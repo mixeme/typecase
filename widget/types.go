@@ -241,13 +241,17 @@ const (
 type RowVariant string
 
 const (
-	RowDefault RowVariant = ""
-	RowAvatar  RowVariant = "avatar"
-	RowLead    RowVariant = "lead"
-	RowTick    RowVariant = "tick"
-	RowExcerpt RowVariant = "excerpt"
-	RowMeta    RowVariant = "meta"
-	RowFind    RowVariant = "find"
+	RowDefault      RowVariant = ""
+	RowAvatar       RowVariant = "avatar"
+	RowLead         RowVariant = "lead"
+	RowTick         RowVariant = "tick"
+	RowExcerpt      RowVariant = "excerpt"
+	RowMeta         RowVariant = "meta"
+	RowFind         RowVariant = "find"
+	RowAvatarCols   RowVariant = "avatarcols"
+	RowTickCols     RowVariant = "tickcols"
+	RowTimeCols     RowVariant = "timecols"
+	RowTickMarkCols RowVariant = "tickmarkcols"
 )
 
 // TickState is checked/unchecked/indeterminate for tick rows.

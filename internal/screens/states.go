@@ -120,9 +120,9 @@ func statesLoading() string {
 			widget.List{Groups: []widget.ListGroup{{
 				Rubric: widget.Rubric{Text: "Monday · 10 August"},
 				Rows: []widget.Row{
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…", Subtitle: "…"}},
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…", Subtitle: "…"}},
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…", Detail: "…"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…", Detail: "…"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#c9bfa6", Label: "pending"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "…", Title: "…"}},
 				},
 			}}},
 			widget.Skel{Shape: widget.SkelLine, Lines: 3},
@@ -170,8 +170,8 @@ func statesOffline() string {
 			widget.List{Groups: []widget.ListGroup{{
 				Rubric: widget.Rubric{Text: "Monday · 10 August", Count: intPtr(3)},
 				Rows: []widget.Row{
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#4A6B52", Label: "Личный"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "10:00", Title: "Синк-ап по релизу", Subtitle: "Переговорная 2", Detail: "nextcloud · Личный"}},
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#3F6E8C", Label: "Работа"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "15:00", Title: "Созвон с подрядчиком", Subtitle: "Jitsi", Detail: "nextcloud · Работа"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Личный"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "10:00", Title: "Синк-ап по релизу", Detail: "Переговорная 2", Source: "nextcloud · Личный"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#3F6E8C", Label: "Работа"}, State: widget.RowMuted, Cells: widget.RowCells{Lead: "15:00", Title: "Созвон с подрядчиком", Detail: "Jitsi", Source: "nextcloud · Работа"}},
 				},
 			}}},
 			widget.Msg{
@@ -231,8 +231,34 @@ func statesPartial() string {
 			widget.List{Groups: []widget.ListGroup{{
 				Rubric: widget.Rubric{Text: "Monday · 10 August", Count: intPtr(n2)},
 				Rows: []widget.Row{
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#4A6B52", Label: "Личный"}, Cells: widget.RowCells{Lead: "10:00", Title: "Синк-ап по релизу", Subtitle: "Переговорная 2", Detail: "nextcloud · Личный"}},
-					{Variant: widget.RowLead, Mark: widget.Mark{Colour: "#3F6E8C", Label: "Работа"}, Cells: widget.RowCells{Lead: "15:00", Title: "Созвон с подрядчиком", Subtitle: "Jitsi", Detail: "nextcloud · Работа"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Личный"}, Cells: widget.RowCells{Lead: "10:00", Title: "Синк-ап по релизу", Detail: "Переговорная 2", Source: "nextcloud · Личный"}},
+					{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#3F6E8C", Label: "Работа"}, Cells: widget.RowCells{Lead: "15:00", Title: "Созвон с подрядчиком", Detail: "Jitsi", Source: "nextcloud · Работа"}},
+				},
+			}, {
+				Rubric: widget.Rubric{Text: "Matched"},
+				Rows: []widget.Row{
+					{
+						Variant: widget.RowFind,
+						Mark:    widget.Mark{Colour: "#4A6B52", Label: "Личный"},
+						Cells: widget.RowCells{
+							Lead:    "event",
+							Title:   "Синк-ап по релизу",
+							Detail:  "attendee · accepted",
+							Caption: "10 Aug",
+							Source:  "nextcloud · Личный",
+						},
+					},
+					{
+						Variant: widget.RowFind,
+						Mark:    widget.Mark{Colour: "#4A6B52", Label: "Записи"},
+						Cells: widget.RowCells{
+							Lead:    "note",
+							Title:   "Заметка со встречи 10.08",
+							Detail:  "mentioned in the text",
+							Caption: "10 Aug",
+							Source:  "nextcloud · Записи",
+						},
+					},
 				},
 			}}},
 			widget.Msg{
@@ -286,14 +312,16 @@ func statesUnavailable() string {
 			},
 			widget.List{Groups: []widget.ListGroup{{Rows: []widget.Row{
 				{
-					Variant: widget.RowAvatar,
+					Variant: widget.RowAvatarCols,
 					Mark:    widget.Mark{Colour: "#6B4E7A", Label: "Команда"},
 					State:   widget.RowMuted,
 					Cells: widget.RowCells{
 						Avatar:   widget.Avatar{Initials: "ПК", Colour: "#6B4E7A"},
 						Title:    "Пётр Ковалёв",
-						Subtitle: "p.kovalev@example.org",
-						Detail:   "radicale · Команда",
+						Subtitle: "—",
+						Detail:   "p.kovalev@example.org",
+						Caption:  "—",
+						Source:   "radicale · Команда",
 					},
 				},
 			}}}},

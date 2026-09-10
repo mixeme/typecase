@@ -131,22 +131,26 @@ func filesMain() widget.Main {
 		Groups: []widget.ListGroup{{
 			Rows: []widget.Row{
 				{
-					Variant:  widget.RowMeta,
+					Variant:  widget.RowTickCols,
 					Selected: true,
 					Cells: widget.RowCells{
-						Icon: "tc-i-img",
-						Name: "2026-08-10-sync-board.png",
-						Size: "412 KB",
-						Time: "2026-08-10 11:07",
+						Icon:   "tc-i-img",
+						Name:   "2026-08-10-sync-board.png",
+						Size:   "412 KB",
+						Time:   "2026-08-10 11:07",
+						Detail: "rw",
+						Source: "sftpgo · vps",
 					},
 				},
 				{
-					Variant: widget.RowMeta,
+					Variant: widget.RowTickCols,
 					Cells: widget.RowCells{
-						Icon: "tc-i-doc",
-						Name: "release-checklist.md",
-						Size: "3 KB",
-						Time: "2026-08-09 18:44",
+						Icon:   "tc-i-doc",
+						Name:   "release-checklist.md",
+						Size:   "3 KB",
+						Time:   "2026-08-09 18:44",
+						Detail: "rw",
+						Source: "sftpgo · vps",
 					},
 				},
 			},

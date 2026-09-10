@@ -53,6 +53,17 @@ func CheckScreensCompose(p ModulePaths) error {
 			return fmt.Errorf("screens-compose: notes excerpt rows must include date and source cells")
 		}
 	}
+	contacts := screens.Contacts()
+	if !strings.Contains(contacts, "tc-row--avatarcols") {
+		return fmt.Errorf("screens-compose: contacts list must use avatarcols")
+	}
+	if !strings.Contains(contacts, "tc-row__subtitle") || !strings.Contains(contacts, "tc-row__detail") || !strings.Contains(contacts, "tc-row__source") {
+		return fmt.Errorf("screens-compose: contacts avatarcols rows must include subtitle, detail and source cells")
+	}
+	files := screens.Files()
+	if !strings.Contains(files, "tc-row--tickcols") {
+		return fmt.Errorf("screens-compose: files list must use tickcols")
+	}
 	list := screens.Notes()
 	if strings.Contains(list, "tc-doc") {
 		return fmt.Errorf("screens-compose: notes list must not include tc-doc preview")

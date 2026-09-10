@@ -57,14 +57,23 @@ func dupMain() widget.Main {
 	taskGroup := dupCard("Собрать чемодан", "candidate ×2 · 74 points",
 		widget.List{Groups: []widget.ListGroup{{Rows: []widget.Row{
 			{
-				Variant: widget.RowTick,
+				Variant: widget.RowTickMarkCols,
 				Mark:    widget.Mark{Colour: "#4A6B52", Label: "Дела"},
-				Cells:   widget.RowCells{Title: "Собрать чемодан", Due: "12 Aug 18:00", Tags: []widget.Tag{{Label: "дом"}}},
+				Cells: widget.RowCells{
+					Title:  "Собрать чемодан",
+					Due:    "12 Aug 18:00",
+					Tags:   []widget.Tag{{Label: "дом"}},
+					Source: "nextcloud · Дела",
+				},
 			},
 			{
-				Variant: widget.RowTick,
+				Variant: widget.RowTickMarkCols,
 				Mark:    widget.Mark{Colour: "#6B4E7A", Label: "Личное"},
-				Cells:   widget.RowCells{Title: "Собрать чемодан", Due: "12 Aug"},
+				Cells: widget.RowCells{
+					Title:  "Собрать чемодан",
+					Due:    "12 Aug",
+					Source: "radicale · Личное",
+				},
 			},
 		}}}},
 		[]widget.Diff{

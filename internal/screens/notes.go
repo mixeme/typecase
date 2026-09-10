@@ -345,7 +345,10 @@ func notesSide() widget.Side {
 	}
 	related := widget.Sec{
 		Rubric: widget.Rubric{Text: "Related"},
-		Body:   []widget.Node{widget.Paragraph("Синк-ап по релизу · event · 10 Aug")},
+		Body: []widget.Node{
+			widget.Paragraph("Синк-ап по релизу · event · 10 Aug"),
+			widget.Row{Variant: widget.RowTick, Cells: widget.RowCells{Title: "Отправить макет Ковалёвой", Due: "Fri"}},
+		},
 	}
 	return widget.Side{
 		Label: "Note details",

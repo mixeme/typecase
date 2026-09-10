@@ -12,7 +12,7 @@ do, not what the authors did.
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry after TickRow and excerpt: steps 3–7 and 10 of
+- Remaining mockup geometry after the row variants: steps 4–7 and 10 of
   the same plan (`Cols` is step 7).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
@@ -24,13 +24,17 @@ until released separately.
 - **Do not import `layout`.** Geometry tables are the library's, like `token`.
   Screens keep calling `widget`. `Cols` is the new consumer type and is not
   in this drop.
+- **Row variants now in this drop:** `RowAvatarCols`, `RowTickCols`,
+  `RowTimeCols`, `RowTickMarkCols`, and `RowFind` as a grid. A grid row must
+  live in `List`. `Menu` on a grid variant fails the gates instead of
+  rendering nothing. Contacts that used `RowAvatar` (two lines of text) and
+  want the mockup columns use `RowAvatarCols` with the cells filled in.
+  Search suggestions are `RowLead` (title + subtitle); `RowFind` is the
+  `/find` hit list, not the popover. `RowAvatar`, `RowLead`, `RowTick` and
+  `RowMeta` stay as flex and remain legal outside `List`.
 - **Breaking, as L-4 now states (code follows the remaining plan steps):**
   `ButtonDanger` is outline; fill is `ButtonDangerSolid`. `Field` label sits
-  above the control and takes `Width`. New row variants are named by shape.
-  A grid row must live in `List`. `Menu` on a grid variant fails the gates
-  instead of rendering nothing. Contacts that used `RowAvatar` (two lines of
-  text) and want the mockup columns use `RowAvatarCols` with the cells filled
-  in.
+  above the control and takes `Width`.
 
 ### For consumers (wordmark and icon preview)
 

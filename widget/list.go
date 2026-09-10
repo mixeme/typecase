@@ -63,8 +63,8 @@ type Row struct {
 }
 
 func (r Row) Render() string {
-	if r.Variant == RowExcerpt {
-		return renderGridRow(r, layout.RowExcerpt)
+	if g, ok := rowGrid(r.Variant); ok {
+		return renderGridRow(r, g)
 	}
 	cls := classes("tc-row", rowVariantClass(r.Variant))
 	if r.Selected || r.State == RowSelected {
@@ -114,6 +114,25 @@ func renderGridRow(r Row, g layout.Grid) string {
 	return `<div` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</div>`
 }
 
+func rowGrid(v RowVariant) (layout.Grid, bool) {
+	switch v {
+	case RowExcerpt:
+		return layout.RowExcerpt, true
+	case RowAvatarCols:
+		return layout.RowAvatarCols, true
+	case RowTickCols:
+		return layout.RowTickCols, true
+	case RowTimeCols:
+		return layout.RowTimeCols, true
+	case RowTickMarkCols:
+		return layout.RowTickMarkCols, true
+	case RowFind:
+		return layout.RowFind, true
+	default:
+		return layout.Grid{}, false
+	}
+}
+
 func rowSlot(slot string, r Row) string {
 	switch slot {
 	case "mark":
@@ -122,6 +141,21 @@ func rowSlot(slot string, r Row) string {
 			return `<span class="tc-mark"></span>`
 		}
 		return html
+	case "tick":
+		label := r.Cells.Name
+		if label == "" {
+			label = r.Cells.Title
+		}
+		if label == "" {
+			label = labels.Toggle
+		}
+		return Tick{Done: r.Cells.Done, Label: label}.Render()
+	case "avatar":
+		av := r.Cells.Avatar
+		if av.Initials == "" && av.Image == "" {
+			av = Avatar{Initials: initials(r.Cells.Title)}
+		}
+		return av.Render()
 	case "title":
 		return `<span class="tc-row__title">` + esc(r.Cells.Title) + `</span>`
 	case "excerpt":
@@ -139,9 +173,40 @@ func rowSlot(slot string, r Row) string {
 		return `<span class="tc-row__date">` + esc(r.Cells.Date) + `</span>`
 	case "source":
 		return `<span class="tc-row__source">` + esc(r.Cells.Source) + `</span>`
+	case "subtitle":
+		return `<span class="tc-row__subtitle">` + esc(r.Cells.Subtitle) + `</span>`
+	case "detail":
+		return `<span class="tc-row__detail">` + esc(r.Cells.Detail) + `</span>`
+	case "caption":
+		return `<span class="tc-row__caption">` + esc(r.Cells.Caption) + `</span>`
+	case "name":
+		return `<span class="tc-row__name">` + rowCellIcon(r.Cells.Icon) + esc(r.Cells.Name) + `</span>`
+	case "size":
+		return `<span class="tc-row__size">` + esc(r.Cells.Size) + `</span>`
+	case "time":
+		return `<span class="tc-row__time">` + esc(r.Cells.Time) + `</span>`
+	case "lead":
+		return `<span class="tc-row__lead">` + esc(r.Cells.Lead) + `</span>`
+	case "due":
+		return `<span class="tc-row__due">` + esc(r.Cells.Due) + `</span>`
+	case "progress":
+		if r.Cells.Progress != nil {
+			return `<progress class="tc-row__progress" max="100" value="` + itoa(*r.Cells.Progress) + `"` + attr("aria-label", labels.Progress) + `></progress>`
+		}
+		return `<span class="tc-row__progress"></span>`
 	default:
 		return ""
 	}
+}
+
+func rowCellIcon(icon string) string {
+	if icon == "" {
+		return ""
+	}
+	if strings.HasPrefix(icon, "tc-i-") {
+		return renderNavIcon(icon)
+	}
+	return `<span class="tc-row__icon" aria-hidden="true">` + esc(icon) + `</span>`
 }
 
 func rowVariantClass(v RowVariant) string {
@@ -170,8 +235,6 @@ func renderRowCells(v RowVariant, c RowCells) string {
 			icon = renderNavIcon(c.Icon)
 		}
 		return `<span class="tc-row__icon" aria-hidden="true">` + icon + `</span><span class="tc-row__name">` + esc(c.Name) + `</span><span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
-	case RowFind:
-		return `<span class="tc-row__icon" aria-hidden="true">` + esc(c.Icon) + `</span><div class="tc-row__find"><span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__detail">` + esc(c.Detail) + `</span><span class="tc-row__caption">` + esc(c.Caption) + `</span></div>`
 	default:
 		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span>`
 	}

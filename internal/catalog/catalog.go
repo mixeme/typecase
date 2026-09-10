@@ -49,6 +49,8 @@ func Entries() []Entry {
 	add("primitives", "tc-brand", "markOnly", widget.Brand{Mark: "◆", Word: "Typecase", MarkOnly: true}.Render())
 	add("primitives", "tc-mark", "default", widget.Mark{Colour: "#4a6b52", Label: "Group A"}.Render())
 	n := 3
+	prog := 40
+	doneProg := 100
 	add("primitives", "tc-num", "known", widget.Num{Value: &n}.Render())
 	add("primitives", "tc-num", "unknown", widget.Num{}.Render())
 	add("primitives", "tc-badge", "neutral", widget.Badge{Label: "Draft", Role: widget.BadgeNeutral}.Render())
@@ -91,7 +93,15 @@ func Entries() []Entry {
 	add("lists", "tc-row--tick", "default", widget.Row{Variant: widget.RowTick, Cells: widget.RowCells{Title: "Task", Due: "Fri"}}.Render())
 	add("lists", "tc-row--excerpt", "default", widget.Row{Variant: widget.RowExcerpt, Cells: widget.RowCells{Title: "Post", Excerpt: "First lines of content…", Tags: []widget.Tag{{Label: "draft", Href: "/tags/draft"}}, Date: "10 Aug", Source: "nextcloud · Notes"}}.Render())
 	add("lists", "tc-row--meta", "default", widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Icon: "tc-i-doc", Name: "readme.txt", Size: "2 KB", Time: "10:30"}}.Render())
-	add("lists", "tc-row--find", "default", widget.Row{Variant: widget.RowFind, Cells: widget.RowCells{Icon: "⌕", Title: "Query", Detail: "Jump to section", Caption: "Recent"}}.Render())
+	add("lists", "tc-row--find", "default", widget.Row{Variant: widget.RowFind, Mark: widget.Mark{Colour: "#4A6B52", Label: "Notes"}, Cells: widget.RowCells{Lead: "event", Title: "Standup", Detail: "attendee · accepted", Caption: "10 Aug", Source: "nextcloud · Personal"}}.Render())
+	add("lists", "tc-row--avatarcols", "default", widget.Row{Variant: widget.RowAvatarCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Book"}, Cells: widget.RowCells{Avatar: widget.Avatar{Initials: "AK"}, Title: "Alex Kovalev", Subtitle: "+7 912 000-00-00", Detail: "alex@example.org", Caption: "Press", Source: "nextcloud · Contacts"}}.Render())
+	add("lists", "tc-row--avatarcols", "selected", widget.Row{Variant: widget.RowAvatarCols, Selected: true, Mark: widget.Mark{Colour: "#4A6B52", Label: "Book"}, Cells: widget.RowCells{Avatar: widget.Avatar{Initials: "AK"}, Title: "Alex Kovalev", Subtitle: "+7 912 000-00-00", Detail: "alex@example.org", Caption: "Press", Source: "nextcloud · Contacts"}}.Render())
+	add("lists", "tc-row--tickcols", "default", widget.Row{Variant: widget.RowTickCols, Cells: widget.RowCells{Icon: "tc-i-doc", Name: "readme.txt", Size: "2 KB", Time: "10:30", Detail: "rw", Source: "sftpgo · vps"}}.Render())
+	add("lists", "tc-row--tickcols", "selected", widget.Row{Variant: widget.RowTickCols, Selected: true, Cells: widget.RowCells{Icon: "tc-i-img", Name: "board.png", Size: "412 KB", Time: "11:07", Detail: "rw", Source: "sftpgo · vps"}}.Render())
+	add("lists", "tc-row--timecols", "default", widget.Row{Variant: widget.RowTimeCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Personal"}, Cells: widget.RowCells{Lead: "09:00", Title: "Standup", Detail: "Room A", Caption: "weekly", Source: "nextcloud · Personal"}}.Render())
+	add("lists", "tc-row--timecols", "muted", widget.Row{Variant: widget.RowTimeCols, State: widget.RowMuted, Mark: widget.Mark{Colour: "#4A6B52", Label: "Personal"}, Cells: widget.RowCells{Lead: "09:00", Title: "Standup", Detail: "Room A", Source: "nextcloud · Personal"}}.Render())
+	add("lists", "tc-row--tickmarkcols", "default", widget.Row{Variant: widget.RowTickMarkCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Home"}, Cells: widget.RowCells{Title: "Pack", Tags: []widget.Tag{{Label: "home"}}, Due: "Fri", Progress: &prog, Source: "nextcloud · Tasks"}}.Render())
+	add("lists", "tc-row--tickmarkcols", "done", widget.Row{Variant: widget.RowTickMarkCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Home"}, Cells: widget.RowCells{Title: "Pack", Due: "—", Done: true, Progress: &doneProg, Source: "nextcloud · Tasks"}}.Render())
 	add("lists", "tc-tickrow", "ok", widget.TickRow{Label: "Inbox", Tick: widget.TickOn, Count: &n}.Render())
 	add("lists", "tc-rubric", "default", widget.Rubric{Text: "Section", Count: &n, Action: &widget.Action{Label: "Attach"}}.Render())
 

@@ -244,6 +244,54 @@ func TestRowExcerpt_badgeLivesInTags(t *testing.T) {
 	}
 }
 
+func TestRowAvatarCols_directSlotChildren(t *testing.T) {
+	html := widget.Row{
+		Variant: widget.RowAvatarCols,
+		Cells: widget.RowCells{
+			Avatar:   widget.Avatar{Initials: "AK"},
+			Title:    "Alex",
+			Subtitle: "+7",
+			Detail:   "a@example.org",
+			Caption:  "Press",
+			Source:   "book",
+		},
+	}.Render()
+	if strings.Contains(html, "tc-row__cells") {
+		t.Fatalf("avatarcols must not wrap slots in .tc-row__cells: %s", html)
+	}
+	if !strings.Contains(html, `class="tc-avatar`) || !strings.Contains(html, `class="tc-row__subtitle"`) {
+		t.Fatalf("avatarcols must print avatar and subtitle slots: %s", html)
+	}
+}
+
+func TestRowTickCols_holdTick(t *testing.T) {
+	html := widget.Row{
+		Variant: widget.RowTickCols,
+		Cells:   widget.RowCells{Name: "readme.txt", Size: "2 KB", Time: "10:30", Source: "sftp"},
+	}.Render()
+	if !strings.Contains(html, "tc-tick") {
+		t.Fatalf("tickcols must print a tick stub: %s", html)
+	}
+	if strings.Contains(html, "tc-mark") {
+		t.Fatalf("tickcols has no mark slot: %s", html)
+	}
+}
+
+func TestSearchHints_useRowLead(t *testing.T) {
+	html := widget.Search{
+		Action:     "/s",
+		Suggesting: true,
+		History:    []widget.SearchRow{{Query: "q", Href: "/q"}},
+		Jump:       []widget.JumpRow{{Label: "Alex", Hint: "Contact", Href: "/c"}},
+	}.Render()
+	if strings.Contains(html, "tc-row--find") {
+		t.Fatalf("search hints must not use the find grid: %s", html)
+	}
+	if !strings.Contains(html, "tc-row--lead") {
+		t.Fatalf("search hints must use RowLead: %s", html)
+	}
+}
+
 func TestDocMeta_emptyRendersNothing(t *testing.T) {
 	if got := (widget.DocMeta{}).Render(); got != "" {
 		t.Fatalf("empty DocMeta must render nothing, got %q", got)

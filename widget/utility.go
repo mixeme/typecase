@@ -10,7 +10,7 @@ import "strconv"
 // Инварианты. Подсказки под полем; пустой запрос никуда не ведёт.
 // Поведение. Открытие подсказок, стрелки, Enter, Esc, крестик очищает.
 // Геометрия. Поле тянется; выпадающее не уже поля.
-// Содержимое. tc-row--find.
+// Содержимое. tc-row--lead.
 // Чего нет. Не ищет само.
 type Search struct {
 	Query       string
@@ -29,12 +29,12 @@ func (s Search) Render() string {
 	}
 	var history string
 	for _, h := range s.History {
-		r := Row{Variant: RowFind, Href: h.Href, Cells: RowCells{Title: h.Query, Caption: labels.Recent}}
+		r := Row{Variant: RowLead, Href: h.Href, Cells: RowCells{Title: h.Query, Subtitle: labels.Recent}}
 		history += r.Render()
 	}
 	var jump string
 	for _, j := range s.Jump {
-		r := Row{Variant: RowFind, Href: j.Href, Cells: RowCells{Title: j.Label, Detail: j.Hint}}
+		r := Row{Variant: RowLead, Href: j.Href, Cells: RowCells{Title: j.Label, Subtitle: j.Hint}}
 		jump += r.Render()
 	}
 	pop := ""
