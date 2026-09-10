@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"carrel.dev/typecase/css"
-	"carrel.dev/typecase/gate"
+	"carrel.dev/typecase/internal/gate"
 )
 
 func readBroken(t *testing.T, name string) string {
@@ -15,7 +15,7 @@ func readBroken(t *testing.T, name string) string {
 	if err != nil {
 		t.Fatalf("module root: %v", err)
 	}
-	path := filepath.Join(root, "gate", "testdata", "broken", name)
+	path := filepath.Join(root, "internal", "gate", "testdata", "broken", name)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatalf("read %s: %v", name, err)
@@ -206,7 +206,7 @@ func TestBite_ownership(t *testing.T) {
 
 func TestBite_gofmt(t *testing.T) {
 	tmp := t.TempDir()
-	src := readBroken(t, "unformatted.go")
+	src := "package widget\n\ntype Bad struct{\nX int\n}\n"
 	if err := os.WriteFile(filepath.Join(tmp, "bad.go"), []byte(src), 0644); err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +266,7 @@ func TestBite_verifiable(t *testing.T) {
 		t.Fatal(err)
 	}
 	p := gate.Paths(root)
-	broken := filepath.Join(p.Root, "browser", "testdata", "broken", "ellipsis.html")
+	broken := filepath.Join(p.Root, "internal", "browser", "testdata", "broken", "ellipsis.html")
 	orig, err := os.ReadFile(broken)
 	if err != nil {
 		t.Fatal(err)
@@ -328,7 +328,7 @@ func TestBite_uniqueIDs(t *testing.T) {
 
 func TestBite_specL4(t *testing.T) {
 	p := brokenModule(t)
-	specDir := filepath.Join(p.RepoRoot, "docs", "spec")
+	specDir := filepath.Join(p.Root, "docs", "spec")
 	if err := os.MkdirAll(specDir, 0755); err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +399,7 @@ func TestBite_screensCompose(t *testing.T) {
 		t.Fatalf("live screen assemblers should pass: %v", err)
 	}
 	tmp := t.TempDir()
-	screensDir := filepath.Join(tmp, "screens")
+	screensDir := filepath.Join(tmp, "internal", "screens")
 	if err := os.MkdirAll(screensDir, 0755); err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +431,7 @@ func TestBite_screensCSS(t *testing.T) {
 		t.Fatalf("live screens.css should pass: %v", err)
 	}
 	tmp := t.TempDir()
-	screensDir := filepath.Join(tmp, "screens")
+	screensDir := filepath.Join(tmp, "internal", "screens")
 	if err := os.MkdirAll(screensDir, 0755); err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +449,7 @@ func readInvBroken(t *testing.T, name string) string {
 	if err != nil {
 		t.Fatalf("module root: %v", err)
 	}
-	path := filepath.Join(root, "gate", "testdata", "inv", name)
+	path := filepath.Join(root, "internal", "gate", "testdata", "inv", name)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatalf("read %s: %v", name, err)

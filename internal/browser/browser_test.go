@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/browser"
+	"carrel.dev/typecase/internal/browser"
 )
 
 func TestL9_2_browserChecks(t *testing.T) {
@@ -33,7 +33,7 @@ func TestL9_2_browserChecks(t *testing.T) {
 
 func readBroken(t *testing.T, name string) string {
 	root := browser.ModuleRoot(t)
-	path := filepath.Join(root, "browser", "testdata", "broken", name)
+	path := filepath.Join(root, "internal", "browser", "testdata", "broken", name)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatalf("read %s: %v", name, err)
@@ -60,7 +60,7 @@ func brokenFixture(t *testing.T, name browser.Name) browser.Fixture {
 
 func readBrokenOptional(t *testing.T, name string) string {
 	root := browser.ModuleRoot(t)
-	path := filepath.Join(root, "browser", "testdata", "broken", name)
+	path := filepath.Join(root, "internal", "browser", "testdata", "broken", name)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return ""

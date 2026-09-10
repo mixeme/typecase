@@ -11,11 +11,20 @@ do, not what the authors did.
 - An open side panel still covers the viewport at phone width, including the
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens, plus their row grids —
-  [docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md).
+  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
 - Remaining mockup geometry is the same plan: a `layout` package (tables
   generate CSS), not hand-copied rules.
-- Standalone repository extraction (`internal/`, docs, CI; history via subtree
-  split) — [docs/plan/typecase-export.md](../docs/plan/typecase-export.md).
+- **There is no way to compose a shape the catalog does not have.** A screen
+  that needs one waits for a library change: 24 of the 76 catalog widgets sit
+  on at most one screen because a composition has nowhere else to go. `Cols` —
+  a container whose shape is chosen from a closed enum, no numbers passed in —
+  is step 7 of the layout plan. Until it lands, build the shape out of the
+  widgets you have or ask for the widget; do not reach into `.tc-` or
+  `data-tc-` from your own stylesheet.
+- **Vocabulary completeness is asserted, not measured.** Eight of the mockup's
+  22 sections are assembled; the rest are assumed to be the same forms. Step 9
+  of the layout plan assembles them and records whatever turns out to be
+  missing.
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
@@ -120,12 +129,39 @@ until released separately.
 - A Cyrillic wordmark. There is none, and Literata set next to the mark stays
   text.
 
+## typecase/v0.5.0 — 2026-09-10
+
+Standalone repository layout: the module root is the repository root.
+
+### For consumers (v0.4.0 → v0.5.0)
+
+- **Import path unchanged:** `carrel.dev/typecase`. Acceptance packages
+  (`catalog`, `browser`, `gate`, `screens`) live under `internal/`; import them
+  only from module tests and demos, not from application code.
+- **Run demos from the repository root** with `scripts/catalog.bat` and
+  `scripts/screens.bat` (replacing `scripts/typecase-screens.bat` and paths
+  that assumed a monorepo parent).
+- **The icon reference names tokens as `css/00-tokens.css`**, not a monorepo-relative path.
+
+### Included
+
+- Repository root matches the Go module layout; `internal/` holds acceptance
+  packages; docs, scripts, and CI ship with the module.
+- `scripts/catalog.bat` and `scripts/screens.bat` for local demos.
+- Layout plan ([docs/plan/typecase-layout.md](docs/plan/typecase-layout.md))
+  aims at composing screens, not only at a single geometry source.
+
+### Not yet included
+
+- Calendar, tasks, find screens and remaining geometry — see Unreleased
+  ([docs/plan/typecase-layout.md](docs/plan/typecase-layout.md)).
+
 ## typecase/v0.4.0 — 2026-09-09
 
 Assembled screens match mockup drawing at 1280×900. Notes frames 7.4 close with
 `tc-pfield`, `tc-pick`, and `tc-docedit`. Palette gains `--tc-edge`, `--tc-hair`,
 and `--tc-dusty`; icons render through the `tc-i-*` sprite. Remaining mockup
-geometry is the `layout` package — [docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md).
+geometry is the `layout` package — [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
 
 ### For consumers (v0.3.0 → v0.4.0)
 
@@ -222,7 +258,7 @@ geometry is the `layout` package — [docs/plan/typecase-layout.md](../docs/plan
 ### Not yet included
 
 - Calendar, tasks, find screens and remaining geometry — closed in Unreleased
-  ([docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md)).
+  ([docs/plan/typecase-layout.md](docs/plan/typecase-layout.md)).
 
 ## typecase/v0.3.0 — 2026-09-07
 

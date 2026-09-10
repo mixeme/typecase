@@ -164,7 +164,7 @@ func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 // and every invariant clause has a named executable check.
 func CheckVerifiable(p ModulePaths, catalog []CatalogEntry) error {
 	var missing []string
-	brokenDir := filepath.Join(p.Root, "browser", "testdata", "broken")
+	brokenDir := filepath.Join(p.Root, "internal", "browser", "testdata", "broken")
 	for _, name := range browserChecks {
 		htmlPath := filepath.Join(brokenDir, name+".html")
 		if _, err := os.Stat(htmlPath); err != nil {

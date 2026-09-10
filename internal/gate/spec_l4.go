@@ -48,7 +48,7 @@ func LoadSpecL4Widgets(specPath string) (map[string]bool, error) {
 // CheckSpecL4 ensures implemented widgets match the L-4 registry in the spec.
 func CheckSpecL4(p ModulePaths, specPath string) error {
 	if specPath == "" {
-		specPath = filepath.Join(p.RepoRoot, "docs", "spec", "typecase.md")
+		specPath = filepath.Join(p.Root, "docs", "spec", "typecase.md")
 	}
 	declared, err := LoadSpecL4Widgets(specPath)
 	if err != nil {

@@ -7,8 +7,8 @@ import (
 
 	"github.com/chromedp/chromedp"
 
-	"carrel.dev/typecase/browser"
-	"carrel.dev/typecase/screens"
+	"carrel.dev/typecase/internal/browser"
+	"carrel.dev/typecase/internal/screens"
 )
 
 func screensServer(t *testing.T) *httptest.Server {

@@ -1,0 +1,42 @@
+name: typecase
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.1"
+          cache-dependency-path: go.sum
+
+      - name: gofmt
+        run: test -z "$(gofmt -l .)"
+
+      - name: go vet
+        run: go vet ./...
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+
+      - name: CHROME_PATH
+        run: echo "CHROME_PATH=${{ steps.chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
+
+      - name: go test
+        run: |
+          go test . ./widget ./css ./token ./internal/gate ./internal/catalog ./internal/screens -count=1
+          go test ./internal/browser -count=1
+
+      - name: static build
+        run: go build -o /dev/null ./cmd/catalog ./cmd/screens
+
+      - name: spec check
+        run: python docs/spec/check.py

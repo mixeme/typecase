@@ -3,8 +3,8 @@ package gate_test
 import (
 	"testing"
 
-	"carrel.dev/typecase/catalog"
-	"carrel.dev/typecase/gate"
+	"carrel.dev/typecase/internal/catalog"
+	"carrel.dev/typecase/internal/gate"
 )
 
 func catalogEntries() []gate.CatalogEntry {

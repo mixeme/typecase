@@ -1,3 +1,6 @@
 /cmd/catalog/catalog
 /cmd/catalog/catalog.exe
+/cmd/screens/screens
+/cmd/screens/screens.exe
 .chromedp-cache/
+__pycache__/

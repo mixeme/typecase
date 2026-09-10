@@ -8,8 +8,8 @@ import (
 
 	"github.com/chromedp/chromedp"
 
-	"carrel.dev/typecase/browser"
-	"carrel.dev/typecase/screens"
+	"carrel.dev/typecase/internal/browser"
+	"carrel.dev/typecase/internal/screens"
 )
 
 type lookProbe struct {

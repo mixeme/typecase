@@ -10,8 +10,8 @@ import (
 	"github.com/chromedp/chromedp"
 
 	"carrel.dev/typecase"
-	"carrel.dev/typecase/browser"
-	"carrel.dev/typecase/catalog"
+	"carrel.dev/typecase/internal/browser"
+	"carrel.dev/typecase/internal/catalog"
 )
 
 // catalogServer serves the whole catalog site: the page plus every asset it

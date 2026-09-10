@@ -9,7 +9,7 @@ import (
 
 // CheckScreensCSS rejects widget selectors in screens page chrome styles.
 func CheckScreensCSS(p ModulePaths) error {
-	path := filepath.Join(p.Root, "screens", "screens.css")
+	path := filepath.Join(p.Root, "internal", "screens", "screens.css")
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return fmt.Errorf("screens-css: read screens.css: %w", err)

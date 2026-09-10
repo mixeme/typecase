@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"carrel.dev/typecase/screens"
+	"carrel.dev/typecase/internal/screens"
 )
 
 func main() {

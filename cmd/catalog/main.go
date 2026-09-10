@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"carrel.dev/typecase/catalog"
+	"carrel.dev/typecase/internal/catalog"
 )
 
 func main() {

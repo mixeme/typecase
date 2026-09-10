@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"carrel.dev/typecase/screens"
+	"carrel.dev/typecase/internal/screens"
 )
 
 var screensComposeBypass = []string{
@@ -18,7 +18,7 @@ var screensComposeBypass = []string{
 
 // CheckScreensCompose rejects hand-built shell markup in demo screen assemblers.
 func CheckScreensCompose(p ModulePaths) error {
-	screensDir := filepath.Join(p.Root, "screens")
+	screensDir := filepath.Join(p.Root, "internal", "screens")
 	entries, err := os.ReadDir(screensDir)
 	if err != nil {
 		return fmt.Errorf("screens-compose: read screens: %w", err)

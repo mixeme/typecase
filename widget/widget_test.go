@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/catalog"
 	"carrel.dev/typecase/css"
+	"carrel.dev/typecase/internal/catalog"
 	"carrel.dev/typecase/token"
 	"carrel.dev/typecase/widget"
 )

@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"carrel.dev/typecase/screens"
+	"carrel.dev/typecase/internal/screens"
 )
 
 // CheckScreensCoverage ensures every catalog widget appears on at least one

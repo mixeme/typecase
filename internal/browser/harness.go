@@ -13,7 +13,7 @@ import (
 	"github.com/chromedp/chromedp"
 
 	"carrel.dev/typecase"
-	"carrel.dev/typecase/gate"
+	"carrel.dev/typecase/internal/gate"
 )
 
 // Rect is a DOM bounding box in CSS pixels.

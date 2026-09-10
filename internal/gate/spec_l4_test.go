@@ -12,7 +12,7 @@ func TestLoadSpecL4Widgets_multiNameHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 	p := Paths(root)
-	specPath := filepath.Join(p.RepoRoot, "docs", "spec", "typecase.md")
+	specPath := filepath.Join(p.Root, "docs", "spec", "typecase.md")
 	declared, err := LoadSpecL4Widgets(specPath)
 	if err != nil {
 		t.Fatal(err)
