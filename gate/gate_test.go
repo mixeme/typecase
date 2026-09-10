@@ -28,6 +28,8 @@ func TestL8_gates(t *testing.T) {
 	cat := catalogEntries()
 
 	checks := []gate.Name{
+		gate.Gofmt,
+		gate.Vet,
 		gate.Completeness,
 		gate.Ownership,
 		gate.NodeNames,
@@ -36,6 +38,8 @@ func TestL8_gates(t *testing.T) {
 		gate.DomainNaming,
 		gate.DocFormat,
 		gate.Catalog,
+		gate.SpecL4,
+		gate.Verifiable,
 		gate.NoInline,
 		gate.A11y,
 	}
@@ -49,13 +53,15 @@ func TestL8_gates(t *testing.T) {
 }
 
 func TestL8_verifiable(t *testing.T) {
-	// Each gate above has a matching bite test in bite_test.go (L-9.3).
-	names := []gate.Name{
-		gate.Completeness, gate.Ownership, gate.NodeNames, gate.TypedInput,
-		gate.Enumerations, gate.DomainNaming, gate.DocFormat, gate.Catalog,
-		gate.NoInline, gate.A11y,
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
 	}
-	if len(names) < 10 {
-		t.Fatal("expected gate coverage")
+	p := gate.Paths(root)
+	if err := gate.Run(gate.Verifiable, p, catalogEntries()); err != nil {
+		t.Fatal(err)
+	}
+	if len(gate.AllGates) != 14 {
+		t.Fatalf("expected 14 gates, got %d", len(gate.AllGates))
 	}
 }

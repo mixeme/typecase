@@ -4,6 +4,77 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.1.0 — 2026-09-05
+
+First tagged release after the pre-tag reviews. Upgrade in one step from
+`v0.0.5` and run `go test ./...` from the module root before deploying.
+
+### For consumers (v0.0.5 → v0.1.0)
+
+- **Body fields are `Prose`, not HTML strings.** `Overlay.Body`, `Sheet.Body`,
+  `Dialog.Body`, `Doc.Body`, `Main.Body`, `Card.Body`, and `Sec.Body` now take
+  `widget.Prose`. Use `widget.Paragraph("text")` for a single paragraph, or build
+  `Prose{Blocks: ...}` for richer content. This is a breaking change from
+  v0.0.5, where those fields were unescaped `string` markup.
+- **Disabled controls use `Reason`, not `Enabled`.** `Button`, `Action`, `Check`,
+  and `Tick` no longer have an `Enabled` field. Set `Reason` to a non-empty
+  string to disable; leave `Reason` empty for an enabled control.
+- **IDs are generated inside widgets.** `Menu`, `Sheet`, `Dialog`, `Side`,
+  `Field`, `Input`, and `Check` assign unique `id` values automatically. Pass
+  `ID` only when you need a stable reference for tests or `aria-controls`.
+- **`RowMeta` replaces `RowFile`.** The row variant constant is now `RowMeta`
+  (`"meta"`); CSS class is `tc-row--meta`. Update any code that used
+  `RowFile` / `tc-row--file`.
+- **CSS-bound fields use named enum types.** `Brand.Size`, `Avatar.Size`,
+  `Skel.Width`, `Rail.Layout`, `Nav.Layout`, `Thumb.Size`, `ProseBlock.Kind`,
+  `Step.Status`, `RunItem.State`, and `RailSection.State` are no longer plain
+  `string`. `Mark.Colour` and `Avatar.Colour` use `MarkColour`.
+- **Localise UI strings with `widget.SetLabels`.** Call before rendering to
+  replace defaults such as "Close", "Cancel", "Search", and "More". Use
+  `widget.SetStepOfFunc` for step progress text.
+- **Run the full check suite** with `go test ./...` from the module root. L-8
+  gates live in `gate/`; L-9.2 browser checks in `browser/` need Chrome or
+  Edge (`CHROME_PATH` overrides detection).
+
+### Included
+
+- `gate.CheckDocInput`: L-3.2 «Вход» field lists must match exported struct fields.
+- `gate.CheckDomainNaming`: const names, enum string values, and L-3.2 «Состояния»
+  slugs are checked without the catalog whitelist.
+- `gate.CheckInvariantCoverage`: every invariant clause has a `gate:inv-*` markup
+  check; `todo:` bindings are rejected; 72 bite fixtures under
+  `gate/testdata/inv/`.
+- `gate.CheckSpecL4`: implemented widgets must match the L-4 registry in
+  `docs/spec/typecase.md`.
+- `gate.CheckGofmt` and `gate.CheckVet` run from `gate.Run` via `go test ./...`.
+- `gate.CheckOwnership`: scans git repository root, skips the typecase module by path.
+- `tc.js`: focus trap lifecycle (`attachTrap` / `releaseOverlayTrap`); no
+  autofocus on pre-open overlays at load.
+- `gate.CheckUniqueIDs`: catalog HTML must not repeat `id` attributes.
+- `gate.CheckA11y`: each button and field in catalog HTML is checked individually.
+- `widget.Paragraph`, `widget.SetLabels`, `widget.SetStepOfFunc`, internal
+  `uniqueID` for collision-free markup.
+- `gate.CheckVerifiable` and bite tests that call `gate.Run` for every gate.
+- `tc-table`, `tc-grid`, `tc-queue`, and `tc-runbar`: behaviour moved to
+  «Чего нет» (consumer-owned); orphan `data-tc-*` hooks removed.
+- `tc-diff`: arrow keys documented as native radio-group behaviour.
+- `tc.js`: menu keyboard navigation (arrows, Home/End, first letter), seg
+  arrows, tree toggle/selection, search clear, rail drawer, bar collapse,
+  side-panel close, crop controls, list arrows, range validation, tickrow toggle.
+- `tc-tree` disabled nodes: `disabled` button and `pointer-events: none`.
+- `tc-row` avatar/tick variants read `RowCells.Avatar` and `RowCells.Done`.
+- `tc-stat` and `tc-stats`: pre-formatted `Stat.Value` string; equal-width row
+  with `flex-wrap: nowrap`.
+- Catalog page styles served as `/catalog.css` (strict `style-src` on the demo).
+- `Column.Kind` defaults to `ColText` when empty in table headers.
+
+### Breaking changes from v0.0.5
+
+- `Body string` → `Body Prose` on overlay, document, shell, and utility widgets.
+- `Button.Enabled` / `Action.Enabled` removed; use `Reason`.
+- `RowFile` / `tc-row--file` renamed to `RowMeta` / `tc-row--meta`.
+- `RowCells` gained `Done` and `Tags`; avatar variant prefers `Avatar` field.
+
 ## typecase/v0.0.5 — 2026-09-04
 
 Browser checks that actually run, and a readable catalog.

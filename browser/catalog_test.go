@@ -38,6 +38,10 @@ func catalogServer(t *testing.T, withJS bool) *httptest.Server {
 		w.Header().Set("Content-Type", "text/css; charset=utf-8")
 		_, _ = w.Write([]byte(css))
 	})
+	mux.HandleFunc("/catalog.css", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/css; charset=utf-8")
+		_, _ = w.Write([]byte(catalog.CSS()))
+	})
 	mux.HandleFunc("/theme.js", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
 		_, _ = w.Write(themeJS)
@@ -105,5 +109,28 @@ func TestCatalogCellsContainOverlays(t *testing.T) {
 	}
 	for _, e := range probe.Escaped {
 		t.Errorf("escapes its cell: %s", e)
+	}
+}
+
+// TestCatalogFocusOnLoad ensures pre-open overlays do not steal focus at load.
+func TestCatalogFocusOnLoad(t *testing.T) {
+	if !browser.ChromeAvailable() {
+		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
+	}
+	if testing.Short() {
+		t.Skip("catalog focus check needs Chrome")
+	}
+	srv := catalogServer(t, true)
+	h := browser.NewHarness(t)
+
+	var onBody bool
+	if err := h.Run(srv.URL, 1200, 900, chromedp.Evaluate(
+		`document.activeElement === document.body || document.activeElement === document.documentElement`,
+		&onBody,
+	)); err != nil {
+		t.Fatal(err)
+	}
+	if !onBody {
+		t.Fatalf("focus should stay on document body after catalog load, got %v", onBody)
 	}
 }
