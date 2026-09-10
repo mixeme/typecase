@@ -94,8 +94,10 @@ func TestCatalog_entries(t *testing.T) {
 }
 
 func TestCSS_widgetTokenValidation(t *testing.T) {
-	names := css.Order[2:]
-	for _, name := range names {
+	for _, name := range css.Order {
+		if name == css.LayoutSentinel || name == "00-tokens.css" || name == "01-base.css" {
+			continue
+		}
 		data, err := css.Files().Open(name)
 		if err != nil {
 			t.Fatal(err)

@@ -7,16 +7,21 @@ import (
 	"io/fs"
 	"strings"
 
+	"carrel.dev/typecase/layout"
 	"carrel.dev/typecase/token"
 )
 
 //go:embed *.css
 var files embed.FS
 
+// LayoutSentinel is the Order entry that injects layout.CSS().
+const LayoutSentinel = "generated:layout"
+
 // Order is the concatenation order; changing it changes cascade precedence.
 var Order = []string{
 	"00-tokens.css",
 	"01-base.css",
+	LayoutSentinel,
 	"02-primitives.css",
 	"03-forms.css",
 	"04-overlays.css",
@@ -32,6 +37,15 @@ var Order = []string{
 func Bundle() (string, error) {
 	var b strings.Builder
 	for _, name := range Order {
+		if name == LayoutSentinel {
+			gen := layout.CSS()
+			b.WriteString("\n/* generated: layout */\n")
+			b.WriteString(gen)
+			if !strings.HasSuffix(gen, "\n") {
+				b.WriteByte('\n')
+			}
+			continue
+		}
 		data, err := files.ReadFile(name)
 		if err != nil {
 			return "", fmt.Errorf("css: read %s: %w", name, err)

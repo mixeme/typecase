@@ -17,5 +17,8 @@ func CheckScreensCSS(p ModulePaths) error {
 	if strings.Contains(string(data), ".tc-") {
 		return fmt.Errorf("screens-css: screens.css must not contain .tc- selectors")
 	}
+	if strings.Contains(string(data), "data-tc-") {
+		return fmt.Errorf("screens-css: screens.css must not contain data-tc- selectors")
+	}
 	return nil
 }

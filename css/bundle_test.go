@@ -17,6 +17,19 @@ func TestBundle(t *testing.T) {
 	if !strings.Contains(out, "--tc-ink") || !strings.Contains(out, "[data-tc-root]") {
 		t.Fatal("bundle missing expected token or base rules")
 	}
+	if !strings.Contains(out, "/* generated: layout */") {
+		t.Fatal("bundle missing layout sentinel comment")
+	}
+	if !strings.Contains(out, ".tc-tickrow{") && !strings.Contains(out, ".tc-tickrow {") {
+		t.Fatal("bundle missing generated tickrow grid")
+	}
+	a, err := css.Bundle()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if a != out {
+		t.Fatal("bundle is not byte-stable")
+	}
 	if err := token.Validate(out); err != nil {
 		t.Fatal(err)
 	}

@@ -127,7 +127,7 @@ func PageHTML(title, current string, screens []Screen, theme string) string {
 %s
 <h1>%s</h1>
 </header>
-<div class="screens-stage">%s</div>
+<div class="screens-stage"><div class="screens-stage__frame">%s</div></div>
 <script src="/tc.js"></script>
 </body>
 </html>`, title, themeJS, defs, nav.String(), toolbar, title, body)

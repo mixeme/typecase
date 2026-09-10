@@ -8,6 +8,7 @@ import (
 
 	"carrel.dev/typecase/css"
 	"carrel.dev/typecase/internal/gate"
+	"carrel.dev/typecase/layout"
 )
 
 func readBroken(t *testing.T, name string) string {
@@ -441,6 +442,57 @@ func TestBite_screensCSS(t *testing.T) {
 	p.Root = tmp
 	if err := gate.CheckScreensCSS(p); err == nil {
 		t.Fatal("expected screens-css gate to fail on .tc- selector")
+	}
+	if err := os.WriteFile(filepath.Join(screensDir, "screens.css"), []byte(readBroken(t, "screens-css-data.css")), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := gate.CheckScreensCSS(p); err == nil {
+		t.Fatal("expected screens-css gate to fail on data-tc- selector")
+	}
+}
+
+func TestBite_mockupParity(t *testing.T) {
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := gate.Paths(root)
+	if err := gate.CheckMockupParity(p); err != nil {
+		t.Fatalf("live mockup-parity should pass: %v", err)
+	}
+	spec := layout.All()
+	if len(spec.Grids) == 0 || len(spec.Grids[0].Tracks) == 0 {
+		t.Fatal("empty layout spec")
+	}
+	tracks := append([]layout.Track(nil), spec.Grids[0].Tracks...)
+	tracks[0].Size = "99px"
+	spec.Grids[0].Tracks = tracks
+	html, err := os.ReadFile(filepath.Join(root, "docs", "visual", "carrel-ui-mockups.html"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := gate.CheckMockupParitySpec(spec, string(html)); err == nil {
+		t.Fatal("expected mockup-parity to fail on mutated track")
+	}
+}
+
+func TestBite_layoutSlotsManual(t *testing.T) {
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := gate.Paths(root)
+	tmp := t.TempDir()
+	cssDir := filepath.Join(tmp, "css")
+	if err := os.MkdirAll(cssDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(cssDir, "hand.css"), []byte(".tc-tickrow{display:grid}\n"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	p.CSSDir = cssDir
+	if err := gate.CheckLayoutSlots(p, nil); err == nil {
+		t.Fatal("expected layout-slots to fail on hand display:grid")
 	}
 }
 
