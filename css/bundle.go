@@ -17,6 +17,15 @@ var files embed.FS
 var Order = []string{
 	"00-tokens.css",
 	"01-base.css",
+	"02-primitives.css",
+	"03-forms.css",
+	"04-overlays.css",
+	"05-panels.css",
+	"06-lists.css",
+	"07-tables.css",
+	"08-shell.css",
+	"09-document.css",
+	"10-utility.css",
 }
 
 // Bundle reads fragments in Order, joins them, and validates required tokens.

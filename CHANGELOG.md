@@ -4,6 +4,40 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.0.2 — 2026-09-04
+
+Widget families, catalog server, and expanded behavior script.
+
+### For consumers
+
+- Import `carrel.dev/typecase/widget` and call `Render()` on typed widget
+  structs (for example `widget.Button{Label: "Save"}.Render()`). Every input
+  field is typed; there are no HTML slots.
+- Run the live catalog with `go run ./cmd/catalog` from the module root. Open
+  `http://localhost:8080/` for the page with `tc.js`, or `/static` for the same
+  widgets without behavior scripts.
+- Styles now include family sheets (`02-primitives.css` through
+  `10-utility.css`) concatenated in `css.Order`. Continue to serve via
+  `typecase.CSS()`.
+- `js/tc.js` handles menu open/close, overlay `Esc`, scrim dismiss, close
+  buttons, and basic focus trapping inside `[data-tc-trap]`. Load after markup
+  as before.
+- Widget CSS is validated against the public `--tc-*` token surface; do not
+  reference undeclared custom properties in overrides.
+
+### Included
+
+- All widget families from L-4: primitives, forms, overlays, panels, lists,
+  tables/grids/trees, shell, document, and utility widgets.
+- `catalog` package with every widget in each declared state.
+- `widget` package tests: render smoke, HTML escaping, catalog completeness,
+  per-family CSS token validation.
+
+### Not yet included
+
+- L-8 gate tests beyond token validation, L-9 browser checks (chromedp), and
+  Opus API review.
+
 ## typecase/v0.0.1 — 2026-09-04
 
 First publishable skeleton: module layout, token surface, asset delivery.
@@ -38,5 +72,5 @@ First publishable skeleton: module layout, token surface, asset delivery.
 
 ### Not yet included
 
-- Widget families (`tc-btn`, `tc-menu`, …).
-- Catalog (`cmd/catalog`) and L-8 / L-9 gates beyond token validation.
+- L-8 gate tests beyond token validation, L-9 browser checks (chromedp), and
+  full widget catalog acceptance.
