@@ -4,6 +4,49 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.0.5 — 2026-09-04
+
+Browser checks that actually run, and a readable catalog.
+
+### For consumers
+
+- The L-9.2 checks now run on Microsoft Edge as well as Chrome. The harness
+  starts the browser itself and connects over the DevTools endpoint published
+  in the profile directory, instead of relying on the "DevTools listening" line
+  on stderr — a browser built as a Windows GUI subsystem binary writes nothing
+  to an inherited pipe, so every check previously failed with `chrome failed to
+  start` on a machine that has only Edge. `CHROME_PATH` still overrides
+  detection.
+- One browser process now serves every check in a run; viewports come from
+  device metrics rather than a window-size flag.
+- The catalog page loads `/theme.js` in `<head>`. The route was served but
+  never linked, so the catalog rendered without a resolved theme. Both pages
+  carry it: the theme boot script must precede first paint (L-5.3) and is not
+  widget behavior. `/static` still withholds `tc.js`.
+- The catalog gives each cell holding a scrim, overlay, or rail drawer its own
+  containing block. Those widgets are fixed to the viewport by design, so on a
+  page that shows every state at once a single open scrim covered the whole
+  catalog and hid all 139 entries.
+
+### Included
+
+- `browser`: own launcher (`--remote-debugging-port=0` plus `DevToolsActivePort`)
+  behind `chromedp.NewRemoteAllocator`; `chromedp.EmulateViewport` per check.
+- `browser/catalog_test.go`: measures that no viewport-fixed widget escapes its
+  catalog cell and that the theme attribute is set on load.
+
+### Fixed
+
+- Settle waits in the browser checks were untyped constants passed to
+  `chromedp.Sleep`, so `Sleep(80)` waited 80 nanoseconds instead of 80
+  milliseconds; menu-open and theme-switch checks measured before the page had
+  settled.
+- `browser/fixtures.go` was not `gofmt`-clean, failing the first-commit gate.
+
+### Not yet included
+
+- Opus API review.
+
 ## typecase/v0.0.4 — 2026-09-04
 
 L-9.2 browser checks (chromedp) and menu popover positioning.
