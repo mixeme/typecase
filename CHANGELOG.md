@@ -4,6 +4,30 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.0.4 — 2026-09-04
+
+L-9.2 browser checks (chromedp) and menu popover positioning.
+
+### For consumers
+
+- Run `go test ./...` from the module root to execute L-8 gate checks and L-9.2
+  browser checks in the `browser` package. Set `CHROME_PATH` if Chrome is not on
+  `PATH` (Microsoft Edge is used automatically on Windows when Chrome is absent).
+- `tc-menu` popovers flip upward when there is not enough space below the
+  control; long labels no longer overlap the arrow.
+
+### Included
+
+- `browser` package: chromedp v0.16.0 checks for menu geometry, ellipsis,
+  single-row bar, 44 px tap targets, focus return, stacked `Esc`, WCAG AA
+  contrast, and stable geometry across themes.
+- L-9.3 bite fixtures under `browser/testdata/broken/`.
+- `tc.js` `positionPopover()` and `is-flip-up` CSS for menus.
+
+### Not yet included
+
+- Opus API review.
+
 ## typecase/v0.0.3 — 2026-09-04
 
 L-8 gates, full catalog coverage, and markup without inline styles.
@@ -30,7 +54,7 @@ L-8 gates, full catalog coverage, and markup without inline styles.
 
 ### Not yet included
 
-- L-9.2 browser checks (chromedp), Opus API review.
+- Opus API review.
 
 ## typecase/v0.0.2 — 2026-09-04
 

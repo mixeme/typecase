@@ -41,6 +41,23 @@
 		first.focus();
 	}
 
+	function positionPopover(menuRoot) {
+		var pop = menuRoot.querySelector(popoverSelector);
+		var btn = menuRoot.querySelector(menuSelector);
+		if (!pop || !btn) return;
+		pop.classList.remove("is-flip-up");
+		var prev = pop.style.display;
+		pop.style.display = "block";
+		pop.style.visibility = "hidden";
+		var btnRect = btn.getBoundingClientRect();
+		var popRect = pop.getBoundingClientRect();
+		pop.style.display = prev || "";
+		pop.style.visibility = "";
+		if (btnRect.bottom + popRect.height + 4 > window.innerHeight) {
+			pop.classList.add("is-flip-up");
+		}
+	}
+
 	function openMenu(menuRoot) {
 		var pop = menuRoot.querySelector(popoverSelector);
 		var btn = menuRoot.querySelector(menuSelector);
@@ -48,6 +65,7 @@
 		menuRoot.classList.add(OPEN);
 		btn.setAttribute("aria-expanded", "true");
 		menuRoot._tcTrigger = document.activeElement;
+		positionPopover(menuRoot);
 		var item = pop.querySelector('[role="menuitem"]');
 		if (item) item.focus();
 	}
