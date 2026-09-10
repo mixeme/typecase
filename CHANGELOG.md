@@ -10,8 +10,9 @@ do, not what the authors did.
 
 - An open side panel still covers the viewport at phone width, including the
   rail chrome (U-9: row menu instead of the panel).
-- Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
-  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
+- Remaining mockup sections (step 9 of
+  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md)): conflict,
+  settings, mail, admin, sign-in.
 - Remaining mockup geometry: step 10 of
   the same plan.
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
@@ -38,6 +39,11 @@ until released separately.
   Search suggestions are `RowLead` (title + subtitle); `RowFind` is the
   `/find` hit list, not the popover. `RowAvatar`, `RowLead`, `RowTick` and
   `RowMeta` stay as flex and remain legal outside `List`.
+- **Demo screens `/agenda`, `/tasks`, `/find`.** Week agenda is `RowTimeCols`
+  in a `List`, with `TickRow` sources and a `Fields` side; Day/Week/Month/Range
+  is `Seg` with Week chosen (no month day grid). Tasks are `RowTickMarkCols`.
+  Find hits are `RowFind` in a `List`, not the search popover. No new widget
+  types. The Calendar nav item points at `/agenda`.
 - **Shell, search, rail and side** take their geometry from `layout` (step 4).
   No new widget types. Search shows the 13 px icon as the first node of the
   field. `NavLayoutBottom` matches the mockup tab bar (icon above the label).

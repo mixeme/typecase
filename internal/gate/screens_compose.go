@@ -90,6 +90,30 @@ func CheckScreensCompose(p ModulePaths) error {
 	if !strings.Contains(files, "tc-row--tickcols") {
 		return fmt.Errorf("screens-compose: files list must use tickcols")
 	}
+	agenda := screens.Agenda()
+	if !strings.Contains(agenda, "tc-row--timecols") {
+		return fmt.Errorf("screens-compose: agenda list must use timecols")
+	}
+	if !strings.Contains(agenda, "tc-tickrow") {
+		return fmt.Errorf("screens-compose: agenda rail must use tickrow")
+	}
+	if !strings.Contains(agenda, "tc-fields") {
+		return fmt.Errorf("screens-compose: agenda side must use fields")
+	}
+	if !strings.Contains(agenda, `data-value="week"`) || !strings.Contains(agenda, "is-chosen") {
+		return fmt.Errorf("screens-compose: agenda span must be week")
+	}
+	tasks := screens.Tasks()
+	if !strings.Contains(tasks, "tc-row--tickmarkcols") {
+		return fmt.Errorf("screens-compose: tasks list must use tickmarkcols")
+	}
+	find := screens.Find()
+	if !strings.Contains(find, "tc-row--find") {
+		return fmt.Errorf("screens-compose: find hits must use row find")
+	}
+	if strings.Contains(find, "tc-search__popover") {
+		return fmt.Errorf("screens-compose: find must be the hit list, not the search popover")
+	}
 	list := screens.Notes()
 	if strings.Contains(list, "tc-doc") {
 		return fmt.Errorf("screens-compose: notes list must not include tc-doc preview")

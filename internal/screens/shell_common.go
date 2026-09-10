@@ -10,7 +10,7 @@ func shellTop() widget.Top {
 	return widget.Top{
 		Brand: widget.Brand{SVG: carrelBrandMarkup, Href: "/"},
 		Search: widget.Search{
-			Action:      "/search",
+			Action:      "/find",
 			Placeholder: "Search everything…",
 		},
 		Create: widget.Menu{
@@ -36,7 +36,7 @@ func shellNav(current string) widget.Nav {
 	return widget.Nav{
 		Items: []widget.NavItem{
 			{Label: "Contacts", Icon: "tc-i-con", Href: "/contacts", Count: intPtr(n312)},
-			{Label: "Calendar", Icon: "tc-i-cal", Href: "/calendar", Count: intPtr(n14)},
+			{Label: "Calendar", Icon: "tc-i-cal", Href: "/agenda", Count: intPtr(n14)},
 			{Label: "Tasks", Icon: "tc-i-task", Href: "/tasks", Count: intPtr(n3)},
 			{Label: "Notes", Icon: "tc-i-note", Href: "/notes", Count: intPtr(n86)},
 			{Label: "Files", Icon: "tc-i-file", Href: "/files"},
@@ -47,8 +47,12 @@ func shellNav(current string) widget.Nav {
 }
 
 func shellFrame(nav widget.Nav, rail widget.Rail, main widget.Main, side widget.Side, tail string) string {
+	return shellFrameWith(shellTop(), nav, rail, main, side, tail)
+}
+
+func shellFrameWith(top widget.Top, nav widget.Nav, rail widget.Rail, main widget.Main, side widget.Side, tail string) string {
 	html := widget.Shell{
-		Top:  shellTop(),
+		Top:  top,
 		Nav:  nav,
 		Rail: rail,
 		Main: main,

@@ -46,7 +46,7 @@ func statesShell(top widget.Top, nav widget.Nav, rail widget.Rail, main widget.M
 }
 
 func statesEmpty() string {
-	return statesShell(statesTop(false), shellNav("/calendar"), widget.Rail{
+	return statesShell(statesTop(false), shellNav("/agenda"), widget.Rail{
 		Sections: []widget.RailSection{{
 			Title: "Sources",
 			State: widget.RailSecMuted,
@@ -73,7 +73,7 @@ func statesEmpty() string {
 func statesLoading() string {
 	skel18 := widget.SkelWidth("18px")
 	skel16 := widget.SkelWidth("16px")
-	return statesShell(statesTop(true), shellNav("/calendar"), widget.Rail{
+	return statesShell(statesTop(true), shellNav("/agenda"), widget.Rail{
 		Sections: []widget.RailSection{
 			{Rows: []widget.TickRow{{
 				Label: "Combined calendar",
@@ -132,7 +132,7 @@ func statesLoading() string {
 }
 
 func statesOffline() string {
-	return statesShell(statesTop(false), shellNav("/calendar"), widget.Rail{
+	return statesShell(statesTop(false), shellNav("/agenda"), widget.Rail{
 		Sections: []widget.RailSection{
 			{Rows: []widget.TickRow{{
 				Label: "Combined calendar",
@@ -184,7 +184,7 @@ func statesOffline() string {
 
 func statesPartial() string {
 	n2, n1, p83 := 2, 1, 83
-	return statesShell(statesTop(false), shellNav("/calendar"), widget.Rail{
+	return statesShell(statesTop(false), shellNav("/agenda"), widget.Rail{
 		Sections: []widget.RailSection{
 			{Rows: []widget.TickRow{{
 				Label: "Combined calendar",

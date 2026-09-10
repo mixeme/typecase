@@ -18,6 +18,9 @@ echo   /notes-edit   - Notes edit view
 echo   /notes-quick  - Notes quick capture
 echo   /files        - Files
 echo   /contacts     - Contacts
+echo   /agenda       - Calendar week agenda
+echo   /tasks        - Tasks
+echo   /find         - Search hits
 echo   /io           - Import and export
 echo   /duplicates   - Duplicates
 echo   /states       - UI states
