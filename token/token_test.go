@@ -8,7 +8,7 @@ import (
 func TestValidate_complete(t *testing.T) {
 	css := strings.Join([]string{
 		":root {",
-		"--tc-ink: #000; --tc-surface: #111; --tc-bg: #222; --tc-rule: #333;",
+		"--tc-ink: #000; --tc-surface: #111; --tc-bg: #222; --tc-card: #777; --tc-rule: #333;",
 		"--tc-muted: #444; --tc-accent: #555; --tc-danger: #666;",
 		"--tc-font-serif: a; --tc-font-sans: b; --tc-font-mono: c; --tc-font-size: 1px;",
 		"--tc-row-height: 22px; --tc-row-height-touch: 52px;",

@@ -319,6 +319,11 @@ type Badge struct {
 }
 
 func (b Badge) Render() string {
+	// Бейдж без подписи — это не «бейдж без текста», а бейдж, которого нет:
+	// пустая рамка ничего не сообщает. Так же ведёт себя Mark.
+	if b.Label == "" {
+		return ""
+	}
 	role := b.Role
 	if role == "" {
 		role = BadgeNeutral

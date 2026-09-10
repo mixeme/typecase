@@ -65,6 +65,8 @@ func (t Top) Render() string {
 		user = t.User.Render()
 	}
 	nav := t.Nav.Render()
+	// Поиск рисуется всегда: «поле не убирается параметром» — инвариант tc-top,
+	// а не недосмотр. Ширину ему задаёт геометрия панели, а не наличие входа.
 	search := t.Search.Render()
 	mark := t.Mark.Render()
 	return `<header` + classAttr(cls) + `>` + t.Brand.Render() + nav + search + `<div class="tc-top__actions">` + create + user + `</div>` + mark + `</header>`
@@ -126,6 +128,10 @@ func (r Rail) Render() string {
 	for _, c := range r.Chips {
 		chips += c.Render()
 	}
+	if chips != "" {
+		// Пустая полоса чипов рисовала линовку и отступ из ничего.
+		chips = `<div class="tc-rail__chips">` + chips + `</div>`
+	}
 	var secs string
 	for _, s := range r.Sections {
 		secs += s.Render()
@@ -134,7 +140,7 @@ func (r Rail) Render() string {
 	if r.Note != "" {
 		note = `<p class="tc-rail__note">` + esc(r.Note) + `</p>`
 	}
-	return `<aside` + classAttr(cls) + ` data-tc-rail` + ariaBool("aria-expanded", r.Open) + `><div class="tc-rail__chips">` + chips + `</div><div class="tc-rail__sections">` + secs + `</div>` + note + r.Foot.Render() + `</aside>`
+	return `<aside` + classAttr(cls) + ` data-tc-rail` + ariaBool("aria-expanded", r.Open) + `>` + chips + `<div class="tc-rail__sections">` + secs + `</div>` + note + r.Foot.Render() + `</aside>`
 }
 
 // RailSection — tc-railsec

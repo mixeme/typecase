@@ -1,8 +1,9 @@
-/* Palette — light theme defaults. Only these seven change in dark (L-5.3). */
+/* Palette — light theme defaults. Only these eight change in dark (L-5.3). */
 :root {
 	--tc-ink: #17211c;
 	--tc-surface: #fffdf7;
 	--tc-bg: #f5f1e8;
+	--tc-card: #e8dfcb;
 	--tc-rule: #d8cfbb;
 	--tc-muted: #56503f;
 	--tc-accent: #4a6b52;
@@ -24,6 +25,7 @@
 	--tc-ink: #e8dfcb;
 	--tc-surface: #1b231d;
 	--tc-bg: #141a16;
+	--tc-card: #242e27;
 	--tc-rule: #2f3b33;
 	--tc-muted: #a79e88;
 	--tc-accent: #7fa085;

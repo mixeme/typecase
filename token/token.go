@@ -6,11 +6,12 @@ import (
 	"strings"
 )
 
-// Palette names the seven overridable palette slots (L-5.1).
+// Palette names the eight overridable palette slots (L-5.1).
 var Palette = []string{
 	"--tc-ink",
 	"--tc-surface",
 	"--tc-bg",
+	"--tc-card",
 	"--tc-rule",
 	"--tc-muted",
 	"--tc-accent",

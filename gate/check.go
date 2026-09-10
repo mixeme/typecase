@@ -225,7 +225,7 @@ func CheckCompleteness(p ModulePaths, catalog []CatalogEntry) error {
 		}
 	}
 	for name := range cssWidgets {
-		if name == "tc-root" || name == "tc-icon" {
+		if name == "tc-icon" {
 			continue
 		}
 		if _, ok := goNames[name]; !ok && !isVariantOnly(name) {

@@ -112,3 +112,25 @@ func TestEscape_html(t *testing.T) {
 		t.Fatal("unescaped HTML in label")
 	}
 }
+
+// Пустой бейдж — ломаная фикстура ворот inv-badge-has-text. tc-usermenu отдавал
+// её всякий раз, когда метка не задана (В-19).
+func TestUserMenu_noEmptyBadge(t *testing.T) {
+	html := widget.UserMenu{
+		Name:  "Alex",
+		Note:  "Signed in",
+		Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}},
+	}.Render()
+	if strings.Contains(html, `class="tc-badge`) {
+		t.Fatalf("user menu without Mark must not render a badge: %s", html)
+	}
+	if strings.Contains(html, `<ul class="tc-usermenu__popover`) {
+		t.Fatal("popover head must not sit inside the menu list")
+	}
+}
+
+func TestBadge_emptyLabelRendersNothing(t *testing.T) {
+	if got := (widget.Badge{}).Render(); got != "" {
+		t.Fatalf("empty badge must render nothing, got %q", got)
+	}
+}

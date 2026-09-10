@@ -4,6 +4,105 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.2.0 — 2026-09-05
+
+The second visual audit pass, closed (`В-12`…`В-27` in
+`docs/plan/catalog-visual.md`). The palette gains an eighth slot, small controls
+stop drawing their tap area, headings stop inheriting the browser's scale, and
+sheets and dialogs are finally positioned by the library.
+
+### For consumers (v0.1.1 → v0.2.0)
+
+- **Define `--tc-card` if you override the palette.** The eighth palette slot: a
+  quiet surface tone one step off the page ground. `token.Validate` and
+  `token.ValidateWidget` now require it, so a consumer stylesheet that redefines
+  the palette without it fails validation. Defaults ship in the bundle:
+  `#e8dfcb` light, `#242e27` dark. Nothing to do if you use the bundle as is.
+- **Mark the root with `data-tc-root`, not the `tc-root` class.** Base
+  typography, colour and `box-sizing` now hang on the attribute the markup
+  already carries, so the library no longer needs a script to look like itself.
+  `tc.js` stops adding the class; if your own CSS targeted `.tc-root`, retarget
+  it at `[data-tc-root]`.
+- **Small controls are drawn at their real size again.** `tc-tick` and the
+  tick in `tc-tickrow` are 13 px, `tc-close` is 24 px. The 44 px tap area comes
+  from a transparent pseudo-element below 720 px, so layouts that reserved
+  44 px of space for these marks will now see them take 13 or 24. `tc-check`
+  no longer forces the touch row height at every width.
+- **Headings inherit the base size unless a widget names one.** If you styled
+  around `h1` being 2em inside `tc-head`, drop those overrides: the title is
+  `1.6em`, the sheet and dialog titles are body size in bold.
+- **`tc-usermenu` markup changed.** The popover is a `div` wrapping the header
+  and a `ul[role=menu]`; `aria-controls` points at the list. CSS or scripts
+  that assumed `ul.tc-usermenu__popover` need updating.
+- **`Badge` with an empty label renders nothing** instead of an empty chip.
+- **`tc-seg` changed appearance.** The chosen part is `--tc-card` with ink text
+  and `font-weight: 600`; the others are muted with no fill. A solid accent
+  marks the primary action and the "done" state, and a view switch does not
+  take that rank.
+- **The side column's width moved to `.tc-side`.** `.tc-shell__side` is
+  `width: auto`, so a closed panel collapses its column instead of holding
+  400 px open.
+- **Run `go test ./...`** from the module root after upgrading. The browser
+  gates need Chrome or Edge (`CHROME_PATH` overrides detection).
+
+### Fixed
+
+- `tc-tick`, `tc-tickrow__tick`, `tc-close`, `tc-check`: the 44 px tap area was
+  written as `min-width`/`min-height` on the mark itself, so it was painted at
+  every width instead of being reserved for the narrow layout (`В-14`).
+- `tc-tickrow` in the narrow layout spaces the tick and the label by `1.2em`, so
+  the tick's tap area does not swallow taps meant for the label.
+- Heading sizes: no `h1`–`h4` inside the library inherits the browser scale any
+  more. `tc-head__title` is `1.6em/1.5` serif, `tc-sheet__title` and
+  `tc-dialog__title` are body size in bold, `tc-empty__title` is `1.1em`, and
+  the document heading scale is stated in `09-document.css` (`В-15`).
+- `button`, `input`, `select`, `textarea` take `font: inherit`; `code`, `kbd`,
+  `samp` and `pre` take the declared monospace. Nineteen controls were drawn
+  with the system face (`В-16`).
+- `tc-sheet` and `tc-dialog` are centred by their overlay layer, 44 px from the
+  top, at `560px`/`92%` and `24em`/`90vw`. The layer is transparent to pointer
+  events so the scrim still closes on a click outside (`В-17`).
+- `tc-sheet__head`: the title leads and the target caption is pushed right;
+  `width: 100%` on the caption used to squeeze it against the title (`В-18`).
+- `Badge.Render` with no label renders nothing; `tc-usermenu` no longer emits
+  the empty badge that its own `inv-badge-has-text` fixture describes, and the
+  popover header no longer sits inside the `ul` (`В-19`).
+- `.tc-main` fills its column, like `.tc-rail` and `.tc-side` (`В-20`).
+- A closed side panel collapses its column (`В-21`).
+- `tc-rail` draws no chip strip when there are no chips (`В-23`).
+- Base styles hang on `[data-tc-root]`, so the library looks the same without
+  `tc.js`; the static catalog page used to fall back to 16 px Times (`В-24`).
+- `.tc-mark` has no palette default: without a supplied colour it is not
+  painted, rather than painted with the theme accent (`В-25`).
+- `tc-seg`: chosen part follows the mockups, carries a non-colour cue, and takes
+  `flex: none`/`white-space: nowrap` so a part is never squeezed below its
+  label (`В-26`).
+- `tc.js` moves `is-chosen` together with `aria-pressed` when a segment is
+  clicked; the visible and the announced selection used to diverge (`В-27`).
+
+### Included
+
+- `catalog.Mux`: the catalog site — pages, styles, scripts, fonts, icons and a
+  sample image — built once and used by both `cmd/catalog` and the browser
+  checks. Unknown paths answer 404 instead of the page, which is what made font
+  faces fail to parse and images fail to decode (`В-12`).
+- `--tc-card` in `css/00-tokens.css`, in `token.Palette`, and in the L-5.1
+  palette list in `docs/spec/typecase.md`.
+- `browser.TapTarget` measures the hit area with `elementFromPoint` at four
+  points 21 px from the centre, across five controls, and separately checks the
+  drawn size at 1280 px.
+- `gate.compositeInvariants`: per-occurrence markup invariants read every
+  catalog entry the widget is drawn in, not only the entry named after it.
+- Browser checks for catalog assets, typography, overlay geometry, shell
+  geometry, the no-script base, and segment selection agreement.
+- Catalog fixtures carry a build caption; `tc-railfoot — missing` shows the
+  unassembled-input state on purpose.
+
+### Not yet included
+
+- `tc-seg` does not collapse into a menu when width runs short (L-4.4).
+- No tag `typecase/v0.2.0` in the repository yet (`В-11`).
+
 ## typecase/v0.1.1 — 2026-09-05
 
 Visual audit fixes from the catalog browser review (findings В-1…В-7) and
