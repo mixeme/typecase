@@ -28,6 +28,8 @@ type Pick struct {
 	Options []PickItem
 	Manual  string
 	Open    bool
+
+	describedBy string // hint and error ids, set by PField
 }
 
 func (p Pick) Render() string {
@@ -71,6 +73,6 @@ func (p Pick) Render() string {
 		menu = `<ul class="tc-pick__menu" role="listbox"` + attr("id", menuID) + hidden + `>` + items + `</ul>`
 		controls = attr("aria-controls", menuID)
 	}
-	query := `<input type="text" class="tc-pick__query" autocomplete="off"` + attr("id", id) + al + ph + attr("value", p.Query) + ` role="combobox" aria-autocomplete="list"` + ariaBool("aria-expanded", p.Open) + controls + `>`
+	query := `<input type="text" class="tc-pick__query" autocomplete="off"` + attr("id", id) + al + attr("aria-describedby", p.describedBy) + ph + attr("value", p.Query) + ` role="combobox" aria-autocomplete="list"` + ariaBool("aria-expanded", p.Open) + controls + `>`
 	return `<div` + classAttr(cls) + ` data-tc-pick` + attr("data-tc-remove", labels.Remove) + `><div class="tc-pick__box">` + tags + query + `</div>` + menu + `<input type="hidden" name="` + esc(p.Name) + `" value="` + esc(strings.Join(p.Chosen, ",")) + `"></div>`
 }

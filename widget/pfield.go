@@ -54,15 +54,8 @@ func (f PField) Render() string {
 	if f.Disabled {
 		cls = classes(cls, "is-disabled")
 	}
-	hint := ""
-	if f.Hint != "" {
-		hint = `<span class="tc-pfield__hint" id="` + esc(f.Name) + `-hint">` + esc(f.Hint) + `</span>`
-	}
-	err := ""
-	if f.Error != "" {
-		err = `<span class="tc-pfield__error" id="` + esc(f.Name) + `-error" role="alert">` + esc(f.Error) + `</span>`
-	}
 	fieldID := uniqueID("tc-pfield")
+	hint, err, describedBy := fieldNotes("tc-pfield", fieldID, f.Hint, f.Error)
 	label := ""
 	if f.Label != "" && !f.Title {
 		label = `<label class="tc-pfield__label" for="` + esc(fieldID) + `">` + esc(f.Label) + `</label>`
@@ -74,9 +67,10 @@ func (f PField) Render() string {
 			p.Name = f.Name
 		}
 		p.ID = fieldID
+		p.describedBy = describedBy
 		control = `<div class="tc-pfield__control">` + p.Render() + `</div>`
 	} else {
-		in := Input{ID: fieldID, Name: f.Name, Label: f.Label, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}
+		in := Input{ID: fieldID, Name: f.Name, Label: f.Label, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled, describedBy: describedBy}
 		control = `<div class="tc-pfield__control">` + in.Render() + `</div>`
 	}
 	return `<div` + classAttr(cls) + `>` + label + control + hint + err + `</div>`

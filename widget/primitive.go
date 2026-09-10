@@ -99,6 +99,8 @@ type Input struct {
 	Options     []SelectOption
 	Placeholder string
 	ReadOnly    bool
+
+	describedBy string // hint and error ids, set by Field and PField
 }
 
 func (in Input) Render() string {
@@ -118,6 +120,7 @@ func (in Input) Render() string {
 	if in.Label == "" && in.Name != "" {
 		al = attr("aria-label", in.Name)
 	}
+	al += attr("aria-describedby", in.describedBy)
 	switch kind {
 	case InputPick:
 		return ""
@@ -157,6 +160,8 @@ type Check struct {
 	Checked bool
 	Hint    string
 	Reason  string
+
+	describedBy string // hint and error ids, set by Field
 }
 
 func (c Check) Render() string {
@@ -189,7 +194,7 @@ func (c Check) Render() string {
 	if idVal == "" {
 		idVal = uniqueID("tc-check")
 	}
-	id := attr("id", idVal)
+	id := attr("id", idVal) + attr("aria-describedby", c.describedBy)
 	return `<label` + classAttr(cls) + title + `><input type="` + esc(string(kind)) + `"` + attr("name", c.Name) + id + attr("value", c.Value) + chk + dis + `><span class="tc-check__box" aria-hidden="true"></span><span class="tc-check__label">` + esc(c.Label) + `</span>` + hint + `</label>`
 }
 

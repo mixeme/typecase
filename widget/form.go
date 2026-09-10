@@ -1,5 +1,7 @@
 package widget
 
+import "strings"
+
 // Form — tc-form
 //
 // Роль. Набор полей с общими кнопками и общими ошибками.
@@ -137,14 +139,8 @@ func (f Field) Render() string {
 	if f.Required {
 		req = `<span class="tc-field__req" aria-hidden="true">*</span>`
 	}
-	hint := ""
-	if f.Hint != "" {
-		hint = `<span class="tc-field__hint" id="` + esc(f.Name) + `-hint">` + esc(f.Hint) + `</span>`
-	}
-	err := ""
-	if f.Error != "" {
-		err = `<span class="tc-field__error" id="` + esc(f.Name) + `-error" role="alert">` + esc(f.Error) + `</span>`
-	}
+	fieldID := uniqueID("tc-field")
+	hint, err, describedBy := fieldNotes("tc-field", fieldID, f.Hint, f.Error)
 	extra := ""
 	if f.Extra.Label != "" {
 		extra = `<div class="tc-field__extra">` + f.Extra.Render() + `</div>`
@@ -153,10 +149,10 @@ func (f Field) Render() string {
 	if bare {
 		cls = classes(cls, "tc-field--bare")
 	}
-	fieldID := uniqueID("tc-field")
 	if f.Check != nil {
 		chk := *f.Check
 		chk.ID = fieldID
+		chk.describedBy = describedBy
 		if chk.Name == "" {
 			chk.Name = f.Name
 		}
@@ -169,12 +165,29 @@ func (f Field) Render() string {
 		}
 		return `<div` + classAttr(cls) + `>` + control + hint + err + `</div>`
 	}
-	input := Input{ID: fieldID, Name: f.Name, Label: f.Label, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}.Render()
+	input := Input{ID: fieldID, Name: f.Name, Label: f.Label, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled, describedBy: describedBy}.Render()
 	label := ""
 	if !bare {
 		label = `<label class="tc-field__label" for="` + esc(fieldID) + `">` + esc(f.Label) + req + `</label>`
 	}
 	return `<div` + classAttr(cls) + `>` + label + `<div class="tc-field__control">` + input + extra + `</div>` + hint + err + `</div>`
+}
+
+// fieldNotes prints the hint and error of a field block with ids derived from
+// the control id, and the aria-describedby value that ties them to it.
+func fieldNotes(block, controlID, hintText, errText string) (hint, err, describedBy string) {
+	var ids []string
+	if hintText != "" {
+		id := controlID + "-hint"
+		hint = `<span class="` + block + `__hint" id="` + esc(id) + `">` + esc(hintText) + `</span>`
+		ids = append(ids, id)
+	}
+	if errText != "" {
+		id := controlID + "-error"
+		err = `<span class="` + block + `__error" id="` + esc(id) + `" role="alert">` + esc(errText) + `</span>`
+		ids = append(ids, id)
+	}
+	return hint, err, strings.Join(ids, " ")
 }
 
 // FormFoot — tc-formfoot

@@ -1,6 +1,7 @@
 package widget_test
 
 import (
+	"regexp"
 	"strings"
 	"testing"
 
@@ -462,5 +463,34 @@ func TestDocEdit_titleAndBody(t *testing.T) {
 	}
 	if !strings.Contains(html, "Hello") || !strings.Contains(html, "tc-in--textarea") {
 		t.Fatalf("body textarea missing: %s", html)
+	}
+}
+
+func TestField_hintAndErrorDescribeControl(t *testing.T) {
+	cases := map[string]string{
+		"field":  widget.Field{Name: "mail", Label: "Mail", Kind: widget.InputEmail, Hint: "Work address", Error: "Required"}.Render(),
+		"check":  widget.Field{Name: "agree", Label: "Agree", Check: &widget.Check{}, Hint: "Once", Error: "Required"}.Render(),
+		"pfield": widget.PField{Name: "date", Label: "Date", Kind: widget.InputDate, Hint: "Local time", Error: "Bad date"}.Render(),
+		"pick":   widget.PField{Name: "rel", Label: "Related", Kind: widget.InputPick, Pick: &widget.Pick{}, Hint: "Any record", Error: "Gone"}.Render(),
+	}
+	idRe := regexp.MustCompile(`class="tc-p?field__(hint|error)" id="([^"]+)"`)
+	for name, html := range cases {
+		ids := idRe.FindAllStringSubmatch(html, -1)
+		if len(ids) != 2 {
+			t.Fatalf("%s: want hint and error ids, got %v in %s", name, ids, html)
+		}
+		want := `aria-describedby="` + ids[0][2] + " " + ids[1][2] + `"`
+		if strings.Count(html, want) != 1 {
+			t.Fatalf("%s: control must carry %s: %s", name, want, html)
+		}
+	}
+}
+
+func TestField_hintIDsUniquePerRender(t *testing.T) {
+	a := widget.Field{Name: "label", Label: "Label", Hint: "h"}.Render()
+	b := widget.Field{Name: "label", Label: "Label", Hint: "h"}.Render()
+	idRe := regexp.MustCompile(`id="([^"]+-hint)"`)
+	if idRe.FindStringSubmatch(a)[1] == idRe.FindStringSubmatch(b)[1] {
+		t.Fatalf("two fields with one Name must not share a hint id")
 	}
 }

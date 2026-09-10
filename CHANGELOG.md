@@ -63,6 +63,12 @@ until released separately.
   label leaves the screen, the name stays. An empty `Label` still renders
   bare, but then the control is named by `Name` — do not write fields that
   way.
+- **Hints and errors are tied to their control.** `Field` and `PField`
+  (including a `Check` or `Pick` inside) put `aria-describedby` on the
+  control: hint first, then error. Their ids now derive from the control id
+  (`tc-field-N-hint`), not from `Name` (`name-hint`), so two fields with one
+  `Name` no longer share an id. If your script looked up `#<name>-hint`, look
+  up the control's `aria-describedby` instead. No new input fields.
 - **The fence now covers screens too.** The demo screens fail the gates if
   they import `layout` or carry `style=`, inline handlers or `<script>` in
   their markup — the same rules an application screen follows.
