@@ -10,8 +10,6 @@ do, not what the authors did.
 
 - An open side panel still covers the viewport at phone width, including the
   rail chrome (U-9: row menu instead of the panel).
-- Remaining mockup geometry: step 10 of
-  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
@@ -94,6 +92,15 @@ until released separately.
   menu sit above and work on their own. Nothing changes in your code. If your
   CSS or scripts targeted `a.tc-row` or `.tc-tickrow__link` as a wrapper,
   target `.tc-row__link` / `.tc-tickrow__link` on the text instead.
+- **`tc-fields` label column is 104 px.** It is no longer `8em` and no longer
+  grows with the longest label. Pair lists that assumed a flexible label
+  column will wrap or clip sooner.
+- **Geometry is locked to the mockup.** `mockup-parity` compares every pair
+  in the layout plan to `.m-*`. The look probe runs assembled screens at
+  1600, 1280, 900 and 480; expected sizes come from `layout` for the measured
+  container, not a third copy of the numbers. A grid row's slot count must
+  match the computed tracks. Nothing to change in your widgets if you already
+  compose from the catalog.
 - **The fence now covers screens too.** The demo screens fail the gates if
   they import `layout` or carry `style=`, inline handlers or `<script>` in
   their markup — the same rules an application screen follows.

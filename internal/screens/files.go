@@ -22,7 +22,7 @@ func filesRail() widget.Rail {
 			{
 				Title: "sftpgo · vps",
 				Rows: []widget.TickRow{
-					{Label: "Documents", Mark: widget.Mark{Colour: "#4A6B52", Label: "Documents"}, Tick: widget.TickOn},
+					{Label: "Documents", Mark: widget.Mark{Colour: "#4A6B52", Label: "Documents"}, Tick: widget.TickOn, Menu: []widget.MenuItem{{Label: "Retry"}}},
 					{Label: "Public", Mark: widget.Mark{Colour: "#9A9280", Label: "Public"}, Tick: widget.TickOff, State: widget.TickRowReadOnly},
 				},
 			},

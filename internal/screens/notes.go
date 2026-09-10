@@ -37,6 +37,7 @@ func notesRail() widget.Rail {
 			{
 				Rows: []widget.TickRow{{
 					Label:   "Combined notebook",
+					Href:    "/notes",
 					Mark:    widget.Mark{Colours: []string{"#4a6b52", "#6B4E7A", "#A05A2C"}, Label: "Combined"},
 					Count:   intPtr(n86),
 					Tick:    widget.TickPartial,

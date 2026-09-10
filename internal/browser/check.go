@@ -6,6 +6,8 @@ import (
 	"time"
 
 	"github.com/chromedp/chromedp"
+
+	"carrel.dev/typecase/layout"
 )
 
 // Name identifies one L-9.2 browser invariant.
@@ -214,9 +216,12 @@ const tapHitJS = `(() => {
 })()`
 
 // tapDrawnJS reports the drawn rectangle of the marks that must stay small in
-// the normal density: 13 px for a tick, 24 px for a close.
-const tapDrawnJS = `(() => {
-  const want = { ".tc-tick": 13, ".tc-tickrow__tick": 13, ".tc-close": 24 };
+// the normal density. Tick sizes come from layout tables, not a third copy.
+func tapDrawnJS() string {
+	tick := layoutBoxPx(".tc-tick", "width")
+	rowTick := layoutBoxPx(".tc-tickrow__tick", "width")
+	return fmt.Sprintf(`(() => {
+  const want = { ".tc-tick": %g, ".tc-tickrow__tick": %g, ".tc-close": 24 };
   const bad = [];
   for (const sel of Object.keys(want)) {
     const el = document.querySelector(sel);
@@ -227,7 +232,20 @@ const tapDrawnJS = `(() => {
     }
   }
   return bad;
-})()`
+})()`, tick, rowTick)
+}
+
+func layoutBoxPx(sel, prop string) float64 {
+	for _, b := range layout.All().Boxes {
+		if b.Selector != sel {
+			continue
+		}
+		if n, ok := layout.Px(b.Props[prop]); ok {
+			return n
+		}
+	}
+	return 0
+}
 
 func checkTapTarget(h *Harness, url string, width, height int) error {
 	var missed []string
@@ -238,7 +256,7 @@ func checkTapTarget(h *Harness, url string, width, height int) error {
 		return fmt.Errorf("tap-target: hit area under 44px: %s", strings.Join(missed, "; "))
 	}
 	var grown []string
-	if err := h.Run(url, 1280, 900, chromedp.Evaluate(tapDrawnJS, &grown)); err != nil {
+	if err := h.Run(url, 1280, 900, chromedp.Evaluate(tapDrawnJS(), &grown)); err != nil {
 		return err
 	}
 	if len(grown) > 0 {

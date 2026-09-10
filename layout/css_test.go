@@ -133,6 +133,8 @@ func TestCSS_restBoxes(t *testing.T) {
 		"width:330px",
 		"position:absolute",
 		".tc-prose__h1{font-size:27px;line-height:1.15}",
+		".tc-fields__row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:7px 14px}",
+		".tc-tick{height:13px;width:13px}",
 		".tc-btn{border-color:var(--tc-edge)}",
 		".tc-table__td{border-color:var(--tc-hair)}",
 		".tc-top{border-color:var(--tc-rule)}",
@@ -199,6 +201,20 @@ func TestSplitTracks_outsideParens(t *testing.T) {
 	got := layout.SplitTracks("3px minmax(140px,1.2fr) 80px")
 	if len(got) != 3 || got[1] != "minmax(140px,1.2fr)" {
 		t.Fatalf("got %v", got)
+	}
+}
+
+func TestTracksAt(t *testing.T) {
+	got := layout.TracksAt(layout.RowTimeCols, 616)
+	if len(got) < 2 {
+		t.Fatalf("tracks %v", got)
+	}
+	if got[1].Size != "54px" {
+		t.Fatalf("lead at 616 %q want 54px (620 block)", got[1].Size)
+	}
+	wide := layout.TracksAt(layout.RowTimeCols, 900)
+	if wide[1].Size != "62px" {
+		t.Fatalf("lead at 900 %q want 62px", wide[1].Size)
 	}
 }
 

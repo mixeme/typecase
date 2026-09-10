@@ -189,8 +189,6 @@
 	border-width: var(--tc-stroke);
 	border-style: solid;
 	border-radius: var(--tc-radius-sm);
-	width: 13px;
-	height: 13px;
 	padding: 0;
 	background: var(--tc-surface);
 	cursor: pointer;

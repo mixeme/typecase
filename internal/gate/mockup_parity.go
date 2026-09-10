@@ -15,20 +15,12 @@ type parityPair struct {
 	Selector string
 	Props    []string
 	Narrow   []int
+	SideAuto bool // last shell track is auto; width lives on .tc-side
+	Pad620   bool // .m-row 620 padding vs every row grid's 620 PadLeft/PadRight
 }
 
-func liveParityPairs(spec layout.Spec) []parityPair {
-	have := map[string]bool{}
-	for _, g := range spec.Grids {
-		have[g.Selector] = true
-	}
-	for _, b := range spec.Boxes {
-		have[b.Selector] = true
-	}
-	for _, f := range spec.Flows {
-		have[f.Selector] = true
-	}
-	all := []parityPair{
+func parityPairs() []parityPair {
+	return []parityPair{
 		{Mockup: ".m-src", Selector: ".tc-tickrow", Props: []string{
 			"grid-template-columns", "gap", "height", "padding-left", "padding-right",
 			"grid-auto-flow", "grid-auto-columns",
@@ -39,25 +31,42 @@ func liveParityPairs(spec layout.Spec) []parityPair {
 		{Mockup: ".m-row--find", Selector: ".tc-row--find", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
 		{Mockup: ".m-row--agenda", Selector: ".tc-row--timecols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
 		{Mockup: ".m-row--task", Selector: ".tc-row--tickmarkcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-shell", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
+		{Mockup: ".m-row", Selector: ".tc-row", Props: []string{"min-height", "gap"}, Pad620: true},
 		{Mockup: ".m-top", Selector: ".tc-top", Props: []string{"height", "gap", "padding"}},
 		{Mockup: ".m-search", Selector: ".tc-search", Props: []string{"width"}},
 		{Mockup: ".m-search", Selector: ".tc-search__field", Props: []string{"height", "gap", "padding"}},
-		{Mockup: ".m-nav", Selector: ".tc-nav", Props: []string{"gap", "padding"}},
-		{Mockup: ".m-form", Selector: ".tc-form", Props: []string{"gap"}},
+		{Mockup: ".m-nav a", Selector: ".tc-nav__item", Props: []string{"height", "gap"}},
+		{Mockup: ".m-shell", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
+		{Mockup: ".m-shell.has-side", Selector: ".tc-shell__body:has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
+		{Mockup: ".m-shell.no-rail", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail))", Props: []string{"grid-template-columns"}},
+		{Mockup: ".m-shell.no-rail.has-side", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail)):has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
+		{Mockup: ".m-form", Selector: ".tc-form", Props: []string{"gap", "padding"}},
+		{Mockup: ".mock .m-fields", Selector: ".tc-fields__row", Props: []string{"grid-template-columns"}},
 		{Mockup: ".m-sheet", Selector: ".tc-sheet", Props: []string{"width"}},
 		{Mockup: ".m-dialog.is-narrow", Selector: ".tc-dialog", Props: []string{"max-width"}},
 		{Mockup: ".m-grid", Selector: ".tc-grid", Props: []string{"grid-template-columns", "gap"}},
 		{Mockup: ".m-doc", Selector: ".tc-doc__layout", Props: []string{"grid-template-columns"}},
 		{Mockup: ".m-title", Selector: ".tc-prose__h1", Props: []string{"font-size", "line-height"}},
 	}
-	var out []parityPair
-	for _, p := range all {
-		if have[p.Selector] {
-			out = append(out, p)
+}
+
+func specHasSelector(spec layout.Spec, sel string) bool {
+	for _, g := range spec.Grids {
+		if g.Selector == sel {
+			return true
 		}
 	}
-	return out
+	for _, b := range spec.Boxes {
+		if b.Selector == sel {
+			return true
+		}
+	}
+	for _, f := range spec.Flows {
+		if f.Selector == sel {
+			return true
+		}
+	}
+	return false
 }
 
 // CheckMockupParity compares layout tables in All() to .m-* rules in the mockup.
@@ -81,13 +90,17 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 	}
 	css = stripCSSComments(css)
 	base, atBlocks := cutAtRules(css)
-	baseRules := indexRules(parseCSSRules(base))
-	narrow := indexNarrow(atBlocks)
+	baseRules := parseCSSRules(base)
+	narrow := indexNarrowProps(atBlocks)
 
 	var errs []string
-	for _, pair := range liveParityPairs(spec) {
-		mock := baseRules[pair.Mockup]
-		if mock == nil {
+	for _, pair := range parityPairs() {
+		if !specHasSelector(spec, pair.Selector) {
+			errs = append(errs, pair.Selector+" missing from layout.All()")
+			continue
+		}
+		mock := propsForSelector(baseRules, pair.Mockup)
+		if len(mock) == 0 {
 			errs = append(errs, pair.Mockup+" missing in mockup")
 			continue
 		}
@@ -99,10 +112,11 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 					want = paddingFromShorthand(mock["padding"], prop)
 				}
 			}
-			if strings.Contains(want, "var(") {
-				want = resolveMockVars(css, want)
+			want = resolveMockVars(css, want)
+			got := resolveLayoutVars(layoutVals[prop])
+			if pair.SideAuto && prop == "grid-template-columns" {
+				got = sideAutoAsMock(got, want)
 			}
-			got := layoutVals[prop]
 			if !parityEqual(prop, got, want) {
 				errs = append(errs, fmt.Sprintf("%s %s mock %q layout %q", pair.Mockup, prop, want, got))
 			}
@@ -115,12 +129,40 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 				continue
 			}
 			key := fmt.Sprintf("%s|%d", pair.Mockup, max)
-			mcols := narrow[key]
+			mcols := narrow[key]["grid-template-columns"]
 			got := layout.TrackSizes(bp.Tracks)
 			if !parityEqual("grid-template-columns", got, mcols) {
 				errs = append(errs, fmt.Sprintf("%s @%d mock %q layout %q", pair.Mockup, max, mcols, got))
 			}
 		}
+		if pair.Pad620 {
+			key := ".m-row|620"
+			mp := narrow[key]
+			wantL := mp["padding-left"]
+			wantR := mp["padding-right"]
+			if wantL == "" {
+				wantL = paddingFromShorthand(mp["padding"], "padding-left")
+			}
+			if wantR == "" {
+				wantR = paddingFromShorthand(mp["padding"], "padding-right")
+			}
+			for _, row := range spec.Grids {
+				if !strings.HasPrefix(row.Selector, ".tc-row--") {
+					continue
+				}
+				bp := breakpoint(row, 620)
+				if bp.MaxPx == 0 {
+					continue
+				}
+				if bp.PadLeft != wantL || bp.PadRight != wantR {
+					errs = append(errs, fmt.Sprintf("%s @620 padding mock %s/%s layout %s/%s", row.Selector, wantL, wantR, bp.PadLeft, bp.PadRight))
+				}
+			}
+		}
+	}
+	if !strings.Contains(layout.CSS(), "@container tcbox (max-width:1190px)") ||
+		!strings.Contains(layout.CSS(), ".tc-shell:not(.tc-shell--narrow) .tc-shell__side{display:none}") {
+		errs = append(errs, "1190 side hide missing from layout CSS")
 	}
 	if len(errs) > 0 {
 		return fmt.Errorf("mockup-parity: %s", strings.Join(errs, "; "))
@@ -145,24 +187,16 @@ func mockupStyle(html string) string {
 	return html[start+gt+1 : start+gt+1+end]
 }
 
-func indexRules(rules []cssRule) map[string]map[string]string {
-	out := make(map[string]map[string]string)
+func propsForSelector(rules []cssRule, want string) map[string]string {
+	want = compactSel(want)
+	out := map[string]string{}
 	for _, r := range rules {
 		for _, sel := range splitSelectors(r.Selector) {
-			if !strings.HasPrefix(sel, ".m-") {
+			if compactSel(sel) != want {
 				continue
 			}
-			if strings.ContainsAny(sel, " >+~") {
-				continue
-			}
-			props := cssProps(r.Body)
-			prev := out[sel]
-			if prev == nil {
-				out[sel] = props
-				continue
-			}
-			for k, v := range props {
-				prev[k] = v
+			for k, v := range cssProps(r.Body) {
+				out[k] = v
 			}
 		}
 	}
@@ -171,8 +205,8 @@ func indexRules(rules []cssRule) map[string]map[string]string {
 
 var maxWidthRe = regexp.MustCompile(`max-width:\s*(\d+)px`)
 
-func indexNarrow(atBlocks []string) map[string]string {
-	out := make(map[string]string)
+func indexNarrowProps(atBlocks []string) map[string]map[string]string {
+	out := make(map[string]map[string]string)
 	for _, block := range atBlocks {
 		m := maxWidthRe.FindStringSubmatch(block)
 		if m == nil {
@@ -181,14 +215,16 @@ func indexNarrow(atBlocks []string) map[string]string {
 		inner := innerAtBlock(block)
 		for _, r := range parseCSSRules(inner) {
 			for _, sel := range splitSelectors(r.Selector) {
-				if !strings.HasPrefix(sel, ".m-") || strings.ContainsAny(sel, " >+~") {
+				key := sel + "|" + m[1]
+				props := cssProps(r.Body)
+				prev := out[key]
+				if prev == nil {
+					out[key] = props
 					continue
 				}
-				cols := cssProps(r.Body)["grid-template-columns"]
-				if cols == "" {
-					continue
+				for k, v := range props {
+					prev[k] = v
 				}
-				out[sel+"|"+m[1]] = cols
 			}
 		}
 	}
@@ -285,6 +321,24 @@ func resolveMockVars(css, value string) string {
 		}
 		return strings.TrimSpace(m[1])
 	})
+}
+
+func resolveLayoutVars(value string) string {
+	value = strings.ReplaceAll(value, "var(--tc-page-gutter)", "20px")
+	value = strings.ReplaceAll(value, "var(--tc-page-gutter-narrow)", "14px")
+	return value
+}
+
+func sideAutoAsMock(layoutVal, mockVal string) string {
+	a := layout.SplitTracks(layoutVal)
+	b := layout.SplitTracks(mockVal)
+	if len(a) == 0 || len(a) != len(b) {
+		return layoutVal
+	}
+	if a[len(a)-1] == "auto" {
+		a[len(a)-1] = b[len(b)-1]
+	}
+	return strings.Join(a, " ")
 }
 
 func parityEqual(prop, layoutVal, mockVal string) bool {

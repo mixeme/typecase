@@ -19,7 +19,17 @@ var TickRow = Grid{
 
 var tickRowBoxes = []Box{
 	{Selector: ".tc-tickrow", Props: map[string]string{"height": "26px", "position": "relative"}},
-	{Selector: ".tc-tickrow__tick", Props: map[string]string{"height": "11px", "width": "11px"}},
+	{Selector: ".tc-tick", Props: map[string]string{"height": "13px", "width": "13px"}},
+	{Selector: ".tc-tickrow__tick", Props: map[string]string{
+		"box-sizing":  "border-box",
+		"flex":        "none",
+		"height":      "11px",
+		"line-height": "1",
+		"min-height":  "0",
+		"min-width":   "0",
+		"padding":     "0",
+		"width":       "11px",
+	}},
 	{Selector: ".tc-tickrow .tc-mark", Props: map[string]string{"height": "14px", "min-height": "14px", "width": "3px"}},
 	{Selector: ".tc-row .tc-mark", Props: map[string]string{"height": "22px", "min-height": "22px"}},
 	{Selector: ".tc-head .tc-mark, .tc-side__title .tc-mark", Props: map[string]string{"height": "20px", "min-height": "20px"}},

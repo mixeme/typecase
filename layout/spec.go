@@ -1,5 +1,10 @@
 package layout
 
+import (
+	"strconv"
+	"strings"
+)
+
 // EmptyPolicy is what Render does when a slot has no content.
 type EmptyPolicy uint8
 
@@ -56,4 +61,26 @@ type Spec struct {
 	Grids []Grid
 	Boxes []Box
 	Flows []Flow
+}
+
+// TracksAt returns the tracks that apply at a named-container width.
+// Each matching max-width restates the tracks, in table order.
+func TracksAt(g Grid, widthPx float64) []Track {
+	tracks := g.Tracks
+	for _, bp := range g.Narrow {
+		if widthPx <= float64(bp.MaxPx) {
+			tracks = bp.Tracks
+		}
+	}
+	return tracks
+}
+
+// Px parses a CSS pixel length such as "54px".
+func Px(value string) (float64, bool) {
+	value = strings.TrimSpace(value)
+	if !strings.HasSuffix(value, "px") {
+		return 0, false
+	}
+	n, err := strconv.ParseFloat(strings.TrimSuffix(value, "px"), 64)
+	return n, err == nil
 }

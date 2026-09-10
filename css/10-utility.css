@@ -145,9 +145,6 @@
 
 .tc-fields { margin: 0; min-width: 0; max-width: 100%; }
 .tc-fields__row {
-	display: grid;
-	grid-template-columns: 8em 1fr;
-	gap: 0.35em 0.75em;
 	padding: 0.25em 0;
 }
 .tc-fields__label { color: var(--tc-muted); margin: 0; }

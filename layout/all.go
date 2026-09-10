@@ -26,6 +26,7 @@ func All() Spec {
 			ShellNoRailHasSide,
 			Doc,
 			DocNoMeta,
+			Fields,
 			ColsHalves,
 			ColsThirds,
 			ColsSidebar,

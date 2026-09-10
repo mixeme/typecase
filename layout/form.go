@@ -1,5 +1,15 @@
 package layout
 
+// Fields is .tc-fields__row ↔ .mock .m-fields.
+var Fields = Grid{
+	Selector: ".tc-fields__row",
+	Gap:      "7px 14px",
+	Tracks: []Track{
+		{Size: "104px"},
+		{Size: "minmax(0,1fr)"},
+	},
+}
+
 // Form is .tc-form ↔ .m-form.
 var Form = Flow{
 	Selector: ".tc-form",
