@@ -49,6 +49,33 @@ func TestCSS_containerOmitsBase(t *testing.T) {
 	}
 }
 
+func TestCSS_namedShellContainer(t *testing.T) {
+	css := layout.CSS()
+	if !strings.Contains(css, "@container tcbox (max-width:1190px)") {
+		t.Fatal("shell hide-side rule must use named tcbox")
+	}
+	if strings.Contains(css, "@container (max-width:1190px)") {
+		t.Fatal("unnamed @container is forbidden")
+	}
+	if !strings.Contains(css, ".tc-shell:not(.tc-shell--narrow) .tc-shell__side{display:none}") {
+		t.Fatal("1190 rule must hide .tc-shell__side")
+	}
+}
+
+func TestCSS_shellTracks(t *testing.T) {
+	css := layout.CSS()
+	got := columnsOf(css, ".tc-shell__body")
+	want := []string{"264px", "minmax(0,1fr)"}
+	if len(got) != len(want) {
+		t.Fatalf("shell tracks %v want %v", got, want)
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("shell track %d %q want %q", i, got[i], want[i])
+		}
+	}
+}
+
 func TestCSS_stable(t *testing.T) {
 	a := layout.CSS()
 	b := layout.CSS()

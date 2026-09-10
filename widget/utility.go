@@ -9,7 +9,7 @@ import "strconv"
 // Состояния. idle | suggesting.
 // Инварианты. Подсказки под полем; пустой запрос никуда не ведёт.
 // Поведение. Открытие подсказок, стрелки, Enter, Esc, крестик очищает.
-// Геометрия. Поле тянется; выпадающее не уже поля.
+// Геометрия. Ширина 560; коробка поля 28 / gap 7 / padding 9; значок 13×13 первый узел.
 // Содержимое. tc-row--lead.
 // Чего нет. Не ищет само.
 type Search struct {
@@ -49,7 +49,7 @@ func (s Search) Render() string {
 	if ph == "" {
 		ph = labels.Search
 	}
-	return `<form` + classAttr(cls) + ` action="` + esc(s.Action) + `" method="get" data-tc-search role="search"><div class="tc-search__field"><input type="search" name="q" class="tc-search__input" value="` + esc(s.Query) + `" placeholder="` + esc(ph) + `" aria-label="` + esc(labels.Search) + `">` + note + `<button type="button" class="tc-search__clear" data-tc-search-clear aria-label="` + esc(labels.Clear) + `">×</button></div>` + pop + `</form>`
+	return `<form` + classAttr(cls) + ` action="` + esc(s.Action) + `" method="get" data-tc-search role="search"><div class="tc-search__field">` + renderIconClass("tc-i-search", "tc-icon tc-search__icon") + `<input type="search" name="q" class="tc-search__input" value="` + esc(s.Query) + `" placeholder="` + esc(ph) + `" aria-label="` + esc(labels.Search) + `">` + note + `<button type="button" class="tc-search__clear" data-tc-search-clear aria-label="` + esc(labels.Clear) + `">×</button></div>` + pop + `</form>`
 }
 
 // RunBar — tc-runbar

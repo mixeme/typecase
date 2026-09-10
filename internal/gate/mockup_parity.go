@@ -22,6 +22,12 @@ func liveParityPairs(spec layout.Spec) []parityPair {
 	for _, g := range spec.Grids {
 		have[g.Selector] = true
 	}
+	for _, b := range spec.Boxes {
+		have[b.Selector] = true
+	}
+	for _, f := range spec.Flows {
+		have[f.Selector] = true
+	}
 	all := []parityPair{
 		{Mockup: ".m-src", Selector: ".tc-tickrow", Props: []string{
 			"grid-template-columns", "gap", "height", "padding-left", "padding-right",
@@ -33,6 +39,11 @@ func liveParityPairs(spec layout.Spec) []parityPair {
 		{Mockup: ".m-row--find", Selector: ".tc-row--find", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
 		{Mockup: ".m-row--agenda", Selector: ".tc-row--timecols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
 		{Mockup: ".m-row--task", Selector: ".tc-row--tickmarkcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".m-shell", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
+		{Mockup: ".m-top", Selector: ".tc-top", Props: []string{"height", "gap", "padding"}},
+		{Mockup: ".m-search", Selector: ".tc-search", Props: []string{"width"}},
+		{Mockup: ".m-search", Selector: ".tc-search__field", Props: []string{"height", "gap", "padding"}},
+		{Mockup: ".m-nav", Selector: ".tc-nav", Props: []string{"gap", "padding"}},
 	}
 	var out []parityPair
 	for _, p := range all {
@@ -69,16 +80,12 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 
 	var errs []string
 	for _, pair := range liveParityPairs(spec) {
-		g := gridBySelector(spec, pair.Selector)
-		if g.Selector == "" {
-			continue
-		}
 		mock := baseRules[pair.Mockup]
 		if mock == nil {
 			errs = append(errs, pair.Mockup+" missing in mockup")
 			continue
 		}
-		layoutVals := layoutValues(spec, g)
+		layoutVals := layoutPropValues(spec, pair.Selector)
 		for _, prop := range pair.Props {
 			want := mock[prop]
 			if prop == "padding-left" || prop == "padding-right" {
@@ -86,14 +93,15 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 					want = paddingFromShorthand(mock["padding"], prop)
 				}
 			}
-			if prop == "height" && want != "" && strings.HasPrefix(want, "var(") {
-				want = resolveMockVar(css, want)
+			if strings.Contains(want, "var(") {
+				want = resolveMockVars(css, want)
 			}
 			got := layoutVals[prop]
 			if !parityEqual(prop, got, want) {
 				errs = append(errs, fmt.Sprintf("%s %s mock %q layout %q", pair.Mockup, prop, want, got))
 			}
 		}
+		g := gridBySelector(spec, pair.Selector)
 		for _, max := range pair.Narrow {
 			bp := breakpoint(g, max)
 			if bp.MaxPx == 0 {
@@ -202,22 +210,32 @@ func breakpoint(g layout.Grid, max int) layout.Breakpoint {
 	return layout.Breakpoint{}
 }
 
-func layoutValues(spec layout.Spec, g layout.Grid) map[string]string {
-	out := map[string]string{
-		"grid-template-columns": layout.TrackSizes(g.Tracks),
-		"gap":                   g.Gap,
-		"min-height":            g.MinHeight,
-		"padding-left":          g.PadLeft,
-		"padding-right":         g.PadRight,
-		"grid-auto-flow":        g.AutoFlow,
-		"grid-auto-columns":     g.AutoColumns,
-		"align-items":           g.Align,
+func layoutPropValues(spec layout.Spec, sel string) map[string]string {
+	out := map[string]string{}
+	g := gridBySelector(spec, sel)
+	if g.Selector != "" {
+		out["grid-template-columns"] = layout.TrackSizes(g.Tracks)
+		out["gap"] = g.Gap
+		out["min-height"] = g.MinHeight
+		out["padding-left"] = g.PadLeft
+		out["padding-right"] = g.PadRight
+		out["grid-auto-flow"] = g.AutoFlow
+		out["grid-auto-columns"] = g.AutoColumns
+		out["align-items"] = g.Align
 	}
 	for _, box := range spec.Boxes {
-		if box.Selector != g.Selector {
+		if box.Selector != sel {
 			continue
 		}
 		for k, v := range box.Props {
+			out[k] = v
+		}
+	}
+	for _, flow := range spec.Flows {
+		if flow.Selector != sel {
+			continue
+		}
+		for k, v := range flow.Props {
 			out[k] = v
 		}
 	}
@@ -253,15 +271,17 @@ func paddingFromShorthand(pad, prop string) string {
 	return ""
 }
 
-func resolveMockVar(css, value string) string {
-	name := strings.TrimSuffix(strings.TrimPrefix(value, "var("), ")")
-	name = strings.TrimSpace(name)
-	re := regexp.MustCompile(regexp.QuoteMeta(name) + `\s*:\s*([^;}]+)`)
-	m := re.FindStringSubmatch(css)
-	if m == nil {
-		return value
-	}
-	return strings.TrimSpace(m[1])
+func resolveMockVars(css, value string) string {
+	re := regexp.MustCompile(`var\((--[^)]+)\)`)
+	return re.ReplaceAllStringFunc(value, func(match string) string {
+		name := strings.TrimSpace(match[4 : len(match)-1])
+		def := regexp.MustCompile(regexp.QuoteMeta(name) + `\s*:\s*([^;}]+)`)
+		m := def.FindStringSubmatch(css)
+		if m == nil {
+			return match
+		}
+		return strings.TrimSpace(m[1])
+	})
 }
 
 func parityEqual(prop, layoutVal, mockVal string) bool {

@@ -110,8 +110,11 @@ func checkGeneratedGrid(css string, g layout.Grid) string {
 
 func generatedBaseColumns(css, sel string) string {
 	for _, r := range parseCSSRules(css) {
-		if compactSel(r.Selector) == compactSel(sel) {
-			return cssProps(r.Body)["grid-template-columns"]
+		if compactSel(r.Selector) != compactSel(sel) {
+			continue
+		}
+		if cols := cssProps(r.Body)["grid-template-columns"]; cols != "" {
+			return cols
 		}
 	}
 	return ""

@@ -12,7 +12,7 @@ do, not what the authors did.
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry after the row variants: steps 4–7 and 10 of
+- Remaining mockup geometry after the shell: steps 5–7 and 10 of
   the same plan (`Cols` is step 7).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
@@ -32,6 +32,9 @@ until released separately.
   Search suggestions are `RowLead` (title + subtitle); `RowFind` is the
   `/find` hit list, not the popover. `RowAvatar`, `RowLead`, `RowTick` and
   `RowMeta` stay as flex and remain legal outside `List`.
+- **Shell, search, rail and side** take their geometry from `layout` (step 4).
+  No new widget types. Search shows the 13 px icon as the first node of the
+  field. `NavLayoutBottom` matches the mockup tab bar (icon above the label).
 - **Breaking, as L-4 now states (code follows the remaining plan steps):**
   `ButtonDanger` is outline; fill is `ButtonDangerSolid`. `Field` label sits
   above the control and takes `Width`.

@@ -292,6 +292,28 @@ func TestSearchHints_useRowLead(t *testing.T) {
 	}
 }
 
+func TestSearch_iconFirstInField(t *testing.T) {
+	html := widget.Search{Action: "/s"}.Render()
+	i := strings.Index(html, `class="tc-search__field"`)
+	if i < 0 {
+		t.Fatal("missing search field")
+	}
+	rest := html[i:]
+	end := strings.Index(rest, "</div>")
+	if end < 0 {
+		t.Fatal("unclosed search field")
+	}
+	inner := rest[:end]
+	iconAt := strings.Index(inner, "tc-search__icon")
+	inputAt := strings.Index(inner, "tc-search__input")
+	if iconAt < 0 || !strings.Contains(inner, "#tc-i-search") {
+		t.Fatalf("search field must include the search icon: %s", inner)
+	}
+	if inputAt < 0 || iconAt > inputAt {
+		t.Fatalf("icon must be the first node of the field: %s", inner)
+	}
+}
+
 func TestDocMeta_emptyRendersNothing(t *testing.T) {
 	if got := (widget.DocMeta{}).Render(); got != "" {
 		t.Fatalf("empty DocMeta must render nothing, got %q", got)

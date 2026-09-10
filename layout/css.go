@@ -8,23 +8,25 @@ import (
 
 // CSS prints All() as stylesheet text.
 func CSS() string {
-	return Format(All())
+	return Format(All()) + shellHideSideCSS()
 }
 
 // Format prints spec as stylesheet text. Box/Flow keys are sorted.
+// Flows then Boxes, then Grids: a later grid display:grid wins over .tc-row
+// display:flex at equal specificity.
 func Format(spec Spec) string {
 	var b strings.Builder
+	for _, flow := range spec.Flows {
+		writeProps(&b, flow.Selector, flow.Props)
+	}
+	for _, box := range spec.Boxes {
+		writeProps(&b, box.Selector, box.Props)
+	}
 	for _, g := range spec.Grids {
 		if len(g.Narrow) > 0 && g.Container == "" {
 			panic("layout: unnamed @container for " + g.Selector)
 		}
 		writeGrid(&b, g)
-	}
-	for _, box := range spec.Boxes {
-		writeProps(&b, box.Selector, box.Props)
-	}
-	for _, flow := range spec.Flows {
-		writeProps(&b, flow.Selector, flow.Props)
 	}
 	return b.String()
 }
