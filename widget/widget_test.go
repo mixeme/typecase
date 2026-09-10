@@ -351,6 +351,22 @@ func TestSideBlock_exactlyOne(t *testing.T) {
 	}
 }
 
+func TestField_widthAndOwnLine(t *testing.T) {
+	html := widget.Field{Name: "title", Label: "Title", Kind: widget.InputText, Width: widget.FieldWidthXL, OwnLine: true}.Render()
+	if !strings.Contains(html, "tc-field--xl") {
+		t.Fatalf("Width must print a field width class: %s", html)
+	}
+	if !strings.Contains(html, "is-own-line") {
+		t.Fatalf("OwnLine must print is-own-line: %s", html)
+	}
+}
+
+func TestFormFoot_emptyRendersNothing(t *testing.T) {
+	if got := (widget.FormFoot{}).Render(); got != "" {
+		t.Fatalf("empty FormFoot must render nothing, got %q", got)
+	}
+}
+
 func TestField_emptyLabelIsBare(t *testing.T) {
 	html := widget.Field{Name: "quick", Kind: widget.InputTextarea, Value: "note"}.Render()
 	if strings.Contains(html, "tc-field__label") {

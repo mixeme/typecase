@@ -5,6 +5,7 @@ type PFieldWidth string
 
 const (
 	PFieldWidthFull PFieldWidth = "full"
+	PFieldWidthXL   PFieldWidth = "xl"
 	PFieldWidthLG   PFieldWidth = "lg"
 	PFieldWidthMD   PFieldWidth = "md"
 	PFieldWidthSM   PFieldWidth = "sm"

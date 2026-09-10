@@ -68,19 +68,35 @@ func (fs FieldSet) Render() string {
 	if fs.Note != "" {
 		note = `<p class="tc-fset__note">` + esc(fs.Note) + `</p>`
 	}
-	return `<fieldset class="tc-fset"><legend class="tc-fset__legend">` + esc(fs.Legend) + `</legend>` + rows + note + `</fieldset>`
+	legend := ""
+	if fs.Legend != "" {
+		legend = `<legend class="tc-fset__legend">` + esc(fs.Legend) + `</legend>`
+	}
+	return `<fieldset class="tc-fset">` + legend + rows + note + `</fieldset>`
 }
+
+// FieldWidth is the width step for tc-field, matching .w-*.
+type FieldWidth string
+
+const (
+	FieldWidthFull FieldWidth = "full"
+	FieldWidthXL   FieldWidth = "xl"
+	FieldWidthLG   FieldWidth = "lg"
+	FieldWidthMD   FieldWidth = "md"
+	FieldWidthSM   FieldWidth = "sm"
+	FieldWidthXS   FieldWidth = "xs"
+)
 
 // Field — tc-field
 //
 // Роль. Подпись, ввод, подсказка, ошибка и кнопка, относящаяся к полю.
-// Вход. Field{ Name, Label, Kind, Value, Options, Hint, Error, Extra, ReadOnly, Required, Disabled, Check }.
+// Вход. Field{ Name, Label, Kind, Value, Options, Hint, Error, Extra, Width, OwnLine, ReadOnly, Required, Disabled, Check }.
 // Состояния. normal | error | read-only | disabled.
-// Инварианты. Подпись связана с полем; ширина по роду содержимого.
+// Инварианты. Подпись есть или поле явно bare; ширина через FieldWidth.
 // Поведение. Показ ошибки, связь подсказки с полем.
-// Геометрия. Высота 28px; в узкой раскладке кегль не меньше 16px.
+// Геометрия. Подпись сверху; spacer 16 px у check/btn/seg, если у соседа есть label.
 // Содержимое. tc-in, tc-check, tc-btn.
-// Чего нет. Нет плавающей подписи внутри поля.
+// Чего нет. Нет плавающей подписи внутри поля. Нет сетки «подпись слева».
 type Field struct {
 	Name     string
 	Label    string
@@ -90,6 +106,8 @@ type Field struct {
 	Hint     string
 	Error    string
 	Extra    Action
+	Width    FieldWidth
+	OwnLine  bool
 	ReadOnly bool
 	Required bool
 	Disabled bool
@@ -98,6 +116,12 @@ type Field struct {
 
 func (f Field) Render() string {
 	cls := "tc-field"
+	if f.Width != "" {
+		cls = classes(cls, "tc-field--"+string(f.Width))
+	}
+	if f.OwnLine {
+		cls = classes(cls, "is-own-line")
+	}
 	if f.Error != "" {
 		cls = classes(cls, "is-error")
 	}
@@ -136,7 +160,11 @@ func (f Field) Render() string {
 		if chk.Label == "" {
 			chk.Label = f.Label
 		}
-		return `<div` + classAttr(cls) + `><div class="tc-field__control">` + chk.Render() + extra + `</div>` + hint + err + `</div>`
+		control := chk.Render()
+		if extra != "" {
+			control = `<div class="tc-field__control">` + control + extra + `</div>`
+		}
+		return `<div` + classAttr(cls) + `>` + control + hint + err + `</div>`
 	}
 	input := Input{ID: fieldID, Name: f.Name, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}.Render()
 	label := ""
@@ -163,6 +191,9 @@ type FormFoot struct {
 }
 
 func (ff FormFoot) Render() string {
+	if ff.Primary.Label == "" && ff.Primary.Icon == "" && ff.Primary.Href == "" && len(ff.Rest) == 0 && len(ff.Danger) == 0 {
+		return ""
+	}
 	var rest, danger string
 	for _, a := range ff.Rest {
 		aa := a

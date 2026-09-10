@@ -5,8 +5,10 @@ func All() Spec {
 	boxes := append([]Box{}, tickRowBoxes...)
 	boxes = append(boxes, rowBoxes...)
 	boxes = append(boxes, shellBoxes...)
+	boxes = append(boxes, formBoxes...)
 	flows := append([]Flow{}, rowFlows...)
 	flows = append(flows, shellFlows...)
+	flows = append(flows, formFlows...)
 	return Spec{
 		Grids: []Grid{
 			TickRow,

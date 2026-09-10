@@ -38,8 +38,6 @@
 	background: var(--tc-surface);
 	border: var(--tc-stroke) solid var(--tc-rule);
 	border-radius: var(--tc-radius);
-	width: 560px;
-	max-width: 92%;
 	max-height: 80vh;
 	display: flex;
 	flex-direction: column;
@@ -52,14 +50,17 @@
 	padding: 11px 40px 11px 14px;
 	border-bottom: var(--tc-stroke) solid var(--tc-rule);
 }
-/* Цель прижата вправо, а не растянута на всю строку: с width: 100% флекс
-   сжимал её и ставил слева от заголовка, вместо того чтобы развести их. */
+/* Цель — подпись «куда», не поле: стрелку рисуют псевдоэлементы, как у
+   .m-in.is-pick, без общего примитива стрелки. */
 .tc-sheet__target {
+	display: flex;
+	align-items: center;
 	font-size: 12px;
 	color: var(--tc-muted);
 	margin-left: auto;
-	max-width: 200px;
-	overflow: hidden;
+	border: var(--tc-stroke) solid var(--tc-rule);
+	border-radius: var(--tc-radius);
+	background: var(--tc-surface);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -75,10 +76,8 @@
 }
 .tc-sheet__body { padding: 12px 14px; overflow: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .tc-sheet .tc-in--textarea {
-	min-height: 132px;
 	font-size: 14px;
 	line-height: 1.6;
-	padding: 7px 9px;
 }
 .tc-sheet .tc-field__hint {
 	font-size: 11.5px;
@@ -99,8 +98,6 @@
 	background: var(--tc-surface);
 	border: var(--tc-stroke) solid var(--tc-rule);
 	border-radius: var(--tc-radius);
-	width: 24em;
-	max-width: 90vw;
 }
 .tc-dialog--danger .tc-dialog__title { color: var(--tc-danger); }
 .tc-dialog__head {

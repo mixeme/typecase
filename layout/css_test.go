@@ -84,6 +84,51 @@ func TestCSS_stable(t *testing.T) {
 	}
 }
 
+func TestCSS_formSpacer(t *testing.T) {
+	css := layout.CSS()
+	want := `*:has(> .tc-field > .tc-field__label) > .tc-field:has(> .tc-check:only-child)::before,
+*:has(> .tc-field > .tc-field__label) > .tc-field:has(> .tc-btn:only-child)::before,
+*:has(> .tc-field > .tc-field__label) > .tc-field:has(> .tc-seg:only-child)::before{content:"";height:16px;flex:none}
+.tc-field.is-own-line::before{display:none}`
+	if !strings.Contains(css, want) {
+		t.Fatal("form spacer CSS missing or rewritten")
+	}
+}
+
+func TestCSS_fieldWidths(t *testing.T) {
+	css := layout.CSS()
+	for _, frag := range []string{
+		".tc-field--xs, .tc-pfield--xs{width:96px}",
+		".tc-field--sm, .tc-pfield--sm{width:140px}",
+		".tc-field--md, .tc-pfield--md{width:210px}",
+		".tc-field--lg, .tc-pfield--lg{width:300px}",
+		".tc-field--xl, .tc-pfield--xl{width:420px}",
+	} {
+		if !strings.Contains(css, frag) {
+			t.Fatalf("missing field width %s in %s", frag, css)
+		}
+	}
+	if !strings.Contains(css, ".tc-field--full, .tc-pfield--full{") {
+		t.Fatal("missing full field width")
+	}
+	if !strings.Contains(css, "max-width:760px") {
+		t.Fatal("full width must cap at 760px")
+	}
+}
+
+func TestCSS_sheetAndDialog(t *testing.T) {
+	css := layout.CSS()
+	if !strings.Contains(css, ".tc-sheet{") || !strings.Contains(css, "width:560px") {
+		t.Fatal("sheet width 560 missing")
+	}
+	if !strings.Contains(css, ".tc-dialog{") || !strings.Contains(css, "max-width:420px") {
+		t.Fatal("dialog max-width 420 missing")
+	}
+	if !strings.Contains(css, ".tc-sheet__target::after") {
+		t.Fatal("sheet target pick chevron missing")
+	}
+}
+
 func TestSplitTracks_outsideParens(t *testing.T) {
 	got := layout.SplitTracks("3px minmax(140px,1.2fr) 80px")
 	if len(got) != 3 || got[1] != "minmax(140px,1.2fr)" {

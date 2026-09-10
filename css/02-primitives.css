@@ -28,12 +28,9 @@
 	border-radius: var(--tc-radius);
 	background: var(--tc-surface);
 	color: var(--tc-ink);
-	min-height: 28px;
-	padding: 0 0.5em;
 	width: 100%;
 }
-.tc-in--date, .tc-in--time, .tc-in--number { width: 10em; }
-.tc-in--textarea { min-height: 4.5em; resize: vertical; }
+.tc-in--textarea { resize: vertical; }
 .tc-in-wrap--select { position: relative; display: inline-block; }
 .tc-in-wrap--select .tc-in { padding-right: 1.5em; }
 .tc-in__arrow {

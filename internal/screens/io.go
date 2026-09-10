@@ -36,7 +36,17 @@ func ioMain() widget.Main {
 					{Label: "Import 122 contacts", Kind: widget.ButtonPrimary},
 				},
 			},
-			widget.Field{Name: "into", Label: "Into", Kind: widget.InputText, Value: "Контакты · nextcloud · home"},
+			widget.Form{
+				Sets: []widget.FieldSet{{
+					Rows: []widget.Field{{
+						Name:  "into",
+						Label: "Into",
+						Kind:  widget.InputText,
+						Value: "Контакты · nextcloud · home",
+						Width: widget.FieldWidthLG,
+					}},
+				}},
+			},
 			widget.Stats{Items: []widget.Stat{
 				{Label: "ready", Value: "122"},
 				{Label: "with errors", Value: "3"},

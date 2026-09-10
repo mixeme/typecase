@@ -12,7 +12,7 @@ do, not what the authors did.
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry after the shell: steps 5–7 and 10 of
+- Remaining mockup geometry after form/sheet: steps 6–7 and 10 of
   the same plan (`Cols` is step 7).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
@@ -35,9 +35,16 @@ until released separately.
 - **Shell, search, rail and side** take their geometry from `layout` (step 4).
   No new widget types. Search shows the 13 px icon as the first node of the
   field. `NavLayoutBottom` matches the mockup tab bar (icon above the label).
-- **Breaking, as L-4 now states (code follows the remaining plan steps):**
-  `ButtonDanger` is outline; fill is `ButtonDangerSolid`. `Field` label sits
-  above the control and takes `Width`.
+- **Form, field, sheet and dialog** take their geometry from `layout` (step 5).
+  `Field.Width` is `FieldWidth` (xs/sm/md/lg/xl/full, same six steps as
+  `PFieldWidth`, which gains `XL`). `OwnLine` drops the form spacer on a lone
+  button. Overlay `Dialog` is 420 px. Sheet target is 200×26 with pick
+  chevrons as pseudo-elements, not a shared arrow widget. `/io` wraps Into
+  in `Form`. Date/time/number inputs no longer force `10em`.
+- **Breaking, now in this drop:** `Field` label sits above the control and
+  takes `Width`.
+- **Breaking, still ahead:** `ButtonDanger` is outline; fill is
+  `ButtonDangerSolid`.
 
 ### For consumers (wordmark and icon preview)
 

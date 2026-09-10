@@ -65,7 +65,7 @@ func Entries() []Entry {
 	// Forms
 	add("forms", "tc-form", "normal", widget.Form{Action: "/save", Sets: []widget.FieldSet{{Legend: "Details", Rows: []widget.Field{{Name: "title", Label: "Title", Kind: widget.InputText}}}}, Foot: widget.FormFoot{Primary: widget.Action{Label: "Save", Kind: widget.ButtonPrimary}}}.Render())
 	add("forms", "tc-fset", "default", widget.FieldSet{Legend: "Account", Rows: []widget.Field{{Name: "email", Label: "Email", Kind: widget.InputEmail}}}.Render())
-	add("forms", "tc-field", "normal", widget.Field{Name: "phone", Label: "Phone", Kind: widget.InputTel, Hint: "Include country code"}.Render())
+	add("forms", "tc-field", "normal", widget.Field{Name: "phone", Label: "Phone", Kind: widget.InputTel, Hint: "Include country code", Width: widget.FieldWidthMD}.Render())
 	add("forms", "tc-formfoot", "default", widget.FormFoot{Primary: widget.Action{Label: "Save"}, Rest: []widget.Action{{Label: "Cancel"}}}.Render())
 	add("forms", "tc-danger", "default", widget.Danger{Title: "Danger zone", Rows: []widget.DangerRow{{Title: "Remove all data", Text: "This cannot be undone.", Action: widget.Action{Label: "Remove all data", Kind: widget.ButtonDanger}}}}.Render())
 

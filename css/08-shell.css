@@ -253,8 +253,6 @@
 .tc-main__body > .tc-bar .tc-in {
 	width: 200px;
 	flex: none;
-	min-height: 26px;
-	height: 26px;
 }
 .tc-head__titles { flex: 1; min-width: 0; }
 .tc-head > .tc-bar { flex: 0 1 auto; min-width: 0; max-width: 100%; overflow: hidden; }

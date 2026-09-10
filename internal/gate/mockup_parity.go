@@ -44,6 +44,9 @@ func liveParityPairs(spec layout.Spec) []parityPair {
 		{Mockup: ".m-search", Selector: ".tc-search", Props: []string{"width"}},
 		{Mockup: ".m-search", Selector: ".tc-search__field", Props: []string{"height", "gap", "padding"}},
 		{Mockup: ".m-nav", Selector: ".tc-nav", Props: []string{"gap", "padding"}},
+		{Mockup: ".m-form", Selector: ".tc-form", Props: []string{"gap"}},
+		{Mockup: ".m-sheet", Selector: ".tc-sheet", Props: []string{"width"}},
+		{Mockup: ".m-dialog.is-narrow", Selector: ".tc-dialog", Props: []string{"max-width"}},
 	}
 	var out []parityPair
 	for _, p := range all {
@@ -147,9 +150,6 @@ func indexRules(rules []cssRule) map[string]map[string]string {
 				continue
 			}
 			if strings.ContainsAny(sel, " >+~") {
-				continue
-			}
-			if strings.Count(sel, ".") != 1 {
 				continue
 			}
 			props := cssProps(r.Body)

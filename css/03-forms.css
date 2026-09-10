@@ -1,18 +1,19 @@
 /* tc-form, tc-fset, tc-field, tc-pfield, tc-pfieldrow, tc-pick, tc-formfoot, tc-danger */
 
-.tc-form { display: flex; flex-direction: column; gap: 1em; }
+.tc-form { min-width: 0; }
 .tc-form.is-busy { opacity: 0.7; pointer-events: none; }
 .tc-form__error {
 	color: var(--tc-danger);
 	border: var(--tc-stroke) solid var(--tc-danger);
 	border-radius: var(--tc-radius);
 	padding: 0.5em;
+	flex: 1 1 100%;
 }
 
 .tc-fset {
 	border: 0;
 	margin: 0;
-	padding: 0;
+	margin-top: 2px;
 }
 .tc-fset__legend {
 	font-size: 0.75em;
@@ -23,26 +24,21 @@
 }
 .tc-fset__note { color: var(--tc-muted); font-size: 0.9em; }
 
-.tc-field {
-	display: grid;
-	grid-template-columns: 10em 1fr;
-	gap: 0.25em 0.75em;
-	align-items: start;
-	margin-bottom: 0.75em;
+.tc-field { margin: 0; }
+.tc-field__label {
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	color: var(--tc-muted);
+	text-transform: none;
 }
-.tc-field__label { padding-top: 0.35em; color: var(--tc-ink); }
 .tc-field__req { color: var(--tc-danger); margin-left: 0.15em; }
-.tc-field__hint { grid-column: 2; color: var(--tc-muted); font-size: 0.9em; }
-.tc-field__error { grid-column: 2; color: var(--tc-danger); font-size: 0.9em; }
+.tc-field__hint { color: var(--tc-dusty); font-size: 11px; line-height: 1.45; }
+.tc-field__error { color: var(--tc-danger); font-size: 0.9em; }
 .tc-field.is-error .tc-in { border-color: var(--tc-danger); }
-.tc-field__control { grid-column: 2; min-width: 0; }
+.tc-field__control { min-width: 0; }
 .tc-field__extra { margin-top: 0.35em; }
-.tc-field--bare {
-	grid-template-columns: minmax(0, 1fr);
-}
-.tc-field--bare .tc-field__control,
-.tc-field--bare .tc-field__hint,
-.tc-field--bare .tc-field__error { grid-column: 1; }
+.tc-field .tc-in { width: 100%; }
+.tc-field .tc-in-wrap--select { display: block; width: 100%; }
 
 .tc-pfield {
 	display: flex;
@@ -51,11 +47,6 @@
 	margin-bottom: 0.75em;
 	min-width: 0;
 }
-.tc-pfield--full { width: 100%; flex: 1 1 100%; }
-.tc-pfield--lg { flex: 3 1 320px; }
-.tc-pfield--md { flex: 1 1 8em; min-width: 8em; }
-.tc-pfield--sm { flex: 0 0 150px; }
-.tc-pfield--xs { flex: 0 0 110px; }
 .tc-pfield__label { color: var(--tc-muted); font-size: 11px; letter-spacing: 0.04em; }
 .tc-pfield__hint { color: var(--tc-muted); font-size: 0.9em; }
 .tc-pfield__error { color: var(--tc-danger); font-size: 0.9em; }

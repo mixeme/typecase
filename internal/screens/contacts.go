@@ -189,25 +189,25 @@ func contactsMain() widget.Main {
 			{
 				Legend: "Photo",
 				Rows: []widget.Field{
-					{Name: "display", Label: "Display name", Kind: widget.InputText, Value: "Анна Ковалёва"},
-					{Name: "given", Label: "Given", Kind: widget.InputText, Value: "Анна"},
-					{Name: "family", Label: "Family", Kind: widget.InputText, Value: "Ковалёва"},
+					{Name: "display", Label: "Display name", Kind: widget.InputText, Value: "Анна Ковалёва", Width: widget.FieldWidthXL},
+					{Name: "given", Label: "Given", Kind: widget.InputText, Value: "Анна", Width: widget.FieldWidthSM},
+					{Name: "family", Label: "Family", Kind: widget.InputText, Value: "Ковалёва", Width: widget.FieldWidthSM},
 				},
 			},
 			{
 				Legend: "Phone numbers",
 				Rows: []widget.Field{
-					{Name: "phone-label", Label: "Label", Kind: widget.InputText, Value: "mobile"},
-					{Name: "phone", Label: "Number", Kind: widget.InputTel, Value: "+7 912 445-10-88"},
-					{Name: "phone2-label", Label: "Label", Kind: widget.InputText, Value: "work"},
-					{Name: "phone2", Label: "Number", Kind: widget.InputTel, Value: "+7 495 120-45-00"},
+					{Name: "phone-label", Label: "Label", Kind: widget.InputText, Value: "mobile", Width: widget.FieldWidthXS},
+					{Name: "phone", Label: "Number", Kind: widget.InputTel, Value: "+7 912 445-10-88", Width: widget.FieldWidthMD},
+					{Name: "phone2-label", Label: "Label", Kind: widget.InputText, Value: "work", Width: widget.FieldWidthXS},
+					{Name: "phone2", Label: "Number", Kind: widget.InputTel, Value: "+7 495 120-45-00", Width: widget.FieldWidthMD},
 				},
 			},
 			{
 				Legend: "Email addresses",
 				Rows: []widget.Field{
-					{Name: "email-label", Label: "Label", Kind: widget.InputText, Value: "work"},
-					{Name: "email", Label: "Address", Kind: widget.InputEmail, Value: "a.kovaleva@example.org"},
+					{Name: "email-label", Label: "Label", Kind: widget.InputText, Value: "work", Width: widget.FieldWidthXS},
+					{Name: "email", Label: "Address", Kind: widget.InputEmail, Value: "a.kovaleva@example.org", Width: widget.FieldWidthLG},
 				},
 			},
 		},
