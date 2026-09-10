@@ -10,25 +10,27 @@ do, not what the authors did.
 
 - An open side panel still covers the viewport at phone width, including the
   rail chrome (U-9: row menu instead of the panel).
-- Calendar (7.2), tasks (7.3) and find (7.6) screens, plus their row grids —
+- Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry is the same plan: a `layout` package (tables
-  generate CSS), not hand-copied rules.
-- **There is no way to compose a shape the catalog does not have.** A screen
-  that needs one waits for a library change: 24 of the 76 catalog widgets sit
-  on at most one screen because a composition has nowhere else to go. `Cols` —
-  a container whose shape is chosen from a closed enum, no numbers passed in —
-  is step 7 of the layout plan. Until it lands, build the shape out of the
-  widgets you have or ask for the widget; do not reach into `.tc-` or
-  `data-tc-` from your own stylesheet.
-- **Vocabulary completeness is asserted, not measured.** Eight of the mockup's
-  22 sections are assembled; the rest are assumed to be the same forms. Step 9
-  of the layout plan assembles them and records whatever turns out to be
-  missing.
+- Remaining mockup geometry after TickRow and excerpt: steps 3–7 and 10 of
+  the same plan (`Cols` is step 7).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
 until released separately.
+
+### For consumers (layout)
+
+- **Do not import `layout`.** Geometry tables are the library's, like `token`.
+  Screens keep calling `widget`. `Cols` is the new consumer type and is not
+  in this drop.
+- **Breaking, as L-4 now states (code follows the remaining plan steps):**
+  `ButtonDanger` is outline; fill is `ButtonDangerSolid`. `Field` label sits
+  above the control and takes `Width`. New row variants are named by shape.
+  A grid row must live in `List`. `Menu` on a grid variant fails the gates
+  instead of rendering nothing. Contacts that used `RowAvatar` (two lines of
+  text) and want the mockup columns use `RowAvatarCols` with the cells filled
+  in.
 
 ### For consumers (wordmark and icon preview)
 
