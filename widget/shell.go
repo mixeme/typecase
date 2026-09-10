@@ -34,8 +34,8 @@ func (s Shell) Render() string {
 // Top — tc-top
 //
 // Роль. Знак, поиск, создание, меню учётной записи. Одна на страницу.
-// Вход. Top{ Brand, Nav, Search, Create, User, Mark, Narrow }.
-// Состояния. normal | narrow.
+// Вход. Top{ Brand, Nav, Search, Create, User, Mark }.
+// Состояния. normal | full.
 // Инварианты. Знак один раз слева; поиск виден всегда.
 // Поведение. Отступление правой группы; меню создания и учётной записи.
 // Геометрия. Высота фиксирована; поиск тянется.
@@ -48,14 +48,10 @@ type Top struct {
 	Create Menu
 	User   UserMenu
 	Mark   Mark
-	Narrow bool
 }
 
 func (t Top) Render() string {
 	cls := "tc-top"
-	if t.Narrow {
-		cls = classes(cls, "tc-top--narrow")
-	}
 	create := ""
 	if t.Create.Label != "" || t.Create.Icon != "" || len(t.Create.Items) > 0 {
 		create = t.Create.Render()
@@ -69,13 +65,13 @@ func (t Top) Render() string {
 	// а не недосмотр. Ширину ему задаёт геометрия панели, а не наличие входа.
 	search := t.Search.Render()
 	mark := t.Mark.Render()
-	return `<header` + classAttr(cls) + `>` + t.Brand.Render() + nav + search + `<div class="tc-top__actions">` + create + user + `</div>` + mark + `</header>`
+	return `<header` + classAttr(cls) + ` data-tc-top` + attr("data-tc-more", labels.More) + `>` + t.Brand.Render() + nav + search + `<div class="tc-top__actions">` + create + user + `</div>` + mark + `</header>`
 }
 
 // Main — tc-main
 //
 // Роль. Всё, что осталось после рейла и панели.
-// Вход. Main{ Label, Body }.
+// Вход. Main{ Label, Body []Node }.
 // Состояния. нет.
 // Инварианты. Ширину не ограничивает.
 // Поведение. Своя прокрутка.
@@ -84,11 +80,11 @@ func (t Top) Render() string {
 // Чего нет. Нет отступов «на всякий случай».
 type Main struct {
 	Label string
-	Body  Prose
+	Body  []Node
 }
 
 func (m Main) Render() string {
-	return `<main class="tc-main"` + attr("aria-label", m.Label) + `><div class="tc-main__body">` + m.Body.Render() + `</div></main>`
+	return `<main class="tc-main"` + attr("aria-label", m.Label) + `><div class="tc-main__body">` + renderNodes(m.Body) + `</div></main>`
 }
 
 // Rail — tc-rail
@@ -146,23 +142,35 @@ func (r Rail) Render() string {
 // RailSection — tc-railsec
 //
 // Роль. Заголовок группы и её строки.
-// Вход. RailSection{ Title, State, Rows }.
+// Вход. RailSection{ Title, State, Rows, Body }.
 // Состояния. ok | muted | alert.
-// Инварианты. Недоступная группа помечена цветом и словом.
+// Инварианты. Недоступная группа помечена цветом и словом; пустой Title не выпускает заголовок.
 // Поведение. нет.
 // Геометрия. Заголовок — мелкий кегль с разрядкой.
-// Содержимое. tc-tickrow.
+// Содержимое. tc-tickrow; при пустых Rows — любые виджеты в Body.
 // Чего нет. Не сворачивается.
 func (rs RailSection) Render() string {
 	cls := "tc-railsec"
 	if rs.State != "" {
 		cls = classes(cls, "tc-railsec--"+string(rs.State))
 	}
-	var rows string
-	for _, r := range rs.Rows {
-		rows += r.Render()
+	title := ""
+	if rs.Title != "" {
+		title = `<h3 class="tc-railsec__title">` + esc(rs.Title) + `</h3>`
 	}
-	return `<section` + classAttr(cls) + `><h3 class="tc-railsec__title">` + esc(rs.Title) + `</h3><div class="tc-railsec__rows">` + rows + `</div></section>`
+	body := ""
+	if len(rs.Rows) > 0 {
+		var rows string
+		for _, r := range rs.Rows {
+			rows += r.Render()
+		}
+		body = `<div class="tc-railsec__rows">` + rows + `</div>`
+	} else if len(rs.Body) > 0 {
+		body = `<div class="tc-railsec__body">` + renderNodes(rs.Body) + `</div>`
+	} else {
+		body = `<div class="tc-railsec__rows"></div>`
+	}
+	return `<section` + classAttr(cls) + `>` + title + body + `</section>`
 }
 
 // RailFoot — tc-railfoot
@@ -213,8 +221,8 @@ func (b Build) Render() string {
 // Инварианты. Закрывается крестиком, кнопкой и Esc.
 // Поведение. Открытие, закрытие, возврат фокуса.
 // Геометрия. 400px; содержимое прокручивается.
-// Содержимое. tc-sec, tc-fields, tc-btn, tc-bar.
-// Чего нет. Не редактирует.
+// Содержимое. tc-sec, tc-fields, tc-field, tc-btn, tc-bar.
+// Чего нет. Своей семантики сохранения нет; tc-field в панели допустим.
 type Side struct {
 	Label   string
 	Title   string
@@ -232,10 +240,42 @@ func (s Side) Render() string {
 	}
 	var blocks string
 	for _, b := range s.Blocks {
-		blocks += b.Sec.Render()
+		blocks += b.Render()
 	}
 	id := uniqueID("tc-side")
-	return `<aside` + classAttr(cls) + ` data-tc-side` + attr("id", id) + attr("aria-label", s.Label) + `><header class="tc-side__head"><h2 class="tc-side__title">` + esc(s.Title) + `</h2>` + Close{For: id, Label: labels.ClosePanel}.Render() + `</header><div class="tc-side__body">` + blocks + `</div><footer class="tc-side__foot">` + Bar{Left: s.Actions}.Render() + `</footer></aside>`
+	return `<aside` + classAttr(cls) + ` data-tc-side` + attr("id", id) + attr("aria-label", s.Label) + `><header class="tc-side__head"><h2 class="tc-side__title">` + esc(s.Title) + `</h2>` + Close{For: id, Label: labels.ClosePanel}.Render() + `</header><div class="tc-side__body">` + blocks + `</div><footer class="tc-side__foot">` + Bar{Left: ActionsAsNodes(s.Actions)}.Render() + `</footer></aside>`
+}
+
+func (b SideBlock) kindCount() int {
+	n := 0
+	if b.Sec != nil {
+		n++
+	}
+	if b.Fields != nil {
+		n++
+	}
+	if b.Field != nil {
+		n++
+	}
+	return n
+}
+
+// Render emits one side-panel block. Zero kinds render nothing; more than one is invalid.
+func (b SideBlock) Render() string {
+	switch b.kindCount() {
+	case 0:
+		return ""
+	case 1:
+		if b.Sec != nil {
+			return b.Sec.Render()
+		}
+		if b.Fields != nil {
+			return b.Fields.Render()
+		}
+		return b.Field.Render()
+	default:
+		return ""
+	}
 }
 
 // Nav — tc-nav
@@ -293,7 +333,7 @@ type Head struct {
 }
 
 func (h Head) Render() string {
-	return `<header class="tc-head">` + h.Crumbs.Render() + h.Mark.Render() + `<div class="tc-head__titles"><h1 class="tc-head__title">` + esc(h.Title) + `</h1><p class="tc-head__sub">` + esc(h.Sub) + `</p></div>` + Bar{Right: h.Actions, Rank2: h.Rank2}.Render() + `</header>`
+	return `<header class="tc-head">` + h.Crumbs.Render() + h.Mark.Render() + `<div class="tc-head__titles"><h1 class="tc-head__title">` + esc(h.Title) + `</h1><p class="tc-head__sub">` + esc(h.Sub) + `</p></div>` + Bar{Right: ActionsAsNodes(h.Actions), Rank2: h.Rank2}.Render() + `</header>`
 }
 
 // Crumbs — tc-crumbs

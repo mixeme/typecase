@@ -2,7 +2,6 @@ package browser
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 	"time"
 
@@ -159,8 +158,19 @@ func checkBarOneRow(h *Harness, url string, width, height int) error {
 	var barH float64
 	var tops []float64
 	err := h.Run(url, width, height,
-		chromedp.Evaluate(`(() => { const b = document.querySelector(".tc-bar"); return b ? b.getBoundingClientRect().height : 0; })()`, &barH),
-		chromedp.Evaluate(`Array.from(document.querySelectorAll(".tc-bar .tc-btn")).map(b => b.getBoundingClientRect().top)`, &tops),
+		chromedp.Evaluate(`(() => {
+  if (window.__tc && window.__tc.layoutUpdates) window.__tc.layoutUpdates();
+  const b = document.querySelector(".tc-bar");
+  return b ? b.getBoundingClientRect().height : 0;
+})()`, &barH),
+		chromedp.Evaluate(`(() => {
+  if (window.__tc && window.__tc.layoutUpdates) window.__tc.layoutUpdates();
+  return Array.from(document.querySelectorAll(".tc-bar .tc-btn")).filter((el) => {
+    if (el.closest("[data-tc-bar-stash]")) return false;
+    const r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0;
+  }).map((el) => el.getBoundingClientRect().top);
+})()`, &tops),
 	)
 	if err != nil {
 		return err
@@ -300,11 +310,11 @@ func checkContrast(h *Harness, url string, width, height int) error {
 		{"light", light},
 		{"dark", dark},
 	} {
-		fg, err := parseRGB(theme.s.Fg)
+		fg, err := ParseCSSColor(theme.s.Fg)
 		if err != nil {
 			return fmt.Errorf("contrast %s fg: %w", theme.name, err)
 		}
-		bg, err := parseRGB(theme.s.Bg)
+		bg, err := ParseCSSColor(theme.s.Bg)
 		if err != nil {
 			return fmt.Errorf("contrast %s bg: %w", theme.name, err)
 		}
@@ -331,42 +341,4 @@ func checkThemeGeometry(h *Harness, url string, width, height int) error {
 		return fmt.Errorf("theme-geometry: rectangles differ between themes")
 	}
 	return nil
-}
-
-func parseRGB(css string) ([3]float64, error) {
-	css = strings.TrimSpace(css)
-	if strings.HasPrefix(css, "rgb(") {
-		return parseRGBTuple(css)
-	}
-	if strings.HasPrefix(css, "#") {
-		r, g, b, err := ParseHexColor(css)
-		return [3]float64{r, g, b}, err
-	}
-	return [3]float64{}, fmt.Errorf("unsupported color %q", css)
-}
-
-func parseRGBTuple(css string) ([3]float64, error) {
-	inner := css[4 : len(css)-1]
-	parts := strings.Split(inner, ",")
-	if len(parts) != 3 {
-		return [3]float64{}, fmt.Errorf("bad rgb %q", css)
-	}
-	var out [3]float64
-	for i, p := range parts {
-		p = strings.TrimSpace(p)
-		if strings.HasSuffix(p, "%") {
-			v, err := strconv.ParseFloat(strings.TrimSuffix(p, "%"), 64)
-			if err != nil {
-				return out, err
-			}
-			out[i] = v / 100
-			continue
-		}
-		v, err := strconv.ParseFloat(p, 64)
-		if err != nil {
-			return out, err
-		}
-		out[i] = v / 255
-	}
-	return out, nil
 }

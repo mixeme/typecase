@@ -35,7 +35,7 @@ func Entries() []Entry {
 	}
 
 	// Primitives
-	add("primitives", "tc-btn", "normal", widget.Button{Label: "Save"}.Render())
+	add("primitives", "tc-btn", "normal", widget.Button{Label: "Save", Icon: "+"}.Render())
 	add("primitives", "tc-btn", "primary", widget.Button{Label: "Create", Kind: widget.ButtonPrimary}.Render())
 	add("primitives", "tc-btn", "danger", widget.Button{Label: "Delete permanently", Kind: widget.ButtonDanger}.Render())
 	add("primitives", "tc-btn", "disabled", widget.Button{Label: "Unavailable", Reason: "Nothing selected"}.Render())
@@ -69,14 +69,14 @@ func Entries() []Entry {
 	// Overlays
 	add("overlays", "tc-scrim", "on", widget.Scrim{For: "sheet", On: true}.Render())
 	add("overlays", "tc-overlay", "sheet", widget.Overlay{Kind: widget.OverlaySheet, Open: true, ID: "demo-overlay", Body: widget.Paragraph("Overlay body")}.Render())
-	add("overlays", "tc-sheet", "open", widget.Sheet{Title: "Edit", Target: "Settings", Body: widget.Paragraph("Sheet body"), Open: true, Actions: []widget.Action{{Label: "Apply", Kind: widget.ButtonPrimary}}}.Render())
+	add("overlays", "tc-sheet", "open", widget.Sheet{Title: "Edit", Target: "Settings", Body: []widget.Node{widget.Paragraph("Sheet body")}, Open: true, Actions: []widget.Action{{Label: "Apply", Kind: widget.ButtonPrimary}}}.Render())
 	add("overlays", "tc-dialog", "open", widget.Dialog{Title: "Delete?", Text: "This removes the item.", Open: true, Danger: true, Confirm: widget.Action{Label: "Delete item", Kind: widget.ButtonDanger}, Cancel: widget.Action{Label: "Keep"}}.Render())
 	add("overlays", "tc-menu", "closed", widget.Menu{Label: "Actions", Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}, {Separator: true}, {Label: "Remove", Href: "/remove"}}}.Render())
 	add("overlays", "tc-menu", "open", widget.Menu{Label: "Actions", State: widget.MenuOpen, Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}}}.Render())
 	add("overlays", "tc-usermenu", "closed", widget.UserMenu{Name: "Alex", Note: "Signed in", Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}}.Render())
 
 	// Panels
-	add("panels", "tc-bar", "full", widget.Bar{Left: []widget.Action{{Label: "New"}}, Right: []widget.Action{{Label: "Export"}}, Rank2: []widget.Action{{Label: "Archive"}}}.Render())
+	add("panels", "tc-bar", "full", widget.Bar{Left: []widget.Node{widget.Action{Label: "New"}}, Right: []widget.Node{widget.Action{Label: "Export"}}, Rank2: []widget.Action{{Label: "Archive"}}}.Render())
 	add("panels", "tc-seg", "default", widget.Seg{Options: []widget.SegOption{{Label: "Day", Value: "d"}, {Label: "Week", Value: "w"}}, Chosen: "d", Name: "range"}.Render())
 	add("panels", "tc-chip", "on", widget.Chip{Label: "Active", On: true, Count: &n}.Render())
 	add("panels", "tc-range", "default", widget.Range{From: "2026-01-01", To: "2026-01-31", Presets: []widget.Action{{Label: "Last 7 days"}}}.Render())
@@ -88,7 +88,7 @@ func Entries() []Entry {
 	add("lists", "tc-row--avatar", "default", widget.Row{Variant: widget.RowAvatar, Cells: widget.RowCells{Title: "Alex", Subtitle: "alex@example.com"}}.Render())
 	add("lists", "tc-row--lead", "default", widget.Row{Variant: widget.RowLead, Cells: widget.RowCells{Lead: "09:00", Title: "Standup", Subtitle: "Room A"}}.Render())
 	add("lists", "tc-row--tick", "default", widget.Row{Variant: widget.RowTick, Cells: widget.RowCells{Title: "Task", Due: "Fri"}}.Render())
-	add("lists", "tc-row--excerpt", "default", widget.Row{Variant: widget.RowExcerpt, Cells: widget.RowCells{Title: "Post", Excerpt: "First lines of content…"}}.Render())
+	add("lists", "tc-row--excerpt", "default", widget.Row{Variant: widget.RowExcerpt, Cells: widget.RowCells{Title: "Post", Excerpt: "First lines of content…", Tags: []widget.Tag{{Label: "draft", Href: "/tags/draft"}}, Date: "10 Aug", Source: "nextcloud · Notes"}}.Render())
 	add("lists", "tc-row--meta", "default", widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Icon: "📄", Name: "readme.txt", Size: "2 KB", Time: "10:30"}}.Render())
 	add("lists", "tc-row--find", "default", widget.Row{Variant: widget.RowFind, Cells: widget.RowCells{Icon: "⌕", Title: "Query", Detail: "Jump to section", Caption: "Recent"}}.Render())
 	add("lists", "tc-tickrow", "ok", widget.TickRow{Label: "Inbox", Tick: widget.TickOn, Count: &n}.Render())
@@ -104,14 +104,15 @@ func Entries() []Entry {
 	add("tables", "tc-queue", "running", widget.Queue{Rows: []widget.QueueRow{{Label: "Import", State: widget.QueueRunning, Percent: &p}}}.Render())
 
 	// Shell
-	add("shell", "tc-shell", "wide", widget.Shell{Top: widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}}, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}, Main: widget.Main{Label: "Main", Body: widget.Paragraph("Content")}}.Render())
+	add("shell", "tc-shell", "wide", widget.Shell{Top: widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}}, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}, Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Content")}}}.Render())
 	add("shell", "tc-top", "normal", widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}, Search: widget.Search{Action: "/search"}}.Render())
-	add("shell", "tc-main", "default", widget.Main{Label: "Workspace", Body: widget.Paragraph("Main area")}.Render())
+	add("shell", "tc-main", "default", widget.Main{Label: "Workspace", Body: []widget.Node{widget.Paragraph("Main area")}}.Render())
 	add("shell", "tc-rail", "column", railDemo(widget.Rail{Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}))
 	add("shell", "tc-railsec", "ok", widget.RailSection{Title: "Groups", State: widget.RailSecOK, Rows: []widget.TickRow{{Label: "One"}}}.Render())
+	add("shell", "tc-railsec", "untitled", widget.RailSection{Rows: []widget.TickRow{{Label: "Combined notebook"}}}.Render())
 	add("shell", "tc-railfoot", "default", widget.RailFoot{Actions: []widget.Action{{Label: "Apply"}}, Build: demoBuild}.Render())
 	add("shell", "tc-railfoot", "missing", widget.RailFoot{Actions: []widget.Action{{Label: "Apply"}}}.Render())
-	add("shell", "tc-side", "open", widget.Side{Label: "Details", Title: "Item", Open: true, Blocks: []widget.SideBlock{{Sec: widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: widget.Paragraph("Details")}}}}.Render())
+	add("shell", "tc-side", "open", widget.Side{Label: "Details", Title: "Item", Open: true, Blocks: []widget.SideBlock{{Sec: &widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}}}}.Render())
 	add("shell", "tc-nav", "column", widget.Nav{Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}, {Label: "Settings", Icon: "⚙", Href: "/settings"}}, Current: "/"}.Render())
 	add("shell", "tc-head", "default", widget.Head{Crumbs: widget.Crumbs{Items: []widget.Crumb{{Label: "Home", Href: "/"}, {Label: "Page"}}}, Title: "Page", Sub: "Subtitle"}.Render())
 	add("shell", "tc-crumbs", "default", widget.Crumbs{Items: []widget.Crumb{{Label: "Root", Href: "/"}, {Label: "Here"}}}.Render())
@@ -130,8 +131,8 @@ func Entries() []Entry {
 	add("utility", "tc-diff", "open", widget.Diff{Property: "Title", Options: []widget.DiffOption{{Label: "Version A", Value: "a"}, {Label: "Version B", Value: "b"}}, Chosen: "a"}.Render())
 	add("utility", "tc-crop", "full", widget.Crop{Href: "/img/sample.svg", Zoom: 100}.Render())
 	add("utility", "tc-steps", "default", widget.Steps{Items: []string{"Start", "Details", "Done"}, Current: 1}.Render())
-	add("utility", "tc-card", "default", widget.Card{Rubric: widget.Rubric{Text: "Card"}, Body: widget.Paragraph("Card body")}.Render())
-	add("utility", "tc-sec", "default", widget.Sec{Rubric: widget.Rubric{Text: "Section"}, Body: widget.Paragraph("Section body")}.Render())
+	add("utility", "tc-card", "default", widget.Card{Rubric: widget.Rubric{Text: "Card"}, Body: []widget.Node{widget.Paragraph("Card body")}}.Render())
+	add("utility", "tc-sec", "default", widget.Sec{Rubric: widget.Rubric{Text: "Section"}, Body: []widget.Node{widget.Paragraph("Section body")}}.Render())
 	add("utility", "tc-fields", "default", widget.Fields{Rows: []widget.FieldRow{{Label: "Name", Value: "Example"}, {Label: "Path", Value: "/very/long/path/to/item", Path: true}}}.Render())
 	add("utility", "tc-stat", "default", widget.Stat{Label: "Users", Value: "1,234", Hint: "Last 30 days"}.Render())
 	add("utility", "tc-stats", "default", widget.Stats{Items: []widget.Stat{{Label: "Users", Value: "1,234"}, {Label: "Sessions", Value: "89"}, {Label: "Errors", Value: "3"}}}.Render())
@@ -159,12 +160,12 @@ func Entries() []Entry {
 	add("overlays", "tc-scrim", "off", widget.Scrim{For: "sheet", On: false}.Render())
 	add("overlays", "tc-overlay", "dialog", widget.Overlay{Kind: widget.OverlayDialog, Open: true, ID: "dlg", Body: widget.Paragraph("Dialog body")}.Render())
 	add("overlays", "tc-overlay", "popover", widget.Overlay{Kind: widget.OverlayPopover, Open: true, ID: "pop", Body: widget.Paragraph("Popover")}.Render())
-	add("overlays", "tc-sheet", "closed", widget.Sheet{Title: "Edit", Target: "Settings", Body: widget.Paragraph("Closed"), Open: false}.Render())
+	add("overlays", "tc-sheet", "closed", widget.Sheet{Title: "Edit", Target: "Settings", Body: []widget.Node{widget.Paragraph("Closed")}, Open: false}.Render())
 	add("overlays", "tc-dialog", "closed", widget.Dialog{Title: "Delete?", Text: "Closed.", Open: false, Confirm: widget.Action{Label: "Delete", Kind: widget.ButtonDanger}, Cancel: widget.Action{Label: "Keep"}}.Render())
 	add("overlays", "tc-menu", "disabled", widget.Menu{Label: "Actions", State: widget.MenuDisabled, Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}}}.Render())
 	add("overlays", "tc-usermenu", "open", widget.UserMenu{Name: "Alex", Note: "Signed in", State: widget.MenuOpen, Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}}.Render())
 
-	add("panels", "tc-bar", "collapsed", widget.Bar{Collapsed: true, Left: []widget.Action{{Label: "New"}}}.Render())
+	add("panels", "tc-bar", "collapsed", widget.Bar{Collapsed: true, Left: []widget.Node{widget.Action{Label: "New"}}}.Render())
 	add("panels", "tc-chip", "off", widget.Chip{Label: "Inactive", On: false}.Render())
 
 	add("lists", "tc-row", "normal", widget.Row{Cells: widget.RowCells{Title: "Row", Subtitle: "Subtitle"}}.Render())
@@ -187,13 +188,18 @@ func Entries() []Entry {
 	add("tables", "tc-queue", "partial", widget.Queue{Rows: []widget.QueueRow{{Label: "Partial", State: widget.QueuePartial}}}.Render())
 	add("tables", "tc-queue", "cancelled", widget.Queue{Rows: []widget.QueueRow{{Label: "Cancelled", State: widget.QueueCancelled}}}.Render())
 
-	add("shell", "tc-shell", "narrow", widget.Shell{Narrow: true, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}}, Main: widget.Main{Label: "Main", Body: widget.Paragraph("Narrow")}}.Render())
-	add("shell", "tc-top", "narrow", widget.Top{Narrow: true, Brand: widget.Brand{Mark: "◆", Word: "App"}}.Render())
+	add("shell", "tc-shell", "narrow", widget.Shell{Narrow: true, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}}, Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Narrow")}}}.Render())
+	add("shell", "tc-top", "full", widget.Top{
+		Brand:  widget.Brand{Mark: "◆", Word: "App"},
+		Search: widget.Search{Action: "/search"},
+		Create: widget.Menu{Label: "New", Icon: "✎", Items: []widget.MenuItem{{Label: "Item", Href: "/new"}}},
+		User:   widget.UserMenu{Name: "user", Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}},
+	}.Render())
 	add("shell", "tc-rail", "icons", railDemo(widget.Rail{Layout: widget.RailLayoutIcons, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All"}}}}}))
 	add("shell", "tc-rail", "drawer", railDemo(widget.Rail{Layout: widget.RailLayoutDrawer, Open: true, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All"}}}}}))
 	add("shell", "tc-railsec", "muted", widget.RailSection{Title: "Muted", State: widget.RailSecMuted, Rows: []widget.TickRow{{Label: "One"}}}.Render())
 	add("shell", "tc-railsec", "alert", widget.RailSection{Title: "Alert", State: widget.RailSecAlert, Rows: []widget.TickRow{{Label: "One"}}}.Render())
-	add("shell", "tc-side", "closed", widget.Side{Label: "Details", Title: "Item", Open: false, Blocks: []widget.SideBlock{{Sec: widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: widget.Paragraph("Details")}}}}.Render())
+	add("shell", "tc-side", "closed", widget.Side{Label: "Details", Title: "Item", Open: false, Blocks: []widget.SideBlock{{Sec: &widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}}}}.Render())
 	add("shell", "tc-nav", "icons", widget.Nav{Layout: widget.NavLayoutIcons, Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}}, Current: "/"}.Render())
 	add("shell", "tc-nav", "bottom", widget.Nav{Layout: widget.NavLayoutBottom, Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}}, Current: "/"}.Render())
 

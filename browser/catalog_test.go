@@ -583,14 +583,14 @@ func TestCatalogBaseWithoutScript(t *testing.T) {
 	if probe.Scripted != 0 {
 		t.Fatal("static page must not load tc.js")
 	}
-	if probe.Size != "13.5px" {
-		t.Errorf("base size without script is %s, want 13.5px", probe.Size)
+	if probe.Size != "13px" {
+		t.Errorf("base size without script is %s, want 13px", probe.Size)
 	}
 	if probe.Family != "Public Sans" {
 		t.Errorf("base family without script is %q, want Public Sans", probe.Family)
 	}
-	if probe.TitleSize != "21.6px" {
-		t.Errorf("tc-head title without script is %s, want 21.6px", probe.TitleSize)
+	if probe.TitleSize != "20.8px" {
+		t.Errorf("tc-head title without script is %s, want 20.8px", probe.TitleSize)
 	}
 }
 

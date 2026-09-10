@@ -9,7 +9,7 @@ import "strconv"
 // Состояния. normal | primary | danger | disabled; по умолчанию normal.
 // Инварианты. Выключенная несёт причину; опасная не бывает первичной; подпись не обрезается до неузнаваемости.
 // Поведение. Нажатие, Enter и пробел на фокусе, подсказка причины у выключенной.
-// Геометрия. Три высоты: form 28px, bar 26px, table 22px; в узкой раскладке зона нажатия не меньше 44px.
+// Геометрия. Три высоты: bar 26px по умолчанию, form 28px, table 22px; в узкой раскладке зона нажатия не меньше 44px.
 // Содержимое. нет.
 // Чего нет. Нет кнопки только со значком, кроме узнаваемых вслепую.
 type Button struct {
@@ -50,7 +50,7 @@ func (b Button) Render() string {
 
 func (b Button) sizeOrDefault() ButtonSize {
 	if b.Size == "" {
-		return ButtonSizeForm
+		return ButtonSizeBar
 	}
 	return b.Size
 }

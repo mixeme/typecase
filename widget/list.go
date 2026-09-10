@@ -7,7 +7,7 @@ package widget
 // Состояния. normal | empty.
 // Инварианты. Пустой список показывает действие; плотность от оболочки.
 // Поведение. Ходьба стрелками по строкам, Enter открывает выделенную.
-// Геометрия. Высота строки 22px / 52px.
+// Геометрия. Высота строки 38px / 52px.
 // Содержимое. tc-rubric, строки tc-row.
 // Чего нет. Не сортирует и не фильтрует.
 type List struct {
@@ -109,7 +109,7 @@ func renderRowCells(v RowVariant, c RowCells) string {
 		for _, t := range c.Tags {
 			tags += t.Render()
 		}
-		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__excerpt">` + esc(c.Excerpt) + `</span><span class="tc-row__tags">` + tags + `</span>`
+		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__excerpt">` + esc(c.Excerpt) + `</span><span class="tc-row__tags">` + tags + `</span><span class="tc-row__date">` + esc(c.Date) + `</span><span class="tc-row__source">` + esc(c.Source) + `</span>`
 	case RowMeta:
 		return `<span class="tc-row__icon" aria-hidden="true">` + esc(c.Icon) + `</span><span class="tc-row__name">` + esc(c.Name) + `</span><span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
 	case RowFind:

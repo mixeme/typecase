@@ -12,12 +12,16 @@
 	--tc-font-serif: "Literata", Georgia, "Times New Roman", serif;
 	--tc-font-sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 	--tc-font-mono: "Source Code Pro", ui-monospace, "Cascadia Mono", monospace;
-	--tc-font-size: 13.5px;
+	--tc-font-size: 13px;
 
-	--tc-row-height: 22px;
+	--tc-row-height: 38px;
 	--tc-row-height-touch: 52px;
 
+	--tc-page-gutter: 20px;
+	--tc-page-gutter-narrow: 14px;
+
 	--tc-radius: 3px;
+	--tc-radius-sm: 2px;
 	--tc-stroke: 0.5px;
 }
 

@@ -4,12 +4,150 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+The typecase wordmark work documented below stays documentation-only until
+released separately. Remaining screen-assembly work — other demo pages still
+wrap the shell by hand, and descendant overflow at 375 px — is in
+[docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+
+### For consumers (wordmark preview)
+
+- **Nothing to do for the wordmark.** No module code, token, markup or behaviour
+  changed for the wordmark; it is not part of this library release.
+- **The wordmark belongs to the library's own pages** — the widget catalog, the
+  README, a release page — and nowhere else. It marks the library, not an
+  application built on it, so it does not go into a consumer's interface, and it
+  never stands next to the marks of the application that depends on it.
+- **Do not set the word in Literata and call it the mark.** The nests, the air
+  inside them and the empty nest are measured, not typed; `typecase-logotype.svg`
+  is the only file that carries them.
+- **Below 164 px wide, do not use it.** That is where the hairline of “e” still
+  holds 1.5 px. There is no hinted small version and no icon yet, so in square
+  formats the library has no mark at all.
+
+### Included
+
+- `docs/visual/typecase-logotype.svg`: the master. Eight letters, each in its own
+  nest, and one empty nest as the accent. Three fills, no strokes, no embedded
+  text and no metadata, 8.1 KB.
+- `docs/visual/typecase-logotype.html`: the construction reference — the single
+  source of truth for the mark, in the genre of the Carrel references next to it.
+  It records what was chosen and why, including the five rejected accent
+  placements and the two rejected nest geometries.
+- The instance is `opsz 12, wght 400`, and the reference shows the measurement
+  behind it: across the optical size axis the hairline of “e” varies from 5.89 to
+  1.34 units, so at `opsz 72` the word would need 564 px of width to keep that
+  stroke at 1.5 px, against 164 px here. It is also the instance that sets the
+  library's own text.
+- The grid is derived, not designed: a nest is the letter's ink plus the
+  instance's mean side bearing (3.24) on all four sides, which makes the nests
+  sum to the font's own advances exactly (420.42 against 420.42). The partition
+  between nests and the corner radius are one module — the stem of “p”, 8.77.
+- The accent is an empty nest after the word, as wide as the average nest
+  (52.55): in a case, an empty nest means the sort is already set in the line and
+  its place is still there.
+- `docs/visual/tools/`: `typecase_logotype.py` builds the mark from the font,
+  `build_typecase_logotype.py` releases the master and the reference together,
+  `checks.py` measures contours against the font, containment, gaps, the sums and
+  the size limit. Every number printed in the reference comes from that
+  measurement, so the document cannot drift away from the file it describes.
+
+### Not yet included
+
+- An icon. The 3×3 case sketches — `docs/visual/typecase-logo-v2.svg` and
+  `typecase-logo-bg.svg`, which differ only by a background plate — are a
+  separate piece of work with its own reference.
+- A Cyrillic wordmark. There is none, and Literata set next to the mark stays
+  text.
+
+## typecase/v0.3.0 — 2026-09-07
+
+Screens assembled from widgets. Geometry matches the mockups; notes frames no
+longer bypass `tc-main`, `tc-bar`, or `tc-side`; `tc-seg` and `tc-top` collapse
+when width runs short. Remaining demo pages still wrap the shell by hand —
+[docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+
+### For consumers (v0.2.0 → v0.3.0)
+
+- **`Node` and `[]Node` for widget composition.** `Main.Body`, `Card.Body`,
+  `Sec.Body`, `Bar.Left`, and `Bar.Right` now take `[]Node` (any value with
+  `Render() string`), not `Prose` or `[]Action`. Use
+  `widget.Paragraph("text")` as a `Node` inside the slice; for bar actions
+  use `widget.ActionsAsNodes([]widget.Action{...})` or
+  `[]widget.Node{widget.Action{Label: "Save"}}`.
+- **`Sheet.Body` is `[]Node`.** Pass `[]widget.Node{widget.Paragraph("…")}` or
+  fields and other widgets; a bare `Prose` value no longer compiles.
+- **`RailSection.Body` for non-tickrow rail content.** When `Rows` is empty,
+  `Body` renders instead (for example a neighbour `tc-tree`); do not set both.
+- **`Top.Narrow` and `tc-top--narrow` are gone.** Narrow layout is computed in
+  `tc.js` from width: search shrinks first, then the right group goes under
+  `labels.More`. Do not pass window width as widget input.
+- **Redefine tokens if you override the bundle.** `--tc-row-height` is now
+  `38px`, `--tc-font-size` is `13px`, and three new required tokens appear:
+  `--tc-page-gutter` (`20px`), `--tc-page-gutter-narrow` (`14px`), and
+  `--tc-radius-sm` (`2px`). `token.Validate` fails without them. Defaults ship
+  in the bundle; nothing to do if you use `typecase.CSS()` as is.
+- **Default button height is bar (26 px), not form (28 px).** Bare `Button{}`
+  and `Action{}` now render `tc-btn--bar`. Form footers still get
+  `tc-btn--form` automatically; elsewhere pass `Size: ButtonSizeForm` when the
+  control sits in a form.
+- **Page gutter replaces ad-hoc horizontal padding.** Panels, rows and headers
+  read `var(--tc-page-gutter)`; narrow shells swap it for
+  `var(--tc-page-gutter-narrow)` via `.tc-shell--narrow`.
+- **Run the screens demo beside the catalog.** `scripts/typecase-screens.bat`
+  serves `http://localhost:8081/` — assembled mockup pages, not widget
+  cells. Routes: `/notes`, `/notes-read`, `/notes-edit`, `/notes-quick`,
+  `/files`, `/contacts`, `/io`, `/duplicates`, `/states`. Append `?theme=dark`
+  for a dark rerender before first paint. `screens.css` holds page chrome
+  only; it must not contain `.tc-` selectors.
+
+### Included
+
+- `widget.Node` and `[]Node` on `Main`, `Card`, `Sec`, and `Bar` shelves; gate
+  `screens-compose` on `/notes`.
+- `SideBlock` union (`*Sec`, `*Fields`, `*Field`); `/notes` side panel through
+  `Side.Render()`.
+- Empty `RailSection.Title` omits `tc-railsec__title`.
+- `RowCells.Date` and `Source` on `tc-row--excerpt`; excerpt is one line with
+  ellipsis.
+- Narrow layout (L-4.4): `tc-seg` collapses to `tc-menu` when width runs short;
+  `tc-top` shrinks search first and stashes the right group under `labels.More`.
+- Notes demo frames: routes `notes-read`, `notes-edit`, and `notes-quick`; list
+  frame drops inline `tc-doc` preview; read frame carries neighbour `tc-tree`
+  in the rail; `RailSection.Body` and `Sheet.Body []Node`.
+- Mockup-aligned geometry: row height 38, row gap 12, rail tickrow padding 16,
+  top bar 52, default button 26, second radius 2 px on check/badge/mark.
+- Gates `geometry`, `screens-css`, `screens-coverage`, and `screens-compose`.
+- Package `typecase/screens`, binary `cmd/screens`, routes for s-notes,
+  s-files, s-contacts, s-io, s-dup and m-states mockup frames.
+- Browser check `screens_test.go`: each screen at 1280×900 and 375×812, light
+  and dark (`?theme=dark`), including page-level horizontal overflow at 375 px.
+- Demo chrome follows the palette tokens, so dark theme does not leave the
+  screens nav in light ink. Theme links: `?theme=light` / `?theme=dark`.
+
+### Fixed
+
+- Screens browser probe: SVG `className` is not a string; `color-mix`
+  backgrounds come back as `color(srgb …)` and now parse for contrast.
+- Completeness: `tc-btn__icon` had no stylesheet rule.
+- `tc.js` treated every `data-tc-seg` node as a group, including the option
+  buttons; layout and keyboard now bind to `.tc-seg`.
+- `tc-bar` restore after collapse: left-shelf items were inserted before the
+  overflow menu, which lives on the right shelf, so a second layout pass threw.
+
+### Not yet included
+
+- Other assembled screens still wrap `tc-shell` by hand; descendant overflow
+  at 375 px is still skipped. See
+  [docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+
 ## typecase/v0.2.0 — 2026-09-05
 
-The second visual audit pass, closed (`В-12`…`В-27` in
-`docs/plan/catalog-visual.md`). The palette gains an eighth slot, small controls
-stop drawing their tap area, headings stop inheriting the browser's scale, and
-sheets and dialogs are finally positioned by the library.
+The second visual audit pass, closed (`В-12`…`В-27`). The palette gains an
+eighth slot, small controls stop drawing their tap area, headings stop
+inheriting the browser's scale, and sheets and dialogs are finally positioned
+by the library.
 
 ### For consumers (v0.1.1 → v0.2.0)
 
@@ -101,7 +239,6 @@ sheets and dialogs are finally positioned by the library.
 ### Not yet included
 
 - `tc-seg` does not collapse into a menu when width runs short (L-4.4).
-- No tag `typecase/v0.2.0` in the repository yet (`В-11`).
 
 ## typecase/v0.1.1 — 2026-09-05
 

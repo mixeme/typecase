@@ -35,10 +35,10 @@ func TestRender_smoke(t *testing.T) {
 		{"meter", widget.Meter{Value: 1, Max: 10, Label: "1/10"}.Render()},
 		{"form", widget.Form{Action: "/f", Sets: []widget.FieldSet{{Legend: "L", Rows: []widget.Field{{Name: "n", Label: "N", Kind: widget.InputText}}}}}.Render()},
 		{"menu", widget.Menu{Label: "Menu", Items: []widget.MenuItem{{Label: "One", Href: "#"}}}.Render()},
-		{"bar", widget.Bar{Left: []widget.Action{{Label: "A"}}}.Render()},
+		{"bar", widget.Bar{Left: []widget.Node{widget.Action{Label: "A"}}}.Render()},
 		{"list", widget.List{Groups: []widget.ListGroup{{Rows: []widget.Row{{Cells: widget.RowCells{Title: "T"}}}}}}.Render()},
 		{"table", widget.Table{Columns: []widget.Column{{Label: "C"}}, Rows: []widget.TableRow{{Cells: []string{"v"}}}}.Render()},
-		{"shell", widget.Shell{Main: widget.Main{Label: "M", Body: widget.Paragraph("b")}}.Render()},
+		{"shell", widget.Shell{Main: widget.Main{Label: "M", Body: []widget.Node{widget.Paragraph("b")}}}.Render()},
 		{"doc", widget.Doc{Body: widget.Paragraph("x")}.Render()},
 		{"search", widget.Search{Action: "/s"}.Render()},
 		{"stat", widget.Stat{Label: "Users", Value: "1,234"}.Render()},
@@ -132,5 +132,98 @@ func TestUserMenu_noEmptyBadge(t *testing.T) {
 func TestBadge_emptyLabelRendersNothing(t *testing.T) {
 	if got := (widget.Badge{}).Render(); got != "" {
 		t.Fatalf("empty badge must render nothing, got %q", got)
+	}
+}
+
+func TestRailSection_emptyTitleOmitsHeading(t *testing.T) {
+	html := widget.RailSection{Rows: []widget.TickRow{{Label: "Combined notebook"}}}.Render()
+	if strings.Contains(html, "tc-railsec__title") {
+		t.Fatalf("empty title must omit heading: %s", html)
+	}
+	if !strings.Contains(html, "tc-railsec__rows") {
+		t.Fatalf("rows must still render: %s", html)
+	}
+}
+
+func TestRailSection_titledKeepsHeading(t *testing.T) {
+	html := widget.RailSection{Title: "Views", Rows: []widget.TickRow{{Label: "All"}}}.Render()
+	if !strings.Contains(html, `<h3 class="tc-railsec__title">Views</h3>`) {
+		t.Fatalf("titled section must keep heading: %s", html)
+	}
+}
+
+func TestRailSection_bodyWhenNoRows(t *testing.T) {
+	html := widget.RailSection{
+		Title: "Neighbours",
+		Body:  []widget.Node{widget.Tree{Nodes: []widget.TreeNode{{ID: "a", Label: "One"}}}},
+	}.Render()
+	if strings.Contains(html, "tc-railsec__rows") {
+		t.Fatalf("body section must not render rows container: %s", html)
+	}
+	if !strings.Contains(html, "tc-tree") {
+		t.Fatalf("body section must render tree: %s", html)
+	}
+}
+
+func TestRailSection_rowsTakePrecedenceOverBody(t *testing.T) {
+	html := widget.RailSection{
+		Rows: []widget.TickRow{{Label: "All"}},
+		Body: []widget.Node{widget.Paragraph("ignored")},
+	}.Render()
+	if strings.Contains(html, "tc-prose") {
+		t.Fatalf("rows must take precedence over body: %s", html)
+	}
+}
+
+func TestSheet_bodyNodes(t *testing.T) {
+	html := widget.Sheet{
+		Title:  "Quick",
+		Target: "Notes",
+		Open:   true,
+		Body:   []widget.Node{widget.Field{Name: "quick", Kind: widget.InputTextarea, Value: "draft"}},
+	}.Render()
+	if !strings.Contains(html, `class="tc-in`) {
+		t.Fatalf("sheet body must render field nodes: %s", html)
+	}
+}
+
+func TestRowExcerpt_dateAndSource(t *testing.T) {
+	html := widget.Row{
+		Variant: widget.RowExcerpt,
+		Cells: widget.RowCells{
+			Title:   "Note",
+			Excerpt: "Body text",
+			Date:    "10 Aug",
+			Source:  "nextcloud · Notes",
+		},
+	}.Render()
+	if !strings.Contains(html, `<span class="tc-row__date">10 Aug</span>`) {
+		t.Fatalf("excerpt row must render date: %s", html)
+	}
+	if !strings.Contains(html, `<span class="tc-row__source">nextcloud · Notes</span>`) {
+		t.Fatalf("excerpt row must render source: %s", html)
+	}
+}
+
+func TestSideBlock_exactlyOne(t *testing.T) {
+	sec := widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}
+	field := widget.Field{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Note"}
+	fields := widget.Fields{Rows: []widget.FieldRow{{Label: "UID", Value: "42"}}}
+
+	if got := (widget.SideBlock{Sec: &sec}).Render(); !strings.Contains(got, "tc-sec") {
+		t.Fatalf("sec block: %q", got)
+	}
+	if got := (widget.SideBlock{Field: &field}).Render(); !strings.Contains(got, "tc-field") {
+		t.Fatalf("field block: %q", got)
+	}
+	if got := (widget.SideBlock{Fields: &fields}).Render(); !strings.Contains(got, "tc-fields") {
+		t.Fatalf("fields block: %q", got)
+	}
+	if got := (widget.SideBlock{}).Render(); got != "" {
+		t.Fatalf("empty block must render nothing, got %q", got)
+	}
+	both := widget.SideBlock{Sec: &sec, Field: &field}
+	if got := both.Render(); got != "" {
+		t.Fatalf("two kinds must render nothing, got %q", got)
 	}
 }

@@ -24,7 +24,7 @@ func GoodFixtures() map[Name]Fixture {
 	for i := 0; i < 6; i++ {
 		actions = append(actions, widget.Action{Label: "Action"})
 	}
-	bar := widget.Bar{Left: actions, Right: []widget.Action{{Label: "Save"}}}.Render()
+	bar := widget.Bar{Left: widget.ActionsAsNodes(actions), Right: widget.ActionsAsNodes([]widget.Action{{Label: "Save"}})}.Render()
 
 	fields := widget.Fields{Rows: []widget.FieldRow{
 		{Label: "Path", Value: "/very/long/path/that/must/truncate/in/its/cell/without/overflow", Path: true},
@@ -36,7 +36,7 @@ func GoodFixtures() map[Name]Fixture {
 	}.Render()
 
 	sheet := widget.Sheet{
-		Title: "Sheet", Target: "Item", Body: widget.Paragraph("Under"), Open: true, ID: "bottom-sheet",
+		Title: "Sheet", Target: "Item", Body: []widget.Node{widget.Paragraph("Under")}, Open: true, ID: "bottom-sheet",
 		Actions: []widget.Action{{Label: "OK"}},
 	}.Render()
 	dialog := widget.Dialog{

@@ -10,15 +10,17 @@
 	color: var(--tc-ink);
 	line-height: 1.35;
 	padding: 0 0.6em;
-	min-height: 28px;
+	min-height: 26px;
 	cursor: pointer;
 	text-decoration: none;
 }
+.tc-btn--form { min-height: 28px; }
 .tc-btn--bar { min-height: 26px; }
 .tc-btn--table { min-height: 22px; }
 .tc-btn--primary { background: var(--tc-accent); color: var(--tc-surface); border-color: var(--tc-accent); }
 .tc-btn--danger { background: var(--tc-danger); color: var(--tc-surface); border-color: var(--tc-danger); }
 .tc-btn.is-disabled, .tc-btn--disabled { opacity: 0.55; cursor: not-allowed; }
+.tc-btn__icon { flex: none; }
 .tc-btn__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .tc-in {
@@ -64,7 +66,7 @@
 	height: 13px;
 	min-width: 13px;
 	border: var(--tc-stroke) solid var(--tc-rule);
-	border-radius: var(--tc-radius);
+	border-radius: var(--tc-radius-sm);
 	flex: none;
 }
 .tc-check input:checked + .tc-check__box { background: var(--tc-accent); }
@@ -123,6 +125,7 @@
 	display: inline-block;
 	width: 3px;
 	min-height: var(--tc-row-height);
+	border-radius: var(--tc-radius-sm);
 	background: transparent;
 	flex: none;
 }
@@ -133,7 +136,7 @@
 .tc-badge {
 	display: inline-block;
 	border: var(--tc-stroke) solid var(--tc-rule);
-	border-radius: var(--tc-radius);
+	border-radius: var(--tc-radius-sm);
 	padding: 0 0.35em;
 	font-size: 0.85em;
 	white-space: nowrap;
@@ -168,7 +171,7 @@
 .tc-tick {
 	position: relative;
 	border: var(--tc-stroke) solid var(--tc-rule);
-	border-radius: var(--tc-radius);
+	border-radius: var(--tc-radius-sm);
 	width: 13px;
 	height: 13px;
 	padding: 0;

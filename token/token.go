@@ -32,16 +32,23 @@ var Density = []string{
 	"--tc-row-height-touch",
 }
 
-// Shape names radius and stroke; one value each (L-5.1).
+// Spacing names page-level horizontal padding (L-5.1).
+var Spacing = []string{
+	"--tc-page-gutter",
+	"--tc-page-gutter-narrow",
+}
+
+// Shape names corner radii and stroke (L-5.1).
 var Shape = []string{
 	"--tc-radius",
+	"--tc-radius-sm",
 	"--tc-stroke",
 }
 
 // Required is the full set of custom properties every consumer must define.
 // Widget styles must only reference names from Required or names derived in
 // the library; an undefined name fails validation.
-var Required = concat(Palette, Typography, Density, Shape)
+var Required = concat(Palette, Typography, Density, Spacing, Shape)
 
 var varDecl = regexp.MustCompile(`--tc-[a-z0-9-]+`)
 
