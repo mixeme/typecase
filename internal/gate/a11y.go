@@ -90,5 +90,35 @@ func checkEntryA11y(html string) []string {
 			bad = append(bad, "field")
 		}
 	}
+	return append(bad, nestedInteractive(html)...)
+}
+
+var interactiveHTML = map[string]bool{
+	"a": true, "button": true, "input": true, "select": true, "textarea": true,
+}
+
+// nestedInteractive reports a control inside a link or a button: invalid HTML,
+// and a press on the inner control also fires the outer one.
+func nestedInteractive(html string) []string {
+	var bad []string
+	walkHTML(parseHTML(html), func(outer *htmlNode) {
+		if outer.tag != "a" && outer.tag != "button" {
+			return
+		}
+		for _, kid := range outer.children {
+			walkHTML(kid, func(inner *htmlNode) {
+				if interactiveHTML[inner.tag] {
+					bad = append(bad, "nested-interactive "+describeNode(outer)+" > "+describeNode(inner))
+				}
+			})
+		}
+	})
 	return bad
+}
+
+func describeNode(n *htmlNode) string {
+	if len(n.class) == 0 {
+		return n.tag
+	}
+	return n.tag + "." + n.class[0]
 }

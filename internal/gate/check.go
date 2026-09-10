@@ -645,12 +645,18 @@ func CheckNoInline(catalog []CatalogEntry) error {
 	return nil
 }
 
-// CheckA11y requires accessible names on each control in catalog HTML.
+// CheckA11y requires accessible names on each control in catalog HTML and
+// rejects a control nested in a link or button in catalog and screen HTML.
 func CheckA11y(catalog []CatalogEntry) error {
 	var bad []string
 	for _, e := range catalog {
 		for _, kind := range checkEntryA11y(e.HTML) {
 			bad = append(bad, e.Widget+"/"+e.State+": "+kind)
+		}
+	}
+	for _, sc := range screens.All() {
+		for _, kind := range nestedInteractive(sc.Body()) {
+			bad = append(bad, "/"+sc.ID+": "+kind)
 		}
 	}
 	if len(bad) > 0 {

@@ -1209,7 +1209,7 @@
 				else if (e.key === "ArrowDown") idx = Math.min(idx + 1, rows.length - 1);
 				else idx = Math.max(idx - 1, 0);
 				e.preventDefault();
-				var link = rows[idx].querySelector("a[href]") || rows[idx];
+				var link = rows[idx].querySelector(".tc-row__link") || rows[idx];
 				if (link.focus) link.focus();
 			});
 		});

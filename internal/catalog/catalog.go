@@ -104,6 +104,12 @@ func Entries() []Entry {
 	add("lists", "tc-row--tickmarkcols", "default", widget.Row{Variant: widget.RowTickMarkCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Home"}, Cells: widget.RowCells{Title: "Pack", Tags: []widget.Tag{{Label: "home"}}, Due: "Fri", Progress: &prog, Source: "nextcloud · Tasks"}}.Render())
 	add("lists", "tc-row--tickmarkcols", "done", widget.Row{Variant: widget.RowTickMarkCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Home"}, Cells: widget.RowCells{Title: "Pack", Due: "—", Done: true, Progress: &doneProg, Source: "nextcloud · Tasks"}}.Render())
 	add("lists", "tc-tickrow", "ok", widget.TickRow{Label: "Inbox", Tick: widget.TickOn, Count: &n}.Render())
+	add("lists", "tc-tickrow", "link", widget.TickRow{Href: "/sources/inbox", Label: "Inbox", Tick: widget.TickOn, Count: &n, Menu: []widget.MenuItem{{Label: "Rename", Href: "/rename"}}}.Render())
+	add("lists", "tc-row", "link", widget.Row{Href: "/rows/1", Cells: widget.RowCells{Title: "Row", Subtitle: "Subtitle"}, Menu: []widget.MenuItem{{Label: "Open", Href: "/rows/1"}}}.Render())
+	add("lists", "tc-row--tick", "link", widget.Row{Href: "/rows/2", Variant: widget.RowTick, Cells: widget.RowCells{Title: "Task", Due: "Fri"}}.Render())
+	add("lists", "tc-row--meta", "link", widget.Row{Href: "/rows/3", Variant: widget.RowMeta, Cells: widget.RowCells{Icon: "tc-i-doc", Name: "readme.txt", Size: "2 KB", Time: "10:30"}}.Render())
+	add("lists", "tc-row--tickcols", "link", widget.Row{Href: "/rows/4", Variant: widget.RowTickCols, Cells: widget.RowCells{Icon: "tc-i-doc", Name: "readme.txt", Size: "2 KB", Time: "10:30", Detail: "rw", Source: "sftpgo · vps"}}.Render())
+	add("lists", "tc-row--tickmarkcols", "link", widget.Row{Href: "/rows/5", Variant: widget.RowTickMarkCols, Mark: widget.Mark{Colour: "#4A6B52", Label: "Home"}, Cells: widget.RowCells{Title: "Pack", Tags: []widget.Tag{{Label: "home", Href: "/tags/home"}}, Due: "Fri", Progress: &prog, Source: "nextcloud · Tasks"}}.Render())
 	add("lists", "tc-rubric", "default", widget.Rubric{Text: "Section", Count: &n, Action: &widget.Action{Label: "Attach"}}.Render())
 
 	// Tables

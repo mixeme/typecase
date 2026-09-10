@@ -152,18 +152,6 @@ func walkHTML(n *htmlNode, fn func(*htmlNode)) {
 	}
 }
 
-func expandedChildren(n *htmlNode, contentsClass string) []*htmlNode {
-	var out []*htmlNode
-	for _, c := range n.children {
-		if contentsClass != "" && nodeHasClass(c, contentsClass) {
-			out = append(out, c.children...)
-			continue
-		}
-		out = append(out, c)
-	}
-	return out
-}
-
 func className(sel string) string {
 	return strings.TrimPrefix(sel, ".")
 }

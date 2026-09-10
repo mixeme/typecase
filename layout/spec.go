@@ -35,7 +35,6 @@ type Grid struct {
 	Tracks      []Track
 	AutoFlow    string // "" или "column"
 	AutoColumns string // "minmax(0,auto)" если AutoFlow задан, иначе ""
-	Contents    string // селектор ребёнка с display:contents; "" если нет
 	Narrow      []Breakpoint
 	Container   string // "tcbox" или ""
 }

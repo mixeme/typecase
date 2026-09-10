@@ -47,6 +47,9 @@ func (l List) Render() string {
 // Вход. Row{ Href, Mark, Cells, Badges, Menu, Selected, State, Variant }.
 // Состояния. normal | selected | muted | alert.
 // Инварианты. Метка — полоса слева; меню у flex-строки; сеточная — только в List.
+// Корень строки не ссылка: при Href ссылкой становится главный текст (title,
+// у meta и tickcols — name), растянутый на всю строку; галка, теги и меню лежат
+// поверх и нажимаются отдельно.
 // Поведение. Наведение, выделение, меню, Enter.
 // Геометрия. Сеточные варианты — таблица layout; дети = слоты.
 // Содержимое. Ячейки, tc-badge; tc-menu у flex-вариантов.
@@ -81,16 +84,31 @@ func (r Row) Render() string {
 	for _, b := range r.Badges {
 		badges += b.Render()
 	}
-	cells := renderRowCells(r.Variant, r.Cells)
+	cells := renderRowCells(r.Variant, r.Cells, r.Href)
 	menu := ""
 	if len(r.Menu) > 0 {
 		menu = Menu{Label: labels.Actions, Items: r.Menu}.Render()
 	}
 	inner := mark + `<div class="tc-row__cells">` + cells + `</div><div class="tc-row__badges">` + badges + `</div><div class="tc-row__tail">` + menu + `</div>`
-	if r.Href != "" {
-		return `<a href="` + esc(r.Href) + `"` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</a>`
-	}
 	return `<div` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</div>`
+}
+
+// rowMain prints the row's main text node. With href it is the row link.
+func rowMain(slotClass, inner, href string) string {
+	if href == "" {
+		return `<span class="` + slotClass + `">` + inner + `</span>`
+	}
+	return `<a href="` + esc(href) + `" class="` + slotClass + ` tc-row__link">` + inner + `</a>`
+}
+
+// rowMainSlot is the slot that carries the link of a grid row.
+func rowMainSlot(g layout.Grid) string {
+	for _, slot := range []string{"title", "name"} {
+		if layout.HasSlot(g, slot) {
+			return slot
+		}
+	}
+	return ""
 }
 
 func renderGridRow(r Row, g layout.Grid) string {
@@ -104,12 +122,14 @@ func renderGridRow(r Row, g layout.Grid) string {
 	case RowAlert:
 		cls = classes(cls, "is-alert")
 	}
+	main := rowMainSlot(g)
 	var inner string
 	for _, tr := range g.Tracks {
-		inner += rowSlot(tr.Slot, r)
-	}
-	if r.Href != "" {
-		return `<a href="` + esc(r.Href) + `"` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</a>`
+		href := ""
+		if tr.Slot == main {
+			href = r.Href
+		}
+		inner += rowSlot(tr.Slot, r, href)
 	}
 	return `<div` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</div>`
 }
@@ -133,7 +153,7 @@ func rowGrid(v RowVariant) (layout.Grid, bool) {
 	}
 }
 
-func rowSlot(slot string, r Row) string {
+func rowSlot(slot string, r Row, href string) string {
 	switch slot {
 	case "mark":
 		html := r.Mark.Render()
@@ -157,7 +177,7 @@ func rowSlot(slot string, r Row) string {
 		}
 		return av.Render()
 	case "title":
-		return `<span class="tc-row__title">` + esc(r.Cells.Title) + `</span>`
+		return rowMain("tc-row__title", esc(r.Cells.Title), href)
 	case "excerpt":
 		return `<span class="tc-row__excerpt">` + esc(r.Cells.Excerpt) + `</span>`
 	case "tags":
@@ -180,7 +200,7 @@ func rowSlot(slot string, r Row) string {
 	case "caption":
 		return `<span class="tc-row__caption">` + esc(r.Cells.Caption) + `</span>`
 	case "name":
-		return `<span class="tc-row__name">` + rowCellIcon(r.Cells.Icon) + esc(r.Cells.Name) + `</span>`
+		return rowMain("tc-row__name", rowCellIcon(r.Cells.Icon)+esc(r.Cells.Name), href)
 	case "size":
 		return `<span class="tc-row__size">` + esc(r.Cells.Size) + `</span>`
 	case "time":
@@ -216,27 +236,28 @@ func rowVariantClass(v RowVariant) string {
 	return "tc-row--" + string(v)
 }
 
-func renderRowCells(v RowVariant, c RowCells) string {
+func renderRowCells(v RowVariant, c RowCells, href string) string {
+	title := rowMain("tc-row__title", esc(c.Title), href)
 	switch v {
 	case RowAvatar:
 		av := c.Avatar
 		if av.Initials == "" && av.Image == "" {
 			av = Avatar{Initials: initials(c.Title)}
 		}
-		return av.Render() + `<div class="tc-row__text"><span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span></div>`
+		return av.Render() + `<div class="tc-row__text">` + title + `<span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span></div>`
 	case RowLead:
-		return `<span class="tc-row__lead">` + esc(c.Lead) + `</span><div class="tc-row__text"><span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span></div>`
+		return `<span class="tc-row__lead">` + esc(c.Lead) + `</span><div class="tc-row__text">` + title + `<span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span></div>`
 	case RowTick:
 		tick := Tick{Done: c.Done, Label: c.Title}.Render()
-		return tick + `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__due">` + esc(c.Due) + `</span>`
+		return tick + title + `<span class="tc-row__due">` + esc(c.Due) + `</span>`
 	case RowMeta:
 		icon := esc(c.Icon)
 		if strings.HasPrefix(c.Icon, "tc-i-") {
 			icon = renderNavIcon(c.Icon)
 		}
-		return `<span class="tc-row__icon" aria-hidden="true">` + icon + `</span><span class="tc-row__name">` + esc(c.Name) + `</span><span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
+		return `<span class="tc-row__icon" aria-hidden="true">` + icon + `</span>` + rowMain("tc-row__name", esc(c.Name), href) + `<span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
 	default:
-		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span>`
+		return title + `<span class="tc-row__subtitle">` + esc(c.Subtitle) + `</span>`
 	}
 }
 
@@ -246,7 +267,8 @@ func renderRowCells(v RowVariant, c RowCells) string {
 // Вход. TickRow{ Href, Label, Mark, Count, Tick, ReadOnly, State, Current, Menu }.
 // Состояния. ok | read-only | unavailable | gone; галка on | off | partial.
 // Инварианты. Три состояния галки — одно поле; счётчик пуст при отсутствии;
-// заглушка метки всегда при Hold; ссылка коробки не заводит.
+// заглушка метки всегда при Hold; ссылка коробки не заводит: при Href ссылкой
+// становится подпись, растянутая на строку, галка и меню лежат поверх.
 // Поведение. Галка и подпись — разные зоны.
 // Геометрия. Таблица layout.TickRow.
 // Содержимое. tc-mark, tc-num, tc-menu.
@@ -297,11 +319,7 @@ func (t TickRow) Render() string {
 	for _, tr := range layout.TickRow.Tracks {
 		slots += tickRowSlot(tr.Slot, t, tickCls)
 	}
-	inner := slots + stateWord + Num{Value: t.Count}.Render() + menu
-	if t.Href != "" {
-		return `<div` + classAttr(cls) + ` data-tc-tickrow><a href="` + esc(t.Href) + `" class="tc-tickrow__link">` + inner + `</a></div>`
-	}
-	return `<div` + classAttr(cls) + ` data-tc-tickrow>` + inner + `</div>`
+	return `<div` + classAttr(cls) + ` data-tc-tickrow>` + slots + stateWord + Num{Value: t.Count}.Render() + menu + `</div>`
 }
 
 func tickRowSlot(slot string, t TickRow, tickCls string) string {
@@ -315,6 +333,9 @@ func tickRowSlot(slot string, t TickRow, tickCls string) string {
 		}
 		return html
 	case "label":
+		if t.Href != "" {
+			return `<a href="` + esc(t.Href) + `" class="tc-tickrow__label tc-tickrow__link">` + esc(t.Label) + `</a>`
+		}
 		return `<span class="tc-tickrow__label">` + esc(t.Label) + `</span>`
 	default:
 		return ""

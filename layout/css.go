@@ -62,10 +62,6 @@ func writeGrid(b *strings.Builder, g Grid) {
 	b.WriteByte('{')
 	b.WriteString(strings.Join(props, ";"))
 	b.WriteString("}\n")
-	if g.Contents != "" {
-		b.WriteString(g.Contents)
-		b.WriteString("{display:contents}\n")
-	}
 	for _, bp := range g.Narrow {
 		fmt.Fprintf(b, "@container %s (max-width:%dpx){\n", g.Container, bp.MaxPx)
 		var nprops []string

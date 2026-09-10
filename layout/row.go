@@ -314,6 +314,7 @@ var rowBoxes = []Box{
 		"min-height":    "38px",
 		"padding-left":  "var(--tc-page-gutter)",
 		"padding-right": "var(--tc-page-gutter)",
+		"position":      "relative",
 	}},
 	{Selector: ".tc-row--avatarcols .tc-row__subtitle", Props: map[string]string{
 		"font-family": "var(--tc-font-mono)",

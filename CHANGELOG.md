@@ -69,6 +69,15 @@ until released separately.
   (`tc-field-N-hint`), not from `Name` (`name-hint`), so two fields with one
   `Name` no longer share an id. If your script looked up `#<name>-hint`, look
   up the control's `aria-describedby` instead. No new input fields.
+- **A row link is the row's main text, not the row.** `Row` and `TickRow`
+  with `Href` used to render the whole row as `<a>`, with the tick, the tags
+  and the menu inside it: invalid HTML, and a press on the tick followed the
+  link. Now the root is a `div`; the title (`name` for `RowMeta` and
+  `RowTickCols`, the label for `TickRow`) is the link, stretched over the row
+  with `::after`, so the whole row still opens it, and the tick, tags and
+  menu sit above and work on their own. Nothing changes in your code. If your
+  CSS or scripts targeted `a.tc-row` or `.tc-tickrow__link` as a wrapper,
+  target `.tc-row__link` / `.tc-tickrow__link` on the text instead.
 - **The fence now covers screens too.** The demo screens fail the gates if
   they import `layout` or carry `style=`, inline handlers or `<script>` in
   their markup — the same rules an application screen follows.

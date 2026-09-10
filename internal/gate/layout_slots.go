@@ -202,12 +202,11 @@ func checkMarkupGrid(spec layout.Spec, html, where string, screens bool) []strin
 			continue
 		}
 		cls := className(g.Selector)
-		contents := className(g.Contents)
 		walkHTML(root, func(n *htmlNode) {
 			if n.tag == "#root" || !nodeHasClass(n, cls) {
 				return
 			}
-			kids := expandedChildren(n, contents)
+			kids := n.children
 			want := len(g.Tracks)
 			if g.AutoFlow != "" {
 				if len(kids) < want {
@@ -257,6 +256,12 @@ func checkGridRowParent(spec layout.Spec, html, route string) []string {
 	return errs
 }
 
+// checkGridRowFields reads Row literals in widget, catalog and screens source.
+//
+// Blind spot (spec L-8.1): a Variant coming from a variable or a function, or
+// Menu assigned after the literal (r.Menu = …), is not seen here, and Render
+// drops such a menu without an error. Enough while every row is a literal in
+// the catalog or a demo screen; revisit when application code exists.
 func checkGridRowFields(p ModulePaths) []string {
 	gridByVariant := map[string]layout.Grid{}
 	for _, g := range layout.All().Grids {

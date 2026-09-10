@@ -494,3 +494,27 @@ func TestField_hintIDsUniquePerRender(t *testing.T) {
 		t.Fatalf("two fields with one Name must not share a hint id")
 	}
 }
+
+func TestRow_linkIsMainTextNotRoot(t *testing.T) {
+	grid := widget.Row{Href: "/f", Variant: widget.RowTickCols, Cells: widget.RowCells{Name: "readme.txt"}}.Render()
+	if !strings.HasPrefix(grid, `<div class="tc-row tc-row--tickcols"`) {
+		t.Fatalf("grid row root must not be a link: %s", grid)
+	}
+	if !strings.Contains(grid, `<a href="/f" class="tc-row__name tc-row__link">`) {
+		t.Fatalf("tickcols link must be the name slot: %s", grid)
+	}
+	flex := widget.Row{Href: "/r", Variant: widget.RowTick, Cells: widget.RowCells{Title: "Task"}, Menu: []widget.MenuItem{{Label: "Open", Href: "/r"}}}.Render()
+	if !strings.HasPrefix(flex, `<div class="tc-row tc-row--tick"`) || !strings.Contains(flex, `<a href="/r" class="tc-row__title tc-row__link">Task</a>`) {
+		t.Fatalf("flex row link must be the title, not the root: %s", flex)
+	}
+}
+
+func TestTickRow_linkIsLabel(t *testing.T) {
+	html := widget.TickRow{Href: "/s", Label: "Inbox"}.Render()
+	if strings.Contains(html, "<a") && strings.Index(html, "<a") < strings.Index(html, "tc-tickrow__tick") {
+		t.Fatalf("tick must not sit inside the link: %s", html)
+	}
+	if !strings.Contains(html, `<a href="/s" class="tc-tickrow__label tc-tickrow__link">Inbox</a>`) {
+		t.Fatalf("TickRow link must be the label: %s", html)
+	}
+}

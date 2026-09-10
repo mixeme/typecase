@@ -28,6 +28,7 @@
 .tc-row__cells { flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.5em; overflow: hidden; }
 .tc-row__text { display: flex; flex-direction: column; min-width: 0; }
 .tc-row__title, .tc-row__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tc-row__link, .tc-tickrow__link { color: inherit; text-decoration: none; }
 .tc-row__name { display: flex; align-items: center; gap: 0.35em; min-width: 0; }
 .tc-row__subtitle, .tc-row__detail, .tc-row__caption { color: var(--tc-muted); font-size: 0.9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tc-row__lead { font-family: var(--tc-font-mono); flex: none; }
