@@ -138,6 +138,30 @@
 		if (ov && ov._tcTrigger) ov._tcTrigger.focus();
 	}
 
+	function initDynamic() {
+		document.querySelectorAll("[data-tc-colour]").forEach(function (el) {
+			var c = el.getAttribute("data-tc-colour");
+			if (c) el.style.backgroundColor = c;
+		});
+		document.querySelectorAll("[data-tc-pct]").forEach(function (el) {
+			var bar = el.querySelector(".tc-meter__bar");
+			var pct = el.getAttribute("data-tc-pct");
+			if (bar && pct) bar.style.width = pct + "%";
+		});
+		document.querySelectorAll("[data-tc-width]").forEach(function (el) {
+			var w = el.getAttribute("data-tc-width");
+			if (w) el.style.width = w;
+		});
+		document.querySelectorAll(".tc-crop__img").forEach(function (img) {
+			var z = img.getAttribute("data-tc-zoom") || "100";
+			var r = img.getAttribute("data-tc-rotate") || "0";
+			var x = img.getAttribute("data-tc-offset-x") || "0";
+			var y = img.getAttribute("data-tc-offset-y") || "0";
+			img.style.transform =
+				"rotate(" + r + "deg) scale(" + z / 100 + ") translate(" + x + "px, " + y + "px)";
+		});
+	}
+
 	function initRoots() {
 		document.querySelectorAll("[data-tc-root]").forEach(function (root) {
 			root.classList.add("tc-root");
@@ -150,6 +174,7 @@
 
 	document.addEventListener("DOMContentLoaded", function () {
 		initRoots();
+		initDynamic();
 		document.addEventListener("click", onDocClick);
 		document.addEventListener("keydown", onKeydown);
 		document.addEventListener("click", onCloseClick);
