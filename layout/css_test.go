@@ -116,6 +116,43 @@ func TestCSS_fieldWidths(t *testing.T) {
 	}
 }
 
+func TestCSS_restBoxes(t *testing.T) {
+	css := layout.CSS()
+	for _, frag := range []string{
+		".tc-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}",
+		".tc-doc__layout{display:grid;grid-template-columns:minmax(0,1fr) 296px;min-height:0}",
+		".tc-skel__line{",
+		"height:9px",
+		".tc-meter{",
+		"width:64px",
+		"height:3px",
+		".tc-chip, .tc-tag{",
+		"font-size:10.5px",
+		"min-height:16px",
+		".tc-queue{",
+		"width:330px",
+		"position:absolute",
+		".tc-prose__h1{font-size:27px;line-height:1.15}",
+		".tc-btn{border-color:var(--tc-edge)}",
+		".tc-table__td{border-color:var(--tc-hair)}",
+		".tc-top{border-color:var(--tc-rule)}",
+		".tc-tree__row{",
+		"gap:7px",
+		"height:26px",
+		".tc-empty{",
+		"text-align:start",
+		".tc-list > .tc-rubric{",
+		"padding:15px var(--tc-page-gutter) 5px",
+	} {
+		if !strings.Contains(css, frag) {
+			t.Fatalf("missing %q in generated CSS", frag)
+		}
+	}
+	if strings.Contains(css, "--tc-row-height") {
+		t.Fatal("generated CSS must not set --tc-row-height on rest boxes")
+	}
+}
+
 func TestCSS_sheetAndDialog(t *testing.T) {
 	css := layout.CSS()
 	if !strings.Contains(css, ".tc-sheet{") || !strings.Contains(css, "width:560px") {

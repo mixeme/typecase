@@ -7,7 +7,7 @@ package widget
 // Состояния. reading | editing.
 // Инварианты. Переключатель меры — часть виджета; тихого сохранения нет.
 // Поведение. Переключение меры, переход в правку, предупреждение при уходе.
-// Геометрия. Полная ширина или мера 72–78 знаков.
+// Геометрия. Сетка .tc-doc__layout: minmax(0,1fr) 296px.
 // Содержимое. tc-docbar, tc-prose, tc-docedit, tc-docmeta.
 // Чего нет. Нет панели форматирования с разметкой.
 type Doc struct {
@@ -156,7 +156,7 @@ func (d DocBar) Render() string {
 // Состояния. нет.
 // Инварианты. Не превращается в форму.
 // Поведение. нет.
-// Геометрия. Своя колонка; в узкой раскладке под текстом.
+// Геометрия. Колонка 296; в узкой раскладке под текстом.
 // Содержимое. tc-tag, tc-fields, tc-row, tc-btn.
 // Чего нет. Нет прокрутки отдельно от документа.
 type DocMeta struct {
@@ -192,7 +192,7 @@ func (m DocMeta) Render() string {
 	if m.Danger != nil {
 		a := *m.Danger
 		if a.Kind == "" {
-			a.Kind = ButtonDanger
+			a.Kind = ButtonDangerSolid
 		}
 		if a.Size == "" {
 			a.Size = ButtonSizeForm

@@ -208,7 +208,7 @@ func (ff FormFoot) Render() string {
 			da.Size = ButtonSizeForm
 		}
 		if da.Kind == "" {
-			da.Kind = ButtonDanger
+			da.Kind = ButtonDangerSolid
 		}
 		danger += da.Render()
 	}
@@ -249,7 +249,7 @@ func (d Danger) Render() string {
 			a.Size = ButtonSizeForm
 		}
 		if a.Kind == "" {
-			a.Kind = ButtonDanger
+			a.Kind = ButtonDangerSolid
 		}
 		rows += `<div class="tc-danger__row"><div class="tc-danger__text"><strong>` + esc(r.Title) + `</strong><p>` + esc(r.Text) + `</p></div><div class="tc-danger__action">` + a.Render() + `</div></div>`
 	}

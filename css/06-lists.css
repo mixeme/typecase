@@ -61,7 +61,8 @@
 .tc-tickrow.is-current { background: var(--tc-card); }
 .tc-tickrow__tick {
 	position: relative;
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius-sm);
 	background: var(--tc-surface);
 	cursor: pointer;

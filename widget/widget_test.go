@@ -72,6 +72,17 @@ func TestRowAvatar_fallbackNoImageSrc(t *testing.T) {
 	}
 }
 
+func TestButton_dangerSolid(t *testing.T) {
+	outline := widget.Button{Label: "Detach", Kind: widget.ButtonDanger}.Render()
+	if !strings.Contains(outline, "tc-btn--danger") || strings.Contains(outline, "tc-btn--danger-solid") {
+		t.Fatalf("outline danger: %s", outline)
+	}
+	fill := widget.Button{Label: "Delete", Kind: widget.ButtonDangerSolid}.Render()
+	if !strings.Contains(fill, "tc-btn--danger-solid") {
+		t.Fatalf("solid danger: %s", fill)
+	}
+}
+
 func TestCatalog_entries(t *testing.T) {
 	entries := catalog.Entries()
 	if len(entries) < 50 {

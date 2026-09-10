@@ -12,7 +12,7 @@ do, not what the authors did.
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry after form/sheet: steps 6–7 and 10 of
+- Remaining mockup geometry: steps 7 and 10 of
   the same plan (`Cols` is step 7).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
@@ -41,10 +41,21 @@ until released separately.
   button. Overlay `Dialog` is 420 px. Sheet target is 200×26 with pick
   chevrons as pseudo-elements, not a shared arrow widget. `/io` wraps Into
   in `Form`. Date/time/number inputs no longer force `10em`.
+- **Chip, tag, empty, table, tree, grid and document** take their geometry
+  from `layout` (step 6). Chip and tag match `.m-tag` (10.5 px, padding 0 5,
+  min-height 16; `is-on` is accent on both). Empty is left-aligned. Message
+  has a card ground and a 2 px left bar; alert is a full danger frame.
+  Skeleton lines are 9 px. The run meter is 64×3. Table has no wrapper
+  frame; header 10 px / 0.12em; cell padding 7 12. Tile grid is
+  `repeat(auto-fill, minmax(132px, 1fr))` with gap 14; thumbs are 4/3.
+  Tree rows are 26 / gap 7. Queue is 330 px, absolute in `.tc-main`.
+  Document layout is `minmax(0,1fr) 296px`; the reading title is 27 / 1.15.
+  List rubrics match `.m-group`. Line colours come from `layout` (`--tc-edge`,
+  `--tc-hair`, `--tc-rule`).
 - **Breaking, now in this drop:** `Field` label sits above the control and
-  takes `Width`.
-- **Breaking, still ahead:** `ButtonDanger` is outline; fill is
-  `ButtonDangerSolid`.
+  takes `Width`. `ButtonDanger` is outline; fill is `ButtonDangerSolid`.
+  Delete actions in the library (danger zone, danger dialog confirm,
+  document meta) default to `ButtonDangerSolid`.
 
 ### For consumers (wordmark and icon preview)
 

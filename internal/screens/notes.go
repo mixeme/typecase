@@ -236,7 +236,7 @@ func notesReadDoc() widget.Doc {
 				{Label: "UID", Value: "9e31-40b7-c012", Path: true},
 				{Label: "Read", Value: "2 min ago"},
 			}},
-		}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDanger}},
+		}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDangerSolid}},
 	}
 }
 

@@ -328,7 +328,7 @@ func tickRowSlot(slot string, t TickRow, tickCls string) string {
 // Состояния. нет.
 // Инварианты. Не заголовок раздела и не кликается.
 // Поведение. нет.
-// Геометрия. Прописные, разрядка, приглушённый цвет.
+// Геометрия. В списке — как .m-group: padding 15 / gutter / 5, низ --tc-rule.
 // Содержимое. tc-num, tc-btn.
 // Чего нет. Нет уровней.
 type Rubric struct {

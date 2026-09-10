@@ -162,7 +162,7 @@ func dupOverlays() string {
 		Title:   "Merge on the server",
 		Text:    "The kept record is rewritten with the values you chose. The other is deleted. This cannot be undone from here.",
 		Danger:  true,
-		Confirm: widget.Action{Label: "Write the merge and delete the rest", Kind: widget.ButtonDanger},
+		Confirm: widget.Action{Label: "Write the merge and delete the rest", Kind: widget.ButtonDangerSolid},
 		Cancel:  widget.Action{Label: "Cancel"},
 	}.Render()
 }

@@ -30,9 +30,10 @@ type MenuItem struct {
 type ButtonKind string
 
 const (
-	ButtonNormal  ButtonKind = "normal"
-	ButtonPrimary ButtonKind = "primary"
-	ButtonDanger  ButtonKind = "danger"
+	ButtonNormal      ButtonKind = "normal"
+	ButtonPrimary     ButtonKind = "primary"
+	ButtonDanger      ButtonKind = "danger"
+	ButtonDangerSolid ButtonKind = "danger-solid"
 )
 
 // ButtonSize is the height tier of a button.

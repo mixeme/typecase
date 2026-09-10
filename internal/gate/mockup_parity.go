@@ -47,6 +47,9 @@ func liveParityPairs(spec layout.Spec) []parityPair {
 		{Mockup: ".m-form", Selector: ".tc-form", Props: []string{"gap"}},
 		{Mockup: ".m-sheet", Selector: ".tc-sheet", Props: []string{"width"}},
 		{Mockup: ".m-dialog.is-narrow", Selector: ".tc-dialog", Props: []string{"max-width"}},
+		{Mockup: ".m-grid", Selector: ".tc-grid", Props: []string{"grid-template-columns", "gap"}},
+		{Mockup: ".m-doc", Selector: ".tc-doc__layout", Props: []string{"grid-template-columns"}},
+		{Mockup: ".m-title", Selector: ".tc-prose__h1", Props: []string{"font-size", "line-height"}},
 	}
 	var out []parityPair
 	for _, p := range all {

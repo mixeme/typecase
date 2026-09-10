@@ -1,9 +1,9 @@
 /* tc-doc, tc-prose, tc-docedit, tc-docbar, tc-docmeta */
 
 .tc-doc { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.tc-doc__layout { padding: 1em; min-width: 0; flex: 1; }
 .tc-doc--measure .tc-doc__layout { max-width: 72ch; margin: 0 auto; }
-.tc-doc__layout { display: flex; gap: 2em; padding: 1em; min-width: 0; flex: 1; min-height: 0; }
-.tc-shell--narrow .tc-doc__layout { flex-direction: column; }
+.tc-shell--narrow .tc-doc__layout { grid-template-columns: minmax(0,1fr); }
 
 .tc-docbar {
 	display: flex;
@@ -82,7 +82,6 @@
 /* Документ — единственное место, где заголовкам нужна своя лестница; после
    сброса в 01-base.css её называют здесь. */
 .tc-prose__h1, .tc-prose__h2, .tc-prose__h3 { font-family: var(--tc-font-serif); font-weight: 400; margin: 1em 0 0.5em; }
-.tc-prose__h1 { font-size: 1.6em; }
 .tc-prose__h2 { font-size: 1.3em; }
 .tc-prose__h3 { font-size: 1.1em; }
 .tc-prose__p { margin: 0 0 0.75em; overflow-wrap: anywhere; }
@@ -97,9 +96,10 @@
 .tc-prose__link { color: var(--tc-accent); }
 
 .tc-docmeta {
-	width: 16em;
 	flex: none;
 	font-size: 0.9em;
+	border-left-width: var(--tc-stroke);
+	border-left-style: solid;
 }
 .tc-docmeta__section { margin-bottom: 1em; }
 .tc-docmeta__title {
@@ -122,6 +122,6 @@
 .tc-docmeta__rows { display: flex; flex-direction: column; gap: 0.35em; }
 
 @media (max-width: 720px) {
-	.tc-doc__layout { flex-direction: column; }
+	.tc-doc__layout { grid-template-columns: minmax(0,1fr); }
 	.tc-docmeta { width: auto; }
 }

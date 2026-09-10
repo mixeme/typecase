@@ -38,7 +38,8 @@
 .tc-top {
 	min-width: 0;
 	overflow: hidden;
-	border-bottom: var(--tc-stroke) solid var(--tc-rule);
+	border-bottom-width: var(--tc-stroke);
+	border-bottom-style: solid;
 	background: var(--tc-surface);
 }
 .tc-top .tc-brand { min-width: 0; }
@@ -86,13 +87,7 @@
 	border-bottom: 0;
 	flex: none;
 }
-.tc-rail__chips .tc-chip {
-	border-radius: var(--tc-radius-sm);
-	min-height: 0;
-	height: 18px;
-	padding: 0 5px;
-	font-size: 10.5px;
-}
+.tc-rail__chips .tc-chip { cursor: pointer; }
 .tc-rail--drawer {
 	position: fixed;
 	inset: 0;
@@ -146,7 +141,8 @@
 .tc-railfoot {
 	margin-top: auto;
 	padding: 0.5em var(--tc-page-gutter);
-	border-top: var(--tc-stroke) solid var(--tc-rule);
+	border-top-width: var(--tc-stroke);
+	border-top-style: solid;
 }
 .tc-railfoot__actions {
 	display: flex;
@@ -205,7 +201,8 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	border-left: var(--tc-stroke) solid var(--tc-rule);
+	border-left-width: var(--tc-stroke);
+	border-left-style: solid;
 	background: var(--tc-surface);
 }
 .tc-side.is-closed { display: none; }
@@ -248,7 +245,8 @@
 .tc-head:has(+ .tc-bar) { padding-bottom: 4px; }
 .tc-main__body > .tc-bar {
 	padding: 7px var(--tc-page-gutter);
-	border-bottom: var(--tc-stroke) solid var(--tc-rule);
+	border-bottom-width: var(--tc-stroke);
+	border-bottom-style: solid;
 }
 .tc-main__body > .tc-bar .tc-in {
 	width: 200px;

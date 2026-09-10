@@ -36,7 +36,8 @@
 .tc-sheet {
 	position: relative;
 	background: var(--tc-surface);
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	max-height: 80vh;
 	display: flex;
@@ -48,7 +49,8 @@
 	gap: 10px;
 	/* Правое поле — под приколотый крестик. */
 	padding: 11px 40px 11px 14px;
-	border-bottom: var(--tc-stroke) solid var(--tc-rule);
+	border-bottom-width: var(--tc-stroke);
+	border-bottom-style: solid;
 }
 /* Цель — подпись «куда», не поле: стрелку рисуют псевдоэлементы, как у
    .m-in.is-pick, без общего примитива стрелки. */
@@ -90,13 +92,15 @@
 	gap: 8px;
 	justify-content: flex-end;
 	padding: 11px 14px;
-	border-top: var(--tc-stroke) solid var(--tc-rule);
+	border-top-width: var(--tc-stroke);
+	border-top-style: solid;
 }
 
 .tc-dialog {
 	position: relative;
 	background: var(--tc-surface);
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 }
 .tc-dialog--danger .tc-dialog__title { color: var(--tc-danger); }
@@ -121,7 +125,8 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 0.35em;
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	background: var(--tc-surface);
 	min-height: 26px;
@@ -131,7 +136,7 @@
 }
 .tc-menu__control.tc-btn--primary {
 	background: var(--tc-accent);
-	border-color: var(--tc-accent);
+	border: var(--tc-stroke) solid var(--tc-accent);
 	color: var(--tc-surface);
 }
 .tc-menu__label, .tc-usermenu__label {
@@ -160,7 +165,8 @@
 	min-width: 100%;
 	margin-top: 2px;
 	background: var(--tc-surface);
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	list-style: none;
 	padding: 0.25em 0;
@@ -187,7 +193,6 @@
 .tc-menu__item:hover, .tc-usermenu__item:hover { background: var(--tc-bg); }
 .tc-menu__sep, .tc-usermenu__sep {
 	height: var(--tc-stroke);
-	background: var(--tc-rule);
 	margin: 0.25em 0;
 }
 .tc-menu.is-disabled .tc-menu__control { opacity: 0.55; cursor: not-allowed; }

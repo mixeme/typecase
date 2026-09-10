@@ -75,7 +75,7 @@ func filesMain() widget.Main {
 			{Label: "Rename", Icon: "tc-i-pencil"},
 			{Label: "Move", Icon: "tc-i-move"},
 			{Label: "Copy", Icon: "tc-i-dup"},
-			{Label: "Delete", Kind: widget.ButtonDanger, Icon: "tc-i-trash"},
+			{Label: "Delete", Kind: widget.ButtonDangerSolid, Icon: "tc-i-trash"},
 		},
 		Right: []widget.Node{widget.Action{Label: "Clear selection", Size: widget.ButtonSizeBar}},
 	}
@@ -237,7 +237,7 @@ func filesSide() widget.Side {
 		Body: []widget.Node{widget.Danger{Title: "Danger zone", Rows: []widget.DangerRow{{
 			Title:  "Delete",
 			Text:   "Removes the file from the server.",
-			Action: widget.Action{Label: "Delete", Kind: widget.ButtonDanger, Icon: "tc-i-trash"},
+			Action: widget.Action{Label: "Delete", Kind: widget.ButtonDangerSolid, Icon: "tc-i-trash"},
 		}}}},
 	}
 

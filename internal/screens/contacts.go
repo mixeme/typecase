@@ -254,7 +254,7 @@ func contactsSide() widget.Side {
 		Body: []widget.Node{widget.Danger{Title: "Danger zone", Rows: []widget.DangerRow{{
 			Title:  "Delete contact",
 			Text:   "Removes the card from the server.",
-			Action: widget.Action{Label: "Delete contact", Kind: widget.ButtonDanger},
+			Action: widget.Action{Label: "Delete contact", Kind: widget.ButtonDangerSolid},
 		}}}},
 	}
 

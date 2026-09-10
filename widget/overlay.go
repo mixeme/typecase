@@ -138,7 +138,7 @@ func (d Dialog) Render() string {
 	}
 	confirm := d.Confirm
 	if d.Danger && confirm.Kind == "" {
-		confirm.Kind = ButtonDanger
+		confirm.Kind = ButtonDangerSolid
 	}
 	cancel := d.Cancel
 	if cancel.Label == "" {

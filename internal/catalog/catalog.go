@@ -38,7 +38,8 @@ func Entries() []Entry {
 	// Primitives
 	add("primitives", "tc-btn", "normal", widget.Button{Label: "Save", Icon: "tc-i-plus"}.Render())
 	add("primitives", "tc-btn", "primary", widget.Button{Label: "Create", Kind: widget.ButtonPrimary}.Render())
-	add("primitives", "tc-btn", "danger", widget.Button{Label: "Delete permanently", Kind: widget.ButtonDanger}.Render())
+	add("primitives", "tc-btn", "danger", widget.Button{Label: "Detach", Kind: widget.ButtonDanger}.Render())
+	add("primitives", "tc-btn", "danger-solid", widget.Button{Label: "Delete permanently", Kind: widget.ButtonDangerSolid}.Render())
 	add("primitives", "tc-btn", "disabled", widget.Button{Label: "Unavailable", Reason: "Nothing selected"}.Render())
 	add("primitives", "tc-in", "text", widget.Input{Name: "name", Kind: widget.InputText, Placeholder: "Enter name"}.Render())
 	add("primitives", "tc-in", "select", widget.Input{Name: "role", Kind: widget.InputSelect, Options: []widget.SelectOption{{Label: "One", Value: "1"}, {Label: "Two", Value: "2", Selected: true}}}.Render())
@@ -67,13 +68,13 @@ func Entries() []Entry {
 	add("forms", "tc-fset", "default", widget.FieldSet{Legend: "Account", Rows: []widget.Field{{Name: "email", Label: "Email", Kind: widget.InputEmail}}}.Render())
 	add("forms", "tc-field", "normal", widget.Field{Name: "phone", Label: "Phone", Kind: widget.InputTel, Hint: "Include country code", Width: widget.FieldWidthMD}.Render())
 	add("forms", "tc-formfoot", "default", widget.FormFoot{Primary: widget.Action{Label: "Save"}, Rest: []widget.Action{{Label: "Cancel"}}}.Render())
-	add("forms", "tc-danger", "default", widget.Danger{Title: "Danger zone", Rows: []widget.DangerRow{{Title: "Remove all data", Text: "This cannot be undone.", Action: widget.Action{Label: "Remove all data", Kind: widget.ButtonDanger}}}}.Render())
+	add("forms", "tc-danger", "default", widget.Danger{Title: "Danger zone", Rows: []widget.DangerRow{{Title: "Remove all data", Text: "This cannot be undone.", Action: widget.Action{Label: "Remove all data", Kind: widget.ButtonDangerSolid}}}}.Render())
 
 	// Overlays
 	add("overlays", "tc-scrim", "on", widget.Scrim{For: "sheet", On: true}.Render())
 	add("overlays", "tc-overlay", "sheet", widget.Overlay{Kind: widget.OverlaySheet, Open: true, ID: "demo-overlay", Body: widget.Paragraph("Overlay body")}.Render())
 	add("overlays", "tc-sheet", "open", widget.Sheet{Title: "Edit", Target: "Settings", Body: []widget.Node{widget.Paragraph("Sheet body")}, Open: true, Actions: []widget.Action{{Label: "Apply", Kind: widget.ButtonPrimary}}}.Render())
-	add("overlays", "tc-dialog", "open", widget.Dialog{Title: "Delete?", Text: "This removes the item.", Open: true, Danger: true, Confirm: widget.Action{Label: "Delete item", Kind: widget.ButtonDanger}, Cancel: widget.Action{Label: "Keep"}}.Render())
+	add("overlays", "tc-dialog", "open", widget.Dialog{Title: "Delete?", Text: "This removes the item.", Open: true, Danger: true, Confirm: widget.Action{Label: "Delete item", Kind: widget.ButtonDangerSolid}, Cancel: widget.Action{Label: "Keep"}}.Render())
 	add("overlays", "tc-menu", "closed", widget.Menu{Label: "Actions", Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}, {Separator: true}, {Label: "Remove", Href: "/remove"}}}.Render())
 	add("overlays", "tc-menu", "open", widget.Menu{Label: "Actions", State: widget.MenuOpen, Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}}}.Render())
 	add("overlays", "tc-usermenu", "closed", widget.UserMenu{Name: "Alex", Note: "Signed in", Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}}.Render())
@@ -135,7 +136,7 @@ func Entries() []Entry {
 	add("document", "tc-docbar", "dirty", widget.DocBar{Dirty: true, Left: []widget.Action{{Label: "Save", Kind: widget.ButtonPrimary}}}.Render())
 	add("document", "tc-docbar", "frame", widget.DocBar{Sub: "nextcloud · Notes · 10 Aug", Mark: widget.Mark{Colour: "#4A6B52", Label: "Notes"}, Left: []widget.Action{{Label: "Edit", Kind: widget.ButtonPrimary}}}.Render())
 	add("document", "tc-docedit", "default", widget.DocEdit{Title: "Meeting note", Rows: []widget.PFieldRow{{Fields: []widget.PField{{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10", Width: widget.PFieldWidthSM}, {Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05", Width: widget.PFieldWidthXS}}}}, Text: "Body text."}.Render())
-	add("document", "tc-docmeta", "default", widget.DocMeta{Sections: []widget.MetaSection{{Title: "Tags", Action: &widget.Action{Label: "Attach"}, Tags: []widget.Tag{{Label: "draft", On: true}}}}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDanger}}.Render())
+	add("document", "tc-docmeta", "default", widget.DocMeta{Sections: []widget.MetaSection{{Title: "Tags", Action: &widget.Action{Label: "Attach"}, Tags: []widget.Tag{{Label: "draft", On: true}}}}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDangerSolid}}.Render())
 	add("forms", "tc-pfield", "normal", widget.PField{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Note", Width: widget.PFieldWidthFull}.Render())
 	add("forms", "tc-pfield", "error", widget.PField{Name: "pfield-email", Label: "Email", Kind: widget.InputEmail, Error: "Invalid address", Width: widget.PFieldWidthFull}.Render())
 	add("forms", "tc-pfield", "read-only", widget.PField{Name: "id", Label: "ID", Kind: widget.InputText, Value: "42", ReadOnly: true, Width: widget.PFieldWidthSM}.Render())
@@ -182,7 +183,7 @@ func Entries() []Entry {
 	add("overlays", "tc-overlay", "dialog", widget.Overlay{Kind: widget.OverlayDialog, Open: true, ID: "dlg", Body: widget.Paragraph("Dialog body")}.Render())
 	add("overlays", "tc-overlay", "popover", widget.Overlay{Kind: widget.OverlayPopover, Open: true, ID: "pop", Body: widget.Paragraph("Popover")}.Render())
 	add("overlays", "tc-sheet", "closed", widget.Sheet{Title: "Edit", Target: "Settings", Body: []widget.Node{widget.Paragraph("Closed")}, Open: false}.Render())
-	add("overlays", "tc-dialog", "closed", widget.Dialog{Title: "Delete?", Text: "Closed.", Open: false, Confirm: widget.Action{Label: "Delete", Kind: widget.ButtonDanger}, Cancel: widget.Action{Label: "Keep"}}.Render())
+	add("overlays", "tc-dialog", "closed", widget.Dialog{Title: "Delete?", Text: "Closed.", Open: false, Confirm: widget.Action{Label: "Delete", Kind: widget.ButtonDangerSolid}, Cancel: widget.Action{Label: "Keep"}}.Render())
 	add("overlays", "tc-menu", "disabled", widget.Menu{Label: "Actions", State: widget.MenuDisabled, Items: []widget.MenuItem{{Label: "Edit", Href: "/edit"}}}.Render())
 	add("overlays", "tc-usermenu", "open", widget.UserMenu{Name: "Alex", Note: "Signed in", State: widget.MenuOpen, Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}}.Render())
 

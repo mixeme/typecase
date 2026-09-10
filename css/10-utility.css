@@ -4,7 +4,8 @@
 .tc-search__icon { flex: none; }
 .tc-search__field {
 	background: var(--tc-bg);
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 }
 .tc-search__input {
@@ -129,7 +130,8 @@
 .tc-steps__count { margin-left: auto; color: var(--tc-muted); }
 
 .tc-card {
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	padding: 0.75em 1em;
 	background: var(--tc-surface);

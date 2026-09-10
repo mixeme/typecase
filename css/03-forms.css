@@ -12,6 +12,8 @@
 
 .tc-fset {
 	border: 0;
+	border-top-width: var(--tc-stroke);
+	border-top-style: solid;
 	margin: 0;
 	margin-top: 2px;
 }
@@ -80,7 +82,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 0.35em;
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	background: var(--tc-surface);
 	min-height: 28px;
@@ -157,7 +160,8 @@
 	gap: 0.5em;
 	align-items: center;
 	padding-top: 0.75em;
-	border-top: var(--tc-stroke) solid var(--tc-rule);
+	border-top-width: var(--tc-stroke);
+	border-top-style: solid;
 }
 .tc-formfoot__primary,
 .tc-formfoot__rest { display: flex; gap: 0.5em; flex-wrap: wrap; }

@@ -24,7 +24,8 @@
 
 .tc-seg {
 	display: inline-flex;
-	border: var(--tc-stroke) solid var(--tc-rule);
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	border-radius: var(--tc-radius);
 	overflow: hidden;
 	/* Целиком или под «ещё»: доля не сжимается до нечитаемой (L-4.4). */
@@ -65,19 +66,11 @@
 	display: inline-flex;
 	align-items: center;
 	gap: 0.35em;
-	border: var(--tc-stroke) solid var(--tc-rule);
-	border-radius: 999px;
-	padding: 0 0.6em;
-	min-height: 26px;
+	border-width: var(--tc-stroke);
+	border-style: solid;
 	background: var(--tc-surface);
-	color: var(--tc-ink);
 	text-decoration: none;
 	cursor: pointer;
-	font-size: var(--tc-font-size);
-}
-.tc-chip.is-on {
-	border-color: var(--tc-accent);
-	box-shadow: inset 0 0 0 1px var(--tc-accent);
 }
 .tc-chip__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 12em; line-height: 1.35; }
 
