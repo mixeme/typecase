@@ -123,6 +123,9 @@ func (f Field) Render() string {
 	if f.Extra.Label != "" {
 		extra = `<div class="tc-field__extra">` + f.Extra.Render() + `</div>`
 	}
+	if f.Label == "" {
+		cls = classes(cls, "tc-field--bare")
+	}
 	fieldID := uniqueID("tc-field")
 	if f.Check != nil {
 		chk := *f.Check
@@ -136,7 +139,11 @@ func (f Field) Render() string {
 		return `<div` + classAttr(cls) + `><div class="tc-field__control">` + chk.Render() + extra + `</div>` + hint + err + `</div>`
 	}
 	input := Input{ID: fieldID, Name: f.Name, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}.Render()
-	return `<div` + classAttr(cls) + `><label class="tc-field__label" for="` + esc(fieldID) + `">` + esc(f.Label) + req + `</label><div class="tc-field__control">` + input + extra + `</div>` + hint + err + `</div>`
+	label := ""
+	if f.Label != "" {
+		label = `<label class="tc-field__label" for="` + esc(fieldID) + `">` + esc(f.Label) + req + `</label>`
+	}
+	return `<div` + classAttr(cls) + `>` + label + `<div class="tc-field__control">` + input + extra + `</div>` + hint + err + `</div>`
 }
 
 // FormFoot — tc-formfoot

@@ -47,28 +47,50 @@
 .tc-sheet__head {
 	display: flex;
 	align-items: center;
-	gap: 0.5em;
+	gap: 10px;
 	/* Правое поле — под приколотый крестик. */
-	padding: 0.75em 40px 0.75em 1em;
+	padding: 11px 40px 11px 14px;
 	border-bottom: var(--tc-stroke) solid var(--tc-rule);
 }
 /* Цель прижата вправо, а не растянута на всю строку: с width: 100% флекс
    сжимал её и ставил слева от заголовка, вместо того чтобы развести их. */
 .tc-sheet__target {
-	font-size: 0.85em;
+	font-size: 12px;
 	color: var(--tc-muted);
 	margin-left: auto;
+	max-width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.tc-sheet__title { margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tc-sheet__body { padding: 1em; overflow: auto; flex: 1; }
+.tc-sheet__title {
+	margin: 0;
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.3;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.tc-sheet__body { padding: 12px 14px; overflow: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.tc-sheet .tc-in--textarea {
+	min-height: 132px;
+	font-size: 14px;
+	line-height: 1.6;
+	padding: 7px 9px;
+}
+.tc-sheet .tc-field__hint {
+	font-size: 11.5px;
+	color: var(--tc-dusty);
+}
+.tc-sheet__body > .tc-field { margin-bottom: 0; }
 .tc-sheet__foot {
 	display: flex;
-	gap: 0.5em;
+	align-items: center;
+	gap: 8px;
 	justify-content: flex-end;
-	padding: 0.75em 1em;
+	padding: 11px 14px;
 	border-top: var(--tc-stroke) solid var(--tc-rule);
 }
 
@@ -109,6 +131,11 @@
 	padding: 0 0.5em;
 	cursor: pointer;
 	max-width: 100%;
+}
+.tc-menu__control.tc-btn--primary {
+	background: var(--tc-accent);
+	border-color: var(--tc-accent);
+	color: var(--tc-surface);
 }
 .tc-menu__label, .tc-usermenu__label {
 	flex: 1 1 auto;

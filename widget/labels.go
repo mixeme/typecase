@@ -23,6 +23,9 @@ type Labels struct {
 	BuildMissing   string
 	Progress       string
 	Rotate90       string
+	Sources        string
+	Apply          string
+	Remove         string
 	StepOf         string // "Step %d of %d" with %d placeholders — use StepOfFunc instead
 }
 
@@ -56,6 +59,9 @@ func defaultLabels() Labels {
 		BuildMissing:   "Build information missing",
 		Progress:       "Progress",
 		Rotate90:       "Rotate 90°",
+		Sources:        "Sources",
+		Apply:          "Apply",
+		Remove:         "Remove",
 	}
 }
 

@@ -40,6 +40,9 @@ func TestRender_smoke(t *testing.T) {
 		{"table", widget.Table{Columns: []widget.Column{{Label: "C"}}, Rows: []widget.TableRow{{Cells: []string{"v"}}}}.Render()},
 		{"shell", widget.Shell{Main: widget.Main{Label: "M", Body: []widget.Node{widget.Paragraph("b")}}}.Render()},
 		{"doc", widget.Doc{Body: widget.Paragraph("x")}.Render()},
+		{"docedit", widget.DocEdit{Title: "T", Text: "b"}.Render()},
+		{"pfield", widget.PField{Name: "t", Label: "Title", Kind: widget.InputText}.Render()},
+		{"pick", widget.Pick{Name: "r", Label: "Related"}.Render()},
 		{"search", widget.Search{Action: "/s"}.Render()},
 		{"stat", widget.Stat{Label: "Users", Value: "1,234"}.Render()},
 		{"stats", widget.Stats{Items: []widget.Stat{{Label: "Users", Value: "1,234"}}}.Render()},
@@ -205,6 +208,29 @@ func TestRowExcerpt_dateAndSource(t *testing.T) {
 	}
 }
 
+func TestRowExcerpt_badgeLivesInTags(t *testing.T) {
+	html := widget.Row{
+		Variant: widget.RowExcerpt,
+		Cells:   widget.RowCells{Title: "Note", Date: "10 Aug", Source: "src"},
+		Badges:  []widget.Badge{{Label: "linked", Role: widget.BadgeLinked}},
+	}.Render()
+	tagsAt := strings.Index(html, `class="tc-row__tags"`)
+	badgeAt := strings.Index(html, "tc-badge")
+	if tagsAt < 0 || badgeAt < 0 || badgeAt < tagsAt {
+		t.Fatalf("linked badge must sit in the tags cell: %s", html)
+	}
+	dateAt := strings.Index(html, `class="tc-row__date"`)
+	if dateAt > 0 && badgeAt > dateAt {
+		t.Fatalf("linked badge must come before the date column: %s", html)
+	}
+}
+
+func TestDocMeta_emptyRendersNothing(t *testing.T) {
+	if got := (widget.DocMeta{}).Render(); got != "" {
+		t.Fatalf("empty DocMeta must render nothing, got %q", got)
+	}
+}
+
 func TestSideBlock_exactlyOne(t *testing.T) {
 	sec := widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}
 	field := widget.Field{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Note"}
@@ -216,6 +242,14 @@ func TestSideBlock_exactlyOne(t *testing.T) {
 	if got := (widget.SideBlock{Field: &field}).Render(); !strings.Contains(got, "tc-field") {
 		t.Fatalf("field block: %q", got)
 	}
+	pfield := widget.PField{Name: "title", Label: "Title", Kind: widget.InputText, Width: widget.PFieldWidthFull}
+	pfieldRow := widget.PFieldRow{Fields: []widget.PField{{Name: "date", Label: "Date", Kind: widget.InputDate, Width: widget.PFieldWidthSM}}}
+	if got := (widget.SideBlock{PField: &pfield}).Render(); !strings.Contains(got, "tc-pfield") {
+		t.Fatalf("pfield block: %q", got)
+	}
+	if got := (widget.SideBlock{PFieldRow: &pfieldRow}).Render(); !strings.Contains(got, "tc-pfieldrow") {
+		t.Fatalf("pfieldrow block: %q", got)
+	}
 	if got := (widget.SideBlock{Fields: &fields}).Render(); !strings.Contains(got, "tc-fields") {
 		t.Fatalf("fields block: %q", got)
 	}
@@ -225,5 +259,72 @@ func TestSideBlock_exactlyOne(t *testing.T) {
 	both := widget.SideBlock{Sec: &sec, Field: &field}
 	if got := both.Render(); got != "" {
 		t.Fatalf("two kinds must render nothing, got %q", got)
+	}
+}
+
+func TestField_emptyLabelIsBare(t *testing.T) {
+	html := widget.Field{Name: "quick", Kind: widget.InputTextarea, Value: "note"}.Render()
+	if strings.Contains(html, "tc-field__label") {
+		t.Fatalf("unlabeled field must omit the label column: %s", html)
+	}
+	if !strings.Contains(html, "tc-field--bare") {
+		t.Fatalf("unlabeled field must be bare: %s", html)
+	}
+}
+
+func TestPField_labelAboveInput(t *testing.T) {
+	html := widget.PField{Name: "date", Label: "Date", Kind: widget.InputDate, Width: widget.PFieldWidthSM}.Render()
+	labelAt := strings.Index(html, `class="tc-pfield__label"`)
+	inputAt := strings.Index(html, `<input`)
+	if labelAt < 0 || inputAt < 0 || labelAt > inputAt {
+		t.Fatalf("label must precede input: %s", html)
+	}
+	if strings.Contains(html, "tc-field") {
+		t.Fatalf("panel field must not use form grid: %s", html)
+	}
+}
+
+func TestPFieldRow_emptyAndSelectWrap(t *testing.T) {
+	if got := (widget.PFieldRow{}).Render(); got != "" {
+		t.Fatalf("empty row must render nothing, got %q", got)
+	}
+	html := widget.PFieldRow{Fields: []widget.PField{
+		{Name: "book", Label: "Notebook", Kind: widget.InputSelect, Options: []widget.SelectOption{{Label: "Notes", Value: "n", Selected: true}}, Width: widget.PFieldWidthLG},
+	}}.Render()
+	if strings.Contains(html, "tc-in--pick") || strings.Contains(html, "tc-in tc-in--pick-wrap") {
+		t.Fatalf("select wrap class must not be rewritten: %s", html)
+	}
+	if !strings.Contains(html, "tc-in-wrap--select") {
+		t.Fatalf("select wrap missing: %s", html)
+	}
+}
+
+func TestPick_queryIsInput(t *testing.T) {
+	closed := widget.Pick{Name: "rel", Label: "Related to", Chosen: []string{"Sync-up"}}.Render()
+	if !strings.Contains(closed, `class="tc-pick__query"`) || !strings.Contains(closed, `<input type="text"`) {
+		t.Fatalf("pick query must be an input: %s", closed)
+	}
+	if strings.Contains(closed, "aria-controls") {
+		t.Fatalf("closed pick without menu must not point at a missing listbox: %s", closed)
+	}
+	open := widget.Pick{Name: "rel", Label: "Related to", Query: "kov", Open: true, Options: []widget.PickItem{{Label: "Call"}}, Manual: "Enter a UID by hand"}.Render()
+	if !strings.Contains(open, `aria-expanded="true"`) || !strings.Contains(open, "tc-pick__menu") {
+		t.Fatalf("open pick must expose the listbox: %s", open)
+	}
+}
+
+func TestInput_pickKindEmitsNothing(t *testing.T) {
+	if got := (widget.Input{Name: "rel", Kind: widget.InputPick}).Render(); got != "" {
+		t.Fatalf("InputPick belongs on PField, not tc-in: %s", got)
+	}
+}
+
+func TestDocEdit_titleAndBody(t *testing.T) {
+	html := widget.DocEdit{Title: "Note", Text: "Hello"}.Render()
+	if !strings.Contains(html, "tc-pfield--title") {
+		t.Fatalf("title field missing: %s", html)
+	}
+	if !strings.Contains(html, "Hello") || !strings.Contains(html, "tc-in--textarea") {
+		t.Fatalf("body textarea missing: %s", html)
 	}
 }

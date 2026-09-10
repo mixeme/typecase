@@ -10,14 +10,15 @@ func Notes() string {
 
 // NotesRead is full-screen reading with neighbour notes in the rail tree.
 func NotesRead() string {
-	return shellWrap(notesReadNav()+notesReadRail().Render(), notesReadMain(), "", "")
+	return shellFrame(notesReadNav(), notesReadRail(), notesReadMain(), widget.Side{}, "")
 }
 
 // NotesEdit is focus editing: top bar and main column only, no rail or side.
 func NotesEdit() string {
-	return `<div class="tc-shell" data-tc-shell data-tc-root>` + shellTop().Render() +
-		`<div class="tc-shell__body"><div class="tc-shell__main">` + notesEditMain() +
-		`</div></div></div>`
+	return widget.Shell{
+		Top:  shellTop(),
+		Main: notesEditMain(),
+	}.Render()
 }
 
 // NotesQuick is the list frame with the quick-note sheet open.
@@ -26,7 +27,7 @@ func NotesQuick() string {
 }
 
 func notesListFrame(quickOpen bool) string {
-	return shellWrap(shellNav("/notes")+notesRail().Render(), notesListMain(), notesSide(), notesQuickSheet(quickOpen))
+	return shellFrame(shellNav("/notes"), notesRail(), notesListMain(), notesSide(), notesQuickSheet(quickOpen))
 }
 
 func notesRail() widget.Rail {
@@ -35,10 +36,11 @@ func notesRail() widget.Rail {
 		Sections: []widget.RailSection{
 			{
 				Rows: []widget.TickRow{{
-					Label: "Combined notebook",
-					Mark:  widget.Mark{Colour: "#4a6b52", Label: "Combined"},
-					Count: intPtr(n86),
-					Tick:  widget.TickPartial,
+					Label:   "Combined notebook",
+					Mark:    widget.Mark{Colours: []string{"#4a6b52", "#6B4E7A", "#A05A2C"}, Label: "Combined"},
+					Count:   intPtr(n86),
+					Tick:    widget.TickPartial,
+					Current: true,
 				}},
 			},
 			{
@@ -59,20 +61,20 @@ func notesRail() widget.Rail {
 		},
 		Foot: widget.RailFoot{
 			Actions: []widget.Action{
-				{Label: "New notebook", Icon: "+"},
-				{Label: "Connect account", Icon: "⎈"},
-				{Label: "Subscribe to a feed", Icon: "🔗"},
+				{Label: "New notebook", Icon: "tc-i-plus"},
+				{Label: "Connect account", Icon: "tc-i-server"},
+				{Label: "Subscribe to a feed", Icon: "tc-i-link"},
 			},
 			Build: demoBuild,
 		},
 	}
 }
 
-func notesReadNav() string {
+func notesReadNav() widget.Nav {
 	return widget.Nav{
-		Items:   []widget.NavItem{{Label: "Combined notebook", Icon: "←", Href: "/notes"}},
+		Items:   []widget.NavItem{{Label: "Combined notebook", Icon: "tc-i-back", Href: "/notes"}},
 		Current: "/notes",
-	}.Render()
+	}
 }
 
 func notesReadRail() widget.Rail {
@@ -103,7 +105,7 @@ func notesReadRail() widget.Rail {
 	}
 }
 
-func notesListMain() string {
+func notesListMain() widget.Main {
 	n86, n9 := 86, 9
 	return widget.Main{
 		Label: "Notes",
@@ -113,7 +115,9 @@ func notesListMain() string {
 				Title: "Combined notebook",
 				Sub:   "2 of 3 notebooks · 86 notes · VJOURNAL",
 				Actions: []widget.Action{
-					{Label: "New note", Kind: widget.ButtonPrimary, Icon: "+"},
+					{Label: "New note", Kind: widget.ButtonPrimary, Icon: "tc-i-plus"},
+				},
+				Rank2: []widget.Action{
 					{Label: "Import Markdown"},
 					{Label: "Export"},
 				},
@@ -128,7 +132,7 @@ func notesListMain() string {
 					},
 				},
 				Right: []widget.Node{
-					widget.Button{Label: "Columns", Icon: "▦", Size: widget.ButtonSizeBar},
+					widget.Button{Label: "Columns", Icon: "tc-i-cols", Size: widget.ButtonSizeBar},
 					widget.Num{Value: intPtr(n86)},
 				},
 			},
@@ -174,14 +178,14 @@ func notesListMain() string {
 				}},
 			},
 		},
-	}.Render()
+	}
 }
 
-func notesReadMain() string {
+func notesReadMain() widget.Main {
 	return widget.Main{
 		Label: "Note",
 		Body:  []widget.Node{notesReadDoc()},
-	}.Render()
+	}
 }
 
 func notesReadDoc() widget.Doc {
@@ -189,10 +193,24 @@ func notesReadDoc() widget.Doc {
 		Mode:  widget.DocReading,
 		Width: widget.DocWidthFull,
 		Bar: widget.DocBar{
+			Sub:  "nextcloud · Записи · 10 Aug 2026 11:05",
+			Mark: widget.Mark{Colour: "#4A6B52", Label: "Записи"},
 			Left: []widget.Action{
-				{Label: "Edit", Kind: widget.ButtonPrimary, Icon: "✎"},
+				{Label: "Edit", Kind: widget.ButtonPrimary, Icon: "tc-i-pencil"},
+			},
+			Right: []widget.Action{
+				{Label: "Hide the side column", Icon: "tc-i-panel"},
+			},
+			RightNodes: []widget.Node{
+				widget.Seg{
+					Name:    "width",
+					Chosen:  "full",
+					Options: []widget.SegOption{{Label: "Full width", Value: "full"}, {Label: "Reading width", Value: "reading"}},
+				},
+			},
+			Rank2: []widget.Action{
 				{Label: "Export Markdown"},
-				{Label: "Print", Icon: "🖨"},
+				{Label: "Print", Icon: "tc-i-print"},
 				{Label: "Source"},
 			},
 		},
@@ -210,7 +228,7 @@ func notesReadDoc() widget.Doc {
 				{Label: "Синк-ап по релизу", Value: "event · 10 Aug"},
 				{Label: "Дописать раздел про кэш", Value: "task"},
 			}},
-			{Title: "Attachments", Rows: []widget.FieldRow{
+			{Title: "Attachments", Action: &widget.Action{Label: "Attach"}, Rows: []widget.FieldRow{
 				{Label: "2026-08-10-sync-board.png", Value: "412 KB · in the note"},
 				{Label: "запись-встречи.m4a", Value: "24 MB · Documents / carrel"},
 			}},
@@ -218,11 +236,23 @@ func notesReadDoc() widget.Doc {
 				{Label: "UID", Value: "9e31-40b7-c012", Path: true},
 				{Label: "Read", Value: "2 min ago"},
 			}},
-		}},
+		}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDanger}},
 	}
 }
 
-func notesEditMain() string {
+func notesEditMain() widget.Main {
+	editBody := `Договорились заморозить ветку в среду.
+
+Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.
+
+## Что делаем
+
+- [ ] проверить changelog
+- [x] попросить у Артёма скриншоты
+
+## Отложено до следующего спринта
+
+Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.`
 	return widget.Main{
 		Label: "Edit note",
 		Body: []widget.Node{
@@ -233,31 +263,47 @@ func notesEditMain() string {
 					Left: []widget.Action{
 						{Label: "Save", Kind: widget.ButtonPrimary},
 						{Label: "Cancel"},
+					},
+					Rank2: []widget.Action{
 						{Label: "B"},
 						{Label: "I"},
 						{Label: "H2"},
 						{Label: "• list"},
-						{Label: "task", Icon: "☑"},
-						{Label: "Link", Icon: "🔗"},
-						{Label: "Attach", Icon: "↑"},
+						{Label: "task", Icon: "tc-i-task"},
+						{Label: "Link", Icon: "tc-i-link"},
+						{Label: "Attach", Icon: "tc-i-up"},
 					},
 					Right: []widget.Action{
-						{Label: "Focus", Icon: "⤢"},
+						{Label: "Focus", Icon: "tc-i-expand"},
 					},
 					Dirty: true,
 				},
-				Body: widget.Prose{Blocks: []widget.ProseBlock{
-					{Kind: widget.ProseH1, Text: "Заметка со встречи 10.08"},
-					{Kind: widget.ProseP, Text: "Договорились заморозить ветку в среду."},
-					{Kind: widget.ProseP, Text: "Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт."},
-					{Kind: widget.ProseH2, Text: "Что делаем"},
-					{Kind: widget.ProseUL, Items: []string{"проверить changelog", "попросить у Артёма скриншоты"}},
-					{Kind: widget.ProseH2, Text: "Отложено до следующего спринта"},
-					{Kind: widget.ProseP, Text: "Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще."},
-				}},
+				Edit: &widget.DocEdit{
+					Title: "Заметка со встречи 10.08",
+					Rows: []widget.PFieldRow{{
+						Fields: []widget.PField{
+							{Name: "notebook", Label: "Notebook", Kind: widget.InputSelect, Value: "notes", Width: widget.PFieldWidthLG, Options: []widget.SelectOption{{Label: "Записи · nextcloud", Value: "notes", Selected: true}}},
+							{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10", Width: widget.PFieldWidthSM},
+							{Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05", Width: widget.PFieldWidthXS},
+							{Name: "tags", Label: "Tags", Kind: widget.InputText, Value: "встречи, релиз", Width: widget.PFieldWidthMD},
+							{Name: "related", Label: "Related to", Kind: widget.InputPick, Width: widget.PFieldWidthLG, Pick: &widget.Pick{
+								Chosen: []string{"Синк-ап по релизу"},
+								Query:  "ковал",
+								Open:   true,
+								Options: []widget.PickItem{
+									{Label: "Звонок с Ковалёвой", Hint: "10 Aug · Личный", Icon: "tc-i-cal"},
+									{Label: "Ответить Анне по смете", Hint: "task · Работа", Icon: "tc-i-task"},
+									{Label: "Анна Ковалёва", Hint: "contact", Icon: "tc-i-con"},
+								},
+								Manual: "Enter a UID by hand",
+							}},
+						},
+					}},
+					Text: editBody,
+				},
 			},
 		},
-	}.Render()
+	}
 }
 
 func notesQuickSheet(open bool) string {
@@ -267,8 +313,12 @@ func notesQuickSheet(open bool) string {
 		Target: "Записи · nextcloud",
 		Open:   open,
 		Body: []widget.Node{
-			widget.Field{Name: "quick", Kind: widget.InputTextarea, Value: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности."},
-			widget.Paragraph("The title is taken from the first line. The date is now."),
+			widget.Field{
+				Name:  "quick",
+				Kind:  widget.InputTextarea,
+				Value: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.",
+				Hint:  "The title is taken from the first line. The date is now.",
+			},
 		},
 		Actions: []widget.Action{
 			{Label: "Save note", Kind: widget.ButtonPrimary},
@@ -278,15 +328,20 @@ func notesQuickSheet(open bool) string {
 	}.Render()
 }
 
-func notesSide() string {
-	title := widget.Field{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Заметка со встречи 10.08"}
-	text := widget.Field{Name: "text", Label: "Text", Kind: widget.InputTextarea, Value: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна…"}
-	date := widget.Field{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10"}
-	timeF := widget.Field{Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05"}
-	tags := widget.Field{Name: "tags", Label: "Tags", Kind: widget.InputText, Value: "встречи, релиз"}
+func notesSide() widget.Side {
+	title := widget.PField{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Заметка со встречи 10.08", Width: widget.PFieldWidthFull}
+	text := widget.PField{Name: "text", Label: "Text", Kind: widget.InputTextarea, Value: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна…", Width: widget.PFieldWidthFull}
+	metaRow := widget.PFieldRow{Fields: []widget.PField{
+		{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10", Width: widget.PFieldWidthSM},
+		{Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05", Width: widget.PFieldWidthXS},
+		{Name: "tags", Label: "Tags", Kind: widget.InputText, Value: "встречи, релиз", Width: widget.PFieldWidthMD},
+	}}
 	attach := widget.Sec{
-		Rubric: widget.Rubric{Text: "Attachments"},
-		Body:   []widget.Node{widget.Paragraph("2026-08-10-sync-board.png · 412 KB · in the note")},
+		Rubric: widget.Rubric{Text: "Attachments", Action: &widget.Action{Label: "Attach"}},
+		Body: []widget.Node{
+			widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Name: "2026-08-10-sync-board.png", Size: "412 KB · in the note", Icon: "tc-i-img"}},
+			widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Name: "запись-встречи.m4a", Size: "24 MB · Documents / carrel", Icon: "tc-i-doc"}},
+		},
 	}
 	related := widget.Sec{
 		Rubric: widget.Rubric{Text: "Related"},
@@ -295,19 +350,19 @@ func notesSide() string {
 	return widget.Side{
 		Label: "Note details",
 		Title: "Заметка со встречи 10.08",
+		Sub:   "nextcloud · Записи · 2 min ago",
 		Open:  true,
+		Size:  widget.SideSizeWide,
 		Blocks: []widget.SideBlock{
-			{Field: &title},
-			{Field: &text},
-			{Field: &date},
-			{Field: &timeF},
-			{Field: &tags},
+			{PField: &title},
+			{PField: &text},
+			{PFieldRow: &metaRow},
 			{Sec: &attach},
 			{Sec: &related},
 		},
 		Actions: []widget.Action{
 			{Label: "Save", Kind: widget.ButtonPrimary},
-			{Label: "Open full screen", Icon: "⤢"},
+			{Label: "Open full screen", Icon: "tc-i-expand"},
 		},
-	}.Render()
+	}
 }

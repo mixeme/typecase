@@ -6,12 +6,22 @@ do, not what the authors did.
 
 ## Unreleased
 
-The typecase wordmark work documented below stays documentation-only until
-released separately. Remaining screen-assembly work — other demo pages still
-wrap the shell by hand, and descendant overflow at 375 px — is in
-[docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+### Not yet included
 
-### For consumers (wordmark preview)
+- An open side panel still covers the viewport at phone width, including the
+  rail chrome (U-9: row menu instead of the panel).
+- Calendar (7.2), tasks (7.3) and find (7.6) screens, plus their row grids —
+  [docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md).
+- Remaining mockup geometry is the same plan: a `layout` package (tables
+  generate CSS), not hand-copied rules.
+- Standalone repository extraction (`internal/`, docs, CI; history via subtree
+  split) — [docs/plan/typecase-export.md](../docs/plan/typecase-export.md).
+- Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
+
+The typecase wordmark and icon work documented below stays documentation-only
+until released separately.
+
+### For consumers (wordmark and icon preview)
 
 - **Nothing to do for the wordmark.** No module code, token, markup or behaviour
   changed for the wordmark; it is not part of this library release.
@@ -22,9 +32,23 @@ wrap the shell by hand, and descendant overflow at 375 px — is in
 - **Do not set the word in Literata and call it the mark.** The nests, the air
   inside them and the empty nest are measured, not typed; `typecase-logotype.svg`
   is the only file that carries them.
-- **Below 164 px wide, do not use it.** That is where the hairline of “e” still
-  holds 1.5 px. There is no hinted small version and no icon yet, so in square
-  formats the library has no mark at all.
+- **Below 164 px wide, do not use it.** That is where the hairline of "e" still
+  holds 1.5 px. There is no hinted small version of the word; in square formats
+  the icon carries the library instead.
+- **Nothing to do for the icon either.** No module code, token, markup or
+  behaviour changed for it; it is not part of this library release.
+- **The icon is the square-format mark** — the catalog, the README, a section
+  head. It does not replace the Carrel logo and it is not the project's favicon:
+  Typecase ships separately, but the project has one logo.
+- **Do not draw the letter.** It is the Literata glyph of the same instance as
+  the wordmark, scaled to a quarter. Only the cap height is assigned; the width
+  and the air follow from the glyph.
+- **The box is not a backdrop.** Nests never sit straight on paper or on an
+  application's background: card on paper measures 1.18:1, which is no visible
+  edge at all. On the ink box the same nest measures 12.47:1.
+- **Below 24 px the accent is gone.** The 16 px drawing collapses the case to a
+  single nest with the letter — no empty nest, no accent. Expect the mark to say
+  "a sort in a case", not "there is room in the case".
 
 ### Included
 
@@ -36,14 +60,14 @@ wrap the shell by hand, and descendant overflow at 375 px — is in
   It records what was chosen and why, including the five rejected accent
   placements and the two rejected nest geometries.
 - The instance is `opsz 12, wght 400`, and the reference shows the measurement
-  behind it: across the optical size axis the hairline of “e” varies from 5.89 to
+  behind it: across the optical size axis the hairline of "e" varies from 5.89 to
   1.34 units, so at `opsz 72` the word would need 564 px of width to keep that
   stroke at 1.5 px, against 164 px here. It is also the instance that sets the
   library's own text.
 - The grid is derived, not designed: a nest is the letter's ink plus the
   instance's mean side bearing (3.24) on all four sides, which makes the nests
   sum to the font's own advances exactly (420.42 against 420.42). The partition
-  between nests and the corner radius are one module — the stem of “p”, 8.77.
+  between nests and the corner radius are one module — the stem of "p", 8.77.
 - The accent is an empty nest after the word, as wide as the average nest
   (52.55): in a case, an empty nest means the sort is already set in the line and
   its place is still there.
@@ -52,21 +76,161 @@ wrap the shell by hand, and descendant overflow at 375 px — is in
   `checks.py` measures contours against the font, containment, gaps, the sums and
   the size limit. Every number printed in the reference comes from that
   measurement, so the document cannot drift away from the file it describes.
+- `docs/visual/typecase-mark.svg`: the icon master. An ink box, nine nests, one
+  letter and one empty nest as the accent. Four fills in three colours — the box
+  and the letter share one — no strokes, no embedded text and no metadata,
+  1.4 KB.
+- `docs/visual/typecase-icon.html`: the construction reference for the icon, in
+  the same genre. It records what the 3×3 sketches got wrong — the 64 field, the
+  1.5 stroke that puts every edge at 3.25 and 20.75, the letter set in Georgia,
+  the palette that belongs to no theme, and the accent painted on the occupied
+  nest instead of the empty one.
+- The grid is assigned and the letter is not: 6 + 24 + 6 + 24 + 6 + 24 + 6 = 96,
+  where 6 is both the outer field and the partition, and the radius is half a
+  module. The only assigned number of the letter is the cap height — 16.5, a
+  quarter of the wordmark's 66; the width (15.42) and the air (4.29 by 3.75)
+  follow from the glyph, whose contour matches the font's to 0.0065 %.
+- The accent rule is the wordmark's: the empty nest carries it, the occupied nest
+  never does. In the icon the letter sits in the left middle nest and the empty
+  one in the right middle — the line is started and there is still room.
+- Colour roles differ from the wordmark, and the reference measures why: the box
+  takes the darkest token of the theme, the nests the lightest, the letter the
+  colour of the box. That is 12.47:1 for a nest against the box in light and
+  13.33:1 in dark, against 1.18:1 for a nest lying on paper.
+- `docs/visual/tools/`: `typecase_icon.py` builds the icon from the same font
+  instance as the wordmark, `build_typecase_icon.py` releases the master and the
+  reference together, `icon_checks.py` measures the glyph against the font, the
+  grid, the halftones and the contrasts, and `raster.py` is the rasterizer it
+  uses — ready-made ones fill a polygon together with both borders, so an edge
+  lying exactly on a pixel never comes out clean.
 
 ### Not yet included
 
-- An icon. The 3×3 case sketches — `docs/visual/typecase-logo-v2.svg` and
-  `typecase-logo-bg.svg`, which differ only by a background plate — are a
-  separate piece of work with its own reference.
+- Raster frames of the icon. The 16 px and 32 px drawings exist as constructions;
+  `.ico` and PNG are not built from them.
+- The lock-up of the icon and the wordmark. Both references exist; the spacing
+  and the alignment between the two are described in neither.
+- The nest contrast inside the wordmark itself. On paper the nests measure
+  1.18:1 in light and 1.26:1 in dark — they disappear and only the word remains.
+  The icon works around it with the box; the wordmark has to be fixed on its own
+  terms, in its own reference.
+- The superseded sketches. `docs/visual/typecase-logo-v2.svg`,
+  `typecase-logo-bg.svg` and `typecase-wordmark-tiles.svg` are still on disk and
+  no longer describe anything.
 - A Cyrillic wordmark. There is none, and Literata set next to the mark stays
   text.
+
+## typecase/v0.4.0 — 2026-09-09
+
+Assembled screens match mockup drawing at 1280×900. Notes frames 7.4 close with
+`tc-pfield`, `tc-pick`, and `tc-docedit`. Palette gains `--tc-edge`, `--tc-hair`,
+and `--tc-dusty`; icons render through the `tc-i-*` sprite. Remaining mockup
+geometry is the `layout` package — [docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md).
+
+### For consumers (v0.3.0 → v0.4.0)
+
+- **`tc-pfield` / `tc-pfieldrow` for side panels and focus-edit frames.** Stacked
+  label-on-top fields (`PField`, `PFieldWidth`) and wrapped rows (`PFieldRow`).
+  `SideBlock` accepts `*PField` and `*PFieldRow`; form `tc-field` geometry is
+  unchanged.
+- **`tc-pick` for relation fields.** `InputPick` on `PField` with `Pick{ Chosen,
+  Query, Options, Manual, Open }` — removable chips, a real query input, candidate
+  list, manual UID entry as the last row. `tc.js` filters the list and adds chips.
+  Localise the chip button with `Labels.Remove` (default `"Remove"`).
+- **`DocEdit` for focus editing.** `Doc{ Edit: &DocEdit{ Title, Rows, Text } }`
+  replaces `Prose` in editing mode: title input, property rows, textarea.
+- **`DocBar.Sub` + `DocBar.Mark` for reading head.** Source line and actions
+  render as one frame (`tc-docbar--frame`).
+- **`DocMeta` extensions.** `MetaSection.Action` (e.g. Attach on Attachments) and
+  `DocMeta.Danger` at the foot of the meta column. `Rubric.Action` for the same
+  pattern in `tc-sec`.
+- **Redefine the palette if you override the bundle.** Three new required slots:
+  `--tc-edge`, `--tc-hair`, and `--tc-dusty` (light/dark values ship in the bundle).
+  `token.Validate` fails without them.
+- **`Icon` is a sprite id (`tc-i-*`), not a glyph or `#+` href.** Pass ids such as
+  `tc-i-plus`; empty string omits the icon node. Nav icons render through the sprite too.
+- **`Brand.SVG` replaces `Mark`/`Word` when set.** Inline `<svg>…</svg>` markup is
+  inserted as HTML; screens use the Carrel logo from `screens/carrel-logo.svg`.
+- **`Top.Refresh`** is an optional poll action between Create and User (`Label` is
+  the time caption, `Icon` is `tc-i-refresh`). Zero value hides the button.
+- **`Side.Size`**: `SideSizeWide` (`"wide"`) sets 440 px (`tc-side--wide`); default
+  stays 400 px. **`Side.Sub`** adds a panel subtitle under the title.
+- **`Menu.Kind`** styles the create control (`ButtonPrimary` + `tc-i-quill` on screens).
+- **`TickRow.Current`** marks the active source row (`is-current`, `--tc-card` background).
+- **Unlabeled `Field`** (`Label == ""`) omits the label node and the 10em column
+  (`tc-field--bare`): control and hint share one left edge.
+- **`tc-tickrow .tc-mark`** is the 3×14 px collection bar, not `--tc-row-height`.
+  Tickrow padding is 12/14 px. Empty `DocMeta` renders nothing.
+- **Excerpt `Row.Badges` live in the tags cell**, not after the grid. The excerpt
+  row is a six-column grid that includes the 3 px mark.
+- **`Mark.Colours`** draws equal horizontal stripes when more than one colour is given.
+- **Rank2 bar actions render as buttons first.** `tc.js` stashes them under «More» only
+  when the bar runs short; at 1280 px Import/Export stay visible on `/notes`.
+- **Assembled screens match mockup drawing** at 1280×900. The browser probe
+  (`screens_look_test.go`) checks nav 29 px and `--tc-card` current, tickrow 26,
+  `tc-main` on `--tc-bg`, list without border, sprite ids, `/notes` side 440 px,
+  Rank2 buttons, head title 22 px / line-height 1.15, and every `/states` mock.
+  Demo chrome lives in `.screens-chrome`; the product shell inside
+  `.screens-stage` uses `min-height: 100%`, not `100vh` with page chrome.
+  Look probe also checks: quick-sheet `tc-field--bare` and textarea/hint
+  alignment, sheet textarea min-height 132 px, tickrow mark 14 px and no
+  overlap with rail section titles. Search in the top bar is 560 px; the
+  shell rail is a flex column so chips and foot stay in the 1280×900 frame.
+
+### Included
+
+- `tc-pfield`, `tc-pfieldrow`, `tc-pick`, `tc-docedit`; `DocEdit`, `DocBar.Sub`,
+  `DocMeta.Danger`, `MetaSection.Action`, `Rubric.Action`, `SideBlock` pfield
+  kinds; notes frames 7.4 / read / edit assembled (`Э-7`…`Э-10`).
+- `screens-compose` locks panel fields on `/notes`, `tc-docbar--frame` on
+  `/notes-read`, and `tc-docedit` / `tc-pick` on `/notes-edit`.
+- Palette slots `--tc-edge`, `--tc-hair`, `--tc-dusty`; mockup-aligned shell CSS (nav
+  29 px, tickrow 26 px, transparent `tc-main`, list hairline, card selection).
+- Expanded `icons/sprite.svg`; sprite + logo defs embedded in screens and catalog pages.
+- `screens/carrel-logo.svg`; `Brand.SVG` on demo screens.
+- `Top.Refresh`, `Side.Size` / `Side.Sub`, `Menu.Kind`, `TickRow.Current`,
+  `Mark.Colours`, icon-only railfoot buttons, `DocBar.RightNodes`.
+- `gate/geometry`: nav 29, tickrow 26, tickrow pad 12/14, tickrow mark 14,
+  sheet textarea min-height 132, list `border-width` 0, head title 22 px.
+- `browser/screens_look_test.go`: per-screen look probe at 1280×900, including
+  `/states` frames, current-nav background, main surface, head title measure,
+  `/notes-quick` bare field, and rail mark height.
+- Demo `screens-chrome` + stage layout in `screens.css` / `PageHTML`.
+
+### Fixed
+
+- Rank2 Import/Export were only reachable through the bar overflow menu at desktop width.
+- Rail tag chips rendered above sections instead of after them.
+- Demo page chrome was counted in `.tc-shell { min-height: 100vh }`.
+- Head title used `line-height: 1.5` instead of 1.15; ink overflow is absorbed
+  by `padding-block` so the В-1 check does not return.
+- Notes reading frame omitted the panel-hide control (`tc-i-panel`).
+- Panel date, time and select did not fill their `tc-pfield` cells: native
+  date/time stayed 10em, and a class rewrite broke the select wrap.
+- `tc-pick` query was a span, so the field could not be typed.
+- Focus-edit padded twice (`.tc-doc__layout` and `.tc-docedit`).
+- Rubric `Action` inherited uppercase from `tc-rubric`.
+- Unlabeled sheet fields reserved a 10em label column, so the textarea sat to
+  the right of its hint.
+- Rail collection bars used list-row height (38 px) and painted through
+  section titles and neighbouring ticks.
+- Excerpt `linked` badges sat outside the six-column grid.
+- Empty `DocMeta` still emitted a 16em aside beside the edit textarea.
+- `.tc-rail { height: 100% }` overflowed chips and the rail foot below the
+  900 px frame; top search `flex: 1` stretched across the bar.
+
+### Not yet included
+
+- Calendar, tasks, find screens and remaining geometry — closed in Unreleased
+  ([docs/plan/typecase-layout.md](../docs/plan/typecase-layout.md)).
 
 ## typecase/v0.3.0 — 2026-09-07
 
 Screens assembled from widgets. Geometry matches the mockups; notes frames no
 longer bypass `tc-main`, `tc-bar`, or `tc-side`; `tc-seg` and `tc-top` collapse
-when width runs short. Remaining demo pages still wrap the shell by hand —
-[docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+when width runs short. Remaining demo pages still wrapped the shell by hand;
+that leftover is closed in Unreleased. The narrow rail's open control is also
+closed in Unreleased.
 
 ### For consumers (v0.2.0 → v0.3.0)
 
@@ -138,9 +302,8 @@ when width runs short. Remaining demo pages still wrap the shell by hand —
 
 ### Not yet included
 
-- Other assembled screens still wrap `tc-shell` by hand; descendant overflow
-  at 375 px is still skipped. See
-  [docs/plan/typecase-shell.md](../docs/plan/typecase-shell.md).
+- Narrow rail open control and hand-wrapped shells: closed in Unreleased.
+  The 375 px `OutOfBounds` skip of `.tc-main` is also closed there.
 
 ## typecase/v0.2.0 — 2026-09-05
 

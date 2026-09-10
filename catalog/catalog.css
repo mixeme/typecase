@@ -18,7 +18,7 @@
    In the catalog every state is on one page, so each such cell becomes its own
    containing block; otherwise one open scrim covers every other entry.
    Empty-looking space below overlay content is this min-height, not a broken widget. */
-.catalog-demo:has(.tc-scrim, .tc-overlay, .tc-rail--drawer, .tc-menu, .tc-usermenu, .tc-search) {
+.catalog-demo:has(.tc-scrim, .tc-overlay, .tc-rail--drawer, .tc-menu, .tc-usermenu, .tc-search, .tc-pick) {
 	position: relative;
 	min-height: 220px;
 	overflow: hidden;
@@ -27,6 +27,7 @@
 .catalog-demo:has(.tc-meter) {
 	padding-bottom: 1.25em;
 }
+.catalog-demo .tc-shell { min-height: 0; }
 
 /* Библиотека сбросила кегль заголовков (L-5.2), а страница каталога — это её
    собственная обвязка: её лестницу называем здесь, а не в бандле. */

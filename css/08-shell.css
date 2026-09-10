@@ -16,8 +16,19 @@
 	min-height: 0;
 	min-width: 0;
 	overflow-x: clip;
+	position: relative;
 }
-.tc-shell__rail { width: 264px; flex: none; }
+.tc-shell__rail {
+	width: 264px;
+	flex: none;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	padding-top: 12px;
+	gap: 16px;
+	border-right: var(--tc-stroke) solid var(--tc-rule);
+	background: var(--tc-surface);
+}
 .tc-shell__main { flex: 1; min-width: 0; }
 /* Ширину держит сама панель, а не обёртка: закрытая панель тогда
    схлопывает колонку, а не оставляет пустые 400 px. */
@@ -35,31 +46,79 @@
 	border-bottom: var(--tc-stroke) solid var(--tc-rule);
 	background: var(--tc-surface);
 }
-.tc-top__actions { margin-left: auto; display: flex; gap: 0.5em; align-items: center; flex: none; }
+.tc-top .tc-brand { flex: 1 1 0; min-width: 0; }
+.tc-top .tc-search { flex: 0 1 560px; width: 560px; max-width: 100%; }
+.tc-top__actions {
+	margin-left: 0;
+	display: flex;
+	gap: 0.5em;
+	align-items: center;
+	flex: 1 1 0;
+	justify-content: flex-end;
+	min-width: 0;
+}
 .tc-top [data-tc-top-stash] { display: none; }
 
 .tc-main {
 	display: flex;
 	flex-direction: column;
-	/* Тянется по своей колонке, как tc-rail и tc-side: иначе рабочая
-	   поверхность обрывается по высоте содержимого. */
 	height: 100%;
 	overflow: auto;
-	background: var(--tc-surface);
+	background: transparent;
 }
-.tc-main__body { flex: 1; padding: var(--tc-page-gutter); min-width: 0; }
+.tc-main__body {
+	flex: 1;
+	padding: 0;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+}
+.tc-main__body > .tc-doc { flex: 1; min-height: 0; }
+.tc-main__body > .tc-bar { min-width: 0; }
 
 .tc-rail {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	border-right: var(--tc-stroke) solid var(--tc-rule);
+	flex: 1 1 auto;
+	min-height: 0;
+	height: auto;
 	background: var(--tc-surface);
 }
 .tc-rail__sections { flex: 1; overflow: auto; }
-.tc-rail__chips { display: flex; flex-wrap: wrap; gap: 0.35em; padding: 0.5em var(--tc-page-gutter); border-bottom: var(--tc-stroke) solid var(--tc-rule); }
-.tc-rail--drawer { position: fixed; inset: 0; z-index: 90; width: 100%; transform: translateX(-100%); transition: transform 0.2s ease; }
+.tc-rail__chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	padding: 0 16px;
+	border-bottom: 0;
+	flex: none;
+}
+.tc-rail__chips .tc-chip {
+	border-radius: var(--tc-radius-sm);
+	min-height: 0;
+	height: 18px;
+	padding: 0 5px;
+	font-size: 10.5px;
+}
+.tc-rail--drawer {
+	position: fixed;
+	inset: 0;
+	z-index: 90;
+	width: 100%;
+	height: auto;
+	transform: translateX(-100%);
+	border-right: var(--tc-stroke) solid var(--tc-rule);
+}
+.tc-rail--drawer:not(.is-open) {
+	inset: auto;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	transform: none;
+}
 .tc-rail--drawer.is-open { transform: translateX(0); }
+.tc-shell--narrow .tc-rail--drawer { position: absolute; }
 .tc-rail--icons { width: 56px; }
 .tc-shell--narrow {
 	--tc-page-gutter: var(--tc-page-gutter-narrow);
@@ -68,7 +127,18 @@
 	width: 100%;
 	max-width: 100%;
 }
-.tc-nav--bottom { display: flex; flex-direction: row; }
+[data-tc-rail-toggle],
+[data-tc-rail-apply] { display: none; flex: none; }
+.tc-shell--narrow [data-tc-rail-toggle] { display: inline-flex; }
+.tc-shell--narrow:has(.tc-rail.is-open) [data-tc-rail-apply] {
+	display: inline-flex;
+	position: relative;
+	z-index: 1;
+}
+/* Search stays in the markup (L-4.1); the open sources panel is a mode, not a
+   Top parameter. Frame 10 has no field on that bar, and position:relative on
+   tc-search would otherwise paint over Apply. */
+.tc-shell--narrow:has(.tc-rail.is-open) .tc-search { display: none; }
 
 .tc-railsec { display: block; }
 .tc-railsec__title {
@@ -88,7 +158,19 @@
 	padding: 0.5em var(--tc-page-gutter);
 	border-top: var(--tc-stroke) solid var(--tc-rule);
 }
-.tc-railfoot__actions { display: flex; gap: 0.35em; margin-bottom: 0.35em; }
+.tc-railfoot__actions {
+	display: flex;
+	gap: 0.35em;
+	margin-bottom: 0.35em;
+	flex: none;
+}
+.tc-railfoot__actions .tc-btn {
+	flex: none;
+	width: 29px;
+	min-width: 29px;
+	padding-inline: 0;
+	justify-content: center;
+}
 .tc-railfoot__build {
 	display: block;
 	font-size: 0.8em;
@@ -96,6 +178,37 @@
 	text-decoration: none;
 }
 .tc-railfoot__build--missing { color: var(--tc-danger); }
+
+.tc-shell--narrow .tc-shell__rail {
+	width: 0;
+	flex: none;
+	overflow: visible;
+	border: none;
+	padding-top: 0;
+	gap: 0;
+}
+.tc-shell--narrow .tc-shell__rail > .tc-nav.tc-nav--bottom {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 85;
+	border-top: var(--tc-stroke) solid var(--tc-rule);
+	background: var(--tc-surface);
+}
+.tc-shell--narrow:has(.tc-nav--bottom) .tc-main {
+	padding-bottom: 44px;
+}
+.tc-shell--narrow .tc-shell__side {
+	position: fixed;
+	inset: 0;
+	z-index: 90;
+	width: auto;
+}
+.tc-shell--narrow .tc-side {
+	width: 100%;
+	max-width: 100%;
+}
 
 .tc-side {
 	position: relative;
@@ -106,55 +219,74 @@
 	border-left: var(--tc-stroke) solid var(--tc-rule);
 	background: var(--tc-surface);
 }
+.tc-side--wide { width: 440px; }
 .tc-side.is-closed { display: none; }
 .tc-side__head {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	padding: 0.75em var(--tc-page-gutter);
 	border-bottom: var(--tc-stroke) solid var(--tc-rule);
 }
-.tc-side__title { margin: 0; font-family: var(--tc-font-serif); font-size: 1.1em; }
+.tc-side__titles { flex: 1; min-width: 0; }
+.tc-side__title { margin: 0; font-family: var(--tc-font-serif); font-size: 19px; font-weight: 400; }
+.tc-side__sub { margin: 0.15em 0 0; color: var(--tc-muted); font-size: 0.9em; }
 .tc-side__head .tc-close { position: absolute; top: 8px; right: 8px; }
 .tc-side__body { flex: 1; overflow: auto; padding: var(--tc-page-gutter); }
 .tc-side__foot { border-top: var(--tc-stroke) solid var(--tc-rule); padding: 0.35em 0.5em; }
 
-.tc-nav { display: flex; flex-direction: column; gap: 0.15em; }
+.tc-nav { display: flex; flex-direction: column; gap: 1px; padding: 0 8px; flex: none; }
 .tc-nav--bottom { flex-direction: row; }
 .tc-nav__item {
 	display: flex;
 	align-items: center;
 	gap: 0.35em;
 	padding: 0.35em 0.5em;
-	min-height: var(--tc-row-height);
+	min-height: 29px;
+	font-size: 13.5px;
 	color: var(--tc-ink);
 	text-decoration: none;
 }
-.tc-nav__item.is-current { font-weight: 600; color: var(--tc-accent); }
-.tc-nav__icon { flex: none; }
+.tc-nav__item.is-current {
+	font-weight: 600;
+	color: var(--tc-ink);
+	background: var(--tc-card);
+}
+.tc-nav__icon-svg { width: 16px; height: 16px; flex: none; }
 .tc-nav__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tc-nav--bottom .tc-nav__item { min-height: 44px; flex: 1; justify-content: center; }
 
 .tc-head {
 	display: flex;
-	align-items: center;
-	gap: 0.75em;
-	padding: 0.75em var(--tc-page-gutter) 0;
-	border-bottom: var(--tc-stroke) solid var(--tc-rule);
-	margin-bottom: 1em;
+	align-items: flex-start;
+	gap: 16px;
+	padding: 15px var(--tc-page-gutter) 11px;
+	border-bottom: 0;
+	margin-bottom: 0;
 	min-height: 26px;
+	min-width: 0;
+	overflow: hidden;
+}
+.tc-head:has(+ .tc-bar) { padding-bottom: 4px; }
+.tc-main__body > .tc-bar {
+	padding: 7px var(--tc-page-gutter);
+	border-bottom: var(--tc-stroke) solid var(--tc-rule);
+}
+.tc-main__body > .tc-bar .tc-in {
+	width: 200px;
+	flex: none;
+	min-height: 26px;
+	height: 26px;
 }
 .tc-head__titles { flex: 1; min-width: 0; }
+.tc-head > .tc-bar { flex: 0 1 auto; min-width: 0; max-width: 100%; overflow: hidden; }
 .tc-head__title {
 	margin: 0;
 	font-family: var(--tc-font-serif);
-	/* 22 px по макету при базе 13; вес обычный — крупность и есть ранг.
-	   Межстрочное не 1.15, как в макете: здесь заголовок обрезается многоточием,
-	   и строчный бокс обязан покрывать шрифтовой, иначе возвращается В-1.
-	   Шрифтовой бокс Literata — 1.48 кегля, отсюда 1.5. */
-	font-size: 1.6em;
+	font-size: 22px;
 	font-weight: 400;
-	line-height: 1.5;
+	line-height: 1.15;
+	padding-block: 0.28em 0.2em;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -169,7 +301,12 @@
 	color: var(--tc-muted);
 	overflow: hidden;
 	white-space: nowrap;
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: 100%;
 }
-.tc-crumbs__link { color: var(--tc-accent); text-decoration: none; }
-.tc-crumbs__sep { color: var(--tc-muted); margin: 0 0.25em; }
-.tc-crumbs__current { color: var(--tc-ink); }
+.tc-crumbs [data-tc-crumbs-stash] { display: none; }
+.tc-crumbs__ellipsis { flex: none; }
+.tc-crumbs__link { color: var(--tc-accent); text-decoration: none; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+.tc-crumbs__sep { color: var(--tc-muted); margin: 0 0.25em; flex: none; }
+.tc-crumbs__current { color: var(--tc-ink); overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }

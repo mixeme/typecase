@@ -3,15 +3,16 @@ package widget
 // Shell — tc-shell
 //
 // Роль. Четыре зоны страницы и переходы между раскладками по ширине.
-// Вход. Shell{ Top, Rail, Main, Side, Density, Narrow }.
+// Вход. Shell{ Top, Nav, Rail, Main, Side, Density, Narrow }.
 // Состояния. wide | narrow; по ширине окна.
 // Инварианты. Пятой зоны нет; раскладка считается виджетом.
 // Поведение. Следит за шириной; рейл становится выдвижной панелью.
-// Геометрия. Рейл 264/232/56px; side 400px.
-// Содержимое. tc-top, tc-rail, tc-main, tc-side.
+// Геометрия. Рейл 264/232/56px; side 400px, wide 440px.
+// Содержимое. tc-top, tc-nav, tc-rail, tc-main, tc-side.
 // Чего нет. Нет своей прокрутки страницы.
 type Shell struct {
 	Top     Top
+	Nav     Nav
 	Rail    Rail
 	Main    Main
 	Side    Side
@@ -28,13 +29,42 @@ func (s Shell) Render() string {
 	if s.Narrow {
 		cls = classes(cls, "tc-shell--narrow")
 	}
-	return `<div` + classAttr(cls) + ` data-tc-shell data-tc-root>` + s.Top.Render() + `<div class="tc-shell__body"><div class="tc-shell__rail">` + s.Rail.Render() + `</div><div class="tc-shell__main">` + s.Main.Render() + `</div><div class="tc-shell__side">` + s.Side.Render() + `</div></div></div>`
+	body := `<div class="tc-shell__body">`
+	if !s.Nav.IsZero() || !s.Rail.IsZero() {
+		body += `<div class="tc-shell__rail">`
+		if !s.Nav.IsZero() {
+			body += s.Nav.Render()
+		}
+		if !s.Rail.IsZero() {
+			body += s.Rail.Render()
+		}
+		body += `</div>`
+	}
+	body += `<div class="tc-shell__main">` + s.Main.Render() + `</div>`
+	if !s.Side.IsZero() {
+		body += `<div class="tc-shell__side">` + s.Side.Render() + `</div>`
+	}
+	body += `</div>`
+	hasRailCol := !s.Nav.IsZero() || !s.Rail.IsZero()
+	shellAttr := ` data-tc-shell data-tc-root`
+	if s.Narrow {
+		shellAttr += ` data-tc-shell-narrow`
+	}
+	return `<div` + classAttr(cls) + shellAttr + `>` + s.Top.render(hasRailCol) + body + `</div>`
+}
+
+func shellRailToggleBtn() string {
+	return `<button type="button" class="tc-btn tc-btn--bar tc-btn--normal" data-tc-rail-toggle><span class="tc-btn__label">` + esc(labels.Sources) + `</span></button>`
+}
+
+func shellRailApplyBtn() string {
+	return `<button type="button" class="tc-btn tc-btn--bar tc-btn--primary" data-tc-rail-apply><span class="tc-btn__label">` + esc(labels.Apply) + `</span></button>`
 }
 
 // Top — tc-top
 //
 // Роль. Знак, поиск, создание, меню учётной записи. Одна на страницу.
-// Вход. Top{ Brand, Nav, Search, Create, User, Mark }.
+// Вход. Top{ Brand, Nav, Search, Create, Refresh, User, Mark }.
 // Состояния. normal | full.
 // Инварианты. Знак один раз слева; поиск виден всегда.
 // Поведение. Отступление правой группы; меню создания и учётной записи.
@@ -42,15 +72,20 @@ func (s Shell) Render() string {
 // Содержимое. tc-brand, tc-search, tc-menu, tc-usermenu, tc-nav.
 // Чего нет. Нет второй строки.
 type Top struct {
-	Brand  Brand
-	Nav    Nav
-	Search Search
-	Create Menu
-	User   UserMenu
-	Mark   Mark
+	Brand   Brand
+	Nav     Nav
+	Search  Search
+	Create  Menu
+	Refresh Action
+	User    UserMenu
+	Mark    Mark
 }
 
 func (t Top) Render() string {
+	return t.render(false)
+}
+
+func (t Top) render(railChrome bool) string {
 	cls := "tc-top"
 	create := ""
 	if t.Create.Label != "" || t.Create.Icon != "" || len(t.Create.Items) > 0 {
@@ -60,12 +95,22 @@ func (t Top) Render() string {
 	if t.User.Name != "" || len(t.User.Items) > 0 {
 		user = t.User.Render()
 	}
+	refresh := ""
+	if t.Refresh.Label != "" || t.Refresh.Icon != "" {
+		refresh = t.Refresh.Render()
+	}
 	nav := t.Nav.Render()
 	// Поиск рисуется всегда: «поле не убирается параметром» — инвариант tc-top,
 	// а не недосмотр. Ширину ему задаёт геометрия панели, а не наличие входа.
 	search := t.Search.Render()
 	mark := t.Mark.Render()
-	return `<header` + classAttr(cls) + ` data-tc-top` + attr("data-tc-more", labels.More) + `>` + t.Brand.Render() + nav + search + `<div class="tc-top__actions">` + create + user + `</div>` + mark + `</header>`
+	chrome := ""
+	apply := ""
+	if railChrome {
+		chrome = shellRailToggleBtn()
+		apply = shellRailApplyBtn()
+	}
+	return `<header` + classAttr(cls) + ` data-tc-top` + attr("data-tc-more", labels.More) + `>` + chrome + t.Brand.Render() + nav + search + `<div class="tc-top__actions">` + apply + create + refresh + user + `</div>` + mark + `</header>`
 }
 
 // Main — tc-main
@@ -107,6 +152,19 @@ type Rail struct {
 	Open     bool
 }
 
+func (r Rail) IsZero() bool {
+	if r.Note != "" || r.Drawer || r.Open || r.Layout != "" {
+		return false
+	}
+	if len(r.Chips) > 0 || len(r.Sections) > 0 {
+		return false
+	}
+	if len(r.Foot.Actions) > 0 {
+		return false
+	}
+	return r.Foot.Build == Build{}
+}
+
 func (r Rail) Render() string {
 	cls := "tc-rail"
 	layout := r.Layout
@@ -136,7 +194,7 @@ func (r Rail) Render() string {
 	if r.Note != "" {
 		note = `<p class="tc-rail__note">` + esc(r.Note) + `</p>`
 	}
-	return `<aside` + classAttr(cls) + ` data-tc-rail` + ariaBool("aria-expanded", r.Open) + `>` + chips + `<div class="tc-rail__sections">` + secs + `</div>` + note + r.Foot.Render() + `</aside>`
+	return `<aside` + classAttr(cls) + ` data-tc-rail` + ariaBool("aria-expanded", r.Open) + `><div class="tc-rail__sections">` + secs + `</div>` + chips + note + r.Foot.Render() + `</aside>`
 }
 
 // RailSection — tc-railsec
@@ -180,7 +238,7 @@ func (rs RailSection) Render() string {
 // Состояния. нет.
 // Инварианты. Подпись сборки всегда последняя; пустой Build — видимо.
 // Поведение. нет.
-// Геометрия. Действия одна строка; подпись под ними.
+// Геометрия. Квадраты со значком, не делят ширину; подпись под ними.
 // Содержимое. tc-btn.
 // Чего нет. Нет меню.
 type RailFoot struct {
@@ -193,6 +251,9 @@ func (rf RailFoot) Render() string {
 	for _, a := range rf.Actions {
 		aa := a
 		aa.Size = ButtonSizeBar
+		if aa.Icon != "" {
+			aa.IconOnly = true
+		}
 		acts += aa.Render()
 	}
 	build := rf.Build.Render()
@@ -216,23 +277,35 @@ func (b Build) Render() string {
 // Side — tc-side
 //
 // Роль. Колонка справа, отвечающая на выделение.
-// Вход. Side{ Label, Title, Blocks, Actions, Open }.
+// Вход. Side{ Label, Title, Sub, Blocks, Actions, Open, Size }.
 // Состояния. open | closed.
 // Инварианты. Закрывается крестиком, кнопкой и Esc.
 // Поведение. Открытие, закрытие, возврат фокуса.
-// Геометрия. 400px; содержимое прокручивается.
-// Содержимое. tc-sec, tc-fields, tc-field, tc-btn, tc-bar.
-// Чего нет. Своей семантики сохранения нет; tc-field в панели допустим.
+// Геометрия. 400px, Size wide — 440px; содержимое прокручивается.
+// Содержимое. tc-sec, tc-fields, tc-field, tc-pfield, tc-pfieldrow, tc-btn, tc-bar.
+// Чего нет. Своей семантики сохранения нет: панель несёт tc-pfield, не сетку tc-field.
 type Side struct {
 	Label   string
 	Title   string
+	Sub     string
 	Blocks  []SideBlock
 	Actions []Action
 	Open    bool
+	Size    SideSize
+}
+
+func (s Side) IsZero() bool {
+	if s.Open || s.Label != "" || s.Title != "" {
+		return false
+	}
+	return len(s.Blocks) == 0 && len(s.Actions) == 0
 }
 
 func (s Side) Render() string {
 	cls := "tc-side"
+	if s.Size == SideSizeWide {
+		cls = classes(cls, "tc-side--wide")
+	}
 	if s.Open {
 		cls = classes(cls, "is-open")
 	} else {
@@ -243,7 +316,11 @@ func (s Side) Render() string {
 		blocks += b.Render()
 	}
 	id := uniqueID("tc-side")
-	return `<aside` + classAttr(cls) + ` data-tc-side` + attr("id", id) + attr("aria-label", s.Label) + `><header class="tc-side__head"><h2 class="tc-side__title">` + esc(s.Title) + `</h2>` + Close{For: id, Label: labels.ClosePanel}.Render() + `</header><div class="tc-side__body">` + blocks + `</div><footer class="tc-side__foot">` + Bar{Left: ActionsAsNodes(s.Actions)}.Render() + `</footer></aside>`
+	sub := ""
+	if s.Sub != "" {
+		sub = `<p class="tc-side__sub">` + esc(s.Sub) + `</p>`
+	}
+	return `<aside` + classAttr(cls) + ` data-tc-side` + attr("id", id) + attr("aria-label", s.Label) + `><header class="tc-side__head"><div class="tc-side__titles"><h2 class="tc-side__title">` + esc(s.Title) + `</h2>` + sub + `</div>` + Close{For: id, Label: labels.ClosePanel}.Render() + `</header><div class="tc-side__body">` + blocks + `</div><footer class="tc-side__foot">` + Bar{Left: ActionsAsNodes(s.Actions)}.Render() + `</footer></aside>`
 }
 
 func (b SideBlock) kindCount() int {
@@ -255,6 +332,12 @@ func (b SideBlock) kindCount() int {
 		n++
 	}
 	if b.Field != nil {
+		n++
+	}
+	if b.PField != nil {
+		n++
+	}
+	if b.PFieldRow != nil {
 		n++
 	}
 	return n
@@ -272,7 +355,13 @@ func (b SideBlock) Render() string {
 		if b.Fields != nil {
 			return b.Fields.Render()
 		}
-		return b.Field.Render()
+		if b.Field != nil {
+			return b.Field.Render()
+		}
+		if b.PField != nil {
+			return b.PField.Render()
+		}
+		return b.PFieldRow.Render()
 	default:
 		return ""
 	}
@@ -285,13 +374,17 @@ func (b SideBlock) Render() string {
 // Состояния. column | icons | bottom.
 // Инварианты. Отмечен ровно один текущий пункт.
 // Поведение. Ходьба клавишами, подсказки в раскладке значков.
-// Геометрия. Высота строки фиксирована.
+// Геометрия. Высота строки 29px; текущий — --tc-card.
 // Содержимое. tc-num.
 // Чего нет. Не сворачивается в меню.
 type Nav struct {
 	Items   []NavItem
 	Current string
 	Layout  NavLayout
+}
+
+func (n Nav) IsZero() bool {
+	return len(n.Items) == 0
 }
 
 func (n Nav) Render() string {
@@ -308,7 +401,7 @@ func (n Nav) Render() string {
 		if it.Href == n.Current {
 			cls = classes(cls, "is-current")
 		}
-		items += `<a href="` + esc(it.Href) + `"` + classAttr(cls) + `><span class="tc-nav__icon" aria-hidden="true">` + esc(it.Icon) + `</span><span class="tc-nav__label">` + esc(it.Label) + `</span>` + Num{Value: it.Count}.Render() + `</a>`
+		items += `<a href="` + esc(it.Href) + `"` + classAttr(cls) + `>` + renderNavIcon(it.Icon) + `<span class="tc-nav__label">` + esc(it.Label) + `</span>` + Num{Value: it.Count}.Render() + `</a>`
 	}
 	return `<nav` + classAttr("tc-nav", "tc-nav--"+string(layout)) + ` aria-label="` + esc(labels.Main) + `">` + items + `</nav>`
 }
@@ -320,7 +413,7 @@ func (n Nav) Render() string {
 // Состояния. нет.
 // Инварианты. Действия справа не наезжают на заголовок.
 // Поведение. Отступление действий по рангу.
-// Геометрия. Одна строка заголовка и подзаголовка.
+// Геометрия. Заголовок 22px Literata, line-height 1.15.
 // Содержимое. tc-crumbs, tc-btn, tc-menu, tc-mark.
 // Чего нет. Нет поиска.
 type Head struct {
@@ -365,5 +458,5 @@ func (c Crumbs) Render() string {
 			parts += `<a href="` + esc(item.Href) + `" class="tc-crumbs__link">` + esc(item.Label) + `</a>`
 		}
 	}
-	return `<nav class="tc-crumbs" aria-label="` + esc(labels.Breadcrumb) + `">` + parts + `</nav>`
+	return `<nav class="tc-crumbs" data-tc-crumbs aria-label="` + esc(labels.Breadcrumb) + `">` + parts + `</nav>`
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"carrel.dev/typecase"
 	"carrel.dev/typecase/widget"
 )
 
@@ -35,7 +36,7 @@ func Entries() []Entry {
 	}
 
 	// Primitives
-	add("primitives", "tc-btn", "normal", widget.Button{Label: "Save", Icon: "+"}.Render())
+	add("primitives", "tc-btn", "normal", widget.Button{Label: "Save", Icon: "tc-i-plus"}.Render())
 	add("primitives", "tc-btn", "primary", widget.Button{Label: "Create", Kind: widget.ButtonPrimary}.Render())
 	add("primitives", "tc-btn", "danger", widget.Button{Label: "Delete permanently", Kind: widget.ButtonDanger}.Render())
 	add("primitives", "tc-btn", "disabled", widget.Button{Label: "Unavailable", Reason: "Nothing selected"}.Render())
@@ -89,22 +90,23 @@ func Entries() []Entry {
 	add("lists", "tc-row--lead", "default", widget.Row{Variant: widget.RowLead, Cells: widget.RowCells{Lead: "09:00", Title: "Standup", Subtitle: "Room A"}}.Render())
 	add("lists", "tc-row--tick", "default", widget.Row{Variant: widget.RowTick, Cells: widget.RowCells{Title: "Task", Due: "Fri"}}.Render())
 	add("lists", "tc-row--excerpt", "default", widget.Row{Variant: widget.RowExcerpt, Cells: widget.RowCells{Title: "Post", Excerpt: "First lines of content…", Tags: []widget.Tag{{Label: "draft", Href: "/tags/draft"}}, Date: "10 Aug", Source: "nextcloud · Notes"}}.Render())
-	add("lists", "tc-row--meta", "default", widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Icon: "📄", Name: "readme.txt", Size: "2 KB", Time: "10:30"}}.Render())
+	add("lists", "tc-row--meta", "default", widget.Row{Variant: widget.RowMeta, Cells: widget.RowCells{Icon: "tc-i-doc", Name: "readme.txt", Size: "2 KB", Time: "10:30"}}.Render())
 	add("lists", "tc-row--find", "default", widget.Row{Variant: widget.RowFind, Cells: widget.RowCells{Icon: "⌕", Title: "Query", Detail: "Jump to section", Caption: "Recent"}}.Render())
 	add("lists", "tc-tickrow", "ok", widget.TickRow{Label: "Inbox", Tick: widget.TickOn, Count: &n}.Render())
-	add("lists", "tc-rubric", "default", widget.Rubric{Text: "Section", Count: &n}.Render())
+	add("lists", "tc-rubric", "default", widget.Rubric{Text: "Section", Count: &n, Action: &widget.Action{Label: "Attach"}}.Render())
 
 	// Tables
 	add("tables", "tc-table", "normal", widget.Table{Columns: []widget.Column{{Label: "Name", Kind: widget.ColText}, {Label: "Count", Kind: widget.ColNumber}}, Rows: []widget.TableRow{{Cells: []string{"Alpha", "1"}, Actions: []widget.Action{{Label: "Open", Href: "/a"}}}}}.Render())
-	add("tables", "tc-grid", "default", widget.Grid{Tiles: []widget.Tile{{Name: "Photo", Icon: "🖼"}}}.Render())
-	add("tables", "tc-tile", "icon", widget.Tile{Name: "Document", Icon: "📄"}.Render())
-	add("tables", "tc-thumb", "icon", widget.Thumb{Icon: "📄"}.Render())
+	add("tables", "tc-grid", "default", widget.Grid{Tiles: []widget.Tile{{Name: "Photo", Icon: "tc-i-img"}}}.Render())
+	add("tables", "tc-tile", "icon", widget.Tile{Name: "Document", Icon: "tc-i-doc"}.Render())
+	add("tables", "tc-thumb", "icon", widget.Thumb{Icon: "tc-i-doc"}.Render())
 	add("tables", "tc-tree", "default", widget.Tree{Nodes: []widget.TreeNode{{ID: "a", Label: "Root", Open: true, Children: []widget.TreeNode{{ID: "b", Label: "Child"}}}}, Chosen: "b"}.Render())
 	p := 60
 	add("tables", "tc-queue", "running", widget.Queue{Rows: []widget.QueueRow{{Label: "Import", State: widget.QueueRunning, Percent: &p}}}.Render())
 
 	// Shell
-	add("shell", "tc-shell", "wide", widget.Shell{Top: widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}}, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}, Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Content")}}}.Render())
+	shellSide := widget.Side{Label: "Details", Title: "Item", Open: false, Blocks: []widget.SideBlock{{Sec: &widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}}}}
+	add("shell", "tc-shell", "wide", widget.Shell{Top: widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}}, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}, Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Content")}}, Side: shellSide}.Render())
 	add("shell", "tc-top", "normal", widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}, Search: widget.Search{Action: "/search"}}.Render())
 	add("shell", "tc-main", "default", widget.Main{Label: "Workspace", Body: []widget.Node{widget.Paragraph("Main area")}}.Render())
 	add("shell", "tc-rail", "column", railDemo(widget.Rail{Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}}}))
@@ -113,7 +115,7 @@ func Entries() []Entry {
 	add("shell", "tc-railfoot", "default", widget.RailFoot{Actions: []widget.Action{{Label: "Apply"}}, Build: demoBuild}.Render())
 	add("shell", "tc-railfoot", "missing", widget.RailFoot{Actions: []widget.Action{{Label: "Apply"}}}.Render())
 	add("shell", "tc-side", "open", widget.Side{Label: "Details", Title: "Item", Open: true, Blocks: []widget.SideBlock{{Sec: &widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}}}}.Render())
-	add("shell", "tc-nav", "column", widget.Nav{Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}, {Label: "Settings", Icon: "⚙", Href: "/settings"}}, Current: "/"}.Render())
+	add("shell", "tc-nav", "column", widget.Nav{Items: []widget.NavItem{{Label: "Home", Icon: "tc-i-note", Href: "/"}, {Label: "Settings", Icon: "tc-i-gear", Href: "/settings"}}, Current: "/"}.Render())
 	add("shell", "tc-head", "default", widget.Head{Crumbs: widget.Crumbs{Items: []widget.Crumb{{Label: "Home", Href: "/"}, {Label: "Page"}}}, Title: "Page", Sub: "Subtitle"}.Render())
 	add("shell", "tc-crumbs", "default", widget.Crumbs{Items: []widget.Crumb{{Label: "Root", Href: "/"}, {Label: "Here"}}}.Render())
 
@@ -121,7 +123,16 @@ func Entries() []Entry {
 	add("document", "tc-doc", "reading", widget.Doc{Mode: widget.DocReading, Body: widget.Paragraph("Document body.")}.Render())
 	add("document", "tc-prose", "default", widget.Prose{Blocks: []widget.ProseBlock{{Kind: widget.ProseH2, Text: "Heading"}, {Kind: widget.ProseP, Text: "Paragraph."}}}.Render())
 	add("document", "tc-docbar", "dirty", widget.DocBar{Dirty: true, Left: []widget.Action{{Label: "Save", Kind: widget.ButtonPrimary}}}.Render())
-	add("document", "tc-docmeta", "default", widget.DocMeta{Sections: []widget.MetaSection{{Title: "Tags", Tags: []widget.Tag{{Label: "draft", On: true}}}}}.Render())
+	add("document", "tc-docbar", "frame", widget.DocBar{Sub: "nextcloud · Notes · 10 Aug", Mark: widget.Mark{Colour: "#4A6B52", Label: "Notes"}, Left: []widget.Action{{Label: "Edit", Kind: widget.ButtonPrimary}}}.Render())
+	add("document", "tc-docedit", "default", widget.DocEdit{Title: "Meeting note", Rows: []widget.PFieldRow{{Fields: []widget.PField{{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10", Width: widget.PFieldWidthSM}, {Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05", Width: widget.PFieldWidthXS}}}}, Text: "Body text."}.Render())
+	add("document", "tc-docmeta", "default", widget.DocMeta{Sections: []widget.MetaSection{{Title: "Tags", Action: &widget.Action{Label: "Attach"}, Tags: []widget.Tag{{Label: "draft", On: true}}}}, Danger: &widget.Action{Label: "Delete note", Kind: widget.ButtonDanger}}.Render())
+	add("forms", "tc-pfield", "normal", widget.PField{Name: "title", Label: "Title", Kind: widget.InputText, Value: "Note", Width: widget.PFieldWidthFull}.Render())
+	add("forms", "tc-pfield", "error", widget.PField{Name: "pfield-email", Label: "Email", Kind: widget.InputEmail, Error: "Invalid address", Width: widget.PFieldWidthFull}.Render())
+	add("forms", "tc-pfield", "read-only", widget.PField{Name: "id", Label: "ID", Kind: widget.InputText, Value: "42", ReadOnly: true, Width: widget.PFieldWidthSM}.Render())
+	add("forms", "tc-pfield", "disabled", widget.PField{Name: "role", Label: "Role", Kind: widget.InputText, Disabled: true, Width: widget.PFieldWidthMD}.Render())
+	add("forms", "tc-pfieldrow", "default", widget.PFieldRow{Fields: []widget.PField{{Name: "date", Label: "Date", Kind: widget.InputDate, Value: "2026-08-10", Width: widget.PFieldWidthSM}, {Name: "time", Label: "Time", Kind: widget.InputTime, Value: "11:05", Width: widget.PFieldWidthXS}}}.Render())
+	add("forms", "tc-pick", "closed", widget.Pick{Name: "related", Label: "Related to", Chosen: []string{"Sync-up"}}.Render())
+	add("forms", "tc-pick", "open", widget.Pick{Name: "related", Label: "Related to", Chosen: []string{"Sync-up"}, Query: "kov", Open: true, Options: []widget.PickItem{{Label: "Call", Hint: "10 Aug", Icon: "tc-i-cal"}}, Manual: "Enter a UID by hand"}.Render())
 
 	// Utility
 	add("utility", "tc-search", "idle", widget.Search{Action: "/search", Query: ""}.Render())
@@ -188,11 +199,24 @@ func Entries() []Entry {
 	add("tables", "tc-queue", "partial", widget.Queue{Rows: []widget.QueueRow{{Label: "Partial", State: widget.QueuePartial}}}.Render())
 	add("tables", "tc-queue", "cancelled", widget.Queue{Rows: []widget.QueueRow{{Label: "Cancelled", State: widget.QueueCancelled}}}.Render())
 
-	add("shell", "tc-shell", "narrow", widget.Shell{Narrow: true, Rail: widget.Rail{Foot: widget.RailFoot{Build: demoBuild}}, Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Narrow")}}}.Render())
+	add("shell", "tc-shell", "narrow", widget.Shell{
+		Narrow: true,
+		Top:    widget.Top{Brand: widget.Brand{Mark: "◆", Word: "App"}},
+		Nav: widget.Nav{
+			Items:   []widget.NavItem{{Label: "Notes", Icon: "tc-i-note", Href: "/notes"}, {Label: "Files", Icon: "tc-i-file", Href: "/files"}},
+			Current: "/notes",
+		},
+		Rail: widget.Rail{
+			Foot:     widget.RailFoot{Build: demoBuild},
+			Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All", Tick: widget.TickOn}}}},
+		},
+		Main: widget.Main{Label: "Main", Body: []widget.Node{widget.Paragraph("Narrow")}},
+		Side: shellSide,
+	}.Render())
 	add("shell", "tc-top", "full", widget.Top{
 		Brand:  widget.Brand{Mark: "◆", Word: "App"},
 		Search: widget.Search{Action: "/search"},
-		Create: widget.Menu{Label: "New", Icon: "✎", Items: []widget.MenuItem{{Label: "Item", Href: "/new"}}},
+		Create: widget.Menu{Label: "New", Kind: widget.ButtonPrimary, Icon: "tc-i-quill", Items: []widget.MenuItem{{Label: "Item", Href: "/new"}}},
 		User:   widget.UserMenu{Name: "user", Items: []widget.MenuItem{{Label: "Sign out", Href: "/logout"}}},
 	}.Render())
 	add("shell", "tc-rail", "icons", railDemo(widget.Rail{Layout: widget.RailLayoutIcons, Sections: []widget.RailSection{{Title: "Views", Rows: []widget.TickRow{{Label: "All"}}}}}))
@@ -200,10 +224,10 @@ func Entries() []Entry {
 	add("shell", "tc-railsec", "muted", widget.RailSection{Title: "Muted", State: widget.RailSecMuted, Rows: []widget.TickRow{{Label: "One"}}}.Render())
 	add("shell", "tc-railsec", "alert", widget.RailSection{Title: "Alert", State: widget.RailSecAlert, Rows: []widget.TickRow{{Label: "One"}}}.Render())
 	add("shell", "tc-side", "closed", widget.Side{Label: "Details", Title: "Item", Open: false, Blocks: []widget.SideBlock{{Sec: &widget.Sec{Rubric: widget.Rubric{Text: "Info"}, Body: []widget.Node{widget.Paragraph("Details")}}}}}.Render())
-	add("shell", "tc-nav", "icons", widget.Nav{Layout: widget.NavLayoutIcons, Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}}, Current: "/"}.Render())
-	add("shell", "tc-nav", "bottom", widget.Nav{Layout: widget.NavLayoutBottom, Items: []widget.NavItem{{Label: "Home", Icon: "⌂", Href: "/"}}, Current: "/"}.Render())
+	add("shell", "tc-nav", "icons", widget.Nav{Layout: widget.NavLayoutIcons, Items: []widget.NavItem{{Label: "Home", Icon: "tc-i-note", Href: "/"}}, Current: "/"}.Render())
+	add("shell", "tc-nav", "bottom", widget.Nav{Layout: widget.NavLayoutBottom, Items: []widget.NavItem{{Label: "Home", Icon: "tc-i-note", Href: "/"}}, Current: "/"}.Render())
 
-	add("document", "tc-doc", "editing", widget.Doc{Mode: widget.DocEditing, Body: widget.Paragraph("Editing.")}.Render())
+	add("document", "tc-doc", "editing", widget.Doc{Mode: widget.DocEditing, Edit: &widget.DocEdit{Title: "Meeting note", Text: "Editing."}}.Render())
 	add("document", "tc-docbar", "full", widget.DocBar{Left: []widget.Action{{Label: "Save", Kind: widget.ButtonPrimary}}}.Render())
 	add("document", "tc-docbar", "collapsed", widget.DocBar{Collapsed: true, Left: []widget.Action{{Label: "Save"}}}.Render())
 
@@ -239,6 +263,11 @@ func PageHTML(title string, entries []Entry, withJS bool) string {
 	if withJS {
 		js = `<script src="/tc.js"></script>`
 	}
+	sprite, err := typecase.Sprite()
+	if err != nil {
+		sprite = nil
+	}
+	defs := string(sprite)
 	return fmt.Sprintf(`<!DOCTYPE html>
 <html lang="en" data-tc-root>
 <head>
@@ -250,12 +279,13 @@ func PageHTML(title string, entries []Entry, withJS bool) string {
 <link rel="stylesheet" href="/catalog.css">
 </head>
 <body data-tc-root>
+<div hidden aria-hidden="true">%s</div>
 <header class="catalog-nav"><a href="/">With behavior</a><a href="/static">Without behavior</a></header>
 <h1>%s</h1>
 %s
 %s
 </body>
-</html>`, title, title, sections.String(), js)
+</html>`, title, defs, title, sections.String(), js)
 }
 
 func slug(s string) string {

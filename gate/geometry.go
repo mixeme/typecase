@@ -55,11 +55,18 @@ func CheckGeometryCSS(cssText string) error {
 		want     float64
 	}{
 		{".tc-row", "gap", 12},
-		{".tc-tickrow", "padding-left", 16},
-		{".tc-tickrow", "padding-right", 16},
+		{".tc-tickrow", "padding-left", 12},
+		{".tc-tickrow", "padding-right", 14},
+		{".tc-tickrow", "min-height", 26},
+		{".tc-tickrow .tc-mark", "height", 14},
+		{".tc-tickrow .tc-mark", "min-height", 14},
+		{".tc-sheet .tc-in--textarea", "min-height", 132},
+		{".tc-nav__item", "min-height", 29},
 		{".tc-top", "min-height", 52},
 		{".tc-btn", "min-height", 26},
 		{".tc-btn--form", "min-height", 28},
+		{".tc-list", "border-top-width", 0},
+		{".tc-head__title", "font-size", 22},
 	}
 	rules := ruleValues(cssText)
 	for _, rc := range ruleChecks {

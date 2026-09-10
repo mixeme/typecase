@@ -2,13 +2,14 @@ package widget
 
 // Action is a labeled control used in bars, forms, and menus.
 type Action struct {
-	Label  string
-	Icon   string
-	Href   string
-	Method string
-	Kind   ButtonKind
-	Size   ButtonSize
-	Reason string
+	Label    string
+	Icon     string
+	Href     string
+	Method   string
+	Kind     ButtonKind
+	Size     ButtonSize
+	Reason   string
+	IconOnly bool
 }
 
 // Render returns the tc-btn markup for this action.
@@ -56,6 +57,7 @@ const (
 	InputURL      InputKind = "url"
 	InputPassword InputKind = "password"
 	InputSelect   InputKind = "select"
+	InputPick     InputKind = "pick"
 	InputTextarea InputKind = "textarea"
 )
 
@@ -100,6 +102,14 @@ const (
 	NavLayoutColumn NavLayout = "column"
 	NavLayoutIcons  NavLayout = "icons"
 	NavLayoutBottom NavLayout = "bottom"
+)
+
+// SideSize is the width tier of tc-side.
+type SideSize string
+
+const (
+	SideSizeDefault SideSize = ""
+	SideSizeWide    SideSize = "wide"
 )
 
 // ThumbSize is the geometry tier of tc-thumb.
@@ -400,17 +410,20 @@ type JumpRow struct {
 
 // MetaSection is one section in doc meta.
 type MetaSection struct {
-	Title string
-	Tags  []Tag
-	Rows  []FieldRow
-	Rows2 []Row
+	Title  string
+	Action *Action
+	Tags   []Tag
+	Rows   []FieldRow
+	Rows2  []Row
 }
 
-// SideBlock is one block in the side panel: exactly one of Sec, Fields, or Field.
+// SideBlock is one block in the side panel: exactly one kind.
 type SideBlock struct {
-	Sec    *Sec
-	Fields *Fields
-	Field  *Field
+	Sec       *Sec
+	Fields    *Fields
+	Field     *Field
+	PField    *PField
+	PFieldRow *PFieldRow
 }
 
 // ListGroup is a rubric and its rows.

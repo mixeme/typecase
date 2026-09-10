@@ -1,5 +1,7 @@
 package widget
 
+import "strings"
+
 // List — tc-list
 //
 // Роль. Ряд строк, разделённых линовкой, с рубрикаторами между группами.
@@ -7,7 +9,7 @@ package widget
 // Состояния. normal | empty.
 // Инварианты. Пустой список показывает действие; плотность от оболочки.
 // Поведение. Ходьба стрелками по строкам, Enter открывает выделенную.
-// Геометрия. Высота строки 38px / 52px.
+// Геометрия. Высота строки 38px / 52px; без рамки, линовка --tc-hair.
 // Содержимое. tc-rubric, строки tc-row.
 // Чего нет. Не сортирует и не фильтрует.
 type List struct {
@@ -68,10 +70,13 @@ func (r Row) Render() string {
 		cls = classes(cls, "is-alert")
 	}
 	mark := r.Mark.Render()
-	cells := renderRowCells(r.Variant, r.Cells)
 	var badges string
 	for _, b := range r.Badges {
 		badges += b.Render()
+	}
+	cells := renderRowCells(r.Variant, r.Cells, badges)
+	if r.Variant == RowExcerpt {
+		badges = ""
 	}
 	menu := ""
 	if len(r.Menu) > 0 {
@@ -91,7 +96,7 @@ func rowVariantClass(v RowVariant) string {
 	return "tc-row--" + string(v)
 }
 
-func renderRowCells(v RowVariant, c RowCells) string {
+func renderRowCells(v RowVariant, c RowCells, badges string) string {
 	switch v {
 	case RowAvatar:
 		av := c.Avatar
@@ -109,9 +114,13 @@ func renderRowCells(v RowVariant, c RowCells) string {
 		for _, t := range c.Tags {
 			tags += t.Render()
 		}
-		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__excerpt">` + esc(c.Excerpt) + `</span><span class="tc-row__tags">` + tags + `</span><span class="tc-row__date">` + esc(c.Date) + `</span><span class="tc-row__source">` + esc(c.Source) + `</span>`
+		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__excerpt">` + esc(c.Excerpt) + `</span><span class="tc-row__tags">` + tags + badges + `</span><span class="tc-row__date">` + esc(c.Date) + `</span><span class="tc-row__source">` + esc(c.Source) + `</span>`
 	case RowMeta:
-		return `<span class="tc-row__icon" aria-hidden="true">` + esc(c.Icon) + `</span><span class="tc-row__name">` + esc(c.Name) + `</span><span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
+		icon := esc(c.Icon)
+		if strings.HasPrefix(c.Icon, "tc-i-") {
+			icon = renderNavIcon(c.Icon)
+		}
+		return `<span class="tc-row__icon" aria-hidden="true">` + icon + `</span><span class="tc-row__name">` + esc(c.Name) + `</span><span class="tc-row__size">` + esc(c.Size) + `</span><span class="tc-row__time">` + esc(c.Time) + `</span>`
 	case RowFind:
 		return `<span class="tc-row__icon" aria-hidden="true">` + esc(c.Icon) + `</span><div class="tc-row__find"><span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__detail">` + esc(c.Detail) + `</span><span class="tc-row__caption">` + esc(c.Caption) + `</span></div>`
 	default:
@@ -122,11 +131,11 @@ func renderRowCells(v RowVariant, c RowCells) string {
 // TickRow — tc-tickrow
 //
 // Роль. Отмечаемая строка: галка, метка, подпись, счётчик, только чтение.
-// Вход. TickRow{ Href, Label, Mark, Count, Tick, ReadOnly, State, Menu }.
+// Вход. TickRow{ Href, Label, Mark, Count, Tick, ReadOnly, State, Current, Menu }.
 // Состояния. ok | read-only | unavailable | gone; галка on | off | partial.
 // Инварианты. Три состояния галки — одно поле; счётчик пуст при отсутствии.
 // Поведение. Галка и подпись — разные зоны.
-// Геометрия. Зона галки 44px в узкой раскладке.
+// Геометрия. 26px в рейле; Current — --tc-card; зона галки 44px в узкой раскладке.
 // Содержимое. tc-mark, tc-num, tc-menu.
 // Чего нет. Не хранит состояние.
 type TickRow struct {
@@ -137,11 +146,15 @@ type TickRow struct {
 	Tick     TickState
 	ReadOnly bool
 	State    TickRowState
+	Current  bool
 	Menu     []MenuItem
 }
 
 func (t TickRow) Render() string {
 	cls := "tc-tickrow"
+	if t.Current {
+		cls = classes(cls, "is-current")
+	}
 	switch t.State {
 	case TickRowReadOnly:
 		cls = classes(cls, "is-read-only")
@@ -177,18 +190,27 @@ func (t TickRow) Render() string {
 // Rubric — tc-rubric
 //
 // Роль. Мелкая надпись с разрядкой, открывающая группу.
-// Вход. Rubric{ Text, Count }.
+// Вход. Rubric{ Text, Count, Action }.
 // Состояния. нет.
 // Инварианты. Не заголовок раздела и не кликается.
 // Поведение. нет.
 // Геометрия. Прописные, разрядка, приглушённый цвет.
-// Содержимое. tc-num.
+// Содержимое. tc-num, tc-btn.
 // Чего нет. Нет уровней.
 type Rubric struct {
-	Text  string
-	Count *int
+	Text   string
+	Count  *int
+	Action *Action
 }
 
 func (r Rubric) Render() string {
-	return `<div class="tc-rubric"><span class="tc-rubric__text">` + esc(r.Text) + `</span>` + Num{Value: r.Count}.Render() + `</div>`
+	action := ""
+	if r.Action != nil {
+		a := *r.Action
+		if a.Size == "" {
+			a.Size = ButtonSizeTable
+		}
+		action = `<span class="tc-rubric__action">` + a.Render() + `</span>`
+	}
+	return `<div class="tc-rubric">` + `<span class="tc-rubric__text">` + esc(r.Text) + `</span>` + Num{Value: r.Count}.Render() + action + `</div>`
 }
