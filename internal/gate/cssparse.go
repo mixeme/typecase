@@ -173,6 +173,9 @@ func sameElement(ruleSel, owned string) bool {
 	if rest == "" {
 		return true
 	}
+	if strings.HasPrefix(rest, "::") {
+		return false
+	}
 	switch rest[0] {
 	case ' ', '>', '+', '~':
 		return false

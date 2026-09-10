@@ -1,6 +1,10 @@
 package widget
 
-import "strings"
+import (
+	"strings"
+
+	"carrel.dev/typecase/layout"
+)
 
 // List — tc-list
 //
@@ -42,10 +46,10 @@ func (l List) Render() string {
 // Роль. Одна запись в списке: ведущая метка, содержимое, хвост.
 // Вход. Row{ Href, Mark, Cells, Badges, Menu, Selected, State, Variant }.
 // Состояния. normal | selected | muted | alert.
-// Инварианты. Метка — полоса слева; меню у своей строки; хвост прижат вправо.
+// Инварианты. Метка — полоса слева; меню у flex-строки; сеточная — только в List.
 // Поведение. Наведение, выделение, меню, Enter.
-// Геометрия. Одна строка / две в узкой раскладке.
-// Содержимое. Ячейки, tc-badge, tc-menu.
+// Геометрия. Сеточные варианты — таблица layout; дети = слоты.
+// Содержимое. Ячейки, tc-badge; tc-menu у flex-вариантов.
 // Чего нет. Нет перетаскивания и вложенных строк.
 type Row struct {
 	Href     string
@@ -59,6 +63,9 @@ type Row struct {
 }
 
 func (r Row) Render() string {
+	if r.Variant == RowExcerpt {
+		return renderGridRow(r, layout.RowExcerpt)
+	}
 	cls := classes("tc-row", rowVariantClass(r.Variant))
 	if r.Selected || r.State == RowSelected {
 		cls = classes(cls, "is-selected")
@@ -74,10 +81,7 @@ func (r Row) Render() string {
 	for _, b := range r.Badges {
 		badges += b.Render()
 	}
-	cells := renderRowCells(r.Variant, r.Cells, badges)
-	if r.Variant == RowExcerpt {
-		badges = ""
-	}
+	cells := renderRowCells(r.Variant, r.Cells)
 	menu := ""
 	if len(r.Menu) > 0 {
 		menu = Menu{Label: labels.Actions, Items: r.Menu}.Render()
@@ -89,6 +93,57 @@ func (r Row) Render() string {
 	return `<div` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</div>`
 }
 
+func renderGridRow(r Row, g layout.Grid) string {
+	cls := classes("tc-row", rowVariantClass(r.Variant))
+	if r.Selected || r.State == RowSelected {
+		cls = classes(cls, "is-selected")
+	}
+	switch r.State {
+	case RowMuted:
+		cls = classes(cls, "is-muted")
+	case RowAlert:
+		cls = classes(cls, "is-alert")
+	}
+	var inner string
+	for _, tr := range g.Tracks {
+		inner += rowSlot(tr.Slot, r)
+	}
+	if r.Href != "" {
+		return `<a href="` + esc(r.Href) + `"` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</a>`
+	}
+	return `<div` + classAttr(cls) + ` role="listitem" data-tc-row>` + inner + `</div>`
+}
+
+func rowSlot(slot string, r Row) string {
+	switch slot {
+	case "mark":
+		html := r.Mark.Render()
+		if html == "" {
+			return `<span class="tc-mark"></span>`
+		}
+		return html
+	case "title":
+		return `<span class="tc-row__title">` + esc(r.Cells.Title) + `</span>`
+	case "excerpt":
+		return `<span class="tc-row__excerpt">` + esc(r.Cells.Excerpt) + `</span>`
+	case "tags":
+		var tags string
+		for _, t := range r.Cells.Tags {
+			tags += t.Render()
+		}
+		for _, b := range r.Badges {
+			tags += b.Render()
+		}
+		return `<span class="tc-row__tags">` + tags + `</span>`
+	case "date":
+		return `<span class="tc-row__date">` + esc(r.Cells.Date) + `</span>`
+	case "source":
+		return `<span class="tc-row__source">` + esc(r.Cells.Source) + `</span>`
+	default:
+		return ""
+	}
+}
+
 func rowVariantClass(v RowVariant) string {
 	if v == "" || v == RowDefault {
 		return ""
@@ -96,7 +151,7 @@ func rowVariantClass(v RowVariant) string {
 	return "tc-row--" + string(v)
 }
 
-func renderRowCells(v RowVariant, c RowCells, badges string) string {
+func renderRowCells(v RowVariant, c RowCells) string {
 	switch v {
 	case RowAvatar:
 		av := c.Avatar
@@ -109,12 +164,6 @@ func renderRowCells(v RowVariant, c RowCells, badges string) string {
 	case RowTick:
 		tick := Tick{Done: c.Done, Label: c.Title}.Render()
 		return tick + `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__due">` + esc(c.Due) + `</span>`
-	case RowExcerpt:
-		var tags string
-		for _, t := range c.Tags {
-			tags += t.Render()
-		}
-		return `<span class="tc-row__title">` + esc(c.Title) + `</span><span class="tc-row__excerpt">` + esc(c.Excerpt) + `</span><span class="tc-row__tags">` + tags + badges + `</span><span class="tc-row__date">` + esc(c.Date) + `</span><span class="tc-row__source">` + esc(c.Source) + `</span>`
 	case RowMeta:
 		icon := esc(c.Icon)
 		if strings.HasPrefix(c.Icon, "tc-i-") {
@@ -133,9 +182,10 @@ func renderRowCells(v RowVariant, c RowCells, badges string) string {
 // Роль. Отмечаемая строка: галка, метка, подпись, счётчик, только чтение.
 // Вход. TickRow{ Href, Label, Mark, Count, Tick, ReadOnly, State, Current, Menu }.
 // Состояния. ok | read-only | unavailable | gone; галка on | off | partial.
-// Инварианты. Три состояния галки — одно поле; счётчик пуст при отсутствии.
+// Инварианты. Три состояния галки — одно поле; счётчик пуст при отсутствии;
+// заглушка метки всегда при Hold; ссылка коробки не заводит.
 // Поведение. Галка и подпись — разные зоны.
-// Геометрия. 26px в рейле; Current — --tc-card; зона галки 44px в узкой раскладке.
+// Геометрия. Таблица layout.TickRow.
 // Содержимое. tc-mark, tc-num, tc-menu.
 // Чего нет. Не хранит состояние.
 type TickRow struct {
@@ -180,11 +230,32 @@ func (t TickRow) Render() string {
 	if t.State == TickRowUnavailable {
 		stateWord = `<span class="tc-tickrow__state">` + esc(labels.Unavailable) + `</span>`
 	}
-	inner := `<button type="button" class="` + tickCls + `" aria-label="` + esc(labels.Toggle) + ` ` + esc(t.Label) + `"></button>` + t.Mark.Render() + `<span class="tc-tickrow__label">` + esc(t.Label) + `</span>` + stateWord + Num{Value: t.Count}.Render() + menu
+	var slots string
+	for _, tr := range layout.TickRow.Tracks {
+		slots += tickRowSlot(tr.Slot, t, tickCls)
+	}
+	inner := slots + stateWord + Num{Value: t.Count}.Render() + menu
 	if t.Href != "" {
 		return `<div` + classAttr(cls) + ` data-tc-tickrow><a href="` + esc(t.Href) + `" class="tc-tickrow__link">` + inner + `</a></div>`
 	}
 	return `<div` + classAttr(cls) + ` data-tc-tickrow>` + inner + `</div>`
+}
+
+func tickRowSlot(slot string, t TickRow, tickCls string) string {
+	switch slot {
+	case "tick":
+		return `<button type="button" class="` + tickCls + `" aria-label="` + esc(labels.Toggle) + ` ` + esc(t.Label) + `"></button>`
+	case "mark":
+		html := t.Mark.Render()
+		if html == "" {
+			return `<span class="tc-mark"></span>`
+		}
+		return html
+	case "label":
+		return `<span class="tc-tickrow__label">` + esc(t.Label) + `</span>`
+	default:
+		return ""
+	}
 }
 
 // Rubric — tc-rubric

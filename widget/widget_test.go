@@ -192,6 +192,23 @@ func TestSheet_bodyNodes(t *testing.T) {
 	}
 }
 
+func TestTickRow_holdMark(t *testing.T) {
+	html := widget.TickRow{Label: "Attachments"}.Render()
+	if strings.Count(html, `class="tc-mark"`) != 1 {
+		t.Fatalf("TickRow must print exactly one .tc-mark: %s", html)
+	}
+}
+
+func TestRowExcerpt_directSlotChildren(t *testing.T) {
+	html := widget.Row{
+		Variant: widget.RowExcerpt,
+		Cells:   widget.RowCells{Title: "Note", Excerpt: "Body", Date: "10 Aug", Source: "src"},
+	}.Render()
+	if strings.Contains(html, "tc-row__cells") {
+		t.Fatalf("excerpt must not wrap slots in .tc-row__cells: %s", html)
+	}
+}
+
 func TestRowExcerpt_dateAndSource(t *testing.T) {
 	html := widget.Row{
 		Variant: widget.RowExcerpt,
