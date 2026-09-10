@@ -61,7 +61,7 @@ var Inventory = map[string]InventoryEntry{
 	"m-logo":         mapped(".tc-brand__logo"),
 	"m-main":         mapped(".tc-main"),
 	"m-menu":         mapped(".tc-menu"),
-	"m-merge":        deferred("duplicates compose; Cols in step 7 of docs/plan/typecase-layout.md"),
+	"m-merge":        deferred("flex pick+button on duplicates; not halves/thirds/sidebar. Step 9 of docs/plan/typecase-layout.md"),
 	"m-meta":         mapped(".tc-num"),
 	"m-metacol":      mapped(".tc-docmeta"),
 	"m-more":         mapped(".tc-bar overflow"),

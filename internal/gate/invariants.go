@@ -16,6 +16,7 @@ var invariantBindings = map[string][]string{
 	"tc-card":      {"gate:inv-card-has-body"},
 	"tc-check":     {"gate:a11y", "gate:enumerations"},
 	"tc-chip":      {"gate:inv-chip-state-class"},
+	"tc-cols":      {"gate:layout-slots"},
 	"tc-close":     {"gate:a11y", "gate:a11y"},
 	"tc-crop":      {"gate:inv-crop-has-frame", "gate:inv-crop-has-zoom"},
 	"tc-crumbs":    {"gate:crumbs-last-not-link", "gate:inv-crumbs-has-root"},

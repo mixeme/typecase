@@ -1,4 +1,4 @@
-/* tc-search, tc-runbar, tc-diag, tc-diff, tc-crop, tc-steps, tc-card, tc-sec, tc-fields, tc-stat, tc-stats */
+/* tc-search, tc-runbar, tc-diag, tc-diff, tc-crop, tc-steps, tc-cols, tc-card, tc-sec, tc-fields, tc-stat, tc-stats */
 
 .tc-search { position: relative; min-width: 8em; }
 .tc-search__icon { flex: none; }
@@ -128,6 +128,8 @@
 .tc-steps__item.is-done { color: var(--tc-ink); }
 .tc-steps__item.is-current { font-weight: 600; color: var(--tc-accent); }
 .tc-steps__count { margin-left: auto; color: var(--tc-muted); }
+
+.tc-cols { min-width: 0; }
 
 .tc-card {
 	border-width: var(--tc-stroke);

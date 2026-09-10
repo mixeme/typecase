@@ -198,7 +198,9 @@ func checkMarkupGrid(spec layout.Spec, html, where string, screens bool) []strin
 	root := parseHTML(html)
 	var errs []string
 	for _, g := range spec.Grids {
-		if !layout.Slotted(g) {
+		slotted := layout.Slotted(g)
+		cols := isColsGrid(g)
+		if !slotted && !cols {
 			continue
 		}
 		cls := className(g.Selector)
@@ -218,6 +220,9 @@ func checkMarkupGrid(spec layout.Spec, html, where string, screens bool) []strin
 				errs = append(errs, fmt.Sprintf("%s %s children %d want %d", where, g.Selector, len(kids), want))
 				return
 			}
+			if !slotted {
+				return
+			}
 			for i, t := range g.Tracks {
 				slotCls := layout.SlotClass(t.Slot, g.Selector)
 				if slotCls == "" {
@@ -231,6 +236,10 @@ func checkMarkupGrid(spec layout.Spec, html, where string, screens bool) []strin
 		_ = screens
 	}
 	return errs
+}
+
+func isColsGrid(g layout.Grid) bool {
+	return strings.HasPrefix(g.Selector, ".tc-cols--")
 }
 
 func checkGridRowParent(spec layout.Spec, html, route string) []string {

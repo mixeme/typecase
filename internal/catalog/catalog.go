@@ -164,6 +164,9 @@ func Entries() []Entry {
 	add("utility", "tc-fields", "default", widget.Fields{Rows: []widget.FieldRow{{Label: "Name", Value: "Example"}, {Label: "Path", Value: "/very/long/path/to/item", Path: true}}}.Render())
 	add("utility", "tc-stat", "default", widget.Stat{Label: "Users", Value: "1,234", Hint: "Last 30 days"}.Render())
 	add("utility", "tc-stats", "default", widget.Stats{Items: []widget.Stat{{Label: "Users", Value: "1,234"}, {Label: "Sessions", Value: "89"}, {Label: "Errors", Value: "3"}}}.Render())
+	add("utility", "tc-cols", "halves", widget.Cols{Shape: widget.ColsHalves, Items: []widget.Node{widget.Paragraph("Left"), widget.Paragraph("Right")}}.Render())
+	add("utility", "tc-cols", "thirds", widget.Cols{Shape: widget.ColsThirds, Items: []widget.Node{widget.Paragraph("One"), widget.Paragraph("Two"), widget.Paragraph("Three")}}.Render())
+	add("utility", "tc-cols", "sidebar", widget.Cols{Shape: widget.ColsSidebar, Items: []widget.Node{widget.Paragraph("Main"), widget.Paragraph("Side")}}.Render())
 
 	// Additional states (L-9.1)
 	add("primitives", "tc-check", "on", widget.Check{Name: "on", Label: "On", Checked: true}.Render())

@@ -202,6 +202,15 @@ const (
 	DensityTouch  Density = "touch"
 )
 
+// ColsShape is one named column form of tc-cols.
+type ColsShape string
+
+const (
+	ColsHalves  ColsShape = "halves"
+	ColsThirds  ColsShape = "thirds"
+	ColsSidebar ColsShape = "sidebar"
+)
+
 // OverlayKind is the overlay presentation mode.
 type OverlayKind string
 

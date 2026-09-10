@@ -476,6 +476,19 @@ func TestBite_mockupParity(t *testing.T) {
 	}
 }
 
+func TestBite_layoutSlotsColsCount(t *testing.T) {
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := gate.Paths(root)
+	html := `<div class="tc-cols tc-cols--halves"><div class="tc-cols__col">a</div></div>`
+	cat := []gate.CatalogEntry{{Widget: "tc-cols", State: "halves", HTML: html}}
+	if err := gate.CheckLayoutSlots(p, cat); err == nil {
+		t.Fatal("expected layout-slots to fail on cols child count")
+	}
+}
+
 func TestBite_layoutSlotsManual(t *testing.T) {
 	root, err := gate.FindModuleRoot()
 	if err != nil {

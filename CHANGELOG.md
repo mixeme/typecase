@@ -12,8 +12,8 @@ do, not what the authors did.
   rail chrome (U-9: row menu instead of the panel).
 - Calendar (7.2), tasks (7.3) and find (7.6) screens — steps 8–9 of
   [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
-- Remaining mockup geometry: steps 7 and 10 of
-  the same plan (`Cols` is step 7).
+- Remaining mockup geometry: step 10 of
+  the same plan.
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
@@ -22,8 +22,14 @@ until released separately.
 ### For consumers (layout)
 
 - **Do not import `layout`.** Geometry tables are the library's, like `token`.
-  Screens keep calling `widget`. `Cols` is the new consumer type and is not
-  in this drop.
+  Screens keep calling `widget`.
+- **`Cols` is the fallback when the catalog has no form.** Three shapes:
+  `ColsHalves`, `ColsThirds`, `ColsSidebar` (fluid + 296 px, the same column
+  as the document meta). Pass `Items` — one node per track. Empty `Items`
+  renders nothing. Widths and gap are not fields: you pick a shape. `Cols`
+  does not replace `Shell`, `Doc` or `Fields`. A wrapping tile grid is still
+  `Grid`. When a screen needs a local form, it names a type in its own
+  package and builds it from `Cols` and primitives.
 - **Row variants now in this drop:** `RowAvatarCols`, `RowTickCols`,
   `RowTimeCols`, `RowTickMarkCols`, and `RowFind` as a grid. A grid row must
   live in `List`. `Menu` on a grid variant fails the gates instead of

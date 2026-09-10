@@ -153,6 +153,35 @@ func TestCSS_restBoxes(t *testing.T) {
 	}
 }
 
+func TestCSS_cols(t *testing.T) {
+	css := layout.CSS()
+	halves := columnsOf(css, ".tc-cols--halves")
+	if len(halves) != 2 || halves[0] != "minmax(0,1fr)" || halves[1] != "minmax(0,1fr)" {
+		t.Fatalf("halves tracks %v", halves)
+	}
+	thirds := columnsOf(css, ".tc-cols--thirds")
+	if len(thirds) != 3 {
+		t.Fatalf("thirds tracks %v", thirds)
+	}
+	side := columnsOf(css, ".tc-cols--sidebar")
+	if len(side) != 2 || side[1] != "296px" {
+		t.Fatalf("sidebar tracks %v", side)
+	}
+	doc := columnsOf(css, ".tc-doc__layout")
+	if len(doc) < 2 || side[1] != doc[1] {
+		t.Fatalf("sidebar must reuse doc meta column, sidebar %v doc %v", side, doc)
+	}
+	if !strings.Contains(css, ".tc-cols--halves{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}") {
+		t.Fatal("halves base rule missing")
+	}
+	if !strings.Contains(css, "@container tcbox (max-width:620px){\n.tc-cols--halves{grid-template-columns:minmax(0,1fr)}\n}") {
+		t.Fatal("halves 620 rule missing")
+	}
+	if !strings.Contains(css, ".tc-cols__col{container:tcbox / inline-size;min-width:0}") {
+		t.Fatal("col box missing")
+	}
+}
+
 func TestCSS_sheetAndDialog(t *testing.T) {
 	css := layout.CSS()
 	if !strings.Contains(css, ".tc-sheet{") || !strings.Contains(css, "width:560px") {

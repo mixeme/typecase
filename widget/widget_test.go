@@ -47,6 +47,7 @@ func TestRender_smoke(t *testing.T) {
 		{"search", widget.Search{Action: "/s"}.Render()},
 		{"stat", widget.Stat{Label: "Users", Value: "1,234"}.Render()},
 		{"stats", widget.Stats{Items: []widget.Stat{{Label: "Users", Value: "1,234"}}}.Render()},
+		{"cols", widget.Cols{Shape: widget.ColsHalves, Items: []widget.Node{widget.Paragraph("A"), widget.Paragraph("B")}}.Render()},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -376,6 +377,36 @@ func TestField_widthAndOwnLine(t *testing.T) {
 func TestFormFoot_emptyRendersNothing(t *testing.T) {
 	if got := (widget.FormFoot{}).Render(); got != "" {
 		t.Fatalf("empty FormFoot must render nothing, got %q", got)
+	}
+}
+
+func TestCols_emptyAndShapes(t *testing.T) {
+	if got := (widget.Cols{}).Render(); got != "" {
+		t.Fatalf("empty Cols must render nothing, got %q", got)
+	}
+	html := widget.Cols{
+		Shape: widget.ColsHalves,
+		Items: []widget.Node{widget.Paragraph("Left"), widget.Paragraph("Right")},
+	}.Render()
+	if !strings.Contains(html, `class="tc-cols tc-cols--halves"`) {
+		t.Fatalf("halves class missing: %s", html)
+	}
+	if strings.Count(html, `class="tc-cols__col"`) != 2 {
+		t.Fatalf("want 2 cols, got: %s", html)
+	}
+	thirds := widget.Cols{
+		Shape: widget.ColsThirds,
+		Items: []widget.Node{widget.Paragraph("A"), widget.Paragraph("B"), widget.Paragraph("C")},
+	}.Render()
+	if !strings.Contains(thirds, "tc-cols--thirds") || strings.Count(thirds, `class="tc-cols__col"`) != 3 {
+		t.Fatalf("thirds: %s", thirds)
+	}
+	side := widget.Cols{
+		Shape: widget.ColsSidebar,
+		Items: []widget.Node{widget.Paragraph("Main"), widget.Paragraph("Meta")},
+	}.Render()
+	if !strings.Contains(side, "tc-cols--sidebar") {
+		t.Fatalf("sidebar class missing: %s", side)
 	}
 }
 

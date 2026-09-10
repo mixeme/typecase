@@ -7,6 +7,7 @@ func All() Spec {
 	boxes = append(boxes, shellBoxes...)
 	boxes = append(boxes, formBoxes...)
 	boxes = append(boxes, restBoxes...)
+	boxes = append(boxes, colsBoxes...)
 	flows := append([]Flow{}, rowFlows...)
 	flows = append(flows, shellFlows...)
 	flows = append(flows, formFlows...)
@@ -25,6 +26,9 @@ func All() Spec {
 			ShellNoRailHasSide,
 			Doc,
 			DocNoMeta,
+			ColsHalves,
+			ColsThirds,
+			ColsSidebar,
 		},
 		Boxes: boxes,
 		Flows: flows,

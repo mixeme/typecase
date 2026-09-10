@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"carrel.dev/typecase/layout"
 )
 
 var tcAnyClass = regexp.MustCompile(`\.tc-([a-z][a-z0-9_-]+)`)
@@ -72,6 +74,9 @@ func cssAllClasses(dir string) (map[string]bool, error) {
 		for _, m := range tcAnyClass.FindAllStringSubmatch(string(data), -1) {
 			found["tc-"+m[1]] = true
 		}
+	}
+	for _, m := range tcAnyClass.FindAllStringSubmatch(layout.CSS(), -1) {
+		found["tc-"+m[1]] = true
 	}
 	return found, nil
 }

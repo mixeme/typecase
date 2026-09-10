@@ -52,26 +52,30 @@ func ioMain() widget.Main {
 				{Label: "with errors", Value: "3"},
 				{Label: "UID collisions", Value: "5"},
 			}},
-			ioPreviewSection("Contacts", []string{"Source", "Name", "UID", "Result"}, []widget.TableRow{
-				{Cells: []string{"Разное (mix).vcf", "Анна Ковалёва", "4f2b-9c31-a0e7", "Ready"}},
-				{Cells: []string{"Разное (mix).vcf", "Артём Белов", "1a77-40de-bb02", "New UID will be assigned"}},
-				{Cells: []string{"Разное (mix).vcf", "— (no FN)", "—", "vCard 2.1 quoted-printable: cannot decode line 12"}},
-			}),
-			ioPreviewSection("Events", []string{"Source", "Summary", "When", "Result"}, []widget.TableRow{
-				{Cells: []string{"rabota.ics", "Синк-ап по релизу", "10 Aug 10:00", "Ready"}},
-				{Cells: []string{"rabota.ics", "Дежурство: первая линия", "all day", "Ready"}},
-				{Cells: []string{"rabota.ics", "— (no SUMMARY)", "—", "Missing SUMMARY"}},
-			}),
-			ioPreviewSection("Tasks", []string{"Source", "Summary", "Due", "Result"}, []widget.TableRow{
-				{Cells: []string{"tasks.ics", "Собрать чемодан", "12 Aug 18:00", "Ready"}},
-				{Cells: []string{"tasks.ics", "Купить билеты", "15 Aug", "Ready"}},
-				{Cells: []string{"rabota.ics", "Созвон с подрядчиком", "11 Aug 15:00", "Skipped — belongs in calendar"}},
-			}),
-			ioPreviewSection("Notes", []string{"Source", "Title", "Date", "Result"}, []widget.TableRow{
-				{Cells: []string{"заметки-2026.zip", "Что почитать про CRDT", "8 Aug", "Ready"}},
-				{Cells: []string{"заметки-2026.zip", "Про дорогу до дачи", "4 Aug", "Ready"}},
-				{Cells: []string{"draft.md", "— (from filename)", "—", "No front matter — dated from file"}},
-			}),
+			ioPreviewPair{
+				Left: ioPreviewSection("Contacts", []string{"Source", "Name", "UID", "Result"}, []widget.TableRow{
+					{Cells: []string{"Разное (mix).vcf", "Анна Ковалёва", "4f2b-9c31-a0e7", "Ready"}},
+					{Cells: []string{"Разное (mix).vcf", "Артём Белов", "1a77-40de-bb02", "New UID will be assigned"}},
+					{Cells: []string{"Разное (mix).vcf", "— (no FN)", "—", "vCard 2.1 quoted-printable: cannot decode line 12"}},
+				}),
+				Right: ioPreviewSection("Events", []string{"Source", "Summary", "When", "Result"}, []widget.TableRow{
+					{Cells: []string{"rabota.ics", "Синк-ап по релизу", "10 Aug 10:00", "Ready"}},
+					{Cells: []string{"rabota.ics", "Дежурство: первая линия", "all day", "Ready"}},
+					{Cells: []string{"rabota.ics", "— (no SUMMARY)", "—", "Missing SUMMARY"}},
+				}),
+			},
+			ioPreviewPair{
+				Left: ioPreviewSection("Tasks", []string{"Source", "Summary", "Due", "Result"}, []widget.TableRow{
+					{Cells: []string{"tasks.ics", "Собрать чемодан", "12 Aug 18:00", "Ready"}},
+					{Cells: []string{"tasks.ics", "Купить билеты", "15 Aug", "Ready"}},
+					{Cells: []string{"rabota.ics", "Созвон с подрядчиком", "11 Aug 15:00", "Skipped — belongs in calendar"}},
+				}),
+				Right: ioPreviewSection("Notes", []string{"Source", "Title", "Date", "Result"}, []widget.TableRow{
+					{Cells: []string{"заметки-2026.zip", "Что почитать про CRDT", "8 Aug", "Ready"}},
+					{Cells: []string{"заметки-2026.zip", "Про дорогу до дачи", "4 Aug", "Ready"}},
+					{Cells: []string{"draft.md", "— (from filename)", "—", "No front matter — dated from file"}},
+				}),
+			},
 			widget.Stats{Items: []widget.Stat{
 				{Label: "imported", Value: "118"},
 				{Label: "skipped", Value: "4"},
@@ -91,4 +95,18 @@ func ioPreviewSection(title string, cols []string, rows []widget.TableRow) widge
 		Rubric: widget.Rubric{Text: title},
 		Body:   []widget.Node{widget.Table{Columns: columns, Rows: rows}},
 	}
+}
+
+// ioPreviewPair is two preview tables side by side. The catalog has no such
+// form; the screen assembles it from Cols (L-3.6).
+type ioPreviewPair struct {
+	Left  widget.Sec
+	Right widget.Sec
+}
+
+func (p ioPreviewPair) Render() string {
+	return widget.Cols{
+		Shape: widget.ColsHalves,
+		Items: []widget.Node{p.Left, p.Right},
+	}.Render()
 }
