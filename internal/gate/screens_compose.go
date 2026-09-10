@@ -148,5 +148,32 @@ func CheckScreensCompose(p ModulePaths) error {
 	if !strings.Contains(edit, "tc-pick") {
 		return fmt.Errorf("screens-compose: notes-edit must include related pick")
 	}
+	conflict := screens.Conflict()
+	if !strings.Contains(conflict, "tc-diff") {
+		return fmt.Errorf("screens-compose: conflict must use diff cards")
+	}
+	devices := screens.Devices()
+	if !strings.Contains(devices, "tc-cols--halves") {
+		return fmt.Errorf("screens-compose: devices must assemble from Cols halves")
+	}
+	admin := screens.Admin()
+	if !strings.Contains(admin, "tc-cols--thirds") {
+		return fmt.Errorf("screens-compose: admin must assemble from Cols thirds")
+	}
+	mail := screens.Mail()
+	if !strings.Contains(mail, "tc-sheet is-open") {
+		return fmt.Errorf("screens-compose: mail must have an open sheet")
+	}
+	if !strings.Contains(mail, "tc-row--avatarcols") {
+		return fmt.Errorf("screens-compose: mail must keep the contact list")
+	}
+	login := screens.Login()
+	if strings.Contains(login, "tc-shell") {
+		return fmt.Errorf("screens-compose: login must not use the shell chrome")
+	}
+	account := screens.Account()
+	if !strings.Contains(account, "tc-nav") {
+		return fmt.Errorf("screens-compose: account must use settings nav")
+	}
 	return nil
 }

@@ -38,6 +38,7 @@ const (
 	LayoutSlots     Name = "layout-slots"
 	MockupParity    Name = "mockup-parity"
 	LayoutInventory Name = "layout-inventory"
+	LayoutOrphans   Name = "layout-orphans"
 )
 
 // AllGates lists every L-8 gate in stable order.
@@ -45,7 +46,7 @@ var AllGates = []Name{
 	Completeness, Ownership, NodeNames, TypedInput, Enumerations,
 	DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 	Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
-	LayoutSlots, MockupParity, LayoutInventory, Gofmt, Vet,
+	LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet,
 }
 
 // browserChecks lists L-9.2 invariant names that must have broken HTML fixtures.
@@ -163,6 +164,8 @@ func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 		return CheckMockupParity(p)
 	case LayoutInventory:
 		return CheckLayoutInventory(p)
+	case LayoutOrphans:
+		return CheckLayoutOrphans(catalog)
 	case Gofmt:
 		return CheckGofmt(p.Root)
 	case Vet:
@@ -222,7 +225,7 @@ func gateImplemented(name Name) bool {
 	case Completeness, Ownership, NodeNames, TypedInput, Enumerations,
 		DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 		Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
-		LayoutSlots, MockupParity, LayoutInventory, Gofmt, Vet:
+		LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet:
 		return true
 	default:
 		return false

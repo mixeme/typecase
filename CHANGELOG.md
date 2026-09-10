@@ -10,11 +10,8 @@ do, not what the authors did.
 
 - An open side panel still covers the viewport at phone width, including the
   rail chrome (U-9: row menu instead of the panel).
-- Remaining mockup sections (step 9 of
-  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md)): conflict,
-  settings, mail, admin, sign-in.
 - Remaining mockup geometry: step 10 of
-  the same plan.
+  [docs/plan/typecase-layout.md](docs/plan/typecase-layout.md).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
@@ -44,6 +41,13 @@ until released separately.
   is `Seg` with Week chosen (no month day grid). Tasks are `RowTickMarkCols`.
   Find hits are `RowFind` in a `List`, not the search popover. No new widget
   types. The Calendar nav item points at `/agenda`.
+- **Remaining mockup sections are assembled** (step 9): `/conflict`, settings
+  `/account` through `/appearance`, `/mail`, `/admin`, `/login`. No new widget
+  types. Where the catalog had no form, the screen named a type in its own
+  package and built it from `Cols` (`deviceSetup` halves, `adminWays` thirds).
+  Sign-in is Brand + Form, without the shell. The `layout-orphans` gate prints
+  a report — catalog widget on ≤1 screen, without `data-tc-`, `role`/`aria-`,
+  or a layout number — and does not fail; look at `go test ./internal/gate -v`.
 - **Shell, search, rail and side** take their geometry from `layout` (step 4).
   No new widget types. Search shows the 13 px icon as the first node of the
   field. `NavLayoutBottom` matches the mockup tab bar (icon above the label).
