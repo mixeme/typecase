@@ -388,6 +388,26 @@ func TestField_emptyLabelIsBare(t *testing.T) {
 	}
 }
 
+func TestField_bareKeepsAccessibleName(t *testing.T) {
+	html := widget.Field{Name: "quick", Label: "Note", Bare: true, Kind: widget.InputTextarea}.Render()
+	if strings.Contains(html, "tc-field__label") {
+		t.Fatalf("bare field must not print the label: %s", html)
+	}
+	if !strings.Contains(html, "tc-field--bare") {
+		t.Fatalf("Bare must print tc-field--bare: %s", html)
+	}
+	if !strings.Contains(html, `aria-label="Note"`) {
+		t.Fatalf("bare field must keep Label as the accessible name: %s", html)
+	}
+}
+
+func TestField_labelIsInputName(t *testing.T) {
+	html := widget.Field{Name: "display", Label: "Display name", Kind: widget.InputText}.Render()
+	if strings.Contains(html, `aria-label="display"`) {
+		t.Fatalf("machine Name must not override the visible label: %s", html)
+	}
+}
+
 func TestPField_labelAboveInput(t *testing.T) {
 	html := widget.PField{Name: "date", Label: "Date", Kind: widget.InputDate, Width: widget.PFieldWidthSM}.Render()
 	labelAt := strings.Index(html, `class="tc-pfield__label"`)

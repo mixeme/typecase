@@ -56,6 +56,16 @@ until released separately.
   takes `Width`. `ButtonDanger` is outline; fill is `ButtonDangerSolid`.
   Delete actions in the library (danger zone, danger dialog confirm,
   document meta) default to `ButtonDangerSolid`.
+- **`Field.Bare` and the field's accessible name.** A field's `Label` is now
+  always the accessible name of its control; before, the control carried
+  `aria-label` from the machine `Name`, which overrode the visible label.
+  For a field without a visible label, keep `Label` and set `Bare: true`: the
+  label leaves the screen, the name stays. An empty `Label` still renders
+  bare, but then the control is named by `Name` — do not write fields that
+  way.
+- **The fence now covers screens too.** The demo screens fail the gates if
+  they import `layout` or carry `style=`, inline handlers or `<script>` in
+  their markup — the same rules an application screen follows.
 
 ### For consumers (wordmark and icon preview)
 

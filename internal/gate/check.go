@@ -9,6 +9,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"carrel.dev/typecase/internal/screens"
 )
 
 // Name identifies one L-8 gate.
@@ -624,11 +626,17 @@ func CheckCatalog(widgetDir string, catalog []CatalogEntry) error {
 	return CheckUniqueIDs(catalog)
 }
 
+// CheckNoInline rejects inline style, handlers and script in catalog and screen markup.
 func CheckNoInline(catalog []CatalogEntry) error {
 	var bad []string
 	for _, e := range catalog {
 		if inlineBad.MatchString(e.HTML) {
 			bad = append(bad, e.Widget+"/"+e.State)
+		}
+	}
+	for _, sc := range screens.All() {
+		if inlineBad.MatchString(sc.Body()) {
+			bad = append(bad, "/"+sc.ID)
 		}
 	}
 	if len(bad) > 0 {

@@ -102,6 +102,34 @@ var formBoxes = []Box{
 		"position":   "relative",
 		"width":      "200px",
 	}},
+	// .m-in.is-pick: the ground that hides overflowing text, then the chevron.
+	{Selector: ".tc-sheet__target::before", Props: map[string]string{
+		"background":     "var(--tc-surface)",
+		"border-radius":  "0 var(--tc-radius) var(--tc-radius) 0",
+		"bottom":         "0",
+		"content":        `""`,
+		"pointer-events": "none",
+		"position":       "absolute",
+		"right":          "0",
+		"top":            "0",
+		"width":          "24px",
+		"z-index":        "1",
+	}},
+	{Selector: ".tc-sheet__target::after", Props: map[string]string{
+		"border-bottom":  "1.3px solid currentColor",
+		"border-right":   "1.3px solid currentColor",
+		"content":        `""`,
+		"height":         "6px",
+		"margin-top":     "-4px",
+		"opacity":        ".5",
+		"pointer-events": "none",
+		"position":       "absolute",
+		"right":          "9px",
+		"top":            "50%",
+		"transform":      "rotate(45deg)",
+		"width":          "6px",
+		"z-index":        "2",
+	}},
 }
 
 var formFlows = []Flow{Form, Field, FieldSet}
@@ -111,11 +139,5 @@ func formSpacerCSS() string {
 *:has(> .tc-field > .tc-field__label) > .tc-field:has(> .tc-btn:only-child)::before,
 *:has(> .tc-field > .tc-field__label) > .tc-field:has(> .tc-seg:only-child)::before{content:"";height:16px;flex:none}
 .tc-field.is-own-line::before{display:none}
-`
-}
-
-func sheetTargetCSS() string {
-	return `.tc-sheet__target::before{content:"";position:absolute;right:0;top:0;bottom:0;width:24px;background:var(--tc-surface);pointer-events:none;border-radius:0 var(--tc-radius) var(--tc-radius) 0;z-index:1}
-.tc-sheet__target::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
 `
 }

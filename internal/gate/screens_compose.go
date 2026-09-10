@@ -2,6 +2,8 @@ package gate
 
 import (
 	"fmt"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,6 +18,27 @@ var screensComposeBypass = []string{
 	`<aside class="tc-side"`,
 }
 
+// screensForbiddenImports are library packages a screen must not reach past widget.
+var screensForbiddenImports = []string{
+	"carrel.dev/typecase/layout",
+}
+
+func forbiddenScreenImport(path string, src []byte) string {
+	f, err := parser.ParseFile(token.NewFileSet(), path, src, parser.ImportsOnly)
+	if err != nil {
+		return ""
+	}
+	for _, imp := range f.Imports {
+		p := strings.Trim(imp.Path.Value, `"`)
+		for _, bad := range screensForbiddenImports {
+			if p == bad {
+				return p
+			}
+		}
+	}
+	return ""
+}
+
 // CheckScreensCompose rejects hand-built shell markup in demo screen assemblers.
 func CheckScreensCompose(p ModulePaths) error {
 	screensDir := filepath.Join(p.Root, "internal", "screens")
@@ -27,14 +50,17 @@ func CheckScreensCompose(p ModulePaths) error {
 		if e.IsDir() || !strings.HasSuffix(e.Name(), ".go") {
 			continue
 		}
-		switch e.Name() {
-		case "fixtures.go", "serve.go", "shell_common.go", "style.go", "widgets.go":
-			continue
-		}
 		path := filepath.Join(screensDir, e.Name())
 		src, err := os.ReadFile(path)
 		if err != nil {
 			return fmt.Errorf("screens-compose: read %s: %w", e.Name(), err)
+		}
+		if imp := forbiddenScreenImport(path, src); imp != "" {
+			return fmt.Errorf("screens-compose: %s imports %s; screens call widget only", e.Name(), imp)
+		}
+		switch e.Name() {
+		case "fixtures.go", "serve.go", "shell_common.go", "style.go", "widgets.go":
+			continue
 		}
 		text := string(src)
 		var found []string

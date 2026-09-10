@@ -90,9 +90,10 @@ const (
 // Field — tc-field
 //
 // Роль. Подпись, ввод, подсказка, ошибка и кнопка, относящаяся к полю.
-// Вход. Field{ Name, Label, Kind, Value, Options, Hint, Error, Extra, Width, OwnLine, ReadOnly, Required, Disabled, Check }.
+// Вход. Field{ Name, Label, Kind, Value, Options, Hint, Error, Extra, Width, OwnLine, Bare, ReadOnly, Required, Disabled, Check }.
 // Состояния. normal | error | read-only | disabled.
-// Инварианты. Подпись есть или поле явно bare; ширина через FieldWidth.
+// Инварианты. Label — доступное имя ввода всегда; Bare снимает подпись с экрана,
+// но не имя. Ширина через FieldWidth.
 // Поведение. Показ ошибки, связь подсказки с полем.
 // Геометрия. Подпись сверху; spacer 16 px у check/btn/seg, если у соседа есть label.
 // Содержимое. tc-in, tc-check, tc-btn.
@@ -108,6 +109,7 @@ type Field struct {
 	Extra    Action
 	Width    FieldWidth
 	OwnLine  bool
+	Bare     bool
 	ReadOnly bool
 	Required bool
 	Disabled bool
@@ -147,7 +149,8 @@ func (f Field) Render() string {
 	if f.Extra.Label != "" {
 		extra = `<div class="tc-field__extra">` + f.Extra.Render() + `</div>`
 	}
-	if f.Label == "" {
+	bare := f.Bare || f.Label == ""
+	if bare {
 		cls = classes(cls, "tc-field--bare")
 	}
 	fieldID := uniqueID("tc-field")
@@ -166,9 +169,9 @@ func (f Field) Render() string {
 		}
 		return `<div` + classAttr(cls) + `>` + control + hint + err + `</div>`
 	}
-	input := Input{ID: fieldID, Name: f.Name, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}.Render()
+	input := Input{ID: fieldID, Name: f.Name, Label: f.Label, Kind: f.Kind, Value: f.Value, Options: f.Options, ReadOnly: f.ReadOnly || f.Disabled}.Render()
 	label := ""
-	if f.Label != "" {
+	if !bare {
 		label = `<label class="tc-field__label" for="` + esc(fieldID) + `">` + esc(f.Label) + req + `</label>`
 	}
 	return `<div` + classAttr(cls) + `>` + label + `<div class="tc-field__control">` + input + extra + `</div>` + hint + err + `</div>`

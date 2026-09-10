@@ -315,6 +315,8 @@ func notesQuickSheet(open bool) string {
 		Body: []widget.Node{
 			widget.Field{
 				Name:  "quick",
+				Label: "Note",
+				Bare:  true,
 				Kind:  widget.InputTextarea,
 				Value: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.",
 				Hint:  "The title is taken from the first line. The date is now.",
