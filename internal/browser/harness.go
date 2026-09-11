@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"sync"
 	"testing"
 	"time"
 
@@ -136,6 +137,33 @@ func (h *Harness) Run(pageURL string, width, height int, actions ...chromedp.Act
 		return fmt.Errorf("chromedp: %w", err)
 	}
 	return nil
+}
+
+// Tab runs chromedp actions in one tab until cancel is called.
+func (h *Harness) Tab(timeout time.Duration) (run func(actions ...chromedp.Action) error, cancel func()) {
+	h.t.Helper()
+	if timeout <= 0 {
+		timeout = 90 * time.Second
+	}
+	allocCtx, cancelAlloc := chromedp.NewRemoteAllocator(context.Background(), h.browser.endpoint)
+	ctx, cancelCtx := chromedp.NewContext(allocCtx)
+	ctx, cancelTimeout := context.WithTimeout(ctx, timeout)
+	var once sync.Once
+	cancel = func() {
+		once.Do(func() {
+			cancelTimeout()
+			cancelCtx()
+			cancelAlloc()
+		})
+	}
+	h.t.Cleanup(cancel)
+	run = func(actions ...chromedp.Action) error {
+		if err := chromedp.Run(ctx, actions...); err != nil {
+			return fmt.Errorf("chromedp: %w", err)
+		}
+		return nil
+	}
+	return run, cancel
 }
 
 // PageHTML builds a minimal document around a demo fragment.

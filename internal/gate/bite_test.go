@@ -476,6 +476,24 @@ func TestBite_mockupParity(t *testing.T) {
 	}
 }
 
+func TestBite_mockupLint(t *testing.T) {
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := gate.CheckMockupLintFile(root); err != nil {
+		t.Fatalf("live mockup-lint should pass: %v", err)
+	}
+	dup := `<div class="frame" data-frame="s-notes-1"></div>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := gate.CheckMockupLint(dup); err == nil {
+		t.Fatal("expected duplicate data-frame to fail")
+	}
+	if err := gate.CheckMockupLint(`<div class="frame"></div>`); err == nil {
+		t.Fatal("expected missing data-frame to fail")
+	}
+}
+
 func TestBite_layoutSlotsColsCount(t *testing.T) {
 	root, err := gate.FindModuleRoot()
 	if err != nil {

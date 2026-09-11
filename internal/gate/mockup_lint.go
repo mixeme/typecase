@@ -1,0 +1,349 @@
+package gate
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+// MockupLintRule is one check against the mockup copy. Step 0 enables only
+// uniqueness of data-frame; later plan 1 steps append rules.
+type MockupLintRule string
+
+const (
+	// MockupFrameIDs requires every .frame to have a unique data-frame.
+	MockupFrameIDs MockupLintRule = "frame-ids"
+)
+
+// MockupLintStep0 is the rule set for plan 1 step 0.
+var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
+
+const mockupRel = "docs/visual/carrel-ui-mockups.html"
+
+// MockupFile is the Typecase copy of the Carrel mockup.
+func MockupFile(root string) string {
+	return filepath.Join(root, filepath.FromSlash(mockupRel))
+}
+
+// CheckMockupLintFile reads the mockup copy and runs the step-0 rules.
+func CheckMockupLintFile(root string) error {
+	data, err := os.ReadFile(MockupFile(root))
+	if err != nil {
+		return fmt.Errorf("mockup-lint: %w", err)
+	}
+	return CheckMockupLint(string(data), MockupLintStep0...)
+}
+
+// CheckMockupLint runs the given rules against mockup HTML.
+func CheckMockupLint(html string, rules ...MockupLintRule) error {
+	if len(rules) == 0 {
+		rules = MockupLintStep0
+	}
+	var errs []string
+	for _, r := range rules {
+		switch r {
+		case MockupFrameIDs:
+			if err := checkMockupFrameIDs(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		default:
+			return fmt.Errorf("mockup-lint: unknown rule %q", r)
+		}
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("mockup-lint: %s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
+// ListMockupFrames returns data-frame values in document order.
+func ListMockupFrames(html string) []string {
+	ids, _ := collectMockupFrames(html)
+	out := make([]string, 0, len(ids))
+	for _, id := range ids {
+		if id != "" {
+			out = append(out, id)
+		}
+	}
+	return out
+}
+
+func checkMockupFrameIDs(html string) error {
+	ids, n := collectMockupFrames(html)
+	if n == 0 {
+		return fmt.Errorf("no .frame in mockup")
+	}
+	seen := make(map[string]int, n)
+	var missing, dups []string
+	for i, id := range ids {
+		if id == "" {
+			missing = append(missing, fmt.Sprintf("#%d", i+1))
+			continue
+		}
+		if seen[id] > 0 {
+			dups = append(dups, id)
+		}
+		seen[id]++
+	}
+	var parts []string
+	if len(missing) > 0 {
+		parts = append(parts, fmt.Sprintf("missing data-frame on %d frames (%s)", len(missing), strings.Join(missing, ", ")))
+	}
+	if len(dups) > 0 {
+		parts = append(parts, "duplicate data-frame "+strings.Join(dups, ", "))
+	}
+	if len(parts) > 0 {
+		return fmt.Errorf("%s", strings.Join(parts, "; "))
+	}
+	return nil
+}
+
+func collectMockupFrames(html string) (ids []string, n int) {
+	forEachHTMLStartTag(html, func(name string, attrs map[string]string) {
+		if !hasClassToken(attrs["class"], "frame") {
+			return
+		}
+		n++
+		ids = append(ids, attrs["data-frame"])
+	})
+	return ids, n
+}
+
+// MockupFrame is one .frame element extracted from the mockup.
+type MockupFrame struct {
+	ID   string
+	HTML string
+}
+
+// MockupParts is the mockup split into styles, icon sprite and frames.
+type MockupParts struct {
+	Styles string
+	Sprite string
+	Frames []MockupFrame
+}
+
+// ParseMockupParts extracts <style> blocks, the zero-size sprite SVG, and each .frame.
+func ParseMockupParts(html string) (MockupParts, error) {
+	var p MockupParts
+	i := 0
+	for i < len(html) {
+		start, end, name, attrs, ok := nextStartTag(html, i)
+		if !ok {
+			break
+		}
+		switch name {
+		case "style":
+			outer, next, err := elementOuter(html, start, name)
+			if err != nil {
+				return MockupParts{}, err
+			}
+			p.Styles += outer
+			i = next
+			continue
+		case "svg":
+			if attrs["width"] == "0" && attrs["height"] == "0" {
+				outer, next, err := elementOuter(html, start, name)
+				if err != nil {
+					return MockupParts{}, err
+				}
+				p.Sprite = outer
+				i = next
+				continue
+			}
+		}
+		if hasClassToken(attrs["class"], "frame") {
+			outer, next, err := elementOuter(html, start, name)
+			if err != nil {
+				return MockupParts{}, err
+			}
+			p.Frames = append(p.Frames, MockupFrame{ID: attrs["data-frame"], HTML: outer})
+			i = next
+			continue
+		}
+		i = end + 1
+	}
+	if p.Styles == "" {
+		return MockupParts{}, fmt.Errorf("mockup: no <style>")
+	}
+	if p.Sprite == "" {
+		return MockupParts{}, fmt.Errorf("mockup: no sprite svg")
+	}
+	if len(p.Frames) == 0 {
+		return MockupParts{}, fmt.Errorf("mockup: no .frame")
+	}
+	return p, nil
+}
+
+func nextStartTag(html string, i int) (start, end int, name string, attrs map[string]string, ok bool) {
+	for i < len(html) {
+		if strings.HasPrefix(html[i:], "<!--") {
+			j := strings.Index(html[i+4:], "-->")
+			if j < 0 {
+				return 0, 0, "", nil, false
+			}
+			i += 4 + j + 3
+			continue
+		}
+		if html[i] != '<' {
+			i++
+			continue
+		}
+		if i+1 < len(html) && (html[i+1] == '/' || html[i+1] == '!' || html[i+1] == '?') {
+			j := strings.IndexByte(html[i:], '>')
+			if j < 0 {
+				return 0, 0, "", nil, false
+			}
+			i += j + 1
+			continue
+		}
+		end = scanTagEnd(html, i)
+		if end < 0 {
+			return 0, 0, "", nil, false
+		}
+		inner := strings.TrimSpace(html[i+1 : end])
+		if strings.HasSuffix(inner, "/") {
+			inner = strings.TrimSpace(inner[:len(inner)-1])
+		}
+		name, attrs = splitTag(inner)
+		return i, end, name, attrs, true
+	}
+	return 0, 0, "", nil, false
+}
+
+func elementOuter(html string, start int, name string) (string, int, error) {
+	tagEnd := scanTagEnd(html, start)
+	if tagEnd < 0 {
+		return "", 0, fmt.Errorf("mockup: unclosed <%s>", name)
+	}
+	inner := strings.TrimSpace(html[start+1 : tagEnd])
+	selfClose := strings.HasSuffix(inner, "/")
+	if selfClose || voidHTML[name] {
+		return html[start : tagEnd+1], tagEnd + 1, nil
+	}
+	depth := 1
+	i := tagEnd + 1
+	for i < len(html) {
+		if strings.HasPrefix(html[i:], "<!--") {
+			j := strings.Index(html[i+4:], "-->")
+			if j < 0 {
+				break
+			}
+			i += 4 + j + 3
+			continue
+		}
+		if html[i] != '<' {
+			i++
+			continue
+		}
+		if strings.HasPrefix(html[i:], "</") {
+			closeEnd := strings.IndexByte(html[i:], '>')
+			if closeEnd < 0 {
+				break
+			}
+			closeEnd += i
+			cname := strings.ToLower(strings.TrimSpace(html[i+2 : closeEnd]))
+			if sp := strings.IndexFunc(cname, func(r rune) bool { return r == ' ' || r == '\t' || r == '\n' }); sp >= 0 {
+				cname = cname[:sp]
+			}
+			if cname == name {
+				depth--
+				if depth == 0 {
+					return html[start : closeEnd+1], closeEnd + 1, nil
+				}
+			}
+			i = closeEnd + 1
+			continue
+		}
+		if i+1 < len(html) && (html[i+1] == '!' || html[i+1] == '?') {
+			j := strings.IndexByte(html[i:], '>')
+			if j < 0 {
+				break
+			}
+			i += j + 1
+			continue
+		}
+		openEnd := scanTagEnd(html, i)
+		if openEnd < 0 {
+			break
+		}
+		openInner := strings.TrimSpace(html[i+1 : openEnd])
+		openSelf := strings.HasSuffix(openInner, "/")
+		if openSelf {
+			openInner = strings.TrimSpace(openInner[:len(openInner)-1])
+		}
+		openName, _ := splitTag(openInner)
+		if openName == name && !openSelf && !voidHTML[openName] {
+			depth++
+		}
+		i = openEnd + 1
+	}
+	return "", 0, fmt.Errorf("mockup: unclosed <%s>", name)
+}
+
+func hasClassToken(class, want string) bool {
+	for _, c := range classTokens(class) {
+		if c == want {
+			return true
+		}
+	}
+	return false
+}
+
+func forEachHTMLStartTag(html string, fn func(name string, attrs map[string]string)) {
+	i := 0
+	for i < len(html) {
+		if strings.HasPrefix(html[i:], "<!--") {
+			j := strings.Index(html[i+4:], "-->")
+			if j < 0 {
+				return
+			}
+			i += 4 + j + 3
+			continue
+		}
+		if html[i] != '<' {
+			i++
+			continue
+		}
+		if i+1 < len(html) && (html[i+1] == '/' || html[i+1] == '!' || html[i+1] == '?') {
+			j := strings.IndexByte(html[i:], '>')
+			if j < 0 {
+				return
+			}
+			i += j + 1
+			continue
+		}
+		end := scanTagEnd(html, i)
+		if end < 0 {
+			return
+		}
+		inner := strings.TrimSpace(html[i+1 : end])
+		if strings.HasSuffix(inner, "/") {
+			inner = strings.TrimSpace(inner[:len(inner)-1])
+		}
+		name, attrs := splitTag(inner)
+		fn(name, attrs)
+		i = end + 1
+	}
+}
+
+func scanTagEnd(html string, start int) int {
+	var quote byte
+	for i := start + 1; i < len(html); i++ {
+		c := html[i]
+		if quote != 0 {
+			if c == quote {
+				quote = 0
+			}
+			continue
+		}
+		if c == '"' || c == '\'' {
+			quote = c
+			continue
+		}
+		if c == '>' {
+			return i
+		}
+	}
+	return -1
+}

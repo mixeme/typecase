@@ -15,6 +15,13 @@ do, not what the authors did.
 The typecase wordmark and icon work documented below stays documentation-only
 until released separately.
 
+### For maintainers (mockup source)
+
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 0 only numbers
+  mockup frames (`data-frame`) and adds repository tools: a lint that those ids
+  are unique, and a Chrome before/after screenshot of every frame at 1351 and
+  820. Allowed exceptions live in `docs/visual/allowed-diffs.md`.
+
 ### For consumers (layout)
 
 - **Do not import `layout`.** Geometry tables are the library's, like `token`.
