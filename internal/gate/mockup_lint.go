@@ -4,20 +4,27 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 )
 
-// MockupLintRule is one check against the mockup copy. Step 0 enables only
-// uniqueness of data-frame; later plan 1 steps append rules.
+// MockupLintRule is one check against the mockup copy. Later plan 1 steps
+// append rules to MockupLintLive.
 type MockupLintRule string
 
 const (
 	// MockupFrameIDs requires every .frame to have a unique data-frame.
 	MockupFrameIDs MockupLintRule = "frame-ids"
+	// MockupStyleBlocks requires product CSS in <style data-tc> and page
+	// chrome in a second <style>, with no selectors crossing the cut.
+	MockupStyleBlocks MockupLintRule = "style-blocks"
 )
 
 // MockupLintStep0 is the rule set for plan 1 step 0.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
+
+// MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
+var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks}
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
 
@@ -26,25 +33,29 @@ func MockupFile(root string) string {
 	return filepath.Join(root, filepath.FromSlash(mockupRel))
 }
 
-// CheckMockupLintFile reads the mockup copy and runs the step-0 rules.
+// CheckMockupLintFile reads the mockup copy and runs the live rule set.
 func CheckMockupLintFile(root string) error {
 	data, err := os.ReadFile(MockupFile(root))
 	if err != nil {
 		return fmt.Errorf("mockup-lint: %w", err)
 	}
-	return CheckMockupLint(string(data), MockupLintStep0...)
+	return CheckMockupLint(string(data), MockupLintLive...)
 }
 
 // CheckMockupLint runs the given rules against mockup HTML.
 func CheckMockupLint(html string, rules ...MockupLintRule) error {
 	if len(rules) == 0 {
-		rules = MockupLintStep0
+		rules = MockupLintLive
 	}
 	var errs []string
 	for _, r := range rules {
 		switch r {
 		case MockupFrameIDs:
 			if err := checkMockupFrameIDs(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupStyleBlocks:
+			if err := checkMockupStyleBlocks(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:
@@ -108,6 +119,170 @@ func collectMockupFrames(html string) (ids []string, n int) {
 		ids = append(ids, attrs["data-frame"])
 	})
 	return ids, n
+}
+
+var mockupCSSClassRe = regexp.MustCompile(`\.([A-Za-z_][\w-]*)`)
+
+var mockupPageClass = map[string]bool{
+	"wrap": true, "doc-head": true, "lamp": true, "sub": true,
+	"lede": true, "note": true, "toc": true, "t-h": true,
+	"frame": true, "frame-label": true, "frames": true,
+	"swatches": true, "sw": true, "demo": true, "cols": true,
+	"plan": true, "frag": true, "chip": true, "doc": true,
+}
+
+var mockupPageBare = map[string]bool{
+	"*": true, "body": true, "html": true,
+	"h1": true, "h2": true, "h3": true, "h4": true,
+	"p": true, "a": true, "code": true,
+	"figure": true, "figcaption": true, "figcaption b": true,
+}
+
+func mockupProductClass(c string) bool {
+	if c == "mock" || strings.HasPrefix(c, "m-") || strings.HasPrefix(c, "auth-") {
+		return true
+	}
+	switch c {
+	case "w-xs", "w-sm", "w-md", "w-lg", "w-xl", "w-full", "has-side", "no-rail":
+		return true
+	}
+	return false
+}
+
+type mockupSheet struct {
+	dataTC bool
+	css    string
+}
+
+func checkMockupStyleBlocks(html string) error {
+	sheets, err := mockupStyleSheets(html)
+	if err != nil {
+		return err
+	}
+	var product, page []string
+	for _, s := range sheets {
+		if s.dataTC {
+			product = append(product, s.css)
+		} else {
+			page = append(page, s.css)
+		}
+	}
+	if len(product) != 1 {
+		return fmt.Errorf("style-blocks: want 1 <style data-tc>, got %d", len(product))
+	}
+	if len(page) != 1 {
+		return fmt.Errorf("style-blocks: want 1 page <style>, got %d", len(page))
+	}
+	var errs []string
+	for _, sel := range mockupCSSSelectors(product[0]) {
+		if mockupSelectorHasPage(sel) {
+			errs = append(errs, "data-tc has page selector "+sel)
+		}
+	}
+	for _, sel := range mockupCSSSelectors(page[0]) {
+		if mockupSelectorHasProduct(sel) {
+			errs = append(errs, "page style has product class in "+sel)
+		}
+	}
+	if len(errs) > 6 {
+		errs = append(errs[:6], fmt.Sprintf("… %d more", len(errs)-6))
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("style-blocks: %s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
+func mockupStyleSheets(html string) ([]mockupSheet, error) {
+	var out []mockupSheet
+	i := 0
+	for i < len(html) {
+		start, end, name, attrs, ok := nextStartTag(html, i)
+		if !ok {
+			break
+		}
+		if name != "style" {
+			i = end + 1
+			continue
+		}
+		outer, next, err := elementOuter(html, start, name)
+		if err != nil {
+			return nil, err
+		}
+		gt := strings.Index(outer, ">")
+		closeAt := strings.LastIndex(strings.ToLower(outer), "</style>")
+		css := ""
+		if gt >= 0 && closeAt > gt {
+			css = outer[gt+1 : closeAt]
+		}
+		_, dataTC := attrs["data-tc"]
+		out = append(out, mockupSheet{dataTC: dataTC, css: css})
+		i = next
+	}
+	return out, nil
+}
+
+func mockupCSSSelectors(css string) []string {
+	css = stripCSSComments(css)
+	var out []string
+	var walk func(string)
+	walk = func(s string) {
+		for {
+			s = strings.TrimSpace(s)
+			if s == "" {
+				return
+			}
+			open := strings.IndexByte(s, '{')
+			if open < 0 {
+				return
+			}
+			prelude := compactSel(s[:open])
+			end := matchBrace(s, open)
+			if end < 0 {
+				return
+			}
+			body := s[open+1 : end]
+			if strings.HasPrefix(prelude, "@font-face") {
+				out = append(out, "@font-face")
+			} else if strings.HasPrefix(prelude, "@") {
+				walk(body)
+			} else {
+				out = append(out, splitSelectors(prelude)...)
+			}
+			s = s[end+1:]
+		}
+	}
+	walk(css)
+	return out
+}
+
+func mockupSelectorHasPage(sel string) bool {
+	sel = compactSel(sel)
+	if sel == "@font-face" {
+		return true
+	}
+	for _, m := range mockupCSSClassRe.FindAllStringSubmatch(sel, -1) {
+		if mockupPageClass[m[1]] {
+			return true
+		}
+	}
+	return mockupPageBare[sel]
+}
+
+func mockupSelectorHasProduct(sel string) bool {
+	sel = compactSel(sel)
+	if strings.Contains(sel, "data-tc") {
+		return true
+	}
+	if strings.HasPrefix(sel, "@container") || strings.HasPrefix(sel, "@media") {
+		return true
+	}
+	for _, m := range mockupCSSClassRe.FindAllStringSubmatch(sel, -1) {
+		if mockupProductClass(m[1]) {
+			return true
+		}
+	}
+	return false
 }
 
 // MockupFrame is one .frame element extracted from the mockup.

@@ -486,11 +486,16 @@ func TestBite_mockupLint(t *testing.T) {
 	}
 	dup := `<div class="frame" data-frame="s-notes-1"></div>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
-	if err := gate.CheckMockupLint(dup); err == nil {
+	if err := gate.CheckMockupLint(dup, gate.MockupFrameIDs); err == nil {
 		t.Fatal("expected duplicate data-frame to fail")
 	}
-	if err := gate.CheckMockupLint(`<div class="frame"></div>`); err == nil {
+	if err := gate.CheckMockupLint(`<div class="frame"></div>`, gate.MockupFrameIDs); err == nil {
 		t.Fatal("expected missing data-frame to fail")
+	}
+	pageInProduct := `<style data-tc>.frame{border:0}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := gate.CheckMockupLint(pageInProduct); err == nil {
+		t.Fatal("expected page selector in data-tc to fail")
 	}
 }
 

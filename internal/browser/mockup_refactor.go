@@ -177,11 +177,49 @@ func channelDelta(a, b uint32) int {
 }
 
 // MockupShotShell is a page with mockup CSS and sprite, and an empty host for frames.
+// Style tags are flattened into one block so a split page/product stylesheet
+// paints like the single <style> of the step 1 baseline.
 func MockupShotShell(styles, sprite string) string {
+	css := flattenStyleTags(styles)
 	return "<!DOCTYPE html>\n<html lang=\"ru\"><head>\n<meta charset=\"utf-8\">\n" +
-		styles +
-		"\n<style>\nbody{margin:0;padding:0}\n" +
+		"<style>\n" + css + "\n" +
+		"body{margin:0;padding:0}\n" +
 		"*{caret-color:transparent!important;animation:none!important;transition:none!important}\n" +
 		"::-webkit-scrollbar{display:none}\n</style>\n</head><body>\n" +
+		// Off-screen Latin+Cyrillic so the three mockup fonts are decoded before a frame is injected.
+		`<div aria-hidden="true" style="position:absolute;left:-9999px;top:0;font-size:16px">` +
+		`<span style="font-family:'Public Sans'">AgЯя</span>` +
+		`<span style="font-family:Literata">AgЯя</span>` +
+		`<span style="font-family:'Source Code Pro'">AgЯя</span></div>` + "\n" +
 		sprite + "\n<div id=\"host\"></div>\n</body></html>"
+}
+
+func flattenStyleTags(html string) string {
+	low := strings.ToLower(html)
+	var b strings.Builder
+	i := 0
+	found := false
+	for i < len(low) {
+		start := strings.Index(low[i:], "<style")
+		if start < 0 {
+			break
+		}
+		start += i
+		gt := strings.Index(html[start:], ">")
+		if gt < 0 {
+			break
+		}
+		body := start + gt + 1
+		endRel := strings.Index(low[body:], "</style>")
+		if endRel < 0 {
+			break
+		}
+		b.WriteString(html[body : body+endRel])
+		found = true
+		i = body + endRel + len("</style>")
+	}
+	if !found {
+		return html
+	}
+	return b.String()
 }

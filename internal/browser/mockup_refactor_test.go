@@ -24,6 +24,16 @@ import (
 
 const mockupStageSize = 1
 
+func TestMockupShotShellFlattensStyles(t *testing.T) {
+	got := browser.MockupShotShell(`<style>a{color:red}</style><style data-tc>b{color:blue}</style>`, "")
+	if strings.Count(strings.ToLower(got), "<style") != 1 {
+		t.Fatalf("want one <style>, got %s", got)
+	}
+	if !strings.Contains(got, "a{color:red}") || !strings.Contains(got, "b{color:blue}") {
+		t.Fatalf("missing concatenated rules: %s", got)
+	}
+}
+
 func TestParseAllowedDiffs(t *testing.T) {
 	md := "База: abc\n\n| Кадр | Ширина | Решение | Что меняется |\n|------|-------:|---------|----------------|\n| s-notes-1 | 820 | Р-7 | меню |\n"
 	got, err := browser.ParseAllowedDiffs(md)

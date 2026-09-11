@@ -17,13 +17,15 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 1 renames
-  mockup tokens to the Typecase `--tc-*` names, switches the dark calendar
-  frame to `data-tc-theme="dark"`, and ships Public Sans, Literata and Source
-  Code Pro next to the mockup (`docs/visual/fonts/`). `--tc-dusty` keeps the
-  mockup value `#6A6351` (Р-9). This commit is the screenshot baseline. Step 0
-  numbered frames and added the unique-id lint and the Chrome before/after
-  tool; allowed exceptions live in `docs/visual/allowed-diffs.md`.
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 2 puts
+  component rules in `<style data-tc>` in source order and page chrome
+  (`@font-face`, `.wrap`, `.frame`, TOC) in a separate `<style>`. The lint
+  rejects page selectors in `data-tc` and product classes in the page block.
+  Step 1 renamed tokens to `--tc-*`, set `data-tc-theme="dark"` on the dark calendar frame,
+  and shipped Public Sans, Literata and Source Code Pro next to the mockup
+  (`docs/visual/fonts/`). `--tc-dusty` keeps the mockup value `#6A6351` (Р-9).
+  Step 0 numbered frames and added the unique-id lint and the Chrome
+  before/after tool; allowed exceptions live in `docs/visual/allowed-diffs.md`.
 
 ### For consumers (layout)
 

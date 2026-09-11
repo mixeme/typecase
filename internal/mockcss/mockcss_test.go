@@ -33,3 +33,13 @@ func TestGenerateKeepsOnlyOwnContext(t *testing.T) {
 		t.Fatal("rule of another context leaked")
 	}
 }
+
+func TestStylePrefersDataTC(t *testing.T) {
+	html := `<style>body{margin:0}</style><style data-tc>.m-btn{height:26px}</style>`
+	if got := Style(html); got != ".m-btn{height:26px}" {
+		t.Fatalf("got %q", got)
+	}
+	if got := Style(`<style>.m-btn{color:red}</style>`); got != ".m-btn{color:red}" {
+		t.Fatalf("fallback: %q", got)
+	}
+}

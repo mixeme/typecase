@@ -172,19 +172,34 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 
 func mockupStyle(html string) string {
 	low := strings.ToLower(html)
-	start := strings.Index(low, "<style")
-	if start < 0 {
-		return ""
+	i := 0
+	first := ""
+	for i < len(low) {
+		start := strings.Index(low[i:], "<style")
+		if start < 0 {
+			return first
+		}
+		start += i
+		gt := strings.Index(html[start:], ">")
+		if gt < 0 {
+			return first
+		}
+		open := strings.ToLower(html[start : start+gt+1])
+		body := start + gt + 1
+		end := strings.Index(low[body:], "</style>")
+		if end < 0 {
+			return first
+		}
+		css := html[body : body+end]
+		if first == "" {
+			first = css
+		}
+		if strings.Contains(open, "data-tc") {
+			return css
+		}
+		i = body + end + len("</style>")
 	}
-	gt := strings.Index(html[start:], ">")
-	if gt < 0 {
-		return ""
-	}
-	end := strings.Index(low[start+gt+1:], "</style>")
-	if end < 0 {
-		return ""
-	}
-	return html[start+gt+1 : start+gt+1+end]
+	return first
 }
 
 func propsForSelector(rules []cssRule, want string) map[string]string {

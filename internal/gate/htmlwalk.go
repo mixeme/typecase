@@ -3,6 +3,7 @@ package gate
 import (
 	"strings"
 	"unicode"
+	"unicode/utf8"
 )
 
 type htmlNode struct {
@@ -89,43 +90,71 @@ func splitTag(inner string) (name string, attrs map[string]string) {
 	attrs = map[string]string{}
 	inner = strings.TrimSpace(inner)
 	i := 0
-	for i < len(inner) && !unicode.IsSpace(rune(inner[i])) {
-		i++
+	for i < len(inner) {
+		r, n := utf8.DecodeRuneInString(inner[i:])
+		if unicode.IsSpace(r) {
+			break
+		}
+		i += n
 	}
 	name = inner[:i]
 	rest := strings.TrimSpace(inner[i:])
 	for rest != "" {
-		eq := strings.IndexByte(rest, '=')
-		if eq < 0 {
-			break
+		j := 0
+		for j < len(rest) {
+			r, n := utf8.DecodeRuneInString(rest[j:])
+			if r == '=' || unicode.IsSpace(r) {
+				break
+			}
+			j += n
 		}
-		key := strings.ToLower(strings.TrimSpace(rest[:eq]))
-		rest = strings.TrimSpace(rest[eq+1:])
+		if j == 0 {
+			_, n := utf8.DecodeRuneInString(rest)
+			if n < 1 {
+				n = 1
+			}
+			rest = strings.TrimSpace(rest[n:])
+			continue
+		}
+		key := strings.ToLower(rest[:j])
+		rest = strings.TrimSpace(rest[j:])
+		if rest == "" || rest[0] != '=' {
+			attrs[key] = ""
+			continue
+		}
+		rest = strings.TrimSpace(rest[1:])
 		if rest == "" {
+			attrs[key] = ""
 			break
 		}
 		var val string
 		if rest[0] == '"' {
-			if j := strings.IndexByte(rest[1:], '"'); j >= 0 {
-				val = rest[1 : 1+j]
-				rest = strings.TrimSpace(rest[1+j+1:])
+			if k := strings.IndexByte(rest[1:], '"'); k >= 0 {
+				val = rest[1 : 1+k]
+				rest = strings.TrimSpace(rest[1+k+1:])
 			} else {
+				attrs[key] = rest[1:]
 				break
 			}
 		} else if rest[0] == '\'' {
-			if j := strings.IndexByte(rest[1:], '\''); j >= 0 {
-				val = rest[1 : 1+j]
-				rest = strings.TrimSpace(rest[1+j+1:])
+			if k := strings.IndexByte(rest[1:], '\''); k >= 0 {
+				val = rest[1 : 1+k]
+				rest = strings.TrimSpace(rest[1+k+1:])
 			} else {
+				attrs[key] = rest[1:]
 				break
 			}
 		} else {
-			j := 0
-			for j < len(rest) && !unicode.IsSpace(rune(rest[j])) {
-				j++
+			k := 0
+			for k < len(rest) {
+				r, n := utf8.DecodeRuneInString(rest[k:])
+				if unicode.IsSpace(r) {
+					break
+				}
+				k += n
 			}
-			val = rest[:j]
-			rest = strings.TrimSpace(rest[j:])
+			val = rest[:k]
+			rest = strings.TrimSpace(rest[k:])
 		}
 		attrs[key] = val
 	}

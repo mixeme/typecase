@@ -68,6 +68,20 @@ figcaption b{color:var(--tc-ink);font-weight:600}
    display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
 .demo.col{flex-direction:column;align-items:stretch;gap:10px}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px 32px;max-width:1400px}
+.frame-label .plan{border:.5px solid var(--tc-edge);border-radius:2px;padding:0 5px;
+  color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
+/* Метка «фрагмент»: кадр показывает часть экрана. Разделы 7–12 — целиком. */
+.frame-label .frag{border:.5px dashed var(--tc-edge);border-radius:2px;padding:0 5px;
+  color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
+</style>
+<style data-tc>
+:root{
+  --tc-ink:#17211C; --tc-card:#E8DFCB; --tc-edge:#C9BFA6; --tc-accent:#4A6B52;
+  --tc-bg:#F5F1E8; --tc-surface:#FFFDF7; --tc-rule:#D8CFBB; --tc-hair:#E2DACA; --tc-dusty:#6A6351; --tc-muted:#56503F; --tc-danger:#A84232;
+  --tc-font-serif:"Literata", Georgia, "Times New Roman", serif;
+  --tc-font-sans:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tc-font-mono:"Source Code Pro", ui-monospace, "Cascadia Mono", monospace;
+}
 
 /* Классы .m-* — набор компонентов; имена те, что уйдут в carrel.css. */
 .mock{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px;
@@ -93,11 +107,6 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 .m-logo .wd{fill:var(--tc-ink)}
 .m-logo .sh{fill:var(--tc-accent)}
 .m-brand .m-logo{width:56px;height:22px}
-.frame-label .plan{border:.5px solid var(--tc-edge);border-radius:2px;padding:0 5px;
-  color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
-/* Метка «фрагмент»: кадр показывает часть экрана. Разделы 7–12 — целиком. */
-.frame-label .frag{border:.5px dashed var(--tc-edge);border-radius:2px;padding:0 5px;
-  color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
 .m-badge.is-plan{border-style:dashed}
 .m-badge.is-local{border-color:transparent;color:var(--tc-danger);
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
@@ -242,8 +251,7 @@ a.m-rail-about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc-dusty
 .m-in.is-mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .m-check{display:flex;align-items:center;gap:7px;font-size:12.5px}
 /* Высота строки: 28 поле, 26 панель, 22 таблица. Всё в строке берёт её. */
-.m-f > .m-check:only-child,.m-f > label + .m-check:last-child,
-.m-form > .m-check,.m-fset > .m-check,.demo > .m-check{min-height:28px}
+.m-f > .m-check:only-child,.m-f > label + .m-check:last-child,.m-form > .m-check,.m-fset > .m-check{min-height:28px}
 /* Форма равняется сверху, по строке подписи. Пустая строка подписи —
    только если подпись есть у соседа; одинокой кнопке она не нужна. */
 *:has(> .m-f > label) > .m-f:has(> .m-check:only-child)::before,

@@ -75,23 +75,37 @@ func ClassesIn(markup string) map[string]bool {
 	return out
 }
 
-// Style returns the text of the first <style> element in html.
+// Style returns the text of <style data-tc>, or the first <style> if none has data-tc.
 func Style(html string) string {
 	low := strings.ToLower(html)
-	start := strings.Index(low, "<style")
-	if start < 0 {
-		return ""
+	i := 0
+	first := ""
+	for i < len(low) {
+		start := strings.Index(low[i:], "<style")
+		if start < 0 {
+			return first
+		}
+		start += i
+		gt := strings.Index(html[start:], ">")
+		if gt < 0 {
+			return first
+		}
+		open := strings.ToLower(html[start : start+gt+1])
+		body := start + gt + 1
+		end := strings.Index(low[body:], "</style>")
+		if end < 0 {
+			return first
+		}
+		css := html[body : body+end]
+		if first == "" {
+			first = css
+		}
+		if strings.Contains(open, "data-tc") {
+			return css
+		}
+		i = body + end + len("</style>")
 	}
-	gt := strings.Index(html[start:], ">")
-	if gt < 0 {
-		return ""
-	}
-	body := start + gt + 1
-	end := strings.Index(low[body:], "</style>")
-	if end < 0 {
-		return ""
-	}
-	return html[body : body+end]
+	return first
 }
 
 // Generate returns the rules of css that concern only o.Keep, renamed.
