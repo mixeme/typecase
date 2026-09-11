@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "screens",
+      "runtimeExecutable": "go",
+      "runtimeArgs": ["run", "./cmd/screens"],
+      "port": 8083,
+      "autoPort": true
+    },
+    {
+      "name": "proof",
+      "runtimeExecutable": "go",
+      "runtimeArgs": ["run", "./cmd/proof"],
+      "port": 8084,
+      "autoPort": true
+    },
+    {
+      "name": "mockup",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8090", "--bind", "127.0.0.1", "--directory", "docs/visual"],
+      "port": 8090
+    }
+  ]
+}
