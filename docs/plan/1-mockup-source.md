@@ -11,7 +11,7 @@
 **Где править во время плана.** Правки этого плана делаются в копии Typecase (`docs/visual/carrel-ui-mockups.html` и `docs/visual/fonts/`) — там же скрипты, сверка и линт. В конце каждого шага оба пути копируются в Carrel (`carrel_reborn/docs/visual/`) отдельным коммитом Carrel; после копирования файлы в двух репозиториях совпадают побайтно. После плана направление обратное: макет правится в Carrel, копия в Typecase заменяется целиком. Независимость держится на содержимом файла (нет ссылок на Typecase), а не на том, где его правят.
 
 - [x] Шаг 0 — инструменты: номера кадров, снимок «до», линт макета
-- [ ] Шаг 1 — токены и шрифты
+- [x] Шаг 1 — токены и шрифты
 - [ ] Шаг 2 — CSS продукта отдельным блоком
 - [ ] Шаг 3 — переименование в `tc-*`
 - [ ] Шаг 4 — настоящие элементы в кадрах
@@ -143,11 +143,11 @@ PNG в репозиторий не класть. Инструменты живу
 
 ## Шаг 1 — токены и шрифты
 
-- [ ] `:root` макета: `--ink`→`--tc-ink`, `--paper`→`--tc-surface`, `--bg`→`--tc-bg`, `--card`→`--tc-card`, `--card-border`→`--tc-edge`, `--rule`→`--tc-rule`, `--hair`→`--tc-hair`, `--dusty`→`--tc-dusty`, `--muted`→`--tc-muted`, `--accent`→`--tc-accent`, `--alert`→`--tc-danger`, `--f-*`→`--tc-font-*`. `--accent-lt` объявлен и нигде не используется — удалить.
-- [ ] Токены раскладки: `--pad`→`--tc-page-gutter`, `--rail`→`--tc-rail`, `--side`→`--tc-side`, `--top`→`--tc-top`. Телефонное `--pad:14px` — `--tc-page-gutter-narrow` (такой токен в Typecase уже есть), подключается в состоянии `drawer` на шаге 7.
-- [ ] `.mock.is-dark{…}` → `[data-tc-theme="dark"]{…}`; `.is-dark X` → `[data-tc-theme="dark"] X`; кадр тёмного календаря — атрибут на корне.
-- [ ] Шрифты: копии `fonts/PublicSans.ttf`, `Literata.ttf`, `SourceCodePro.ttf` и `OFL.txt` Typecase — в `docs/visual/fonts/`; `@font-face` страницы — `url("fonts/…")`. Моно — Source Code Pro. Единственный шаг, который меняет вид всех кадров; после него — базовый коммит сверки.
-- [ ] Р-9: значение макета остаётся; библиотека получит его вместе с CSS (план 2).
+- [x] `:root` макета: `--ink`→`--tc-ink`, `--paper`→`--tc-surface`, `--bg`→`--tc-bg`, `--card`→`--tc-card`, `--card-border`→`--tc-edge`, `--rule`→`--tc-rule`, `--hair`→`--tc-hair`, `--dusty`→`--tc-dusty`, `--muted`→`--tc-muted`, `--accent`→`--tc-accent`, `--alert`→`--tc-danger`, `--f-*`→`--tc-font-*`. `--accent-lt` объявлен и нигде не используется — удалить.
+- [x] Токены раскладки: `--pad`→`--tc-page-gutter`, `--rail`→`--tc-rail`, `--side`→`--tc-side`, `--top`→`--tc-top`. Телефонное `--pad:14px` — `--tc-page-gutter-narrow` (такой токен в Typecase уже есть), подключается в состоянии `drawer` на шаге 7.
+- [x] `.mock.is-dark{…}` → `[data-tc-theme="dark"]{…}`; `.is-dark X` → `[data-tc-theme="dark"] X`; кадр тёмного календаря — атрибут на корне.
+- [x] Шрифты: копии `fonts/PublicSans.ttf`, `Literata.ttf`, `SourceCodePro.ttf` и `OFL.txt` Typecase — в `docs/visual/fonts/`; `@font-face` страницы — `url("fonts/…")`. Моно — Source Code Pro. Единственный шаг, который меняет вид всех кадров; после него — базовый коммит сверки.
+- [x] Р-9: значение макета остаётся; библиотека получит его вместе с CSS (план 2).
 
 ## Шаг 2 — CSS продукта отдельным блоком
 

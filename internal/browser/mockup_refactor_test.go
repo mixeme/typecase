@@ -191,7 +191,7 @@ func TestMockupRefactor(t *testing.T) {
 				if err != nil {
 					t.Fatal(err)
 				}
-				js := fmt.Sprintf(`(function(){
+				js := fmt.Sprintf(`(async function(){
   var host = document.getElementById("host");
   host.innerHTML = %s;
   var f = host.querySelector(".frame");
@@ -201,6 +201,12 @@ func TestMockupRefactor(t *testing.T) {
   f.style.maxHeight = %d + "px";
   f.style.overflow = "hidden";
   f.style.margin = "0";
+  if (document.fonts && document.fonts.ready) {
+    await Promise.race([
+      document.fonts.ready,
+      new Promise(function(r){ setTimeout(r, 2000); })
+    ]);
+  }
   return true;
 })()`, raw, width, width, browser.MockupShotMaxHeight)
 				var png []byte

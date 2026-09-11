@@ -17,10 +17,13 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 0 only numbers
-  mockup frames (`data-frame`) and adds repository tools: a lint that those ids
-  are unique, and a Chrome before/after screenshot of every frame at 1351 and
-  820. Allowed exceptions live in `docs/visual/allowed-diffs.md`.
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 1 renames
+  mockup tokens to the Typecase `--tc-*` names, switches the dark calendar
+  frame to `data-tc-theme="dark"`, and ships Public Sans, Literata and Source
+  Code Pro next to the mockup (`docs/visual/fonts/`). `--tc-dusty` keeps the
+  mockup value `#6A6351` (Р-9). This commit is the screenshot baseline. Step 0
+  numbered frames and added the unique-id lint and the Chrome before/after
+  tool; allowed exceptions live in `docs/visual/allowed-diffs.md`.
 
 ### For consumers (layout)
 

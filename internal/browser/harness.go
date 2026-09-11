@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"path/filepath"
 	"sync"
 	"testing"
 	"time"
@@ -55,6 +56,12 @@ func NewHarness(t *testing.T) *Harness {
 
 	h := &Harness{t: t, pages: make(map[string]string)}
 	mux := http.NewServeMux()
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatalf("module root: %v", err)
+	}
+	mockupFonts := filepath.Join(root, "docs", "visual", "fonts")
+	mux.Handle("/page/fonts/", http.StripPrefix("/page/fonts/", http.FileServer(http.Dir(mockupFonts))))
 	mux.HandleFunc("/typecase.css", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css; charset=utf-8")
 		_, _ = w.Write([]byte(css))

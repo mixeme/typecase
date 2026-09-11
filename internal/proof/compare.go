@@ -19,7 +19,7 @@ table.d td,table.d th{border-bottom:1px solid #e2daca;padding:3px 10px 3px 0;tex
 code{font:11.5px ui-monospace,monospace}
 </style></head><body>
 <h1>Кадры макета и пруф: построчное сравнение</h1>
-<div>Каждый кадр и его экран пруфа обходятся одним деревом на пяти ширинах кадра. Считаются координаты, размеры и вычисленные стили каждого узла и каждого куска текста. Отдельно — расхождения только в токене <code>--dusty</code>.</div>
+<div>Каждый кадр и его экран пруфа обходятся одним деревом на пяти ширинах кадра. Считаются координаты, размеры и вычисленные стили каждого узла и каждого куска текста. Отдельно — расхождения только в токене <code>--tc-dusty</code>.</div>
 <table id="sum"></table>
 <div id="where"></div>
 <div class="pair">
@@ -128,7 +128,7 @@ function summary(){
   let h="<tr><th>Кадр</th>"+WIDTHS.map(w=>"<th>"+w+" px</th>").join("")+"</tr>";
   for(const c of CFG.cases){h+="<tr><th>"+c.name+"</th>";for(const W of WIDTHS){const r=RES[c.name+"@"+W];
     const real=r.diffs.filter(d=>!d.token&&!d.dev).length,tok=r.diffs.filter(d=>d.token).length,dev=r.diffs.filter(d=>d.dev).length;
-    h+="<td class='"+(real?"bad":"ok")+"' onclick='show(\""+c.name+"\","+W+")'>"+r.nodes+" узлов<br>расхождений: <b>"+real+"</b><br><small>--dusty: "+tok+(dev?" · структура: "+dev:"")+"</small></td>";}h+="</tr>";}
+    h+="<td class='"+(real?"bad":"ok")+"' onclick='show(\""+c.name+"\","+W+")'>"+r.nodes+" узлов<br>расхождений: <b>"+real+"</b><br><small>--tc-dusty: "+tok+(dev?" · структура: "+dev:"")+"</small></td>";}h+="</tr>";}
   document.getElementById("sum").innerHTML=h;
 }
 async function show(name,W){

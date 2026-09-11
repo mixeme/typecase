@@ -31,13 +31,15 @@ var Cases = []Case{
 }
 
 // tokens maps mockup custom properties to library tokens (same values, one
-// exception: --dusty is #6A6351 in the mockup, #6f6856 in Typecase).
+// exception: --tc-dusty is #6A6351 in the mockup, #6f6856 in Typecase).
+// Layout sizes the proof still prefixes (rail/side/top are not library tokens).
 var tokens = map[string]string{
-	"ink": "tc-ink", "card": "tc-card", "card-border": "tc-edge", "accent": "tc-accent",
-	"bg": "tc-bg", "paper": "tc-surface", "rule": "tc-rule", "hair": "tc-hair",
-	"dusty": "tc-dusty", "muted": "tc-muted", "alert": "tc-danger",
-	"f-serif": "tc-font-serif", "f-sans": "tc-font-sans", "f-mono": "tc-font-mono",
-	"pad": "tc-page-gutter",
+	"tc-ink": "tc-ink", "tc-card": "tc-card", "tc-edge": "tc-edge", "tc-accent": "tc-accent",
+	"tc-bg": "tc-bg", "tc-surface": "tc-surface", "tc-rule": "tc-rule", "tc-hair": "tc-hair",
+	"tc-dusty": "tc-dusty", "tc-muted": "tc-muted", "tc-danger": "tc-danger",
+	"tc-font-serif": "tc-font-serif", "tc-font-sans": "tc-font-sans", "tc-font-mono": "tc-font-mono",
+	"tc-page-gutter": "tc-page-gutter", "tc-page-gutter-narrow": "tc-page-gutter-narrow",
+	"tc-rail": "tcx-rail", "tc-side": "tcx-side", "tc-top": "tcx-top",
 }
 
 // elements: where a widget prints another element than the frame.
@@ -58,7 +60,7 @@ var dropAt = []string{
 
 // dropRules: mockup selectors not carried over, with the reason.
 var dropRules = []string{
-	".mock.is-dark", // dark token values come from the library's own tokens
+	`[data-tc-theme="dark"]`, // dark token values come from the library's own tokens
 }
 
 // extraClasses: mockup classes a widget prints although its frame does not
@@ -174,10 +176,10 @@ func page(c Case) string {
 </head><body>` + s.Render() + `<script src="/tc.js"></script></body></html>`
 }
 
-// mockupWithFonts gives the mockup the library font files and mono stack, so
-// text measures the same on both sides. Layout rules are untouched.
+// mockupWithFonts adds @font-face at /fonts/ so the /mockup page uses the
+// same files as the proof screens. Layout rules are untouched.
 func mockupWithFonts(html string) string {
-	inject := "<style>" + fontFaces + `:root{--f-mono:"Source Code Pro",ui-monospace,"Cascadia Mono",monospace}</style>`
+	inject := "<style>" + fontFaces + `</style>`
 	return strings.Replace(html, "</head>", inject+"</head>", 1)
 }
 

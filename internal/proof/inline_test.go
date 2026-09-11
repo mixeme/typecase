@@ -31,7 +31,7 @@ func TestInlineRulesAreCopiedFromFrames(t *testing.T) {
 	}
 	for _, r := range frameInline {
 		if name, val, ok := strings.Cut(r.From, `="`); ok {
-			// a presentation attribute such as stroke="var(--alert)"
+			// a presentation attribute such as stroke="var(--tc-danger)"
 			if !strings.Contains(frames[r.Frame], r.From) {
 				t.Errorf("%s: %s is not in frame %s", r.Selector, r.From, r.Frame)
 			}
