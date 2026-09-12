@@ -21,6 +21,7 @@ until released separately.
   component rules in `<style data-tc>` in source order and page chrome
   (`@font-face`, `.wrap`, `.frame`, TOC) in a separate `<style>`. The lint
   rejects page selectors in `data-tc` and product classes in the page block.
+  Chrome before/after vs the step 1 base is 0-diff (channel ±2).
   Step 1 renamed tokens to `--tc-*`, set `data-tc-theme="dark"` on the dark calendar frame,
   and shipped Public Sans, Literata and Source Code Pro next to the mockup
   (`docs/visual/fonts/`). `--tc-dusty` keeps the mockup value `#6A6351` (Р-9).
