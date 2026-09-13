@@ -22,13 +22,15 @@ const (
 	// chrome and its label) to be tc-*, is-*, or mk-* (mk-* only in
 	// m-desktop frames). .mock is forbidden.
 	MockupFrameClasses MockupLintRule = "frame-classes"
+	// MockupFrameElements requires real controls in frames: button, kbd.
+	MockupFrameElements MockupLintRule = "frame-elements"
 )
 
 // MockupLintStep0 is the rule set for plan 1 step 0.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 
 // MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
-var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses}
+var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements}
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
 
@@ -64,6 +66,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupFrameClasses:
 			if err := checkMockupFrameClasses(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupFrameElements:
+			if err := checkMockupFrameElements(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:
@@ -256,6 +262,52 @@ func checkMockupFrameClasses(html string) error {
 	}
 	if len(errs) > 0 {
 		return fmt.Errorf("frame-classes: %s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
+var mockupButtonClass = map[string]bool{
+	"tc-btn": true, "tc-close": true, "tc-check": true,
+	"tc-seg__opt": true, "tc-menu__item": true, "tc-usermenu": true,
+}
+
+func checkMockupFrameElements(html string) error {
+	var errs []string
+	i := 0
+	for i < len(html) {
+		start, end, name, attrs, ok := nextStartTag(html, i)
+		if !ok {
+			break
+		}
+		if !hasClassToken(attrs["class"], "frame") {
+			i = end + 1
+			continue
+		}
+		outer, next, err := elementOuter(html, start, name)
+		if err != nil {
+			return err
+		}
+		id := attrs["data-frame"]
+		walkHTML(parseHTML(outer), func(n *htmlNode) {
+			if n.tag == "#root" || nodeHasClass(n, "frame") || nodeHasClass(n, "frame-label") || ancestorHasClass(n, "frame-label") {
+				return
+			}
+			for _, c := range n.class {
+				if mockupButtonClass[c] && n.tag != "button" {
+					errs = append(errs, fmt.Sprintf("%s: %s is <%s>, want <button>", id, c, n.tag))
+				}
+				if c == "tc-kbd" && n.tag != "kbd" {
+					errs = append(errs, fmt.Sprintf("%s: tc-kbd is <%s>, want <kbd>", id, n.tag))
+				}
+			}
+		})
+		i = next
+	}
+	if len(errs) > 8 {
+		errs = append(errs[:8], fmt.Sprintf("… %d more", len(errs)-8))
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("frame-elements: %s", strings.Join(errs, "; "))
 	}
 	return nil
 }

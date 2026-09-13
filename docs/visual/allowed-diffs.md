@@ -30,3 +30,35 @@ go test ./internal/browser -timeout 35m -run TestMockupRefactor
 
 | Кадр | Ширина | Решение | Что меняется |
 |------|-------:|---------|----------------|
+| s-contacts-3 | 1351 | шаг 4 | нативный input type=date/time |
+| s-contacts-3 | 820 | шаг 4 | нативный input type=date/time |
+| s-contacts-4 | 1351 | шаг 4 | нативный input type=date/time |
+| s-contacts-4 | 820 | шаг 4 | нативный input type=date/time |
+| s-contacts-7 | 1351 | шаг 4 | нативный input type=date/time |
+| s-contacts-7 | 820 | шаг 4 | нативный input type=date/time |
+| s-agenda-1 | 1351 | шаг 4 | нативный input type=date/time |
+| s-agenda-1 | 820 | шаг 4 | нативный input type=date/time |
+| s-agenda-3 | 1351 | шаг 4 | нативный input type=date/time |
+| s-agenda-3 | 820 | шаг 4 | нативный input type=date/time |
+| s-tasks-3 | 1351 | шаг 4 | нативный input type=date/time |
+| s-tasks-3 | 820 | шаг 4 | нативный input type=date/time |
+| s-notes-1 | 1351 | шаг 4 | нативный input type=date/time |
+| s-notes-1 | 820 | шаг 4 | нативный input type=date/time |
+| s-notes-4 | 1351 | шаг 4 | нативный input type=date/time |
+| s-notes-4 | 820 | шаг 4 | нативный input type=date/time |
+| s-notes-9 | 1351 | шаг 4 | нативный input type=date/time |
+| s-notes-9 | 820 | шаг 4 | нативный input type=date/time |
+| s-notes-10 | 1351 | шаг 4 | нативный input type=date/time |
+| s-notes-10 | 820 | шаг 4 | нативный input type=date/time |
+| s-publish-1 | 1351 | шаг 4 | нативный input type=date/time |
+| s-publish-1 | 820 | шаг 4 | нативный input type=date/time |
+| s-publish-2 | 1351 | шаг 4 | нативный input type=date/time |
+| s-publish-2 | 820 | шаг 4 | нативный input type=date/time |
+| s-admin-7 | 1351 | шаг 4 | нативный input type=date/time |
+| s-admin-7 | 820 | шаг 4 | нативный input type=date/time |
+| m-desktop-10 | 1351 | шаг 4 | нативный input type=date/time |
+| m-desktop-10 | 820 | шаг 4 | нативный input type=date/time |
+| s-profile-1 | 1351 | шаг 4 | иконки пунктов меню после выноса в .tc-drop |
+| s-profile-1 | 820 | шаг 4 | иконки пунктов меню после выноса в .tc-drop |
+| s-backup-8 | 1351 | шаг 4 | иконки пунктов меню после выноса в .tc-drop |
+| s-backup-8 | 820 | шаг 4 | иконки пунктов меню после выноса в .tc-drop |

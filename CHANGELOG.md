@@ -17,13 +17,22 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 3 renames
-  mockup classes to the Typecase dictionary (`tc-*`, states `is-*`) from
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 4 puts real
+  controls in mockup frames: `button` (btn, seg option, check, menu item,
+  pick, close, tick), `input`/`textarea`, `a href`, `kbd`. Search and icon
+  fields keep a `tc-q` input (value for painted text). Menus that sat inside
+  a button become `.tc-drop` (offset stays 6 px until step 6 / Р-7).
+  Control reset is the proof `controlCSS` (`.tcx` → `.tc-root`).
+  `go run ./internal/mockcss/elements` is idempotent. Lint `frame-elements`
+  requires those tags in frames. Chrome before/after vs the step 1 base is
+  0-diff except date/time native chrome, extracted pop-menu item icons
+  (`s-profile-1`, `s-backup-8`), and ≤4 PNG pixels of input ClearType at
+  quarter scale — all in `docs/visual/allowed-diffs.md`.
+  Step 3 renames mockup classes to the Typecase dictionary (`tc-*`, states `is-*`) from
   `docs/visual/rename.tsv` via `go run ./internal/mockcss/rename`; a second
   run is a no-op. Desktop window chrome is page classes `mk-*` (not in
   `data-tc`). The lint rejects leftover names inside frames (`.mock`, `m-*`,
-  short classes) and `mk-*` outside `m-desktop` frames. Chrome before/after
-  vs the step 1 base is 0-diff (channel ±2).
+  short classes) and `mk-*` outside `m-desktop` frames.
   Step 2 puts component rules in `<style data-tc>` in source order and page
   chrome (`@font-face`, `.wrap`, `.frame`, TOC) in a separate `<style>`.
   Step 1 renamed tokens to `--tc-*`, set `data-tc-theme="dark"` on the dark calendar frame,

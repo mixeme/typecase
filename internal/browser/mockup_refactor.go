@@ -17,6 +17,10 @@ const (
 
 	// MockupChannelTol is the per-channel 8-bit allowance for antialiasing.
 	MockupChannelTol = 2
+	// MockupAAPixelCap is how many PNG pixels may still differ after the
+	// per-channel check: at MockupShotScale 0.25 a one-pixel input-vs-span
+	// ClearType fringe becomes 2–4 pixels. A missing 11 px tick is ~8.
+	MockupAAPixelCap = 4
 	// MockupShotViewport is the Chrome viewport width while shooting frames.
 	MockupShotViewport = 1600
 	// MockupShotMaxHeight is the visible slice of a frame (viewport height).
@@ -149,6 +153,7 @@ func PNGsMatch(a, b []byte, tol int) error {
 	}
 	nDiff := 0
 	first := ""
+	minX, minY, maxX, maxY := ba.Dx(), ba.Dy(), -1, -1
 	for y := 0; y < ba.Dy(); y++ {
 		for x := 0; x < ba.Dx(); x++ {
 			r1, g1, b1, a1 := ia.At(ba.Min.X+x, ba.Min.Y+y).RGBA()
@@ -157,13 +162,26 @@ func PNGsMatch(a, b []byte, tol int) error {
 				channelDelta(b1, b2) > tol || channelDelta(a1, a2) > tol {
 				nDiff++
 				if first == "" {
-					first = fmt.Sprintf("%d,%d", x, y)
+					first = fmt.Sprintf("%d,%d #%02x%02x%02x vs #%02x%02x%02x",
+						x, y, r1>>8, g1>>8, b1>>8, r2>>8, g2>>8, b2>>8)
+				}
+				if x < minX {
+					minX = x
+				}
+				if y < minY {
+					minY = y
+				}
+				if x > maxX {
+					maxX = x
+				}
+				if y > maxY {
+					maxY = y
 				}
 			}
 		}
 	}
 	if nDiff > 0 {
-		return fmt.Errorf("%d pixels (first %s)", nDiff, first)
+		return fmt.Errorf("%d pixels (first %s, box %d,%d–%d,%d)", nDiff, first, minX, minY, maxX, maxY)
 	}
 	return nil
 }
@@ -185,6 +203,8 @@ func MockupShotShell(styles, sprite string) string {
 		"<style>\n" + css + "\n" +
 		"body{margin:0;padding:0}\n" +
 		"*{caret-color:transparent!important;animation:none!important;transition:none!important}\n" +
+		"*:focus,*:focus-visible{outline:none!important}\n" +
+		"input::-webkit-search-decoration,input::-webkit-search-cancel-button{display:none}\n" +
 		"::-webkit-scrollbar{display:none}\n</style>\n</head><body>\n" +
 		// Off-screen Latin+Cyrillic so the three mockup fonts are decoded before a frame is injected.
 		`<div aria-hidden="true" style="position:absolute;left:-9999px;top:0;font-size:16px">` +

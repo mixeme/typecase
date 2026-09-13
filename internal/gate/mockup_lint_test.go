@@ -110,6 +110,30 @@ func TestCheckMockupLint_frameClasses(t *testing.T) {
 	}
 }
 
+func TestCheckMockupLint_frameElements(t *testing.T) {
+	ok := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><div class="tc-root"><button class="tc-btn">Go</button><kbd class="tc-kbd">Esc</kbd></div></div>`
+	if err := CheckMockupLint(ok, MockupFrameElements); err != nil {
+		t.Fatal(err)
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><span class="tc-btn">Go</span></div>`,
+		MockupFrameElements,
+	); err == nil {
+		t.Fatal("expected span.tc-btn to fail")
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><span class="tc-kbd">Esc</span></div>`,
+		MockupFrameElements,
+	); err == nil {
+		t.Fatal("expected span.tc-kbd to fail")
+	}
+	labelOK := `<div class="frame" data-frame="s-notes-1"><div class="frame-label"><span class="tc-btn">not a control</span></div></div>`
+	if err := CheckMockupLint(labelOK, MockupFrameElements); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestSplitTag_booleanAttr(t *testing.T) {
 	name, attrs := splitTag(`style data-tc`)
 	if name != "style" {
