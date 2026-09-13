@@ -39,11 +39,23 @@ func TestCheckMockupLint_frameIDs(t *testing.T) {
 }
 
 func TestCheckMockupLint_styleBlocks(t *testing.T) {
-	ok := `<style data-tc>:root{--tc-ink:#000}.mock,.m-btn{color:red}</style>` +
-		`<style>body{margin:0}.frame{border:0}.wrap{padding:0}</style>` +
+	ok := `<style data-tc>:root{--tc-ink:#000}.mock,.m-btn,.tc-btn{color:red}</style>` +
+		`<style>body{margin:0}.frame{border:0}.wrap{padding:0}.mk-win{border:0}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(ok); err != nil {
 		t.Fatal(err)
+	}
+	tcInPage := `<style data-tc>.tc-btn{color:red}</style>` +
+		`<style>.tc-btn{height:26px}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(tcInPage); err == nil {
+		t.Fatal("expected product class .tc-btn in page style to fail")
+	}
+	mkInProduct := `<style data-tc>.mk-win{border:0}</style>` +
+		`<style>body{margin:0}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(mkInProduct); err == nil {
+		t.Fatal("expected page class .mk-win in data-tc to fail")
 	}
 	pageInProduct := `<style data-tc>.frame{border:0}.m-btn{color:red}</style>` +
 		`<style>body{margin:0}</style>` +
@@ -61,6 +73,40 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(oneStyle); err == nil {
 		t.Fatal("expected a single <style> to fail")
+	}
+}
+
+func TestCheckMockupLint_frameClasses(t *testing.T) {
+	ok := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><div class="tc-root"><span class="tc-btn is-primary">Go</span></div></div>`
+	if err := CheckMockupLint(ok, MockupFrameClasses); err != nil {
+		t.Fatal(err)
+	}
+	desktop := `<div class="frame" data-frame="m-desktop-1"><div class="mk-win"><div class="tc-root"></div></div></div>`
+	if err := CheckMockupLint(desktop, MockupFrameClasses); err != nil {
+		t.Fatal(err)
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><div class="mock tc-root"></div></div>`,
+		MockupFrameClasses,
+	); err == nil {
+		t.Fatal("expected .mock inside a frame to fail")
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><span class="m-btn">Go</span></div>`,
+		MockupFrameClasses,
+	); err == nil {
+		t.Fatal("expected leftover m-* class to fail")
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><div class="mk-win"></div></div>`,
+		MockupFrameClasses,
+	); err == nil {
+		t.Fatal("expected mk-* outside m-desktop to fail")
+	}
+	labelOK := `<div class="frame" data-frame="s-notes-1"><div class="frame-label"><span class="frag">компонент</span></div><div class="tc-root"></div></div>`
+	if err := CheckMockupLint(labelOK, MockupFrameClasses); err != nil {
+		t.Fatal(err)
 	}
 }
 

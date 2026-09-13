@@ -18,13 +18,17 @@ const (
 	// MockupStyleBlocks requires product CSS in <style data-tc> and page
 	// chrome in a second <style>, with no selectors crossing the cut.
 	MockupStyleBlocks MockupLintRule = "style-blocks"
+	// MockupFrameClasses requires classes inside .frame (except the frame
+	// chrome and its label) to be tc-*, is-*, or mk-* (mk-* only in
+	// m-desktop frames). .mock is forbidden.
+	MockupFrameClasses MockupLintRule = "frame-classes"
 )
 
 // MockupLintStep0 is the rule set for plan 1 step 0.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 
 // MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
-var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks}
+var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses}
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
 
@@ -56,6 +60,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupStyleBlocks:
 			if err := checkMockupStyleBlocks(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupFrameClasses:
+			if err := checkMockupFrameClasses(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:
@@ -139,6 +147,14 @@ var mockupPageBare = map[string]bool{
 }
 
 func mockupProductClass(c string) bool {
+	// mk-* is page chrome around the product (desktop window). Check it
+	// before m-*: "mk-win" would otherwise match the m- prefix.
+	if strings.HasPrefix(c, "mk-") {
+		return false
+	}
+	if strings.HasPrefix(c, "tc-") {
+		return true
+	}
 	if c == "mock" || strings.HasPrefix(c, "m-") || strings.HasPrefix(c, "auth-") {
 		return true
 	}
@@ -191,6 +207,64 @@ func checkMockupStyleBlocks(html string) error {
 		return fmt.Errorf("style-blocks: %s", strings.Join(errs, "; "))
 	}
 	return nil
+}
+
+func checkMockupFrameClasses(html string) error {
+	var errs []string
+	i := 0
+	for i < len(html) {
+		start, end, name, attrs, ok := nextStartTag(html, i)
+		if !ok {
+			break
+		}
+		if !hasClassToken(attrs["class"], "frame") {
+			i = end + 1
+			continue
+		}
+		outer, next, err := elementOuter(html, start, name)
+		if err != nil {
+			return err
+		}
+		id := attrs["data-frame"]
+		desktop := strings.HasPrefix(id, "m-desktop")
+		walkHTML(parseHTML(outer), func(n *htmlNode) {
+			if n.tag == "#root" || n.tag == "script" || n.tag == "style" {
+				return
+			}
+			if nodeHasClass(n, "frame") || nodeHasClass(n, "frame-label") || ancestorHasClass(n, "frame-label") {
+				return
+			}
+			for _, c := range n.class {
+				if mockupFrameClassOK(c, desktop) {
+					continue
+				}
+				label := id
+				if label == "" {
+					label = "(no data-frame)"
+				}
+				if strings.HasPrefix(c, "mk-") {
+					errs = append(errs, fmt.Sprintf("%s: mk-* class %s outside m-desktop", label, c))
+					continue
+				}
+				errs = append(errs, fmt.Sprintf("%s: class %s", label, c))
+			}
+		})
+		i = next
+	}
+	if len(errs) > 8 {
+		errs = append(errs[:8], fmt.Sprintf("… %d more", len(errs)-8))
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("frame-classes: %s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
+func mockupFrameClassOK(c string, desktop bool) bool {
+	if strings.HasPrefix(c, "tc-") || strings.HasPrefix(c, "is-") {
+		return true
+	}
+	return desktop && strings.HasPrefix(c, "mk-")
 }
 
 func mockupStyleSheets(html string) ([]mockupSheet, error) {
@@ -262,7 +336,7 @@ func mockupSelectorHasPage(sel string) bool {
 		return true
 	}
 	for _, m := range mockupCSSClassRe.FindAllStringSubmatch(sel, -1) {
-		if mockupPageClass[m[1]] {
+		if mockupPageClass[m[1]] || strings.HasPrefix(m[1], "mk-") {
 			return true
 		}
 	}

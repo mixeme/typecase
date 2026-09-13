@@ -16,37 +16,37 @@ type parityPair struct {
 	Props    []string
 	Narrow   []int
 	SideAuto bool // last shell track is auto; width lives on .tc-side
-	Pad620   bool // .m-row 620 padding vs every row grid's 620 PadLeft/PadRight
+	Pad620   bool // .tc-row 620 padding vs every row grid's 620 PadLeft/PadRight
 }
 
 func parityPairs() []parityPair {
 	return []parityPair{
-		{Mockup: ".m-src", Selector: ".tc-tickrow", Props: []string{
+		{Mockup: ".tc-tickrow", Selector: ".tc-tickrow", Props: []string{
 			"grid-template-columns", "gap", "height", "padding-left", "padding-right",
 			"grid-auto-flow", "grid-auto-columns",
 		}},
-		{Mockup: ".m-row--note", Selector: ".tc-row--excerpt", Props: []string{"grid-template-columns"}, Narrow: []int{700, 620, 460}},
-		{Mockup: ".m-row--contact", Selector: ".tc-row--avatarcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-row--file", Selector: ".tc-row--tickcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-row--find", Selector: ".tc-row--find", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-row--agenda", Selector: ".tc-row--timecols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-row--task", Selector: ".tc-row--tickmarkcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
-		{Mockup: ".m-row", Selector: ".tc-row", Props: []string{"min-height", "gap"}, Pad620: true},
-		{Mockup: ".m-top", Selector: ".tc-top", Props: []string{"height", "gap", "padding"}},
-		{Mockup: ".m-search", Selector: ".tc-search", Props: []string{"width"}},
-		{Mockup: ".m-search", Selector: ".tc-search__field", Props: []string{"height", "gap", "padding"}},
-		{Mockup: ".m-nav a", Selector: ".tc-nav__item", Props: []string{"height", "gap"}},
-		{Mockup: ".m-shell", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
-		{Mockup: ".m-shell.has-side", Selector: ".tc-shell__body:has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
-		{Mockup: ".m-shell.no-rail", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail))", Props: []string{"grid-template-columns"}},
-		{Mockup: ".m-shell.no-rail.has-side", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail)):has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
-		{Mockup: ".m-form", Selector: ".tc-form", Props: []string{"gap", "padding"}},
-		{Mockup: ".mock .m-fields", Selector: ".tc-fields__row", Props: []string{"grid-template-columns"}},
-		{Mockup: ".m-sheet", Selector: ".tc-sheet", Props: []string{"width"}},
-		{Mockup: ".m-dialog.is-narrow", Selector: ".tc-dialog", Props: []string{"max-width"}},
-		{Mockup: ".m-grid", Selector: ".tc-grid", Props: []string{"grid-template-columns", "gap"}},
-		{Mockup: ".m-doc", Selector: ".tc-doc__layout", Props: []string{"grid-template-columns"}},
-		{Mockup: ".m-title", Selector: ".tc-prose__h1", Props: []string{"font-size", "line-height"}},
+		{Mockup: ".tc-row--excerpt", Selector: ".tc-row--excerpt", Props: []string{"grid-template-columns"}, Narrow: []int{700, 620, 460}},
+		{Mockup: ".tc-row--avatarcols", Selector: ".tc-row--avatarcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".tc-row--tickcols", Selector: ".tc-row--tickcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".tc-row--find", Selector: ".tc-row--find", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".tc-row--timecols", Selector: ".tc-row--timecols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".tc-row--tickmarkcols", Selector: ".tc-row--tickmarkcols", Props: []string{"grid-template-columns"}, Narrow: []int{800, 620, 460}},
+		{Mockup: ".tc-row", Selector: ".tc-row", Props: []string{"min-height", "gap"}, Pad620: true},
+		{Mockup: ".tc-top", Selector: ".tc-top", Props: []string{"height", "gap", "padding"}},
+		{Mockup: ".tc-search", Selector: ".tc-search", Props: []string{"width"}},
+		{Mockup: ".tc-search", Selector: ".tc-search__field", Props: []string{"height", "gap", "padding"}},
+		{Mockup: ".tc-nav .tc-nav__item", Selector: ".tc-nav__item", Props: []string{"height", "gap"}},
+		{Mockup: ".tc-shell__body", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
+		{Mockup: ".tc-shell__body.tc-shell__body--side", Selector: ".tc-shell__body:has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
+		{Mockup: ".tc-shell__body.tc-shell__body--no-rail", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail))", Props: []string{"grid-template-columns"}},
+		{Mockup: ".tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail)):has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
+		{Mockup: ".tc-form", Selector: ".tc-form", Props: []string{"gap", "padding"}},
+		{Mockup: ".tc-root .tc-fields", Selector: ".tc-fields__row", Props: []string{"grid-template-columns"}},
+		{Mockup: ".tc-sheet", Selector: ".tc-sheet", Props: []string{"width"}},
+		{Mockup: ".tc-dialog.is-narrow", Selector: ".tc-dialog", Props: []string{"max-width"}},
+		{Mockup: ".tc-grid", Selector: ".tc-grid", Props: []string{"grid-template-columns", "gap"}},
+		{Mockup: ".tc-doc__layout", Selector: ".tc-doc__layout", Props: []string{"grid-template-columns"}},
+		{Mockup: ".tc-doc__title", Selector: ".tc-prose__h1", Props: []string{"font-size", "line-height"}},
 	}
 }
 
@@ -69,7 +69,7 @@ func specHasSelector(spec layout.Spec, sel string) bool {
 	return false
 }
 
-// CheckMockupParity compares layout tables in All() to .m-* rules in the mockup.
+// CheckMockupParity compares layout tables in All() to the matching rules in the mockup.
 func CheckMockupParity(p ModulePaths) error {
 	path := filepath.Join(p.Root, "docs", "visual", "carrel-ui-mockups.html")
 	data, err := os.ReadFile(path)
@@ -136,7 +136,7 @@ func CheckMockupParitySpec(spec layout.Spec, mockupHTML string) error {
 			}
 		}
 		if pair.Pad620 {
-			key := ".m-row|620"
+			key := ".tc-row|620"
 			mp := narrow[key]
 			wantL := mp["padding-left"]
 			wantR := mp["padding-right"]

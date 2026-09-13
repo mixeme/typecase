@@ -1,0 +1,224 @@
+# old selector fragment → new. Applied to CSS and frame markup by
+# go run ./internal/mockcss/rename. Re-run is a no-op. Do not rename by hand.
+#
+# First rows: layout/inventory.go (mapped) plus Р-6 specials.
+
+# inventory mapped
+.m-av	.tc-avatar
+.m-badge	.tc-badge
+.m-bar	.tc-bar
+.m-bar3	.tc-mark
+.m-box	.tc-tickrow__tick
+.m-brand	.tc-brand
+.m-btn	.tc-btn
+.m-card	.tc-card
+.m-check	.tc-check
+.m-close	.tc-close
+.m-crumbs	.tc-crumbs
+.m-danger-zone	.tc-danger
+.m-diag	.tc-diag
+.m-dialog	.tc-dialog
+.m-diff	.tc-diff
+.m-diff-agree	.tc-diff__agree
+.m-diff-choice	.tc-diff__options
+.m-diff-item	.tc-diff__item
+.m-doc	.tc-doc__layout
+.m-docbody	.tc-doc
+.m-drop	.tc-drop
+.m-editbar	.tc-docbar
+.m-empty	.tc-empty
+.m-f	.tc-field
+.m-fields	.tc-fields
+.m-form	.tc-form
+.m-formfoot	.tc-formfoot
+.m-fset	.tc-fset
+.m-grid	.tc-grid
+.m-h1	.tc-head__title
+.m-head	.tc-head
+.m-hint	.tc-field__hint
+.m-hgroup	.tc-head__group
+.m-htext	.tc-head__titles
+.m-in	.tc-in
+.m-kbd	.tc-kbd
+.m-lbl	.tc-field__label
+.m-list	.tc-list
+.m-logo	.tc-brand__logo
+.m-main	.tc-main
+.m-menu	.tc-menu
+.m-merge	.tc-merge
+.m-metacol	.tc-docmeta
+.m-more	.tc-bar__more
+.m-msg	.tc-msg
+.m-nav	.tc-nav
+.m-num	.tc-num
+.m-overlay	.tc-overlay
+.m-photo	.tc-avatar--photo
+.m-poll	.tc-runbar
+.m-prog	.tc-meter
+.m-prose	.tc-prose
+.m-rail	.tc-shell__rail
+.m-rail-about	.tc-railfoot__about
+.m-rail-foot	.tc-railfoot
+.m-rail-sec	.tc-railsec
+.m-range	.tc-range
+.m-right	.tc-bar__right
+.m-row	.tc-row
+.m-row--agenda	.tc-row--timecols
+.m-row--contact	.tc-row--avatarcols
+.m-row--file	.tc-row--tickcols
+.m-row--find	.tc-row--find
+.m-row--note	.tc-row--excerpt
+.m-row--phone	.tc-row--phone
+.m-row--task	.tc-row--tickmarkcols
+.m-rubric	.tc-rubric
+.m-scrim	.tc-scrim
+.m-search	.tc-search
+.m-sec	.tc-sec
+.m-seg	.tc-seg
+.m-sel	.tc-bar--sel
+.m-sep	.tc-bar__sep
+.m-sheet	.tc-sheet
+.m-shell	.tc-shell__body
+.m-side	.tc-side
+.m-skel	.tc-skel
+.m-split	.tc-split
+.m-src	.tc-tickrow
+.m-stat	.tc-stat
+.m-stats	.tc-stats
+.m-steps	.tc-steps
+.m-sub	.tc-head__sub
+.m-table	.tc-table
+.m-tag	.tc-tag
+.m-tick	.tc-tick
+.m-tile	.tc-tile
+.m-title	.tc-doc__title
+.m-thumb	.tc-thumb
+.m-top	.tc-top
+.m-top-right	.tc-top__actions
+.m-transfers	.tc-queue
+.m-tree	.tc-tree
+.m-two	.tc-row__text
+.m-user	.tc-usermenu
+
+# own block / plan specials
+.m-acts	.tc-acts
+.m-fname	.tc-table__file
+.m-group	.tc-list__group
+.m-meta	.tc-tickrow__meta
+.m-tabbar	.tc-nav--bottom
+.has-side	.tc-shell__body--side
+.no-rail	.tc-shell__body--no-rail
+.mock	.tc-root
+.mock.is-print	.tc-root.tc-root--print
+
+# field widths
+.w-xs	.tc-field--xs
+.w-sm	.tc-field--sm
+.w-md	.tc-field--md
+.w-lg	.tc-field--lg
+.w-xl	.tc-field--xl
+.w-full	.tc-field--full
+
+# internals named in the plan
+.m-row .t.is-strong	.tc-row__title.is-strong
+.m-row.is-done .t	.tc-row.is-done .tc-row__title
+.m-row .t	.tc-row .tc-row__title
+.m-row .s	.tc-row .tc-row__excerpt
+.m-row .d	.tc-row .tc-row__cell
+.m-row.is-overdue .mono	.tc-row.is-overdue .tc-mono
+.m-row .mono	.tc-row .tc-mono
+.m-src.is-off span.t	.tc-tickrow.is-off .tc-tickrow__label
+.m-src.is-ext span.t	.tc-tickrow.is-ext .tc-tickrow__label
+.m-src span.t	.tc-tickrow__label
+.m-src .t	.tc-tickrow__label
+.m-sheet > .h	.tc-sheet__head
+.m-sheet > .b	.tc-sheet__body
+.m-sheet > .f	.tc-sheet__foot
+.lbl	.tc-btn__label
+.m-menu > .sep	.tc-menu__sep
+.mono	.tc-mono
+.m-logo .wd	.tc-logo__word
+.m-logo .sh	.tc-logo__shade
+
+# other short classes by block
+.m-tile .n	.tc-tile__name
+.m-tile .s	.tc-tile__meta
+.m-diff-choice .v .src	.tc-diff__source
+.m-diff-choice .v	.tc-diff__value
+.m-diff-choice .src	.tc-diff__source
+.m-transfers .h	.tc-queue__head
+.m-transfers.is-min .h	.tc-queue.is-min .tc-queue__head
+.m-transfers .r	.tc-queue__row
+.m-hide-3	.tc-row__excerpt
+.d	.tc-dim
+.dot	.mk-dot
+
+# login
+.auth-page	.tc-auth
+.auth-stack	.tc-auth__stack
+.auth-links	.tc-auth__links
+.auth-tagline	.tc-auth__tagline
+
+# print (product)
+.p-h1	.tc-print__h1
+.p-rub	.tc-print__rub
+.p-row	.tc-print__row
+
+# desktop chrome → page classes mk-*
+.m-win	.mk-win
+.m-titlebar	.mk-titlebar
+.m-titlebar .t	.mk-titlebar__title
+.m-winbtns	.mk-winbtns
+.m-status	.mk-status
+.m-status .dot	.mk-status__dot
+.m-toast	.mk-toast
+.m-toast .h	.mk-toast__head
+.m-tray	.mk-tray
+.m-tray .r	.mk-tray__row
+.m-tray .sep	.mk-tray__sep
+
+# tag selectors that step 4 will change, and unnamed wrappers
+.m-seg span	.tc-seg__opt
+.m-menu > div	.tc-menu__item
+.m-nav a	.tc-nav .tc-nav__item
+.m-tabbar a	.tc-nav__item
+.m-tree div	.tc-tree__row
+.m-fname span	.tc-table__file .tc-table__filename
+.m-fname > span:last-child	.tc-table__filename:last-child
+.m-crumbs a	.tc-crumbs .tc-crumbs__link
+.m-steps span	.tc-steps__item
+.m-steps i	.tc-steps__rule
+.m-range > i	.tc-range__dash
+.m-prog i	.tc-meter__bar
+.m-winbtns span	.mk-winbtns__btn
+.m-card > .m-rubric > span	.tc-rubric__aside
+
+# slot hide: nth-child → slot class (layout/slot.go)
+.m-row--contact > :nth-child(6)	.tc-row--avatarcols .tc-row__caption
+.m-row--contact > :nth-child(5)	.tc-row--avatarcols .tc-row__detail
+.m-row--contact > :nth-child(4)	.tc-row--avatarcols .tc-row__subtitle
+.m-row--agenda > :nth-child(4)	.tc-row--timecols .tc-row__detail
+.m-row--agenda > :nth-child(5)	.tc-row--timecols .tc-row__caption
+.m-row--agenda > :nth-child(6)	.tc-row--timecols .tc-row__source
+.m-row--find > :nth-child(4)	.tc-row--find .tc-row__detail
+.m-row--find > :nth-child(5)	.tc-row--find .tc-row__caption
+.m-row--find > :nth-child(6)	.tc-row--find .tc-row__source
+.m-row--task > :nth-child(6)	.tc-row--tickmarkcols .tc-row__progress
+.m-row--task > :nth-child(4)	.tc-row--tickmarkcols .tc-row__tags
+.m-row--task > :nth-child(7)	.tc-row--tickmarkcols .tc-row__source
+.m-row--file > :nth-child(5)	.tc-row--tickcols .tc-row__detail
+.m-row--file > :nth-child(4)	.tc-row--tickcols .tc-row__time
+.m-row--file > :nth-child(6)	.tc-row--tickcols .tc-row__source
+.m-row--note > :nth-child(4)	.tc-row--excerpt .tc-row__tags
+.m-row--note > :nth-child(6)	.tc-row--excerpt .tc-row__source
+.m-row--file > :nth-child(3)	.tc-row--tickcols .tc-row__size
+.m-row--file > :nth-child(2)	.tc-row--tickcols .tc-row__name
+.m-row--agenda > :nth-child(2)	.tc-row--timecols .tc-row__lead
+.m-row--find > :nth-child(2)	.tc-row--find .tc-row__lead
+.m-row--note > :nth-child(5)	.tc-row--excerpt .tc-row__date
+.m-row--task > :nth-child(5)	.tc-row--tickmarkcols .tc-row__due
+.m-row--task > :nth-child(3)	.tc-row--tickmarkcols .tc-row__title
+.m-table th:nth-child(3)	.tc-table .tc-table__n3
+.m-table td:nth-child(3)	.tc-table .tc-table__n3
+.m-table th:nth-child(4)	.tc-table .tc-table__n4
+.m-table td:nth-child(4)	.tc-table .tc-table__n4

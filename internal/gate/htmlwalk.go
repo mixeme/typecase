@@ -174,6 +174,15 @@ func nodeHasClass(n *htmlNode, cls string) bool {
 	return false
 }
 
+func ancestorHasClass(n *htmlNode, cls string) bool {
+	for p := n.parent; p != nil; p = p.parent {
+		if nodeHasClass(p, cls) {
+			return true
+		}
+	}
+	return false
+}
+
 func walkHTML(n *htmlNode, fn func(*htmlNode)) {
 	fn(n)
 	for _, c := range n.children {

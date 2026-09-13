@@ -497,6 +497,11 @@ func TestBite_mockupLint(t *testing.T) {
 	if err := gate.CheckMockupLint(pageInProduct); err == nil {
 		t.Fatal("expected page selector in data-tc to fail")
 	}
+	leftover := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><span class="m-btn">Go</span></div>`
+	if err := gate.CheckMockupLint(leftover); err == nil {
+		t.Fatal("expected leftover m-* class in a frame to fail")
+	}
 }
 
 func TestBite_layoutSlotsColsCount(t *testing.T) {

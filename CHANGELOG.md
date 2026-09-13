@@ -17,11 +17,15 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 2 puts
-  component rules in `<style data-tc>` in source order and page chrome
-  (`@font-face`, `.wrap`, `.frame`, TOC) in a separate `<style>`. The lint
-  rejects page selectors in `data-tc` and product classes in the page block.
-  Chrome before/after vs the step 1 base is 0-diff (channel ±2).
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 3 renames
+  mockup classes to the Typecase dictionary (`tc-*`, states `is-*`) from
+  `docs/visual/rename.tsv` via `go run ./internal/mockcss/rename`; a second
+  run is a no-op. Desktop window chrome is page classes `mk-*` (not in
+  `data-tc`). The lint rejects leftover names inside frames (`.mock`, `m-*`,
+  short classes) and `mk-*` outside `m-desktop` frames. Chrome before/after
+  vs the step 1 base is 0-diff (channel ±2).
+  Step 2 puts component rules in `<style data-tc>` in source order and page
+  chrome (`@font-face`, `.wrap`, `.frame`, TOC) in a separate `<style>`.
   Step 1 renamed tokens to `--tc-*`, set `data-tc-theme="dark"` on the dark calendar frame,
   and shipped Public Sans, Literata and Source Code Pro next to the mockup
   (`docs/visual/fonts/`). `--tc-dusty` keeps the mockup value `#6A6351` (Р-9).

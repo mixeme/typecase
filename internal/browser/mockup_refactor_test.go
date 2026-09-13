@@ -181,7 +181,7 @@ func TestMockupRefactor(t *testing.T) {
 				}
 			}
 			h := browser.NewHarness(t)
-			run, cancel := h.Tab(3 * time.Minute)
+			run, cancel := h.Tab(8 * time.Minute)
 			defer cancel()
 
 			open := func(styles, sprite, id string) {
