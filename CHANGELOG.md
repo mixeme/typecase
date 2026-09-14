@@ -17,7 +17,17 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 4 puts real
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 5 strips `style=`
+  from mockup frames. Colours and meter widths become `data-tc-colour` /
+  `data-tc-width` (page `[data-tc-*="…"]` rules set the variables; product CSS
+  reads `var(--tc-colour)` / `var(--tc-width)`). Layout glue is `tc-line` /
+  `tc-stack` / `tc-push` / `tc-pad` / `tc-grow` / `tc-cols--*`. Repeating tweaks
+  are block variants; one-offs are `--rN` (Р-13). Table columns are role
+  classes; SVG `stroke="var(--tc-*)"` becomes `tc-ico--accent` and kin. Lint
+  `frame-no-style`. `go run ./internal/mockcss/inline` is idempotent. Chrome
+  before/after vs the step 1 base is 0-diff except the step 4 rows and the
+  Р-13 frames in `docs/visual/allowed-diffs.md`.
+  Plan 1 step 4 puts real
   controls in mockup frames: `button` (btn, seg option, check, menu item,
   pick, close, tick), `input`/`textarea`, `a href`, `kbd`. Search and icon
   fields keep a `tc-q` input (value for painted text). Menus that sat inside

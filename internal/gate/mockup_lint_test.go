@@ -74,6 +74,12 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 	if err := CheckMockupLint(oneStyle); err == nil {
 		t.Fatal("expected a single <style> to fail")
 	}
+	dataVals := `<style data-tc>[data-tc-colour]{background:var(--tc-colour)}</style>` +
+		`<style>body{margin:0}[data-tc-colour="#4A6B52"]{--tc-colour:#4A6B52}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(dataVals); err != nil {
+		t.Fatal(err)
+	}
 }
 
 func TestCheckMockupLint_frameClasses(t *testing.T) {
@@ -131,6 +137,20 @@ func TestCheckMockupLint_frameElements(t *testing.T) {
 	labelOK := `<div class="frame" data-frame="s-notes-1"><div class="frame-label"><span class="tc-btn">not a control</span></div></div>`
 	if err := CheckMockupLint(labelOK, MockupFrameElements); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestCheckMockupLint_frameNoStyle(t *testing.T) {
+	ok := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1" style="width:392px"><div class="frame-label"><span style="color:red">x</span></div><div class="tc-root"><span class="tc-mark"></span></div></div>`
+	if err := CheckMockupLint(ok, MockupFrameNoStyle); err != nil {
+		t.Fatal(err)
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1"><span class="tc-mark" style="background:#4A6B52"></span></div>`,
+		MockupFrameNoStyle,
+	); err == nil {
+		t.Fatal("expected style= inside a frame to fail")
 	}
 }
 

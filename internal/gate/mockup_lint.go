@@ -24,13 +24,16 @@ const (
 	MockupFrameClasses MockupLintRule = "frame-classes"
 	// MockupFrameElements requires real controls in frames: button, kbd.
 	MockupFrameElements MockupLintRule = "frame-elements"
+	// MockupFrameNoStyle forbids style= inside frames (not on .frame itself
+	// or .frame-label page chrome).
+	MockupFrameNoStyle MockupLintRule = "frame-no-style"
 )
 
 // MockupLintStep0 is the rule set for plan 1 step 0.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 
 // MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
-var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements}
+var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle}
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
 
@@ -70,6 +73,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupFrameElements:
 			if err := checkMockupFrameElements(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupFrameNoStyle:
+			if err := checkMockupFrameNoStyle(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:
@@ -312,6 +319,44 @@ func checkMockupFrameElements(html string) error {
 	return nil
 }
 
+func checkMockupFrameNoStyle(html string) error {
+	var errs []string
+	i := 0
+	for i < len(html) {
+		start, end, name, attrs, ok := nextStartTag(html, i)
+		if !ok {
+			break
+		}
+		if !hasClassToken(attrs["class"], "frame") {
+			i = end + 1
+			continue
+		}
+		outer, next, err := elementOuter(html, start, name)
+		if err != nil {
+			return err
+		}
+		id := attrs["data-frame"]
+		walkHTML(parseHTML(outer), func(n *htmlNode) {
+			if n.tag == "#root" || nodeHasClass(n, "frame") || nodeHasClass(n, "frame-label") || ancestorHasClass(n, "frame-label") {
+				return
+			}
+			if n.attrs != nil {
+				if st := n.attrs["style"]; st != "" {
+					errs = append(errs, fmt.Sprintf("%s: <%s> style=", id, n.tag))
+				}
+			}
+		})
+		i = next
+	}
+	if len(errs) > 8 {
+		errs = append(errs[:8], fmt.Sprintf("… %d more", len(errs)-8))
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("frame-no-style: %s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
 func mockupFrameClassOK(c string, desktop bool) bool {
 	if strings.HasPrefix(c, "tc-") || strings.HasPrefix(c, "is-") {
 		return true
@@ -397,6 +442,9 @@ func mockupSelectorHasPage(sel string) bool {
 
 func mockupSelectorHasProduct(sel string) bool {
 	sel = compactSel(sel)
+	if strings.Contains(sel, "data-tc-colour") || strings.Contains(sel, "data-tc-width") {
+		return false
+	}
 	if strings.Contains(sel, "data-tc") {
 		return true
 	}

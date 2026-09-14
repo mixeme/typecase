@@ -9,6 +9,7 @@ import (
 type htmlNode struct {
 	tag      string
 	class    []string
+	attrs    map[string]string
 	parent   *htmlNode
 	children []*htmlNode
 }
@@ -75,7 +76,7 @@ func parseHTML(fragment string) *htmlNode {
 		}
 		name, attrs := splitTag(inner)
 		name = strings.ToLower(name)
-		n := &htmlNode{tag: name, class: classTokens(attrs["class"]), parent: stack[len(stack)-1]}
+		n := &htmlNode{tag: name, class: classTokens(attrs["class"]), attrs: attrs, parent: stack[len(stack)-1]}
 		stack[len(stack)-1].children = append(stack[len(stack)-1].children, n)
 		s = s[end+1:]
 		if selfClose || voidHTML[name] {
