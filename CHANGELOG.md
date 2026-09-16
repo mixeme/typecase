@@ -24,12 +24,15 @@ until released separately.
   `tc-stack` / `tc-push` / `tc-pad` / `tc-grow` / `tc-cols--*`. Repeating tweaks
   are block variants; one-offs are `--rN` (Р-13) — leftover classes are not
   selectors for new rules. A table that must share columns after `is-2nd`
-  slots hide is `tc-table--fit`. Table columns are role classes; SVG
-  `stroke="var(--tc-*)"` becomes `tc-ico--accent` and kin. A menu row that
-  hosts a segment is a `div.tc-menu__item` (a button cannot wrap buttons).
-  Lint `frame-no-style`. `go run ./internal/mockcss/inline` is idempotent.
-  Chrome before/after vs the step 1 base is 0-diff except the step 4 rows and
-  the Р-13 frames in `docs/visual/allowed-diffs.md`.
+  slots hide is `tc-table--fit` (break-word, `td.tc-acts` as a table cell).
+  Other tables keep the step 1 wrap (`overflow-wrap: anywhere`). Table
+  columns are role classes; SVG `stroke="var(--tc-*)"` becomes
+  `tc-ico--accent` and kin. A menu row that hosts a segment is a
+  `div.tc-menu__item` (a button cannot wrap buttons). Lint `frame-no-style`.
+  `go run ./internal/mockcss/inline` is idempotent. The Р-13 visible list is
+  approved. Chrome before/after vs the step 1 base is 0-diff except the
+  step 4 rows and the Р-13 frames in `docs/visual/allowed-diffs.md`
+  (7.11.2 wrap and 7.19 invitation buttons wait for step 6).
   Plan 1 step 4 puts real
   controls in mockup frames: `button` (btn, seg option, check, menu item,
   pick, close, tick), `input`/`textarea`, `a href`, `kbd`. Search and icon

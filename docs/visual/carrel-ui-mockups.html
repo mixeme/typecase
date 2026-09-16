@@ -406,19 +406,16 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-avatar--photo{width:104px;height:104px;border-radius:4px;background:#8C7B6A;flex:none}
 .tc-avatar--photo.is-ph{background:#D9D2BE;display:flex;align-items:center;justify-content:center;color:#4E4738;font-size:26px;font-family:var(--tc-font-serif)}
 /* таблицы */
-.tc-table{width:100%;max-width:100%;min-width:0;border-collapse:collapse}
+.tc-table{width:100%;border-collapse:collapse}
 .tc-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-dusty);text-align:left;
   font-weight:600;padding:9px 12px;border-bottom:.5px solid var(--tc-rule);white-space:nowrap}
 .tc-table td{padding:7px 12px;border-bottom:.5px solid var(--tc-hair);font-size:12.5px;vertical-align:middle}
-/* Машинная строка без пробелов: break-word, иначе таблица не ужимается.
-   anywhere ломает «4 calendars · 1 book» по буквам. */
-.tc-table td.tc-mono,.tc-table td .tc-mono{overflow-wrap:break-word}
+/* Машинная строка без пробелов: anywhere, иначе таблица не ужимается. */
+.tc-table td.tc-mono,.tc-table td .tc-mono{overflow-wrap:anywhere}
 .tc-table td.tc-mono{font-family:var(--tc-font-mono);font-size:11.5px;color:var(--tc-muted)}
 .tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
 .tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
 .tc-table .tc-acts{justify-content:flex-start}
-/* flex на td ломает высоту ячейки: кнопка липнет к верху высокой строки. */
-.tc-table td.tc-acts{display:table-cell;vertical-align:middle}
 /* Таблица в карточке: отступы у карточки, последняя строка без линии. */
 .tc-card > .tc-table{margin-top:9px}
 .tc-card > .tc-table tr td:first-child,.tc-card > .tc-table tr th:first-child{padding-left:0}
@@ -614,6 +611,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-table--fit .tc-table__n3{width:118px}
   .tc-table--fit th{white-space:normal}
   .tc-table--fit .tc-table__filename{white-space:normal;overflow:visible;text-overflow:clip}
+  /* --fit: break-word, не anywhere — иначе «4 calendars · 1 book» по буквам. */
+  .tc-table--fit td.tc-mono,.tc-table--fit td .tc-mono{overflow-wrap:break-word}
+  .tc-table--fit .tc-acts{justify-content:flex-start}
+  .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
   .tc-row--excerpt{grid-template-columns:3px minmax(140px,1.4fr) minmax(70px,auto) 80px 116px}
   .tc-row--excerpt > :nth-child(3){display:none}
 }
