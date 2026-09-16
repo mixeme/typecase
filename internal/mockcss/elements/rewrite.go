@@ -115,6 +115,9 @@ func rewriteProduct(html string, n *node, inner string) string {
 	case hasClass(n, "tc-seg__opt"):
 		return retag(html, n, inner, "button", map[string]string{"type": "button"})
 	case hasClass(n, "tc-menu__item"):
+		if nodeHoldsControls(n) {
+			return menuItemHost(n, inner)
+		}
 		return retag(html, n, inner, "button", map[string]string{"type": "button", "role": "menuitem"})
 	case hasClass(n, "tc-check"):
 		return retag(html, n, inner, "button", map[string]string{"type": "button"})
@@ -131,6 +134,22 @@ func rewriteProduct(html string, n *node, inner string) string {
 		return ensureHref(html, n, inner)
 	}
 	return openTag(html, n) + inner + closeTag(html, n)
+}
+
+func nodeHoldsControls(n *node) bool {
+	for _, ch := range n.children {
+		if ch.tag == "button" || hasAnyClass(ch, "tc-seg", "tc-seg__opt", "tc-btn", "tc-in") {
+			return true
+		}
+		if nodeHoldsControls(ch) {
+			return true
+		}
+	}
+	return false
+}
+
+func menuItemHost(n *node, inner string) string {
+	return `<div class="` + strings.Join(n.class, " ") + `">` + inner + `</div>`
 }
 
 func insideButtonHost(n *node) bool {

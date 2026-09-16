@@ -301,6 +301,9 @@ func checkMockupFrameElements(html string) error {
 			}
 			for _, c := range n.class {
 				if mockupButtonClass[c] && n.tag != "button" {
+					if c == "tc-menu__item" && n.tag == "div" && htmlNodeHasDescendantClass(n, "tc-seg") {
+						continue
+					}
 					errs = append(errs, fmt.Sprintf("%s: %s is <%s>, want <button>", id, c, n.tag))
 				}
 				if c == "tc-kbd" && n.tag != "kbd" {

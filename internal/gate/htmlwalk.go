@@ -175,6 +175,15 @@ func nodeHasClass(n *htmlNode, cls string) bool {
 	return false
 }
 
+func htmlNodeHasDescendantClass(n *htmlNode, cls string) bool {
+	for _, c := range n.children {
+		if nodeHasClass(c, cls) || htmlNodeHasDescendantClass(c, cls) {
+			return true
+		}
+	}
+	return false
+}
+
 func ancestorHasClass(n *htmlNode, cls string) bool {
 	for p := n.parent; p != nil; p = p.parent {
 		if nodeHasClass(p, cls) {

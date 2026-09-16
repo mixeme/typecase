@@ -174,6 +174,31 @@ func TestTickInsideMenuStaysSpan(t *testing.T) {
 	}
 }
 
+func TestThemeMenuItemStaysDivAroundSeg(t *testing.T) {
+	in := `<style data-tc>/* элементы управления */</style><style>body{}</style>
+<div class="frame" data-frame="account-5"><div class="tc-root">
+<div class="tc-menu">
+  <div class="tc-menu__item tc-menu__item--r6">
+    <span>Theme</span>
+    <span class="tc-seg"><span class="is-on tc-seg__opt">Auto</span><span class="tc-seg__opt">Light</span></span>
+  </div>
+</div>
+</div></div>`
+	got, err := apply(in)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(got, `<button class="tc-menu__item`) {
+		t.Fatalf("theme host became button:\n%s", got)
+	}
+	if !strings.Contains(got, `<div class="tc-menu__item tc-menu__item--r6">`) {
+		t.Fatalf("theme host:\n%s", got)
+	}
+	if !strings.Contains(got, `<button class="is-on tc-seg__opt" type="button">Auto</button>`) {
+		t.Fatalf("seg opt:\n%s", got)
+	}
+}
+
 func TestApplyLeavesCompositeField(t *testing.T) {
 	in := `<style data-tc>/* элементы управления */</style><style>body{}</style>
 <div class="frame" data-frame="x-1"><div class="tc-root">

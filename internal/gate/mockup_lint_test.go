@@ -138,6 +138,14 @@ func TestCheckMockupLint_frameElements(t *testing.T) {
 	if err := CheckMockupLint(labelOK, MockupFrameElements); err != nil {
 		t.Fatal(err)
 	}
+	themeOK := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="account-5"><div class="tc-root">` +
+		`<div class="tc-menu__item tc-menu__item--r6"><span>Theme</span>` +
+		`<span class="tc-seg"><button class="tc-seg__opt" type="button">Auto</button></span></div>` +
+		`</div></div>`
+	if err := CheckMockupLint(themeOK, MockupFrameElements); err != nil {
+		t.Fatal(err)
+	}
 }
 
 func TestCheckMockupLint_frameNoStyle(t *testing.T) {

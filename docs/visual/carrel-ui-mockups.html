@@ -374,6 +374,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 [data-tc-theme="dark"] .tc-avatar{background:#3A463D;color:#C9BFA6}
 /* метки, значки, статусы */
 .tc-tag{border:.5px solid var(--tc-hair);border-radius:2px;padding:0 5px;font-size:10.5px;color:var(--tc-muted);background:var(--tc-surface);white-space:nowrap}
+.tc-tag:has(> .tc-mark){display:inline-flex;align-items:center;gap:5px}
 .tc-tag.is-on{border-color:var(--tc-accent);color:var(--tc-accent)}
 .tc-badge{display:inline-flex;align-items:center;gap:4px;height:16px;line-height:1;vertical-align:1px;
   border:.5px solid var(--tc-rule);border-radius:2px;padding:0 6px;font-size:10px;color:var(--tc-muted);white-space:nowrap;
@@ -405,16 +406,19 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-avatar--photo{width:104px;height:104px;border-radius:4px;background:#8C7B6A;flex:none}
 .tc-avatar--photo.is-ph{background:#D9D2BE;display:flex;align-items:center;justify-content:center;color:#4E4738;font-size:26px;font-family:var(--tc-font-serif)}
 /* таблицы */
-.tc-table{width:100%;border-collapse:collapse}
+.tc-table{width:100%;max-width:100%;min-width:0;border-collapse:collapse}
 .tc-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-dusty);text-align:left;
   font-weight:600;padding:9px 12px;border-bottom:.5px solid var(--tc-rule);white-space:nowrap}
 .tc-table td{padding:7px 12px;border-bottom:.5px solid var(--tc-hair);font-size:12.5px;vertical-align:middle}
-/* Машинная строка без пробелов: overflow-wrap, иначе таблица не ужимается. */
-.tc-table td.tc-mono,.tc-table td .tc-mono{overflow-wrap:anywhere}
+/* Машинная строка без пробелов: break-word, иначе таблица не ужимается.
+   anywhere ломает «4 calendars · 1 book» по буквам. */
+.tc-table td.tc-mono,.tc-table td .tc-mono{overflow-wrap:break-word}
 .tc-table td.tc-mono{font-family:var(--tc-font-mono);font-size:11.5px;color:var(--tc-muted)}
 .tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
 .tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
 .tc-table .tc-acts{justify-content:flex-start}
+/* flex на td ломает высоту ячейки: кнопка липнет к верху высокой строки. */
+.tc-table td.tc-acts{display:table-cell;vertical-align:middle}
 /* Таблица в карточке: отступы у карточки, последняя строка без линии. */
 .tc-card > .tc-table{margin-top:9px}
 .tc-card > .tc-table tr td:first-child,.tc-card > .tc-table tr th:first-child{padding-left:0}
@@ -465,8 +469,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative}
-/* Правое поле шапки листа — 40 px под приколотый крестик. */
-.tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 40px 11px 14px;border-bottom:.5px solid var(--tc-hair)}
+/* Правое поле шапки листа — 40 px под приколотый крестик.
+   Крестик позиционируется от шапки, не от всего листа: иначе top:8px
+   сидит выше поиска и заголовка (padding 11 px). */
+.tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 40px 11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
+.tc-sheet__head > .tc-close{top:50%;transform:translateY(-50%)}
 .tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .tc-sheet__foot{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:.5px solid var(--tc-hair)}
 .tc-kbd{font-family:var(--tc-font-mono);font-size:10.5px;border:.5px solid var(--tc-edge);border-radius:3px;
@@ -547,6 +554,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-root.tc-root--print .tc-print__h1{font-family:var(--tc-font-serif);font-size:20px;margin-bottom:2px}
 .tc-root.tc-root--print .tc-print__rub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#555;margin:16px 0 4px}
 .tc-root.tc-root--print .tc-print__row{display:grid;grid-template-columns:66px 1fr;gap:12px;padding:5px 0;border-bottom:.5px solid #bbb}
+/* Три колонки: имя / размер / дата. Базовое правило выше — 66px 1fr,
+   leftover --r1 его не перебивает (слабее). Без этого дата уезжает
+   на вторую строку в узкий столбец и ломается по дефисам. */
+.tc-root.tc-root--print .tc-print__row--r1{grid-template-columns:minmax(0,1fr) max-content max-content}
+.tc-root.tc-root--print .tc-print__row--r1 > :not(:first-child){white-space:nowrap}
 .tc-root.is-phone{width:390px;--tc-top:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);flex:none}
 .tc-root.is-phone .tc-shell__body{grid-template-columns:minmax(0,1fr);min-height:600px}
 .tc-root.is-phone .tc-brand{width:auto}
@@ -594,6 +606,14 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 @container (max-width:700px){
   /* Колонка is-2nd исчезает, когда панель узкая. */
   .tc-table th.is-2nd,.tc-table td.is-2nd{display:none}
+  /* После скрытия слотов таблица всё ещё может быть шире панели.
+     --fit: ведущая колонка держит имя, заголовки переносятся словами. */
+  .tc-table--fit{table-layout:fixed}
+  .tc-table--fit td{min-width:0}
+  .tc-table--fit th:first-child{width:36%}
+  .tc-table--fit .tc-table__n3{width:118px}
+  .tc-table--fit th{white-space:normal}
+  .tc-table--fit .tc-table__filename{white-space:normal;overflow:visible;text-overflow:clip}
   .tc-row--excerpt{grid-template-columns:3px minmax(140px,1.4fr) minmax(70px,auto) 80px 116px}
   .tc-row--excerpt > :nth-child(3){display:none}
 }
@@ -1075,6 +1095,9 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-msg--r14.tc-msg--r14{margin:0 0 10px}
 .tc-msg--r15.tc-msg--r15{margin:0 0 12px}
 .tc-msg--r16.tc-msg--r16{margin:0;border-radius:0}
+.tc-msg--r16 .tc-push.tc-push{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:none}
+.tc-msg--r16 .tc-push > .tc-btn{width:100%}
+.tc-msg--r16 .tc-push > .is-primary{grid-column:1/-1}
 .tc-msg--r2.tc-msg--r2{margin-right:0;margin-left:0}
 .tc-msg--r3.tc-msg--r3{margin:2px 0 0}
 .tc-msg--r4.tc-msg--r4{margin:0 20px}
@@ -1086,7 +1109,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-nav--r1.tc-nav--r1{margin-top:2px}
 .tc-nav--r2.tc-nav--r2{padding:0}
 .tc-p--r1.tc-p--r1{font-size:13px;color:var(--tc-muted);margin:0}
-.tc-print__row--r1.tc-print__row--r1{grid-template-columns:1fr 90px 130px}
+.tc-print__row--r1.tc-print__row--r1{grid-template-columns:minmax(0,1fr) max-content max-content}
 .tc-prose--r1.tc-prose--r1{font-size:13px}
 .tc-prose--r10.tc-prose--r10{margin-top:12px;font-size:14px;line-height:1.65}
 .tc-prose--r2.tc-prose--r2{margin-top:14px;font-size:14.5px;line-height:1.7}
@@ -1163,7 +1186,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-sec--r2.tc-sec--r2{margin:0;padding:10px 0 0}
 .tc-sec--r3.tc-sec--r3{margin:0}
 .tc-seg--r1.tc-seg--r1{align-self:flex-start}
-.tc-seg--r2.tc-seg--r2{height:22px;font-size:11.5px}
+.tc-seg--r2.tc-seg--r2{height:22px;font-size:11.5px;align-self:flex-start}
 .tc-seg--r3.tc-seg--r3{height:22px}
 .tc-sheet--r1.tc-sheet--r1{width:480px}
 .tc-sheet--r2.tc-sheet--r2{width:520px}
@@ -1224,7 +1247,9 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-span--r33.tc-span--r33{font-size:11.5px;color:var(--tc-muted);line-height:1.55}
 .tc-span--r34.tc-span--r34{margin-top:2px}
 .tc-span--r35.tc-span--r35{font-size:11px;color:var(--tc-dusty);margin-left:6px}
-.tc-span--r36.tc-span--r36{align-items:center;display:grid;gap:10px;grid-template-columns:64px 1fr auto}
+.tc-span--r36.tc-span--r36{align-items:center;display:flex;flex-wrap:wrap;gap:8px 10px;min-width:0;max-width:100%;overflow:hidden}
+.tc-span--r36.tc-span--r36 .tc-line{flex-wrap:nowrap}
+.tc-span--r36.tc-span--r36 .tc-mono{overflow-wrap:normal;white-space:normal;min-width:0}
 .tc-span--r37.tc-span--r37{font-size:11px;color:var(--tc-dusty);align-self:start;padding-top:6px}
 .tc-span--r38.tc-span--r38{font-size:12px;color:var(--tc-muted)}
 .tc-span--r39.tc-span--r39{text-transform:none;letter-spacing:0;color:var(--tc-dusty);font-weight:400}
@@ -1241,7 +1266,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-span--r49.tc-span--r49{height:6px;border-radius:50%;background:var(--tc-danger);display:inline-block;width:6px}
 .tc-span--r5.tc-span--r5{font-weight:600}
 .tc-span--r50.tc-span--r50{height:30px}
-.tc-span--r51.tc-span--r51{font-family:var(--tc-font-mono)}
+.tc-span--r51.tc-span--r51{font-family:var(--tc-font-mono);white-space:nowrap}
 .tc-span--r6.tc-span--r6{font-size:10.5px;color:var(--tc-dusty)}
 .tc-span--r7.tc-span--r7{color:var(--tc-danger)}
 .tc-span--r8.tc-span--r8{font-size:12px}
@@ -6496,9 +6521,9 @@ Read  2 min ago</div>
                 <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-gear"/></svg>Settings</button>
                 <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-adm"/></svg>Administration</button>
                 <span class="tc-menu__sep"></span>
-                <button class="tc-menu__item tc-menu__item--r6" type="button" role="menuitem">
+                <div class="tc-menu__item tc-menu__item--r6">
                   <span class="tc-line tc-line--gap-9 tc-span--r29">Theme</span>
-                  <span class="tc-seg tc-seg--r2"><button class="is-on tc-seg__opt" type="button">Auto</button><button class="tc-seg__opt" type="button">Light</button><button class="tc-seg__opt" type="button">Dark</button></span></button>
+                  <span class="tc-seg tc-seg--r2"><button class="is-on tc-seg__opt" type="button">Auto</button><button class="tc-seg__opt" type="button">Light</button><button class="tc-seg__opt" type="button">Dark</button></span></div>
                 <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-search"/></svg>Keyboard shortcuts<kbd class="tc-kbd">?</kbd></button>
                 <span class="tc-menu__sep"></span>
                 <button class="tc-menu__item" type="button" role="menuitem">Sign out</button>
@@ -8140,8 +8165,8 @@ Read  2 min ago</div>
         </div>
         <div class="tc-msg is-accent">Changing your Carrel password does <b>not</b> disconnect devices: each has its own key wrapper. To disconnect one, revoke its password here — that is the only thing that stops it.</div>
         <div class="tc-list__group"><span class="tc-rubric">Devices</span><span class="tc-num">3</span></div>
-        <table class="tc-table">
-          <thead><tr><th>Device</th><th class="tc-table__col--w34">What it can see</th><th class="tc-table__n3">Access</th><th class="is-2nd tc-table__n4">Created</th><th>Last request</th><th class="tc-table__col--w90"></th></tr></thead>
+        <table class="tc-table tc-table--fit">
+          <thead><tr><th>Device</th><th>What it can see</th><th class="tc-table__n3">Access</th><th class="is-2nd tc-table__n4">Created</th><th class="is-2nd">Last request</th><th class="tc-table__col--w90"></th></tr></thead>
           <tbody>
             <tr><td><span class="tc-table__file"><svg><use href="#i-device"/></svg><span class="tc-table__filename">Телефон · DAVx5</span></span></td>
               <td><span class="tc-span--r36">
@@ -8150,7 +8175,7 @@ Read  2 min ago</div>
                 <span class="tc-mono tc-mono--r4">4 calendars · 1 book</span>
                 <button class="tc-btn is-sm" type="button">Change</button></span></td>
               <td class="tc-table__n3"><span class="tc-seg tc-seg--r3"><button class="is-on tc-seg__opt" type="button">read</button><button class="is-dim tc-seg__opt" title="Writing is off for the whole proxy" type="button">write</button></span></td>
-              <td class="tc-mono is-2nd tc-table__n4">2026-06-02</td><td class="tc-mono">2026-08-15 09:31</td>
+              <td class="tc-mono is-2nd tc-table__n4">2026-06-02</td><td class="tc-mono is-2nd">2026-08-15 09:31</td>
               <td class="tc-acts"><button class="tc-btn is-sm is-danger" type="button">Revoke</button></td></tr>
             <tr><td><span class="tc-table__file"><svg><use href="#i-device"/></svg><span class="tc-table__filename">Ноутбук · Thunderbird</span></span></td>
               <td><span class="tc-span--r36">
@@ -8158,11 +8183,11 @@ Read  2 min ago</div>
                 <span class="tc-mono tc-mono--r4">all · 12 collections</span>
                 <button class="tc-btn is-sm" type="button">Change</button></span></td>
               <td class="tc-table__n3"><span class="tc-seg tc-seg--r3"><button class="is-on tc-seg__opt" type="button">read</button><button class="is-dim tc-seg__opt" title="Writing is off for the whole proxy" type="button">write</button></span></td>
-              <td class="tc-mono is-2nd tc-table__n4">2026-06-02</td><td class="tc-mono">2026-08-15 08:02</td>
+              <td class="tc-mono is-2nd tc-table__n4">2026-06-02</td><td class="tc-mono is-2nd">2026-08-15 08:02</td>
               <td class="tc-acts"><button class="tc-btn is-sm is-danger" type="button">Revoke</button></td></tr>
             <tr class="tc-tr--r1"><td><span class="tc-table__file"><svg><use href="#i-device"/></svg><span class="tc-table__filename">Old phone</span></span></td>
               <td><span class="tc-span--r36"><span></span><span class="tc-mono tc-mono--r8">—</span><span></span></span></td>
-              <td class="tc-mono tc-table__n3">revoked</td><td class="tc-mono is-2nd tc-table__n4">2026-03-14</td><td class="tc-mono">2026-05-30 12:10</td>
+              <td class="tc-mono tc-table__n3">revoked</td><td class="tc-mono is-2nd tc-table__n4">2026-03-14</td><td class="tc-mono is-2nd">2026-05-30 12:10</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button">Delete</button></td></tr>
           </tbody>
         </table>
@@ -9742,8 +9767,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           <div class="tc-sheet__body">
             <div class="tc-field tc-field--r4"><label>To</label>
               <span class="tc-in is-focus tc-in--r26">
-                <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#4A6B52"></span> Анна Ковалёва · a.kovaleva@example.org</span>
-                <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#6B4E7A"></span> Артём Белов · a.belov@example.org</span>
+                <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span>
+                <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#6B4E7A"></span>Артём Белов · a.belov@example.org</span>
               </span>
               <span class="tc-field__hint">2 of 10 recipients. Everyone sees the whole list.</span></div>
             <div class="tc-field tc-field--r4"><label>Subject</label><input class="tc-in" type="text" value="Контакты подрядчика и смета" aria-label="Subject"></div>
@@ -9818,7 +9843,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
       <div class="tc-stack tc-div--r74">
         <div class="tc-field tc-field--r4"><label>To</label>
           <span class="tc-in is-focus tc-in--r26">
-            <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#4A6B52"></span> Анна Ковалёва · a.kovaleva@example.org</span>
+            <span class="tc-tag"><span class="tc-mark tc-mark--r7" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span>
             <span class="tc-span--r40">бел</span>
           </span></div>
         <div class="tc-menu tc-menu--r11">
@@ -11844,9 +11869,9 @@ The account itself stays: same login, same confirmed address. Only the password 
       <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-device"/></svg>Application settings</button>
       <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-server"/></svg>Switch instance</button>
       <span class="tc-menu__sep"></span>
-      <button class="tc-menu__item tc-menu__item--r6" type="button" role="menuitem">
+      <div class="tc-menu__item tc-menu__item--r6">
         <span class="tc-line tc-line--gap-9 tc-span--r29">Theme</span>
-        <span class="tc-seg tc-seg--r2"><button class="is-on tc-seg__opt" type="button">Auto</button><button class="tc-seg__opt" type="button">Light</button><button class="tc-seg__opt" type="button">Dark</button></span></button>
+        <span class="tc-seg tc-seg--r2"><button class="is-on tc-seg__opt" type="button">Auto</button><button class="tc-seg__opt" type="button">Light</button><button class="tc-seg__opt" type="button">Dark</button></span></div>
       <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-search"/></svg>Keyboard shortcuts<kbd class="tc-kbd">?</kbd></button>
       <span class="tc-menu__sep"></span>
       <button class="tc-menu__item" type="button" role="menuitem">Sign out…</button>
@@ -12301,7 +12326,7 @@ The account itself stays: same login, same confirmed address. Only the password 
         <div class="tc-msg is-accent is-row tc-msg--r16">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-down"/></svg>
           <span><b>Carrel 0.8.0 is ready to install.</b> It will be applied the next time the app closes, or now — the window reopens where it was.</span>
-          <span class="tc-push tc-line tc-line--gap-6">
+          <span class="tc-push">
             <button class="tc-btn is-primary" type="button">Install and restart</button>
             <button class="tc-btn" type="button">What’s new</button>
             <button class="tc-btn" type="button">Later</button>
