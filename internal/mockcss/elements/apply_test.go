@@ -8,7 +8,7 @@ import (
 func TestApplyButtonsAndFields(t *testing.T) {
 	in := `<style data-tc>
 .tc-root svg{display:block}
-.tc-btn > .tc-menu.is-pop{margin-top:6px;font-weight:400;text-align:left}
+.tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
 /* элементы управления */
 .tc-btn{height:26px}
 </style><style>body{}</style>

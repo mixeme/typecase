@@ -17,7 +17,16 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 5 strips `style=`
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 6 closes
+  mockup slips. `.tc-drop` menu offset is **4 px** (Р-7). A mark in
+  `.tc-head__title` is **20 px** (Р-8). A file-row icon is **15 px**, as in
+  the table filename (Р-10). Table `.tc-acts` is nowrap (Р-11). `.tc-btn`
+  sets `text-transform: none`, `letter-spacing: normal`, `font-weight: 400`
+  so a button in a rubric is ordinary type, not small caps (Р-12: Attach,
+  server-card actions, and the approved extras Show 3 and New folder).
+  Chrome before/after vs the step 1 base is 0-diff except the rows in
+  `docs/visual/allowed-diffs.md`.
+  Plan 1 step 5 strips `style=`
   from mockup frames. Colours and meter widths become `data-tc-colour` /
   `data-tc-width` (page `[data-tc-*="…"]` rules set the variables; product CSS
   reads `var(--tc-colour)` / `var(--tc-width)`). Layout glue is `tc-line` /
@@ -31,13 +40,12 @@ until released separately.
   `div.tc-menu__item` (a button cannot wrap buttons). Lint `frame-no-style`.
   `go run ./internal/mockcss/inline` is idempotent. The Р-13 visible list is
   approved. Chrome before/after vs the step 1 base is 0-diff except the
-  step 4 rows and the Р-13 frames in `docs/visual/allowed-diffs.md`
-  (7.11.2 wrap and 7.19 invitation buttons wait for step 6).
+  step 4 rows and the Р-13 frames in `docs/visual/allowed-diffs.md`.
   Plan 1 step 4 puts real
   controls in mockup frames: `button` (btn, seg option, check, menu item,
   pick, close, tick), `input`/`textarea`, `a href`, `kbd`. Search and icon
   fields keep a `tc-q` input (value for painted text). Menus that sat inside
-  a button become `.tc-drop` (offset stays 6 px until step 6 / Р-7).
+  a button become `.tc-drop` (offset 4 px, Р-7).
   Control reset is the proof `controlCSS` (`.tcx` → `.tc-root`).
   `go run ./internal/mockcss/elements` is idempotent. Lint `frame-elements`
   requires those tags in frames. Chrome before/after vs the step 1 base is

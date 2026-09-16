@@ -217,6 +217,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 /* шапка раздела и панель управления */
 .tc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:15px var(--tc-page-gutter) 11px;flex-wrap:wrap}
 .tc-head__title{font-family:var(--tc-font-serif);font-size:22px;font-weight:400;line-height:1.15;display:flex;align-items:center;gap:9px}
+.tc-head__title .tc-mark{width:3px;height:20px;border-radius:1px}
 .tc-head__sub{font-size:11.5px;color:var(--tc-dusty);margin-top:4px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
 .tc-acts{display:flex;gap:6px;align-items:center;flex:none;flex-wrap:wrap;justify-content:flex-end}
 /* Полоса: свой отступ 7 px сверху и снизу; одна строка; лишнее — is-2nd. */
@@ -255,7 +256,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-acts > .tc-drop{flex:none}
 /* элементы управления */
 .tc-btn{height:26px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;border:.5px solid var(--tc-edge);
-  border-radius:3px;background:var(--tc-surface);font-size:12.5px;color:var(--tc-ink);white-space:nowrap;flex:none;box-sizing:border-box}
+  border-radius:3px;background:var(--tc-surface);font-size:12.5px;color:var(--tc-ink);white-space:nowrap;flex:none;box-sizing:border-box;
+  text-transform:none;letter-spacing:normal;font-weight:400}
 .tc-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .tc-btn.is-primary{background:var(--tc-accent);border-color:var(--tc-accent);color:#FFFDF7}
 .tc-btn.is-danger{color:var(--tc-danger);border-color:var(--tc-edge)}
@@ -351,6 +353,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-row.is-on{background:var(--tc-card)}
 .tc-row .tc-mark{width:3px;height:22px;border-radius:1px}
 .tc-row .tc-row__title{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-row__name svg{width:15px;height:15px;flex:none;stroke:var(--tc-muted);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .tc-row__title.is-strong{font-weight:600}
 .tc-row .tc-row__excerpt{font-size:12px;color:var(--tc-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-row .tc-row__cell{font-size:11.5px;color:var(--tc-dusty);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -415,7 +418,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-table td.tc-mono{font-family:var(--tc-font-mono);font-size:11.5px;color:var(--tc-muted)}
 .tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
 .tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
-.tc-table .tc-acts{justify-content:flex-start}
+.tc-table .tc-acts{justify-content:flex-start;flex-wrap:nowrap;white-space:nowrap}
 /* Таблица в карточке: отступы у карточки, последняя строка без линии. */
 .tc-card > .tc-table{margin-top:9px}
 .tc-card > .tc-table tr td:first-child,.tc-card > .tc-table tr th:first-child{padding-left:0}
@@ -486,8 +489,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-field:has(> .tc-menu.is-pop){position:relative}
 /* Раскрытая кнопка — точка отсчёта для своего меню. */
 .tc-btn:has(> .tc-menu.is-pop){position:relative}
-.tc-btn > .tc-menu.is-pop{margin-top:6px;font-weight:400;text-align:left}
-.tc-drop:not(.is-bar) > .tc-menu.is-pop{margin-top:6px;font-weight:400;text-align:left}
+.tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
+.tc-drop:not(.is-bar) > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
 /* Рубрика внутри меню: говорит, откуда взялся набор строк. */
 .tc-menu > .tc-rubric{padding:4px 8px 6px}
 .tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
@@ -11382,7 +11385,7 @@ The account itself stays: same login, same confirmed address. Only the password 
       </div>
       <div class="tc-main">
         <div class="tc-head">
-          <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--r3"></span>Combined calendar</div><div class="tc-head__sub">5 of 7 calendars · 10 – 16 August 2026</div></div>
+          <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--r1"></span>Combined calendar</div><div class="tc-head__sub">5 of 7 calendars · 10 – 16 August 2026</div></div>
           <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button">Export</button></div>
         </div>
         <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <span class="tc-span--r7">1 unavailable</span></div>

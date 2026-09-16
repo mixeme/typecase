@@ -21,7 +21,7 @@ const controlCSS = controlMarker + `
 .tc-acts > .tc-drop{flex:none}
 `
 
-const dropOffsetCSS = `.tc-drop:not(.is-bar) > .tc-menu.is-pop{margin-top:6px;font-weight:400;text-align:left}`
+const dropOffsetCSS = `.tc-drop:not(.is-bar) > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}`
 
 func injectCSS(html string) string {
 	const needle = "/* элементы управления */"
@@ -44,7 +44,7 @@ func ensureDropOffset(html string) string {
 	if strings.Contains(html, ".tc-drop:not(.is-bar) > .tc-menu.is-pop") {
 		return html
 	}
-	const nested = `.tc-btn > .tc-menu.is-pop{margin-top:6px;font-weight:400;text-align:left}`
+	const nested = `.tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}`
 	if i := strings.Index(html, nested); i >= 0 {
 		at := i + len(nested)
 		return html[:at] + "\n" + dropOffsetCSS + html[at:]
