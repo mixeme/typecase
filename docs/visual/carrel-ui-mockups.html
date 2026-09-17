@@ -160,7 +160,7 @@ body:has(#w390:checked) .tc-root{width:390px}
 [data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
   --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
 /* верхняя панель */
-.tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule);container:tcbox / inline-size}
+.tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule)}
 /* Поиск по центру: равные крылья flex:1 1 0 слева и справа. */
 .tc-brand{display:flex;align-items:center;gap:9px;font-family:var(--tc-font-serif);font-size:17px;
   flex:1 1 0}
@@ -249,7 +249,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-acts{display:flex;gap:6px;align-items:center;flex:none;flex-wrap:wrap;justify-content:flex-end}
 /* Полоса: свой отступ 7 px сверху и снизу; одна строка; лишнее — is-2nd. */
 .tc-head:has(+ .tc-bar){padding-bottom:4px}
-.tc-side > .tc-head{flex-wrap:nowrap;padding-right:calc(var(--tc-page-gutter) + 20px)}
+.tc-side > .tc-head{flex-wrap:nowrap}
 .tc-side > .tc-head > .tc-acts{flex:none}
 /* Левая половина шапки: .tc-head__group (фото + заголовки), внутри .tc-head__titles. */
 .tc-head__group{display:flex;gap:14px;align-items:flex-start;min-width:0}
@@ -292,9 +292,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
 .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
 .tc-btn.is-sm{height:22px;font-size:11.5px;padding:0 7px}
-/* Крестик приколот к правому верхнему углу, вынут из потока. */
-.tc-close{position:absolute;top:8px;right:8px;z-index:4;
-  width:24px;height:24px;padding:0;justify-content:center;
+/* Крестик — тихая кнопка в шапке, в потоке, как остальные действия. */
+.tc-close{width:24px;height:24px;padding:0;justify-content:center;flex:none;margin-left:auto;
   border-color:transparent;background:transparent;color:var(--tc-muted)}
 .tc-close > svg{width:14px;height:14px}
 .tc-split{display:inline-flex;flex:none}
@@ -495,11 +494,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
-/* Правое поле шапки листа — 40 px под приколотый крестик.
-   Крестик позиционируется от шапки, не от всего листа: иначе top:8px
-   сидит выше поиска и заголовка (padding 11 px). */
-.tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 40px 11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
-.tc-sheet__head > .tc-close{top:50%;transform:translateY(-50%)}
+.tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
+.tc-sheet__head > .tc-close{margin-left:auto}
 .tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .tc-sheet__foot{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:.5px solid var(--tc-hair)}
 .tc-kbd{font-family:var(--tc-font-mono);font-size:10.5px;border:.5px solid var(--tc-edge);border-radius:3px;
@@ -684,7 +680,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-nav{padding:0;align-items:center}
   .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
   .tc-nav .tc-num{display:none}
-  .tc-top .tc-search{flex:1 1 120px;width:auto;min-width:0}
+  /* Крылья brand/actions остаются flex:1 1 0 — поиск по центру, сжимается. */
+  .tc-top .tc-search{flex:0 1 560px;width:auto;min-width:0;max-width:560px}
 }
 /* Ящик: ≤640. Состояние — на детях корня; вид потомков — style(), иначе
    панель 440 px и лист 560 px на широком корне тоже попали бы в max-width:640. */
@@ -693,11 +690,29 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-shell__body.tc-shell__body--no-rail,
   .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{
     --tc-shell-mode:drawer;--tc-page-gutter:var(--tc-page-gutter-narrow);
-    grid-template-columns:minmax(0,1fr);min-height:600px;overflow-x:clip}
+    grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;
+    min-height:600px;overflow-x:clip}
   .tc-overlay{--tc-shell-mode:drawer;overflow-x:clip;min-width:0}
-  .tc-shell__rail,.tc-shell__body.tc-shell__body--side > .tc-side{display:none}
-  .tc-top{--tc-shell-mode:drawer;--tc-top:46px;height:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);overflow-x:clip}
+  .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+  .tc-shell__body > .tc-main{grid-row:1;grid-column:1}
+  .tc-shell__rail{
+    --tc-shell-mode:drawer;
+    grid-row:2;grid-column:1;flex-direction:row;flex-wrap:nowrap;gap:0;padding:0;
+    border-right:0;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);
+    overflow:visible;align-items:stretch}
+  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  .tc-shell__rail .tc-nav{
+    display:flex;flex-direction:row;width:100%;padding:0;gap:0;align-items:stretch}
+  .tc-shell__rail .tc-nav .tc-nav__item{
+    flex:1;flex-direction:column;justify-content:center;gap:3px;height:auto;width:auto;
+    padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
+  .tc-shell__rail .tc-nav .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
+  .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
+  .tc-shell__rail .tc-num{display:none}
+  .tc-top{--tc-shell-mode:drawer;--tc-top:46px;height:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);
+    padding:0 var(--tc-page-gutter-narrow);overflow-x:clip}
   .tc-top .tc-btn{height:38px}
+  .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0}
   .tc-top .tc-search{display:none}
   .tc-top .tc-brand{width:auto;flex:1 1 auto;min-width:0}
   /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
@@ -1244,7 +1259,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-root--r15.tc-root--r15{background:var(--tc-surface);padding:16px 20px}
 .tc-root--r16.tc-root--r16{background:var(--tc-surface);gap:12px;padding:14px 20px}
 .tc-root--r17.tc-root--r17{background:var(--tc-surface);max-width:280px;padding:14px}
-.tc-root--r18.tc-root--r18{background:var(--tc-surface);position:relative;max-width:220px;padding:12px 40px 12px 14px}
+.tc-root--r18.tc-root--r18{background:var(--tc-surface);max-width:220px;padding:12px 14px;display:flex;align-items:center;gap:8px}
 .tc-root--r19.tc-root--r19{background:var(--tc-surface);max-width:360px;overflow:hidden;padding:0}
 .tc-root--r2.tc-root--r2{background:var(--tc-surface);align-items:flex-start}
 .tc-root--r20.tc-root--r20{min-height:88px}
@@ -2340,7 +2355,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   <div class="tc-div--r10">Card body</div>
   <div class="tc-danger tc-danger--r1"><button class="tc-btn is-danger-solid" type="button">Delete contact</button></div>
 </div>
-<p><code>.m-close</code> — крестик в правом верхнем углу панели: вынут из потока, и шапка отводит для него место. <code>.m-danger-zone</code> — подвал карточки с разрушительным действием: отдельная полоса с волосяной линией сверху, тревожный текст рядом с кнопкой.</p>
+<p><code>.m-close</code> — крестик закрытия: та же кнопка, что в шапке листа и в панели, стоит в ряду с другими действиями. <code>.m-danger-zone</code> — подвал карточки с разрушительным действием: отдельная полоса с волосяной линией сверху, тревожный текст рядом с кнопкой.</p>
 
 <p><b>Счёт разобранного — <code>.m-stats</code>, одна ячейка — <code>.m-stat</code>.</b> Строка над предпросмотром на всех трёх мастерах. Число полужирным; неудачи — <code>is-error</code>, тот же цвет, что у отказавшей строки предпросмотра.</p>
 
@@ -3748,7 +3763,7 @@ Read  2 min ago · not changed on server</div>
       <div class="tc-side" data-part="panel">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title tc-head__title--r1">Заметка со встречи 10.08</div><div class="tc-head__sub">nextcloud · Записи · <span class="tc-mono">10 Aug 2026 11:05</span></div></div>
-          <div class="tc-acts"><button class="tc-btn is-sm is-primary" type="button">Save</button><button class="tc-btn is-sm" title="Open full screen" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg></button><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></div>
+          <div class="tc-acts"><button class="tc-btn is-sm is-primary" type="button">Save</button><button class="tc-btn is-sm" title="Open full screen" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
         </div>
         <div class="tc-form is-tight">
           <div class="tc-field tc-field--full"><label>Title</label><input class="tc-in" type="text" value="Заметка со встречи 10.08" aria-label="Title"></div>

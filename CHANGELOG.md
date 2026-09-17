@@ -26,7 +26,12 @@ until released separately.
   44 px in drawer without growing the drawing (Р-21). The page ladder
   (radios above the TOC) sets `.frame` width. New frames `m-phone-8` and
   `m-phone-9` show the icon rail and the sources overlay. Class `is-phone`
-  is gone; phone look is width 390. Chrome ladder:
+  is gone; phone look is width 390. `.tc-top` is not a `tcbox` container:
+  otherwise padding made drawer chrome start above 640. In `rail` the
+  search keeps equal brand/actions wings. In `drawer` the section rail
+  becomes the bottom bar; icon-only header buttons are 38×38.
+  `.tc-close` sits in the header row on sheets and side panels. Chrome
+  ladder:
   `go test ./internal/browser -timeout 40m -run TestMockupLadder`.
   Plan 1 step 6 closes
   mockup slips. `.tc-drop` menu offset is **4 px** (Р-7). A mark in
