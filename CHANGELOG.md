@@ -8,8 +8,6 @@ do, not what the authors did.
 
 ### Not yet included
 
-- An open side panel still covers the viewport at phone width, including the
-  rail chrome (U-9: row menu instead of the panel).
 - Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
 
 The typecase wordmark and icon work documented below stays documentation-only
@@ -17,7 +15,20 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 6 closes
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 7 makes the
+  mockup the source of narrow behaviour. Named containers are `tcbox`
+  (`tc-root`, `tc-main`, `tc-side`, `tc-list`, overlay, sheet, dialog).
+  Shell states (Р-3) live in mockup CSS: `--tc-shell-mode` on
+  `.tc-shell__body` is `full` / `rail` (641–1007, 56 px icons) /
+  `drawer` (≤640). Drawer descendant rules use
+  `@container style(--tc-shell-mode: drawer)` so a 560 px sheet or a
+  440 px side panel on a wide root does not pick them up. Tap zones grow to
+  44 px in drawer without growing the drawing (Р-21). The page ladder
+  (radios above the TOC) sets `.frame` width. New frames `m-phone-8` and
+  `m-phone-9` show the icon rail and the sources overlay. Class `is-phone`
+  is gone; phone look is width 390. Chrome ladder:
+  `go test ./internal/browser -timeout 40m -run TestMockupLadder`.
+  Plan 1 step 6 closes
   mockup slips. `.tc-drop` menu offset is **4 px** (Р-7). A mark in
   `.tc-head__title` is **20 px** (Р-8). A file-row icon is **15 px**, as in
   the table filename (Р-10). Table `.tc-acts` is nowrap (Р-11). `.tc-btn`

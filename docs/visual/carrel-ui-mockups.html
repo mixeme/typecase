@@ -74,6 +74,32 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 .frame-label .frag{border:.5px dashed var(--tc-edge);border-radius:2px;padding:0 5px;
   color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
 
+/* Лестница ширин: радиокнопки, без скрипта. Ширину кадра бьёт !important поверх style= у телефонных кадров. */
+.ladder{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin:0 0 28px;max-width:1500px;font-size:13px;color:var(--tc-muted)}
+.ladder__label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tc-dusty);font-weight:600}
+.ladder label{display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--tc-ink)}
+.ladder input{margin:0}
+body:has(#w1351:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w1351:checked) .tc-root{width:1351px}
+body:has(#w1191:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w1191:checked) .tc-root{width:1191px}
+body:has(#w1190:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w1190:checked) .tc-root{width:1190px}
+body:has(#w1008:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w1008:checked) .tc-root{width:1008px}
+body:has(#w1007:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w1007:checked) .tc-root{width:1007px}
+body:has(#w820:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w820:checked) .tc-root{width:820px}
+body:has(#w641:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w641:checked) .tc-root{width:641px}
+body:has(#w640:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w640:checked) .tc-root{width:640px}
+body:has(#w460:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w460:checked) .tc-root{width:460px}
+body:has(#w390:checked) .frame{width:max-content!important;max-width:100%}
+body:has(#w390:checked) .tc-root{width:390px}
+
 /* native desktop chrome around the product */
 /* настольное приложение: нативное окно вокруг того же интерфейса */
 .mk-win{border:.5px solid var(--tc-edge);border-radius:7px;overflow:hidden;background:var(--tc-bg)}
@@ -124,7 +150,7 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 /* Классы .m-* — набор компонентов; имена те, что уйдут в carrel.css. */
 .tc-root{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px;
   font-family:var(--tc-font-sans);font-size:13px;line-height:1.45;color:var(--tc-ink);background:var(--tc-bg);
-  container-type:inline-size}
+  container:tcbox / inline-size}
 .tc-root *{box-sizing:border-box}
 .tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
 .tc-root ul{list-style:none}
@@ -134,7 +160,7 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 [data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
   --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
 /* верхняя панель */
-.tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule)}
+.tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule);container:tcbox / inline-size}
 /* Поиск по центру: равные крылья flex:1 1 0 слева и справа. */
 .tc-brand{display:flex;align-items:center;gap:9px;font-family:var(--tc-font-serif);font-size:17px;
   flex:1 1 0}
@@ -154,15 +180,16 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 .tc-usermenu{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--tc-muted)}
 .tc-usermenu .tc-avatar{width:22px;height:22px;font-size:9.5px}
 /* каркас */
-.tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px}
+.tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px;--tc-shell-mode:full}
 .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr) var(--tc-side)}
 .tc-shell__body.tc-shell__body--no-rail{grid-template-columns:minmax(0,1fr)}
 .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{grid-template-columns:minmax(0,1fr) var(--tc-side)}
 .tc-shell__rail{border-right:.5px solid var(--tc-rule);padding:12px 0 0;display:flex;flex-direction:column;gap:16px;min-width:0}
-.tc-main{min-width:0;display:flex;flex-direction:column;background:var(--tc-bg);container-type:inline-size;overflow-x:auto;position:relative}
-.tc-side{border-left:.5px solid var(--tc-rule);background:var(--tc-surface);display:flex;flex-direction:column;min-width:0;position:relative}
+.tc-main{min-width:0;display:flex;flex-direction:column;background:var(--tc-bg);container:tcbox / inline-size;overflow-x:auto;position:relative}
+.tc-side{border-left:.5px solid var(--tc-rule);background:var(--tc-surface);display:flex;flex-direction:column;min-width:0;position:relative;container:tcbox / inline-size}
 /* рейл */
 .tc-nav{display:flex;flex-direction:column;gap:1px;padding:0 8px}
+.tc-nav--bottom{display:none}
 .tc-nav .tc-nav__item{display:flex;align-items:center;gap:9px;height:29px;padding:0 8px;border-radius:3px;font-size:13.5px;color:var(--tc-ink)}
 .tc-nav .tc-nav__item.is-on{background:var(--tc-card);font-weight:600}
 .tc-nav .tc-nav__item.is-on .tc-num{color:var(--tc-muted)}
@@ -322,8 +349,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-bar .tc-check,.tc-docbar .tc-check{min-height:26px;white-space:nowrap}
 /* Строка таблицы — 22 px: полей в ней нет, и кнопка не должна её распирать. */
 .tc-table td .tc-btn{height:22px}
-/* Телефон: касание крупнее, верхняя панель одной высоты. */
-.tc-root.is-phone .tc-top .tc-btn{height:38px}
 .tc-check .tc-tickrow__tick{width:12px;height:12px;border-radius:2px;background:var(--tc-ink);flex:none}
 .tc-check .tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
 /* поля формы: ширина по содержимому, не 100% */
@@ -347,7 +372,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-danger{display:flex;gap:12px;align-items:center;padding:11px var(--tc-page-gutter);border-top:.5px solid var(--tc-hair);
   margin-top:auto;font-size:12px;color:var(--tc-dusty);flex-wrap:wrap}
 /* списки */
-.tc-list{display:flex;flex-direction:column}
+.tc-list{display:flex;flex-direction:column;container:tcbox / inline-size}
 .tc-row{display:grid;align-items:center;gap:12px;padding-left:var(--tc-page-gutter);padding-right:var(--tc-page-gutter);
   min-height:38px;border-bottom:.5px solid var(--tc-hair)}
 .tc-row.is-on{background:var(--tc-card)}
@@ -366,6 +391,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-row--excerpt{grid-template-columns:3px minmax(140px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 118px}
 .tc-row--find{grid-template-columns:3px 76px minmax(220px,2.4fr) minmax(120px,1fr) 74px 128px}
 .tc-row--tickcols{grid-template-columns:16px minmax(220px,2.4fr) 90px 130px 60px 128px}
+.tc-row--phone{grid-template-columns:3px minmax(0,1fr) auto;align-items:center}
 .tc-list__group{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
   padding:15px var(--tc-page-gutter) 5px;border-bottom:.5px solid var(--tc-rule);background:var(--tc-bg)}
 .tc-list__group .tc-num{margin-left:0}
@@ -465,10 +491,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-tree__row.is-on{background:var(--tc-card);font-weight:600}
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
 /* наложение: быстрая заметка поверх любого экрана */
-.tc-overlay{position:relative}
+.tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 .tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
-.tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative}
+.tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
 /* Правое поле шапки листа — 40 px под приколотый крестик.
    Крестик позиционируется от шапки, не от всего листа: иначе top:8px
    сидит выше поиска и заголовка (padding 11 px). */
@@ -518,7 +544,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-auth__stack > .tc-form,.tc-auth__stack > .tc-auth__links{align-self:stretch}
 .tc-auth__links{display:flex;flex-wrap:wrap;gap:13px;font-size:12px}
 .tc-auth__links > *{color:var(--tc-accent)}
-.tc-dialog{width:100%;max-width:760px;margin:0 auto;padding:22px var(--tc-page-gutter) 26px}
+.tc-dialog{width:100%;max-width:760px;margin:0 auto;padding:22px var(--tc-page-gutter) 26px;container:tcbox / inline-size}
 .tc-dialog.is-wide{max-width:1080px}
 .tc-dialog.is-narrow{max-width:420px}
 .tc-dialog .tc-head{padding-left:0;padding-right:0}
@@ -559,33 +585,23 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    на вторую строку в узкий столбец и ломается по дефисам. */
 .tc-root.tc-root--print .tc-print__row--r1{grid-template-columns:minmax(0,1fr) max-content max-content}
 .tc-root.tc-root--print .tc-print__row--r1 > :not(:first-child){white-space:nowrap}
-.tc-root.is-phone{width:390px;--tc-top:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);flex:none}
-.tc-root.is-phone .tc-shell__body{grid-template-columns:minmax(0,1fr);min-height:600px}
-.tc-root.is-phone .tc-brand{width:auto}
-.tc-root.is-phone .tc-row{min-height:52px;gap:10px}
-.tc-root.is-phone .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
-.tc-root.is-phone .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty)}
-.tc-root.is-phone .tc-nav__item.is-on{color:var(--tc-accent)}
-.tc-root.is-phone .tc-nav--bottom svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.tc-root.is-phone .tc-row--phone{grid-template-columns:3px minmax(0,1fr) auto;align-items:center}
-.tc-root.is-phone .tc-btn,.tc-root.is-phone .tc-in{height:38px}
 .tc-row__text{display:flex;flex-direction:column;gap:2px;min-width:0}
 .tc-skel{background:var(--tc-hair);border-radius:2px;height:9px;display:block}
 /* Колонки уходят по сужению .tc-main, не окна.
    Панель подробностей скрывается. Порог 1190: рейл 264 + самая широкая
    панель 440 + пол колонки 480. Считается по самой широкой: хватит всем. */
-@container (max-width:1190px){
+@container tcbox (max-width:1190px){
   .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr)}
   .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{grid-template-columns:minmax(0,1fr)}
   .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
 }
 /* Панель правки заметки: порог 960 — правая группа самая тяжёлая
    (черновик + Ctrl+S + ширина + Focus ≈ 451, левая до Attach 447). */
-@container (max-width:960px){
+@container tcbox (max-width:960px){
   .tc-docbar .is-2nd{display:none}
   .tc-docbar:has(.is-2nd) .tc-bar__more{display:inline-flex}
 }
-@container (max-width:800px){
+@container tcbox (max-width:800px){
   /* is-2nd уходит под «...». У таблицы порог 700: ячейка умеет сжиматься. */
   .tc-bar .is-2nd{display:none}
   /* Панель выделения теряет подписи, не действия. */
@@ -603,7 +619,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-row--tickcols{grid-template-columns:16px minmax(200px,2.4fr) 84px 124px 116px}
   .tc-row--tickcols .tc-row__detail{display:none}
 }
-@container (max-width:700px){
+@container tcbox (max-width:700px){
   /* Колонка is-2nd исчезает, когда панель узкая. */
   .tc-table th.is-2nd,.tc-table td.is-2nd{display:none}
   /* После скрытия слотов таблица всё ещё может быть шире панели.
@@ -621,7 +637,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-row--excerpt{grid-template-columns:3px minmax(140px,1.4fr) minmax(70px,auto) 80px 116px}
   .tc-row--excerpt > :nth-child(3){display:none}
 }
-@container (max-width:620px){
+@container tcbox (max-width:620px){
   .tc-row{padding-left:12px;padding-right:12px}
   /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
   .tc-head .tc-acts{flex:0 1 auto;min-width:0}
@@ -638,7 +654,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-row--tickcols{grid-template-columns:16px minmax(120px,2fr) 78px 96px}
   .tc-row--tickcols .tc-row__time{display:none}
 }
-@container (max-width:460px){
+@container tcbox (max-width:460px){
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(0,1fr) 74px}
   .tc-row--avatarcols .tc-row__subtitle{display:none}
   .tc-row--timecols{grid-template-columns:3px 50px minmax(0,1fr)}
@@ -654,8 +670,96 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-table .tc-table__n3,.tc-table .tc-table__n3,
   .tc-table .tc-table__n4,.tc-table .tc-table__n4{display:none}
 }
-@container (max-width:560px){
-  .tc-shell__body,.tc-shell__body.tc-shell__body--side{grid-template-columns:56px minmax(0,1fr)}
+/* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
+@container tcbox (min-width:641px) and (max-width:1007px){
+  .tc-shell__body,.tc-shell__body.tc-shell__body--side{
+    --tc-shell-mode:rail;--tc-rail:56px;
+    grid-template-columns:56px minmax(0,1fr)}
+  .tc-shell__body.tc-shell__body--no-rail,
+  .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{
+    --tc-shell-mode:rail;grid-template-columns:minmax(0,1fr)}
+  .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+  .tc-shell__rail{overflow:hidden;padding:12px 4px;align-items:center}
+  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  .tc-nav{padding:0;align-items:center}
+  .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
+  .tc-nav .tc-num{display:none}
+  .tc-top .tc-search{flex:1 1 120px;width:auto;min-width:0}
+}
+/* Ящик: ≤640. Состояние — на детях корня; вид потомков — style(), иначе
+   панель 440 px и лист 560 px на широком корне тоже попали бы в max-width:640. */
+@container tcbox (max-width:640px){
+  .tc-shell__body,.tc-shell__body.tc-shell__body--side,
+  .tc-shell__body.tc-shell__body--no-rail,
+  .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{
+    --tc-shell-mode:drawer;--tc-page-gutter:var(--tc-page-gutter-narrow);
+    grid-template-columns:minmax(0,1fr);min-height:600px;overflow-x:clip}
+  .tc-overlay{--tc-shell-mode:drawer;overflow-x:clip;min-width:0}
+  .tc-shell__rail,.tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+  .tc-top{--tc-shell-mode:drawer;--tc-top:46px;height:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);overflow-x:clip}
+  .tc-top .tc-btn{height:38px}
+  .tc-top .tc-search{display:none}
+  .tc-top .tc-brand{width:auto;flex:1 1 auto;min-width:0}
+  /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
+     Столбец формы сюда нельзя: панель 440 на широком корне тоже ≤640. */
+  .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
+  .tc-sheet{width:100%;margin:0}
+  .tc-sheet__head{flex-wrap:wrap}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
+  .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
+  label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-span--r19,.tc-span--r33,.tc-sheet__head,.tc-b--r1{
+    overflow-wrap:anywhere;min-width:0}
+  .tc-div--r79{flex-direction:column}
+  .tc-div--r77{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
+}
+@container style(--tc-shell-mode: drawer){
+  .tc-row{min-height:52px;gap:10px}
+  .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
+  .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
+  .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
+  .tc-nav--bottom svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:1}
+  .tc-btn,.tc-in,.tc-seg{height:38px}
+  .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
+  .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn,
+  .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
+  .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
+  .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
+  button,.tc-in,.tc-seg__opt,.tc-check,.tc-nav__item,.tc-tick,.tc-tickrow__tick,.tc-tag,a[href]{
+    position:relative;overflow:visible;z-index:1;appearance:none}
+  button:not(.is-pick)::after,a[href]::after,input:not(.is-pick)::after,textarea::after,select::after,
+  .tc-check::after,.tc-tick::after,.tc-tickrow__tick::after,.tc-seg__opt::after,.tc-menu__item::after{
+    content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;
+    transform:translate(-50%,-50%);pointer-events:auto}
+  .tc-in.is-pick::before{pointer-events:auto;width:44px;height:44px;top:50%;bottom:auto;right:auto;left:50%;
+    transform:translate(-50%,-50%);background:transparent}
+  .tc-menu.is-pop,.tc-drop{z-index:6;overflow:visible}
+  .tc-crumbs{position:relative;z-index:1}
+  .tc-shell__body .tc-main,.tc-shell__body .tc-bar,.tc-shell__body .tc-head,.tc-shell__body .tc-acts{overflow:visible}
+  .tc-form{flex-direction:column;flex-wrap:nowrap}
+  .tc-field,.tc-field--xs,.tc-field--sm,.tc-field--md,.tc-field--lg,.tc-field--xl,.tc-field--full{width:100%;min-width:0}
+  .tc-fields{grid-template-columns:minmax(0,1fr)}
+  .tc-head .tc-acts{flex:1 1 100%;justify-content:flex-start}
+  .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
+  .tc-sheet{width:100%;max-width:100%;margin:0}
+  .tc-sheet__head{flex-wrap:wrap}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
+  .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
+  .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
+  .tc-card{display:flex;flex-direction:column}
+  .tc-form .tc-line{flex-direction:column;align-items:stretch}
+  label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-span--r19,.tc-span--r33,.tc-sheet__head,.tc-b--r1{
+    overflow-wrap:anywhere;min-width:0}
+  /* input/textarea — replaced, без ::after: зону даёт поле. */
+  .tc-field{position:relative}
+  .tc-field:has(> input,> textarea,> .tc-in)::after{
+    content:"";position:absolute;left:0;right:0;bottom:-3px;height:44px;pointer-events:auto}
+  .tc-range{position:relative;overflow:visible}
+  .tc-range:has(.tc-in)::after{
+    content:"";position:absolute;inset:-3px 0;min-height:44px;pointer-events:auto}
+  .tc-div--r79{flex-direction:column}
+  .tc-div--r77{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
 }
 
 /* layout glue */
@@ -1345,6 +1449,21 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 </header>
 
 <p class="lede">Полный набор экранов Carrel, нарисованный вёрсткой, а не картинками: каждый макет — живой HTML на тех же классах, которые предлагается перенести в <code>carrel.css</code>. Палитра, шрифты и приёмы взяты из <a href="carrel-brand-guide.html">визуального стиля</a>; здесь они доведены до конкретных экранов, сеток и размеров.</p>
+
+<form class="ladder" aria-label="Ширина кадров">
+  <span class="ladder__label">Ширина</span>
+  <label><input type="radio" name="w" id="wauto" checked> как нарисовано</label>
+  <label><input type="radio" name="w" id="w1351"> 1351</label>
+  <label><input type="radio" name="w" id="w1191"> 1191</label>
+  <label><input type="radio" name="w" id="w1190"> 1190</label>
+  <label><input type="radio" name="w" id="w1008"> 1008</label>
+  <label><input type="radio" name="w" id="w1007"> 1007</label>
+  <label><input type="radio" name="w" id="w820"> 820</label>
+  <label><input type="radio" name="w" id="w641"> 641</label>
+  <label><input type="radio" name="w" id="w640"> 640</label>
+  <label><input type="radio" name="w" id="w460"> 460</label>
+  <label><input type="radio" name="w" id="w390"> 390</label>
+</form>
 
 <h2>Содержание</h2>
 <nav class="toc" aria-label="Содержание">
@@ -11420,7 +11539,7 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-1" style="width:392px">
     <div class="frame-label"><span>Агенда</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-menu"/></svg></button>
         <div class="tc-brand tc-brand--r1">Combined calendar</div>
@@ -11429,7 +11548,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           <button class="tc-btn is-primary tc-btn--r10" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r11"><use href="#i-quill"/></svg></button>
         </div>
       </div>
-      <div class="tc-shell__body">
+      <div class="tc-shell__body tc-shell__body--no-rail">
         <div class="tc-main">
           <div class="tc-runbar tc-runbar--r2"><span class="tc-meter tc-meter--r1"><i class="tc-meter__bar" data-tc-width="83%"></i></span>5 of 6 · 14 events · <span class="tc-span--r7">1 unavailable</span></div>
           <div class="tc-list__group"><span class="tc-rubric">Mon · 10 Aug</span><span class="tc-num">3</span></div>
@@ -11475,13 +11594,13 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-2" style="width:392px">
     <div class="frame-label"><span>Выдвижной рейл источников</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-back"/></svg></button>
         <div class="tc-brand tc-brand--r1">Sources</div>
         <div class="tc-top__actions"><button class="tc-btn is-sm" type="button">Apply</button></div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-railsec tc-railsec--r2">
           <div class="tc-tickrow is-all is-on tc-tickrow--r3"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined calendar</span><span class="tc-tickrow__meta">14</span></div>
         </div>
@@ -11510,13 +11629,13 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-3" style="width:392px">
     <div class="frame-label"><span>Карточка события</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-back"/></svg></button>
         <div class="tc-brand tc-brand--r1">Event</div>
         <div class="tc-top__actions"><button class="tc-btn is-sm" type="button">Edit</button></div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-head tc-head--snug">
           <div class="tc-head__titles"><div class="tc-head__title tc-head__title--r1">Синк-ап по релизу</div><div class="tc-head__sub"><span class="tc-mark tc-mark--r7" data-tc-colour="#4A6B52"></span>nextcloud · Личный</div></div>
         </div>
@@ -11541,7 +11660,7 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-4" style="width:392px">
     <div class="frame-label"><span>Контакты</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-menu"/></svg></button>
         <div class="tc-brand tc-brand--r1">Combined address book</div>
@@ -11550,7 +11669,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           <button class="tc-btn is-primary tc-btn--r10" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r11"><use href="#i-quill"/></svg></button>
         </div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-list__group"><span class="tc-rubric">А</span><span class="tc-num">3</span></div>
         <div class="tc-list">
           <div class="tc-row tc-row--phone">
@@ -11605,13 +11724,13 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-5" style="width:392px">
     <div class="frame-label"><span>Человек целиком</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-back"/></svg></button>
         <div class="tc-brand tc-brand--r1">Анна Ковалёва</div>
         <div class="tc-top__actions"><button class="tc-btn is-sm" type="button">Edit</button></div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-line tc-line--gap-12 tc-div--r94">
           <span class="tc-avatar--photo is-ph tc-avatar--photo--r2">АК</span>
           <div class="tc-div--r95">
@@ -11646,13 +11765,13 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-6" style="width:392px">
     <div class="frame-label"><span>Файлы · выделение</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-menu"/></svg></button>
         <div class="tc-brand tc-brand--r1">attachments</div>
         <div class="tc-top__actions"><button class="tc-btn is-primary tc-btn--r10" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r11"><use href="#i-up"/></svg></button></div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-bar tc-bar--sel tc-bar--sel--r2">
           <span class="tc-span--r44">2 selected</span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button>
@@ -11702,13 +11821,13 @@ The account itself stays: same login, same confirmed address. Only the password 
   <div>
   <div class="frame" data-frame="m-phone-7" style="width:392px">
     <div class="frame-label"><span>Заметка · чтение и правка</span><i>390 px</i></div>
-    <div class="tc-root is-phone tc-shell">
+    <div class="tc-root tc-shell">
       <div class="tc-top">
         <button class="tc-btn tc-btn--r8" type="button"><svg viewBox="0 0 24 24" class="tc-ico--r9"><use href="#i-back"/></svg></button>
         <div class="tc-brand tc-brand--r1">Записи</div>
         <div class="tc-top__actions"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg>Edit</button></div>
       </div>
-      <div class="tc-shell__body"><div class="tc-main">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-doc tc-doc--r3">
           <div class="tc-doc__title tc-doc__title--r1">Заметка со встречи 10.08</div>
           <div class="tc-head__sub tc-head__sub--r3"><span class="tc-mono">10 August, 11:05</span> · <span class="tc-tag">встречи</span></div>
@@ -11738,6 +11857,172 @@ The account itself stays: same login, same confirmed address. Only the password 
     </div>
   </div>
   <div style="font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:392px">Разобранный Markdown, флажки задач нажимаются пальцем, «Reading width» на телефоне не нужен — ширина и так одна. Правка открывает то же поле во весь экран, с той же панелью разметки.</div>
+  </div>
+
+  <div>
+  <div class="frame" data-frame="m-phone-8" style="width:820px">
+    <div class="frame-label"><span>Рейл из значков</span><i>820 px</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" value="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-tickrow is-all is-on"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined notebook</span><span class="tc-tickrow__meta">86</span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">nextcloud · home</div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">22</span></div>
+            <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Архив</span><span class="tc-tickrow__meta">—</span></div>
+          </div>
+          <div class="tc-railfoot">
+            <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+            <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+            <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+          <div class="tc-head">
+            <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--r1"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 86 notes · VJOURNAL</div></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button">Import Markdown</button><button class="tc-btn" type="button">Export</button></div>
+          </div>
+          <div class="tc-bar">
+            <input class="tc-in is-ph tc-in--r6" type="search" placeholder="Filter by word" aria-label="Filter by word">
+            <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+            <span class="tc-bar__right is-2nd"><span class="tc-mono">86</span></span>
+          </div>
+          <div class="tc-list__group"><span class="tc-rubric">August 2026</span><span class="tc-num">9</span></div>
+          <div class="tc-list">
+            <div class="tc-row tc-row--excerpt is-on">
+              <span class="tc-mark" data-tc-colour="#4A6B52"></span>
+              <span class="tc-row__title is-strong">Заметка со встречи 10.08</span>
+              <span class="tc-row__excerpt">Договорились заморозить ветку в среду; письмо пользователям пишет Анна…</span>
+              <span class="tc-row__cell tc-row__tags"><span class="tc-tag">встречи</span></span>
+              <span class="tc-mono tc-row__date">10 Aug</span>
+              <span class="tc-row__cell tc-row__source">nextcloud · Записи</span>
+            </div>
+            <div class="tc-row tc-row--excerpt">
+              <span class="tc-mark" data-tc-colour="#4A6B52"></span>
+              <span class="tc-row__title">Что почитать про CRDT</span>
+              <span class="tc-row__excerpt">Кляйн, глава 5; статья Шапиро 2011; демка automerge…</span>
+              <span class="tc-row__cell tc-row__tags"><span class="tc-tag">книги</span></span>
+              <span class="tc-mono tc-row__date">8 Aug</span>
+              <span class="tc-row__cell tc-row__source">nextcloud · Записи</span>
+            </div>
+            <div class="tc-row tc-row--excerpt">
+              <span class="tc-mark" data-tc-colour="#6B4E7A"></span>
+              <span class="tc-row__title">Про дорогу до дачи</span>
+              <span class="tc-row__excerpt">Съезд после заправки, потом грунтовка два километра…</span>
+              <span class="tc-row__cell tc-row__tags"><span class="tc-badge is-linked"><svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="tc-ico--r3"><use href="#i-link"/></svg> linked</span></span>
+              <span class="tc-mono tc-row__date">3 Aug</span>
+              <span class="tc-row__cell tc-row__source">nextcloud · Дневник</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:820px">На 641–1007 рейл 56 px из значков разделов. Подписи и список источников спрятаны: источники открываются панелью поверх <code>main</code>, кадр ниже.</div>
+  </div>
+
+  <div>
+  <div class="frame" data-frame="m-phone-9" style="width:820px">
+    <div class="frame-label"><span>Рейл из значков · источники открыты</span><i>820 px</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" value="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-tickrow is-all is-on"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined notebook</span><span class="tc-tickrow__meta">86</span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">nextcloud · home</div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">22</span></div>
+            <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Архив</span><span class="tc-tickrow__meta">—</span></div>
+          </div>
+          <div class="tc-railfoot">
+            <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+            <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+            <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+          <div class="tc-head">
+            <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--r1"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 86 notes · VJOURNAL</div></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button">Import Markdown</button><button class="tc-btn" type="button">Export</button></div>
+          </div>
+          <div class="tc-list__group"><span class="tc-rubric">August 2026</span><span class="tc-num">9</span></div>
+          <div class="tc-list">
+            <div class="tc-row tc-row--excerpt is-on">
+              <span class="tc-mark" data-tc-colour="#4A6B52"></span>
+              <span class="tc-row__title is-strong">Заметка со встречи 10.08</span>
+              <span class="tc-row__excerpt">Договорились заморозить ветку в среду; письмо пользователям пишет Анна…</span>
+              <span class="tc-row__cell tc-row__tags"><span class="tc-tag">встречи</span></span>
+              <span class="tc-mono tc-row__date">10 Aug</span>
+              <span class="tc-row__cell tc-row__source">nextcloud · Записи</span>
+            </div>
+          </div>
+          <div class="tc-scrim">
+            <div class="tc-sheet">
+              <div class="tc-sheet__head">
+                <b class="tc-b--r1">Sources</b>
+                <button class="tc-btn is-sm tc-push" type="button">Apply</button>
+                <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+              </div>
+              <div class="tc-sheet__body">
+                <div class="tc-railsec">
+                  <div class="tc-tickrow is-all is-on"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined notebook</span><span class="tc-tickrow__meta">86</span></div>
+                </div>
+                <div class="tc-railsec">
+                  <div class="tc-rubric">nextcloud · home</div>
+                  <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
+                  <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">22</span></div>
+                  <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Архив</span><span class="tc-tickrow__meta">—</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:820px">Источники — лист поверх <code>main</code>, рейл из значков остаётся. Затемнение то же, что у быстрой заметки. «Apply» закрывает панель.</div>
   </div>
 </div>
 

@@ -80,6 +80,12 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 	if err := CheckMockupLint(dataVals); err != nil {
 		t.Fatal(err)
 	}
+	ladder := `<style data-tc>.tc-root{color:red}</style>` +
+		`<style>body{margin:0}.ladder{display:flex}body:has(#w820:checked) .tc-root{width:820px}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(ladder); err != nil {
+		t.Fatal(err)
+	}
 }
 
 func TestCheckMockupLint_frameClasses(t *testing.T) {
@@ -189,8 +195,8 @@ func TestParseMockupParts_live(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.Frames) != 163 {
-		t.Fatalf("frames: got %d, want 163", len(p.Frames))
+	if len(p.Frames) != 165 {
+		t.Fatalf("frames: got %d, want 165", len(p.Frames))
 	}
 	if p.Frames[0].ID != "shell-1" || !strings.Contains(p.Frames[0].HTML, "data-frame=\"shell-1\"") {
 		t.Fatalf("first frame: %+v", p.Frames[0].ID)

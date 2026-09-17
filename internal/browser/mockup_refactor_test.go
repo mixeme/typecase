@@ -174,11 +174,17 @@ func TestMockupRefactor(t *testing.T) {
 		st := st
 		t.Run(st.name, func(t *testing.T) {
 			if spec.Base != "" {
+				kept := st.frames[:0]
 				for _, fr := range st.frames {
 					if _, ok := beforeByID[fr.ID]; !ok {
-						t.Fatalf("frame %s missing from base %s", fr.ID, spec.Base)
+						continue
 					}
+					kept = append(kept, fr)
 				}
+				if len(kept) == 0 {
+					return
+				}
+				st.frames = kept
 			}
 			h := browser.NewHarness(t)
 			run, cancel := h.Tab(8 * time.Minute)

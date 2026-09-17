@@ -150,6 +150,7 @@ var mockupPageClass = map[string]bool{
 	"frame": true, "frame-label": true, "frames": true,
 	"swatches": true, "sw": true, "demo": true, "cols": true,
 	"plan": true, "frag": true, "chip": true, "doc": true,
+	"ladder": true, "ladder__label": true,
 }
 
 var mockupPageBare = map[string]bool{
@@ -445,6 +446,10 @@ func mockupSelectorHasPage(sel string) bool {
 
 func mockupSelectorHasProduct(sel string) bool {
 	sel = compactSel(sel)
+	if strings.HasPrefix(sel, "body:has(") {
+		// Page ladder: radios set .tc-root width. Not product CSS.
+		return false
+	}
 	if strings.Contains(sel, "data-tc-colour") || strings.Contains(sel, "data-tc-width") {
 		return false
 	}
