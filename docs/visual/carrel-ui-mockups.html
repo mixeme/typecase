@@ -729,10 +729,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-top .tc-search svg{width:20px;height:20px;flex:none}
   .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;min-width:0;height:auto;padding:0;border:0}
   /* Запрос открыт (крестик очистки) — поле остаётся полем. */
-  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:0;max-width:560px;height:38px;
+  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
     padding:0 9px;justify-content:flex-start;gap:7px;margin-left:0;overflow:visible}
-  .tc-top .tc-search:has(> svg + svg) .tc-q{position:static;opacity:1;flex:1;height:auto}
-  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px}
+  .tc-top .tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
+    padding:0 28px 0 36px;flex:none}
+  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
   .tc-top .tc-brand{flex:1 1 auto;min-width:0}
   .tc-top .tc-brand:has(.tc-brand__logo){flex:none;width:auto}
   /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
@@ -797,6 +798,9 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-range{position:relative;overflow:visible}
   .tc-range:has(.tc-in)::after{
     content:"";position:absolute;inset:-3px 0;min-height:44px;pointer-events:auto}
+  .tc-search{position:relative;overflow:visible}
+  .tc-search:has(.tc-q)::after{
+    content:"";position:absolute;inset:-3px;min-width:44px;min-height:44px;pointer-events:auto}
   .tc-div--r79{flex-direction:column}
   .tc-div--r77{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
 }

@@ -102,7 +102,7 @@ const MockupLadderProbeJS = `(() => {
         const hit = document.elementFromPoint(x, y);
         if (!hit) { miss = Math.round(x - cx) + "," + Math.round(y - cy) + " hit=null"; break; }
         if (el === hit || el.contains(hit) || hit.contains(el)) continue;
-        if (hit.closest && hit.closest("button, a[href], input, textarea, select, label, .tc-check, .tc-tick, .tc-tickrow__tick, .tc-close, .tc-nav__item, .tc-seg__opt, .tc-menu, .tc-menu__item, .tc-scrim, .tc-sheet, .tc-field, .tc-range, .tc-rubric, .tc-overlay")) continue;
+        if (hit.closest && hit.closest("button, a[href], input, textarea, select, label, .tc-check, .tc-tick, .tc-tickrow__tick, .tc-close, .tc-nav__item, .tc-seg__opt, .tc-menu, .tc-menu__item, .tc-scrim, .tc-sheet, .tc-field, .tc-range, .tc-search, .tc-rubric, .tc-overlay")) continue;
         miss = Math.round(x - cx) + "," + Math.round(y - cy) + " hit=" + cls(hit).split(/\s+/).slice(0, 2).join(".");
         break;
       }

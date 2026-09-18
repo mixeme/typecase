@@ -40,7 +40,8 @@ until released separately.
   `100%`, so a long frame label cannot make the chrome narrower than the
   card. A header button with an icon and a label (2 min ago) keeps
   `max-content` width; idle search collapses to a 38 px icon (tap opens
-  search), not `display:none`.
+  search), not `display:none`. The search field gets the same 44 px tap
+  overlay as `.tc-field` (an `input` has no `::after`).
   Chrome ladder:
   `go test ./internal/browser -timeout 40m -run TestMockupLadder`.
   Plan 1 step 6 closes
