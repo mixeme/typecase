@@ -53,10 +53,12 @@ figure{margin:22px 0 34px}
 figcaption{font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:112ch}
 figcaption b{color:var(--tc-ink);font-weight:600}
 .frame{border:.5px solid var(--tc-rule);border-radius:6px;overflow:hidden;background:var(--tc-bg)}
-.frame-label{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+.frame-label{display:flex;justify-content:space-between;gap:12px;align-items:baseline;min-width:0;
    font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tc-dusty);
    padding:7px 12px;border-bottom:.5px solid var(--tc-hair);background:var(--tc-surface)}
-.frame-label i{font-style:normal;letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-mono);font-size:10.5px}
+.frame-label span{min-width:0}
+.frame-label i{font-style:normal;letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-mono);font-size:10.5px;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .frames{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
 .frames > *{min-width:min(360px,100%)}
 .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin:18px 0;max-width:1400px}
@@ -74,31 +76,31 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 .frame-label .frag{border:.5px dashed var(--tc-edge);border-radius:2px;padding:0 5px;
   color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
 
-/* Лестница ширин: радиокнопки, без скрипта. Ширину кадра бьёт !important поверх style= у телефонных кадров. */
+/* Лестница: ширину рамки задаёт ступень; корень 100%, иначе подпись кадра шире шапки. */
 .ladder{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin:0 0 28px;max-width:1500px;font-size:13px;color:var(--tc-muted)}
 .ladder__label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tc-dusty);font-weight:600}
 .ladder label{display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--tc-ink)}
 .ladder input{margin:0}
-body:has(#w1351:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w1351:checked) .tc-root{width:1351px}
-body:has(#w1191:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w1191:checked) .tc-root{width:1191px}
-body:has(#w1190:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w1190:checked) .tc-root{width:1190px}
-body:has(#w1008:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w1008:checked) .tc-root{width:1008px}
-body:has(#w1007:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w1007:checked) .tc-root{width:1007px}
-body:has(#w820:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w820:checked) .tc-root{width:820px}
-body:has(#w641:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w641:checked) .tc-root{width:641px}
-body:has(#w640:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w640:checked) .tc-root{width:640px}
-body:has(#w460:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w460:checked) .tc-root{width:460px}
-body:has(#w390:checked) .frame{width:max-content!important;max-width:100%}
-body:has(#w390:checked) .tc-root{width:390px}
+body:has(#w1351:checked) .frame{width:1351px!important;max-width:100%}
+body:has(#w1351:checked) .tc-root{width:100%}
+body:has(#w1191:checked) .frame{width:1191px!important;max-width:100%}
+body:has(#w1191:checked) .tc-root{width:100%}
+body:has(#w1190:checked) .frame{width:1190px!important;max-width:100%}
+body:has(#w1190:checked) .tc-root{width:100%}
+body:has(#w1008:checked) .frame{width:1008px!important;max-width:100%}
+body:has(#w1008:checked) .tc-root{width:100%}
+body:has(#w1007:checked) .frame{width:1007px!important;max-width:100%}
+body:has(#w1007:checked) .tc-root{width:100%}
+body:has(#w820:checked) .frame{width:820px!important;max-width:100%}
+body:has(#w820:checked) .tc-root{width:100%}
+body:has(#w641:checked) .frame{width:641px!important;max-width:100%}
+body:has(#w641:checked) .tc-root{width:100%}
+body:has(#w640:checked) .frame{width:640px!important;max-width:100%}
+body:has(#w640:checked) .tc-root{width:100%}
+body:has(#w460:checked) .frame{width:460px!important;max-width:100%}
+body:has(#w460:checked) .tc-root{width:100%}
+body:has(#w390:checked) .frame{width:390px!important;max-width:100%}
+body:has(#w390:checked) .tc-root{width:100%}
 
 /* native desktop chrome around the product */
 /* настольное приложение: нативное окно вокруг того же интерфейса */
@@ -177,7 +179,7 @@ body:has(#w390:checked) .tc-root{width:390px}
 .tc-search{flex:0 1 560px;width:560px;display:flex;align-items:center;gap:7px;height:28px;padding:0 9px;
   background:var(--tc-bg);border:.5px solid var(--tc-edge);border-radius:3px;color:var(--tc-dusty);font-size:12.5px}
 .tc-top__actions{flex:1 1 0;display:flex;align-items:center;justify-content:flex-end;gap:8px}
-.tc-usermenu{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--tc-muted)}
+.tc-usermenu{display:flex;align-items:center;gap:7px;padding:0 2px 0 10px;font-size:12.5px;color:var(--tc-muted)}
 .tc-usermenu .tc-avatar{width:22px;height:22px;font-size:9.5px}
 /* каркас */
 .tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px;--tc-shell-mode:full}
@@ -296,6 +298,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-close{width:24px;height:24px;padding:0;justify-content:center;flex:none;margin-left:auto;
   border-color:transparent;background:transparent;color:var(--tc-muted)}
 .tc-close > svg{width:14px;height:14px}
+/* Один auto на ряд: иначе Apply / «куда» и крестик делят свободное место. */
+.tc-push + .tc-close,.tc-acts > .tc-close{margin-left:0}
 .tc-split{display:inline-flex;flex:none}
 .tc-split > .tc-btn:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;border-right:0}
 .tc-split > .tc-btn + .tc-btn{border-top-left-radius:0;border-bottom-left-radius:0;padding:0 8px;border-left:0}
@@ -495,7 +499,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
 .tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
-.tc-sheet__head > .tc-close{margin-left:auto}
 .tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .tc-sheet__foot{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:.5px solid var(--tc-hair)}
 .tc-kbd{font-family:var(--tc-font-mono);font-size:10.5px;border:.5px solid var(--tc-edge);border-radius:3px;
@@ -709,12 +712,29 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-shell__rail .tc-nav .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
   .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
   .tc-shell__rail .tc-num{display:none}
-  .tc-top{--tc-shell-mode:drawer;--tc-top:46px;height:46px;--tc-page-gutter:var(--tc-page-gutter-narrow);
-    padding:0 var(--tc-page-gutter-narrow);overflow-x:clip}
+  .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
+    padding:8px;gap:8px;overflow-x:clip}
+  .tc-top .tc-top__actions.tc-top__actions{flex:1 1 auto;gap:8px}
   .tc-top .tc-btn{height:38px}
-  .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0}
-  .tc-top .tc-search{display:none}
-  .tc-top .tc-brand{width:auto;flex:1 1 auto;min-width:0}
+  .tc-top .tc-btn:has(> svg:only-child){min-width:38px;width:max(38px,max-content);height:38px}
+  .tc-top > .tc-btn.tc-btn,
+  .tc-top .tc-top__actions > .tc-btn:first-child:has(> svg:only-child),
+  .tc-top .tc-top__actions > .is-primary:has(> svg:only-child){width:38px;padding:0}
+  .tc-top .tc-btn:has(> svg:only-child) svg{width:20px;height:20px}
+  .tc-top .tc-usermenu{flex:none;height:38px}
+  /* Поле уходит, остаётся значок — тот же вход, что кнопка поиска на телефоне. */
+  .tc-top .tc-search.tc-search{display:flex;flex:none;align-items:center;justify-content:center;
+    width:38px;height:38px;padding:0;gap:0;margin-left:auto;overflow:hidden;position:relative;
+    background:var(--tc-surface)}
+  .tc-top .tc-search svg{width:20px;height:20px;flex:none}
+  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;min-width:0;height:auto;padding:0;border:0}
+  /* Запрос открыт (крестик очистки) — поле остаётся полем. */
+  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:0;max-width:560px;height:38px;
+    padding:0 9px;justify-content:flex-start;gap:7px;margin-left:0;overflow:visible}
+  .tc-top .tc-search:has(> svg + svg) .tc-q{position:static;opacity:1;flex:1;height:auto}
+  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px}
+  .tc-top .tc-brand{flex:1 1 auto;min-width:0}
+  .tc-top .tc-brand:has(.tc-brand__logo){flex:none;width:auto}
   /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
      Столбец формы сюда нельзя: панель 440 на широком корне тоже ≤640. */
   .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
@@ -727,6 +747,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
     overflow-wrap:anywhere;min-width:0}
   .tc-div--r79{flex-direction:column}
   .tc-div--r77{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
+}
+/* 390–460: «2 min ago» значком, иначе New note и mix не входят. */
+@container tcbox (max-width:460px){
+  .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0;font-size:0;gap:0}
 }
 @container style(--tc-shell-mode: drawer){
   .tc-row{min-height:52px;gap:10px}

@@ -30,8 +30,18 @@ until released separately.
   otherwise padding made drawer chrome start above 640. In `rail` the
   search keeps equal brand/actions wings. In `drawer` the section rail
   becomes the bottom bar; icon-only header buttons are 38×38.
-  `.tc-close` sits in the header row on sheets and side panels. Chrome
-  ladder:
+  `.tc-close` sits in the header row on sheets and side panels. After
+  `.tc-push` it does not take a second `margin-left: auto`, so Apply and
+  destination picks stay next to the close. In `drawer` the header is
+  54 px: 38×38 buttons sit in 8 px chrome, the same as the gap between
+  them (Р-21 keeps the drawing 38). `.tc-usermenu` has the
+  same 10 px inset as a button, so the name is not flush with the
+  previous control. The page ladder sets `.frame` width; `.tc-root` is
+  `100%`, so a long frame label cannot make the chrome narrower than the
+  card. A header button with an icon and a label (2 min ago) keeps
+  `max-content` width; idle search collapses to a 38 px icon (tap opens
+  search), not `display:none`.
+  Chrome ladder:
   `go test ./internal/browser -timeout 40m -run TestMockupLadder`.
   Plan 1 step 6 closes
   mockup slips. `.tc-drop` menu offset is **4 px** (Р-7). A mark in
