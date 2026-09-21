@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -70,6 +71,8 @@ type instance struct {
 	cmd      *exec.Cmd
 	dir      string
 	endpoint string
+	stopped  bool
+	mu       sync.Mutex
 }
 
 const portFileTimeout = 30 * time.Second
@@ -85,6 +88,8 @@ func launchChrome() (*instance, error) {
 	cmd := exec.Command(chromeExec,
 		"--headless",
 		"--disable-gpu",
+		"--disable-lcd-text",
+		"--force-color-profile=srgb",
 		"--no-sandbox",
 		"--no-first-run",
 		"--no-default-browser-check",
@@ -145,8 +150,19 @@ func readPortFile(path string) (int, error) {
 }
 
 func (in *instance) stop() {
+	in.mu.Lock()
+	defer in.mu.Unlock()
+	if in.stopped {
+		return
+	}
+	in.stopped = true
 	if in.cmd != nil && in.cmd.Process != nil {
-		_ = in.cmd.Process.Kill()
+		pid := in.cmd.Process.Pid
+		if runtime.GOOS == "windows" {
+			_ = exec.Command("taskkill", "/T", "/F", "/PID", strconv.Itoa(pid)).Run()
+		} else {
+			_ = in.cmd.Process.Kill()
+		}
 		_, _ = in.cmd.Process.Wait()
 	}
 	if in.dir != "" {

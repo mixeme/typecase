@@ -194,6 +194,17 @@ func channelDelta(a, b uint32) int {
 	return d
 }
 
+// MockupShotCSS concatenates every <style> body from a mockup document.
+func MockupShotCSS(styles string) string {
+	return flattenStyleTags(styles)
+}
+
+const mockupShotExtras = "body{margin:0;padding:0}\n" +
+	"*{caret-color:transparent!important;animation:none!important;transition:none!important}\n" +
+	"*:focus,*:focus-visible{outline:none!important}\n" +
+	"input::-webkit-search-decoration,input::-webkit-search-cancel-button{display:none}\n" +
+	"::-webkit-scrollbar{display:none}\n"
+
 // MockupShotShell is a page with mockup CSS and sprite, and an empty host for frames.
 // Style tags are flattened into one block so a split page/product stylesheet
 // paints like the single <style> of the step 1 baseline.
@@ -201,12 +212,8 @@ func MockupShotShell(styles, sprite string) string {
 	css := flattenStyleTags(styles)
 	return "<!DOCTYPE html>\n<html lang=\"ru\"><head>\n<meta charset=\"utf-8\">\n" +
 		"<style>\n" + css + "\n" +
-		"body{margin:0;padding:0}\n" +
-		"*{caret-color:transparent!important;animation:none!important;transition:none!important}\n" +
-		"*:focus,*:focus-visible{outline:none!important}\n" +
-		"input::-webkit-search-decoration,input::-webkit-search-cancel-button{display:none}\n" +
-		"::-webkit-scrollbar{display:none}\n</style>\n</head><body>\n" +
-		// Off-screen Latin+Cyrillic so the three mockup fonts are decoded before a frame is injected.
+		mockupShotExtras +
+		"</style>\n</head><body>\n" +
 		`<div aria-hidden="true" style="position:absolute;left:-9999px;top:0;font-size:16px">` +
 		`<span style="font-family:'Public Sans'">AgЯя</span>` +
 		`<span style="font-family:Literata">AgЯя</span>` +
@@ -214,11 +221,100 @@ func MockupShotShell(styles, sprite string) string {
 		sprite + "\n<div id=\"host\"></div>\n</body></html>"
 }
 
-func flattenStyleTags(html string) string {
-	low := strings.ToLower(html)
+// MockupShotShellPair puts current and baseline CSS in one document.
+// Baseline uses media="not all" until the test flips it — one Navigate,
+// so Edge does not re-rasterize cream type. @font-face stays on the
+// current sheet only; the files are the same and a second parse hangs Edge.
+func MockupShotShellPair(afterStyles, beforeStyles, sprite string) string {
+	after := flattenStyleTags(afterStyles)
+	before := StripFontFaceCSS(flattenStyleTags(beforeStyles))
+	return mockupShotDoc(after, before, sprite)
+}
+
+func mockupShotDoc(afterCSS, beforeCSS, sprite string) string {
+	var b strings.Builder
+	b.WriteString("<!DOCTYPE html>\n<html lang=\"ru\"><head>\n<meta charset=\"utf-8\">\n")
+	b.WriteString(`<style id="tc-css-after">`)
+	b.WriteString("\n")
+	b.WriteString(afterCSS)
+	b.WriteString("\n</style>\n<style>\n")
+	b.WriteString(mockupShotExtras)
+	b.WriteString("</style>\n")
+	if beforeCSS != "" {
+		b.WriteString(`<style id="tc-css-before" media="not all">`)
+		b.WriteString("\n")
+		b.WriteString(beforeCSS)
+		b.WriteString("\n</style>\n")
+	}
+	b.WriteString("</head><body>\n")
+	b.WriteString(`<div aria-hidden="true" style="position:absolute;left:-9999px;top:0;font-size:16px">`)
+	b.WriteString(`<span style="font-family:'Public Sans'">AgЯя</span>`)
+	b.WriteString(`<span style="font-family:Literata">AgЯя</span>`)
+	b.WriteString(`<span style="font-family:'Source Code Pro'">AgЯя</span></div>`)
+	b.WriteString("\n<div id=\"tc-sprite\">")
+	b.WriteString(sprite)
+	b.WriteString("</div>\n<div id=\"host\"></div>\n</body></html>")
+	return b.String()
+}
+
+// StripFontFaceCSS drops @font-face rules so a same-tab CSS toggle
+// does not re-parse the mockup font files.
+func StripFontFaceCSS(css string) string {
+	low := strings.ToLower(css)
 	var b strings.Builder
 	i := 0
-	found := false
+	for i < len(css) {
+		j := strings.Index(low[i:], "@font-face")
+		if j < 0 {
+			b.WriteString(css[i:])
+			break
+		}
+		b.WriteString(css[i : i+j])
+		k := i + j + len("@font-face")
+		for k < len(css) && (css[k] == ' ' || css[k] == '\t' || css[k] == '\n' || css[k] == '\r') {
+			k++
+		}
+		if k >= len(css) || css[k] != '{' {
+			i = i + j + len("@font-face")
+			continue
+		}
+		depth := 0
+		for k < len(css) {
+			switch css[k] {
+			case '{':
+				depth++
+			case '}':
+				depth--
+				if depth == 0 {
+					k++
+					depth = -1
+				}
+			}
+			if depth < 0 {
+				break
+			}
+			k++
+		}
+		i = k
+	}
+	return b.String()
+}
+
+func flattenStyleTags(html string) string {
+	var b strings.Builder
+	for _, body := range styleTagBodies(html) {
+		b.WriteString(body)
+	}
+	if b.Len() == 0 {
+		return html
+	}
+	return b.String()
+}
+
+func styleTagBodies(html string) []string {
+	low := strings.ToLower(html)
+	var out []string
+	i := 0
 	for i < len(low) {
 		start := strings.Index(low[i:], "<style")
 		if start < 0 {
@@ -234,12 +330,8 @@ func flattenStyleTags(html string) string {
 		if endRel < 0 {
 			break
 		}
-		b.WriteString(html[body : body+endRel])
-		found = true
+		out = append(out, html[body:body+endRel])
 		i = body + endRel + len("</style>")
 	}
-	if !found {
-		return html
-	}
-	return b.String()
+	return out
 }

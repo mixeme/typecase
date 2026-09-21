@@ -11,6 +11,7 @@ import (
 	"image/png"
 	"math"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -26,11 +27,35 @@ const mockupStageSize = 1
 
 func TestMockupShotShellFlattensStyles(t *testing.T) {
 	got := browser.MockupShotShell(`<style>a{color:red}</style><style data-tc>b{color:blue}</style>`, "")
-	if strings.Count(strings.ToLower(got), "<style") != 1 {
-		t.Fatalf("want one <style>, got %s", got)
+	if n := strings.Count(strings.ToLower(got), "<style"); n != 1 {
+		t.Fatalf("want one <style>, got %d in %s", n, got)
 	}
 	if !strings.Contains(got, "a{color:red}") || !strings.Contains(got, "b{color:blue}") {
 		t.Fatalf("missing concatenated rules: %s", got)
+	}
+}
+
+func TestStripFontFaceCSS(t *testing.T) {
+	in := "@font-face{font-family:X;src:url(a.ttf)}.a{color:red}@font-face {font-family:Y;src:url(b.ttf)}.b{color:blue}"
+	got := browser.StripFontFaceCSS(in)
+	if strings.Contains(strings.ToLower(got), "@font-face") {
+		t.Fatalf("still has @font-face: %s", got)
+	}
+	if !strings.Contains(got, ".a{color:red}") || !strings.Contains(got, ".b{color:blue}") {
+		t.Fatalf("stripped rules: %s", got)
+	}
+}
+
+func TestMockupShotShellPair(t *testing.T) {
+	got := browser.MockupShotShellPair(`<style>a{color:red}@font-face{font-family:X;src:url(a.ttf)}</style>`, `<style>b{color:blue}@font-face{font-family:Y;src:url(b.ttf)}</style>`, "")
+	if !strings.Contains(got, `id="tc-css-after"`) || !strings.Contains(got, `id="tc-css-before"`) {
+		t.Fatalf("missing pair ids: %s", got)
+	}
+	if !strings.Contains(got, `media="not all"`) {
+		t.Fatal("baseline sheet must start disabled")
+	}
+	if strings.Count(strings.ToLower(got), "@font-face") != 1 {
+		t.Fatalf("want @font-face only on after sheet, got %s", got)
 	}
 }
 
@@ -145,6 +170,10 @@ func TestMockupRefactor(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	envBase := strings.TrimSpace(os.Getenv("TYPECASE_MOCKUP_BASE"))
+	if envBase != "" {
+		spec.Base = envBase
+	}
 	afterHTML, err := browser.LoadMockupHTML(root, "")
 	if err != nil {
 		t.Fatal(err)
@@ -186,28 +215,45 @@ func TestMockupRefactor(t *testing.T) {
 				}
 				st.frames = kept
 			}
-			h := browser.NewHarness(t)
-			run, cancel := h.Tab(8 * time.Minute)
-			defer cancel()
+			withTab := func(fn func(open func(html, id string), shot func(html, id string, width int) []byte)) {
+				h := browser.NewHarness(t)
+				run, cancel := h.Tab(90 * time.Second)
+				defer func() {
+					cancel()
+					h.CloseBrowser()
+				}()
 
-			open := func(styles, sprite, id string) {
-				t.Helper()
-				url := h.RegisterPage(id, browser.MockupShotShell(styles, sprite))
-				if err := run(
-					chromedp.EmulateViewport(int64(browser.MockupShotViewport), 900, chromedp.EmulateScale(browser.MockupShotScale)),
-					chromedp.Navigate(url),
-					chromedp.WaitReady("body"),
-				); err != nil {
-					t.Fatal(err)
+				open := func(html, id string) {
+					t.Helper()
+					url := h.RegisterPage(id, html)
+					if err := run(
+						chromedp.EmulateViewport(int64(browser.MockupShotViewport), 900, chromedp.EmulateScale(browser.MockupShotScale)),
+						chromedp.Navigate(url),
+						chromedp.WaitReady("body"),
+						chromedp.Evaluate(`(async function(){
+  if (document.fonts && document.fonts.ready) {
+    await Promise.race([
+      document.fonts.ready,
+      new Promise(function(r){ setTimeout(r, 2000); })
+    ]);
+  }
+  return true;
+})()`, nil),
+						chromedp.ActionFunc(func(ctx context.Context) error {
+							_, err := page.CaptureScreenshot().WithFormat(page.CaptureScreenshotFormatPng).Do(ctx)
+							return err
+						}),
+					); err != nil {
+						t.Fatal(err)
+					}
 				}
-			}
-			shot := func(html, id string, width int) []byte {
-				t.Helper()
-				raw, err := json.Marshal(html)
-				if err != nil {
-					t.Fatal(err)
-				}
-				js := fmt.Sprintf(`(async function(){
+				shot := func(html, id string, width int) []byte {
+					t.Helper()
+					raw, err := json.Marshal(html)
+					if err != nil {
+						t.Fatal(err)
+					}
+					js := fmt.Sprintf(`(async function(){
   var host = document.getElementById("host");
   host.innerHTML = %s;
   var f = host.querySelector(".frame");
@@ -217,68 +263,72 @@ func TestMockupRefactor(t *testing.T) {
   f.style.maxHeight = %d + "px";
   f.style.overflow = "hidden";
   f.style.margin = "0";
-  if (document.fonts && document.fonts.ready) {
-    await Promise.race([
-      document.fonts.ready,
-      new Promise(function(r){ setTimeout(r, 2000); })
-    ]);
-  }
+  void f.offsetHeight;
+  await new Promise(function(r){ requestAnimationFrame(function(){ requestAnimationFrame(r); }); });
   var ae = document.activeElement;
   if (ae && ae.blur) ae.blur();
   host.querySelectorAll("input,textarea,button,select").forEach(function(el){ el.blur(); });
   return true;
 })()`, raw, width, width, browser.MockupShotMaxHeight)
-				var png []byte
-				if err := run(
-					chromedp.Evaluate(js, nil),
-					chromedp.Sleep(50*time.Millisecond),
-					chromedp.ActionFunc(func(ctx context.Context) error {
-						buf, err := captureFramePNG(ctx)
-						if err != nil {
-							return err
-						}
-						png = buf
-						return nil
-					}),
-				); err != nil {
-					t.Fatalf("%s @%d: %v", id, width, err)
+					var png []byte
+					if err := run(
+						chromedp.Evaluate(js, nil),
+						chromedp.Sleep(50*time.Millisecond),
+						chromedp.ActionFunc(func(ctx context.Context) error {
+							buf, err := captureFramePNG(ctx)
+							if err != nil {
+								return err
+							}
+							png = buf
+							return nil
+						}),
+					); err != nil {
+						t.Fatalf("%s @%d: %v", id, width, err)
+					}
+					if len(png) == 0 {
+						t.Fatalf("%s @%d: empty screenshot", id, width)
+					}
+					return png
 				}
-				if len(png) == 0 {
-					t.Fatalf("%s @%d: empty screenshot", id, width)
-				}
-				return png
+				fn(open, shot)
 			}
 
-			open(after.Styles, after.Sprite, "after")
 			afterPNG := map[string][]byte{}
-			for _, fr := range st.frames {
-				for _, w := range browser.MockupRefactorWidths {
-					if spec.Skip(fr.ID, w) {
-						continue
+			withTab(func(open func(html, id string), shot func(html, id string, width int) []byte) {
+				open(browser.MockupShotShell(after.Styles, after.Sprite), "after")
+				for _, fr := range st.frames {
+					for _, w := range browser.MockupRefactorWidths {
+						if envBase == "" && spec.Skip(fr.ID, w) {
+							continue
+						}
+						afterPNG[fmt.Sprintf("%s@%d", fr.ID, w)] = shot(fr.HTML, fr.ID, w)
 					}
-					afterPNG[fmt.Sprintf("%s@%d", fr.ID, w)] = shot(fr.HTML, fr.ID, w)
 				}
-			}
+			})
 			if sameDoc {
 				return
 			}
-			open(before.Styles, before.Sprite, "before")
-			for _, fr := range st.frames {
-				src := beforeByID[fr.ID].HTML
-				for _, w := range browser.MockupRefactorWidths {
-					if spec.Skip(fr.ID, w) {
-						continue
-					}
-					key := fmt.Sprintf("%s@%d", fr.ID, w)
-					got := shot(src, fr.ID, w)
-					if err := browser.PNGsMatch(got, afterPNG[key], browser.MockupChannelTol); err != nil {
-						if n := mockupDiffPixels(err); n > 0 && n <= browser.MockupAAPixelCap {
+			withTab(func(open func(html, id string), shot func(html, id string, width int) []byte) {
+				open(browser.MockupShotShell(before.Styles, before.Sprite), "before")
+				for _, fr := range st.frames {
+					src := beforeByID[fr.ID].HTML
+					for _, w := range browser.MockupRefactorWidths {
+						if envBase == "" && spec.Skip(fr.ID, w) {
 							continue
 						}
-						t.Errorf("%s @%d: %v", fr.ID, w, err)
+						key := fmt.Sprintf("%s@%d", fr.ID, w)
+						got := shot(src, fr.ID, w)
+						if err := browser.PNGsMatch(got, afterPNG[key], browser.MockupChannelTol); err != nil {
+							if n := mockupDiffPixels(err); n > 0 && n <= browser.MockupAAPixelCap {
+								continue
+							}
+							dumpMockupPNG(fr.ID, w, "before", got)
+							dumpMockupPNG(fr.ID, w, "after", afterPNG[key])
+							t.Errorf("%s @%d: %v", fr.ID, w, err)
+						}
 					}
 				}
-			}
+			})
 		})
 	}
 }
@@ -289,6 +339,12 @@ func mockupDiffPixels(err error) int {
 		return -1
 	}
 	return n
+}
+
+func dumpMockupPNG(id string, w int, side string, png []byte) {
+	dir := filepath.Join(os.TempDir(), "tc-mockup-diff")
+	_ = os.MkdirAll(dir, 0755)
+	_ = os.WriteFile(filepath.Join(dir, fmt.Sprintf("%s-%d-%s.png", id, w, side)), png, 0644)
 }
 
 const frameBoxJS = `(function(){

@@ -42,7 +42,7 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 	ok := `<style data-tc>:root{--tc-ink:#000}.mock,.m-btn,.tc-btn{color:red}</style>` +
 		`<style>body{margin:0}.frame{border:0}.wrap{padding:0}.mk-win{border:0}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
-	if err := CheckMockupLint(ok); err != nil {
+	if err := CheckMockupLint(ok, MockupStyleBlocks, MockupFrameIDs); err != nil {
 		t.Fatal(err)
 	}
 	tcInPage := `<style data-tc>.tc-btn{color:red}</style>` +
@@ -77,13 +77,13 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 	dataVals := `<style data-tc>[data-tc-colour]{background:var(--tc-colour)}</style>` +
 		`<style>body{margin:0}[data-tc-colour="#4A6B52"]{--tc-colour:#4A6B52}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
-	if err := CheckMockupLint(dataVals); err != nil {
+	if err := CheckMockupLint(dataVals, MockupStyleBlocks, MockupFrameIDs); err != nil {
 		t.Fatal(err)
 	}
 	ladder := `<style data-tc>.tc-root{color:red}</style>` +
 		`<style>body{margin:0}.ladder{display:flex}body:has(#w820:checked) .tc-root{width:820px}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
-	if err := CheckMockupLint(ladder); err != nil {
+	if err := CheckMockupLint(ladder, MockupStyleBlocks, MockupFrameIDs); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -165,6 +165,49 @@ func TestCheckMockupLint_frameNoStyle(t *testing.T) {
 		MockupFrameNoStyle,
 	); err == nil {
 		t.Fatal("expected style= inside a frame to fail")
+	}
+}
+
+func TestCheckMockupLint_lock(t *testing.T) {
+	ok := `<style data-tc>:root{--tc-ink:#000}.tc-root{color:var(--tc-ink);container:tcbox / inline-size}.tc-btn{color:red}</style>` +
+		`<style>body{margin:0}[data-tc-colour="#4A6B52"]{--tc-colour:#4A6B52}url("fonts/x.ttf")</style>` +
+		`<div class="frame" data-frame="s-notes-1"><div class="tc-root"><button class="tc-btn" type="button">Go</button></div></div>`
+	if err := CheckMockupLint(ok, MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined, MockupDeadRules, MockupNamedContainer, MockupTokenVars); err != nil {
+		t.Fatal(err)
+	}
+	bare := `<div class="frame" data-frame="s-notes-1"><div class="tc-root"><div></div></div></div>`
+	if err := CheckMockupLint(bare, MockupFrameNamedClass); err == nil {
+		t.Fatal("expected classless div to fail")
+	}
+	noRule := `<style data-tc>.tc-root{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><span class="tc-mark" data-tc-colour="#4A6B52"></span></div>`
+	if err := CheckMockupLint(noRule, MockupDataAttrs); err == nil {
+		t.Fatal("expected missing colour rule to fail")
+	}
+	script := `<style data-tc>.tc-root{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div><script>alert(1)</script>`
+	if err := CheckMockupLint(script, MockupSelfContained); err == nil {
+		t.Fatal("expected script to fail")
+	}
+	undef := `<style data-tc>.tc-root{color:red}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><span class="tc-mark"></span></div>`
+	if err := CheckMockupLint(undef, MockupClassesDefined); err == nil {
+		t.Fatal("expected undefined tc-mark to fail")
+	}
+	dead := `<style data-tc>.tc-root{color:red}.tc-gone{display:none}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><div class="tc-root"></div></div>`
+	if err := CheckMockupLint(dead, MockupDeadRules); err == nil {
+		t.Fatal("expected dead .tc-gone to fail")
+	}
+	unnamed := `<style data-tc>.tc-root{container-type:inline-size}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(unnamed, MockupNamedContainer); err == nil {
+		t.Fatal("expected unnamed container to fail")
+	}
+	badVar := `<style data-tc>.tc-root{color:var(--ink)}</style><style>body{}</style>` +
+		`<div class="frame" data-frame="s-notes-1"></div>`
+	if err := CheckMockupLint(badVar, MockupTokenVars); err == nil {
+		t.Fatal("expected unknown var to fail")
 	}
 }
 

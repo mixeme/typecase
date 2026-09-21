@@ -193,6 +193,15 @@ func ancestorHasClass(n *htmlNode, cls string) bool {
 	return false
 }
 
+func ancestorHasTag(n *htmlNode, tag string) bool {
+	for p := n.parent; p != nil; p = p.parent {
+		if p.tag == tag {
+			return true
+		}
+	}
+	return false
+}
+
 func walkHTML(n *htmlNode, fn func(*htmlNode)) {
 	fn(n)
 	for _, c := range n.children {

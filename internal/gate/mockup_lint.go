@@ -27,13 +27,39 @@ const (
 	// MockupFrameNoStyle forbids style= inside frames (not on .frame itself
 	// or .frame-label page chrome).
 	MockupFrameNoStyle MockupLintRule = "frame-no-style"
+	// MockupFrameNamedClass requires a class on every node in a frame except
+	// the step 3 list: inline text tags, svg guts, and semantic table/list
+	// / field tags.
+	MockupFrameNamedClass MockupLintRule = "frame-named-class"
+	// MockupDataAttrs requires every data-tc-colour and data-tc-width value
+	// in frames to have a matching rule in the page <style>.
+	MockupDataAttrs MockupLintRule = "data-attrs"
+	// MockupSelfContained forbids <script>, <link>, and url() outside the
+	// mockup directory (fonts/ next to the file).
+	MockupSelfContained MockupLintRule = "self-contained"
+	// MockupClassesDefined requires every class in a frame to be defined in
+	// data-tc, or in the page <style> when it is a page class.
+	MockupClassesDefined MockupLintRule = "classes-defined"
+	// MockupDeadRules requires every data-tc rule to match at least one
+	// frame (dead CSS report empty).
+	MockupDeadRules MockupLintRule = "dead-rules"
+	// MockupNamedContainer requires every @container to be named (tcbox or
+	// a style query) and container: to be tcbox / inline-size.
+	MockupNamedContainer MockupLintRule = "named-container"
+	// MockupTokenVars forbids var(--x) in data-tc outside the token list
+	// and the data properties --tc-colour / --tc-width.
+	MockupTokenVars MockupLintRule = "token-vars"
 )
 
 // MockupLintStep0 is the rule set for plan 1 step 0.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 
 // MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
-var MockupLintLive = []MockupLintRule{MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle}
+var MockupLintLive = []MockupLintRule{
+	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
+	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
+	MockupDeadRules, MockupNamedContainer, MockupTokenVars,
+}
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
 
@@ -77,6 +103,34 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupFrameNoStyle:
 			if err := checkMockupFrameNoStyle(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupFrameNamedClass:
+			if err := checkMockupFrameNamedClass(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupDataAttrs:
+			if err := checkMockupDataAttrs(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupSelfContained:
+			if err := checkMockupSelfContained(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupClassesDefined:
+			if err := checkMockupClassesDefined(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupDeadRules:
+			if err := checkMockupDeadRules(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupNamedContainer:
+			if err := checkMockupNamedContainer(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupTokenVars:
+			if err := checkMockupTokenVars(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:

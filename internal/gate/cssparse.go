@@ -117,6 +117,54 @@ func parseCSSRules(css string) []cssRule {
 	return rules
 }
 
+func parseCSSRulesDeep(css string) []cssRule {
+	css = stripCSSComments(css)
+	var rules []cssRule
+	var walk func(string)
+	walk = func(s string) {
+		i := 0
+		for i < len(s) {
+			for i < len(s) && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t' || s[i] == '\r') {
+				i++
+			}
+			if i >= len(s) {
+				return
+			}
+			if s[i] == '@' {
+				brace := strings.Index(s[i:], "{")
+				if brace < 0 {
+					return
+				}
+				end := matchBrace(s, i+brace)
+				if end < 0 {
+					return
+				}
+				prelude := strings.TrimSpace(s[i : i+brace])
+				if !strings.HasPrefix(prelude, "@font-face") && !strings.HasPrefix(prelude, "@keyframes") {
+					walk(s[i+brace+1 : end])
+				}
+				i = end + 1
+				continue
+			}
+			brace := strings.Index(s[i:], "{")
+			if brace < 0 {
+				return
+			}
+			sel := strings.TrimSpace(s[i : i+brace])
+			end := matchBrace(s, i+brace)
+			if end < 0 {
+				return
+			}
+			if sel != "" {
+				rules = append(rules, cssRule{Selector: sel, Body: s[i+brace+1 : end]})
+			}
+			i = end + 1
+		}
+	}
+	walk(css)
+	return rules
+}
+
 func cssProps(body string) map[string]string {
 	out := make(map[string]string)
 	for _, part := range strings.Split(body, ";") {

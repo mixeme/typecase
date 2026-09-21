@@ -88,6 +88,20 @@ func NewHarness(t *testing.T) *Harness {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(html))
 	})
+	mux.HandleFunc("/css/", func(w http.ResponseWriter, r *http.Request) {
+		id, err := url.PathUnescape(r.URL.Path[len("/css/"):])
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		css, ok := h.pages[id]
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+		w.Header().Set("Content-Type", "text/css; charset=utf-8")
+		_, _ = w.Write([]byte(css))
+	})
 
 	ln, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
@@ -107,10 +121,23 @@ func NewHarness(t *testing.T) *Harness {
 	return h
 }
 
+// CloseBrowser kills the harness Chrome process. Safe to call more than once.
+func (h *Harness) CloseBrowser() {
+	if h.browser != nil {
+		h.browser.stop()
+	}
+}
+
 // RegisterPage stores HTML and returns its URL.
 func (h *Harness) RegisterPage(id, html string) string {
 	h.pages[id] = html
 	return h.server.URL + "/page/" + url.PathEscape(id)
+}
+
+// RegisterCSS stores a stylesheet and returns its URL.
+func (h *Harness) RegisterCSS(id, css string) string {
+	h.pages[id] = css
+	return h.server.URL + "/css/" + url.PathEscape(id)
 }
 
 // Run executes chromedp actions against a registered page URL.
@@ -163,6 +190,17 @@ func (h *Harness) Tab(timeout time.Duration) (run func(actions ...chromedp.Actio
 			cancelAlloc()
 		})
 	}
+	// CaptureScreenshot on Edge can ignore context cancel. If the tab
+	// deadline fires and chromedp still does not return, kill the OS
+	// process tree so the test can fail instead of hanging forever.
+	go func() {
+		<-ctx.Done()
+		if ctx.Err() != context.DeadlineExceeded {
+			return
+		}
+		time.Sleep(2 * time.Second)
+		h.browser.stop()
+	}()
 	h.t.Cleanup(cancel)
 	run = func(actions ...chromedp.Action) error {
 		if err := chromedp.Run(ctx, actions...); err != nil {

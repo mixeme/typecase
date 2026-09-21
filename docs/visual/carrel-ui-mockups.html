@@ -112,6 +112,8 @@ body:has(#w390:checked) .tc-root{width:100%}
 .mk-winbtns svg{width:11px;height:11px;stroke:var(--tc-muted);stroke-width:1.2;fill:none}
 .mk-status{height:26px;display:flex;align-items:center;gap:14px;padding:0 12px;border-top:.5px solid var(--tc-hair);
   background:var(--tc-surface);font-size:11px;color:var(--tc-dusty)}
+.mk-status__text{}
+.mk-dot{}
 .mk-status__dot{width:6px;height:6px;border-radius:50%;background:var(--tc-accent);display:inline-block;margin-right:5px}
 .mk-status__dot.is-off{background:var(--tc-danger)}
 .mk-toast{width:330px;border:.5px solid var(--tc-edge);border-radius:7px;background:var(--tc-surface);padding:11px 12px;
@@ -172,7 +174,6 @@ body:has(#w390:checked) .tc-root{width:100%}
 .tc-logo__word{fill:var(--tc-ink)}
 .tc-logo__shade{fill:var(--tc-accent)}
 .tc-brand .tc-brand__logo{width:56px;height:22px}
-.tc-badge.is-plan{border-style:dashed}
 .tc-badge.is-local{border-color:transparent;color:var(--tc-danger);
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
 .tc-badge.is-local::before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor;flex:none}
@@ -185,7 +186,6 @@ body:has(#w390:checked) .tc-root{width:100%}
 .tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px;--tc-shell-mode:full}
 .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr) var(--tc-side)}
 .tc-shell__body.tc-shell__body--no-rail{grid-template-columns:minmax(0,1fr)}
-.tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{grid-template-columns:minmax(0,1fr) var(--tc-side)}
 .tc-shell__rail{border-right:.5px solid var(--tc-rule);padding:12px 0 0;display:flex;flex-direction:column;gap:16px;min-width:0}
 .tc-main{min-width:0;display:flex;flex-direction:column;background:var(--tc-bg);container:tcbox / inline-size;overflow-x:auto;position:relative}
 .tc-side{border-left:.5px solid var(--tc-rule);background:var(--tc-surface);display:flex;flex-direction:column;min-width:0;position:relative;container:tcbox / inline-size}
@@ -403,7 +403,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-avatar{width:28px;height:28px;border-radius:3px;background:#D9D2BE;color:#4E4738;font-size:10.5px;
   display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
 .tc-avatar.is-photo{background:#8C7B6A}
-[data-tc-theme="dark"] .tc-avatar{background:#3A463D;color:#C9BFA6}
 /* метки, значки, статусы */
 .tc-tag{border:.5px solid var(--tc-hair);border-radius:2px;padding:0 5px;font-size:10.5px;color:var(--tc-muted);background:var(--tc-surface);white-space:nowrap}
 .tc-tag:has(> .tc-mark){display:inline-flex;align-items:center;gap:5px}
@@ -456,7 +455,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-card > .tc-table tbody td{padding-top:5px;padding-bottom:5px}
 /* Не опрашивается — приглушено имя, числа остаются. */
 .tc-table tr.is-off .tc-table__filename:last-child{color:var(--tc-dusty)}
-.tc-table td.is-idle{color:var(--tc-dusty)}
 /* файловый менеджер */
 .tc-bar--sel{background:var(--tc-card);border-bottom:.5px solid var(--tc-rule)}
 .tc-bar--sel .tc-btn{background:var(--tc-surface)}
@@ -472,14 +470,12 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-tile{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:7px;display:flex;flex-direction:column;gap:6px}
 .tc-tile.is-sel{border-color:var(--tc-accent);background:var(--tc-card)}
 .tc-thumb{aspect-ratio:4/3;border-radius:3px;background:#D9D2BE;display:flex;align-items:center;justify-content:center}
-[data-tc-theme="dark"] .tc-thumb{background:#33403A}
 .tc-thumb svg{width:22px;height:22px;stroke:var(--tc-muted);stroke-width:1.2;fill:none}
 .tc-tile__name{font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-tile__meta{font-size:10.5px;color:var(--tc-dusty);font-family:var(--tc-font-mono)}
 .tc-queue{width:330px;margin:14px var(--tc-page-gutter) 16px auto;border:.5px solid var(--tc-edge);border-radius:4px;background:var(--tc-surface)}
 .tc-main > .tc-queue{position:absolute;right:var(--tc-page-gutter);bottom:16px;margin:0;z-index:4}
 .tc-queue.is-min{width:auto}
-.tc-queue.is-min ul{display:none}
 .tc-queue.is-min .tc-queue__head{border-bottom:none}
 .tc-queue__head{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:.5px solid var(--tc-hair);font-size:12px}
 .tc-queue ul{padding:6px 10px 8px;display:flex;flex-direction:column;gap:7px}
@@ -496,7 +492,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 .tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
-[data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
 .tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
 .tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
@@ -558,7 +553,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-stat.is-error{color:var(--tc-danger)}
 .tc-card{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:12px 14px;margin-bottom:10px}
 .tc-card > .tc-rubric{margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-.tc-rubric__aside{flex:none}
+.tc-rubric__aside{}
 /* Слияние: список «куда» сжимается (min-width:0), кнопка не уезжает. */
 .tc-merge{margin-left:auto;display:flex;gap:8px;align-items:center;min-width:0;flex:1 1 200px;justify-content:flex-end}
 .tc-merge .tc-in,.tc-merge .tc-field{min-width:0;flex:1 1 140px;max-width:240px}
@@ -591,7 +586,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    панель 440 + пол колонки 480. Считается по самой широкой: хватит всем. */
 @container tcbox (max-width:1190px){
   .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr)}
-  .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{grid-template-columns:minmax(0,1fr)}
   .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
 }
 /* Панель правки заметки: порог 960 — правая группа самая тяжёлая
@@ -853,7 +847,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-table__col--w170.tc-table__col--w170{width:170px}
 .tc-table__col--w26.tc-table__col--w26{width:26%}
 .tc-table__col--w30.tc-table__col--w30{width:30%}
-.tc-table__col--w34.tc-table__col--w34{width:34%}
 .tc-table__col--w80.tc-table__col--w80{width:80px}
 .tc-table__col--w88.tc-table__col--w88{width:88px}
 .tc-table__col--w90.tc-table__col--w90{width:90px}
@@ -1474,6 +1467,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-ul--r6.tc-ul--r6{font-size:12.5px;color:var(--tc-muted);margin-top:6px}
 .tc-usermenu--r1.tc-usermenu--r1{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-dim{color:var(--tc-dusty)}
+.tc-shell,.tc-row__lead,.tc-row__due,.tc-row__date,.tc-row__size,
+.tc-head__text,.tc-docmeta__sec,.tc-queue__list,.tc-queue__name,.tc-queue__meta,
+.tc-row__file,.tc-menu__label,.tc-auth__tagline,.tc-auth__link,.tc-print__cell,
+.tc-msg__aside,.tc-stack__item,.tc-sheet__block,.tc-line__item{}
 </style>
 </head>
 <body>
@@ -2518,7 +2515,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
         <div class="tc-head tc-head--mid">
           <div class="tc-head__titles tc-line tc-line--gap-14">
             <span class="tc-avatar--photo is-ph">АК</span>
-            <div>
+            <div class="tc-head__text">
               <div class="tc-head__title tc-head__title--r1">Анна Ковалёва</div>
               <div class="tc-head__sub">nextcloud · Контакты</div>
               <div class="tc-line tc-line--gap-5 tc-div--r12"><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm" type="button">All records</button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></div>
@@ -2597,7 +2594,7 @@ Read  2 min ago</div>
               <div class="tc-tree__row tc-tree__row--r2"><span class="tc-mark" data-tc-colour="#8C6239"></span>Shared <span class="tc-badge tc-push">read-only</span></div>
             </div>
           </div>
-          <div class="tc-msg">Inside one server this is <code>MOVE</code>: instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with <b>Copy here</b>.</div>
+          <div class="tc-msg">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with <b>Copy here</b>.</div>
           <div class="tc-formfoot tc-formfoot--r1"><button class="tc-btn is-primary" type="button">Move here</button><button class="tc-btn" type="button">Cancel</button></div>
         </div>
       </div>
@@ -2845,7 +2842,7 @@ Read  2 min ago</div>
         <div class="tc-head">
           <div class="tc-head__titles tc-line tc-line--gap-14">
             <span class="tc-avatar--photo"></span>
-            <div>
+            <div class="tc-head__text">
               <div class="tc-head__title">Анна Ковалёва</div>
               <div class="tc-head__sub">Издательство «Слово» · Выпускающий редактор</div>
               <div class="tc-head__sub">nextcloud · Контакты</div>
@@ -2944,7 +2941,7 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-head tc-head--r2">
           <div class="tc-head__titles tc-head__titles--r1">
             <span class="tc-avatar tc-avatar--r1">АК</span>
-            <div>
+            <div class="tc-head__text">
               <div class="tc-rubric tc-rubric--r2">Timeline</div>
               <div class="tc-head__title">Анна Ковалёва</div>
               <div class="tc-head__sub">Издательство «Слово» · Выпускающий редактор
@@ -3017,7 +3014,7 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-head tc-head--r3">
           <div class="tc-head__titles tc-line tc-line--gap-14">
             <span class="tc-avatar--photo is-ph tc-avatar--photo--r1">АК</span>
-            <div>
+            <div class="tc-head__text">
               <div class="tc-rubric">Card</div>
               <div class="tc-line tc-line--gap-5 tc-div--r12"><button class="tc-btn is-sm" type="button">Open the card</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></div>
             </div>
@@ -3887,23 +3884,23 @@ Read  2 min ago · not changed on server</div>
             <div class="tc-prose tc-prose--r3">Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.</div>
           </div>
           <div class="tc-docmeta">
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Tags</div>
               <div class="tc-line tc-line--gap-4"><span class="tc-tag">встречи</span><span class="tc-tag">релиз</span></div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
               <div class="tc-stack tc-stack--gap-5 tc-div--r23">
-                <span><span class="tc-span--r16">Синк-ап по релизу</span> <span class="tc-span--r15">· event · 10 Aug</span></span>
-                <span><span class="tc-span--r16">Дописать раздел про кэш</span> <span class="tc-span--r15">· task</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">Синк-ап по релизу</span> <span class="tc-span--r15">· event · 10 Aug</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">Дописать раздел про кэш</span> <span class="tc-span--r15">· task</span></span>
               </div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Attachments <button class="tc-btn is-sm" type="button">Attach</button></div>
               <div class="tc-div--r23">2026-08-10-sync-board.png <span class="tc-span--r15">· 412 KB</span> <span class="tc-badge">in the note</span></div>
               <div class="tc-div--r23">запись-встречи.m4a <span class="tc-span--r15">· 24 MB</span> <span class="tc-badge">Documents / carrel</span></div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Source</div>
               <div class="tc-diag">UID   9e31-40b7-c012
 Read  2 min ago</div>
@@ -3978,23 +3975,23 @@ Read  2 min ago</div>
             <div class="tc-prose tc-prose--r3">Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.</div>
           </div>
           <div class="tc-docmeta">
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Tags</div>
               <div class="tc-line tc-line--gap-4"><span class="tc-tag">встречи</span><span class="tc-tag">релиз</span></div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
               <div class="tc-stack tc-stack--gap-5 tc-div--r23">
-                <span><span class="tc-span--r16">Синк-ап по релизу</span> <span class="tc-span--r15">· event · 10 Aug</span></span>
-                <span><span class="tc-span--r16">Дописать раздел про кэш</span> <span class="tc-span--r15">· task</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">Синк-ап по релизу</span> <span class="tc-span--r15">· event · 10 Aug</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">Дописать раздел про кэш</span> <span class="tc-span--r15">· task</span></span>
               </div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Attachments <button class="tc-btn is-sm" type="button">Attach</button></div>
               <div class="tc-div--r23">2026-08-10-sync-board.png <span class="tc-span--r15">· 412 KB</span> <span class="tc-badge">in the note</span></div>
               <div class="tc-div--r23">запись-встречи.m4a <span class="tc-span--r15">· 24 MB</span> <span class="tc-badge">Documents / carrel</span></div>
             </div>
-            <div>
+            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Source</div>
               <div class="tc-diag">UID   9e31-40b7-c012
 Read  2 min ago</div>
@@ -4784,7 +4781,7 @@ Read  2 min ago</div>
         <div class="tc-list">
           <div class="tc-row tc-row--tickcols is-sel">
             <button class="tc-tickrow__tick" type="button"></button>
-            <span class="tc-row__title tc-row__name"><svg><use href="#i-img"/></svg><span>2026-08-10-sync-board.png</span></span>
+            <span class="tc-row__title tc-row__name"><svg><use href="#i-img"/></svg><span class="tc-row__file">2026-08-10-sync-board.png</span></span>
             <span class="tc-row__excerpt tc-mono tc-row__size">412 KB</span>
             <span class="tc-row__excerpt tc-mono tc-row__time">2026-08-10 11:07</span>
             <span class="tc-row__cell tc-mono tc-row__detail">rw</span>
@@ -4792,7 +4789,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-row tc-row--tickcols">
             <button class="tc-tickrow__tick is-off" type="button"></button>
-            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span>release-checklist.md</span></span>
+            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span class="tc-row__file">release-checklist.md</span></span>
             <span class="tc-row__excerpt tc-mono tc-row__size">3 KB</span>
             <span class="tc-row__excerpt tc-mono tc-row__time">2026-08-09 18:44</span>
             <span class="tc-row__cell tc-mono tc-row__detail">rw</span>
@@ -4914,9 +4911,9 @@ Read  2 min ago</div>
         </table>
         <div class="tc-queue">
           <div class="tc-queue__head"><b>Uploading 2 of 3</b><span class="tc-mono tc-push tc-mono--r7">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
-          <ul>
-            <li><div class="tc-queue__row"><span>отчёт-июль.pdf</span><span>4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
-            <li><div class="tc-queue__row"><span>плакат.png</span><span>8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
+          <ul class="tc-queue__list">
+            <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
+            <li><div class="tc-queue__row"><span class="tc-queue__name">плакат.png</span><span class="tc-queue__meta">8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-span--r7">release-checklist.md</span><span class="tc-span--r7">name taken</span></div>
               <div class="tc-line tc-line--gap-6 tc-div--r8"><button class="tc-btn is-sm" type="button">Keep both</button><button class="tc-btn is-sm" type="button">Replace</button><button class="tc-btn is-sm" type="button">Skip</button></div></li>
           </ul>
@@ -5003,7 +5000,7 @@ Read  2 min ago</div>
             <div class="tc-tree__row tc-tree__row--r2"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
           </div>
         </div>
-        <div class="tc-msg">Inside one server this is <code>MOVE</code>: instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.</div>
+        <div class="tc-msg">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.</div>
         <div class="tc-formfoot tc-formfoot--r1"><button class="tc-btn is-primary" type="button">Move here</button><button class="tc-btn" type="button">Cancel</button></div>
       </div></div></div>
     </div>
@@ -5258,7 +5255,7 @@ Read  2 min ago</div>
         <div class="tc-list" data-part="results">
           <div class="tc-row tc-row--tickcols">
             <button class="tc-tickrow__tick is-off" type="button"></button>
-            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span>договор-<b>ковал</b>ёва.pdf</span></span>
+            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span class="tc-row__file">договор-<b>ковал</b>ёва.pdf</span></span>
             <span class="tc-row__excerpt tc-mono tc-row__size">240 KB</span>
             <span class="tc-row__excerpt tc-mono tc-row__time">2026-08-04 11:20</span>
             <span class="tc-row__cell tc-mono tc-row__detail">rw</span>
@@ -5266,7 +5263,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-row tc-row--tickcols">
             <button class="tc-tickrow__tick is-off" type="button"></button>
-            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span><b>Ковал</b>ёва — правки по обложке.md</span></span>
+            <span class="tc-row__title tc-row__name"><svg><use href="#i-doc"/></svg><span class="tc-row__file"><b>Ковал</b>ёва — правки по обложке.md</span></span>
             <span class="tc-row__excerpt tc-mono tc-row__size">6 KB</span>
             <span class="tc-row__excerpt tc-mono tc-row__time">2026-07-21 16:02</span>
             <span class="tc-row__cell tc-mono tc-row__detail">rw</span>
@@ -5378,9 +5375,9 @@ Read  2 min ago</div>
           <span class="tc-span--r25">
             <div class="tc-menu tc-menu--r7">
               <button class="tc-rubric tc-menu__item" type="button" role="menuitem">Jump to</button>
-              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-con"/></svg><span>Анна <b>Ковал</b>ёва</span><span class="tc-push tc-span--r26">nextcloud · Контакты</span></button>
-              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-cal"/></svg><span>Звонок с <b>Ковал</b>ёвой</span><span class="tc-push tc-span--r26">10 Aug · Личный</span></button>
-              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg><span>договор-<b>ковал</b>ёва.pdf</span><span class="tc-push tc-span--r26">sftpgo · Documents</span></button>
+              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-con"/></svg><span class="tc-menu__label">Анна <b>Ковал</b>ёва</span><span class="tc-push tc-span--r26">nextcloud · Контакты</span></button>
+              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-cal"/></svg><span class="tc-menu__label">Звонок с <b>Ковал</b>ёвой</span><span class="tc-push tc-span--r26">10 Aug · Личный</span></button>
+              <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg><span class="tc-menu__label">договор-<b>ковал</b>ёва.pdf</span><span class="tc-push tc-span--r26">sftpgo · Documents</span></button>
               <span class="tc-menu__sep"></span>
               <button class="is-on tc-menu__item" type="button" role="menuitem"><svg><use href="#i-search"/></svg>Show all results for «ковал»<kbd class="tc-kbd">Enter</kbd></button>
               <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-all"/></svg>Timeline · Анна Ковалёва<span class="tc-push tc-span--r26">asks every server</span></button>
@@ -5484,7 +5481,7 @@ Read  2 min ago</div>
         <div data-part="results" class="tc-stack tc-stack--gap-10 tc-div--r29">
 
           <div class="tc-card">
-            <div class="tc-rubric">Артём Белов <span><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">86 points · same name, same phone</span></span></div>
+            <div class="tc-rubric">Артём Белов <span class="tc-rubric__aside"><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">86 points · same name, same phone</span></span></div>
             <div class="tc-list tc-list--r1">
               <div class="tc-row tc-row--avatarcols tc-row--avatarcols--r1">
                 <span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-avatar">АБ</span>
@@ -5519,7 +5516,7 @@ Read  2 min ago</div>
           </div>
 
           <div class="tc-card">
-            <div class="tc-rubric">Дежурство: первая линия <span><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">80 points · same title, same start</span></span></div>
+            <div class="tc-rubric">Дежурство: первая линия <span class="tc-rubric__aside"><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">80 points · same title, same start</span></span></div>
             <div class="tc-list tc-list--r1">
               <div class="tc-row tc-row--timecols tc-row--timecols--r1">
                 <span class="tc-mark" data-tc-colour="#3F6E8C"></span>
@@ -5550,7 +5547,7 @@ Read  2 min ago</div>
           </div>
 
           <div class="tc-card">
-            <div class="tc-rubric">Собрать чемодан <span><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">74 points · same summary, same due date</span></span></div>
+            <div class="tc-rubric">Собрать чемодан <span class="tc-rubric__aside"><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">74 points · same summary, same due date</span></span></div>
             <div class="tc-list tc-list--r1">
               <div class="tc-row tc-row--tickmarkcols tc-row--tickmarkcols--r1">
                 <button class="tc-tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span>
@@ -5582,7 +5579,7 @@ Read  2 min ago</div>
           </div>
 
           <div class="tc-card">
-            <div class="tc-rubric">Что почитать про CRDT <span><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">80 points · same title, same date</span></span></div>
+            <div class="tc-rubric">Что почитать про CRDT <span class="tc-rubric__aside"><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--r10">80 points · same title, same date</span></span></div>
             <div class="tc-list tc-list--r1">
               <div class="tc-row tc-row--excerpt tc-row--excerpt--r1">
                 <span class="tc-mark" data-tc-colour="#4A6B52"></span>
@@ -5714,28 +5711,28 @@ Read  2 min ago</div>
           <div class="tc-diff__agree"><span class="tc-mono">FN</span> agrees — kept as it is.</div>
           <div class="tc-diff">
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">TEL;work</span> <span>only in your edit</span></div>
+              <div class="tc-rubric"><span class="tc-mono">TEL;work</span> <span class="tc-rubric__aside">only in your edit</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit · include</span>+7 495 120-45-00</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Leave it out</span>—</span></button>
               </div>
             </div>
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">EMAIL;work</span> <span>both changed</span></div>
+              <div class="tc-rubric"><span class="tc-mono">EMAIL;work</span> <span class="tc-rubric__aside">both changed</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit</span>a.kovaleva@example.org</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Server</span>anna.kovaleva@slovo.example</span></button>
               </div>
             </div>
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">NOTE</span> <span>only in your edit</span></div>
+              <div class="tc-rubric"><span class="tc-mono">NOTE</span> <span class="tc-rubric__aside">only in your edit</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit · include</span>Пишет по вторникам, отвечает в тот же день.</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Leave it out</span>—</span></button>
               </div>
             </div>
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">X-EVOLUTION-FILE-AS</span> <span>only on the server</span></div>
+              <div class="tc-rubric"><span class="tc-mono">X-EVOLUTION-FILE-AS</span> <span class="tc-rubric__aside">only on the server</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit</span>—</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Server · include</span>Ковалёва, Анна</span></button>
@@ -5780,14 +5777,14 @@ Read  2 min ago</div>
           <div class="tc-diff__agree"><span class="tc-mono">FN</span> agrees — kept as it is.</div>
           <div class="tc-diff">
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">EMAIL;work</span> <span>both changed</span></div>
+              <div class="tc-rubric"><span class="tc-mono">EMAIL;work</span> <span class="tc-rubric__aside">both changed</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit</span>a.kovaleva@example.org</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Server</span>anna.kovaleva@slovo.example</span></button>
               </div>
             </div>
             <div class="tc-diff__item">
-              <div class="tc-rubric"><span class="tc-mono">TEL;work</span> <span>only in your edit</span></div>
+              <div class="tc-rubric"><span class="tc-mono">TEL;work</span> <span class="tc-rubric__aside">only in your edit</span></div>
               <div class="tc-diff__options">
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span><span class="tc-diff__value"><span class="tc-diff__source">Your edit · include</span>+7 495 120-45-00</span></button>
                 <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-diff__value"><span class="tc-diff__source">Leave it out</span>—</span></button>
@@ -6800,13 +6797,13 @@ Read  2 min ago</div>
           </div>
           <div class="tc-sheet__body">
             <div class="tc-div--r34">
-              <kbd class="tc-kbd">N</kbd><span>Quick note over this screen</span>
-              <kbd class="tc-kbd">/</kbd><span>Focus the search field in the header</span>
-              <kbd class="tc-kbd">Enter</kbd><span>Open the selected record full screen</span>
-              <kbd class="tc-kbd">Esc</kbd><span>Close a sheet, the details panel or focus mode</span>
-              <kbd class="tc-kbd">Ctrl+S</kbd><span>Save in the editor</span>
-              <kbd class="tc-kbd">Ctrl+Enter</kbd><span>Save a quick note</span>
-              <kbd class="tc-kbd">Ctrl+V</kbd><span>Paste an image as an attachment</span>
+              <kbd class="tc-kbd">N</kbd><span class="tc-stack__item">Quick note over this screen</span>
+              <kbd class="tc-kbd">/</kbd><span class="tc-stack__item">Focus the search field in the header</span>
+              <kbd class="tc-kbd">Enter</kbd><span class="tc-stack__item">Open the selected record full screen</span>
+              <kbd class="tc-kbd">Esc</kbd><span class="tc-stack__item">Close a sheet, the details panel or focus mode</span>
+              <kbd class="tc-kbd">Ctrl+S</kbd><span class="tc-stack__item">Save in the editor</span>
+              <kbd class="tc-kbd">Ctrl+Enter</kbd><span class="tc-stack__item">Save a quick note</span>
+              <kbd class="tc-kbd">Ctrl+V</kbd><span class="tc-stack__item">Paste an image as an attachment</span>
             </div>
             <span class="tc-field__hint tc-field__hint--r5">Shortcuts do nothing while the cursor is in a field. None of them destroy anything.</span>
           </div>
@@ -7024,7 +7021,7 @@ Read  2 min ago</div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
       <div class="tc-form tc-form--r2">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code>.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" value="m.yenuchenko" aria-label="Username"></div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="text" value="••••••••••" aria-label="Password"></div>
       </div>
@@ -7595,12 +7592,12 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-msg is-alert tc-msg--r1">The calendar and all <b>51</b> events in it are deleted on <span class="tc-mono">cloud.example.org</span>. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.</div>
-              <div>
+              <div class="tc-sheet__block">
                 <div class="tc-rubric tc-rubric--r6">What is pointing at it now</div>
                 <div class="tc-stack tc-stack--gap-6 tc-div--r23">
-                  <span><b>1 published link</b> <span class="tc-span--r15">— answers “not found” from that moment</span></span>
-                  <span><b>Backup job «Личное на домашний диск»</b> <span class="tc-span--r15">— copies this collection; it will run one short and say so</span></span>
-                  <span><b>3 devices through davloom</b> <span class="tc-span--r15">— it disappears for them at the next sync</span></span>
+                  <span class="tc-stack__item"><b>1 published link</b> <span class="tc-span--r15">— answers “not found” from that moment</span></span>
+                  <span class="tc-stack__item"><b>Backup job «Личное на домашний диск»</b> <span class="tc-span--r15">— copies this collection; it will run one short and say so</span></span>
+                  <span class="tc-stack__item"><b>3 devices through davloom</b> <span class="tc-span--r15">— it disappears for them at the next sync</span></span>
                 </div>
               </div>
               <div class="tc-msg tc-msg--r1">Last time it was in an archive: <span class="tc-mono">2026-08-14</span>. Restoring brings the records back into a <b>new</b> collection — not into this one, and not to this address.</div>
@@ -7961,7 +7958,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-msg is-alert is-row tc-msg--r1">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-shield"/></svg>
-              <span><b>The profile carries passwords in cleartext.</b> It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link lives 10 minutes and opens once; nothing is written to the server’s disk, and the issue is recorded in the audit log.</span>
+              <span class="tc-msg__aside"><b>The profile carries passwords in cleartext.</b> It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link lives 10 minutes and opens once; nothing is written to the server’s disk, and the issue is recorded in the audit log.</span>
             </div>
           </div>
           <div class="tc-stack tc-stack--gap-12 tc-div--r38">
@@ -8202,7 +8199,7 @@ Read  2 min ago</div>
           </tbody>
         </table>
         <div class="tc-msg is-row"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span>Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book. There is no import file and none is needed.</span></div>
+          <span class="tc-msg__aside">Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book. There is no import file and none is needed.</span></div>
       </div></div>
     </div>
   </div>
@@ -8261,7 +8258,7 @@ Read  2 min ago</div>
           </tbody>
         </table>
         <div class="tc-msg is-row"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span>Credentials are unlocked for five minutes — here and everywhere else they are handed out. Everything shown closes when the time is up or when you press <b>Lock now</b>; every reveal is written to the audit log.</span></div>
+          <span class="tc-msg__aside">Credentials are unlocked for five minutes — here and everywhere else they are handed out. Everything shown closes when the time is up or when you press <b>Lock now</b>; every reveal is written to the audit log.</span></div>
       </div></div>
     </div>
   </div>
@@ -8352,7 +8349,7 @@ Read  2 min ago</div>
               <td class="tc-mono is-2nd tc-table__n4">2026-06-02</td><td class="tc-mono is-2nd">2026-08-15 08:02</td>
               <td class="tc-acts"><button class="tc-btn is-sm is-danger" type="button">Revoke</button></td></tr>
             <tr class="tc-tr--r1"><td><span class="tc-table__file"><svg><use href="#i-device"/></svg><span class="tc-table__filename">Old phone</span></span></td>
-              <td><span class="tc-span--r36"><span></span><span class="tc-mono tc-mono--r8">—</span><span></span></span></td>
+              <td><span class="tc-span--r36"><span class="tc-stack__item"></span><span class="tc-mono tc-mono--r8">—</span><span class="tc-stack__item"></span></span></td>
               <td class="tc-mono tc-table__n3">revoked</td><td class="tc-mono is-2nd tc-table__n4">2026-03-14</td><td class="tc-mono is-2nd">2026-05-30 12:10</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button">Delete</button></td></tr>
           </tbody>
@@ -8572,7 +8569,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-railfoot">
-          <span class="tc-span--r14">Last successful copy<br><span class="tc-mono tc-mono--r15">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched">verified</span></span>
+          <span class="tc-span--r14">Last successful copy<br><span class="tc-mono tc-mono--r15">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-stack__item">verified</span></span>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8878,9 +8875,9 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
           <div class="tc-rubric tc-rubric--r7">What it opens</div>
           <div class="tc-div--r58">
-            <span><span class="tc-mono">POST /api/backup/run?job=personal</span><br><span class="tc-span--r15">starts a copy · answers <span class="tc-mono">202</span> and an id, a second one while it runs is refused</span></span>
-            <span><span class="tc-mono">GET /api/backup/status?job=personal</span><br><span class="tc-span--r15">how the running one is doing, and how the last one ended</span></span>
-            <span><span class="tc-mono">GET /api/backup/{id}/download</span><br><span class="tc-span--r15">the archive itself, once it is done — <span class="tc-mono">409</span> while it runs</span></span>
+            <span class="tc-stack__item"><span class="tc-mono">POST /api/backup/run?job=personal</span><br><span class="tc-span--r15">starts a copy · answers <span class="tc-mono">202</span> and an id, a second one while it runs is refused</span></span>
+            <span class="tc-stack__item"><span class="tc-mono">GET /api/backup/status?job=personal</span><br><span class="tc-span--r15">how the running one is doing, and how the last one ended</span></span>
+            <span class="tc-stack__item"><span class="tc-mono">GET /api/backup/{id}/download</span><br><span class="tc-span--r15">the archive itself, once it is done — <span class="tc-mono">409</span> while it runs</span></span>
           </div>
           <div class="tc-msg is-alert tc-msg--r8">No collections, no settings — but read the third line together with <b>Encrypt the archive</b> in this job: the password can pull the archive down as well, and an archive with encryption turned off is your data in the clear.</div>
           <div class="tc-div--r59">Every use is logged, naming this password. <b>Regenerate</b> replaces it on the spot — and every line already handed out stops working with it.</div>
@@ -9638,8 +9635,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <div class="tc-div--r66">
               <div class="tc-rubric tc-rubric--r8">Attachments</div>
               <div class="tc-stack tc-stack--gap-5 tc-div--r67">
-                <span><span class="tc-span--r16">2026-08-10-sync-board.png</span> <span class="tc-span--r15">· 412 KB</span></span>
-                <span><span class="tc-span--r16">release-checklist.md</span> <span class="tc-span--r15">· 3 KB</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">2026-08-10-sync-board.png</span> <span class="tc-span--r15">· 412 KB</span></span>
+                <span class="tc-stack__item"><span class="tc-span--r16">release-checklist.md</span> <span class="tc-span--r15">· 3 KB</span></span>
               </div>
             </div>
           </div>
@@ -9724,7 +9721,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           <span class="tc-thumb tc-thumb--r4">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--r8"><use href="#i-doc"/></svg>
           </span>
-          <div>
+          <div class="tc-stack__item">
             <div class="tc-head__title tc-head__title--r2">макет-обложки.psd</div>
             <div class="tc-head__sub tc-head__sub--r4"><span class="tc-mono">image/vnd.adobe.photoshop · 84.2 MB · changed 2026-08-04</span></div>
           </div>
@@ -10091,7 +10088,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
               <div class="tc-field tc-field--r4"><label>A line from you</label><input class="tc-in is-ph" type="text" placeholder="optional" aria-label="A line from you"></div>
               <div class="tc-line tc-line--gap-8 tc-div--r75">
                 <span class="tc-span--r41">Sent as</span>
-                <span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--r4">&lt;mix@carrel.example&gt;</span><br>Replies go to <span class="tc-mono tc-mono--r4">mix@example.org</span> · <span class="tc-span--r16">change in Account</span></span>
+                <span class="tc-line__item"><b>Михаил Енученко</b> <span class="tc-mono tc-mono--r4">&lt;mix@carrel.example&gt;</span><br>Replies go to <span class="tc-mono tc-mono--r4">mix@example.org</span> · <span class="tc-span--r16">change in Account</span></span>
               </div>
               <div class="tc-sec tc-sec--r2">
                 <div class="tc-rubric">The letter carries</div>
@@ -10224,9 +10221,9 @@ https://carrel.example/api/backup/run?job=personal</textarea>
     <div class="tc-root tc-root--r21">
       <div class="tc-card tc-card--r1">
         <div class="tc-stack tc-stack--gap-3 tc-div--r80">
-          <div><span class="tc-span--r42">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--r18">&lt;mix@carrel.example&gt;</span></div>
-          <div><span class="tc-span--r42">Reply-To</span><span class="tc-mono tc-mono--r4">mix@example.org</span></div>
-          <div><span class="tc-span--r42">Subject</span>Контакты подрядчика и смета</div>
+          <div class="tc-stack__item"><span class="tc-span--r42">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--r18">&lt;mix@carrel.example&gt;</span></div>
+          <div class="tc-stack__item"><span class="tc-span--r42">Reply-To</span><span class="tc-mono tc-mono--r4">mix@example.org</span></div>
+          <div class="tc-stack__item"><span class="tc-span--r42">Subject</span>Контакты подрядчика и смета</div>
         </div>
         <div class="tc-prose tc-prose--r6">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.
 
@@ -10248,8 +10245,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
     <div class="tc-root tc-root--r21">
       <div class="tc-card tc-card--r1">
         <div class="tc-stack tc-stack--gap-3 tc-div--r80">
-          <div><span class="tc-span--r42">From</span><b>Михаил Енученко (через Carrel)</b> <span class="tc-mono tc-mono--r18">&lt;noreply@carrel.example&gt;</span></div>
-          <div><span class="tc-span--r42">Subject</span>Контакты подрядчика и смета</div>
+          <div class="tc-stack__item"><span class="tc-span--r42">From</span><b>Михаил Енученко (через Carrel)</b> <span class="tc-mono tc-mono--r18">&lt;noreply@carrel.example&gt;</span></div>
+          <div class="tc-stack__item"><span class="tc-span--r42">Subject</span>Контакты подрядчика и смета</div>
         </div>
         <div class="tc-prose tc-prose--r6">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.
 
@@ -10723,7 +10720,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
         </div>
         <div class="tc-msg is-alert is-row">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span>Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them.</span>
+          <span class="tc-msg__aside">Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them.</span>
         </div>
         <div class="tc-form">
           <div class="tc-fset tc-fset--r1">
@@ -10847,8 +10844,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
           <button class="tc-btn is-primary" type="button">Sign in</button>
           <div class="tc-auth__links">
-            <span>Create an account</span>
-            <span>Forgotten your password?</span>
+            <span class="tc-auth__link">Create an account</span>
+            <span class="tc-auth__link">Forgotten your password?</span>
           </div>
           </div>
         </div>
@@ -12079,11 +12076,11 @@ The account itself stays: same login, same confirmed address. Only the password 
     <div class="tc-print__h1">Agenda · 10 – 16 August 2026</div>
     <div class="tc-div--r100">nextcloud · Личный, Работа · radicale · Проекты, Дежурства</div>
     <div class="tc-print__rub">Monday · 10 August</div>
-    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">10:00</span><span><b>Синк-ап по релизу</b><br><span class="tc-span--r45">Переговорная 2 · nextcloud · Личный</span></span></div>
-    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">all day</span><span><b>Дежурство: первая линия</b><br><span class="tc-span--r45">radicale · Дежурства</span></span></div>
-    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">15:00</span><span><b>Созвон с подрядчиком</b><br><span class="tc-span--r45">Jitsi · nextcloud · Работа</span></span></div>
+    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">10:00</span><span class="tc-print__cell"><b>Синк-ап по релизу</b><br><span class="tc-span--r45">Переговорная 2 · nextcloud · Личный</span></span></div>
+    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">all day</span><span class="tc-print__cell"><b>Дежурство: первая линия</b><br><span class="tc-span--r45">radicale · Дежурства</span></span></div>
+    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">15:00</span><span class="tc-print__cell"><b>Созвон с подрядчиком</b><br><span class="tc-span--r45">Jitsi · nextcloud · Работа</span></span></div>
     <div class="tc-print__rub">Tuesday · 11 August</div>
-    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">09:30</span><span><b>Ревью архитектуры</b><br><span class="tc-span--r45">Переговорная 1 · radicale · Проекты</span></span></div>
+    <div class="tc-print__row"><span class="tc-mono tc-mono--r21">09:30</span><span class="tc-print__cell"><b>Ревью архитектуры</b><br><span class="tc-span--r45">Переговорная 1 · radicale · Проекты</span></span></div>
     <div class="tc-div--r101">Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources</div>
   </div>
 </div>
@@ -12171,7 +12168,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           <div class="tc-sec">
             <div class="tc-rubric">Attachments</div>
             <div class="tc-stack tc-stack--gap-7 tc-div--r23">
-              <span>release-checklist.md <span class="tc-span--r15">· 3 KB</span></span>
+              <span class="tc-stack__item">release-checklist.md <span class="tc-span--r15">· 3 KB</span></span>
               <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Open in editor</button><button class="tc-btn is-sm" type="button">Show in folder</button></span>
               <span class="tc-span--r14">Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.</span>
             </div>
@@ -12179,7 +12176,7 @@ The account itself stays: same login, same confirmed address. Only the password 
         </div>
       </div>
       <div class="mk-status">
-        <span><span class="mk-status__dot"></span>carrel.example · polled 5 of 7 sources</span>
+        <span class="mk-status__text"><span class="mk-status__dot"></span>carrel.example · polled 5 of 7 sources</span>
         <span class="tc-mono">last answer 2 min ago</span>
         <span class="tc-mono tc-push">app 0.8.0 · server 0.8.0</span>
       </div>
@@ -12230,7 +12227,7 @@ The account itself stays: same login, same confirmed address. Only the password 
             <div class="tc-card tc-card--r5">
               <div class="tc-div--r103">
                 <button class="tc-tickrow__tick tc-tickrow__tick--r2" type="button"></button>
-                <div>
+                <div class="tc-stack__item">
                   <div class="tc-div--r104">Just for me</div>
                   <div class="tc-div--r105">Installs into your own profile. No administrator needed.</div>
                 </div>
@@ -12239,7 +12236,7 @@ The account itself stays: same login, same confirmed address. Only the password 
             <div class="tc-card tc-card--r1">
               <div class="tc-div--r103">
                 <button class="tc-tickrow__tick is-off tc-tickrow__tick--r2" type="button"></button>
-                <div>
+                <div class="tc-stack__item">
                   <div class="tc-div--r104">For everyone on this computer</div>
                   <div class="tc-div--r105">Installs into <span class="tc-mono">Program Files</span>. Asks for administrator once; each account still keeps its own data and password.</div>
                 </div>
@@ -12248,7 +12245,7 @@ The account itself stays: same login, same confirmed address. Only the password 
             <div class="tc-card tc-card--r1">
               <div class="tc-div--r103">
                 <button class="tc-tickrow__tick is-off tc-tickrow__tick--r2" type="button"></button>
-                <div>
+                <div class="tc-stack__item">
                   <div class="tc-div--r104">Portable — do not install</div>
                   <div class="tc-div--r105">Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.</div>
                   <div class="tc-field tc-field--r21">
@@ -12264,7 +12261,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           </div>
           <div class="tc-msg is-alert is-row tc-msg--r1">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-shield"/></svg>
-            <span><b>On a stick, the folder is the secret.</b> Your saved DAV passwords are encrypted with your Carrel password and stay encrypted there — but whoever finds the stick holds that file and can try guessing. Choose a long password, or keep the portable copy where you would keep keys.</span>
+            <span class="tc-msg__aside"><b>On a stick, the folder is the secret.</b> Your saved DAV passwords are encrypted with your Carrel password and stay encrypted there — but whoever finds the stick holds that file and can try guessing. Choose a long password, or keep the portable copy where you would keep keys.</span>
           </div>
           <div class="tc-line tc-line--gap-8">
             <button class="tc-btn is-primary" type="button">Continue</button>
@@ -12303,7 +12300,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           <div class="tc-msg tc-msg--r1">A portable copy is a full Carrel, local or remote as usual — not a cut-down build.</div>
         </div>
         <div class="mk-status">
-          <span><span class="mk-status__dot"></span>portable · <span class="tc-mono">E:\Carrel</span></span>
+          <span class="mk-status__text"><span class="mk-status__dot"></span>portable · <span class="tc-mono">E:\Carrel</span></span>
           <span class="tc-mono tc-push">app 0.8.0 · server 0.8.0</span>
         </div>
       </div>
@@ -12335,7 +12332,7 @@ The account itself stays: same login, same confirmed address. Only the password 
             <div class="tc-card tc-card--r5">
               <div class="tc-div--r103">
                 <button class="tc-tickrow__tick tc-tickrow__tick--r2" type="button"></button>
-                <div>
+                <div class="tc-stack__item">
                   <div class="tc-div--r104">Local — run it here</div>
                   <div class="tc-div--r105">Carrel runs inside the app, on this computer. Nothing to deploy.</div>
                   <div class="tc-div--r108">Suits one person and one computer. A phone cannot open this Carrel until access over the network is allowed.</div>
@@ -12345,7 +12342,7 @@ The account itself stays: same login, same confirmed address. Only the password 
             <div class="tc-card tc-card--r1">
               <div class="tc-div--r103">
                 <button class="tc-tickrow__tick is-off tc-tickrow__tick--r2" type="button"></button>
-                <div>
+                <div class="tc-stack__item">
                   <div class="tc-div--r104">Remote — connect to a server</div>
                   <div class="tc-div--r105">Carrel is already running — yours or a shared one. The app becomes its window.</div>
                   <div class="tc-div--r108">One instance for all your devices, with the same settings everywhere.</div>
@@ -12390,7 +12387,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           </div>
           <div class="tc-msg is-alert is-row tc-msg--r1">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-shield"/></svg>
-            <span><b>What only works from outside.</b> A local Carrel is not visible from the internet, so <b>published links</b>, <b>devices over davloom</b>, <b>backup started by an external request</b> and <b>invitation links</b> either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.</span>
+            <span class="tc-msg__aside"><b>What only works from outside.</b> A local Carrel is not visible from the internet, so <b>published links</b>, <b>devices over davloom</b>, <b>backup started by an external request</b> and <b>invitation links</b> either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.</span>
           </div>
           <div class="tc-line tc-line--gap-8">
             <button class="tc-btn is-primary" type="button">Run</button>
@@ -12399,7 +12396,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           </div>
         </div>
         <div class="mk-status">
-          <span><span class="mk-status__dot"></span>local · <span class="tc-mono">127.0.0.1:51734</span></span>
+          <span class="mk-status__text"><span class="mk-status__dot"></span>local · <span class="tc-mono">127.0.0.1:51734</span></span>
           <span class="tc-mono">data: AppData\Local\Carrel · 312 KB</span>
           <span class="tc-mono tc-push">app 0.8.0 · server 0.8.0</span>
         </div>
@@ -12568,7 +12565,7 @@ The account itself stays: same login, same confirmed address. Only the password 
         <div class="tc-msg tc-msg--r1"><b>Sign out of <span class="tc-mono">carrel.example</span>?</b> The app goes back to the first screen, where the mode is chosen again — a server or a local run. <b>Your other devices stay signed in</b> — those sessions end in Settings → Account, and they end there whether this app is running or not.</div>
         <div class="tc-msg is-alert is-row tc-msg--r1">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-shield"/></svg>
-          <span><b>Delete what this app keeps on this computer?</b> The data folder <span class="tc-mono">C:\Users\mix\AppData\Roaming\Carrel</span>, the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.</span>
+          <span class="tc-msg__aside"><b>Delete what this app keeps on this computer?</b> The data folder <span class="tc-mono">C:\Users\mix\AppData\Roaming\Carrel</span>, the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.</span>
         </div>
         <div class="tc-msg tc-msg--r1">Your events, contacts and notes are not here and are not touched: they live on your DAV servers. What would be deleted is the key to them, not them.</div>
         <div class="tc-line tc-line--gap-8">
@@ -12657,7 +12654,7 @@ The account itself stays: same login, same confirmed address. Only the password 
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
         <div class="tc-msg is-accent is-row tc-msg--r16">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-down"/></svg>
-          <span><b>Carrel 0.8.0 is ready to install.</b> It will be applied the next time the app closes, or now — the window reopens where it was.</span>
+          <span class="tc-msg__aside"><b>Carrel 0.8.0 is ready to install.</b> It will be applied the next time the app closes, or now — the window reopens where it was.</span>
           <span class="tc-push">
             <button class="tc-btn is-primary" type="button">Install and restart</button>
             <button class="tc-btn" type="button">What’s new</button>
@@ -12692,7 +12689,7 @@ The account itself stays: same login, same confirmed address. Only the password 
         <div class="tc-stack tc-stack--gap-12 tc-div--r106">
           <div class="tc-msg is-alert is-row tc-msg--r1">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--r4"><use href="#i-shield"/></svg>
-            <span><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there.</span>
+            <span class="tc-msg__aside"><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there.</span>
           </div>
           <div class="tc-form tc-form--r10">
             <div class="tc-field tc-grow"><label>What to do</label>
@@ -12705,7 +12702,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           </div>
         </div>
         <div class="mk-status">
-          <span><span class="mk-status__dot"></span>carrel.example</span>
+          <span class="mk-status__text"><span class="mk-status__dot"></span>carrel.example</span>
           <span class="tc-mono tc-push">app 0.8.0 · server 0.6.4</span>
         </div>
       </div>
@@ -12747,12 +12744,12 @@ The account itself stays: same login, same confirmed address. Only the password 
     <div class="tc-print__h1">Documents / carrel / attachments</div>
     <div class="tc-div--r100">sftpgo · vps · 14 items · 38.2 MB</div>
     <div class="tc-print__rub">Folders</div>
-    <div class="tc-print__row tc-print__row--r1"><span>2026-07</span><span class="tc-span--r51">34 items</span><span class="tc-span--r51">2026-07-01</span></div>
+    <div class="tc-print__row tc-print__row--r1"><span class="tc-print__cell">2026-07</span><span class="tc-span--r51">34 items</span><span class="tc-span--r51">2026-07-01</span></div>
     <div class="tc-print__rub">Files</div>
-    <div class="tc-print__row tc-print__row--r1"><span>2026-08-10-sync-board.png</span><span class="tc-span--r51">412 KB</span><span class="tc-span--r51">2026-08-10</span></div>
-    <div class="tc-print__row tc-print__row--r1"><span>release-checklist.md</span><span class="tc-span--r51">3 KB</span><span class="tc-span--r51">2026-08-09</span></div>
-    <div class="tc-print__row tc-print__row--r1"><span>смета-подрядчик.pdf</span><span class="tc-span--r51">1.2 MB</span><span class="tc-span--r51">2026-08-05</span></div>
-    <div class="tc-print__row tc-print__row--r1"><span>2026-08-04-whiteboard.jpg</span><span class="tc-span--r51">2.8 MB</span><span class="tc-span--r51">2026-08-04</span></div>
+    <div class="tc-print__row tc-print__row--r1"><span class="tc-print__cell">2026-08-10-sync-board.png</span><span class="tc-span--r51">412 KB</span><span class="tc-span--r51">2026-08-10</span></div>
+    <div class="tc-print__row tc-print__row--r1"><span class="tc-print__cell">release-checklist.md</span><span class="tc-span--r51">3 KB</span><span class="tc-span--r51">2026-08-09</span></div>
+    <div class="tc-print__row tc-print__row--r1"><span class="tc-print__cell">смета-подрядчик.pdf</span><span class="tc-span--r51">1.2 MB</span><span class="tc-span--r51">2026-08-05</span></div>
+    <div class="tc-print__row tc-print__row--r1"><span class="tc-print__cell">2026-08-04-whiteboard.jpg</span><span class="tc-span--r51">2.8 MB</span><span class="tc-span--r51">2026-08-04</span></div>
     <div class="tc-div--r101">Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 14 of 14 shown</div>
   </div>
 </div>
@@ -12760,7 +12757,7 @@ The account itself stays: same login, same confirmed address. Only the password 
 </figure>
 
 <h3>Сверка готового экрана с макетом</h3>
-<p>Встроенная проверка следит за самим документом. За тем, что получилось в приложении, она не следит никак, а разница в одну колонку или в один разъехавшийся флажок глазами не ловится — тем более между двумя окнами, где данные разные. Поэтому рядом с макетами лежат наборы: <a href="fixtures/README.md">docs/visual/fixtures</a> — двенадцать файлов <code>.vcf</code> и <code>.ics</code> с <b>теми самыми</b> записями, что нарисованы выше. Их загружают через «Import» в пустой экземпляр и открывают те же экраны: состав строк, группы, колонки и состояния должны совпасть.</p>
+<p>Разница в одну колонку или в один разъехавшийся флажок глазами не ловится — тем более между двумя окнами, где данные разные. Поэтому рядом с макетами лежат наборы: <a href="fixtures/README.md">docs/visual/fixtures</a> — двенадцать файлов <code>.vcf</code> и <code>.ics</code> с <b>теми самыми</b> записями, что нарисованы выше. Их загружают через «Import» в пустой экземпляр и открывают те же экраны: состав строк, группы, колонки и состояния должны совпасть.</p>
 <p>Четыре вещи набор проверяет нарочно, потому что на выдуманных данных они не воспроизводятся: встреча заведена в <code>Asia/Yekaterinburg</code> и обязана показать исходный пояс меткой; дежурство лежит в двух коллекциях разными UID и обязано стать одной строкой с «duplicate?&nbsp;×2»; Артём Белов лежит в двух книгах и до связывания обязан попасть в «Дубликаты»; у карточки Анны Ковалёвой три чужих свойства, и карточка обязана сказать «Kept as the server sent them · Show&nbsp;3». Чего набор не воспроизводит — счётчиков в рейле: 248 карточек файлом не задать, да и сам макет рисует книгу на 248 карточек пятью строками. <b>Сверяется устройство экрана, а не итог пересчёта</b>, и в README это сказано прямо, чтобы никто не гнался за числами.</p>
 
 <p><b>Кадры адресуются машиной.</b> Индекс в <code>querySelectorAll('.mock')</code> идентичностью не является: кадров 162, и каждый дорисованный сдвигает нумерацию. Поэтому кадр, по которому собирают экран, несёт <code>data-screen</code> с маршрутом — тем же, что стоит в подписи кадра; кадр, показывающий несколько страниц сразу, перечисляет их через пробел. Кусок кадра, которым отвечает фрагмент (панель подробностей, порция списка, результаты поиска), несёт <code>data-part</code> с именем этого куска; имя может стоять на нескольких соседях, и тогда куском считаются они все по порядку. Третьего атрибута нет: состояние работ на кадрах не отмечается, потому что живёт оно в системе контроля версий (C-16). <b>Отсутствие контрола на экране законно только тогда, когда оно объявлено здесь</b>, на виду у того, кто смотрит на дизайн, — а не в списке исключений внутри теста, куда никто не заглядывает.</p>
@@ -12768,136 +12765,5 @@ The account itself stays: same login, same confirmed address. Only the password 
 <div class="note">Файл живой: макеты — это HTML, а не картинки, поэтому классы из раздела 6 переносятся в <code>carrel.css</code> копированием, а не перерисовкой.</div>
 
 </div>
-<script>
-/* #check: ряд, где контролы разъехались центром >1.5 px или высотой. */
-addEventListener('load', function () {
-  if (!/check/.test(location.hash + location.search)) return;
-  var SEL = '.tc-in, .tc-btn, .tc-seg, .tc-check';
-  var mid = function (el) { var r = el.getBoundingClientRect(); return (r.top + r.bottom) / 2; };
-  var rowBox = function (el) {
-    /* Ближайший flex/grid-предок не-колонка: иначе сравниваются столбцы. */
-    for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) {
-      var cs = getComputedStyle(n);
-      if (cs.display === 'contents') continue;
-      if (!/flex|grid/.test(cs.display)) continue;
-      return /column/.test(cs.flexDirection) ? null : n;
-    }
-    return null;
-  };
-  var groups = new Map(), bad = 0;
-  [].slice.call(document.querySelectorAll(SEL)).forEach(function (el) {
-    var r = el.getBoundingClientRect();
-    if (!r.height || el.closest('.tc-menu') || el.classList.contains('is-area')) return;
-    /* Витрина размеров — единственное место, где разная высота намеренна. */
-    if (el.closest('[data-check="off"]')) return;
-    /* Вынутое из потока в строке не стоит (крестик панели). */
-    if (getComputedStyle(el).position === 'absolute') return;
-    /* вертикальная стопка внутри одной ячейки строкой не является */
-    var stacked = [].slice.call(el.parentElement.children).some(function (sib) {
-      return sib !== el && sib.matches(SEL) && sib.getBoundingClientRect().height &&
-             Math.abs(mid(sib) - mid(el)) > 4;
-    });
-    if (stacked) return;
-    var box = rowBox(el);
-    if (!box) return;
-    if (!groups.has(box)) groups.set(box, []);
-    groups.get(box).push(el);
-  });
-  groups.forEach(function (els) {
-    var lines = [];
-    els.forEach(function (el) {
-      var line = lines.filter(function (L) { return Math.abs(L.mid - mid(el)) < 18; })[0];
-      if (line) line.els.push(el); else lines.push({ mid: mid(el), els: [el] });
-    });
-    lines.forEach(function (L) {
-      if (L.els.length < 2) return;
-      var mids = L.els.map(mid).sort(function (a, b) { return a - b; });
-      var med = mids[Math.floor(mids.length / 2)];
-      var hs = L.els.map(function (el) { return Math.round(el.getBoundingClientRect().height); });
-      var tallest = Math.max.apply(null, hs), shortest = Math.min.apply(null, hs);
-      L.els.forEach(function (el, i) {
-        var off = Math.abs(mid(el) - med) > 1.5;
-        var odd = tallest !== shortest && Math.round(el.getBoundingClientRect().height) !== tallest;
-        if (off || odd) { el.style.outline = '1.5px solid #B4442E'; bad++; }
-      });
-    });
-  });
-  /* Второй проход: строку задают ячейки формы, чьи диапазоны пересекаются.
-     Ячейка — и контрол без .tc-field («Remove» у телефона). */
-  document.querySelectorAll('.tc-form, .tc-fset, .demo').forEach(function (row) {
-    if (row.closest('[data-check="off"]')) return;
-    var cells = [].slice.call(row.children).filter(function (c) {
-      return (c.classList.contains('tc-field') || c.matches(SEL)) &&
-             c.getBoundingClientRect().height &&
-             getComputedStyle(c).position !== 'absolute';
-    }).map(function (c) {
-      var ctrl = c.matches(SEL) ? c : c.querySelector(SEL);
-      if (!ctrl || ctrl.classList.contains('is-area')) return null;
-      var cr = c.getBoundingClientRect();
-      return { cell: c, ctrl: ctrl, top: cr.top, bottom: cr.bottom };
-    }).filter(Boolean);
-    var lines = [];
-    cells.forEach(function (c) {
-      var line = lines.filter(function (L) {
-        var overlap = Math.min(L.bottom, c.bottom) - Math.max(L.top, c.top);
-        return overlap > Math.min(L.bottom - L.top, c.bottom - c.top) * 0.5;
-      })[0];
-      if (line) { line.items.push(c); line.top = Math.min(line.top, c.top); line.bottom = Math.max(line.bottom, c.bottom); }
-      else { lines.push({ top: c.top, bottom: c.bottom, items: [c] }); }
-    });
-    lines.forEach(function (L) {
-      if (L.items.length < 2) return;
-      var mids = L.items.map(function (i) { return mid(i.ctrl); }).sort(function (a, b) { return a - b; });
-      var med = mids[Math.floor(mids.length / 2)];
-      L.items.forEach(function (i) {
-        if (Math.abs(mid(i.ctrl) - med) > 1.5) { i.ctrl.style.outline = '1.5px solid #B4442E'; bad++; }
-      });
-    });
-  });
-
-  /* Третий проход — по полосам: неравный отступ, два ряда, вылет за край. */
-  document.querySelectorAll('.tc-bar, .tc-docbar, .tc-tickrow').forEach(function (bar) {
-    if (bar.closest('[data-check="off"]')) return;
-    /* Свёрнутый рейл — другой режим, там строка нарочно без имени. */
-    if (bar.classList.contains('tc-tickrow') && bar.getBoundingClientRect().width < 80) return;
-    var kids = [].slice.call(bar.children).filter(function (c) {
-      return getComputedStyle(c).display !== 'none' && c.getBoundingClientRect().height;
-    });
-    if (!kids.length) return;
-    var br = bar.getBoundingClientRect(), pad = parseFloat(getComputedStyle(bar).paddingRight);
-    var box = function (c) { return c.getBoundingClientRect(); };
-    var lines = [];
-    kids.forEach(function (c) {
-      var m = mid(c);
-      if (!lines.some(function (L) { return Math.abs(L - m) < 6; })) lines.push(m);
-    });
-    var top = Math.min.apply(null, kids.map(function (c) { return box(c).top; }));
-    var bottom = Math.max.apply(null, kids.map(function (c) { return box(c).bottom; }));
-    var right = Math.max.apply(null, kids.map(function (c) { return box(c).right; }));
-    var broke = lines.length > 1;
-    var offCentre = Math.abs((top - br.top) - (br.bottom - bottom)) > 1;
-    var spills = right > br.right - pad + 1;
-    /* Имя источника, сжатое хвостом до нуля: строка есть, узнать нельзя. */
-    var name = bar.querySelector(':scope > .t');
-    var noName = !!name && name.getBoundingClientRect().width < 24;
-    if (broke || offCentre || spills || noName) { bar.style.outline = '1.5px solid #B4442E'; bad++; }
-  });
-
-  /* Четвёртый проход: меню внутри .tc-shell__body обязано всплывать. */
-  document.querySelectorAll('.tc-shell__body .tc-menu').forEach(function (menu) {
-    if (menu.closest('[data-check="off"]')) return;
-    if (getComputedStyle(menu).position === 'static') {
-      menu.style.outline = '1.5px solid #B4442E'; bad++;
-    }
-  });
-
-  var tag = document.createElement('div');
-  tag.textContent = bad ? 'Разъездов: ' + bad : 'Строки выровнены';
-  tag.style.cssText = 'position:fixed;right:14px;bottom:14px;z-index:99;padding:7px 11px;' +
-    'border-radius:4px;font:12px/1.2 ui-monospace,monospace;color:#fff;background:' +
-    (bad ? '#B4442E' : '#4A6B52');
-  document.body.appendChild(tag);
-});
-</script>
 </body>
 </html>

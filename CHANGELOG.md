@@ -15,7 +15,18 @@ until released separately.
 
 ### For maintainers (mockup source)
 
-- **Nothing to change in widgets, CSS or screens.** Plan 1 step 7 makes the
+- **Nothing to change in widgets, CSS or screens.** Plan 1 step 8 locks
+  the mockup: every live lint rule is on (`tc-*` / `is-*` / `mk-*` in
+  frames, a class on each node, no `style=`, no `<script>`, named
+  `@container`, tokens only, unique `data-frame`, every frame class
+  defined, every `data-tc` rule used in some frame). Leftover `--rN`
+  stay as one-off classes. Chrome before/after vs the step 1 base is
+  0-diff except the rows in `docs/visual/allowed-diffs.md` (step 7
+  caption `min-width:0` on 1351 is recorded; the person looked, no
+  visible change). The screenshot harness uses one Edge process per
+  side so a second Navigate does not hang CaptureScreenshot.
+  `go test ./internal/browser -timeout 40m -run TestMockupLadder`.
+  Plan 1 step 7 makes the
   mockup the source of narrow behaviour. Named containers are `tcbox`
   (`tc-root`, `tc-main`, `tc-side`, `tc-list`, overlay, sheet, dialog).
   Shell states (Р-3) live in mockup CSS: `--tc-shell-mode` on
