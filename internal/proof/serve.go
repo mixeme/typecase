@@ -103,14 +103,13 @@ const fontFaces = `@font-face{font-family:"Literata";font-weight:200 900;src:url
 @font-face{font-family:"Source Code Pro";font-weight:200 900;src:url("/fonts/SourceCodePro.ttf") format("truetype")}
 `
 
-// Mux serves the proof screens, the mockup with the same fonts, its sprite,
-// and the comparison page.
+// Mux serves the proof screens, the mockup at MockupRev with the same fonts,
+// its sprite, and the comparison page.
 func Mux(root string) (*http.ServeMux, error) {
-	raw, err := os.ReadFile(filepath.Join(root, "docs", "visual", "carrel-ui-mockups.html"))
+	mockup, err := LoadMockup(root)
 	if err != nil {
 		return nil, err
 	}
-	mockup := string(raw)
 	o, err := Options(mockup)
 	if err != nil {
 		return nil, err

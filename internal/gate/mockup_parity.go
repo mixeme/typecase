@@ -39,7 +39,9 @@ func parityPairs() []parityPair {
 		{Mockup: ".tc-shell__body", Selector: ".tc-shell__body", Props: []string{"grid-template-columns"}},
 		{Mockup: ".tc-shell__body.tc-shell__body--side", Selector: ".tc-shell__body:has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
 		{Mockup: ".tc-shell__body.tc-shell__body--no-rail", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail))", Props: []string{"grid-template-columns"}},
-		{Mockup: ".tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side", Selector: ".tc-shell__body:not(:has(> .tc-shell__rail)):has(> .tc-shell__side)", Props: []string{"grid-template-columns"}, SideAuto: true},
+		// No pair for no-rail + side: no frame draws it, so the mockup lock
+		// removed the rule as dead. layout.ShellNoRailHasSide has no mockup
+		// number to match until a frame shows that shell.
 		{Mockup: ".tc-form", Selector: ".tc-form", Props: []string{"gap", "padding"}},
 		{Mockup: ".tc-root .tc-fields", Selector: ".tc-fields__row", Props: []string{"grid-template-columns"}},
 		{Mockup: ".tc-sheet", Selector: ".tc-sheet", Props: []string{"width"}},

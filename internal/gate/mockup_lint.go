@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-// MockupLintRule is one check against the mockup copy. Later plan 1 steps
-// append rules to MockupLintLive.
+// MockupLintRule is one check against the mockup copy. The rules are listed
+// in docs/visual/mockup.md.
 type MockupLintRule string
 
 const (
@@ -51,10 +51,10 @@ const (
 	MockupTokenVars MockupLintRule = "token-vars"
 )
 
-// MockupLintStep0 is the rule set for plan 1 step 0.
+// MockupLintStep0 is the first rule set: frame ids only.
 var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 
-// MockupLintLive is every mockup-lint rule enabled at the current plan 1 step.
+// MockupLintLive is every mockup-lint rule; the mockup is locked on all of them.
 var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,

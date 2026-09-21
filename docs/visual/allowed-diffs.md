@@ -23,7 +23,8 @@ go test ./internal/browser -timeout 5m -run TestMockupRefactor/s-notes
 go test ./internal/browser -timeout 35m -run TestMockupRefactor
 ```
 
-Базовый коммит — конец шага 1 плана 1 (токены и шрифты как в продукте).
+Базовый коммит — токены и шрифты как в продукте (шаг 1 плана макета-источника).
+Правила макета и сверки — [mockup.md](mockup.md).
 Когда база задана и файлы разошлись, каждый этап сравнивает до/после.
 
 База: 2cc387df9a4dad7fe72087d7156cb2e4356235f6

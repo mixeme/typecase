@@ -12,6 +12,9 @@ jobs:
         working-directory: .
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the mockup compare and the proof read older commits with git show
+          fetch-depth: 0
 
       - uses: actions/setup-go@v5
         with:
@@ -32,7 +35,7 @@ jobs:
 
       - name: go test
         run: |
-          go test . ./widget ./css ./token ./internal/gate ./internal/catalog ./internal/screens -count=1
+          go test . ./widget ./css ./token ./layout ./internal/gate ./internal/catalog ./internal/screens ./internal/mockcss/... ./internal/proof -count=1
           go test ./internal/browser -count=1
 
       - name: static build

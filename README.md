@@ -27,6 +27,9 @@ go run ./cmd/screens   # http://localhost:8081/
 
 See [docs/spec/typecase.md](docs/spec/typecase.md).
 
+The look comes from the mockup; its rules and checks are in
+[docs/visual/mockup.md](docs/visual/mockup.md).
+
 ## License
 
 MIT

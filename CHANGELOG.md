@@ -6,15 +6,62 @@ do, not what the authors did.
 
 ## Unreleased
 
-### Not yet included
+Nothing yet. Next: the mockup tails
+([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), then the breaking
+0.7.0 where the library prints the mockup
+([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
-- Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
+## typecase/v0.6.0 — 2026-09-21
+
+Geometry comes from `layout` tables locked to the mockup, the remaining mockup
+sections are assembled as demo screens, and the mockup itself is rewritten in
+the Typecase dictionary so the next release can take its CSS verbatim.
+Breaking for consumers: see the `Field`, `ButtonDanger`, row-link and
+`tc-fields` items below.
 
 The typecase wordmark and icon work documented below stays documentation-only
 until released separately.
 
 ### For maintainers (mockup source)
 
+- **The mockup plan is closed; its rules live in
+  [docs/visual/mockup.md](docs/visual/mockup.md).** Read it before touching
+  `docs/visual/carrel-ui-mockups.html`: what the file holds, the `tc-*`
+  dictionary, the closed decisions (Р-3 shell states, Р-4 bar overflow, Р-21
+  tap zones and the rest), the width ladder, the lint rules, the before/after
+  compare and how to change the mockup. From now on the mockup is edited in
+  Carrel and the copy here is replaced whole.
+- **What the closing review found is a plan, not a footnote:**
+  [docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md). The lint is
+  green, but 596 numbered `--rN` classes stand where step 5 asked for named
+  variants, the lock deleted dark-theme rules for avatar, thumb and scrim
+  because no dark frame shows them, `.demo` blocks are only half under the
+  frame rules, and `data-tc` carries empty `{}` rules. Do these before plan 2
+  cuts the CSS.
+- **The library-from-mockup release is 0.7.0**, not 0.6.0: plans 2 and 3 say
+  so now.
+- **`mockup-parity` no longer asks for the no-rail + side shell.** No frame
+  draws it, so the lock removed the rule as dead and the gate was red since.
+  `layout.ShellNoRailHasSide` has no mockup number to match until a frame
+  shows that shell.
+- **The proof reads the mockup it was proven against.** `internal/proof`
+  translates the `m-*` dictionary, so its tests and `go run ./cmd/proof` were
+  broken from the rename on. It now takes the mockup at `proof.MockupRev` with
+  `git show`; a shallow clone skips its tests. `/compare` shows the same
+  zeros as before. Plan 3 still deletes it.
+- **CI** checks out full history (the compare base and the proof revision are
+  older commits) and now tests `./layout`, `./internal/mockcss/...` and
+  `./internal/proof`; they were not in the list, which is how the proof went
+  red unnoticed. The two long
+  mockup browser tests still run under the default 10-minute timeout there —
+  see the tails.
+- **Shoot mockup frames one after another, with nothing else using the
+  browser.** On closing, the ladder passed and the before/after compare showed
+  no pixel difference outside `allowed-diffs.md`, but under load a shot hangs
+  (`context deadline exceeded`), and a hung run can leave a headless browser
+  with a `typecase-browser-*` profile that makes the next frames hang too.
+  Stop such processes, then re-run the failed frames one by one:
+  `go test ./internal/browser -timeout 8m -run 'TestMockupRefactor/^s-auth$/^8$'`.
 - **Nothing to change in widgets, CSS or screens.** Plan 1 step 8 locks
   the mockup: every live lint rule is on (`tc-*` / `is-*` / `mk-*` in
   frames, a class on each node, no `style=`, no `<script>`, named
@@ -103,7 +150,7 @@ until released separately.
   Step 0 numbered frames and added the unique-id lint and the Chrome
   before/after tool; allowed exceptions live in `docs/visual/allowed-diffs.md`.
 
-### For consumers (layout)
+### For consumers (v0.5.0 → v0.6.0, layout)
 
 - **Do not import `layout`.** Geometry tables are the library's, like `token`.
   Screens keep calling `widget`.
@@ -278,6 +325,8 @@ until released separately.
 
 ### Not yet included
 
+- Overflow of `tc-top` / `tc-seg` at 375 px — not the layout plan.
+- The mockup tails: [docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md).
 - Raster frames of the icon. The 16 px and 32 px drawings exist as constructions;
   `.ico` and PNG are not built from them.
 - The lock-up of the icon and the wordmark. Both references exist; the spacing

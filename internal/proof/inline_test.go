@@ -1,7 +1,6 @@
 package proof
 
 import (
-	"os"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -11,11 +10,11 @@ import (
 
 func readMockup(t *testing.T) string {
 	t.Helper()
-	raw, err := os.ReadFile(filepath.Join("..", "..", "docs", "visual", "carrel-ui-mockups.html"))
+	mockup, err := LoadMockup(filepath.Join("..", ".."))
 	if err != nil {
-		t.Skip("mockup not present")
+		t.Skipf("mockup at MockupRev not reachable (shallow clone?): %v", err)
 	}
-	return string(raw)
+	return mockup
 }
 
 // Every variant is a copy of a style="" its frame really has: the table adds
