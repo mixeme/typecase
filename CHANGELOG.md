@@ -48,6 +48,15 @@ the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (checks)
 
+- **Each `--rN` class was asked whether it does anything.**
+  `TestNumberedClassEffect` reads the properties a numbered rule declares,
+  takes the class off the node and reads them again; it is skipped unless
+  `TC_NUMBERED_EFFECT=1`, so it costs CI nothing. Of 602 classes, 29 declare
+  what the node already had and 565 change the drawing (8 sit in
+  `@container` rules and were not measured). Among the 324 used exactly once
+  the split is 12 against 309 — which is why folding the one-offs away is a
+  pile of decisions rather than a mechanical pass.
+
 - **The two long mockup tests have their own CI job and their own timeout
   (Х-6).** `TestMockupLadder` (up to 40 min) and `TestMockupRefactor` (up to
   35) ran inside `go test ./internal/browser` under the default 10-minute
