@@ -16,6 +16,11 @@ jobs:
           # the mockup compare and the proof read older commits with git show
           fetch-depth: 0
 
+      - name: full history
+        run: |
+          test "$(git rev-parse --is-shallow-repository)" = false \
+            || { echo "shallow clone: git show of the compare base and proof.MockupRev will fail"; exit 1; }
+
       - uses: actions/setup-go@v5
         with:
           go-version: "1.27.1"
@@ -36,10 +41,69 @@ jobs:
       - name: go test
         run: |
           go test . ./widget ./css ./token ./layout ./internal/gate ./internal/catalog ./internal/screens ./internal/mockcss/... ./internal/proof -count=1
-          go test ./internal/browser -count=1
+          go test ./internal/browser -count=1 -skip '^TestMockupLadder$|^TestMockupRefactor$'
 
       - name: static build
         run: go build -o /dev/null ./cmd/catalog ./cmd/screens
 
       - name: spec check
         run: python docs/spec/check.py
+
+  # Whether this push touches the mockup, its allowed differences, or the code
+  # that reads them. The two long mockup tests run only then.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      mockup: ${{ steps.filter.outputs.mockup }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: filter
+        run: |
+          base='${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}'
+          if [ -z "$base" ] || [ "$base" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            echo "mockup=true" >> "$GITHUB_OUTPUT"   # no usable base: run them
+            exit 0
+          fi
+          if git diff --name-only "$base" HEAD \
+             | grep -Eq '^(docs/visual/(carrel-ui-mockups\.html|allowed-diffs\.md|fonts/)|internal/(browser|gate)/)'; then
+            echo "mockup=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "mockup=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  # The ladder is up to 40 min and the compare up to 35; the default go test
+  # timeout is 10. Their own job, their own timeout, one browser at a time.
+  mockup:
+    needs: changes
+    if: needs.changes.outputs.mockup == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: full history
+        run: |
+          test "$(git rev-parse --is-shallow-repository)" = false \
+            || { echo "shallow clone: git show of the compare base will fail"; exit 1; }
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.1"
+          cache-dependency-path: go.sum
+
+      - uses: browser-actions/setup-chrome@v2
+        id: chrome
+
+      - name: CHROME_PATH
+        run: echo "CHROME_PATH=${{ steps.chrome.outputs.chrome-path }}" >> "$GITHUB_ENV"
+
+      - name: mockup ladder
+        run: go test ./internal/browser -count=1 -timeout 60m -run '^TestMockupLadder$'
+
+      - name: mockup compare
+        run: go test ./internal/browser -count=1 -timeout 60m -run '^TestMockupRefactor$'

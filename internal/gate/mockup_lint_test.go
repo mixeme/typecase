@@ -156,7 +156,7 @@ func TestCheckMockupLint_frameElements(t *testing.T) {
 
 func TestCheckMockupLint_frameNoStyle(t *testing.T) {
 	ok := `<style data-tc>.tc-btn{color:red}</style><style>body{}</style>` +
-		`<div class="frame" data-frame="s-notes-1" style="width:392px"><div class="frame-label"><span style="color:red">x</span></div><div class="tc-root"><span class="tc-mark"></span></div></div>`
+		`<div class="frame w392" data-frame="s-notes-1"><div class="frame-label"><span style="color:red">x</span></div><div class="tc-root"><span class="tc-mark"></span></div></div>`
 	if err := CheckMockupLint(ok, MockupFrameNoStyle); err != nil {
 		t.Fatal(err)
 	}
@@ -165,6 +165,12 @@ func TestCheckMockupLint_frameNoStyle(t *testing.T) {
 		MockupFrameNoStyle,
 	); err == nil {
 		t.Fatal("expected style= inside a frame to fail")
+	}
+	if err := CheckMockupLint(
+		`<div class="frame" data-frame="s-notes-1" style="max-width:900px"><div class="tc-root"></div></div>`,
+		MockupFrameNoStyle,
+	); err == nil {
+		t.Fatal("expected style= on .frame itself to fail")
 	}
 }
 
@@ -249,5 +255,77 @@ func TestParseMockupParts_live(t *testing.T) {
 	}
 	if !strings.Contains(p.Styles, "@font-face") || !strings.Contains(p.Styles, "<style data-tc>") {
 		t.Fatal("Styles must include page @font-face and <style data-tc>")
+	}
+}
+
+func TestCheckMockupLint_emptyRules(t *testing.T) {
+	frame := `<div class="frame" data-frame="s-notes-1"><div class="tc-root">` +
+		`<span class="tc-line__item">x</span></div></div>`
+	ok := `<style data-tc>.tc-root{color:red}` +
+		`/* names-without-rule: tc-line__item */</style>` +
+		`<style>body{margin:0}</style>` + frame
+	if err := CheckMockupLint(ok, MockupEmptyRules, MockupClassesDefined); err != nil {
+		t.Fatal(err)
+	}
+	empty := `<style data-tc>.tc-root{color:red}.tc-line__item{}</style>` +
+		`<style>body{margin:0}</style>` + frame
+	if err := CheckMockupLint(empty, MockupEmptyRules); err == nil {
+		t.Fatal("expected a rule with no declarations to fail")
+	}
+	stale := `<style data-tc>.tc-root{color:red}` +
+		`/* names-without-rule: tc-line__item tc-gone */</style>` +
+		`<style>body{margin:0}</style>` + frame
+	if err := CheckMockupLint(stale, MockupEmptyRules); err == nil {
+		t.Fatal("expected a listed name that stands on no node to fail")
+	}
+	undeclared := `<style data-tc>.tc-root{color:red}</style>` +
+		`<style>body{margin:0}</style>` + frame
+	if err := CheckMockupLint(undeclared, MockupClassesDefined); err == nil {
+		t.Fatal("expected an unlisted name with no rule to fail")
+	}
+}
+
+func TestMockupNumberedClasses(t *testing.T) {
+	html := `<style data-tc>.tc-root{color:red}` +
+		`.tc-div--r7.tc-div--r7{margin-top:12px}` +
+		`@container tcbox (max-width:640px){.tc-div--r7{margin-top:0}}` +
+		`.tc-card--r1.tc-card--r1{margin:0}</style>` +
+		`<style>body{margin:0}</style>` +
+		`<div class="frame" data-frame="s-notes-1"><div class="tc-root">` +
+		`<div class="tc-card tc-card--r1"><div class="tc-div--r7">x</div></div>` +
+		`</div></div>`
+	list, err := MockupNumberedClasses(html)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(list) != 2 {
+		t.Fatalf("want 2 numbered classes, got %d: %+v", len(list), list)
+	}
+	byName := map[string]NumberedClass{}
+	for _, c := range list {
+		byName[c.Name] = c
+	}
+	div, ok := byName["tc-div--r7"]
+	if !ok {
+		t.Fatal("tc-div--r7 missing")
+	}
+	if !div.TagBlock() {
+		t.Error("tc-div--r7 is a block by tag name")
+	}
+	if len(div.Rules) != 2 {
+		t.Errorf("tc-div--r7 rules: %v", div.Rules)
+	}
+	if len(div.Uses) != 1 || div.Uses[0].In != "tc-card" || div.Uses[0].Frame != "s-notes-1" {
+		t.Errorf("tc-div--r7 uses: %+v", div.Uses)
+	}
+	card := byName["tc-card--r1"]
+	if card.TagBlock() {
+		t.Error("tc-card--r1 is a real block")
+	}
+	if len(card.Uses) != 1 || card.Uses[0].Own != "tc-card" {
+		t.Errorf("tc-card--r1 uses: %+v", card.Uses)
+	}
+	if !IsNumberedClass("tc-div--r7") || IsNumberedClass("tc-line--gap-14") || IsNumberedClass("tc-table__col--w110") {
+		t.Error("IsNumberedClass must catch --rN only")
 	}
 }

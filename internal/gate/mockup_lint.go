@@ -24,8 +24,8 @@ const (
 	MockupFrameClasses MockupLintRule = "frame-classes"
 	// MockupFrameElements requires real controls in frames: button, kbd.
 	MockupFrameElements MockupLintRule = "frame-elements"
-	// MockupFrameNoStyle forbids style= inside frames (not on .frame itself
-	// or .frame-label page chrome).
+	// MockupFrameNoStyle forbids style= inside frames and on .frame itself
+	// (frame width is a page class); .frame-label page chrome is exempt.
 	MockupFrameNoStyle MockupLintRule = "frame-no-style"
 	// MockupFrameNamedClass requires a class on every node in a frame except
 	// the step 3 list: inline text tags, svg guts, and semantic table/list
@@ -49,6 +49,9 @@ const (
 	// MockupTokenVars forbids var(--x) in data-tc outside the token list
 	// and the data properties --tc-colour / --tc-width.
 	MockupTokenVars MockupLintRule = "token-vars"
+	// MockupEmptyRules forbids a rule with no declarations, and requires
+	// every name listed in a "names-without-rule" comment to be used.
+	MockupEmptyRules MockupLintRule = "empty-rules"
 )
 
 // MockupLintStep0 is the first rule set: frame ids only.
@@ -58,7 +61,7 @@ var MockupLintStep0 = []MockupLintRule{MockupFrameIDs}
 var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
-	MockupDeadRules, MockupNamedContainer, MockupTokenVars,
+	MockupDeadRules, MockupNamedContainer, MockupTokenVars, MockupEmptyRules,
 }
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
@@ -115,6 +118,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupSelfContained:
 			if err := checkMockupSelfContained(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupEmptyRules:
+			if err := checkMockupEmptyRules(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		case MockupClassesDefined:
@@ -394,6 +401,9 @@ func checkMockupFrameNoStyle(html string) error {
 			return err
 		}
 		id := attrs["data-frame"]
+		if st := attrs["style"]; st != "" {
+			errs = append(errs, fmt.Sprintf("%s: style= on .frame — width is a page class", id))
+		}
 		walkHTML(parseHTML(outer), func(n *htmlNode) {
 			if n.tag == "#root" || nodeHasClass(n, "frame") || nodeHasClass(n, "frame-label") || ancestorHasClass(n, "frame-label") {
 				return

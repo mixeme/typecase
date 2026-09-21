@@ -3,6 +3,7 @@ package gate
 import (
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode"
 )
@@ -120,13 +121,42 @@ func mockupLocalURL(u string) bool {
 	return strings.HasPrefix(u, "fonts/")
 }
 
+// mockupNamesWithoutRule reads the names a sheet declares as named but not
+// styled, from "/* names-without-rule: a b c */" comments.
+//
+// A widget prints a class for the structure it builds whether or not the
+// mockup gives that class a look. Writing ".tc-line__item{}" to satisfy
+// classes-defined puts a rule with no declarations into the product CSS, and
+// the library carries it on; saying the name out loud instead keeps the
+// stylesheet free of rules that do nothing.
+func mockupNamesWithoutRule(css string) map[string]bool {
+	out := map[string]bool{}
+	for _, m := range mockupNamesRe.FindAllStringSubmatch(css, -1) {
+		for _, f := range strings.Fields(strings.NewReplacer(",", " ", ".", " ").Replace(m[1])) {
+			if f == "" || strings.HasPrefix(f, "—") {
+				break
+			}
+			out[f] = true
+		}
+	}
+	return out
+}
+
+var mockupNamesRe = regexp.MustCompile(`(?s)/\*\s*names-without-rule:(.*?)\*/`)
+
 func checkMockupClassesDefined(html string) error {
 	product, page, err := mockupSplitCSS(html)
 	if err != nil {
 		return err
 	}
 	inProduct := cssClassNames(product)
+	for n := range mockupNamesWithoutRule(product) {
+		inProduct[n] = true
+	}
 	inPage := cssClassNames(page)
+	for n := range mockupNamesWithoutRule(page) {
+		inPage[n] = true
+	}
 	var errs []string
 	seen := map[string]bool{}
 	_ = forEachMockupFrame(html, func(id, outer string) error {
@@ -157,6 +187,50 @@ func checkMockupClassesDefined(html string) error {
 		return nil
 	})
 	return mockupLintErrs("classes-defined", errs, 8)
+}
+
+// checkMockupEmptyRules keeps rules with no declarations out of both sheets and
+// keeps the names-without-rule list honest.
+//
+// Х-4: rules such as ".tc-line__item{}" were written to satisfy
+// classes-defined. They say nothing, they pass dead-rules because the selector
+// matches, and the library would carry them into its own CSS. A name that has
+// no look is declared in a comment instead, and every declared name has to be
+// on a node — otherwise the list outlives the markup.
+func checkMockupEmptyRules(html string) error {
+	product, page, err := mockupSplitCSS(html)
+	if err != nil {
+		return err
+	}
+	var errs []string
+	for _, sheet := range []struct {
+		name string
+		css  string
+	}{{"data-tc", product}, {"page", page}} {
+		for _, r := range parseCSSRulesDeep(sheet.css) {
+			if strings.TrimSpace(r.Body) == "" {
+				errs = append(errs, fmt.Sprintf("%s: %s has no declarations", sheet.name, compactSel(r.Selector)))
+			}
+		}
+	}
+	used := map[string]bool{}
+	_ = forEachMockupProduct(html, func(id, outer string) error {
+		walkMockupFrameNodes(outer, func(n *htmlNode) {
+			for _, c := range n.class {
+				used[c] = true
+			}
+		})
+		return nil
+	})
+	for _, css := range []string{product, page} {
+		for n := range mockupNamesWithoutRule(css) {
+			if !used[n] {
+				errs = append(errs, n+" is listed as a name without a rule but stands on no node")
+			}
+		}
+	}
+	sort.Strings(errs)
+	return mockupLintErrs("empty-rules", errs, 8)
 }
 
 func checkMockupDeadRules(html string) error {

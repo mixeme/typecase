@@ -215,7 +215,7 @@ func TestMockupRefactor(t *testing.T) {
 				}
 				st.frames = kept
 			}
-			withTab := func(fn func(open func(html, id string), shot func(html, id string, width int) []byte)) {
+			withTab := func(fn func(open func(html, id string) error, shot func(html, id string, width int) ([]byte, error)) error) error {
 				h := browser.NewHarness(t)
 				run, cancel := h.Tab(90 * time.Second)
 				defer func() {
@@ -223,10 +223,9 @@ func TestMockupRefactor(t *testing.T) {
 					h.CloseBrowser()
 				}()
 
-				open := func(html, id string) {
-					t.Helper()
+				open := func(html, id string) error {
 					url := h.RegisterPage(id, html)
-					if err := run(
+					return run(
 						chromedp.EmulateViewport(int64(browser.MockupShotViewport), 900, chromedp.EmulateScale(browser.MockupShotScale)),
 						chromedp.Navigate(url),
 						chromedp.WaitReady("body"),
@@ -243,15 +242,12 @@ func TestMockupRefactor(t *testing.T) {
 							_, err := page.CaptureScreenshot().WithFormat(page.CaptureScreenshotFormatPng).Do(ctx)
 							return err
 						}),
-					); err != nil {
-						t.Fatal(err)
-					}
+					)
 				}
-				shot := func(html, id string, width int) []byte {
-					t.Helper()
+				shot := func(html, id string, width int) ([]byte, error) {
 					raw, err := json.Marshal(html)
 					if err != nil {
-						t.Fatal(err)
+						return nil, err
 					}
 					js := fmt.Sprintf(`(async function(){
   var host = document.getElementById("host");
@@ -283,52 +279,85 @@ func TestMockupRefactor(t *testing.T) {
 							return nil
 						}),
 					); err != nil {
-						t.Fatalf("%s @%d: %v", id, width, err)
+						return nil, fmt.Errorf("%s @%d: %w", id, width, err)
 					}
 					if len(png) == 0 {
-						t.Fatalf("%s @%d: empty screenshot", id, width)
+						return nil, fmt.Errorf("%s @%d: empty screenshot", id, width)
 					}
-					return png
+					return png, nil
 				}
-				fn(open, shot)
+				return fn(open, shot)
 			}
 
-			afterPNG := map[string][]byte{}
-			withTab(func(open func(html, id string), shot func(html, id string, width int) []byte) {
-				open(browser.MockupShotShell(after.Styles, after.Sprite), "after")
-				for _, fr := range st.frames {
-					for _, w := range browser.MockupRefactorWidths {
-						if envBase == "" && spec.Skip(fr.ID, w) {
-							continue
-						}
-						afterPNG[fmt.Sprintf("%s@%d", fr.ID, w)] = shot(fr.HTML, fr.ID, w)
+			// One side of one stage: the shell of that side, then every frame
+			// at every width. The browser process is the harness's own, so a
+			// retry of this function starts a clean one.
+			side := func(styles, sprite string, id string, html func(fr gate.MockupFrame) string) (map[string][]byte, error) {
+				out := map[string][]byte{}
+				err := withTab(func(open func(html, id string) error, shot func(html, id string, width int) ([]byte, error)) error {
+					if err := open(browser.MockupShotShell(styles, sprite), id); err != nil {
+						return err
 					}
-				}
-			})
-			if sameDoc {
-				return
-			}
-			withTab(func(open func(html, id string), shot func(html, id string, width int) []byte) {
-				open(browser.MockupShotShell(before.Styles, before.Sprite), "before")
-				for _, fr := range st.frames {
-					src := beforeByID[fr.ID].HTML
-					for _, w := range browser.MockupRefactorWidths {
-						if envBase == "" && spec.Skip(fr.ID, w) {
-							continue
-						}
-						key := fmt.Sprintf("%s@%d", fr.ID, w)
-						got := shot(src, fr.ID, w)
-						if err := browser.PNGsMatch(got, afterPNG[key], browser.MockupChannelTol); err != nil {
-							if n := mockupDiffPixels(err); n > 0 && n <= browser.MockupAAPixelCap {
+					for _, fr := range st.frames {
+						for _, w := range browser.MockupRefactorWidths {
+							if envBase == "" && spec.Skip(fr.ID, w) {
 								continue
 							}
-							dumpMockupPNG(fr.ID, w, "before", got)
-							dumpMockupPNG(fr.ID, w, "after", afterPNG[key])
-							t.Errorf("%s @%d: %v", fr.ID, w, err)
+							png, err := shot(html(fr), fr.ID, w)
+							if err != nil {
+								return err
+							}
+							out[fmt.Sprintf("%s@%d", fr.ID, w)] = png
 						}
 					}
+					return nil
+				})
+				return out, err
+			}
+
+			// A hung snapshot is not a расхождение: say so, and give the stage
+			// one more go in a new browser process.
+			capture := func(styles, sprite, id string, html func(fr gate.MockupFrame) string) (map[string][]byte, bool) {
+				png, err := side(styles, sprite, id, html)
+				if err != nil && browser.IsHang(err) {
+					t.Logf("%s: снимок завис (%v) — повтор в новом процессе браузера", id, err)
+					png, err = side(styles, sprite, id, html)
 				}
-			})
+				if err != nil {
+					if browser.IsHang(err) {
+						t.Errorf("%s: снимок завис и после повтора (%v) — это таймаут, не расхождение", id, err)
+					} else {
+						t.Errorf("%s: %v", id, err)
+					}
+					return nil, false
+				}
+				return png, true
+			}
+
+			afterPNG, ok := capture(after.Styles, after.Sprite, "after", func(fr gate.MockupFrame) string { return fr.HTML })
+			if !ok || sameDoc {
+				return
+			}
+			beforePNG, ok := capture(before.Styles, before.Sprite, "before", func(fr gate.MockupFrame) string { return beforeByID[fr.ID].HTML })
+			if !ok {
+				return
+			}
+			for _, fr := range st.frames {
+				for _, w := range browser.MockupRefactorWidths {
+					if envBase == "" && spec.Skip(fr.ID, w) {
+						continue
+					}
+					key := fmt.Sprintf("%s@%d", fr.ID, w)
+					if err := browser.PNGsMatch(beforePNG[key], afterPNG[key], browser.MockupChannelTol); err != nil {
+						if n := mockupDiffPixels(err); n > 0 && n <= browser.MockupAAPixelCap {
+							continue
+						}
+						dumpMockupPNG(fr.ID, w, "before", beforePNG[key])
+						dumpMockupPNG(fr.ID, w, "after", afterPNG[key])
+						t.Errorf("%s @%d: %v", fr.ID, w, err)
+					}
+				}
+			}
 		})
 	}
 }

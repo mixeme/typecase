@@ -77,11 +77,15 @@ type instance struct {
 
 const portFileTimeout = 30 * time.Second
 
+// profilePrefix names the harness profile directories. killProfileHolders
+// matches command lines against it, so nothing else may use it.
+const profilePrefix = "typecase-browser-"
+
 func launchChrome() (*instance, error) {
 	if chromeExec == "" {
 		return nil, exec.ErrNotFound
 	}
-	dir, err := os.MkdirTemp("", "typecase-browser-")
+	dir, err := os.MkdirTemp("", profilePrefix)
 	if err != nil {
 		return nil, fmt.Errorf("profile dir: %w", err)
 	}
@@ -165,7 +169,93 @@ func (in *instance) stop() {
 		}
 		_, _ = in.cmd.Process.Wait()
 	}
+	killProfileHolders(in.dir)
 	if in.dir != "" {
 		_ = os.RemoveAll(in.dir)
 	}
+}
+
+// killProfileHolders kills browser processes that still name dir as their
+// --user-data-dir.
+//
+// stop kills the tree of the process the harness started. A browser that
+// re-execs itself leaves that tree, so the tree kill misses it; the orphan
+// keeps the profile locked and the next frame's screenshot hangs until its
+// deadline. The profile directory name is unique per harness, so it is a safe
+// thing to match command lines against — as long as only browsers are
+// considered, or the query finds the shell that runs it.
+func killProfileHolders(dir string) {
+	if dir == "" || !strings.HasPrefix(filepath.Base(dir), profilePrefix) {
+		return
+	}
+	self := os.Getpid()
+	for _, pid := range profileHolders(dir) {
+		if pid <= 0 || pid == self {
+			continue
+		}
+		if runtime.GOOS == "windows" {
+			_ = exec.Command("taskkill", "/T", "/F", "/PID", strconv.Itoa(pid)).Run()
+			continue
+		}
+		if p, err := os.FindProcess(pid); err == nil {
+			_ = p.Kill()
+		}
+	}
+}
+
+// browserNames are the process names a Chromium-based browser runs under: the
+// one the harness launched, plus the family, because a re-exec may pick a
+// sibling binary.
+func browserNames() []string {
+	names := []string{"chrome.exe", "msedge.exe", "chromium.exe", "chrome", "chromium", "chromium-browser", "msedge"}
+	if chromeExec != "" {
+		names = append([]string{filepath.Base(chromeExec)}, names...)
+	}
+	return names
+}
+
+// processListPS prints "pid<TAB>name<TAB>command line" for every process.
+var processListPS = "Get-CimInstance Win32_Process | ForEach-Object { \"$($_.ProcessId)\t$($_.Name)\t$($_.CommandLine)\" }"
+
+// profileHolders returns the pids of browser processes holding dir.
+func profileHolders(dir string) []int {
+	marker := filepath.Base(dir)
+	var out []byte
+	var err error
+	if runtime.GOOS == "windows" {
+		out, err = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", processListPS).Output()
+	} else {
+		out, err = exec.Command("ps", "-A", "-o", "pid=,comm=,args=").Output()
+	}
+	if err != nil && len(out) == 0 {
+		return nil
+	}
+	return parseProcessList(string(out), marker, browserNames())
+}
+
+// parseProcessList picks the pids whose command line names marker and whose
+// process name is one of names. A line is "pid<sep>name<sep>command line",
+// separated by tabs on Windows and by spaces from ps elsewhere.
+func parseProcessList(out, marker string, names []string) []int {
+	isBrowser := make(map[string]bool, len(names))
+	for _, n := range names {
+		isBrowser[strings.ToLower(n)] = true
+	}
+	var pids []int
+	for _, line := range strings.Split(out, "\n") {
+		line = strings.TrimRight(line, "\r")
+		fields := strings.FieldsFunc(line, func(r rune) bool { return r == '\t' || r == ' ' })
+		if len(fields) < 3 || !strings.Contains(line, marker) {
+			continue
+		}
+		pid, convErr := strconv.Atoi(fields[0])
+		if convErr != nil {
+			continue
+		}
+		if !isBrowser[strings.ToLower(filepath.Base(fields[1]))] {
+			continue
+		}
+		pids = append(pids, pid)
+	}
+	return pids
 }

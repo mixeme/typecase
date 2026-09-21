@@ -2,6 +2,8 @@ package browser
 
 import (
 	"bytes"
+	"context"
+	"errors"
 	"fmt"
 	"image/png"
 	"os"
@@ -117,12 +119,46 @@ func LoadMockupHTML(root, rev string) ([]byte, error) {
 		if ee, ok := err.(*exec.ExitError); ok {
 			stderr = strings.TrimSpace(string(ee.Stderr))
 		}
+		if ShallowRepo(root) {
+			return nil, fmt.Errorf("git show %s:%s: shallow clone — the comparison needs the full history (fetch-depth: 0)", rev, rel)
+		}
 		if stderr != "" {
 			return nil, fmt.Errorf("git show %s:%s: %v (%s)", rev, rel, err, stderr)
 		}
 		return nil, fmt.Errorf("git show %s:%s: %w", rev, rel, err)
 	}
 	return out, nil
+}
+
+// IsHang reports whether err is a screenshot that ran out of time rather than
+// a difference between the two sides.
+//
+// CaptureScreenshot can stay pending in the browser (Edge, notably); the tab
+// deadline then fires and chromedp hands back the context error. Saying so in
+// its own words keeps a hung frame out of the comparison's results, where it
+// reads as a расхождение that is not there.
+func IsHang(err error) bool {
+	if err == nil {
+		return false
+	}
+	if errors.Is(err, context.DeadlineExceeded) {
+		return true
+	}
+	return strings.Contains(err.Error(), context.DeadlineExceeded.Error())
+}
+
+// ShallowRepo reports whether root is a shallow git clone.
+//
+// The comparison reads the mockup at the base commit and the proof reads it at
+// proof.MockupRev; both need the full history (the runner asks for it with
+// fetch-depth: 0). A shallow clone fails in git show with "bad object", which
+// says nothing about the runner.
+func ShallowRepo(root string) bool {
+	out, err := exec.Command("git", "-C", root, "rev-parse", "--is-shallow-repository").Output()
+	if err != nil {
+		return false
+	}
+	return strings.TrimSpace(string(out)) == "true"
 }
 
 // LoadAllowedDiffs reads docs/visual/allowed-diffs.md from module root.

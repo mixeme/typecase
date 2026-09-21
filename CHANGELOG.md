@@ -6,10 +6,67 @@ do, not what the authors did.
 
 ## Unreleased
 
-Nothing yet. Next: the mockup tails
-([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), then the breaking
-0.7.0 where the library prints the mockup
+Nothing for consumers: the library's API, CSS and JS are untouched. The work
+below is the mockup tails
+([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)) — Х-4, Х-5 and Х-6
+are closed, Х-1 has its report, Х-2 and Х-3 wait on decisions. Next after them:
+the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+
+### For maintainers (mockup source)
+
+- **A name may exist without a rule, and it says so out loud (Х-4).** The
+  mockup listed nineteen classes in a `.tc-shell,…{}` rule with no
+  declarations so they would pass `classes-defined`; such a rule says nothing,
+  passes `dead-rules` because its selector matches, and would be cut into the
+  library's CSS. Those names now stand in a
+  `/* names-without-rule: … */` comment in the sheet they belong to, and the
+  empty rules are gone. New lint rule `empty-rules`: no rule anywhere in either
+  `<style>` may be empty, and every listed name must stand on a node.
+  `classes-defined` reads the list. Nothing moved on screen.
+- **Frame widths are page classes, and the width switch now reaches every
+  frame (Х-5).** Twenty-one frames carried `style="max-width:900px"` and the
+  like. Inline styles outrank any selector, so eleven of them ignored the width
+  ladder above the contents. They now carry `.frame.w392` / `.frame.cap900` and
+  friends, defined next to the switch, which is more specific and wins.
+  `frame-no-style` covers the `.frame` element itself from now on, so this
+  cannot come back; `.frame-label` stays exempt as page chrome.
+  `TestMockupLadderSwitch` checks the eleven in a browser.
+- **`data-demo` is gone.** It listed pre-rename `m-*` names on 34 nodes and
+  nothing in either repository read it. The rename history stays in
+  `docs/visual/rename.tsv`.
+- **The `.tc-queue` showcase is named like the frame** — `tc-queue__list`,
+  `tc-queue__name`, `tc-queue__meta` instead of bare `<ul>` and `<span>`.
+- **The report Х-1 is decided on:**
+  [docs/visual/numbered-audit.md](docs/visual/numbered-audit.md), rebuilt with
+  `go run ./internal/mockcss/numbered`. Every `--rN` class with its
+  declarations, how often it is used, in which frames, on what element of what
+  block: 602 classes over 1717 uses, 324 of them used once, 192 hung on a tag
+  name rather than a block. `gate.MockupNumberedClasses` is the same data for
+  code; `gate.IsNumberedClass` tells a number (`--r37`) from a name by value
+  (`--gap-14`, `--w110`).
+
+### For maintainers (checks)
+
+- **The two long mockup tests have their own CI job and their own timeout
+  (Х-6).** `TestMockupLadder` (up to 40 min) and `TestMockupRefactor` (up to
+  35) ran inside `go test ./internal/browser` under the default 10-minute
+  timeout. The main step now skips them and a `mockup` job runs each with
+  `-timeout 60m`, on pushes that touch the mockup, its allowed differences, its
+  fonts or the code that reads them — and always when the base commit cannot be
+  worked out.
+- **A hung screenshot is called a hang, not a difference.** The compare reports
+  `browser.IsHang` failures in their own words and gives the frame one more go
+  in a fresh browser process before failing it. On a full 165-frame run this
+  caught `m-desktop-9 @820` and said so, while every other frame compared clean.
+- **`instance.stop` kills the browser that outlived its process tree.** A
+  browser that re-execs itself leaves the tree `taskkill /T` walks, keeps the
+  `typecase-browser-*` profile locked and hangs the next frame. Stop now also
+  looks for processes holding that profile — matching browser process names
+  only, or the query finds the shell running it (`parseProcessList`).
+- **A shallow clone says so.** Both CI jobs fail early on one, and
+  `LoadMockupHTML` names `fetch-depth: 0` instead of passing on git's
+  "bad object" when it cannot read the compare base.
 
 ## typecase/v0.6.0 — 2026-09-21
 
