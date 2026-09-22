@@ -41,7 +41,9 @@ jobs:
       - name: go test
         run: |
           go test . ./widget ./css ./token ./layout ./internal/gate ./internal/catalog ./internal/screens ./internal/mockcss/... ./internal/proof -count=1
-          go test ./internal/browser -count=1 -skip '^TestMockupLadder$|^TestMockupRefactor$'
+          # 8 min locally and the default is 10: give it room rather than
+          # learn on a slower runner that it was close
+          go test ./internal/browser -count=1 -timeout 25m -skip '^TestMockupLadder$|^TestMockupRefactor$'
 
       - name: static build
         run: go build -o /dev/null ./cmd/catalog ./cmd/screens
