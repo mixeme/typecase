@@ -9,8 +9,7 @@ do, not what the authors did.
 One thing for consumers, and it is a removal: `layout.ShellNoRailHasSide` is
 gone (see below). Everything else here is the mockup tails
 ([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), and all six are
-closed. Next after them: the
-breaking 0.7.0 where the library prints the mockup
+closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
 ### Breaking
@@ -34,8 +33,8 @@ breaking 0.7.0 where the library prints the mockup
   value where there is not (`tc-dialog--max520`, `tc-mark--h18`), as the file
   already named `tc-table__col--w110` and `tc-line--gap-14`. A variant that
   splits into independent parts is written in parts: `tc-root--on-bg
-  tc-root--flat tc-root--max460`. New lint rule `no-numbered-classes` keeps
-  them out. **Nothing moved on screen** — see the new check below.
+  tc-root--flat` rather than one long name. New lint rule
+  `no-numbered-classes` keeps them out. **Nothing moved on screen** — see the new check below.
 - **Three names joined the dictionary**, because without them there was
   nothing to call a nameless `<div>`: `tc-dim` (secondary text, which turned
   up in fifteen blocks and so is a block, with size steps `--t10-5`…`--t12-5`
