@@ -77,6 +77,9 @@ func TestMockupComputedStyles(t *testing.T) {
 			chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
 			chromedp.Navigate(url),
 			chromedp.WaitReady("body"),
+			// without this the boxes are measured against the fallback font on
+			// one side and the real one on the other, and every text node moves
+			chromedp.Evaluate(fontsReadyJS, nil),
 		); err != nil {
 			t.Fatal(err)
 		}
@@ -152,6 +155,17 @@ func TestMockupComputedStyles(t *testing.T) {
 	t.Logf("compared %d frame×width pairs against %s", len(keys), base)
 }
 
+// fontsReadyJS waits for the webfonts, or gives up after two seconds.
+const fontsReadyJS = `(async function(){
+  if (document.fonts && document.fonts.ready) {
+    await Promise.race([
+      document.fonts.ready,
+      new Promise(function(r){ setTimeout(r, 2000); })
+    ]);
+  }
+  return true;
+})()`
+
 func nodeTag(line string) string {
 	if i := strings.IndexByte(line, ';'); i > 0 {
 		return line[:i]
@@ -210,14 +224,17 @@ const computedStylesJS = `(function(){
   for (var i = 0; i < nodes.length; i++) {
     var el = nodes[i];
     var cs = getComputedStyle(el);
-    var parts = [el.tagName.toLowerCase()];
+    var parts = [];
     for (var j = 0; j < cs.length; j++) {
       var p = cs[j];
       parts.push(p + ":" + cs.getPropertyValue(p));
     }
     var r = el.getBoundingClientRect();
-    parts.push("@" + Math.round(r.width) + "x" + Math.round(r.height));
-    out.push(parts.join(";"));
+    parts.push("rect:" + Math.round(r.width) + "x" + Math.round(r.height));
+    // sorted: custom properties are enumerated in an order that depends on
+    // which rules declare them, so adding a rule reshuffles the list
+    parts.sort();
+    out.push(el.tagName.toLowerCase() + ";" + parts.join(";"));
   }
   return out;
 })()`

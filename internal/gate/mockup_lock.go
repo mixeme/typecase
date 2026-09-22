@@ -239,7 +239,7 @@ func checkMockupDeadRules(html string) error {
 		return err
 	}
 	var frames []mockupFrameIndex
-	_ = forEachMockupProduct(html, func(id, outer string) error {
+	_ = forEachMockupFrame(html, func(id, outer string) error {
 		frames = append(frames, indexMockupFrame(id, outer))
 		return nil
 	})

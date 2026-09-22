@@ -8,8 +8,8 @@ do, not what the authors did.
 
 One thing for consumers, and it is a removal: `layout.ShellNoRailHasSide` is
 gone (see below). Everything else here is the mockup tails
-([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)) — Х-1, Х-2, Х-4,
-Х-5 and Х-6 are closed, Х-3 waits on a decision. Next after them: the
+([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), and all six are
+closed. Next after them: the
 breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
@@ -81,6 +81,24 @@ breaking 0.7.0 where the library prints the mockup
   belongs to the library, not here; `.tc-table__col--w34` was junk; and the
   no-rail-with-panel shell does not exist, which is what the removal above is.
   `mockup-parity` no longer carries a hole for it.
+- **A component is shown by a frame, not by a showcase in the running text
+  (Х-3).** The components section had 27 `.demo` blocks that were half inside
+  the rules: `dead-rules` counted them as product and kept rules alive, while
+  none of the other frame checks applied. A frame is the only unit the library
+  is measured against, so intent that sits outside one cannot be checked. 26 of
+  the 27 show real product blocks and are now frames `components-9…34`, built
+  the way `components-1…8` already were. The 27th is a strip of logo and icon
+  sizes: it stays page decoration, and its layout (`tc-specs*` → `specs*`) and
+  the 38 px logo size moved to the page sheet, because no frame draws them.
+  Frames 167 → 193.
+- **`dead-rules` now means "fires in a frame".** The "or in a showcase" escape
+  hatch is gone with the showcases; 52 product classes had been leaning on it.
+  Nothing moved on screen: the 26 boxes compute the same display, direction,
+  wrap, alignment, gap, padding, background and width they got from the `.demo`
+  page rule, which is what the three new root variants (`tc-root--wrap`,
+  `tc-root--col`, `tc-root--pad18-20`) exist to reproduce.
+- **`data-check="off"` is gone** with `data-demo`: it steered the `#check`
+  in-page audit, which was a script, and scripts are not allowed in the mockup.
 - **`data-demo` is gone.** It listed pre-rename `m-*` names on 34 nodes and
   nothing in either repository read it. The rename history stays in
   `docs/visual/rename.tsv`.
@@ -96,9 +114,13 @@ breaking 0.7.0 where the library prints the mockup
   move anything the tree is the same tree, so matching properties mean a
   matching picture — and a difference is named as the node and the property
   instead of a count of pixels. Five minutes against the compare's half hour.
-  It found two real mistakes in this rename: a name that collided with the
+  It found two real mistakes in the rename: a name that collided with the
   existing `.tc-field--full` (`flex:1 1 100%;max-width:760px`), and a rule
-  written twice. The final run is clean over all 330 frame×width pairs.
+  written twice. It also had two faults of its own, both now fixed: it compared
+  the properties in the order `getComputedStyle` lists them, and custom
+  properties are listed in an order that depends on which rules declare them,
+  so adding a rule reported thousands of differences with nothing in them; and
+  it measured before the webfonts had loaded.
 - **Each `--rN` class was asked whether it does anything.**
   `TestNumberedClassEffect` reads the properties a numbered rule declares,
   takes the class off the node and reads them again; it is skipped unless
