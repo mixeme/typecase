@@ -159,76 +159,26 @@ func cssSelectorClasses(sel string) []string {
 
 var cssClassRe = regexp.MustCompile(`\.([A-Za-z_][\w-]*)`)
 
-// FormatNumberedAudit writes the report Х-1 asks for: every --rN class with
-// its declarations, how often it is used, in which frames, on what element of
-// what block.
-func FormatNumberedAudit(list []NumberedClass) string {
-	var b strings.Builder
-	tagBlocks, once, many, uses := 0, 0, 0, 0
+// checkMockupNoNumberedClasses keeps the numbered classes out for good.
+//
+// The inline script of the closed plan moved each distinct style= line into a
+// class with a number: tc-div--r37 is neither a block, nor an element, nor a
+// variant (Р-6), and a widget that prints it would be printing a line number.
+// A variant named by its value — tc-table__col--w110, tc-line--gap-14 — is a
+// name and passes.
+func checkMockupNoNumberedClasses(html string) error {
+	list, err := MockupNumberedClasses(html)
+	if err != nil {
+		return err
+	}
+	var errs []string
 	for _, c := range list {
-		uses += len(c.Uses)
-		if c.TagBlock() {
-			tagBlocks++
+		where := "data-tc"
+		if len(c.Uses) > 0 {
+			where = c.Uses[0].Frame
 		}
-		if len(c.Uses) == 1 {
-			once++
-		} else {
-			many++
-		}
+		errs = append(errs, fmt.Sprintf("%s (%s, %d uses)", c.Name, where, len(c.Uses)))
 	}
-	fmt.Fprintf(&b, "# Классы-номера макета\n\n")
-	fmt.Fprintf(&b, "Отчёт для Х-1 плана [1-mockup-tails](../plan/1-mockup-tails.md).\n")
-	fmt.Fprintf(&b, "Пересобрать: `go run ./internal/mockcss/numbered`.\n\n")
-	fmt.Fprintf(&b, "Классов `--rN`: **%d**, употреблений в кадрах и витринах: **%d**.\n", len(list), uses)
-	fmt.Fprintf(&b, "Разовых (одно употребление): **%d**, повторяющихся: **%d**.\n", once, many)
-	fmt.Fprintf(&b, "Висят на имени тега, а не на блоке (Р-6 не выполнено): **%d**.\n\n", tagBlocks)
-	b.WriteString("Колонки: класс · сколько раз · тег · остальные классы узла · блок, ")
-	b.WriteString("в котором узел стоит · кадры · объявления.\n\n")
-	for _, c := range list {
-		fmt.Fprintf(&b, "## %s — %d\n\n", c.Name, len(c.Uses))
-		if c.TagBlock() {
-			b.WriteString("*Блок по имени тега.*\n\n")
-		}
-		for _, r := range c.Rules {
-			fmt.Fprintf(&b, "    %s\n", r)
-		}
-		b.WriteString("\n")
-		tags, owns, ins, frames := map[string]int{}, map[string]int{}, map[string]int{}, map[string]int{}
-		for _, u := range c.Uses {
-			tags[u.Tag]++
-			owns[u.Own]++
-			ins[u.In]++
-			frames[u.Frame]++
-		}
-		fmt.Fprintf(&b, "- тег: %s\n", countList(tags))
-		fmt.Fprintf(&b, "- узел: %s\n", countList(owns))
-		fmt.Fprintf(&b, "- в блоке: %s\n", countList(ins))
-		fmt.Fprintf(&b, "- кадры: %s\n\n", countList(frames))
-	}
-	return b.String()
-}
-
-func countList(m map[string]int) string {
-	keys := make([]string, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
-	}
-	sort.Slice(keys, func(i, j int) bool {
-		if m[keys[i]] != m[keys[j]] {
-			return m[keys[i]] > m[keys[j]]
-		}
-		return keys[i] < keys[j]
-	})
-	parts := make([]string, 0, len(keys))
-	for _, k := range keys {
-		name := k
-		if name == "" {
-			name = "(без класса)"
-		}
-		if m[k] > 1 {
-			name += " ×" + strconv.Itoa(m[k])
-		}
-		parts = append(parts, name)
-	}
-	return strings.Join(parts, ", ")
+	sort.Strings(errs)
+	return mockupLintErrs("no-numbered-classes", errs, 8)
 }

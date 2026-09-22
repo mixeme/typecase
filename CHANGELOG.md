@@ -8,13 +8,33 @@ do, not what the authors did.
 
 Nothing for consumers: the library's API, CSS and JS are untouched. The work
 below is the mockup tails
-([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)) — Х-4, Х-5 and Х-6
-are closed, Х-1 has its report, Х-2 and Х-3 wait on decisions. Next after them:
-the breaking 0.7.0 where the library prints the mockup
+([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)) — Х-1, Х-4, Х-5
+and Х-6 are closed, Х-2 and Х-3 wait on decisions. Next after them: the
+breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
 ### For maintainers (mockup source)
 
+- **The numbered classes are gone (Х-1).** The closed plan's inline script had
+  moved every distinct `style=` line into a class with a number: 602 of them
+  over 1717 uses, and 192 hung on a tag name (`tc-div--r37`) rather than on a
+  block, which Р-6 does not allow and which plan 2 would have had a widget
+  print. They are now 596 names — by meaning where there is one
+  (`tc-in--body`, `tc-empty--drop`, `tc-card__acts`, `tc-sheet__title`), by
+  value where there is not (`tc-dialog--max520`, `tc-mark--h18`), as the file
+  already named `tc-table__col--w110` and `tc-line--gap-14`. A variant that
+  splits into independent parts is written in parts: `tc-root--on-bg
+  tc-root--flat tc-root--max460`. New lint rule `no-numbered-classes` keeps
+  them out. **Nothing moved on screen** — see the new check below.
+- **Three names joined the dictionary**, because without them there was
+  nothing to call a nameless `<div>`: `tc-dim` (secondary text, which turned
+  up in fifteen blocks and so is a block, with size steps `--t10-5`…`--t12-5`
+  and tones `--muted`, `--accent`, `--danger`), `is-focus` (the drawn focus
+  ring, which `.tc-in` already had, now also on `.tc-btn`, `.tc-search`,
+  `.tc-usermenu`, `.tc-mark`), and `tc-plain` (ordinary case under a heading
+  that shouts). The glue variants that looked necessary turned out not to be:
+  of the seventeen numbered rules with `display:flex`, none matched `tc-line`,
+  so nothing was hiding there.
 - **A name may exist without a rule, and it says so out loud (Х-4).** The
   mockup listed nineteen classes in a `.tc-shell,…{}` rule with no
   declarations so they would pass `classes-defined`; such a rule says nothing,
@@ -23,7 +43,7 @@ the breaking 0.7.0 where the library prints the mockup
   `/* names-without-rule: … */` comment in the sheet they belong to, and the
   empty rules are gone. New lint rule `empty-rules`: no rule anywhere in either
   `<style>` may be empty, and every listed name must stand on a node.
-  `classes-defined` reads the list. Nothing moved on screen.
+  `classes-defined` reads the list.
 - **Frame widths are page classes, and the width switch now reaches every
   frame (Х-5).** Twenty-one frames carried `style="max-width:900px"` and the
   like. Inline styles outrank any selector, so eleven of them ignored the width
@@ -37,26 +57,27 @@ the breaking 0.7.0 where the library prints the mockup
   `docs/visual/rename.tsv`.
 - **The `.tc-queue` showcase is named like the frame** — `tc-queue__list`,
   `tc-queue__name`, `tc-queue__meta` instead of bare `<ul>` and `<span>`.
-- **The report Х-1 is decided on:**
-  [docs/visual/numbered-audit.md](docs/visual/numbered-audit.md), rebuilt with
-  `go run ./internal/mockcss/numbered`. Every `--rN` class with its
-  declarations, how often it is used, in which frames, on what element of what
-  block: 602 classes over 1717 uses, 324 of them used once, 192 hung on a tag
-  name rather than a block. `gate.MockupNumberedClasses` is the same data for
-  code; `gate.IsNumberedClass` tells a number (`--r37`) from a name by value
-  (`--gap-14`, `--w110`).
 
 ### For maintainers (checks)
 
+- **A rename is checked by what the CSS computes, not by screenshots.**
+  `TestMockupComputedStyles` takes the mockup at `HEAD` and in the working
+  tree, injects each frame at 1351 and 820, and compares every computed
+  property and the box of every node. For a change that is not supposed to
+  move anything the tree is the same tree, so matching properties mean a
+  matching picture — and a difference is named as the node and the property
+  instead of a count of pixels. Five minutes against the compare's half hour.
+  It found two real mistakes in this rename: a name that collided with the
+  existing `.tc-field--full` (`flex:1 1 100%;max-width:760px`), and a rule
+  written twice. The final run is clean over all 330 frame×width pairs.
 - **Each `--rN` class was asked whether it does anything.**
   `TestNumberedClassEffect` reads the properties a numbered rule declares,
   takes the class off the node and reads them again; it is skipped unless
-  `TC_NUMBERED_EFFECT=1`, so it costs CI nothing. Of 602 classes, 29 declare
-  what the node already had and 565 change the drawing (8 sit in
-  `@container` rules and were not measured). Among the 324 used exactly once
-  the split is 12 against 309 — which is why folding the one-offs away is a
-  pile of decisions rather than a mechanical pass.
-
+  `TC_NUMBERED_EFFECT=1`, so it costs CI nothing. Of 602 classes, 29 declared
+  what the node already had and 565 changed the drawing. Among the 324 used
+  exactly once the split was 12 against 309 — which is why folding the one-offs
+  away is a pile of decisions rather than a mechanical pass, and why it is
+  still open.
 - **The two long mockup tests have their own CI job and their own timeout
   (Х-6).** `TestMockupLadder` (up to 40 min) and `TestMockupRefactor` (up to
   35) ran inside `go test ./internal/browser` under the default 10-minute
@@ -67,7 +88,8 @@ the breaking 0.7.0 where the library prints the mockup
 - **A hung screenshot is called a hang, not a difference.** The compare reports
   `browser.IsHang` failures in their own words and gives the frame one more go
   in a fresh browser process before failing it. On a full 165-frame run this
-  caught `m-desktop-9 @820` and said so, while every other frame compared clean.
+  caught `m-desktop-9 @820` and said so, while every other frame compared clean;
+  run on its own that frame passes in thirteen seconds.
 - **`instance.stop` kills the browser that outlived its process tree.** A
   browser that re-execs itself leaves the tree `taskkill /T` walks, keeps the
   `typecase-browser-*` profile locked and hangs the next frame. Stop now also

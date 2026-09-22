@@ -52,6 +52,9 @@ const (
 	// MockupEmptyRules forbids a rule with no declarations, and requires
 	// every name listed in a "names-without-rule" comment to be used.
 	MockupEmptyRules MockupLintRule = "empty-rules"
+	// MockupNoNumberedClasses forbids a class named by a number (--rN), in
+	// the frames and in data-tc alike.
+	MockupNoNumberedClasses MockupLintRule = "no-numbered-classes"
 )
 
 // MockupLintStep0 is the first rule set: frame ids only.
@@ -62,6 +65,7 @@ var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
 	MockupDeadRules, MockupNamedContainer, MockupTokenVars, MockupEmptyRules,
+	MockupNoNumberedClasses,
 }
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
@@ -122,6 +126,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupEmptyRules:
 			if err := checkMockupEmptyRules(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupNoNumberedClasses:
+			if err := checkMockupNoNumberedClasses(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		case MockupClassesDefined:

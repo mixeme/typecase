@@ -329,3 +329,25 @@ func TestMockupNumberedClasses(t *testing.T) {
 		t.Error("IsNumberedClass must catch --rN only")
 	}
 }
+
+func TestCheckMockupLint_noNumberedClasses(t *testing.T) {
+	head := `<style data-tc>.tc-root{color:red}`
+	tail := `</style><style>body{margin:0}</style>`
+	frame := func(cls string) string {
+		return `<div class="frame" data-frame="s-notes-1"><div class="tc-root">` +
+			`<div class="` + cls + `">x</div></div></div>`
+	}
+	ok := head + `.tc-table__col--w110.tc-table__col--w110{width:110px}` + tail +
+		frame("tc-table__col--w110")
+	if err := CheckMockupLint(ok, MockupNoNumberedClasses); err != nil {
+		t.Fatalf("a variant named by its value is a name: %v", err)
+	}
+	bad := head + `.tc-div--r37.tc-div--r37{margin-top:12px}` + tail + frame("tc-div--r37")
+	err := CheckMockupLint(bad, MockupNoNumberedClasses)
+	if err == nil {
+		t.Fatal("expected --rN to fail")
+	}
+	if !strings.Contains(err.Error(), "tc-div--r37") {
+		t.Fatalf("the message must name the class: %v", err)
+	}
+}
