@@ -23,7 +23,6 @@ func All() Spec {
 			Shell,
 			ShellHasSide,
 			ShellNoRail,
-			ShellNoRailHasSide,
 			Doc,
 			DocNoMeta,
 			Fields,

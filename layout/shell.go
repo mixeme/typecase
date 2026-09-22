@@ -28,15 +28,6 @@ var ShellNoRail = Grid{
 	},
 }
 
-// ShellNoRailHasSide is .m-shell.no-rail.has-side.
-var ShellNoRailHasSide = Grid{
-	Selector: ".tc-shell__body:not(:has(> .tc-shell__rail)):has(> .tc-shell__side)",
-	Tracks: []Track{
-		{Size: "minmax(0,1fr)"},
-		{Size: "auto"},
-	},
-}
-
 // Top is .tc-top ↔ .m-top.
 var Top = Flow{
 	Selector: ".tc-top",
