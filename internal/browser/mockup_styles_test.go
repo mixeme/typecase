@@ -221,3 +221,75 @@ const computedStylesJS = `(function(){
   }
   return out;
 })()`
+
+// TestMockupDarkRules checks that the components with a hard-coded colour are
+// actually repainted in a dark frame.
+//
+// Tokens carry the dark theme almost everywhere, but the avatar and the
+// preview tile are filled with cardboard and the scrim is ink over a light
+// page, so each has a rule of its own under [data-tc-theme="dark"]. dead-rules
+// only says the selector matches a node somewhere; this says the node ends up
+// the right colour, which is what the frames were drawn for.
+func TestMockupDarkRules(t *testing.T) {
+	if !browser.ChromeAvailable() {
+		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
+	}
+	if os.Getenv("CI") == "" && testing.Short() {
+		t.Skip("needs Chrome; skip with -short outside CI")
+	}
+	root := browser.ModuleRoot(t)
+	html, err := browser.LoadMockupHTML(root, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	parts, err := gate.ParseMockupParts(string(html))
+	if err != nil {
+		t.Fatal(err)
+	}
+	byID := map[string]string{}
+	for _, f := range parts.Frames {
+		byID[f.ID] = f.HTML
+	}
+
+	h := browser.NewHarness(t)
+	run, cancel := h.Tab(5 * time.Minute)
+	defer cancel()
+	url := h.RegisterPage("dark", browser.MockupShotShell(parts.Styles, parts.Sprite))
+	if err := run(
+		chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
+		chromedp.Navigate(url),
+		chromedp.WaitReady("body"),
+	); err != nil {
+		t.Fatal(err)
+	}
+
+	for _, c := range []struct{ frame, sel, prop, want string }{
+		{"m-dark-2", ".tc-avatar", "background-color", "rgb(58, 70, 61)"},
+		{"m-dark-2", ".tc-avatar", "color", "rgb(201, 191, 166)"},
+		{"m-dark-2", ".tc-scrim", "background-color", "rgba(0, 0, 0, 0.42)"},
+		{"m-dark-3", ".tc-thumb", "background-color", "rgb(51, 64, 58)"},
+	} {
+		frame, ok := byID[c.frame]
+		if !ok {
+			t.Fatalf("no frame %s", c.frame)
+		}
+		raw, err := json.Marshal(frame)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var got string
+		js := fmt.Sprintf(`(function(){
+  var host = document.getElementById("host");
+  host.innerHTML = %s;
+  var el = host.querySelector(%q);
+  if (!el) return "no node";
+  return getComputedStyle(el).getPropertyValue(%q);
+})()`, raw, c.sel, c.prop)
+		if err := run(chromedp.Evaluate(js, &got)); err != nil {
+			t.Fatalf("%s %s: %v", c.frame, c.sel, err)
+		}
+		if got != c.want {
+			t.Errorf("%s %s %s: %s, want %s", c.frame, c.sel, c.prop, got, c.want)
+		}
+	}
+}

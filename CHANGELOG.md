@@ -9,7 +9,7 @@ do, not what the authors did.
 Nothing for consumers: the library's API, CSS and JS are untouched. The work
 below is the mockup tails
 ([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)) — Х-1, Х-4, Х-5
-and Х-6 are closed, Х-2 and Х-3 wait on decisions. Next after them: the
+and Х-6 are closed, Х-2 is down to two rows and Х-3 waits on a decision. Next after them: the
 breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
@@ -52,6 +52,23 @@ breaking 0.7.0 where the library prints the mockup
   `frame-no-style` covers the `.frame` element itself from now on, so this
   cannot come back; `.frame-label` stays exempt as page chrome.
   `TestMockupLadderSwitch` checks the eleven in a browser.
+- **The dark theme gets the two frames its rules need (Х-2).** Tokens carry it
+  almost everywhere, but the avatar and the preview tile are filled with a hard
+  `#D9D2BE` and the scrim is ink at .22 over a light page, so each needs a rule
+  of its own — and the lock had deleted all three because no dark frame showed
+  those components. `m-dark-2` (the drop overlay over the contacts list: avatars
+  under a scrim) and `m-dark-3` (files as tiles) are copies of existing frames
+  with one attribute on the root, which is what "any frame can be shown dark
+  with one attribute" was supposed to mean. `TestMockupDarkRules` checks the
+  nodes end up the right colour, which `dead-rules` does not: it only says a
+  selector matched something.
+- **Four of the other deleted rules are not missing frames at all.** Checked
+  against the base commit rather than guessed: `.tc-badge.is-plan` and
+  `.tc-table td.is-idle` never stood on a node even then, so they are
+  inheritance, not undrawn states; `.tc-queue.is-min ul` has its frame already
+  (`s-files-3` draws the collapsed queue by not drawing the list), so that rule
+  belongs to the library, not here; `.tc-table__col--w34` was junk. Two rows are
+  left for a human, and they are written down as such.
 - **`data-demo` is gone.** It listed pre-rename `m-*` names on 34 nodes and
   nothing in either repository read it. The rename history stays in
   `docs/visual/rename.tsv`.
