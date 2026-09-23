@@ -135,6 +135,20 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   copy". The key-escrow sentence "No copy of your data key is deposited" is a
   different subject and stands.
 
+- **The screenshot compare moved its base to the current mockup, and the
+  exemption table is empty again.** It had drifted to the point of proving
+  nothing: of 194 frames, 163 existed in the base commit from 11 September and
+  130 of those were exempted by a row, so a forty-seven-minute run was
+  comparing 33 frames. The rail-footer change touched 41 and the run went green
+  without comparing one of them. The confirmations those rows held are in this
+  file and in the history; `allowed-diffs.md` holds what is being compared now,
+  and says when to move the base again.
+- **A compare with nothing to compare now skips.** With a base set and the
+  mockup identical to it, the test used to take one screenshot of every frame
+  at both widths and throw them away — twenty-odd minutes. It skips in a second
+  and a half instead. That the frames still render is `TestMockupLadder`'s job,
+  and that takes ninety seconds for all 194.
+
 ### For maintainers (checks)
 
 - **A rename is checked by what the CSS computes, not by screenshots.**

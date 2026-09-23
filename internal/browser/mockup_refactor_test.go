@@ -198,6 +198,12 @@ func TestMockupRefactor(t *testing.T) {
 		beforeByID[f.ID] = f
 	}
 	sameDoc := spec.Base == "" || string(beforeHTML) == string(afterHTML)
+	// With a base set and the file identical to it there is nothing to compare,
+	// and the run is twenty-odd minutes of screenshots nobody looks at. That the
+	// frames still render is TestMockupLadder's job, and it takes ninety seconds.
+	if spec.Base != "" && string(beforeHTML) == string(afterHTML) {
+		t.Skipf("макет совпадает с базой %s — сравнивать нечего", spec.Base)
+	}
 
 	for _, st := range mockupStages(after.Frames, mockupStageSize) {
 		st := st
