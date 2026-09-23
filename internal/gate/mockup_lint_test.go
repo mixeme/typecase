@@ -244,8 +244,8 @@ func TestParseMockupParts_live(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.Frames) != 194 {
-		t.Fatalf("frames: got %d, want 194", len(p.Frames))
+	if len(p.Frames) != 195 {
+		t.Fatalf("frames: got %d, want 195", len(p.Frames))
 	}
 	if p.Frames[0].ID != "shell-1" || !strings.Contains(p.Frames[0].HTML, "data-frame=\"shell-1\"") {
 		t.Fatalf("first frame: %+v", p.Frames[0].ID)
@@ -349,5 +349,29 @@ func TestCheckMockupLint_noNumberedClasses(t *testing.T) {
 	}
 	if !strings.Contains(err.Error(), "tc-div--r37") {
 		t.Fatalf("the message must name the class: %v", err)
+	}
+}
+
+func TestMockupNesting(t *testing.T) {
+	ok := `<style data-tc>.a{b:c}</style><figure><div class="frame" data-frame="s-x-1">` +
+		`<div class="tc-root"><svg viewBox="0 0 16 16"><title>t</title><use href="#a"/></svg>` +
+		`<input class="tc-in" value="1"><br></div></div></figure>`
+	if err := CheckMockupLint(ok, MockupNesting); err != nil {
+		t.Fatalf("well nested: %v", err)
+	}
+	// the shape of the rail-footer mistake: one </div> too many inside the
+	// rail, which the frame parser does not see
+	bad := `<figure><div class="frame" data-frame="s-x-1"><div class="tc-shell__rail">` +
+		`<div class="tc-railfoot"><a>v</a></div><a>v</a></div></div>` +
+		`<div class="tc-main">m</div></div></figure>`
+	err := CheckMockupLint(bad, MockupNesting)
+	if err == nil {
+		t.Fatal("expected a stray </div> to fail")
+	}
+	if !strings.Contains(err.Error(), "</div> while <figure>") {
+		t.Fatalf("the message must say what is open: %v", err)
+	}
+	if err := CheckMockupLint(`<div><span></div>`, MockupNesting); err == nil {
+		t.Fatal("expected an unclosed <span> to fail")
 	}
 }

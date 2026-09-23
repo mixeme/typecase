@@ -130,6 +130,44 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   device table and the backup history already used; four dotted ones were left.
   `tc-mono--ink` lost its last user when a date in a banner started taking the
   banner's tone instead of forcing ink, and `dead-rules` said so.
+- **The davloom mark is drawn from its guide, and the app rail shows its
+  state.** The sprite had a three-thread stroke sketch in a 24 grid, drawn at 13
+  and 15 px; the guide (Carrel `docs/visual/davloom-icon.html`, v1.1) has five
+  threads, a filled beam and a filled accent cloth, and does not go below 16 px,
+  which has its own hinted geometry. Under the icon set's `fill:none` the beam
+  and cloth cannot survive, so the mark is built the way the Carrel logo is:
+  parts in the sprite, a `<use>` per part, colours from `--tc-ink` and
+  `--tc-accent`, which are the guide's colours in both themes. It replaces the
+  sketch on the settings rail item and joins the footer of the app rail — as a
+  mark, not a button, pulled right so it does not read as one more action:
+  absent when davloom is off, present when it runs, with the cloth in the danger
+  colour when it does not answer. All three are frame `components-36`, so frames
+  are 195.
+- **The app rail footer has one row of buttons, the same on every screen.**
+  Over 27 frames it had drifted into four shapes: three buttons on ten, two on
+  seven, only "Connect account" on three, and on seven a lone plus titled
+  "Connect account". The first button's title had been copied as "New
+  calendar" onto notes, profile and desktop frames. The row is now: add what
+  the rail lists, named by the section the rail is in (address book, calendar,
+  list, notebook, folder), connect an account, subscribe to a feed — 17 frames
+  changed; a state already drawn on a button (`is-focus` on the profile frames)
+  stays.
+- **The width ladder had not been run on the rail-footer commit, and it finds
+  two things there.** The Match threshold field used `tc-in--chip`, whose fixed
+  22 px beat the bar's own heights, so at phone width it had no 44 px tap zone
+  (Р-21); it is `tc-in--w52` now and takes its height from the bar like every
+  other bar field. And the banner strips in `components-35` were drawn as a
+  `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
+  without a shell mode; the strip is the footer itself at rail width
+  (`tc-railfoot--strip`).
+- **Seven frames had their main area knocked out of the shell grid, by the
+  rail-footer commit above.** Where a footer already existed, the rewrite
+  replaced it only up to the first `</div>`, leaving the old version line and
+  one `</div>` too many. The browser closed the rail early and moved everything
+  after it out of the grid (`s-davloom-1`, `s-backup-1`, `s-admin-2`…`-5`,
+  `-7`). No check saw it: the compare skipped those frames, and the frame parser
+  counts only tags of the frame's own name, so the frame still came out
+  balanced. Fixed, and the new `nesting` rule below keeps it from coming back.
 - **The backup screen says "backup", not "copy".** The rail item, the page and
   the banner now agree, and so does the table column that used to read "Last
   copy". The key-escrow sentence "No copy of your data key is deposited" is a
@@ -151,6 +189,11 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (checks)
 
+- **New lint rule `nesting`: the whole file must be well nested.** Every
+  closing tag closes the element opened last, and nothing is left open. It
+  exists because of the seven broken frames above; read strictly, the rest of
+  the file was already well nested, so the rule costs nothing. Against the
+  broken commit it reports the nine places; against the fix, none.
 - **A rename is checked by what the CSS computes, not by screenshots.**
   `TestMockupComputedStyles` takes the mockup at `HEAD` and in the working
   tree, injects each frame at 1351 and 820, and compares every computed

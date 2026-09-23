@@ -55,6 +55,9 @@ const (
 	// MockupNoNumberedClasses forbids a class named by a number (--rN), in
 	// the frames and in data-tc alike.
 	MockupNoNumberedClasses MockupLintRule = "no-numbered-classes"
+	// MockupNesting requires every closing tag to close the element opened
+	// last, and every element to be closed, across the whole file.
+	MockupNesting MockupLintRule = "nesting"
 )
 
 // MockupLintStep0 is the first rule set: frame ids only.
@@ -65,7 +68,7 @@ var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
 	MockupDeadRules, MockupNamedContainer, MockupTokenVars, MockupEmptyRules,
-	MockupNoNumberedClasses,
+	MockupNoNumberedClasses, MockupNesting,
 }
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
@@ -130,6 +133,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupNoNumberedClasses:
 			if err := checkMockupNoNumberedClasses(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupNesting:
+			if err := checkMockupNesting(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		case MockupClassesDefined:
