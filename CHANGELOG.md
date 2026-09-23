@@ -142,8 +142,9 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `--tc-accent`, which are the guide's colours in both themes. It replaces the
   sketch on the settings rail item and joins the footer of the app rail — as a
   mark, not a button, pulled right so it does not read as one more action:
-  absent when davloom is off, present when it runs, with the cloth in the danger
-  colour when it does not answer. All three are frame `components-36`, so frames
+  absent when davloom is off, present when it runs, and on a danger plate —
+  tinted ground, red border — when it does not answer. The mark itself is not
+  recoloured: a red cloth at 7×4 px was tried first and could not be read. All three are frame `components-36`, so frames
   are 195.
 - **The app rail footer has one row of buttons, the same on every screen.**
   Over 27 frames it had drifted into four shapes: three buttons on ten, two on
