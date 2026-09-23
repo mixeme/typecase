@@ -162,6 +162,15 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **A check with a hint under it stood on the label line, not on the field
+  line.** In a row of labelled fields, a check alone gets an empty label line
+  and the 28 px row height, so it lines up with the inputs; the rule matched
+  only a check that was the field's only child, so "All day" with its hint
+  (`components-10`) floated up to the labels. The rule now covers a check
+  followed by a hint. Fields where that same pair stands on its own line
+  (`s-profile-10`, `s-admin-3`, `s-backup-2`, `m-desktop-6`) are marked
+  `is-own-line`, which is what the mockup already did for such cells;
+  computed styles confirm only `components-10` moves.
 - **Seven frames had their main area knocked out of the shell grid, by the
   rail-footer commit above.** Where a footer already existed, the rewrite
   replaced it only up to the first `</div>`, leaving the old version line and
