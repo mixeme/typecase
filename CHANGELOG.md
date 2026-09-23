@@ -124,8 +124,10 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 - **"Match threshold" is out of the rail footer.** It sat in the footer of
   `s-dup-1` and `s-dup-2` as a form field — the one thing that footer is not
   for, and nowhere anyone would look for it. It is a control over the list, so
-  it moved into the bar above the list (new `tc-field--inline`), and the head
-  stopped repeating its value in prose.
+  it sits in the head under the kind filter over the same list (new
+  `tc-acts--stack`, `tc-field--inline`) rather than in a bar of its own — a
+  whole row for one field was too much — and the head stopped repeating its
+  value in prose.
 - **Dates in frames are written one way**, `2026-08-16 09:12` — the form the
   device table and the backup history already used; four dotted ones were left.
   `tc-mono--ink` lost its last user when a date in a banner started taking the
