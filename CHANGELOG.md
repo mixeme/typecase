@@ -103,6 +103,37 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `docs/visual/rename.tsv`.
 - **The `.tc-queue` showcase is named like the frame** — `tc-queue__list`,
   `tc-queue__name`, `tc-queue__meta` instead of bare `<ul>` and `<span>`.
+- **The settings rail has a footer, and it carries the statuses that have to be
+  in sight.** That footer was two different things without saying so: on the app
+  rails it holds the buttons that add what the rail lists (new notebook, connect
+  account, subscribe), while on the settings and admin rails it held whatever
+  the one screen happened to have — an SMTP badge, a backup date, a davloom
+  icon — and only on 7 frames out of 38. Those rails are short and fixed, so the
+  footer is now one component, `tc-railnote`: a status dot (`tc-dot--accent`
+  running, `tc-dot--dusty` off, `tc-dot--danger` alarm), a title, and a second
+  line of the shape `Last <what> <when>`. The set is fixed per panel and does
+  not follow the section you are in — settings show davloom and Backup,
+  administration shows mail and the installation checks — because the point is
+  not having to know which section to open to see them. Ordinary states are
+  shown too, not only breakage: a banner that appears only in trouble says
+  nothing in quiet. All 38 frames have the footer now, which also gives 31 of
+  them the visible version line they lacked (C-13); on a narrow screen it is
+  hidden with the rest of the rail, where there is no free slot for it. The
+  nine states stand together in the new frame `components-35`, so frames are
+  194.
+- **"Match threshold" is out of the rail footer.** It sat in the footer of
+  `s-dup-1` and `s-dup-2` as a form field — the one thing that footer is not
+  for, and nowhere anyone would look for it. It is a control over the list, so
+  it moved into the bar above the list (new `tc-field--inline`), and the head
+  stopped repeating its value in prose.
+- **Dates in frames are written one way**, `2026-08-16 09:12` — the form the
+  device table and the backup history already used; four dotted ones were left.
+  `tc-mono--ink` lost its last user when a date in a banner started taking the
+  banner's tone instead of forcing ink, and `dead-rules` said so.
+- **The backup screen says "backup", not "copy".** The rail item, the page and
+  the banner now agree, and so does the table column that used to read "Last
+  copy". The key-escrow sentence "No copy of your data key is deposited" is a
+  different subject and stands.
 
 ### For maintainers (checks)
 
