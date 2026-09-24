@@ -178,6 +178,20 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **The duplicates frames say what S-16 and S-23 do** (`s-dup-1…6`). Points
+  follow the instance weights — email and phone 60, UID 80, name 20, birthday
+  10, title and date 70 — and the threshold is 60, with the six weights and
+  their instance defaults behind a "Weights" button (`s-dup-3`). Only real
+  questions are asked (name, organisation and photo of a contact, title and
+  place of an event, title of a task or note): no Due, no Tags. The target of
+  a merge is chosen on the merge screen ("Keep … instead"), not by a picker on
+  the group, and a group with a read-only member cannot be merged and says why.
+  Decided groups stand on the same screen after the open ones: linked ("Keep
+  these values", "Unlink") and not duplicates ("Offer again"). New frames: an
+  event merge that names the reminders gained and the occurrences not carried
+  over (`s-dup-4`), a merge that did not end in one record with "Still there"
+  (`s-dup-5`), and "Nothing is loaded yet" for an empty cache (`s-dup-6`).
+  `tc-merge` lost its last user and is gone. Frames are 206.
 - **Mail, publishing and admin settings, as S-26 builds them.** The sheet of a
   link just made — the link, its expiry, "Open the link", "All published
   links" and "Send by letter" — is a frame now (`s-publish-13`), and so is the
