@@ -39,6 +39,9 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **A published link may have no expiry.** "Link lives for" offers 7, 14 or
+  30 days and "No expiry" (caption of `s-publish-2`); the file link in the
+  list of published links (`s-publish-1`) shows "No expiry".
 - **The timeline drops rows found by being written about; the rubric aside
   keeps its phrases whole.** The three rows that were "mentioned in the text /
   title" are gone from the timeline, not relabelled: being written about is
