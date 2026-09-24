@@ -178,6 +178,16 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **Mentions, a candidate function, have a section of their own (7.23).**
+  Where the timeline shows a person as the subject — attendee, organiser —
+  mentions show them as the object: listed in another card (`RELATED`,
+  `MEMBER`) or named with `@` in a note, an event or task description, or a
+  card's note. Five frames (`mentions-1…5`, frames 200): the inset on the card
+  next to the timeline, the screen, the `@` suggestion (the "Related to" menu,
+  people only), a mention as it reads — a link to the card — and as the server
+  stores it, `@[Name](urn:uuid:…)`, and the empty state that tells "nobody"
+  from "not asked". No other frame changes, and the candidate frames carry no
+  `data-screen`, so nothing in Carrel checks them yet.
 - **Connection labels in the frames are one word** — `nextcloud`, `baikal` —
   because that is what people usually call a connection; `radicale · vps` and
   `sftpgo · vps` stay compound on purpose, as the hard case. The contact row's
