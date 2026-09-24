@@ -39,6 +39,11 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **One-off value classes are folded (Р-13).** Of the 282 rules whose class
+  sits on one node, 109 are gone: 76 replaced by the nearest shared class of
+  the same block, 33 dropped to the block's base look. The 173 kept are
+  elements of one frame, variants with a meaning, and geometry a frame sets
+  for itself. The drawing moved in 70 frames; the owner reviews them by eye.
 - **The timeline no longer finds a person in the text.** Its rows said
   "mentioned in the text" and "mentioned in the title"; they say "related to
   this person" now, as `timeline.go` matches (addresses and RELATED-TO). Where
