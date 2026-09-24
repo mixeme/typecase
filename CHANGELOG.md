@@ -6,8 +6,9 @@ do, not what the authors did.
 
 ## Unreleased
 
-One thing for consumers, and it is a removal: `layout.ShellNoRailHasSide` is
-gone (see below). Everything else here is the mockup tails
+Two things for consumers: `layout.ShellNoRailHasSide` is gone, and the source
+column of the grid rows changes width and leaves on a phone (see below).
+Everything else here is the mockup tails
 ([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), and all six are
 closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
@@ -21,6 +22,20 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   answered — so the bundle was shipping geometry that could never apply. If you
   reference the variable, drop the reference; if you relied on the rule, you
   were relying on a shell that does not exist.
+
+### Changed
+
+- **The source column of every grid row is sized to real stamps and leaves on
+  a phone.** In all six grid rows (`tc-row--avatarcols`, `--timecols`,
+  `--tickcols`, `--tickmarkcols`, `--excerpt`, `--find`) the source track is
+  140 px on the wide steps and 130 px at the 620 step, up from 92–128 px, and
+  the title's minimum gives up the same amount, so no step needs more room
+  than before. At the 460 step the source is hidden on all six. Two rows
+  change what they keep there: the contact row keeps the phone and drops the
+  source (it used to drop the phone and keep a 74 px source), and the file row
+  keeps the size and drops the source (the library used to drop the size,
+  which the mockup never did). If you print a contact row, its source cell now
+  needs the `source` slot like the other five.
 
 ### For maintainers (mockup source)
 
@@ -163,6 +178,12 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **Connection labels in the frames are one word** — `nextcloud`, `baikal` —
+  because that is what people usually call a connection; `radicale · vps` and
+  `sftpgo · vps` stay compound on purpose, as the hard case. The contact row's
+  source cell gets its `tc-row__source` class, the anatomy caption of
+  `components-12` names the real order in which columns leave, and the rule is
+  in `mockup.md`.
 - **A list does not mark a duplicate candidate.** `s-agenda-1` showed the
   same duty from two calendars folded into one row with "2 sources" and a
   "duplicate? ×2" badge — but only linked records fold, and the owner decided

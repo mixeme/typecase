@@ -8,11 +8,11 @@ var RowExcerpt = Grid{
 	Container: "tcbox",
 	Tracks: []Track{
 		{Slot: "mark", Size: "3px", Empty: EmptyHold},
-		{Slot: "title", Size: "minmax(140px,1.2fr)"},
+		{Slot: "title", Size: "minmax(118px,1.2fr)"},
 		{Slot: "excerpt", Size: "minmax(170px,2fr)"},
 		{Slot: "tags", Size: "minmax(70px,auto)"},
 		{Slot: "date", Size: "80px"},
-		{Slot: "source", Size: "118px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -20,10 +20,10 @@ var RowExcerpt = Grid{
 			Hide:  []string{"excerpt"},
 			Tracks: []Track{
 				{Size: "3px"},
-				{Size: "minmax(140px,1.4fr)"},
+				{Size: "minmax(116px,1.4fr)"},
 				{Size: "minmax(70px,auto)"},
 				{Size: "80px"},
-				{Size: "116px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -35,7 +35,7 @@ var RowExcerpt = Grid{
 				{Size: "3px"},
 				{Size: "minmax(100px,1.4fr)"},
 				{Size: "74px"},
-				{Size: "96px"},
+				{Size: "130px"},
 			},
 		},
 		{
@@ -59,11 +59,11 @@ var RowAvatarCols = Grid{
 	Tracks: []Track{
 		{Slot: "mark", Size: "3px", Empty: EmptyHold},
 		{Slot: "avatar", Size: "28px"},
-		{Slot: "title", Size: "minmax(150px,1.4fr)"},
+		{Slot: "title", Size: "minmax(130px,1.4fr)"},
 		{Slot: "subtitle", Size: "142px"},
 		{Slot: "detail", Size: "minmax(150px,1.1fr)"},
 		{Slot: "caption", Size: "minmax(110px,.9fr)"},
-		{Slot: "source", Size: "120px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -72,10 +72,10 @@ var RowAvatarCols = Grid{
 			Tracks: []Track{
 				{Size: "3px"},
 				{Size: "28px"},
-				{Size: "minmax(130px,1.4fr)"},
+				{Size: "minmax(100px,1.4fr)"},
 				{Size: "130px"},
 				{Size: "minmax(120px,1fr)"},
-				{Size: "110px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -88,17 +88,17 @@ var RowAvatarCols = Grid{
 				{Size: "28px"},
 				{Size: "minmax(100px,1.6fr)"},
 				{Size: "118px"},
-				{Size: "96px"},
+				{Size: "130px"},
 			},
 		},
 		{
 			MaxPx: 460,
-			Hide:  []string{"subtitle"},
+			Hide:  []string{"source"},
 			Tracks: []Track{
 				{Size: "3px"},
 				{Size: "28px"},
 				{Size: "minmax(0,1fr)"},
-				{Size: "74px"},
+				{Size: "118px"},
 			},
 		},
 	},
@@ -112,11 +112,11 @@ var RowTickCols = Grid{
 	Container: "tcbox",
 	Tracks: []Track{
 		{Slot: "tick", Size: "16px", Empty: EmptyHold},
-		{Slot: "name", Size: "minmax(220px,2.4fr)"},
+		{Slot: "name", Size: "minmax(208px,2.4fr)"},
 		{Slot: "size", Size: "90px"},
 		{Slot: "time", Size: "130px"},
 		{Slot: "detail", Size: "60px"},
-		{Slot: "source", Size: "128px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -124,10 +124,10 @@ var RowTickCols = Grid{
 			Hide:  []string{"detail"},
 			Tracks: []Track{
 				{Size: "16px"},
-				{Size: "minmax(200px,2.4fr)"},
+				{Size: "minmax(176px,2.4fr)"},
 				{Size: "84px"},
 				{Size: "124px"},
-				{Size: "116px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -139,12 +139,12 @@ var RowTickCols = Grid{
 				{Size: "16px"},
 				{Size: "minmax(120px,2fr)"},
 				{Size: "78px"},
-				{Size: "96px"},
+				{Size: "130px"},
 			},
 		},
 		{
 			MaxPx: 460,
-			Hide:  []string{"size"},
+			Hide:  []string{"source"},
 			Tracks: []Track{
 				{Size: "16px"},
 				{Size: "minmax(0,1fr)"},
@@ -163,10 +163,10 @@ var RowTimeCols = Grid{
 	Tracks: []Track{
 		{Slot: "mark", Size: "3px", Empty: EmptyHold},
 		{Slot: "lead", Size: "62px"},
-		{Slot: "title", Size: "minmax(180px,2fr)"},
+		{Slot: "title", Size: "minmax(168px,2fr)"},
 		{Slot: "detail", Size: "minmax(110px,1fr)"},
 		{Slot: "caption", Size: "96px"},
-		{Slot: "source", Size: "128px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -175,9 +175,9 @@ var RowTimeCols = Grid{
 			Tracks: []Track{
 				{Size: "3px"},
 				{Size: "60px"},
-				{Size: "minmax(140px,2fr)"},
+				{Size: "minmax(116px,2fr)"},
 				{Size: "88px"},
-				{Size: "116px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -189,7 +189,7 @@ var RowTimeCols = Grid{
 				{Size: "3px"},
 				{Size: "54px"},
 				{Size: "minmax(110px,1fr)"},
-				{Size: "96px"},
+				{Size: "130px"},
 			},
 		},
 		{
@@ -213,11 +213,11 @@ var RowTickMarkCols = Grid{
 	Tracks: []Track{
 		{Slot: "tick", Size: "14px", Empty: EmptyHold},
 		{Slot: "mark", Size: "3px", Empty: EmptyHold},
-		{Slot: "title", Size: "minmax(190px,2fr)"},
+		{Slot: "title", Size: "minmax(178px,2fr)"},
 		{Slot: "tags", Size: "minmax(90px,auto)"},
 		{Slot: "due", Size: "84px"},
 		{Slot: "progress", Size: "44px"},
-		{Slot: "source", Size: "128px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -226,10 +226,10 @@ var RowTickMarkCols = Grid{
 			Tracks: []Track{
 				{Size: "14px"},
 				{Size: "3px"},
-				{Size: "minmax(140px,2fr)"},
+				{Size: "minmax(112px,2fr)"},
 				{Size: "minmax(60px,auto)"},
 				{Size: "74px"},
-				{Size: "112px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -242,7 +242,7 @@ var RowTickMarkCols = Grid{
 				{Size: "3px"},
 				{Size: "minmax(100px,2fr)"},
 				{Size: "70px"},
-				{Size: "92px"},
+				{Size: "130px"},
 			},
 		},
 		{
@@ -267,10 +267,10 @@ var RowFind = Grid{
 	Tracks: []Track{
 		{Slot: "mark", Size: "3px", Empty: EmptyHold},
 		{Slot: "lead", Size: "76px"},
-		{Slot: "title", Size: "minmax(220px,2.4fr)"},
+		{Slot: "title", Size: "minmax(208px,2.4fr)"},
 		{Slot: "detail", Size: "minmax(120px,1fr)"},
 		{Slot: "caption", Size: "74px"},
-		{Slot: "source", Size: "128px"},
+		{Slot: "source", Size: "140px"},
 	},
 	Narrow: []Breakpoint{
 		{
@@ -279,9 +279,9 @@ var RowFind = Grid{
 			Tracks: []Track{
 				{Size: "3px"},
 				{Size: "70px"},
-				{Size: "minmax(160px,2.4fr)"},
+				{Size: "minmax(136px,2.4fr)"},
 				{Size: "66px"},
-				{Size: "116px"},
+				{Size: "140px"},
 			},
 		},
 		{
@@ -293,7 +293,7 @@ var RowFind = Grid{
 				{Size: "3px"},
 				{Size: "62px"},
 				{Size: "minmax(110px,2fr)"},
-				{Size: "96px"},
+				{Size: "130px"},
 			},
 		},
 		{
