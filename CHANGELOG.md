@@ -39,6 +39,15 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **Two tools to look at the mockup, and two rules it had only in CSS.**
+  `TestMockupFrameShots` (`TC_FRAME_SHOTS=frame@width,…`) writes full-size
+  pictures of frames; `TestMockupFrameMoves` (`TC_FRAME_MOVES=<commit>`) lists
+  the frames whose boxes moved against a commit, on all ten widths, with the
+  first element that moved. Both skip without their variable.
+  `docs/visual/mockup.md` now says that a menu with fields ends in buttons
+  (`tc-menu__foot`), and that a single choice in a sheet is a tree with a
+  marked row, never rail nav items, which fold to icons at 641–1007. The
+  row-height paragraph no longer promises a `#check` that is gone.
 - **A published link may have no expiry.** "Link lives for" offers 7, 14 or
   30 days and "No expiry" (caption of `s-publish-2`); the file link in the
   list of published links (`s-publish-1`) shows "No expiry".
