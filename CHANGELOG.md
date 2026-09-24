@@ -195,9 +195,11 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 - **Mail, publishing and admin settings, as S-26 builds them.** The sheet of a
   link just made — the link, its expiry, "Open the link", "All published
   links" and "Send by letter" — is a frame now (`s-publish-13`), and so is the
-  calendar-for-a-range attach sheet with its From and To (`s-mail-10`), whose
-  rail holds only the person's own calendars: a subscription is not theirs to
-  attach. The captions say where errors go: a failed attach disables the
+  calendar-for-a-range attach sheet (`s-mail-10`): one calendar picked on the
+  left, From and To with "Both days are in the file." and "Show" on the right,
+  as mail_attach.go builds it. The list holds only the person's own calendars:
+  a subscription is not theirs to attach. A whole calendar is not an attach
+  kind; it goes by range. The captions say where errors go: a failed attach disables the
   sheet's first action with its reason, a failed send is the first phrase of
   the limits line. Admin settings gain the read-only "Public address" row
   (`CARREL_PUBLIC_URL`) and the test letter as a form of its own, its button
