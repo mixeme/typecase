@@ -163,6 +163,17 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **Six of the frame fixes the server work asked for
+  ([docs/plan/typecase.md](docs/plan/typecase.md)).** The origin stamp is one
+  form everywhere — connection label, then collection, `nextcloud · home ·
+  Контакты`: 168 truncated stamps in list columns, head subtitles and error
+  lines, and 27 reversed ones in the "where" pickers, are brought to it. The
+  return link says "Back to list" from a card and "Back to the card" from an
+  edit form, on every kind. The back rail of the contact and event card and
+  edit forms carries every collection of its connection. The quick note is the
+  common new-record sheet: "Open the card", no title hint, route
+  `/app/{kind}/quick`, and no "where" when there is nowhere to write. And the
+  quick-sheet caption no longer says the record is saved before "Save".
 - **A check with a hint under it stood on the label line, not on the field
   line.** In a row of labelled fields, a check alone gets an empty label line
   and the 28 px row height, so it lines up with the inputs; the rule matched
