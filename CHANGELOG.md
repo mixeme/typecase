@@ -39,16 +39,18 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **The timeline drops rows found by being written about; the rubric aside
+  keeps its phrases whole.** The three rows that were "mentioned in the text /
+  title" are gone from the timeline, not relabelled: being written about is
+  Mentions. `.tc-rubric__aside` has a rule again — its parts wrap as wholes,
+  no phrase breaks and none spills past the card. The notes rail loses the
+  notebook "Архив", which the fixture set does not have.
 - **One-off value classes are folded (Р-13).** Of the 282 rules whose class
   sits on one node, 109 are gone: 67 replaced by the nearest shared class of
   the same block, 42 dropped to the block's base look, whichever is nearer. The 173 kept are
   elements of one frame, variants with a meaning, and geometry a frame sets
   for itself. The drawing moved in 69 frames; the owner reviews them by eye against
   `docs/plan/fold-review.md`.
-- **The timeline no longer finds a person in the text.** Its rows said
-  "mentioned in the text" and "mentioned in the title"; they say "related to
-  this person" now, as `timeline.go` matches (addresses and RELATED-TO). Where
-  a person is written about belongs to Mentions, a candidate feature.
 - **A taken connection label is refused, in a frame of its own.** `s-profile-11`
   is the connect dialog after Connect with a label that already exists: the
   field is marked and says to choose another; the other fields stay as typed.
