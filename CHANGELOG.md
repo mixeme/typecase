@@ -39,6 +39,18 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **Device rights are back, and new-device passwords stay on the page.** By
+  the owner's decision a davloom device is again "read only" or "read and
+  write": chosen when it is added (`s-davloom-2`), shown in the step-2 subtitle
+  (`s-davloom-3`) and switched in the device's row (`s-davloom-1`), with no
+  proxy-wide ceiling. The new-device screens no longer send the person to
+  Connections for a password: Android draws one card per ticked account, its
+  code, "Open in DAVx5" and the password with Copy (`s-plan-2`); Thunderbird
+  and "Anything else" carry login and password with "Copy password" in the
+  account row (`s-plan-4`, `s-plan-5`). The weights menu ends in real buttons,
+  Save and "Back to the instance's numbers" (`tc-menu__foot`, `s-dup-3`): a
+  menu item acts at once, fields wait for Save. The server side is a note in
+  Carrel `docs/plan/from-typecase.md`.
 - **The numbered classes are gone (Х-1).** The closed plan's inline script had
   moved every distinct `style=` line into a class with a number: 602 of them
   over 1717 uses, and 192 hung on a tag name (`tc-div--r37`) rather than on a
