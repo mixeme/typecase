@@ -39,6 +39,10 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **The timeline no longer finds a person in the text.** Its rows said
+  "mentioned in the text" and "mentioned in the title"; they say "related to
+  this person" now, as `timeline.go` matches (addresses and RELATED-TO). Where
+  a person is written about belongs to Mentions, a candidate feature.
 - **A taken connection label is refused, in a frame of its own.** `s-profile-11`
   is the connect dialog after Connect with a label that already exists: the
   field is marked and says to choose another; the other fields stay as typed.
