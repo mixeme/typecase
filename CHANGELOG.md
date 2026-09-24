@@ -39,6 +39,11 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **A calendar is attached whole or for dates, from one menu item.** The
+  attach menu says "Calendar" instead of "Calendar for a range" (`s-mail-2`),
+  and the sheet (`s-mail-10`, "Attach a calendar") asks "Whole calendar" or
+  "Dates"; From, To and Show belong to Dates. On a phone the calendar list
+  stands above the fields.
 - **Device rights are back, and new-device passwords stay on the page.** By
   the owner's decision a davloom device is again "read only" or "read and
   write": chosen when it is added (`s-davloom-2`), shown in the step-2 subtitle
