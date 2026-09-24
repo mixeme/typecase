@@ -178,6 +178,17 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **The davloom frames say what plan S-27 and the code do** (`s-davloom-1…3`).
+  A proxy device has no rights of its own — it can do what the person can do
+  in their connections — so the proxy-wide "Read only / Read and write"
+  ceiling, the same switch in the add dialog and the Access column are gone.
+  Revoking deletes the record, so there is no "revoked … Delete" row. The tree
+  shows the code's levels (`principal/`, `cal/`, `card/`, `files/`) and each
+  collection at `c/{account}/{col}/` — connection ID and catalog path, the
+  name only beside it. The add dialog ticks collections as well as kinds, as
+  the code does; step 2 is the password, the address and the user name with
+  "Done", without a code (empty by plan) or setup notes (not in C-6). Five
+  rules lost their last user and are gone.
 - **The new-device frames say what the server does** (`s-plan-1…5`, task 4 of
   `docs/plan/typecase.md`). An account is included or left out whole — the
   profile and DAVx5 take the account — so the tick sits on the account row,
