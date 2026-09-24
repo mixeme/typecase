@@ -163,6 +163,14 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **A list does not mark a duplicate candidate.** `s-agenda-1` showed the
+  same duty from two calendars folded into one row with "2 sources" and a
+  "duplicate? ×2" badge — but only linked records fold, and the owner decided
+  against the hint: a question hanging in sight while one works distracts, and
+  a pair found by mistake would distract for nothing; when two records get in
+  the way, the way is the Duplicates screen. The duty is two plain rows now,
+  each with its calendar, and the duplicates screen no longer says the agenda
+  folds it.
 - **Six of the frame fixes the server work asked for
   ([docs/plan/typecase.md](docs/plan/typecase.md)).** The origin stamp is one
   form everywhere — connection label, then collection, `nextcloud · home ·
