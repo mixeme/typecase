@@ -178,6 +178,14 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **Linked records read as the code builds them.** The block under a card
+  lists every other member of the linked group — its stamp, a link to that
+  record, and "Phone, email differ", "Holds the same" or "The server did not
+  answer; the record stays linked" — instead of "open" and "phone differs"
+  (`s-contacts-6`, `s-contacts-7`). Events, tasks and notes have the same block
+  now (`s-agenda-2`, `s-tasks-2`, `s-notes-2`), and the task and note lists
+  show a linked record as one row with "linked ×2" and "2 sources"
+  (`s-tasks-1`, `s-notes-1`).
 - **The davloom frames say what plan S-27 and the code do** (`s-davloom-1…3`).
   A proxy device has no rights of its own — it can do what the person can do
   in their connections — so the proxy-wide "Read only / Read and write"
