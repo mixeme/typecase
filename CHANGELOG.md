@@ -178,6 +178,17 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **Mail, publishing and admin settings, as S-26 builds them.** The sheet of a
+  link just made — the link, its expiry, "Open the link", "All published
+  links" and "Send by letter" — is a frame now (`s-publish-13`), and so is the
+  calendar-for-a-range attach sheet with its From and To (`s-mail-10`), whose
+  rail holds only the person's own calendars: a subscription is not theirs to
+  attach. The captions say where errors go: a failed attach disables the
+  sheet's first action with its reason, a failed send is the first phrase of
+  the limits line. Admin settings gain the read-only "Public address" row
+  (`CARREL_PUBLIC_URL`) and the test letter as a form of its own, its button
+  off with a reason while mail is not configured (`s-admin-3`). The last dotted
+  date in the frames is ISO now. Frames are 202.
 - **Linked records read as the code builds them.** The block under a card
   lists every other member of the linked group — its stamp, a link to that
   record, and "Phone, email differ", "Holds the same" or "The server did not
