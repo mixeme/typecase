@@ -6,12 +6,22 @@ do, not what the authors did.
 
 ## Unreleased
 
-Two things for consumers: `layout.ShellNoRailHasSide` is gone, and the source
-column of the grid rows changes width and leaves on a phone (see below).
-Everything else here is the mockup tails
-([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), and all six are
-closed. Next after them: the breaking 0.7.0 where the library prints the mockup
+Nothing yet. Next: the owner looks through the frames the one-off fold moved
+([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
+moves, and then the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+
+## typecase/v0.6.1 — 2026-09-24
+
+Two things for consumers: `layout.ShellNoRailHasSide` is gone, and the source
+column of the grid rows changes width and leaves on a phone (see below). The
+removal is breaking and still ships as a patch: 0.7.0 is the release of plan 2
+(Р-5), and before 1.0 a breaking change needs no deprecation period (L-10).
+Everything else is the mockup: its tails are closed
+([docs/plan/1-mockup-tails.md](docs/plan/1-mockup-tails.md)), its frames now
+agree with the Carrel server or say what the server has to change
+(Carrel `docs/plan/from-typecase.md`), and its one-off classes are folded,
+waiting for the owner's eye.
 
 ### Breaking
 
