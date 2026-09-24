@@ -39,6 +39,13 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (mockup source)
 
+- **A taken connection label is refused, in a frame of its own.** `s-profile-11`
+  is the connect dialog after Connect with a label that already exists: the
+  field is marked and says to choose another; the other fields stay as typed.
+  An empty label is the server's address, so a second label-less connection to
+  the same server meets the same refusal. New state `tc-in.is-error` (danger
+  border). The davloom rights switch sits at the right edge of its cell.
+  Frames are 207.
 - **A calendar is attached whole or for dates, from one menu item.** The
   attach menu says "Calendar" instead of "Calendar for a range" (`s-mail-2`),
   and the sheet (`s-mail-10`, "Attach a calendar") asks "Whole calendar" or
