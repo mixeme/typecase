@@ -152,6 +152,16 @@ func TestCheckMockupLint_frameElements(t *testing.T) {
 	if err := CheckMockupLint(themeOK, MockupFrameElements); err != nil {
 		t.Fatal(err)
 	}
+	fieldOK := `<div class="frame" data-frame="s-dup-3"><div class="tc-root">` +
+		`<div class="tc-menu__item">Same UID<input class="tc-in" type="text" value="80"></div>` +
+		`</div></div>`
+	if err := CheckMockupLint(fieldOK, MockupFrameElements); err != nil {
+		t.Fatalf("a menu row holding a field is a div: %v", err)
+	}
+	bare := `<div class="frame" data-frame="s-dup-3"><div class="tc-root"><div class="tc-menu__item">Save</div></div></div>`
+	if err := CheckMockupLint(bare, MockupFrameElements); err == nil {
+		t.Fatal("a menu row with no control of its own must be a button")
+	}
 }
 
 func TestCheckMockupLint_frameNoStyle(t *testing.T) {

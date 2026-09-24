@@ -378,7 +378,9 @@ func checkMockupFrameElements(html string) error {
 			}
 			for _, c := range n.class {
 				if mockupButtonClass[c] && n.tag != "button" {
-					if c == "tc-menu__item" && n.tag == "div" && htmlNodeHasDescendantClass(n, "tc-seg") {
+					// a row that holds a control of its own cannot be a button: a
+					// control is never nested in another
+					if c == "tc-menu__item" && n.tag == "div" && (htmlNodeHasDescendantClass(n, "tc-seg") || htmlNodeHasDescendantClass(n, "tc-in")) {
 						continue
 					}
 					errs = append(errs, fmt.Sprintf("%s: %s is <%s>, want <button>", id, c, n.tag))

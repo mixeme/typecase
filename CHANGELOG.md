@@ -181,7 +181,7 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 - **The duplicates frames say what S-16 and S-23 do** (`s-dup-1…6`). Points
   follow the instance weights — email and phone 60, UID 80, name 20, birthday
   10, title and date 70 — and the threshold is 60, with the six weights and
-  their instance defaults behind a "Weights" button (`s-dup-3`). Only real
+  their instance defaults in a menu under a "Weights" button, as the column chooser is (`s-dup-3`). Only real
   questions are asked (name, organisation and photo of a contact, title and
   place of an event, title of a task or note): no Due, no Tags. The target of
   a merge is chosen on the merge screen ("Keep … instead"), not by a picker on
@@ -308,6 +308,9 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
 
 ### For maintainers (checks)
 
+- **`frame-elements` lets a menu row that holds a field be a `div`**, as it
+  already did for a row holding a segment: a control is never nested in a
+  button. The weights menu of the duplicates screen is the first such row.
 - **New lint rule `nesting`: the whole file must be well nested.** Every
   closing tag closes the element opened last, and nothing is left open. It
   exists because of the seven broken frames above; read strictly, the rest of
