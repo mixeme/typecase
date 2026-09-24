@@ -178,6 +178,19 @@ closed. Next after them: the breaking 0.7.0 where the library prints the mockup
   `tc-shell__rail` outside any shell, which the ladder rightly reads as a rail
   without a shell mode; the strip is the footer itself at rail width
   (`tc-railfoot--strip`).
+- **The new-device frames say what the server does** (`s-plan-1…5`, task 4 of
+  `docs/plan/typecase.md`). An account is included or left out whole — the
+  profile and DAVx5 take the account — so the tick sits on the account row,
+  titled `label · login`, and its collections are listed in it. The pages no
+  longer show a login and a password per server with Copy and Hide: there is
+  one "Show password", which opens the unlock window when locked and the
+  Connections page inside it. The Apple profile has no password field of its
+  own (it is issued inside the unlock window, as `s-plan-3` already drew), its
+  link lives five minutes, not ten, and opens once for the person signed in
+  to Carrel, and a ready link offers "Download profile" and "Revoke" — nothing
+  to copy. Android shows one code per connection, with "Open in DAVx5" on the
+  same link and "Code for …" for the others. Two rules lost their last user
+  and are gone (`tc-in--t12-w190`, `tc-table--flush`).
 - **Mentions, a candidate function, have a section of their own (7.23).**
   Where the timeline shows a person as the subject — attendee, organiser —
   mentions show them as the object: listed in another card (`RELATED`,
