@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carrel — почта ящика, макеты-кандидаты</title>
-<!-- Собрано из docs/visual/carrel-ui-mockups.html на e9c5180: CSS страницы,
+<!-- Собрано из docs/visual/carrel-ui-mockups.html на 29e07b0: CSS страницы,
      data-tc и спрайт скопированы как есть. Правила кандидата — в третьем
      блоке <style data-tc-candidate>. -->
 <style>
@@ -1470,9 +1470,12 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-row.is-unread .tc-row__title,.tc-row.is-unread .tc-row__topic{font-weight:600}
 .tc-row.is-unread .tc-row__date{color:var(--tc-ink)}
 
-/* Полоска письма — пустая: письмо не лежит в коллекции (C-2.1 в M-10),
-   цвета коллекции у него нет. */
-.tc-mark.is-mail{background:transparent;box-shadow:inset 0 0 0 1px var(--tc-dusty)}
+/* Имя файла в строке — значок и имя в одну строку. В data-tc основного
+   макета этого правила нет, и .tc-root svg{display:block} ставит значок над
+   именем (s-files-1, s-find-1 там сломаны так же). Уходит в data-tc при
+   исправлении основного макета, а не вместе с почтой. */
+.tc-row__name{display:flex;align-items:center;gap:7px;min-width:0}
+.tc-row__file{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Цитата в тексте письма: строки «>» и цитаты HTML (M-5). */
 .tc-quote{margin:0;padding:1px 0 1px 12px;border-left:2px solid var(--tc-edge);color:var(--tc-muted);
@@ -1520,7 +1523,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   </div>
 </header>
 
-<p class="lede">Кадры к отложенной функции из <a href="../spec/carrel-mailbox.md">carrel-mailbox.md</a>: человек подключает свой ящик по IMAP и SMTP, читает его в Carrel и пишет с него. <b>Отдельный файл, основной макет не тронут.</b> Здесь те же классы, CSS и спрайт, что в <a href="carrel-ui-mockups.html">carrel-ui-mockups.html</a> на коммите e9c5180. Новое лежит отдельно: правила — в блоке <code>&lt;style data-tc-candidate&gt;</code>, значки — в конце спрайта. Если функцию возьмут в работу, раздел целиком переезжает в основной макет, а блок правил — в <code>data-tc</code> (M-10).</p>
+<p class="lede">Кадры к отложенной функции из <code>docs/spec/carrel-mailbox.md</code> в Carrel: человек подключает свой ящик по IMAP и SMTP, читает его в Carrel и пишет с него. <b>Отдельный файл, основной макет не тронут; живёт только в Typecase.</b> Здесь те же классы, CSS и спрайт, что в <a href="carrel-ui-mockups.html">carrel-ui-mockups.html</a> на коммите Typecase 29e07b0. Новое лежит отдельно: правила — в блоке <code>&lt;style data-tc-candidate&gt;</code>, значки — в конце спрайта. Если функцию возьмут в работу, раздел целиком переезжает в основной макет, а блок правил — в <code>data-tc</code> (M-10).</p>
 
 <div class="note"><b>Как читать.</b> Порядок разделов — как в списке кадров M-12. Номера кадров идут подряд, <code>s-mailbox-N</code>. Если раздел переедет в основной макет как есть, номера не придётся менять. Подпись у каждого кадра — «кандидат». Лестница ширин ниже работает так же, как в основном макете. <b>Метки «фрагмент»</b> — меню и листы: они рисуются рядом с экраном, с которого открываются.</div>
 
@@ -1627,7 +1630,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 
 <h2 id="s-mailbox">Почта ящика — кандидат</h2>
 <p><b>Два ящика на всех кадрах.</b> <b>home</b> — <span class="tc-mono">mix@home.example</span>: свой почтовый сервер, в нём всё работает. <b>office</b> — <span class="tc-mono">m.yenuchenko@office.example</span>: рабочий ящик, у которого что-то идёт не так. Подписи ящиков однословные, как у подключений DAV: подпись — первая половина штампа источника, «home · Inbox».</p>
-<p><b>Почта — канал, а не коллекция</b> (C-2.1 в M-10). Поэтому у ящика нет цвета, а у папок нет флажков. Папку открывают по одной, как папку в файлах, а не складывают в единый вид. Там, где письмо стоит среди записей (поиск, хронология), его полоска пустая: цвета коллекции у письма нет.</p>
+<p><b>Почта — канал, а не коллекция</b> (C-2.1 в M-10). Поэтому у папок нет флажков: папку открывают по одной, как папку в файлах, а не складывают в единый вид. <b>Цвет у ящика есть</b> — его выбирают при подключении, как цвет коллекции (решение владельца). Там, где письмо стоит среди записей (поиск, хронология), полоска говорит, из какого оно ящика: home — рыжий, office — синий.</p>
 
 <h3 id="mb-rail">1. Рейл и список папки</h3>
 
@@ -1658,7 +1661,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -1671,7 +1674,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -1772,7 +1775,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
     </div>
   </div>
 </div>
-<figcaption><b>Раздел Mail стоит в рейле после Files.</b> Он есть у всех, как только администратор включил почту ящиков. Число у раздела — непрочитанные во входящих всех ящиков. Под разделами — ящик за ящиком: подпись ящика, под ней его папки. Специальные папки берут значки по роли и идут первыми, в постоянном порядке: Inbox, Drafts, Sent, Archive, Spam, Trash. Порядок не зависит от того, как их назвал сервер. Остальные папки — по имени с сервера. Число у папки — непрочитанные; счётчики берутся одним <span class="tc-mono">STATUS</span> на ящик при сборке рейла.<br><br><b>Папки — дерево, а не флажки.</b> Открыта всегда одна папка одного ящика: общих входящих нет (M-9). Флажки тут обещали бы единый вид, которого нет. <b>Ящик, который не ответил, остаётся в рейле</b> с причиной и кнопкой Retry прямо под своей подписью: это состояние источника (S-21), а не ошибка экрана. Другой ящик и весь остальной стол работают.<br><br><b>Строка письма</b> — отправитель, тема с началом текста, скрепка, размер, дата прихода. Непрочитанное выделено начертанием, а не цветом: цвет в строке закреплён за источником. Флажок «важное» — кнопка в самой строке: одно нажатие, без открытия письма. Список плоский, без цепочек (M-5). <b>Страница — 50 писем</b> (<code>CARREL_MAILBOX_PAGE</code>), листается кнопками. Бесконечной прокрутки нет: папка не выкачивается целиком никогда, и «1–50 of 1 284» честно говорит, сколько на сервере. Поля «Filter» у списка нет, в отличие от контактов: фильтр просеивает загруженное, а здесь загружена одна страница. Поиск по папке — общий поиск, суженный до писем (кадр «Поиск в разделе почты»).</figcaption>
+<figcaption><b>Раздел Mail стоит в рейле после Files.</b> Он есть у всех, как только администратор включил почту ящиков. Число у раздела — непрочитанные во входящих всех ящиков. Под разделами — ящик за ящиком: подпись ящика, под ней его папки. Специальные папки берут значки по роли и идут первыми, в постоянном порядке: Inbox, Drafts, Sent, Archive, Spam, Trash. Порядок не зависит от того, как их назвал сервер. Остальные папки — по имени с сервера. Число у папки — непрочитанные; счётчики берутся одним <span class="tc-mono">STATUS</span> на ящик при сборке рейла.<br><br><b>Папки — дерево, а не флажки.</b> Открыта всегда одна папка одного ящика: общих входящих нет (M-9). Флажки тут обещали бы единый вид, которого нет. <b>Ящик, который не ответил, остаётся в рейле</b> с причиной и кнопкой Retry прямо под своей подписью: это состояние источника (S-21), а не ошибка экрана. Другой ящик и весь остальной стол работают.<br><br><b>Строка письма</b> — отправитель, тема с началом текста, скрепка, размер, дата прихода. Непрочитанное выделено начертанием, а не цветом: цвет в строке закреплён за источником. Флажок «важное» — кнопка в самой строке: одно нажатие, без открытия письма. Список плоский, без цепочек (M-5). <b>Страница — 50 писем</b> (<code>CARREL_MAILBOX_PAGE</code>), листается кнопками. Бесконечной прокрутки нет: папка не выкачивается целиком никогда, и «1–50 of 1 284» честно говорит, сколько на сервере. Поля «Filter» у списка нет, в отличие от контактов: фильтр просеивает загруженное, а здесь загружена одна страница. Найти письмо — общий поиск в шапке: сегмент Mail и флажки папок сужают выдачу до нужного (кадр «Поиск по всем источникам · с почтой»).</figcaption>
 </figure>
 
 <figure>
@@ -1847,7 +1850,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -1860,7 +1863,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -2040,7 +2043,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -2053,7 +2056,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -2064,7 +2067,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
       </div>
       <div class="tc-main">
         <div class="tc-head tc-head--rule">
-          <div class="tc-head__sub tc-head__sub--top0">home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
+          <div class="tc-head__sub tc-head__sub--top0"><span class="tc-mark tc-mark--h12" data-tc-colour="#A05A2C"></span>home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-reply"/></svg>Reply</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-replyall"/></svg>Reply all</button>
@@ -2214,7 +2217,7 @@ Read    2 min ago</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -2227,7 +2230,7 @@ Read    2 min ago</div>
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -2238,7 +2241,7 @@ Read    2 min ago</div>
       </div>
       <div class="tc-main">
         <div class="tc-head tc-head--rule">
-          <div class="tc-head__sub tc-head__sub--top0">home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
+          <div class="tc-head__sub tc-head__sub--top0"><span class="tc-mark tc-mark--h12" data-tc-colour="#A05A2C"></span>home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-reply"/></svg>Reply</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-replyall"/></svg>Reply all</button>
@@ -2449,7 +2452,7 @@ Read    2 min ago</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -2462,7 +2465,7 @@ Read    2 min ago</div>
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -2473,7 +2476,7 @@ Read    2 min ago</div>
       </div>
       <div class="tc-main">
         <div class="tc-head tc-head--rule">
-          <div class="tc-head__sub tc-head__sub--top0">home · Inbox · <span class="tc-mono">2026-09-23 19:30</span></div>
+          <div class="tc-head__sub tc-head__sub--top0"><span class="tc-mark tc-mark--h12" data-tc-colour="#A05A2C"></span>home · Inbox · <span class="tc-mono">2026-09-23 19:30</span></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-reply"/></svg>Reply</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-forward"/></svg>Forward</button>
@@ -2549,12 +2552,12 @@ Read    2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">0</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__meta">2</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">2</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">0</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">office · Archive</span><span class="tc-tickrow__meta" title="The mail server did not answer in 8 s. Everything else is already in the list.">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">office · Sent</span><span class="tc-tickrow__meta">—</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">2</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">1</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">0</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta">1</span></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Archive</span><span class="tc-tickrow__meta" title="The mail server did not answer in 8 s. Everything else is already in the list.">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Sent</span><span class="tc-tickrow__meta">—</span></div>
         </div>
       </div>
       <div class="tc-main">
@@ -2594,22 +2597,22 @@ Read    2 min ago</div>
         <div class="tc-list__group" data-part="results"><span class="tc-rubric">Mail</span><span class="tc-num">4</span></div>
         <div class="tc-list" data-part="results">
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">24 Sep</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">24 Sep</span>
             <span class="tc-row__title"><b>Смет</b>а по второму этапу</span><span class="tc-row__excerpt tc-row__detail">from Пётр Смирнов</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">24 Sep</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">24 Sep</span>
             <span class="tc-row__title">Вёрстка сборника: правки и встреча в четверг</span><span class="tc-row__excerpt tc-row__detail">from Анна Ковалёва</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">12 Aug</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">12 Aug</span>
             <span class="tc-row__title">Re: <b>Смет</b>а подрядчика</span><span class="tc-row__excerpt tc-row__detail">to Пётр Смирнов</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Sent</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">3 Jul</span>
+            <span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-mono tc-row__lead">3 Jul</span>
             <span class="tc-row__title"><b>Смет</b>ы на ремонт офиса — сводная</span><span class="tc-row__excerpt tc-row__detail">from Бухгалтерия</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">office · Inbox</span>
           </div>
@@ -2619,94 +2622,15 @@ Read    2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Тот же экран поиска</b>, что 7.6 основного макета. Добавлены сегмент <b>Mail</b> и папки ящиков среди источников. Фильтр Mail режет уже пришедшее, без второго опроса. Письма стоят своей группой после записей и файлов: в выдаче их обычно больше всего, и впереди они бы заслонили запись. <b>Строка письма</b> — дата, тема, кто и в какую сторону писал (from / to), штамп «ящик · папка». Полоска пустая: у письма нет цвета коллекции.<br><br><b>Главное в выдаче — строка внизу, что искал сервер.</b> Своего индекса у Carrel нет. Один сервер ищет по телу письма, другой только по заголовкам. Молчание на этот счёт читалось бы как «такого письма нет». Это та же честность, что строка о файлах в 7.6: там — «содержимое файлов не ищется». <b>Медленный ящик выдачу не держит:</b> его папка помечена в рейле, как любой источник, с Retry у себя.</figcaption>
+<figcaption><b>Тот же экран поиска</b>, что 7.6 основного макета. Добавлены сегмент <b>Mail</b> и папки ящиков среди источников. Фильтр Mail режет уже пришедшее, без второго опроса. Письма стоят своей группой после записей и файлов: в выдаче их обычно больше всего, и впереди они бы заслонили запись. <b>Строка письма</b> — дата, тема, кто и в какую сторону писал (from / to), штамп «ящик · папка». Полоска — цвет ящика, выбранный при подключении.<br><br><b>Главное в выдаче — строка внизу, что искал сервер.</b> Своего индекса у Carrel нет. Один сервер ищет по телу письма, другой только по заголовкам. Молчание на этот счёт читалось бы как «такого письма нет». Это та же честность, что строка о файлах в 7.6: там — «содержимое файлов не ищется». <b>Медленный ящик выдачу не держит:</b> его папка помечена в рейле, как любой источник, с Retry у себя.<br><br><b>Отдельного поиска в разделе почты нет.</b> Поле в шапке ищет везде, из какого раздела его ни открой, — как в основном макете. «Искать только в письмах» — сегмент Mail. «Только в этих папках» — флажки источников в рейле. Строка M-6 «поиск в разделе почты — тот же поиск, суженный до писем» здесь понята буквально: это та же выдача с включённым фильтром, а не второй режим поля.</figcaption>
 </figure>
 
-<figure>
-<div class="frame" data-frame="s-mailbox-15" data-screen="/app/search?kind=mail">
-  <div class="frame-label"><span>Поиск в разделе почты</span><span class="frag">кандидат</span><i>/app/search?q=…&amp;kind=mail</i></div>
-  <div class="tc-root tc-shell">
-    <div class="tc-top">
-      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
-      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><use href="#i-close"/></svg><input class="tc-q" type="search" value="смета" aria-label="смета"></div>
-      <div class="tc-top__actions">
-        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
-        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
-        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
-      </div>
-    </div>
-    <div class="tc-shell__body">
-      <div class="tc-shell__rail">
-        <div class="tc-nav">
-          <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
-          <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
-          <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
-          <a class="tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
-          <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
-          <a class="is-on tc-nav__item" href="#"><svg><use href="#i-mail"/></svg>Mail<span class="tc-num">12</span></a>
-          <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
-        </div>
-        <div class="tc-railsec">
-          <div class="tc-rubric">Search in <span class="tc-mono tc-mono--ls0">4 / 7</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">2</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">0</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Стройка</span><span class="tc-tickrow__meta">3</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Рассылки</span><span class="tc-tickrow__meta">—</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Spam</span><span class="tc-tickrow__meta">—</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Trash</span><span class="tc-tickrow__meta">—</span></div>
-        </div>
-      </div>
-      <div class="tc-main">
-        <div class="tc-head">
-          <div class="tc-head__titles"><div class="tc-head__title">«смета» in mail</div><div class="tc-head__sub">home · 4 of 7 folders · 6 letters</div></div>
-          <div class="tc-acts"><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-search"/></svg>Search everything</button></div>
-        </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="100%"></i></span>Done · 4 of 4 folders answered<span class="tc-mono">0.9 s</span><span class="tc-push tc-line tc-line--gap-8"><span class="tc-mono">answered 11:44</span><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Search again</button></span></div>
-        <div class="tc-list">
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">24 Sep</span>
-            <span class="tc-row__title"><b>Смет</b>а по второму этапу</span><span class="tc-row__excerpt tc-row__detail">from Пётр Смирнов</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
-          </div>
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">24 Sep</span>
-            <span class="tc-row__title">Вёрстка сборника: правки и встреча в четверг</span><span class="tc-row__excerpt tc-row__detail">from Анна Ковалёва</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
-          </div>
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">2 Sep</span>
-            <span class="tc-row__title">Кровля: <b>смет</b>а и сроки</span><span class="tc-row__excerpt tc-row__detail">from Пётр Смирнов</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Стройка</span>
-          </div>
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">20 Aug</span>
-            <span class="tc-row__title">Фасад — предварительная <b>смет</b>а</span><span class="tc-row__excerpt tc-row__detail">from Пётр Смирнов</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Стройка</span>
-          </div>
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">14 Aug</span>
-            <span class="tc-row__title">Договор подряда и <b>смет</b>а</span><span class="tc-row__excerpt tc-row__detail">to Пётр Смирнов</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Стройка</span>
-          </div>
-          <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">12 Aug</span>
-            <span class="tc-row__title">Re: <b>Смет</b>а подрядчика</span><span class="tc-row__excerpt tc-row__detail">to Пётр Смирнов</span>
-            <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Sent</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<figcaption><b>Поиск в разделе почты — тот же поиск,</b> суженный до писем и до папок, отмеченных в рейле. Запрос, набранный в шапке, пока открыт раздел Mail, ищет в папках открытого ящика. По умолчанию отмечены Inbox, Sent и Archive, а человек добавил «Стройку». Своей механики у этого поиска нет. «Search everything» снимает сужение и открывает общий поиск с тем же запросом. Раздел Mail в рейле остаётся подсвеченным: человек не уходил из почты, в отличие от общего поиска, где не подсвечено ничего.</figcaption>
-</figure>
 
 <h3 id="mb-sheet">5. Лист письма со своего ящика</h3>
 <p><b>Лист один на оба пути</b> (<code>MailSheet</code>, 7.18 основного макета). «С какого адреса» становится выбором: ящики с работающей отправкой и релей экземпляра, если он включён. По умолчанию — ящик, из которого начат ответ. Исходящее письмо — только текст.</p>
 
 <figure>
-<div class="frame" data-frame="s-mailbox-16" data-screen="/app/mail/compose">
+<div class="frame" data-frame="s-mailbox-15" data-screen="/app/mail/compose">
   <div class="frame-label"><span>Ответ со своего ящика</span><span class="frag">кандидат</span><i>Reply all на письме</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
@@ -2731,7 +2655,7 @@ Read    2 min ago</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">home</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span></div>
           <div class="tc-tree tc-tree--padx8">
             <div class="is-on tc-tree__row"><svg><use href="#i-inbox"/></svg>Inbox<span class="tc-num">12</span></div>
             <div class="tc-tree__row"><svg><use href="#i-pencil"/></svg>Drafts<span class="tc-num">1</span></div>
@@ -2744,7 +2668,7 @@ Read    2 min ago</div>
           </div>
         </div>
         <div class="tc-railsec">
-          <div class="tc-rubric">office</div>
+          <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office</span></div>
           <div class="tc-railsec__note"><span class="tc-dim--danger" title="mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.">no reply · 8 s</span> <button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
         <div class="tc-railfoot">
@@ -2755,7 +2679,7 @@ Read    2 min ago</div>
       </div>
       <div class="tc-main">
         <div class="tc-head tc-head--rule">
-          <div class="tc-head__sub tc-head__sub--top0">home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
+          <div class="tc-head__sub tc-head__sub--top0"><span class="tc-mark tc-mark--h12" data-tc-colour="#A05A2C"></span>home · Inbox · <span class="tc-mono">2026-09-24 10:12</span></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-reply"/></svg>Reply</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-replyall"/></svg>Reply all</button>
@@ -2849,16 +2773,21 @@ Read    2 min ago</div>
           <div class="tc-sheet__body">
             <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
             <div class="tc-field tc-field--w100"><label>To</label>
-              <span class="tc-in tc-in--wrap-gap5"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span></div>
+              <span class="tc-in tc-in--wrap-gap5"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span><span class="tc-push"><button class="tc-btn is-sm" title="Add blind copy" type="button">Bcc</button></span></span></div>
             <div class="tc-field tc-field--w100"><label>Cc</label>
               <span class="tc-in tc-in--wrap-gap5"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Пётр Смирнов · p.smirnov@example.org</span></span></div>
             <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" value="Re: Вёрстка сборника: правки и встреча в четверг" aria-label="Subject"></div>
             <textarea class="tc-in is-area tc-in--note is-focus">Анна, спасибо! Подписи поправлю к пятнице, исправленная вёрстка во вложении. В четверг буду.
 
+-- 
+Михаил Енученко
+вёрстка и допечатная подготовка
+
 2026-09-24 10:12, Анна Ковалёва:
 &gt; Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:
 &gt; — на с. 14 и 37 съехали подписи к иллюстрациям;
 &gt; — в оглавлении не тот номер у главы «Переплёт»;</textarea>
+            <span class="tc-field__hint">Signature of <b>home</b>, set in Connections → home → Edit. It follows the mailbox you send from.</span>
             <div class="tc-sec tc-sec--flush-flush-padt11">
               <div class="tc-rubric tc-line tc-line--gap-8">Attached<span class="tc-num">1</span>
                 <span class="tc-push tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span></div>
@@ -2883,7 +2812,22 @@ Read    2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («2 of 10 recipients») здесь не появляется.<br><br><b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
+<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>Cc и Bcc видны, только когда в них кто-то есть.</b> «Reply all» заполнил Cc, поэтому поле стоит. Bcc пуст, и от него осталась кнопка в конце поля To. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («2 of 10 recipients») здесь не появляется.<br><br><b>Подпись — своя у каждого ящика</b> и встаёт под текстом, над цитатой, после строки <span class="tc-mono">-- </span>: почтовые программы её узнают и сворачивают. Сменили ящик в поле From — подпись в тексте меняется на подпись нового ящика. Задаётся она в правке ящика (кадр «Ящик · правка»). <b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
+</figure>
+
+<figure>
+<div class="frame cap660" data-frame="s-mailbox-16">
+  <div class="frame-label"><span>Новое письмо · Cc и Bcc спрятаны</span><span class="frag">фрагмент</span><i>шапка листа, Write a letter из хронологии</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+    <div class="tc-stack tc-stack--gap-10">
+      <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
+      <div class="tc-field tc-field--w100"><label>To</label>
+        <span class="tc-in tc-in--wrap-gap5 is-focus"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span><span class="tc-push tc-line tc-line--gap-6"><button class="tc-btn is-sm" title="Add copy" type="button">Cc</button><button class="tc-btn is-sm" title="Add blind copy" type="button">Bcc</button></span></span></div>
+      <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in is-ph" type="text" placeholder="Subject" aria-label="Subject"></div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Копии нужны редко, и два пустых поля каждый раз толкали бы текст вниз.</b> Поэтому новое письмо открывается с одним To. Кнопки <b>Cc</b> и <b>Bcc</b> стоят в конце его строки. Нажатие открывает поле под To и ставит в него курсор, а кнопка пропадает. Поле, в котором кто-то есть, не прячется: ответ всем, черновик с копией, пересылка открываются с ним. Опустевшее поле при следующем открытии снова спрятано.</figcaption>
 </figure>
 
 <div class="frames">
@@ -3007,10 +2951,10 @@ DATA                → 550 5.7.1 Daily sending limit reached
         </div>
         <div class="tc-railsec tc-railsec--top14">
           <div class="tc-rubric">Mail</div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">3</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">2</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-mail"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta" title="mail.office.example did not answer in 8 s">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">2</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">1</span></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta" title="mail.office.example did not answer in 8 s">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
         </div>
       </div>
       <div class="tc-main">
@@ -3040,17 +2984,17 @@ DATA                → 550 5.7.1 Daily sending limit reached
         <div class="tc-list__group"><span class="tc-rubric">September 2026</span><span class="tc-num">4</span></div>
         <div class="tc-list">
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">24 Sep</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">24 Sep</span>
             <span class="tc-row__title">Вёрстка сборника: правки и встреча в четверг</span><span class="tc-row__excerpt tc-row__detail">from</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">22 Sep</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">22 Sep</span>
             <span class="tc-row__title">Вёрстка сборника, третья</span><span class="tc-row__excerpt tc-row__detail">to</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Sent</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">18 Sep</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">18 Sep</span>
             <span class="tc-row__title">Тираж: сроки печати</span><span class="tc-row__excerpt tc-row__detail">cc</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Inbox</span>
           </div>
@@ -3068,12 +3012,12 @@ DATA                → 550 5.7.1 Daily sending limit reached
             <span class="tc-row__cell tc-row__caption">task</span><span class="tc-row__cell tc-row__source">nextcloud · Работа</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">3 Aug</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">3 Aug</span>
             <span class="tc-row__title">Обложка: два варианта</span><span class="tc-row__excerpt tc-row__detail">from</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Archive</span>
           </div>
           <div class="tc-row tc-row--find">
-            <span class="tc-mark is-mail"></span><span class="tc-mono tc-row__lead">1 Aug</span>
+            <span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-mono tc-row__lead">1 Aug</span>
             <span class="tc-row__title">Re: Обложка: два варианта</span><span class="tc-row__excerpt tc-row__detail">to</span>
             <span class="tc-row__cell tc-row__caption">letter</span><span class="tc-row__cell tc-row__source">home · Sent</span>
           </div>
@@ -3128,6 +3072,15 @@ DATA                → 550 5.7.1 Daily sending limit reached
         <div class="tc-form tc-form--padl0-padr0">
           <div class="tc-field tc-field--lg"><label>Email address</label><input class="tc-in" type="text" value="mix.letters@yandex.ru" aria-label="Email address"></div>
           <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in" type="text" value="yandex" aria-label="Label"><span class="tc-field__hint">How this mailbox is named in the rail: «yandex · Inbox».</span></div>
+          <div class="tc-field tc-field--md"><label>Colour</label>
+            <span class="tc-line tc-line--gap-9 tc-field__swatches">
+              <span data-tc-colour="#4A6B52" class="tc-field__swatch"></span>
+              <span data-tc-colour="#3F6E8C" class="tc-field__swatch"></span>
+              <span data-tc-colour="#6B4E7A" class="tc-field__swatch tc-field__swatch--on"></span>
+              <span data-tc-colour="#A05A2C" class="tc-field__swatch"></span>
+              <span data-tc-colour="#8C6239" class="tc-field__swatch"></span>
+              <span data-tc-colour="#9A9280" class="tc-field__swatch"></span>
+            </span></div>
           <div class="tc-msg is-accent tc-msg--flush tc-grow">Yandex lets mail programs in with an <b>app password</b>, not with the password of your Yandex account. Make one in Yandex ID → Security → App passwords → Mail, and paste it here.</div>
           <div class="tc-field tc-field--md"><label>App password</label><input class="tc-in is-focus" type="text" value="••••••••••••••••" aria-label="App password"></div>
           <div class="tc-fset tc-grow">
@@ -3298,7 +3251,7 @@ SMTP  smtp.yandex.ru:465  TLS
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">Mailboxes<span class="tc-mono tc-mono--ls0">2</span></div>
 
           <div class="tc-card">
-            <div class="tc-rubric">home
+            <div class="tc-rubric"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span>home</span>
               <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">mix@home.example · IMAP mail.home.example:993 · SMTP mail.home.example:465 · up to 25 MB · last answer 1 min ago</div>
@@ -3316,7 +3269,7 @@ SMTP  smtp.yandex.ru:465  TLS
           </div>
 
           <div class="tc-card tc-card--alert">
-            <div class="tc-rubric tc-rubric--danger">office <span class="tc-badge is-alert">sending does not work</span>
+            <div class="tc-rubric tc-rubric--danger"><span class="tc-line tc-line--gap-6"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span>office <span class="tc-badge is-alert">sending does not work</span></span>
               <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">m.yenuchenko@office.example · IMAP mail.office.example:993 · SMTP mail.office.example:587 · reading works</div>
@@ -3337,11 +3290,80 @@ SMTP  smtp.yandex.ru:465  TLS
     </div>
   </div>
 </div>
-<figcaption><b>Ящики — своей рубрикой между DAV-серверами и подписками</b>, той же карточкой: подпись, кнопки, строка адреса, таблица, диагностика в карточке. Карточки DAV и подписок здесь свёрнуты до строки адреса, чтобы кадр не повторял 7.11. Разница в содержимом таблицы: у DAV это коллекции, у ящика — <b>роли специальных папок</b> и то, откуда роль взялась. «You chose it» отличает ответ человека от объявления сервера: если с папками что-то не так, видно, чьё это решение. Отметка о копии отправленного — в подвале карточки, где её можно переключить.<br><br><b>Ящик, с которого не уходят письма, помечен как отказавший DAV</b>, но с меткой, что именно не работает: чтение живо, и красная карточка без метки врала бы. Строка внизу карточки называет следствие для листа письма.</figcaption>
+<figcaption><b>Ящики — своей рубрикой между DAV-серверами и подписками</b>, той же карточкой: подпись с цветом ящика, кнопки, строка адреса, таблица, диагностика в карточке. Карточки DAV и подписок здесь свёрнуты до строки адреса, чтобы кадр не повторял 7.11. Разница в содержимом таблицы: у DAV это коллекции, у ящика — <b>роли специальных папок</b> и то, откуда роль взялась. «You chose it» отличает ответ человека от объявления сервера: если с папками что-то не так, видно, чьё это решение. Отметка о копии отправленного — в подвале карточки, где её можно переключить. <b>Edit</b> открывает правку ящика: подпись, имя в From, пароль и серверы, кадр следом.<br><br><b>Ящик, с которого не уходят письма, помечен как отказавший DAV</b>, но с меткой, что именно не работает: чтение живо, и красная карточка без метки врала бы. Строка внизу карточки называет следствие для листа письма.</figcaption>
 </figure>
 
 <figure>
-<div class="frame cap820" data-frame="s-mailbox-27">
+<div class="frame" data-frame="s-mailbox-27" data-screen="/app/settings/connections/mailbox/{mailbox}">
+  <div class="frame-label"><span>Ящик · правка</span><span class="frag">кандидат</span><i>диалог · Connections → home → Edit</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" value="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">5</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-09-24 09:41</span></span></div>
+          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-09-24 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-stack__item">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max560">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">home</div><div class="tc-head__sub"><span class="tc-mono">mix@home.example</span> · mailbox</div></div></div>
+        <div class="tc-form tc-form--padl0-padr0">
+          <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in" type="text" value="home" aria-label="Label"></div>
+          <div class="tc-field tc-field--md"><label>Colour</label>
+            <span class="tc-line tc-line--gap-9 tc-field__swatches">
+              <span data-tc-colour="#4A6B52" class="tc-field__swatch"></span>
+              <span data-tc-colour="#3F6E8C" class="tc-field__swatch"></span>
+              <span data-tc-colour="#6B4E7A" class="tc-field__swatch"></span>
+              <span data-tc-colour="#A05A2C" class="tc-field__swatch tc-field__swatch--on"></span>
+              <span data-tc-colour="#8C6239" class="tc-field__swatch"></span>
+              <span data-tc-colour="#9A9280" class="tc-field__swatch"></span>
+            </span></div>
+          <div class="tc-field tc-field--md"><label>Name in From</label><input class="tc-in" type="text" value="Михаил Енученко" aria-label="Name in From"><span class="tc-field__hint">Recipients see «Михаил Енученко &lt;mix@home.example&gt;». Your profile name until you change it here.</span></div>
+          <div class="tc-field tc-field--full"><label>Signature</label><textarea class="tc-in is-area is-focus" aria-label="Signature">Михаил Енученко
+вёрстка и допечатная подготовка</textarea>
+            <span class="tc-field__hint">Goes under your text in every letter from home, above the quote, after a line «-- » that mail programs recognise and fold. Plain text, like the letter. Empty — no signature.</span></div>
+          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="text" placeholder="leave blank to keep the current one" aria-label="Password"></div>
+          <div class="tc-fset tc-grow">
+            <div class="tc-rubric">Servers</div>
+            <div class="tc-diag tc-grow">IMAP  mail.home.example:993  TLS
+SMTP  mail.home.example:465  TLS
+      found by SRV</div>
+            <button class="tc-btn is-sm" type="button">Enter servers by hand</button>
+          </div>
+        </div>
+        <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="button">Save</button><button class="tc-btn" type="button">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Подпись, имя и цвет — у ящика, а не у профиля.</b> Цвет — тот же выбор, что у коллекции: им окрашены метка ящика в рейле и полоска письма в поиске и хронологии. С рабочего ящика пишут одной подписью, с домашнего — другой, иногда и под другим именем. Поэтому обе вещи живут в подключении ящика, в том же блобе, что пароль, и открываются кнопкой Edit на его карточке. Имя по умолчанию берётся из профиля, и подсказка показывает, как его увидит получатель. <b>Подпись — простой текст</b>, как и само письмо: форматировать её нечем и незачем. Строку <span class="tc-mono">-- </span> Carrel ставит сам, человек её не набирает. Роли специальных папок здесь не повторяются: они в таблице на карточке ящика, у каждой своя кнопка Change.</figcaption>
+</figure>
+
+<figure>
+<div class="frame cap820" data-frame="s-mailbox-28">
   <div class="frame-label"><span>Почта выключена на экземпляре</span><span class="frag">фрагмент</span><i>рубрика Mailboxes того же экрана</i></div>
   <div class="tc-root tc-root--on-bg tc-root--pad14">
     <div class="tc-stack tc-stack--gap-10">
@@ -3364,7 +3386,7 @@ SMTP  smtp.yandex.ru:465  TLS
 <h3 id="mb-admin">9. Настройки экземпляра</h3>
 
 <figure>
-<div class="frame" data-frame="s-mailbox-28" data-screen="/admin/settings">
+<div class="frame" data-frame="s-mailbox-29" data-screen="/admin/settings">
   <div class="frame-label"><span>Администрирование · настройки, свои ящики людей</span><span class="frag">кандидат</span><i>/admin/settings</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
@@ -3434,7 +3456,7 @@ SMTP  smtp.yandex.ru:465  TLS
 
 <div class="frames">
   <figure style="flex:1 1 400px">
-  <div class="frame" data-frame="s-mailbox-29">
+  <div class="frame" data-frame="s-mailbox-30">
     <div class="frame-label"><span>Удалить навсегда из корзины</span><span class="frag">фрагмент</span><i>лист поверх Trash</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad16">
       <div class="tc-sheet tc-sheet--max100pc-full">
@@ -3455,7 +3477,7 @@ SMTP  smtp.yandex.ru:465  TLS
   </figure>
 
   <figure style="flex:1 1 400px">
-  <div class="frame" data-frame="s-mailbox-30">
+  <div class="frame" data-frame="s-mailbox-31">
     <div class="frame-label"><span>Удалить, когда корзины нет</span><span class="frag">фрагмент</span><i>лист поверх любой папки ящика без Trash</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad16">
       <div class="tc-sheet tc-sheet--max100pc-full">
@@ -3475,7 +3497,7 @@ SMTP  smtp.yandex.ru:465  TLS
   </figure>
 
   <figure style="flex:1 1 400px">
-  <div class="frame" data-frame="s-mailbox-31">
+  <div class="frame" data-frame="s-mailbox-32">
     <div class="frame-label"><span>Закрыть лист, когда черновикам некуда лечь</span><span class="frag">фрагмент</span><i>поверх листа письма</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad16">
       <div class="tc-sheet tc-sheet--max100pc-full">
@@ -3500,7 +3522,6 @@ SMTP  smtp.yandex.ru:465  TLS
 <table class="doc">
   <thead><tr><th>Вопрос</th><th>Где видно</th><th>Как нарисовано сейчас</th></tr></thead>
   <tbody>
-    <tr><td>Полоска письма в поиске и хронологии</td><td>«Поиск по всем источникам · с почтой», «Человек · хронология с письмами»</td><td>Пустая рамка (<code>tc-mark is-mail</code>): у ящика нет цвета, потому что почта — канал, а не коллекция. Другой путь — дать ящику цвет на подключении, как коллекции. Тогда в строке будет видно, какой ящик, но почта станет выглядеть коллекцией.</td></tr>
     <tr><td>Чьи непрочитанные у раздела Mail</td><td>«Почта · входящие»</td><td>Сумма непрочитанных во входящих всех ящиков. Спам и прочие папки не считаются, иначе число ничего не значит. Ящик без ответа в сумму не входит.</td></tr>
     <tr><td>Рейл на экране письма</td><td>«Письмо · чтение»</td><td>Остаются папки ящика. У заметки там соседние заметки. Для почты кажется нужнее перейти в другую папку, чем листать соседние письма. Соседей можно добавить стрелками в шапке письма.</td></tr>
     <tr><td>Нижняя панель телефона</td><td>любой кадр на ступени 390</td><td>Mail стал седьмым пунктом, и на 390 он влезает. Если пунктов станет больше, Duplicates придётся уводить в ящик.</td></tr>

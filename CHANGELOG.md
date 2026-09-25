@@ -6,7 +6,23 @@ do, not what the authors did.
 
 ## Unreleased
 
-Nothing yet. Next: the owner looks through the frames the one-off fold moved
+### Mockup
+
+- Mailbox candidate (`carrel-mailbox-mockups.html`): each mailbox has its own
+  signature and name in From, set in a new «Ящик · правка» frame and shown in
+  the reply sheet under the text, after «-- ». The frame of a separate search
+  in the mail section is gone: the header search is global everywhere, and
+  mail is narrowed by the Mail segment and the folder ticks. File rows keep
+  the icon on the name's line (`.tc-row__name` as a row) — the main mockup's
+  «Файлы · обзор папки» and «Поиск по всем источникам» still put it above.
+- A mailbox gets a colour when connected, as a collection does: its mark in
+  the rail and the mark of its letters in search and the timeline take it;
+  `.tc-mark.is-mail`, the hollow mark, is gone. Cc and Bcc in the letter sheet
+  are hidden behind buttons at the end of the To line and shown once pressed
+  or filled (new frame «Новое письмо · Cc и Bcc спрятаны», 32 in all).
+- The candidate file lives only in Typecase; Carrel no longer has a copy.
+
+Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
 moves, and then the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
