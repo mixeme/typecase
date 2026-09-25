@@ -6,7 +6,34 @@ do, not what the authors did.
 
 ## Unreleased
 
-Nothing yet. Next: the owner looks through the frames the one-off fold moved
+### Changed
+
+- **The side column of a full-screen note is the details panel: 400 px, not
+  296.** `.tc-doc__layout` is `minmax(0,1fr) 400px` and `.tc-docmeta` is
+  400 px wide, as wide as `.tc-side` on every list; in a work area of 880 px
+  or less (`@container tcbox`) the column narrows to 296 again, and at 640 it
+  drops under the text as before. Nothing to do unless you sized something to
+  the old 296 — then measure against the new column. `.tc-cols--sidebar` keeps
+  296: it is a page column, not the details panel, and no longer follows the
+  note's column.
+
+### Mockup
+
+- A full-width field owns its line; only its control stops at 760 px — the
+  due date no longer climbs next to the description. The task form takes the
+  event's rubrics, head and foot; the published-links list creates nothing and
+  lists no feeds (a link is made where the thing lies); the bar's overflow
+  menu is open only while its "⋯" is shown; every details panel is 400 px; the
+  publish sheets fit their frame and keep the switch and the term at their own
+  width.
+- Edit forms keep one Save/Cancel pair, in the head; the foot holds only the
+  deletion. Four "⋯" with nothing behind them on their screen are gone
+  (timeline head, backup job rows, the task bar, the link rows under the
+  letter), and the task card in the list panel gets the "⋯" the other cards
+  have. Every remaining "⋯" and button arrow on a screen is drawn open as its
+  own frame right after that screen — 19 new frames, 226 in all.
+
+Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
 moves, and then the breaking 0.7.0 where the library prints the mockup
 ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).

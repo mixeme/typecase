@@ -8,7 +8,7 @@ import (
 
 // CSS prints All() as stylesheet text.
 func CSS() string {
-	return Format(All()) + shellHideSideCSS() + formSpacerCSS()
+	return Format(All()) + shellHideSideCSS() + docNarrowCSS() + formSpacerCSS()
 }
 
 // Format prints spec as stylesheet text. Box/Flow keys are sorted.

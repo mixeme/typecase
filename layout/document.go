@@ -1,8 +1,19 @@
 package layout
 
-// metaColumn is the reading side column (.m-doc, .m-metacol). One number for
-// the document layout, its meta block and, from step 7, ColsSidebar.
-const metaColumn = "296px"
+// metaColumn is the reading side column (.m-doc, .m-metacol): the details
+// panel, as wide as .tc-side. In a work area of 880 and less (400 of panel
+// plus 480 of text) it narrows to narrowMetaColumn (docNarrowCSS).
+const metaColumn = "400px"
+
+// narrowMetaColumn is the reading side column in a narrow work area;
+// ColsSidebar keeps it at every width — a page column, not the details panel.
+const narrowMetaColumn = "296px"
+
+func docNarrowCSS() string {
+	return "@container tcbox (max-width:880px){\n" +
+		".tc-doc__layout{grid-template-columns:minmax(0,1fr) " + narrowMetaColumn + "}\n" +
+		".tc-docmeta{width:auto}\n}\n" // the track sizes it
+}
 
 // Doc is .tc-doc__layout ↔ .m-doc.
 var Doc = Grid{

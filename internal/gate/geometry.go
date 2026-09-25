@@ -68,7 +68,7 @@ func CheckGeometryCSS(cssText string) error {
 		{".tc-list", "border-top-width", 0},
 		{".tc-head__title", "font-size", 22},
 		{".tc-queue", "width", 330},
-		{".tc-docmeta", "width", 296},
+		{".tc-docmeta", "width", 400},
 		{".tc-prose__h1", "font-size", 27},
 		{".tc-skel__line", "height", 9},
 		{".tc-meter", "height", 3},

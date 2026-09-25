@@ -120,7 +120,8 @@ func TestCSS_restBoxes(t *testing.T) {
 	css := layout.CSS()
 	for _, frag := range []string{
 		".tc-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}",
-		".tc-doc__layout{display:grid;grid-template-columns:minmax(0,1fr) 296px;min-height:0}",
+		".tc-doc__layout{display:grid;grid-template-columns:minmax(0,1fr) 400px;min-height:0}",
+		"@container tcbox (max-width:880px){\n.tc-doc__layout{grid-template-columns:minmax(0,1fr) 296px}\n.tc-docmeta{width:auto}\n}",
 		".tc-skel__line{",
 		"height:9px",
 		".tc-meter{",
@@ -170,8 +171,8 @@ func TestCSS_cols(t *testing.T) {
 		t.Fatalf("sidebar tracks %v", side)
 	}
 	doc := columnsOf(css, ".tc-doc__layout")
-	if len(doc) < 2 || side[1] != doc[1] {
-		t.Fatalf("sidebar must reuse doc meta column, sidebar %v doc %v", side, doc)
+	if len(doc) < 2 || doc[1] != "400px" {
+		t.Fatalf("doc meta column is the details panel, 400px: %v", doc)
 	}
 	if !strings.Contains(css, ".tc-cols--halves{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}") {
 		t.Fatal("halves base rule missing")

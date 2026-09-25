@@ -32,14 +32,14 @@ var ColsThirds = Grid{
 	Narrow: colsNarrow(),
 }
 
-// ColsSidebar is .tc-cols--sidebar: fluid + metaColumn, as .m-doc.
+// ColsSidebar is .tc-cols--sidebar: fluid + narrowMetaColumn.
 var ColsSidebar = Grid{
 	Selector:  ".tc-cols--sidebar",
 	Gap:       "14px",
 	Container: "tcbox",
 	Tracks: []Track{
 		{Size: "minmax(0,1fr)"},
-		{Size: metaColumn},
+		{Size: narrowMetaColumn},
 	},
 	Narrow: colsNarrow(),
 }
