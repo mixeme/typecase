@@ -32,6 +32,13 @@ do, not what the authors did.
   letter), and the task card in the list panel gets the "⋯" the other cards
   have. Every remaining "⋯" and button arrow on a screen is drawn open as its
   own frame right after that screen — 19 new frames, 226 in all.
+- Attach carries its arrow everywhere a record takes a file (from this
+  computer or from Files). Every dropdown field on a screen has its options
+  drawn as a frame next to that screen — statuses, priority, reminders, time
+  zone, repeat, phone and email labels, target collections, link term,
+  appearance, admin roles, mail encryption, the audit filter, the desktop
+  settings — 33 new frames, 259 in all. The appearance time zone is shown
+  read-only: it is the instance's, set by the administrator.
 
 Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
