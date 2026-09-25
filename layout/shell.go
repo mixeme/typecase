@@ -10,7 +10,7 @@ var Shell = Grid{
 }
 
 // ShellHasSide is .m-shell.has-side. The side track is auto: width lives on
-// .tc-side (400 / wide 440), so a closed panel and the 1190 hide collapse it.
+// .tc-side (400), so a closed panel and the 1190 hide collapse it.
 var ShellHasSide = Grid{
 	Selector: ".tc-shell__body:has(> .tc-shell__side)",
 	Tracks: []Track{
@@ -154,7 +154,6 @@ var shellBoxes = []Box{
 		"container": "tcbox / inline-size",
 		"width":     "400px",
 	}},
-	{Selector: ".tc-side--wide", Props: map[string]string{"width": "440px"}},
 	{Selector: ".tc-rail", Props: map[string]string{"background": "transparent"}},
 	{Selector: ".tc-nav__icon-svg", Props: map[string]string{"height": "15px", "width": "15px"}},
 	{Selector: ".tc-nav--bottom .tc-nav__icon-svg", Props: map[string]string{"height": "17px", "width": "17px"}},

@@ -294,7 +294,7 @@ func checkLookProbe(t *testing.T, id string, width, frame int, p lookProbe) {
 	wantSearch, _ := layout.Px(layout.Search.Props["width"])
 	wantField, _ := layout.Px(layout.SearchField.Props["height"])
 	wantMark := layoutSelPx(".tc-tickrow .tc-mark", "height")
-	wantSideWide := layoutSelPx(".tc-side--wide", "width")
+	wantSide := layoutSelPx(".tc-side", "width")
 	wantQueue, _ := layout.Px(layout.Queue.Props["width"])
 
 	if width >= 900 && p.NavHeight > 0 && !closeEnough(p.NavHeight, wantNav) {
@@ -356,8 +356,8 @@ func checkLookProbe(t *testing.T, id string, width, frame int, p lookProbe) {
 	}
 
 	if width == 1280 {
-		if id == "notes" && p.SideWidth > 0 && !closeEnough(p.SideWidth, wantSideWide) {
-			t.Fatalf("%s .tc-side width %.1f want %.0f", prefix, p.SideWidth, wantSideWide)
+		if id == "notes" && p.SideWidth > 0 && !closeEnough(p.SideWidth, wantSide) {
+			t.Fatalf("%s .tc-side width %.1f want %.0f", prefix, p.SideWidth, wantSide)
 		}
 		if id == "notes" && p.Rank2Buttons < 2 {
 			t.Fatalf("%s Rank2 buttons %d want >= 2 at 1280", prefix, p.Rank2Buttons)

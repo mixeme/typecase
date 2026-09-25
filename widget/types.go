@@ -105,14 +105,6 @@ const (
 	NavLayoutBottom NavLayout = "bottom"
 )
 
-// SideSize is the width tier of tc-side.
-type SideSize string
-
-const (
-	SideSizeDefault SideSize = ""
-	SideSizeWide    SideSize = "wide"
-)
-
 // ThumbSize is the geometry tier of tc-thumb.
 type ThumbSize string
 

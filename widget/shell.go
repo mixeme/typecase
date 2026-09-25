@@ -7,7 +7,7 @@ package widget
 // Состояния. wide | narrow; по ширине окна.
 // Инварианты. Пятой зоны нет; раскладка считается виджетом.
 // Поведение. Следит за шириной; рейл становится выдвижной панелью.
-// Геометрия. Рейл 264px; side 400px, wide 440px.
+// Геометрия. Рейл 264px; side 400px.
 // Содержимое. tc-top, tc-nav, tc-rail, tc-main, tc-side.
 // Чего нет. Нет своей прокрутки страницы.
 type Shell struct {
@@ -277,11 +277,11 @@ func (b Build) Render() string {
 // Side — tc-side
 //
 // Роль. Колонка справа, отвечающая на выделение.
-// Вход. Side{ Label, Title, Sub, Blocks, Actions, Open, Size }.
+// Вход. Side{ Label, Title, Sub, Blocks, Actions, Open }.
 // Состояния. open | closed.
 // Инварианты. Закрывается крестиком, кнопкой и Esc.
 // Поведение. Открытие, закрытие, возврат фокуса.
-// Геометрия. 400px, Size wide — 440px; содержимое прокручивается.
+// Геометрия. 400px, одна ширина на все панели; содержимое прокручивается.
 // Содержимое. tc-sec, tc-fields, tc-field, tc-pfield, tc-pfieldrow, tc-btn, tc-bar.
 // Чего нет. Своей семантики сохранения нет: панель несёт tc-pfield, не сетку tc-field.
 type Side struct {
@@ -291,7 +291,6 @@ type Side struct {
 	Blocks  []SideBlock
 	Actions []Action
 	Open    bool
-	Size    SideSize
 }
 
 func (s Side) IsZero() bool {
@@ -303,9 +302,6 @@ func (s Side) IsZero() bool {
 
 func (s Side) Render() string {
 	cls := "tc-side"
-	if s.Size == SideSizeWide {
-		cls = classes(cls, "tc-side--wide")
-	}
 	if s.Open {
 		cls = classes(cls, "is-open")
 	} else {

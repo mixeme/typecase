@@ -358,7 +358,6 @@ func notesSide() widget.Side {
 		Title: "Заметка со встречи 10.08",
 		Sub:   "nextcloud · Записи · 2 min ago",
 		Open:  true,
-		Size:  widget.SideSizeWide,
 		Blocks: []widget.SideBlock{
 			{PField: &title},
 			{PField: &text},

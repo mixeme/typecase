@@ -6,6 +6,13 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Breaking
+
+- **The wide details panel is gone: `widget.SideSizeWide`, the `SideSize`
+  type, the `Side.Size` field and the `.tc-side--wide` rule (440 px).** The
+  mockup has one panel width, 400 px, on every screen. Drop `Size:` from your
+  `widget.Side` literals; a panel that was wide is now 400 px like the others.
+
 ### Changed
 
 - **The side column of a full-screen note is the details panel: 400 px, not
