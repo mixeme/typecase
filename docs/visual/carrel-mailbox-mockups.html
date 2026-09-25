@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carrel — почта ящика, макеты-кандидаты</title>
-<!-- Собрано из docs/visual/carrel-ui-mockups.html на 29e07b0: CSS страницы,
+<!-- Собрано из docs/visual/carrel-ui-mockups.html на 22c1808: CSS страницы,
      data-tc и спрайт скопированы как есть. Правила кандидата — в третьем
      блоке <style data-tc-candidate>. -->
 <style>
@@ -447,7 +447,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-row.is-on{background:var(--tc-card)}
 .tc-row .tc-mark{width:3px;height:22px;border-radius:1px}
 .tc-row .tc-row__title{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Значок и имя файла — одна строка: .tc-root svg{display:block} иначе ставит значок над именем. */
+.tc-row__name{display:flex;align-items:center;gap:7px;min-width:0}
 .tc-row__name svg{width:15px;height:15px;flex:none;stroke:var(--tc-muted);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc-row__file{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-row__title.is-strong{font-weight:600}
 .tc-row .tc-row__excerpt{font-size:12px;color:var(--tc-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-row .tc-row__cell{font-size:11.5px;color:var(--tc-dusty);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -839,6 +842,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-btn,.tc-in,.tc-seg{height:38px}
   .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
   .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn,
+  .tc-form .tc-btn:not(.is-sm),.tc-fset .tc-btn:not(.is-sm),.tc-field .tc-btn:not(.is-sm),
   .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
   .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
   .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
@@ -1445,7 +1449,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-dim.tc-dim{color:var(--tc-dusty)}
 /* names-without-rule: tc-shell tc-row__lead tc-row__due tc-row__date tc-row__size
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
-   tc-row__file tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
+   tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
    tc-row__subtitle
    — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
@@ -1469,13 +1473,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-row__topic{font-size:13px;color:var(--tc-ink)}
 .tc-row.is-unread .tc-row__title,.tc-row.is-unread .tc-row__topic{font-weight:600}
 .tc-row.is-unread .tc-row__date{color:var(--tc-ink)}
-
-/* Имя файла в строке — значок и имя в одну строку. В data-tc основного
-   макета этого правила нет, и .tc-root svg{display:block} ставит значок над
-   именем (s-files-1, s-find-1 там сломаны так же). Уходит в data-tc при
-   исправлении основного макета, а не вместе с почтой. */
-.tc-row__name{display:flex;align-items:center;gap:7px;min-width:0}
-.tc-row__file{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Цитата в тексте письма: строки «>» и цитаты HTML (M-5). */
 .tc-quote{margin:0;padding:1px 0 1px 12px;border-left:2px solid var(--tc-edge);color:var(--tc-muted);
@@ -1523,7 +1520,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   </div>
 </header>
 
-<p class="lede">Кадры к отложенной функции из <code>docs/spec/carrel-mailbox.md</code> в Carrel: человек подключает свой ящик по IMAP и SMTP, читает его в Carrel и пишет с него. <b>Отдельный файл, основной макет не тронут; живёт только в Typecase.</b> Здесь те же классы, CSS и спрайт, что в <a href="carrel-ui-mockups.html">carrel-ui-mockups.html</a> на коммите Typecase 29e07b0. Новое лежит отдельно: правила — в блоке <code>&lt;style data-tc-candidate&gt;</code>, значки — в конце спрайта. Если функцию возьмут в работу, раздел целиком переезжает в основной макет, а блок правил — в <code>data-tc</code> (M-10).</p>
+<p class="lede">Кадры к отложенной функции из <code>docs/spec/carrel-mailbox.md</code> в Carrel: человек подключает свой ящик по IMAP и SMTP, читает его в Carrel и пишет с него. <b>Отдельный файл, основной макет не тронут; живёт только в Typecase.</b> Здесь те же классы, CSS и спрайт, что в <a href="carrel-ui-mockups.html">carrel-ui-mockups.html</a> на коммите Typecase 22c1808. Новое лежит отдельно: правила — в блоке <code>&lt;style data-tc-candidate&gt;</code>, значки — в конце спрайта. Если функцию возьмут в работу, раздел целиком переезжает в основной макет, а блок правил — в <code>data-tc</code> (M-10).</p>
 
 <div class="note"><b>Как читать.</b> Порядок разделов — как в списке кадров M-12. Номера кадров идут подряд, <code>s-mailbox-N</code>. Если раздел переедет в основной макет как есть, номера не придётся менять. Подпись у каждого кадра — «кандидат». Лестница ширин ниже работает так же, как в основном макете. <b>Метки «фрагмент»</b> — меню и листы: они рисуются рядом с экраном, с которого открываются.</div>
 
@@ -2773,7 +2770,7 @@ Read    2 min ago</div>
           <div class="tc-sheet__body">
             <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
             <div class="tc-field tc-field--w100"><label>To</label>
-              <span class="tc-in tc-in--wrap-gap5"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span><span class="tc-push"><button class="tc-btn is-sm" title="Add blind copy" type="button">Bcc</button></span></span></div>
+              <span class="tc-line tc-line--gap-8"><span class="tc-in tc-in--wrap-gap5 tc-in--fill"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span><button class="tc-btn" title="Add blind copy" type="button">Bcc</button></span></div>
             <div class="tc-field tc-field--w100"><label>Cc</label>
               <span class="tc-in tc-in--wrap-gap5"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Пётр Смирнов · p.smirnov@example.org</span></span></div>
             <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" value="Re: Вёрстка сборника: правки и встреча в четверг" aria-label="Subject"></div>
@@ -2812,7 +2809,7 @@ Read    2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>Cc и Bcc видны, только когда в них кто-то есть.</b> «Reply all» заполнил Cc, поэтому поле стоит. Bcc пуст, и от него осталась кнопка в конце поля To. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («2 of 10 recipients») здесь не появляется.<br><br><b>Подпись — своя у каждого ящика</b> и встаёт под текстом, над цитатой, после строки <span class="tc-mono">-- </span>: почтовые программы её узнают и сворачивают. Сменили ящик в поле From — подпись в тексте меняется на подпись нового ящика. Задаётся она в правке ящика (кадр «Ящик · правка»). <b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
+<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>Cc и Bcc видны, только когда в них кто-то есть.</b> «Reply all» заполнил Cc, поэтому поле стоит. Bcc пуст, и от него осталась кнопка справа от поля To. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («2 of 10 recipients») здесь не появляется.<br><br><b>Подпись — своя у каждого ящика</b> и встаёт под текстом, над цитатой, после строки <span class="tc-mono">-- </span>: почтовые программы её узнают и сворачивают. Сменили ящик в поле From — подпись в тексте меняется на подпись нового ящика. Задаётся она в правке ящика (кадр «Ящик · правка»). <b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
 </figure>
 
 <figure>
@@ -2822,12 +2819,12 @@ Read    2 min ago</div>
     <div class="tc-stack tc-stack--gap-10">
       <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
       <div class="tc-field tc-field--w100"><label>To</label>
-        <span class="tc-in tc-in--wrap-gap5 is-focus"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span><span class="tc-push tc-line tc-line--gap-6"><button class="tc-btn is-sm" title="Add copy" type="button">Cc</button><button class="tc-btn is-sm" title="Add blind copy" type="button">Bcc</button></span></span></div>
+        <span class="tc-line tc-line--gap-8"><span class="tc-in tc-in--wrap-gap5 tc-in--fill is-focus"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span><button class="tc-btn" title="Add copy" type="button">Cc</button><button class="tc-btn" title="Add blind copy" type="button">Bcc</button></span></div>
       <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in is-ph" type="text" placeholder="Subject" aria-label="Subject"></div>
     </div>
   </div>
 </div>
-<figcaption><b>Копии нужны редко, и два пустых поля каждый раз толкали бы текст вниз.</b> Поэтому новое письмо открывается с одним To. Кнопки <b>Cc</b> и <b>Bcc</b> стоят в конце его строки. Нажатие открывает поле под To и ставит в него курсор, а кнопка пропадает. Поле, в котором кто-то есть, не прячется: ответ всем, черновик с копией, пересылка открываются с ним. Опустевшее поле при следующем открытии снова спрятано.</figcaption>
+<figcaption><b>Копии нужны редко, и два пустых поля каждый раз толкали бы текст вниз.</b> Поэтому новое письмо открывается с одним To. Кнопки <b>Cc</b> и <b>Bcc</b> стоят справа от него — тем же приёмом, что Browse и Copy у полей (компонент «Кнопка рядом с полем»). Нажатие открывает поле под To и ставит в него курсор, а кнопка пропадает. Поле, в котором кто-то есть, не прячется: ответ всем, черновик с копией, пересылка открываются с ним. Опустевшее поле при следующем открытии снова спрятано.</figcaption>
 </figure>
 
 <div class="frames">

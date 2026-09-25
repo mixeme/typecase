@@ -12,15 +12,28 @@ do, not what the authors did.
   signature and name in From, set in a new «Ящик · правка» frame and shown in
   the reply sheet under the text, after «-- ». The frame of a separate search
   in the mail section is gone: the header search is global everywhere, and
-  mail is narrowed by the Mail segment and the folder ticks. File rows keep
-  the icon on the name's line (`.tc-row__name` as a row) — the main mockup's
-  «Файлы · обзор папки» and «Поиск по всем источникам» still put it above.
+  mail is narrowed by the Mail segment and the folder ticks.
+- The mockup's file rows keep the icon on the name's line, as the library's
+  `css/06-lists.css` already does: `.tc-row__name` is a row there too, and
+  `.tc-row__file` cuts a long name with an ellipsis. Before, the mockup's
+  `.tc-root svg{display:block}` put the icon above the name in «Файлы · обзор
+  папки» and «Поиск по всем источникам» (recorded in `allowed-diffs.md`). Nothing
+  changes for consumers; the gap is 7 px in the mockup and 0.35em in the
+  library, and plan 2 takes the mockup's.
+- On a phone (`--tc-shell-mode: drawer`) a button next to a field — Browse,
+  Copy, Change, Send test — is 38 px like the field, not 28: the drawer rule
+  now lists `.tc-form`, `.tc-fset` and `.tc-field` buttons (small `is-sm`
+  ones keep their size). Only widths of 640 and less change.
+- Mailbox candidate: Cc and Bcc stand next to the To field as ordinary
+  buttons, the «button next to a field» component, instead of inside its box.
 - A mailbox gets a colour when connected, as a collection does: its mark in
   the rail and the mark of its letters in search and the timeline take it;
   `.tc-mark.is-mail`, the hollow mark, is gone. Cc and Bcc in the letter sheet
   are hidden behind buttons at the end of the To line and shown once pressed
   or filled (new frame «Новое письмо · Cc и Bcc спрятаны», 32 in all).
 - The candidate file lives only in Typecase; Carrel no longer has a copy.
+- The mockup's home is Typecase: it is edited here and copied whole into
+  Carrel (`docs/visual/mockup.md`), the reverse of the earlier order.
 
 Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
