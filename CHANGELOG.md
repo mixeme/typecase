@@ -6,6 +6,20 @@ do, not what the authors did.
 
 ## Unreleased
 
+Nothing yet. Next: the owner looks through the frames the one-off fold moved
+([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
+moves, and then the breaking 0.7.0 where the library prints the mockup
+([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+
+## typecase/v0.6.2 — 2026-09-25
+
+One thing for consumers: the wide details panel is gone, and every panel —
+including a full-screen note's side column — is 400 px (see below). The
+removal is breaking and ships as a patch for the same reason as 0.6.1: 0.7.0 is
+the release of plan 2, and before 1.0 a breaking change needs no deprecation
+period (L-10). Everything else is the mockup: menus and dropdowns drawn next to
+their screens, and a separate file of candidate frames for the mailbox.
+
 ### Breaking
 
 - **The wide details panel is gone: `widget.SideSizeWide`, the `SideSize`
@@ -46,11 +60,21 @@ do, not what the authors did.
   appearance, admin roles, mail encryption, the audit filter, the desktop
   settings — 33 new frames, 259 in all. The appearance time zone is shown
   read-only: it is the instance's, set by the administrator.
-
-Next: the owner looks through the frames the one-off fold moved
-([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
-moves, and then the breaking 0.7.0 where the library prints the mockup
-([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+- **Candidate frames for the mailbox: `docs/visual/carrel-mailbox-mockups.html`,
+  a separate file.** The deferred feature of Carrel's `carrel-mailbox.md`
+  (a person's own mailbox over IMAP and SMTP), in 31 frames: the mail section
+  and folder list, the letter, the original in a sandbox with external
+  pictures behind a button, mail in the general search and in a person's
+  timeline, the letter sheet sending from one's own mailbox, connecting a
+  mailbox, the connections and instance settings screens, confirmations.
+  **Nothing here is for the library yet.** The file copies the main
+  mockup's CSS and sprite as of Carrel `e9c5180` and keeps its own new rules
+  in a third block, `<style data-tc-candidate>` (`.tc-row--mailcols`,
+  `.tc-mark.is-mail`, `.tc-quote`, `.tc-original`, a bulleted list); the
+  main mockup, its lint and its checks do not read it. If the feature is taken,
+  the section moves into `carrel-ui-mockups.html` and the block into
+  `data-tc`. Its home is Carrel, like the main mockup's; the copy here is
+  byte-identical.
 
 ## typecase/v0.6.1 — 2026-09-24
 
