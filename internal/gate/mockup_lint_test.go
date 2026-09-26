@@ -39,7 +39,7 @@ func TestCheckMockupLint_frameIDs(t *testing.T) {
 }
 
 func TestCheckMockupLint_styleBlocks(t *testing.T) {
-	ok := `<style data-tc>:root{--tc-ink:#000}.mock,.m-btn,.tc-btn{color:red}</style>` +
+	ok := `<style data-tc>:root{--tc-ink:#000}.tc-tag,.tc-btn{color:red}</style>` +
 		`<style>body{margin:0}.frame{border:0}.wrap{padding:0}.mk-win{border:0}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(ok, MockupStyleBlocks, MockupFrameIDs); err != nil {
@@ -57,19 +57,19 @@ func TestCheckMockupLint_styleBlocks(t *testing.T) {
 	if err := CheckMockupLint(mkInProduct); err == nil {
 		t.Fatal("expected page class .mk-win in data-tc to fail")
 	}
-	pageInProduct := `<style data-tc>.frame{border:0}.m-btn{color:red}</style>` +
+	pageInProduct := `<style data-tc>.frame{border:0}.tc-tag{color:red}</style>` +
 		`<style>body{margin:0}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(pageInProduct); err == nil {
 		t.Fatal("expected page selector in data-tc to fail")
 	}
-	productInPage := `<style data-tc>.m-btn{color:red}</style>` +
-		`<style>.m-btn{height:26px}</style>` +
+	productInPage := `<style data-tc>.tc-tag{color:red}</style>` +
+		`<style>.tc-tag{height:26px}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(productInPage); err == nil {
 		t.Fatal("expected product class in page style to fail")
 	}
-	oneStyle := `<style>.m-btn{color:red}</style>` +
+	oneStyle := `<style>.tc-tag{color:red}</style>` +
 		`<div class="frame" data-frame="s-notes-1"></div>`
 	if err := CheckMockupLint(oneStyle); err == nil {
 		t.Fatal("expected a single <style> to fail")

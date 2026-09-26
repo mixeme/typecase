@@ -149,10 +149,9 @@ func IsHang(err error) bool {
 
 // ShallowRepo reports whether root is a shallow git clone.
 //
-// The comparison reads the mockup at the base commit and the proof reads it at
-// proof.MockupRev; both need the full history (the runner asks for it with
-// fetch-depth: 0). A shallow clone fails in git show with "bad object", which
-// says nothing about the runner.
+// The comparison reads the mockup at the base commit, which needs the full
+// history (the runner asks for it with fetch-depth: 0). A shallow clone fails
+// in git show with "bad object", which says nothing about the runner.
 func ShallowRepo(root string) bool {
 	out, err := exec.Command("git", "-C", root, "rev-parse", "--is-shallow-repository").Output()
 	if err != nil {
