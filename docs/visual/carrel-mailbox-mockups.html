@@ -99,7 +99,7 @@ figcaption b{color:var(--tc-ink);font-weight:600}
 .specs__tile--72{height:72px;border-radius:8px;overflow:hidden;border:.5px solid var(--tc-edge);display:block;width:72px}
 .specs__tile--32-ink{height:32px;border-radius:4px;overflow:hidden;border:.5px solid #17211C;display:block;width:32px}
 .specs__item--ml18{margin-left:18px}
-.specs__logo--38{height:15px;width:38px}
+.specs__logo--38.specs__logo--38{height:15px;width:38px}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px 32px;max-width:1400px}
 .frame-label .plan{border:.5px solid var(--tc-edge);border-radius:2px;padding:0 5px;
   color:var(--tc-dusty);letter-spacing:.04em;text-transform:none;font-family:var(--tc-font-sans);font-size:10px}
@@ -306,6 +306,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-head__title .tc-mark{width:3px;height:20px;border-radius:1px}
 .tc-head__sub{font-size:11.5px;color:var(--tc-dusty);margin-top:4px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
 .tc-acts{display:flex;gap:6px;align-items:center;flex:none;flex-wrap:wrap;justify-content:flex-end}
+/* Набор кнопок шапки не шире шапки: иначе, пока порог 620 не пустил его в перенос, он выдавливает колонку. */
+.tc-head .tc-acts{max-width:100%}
 /* Полоса: свой отступ 7 px сверху и снизу; одна строка; лишнее — is-2nd. */
 .tc-head:has(+ .tc-bar){padding-bottom:4px}
 .tc-side > .tc-head{flex-wrap:nowrap}
@@ -313,12 +315,15 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 /* Левая половина шапки: .tc-head__group (фото + заголовки), внутри .tc-head__titles. */
 .tc-head__group{display:flex;gap:14px;align-items:flex-start;min-width:0}
 .tc-head__titles{min-width:0}
-/* .tc-drop.is-bar коробки не заводит: меню всплывает от полосы. */
 .tc-bar{display:flex;align-items:center;gap:10px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-rule);
   position:relative}
 .tc-bar__right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--tc-dusty)}
-/* Потомок, не ребёнок: is-bar — display:contents, дочерний селектор кнопку не видит. */
+/* Правая группа не переносит подписи: «Draft in this window · 11:42» в две строки наезжал на Auto-save. Лишнее уходит по порогу, а не сжатием. */
+.tc-bar__right > *{white-space:nowrap;flex:none}
+/* Потомок, не ребёнок: «...» с меню лежит в .tc-drop. Узел спрятан вместе с кнопкой,
+   иначе пустой flex-элемент добавил бы полосе промежуток. */
 .tc-bar .tc-bar__more,.tc-docbar .tc-bar__more{display:none;margin-left:auto}
+.tc-bar .tc-drop:has(> .tc-bar__more),.tc-docbar .tc-drop:has(> .tc-bar__more){display:none;margin-left:auto;flex:none}
 /* Меню «...» полосы открыто, только пока видна сама кнопка: без неё оно висело бы ни от чего. */
 .tc-bar .tc-bar__more + .tc-menu,.tc-docbar .tc-bar__more + .tc-menu{display:none}
 /* .tc-bar__sep и .tc-range — элементы панели: диапазон уходит в «...» целиком.
@@ -351,6 +356,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .tc-btn.is-primary{background:var(--tc-accent);border-color:var(--tc-accent);color:#FFFDF7}
 .tc-btn.is-danger{color:var(--tc-danger);border-color:var(--tc-edge)}
+/* Недоступная кнопка остаётся своего цвета и бледнеет: по цвету видно, что она сделала бы. */
+.tc-btn:disabled{opacity:.45;cursor:default}
 /* Заливка — уничтожение; рамка — отвязать. Подпись на заливке — --tc-surface:
    в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
 .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
@@ -434,6 +441,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-field--full > .tc-in{max-width:760px}
 .tc-fset{flex:1 1 100%;border-top:.5px solid var(--tc-hair);padding-top:12px;margin-top:2px;
   display:flex;flex-wrap:wrap;gap:13px 16px;align-items:flex-start}
+/* min-width:0: сетка auto-fill иначе держит набор шириной в max-width и выдавливает колонку. */
+.tc-fset{min-width:0}
 .tc-fset > .tc-rubric{flex:1 1 100%;margin-bottom:-2px}
 /* «Remove» у повторяющегося поля прижат к нижнему краю строки — к полю. */
 .tc-fset > .tc-btn{align-self:flex-end}
@@ -575,14 +584,13 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    Витрины раздела 6 — исключение: там меню и есть предмет. */
 .tc-menu.is-pop{position:absolute;top:100%;left:0;margin-top:4px;z-index:3}
 .tc-menu.is-pop.is-right{left:auto;right:0}
-/* Кнопка и меню — .tc-drop. На полосе — is-bar (display:contents). */
+/* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
-.tc-drop.is-bar{display:contents}
 .tc-field:has(> .tc-menu.is-pop){position:relative}
 /* Раскрытая кнопка — точка отсчёта для своего меню. */
 .tc-btn:has(> .tc-menu.is-pop){position:relative}
 .tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
-.tc-drop:not(.is-bar) > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
+.tc-drop > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
 /* Рубрика внутри меню: говорит, откуда взялся набор строк. */
 .tc-menu > .tc-rubric{padding:4px 8px 6px}
 /* Поиск в длинном списке — поле во всю ширину меню, над строками. */
@@ -672,12 +680,24 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 @container tcbox (max-width:880px){
   .tc-doc__layout{grid-template-columns:minmax(0,1fr) 296px}
 }
-/* Панель правки заметки: порог 960 — правая группа самая тяжёлая
-   (черновик + Ctrl+S + ширина + Focus ≈ 451, левая до Attach 447). */
-@container tcbox (max-width:960px){
+/* Панель правки заметки: порог 1120 — целиком она занимает около 1115
+   (левая группа до Attach 447, правая: черновик + Ctrl+S + ширина + Focus). */
+@container tcbox (max-width:1120px){
   .tc-docbar .is-2nd{display:none}
-  .tc-docbar:has(.is-2nd) .tc-bar__more{display:inline-flex}
+  .tc-docbar:has(.is-2nd) .tc-bar__more,.tc-docbar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-docbar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Тяжёлая полоса — .tc-bar--wide: целиком ей нужно 930–940 px, поэтому
+   is-2nd уходит под «...» с 960, а не с 800. Агенда, хронология человека. */
+@container tcbox (max-width:960px){
+  .tc-bar--wide .is-2nd{display:none}
+  .tc-bar--wide:has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Без is-2nd панели правки нужно 740: дальше кнопки теряют подписи, не действия, и стоят плотнее. */
+@container tcbox (max-width:740px){
+  .tc-docbar .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar .tc-btn{padding:0 7px}
 }
 @container tcbox (max-width:800px){
   /* is-2nd уходит под «...». У таблицы порог 700: ячейка умеет сжиматься. */
@@ -685,8 +705,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   /* Панель выделения теряет подписи, не действия. */
   .tc-bar--sel .tc-btn > .tc-btn__label{display:none}
   .tc-bar--sel .tc-btn:has(> .tc-btn__label){padding:0 9px}
-  .tc-bar:has(.is-2nd) .tc-bar__more{display:inline-flex}
+  .tc-bar:has(.is-2nd) .tc-bar__more,.tc-bar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  /* Тяжёлая таблица — .tc-table--wide: целиком ей нужно около 790, поэтому is-2nd уходит с 800, а не с 700. */
+  .tc-table--wide th.is-2nd,.tc-table--wide td.is-2nd{display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr) 140px}
   .tc-row--avatarcols .tc-row__caption{display:none}
   .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 88px 140px}
@@ -1035,7 +1057,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-main__hero-side.tc-main__hero-side{min-width:0;flex:1 1 320px}
 .tc-main__hero-title.tc-main__hero-title{font-family:var(--tc-font-serif);font-size:26px}
 .tc-doc__acts.tc-doc__acts{margin-top:14px}
-.tc-fset__grid.tc-fset__grid{max-width:1100px;display:grid;gap:2px 24px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.tc-fset__grid.tc-fset__grid{max-width:1100px;min-width:0;display:grid;gap:2px 24px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .tc-card__note.tc-card__note{font-size:11.5px;color:var(--tc-muted);margin-top:9px;line-height:1.55}
 .tc-card__foot.tc-card__foot{border-top:.5px solid var(--tc-hair);margin-top:11px;padding-top:9px}
 .tc-card__above.tc-card__above{font-size:11.5px;color:var(--tc-dusty);margin:-3px 0 8px}
@@ -1250,7 +1272,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-msg--flush.tc-msg--flush{margin:0}
 .tc-msg--m0-14-12.tc-msg--m0-14-12{margin:0 14px 12px}
 .tc-msg--flush-top11.tc-msg--flush-top11{margin:11px 0 0}
-.tc-msg--m0-20-16.tc-msg--m0-20-16{margin:0 20px 16px}
 .tc-msg--flush-bot12.tc-msg--flush-bot12{margin:0 0 12px}
 .tc-msg--flush-r0.tc-msg--flush-r0{margin:0;border-radius:0}
 .tc-msg--flush-r0 .tc-push.tc-push{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:none}
@@ -1887,10 +1908,9 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           <button class="tc-btn" title="Archive" type="button"><svg viewBox="0 0 24 24"><use href="#i-archive"/></svg><span class="tc-btn__label">Archive</span></button>
           <button class="tc-btn is-2nd" title="Spam" type="button"><svg viewBox="0 0 24 24"><use href="#i-spam"/></svg><span class="tc-btn__label">Spam</span></button>
           <button class="tc-btn" title="Move to Trash" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Trash</span></button>
-          <span class="tc-drop is-bar">
+          <span class="tc-drop">
             <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
             <div class="tc-menu is-pop is-right tc-menu--w212">
-              <span class="tc-rubric">Didn’t fit</span>
               <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-mailopen"/></svg>Mark as read</button>
               <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-mail"/></svg>Mark as unread</button>
               <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-flag"/></svg>Mark as important</button>

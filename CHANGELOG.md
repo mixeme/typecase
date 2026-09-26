@@ -34,6 +34,36 @@ do, not what the authors did.
 - The candidate file lives only in Typecase; Carrel no longer has a copy.
 - The mockup's home is Typecase: it is edited here and copied whole into
   Carrel (`docs/visual/mockup.md`), the reverse of the earlier order.
+- A menu stands under its own button everywhere: right edge to the button's
+  right edge, 4 px below. `.tc-drop.is-bar`, which measured the bar's
+  overflow menu from the bar and so shifted it by the bar's padding, is gone;
+  the bar's «⋯» is an ordinary `.tc-drop`, hidden whole while it is not
+  needed. The overflow menu has no «Didn't fit» rubric.
+- Nothing scrolls sideways inside a frame. `.tc-bar--wide` (agenda, person
+  timeline) sends `is-2nd` under «⋯» from 960 px, `.tc-table--wide` hides its
+  `is-2nd` columns from 800; the note edit bar gives up `is-2nd` from 1120
+  (it needs about 1115, not 1008) and its button labels from 740;
+  `.tc-bar__right` labels do not wrap; `.tc-fset` and its grid may shrink;
+  header actions are never wider than the header. A table row shows one
+  action in words and the rest as an icon or under «⋯»; new row menus are
+  drawn by their screens.
+- A disabled button keeps its colour and fades (`.tc-btn:disabled`); why it is
+  disabled is a line under the button row (`.tc-card__why`), not beside it.
+  Remove in a form and Revoke are `is-danger`.
+- Moving a contact or files is a sheet over the list, like moving a calendar.
+  New frames: «Заметка · правка» (the note page in edit, with the rail and
+  the column; Focus is its state), account states (address confirmed,
+  confirmation sent, key deposited). Name and Reply-To live on the one
+  account screen; the separate account frame in the mail section is now its
+  «not confirmed» state beside it. Section 7.4 says why notes differ: the
+  panel edits, and the note page lists its neighbours.
+- Birthday is typed, not picked: a text field, the year optional. The
+  duplicates weights name both columns, Default and Yours. The public note
+  page offers only the download the author allowed, `.md`; the files header
+  «⋯» no longer repeats the rail's Published links.
+- The width ladder (`TestMockupLadder`) now fails on horizontal scroll of any
+  box inside a frame, not only of the frame: a scrolling `.tc-main` had hidden
+  a too-wide bar.
 
 Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base

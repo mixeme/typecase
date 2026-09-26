@@ -43,7 +43,7 @@ func TestApplyButtonsAndFields(t *testing.T) {
 		`role="menuitem"`,
 		`<kbd class="tc-kbd">Ctrl+S</kbd>`,
 		`<button class="tc-check" type="button">`,
-		`.tc-drop:not(.is-bar) > .tc-menu.is-pop`,
+		`.tc-drop > .tc-menu.is-pop`,
 	}
 	for _, w := range want {
 		if !strings.Contains(got, w) {

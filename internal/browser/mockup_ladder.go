@@ -4,7 +4,8 @@ package browser
 // the catalog (docs/visual/mockup.md). Pairs sit on both sides of the Р-3 thresholds.
 var MockupLadderWidths = []int{1351, 1191, 1190, 1008, 1007, 820, 641, 640, 460, 390}
 
-// MockupLadderProbeJS checks one painted frame: no horizontal frame scroll,
+// MockupLadderProbeJS checks one painted frame: no horizontal scroll of the
+// frame or of any box inside it (a scrolling .tc-main hid a too-wide bar),
 // in-flow siblings do not overlap, text stays in its box except ellipsis,
 // and in drawer mode every tappable has a 44 px hit zone (same idea as tapHitJS).
 const MockupLadderProbeJS = `(() => {
@@ -21,6 +22,12 @@ const MockupLadderProbeJS = `(() => {
   };
   const hScroll = Math.max(root.scrollWidth - root.clientWidth, frame.scrollWidth - frame.clientWidth);
   if (hScroll > 2) issues.push("h-scroll " + Math.round(hScroll) + "px");
+  for (const el of root.querySelectorAll("*")) {
+    const ox = getComputedStyle(el).overflowX;
+    if (ox !== "auto" && ox !== "scroll") continue;
+    const d = el.scrollWidth - el.clientWidth;
+    if (d > 2) issues.push("inner h-scroll " + cls(el).split(" ")[0] + " " + Math.round(d) + "px");
+  }
   const frameR = frame.getBoundingClientRect();
   const flowKids = (el) => {
     const out = [];
