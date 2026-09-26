@@ -73,8 +73,11 @@ do, not what the authors did.
   them; the screenshot base (`docs/visual/allowed-diffs.md`) moved to
   `de784a4` and its table is empty. `docs/plan/fold-review.md` is gone.
 
-Next: plan 1 closes, and then the breaking 0.7.0 where the library prints the
-mockup ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+- Plan 1 (mockup tails) is closed and deleted; what lasts from it —
+  `tc-plain`, the fold of one-off classes, states decided not to exist, the
+  print footer without the mark — is in `docs/visual/mockup.md`.
+
+Next: the breaking 0.7.0 where the library prints the mockup ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
 ## typecase/v0.6.2 — 2026-09-25
 
