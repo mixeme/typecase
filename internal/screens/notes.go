@@ -105,7 +105,7 @@ func Notes1() Screen {
 							},
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Что почитать про CRDT")},
+								Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
 								Tags:       []w.RowTag{w.Tag{Label: "книги"}},
@@ -161,7 +161,7 @@ func Notes1() Screen {
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}},
+							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "встречи"}, w.Text(" "), w.Tag{Label: "релиз"}}}},
 					},
 					w.Sec{
 						Items: []w.SecPart{
@@ -1368,7 +1368,7 @@ func Notes9() Screen {
 									Width: w.FieldFix96,
 								},
 								w.Field{
-									Label: " ",
+									Label: "\u00a0",
 									Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}},
 									Width: w.FieldFill120,
 								},
@@ -1625,8 +1625,9 @@ func Notes11() Screen {
 					Body: []w.SheetPart{
 						w.Empty{
 							Parts: []w.EmptyPart{
-								w.Text("Drop files here, or"),
+								w.Text("Drop files here, or "),
 								w.Emphasis("choose on the computer"),
+								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
 							},
 							Variant: w.EmptyDashed,

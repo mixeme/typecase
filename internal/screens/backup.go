@@ -42,15 +42,15 @@ func Backup1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -307,15 +307,15 @@ func Backup2() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -446,9 +446,9 @@ func Backup2() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Copies past the eighth are deleted"),
+													w.Text("Copies past the eighth are deleted "),
 													w.Strong("after"),
-													w.Text("the new one has been read back and checked, not before. The file is dated and never overwritten."),
+													w.Text(" the new one has been read back and checked, not before. The file is dated and never overwritten."),
 												},
 											},
 										},
@@ -516,9 +516,9 @@ func Backup2() Screen {
 											w.Check{
 												On: true,
 												Parts: []w.CheckPart{
-													w.Text("On a clock of your own —"),
+													w.Text("On a clock of your own — "),
 													w.Mono{Text: "cron"},
-													w.Text(", GoSentry, a job in Gitea"),
+													w.Text(", GoSentry, a job in Gitea "),
 													w.Badge{
 														Label: "local",
 														Tone:  w.BadgeLocal,
@@ -662,15 +662,15 @@ func Backup3() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -836,15 +836,15 @@ func Backup6() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -868,7 +868,7 @@ func Backup6() Screen {
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{
-							w.Text("Carrel copies raw"),
+							w.Text("Carrel copies raw "),
 							w.Mono{Text: ".ics"},
 							w.Text(", "),
 							w.Mono{Text: ".vcf"},
@@ -876,9 +876,9 @@ func Backup6() Screen {
 							w.Aside{
 								Face: w.FaceLarge,
 								Parts: []w.Inline{
-									w.Text("Already have an archive from another instance?"),
+									w.Text("Already have an archive from another instance? "),
 									w.Strong("Restore"),
-									w.Text("takes it from a file — a job is not needed for that."),
+									w.Text(" takes it from a file — a job is not needed for that."),
 								},
 							},
 						},
@@ -927,15 +927,15 @@ func Backup7() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -1056,15 +1056,15 @@ func Backup8() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,

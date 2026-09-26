@@ -291,7 +291,7 @@ func Mail1() Screen {
 						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary},
 						w.Button{Label: "Preview"},
 						w.Dim{
-							Parts:   []w.Inline{w.Text("Signed"), w.Strong("Михаил Енученко"), w.Text("· replies go to mix@example.org")},
+							Parts:   []w.Inline{w.Text("Signed "), w.Strong("Михаил Енученко"), w.Text(" · replies go to mix@example.org")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
@@ -343,15 +343,15 @@ func Mail4() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,

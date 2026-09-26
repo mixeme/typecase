@@ -97,6 +97,10 @@ func page(i int, sprite string) string {
 	r := screens.Routes[i]
 	var b strings.Builder
 	b.WriteString(head + `<title>` + html.EscapeString(r.Caption) + `</title></head><body>`)
+	if r.Theme != "" {
+		// The frame is drawn in a theme: so is the page, whatever the viewer chose.
+		b.WriteString(`<script>document.documentElement.setAttribute("data-tc-theme", "` + r.Theme + `")</script>`)
+	}
 	b.WriteString(`<nav class="screens-bar"><a href="/">All screens</a>`)
 	if i > 0 {
 		p := screens.Routes[i-1]

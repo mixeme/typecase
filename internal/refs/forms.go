@@ -10,9 +10,27 @@ func seg(on int, labels ...string) []w.SegOption {
 	return out
 }
 
-func check(on bool, parts ...w.CheckPart) w.Check { return w.Check{On: on, Parts: parts} }
+// A widget prints the pieces of running text one after another, as the
+// frame writes them; these helpers put the space between words that the
+// frames have, so a record reads as a sentence.
+func check(on bool, parts ...w.CheckPart) w.Check {
+	return w.Check{On: on, Parts: spacedParts(parts, w.CheckPart(w.Text(" ")))}
+}
 
-func hint(parts ...w.Inline) w.FieldHint { return w.FieldHint{Parts: parts} }
+func hint(parts ...w.Inline) w.FieldHint {
+	return w.FieldHint{Parts: spacedParts(parts, w.Inline(w.Text(" ")))}
+}
+
+func spacedParts[T any](parts []T, space T) []T {
+	var out []T
+	for i, p := range parts {
+		if i > 0 {
+			out = append(out, space)
+		}
+		out = append(out, p)
+	}
+	return out
+}
 
 var btn = w.Button{Label: "x"}
 

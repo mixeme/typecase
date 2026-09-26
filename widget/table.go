@@ -142,6 +142,7 @@ type TableCell struct {
 	Unset bool     // a placeholder value
 	Name  bool     // the name column of a narrow list
 	Span  int      // the cell spans that many columns
+	Rows  int      // the cell spans that many rows: one value for several
 	Rank  ColRank  // a table without a head: the cell carries its column's rank
 	Width ColWidth // a table without a head: the cell carries its column's width
 }
@@ -229,7 +230,7 @@ func (t Table) html(m mix) string {
 		s.WriteString(`<tr` + class(nil, r.State.class()) + `>`)
 		for i, c := range r.Cells {
 			col := t.col(i, c)
-			s.WriteString(`<td` + class(nil, c.classes(col)...) + attr("colspan", pick(c.Span > 1, strconv.Itoa(c.Span))) + `>`)
+			s.WriteString(`<td` + class(nil, c.classes(col)...) + attr("colspan", pick(c.Span > 1, strconv.Itoa(c.Span))) + attr("rowspan", pick(c.Rows > 1, strconv.Itoa(c.Rows))) + `>`)
 			if c.Pick != nil {
 				s.WriteString(c.Pick.box("Pick"))
 			}

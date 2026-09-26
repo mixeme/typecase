@@ -41,11 +41,11 @@ func Admin1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "Mail is going out",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -243,7 +243,7 @@ func Admin2() Screen {
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -386,7 +386,7 @@ func Admin3() Screen {
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -495,9 +495,9 @@ func Admin3() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Your relay decides which of the two it will let out. The envelope sender stays"),
+													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
 													w.Mono{Text: "noreply@carrel.example"},
-													w.Text("either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
+													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
 												},
 											},
 										},
@@ -589,11 +589,11 @@ func Admin4() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "Mail is going out",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -805,7 +805,7 @@ func Admin5() Screen {
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -890,11 +890,11 @@ func Admin6() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "Mail is going out",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
@@ -1074,7 +1074,7 @@ func Admin7() Screen {
 						},
 						w.RailStatus{
 							Text:   "Checks passed",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check"), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},

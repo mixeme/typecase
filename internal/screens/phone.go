@@ -35,19 +35,19 @@ func Phone1() Screen {
 							w.PhoneRow{
 								Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH32},
 								Title: "Синк-ап по релизу",
-								Sub:   []w.Inline{w.Mono{Text: "10:00 – 11:00"}, w.Text("· Переговорная 2")},
+								Sub:   []w.Inline{w.Mono{Text: "10:00 – 11:00"}, w.Text(" · Переговорная 2")},
 								Aside: "Личный",
 							},
 							w.PhoneRow{
 								Mark:  &w.Mark{Colour: "#8C6239", Size: w.MarkH32},
 								Title: "Дежурство: первая линия",
-								Sub:   []w.Inline{w.Mono{Text: "all day"}, w.Text("· repeats")},
+								Sub:   []w.Inline{w.Mono{Text: "all day"}, w.Text(" · repeats")},
 								Aside: "Дежурства",
 							},
 							w.PhoneRow{
 								Mark:  &w.Mark{Colour: "#3F6E8C", Size: w.MarkH32},
 								Title: "Созвон с подрядчиком",
-								Sub:   []w.Inline{w.Mono{Text: "15:00"}, w.Text("· Jitsi")},
+								Sub:   []w.Inline{w.Mono{Text: "15:00"}, w.Text(" · Jitsi")},
 								Aside: "Работа",
 							},
 						},
@@ -58,7 +58,7 @@ func Phone1() Screen {
 							w.PhoneRow{
 								Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH32},
 								Title: "Ревью архитектуры",
-								Sub:   []w.Inline{w.Mono{Text: "09:30"}, w.Text("· Переговорная 1")},
+								Sub:   []w.Inline{w.Mono{Text: "09:30"}, w.Text(" · Переговорная 1")},
 								Aside: "Проекты",
 							},
 						},

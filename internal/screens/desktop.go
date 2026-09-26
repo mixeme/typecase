@@ -164,7 +164,7 @@ func Desktop13() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Signing out brings back the first screen, where the mode is chosen again — a server or a local run. Nothing is deleted by it. It asks first, which is what the ellipsis promises — in the web user menu the same words end the session at once and carry no ellipsis. In local mode the line reads"),
+													w.Text("Signing out brings back the first screen, where the mode is chosen again — a server or a local run. Nothing is deleted by it. It asks first, which is what the ellipsis promises — in the web user menu the same words end the session at once and carry no ellipsis. In local mode the line reads "),
 													w.Mono{Text: "mix · local run"},
 													w.Text(": there is no address to show."),
 												},
@@ -244,9 +244,9 @@ func Desktop13() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Last checked 2 hours ago, by this button ·"),
+													w.Text("Last checked 2 hours ago, by this button · "),
 													w.Mono{Text: "0.8.0"},
-													w.Text("was the latest. Nothing is checked on its own while the tick below is clear."),
+													w.Text(" was the latest. Nothing is checked on its own while the tick below is clear."),
 												},
 											},
 										},

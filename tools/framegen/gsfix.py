@@ -150,12 +150,36 @@ def listgroup(k):
     return "w.ListGroup{" + ", ".join(f) + "}"
 
 
+def spaced(e, k):
+    """A text piece of e as drawn: runs of white space are one space, and a
+    space on a side where an element stands next to it is kept — the browser
+    draws it; on the element's own edge it collapses and is dropped. A piece
+    that is only a space is kept between two elements. None when nothing is
+    left."""
+    i = e.kids.index(k)
+    before = any(not isinstance(x, str) for x in e.kids[:i])
+    after = any(not isinstance(x, str) for x in e.kids[i + 1:])
+    t = re.sub(r"\s+", " ", k)
+    if not before:
+        t = t.lstrip()
+    if not after:
+        t = t.rstrip()
+    if t.strip() == "" and not (before and after):
+        return None
+    return t or None
+
+
+def textpart(e, k):
+    t = spaced(e, k)
+    return "w.Text(" + q(t) + ")" if t is not None else None
+
+
 def dimparts(e):
     parts = []
     for k in e.kids:
         if isinstance(k, str):
-            if k.strip():
-                parts.append("w.Text(" + q(norm(k)) + ")")
+            if textpart(e, k):
+                parts.append(textpart(e, k))
         elif k.has("tc-mono"):
             parts.append(mono(k))
         elif k.has("tc-dim__hint"):
@@ -206,9 +230,8 @@ def inlparts(e, el=inline_el):
     out = []
     for k in e.kids:
         if isinstance(k, str):
-            t = norm(k)
-            if t:
-                out.append("w.Text(" + q(t) + ")")
+            if textpart(e, k):
+                out.append(textpart(e, k))
         else:
             out.append(el(k))
     return out
@@ -338,9 +361,8 @@ def checkw(x):
     parts = []
     for k in x.kids:
         if isinstance(k, str):
-            t = norm(k)
-            if t:
-                parts.append("w.Text(" + q(t) + ")")
+            if textpart(x, k):
+                parts.append(textpart(x, k))
         elif k is not tick:
             parts.append(checkpart(k))
     f = []

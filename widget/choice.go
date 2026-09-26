@@ -108,10 +108,7 @@ func (c Check) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<button` + class(m, "tc-check", rank3(c.Tertiary)) + ` type="button" role="checkbox"` + attr("aria-checked", boolText(c.On)) +
 		attr("aria-label", c.Label) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
-	for i, p := range c.Parts {
-		if i > 0 {
-			s.WriteString(" ")
-		}
+	for _, p := range c.Parts {
 		s.WriteString(p.html(nil))
 	}
 	s.WriteString(`</button>`)

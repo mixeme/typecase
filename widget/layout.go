@@ -55,10 +55,7 @@ type Faced struct {
 func (f Faced) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<span class="` + f.Face.class() + `">`)
-	for i, p := range f.Items {
-		if i > 0 {
-			s.WriteString(" ")
-		}
+	for _, p := range f.Items {
 		s.WriteString(p.html(nil))
 	}
 	s.WriteString(`</span>`)

@@ -112,9 +112,9 @@ files = {}
 routes = []
 for (hid, htitle), items in d["sections"]:
     f = files.setdefault(fname(hid), [])
-    for fid, name, cap, expr in items:
+    for fid, name, cap, expr, theme in items:
         f.append((hid, htitle, fid, name, cap, expr))
-        routes.append((fid, cap, name))
+        routes.append((fid, cap, name, theme))
 
 for fn, items in files.items():
     buf = ["package screens", "", 'import w "carrel.dev/typecase/widget"', ""]
@@ -132,11 +132,14 @@ for fn, items in files.items():
         i = ref.index("const noteBody = `")
         j = ref.index("`", i + len("const noteBody = `")) + 1
         src += "\n// noteBody is the text of the note being edited in the notes frames.\n" + ref[i:j] + "\n"
+    # A no-break space is invisible in source: write it as its escape.
+    src = src.replace(chr(0xa0), chr(92) + "u00a0")
     open(os.path.join(OUT, fn), "w", encoding="utf-8", newline="\n").write(src)
 
 rb = ["package screens", "", "// Routes lists the frames of the mockup built as screens, in the mockup's", "// order: /f/<Frame> (plan 3, step 1; Р-16).", "var Routes = []Route{"]
-for fid, cap, name in routes:
-    rb.append("\t{Frame: %s, Caption: %s, Screen: %s}," % (json.dumps(fid), json.dumps(cap, ensure_ascii=False), name))
+for fid, cap, name, theme in routes:
+    th = ", Theme: %s" % json.dumps(theme) if theme else ""
+    rb.append("\t{Frame: %s, Caption: %s%s, Screen: %s}," % (json.dumps(fid), json.dumps(cap, ensure_ascii=False), th, name))
 rb.append("}")
 open(os.path.join(OUT, "routes_list.go"), "w", encoding="utf-8", newline="\n").write("\n".join(rb) + "\n")
 print(len(files), "files", len(routes), "routes")

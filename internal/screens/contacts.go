@@ -117,7 +117,7 @@ func Contacts1() Screen {
 							w.FaceRow{
 								Mark:       w.Mark{Colour: "#6B4E7A"},
 								Avatar:     w.Avatar{Photo: true},
-								Title:      []w.Inline{w.Text("Артём Белов")},
+								Title:      []w.Inline{w.Text("Артём Белов ")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Subtitle:   "+7 903 118-22-04",
 								Detail:     "a.belov@example.org",
@@ -183,7 +183,10 @@ func Contacts1() Screen {
 							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
 							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 							{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+							{
+								Term:  "Categories",
+								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
+							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
 						},
 					},
@@ -297,7 +300,7 @@ func Contacts2() Screen {
 								w.FaceRow{
 									Mark:       w.Mark{Colour: "#6B4E7A"},
 									Avatar:     w.Avatar{Photo: true},
-									Title:      []w.Inline{w.Text("Артём Белов")},
+									Title:      []w.Inline{w.Text("Артём Белов ")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Subtitle:   "+7 903 118-22-04",
 									Detail:     "a.belov@example.org",
@@ -793,7 +796,10 @@ func Contacts6() Screen {
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
 								Face:  w.ValueMono,
 							},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+							{
+								Term:  "Categories",
+								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
+							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
 						},
 					},
@@ -1057,7 +1063,10 @@ func Contacts7() Screen {
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
 								Face:  w.ValueMono,
 							},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+							{
+								Term:  "Categories",
+								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
+							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
 						},
 					},

@@ -66,10 +66,7 @@ func (Mono) rubricAsidePart()  {}
 func (a RubricAside) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<span class="tc-rubric__aside">` + esc(a.Text))
-	for i, it := range a.Items {
-		if i > 0 {
-			s.WriteString(" ")
-		}
+	for _, it := range a.Items {
 		s.WriteString(it.html(nil))
 	}
 	s.WriteString(`</span>`)

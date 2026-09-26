@@ -136,7 +136,7 @@ func Io1() Screen {
 					Parts: []w.EmptyPart{
 						w.Aside{
 							Face:  w.FaceLarge,
-							Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")},
+							Parts: []w.Inline{w.Text("One "), w.Mono{Text: ".vcf"}, w.Text(" file into "), w.Strong("nextcloud · Контакты")},
 						},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")},
@@ -293,9 +293,9 @@ func Io2() Screen {
 								Parts: []w.EmptyPart{
 									w.Dim{
 										Parts: []w.Inline{
-											w.Text("Over 2 MB it goes to"),
+											w.Text("Over 2 MB it goes to "),
 											w.Mono{Text: "Documents / carrel"},
-											w.Text("and the event keeps a link"),
+											w.Text(" and the event keeps a link"),
 										},
 										Size:    w.Dim11_5,
 										Variant: w.DimWrap,

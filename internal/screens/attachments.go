@@ -42,15 +42,15 @@ func Attachments1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -94,11 +94,11 @@ func Attachments1() Screen {
 												Parts: []w.Inline{
 													w.Text("A collection that says it takes less ("),
 													w.Mono{Text: "max-resource-size"},
-													w.Text(") lowers the boundary for itself:"),
+													w.Text(") lowers the boundary for itself: "),
 													w.Mono{Text: "nextcloud"},
-													w.Text("2 MB,"),
+													w.Text(" 2 MB, "),
 													w.Mono{Text: "radicale · vps"},
-													w.Text("1 MB. Nothing here raises it."),
+													w.Text(" 1 MB. Nothing here raises it."),
 												},
 											},
 										},
@@ -139,7 +139,7 @@ func Attachments1() Screen {
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: "2026-07"},
-													w.Text(","),
+													w.Text(", "),
 													w.Mono{Text: "2026-08"},
 													w.Text(". Off means one flat folder — fine for a hundred files, not for ten thousand."),
 												},

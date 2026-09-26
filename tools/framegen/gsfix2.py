@@ -64,7 +64,9 @@ def field(k):
     elif lab:
         l = lab[0]
         skip.add(id(l))
-        f.append("Label: " + q(l.own_text() or " "))
+        raw = "".join(k for k in l.kids if isinstance(k, str))
+        # An empty label that keeps its line is a no-break space in the frame.
+        f.append("Label: " + ('"\u00a0"' if "\xa0" in raw and not raw.strip() else q(l.own_text() or " ")))
         for a in l.els():
             if a.has("tc-dim"):
                 f.append("LabelAside: " + dimx(a))
@@ -123,8 +125,8 @@ def linetext(e):
     out = []
     for k in e.kids:
         if isinstance(k, str):
-            if norm(k):
-                out.append("w.Text(" + q(norm(k)) + ")")
+            if textpart(e, k):
+                out.append(textpart(e, k))
         else:
             out.append(linepart(k))
     return out

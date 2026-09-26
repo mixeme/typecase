@@ -11,8 +11,8 @@ def subparts(d):
     for k in d.kids:
         if isinstance(k, str):
             t = re.sub(r"\s+", " ", k)
-            if t.strip():
-                parts.append("w.Text(" + q(t) + ")")
+            if textpart(d, k):
+                parts.append(textpart(d, k))
         elif k.tag == "b":
             parts.append("w.Strong(" + q(k.text()) + ")")
         elif k.has("tc-dim--danger"):

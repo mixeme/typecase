@@ -183,6 +183,21 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   the library lacked: `Pick` in a bar, `Field` in a dialog, `Check` in a
   sheet, a tag input as a drop's trigger, `Place` on `Diag` and `Table`.
 
+- **Each screen is laid out against its frame on every step of the ladder.**
+  `TestFramesLadder` puts a frame and its screen on one page and compares
+  the box of every node and text run (half a pixel) and the computed style
+  that draws it, on all ten steps; it also holds the screen to the
+  invariants of a screen (nothing scrolls sideways, siblings do not overlap,
+  sheets and menus are on top, text stays in its box, a 44 px zone in the
+  drawer state). Ten breakages of the mockup itself on the narrow steps are
+  listed in the test with their reasons. Long labels (the safety of `tc.js`
+  catches the bars) and a tablet's viewport are run too. What the ladder
+  found in the library: `Check`, `FieldHint`, `Faced` and `RubricAside` no
+  longer put a space between their parts — the text carries its spaces, as
+  in HTML, and a space before a comma is not forced any more; `TableCell`
+  takes `Rows` (one value for several rows); the static comparison compares
+  `colspan` and `rowspan`. A route carries the theme its frame is drawn in.
+
 ### Mockup
 
 - Step 7 of plan 2, the owner's answers of 2026-09-26. The bars of «Заметка ·

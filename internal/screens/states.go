@@ -48,7 +48,7 @@ func States1() Screen {
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{
-							w.Text("Carrel stores nothing of its own: calendars, contacts and notes come from your DAV servers. Connect the first one — you will need an address, a user name and a password."),
+							w.Text("Carrel stores nothing of its own: calendars, contacts and notes come from your DAV servers. Connect the first one — you will need an address, a user name and a password. "),
 							w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
 						},
 					},
@@ -103,7 +103,7 @@ func States2() Screen {
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{
-							w.Text("Carrel shows this section when discovery finds a WebDAV collection that is neither a calendar nor an address book. There is no setting to turn it on: Baikal serves calendars and contacts only — a folder usually means a second account, on Nextcloud or on a plain WebDAV server."),
+							w.Text("Carrel shows this section when discovery finds a WebDAV collection that is neither a calendar nor an address book. There is no setting to turn it on: Baikal serves calendars and contacts only — a folder usually means a second account, on Nextcloud or on a plain WebDAV server. "),
 							w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
 						},
 					},

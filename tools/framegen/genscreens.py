@@ -104,7 +104,7 @@ def gen_screens():
             tb = [f.name for f in traceback.extract_tb(e.__traceback__)][-6:]
             gaps.append((fid, cap, "error: " + type(e).__name__ + ": " + str(e)[:160] + " @ " + ">".join(tb)))
             continue
-        out.setdefault((hid, htitle), []).append((fid, name, cap, expr))
+        out.setdefault((hid, htitle), []).append((fid, name, cap, expr, root.attrs.get("data-tc-theme") or ""))
     n = sum(len(v) for v in out.values())
     print("routes", n, "gaps", len(gaps))
     for g in gaps:

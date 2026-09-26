@@ -54,10 +54,7 @@ type FieldHint struct {
 func (h FieldHint) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<span` + class(nil, "tc-field__hint", h.Variant.class()) + `>`)
-	for i, p := range h.Parts {
-		if i > 0 {
-			s.WriteString(" ")
-		}
+	for _, p := range h.Parts {
 		s.WriteString(p.html(nil))
 	}
 	s.WriteString(`</span>`)

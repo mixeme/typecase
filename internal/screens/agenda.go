@@ -256,7 +256,7 @@ func Agenda1() Screen {
 							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}},
+							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
 						},
 					},
 					w.Sec{
@@ -379,7 +379,7 @@ func Agenda2() Screen {
 							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}},
+							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
 						},
 					},
 					w.Sec{
@@ -581,7 +581,7 @@ func Agenda3() Screen {
 								Rubric: w.Rubric{Text: "Reminders"},
 								Items: []w.FieldSetPart{
 									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
-									w.Field{Label: " ", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
 							w.FieldSet{
@@ -593,8 +593,9 @@ func Agenda3() Screen {
 											w.Faced{
 												Face: w.FaceLarge,
 												Items: []w.LinePart{
-													w.Text("release-checklist.md"),
+													w.Text("release-checklist.md "),
 													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+													w.Text(" "),
 													w.Badge{Label: "in the event"},
 												},
 											},

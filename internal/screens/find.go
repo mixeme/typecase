@@ -109,7 +109,7 @@ func Find1() Screen {
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
 								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Звонок с"), w.Strong("Ковал"), w.Text("ёвой")},
+								Title:  []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
 								Detail: "Zoom",
 								Source: "nextcloud · Личный",
 							},
@@ -121,7 +121,7 @@ func Find1() Screen {
 							w.DueRow{
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#3F6E8C"},
-								Title:    []w.Inline{w.Text("Ответить"), w.Strong("Ковал"), w.Text("ёвой по смете")},
+								Title:    []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")},
 								Tags:     []w.RowTag{w.Tag{Label: "релиз"}},
 								Due:      "12 Aug",
 								Progress: "40%",
@@ -134,7 +134,7 @@ func Find1() Screen {
 						Rows: []w.ListRow{
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#4A6B52"},
-								Title:   []w.Inline{w.Text("Звонок с"), w.Strong("Ковал"), w.Text("ёвой — тезисы")},
+								Title:   []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")},
 								Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…",
 								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
@@ -315,7 +315,7 @@ func Find3() Screen {
 					w.MenuHeading{Rubric: w.Rubric{Text: "Jump to", Form: w.RubricItem}},
 					w.MenuItem{
 						Icon:  "con",
-						Found: []w.Inline{w.Text("Анна"), w.Strong("Ковал"), w.Text("ёва")},
+						Found: []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")},
 						Trail: w.Dim{
 							Parts:   []w.Inline{w.Text("nextcloud · Контакты")},
 							Size:    w.Dim11,
@@ -325,7 +325,7 @@ func Find3() Screen {
 					},
 					w.MenuItem{
 						Icon:  "cal",
-						Found: []w.Inline{w.Text("Звонок с"), w.Strong("Ковал"), w.Text("ёвой")},
+						Found: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
 						Trail: w.Dim{Parts: []w.Inline{w.Text("10 Aug · Личный")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed},
 					},
 					w.MenuItem{

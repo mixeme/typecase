@@ -42,15 +42,15 @@ func Account1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -95,7 +95,11 @@ func Account1() Screen {
 												Gap:   w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Used for service notices, and as"), w.Mono{Text: "Reply-To"}, w.Text("on letters you send.")},
+												Parts: []w.Inline{
+													w.Text("Used for service notices, and as "),
+													w.Mono{Text: "Reply-To"},
+													w.Text(" on letters you send."),
+												},
 											},
 											w.Line{Items: []w.LinePart{w.Badge{Label: "pending: new@example.org"}}},
 										},
@@ -218,15 +222,15 @@ func Account2() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,
@@ -338,15 +342,15 @@ func Mail9() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -391,7 +395,11 @@ func Mail9() Screen {
 												Gap:   w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Used for service notices, and as"), w.Mono{Text: "Reply-To"}, w.Text("on letters you send.")},
+												Parts: []w.Inline{
+													w.Text("Used for service notices, and as "),
+													w.Mono{Text: "Reply-To"},
+													w.Text(" on letters you send."),
+												},
 											},
 											w.Msg{
 												Parts: []w.MsgPart{
@@ -452,15 +460,15 @@ func Account3() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -561,15 +569,15 @@ func Account4() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,

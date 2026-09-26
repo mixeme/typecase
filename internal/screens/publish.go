@@ -42,15 +42,15 @@ func Publish1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -242,7 +242,7 @@ func Publish2() Screen {
 							Items: []w.Check{
 								w.Check{
 									On:    true,
-									Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")},
+									Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")},
 								},
 								w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}},
 							},
@@ -484,7 +484,7 @@ func Publish3() Screen {
 							},
 							Width: w.FieldW100,
 						},
-						w.Check{Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".vcf"}, w.Text("download and subscription")}},
+						w.Check{Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".vcf"}, w.Text(" download and subscription")}},
 						w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "7 days"}}, Width: w.FieldSM},
 					},
 					Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
@@ -605,7 +605,7 @@ func Publish4() Screen {
 							},
 							Width: w.FieldW100,
 						},
-						w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".md"}, w.Text("download")}},
+						w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".md"}, w.Text(" download")}},
 						w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "30 days"}}, Width: w.FieldSM},
 					},
 					Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},

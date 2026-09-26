@@ -191,6 +191,8 @@ var compared = map[string][]string{
 	"input":    {"type", "value", "placeholder", "disabled", "checked"},
 	"textarea": {"placeholder", "disabled"},
 	"button":   {"disabled"},
+	"td":       {"colspan", "rowspan"},
+	"th":       {"colspan", "rowspan"},
 	"svg":      {"viewBox", "width", "height", "stroke", "stroke-width", "fill"},
 	"use":      {"href"},
 	"img":      {"src", "width", "height"},

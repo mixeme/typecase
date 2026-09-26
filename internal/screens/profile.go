@@ -42,15 +42,15 @@ func Profile1() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -354,7 +354,7 @@ func Profile1() Screen {
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}},
 													},
 													{Parts: []w.CellPart{w.Text("118")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 3},
 												},
 											},
 											{
@@ -461,15 +461,15 @@ func Profile2() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -501,7 +501,7 @@ func Profile2() Screen {
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: ".well-known", Form: w.MonoCode},
-													w.Text("is tried first, then the URL exactly as typed — which is the reliable path for Baikal."),
+													w.Text(" is tried first, then the URL exactly as typed — which is the reliable path for Baikal."),
 												},
 											},
 										},
@@ -575,15 +575,15 @@ func Profile11() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -690,15 +690,15 @@ func Profile3() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,
@@ -833,15 +833,15 @@ func Profile4() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -1044,9 +1044,9 @@ func Profile5() Screen {
 								w.Pick{Value: "nextcloud"},
 								w.FieldHint{
 									Parts: []w.Inline{
-										w.Text("Two of three are listed:"),
+										w.Text("Two of three are listed: "),
 										w.Mono{Text: "baikal"},
-										w.Text("is not answering, and until it does there is nothing to create there."),
+										w.Text(" is not answering, and until it does there is nothing to create there."),
 									},
 									Variant: w.HintSmall,
 								},
@@ -1064,9 +1064,9 @@ func Profile5() Screen {
 								w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 2},
 								w.FieldHint{
 									Parts: []w.Inline{
-										w.Text("Written to the server as"),
+										w.Text("Written to the server as "),
 										w.Mono{Text: "calendar-color"},
-										w.Text("— DAVx5 and Thunderbird will show the same one."),
+										w.Text(" — DAVx5 and Thunderbird will show the same one."),
 									},
 									Variant: w.HintSmall,
 								},
@@ -1085,7 +1085,7 @@ func Profile5() Screen {
 								},
 								w.FieldHint{
 									Parts: []w.Inline{
-										w.Text("Most servers settle this when the collection is made and will not change it afterwards. A collection holding only tasks appears in"),
+										w.Text("Most servers settle this when the collection is made and will not change it afterwards. A collection holding only tasks appears in "),
 										w.Strong("Tasks"),
 										w.Text(", not here — the rail follows what is inside, not where it was made."),
 									},
@@ -1101,7 +1101,7 @@ func Profile5() Screen {
 								w.FieldHint{
 									Parts: []w.Inline{
 										w.Mono{Text: "…/remote.php/dav/calendars/mix/poezdki/"},
-										w.Text("— taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show."),
+										w.Text(" — taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show."),
 									},
 									Variant: w.HintSmall,
 								},
@@ -1280,15 +1280,15 @@ func Profile7() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,
@@ -1460,15 +1460,15 @@ func Profile8() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,
@@ -1652,15 +1652,15 @@ func Profile9() Screen {
 						Items: []w.RailFootPart{
 							w.RailStatus{
 								Text:   "davloom · running · 3 devices",
-								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 							},
 							w.RailStatus{
 								Text: "Backups are running",
 								Detail: w.Dim{
 									Parts: []w.Inline{
-										w.Text("Last backup"),
+										w.Text("Last backup "),
 										w.Mono{Text: "2026-08-16 03:10"},
-										w.Text("·"),
+										w.Text(" · "),
 										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 									},
 									Size: w.Dim11,
@@ -1861,15 +1861,15 @@ func Profile10() Screen {
 					Items: []w.RailFootPart{
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
 							Text: "Backups are running",
 							Detail: w.Dim{
 								Parts: []w.Inline{
-									w.Text("Last backup"),
+									w.Text("Last backup "),
 									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text("·"),
+									w.Text(" · "),
 									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
 								},
 								Size: w.Dim11,
@@ -2155,7 +2155,7 @@ func Profile10() Screen {
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}},
 													},
 													{Parts: []w.CellPart{w.Text("118")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 3},
 												},
 											},
 											{
@@ -2250,9 +2250,9 @@ func Profile10() Screen {
 									w.FieldHint{
 										Parts: []w.Inline{
 											w.Mono{Text: "https://"},
-											w.Text(","),
+											w.Text(", "),
 											w.Mono{Text: "webcal://"},
-											w.Text("and a secret link from another Carrel are all understood."),
+											w.Text(" and a secret link from another Carrel are all understood."),
 										},
 									},
 								},

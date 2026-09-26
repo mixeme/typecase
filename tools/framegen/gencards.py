@@ -120,8 +120,8 @@ def runbar(e):
     for k in e.kids:
         if isinstance(k, str):
             t = re.sub(r"\s+", " ", k)
-            if t.strip():
-                ps.append("w.Text(" + q(t) + ")")
+            if textpart(e, k):
+                ps.append(textpart(e, k))
         elif k.has("tc-meter"):
             continue
         elif k.has("tc-dim--danger"):
@@ -211,8 +211,8 @@ def empty(e):
     for k in e.kids:
         if isinstance(k, str):
             t = re.sub(r"\s+", " ", k)
-            if t.strip():
-                ps.append("w.Text(" + q(t.strip() if not ps else t) + ")")
+            if textpart(e, k):
+                ps.append(textpart(e, k))
         elif k.tag == "svg" or k.has("tc-empty__lead") or k.has("tc-empty__lead-sm"):
             continue
         elif k.has("tc-btn"):
@@ -223,14 +223,14 @@ def empty(e):
             for y in k.kids:
                 if isinstance(y, str):
                     if y.strip():
-                        its.append("w.Text(" + q(" ".join(y.split())) + ")")
+                        its.append(textpart(k, y))
                 elif y.has("tc-mono"):
                     its.append(mono(y))
                 elif y.tag == "b":
                     its.append("w.Strong(" + q(y.text()) + ")")
             ps.append("w.Aside{Face: w." + face + ", Parts: []w.Inline{" + ", ".join(its) + "}}")
         elif k.has("tc-dim"):
-            ps.append("w.Dim{Parts: []w.Inline{" + ", ".join(("w.Text(" + q(" ".join(y.split())) + ")") if isinstance(y, str) else mono(y) for y in k.kids if not isinstance(y, str) or y.strip()) + "}, Size: w.Dim11_5, Variant: w.DimWrap}")
+            ps.append(dimx(k))
         elif k.tag == "b" and k.has("tc-dim--accent"):
             ps.append("w.Emphasis(" + q(k.text()) + ")")
         elif k.has("tc-mono"):
@@ -289,8 +289,8 @@ def fields(e):
         for k in dd.kids:
             if isinstance(k, str):
                 t = re.sub(r"\s+", " ", k)
-                if t.strip():
-                    vp.append("w.Text(" + q(t) + ")")
+                if textpart(dd, k):
+                    vp.append(textpart(dd, k))
             elif k.tag == "br":
                 vp.append("w.Break{}")
             elif k.has("tc-mark"):
@@ -610,8 +610,8 @@ def table(e):
             for k in td.kids:
                 if isinstance(k, str):
                     t = re.sub(r"\s+", " ", k)
-                    if t.strip():
-                        parts.append("w.Text(" + q(t) + ")")
+                    if textpart(td, k):
+                        parts.append(textpart(td, k))
                 elif k.has("tc-tickrow__tick"):
                     g.append("Pick: ptr(" + ("w.TickedOff" if k.has("is-off") else "w.TickedOn") + ")")
                 else:
@@ -638,6 +638,8 @@ def table(e):
                 g.append("Small: true")
             if td.attrs.get("colspan"):
                 g.append("Span: " + td.attrs["colspan"])
+            if td.attrs.get("rowspan"):
+                g.append("Rows: " + td.attrs["rowspan"])
             if not head:
                 if td.has("tc-table__n3"):
                     g.append("Rank: w.Rank3")

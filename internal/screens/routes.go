@@ -22,6 +22,7 @@ type Screen interface{ Render() string }
 type Route struct {
 	Frame   string // the frame's data-frame
 	Caption string // the frame's caption in the mockup
+	Theme   string // the theme the frame is drawn in ("dark"); the page sets it, as theme.js does
 	Screen  func() Screen
 }
 

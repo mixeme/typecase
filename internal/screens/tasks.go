@@ -129,7 +129,7 @@ func Tasks1() Screen {
 							w.DueRow{
 								Tick:       w.Tick{Label: "Done"},
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Собрать чемодан")},
+								Title:      []w.Inline{w.Text("Собрать чемодан ")},
 								Strong:     true,
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Tags:       []w.RowTag{w.Tag{Label: "дом"}},
@@ -280,8 +280,12 @@ func Tasks2() Screen {
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 							{
-								Term:  "Due",
-								Value: []w.ValuePart{w.Mono{Text: "2026-08-12 18:00"}, w.Span{Face: w.FaceDanger, Text: "· overdue by 3 days"}},
+								Term: "Due",
+								Value: []w.ValuePart{
+									w.Mono{Text: "2026-08-12 18:00"},
+									w.Text(" "),
+									w.Span{Face: w.FaceDanger, Text: "· overdue by 3 days"},
+								},
 							},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
 							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
