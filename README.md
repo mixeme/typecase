@@ -46,8 +46,14 @@ How to build a screen — [docs/guide/screen.md](docs/guide/screen.md).
 
 See [docs/spec/typecase.md](docs/spec/typecase.md).
 
-The look comes from the mockup; its rules and checks are in
-[docs/visual/mockup.md](docs/visual/mockup.md).
+The look comes from the mockup,
+[docs/visual/carrel-ui-mockups.html](docs/visual/carrel-ui-mockups.html):
+its style block is cut into `css/typecase.css` (`go generate ./css`), each
+widget prints the fragment of its frame, and a screen is a frame built of
+widgets. Something the mockup does not draw is drawn there first. The
+mockup's rules and checks are in [docs/visual/mockup.md](docs/visual/mockup.md);
+how to build a screen — [docs/guide/screen.md](docs/guide/screen.md); the
+gates the library keeps — [L-8 of the spec](docs/spec/typecase.md#l-8-ворота).
 
 ## License
 
