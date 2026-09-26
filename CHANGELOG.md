@@ -68,6 +68,16 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   to a record. In the mockup: the zoom is `tc-field__zoom`, the weights
   column `tc-rubric__col`, and «Find a zone» gets the `is-ph` every other
   placeholder has (awaiting the owner in `allowed-diffs.md`).
+- **Rows and lists.** A list row is typed by its columns: `TimeRow`,
+  `FaceRow`, `ExcerptRow`, `DueRow`, `FindRow`, `LinkedRow`, `BriefRow`,
+  `SizeRow`, `SlimRow`, `PhoneRow` and the loading `SkelRow` are the nine
+  column sets of `tc-row`, so a row of times has no avatar and a row of people
+  no due date. `List` holds any of them; `TickRow` is the rail's row with its
+  tick box (`Ticked`: on, part, off), also in a group's grid of choices;
+  `Tree` with its rows names the chosen one by number, so two cannot be
+  chosen; `Skel` is the placeholder. In the mockup the tree's icons lose the
+  four different `svg` wrappers that drew the same icon and keep the plain one
+  the tree's CSS sizes.
 
 ### Mockup
 

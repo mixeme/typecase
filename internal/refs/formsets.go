@@ -64,6 +64,6 @@ var _ = wait("children from the family of tables and cards (message, card, field
 	ref("s-backup-3", "tc-fset", 1), ref("s-backup-2", "tc-fset", 2), ref("attachments-1", "tc-fset", 1),
 	ref("m-desktop-14", "tc-line", 1), ref("m-desktop-5", "tc-stack", 1))
 
-var _ = wait("children from the family of rows and lists (tick row)", ref("s-backup-2", "tc-fset", 1))
+var _ = wait("children from the family of tables and cards (message)", ref("s-backup-2", "tc-fset", 1))
 
 var _ = wait("mockup defect for the owner: an input inside the check's button (nested controls)", ref("s-backup-2", "tc-check", 4))
