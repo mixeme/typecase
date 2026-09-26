@@ -69,10 +69,12 @@ do, not what the authors did.
   the title. Editing is on the note page («Заметка · правка»); section 7.4
   now names the one real difference, neighbours in the note page's rail.
 
-Next: the owner looks through the frames the one-off fold moved
-([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base
-moves, and then the breaking 0.7.0 where the library prints the mockup
-([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
+- The owner looked through the 69 frames the one-off fold moved and accepted
+  them; the screenshot base (`docs/visual/allowed-diffs.md`) moved to
+  `de784a4` and its table is empty. `docs/plan/fold-review.md` is gone.
+
+Next: plan 1 closes, and then the breaking 0.7.0 where the library prints the
+mockup ([docs/plan/2-library-from-mockup.md](docs/plan/2-library-from-mockup.md)).
 
 ## typecase/v0.6.2 — 2026-09-25
 
@@ -199,8 +201,7 @@ waiting for the owner's eye.
   sits on one node, 109 are gone: 67 replaced by the nearest shared class of
   the same block, 42 dropped to the block's base look, whichever is nearer. The 173 kept are
   elements of one frame, variants with a meaning, and geometry a frame sets
-  for itself. The drawing moved in 69 frames; the owner reviews them by eye against
-  `docs/plan/fold-review.md`.
+  for itself. The drawing moved in 69 frames; the owner reviewed them by eye and accepted them.
 - **A taken connection label is refused, in a frame of its own.** `s-profile-11`
   is the connect dialog after Connect with a label that already exists: the
   field is marked and says to choose another; the other fields stay as typed.
