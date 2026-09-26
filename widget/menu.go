@@ -203,13 +203,16 @@ type Menu struct {
 // Render prints the menu.
 func (u Menu) Render() string { return u.html(nil) }
 
-func (u Menu) html(m mix) string {
+func (u Menu) html(m mix) string { return u.shown(m, true) }
+
+// shown prints the menu open, or closed until its button opens it.
+func (u Menu) shown(m mix, open bool) string {
 	tag := "div"
 	if u.Inline {
 		tag = "span"
 	}
 	var s strings.Builder
-	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + ` role="menu">`)
+	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + ` role="menu"` + flag("hidden", !open) + `>`)
 	for _, it := range u.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -229,17 +232,18 @@ func (Pick) dropTrigger()   {}
 // Drop — tc-drop
 //
 // Роль. Кнопка или выбор вместе с меню, которое они открывают.
-// Вход. Drop{Trigger, Menu, More}.
+// Вход. Drop{Trigger, Menu, More, Open}.
 // Состояния. more | pick.
 // Инварианты. Меню стоит сразу за тем, что его открывает; «⋯» бара — кнопка бара и тогда, когда она в выпадашке; выпадашка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус.
 // Эталон. кадр `components-19`, фрагмент `.tc-drop`.
 // Содержимое. Кнопка или поле выбора, меню.
-// Чего нет. Своего вида: вид у кнопки и меню.
+// Чего нет. Своего вида: вид у кнопки и меню. Без сценария закрытое меню не открыть.
 type Drop struct {
 	Trigger DropTrigger
 	Menu    Menu
 	More    bool // the trigger is its bar's «⋯»
+	Open    bool // drawn open, as the frames draw it; closed, the menu waits hidden for its button
 }
 
 // Render prints the drop.
@@ -250,5 +254,5 @@ func (d Drop) html(m mix) string {
 	if d.More {
 		t = mix{"tc-bar__more"}
 	}
-	return `<span` + class(m, "tc-drop") + `>` + d.Trigger.html(t) + d.Menu.html(nil) + `</span>`
+	return `<span` + class(m, "tc-drop") + `>` + d.Trigger.html(t) + d.Menu.shown(nil, d.Open) + `</span>`
 }

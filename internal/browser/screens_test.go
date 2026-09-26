@@ -136,7 +136,7 @@ func screenURL(base, id, theme string) string {
 }
 
 func TestScreensRenders(t *testing.T) {
-	skipUntilStep4(t)
+	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -329,7 +329,7 @@ const railDrawerProbeJS = `(() => {
 })()`
 
 func TestScreensNarrowRailDrawer(t *testing.T) {
-	skipUntilStep4(t)
+	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}

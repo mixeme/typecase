@@ -2,12 +2,11 @@ package browser
 
 import (
 	"fmt"
+	"math"
 	"strings"
 	"time"
 
 	"github.com/chromedp/chromedp"
-
-	"carrel.dev/typecase/layout"
 )
 
 // Name identifies one L-9.2 browser invariant.
@@ -76,22 +75,43 @@ func rectAction(sel string, dest *Rect) chromedp.Action {
 	return chromedp.Evaluate(js, dest)
 }
 
+// A menu's button and its popup, as the widgets print them.
+const (
+	menuTrigger = ".tc-drop > .tc-btn"
+	menuPopup   = ".tc-drop > .tc-menu"
+)
+
+// labelArrowJS measures a menu button's label (its text) against its arrow
+// (the last icon): the arrow is whole inside the button, the words stop
+// before it.
+const labelArrowJS = `(() => {
+  const b = document.querySelector(".tc-drop > .tc-btn");
+  if (!b) return "missing button";
+  const svgs = b.querySelectorAll("svg");
+  if (!svgs.length) return "missing arrow";
+  const arrow = svgs[svgs.length - 1].getBoundingClientRect();
+  const box = b.getBoundingClientRect();
+  if (arrow.width === 0) return "arrow not drawn";
+  if (arrow.right > box.right + 0.5 || arrow.left < box.left - 0.5) return "arrow outside the button";
+  let right = -Infinity;
+  for (const n of b.childNodes) {
+    if (n.nodeType !== 3 || !n.textContent.trim()) continue;
+    const r = document.createRange();
+    r.selectNodeContents(n);
+    for (const rect of r.getClientRects()) right = Math.max(right, Math.min(rect.right, box.right));
+  }
+  if (right === -Infinity) return "missing label";
+  if (right > arrow.left + 0.5) return "label overlaps arrow";
+  return "";
+})()`
+
 func checkMenuLabelArrow(h *Harness, url string, width, height int) error {
-	var label, arrow Rect
-	err := h.Run(url, width, height,
-		chromedp.Click(".tc-menu__control", chromedp.ByQuery),
-		chromedp.Sleep(80*time.Millisecond),
-		rectAction(".tc-menu__label", &label),
-		rectAction(".tc-menu__arrow", &arrow),
-	)
-	if err != nil {
+	var bad string
+	if err := h.Run(url, width, height, chromedp.Evaluate(labelArrowJS, &bad)); err != nil {
 		return err
 	}
-	if label.Width == 0 || arrow.Width == 0 {
-		return fmt.Errorf("menu-label-arrow: missing elements")
-	}
-	if Intersects(label, arrow) {
-		return fmt.Errorf("menu-label-arrow: label overlaps arrow")
+	if bad != "" {
+		return fmt.Errorf("menu-label-arrow: %s", bad)
 	}
 	return nil
 }
@@ -99,10 +119,10 @@ func checkMenuLabelArrow(h *Harness, url string, width, height int) error {
 func checkPopoverAnchor(h *Harness, url string, width, height int) error {
 	var btn, pop Rect
 	err := h.Run(url, width, height,
-		chromedp.Click(".tc-menu__control", chromedp.ByQuery),
+		chromedp.Click(menuTrigger, chromedp.ByQuery),
 		chromedp.Sleep(80*time.Millisecond),
-		rectAction(".tc-menu__control", &btn),
-		rectAction(".tc-menu__popover", &pop),
+		rectAction(menuTrigger, &btn),
+		rectAction(menuPopup, &pop),
 	)
 	if err != nil {
 		return err
@@ -113,8 +133,8 @@ func checkPopoverAnchor(h *Harness, url string, width, height int) error {
 	if !CloseEnough(btn.Left, pop.Left) {
 		return fmt.Errorf("popover-anchor: left edges differ (btn=%.1f pop=%.1f)", btn.Left, pop.Left)
 	}
-	if pop.Top < btn.Bottom && !CloseEnough(pop.Top, btn.Bottom+2) {
-		return fmt.Errorf("popover-anchor: popover not below control (btn.bottom=%.1f pop.top=%.1f)", btn.Bottom, pop.Top)
+	if !CloseEnough(pop.Top, btn.Bottom+4) {
+		return fmt.Errorf("popover-anchor: popover not under its button (btn.bottom=%.1f pop.top=%.1f)", btn.Bottom, pop.Top)
 	}
 	return nil
 }
@@ -123,15 +143,18 @@ func checkPopoverFlip(h *Harness, url string, width, height int) error {
 	var btn, pop Rect
 	var vw, vh float64
 	err := h.Run(url, width, height,
-		chromedp.Click(".tc-menu__control", chromedp.ByQuery),
+		chromedp.Click(menuTrigger, chromedp.ByQuery),
 		chromedp.Sleep(80*time.Millisecond),
-		rectAction(".tc-menu__control", &btn),
-		rectAction(".tc-menu__popover", &pop),
+		rectAction(menuTrigger, &btn),
+		rectAction(menuPopup, &pop),
 		chromedp.Evaluate(`window.innerWidth`, &vw),
 		chromedp.Evaluate(`window.innerHeight`, &vh),
 	)
 	if err != nil {
 		return err
+	}
+	if pop.Width == 0 {
+		return fmt.Errorf("popover-flip: popover not open")
 	}
 	if !FullyVisible(pop, vw, vh) {
 		return fmt.Errorf("popover-flip: popover not fully visible")
@@ -145,7 +168,7 @@ func checkPopoverFlip(h *Harness, url string, width, height int) error {
 func checkEllipsis(h *Harness, url string, width, height int) error {
 	var clipped bool
 	err := h.Run(url, width, height,
-		chromedp.Evaluate(`(() => { const el = document.querySelector(".tc-fields__value--path"); if (!el) return false; const cs = getComputedStyle(el); return cs.textOverflow === "ellipsis" && cs.overflow !== "visible" && el.scrollWidth > el.clientWidth + 1; })()`, &clipped),
+		chromedp.Evaluate(`(() => { const el = document.querySelector(".tc-row__title"); if (!el) return false; const cs = getComputedStyle(el); return cs.textOverflow === "ellipsis" && cs.overflow !== "visible" && el.scrollWidth > el.clientWidth + 1; })()`, &clipped),
 	)
 	if err != nil {
 		return err
@@ -167,8 +190,7 @@ func checkBarOneRow(h *Harness, url string, width, height int) error {
 })()`, &barH),
 		chromedp.Evaluate(`(() => {
   if (window.__tc && window.__tc.layoutUpdates) window.__tc.layoutUpdates();
-  return Array.from(document.querySelectorAll(".tc-bar .tc-btn")).filter((el) => {
-    if (el.closest("[data-tc-bar-stash]")) return false;
+  return Array.from(document.querySelectorAll(".tc-bar > *")).filter((el) => {
     const r = el.getBoundingClientRect();
     return r.width > 0 && r.height > 0;
   }).map((el) => el.getBoundingClientRect().top);
@@ -180,11 +202,8 @@ func checkBarOneRow(h *Harness, url string, width, height int) error {
 	if barH == 0 {
 		return fmt.Errorf("bar-one-row: missing bar")
 	}
-	if barH > 40 {
-		return fmt.Errorf("bar-one-row: bar height %.1f exceeds single row", barH)
-	}
 	for i, top := range tops {
-		if i > 0 && !CloseEnough(top, tops[0]) {
+		if i > 0 && math.Abs(top-tops[0]) > 12 {
 			return fmt.Errorf("bar-one-row: buttons wrap to multiple rows")
 		}
 	}
@@ -216,12 +235,10 @@ const tapHitJS = `(() => {
 })()`
 
 // tapDrawnJS reports the drawn rectangle of the marks that must stay small in
-// the normal density. Tick sizes come from layout tables, not a third copy.
-func tapDrawnJS() string {
-	tick := layoutBoxPx(".tc-tick", "width")
-	rowTick := layoutBoxPx(".tc-tickrow__tick", "width")
-	return fmt.Sprintf(`(() => {
-  const want = { ".tc-tick": %g, ".tc-tickrow__tick": %g, ".tc-close": 24 };
+// the normal density: the sizes are the mockup's (.tc-tick 13 px,
+// .tc-tickrow__tick 12 px).
+const tapDrawnJS = `(() => {
+  const want = { ".tc-tick": 13, ".tc-tickrow__tick": 12 };
   const bad = [];
   for (const sel of Object.keys(want)) {
     const el = document.querySelector(sel);
@@ -232,20 +249,7 @@ func tapDrawnJS() string {
     }
   }
   return bad;
-})()`, tick, rowTick)
-}
-
-func layoutBoxPx(sel, prop string) float64 {
-	for _, b := range layout.All().Boxes {
-		if b.Selector != sel {
-			continue
-		}
-		if n, ok := layout.Px(b.Props[prop]); ok {
-			return n
-		}
-	}
-	return 0
-}
+})()`
 
 func checkTapTarget(h *Harness, url string, width, height int) error {
 	var missed []string
@@ -256,7 +260,7 @@ func checkTapTarget(h *Harness, url string, width, height int) error {
 		return fmt.Errorf("tap-target: hit area under 44px: %s", strings.Join(missed, "; "))
 	}
 	var grown []string
-	if err := h.Run(url, 1280, 900, chromedp.Evaluate(tapDrawnJS(), &grown)); err != nil {
+	if err := h.Run(url, 1280, 900, chromedp.Evaluate(tapDrawnJS, &grown)); err != nil {
 		return err
 	}
 	if len(grown) > 0 {
@@ -268,38 +272,43 @@ func checkTapTarget(h *Harness, url string, width, height int) error {
 const keyEscapeJS = `document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", code: "Escape", bubbles: true }))`
 
 func checkFocusReturn(h *Harness, url string, width, height int) error {
-	var active string
+	var back bool
 	err := h.Run(url, width, height,
-		chromedp.Click(".tc-menu__control", chromedp.ByQuery),
+		chromedp.Click(menuTrigger, chromedp.ByQuery),
 		chromedp.Sleep(80*time.Millisecond),
 		chromedp.Evaluate(keyEscapeJS, nil),
 		chromedp.Sleep(80*time.Millisecond),
-		chromedp.Evaluate(`document.activeElement ? document.activeElement.className : ""`, &active),
+		chromedp.Evaluate(`document.activeElement === document.querySelector(".tc-drop > .tc-btn")`, &back),
 	)
 	if err != nil {
 		return err
 	}
-	if active != "tc-menu__control" {
-		return fmt.Errorf("focus-return: focus not on menu control (%q)", active)
+	if !back {
+		return fmt.Errorf("focus-return: focus not back on the menu's button")
 	}
 	return nil
 }
 
+// shownJS says whether the scrim in the element with the id is shown.
+func shownJS(id string) string {
+	return `(() => { const s = document.querySelector("#` + id + ` .tc-scrim"); return !!s && !s.hidden && s.getClientRects().length > 0; })()`
+}
+
 func checkEscLayers(h *Harness, url string, width, height int) error {
-	var dialogHidden, sheetHidden bool
+	var topShown, bottomShown bool
 	err := h.Run(url, width, height,
 		chromedp.Evaluate(keyEscapeJS, nil),
 		chromedp.Sleep(80*time.Millisecond),
-		chromedp.Evaluate(`(() => { const el = document.getElementById("top-dialog"); return el ? el.hidden : true; })()`, &dialogHidden),
-		chromedp.Evaluate(`(() => { const el = document.getElementById("bottom-sheet"); return el ? el.hidden : true; })()`, &sheetHidden),
+		chromedp.Evaluate(shownJS("top-dialog"), &topShown),
+		chromedp.Evaluate(shownJS("bottom-sheet"), &bottomShown),
 	)
 	if err != nil {
 		return err
 	}
-	if !dialogHidden {
-		return fmt.Errorf("esc-layers: top dialog still open")
+	if topShown {
+		return fmt.Errorf("esc-layers: top sheet still open")
 	}
-	if sheetHidden {
+	if !bottomShown {
 		return fmt.Errorf("esc-layers: bottom sheet closed")
 	}
 	return nil

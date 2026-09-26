@@ -135,6 +135,20 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   allowed. In the mockup the icons of message rows and of grid thumbnails
   lose a wrapper that repeated their block's rule, and the rule that only
   that wrapper used is gone.
+- **tc.js on the new markup.** The script reads what the widgets print:
+  a drop's button is the first child of `.tc-drop` (`.tc-drop__anchor` in the
+  top bar) and its menu stands beside it; a sheet or a panel closes by its
+  `.tc-close`, by a click on the scrim or by Esc, the topmost layer first; a
+  control with `data-tc-open="id"` opens the sheet or panel with that id.
+  Closed is the `hidden` attribute (backed by an inline `display:none` where a
+  rule of the mockup would show the element), since the mockup's CSS has no
+  closed state; `Drop` and `TopDrop` have `Open`. The shell's state is read
+  from `--tc-shell-mode` and written on the shell as `data-tc-mode`; the
+  script keeps no threshold of its own. A bar the CSS did not fit is marked
+  `data-tc-overflow` and scrolls sideways. The old hooks (`data-tc-menu`,
+  `data-tc-bar-*`, `data-tc-top-*`, `data-tc-seg*`, `data-tc-tree*`,
+  `data-tc-pick*`, `data-tc-crop`, `data-tc-rail*` and the rest) are gone with
+  the markup they served.
 
 ### Mockup
 

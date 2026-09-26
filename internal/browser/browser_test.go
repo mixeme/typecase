@@ -20,9 +20,6 @@ func TestL9_2_browserChecks(t *testing.T) {
 	fixtures := browser.GoodFixtures()
 	for _, name := range browser.AllChecks {
 		t.Run(string(name), func(t *testing.T) {
-			if geometryChecks[name] {
-				skipUntilStep4(t)
-			}
 			fix, ok := fixtures[name]
 			if !ok {
 				t.Fatalf("missing good fixture for %s", name)
@@ -81,9 +78,6 @@ func TestL9_3_biteTests(t *testing.T) {
 	h := browser.NewHarness(t)
 	for _, name := range browser.AllChecks {
 		t.Run(string(name), func(t *testing.T) {
-			if geometryChecks[name] {
-				skipUntilStep4(t)
-			}
 			fix := brokenFixture(t, name)
 			if err := browser.Check(name, h, fix); err == nil {
 				t.Fatalf("expected %s check to fail on broken fixture", name)

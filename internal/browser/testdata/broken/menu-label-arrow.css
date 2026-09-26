@@ -1,1 +1,2 @@
-.tc-menu__label { max-width: none !important; margin-right: -2em; }
+.tc-drop > .tc-btn > svg:last-child { position: absolute !important; left: 8px !important; }
+.tc-drop > .tc-btn { position: relative !important; }

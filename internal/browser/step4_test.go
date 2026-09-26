@@ -1,28 +1,14 @@
 package browser_test
 
-import (
-	"testing"
+import "testing"
 
-	"carrel.dev/typecase/internal/browser"
-)
+// The catalog and the demo screens measure markup that plan 3 rebuilds: the
+// catalog from the reference records, the screens from the new widgets. Until
+// then their tests are skipped, not deleted. The behaviour checks of tc.js and
+// the geometry checks of L-9.2 run on the new widgets since plan 2, step 5.
+const untilPlan3 = "library-from-mockup: каталог и демо-экраны пересобираются в плане 3"
 
-// Plan 2, step 1: the library CSS is the mockup's cut, and the old widget
-// markup is not drawn by it. Until step 4 rewrites the widgets, the tests that
-// measure old markup — the catalog, the demo screens and the geometry checks
-// of L-9.2 — are skipped, not deleted. Behaviour checks of tc.js stay on.
-const step4 = "library-from-mockup: шаг 4 — старая разметка виджетов под CSS макета"
-
-// geometryChecks measure widget geometry on catalog fixtures.
-var geometryChecks = map[browser.Name]bool{
-	browser.MenuLabelArrow: true,
-	browser.PopoverAnchor:  true,
-	browser.PopoverFlip:    true,
-	browser.Ellipsis:       true,
-	browser.BarOneRow:      true,
-	browser.TapTarget:      true,
-}
-
-func skipUntilStep4(t *testing.T) {
+func skipUntilPlan3(t *testing.T) {
 	t.Helper()
-	t.Skip(step4)
+	t.Skip(untilPlan3)
 }

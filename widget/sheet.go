@@ -326,23 +326,25 @@ func (p ScrimPad) class() string {
 // Scrim — tc-scrim
 //
 // Роль. Затемнение страницы под листом: страница видна, но недоступна, пока лист открыт.
-// Вход. Scrim{Content, Pad}.
+// Вход. Scrim{Content, Pad, ID, Closed}.
 // Состояния. plain | pad.
 // Инварианты. На затемнении одно: лист или пустое состояние; отступ сверху — перечисление; затемнение печатает фрагмент своего кадра.
-// Поведение. Нажатие на затемнение закрывает лист, как Esc.
+// Поведение. Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте.
 // Эталон. кадр `s-contacts-2`, фрагмент `.tc-scrim`.
 // Содержимое. Лист.
-// Чего нет. Своего содержимого: только то, что на нём стоит.
+// Чего нет. Своего содержимого: только то, что на нём стоит. Без сценария закрытое затемнение не открыть: экран тогда открывает лист своим адресом.
 type Scrim struct {
 	Content ScrimPart
 	Pad     ScrimPad
+	ID      string // what a button's Opens names
+	Closed  bool   // printed closed, for a button to open in place
 }
 
 // Render prints the scrim.
 func (c Scrim) Render() string { return c.html(nil) }
 
 func (c Scrim) html(m mix) string {
-	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + `>`
+	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + attr("id", c.ID) + flag("hidden", c.Closed) + `>`
 	if c.Content != nil {
 		s += c.Content.html(nil)
 	}

@@ -26,6 +26,7 @@ type TopDrop struct {
 	Trigger TopDropTrigger
 	Menu    Menu
 	End     bool // the menu is aligned to the button's end: the last button of the bar
+	Open    bool // drawn open; closed, the menu waits hidden for its button
 }
 
 func (d TopDrop) html(mix) string {
@@ -33,7 +34,7 @@ func (d TopDrop) html(mix) string {
 	if d.End {
 		panel = "tc-drop__panel--right"
 	}
-	return `<span class="tc-drop__anchor">` + d.Trigger.html(nil) + `<span class="` + panel + `">` + d.Menu.html(nil) + `</span></span>`
+	return `<span class="tc-drop__anchor">` + d.Trigger.html(nil) + `<span class="` + panel + `"` + flag("hidden", !d.Open) + `>` + d.Menu.html(nil) + `</span></span>`
 }
 
 // Top — tc-top

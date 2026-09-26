@@ -1,2 +1,3 @@
-.demo { width: 140px !important; }
-.tc-bar { flex-wrap: wrap !important; height: auto !important; min-height: 52px !important; }
+.tc-bar { flex-wrap: wrap !important; height: auto !important; }
+.tc-bar .is-2nd { display: inline-flex !important; }
+.tc-bar > * { flex: 0 0 180px !important; }

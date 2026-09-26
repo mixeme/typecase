@@ -1,2 +1,1 @@
-.demo { margin-top: 240px; }
-.tc-menu__popover.is-flip-up { top: 100% !important; bottom: auto !important; margin-top: 2px !important; margin-bottom: 0 !important; }
+.tc-drop > .tc-menu { top: 100% !important; bottom: auto !important; }
