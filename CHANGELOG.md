@@ -96,6 +96,20 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   group's heading (`ListGroup`) and a public page's banner, address strip and
   foot. The badge check looks at the badge element itself, so a badge beside
   a link no longer fails it.
+- **Overlays.** `Menu` with its items (`MenuItem`: icon, mark, tick box,
+  label or found words, a monospaced detail, a trail), separators, headings,
+  value rows, a column with a switch and a foot; `Drop` is a button or a pick
+  with its menu, and is its bar's «⋯» when it says so; the top bar takes a
+  menu under the search and buttons with menus (`TopDrop`). `Sheet` has one
+  bold title after a toned icon, what stands at the end of its head, a body
+  of named parts (fields, keys, a picker, checks, a block of lines, the
+  sender) and a foot; `Scrim` holds it; `Overlay` holds the shell's body
+  under the scrim with its own `OverlayBody`, because the side panel is
+  closed while a sheet is open. `Dialog` is the centred canvas with its own
+  title, logo, tagline and sign-in column; `Auth` is the sign-in page. In the
+  mockup the accent icons of sheet heads share one stroke (1.4, round caps)
+  instead of three, and the folder picker of «Attach a file» gets the base
+  class its sibling has.
 
 ### Mockup
 

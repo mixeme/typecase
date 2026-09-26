@@ -133,6 +133,17 @@ var _ = add(
 		w.Head{Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}}},
 		w.Form{},
 		w.FormFoot{}}}}}, "s-contacts-3", "tc-shell", 1),
+	shell("overlay", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.Rubric{Text: "nextcloud"},
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
+		w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"}}}}, Main: w.Main{}, Height: w.ShellHeight560}, Scrim: w.Scrim{Content: w.Sheet{Title: "Sheet"}, Pad: w.ScrimPad26}}}, "s-contacts-2", "tc-shell", 1),
 	shell("no-top", w.Shell{Body: w.ShellBody{Main: w.Main{Items: []w.MainPart{
 		w.Form{}}}}}, "account-8", "tc-shell", 1),
 	shell("side", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
@@ -210,7 +221,5 @@ func init() {
 		w.Stage{}, w.Person{})
 }
 
-var _ = wait("children from the family of overlays (a drop with a menu in a bar)", ref("components-19", "tc-bar", 1), ref("s-agenda-1", "tc-bar", 1))
-
-var _ = wait("children from later families (cards, tables, documents, overlays, states)",
-	ref("s-contacts-1", "tc-main", 1), ref("s-agenda-1", "tc-main", 1), ref("s-notes-2", "tc-main", 1), ref("s-dup-1", "tc-main", 1), ref("s-notes-3", "tc-main", 1), ref("s-notes-4", "tc-main", 1), ref("s-files-2", "tc-main", 1), ref("s-files-3", "tc-main", 1), ref("s-find-1", "tc-main", 1), ref("s-profile-10", "tc-main", 1), ref("s-davloom-1", "tc-main", 1), ref("s-davloom-4", "tc-main", 1), ref("s-backup-1", "tc-main", 1), ref("s-publish-8", "tc-main", 1), ref("s-publish-9", "tc-main", 1), ref("s-publish-10", "tc-main", 1), ref("s-publish-11", "tc-main", 1), ref("s-publish-12", "tc-main", 1), ref("s-admin-1", "tc-main", 1), ref("s-admin-5", "tc-main", 1), ref("m-phone-1", "tc-main", 1), ref("m-phone-3", "tc-main", 1), ref("m-phone-5", "tc-main", 1), ref("m-phone-7", "tc-main", 1), ref("s-contacts-1", "tc-side", 1), ref("s-files-1", "tc-side", 1), ref("s-io-2", "tc-side", 1), ref("s-contacts-2", "tc-shell", 1))
+var _ = wait("children from later families (cards, tables, documents, states)",
+	ref("s-contacts-1", "tc-main", 1), ref("s-agenda-1", "tc-main", 1), ref("s-notes-2", "tc-main", 1), ref("s-dup-1", "tc-main", 1), ref("s-notes-3", "tc-main", 1), ref("s-notes-4", "tc-main", 1), ref("s-files-2", "tc-main", 1), ref("s-files-3", "tc-main", 1), ref("s-find-1", "tc-main", 1), ref("s-profile-10", "tc-main", 1), ref("s-davloom-1", "tc-main", 1), ref("s-davloom-4", "tc-main", 1), ref("s-backup-1", "tc-main", 1), ref("s-publish-8", "tc-main", 1), ref("s-publish-9", "tc-main", 1), ref("s-publish-10", "tc-main", 1), ref("s-publish-11", "tc-main", 1), ref("s-publish-12", "tc-main", 1), ref("s-admin-1", "tc-main", 1), ref("s-admin-5", "tc-main", 1), ref("m-phone-1", "tc-main", 1), ref("m-phone-3", "tc-main", 1), ref("m-phone-5", "tc-main", 1), ref("m-phone-7", "tc-main", 1), ref("s-contacts-1", "tc-side", 1), ref("s-files-1", "tc-side", 1), ref("s-io-2", "tc-side", 1))

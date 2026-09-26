@@ -257,19 +257,28 @@ type ShellBody struct {
 }
 
 func (b ShellBody) html(mix) string {
+	rail := make([]part, len(b.Rail))
+	for i, r := range b.Rail {
+		rail[i] = r
+	}
+	return shellBody(rail, b.RailForm, b.Main, b.Side, b.Height)
+}
+
+// shellBody prints the shell's body, in the shell or under an overlay.
+func shellBody(rail []part, form RailForm, main Main, side *Side, height ShellHeight) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, "tc-shell__body", pick(len(b.Rail) == 0, "tc-shell__body--no-rail"), pick(b.Side != nil, "tc-shell__body--side"),
-		b.Height.class(), pick(b.RailForm == RailIcons, "tc-shell__body--tcrail-56")) + `>`)
-	if len(b.Rail) > 0 {
-		s.WriteString(`<div` + class(nil, "tc-shell__rail", [...]string{"", "tc-shell__rail--icons", "tc-shell__rail--zone"}[b.RailForm]) + `>`)
-		for _, it := range b.Rail {
+	s.WriteString(`<div` + class(nil, "tc-shell__body", pick(len(rail) == 0, "tc-shell__body--no-rail"), pick(side != nil, "tc-shell__body--side"),
+		height.class(), pick(form == RailIcons, "tc-shell__body--tcrail-56")) + `>`)
+	if len(rail) > 0 {
+		s.WriteString(`<div` + class(nil, "tc-shell__rail", [...]string{"", "tc-shell__rail--icons", "tc-shell__rail--zone"}[form]) + `>`)
+		for _, it := range rail {
 			s.WriteString(it.html(nil))
 		}
 		s.WriteString(`</div>`)
 	}
-	s.WriteString(b.Main.html(nil))
-	if b.Side != nil {
-		s.WriteString(b.Side.html(nil))
+	s.WriteString(main.html(nil))
+	if side != nil {
+		s.WriteString(side.html(nil))
 	}
 	s.WriteString(`</div>`)
 	return s.String()

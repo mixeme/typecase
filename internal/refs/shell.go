@@ -284,6 +284,3 @@ func init() {
 		w.Nav{}, w.RailSec{}, w.RailStatus{}, w.RailFoot{}, w.Top{})
 	Parts = append(Parts, w.Logo{}, w.Crumb{}, w.NavItem{}, w.About{})
 }
-
-var _ = wait("children from the family of overlays (a menu under the search, a drop under a button)",
-	ref("s-find-2", "tc-top", 1), ref("s-notes-7", "tc-top", 1), ref("account-5", "tc-top", 1))

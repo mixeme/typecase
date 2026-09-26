@@ -10,21 +10,47 @@ type TopAction interface {
 
 func (Button) topAction()   {}
 func (UserMenu) topAction() {}
+func (TopDrop) topAction()  {}
+
+// TopDropTrigger is what opens a menu in the top bar.
+type TopDropTrigger interface {
+	part
+	topDropTrigger()
+}
+
+func (Button) topDropTrigger()   {}
+func (UserMenu) topDropTrigger() {}
+
+// TopDrop is a button of the top bar with the menu it opens under it.
+type TopDrop struct {
+	Trigger TopDropTrigger
+	Menu    Menu
+	End     bool // the menu is aligned to the button's end: the last button of the bar
+}
+
+func (d TopDrop) html(mix) string {
+	panel := "tc-drop__panel"
+	if d.End {
+		panel = "tc-drop__panel--right"
+	}
+	return `<span class="tc-drop__anchor">` + d.Trigger.html(nil) + `<span class="` + panel + `">` + d.Menu.html(nil) + `</span></span>`
+}
 
 // Top — tc-top
 //
 // Роль. Верхняя полоса приложения: знак, поиск по всему, главные действия и учётная запись.
-// Вход. Top{Lead, Brand, Search, Actions, Tight}.
-// Состояния. plain | phone.
+// Вход. Top{Lead, Brand, Search, Suggest, Actions, Tight}.
+// Состояния. plain | phone | suggest | drop.
 // Инварианты. Знак — один и первый, после кнопки рейла на телефоне; действия — в конце полосы; полоса печатает фрагмент своего кадра.
 // Поведение. нет: поведение у поиска, кнопок и меню учётной записи.
 // Эталон. кадр `shell-1`, фрагмент `.tc-top`.
-// Содержимое. Кнопка рейла (телефон), знак или название раздела, поиск, кнопки, меню учётной записи.
+// Содержимое. Кнопка рейла (телефон), знак или название раздела, поиск с подсказками под ним, кнопки, кнопки с меню, меню учётной записи.
 // Чего нет. Навигации по разделам: она в рейле.
 type Top struct {
 	Lead    *Button // on a phone: the button that opens the rail
 	Brand   Brand
 	Search  *Search
+	Suggest *Menu // what the search suggests, under it
 	Actions []TopAction
 	Tight   bool // 2 px between the actions: a phone's icon buttons
 }
@@ -39,7 +65,10 @@ func (t Top) html(m mix) string {
 		s.WriteString(t.Lead.html(nil))
 	}
 	s.WriteString(t.Brand.html(nil))
-	if t.Search != nil {
+	switch {
+	case t.Search != nil && t.Suggest != nil:
+		s.WriteString(`<span class="tc-line tc-top__search">` + t.Search.html(nil) + `<span class="tc-top__suggest">` + t.Suggest.html(nil) + `</span></span>`)
+	case t.Search != nil:
 		s.WriteString(t.Search.html(nil))
 	}
 	s.WriteString(`<div` + class(nil, "tc-top__actions", pick(t.Tight, "tc-top__actions--gap2")) + `>`)
