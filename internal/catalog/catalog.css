@@ -14,23 +14,27 @@
 	overflow: auto;
 }
 .catalog-nav { display: flex; gap: 1em; margin-bottom: 1em; }
-/* Scrims, overlays and the rail drawer are fixed to the viewport by design.
-   In the catalog every state is on one page, so each such cell becomes its own
-   containing block; otherwise one open scrim covers every other entry.
-   Empty-looking space below overlay content is this min-height, not a broken widget. */
-.catalog-demo:has(.tc-scrim, .tc-overlay, .tc-rail--drawer, .tc-menu, .tc-usermenu, .tc-search, .tc-pick) {
+/* Every cell is the containing block of what the library positions: a scrim
+   covers its cell and nothing else, a menu hangs from inside it. */
+.catalog-demo {
 	position: relative;
-	min-height: 220px;
-	overflow: hidden;
 	transform: translate(0);
+}
+/* What hangs out of its box as the mockup draws it — an open menu under its
+   trigger, the search's suggestions, a scrim over its content — is not
+   clipped, and the page's own script (roomJS) pads the cell until it is
+   inside. */
+.catalog-demo:has(.tc-menu.is-pop, [class*="tc-drop__panel"], .tc-top__suggest, .tc-scrim) {
+	overflow: visible;
+}
+/* A menu shown without its trigger hangs from the top of its cell: the
+   anchor stands where the trigger would (PageHTML). */
+.catalog-anchor {
+	position: relative;
+	height: 0;
 }
 .catalog-demo:has(.tc-meter) {
 	padding-bottom: 1.25em;
-}
-.catalog-demo:has(.tc-queue) {
-	position: relative;
-	min-height: 180px;
-	transform: translate(0);
 }
 
 /* Библиотека сбросила кегль заголовков (L-5.2), а страница каталога — это её
@@ -38,3 +42,8 @@
 body > h1 { font-size: 1.8em; font-weight: 400; margin: 0 0 0.5em; }
 .catalog-family > h2 { font-size: 1.3em; margin: 0 0 0.5em; }
 .catalog-entry > h3 { font-size: 1em; margin: 0; }
+
+/* The ladder switch and the theme links: the page's, not the library's. */
+.catalog-ladder { display: flex; flex-wrap: wrap; gap: 0.4em 1em; margin: 0 0 1em; font-size: 13px; }
+.catalog-theme { margin-left: auto; }
+.catalog-frame > h3 code { color: var(--tc-dusty); }

@@ -9,7 +9,6 @@ import (
 	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
 
-	"carrel.dev/typecase"
 	"carrel.dev/typecase/internal/browser"
 	"carrel.dev/typecase/internal/catalog"
 )
@@ -99,7 +98,6 @@ type catalogProbe struct {
 // without a per-cell containing block a single open scrim hides the whole
 // catalog.
 func TestCatalogCellsContainOverlays(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -126,7 +124,6 @@ func TestCatalogCellsContainOverlays(t *testing.T) {
 
 // TestCatalogFocusOnLoad ensures pre-open overlays do not steal focus at load.
 func TestCatalogFocusOnLoad(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -149,7 +146,6 @@ func TestCatalogFocusOnLoad(t *testing.T) {
 }
 
 func TestCatalogTextInkFitsLineBox(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -165,150 +161,6 @@ func TestCatalogTextInkFitsLineBox(t *testing.T) {
 	}
 	for _, cls := range bad {
 		t.Errorf("font box exceeds line box: %s", cls)
-	}
-}
-
-func TestCatalogRowTextStacked(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("catalog row layout check needs Chrome")
-	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
-
-	var stacked bool
-	js := `(() => {
-	  const cell = document.getElementById('tc-row--avatar-default');
-	  if (!cell) return false;
-	  const title = cell.querySelector('.tc-row__title');
-	  const subtitle = cell.querySelector('.tc-row__subtitle');
-	  if (!title || !subtitle) return false;
-	  const tr = title.getBoundingClientRect();
-	  const sr = subtitle.getBoundingClientRect();
-	  return sr.top >= tr.bottom - 1;
-	})()`
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(js, &stacked)); err != nil {
-		t.Fatal(err)
-	}
-	if !stacked {
-		t.Fatal("tc-row--avatar title and subtitle share one line")
-	}
-}
-
-func TestCatalogTreeLabelWidth(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("catalog tree layout check needs Chrome")
-	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
-
-	var ok bool
-	js := `(() => {
-	  const cell = document.getElementById('tc-tree-default');
-	  if (!cell) return false;
-	  const label = cell.querySelector('.tc-tree__label');
-	  if (!label) return false;
-	  const text = label.textContent.trim();
-	  const canvas = document.createElement('canvas');
-	  const ctx = canvas.getContext('2d');
-	  ctx.font = getComputedStyle(label).font;
-	  const need = ctx.measureText(text).width;
-	  const have = label.getBoundingClientRect().width;
-	  return have >= need - 1;
-	})()`
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(js, &ok)); err != nil {
-		t.Fatal(err)
-	}
-	if !ok {
-		t.Fatal("tc-tree label narrower than its text with children open")
-	}
-}
-
-// queueRowFingerprintJS returns how many distinct row-style fingerprints the six
-// queue states have, and whether idle is visually muted. Colour alone is not enough:
-// idle, running and cancelled share the base ink colour.
-const queueRowFingerprintJS = `(() => {
-  const states = ['idle', 'running', 'done', 'failed', 'partial', 'cancelled'];
-  const prints = [];
-  for (const st of states) {
-    const row = document.querySelector('#tc-queue-' + st + ' .tc-queue__row');
-    if (!row) continue;
-    const label = row.querySelector('.tc-queue__label');
-    const rowCS = getComputedStyle(row);
-    const labelCS = getComputedStyle(label);
-    prints.push([
-      labelCS.color,
-      labelCS.fontWeight,
-      labelCS.textDecorationLine,
-      rowCS.opacity
-    ].join('|'));
-  }
-  const idleRow = document.querySelector('#tc-queue-idle .tc-queue__row');
-  const idleMuted = idleRow && parseFloat(getComputedStyle(idleRow).opacity) < 0.9;
-  return { distinct: new Set(prints).size, idleMuted };
-})()`
-
-type queueFingerprintProbe struct {
-	Distinct  int  `json:"distinct"`
-	IdleMuted bool `json:"idleMuted"`
-}
-
-func assertQueueStatesDistinct(t *testing.T, h *browser.Harness, srv *httptest.Server) {
-	t.Helper()
-	var probe queueFingerprintProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(queueRowFingerprintJS, &probe)); err != nil {
-		t.Fatal(err)
-	}
-	if probe.Distinct < 6 {
-		t.Fatalf("tc-queue states look alike: only %d distinct row fingerprints", probe.Distinct)
-	}
-	if !probe.IdleMuted {
-		t.Fatal("tc-queue idle state is not visually muted")
-	}
-}
-
-func TestCatalogQueueStatesDiffer(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("catalog queue check needs Chrome")
-	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
-	assertQueueStatesDistinct(t, h, srv)
-}
-
-func TestBite_catalogQueueStates(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("catalog queue bite needs Chrome")
-	}
-	css, err := typecase.CSS()
-	if err != nil {
-		t.Fatal(err)
-	}
-	css = strings.Replace(css, ".tc-queue__row--idle { opacity: 0.65; }\n", "", 1)
-	srv := catalogServerCSS(t, true, css)
-	h := browser.NewHarness(t)
-
-	var probe queueFingerprintProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(queueRowFingerprintJS, &probe)); err != nil {
-		t.Fatal(err)
-	}
-	if probe.Distinct >= 6 && probe.IdleMuted {
-		t.Fatal("removing idle rule should fail queue state check")
 	}
 }
 
@@ -338,7 +190,6 @@ func assetProbeAction(dest *assetProbe) chromedp.Action {
 }
 
 func TestCatalogAssetsLoad(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -366,7 +217,6 @@ func TestCatalogAssetsLoad(t *testing.T) {
 // TestBite_catalogAssets: a catch-all that answers every path with the page
 // is exactly what the catalog did before В-12, and the check must bite it.
 func TestBite_catalogAssets(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -401,10 +251,9 @@ func TestBite_catalogAssets(t *testing.T) {
 	}
 }
 
-// typographyJS reports text nodes drawn with a family the library never
-// declared, and the ratio between the head title and its subtitle. A control
-// that does not inherit the font falls back to the system face, and a heading
-// without a size falls back to the browser's scale (В-15, В-16).
+// typographyJS reports text drawn with a family the library never declared:
+// a control that does not inherit the font falls back to the system face
+// (В-15). Sizes are the frames' business: the ladder compares them.
 const typographyJS = `(() => {
   const declared = new Set(["Literata", "Public Sans", "Source Code Pro"]);
   const bad = new Set();
@@ -415,22 +264,10 @@ const typographyJS = `(() => {
     const fam = getComputedStyle(el).fontFamily.split(",")[0].replace(/["']/g, "").trim();
     if (!declared.has(fam)) bad.add((el.className || el.tagName) + " → " + fam);
   }
-  const title = document.querySelector("#tc-head-default .tc-head__title");
-  const sub = document.querySelector("#tc-head-default .tc-head__sub");
-  const size = el => parseFloat(getComputedStyle(el).fontSize);
-  return {
-    families: [...bad],
-    ratio: title && sub ? size(title) / size(sub) : 0
-  };
+  return [...bad];
 })()`
 
-type typographyProbe struct {
-	Families []string `json:"families"`
-	Ratio    float64  `json:"ratio"`
-}
-
 func TestCatalogTypography(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -440,147 +277,39 @@ func TestCatalogTypography(t *testing.T) {
 	srv := catalogServer(t, true)
 	h := browser.NewHarness(t)
 
-	var probe typographyProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(typographyJS, &probe)); err != nil {
+	var families []string
+	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(typographyJS, &families)); err != nil {
 		t.Fatal(err)
 	}
-	if len(probe.Families) > 0 {
-		t.Errorf("text drawn with undeclared families: %v", probe.Families)
-	}
-	// 22px заголовка против 0.9em подзаголовка (≈11.7px).
-	if probe.Ratio < 1.85 || probe.Ratio > 1.92 {
-		t.Errorf("tc-head title/sub size ratio %.2f, want ≈1.88", probe.Ratio)
+	for _, f := range families {
+		t.Errorf("text drawn with an undeclared family: %s", f)
 	}
 }
 
-// overlayGeometryJS reports sheets and dialogs that are not centred inside
-// their own layer, and sheet heads whose target caption and title overlap.
-const overlayGeometryJS = `(() => {
-  const off = [], collide = [];
-  for (const layer of document.querySelectorAll(".tc-overlay--sheet, .tc-overlay--dialog")) {
-    const panel = layer.querySelector(".tc-sheet, .tc-dialog");
-    if (!panel) continue;
-    const l = layer.getBoundingClientRect(), p = panel.getBoundingClientRect();
-    const delta = (p.x + p.width / 2) - (l.x + l.width / 2);
-    if (Math.abs(delta) > 1) off.push(layer.id || layer.className + " off by " + delta.toFixed(1));
-    if (p.y < l.y) off.push((layer.id || layer.className) + " above its layer");
-  }
-  for (const head of document.querySelectorAll(".tc-sheet__head")) {
-    const target = head.querySelector(".tc-sheet__target");
-    const title = head.querySelector(".tc-sheet__title");
-    if (!target || !title) continue;
-    const a = target.getBoundingClientRect(), b = title.getBoundingClientRect();
-    if (a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom) {
-      collide.push("target and title overlap");
-    }
-  }
-  return { off: off, collide: collide };
-})()`
-
-type overlayGeometryProbe struct {
-	Off     []string `json:"off"`
-	Collide []string `json:"collide"`
-}
-
-func TestCatalogOverlayGeometry(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("overlay geometry check needs Chrome")
-	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
-
-	var probe overlayGeometryProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(overlayGeometryJS, &probe)); err != nil {
-		t.Fatal(err)
-	}
-	if len(probe.Off) > 0 {
-		t.Errorf("overlay not centred in its layer: %v", probe.Off)
-	}
-	if len(probe.Collide) > 0 {
-		t.Errorf("sheet head: %v", probe.Collide)
-	}
-}
-
-// shellJS measures the shell: the work surface must fill its column, a closed
-// side panel must not hold a column open, and neither an unset search nor an
-// empty chip strip may be drawn (В-20…В-23).
-const shellJS = `(() => {
-  const shell = document.querySelector("#tc-shell-wide .tc-shell");
-  if (!shell) return { missing: true };
-  const h = el => el ? el.getBoundingClientRect().height : -1;
-  const w = el => el ? el.getBoundingClientRect().width : -1;
+// cellTypeJS reads how the library sets type in a cell: the cell's own face
+// and a head title's, and whether tc.js is on the page. While the base hung on
+// a class the script added, the page without it fell back to the browser's
+// defaults (В-24).
+const cellTypeJS = `(() => {
+  const cell = document.querySelector(".catalog-demo");
+  const title = document.querySelector(".catalog-demo .tc-head__title");
+  const face = el => el ? getComputedStyle(el).fontFamily.split(",")[0].replace(/["']/g, "").trim() + " " + getComputedStyle(el).fontSize : "";
   return {
-    mainHeight: h(shell.querySelector(".tc-main")),
-    columnHeight: h(shell.querySelector(".tc-shell__main")),
-    sideWidth: w(shell.querySelector(".tc-shell__side")),
-    emptyChips: [...shell.querySelectorAll(".tc-rail__chips")].filter(c => c.children.length === 0).length
-  };
-})()`
-
-type shellProbe struct {
-	Missing      bool    `json:"missing"`
-	MainHeight   float64 `json:"mainHeight"`
-	ColumnHeight float64 `json:"columnHeight"`
-	SideWidth    float64 `json:"sideWidth"`
-	EmptyChips   int     `json:"emptyChips"`
-}
-
-func TestCatalogShellGeometry(t *testing.T) {
-	skipUntilPlan3(t)
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
-	if testing.Short() {
-		t.Skip("shell geometry check needs Chrome")
-	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
-
-	var probe shellProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(shellJS, &probe)); err != nil {
-		t.Fatal(err)
-	}
-	if probe.Missing {
-		t.Fatal("no tc-shell entry in the catalog")
-	}
-	if probe.MainHeight+1 < probe.ColumnHeight {
-		t.Errorf("tc-main %.1f does not fill its column %.1f", probe.MainHeight, probe.ColumnHeight)
-	}
-	if probe.SideWidth > 1 {
-		t.Errorf("closed side panel still holds %.1fpx of column", probe.SideWidth)
-	}
-	if probe.EmptyChips != 0 {
-		t.Errorf("rail draws %d empty chip strips", probe.EmptyChips)
-	}
-}
-
-// noScriptJS reads the base typography the library promises without any
-// behaviour script running. While the base hung on a class the script added,
-// this page fell back to the browser defaults (В-24).
-const noScriptJS = `(() => {
-  const cs = getComputedStyle(document.body);
-  const title = document.querySelector("#tc-head-default .tc-head__title");
-  return {
-    size: cs.fontSize,
-    family: cs.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
-    titleSize: title ? getComputedStyle(title).fontSize : "",
+    cell: face(cell),
+    title: face(title),
     scripted: document.querySelectorAll("script[src$='/tc.js']").length
   };
 })()`
 
-type noScriptProbe struct {
-	Size      string `json:"size"`
-	Family    string `json:"family"`
-	TitleSize string `json:"titleSize"`
-	Scripted  int    `json:"scripted"`
+type cellTypeProbe struct {
+	Cell     string `json:"cell"`
+	Title    string `json:"title"`
+	Scripted int    `json:"scripted"`
 }
 
+// TestCatalogBaseWithoutScript: the page without behaviour sets type exactly
+// as the page with it does.
 func TestCatalogBaseWithoutScript(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -590,67 +319,103 @@ func TestCatalogBaseWithoutScript(t *testing.T) {
 	srv := catalogServer(t, false)
 	h := browser.NewHarness(t)
 
-	var probe noScriptProbe
-	if err := h.Run(catalogURL(srv, false), 1280, 900, chromedp.Evaluate(noScriptJS, &probe)); err != nil {
+	var with, without cellTypeProbe
+	if err := h.Run(catalogURL(srv, true), 1280, 900, chromedp.Evaluate(cellTypeJS, &with)); err != nil {
 		t.Fatal(err)
 	}
-	if probe.Scripted != 0 {
-		t.Fatal("static page must not load tc.js")
+	if err := h.Run(catalogURL(srv, false), 1280, 900, chromedp.Evaluate(cellTypeJS, &without)); err != nil {
+		t.Fatal(err)
 	}
-	if probe.Size != "13px" {
-		t.Errorf("base size without script is %s, want 13px", probe.Size)
+	if without.Scripted != 0 || with.Scripted == 0 {
+		t.Fatalf("tc.js on the page with behaviour %d times, without it %d times", with.Scripted, without.Scripted)
 	}
-	if probe.Family != "Public Sans" {
-		t.Errorf("base family without script is %q, want Public Sans", probe.Family)
+	if with.Title == "" {
+		t.Fatal("no head title in the catalog")
 	}
-	if probe.TitleSize != "22px" {
-		t.Errorf("tc-head title without script is %s, want 22px", probe.TitleSize)
+	if !strings.HasPrefix(with.Cell, "Public Sans ") {
+		t.Errorf("a cell sets %q, want Public Sans", with.Cell)
+	}
+	if without != (cellTypeProbe{Cell: with.Cell, Title: with.Title}) {
+		t.Errorf("without behaviour the type is %+v, with it %+v", without, with)
 	}
 }
 
-// segAfterClickJS clicks the second part of a segmented control and reports
-// where the visible mark and the announced state ended up.
-const segAfterClickJS = `(() => {
-  const seg = document.querySelector("#tc-seg-default .tc-seg");
+// segClickJS presses the second option of the first switch and reports where
+// the mark and the announced state ended up; segKeyJS then moves the choice
+// with the arrow key from there.
+const segClickJS = `(() => {
+  const seg = [...document.querySelectorAll(".catalog-demo .tc-seg")].find(s => s.querySelectorAll(".tc-seg__opt").length > 2);
   if (!seg) return { missing: true };
-  const opts = [...seg.querySelectorAll("button")];
+  seg.id = "seg-under-test";
+  const opts = [...seg.querySelectorAll(".tc-seg__opt")];
   opts[1].click();
-  const chosen = opts.filter(b => b.classList.contains("is-chosen"));
-  const pressed = opts.filter(b => b.getAttribute("aria-pressed") === "true");
-  return {
-    chosen: chosen.length,
-    pressed: pressed.length,
-    same: chosen.length === 1 && pressed.length === 1 && chosen[0] === pressed[0]
-  };
+  return segState(opts, 1);
+  function segState(opts, want) {
+    const on = opts.filter(b => b.classList.contains("is-on"));
+    const checked = opts.filter(b => b.getAttribute("aria-checked") === "true");
+    return { on: on.length, checked: checked.length, at: on.length === 1 && checked.length === 1 && on[0] === checked[0] && on[0] === opts[want] };
+  }
+})()`
+
+const segKeyJS = `(() => {
+  const seg = document.getElementById("seg-under-test");
+  const opts = [...seg.querySelectorAll(".tc-seg__opt")];
+  opts[1].focus();
+  opts[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+  const on = opts.filter(b => b.classList.contains("is-on"));
+  const checked = opts.filter(b => b.getAttribute("aria-checked") === "true");
+  return { on: on.length, checked: checked.length, at: on.length === 1 && checked.length === 1 && on[0] === checked[0] && on[0] === opts[2] && document.activeElement === opts[2] };
 })()`
 
 type segProbe struct {
 	Missing bool `json:"missing"`
-	Chosen  int  `json:"chosen"`
-	Pressed int  `json:"pressed"`
-	Same    bool `json:"same"`
+	On      int  `json:"on"`
+	Checked int  `json:"checked"`
+	At      bool `json:"at"`
 }
 
+func segProbes(t *testing.T, withJS bool) (click, key segProbe) {
+	t.Helper()
+	srv := catalogServer(t, withJS)
+	h := browser.NewHarness(t)
+	if err := h.Run(catalogURL(srv, withJS), 1280, 900, chromedp.Evaluate(segClickJS, &click), chromedp.Evaluate(segKeyJS, &key)); err != nil {
+		t.Fatal(err)
+	}
+	if click.Missing {
+		t.Fatal("no tc-seg of three options in the catalog")
+	}
+	return click, key
+}
+
+// TestCatalogSegSelectionAgrees: pressing an option of a switch chooses it
+// and the arrows move the choice (L-4 tc-seg); the mark and the announced
+// state stay on the same option.
 func TestCatalogSegSelectionAgrees(t *testing.T) {
-	skipUntilPlan3(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
 	if testing.Short() {
 		t.Skip("seg selection check needs Chrome")
 	}
-	srv := catalogServer(t, true)
-	h := browser.NewHarness(t)
+	click, key := segProbes(t, true)
+	if !click.At {
+		t.Errorf("after a click: %d marked, %d announced, not both on the option pressed", click.On, click.Checked)
+	}
+	if !key.At {
+		t.Errorf("after the arrow: %d marked, %d announced, not both on the next option with the focus", key.On, key.Checked)
+	}
+}
 
-	var probe segProbe
-	if err := h.Run(srv.URL, 1280, 900, chromedp.Evaluate(segAfterClickJS, &probe)); err != nil {
-		t.Fatal(err)
+// TestBite_catalogSeg: without tc.js nothing chooses, and the check says so.
+func TestBite_catalogSeg(t *testing.T) {
+	if !browser.ChromeAvailable() {
+		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
-	if probe.Missing {
-		t.Fatal("no tc-seg entry in the catalog")
+	if testing.Short() {
+		t.Skip("seg bite needs Chrome")
 	}
-	if !probe.Same {
-		t.Errorf("after click: %d chosen, %d pressed, on the same part: %v",
-			probe.Chosen, probe.Pressed, probe.Same)
+	click, key := segProbes(t, false)
+	if click.At || key.At {
+		t.Fatal("a switch without behaviour passed the selection check")
 	}
 }

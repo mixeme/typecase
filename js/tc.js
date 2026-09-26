@@ -262,6 +262,12 @@
 		}
 		if (openTrigger && !closest(e.target, ".tc-menu")) closeMenu(false);
 
+		var opt = closest(e.target, ".tc-seg__opt");
+		if (opt) {
+			chooseSeg(opt);
+			return;
+		}
+
 		var opener = closest(e.target, "[data-tc-open]");
 		// The current section of the navigation opens its sources only in the
 		// rail of icons, where they are not in the rail; otherwise it is a link.
@@ -287,8 +293,33 @@
 		if (e.target.classList && e.target.classList.contains("tc-scrim")) closeLayer(e.target);
 	}
 
+	// A segmented switch is a radio group: pressing an option chooses it, the
+	// arrows move the choice along the switch (L-4 tc-seg).
+	function chooseSeg(opt) {
+		var seg = closest(opt, ".tc-seg");
+		if (!seg) return;
+		seg.querySelectorAll(".tc-seg__opt").forEach(function (o) {
+			o.classList.toggle("is-on", o === opt);
+			if (o === opt) o.setAttribute("aria-checked", "true");
+			else o.removeAttribute("aria-checked");
+		});
+	}
+
+	function onSegKey(e) {
+		var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+		var opt = step && closest(e.target, ".tc-seg__opt");
+		if (!opt) return false;
+		var opts = Array.prototype.slice.call(closest(opt, ".tc-seg").querySelectorAll(".tc-seg__opt"));
+		var next = opts[(opts.indexOf(opt) + step + opts.length) % opts.length];
+		e.preventDefault();
+		chooseSeg(next);
+		next.focus();
+		return true;
+	}
+
 	function onKeydown(e) {
 		if (openTrigger && onMenuKey(e)) return;
+		if (onSegKey(e)) return;
 		if (e.key !== "Escape") return;
 		if (closeMenu(true)) {
 			e.preventDefault();

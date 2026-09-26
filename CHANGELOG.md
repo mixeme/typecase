@@ -211,6 +211,17 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   notification of the system (`mk-toast`) is chrome like the window's title
   bar, and a route frame's plain `tc-root` is the page's block.
 
+- **The catalog shows the mockup's forms.** A cell is a reference record, one
+  per state; after a widget's last cell stand the mockup's component and
+  fragment frames built around it (109; the candidate frames are not shown).
+  A switch sets the cells' width on the mockup's ladder, links set the theme.
+  An open menu, the search's suggestions and a scrim hang out of their box as
+  in their frames, and the catalog makes room for them in the cell. The
+  catalog's browser tests run again, on the new markup.
+- **A segmented switch chooses.** `tc.js` now does what L-4 says of `tc-seg`:
+  pressing an option chooses it (`is-on` and `aria-checked` move to it) and
+  the arrow keys move the choice along the switch.
+
 - **A screen starts from its frame: `cmd/frame2go`.** `go run
   ./cmd/frame2go <data-frame>` prints a frame of the mockup as a screen
   function — the widgets and the frame's data, top to bottom, each variant

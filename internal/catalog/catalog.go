@@ -2,6 +2,7 @@ package catalog
 
 import (
 	"fmt"
+	"html"
 	"strings"
 
 	"carrel.dev/typecase"
@@ -33,11 +34,18 @@ func Entries() []Entry {
 	return out
 }
 
-// PageHTML renders a full catalog page.
-func PageHTML(title string, entries []Entry, withJS bool) string {
+// PageHTML renders a full catalog page: the widgets' cells family by family,
+// and after the last cell of a widget the mockup's component and fragment
+// frames built around it (Р-16).
+func PageHTML(title string, entries []Entry, withJS bool, frames ...Frame) string {
+	byBlock := map[string][]Frame{}
+	for _, f := range frames {
+		byBlock[f.Block] = append(byBlock[f.Block], f)
+	}
+	shown := map[string]bool{}
 	var sections strings.Builder
 	family := ""
-	for _, e := range entries {
+	for i, e := range entries {
 		if e.Family != family {
 			if family != "" {
 				sections.WriteString("</section>")
@@ -45,7 +53,14 @@ func PageHTML(title string, entries []Entry, withJS bool) string {
 			family = e.Family
 			sections.WriteString(`<section class="catalog-family"><h2>` + family + `</h2>`)
 		}
-		sections.WriteString(`<article class="catalog-entry" id="` + slug(e.Widget) + `-` + slug(e.State) + `"><h3><code>` + e.Widget + `</code> — ` + e.State + `</h3><div class="catalog-demo tc-root">` + e.HTML + `</div></article>`)
+		sections.WriteString(`<article class="catalog-entry" id="` + slug(e.Widget) + `-` + slug(e.State) + `"><h3><code>` + e.Widget + `</code> — ` + e.State + `</h3><div class="catalog-demo tc-root">` + anchored(e.HTML) + `</div></article>`)
+		last := i+1 == len(entries) || entries[i+1].Widget != e.Widget || entries[i+1].Family != e.Family
+		if last && !shown[e.Widget] {
+			shown[e.Widget] = true
+			for _, f := range byBlock[e.Widget] {
+				sections.WriteString(`<article class="catalog-entry catalog-frame" id="frame-` + f.ID + `"><h3>` + html.EscapeString(f.Caption) + ` <code>` + f.ID + `</code> — a frame of the mockup</h3><div class="catalog-demo">` + f.HTML + `</div></article>`)
+			}
+		}
 	}
 	if family != "" {
 		sections.WriteString("</section>")
@@ -78,8 +93,19 @@ func PageHTML(title string, entries []Entry, withJS bool) string {
 <h1>%s</h1>
 %s
 %s
+%s
+%s
 </body>
-</html>`, title, defs, title, sections.String(), js)
+</html>`, title, defs, title, ladderHTML(), sections.String(), roomJS, js)
+}
+
+// anchored gives a menu shown without its trigger (an open menu's record)
+// the anchor its trigger would be: the menu hangs below it, as in its frame.
+func anchored(h string) string {
+	if i := strings.Index(h, ">"); i > 0 && strings.Contains(h[:i], `class="tc-menu `) && strings.Contains(h[:i], " is-pop") {
+		return `<div class="catalog-anchor">` + h + `</div>`
+	}
+	return h
 }
 
 func slug(s string) string {

@@ -41,8 +41,16 @@ func Mux(css string) (*http.ServeMux, error) {
 		return nil, err
 	}
 	entries := Entries()
-	withJS := PageHTML("Typecase catalog", entries, true)
-	withoutJS := PageHTML("Typecase catalog (no behavior)", entries, false)
+	root, err := moduleRoot()
+	if err != nil {
+		return nil, err
+	}
+	frames, err := Frames(root)
+	if err != nil {
+		return nil, err
+	}
+	withJS := PageHTML("Typecase catalog", entries, true, frames...)
+	withoutJS := PageHTML("Typecase catalog (no behavior)", entries, false, frames...)
 
 	mux := http.NewServeMux()
 	page := func(body string) http.HandlerFunc {
@@ -65,7 +73,7 @@ func Mux(css string) (*http.ServeMux, error) {
 		}
 	}
 	mux.HandleFunc("/typecase.css", text("text/css; charset=utf-8", []byte(css)))
-	mux.HandleFunc("/catalog.css", text("text/css; charset=utf-8", []byte(CSS())))
+	mux.HandleFunc("/catalog.css", text("text/css; charset=utf-8", []byte(CSS()+ladderCSS())))
 	mux.HandleFunc("/theme.js", text("application/javascript; charset=utf-8", themeJS))
 	mux.HandleFunc("/tc.js", text("application/javascript; charset=utf-8", js))
 	mux.HandleFunc("/img/sample.svg", text("image/svg+xml; charset=utf-8", []byte(sampleSVG)))

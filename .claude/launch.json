@@ -13,14 +13,13 @@
       "port": 8085
     },
     {
-      "name": "proof",
+      "name": "catalog",
       "runtimeExecutable": "go",
       "runtimeArgs": [
         "run",
-        "./cmd/proof"
+        "./cmd/catalog"
       ],
-      "port": 8084,
-      "autoPort": true
+      "port": 8080
     },
     {
       "name": "mockup",
