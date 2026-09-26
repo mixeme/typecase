@@ -1025,8 +1025,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-in--t11-fill.tc-in--t11-fill{font-size:11px;flex:1}
 .tc-in--key.tc-in--key{font-size:14px;letter-spacing:.04em}
 .tc-in--chip.tc-in--chip{height:22px;display:inline-flex;width:52px}
-/* Заголовок колонки над полями-фишками меню: той же ширины, что поле. */
-.tc-menu__col{width:52px;flex:none;text-align:center;letter-spacing:0}
+/* Заголовок колонки над полями-фишками меню весов: той же ширины, что поле. */
+.tc-rubric__col{width:52px;flex:none;text-align:center;letter-spacing:0}
 .tc-in--paste.tc-in--paste{font-size:11px;white-space:pre-wrap;min-height:88px;align-items:flex-start}
 .tc-in--key-sm.tc-in--key-sm{min-width:200px;font-size:13px;letter-spacing:.03em}
 .tc-in--line.tc-in--line{min-width:220px;max-width:540px;font-size:11px}
@@ -1299,7 +1299,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
    tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
-   tc-dim__hint
+   tc-dim__hint tc-field__zoom
    tc-row__subtitle
    — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
    classes-defined и уезжало в CSS библиотеки. Список читает линт. */

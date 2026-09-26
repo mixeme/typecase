@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Place, Secondary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -98,6 +98,9 @@ type Button struct {
 	Focus   bool   // the drawn keyboard focus of the mockup's states
 	Title   string // the accessible name when there is no label
 	Submit  bool   // submits its form
+	Place   Place
+	// Secondary is the first to go under «⋯» when its bar narrows.
+	Secondary bool
 }
 
 // Render prints the button.
@@ -117,7 +120,7 @@ func (b Button) html(m mix) string {
 	if b.State == ButtonOff {
 		state = "is-off"
 	}
-	s.WriteString(`<button` + class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class()) +
+	s.WriteString(`<button` + class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary)) +
 		` type="` + typ + `"` + attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + flag("disabled", b.State == ButtonDisabled) + `>`)
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))
@@ -150,7 +153,7 @@ func (b Button) html(m mix) string {
 // Close — tc-close
 //
 // Роль. Крестик, который закрывает панель, лист или сообщение.
-// Вход. Close{Label}.
+// Вход. Close{Label, Place}.
 // Состояния. нет.
 // Инварианты. У крестика всегда есть доступное имя — что он закрывает; крестик печатает фрагмент своего кадра.
 // Поведение. Закрывает свой слой; Esc делает то же, фокус возвращается на вызвавший контрол.
@@ -159,12 +162,13 @@ func (b Button) html(m mix) string {
 // Чего нет. Подписи: крестик без слов, имя — в подсказке.
 type Close struct {
 	Label string // what it closes: "Close the panel"
+	Place Place
 }
 
 // Render prints the close button.
 func (c Close) Render() string { return c.html(nil) }
 
 func (c Close) html(m mix) string {
-	return `<button` + class(m, "tc-btn", "tc-close") + attr("title", c.Label) + attr("aria-label", c.Label) + ` type="button"><svg viewBox="0 0 24 24">` +
+	return `<button` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("title", c.Label) + attr("aria-label", c.Label) + ` type="button"><svg viewBox="0 0 24 24">` +
 		Icon("close").use() + `</svg></button>`
 }

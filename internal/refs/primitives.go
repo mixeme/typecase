@@ -165,7 +165,7 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}, "s-publish-10", "tc-mono", 2),
 )
 
-func dim(size w.DimSize, variant w.DimVariant, parts ...w.DimPart) w.Dim {
+func dim(size w.DimSize, variant w.DimVariant, parts ...w.Inline) w.Dim {
 	return w.Dim{Parts: parts, Size: size, Variant: variant}
 }
 

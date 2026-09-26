@@ -24,7 +24,9 @@ var (
 	}
 )
 
-// LoadWidgets parses widget/*.go L-3.2 headers.
+// LoadWidgets parses widget/*.go L-3.2 headers, keyed by Go type: one block
+// can be printed by several types (tc-in: Input, Pick, Area…), each with
+// its own description; WidgetSpec.Name is the block.
 func LoadWidgets(widgetDir string) (map[string]WidgetSpec, error) {
 	entries, err := os.ReadDir(widgetDir)
 	if err != nil {
@@ -43,8 +45,8 @@ func LoadWidgets(widgetDir string) (map[string]WidgetSpec, error) {
 		if err != nil {
 			return nil, err
 		}
-		for name, spec := range specs {
-			out[name] = spec
+		for _, spec := range specs {
+			out[spec.GoType] = spec
 		}
 	}
 	return out, nil
@@ -64,7 +66,7 @@ func parseWidgetFile(path string) (map[string]WidgetSpec, error) {
 		line := sc.Text()
 		if m := widgetHeader.FindStringSubmatch(line); m != nil {
 			if cur != nil && cur.Name != "" {
-				out[cur.Name] = *cur
+				out[cur.GoType] = *cur
 			}
 			cur = &WidgetSpec{
 				GoType:   m[1],
@@ -85,7 +87,7 @@ func parseWidgetFile(path string) (map[string]WidgetSpec, error) {
 		}
 	}
 	if cur != nil && cur.Name != "" {
-		out[cur.Name] = *cur
+		out[cur.GoType] = *cur
 	}
 	return out, sc.Err()
 }

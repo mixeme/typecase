@@ -36,8 +36,11 @@ func Block(n *html.Node) string {
 		return ""
 	}
 	blocks := BlockClasses(n)
-	if len(blocks) > 0 && allTypographic(blocks) && hasElementClass(n) {
+	if len(blocks) > 0 && allUtility(blocks) && hasElementClass(n) {
 		return ""
+	}
+	if hasClass(n, "tc-root") && allUtility(withoutRoot(blocks)) {
+		return "" // a frame's box laid out as a row or a column, not a block
 	}
 	best, rank := "", -1
 	for _, c := range blocks {
@@ -59,13 +62,29 @@ var structural = map[string]bool{
 	"dd": true, "dt": true, "li": true, "option": true,
 }
 
-// typographic blocks set how text looks. On an element of another block
-// (tc-row__excerpt tc-mono) they are that element's typeface, not a block.
-var typographic = map[string]bool{"tc-mono": true, "tc-dim": true, "tc-plain": true}
+// utility blocks set how text looks or how an element sits: tc-mono, tc-dim,
+// tc-plain, tc-push, tc-grow, tc-line, tc-stack. On an element of another
+// block (tc-row__excerpt tc-mono, tc-line tc-card__acts, tc-push
+// tc-tickrow__meta) they are that element's typeface or layout, printed by
+// that block, not a block of their own.
+var utility = map[string]bool{
+	"tc-mono": true, "tc-dim": true, "tc-plain": true,
+	"tc-push": true, "tc-grow": true, "tc-line": true, "tc-stack": true,
+}
 
-func allTypographic(blocks []string) bool {
+func withoutRoot(blocks []string) []string {
+	var out []string
 	for _, b := range blocks {
-		if !typographic[b] {
+		if b != "tc-root" {
+			out = append(out, b)
+		}
+	}
+	return out
+}
+
+func allUtility(blocks []string) bool {
+	for _, b := range blocks {
+		if !utility[b] {
 			return false
 		}
 	}
@@ -94,7 +113,8 @@ func blockRank(c string) int {
 }
 
 // Base names the block a block is built on: its class is the block's own.
-var Base = map[string]string{"tc-close": "tc-btn"}
+// The shell is the page's root, so tc-root is its own class.
+var Base = map[string]string{"tc-close": "tc-btn", "tc-shell": "tc-root"}
 
 // Pair is a parent block and a child block: the child's nearest ancestor that
 // carries a block class is the parent.

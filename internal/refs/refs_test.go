@@ -99,3 +99,13 @@ func TestWidgetsList(t *testing.T) {
 		seen[name] = true
 	}
 }
+
+// TestShapesCovered: every form of a block that has a widget has a record or
+// a pending entry with its reason (step 4); step 7 empties the pending list.
+func TestShapesCovered(t *testing.T) {
+	m := mockup(t)
+	if miss := refs.Uncovered(m, refs.Entries, refs.Waiting); len(miss) > 0 {
+		t.Fatalf("%d forms without a record:\n  %s", len(miss), strings.Join(miss, "\n  "))
+	}
+	t.Logf("pending: %s", refs.WaitingSummary(refs.Waiting))
+}

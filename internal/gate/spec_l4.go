@@ -58,13 +58,17 @@ func CheckSpecL4(p ModulePaths, specPath string) error {
 	if err != nil {
 		return err
 	}
+	implemented := map[string]bool{}
+	for _, spec := range widgets {
+		implemented[spec.Name] = true
+	}
 	var missing, extra []string
 	for name := range declared {
-		if _, ok := widgets[name]; !ok {
+		if !implemented[name] {
 			missing = append(missing, name)
 		}
 	}
-	for name := range widgets {
+	for name := range implemented {
 		if !declared[name] {
 			extra = append(extra, name)
 		}

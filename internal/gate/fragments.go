@@ -34,5 +34,5 @@ func CheckContainerPairs(p ModulePaths) error {
 	if err != nil {
 		return fmt.Errorf("container-pairs: %w", err)
 	}
-	return refs.CheckPairs(m.Pairs(), refs.Entries, refs.Widgets)
+	return refs.CheckPairs(m.Pairs(), refs.Entries, refs.Widgets, refs.Parts...)
 }

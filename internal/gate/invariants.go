@@ -8,6 +8,16 @@ import (
 // invariantBindings maps each widget to executable checks for its invariant clauses
 // (semicolon-separated in L-3.2 «Инварианты»). Order matches clause order.
 var invariantBindings = map[string][]string{
+	"tc-push":      {"gate:widget-fragments", "gate:widget-fragments"},
+	"tc-grow":      {"gate:widget-fragments", "gate:widget-fragments"},
+	"tc-stack":     {"gate:enumerations", "gate:widget-fragments"},
+	"tc-line":      {"gate:enumerations", "gate:widget-fragments", "gate:widget-fragments"},
+	"tc-q":         {"gate:widget-fragments", "gate:a11y", "gate:widget-fragments"},
+	"Area":         {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
+	"TagInput":     {"gate:container-pairs", "gate:widget-fragments"},
+	"Filter":       {"gate:widget-fragments", "gate:widget-fragments"},
+	"Pick":         {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
+	"Input":        {"gate:widget-fragments", "gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-plain":     {"gate:widget-fragments", "gate:widget-fragments"},
 	"tc-mono":      {"gate:enumerations", "gate:widget-fragments"},
 	"tc-dim":       {"gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
@@ -17,7 +27,7 @@ var invariantBindings = map[string][]string{
 	"tc-brand":     {"gate:inv-brand-single-mark", "gate:inv-brand-no-dup-word"},
 	"tc-btn":       {"gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-card":      {"gate:inv-card-has-body"},
-	"tc-check":     {"gate:a11y", "gate:enumerations"},
+	"tc-check":     {"gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-chip":      {"gate:inv-chip-state-class"},
 	"tc-cols":      {"gate:layout-slots"},
 	"tc-close":     {"gate:a11y", "gate:widget-fragments"},
@@ -32,14 +42,14 @@ var invariantBindings = map[string][]string{
 	"tc-docbar":    {"gate:inv-docbar-actions", "gate:inv-docbar-dirty-flag"},
 	"tc-docmeta":   {"gate:inv-docmeta-sections"},
 	"tc-empty":     {"gate:a11y"},
-	"tc-field":     {"gate:a11y", "gate:a11y"},
+	"tc-field":     {"gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-fields":    {"browser:ellipsis", "gate:inv-fields-dl-structure"},
 	"tc-pfield":    {"gate:a11y", "gate:a11y"},
 	"tc-pfieldrow": {"gate:a11y"},
 	"tc-pick":      {"gate:a11y", "gate:a11y"},
-	"tc-form":      {"gate:a11y", "gate:a11y", "gate:a11y"},
-	"tc-formfoot":  {"gate:a11y", "gate:a11y"},
-	"tc-fset":      {"gate:inv-fset-rubric"},
+	"tc-form":      {"gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
+	"tc-formfoot":  {"gate:widget-fragments", "gate:widget-fragments"},
+	"tc-fset":      {"gate:container-pairs", "gate:widget-fragments", "gate:widget-fragments"},
 	"tc-grid":      {"gate:inv-grid-tiles", "gate:inv-grid-uniform"},
 	"tc-head":      {"gate:inv-head-title"},
 	"tc-in":        {"gate:a11y", "gate:a11y"},
@@ -58,14 +68,14 @@ var invariantBindings = map[string][]string{
 	"tc-rail":      {"gate:inv-rail-foot", "gate:inv-rail-drawer-class"},
 	"tc-railfoot":  {"gate:inv-railfoot-build", "gate:inv-railfoot-actions"},
 	"tc-railsec":   {"gate:inv-railsec-state", "gate:inv-railsec-untitled-no-title"},
-	"tc-range":     {"gate:range-order", "gate:inv-range-field-width"},
+	"tc-range":     {"gate:widget-fragments", "gate:widget-fragments"},
 	"tc-row":       {"gate:inv-row-mark", "gate:inv-row-tail", "gate:inv-row-menu-in-tail"},
-	"tc-rubric":    {"gate:inv-rubric-not-heading"},
+	"tc-rubric":    {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"tc-runbar":    {"gate:inv-runbar-meter-hidden-idle", "gate:inv-runbar-states"},
 	"tc-scrim":     {"gate:inv-scrim-for-attr", "browser:esc-layers"},
 	"tc-search":    {"gate:inv-search-popover-below", "gate:inv-search-no-empty-submit"},
 	"tc-sec":       {"gate:inv-sec-like-card"},
-	"tc-seg":       {"gate:seg-one-chosen", "gate:inv-seg-narrow-menu"},
+	"tc-seg":       {"gate:widget-fragments", "gate:a11y", "gate:widget-fragments"},
 	"tc-sheet":     {"browser:esc-layers", "gate:a11y", "gate:a11y"},
 	"tc-shell":     {"gate:inv-shell-four-zones", "browser:theme-geometry"},
 	"tc-side":      {"browser:esc-layers"},
@@ -134,12 +144,17 @@ func CheckInvariantCoverage(widgetDir string, catalog []CatalogEntry) error {
 	}
 	var problems []string
 	todos := 0
-	for name, spec := range widgets {
+	for goType, spec := range widgets {
+		name := spec.Name
 		clauses := splitInvariantClauses(spec.Sections["Инварианты"])
 		if len(clauses) == 0 {
 			continue
 		}
-		checks, ok := invariantBindings[name]
+		// A binding names the Go type when a block has several (tc-in).
+		checks, ok := invariantBindings[goType]
+		if !ok {
+			checks, ok = invariantBindings[name]
+		}
 		if !ok {
 			problems = append(problems, name+": no invariant bindings")
 			continue

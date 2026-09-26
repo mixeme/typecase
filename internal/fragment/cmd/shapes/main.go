@@ -30,7 +30,9 @@ func main() {
 		os.Exit(1)
 	}
 	all := len(os.Args) > 2 && os.Args[2] == "-all"
-	withHTML := len(os.Args) > 2 && os.Args[2] == "-html"
+	withHTML := len(os.Args) > 2 && (os.Args[2] == "-html" || os.Args[2] == "-raw")
+	raw := len(os.Args) > 2 && os.Args[2] == "-raw"
+	own := len(os.Args) > 2 && os.Args[2] == "-own"
 	shapes := m.Shapes(os.Args[1])
 	fmt.Printf("%s: %d shapes\n", os.Args[1], len(shapes))
 	for i, s := range shapes {
@@ -39,7 +41,16 @@ func main() {
 			if n, err := m.Block(s.First); err == nil {
 				var b strings.Builder
 				_ = html.Render(&b, n)
-				fmt.Printf("   %s\n", strings.Join(strings.Fields(b.String()), " "))
+				if raw {
+					fmt.Printf("   %s\n", b.String())
+				} else {
+					fmt.Printf("   %s\n", strings.Join(strings.Fields(b.String()), " "))
+				}
+			}
+		}
+		if own {
+			if n, err := m.Block(s.First); err == nil {
+				fmt.Printf("   own: %s\n", fragment.Skeleton(m.Own(n, false)))
 			}
 		}
 		if all {

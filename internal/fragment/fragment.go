@@ -306,6 +306,9 @@ func OwnClass(block, cls string) bool {
 	switch {
 	case cls == block, strings.HasPrefix(cls, block+"--"), cls == Base[block]:
 		return true
+	case block != "tc-line" && block != "tc-stack" &&
+		(cls == "tc-line" || cls == "tc-stack" || strings.HasPrefix(cls, "tc-line--") || strings.HasPrefix(cls, "tc-stack--")):
+		return true // a named block laid out as a row or a column: its own layout
 	case cls == "is-2nd":
 		return false
 	case strings.HasPrefix(cls, "is-"):

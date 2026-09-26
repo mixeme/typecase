@@ -1198,8 +1198,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-in--t11-fill.tc-in--t11-fill{font-size:11px;flex:1}
 .tc-in--key.tc-in--key{font-size:14px;letter-spacing:.04em}
 .tc-in--chip.tc-in--chip{height:22px;display:inline-flex;width:52px}
-/* Заголовок колонки над полями-фишками меню: той же ширины, что поле. */
-.tc-menu__col{width:52px;flex:none;text-align:center;letter-spacing:0}
+/* Заголовок колонки над полями-фишками меню весов: той же ширины, что поле. */
+.tc-rubric__col{width:52px;flex:none;text-align:center;letter-spacing:0}
 .tc-in--paste.tc-in--paste{font-size:11px;white-space:pre-wrap;min-height:88px;align-items:flex-start}
 .tc-in--key-sm.tc-in--key-sm{min-width:200px;font-size:13px;letter-spacing:.03em}
 .tc-in--line.tc-in--line{min-width:220px;max-width:540px;font-size:11px}
@@ -1472,7 +1472,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
    tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
-   tc-dim__hint
+   tc-dim__hint tc-field__zoom
    tc-row__subtitle
    — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
    classes-defined и уезжало в CSS библиотеки. Список читает линт. */
@@ -3103,7 +3103,7 @@ Read  2 min ago</div>
         <div class="tc-stack tc-stack--gap-10 tc-dialog__side">
           <span class="tc-dim--muted tc-dim--t12-5">Drag the photo to choose the frame. The box is what other clients will see.</span>
           <div class="tc-field tc-field--w100"><label>Zoom</label>
-            <span class="tc-line tc-line--gap-9">
+            <span class="tc-line tc-line--gap-9 tc-field__zoom">
               <span class="tc-field__rail">
                 <span class="tc-field__fill"></span>
                 <span class="tc-field__knob"></span>
@@ -3839,7 +3839,7 @@ SEQUENCE  2</div>
     <div class="frame-label"><span>Часовой пояс события</span><span class="frag">список</span><i>поле Time zone</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w290">
-        <input class="tc-in" type="search" placeholder="Find a zone" aria-label="Find a zone">
+        <input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone">
         <span class="tc-rubric">As sent</span>
         <button class="is-on tc-menu__item" type="button" role="menuitem">Europe/Moscow</button>
         <span class="tc-menu__sep"></span>
@@ -6643,7 +6643,7 @@ Read  2 min ago</div>
   <div class="tc-root tc-root--on-surface tc-root--top tc-root--col tc-root--pad18-20">
   <div class="tc-field tc-field--inline"><label>Match threshold</label><input class="tc-in is-mono tc-in--w52" type="text" value="60" aria-label="Match threshold"><button class="tc-btn is-sm is-focus" type="button">Weights</button></div>
   <div class="tc-menu tc-menu--w420 tc-menu--fields">
-    <button class="tc-rubric tc-menu__item tc-menu__item--pad5-8-7" type="button" role="menuitem">Points per signal<span class="tc-push">Default</span><span class="tc-menu__col">Yours</span></button>
+    <button class="tc-rubric tc-menu__item tc-menu__item--pad5-8-7" type="button" role="menuitem">Points per signal<span class="tc-push">Default</span><span class="tc-rubric__col">Yours</span></button>
     <div class="tc-menu__item">Same UID<span class="tc-push tc-dim tc-dim--t10-5">80</span><input class="tc-in is-mono tc-in--chip" type="text" value="80" aria-label="Same UID"></div>
     <div class="tc-menu__item">Same email<span class="tc-push tc-dim tc-dim--t10-5">60</span><input class="tc-in is-mono tc-in--chip" type="text" value="60" aria-label="Same email"></div>
     <div class="tc-menu__item">Same phone<span class="tc-push tc-dim tc-dim--t10-5">60</span><input class="tc-in is-mono tc-in--chip" type="text" value="60" aria-label="Same phone"></div>

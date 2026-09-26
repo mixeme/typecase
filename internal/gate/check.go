@@ -251,8 +251,8 @@ func CheckCompleteness(p ModulePaths, catalog []CatalogEntry) error {
 		return err
 	}
 	goNames := make(map[string]struct{}, len(widgets))
-	for name := range widgets {
-		goNames[name] = struct{}{}
+	for _, spec := range widgets {
+		goNames[spec.Name] = struct{}{}
 	}
 	var missing []string
 	for name := range goNames {
@@ -614,7 +614,8 @@ func CheckCatalog(widgetDir string, catalog []CatalogEntry) error {
 		seen[e.Widget][slugState(e.State)] = true
 	}
 	var missing []string
-	for name, spec := range widgets {
+	for _, spec := range widgets {
+		name := spec.Name
 		if len(spec.States) == 1 && spec.States[0] == "default" {
 			if len(seen[name]) == 0 {
 				missing = append(missing, name+"/(any)")

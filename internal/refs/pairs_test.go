@@ -12,7 +12,7 @@ import (
 // and every nesting the types allow is drawn (step 3).
 func TestContainerPairs(t *testing.T) {
 	m := mockup(t)
-	if err := refs.CheckPairs(m.Pairs(), refs.Entries, refs.Widgets); err != nil {
+	if err := refs.CheckPairs(m.Pairs(), refs.Entries, refs.Widgets, refs.Parts...); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -60,7 +60,7 @@ func TestBite_containerPairs(t *testing.T) {
 	}
 	// The mockup draws a kbd in the sheet; no field takes it.
 	more := append(drawn, pairs([2]string{"tc-sheet", "tc-kbd"})...)
-	if err := refs.CheckPairs(more, toyEntries, toyWidgets); err == nil || !strings.Contains(err.Error(), "no field that takes toyKbd") {
+	if err := refs.CheckPairs(more, toyEntries, toyWidgets); err == nil || !strings.Contains(err.Error(), "puts .tc-kbd in .tc-sheet") {
 		t.Fatalf("an undrawable pair passed: %v", err)
 	}
 	// The types allow a button in the sheet; no frame draws it.
@@ -73,9 +73,9 @@ func TestBite_containerPairs(t *testing.T) {
 	if err := refs.CheckPairs(drawn, loose, append(toyWidgets, toyLoose{})); err == nil || !strings.Contains(err.Error(), "takes any widget") {
 		t.Fatalf("an any-widget slot passed: %v", err)
 	}
-	// One class printed by two types is refused.
+	// One type printing two blocks is refused.
 	twice := append(toyEntries, refs.Entry{Fixture: toyKbd{}, Ref: fragment.Ref{Class: "tc-btn"}})
 	if err := refs.CheckPairs(drawn, twice, toyWidgets); err == nil {
-		t.Fatal("one class, two types passed")
+		t.Fatal("one type, two blocks passed")
 	}
 }

@@ -64,7 +64,7 @@ func (k Mark) html(m mix) string {
 // Tag — tc-tag
 //
 // Роль. Метка категории: тег записи, фильтр по тегу, приложенная вещь, связанная запись.
-// Вход. Tag{Label, On, Icon, Mark, Removable}.
+// Вход. Tag{Label, On, Icon, Mark, Removable, Place}.
 // Состояния. plain | on | icon | mark | removable.
 // Инварианты. Тег не правится на месте: он или выбран, или снимается крестиком; тег печатает фрагмент своего кадра.
 // Поведение. Выбранный фильтр (On) снимается нажатием; тег с крестиком убирается крестиком.
@@ -77,13 +77,14 @@ type Tag struct {
 	Icon      Icon
 	Mark      *Mark
 	Removable bool // a pill with a cross after the label
+	Place     Place
 }
 
 // Render prints the tag.
 func (t Tag) Render() string { return t.html(nil) }
 
 func (t Tag) html(m mix) string {
-	s := `<span` + class(m, "tc-tag", is("on", t.On), pick(t.Removable, "tc-tag--pill")) + `>`
+	s := `<span` + class(m, "tc-tag", is("on", t.On), pick(t.Removable, "tc-tag--pill"), t.Place.class()) + `>`
 	if t.Icon != "" {
 		s += `<svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none">` + t.Icon.use() + `</svg> `
 	}
@@ -114,7 +115,7 @@ func (t BadgeTone) class() string {
 // Badge — tc-badge
 //
 // Роль. Короткая пометка рядом с именем: «read-only», «linked ×2», «tentative».
-// Вход. Badge{Label, Tone, Icon, Accent, Title}.
+// Вход. Badge{Label, Tone, Icon, Accent, Title, Place}.
 // Состояния. neutral | linked | alert | local | accent | icon.
 // Инварианты. В бейдже есть текст; бейдж не ссылка и не кнопка; бейдж печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -127,13 +128,14 @@ type Badge struct {
 	Icon   Icon
 	Accent bool   // accent edge and text: an unlocked state that runs out
 	Title  string // what the badge means, as a hint
+	Place  Place
 }
 
 // Render prints the badge.
 func (b Badge) Render() string { return b.html(nil) }
 
 func (b Badge) html(m mix) string {
-	s := `<span` + class(m, "tc-badge", b.Tone.class(), pick(b.Accent, "tc-badge--edge-accent-accent")) + attr("title", b.Title) + `>`
+	s := `<span` + class(m, "tc-badge", b.Tone.class(), pick(b.Accent, "tc-badge--edge-accent-accent"), b.Place.class()) + attr("title", b.Title) + `>`
 	if b.Icon != "" {
 		s += `<svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="tc-ico--inline">` + b.Icon.use() + `</svg> `
 	}
@@ -185,7 +187,7 @@ func (t Tick) html(m mix) string {
 // Kbd — tc-kbd
 //
 // Роль. Клавиша или сочетание в подсказке и в таблице клавиш.
-// Вход. Kbd{Keys}.
+// Вход. Kbd{Keys, Place, Secondary}.
 // Состояния. нет.
 // Инварианты. Не нажимается: это надпись, а не кнопка; клавиша печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -193,14 +195,16 @@ func (t Tick) html(m mix) string {
 // Содержимое. нет.
 // Чего нет. Привязки к действию: сочетание называет клавиши, а работает поведение библиотеки.
 type Kbd struct {
-	Keys string // "Ctrl+S"
+	Keys      string // "Ctrl+S"
+	Place     Place
+	Secondary bool
 }
 
 // Render prints the key.
 func (k Kbd) Render() string { return k.html(nil) }
 
 func (k Kbd) html(m mix) string {
-	return `<kbd` + class(m, "tc-kbd") + `>` + esc(k.Keys) + `</kbd>`
+	return `<kbd` + class(m, "tc-kbd", k.Place.class(), rank(k.Secondary)) + `>` + esc(k.Keys) + `</kbd>`
 }
 
 // Num — tc-num

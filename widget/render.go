@@ -67,3 +67,24 @@ func (m mix) with(more ...string) mix {
 	out := append(mix{}, m...)
 	return append(out, more...)
 }
+
+// Place is where a widget sits in its row. The screen's author chooses it,
+// as the frame's author did: which button goes to the end, which field
+// takes the rest of the line.
+type Place int
+
+const (
+	InFlow Place = iota // where the row puts it
+	Pushed              // pushed to the row's end (tc-push)
+	Grown               // takes the rest of the row (tc-grow)
+)
+
+func (p Place) class() string {
+	return [...]string{"", "tc-push", "tc-grow"}[p]
+}
+
+// rank is is-2nd for a secondary item: the first to go under «⋯» when the
+// bar narrows.
+func rank(secondary bool) string {
+	return pick(secondary, "is-2nd")
+}

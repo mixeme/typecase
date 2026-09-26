@@ -103,7 +103,7 @@ func TestBlockAndMixins(t *testing.T) {
 	// The bar's own form keeps the mixins it puts on its children.
 	bar, _ := m.Block(Ref{"b-1", "tc-bar", 1})
 	key := Skeleton(m.Own(bar, false))
-	for _, want := range []string{"tc-btn.is-2nd.tc-bar__more.tc-push", "tc-dim.tc-push", "tc-close", "tc-rubric.tc-line"} {
+	for _, want := range []string{"tc-btn.is-2nd.tc-bar__more.tc-push", "tc-dim.tc-push", "tc-close", "tc-rubric)"} {
 		if !strings.Contains(key, want) {
 			t.Errorf("bar's own form lacks %s: %s", want, key)
 		}

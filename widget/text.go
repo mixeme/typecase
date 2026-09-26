@@ -41,18 +41,50 @@ func (d Dot) html(mix) string {
 	return `<span class="` + [...]string{"tc-dot--accent", "tc-dot--danger", "tc-dot--dusty"}[d.Tone] + `"></span>`
 }
 
-// DimPart is what a dim line holds: text, bold, a monospaced piece, a hint,
-// a state dot.
-type DimPart interface {
+// Inline is running text: plain text, bold, a monospaced piece, a hint, a
+// state dot, a piece in a face of its own. A dim line, a field's hint and a
+// check's label are made of it.
+type Inline interface {
 	part
-	dimPart()
+	inline()
 }
 
-func (Text) dimPart()   {}
-func (Strong) dimPart() {}
-func (Hint) dimPart()   {}
-func (Dot) dimPart()    {}
-func (Mono) dimPart()   {}
+func (Text) inline()   {}
+func (Strong) inline() {}
+func (Hint) inline()   {}
+func (Dot) inline()    {}
+func (Mono) inline()   {}
+func (Span) inline()   {}
+
+// Face is a face without a block of its own: a tone or a size of dim text
+// set by its variant alone («another tone is the variant instead of the
+// base», docs/visual/mockup.md).
+type Face int
+
+const (
+	FaceMuted      Face = iota // tc-dim--muted: typed text, still being written
+	FaceAccent                 // tc-dim--accent: a good outcome
+	FaceDanger                 // tc-dim--danger: a failure
+	FaceAccent12               // accent, 12 px
+	FaceAccent11_5             // accent, 11.5 px
+	FaceDanger11_5             // danger, 11.5 px
+	FaceLarge                  // tc-dim--t12-5: a sentence a little larger
+)
+
+func (f Face) class() string {
+	return [...]string{"tc-dim--muted", "tc-dim--accent", "tc-dim--danger", "tc-dim--accent tc-dim--t12",
+		"tc-dim--accent tc-dim--t11-5", "tc-dim--danger tc-dim--t11-5", "tc-dim--t12-5"}[f]
+}
+
+// Span is words in a face of their own.
+type Span struct {
+	Face Face
+	Text string
+}
+
+func (s Span) html(mix) string {
+	return `<span class="` + s.Face.class() + `">` + esc(s.Text) + `</span>`
+}
 
 // DimSize is the size of a dim line where it is not the running text's.
 type DimSize int
@@ -90,7 +122,7 @@ func (v DimVariant) class() string {
 // Dim — tc-dim
 //
 // Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», «nextcloud · Контакты».
-// Вход. Dim{Parts, Size, Variant}.
+// Вход. Dim{Parts, Size, Variant, Place}.
 // Состояния. plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
 // Инварианты. Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -98,9 +130,10 @@ func (v DimVariant) class() string {
 // Содержимое. Текст, жирное, моноширинный кусок, подсказка, точка состояния.
 // Чего нет. Ссылок и кнопок: приглушённое не нажимают.
 type Dim struct {
-	Parts   []DimPart
+	Parts   []Inline
 	Size    DimSize
 	Variant DimVariant
+	Place   Place
 }
 
 // Render prints the dim line.
@@ -108,7 +141,7 @@ func (d Dim) Render() string { return d.html(nil) }
 
 func (d Dim) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class()) + `>`)
+	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class(), d.Place.class()) + `>`)
 	for _, p := range d.Parts {
 		s.WriteString(p.html(nil))
 	}
@@ -160,7 +193,7 @@ func (v MonoVariant) class() string {
 // Mono — tc-mono
 //
 // Роль. Моноширинный кусок: время, размер, адрес, идентификатор, команда.
-// Вход. Mono{Text, Form, Variant}.
+// Вход. Mono{Text, Form, Variant, Place}.
 // Состояния. span | line | code | variant.
 // Инварианты. Элемент и вариант — перечисления; кусок печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -171,6 +204,7 @@ type Mono struct {
 	Text    string
 	Form    MonoForm
 	Variant MonoVariant
+	Place   Place
 }
 
 // Render prints the monospaced piece.
@@ -178,7 +212,7 @@ func (o Mono) Render() string { return o.html(nil) }
 
 func (o Mono) html(m mix) string {
 	tag := [...]string{"span", "div", "code"}[o.Form]
-	return `<` + tag + class(m, "tc-mono", o.Variant.class()) + `>` + esc(o.Text) + `</` + tag + `>`
+	return `<` + tag + class(m, "tc-mono", o.Variant.class(), o.Place.class()) + `>` + esc(o.Text) + `</` + tag + `>`
 }
 
 // Plain — tc-plain

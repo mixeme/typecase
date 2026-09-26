@@ -57,6 +57,17 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   `Icon` names a symbol of the sprite without enumerating the set, and
   `icons/sprite.svg` is now the mockup's sprite, cut like the CSS. The old
   widgets live in `internal/legacy/widget` until step 6.
+- **Fields and forms.** `Input`, `Pick`, `Filter`, `TagInput` and `Area` are
+  the five forms of `tc-in` (one type each, so a pick with a date's
+  placeholder cannot be built); `Query`, `Seg`, `Check`, `Range`, `Field` with
+  its parts (hint, swatches, zoom, row, group, photo), `FieldSet`, `Form`,
+  `FormFoot`, `Rubric`, and the layout glue `Line`, `Stack`, `Grow`, `Push`.
+  `Place` (pushed, grown) and `Secondary` (is-2nd) are fields of the widgets
+  the frames place so. Forms whose children come from later families wait in
+  `refs.Waiting` with their reason; `TestShapesCovered` holds every other form
+  to a record. In the mockup: the zoom is `tc-field__zoom`, the weights
+  column `tc-rubric__col`, and «Find a zone» gets the `is-ph` every other
+  placeholder has (awaiting the owner in `allowed-diffs.md`).
 
 ### Mockup
 
