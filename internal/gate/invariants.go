@@ -8,6 +8,9 @@ import (
 // invariantBindings maps each widget to executable checks for its invariant clauses
 // (semicolon-separated in L-3.2 «Инварианты»). Order matches clause order.
 var invariantBindings = map[string][]string{
+	"Prose":        {"gate:css-from-mockup", "gate:enumerations", "gate:widget-fragments"},
+	"Doc":          {"gate:widget-fragments", "gate:container-pairs", "gate:widget-fragments"},
+	"Docbar":       {"browser:bar-one-row", "gate:widget-fragments", "gate:widget-fragments"},
 	"Menu":         {"gate:a11y", "gate:enumerations", "gate:widget-fragments"},
 	"Drop":         {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"Sheet":        {"gate:widget-fragments", "gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
@@ -73,10 +76,6 @@ var invariantBindings = map[string][]string{
 	"tc-danger":    {"gate:a11y", "gate:a11y"},
 	"tc-diag":      {"gate:inv-diag-collapsed-default", "gate:inv-diag-mono"},
 	"tc-diff":      {"gate:inv-diff-options-column", "gate:inv-diff-one-chosen"},
-	"tc-doc":       {"gate:inv-doc-mode-switch", "gate:inv-doc-no-silent-save"},
-	"tc-docedit":   {"gate:a11y"},
-	"tc-docbar":    {"gate:inv-docbar-actions", "gate:inv-docbar-dirty-flag"},
-	"tc-docmeta":   {"gate:inv-docmeta-sections"},
 	"tc-empty":     {"gate:a11y"},
 	"tc-field":     {"gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-fields":    {"browser:ellipsis", "gate:inv-fields-dl-structure"},
@@ -93,7 +92,6 @@ var invariantBindings = map[string][]string{
 	"tc-meter":     {"gate:inv-meter-has-value"},
 	"tc-msg":       {"gate:a11y", "gate:a11y"},
 	"tc-num":       {"gate:typed-input", "gate:widget-fragments"},
-	"tc-prose":     {"gate:typed-input"},
 	"tc-queue":     {"gate:inv-queue-question", "gate:inv-queue-meter"},
 	"tc-rail":      {"gate:inv-rail-foot", "gate:inv-rail-drawer-class"},
 	"tc-range":     {"gate:widget-fragments", "gate:widget-fragments"},

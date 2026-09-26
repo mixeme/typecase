@@ -1,0 +1,388 @@
+package widget
+
+import "strings"
+
+// Link is a link inside running text, in the accent.
+type Link struct {
+	Text string
+	Href string
+}
+
+func (l Link) html(mix) string {
+	return `<a class="tc-dim--accent"` + attr("href", l.Href) + `>` + esc(l.Text) + `</a>`
+}
+
+func (Link) inline() {}
+
+// ProseVariant is the drawn size, tone and spacing of a paragraph.
+type ProseVariant int
+
+const (
+	ProsePlain      ProseVariant = iota
+	ProseMuted                   // a quieter paragraph: what a dialog means
+	ProseMutedClose              // muted, flush, 10 px below: over a button in a card
+	Prose13                      // 13 px: an event's description
+	Prose13Card                  // 13 px, flush, 11 px above: a card's text
+	ProseLead                    // the first paragraph of a document, 14 px above
+	ProseLeadAfter               // a paragraph after a section, 18 px above
+	ProseRead                    // the reading measure
+	ProseReadTop                 // the reading measure, 14 px above
+	ProseTop                     // 14 px above
+)
+
+func (v ProseVariant) class() string {
+	return [...]string{"", "tc-prose--muted", "tc-prose--muted-flush-bot10", "tc-prose--t13", "tc-prose--t13-flush-padt11",
+		"tc-prose--lead tc-prose--top14", "tc-prose--lead tc-prose--top18", "tc-prose--read", "tc-prose--read tc-prose--top14", "tc-prose--top14"}[v]
+}
+
+// Prose — tc-prose
+//
+// Роль. Абзац текста: описание события, начало заметки, пояснение диалога.
+// Вход. Prose{Parts, Variant}.
+// Состояния. plain | muted | size | lead | read | top | rich.
+// Инварианты. Текст переносится по словам и держит свою меру; вид — перечисление; абзац печатает фрагмент своего кадра.
+// Поведение. нет.
+// Эталон. кадр `s-notes-2`, фрагмент `.tc-prose`.
+// Содержимое. Текст, жирное, моноширинное, ссылка.
+// Чего нет. Разметки заголовков и списков: у документа для них свои части.
+type Prose struct {
+	Parts   []Inline
+	Variant ProseVariant
+}
+
+// Render prints the paragraph.
+func (p Prose) Render() string { return p.html(nil) }
+
+func (p Prose) html(m mix) string {
+	return `<div` + class(m, "tc-prose", p.Variant.class()) + `>` + inlines(p.Parts) + `</div>`
+}
+
+// DocTitle is a document's title as read.
+type DocTitle struct {
+	Text string
+}
+
+func (t DocTitle) html(mix) string { return `<div class="tc-doc__title">` + esc(t.Text) + `</div>` }
+
+// DocSubPart is what the line under a document's title holds.
+type DocSubPart interface {
+	part
+	docSubPart()
+}
+
+func (Text) docSubPart() {}
+func (Mono) docSubPart() {}
+func (Tag) docSubPart()  {}
+
+// DocSub is the line under a document's title: when it was written, its tags.
+type DocSub struct {
+	Parts []DocSubPart
+}
+
+func (b DocSub) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-head__sub tc-head__sub--top6">`)
+	for _, p := range b.Parts {
+		s.WriteString(p.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocTask is a task line of a document: a tick and what to do.
+type DocTask struct {
+	Tick Tick // Done says whether it is done
+	Text string
+}
+
+// DocTasks is a list of tasks in a document under its rubric.
+type DocTasks struct {
+	Title Rubric
+	Items []DocTask
+	Phone bool // a phone's list: wider gaps
+}
+
+func (t DocTasks) html(mix) string {
+	var s strings.Builder
+	if t.Phone {
+		s.WriteString(`<div class="tc-doc__acts">` + t.Title.html(nil) + `<ul class="tc-stack tc-stack--gap-9 tc-doc__list">`)
+	} else {
+		s.WriteString(`<div class="tc-doc__sec">` + t.Title.html(nil) + `<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
+	}
+	for _, it := range t.Items {
+		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil))
+		if it.Tick.Done {
+			s.WriteString(Dim{Parts: []Inline{Text(it.Text)}, Variant: DimStruck}.html(nil))
+		} else {
+			s.WriteString(esc(it.Text))
+		}
+		s.WriteString(`</li>`)
+	}
+	s.WriteString(`</ul></div>`)
+	return s.String()
+}
+
+// DocFile is an attachment named in a document: the name and its size.
+type DocFile struct {
+	Name string
+	Size Dim
+}
+
+// DocFiles is the attachments of a document under a rule.
+type DocFiles struct {
+	Title Rubric
+	Items []DocFile
+}
+
+func (f DocFiles) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-doc__sec--rule">` + f.Title.html(nil) + `<div class="tc-stack tc-stack--gap-5 tc-doc__files">`)
+	for _, it := range f.Items {
+		s.WriteString(`<span class="tc-stack__item"><span class="tc-dim--accent">` + esc(it.Name) + `</span> ` + it.Size.html(nil) + `</span>`)
+	}
+	s.WriteString(`</div></div>`)
+	return s.String()
+}
+
+// DocRelated is what a document is related to, under a rule: a phone's note.
+type DocRelated struct {
+	Title Rubric
+	Name  string
+	What  Dim
+}
+
+func (r DocRelated) html(mix) string {
+	return `<div class="tc-doc__sec--rule16">` + r.Title.html(nil) + `<div class="tc-doc__link">` + esc(r.Name) + ` ` + r.What.html(nil) + `</div></div>`
+}
+
+// DocFields is the row of a document's fields in the editor.
+type DocFields struct {
+	Items []Field
+}
+
+func (f DocFields) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-doc__fields">`)
+	for _, it := range f.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocNote is the small line at the end of the editor: what is kept unseen.
+type DocNote struct {
+	Parts []Inline
+}
+
+func (n DocNote) html(mix) string { return `<div class="tc-doc__note">` + inlines(n.Parts) + `</div>` }
+
+// DocHeading is a heading inside a document's text.
+type DocHeading struct {
+	Text string
+}
+
+func (h DocHeading) html(mix) string { return `<div class="tc-doc__heading">` + esc(h.Text) + `</div>` }
+
+// DocBullets is a bulleted list inside a document's text.
+type DocBullets struct {
+	Items [][]Inline
+}
+
+func (b DocBullets) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<ul class="tc-stack tc-stack--gap-6 tc-doc__bullets">`)
+	for _, it := range b.Items {
+		s.WriteString(`<li>` + inlines(it) + `</li>`)
+	}
+	s.WriteString(`</ul>`)
+	return s.String()
+}
+
+// DocBody is a plain paragraph inside a document's text.
+type DocBody struct {
+	Text string
+}
+
+func (b DocBody) html(mix) string { return `<div class="tc-doc__body">` + esc(b.Text) + `</div>` }
+
+// DocPart is what a document holds.
+type DocPart interface {
+	part
+	docPart()
+}
+
+func (DocTitle) docPart()   {}
+func (DocSub) docPart()     {}
+func (Prose) docPart()      {}
+func (DocTasks) docPart()   {}
+func (DocFiles) docPart()   {}
+func (DocRelated) docPart() {}
+func (Area) docPart()       {}
+func (DocFields) docPart()  {}
+func (DocNote) docPart()    {}
+func (DocHeading) docPart() {}
+func (DocBullets) docPart() {}
+func (DocBody) docPart()    {}
+
+// Doc — tc-doc
+//
+// Роль. Документ: заметка для чтения или в правке — заголовок, текст, дела, вложения.
+// Вход. Doc{Items, Text}.
+// Состояния. read | edit | public | text | phone.
+// Инварианты. Заголовок — первым; дела — галки, а не строки текста с квадратными скобками; документ печатает фрагмент своего кадра.
+// Поведение. Галка отмечает дело прямо в тексте заметки.
+// Эталон. кадр `s-notes-2`, фрагмент `.tc-doc`.
+// Содержимое. Заголовок и строка под ним, абзацы, дела, вложения, связанное; в правке — поле заголовка, поля заметки, поле текста, примечание; в тексте — подзаголовки, списки, абзацы.
+// Чего нет. Своего меню: действия — в шапке и в полосе правки.
+type Doc struct {
+	Items []DocPart
+	Text  bool // the rendered text of a note alone: a column with 14 px gaps
+}
+
+// Render prints the document.
+func (d Doc) Render() string { return d.html(nil) }
+
+func (d Doc) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<div` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + `>`)
+	for _, it := range d.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocbarPart is what an edit bar holds before its end.
+type DocbarPart interface {
+	part
+	docbarPart()
+}
+
+func (Button) docbarPart() {}
+func (BarSep) docbarPart() {}
+
+// DraftNote says where the draft is kept and when it was saved.
+type DraftNote struct {
+	Text      string
+	Time      Mono
+	Secondary bool
+}
+
+func (n DraftNote) html(mix) string {
+	return `<span` + class(nil, rank(n.Secondary)) + `>` + esc(n.Text) + ` ` + n.Time.html(nil) + `</span>`
+}
+
+// DocbarEnd is what the end of an edit bar holds.
+type DocbarEnd interface {
+	part
+	docbarEnd()
+}
+
+func (Check) docbarEnd()     {}
+func (DraftNote) docbarEnd() {}
+func (Kbd) docbarEnd()       {}
+func (Seg) docbarEnd()       {}
+func (Button) docbarEnd()    {}
+
+// Docbar — tc-docbar
+//
+// Роль. Полоса правки над документом: сохранить, отменить, разметка, вложения; справа — черновик и вид.
+// Вход. Docbar{Items, More, End, Rule}.
+// Состояния. plain | rule.
+// Инварианты. Полоса — одна строка: второстепенное уходит под «⋯» первым; сохранить — первой кнопкой; полоса печатает фрагмент своего кадра.
+// Поведение. Ctrl+S сохраняет; «⋯» открывает то, что не поместилось.
+// Эталон. кадр `components-29`, фрагмент `.tc-docbar`.
+// Содержимое. Кнопки, разделители, «⋯»; в конце — автосохранение, черновик, клавиша, ширина текста, фокус.
+// Чего нет. Второй строки: то, что не влезло, уходит под «⋯».
+type Docbar struct {
+	Items []DocbarPart
+	More  *Button
+	End   []DocbarEnd
+	Rule  bool // a rule below: the bar drawn alone
+}
+
+// Render prints the bar.
+func (b Docbar) Render() string { return b.html(nil) }
+
+func (b Docbar) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<div` + class(m, "tc-docbar", pick(b.Rule, "tc-docbar--rule")) + `>`)
+	for _, it := range b.Items {
+		s.WriteString(it.html(nil))
+	}
+	if b.More != nil {
+		s.WriteString(b.More.html(mix{"tc-bar__more"}))
+	}
+	if len(b.End) > 0 {
+		s.WriteString(`<span class="tc-bar__right">`)
+		for _, it := range b.End {
+			s.WriteString(it.html(nil))
+		}
+		s.WriteString(`</span>`)
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocLayoutPart is what a document's layout holds.
+type DocLayoutPart interface {
+	part
+	docLayoutPart()
+}
+
+func (Doc) docLayoutPart()    {}
+func (Docbar) docLayoutPart() {}
+
+// DocView is how a document is laid out in its page.
+type DocView int
+
+const (
+	DocViewFull    DocView = iota // the page's width, the side column beside it
+	DocViewMeasure                // the reading measure
+	DocViewFocus                  // focus: the document alone
+)
+
+// DocLayout is a document in its page: the document and its side column.
+type DocLayout struct {
+	Items []DocLayoutPart
+	View  DocView
+}
+
+func (l DocLayout) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div` + class(nil, is("measure", l.View == DocViewMeasure), is("focus", l.View == DocViewFocus), "tc-doc__layout") + `>`)
+	for _, it := range l.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+func (DocLayout) mainPart() {}
+func (Docbar) mainPart()    {}
+func (Prose) dialogPart()   {}
+func (Hero) mainPart()      {}
+
+// Hero is the head of a service's own page: its picture from the sprite, its
+// name, a line, a paragraph and the buttons.
+type Hero struct {
+	Symbol string // the picture's symbol in the sprite, drawn in a 96 box
+	Label  string // what the picture shows
+	Title  string
+	Sub    string
+	Text   Prose
+	Acts   []Button
+}
+
+func (h Hero) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-main__hero"><svg width="72" height="72" viewBox="0 0 96 96" role="img"` + attr("aria-label", h.Label) +
+		` class="tc-ico--fix"><use href="#` + esc(h.Symbol) + `"/></svg><div class="tc-main__hero-side"><div class="tc-main__hero-title">` + esc(h.Title) +
+		`</div><div class="tc-head__sub">` + esc(h.Sub) + `</div>` + h.Text.html(nil) + `<div class="tc-line tc-line--gap-8 tc-doc__acts">`)
+	for _, b := range h.Acts {
+		s.WriteString(b.html(nil))
+	}
+	s.WriteString(`</div></div></div>`)
+	return s.String()
+}

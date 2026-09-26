@@ -110,6 +110,15 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   mockup the accent icons of sheet heads share one stroke (1.4, round caps)
   instead of three, and the folder picker of «Attach a file» gets the base
   class its sibling has.
+- **The document.** `Prose` keeps its paragraphs as written (the text is
+  pre-wrapped), with bold, monospaced pieces and links (`Link`) inside; `Doc`
+  is a note as read, edited, published, rendered or on a phone, made of named
+  parts (title, date line, paragraphs, tasks with real ticks, attachments,
+  related, the editor's fields and note, headings, bullets); `Docbar` is the
+  edit bar with its end; `DocLayout` puts them in the page, and `Hero` heads
+  a service's own page. In the mockup the davloom tile of that page is the
+  sprite's symbol `davloom-tile` instead of an inline drawing — the same
+  picture, referenced like the logo.
 
 ### Mockup
 
