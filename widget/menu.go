@@ -233,8 +233,9 @@ type DropTrigger interface {
 	dropTrigger()
 }
 
-func (Button) dropTrigger() {}
-func (Pick) dropTrigger()   {}
+func (Button) dropTrigger()   {}
+func (Pick) dropTrigger()     {}
+func (TagInput) dropTrigger() {}
 
 // Drop — tc-drop
 //

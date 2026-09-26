@@ -126,7 +126,7 @@ func (v DiagVariant) class() string {
 // Diag — tc-diag
 //
 // Роль. Диагностика: что ответил сервер, строка для вставки, идентификаторы — моноширинным, как есть.
-// Вход. Diag{Text, Variant}.
+// Вход. Diag{Text, Variant, Place}.
 // Состояния. plain | ink | danger.
 // Инварианты. Текст — как есть, с переносами строк; диагностика печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -136,13 +136,14 @@ func (v DiagVariant) class() string {
 type Diag struct {
 	Text    string
 	Variant DiagVariant
+	Place   Place
 }
 
 // Render prints the block.
 func (d Diag) Render() string { return d.html(nil) }
 
 func (d Diag) html(m mix) string {
-	return `<div` + class(m, "tc-diag", d.Variant.class()) + `>` + esc(d.Text) + `</div>`
+	return `<div` + class(m, "tc-diag", d.Variant.class(), d.Place.class()) + `>` + esc(d.Text) + `</div>`
 }
 
 // DangerSpace is the space a danger zone keeps around it.

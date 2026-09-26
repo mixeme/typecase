@@ -131,7 +131,7 @@ def runbar(e):
         elif k.has("tc-mono"):
             ps.append(mono(k))
         elif k.has("tc-line"):
-            ps.append("w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{" + ", ".join(button(b) for b in k.els()) + "}}")
+            ps.append(linew2(k))
         elif k.has("tc-push"):
             ps.append("w.Push{Items: []w.PushPart{" + ", ".join(button(b) for b in k.els()) + "}}")
         else:
@@ -346,7 +346,7 @@ def anyblock(k):
     if k.has("tc-seg"):
         return baritem(k)
     if k.has("tc-check"):
-        return "w.Check{Parts: []w.CheckPart{w.Text(" + q(k.text()) + ")}}"
+        return checkw(k)
     if k.has("tc-field"):
         return field(k)
     if k.has("tc-form"):
@@ -360,7 +360,7 @@ def anyblock(k):
     if k.has("tc-mono"):
         return mono(k)
     if k.has("tc-in"):
-        return "w.Input{Value: " + q(k.attrs.get("value", "")) + ', Label: "x"}'
+        return control(k)
     raise Wait()
 
 
@@ -387,7 +387,7 @@ def sec(e):
             fs = []
             for ln in k.els():
                 fl = kid(ln, "tc-table__file")
-                fs.append("{Icon: " + icon(fl.els()[0]) + ", Name: " + q(fl.els()[1].text()) + ", Size: w.Mono{Text: " + q(kid(ln, "tc-mono").text()) + "}, Tag: " +
+                fs.append("{Icon: " + icon(fl.els()[0]) + ", Name: " + q(fl.els()[1].text()) + ", Size: " + mono(kid(ln, "tc-mono")) + ", Tag: " +
                           tag(kid(ln, "tc-tag")) + ", Remove: " + button(kid(ln, "tc-btn")) + "}")
             items.append("w.SecFiles{Items: []w.SecFile{" + ", ".join(fs) + "}}")
         elif k.has("tc-line__text") and k.has("tc-stack"):
@@ -396,7 +396,7 @@ def sec(e):
                 if x.has("tc-stack__item"):
                     ps.append("w.SecOpened{Name: " + q(x.own_text()) + ", Size: w.Dim{Parts: []w.Inline{w.Text(" + q(kid(x, "tc-dim").text()) + ")}}}")
                 elif x.has("tc-line"):
-                    ps.append("w.Line{Gap: w.LineGap6, Items: []w.LinePart{" + ", ".join(button(b) for b in x.els()) + "}}")
+                    ps.append(linew2(x))
                 else:
                     ps.append(dimx(x))
             items.append("w.SecOpen{Items: []w.SecOpenPart{" + ", ".join(ps) + "}}")
@@ -430,7 +430,7 @@ def rowpart(x):
     if x.has("tc-dim"):
         return dimx(x)
     if x.has("tc-in"):
-        return "w.Input{Value: " + q(x.attrs.get("value", "")) + ', Mono: true, Variant: w.InputKeyFill, Label: "Key"}'
+        return inputw(x)
     raise SystemExit("card row? " + str(x.cls))
 
 
@@ -493,7 +493,7 @@ def card(e):
                 elif x.tag == "textarea":
                     gs.append("w.Area{Text: pasteArgs, Variant: w.AreaPaste, Mono: true, Label: \"Arguments\"}")
                 elif x.has("tc-in"):
-                    gs.append("w.Input{Value: " + q(x.attrs.get("value", "")) + ", Label: \"x\"}")
+                    gs.append(inputw(x))
                 else:
                     gs.append(button(x))
             items.append("w.CardGrid{Items: []w.CardGridPart{" + ", ".join(gs) + "}}")
@@ -513,8 +513,7 @@ def card(e):
                 ls.append("{Slot: " + q(slot.text()) + ", Parts: " + tparts(rest) + "}")
             items.append("w.CardHead{Lines: []w.CardHeadLine{" + ", ".join(ls) + "}}")
         elif k.has("tc-line") and not [c for c in k.cls if "__" in c]:
-            items.append("w.Line{Block: true, Gap: w.LineGap8, Items: []w.LinePart{" + ", ".join(button(x) if x.has("tc-btn") else field(x) if x.has("tc-field") else
-                         "w.Input{Value: " + q(x.attrs.get("value", "")) + ', Mono: true, Variant: w.InputKeySmFill, Label: "Key"}' for x in k.els()) + "}}")
+            items.append(linew2(k))
         elif k.has("tc-mono") and k.tag == "div":
             items.append(mono(k))
         else:
@@ -565,18 +564,12 @@ def cellpart(x):
     if x.has("tc-table__wrap"):
         return "w.CellWrap{Items: []w.CellPart{" + ", ".join(cellpart(y) for y in x.els()) + "}}"
     if x.has("tc-line"):
-        its = []
-        for y in x.els():
-            if y.has("tc-mark"):
-                its.append(mark(y))
-            elif y.has("tc-mono"):
-                its.append(mono(y))
-        return "w.Line{Gap: w.LineGap3, Items: []w.LinePart{" + ", ".join(its) + "}}"
+        return linew2(x)
     if x.has("tc-mono"):
         return mono(x)
     if x.has("tc-seg"):
         opts = ["{Label: " + q(o.text()) + (", On: true" if o.has("is-on") else "") + "}" for o in x.els()]
-        return "w.Seg{Options: []w.SegOption{" + ", ".join(opts) + "}, Variant: w.SegCompact, Place: w.Pushed}"
+        return segw(x)
     if x.tag == "svg" and x.has("tc-ico--inline"):
         return "w.Chevron{}"
     if x.has("tc-dim"):

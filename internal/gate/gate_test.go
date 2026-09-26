@@ -46,7 +46,7 @@ func TestL8_verifiable(t *testing.T) {
 	if err := gate.Run(gate.Verifiable, p, catalogEntries()); err != nil {
 		t.Fatal(err)
 	}
-	if len(gate.AllGates) != 17 {
-		t.Fatalf("expected 17 gates, got %d", len(gate.AllGates))
+	if len(gate.AllGates) != 18 {
+		t.Fatalf("expected 18 gates, got %d", len(gate.AllGates))
 	}
 }

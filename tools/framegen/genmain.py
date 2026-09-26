@@ -18,9 +18,9 @@ def block_child(k):
     if k.has("tc-list"):
         return lst(k)
     if k.has("tc-form"):
-        return "w.Form{}"
+        return formw(k)
     if k.has("tc-formfoot"):
-        return "w.FormFoot{}"
+        return formfootw(k)
     if k.has("tc-railsec"):
         return railsec(k)
     if k.has("tc-zone"):
@@ -76,7 +76,7 @@ def main(e):
                 elif x.has("tc-dim"):
                     parts.append(dimx(x))
                 else:
-                    parts.append("w.Input{Value: " + q(x.attrs.get("value", "")) + ', Mono: true, Variant: w.InputLineFill, Label: "Address"}')
+                    parts.append(inputw(x))
             items.append("w.Strip{Label: " + q(k.els()[0].text()) + ", Items: []w.StripPart{" + ", ".join(parts) + "}}")
         elif k.has("tc-main__foot") or k.has("tc-main__foot--16"):
             items.append("w.MainFoot{Text: " + q(k.text()) + (", Roomy: true" if k.has("tc-main__foot--16") else "") + "}")

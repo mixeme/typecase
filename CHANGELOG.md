@@ -172,6 +172,17 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   no longer takes an input (`Check.Parts` without `Input`): the input of a
   sentence stands beside the check in a `Line`.
 
+- **Demo screens are the mockup's frames.** `go run ./cmd/screens` serves
+  every route frame (decision Р-16) at `/f/<data-frame>`, built from widgets
+  with the frame's data, top to bottom; 127 of 154 build, and the other 27 —
+  pages without a shell and print — are listed in `docs/visual/gaps.md`. The
+  static comparison (`TestFramesStatic`, `internal/fragment`'s
+  `CompareFrame`) holds each screen's whole tree to its frame; the new gate
+  `frame-coverage` wants every route frame either built or listed as a gap.
+  The screens are drafted by `tools/framegen`. What the whole frames showed
+  the library lacked: `Pick` in a bar, `Field` in a dialog, `Check` in a
+  sheet, a tag input as a drop's trigger, `Place` on `Diag` and `Table`.
+
 ### Mockup
 
 - Step 7 of plan 2, the owner's answers of 2026-09-26. The bars of «Заметка ·

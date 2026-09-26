@@ -195,7 +195,7 @@ def tickrow(e):
         f.append("Error: true")
     last = e.els()[-1]
     if last.has("tc-badge"):
-        f.append("Trail: " + badge(last))
+        f.append("Trail: " + badge(last).replace(", Place: w.Pushed", ""))
     if last.has("tc-btn"):
         f.append("Trail: w.Button{Label: " + q(last.text()) + ", Small: true}")
     if last.has("tc-skel"):
@@ -240,7 +240,7 @@ def tree(e):
             elif t.has("tc-mono"):
                 g.append("Trail: w.Mono{Text: " + q(t.text()) + ", Variant: w.Mono10Dusty}")
             elif t.has("tc-badge"):
-                g.append("Trail: " + badge(t))
+                g.append("Trail: " + badge(t).replace(", Place: w.Pushed", ""))
         rows.append("{" + ", ".join(g) + "}")
     out = ["Rows: []w.TreeRow{\n\t\t" + ",\n\t\t".join(rows) + "}"]
     if on:

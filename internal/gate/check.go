@@ -32,6 +32,7 @@ const (
 	CSSFromMockup   Name = "css-from-mockup"
 	WidgetFragments Name = "widget-fragments"
 	ContainerPairs  Name = "container-pairs"
+	FrameCoverage   Name = "frame-coverage"
 )
 
 // AllGates lists every L-8 gate in stable order.
@@ -39,7 +40,7 @@ var AllGates = []Name{
 	Ownership, NodeNames, TypedInput, Enumerations,
 	DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 	ScreensCSS, Gofmt, Vet,
-	CSSFromMockup, WidgetFragments, ContainerPairs,
+	CSSFromMockup, WidgetFragments, ContainerPairs, FrameCoverage,
 }
 
 // browserChecks lists L-9.2 invariant names that must have broken HTML fixtures.
@@ -149,6 +150,8 @@ func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 		return CheckWidgetFragments(p)
 	case ContainerPairs:
 		return CheckContainerPairs(p)
+	case FrameCoverage:
+		return CheckFrameCoverage(p)
 	case Gofmt:
 		return CheckGofmt(p.Root)
 	case Vet:
@@ -208,7 +211,7 @@ func gateImplemented(name Name) bool {
 	case Ownership, NodeNames, TypedInput, Enumerations,
 		DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 		ScreensCSS, Gofmt, Vet,
-		CSSFromMockup, WidgetFragments, ContainerPairs:
+		CSSFromMockup, WidgetFragments, ContainerPairs, FrameCoverage:
 		return true
 	default:
 		return false

@@ -184,12 +184,12 @@ def child(e):
         if e.has(c):
             return fn(e)
     if e.has("tc-close"):
-        return 'w.Close{Label: "Close the panel"}'
+        return button(e)
     if e.has("tc-seg"):
         opts = ["{Label: " + q(o.text()) + (", On: true" if o.has("is-on") else "") + "}" for o in e.els()]
-        return "w.Seg{Options: []w.SegOption{" + ", ".join(opts) + "}}"
+        return segw(e)
     if e.has("tc-field"):
-        return 'w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}'
+        return field(e)
     if e.has("tc-in") and e.has("is-ph"):
         qq = kid(e, "tc-q")
         return "w.Filter{Query: w.Query{Value: " + q(qq.attrs.get("value", "")) + ", Label: " + q(qq.attrs.get("aria-label", "")) + "}, Waiting: true, Variant: w.FilterH26W190}"

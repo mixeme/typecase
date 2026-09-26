@@ -186,7 +186,7 @@ func (v TableVariant) class() string {
 // Table — tc-table
 //
 // Роль. Таблица: файлы папки, строки мастера, задания копирования, устройства.
-// Вход. Table{Cols, Rows, Variant}.
+// Вход. Table{Cols, Rows, Variant, Place}.
 // Состояния. plain | head | picked | folder | off | acts | wide | fit.
 // Инварианты. Ширина и ранг колонки — перечисления, и ячейки колонки берут их из её заголовка; третья и четвёртая колонки уходят первыми на узком экране; таблица печатает фрагмент своего кадра.
 // Поведение. Галка выбирает строку для действий бара; «⋯» строки открывает её меню.
@@ -197,6 +197,7 @@ type Table struct {
 	Cols    []TableCol // none: a table without a head
 	Rows    []TableRow
 	Variant TableVariant
+	Place   Place
 }
 
 // Render prints the table.
@@ -211,7 +212,7 @@ func (t Table) col(i int, c TableCell) TableCol {
 
 func (t Table) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<table` + class(m, "tc-table", t.Variant.class()) + `>`)
+	s.WriteString(`<table` + class(m, "tc-table", t.Place.class(), t.Variant.class()) + `>`)
 	if len(t.Cols) > 0 {
 		s.WriteString(`<thead><tr>`)
 		for _, c := range t.Cols {

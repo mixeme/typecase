@@ -69,14 +69,14 @@ def sheet(e):
         elif x.has("tc-close"):
             hp.append('w.Close{Label: "Close"' + (", Place: w.Pushed" if x.has("tc-push") else "") + "}")
         elif x.has("tc-tag"):
-            hp.append("w.Tag{Label: " + q(x.text()) + ", On: true, Place: w.Pushed}")
+            hp.append(tag(x))
         elif x.has("tc-btn"):
             hp.append(button(x))
         elif x.has("tc-in") and x.has("is-pick"):
-            hp.append("w.Pick{Value: " + q(x.text()) + ', Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}')
+            hp.append(pickw(x))
         elif x.has("tc-in"):
             qq = kid(x, "tc-q")
-            hp.append("w.Filter{Query: w.Query{Value: " + q(qq.attrs.get("value", "")) + ", Label: " + q(qq.attrs.get("aria-label", "")) + "}, Quiet: true, Variant: w.FilterT12W200, Place: w.Pushed}")
+            hp.append(filterw(x))
         elif x.has("tc-crumbs"):
             hp.append(crumbs(x))
         elif x.has("tc-table__file"):
@@ -100,7 +100,7 @@ def sheet(e):
         elif x.has("tc-field"):
             bp.append(field(x))
         elif x.tag == "textarea":
-            bp.append("w.Area{Text: " + q(x.text()) + ', Variant: w.AreaBodySm, Focus: true, Label: "Text"}')
+            bp.append(areaw(x))
         elif x.has("tc-sheet__keys"):
             ks = x.els()
             pairs = ["{Keys: " + q(ks[i].text()) + ", Does: " + q(ks[i + 1].text()) + "}" for i in range(0, len(ks), 2)]
@@ -112,7 +112,7 @@ def sheet(e):
         elif x.has("tc-dim"):
             bp.append(dimx(x))
         elif x.has("tc-check"):
-            bp.append("w.SheetChecks{Items: []w.Check{" + baritem(x) + "}}")
+            bp.append(checkw(x))
         elif x.has("tc-sheet__checks"):
             bp.append("w.SheetChecks{Items: []w.Check{" + ", ".join(baritem(y) for y in x.els()) + "}}")
         elif x.has("tc-sheet__from"):
@@ -219,7 +219,7 @@ def dialog(e):
         elif x.has("tc-form"):
             items.append(formw(x))
         elif x.has("tc-formfoot"):
-            items.append("w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{" + ", ".join(button(y) for y in x.els()) + "}}")
+            items.append(formfootw(x))
         elif x.has("tc-bar"):
             items.append(bar2(x))
         elif x.has("tc-head__title"):

@@ -524,3 +524,105 @@ func text(n *html.Node) string {
 	}
 	return b.String()
 }
+
+// Root returns the root of the frame's drawing: its one element besides the
+// label, the tc-root.
+func (f *Frame) Root() (*html.Node, error) {
+	var out []*html.Node
+	for c := f.Node.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.ElementNode && !hasClass(c, "frame-label") {
+			out = append(out, c)
+		}
+	}
+	if len(out) != 1 {
+		return nil, fmt.Errorf("fragment: frame %s has %d drawings, want 1", f.ID, len(out))
+	}
+	return out[0], nil
+}
+
+// CompareFrame compares a whole frame with a screen printed for it (plan 3,
+// step 2): the same tree, classes, compared attributes and text, top to
+// bottom. It says which widget was chosen and in what order, which the check
+// of one widget against its fragment does not.
+func (m *Mockup) CompareFrame(id, rendered string) error {
+	f, ok := m.byID[id]
+	if !ok {
+		return fmt.Errorf("fragment: no frame %q", id)
+	}
+	root, err := f.Root()
+	if err != nil {
+		return err
+	}
+	nodes, err := Fragment(rendered)
+	if err != nil {
+		return err
+	}
+	if len(nodes) != 1 {
+		return fmt.Errorf("%s: the screen printed %d top elements, want 1", id, len(nodes))
+	}
+	if d := Diff(m.Normalize(root), m.Normalize(nodes[0])); d != "" {
+		return fmt.Errorf("%s: %s", id, d)
+	}
+	return nil
+}
+
+// Diffs is Diff that goes on past a difference: every differing place, up
+// to max. A place whose tag differs is reported and not entered; elsewhere
+// the children are compared pairwise.
+func Diffs(want, got *Node, max int) []string {
+	var out []string
+	var walk func(want, got *Node, path string)
+	walk = func(want, got *Node, path string) {
+		if len(out) >= max {
+			return
+		}
+		if want.Tag == "" || got.Tag == "" || want.Tag != got.Tag {
+			if d := diff(want, got, path); d != "" {
+				out = append(out, d)
+			}
+			return
+		}
+		if a, b := strings.Join(want.Classes, " "), strings.Join(got.Classes, " "); a != b {
+			out = append(out, fmt.Sprintf("%s: class %q, widget %q", path, a, b))
+		} else if a, b := strings.Join(want.Attrs, " "), strings.Join(got.Attrs, " "); a != b {
+			out = append(out, fmt.Sprintf("%s: attributes [%s], widget [%s]", path, a, b))
+		}
+		n := min(len(want.Children), len(got.Children))
+		if len(want.Children) != len(got.Children) {
+			d := fmt.Sprintf("%s: frame has %d children, widget %d", path, len(want.Children), len(got.Children))
+			if len(want.Children) > n {
+				d += "; first missing: " + describe(want.Children[n])
+			} else {
+				d += "; first extra: " + describe(got.Children[n])
+			}
+			out = append(out, d)
+			return
+		}
+		for i := 0; i < n; i++ {
+			p := fmt.Sprintf("%s > %s[%d]", path, label(want.Children[i]), i+1)
+			walk(want.Children[i], got.Children[i], p)
+		}
+	}
+	walk(want, got, label(want))
+	return out
+}
+
+// FrameDiffs lists up to max differences between a frame and its screen.
+func (m *Mockup) FrameDiffs(id, rendered string, max int) ([]string, error) {
+	f, ok := m.byID[id]
+	if !ok {
+		return nil, fmt.Errorf("fragment: no frame %q", id)
+	}
+	root, err := f.Root()
+	if err != nil {
+		return nil, err
+	}
+	nodes, err := Fragment(rendered)
+	if err != nil {
+		return nil, err
+	}
+	if len(nodes) != 1 {
+		return []string{fmt.Sprintf("the screen printed %d top elements, want 1", len(nodes))}, nil
+	}
+	return Diffs(m.Normalize(root), m.Normalize(nodes[0]), max), nil
+}

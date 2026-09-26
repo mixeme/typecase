@@ -2,6 +2,17 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "screens",
+      "runtimeExecutable": "go",
+      "runtimeArgs": [
+        "run",
+        "./cmd/screens",
+        "-addr",
+        ":8085"
+      ],
+      "port": 8085
+    },
+    {
       "name": "proof",
       "runtimeExecutable": "go",
       "runtimeArgs": [

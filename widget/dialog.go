@@ -125,6 +125,7 @@ type DialogPart interface {
 }
 
 func (Head) dialogPart()        {}
+func (Field) dialogPart()       {}
 func (Form) dialogPart()        {}
 func (FormFoot) dialogPart()    {}
 func (Bar) dialogPart()         {}

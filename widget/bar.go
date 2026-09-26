@@ -12,6 +12,7 @@ func (Button) barPart() {}
 func (Check) barPart()  {}
 func (Input) barPart()  {}
 func (Filter) barPart() {}
+func (Pick) barPart()   {}
 func (Mono) barPart()   {}
 func (Range) barPart()  {}
 func (Seg) barPart()    {}

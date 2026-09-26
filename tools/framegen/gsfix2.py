@@ -253,4 +253,135 @@ def block_child(k):
         return formfootw(k)
     if k.has("tc-dialog"):
         return dialog(k)
+    if k.has("tc-scrim"):
+        return scrim(k)
     return _block_child0(k)
+
+
+_diag0 = diag
+_table0 = table
+
+
+def diag(e):
+    s = _diag0(e)
+    return s[:-1] + placef(e) + "}" if placef(e) else s
+
+
+def table(e):
+    s = _table0(e)
+    return s[:-1] + placef(e) + "}" if placef(e) else s
+
+
+def tag(e):
+    f = ["Label: " + q(e.own_text())]
+    if e.has("is-on"):
+        f.append("On: true")
+    svgs = [k for k in e.els() if k.tag == "svg"]
+    if svgs and not e.has("tc-tag--pill") or len(svgs) > 1:
+        f.append("Icon: " + icon(svgs[0]))
+    m = kid(e, "tc-mark")
+    if m is not None:
+        f.append("Mark: &" + mark(m))
+    if e.has("tc-tag--pill"):
+        f.append("Removable: true")
+    return "w.Tag{" + ", ".join(f) + placef(e) + "}"
+
+
+def shellw(e):
+    """The whole shell: its top bar as drawn (never a placeholder), then an
+    overlay or the body — also when the body stands inside a desktop window."""
+    f = []
+    t = kid(e, "tc-top")
+    if t is not None:
+        tt = top(t)
+        f.append("Top: &" + (tt if tt is not None else top2(t)))
+    o = kid(e, "tc-overlay")
+    if o is not None:
+        f.append("Body: " + overlayw(o))
+        return "w.Shell{" + ", ".join(f) + "}"
+    f.append("Body: " + body(kid(e, "tc-shell__body")))
+    return "w.Shell{" + ", ".join(f) + "}"
+
+
+shellw2 = shellw
+_button1 = button
+
+
+def button(e):
+    if e.has("tc-close"):
+        return _button1(e)
+    s = _button1(e)
+    extra = []
+    if "disabled" in e.attrs and "State:" not in s:
+        extra.append("State: w.ButtonDisabled")
+    tick = kid(e, "tc-tick")
+    if tick is not None:
+        extra.append("Tick: &w.Tick{" + ("Done: true, " if tick.has("is-done") else "") + "Glyph: true" + ev(tick, "TickVariant", "Variant") + "}")
+    m = kid(e, "tc-mono")
+    if m is not None:
+        extra.append("Aside: &" + mono(m))
+        after = norm("".join(k for k in e.kids[e.kids.index(m) + 1:] if isinstance(k, str)))
+        if after:
+            extra.append("After: " + q(after))
+        before = norm("".join(k for k in e.kids[:e.kids.index(m)] if isinstance(k, str)))
+        s = re.sub(r'Label: "[^"]*"', "Label: " + q(before), s, count=1) if before else s
+    if tick is not None or m is not None:
+        s = s.replace('Title: "More", ', "").replace(', Title: "More"', "")
+    if extra:
+        s = s[:-1] + ", " + ", ".join(extra) + "}"
+    return s
+
+
+_rubric_item0 = rubric_item
+
+
+def rubric_item(x):
+    if x.has("tc-line"):
+        return linew2(x)
+    return _rubric_item0(x)
+
+
+_fields0 = fields
+
+
+def fields(e):
+    s = _fields0(e)
+    return s[:-1] + placef(e) + "}" if placef(e) and "Place:" not in s else s
+
+
+def drop(e):
+    t, m = e.els()[0], e.els()[1]
+    f = ["Trigger: " + (control(t) or button(t))]
+    if t.has("tc-bar__more"):
+        f.append("More: true")
+    f.append("Menu: " + menu(m))
+    return "w.Drop{Open: true, " + ", ".join(f) + "}"
+
+
+_body0 = body
+
+
+def body(b):
+    """The chain's body swallows a main or side it could not build and prints
+    an empty one; a screen must say so instead."""
+    m = kid(b, "tc-main")
+    main(m)
+    sd = kid(b, "tc-side")
+    if sd is not None:
+        side(sd)
+    return _body0(b)
+
+
+# An icon button the mockup draws without a title still needs an accessible
+# name (the Button invariant); the chain called every such button "More".
+ICON_NAMES = {"down": "Download", "close": "Close", "back": "Back", "quill": "New note", "menu": "Menu",
+              "search": "Search", "link": "Link", "up": "Upload", "refresh": "Refresh", "move": "Move"}
+_button2 = button
+
+
+def button(e):
+    s = _button2(e)
+    m = re.search(r'Icon: "([a-z-]+)"', s)
+    if 'Title: "More"' in s and m and m.group(1) != "dots":
+        s = s.replace('Title: "More"', "Title: " + q(ICON_NAMES.get(m.group(1), m.group(1).capitalize())))
+    return s

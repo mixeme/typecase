@@ -45,7 +45,7 @@ def menuitem(k):
         elif x.has("tc-dim--danger"):
             f.append("Note: &w.Span{Face: w.FaceDanger, Text: " + q(x.text()) + "}")
         elif x.has("tc-mono") and not x.has("tc-push"):
-            f.append("Detail: &w.Mono{Text: " + q(x.text()) + ", Variant: w.Mono11Dusty}")
+            f.append("Detail: &" + mono(x))
         elif x.has("tc-tag"):
             f.append("Trail: w.Tag{Label: " + q(x.text()) + ", Place: w.Pushed}")
         else:
@@ -58,6 +58,8 @@ def menuitem(k):
                  "tc-menu__item--accent": "MenuToneAccent", "tc-menu__item--note": "MenuToneAside"}.items():
         if k.has(c):
             f.append("Tone: w." + x)
+    if k.has("is-3rd"):
+        f.append("Tertiary: true")
     return "w.MenuItem{" + ", ".join(f) + "}"
 
 
@@ -84,7 +86,7 @@ def menu(e):
     items = []
     for k in e.els():
         if k.has("tc-menu__sep"):
-            items.append("w.MenuSep{}")
+            items.append("w.MenuSep{" + ("Tertiary: true" if k.has("is-3rd") else "") + "}")
         elif k.has("tc-rubric") and k.has("tc-menu__item"):
             form = "MenuHeadingRoomy" if k.has("tc-menu__item--pad5-8-7") else ("MenuHeadingSplit" if k.has("tc-menu__item--split") else "")
             items.append("w.MenuHeading{Rubric: " + rubric_full(k, "RubricItem") + (", Form: w." + form if form else "") + "}")
@@ -108,7 +110,7 @@ def menu(e):
         elif k.has("tc-menu__item"):
             items.append(menuitem(k))
         elif k.has("tc-in"):
-            items.append("w.Input{Kind: w.InputSearch, Placeholder: " + q(k.attrs.get("placeholder", k.attrs.get("value", ""))) + ", Label: " + q(k.attrs.get("aria-label", "")) + "}")
+            items.append(inputw(k))
         elif k.has("tc-range"):
             items.append(baritem(k)[:-1] + ", Wrap: true}")
         else:
@@ -175,7 +177,7 @@ def bar2(e):
         if k.has("tc-drop"):
             items.append(drop(k))
         elif k.has("tc-bar__count"):
-            f.append("Count: &w.BarCount{Text: " + q(k.text()) + "}")
+            f.append("Count: &w.BarCount{Text: " + q(k.text()) + (", Small: true" if k.has("tc-bar__count--t12-5") else "") + "}")
         elif k.has("tc-bar__more"):
             f.append("More: &" + button(k))
         elif k.has("tc-bar__right"):

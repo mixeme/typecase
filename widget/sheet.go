@@ -66,6 +66,7 @@ func (SheetHint) sheetPart()   {}
 func (SheetNote) sheetPart()   {}
 func (SheetBlock) sheetPart()  {}
 func (SheetChecks) sheetPart() {}
+func (Check) sheetPart()       {}
 func (SheetFrom) sheetPart()   {}
 func (SheetPick) sheetPart()   {}
 

@@ -1,0 +1,694 @@
+// Раздел макета: 10. Узкий экран.
+
+package screens
+
+import w "carrel.dev/typecase/widget"
+
+// Phone1 is frame «Агенда» (m-phone-1).
+func Phone1() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
+			Brand: w.Brand{Title: "Combined calendar"},
+			Actions: []w.TopAction{
+				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search"},
+				w.Button{
+					Icon:    "quill",
+					IconBox: w.IconBox16,
+					Kind:    w.ButtonPrimary,
+					Variant: w.ButtonPadX8,
+					Title:   "New note",
+				},
+			},
+			Tight: true,
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Runbar{
+						Meter: w.Meter{Percent: 83, Width: w.Meter60},
+						Parts: []w.RunbarPart{w.Text("5 of 6 · 14 events · "), w.Span{Face: w.FaceDanger, Text: "1 unavailable"}},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Mon · 10 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH32},
+								Title: "Синк-ап по релизу",
+								Sub:   []w.Inline{w.Mono{Text: "10:00 – 11:00"}, w.Text("· Переговорная 2")},
+								Aside: "Личный",
+							},
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#8C6239", Size: w.MarkH32},
+								Title: "Дежурство: первая линия",
+								Sub:   []w.Inline{w.Mono{Text: "all day"}, w.Text("· repeats")},
+								Aside: "Дежурства",
+							},
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#3F6E8C", Size: w.MarkH32},
+								Title: "Созвон с подрядчиком",
+								Sub:   []w.Inline{w.Mono{Text: "15:00"}, w.Text("· Jitsi")},
+								Aside: "Работа",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tue · 11 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH32},
+								Title: "Ревью архитектуры",
+								Sub:   []w.Inline{w.Mono{Text: "09:30"}, w.Text("· Переговорная 1")},
+								Aside: "Проекты",
+							},
+						},
+					},
+					w.BottomNav{
+						Items: []w.BottomItem{
+							{Icon: "con", Label: "Contacts", Href: "#"},
+							{Icon: "cal", Label: "Calendar", Href: "#"},
+							{Icon: "task", Label: "Tasks", Href: "#"},
+							{Icon: "note", Label: "Notes", Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 2,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone2 is frame «Выдвижной рейл источников» (m-phone-2).
+func Phone2() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:    &w.Button{Icon: "back", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Back"},
+			Brand:   w.Brand{Title: "Sources"},
+			Actions: []w.TopAction{w.Button{Label: "Apply", Small: true}},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked:  w.TickedPart,
+								Kind:    w.TickRowAll,
+								Form:    w.TickRowTouch,
+								Mark:    w.Mark{Kind: w.MarkMulti},
+								Label:   "Combined calendar",
+								Meta:    "14",
+								Current: true,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud", Variant: w.RubricRail},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Form:   w.TickRowTouch,
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Label:  "Дни рождения",
+								Meta:   "—",
+								Hidden: true,
+							},
+						},
+						Apart: true,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "radicale · vps", Variant: w.RubricRail},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						},
+						Apart: true,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "baikal", Variant: w.RubricRail},
+							w.TickRow{
+								Form:      w.TickRowTouch,
+								Mark:      w.Mark{Colour: "#9A9280"},
+								Label:     "Общий",
+								Meta:      "password · 401",
+								MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
+								Error:     true,
+								Trail:     w.Button{Label: "Retry", Small: true},
+							},
+						},
+						Apart: true,
+					},
+					w.Empty{
+						Parts:   []w.EmptyPart{w.Text("Unticked collections are not polled at all, which saves both time and mobile traffic.")},
+						Variant: w.EmptySmall,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone3 is frame «Карточка события» (m-phone-3).
+func Phone3() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:    &w.Button{Icon: "back", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Back"},
+			Brand:   w.Brand{Title: "Event"},
+			Actions: []w.TopAction{w.Button{Label: "Edit", Small: true}},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{
+								Term:  "When",
+								Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Break{}, w.Text("Monday, 10 August")},
+							},
+							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
+							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+						},
+						Variant: w.Fields88,
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Description"},
+							w.Prose{
+								Parts:   []w.Inline{w.Text("Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.")},
+								Variant: w.Prose13,
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Attendees 4"},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
+									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
+								},
+								Gap: 5,
+							},
+						},
+					},
+					w.FootActs{
+						Items: []w.Button{
+							w.Button{Label: "Write a note", Variant: w.ButtonCentredFill},
+							w.Button{Label: "Delete", Kind: w.ButtonDangerSolid, Variant: w.ButtonCentred},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone4 is frame «Контакты» (m-phone-4).
+func Phone4() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
+			Brand: w.Brand{Title: "Combined address book"},
+			Actions: []w.TopAction{
+				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search"},
+				w.Button{
+					Icon:    "quill",
+					IconBox: w.IconBox16,
+					Kind:    w.ButtonPrimary,
+					Variant: w.ButtonPadX8,
+					Title:   "New note",
+				},
+			},
+			Tight: true,
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Mark:    &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar:  &w.Avatar{Initials: "АК", Size: w.Avatar34},
+								Title:   "Анна Ковалёва",
+								Sub:     []w.Inline{w.Text("+7 912 445-10-88")},
+								SubMono: true,
+								Aside:   "Контакты",
+							},
+							w.PhoneRow{
+								Mark:       &w.Mark{Colour: "#6B4E7A", Size: w.MarkH34},
+								Avatar:     &w.Avatar{Photo: true, Size: w.Avatar34},
+								Title:      "Артём Белов",
+								TitleBadge: &w.Badge{Label: "×2", Tone: w.BadgeLinked},
+								Sub:        []w.Inline{w.Text("+7 903 118-22-04")},
+								SubMono:    true,
+								Aside:      "Команда",
+							},
+							w.PhoneRow{
+								Mark:    &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar:  &w.Avatar{Initials: "АС", Size: w.Avatar34},
+								Title:   "Алексей Смирнов",
+								Sub:     []w.Inline{w.Text("+7 916 200-71-15")},
+								SubMono: true,
+								Aside:   "Контакты",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Mark:   &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34},
+								Title:  "Виктор Гончаров",
+								Sub:    []w.Inline{w.Text("v.goncharov@example.org")},
+								Aside:  "Контакты",
+							},
+						},
+					},
+					w.BottomNav{
+						Items: []w.BottomItem{
+							{Icon: "con", Label: "Contacts", Href: "#"},
+							{Icon: "cal", Label: "Calendar", Href: "#"},
+							{Icon: "task", Label: "Tasks", Href: "#"},
+							{Icon: "note", Label: "Notes", Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 1,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone5 is frame «Человек целиком» (m-phone-5).
+func Phone5() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:    &w.Button{Icon: "back", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Back"},
+			Brand:   w.Brand{Title: "Анна Ковалёва"},
+			Actions: []w.TopAction{w.Button{Label: "Edit", Small: true}},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Person{
+						Initials: "АК",
+						Name:     "Анна Ковалёва",
+						Sub:      "Издательство «Слово»",
+						Badge:    &w.Badge{Label: "in 2 books", Tone: w.BadgeLinked},
+						Acts:     []w.Button{w.Button{Label: "Call"}, w.Button{Label: "Email"}, w.Button{Icon: "quill", Title: "New note"}},
+					},
+					w.Bar{
+						Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Card", On: true}, {Label: "Connections 27"}}}},
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{Term: "Phone", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMonoAccent},
+							{Term: "Email", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Face: w.ValueAccent},
+							{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
+						},
+						Variant: w.Fields88Pad,
+					},
+					w.BottomNav{
+						Items: []w.BottomItem{
+							{Icon: "con", Label: "Contacts", Href: "#"},
+							{Icon: "cal", Label: "Calendar", Href: "#"},
+							{Icon: "task", Label: "Tasks", Href: "#"},
+							{Icon: "note", Label: "Notes", Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 1,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone6 is frame «Файлы · выделение» (m-phone-6).
+func Phone6() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
+			Brand: w.Brand{Title: "attachments"},
+			Actions: []w.TopAction{
+				w.Button{Icon: "up", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "Upload"},
+			},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Bar{
+						Items: []w.BarPart{
+							w.Button{Icon: "down", Title: "Download"},
+							w.Button{Icon: "move", Title: "Move"},
+							w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
+							w.Button{Icon: "close", Title: "Close", Place: w.Pushed},
+						},
+						Count:   &w.BarCount{Text: "2 selected", Small: true},
+						Variant: w.BarSelection,
+					},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Pick:    &w.TickBox{},
+								Icon:    "img",
+								Title:   "2026-08-10-sync-board.png",
+								Sub:     []w.Inline{w.Text("412 KB · image/png")},
+								SubMono: true,
+								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
+								On:      true,
+							},
+							w.PhoneRow{
+								Pick:    &w.TickBox{},
+								Icon:    "doc",
+								Title:   "release-checklist.md",
+								Sub:     []w.Inline{w.Text("3 KB · text/markdown")},
+								SubMono: true,
+								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
+								On:      true,
+							},
+							w.PhoneRow{
+								Pick:    &w.TickBox{Ticked: w.TickedOff},
+								Icon:    "file",
+								Title:   "2026-07",
+								Sub:     []w.Inline{w.Text("34 items")},
+								SubMono: true,
+								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
+							},
+						},
+					},
+					w.BottomNav{
+						Items: []w.BottomItem{
+							{Icon: "con", Label: "Contacts", Href: "#"},
+							{Icon: "cal", Label: "Calendar", Href: "#"},
+							{Icon: "task", Label: "Tasks", Href: "#"},
+							{Icon: "note", Label: "Notes", Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 5,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone7 is frame «Заметка · чтение и правка» (m-phone-7).
+func Phone7() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Lead:    &w.Button{Icon: "back", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Back"},
+			Brand:   w.Brand{Title: "Записи"},
+			Actions: []w.TopAction{w.Button{Label: "Edit", Icon: "pencil", Small: true}},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Doc{
+						Items: []w.DocPart{
+							w.DocTitle{Text: "Заметка со встречи 10.08"},
+							w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
+							w.Prose{
+								Parts: []w.Inline{
+									w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника."),
+								},
+								Variant: w.ProseReadTop,
+							},
+							w.DocTasks{
+								Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7},
+								Items: []w.DocTask{
+									{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
+									{
+										Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"},
+										Text: "попросить скриншоты",
+									},
+								},
+								Phone: true,
+							},
+							w.DocRelated{
+								Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7},
+								Name:  "Синк-ап по релизу",
+								What:  w.Dim{Parts: []w.Inline{w.Text("· event")}},
+							},
+						},
+					},
+					w.BottomNav{
+						Items: []w.BottomItem{
+							{Icon: "con", Label: "Contacts", Href: "#"},
+							{Icon: "cal", Label: "Calendar", Href: "#"},
+							{Icon: "task", Label: "Tasks", Href: "#"},
+							{Icon: "note", Label: "Notes", Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 4,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone8 is frame «Рейл из значков» (m-phone-8).
+func Phone8() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined notebook",
+							Meta:    "86",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 86 notes · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Input{Kind: w.InputSearch, Placeholder: "Filter by word", Label: "Filter by word", Variant: w.InputH26W200},
+							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "86"}}, Secondary: true},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 9}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
+								Strong:  true,
+								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
+								Date:    "10 Aug",
+								Source:  "nextcloud · Записи",
+								On:      true,
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
+								Date:    "8 Aug",
+								Source:  "nextcloud · Записи",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#6B4E7A"},
+								Title:   []w.Inline{w.Text("Про дорогу до дачи")},
+								Excerpt: "Съезд после заправки, потом грунтовка два километра…",
+								Tags:    []w.RowTag{w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}},
+								Date:    "3 Aug",
+								Source:  "nextcloud · Дневник",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Phone9 is frame «Рейл из значков · источники открыты» (m-phone-9).
+func Phone9() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined notebook",
+							Meta:    "86",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 86 notes · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 9}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
+								Strong:  true,
+								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
+								Date:    "10 Aug",
+								Source:  "nextcloud · Записи",
+								On:      true,
+							},
+						},
+					},
+					w.Scrim{
+						Content: w.Sheet{
+							Title: "Sources",
+							Head:  []w.SheetHeadPart{w.Button{Label: "Apply", Small: true, Place: w.Pushed}, w.Close{Label: "Close"}},
+							Body: []w.SheetPart{
+								w.RailSec{
+									Items: []w.RailSecPart{
+										w.TickRow{
+											Ticked:  w.TickedPart,
+											Kind:    w.TickRowAll,
+											Mark:    w.Mark{Kind: w.MarkMulti},
+											Label:   "Combined notebook",
+											Meta:    "86",
+											Current: true,
+										},
+									},
+								},
+								w.RailSec{
+									Items: []w.RailSecPart{
+										w.Rubric{Text: "nextcloud"},
+										w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+										w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}

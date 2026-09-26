@@ -114,9 +114,9 @@ def doc(e):
             items.append("w.DocRelated{Title: " + rub(kid(k, "tc-rubric")) + ", Name: " + q(l.own_text()) + ", What: w.Dim{Parts: []w.Inline{w.Text(" + q(kid(l, "tc-dim").text()) + ")}}}")
         elif k.tag == "textarea":
             if k.has("tc-in--title"):
-                items.append("w.Area{Text: " + q(k.text()) + ', Variant: w.AreaTitle, Label: "Title"}')
+                items.append(areaw(k))
             else:
-                items.append('w.Area{Text: noteBody, Variant: w.AreaBody, Focus: true, Label: "Text"}')
+                items.append(areaw(k))
         elif k.has("tc-doc__fields"):
             items.append("w.DocFields{Items: []w.Field{" + ", ".join(field(y) for y in k.els()) + "}}")
         elif k.has("tc-doc__note"):
