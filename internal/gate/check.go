@@ -9,15 +9,12 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-
-	"carrel.dev/typecase/internal/screens"
 )
 
 // Name identifies one L-8 gate.
 type Name string
 
 const (
-	Completeness    Name = "completeness"
 	Ownership       Name = "ownership"
 	NodeNames       Name = "node-names"
 	TypedInput      Name = "typed-input"
@@ -31,14 +28,7 @@ const (
 	A11y            Name = "a11y"
 	Gofmt           Name = "gofmt"
 	Vet             Name = "vet"
-	Geometry        Name = "geometry"
 	ScreensCSS      Name = "screens-css"
-	ScreensCoverage Name = "screens-coverage"
-	ScreensCompose  Name = "screens-compose"
-	LayoutSlots     Name = "layout-slots"
-	MockupParity    Name = "mockup-parity"
-	LayoutInventory Name = "layout-inventory"
-	LayoutOrphans   Name = "layout-orphans"
 	CSSFromMockup   Name = "css-from-mockup"
 	WidgetFragments Name = "widget-fragments"
 	ContainerPairs  Name = "container-pairs"
@@ -46,10 +36,9 @@ const (
 
 // AllGates lists every L-8 gate in stable order.
 var AllGates = []Name{
-	Completeness, Ownership, NodeNames, TypedInput, Enumerations,
+	Ownership, NodeNames, TypedInput, Enumerations,
 	DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
-	Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
-	LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet,
+	ScreensCSS, Gofmt, Vet,
 	CSSFromMockup, WidgetFragments, ContainerPairs,
 }
 
@@ -130,8 +119,6 @@ func FindModuleRoot() (string, error) {
 // Run executes one gate against the live module.
 func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 	switch name {
-	case Completeness:
-		return CheckCompleteness(p, catalog)
 	case Ownership:
 		return CheckOwnership(p)
 	case NodeNames:
@@ -154,18 +141,8 @@ func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 		return CheckNoInline(catalog)
 	case A11y:
 		return CheckA11y(catalog)
-	case Geometry:
-		return CheckGeometry(p)
 	case ScreensCSS:
 		return CheckScreensCSS(p)
-	case ScreensCoverage:
-		return CheckScreensCoverage(catalog)
-	case ScreensCompose:
-		return CheckScreensCompose(p)
-	case LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans:
-		// Выключены на ветке плана 2 с шага 1: они читают старый CSS и
-		// таблицы layout. Удаляются вместе с пакетом layout на шаге 6.
-		return nil
 	case CSSFromMockup:
 		return CheckCSSFromMockup(p)
 	case WidgetFragments:
@@ -228,50 +205,14 @@ func CheckUniqueIDs(catalog []CatalogEntry) error {
 
 func gateImplemented(name Name) bool {
 	switch name {
-	case Completeness, Ownership, NodeNames, TypedInput, Enumerations,
+	case Ownership, NodeNames, TypedInput, Enumerations,
 		DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
-		Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
-		LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet,
+		ScreensCSS, Gofmt, Vet,
 		CSSFromMockup, WidgetFragments, ContainerPairs:
 		return true
 	default:
 		return false
 	}
-}
-
-// CheckCompleteness ensures every tc-* root widget has CSS and a Go widget,
-// and every tc-*__* class in catalog markup has a stylesheet rule or hook.
-func CheckCompleteness(p ModulePaths, catalog []CatalogEntry) error {
-	widgets, err := LoadWidgets(p.WidgetDir)
-	if err != nil {
-		return err
-	}
-	cssWidgets, err := cssRootWidgets(p.CSSDir)
-	if err != nil {
-		return err
-	}
-	goNames := make(map[string]struct{}, len(widgets))
-	for _, spec := range widgets {
-		goNames[spec.Name] = struct{}{}
-	}
-	var missing []string
-	for name := range goNames {
-		if !cssWidgets[name] {
-			missing = append(missing, "css missing for "+name)
-		}
-	}
-	for name := range cssWidgets {
-		if name == "tc-icon" {
-			continue
-		}
-		if _, ok := goNames[name]; !ok && !isVariantOnly(name) {
-			missing = append(missing, "widget missing for "+name)
-		}
-	}
-	if len(missing) > 0 {
-		return fmt.Errorf("completeness: %s", strings.Join(missing, "; "))
-	}
-	return checkCatalogElementClasses(p, catalog)
 }
 
 func isVariantOnly(name string) bool {
@@ -342,26 +283,6 @@ func CheckOwnership(p ModulePaths) error {
 	}
 	if len(hits) > 0 {
 		return fmt.Errorf("ownership: %s", strings.Join(hits, "; "))
-	}
-	return nil
-}
-
-// CheckNodeNames requires BEM element classes on inner nodes in catalog HTML.
-func CheckNodeNames(catalog []CatalogEntry) error {
-	var bad []string
-	for _, e := range catalog {
-		if strings.Contains(e.HTML, `class="tc-`) && strings.Contains(e.HTML, "<div") {
-			if strings.Contains(e.HTML, `<div class="tc-`) || strings.Contains(e.HTML, `<span class="tc-`) {
-				continue
-			}
-		}
-		// Every opening tag inside widget markup should carry tc-*__* or be structural with parent tc-*.
-		if strings.Contains(e.HTML, "<button") && !strings.Contains(e.HTML, "tc-") {
-			bad = append(bad, e.Widget+"/"+e.State)
-		}
-	}
-	if len(bad) > 0 {
-		return fmt.Errorf("node-names: missing tc classes in %s", strings.Join(bad, ", "))
 	}
 	return nil
 }
@@ -637,17 +558,12 @@ func CheckCatalog(widgetDir string, catalog []CatalogEntry) error {
 	return CheckUniqueIDs(catalog)
 }
 
-// CheckNoInline rejects inline style, handlers and script in catalog and screen markup.
+// CheckNoInline rejects inline style, handlers and script in catalog markup.
 func CheckNoInline(catalog []CatalogEntry) error {
 	var bad []string
 	for _, e := range catalog {
 		if inlineBad.MatchString(e.HTML) {
 			bad = append(bad, e.Widget+"/"+e.State)
-		}
-	}
-	for _, sc := range screens.All() {
-		if inlineBad.MatchString(sc.Body()) {
-			bad = append(bad, "/"+sc.ID)
 		}
 	}
 	if len(bad) > 0 {
@@ -657,7 +573,7 @@ func CheckNoInline(catalog []CatalogEntry) error {
 }
 
 // CheckA11y requires accessible names on each control in catalog HTML and
-// rejects a control nested in a link or button in catalog and screen HTML.
+// rejects a control nested in a link or button.
 func CheckA11y(catalog []CatalogEntry) error {
 	var bad []string
 	for _, e := range catalog {
@@ -665,21 +581,8 @@ func CheckA11y(catalog []CatalogEntry) error {
 			bad = append(bad, e.Widget+"/"+e.State+": "+kind)
 		}
 	}
-	for _, sc := range screens.All() {
-		for _, kind := range nestedInteractive(sc.Body()) {
-			bad = append(bad, "/"+sc.ID+": "+kind)
-		}
-	}
 	if len(bad) > 0 {
 		return fmt.Errorf("a11y: %s", strings.Join(bad, ", "))
-	}
-	return nil
-}
-
-// CheckCompletenessCSS is a bite helper: css text must mention widget class.
-func CheckCompletenessCSS(widgetName, css string) error {
-	if !strings.Contains(css, "."+widgetName) {
-		return fmt.Errorf("completeness: css missing %s", widgetName)
 	}
 	return nil
 }

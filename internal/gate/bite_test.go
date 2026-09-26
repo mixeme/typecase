@@ -6,9 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/css"
 	"carrel.dev/typecase/internal/gate"
-	"carrel.dev/typecase/layout"
 )
 
 func readBroken(t *testing.T, name string) string {
@@ -35,62 +33,6 @@ func brokenModule(t *testing.T) gate.ModulePaths {
 		t.Fatal(err)
 	}
 	return gate.ModulePaths{Root: tmp, WidgetDir: widgetDir, CSSDir: cssDir, RepoRoot: tmp}
-}
-
-func TestBite_completeness(t *testing.T) {
-	p := brokenModule(t)
-	widgetSrc := `package widget
-
-// Foo — tc-foo
-//
-// Роль. Test widget.
-// Вход. Foo{}.
-// Состояния. default.
-// Инварианты. none.
-// Поведение. none.
-// Геометрия. none.
-// Содержимое. none.
-// Чего нет. none.
-type Foo struct{}
-`
-	if err := os.WriteFile(filepath.Join(p.WidgetDir, "foo.go"), []byte(widgetSrc), 0644); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(p.CSSDir, "01-base.css"), []byte(readBroken(t, "completeness.css")), 0644); err != nil {
-		t.Fatal(err)
-	}
-	if err := gate.Run(gate.Completeness, p, nil); err == nil {
-		t.Fatal("expected completeness gate to fail")
-	}
-}
-
-func TestBite_completeness_elementClass(t *testing.T) {
-	p := brokenModule(t)
-	widgetSrc := `package widget
-
-// Foo — tc-foo
-//
-// Роль. Test widget.
-// Вход. Foo{}.
-// Состояния. default.
-// Инварианты. none.
-// Поведение. none.
-// Геометрия. none.
-// Содержимое. none.
-// Чего нет. none.
-type Foo struct{}
-func (Foo) Render() string { return "<div class=\"tc-foo\"><span class=\"tc-foo__orphan\">x</span></div>" }
-`
-	if err := os.WriteFile(filepath.Join(p.WidgetDir, "foo.go"), []byte(widgetSrc), 0644); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(p.CSSDir, "01-base.css"), []byte(".tc-foo { display: block; }\n"), 0644); err != nil {
-		t.Fatal(err)
-	}
-	cat := []gate.CatalogEntry{{Widget: "tc-foo", State: "default", HTML: `<div class="tc-foo"><span class="tc-foo__orphan">x</span></div>`}}
-	if err := gate.Run(gate.Completeness, p, cat); err == nil {
-		t.Fatal("expected completeness gate to fail on element class without css")
-	}
 }
 
 func TestBite_domainNaming(t *testing.T) {
@@ -263,9 +205,11 @@ func TestBite_enumerations(t *testing.T) {
 }
 
 func TestBite_nodeNames(t *testing.T) {
+	if err := gate.CheckNodeNames(nil); err != nil {
+		t.Fatalf("live records should pass: %v", err)
+	}
 	html := readBroken(t, "nodes.html")
-	cat := []gate.CatalogEntry{{Widget: "tc-btn", State: "bad", HTML: html}}
-	if err := gate.CheckNodeNames(cat); err == nil {
+	if err := gate.CheckNodeNamesHTML(html); err == nil {
 		t.Fatal("expected node-names gate to fail")
 	}
 }
@@ -374,65 +318,6 @@ func TestBite_specL4_missingSpec(t *testing.T) {
 	}
 }
 
-func TestBite_geometry(t *testing.T) {
-	t.Skip("library-from-mockup: шаг 4 — пункт «Геометрия» заменён «Эталоном»")
-	broken := readBroken(t, "geometry.css")
-	live, err := css.Bundle()
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := gate.CheckGeometryCSS(live); err != nil {
-		t.Fatalf("live bundle should pass geometry: %v", err)
-	}
-	if err := gate.CheckGeometryCSS(live + broken); err == nil {
-		t.Fatal("expected geometry gate to fail on broken css")
-	}
-}
-
-func TestBite_screensCoverage(t *testing.T) {
-	t.Skip("library-from-mockup: демо-экраны собираются заново в плане 3, шаг 1")
-	entries := catalogEntries()
-	if err := gate.CheckScreensCoverage(entries); err != nil {
-		t.Fatalf("live screens should cover catalog widgets: %v", err)
-	}
-	entries = append(entries, gate.CatalogEntry{Widget: "tc-not-a-widget", HTML: `<div class="tc-not-a-widget"></div>`})
-	if err := gate.CheckScreensCoverage(entries); err == nil {
-		t.Fatal("expected screens-coverage gate to fail on extra catalog widget")
-	}
-}
-
-func TestBite_screensCompose(t *testing.T) {
-	root, err := gate.FindModuleRoot()
-	if err != nil {
-		t.Fatal(err)
-	}
-	p := gate.Paths(root)
-	if err := gate.CheckScreensCompose(p); err != nil {
-		t.Fatalf("live screen assemblers should pass: %v", err)
-	}
-	tmp := t.TempDir()
-	screensDir := filepath.Join(tmp, "internal", "screens")
-	if err := os.MkdirAll(screensDir, 0755); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(screensDir, "notes.go"), []byte("package screens\n\nfunc Notes() string {\n\treturn `<aside class=\"tc-side\"`\n}\n"), 0644); err != nil {
-		t.Fatal(err)
-	}
-	p.Root = tmp
-	if err := gate.CheckScreensCompose(p); err == nil {
-		t.Fatal("expected screens-compose gate to fail on manual tc-side")
-	}
-	if err := os.WriteFile(filepath.Join(screensDir, "notes.go"), []byte("package screens\n"), 0644); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(screensDir, "files.go"), []byte("package screens\n\nfunc Files() string {\n\treturn `<div class=\"tc-shell\"`\n}\n"), 0644); err != nil {
-		t.Fatal(err)
-	}
-	if err := gate.CheckScreensCompose(p); err == nil {
-		t.Fatal("expected screens-compose gate to fail on files.go, not only notes.go")
-	}
-}
-
 func TestBite_screensCSS(t *testing.T) {
 	root, err := gate.FindModuleRoot()
 	if err != nil {
@@ -462,31 +347,6 @@ func TestBite_screensCSS(t *testing.T) {
 	}
 }
 
-func TestBite_mockupParity(t *testing.T) {
-	root, err := gate.FindModuleRoot()
-	if err != nil {
-		t.Fatal(err)
-	}
-	p := gate.Paths(root)
-	if err := gate.CheckMockupParity(p); err != nil {
-		t.Fatalf("live mockup-parity should pass: %v", err)
-	}
-	spec := layout.All()
-	if len(spec.Grids) == 0 || len(spec.Grids[0].Tracks) == 0 {
-		t.Fatal("empty layout spec")
-	}
-	tracks := append([]layout.Track(nil), spec.Grids[0].Tracks...)
-	tracks[0].Size = "99px"
-	spec.Grids[0].Tracks = tracks
-	html, err := os.ReadFile(filepath.Join(root, "docs", "visual", "carrel-ui-mockups.html"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := gate.CheckMockupParitySpec(spec, string(html)); err == nil {
-		t.Fatal("expected mockup-parity to fail on mutated track")
-	}
-}
-
 func TestBite_mockupLint(t *testing.T) {
 	root, err := gate.FindModuleRoot()
 	if err != nil {
@@ -512,39 +372,6 @@ func TestBite_mockupLint(t *testing.T) {
 		`<div class="frame" data-frame="s-notes-1"><span class="m-btn">Go</span></div>`
 	if err := gate.CheckMockupLint(leftover); err == nil {
 		t.Fatal("expected leftover m-* class in a frame to fail")
-	}
-}
-
-func TestBite_layoutSlotsColsCount(t *testing.T) {
-	root, err := gate.FindModuleRoot()
-	if err != nil {
-		t.Fatal(err)
-	}
-	p := gate.Paths(root)
-	html := `<div class="tc-cols tc-cols--halves"><div class="tc-cols__col">a</div></div>`
-	cat := []gate.CatalogEntry{{Widget: "tc-cols", State: "halves", HTML: html}}
-	if err := gate.CheckLayoutSlots(p, cat); err == nil {
-		t.Fatal("expected layout-slots to fail on cols child count")
-	}
-}
-
-func TestBite_layoutSlotsManual(t *testing.T) {
-	root, err := gate.FindModuleRoot()
-	if err != nil {
-		t.Fatal(err)
-	}
-	p := gate.Paths(root)
-	tmp := t.TempDir()
-	cssDir := filepath.Join(tmp, "css")
-	if err := os.MkdirAll(cssDir, 0755); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(cssDir, "hand.css"), []byte(".tc-tickrow{display:grid}\n"), 0644); err != nil {
-		t.Fatal(err)
-	}
-	p.CSSDir = cssDir
-	if err := gate.CheckLayoutSlots(p, nil); err == nil {
-		t.Fatal("expected layout-slots to fail on hand display:grid")
 	}
 }
 

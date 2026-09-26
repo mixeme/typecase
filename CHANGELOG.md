@@ -149,6 +149,17 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   `data-tc-bar-*`, `data-tc-top-*`, `data-tc-seg*`, `data-tc-tree*`,
   `data-tc-pick*`, `data-tc-crop`, `data-tc-rail*` and the rest) are gone with
   the markup they served.
+- **`layout` is gone, and the gates are what the library checks now.** The
+  `layout` package (tables, generation, inventory, parity) is removed, with
+  the old widgets and the old demo screens that stood on it (`cmd/screens`;
+  plan 3 rebuilds the screens from the frames). Gates removed: `layout-slots`,
+  `mockup-parity`, `layout-inventory`, `layout-orphans`, `geometry`,
+  `completeness`, `screens-coverage`, `screens-compose`. `css-from-mockup`
+  also refuses a rule outside `css/` that styles a widget; `node-names` reads
+  the output of every reference record and wants a library class on every
+  element the mockup's dictionary does not leave bare. Spec L-8 lists the 17
+  gates as they are. `widget-fragments` also reads the widget types from the source
+  and wants each in `refs.Widgets` and with at least one record.
 
 ### Mockup
 

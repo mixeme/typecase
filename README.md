@@ -16,12 +16,13 @@ go get carrel.dev/typecase
 - `Fonts()` — embedded font files
 - `Icons()` / `Sprite()` — neutral icon sprite
 
-## Catalog and screens
+## Catalog
 
 ```bash
 go run ./cmd/catalog   # http://localhost:8080/
-go run ./cmd/screens   # http://localhost:8081/
 ```
+
+The demo screens are being rebuilt from the mockup's frames (plan 3).
 
 ## Specification
 
