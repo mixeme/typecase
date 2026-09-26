@@ -44,6 +44,9 @@ var _ = add(
 	form("off", check(false, w.Text("Print with photos")), "components-10", "tc-check", 2),
 	form("on", check(true, w.Text("All day")), "components-10", "tc-check", 1),
 	form("rich", check(true, w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}), "s-conflict-1", "tc-check", 1),
+	form("rich", check(true, w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")), "s-publish-2", "tc-check", 1),
+	form("tertiary", w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true}, "s-agenda-1", "tc-check", 1),
+	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true}, "s-agenda-1", "tc-check", 2),
 	form("rich", check(false, w.Choice{Source: "Leave it out", Value: "—"}), "s-conflict-1", "tc-check", 2),
 	// s-backup-2 .tc-check #4 holds an input inside the button: nested controls
 	// (a11y). Its record waits for the owner's decision on the mockup.
@@ -73,6 +76,7 @@ var _ = add(
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn,
 		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}}}, "s-agenda-3", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 1),
+	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, btn, w.Push{Face: faceOf(w.FaceAccent11_5), Items: []w.PushPart{w.Text("Add a second instance")}}}}, "m-desktop-7", "tc-line", 1),
 	form("default", w.Stack{Gap: w.StackGap9, Items: []w.StackPart{btn}}, "components-21", "tc-stack", 1),
 	form("default", w.Grow{}, "s-contacts-3", "tc-grow", 1),

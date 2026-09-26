@@ -125,6 +125,10 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Icon: "cols", Label: "Columns"}}, Width: w.MenuWidth212}, "s-contacts-14", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOn}, Label: "Events", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+		w.MenuSep{Tertiary: true},
 		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}, "s-agenda-1", "tc-menu", 1),
@@ -386,7 +390,11 @@ var _ = add(
 	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}}, w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Overdue"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}}, "components-19", "tc-bar", 1),
-	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Secondary: true}, w.BarSep{Secondary: true}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Parts: []w.CheckPart{w.Text("Notes")}}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Secondary: true}, w.BarSep{Secondary: true}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Notes")}, Tertiary: true}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOn}, Label: "Events", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+		w.MenuSep{Tertiary: true},
 		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
@@ -444,7 +452,7 @@ var _ = add(
 		w.Field{Label: "How much of it", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Label: "From", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "To", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Field{Label: "Link lives for", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
-		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, "s-publish-2", "tc-sheet", 1),
+		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, "s-publish-2", "tc-sheet", 1),
 	overlay("close", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Field{Label: "To", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Field{Label: "Subject", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
@@ -630,7 +638,7 @@ var _ = add(
 		w.Field{Label: "How much of it", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Label: "From", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "To", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Field{Label: "Link lives for", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
-		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, Pad: w.ScrimPad26}}, "s-publish-2", "tc-overlay", 1),
+		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, Pad: w.ScrimPad26}}, "s-publish-2", "tc-overlay", 1),
 
 	// tc-dialog
 	overlay("width", w.Dialog{Items: []w.DialogPart{

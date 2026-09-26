@@ -54,7 +54,7 @@ func (n BottomNav) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<div class="tc-nav--bottom">`)
 	for i, it := range n.Items {
-		s.WriteString(NavItem{Icon: it.Icon, Label: it.Label, Href: it.Href}.html(i+1 == n.On))
+		s.WriteString(NavItem{Icon: it.Icon, Label: it.Label, Href: it.Href}.html(i+1 == n.On, ""))
 	}
 	s.WriteString(`</div>`)
 	return s.String()

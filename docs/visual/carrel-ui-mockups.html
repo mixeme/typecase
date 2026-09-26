@@ -420,7 +420,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 :where(div,span,label,p):has(> .tc-field) > .tc-btn,
 :where(div,span,label,p):has(> .tc-field) > .tc-seg{height:28px}
 :where(div,span,label,p):has(> .tc-field) > .tc-check,
-:where(div,span,label,p):has(> .tc-in) > .tc-check{min-height:28px}
+:where(div,span,label,p):has(> .tc-in:where(:not(.tc-in--chip))) > .tc-check{min-height:28px}
 /* Панель инструментов — 26 px всему, включая поле фильтра в ней. */
 .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
 .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn{height:26px}
@@ -775,6 +775,22 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-table .tc-table__n3,.tc-table .tc-table__n3,
   .tc-table .tc-table__n4,.tc-table .tc-table__n4{display:none}
 }
+/* Телефон (≤460), третий ранг бара (Р-4): is-3rd уходит под «⋯» вслед за is-2nd.
+   В меню «⋯» у него двойник с тем же is-3rd — виден только здесь, пока сам элемент
+   спрятан. Кнопка бара со складной подписью остаётся значком; поля диапазона в баре
+   сжимаются, а не выдавливают «⋯». Решение человека 2026-09-26: без прокрутки. */
+@container tcbox (max-width:460px){
+  .tc-bar > .is-3rd,.tc-bar__right > .is-3rd,.tc-docbar > .is-3rd{display:none}
+  .tc-bar:has(> .is-3rd) .tc-bar__more,.tc-bar:has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
+  .tc-docbar:has(.is-3rd) .tc-bar__more,.tc-docbar:has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar .tc-btn > .tc-btn__label{display:none}
+  .tc-bar > .tc-range{flex:0 1 auto;min-width:0}
+  .tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}
+}
+@container tcbox (min-width:461px){
+  .tc-menu .is-3rd{display:none}
+}
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){
   .tc-shell__body,.tc-shell__body.tc-shell__body--side{
@@ -897,7 +913,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
   .tc-card{display:flex;flex-direction:column}
-  .tc-form .tc-line{flex-direction:column;align-items:stretch}
+  /* Строка полей встаёт столбцом; фраза с полем-фишкой («старше [7] дней») — нет. */
+  .tc-form .tc-line:where(:not(:has(> .tc-in--chip))){flex-direction:column;align-items:stretch}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
     overflow-wrap:anywhere;min-width:0}
   /* input/textarea — replaced, без ::after: зону даёт поле. */
@@ -3484,12 +3501,16 @@ Read  2 min ago</div>
           <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
           <span class="tc-range is-2nd"><input class="tc-in is-mono" type="date" value="2026-08-10"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16"><button class="tc-btn" type="button">Show</button></span>
           <span class="tc-bar__sep is-2nd"></span>
-          <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Events</button>
-          <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
-          <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Notes</button>
+          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick"></span>Events</button>
+          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
+          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Notes</button>
           <span class="tc-drop"><button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg>
             
           </button><span class="tc-menu is-pop is-right">
+              <button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick"></span>Events</button>
+              <button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
+              <button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Notes</button>
+              <span class="tc-menu__sep is-3rd"></span>
               <span class="tc-range tc-range--wrap"><input class="tc-in is-mono" type="date" value="2026-08-10"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16"><button class="tc-btn" type="button">Show</button></span>
               <span class="tc-menu__sep"></span>
               <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Compact rows</button>
@@ -4683,14 +4704,14 @@ Read  2 min ago</div>
           <span class="tc-bar__sep"></span>
           <button class="tc-btn" type="button"><b>B</b></button>
           <button class="tc-btn tc-btn--fontstyle-italic" type="button">I</button>
-          <button class="tc-btn" type="button">H2</button>
-          <button class="tc-btn" type="button">• list</button>
-          <button class="tc-btn" title="Task" type="button"><svg viewBox="0 0 24 24"><use href="#i-task"/></svg><span class="tc-btn__label">task</span></button>
-          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+          <button class="tc-btn is-3rd" type="button">H2</button>
+          <button class="tc-btn is-3rd" type="button">• list</button>
+          <button class="tc-btn is-3rd" title="Task" type="button"><svg viewBox="0 0 24 24"><use href="#i-task"/></svg><span class="tc-btn__label">task</span></button>
+          <button class="tc-btn is-3rd" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
           <button class="tc-btn" title="Attach" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg><span class="tc-btn__label">Attach</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           <span class="tc-bar__right">
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Auto-save</button>
+            <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Auto-save</button>
             <span class="is-2nd">Draft in this window · <span class="tc-mono">11:42</span></span>
             <kbd class="tc-kbd is-2nd">Ctrl+S</kbd>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Full width</button><button class="tc-seg__opt" type="button">Reading width</button></span>
@@ -10262,7 +10283,7 @@ Read  2 min ago</div>
           <div class="tc-rubric">When</div>
           <div class="tc-field tc-grow tc-field--gap8">
             <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>On demand — the button in the job list</button>
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>On sign-in, if the last copy is older than <input class="tc-in is-mono tc-in--chip" type="text" value="7"> days</button>
+            <div class="tc-line tc-line--gap-7"><button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>On sign-in, if the last copy is older than</button><input class="tc-in is-mono tc-in--chip" type="text" value="7" aria-label="Days"><span class="tc-dim--t12-5">days</span></div>
             <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>On a clock of your own — <span class="tc-mono">cron</span>, GoSentry, a job in Gitea <span class="tc-badge is-local" title="Local instance: the address in the line answers only from inside your own network">local</span></button>
           </div>
           <div class="tc-msg tc-grow tc-msg--flush-top4">No time picker here, and that is deliberate: Carrel keeps no clock of its own, so whoever holds the schedule holds the password. What it hands you instead is the line to paste where the clock already is.</div>
@@ -12159,7 +12180,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
         <div class="tc-bar">
           <input class="tc-in is-ph tc-in--h26-w200" type="search" placeholder="Filter by login" aria-label="Filter by login">
           <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All</button><button class="tc-seg__opt" type="button">Administrators</button><button class="tc-seg__opt" type="button">Disabled</button></span>
-          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+          <button class="tc-btn" title="Columns" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg><span class="tc-btn__label">Columns</span></button>
         </div>
         <table class="tc-table">
           <thead><tr><th>Login</th><th>Role</th><th class="tc-table__n3 is-2nd">Created</th><th class="tc-table__n4">Last login</th><th>DAV</th><th>Sessions</th><th>Escrow</th><th></th></tr></thead>
@@ -14277,7 +14298,7 @@ Read  2 min ago · not changed on server</div>
       </div>
     </div>
   </div>
-  <div style="font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:820px">Источники — лист поверх <code>main</code>, рейл из значков остаётся. Затемнение то же, что у быстрой заметки. «Apply» закрывает панель.</div>
+  <div style="font-size:13px;color:var(--tc-muted);margin-top:10px;max-width:820px">Источники — лист поверх <code>main</code>, рейл из значков остаётся. Открывает его повторное нажатие на значок текущего раздела — здесь Notes: другого входа нет, значок и так ведёт в этот раздел. Затемнение то же, что у быстрой заметки. «Apply» закрывает панель.</div>
   </div>
 </div>
 

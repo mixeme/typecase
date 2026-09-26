@@ -73,8 +73,8 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Opens, Place, Secondary}.
-// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Opens, Place, Secondary, Tertiary}.
+// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
 // Эталон. кадр `components-9`, фрагмент `.tc-btn`; формы — в таблице эталонов.
@@ -102,6 +102,8 @@ type Button struct {
 	Place   Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
 	Secondary bool
+	// Tertiary goes under «⋯» on a phone, after the secondary ones.
+	Tertiary bool
 }
 
 // Render prints the button.
@@ -121,7 +123,7 @@ func (b Button) html(m mix) string {
 	if b.State == ButtonOff {
 		state = "is-off"
 	}
-	s.WriteString(`<button` + class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary)) +
+	s.WriteString(`<button` + class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary)) +
 		` type="` + typ + `"` + attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) + flag("disabled", b.State == ButtonDisabled) + `>`)
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))

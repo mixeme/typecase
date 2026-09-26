@@ -160,9 +160,33 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   element the mockup's dictionary does not leave bare. Spec L-8 lists the 17
   gates as they are. `widget-fragments` also reads the widget types from the source
   and wants each in `refs.Widgets` and with at least one record.
+- **The owner's answers of step 7.** A bar gives what did not fit to «⋯» on
+  the narrowest steps too, instead of scrolling sideways: the third rank
+  `is-3rd` goes under «⋯» at 460 px and below, after `is-2nd`, and its twin
+  in the drawn menu of «⋯» shows there only. `Button`, `Check`, `BarSep`,
+  `MenuItem` and `MenuSep` take `Tertiary`; a folding button label in a bar
+  leaves at the same step, and the fields of a range in a bar shrink. The
+  safety of `tc.js` trips on no reference bar at any step. In the rail of
+  icons the current section, pressed again, opens the sheet with its
+  sources: `Nav.Opens` names it, and elsewhere the item stays a link. A check
+  no longer takes an input (`Check.Parts` without `Input`): the input of a
+  sentence stands beside the check in a `Line`.
 
 ### Mockup
 
+- Step 7 of plan 2, the owner's answers of 2026-09-26. The bars of «Заметка ·
+  правка» [s-notes-20], «Календарь · агенда со списком и карточкой»
+  [s-agenda-1], «Администрирование · пользователи» [s-admin-2] and «Человек ·
+  хронология» [s-contacts-7] fit at 460 and 390 px: the third rank `is-3rd`
+  (Р-4) goes under «⋯» there, the agenda's menu gets the three ticks as its
+  twins, Columns keeps its icon, the date range shrinks. In «Резервная копия ·
+  задание, что и куда» [s-backup-2] the days input leaves the check's button
+  and stands beside it in a line — the frame is the same to the pixel; the
+  rule that makes a check beside an input 28 px high leaves the 22 px chip
+  input alone. The caption of «Рейл из значков · источники открыты» [m-phone-9]
+  says what opens the sheet: the current section's icon, pressed again. The
+  placeholder of «Find a zone» and the one stroke of the sheet heads' accent
+  icons are the owner's, in `allowed-diffs.md`.
 - Mailbox candidate (`carrel-mailbox-mockups.html`): each mailbox has its own
   signature and name in From, set in a new «Ящик · правка» frame and shown in
   the reply sheet under the text, after «-- ». The frame of a separate search

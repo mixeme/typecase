@@ -263,6 +263,10 @@
 		if (openTrigger && !closest(e.target, ".tc-menu")) closeMenu(false);
 
 		var opener = closest(e.target, "[data-tc-open]");
+		// The current section of the navigation opens its sources only in the
+		// rail of icons, where they are not in the rail; otherwise it is a link.
+		var shell = opener && opener.classList.contains("tc-nav__item") ? closest(opener, ".tc-shell") : null;
+		if (shell && shellMode(shell) !== "rail") opener = null;
 		if (opener) {
 			var target = document.getElementById(opener.getAttribute("data-tc-open"));
 			if (target) {

@@ -68,21 +68,11 @@ func TestShellModeFromCSS(t *testing.T) {
 	}
 }
 
-// safetyAwaiting lists the reference bars the mockup's CSS does not fit on
-// the narrowest steps: their buttons do not go under «⋯». Each is a question
-// for the owner (plan 2, step 7); until it is answered the safety lets the
-// bar scroll.
-var safetyAwaiting = map[string]bool{
-	"s-notes-20 .tc-docbar #1@460": true, "s-notes-20 .tc-docbar #1@390": true,
-	"s-agenda-1 .tc-bar #1@460": true, "s-agenda-1 .tc-bar #1@390": true,
-	"s-admin-2 .tc-bar #1@390":    true,
-	"s-contacts-7 .tc-bar #1@390": true,
-}
-
 // TestBarSafetyQuiet (Р-4): what goes under «⋯» and when is the mockup's
 // CSS; tc.js only catches a bar the CSS did not fit. On the reference bars,
-// edit bars and heads it never has to, on any step of the ladder — except
-// the cases waiting for the owner, which must still trip it.
+// edit bars and heads it never has to, on any step of the ladder: the
+// narrowest steps give the tertiary items (is-3rd) to «⋯» (the owner's
+// decision of 2026-09-26: no sideways scroll).
 func TestBarSafetyQuiet(t *testing.T) {
 	needChrome(t)
 	h := browser.NewHarness(t)
@@ -101,12 +91,8 @@ func TestBarSafetyQuiet(t *testing.T) {
 			if err := h.Run(url, width, 600, chromedp.Evaluate(js, &n)); err != nil {
 				t.Fatal(err)
 			}
-			key := fmt.Sprintf("%s@%d", e.Ref, width)
-			if n != 0 && !safetyAwaiting[key] {
+			if n != 0 {
 				t.Errorf("%s at %d px: the CSS did not fit it and the safety tripped", e.Ref, width)
-			}
-			if n == 0 && safetyAwaiting[key] {
-				t.Errorf("%s at %d px fits now: take it off safetyAwaiting", e.Ref, width)
 			}
 		}
 	}
@@ -137,5 +123,39 @@ func TestOpensInPlace(t *testing.T) {
 	}
 	if before || !opened || !closed || !back {
 		t.Errorf("closed at start %v, opened %v, closed by Esc %v, focus back %v", !before, opened, closed, back)
+	}
+}
+
+// TestRailReopensSources (Р-3): in the rail of icons the current section,
+// pressed again, opens the sheet with its sources; where the rail shows the
+// sources itself, the current section stays a link.
+func TestRailReopensSources(t *testing.T) {
+	needChrome(t)
+	body := w.Shell{Body: w.ShellBody{
+		Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}}, On: 2, Opens: "sources"}},
+		Main: w.Main{Items: []w.MainPart{
+			w.Head{Title: &w.HeadTitle{Text: "Combined notebook"}},
+			w.Scrim{ID: "sources", Closed: true, Content: w.Sheet{Title: "Sources",
+				Body: []w.SheetPart{w.Dim{Parts: []w.Inline{w.Text("Записи")}}},
+				Foot: []w.SheetFootPart{w.Button{Label: "Apply", Kind: w.ButtonPrimary}}}},
+		}}}}.Render()
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("rail-sources", browser.PageHTML(body, flush))
+	shown := `(() => { const s = document.getElementById("sources"); return !s.hidden && s.getClientRects().length > 0; })()`
+	for _, c := range []struct {
+		width int
+		want  bool
+	}{{820, true}, {1351, false}} {
+		var opened bool
+		err := h.Run(url, c.width, 700,
+			chromedp.Click(`.tc-nav__item[aria-current="page"]`, chromedp.ByQuery),
+			chromedp.Evaluate(shown, &opened),
+		)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if opened != c.want {
+			t.Errorf("%d px: the sources sheet opened %v, want %v", c.width, opened, c.want)
+		}
 	}
 }

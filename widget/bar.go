@@ -21,10 +21,11 @@ func (Drop) barPart()   {}
 // BarSep is a thin rule between groups of a bar.
 type BarSep struct {
 	Secondary bool
+	Tertiary  bool
 }
 
 func (p BarSep) html(mix) string {
-	return `<span` + class(nil, "tc-bar__sep", rank(p.Secondary)) + `></span>`
+	return `<span` + class(nil, "tc-bar__sep", rank(p.Secondary), rank3(p.Tertiary)) + `></span>`
 }
 
 // BarCount says how many rows are selected, at the start of a selection bar.
@@ -58,7 +59,7 @@ func (v BarVariant) class() string {
 // Роль. Бар над списком: фильтр, сортировка, вид, «⋯»; при выделении — что сделать с выделенным.
 // Вход. Bar{Count, Items, More, Right, Variant}.
 // Состояния. plain | selection | wide | more | right.
-// Инварианты. Бар — одна строка: второстепенное (is-2nd) уходит под «⋯» первым, порядок и пороги — в CSS; «⋯» — одна кнопка перед концом бара; бар печатает фрагмент своего кадра.
+// Инварианты. Бар — одна строка: второстепенное (is-2nd) уходит под «⋯» первым, третьестепенное (is-3rd) — на телефоне, порядок и пороги — в CSS; «⋯» — одна кнопка перед концом бара; бар печатает фрагмент своего кадра.
 // Поведение. «⋯» открывает меню с тем, что не поместилось.
 // Эталон. кадр `components-16`, фрагмент `.tc-bar`.
 // Содержимое. Счёт выделенного, фильтр, поле, переключатели, диапазон, флажки, кнопки, выпадашка «⋯» с меню, разделители, моноширинное, конец бара.

@@ -70,7 +70,6 @@ func (Text) checkPart()   {}
 func (Dim) checkPart()    {}
 func (Mono) checkPart()   {}
 func (Badge) checkPart()  {}
-func (Input) checkPart()  {}
 func (Choice) checkPart() {}
 
 // Choice is one side of a conflict in a check's label: where the value comes
@@ -87,8 +86,8 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет.
-// Вход. Check{On, Parts, Label}.
-// Состояния. on | off | rich.
+// Вход. Check{On, Parts, Label, Tertiary}.
+// Состояния. on | off | rich | tertiary.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью, у неё есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже.
 // Эталон. кадр `components-10`, фрагмент `.tc-check`.
@@ -98,6 +97,8 @@ type Check struct {
 	On    bool
 	Parts []CheckPart
 	Label string // the accessible name when the parts are not plain words
+	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
+	Tertiary bool
 }
 
 // Render prints the check.
@@ -105,7 +106,7 @@ func (c Check) Render() string { return c.html(nil) }
 
 func (c Check) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<button` + class(m, "tc-check") + ` type="button" role="checkbox"` + attr("aria-checked", boolText(c.On)) +
+	s.WriteString(`<button` + class(m, "tc-check", rank3(c.Tertiary)) + ` type="button" role="checkbox"` + attr("aria-checked", boolText(c.On)) +
 		attr("aria-label", c.Label) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
 	for i, p := range c.Parts {
 		if i > 0 {

@@ -13,10 +13,10 @@ type NavItem struct {
 	Title  string // the name of an item drawn without a label
 }
 
-func (it NavItem) html(on bool) string {
+func (it NavItem) html(on bool, opens string) string {
 	var s strings.Builder
 	s.WriteString(`<a` + class(nil, is("on", on), "tc-nav__item") + attr("href", it.Href) + attr("title", it.Title) +
-		attr("aria-label", pick(it.Label == "", it.Title)) + attr("aria-current", pick(on, "page")) + `>`)
+		attr("aria-label", pick(it.Label == "", it.Title)) + attr("aria-current", pick(on, "page")) + attr("data-tc-open", pick(on, opens)) + `>`)
 	if it.Emblem != nil {
 		s.WriteString(it.Emblem.html(nil))
 	} else {
@@ -33,10 +33,10 @@ func (it NavItem) html(on bool) string {
 // Nav — tc-nav
 //
 // Роль. Навигация по разделам: в рейле приложения, в рейле настроек, строка «назад».
-// Вход. Nav{Items, On, Apart}.
+// Вход. Nav{Items, On, Apart, Opens}.
 // Состояния. plain | back | apart | icons.
 // Инварианты. Текущий раздел — один, его номер, а не флаг у каждого пункта; пункт — ссылка; навигация печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает раздел; текущий помечен для чтения (aria-current).
+// Поведение. Нажатие открывает раздел; текущий помечен для чтения (aria-current). В рейле из значков (641–1007) повторное нажатие на текущий раздел открывает лист его источников (Opens).
 // Эталон. кадр `s-contacts-1`, фрагмент `.tc-nav`.
 // Содержимое. Пункты: значок или знак службы, название, число.
 // Чего нет. Вложенных пунктов: подразделы — секции рейла под навигацией.
@@ -44,6 +44,9 @@ type Nav struct {
 	Items []NavItem
 	On    int  // the current section, counted from 1; 0 for none
 	Apart bool // 2 px above: a single «back» under the top bar
+	// Opens is the ID of the sheet (Scrim) with the section's sources: in the
+	// rail of icons (Р-3, rail) pressing the current section again opens it.
+	Opens string
 }
 
 // Render prints the navigation.
@@ -53,7 +56,7 @@ func (n Nav) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-nav", pick(n.Apart, "tc-nav--top2")) + `>`)
 	for i, it := range n.Items {
-		s.WriteString(it.html(i+1 == n.On))
+		s.WriteString(it.html(i+1 == n.On, n.Opens))
 	}
 	s.WriteString(`</div>`)
 	return s.String()

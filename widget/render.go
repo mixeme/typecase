@@ -7,7 +7,7 @@ import (
 )
 
 // mix is what a container puts on a child's root: another block (tc-push,
-// tc-grow), its own element (tc-bar__more, tc-sec__acts), the rank is-2nd. A
+// tc-grow), its own element (tc-bar__more, tc-sec__acts), the ranks is-2nd and is-3rd. A
 // widget does not choose its mixins; the container that holds it prints them.
 type mix []string
 
@@ -88,6 +88,12 @@ func (p Place) class() string {
 // bar narrows.
 func rank(secondary bool) string {
 	return pick(secondary, "is-2nd")
+}
+
+// rank3 is is-3rd for a tertiary item: it goes under «⋯» on a phone, after
+// the secondary ones; in the menu of «⋯» its twin with is-3rd shows there only.
+func rank3(tertiary bool) string {
+	return pick(tertiary, "is-3rd")
 }
 
 func itoa(n int) string { return strconv.Itoa(n) }

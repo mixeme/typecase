@@ -43,11 +43,14 @@ type MenuItem struct {
 	Trail  MenuTrail
 	On     bool // the chosen or current item
 	Tone   MenuTone
+	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
+	// shown on a phone only, where the item itself is under «⋯».
+	Tertiary bool
 }
 
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<button` + class(nil, is("on", it.On), "tc-menu__item", it.Tone.class()) + ` type="button" role="menuitem"` +
+	s.WriteString(`<button` + class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary)) + ` type="button" role="menuitem"` +
 		attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true")) + `>`)
 	if it.Icon != "" {
 		s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
@@ -77,9 +80,13 @@ func (it MenuItem) html(mix) string {
 }
 
 // MenuSep is a rule between groups of a menu.
-type MenuSep struct{}
+type MenuSep struct {
+	Tertiary bool // it parts the twins of a bar's tertiary items: a phone only
+}
 
-func (MenuSep) html(mix) string { return `<span class="tc-menu__sep"></span>` }
+func (p MenuSep) html(mix) string {
+	return `<span` + class(nil, "tc-menu__sep", rank3(p.Tertiary)) + `></span>`
+}
 
 // MenuHeadingForm is how a menu's heading row is drawn.
 type MenuHeadingForm int
