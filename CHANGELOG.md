@@ -33,6 +33,14 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   `--tc-colour` and `--tc-width` from `data-tc-colour` and `data-tc-width`
   and the mockup's CSS applies them; `data-tc-pct` is gone. The mockup's
   rename, element and inline scripts are removed.
+- **A widget is checked against its frame.** `internal/fragment` parses the
+  mockup (`golang.org/x/net/html`, internal only), finds a block by
+  `Ref{Frame, Class, N}`, normalizes both trees — tags, classes, text, field
+  values, icons, `data-tc-colour`/`data-tc-width`; not `aria-*`, `role`,
+  `id`, `title` — and names the first path where they part.
+  `go run ./internal/fragment/cmd/shapes tc-tickrow` prints a block's forms.
+  `internal/refs` holds the reference table and the list of widget types;
+  `TestWidgetFragments` compares every record.
 
 ### Mockup
 
