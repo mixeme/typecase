@@ -16,7 +16,9 @@ types: a nesting the mockup does not draw does not compile. The `layout`
 package, the `[]Node` "any widget" slots and the screen-side fallback
 (`Cols`) are gone. Before 1.0 a breaking change comes in a minor release
 without a deprecation period; there are no aliases or transition layers, and
-this entry says what changed rather than how to migrate. The spec
+this entry says what changed rather than how to migrate. How a screen is
+built now — a frame of the mockup, drafted by `cmd/frame2go`, its data then
+the application's — is [docs/guide/screen.md](docs/guide/screen.md). The spec
 (`docs/spec/typecase.md`) states the model: L-1, L-2.2, L-3.1, L-3.2 (the
 eighth item is now «Эталон», the frame and fragment a widget prints), L-3.6,
 L-5, L-6.1, L-7, L-10, L-11.1.
