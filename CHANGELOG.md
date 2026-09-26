@@ -41,6 +41,15 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   `go run ./internal/fragment/cmd/shapes tc-tickrow` prints a block's forms.
   `internal/refs` holds the reference table and the list of widget types;
   `TestWidgetFragments` compares every record.
+- **What a container takes comes from the mockup.** A container declares its
+  children by field types: a widget field is a fixed child, a slot is an
+  interface with an unexported method that exactly the widgets the mockup
+  puts there implement. `TestContainerPairs` derives every parent → child
+  block pair from the frames (362 today) and checks them against the types
+  both ways; an interface field that takes any widget is refused. How the
+  library reads a frame — the block of an element, mixins such as
+  `tc-push` or `is-2nd` that the container prints, forms without slot
+  contents — is written in `docs/visual/mockup.md`.
 
 ### Mockup
 

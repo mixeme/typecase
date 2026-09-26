@@ -5,8 +5,10 @@ import (
 	"strings"
 )
 
-// Shape is one form of a block: every occurrence of the class whose tree,
-// without text, is the same. Each shape is one reference record (step 4).
+// Shape is one form of a block: every occurrence of the class whose own tree,
+// without text, is the same. A nested block counts as a placeholder with its
+// name and mixins, not with its insides: the insides are that block's forms.
+// Each shape is one reference record (step 4).
 type Shape struct {
 	Key   string // the tree without text, one line
 	Count int    // occurrences in all frames
@@ -21,7 +23,7 @@ func (m *Mockup) Shapes(cls string) []Shape {
 	var order []string
 	for _, f := range m.Frames {
 		for i, n := range f.all(cls) {
-			key := Skeleton(m.Normalize(n))
+			key := Skeleton(WithoutMixins(cls, m.Own(n, true)))
 			ref := Ref{Frame: f.ID, Class: cls, N: i + 1}
 			s, ok := byKey[key]
 			if !ok {
@@ -65,7 +67,7 @@ func skeleton(b *strings.Builder, n *Node) {
 			name = a[:i]
 		}
 		switch name {
-		case "type", "href", "disabled", "checked":
+		case "type", "disabled", "checked":
 			b.WriteString("[" + a + "]") // part of the form, not data
 		default:
 			b.WriteString("[" + name + "]")
@@ -75,11 +77,23 @@ func skeleton(b *strings.Builder, n *Node) {
 		return
 	}
 	b.WriteString("(")
-	for i, c := range n.Children {
-		if i > 0 {
+	var prev string
+	first := true
+	for _, c := range n.Children {
+		var one strings.Builder
+		skeleton(&one, c)
+		s := one.String()
+		// A run of slot places with the same mixins is one place: how many
+		// children a slot holds is content, not form.
+		if c.Tag == "*" && s == prev {
+			continue
+		}
+		prev = s
+		if !first {
 			b.WriteString(" ")
 		}
-		skeleton(b, c)
+		first = false
+		b.WriteString(s)
 	}
 	b.WriteString(")")
 }

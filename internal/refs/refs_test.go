@@ -54,13 +54,22 @@ func TestBite_widgetFragments(t *testing.T) {
 	if err := m.Compare(ref, good.Render()); err != nil {
 		t.Fatalf("the frame's own fragment is red: %v", err)
 	}
-	spoiled := raw(strings.Replace(string(good), `<span class="tc-mono tc-mono--t11">`, `<span class="tc-mono">`, 1))
+	spoiled := raw(strings.Replace(string(good), `<button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/>`, `<button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-down"/>`, 1))
 	err := m.Compare(ref, spoiled.Render())
 	if err == nil {
 		t.Fatal("a spoiled class passed")
 	}
-	if !strings.Contains(err.Error(), "button.tc-menu__item[2] > span.tc-mono.tc-mono--t11") {
+	if !strings.Contains(err.Error(), "button.tc-menu__item[2]") {
 		t.Fatalf("the message does not name the path: %v", err)
+	}
+	// A nested block is a place: its name is the menu's business, its variant is not.
+	otherBlock := raw(strings.Replace(string(good), `<span class="tc-mono tc-mono--t11">`, `<span class="tc-dim">`, 1))
+	if err := m.Compare(ref, otherBlock.Render()); err == nil || !strings.Contains(err.Error(), "tc-mono") {
+		t.Fatalf("another block in the place passed: %v", err)
+	}
+	ownVariant := raw(strings.Replace(string(good), `<span class="tc-mono tc-mono--t11">`, `<span class="tc-mono tc-mono--t12">`, 1))
+	if err := m.Compare(ref, ownVariant.Render()); err != nil {
+		t.Fatalf("the nested block's own variant is its own record's business: %v", err)
 	}
 	wrongText := raw(strings.Replace(string(good), "Rename", "Rename it", 1))
 	if err := m.Compare(ref, wrongText.Render()); err == nil || !strings.Contains(err.Error(), `"Rename"`) {

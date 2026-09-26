@@ -243,6 +243,85 @@ func (m *Mockup) norm(n *html.Node, pre bool) *Node {
 	return out
 }
 
+// Own normalizes a block down to its own elements. A nested element that is
+// another block becomes a place: its block name (or "*" when anonymous) and
+// the mixins this container puts on it, without its variants, states,
+// attributes or insides — those are that block's own forms.
+func (m *Mockup) Own(n *html.Node, anonymous bool) *Node {
+	return m.own(n, false, true, anonymous)
+}
+
+func (m *Mockup) own(n *html.Node, pre, root, anonymous bool) *Node {
+	if b := Block(n); b != "" && !root {
+		place := &Node{Tag: b}
+		if anonymous {
+			place.Tag = "*"
+		}
+		for _, cls := range strings.Fields(attr(n, "class")) {
+			if !OwnClass(b, cls) {
+				place.Classes = append(place.Classes, cls)
+			}
+		}
+		sort.Strings(place.Classes)
+		return place
+	}
+	out := m.norm(n, pre)
+	out.Children = nil
+	for _, c := range strings.Fields(attr(n, "class")) {
+		if m.pre[c] {
+			pre = true
+		}
+	}
+	if n.DataAtom == atom.Textarea || n.DataAtom == atom.Pre {
+		pre = true
+	}
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		switch c.Type {
+		case html.ElementNode:
+			out.Children = append(out.Children, m.own(c, pre, false, anonymous))
+		case html.TextNode:
+			t := c.Data
+			if !pre {
+				t = strings.Join(strings.Fields(t), " ")
+			}
+			if t == "" || !pre && strings.TrimSpace(t) == "" {
+				continue
+			}
+			out.Children = append(out.Children, &Node{Text: t})
+		}
+	}
+	return out
+}
+
+// OwnClass says whether cls belongs to block itself on the block's root: the
+// block, its variants --…, and its states is-*, except is-2nd, the rank a bar
+// gives its items. Anything else on the root — another block (tc-push,
+// tc-grow), another block's element (tc-bar__more, tc-sec__acts), is-2nd —
+// is a mixin the container prints.
+func OwnClass(block, cls string) bool {
+	switch {
+	case cls == block, strings.HasPrefix(cls, block+"--"), cls == Base[block]:
+		return true
+	case cls == "is-2nd":
+		return false
+	case strings.HasPrefix(cls, "is-"):
+		return true
+	}
+	return false
+}
+
+// WithoutMixins drops the root's mixins: the form the block prints by itself.
+func WithoutMixins(block string, n *Node) *Node {
+	c := *n
+	c.Classes = nil
+	for _, cls := range n.Classes {
+		if OwnClass(block, cls) {
+			c.Classes = append(c.Classes, cls)
+		}
+	}
+	return &c
+}
+
 // Fragment parses a widget's output: one element, or several siblings.
 func Fragment(markup string) ([]*html.Node, error) {
 	ctx := &html.Node{Type: html.ElementNode, Data: "div", DataAtom: atom.Div}
@@ -262,7 +341,11 @@ func Fragment(markup string) ([]*html.Node, error) {
 }
 
 // Compare checks a widget's rendered markup against the block Ref points at.
-// The error names the first path where the trees part.
+// It compares the block's own elements: a nested block is a place with its
+// name and the mixins this block puts on it, and its insides are checked by
+// its own records. The mixins on the frame's root come from the frame's
+// container and are not the widget's to print. The error names the first
+// path where the trees part.
 func (m *Mockup) Compare(r Ref, rendered string) error {
 	block, err := m.Block(r)
 	if err != nil {
@@ -275,8 +358,12 @@ func (m *Mockup) Compare(r Ref, rendered string) error {
 	if len(nodes) != 1 {
 		return fmt.Errorf("%s: the widget printed %d top elements, want 1", r, len(nodes))
 	}
-	want := m.Normalize(block)
-	got := m.Normalize(nodes[0])
+	cls := r.Class
+	want := WithoutMixins(cls, m.Own(block, false))
+	got := m.Own(nodes[0], false)
+	if b := Block(nodes[0]); b != cls {
+		return fmt.Errorf("%s: the widget prints block %q, want %q", r, b, cls)
+	}
 	if d := Diff(want, got); d != "" {
 		return fmt.Errorf("%s: %s", r, d)
 	}

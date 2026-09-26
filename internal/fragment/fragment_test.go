@@ -80,3 +80,42 @@ func TestShapes(t *testing.T) {
 		t.Fatalf("plain button: %+v", shapes[0])
 	}
 }
+
+func TestBlockAndMixins(t *testing.T) {
+	m, err := Parse(`<div class="frame" data-frame="b-1"><div class="tc-root tc-shell">
+<div class="tc-bar"><button class="tc-btn tc-push is-2nd tc-bar__more" type="button">x</button>
+<span class="tc-push tc-dim">note</span><button class="tc-btn tc-close" type="button">×</button>
+<h3 class="tc-rubric tc-line">Title</h3></div></div></div>`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f, _ := m.Frame("b-1")
+	got := map[string]int{}
+	for _, p := range m.Pairs() {
+		got[p.Parent+">"+p.Child]++
+	}
+	for _, want := range []string{"tc-shell>tc-bar", "tc-bar>tc-btn", "tc-bar>tc-dim", "tc-bar>tc-close", "tc-bar>tc-rubric"} {
+		if got[want] == 0 {
+			t.Errorf("pair %s missing: %v", want, got)
+		}
+	}
+	_ = f
+	// The bar's own form keeps the mixins it puts on its children.
+	bar, _ := m.Block(Ref{"b-1", "tc-bar", 1})
+	key := Skeleton(m.Own(bar, false))
+	for _, want := range []string{"tc-btn.is-2nd.tc-bar__more.tc-push", "tc-dim.tc-push", "tc-close", "tc-rubric.tc-line"} {
+		if !strings.Contains(key, want) {
+			t.Errorf("bar's own form lacks %s: %s", want, key)
+		}
+	}
+	// The button printed alone has no mixins; the frame's root mixins are stripped.
+	if err := m.Compare(Ref{"b-1", "tc-btn", 1}, `<button class="tc-btn" type="button">x</button>`); err != nil {
+		t.Fatalf("root mixins are the container's: %v", err)
+	}
+	if err := m.Compare(Ref{"b-1", "tc-btn", 1}, `<button class="tc-btn tc-push" type="button">x</button>`); err == nil {
+		t.Fatal("a widget printing a mixin by itself passed")
+	}
+	if err := m.Compare(Ref{"b-1", "tc-close", 1}, `<button class="tc-btn tc-close" type="button">×</button>`); err != nil {
+		t.Fatalf("tc-close is built on tc-btn: %v", err)
+	}
+}
