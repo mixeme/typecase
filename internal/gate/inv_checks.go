@@ -301,10 +301,17 @@ func checkInvBadgeHasText(widget string, html []string, _ string) error {
 	})
 }
 
+// badgeTag finds the tag that carries a badge's class: the badge itself.
+var badgeTag = regexp.MustCompile(`<([a-z]+)\s[^>]*\bclass="(?:[^"]* )?tc-badge[" ]`)
+
 func checkInvBadgeNotLink(widget string, html []string, _ string) error {
 	return forEachHTML(widget, html, func(h string) error {
-		if strings.Contains(h, `<a`) && strings.Contains(h, "tc-badge") {
-			return fmt.Errorf("%s: badge must not be a link", widget)
+		// The badge itself, not whatever holds it: a badge may sit in a
+		// row whose name is a link.
+		for _, m := range badgeTag.FindAllStringSubmatch(h, -1) {
+			if m[1] == "a" || m[1] == "button" {
+				return fmt.Errorf("%s: badge must not be a link", widget)
+			}
 		}
 		return nil
 	})

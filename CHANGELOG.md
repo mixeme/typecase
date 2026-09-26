@@ -89,7 +89,13 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   chrome, read past by the fragment reader; its classes that sat in the
   product's namespace (`tc-win--*`, `tc-win__bar`, `tc-winbtn`,
   `tc-win__toast`, `tc-win__title`, `tc-tray__row`) are `mk-*` in the page's
-  style now.
+  style now. `Shell` holds the top bar and a `ShellBody` (the rail's pieces,
+  `Main`, an optional `Side`); `Head` has one title with the lines, the path
+  and the actions around it; `Bar` keeps one row, its secondary items go
+  under «⋯» first. `Main` takes the page's pieces, among them the list
+  group's heading (`ListGroup`) and a public page's banner, address strip and
+  foot. The badge check looks at the badge element itself, so a badge beside
+  a link no longer fails it.
 
 ### Mockup
 
