@@ -200,6 +200,15 @@ L-5, L-6.1, L-7, L-10, L-11.1.
 
 ### Mockup
 
+- Breakages on the narrow steps that the ladder comparison found, fixed:
+  the scrim is a layer of its own above the page (`z-index:7`), so the
+  drawer state's raised buttons no longer show over a sheet («Перемещение и
+  копирование» [s-files-4], «Учётная запись» [account-6], a publishing
+  sheet [s-publish-5] at 390 px); with the search folded into its icon, its
+  suggestions span the top bar instead of the icon's width («Подсказки»
+  [s-find-2], [s-find-3]); a primary button drawn as an icon hides its label
+  instead of cutting it («Конфликт · планшет» [s-conflict-2], «Заметка ·
+  чтение и правка» [m-phone-7] at 640 px). Nothing moves at 820 px and up.
 - Step 7 of plan 2, the owner's answers of 2026-09-26. The bars of «Заметка ·
   правка» [s-notes-20], «Календарь · агенда со списком и карточкой»
   [s-agenda-1], «Администрирование · пользователи» [s-admin-2] and «Человек ·

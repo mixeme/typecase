@@ -395,7 +395,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
-.tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
+/* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */
+.tc-scrim{position:absolute;inset:0;z-index:7;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
 .tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
@@ -656,12 +657,17 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-shell__rail .tc-num{display:none}
   .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
     padding:8px;gap:8px;overflow-x:clip}
+  /* Поиск свёрнут в значок: подсказки под ним — во всю полосу, а не шириной значка. */
+  .tc-top{position:relative}
+  .tc-top .tc-top__search.tc-top__search{position:static}
+  .tc-top .tc-top__suggest.tc-top__suggest{left:8px;right:8px;width:auto}
   .tc-top .tc-top__actions.tc-top__actions{flex:1 1 auto;gap:8px}
   .tc-top .tc-btn{height:38px}
   .tc-top .tc-btn:has(> svg:only-child){min-width:38px;width:max(38px,max-content);height:38px}
   .tc-top > .tc-btn.tc-btn,
   .tc-top .tc-top__actions > .tc-btn:first-child:has(> svg:only-child),
-  .tc-top .tc-top__actions > .is-primary:has(> svg:only-child){width:38px;padding:0}
+  .tc-top .tc-top__actions > .is-primary:has(> svg:only-child){width:38px;padding:0;font-size:0;gap:0}
+  /* Кнопка значком: подпись уходит, а не режется краем (CSS не видит текста рядом со значком). */
   .tc-top .tc-btn:has(> svg:only-child) svg{width:20px;height:20px}
   .tc-top .tc-usermenu{flex:none;height:38px}
   /* Поле уходит, остаётся значок — тот же вход, что кнопка поиска на телефоне. */

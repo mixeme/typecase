@@ -73,18 +73,7 @@ func compareFrameAfter(run func(...chromedp.Action) error, frameHTML, screenHTML
 // the mockup (Р-3, Р-4, Р-21). Each is keyed by frame, step and the start of
 // the finding; the run fails on a finding not listed and on a listed one
 // that is gone.
-var framesAwaiting = map[string]string{
-	"s-find-2@390: text out of its box: button.tc-menu__item":            "the search's suggestions are squeezed under the phone's search button",
-	"s-find-3@390: text out of its box: button.tc-menu__item":            "the search's suggestions are squeezed under the phone's search button",
-	"s-conflict-2@640: text out of its box: button.tc-btn.is-primary":    "«New note» is cut to its box on a phone's top bar",
-	"s-files-4@390: under something: div.tc-sheet":                       "the page's buttons are drawn over the move sheet",
-	"s-publish-5@390: under something: div.tc-sheet":                     "the page is drawn over the sheet",
-	"account-6@390: under something: div.tc-sheet":                       "the page's primary button is drawn over the sheet",
-	"s-admin-5@390: text out of its box: div.tc-diag":                    "a diagnostic line does not wrap on a phone",
-	"s-profile-1@390: text out of its box: div.tc-diag":                  "a diagnostic line does not wrap on a phone",
-	"s-profile-10@390: text out of its box: div.tc-diag":                 "a diagnostic line does not wrap on a phone",
-	"s-backup-2@640: text out of its box: div.tc-diag.tc-diag--top9-ink": "the line to paste does not wrap on a phone",
-}
+var framesAwaiting = map[string]string{}
 
 func awaited(frame string, w int, finding string) (string, bool) {
 	for k := range framesAwaiting {

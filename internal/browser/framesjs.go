@@ -155,7 +155,11 @@ const FramesInvariantsJS = `(function(max){
         // and so does the space where a line wraps (a rectangle one space wide).
         var tx = n.textContent, i0 = tx.search(/\S/), i1 = tx.length - tx.split("").reverse().join("").search(/\S/);
         var rg = document.createRange(); rg.setStart(n, i0); rg.setEnd(n, i1);
-        var over = Array.prototype.some.call(rg.getClientRects(), function(tr){ return tr.width > 5 && (tr.right > right || tr.left < left); });
+        // pre-wrap keeps runs of spaces, and a run that hangs at a wrap is
+        // wider than a space: there the box's own scroll width says it.
+        var over = /^(pre-wrap|break-spaces)$/.test(cs.whiteSpace)
+          ? el.scrollWidth > el.clientWidth + 1
+          : Array.prototype.some.call(rg.getClientRects(), function(tr){ return tr.width > 5 && (tr.right > right || tr.left < left); });
         if (over) { add("text out of its box: " + label(el) + " " + JSON.stringify(tx.trim().slice(0, 30))); break; }
       }
     }
