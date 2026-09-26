@@ -37,3 +37,5 @@ func Find(frame string) (Route, bool) {
 }
 
 func ptr(t w.Ticked) *w.Ticked { return &t }
+
+func faceOf(f w.Face) *w.Face { return &f }

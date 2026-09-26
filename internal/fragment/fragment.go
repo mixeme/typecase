@@ -47,6 +47,44 @@ type Mockup struct {
 type Frame struct {
 	ID   string
 	Node *html.Node
+	// Page says the frame is a page without a shell (a route of Р-16 whose
+	// drawing's root is a plain tc-root): there, and only there, the root is
+	// the block tc-root — the page widget's. Elsewhere tc-root is the box a
+	// frame draws in, as a catalog cell is, and never a block.
+	Page bool
+}
+
+// catalogOnly are frames without a mark that still go to the catalog, not to
+// a route (Р-16 of plan 3): the desktop app's user menu and the tray menu.
+var catalogOnly = map[string]bool{"m-desktop-2": true, "m-desktop-8": true}
+
+// Route says whether a frame is a route of the demo screens (Р-16): its
+// label carries no mark (span.frag: компонент, фрагмент, список, меню,
+// кандидат) and it is not one of the menus kept for the catalog.
+func (f *Frame) Route() bool {
+	if catalogOnly[f.ID] {
+		return false
+	}
+	for c := f.Node.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.ElementNode && hasClass(c, "frame-label") {
+			for s := c.FirstChild; s != nil; s = s.NextSibling {
+				if s.Type == html.ElementNode && hasClass(s, "frag") {
+					return false
+				}
+			}
+		}
+	}
+	return true
+}
+
+// blockOf is Block, with a page's root read as the block tc-root.
+func (f *Frame) blockOf(n *html.Node) string {
+	if f.Page {
+		if r, err := f.Root(); err == nil && r == n {
+			return "tc-root"
+		}
+	}
+	return Block(n)
 }
 
 var (
@@ -119,6 +157,11 @@ func Parse(markup string) (*Mockup, error) {
 	if len(m.Frames) == 0 {
 		return nil, errors.New("fragment: no frames")
 	}
+	for _, f := range m.Frames {
+		if r, err := f.Root(); err == nil && f.Route() && hasClass(r, "tc-root") && Block(r) == "" {
+			f.Page = true
+		}
+	}
 	return m, nil
 }
 
@@ -163,7 +206,7 @@ func (f *Frame) all(cls string) []*html.Node {
 			if hasClass(n, "frame-label") || chrome(n) {
 				return
 			}
-			if hasClass(n, cls) && Block(n) == cls {
+			if hasClass(n, cls) && f.blockOf(n) == cls {
 				out = append(out, n)
 			}
 		}
@@ -370,7 +413,7 @@ func (m *Mockup) Compare(r Ref, rendered string) error {
 	cls := r.Class
 	want := WithoutMixins(cls, m.Own(block, false))
 	got := m.Own(nodes[0], false)
-	if b := Block(nodes[0]); b != cls {
+	if b := Block(nodes[0]); b != cls && !(cls == "tc-root" && b == "" && hasClass(nodes[0], "tc-root")) {
 		return fmt.Errorf("%s: the widget prints block %q, want %q", r, b, cls)
 	}
 	if d := Diff(want, got); d != "" {
@@ -471,15 +514,16 @@ func hasClass(n *html.Node, cls string) bool {
 	return false
 }
 
-// chrome says whether n is the desktop window's frame: its title bar or
-// status line. The frame is page chrome, not product, and is not seen with its
-// contents.
+// chrome says whether n is the desktop drawing's own: the window's title bar
+// or status line, or a notification of the operating system. It is page
+// chrome, not product — the system draws it, not the library — and is not
+// seen with its contents.
 func chrome(n *html.Node) bool {
 	if n.Type != html.ElementNode {
 		return false
 	}
 	for _, c := range strings.Fields(attr(n, "class")) {
-		if c == "mk-titlebar" || c == "mk-status" {
+		if c == "mk-titlebar" || c == "mk-status" || c == "mk-toast" {
 			return true
 		}
 	}

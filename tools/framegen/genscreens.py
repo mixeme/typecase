@@ -50,7 +50,7 @@ def unwrap(e):
     kids = []
     for k in e.kids:
         if isinstance(k, El):
-            if k.has("mk-titlebar") or k.has("mk-status"):
+            if k.has("mk-titlebar") or k.has("mk-status") or k.has("mk-toast"):
                 continue
             if any(c.startswith("mk-") for c in k.cls):
                 unwrap(k)
@@ -73,6 +73,8 @@ class Gap(Exception):
 def screen(root):
     if root.has("tc-shell"):
         return shellw2(root)
+    if root.has("tc-root"):
+        return pagew(root)
     raise Gap("root " + " ".join(root.cls) + " > " + ",".join(" ".join(k.cls) for k in root.els()[:2]))
 
 

@@ -541,7 +541,9 @@ func Agenda3() Screen {
 							},
 							w.Field{
 								Label: "Description",
-								Parts: []w.FieldPart{w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям."}},
+								Parts: []w.FieldPart{
+									w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.", Label: "Text"},
+								},
 								Width: w.FieldFull,
 							},
 							w.FieldSet{

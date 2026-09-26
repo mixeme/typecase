@@ -409,7 +409,7 @@ func Tasks3() Screen {
 							},
 							w.Field{
 								Label: "Description",
-								Parts: []w.FieldPart{w.Area{Text: "Опись, копия паспорта и заявление. Приём до 18:00, окно 4."}},
+								Parts: []w.FieldPart{w.Area{Text: "Опись, копия паспорта и заявление. Приём до 18:00, окно 4.", Label: "Text"}},
 								Width: w.FieldFull,
 							},
 							w.FieldSet{

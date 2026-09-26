@@ -198,6 +198,19 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   takes `Rows` (one value for several rows); the static comparison compares
   `colspan` and `rowspan`. A route carries the theme its frame is drawn in.
 
+- **Pages without a shell.** `Page` is the root of a page that has no top
+  bar and rail: sign-in and the password pages, «about», a desktop window's
+  inside, a page on paper (variants: plain, print, on the background, on the
+  background in a column). `Window` is a desktop window's inside with the
+  padding of a big or a small window, `WindowNote` its sentence of purpose;
+  a page on paper is `PrintTitle`, `PrintSources`, `PrintRubric`, `PrintRow`
+  (a time and what is at it, or a name and two numbers: `PrintCell`,
+  `PrintNum`) and `PrintFoot`. A line takes a `Pick`. All 154 route frames
+  are screens now and `docs/visual/gaps.md` is empty; a page on paper is also
+  compared with the print medium emulated. Reading the mockup, a
+  notification of the system (`mk-toast`) is chrome like the window's title
+  bar, and a route frame's plain `tc-root` is the page's block.
+
 ### Mockup
 
 - Breakages on the narrow steps that the ladder comparison found, fixed:

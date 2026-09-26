@@ -109,10 +109,10 @@ def linepart(x):
         return badge(x)
     if x.has("tc-meter"):
         return meter(x)
-    if x.has("tc-push"):
-        return "w.Push{Items: []w.PushPart{" + ", ".join(push_item(y) for y in x.els()) + "}}"
     if x.has("tc-line"):
         return linew2(x)
+    if x.has("tc-push"):
+        return pushw(x)
     if x.tag == "b":
         return "w.Strong(" + q(x.text()) + ")"
     cl = " ".join(x.cls)
@@ -387,3 +387,98 @@ def button(e):
     if 'Title: "More"' in s and m and m.group(1) != "dots":
         s = s.replace('Title: "More"', "Title: " + q(ICON_NAMES.get(m.group(1), m.group(1).capitalize())))
     return s
+
+
+# ---- a page without a shell (plan 3, step 5 closes the gaps) -------------
+
+PAGE_VARIANTS = [("tc-stack", "PageOnBackgroundColumn"), ("tc-root--on-bg", "PageOnBackground"), ("tc-root--print", "PagePrint")]
+
+
+def printrow(x):
+    its = []
+    for y in x.els():
+        if y.has("tc-mono"):
+            its.append(mono(y))
+        elif y.has("tc-print__num"):
+            its.append("w.PrintNum{Text: " + q(y.text()) + "}")
+        elif y.has("tc-print__cell"):
+            b = [z for z in y.els() if z.tag == "b"]
+            d = [z for z in y.els() if z.has("tc-dim--print")]
+            if b:
+                its.append("w.PrintCell{Name: " + q(b[0].text()) + (", Detail: " + q(d[0].text()) if d else "") + "}")
+            else:
+                its.append("w.PrintCell{Name: " + q(y.text()) + "}")
+        else:
+            raise SystemExit("print row? " + str(y.cls))
+    return "w.PrintRow{Items: []w.PrintRowPart{" + ", ".join(its) + "}" + (", Columns: true" if x.has("tc-print__row--3col") else "") + "}"
+
+
+def windowpart(x):
+    if x.has("tc-form"):
+        return formw(x)
+    if x.has("tc-msg"):
+        return msg(x)
+    if x.has("tc-sheet__fields"):
+        return "w.SheetFields{Items: []w.Field{" + ", ".join(field(y) for y in x.els()) + "}}"
+    if x.has("tc-line"):
+        return linew2(x)
+    if x.has("tc-stack"):
+        g = "StackGap10" if x.has("tc-stack--gap-10") else "StackGap9"
+        return "w.Stack{Gap: w." + g + ", Items: []w.StackPart{" + ", ".join(card(y) if y.has("tc-card") else button(y) for y in x.els()) + "}}"
+    if x.tag == "svg" and x.has("tc-brand__logo"):
+        return logo(x)
+    if x.has("tc-win__note"):
+        return "w.WindowNote{Text: " + q(x.text()) + "}"
+    if x.has("tc-diag"):
+        return diag(x)
+    if x.has("tc-fset"):
+        return fset(x)
+    if x.tag == "textarea":
+        return areaw(x)
+    if x.has("tc-dim"):
+        return dimx(x)
+    raise SystemExit("window part? " + x.tag + " " + str(x.cls))
+
+
+def windoww(x):
+    gap = {9: "WindowGap9", 10: "WindowGap10", 12: "WindowGap12", 13: "WindowGap13", 14: "WindowGap14"}
+    g = [v for n, v in gap.items() if x.has("tc-stack--gap-%d" % n)][0]
+    return ("w.Window{Items: []w.WindowPart{" + ", ".join(windowpart(y) for y in x.els()) + "}, Gap: w." + g +
+            (", Small: true" if x.has("tc-win__sheet--pad12") else "") + "}")
+
+
+def pagepart(x):
+    if x.has("tc-auth"):
+        return auth(x)
+    if x.has("tc-win__body--pad16-20") or x.has("tc-win__sheet--pad12"):
+        return windoww(x)
+    if x.has("tc-msg"):
+        return msg(x)
+    if x.has("tc-form"):
+        return formw(x)
+    for c, t in (("tc-print__h1", "PrintTitle"), ("tc-print__sources", "PrintSources"), ("tc-print__rub", "PrintRubric"), ("tc-print__foot", "PrintFoot")):
+        if x.has(c):
+            return "w." + t + "{Text: " + q(x.text()) + "}"
+    if x.has("tc-print__row"):
+        return printrow(x)
+    raise SystemExit("page part? " + x.tag + " " + str(x.cls))
+
+
+def pagew(root):
+    v = [t for c, t in PAGE_VARIANTS if root.has(c)]
+    return "w.Page{Items: []w.PagePart{" + ", ".join(pagepart(x) for x in root.els()) + "}" + (", Variant: w." + v[0] if v else "") + "}"
+
+
+def pushw(x):
+    """A pushed group: its buttons and words, in a face of its own when its
+    classes name one."""
+    items = []
+    for k in x.kids:
+        if isinstance(k, str):
+            if textpart(x, k):
+                items.append(textpart(x, k))
+        else:
+            items.append(push_item(k))
+    face = " ".join(c for c in x.cls if c != "tc-push")
+    f = ", Face: faceOf(w." + _faces[face] + ")" if face in _faces else ""
+    return "w.Push{Items: []w.PushPart{" + ", ".join(items) + "}" + f + "}"

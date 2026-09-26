@@ -8,15 +8,9 @@ import (
 	"sort"
 	"strings"
 
-	"golang.org/x/net/html"
-
 	"carrel.dev/typecase/internal/fragment"
 	"carrel.dev/typecase/internal/screens"
 )
-
-// catalogOnly are frames without a mark that still go to the catalog, not to
-// a route (Р-16): the desktop app's user menu and the tray menu.
-var catalogOnly = map[string]bool{"m-desktop-2": true, "m-desktop-8": true}
 
 var gapRow = regexp.MustCompile(`(?m)^\| ([a-z0-9-]+) \|`)
 
@@ -31,7 +25,7 @@ func CheckFrameCoverage(p ModulePaths) error {
 	}
 	want := map[string]bool{}
 	for _, f := range m.Frames {
-		if routeFrame(f) {
+		if f.Route() {
 			want[f.ID] = true
 		}
 	}
@@ -86,35 +80,4 @@ func gapFrames(md string) []string {
 		out = append(out, m[1])
 	}
 	return out
-}
-
-// routeFrame says whether a frame is a route: its label carries no mark
-// (span.frag) and it is not one of the menus kept for the catalog.
-func routeFrame(f *fragment.Frame) bool {
-	if catalogOnly[f.ID] {
-		return false
-	}
-	for c := f.Node.FirstChild; c != nil; c = c.NextSibling {
-		if c.Type == html.ElementNode && hasClassAttr(c, "frame-label") {
-			for s := c.FirstChild; s != nil; s = s.NextSibling {
-				if s.Type == html.ElementNode && hasClassAttr(s, "frag") {
-					return false
-				}
-			}
-		}
-	}
-	return true
-}
-
-func hasClassAttr(n *html.Node, cls string) bool {
-	for _, a := range n.Attr {
-		if a.Key == "class" {
-			for _, c := range strings.Fields(a.Val) {
-				if c == cls {
-					return true
-				}
-			}
-		}
-	}
-	return false
 }

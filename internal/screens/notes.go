@@ -568,7 +568,7 @@ func Notes20() Screen {
 						Items: []w.DocLayoutPart{
 							w.Doc{
 								Items: []w.DocPart{
-									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle},
+									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
 											w.Field{
@@ -602,6 +602,7 @@ func Notes20() Screen {
 										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
 										Variant: w.AreaBody,
 										Focus:   true,
+										Label:   "Text",
 									},
 									w.DocNote{
 										Parts: []w.Inline{
@@ -703,7 +704,7 @@ func Notes4() Screen {
 						Items: []w.DocLayoutPart{
 							w.Doc{
 								Items: []w.DocPart{
-									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true},
+									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
 											w.Field{
@@ -768,6 +769,7 @@ func Notes4() Screen {
 									w.Area{
 										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
 										Variant: w.AreaBody,
+										Label:   "Text",
 									},
 									w.DocNote{
 										Parts: []w.Inline{
@@ -893,6 +895,7 @@ func Notes5() Screen {
 							Text:    "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.",
 							Variant: w.AreaBodySm,
 							Focus:   true,
+							Label:   "Text",
 						},
 					},
 					Foot: []w.SheetFootPart{

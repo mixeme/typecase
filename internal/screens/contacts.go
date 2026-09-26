@@ -534,7 +534,7 @@ func Contacts3() Screen {
 									},
 									w.Field{
 										Label: "Note",
-										Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день."}},
+										Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}},
 										Width: w.FieldFull,
 									},
 									w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},

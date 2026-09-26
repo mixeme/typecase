@@ -227,6 +227,7 @@ func Mail1() Screen {
 						w.Area{
 							Text:    "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.",
 							Variant: w.AreaLetter,
+							Label:   "Text",
 						},
 						w.Sec{
 							Items: []w.SecPart{

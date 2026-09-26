@@ -187,7 +187,7 @@ def dimparts(e):
         elif k.tag == "b":
             parts.append("w.Strong(" + q(k.text()) + ")")
         else:
-            raise SystemExit("dim part? " + str(k.cls))
+            parts.append(inline_el(k))
     return parts
 
 
@@ -320,6 +320,9 @@ def areaw(x):
     for a, n in (("name", "Name"), ("aria-label", "Label")):
         if x.attrs.get(a):
             f.append(n + ": " + q(x.attrs[a]))
+    if not x.attrs.get("aria-label"):
+        # A text field the frame leaves unnamed still needs its name (a11y).
+        f.append('Label: "Text"')
     return "w.Area{" + ", ".join(f) + "}"
 
 

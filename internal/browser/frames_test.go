@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/chromedp/cdproto/emulation"
 	"github.com/chromedp/chromedp"
 
 	"carrel.dev/typecase"
@@ -254,5 +255,34 @@ func TestFramesTablet(t *testing.T) {
 				t.Errorf("%s @tablet %dx%d: %s", r.Frame, v[0], v[1], d)
 			}
 		}
+	}
+}
+
+// TestFramesPrint (Р-16): a page on paper is compared as printed too — the
+// print medium emulated — at an A4 width.
+func TestFramesPrint(t *testing.T) {
+	needChrome(t)
+	_, run, done, frames := framesPage(t)
+	defer done()
+	n := 0
+	for _, r := range screens.Routes {
+		if !strings.Contains(frames[r.Frame], "tc-root--print") {
+			continue
+		}
+		n++
+		if err := run(emulation.SetEmulatedMedia().WithMedia("print")); err != nil {
+			t.Fatal(err)
+		}
+		diffs, broken, err := compareFrame(run, frames[r.Frame], r.Screen().Render(), 794, 8)
+		_ = run(emulation.SetEmulatedMedia().WithMedia(""))
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, d := range append(diffs, broken...) {
+			t.Errorf("%s printed: %s", r.Frame, d)
+		}
+	}
+	if n == 0 {
+		t.Error("no page on paper among the routes")
 	}
 }

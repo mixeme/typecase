@@ -19,18 +19,26 @@ const FramesPairJS = `(function(frameHTML, screenHTML, w){
   // page's (theme.js puts it on <html>), so the screen gets it from above.
   var fr = f.querySelector(":scope > .tc-root"), th = fr && fr.getAttribute("data-tc-theme");
   if (th) sf.setAttribute("data-tc-theme", th);
-  // A frame drawn inside the desktop window's drawing (mk-*): the drawing
-  // is page chrome, not the screen's, so the screen is put inside a copy of
-  // it — the window, its title bar and status line — and both sides lay out
-  // alike; the walk leaves the drawing out on both.
-  var fwin = fr && fr.querySelector(":scope > .mk-win"), sroot = sf.querySelector(":scope > .tc-root");
-  if (fwin && sroot) {
-    var swin = fwin.cloneNode(false), moved = false;
-    for (var c = fwin.firstElementChild; c; c = c.nextElementSibling) {
-      if (c.classList.contains("mk-titlebar") || c.classList.contains("mk-status")) { swin.appendChild(c.cloneNode(true)); continue; }
-      if (!moved) { while (sroot.firstChild) swin.appendChild(sroot.firstChild); moved = true; }
+  // The desktop drawing (mk-*) is page chrome, not the screen's: a window
+  // with its title bar and status line, a notification of the system. The
+  // screen is laid out in a copy of it — the chrome copied, the screen's own
+  // nodes put where the frame has product — so both sides lay out alike; the
+  // walk leaves the drawing out on both.
+  var sroot = sf.querySelector(":scope > .tc-root");
+  function isChrome(c){ return c.classList.contains("mk-titlebar") || c.classList.contains("mk-status") || c.classList.contains("mk-toast"); }
+  function isWin(c){ return !isChrome(c) && Array.prototype.some.call(c.classList, function(x){ return x.indexOf("mk-") === 0; }); }
+  function rebuild(fparent, into, pool){
+    for (var c = fparent.firstElementChild; c; c = c.nextElementSibling) {
+      if (isChrome(c)) { into.appendChild(c.cloneNode(true)); continue; }
+      if (isWin(c)) { var w2 = c.cloneNode(false); rebuild(c, w2, pool); into.appendChild(w2); continue; }
+      if (pool.length) into.appendChild(pool.shift());
     }
-    sroot.appendChild(swin);
+  }
+  if (fr && sroot && Array.prototype.some.call(fr.children, function(c){ return isChrome(c) || isWin(c); })) {
+    var pool = Array.prototype.slice.call(sroot.children);
+    pool.forEach(function(c){ c.remove(); });
+    rebuild(fr, sroot, pool);
+    pool.forEach(function(c){ sroot.appendChild(c); });
   }
   s.innerHTML = "";
   s.appendChild(sf);

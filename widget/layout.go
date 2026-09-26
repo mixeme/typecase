@@ -30,6 +30,7 @@ type LinePart interface {
 
 func (Button) linePart() {}
 func (Input) linePart()  {}
+func (Pick) linePart()   {}
 func (Kbd) linePart()    {}
 func (Dim) linePart()    {}
 func (Check) linePart()  {}

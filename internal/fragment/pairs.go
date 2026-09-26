@@ -144,7 +144,7 @@ func (m *Mockup) Pairs() []PairUse {
 				for _, b := range BlockClasses(n) {
 					counts[b]++
 				}
-				if child := Block(n); child != "" {
+				if child := f.blockOf(n); child != "" {
 					if parent != "" {
 						p := Pair{parent, child}
 						u, ok := byPair[p]
@@ -190,7 +190,7 @@ func (m *Mockup) Blocks() []string {
 				if hasClass(n, "frame-label") || chrome(n) {
 					return
 				}
-				if b := Block(n); b != "" && !seen[b] {
+				if b := f.blockOf(n); b != "" && !seen[b] {
 					seen[b] = true
 					out = append(out, b)
 				}

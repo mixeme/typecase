@@ -38,6 +38,7 @@ var invariantBindings = map[string][]string{
 	"Overlay":     {"gate:container-pairs", "gate:widget-fragments"},
 	"Dialog":      {"gate:enumerations", "gate:widget-fragments", "gate:widget-fragments"},
 	"Auth":        {"gate:container-pairs", "gate:widget-fragments"},
+	"Page":        {"gate:container-pairs", "gate:enumerations", "gate:widget-fragments"},
 	"Head":        {"gate:widget-fragments", "gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
 	"Bar":         {"browser:bar-one-row", "gate:widget-fragments", "gate:widget-fragments"},
 	"Main":        {"gate:css-from-mockup", "gate:widget-fragments", "gate:widget-fragments"},
