@@ -160,7 +160,7 @@ func (f *Frame) all(cls string) []*html.Node {
 	var walk func(n *html.Node)
 	walk = func(n *html.Node) {
 		if n.Type == html.ElementNode {
-			if hasClass(n, "frame-label") {
+			if hasClass(n, "frame-label") || chrome(n) {
 				return
 			}
 			if hasClass(n, cls) && Block(n) == cls {
@@ -229,7 +229,7 @@ func (m *Mockup) norm(n *html.Node, pre bool) *Node {
 		}
 	}
 	sort.Strings(out.Attrs)
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
+	for _, c := range children(n) {
 		switch c.Type {
 		case html.ElementNode:
 			out.Children = append(out.Children, m.norm(c, pre))
@@ -279,7 +279,7 @@ func (m *Mockup) own(n *html.Node, pre, root, anonymous bool) *Node {
 	if n.DataAtom == atom.Textarea || n.DataAtom == atom.Pre {
 		pre = true
 	}
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
+	for _, c := range children(n) {
 		switch c.Type {
 		case html.ElementNode:
 			out.Children = append(out.Children, m.own(c, pre, false, anonymous))
@@ -467,6 +467,52 @@ func hasClass(n *html.Node, cls string) bool {
 		}
 	}
 	return false
+}
+
+// chrome says whether n is the desktop window's frame: its title bar or
+// status line. The frame is page chrome, not product, and is not seen with its
+// contents.
+func chrome(n *html.Node) bool {
+	if n.Type != html.ElementNode {
+		return false
+	}
+	for _, c := range strings.Fields(attr(n, "class")) {
+		if c == "mk-titlebar" || c == "mk-status" {
+			return true
+		}
+	}
+	return false
+}
+
+// window says whether n is another element of the desktop drawing (mk-*):
+// the window, a notification, the tray menu. It is transparent — its children
+// stand in its place — because what it holds is the product's.
+func window(n *html.Node) bool {
+	if n.Type != html.ElementNode || chrome(n) {
+		return false
+	}
+	for _, c := range strings.Fields(attr(n, "class")) {
+		if strings.HasPrefix(c, "mk-") {
+			return true
+		}
+	}
+	return false
+}
+
+// children lists n's child nodes with the desktop drawing unwrapped — the
+// window's children stand in its place — and the window's frame left out.
+func children(n *html.Node) []*html.Node {
+	var out []*html.Node
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		switch {
+		case window(c):
+			out = append(out, children(c)...)
+		case chrome(c):
+		default:
+			out = append(out, c)
+		}
+	}
+	return out
 }
 
 func text(n *html.Node) string {

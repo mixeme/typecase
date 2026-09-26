@@ -78,6 +78,18 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   chosen; `Skel` is the placeholder. In the mockup the tree's icons lose the
   four different `svg` wrappers that drew the same icon and keep the plain one
   the tree's CSS sizes.
+- **The shell's pieces.** `Top` with `Brand` (a `Logo` or a section's title),
+  `Search`, `UserMenu`; `Nav` names its current section by number;
+  `RailSec`, `RailFoot` with `RailStatus` (the dot's colour follows the
+  state) and the build line; `Emblem` is a service's three-part mark from the
+  sprite (`#<symbol>-stroke`, `-fill`, `-accent`); `Crumbs`, `Acts`, `Split`,
+  `Zone`. Renamed in the mockup and the CSS: `tc-davmark` is `tc-emblem`
+  (parts `__stroke`, `__fill`, `__accent`), `tc-railnote` is
+  `tc-railstatus`. The desktop window's title bar and status line are page
+  chrome, read past by the fragment reader; its classes that sat in the
+  product's namespace (`tc-win--*`, `tc-win__bar`, `tc-winbtn`,
+  `tc-win__toast`, `tc-win__title`, `tc-tray__row`) are `mk-*` in the page's
+  style now.
 
 ### Mockup
 

@@ -140,7 +140,15 @@ body:has(#w390:checked) .tc-root{width:100%}
 .mk-winbtns svg{width:11px;height:11px;stroke:var(--tc-muted);stroke-width:1.2;fill:none}
 .mk-status{height:26px;display:flex;align-items:center;gap:14px;padding:0 12px;border-top:.5px solid var(--tc-hair);
   background:var(--tc-surface);font-size:11px;color:var(--tc-dusty)}
-/* names-without-rule: mk-status__text mk-dot */
+/* names-without-rule: mk-status__text */
+.mk-win--420.mk-win--420{max-width:420px;margin:0 auto}
+.mk-win--520.mk-win--520{max-width:520px;margin:0 auto}
+.mk-win--560.mk-win--560{max-width:560px;margin:0 auto}
+.mk-titlebar--h30.mk-titlebar--h30{height:30px}
+.mk-winbtns__btn--h30.mk-winbtns__btn--h30{height:30px}
+.mk-toast--mid.mk-toast--mid{margin:0 auto}
+.mk-toast__title.mk-toast__title{font-size:13.5px;font-weight:600}
+.mk-tray__row--muted.mk-tray__row--muted{color:var(--tc-muted)}
 .mk-status__dot{width:6px;height:6px;border-radius:50%;background:var(--tc-accent);display:inline-block;margin-right:5px}
 .mk-status__dot.is-off{background:var(--tc-danger)}
 .mk-toast{width:330px;border:.5px solid var(--tc-edge);border-radius:7px;background:var(--tc-surface);padding:11px 12px;
@@ -210,15 +218,15 @@ body:has(#w390:checked) .tc-root{width:100%}
    под правилом значков fill:none вал и полотно не выжили бы. Меньше 16 px не рисуется.
    Не отвечает — знак на плашке тревоги; сам знак не перекрашивается: красное полотно
    в 7×4 px не читалось. Плашка 24 px — ниже кнопок ряда (26), строка не прыгает. */
-.tc-davmark{width:16px;height:16px;flex:none}
-.tc-davmark__threads{fill:none;stroke:var(--tc-ink);stroke-width:1;stroke-linecap:round}
-.tc-davmark__beam{fill:var(--tc-ink);stroke:none}
-.tc-davmark__cloth{fill:var(--tc-accent);stroke:none}
-.tc-davmark.is-alert{box-sizing:content-box;padding:3px;border:1px solid var(--tc-danger);border-radius:3px;
+.tc-emblem{width:16px;height:16px;flex:none}
+.tc-emblem__stroke{fill:none;stroke:var(--tc-ink);stroke-width:1;stroke-linecap:round}
+.tc-emblem__fill{fill:var(--tc-ink);stroke:none}
+.tc-emblem__accent{fill:var(--tc-accent);stroke:none}
+.tc-emblem.is-alert{box-sizing:content-box;padding:3px;border:1px solid var(--tc-danger);border-radius:3px;
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
-.tc-nav .tc-davmark{width:16px;height:16px;opacity:1}
+.tc-nav .tc-emblem{width:16px;height:16px;opacity:1}
 /* в подвале приложения — не кнопка: прижат вправо, чтобы не читался равным кнопкам */
-.tc-railfoot > .tc-davmark{margin-left:auto}
+.tc-railfoot > .tc-emblem{margin-left:auto}
 .tc-brand .tc-brand__logo{width:56px;height:22px}
 .tc-badge.is-local{border-color:transparent;color:var(--tc-danger);
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
@@ -288,10 +296,10 @@ body:has(#w390:checked) .tc-root{width:100%}
 .tc-railfoot--strip{width:var(--tc-rail);border-right:.5px solid var(--tc-rule)}
 /* Баннер подвала: важное состояние, которое должно быть на виду, чтобы за ним
    не ходить в раздел. Первая строка — что сейчас, вторая — подробность. */
-.tc-railnote{flex:1 1 100%;font-size:11px;line-height:1.5}
-.tc-railnote.is-alert{color:var(--tc-danger)}
-.tc-railnote.is-off{color:var(--tc-dusty)}
-.tc-railnote .tc-mono{color:inherit}
+.tc-railstatus{flex:1 1 100%;font-size:11px;line-height:1.5}
+.tc-railstatus.is-alert{color:var(--tc-danger)}
+.tc-railstatus.is-off{color:var(--tc-dusty)}
+.tc-railstatus .tc-mono{color:inherit}
 /* Последняя строка рейла: версия и ссылка на «о программе». C-13 (AGPL) требует видимую
    ссылку на исходники именно запущенной версии — она стоит в оболочке, а не только
    на странице без входа. Занимает всю ширину подвала, поэтому переносится под кнопки. */
@@ -809,7 +817,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
     padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
   .tc-shell__rail .tc-nav .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
   .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
-  .tc-shell__rail .tc-nav .tc-davmark{width:16px;height:16px}
+  .tc-shell__rail .tc-nav .tc-emblem{width:16px;height:16px}
   .tc-shell__rail .tc-num{display:none}
   .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
     padding:8px;gap:8px;overflow-x:clip}
@@ -1009,14 +1017,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-stack__item-aside.tc-stack__item-aside{font-size:11.5px;color:var(--tc-dusty);margin-top:6px}
 .tc-railsec__tags.tc-railsec__tags{padding:0 16px}
 .tc-win__note.tc-win__note{font-size:13px;color:var(--tc-muted)}
-.tc-tray__row.tc-tray__row{color:var(--tc-muted)}
-.tc-win--420.tc-win--420{max-width:420px;margin:0 auto}
-.tc-win__bar.tc-win__bar{height:30px}
 .tc-win__sheet--pad12.tc-win__sheet--pad12{background:var(--tc-surface);padding:12px}
-.tc-win--520.tc-win--520{max-width:520px;margin:0 auto}
-.tc-win__toast.tc-win__toast{margin:0 auto}
-.tc-win__title.tc-win__title{font-size:13.5px;font-weight:600}
-.tc-win--560.tc-win--560{max-width:560px;margin:0 auto}
 .tc-sec__acts.tc-sec__acts{margin-top:7px}
 .tc-field__photo-row.tc-field__photo-row{align-items:flex-start;display:flex;gap:14px}
 .tc-field__photo-side.tc-field__photo-side{align-items:flex-start}
@@ -1414,7 +1415,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-dot--danger.tc-dot--danger{height:6px;border-radius:50%;background:var(--tc-danger);margin-right:5px;display:inline-block;width:6px}
 .tc-dot--dusty.tc-dot--dusty{height:6px;border-radius:50%;background:var(--tc-dusty);margin-right:5px;display:inline-block;width:6px}
 
-.tc-winbtn.tc-winbtn{height:30px}
 .tc-print__num.tc-print__num{font-family:var(--tc-font-mono);white-space:nowrap}
 .tc-dim--t10-5.tc-dim--t10-5{font-size:10.5px}
 
@@ -1590,9 +1590,9 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   <symbol id="i-archive" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4" rx="1"/><path d="M5 9v10h14V9M10 13h4"/></symbol>
   <!-- davloom: три нити — на 15 px пять сливаются. -->
   <g id="qr-demo"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM9 0h1v1h-1zM11 0h1v1h-1zM13 0h1v1h-1zM14 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM21 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM11 1h1v1h-1zM13 1h1v1h-1zM14 1h1v1h-1zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM9 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM9 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM15 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM10 7h1v1h-1zM15 7h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM2 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM10 9h1v1h-1zM11 9h1v1h-1zM18 9h1v1h-1zM23 9h1v1h-1zM24 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM15 10h1v1h-1zM16 10h1v1h-1zM17 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM24 10h1v1h-1zM0 11h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM8 11h1v1h-1zM10 11h1v1h-1zM15 11h1v1h-1zM16 11h1v1h-1zM17 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM13 12h1v1h-1zM17 12h1v1h-1zM18 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM3 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM23 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM1 15h1v1h-1zM7 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM15 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM15 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM17 17h1v1h-1zM19 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM24 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM13 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM6 21h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM14 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM23 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM9 22h1v1h-1zM11 22h1v1h-1zM14 22h1v1h-1zM18 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM24 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM0 24h1v1h-1zM1 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1z" fill="#17211C"/></g>
-  <g id="davloom-threads"><path d="M1 2 C3 2 5 4 7 5"/><path d="M1 5 C4 5 6 7 7 7"/><path d="M1 8 L7 8"/><path d="M1 11 C4 11 6 9 7 9"/><path d="M1 14 C3 14 5 12 7 11"/></g>
-  <g id="davloom-beam"><rect x="7" y="3" width="2" height="10"/></g>
-  <g id="davloom-cloth"><rect x="9" y="6" width="7" height="4"/></g>
+  <g id="davloom-stroke"><path d="M1 2 C3 2 5 4 7 5"/><path d="M1 5 C4 5 6 7 7 7"/><path d="M1 8 L7 8"/><path d="M1 11 C4 11 6 9 7 9"/><path d="M1 14 C3 14 5 12 7 11"/></g>
+  <g id="davloom-fill"><rect x="7" y="3" width="2" height="10"/></g>
+  <g id="davloom-accent"><rect x="9" y="6" width="7" height="4"/></g>
   <symbol id="i-all" viewBox="0 0 24 24"><path d="M4 8l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4"/><path d="M4 16.5l8 4 8-4"/></symbol>
   <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
   <symbol id="i-con" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.5 3.1-5.5 7-5.5s7 2 7 5.5"/></symbol>
@@ -2521,15 +2521,15 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 <div class="frame" data-frame="components-35">
   <div class="frame-label"><span>Баннер подвала рейла</span><span class="frag">компонент</span><i>девять состояний</i></div>
   <div class="tc-root tc-root--on-surface tc-root--flat tc-root--wrap">
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote is-off"><span class="tc-dot--dusty"></span>davloom is off<br><span class="tc-dim tc-dim--t11">No device connects until it is started.</span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>davloom is not responding<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>No backup for 9 days<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-07 03:10</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
-  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>2 checks failed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus is-off"><span class="tc-dot--dusty"></span>davloom is off<br><span class="tc-dim tc-dim--t11">No device connects until it is started.</span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>davloom is not responding<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>No backup for 9 days<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-07 03:10</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
+  <div class="tc-railfoot tc-railfoot--strip"><div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>2 checks failed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div></div>
 </div>
 </div>
 </figure>
@@ -2547,14 +2547,14 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
       <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
       <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
       <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-      <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+      <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
       <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
     </div>
   <div class="tc-railfoot tc-railfoot--strip">
       <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
       <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
       <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-      <svg class="tc-davmark is-alert" viewBox="0 0 16 16" role="img"><title>davloom is not responding · last response 2026-08-16 09:12</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+      <svg class="tc-emblem is-alert" viewBox="0 0 16 16" role="img"><title>davloom is not responding · last response 2026-08-16 09:12</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
       <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
     </div>
 </div>
@@ -2620,7 +2620,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
           <button class="tc-btn" title="New address book" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -3462,7 +3462,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -3950,7 +3950,7 @@ SEQUENCE  2</div>
           <button class="tc-btn" title="New list" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -4326,7 +4326,7 @@ Read  2 min ago · not changed on server</div>
           <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -4958,7 +4958,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -5040,7 +5040,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -5112,7 +5112,7 @@ Read  2 min ago</div>
               <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -5433,7 +5433,7 @@ Read  2 min ago</div>
               <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -5542,7 +5542,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -5756,7 +5756,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -5868,7 +5868,7 @@ Read  2 min ago</div>
               <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -5978,7 +5978,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -6058,7 +6058,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -6223,7 +6223,7 @@ Read  2 min ago</div>
       <div class="tc-top">
         <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
         <span class="tc-line tc-top__search">
-          <div class="tc-search is-focus tc-search--full" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" value="Search everything…Esc" aria-label="Search everything…Esc"></div>
+          <div class="tc-search is-focus tc-search--full" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" value="Search everything…" aria-label="Search everything…"></div>
           <span class="tc-top__suggest">
             <div class="tc-menu tc-menu--full">
               <button class="tc-rubric tc-menu__item" type="button" role="menuitem">Recent searches</button>
@@ -6346,7 +6346,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -7000,7 +7000,7 @@ Read  2 min ago</div>
             <button class="tc-btn" title="New address book" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -7104,7 +7104,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -7667,15 +7667,15 @@ Read  2 min ago</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-          <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+          <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
         </div>
       </div>
       <div class="tc-railfoot">
-        <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-        <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+        <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+        <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
         <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
       </div>
     </div>
@@ -7750,15 +7750,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -7818,15 +7818,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -7932,15 +7932,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -7983,15 +7983,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8080,7 +8080,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8212,15 +8212,15 @@ Read  2 min ago</div>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8397,15 +8397,15 @@ Read  2 min ago</div>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8447,15 +8447,15 @@ Read  2 min ago</div>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -8499,15 +8499,15 @@ Read  2 min ago</div>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -8571,15 +8571,15 @@ Read  2 min ago</div>
               <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -8668,7 +8668,7 @@ Read  2 min ago</div>
               <button class="tc-btn is-focus" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -8775,7 +8775,7 @@ Read  2 min ago</div>
               <button class="tc-btn is-focus" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -8841,15 +8841,15 @@ Read  2 min ago</div>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -8936,15 +8936,15 @@ Read  2 min ago</div>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -9026,15 +9026,15 @@ Read  2 min ago</div>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -9129,15 +9129,15 @@ Read  2 min ago</div>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -9330,15 +9330,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -9447,15 +9447,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -9529,15 +9529,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -9623,15 +9623,15 @@ Read  2 min ago</div>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -9700,15 +9700,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -9757,15 +9757,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -9820,15 +9820,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="is-on tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -9918,15 +9918,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="is-on tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="is-on tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -9993,15 +9993,15 @@ Read  2 min ago</div>
               <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="is-on tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+              <a class="is-on tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
               <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -10093,15 +10093,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10204,15 +10204,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10338,15 +10338,15 @@ Read  2 min ago</div>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10486,15 +10486,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10539,15 +10539,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10605,15 +10605,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -10689,15 +10689,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -11097,7 +11097,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
               <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
               <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
               <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-              <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+              <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -11464,15 +11464,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-            <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
             <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
             <a class="is-on tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -11736,15 +11736,15 @@ https://carrel.example/api/backup/run?job=personal</textarea>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-                <a class="tc-nav__item" href="#"><svg class="tc-davmark" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>davloom<span class="tc-num">3</span></a>
+                <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
                 <a class="is-on tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
                 <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
               </div>
             </div>
             <div class="tc-railfoot">
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-              <div class="tc-railnote"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+              <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
               <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
             </div>
           </div>
@@ -12028,8 +12028,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -12153,8 +12153,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -12234,8 +12234,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -12335,8 +12335,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -12410,8 +12410,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -12466,8 +12466,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
           </div>
         </div>
         <div class="tc-railfoot">
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
-          <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
@@ -12549,8 +12549,8 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             </div>
           </div>
           <div class="tc-railfoot">
-            <div class="tc-railnote is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
-            <div class="tc-railnote"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -13250,7 +13250,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -13298,7 +13298,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -13644,7 +13644,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New address book" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -13757,7 +13757,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -14155,7 +14155,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -14240,7 +14240,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New notebook" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -14366,7 +14366,7 @@ Read  2 min ago · not changed on server</div>
             <button class="tc-btn" title="New calendar" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
             <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
             <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-            <svg class="tc-davmark" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-threads" class="tc-davmark__threads"/><use href="#davloom-beam" class="tc-davmark__beam"/><use href="#davloom-cloth" class="tc-davmark__cloth"/></svg>
+            <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
@@ -14616,7 +14616,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-line tc-line--gap-8">
             <button class="tc-btn is-primary" type="button">Run</button>
             <button class="tc-btn" type="button">Back</button>
-            <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap"><span class="mk-dot tc-dot--accent"></span>server stopped</span>
+            <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap"><span class="tc-dot--accent"></span>server stopped</span>
           </div>
         </div>
         <div class="mk-status">
@@ -14682,8 +14682,8 @@ Read  2 min ago · not changed on server</div>
         <div class="mk-tray__row"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3" fill="none"><use href="#i-refresh"/></svg>Poll now</div>
         <div class="mk-tray__row">Open Carrel</div>
         <span class="mk-tray__sep"></span>
-        <div class="mk-tray__row tc-tray__row"><span class="mk-dot tc-dot--danger"></span>baikal unavailable</div>
-        <div class="mk-tray__row tc-tray__row">Quit</div>
+        <div class="mk-tray__row mk-tray__row--muted"><span class="tc-dot--danger"></span>baikal unavailable</div>
+        <div class="mk-tray__row mk-tray__row--muted">Quit</div>
       </div>
     </div>
   </div>
@@ -14696,11 +14696,11 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="m-desktop-9">
     <div class="frame-label"><span>Заметка из любой программы</span><i>Ctrl+Shift+N, окно поверх всего</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad18">
-      <div class="mk-win tc-win--420">
-        <div class="mk-titlebar tc-win__bar">
+      <div class="mk-win mk-win--420">
+        <div class="mk-titlebar mk-titlebar--h30">
           <svg width="13" height="13" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" class="tc-ico--accent"><use href="#i-quill"/></svg>
           <span class="mk-titlebar__title">New note</span>
-          <span class="mk-winbtns"><span class="mk-winbtns__btn tc-winbtn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
+          <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
         </div>
         <div class="tc-stack tc-stack--gap-9 tc-win__sheet--pad12">
           <textarea class="tc-in is-area is-focus tc-in--minh104-t13-5">Спросить у Виктора про миграцию — успеет ли до заморозки.</textarea>
@@ -14733,11 +14733,11 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="m-desktop-10">
     <div class="frame-label"><span>Встреча из трея</span><i>тот же лист, тем же окном</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad18">
-      <div class="mk-win tc-win--520">
-        <div class="mk-titlebar tc-win__bar">
+      <div class="mk-win mk-win--520">
+        <div class="mk-titlebar mk-titlebar--h30">
           <svg width="13" height="13" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" class="tc-ico--accent"><use href="#i-cal"/></svg>
           <span class="mk-titlebar__title">New event</span>
-          <span class="mk-winbtns"><span class="mk-winbtns__btn tc-winbtn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
+          <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
         </div>
         <div class="tc-stack tc-stack--gap-9 tc-win__sheet--pad12">
           <div class="tc-line tc-sheet__fields">
@@ -14799,12 +14799,12 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="m-desktop-11">
     <div class="frame-label"><span>Напоминания</span><i>системное уведомление и его настройка</i></div>
     <div class="tc-root tc-stack tc-stack--gap-14 tc-root--on-bg tc-root--pad18">
-      <div class="mk-toast tc-win__toast">
+      <div class="mk-toast mk-toast--mid">
         <div class="mk-toast__head">
           <svg viewBox="0 0 24 24" stroke-width="1.3" fill="none" class="tc-ico--muted"><use href="#i-cal"/></svg>
           Carrel · in 10 minutes
         </div>
-        <div class="tc-win__title">Синк-ап по релизу</div>
+        <div class="mk-toast__title">Синк-ап по релизу</div>
         <div class="tc-sec__note"><span class="tc-mono">10:00 – 11:00</span> · Переговорная 2 · nextcloud · Личный</div>
         <div class="tc-line tc-line--gap-6 tc-card__top2"><button class="tc-btn is-sm" type="button">Open</button><button class="tc-btn is-sm" type="button">Snooze 5 min</button></div>
       </div>
@@ -14844,10 +14844,10 @@ Read  2 min ago · not changed on server</div>
 <div class="frame cap660" data-frame="m-desktop-12">
   <div class="frame-label"><span>Выход из учётной записи · удалять ли данные</span><i>единственное место, где спрашивают</i></div>
   <div class="tc-root tc-root--on-bg tc-root--pad18">
-    <div class="mk-win tc-win--560">
-      <div class="mk-titlebar tc-win__bar">
+    <div class="mk-win mk-win--560">
+      <div class="mk-titlebar mk-titlebar--h30">
         <span class="mk-titlebar__title">Sign out</span>
-        <span class="mk-winbtns"><span class="mk-winbtns__btn tc-winbtn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
+        <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
       </div>
       <div class="tc-stack tc-stack--gap-10 tc-win__sheet--pad12">
         <div class="tc-msg tc-msg--flush"><b>Sign out of <span class="tc-mono">carrel.example</span>?</b> The app goes back to the first screen, where the mode is chosen again — a server or a local run. <b>Your other devices stay signed in</b> — those sessions end in Settings → Account, and they end there whether this app is running or not.</div>

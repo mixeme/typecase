@@ -119,3 +119,32 @@ func TestBlockAndMixins(t *testing.T) {
 		t.Fatalf("tc-close is built on tc-btn: %v", err)
 	}
 }
+
+func TestWindowChrome(t *testing.T) {
+	m, err := Parse(`<div class="frame" data-frame="m-1"><div class="tc-root tc-shell"><div class="mk-win">
+<div class="mk-titlebar"><span class="mk-titlebar__title">App</span><button class="tc-btn" type="button">x</button></div>
+<div class="tc-top"><button class="tc-btn" type="button">New</button></div>
+<div class="mk-status"><span class="tc-mono">ok</span></div></div></div></div>`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	n, err := m.Block(Ref{Frame: "m-1", Class: "tc-shell", N: 1})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got, want := Skeleton(m.Own(n, false)), "div.tc-root.tc-shell(tc-top)"; got != want {
+		t.Errorf("own = %s, want %s: the window is transparent and its frame unseen", got, want)
+	}
+	b, err := m.Block(Ref{Frame: "m-1", Class: "tc-btn", N: 1})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if text(b) != "New" {
+		t.Errorf("the first button is %q: a button in the title bar was counted", text(b))
+	}
+	for _, p := range m.Pairs() {
+		if p.Child == "tc-mono" {
+			t.Errorf("the status line's %v was paired", p)
+		}
+	}
+}

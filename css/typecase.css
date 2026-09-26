@@ -37,15 +37,15 @@
    под правилом значков fill:none вал и полотно не выжили бы. Меньше 16 px не рисуется.
    Не отвечает — знак на плашке тревоги; сам знак не перекрашивается: красное полотно
    в 7×4 px не читалось. Плашка 24 px — ниже кнопок ряда (26), строка не прыгает. */
-.tc-davmark{width:16px;height:16px;flex:none}
-.tc-davmark__threads{fill:none;stroke:var(--tc-ink);stroke-width:1;stroke-linecap:round}
-.tc-davmark__beam{fill:var(--tc-ink);stroke:none}
-.tc-davmark__cloth{fill:var(--tc-accent);stroke:none}
-.tc-davmark.is-alert{box-sizing:content-box;padding:3px;border:1px solid var(--tc-danger);border-radius:3px;
+.tc-emblem{width:16px;height:16px;flex:none}
+.tc-emblem__stroke{fill:none;stroke:var(--tc-ink);stroke-width:1;stroke-linecap:round}
+.tc-emblem__fill{fill:var(--tc-ink);stroke:none}
+.tc-emblem__accent{fill:var(--tc-accent);stroke:none}
+.tc-emblem.is-alert{box-sizing:content-box;padding:3px;border:1px solid var(--tc-danger);border-radius:3px;
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
-.tc-nav .tc-davmark{width:16px;height:16px;opacity:1}
+.tc-nav .tc-emblem{width:16px;height:16px;opacity:1}
 /* в подвале приложения — не кнопка: прижат вправо, чтобы не читался равным кнопкам */
-.tc-railfoot > .tc-davmark{margin-left:auto}
+.tc-railfoot > .tc-emblem{margin-left:auto}
 .tc-brand .tc-brand__logo{width:56px;height:22px}
 .tc-badge.is-local{border-color:transparent;color:var(--tc-danger);
   background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
@@ -115,10 +115,10 @@
 .tc-railfoot--strip{width:var(--tc-rail);border-right:.5px solid var(--tc-rule)}
 /* Баннер подвала: важное состояние, которое должно быть на виду, чтобы за ним
    не ходить в раздел. Первая строка — что сейчас, вторая — подробность. */
-.tc-railnote{flex:1 1 100%;font-size:11px;line-height:1.5}
-.tc-railnote.is-alert{color:var(--tc-danger)}
-.tc-railnote.is-off{color:var(--tc-dusty)}
-.tc-railnote .tc-mono{color:inherit}
+.tc-railstatus{flex:1 1 100%;font-size:11px;line-height:1.5}
+.tc-railstatus.is-alert{color:var(--tc-danger)}
+.tc-railstatus.is-off{color:var(--tc-dusty)}
+.tc-railstatus .tc-mono{color:inherit}
 /* Последняя строка рейла: версия и ссылка на «о программе». C-13 (AGPL) требует видимую
    ссылку на исходники именно запущенной версии — она стоит в оболочке, а не только
    на странице без входа. Занимает всю ширину подвала, поэтому переносится под кнопки. */
@@ -636,7 +636,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
     padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
   .tc-shell__rail .tc-nav .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
   .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
-  .tc-shell__rail .tc-nav .tc-davmark{width:16px;height:16px}
+  .tc-shell__rail .tc-nav .tc-emblem{width:16px;height:16px}
   .tc-shell__rail .tc-num{display:none}
   .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
     padding:8px;gap:8px;overflow-x:clip}
@@ -836,14 +836,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-stack__item-aside.tc-stack__item-aside{font-size:11.5px;color:var(--tc-dusty);margin-top:6px}
 .tc-railsec__tags.tc-railsec__tags{padding:0 16px}
 .tc-win__note.tc-win__note{font-size:13px;color:var(--tc-muted)}
-.tc-tray__row.tc-tray__row{color:var(--tc-muted)}
-.tc-win--420.tc-win--420{max-width:420px;margin:0 auto}
-.tc-win__bar.tc-win__bar{height:30px}
 .tc-win__sheet--pad12.tc-win__sheet--pad12{background:var(--tc-surface);padding:12px}
-.tc-win--520.tc-win--520{max-width:520px;margin:0 auto}
-.tc-win__toast.tc-win__toast{margin:0 auto}
-.tc-win__title.tc-win__title{font-size:13.5px;font-weight:600}
-.tc-win--560.tc-win--560{max-width:560px;margin:0 auto}
 .tc-sec__acts.tc-sec__acts{margin-top:7px}
 .tc-field__photo-row.tc-field__photo-row{align-items:flex-start;display:flex;gap:14px}
 .tc-field__photo-side.tc-field__photo-side{align-items:flex-start}
@@ -1241,7 +1234,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-dot--danger.tc-dot--danger{height:6px;border-radius:50%;background:var(--tc-danger);margin-right:5px;display:inline-block;width:6px}
 .tc-dot--dusty.tc-dot--dusty{height:6px;border-radius:50%;background:var(--tc-dusty);margin-right:5px;display:inline-block;width:6px}
 
-.tc-winbtn.tc-winbtn{height:30px}
 .tc-print__num.tc-print__num{font-family:var(--tc-font-mono);white-space:nowrap}
 .tc-dim--t10-5.tc-dim--t10-5{font-size:10.5px}
 

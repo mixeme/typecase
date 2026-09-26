@@ -138,7 +138,7 @@ func (m *Mockup) Pairs() []PairUse {
 		var walk func(n *html.Node, parent string)
 		walk = func(n *html.Node, parent string) {
 			if n.Type == html.ElementNode {
-				if hasClass(n, "frame-label") {
+				if hasClass(n, "frame-label") || chrome(n) {
 					return
 				}
 				for _, b := range BlockClasses(n) {
@@ -187,7 +187,7 @@ func (m *Mockup) Blocks() []string {
 		var walk func(n *html.Node)
 		walk = func(n *html.Node) {
 			if n.Type == html.ElementNode {
-				if hasClass(n, "frame-label") {
+				if hasClass(n, "frame-label") || chrome(n) {
 					return
 				}
 				if b := Block(n); b != "" && !seen[b] {
