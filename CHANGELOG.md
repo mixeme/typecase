@@ -64,6 +64,10 @@ do, not what the authors did.
 - The width ladder (`TestMockupLadder`) now fails on horizontal scroll of any
   box inside a frame, not only of the frame: a scrolling `.tc-main` had hidden
   a too-wide bar.
+- The note panel is a view, as for the other kinds: formatted text with its
+  tasks, tags, attachments and links, with Edit, the note page and «⋯» under
+  the title. Editing is on the note page («Заметка · правка»); section 7.4
+  now names the one real difference, neighbours in the note page's rail.
 
 Next: the owner looks through the frames the one-off fold moved
 ([docs/plan/fold-review.md](docs/plan/fold-review.md)), the screenshot base

@@ -1212,7 +1212,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px}
 .tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
 .tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px}
-.tc-in--minh190.tc-in--minh190{min-height:190px}
 .tc-in--title.tc-in--title{height:auto;font-family:var(--tc-font-serif);font-size:24px;padding:7px 12px}
 .tc-in--body.tc-in--body{min-height:260px;font-size:14.5px;line-height:1.7;padding:14px 16px}
 .tc-doc__task.tc-doc__task{align-items:baseline;display:flex;gap:9px}
@@ -1792,7 +1791,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 </table>
 <p>Двойное нажатие или <kbd class="tc-kbd" style="font-family:var(--tc-font-mono)">Enter</kbd> открывает запись, а не панель: папку внутрь, файл на скачивание, заметку на весь экран, контакт — на его карточку. Панель — про «что это такое».</p>
 <p><b>Панель или экран — решает не содержимое, а то, есть ли список.</b> Панель стоит рядом со списком, отвечает на выделение, закрывается и <b>адреса не имеет</b>. Экран записи существует там, где списка нет: пришли по ссылке, из поиска, из связи в другой записи, из хронологии человека, с узкого экрана, на печать, в чужую коллекцию — или просто закрыли панель руками. Отсюда правило, одно на все роды: <b>всё, что имеет адрес, обязано читаться, ничего не нажимая</b>, а правка живёт на <code>/{uid}/edit</code> и открывается кнопкой. Экран, встречающий пришедшего по ссылке формой с Save и Delete, — дефект, а не экономия одного нажатия.</p>
-<p>Что внутри — дело раздела: у контакта телефоны и связанные книги, у события участники и повтор, у задачи срок и выполнение, у заметки текст — и сразу в правке, потому что заметку пишут, а не заполняют (<a href="#s-notes">7.4</a>), у файла предпросмотр и путь. Поведение общее, содержимое своё. Раздел 7.5 добавляет только то, чего у остальных нет: панель операций над списком при выделении и очередь загрузок.</p>
+<p>Что внутри — дело раздела: у контакта телефоны и связанные книги, у события участники и повтор, у задачи срок и выполнение, у заметки оформленный текст, у файла предпросмотр и путь. Поведение общее, содержимое своё. Раздел 7.5 добавляет только то, чего у остальных нет: панель операций над списком при выделении и очередь загрузок.</p>
 
 <h3>Модульная сетка</h3>
 <p>Шаг 4&nbsp;px. Горизонтальные отступы содержимого — 20&nbsp;px, в рейле — 12/16&nbsp;px, внутри панели подробностей — 20&nbsp;px. Колонки списка задаются через <code>minmax()</code>, а не процентами: колонка с почтой не должна становиться 400&nbsp;px только потому, что монитор широкий.</p>
@@ -4282,14 +4281,12 @@ Read  2 min ago · not changed on server</div>
 </div>
 
 <h2 id="s-notes">7.4 Заметки</h2>
-<div class="note"><b>Заметки ведут себя иначе, чем остальные четыре рода, в двух местах — и оба раза по одной причине: заметку пишут, а не заполняют.</b>
-<br><br><b>1. Выделение открывает не сводку, а правку.</b> У контакта, события, задачи и файла панель справа отвечает на «что это такое»: телефоны, время, срок, путь — сводка полей, которые меняют на отдельной странице правки. У заметки сводки нет: всё, что в ней есть, — это текст, и показать его «для просмотра», чтобы ради одного слова нажимать Edit, значит добавить шаг, которому нечего делать. Поэтому панель заметки — тот же узел, так же открывается выделением и так же закрывается крестиком или <kbd class="tc-kbd">Esc</kbd>, но внутри у неё поля заголовка и текста и кнопка Save.
-<br><br><b>2. Страница заметки показывает соседей.</b> <kbd class="tc-kbd">Enter</kbd> у контакта, события и задачи ведёт на их страницу: туда приходят за одной записью и уходят обратно в список. Заметки читают подряд — протоколы встреч, дневник, конспект, — и за следующей возвращаться в список значило бы терять место в тексте. Поэтому на странице заметки в рейле вместо разделов стоят «Back to list», тетради и под ними соседние заметки той же тетради — листают прямо в рейле.
-<br><br>Всё остальное — выделение, панель, ⋯ строки, «Back to list», лист «New note» — общее для всех родов.</div>
+<div class="note"><b>Заметки ведут себя как остальные четыре рода, кроме одного места.</b> Выделение открывает панель просмотра — оформленный текст, теги, вложения, связи; <b>Edit</b> открывает правку, <kbd class="tc-kbd">Enter</kbd> — страницу записи. Сразу давать правку в панели было бы короче на одно нажатие, но выделить заметку, чтобы глянуть, значило бы открыть её на правку: лишняя клавиша меняла бы текст, а вместо оформленного текста была бы разметка.
+<br><br><b>Отличие — страница заметки показывает соседей.</b> <kbd class="tc-kbd">Enter</kbd> у контакта, события и задачи ведёт на их страницу: туда приходят за одной записью и уходят обратно в список. Заметки читают подряд — протоколы встреч, дневник, конспект, — и за следующей возвращаться в список значило бы терять место в тексте. Поэтому на странице заметки в рейле вместо разделов стоят «Back to list», тетради и под ними соседние заметки той же тетради — листают прямо в рейле. Правка идёт на той же странице, рейл при ней остаётся; убирает его только Focus.</div>
 
 <figure>
 <div class="frame" data-frame="s-notes-1" data-screen="/app/notes/{account}/{col}">
-  <div class="frame-label"><span>Заметки · список и редактор</span><i>/app/notes/{account}/{col}</i></div>
+  <div class="frame-label"><span>Заметки · список и заметка в панели</span><i>/app/notes/{account}/{col}</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -4372,30 +4369,32 @@ Read  2 min ago · not changed on server</div>
         </div>
       </div>
       <div class="tc-side" data-part="panel">
-        <div class="tc-head">
-          <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t19">Заметка со встречи 10.08</div><div class="tc-head__sub">nextcloud · Записи · <span class="tc-mono">10 Aug 2026 11:05</span></div></div>
-          <div class="tc-acts"><button class="tc-btn is-sm is-primary" type="button">Save</button><button class="tc-btn is-sm" title="Open full screen" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
-        </div>
-        <div class="tc-form is-tight">
-          <div class="tc-field tc-field--full"><label>Title</label><input class="tc-in" type="text" value="Заметка со встречи 10.08" aria-label="Title"></div>
-          <div class="tc-field tc-field--full"><label>Text</label><textarea class="tc-in is-area tc-in--minh190">Договорились заморозить ветку в среду.
-
-Письмо пользователям пишет Анна, черновик к вечеру вторника.
-Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.
-
-- [ ] проверить changelog
-- [ ] попросить у Артёма скриншоты</textarea></div>
-          <div class="tc-field tc-field--sm"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="Date"></div>
-          <div class="tc-field tc-field--xs"><label>Time</label><input class="tc-in is-mono" type="time" value="11:05" aria-label="Time"></div>
-          <div class="tc-field tc-field--md"><label>Tags</label><input class="tc-in" type="text" value="встречи, релиз" aria-label="Tags"></div>
+        <div class="tc-head tc-head--mid">
+          <div class="tc-head__titles">
+            <div class="tc-head__title tc-head__title--t19">Заметка со встречи 10.08</div>
+            <div class="tc-head__sub">nextcloud · Записи · <span class="tc-mono">10 Aug 2026 11:05</span></div>
+            <div class="tc-line tc-line--gap-5 tc-sec__acts"><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm" title="Open the note page" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg></button><button class="tc-btn is-sm" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></div>
+          </div>
+          <div class="tc-acts"><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
         </div>
         <div class="tc-sec">
-          <div class="tc-rubric">Attachments <button class="tc-btn is-sm" type="button">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></div>
+          <div class="tc-prose tc-prose--read">Договорились заморозить ветку в среду.
+
+Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
+          <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+            <li class="tc-doc__task"><button class="tc-tick tc-tick--nudge" type="button"></button>проверить changelog</li>
+            <li class="tc-doc__task"><button class="tc-tick tc-tick--nudge" type="button"></button>попросить у Артёма скриншоты</li>
+          </ul>
+        </div>
+        <dl class="tc-fields">
+          <dt>Tags</dt><dd><span class="tc-tag">встречи</span> <span class="tc-tag">релиз</span></dd>
+        </dl>
+        <div class="tc-sec">
+          <div class="tc-rubric">Attachments</div>
           <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
             <li>2026-08-10-sync-board.png <span class="tc-dim">image/png · 412 KB</span> <span class="tc-badge">in the note</span></li>
             <li>запись-встречи.m4a <span class="tc-dim">audio/mp4 · 24 MB</span> <span class="tc-badge">Documents / carrel</span></li>
           </ul>
-          <div class="tc-field__hint tc-field__hint--top6">You can also paste a picture from the clipboard or drop one onto this card. Over 2 MB the file goes to the attachments folder and the note keeps a link.</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Related</div>
@@ -4405,7 +4404,7 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
 </div>
-<figcaption><b>Панель — правка, а не сводка:</b> здесь пишут, а не смотрят (почему — в начале раздела). Ширина у неё общая, 400&nbsp;px, и абзац в неё помещается. Когда написанного больше абзаца, панель тесна по определению — для этого есть страница заметки, следующие макеты. Список слева при этом остаётся колоночным: заголовок, выдержка, теги, дата, источник. Выдержка — отдельная колонка, а не вторая строка: так видно больше заметок за один взгляд. <b>Связанная заметка — одна строка</b> с «linked ×2» и числом источников; оба штампа — в подсказке.</figcaption>
+<figcaption><b>Панель — просмотр, как у остальных родов.</b> Текст в ней оформлен — абзацы, задачи с отметками, — а не показан сырым Markdown, и случайное нажатие ничего в нём не меняет. <b>Edit</b> открывает правку на странице заметки (кадр «Заметка · правка»), значок рядом — ту же страницу для чтения; <kbd class="tc-kbd">Enter</kbd> в списке делает то же. Ширина общая, 400&nbsp;px: абзац помещается, длинный текст читают на странице. Список слева при этом остаётся колоночным: заголовок, выдержка, теги, дата, источник. Выдержка — отдельная колонка, а не вторая строка: так видно больше заметок за один взгляд. <b>Связанная заметка — одна строка</b> с «linked ×2» и числом источников; оба штампа — в подсказке.</figcaption>
 </figure>
 
 <div class="frames">
@@ -4414,7 +4413,6 @@ Read  2 min ago · not changed on server</div>
     <div class="frame-label"><span>Заметка в панели · ⋯</span><span class="frag">меню</span><i>шапка панели</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w212">
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-note"/></svg>Open full screen</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.md</span></button>
@@ -4424,7 +4422,7 @@ Read  2 min ago · not changed on server</div>
       </div>
     </div>
   </div>
-  <figcaption>В панели на виду только Save, поэтому под «⋯» всё остальное, что делают с заметкой, и удаление — последним и красным.</figcaption>
+  <figcaption>На виду Edit и значок страницы заметки, как Edit и All records у контакта; под «⋯» — всё остальное, что делают с заметкой, и удаление — последним и красным.</figcaption>
   </figure>
   <figure style="flex:0 1 300px">
   <div class="frame" data-frame="s-notes-13">
@@ -4752,7 +4750,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Правка там же, где чтение.</b> Edit в панели над текстом переключает ту же страницу: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом.</figcaption>
+<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом.</figcaption>
 </figure>
 
 <figure>
