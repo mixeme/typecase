@@ -110,7 +110,9 @@ func TestFrameShotTargets(t *testing.T) {
 //	TC_FRAME_SHOTS=s-dup-1@390,s-plan-2 go test ./internal/browser -run TestMockupFrameShots -v
 //
 // A frame without @width is shot as drawn; the widths are the ladder's
-// (browser.MockupLadderWidths), though any number works.
+// (browser.MockupLadderWidths), though any number works. TC_FRAME_SHOTS_REV
+// shoots the mockup of a git revision instead of the working one, for a
+// picture of «before».
 func TestMockupFrameShots(t *testing.T) {
 	spec := os.Getenv("TC_FRAME_SHOTS")
 	if spec == "" {
@@ -131,7 +133,7 @@ func TestMockupFrameShots(t *testing.T) {
 		t.Fatal(err)
 	}
 	root := browser.ModuleRoot(t)
-	html, err := browser.LoadMockupHTML(root, "")
+	html, err := browser.LoadMockupHTML(root, os.Getenv("TC_FRAME_SHOTS_REV"))
 	if err != nil {
 		t.Fatal(err)
 	}
