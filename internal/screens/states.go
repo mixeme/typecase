@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // States assembles mockup m-states: empty, loading skeletons, offline refusal,
 // partial failure, and an unavailable source.

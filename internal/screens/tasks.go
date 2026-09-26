@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Tasks assembles mockup 7.3: combined list, overdue group, task card.
 func Tasks() string {

@@ -5,8 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/internal/catalog"
-	"carrel.dev/typecase/widget"
+	"carrel.dev/typecase/internal/legacy/widget"
 )
 
 func intPtr(n int) *int { return &n }
@@ -80,27 +79,6 @@ func TestButton_dangerSolid(t *testing.T) {
 	fill := widget.Button{Label: "Delete", Kind: widget.ButtonDangerSolid}.Render()
 	if !strings.Contains(fill, "tc-btn--danger-solid") {
 		t.Fatalf("solid danger: %s", fill)
-	}
-}
-
-func TestCatalog_entries(t *testing.T) {
-	entries := catalog.Entries()
-	if len(entries) < 50 {
-		t.Fatalf("expected comprehensive catalog, got %d entries", len(entries))
-	}
-	seen := make(map[string]struct{})
-	for _, e := range entries {
-		key := e.Widget + "/" + e.State
-		if _, ok := seen[key]; ok {
-			t.Fatalf("duplicate catalog entry %s", key)
-		}
-		seen[key] = struct{}{}
-		if e.HTML == "" {
-			t.Fatalf("empty HTML for %s", key)
-		}
-		if !strings.Contains(e.HTML, "tc-") {
-			t.Fatalf("missing tc- class for %s", key)
-		}
 	}
 }
 

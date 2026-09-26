@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Contacts assembles mockup s-contacts: list, card panel, edit form with
 // field sets, crop, range filter, search jumps, and a loading run bar.

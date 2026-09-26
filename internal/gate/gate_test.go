@@ -22,8 +22,9 @@ func catalogEntries() []gate.CatalogEntry {
 // untilStep lists gates skipped on the plan 2 branch while the old widgets
 // meet the mockup's CSS; each names the step that brings it back or removes it.
 var untilStep = map[gate.Name]string{
-	gate.Completeness: "library-from-mockup: шаг 4 — классы старых виджетов против CSS макета",
-	gate.Geometry:     "library-from-mockup: шаг 4 — пункт «Геометрия» заменён «Эталоном», ворота уходят вместе с ним",
+	gate.Completeness:    "library-from-mockup: шаг 4 — классы старых виджетов против CSS макета",
+	gate.Geometry:        "library-from-mockup: шаг 4 — пункт «Геометрия» заменён «Эталоном», ворота уходят вместе с ним",
+	gate.ScreensCoverage: "library-from-mockup: демо-экраны собираются заново в плане 3, шаг 1",
 }
 
 func TestL8_gates(t *testing.T) {
@@ -58,6 +59,8 @@ func TestL8_gates(t *testing.T) {
 		gate.LayoutInventory,
 		gate.LayoutOrphans,
 		gate.CSSFromMockup,
+		gate.WidgetFragments,
+		gate.ContainerPairs,
 	}
 	for _, name := range checks {
 		t.Run(string(name), func(t *testing.T) {
@@ -80,8 +83,8 @@ func TestL8_verifiable(t *testing.T) {
 	if err := gate.Run(gate.Verifiable, p, catalogEntries()); err != nil {
 		t.Fatal(err)
 	}
-	if len(gate.AllGates) != 23 {
-		t.Fatalf("expected 23 gates, got %d", len(gate.AllGates))
+	if len(gate.AllGates) != 25 {
+		t.Fatalf("expected 25 gates, got %d", len(gate.AllGates))
 	}
 }
 

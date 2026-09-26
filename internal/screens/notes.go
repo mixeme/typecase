@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Notes assembles mockup s-notes figure 1: list, side panel, and a closed
 // quick-note sheet in the DOM.

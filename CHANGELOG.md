@@ -50,6 +50,13 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   library reads a frame — the block of an element, mixins such as
   `tc-push` or `is-2nd` that the container prints, forms without slot
   contents — is written in `docs/visual/mockup.md`.
+- **Primitives.** `Button`, `Close`, `Mark`, `Tag`, `Badge`, `Tick`, `Kbd`,
+  `Num`, `Avatar`, `Dim`, `Mono`, `Plain` print their frames' fragments,
+  checked form by form (124 records). Kinds, states and variants are enums;
+  running text inside `Dim` is `Text`, `Strong`, `Hint`, `Dot` and `Mono`.
+  `Icon` names a symbol of the sprite without enumerating the set, and
+  `icons/sprite.svg` is now the mockup's sprite, cut like the CSS. The old
+  widgets live in `internal/legacy/widget` until step 6.
 
 ### Mockup
 

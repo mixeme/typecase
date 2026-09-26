@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Connections assembles mockup 7.11: servers, collections, one refused source.
 func Connections() string {

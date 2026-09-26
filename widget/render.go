@@ -1,0 +1,69 @@
+package widget
+
+import (
+	"html"
+	"strings"
+)
+
+// mix is what a container puts on a child's root: another block (tc-push,
+// tc-grow), its own element (tc-bar__more, tc-sec__acts), the rank is-2nd. A
+// widget does not choose its mixins; the container that holds it prints them.
+type mix []string
+
+// part is every widget: it prints its fragment with its container's mixins.
+// Render is the same with none.
+type part interface {
+	html(m mix) string
+}
+
+func esc(s string) string { return html.EscapeString(s) }
+
+// attr writes name="value", or nothing when value is empty.
+func attr(name, value string) string {
+	if value == "" {
+		return ""
+	}
+	return " " + name + `="` + esc(value) + `"`
+}
+
+// flag writes a boolean attribute when on.
+func flag(name string, on bool) string {
+	if on {
+		return " " + name
+	}
+	return ""
+}
+
+// class writes class="…" from the widget's own classes and the mixins,
+// skipping empty ones.
+func class(m mix, own ...string) string {
+	var parts []string
+	for _, c := range own {
+		if c != "" {
+			parts = append(parts, c)
+		}
+	}
+	for _, c := range m {
+		if c != "" {
+			parts = append(parts, c)
+		}
+	}
+	if len(parts) == 0 {
+		return ""
+	}
+	return ` class="` + strings.Join(parts, " ") + `"`
+}
+
+// is returns the state class when on.
+func is(state string, on bool) string {
+	if on {
+		return "is-" + state
+	}
+	return ""
+}
+
+// with appends mixins.
+func (m mix) with(more ...string) mix {
+	out := append(mix{}, m...)
+	return append(out, more...)
+}

@@ -1,0 +1,203 @@
+package widget
+
+import "strings"
+
+// Text is plain running text inside a text block.
+type Text string
+
+func (t Text) html(mix) string { return esc(string(t)) }
+
+// Strong is a bold piece of running text: a name in a sentence.
+type Strong string
+
+func (s Strong) html(mix) string { return `<b>` + esc(string(s)) + `</b>` }
+
+// Hint is a word with an explanation in a hint: «verified», with what was
+// verified.
+type Hint struct {
+	Text  string
+	Title string
+}
+
+func (h Hint) html(mix) string {
+	return `<span class="tc-dim__hint"` + attr("title", h.Title) + `>` + esc(h.Text) + `</span>`
+}
+
+// DotTone is the state a dot shows.
+type DotTone int
+
+const (
+	DotAccent DotTone = iota // running as it should
+	DotDanger                // failing
+	DotDusty                 // off
+)
+
+// Dot is the state dot before a line of status text.
+type Dot struct {
+	Tone DotTone
+}
+
+func (d Dot) html(mix) string {
+	return `<span class="` + [...]string{"tc-dot--accent", "tc-dot--danger", "tc-dot--dusty"}[d.Tone] + `"></span>`
+}
+
+// DimPart is what a dim line holds: text, bold, a monospaced piece, a hint,
+// a state dot.
+type DimPart interface {
+	part
+	dimPart()
+}
+
+func (Text) dimPart()   {}
+func (Strong) dimPart() {}
+func (Hint) dimPart()   {}
+func (Dot) dimPart()    {}
+func (Mono) dimPart()   {}
+
+// DimSize is the size of a dim line where it is not the running text's.
+type DimSize int
+
+const (
+	DimText DimSize = iota
+	Dim10_5
+	Dim11
+	Dim11_5
+)
+
+func (s DimSize) class() string {
+	return [...]string{"", "tc-dim--t10-5", "tc-dim--t11", "tc-dim--t11-5"}[s]
+}
+
+// DimVariant is how a dim line sits in its row.
+type DimVariant int
+
+const (
+	DimInline DimVariant = iota
+	DimWrap              // wraps instead of cutting: a long context line
+	DimTight             // no letter spacing: a source name in a list
+	DimIndent            // 6 px from what it follows
+	DimTop               // pinned to the top of its row
+	DimSlot              // the name of a slot in a letter: From, To
+	DimStruck            // struck through: a done item
+	DimFixed             // a fixed-width label column
+)
+
+func (v DimVariant) class() string {
+	return [...]string{"", "tc-dim--wrap", "tc-dim--ls0", "tc-dim--ml6", "tc-dim--start", "tc-dim--slot",
+		"tc-dim--struck", "tc-dim--fix"}[v]
+}
+
+// Dim — tc-dim
+//
+// Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», «nextcloud · Контакты».
+// Вход. Dim{Parts, Size, Variant}.
+// Состояния. plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
+// Инварианты. Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
+// Поведение. нет.
+// Эталон. кадр `s-contacts-6`, фрагмент `.tc-dim`.
+// Содержимое. Текст, жирное, моноширинный кусок, подсказка, точка состояния.
+// Чего нет. Ссылок и кнопок: приглушённое не нажимают.
+type Dim struct {
+	Parts   []DimPart
+	Size    DimSize
+	Variant DimVariant
+}
+
+// Render prints the dim line.
+func (d Dim) Render() string { return d.html(nil) }
+
+func (d Dim) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class()) + `>`)
+	for _, p := range d.Parts {
+		s.WriteString(p.html(nil))
+	}
+	s.WriteString(`</span>`)
+	return s.String()
+}
+
+// MonoForm is the element a monospaced piece is.
+type MonoForm int
+
+const (
+	MonoSpan MonoForm = iota // inside a line
+	MonoLine                 // a line of its own
+	MonoCode                 // a word of a protocol or a command
+)
+
+// MonoVariant is the drawn variant of a monospaced piece.
+type MonoVariant int
+
+const (
+	MonoDefault MonoVariant = iota
+	Mono11
+	MonoTight        // no letter spacing: a count
+	Mono10Dusty      // 10 px, dusty: "last used"
+	Mono11_5Dusty    // 11.5 px, dusty: a server address line
+	Mono11_5DustyGap // the same with 9 px below
+	MonoMuted        // muted: a size
+	MonoTightDusty   // no spacing, dusty: points of a pair
+	MonoDusty11      // dusty, 11 px: a count on a button
+	Mono11Dusty      // 11 px, dusty: a zoom
+	MonoDusty        // dusty: a size in a queue
+	Mono11DustyTight // 11 px, dusty, no spacing: found and when
+	MonoTightDanger  // no spacing, red: "visible only now"
+	MonoFace         // the monospaced face only: a time in print
+	Mono11Top        // 11 px, 4 px above: a measure under a frame
+	Mono11Indent     // 11 px, 4 px before: a count after marks
+	MonoTightPlain   // no spacing, no capitals: a host name in a rubric
+	Mono11Muted      // 11 px, muted: an address in angle brackets
+	MonoChip         // on a chip: a command
+)
+
+func (v MonoVariant) class() string {
+	return [...]string{"", "tc-mono--t11", "tc-mono--ls0", "tc-mono--t10-dusty", "tc-mono--t11-5-dusty",
+		"tc-mono--t11-5-dusty tc-mono--bot9", "tc-mono--muted", "tc-mono--ls0-dusty", "tc-mono--dusty-t11",
+		"tc-mono--t11-dusty", "tc-mono--dusty", "tc-mono--t11-dusty-ls0", "tc-mono--ls0-danger", "tc-mono--f-mono",
+		"tc-mono--t11-top4", "tc-mono--t11-ml4", "tc-mono--ls0-tt-none", "tc-mono--t11-muted", "tc-mono--chip"}[v]
+}
+
+// Mono — tc-mono
+//
+// Роль. Моноширинный кусок: время, размер, адрес, идентификатор, команда.
+// Вход. Mono{Text, Form, Variant}.
+// Состояния. span | line | code | variant.
+// Инварианты. Элемент и вариант — перечисления; кусок печатает фрагмент своего кадра.
+// Поведение. нет.
+// Эталон. кадр `components-16`, фрагмент `.tc-mono`.
+// Содержимое. Только текст.
+// Чего нет. Разметки внутри: адрес и команда переносятся как есть.
+type Mono struct {
+	Text    string
+	Form    MonoForm
+	Variant MonoVariant
+}
+
+// Render prints the monospaced piece.
+func (o Mono) Render() string { return o.html(nil) }
+
+func (o Mono) html(m mix) string {
+	tag := [...]string{"span", "div", "code"}[o.Form]
+	return `<` + tag + class(m, "tc-mono", o.Variant.class()) + `>` + esc(o.Text) + `</` + tag + `>`
+}
+
+// Plain — tc-plain
+//
+// Роль. Пояснение обычным регистром внутри заголовка, который кричит: «2 active» в рубрике.
+// Вход. Plain{Text}.
+// Состояния. нет.
+// Инварианты. Строчные и без разрядки, какой бы ни была рубрика вокруг; пояснение печатает фрагмент своего кадра.
+// Поведение. нет.
+// Эталон. кадр `account-1`, фрагмент `.tc-plain`.
+// Содержимое. Только текст.
+// Чего нет. Своего размера и цвета: их даёт заголовок.
+type Plain struct {
+	Text string
+}
+
+// Render prints the plain aside.
+func (p Plain) Render() string { return p.html(nil) }
+
+func (p Plain) html(m mix) string {
+	return `<span` + class(m, "tc-plain") + `>` + esc(p.Text) + `</span>`
+}

@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Duplicates assembles mockup s-dup: candidate groups, property diffs, tick rows,
 // and the merge confirmation dialog.

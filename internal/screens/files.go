@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Files assembles mockup s-files figure 1: folder view, table, tiles, queue,
 // move dialog, filter chips, and the properties side panel.

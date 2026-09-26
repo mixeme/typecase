@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Login assembles mockup 7.20: sign-in without shell chrome.
 func Login() string {

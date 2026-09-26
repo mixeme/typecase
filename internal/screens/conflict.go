@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Conflict assembles mockup 7.8: property cards, one combination to write.
 func Conflict() string {

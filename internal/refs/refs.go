@@ -11,8 +11,12 @@ type Renderer interface {
 	Render() string
 }
 
-// Entry is one reference record: one form of one block.
+// Entry is one reference record: one form of one block. Family and State
+// name its catalog cell; the gate catalog wants every state a widget's
+// comment lists («Состояния») to have one.
 type Entry struct {
+	Family  string
+	State   string
 	Fixture Renderer
 	Ref     fragment.Ref
 }

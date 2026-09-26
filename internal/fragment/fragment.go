@@ -24,8 +24,9 @@ import (
 const Source = "docs/visual/carrel-ui-mockups.html"
 
 // Ref addresses one block in the mockup: the frame's data-frame, the block's
-// class and which occurrence of that class in the frame it is, from 1, in
-// document order.
+// class and which occurrence of that block in the frame it is, from 1, in
+// document order. An element counts when the class is its block (see Block),
+// not when it merely carries the class as a mixin.
 type Ref struct {
 	Frame string
 	Class string
@@ -162,7 +163,7 @@ func (f *Frame) all(cls string) []*html.Node {
 			if hasClass(n, "frame-label") {
 				return
 			}
-			if hasClass(n, cls) {
+			if hasClass(n, cls) && Block(n) == cls {
 				out = append(out, n)
 			}
 		}
@@ -205,6 +206,9 @@ func (m *Mockup) Normalize(n *html.Node) *Node {
 func (m *Mockup) norm(n *html.Node, pre bool) *Node {
 	out := &Node{Tag: n.Data}
 	for _, c := range strings.Fields(attr(n, "class")) {
+		if strings.HasPrefix(c, "mk-") {
+			continue // the desktop window's frame is page chrome, not product
+		}
 		out.Classes = append(out.Classes, c)
 		if m.pre[c] {
 			pre = true

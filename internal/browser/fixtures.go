@@ -3,7 +3,7 @@ package browser
 import (
 	"strings"
 
-	"carrel.dev/typecase/widget"
+	"carrel.dev/typecase/internal/legacy/widget"
 )
 
 // GoodFixtures returns passing L-9.2 page bodies keyed by check name.

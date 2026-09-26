@@ -1299,6 +1299,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
    tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
+   tc-dim__hint
    tc-row__subtitle
    — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
    classes-defined и уезжало в CSS библиотеки. Список читает линт. */

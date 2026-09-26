@@ -3,7 +3,7 @@ package screens
 import (
 	"strings"
 
-	"carrel.dev/typecase/widget"
+	"carrel.dev/typecase/internal/legacy/widget"
 )
 
 func shellTop() widget.Top {

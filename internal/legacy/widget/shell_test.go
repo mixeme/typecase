@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/widget"
+	"carrel.dev/typecase/internal/legacy/widget"
 )
 
 func TestShell_omitsEmptyColumns(t *testing.T) {

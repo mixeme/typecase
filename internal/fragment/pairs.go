@@ -32,8 +32,15 @@ func BlockClasses(n *html.Node) []string {
 // never a block: in tc-root tc-shell the block is the shell, and a component
 // frame's tc-root tc-root--on-bg is the frame's box, as a catalog cell is.
 func Block(n *html.Node) string {
+	if structural[n.Data] {
+		return ""
+	}
+	blocks := BlockClasses(n)
+	if len(blocks) > 0 && allTypographic(blocks) && hasElementClass(n) {
+		return ""
+	}
 	best, rank := "", -1
-	for _, c := range BlockClasses(n) {
+	for _, c := range blocks {
 		if c == "tc-root" {
 			continue
 		}
@@ -42,6 +49,36 @@ func Block(n *html.Node) string {
 		}
 	}
 	return best
+}
+
+// structural tags belong to their block by meaning (the dictionary, Р-6): a
+// cell, a term, a list item is never a block of its own, and its classes are
+// its block's (tc-mono on a td is how that cell's text is set).
+var structural = map[string]bool{
+	"td": true, "th": true, "tr": true, "thead": true, "tbody": true,
+	"dd": true, "dt": true, "li": true, "option": true,
+}
+
+// typographic blocks set how text looks. On an element of another block
+// (tc-row__excerpt tc-mono) they are that element's typeface, not a block.
+var typographic = map[string]bool{"tc-mono": true, "tc-dim": true, "tc-plain": true}
+
+func allTypographic(blocks []string) bool {
+	for _, b := range blocks {
+		if !typographic[b] {
+			return false
+		}
+	}
+	return true
+}
+
+func hasElementClass(n *html.Node) bool {
+	for _, c := range strings.Fields(attr(n, "class")) {
+		if strings.HasPrefix(c, "tc-") && strings.Contains(c, "__") {
+			return true
+		}
+	}
+	return false
 }
 
 func blockRank(c string) int {

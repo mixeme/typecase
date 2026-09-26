@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Mail assembles mockup 7.18: letter sheet over a contact list.
 func Mail() string {

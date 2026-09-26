@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Backup assembles mockup 7.15: backup jobs, one state.
 func Backup() string {

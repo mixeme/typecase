@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Devices assembles mockup 7.13: Apple profile, one state.
 func Devices() string {

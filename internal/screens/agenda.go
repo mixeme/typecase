@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Agenda assembles mockup 7.2: combined calendar, week list, event card.
 func Agenda() string {

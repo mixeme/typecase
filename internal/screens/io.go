@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // ImportExport assembles mockup s-io step 2: wizard steps, preview tables for
 // all four record kinds, and summary stats.

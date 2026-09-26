@@ -1,6 +1,6 @@
 package screens
 
-import "carrel.dev/typecase/widget"
+import "carrel.dev/typecase/internal/legacy/widget"
 
 // Find assembles mockup 7.6: search hits as RowFind, not the search popover.
 func Find() string {
