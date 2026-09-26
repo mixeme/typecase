@@ -1,0 +1,25 @@
+/* Шрифты библиотеки. Блок data-tc макета их не объявляет: там @font-face
+   указывает на файлы рядом с макетом и живёт в <style> страницы. */
+@font-face {
+	font-family: "Literata";
+	font-style: normal;
+	font-weight: 200 900;
+	font-display: swap;
+	src: url("../fonts/Literata.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Public Sans";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("../fonts/PublicSans.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Source Code Pro";
+	font-style: normal;
+	font-weight: 200 900;
+	font-display: swap;
+	src: url("../fonts/SourceCodePro.ttf") format("truetype");
+}

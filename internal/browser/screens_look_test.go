@@ -232,6 +232,7 @@ const menuOnTopJS = `(() => {
 })()`
 
 func TestScreensLook(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}

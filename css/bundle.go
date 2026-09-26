@@ -1,5 +1,8 @@
-// Package css concatenates stylesheet fragments in declared order at startup (L-11.1).
+// Package css serves the library stylesheet: the fonts, then the mockup's
+// product CSS cut out verbatim (L-11.1, plan 2 step 1).
 package css
+
+//go:generate go run ../internal/mockcss/cut/cmd/cutcss -root ..
 
 import (
 	"embed"
@@ -7,45 +10,23 @@ import (
 	"io/fs"
 	"strings"
 
-	"carrel.dev/typecase/layout"
 	"carrel.dev/typecase/token"
 )
 
 //go:embed *.css
 var files embed.FS
 
-// LayoutSentinel is the Order entry that injects layout.CSS().
-const LayoutSentinel = "generated:layout"
-
-// Order is the concatenation order; changing it changes cascade precedence.
+// Order is the concatenation order: @font-face first, then typecase.css,
+// which is the mockup's <style data-tc> block byte for byte.
 var Order = []string{
-	"00-tokens.css",
-	"01-base.css",
-	LayoutSentinel,
-	"02-primitives.css",
-	"03-forms.css",
-	"04-overlays.css",
-	"05-panels.css",
-	"06-lists.css",
-	"07-tables.css",
-	"08-shell.css",
-	"09-document.css",
-	"10-utility.css",
+	"fonts.css",
+	"typecase.css",
 }
 
-// Bundle reads fragments in Order, joins them, and validates required tokens.
+// Bundle reads fragments in Order, joins them, and validates the tokens.
 func Bundle() (string, error) {
 	var b strings.Builder
 	for _, name := range Order {
-		if name == LayoutSentinel {
-			gen := layout.CSS()
-			b.WriteString("\n/* generated: layout */\n")
-			b.WriteString(gen)
-			if !strings.HasSuffix(gen, "\n") {
-				b.WriteByte('\n')
-			}
-			continue
-		}
 		data, err := files.ReadFile(name)
 		if err != nil {
 			return "", fmt.Errorf("css: read %s: %w", name, err)

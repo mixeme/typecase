@@ -1,6 +1,6 @@
 // Package proof renders mockup frames the "no translation" way: each widget
 // prints the frame's markup with renamed classes, and the CSS is taken from the
-// mockup by internal/mockcss. Not part of the library API.
+// mockup by internal/ Not part of the library API.
 package proof
 
 import (

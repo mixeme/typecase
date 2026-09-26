@@ -21,6 +21,19 @@ this entry says what changed rather than how to migrate. The spec
 eighth item is now «Эталон», the frame and fragment a widget prints), L-3.6,
 L-5, L-6.1, L-7, L-10, L-11.1.
 
+- **One stylesheet.** `css/typecase.css` is the mockup's `<style data-tc>`
+  block, cut verbatim by `go generate ./css` (`internal/mockcss/cut`); the
+  gate `css-from-mockup` compares them byte for byte. `css.Order` is
+  `fonts.css`, `typecase.css`; the eleven hand-written `css/*.css` files and
+  the generated layout CSS are gone. `token` requires what the mockup
+  defines — the palette, three font families, the page gutters and the layout
+  tokens `--tc-rail`, `--tc-side`, `--tc-top` — and rejects a token that is
+  read but never defined; `--tc-font-size`, `--tc-row-height`,
+  `--tc-radius*` and `--tc-stroke` no longer exist. `tc.js` sets
+  `--tc-colour` and `--tc-width` from `data-tc-colour` and `data-tc-width`
+  and the mockup's CSS applies them; `data-tc-pct` is gone. The mockup's
+  rename, element and inline scripts are removed.
+
 ### Mockup
 
 - Mailbox candidate (`carrel-mailbox-mockups.html`): each mailbox has its own

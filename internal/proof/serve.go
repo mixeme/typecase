@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"carrel.dev/typecase"
-	"carrel.dev/typecase/internal/mockcss"
 )
 
 // Case is one frame of the mockup and the screen that transliterates it.
@@ -71,17 +70,17 @@ var extraClasses = []string{
 
 // Options builds the generator input from the frames themselves: the classes
 // kept are exactly the classes the frames use.
-func Options(mockup string) (mockcss.Options, error) {
+func Options(mockup string) (cssOptions, error) {
 	keep := map[string]bool{"mock": true}
 	for _, c := range extraClasses {
 		keep[c] = true
 	}
 	for _, c := range Cases {
-		frame := mockcss.Frame(mockup, c.Label)
+		frame := Frame(mockup, c.Label)
 		if frame == "" {
-			return mockcss.Options{}, fmt.Errorf("proof: frame %q not found", c.Label)
+			return cssOptions{}, fmt.Errorf("proof: frame %q not found", c.Label)
 		}
-		for cls := range mockcss.ClassesIn(frame) {
+		for cls := range ClassesIn(frame) {
 			keep[cls] = true
 		}
 	}
@@ -94,7 +93,7 @@ func Options(mockup string) (mockcss.Options, error) {
 			names[c] = "tcx-" + strings.TrimPrefix(c, "m-")
 		}
 	}
-	return mockcss.Options{Keep: keep, Classes: names, Vars: tokens, Prefix: "tcx-",
+	return cssOptions{Keep: keep, Classes: names, Vars: tokens, Prefix: "tcx-",
 		Elements: elements, Selectors: selectors, DropAt: dropAt, DropRules: dropRules}, nil
 }
 
@@ -114,7 +113,7 @@ func Mux(root string) (*http.ServeMux, error) {
 	if err != nil {
 		return nil, err
 	}
-	generated := mockcss.Generate(mockcss.Style(mockup), o)
+	generated := Generate(Style(mockup), o)
 	tokensCSS, err := os.ReadFile(filepath.Join(root, "css", "00-tokens.css"))
 	if err != nil {
 		return nil, err

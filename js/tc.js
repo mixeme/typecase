@@ -316,21 +316,18 @@
 	}
 
 	function initDynamic() {
-		// Цвет метки приходит значением. Встроенных стилей в разметке не бывает
-		// (ворота no-inline), поэтому значение ставит сценарий; без него метка
+		// Цвет метки и доля полосы приходят данными (Р-18). Встроенных стилей в
+		// разметке не бывает (ворота no-inline, CSP), поэтому сценарий ставит
+		// только переменную, а что с ней делать, говорит CSS из макета:
+		// [data-tc-colour]{background:var(--tc-colour)}. Без сценария метка
 		// остаётся непокрашенной, а не берёт цвет из палитры темы.
 		document.querySelectorAll("[data-tc-colour]").forEach(function (el) {
 			var c = el.getAttribute("data-tc-colour");
-			if (c) el.style.backgroundColor = c;
-		});
-		document.querySelectorAll("[data-tc-pct]").forEach(function (el) {
-			var bar = el.querySelector(".tc-meter__bar");
-			var pct = el.getAttribute("data-tc-pct");
-			if (bar && pct) bar.style.width = pct + "%";
+			if (c) el.style.setProperty("--tc-colour", c);
 		});
 		document.querySelectorAll("[data-tc-width]").forEach(function (el) {
 			var w = el.getAttribute("data-tc-width");
-			if (w) el.style.width = w;
+			if (w) el.style.setProperty("--tc-width", w);
 		});
 		document.querySelectorAll(".tc-crop__img").forEach(applyCropTransform);
 	}

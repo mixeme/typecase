@@ -5,9 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"carrel.dev/typecase/css"
 	"carrel.dev/typecase/internal/catalog"
-	"carrel.dev/typecase/token"
 	"carrel.dev/typecase/widget"
 )
 
@@ -102,24 +100,6 @@ func TestCatalog_entries(t *testing.T) {
 		}
 		if !strings.Contains(e.HTML, "tc-") {
 			t.Fatalf("missing tc- class for %s", key)
-		}
-	}
-}
-
-func TestCSS_widgetTokenValidation(t *testing.T) {
-	for _, name := range css.Order {
-		if name == css.LayoutSentinel || name == "00-tokens.css" || name == "01-base.css" {
-			continue
-		}
-		data, err := css.Files().Open(name)
-		if err != nil {
-			t.Fatal(err)
-		}
-		buf := make([]byte, 1<<20)
-		n, _ := data.Read(buf)
-		_ = data.Close()
-		if err := token.ValidateWidget(string(buf[:n])); err != nil {
-			t.Fatalf("%s: %v", name, err)
 		}
 	}
 }

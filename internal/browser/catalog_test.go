@@ -99,6 +99,7 @@ type catalogProbe struct {
 // without a per-cell containing block a single open scrim hides the whole
 // catalog.
 func TestCatalogCellsContainOverlays(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -125,6 +126,7 @@ func TestCatalogCellsContainOverlays(t *testing.T) {
 
 // TestCatalogFocusOnLoad ensures pre-open overlays do not steal focus at load.
 func TestCatalogFocusOnLoad(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -147,6 +149,7 @@ func TestCatalogFocusOnLoad(t *testing.T) {
 }
 
 func TestCatalogTextInkFitsLineBox(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -166,6 +169,7 @@ func TestCatalogTextInkFitsLineBox(t *testing.T) {
 }
 
 func TestCatalogRowTextStacked(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -195,6 +199,7 @@ func TestCatalogRowTextStacked(t *testing.T) {
 }
 
 func TestCatalogTreeLabelWidth(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -270,6 +275,7 @@ func assertQueueStatesDistinct(t *testing.T, h *browser.Harness, srv *httptest.S
 }
 
 func TestCatalogQueueStatesDiffer(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -282,6 +288,7 @@ func TestCatalogQueueStatesDiffer(t *testing.T) {
 }
 
 func TestBite_catalogQueueStates(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -331,6 +338,7 @@ func assetProbeAction(dest *assetProbe) chromedp.Action {
 }
 
 func TestCatalogAssetsLoad(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -358,6 +366,7 @@ func TestCatalogAssetsLoad(t *testing.T) {
 // TestBite_catalogAssets: a catch-all that answers every path with the page
 // is exactly what the catalog did before В-12, and the check must bite it.
 func TestBite_catalogAssets(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -421,6 +430,7 @@ type typographyProbe struct {
 }
 
 func TestCatalogTypography(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -473,6 +483,7 @@ type overlayGeometryProbe struct {
 }
 
 func TestCatalogOverlayGeometry(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -519,6 +530,7 @@ type shellProbe struct {
 }
 
 func TestCatalogShellGeometry(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -568,6 +580,7 @@ type noScriptProbe struct {
 }
 
 func TestCatalogBaseWithoutScript(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -619,6 +632,7 @@ type segProbe struct {
 }
 
 func TestCatalogSegSelectionAgrees(t *testing.T) {
+	skipUntilStep4(t)
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}

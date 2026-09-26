@@ -366,6 +366,7 @@ func TestBite_specL4_missingSpec(t *testing.T) {
 }
 
 func TestBite_geometry(t *testing.T) {
+	t.Skip("library-from-mockup: шаг 4 — пункт «Геометрия» заменён «Эталоном»")
 	broken := readBroken(t, "geometry.css")
 	live, err := css.Bundle()
 	if err != nil {

@@ -4,8 +4,6 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
-	"carrel.dev/typecase/internal/mockcss"
 )
 
 func readMockup(t *testing.T) string {
@@ -23,7 +21,7 @@ func TestInlineRulesAreCopiedFromFrames(t *testing.T) {
 	mockup := readMockup(t)
 	frames := map[string]string{}
 	for _, c := range Cases {
-		frames[c.Name] = mockcss.Frame(mockup, c.Label)
+		frames[c.Name] = Frame(mockup, c.Label)
 		if frames[c.Name] == "" {
 			t.Fatalf("frame %q not found", c.Label)
 		}

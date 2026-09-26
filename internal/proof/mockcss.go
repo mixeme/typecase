@@ -1,10 +1,12 @@
-// Package mockcss takes stylesheet text from the mockup's own <style> block.
+// Rule picking from the mockup's <style> block, moved here from internal/mockcss
+// when plan 2 made the library CSS a verbatim cut; the prototype is removed in
+// plan 3, step 7. It takes stylesheet text from the mockup's own <style> block.
 //
 // Proof of the "no translation" path: rules are picked by class set and
 // renamed; no number is retyped. A selector part is kept only when every class
 // it names is in the allowed set, so rules for other contexts (.mock.is-phone,
 // .m-bar > .m-btn, :has(> .m-f)) fall away by themselves.
-package mockcss
+package proof
 
 import (
 	"regexp"
@@ -12,8 +14,8 @@ import (
 	"strings"
 )
 
-// Options says which rules to take and how to rename them.
-type Options struct {
+// cssOptions says which rules to take and how to rename them.
+type cssOptions struct {
 	Keep    map[string]bool   // classes allowed in a selector, without the dot
 	Classes map[string]string // mockup class → library class; unlisted keep their name
 	Vars    map[string]string // mockup custom property → library property (without "--")
@@ -109,7 +111,7 @@ func Style(html string) string {
 }
 
 // Generate returns the rules of css that concern only o.Keep, renamed.
-func Generate(css string, o Options) string {
+func Generate(css string, o cssOptions) string {
 	var b strings.Builder
 	for _, r := range parse(stripComments(css)) {
 		writeRule(&b, r, o)
@@ -123,7 +125,7 @@ type rule struct {
 	nested  []rule
 }
 
-func writeRule(b *strings.Builder, r rule, o Options) {
+func writeRule(b *strings.Builder, r rule, o cssOptions) {
 	if strings.HasPrefix(r.prelude, "@") {
 		if !strings.HasPrefix(r.prelude, "@container") && !strings.HasPrefix(r.prelude, "@media") {
 			return
@@ -197,9 +199,9 @@ var varUseRe = regexp.MustCompile(`var\(--([\w-]+)`)
 var varDeclRe = regexp.MustCompile(`(^|;)\s*--([\w-]+)\s*:`)
 
 // RenameVars renames custom properties in declarations as Generate does.
-func RenameVars(body string, o Options) string { return renameVars(body, o) }
+func RenameVars(body string, o cssOptions) string { return renameVars(body, o) }
 
-func renameVars(body string, o Options) string {
+func renameVars(body string, o cssOptions) string {
 	name := func(v string) string {
 		if to, ok := o.Vars[v]; ok {
 			return to

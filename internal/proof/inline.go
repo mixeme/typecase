@@ -3,8 +3,6 @@ package proof
 import (
 	"regexp"
 	"strings"
-
-	"carrel.dev/typecase/internal/mockcss"
 )
 
 // inlineRule is a style="" of a frame that became a widget variant. From is the
@@ -108,10 +106,10 @@ const controlCSS = `:where(.tcx) :where(button,input,textarea){margin:0;padding:
 .tcx .tcx-q{flex:1;min-width:0}
 `
 
-func inlineCSS(o mockcss.Options) string {
+func inlineCSS(o cssOptions) string {
 	var b strings.Builder
 	for _, r := range frameInline {
-		b.WriteString(r.Selector + "{" + mockcss.RenameVars(r.CSS, o) + "}\n")
+		b.WriteString(r.Selector + "{" + RenameVars(r.CSS, o) + "}\n")
 	}
 	return b.String()
 }

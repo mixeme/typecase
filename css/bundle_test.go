@@ -2,6 +2,8 @@ package css_test
 
 import (
 	"io/fs"
+	"regexp"
+	"sort"
 	"strings"
 	"testing"
 
@@ -14,14 +16,8 @@ func TestBundle(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(out, "--tc-ink") || !strings.Contains(out, "[data-tc-root]") {
-		t.Fatal("bundle missing expected token or base rules")
-	}
-	if !strings.Contains(out, "/* generated: layout */") {
-		t.Fatal("bundle missing layout sentinel comment")
-	}
-	if !strings.Contains(out, ".tc-tickrow{") && !strings.Contains(out, ".tc-tickrow {") {
-		t.Fatal("bundle missing generated tickrow grid")
+	if !strings.Contains(out, "@font-face") || !strings.Contains(out, ".tc-root{") {
+		t.Fatal("bundle missing fonts or product rules")
 	}
 	a, err := css.Bundle()
 	if err != nil {
@@ -30,48 +26,28 @@ func TestBundle(t *testing.T) {
 	if a != out {
 		t.Fatal("bundle is not byte-stable")
 	}
-	if err := token.Validate(out); err != nil {
-		t.Fatal(err)
-	}
 }
 
-func TestBundle_themeOnlyChangesPalette(t *testing.T) {
-	data, err := fs.ReadFile(css.Files(), "00-tokens.css")
+var darkBlock = regexp.MustCompile(`\[data-tc-theme="dark"\]\{([^}]*)\}`)
+
+// The dark theme changes palette values and nothing else (L-5.3).
+func TestDarkThemeOnlyChangesPalette(t *testing.T) {
+	data, err := fs.ReadFile(css.Files(), "typecase.css")
 	if err != nil {
 		t.Fatal(err)
 	}
-	tokens := string(data)
-	darkIdx := strings.Index(tokens, `[data-tc-theme="dark"]`)
-	if darkIdx < 0 {
-		t.Fatal("dark theme block missing")
+	m := darkBlock.FindStringSubmatch(string(data))
+	if m == nil {
+		t.Fatal(`[data-tc-theme="dark"]{…} missing`)
 	}
-	rest := tokens[darkIdx:]
-	end := strings.Index(rest, "}")
-	if end < 0 {
-		t.Fatal("dark theme block unclosed")
+	got := make([]string, 0)
+	for name := range token.Defined(m[1]) {
+		got = append(got, name)
 	}
-	dark := rest[:end]
-	for _, name := range append(token.Typography, token.Density...) {
-		if strings.Contains(dark, name) {
-			t.Fatalf("dark theme must not redefine %s", name)
-		}
-	}
-	for _, name := range token.Shape {
-		if strings.Contains(dark, name) {
-			t.Fatalf("dark theme must not redefine %s", name)
-		}
-	}
-	for _, name := range token.Palette {
-		if !strings.Contains(dark, name) {
-			t.Fatalf("dark theme must redefine %s", name)
-		}
-	}
-}
-
-func TestBundle_failsWhenTokenMissing(t *testing.T) {
-	// Regression guard: token.Validate is wired into Bundle.
-	broken := ":root { --tc-ink: #000; }"
-	if err := token.Validate(broken); err == nil {
-		t.Fatal("expected validation failure")
+	sort.Strings(got)
+	want := append([]string(nil), token.Palette...)
+	sort.Strings(want)
+	if strings.Join(got, " ") != strings.Join(want, " ") {
+		t.Fatalf("dark theme defines %v, want the palette %v", got, want)
 	}
 }

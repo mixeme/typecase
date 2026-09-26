@@ -3,10 +3,12 @@ package token
 import (
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 )
 
-// Palette names the eleven overridable palette slots (L-5.1).
+// Palette names the eleven overridable palette slots (L-5.1). The dark theme
+// redefines exactly these.
 var Palette = []string{
 	"--tc-ink",
 	"--tc-surface",
@@ -21,45 +23,57 @@ var Palette = []string{
 	"--tc-dusty",
 }
 
-// Typography names font families and base size.
+// Typography names the three font families (L-5.1).
 var Typography = []string{
 	"--tc-font-serif",
 	"--tc-font-sans",
 	"--tc-font-mono",
-	"--tc-font-size",
 }
 
-// Density names the two row-height values; there is no third (L-5.1).
-var Density = []string{
-	"--tc-row-height",
-	"--tc-row-height-touch",
-}
-
-// Spacing names page-level horizontal padding (L-5.1).
+// Spacing names the page-level horizontal padding (L-5.1).
 var Spacing = []string{
 	"--tc-page-gutter",
 	"--tc-page-gutter-narrow",
 }
 
-// Shape names corner radii and stroke (L-5.1).
-var Shape = []string{
-	"--tc-radius",
-	"--tc-radius-sm",
-	"--tc-stroke",
+// Layout names the layout tokens. They are geometry and not overridden
+// (L-5.2), but the stylesheet must define them.
+var Layout = []string{
+	"--tc-rail",
+	"--tc-side",
+	"--tc-top",
 }
 
-// Required is the full set of custom properties every consumer must define.
-// Widget styles must only reference names from Required or names derived in
-// the library; an undefined name fails validation.
-var Required = concat(Palette, Typography, Density, Spacing, Shape)
+// Data names the properties that carry data, not design: the script sets
+// them from data-tc-colour and data-tc-width (Р-18), so the stylesheet uses
+// them without defining them.
+var Data = []string{
+	"--tc-colour",
+	"--tc-width",
+}
 
-var varDecl = regexp.MustCompile(`--tc-[a-z0-9-]+`)
+// Required is every custom property the stylesheet must define.
+var Required = concat(Palette, Typography, Spacing, Layout)
+
+var (
+	declRe = regexp.MustCompile(`(--tc-[a-z0-9-]+)\s*:`)
+	useRe  = regexp.MustCompile(`var\(\s*(--tc-[a-z0-9-]+)`)
+)
 
 // Defined returns every --tc-* name assigned a value in css.
 func Defined(css string) map[string]struct{} {
 	seen := make(map[string]struct{})
-	for _, name := range varDecl.FindAllString(css, -1) {
-		seen[name] = struct{}{}
+	for _, m := range declRe.FindAllStringSubmatch(css, -1) {
+		seen[m[1]] = struct{}{}
+	}
+	return seen
+}
+
+// Used returns every --tc-* name read with var() in css.
+func Used(css string) map[string]struct{} {
+	seen := make(map[string]struct{})
+	for _, m := range useRe.FindAllStringSubmatch(css, -1) {
+		seen[m[1]] = struct{}{}
 	}
 	return seen
 }
@@ -76,30 +90,31 @@ func Missing(css string) []string {
 	return missing
 }
 
-// Validate reports an error when css does not define every required token.
+// Undefined reports names css reads but never defines, other than Data.
+func Undefined(css string) []string {
+	defined := Defined(css)
+	data := make(map[string]bool, len(Data))
+	for _, name := range Data {
+		data[name] = true
+	}
+	var out []string
+	for name := range Used(css) {
+		if _, ok := defined[name]; !ok && !data[name] {
+			out = append(out, name)
+		}
+	}
+	sort.Strings(out)
+	return out
+}
+
+// Validate reports an error when css lacks a required token or reads one it
+// never defines: a silently missing value is a difference found on screen.
 func Validate(css string) error {
 	if missing := Missing(css); len(missing) > 0 {
 		return fmt.Errorf("typecase: missing required tokens: %s", strings.Join(missing, ", "))
 	}
-	return nil
-}
-
-// ValidateWidget reports an error when css references a --tc-* name that is
-// not in Required. Widgets must not invent silent defaults for unknown tokens.
-func ValidateWidget(css string) error {
-	defined := Defined(css)
-	required := make(map[string]struct{}, len(Required))
-	for _, name := range Required {
-		required[name] = struct{}{}
-	}
-	var unknown []string
-	for name := range defined {
-		if _, ok := required[name]; !ok {
-			unknown = append(unknown, name)
-		}
-	}
-	if len(unknown) > 0 {
-		return fmt.Errorf("typecase: widget references unknown tokens: %s", strings.Join(unknown, ", "))
+	if undef := Undefined(css); len(undef) > 0 {
+		return fmt.Errorf("typecase: tokens read but never defined: %s", strings.Join(undef, ", "))
 	}
 	return nil
 }

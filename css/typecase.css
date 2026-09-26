@@ -1,0 +1,1304 @@
+:root{
+  --tc-ink:#17211C; --tc-card:#E8DFCB; --tc-edge:#C9BFA6; --tc-accent:#4A6B52;
+  --tc-bg:#F5F1E8; --tc-surface:#FFFDF7; --tc-rule:#D8CFBB; --tc-hair:#E2DACA; --tc-dusty:#6A6351; --tc-muted:#56503F; --tc-danger:#A84232;
+  --tc-font-serif:"Literata", Georgia, "Times New Roman", serif;
+  --tc-font-sans:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tc-font-mono:"Source Code Pro", ui-monospace, "Cascadia Mono", monospace;
+}
+/* Классы .m-* — набор компонентов; имена те, что уйдут в carrel.css. */
+.tc-root{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px;
+  font-family:var(--tc-font-sans);font-size:13px;line-height:1.45;color:var(--tc-ink);background:var(--tc-bg);
+  container:tcbox / inline-size}
+/* Коробка кадра-компонента: то, что раньше давало правило страницы .demo.
+   Идиома та же, что у components-1…8: tc-root и варианты корня. */
+.tc-root--wrap.tc-root--wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.tc-root--col.tc-root--col{display:flex;flex-direction:column;flex-wrap:wrap;align-items:stretch;gap:10px}
+.tc-root--pad18-20.tc-root--pad18-20{padding:18px 20px}
+.tc-root *{box-sizing:border-box}
+.tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
+.tc-root ul{list-style:none}
+.tc-root a{color:inherit;text-decoration:none}
+.tc-root code,.tc-root .tc-mono{font-family:var(--tc-font-mono);font-size:11.5px}
+.tc-root svg{display:block}
+[data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
+  --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
+/* верхняя панель */
+.tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule)}
+/* Поиск по центру: равные крылья flex:1 1 0 слева и справа. */
+.tc-brand{display:flex;align-items:center;gap:9px;font-family:var(--tc-font-serif);font-size:17px;
+  flex:1 1 0}
+.tc-brand svg{width:19px;height:19px;flex:none}
+/* Логотип: знак встроен в последнюю «l» — одна графика. Цвета через <use>. */
+.tc-brand__logo{width:56px;height:22px;flex:none}
+.tc-logo__word{fill:var(--tc-ink)}
+.tc-logo__shade{fill:var(--tc-accent)}
+/* Знак davloom — по эталону carrel/docs/visual/davloom-icon.html (v1.1), хинт 16 px:
+   нити и вал — чернила, полотно — единственный акцент. Собран из частей, как логотип:
+   под правилом значков fill:none вал и полотно не выжили бы. Меньше 16 px не рисуется.
+   Не отвечает — знак на плашке тревоги; сам знак не перекрашивается: красное полотно
+   в 7×4 px не читалось. Плашка 24 px — ниже кнопок ряда (26), строка не прыгает. */
+.tc-davmark{width:16px;height:16px;flex:none}
+.tc-davmark__threads{fill:none;stroke:var(--tc-ink);stroke-width:1;stroke-linecap:round}
+.tc-davmark__beam{fill:var(--tc-ink);stroke:none}
+.tc-davmark__cloth{fill:var(--tc-accent);stroke:none}
+.tc-davmark.is-alert{box-sizing:content-box;padding:3px;border:1px solid var(--tc-danger);border-radius:3px;
+  background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
+.tc-nav .tc-davmark{width:16px;height:16px;opacity:1}
+/* в подвале приложения — не кнопка: прижат вправо, чтобы не читался равным кнопкам */
+.tc-railfoot > .tc-davmark{margin-left:auto}
+.tc-brand .tc-brand__logo{width:56px;height:22px}
+.tc-badge.is-local{border-color:transparent;color:var(--tc-danger);
+  background:color-mix(in srgb,var(--tc-danger) 11%,transparent)}
+.tc-badge.is-local::before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor;flex:none}
+.tc-search{flex:0 1 560px;width:560px;display:flex;align-items:center;gap:7px;height:28px;padding:0 9px;
+  background:var(--tc-bg);border:.5px solid var(--tc-edge);border-radius:3px;color:var(--tc-dusty);font-size:12.5px}
+.tc-top__actions{flex:1 1 0;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.tc-usermenu{display:flex;align-items:center;gap:7px;padding:0 2px 0 10px;font-size:12.5px;color:var(--tc-muted)}
+.tc-usermenu .tc-avatar{width:22px;height:22px;font-size:9.5px}
+/* каркас */
+.tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px;--tc-shell-mode:full}
+.tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr) var(--tc-side)}
+.tc-shell__body.tc-shell__body--no-rail{grid-template-columns:minmax(0,1fr)}
+.tc-shell__rail{border-right:.5px solid var(--tc-rule);padding:12px 0 0;display:flex;flex-direction:column;gap:16px;min-width:0}
+.tc-main{min-width:0;display:flex;flex-direction:column;background:var(--tc-bg);container:tcbox / inline-size;overflow-x:auto;position:relative}
+.tc-side{border-left:.5px solid var(--tc-rule);background:var(--tc-surface);display:flex;flex-direction:column;min-width:0;position:relative;container:tcbox / inline-size}
+/* рейл */
+.tc-nav{display:flex;flex-direction:column;gap:1px;padding:0 8px}
+.tc-nav--bottom{display:none}
+.tc-nav .tc-nav__item{display:flex;align-items:center;gap:9px;height:29px;padding:0 8px;border-radius:3px;font-size:13.5px;color:var(--tc-ink)}
+.tc-nav .tc-nav__item.is-on{background:var(--tc-card);font-weight:600}
+.tc-nav .tc-nav__item.is-on .tc-num{color:var(--tc-muted)}
+.tc-nav svg{width:15px;height:15px;flex:none;stroke:currentColor;stroke-width:1.3;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.tc-num{margin-left:auto;font-family:var(--tc-font-mono);font-size:11px;color:var(--tc-dusty)}
+.tc-num.is-alert{color:var(--tc-danger)}
+.tc-rubric{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--tc-dusty);font-weight:600}
+.tc-railsec{display:flex;flex-direction:column;gap:3px}
+.tc-railsec > .tc-rubric{padding:0 16px;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
+/* Три фиксированные колонки, хвост (ro, Retry) раскладывается сам. */
+.tc-tickrow{display:grid;grid-template-columns:12px 3px minmax(3.5em,1fr);
+  grid-auto-flow:column;grid-auto-columns:minmax(0,auto);gap:9px;align-items:center;
+  height:26px;padding:0 14px 0 12px;font-size:13px}
+/* Уступает хвост, не имя: имя — то, за что строку узнают. */
+.tc-tickrow .tc-tickrow__meta{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Флажок знает свой размер сам — как полоска ниже. */
+.tc-tickrow__tick{display:inline-block;vertical-align:middle;width:11px;height:11px;
+  border-radius:2px;background:var(--tc-ink);flex:none}
+.tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
+/* Полоска коллекции знает свой размер сама. */
+.tc-mark{display:inline-block;vertical-align:middle;width:3px;height:14px;border-radius:1px;flex:none}
+.tc-tickrow .tc-mark{width:3px;height:14px;border-radius:1px}
+.tc-tickrow__label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-tickrow .tc-tickrow__meta{font-size:11px;color:var(--tc-dusty);font-family:var(--tc-font-mono)}
+.tc-tickrow.is-on{background:var(--tc-card);font-weight:600}
+.tc-tickrow.is-off .tc-tickrow__label{color:var(--tc-dusty)}
+.tc-tickrow.is-error .tc-tickrow__meta{color:var(--tc-danger)}
+/* Combined … — единый вид раздела. Полоска из цветов всех коллекций. */
+.tc-tickrow.is-all{margin-bottom:2px}
+/* Корень файлов — навигация, не единый вид: значок раздела вместо сборной
+   полоски. Флажок трёхпозиционный: отмеченные хранилища и есть корень. */
+.tc-tickrow.is-root{grid-template-columns:12px 13px minmax(3.5em,1fr);margin-bottom:2px}
+.tc-tickrow.is-root > svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.3;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+/* Чужая лента: цвет из адреса, полоска штрихованная. Штриховку знает
+   сама полоска — она же стоит в таблице подключений. */
+.tc-mark.is-ext,.tc-tickrow.is-ext .tc-mark{position:relative}
+.tc-mark.is-ext::after,.tc-tickrow.is-ext .tc-mark::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent 0 2px,var(--tc-surface) 2px 3px);opacity:.8}
+.tc-tickrow.is-ext .tc-tickrow__label{font-style:normal}
+.tc-mark.is-multi{background:linear-gradient(#4A6B52 0 20%,#3F6E8C 20% 40%,#A05A2C 40% 60%,#6B4E7A 60% 80%,#8C6239 80% 100%)}
+.tc-tickrow__tick.is-part{background:linear-gradient(var(--tc-ink) 0 0) center/7px 2px no-repeat;border:.5px solid var(--tc-edge)}
+/* Подвал рейла — ряд квадратов с title, прижат к низу колонки, как Delete в панели. */
+.tc-railfoot{margin-top:auto;padding:11px 16px;border-top:.5px solid var(--tc-hair);display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;align-items:center}
+.tc-railfoot > .tc-btn{padding:0 7px;flex:none}
+/* подвал отдельно от рейла, его ширины — для кадров-образцов компонента */
+.tc-railfoot--strip{width:var(--tc-rail);border-right:.5px solid var(--tc-rule)}
+/* Баннер подвала: важное состояние, которое должно быть на виду, чтобы за ним
+   не ходить в раздел. Первая строка — что сейчас, вторая — подробность. */
+.tc-railnote{flex:1 1 100%;font-size:11px;line-height:1.5}
+.tc-railnote.is-alert{color:var(--tc-danger)}
+.tc-railnote.is-off{color:var(--tc-dusty)}
+.tc-railnote .tc-mono{color:inherit}
+/* Последняя строка рейла: версия и ссылка на «о программе». C-13 (AGPL) требует видимую
+   ссылку на исходники именно запущенной версии — она стоит в оболочке, а не только
+   на странице без входа. Занимает всю ширину подвала, поэтому переносится под кнопки. */
+a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc-dusty);
+  text-decoration:underline;text-decoration-color:var(--tc-hair);text-underline-offset:2px}
+/* шапка раздела и панель управления */
+.tc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:15px var(--tc-page-gutter) 11px;flex-wrap:wrap}
+.tc-head__title{font-family:var(--tc-font-serif);font-size:22px;font-weight:400;line-height:1.15;display:flex;align-items:center;gap:9px}
+.tc-head__title .tc-mark{width:3px;height:20px;border-radius:1px}
+.tc-head__sub{font-size:11.5px;color:var(--tc-dusty);margin-top:4px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.tc-acts{display:flex;gap:6px;align-items:center;flex:none;flex-wrap:wrap;justify-content:flex-end}
+/* Набор кнопок шапки не шире шапки: иначе, пока порог 620 не пустил его в перенос, он выдавливает колонку. */
+.tc-head .tc-acts{max-width:100%}
+/* Полоса: свой отступ 7 px сверху и снизу; одна строка; лишнее — is-2nd. */
+.tc-head:has(+ .tc-bar){padding-bottom:4px}
+.tc-side > .tc-head{flex-wrap:nowrap}
+.tc-side > .tc-head > .tc-acts{flex:none}
+/* Левая половина шапки: .tc-head__group (фото + заголовки), внутри .tc-head__titles. */
+.tc-head__group{display:flex;gap:14px;align-items:flex-start;min-width:0}
+.tc-head__titles{min-width:0}
+.tc-bar{display:flex;align-items:center;gap:10px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-rule);
+  position:relative}
+.tc-bar__right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--tc-dusty)}
+/* Правая группа не переносит подписи: «Draft in this window · 11:42» в две строки наезжал на Auto-save. Лишнее уходит по порогу, а не сжатием. */
+.tc-bar__right > *{white-space:nowrap;flex:none}
+/* Потомок, не ребёнок: «...» с меню лежит в .tc-drop. Узел спрятан вместе с кнопкой,
+   иначе пустой flex-элемент добавил бы полосе промежуток. */
+.tc-bar .tc-bar__more,.tc-docbar .tc-bar__more{display:none;margin-left:auto}
+.tc-bar .tc-drop:has(> .tc-bar__more),.tc-docbar .tc-drop:has(> .tc-bar__more){display:none;margin-left:auto;flex:none}
+/* Меню «...» полосы открыто, только пока видна сама кнопка: без неё оно висело бы ни от чего. */
+.tc-bar .tc-bar__more + .tc-menu,.tc-docbar .tc-bar__more + .tc-menu{display:none}
+/* .tc-bar__sep и .tc-range — элементы панели: диапазон уходит в «...» целиком.
+   В панели сжимается только поле, не ниже 96 px; переключатель не сжимается. */
+.tc-bar > .tc-in{min-width:88px;overflow:hidden;white-space:nowrap}
+.tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
+.tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
+.tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}
+.tc-range{display:flex;align-items:center;gap:8px;flex:none}
+.tc-range__dash{font-style:normal;color:var(--tc-dusty)}
+/* native controls: zero specificity */
+:where(.tc-root) :where(button,input,textarea){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
+:where(.tc-root) :where(button){cursor:pointer;appearance:none}
+:where(.tc-root) :where(input[type=search]){appearance:none;-webkit-appearance:none}
+:where(.tc-root) :where(input[type=search])::-webkit-search-decoration,
+:where(.tc-root) :where(input[type=search])::-webkit-search-cancel-button,
+:where(.tc-root) :where(input[type=search])::-webkit-search-results-button,
+:where(.tc-root) :where(input[type=search])::-webkit-search-results-decoration{display:none;appearance:none}
+:where(.tc-root) ::placeholder{color:inherit;opacity:1}
+:where(.tc-root) :where(textarea){field-sizing:content;resize:none}
+:where(.tc-root) :where(button[role=menuitem]){width:100%}
+.tc-root .tc-q{flex:1;min-width:0;min-height:0;overflow:hidden}
+.tc-acts > .tc-drop{flex:none}
+/* действия шапки в два яруса: второй ярус — уточнение к первому (порог под фильтром) */
+.tc-acts--stack{flex-direction:column;align-items:flex-end}
+/* элементы управления */
+.tc-btn{height:26px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;border:.5px solid var(--tc-edge);
+  border-radius:3px;background:var(--tc-surface);font-size:12.5px;color:var(--tc-ink);white-space:nowrap;flex:none;box-sizing:border-box;
+  text-transform:none;letter-spacing:normal;font-weight:400}
+.tc-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc-btn.is-primary{background:var(--tc-accent);border-color:var(--tc-accent);color:#FFFDF7}
+.tc-btn.is-danger{color:var(--tc-danger);border-color:var(--tc-edge)}
+/* Недоступная кнопка остаётся своего цвета и бледнеет: по цвету видно, что она сделала бы. */
+.tc-btn:disabled{opacity:.45;cursor:default}
+/* Заливка — уничтожение; рамка — отвязать. Подпись на заливке — --tc-surface:
+   в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
+.tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
+.tc-btn.is-sm{height:22px;font-size:11.5px;padding:0 7px}
+/* Крестик — тихая кнопка в шапке, в потоке, как остальные действия. */
+.tc-close{width:24px;height:24px;padding:0;justify-content:center;flex:none;margin-left:auto;
+  border-color:transparent;background:transparent;color:var(--tc-muted)}
+.tc-close > svg{width:14px;height:14px}
+/* Один auto на ряд: иначе Apply / «куда» и крестик делят свободное место. */
+.tc-push + .tc-close,.tc-acts > .tc-close{margin-left:0}
+.tc-split{display:inline-flex;flex:none}
+.tc-split > .tc-btn:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;border-right:0}
+.tc-split > .tc-btn + .tc-btn{border-top-left-radius:0;border-bottom-left-radius:0;padding:0 8px;border-left:0}
+/* Переключатель не сжимается и не переносит подписи: целиком или под «⋯». */
+.tc-seg{display:inline-flex;border:.5px solid var(--tc-edge);border-radius:3px;overflow:hidden;height:26px;
+  flex:none;white-space:nowrap}
+.tc-seg__opt{padding:0 11px;display:inline-flex;align-items:center;font-size:12.5px;color:var(--tc-muted);border-right:.5px solid var(--tc-hair)}
+.tc-seg__opt:last-child{border-right:0}
+.tc-seg__opt.is-on{background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+/* Поле — одна строка; не помещающееся обрезается. Многострочное — .is-area. */
+.tc-in{height:28px;border:.5px solid var(--tc-edge);border-radius:3px;background:var(--tc-surface);padding:0 9px;
+  font-size:12.5px;display:flex;align-items:center;color:var(--tc-ink);min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-in.is-ph{color:var(--tc-dusty)}
+/* Поле-список: стрелку рисует система (.is-pick). */
+.tc-in.is-pick{padding-right:26px;position:relative}
+/* Стрелка в правых 24 px; маска цвета поля закрывает хвост текста. */
+.tc-in.is-pick::before{content:"";position:absolute;right:0;top:0;bottom:0;width:24px;
+  background:var(--tc-surface);pointer-events:none;border-radius:0 3px 3px 0;z-index:1}
+.tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
+  margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
+  transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
+.tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
+/* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
+.tc-in.is-error{border-color:var(--tc-danger)}
+.tc-in.is-area{height:auto;min-height:76px;align-items:flex-start;padding:7px 9px;line-height:1.5;
+  white-space:pre-wrap;overflow:visible;text-overflow:clip}
+.tc-in.is-mono{font-family:var(--tc-font-mono);font-size:11.5px}
+.tc-check{display:flex;align-items:center;gap:7px;font-size:12.5px}
+/* Высота строки: 28 поле, 26 панель, 22 таблица. Всё в строке берёт её. */
+.tc-field > .tc-check:only-child,.tc-field > label + .tc-check:last-child,*:has(> .tc-field > label) > .tc-field:not(.is-own-line) > .tc-check:first-child:has(+ .tc-field__hint),.tc-form > .tc-check,.tc-fset > .tc-check{min-height:28px}
+/* Форма равняется сверху, по строке подписи. Пустая строка подписи —
+   только если подпись есть у соседа; одинокой кнопке она не нужна. */
+*:has(> .tc-field > label) > .tc-field:has(> .tc-check:only-child)::before,
+*:has(> .tc-field > label) > .tc-field:has(> .tc-check:first-child + .tc-field__hint)::before,
+*:has(> .tc-field > label) > .tc-field:has(> .tc-btn:only-child)::before,
+*:has(> .tc-field > label) > .tc-field:has(> .tc-seg:only-child)::before{content:"";height:16px;flex:none}
+.tc-field.is-own-line::before{display:none}
+.tc-form .tc-btn,.tc-fset .tc-btn,.tc-field .tc-btn{height:28px}
+.tc-field > .tc-seg,.tc-form > .tc-seg,.tc-fset > .tc-seg{height:28px}
+/* Переключатель в поле — по своим вариантам, не во всю ширину поля. */
+.tc-field > .tc-seg{align-self:flex-start}
+:where(div,span,label,p):has(> .tc-in) > .tc-btn,
+:where(div,span,label,p):has(> .tc-in) > .tc-seg,
+:where(div,span,label,p):has(> .tc-field) > .tc-btn,
+:where(div,span,label,p):has(> .tc-field) > .tc-seg{height:28px}
+:where(div,span,label,p):has(> .tc-field) > .tc-check,
+:where(div,span,label,p):has(> .tc-in) > .tc-check{min-height:28px}
+/* Панель инструментов — 26 px всему, включая поле фильтра в ней. */
+.tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
+.tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn{height:26px}
+.tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in{height:26px}
+.tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:26px}
+.tc-bar .tc-check,.tc-docbar .tc-check{min-height:26px;white-space:nowrap}
+/* Строка таблицы — 22 px: полей в ней нет, и кнопка не должна её распирать. */
+.tc-table td .tc-btn{height:22px}
+.tc-check .tc-tickrow__tick{width:12px;height:12px;border-radius:2px;background:var(--tc-ink);flex:none}
+.tc-check .tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
+/* поля формы: ширина по содержимому, не 100% */
+.tc-form{display:flex;flex-wrap:wrap;gap:13px 16px;padding:14px var(--tc-page-gutter);align-items:flex-start}
+.tc-form.is-tight{padding-top:4px}
+.tc-field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tc-field > label,.tc-field__label{font-size:11px;letter-spacing:.04em;color:var(--tc-muted);text-transform:none}
+.tc-field .tc-field__hint,.tc-field__hint{font-size:11px;color:var(--tc-dusty);line-height:1.45}
+.tc-field--xs{width:96px}
+.tc-field--sm{width:140px}
+.tc-field--md{width:210px}
+.tc-field--lg{width:300px}
+.tc-field--xl{width:420px}
+.tc-field--full{flex:1 1 100%}
+.tc-field--full > .tc-in{max-width:760px}
+.tc-fset{flex:1 1 100%;border-top:.5px solid var(--tc-hair);padding-top:12px;margin-top:2px;
+  display:flex;flex-wrap:wrap;gap:13px 16px;align-items:flex-start}
+/* min-width:0: сетка auto-fill иначе держит набор шириной в max-width и выдавливает колонку. */
+.tc-fset{min-width:0}
+.tc-fset > .tc-rubric{flex:1 1 100%;margin-bottom:-2px}
+/* «Remove» у повторяющегося поля прижат к нижнему краю строки — к полю. */
+.tc-fset > .tc-btn{align-self:flex-end}
+.tc-formfoot{display:flex;gap:10px;align-items:center;padding:12px var(--tc-page-gutter) 16px;border-top:.5px solid var(--tc-hair);margin-top:4px}
+.tc-danger{display:flex;gap:12px;align-items:center;padding:11px var(--tc-page-gutter);border-top:.5px solid var(--tc-hair);
+  margin-top:auto;font-size:12px;color:var(--tc-dusty);flex-wrap:wrap}
+/* списки */
+.tc-list{display:flex;flex-direction:column;container:tcbox / inline-size}
+.tc-row{display:grid;align-items:center;gap:12px;padding-left:var(--tc-page-gutter);padding-right:var(--tc-page-gutter);
+  min-height:38px;border-bottom:.5px solid var(--tc-hair)}
+.tc-row.is-on{background:var(--tc-card)}
+.tc-row .tc-mark{width:3px;height:22px;border-radius:1px}
+.tc-row .tc-row__title{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Значок и имя файла — одна строка: .tc-root svg{display:block} иначе ставит значок над именем. */
+.tc-row__name{display:flex;align-items:center;gap:7px;min-width:0}
+.tc-row__name svg{width:15px;height:15px;flex:none;stroke:var(--tc-muted);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc-row__file{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-row__title.is-strong{font-weight:600}
+.tc-row .tc-row__excerpt{font-size:12px;color:var(--tc-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-row .tc-row__cell{font-size:11.5px;color:var(--tc-dusty);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-row .tc-mono{color:var(--tc-muted)}
+.tc-row.is-done .tc-row__title{color:var(--tc-dusty);text-decoration:line-through}
+.tc-row.is-overdue .tc-mono{color:var(--tc-danger)}
+.tc-row--avatarcols{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr) 140px}
+.tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
+.tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
+.tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
+.tc-row--find{grid-template-columns:3px 76px minmax(208px,2.4fr) minmax(120px,1fr) 74px 140px}
+.tc-row--tickcols{grid-template-columns:16px minmax(208px,2.4fr) 90px 130px 60px 140px}
+.tc-row--phone{grid-template-columns:3px minmax(0,1fr) auto;align-items:center}
+.tc-list__group{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:15px var(--tc-page-gutter) 5px;border-bottom:.5px solid var(--tc-rule);background:var(--tc-bg)}
+.tc-list__group .tc-num{margin-left:0}
+.tc-tick{width:13px;height:13px;border:1px solid var(--tc-edge);border-radius:2px}
+.tc-tick.is-done{background:var(--tc-accent);border-color:var(--tc-accent)}
+.tc-avatar{width:28px;height:28px;border-radius:3px;background:#D9D2BE;color:#4E4738;font-size:10.5px;
+  display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
+.tc-avatar.is-photo{background:#8C7B6A}
+[data-tc-theme="dark"] .tc-avatar{background:#3A463D;color:#C9BFA6}
+/* метки, значки, статусы */
+.tc-tag{border:.5px solid var(--tc-hair);border-radius:2px;padding:0 5px;font-size:10.5px;color:var(--tc-muted);background:var(--tc-surface);white-space:nowrap}
+.tc-tag:has(> .tc-mark){display:inline-flex;align-items:center;gap:5px}
+.tc-tag.is-on{border-color:var(--tc-accent);color:var(--tc-accent)}
+.tc-badge{display:inline-flex;align-items:center;gap:4px;height:16px;line-height:1;vertical-align:1px;
+  border:.5px solid var(--tc-rule);border-radius:2px;padding:0 6px;font-size:10px;color:var(--tc-muted);white-space:nowrap;
+  letter-spacing:.03em;background:transparent}
+.tc-badge.is-linked{border-color:var(--tc-accent);color:var(--tc-accent)}
+.tc-badge.is-alert{border-color:var(--tc-danger);color:var(--tc-danger)}
+.tc-runbar{display:flex;align-items:center;gap:8px;padding:7px var(--tc-page-gutter);background:var(--tc-card);flex-wrap:wrap;
+  border-bottom:.5px solid var(--tc-rule);font-size:11.5px;color:var(--tc-muted)}
+/* Индикатор опроса 64 px, не шкала: 120 на планшете выталкивает хвост. */
+.tc-runbar .tc-meter{width:64px;height:3px;border-radius:2px;background:var(--tc-edge);overflow:hidden;flex:none}
+.tc-runbar .tc-meter__bar{display:block;height:100%;background:var(--tc-accent)}
+/* Отступ у баннера с обеих сторон. */
+.tc-msg{display:block;padding:9px 12px;margin:12px var(--tc-page-gutter);font-size:12.5px;line-height:1.5;
+  background:var(--tc-card);border-left:2px solid var(--tc-edge);border-radius:0 3px 3px 0}
+.tc-msg.is-row{display:flex;gap:9px;align-items:flex-start}
+.tc-msg.is-row > svg{flex:none;margin-top:1px}
+.tc-msg.is-alert{border-left-color:var(--tc-danger);color:var(--tc-danger);background:transparent;border:.5px solid var(--tc-danger);border-left-width:2px}
+.tc-msg.is-accent{border-left-color:var(--tc-accent)}
+.tc-empty{padding:26px var(--tc-page-gutter);color:var(--tc-muted);font-size:13px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.tc-prose{max-width:72ch;font-size:13.5px;line-height:1.65;white-space:pre-wrap}
+.tc-diag{font-family:var(--tc-font-mono);font-size:11px;line-height:1.65;background:var(--tc-card);border-radius:3px;
+  padding:9px 11px;color:var(--tc-muted);white-space:pre-wrap;overflow-x:auto}
+/* панель подробностей */
+.tc-root .tc-fields{display:grid;grid-template-columns:104px minmax(0,1fr);gap:7px 14px;padding:12px var(--tc-page-gutter);font-size:13px}
+.tc-fields dt{color:var(--tc-dusty);font-size:11.5px;padding-top:1px}
+.tc-fields dd{overflow-wrap:anywhere}
+.tc-sec{border-top:.5px solid var(--tc-hair);padding:12px var(--tc-page-gutter)}
+.tc-sec > .tc-rubric{margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+.tc-avatar--photo{width:104px;height:104px;border-radius:4px;background:#8C7B6A;flex:none}
+.tc-avatar--photo.is-ph{background:#D9D2BE;display:flex;align-items:center;justify-content:center;color:#4E4738;font-size:26px;font-family:var(--tc-font-serif)}
+/* таблицы */
+.tc-table{width:100%;border-collapse:collapse}
+.tc-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-dusty);text-align:left;
+  font-weight:600;padding:9px 12px;border-bottom:.5px solid var(--tc-rule);white-space:nowrap}
+.tc-table td{padding:7px 12px;border-bottom:.5px solid var(--tc-hair);font-size:12.5px;vertical-align:middle}
+/* Машинная строка без пробелов: anywhere, иначе таблица не ужимается. */
+.tc-table td.tc-mono,.tc-table td .tc-mono{overflow-wrap:anywhere}
+.tc-table td.tc-mono{font-family:var(--tc-font-mono);font-size:11.5px;color:var(--tc-muted)}
+.tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
+.tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
+.tc-table .tc-acts{justify-content:flex-start;flex-wrap:nowrap;white-space:nowrap}
+/* Таблица в карточке: отступы у карточки, последняя строка без линии. */
+.tc-card > .tc-table{margin-top:9px}
+.tc-card > .tc-table tr td:first-child,.tc-card > .tc-table tr th:first-child{padding-left:0}
+.tc-card > .tc-table tr td:last-child,.tc-card > .tc-table tr th:last-child{padding-right:0}
+.tc-card > .tc-table tbody tr:last-child td,.tc-card > .tc-table tbody td[rowspan]{border-bottom:0}
+.tc-card > .tc-table tbody td{padding-top:5px;padding-bottom:5px}
+/* Не опрашивается — приглушено имя, числа остаются. */
+.tc-table tr.is-off .tc-table__filename:last-child{color:var(--tc-dusty)}
+/* файловый менеджер */
+.tc-bar--sel{background:var(--tc-card);border-bottom:.5px solid var(--tc-rule)}
+.tc-bar--sel .tc-btn{background:var(--tc-surface)}
+.tc-bar--sel .tc-btn.is-off{color:var(--tc-dusty);border-color:var(--tc-hair)}
+/* Бумага панели не перебивает заливку уничтожения. */
+.tc-bar--sel .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
+.tc-table__file{display:flex;align-items:center;gap:8px;min-width:0}
+.tc-table__file svg{width:15px;height:15px;flex:none;stroke:var(--tc-muted);stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc-table__file .tc-table__filename{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-table tr.is-sel{background:var(--tc-card)}
+.tc-table tr.is-folder .tc-table__file .tc-table__filename{font-weight:600}
+.tc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:14px;padding:14px var(--tc-page-gutter)}
+.tc-tile{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:7px;display:flex;flex-direction:column;gap:6px}
+.tc-tile.is-sel{border-color:var(--tc-accent);background:var(--tc-card)}
+.tc-thumb{aspect-ratio:4/3;border-radius:3px;background:#D9D2BE;display:flex;align-items:center;justify-content:center}
+[data-tc-theme="dark"] .tc-thumb{background:#33403A}
+.tc-thumb svg{width:22px;height:22px;stroke:var(--tc-muted);stroke-width:1.2;fill:none}
+.tc-tile__name{font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tc-tile__meta{font-size:10.5px;color:var(--tc-dusty);font-family:var(--tc-font-mono)}
+.tc-queue{width:330px;margin:14px var(--tc-page-gutter) 16px auto;border:.5px solid var(--tc-edge);border-radius:4px;background:var(--tc-surface)}
+.tc-main > .tc-queue{position:absolute;right:var(--tc-page-gutter);bottom:16px;margin:0;z-index:4}
+.tc-queue.is-min{width:auto}
+.tc-queue.is-min .tc-queue__head{border-bottom:none}
+.tc-queue__head{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:.5px solid var(--tc-hair);font-size:12px}
+.tc-queue ul{padding:6px 10px 8px;display:flex;flex-direction:column;gap:7px}
+.tc-queue li{display:flex;flex-direction:column;gap:3px;font-size:11.5px}
+.tc-queue__row{display:flex;justify-content:space-between;gap:8px}
+.tc-queue__row span:last-child{color:var(--tc-dusty);font-family:var(--tc-font-mono);font-size:10.5px;white-space:nowrap}
+.tc-crumbs{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--tc-dusty);flex-wrap:wrap}
+.tc-crumbs .tc-crumbs__link{color:var(--tc-accent)}
+.tc-crumbs b{font-weight:600;color:var(--tc-ink)}
+.tc-tree{display:flex;flex-direction:column;gap:1px;font-size:12.5px}
+.tc-tree__row{display:flex;align-items:center;gap:7px;height:26px;padding:0 8px;border-radius:3px}
+.tc-tree__row.is-on{background:var(--tc-card);font-weight:600}
+.tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
+/* наложение: быстрая заметка поверх любого экрана */
+.tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
+.tc-scrim{position:absolute;inset:0;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
+[data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
+.tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
+.tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
+.tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.tc-sheet__foot{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:.5px solid var(--tc-hair)}
+.tc-kbd{font-family:var(--tc-font-mono);font-size:10.5px;border:.5px solid var(--tc-edge);border-radius:3px;
+  padding:1px 5px;color:var(--tc-muted);background:var(--tc-bg);white-space:nowrap}
+.tc-menu{width:236px;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:4px;padding:4px}
+/* Меню на экране всплывает и места в раскладке не занимает.
+   Витрины раздела 6 — исключение: там меню и есть предмет. */
+.tc-menu.is-pop{position:absolute;top:100%;left:0;margin-top:4px;z-index:3}
+.tc-menu.is-pop.is-right{left:auto;right:0}
+/* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
+.tc-drop{position:relative;display:inline-flex}
+.tc-field:has(> .tc-menu.is-pop){position:relative}
+/* Раскрытая кнопка — точка отсчёта для своего меню. */
+.tc-btn:has(> .tc-menu.is-pop){position:relative}
+.tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
+.tc-drop > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
+/* Рубрика внутри меню: говорит, откуда взялся набор строк. */
+.tc-menu > .tc-rubric{padding:4px 8px 6px}
+/* Поиск в длинном списке — поле во всю ширину меню, над строками. */
+.tc-menu > .tc-in{display:block;width:100%;margin-bottom:4px}
+.tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
+.tc-menu__item.is-on{background:var(--tc-card)}
+.tc-menu__item > svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;opacity:.75}
+.tc-menu__item > .tc-kbd{margin-left:auto}
+/* Разделитель меню — 1 px: полпикселя на короткой линии пропадает. */
+.tc-menu__sep{display:block;height:1px;background:var(--tc-hair);margin:4px 6px;padding:0}
+/* Меню с полями кончается кнопками: сохранить — это действие, а не пункт.
+   Пункт меню действует сразу; поля ждут кнопки. */
+.tc-menu__foot{display:flex;flex-wrap:wrap;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid var(--tc-hair)}
+/* полноэкранная заметка: чтение и правка */
+/* Колонка справа — та же панель подробностей, 400 px; при рабочей области уже 880 — 296. */
+.tc-doc__layout{display:grid;grid-template-columns:minmax(0,1fr) var(--tc-side);min-height:0}
+.tc-doc__layout.is-focus{grid-template-columns:minmax(0,1fr)}
+/* Полный экран: поля не зажаты. «Reading width» — названный режим. */
+.tc-doc{padding:20px var(--tc-page-gutter) 30px;min-width:0}
+/* В документе поле занимает свою ячейку целиком. Без width сброс
+   textarea{field-sizing:content} делает заголовок и тело шириною в свой текст,
+   и три коробки в одном столбце получают три разные ширины. */
+.tc-doc .tc-prose{max-width:none}
+.tc-doc .tc-in{max-width:none;width:100%}
+.tc-doc__layout.is-measure .tc-doc > *{max-width:78ch}
+.tc-doc__title{font-family:var(--tc-font-serif);font-size:27px;line-height:1.15;font-weight:400}
+.tc-docmeta{border-left:.5px solid var(--tc-rule);padding:16px 18px;display:flex;flex-direction:column;gap:15px;background:var(--tc-surface)}
+.tc-docmeta .tc-rubric{margin-bottom:6px}
+.tc-docbar{display:flex;align-items:center;gap:6px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-hair);background:var(--tc-surface)}
+/* диалоги и одиночные страницы */
+/* Страницы до входа: карточка в поле пустой страницы. Не примитив набора. */
+.tc-auth{min-height:520px;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+/* Две ссылки под Sign in — пара в .tc-auth__stack, не два края карточки. */
+.tc-auth__stack{display:flex;flex-direction:column;gap:13px;align-items:flex-start}
+.tc-auth__stack > .tc-form,.tc-auth__stack > .tc-auth__links{align-self:stretch}
+.tc-auth__links{display:flex;flex-wrap:wrap;gap:13px;font-size:12px}
+.tc-auth__links > *{color:var(--tc-accent)}
+.tc-dialog{width:100%;max-width:760px;margin:0 auto;padding:22px var(--tc-page-gutter) 26px;container:tcbox / inline-size}
+.tc-dialog.is-wide{max-width:1080px}
+.tc-dialog.is-narrow{max-width:420px}
+.tc-dialog .tc-head{padding-left:0;padding-right:0}
+.tc-dialog .tc-form{padding-left:0;padding-right:0}
+.tc-dialog .tc-formfoot{padding-left:0;padding-right:0}
+.tc-steps{display:flex;gap:0;align-items:center;font-size:11px;color:var(--tc-dusty);margin-bottom:14px;letter-spacing:.1em;text-transform:uppercase}
+.tc-steps__item{padding:0 12px 0 0}
+.tc-steps__item.is-on{color:var(--tc-ink);font-weight:600}
+.tc-steps__rule{width:22px;height:.5px;background:var(--tc-rule);margin-right:12px;display:block}
+/* Счёт разобранного — .tc-stats: один примитив на три мастера. */
+.tc-stats{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 12px;font-size:13px}
+.tc-stat.is-error{color:var(--tc-danger)}
+.tc-card{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:12px 14px;margin-bottom:10px}
+.tc-card > .tc-rubric{margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+/* Правая часть рубрики: части переносятся целиком, фраза внутри не рвётся и за край карточки не выходит. */
+.tc-rubric__aside{display:inline-flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-end;gap:4px 6px;white-space:nowrap;min-width:0}
+/* Слияние: список «куда» сжимается (min-width:0), кнопка не уезжает. */
+/* Конфликт: карточка на свойство, не три колонки в ряд. */
+.tc-diff{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.tc-diff__item{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:10px 12px}
+.tc-diff__item > .tc-rubric{margin-bottom:8px}
+.tc-diff__options{display:flex;flex-direction:column;gap:6px}
+.tc-diff__options .tc-check{align-items:flex-start;padding:7px 8px;border:.5px solid var(--tc-hair);border-radius:3px}
+.tc-diff__options .tc-check:has(.tc-tickrow__tick:not(.is-off)){border-color:var(--tc-accent);
+  background:color-mix(in srgb,var(--tc-accent) 7%,transparent)}
+.tc-diff__value{display:flex;flex-direction:column;gap:1px;min-width:0}
+.tc-diff__source{font-size:11px;color:var(--tc-dusty)}
+.tc-diff__agree{font-size:12.5px;color:var(--tc-muted);margin:8px 0 0}
+/* печать и телефон */
+.tc-root.tc-root--print{background:#fff;color:#000;padding:26px 30px;font-size:12.5px}
+.tc-root.tc-root--print .tc-print__h1{font-family:var(--tc-font-serif);font-size:20px;margin-bottom:2px}
+.tc-root.tc-root--print .tc-print__rub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#555;margin:16px 0 4px}
+.tc-root.tc-root--print .tc-print__row{display:grid;grid-template-columns:66px 1fr;gap:12px;padding:5px 0;border-bottom:.5px solid #bbb}
+/* Три колонки: имя / размер / дата. Базовое правило выше — 66px 1fr,
+   tc-print__row--3col его не перебивает (слабее). Без этого дата уезжает
+   на вторую строку в узкий столбец и ломается по дефисам. */
+.tc-root.tc-root--print .tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
+.tc-root.tc-root--print .tc-print__row--3col > :not(:first-child){white-space:nowrap}
+.tc-row__text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tc-skel{background:var(--tc-hair);border-radius:2px;height:9px;display:block}
+/* Колонки уходят по сужению .tc-main, не окна.
+   Панель подробностей скрывается. Порог 1190: рейл 264 + панель 400 +
+   пол колонки 480 = 1144, и запас; порог прежний — на нём стоят ступени лестницы 1191/1190. */
+@container tcbox (max-width:1190px){
+  .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr)}
+  .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+}
+/* Колонка заметки считается от рабочей области: 400 панели + 480 текста. Уже — 296. */
+@container tcbox (max-width:880px){
+  .tc-doc__layout{grid-template-columns:minmax(0,1fr) 296px}
+}
+/* Панель правки заметки: порог 1120 — целиком она занимает около 1115
+   (левая группа до Attach 447, правая: черновик + Ctrl+S + ширина + Focus). */
+@container tcbox (max-width:1120px){
+  .tc-docbar .is-2nd{display:none}
+  .tc-docbar:has(.is-2nd) .tc-bar__more,.tc-docbar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-docbar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Тяжёлая полоса — .tc-bar--wide: целиком ей нужно 930–940 px, поэтому
+   is-2nd уходит под «...» с 960, а не с 800. Агенда, хронология человека. */
+@container tcbox (max-width:960px){
+  .tc-bar--wide .is-2nd{display:none}
+  .tc-bar--wide:has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Без is-2nd панели правки нужно 740: дальше кнопки теряют подписи, не действия, и стоят плотнее. */
+@container tcbox (max-width:740px){
+  .tc-docbar .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar .tc-btn{padding:0 7px}
+}
+@container tcbox (max-width:800px){
+  /* is-2nd уходит под «...». У таблицы порог 700: ячейка умеет сжиматься. */
+  .tc-bar .is-2nd{display:none}
+  /* Панель выделения теряет подписи, не действия. */
+  .tc-bar--sel .tc-btn > .tc-btn__label{display:none}
+  .tc-bar--sel .tc-btn:has(> .tc-btn__label){padding:0 9px}
+  .tc-bar:has(.is-2nd) .tc-bar__more,.tc-bar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  /* Тяжёлая таблица — .tc-table--wide: целиком ей нужно около 790, поэтому is-2nd уходит с 800, а не с 700. */
+  .tc-table--wide th.is-2nd,.tc-table--wide td.is-2nd{display:none}
+  .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr) 140px}
+  .tc-row--avatarcols .tc-row__caption{display:none}
+  .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 88px 140px}
+  .tc-row--timecols .tc-row__detail{display:none}
+  .tc-row--find{grid-template-columns:3px 70px minmax(136px,2.4fr) 66px 140px}
+  .tc-row--find .tc-row__detail{display:none}
+  .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(112px,2fr) minmax(60px,auto) 74px 140px}
+  .tc-row--tickmarkcols .tc-row__progress{display:none}
+  .tc-row--tickcols{grid-template-columns:16px minmax(176px,2.4fr) 84px 124px 140px}
+  .tc-row--tickcols .tc-row__detail{display:none}
+}
+@container tcbox (max-width:700px){
+  /* Колонка is-2nd исчезает, когда панель узкая. */
+  .tc-table th.is-2nd,.tc-table td.is-2nd{display:none}
+  /* После скрытия слотов таблица всё ещё может быть шире панели.
+     --fit: ведущая колонка держит имя, заголовки переносятся словами. */
+  .tc-table--fit{table-layout:fixed}
+  .tc-table--fit td{min-width:0}
+  .tc-table--fit th:first-child{width:36%}
+  .tc-table--fit th{white-space:normal}
+  .tc-table--fit .tc-table__filename{white-space:normal;overflow:visible;text-overflow:clip}
+  /* --fit: break-word, не anywhere — иначе «4 calendars · 1 book» по буквам. */
+  .tc-table--fit td.tc-mono,.tc-table--fit td .tc-mono{overflow-wrap:break-word}
+  .tc-table--fit .tc-acts{justify-content:flex-start}
+  .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
+  .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) minmax(70px,auto) 80px 140px}
+  .tc-row--excerpt > :nth-child(3){display:none}
+}
+@container tcbox (max-width:620px){
+  .tc-row{padding-left:12px;padding-right:12px}
+  /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
+  .tc-head .tc-acts{flex:0 1 auto;min-width:0}
+  .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px 130px}
+  .tc-row--avatarcols .tc-row__detail{display:none}
+  .tc-row--timecols{grid-template-columns:3px 54px minmax(110px,1fr) 130px}
+  .tc-row--timecols .tc-row__caption{display:none}
+  .tc-row--find{grid-template-columns:3px 62px minmax(110px,2fr) 130px}
+  .tc-row--find .tc-row__caption{display:none}
+  .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(100px,2fr) 70px 130px}
+  .tc-row--tickmarkcols .tc-row__tags{display:none}
+  .tc-row--excerpt{grid-template-columns:3px minmax(100px,1.4fr) 74px 130px}
+  .tc-row--excerpt .tc-row__tags{display:none}
+  .tc-row--tickcols{grid-template-columns:16px minmax(120px,2fr) 78px 130px}
+  .tc-row--tickcols .tc-row__time{display:none}
+}
+@container tcbox (max-width:460px){
+  .tc-row--avatarcols{grid-template-columns:3px 28px minmax(0,1fr) 118px}
+  .tc-row--avatarcols .tc-row__source{display:none}
+  .tc-row--timecols{grid-template-columns:3px 50px minmax(0,1fr)}
+  .tc-row--timecols .tc-row__source{display:none}
+  .tc-row--find{grid-template-columns:3px 58px minmax(0,1fr)}
+  .tc-row--find .tc-row__source{display:none}
+  .tc-row--excerpt{grid-template-columns:3px minmax(0,1fr) 70px}
+  .tc-row--excerpt .tc-row__source{display:none}
+  .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(0,1fr) 66px}
+  .tc-row--tickmarkcols .tc-row__source{display:none}
+  .tc-row--tickcols{grid-template-columns:16px minmax(0,1fr) 74px}
+  .tc-row--tickcols .tc-row__source{display:none}
+  .tc-table .tc-table__n3,.tc-table .tc-table__n3,
+  .tc-table .tc-table__n4,.tc-table .tc-table__n4{display:none}
+}
+/* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
+@container tcbox (min-width:641px) and (max-width:1007px){
+  .tc-shell__body,.tc-shell__body.tc-shell__body--side{
+    --tc-shell-mode:rail;--tc-rail:56px;
+    grid-template-columns:56px minmax(0,1fr)}
+  .tc-shell__body.tc-shell__body--no-rail,
+  .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{
+    --tc-shell-mode:rail;grid-template-columns:minmax(0,1fr)}
+  .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+  .tc-shell__rail{overflow:hidden;padding:12px 4px;align-items:center}
+  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  .tc-nav{padding:0;align-items:center}
+  .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
+  .tc-nav .tc-num{display:none}
+  /* Крылья brand/actions остаются flex:1 1 0 — поиск по центру, сжимается. */
+  .tc-top .tc-search{flex:0 1 560px;width:auto;min-width:0;max-width:560px}
+}
+/* Ящик: ≤640. Состояние — на детях корня; вид потомков — style(), иначе
+   панель 440 px и лист 560 px на широком корне тоже попали бы в max-width:640. */
+@container tcbox (max-width:640px){
+  .tc-shell__body,.tc-shell__body.tc-shell__body--side,
+  .tc-shell__body.tc-shell__body--no-rail,
+  .tc-shell__body.tc-shell__body--no-rail.tc-shell__body--side{
+    --tc-shell-mode:drawer;--tc-page-gutter:var(--tc-page-gutter-narrow);
+    grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;
+    min-height:600px;overflow-x:clip}
+  .tc-overlay{--tc-shell-mode:drawer;overflow-x:clip;min-width:0}
+  .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
+  .tc-shell__body > .tc-main{grid-row:1;grid-column:1}
+  .tc-shell__rail{
+    --tc-shell-mode:drawer;
+    grid-row:2;grid-column:1;flex-direction:row;flex-wrap:nowrap;gap:0;padding:0;
+    border-right:0;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);
+    overflow:visible;align-items:stretch}
+  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  .tc-shell__rail .tc-nav{
+    display:flex;flex-direction:row;width:100%;padding:0;gap:0;align-items:stretch}
+  .tc-shell__rail .tc-nav .tc-nav__item{
+    flex:1;flex-direction:column;justify-content:center;gap:3px;height:auto;width:auto;
+    padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
+  .tc-shell__rail .tc-nav .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
+  .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
+  .tc-shell__rail .tc-nav .tc-davmark{width:16px;height:16px}
+  .tc-shell__rail .tc-num{display:none}
+  .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
+    padding:8px;gap:8px;overflow-x:clip}
+  .tc-top .tc-top__actions.tc-top__actions{flex:1 1 auto;gap:8px}
+  .tc-top .tc-btn{height:38px}
+  .tc-top .tc-btn:has(> svg:only-child){min-width:38px;width:max(38px,max-content);height:38px}
+  .tc-top > .tc-btn.tc-btn,
+  .tc-top .tc-top__actions > .tc-btn:first-child:has(> svg:only-child),
+  .tc-top .tc-top__actions > .is-primary:has(> svg:only-child){width:38px;padding:0}
+  .tc-top .tc-btn:has(> svg:only-child) svg{width:20px;height:20px}
+  .tc-top .tc-usermenu{flex:none;height:38px}
+  /* Поле уходит, остаётся значок — тот же вход, что кнопка поиска на телефоне. */
+  .tc-top .tc-search.tc-search{display:flex;flex:none;align-items:center;justify-content:center;
+    width:38px;height:38px;padding:0;gap:0;margin-left:auto;overflow:hidden;position:relative;
+    background:var(--tc-surface)}
+  .tc-top .tc-search svg{width:20px;height:20px;flex:none}
+  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;min-width:0;height:auto;padding:0;border:0}
+  /* Запрос открыт (крестик очистки) — поле остаётся полем. */
+  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
+    padding:0 9px;justify-content:flex-start;gap:7px;margin-left:0;overflow:visible}
+  .tc-top .tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
+    padding:0 28px 0 36px;flex:none}
+  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
+  .tc-top .tc-brand{flex:1 1 auto;min-width:0}
+  .tc-top .tc-brand:has(.tc-brand__logo){flex:none;width:auto}
+  /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
+     Столбец формы сюда нельзя: панель 440 на широком корне тоже ≤640. */
+  .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
+  .tc-sheet{width:100%;margin:0}
+  .tc-sheet__head{flex-wrap:wrap}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
+  .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
+  label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
+    overflow-wrap:anywhere;min-width:0}
+  .tc-sheet__pick--196{flex-direction:column}
+  .tc-sheet__pick-rail{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
+}
+/* 390–460: «2 min ago» значком, иначе New note и mix не входят. */
+@container tcbox (max-width:460px){
+  .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0;font-size:0;gap:0}
+}
+@container style(--tc-shell-mode: drawer){
+  .tc-row{min-height:52px;gap:10px}
+  .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
+  .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
+  .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
+  .tc-nav--bottom svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:1}
+  .tc-btn,.tc-in,.tc-seg{height:38px}
+  .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
+  .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn,
+  .tc-form .tc-btn:not(.is-sm),.tc-fset .tc-btn:not(.is-sm),.tc-field .tc-btn:not(.is-sm),
+  .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
+  .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
+  .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
+  button,.tc-in,.tc-seg__opt,.tc-check,.tc-nav__item,.tc-tick,.tc-tickrow__tick,.tc-tag,a[href]{
+    position:relative;overflow:visible;z-index:1;appearance:none}
+  button:not(.is-pick)::after,a[href]::after,input:not(.is-pick)::after,textarea::after,select::after,
+  .tc-check::after,.tc-tick::after,.tc-tickrow__tick::after,.tc-seg__opt::after,.tc-menu__item::after{
+    content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;
+    transform:translate(-50%,-50%);pointer-events:auto}
+  .tc-in.is-pick::before{pointer-events:auto;width:44px;height:44px;top:50%;bottom:auto;right:auto;left:50%;
+    transform:translate(-50%,-50%);background:transparent}
+  .tc-menu.is-pop,.tc-drop{z-index:6;overflow:visible}
+  .tc-crumbs{position:relative;z-index:1}
+  .tc-shell__body .tc-main,.tc-shell__body .tc-bar,.tc-shell__body .tc-head,.tc-shell__body .tc-acts{overflow:visible}
+  .tc-form{flex-direction:column;flex-wrap:nowrap}
+  .tc-field,.tc-field--xs,.tc-field--sm,.tc-field--md,.tc-field--lg,.tc-field--xl,.tc-field--full{width:100%;min-width:0}
+  .tc-fields{grid-template-columns:minmax(0,1fr)}
+  .tc-head .tc-acts{flex:1 1 100%;justify-content:flex-start}
+  .tc-head .tc-acts--stack{align-items:flex-start}
+  .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
+  .tc-sheet{width:100%;max-width:100%;margin:0}
+  .tc-sheet__head{flex-wrap:wrap}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
+  .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
+  .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
+  .tc-card{display:flex;flex-direction:column}
+  .tc-form .tc-line{flex-direction:column;align-items:stretch}
+  label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
+    overflow-wrap:anywhere;min-width:0}
+  /* input/textarea — replaced, без ::after: зону даёт поле. */
+  .tc-field{position:relative}
+  .tc-field:has(> input,> textarea,> .tc-in)::after{
+    content:"";position:absolute;left:0;right:0;bottom:-3px;height:44px;pointer-events:auto}
+  .tc-range{position:relative;overflow:visible}
+  .tc-range:has(.tc-in)::after{
+    content:"";position:absolute;inset:-3px 0;min-height:44px;pointer-events:auto}
+  .tc-search{position:relative;overflow:visible}
+  .tc-search:has(.tc-q)::after{
+    content:"";position:absolute;inset:-3px;min-width:44px;min-height:44px;pointer-events:auto}
+  .tc-sheet__pick--196{flex-direction:column}
+  .tc-sheet__pick-rail{width:auto;border-right:0;border-bottom:.5px solid var(--tc-hair)}
+}
+
+/* layout glue */
+.tc-line.tc-line{display:flex;align-items:center;flex-wrap:wrap}
+.tc-stack.tc-stack{display:flex;flex-direction:column}
+.tc-line--gap-3.tc-line--gap-3{gap:3px}
+.tc-line--gap-4.tc-line--gap-4{gap:4px}
+.tc-line--gap-5.tc-line--gap-5{gap:5px}
+.tc-line--gap-6.tc-line--gap-6{gap:6px}
+.tc-line--gap-7.tc-line--gap-7{gap:7px}
+.tc-line--gap-8.tc-line--gap-8{gap:8px}
+.tc-line--gap-9.tc-line--gap-9{gap:9px}
+.tc-line--gap-10.tc-line--gap-10{gap:10px}
+.tc-line--gap-12.tc-line--gap-12{gap:12px}
+.tc-line--gap-14.tc-line--gap-14{gap:14px}
+.tc-line--gap-22.tc-line--gap-22{gap:22px}
+.tc-stack--gap-2.tc-stack--gap-2{gap:2px}
+.tc-stack--gap-3.tc-stack--gap-3{gap:3px}
+.tc-stack--gap-4.tc-stack--gap-4{gap:4px}
+.tc-stack--gap-5.tc-stack--gap-5{gap:5px}
+.tc-stack--gap-6.tc-stack--gap-6{gap:6px}
+.tc-stack--gap-7.tc-stack--gap-7{gap:7px}
+.tc-stack--gap-8.tc-stack--gap-8{gap:8px}
+.tc-stack--gap-9.tc-stack--gap-9{gap:9px}
+.tc-stack--gap-10.tc-stack--gap-10{gap:10px}
+.tc-stack--gap-12.tc-stack--gap-12{gap:12px}
+.tc-stack--gap-13.tc-stack--gap-13{gap:13px}
+.tc-stack--gap-14.tc-stack--gap-14{gap:14px}
+.tc-push.tc-push{margin-left:auto}
+.tc-pad.tc-pad{padding:0 var(--tc-page-gutter)}
+.tc-grow.tc-grow{flex:1 1 100%;width:100%;min-width:0}
+[data-tc-colour][data-tc-colour]{background:var(--tc-colour)}
+[data-tc-width][data-tc-width]{width:var(--tc-width)}
+.tc-table__col--changed.tc-table__col--changed{width:140px}
+.tc-table__col--menu.tc-table__col--menu{width:26px}
+.tc-table__col--num.tc-table__col--num{width:70px}
+.tc-table__col--size.tc-table__col--size{width:92px}
+.tc-table__col--tick.tc-table__col--tick{width:28px}
+.tc-table__col--tick-sm.tc-table__col--tick-sm{width:20px}
+.tc-table__col--time.tc-table__col--time{width:150px}
+.tc-table__col--type.tc-table__col--type{width:132px}
+.tc-table__col--w110.tc-table__col--w110{width:110px}
+.tc-table__col--w120.tc-table__col--w120{width:120px}
+.tc-table__col--w26.tc-table__col--w26{width:26%}
+.tc-table__col--w80.tc-table__col--w80{width:80px}
+.tc-table__col--w90.tc-table__col--w90{width:90px}
+.tc-ico--accent.tc-ico--accent{stroke:var(--tc-accent)}
+.tc-ico--danger.tc-ico--danger{stroke:var(--tc-danger)}
+.tc-ico--dusty.tc-ico--dusty{stroke:var(--tc-dusty)}
+.tc-ico--muted.tc-ico--muted{stroke:var(--tc-muted)}
+.tc-auth__tagline--mid.tc-auth__tagline--mid{text-align:center;margin:0 0 13px;font-size:13.5px;line-height:1.45;color:var(--tc-muted)}
+.tc-auth__tagline--bot14.tc-auth__tagline--bot14{margin:0 0 14px;font-size:13.5px;line-height:1.45;color:var(--tc-muted)}
+.tc-avatar--photo--sq76-t20.tc-avatar--photo--sq76-t20{height:76px;font-size:20px;width:76px}
+.tc-avatar--photo--sq62-t17.tc-avatar--photo--sq62-t17{height:62px;font-size:17px;width:62px}
+.tc-avatar--sq44-t15-r4.tc-avatar--sq44-t15-r4{height:44px;font-size:15px;border-radius:4px;width:44px}
+.tc-avatar--sq34-t12.tc-avatar--sq34-t12{height:34px;font-size:12px;width:34px}
+.tc-sheet__title.tc-sheet__title{font-size:13.5px}
+
+.tc-empty__lead.tc-empty__lead{font-size:13.5px;color:var(--tc-ink)}
+.tc-empty__lead-sm.tc-empty__lead-sm{font-size:12.5px;color:var(--tc-ink)}
+.tc-card__key.tc-card__key{color:var(--tc-muted)}
+.tc-badge--edge-accent-accent.tc-badge--edge-accent-accent{border-color:var(--tc-accent);color:var(--tc-accent)}
+.tc-brand--t16.tc-brand--t16{font-size:16px}
+.tc-brand__logo--h60-w150.tc-brand__logo--h60-w150{height:60px;width:150px}
+.tc-brand__logo--h48-w118.tc-brand__logo--h48-w118{height:48px;width:118px}
+.tc-brand__logo--h17-w44.tc-brand__logo--h17-w44{height:17px;width:44px}
+.tc-brand__logo--h42-w104.tc-brand__logo--h42-w104{height:42px;width:104px}
+.tc-btn--on-card.tc-btn--on-card{background:var(--tc-card)}
+.tc-btn--padx8.tc-btn--padx8{padding:0 8px}
+.tc-btn--jc-center-fill.tc-btn--jc-center-fill{justify-content:center;flex:1}
+.tc-btn--jc-center.tc-btn--jc-center{justify-content:center}
+.tc-btn--fontstyle-italic.tc-btn--fontstyle-italic{font-style:italic}
+.tc-btn.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px}
+.tc-btn--padx3.tc-btn--padx3{padding:0 3px}
+.tc-btn--self-start.tc-btn--self-start{align-self:start}
+.tc-btn--padx4.tc-btn--padx4{padding:0 4px}
+.tc-btn--padx6.tc-btn--padx6{padding:0 6px}
+.tc-card--alert.tc-card--alert{border-color:var(--tc-danger)}
+.tc-card--flush.tc-card--flush{margin:0}
+.tc-card--top14.tc-card--top14{margin-top:14px}
+.tc-card--edge-accent.tc-card--edge-accent{border-color:var(--tc-accent)}
+.tc-card--edge-accent-flush.tc-card--edge-accent-flush{border-color:var(--tc-accent);margin:0}
+.tc-card--pad12-14.tc-card--pad12-14{padding:12px 14px}
+.tc-danger--top0-pad11-14.tc-danger--top0-pad11-14{margin-top:0;padding:11px 14px}
+.tc-danger--topauto-flush-padt11.tc-danger--topauto-flush-padt11{margin-top:auto;padding:11px 0 0}
+.tc-diag--danger.tc-diag--danger{color:var(--tc-danger)}
+.tc-diag--top9-ink.tc-diag--top9-ink{margin-top:9px;color:var(--tc-ink)}
+.tc-dialog--max420-flush.tc-dialog--max420-flush{max-width:420px;margin:0}
+.tc-dialog--max520-padt0-padb0.tc-dialog--max520-padt0-padb0{max-width:520px;padding-top:0;padding-bottom:0}
+.tc-dialog--max520.tc-dialog--max520{max-width:520px}
+.tc-dialog--max560.tc-dialog--max560{max-width:560px}
+.tc-dialog--max540.tc-dialog--max540{max-width:540px}
+.tc-dialog--padt0-padb0.tc-dialog--padt0-padb0{padding-top:0;padding-bottom:0}
+.tc-dialog--max440-padt0-padb0.tc-dialog--max440-padt0-padb0{max-width:440px;padding-top:0;padding-bottom:0}
+.tc-zone.tc-zone{text-align:center}
+.tc-root__card-body.tc-root__card-body{font-size:12px;padding:12px 14px}
+.tc-print__sources.tc-print__sources{font-size:11px;color:#555}
+.tc-print__foot.tc-print__foot{margin-top:20px;font-size:10.5px;color:#555;border-top:.5px solid #bbb;padding-top:6px}
+.tc-card__pick.tc-card__pick{align-items:flex-start;display:flex;gap:9px}
+.tc-stack__item-title.tc-stack__item-title{font-weight:600;font-size:13.5px}
+.tc-stack__item-note.tc-stack__item-note{font-size:12.5px;color:var(--tc-muted);margin-top:3px}
+.tc-win__body--pad16-20.tc-win__body--pad16-20{background:var(--tc-bg);padding:16px 20px}
+.tc-stack__item-aside.tc-stack__item-aside{font-size:11.5px;color:var(--tc-dusty);margin-top:6px}
+.tc-railsec__tags.tc-railsec__tags{padding:0 16px}
+.tc-win__note.tc-win__note{font-size:13px;color:var(--tc-muted)}
+.tc-tray__row.tc-tray__row{color:var(--tc-muted)}
+.tc-win--420.tc-win--420{max-width:420px;margin:0 auto}
+.tc-win__bar.tc-win__bar{height:30px}
+.tc-win__sheet--pad12.tc-win__sheet--pad12{background:var(--tc-surface);padding:12px}
+.tc-win--520.tc-win--520{max-width:520px;margin:0 auto}
+.tc-win__toast.tc-win__toast{margin:0 auto}
+.tc-win__title.tc-win__title{font-size:13.5px;font-weight:600}
+.tc-win--560.tc-win--560{max-width:560px;margin:0 auto}
+.tc-sec__acts.tc-sec__acts{margin-top:7px}
+.tc-field__photo-row.tc-field__photo-row{align-items:flex-start;display:flex;gap:14px}
+.tc-field__photo-side.tc-field__photo-side{align-items:flex-start}
+.tc-form__cols.tc-form__cols{align-content:flex-start;flex:1 1 420px;gap:13px 16px}
+.tc-dialog__split.tc-dialog__split{align-items:flex-start;display:flex;flex-wrap:wrap;gap:18px}
+.tc-dialog__photo.tc-dialog__photo{position:relative;height:190px;border-radius:4px;overflow:hidden;flex:none;width:190px}
+.tc-dialog__photo-frame.tc-dialog__photo-frame{position:absolute;inset:22px;border:1.5px solid rgba(255,253,247,.9);border-radius:3px}
+.tc-dialog__photo-rule.tc-dialog__photo-rule{position:absolute;left:22px;right:22px;top:50%;height:.5px;background:rgba(255,253,247,.45)}
+.tc-dialog__photo-rule-v.tc-dialog__photo-rule-v{position:absolute;top:22px;bottom:22px;left:50%;background:rgba(255,253,247,.45);width:.5px}
+.tc-dialog__side.tc-dialog__side{flex:1 1 200px}
+.tc-doc__sec.tc-doc__sec{margin-top:18px}
+.tc-line__text.tc-line__text{font-size:12.5px}
+.tc-doc__fields.tc-doc__fields{margin:12px 0;align-items:flex-end;display:flex;flex-wrap:wrap;gap:12px 16px}
+.tc-doc__note.tc-doc__note{margin-top:14px;font-size:11.5px;color:var(--tc-dusty)}
+.tc-sheet__fields.tc-sheet__fields{gap:11px 14px}
+.tc-side__acts.tc-side__acts{padding:12px 20px 0}
+.tc-sec__note.tc-sec__note{font-size:12px;color:var(--tc-muted)}
+.tc-main__results.tc-main__results{padding:14px 20px}
+.tc-card__top11.tc-card__top11{margin-top:11px}
+.tc-card__acts.tc-card__acts{margin-top:12px}
+/* Почему кнопка недоступна — строкой под рядом, у правого края: рядом с кнопкой причина сдвинула бы её из столбца. */
+.tc-card__why{margin-top:6px;text-align:right;font-size:11.5px;color:var(--tc-dusty)}
+.tc-card__line.tc-card__line{font-size:13px}
+.tc-card__top8.tc-card__top8{margin-top:8px}
+.tc-sheet__keys.tc-sheet__keys{font-size:13px;align-items:baseline;display:grid;gap:9px 16px;grid-template-columns:7.2em 1fr}
+.tc-card__alert-note.tc-card__alert-note{font-size:12.5px;color:var(--tc-muted);margin-top:9px}
+.tc-card__top2.tc-card__top2{margin-top:2px}
+.tc-form__col--460.tc-form__col--460{flex:1 1 460px}
+.tc-form__col--300.tc-form__col--300{flex:1 1 300px}
+.tc-card__top9.tc-card__top9{margin-top:9px}
+.tc-card__split.tc-card__split{align-items:flex-start;display:flex;flex-wrap:wrap;gap:12px}
+.tc-card__qr.tc-card__qr{border:.5px solid var(--tc-edge);border-radius:4px;flex:none;padding:8px}
+.tc-card__qr-side.tc-card__qr-side{flex:1 1 140px}
+.tc-main__tree.tc-main__tree{padding:10px 20px 16px}
+.tc-card__warn.tc-card__warn{font-size:11.5px;color:var(--tc-danger);margin-top:8px}
+.tc-main__hero.tc-main__hero{align-items:flex-start;display:flex;flex-wrap:wrap;gap:22px;padding:34px 24px}
+.tc-main__hero-side.tc-main__hero-side{min-width:0;flex:1 1 320px}
+.tc-main__hero-title.tc-main__hero-title{font-family:var(--tc-font-serif);font-size:26px}
+.tc-doc__acts.tc-doc__acts{margin-top:14px}
+.tc-fset__grid.tc-fset__grid{max-width:1100px;min-width:0;display:grid;gap:2px 24px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.tc-card__note.tc-card__note{font-size:11.5px;color:var(--tc-muted);margin-top:9px;line-height:1.55}
+.tc-card__foot.tc-card__foot{border-top:.5px solid var(--tc-hair);margin-top:11px;padding-top:9px}
+.tc-card__above.tc-card__above{font-size:11.5px;color:var(--tc-dusty);margin:-3px 0 8px}
+.tc-card__grid.tc-card__grid{margin-top:11px;align-items:center;display:grid;gap:8px 12px;grid-template-columns:92px minmax(0,1fr) auto}
+.tc-card__rows.tc-card__rows{font-size:11.5px;display:grid;gap:7px 0;grid-template-columns:minmax(0,1fr)}
+.tc-card__note-dusty.tc-card__note-dusty{font-size:11.5px;color:var(--tc-dusty);margin-top:9px}
+.tc-root__bar-row.tc-root__bar-row{justify-content:flex-end;border-bottom:.5px solid var(--tc-hair);padding:12px 20px 96px}
+.tc-card__fields.tc-card__fields{align-items:flex-end;display:flex;flex-wrap:wrap}
+.tc-sheet__checks.tc-sheet__checks{margin-top:4px}
+.tc-main__banner.tc-main__banner{border-bottom:.5px solid var(--tc-rule);background:var(--tc-surface);padding:14px 20px}
+.tc-main__strip.tc-main__strip{border-bottom:.5px solid var(--tc-hair);padding:9px 20px}
+.tc-main__foot--16.tc-main__foot--16{border-top:.5px solid var(--tc-hair);font-size:11.5px;color:var(--tc-dusty);padding:16px 20px}
+.tc-main__banner--12.tc-main__banner--12{border-bottom:.5px solid var(--tc-rule);background:var(--tc-surface);padding:12px 20px}
+.tc-doc__sec--rule.tc-doc__sec--rule{margin-top:20px;padding-top:12px;border-top:.5px solid var(--tc-hair)}
+.tc-doc__files.tc-doc__files{font-size:12.5px;color:var(--tc-muted)}
+.tc-main__foot.tc-main__foot{border-top:.5px solid var(--tc-hair);font-size:11.5px;color:var(--tc-dusty);padding:14px 20px}
+.tc-main__thumbs.tc-main__thumbs{padding:6px 20px 18px}
+/* Полоса витрины узкая нарочно — своим контейнером, иначе «...» не появится на широком кадре. */
+.tc-root__bar-box.tc-root__bar-box{padding-bottom:88px;max-width:460px;container:tcbox / inline-size}
+.tc-doc__heading.tc-doc__heading{font-family:var(--tc-font-serif);font-size:19px}
+.tc-doc__body.tc-doc__body{font-size:14px;line-height:1.7}
+.tc-main__stage.tc-main__stage{text-align:center;align-items:center;padding:34px 20px}
+.tc-main__stage-note.tc-main__stage-note{font-size:12px;color:var(--tc-muted);max-width:44ch}
+.tc-root__compose.tc-root__compose{max-width:400px;gap:0;width:100%}
+.tc-sheet__from.tc-sheet__from{font-size:12px;line-height:1.5;color:var(--tc-muted);padding-top:2px}
+.tc-sheet__pick.tc-sheet__pick{min-height:210px}
+.tc-sheet__pick-rail.tc-sheet__pick-rail{border-right:.5px solid var(--tc-hair);padding:9px 0;width:212px}
+.tc-sheet__pick-list.tc-sheet__pick-list{min-width:0;flex:1;padding:9px 0}
+.tc-sheet__pick--196.tc-sheet__pick--196{min-height:196px}
+.tc-queue__acts.tc-queue__acts{margin-top:3px}
+.tc-card__head.tc-card__head{font-size:12px;padding-bottom:9px;border-bottom:.5px solid var(--tc-hair)}
+.tc-card__files.tc-card__files{padding-top:11px;margin-top:11px;border-top:.5px solid var(--tc-hair)}
+.tc-card__caption.tc-card__caption{font-size:11.5px;color:var(--tc-dusty);padding-top:9px;line-height:1.55}
+.tc-main__cards.tc-main__cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));padding:14px 20px}
+.tc-card__fields--gap10-12.tc-card__fields--gap10-12{gap:10px 12px}
+.tc-card__top10.tc-card__top10{margin-top:10px}
+.tc-card__fields--rule.tc-card__fields--rule{margin-top:12px;padding-top:11px;border-top:.5px solid var(--tc-hair)}
+.tc-card__lede.tc-card__lede{font-size:12.5px;color:var(--tc-muted);margin-bottom:10px}
+.tc-main__diag.tc-main__diag{padding:0 20px 14px}
+.tc-dialog__logo.tc-dialog__logo{justify-content:center;margin:0 0 13px}
+.tc-card__num.tc-card__num{font-size:20px;font-family:var(--tc-font-serif)}
+.tc-dialog__logo--wide.tc-dialog__logo--wide{justify-content:center;margin:6px 0 20px}
+.tc-card__term.tc-card__term{font-weight:600;margin-bottom:4px}
+.tc-railsec__note.tc-railsec__note{font-size:11.5px;color:var(--tc-dusty);padding:2px 16px}
+.tc-main__foot-acts.tc-main__foot-acts{border-top:.5px solid var(--tc-hair);margin-top:auto;padding:12px 14px}
+.tc-main__person.tc-main__person{padding:14px}
+.tc-main__person-side.tc-main__person-side{min-width:0}
+.tc-main__person-name.tc-main__person-name{font-family:var(--tc-font-serif);font-size:18px}
+.tc-main__person-acts.tc-main__person-acts{padding:0 14px 12px}
+.tc-doc__sec--rule16.tc-doc__sec--rule16{margin-top:16px;padding-top:12px;border-top:.5px solid var(--tc-hair)}
+.tc-doc__link.tc-doc__link{font-size:13px;color:var(--tc-accent)}
+.tc-docbar--rule.tc-docbar--rule{margin:0 0 12px;border-bottom:.5px solid var(--tc-hair);padding:7px 0}
+.tc-empty--dusty.tc-empty--dusty{color:var(--tc-dusty)}
+.tc-empty--t12-pad12-20.tc-empty--t12-pad12-20{font-size:12px;padding:12px 20px}
+.tc-empty--dashed.tc-empty--dashed{border:.5px dashed var(--tc-edge);border-radius:4px;margin:0;padding:22px}
+.tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px}
+.tc-empty--drop-side.tc-empty--drop-side{margin-top:8px;background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:6px;padding:16px}
+.tc-empty--t12-pad14-20.tc-empty--t12-pad14-20{font-size:12px;padding:14px 20px}
+.tc-field--fill300.tc-field--fill300{flex:1 1 300px}
+.tc-field--fill200.tc-field--fill200{flex:1 1 200px}
+.tc-field--fix130.tc-field--fix130{flex:0 0 130px}
+.tc-field--fix96.tc-field--fix96{flex:0 0 96px}
+.tc-field--fill120.tc-field--fill120{flex:1 1 120px}
+.tc-field--gap7.tc-field--gap7{gap:7px}
+.tc-field--max640-fill460.tc-field--max640-fill460{max-width:640px;flex:1 1 460px}
+.tc-field--gap8.tc-field--gap8{gap:8px}
+.tc-field--inline{flex-direction:row;align-items:center;gap:8px}
+.tc-field--w280.tc-field--w280{width:280px}
+.tc-field--fixauto.tc-field--fixauto{flex:0 0 auto}
+.tc-field--w100.tc-field--w100{width:100%}
+.tc-field--flex2-280.tc-field--flex2-280{flex:2 1 280px}
+.tc-field--fix150.tc-field--fix150{flex:0 0 150px}
+.tc-field--flex3-320.tc-field--flex3-320{flex:3 1 320px}
+.tc-field--flex3-340.tc-field--flex3-340{flex:3 1 340px}
+.tc-field__hint--max150.tc-field__hint--max150{max-width:150px}
+.tc-field__hint--top6.tc-field__hint--top6{margin-top:6px}
+.tc-field__hint--top8.tc-field__hint--top8{margin-top:8px}
+.tc-field__hint--flush-fill.tc-field__hint--flush-fill{margin:0;flex:1}
+.tc-field__hint--t11-dusty.tc-field__hint--t11-dusty{font-size:11px;color:var(--tc-dusty)}
+.tc-field__hint--gutter.tc-field__hint--gutter{padding:6px var(--tc-page-gutter) 4px}
+.tc-fields--bleed.tc-fields--bleed{padding-left:0;padding-right:0}
+.tc-fields--cols130.tc-fields--cols130{grid-template-columns:130px minmax(0,1fr)}
+.tc-fields--flush-padt14.tc-fields--flush-padt14{padding:14px 0 0}
+.tc-fields--cols88.tc-fields--cols88{grid-template-columns:88px minmax(0,1fr)}
+.tc-fields--pad4-14-12.tc-fields--pad4-14-12{padding:4px 14px 12px}
+.tc-form--padb12.tc-form--padb12{padding-bottom:12px}
+.tc-form--gap12-16-pad0.tc-form--gap12-16-pad0{gap:12px 16px;padding:0}
+.tc-form--col.tc-form--col{flex-direction:column;flex-wrap:nowrap}
+.tc-form--pad0.tc-form--pad0{padding:0}
+.tc-form--gap10.tc-form--gap10{gap:10px}
+.tc-form--mid340.tc-form--mid340{max-width:340px;margin:0 auto;width:100%}
+.tc-form--padl0-padr0.tc-form--padl0-padr0{padding-left:0;padding-right:0}
+.tc-form--padb0.tc-form--padb0{padding-bottom:0}
+.tc-formfoot--padl0-padr0.tc-formfoot--padl0-padr0{padding-left:0;padding-right:0}
+.tc-formfoot--bordertop-0.tc-formfoot--bordertop-0{border-top:0}
+.tc-formfoot--wrap.tc-formfoot--wrap{flex-wrap:wrap}
+.tc-fset--lead.tc-fset--lead{border-top:0;padding-top:0}
+.tc-fset--rule.tc-fset--rule{border-top:.5px solid var(--tc-hair);padding-top:12px}
+.tc-grid--flush-fill-pad8.tc-grid--flush-fill-pad8{margin:0;flex:1;padding:8px}
+.tc-head--mid.tc-head--mid{align-items:center}
+.tc-head--padt11.tc-head--padt11{padding-top:11px}
+.tc-head--padb10.tc-head--padb10{padding-bottom:10px}
+.tc-head--rule.tc-head--rule{padding-bottom:9px;border-bottom:.5px solid var(--tc-rule)}
+.tc-head--padb6.tc-head--padb6{padding-bottom:6px}
+.tc-head--snug.tc-head--snug{padding-bottom:8px}
+.tc-head__group--ai-center.tc-head__group--ai-center{align-items:center}
+.tc-head__sub--top0.tc-head__sub--top0{margin-top:0}
+.tc-head__sub--top6.tc-head__sub--top6{margin-top:6px}
+.tc-head__sub--jc-center.tc-head__sub--jc-center{justify-content:center}
+.tc-head__sub--bot12.tc-head__sub--bot12{margin-bottom:12px}
+.tc-head__title--t19.tc-head__title--t19{font-size:19px}
+.tc-head__title--t18.tc-head__title--t18{font-size:18px}
+.tc-head__title--t17.tc-head__title--t17{font-size:17px}
+.tc-head__title--bot4.tc-head__title--bot4{margin-bottom:4px}
+.tc-head__title--bot6.tc-head__title--bot6{margin-bottom:6px}
+.tc-head__title--bot8.tc-head__title--bot8{margin-bottom:8px}
+.tc-head__titles--row.tc-head__titles--row{align-items:flex-start;display:flex;gap:14px}
+.tc-ico--op-35.tc-ico--op-35{opacity:.35}
+.tc-ico--sq17.tc-ico--sq17{height:17px;width:17px}
+.tc-ico--sq16.tc-ico--sq16{height:16px;width:16px}
+.tc-ico--mr6.tc-ico--mr6{margin-right:6px}
+.tc-ico--inline.tc-ico--inline{vertical-align:-1px;display:inline}
+.tc-ico--top1-fix.tc-ico--top1-fix{margin-top:1px;flex:none}
+.tc-ico--fix.tc-ico--fix{flex:none}
+.tc-ico--turn.tc-ico--turn{transform:rotate(-90deg);color:var(--tc-dusty);flex:none}
+.tc-ico--sq34.tc-ico--sq34{height:34px;width:34px}
+.tc-ico--sq30.tc-ico--sq30{height:30px;width:30px}
+.tc-ico--sq19.tc-ico--sq19{height:19px;width:19px}
+.tc-in--w190.tc-in--w190{width:190px}
+.tc-in--w52{width:52px}
+.tc-in--t12-w200.tc-in--t12-w200{font-size:12px;width:200px}
+.tc-in--body-sm.tc-in--body-sm{min-height:132px;font-size:14px;line-height:1.6}
+.tc-in--t12-w240.tc-in--t12-w240{font-size:12px;width:240px}
+.tc-in--h26-w190.tc-in--h26-w190{height:26px;width:190px}
+.tc-in--fill.tc-in--fill{flex:1}
+.tc-in--dusty.tc-in--dusty{color:var(--tc-dusty)}
+.tc-in--t11-5.tc-in--t11-5{font-size:11.5px}
+.tc-in--t11.tc-in--t11{font-size:11px}
+.tc-in--t11-fill.tc-in--t11-fill{font-size:11px;flex:1}
+.tc-in--key.tc-in--key{font-size:14px;letter-spacing:.04em}
+.tc-in--chip.tc-in--chip{height:22px;display:inline-flex;width:52px}
+/* Заголовок колонки над полями-фишками меню: той же ширины, что поле. */
+.tc-menu__col{width:52px;flex:none;text-align:center;letter-spacing:0}
+.tc-in--paste.tc-in--paste{font-size:11px;white-space:pre-wrap;min-height:88px;align-items:flex-start}
+.tc-in--key-sm.tc-in--key-sm{min-width:200px;font-size:13px;letter-spacing:.03em}
+.tc-in--line.tc-in--line{min-width:220px;max-width:540px;font-size:11px}
+.tc-in--wrap-gap5.tc-in--wrap-gap5{flex-wrap:wrap;gap:5px}
+.tc-in--note.tc-in--note{min-height:82px;font-size:13.5px;line-height:1.6}
+.tc-in--t11-5-fill.tc-in--t11-5-fill{font-size:11.5px;flex:1}
+.tc-in--h26-w120.tc-in--h26-w120{height:26px;width:120px}
+.tc-in--minh104-t13-5.tc-in--minh104-t13-5{min-height:104px;font-size:13.5px}
+.tc-in--t12-fill.tc-in--t12-fill{font-size:12px;flex:1}
+.tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px}
+.tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
+.tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px}
+.tc-in--title.tc-in--title{height:auto;font-family:var(--tc-font-serif);font-size:24px;padding:7px 12px}
+.tc-in--body.tc-in--body{min-height:260px;font-size:14.5px;line-height:1.7;padding:14px 16px}
+.tc-doc__task.tc-doc__task{align-items:baseline;display:flex;gap:9px}
+.tc-list--mx-14.tc-list--mx-14{margin:0 -14px}
+.tc-main--zone.tc-main--zone{justify-content:center;color:var(--tc-dusty);align-items:center}
+.tc-main--padb180.tc-main--padb180{padding-bottom:180px}
+.tc-main--minh88.tc-main--minh88{min-height:88px}
+.tc-mark--h20.tc-mark--h20{height:20px}
+.tc-mark--h34.tc-mark--h34{height:34px}
+.tc-mark--h14.tc-mark--h14{height:14px}
+.tc-mark--h11.tc-mark--h11{height:11px}
+.tc-mark--inline.tc-mark--inline{vertical-align:-1px;display:inline-block}
+.tc-mark--h19.tc-mark--h19{height:19px}
+.tc-mark--h12.tc-mark--h12{height:12px}
+.tc-mark--h18.tc-mark--h18{height:18px}
+.tc-mark.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:2px}
+
+
+.tc-mark--on-hair.tc-mark--on-hair{background:var(--tc-hair)}
+.tc-mark--h32.tc-mark--h32{height:32px}
+.tc-menu--w212.tc-menu--w212{width:212px}
+.tc-menu--full.tc-menu--full{width:100%}
+.tc-menu--w290.tc-menu--w290{width:290px}
+.tc-menu--w420.tc-menu--w420{width:420px;max-width:100%}
+/* меню из строк с полями: длинная подпись на узком переносится, строка растёт */
+.tc-menu--fields .tc-menu__item{height:auto;min-height:28px}
+.tc-menu__item--danger.tc-menu__item--danger{color:var(--tc-danger)}
+.tc-menu__item--pad5-8-7.tc-menu__item--pad5-8-7{padding:5px 8px 7px}
+.tc-menu__item--accent.tc-menu__item--accent{color:var(--tc-accent)}
+.tc-menu__item--dusty.tc-menu__item--dusty{color:var(--tc-dusty)}
+.tc-menu__item--split.tc-menu__item--split{justify-content:space-between;padding:5px 8px 7px}
+.tc-menu__item--col.tc-menu__item--col{height:auto;align-items:stretch;flex-direction:column;gap:6px;padding:7px 8px}
+.tc-menu__item--muted.tc-menu__item--muted{color:var(--tc-muted)}
+.tc-menu__item--note.tc-menu__item--note{height:24px;font-size:11px;color:var(--tc-dusty);gap:5px}
+.tc-meter--w60.tc-meter--w60{width:60px}
+.tc-meter--max260-fill.tc-meter--max260-fill{max-width:260px;flex:1}
+.tc-meter__bar--alert.tc-meter__bar--alert{background:var(--tc-danger)}
+.tc-mono--t11-top4.tc-mono--t11-top4{font-size:11px;margin-top:4px}
+.tc-mono--ls0-dusty.tc-mono--ls0-dusty{letter-spacing:0;color:var(--tc-dusty)}
+.tc-mono--ls0-tt-none.tc-mono--ls0-tt-none{letter-spacing:0;text-transform:none}
+.tc-mono--t11-5-dusty.tc-mono--t11-5-dusty{font-size:11.5px;color:var(--tc-dusty)}
+.tc-mono--bot9.tc-mono--bot9{margin-bottom:9px}
+.tc-mono--ls0-danger.tc-mono--ls0-danger{letter-spacing:0;color:var(--tc-danger)}
+.tc-mono--t11-ml4.tc-mono--t11-ml4{font-size:11px;margin-left:4px}
+.tc-mono--chip.tc-mono--chip{background:var(--tc-card);border-radius:2px;padding:1px 4px}
+.tc-mono--t11-muted.tc-mono--t11-muted{font-size:11px;color:var(--tc-muted)}
+.tc-mono--danger.tc-mono--danger{color:var(--tc-danger)}
+.tc-mono--ls0.tc-mono--ls0{letter-spacing:0}
+.tc-mono--accent.tc-mono--accent{color:var(--tc-accent)}
+.tc-mono--f-mono.tc-mono--f-mono{font-family:var(--tc-font-mono)}
+.tc-mono--muted.tc-mono--muted{color:var(--tc-muted)}
+.tc-mono--t11.tc-mono--t11{font-size:11px}
+.tc-mono--t10-dusty.tc-mono--t10-dusty{font-size:10px;color:var(--tc-dusty)}
+.tc-mono--dusty-t11.tc-mono--dusty-t11{color:var(--tc-dusty);font-size:11px}
+.tc-mono--dusty.tc-mono--dusty{color:var(--tc-dusty)}
+.tc-mono--t11-dusty.tc-mono--t11-dusty{font-size:11px;color:var(--tc-dusty)}
+.tc-mono--t11-dusty-ls0.tc-mono--t11-dusty-ls0{font-size:11px;color:var(--tc-dusty);letter-spacing:0}
+.tc-msg--flush.tc-msg--flush{margin:0}
+.tc-msg--m0-14-12.tc-msg--m0-14-12{margin:0 14px 12px}
+.tc-msg--flush-top11.tc-msg--flush-top11{margin:11px 0 0}
+.tc-msg--flush-bot12.tc-msg--flush-bot12{margin:0 0 12px}
+.tc-msg--flush-r0.tc-msg--flush-r0{margin:0;border-radius:0}
+.tc-msg--flush-r0 .tc-push.tc-push{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:none}
+.tc-msg--flush-r0 .tc-push > .tc-btn{width:100%}
+.tc-msg--flush-r0 .tc-push > .is-primary{grid-column:1/-1}
+.tc-msg--mr0-ml0.tc-msg--mr0-ml0{margin-right:0;margin-left:0}
+.tc-msg--flush-top2.tc-msg--flush-top2{margin:2px 0 0}
+.tc-msg--mx20.tc-msg--mx20{margin:0 20px}
+.tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
+.tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
+.tc-nav--top2.tc-nav--top2{margin-top:2px}
+.tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
+.tc-print__row--3col.tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
+.tc-prose--t13.tc-prose--t13{font-size:13px}
+.tc-prose--read.tc-prose--read{font-size:14px;line-height:1.65}
+.tc-prose--lead.tc-prose--lead{font-size:14.5px;line-height:1.7}
+.tc-prose--top14.tc-prose--top14{margin-top:14px}
+.tc-prose--top18.tc-prose--top18{margin-top:18px}
+.tc-prose--t13-flush-padt11.tc-prose--t13-flush-padt11{font-size:13px;padding:11px 0 0}
+.tc-prose--muted.tc-prose--muted{color:var(--tc-muted)}
+.tc-prose--muted-flush-bot10.tc-prose--muted-flush-bot10{color:var(--tc-muted);margin:0 0 10px}
+.tc-queue--flush-full.tc-queue--flush-full{margin:0;width:100%}
+.tc-queue--flush-wauto.tc-queue--flush-wauto{margin:0;width:auto}
+.tc-railsec--top14.tc-railsec--top14{margin-top:14px}
+.tc-range--wrap.tc-range--wrap{flex-wrap:wrap}
+
+.tc-root--on-surface.tc-root--on-surface{background:var(--tc-surface)}
+.tc-root--top.tc-root--top{align-items:flex-start}
+.tc-root--on-bg.tc-root--on-bg{background:var(--tc-bg)}
+.tc-root--pad14.tc-root--pad14{padding:14px}
+.tc-root--row.tc-root--row{display:flex;align-items:center;gap:8px}
+.tc-root--flat.tc-root--flat{overflow:hidden;padding:0}
+
+.tc-root--minh88.tc-root--minh88{min-height:88px}
+.tc-root--pad16.tc-root--pad16{padding:16px}
+.tc-root--mid.tc-root--mid{justify-content:center}
+.tc-root--pad18.tc-root--pad18{padding:18px}
+
+
+
+.tc-root--pad10-14.tc-root--pad10-14{padding:10px 14px}
+
+.tc-row--avatarcols--padl14-padr14.tc-row--avatarcols--padl14-padr14{padding-left:14px;padding-right:14px}
+.tc-row--excerpt--padl14-padr14.tc-row--excerpt--padl14-padr14{padding-left:14px;padding-right:14px}
+.tc-row--excerpt--cols3-62-148.tc-row--excerpt--cols3-62-148{grid-template-columns:3px minmax(0,1fr) 62px 148px}
+.tc-row--slim.tc-row--slim{padding-left:14px;padding-right:14px;min-height:32px;grid-template-columns:14px 3px minmax(0,1fr) 110px}
+.tc-row--tickmarkcols--padl14-padr14.tc-row--tickmarkcols--padl14-padr14{padding-left:14px;padding-right:14px}
+.tc-row--timecols--padl14-padr14.tc-row--timecols--padl14-padr14{padding-left:14px;padding-right:14px}
+.tc-row--timecols--op-7.tc-row--timecols--op-7{opacity:.7}
+.tc-row__detail--w40pc.tc-row__detail--w40pc{width:40%}
+.tc-row__detail--w30pc.tc-row__detail--w30pc{width:30%}
+.tc-row__detail--w25pc.tc-row__detail--w25pc{width:25%}
+.tc-row__lead--w36.tc-row__lead--w36{width:36px}
+.tc-row__source--w70pc.tc-row__source--w70pc{width:70%}
+.tc-row__source--w55pc.tc-row__source--w55pc{width:55%}
+.tc-row__source--w62pc.tc-row__source--w62pc{width:62%}
+.tc-row__text--row.tc-row__text--row{align-items:center;flex-direction:row;gap:10px}
+.tc-rubric--bot2.tc-rubric--bot2{margin-bottom:2px}
+.tc-rubric--bot8.tc-rubric--bot8{margin-bottom:8px}
+.tc-rubric--split.tc-rubric--split{justify-content:space-between;align-items:baseline;display:flex}
+.tc-rubric--nudge.tc-rubric--nudge{margin:2px 0 -2px}
+.tc-rubric--danger.tc-rubric--danger{color:var(--tc-danger)}
+.tc-rubric--m13-0-6.tc-rubric--m13-0-6{margin:13px 0 6px}
+.tc-rubric--bot7.tc-rubric--bot7{margin-bottom:7px}
+.tc-rubric--pad0-14-6.tc-rubric--pad0-14-6{padding:0 14px 6px}
+.tc-runbar--danger.tc-runbar--danger{background:transparent;border-bottom:.5px solid var(--tc-danger);color:var(--tc-danger)}
+.tc-scrim--padt26.tc-scrim--padt26{padding-top:26px}
+.tc-scrim--padt38.tc-scrim--padt38{padding-top:38px}
+.tc-search.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
+.tc-search--full.tc-search--full{flex:1 1 auto;width:100%}
+.tc-search--fill180-wauto.tc-search--fill180-wauto{flex:1 1 180px;width:auto}
+.tc-sec--flush-flush-padt11.tc-sec--flush-flush-padt11{margin:0;padding:11px 0 0}
+.tc-seg--start.tc-seg--start{align-self:flex-start}
+.tc-seg--h22.tc-seg--h22{height:22px}
+.tc-seg--t11-5.tc-seg--t11-5{font-size:11.5px}
+
+.tc-sheet--w480.tc-sheet--w480{width:480px}
+.tc-sheet--w520.tc-sheet--w520{width:520px}
+.tc-sheet--w400.tc-sheet--w400{width:400px}
+.tc-sheet--w680.tc-sheet--w680{width:680px}
+.tc-sheet--max100pc-full.tc-sheet--max100pc-full{max-width:100%;width:100%}
+.tc-sheet__body--pad0.tc-sheet__body--pad0{padding:0}
+.tc-shell__body--minh230.tc-shell__body--minh230{min-height:230px}
+.tc-shell__body--minh390.tc-shell__body--minh390{min-height:390px}
+.tc-shell__body--minh340.tc-shell__body--minh340{min-height:340px}
+.tc-shell__body--minh560.tc-shell__body--minh560{min-height:560px}
+.tc-shell__body--tcrail-56.tc-shell__body--tcrail-56{--tc-rail:56px}
+.tc-shell__body--minh280.tc-shell__body--minh280{min-height:280px}
+.tc-shell__rail--zone.tc-shell__rail--zone{justify-content:center;color:var(--tc-dusty);align-items:center}
+.tc-shell__rail--icons.tc-shell__rail--icons{align-items:center;padding:12px 4px}
+.tc-side--zone.tc-side--zone{justify-content:center;color:var(--tc-dusty);align-items:center}
+.tc-side--drop.tc-side--drop{outline:1.5px dashed var(--tc-accent);outline-offset:-3px}
+.tc-skel--w16.tc-skel--w16{width:16px}
+.tc-skel--w60pc.tc-skel--w60pc{width:60%}
+.tc-skel--w45pc.tc-skel--w45pc{width:45%}
+.tc-skel--w52pc.tc-skel--w52pc{width:52%}
+.tc-dim--muted.tc-dim--muted{color:var(--tc-muted)}
+.tc-dim--t12-5.tc-dim--t12-5{font-size:12.5px}
+.tc-field__rail.tc-field__rail{height:3px;background:var(--tc-edge);border-radius:2px;position:relative;flex:1}
+.tc-field__fill.tc-field__fill{position:absolute;left:0;top:0;bottom:0;background:var(--tc-accent);border-radius:2px;width:38%}
+.tc-field__knob.tc-field__knob{position:absolute;left:38%;top:-5px;height:13px;border-radius:50%;background:var(--tc-surface);border:.5px solid var(--tc-edge);width:13px}
+.tc-dim--t11.tc-dim--t11{font-size:11px}
+
+.tc-dim--accent.tc-dim--accent{color:var(--tc-accent)}
+.tc-dim--ml6.tc-dim--ml6{margin-left:6px}
+
+.tc-dim--t11-5.tc-dim--t11-5{font-size:11.5px}
+.tc-dim--struck.tc-dim--struck{text-decoration:line-through}
+.tc-drop__anchor.tc-drop__anchor{position:relative}
+.tc-drop__panel.tc-drop__panel{position:absolute;top:calc(100% + 5px);left:0;z-index:2}
+
+.tc-top__search.tc-top__search{position:relative;min-width:0;flex:0 1 560px}
+.tc-top__suggest.tc-top__suggest{position:absolute;top:calc(100% + 5px);left:0;z-index:3;width:100%}
+.tc-dim--ls0.tc-dim--ls0{letter-spacing:0}
+.tc-plain.tc-plain{text-transform:none;letter-spacing:0;font-weight:400;color:var(--tc-dusty)}
+.tc-drop__panel--right.tc-drop__panel--right{position:absolute;top:calc(100% + 5px);right:0;z-index:2}
+.tc-menu__item-indent.tc-menu__item-indent{padding-left:23px}
+.tc-field__swatches.tc-field__swatches{height:22px}
+.tc-field__swatch.tc-field__swatch{height:17px;border-radius:50%;width:17px}
+.tc-field__swatch--on.tc-field__swatch--on{outline:1.5px solid var(--tc-accent);outline-offset:2px}
+.tc-dim--lh1-55.tc-dim--lh1-55{line-height:1.55}
+.tc-field__row.tc-field__row{margin-top:2px}
+
+.tc-table__wrap.tc-table__wrap{align-items:center;display:flex;flex-wrap:wrap;gap:8px 10px;min-width:0;max-width:100%;overflow:hidden}
+.tc-table__wrap.tc-table__wrap .tc-line{flex-wrap:nowrap}
+.tc-table__wrap.tc-table__wrap .tc-mono{overflow-wrap:normal;white-space:normal;min-width:0}
+.tc-dim--start.tc-dim--start{align-self:start;padding-top:6px}
+.tc-dim--t12.tc-dim--t12{font-size:12px}
+
+
+.tc-dim--fix.tc-dim--fix{flex:none}
+.tc-dim--slot.tc-dim--slot{display:inline-block;width:62px}
+
+.tc-bar__count.tc-bar__count{font-weight:600}
+.tc-bar__count--t12-5.tc-bar__count--t12-5{font-size:12.5px}
+.tc-dim--print.tc-dim--print{color:#555}
+.tc-dot--accent.tc-dot--accent{height:6px;border-radius:50%;background:var(--tc-accent);margin-right:5px;display:inline-block;width:6px}
+
+.tc-dim--danger.tc-dim--danger{color:var(--tc-danger)}
+.tc-dot--danger.tc-dot--danger{height:6px;border-radius:50%;background:var(--tc-danger);margin-right:5px;display:inline-block;width:6px}
+.tc-dot--dusty.tc-dot--dusty{height:6px;border-radius:50%;background:var(--tc-dusty);margin-right:5px;display:inline-block;width:6px}
+
+.tc-winbtn.tc-winbtn{height:30px}
+.tc-print__num.tc-print__num{font-family:var(--tc-font-mono);white-space:nowrap}
+.tc-dim--t10-5.tc-dim--t10-5{font-size:10.5px}
+
+
+
+.tc-auth__tagline-lead.tc-auth__tagline-lead{font-size:16px;font-weight:600;color:var(--tc-ink);margin-bottom:4px;display:block}
+.tc-table--mx-20.tc-table--mx-20{margin:0 -20px}
+.tc-table__file--fill.tc-table__file--fill{flex:1}
+.tc-table__filename--accent.tc-table__filename--accent{color:var(--tc-accent)}
+.tc-table__filename--t12.tc-table__filename--t12{font-size:12px}
+.tc-table__n3--dusty.tc-table__n3--dusty{color:var(--tc-dusty)}
+.tc-table__n3--t11.tc-table__n3--t11{font-size:11px}
+.tc-table__n4--danger.tc-table__n4--danger{color:var(--tc-danger)}
+.tc-table__n4--dusty.tc-table__n4--dusty{color:var(--tc-dusty)}
+.tc-table__n4--pos-relative.tc-table__n4--pos-relative{position:relative}
+.tc-table__n4--t11.tc-table__n4--t11{font-size:11px}
+.tc-tag--pill.tc-tag--pill{align-items:center;display:inline-flex;gap:5px;padding:1px 4px 1px 6px}
+
+
+.tc-table__name.tc-table__name{font-weight:600}
+
+.tc-thumb--preview.tc-thumb--preview{aspect-ratio:16/10;border-radius:4px}
+.tc-thumb--on-card.tc-thumb--on-card{background:var(--tc-card)}
+.tc-thumb--wide.tc-thumb--wide{aspect-ratio:16/9;border-radius:4px;border:.5px solid var(--tc-hair)}
+.tc-thumb--tile.tc-thumb--tile{height:76px;aspect-ratio:auto;border-radius:5px;border:.5px solid var(--tc-hair);width:76px}
+.tc-tick--nudge.tc-tick--nudge{position:relative;top:2px}
+.tc-tick--edge-danger.tc-tick--edge-danger{border-color:var(--tc-danger)}
+.tc-tick--edge-dusty.tc-tick--edge-dusty{border-color:var(--tc-dusty)}
+.tc-tickrow--padl0.tc-tickrow--padl0{padding-left:0}
+.tc-tickrow--padl14.tc-tickrow--padl14{padding-left:14px}
+.tc-tickrow--h44.tc-tickrow--h44{height:44px}
+.tc-tickrow__label--fw600.tc-tickrow__label--fw600{font-weight:600}
+.tc-tickrow__meta--dusty.tc-tickrow__meta--dusty{color:var(--tc-dusty)}
+.tc-tickrow__tick--ml2.tc-tickrow__tick--ml2{margin-left:2px}
+.tc-tickrow__tick--top3.tc-tickrow__tick--top3{margin-top:3px}
+.tc-top__actions--gap2.tc-top__actions--gap2{gap:2px}
+.tc-table__row--off.tc-table__row--off{opacity:.6}
+.tc-table__row--dim.tc-table__row--dim{opacity:.62}
+.tc-tree--padx8.tc-tree--padx8{padding:0 8px}
+.tc-tree--max520.tc-tree--max520{max-width:520px}
+.tc-tree__row--padl1-25rem.tc-tree__row--padl1-25rem{padding-left:1.25rem}
+.tc-tree__row--op-55.tc-tree__row--op-55{opacity:.55}
+.tc-tree__row--padl22.tc-tree__row--padl22{padding-left:22px}
+.tc-tree__row--padl40.tc-tree__row--padl40{padding-left:40px}
+.tc-tree__row--padl44.tc-tree__row--padl44{padding-left:44px}
+.tc-tree__row--padl36.tc-tree__row--padl36{padding-left:36px}
+.tc-sec__list.tc-sec__list{font-size:12.5px}
+.tc-doc__list.tc-doc__list{font-size:14px}
+.tc-card__list.tc-card__list{font-size:13px}
+.tc-sec__list--muted.tc-sec__list--muted{color:var(--tc-muted)}
+.tc-doc__bullets.tc-doc__bullets{font-size:14px;line-height:1.6;padding-left:18px;list-style:disc}
+.tc-usermenu.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px}
+.tc-dim.tc-dim{color:var(--tc-dusty)}
+/* names-without-rule: tc-shell tc-row__lead tc-row__due tc-row__date tc-row__size
+   tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
+   tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
+   tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
+   tc-row__subtitle
+   — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
+   classes-defined и уезжало в CSS библиотеки. Список читает линт. */

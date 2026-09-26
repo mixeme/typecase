@@ -602,5 +602,5 @@ func (m Meter) Render() string {
 	if pct > 100 {
 		pct = 100
 	}
-	return `<div class="tc-meter"` + attr("aria-label", m.Label) + attr("data-tc-pct", strconv.FormatFloat(pct, 'f', 1, 64)) + ` role="meter" aria-valuenow="` + esc(strconv.Itoa(m.Value)) + `" aria-valuemin="0" aria-valuemax="` + esc(strconv.Itoa(max)) + `"><div class="tc-meter__bar"></div><span class="tc-meter__label">` + esc(m.Label) + `</span></div>`
+	return `<div class="tc-meter"` + attr("aria-label", m.Label) + ` role="meter" aria-valuenow="` + esc(strconv.Itoa(m.Value)) + `" aria-valuemin="0" aria-valuemax="` + esc(strconv.Itoa(max)) + `"><div class="tc-meter__bar"` + attr("data-tc-width", strconv.FormatFloat(pct, 'f', 1, 64)+"%") + `></div><span class="tc-meter__label">` + esc(m.Label) + `</span></div>`
 }

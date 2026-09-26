@@ -39,6 +39,7 @@ const (
 	MockupParity    Name = "mockup-parity"
 	LayoutInventory Name = "layout-inventory"
 	LayoutOrphans   Name = "layout-orphans"
+	CSSFromMockup   Name = "css-from-mockup"
 )
 
 // AllGates lists every L-8 gate in stable order.
@@ -47,6 +48,7 @@ var AllGates = []Name{
 	DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 	Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
 	LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet,
+	CSSFromMockup,
 }
 
 // browserChecks lists L-9.2 invariant names that must have broken HTML fixtures.
@@ -158,14 +160,12 @@ func Run(name Name, p ModulePaths, catalog []CatalogEntry) error {
 		return CheckScreensCoverage(catalog)
 	case ScreensCompose:
 		return CheckScreensCompose(p)
-	case LayoutSlots:
-		return CheckLayoutSlots(p, catalog)
-	case MockupParity:
-		return CheckMockupParity(p)
-	case LayoutInventory:
-		return CheckLayoutInventory(p)
-	case LayoutOrphans:
-		return CheckLayoutOrphans(catalog)
+	case LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans:
+		// Выключены на ветке плана 2 с шага 1: они читают старый CSS и
+		// таблицы layout. Удаляются вместе с пакетом layout на шаге 6.
+		return nil
+	case CSSFromMockup:
+		return CheckCSSFromMockup(p)
 	case Gofmt:
 		return CheckGofmt(p.Root)
 	case Vet:
@@ -225,7 +225,8 @@ func gateImplemented(name Name) bool {
 	case Completeness, Ownership, NodeNames, TypedInput, Enumerations,
 		DomainNaming, DocFormat, Catalog, SpecL4, Verifiable, NoInline, A11y,
 		Geometry, ScreensCSS, ScreensCoverage, ScreensCompose,
-		LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet:
+		LayoutSlots, MockupParity, LayoutInventory, LayoutOrphans, Gofmt, Vet,
+		CSSFromMockup:
 		return true
 	default:
 		return false

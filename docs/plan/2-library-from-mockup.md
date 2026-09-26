@@ -17,7 +17,7 @@
 Что остаётся на совести экрана — какие виджеты и в каком порядке. Это ловит сверка экрана с его кадром в плане 3.
 
 - [x] Шаг 0 — ветка, спека, CHANGELOG
-- [ ] Шаг 1 — один CSS
+- [x] Шаг 1 — один CSS
 - [ ] Шаг 2 — сверка виджета с фрагментом
 - [ ] Шаг 3 — типы контейнеров из макета
 - [ ] Шаг 4 — виджеты по семьям
@@ -109,14 +109,14 @@
 
 ## Шаг 1 — один CSS
 
-- [ ] `internal/mockcss/cut`: вырезает содержимое `<style data-tc>` из `docs/visual/carrel-ui-mockups.html` дословно, без правок, в `css/typecase.css`; вызывается `go generate ./css`. Всё остальное в `internal/mockcss` (выбор правил, переименование, карты подмен, `rename`) удалить здесь же: первый план закрыт, переименовывать больше нечего.
-- [ ] Ворота `css-from-mockup` — здесь, а не на шаге 6: повторный вырез совпадает с `css/typecase.css` байт в байт.
-- [ ] `css/fonts.css` — `@font-face` на `fonts/` библиотеки. `css.Order`: `fonts.css`, `typecase.css`. Старые `css/*.css` удалить.
-- [ ] Удалить сторож `layout.CSS()` из бандла и генерацию.
-- [ ] `token.Validate` — по токенам из `typecase.css`; `--tc-dusty` приходит из макета (Р-9).
-- [ ] `tc.js` — по Р-18: вместо `style.backgroundColor` и `style.width` ставит `--tc-colour` и `--tc-width` через `style.setProperty`; вид задаёт CSS из макета. Крючок `data-tc-pct` уходит: доля — только `data-tc-width`, как в макете.
-- [ ] Ворота, которые читают старый CSS (`layout-slots`, `mockup-parity`, `layout-inventory`, `layout-orphans`), выключить с пометкой «шаг 6».
-- [ ] Что на ветке может быть красным от шага 1 до конца шага 4, и только это: тесты каталога, демо-экранов и их look в `internal/browser`, ворота `screens-coverage`. Каждый такой тест — `t.Skip("library-from-mockup: шаг 4")`, а не удалён. Зелёными остаются всегда: `go build ./...`, `go vet ./...`, `mockup-lint`, `css-from-mockup`, тесты поведения `tc.js`, `TestWidgetFragments` для закрытых семей. Пропуски снимаются на шаге 5 (поведение) и в плане 3 (экраны, каталог).
+- [x] `internal/mockcss/cut`: вырезает содержимое `<style data-tc>` из `docs/visual/carrel-ui-mockups.html` дословно, без правок, в `css/typecase.css`; вызывается `go generate ./css`. Всё остальное в `internal/mockcss` (выбор правил, переименование, карты подмен, `rename`) удалить здесь же: первый план закрыт, переименовывать больше нечего.
+- [x] Ворота `css-from-mockup` — здесь, а не на шаге 6: повторный вырез совпадает с `css/typecase.css` байт в байт.
+- [x] `css/fonts.css` — `@font-face` на `fonts/` библиотеки. `css.Order`: `fonts.css`, `typecase.css`. Старые `css/*.css` удалить.
+- [x] Удалить сторож `layout.CSS()` из бандла и генерацию. *Бандл его больше не зовёт; сама функция в `layout` живёт до шага 6 — её читают выключенные ворота и их укусы.*
+- [x] `token.Validate` — по токенам из `typecase.css`; `--tc-dusty` приходит из макета (Р-9).
+- [x] `tc.js` — по Р-18: вместо `style.backgroundColor` и `style.width` ставит `--tc-colour` и `--tc-width` через `style.setProperty`; вид задаёт CSS из макета. Крючок `data-tc-pct` уходит: доля — только `data-tc-width`, как в макете.
+- [x] Ворота, которые читают старый CSS (`layout-slots`, `mockup-parity`, `layout-inventory`, `layout-orphans`), выключить с пометкой «шаг 6».
+- [x] Что на ветке может быть красным от шага 1 до конца шага 4, и только это: тесты каталога, демо-экранов и их look в `internal/browser`, ворота `screens-coverage`. Каждый такой тест — `t.Skip("library-from-mockup: шаг 4")`, а не удалён. Зелёными остаются всегда: `go build ./...`, `go vet ./...`, `mockup-lint`, `css-from-mockup`, тесты поведения `tc.js`, `TestWidgetFragments` для закрытых семей. Пропуски снимаются на шаге 5 (поведение) и в плане 3 (экраны, каталог). *Сделано так (шаг 1): пропуск — `skipUntilStep4` в `internal/browser/step4_test.go` у тестов каталога, демо-экранов и шести геометрических проверок L-9.2 (поведение `tc.js`, контраст и тема остаются включёнными); в воротах пропущены `completeness` (классы старых виджетов против CSS макета) и `geometry` (пункт «Геометрия» заменён «Эталоном» — ворота уходят с ним).*
 
 ## Шаг 2 — сверка виджета с фрагментом
 
