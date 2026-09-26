@@ -331,8 +331,9 @@ type DocLayoutPart interface {
 	docLayoutPart()
 }
 
-func (Doc) docLayoutPart()    {}
-func (Docbar) docLayoutPart() {}
+func (Doc) docLayoutPart()     {}
+func (Docbar) docLayoutPart()  {}
+func (Docmeta) docLayoutPart() {}
 
 // DocView is how a document is laid out in its page.
 type DocView int
@@ -363,6 +364,7 @@ func (DocLayout) mainPart() {}
 func (Docbar) mainPart()    {}
 func (Prose) dialogPart()   {}
 func (Hero) mainPart()      {}
+func (Doc) mainPart()       {}
 
 // Hero is the head of a service's own page: its picture from the sprite, its
 // name, a line, a paragraph and the buttons.
@@ -372,6 +374,7 @@ type Hero struct {
 	Title  string
 	Sub    string
 	Text   Prose
+	Fields *Fields // what the service is: its address, its build
 	Acts   []Button
 }
 
@@ -379,7 +382,11 @@ func (h Hero) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<div class="tc-main__hero"><svg width="72" height="72" viewBox="0 0 96 96" role="img"` + attr("aria-label", h.Label) +
 		` class="tc-ico--fix"><use href="#` + esc(h.Symbol) + `"/></svg><div class="tc-main__hero-side"><div class="tc-main__hero-title">` + esc(h.Title) +
-		`</div><div class="tc-head__sub">` + esc(h.Sub) + `</div>` + h.Text.html(nil) + `<div class="tc-line tc-line--gap-8 tc-doc__acts">`)
+		`</div><div class="tc-head__sub">` + esc(h.Sub) + `</div>` + h.Text.html(nil))
+	if h.Fields != nil {
+		s.WriteString(h.Fields.html(nil))
+	}
+	s.WriteString(`<div class="tc-line tc-line--gap-8 tc-doc__acts">`)
 	for _, b := range h.Acts {
 		s.WriteString(b.html(nil))
 	}

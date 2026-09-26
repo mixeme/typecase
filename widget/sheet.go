@@ -32,6 +32,7 @@ func (Button) sheetHeadPart()       {}
 func (Close) sheetHeadPart()        {}
 func (SheetSubject) sheetHeadPart() {}
 func (Tag) sheetHeadPart()          {}
+func (Crumbs) sheetHeadPart()       {}
 
 // SheetSubject is what a sheet acts on, named in its head: a source's mark
 // and the thing's name.
@@ -198,6 +199,8 @@ type SheetPickList interface {
 func (ListGroup) sheetPickList() {}
 func (List) sheetPickList()      {}
 func (Crumbs) sheetPickList()    {}
+func (Form) sheetPickList()      {}
+func (Table) sheetPickList()     {}
 
 // SheetPick is a picker in a sheet: sources on the left, what is in them on
 // the right.
@@ -253,7 +256,7 @@ func (w SheetWidth) class() string {
 //
 // Роль. Лист поверх страницы: быстрая запись, перенос, выбор, подтверждение — одно дело и выход из него.
 // Вход. Sheet{Icon, Tone, Title, Head, Body, Flush, Foot, Width}.
-// Состояния. plain | icon | close.
+// Состояния. plain | icon | close | danger | pick.
 // Инварианты. Заголовок — один, жирным; главная кнопка — первой в подвале, отмена — в конце; ширина — перечисление; лист печатает фрагмент своего кадра.
 // Поведение. Esc закрывает лист и возвращает фокус тому, что его открыло; Enter делает главное.
 // Эталон. кадр `s-contacts-2`, фрагмент `.tc-sheet`.

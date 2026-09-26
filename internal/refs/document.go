@@ -64,6 +64,3 @@ func init() {
 	Parts = append(Parts, w.Link{}, w.DocTitle{}, w.DocSub{}, w.DocTask{}, w.DocTasks{}, w.DocFile{}, w.DocFiles{}, w.DocRelated{},
 		w.DocFields{}, w.DocNote{}, w.DocHeading{}, w.DocBullets{}, w.DocBody{}, w.DraftNote{}, w.DocLayout{}, w.Hero{})
 }
-
-var _ = wait("children from the family of tables and cards (diagnostics, danger zone)",
-	ref("s-notes-2", "tc-docmeta", 1), ref("s-notes-3", "tc-docmeta", 1), ref("s-notes-20", "tc-docmeta", 1))

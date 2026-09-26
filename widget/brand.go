@@ -10,10 +10,11 @@ const (
 	Logo17                    // 17 px high: a window's title bar
 	Logo42                    // 42 px high: the first screen of an installer
 	Logo60                    // 60 px high: the sign-in page
+	Logo48                    // 48 px high: a page of the sign-in flow
 )
 
 func (s LogoSize) class() string {
-	return [...]string{"", "tc-brand__logo--h17-w44", "tc-brand__logo--h42-w104", "tc-brand__logo--h60-w150"}[s]
+	return [...]string{"", "tc-brand__logo--h17-w44", "tc-brand__logo--h42-w104", "tc-brand__logo--h60-w150", "tc-brand__logo--h48-w118"}[s]
 }
 
 // Logo is the consumer's logo: two symbols of the sprite, #logo-word in ink

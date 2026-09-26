@@ -69,11 +69,13 @@ const (
 	FaceAccent11_5             // accent, 11.5 px
 	FaceDanger11_5             // danger, 11.5 px
 	FaceLarge                  // tc-dim--t12-5: a sentence a little larger
+	FaceSmall                  // tc-dim--t12: a condition under a drop zone
+	FaceMuted12                // muted, 12 px: what a field in a card is for
 )
 
 func (f Face) class() string {
 	return [...]string{"tc-dim--muted", "tc-dim--accent", "tc-dim--danger", "tc-dim--accent tc-dim--t12",
-		"tc-dim--accent tc-dim--t11-5", "tc-dim--danger tc-dim--t11-5", "tc-dim--t12-5"}[f]
+		"tc-dim--accent tc-dim--t11-5", "tc-dim--danger tc-dim--t11-5", "tc-dim--t12-5", "tc-dim--t12", "tc-dim--muted tc-dim--t12"}[f]
 }
 
 // Span is words in a face of their own.

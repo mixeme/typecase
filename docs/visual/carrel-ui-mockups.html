@@ -1180,7 +1180,6 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-ico--sq16.tc-ico--sq16{height:16px;width:16px}
 .tc-ico--mr6.tc-ico--mr6{margin-right:6px}
 .tc-ico--inline.tc-ico--inline{vertical-align:-1px;display:inline}
-.tc-ico--top1-fix.tc-ico--top1-fix{margin-top:1px;flex:none}
 .tc-ico--fix.tc-ico--fix{flex:none}
 .tc-ico--turn.tc-ico--turn{transform:rotate(-90deg);color:var(--tc-dusty);flex:none}
 .tc-ico--sq34.tc-ico--sq34{height:34px;width:34px}
@@ -2389,8 +2388,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   <div class="frame-label"><span>Плитки файлов</span><span class="frag">компонент</span><i>предпросмотр</i></div>
   <div class="tc-root tc-root--on-bg tc-root--top tc-root--wrap tc-root--pad18-20">
   <div class="tc-grid tc-grid--flush-fill-pad8">
-    <div class="tc-tile"><div class="tc-thumb"><svg viewBox="0 0 24 24" width="22" height="22"><use href="#i-doc"/></svg></div><span class="tc-tile__name">смета.pdf</span><span class="tc-tile__meta">412 KB</span></div>
-    <div class="tc-tile is-sel"><div class="tc-thumb"><svg viewBox="0 0 24 24" width="22" height="22"><use href="#i-img"/></svg></div><span class="tc-tile__name">фасад.jpg</span><span class="tc-tile__meta">1.8 MB</span></div>
+    <div class="tc-tile"><div class="tc-thumb"><svg><use href="#i-doc"/></svg></div><span class="tc-tile__name">смета.pdf</span><span class="tc-tile__meta">412 KB</span></div>
+    <div class="tc-tile is-sel"><div class="tc-thumb"><svg><use href="#i-img"/></svg></div><span class="tc-tile__name">фасад.jpg</span><span class="tc-tile__meta">1.8 MB</span></div>
   </div>
 </div>
 </div>
@@ -9479,7 +9478,7 @@ Read  2 min ago</div>
               </div>
             </div>
             <div class="tc-msg is-alert is-row tc-msg--flush">
-              <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-shield"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
               <span class="tc-msg__aside"><b>The profile carries passwords in cleartext.</b> It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log.</span>
             </div>
           </div>
@@ -14478,7 +14477,7 @@ Read  2 min ago · not changed on server</div>
             </div>
           </div>
           <div class="tc-msg is-alert is-row tc-msg--flush">
-            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-shield"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
             <span class="tc-msg__aside"><b>On a stick, the folder is the secret.</b> Your saved DAV passwords are encrypted with your Carrel password and stay encrypted there — but whoever finds the stick holds that file and can try guessing. Choose a long password, or keep the portable copy where you would keep keys.</span>
           </div>
           <div class="tc-line tc-line--gap-8">
@@ -14604,7 +14603,7 @@ Read  2 min ago · not changed on server</div>
             <div class="tc-msg is-alert tc-grow tc-msg--flush-top2">The password is the only key to the saved connections. Running locally changes nothing about that: nobody can recover it, including the app on your own computer.</div>
           </div>
           <div class="tc-msg is-alert is-row tc-msg--flush">
-            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-shield"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
             <span class="tc-msg__aside"><b>What only works from outside.</b> A local Carrel is not visible from the internet, so <b>published links</b>, <b>devices over davloom</b>, <b>backup started by an external request</b> and <b>invitation links</b> either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.</span>
           </div>
           <div class="tc-line tc-line--gap-8">
@@ -14846,7 +14845,7 @@ Read  2 min ago · not changed on server</div>
       <div class="tc-stack tc-stack--gap-10 tc-win__sheet--pad12">
         <div class="tc-msg tc-msg--flush"><b>Sign out of <span class="tc-mono">carrel.example</span>?</b> The app goes back to the first screen, where the mode is chosen again — a server or a local run. <b>Your other devices stay signed in</b> — those sessions end in Settings → Account, and they end there whether this app is running or not.</div>
         <div class="tc-msg is-alert is-row tc-msg--flush">
-          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-shield"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
           <span class="tc-msg__aside"><b>Delete what this app keeps on this computer?</b> The data folder <span class="tc-mono">C:\Users\mix\AppData\Roaming\Carrel</span>, the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.</span>
         </div>
         <div class="tc-msg tc-msg--flush">Your events, contacts and notes are not here and are not touched: they live on your DAV servers. What would be deleted is the key to them, not them.</div>
@@ -14963,7 +14962,7 @@ Read  2 min ago · not changed on server</div>
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
         <div class="tc-msg is-accent is-row tc-msg--flush-r0">
-          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-down"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-down"/></svg>
           <span class="tc-msg__aside"><b>Carrel 0.8.0 is ready to install.</b> It will be applied the next time the app closes, or now — the window reopens where it was.</span>
           <span class="tc-push">
             <button class="tc-btn is-primary" type="button">Install and restart</button>
@@ -14998,7 +14997,7 @@ Read  2 min ago · not changed on server</div>
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel · carrel.example</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
         <div class="tc-stack tc-stack--gap-12 tc-win__body--pad16-20">
           <div class="tc-msg is-alert is-row tc-msg--flush">
-            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none" class="tc-ico--top1-fix"><use href="#i-shield"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
             <span class="tc-msg__aside"><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there.</span>
           </div>
           <div class="tc-form tc-form--gap12-16-pad0">

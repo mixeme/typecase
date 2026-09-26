@@ -2,6 +2,7 @@ package widget
 
 import (
 	"html"
+	"strconv"
 	"strings"
 )
 
@@ -88,3 +89,5 @@ func (p Place) class() string {
 func rank(secondary bool) string {
 	return pick(secondary, "is-2nd")
 }
+
+func itoa(n int) string { return strconv.Itoa(n) }

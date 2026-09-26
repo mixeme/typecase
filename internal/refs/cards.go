@@ -1,0 +1,685 @@
+package refs
+
+import w "carrel.dev/typecase/widget"
+
+func cards(state string, fixture Renderer, frame, class string, n int) Entry {
+	return e("cards", state, fixture, ref(frame, class, n))
+}
+
+func ptr(t w.Ticked) *w.Ticked { return &t }
+
+var _ = add(
+	// tc-msg
+	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Drop files onto the window, or onto a folder in the list. A name that is already taken is refused rather than overwritten, and the queue says so.")}}, "s-files-1", "tc-msg", 1),
+	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write. Connect an account that has a journal, or create a notebook after connecting — the note is not kept in this window.")}, Space: w.MsgFlush}, "s-notes-6", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12}, "s-admin-1", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("This is where the section starts: the storages you ticked in the rail, as top-level folders. Open one and its own tree opens — contents of different servers are never mixed in one folder, because a file has one path and belongs to its own storage. "), w.Strong("Public"), w.Text(" is not ticked, so it is not here.")}}, "s-files-6", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("One record is rewritten and 1 other deleted."), w.Text(" The kept record is rewritten with the values you chose, and only once the server has kept it are the others deleted. This cannot be undone from here.")}, Space: w.MsgFlushSides}, "s-dup-2", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "account-3", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one.")}, Tone: w.MsgAccent}, "components-22", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Files are searched by name: "), w.Mono{Text: "PROPFIND"}, w.Text(" returns names anyway, and walking a folder costs one request per folder. Carrel does not look inside files — and says so here, so that “nothing found” is not read as “not in the files”.")}}, "s-find-1", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "account-2", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The profile carries passwords in cleartext."), w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-plan-1", "tc-msg", 1),
+	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("A file collection is copied as files. Tasks and notes live inside calendar collections and are copied with them — they cannot be picked separately. The size beside each collection is what it took last time.")}, Space: w.MsgFlushTop4}, "s-backup-2", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Separate from the sign-in password: the destination may be somebody else’s hosting. Forget it and this job’s archives open for nobody, including you.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2}, "s-backup-2", "tc-msg", 3),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The data folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "m-desktop-12", "tc-msg", 2),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("baikal — the server replied 401. Check the saved password on the profile page.")}, Tone: w.MsgAlert}, "components-22", "tc-msg", 2),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy here"), w.Text(".")}, Space: w.MsgFlushTop2}, "s-contacts-2", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-files-4", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Written, but not every other record was deleted."), w.Text(" The merge was written and 0 records deleted; Белов Артём refused, and the rest were not tried. Nothing is undone.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-dup-5", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent, Space: w.MsgFlushSides}, "s-dup-6", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send: until this address is confirmed, they go out without a reply address and say so at the foot. "), w.Button{Label: "Send confirmation", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "s-mail-9", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send until you open the link we sent to "), w.Mono{Text: "mix@example.org"}, w.Text(" at 11:42. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-9", "tc-msg", 1),
+	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("Renaming is not moving: the address does not change, so devices, published links and backup jobs pointing here go on working. The new name and colour are written to the server — other clients will show them at their next sync.")}, Space: w.MsgFlushTop2}, "s-profile-7", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Carrel creates a calendar there, copies all "), w.Strong("51"), w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path. Copy is this sheet with "), w.Strong("Copy here"), w.Text(", and the original stays.")}, Space: w.MsgFlushTop2}, "s-profile-8", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The calendar and all "), w.Strong("51"), w.Text(" events in it are deleted on "), w.Mono{Text: "cloud.example.org"}, w.Text(". Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the records back into a "), w.Strong("new"), w.Text(" collection — not into this one, and not to this address.")}, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 2),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list.")}, Tone: w.MsgAlert, Space: w.MsgInset20}, "s-profile-10", "tc-msg", 2),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("One code for each ticked account. Scan it with the phone: DAVx5 opens with the address and the login filled in, and asks for the password shown under the code.")}, Space: w.MsgFlush}, "s-plan-2", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book, with the login and the password from the account row. There is no import file and none is needed.")}}, "s-plan-4", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Credentials are unlocked for five minutes — here and everywhere else they are handed out. Everything shown closes when the time is up or when you press "), w.Strong("Lock now"), w.Text("; every reveal is written to the audit log.")}}, "s-plan-5", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Changing your Carrel password does "), w.Strong("not"), w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it.")}, Tone: w.MsgAccent}, "s-davloom-1", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Download"), w.Text(" streams the archive out and writes nothing to the server: no folder, no retention — the copy is yours to keep. It can still run at three in the morning, but only on an external trigger, because a stream needs somebody at the other end: a browser is not there at that hour, a machine with a disk is. "), w.Strong("Both"), w.Text(" does the two at once — and then the trigger has "), w.Strong("two steps"), w.Text(", because the file still has to be taken.")}, Space: w.MsgFlushTop4}, "s-backup-2", "tc-msg", 2),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("This line "), w.Strong("starts"), w.Text(" a copy; it does not wait for one. The answer comes back at once and says the job was accepted, nothing more. Whether the copy went through is on this page and in the history — and can be watched from outside, which is what the "), w.Strong("GoSentry"), w.Text(" tab is for."), w.Break{}, w.Break{}, w.Text("Starting it is all there is to do "), w.Strong("because this job writes to WebDAV"), w.Text(". Put "), w.Strong("Download"), w.Text(" in the destination and what is handed over here becomes a short script instead: the archive is a stream, and somebody has to be at the other end to take it.")}, Space: w.MsgFlushTop9}, "s-backup-2", "tc-msg", 5),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Both"), w.Text(" writes to WebDAV and still has to be taken — so the trigger below is a script, not a line. This is the same job editor as above; only this control changed.")}, Space: w.MsgFlushTop4}, "s-backup-3", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("A copy that fails needs no separate check: the download answers with an error, "), w.Mono{Text: "set -eu"}, w.Text(" stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and "), w.Mono{Text: "409"}, w.Text(" until then means «not yet», not «broken».")}, Space: w.MsgFlushTop9}, "s-backup-3", "tc-msg", 2),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("A second GoSentry job, same form: Command "), w.Mono{Text: "curl"}, w.Text(", Arguments a "), w.Mono{Text: "GET /api/backup/status?job=personal"}, w.Text(", failing when the last "), w.Strong("successful"), w.Text(" copy is older than 26 hours. The first job says the copy was asked for; only the second says it happened.")}, Space: w.MsgFlushTop9}, "s-backup-4", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("No collections, no settings — but read the third line together with "), w.Strong("Encrypt the archive"), w.Text(" in this job: the password can pull the archive down as well, and an archive with encryption turned off is your data in the clear.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop11}, "s-backup-5", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Restoring "), w.Strong("creates"), w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes.")}, Tone: w.MsgAlert}, "s-backup-8", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Both links live 30 days and can be revoked in "), w.Strong("Published links"), w.Text(" — including for the people in this letter.")}, Tone: w.MsgAccent, Space: w.MsgFlushTop11}, "s-mail-1", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("This file is over the limit for an attachment, so the letter will carry a secret link to it instead. The link is listed in "), w.Strong("Published links"), w.Text(", works for 30 days, and revoking it there closes it for whoever got the letter.")}, Tone: w.MsgAccent, Space: w.MsgSheet}, "s-mail-6", "tc-msg", 1),
+	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("Отвечать на это письмо не нужно: адрес почту не принимает. Свяжитесь с отправителем другим способом.")}, Space: w.MsgFlushTop11}, "s-mail-8", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them.")}, Tone: w.MsgAlert}, "s-admin-6", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The mode changes by signing out: the app shows this screen again. The data ("), w.Mono{Text: "state.enc"}, w.Text(") lives in the OS user profile either way.")}, Space: w.MsgFlush}, "m-desktop-5", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("What only works from outside."), w.Text(" A local Carrel is not visible from the internet, so "), w.Strong("published links"), w.Text(", "), w.Strong("devices over davloom"), w.Text(", "), w.Strong("backup started by an external request"), w.Text(" and "), w.Strong("invitation links"), w.Text(" either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "m-desktop-6", "tc-msg", 2),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" The app goes back to the first screen, where the mode is chosen again — a server or a local run. "), w.Strong("Your other devices stay signed in"), w.Text(" — those sessions end in Settings → Account, and they end there whether this app is running or not.")}, Space: w.MsgFlush}, "m-desktop-12", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "down", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, "m-desktop-14", "tc-msg", 1),
+
+	// tc-diag
+	cards("plain", w.Diag{Text: "[discover] GET /.well-known/caldav → 200\n[principal] /principals/mix/"}, "components-30", "tc-diag", 1),
+	cards("ink", w.Diag{Text: "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'", Variant: w.DiagInk}, "s-backup-2", "tc-diag", 1),
+	cards("danger", w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}, "s-io-9", "tc-diag", 2),
+
+	// tc-danger
+	cards("aside", w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, Note: "Удаление уходит на сервер сразу и отменить его нечем."}, "s-contacts-6", "tc-danger", 1),
+	cards("plain", w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}}, "s-contacts-1", "tc-danger", 1),
+	cards("end", w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}, "s-notes-2", "tc-danger", 1),
+	cards("end", w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, Space: w.DangerTight}, "components-34", "tc-danger", 1),
+
+	// tc-meter
+	cards("plain", w.Meter{Percent: 83}, "components-16", "tc-meter", 1),
+	cards("track", w.Meter{Percent: 100, Track: 100}, "components-26", "tc-meter", 1),
+	cards("alert", w.Meter{Percent: 83, Alert: true}, "m-states-6", "tc-meter", 1),
+	cards("width", w.Meter{Percent: 83, Width: w.Meter60}, "m-phone-1", "tc-meter", 1),
+	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "m-desktop-14", "tc-meter", 1),
+
+	// tc-runbar
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 6 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "mentions-5", "tc-runbar", 1),
+	cards("stop", w.Runbar{Meter: w.Meter{Percent: 71}, Parts: []w.RunbarPart{w.Text("Polled 5 of 7 sources · 12 records · 1 unavailable"), w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true}}}}}, "components-22", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Polled 4 of 5 calendars · matched by "), w.Mono{Text: "a.kovaleva@example.org"}, w.Text(", "), w.Mono{Text: "anna.kovaleva@slovo.example"}, w.Text(" and the name · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "s-contacts-7", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Span{Face: w.FaceDanger, Text: "baikal unavailable"}, w.Mono{Text: "from cache · 2 min ago", Place: w.Pushed}}}, "s-agenda-1", "tc-runbar", 1),
+	cards("stop", w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Text("Done · 5 of 6 sources answered"), w.Mono{Text: "1.8 s"}, w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}}}}}, "s-find-1", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Text("11 checks · "), w.Span{Face: w.FaceAccent, Text: "8 fine"}, w.Text(" · "), w.Span{Face: w.FaceDanger, Text: "2 broken"}, w.Text(" · 1 warning"), w.Mono{Text: "4.2 s", Place: w.Pushed}}}, "s-admin-4", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 6 of 7 sources by the card's link "), w.Mono{Text: "urn:uuid:4f2b-9c31-a0e7"}, w.Text(" · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "mentions-2", "tc-runbar", 1),
+	cards("failed", w.Runbar{Meter: w.Meter{Percent: 0}, Parts: []w.RunbarPart{w.Text("No connection to carrel.example · last successful attempt 4 minutes ago "), w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}, Failed: true}, "m-states-5", "tc-runbar", 1),
+	cards("stop", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий: 401 Unauthorized"}, w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}}, "m-states-6", "tc-runbar", 1),
+
+	// tc-queue
+	cards("flush", w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "12.4 MB", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Hide", Small: true}, Items: []w.QueueItem{{Name: "отчёт-июль.pdf", Meta: "4.1 MB · done", Meter: &w.Meter{Percent: 100, Track: 100}}, {Name: "плакат.png", Meta: "8.3 MB · 62%", Meter: &w.Meter{Percent: 62, Track: 100}}, {Name: "release-checklist.md", Meta: "name taken", Failed: true, Acts: []w.Button{w.Button{Label: "Keep both", Small: true}, w.Button{Label: "Replace", Small: true}, w.Button{Label: "Skip", Small: true}}}}, Variant: w.QueueFlushFull}, "components-26", "tc-queue", 1),
+	cards("min", w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "62%", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Show", Small: true}, Min: true, Variant: w.QueueFlushAuto}, "components-27", "tc-queue", 1),
+	cards("flush", w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "12.4 MB", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Hide", Small: true}, Items: []w.QueueItem{{Name: "отчёт-июль.pdf", Meta: "4.1 MB · done", Meter: &w.Meter{Percent: 100, Track: 100}}, {Name: "плакат.png", Meta: "8.3 MB · 62%", Meter: &w.Meter{Percent: 62, Track: 100}}, {Name: "release-checklist.md", Meta: "name taken", Failed: true, Acts: []w.Button{w.Button{Label: "Keep both", Small: true}, w.Button{Label: "Replace", Small: true}, w.Button{Label: "Skip", Small: true}}}}}, "s-files-2", "tc-queue", 1),
+	cards("min", w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "62%", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Show", Small: true}, Min: true}, "s-files-3", "tc-queue", 1),
+
+	// tc-stat
+	cards("plain", w.Stat{Value: "122", Label: "ready"}, "components-30", "tc-stat", 1),
+	cards("error", w.Stat{Value: "3", Label: "with errors", Error: true}, "components-30", "tc-stat", 2),
+
+	// tc-stats
+	cards("plain", w.Stats{Items: []w.Stat{w.Stat{Value: "122", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}, w.Stat{Value: "5", Label: "UID collisions"}}}, "components-30", "tc-stats", 1),
+
+	// tc-steps
+	cards("middle", w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 2}, "s-io-5", "tc-steps", 1),
+	cards("first", w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1}, "components-30", "tc-steps", 1),
+	cards("last", w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 3}, "s-io-9", "tc-steps", 1),
+
+	// tc-diff
+	cards("plain", w.Diff{Items: []w.DiffItem{
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}}, "s-conflict-1", "tc-diff", 1),
+	cards("plain", w.Diff{Items: []w.DiffItem{
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
+		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}}}}, "s-conflict-2", "tc-diff", 1),
+
+	// tc-empty
+	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing this day.")}, Variant: w.EmptySmall}, "s-agenda-1", "tc-empty", 1),
+	cards("action", w.Empty{Parts: []w.EmptyPart{w.Text("No contacts in this address book."), w.Button{Label: "New contact", Kind: w.ButtonPrimary}}}, "components-22", "tc-empty", 1),
+	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, "s-notes-6", "tc-empty", 1),
+	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty}, "s-contacts-1", "tc-empty", 1),
+	cards("drop", w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, "s-io-1", "tc-empty", 1),
+	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing was looked for before January 2026. Widen the range if you need it.")}, Variant: w.EmptySmallTop}, "s-contacts-7", "tc-empty", 1),
+	cards("dashed", w.Empty{Parts: []w.EmptyPart{w.Text("Drop files here, or"), w.Emphasis("choose on the computer"), w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}}}, Variant: w.EmptyDashed}, "s-notes-11", "tc-empty", 1),
+	cards("drop", w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}, "s-io-2", "tc-empty", 1),
+	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("Carrel copies raw"), w.Mono{Text: ".ics"}, w.Text(", "), w.Mono{Text: ".vcf"}, w.Text(" and files to storage of your own, with a manifest and a read-back check. Nothing is kept here. "), w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("Already have an archive from another instance?"), w.Strong("Restore"), w.Text("takes it from a file — a job is not needed for that.")}}}}, "s-backup-6", "tc-empty", 1),
+
+	// tc-thumb
+	cards("tile", w.Thumb{Icon: "doc"}, "components-25", "tc-thumb", 1),
+	cards("card", w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, "s-files-5", "tc-thumb", 4),
+	cards("preview", w.Thumb{Icon: "img", Form: w.ThumbPreview}, "s-files-1", "tc-thumb", 1),
+	cards("wide", w.Thumb{Icon: "img", Form: w.ThumbWide}, "s-publish-9", "tc-thumb", 1),
+	cards("square", w.Thumb{Icon: "doc", Form: w.ThumbSquare}, "s-publish-11", "tc-thumb", 1),
+
+	// tc-tile
+	cards("plain", w.Tile{Thumb: w.Thumb{Icon: "doc"}, Name: "смета.pdf", Meta: "412 KB"}, "components-25", "tc-tile", 1),
+	cards("selected", w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "фасад.jpg", Meta: "1.8 MB", Selected: true}, "components-25", "tc-tile", 2),
+
+	// tc-grid
+	cards("plain", w.Grid{Tiles: []w.Tile{w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "whiteboard.jpg", Meta: "2.8 MB · 4032×3024", Selected: true}, w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-1.png", Meta: "640 KB · 1920×1080"}, w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-2.png", Meta: "712 KB · 1920×1080"}, w.Tile{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, Name: "смета.pdf", Meta: "1.2 MB"}, w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "архив", Meta: "12 items"}, w.Tile{Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard}, Name: "панорама.tif", Meta: "84 MB · too large"}}}, "s-files-5", "tc-grid", 1),
+	cards("flush", w.Grid{Tiles: []w.Tile{w.Tile{Thumb: w.Thumb{Icon: "doc"}, Name: "смета.pdf", Meta: "412 KB"}, w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "фасад.jpg", Meta: "1.8 MB", Selected: true}}, Flush: true}, "components-25", "tc-grid", 1),
+
+	// tc-pad
+	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
+
+	// tc-fields
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
+		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-6", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Organisation", Value: []w.ValuePart{w.Text("Издательство «Слово»")}},
+		{Term: "Title", Value: []w.ValuePart{w.Text("Выпускающий редактор")}},
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
+		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-1", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
+		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-7", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}}}}, "s-agenda-1", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
+		{Term: "Due", Value: []w.ValuePart{w.Text("2026-08-12 18:00")}, Face: w.ValueMono},
+		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-1", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
+		{Term: "Due", Value: []w.ValuePart{w.Mono{Text: "2026-08-12 18:00"}, w.Span{Face: w.FaceDanger, Text: "· overdue by 3 days"}}},
+		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
+		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-2", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Path", Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")}, Face: w.ValueMono},
+		{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · не менялась на сервере")}}}}, "s-tasks-3", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}}, "s-notes-1", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Size", Value: []w.ValuePart{w.Text("412 KB")}, Face: w.ValueMono},
+		{Term: "Type", Value: []w.ValuePart{w.Text("image/png")}, Face: w.ValueMono},
+		{Term: "Changed", Value: []w.ValuePart{w.Text("2026-08-10 11:07")}, Face: w.ValueMono},
+		{Term: "Path", Value: []w.ValuePart{w.Text("/dav/Documents/carrel/attachments/2026-08-10-sync-board.png")}, Face: w.ValueMonoSmall}}}, "s-files-1", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "s-io-2", "tc-fields", 1),
+	cards("bleed", w.Fields{Items: []w.FieldsItem{
+		{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
+		{Term: "Last recovery", Value: []w.ValuePart{w.Text("never")}, Face: w.ValueMono}}, Variant: w.FieldsBleed}, "account-4", "tc-fields", 1),
+	cards("bleed", w.Fields{Items: []w.FieldsItem{
+		{Term: "Up to 2 MB", Value: []w.ValuePart{w.Text("written into the event, the task or the note itself, and travels with it")}},
+		{Term: "Larger", Value: []w.ValuePart{w.Text("put in the folder below; the record keeps a link to it")}}}, Variant: w.FieldsBleed130}, "attachments-1", "tc-fields", 1),
+	cards("bleed", w.Fields{Items: []w.FieldsItem{
+		{Term: "Files", Value: []w.ValuePart{w.Text("128 · 1.4 GB")}, Face: w.ValueMono},
+		{Term: "Oldest", Value: []w.ValuePart{w.Text("2026-02-19")}, Face: w.ValueMono},
+		{Term: "Path", Value: []w.ValuePart{w.Text("https://files.example.org/dav/Documents/carrel/attachments/")}, Face: w.ValueMonoSmall}}, Variant: w.FieldsBleed130}, "attachments-1", "tc-fields", 2),
+	cards("narrow", w.Fields{Items: []w.FieldsItem{
+		{Term: "Address", Value: []w.ValuePart{w.Text("https://carrel.example/dav/")}, Face: w.ValueMono},
+		{Term: "Serves", Value: []w.ValuePart{w.Text("CalDAV · CardDAV · WebDAV")}, Face: w.ValueMono},
+		{Term: "Version", Value: []w.ValuePart{w.Text("0.0.1")}, Face: w.ValueMono},
+		{Term: "Build", Value: []w.ValuePart{w.Text("786949a")}, Face: w.ValueMono},
+		{Term: "Licence", Value: []w.ValuePart{w.Text("AGPL-3.0-or-later")}}}, Variant: w.Fields130Flush}, "s-davloom-4", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}}, "m-dark-1", "tc-fields", 1),
+	cards("phone", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Break{}, w.Text("Monday, 10 August")}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}, Variant: w.Fields88}, "m-phone-3", "tc-fields", 1),
+	cards("phone", w.Fields{Items: []w.FieldsItem{
+		{Term: "Phone", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMonoAccent},
+		{Term: "Email", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Face: w.ValueAccent},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono}}, Variant: w.Fields88Pad}, "m-phone-5", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "m-desktop-1", "tc-fields", 1),
+
+	// tc-sec
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Kept as the server sent them"}}}, "s-contacts-1", "tc-sec", 1),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Related"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Заметка со встречи 10.08"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· note")}}}}}}}, "s-agenda-1", "tc-sec", 4),
+	cards("hint", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Kept as the server sent them"},
+		w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."}}}, "s-contacts-6", "tc-sec", 1),
+	cards("acts", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "11", Variant: w.MonoTightPlain}}},
+		w.List{Rows: []w.ListRow{
+			w.LinkedRow{Mark: w.Mark{Colour: "#4A6B52"}, Icon: "cal", Title: "Синк-ап по релизу", Detail: "10 Aug · участник · приняла"},
+			w.LinkedRow{Mark: w.Mark{Colour: "#4A6B52"}, Icon: "note", Title: "Заметка со встречи 10.08", Detail: "10 Aug · упомянута в тексте"},
+			w.LinkedRow{Mark: w.Mark{Colour: "#3F6E8C"}, Icon: "task", Title: "Отправить макет Ковалёвой", Detail: "08 Aug · упомянута в названии"}}},
+		w.SecActs{Items: []w.Button{w.Button{Label: "Open the timeline", Icon: "all"}}}}}, "s-contacts-6", "tc-sec", 3),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("release-checklist.md "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The same event in other calendars"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}}}}, Gap: 5}}}, "s-agenda-2", "tc-sec", 5),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The same person in other books"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}}}}, Gap: 5}}}, "s-contacts-6", "tc-sec", 2),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The same person in other books"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}}}}, Gap: 6},
+		w.SecHint{Text: "Linked on the duplicates screen. The records stay on their own servers; here they are shown as one person.", Apart: true}}}, "s-contacts-7", "tc-sec", 1),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTightPlain}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Gap: 5}}}, "s-agenda-1", "tc-sec", 2),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("посадочный-казань.pdf "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}}, w.Text(" "), w.Badge{Label: "in the task"}}}, Gap: 6},
+		w.SecHint{Text: "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.", Apart: true}}}, "s-tasks-1", "tc-sec", 3),
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseRead},
+		w.SecTasks{Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}}}}, "s-notes-1", "tc-sec", 1),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("2026-08-10-sync-board.png "), w.Dim{Parts: []w.Inline{w.Text("image/png · 412 KB")}}, w.Text(" "), w.Badge{Label: "in the note"}}, []w.SecItemPart{w.Text("запись-встречи.m4a "), w.Dim{Parts: []w.Inline{w.Text("audio/mp4 · 24 MB")}}, w.Text(" "), w.Badge{Label: "Documents / carrel"}}}, Gap: 6}}}, "s-notes-1", "tc-sec", 2),
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Links"},
+		w.SecNote{Text: "Carrel keeps no index of what points at this file. It may be attached to a note or an event — check before deleting."}}}, "s-files-1", "tc-sec", 1),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("release-checklist.md "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
+		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, "s-io-2", "tc-sec", 1),
+	cards("flush", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Push{Items: []w.PushPart{w.Text("Attach")}}}, Variant: w.RubricItemLine},
+		w.SecFiles{Items: []w.SecFile{{Icon: "con", Name: "Пётр Смирнов · подрядчик", Size: w.Mono{Text: ".vcf · 3 KB"}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "cal", Name: "Встреча на объекте · 18 August 10:00", Size: w.Mono{Text: ".ics · 2 KB"}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "doc", Name: "смета-подрядчик.pdf", Size: w.Mono{Text: "4.2 MB"}, Tag: w.Tag{Label: "as a link", On: true}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "file", Name: "Договор подряда · 9 файлов", Size: w.Mono{Text: "folder"}, Tag: w.Tag{Label: "as a link", On: true}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Both links live 30 days and can be revoked in "), w.Strong("Published links"), w.Text(" — including for the people in this letter.")}, Tone: w.MsgAccent, Space: w.MsgFlushTop11}}, Flush: true}, "s-mail-1", "tc-sec", 1),
+	cards("flush", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The letter carries"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("The link and your line — nothing of the calendar itself")}, []w.SecItemPart{w.Text("Revoking the link closes it for this recipient too")}, []w.SecItemPart{w.Text("It expires on 9 September, as the link does")}}, Gap: 5, Muted: true}}, Flush: true}, "s-mail-4", "tc-sec", 1),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The same person in other books"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Анна Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Общий")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "А. Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· baikal · Работа")}}}}, Gap: 5}}}, "mentions-1", "tc-sec", 2),
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attendees 4"},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}}, "m-phone-3", "tc-sec", 2),
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments"},
+		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "m-desktop-1", "tc-sec", 1),
+
+	// tc-card
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "From a file"},
+		w.Field{Label: "Markdown or a zip of them", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, "s-io-4", "tc-card", 1),
+	cards("alert", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "baikal"},
+		w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap},
+		w.Diag{Text: "[well-known] GET /.well-known/caldav → 404 [base] PROPFIND /dav.php/ → 401 Unauthorized WWW-Authenticate: Basic realm=\"BaikalDAV\" [principal] не запрашивался: предыдущий шаг не прошёл"},
+		w.CardText{Kind: w.CardAlertText, Parts: []w.CardTextPart{w.Text("The server refused the password. It may have been changed on the server: the one Carrel saved no longer fits.")}}}, Variant: w.CardAlert}, "s-profile-1", "tc-card", 3),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Дежурство: первая линия"},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "nextcloud · Работа", Inset: true},
+			w.TimeRow{Mark: w.Mark{Colour: "#8C6239"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "radicale · vps · Дежурства", Inset: true}}, Inset: true},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("The same duty in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.")}, Line: true},
+		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, "s-dup-1", "tc-card", 2),
+	cards("apart", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Kept and rewritten"},
+		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}}}, Variant: w.CardApart}, "s-dup-2", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Deleted afterwards"},
+		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Команда")}}}}}}, "s-dup-2", "tc-card", 2),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The kept record gains"},
+		w.CardList{Items: []string{"2 reminders from the others"}}}}, "s-dup-4", "tc-card", 3),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Profile"},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("Issued inside the unlock window: nothing more is asked.")}},
+		w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "Generate profile", Kind: w.ButtonDanger}}}}}, "s-plan-1", "tc-card", 2),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "nextcloud · mix"},
+		w.CardQR{Colour: "#FFFDF7", Symbol: "qr-demo", Side: []w.CardQRPart{w.Dim{Parts: []w.Inline{w.Text("Address and login are in the code.")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Button{Label: "Open in DAVx5", Small: true}}},
+		w.SpacedField{Field: w.Field{Label: "Password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}}, "s-plan-2", "tc-card", 2),
+	cards("snug", w.Card{Items: []w.CardPart{
+		w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Wipe the account")}},
+		w.Prose{Parts: []w.Inline{w.Text("We send a letter to the confirmed address. The link in it is not a reset: after you confirm, everything stored here is erased — connections become unreadable and are deleted — and the same link then lets you set a new password. Address books, calendars, tasks and notes on the servers stay where they are.")}, Variant: w.ProseMutedClose},
+		w.Button{Label: "Send a confirmation letter", Kind: w.ButtonPrimary}}, Variant: w.CardSnug}, "s-auth-6", "tc-card", 1),
+	cards("flush", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Created"},
+		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}}, Variant: w.CardFlush}, "components-32", "tc-card", 1),
+	cards("flush", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Where to put it"},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Trail: w.Badge{Label: "attachment folder"}},
+			{Icon: "file", Label: "2026-08", Indent: w.TreeLevel40, Trail: w.Badge{Label: "just created"}},
+			{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
+			{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 4}}, Variant: w.CardFlush}, "s-notes-11", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Артём Белов"},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АБ"}, Title: []w.Inline{w.Text("Артём Белов")}, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор", Source: "nextcloud · Контакты", Inset: true},
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Белов Артём")}, Subtitle: "+7 903 118-22-04", Detail: "belov@team.example", Caption: "—", Source: "radicale · vps · Команда", Inset: true}}, Inset: true},
+		w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Display name", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Organisation", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Photo", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
+		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, "s-dup-1", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Собрать чемодан"},
+		w.List{Rows: []w.ListRow{
+			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Tags: []w.RowTag{w.Tag{Label: "дом"}}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
+			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug", Progress: "—", Source: "radicale · vps · Личное", Inset: true}}, Inset: true},
+		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, "s-dup-1", "tc-card", 3),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Анна Ковалёва"},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", Inset: true},
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "—", Source: "radicale · vps · Команда", Inset: true},
+			w.FaceRow{Mark: w.Mark{Colour: "#9A9280"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("А. Ковалёва")}, Subtitle: "—", Detail: "a.kovaleva@example.org", Caption: "Слово", Source: "baikal · Общий", SourceBadge: &w.Badge{Label: "ro"}, Inset: true}}, Inset: true},
+		w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Photo", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
+		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Keep these values", Kind: w.ButtonPrimary}, w.Button{Label: "Unlink"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}},
+		w.CardText{Kind: w.CardWhy, Parts: []w.CardTextPart{w.Text("Общий is read-only: its record could be neither rewritten nor deleted.")}}}}, "s-dup-1", "tc-card", 5),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Сергей Орлов"},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "СО"}, Title: []w.Inline{w.Text("Сергей Орлов")}, Subtitle: "+7 495 120-45-00", Detail: "s.orlov@slovo.example", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", Inset: true},
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "МО"}, Title: []w.Inline{w.Text("Мария Орлова")}, Subtitle: "+7 495 120-45-00", Detail: "m.orlova@slovo.example", Caption: "Издательство «Слово»", Source: "radicale · vps · Команда", Inset: true}}, Inset: true},
+		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again"}}}}}, "s-dup-1", "tc-card", 6),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The kept record gains"},
+		w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from radicale · vps · Команда)"}}}}, "s-dup-2", "tc-card", 3),
+	cards("apart", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "What happened"},
+		w.CardList{Items: []string{"Kept and rewritten: Артём Белов · nextcloud · Контакты", "Still there: Белов Артём · radicale · vps · Команда"}}}, Variant: w.CardApart}, "s-dup-5", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "From a file"},
+		w.Field{Label: "vCard file", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}, "s-io-3", "tc-card", 1),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "From a WebDAV folder"},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "notes", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}}}, On: 2},
+		w.CardRow{Kind: w.CardTop8, Gap: 10, Items: []w.CardRowPart{w.FillHint{Parts: []w.CardTextPart{w.Text("Every "), w.Mono{Text: ".md"}, w.Text(" directly in that folder. Subfolders are not walked, nothing on the server is moved or deleted — the files stay where they were.")}}, w.Button{Label: "Preview folder", Kind: w.ButtonPrimary}}}}, Variant: w.CardChosen}, "s-io-4", "tc-card", 2),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Created"},
+		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}}}, "s-io-9", "tc-card", 1),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "nextcloud"},
+		w.Mono{Text: "https://cloud.example.org/remote.php/dav/", Form: w.MonoLine, Variant: w.Mono11_5DustyGap},
+		w.Line{Block: true, Gap: w.LineGap8, Items: []w.LinePart{w.Field{Label: "User name", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}}, Variant: w.CardChosen}, "s-profile-4", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Link ready until 09:46"},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("It opens once, for you signed in to Carrel. Open it on the device, install the profile, then delete the file.")}},
+		w.CardRow{Kind: w.CardTop9, Gap: 6, Items: []w.CardRowPart{w.Button{Label: "Download profile", Icon: "down"}, w.Button{Label: "Revoke", Kind: w.ButtonDanger}}}}}, "s-plan-1", "tc-card", 3),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Device password"},
+		w.CardRow{Kind: w.CardTop2, Gap: 8, Items: []w.CardRowPart{w.Input{Value: "brick-lamp-9f2-carrel", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy"}}},
+		w.CardText{Kind: w.CardWarn, Parts: []w.CardTextPart{w.Text("Shown once and stored nowhere. Close this page and you will not see it again; lose it and you revoke this device and make another.")}}}, Variant: w.CardChosen}, "s-davloom-3", "tc-card", 1),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The line to paste", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightPlain}}},
+		w.Seg{Options: []w.SegOption{{Label: "crontab", On: true}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl"}}},
+		w.Diag{Text: "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'", Variant: w.DiagInk},
+		w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Regenerate"}, w.Dim{Parts: []w.Inline{w.Text("Runs at 03:00 · the time sits inside the line and is changed there")}, Size: w.Dim11_5, Variant: w.DimWrap}}},
+		w.CardText{Kind: w.CardUsage, Parts: []w.CardTextPart{w.Text("Paste into "), w.Mono{Text: "crontab -e"}, w.Text(" on the machine that is to hold the password. It is one line and stays one line — "), w.Mono{Text: "cron"}, w.Text(" understands no continuations; the wrap you see is this screen’s doing. "), w.Mono{Text: "-fsS"}, w.Text(" keeps it quiet while all is well and makes cron mail you when the request itself fails.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("This line "), w.Strong("starts"), w.Text(" a copy; it does not wait for one. The answer comes back at once and says the job was accepted, nothing more. Whether the copy went through is on this page and in the history — and can be watched from outside, which is what the "), w.Strong("GoSentry"), w.Text(" tab is for."), w.Break{}, w.Break{}, w.Text("Starting it is all there is to do "), w.Strong("because this job writes to WebDAV"), w.Text(". Put "), w.Strong("Download"), w.Text(" in the destination and what is handed over here becomes a short script instead: the archive is a stream, and somebody has to be at the other end to take it.")}, Space: w.MsgFlushTop9},
+		w.CardRow{Kind: w.CardFoot, Gap: 7, Items: []w.CardRowPart{w.Turn{}, w.Span{Face: w.FaceLarge, Text: "The password on its own, and the other endpoints"}, w.Dim{Parts: []w.Inline{w.Text("— for a request written by hand; the line above already carries it")}, Size: w.Dim11_5, Variant: w.DimWrap}}}}, Variant: w.CardChosenFlushGrow}, "s-backup-2", "tc-card", 1),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The script to paste", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightPlain}}},
+		w.CardText{Kind: w.CardAbove, Parts: []w.CardTextPart{w.Text("Destination: "), w.Key("WebDAV and download"), w.Text(" — two steps, so this is a file, not a line")}},
+		w.Seg{Options: []w.SegOption{{Label: "crontab", On: true}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl"}}},
+		w.Diag{Text: "#!/bin/sh set -eu h='Authorization: Bearer cbk_7f3a-91de-4402-lamp' b=https://carrel.example/api/backup out=/var/backups id=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\") until [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done curl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"", Variant: w.DiagInk},
+		w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Save as", Icon: "down"}, w.Button{Label: "Regenerate"}}},
+		w.CardText{Kind: w.CardUsage, Parts: []w.CardTextPart{w.Text("Put it where the password is to live, make it executable, and give "), w.Mono{Text: "crontab -e"}, w.Text(" one line: "), w.Mono{Text: "0 3 * * * /usr/local/bin/carrel-personal.sh"}, w.Text(" — the schedule stays a line, the work moves into the file. The date has to live in the script and not in the crontab line: "), w.Mono{Text: "cron"}, w.Text(" reads "), w.Mono{Text: "%"}, w.Text(" as a newline, so "), w.Mono{Text: "date +%F"}, w.Text(" written up there would break the entry.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("A copy that fails needs no separate check: the download answers with an error, "), w.Mono{Text: "set -eu"}, w.Text(" stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and "), w.Mono{Text: "409"}, w.Text(" until then means «not yet», not «broken».")}, Space: w.MsgFlushTop9}}, Variant: w.CardChosenFlush}, "s-backup-3", "tc-card", 1),
+	cards("chosen", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The fields to paste", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightPlain}}},
+		w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry", On: true}, {Label: "Gitea"}, {Label: "curl"}}},
+		w.CardGrid{Items: []w.CardGridPart{w.Dim{Parts: []w.Inline{w.Text("Name")}, Size: w.Dim11}, w.Input{Value: "Carrel · personal", Label: "x"}, w.Button{Label: "Copy", Small: true}, w.Dim{Parts: []w.Inline{w.Text("Folder")}, Size: w.Dim11}, w.Input{Value: "Backup", Label: "x"}, w.Button{Label: "Copy", Small: true}, w.Dim{Parts: []w.Inline{w.Text("Schedule")}, Size: w.Dim11}, w.Input{Value: "0 3 * * *", Label: "x"}, w.Button{Label: "Copy", Small: true}, w.Dim{Parts: []w.Inline{w.Text("Command")}, Size: w.Dim11}, w.Input{Value: "curl", Label: "x"}, w.Button{Label: "Copy", Small: true}, w.Dim{Parts: []w.Inline{w.Text("Arguments")}, Size: w.Dim11, Variant: w.DimTop}, w.Area{Text: pasteArgs, Variant: w.AreaPaste, Mono: true, Label: "Arguments"}, w.Button{Label: "Copy", Small: true}}},
+		w.CardText{Kind: w.CardUsage, Parts: []w.CardTextPart{w.Text("GoSentry is a scheduler of commands, not an HTTP checker: its job dialog asks for "), w.Strong("Name"), w.Text(", "), w.Strong("Folder"), w.Text(", "), w.Strong("Schedule"), w.Text(", "), w.Strong("Command"), w.Text(" and "), w.Strong("Arguments"), w.Text(" (one argument per line, no quotes). This tab copies those fields, not a URL and a header. Leave "), w.Strong("Start only, do not wait for exit"), w.Text(" off — "), w.Mono{Text: "curl"}, w.Text(" exits when the "), w.Mono{Text: "202"}, w.Text(" comes back.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("A second GoSentry job, same form: Command "), w.Mono{Text: "curl"}, w.Text(", Arguments a "), w.Mono{Text: "GET /api/backup/status?job=personal"}, w.Text(", failing when the last "), w.Strong("successful"), w.Text(" copy is older than 26 hours. The first job says the copy was asked for; only the second says it happened.")}, Space: w.MsgFlushTop9}}, Variant: w.CardChosenFlush}, "s-backup-4", "tc-card", 1),
+	cards("flush", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "The password on its own", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightPlain}}},
+		w.Line{Block: true, Gap: w.LineGap8, Items: []w.LinePart{w.Input{Value: "cbk_7f3a-91de-4402-lamp", Mono: true, Variant: w.InputKeySmFill, Label: "Key"}, w.Button{Label: "Copy"}}},
+		w.Rubric{Text: "What it opens"},
+		w.CardRows{Items: []w.CardRowsItem{{Head: w.Mono{Text: "POST /api/backup/run?job=personal"}, Note: w.Dim{Parts: []w.Inline{w.Text("starts a copy · answers "), w.Mono{Text: "202"}, w.Text(" and an id, a second one while it runs is refused")}}}, {Head: w.Mono{Text: "GET /api/backup/status?job=personal"}, Note: w.Dim{Parts: []w.Inline{w.Text("how the running one is doing, and how the last one ended")}}}, {Head: w.Mono{Text: "GET /api/backup/{id}/download"}, Note: w.Dim{Parts: []w.Inline{w.Text("the archive itself, once it is done — "), w.Mono{Text: "409"}, w.Text(" while it runs")}}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("No collections, no settings — but read the third line together with "), w.Strong("Encrypt the archive"), w.Text(" in this job: the password can pull the archive down as well, and an archive with encryption turned off is your data in the clear.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop11},
+		w.CardText{Kind: w.CardSmallPrint, Parts: []w.CardTextPart{w.Text("Every use is logged, naming this password. "), w.Strong("Regenerate"), w.Text(" replaces it on the spot — and every line already handed out stops working with it.")}}}, Variant: w.CardFlush}, "s-backup-5", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Archive password"},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Width: w.FieldLG, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Span{Face: w.FaceMuted12, Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections."}}}}}, "s-backup-7", "tc-card", 2),
+	cards("flush", w.Card{Items: []w.CardPart{
+		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>"}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Mono{Text: "mix@example.org"}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
+		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже. Михаил Енученко")}, Variant: w.Prose13Card},
+		w.CardRow{Kind: w.CardAttached, Gap: 6, Items: []w.CardRowPart{w.Tag{Label: "smirnov.vcf"}, w.Tag{Label: "vstrecha.ics"}}},
+		w.CardText{Kind: w.CardCaption, Parts: []w.CardTextPart{w.Text("смета-подрядчик.pdf — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/9c1f4e"}, w.Break{}, w.Text("Договор подряда, 9 файлов — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/2ab77d"}}}}, Variant: w.CardFlush}, "s-mail-7", "tc-card", 1),
+	cards("flush", w.Card{Items: []w.CardPart{
+		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко (через Carrel)"), w.Text(" "), w.Mono{Text: "<noreply@carrel.example>"}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
+		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже. Михаил Енученко")}, Variant: w.Prose13Card},
+		w.CardRow{Kind: w.CardAttached, Gap: 6, Items: []w.CardRowPart{w.Tag{Label: "smirnov.vcf"}, w.Tag{Label: "vstrecha.ics"}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Отвечать на это письмо не нужно: адрес почту не принимает. Свяжитесь с отправителем другим способом.")}, Space: w.MsgFlushTop11}}, Variant: w.CardFlush}, "s-mail-8", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Invitation"},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Create link", Kind: w.ButtonPrimary}}, Wide: true},
+		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy", Small: true}}},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Send invitation"}}, Wide: true, Rule: true}}}, "s-admin-1", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Temporary password"},
+		w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Login", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Email (optional)", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Temporary password", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Create user", Kind: w.ButtonPrimary}}, Wide: true}}}, "s-admin-1", "tc-card", 2),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Self-registration"},
+		w.CardText{Kind: w.CardLede, Parts: []w.CardTextPart{w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.")}},
+		w.Check{Parts: []w.CheckPart{w.Text("Publish the registration form")}},
+		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/register", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy", Small: true}}},
+		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save"}}}}}, "s-admin-1", "tc-card", 3),
+	cards("pick", w.Card{Items: []w.CardPart{
+		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, "m-desktop-3", "tc-card", 1),
+	cards("pick", w.Card{Items: []w.CardPart{
+		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, "m-desktop-3", "tc-card", 2),
+	cards("pick", w.Card{Items: []w.CardPart{
+		w.CardPick{Ticked: w.TickedOff, Title: "Portable — do not install", Note: []w.CardTextPart{w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.")}, Field: &w.Field{Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, Variant: w.CardFlush}, "m-desktop-3", "tc-card", 3),
+	cards("pick", w.Card{Items: []w.CardPart{
+		w.CardPick{Title: "Local — run it here", Note: []w.CardTextPart{w.Text("Carrel runs inside the app, on this computer. Nothing to deploy.")}, Aside: "Suits one person and one computer. A phone cannot open this Carrel until access over the network is allowed."}}, Variant: w.CardChosenFlush}, "m-desktop-5", "tc-card", 1),
+	cards("pick", w.Card{Items: []w.CardPart{
+		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "m-desktop-5", "tc-card", 2),
+
+	// tc-table
+	cards("acts", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Collection"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4}, {Width: w.ColMenu}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("128")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-profile-7", "tc-table", 1),
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedPart)}, {Label: "Name"}, {Label: "Size", Width: w.ColSize, Rank: w.Rank3}, {Label: "Type", Width: w.ColType, Rank: w.Rank4}, {Label: "Changed", Width: w.ColTime}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}}, {Parts: []w.CellPart{w.Text("412 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/png")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}}}}}, "s-files-2", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "What is published"}, {Label: "Kind"}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "Expires", Rank: w.Rank4}, {Label: "Last opened", Secondary: true}, {Label: "Opens"}, {Width: w.Col120}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный · 10–31 August"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-09-09")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 08:41")}, Mono: true}, {Parts: []w.CellPart{w.Text("12")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("file")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-12")}, Mono: true}, {Parts: []w.CellPart{w.Text("No expiry")}, Mono: true}, {Parts: []w.CellPart{w.Text("never opened")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("0")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-publish-1", "tc-table", 1),
+	cards("picked", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Role"}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "Last login", Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("administrator")}}, {Parts: []w.CellPart{w.Text("2026-03-12")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 09:14")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("user")}}, {Parts: []w.CellPart{w.Text("2026-04-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:02")}, Mono: true}}, State: w.RowPicked}}}, "components-23", "tc-table", 1),
+	cards("plain", w.Table{Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("accepted")}, Tone: w.CellDusty, Rank: w.Rank3}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("tentative")}, Tone: w.CellDusty, Rank: w.Rank3}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Виктор Гончаров")}}, {Parts: []w.CellPart{w.Text("v@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("no reply")}, Tone: w.CellDusty, Rank: w.Rank3}}}}}, "s-agenda-2", "tc-table", 1),
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedOff)}, {Label: "Name"}, {Label: "Size", Width: w.ColSize, Rank: w.Rank3}, {Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true}, {Label: "Changed", Width: w.ColTime}, {Width: w.ColNum}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{}, {Parts: []w.CellPart{w.TableFile{Icon: "back", Name: "up one folder", Accent: true}}, Span: 5}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 34 items")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true}}, State: w.RowFolder},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}}, {Parts: []w.CellPart{w.Text("412 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/png")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "More"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "More"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "More"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "More"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true}}}}}, "s-files-1", "tc-table", 1),
+	cards("folder", w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Server", Width: w.ColTime}, {Label: "Access", Width: w.Col80, Rank: w.Rank3}, {Label: "Purpose", Width: w.ColTime, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Documents"}}}, {Parts: []w.CellPart{w.Text("sftpgo · vps")}, Mono: true}, {Parts: []w.CellPart{w.Text("rw")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "attachments"}}}}, State: w.RowFolder},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Files"}}}, {Parts: []w.CellPart{w.Text("nextcloud")}, Mono: true}, {Parts: []w.CellPart{w.Text("rw")}, Mono: true}, {}}, State: w.RowFolder}}}, "s-files-6", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("New UID will be assigned")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no FN)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("vCard 2.1 quoted-printable: cannot decode line 12")}, Tone: w.CellDanger}}}}}, "s-io-5", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "When", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дежурство: первая линия")}}, {Parts: []w.CellPart{w.Text("Mon 09:00 · weekly until 2026-12-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — the series as one record")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отпуск")}}, {Parts: []w.CellPart{w.Text("2026-07-13 → 2026-07-27 · all day")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-08-17 10:00 Asia/Yekaterinburg")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — time zone kept as sent")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Купить билеты "), w.Badge{Label: "VTODO"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: a calendar takes events — import it into a list of tasks")}, Tone: w.CellDusty}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-05-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("DTSTART without DTEND or DURATION: cannot tell how long it lasts")}, Tone: w.CellDanger}}}}}, "s-io-6", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "Due", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}}, {Parts: []w.CellPart{w.Text("2026-08-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ответить подрядчику по смете")}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Ready — a task without a date is a task")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}}, {Parts: []w.CellPart{w.Text("2026-09-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}}, {Parts: []w.CellPart{w.Text("2026-08-17")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: a list of tasks takes tasks — import it into a calendar")}, Tone: w.CellDusty}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Neither SUMMARY nor DESCRIPTION: nothing to name it by")}, Tone: w.CellDanger}}}}}, "s-io-7", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "File"}, {Label: "Title"}, {Label: "Date", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-03-11-podryadchik.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Встреча с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-03-11")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — title, date and tags from front matter")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("idei/crdt.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Что почитать про CRDT")}}, {Parts: []w.CellPart{w.Text("2026-08-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no front matter: title from the first heading, date from the file")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("doroga.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Про дорогу до дачи")}}, {Parts: []w.CellPart{w.Text("2026-06-30")}, Mono: true}, {Parts: []w.CellPart{w.Text("New UID will be assigned")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("skan.pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: not Markdown")}, Tone: w.CellDusty}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("pustoj.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Empty file: nothing to store and nothing to name it by")}, Tone: w.CellDanger}}}}}, "s-io-8", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Where"}, {Label: "Started"}, {Label: "Last seen", Rank: w.Rank3}, {Width: w.Col120, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Firefox · Windows "), w.Badge{Label: "this one"}}}, {Parts: []w.CellPart{w.Text("2026-08-16 09:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("just now")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Carrel desktop · Windows")}}, {Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 hours ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "End", Kind: w.ButtonDanger, Small: true}}, Acts: true}}}}, Variant: w.TableInset}, "account-1", "tc-table", 1),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Collection"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4}, {Label: "Changed on the server", Width: w.ColChanged}, {Width: w.ColMenu}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("128")}, Mono: true}, {Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("74")}, Mono: true}, {Parts: []w.CellPart{w.Text("yesterday")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("31")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 August")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "pencil", Label: "Rename and colour"},
+			w.MenuItem{Icon: "move", Label: "Move to another server"},
+			w.MenuItem{Icon: "dup", Label: "Copy to another server"},
+			w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11Dusty}, Label: "Export"},
+			w.MenuItem{Icon: "link", Label: "Publish a link"},
+			w.MenuSep{},
+			w.MenuItem{Icon: "trash", Label: "Delete on the server…", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}, Acts: true}}, State: w.RowOff},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}}, {Parts: []w.CellPart{w.Text("address book")}, Mono: true}, {Parts: []w.CellPart{w.Text("248")}, Mono: true}, {Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}}, {Parts: []w.CellPart{w.Text("journal")}, Mono: true}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}}, {Parts: []w.CellPart{w.Text("tasks")}, Mono: true}, {Parts: []w.CellPart{w.Text("30")}, Mono: true}, {Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-profile-1", "tc-table", 1),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Folder"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4}, {Label: "Changed on the server", Width: w.ColChanged}, {Width: w.ColMenu}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}}, {Parts: []w.CellPart{w.Text("files")}, Mono: true}, {Parts: []w.CellPart{w.Text("412")}, Mono: true}, {Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}}, {Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true}, {Parts: []w.CellPart{w.Text("96")}, Mono: true}, {Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowOff}}}, "s-profile-1", "tc-table", 2),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Lands in"}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank3}, {Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}}}, {Parts: []w.CellPart{w.Text("118")}, Mono: true}, {Parts: []w.CellPart{w.Text("yesterday")}, Mono: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Tasks"}}}, {Parts: []w.CellPart{w.Text("6")}, Mono: true}}, State: w.RowOff},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Notes"}}}, {Parts: []w.CellPart{w.Text("2")}, Mono: true}}}}}, "s-profile-1", "tc-table", 3),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Collection"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true}, {Label: "Changed on the server", Width: w.ColChanged}, {Width: w.ColMenu}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("128")}, Mono: true}, {Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("74")}, Mono: true}, {Parts: []w.CellPart{w.Text("yesterday")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("31")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 August")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowOff},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}}, {Parts: []w.CellPart{w.Text("address book")}, Mono: true}, {Parts: []w.CellPart{w.Text("248")}, Mono: true}, {Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}}, {Parts: []w.CellPart{w.Text("journal")}, Mono: true}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}}, {Parts: []w.CellPart{w.Text("tasks")}, Mono: true}, {Parts: []w.CellPart{w.Text("30")}, Mono: true}, {Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-profile-10", "tc-table", 1),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Folder"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true}, {Label: "Changed on the server", Width: w.ColChanged}, {Width: w.ColMenu}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}}, {Parts: []w.CellPart{w.Text("files")}, Mono: true}, {Parts: []w.CellPart{w.Text("412")}, Mono: true}, {Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}}, {Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true}, {Parts: []w.CellPart{w.Text("96")}, Mono: true}, {Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowOff}}}, "s-profile-10", "tc-table", 2),
+	cards("off", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Lands in"}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Secondary: true}, {Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}}}, {Parts: []w.CellPart{w.Text("118")}, Mono: true}, {Parts: []w.CellPart{w.Text("yesterday")}, Mono: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Tasks"}}}, {Parts: []w.CellPart{w.Text("6")}, Mono: true}}, State: w.RowOff},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Notes"}}}, {Parts: []w.CellPart{w.Text("2")}, Mono: true}}}}}, "s-profile-10", "tc-table", 3),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Collection"}, {Label: "Type"}, {Label: "URL", Rank: w.Rank3}, {Width: w.ColNum, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mono{Text: "mix", Variant: w.Mono11Indent}, w.Mono{Text: "z3-brick-lamp-9f2", Variant: w.Mono11Indent}}}}, Span: 4}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/personal/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}}, {Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/work/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}}, {Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/contacts/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}}}}, "s-plan-4", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Collection"}, {Label: "Type"}, {Label: "URL", Rank: w.Rank3}, {Width: w.ColNum, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mono{Text: "mix", Variant: w.Mono11Indent}, w.Mono{Text: "z3-brick-lamp-9f2", Variant: w.Mono11Indent}}}}, Span: 4}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/personal/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}}, {Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/work/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}}, {Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/contacts/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mono{Text: "mix", Variant: w.Mono11Indent}, w.Mono{Text: "m2-kettle-pine-08d", Variant: w.Mono11Indent}}}}, Span: 4}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}}, {Parts: []w.CellPart{w.Text("WebDAV")}, Mono: true}, {Parts: []w.CellPart{w.Text("https://files.example.org/dav/Documents/")}, Mono: true, Small: true}, {Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true}}}}}, "s-plan-5", "tc-table", 1),
+	cards("fit", w.Table{Cols: []w.TableCol{{Label: "Device"}, {Label: "What it can see and do"}, {Label: "Created", Rank: w.Rank4, Secondary: true}, {Label: "Last request", Secondary: true}, {Width: w.Col90}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Телефон · DAVx5"}}}, {Parts: []w.CellPart{w.CellWrap{Items: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#6B4E7A"}, w.Mark{Colour: "#A05A2C"}}}, w.Mono{Text: "Calendars, Address books", Variant: w.Mono11}, w.Button{Label: "5 collections · Change", Small: true}, w.Seg{Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}}, Variant: w.SegCompact, Place: w.Pushed}}}}}, {Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 09:31")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Ноутбук · Thunderbird"}}}, {Parts: []w.CellPart{w.CellWrap{Items: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}}, w.Mono{Text: "all kinds", Variant: w.Mono11}, w.Button{Label: "12 collections · Change", Small: true}, w.Seg{Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}}, Variant: w.SegCompact, Place: w.Pushed}}}}}, {Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true}}}}, Variant: w.TableFit}, "s-davloom-1", "tc-table", 1),
+	cards("wide", w.Table{Cols: []w.TableCol{{Width: w.ColTick}, {Label: "Job"}, {Label: "What it copies", Rank: w.Rank3, Secondary: true}, {Label: "Where to", Rank: w.Rank4, Secondary: true}, {Label: "When"}, {Label: "Keep", Secondary: true}, {Label: "Last backup"}, {Width: w.ColTime}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Рабочее, ежедневно"}}}, {Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#6B4E7A"}, w.Mark{Colour: "#4A6B52"}, w.Mono{Text: "3 collections", Variant: w.Mono11Indent}}}}}, {Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}}, Mono: true}, {Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}}, Mono: true}, {Parts: []w.CellPart{w.Text("14")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Личное на домашний диск"}}}, {Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#A05A2C"}, w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent}}}}}, {Parts: []w.CellPart{w.Text("nextcloud · Files"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/carrel-backup")}}}, Mono: true}, {Parts: []w.CellPart{w.Text("on sign-in"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("if older than 7 days")}}}, Mono: true}, {Parts: []w.CellPart{w.Text("8")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-14 09:12"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("2.1 GB · verified")}}}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Contacts archive, by hand"}}}, {Parts: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Colour: "#A05A2C"}, w.Mono{Text: "1 book", Variant: w.Mono11Indent}}}}}, {Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}}, Mono: true}, {Parts: []w.CellPart{w.Text("on demand")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowFaded}}, Variant: w.TableWide}, "s-backup-1", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "When"}, {Label: "Job"}, {Label: "Size", Rank: w.Rank3, Secondary: true}, {Label: "Collections", Rank: w.Rank4}, {Label: "Verified"}, {Label: "Trigger", Secondary: true}, {Width: w.ColTime}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true}, {Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}}, {Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("3 / 3")}, Mono: true}, {Parts: []w.CellPart{w.Text("read back")}}, {Parts: []w.CellPart{w.Text("cron")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Restore", Small: true}, w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-15 03:10")}, Mono: true}, {Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}}, {Parts: []w.CellPart{w.Text("18.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 / 3")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("baikal · Общий: 401")}, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("cron")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Restore", Small: true}, w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true}, {Parts: []w.CellPart{w.Text("Личное на домашний диск")}}, {Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true}, {Parts: []w.CellPart{w.Text("read back")}}, {Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Restore", Small: true}, w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"}}, Acts: true}}}}}, "s-backup-1", "tc-table", 2),
+	cards("picked", w.Table{Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Width: w.ColTick}, {Parts: []w.CellPart{w.Text("Личное на домашний диск")}}, {Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("4 collections")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}}, {Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("3 collections")}, Mono: true}}}}}, "s-backup-7", "tc-table", 1),
+	cards("fit", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedPart)}, {Label: "In the archive"}, {Label: "Records", Rank: w.Rank3, Secondary: true}, {Label: "Restore into", Width: w.Col26, Rank: w.Rank4}, {Label: "What will happen"}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("312")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Pick{Value: "radicale · vps · Проекты", Label: "Where"}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true},
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
+			w.MenuSep{},
+			w.MenuItem{Icon: "plus", Label: "New collection"},
+			w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty}}, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — no differences")}}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}}, {Parts: []w.CellPart{w.Text("140")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный "), w.Chevron{}}, Mono: true}, {Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("skip")}, Dim: true}}}}, Variant: w.TableFit}, "s-backup-8", "tc-table", 1),
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedOff)}, {Label: "Name"}, {Label: "Size", Width: w.ColSize, Rank: w.Rank3}, {Label: "Type", Width: w.ColType, Rank: w.Rank4}, {Label: "Changed", Width: w.ColTime}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 34 items")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true}}, State: w.RowFolder},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}}, {Parts: []w.CellPart{w.Text("412 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/png")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}}}}}, "s-publish-5", "tc-table", 1),
+	cards("folder", w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.ColSize}, {Label: "Type", Width: w.ColChanged, Rank: w.Rank3}, {Label: "Changed", Width: w.ColTime, Rank: w.Rank4}, {Width: w.Col90}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 6 files")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Open", Small: true}}, Acts: true}}, State: w.RowFolder},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}}}}, "s-publish-12", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.Col90}, {Label: "Changed", Width: w.Col110, Rank: w.Rank3}, {Width: w.ColType, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "over 2 MB · as a link", On: true}}}}, State: w.RowOn},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "договор-подряда.pdf"}}}, {Parts: []w.CellPart{w.Text("840 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "объект-фасад.jpg"}}}, {Parts: []w.CellPart{w.Text("1.6 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}}}}, "s-mail-6", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Delivery"}, {Label: "Status", Rank: w.Rank3}, {Label: "Mail", Rank: w.Rank4}, {Label: "Expires"}, {}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("link")}, Mono: true}, {Parts: []w.CellPart{w.Text("pending")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("2026-08-18 12:00")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Copy link", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("email")}, Mono: true}, {Parts: []w.CellPart{w.Text("pending")}}, {Parts: []w.CellPart{w.Text("failed — 550 mailbox unavailable")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("2026-08-17 09:30")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Resend", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-admin-1", "tc-table", 1),
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Role"}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "Last login", Rank: w.Rank4}, {Label: "DAV"}, {Label: "Sessions"}, {Label: "Escrow"}, {}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}, Name: true}, {Parts: []w.CellPart{w.Text("Administrator")}}, {Parts: []w.CellPart{w.Text("2026-02-11")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("3")}, Mono: true}, {Parts: []w.CellPart{w.Text("2")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("User")}}, {Parts: []w.CellPart{w.Text("2026-03-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-14 18:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("1")}, Mono: true}, {Parts: []w.CellPart{w.Text("1")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "deposited"}}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("viktor "), w.Badge{Label: "disabled"}}}, {Parts: []w.CellPart{w.Text("User")}}, {Parts: []w.CellPart{w.Text("2026-04-19")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-06-30 11:41")}, Mono: true}, {Parts: []w.CellPart{w.Text("2")}, Mono: true}, {Parts: []w.CellPart{w.Text("0")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "deposited"}}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowGone}}}, "s-admin-2", "tc-table", 1),
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColMenu}, {Label: "Check", Width: w.Col26}, {Label: "What happened", Rank: w.Rank3}, {Label: "What to do", Width: w.Col26, Rank: w.Rank4}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Reachable from outside")}}, {Parts: []w.CellPart{w.Text("GET https://carrel.example/healthz → 200 · 41 ms")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Certificate")}}, {Parts: []w.CellPart{w.Text("Let’s Encrypt R11 · until 2026-11-02 · chain complete · name matches")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Base address")}}, {Parts: []w.CellPart{w.Text("Host and X-Forwarded-Host match base_url")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Scheme behind the proxy")}}, {Parts: []w.CellPart{w.Text("X-Forwarded-Proto: https · links are built as https")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Client address")}}, {Parts: []w.CellPart{w.Text("X-Forwarded-For: 203.0.113.7 · limits count this, not the proxy")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDanger}}}, {Parts: []w.CellPart{w.Text("Event stream (SSE)")}, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("first event after 30.0 s instead of 0.2 s — the response is buffered")}, Mono: true}, {Parts: []w.CellPart{w.Text("nginx: proxy_buffering off for /app/find/*/stream")}, Mono: true, Small: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDanger}}}, {Parts: []w.CellPart{w.Text("Upload size")}, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("20 MB probe → 413 from the proxy; Carrel streams and has no size ceiling of its own")}, Mono: true}, {Parts: []w.CellPart{w.Text("client_max_body_size — the proxy is cutting the body")}, Mono: true, Small: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDusty}}}, {Parts: []w.CellPart{w.Text("Long request timeout")}, Tone: w.CellMuted}, {Parts: []w.CellPart{w.Text("seven sources polled in 21 s; the proxy ceiling cannot be measured from outside")}, Mono: true}, {Parts: []w.CellPart{w.Text("proxy_read_timeout ≥ 60s")}, Mono: true, Small: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Cookie")}}, {Parts: []w.CellPart{w.Text("Secure, HttpOnly, SameSite=Lax · came back")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Clock")}}, {Parts: []w.CellPart{w.Text("0.4 s from NTP · TZ Europe/Moscow")}, Mono: true}, {}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Data folder")}}, {Parts: []w.CellPart{w.Text("/var/lib/carrel · writable · 41 GB free")}, Mono: true}, {}}}}}, "s-admin-4", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited"}, {Label: "Last recovery", Rank: w.Rank3}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("2026-03-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("viktor")}}, {Parts: []w.CellPart{w.Text("2026-04-19")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}}}}}, "s-admin-6", "tc-table", 1),
+	cards("head", w.Table{Cols: []w.TableCol{{Label: "When"}, {Label: "Action"}, {Label: "Actor", Rank: w.Rank3}, {Label: "Target", Rank: w.Rank4}, {Label: "Detail"}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("login")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("ip 10.0.0.4")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 22:07")}, Mono: true}, {Parts: []w.CellPart{w.Text("login_failed")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("3rd attempt · rate-limited")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}, {Parts: []w.CellPart{w.Text("escrow_recover")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("viktor")}}, {Parts: []w.CellPart{w.Text("notice mailed")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings_update")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table", 1),
+
+	// tc-docmeta
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
+		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-2", "tc-docmeta", 1),
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
+		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-3", "tc-docmeta", 1),
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-20", "tc-docmeta", 1),
+)
+
+func init() {
+	Widgets = append(Widgets, w.Msg{}, w.Diag{}, w.Danger{}, w.Meter{}, w.Runbar{}, w.Queue{}, w.Stat{}, w.Stats{}, w.Steps{}, w.Diff{},
+		w.Empty{}, w.Thumb{}, w.Tile{}, w.Grid{}, w.Pad{}, w.Fields{}, w.Sec{}, w.Card{}, w.Table{}, w.Docmeta{})
+	Parts = append(Parts, w.Break{}, w.Key(""), w.QueueItem{}, w.DiffItem{}, w.FieldsItem{}, w.SecList{}, w.SecHint{}, w.SecNote{}, w.SecActs{},
+		w.SecTasks{}, w.SecFile{}, w.SecFiles{}, w.SecOpened{}, w.SecOpen{}, w.CardText{}, w.CardHint{}, w.CardRow{}, w.FillHint{}, w.Turn{},
+		w.CardList{}, w.CardFields{}, w.CardQR{}, w.CardPick{}, w.CardGrid{}, w.CardRowsItem{}, w.CardRows{}, w.CardHeadLine{}, w.CardHead{},
+		w.SpacedField{}, w.TableCol{}, w.TableCell{}, w.TableRow{}, w.TableFile{}, w.CellWrap{}, w.Chevron{}, w.DocRef{}, w.DocRefs{},
+		w.DocAttach{}, w.DocmetaSec{}, w.MainResults{}, w.MainCards{}, w.MainDiag{}, w.MainThumbs{}, w.Bold{}, w.Emphasis(""), w.Aside{})
+}

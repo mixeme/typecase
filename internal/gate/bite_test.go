@@ -319,7 +319,7 @@ type Foo struct{}
 func TestBite_tableColumns(t *testing.T) {
 	cat := []gate.CatalogEntry{{
 		Widget: "tc-table", State: "bad",
-		HTML: `<div class="tc-table"><table class="tc-table__grid"><thead><tr><th class="tc-table__th">A</th><th class="tc-table__th">B</th></tr></thead><tbody><tr><td class="tc-table__td">1</td></tr></tbody></table></div>`,
+		HTML: `<table class="tc-table"><thead><tr><th>A</th><th>B</th></tr></thead><tbody><tr><td>1</td><td colspan="2">2</td></tr></tbody></table>`,
 	}}
 	if err := gate.CheckTableColumns(cat); err == nil {
 		t.Fatal("expected table-columns gate to fail")

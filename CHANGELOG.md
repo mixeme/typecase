@@ -119,6 +119,22 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   a service's own page. In the mockup the davloom tile of that page is the
   sprite's symbol `davloom-tile` instead of an inline drawing — the same
   picture, referenced like the logo.
+- **Tables, cards and the rest.** `Table` takes columns (width, rank — the
+  third and fourth columns go first on a narrow screen — and whether it is
+  secondary) and rows of cells; a cell takes its column's rank and tone, and
+  a table without a head carries them itself. `Card` is made of named parts:
+  lines of text by kind, hints, rows of buttons and fields, lists, a code to
+  scan, a choice, a grid, rows of requests, a letter's head. `Sec` and
+  `Fields` fill panels; `Msg`, `Diag`, `Danger`, `Meter`, `Runbar`, `Queue`,
+  `Stats`, `Steps`, `Diff`, `Empty`, `Thumb`, `Tile`, `Grid`, `Pad` and the
+  document's side column `Docmeta` complete the set. Every form of every
+  block the frames draw has its record; one waits for the owner (an input
+  inside a check's button). The catalog rule for table columns follows the
+  frames now: a row may not be wider than the head (a spanning cell counts as
+  its columns), and a table without a head or a row that stops short is
+  allowed. In the mockup the icons of message rows and of grid thumbnails
+  lose a wrapper that repeated their block's rule, and the rule that only
+  that wrapper used is gone.
 
 ### Mockup
 

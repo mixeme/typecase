@@ -392,6 +392,14 @@ var _ = add(
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("icon", w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Rubric{Text: "Write into"},
+		w.Tree{Rows: []w.TreeRow{
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Shared", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 2},
+		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy here"), w.Text(".")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-2", "tc-sheet", 1),
 	overlay("plain", w.Sheet{Title: "Publish a calendar", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud · Личный")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Link", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Send by letter", Kind: w.ButtonPrimary}, w.Button{Label: "Open the link"}, w.Button{Label: "All published links"}}}, "s-publish-13", "tc-sheet", 1),
 	overlay("close", w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
@@ -399,9 +407,14 @@ var _ = add(
 	overlay("close", w.Sheet{Icon: "con", Title: "New contact", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Контакты", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.SheetFields{Items: []w.Field{w.Field{Label: "Display name", Place: w.Grown, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Phone", Width: w.FieldFill200, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Email", Width: w.FieldFill200, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Dim{Parts: []w.Inline{w.Text("The first word is Given, the rest Family — «Пётр Ковалёв», not «Ковалёв Пётр». Everything else is filled in on the card.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Save contact", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Open the card", Icon: "expand"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-notes-8", "tc-sheet", 1),
+	overlay("close", w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write. Connect an account that has a journal, or create a notebook after connecting — the note is not kept in this window.")}, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-notes-6", "tc-sheet", 1),
 	overlay("close", w.Sheet{Icon: "task", Title: "New task", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Дела", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.SheetFields{Items: []w.Field{w.Field{Label: "Summary", Place: w.Grown, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Due date", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Due time", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Dim{Parts: []w.Inline{w.Text("A task with no due date is a task all the same — the field may stay empty.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Save task", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Open the card", Icon: "expand"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-notes-10", "tc-sheet", 1),
+	overlay("icon", w.Sheet{Icon: "shield", Tone: w.SheetIconInk, Title: "Deposit my key", Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.Field{Label: "Your Carrel password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Deposit my key", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc", Place: w.Pushed}}, Width: w.SheetWidth480}, "account-2", "tc-sheet", 1),
 	overlay("close", w.Sheet{Icon: "search", Title: "Keyboard shortcuts", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.SheetKeys{Items: []w.SheetKey{{Keys: "N", Does: "Quick note over this screen"}, {Keys: "/", Does: "Focus the search field in the header"}, {Keys: "Enter", Does: "Open the selected record full screen"}, {Keys: "Esc", Does: "Close a sheet, the details panel or focus mode"}, {Keys: "Ctrl+S", Does: "Save in the editor"}, {Keys: "Ctrl+Enter", Does: "Save a quick note"}, {Keys: "Ctrl+V", Does: "Paste an image as an attachment"}}},
 		w.SheetHint{Text: "Shortcuts do nothing while the cursor is in a field. None of them destroy anything."}}, Foot: []w.SheetFootPart{w.Button{Label: "Close"}, w.Kbd{Keys: "Esc"}, w.Kbd{Keys: "?", Place: w.Pushed}}, Width: w.SheetWidth480}, "account-6", "tc-sheet", 1),
@@ -414,6 +427,16 @@ var _ = add(
 		w.Field{Label: "Colour", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Field{Label: "What goes in it", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Field{Label: "Address", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-profile-5", "tc-sheet", 1),
+	overlay("danger", w.Sheet{Icon: "plus", Tone: w.SheetIconDanger, Title: "New calendar", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("baikal")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("The server would not make it. Nothing was created, and the form is as you left it.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.Diag{Text: "[create] MKCALENDAR /dav.php/calendars/m.yenuchenko/poezdki/ → 403 <D:error><D:need-privileges/></D:error> no DAV:bind on the calendar home-set"},
+		w.SheetNote{Text: "This account may sign in and read, but not create. Either the user has no such right on the server, or the account was connected with a password issued read-only. Neither is something Carrel can fix from here — but it can say which of the two it is."}}, Foot: []w.SheetFootPart{w.Button{Label: "Back to the form", Kind: w.ButtonPrimary}, w.Button{Label: "Try again"}}}, "s-profile-6", "tc-sheet", 1),
+	overlay("danger", w.Sheet{Icon: "trash", Tone: w.SheetIconDanger, Title: "Delete on the server", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud · Дни рождения")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("The calendar and all "), w.Strong("51"), w.Text(" events in it are deleted on "), w.Mono{Text: "cloud.example.org"}, w.Text(". Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.SheetBlock{Title: w.Rubric{Text: "What is pointing at it now"}, Items: []w.SheetLine{{Name: "1 published link", Note: w.Dim{Parts: []w.Inline{w.Text("— answers “not found” from that moment")}}}, {Name: "Backup job «Личное на домашний диск»", Note: w.Dim{Parts: []w.Inline{w.Text("— copies this collection; it will run one short and say so")}}}, {Name: "3 devices through davloom", Note: w.Dim{Parts: []w.Inline{w.Text("— it disappears for them at the next sync")}}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the records back into a "), w.Strong("new"), w.Text(" collection — not into this one, and not to this address.")}, Space: w.MsgFlush},
+		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
+		w.Field{Label: "Type the name to confirm", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-profile-9", "tc-sheet", 1),
 	overlay("plain", w.Sheet{Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Your Carrel password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks credentials everywhere for five minutes: passwords, device profiles, anything else handed out.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Show", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc", Place: w.Pushed}}, Width: w.SheetWidth400}, "s-plan-3", "tc-sheet", 1),
@@ -422,6 +445,50 @@ var _ = add(
 		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Label: "From", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "To", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Field{Label: "Link lives for", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, "s-publish-2", "tc-sheet", 1),
+	overlay("close", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.Field{Label: "To", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+		w.Field{Label: "Subject", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+		w.Area{Text: "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.", Variant: w.AreaBodySm, Focus: true, Label: "Text"},
+		w.Sec{Items: []w.SecPart{
+			w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Push{Items: []w.PushPart{w.Text("Attach")}}}, Variant: w.RubricItemLine},
+			w.SecFiles{Items: []w.SecFile{{Icon: "con", Name: "Пётр Смирнов · подрядчик", Size: w.Mono{Text: ".vcf · 3 KB"}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "cal", Name: "Встреча на объекте · 18 August 10:00", Size: w.Mono{Text: ".ics · 2 KB"}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "doc", Name: "смета-подрядчик.pdf", Size: w.Mono{Text: "4.2 MB"}, Tag: w.Tag{Label: "as a link", On: true}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}, {Icon: "file", Name: "Договор подряда · 9 файлов", Size: w.Mono{Text: "folder"}, Tag: w.Tag{Label: "as a link", On: true}, Remove: w.Button{Icon: "close", Small: true, Title: "More"}}}},
+			w.Msg{Parts: []w.MsgPart{w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Both links live 30 days and can be revoked in "), w.Strong("Published links"), w.Text(" — including for the people in this letter.")}, Tone: w.MsgAccent, Space: w.MsgFlushTop11}}, Flush: true}}, Foot: []w.SheetFootPart{w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary}, w.Button{Label: "Preview"}, w.Dim{Parts: []w.Inline{w.Text("Signed Михаил Енученко · replies go to mix@example.org")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth680}, "s-mail-1", "tc-sheet", 1),
+	overlay("close", w.Sheet{Icon: "mail", Title: "Send this link", Head: []w.SheetHeadPart{w.SheetSubject{Mark: w.Mark{Colour: "#4A6B52"}, Text: "Личный · 10–31 August"}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.Field{Label: "To", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+		w.Field{Label: "A line from you", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+		w.SheetFrom{Label: "Sent as", Lines: [][]w.Inline{[]w.Inline{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>"}}, []w.Inline{w.Text("Replies go to "), w.Mono{Text: "mix@example.org"}, w.Text(" · "), w.Span{Face: w.FaceAccent, Text: "change in Account"}}}},
+		w.Sec{Items: []w.SecPart{
+			w.Rubric{Text: "The letter carries"},
+			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("The link and your line — nothing of the calendar itself")}, []w.SecItemPart{w.Text("Revoking the link closes it for this recipient too")}, []w.SecItemPart{w.Text("It expires on 9 September, as the link does")}}, Gap: 5, Muted: true}}, Flush: true}}, Foot: []w.SheetFootPart{w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary}, w.Button{Label: "Copy link instead"}, w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}}}, Width: w.SheetWidthFull}, "s-mail-4", "tc-sheet", 1),
+	overlay("pick", w.Sheet{Icon: "note", Title: "Attach a note", Head: []w.SheetHeadPart{w.Filter{Query: w.Query{Value: "подряд", Label: "подряд"}, Quiet: true, Variant: w.FilterT12W200, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.SheetPick{Rail: []w.SheetPickRail{w.RailSec{Items: []w.RailSecPart{
+			w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined notebook", Meta: "86", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+			w.Rubric{Text: "nextcloud"},
+			w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "61"},
+			w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Рабочее", Meta: "25"}}}}, List: []w.SheetPickList{w.ListGroup{Title: w.Rubric{Text: "Найдено"}, Count: &w.Num{Value: 3}}, w.List{Rows: []w.ListRow{
+			w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Встреча с подрядчиком, итоги", Date: w.Mono{Text: "18 Aug"}, Where: "nextcloud · Рабочее", On: true},
+			w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Подрядчики: кого смотрели", Date: w.Mono{Text: "02 Aug"}, Where: "nextcloud · Рабочее"},
+			w.BriefRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: "Ремонт: что осталось", Date: w.Mono{Text: "27 Jul"}, Where: "nextcloud · Записи"}}}}},
+		w.Sec{Items: []w.SecPart{
+			w.Field{Label: "Send it as", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}}, Flush: true, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary}, w.Dim{Parts: []w.Inline{w.Text("1 note · .md · 4 KB · goes as a file")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}}}, Width: w.SheetWidthFull}, "s-mail-5", "tc-sheet", 1),
+	overlay("pick", w.Sheet{Icon: "cal", Title: "Attach a calendar", Head: []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}}, Body: []w.SheetPart{
+		w.SheetPick{Rail: []w.SheetPickRail{w.Tree{Rows: []w.TreeRow{
+			{Icon: "server", Label: "nextcloud"},
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22},
+			{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22},
+			{Icon: "server", Label: "radicale · vps"},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22}}, On: 2, Variant: w.TreePadded}}, List: []w.SheetPickList{w.Form{}}, Short: true}}, Flush: true, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary}, w.Dim{Parts: []w.Inline{w.Text("Calendar «Личный» · 10 August 2026 – 31 August 2026 · .ics · 5 KB · goes as a file")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}}}, Width: w.SheetWidthFull}, "s-mail-10", "tc-sheet", 1),
+	overlay("pick", w.Sheet{Icon: "doc", Title: "Attach a file", Head: []w.SheetHeadPart{w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}}, Current: "Подряд"}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.SheetPick{Rail: []w.SheetPickRail{w.Tree{Rows: []w.TreeRow{
+			{Icon: "server", Label: "sftpgo · vps"},
+			{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36},
+			{Icon: "file", Label: "Подряд", Indent: w.TreeLevel44},
+			{Icon: "file", Label: "Личное", Indent: w.TreeLevel36}}, On: 4, Variant: w.TreePadded}}, List: []w.SheetPickList{w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.Col90}, {Label: "Changed", Width: w.Col110, Rank: w.Rank3}, {Width: w.ColType, Rank: w.Rank4}}, Rows: []w.TableRow{
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "over 2 MB · as a link", On: true}}}}, State: w.RowOn},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "договор-подряда.pdf"}}}, {Parts: []w.CellPart{w.Text("840 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "объект-фасад.jpg"}}}, {Parts: []w.CellPart{w.Text("1.6 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}}}}}, Short: true},
+		w.Msg{Parts: []w.MsgPart{w.Text("This file is over the limit for an attachment, so the letter will carry a secret link to it instead. The link is listed in "), w.Strong("Published links"), w.Text(", works for 30 days, and revoking it there closes it for whoever got the letter.")}, Tone: w.MsgAccent, Space: w.MsgSheet}}, Flush: true, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary}, w.Dim{Parts: []w.Inline{w.Text("смета-подрядчик.pdf · 4.2 MB · goes as a link")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}}}, Width: w.SheetWidthFull}, "s-mail-6", "tc-sheet", 1),
 	overlay("close", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Button{Label: "Apply", Small: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.RailSec{Items: []w.RailSecPart{
 			w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined notebook", Meta: "86", Current: true}}},
@@ -432,11 +499,29 @@ var _ = add(
 			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true}}}}}, "m-phone-9", "tc-sheet", 1),
 
 	// tc-scrim
-	overlay("pad", w.Scrim{Content: w.Sheet{Title: "Sheet"}, Pad: w.ScrimPad26}, "s-contacts-2", "tc-scrim", 1),
+	overlay("pad", w.Scrim{Content: w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Rubric{Text: "Write into"},
+		w.Tree{Rows: []w.TreeRow{
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Shared", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 2},
+		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy here"), w.Text(".")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}, "s-contacts-2", "tc-scrim", 1),
 	overlay("plain", w.Scrim{Content: w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}}, Foot: []w.SheetFootPart{w.Button{Label: "Save note", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Ctrl+Enter"}, w.Button{Label: "Open the card", Icon: "expand"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}}, "s-notes-5", "tc-scrim", 1),
+	overlay("pad", w.Scrim{Content: w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, Pad: w.ScrimPad38}, "s-io-1", "tc-scrim", 1),
 
 	// tc-overlay
+	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
+		{Icon: "con", Label: "Contacts", Href: "#"},
+		{Icon: "cal", Label: "Calendar", Href: "#"},
+		{Icon: "task", Label: "Tasks", Href: "#"},
+		{Icon: "note", Label: "Notes", Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—"}}}, w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New calendar"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
+		w.Empty{Parts: []w.EmptyPart{w.Text("Connect an account to see calendars, address books and notebooks.")}}}}, Height: w.ShellHeight340}, Scrim: w.Scrim{Content: w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write. Connect an account that has a journal, or create a notebook after connecting — the note is not kept in this window.")}, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}}}, "s-notes-6", "tc-overlay", 1),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
@@ -467,7 +552,26 @@ var _ = add(
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
-		w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"}}}}, Main: w.Main{}, Height: w.ShellHeight560}, Scrim: w.Scrim{Content: w.Sheet{Title: "Sheet"}, Pad: w.ScrimPad26}}, "s-contacts-2", "tc-overlay", 1),
+		w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"}}}}, Main: w.Main{Items: []w.MainPart{
+		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 312 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "up"}, w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}},
+		w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Value: "Filter the loaded cards", Label: "Filter the loaded cards"}, Waiting: true}, w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}}, More: &w.Button{Icon: "dots", Title: "More"}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Mono{Text: "312"}}, Secondary: true}},
+		w.ListGroup{Title: w.Rubric{Text: "А"}, Count: &w.Num{Value: 3}},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Strong: true, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", On: true},
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Артём Белов")}, TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор", Source: "radicale · vps · Команда"},
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АС"}, Title: []w.Inline{w.Text("Алексей Смирнов")}, Subtitle: "+7 916 200-71-15", Detail: "—", Caption: "—", Source: "nextcloud · Контакты"}}},
+		w.ListGroup{Title: w.Rubric{Text: "В"}, Count: &w.Num{Value: 2}},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "ВГ"}, Title: []w.Inline{w.Text("Виктор Гончаров")}, Subtitle: "—", Detail: "v.goncharov@example.org", Caption: "Городская библиотека №4", Source: "nextcloud · Контакты"},
+			w.FaceRow{Mark: w.Mark{Colour: "#A05A2C"}, Avatar: w.Avatar{Initials: "ВЛ"}, Title: []w.Inline{w.Text("Вера Лебедева")}, Subtitle: "+7 905 331-09-42", Detail: "vera@example.net", Caption: "—", Source: "nextcloud · Архив"}}},
+		w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty}}}, Height: w.ShellHeight560}, Scrim: w.Scrim{Content: w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Rubric{Text: "Write into"},
+		w.Tree{Rows: []w.TreeRow{
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty}},
+			{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Shared", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 2},
+		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy here"), w.Text(".")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}}, "s-contacts-2", "tc-overlay", 1),
 	overlay("top", w.Overlay{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
@@ -498,7 +602,13 @@ var _ = add(
 			{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
 			{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
 			{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
-			{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 2}}}, w.RailFoot{Items: []w.RailFootPart{w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}, w.RailStatus{Text: "Backups are running", Detail: w.Dim{Parts: []w.Inline{w.Text("Last backup "), w.Mono{Text: "2026-08-16 03:10"}, w.Text("· ")}, Size: w.Dim11}}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{}, Height: w.ShellHeight280}, Scrim: w.Scrim{Content: w.Sheet{Icon: "shield", Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+			{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 2}}}, w.RailFoot{Items: []w.RailFootPart{w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}, w.RailStatus{Text: "Backups are running", Detail: w.Dim{Parts: []w.Inline{w.Text("Last backup "), w.Mono{Text: "2026-08-16 03:10"}, w.Text("· ")}, Size: w.Dim11}}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
+		w.Head{Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}}, Pad: w.HeadPadBottom8},
+		w.Pad{Items: []w.PadPart{w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "nextcloud"},
+			w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}}}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "sftpgo · vps"},
+			w.Mono{Text: "https://files.example.org/dav/ · mix · last answer 5 min ago", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}}}}}}}, Height: w.ShellHeight280}, Scrim: w.Scrim{Content: w.Sheet{Icon: "shield", Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Your Carrel password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks credentials everywhere for five minutes: passwords, device profiles, key escrow — anything handed out or handed over.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Show", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth400}, Pad: w.ScrimPad26}}, "s-profile-3", "tc-overlay", 1),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
@@ -524,9 +634,79 @@ var _ = add(
 
 	// tc-dialog
 	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Head{Title: &w.HeadTitle{Text: "Merge on the server"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Артём Белов · 2 records")}}}},
+		w.Msg{Parts: []w.MsgPart{w.Strong("One record is rewritten and 1 other deleted."), w.Text(" The kept record is rewritten with the values you chose, and only once the server has kept it are the others deleted. This cannot be undone from here.")}, Space: w.MsgFlushSides},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Kept and rewritten"},
+			w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}}}, Variant: w.CardApart},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Deleted afterwards"},
+			w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Команда")}}}}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "The kept record gains"},
+			w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from radicale · vps · Команда)"}}}},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Write the merge and delete the rest", Kind: w.ButtonDangerSolid}, w.Button{Label: "Cancel"}, w.Button{Label: "Keep Белов Артём instead", Place: w.Pushed}}}}}, "s-dup-2", "tc-dialog", 1),
+	overlay("wide", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 2},
+		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Разное (mix).vcf"}, w.Text(" · 84 KB · vCard 3.0")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 122 contacts", Kind: w.ButtonPrimary}}}},
+		w.Form{},
+		w.Stats{Items: []w.Stat{w.Stat{Value: "122", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}, w.Stat{Value: "5", Label: "UID collisions"}}},
+		w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("New UID will be assigned")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no FN)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("vCard 2.1 quoted-printable: cannot decode line 12")}, Tone: w.CellDanger}}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Import always creates. A UID that already exists gets a new one and is listed in the report.")}}}, Variant: w.DialogWide}, "s-io-5", "tc-dialog", 1),
+	overlay("page", w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGap8},
+		w.Prose{Parts: []w.Inline{w.Text("Account "), w.Strong("mix"), w.Text(" has a confirmed email. A silent password reset does not exist: a new password would be a new key, and everything stored under the old one would be lost anyway.")}, Variant: w.ProseMuted},
+		w.Form{},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Back to sign in"}}}}, Variant: w.DialogPage520}, "s-auth-6", "tc-dialog", 1),
+	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 3},
+		w.Head{Title: &w.HeadTitle{Text: "Import report"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Created"},
+			w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "UID collisions", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTightPlain}}},
+			w.Diag{Text: "1a77-40de-bb02 → 9c02-4411-7ee1 33b0-9ffa-1120 → 55da-8e10-02cc"}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTightPlain}}},
+			w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}}},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Back to list", Kind: w.ButtonPrimary}}}}, Variant: w.Dialog520}, "s-io-9", "tc-dialog", 1),
+	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
+		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}},
+		w.Form{},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "From a file"},
+			w.Field{Label: "vCard file", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+			w.CardHint{Parts: []w.CardTextPart{w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed.")}}}, Variant: w.Dialog560}, "s-io-3", "tc-dialog", 1),
+	overlay("narrow", w.Dialog{Items: []w.DialogPart{
+		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
+		w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},
+		w.Prose{Parts: []w.Inline{w.Text("The letter went to "), w.Mono{Text: "v@example.org"}, w.Text(". The account cannot be used until you open the link in it. Sending again with the same login and address, while the account is unconfirmed, simply replaces the letter and the password.")}, Variant: w.ProseMuted},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Back to sign in"}}}}, Variant: w.DialogNarrow}, "s-auth-3", "tc-dialog", 1),
+	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Head{Title: &w.HeadTitle{Text: "Conflict"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Another client changed this contact while you were editing it. Nothing has been overwritten.")}}}},
+		w.DiffAgree{Property: w.Mono{Text: "FN"}, Text: "agrees — kept as it is."},
+		w.Diff{Items: []w.DiffItem{
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Write this combination", Kind: w.ButtonPrimary}, w.Button{Label: "Use only my edit"}, w.Button{Label: "Use only the server version"}, w.Button{Label: "Cancel"}}}}}, "s-conflict-1", "tc-dialog", 1),
+	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Head{Title: &w.HeadTitle{Text: "Connect account"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}}},
 		w.Form{},
 		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Connect", Kind: w.ButtonPrimary}, w.Button{Label: "Test only"}, w.Button{Label: "Cancel"}}}}, Variant: w.Dialog540}, "s-profile-2", "tc-dialog", 1),
+	overlay("page", w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGap4},
+		w.DialogSub{Parts: []w.Inline{w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12},
+		w.Form{},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Create account", Kind: w.ButtonPrimary}, w.Button{Label: "Already have an account? Sign in"}}}}, Variant: w.DialogPage440}, "s-auth-2", "tc-dialog", 1),
 	overlay("canvas", w.Dialog{Items: []w.DialogPart{
 		w.Lede{Text: "Центрированное полотно для форм, мастеров и диалогов выбора."}}, Variant: w.DialogCanvas420}, "components-31", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
@@ -537,6 +717,24 @@ var _ = add(
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
 		w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place.", Centered: true},
 		w.AuthStack{Items: []w.AuthStackPart{w.Form{}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []string{"Create an account", "Forgotten your password?"}}}, Variant: w.DialogNarrow}, "s-auth-1", "tc-dialog", 1),
+	overlay("page", w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGap8},
+		w.Prose{Parts: []w.Inline{w.Text("Enter the login or the confirmed email of the account. There is no way to set a new password and keep the data stored here: the encryption key is derived from the password, and the server never has that key.")}, Variant: w.ProseMutedClose},
+		w.Form{},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Continue", Kind: w.ButtonPrimary}, w.Button{Label: "Back to sign in"}}}}, Variant: w.DialogPage440}, "s-auth-5", "tc-dialog", 1),
+	overlay("page", w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGap4},
+		w.DialogSub{Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12},
+		w.Form{},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Set the password and sign in", Kind: w.ButtonPrimary}}}}, Variant: w.DialogPage440}, "s-auth-11", "tc-dialog", 1),
+	overlay("narrow", w.Dialog{Items: []w.DialogPart{
+		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, Wide: true},
+		w.DialogTitle{Text: "Carrel"},
+		w.DialogSub{Parts: []w.Inline{w.Mono{Text: "0.0.1 · 786949a"}}},
+		w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place."},
+		w.Prose{Parts: []w.Inline{w.Text("AGPL-3.0-or-later: if you run a modified version for others, you must make the source available to them.")}, Variant: w.ProseMuted},
+		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Source code", Small: true}, w.Button{Label: "Third-party licences", Small: true}, w.Button{Title: "More", Place: w.Pushed}}}}, Variant: w.DialogNarrow}, "rest-3", "tc-dialog", 1),
 
 	// tc-auth
 	overlay("plain", w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
@@ -550,8 +748,5 @@ func init() {
 	Parts = append(Parts, w.MenuItem{}, w.MenuSep{}, w.MenuHeading{}, w.MenuField{}, w.MenuColumn{}, w.MenuFoot{}, w.TopDrop{},
 		w.SheetSubject{}, w.SheetFields{}, w.SheetKey{}, w.SheetKeys{}, w.SheetHint{}, w.SheetNote{}, w.SheetLine{}, w.SheetBlock{},
 		w.SheetChecks{}, w.SheetFrom{}, w.SheetPick{}, w.DialogTitle{}, w.DialogSub{}, w.DialogLogo{}, w.Tagline{}, w.AuthStack{},
-		w.Lede{}, w.PhotoCrop{}, w.OverlayBody{})
+		w.Lede{}, w.PhotoCrop{}, w.OverlayBody{}, w.DiffAgree{})
 }
-
-var _ = wait("children from later families (messages, cards, tables, prose, steps, diagnostics, states)",
-	ref("s-contacts-2", "tc-sheet", 1), ref("s-notes-6", "tc-sheet", 1), ref("account-2", "tc-sheet", 1), ref("s-profile-6", "tc-sheet", 1), ref("s-profile-9", "tc-sheet", 1), ref("s-mail-1", "tc-sheet", 1), ref("s-mail-4", "tc-sheet", 1), ref("s-mail-5", "tc-sheet", 1), ref("s-mail-10", "tc-sheet", 1), ref("s-mail-6", "tc-sheet", 1), ref("s-io-1", "tc-scrim", 1), ref("s-notes-6", "tc-overlay", 1), ref("s-dup-2", "tc-dialog", 1), ref("s-io-5", "tc-dialog", 1), ref("s-auth-6", "tc-dialog", 1), ref("s-io-9", "tc-dialog", 1), ref("s-io-3", "tc-dialog", 1), ref("s-auth-3", "tc-dialog", 1), ref("s-conflict-1", "tc-dialog", 1), ref("s-auth-2", "tc-dialog", 1), ref("s-auth-5", "tc-dialog", 1), ref("s-auth-11", "tc-dialog", 1), ref("rest-3", "tc-dialog", 1))

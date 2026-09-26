@@ -1,0 +1,100 @@
+package widget
+
+import "strings"
+
+// DocRef is a record a document points at: the source's mark, the name (a
+// link when it opens elsewhere) and what it is.
+type DocRef struct {
+	Mark *Mark
+	Name string
+	Href string // a link to the record
+	What Dim
+}
+
+// DocmetaPart is what a section of the side column holds under its rubric.
+type DocmetaPart interface {
+	part
+	docmetaPart()
+}
+
+func (Line) docmetaPart()      {}
+func (DocRefs) docmetaPart()   {}
+func (DocAttach) docmetaPart() {}
+func (Diag) docmetaPart()      {}
+
+// DocRefs is a column of records a document points at.
+type DocRefs struct {
+	Items []DocRef
+}
+
+func (r DocRefs) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-stack tc-stack--gap-5 tc-line__text">`)
+	for _, it := range r.Items {
+		s.WriteString(`<span class="tc-stack__item">`)
+		if it.Mark != nil {
+			s.WriteString(it.Mark.html(nil) + " ")
+		}
+		if it.Href != "" {
+			s.WriteString(Link{Text: it.Name, Href: it.Href}.html(nil))
+		} else {
+			s.WriteString(`<span class="tc-dim--accent">` + esc(it.Name) + `</span>`)
+		}
+		s.WriteString(" " + it.What.html(nil) + `</span>`)
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocAttach is an attachment line in the side column: the name, the size,
+// where it lives.
+type DocAttach struct {
+	Name  string
+	Size  Dim
+	Where Badge
+}
+
+func (a DocAttach) html(mix) string {
+	return `<div class="tc-line__text">` + esc(a.Name) + ` ` + a.Size.html(nil) + ` ` + a.Where.html(nil) + `</div>`
+}
+
+// DocmetaSec is a section of a document's side column.
+type DocmetaSec struct {
+	Title Rubric
+	Items []DocmetaPart
+}
+
+// Docmeta — tc-docmeta
+//
+// Роль. Колонка сведений документа: теги, связанное, вложения, копии в других блокнотах, источник, удаление.
+// Вход. Docmeta{Sections, Danger}.
+// Состояния. read.
+// Инварианты. Каждая секция — рубрика и то, что под ней; удаление — последним; колонка печатает фрагмент своего кадра.
+// Поведение. нет: поведение у ссылок и кнопок.
+// Эталон. кадр `s-notes-2`, фрагмент `.tc-docmeta`.
+// Содержимое. Секции: теги, связанные записи, вложения, копии, источник; опасная зона.
+// Чего нет. Полей правки: правят в документе.
+type Docmeta struct {
+	Sections []DocmetaSec
+	Danger   *Danger
+}
+
+// Render prints the column.
+func (d Docmeta) Render() string { return d.html(nil) }
+
+func (d Docmeta) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<div` + class(m, "tc-docmeta") + `>`)
+	for _, sec := range d.Sections {
+		s.WriteString(`<div class="tc-docmeta__sec">` + sec.Title.html(nil))
+		for _, it := range sec.Items {
+			s.WriteString(it.html(nil))
+		}
+		s.WriteString(`</div>`)
+	}
+	if d.Danger != nil {
+		s.WriteString(d.Danger.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
