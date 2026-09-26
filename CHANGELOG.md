@@ -68,6 +68,9 @@ do, not what the authors did.
   tasks, tags, attachments and links, with Edit, the note page and «⋯» under
   the title. Editing is on the note page («Заметка · правка»); section 7.4
   now names the one real difference, neighbours in the note page's rail.
+- Focus has its own icon, `i-focus` (viewfinder corners). The outward
+  arrows, `i-expand`, mean one thing across the mockup: open larger — the
+  note page from the panel, the card from a «New …» sheet.
 
 - The owner looked through the 69 frames the one-off fold moved and accepted
   them; the screenshot base (`docs/visual/allowed-diffs.md`) moved to

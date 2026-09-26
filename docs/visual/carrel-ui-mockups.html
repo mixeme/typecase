@@ -1620,7 +1620,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   <symbol id="i-move" viewBox="0 0 24 24"><path d="M4 12h13"/><path d="M13 7l5 5-5 5"/></symbol>
   <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></symbol>
   <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M15 5v14"/></symbol>
-  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M10 4H4v6M14 20h6v-6"/><path d="M4 4l6 6M20 20l-6-6"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M10 4H4v6M14 20h6v-6"/><path d="M4 4l6 6M20 20l-6-6"/></symbol><symbol id="i-focus" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-quill" viewBox="0 0 24 24"><path d="M5 19l7-7"/><path d="M11 12c5-1 8-4 9-9-5 1-8 4-9 9z"/><path d="M9 15l6-3"/></symbol>
 </defs></svg>
@@ -4693,7 +4693,7 @@ Read  2 min ago</div>
             <span class="is-2nd">Draft in this window · <span class="tc-mono">11:42</span></span>
             <kbd class="tc-kbd is-2nd">Ctrl+S</kbd>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Full width</button><button class="tc-seg__opt" type="button">Reading width</button></span>
-            <button class="tc-btn" title="Focus" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg><span class="tc-btn__label">Focus</span></button>
+            <button class="tc-btn" title="Focus" type="button"><svg viewBox="0 0 24 24"><use href="#i-focus"/></svg><span class="tc-btn__label">Focus</span></button>
           </span>
         </div>
         <div class="tc-doc__layout">
@@ -4750,7 +4750,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом.</figcaption>
+<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом. <b>У Focus свой значок — рамка видоискателя.</b> Стрелки наружу во всём макете значат одно: «открыть крупнее» — страницу заметки из панели, карточку из листа «New …»; одним значком для двух действий было бы не понять, что откроется.</figcaption>
 </figure>
 
 <figure>
@@ -4785,7 +4785,7 @@ Read  2 min ago</div>
             <span class="is-2nd">Draft in this window · <span class="tc-mono">11:42</span></span>
             <kbd class="tc-kbd is-2nd">Ctrl+S</kbd>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Full width</button><button class="tc-seg__opt" type="button">Reading width</button></span>
-            <button class="tc-btn tc-btn--on-card" title="Focus" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg><span class="tc-btn__label">Focus</span></button>
+            <button class="tc-btn tc-btn--on-card" title="Focus" type="button"><svg viewBox="0 0 24 24"><use href="#i-focus"/></svg><span class="tc-btn__label">Focus</span></button>
           </span>
         </div>
         <div class="tc-doc__layout is-focus">
