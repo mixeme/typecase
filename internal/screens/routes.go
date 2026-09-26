@@ -2,7 +2,12 @@
 // (docs/visual/carrel-ui-mockups.html) built from widgets, top to bottom, with
 // the frame's data and nothing else. A route is /f/<data-frame>; which frames
 // are routes is decision Р-16 of plan 3 (docs/plan/3-screens-and-checks.md).
+//
+// The screens are generated from the mockup by cmd/frame2go; edit the
+// mockup or the generator, not them. TestGenerated wants them current.
 package screens
+
+//go:generate go run ../../cmd/frame2go -root ../..
 
 import (
 	_ "embed"

@@ -211,6 +211,17 @@ L-5, L-6.1, L-7, L-10, L-11.1.
   notification of the system (`mk-toast`) is chrome like the window's title
   bar, and a route frame's plain `tc-root` is the page's block.
 
+- **A screen starts from its frame: `cmd/frame2go`.** `go run
+  ./cmd/frame2go <data-frame>` prints a frame of the mockup as a screen
+  function — the widgets and the frame's data, top to bottom, each variant
+  read from the widgets' own `class()` tables — that already passes the
+  static comparison; the author then replaces the frame's data with the
+  application's. Without arguments it writes `internal/screens` (`go
+  generate ./internal/screens`), and `TestGenerated` wants the demo screens
+  to be its output as is. It replaces the Python scripts of
+  `tools/framegen`, which are gone. How to build a screen:
+  [docs/guide/screen.md](docs/guide/screen.md).
+
 ### Mockup
 
 - Breakages on the narrow steps that the ladder comparison found, fixed:

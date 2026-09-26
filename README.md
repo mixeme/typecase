@@ -33,6 +33,15 @@ built from widgets with the frame's data; `go test ./internal/screens` holds
 each one to its frame. Frames that no widget builds yet are listed in
 [docs/visual/gaps.md](docs/visual/gaps.md).
 
+The screens are generated from the mockup (`go generate ./internal/screens`).
+To start a screen of your own from a frame:
+
+```bash
+go run ./cmd/frame2go s-find-2   # prints the frame as a screen function
+```
+
+How to build a screen — [docs/guide/screen.md](docs/guide/screen.md).
+
 ## Specification
 
 See [docs/spec/typecase.md](docs/spec/typecase.md).
