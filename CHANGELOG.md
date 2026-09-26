@@ -6,6 +6,21 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Breaking — 0.7.0: the library prints the mockup
+
+The widget API is replaced, not extended. Each widget prints the fragment of
+its mockup frame — the same tags, classes and text — and the library's CSS is
+the mockup's `<style data-tc>` block cut out verbatim into `css/typecase.css`.
+What a container accepts is derived from the mockup's frames and fixed by Go
+types: a nesting the mockup does not draw does not compile. The `layout`
+package, the `[]Node` "any widget" slots and the screen-side fallback
+(`Cols`) are gone. Before 1.0 a breaking change comes in a minor release
+without a deprecation period; there are no aliases or transition layers, and
+this entry says what changed rather than how to migrate. The spec
+(`docs/spec/typecase.md`) states the model: L-1, L-2.2, L-3.1, L-3.2 (the
+eighth item is now «Эталон», the frame and fragment a widget prints), L-3.6,
+L-5, L-6.1, L-7, L-10, L-11.1.
+
 ### Mockup
 
 - Mailbox candidate (`carrel-mailbox-mockups.html`): each mailbox has its own
