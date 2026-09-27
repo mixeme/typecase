@@ -880,6 +880,366 @@ func Contacts6() Screen {
 	}
 }
 
+// Contacts15 is frame «Контакт · адрес заменён — переписать участников?» (s-contacts-15).
+func Contacts15() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+						},
+						On: 1,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked:  w.TickedPart,
+								Kind:    w.TickRowAll,
+								Mark:    w.Mark{Kind: w.MarkMulti},
+								Label:   "Combined address book",
+								Meta:    "312",
+								Current: true,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 312 cards")}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Import", Icon: "up"},
+									w.Button{Label: "Export", Icon: "down"},
+									w.Button{Label: "Print", Icon: "print"},
+								},
+							},
+						},
+						w.Bar{
+							Items: []w.BarPart{
+								w.Filter{
+									Query:   w.Query{Value: "Filter the loaded cards", Label: "Filter the loaded cards"},
+									Waiting: true,
+									Variant: w.FilterH26W220,
+								},
+								w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+								w.Button{Label: "Columns", Icon: "cols"},
+							},
+							More: &w.Button{Icon: "dots", Title: "More"},
+							Right: &w.BarRight{
+								Items:     []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Mono{Text: "312"}},
+								Secondary: true,
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Strong:   true,
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@slovo.example",
+									Caption:  "Издательство «Слово»",
+									Source:   "nextcloud · Контакты",
+									On:       true,
+								},
+								w.FaceRow{
+									Mark:       w.Mark{Colour: "#6B4E7A"},
+									Avatar:     w.Avatar{Photo: true},
+									Title:      []w.Inline{w.Text("Артём Белов ")},
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Subtitle:   "+7 903 118-22-04",
+									Detail:     "a.belov@example.org",
+									Caption:    "Тензор",
+									Source:     "radicale · vps · Команда",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АС"},
+									Title:    []w.Inline{w.Text("Алексей Смирнов")},
+									Subtitle: "+7 916 200-71-15",
+									Detail:   "—",
+									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВГ"},
+									Title:    []w.Inline{w.Text("Виктор Гончаров")},
+									Subtitle: "—",
+									Detail:   "v.goncharov@example.org",
+									Caption:  "Городская библиотека №4",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#A05A2C"},
+									Avatar:   w.Avatar{Initials: "ВЛ"},
+									Title:    []w.Inline{w.Text("Вера Лебедева")},
+									Subtitle: "+7 905 331-09-42",
+									Detail:   "vera@example.net",
+									Caption:  "—",
+									Source:   "nextcloud · Архив",
+								},
+							},
+						},
+						w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Icon:  "refresh",
+					Title: "Rewrite the address in her records?",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Анна Ковалёва · saved")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.SheetBlock{
+							Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "a.kovaleva@example.org → a.kovaleva@slovo.example",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; she drops out of their timeline")}},
+								},
+							},
+						},
+						w.SheetBlock{
+							Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "9 records on servers that schedule",
+									Note: w.Dim{
+										Parts: []w.Inline{
+											w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees"),
+										},
+									},
+								},
+								{
+									Name: "2 records on baikal",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— the server did not say whether it schedules")}},
+								},
+								{
+									Name: "3 meetings organised by others",
+									Note: w.Dim{
+										Parts: []w.Inline{w.Text("— the organiser’s server may refuse the change, and its next update may undo it")},
+									},
+								},
+								{
+									Name: "Past meetings",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if she had been invited at it")}},
+								},
+							},
+						},
+						w.SheetBlock{
+							Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "2 records in Shared",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}},
+								},
+							},
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+							Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}},
+						},
+					},
+					Width: w.SheetWidth520,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Contacts16 is frame «Контакт · участники переписаны» (s-contacts-16).
+func Contacts16() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+					},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Photo: &w.HeadPhoto{},
+						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
+								w.Button{Label: "Send", Icon: "mail"},
+								w.Button{Label: "Print", Icon: "print"},
+								w.Button{Icon: "dots", Title: "More"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Rewritten in 11 of 12 records."),
+							w.Text(" «Планёрка редакции» was refused: its organiser’s server does not take changes to attendees. 2 records in Shared are read-only and keep the old address."),
+						},
+						Tone: w.MsgAlert,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@slovo.example")}},
+							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+							{
+								Term:  "Birthday",
+								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
+								Face:  w.ValueMono,
+							},
+							{
+								Term:  "Categories",
+								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
+							},
+							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 3", Small: true}}},
+							w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{
+								Text:  "The same person in other books",
+								Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}},
+							},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "baikal · Общий", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}},
+									},
+								},
+								Gap: 5,
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "11", Variant: w.MonoTight}}},
+							w.List{
+								Rows: []w.ListRow{
+									w.LinkedRow{
+										Mark:   w.Mark{Colour: "#4A6B52"},
+										Icon:   "cal",
+										Title:  "Синк-ап по релизу",
+										Detail: "10 Aug · участник · приняла",
+									},
+									w.LinkedRow{
+										Mark:   w.Mark{Colour: "#4A6B52"},
+										Icon:   "note",
+										Title:  "Заметка со встречи 10.08",
+										Detail: "10 Aug · упомянута в тексте",
+									},
+									w.LinkedRow{
+										Mark:   w.Mark{Colour: "#3F6E8C"},
+										Icon:   "task",
+										Title:  "Отправить макет Ковалёвой",
+										Detail: "08 Aug · упомянута в названии",
+									},
+								},
+							},
+							w.SecActs{Items: []w.Button{w.Button{Label: "Open the timeline", Icon: "all"}}},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Source"},
+							w.Diag{Text: "Path  /dav.php/addressbooks/mix/contacts/2b7e.vcf\nRead  2 min ago · not changed on server"},
+						},
+					},
+					w.Danger{
+						Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid},
+						Note:   "Удаление уходит на сервер сразу и отменить его нечем.",
+					},
+				},
+			},
+		},
+	}
+}
+
 // Contacts7 is frame «Человек · хронология» (s-contacts-7).
 func Contacts7() Screen {
 	return w.Shell{
@@ -920,7 +1280,9 @@ func Contacts7() Screen {
 						},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "9"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "7"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
 						w.TickRow{
 							Mark:      w.Mark{Colour: "#9A9280"},
 							Label:     "Общий",
@@ -928,6 +1290,15 @@ func Contacts7() Screen {
 							MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
 							Error:     true,
 							Trail:     w.Button{Label: "Retry", Small: true},
+						},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "ro"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Расписание лиги",
+							Meta:   "ro",
+							Hidden: true,
 						},
 					},
 				},
@@ -980,9 +1351,9 @@ func Contacts7() Screen {
 						Variant: w.BarWide,
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 80},
+						Meter: w.Meter{Percent: 83},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 4 of 5 calendars · matched by "),
+							w.Text("Polled 5 of 6 calendars · matched by "),
 							w.Mono{Text: "a.kovaleva@example.org"},
 							w.Text(", "),
 							w.Mono{Text: "anna.kovaleva@slovo.example"},

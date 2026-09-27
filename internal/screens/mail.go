@@ -381,34 +381,38 @@ func Mail4() Screen {
 							Rows: []w.TableRow{
 								{
 									Cells: []w.TableCell{
-										{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный · 10–31 August"}}},
-										{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-09")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-09-09")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-15 08:41")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("12")}, Mono: true},
-										{
-											Parts: []w.CellPart{
-												w.Button{Label: "Copy", Small: true},
-												w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
-											},
-											Acts: true,
-										},
-									},
-								},
-								{
-									Cells: []w.TableCell{
 										{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
 										{Parts: []w.CellPart{w.Text("file")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-12")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-10")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("No expiry")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("never opened")}, Mono: true, Tone: w.CellDusty},
 										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
 										{
 											Parts: []w.CellPart{
 												w.Button{Label: "Copy", Small: true},
-												w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												w.Button{Label: "Send", Small: true, Secondary: true},
+												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 											},
+											More: &w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный · 10–31 August"}}},
+										{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-09")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-09-08")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-10 08:41")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("12")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Copy", Small: true},
+												w.Button{Label: "Send", Small: true, Secondary: true},
+												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+											},
+											More: &w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 											Acts: true,
 										},
 									},
@@ -456,7 +460,7 @@ func Mail4() Screen {
 									Items: [][]w.SecItemPart{
 										[]w.SecItemPart{w.Text("The link and your line — nothing of the calendar itself")},
 										[]w.SecItemPart{w.Text("Revoking the link closes it for this recipient too")},
-										[]w.SecItemPart{w.Text("It expires on 9 September, as the link does")},
+										[]w.SecItemPart{w.Text("It expires on 8 September, as the link does")},
 									},
 									Gap:   5,
 									Muted: true,

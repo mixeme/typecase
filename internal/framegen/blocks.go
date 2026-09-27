@@ -808,6 +808,7 @@ func (g *gen) table(e *El) string {
 		var cells []string
 		for _, td := range tr.Els() {
 			var f, parts []string
+			more := ""
 			for _, k := range td.Kids {
 				switch v := k.(type) {
 				case string:
@@ -815,7 +816,9 @@ func (g *gen) table(e *El) string {
 						parts = append(parts, t)
 					}
 				case *El:
-					if v.Has("tc-tickrow__tick") {
+					if v.Has("tc-acts__more") {
+						more = "More: &" + g.button(v)
+					} else if v.Has("tc-tickrow__tick") {
 						t := "w.TickedOn"
 						if v.Has("is-off") {
 							t = "w.TickedOff"
@@ -828,6 +831,9 @@ func (g *gen) table(e *El) string {
 			}
 			if len(parts) > 0 {
 				f = append([]string{"Parts: []w.CellPart{" + join(parts, ", ") + "}"}, f...)
+			}
+			if more != "" {
+				f = append(f, more)
 			}
 			if td.Has("tc-mono") {
 				f = append(f, "Mono: true")

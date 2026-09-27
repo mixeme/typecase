@@ -10,10 +10,11 @@ const (
 	InputDate
 	InputTime
 	InputSearch
+	InputPassword
 )
 
 func (k InputKind) attr() string {
-	return [...]string{"text", "date", "time", "search"}[k]
+	return [...]string{"text", "date", "time", "search", "password"}[k]
 }
 
 // InputVariant is the drawn size of a field where it is not its column's.
@@ -45,9 +46,9 @@ func (v InputVariant) class() string {
 
 // Input — tc-in
 //
-// Роль. Поле ввода одной строки: текст, дата, время, поиск.
-// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Variant, Place}.
-// Состояния. value | placeholder | mono | focus | error | variant.
+// Роль. Поле ввода одной строки: текст, дата, время, поиск, пароль.
+// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place}.
+// Состояния. value | placeholder | mono | focus | error | disabled | variant.
 // Инварианты. Плейсхолдер выглядит плейсхолдером всегда: is-ph ставит виджет, когда значения нет; род поля — перечисление; у поля есть доступное имя; поле печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется.
 // Эталон. кадр `components-10`, фрагмент `.tc-in`.
@@ -63,6 +64,7 @@ type Input struct {
 	Focus       bool // the drawn keyboard focus of the mockup's states
 	Error       bool
 	Numeric     bool // a phone keyboard shows digits
+	Disabled    bool // switched off by a choice next to it (a password the server does not ask)
 	Variant     InputVariant
 	Place       Place
 }
@@ -74,7 +76,7 @@ func (i Input) html(m mix) string {
 	return `<input` + class(m, "tc-in", is("mono", i.Mono), is("ph", i.Value == "" && i.Placeholder != ""),
 		is("focus", i.Focus), is("error", i.Error), i.Variant.class(), i.Place.class()) +
 		` type="` + i.Kind.attr() + `"` + attr("name", i.Name) + attr("value", i.Value) +
-		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + `>`
+		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + `>`
 }
 
 // PickVariant is the drawn size of a pick where it is not its column's.

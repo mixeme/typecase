@@ -229,7 +229,7 @@ func (g *gen) buttons(es []*El) string {
 	return join(out, ", ")
 }
 
-var inputKind = map[string]string{"date": "InputDate", "time": "InputTime", "search": "InputSearch"}
+var inputKind = map[string]string{"date": "InputDate", "time": "InputTime", "search": "InputSearch", "password": "InputPassword"}
 
 func (g *gen) input(x *El) string {
 	var f []string
@@ -252,6 +252,9 @@ func (g *gen) input(x *El) string {
 	}
 	if x.Attr("inputmode") == "numeric" {
 		f = append(f, "Numeric: true")
+	}
+	if x.HasAttr("disabled") {
+		f = append(f, "Disabled: true")
 	}
 	return "w.Input{" + join(f, ", ") + g.ev(x, "InputVariant", "Variant") + placef(x) + "}"
 }

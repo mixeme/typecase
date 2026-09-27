@@ -30,12 +30,14 @@ func Find1() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "6 / 7", Variant: w.MonoTight}}},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "14 / 14", Variant: w.MonoTight}}},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Дела", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "1"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
 						w.TickRow{
 							Mark:      w.Mark{Colour: "#9A9280"},
 							Label:     "Общий",
@@ -44,6 +46,11 @@ func Find1() Screen {
 							Error:     true,
 							Trail:     w.Button{Label: "Retry", Small: true},
 						},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Дела", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Files", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "2"},
 					},
 				},
@@ -52,7 +59,7 @@ func Find1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "«ковал»"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("6 of 7 collections · 7 records · 1 source timed out")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("14 of 14 collections · 7 records · 1 source timed out")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{
@@ -71,7 +78,7 @@ func Find1() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 100},
 						Parts: []w.RunbarPart{
-							w.Text("Done · 5 of 6 sources answered"),
+							w.Text("Done · 13 of 14 sources answered"),
 							w.Mono{Text: "1.8 s"},
 							w.Line{
 								Items: []w.LinePart{w.Mono{Text: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}},

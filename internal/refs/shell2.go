@@ -161,7 +161,7 @@ var _ = add(
 		w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August"}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
 			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "09:30", Title: []w.Inline{w.Text("Ревью архитектуры")}, Detail: "Переговорная 1"}}},
-		w.MainFoot{Text: "This link works until 9 September 2026. The owner can revoke it at any moment.", Roomy: true}}}, "s-publish-6", "tc-main", 1),
+		w.MainFoot{Text: "This link works until 8 September 2026. The owner can revoke it at any moment.", Roomy: true}}}, "s-publish-6", "tc-main", 1),
 	shell("zone", w.Main{Items: []w.MainPart{
 		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Variant: w.Mono11Top}}}, Variant: w.MainZone}, "shell-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{

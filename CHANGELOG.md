@@ -4,6 +4,28 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Added
+
+- **`Input` takes a password and can be switched off.** `InputPassword` is
+  the password kind; `Input.Disabled` prints a field that is there but does
+  not take input — the connection form's password when the server asks none.
+- **A table row keeps its buttons while there is room.** `TableCell.More` is
+  the row's «⋯»: it shows only when the row's `is-2nd` buttons are hidden,
+  which a table does in a container of 640 px and less.
+
+### Mockup
+
+- Frames for the tasks Carrel's server found (plan 4): the note frames tick
+  «Дневник» as the list does; the timeline's «Where to look» shows every
+  calendar with its tick, feeds too; the search's rail is every source of
+  the set; published links are newest first and keep Copy, Send and Revoke
+  on the row. New frames: the conflict of an event, a task and a note; the
+  sheet after a card's address is replaced, which offers to rewrite it in
+  the records where the person attends, and its outcome on the card; the
+  connection form of a server that asks no password.
+
 ## typecase/v0.7.0 — 2026-09-27
 
 ### Breaking — 0.7.0: the library prints the mockup

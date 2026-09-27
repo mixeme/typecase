@@ -28,7 +28,7 @@ go run ./cmd/catalog   # http://localhost:8080/
 go run ./cmd/screens   # http://localhost:8085/
 ```
 
-Every frame of the mockup that is a route (154) is a screen at `/f/<data-frame>`,
+Every frame of the mockup that is a route (160) is a screen at `/f/<data-frame>`,
 built from widgets with the frame's data; `go test ./internal/screens` holds
 each one to its frame. Frames that no widget builds yet are listed in
 [docs/visual/gaps.md](docs/visual/gaps.md).

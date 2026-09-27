@@ -139,6 +139,7 @@ type TableCell struct {
 	Small bool     // 11 px
 	Pick  *Ticked  // a tick box that picks the row
 	Acts  bool     // the row's buttons
+	More  *Button  // the row's «⋯»: shown only when the row's is-2nd buttons have no room
 	Unset bool     // a placeholder value
 	Name  bool     // the name column of a narrow list
 	Span  int      // the cell spans that many columns
@@ -236,6 +237,9 @@ func (t Table) html(m mix) string {
 			}
 			for _, p := range c.Parts {
 				s.WriteString(p.html(nil))
+			}
+			if c.More != nil {
+				s.WriteString(c.More.html(mix{"tc-acts__more"}))
 			}
 			s.WriteString(`</td>`)
 		}

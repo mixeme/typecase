@@ -33,6 +33,7 @@ var _ = add(
 	form("placeholder", w.Input{Placeholder: "Documents · sftpgo / carrel-backup/…", Variant: w.Input11Fill, Label: "Folder"}, "components-20", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"}, "s-agenda-8", "tc-in", 1),
 	form("error", w.Input{Value: "nextcloud", Error: true, Focus: true, Label: "Label"}, "s-profile-11", "tc-in", 1),
+	form("disabled", w.Input{Kind: w.InputPassword, Label: "Password", Disabled: true}, "s-profile-14", "tc-in", 4),
 	form("variant", w.Input{Value: "…/remote.php/dav/calendars/mix/birthdays/", Mono: true, Variant: w.InputDusty, Label: "Address"}, "s-profile-7", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Дни рождения", Focus: true, Label: "Type the name to confirm"}, "s-profile-9", "tc-in", 1),
 	form("focus", w.Input{Value: "https://feeds.example/ru-holidays.ics", Mono: true, Focus: true, Variant: w.Input11_5, Label: "Feed address"}, "s-profile-10", "tc-in", 1),
