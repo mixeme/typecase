@@ -737,6 +737,9 @@ func (g *gen) row(e *El) string {
 		if e.Has("tc-row--timecols--padl14-padr14") {
 			f = append(f, "Inset: true")
 		}
+		if e.Has("tc-row--timecols--time") {
+			f = append(f, "Short: true")
+		}
 		return "w.TimeRow{" + join(f, ", ") + "}"
 	case e.Has("tc-row--avatarcols"):
 		f = append(f, "Mark: "+g.mark(els[0]))

@@ -14,6 +14,9 @@ do, not what the authors did.
 - **A table row keeps its buttons while there is room.** `TableCell.More` is
   the row's «⋯»: it shows only when the row's `is-2nd` buttons are hidden,
   which a table does in a container of 640 px and less.
+- **`TimeRow.Short`**: the lead is a time of day only, and its column is as
+  narrow as the time — an event among the search results, whose title then
+  stands level with a contact's name.
 
 ### Mockup
 

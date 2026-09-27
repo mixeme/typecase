@@ -106,7 +106,7 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Short}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
@@ -124,6 +124,7 @@ type TimeRow struct {
 	On      bool
 	Past    bool // gone by: faded
 	Inset   bool
+	Short   bool // the lead is a time of day only: its column as narrow as the time (search results)
 }
 
 // Render prints the row.
@@ -131,7 +132,7 @@ func (r TimeRow) Render() string { return r.html(nil) }
 
 func (r TimeRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Past, "tc-row--timecols--op-7")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + `>`)
 	s.WriteString(r.Mark.html(nil))
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))

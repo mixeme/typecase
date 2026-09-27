@@ -119,6 +119,7 @@ func Find1() Screen {
 								Title:  []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
 								Detail: "Zoom",
 								Source: "nextcloud · Личный",
+								Short:  true,
 							},
 						},
 					},
