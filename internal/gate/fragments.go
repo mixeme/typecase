@@ -14,7 +14,7 @@ import (
 )
 
 // CheckWidgetFragments fails when a reference record does not print the
-// fragment of its frame (plan 2, step 2), and when an exported widget has no
+// fragment of its frame, and when an exported widget has no
 // record (step 7): every widget prints its frame.
 func CheckWidgetFragments(p ModulePaths) error {
 	m, err := fragment.Load(p.Root)
@@ -42,7 +42,7 @@ func CheckWidgetFragments(p ModulePaths) error {
 }
 
 // CheckContainerPairs fails when what a container takes and what the mockup
-// puts in it differ, either way (plan 2, step 3).
+// puts in it differ, either way.
 func CheckContainerPairs(p ModulePaths) error {
 	m, err := fragment.Load(p.Root)
 	if err != nil {
@@ -95,7 +95,7 @@ func renderTypes(widgetDir string) ([]string, error) {
 
 // CheckEveryWidgetHasRecord fails when an exported widget type has no
 // reference record, or when refs.Widgets and the source disagree on what the
-// widgets are (plan 2, step 7): a widget without a frame does not stay.
+// widgets are: a widget without a frame does not stay.
 func CheckEveryWidgetHasRecord(widgetDir string, listed []string, recorded map[string]int) error {
 	src, err := renderTypes(widgetDir)
 	if err != nil {

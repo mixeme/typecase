@@ -1,7 +1,7 @@
 // Package cut takes the product's parts out of the mockup verbatim: the
 // content of its one <style data-tc> block, which is the library's
 // css/typecase.css, and the symbols of its sprite, which are the library's
-// icons/sprite.svg (plan 2, step 1). The gate css-from-mockup cuts again and
+// icons/sprite.svg. The gate css-from-mockup cuts again and
 // compares byte for byte.
 package cut
 

@@ -2,7 +2,7 @@ package refs
 
 import w "carrel.dev/typecase/widget"
 
-// Pages without a shell (plan 3, step 5): sign-in, «about», a desktop
+// Pages without a shell: sign-in, «about», a desktop
 // window's inside, a page on paper. A record per page frame: the root's own
 // tree is the page's whole content, so every frame is a form of its own.
 

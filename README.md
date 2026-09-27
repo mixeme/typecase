@@ -55,6 +55,11 @@ mockup's rules and checks are in [docs/visual/mockup.md](docs/visual/mockup.md);
 how to build a screen — [docs/guide/screen.md](docs/guide/screen.md); the
 gates the library keeps — [L-8 of the spec](docs/spec/typecase.md#l-8-ворота).
 
+## Development
+
+How the library is built and changed — [docs/development.md](docs/development.md);
+what is open and next — [docs/roadmap.md](docs/roadmap.md).
+
 ## License
 
 MIT

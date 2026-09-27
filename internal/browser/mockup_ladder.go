@@ -1,6 +1,6 @@
 package browser
 
-// MockupLadderWidths is the shared width ladder of the mockup, plan 3, and
+// MockupLadderWidths is the shared width ladder of the mockup, the screens' checks, and
 // the catalog (docs/visual/mockup.md). Pairs sit on both sides of the Р-3 thresholds.
 var MockupLadderWidths = []int{1351, 1191, 1190, 1008, 1007, 820, 641, 640, 460, 390}
 

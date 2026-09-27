@@ -1,7 +1,7 @@
 package screens
 
 // Routes lists the frames of the mockup built as screens, in the mockup's
-// order: /f/<Frame> (plan 3, step 1; Р-16).
+// order: /f/<Frame> (Р-16).
 var Routes = []Route{
 	{Frame: "shell-1", Caption: "Каркас: четыре зоны", Screen: Shell1},
 	{Frame: "s-contacts-1", Caption: "Контакты · список и карточка", Screen: Contacts1},

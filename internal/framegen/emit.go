@@ -217,7 +217,7 @@ func Files(secs []Section, refsInputs string) (map[string][]byte, error) {
 		}
 		out[fn] = b
 	}
-	rb := []string{"package screens", "", "// Routes lists the frames of the mockup built as screens, in the mockup's", "// order: /f/<Frame> (plan 3, step 1; Р-16).", "var Routes = []Route{"}
+	rb := []string{"package screens", "", "// Routes lists the frames of the mockup built as screens, in the mockup's", "// order: /f/<Frame> (Р-16).", "var Routes = []Route{"}
 	for _, r := range routes {
 		th := ""
 		if r.Theme != "" {

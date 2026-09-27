@@ -17,7 +17,7 @@ var gapRow = regexp.MustCompile(`(?m)^\| ([a-z0-9-]+) \|`)
 // CheckFrameCoverage fails unless every frame that is a route (Р-16: no
 // mark «компонент», «фрагмент», «список», «меню», «кандидат», and not one of
 // the app's menus) has a screen or a line in docs/visual/gaps.md — one of the
-// two — and every screen and every gap is such a frame (plan 3, step 1).
+// two — and every screen and every gap is such a frame.
 func CheckFrameCoverage(p ModulePaths) error {
 	m, err := fragment.Load(p.Root)
 	if err != nil {

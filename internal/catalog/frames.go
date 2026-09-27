@@ -15,7 +15,7 @@ import (
 // (browser.MockupLadderWidths; a test holds them equal).
 var Ladder = []int{1351, 1191, 1190, 1008, 1007, 820, 641, 640, 460, 390}
 
-// Frame is a component or fragment frame of the mockup (Р-16 of plan 3): not
+// Frame is a component or fragment frame of the mockup (Р-16, docs/development.md): not
 // a route, shown in the catalog next to the widget it is built around.
 type Frame struct {
 	ID      string

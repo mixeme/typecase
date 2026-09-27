@@ -1,7 +1,7 @@
 package browser
 
 // FramesPairJS puts a frame of the mockup and its screen on one page, one
-// above the other, both roots at the same width (plan 3, step 3). Called with
+// above the other, both roots at the same width. Called with
 // the frame's markup, the screen's markup and the width; returns false when
 // the frame has no root.
 const FramesPairJS = `(function(frameHTML, screenHTML, w){

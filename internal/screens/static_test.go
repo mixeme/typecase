@@ -7,7 +7,7 @@ import (
 	"carrel.dev/typecase/internal/fragment"
 )
 
-// TestFramesStatic (plan 3, step 2): every route prints the tree of its
+// TestFramesStatic: every route prints the tree of its
 // frame — the same widgets in the same order, with the frame's data.
 func TestFramesStatic(t *testing.T) {
 	wd, err := os.Getwd()

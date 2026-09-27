@@ -86,7 +86,7 @@ func awaited(frame string, w int, finding string) (string, bool) {
 	return "", false
 }
 
-// TestFramesLadder (plan 3, step 3): every route and its frame, laid out on
+// TestFramesLadder: every route and its frame, laid out on
 // every step of the ladder, draw the same boxes with the same computed style;
 // and the screen keeps the invariants of a screen on each step.
 // TC_FRAMES=<frame>,… limits the run to those frames.
@@ -182,7 +182,7 @@ const longLabelsJS = `(() => {
   return root.querySelectorAll("[data-tc-overflow]").length;
 })()`
 
-// TestFramesLongLabels (plan 3, step 3): with labels longer than the frames
+// TestFramesLongLabels: with labels longer than the frames
 // draw, the CSS cannot know their length; the safety of tc.js catches the
 // bars they overflow (at least somewhere), and nothing else scrolls sideways.
 func TestFramesLongLabels(t *testing.T) {
@@ -227,7 +227,7 @@ func TestFramesLongLabels(t *testing.T) {
 	}
 }
 
-// TestFramesTablet (plan 3, step 3, the owner's observation of 2026-09-26):
+// TestFramesTablet (the owner's observation of 2026-09-26, docs/roadmap.md):
 // the ladder is measured in a desktop Chrome; a tablet also has a mobile
 // viewport, a pixel ratio of 2 and touch. Samsung Galaxy Tab S5e in Vivaldi
 // (mobile Chromium): about 1280×800 landscape and 800×1280 portrait. Every

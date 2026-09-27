@@ -37,6 +37,6 @@ func TestFramesBesideWidgets(t *testing.T) {
 		}
 	}
 	if n != 108 {
-		t.Errorf("%d component and fragment frames, want 108 (Р-16 and plan 4; the 5 candidates are skipped)", n)
+		t.Errorf("%d component and fragment frames, want 108 (Р-16; the 5 candidates are skipped)", n)
 	}
 }

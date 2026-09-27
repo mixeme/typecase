@@ -1,6 +1,6 @@
 // Package refs is the table of references: each record is a widget value
 // filled with the data of its frame (the fixture) and the Ref of the mockup
-// fragment it must print (plan 2, step 2). TestWidgetFragments compares every
+// fragment it must print. TestWidgetFragments compares every
 // record; the families fill the table on step 4.
 package refs
 

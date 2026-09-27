@@ -1,5 +1,5 @@
 // Package css serves the library stylesheet: the fonts, then the mockup's
-// product CSS cut out verbatim (L-11.1, plan 2 step 1).
+// product CSS cut out verbatim (L-11.1).
 package css
 
 //go:generate go run ../internal/mockcss/cut/cmd/cutcss -root ..

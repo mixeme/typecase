@@ -1,5 +1,5 @@
 // Command screens serves the demo screens: every frame of the mockup that is
-// a route (decision Р-16 of plan 3) built from widgets, at /f/<data-frame>.
+// a route (decision Р-16, docs/development.md) built from widgets, at /f/<data-frame>.
 //
 //	go run ./cmd/screens [-addr :8085]
 package main

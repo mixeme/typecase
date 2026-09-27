@@ -101,7 +101,7 @@ func foreignUICSS(css string) []string {
 
 // CheckNoForeignCSS fails when a stylesheet of the module outside css/ styles
 // a widget of the library: the interface's CSS is the mockup's cut and only
-// that (plan 2, step 6). Pages that show widgets — the catalog, the demo
+// that. Pages that show widgets — the catalog, the demo
 // screens — may lay out their own boxes around them, not the widgets.
 func CheckNoForeignCSS(root string) error {
 	var bad []string

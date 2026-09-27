@@ -1,6 +1,6 @@
 // Package framegen translates a frame of the mockup into the Go expression
-// of its screen: the widgets and the frame's data, top to bottom (plan 3,
-// step 5). cmd/frame2go prints it; internal/screens is its output, held to
+// of its screen: the widgets and the frame's data, top to bottom.
+// cmd/frame2go prints it; internal/screens is its output, held to
 // the frames by the static comparison (TestFramesStatic) and to the
 // generator by TestGenerated.
 //

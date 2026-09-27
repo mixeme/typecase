@@ -1,5 +1,5 @@
 // Command frame2go translates frames of the mockup into screens: the
-// frame's widgets and data, top to bottom (plan 3, step 5). It reads
+// frame's widgets and data, top to bottom. It reads
 // docs/visual/carrel-ui-mockups.html and the widget package's enums of the
 // module at -root.
 //

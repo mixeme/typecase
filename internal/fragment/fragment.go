@@ -1,5 +1,5 @@
 // Package fragment compares a widget's output with the fragment of the mockup
-// frame it prints (plan 2, step 2). The comparison is static: the same CSS on
+// frame it prints. The comparison is static: the same CSS on
 // the same tree gives the same picture, so what is compared is what changes
 // the picture — tags, classes, text, the values of fields and the data the
 // script turns into style — and not accessibility attributes, which a widget
@@ -55,7 +55,7 @@ type Frame struct {
 }
 
 // catalogOnly are frames without a mark that still go to the catalog, not to
-// a route (Р-16 of plan 3): the desktop app's user menu and the tray menu.
+// a route (Р-16, docs/development.md): the desktop app's user menu and the tray menu.
 var catalogOnly = map[string]bool{"m-desktop-2": true, "m-desktop-8": true}
 
 // Route says whether a frame is a route of the demo screens (Р-16): its
@@ -586,9 +586,8 @@ func (f *Frame) Root() (*html.Node, error) {
 	return out[0], nil
 }
 
-// CompareFrame compares a whole frame with a screen printed for it (plan 3,
-// step 2): the same tree, classes, compared attributes and text, top to
-// bottom. It says which widget was chosen and in what order, which the check
+// CompareFrame compares a whole frame with a screen printed for it: the
+// same tree, classes, compared attributes and text, top to bottom. It says which widget was chosen and in what order, which the check
 // of one widget against its fragment does not.
 func (m *Mockup) CompareFrame(id, rendered string) error {
 	f, ok := m.byID[id]

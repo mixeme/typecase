@@ -11,7 +11,7 @@ Typecase (`internal/screens`) и для экранов приложения (Car
 Найди кадр экрана и его `data-frame` (`s-find-2`, `m-desktop-10`). Нет кадра —
 нет экрана: сначала кадр в макете (шаг 4).
 
-Какие кадры — экраны, решено в Р-16 ([план 3](../plan/3-screens-and-checks.md)):
+Какие кадры — экраны, решено в Р-16 ([development.md](../development.md)):
 кадры с пометкой «компонент», «фрагмент», «список», «меню» — записи
 каталога, не экраны.
 
@@ -61,7 +61,7 @@ go run carrel.dev/typecase/cmd/frame2go -root "$(go list -m -f '{{.Dir}}' carrel
 2. новая копия макета в Typecase (и в приложении — побайтно);
 3. вырез CSS (`go generate ./css`);
 4. виджет с эталоном — запись в `internal/refs`, фрагмент кадра, ворота
-   ([план 2](../plan/2-library-from-mockup.md));
+   ([development.md](../development.md), «Виджет, вариант, поле»);
 5. экран.
 
 Пока пробел открыт, кадр записан в
