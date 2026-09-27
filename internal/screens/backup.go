@@ -117,11 +117,8 @@ func Backup1() Screen {
 										Mono:  true,
 									},
 									{
-										Parts: []w.CellPart{
-											w.Button{Label: "Run", Small: true},
-											w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
-										},
-										Acts: true,
+										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
+										Acts:  true,
 									},
 								},
 							},
@@ -155,11 +152,8 @@ func Backup1() Screen {
 										Mono:  true,
 									},
 									{
-										Parts: []w.CellPart{
-											w.Button{Label: "Run", Small: true},
-											w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
-										},
-										Acts: true,
+										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
+										Acts:  true,
 									},
 								},
 							},
@@ -183,11 +177,8 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 									{
-										Parts: []w.CellPart{
-											w.Button{Label: "Run", Small: true},
-											w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
-										},
-										Acts: true,
+										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
+										Acts:  true,
 									},
 								},
 								State: w.RowFaded,

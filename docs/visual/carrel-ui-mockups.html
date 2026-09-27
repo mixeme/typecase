@@ -10609,7 +10609,7 @@ Read  2 min ago</div>
               <td class="tc-mono">cron · 03:00<br><span class="tc-dim">external trigger</span></td>
               <td class="tc-mono is-2nd">14</td>
               <td class="tc-mono">2026-08-16 03:10<br><span title="Read back from the destination; checksum matched" class="tc-dim">18.4 MB · verified</span></td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
             </tr>
             <tr>
               <td><button class="tc-tickrow__tick" type="button"></button></td>
@@ -10619,7 +10619,7 @@ Read  2 min ago</div>
               <td class="tc-mono">on sign-in<br><span class="tc-dim">if older than 7 days</span></td>
               <td class="tc-mono is-2nd">8</td>
               <td class="tc-mono">2026-08-14 09:12<br><span title="Read back from the destination; checksum matched" class="tc-dim">2.1 GB · verified</span></td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
             </tr>
             <tr class="tc-table__row--dim">
               <td><button class="tc-tickrow__tick is-off" type="button"></button></td>
@@ -10629,7 +10629,7 @@ Read  2 min ago</div>
               <td class="tc-mono">on demand</td>
               <td class="tc-mono is-2nd">—</td>
               <td class="tc-mono tc-mono--dusty">never</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
             </tr>
           </tbody>
         </table>
@@ -10654,20 +10654,7 @@ Read  2 min ago</div>
 </figure>
 
 <div class="frames">
-  <figure style="flex:0 1 250px">
-  <div class="frame" data-frame="s-backup-10">
-    <div class="frame-label"><span>Строка задания · ⋯</span><span class="frag">меню</span><i>у каждого задания</i></div>
-    <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-menu tc-menu--w212">
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-pencil"/></svg>Edit</button>
-        <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-trash"/></svg>Delete job</button>
-      </div>
-    </div>
   </div>
-  <figcaption>На виду — Run: ради него на экран и заходят. Правка и удаление — под «⋯»; архивы удаление не трогает.</figcaption>
-  </figure>
-</div>
 
 <figure>
 <div class="frame" data-frame="s-backup-2">
@@ -12574,7 +12561,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <tr><td>—</td><td class="tc-mono">link</td><td class="tc-table__n3">pending</td><td class="tc-table__n4">—</td><td class="tc-mono">2026-08-18 12:00</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button">Copy link</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr><td>anna</td><td class="tc-mono">email</td><td class="tc-table__n3">pending</td><td class="tc-mono tc-table__n4 tc-table__n4--danger">failed — 550 mailbox unavailable</td><td class="tc-mono">2026-08-17 09:30</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Resend</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Resend</button><button class="tc-btn is-sm" type="button">Copy link</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
       </div>
@@ -12608,7 +12595,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
       </div>
     </div>
   </div>
-  <figcaption>На виду — Copy link или Resend: то, ради чего приглашение и открывают. Revoke рвёт ссылку, учётной записи ещё нет.</figcaption>
+  <figcaption>У строки — Copy link и, у приглашения письмом, Resend: ради них приглашение и открывают. Под «⋯» — редкое: Extend, когда человек не успел, и Revoke — он рвёт ссылку, учётной записи ещё нет.</figcaption>
   </figure>
 </div>
 
@@ -15564,7 +15551,7 @@ Read  2 min ago · not changed on server</div>
 <p>Разница в одну колонку или в один разъехавшийся флажок глазами не ловится — тем более между двумя окнами, где данные разные. Поэтому рядом с макетами лежат наборы: <a href="fixtures/README.md">docs/visual/fixtures</a> — двенадцать файлов <code>.vcf</code> и <code>.ics</code> с <b>теми самыми</b> записями, что нарисованы выше. Их загружают через «Import» в пустой экземпляр и открывают те же экраны: состав строк, группы, колонки и состояния должны совпасть.</p>
 <p>Четыре вещи набор проверяет нарочно, потому что на выдуманных данных они не воспроизводятся: встреча заведена в <code>Asia/Yekaterinburg</code> и обязана показать исходный пояс меткой; дежурство лежит в двух коллекциях разными UID и обязано стоять в агенде двумя строками, без пометки, а на экране дубликатов — парой; Артём Белов лежит в двух книгах и до связывания обязан попасть в «Дубликаты»; у карточки Анны Ковалёвой три чужих свойства, и карточка обязана сказать «Kept as the server sent them · Show&nbsp;3». Чего набор не воспроизводит — счётчиков в рейле: 248 карточек файлом не задать, да и сам макет рисует книгу на 248 карточек пятью строками. <b>Сверяется устройство экрана, а не итог пересчёта</b>, и в README это сказано прямо, чтобы никто не гнался за числами.</p>
 
-<p><b>Кадры адресуются машиной.</b> Индекс в <code>querySelectorAll('.frame')</code> идентичностью не является: кадров 274, и каждый дорисованный сдвигает нумерацию. Поэтому кадр, по которому собирают экран, несёт <code>data-screen</code> с маршрутом — тем же, что стоит в подписи кадра; кадр, показывающий несколько страниц сразу, перечисляет их через пробел. Кусок кадра, которым отвечает фрагмент (панель подробностей, порция списка, результаты поиска), несёт <code>data-part</code> с именем этого куска; имя может стоять на нескольких соседях, и тогда куском считаются они все по порядку. Третьего атрибута нет: состояние работ на кадрах не отмечается, потому что живёт оно в системе контроля версий (C-16). <b>Отсутствие контрола на экране законно только тогда, когда оно объявлено здесь</b>, на виду у того, кто смотрит на дизайн, — а не в списке исключений внутри теста, куда никто не заглядывает.</p>
+<p><b>Кадры адресуются машиной.</b> Индекс в <code>querySelectorAll('.frame')</code> идентичностью не является: кадров 273, и каждый дорисованный сдвигает нумерацию. Поэтому кадр, по которому собирают экран, несёт <code>data-screen</code> с маршрутом — тем же, что стоит в подписи кадра; кадр, показывающий несколько страниц сразу, перечисляет их через пробел. Кусок кадра, которым отвечает фрагмент (панель подробностей, порция списка, результаты поиска), несёт <code>data-part</code> с именем этого куска; имя может стоять на нескольких соседях, и тогда куском считаются они все по порядку. Третьего атрибута нет: состояние работ на кадрах не отмечается, потому что живёт оно в системе контроля версий (C-16). <b>Отсутствие контрола на экране законно только тогда, когда оно объявлено здесь</b>, на виду у того, кто смотрит на дизайн, — а не в списке исключений внутри теста, куда никто не заглядывает.</p>
 
 <div class="note">Файл живой: макеты — это HTML, а не картинки, поэтому классы из раздела 6 переносятся в <code>carrel.css</code> копированием, а не перерисовкой.</div>
 

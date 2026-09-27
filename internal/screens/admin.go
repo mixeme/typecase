@@ -187,6 +187,7 @@ func Admin1() Screen {
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Resend", Small: true},
+											w.Button{Label: "Copy link", Small: true},
 											w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 										},
 										Acts: true,

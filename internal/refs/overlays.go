@@ -262,10 +262,6 @@ var _ = add(
 		w.MenuItem{Label: "Date, then the original name", On: true},
 		w.MenuItem{Label: "The original name"},
 		w.MenuItem{Label: "Record title, then the original name"}}, Width: w.MenuWidth290}, "attachments-3", "tc-menu", 1),
-	overlay("danger", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "pencil", Label: "Edit"},
-		w.MenuSep{},
-		w.MenuItem{Icon: "trash", Label: "Delete job", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "s-backup-10", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный"},

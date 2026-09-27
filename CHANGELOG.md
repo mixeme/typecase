@@ -28,6 +28,11 @@ do, not what the authors did.
   sheet after a card's address is replaced, which offers to rewrite it in
   the records where the person attends, and its outcome on the card; the
   connection form of a server that asks no password.
+- Row actions by how often they are needed: a backup job keeps Run and Edit
+  on its row and is deleted on its page, with no «⋯»; an invite keeps Copy
+  link, and Resend where it went by mail, with Extend and Revoke under «⋯»;
+  a user's actions are all rare and stay under «⋯». The job row's menu frame
+  is gone.
 
 ## typecase/v0.7.0 — 2026-09-27
 
