@@ -316,7 +316,11 @@ func (g *gen) pick(x *El) string {
 }
 
 func queryOf(qq *El) string {
-	return "w.Query{Value: " + q(qq.Attr("value")) + ", Label: " + q(qq.Attr("aria-label")) + "}"
+	n := ""
+	if v := qq.Attr("name"); v != "" {
+		n = ", Name: " + q(v)
+	}
+	return "w.Query{Value: " + q(qq.Attr("value")) + ", Label: " + q(qq.Attr("aria-label")) + n + "}"
 }
 
 func (g *gen) filter(x *El) string {
@@ -326,6 +330,9 @@ func (g *gen) filter(x *El) string {
 	}
 	if s := svgs(x); len(s) > 0 && s[0].Has("tc-ico--dusty") {
 		f = append(f, "Quiet: true")
+	}
+	if x.Tag == "form" {
+		f = append(f, "Action: "+q(x.Attr("action")))
 	}
 	return "w.Filter{" + join(f, ", ") + g.ev(x, "FilterVariant", "Variant") + placef(x) + "}"
 }
@@ -488,7 +495,7 @@ func (g *gen) control(x *El) string {
 		return g.input(x)
 	case (x.Tag == "button" || x.Tag == "select") && x.Has("tc-in") && x.Has("is-pick"):
 		return g.pick(x)
-	case x.Tag == "label" && x.Has("tc-in"):
+	case (x.Tag == "label" || x.Tag == "form") && x.Has("tc-in"):
 		return g.filter(x)
 	case x.Tag == "span" && x.Has("tc-in"):
 		return g.tagInput(x)
@@ -803,6 +810,9 @@ func (g *gen) form(e *El) string {
 	}
 	f := []string{"Items: []w.FormPart{" + g.each(items, g.formPart) + "}"}
 	if a := e.Attr("action"); a != "" {
+		if id := e.Attr("id"); id != "" {
+			f = append(f, "ID: "+q(id))
+		}
 		f = append(f, "Action: "+q(a))
 		if m := e.Attr("method"); m != "" && m != "post" {
 			f = append(f, "Method: "+q(m))
@@ -1032,6 +1042,33 @@ func (g *gen) listGroup(k *El) string {
 		f = append(f, "Count: &"+g.num(n))
 	}
 	return "w.ListGroup{" + join(f, ", ") + "}"
+}
+
+// sendOf is what a tick box sends: the form it submits, the name and value
+// of its button or checkbox; "" when it sends nothing.
+func sendOf(t *El) string {
+	var f []string
+	for _, a := range []kv{{"form", "Form"}, {"name", "Name"}, {"value", "Value"}} {
+		if v := t.Attr(a.k); v != "" {
+			f = append(f, a.v+": "+q(v))
+		}
+	}
+	if len(f) == 0 {
+		return ""
+	}
+	return "w.Send{" + join(f, ", ") + "}"
+}
+
+// tickedOf is a tick box's state: a checkbox by its checked, a button by its
+// classes.
+func tickedOf(t *El) string {
+	switch {
+	case t.Has("is-part"):
+		return "w.TickedPart"
+	case t.Tag == "input" && !t.HasAttr("checked"), t.Tag != "input" && t.Has("is-off"):
+		return "w.TickedOff"
+	}
+	return "w.TickedOn"
 }
 
 // hiddens are a form's hidden fields.

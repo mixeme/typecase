@@ -159,7 +159,7 @@ func (v TickVariant) class() string {
 // Tick — tc-tick
 //
 // Роль. Галка отметки: задача сделана, пункт списка выполнен.
-// Вход. Tick{Done, Variant, Glyph, Label}.
+// Вход. Tick{Done, Variant, Glyph, Label, Send}.
 // Состояния. open | done | variant | glyph.
 // Инварианты. Отметка — кнопка с доступным именем, кроме знака внутри другой кнопки; сделано или нет — одно поле; отметка печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает отметку; знак (Glyph) не нажимается: нажимается кнопка, в которой он стоит.
@@ -171,6 +171,7 @@ type Tick struct {
 	Variant TickVariant
 	Glyph   bool   // only the drawn box, inside another button
 	Label   string // the accessible name: what is ticked
+	Send    Send   // what pressing sends: the task done or not, without a script
 }
 
 // Render prints the tick.
@@ -181,7 +182,12 @@ func (t Tick) html(m mix) string {
 	if t.Glyph {
 		return `<span` + c + `></span>`
 	}
-	return `<button` + c + ` type="button"` + attr("aria-label", t.Label) + attr("aria-pressed", strconv.FormatBool(t.Done)) + `></button>`
+	typ := "button"
+	if t.Send.Form != "" {
+		typ = "submit"
+	}
+	return `<button` + c + ` type="` + typ + `"` + attr("form", t.Send.Form) + attr("name", t.Send.Name) + attr("value", t.Send.Value) +
+		attr("aria-label", t.Label) + attr("aria-pressed", strconv.FormatBool(t.Done)) + `></button>`
 }
 
 // Kbd — tc-kbd

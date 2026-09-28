@@ -51,6 +51,7 @@ type TableCol struct {
 	Rank      ColRank
 	Secondary bool    // the first to go when the table narrows
 	Tick      *Ticked // a tick box in the head: all rows at once
+	Send      Send    // what the head's tick sends
 }
 
 // CellTone is the colour of a cell's words.
@@ -138,6 +139,7 @@ type TableCell struct {
 	Tone  CellTone
 	Small bool     // 11 px
 	Pick  *Ticked  // a tick box that picks the row
+	Send  Send     // what the pick sends: the row's name in a bulk action's form
 	Acts  bool     // the row's buttons
 	More  *Button  // the row's «⋯»: shown only when the row's is-2nd buttons have no room
 	Unset bool     // a placeholder value
@@ -191,7 +193,7 @@ func (v TableVariant) class() string {
 // Вход. Table{Cols, Rows, Variant, Place}.
 // Состояния. plain | head | picked | folder | off | acts | wide | fit.
 // Инварианты. Ширина и ранг колонки — перечисления, и ячейки колонки берут их из её заголовка; третья и четвёртая колонки уходят первыми на узком экране; таблица печатает фрагмент своего кадра.
-// Поведение. Галка выбирает строку для действий бара; «⋯» строки открывает её меню.
+// Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню.
 // Эталон. кадр `s-files-1`, фрагмент `.tc-table`.
 // Содержимое. Заголовки колонок, строки: имя со значком или меткой, значения, моноширинное, две строки, метки, теги, бейджи, галка, кнопки, выпадашка.
 // Чего нет. Сортировки по заголовку: сортирует переключатель бара.
@@ -220,7 +222,7 @@ func (t Table) html(m mix) string {
 		for _, c := range t.Cols {
 			s.WriteString(`<th` + class(nil, c.Width.class(), c.Rank.class(), rank(c.Secondary)) + `>`)
 			if c.Tick != nil {
-				s.WriteString(c.Tick.box("All"))
+				s.WriteString(c.Tick.box("All", c.Send))
 			}
 			s.WriteString(esc(c.Label) + `</th>`)
 		}
@@ -233,7 +235,7 @@ func (t Table) html(m mix) string {
 			col := t.col(i, c)
 			s.WriteString(`<td` + class(nil, c.classes(col)...) + attr("colspan", pick(c.Span > 1, strconv.Itoa(c.Span))) + attr("rowspan", pick(c.Rows > 1, strconv.Itoa(c.Rows))) + `>`)
 			if c.Pick != nil {
-				s.WriteString(c.Pick.box("Pick"))
+				s.WriteString(c.Pick.box("Pick", c.Send))
 			}
 			for _, p := range c.Parts {
 				s.WriteString(p.html(nil))

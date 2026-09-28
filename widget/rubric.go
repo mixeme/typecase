@@ -102,10 +102,10 @@ type Rubric struct {
 func (r Rubric) Render() string { return r.html(nil) }
 
 func (r Rubric) html(m mix) string {
-	tag := [...]string{"div", "span", "button"}[r.Form]
+	tag := [...]string{"div", "span", "div"}[r.Form]
 	extra := ""
 	if r.Form == RubricItem {
-		extra = ` type="button" role="menuitem"`
+		extra = ` role="presentation"`
 	}
 	var s strings.Builder
 	s.WriteString(`<` + tag + class(m, "tc-rubric", r.Variant.class()) + extra + `>`)

@@ -725,7 +725,14 @@ func (g *gen) cellPart(x *El) string {
 		if x.Has("is-done") {
 			d = "Done: true, "
 		}
-		return "w.Tick{" + d + `Label: "Done"` + v + "}"
+		lab := x.Attr("aria-label")
+		if lab == "" {
+			lab = "Done"
+		}
+		if s := sendOf(x); s != "" {
+			v += ", Send: " + s
+		}
+		return "w.Tick{" + d + "Label: " + q(lab) + v + "}"
 	case x.Has("tc-btn"):
 		return g.button(x)
 	case x.Has("tc-badge"):
@@ -791,13 +798,10 @@ func (g *gen) table(e *El) string {
 				f = append(f, "Secondary: true")
 			}
 			if t := th.Kid("tc-tickrow__tick"); t != nil {
-				tk := "w.TickedOn"
-				if t.Has("is-part") {
-					tk = "w.TickedPart"
-				} else if t.Has("is-off") {
-					tk = "w.TickedOff"
+				f = append(f, "Tick: ptr("+tickedOf(t)+")")
+				if s := sendOf(t); s != "" {
+					f = append(f, "Send: "+s)
 				}
-				f = append(f, "Tick: ptr("+tk+")")
 			}
 			cols = append(cols, "{"+join(f, ", ")+"}")
 		}
@@ -828,11 +832,10 @@ func (g *gen) table(e *El) string {
 					if v.Has("tc-acts__more") {
 						more = "More: &" + g.button(v)
 					} else if v.Has("tc-tickrow__tick") {
-						t := "w.TickedOn"
-						if v.Has("is-off") {
-							t = "w.TickedOff"
+						f = append(f, "Pick: ptr("+tickedOf(v)+")")
+						if s := sendOf(v); s != "" {
+							f = append(f, "Send: "+s)
 						}
-						f = append(f, "Pick: ptr("+t+")")
 					} else {
 						parts = append(parts, g.cellPart(v))
 					}

@@ -186,8 +186,11 @@ func CheckVerifiable(p ModulePaths, catalog []CatalogEntry) error {
 	return nil
 }
 
+// templateID finds the ids of templates and forms: elements the catalog may
+// show alone and inside another record, the same element each time.
+var templateID = regexp.MustCompile(`<(?:template|form)\b[^>]*\sid="([^"]+)"`)
+
 // CheckUniqueIDs rejects duplicate id attributes in catalog HTML.
-var templateID = regexp.MustCompile(`<template\s+id="([^"]+)"`)
 
 func CheckUniqueIDs(catalog []CatalogEntry) error {
 	seen := make(map[string]string)
@@ -199,8 +202,9 @@ func CheckUniqueIDs(catalog []CatalogEntry) error {
 		}
 		for _, m := range idAttr.FindAllStringSubmatch(e.HTML, -1) {
 			id := m[1]
-			// A template (the row «Add …» adds) is the same rows wherever it
-			// stands: the catalog shows a set of fields alone and in its form.
+			// A template (the row «Add …» adds) and a form are the same element
+			// wherever it stands: the catalog shows a set of fields alone and in
+			// its form, a form alone and in its dialog.
 			if templates[id] {
 				continue
 			}

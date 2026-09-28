@@ -755,6 +755,8 @@ var _ = add(
 		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, Pad: w.ScrimPad26}}, "s-publish-2", "tc-overlay", 1),
 
 	// tc-dialog
+	overlay("links", w.Dialog{Items: []w.DialogPart{
+		w.AuthStack{Items: []w.AuthStackPart{w.Form{Items: []w.FormPart{w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Login"}}, Width: w.FieldMD}}, ID: "signin", Action: "/login", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Variant: w.FormFlushAll}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary, Form: "signin"}}, Links: []w.Link{{Text: "Forgotten your password?", Href: "/forgot"}, {Text: "Create an account", Href: "/register"}}}}, Variant: w.DialogPage440}, "components-43", "tc-dialog", 1),
 	overlay("crop-image", w.Dialog{Items: []w.DialogPart{
 		w.PhotoCrop{Colour: "#8C7B6A", Src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E", Note: "Drag the photo to choose the frame. The box is what other clients will see.", Fields: []w.Field{}}}, Variant: w.Dialog520}, "components-40", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
@@ -840,7 +842,7 @@ var _ = add(
 	overlay("narrow", w.Dialog{Items: []w.DialogPart{
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
 		w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place.", Centered: true},
-		w.AuthStack{Items: []w.AuthStackPart{w.Form{}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []string{"Create an account", "Forgotten your password?"}}}, Variant: w.DialogNarrow}, "s-auth-1", "tc-dialog", 1),
+		w.AuthStack{Items: []w.AuthStackPart{w.Form{}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}}}}, Variant: w.DialogNarrow}, "s-auth-1", "tc-dialog", 1),
 	overlay("page", w.Dialog{Items: []w.DialogPart{
 		w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGap8},
 		w.Prose{Parts: []w.Inline{w.Text("Enter the login or the confirmed email of the account. There is no way to set a new password and keep the data stored here: the encryption key is derived from the password, and the server never has that key.")}, Variant: w.ProseMutedClose},
@@ -864,7 +866,7 @@ var _ = add(
 	overlay("plain", w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
 		w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place.", Centered: true},
-		w.AuthStack{Items: []w.AuthStackPart{w.Form{}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []string{"Create an account", "Forgotten your password?"}}}, Variant: w.DialogNarrow}}, "s-auth-1", "tc-auth", 1),
+		w.AuthStack{Items: []w.AuthStackPart{w.Form{}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}}}}, Variant: w.DialogNarrow}}, "s-auth-1", "tc-auth", 1),
 )
 
 func init() {

@@ -126,6 +126,7 @@ func (t DocTasks) html(mix) string {
 type DocFile struct {
 	Name string
 	Size Dim
+	Href string // where the file is fetched
 }
 
 // DocFiles is the attachments of a document under a rule.
@@ -138,7 +139,11 @@ func (f DocFiles) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<div class="tc-doc__sec--rule">` + f.Title.html(nil) + `<div class="tc-stack tc-stack--gap-5 tc-doc__files">`)
 	for _, it := range f.Items {
-		s.WriteString(`<span class="tc-stack__item"><span class="tc-dim--accent">` + esc(it.Name) + `</span> ` + it.Size.html(nil) + `</span>`)
+		name := `<span class="tc-dim--accent">` + esc(it.Name) + `</span>`
+		if it.Href != "" {
+			name = Link{Text: it.Name, Href: it.Href}.html(nil)
+		}
+		s.WriteString(`<span class="tc-stack__item">` + name + ` ` + it.Size.html(nil) + `</span>`)
 	}
 	s.WriteString(`</div></div>`)
 	return s.String()
@@ -149,10 +154,15 @@ type DocRelated struct {
 	Title Rubric
 	Name  string
 	What  Dim
+	Href  string // the related record's address
 }
 
 func (r DocRelated) html(mix) string {
-	return `<div class="tc-doc__sec--rule16">` + r.Title.html(nil) + `<div class="tc-doc__link">` + esc(r.Name) + ` ` + r.What.html(nil) + `</div></div>`
+	tag := "div"
+	if r.Href != "" {
+		tag = "a"
+	}
+	return `<div class="tc-doc__sec--rule16">` + r.Title.html(nil) + `<` + tag + ` class="tc-doc__link"` + attr("href", r.Href) + `>` + esc(r.Name) + ` ` + r.What.html(nil) + `</` + tag + `></div>`
 }
 
 // DocFields is the row of a document's fields in the editor.

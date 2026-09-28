@@ -82,9 +82,13 @@ func (f Face) class() string {
 type Span struct {
 	Face Face
 	Text string
+	Href string // words in the accent that go somewhere: a link
 }
 
 func (s Span) html(mix) string {
+	if s.Href != "" {
+		return `<a class="` + s.Face.class() + `"` + attr("href", s.Href) + `>` + esc(s.Text) + `</a>`
+	}
 	return `<span class="` + s.Face.class() + `">` + esc(s.Text) + `</span>`
 }
 

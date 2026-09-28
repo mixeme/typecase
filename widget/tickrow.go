@@ -12,10 +12,30 @@ const (
 	TickedOff
 )
 
+// Send is what pressing a tick box sends. With Form it is a submit button of
+// that form, a toggle that acts at once — a source of the rail, a card's
+// choice; with a Name only, a checkbox of the form it stands in, a choice
+// acted on later — rows before a bulk action. Empty, the box is the
+// script's.
+type Send struct {
+	Form  string
+	Name  string
+	Value string
+}
+
 // box prints the tick box; label is what is ticked.
-func (t Ticked) box(label string, more ...string) string {
+func (t Ticked) box(label string, send Send, more ...string) string {
+	if send.Name != "" && send.Form == "" {
+		own := append([]string{"tc-tickrow__tick", pick(t == TickedPart, "is-part")}, more...)
+		return `<input` + class(nil, own...) + ` type="checkbox"` + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
+			flag("checked", t == TickedOn) + `>`
+	}
 	own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)
-	return `<button` + class(nil, own...) + ` type="button"` + attr("aria-label", label) +
+	typ := "button"
+	if send.Form != "" {
+		typ = "submit"
+	}
+	return `<button` + class(nil, own...) + ` type="` + typ + `"` + attr("form", send.Form) + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
 		attr("aria-pressed", [...]string{"true", "mixed", "false"}[t]) + `></button>`
 }
 
@@ -62,7 +82,7 @@ func (TickRow) fieldGridPart() {}
 // TickRow — tc-tickrow
 //
 // Роль. Строка источника с галкой: показать его или скрыть, выбрать для копии, для выгрузки.
-// Вход. TickRow{Ticked, Kind, Form, Mark, Icon, Label, Meta, MetaTitle, Current, Hidden, Error, Trail}.
+// Вход. TickRow{Ticked, Kind, Form, Mark, Icon, Label, Meta, MetaTitle, Current, Hidden, Error, Trail, Send}.
 // Состояния. one | all | root | external | current | hidden | error | group | nested | touch | loading.
 // Инварианты. Галка — кнопка с доступным именем; её состояния, род строки и место строки — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие на галку показывает или скрывает источник; галка группы ставит или снимает все галки под ней.
@@ -82,6 +102,7 @@ type TickRow struct {
 	Hidden    bool   // the source is not shown
 	Error     bool   // the source did not answer
 	Trail     TickRowTrail
+	Send      Send // what pressing the tick sends: the source's choice without a script
 }
 
 // Render prints the row.
@@ -90,7 +111,7 @@ func (r TickRow) Render() string { return r.html(nil) }
 func (r TickRow) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-tickrow", r.Kind.class(), is("on", r.Current), is("off", r.Hidden), is("error", r.Error), r.Form.class()) + `>`)
-	s.WriteString(r.Ticked.box(r.Label))
+	s.WriteString(r.Ticked.box(r.Label, r.Send))
 	if r.Icon != "" {
 		s.WriteString(`<svg viewBox="0 0 24 24">` + r.Icon.use() + `</svg>`)
 	} else {

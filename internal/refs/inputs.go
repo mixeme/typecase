@@ -60,6 +60,7 @@ var _ = add(
 	form("unset", w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190, Label: "Action"}, "s-admin-7", "tc-in", 1),
 
 	// tc-in as a filter, with the query line in it
+	form("filter-form", w.Filter{Query: w.Query{Value: "Filter", Label: "Filter", Name: "filter"}, Action: "/app/contacts/nextcloud/kontakty", Variant: w.FilterH26W220}, "components-43", "tc-in", 1),
 	form("waiting", w.Filter{Query: w.Query{Value: "Filter the loaded cards", Label: "Filter the loaded cards"}, Waiting: true}, "s-contacts-1", "tc-in", 1),
 	form("waiting", w.Filter{Query: w.Query{Value: "Filter this folder", Label: "Filter this folder"}, Waiting: true, Variant: w.FilterH26W190}, "s-files-1", "tc-in", 1),
 	form("quiet", w.Filter{Query: w.Query{Value: "подряд", Label: "подряд"}, Quiet: true, Variant: w.FilterT12W200}, "s-mail-5", "tc-in", 1),

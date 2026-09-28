@@ -520,6 +520,9 @@ var _ = add(
 		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "m-desktop-5", "tc-card", 2),
 
 	// tc-table
+	cards("checkboxes", w.Table{Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "pick", Value: "a.pdf"}}, {Parts: []w.CellPart{w.Text("смета.pdf")}}}},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "pick", Value: "b.pdf"}}, {Parts: []w.CellPart{w.Text("договор.pdf")}}}}}}, "components-43", "tc-table", 1),
 	cards("acts", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Collection"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4}, {Width: w.ColMenu}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("128")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-profile-7", "tc-table", 1),

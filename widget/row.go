@@ -369,7 +369,7 @@ func (r DueRow) html(m mix) string {
 // SizeRow — tc-row
 //
 // Роль. Строка вещи с размером: галка, значок и имя, размер, когда менялась, права, источник.
-// Вход. SizeRow{Ticked, Icon, Name, Bytes, Time, Access, Source}.
+// Вход. SizeRow{Ticked, Icon, Name, Bytes, Time, Access, Source, Send}.
 // Состояния. found.
 // Инварианты. Галка — кнопка с доступным именем; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка выбирает вещь для действий шапки; нажатие на имя открывает её.
@@ -378,6 +378,7 @@ func (r DueRow) html(m mix) string {
 // Чего нет. Метки источника: источник назван словами.
 type SizeRow struct {
 	Ticked Ticked
+	Send   Send // what pressing the tick sends
 	Icon   Icon
 	Name   []Inline
 	Bytes  string // 240 KB
@@ -390,7 +391,7 @@ type SizeRow struct {
 func (r SizeRow) Render() string { return r.html(nil) }
 
 func (r SizeRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--tickcols") + `>` + r.Ticked.box(plain(r.Name)) +
+	return `<div` + class(m, "tc-row", "tc-row--tickcols") + `>` + r.Ticked.box(plain(r.Name), r.Send) +
 		`<span class="tc-row__title tc-row__name"><svg>` + r.Icon.use() + `</svg><span class="tc-row__file">` + inlines(r.Name) + `</span></span>` +
 		cell(r.Bytes, "tc-row__excerpt", "tc-mono", "tc-row__size") + cell(r.Time, "tc-row__excerpt", "tc-mono", "tc-row__time") +
 		cell(r.Access, "tc-row__cell", "tc-mono", "tc-row__detail") + source(r.Source, "", nil) + `</div>`
@@ -399,7 +400,7 @@ func (r SizeRow) html(m mix) string {
 // SlimRow — tc-row
 //
 // Роль. Узкая строка выбора: галка, метка, что выбрать и что в нём, род.
-// Вход. SlimRow{Ticked, Mark, Title, Inside, Aside}.
+// Вход. SlimRow{Ticked, Mark, Title, Inside, Aside, Send}.
 // Состояния. plain | off.
 // Инварианты. Галка — кнопка с доступным именем; строка печатает фрагмент своего кадра.
 // Поведение. Галка выбирает строку.
@@ -408,6 +409,7 @@ func (r SizeRow) html(m mix) string {
 // Чего нет. Источника и даты.
 type SlimRow struct {
 	Ticked Ticked
+	Send   Send // what pressing the tick sends
 	Mark   Mark
 	Title  string
 	Inside string // what is in it, after the title
@@ -418,13 +420,14 @@ type SlimRow struct {
 func (r SlimRow) Render() string { return r.html(nil) }
 
 func (r SlimRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--slim") + `>` + r.Ticked.box(r.Title) + r.Mark.html(nil) +
+	return `<div` + class(m, "tc-row", "tc-row--slim") + `>` + r.Ticked.box(r.Title, r.Send) + r.Mark.html(nil) +
 		`<span class="tc-row__title">` + esc(r.Title) + ` ` + cell(r.Inside, "tc-row__cell") + `</span>` + cell(r.Aside, "tc-row__cell") + `</div>`
 }
 
 // TickBox is a tick box in front of a phone's row.
 type TickBox struct {
 	Ticked Ticked
+	Send   Send
 }
 
 // PhoneRow — tc-row
@@ -458,7 +461,7 @@ func (r PhoneRow) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-row", "tc-row--phone", is("on", r.On)) + `>`)
 	if r.Pick != nil {
-		s.WriteString(r.Pick.Ticked.box(r.Title, "tc-tickrow__tick--ml2"))
+		s.WriteString(r.Pick.Ticked.box(r.Title, r.Pick.Send, "tc-tickrow__tick--ml2"))
 	} else if r.Mark != nil {
 		s.WriteString(r.Mark.html(nil))
 	}

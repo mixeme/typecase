@@ -12,12 +12,14 @@ var _ = add(
 	shell("title", w.Brand{Title: "Combined calendar"}, "m-phone-1", "tc-brand", 1),
 
 	// tc-search
+	shell("form", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…", Name: "q"}, Action: "/app/find"}, "components-43", "tc-search", 1),
 	shell("plain", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, "shell-1", "tc-search", 1),
 	shell("focus", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}, Focus: true, Variant: w.SearchFull}, "s-find-2", "tc-search", 1),
 	shell("clear", w.Search{Query: w.Query{Value: "ковал", Label: "Search everything…"}, Clear: true}, "s-find-1", "tc-search", 1),
 	shell("variant", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill}, "s-conflict-2", "tc-search", 1),
 
 	// tc-usermenu
+	shell("link", w.UserMenu{Name: "mix", Href: "/app/settings/account"}, "components-43", "tc-usermenu", 1),
 	shell("plain", w.UserMenu{Name: "mix"}, "shell-1", "tc-usermenu", 1),
 	shell("no-arrow", w.UserMenu{Name: "mix", NoArrow: true}, "s-conflict-2", "tc-usermenu", 1),
 	shell("focus", w.UserMenu{Name: "mix", Focus: true}, "account-5", "tc-usermenu", 1),

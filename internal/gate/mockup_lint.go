@@ -360,7 +360,7 @@ var mockupButtonClass = map[string]bool{
 // goes to an address is a link, a check or a segment of a form is a label
 // around its checkbox or radio button.
 var mockupButtonAlso = map[string][]string{
-	"tc-btn": {"a"}, "tc-close": {"a"}, "tc-menu__item": {"a", "label"}, "tc-check": {"label"}, "tc-seg__opt": {"label"},
+	"tc-btn": {"a"}, "tc-close": {"a"}, "tc-menu__item": {"a", "label"}, "tc-check": {"label"}, "tc-seg__opt": {"label"}, "tc-usermenu": {"a"},
 }
 
 func mockupButtonAlsoOK(c, tag string) bool {
@@ -397,7 +397,8 @@ func checkMockupFrameElements(html string) error {
 				if mockupButtonClass[c] && n.tag != "button" && !mockupButtonAlsoOK(c, n.tag) {
 					// a row that holds a control of its own cannot be a button: a
 					// control is never nested in another
-					if c == "tc-menu__item" && n.tag == "div" && (htmlNodeHasDescendantClass(n, "tc-seg") || htmlNodeHasDescendantClass(n, "tc-in")) {
+					// nor is a heading of a menu: a row of words, not a control
+					if c == "tc-menu__item" && n.tag == "div" && (htmlNodeHasDescendantClass(n, "tc-seg") || htmlNodeHasDescendantClass(n, "tc-in") || nodeHasClass(n, "tc-rubric")) {
 						continue
 					}
 					errs = append(errs, fmt.Sprintf("%s: %s is <%s>, want <button>", id, c, n.tag))

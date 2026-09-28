@@ -153,7 +153,7 @@ func (p Pick) html(m mix) string {
 // Query — tc-q
 //
 // Роль. Строка запроса внутри поля поиска или фильтра.
-// Вход. Query{Value, Label}.
+// Вход. Query{Value, Label, Name}.
 // Состояния. нет.
 // Инварианты. Тип поля — search; у строки есть доступное имя; строка печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; Esc очищает, если поле не пусто.
@@ -163,13 +163,14 @@ func (p Pick) html(m mix) string {
 type Query struct {
 	Value string
 	Label string
+	Name  string // what the search sends it as: q
 }
 
 // Render prints the query line.
 func (q Query) Render() string { return q.html(nil) }
 
 func (q Query) html(m mix) string {
-	return `<input` + class(m, "tc-q") + ` type="search"` + attr("value", q.Value) + attr("aria-label", q.Label) + `>`
+	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("aria-label", q.Label) + `>`
 }
 
 // FilterVariant is the drawn size of a filter.
@@ -188,7 +189,7 @@ func (v FilterVariant) class() string {
 // Filter — tc-in
 //
 // Роль. Фильтр списка: значок поиска и строка запроса в одной рамке.
-// Вход. Filter{Query, Waiting, Quiet, Variant, Place}.
+// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action}.
 // Состояния. waiting | quiet.
 // Инварианты. Значок — первый узел поля, строка занимает остаток; фильтр печатает фрагмент своего кадра.
 // Поведение. Сужает список по мере набора; Esc очищает.
@@ -201,6 +202,7 @@ type Filter struct {
 	Quiet   bool // a smaller, dusty icon: a filter inside a sheet
 	Variant FilterVariant
 	Place   Place
+	Action  string // the filter is a form that sends its query there (GET)
 }
 
 // Render prints the filter.
@@ -211,8 +213,11 @@ func (f Filter) html(m mix) string {
 	if f.Quiet {
 		icon = `<svg width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none" class="tc-ico--dusty">`
 	}
-	return `<label` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + `>` + icon +
-		Icon("search").use() + `</svg>` + f.Query.html(nil) + `</label>`
+	inner := icon + Icon("search").use() + `</svg>` + f.Query.html(nil)
+	if f.Action != "" {
+		return `<form` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + attr("action", f.Action) + ` method="get">` + inner + `</form>`
+	}
+	return `<label` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + `>` + inner + `</label>`
 }
 
 // TagInputPart is what a tag field holds: the chosen tags and the text being typed.

@@ -415,3 +415,40 @@ func TestColumnsMenu(t *testing.T) {
 		t.Errorf("after dragging Phone to the top: %q, want phone,birthday,email", dragged)
 	}
 }
+
+// TestSignInOutsideItsForm (task 39): a button under the fields, outside the
+// form, submits it by its ID, and Enter in a field does the same — with no
+// script; the links under the button go to their addresses.
+func TestSignInOutsideItsForm(t *testing.T) {
+	needChrome(t)
+	form := w.Form{ID: "signin", Action: "/login", Fields: []w.Hidden{{Name: "csrf", Value: "1"}}, Items: []w.FormPart{
+		w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Login"}}},
+		w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "x", Label: "Password"}}}}}
+	stack := w.AuthStack{Items: []w.AuthStackPart{form, w.Button{Label: "Sign in", Kind: w.ButtonPrimary, Form: "signin"}},
+		Links: []w.Link{{Text: "Forgotten your password?", Href: "/forgot"}}}
+	body := `<div class="tc-root">` + w.Dialog{Items: []w.DialogPart{stack}}.Render() + `</div>`
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("signin", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	listen := `(() => { window.__sent = []; document.addEventListener("submit", e => { e.preventDefault();
+		window.__sent.push((e.submitter ? e.submitter.textContent : "enter") + ":" + [...new FormData(e.target, e.submitter)].map(p => p.join("=")).join("&")); }, true); return true; })()`
+	var ok bool
+	var sent []string
+	var href string
+	err := h.Run(url, 900, 600,
+		chromedp.Evaluate(listen, &ok),
+		chromedp.Click(`button[form="signin"]`, chromedp.ByQuery),
+		chromedp.Evaluate(`(() => { const i = document.querySelector("input[name=login]"); i.focus();
+			i.dispatchEvent(new KeyboardEvent("keydown", {key: "Enter", bubbles: true})); document.querySelector("form#signin").requestSubmit(); return true; })()`, &ok),
+		chromedp.Evaluate(`window.__sent`, &sent),
+		chromedp.Evaluate(`document.querySelector(".tc-auth__link").getAttribute("href")`, &href),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(sent) < 1 || sent[0] != "Sign in:csrf=1&login=mix&password=x" {
+		t.Errorf("the button outside the form sent %v", sent)
+	}
+	if href != "/forgot" {
+		t.Errorf("the link under the button goes to %q", href)
+	}
+}

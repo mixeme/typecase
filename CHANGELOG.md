@@ -4,6 +4,33 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Breaking
+
+- **`AuthStack.Links` are `[]Link`** — text and address — instead of
+  `[]string`: «Forgotten your password?» goes to `/forgot`.
+- **A menu's heading is a row, not a control**: `RubricItem` prints a `div`
+  with `role="presentation"` (the frames draw it so too).
+
+### Added
+
+- **Meaning for everything that is pressed** (task 39 of Carrel's server).
+  `Form.ID` — a button outside the form (`Button.Form`) submits it, and Enter
+  in a field does the same; `Send` (`Form`, `Name`, `Value`) on every tick
+  box — a submit button that acts at once (a source of the rail, a card's
+  choice) or a checkbox of the form it stands in (rows before a bulk
+  action): `TickRow`, `SizeRow`, `SlimRow`, `TickBox`, `CardPick`, the
+  table's head and picks; `Tick.Send` — a task done without a script;
+  `Search.Action` and `Filter.Action` — forms of GET, `Query.Name`;
+  `UserMenu.Href` — the account's page without a script; `DocRelated.Href`,
+  `DocFile.Href`, `Span.Href` — words in the accent that go somewhere.
+  Frame components-43 draws each once.
+- **The check that finds what still has no meaning**:
+  `TestEveryControlHasMeaning` fills every meaning field of every reference
+  record and reports each button, link, link-like part and field that still
+  sends or leads nowhere, with its frame.
+
 ## typecase/v0.9.0 — 2026-09-29
 
 ### Added

@@ -221,6 +221,7 @@ func (q CardQR) html(mix) string {
 // or a field.
 type CardPick struct {
 	Ticked Ticked
+	Send   Send // what pressing the tick sends
 	Title  string
 	Note   []CardTextPart
 	Aside  string
@@ -228,7 +229,7 @@ type CardPick struct {
 }
 
 func (p CardPick) html(mix) string {
-	s := `<div class="tc-card__pick">` + p.Ticked.box(p.Title, "tc-tickrow__tick--top3") + `<div class="tc-stack__item"><div class="tc-stack__item-title">` + esc(p.Title) +
+	s := `<div class="tc-card__pick">` + p.Ticked.box(p.Title, p.Send, "tc-tickrow__tick--top3") + `<div class="tc-stack__item"><div class="tc-stack__item-title">` + esc(p.Title) +
 		`</div><div class="tc-stack__item-note">` + joined(p.Note) + `</div>`
 	if p.Aside != "" {
 		s += `<div class="tc-stack__item-aside">` + esc(p.Aside) + `</div>`

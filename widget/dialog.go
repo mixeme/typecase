@@ -67,7 +67,7 @@ func (Button) authStackPart() {}
 // them.
 type AuthStack struct {
 	Items []AuthStackPart
-	Links []string
+	Links []Link // under the button: where else to go (Forgotten your password?)
 }
 
 func (a AuthStack) html(mix) string {
@@ -79,7 +79,11 @@ func (a AuthStack) html(mix) string {
 	if len(a.Links) > 0 {
 		s.WriteString(`<div class="tc-auth__links">`)
 		for _, l := range a.Links {
-			s.WriteString(`<span class="tc-auth__link">` + esc(l) + `</span>`)
+			if l.Href != "" {
+				s.WriteString(`<a class="tc-auth__link"` + attr("href", l.Href) + `>` + esc(l.Text) + `</a>`)
+			} else {
+				s.WriteString(`<span class="tc-auth__link">` + esc(l.Text) + `</span>`)
+			}
 		}
 		s.WriteString(`</div>`)
 	}

@@ -36,7 +36,7 @@ func Auth1() Screen {
 								},
 								w.Button{Label: "Sign in", Kind: w.ButtonPrimary},
 							},
-							Links: []string{"Create an account", "Forgotten your password?"},
+							Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}},
 						},
 					},
 					Variant: w.DialogNarrow,

@@ -592,11 +592,11 @@ func (g *gen) tickrow(e *El) string {
 	var f []string
 	els := e.Els()
 	tick := els[0]
-	if tick.Has("is-part") {
-		f = append(f, "Ticked: w.TickedPart")
+	if t := tickedOf(tick); t != "w.TickedOn" {
+		f = append(f, "Ticked: "+t)
 	}
-	if tick.Has("is-off") {
-		f = append(f, "Ticked: w.TickedOff")
+	if s := sendOf(tick); s != "" {
+		f = append(f, "Send: "+s)
 	}
 	for _, v := range allOf(e, []kv{{"is-all", "TickRowAll"}, {"is-root", "TickRowRoot"}, {"is-ext", "TickRowExternal"}}) {
 		f = append(f, "Kind: w."+v)
@@ -1206,7 +1206,11 @@ func (g *gen) dialog(e *El) string {
 				case y.Has("tc-auth__links"):
 					links = nil
 					for _, z := range y.Els() {
-						links = append(links, q(z.Text()))
+						l := "{Text: " + q(z.Text())
+						if h := z.Attr("href"); h != "" {
+							l += ", Href: " + q(h)
+						}
+						links = append(links, l+"}")
 					}
 				case y.Has("tc-form"):
 					its = append(its, g.form(y))
@@ -1214,7 +1218,7 @@ func (g *gen) dialog(e *El) string {
 					its = append(its, g.button(y))
 				}
 			}
-			items = append(items, "w.AuthStack{Items: []w.AuthStackPart{"+join(its, ", ")+"}, Links: []string{"+join(links, ", ")+"}}")
+			items = append(items, "w.AuthStack{Items: []w.AuthStackPart{"+join(its, ", ")+"}, Links: []w.Link{"+join(links, ", ")+"}}")
 		case x.Has("tc-dialog__lede"):
 			items = append(items, "w.Lede{Text: "+q(x.Text())+"}")
 		case x.Has("tc-dialog__split"):
@@ -1326,6 +1330,9 @@ func (g *gen) nav(e *El) string {
 
 func usermenu(e *El) string {
 	f := []string{"Name: " + q(e.OwnText())}
+	if h := e.Attr("href"); h != "" {
+		f = append(f, "Href: "+q(h))
+	}
 	if e.Has("is-focus") {
 		f = append(f, "Focus: true")
 	}
@@ -1345,6 +1352,9 @@ func (g *gen) search(e *El) string {
 	}
 	for _, v := range allOf(e, []kv{{"tc-search--full", "SearchFull"}, {"tc-search--fill180-wauto", "SearchFill"}}) {
 		f = append(f, "Variant: w."+v)
+	}
+	if e.Tag == "form" {
+		f = append(f, "Action: "+q(e.Attr("action")))
 	}
 	return "w.Search{" + join(f, ", ") + "}"
 }

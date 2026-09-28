@@ -71,7 +71,7 @@ func (v SearchVariant) class() string {
 // Search — tc-search
 //
 // Роль. Поиск по всему в верхней полосе: значок и строка запроса.
-// Вход. Search{Query, Focus, Clear, Variant}.
+// Вход. Search{Query, Focus, Clear, Variant, Action}.
 // Состояния. plain | focus | clear | variant.
 // Инварианты. Строка запроса — одна, с доступным именем; ширина — перечисление; поиск печатает фрагмент своего кадра.
 // Поведение. Ввод ищет; Esc очищает запрос и закрывает подсказки.
@@ -83,24 +83,30 @@ type Search struct {
 	Focus   bool
 	Clear   bool // a cross that empties the query
 	Variant SearchVariant
+	Action  string // the search is a form that sends its query there (GET)
 }
 
 // Render prints the search.
 func (s Search) Render() string { return s.html(nil) }
 
 func (s Search) html(m mix) string {
-	out := `<div` + class(m, "tc-search", is("focus", s.Focus), s.Variant.class()) + ` role="search">` +
+	tag := "div"
+	form := ""
+	if s.Action != "" {
+		tag, form = "form", attr("action", s.Action)+` method="get"`
+	}
+	out := `<` + tag + class(m, "tc-search", is("focus", s.Focus), s.Variant.class()) + form + ` role="search">` +
 		`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">` + Icon("search").use() + `</svg>`
 	if s.Clear {
 		out += `<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none">` + Icon("close").use() + `</svg>`
 	}
-	return out + s.Query.html(nil) + `</div>`
+	return out + s.Query.html(nil) + `</` + tag + `>`
 }
 
 // UserMenu — tc-usermenu
 //
 // Роль. Кнопка учётной записи в конце верхней полосы: имя и стрелка меню.
-// Вход. UserMenu{Name, Focus, NoArrow}.
+// Вход. UserMenu{Name, Focus, NoArrow, Href}.
 // Состояния. plain | focus | no-arrow.
 // Инварианты. Имя — текст кнопки; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает меню учётной записи; Esc закрывает его и возвращает фокус кнопке.
@@ -110,18 +116,24 @@ func (s Search) html(m mix) string {
 type UserMenu struct {
 	Name    string
 	Focus   bool
-	NoArrow bool // nothing to open: a screen that stands alone
+	NoArrow bool   // nothing to open: a screen that stands alone
+	Href    string // the account's page: where the button goes without a script
 }
 
 // Render prints the button.
 func (u UserMenu) Render() string { return u.html(nil) }
 
 func (u UserMenu) html(m mix) string {
-	s := `<button` + class(m, "tc-usermenu", is("focus", u.Focus)) + ` type="button">` + esc(u.Name)
+	tag := "button"
+	open := ` type="button"`
+	if u.Href != "" {
+		tag, open = "a", attr("href", u.Href)
+	}
+	s := `<` + tag + class(m, "tc-usermenu", is("focus", u.Focus)) + open + `>` + esc(u.Name)
 	if !u.NoArrow {
 		s += `<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none">` + Icon("chev").use() + `</svg>`
 	}
-	return s + `</button>`
+	return s + `</` + tag + `>`
 }
 
 // Emblem — tc-emblem

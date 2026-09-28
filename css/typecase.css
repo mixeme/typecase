@@ -87,6 +87,9 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-tickrow__tick{display:inline-block;vertical-align:middle;width:11px;height:11px;
   border-radius:2px;background:var(--tc-ink);flex:none}
 .tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
+/* Галка-флажок формы (выбор до действия): состояние — :checked, частичный выбор — класс. */
+input.tc-tickrow__tick{appearance:none;margin:0;cursor:pointer}
+input.tc-tickrow__tick:not(:checked):not(.is-part){background:transparent;border:.5px solid var(--tc-edge)}
 /* Полоска коллекции знает свой размер сама. */
 .tc-mark{display:inline-block;vertical-align:middle;width:3px;height:14px;border-radius:1px;flex:none}
 .tc-tickrow .tc-mark{width:3px;height:14px;border-radius:1px}
