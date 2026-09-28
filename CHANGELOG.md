@@ -4,7 +4,7 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
-## Unreleased
+## typecase/v0.8.0 — 2026-09-28
 
 ### Added
 
