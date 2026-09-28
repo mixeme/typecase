@@ -4,6 +4,34 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## typecase/v0.7.2 — 2026-09-28
+
+### Fixed
+
+- **Date and time fields keep their column on Android.** Mobile Chromium
+  drew `input[type=date|time]` in its own look, wider than its field and with
+  its arrow at the border; such inputs have no system look now and fill their
+  field. Desktop browsers draw them as before.
+- **A narrow form fills its width.** In a container of 640 px and less a
+  form's field groups and its rows of fields and buttons are as wide as the
+  form, instead of as wide as their content and centred — Attach and the
+  form's buttons no longer drift to the middle.
+
+### Mockup
+
+- Frames for the tasks of Carrel's server note of 28.09 (8–25), with the
+  owner's decisions: deleting is one button with no line under it; Attach
+  stands wherever a record is shown; a task has one «All day»; a user's role
+  is one item that switches it; the files head's «⋯» is Print only;
+  publishing a collection lives in Connections only. New frames: the sheet
+  that resets a password, the Related to list, the account's email change
+  with no letter gone, withdrawing a deposited key and the escrow page
+  without a copy or with the scheme off, the copy sheets, a move to another
+  storage, New folder with its name and refusal, From Files and its
+  refusals, a read-only folder's Upload, a connection without a password and
+  its certificate fingerprint, the rewrite sheet for one record, for nothing
+  and its outcome, a public page of one record.
+
 ## typecase/v0.7.1 — 2026-09-27
 
 ### Added
