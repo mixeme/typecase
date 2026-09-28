@@ -1057,6 +1057,8 @@ func (g *gen) doc(e *El) string {
 			items = append(items, "w.DocBullets{Items: [][]w.Inline{"+g.each(k.Els(), g.inl2)+"}}")
 		case k.Has("tc-doc__body"):
 			items = append(items, "w.DocBody{Text: "+q(k.Text())+"}")
+		case k.Has("tc-doc__table"):
+			items = append(items, g.docTable(k))
 		default:
 			stop("doc? " + join(k.Cls(), " "))
 		}
@@ -1066,6 +1068,34 @@ func (g *gen) doc(e *El) string {
 		f = append(f, "Text: true")
 	}
 	return "w.Doc{" + join(f, ", ") + "}"
+}
+
+// docTable is a table in a document's text: its head, its rows, how each
+// column is aligned, and whether its rows keep to one line.
+func (g *gen) docTable(e *El) string {
+	tbl := e.Kid("tc-doc__scroll").Els()[0]
+	head := tbl.Els()[0].Els()[0].Els()
+	var cells, align, rows []string
+	aligned := false
+	for _, th := range head {
+		cells = append(cells, g.inl2(th))
+		a := "w.DocAlignStart"
+		if th.Has("is-center") {
+			a, aligned = "w.DocAlignCenter", true
+		} else if th.Has("is-end") {
+			a, aligned = "w.DocAlignEnd", true
+		}
+		align = append(align, a)
+	}
+	for _, tr := range tbl.Els()[1].Els() {
+		rows = append(rows, "{"+g.each(tr.Els(), g.inl2)+"}")
+	}
+	f := []string{"Head: [][]w.Inline{" + join(cells, ", ") + "}", "Rows: [][][]w.Inline{" + join(rows, ", ") + "}"}
+	if aligned {
+		f = append(f, "Align: []w.DocAlign{"+join(align, ", ")+"}")
+	}
+	f = append(f, "Switch: "+g.child(e.Kid("tc-doc__tablebar").Els()[0]))
+	return "w.DocTable{" + join(f, ", ") + "}"
 }
 
 func (g *gen) docbar(e *El) string {

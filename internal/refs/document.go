@@ -23,6 +23,16 @@ var _ = add(
 	document("read", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop}, "m-phone-7", "tc-prose", 1),
 
 	// tc-doc
+	document("table", w.Doc{Items: []w.DocPart{
+		w.DocTitle{Text: "Сборы в Казань"},
+		w.Prose{Parts: []w.Inline{w.Text("Что купить до четверга и кто за что отвечает.")}, Variant: w.ProseLead},
+		w.DocTable{Head: [][]w.Inline{[]w.Inline{w.Text("Что")}, []w.Inline{w.Text("Кто")}, []w.Inline{w.Text("Когда")}, []w.Inline{w.Text("Сколько")}, []w.Inline{w.Text("Где")}, []w.Inline{w.Text("Статус")}, []w.Inline{w.Text("Заметка")}}, Rows: [][][]w.Inline{{[]w.Inline{w.Text("Чемодан на колёсах, большой")}, []w.Inline{w.Text("Анна")}, []w.Inline{w.Text("12.08")}, []w.Inline{w.Text("4 500")}, []w.Inline{w.Link{Text: "ozon.ru/t/chemodan", Href: "#"}}, []w.Inline{w.Text("заказан")}, []w.Inline{w.Text("синий, не чёрный")}}, {[]w.Inline{w.Text("Билеты до Казани, туда и обратно")}, []w.Inline{w.Strong("Виктор")}, []w.Inline{w.Text("до 10.08")}, []w.Inline{w.Text("11 200")}, []w.Inline{}, []w.Inline{w.Text("ждём")}, []w.Inline{w.Text("поезд, не самолёт")}}, {[]w.Inline{w.Text("Страховка")}, []w.Inline{w.Text("Анна")}, []w.Inline{}, []w.Inline{w.Text("1 350")}, []w.Inline{w.Mono{Text: "alfastrah"}}, []w.Inline{w.Text("куплена")}, []w.Inline{}}}, Align: []w.DocAlign{w.DocAlignStart, w.DocAlignStart, w.DocAlignCenter, w.DocAlignEnd, w.DocAlignStart, w.DocAlignStart, w.DocAlignStart}, Switch: w.Seg{Options: []w.SegOption{{Label: "Wrap"}, {Label: "One line", On: true}}, Variant: w.SegCompactSmall}},
+		w.Prose{Parts: []w.Inline{w.Text("Остальное — на месте.")}, Variant: w.ProseLeadAfter}}}, "s-notes-22", "tc-doc", 1),
+	document("table", w.Doc{Items: []w.DocPart{
+		w.DocTitle{Text: "Сборы в Казань"},
+		w.Prose{Parts: []w.Inline{w.Text("Что купить до четверга и кто за что отвечает.")}, Variant: w.ProseLead},
+		w.DocTable{Head: [][]w.Inline{[]w.Inline{w.Text("Что")}, []w.Inline{w.Text("Кто")}, []w.Inline{w.Text("Когда")}, []w.Inline{w.Text("Сколько")}, []w.Inline{w.Text("Где")}, []w.Inline{w.Text("Статус")}, []w.Inline{w.Text("Заметка")}}, Rows: [][][]w.Inline{{[]w.Inline{w.Text("Чемодан на колёсах, большой")}, []w.Inline{w.Text("Анна")}, []w.Inline{w.Text("12.08")}, []w.Inline{w.Text("4 500")}, []w.Inline{w.Link{Text: "ozon.ru/t/chemodan", Href: "#"}}, []w.Inline{w.Text("заказан")}, []w.Inline{w.Text("синий, не чёрный")}}, {[]w.Inline{w.Text("Билеты до Казани, туда и обратно")}, []w.Inline{w.Strong("Виктор")}, []w.Inline{w.Text("до 10.08")}, []w.Inline{w.Text("11 200")}, []w.Inline{}, []w.Inline{w.Text("ждём")}, []w.Inline{w.Text("поезд, не самолёт")}}, {[]w.Inline{w.Text("Страховка")}, []w.Inline{w.Text("Анна")}, []w.Inline{}, []w.Inline{w.Text("1 350")}, []w.Inline{w.Mono{Text: "alfastrah"}}, []w.Inline{w.Text("куплена")}, []w.Inline{}}}, Align: []w.DocAlign{w.DocAlignStart, w.DocAlignStart, w.DocAlignCenter, w.DocAlignEnd, w.DocAlignStart, w.DocAlignStart, w.DocAlignStart}, Switch: w.Seg{Options: []w.SegOption{{Label: "Wrap", On: true}, {Label: "One line"}}, Variant: w.SegCompactSmall}},
+		w.Prose{Parts: []w.Inline{w.Text("Остальное — на месте.")}, Variant: w.ProseLeadAfter}}}, "s-notes-21", "tc-doc", 1),
 	document("foreign", w.Doc{Items: []w.DocPart{
 		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Label: "Text"},
 		w.DocFields{Items: []w.Field{w.Field{Label: "Notebook", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Записи"}}, Width: w.FieldFlex2_280}, w.Field{Label: "Date", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Date", Mono: true}}, Width: w.FieldFix150}, w.Field{Label: "Time", Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:05", Label: "Time", Mono: true}}, Width: w.FieldFix130}, w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "встречи, релиз", Label: "Tags"}}, Width: w.FieldFlex3_320}, w.Field{Label: "Related to", Parts: []w.FieldPart{w.Drop{Open: true, Trigger: w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
@@ -72,5 +82,5 @@ var _ = add(
 func init() {
 	Widgets = append(Widgets, w.Prose{}, w.Doc{}, w.Docbar{})
 	Parts = append(Parts, w.Link{}, w.DocTitle{}, w.DocSub{}, w.DocTask{}, w.DocTasks{}, w.DocFile{}, w.DocFiles{}, w.DocRelated{},
-		w.DocFields{}, w.DocNote{}, w.DocHeading{}, w.DocBullets{}, w.DocBody{}, w.DraftNote{}, w.DocLayout{}, w.Hero{})
+		w.DocFields{}, w.DocNote{}, w.DocHeading{}, w.DocBullets{}, w.DocBody{}, w.DocTable{}, w.DraftNote{}, w.DocLayout{}, w.Hero{})
 }

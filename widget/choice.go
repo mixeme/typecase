@@ -14,14 +14,15 @@ type SegOption struct {
 type SegVariant int
 
 const (
-	SegDefault    SegVariant = iota
-	SegStart                 // aligned to the start of a form row
-	SegCompact               // 22 px high: inside a row
-	SegStartSmall            // aligned to the start, 22 px, 11.5 px text
+	SegDefault      SegVariant = iota
+	SegStart                   // aligned to the start of a form row
+	SegCompact                 // 22 px high: inside a row
+	SegStartSmall              // aligned to the start, 22 px, 11.5 px text
+	SegCompactSmall            // 22 px, 11.5 px text: over a table in a text
 )
 
 func (v SegVariant) class() string {
-	return [...]string{"", "tc-seg--start", "tc-seg--h22", "tc-seg--start tc-seg--h22 tc-seg--t11-5"}[v]
+	return [...]string{"", "tc-seg--start", "tc-seg--h22", "tc-seg--start tc-seg--h22 tc-seg--t11-5", "tc-seg--h22 tc-seg--t11-5"}[v]
 }
 
 // Seg — tc-seg

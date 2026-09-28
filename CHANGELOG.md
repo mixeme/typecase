@@ -11,6 +11,12 @@ do, not what the authors did.
 - **A menu item that cannot be chosen now.** `MenuItem.Reason` switches the
   item off and says why in its hint — someone a list names but who cannot be
   picked, the role of the last administrator.
+- **A table in a document's text.** `DocTable` prints a Markdown table: a
+  head, rows, each column's alignment (`DocAlign`), bold, links and code in
+  cells. Words wrap between words, never inside one; links and code do not
+  wrap; what does not fit scrolls inside the table. In a container of 640 px
+  and less a Wrap / One line switch stands over it (`DocTableSwitch`,
+  `SegCompactSmall`), and tc.js keeps the rows to one line when asked.
 
 ## typecase/v0.7.2 — 2026-09-28
 

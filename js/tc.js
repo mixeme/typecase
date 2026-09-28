@@ -303,6 +303,9 @@
 			if (o === opt) o.setAttribute("aria-checked", "true");
 			else o.removeAttribute("aria-checked");
 		});
+		// Over a table in a text the switch is Wrap / One line (tc-doc__table).
+		var table = closest(seg, ".tc-doc__table");
+		if (table) table.classList.toggle("is-line", opt !== seg.querySelector(".tc-seg__opt"));
 	}
 
 	function onSegKey(e) {

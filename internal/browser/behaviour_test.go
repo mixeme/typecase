@@ -159,3 +159,46 @@ func TestRailReopensSources(t *testing.T) {
 		}
 	}
 }
+
+// TestDocTableLine: on a narrow screen a table in a text has Wrap / One line
+// over it; One line keeps each row to one line and the table scrolls
+// sideways, Wrap brings the words back. On a wide screen the switch is not
+// there.
+func TestDocTableLine(t *testing.T) {
+	needChrome(t)
+	row := [][]w.Inline{{w.Text("Билеты до Казани, туда и обратно")}, {w.Text("Виктор")}, {w.Text("до 10.08")}, {w.Text("11 200")}, {w.Text("поезд, не самолёт")}}
+	doc := w.Doc{Items: []w.DocPart{w.DocTable{
+		Head: [][]w.Inline{{w.Text("Что")}, {w.Text("Кто")}, {w.Text("Когда")}, {w.Text("Сколько")}, {w.Text("Заметка")}},
+		Rows: [][][]w.Inline{row, row}, Switch: w.DocTableSwitch(false)}}}
+	body := `<div class="tc-root"><div class="tc-main">` + doc.Render() + `</div></div>`
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("doctable", browser.PageHTML(body, flush))
+	state := `(() => { const t = document.querySelector(".tc-doc__table"), s = t.querySelector(".tc-doc__scroll");
+		return [getComputedStyle(t.querySelector(".tc-doc__tablebar")).display !== "none", t.classList.contains("is-line"), s.scrollWidth > s.clientWidth]; })()`
+	var wide, narrow, line, back []bool
+	if err := h.Run(url, 1200, 700, chromedp.Evaluate(state, &wide)); err != nil {
+		t.Fatal(err)
+	}
+	err := h.Run(url, 390, 700,
+		chromedp.Evaluate(state, &narrow),
+		chromedp.Click(`.tc-doc__tablebar .tc-seg__opt:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &line),
+		chromedp.Click(`.tc-doc__tablebar .tc-seg__opt:nth-child(1)`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &back),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if wide[0] {
+		t.Errorf("wide: the switch shows")
+	}
+	if !narrow[0] || narrow[1] || narrow[2] {
+		t.Errorf("narrow: switch %v, one line %v, scrolls %v; want the switch, wrapped, no scroll", narrow[0], narrow[1], narrow[2])
+	}
+	if !line[1] || !line[2] {
+		t.Errorf("One line: one line %v, scrolls %v", line[1], line[2])
+	}
+	if back[1] || back[2] {
+		t.Errorf("Wrap again: one line %v, scrolls %v", back[1], back[2])
+	}
+}

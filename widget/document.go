@@ -206,6 +206,62 @@ type DocBody struct {
 
 func (b DocBody) html(mix) string { return `<div class="tc-doc__body">` + esc(b.Text) + `</div>` }
 
+// DocAlign is how a column of a table in a document's text is aligned.
+type DocAlign int
+
+const (
+	DocAlignStart  DocAlign = iota // the column as written
+	DocAlignCenter                 // «:---:»
+	DocAlignEnd                    // «---:», numbers
+)
+
+func (a DocAlign) class() string { return [...]string{"", "is-center", "is-end"}[a] }
+
+// DocTable is a table in a document's text: a head, rows, how each column is
+// aligned. Words wrap between words, never inside one, and links and code do
+// not wrap at all; what does not fit scrolls inside the table. In a container
+// of 640 px and less Switch stands over it — Wrap / One line — and One line
+// keeps each row to one line.
+type DocTable struct {
+	Head   [][]Inline
+	Rows   [][][]Inline
+	Align  []DocAlign // per column; a missing one is DocAlignStart
+	Switch Seg        // Wrap / One line; its second option on is one line
+}
+
+// DocTableSwitch is the switch over a table: Wrap, or One line when line.
+func DocTableSwitch(line bool) Seg {
+	return Seg{Options: []SegOption{{Label: "Wrap", On: !line}, {Label: "One line", On: line}}, Variant: SegCompactSmall}
+}
+
+func (t DocTable) align(i int) string {
+	if i < len(t.Align) {
+		return t.Align[i].class()
+	}
+	return ""
+}
+
+func (t DocTable) html(mix) string {
+	line := len(t.Switch.Options) > 1 && t.Switch.Options[1].On
+	var s strings.Builder
+	s.WriteString(`<div` + class(nil, "tc-doc__table", is("line", line)) + `>`)
+	s.WriteString(`<div class="tc-doc__tablebar">` + t.Switch.html(nil) + `</div>`)
+	s.WriteString(`<div class="tc-doc__scroll"><table class="tc-doc__grid"><thead><tr>`)
+	for i, c := range t.Head {
+		s.WriteString(`<th` + class(nil, t.align(i)) + `>` + inlines(c) + `</th>`)
+	}
+	s.WriteString(`</tr></thead><tbody>`)
+	for _, r := range t.Rows {
+		s.WriteString(`<tr>`)
+		for i, c := range r {
+			s.WriteString(`<td` + class(nil, t.align(i)) + `>` + inlines(c) + `</td>`)
+		}
+		s.WriteString(`</tr>`)
+	}
+	s.WriteString(`</tbody></table></div></div>`)
+	return s.String()
+}
+
 // DocPart is what a document holds.
 type DocPart interface {
 	part
@@ -224,16 +280,17 @@ func (DocNote) docPart()    {}
 func (DocHeading) docPart() {}
 func (DocBullets) docPart() {}
 func (DocBody) docPart()    {}
+func (DocTable) docPart()   {}
 
 // Doc — tc-doc
 //
 // Роль. Документ: текст для чтения или в правке — заголовок, текст, дела, вложения.
 // Вход. Doc{Items, Text}.
-// Состояния. read | edit | public | text | phone.
+// Состояния. read | edit | public | text | phone | table.
 // Инварианты. Заголовок — первым; дела — галки, а не строки текста с квадратными скобками; документ печатает фрагмент своего кадра.
-// Поведение. Галка отмечает дело прямо в тексте документа.
+// Поведение. Галка отмечает дело прямо в тексте документа; над таблицей в узком контейнере переключатель «Wrap / One line» держит строки таблицы в одну линию.
 // Эталон. кадр `s-notes-2`, фрагмент `.tc-doc`.
-// Содержимое. Заголовок и строка под ним, абзацы, дела, вложения, связанное; в правке — поле заголовка, поля документа, поле текста, примечание; в тексте — подзаголовки, списки, абзацы.
+// Содержимое. Заголовок и строка под ним, абзацы, дела, вложения, связанное; в правке — поле заголовка, поля документа, поле текста, примечание; в тексте — подзаголовки, списки, абзацы, таблицы.
 // Чего нет. Своего меню: действия — в шапке и в полосе правки.
 type Doc struct {
 	Items []DocPart

@@ -449,6 +449,20 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    и три коробки в одном столбце получают три разные ширины. */
 .tc-doc .tc-prose{max-width:none}
 .tc-doc .tc-in{max-width:none;width:100%}
+.tc-doc__table{margin:14px 0 4px}
+.tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
+.tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}
+.tc-doc__grid{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.45}
+.tc-doc__grid th{font-weight:600;text-align:left;vertical-align:bottom;padding:5px 12px 6px 0;border-bottom:1px solid var(--tc-rule)}
+.tc-doc__grid td{vertical-align:top;padding:6px 12px 6px 0;border-bottom:.5px solid var(--tc-hair)}
+.tc-doc__grid :is(th,td):last-child{padding-right:0}
+.tc-doc__grid .is-center{text-align:center}
+.tc-doc__grid .is-end{text-align:right}
+.tc-doc__grid :is(a,.tc-mono){white-space:nowrap}
+.tc-doc__table.is-line :is(th,td){white-space:nowrap}
+@container tcbox (max-width:640px){
+  .tc-doc__tablebar{display:flex}
+}
 .tc-doc__layout.is-measure .tc-doc > *{max-width:78ch}
 .tc-doc__title{font-family:var(--tc-font-serif);font-size:27px;line-height:1.15;font-weight:400}
 .tc-docmeta{border-left:.5px solid var(--tc-rule);padding:16px 18px;display:flex;flex-direction:column;gap:15px;background:var(--tc-surface)}
