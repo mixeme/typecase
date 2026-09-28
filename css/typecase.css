@@ -159,7 +159,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-range{display:flex;align-items:center;gap:8px;flex:none}
 .tc-range__dash{font-style:normal;color:var(--tc-dusty)}
 /* native controls: zero specificity */
-:where(.tc-root) :where(button,input,textarea){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
+:where(.tc-root) :where(button,input,textarea,select,form){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
 :where(.tc-root) :where(button){cursor:pointer;appearance:none}
 :where(.tc-root) :where(input[type=search]){appearance:none;-webkit-appearance:none}
 :where(.tc-root) :where(input[type=search])::-webkit-search-decoration,
@@ -168,7 +168,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 :where(.tc-root) :where(input[type=search])::-webkit-search-results-decoration{display:none;appearance:none}
 :where(.tc-root) ::placeholder{color:inherit;opacity:1}
 :where(.tc-root) :where(textarea){field-sizing:content;resize:none}
-:where(.tc-root) :where(button[role=menuitem]){width:100%}
+:where(.tc-root) :where(button[role=menuitem],a[role=menuitem]){width:100%}
 .tc-root .tc-q{flex:1;min-width:0;min-height:0;overflow:hidden}
 .tc-acts > .tc-drop{flex:none}
 /* действия шапки в два яруса: второй ярус — уточнение к первому (порог под фильтром) */
@@ -182,6 +182,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-btn.is-danger{color:var(--tc-danger);border-color:var(--tc-edge)}
 /* Недоступная кнопка остаётся своего цвета и бледнеет: по цвету видно, что она сделала бы. */
 .tc-btn:disabled{opacity:.45;cursor:default}
+/* Кнопка-ссылка — та же кнопка: адрес вместо действия. Недоступная — без адреса. */
+a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
 /* Заливка — уничтожение; рамка — отвязать. Подпись на заливке — --tc-surface:
    в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
 .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
@@ -201,6 +203,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-seg__opt{padding:0 11px;display:inline-flex;align-items:center;font-size:12.5px;color:var(--tc-muted);border-right:.5px solid var(--tc-hair)}
 .tc-seg__opt:last-child{border-right:0}
 .tc-seg__opt.is-on{background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+/* Сегмент на радиокнопках: выбранный — тот, чья кнопка отмечена. */
+label.tc-seg__opt{position:relative;cursor:pointer}
+.tc-seg__opt:has(> .tc-seg__box:checked){background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+.tc-seg__opt:has(> .tc-seg__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:-2px}
 /* Поле — одна строка; не помещающееся обрезается. Многострочное — .is-area. */
 .tc-in{height:28px;border:.5px solid var(--tc-edge);border-radius:3px;background:var(--tc-surface);padding:0 9px;
   font-size:12.5px;display:flex;align-items:center;color:var(--tc-ink);min-width:0;
@@ -214,6 +220,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
   margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
+/* Выбор списком браузера: та же стрелка, нарисованная фоном, — у select нет ::before и ::after. */
+select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,color-mix(in srgb,currentColor 50%,transparent) 50%),linear-gradient(135deg,color-mix(in srgb,currentColor 50%,transparent) 50%,transparent 50%);background-position:calc(100% - 13px) 50%,calc(100% - 9px) 50%;background-size:4px 4px;background-repeat:no-repeat}
 .tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
 /* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
 .tc-in.is-error{border-color:var(--tc-danger)}
@@ -253,6 +261,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-table td .tc-btn{height:22px}
 .tc-check .tc-tickrow__tick{width:12px;height:12px;border-radius:2px;background:var(--tc-ink);flex:none}
 .tc-check .tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
+/* Отметка с настоящим флажком: флажок невидим, квадрат рисует его состояние — и без сценариев. */
+label.tc-check{position:relative;cursor:pointer}
+.tc-check__box,.tc-seg__box{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.tc-check__box:not(:checked) + .tc-tickrow__tick{background:transparent;border:.5px solid var(--tc-edge)}
+.tc-check__box:focus-visible + .tc-tickrow__tick{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 /* поля формы: ширина по содержимому, не 100% */
 .tc-form{display:flex;flex-wrap:wrap;gap:13px 16px;padding:14px var(--tc-page-gutter);align-items:flex-start}
 .tc-form.is-tight{padding-top:4px}
@@ -449,6 +462,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    и три коробки в одном столбце получают три разные ширины. */
 .tc-doc .tc-prose{max-width:none}
 .tc-doc .tc-in{max-width:none;width:100%}
+/* Форма POST без полей — для кнопок вне формы (атрибут form): её не видно. */
+.tc-post{display:none}
 .tc-doc__table{margin:14px 0 4px}
 .tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
 .tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}

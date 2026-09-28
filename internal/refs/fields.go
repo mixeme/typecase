@@ -38,6 +38,7 @@ var _ = add(
 	form("labelled", field("Email", w.FieldLG, in), "components-10", "tc-field", 4),
 	form("hint", field("", w.FieldAuto, hint(t("Changing your password re-wraps your data key only; saved connections stay readable."))), "account-1", "tc-field", 3),
 	form("hint", field("Saved as", w.FieldW100, in, hint(t("The photo lives inside the card itself, so its size is the card’s size: a square of 512 px at quality 85 keeps a vCard near 200 KB, which servers and phones still accept. Lists are served a smaller copy of the same crop — the original file is not kept anywhere."))), "s-contacts-5", "tc-field", 3),
+	form("checks", w.Field{Parts: []w.FieldPart{w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}}, Gap: 7, OwnLine: true}, "components-38", "tc-field", 4),
 	form("full", w.Field{Label: "Note", Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}}, Width: w.FieldFull}, "s-contacts-3", "tc-field", 22),
 	form("labelled-control", w.Field{Label: " ", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}}, "s-agenda-3", "tc-field", 14),
 	form("labelled-plain", w.Field{Label: "On", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "MO", On: true}, {Label: "TU"}, {Label: "WE"}, {Label: "TH"}, {Label: "FR"}, {Label: "SA"}, {Label: "SU"}}}}}, "s-agenda-3", "tc-field", 17),

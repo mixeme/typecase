@@ -4,11 +4,16 @@
 // module at -root.
 //
 //	go run ./cmd/frame2go s-find-2 ...   # print the screen function of each frame
+//	go run ./cmd/frame2go -self s-find-2 # a Go file that builds outside Typecase
 //	go run ./cmd/frame2go                # rewrite internal/screens
 //	go run ./cmd/frame2go -check         # say which files differ, change nothing
 //
 // internal/screens is its output (go generate). A Carrel screen starts from
-// the printed function: then the frame's data becomes the application's.
+// the -self draft: package draft, the widget import and the helpers it needs,
+// so it builds in the client's module; then the frame's data becomes the
+// application's. Outside Typecase -root is the module's directory:
+//
+//	go run carrel.dev/typecase/cmd/frame2go -self -root "$(go list -m -f '{{.Dir}}' carrel.dev/typecase)" s-find-2
 package main
 
 import (
@@ -25,10 +30,11 @@ import (
 func main() {
 	root := flag.String("root", ".", "the module's root")
 	check := flag.Bool("check", false, "compare with internal/screens instead of writing")
+	self := flag.Bool("self", false, "print each frame as a Go file that builds outside Typecase")
 	flag.Parse()
 	var err error
 	if flag.NArg() > 0 {
-		err = print(*root, flag.Args())
+		err = print(*root, flag.Args(), *self)
 	} else {
 		err = write(*root, *check)
 	}
@@ -39,10 +45,16 @@ func main() {
 }
 
 // print prints the screen function of each frame named.
-func print(root string, frames []string) error {
+func print(root string, frames []string, self bool) error {
 	secs, gaps, err := framegen.Load(root)
 	if err != nil {
 		return err
+	}
+	var refsInputs []byte
+	if self {
+		if refsInputs, err = os.ReadFile(filepath.Join(root, "internal", "refs", "inputs.go")); err != nil {
+			return err
+		}
 	}
 	for _, id := range frames {
 		found := false
@@ -50,6 +62,9 @@ func print(root string, frames []string) error {
 			for _, sc := range s.Screens {
 				if sc.Frame == id {
 					src, err := framegen.Func(sc)
+					if self {
+						src, err = framegen.Draft(sc, string(refsInputs))
+					}
 					if err != nil {
 						return err
 					}

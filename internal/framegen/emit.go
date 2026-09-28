@@ -164,6 +164,37 @@ func Func(sc Screen) (string, error) {
 	return strings.TrimPrefix(string(b), "package screens\n\n"), nil
 }
 
+// Draft is a screen as a Go file of its own that builds outside Typecase: the
+// package draft, the widget import, the frame's function returning what
+// renders, and the helpers it uses (a pointer maker, the notes' text). A
+// client's screen starts from it; refsInputs is internal/refs/inputs.go.
+func Draft(sc Screen, refsInputs string) (string, error) {
+	fn := funcText(sc)
+	fn = strings.Replace(fn, "() Screen {", "() interface{ Render() string } {", 1)
+	fn = strings.ReplaceAll(fn, "faceOf(", "ptr(")
+	buf := []string{
+		"// Drafted by frame2go from frame «" + sc.Caption + "» (" + sc.Frame + ") of the Typecase mockup: the",
+		"// frame's widgets and its data, top to bottom. The data is the frame's; it",
+		"// is to become the application's (docs/guide/screen.md).",
+		"package draft", "", `import w "carrel.dev/typecase/widget"`, "", fn, ""}
+	if strings.Contains(fn, "ptr(") {
+		buf = append(buf, "// ptr is a pointer to a copy of v.", "func ptr[T any](v T) *T { return &v }", "")
+	}
+	src := strings.Join(buf, "\n")
+	if strings.Contains(src, "noteBody") {
+		c := noteBodyConst.FindString(refsInputs)
+		if c == "" {
+			return "", fmt.Errorf("no noteBody in internal/refs/inputs.go")
+		}
+		src += "\n// noteBody is the text of the note being edited in the notes frames.\n" + c + "\n"
+	}
+	b, err := format.Source([]byte(strings.ReplaceAll(src, nbsp, nbspEscape)))
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
+}
+
 // Files is the source of internal/screens, gofmt'ed: a file per mockup
 // section, a function per frame, and routes_list.go with the routes in
 // mockup order. refsInputs is internal/refs/inputs.go, whose noteBody the

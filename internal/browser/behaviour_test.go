@@ -3,6 +3,7 @@ package browser_test
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/chromedp/chromedp"
@@ -200,5 +201,59 @@ func TestDocTableLine(t *testing.T) {
 	}
 	if back[1] || back[2] {
 		t.Errorf("Wrap again: one line %v, scrolls %v", back[1], back[2])
+	}
+}
+
+// TestFormsWithoutScripts (task 29): a form of widgets with names works with
+// no script at all — the check and the segment switch by the browser's own
+// checkbox and radio button and draw their state, the form sends every named
+// field and its hidden CSRF — and a button that is a link looks like the
+// button next to it.
+func TestFormsWithoutScripts(t *testing.T) {
+	needChrome(t)
+	form := w.Form{Action: "/app/settings/account", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Items: []w.FormPart{
+		w.Field{Label: "Week starts on", Parts: []w.FieldPart{w.Pick{Name: "week", Label: "Week starts on", Options: []w.PickOption{{Value: "mon", Label: "Monday", On: true}, {Value: "sun", Label: "Sunday"}}}}},
+		w.Field{Label: "Theme", Parts: []w.FieldPart{w.Seg{Name: "theme", Options: []w.SegOption{{Label: "Auto", Value: "auto", On: true}, {Label: "Dark", Value: "dark"}}}}},
+		w.Field{Parts: []w.FieldPart{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}},
+	}}
+	body := `<div class="tc-root">` + form.Render() +
+		`<div id="pair">` + w.Button{Label: "Import"}.Render() + w.Button{Label: "Import", Href: "/import"}.Render() + `</div></div>`
+	page := strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1)
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("forms", page)
+	state := `(() => {
+		const tick = getComputedStyle(document.querySelector(".tc-check .tc-tickrow__tick")).backgroundColor;
+		const on = [...document.querySelectorAll(".tc-seg__opt")].map(o => getComputedStyle(o).fontWeight);
+		const sent = [...new FormData(document.querySelector("form.tc-form")).entries()].map(e => e.join("=")).join("&");
+		return [tick, on.join(","), sent];
+	})()`
+	look := `(() => {
+		const [b, a] = document.querySelectorAll("#pair .tc-btn"), cb = getComputedStyle(b), ca = getComputedStyle(a);
+		const rb = b.getBoundingClientRect(), ra = a.getBoundingClientRect();
+		return ["height", "fontSize", "color", "backgroundColor", "borderTopWidth", "borderTopColor", "paddingLeft", "display"].filter(k => cb[k] !== ca[k]).concat(Math.abs(rb.width - ra.width) > 0.5 || Math.abs(rb.height - ra.height) > 0.5 ? ["box"] : []);
+	})()`
+	var before, after []string
+	var differ []string
+	err := h.Run(url, 900, 600,
+		chromedp.Evaluate(state, &before),
+		chromedp.Click(`.tc-check`, chromedp.ByQuery),
+		chromedp.Click(`.tc-seg__opt:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &after),
+		chromedp.Evaluate(look, &differ),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if before[0] == after[0] {
+		t.Errorf("the check's tick draws the same before and after a click: %s", before[0])
+	}
+	if before[1] != "600,400" || after[1] != "400,600" {
+		t.Errorf("segment weights before %s, after %s; want 600,400 then 400,600", before[1], after[1])
+	}
+	if want := "csrf=7f3a91de&week=mon&theme=dark&compact=1"; after[2] != want {
+		t.Errorf("the form sends %q, want %q", after[2], want)
+	}
+	if len(differ) > 0 {
+		t.Errorf("the link button differs from the button in %v", differ)
 	}
 }

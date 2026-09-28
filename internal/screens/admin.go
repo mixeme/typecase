@@ -428,7 +428,7 @@ func Admin3() Screen {
 									w.Field{
 										Label: "Public address",
 										Parts: []w.FieldPart{
-											w.Input{Value: "https://carrel.example", Label: "Public address", Mono: true},
+											w.Input{Value: "https://carrel.example", Label: "Public address", Mono: true, ReadOnly: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
 										},
 										Width: w.FieldLG,

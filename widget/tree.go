@@ -49,11 +49,12 @@ type TreeRow struct {
 	Indent      TreeIndent
 	Unavailable bool // cannot be chosen: read-only, already there
 	Trail       TreeTrail
+	Href        string // the node is a link: a folder opens at the address
 }
 
 func (r TreeRow) html(on bool) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + `>`)
+	s.WriteString(`<` + rowTag(r.Href) + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", r.Href) + `>`)
 	switch {
 	case r.Mark != nil:
 		s.WriteString(r.Mark.html(nil))
@@ -68,7 +69,7 @@ func (r TreeRow) html(on bool) string {
 	if r.Trail != nil {
 		s.WriteString(" " + r.Trail.html(mix{"tc-push"}))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + rowTag(r.Href) + `>`)
 	return s.String()
 }
 

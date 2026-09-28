@@ -47,7 +47,7 @@ func (v InputVariant) class() string {
 // Input — tc-in
 //
 // Роль. Поле ввода одной строки: текст, дата, время, поиск, пароль.
-// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place}.
+// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required}.
 // Состояния. value | placeholder | mono | focus | error | disabled | variant.
 // Инварианты. Плейсхолдер выглядит плейсхолдером всегда: is-ph ставит виджет, когда значения нет; род поля — перечисление; у поля есть доступное имя; поле печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется.
@@ -65,6 +65,8 @@ type Input struct {
 	Error       bool
 	Numeric     bool // a phone keyboard shows digits
 	Disabled    bool // switched off by a choice next to it (a password the server does not ask)
+	ReadOnly    bool // shown and sent, not edited
+	Required    bool // the form is not sent without it
 	Variant     InputVariant
 	Place       Place
 }
@@ -76,7 +78,7 @@ func (i Input) html(m mix) string {
 	return `<input` + class(m, "tc-in", is("mono", i.Mono), is("ph", i.Value == "" && i.Placeholder != ""),
 		is("focus", i.Focus), is("error", i.Error), i.Variant.class(), i.Place.class()) +
 		` type="` + i.Kind.attr() + `"` + attr("name", i.Name) + attr("value", i.Value) +
-		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + `>`
+		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + flag("readonly", i.ReadOnly) + flag("required", i.Required) + `>`
 }
 
 // PickVariant is the drawn size of a pick where it is not its column's.
@@ -97,14 +99,19 @@ func (v PickVariant) class() string {
 // Pick — tc-in
 //
 // Роль. Поле со списком: значение выбирают из списка, а не набирают.
-// Вход. Pick{Value, Aside, Unset, Label, Focus, Variant, Place}.
-// Состояния. value | unset | aside | focus | variant.
+// Вход. Pick{Value, Aside, Unset, Label, Focus, Variant, Place, Name, Options}.
+// Состояния. value | unset | aside | focus | variant | select.
 // Инварианты. Стрелку рисует система (is-pick), иначе список неотличим от строки ввода; пустой выбор выглядит плейсхолдером; выбор печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает список под полем; выбор закрывает его, фокус возвращается на поле.
 // Эталон. кадр `components-10`, фрагмент `.tc-in.is-pick`.
 // Содержимое. Приглушённое пояснение после значения.
 // Чего нет. Набора с клавиатуры: чтобы искать, есть фильтр списка.
 type Pick struct {
+	// Name and Options make the pick a list of the browser (select): it
+	// sends the chosen option's value and works without scripts. Value and
+	// Aside are then not drawn — the chosen option is.
+	Name    string
+	Options []PickOption
 	Value   string
 	Aside   *Dim // "as sent" after a time zone
 	Unset   bool // nothing is chosen: the value is a placeholder
@@ -117,7 +124,24 @@ type Pick struct {
 // Render prints the pick.
 func (p Pick) Render() string { return p.html(nil) }
 
+// PickOption is one option of a pick's list.
+type PickOption struct {
+	Value       string
+	Label       string
+	On          bool // chosen
+	Unavailable bool // shown, not chosen: a kind the server does not take
+}
+
 func (p Pick) html(m mix) string {
+	if p.Name != "" {
+		var s strings.Builder
+		s.WriteString(`<select` + class(m, "tc-in", is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
+		for _, o := range p.Options {
+			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + `>` + esc(o.Label) + `</option>`)
+		}
+		s.WriteString(`</select>`)
+		return s.String()
+	}
 	s := `<button` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) +
 		` type="button"` + attr("aria-label", p.Label) + `>` + esc(p.Value)
 	if p.Aside != nil {

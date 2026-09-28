@@ -35,6 +35,9 @@ var _ = add(
 	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "password · 401", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true, Trail: w.Button{Label: "Retry", Small: true}}, "m-phone-2", "tc-tickrow", 7),
 
 	// tc-tree
+	rows("links", w.Tree{Rows: []w.TreeRow{
+		{Icon: "file", Label: "Documents", Href: "/app/files/sftpgo/documents"},
+		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/sftpgo/documents/carrel"}}, On: 2}, "components-39", "tc-tree", 1),
 	rows("new", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
@@ -140,6 +143,7 @@ var _ = add(
 	rows("plain", w.FindRow{Mark: w.Mark{Colour: "#4A6B52"}, Date: "10 Aug", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: []w.Inline{w.Text("attendee · accepted")}, What: "event", Source: "nextcloud · Личный"}, "s-contacts-7", "tc-row", 1),
 	rows("inset", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АБ"}, Title: []w.Inline{w.Text("Артём Белов")}, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор", Source: "nextcloud · Контакты", Inset: true}, "s-dup-1", "tc-row", 1),
 	rows("caption", w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "nextcloud · Работа"}, "s-agenda-1", "tc-row", 2),
+	rows("link", w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Excerpt: "Договорились заморозить ветку в среду…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи", Href: "/app/notes/nextcloud/zapisi/9e31"}, "components-39", "tc-row", 1),
 	rows("on", w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Strong: true, Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи", On: true}, "s-notes-1", "tc-row", 1),
 	rows("plain", w.ExcerptRow{Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Про дорогу до дачи")}, Excerpt: "Съезд после заправки, потом грунтовка два километра…", Tags: []w.RowTag{w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}}, Date: "3 Aug", Source: "nextcloud · Дневник"}, "s-notes-1", "tc-row", 3),
 	rows("found", w.FindRow{Mark: w.Mark{Colour: "#4A6B52"}, Date: "10 Aug", Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Detail: []w.Inline{w.Text("…пишет "), w.Span{Face: w.FaceAccent, Text: "@Анна Ковалёва"}, w.Text(" к вторнику черновик письма…")}, What: "note", Source: "nextcloud · Записи"}, "mentions-2", "tc-row", 4),

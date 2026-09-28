@@ -287,7 +287,7 @@ func Plan2() Screen {
 													Parts: []w.FieldPart{
 														w.Line{
 															Items: []w.LinePart{
-																w.Input{Value: "z3-brick-lamp-9f2", Label: "Password", Mono: true, Variant: w.InputFill},
+																w.Input{Value: "z3-brick-lamp-9f2", Label: "Password", Mono: true, ReadOnly: true, Variant: w.InputFill},
 																w.Button{Label: "Copy", Small: true},
 															},
 															Gap: w.LineGap6,
@@ -315,7 +315,7 @@ func Plan2() Screen {
 													Parts: []w.FieldPart{
 														w.Line{
 															Items: []w.LinePart{
-																w.Input{Value: "q7-otter-fern-41c", Label: "Password", Mono: true, Variant: w.InputFill},
+																w.Input{Value: "q7-otter-fern-41c", Label: "Password", Mono: true, ReadOnly: true, Variant: w.InputFill},
 																w.Button{Label: "Copy", Small: true},
 															},
 															Gap: w.LineGap6,

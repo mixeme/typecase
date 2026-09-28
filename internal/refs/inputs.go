@@ -49,6 +49,7 @@ var _ = add(
 	form("placeholder", w.Input{Placeholder: `E:\Carrel`, Mono: true, Variant: w.Input11Fill, Label: "Folder"}, "m-desktop-3", "tc-in", 1),
 
 	// tc-in as a pick
+	form("select", w.Pick{Name: "week", Options: []w.PickOption{{Value: "mon", Label: "Monday", On: true}, {Value: "sun", Label: "Sunday"}, {Value: "sat", Label: "Saturday", Unavailable: true}}, Label: "Week starts on"}, "components-38", "tc-in", 2),
 	form("value", w.Pick{Value: "Confirmed", Label: "Status"}, "components-10", "tc-in", 5),
 	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where to write"}, "s-notes-5", "tc-in", 1),
 	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12Fill, Label: "Where to write"}, "m-desktop-9", "tc-in", 2),

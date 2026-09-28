@@ -46,6 +46,8 @@ type MenuItem struct {
 	// Reason, when set, switches the item off and says why: someone the
 	// list names but who cannot be chosen now.
 	Reason string
+	// Href makes the item a link: a sheet or a page opens at the address.
+	Href string
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
 	// shown on a phone only, where the item itself is under «⋯».
 	Tertiary bool
@@ -53,9 +55,19 @@ type MenuItem struct {
 
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<button` + class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary)) + ` type="button" role="menuitem"` +
-		attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true")) +
-		attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+	tag := "button"
+	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
+	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
+	if it.Href != "" {
+		tag = "a"
+		if it.Reason != "" {
+			s.WriteString(`<a` + cls + ` role="menuitem"` + checked + attr("title", it.Reason) + ` aria-disabled="true">`)
+		} else {
+			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + `>`)
+		}
+	} else {
+		s.WriteString(`<button` + cls + ` type="button" role="menuitem"` + checked + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+	}
 	if it.Icon != "" {
 		s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 	}
@@ -79,7 +91,7 @@ func (it MenuItem) html(mix) string {
 	if it.Trail != nil {
 		s.WriteString(it.Trail.html(nil))
 	}
-	s.WriteString(`</button>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

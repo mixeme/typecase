@@ -106,7 +106,7 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Short}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Short, Href}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
@@ -124,7 +124,8 @@ type TimeRow struct {
 	On      bool
 	Past    bool // gone by: faded
 	Inset   bool
-	Short   bool // the lead is a time of day only: its column as narrow as the time (search results)
+	Short   bool   // the lead is a time of day only: its column as narrow as the time (search results)
+	Href    string // the row is a link to its record
 }
 
 // Render prints the row.
@@ -132,7 +133,7 @@ func (r TimeRow) Render() string { return r.html(nil) }
 
 func (r TimeRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + `>`)
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + attr("href", r.Href) + `>`)
 	s.WriteString(r.Mark.html(nil))
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))
@@ -143,7 +144,7 @@ func (r TimeRow) html(m mix) string {
 	}
 	s.WriteString(`</span>`)
 	s.WriteString(source(r.Source, "", nil))
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + rowTag(r.Href) + `>`)
 	return s.String()
 }
 
@@ -178,7 +179,7 @@ func (r SkelRow) html(m mix) string {
 // FaceRow — tc-row
 //
 // Роль. Строка человека: аватар, имя, телефон, почта, организация.
-// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset}.
+// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Href}.
 // Состояния. plain | on | strong | badge | inset | found.
 // Инварианты. Колонки строки — её тип: у строки человека есть аватар и нет времени; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает карточку; стрелки ходят по строкам списка.
@@ -198,22 +199,23 @@ type FaceRow struct {
 	SourceBadge *Badge
 	On          bool
 	Inset       bool
+	Href        string // the row is a link to its record
 }
 
 // Render prints the row.
 func (r FaceRow) Render() string { return r.html(nil) }
 
 func (r FaceRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset)) + `>` +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset)) + attr("href", r.Href) + `>` +
 		r.Mark.html(nil) + r.Avatar.html(nil) + title(r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Subtitle, "tc-row__excerpt", "tc-mono", "tc-row__subtitle") + cell(r.Detail, "tc-row__excerpt", "tc-row__detail") +
-		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, "", r.SourceBadge) + `</div>`
+		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, "", r.SourceBadge) + `</` + rowTag(r.Href) + `>`
 }
 
 // FindRow — tc-row
 //
 // Роль. Найденная запись: дата, название, строка с найденным, что это и где лежит.
-// Вход. FindRow{Mark, Date, Title, Detail, What, Source}.
+// Вход. FindRow{Mark, Date, Title, Detail, What, Source, Href}.
 // Состояния. plain | found.
 // Инварианты. Колонки строки — её тип; найденное выделено акцентом внутри строки, а не отдельной колонкой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись.
@@ -227,21 +229,22 @@ type FindRow struct {
 	Detail []Inline
 	What   string // what kind of record it is
 	Source string
+	Href   string // the row is a link to its record
 }
 
 // Render prints the row.
 func (r FindRow) Render() string { return r.html(nil) }
 
 func (r FindRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--find") + `>` + r.Mark.html(nil) + cell(r.Date, "tc-mono", "tc-row__lead") +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--find") + attr("href", r.Href) + `>` + r.Mark.html(nil) + cell(r.Date, "tc-mono", "tc-row__lead") +
 		title(r.Title, false, nil) + `<span class="tc-row__excerpt tc-row__detail">` + inlines(r.Detail) + `</span>` +
-		cell(r.What, "tc-row__cell", "tc-row__caption") + source(r.Source, "", nil) + `</div>`
+		cell(r.What, "tc-row__cell", "tc-row__caption") + source(r.Source, "", nil) + `</` + rowTag(r.Href) + `>`
 }
 
 // LinkedRow — tc-row
 //
 // Роль. Связанная запись в карточке: запись другого рода, где встречается тот же человек.
-// Вход. LinkedRow{Mark, Icon, Title, Detail}.
+// Вход. LinkedRow{Mark, Icon, Title, Detail, Href}.
 // Состояния. plain.
 // Инварианты. Колонки строки — её тип: значок рода записи на месте даты; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись.
@@ -253,22 +256,23 @@ type LinkedRow struct {
 	Icon   Icon
 	Title  string
 	Detail string
+	Href   string // the row is a link to its record
 }
 
 // Render prints the row.
 func (r LinkedRow) Render() string { return r.html(nil) }
 
 func (r LinkedRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--find") + `>` + r.Mark.html(nil) +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--find") + attr("href", r.Href) + `>` + r.Mark.html(nil) +
 		`<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-row__lead">` + r.Icon.use() + `</svg>` +
-		cell(r.Title, "tc-row__title") + cell(r.Detail, "tc-row__cell", "tc-row__detail") + `</div>`
+		cell(r.Title, "tc-row__title") + cell(r.Detail, "tc-row__cell", "tc-row__detail") + `</` + rowTag(r.Href) + `>`
 }
 
 // ExcerptRow — tc-row
 //
 // Роль. Строка текста: название, начало текста, теги, дата, источник.
-// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset}.
-// Состояния. plain | on | badge | inset | found.
+// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Href}.
+// Состояния. plain | on | badge | inset | found | link.
 // Инварианты. Колонки строки — её тип; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает текст; стрелки ходят по строкам списка.
 // Эталон. кадр `s-notes-1`, фрагмент `.tc-row`.
@@ -286,21 +290,22 @@ type ExcerptRow struct {
 	SourceHint string // the sources in full when there are several
 	On         bool
 	Inset      bool
+	Href       string // the row is a link to its record
 }
 
 // Render prints the row.
 func (r ExcerptRow) Render() string { return r.html(nil) }
 
 func (r ExcerptRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset)) + `>` + r.Mark.html(nil) +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset)) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
 		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") + tags(r.Tags) +
-		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil) + `</div>`
+		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil) + `</` + rowTag(r.Href) + `>`
 }
 
 // BriefRow — tc-row
 //
 // Роль. Короткая строка текста в выборе: название, дата, где лежит.
-// Вход. BriefRow{Mark, Title, Date, Where, On}.
+// Вход. BriefRow{Mark, Title, Date, Where, On, Href}.
 // Состояния. plain | on.
 // Инварианты. Колонок три, и это её тип; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает строку.
@@ -313,14 +318,15 @@ type BriefRow struct {
 	Date  Mono
 	Where string
 	On    bool
+	Href  string // the row is a link to its record
 }
 
 // Render prints the row.
 func (r BriefRow) Render() string { return r.html(nil) }
 
 func (r BriefRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), "tc-row--excerpt--cols3-62-148") + `>` + r.Mark.html(nil) +
-		cell(r.Title, "tc-row__title", "is-strong") + r.Date.html(nil) + cell(r.Where, "tc-row__cell", "tc-row__tags") + `</div>`
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), "tc-row--excerpt--cols3-62-148") + attr("href", r.Href) + `>` + r.Mark.html(nil) +
+		cell(r.Title, "tc-row__title", "is-strong") + r.Date.html(nil) + cell(r.Where, "tc-row__cell", "tc-row__tags") + `</` + rowTag(r.Href) + `>`
 }
 
 // DueRow — tc-row
@@ -501,4 +507,12 @@ func (l List) html(m mix) string {
 	}
 	s.WriteString(`</div>`)
 	return s.String()
+}
+
+// rowTag is a row's element: a link when it has an address.
+func rowTag(href string) string {
+	if href != "" {
+		return "a"
+	}
+	return "div"
 }

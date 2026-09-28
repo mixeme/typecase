@@ -73,13 +73,13 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Opens, Place, Secondary, Tertiary}.
-// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Opens, Place, Secondary, Tertiary}.
+// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
 // Эталон. кадр `components-9`, фрагмент `.tc-btn`; формы — в таблице эталонов.
 // Содержимое. Значок, подпись (жирная или уходящая при сужении), моноширинный хвост с текстом после, отметка перед подписью, стрелка.
-// Чего нет. Своего цвета, своих отступов и ссылки вместо действия; причину недоступности кнопка показывает подсказкой, а строкой под рядом — её контейнер.
+// Чего нет. Своего цвета и своих отступов: кнопка-ссылка и кнопка отправки выглядят как любая другая; причину недоступности кнопка показывает подсказкой, а строкой под рядом — её контейнер.
 type Button struct {
 	Label   string
 	Icon    Icon
@@ -98,8 +98,21 @@ type Button struct {
 	Focus   bool   // the drawn keyboard focus of the mockup's states
 	Title   string // the accessible name when there is no label
 	Submit  bool   // submits its form
-	Opens   string // the ID of the sheet (Scrim) the button opens in place
-	Place   Place
+	// Href makes the button a link: pressing it goes to the address (GET).
+	// Disabled, the link has no address.
+	Href string
+	// Form is the ID of a PostForm the button submits from wherever it
+	// stands; the button is a submit button then.
+	Form string
+	// To is the address this submit button sends its form to instead of the
+	// form's own (formaction): «Send invitation» next to «Create link».
+	To string
+	// Name and Value are the pair a submit button adds to what is sent: which
+	// action was pressed.
+	Name  string
+	Value string
+	Opens string // the ID of the sheet (Scrim) the button opens in place
+	Place Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
 	Secondary bool
 	// Tertiary goes under «⋯» on a phone, after the secondary ones.
@@ -123,8 +136,23 @@ func (b Button) html(m mix) string {
 	if b.State == ButtonOff {
 		state = "is-off"
 	}
-	s.WriteString(`<button` + class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary)) +
-		` type="` + typ + `"` + attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) + flag("disabled", b.State == ButtonDisabled) + `>`)
+	tag := "button"
+	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary))
+	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens)
+	if b.Href != "" {
+		tag = "a"
+		if b.State == ButtonDisabled {
+			s.WriteString(`<a` + cls + common + ` aria-disabled="true">`)
+		} else {
+			s.WriteString(`<a` + cls + attr("href", b.Href) + common + `>`)
+		}
+	} else {
+		if b.Form != "" {
+			typ = "submit"
+		}
+		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) +
+			common + flag("disabled", b.State == ButtonDisabled) + `>`)
+	}
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))
 	}
@@ -149,7 +177,7 @@ func (b Button) html(m mix) string {
 	if b.Menu {
 		s.WriteString(`<svg viewBox="0 0 24 24">` + Icon("chev").use() + `</svg>`)
 	}
-	s.WriteString(`</button>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

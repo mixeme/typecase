@@ -422,6 +422,9 @@ func (g *gen) menuItem(k *El) string {
 	if r := k.Attr("title"); r != "" {
 		f = append(f, "Reason: "+q(r))
 	}
+	if h := k.Attr("href"); h != "" {
+		f = append(f, "Href: "+q(h))
+	}
 	return "w.MenuItem{" + join(f, ", ") + "}"
 }
 
@@ -647,6 +650,9 @@ func (g *gen) tree(e *El) string {
 		if r.Has("tc-tree__row--op-55") {
 			x = append(x, "Unavailable: true")
 		}
+		if h := r.Attr("href"); h != "" {
+			x = append(x, "Href: "+q(h))
+		}
 		if t := tr; t != nil {
 			switch {
 			case t.Has("tc-tickrow__meta"):
@@ -709,7 +715,16 @@ func (g *gen) tagsf(e *El, f []string) []string {
 	return f
 }
 
+// row is a row of a list; a row that links to its record has its address.
 func (g *gen) row(e *El) string {
+	s := g.row0(e)
+	if h := e.Attr("href"); h != "" {
+		s = s[:len(s)-1] + ", Href: " + q(h) + "}"
+	}
+	return s
+}
+
+func (g *gen) row0(e *El) string {
 	var f []string
 	on := e.Has("is-on")
 	els := e.Els()

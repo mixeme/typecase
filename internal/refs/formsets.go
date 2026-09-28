@@ -19,6 +19,7 @@ func footItems(items ...w.FormFootPart) []w.FormFootPart {
 // fields, tick row, diagnostics) get their records with those families.
 var _ = add(
 	// tc-fset
+	form("default", w.PostForm{ID: "post-disconnect", Action: "/app/settings/connections/nextcloud/disconnect", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "components-37", "tc-post", 1),
 	form("plain", w.FieldSet{Rubric: rub, Items: fsItems(fld, fld, bt, w.Grow{}, fld, fld, bt, w.Grow{}, bt)}, "s-contacts-3", "tc-fset", 1),
 	form("plain", w.FieldSet{Rubric: rub, Items: fsItems(w.Line{Place: w.Grown})}, "s-agenda-3", "tc-fset", 3),
 	form("lead", w.FieldSet{Rubric: rub, Variant: w.FieldSetLead, Items: fsItems(fld)}, "account-1", "tc-fset", 1),
@@ -26,6 +27,7 @@ var _ = add(
 	form("lead", w.FieldSet{Rubric: rub, Variant: w.FieldSetLead, Items: fsItems(grown, fld)}, "account-2", "tc-fset", 1),
 
 	// tc-form
+	form("action", w.Form{Items: []w.FormPart{w.Field{Label: "Display name", Parts: []w.FieldPart{w.Input{Name: "display", Value: "Mix", Label: "Display name"}}, Width: w.FieldMD}, w.Field{Label: "Week starts on", Parts: []w.FieldPart{w.Pick{Name: "week", Options: []w.PickOption{{Value: "mon", Label: "Monday", On: true}, {Value: "sun", Label: "Sunday"}, {Value: "sat", Label: "Saturday", Unavailable: true}}, Label: "Week starts on"}}, Width: w.FieldSM}, w.Field{Label: "Theme", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "Auto", On: true, Value: "auto"}, {Label: "Light", Value: "light"}, {Label: "Dark", Value: "dark"}}, Name: "theme"}}}, w.Field{Parts: []w.FieldPart{w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}}, Gap: 7, OwnLine: true, Place: w.Grown}, w.Field{Parts: []w.FieldPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Name: "op", Value: "save"}}}}, Action: "/app/settings/account", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Variant: w.FormFlushAll}, "components-38", "tc-form", 1),
 	form("plain", w.Form{Items: formItems(fld, fld, fld, fld, fld, fs, fs, fs, fs, fs)}, "s-agenda-3", "tc-form", 1),
 	form("tight", w.Form{Tight: true, Items: formItems(fld)}, "s-io-5", "tc-form", 1),
 	form("flush", w.Form{Items: []w.FormPart{w.Field{Label: "Label", Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Label"}}, Width: w.FieldMD}, w.Field{Label: "Server URL", Parts: []w.FieldPart{w.Input{Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true, Focus: true}, w.FieldHint{Parts: []w.Inline{w.Mono{Text: ".well-known", Form: w.MonoCode}, w.Text(" is tried first, then the URL exactly as typed — which is the reliable path for Baikal.")}}}, Width: w.FieldFull}, w.Field{Label: "Username", Parts: []w.FieldPart{w.Input{Value: "m.yenuchenko", Label: "Username"}}, Width: w.FieldMD}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Password"}}, Width: w.FieldMD}, w.Field{Label: "Certificate fingerprint", LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}}, Parts: []w.FieldPart{w.Input{Placeholder: "only for a certificate the system does not trust", Label: "Certificate fingerprint", Mono: true}}, Width: w.FieldFull}}, Variant: w.FormFlush}, "s-profile-2", "tc-form", 1),
@@ -49,11 +51,11 @@ var _ = add(
 )
 
 func init() {
-	Widgets = append(Widgets, w.FieldSet{}, w.Form{}, w.FormFoot{})
+	Widgets = append(Widgets, w.FieldSet{}, w.Form{}, w.FormFoot{}, w.PostForm{})
 }
 
 func init() {
-	Parts = append(Parts, w.Text(""), w.Strong(""), w.Hint{}, w.Dot{}, w.Span{}, w.Faced{}, w.Choice{},
+	Parts = append(Parts, w.Text(""), w.Strong(""), w.Hint{}, w.Dot{}, w.Span{}, w.Faced{}, w.Choice{}, w.Hidden{}, w.PickOption{},
 		w.FieldHint{}, w.Swatches{}, w.Zoom{}, w.FieldRow{}, w.Group{}, w.Photo{}, w.FieldGrid{},
 		w.FormCols{}, w.FormColumn{}, w.RubricAside{}, w.RubricCol{})
 }

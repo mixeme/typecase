@@ -31,6 +31,9 @@ func mockupClasslessOK(n *htmlNode) bool {
 		"thead", "tbody", "tfoot", "tr", "th", "td",
 		"dt", "dd", "li", "option", "label":
 		return true
+	case "input":
+		// A hidden field of a form is data, not a drawn element: CSRF, a version.
+		return n.attrs["type"] == "hidden"
 	}
 	return false
 }

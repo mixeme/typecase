@@ -340,7 +340,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-range{display:flex;align-items:center;gap:8px;flex:none}
 .tc-range__dash{font-style:normal;color:var(--tc-dusty)}
 /* native controls: zero specificity */
-:where(.tc-root) :where(button,input,textarea){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
+:where(.tc-root) :where(button,input,textarea,select,form){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
 :where(.tc-root) :where(button){cursor:pointer;appearance:none}
 :where(.tc-root) :where(input[type=search]){appearance:none;-webkit-appearance:none}
 :where(.tc-root) :where(input[type=search])::-webkit-search-decoration,
@@ -349,7 +349,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 :where(.tc-root) :where(input[type=search])::-webkit-search-results-decoration{display:none;appearance:none}
 :where(.tc-root) ::placeholder{color:inherit;opacity:1}
 :where(.tc-root) :where(textarea){field-sizing:content;resize:none}
-:where(.tc-root) :where(button[role=menuitem]){width:100%}
+:where(.tc-root) :where(button[role=menuitem],a[role=menuitem]){width:100%}
 .tc-root .tc-q{flex:1;min-width:0;min-height:0;overflow:hidden}
 .tc-acts > .tc-drop{flex:none}
 /* действия шапки в два яруса: второй ярус — уточнение к первому (порог под фильтром) */
@@ -363,6 +363,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-btn.is-danger{color:var(--tc-danger);border-color:var(--tc-edge)}
 /* Недоступная кнопка остаётся своего цвета и бледнеет: по цвету видно, что она сделала бы. */
 .tc-btn:disabled{opacity:.45;cursor:default}
+/* Кнопка-ссылка — та же кнопка: адрес вместо действия. Недоступная — без адреса. */
+a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
 /* Заливка — уничтожение; рамка — отвязать. Подпись на заливке — --tc-surface:
    в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
 .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}
@@ -382,6 +384,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-seg__opt{padding:0 11px;display:inline-flex;align-items:center;font-size:12.5px;color:var(--tc-muted);border-right:.5px solid var(--tc-hair)}
 .tc-seg__opt:last-child{border-right:0}
 .tc-seg__opt.is-on{background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+/* Сегмент на радиокнопках: выбранный — тот, чья кнопка отмечена. */
+label.tc-seg__opt{position:relative;cursor:pointer}
+.tc-seg__opt:has(> .tc-seg__box:checked){background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+.tc-seg__opt:has(> .tc-seg__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:-2px}
 /* Поле — одна строка; не помещающееся обрезается. Многострочное — .is-area. */
 .tc-in{height:28px;border:.5px solid var(--tc-edge);border-radius:3px;background:var(--tc-surface);padding:0 9px;
   font-size:12.5px;display:flex;align-items:center;color:var(--tc-ink);min-width:0;
@@ -395,6 +401,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
   margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
+/* Выбор списком браузера: та же стрелка, нарисованная фоном, — у select нет ::before и ::after. */
+select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,color-mix(in srgb,currentColor 50%,transparent) 50%),linear-gradient(135deg,color-mix(in srgb,currentColor 50%,transparent) 50%,transparent 50%);background-position:calc(100% - 13px) 50%,calc(100% - 9px) 50%;background-size:4px 4px;background-repeat:no-repeat}
 .tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
 /* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
 .tc-in.is-error{border-color:var(--tc-danger)}
@@ -434,6 +442,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-table td .tc-btn{height:22px}
 .tc-check .tc-tickrow__tick{width:12px;height:12px;border-radius:2px;background:var(--tc-ink);flex:none}
 .tc-check .tc-tickrow__tick.is-off{background:transparent;border:.5px solid var(--tc-edge)}
+/* Отметка с настоящим флажком: флажок невидим, квадрат рисует его состояние — и без сценариев. */
+label.tc-check{position:relative;cursor:pointer}
+.tc-check__box,.tc-seg__box{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.tc-check__box:not(:checked) + .tc-tickrow__tick{background:transparent;border:.5px solid var(--tc-edge)}
+.tc-check__box:focus-visible + .tc-tickrow__tick{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 /* поля формы: ширина по содержимому, не 100% */
 .tc-form{display:flex;flex-wrap:wrap;gap:13px 16px;padding:14px var(--tc-page-gutter);align-items:flex-start}
 .tc-form.is-tight{padding-top:4px}
@@ -630,6 +643,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    и три коробки в одном столбце получают три разные ширины. */
 .tc-doc .tc-prose{max-width:none}
 .tc-doc .tc-in{max-width:none;width:100%}
+/* Форма POST без полей — для кнопок вне формы (атрибут form): её не видно. */
+.tc-post{display:none}
 .tc-doc__table{margin:14px 0 4px}
 .tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
 .tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}
@@ -2616,6 +2631,57 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 </div>
 </div>
 </figure>
+<h4>Формы и ссылки</h4>
+<p>Смысл HTML — данные виджета: адрес, метод, имя и значение. Каждая его форма нарисована здесь один раз, и выглядит так же, как кнопка, поле и строка без него; экранные кадры его не повторяют (решение 28.09.2026, задача сервера 29).</p>
+<figure>
+<div class="frame" data-frame="components-37">
+  <div class="frame-label"><span>Кнопка-ссылка и отправка извне</span><span class="frag">компонент</span><i>a.tc-btn, button[form], form.tc-post</i></div>
+  <div class="tc-root tc-root--on-surface tc-root--wrap tc-root--pad18-20">
+  <button class="tc-btn" type="button">Import</button>
+  <a class="tc-btn" href="/app/contacts/nextcloud/kontakty/import">Import</a>
+  <a class="tc-btn is-primary" href="/app/contacts/nextcloud/kontakty/new"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New contact</a>
+  <a class="tc-btn" title="Nothing to export: the list is empty." aria-disabled="true">Export</a>
+  <button class="tc-btn is-danger" type="submit" form="post-disconnect">Disconnect</button>
+  <form class="tc-post" id="post-disconnect" action="/app/settings/connections/nextcloud/disconnect" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+  </div>
+</div>
+<figcaption><b>Ссылка выглядит как кнопка</b> — первые две неотличимы: одна действует сценарием, другая ведёт по адресу. Недоступная ссылка — без адреса, с причиной в подсказке. <b>Кнопка вне формы</b> отправляет пустую форму по её имени (атрибут <code>form</code>): форма POST с полем CSRF стоит где угодно на странице и не видна, а кнопке не нужна обёртка.</figcaption>
+</figure>
+<figure>
+<div class="frame" data-frame="components-38">
+  <div class="frame-label"><span>Форма с адресом</span><span class="frag">компонент</span><i>form.tc-form, select, радио, флажки</i></div>
+  <div class="tc-root tc-root--on-surface tc-root--pad18-20">
+  <form class="tc-form tc-form--pad0" action="/app/settings/account" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+    <div class="tc-field tc-field--md"><label>Display name</label><input class="tc-in" type="text" name="display" value="Mix" aria-label="Display name"></div>
+    <div class="tc-field tc-field--sm"><label>Week starts on</label><select class="tc-in is-pick" name="week" aria-label="Week starts on"><option value="mon" selected>Monday</option><option value="sun">Sunday</option><option value="sat" disabled>Saturday</option></select></div>
+    <div class="tc-field"><label>Theme</label><span class="tc-seg" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="auto" checked>Auto</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="light">Light</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="dark">Dark</label></span></div>
+    <div class="tc-field is-own-line tc-grow tc-field--gap7"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1" checked><span class="tc-tickrow__tick"></span>Compact rows</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mono" value="1"><span class="tc-tickrow__tick"></span>Monospaced dates</label></div>
+    <div class="tc-field"><button class="tc-btn is-primary" type="submit" name="op" value="save">Save</button></div>
+  </form>
+  </div>
+</div>
+<figcaption><b>Форма — настоящая</b>: адрес, метод и скрытое поле CSRF. Выбор — <code>select</code> браузера с той же стрелкой; выключенный вариант виден, но не выбирается. Сегмент — радиокнопки, отметка — флажок: оба невидимы, а рисует их состояние CSS, поэтому переключаются и без сценариев. Кнопка отправки несёт имя и значение — какое действие нажато.</figcaption>
+</figure>
+<figure>
+<div class="frame" data-frame="components-39">
+  <div class="frame-label"><span>Строка, пункт, узел — ссылкой</span><span class="frag">компонент</span><i>a.tc-row, a.tc-menu__item, a.tc-tree__row</i></div>
+  <div class="tc-root tc-root--on-surface tc-root--pad18-20">
+  <div class="tc-list">
+    <a class="tc-row tc-row--excerpt" href="/app/notes/nextcloud/zapisi/9e31"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__title">Заметка со встречи 10.08</span><span class="tc-row__excerpt">Договорились заморозить ветку в среду…</span><span class="tc-row__cell tc-row__tags"><span class="tc-tag">встречи</span></span><span class="tc-mono tc-row__date">10 Aug</span><span class="tc-row__cell tc-row__source">nextcloud · Записи</span></a>
+  </div>
+  <div class="tc-menu tc-menu--w212">
+    <a class="tc-menu__item" href="/app/collections/rename?c=lichny" role="menuitem"><svg><use href="#i-pencil"/></svg>Rename and colour</a>
+    <a class="tc-menu__item" href="/app/publish?c=lichny" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</a>
+  </div>
+  <div class="tc-tree">
+    <a class="tc-tree__row" href="/app/files/sftpgo/documents"><svg><use href="#i-file"/></svg>Documents</a>
+    <a class="is-on tc-tree__row tc-tree__row--padl22" href="/app/files/sftpgo/documents/carrel"><svg><use href="#i-file"/></svg>carrel</a>
+  </div>
+  </div>
+</div>
+<figcaption>Строка списка, пункт меню и узел дерева, ведущие на адрес, — ссылки, и выглядят как прежде. Строка с кнопкой внутри (отметка задачи) ссылкой не бывает: ссылка на заголовке.</figcaption>
+</figure>
+
 <p><code>.m-close</code> — крестик закрытия: та же кнопка, что в шапке листа и в панели, стоит в ряду с другими действиями. <code>.m-danger-zone</code> — подвал карточки с разрушительным действием: отдельная полоса с волосяной линией сверху, тревожный текст рядом с кнопкой.</p>
 
 <p><b>Счёт разобранного — <code>.m-stats</code>, одна ячейка — <code>.m-stat</code>.</b> Строка над предпросмотром на всех трёх мастерах. Число полужирным; неудачи — <code>is-error</code>, тот же цвет, что у отказавшей строки предпросмотра.</p>

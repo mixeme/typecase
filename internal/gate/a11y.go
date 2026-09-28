@@ -12,7 +12,7 @@ var (
 	ariaLabelRe   = regexp.MustCompile(`aria-label="([^"]*)"`)
 	attrIDRe      = regexp.MustCompile(`\sid="([^"]+)"`)
 	labelTextRe   = regexp.MustCompile(`tc-(?:btn|menu|usermenu|tree|chip)__label">([^<]+)</`)
-	buttonBodyRe  = regexp.MustCompile(`(?is)<button\b[^>]*>(.*)</button>`)
+	buttonBodyRe  = regexp.MustCompile(`(?is)<(?:button|a)\b[^>]*>(.*)</(?:button|a)>`)
 	tagStripRe    = regexp.MustCompile(`<[^>]*>`)
 )
 

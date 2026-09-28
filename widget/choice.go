@@ -8,6 +8,7 @@ type SegOption struct {
 	Icon  Icon
 	On    bool
 	Title string // the accessible name of an option without a label
+	Value string // what the option sends when the switch has a Name
 }
 
 // SegVariant is the drawn size and alignment of a switch.
@@ -28,8 +29,8 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary}.
-// Состояния. default | start | compact | icons.
+// Вход. Seg{Options, Variant, Place, Secondary, Name}.
+// Состояния. default | start | compact | icons | radio.
 // Инварианты. Выбран ровно один вариант; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
 // Эталон. кадр `components-13`, фрагмент `.tc-seg`.
@@ -40,6 +41,9 @@ type Seg struct {
 	Variant   SegVariant
 	Place     Place
 	Secondary bool
+	// Name makes the options radio buttons of a form: the chosen one sends
+	// its Value, and the switch works without scripts.
+	Name string
 }
 
 // Render prints the switch.
@@ -49,6 +53,15 @@ func (g Seg) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup">`)
 	for _, o := range g.Options {
+		if g.Name != "" {
+			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="radio"` + attr("name", g.Name) + attr("value", o.Value) +
+				attr("aria-label", pick(o.Label == "", o.Title)) + flag("checked", o.On) + `>`)
+			if o.Icon != "" {
+				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
+			}
+			s.WriteString(esc(o.Label) + `</label>`)
+			continue
+		}
 		s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="button" role="radio"` +
 			attr("aria-checked", pick(o.On, "true")) + attr("aria-label", pick(o.Label == "", o.Title)) + `>`)
 		if o.Icon != "" {
@@ -87,9 +100,9 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет.
-// Вход. Check{On, Parts, Label, Tertiary}.
-// Состояния. on | off | rich | tertiary.
-// Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью, у неё есть доступное имя; флажок печатает фрагмент своего кадра.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value}.
+// Состояния. on | off | rich | tertiary | box.
+// Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже.
 // Эталон. кадр `components-10`, фрагмент `.tc-check`.
 // Содержимое. Подпись: текст, приглушённое пояснение, моноширинный кусок, бейдж, число внутри фразы, сторона конфликта.
@@ -98,6 +111,10 @@ type Check struct {
 	On    bool
 	Parts []CheckPart
 	Label string // the accessible name when the parts are not plain words
+	// Name makes the check a checkbox of a form: ticked, it sends Value, and
+	// it switches without scripts.
+	Name  string
+	Value string
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool
 }
@@ -107,6 +124,15 @@ func (c Check) Render() string { return c.html(nil) }
 
 func (c Check) html(m mix) string {
 	var s strings.Builder
+	if c.Name != "" {
+		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="checkbox"` + attr("name", c.Name) + attr("value", c.Value) +
+			attr("aria-label", c.Label) + flag("checked", c.On) + `><span class="tc-tickrow__tick"></span>`)
+		for _, p := range c.Parts {
+			s.WriteString(p.html(nil))
+		}
+		s.WriteString(`</label>`)
+		return s.String()
+	}
 	s.WriteString(`<button` + class(m, "tc-check", rank3(c.Tertiary)) + ` type="button" role="checkbox"` + attr("aria-checked", boolText(c.On)) +
 		attr("aria-label", c.Label) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
 	for _, p := range c.Parts {

@@ -128,7 +128,7 @@ func Appearance1() Screen {
 									w.Field{Label: "Time", Parts: []w.FieldPart{w.Pick{Value: "24-hour"}}, Width: w.FieldMD},
 									w.Field{
 										Label: "Time zone",
-										Parts: []w.FieldPart{w.Input{Value: "Europe/Moscow · this instance", Label: "Time zone"}},
+										Parts: []w.FieldPart{w.Input{Value: "Europe/Moscow · this instance", Label: "Time zone", ReadOnly: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{

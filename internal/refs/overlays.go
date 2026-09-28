@@ -8,6 +8,9 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("links", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
+		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
 	overlay("after-rule", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "home", On: true},
 		w.MenuItem{Label: "work"},

@@ -20,6 +20,10 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("post", w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Form: "post-disconnect"}, "components-37", "tc-btn", 5),
+	primitive("link-off", w.Button{Label: "Export", Title: "Nothing to export: the list is empty.", State: w.ButtonDisabled, Href: "#"}, "components-37", "tc-btn", 4),
+	primitive("link-primary", w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary, Href: "/app/contacts/nextcloud/kontakty/new"}, "components-37", "tc-btn", 3),
+	primitive("link", w.Button{Label: "Import", Href: "/app/contacts/nextcloud/kontakty/import"}, "components-37", "tc-btn", 2),
 	primitive("disabled", w.Button{Label: "Rewrite 0 records", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, "s-contacts-20", "tc-btn", 1),
 	primitive("disabled", w.Button{Icon: "plus", Title: "Open a folder to make one in it.", State: w.ButtonDisabled}, "s-files-6", "tc-btn", 3),
 	primitive("disabled", w.Button{Label: "New folder", Icon: "plus", State: w.ButtonDisabled}, "s-files-15", "tc-btn", 2),

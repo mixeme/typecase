@@ -127,11 +127,19 @@ func (g *gen) button1(e *El) string {
 	if e.Has("is-off") {
 		extra = append(extra, "State: w.ButtonOff")
 	}
-	if e.Valued("disabled") {
+	if e.Valued("disabled") || e.Attr("aria-disabled") == "true" {
 		extra = append(extra, "State: w.ButtonDisabled")
 	}
 	if e.Has("is-3rd") {
 		extra = append(extra, "Tertiary: true")
+	}
+	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}} {
+		if v := e.Attr(a.k); v != "" {
+			extra = append(extra, a.v+": "+q(v))
+		}
+	}
+	if e.Tag == "a" && e.Attr("aria-disabled") == "true" {
+		extra = append(extra, `Href: "#"`)
 	}
 	var bs []*El
 	for _, k := range e.Els() {
@@ -256,10 +264,37 @@ func (g *gen) input(x *El) string {
 	if x.HasAttr("disabled") {
 		f = append(f, "Disabled: true")
 	}
+	if x.HasAttr("readonly") {
+		f = append(f, "ReadOnly: true")
+	}
+	if x.HasAttr("required") {
+		f = append(f, "Required: true")
+	}
 	return "w.Input{" + join(f, ", ") + g.ev(x, "InputVariant", "Variant") + placef(x) + "}"
 }
 
 func (g *gen) pick(x *El) string {
+	if x.Tag == "select" {
+		var opts []string
+		for _, o := range x.Els() {
+			o2 := []string{"Value: " + q(o.Attr("value")), "Label: " + q(o.Text())}
+			if o.HasAttr("selected") {
+				o2 = append(o2, "On: true")
+			}
+			if o.HasAttr("disabled") {
+				o2 = append(o2, "Unavailable: true")
+			}
+			opts = append(opts, "{"+join(o2, ", ")+"}")
+		}
+		f := []string{"Name: " + q(x.Attr("name")), "Options: []w.PickOption{" + join(opts, ", ") + "}"}
+		if v := x.Attr("aria-label"); v != "" {
+			f = append(f, "Label: "+q(v))
+		}
+		if x.Has("is-focus") {
+			f = append(f, "Focus: true")
+		}
+		return "w.Pick{" + join(f, ", ") + g.ev(x, "PickVariant", "Variant") + placef(x) + "}"
+	}
 	f := []string{"Value: " + q(x.OwnText())}
 	if d := x.Kid("tc-dim"); d != nil {
 		f = append(f, "Aside: &"+g.dimx(d))
@@ -350,23 +385,36 @@ func (g *gen) area(x *El) string {
 
 func (g *gen) seg(x *El) string {
 	var opts []string
+	name := ""
 	for _, o := range x.Els() {
 		var f []string
+		box := o.Kid("tc-seg__box")
 		if t := o.OwnText(); t != "" {
 			f = append(f, "Label: "+q(t))
 		}
 		if s := svgs(o); len(s) > 0 {
 			f = append(f, "Icon: "+icon(s[0]))
 		}
-		if o.Has("is-on") {
+		if o.Has("is-on") || (box != nil && box.HasAttr("checked")) {
 			f = append(f, "On: true")
 		}
 		if v := o.Attr("aria-label"); v != "" {
 			f = append(f, "Title: "+q(v))
 		}
+		if box != nil {
+			name = box.Attr("name")
+			f = append(f, "Value: "+q(box.Attr("value")))
+			if v := box.Attr("aria-label"); v != "" {
+				f = append(f, "Title: "+q(v))
+			}
+		}
 		opts = append(opts, "{"+join(f, ", ")+"}")
 	}
-	return "w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}" + g.ev(x, "SegVariant", "Variant") + placesec(x) + "}"
+	n := ""
+	if name != "" {
+		n = ", Name: " + q(name)
+	}
+	return "w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}" + g.ev(x, "SegVariant", "Variant") + placesec(x) + n + "}"
 }
 
 func (g *gen) checkPart(k *El) string {
@@ -386,6 +434,7 @@ func (g *gen) checkPart(k *El) string {
 
 func (g *gen) check(x *El) string {
 	tick := x.Kid("tc-tickrow__tick")
+	box := x.Kid("tc-check__box")
 	var parts []string
 	for _, k := range x.Kids {
 		switch v := k.(type) {
@@ -394,13 +443,21 @@ func (g *gen) check(x *El) string {
 				parts = append(parts, t)
 			}
 		case *El:
-			if v != tick {
+			if v != tick && v != box {
 				parts = append(parts, g.checkPart(v))
 			}
 		}
 	}
 	var f []string
-	if tick != nil && !tick.Has("is-off") {
+	if box != nil {
+		if box.HasAttr("checked") {
+			f = append(f, "On: true")
+		}
+		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
+		if v := box.Attr("aria-label"); v != "" {
+			f = append(f, "Label: "+q(v))
+		}
+	} else if tick != nil && !tick.Has("is-off") {
 		f = append(f, "On: true")
 	}
 	f = append(f, "Parts: []w.CheckPart{"+join(parts, ", ")+"}")
@@ -419,7 +476,7 @@ func (g *gen) control(x *El) string {
 	switch {
 	case x.Tag == "input" && x.Has("tc-in"):
 		return g.input(x)
-	case x.Tag == "button" && x.Has("tc-in") && x.Has("is-pick"):
+	case (x.Tag == "button" || x.Tag == "select") && x.Has("tc-in") && x.Has("is-pick"):
 		return g.pick(x)
 	case x.Tag == "label" && x.Has("tc-in"):
 		return g.filter(x)
@@ -521,7 +578,7 @@ func (g *gen) field(k *El) string {
 	var skip *El
 	var lab *El
 	for _, x := range k.Els() {
-		if x.Tag == "label" && !x.Has("tc-in") {
+		if x.Tag == "label" && !x.Has("tc-in") && !x.Has("tc-check") {
 			lab = x
 			break
 		}
@@ -721,7 +778,24 @@ func (g *gen) formPart(k *El) string {
 }
 
 func (g *gen) form(e *El) string {
-	f := []string{"Items: []w.FormPart{" + g.each(e.Els(), g.formPart) + "}"}
+	var items, hidden []*El
+	for _, k := range e.Els() {
+		if k.Tag == "input" && k.Attr("type") == "hidden" {
+			hidden = append(hidden, k)
+		} else {
+			items = append(items, k)
+		}
+	}
+	f := []string{"Items: []w.FormPart{" + g.each(items, g.formPart) + "}"}
+	if a := e.Attr("action"); a != "" {
+		f = append(f, "Action: "+q(a))
+		if m := e.Attr("method"); m != "" && m != "post" {
+			f = append(f, "Method: "+q(m))
+		}
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
+		}
+	}
 	if v := g.en.of(e, "FormVariant"); v != "" {
 		f = append(f, "Variant: "+v)
 	}
@@ -943,4 +1017,22 @@ func (g *gen) listGroup(k *El) string {
 		f = append(f, "Count: &"+g.num(n))
 	}
 	return "w.ListGroup{" + join(f, ", ") + "}"
+}
+
+// hiddens are a form's hidden fields.
+func hiddens(es []*El) string {
+	var out []string
+	for _, h := range es {
+		out = append(out, "{Name: "+q(h.Attr("name"))+", Value: "+q(h.Attr("value"))+"}")
+	}
+	return "[]w.Hidden{" + join(out, ", ") + "}"
+}
+
+// postForm is a form without visible fields that buttons submit by its ID.
+func (g *gen) postForm(e *El) string {
+	f := []string{"ID: " + q(e.Attr("id")), "Action: " + q(e.Attr("action"))}
+	if len(e.Els()) > 0 {
+		f = append(f, "Fields: "+hiddens(e.Els()))
+	}
+	return "w.PostForm{" + join(f, ", ") + "}"
 }

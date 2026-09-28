@@ -350,7 +350,7 @@ func Publish13() Screen {
 						w.Field{
 							Label: "Link",
 							Parts: []w.FieldPart{
-								w.Input{Value: "https://carrel.example/p/7Qm2c8Xv…", Label: "Link", Mono: true},
+								w.Input{Value: "https://carrel.example/p/7Qm2c8Xv…", Label: "Link", Mono: true, ReadOnly: true},
 								w.FieldHint{Parts: []w.Inline{w.Text("Until 2026-09-09.")}},
 							},
 							Width: w.FieldW100,

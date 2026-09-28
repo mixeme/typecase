@@ -4,6 +4,26 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Added
+
+- **Widgets carry the meaning of HTML** (task 29 of Carrel's server, step 1).
+  A button with `Href` is a link, with `Form` it submits a `PostForm` that
+  stands anywhere on the page (a form of hidden fields: CSRF), with `To`,
+  `Name` and `Value` it tells its form where and which action; `Form` with
+  `Action` is a form element with its hidden `Fields`; `Check`, `Seg` and
+  `Pick` with `Name` are a checkbox, radio buttons and a `select` that send
+  their value and switch without scripts; `Input` takes `ReadOnly` and
+  `Required`; rows, menu items and tree rows take `Href`. Each looks as it did:
+  the mockup draws them once (components-37…39) and the CSS matches.
+- **`shape` checks a client's screen against its frame.** `shape.Parse` reads
+  the mockup, `Check(frame, html)` compares the make-up — elements, order,
+  classes and states — and not words or data: a run of rows may be longer or
+  shorter, a link stands for a button, a select for a pick.
+- **`frame2go -self`** prints a frame's draft as a Go file of its own that
+  builds in the client's module with the widget package alone.
+
 ## typecase/v0.7.3 — 2026-09-28
 
 ### Added

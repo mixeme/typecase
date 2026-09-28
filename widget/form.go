@@ -403,8 +403,8 @@ func (v FormVariant) class() string {
 // Form — tc-form
 //
 // Роль. Форма: поля и группы полей, которые переносятся по ширине.
-// Вход. Form{Items, Variant, Tight}.
-// Состояния. plain | tight | flush | column | columns.
+// Вход. Form{Items, Variant, Tight, Action, Method, Fields}.
+// Состояния. plain | tight | flush | column | columns | action.
 // Инварианты. Поля переносятся, а не сжимаются; отступы формы — перечисление; форма печатает фрагмент своего кадра.
 // Поведение. Enter в поле формы отправляет форму.
 // Эталон. кадр `s-agenda-3`, фрагмент `.tc-form`.
@@ -414,6 +414,12 @@ type Form struct {
 	Items   []FormPart
 	Variant FormVariant
 	Tight   bool // the form of a side panel: smaller gaps
+	// Action makes the form a form element that sends its fields there;
+	// Method is "post" (when empty) or "get"; Fields are its hidden fields:
+	// CSRF, the record's version.
+	Action string
+	Method string
+	Fields []Hidden
 }
 
 // Render prints the form.
@@ -421,11 +427,67 @@ func (f Form) Render() string { return f.html(nil) }
 
 func (f Form) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + `>`)
+	tag := "div"
+	if f.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + attr("action", f.Action) + ` method="` + method(f.Method) + `">`)
+		for _, h := range f.Fields {
+			s.WriteString(h.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + `>`)
+	}
 	for _, it := range f.Items {
 		s.WriteString(it.html(nil))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
+	return s.String()
+}
+
+func method(m string) string {
+	if m == "" {
+		return "post"
+	}
+	return strings.ToLower(m)
+}
+
+// Hidden is a hidden field of a form: its name and value go with the form and
+// nothing is drawn — the CSRF token, a record's version.
+type Hidden struct {
+	Name  string
+	Value string
+}
+
+func (h Hidden) html(mix) string {
+	return `<input type="hidden"` + attr("name", h.Name) + attr("value", h.Value) + `>`
+}
+
+// PostForm — tc-post
+//
+// Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).
+// Вход. PostForm{ID, Action, Fields}.
+// Состояния. default.
+// Инварианты. Форму не видно: в ней только скрытые поля; форма печатает фрагмент своего кадра.
+// Поведение. Отправку делает браузер — сценарий не нужен.
+// Эталон. кадр `components-37`, фрагмент `.tc-post`.
+// Содержимое. Скрытые поля.
+// Чего нет. Видимых полей и кнопок: кнопка стоит там, где её место, — в полосе, в строке, в меню.
+type PostForm struct {
+	ID     string
+	Action string
+	Fields []Hidden
+}
+
+// Render prints the form.
+func (f PostForm) Render() string { return f.html(nil) }
+
+func (f PostForm) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post">`)
+	for _, h := range f.Fields {
+		s.WriteString(h.html(nil))
+	}
+	s.WriteString(`</form>`)
 	return s.String()
 }
 
