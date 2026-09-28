@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("link-icon", w.Button{Label: "Sources", Icon: "cal", Href: "#sources-demo"}, "components-41", "tc-btn", 1),
 	primitive("post", w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Form: "post-disconnect"}, "components-37", "tc-btn", 5),
 	primitive("link-off", w.Button{Label: "Export", Title: "Nothing to export: the list is empty.", State: w.ButtonDisabled, Href: "#"}, "components-37", "tc-btn", 4),
 	primitive("link-primary", w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary, Href: "/app/contacts/nextcloud/kontakty/new"}, "components-37", "tc-btn", 3),
@@ -77,6 +78,7 @@ var _ = add(
 	primitive("danger-solid", w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, "m-phone-6", "tc-btn", 5),
 
 	// tc-close
+	primitive("link", w.Close{Label: "Close", Href: "#"}, "components-41", "tc-close", 1),
 	primitive("default", w.Close{Label: "Close the panel"}, "components-33", "tc-close", 1),
 
 	// tc-mark

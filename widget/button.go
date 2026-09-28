@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Opens, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -111,6 +111,10 @@ type Button struct {
 	// action was pressed.
 	Name  string
 	Value string
+	// Adds is the ID of the Template this button adds a row of, in place,
+	// with the library's script; without it the button submits (Name/Value)
+	// and the server answers with one more row.
+	Adds  string
 	Opens string // the ID of the sheet (Scrim) the button opens in place
 	Place Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
@@ -150,7 +154,7 @@ func (b Button) html(m mix) string {
 		if b.Form != "" {
 			typ = "submit"
 		}
-		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) +
+		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) +
 			common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
@@ -184,7 +188,7 @@ func (b Button) html(m mix) string {
 // Close — tc-close
 //
 // Роль. Крестик, который закрывает панель, лист или сообщение.
-// Вход. Close{Label, Place}.
+// Вход. Close{Label, Place, Href}.
 // Состояния. нет.
 // Инварианты. У крестика всегда есть доступное имя — что он закрывает; крестик печатает фрагмент своего кадра.
 // Поведение. Закрывает свой слой; Esc делает то же, фокус возвращается на вызвавший контрол.
@@ -194,12 +198,19 @@ func (b Button) html(m mix) string {
 type Close struct {
 	Label string // what it closes: "Close the panel"
 	Place Place
+	// Href makes the cross a link: "#" closes a sheet opened by its address,
+	// without scripts.
+	Href string
 }
 
 // Render prints the close button.
 func (c Close) Render() string { return c.html(nil) }
 
 func (c Close) html(m mix) string {
+	if c.Href != "" {
+		return `<a` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("href", c.Href) + attr("title", c.Label) + attr("aria-label", c.Label) + `><svg viewBox="0 0 24 24">` +
+			Icon("close").use() + `</svg></a>`
+	}
 	return `<button` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("title", c.Label) + attr("aria-label", c.Label) + ` type="button"><svg viewBox="0 0 24 24">` +
 		Icon("close").use() + `</svg></button>`
 }

@@ -127,6 +127,9 @@ var _ = add(
 		{Icon: "file", Label: "Личное", Indent: w.TreeLevel36}}, On: 4, Variant: w.TreePadded}, "s-mail-6", "tc-tree", 1),
 
 	// tc-list
+	rows("compact", w.List{Rows: []w.ListRow{
+		w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Excerpt: "Договорились заморозить ветку в среду…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи"},
+		w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Договорились заморозить ветку в среду…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи"}}, Compact: true}, "components-41", "tc-list", 1),
 	rows("plain", w.List{Rows: []w.ListRow{
 		w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Strong: true, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Личный"},
 		w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Артём Белов")}, Strong: true, TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "—", Source: "radicale · vps · Команда", On: true}}}, "components-12", "tc-list", 1),

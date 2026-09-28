@@ -268,6 +268,24 @@
 			return;
 		}
 
+		var add = closest(e.target, "[data-tc-add]");
+		if (add) {
+			var tpl = document.getElementById(add.getAttribute("data-tc-add"));
+			if (tpl && tpl.content) {
+				e.preventDefault();
+				addRow(tpl);
+			}
+			return;
+		}
+		// A link to a sheet by its address (#id) opens it in place; without the
+		// script the address opens it (.tc-scrim:target).
+		var hash = closest(e.target, 'a[href^="#"]');
+		var sheet = hash && hash.getAttribute("href").length > 1 ? document.getElementById(hash.getAttribute("href").slice(1)) : null;
+		if (sheet && sheet.classList.contains("tc-scrim")) {
+			e.preventDefault();
+			openLayer(sheet, hash);
+			return;
+		}
 		var opener = closest(e.target, "[data-tc-open]");
 		// The current section of the navigation opens its sources only in the
 		// rail of icons, where they are not in the rail; otherwise it is a link.
@@ -306,6 +324,92 @@
 		// Over a table in a text the switch is Wrap / One line (tc-doc__table).
 		var table = closest(seg, ".tc-doc__table");
 		if (table) table.classList.toggle("is-line", opt !== seg.querySelector(".tc-seg__opt"));
+		if (seg.hasAttribute("data-tc-theme-switch")) {
+			var box = opt.querySelector("input");
+			setTheme((box ? box.value : opt.textContent).trim().toLowerCase());
+		}
+	}
+
+	// The theme's switch keeps the choice in this browser, where theme.js
+	// reads it before the first paint: light or dark, or auto — the system's.
+	function setTheme(v) {
+		try {
+			if (v === "light" || v === "dark") localStorage.setItem("tc-theme", v);
+			else localStorage.removeItem("tc-theme");
+		} catch (e) {}
+		if (v !== "light" && v !== "dark") v = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+		document.documentElement.setAttribute("data-tc-theme", v);
+	}
+
+	// «Add …» adds its template's row above the template: «{n}» in the names
+	// becomes the smallest number the form does not use for that field yet
+	// (FormRow.Template). Without the script the button is a submit, and the
+	// server answers with one more row.
+	function addRow(tpl) {
+		var scope = closest(tpl, "form") || document;
+		var row = tpl.content.cloneNode(true);
+		var named = row.querySelectorAll("[name*='{n}']");
+		var n = 0;
+		var taken = function (k) {
+			return Array.prototype.some.call(named, function (f) {
+				return scope.querySelector('[name="' + f.getAttribute("name").split("{n}").join(String(k)) + '"]');
+			});
+		};
+		while (taken(n)) n++;
+		named.forEach(function (f) {
+			f.setAttribute("name", f.getAttribute("name").split("{n}").join(String(n)));
+		});
+		var first = row.querySelector("input, select, textarea");
+		tpl.parentNode.insertBefore(row, tpl);
+		if (first) first.focus();
+	}
+
+	// A file dragged over the page shows the drop sheet (data-tc-drop); the
+	// drop sends the named form with the file. Import stays a button too.
+	function dropSheet() {
+		return document.querySelector(".tc-scrim[data-tc-drop]");
+	}
+
+	function carriesFiles(e) {
+		return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") >= 0;
+	}
+
+	function onDrag(e) {
+		var sheet = dropSheet();
+		if (!sheet || !carriesFiles(e)) return;
+		e.preventDefault();
+		if (e.type === "dragleave") {
+			if (!e.relatedTarget) hide(sheet);
+			return;
+		}
+		if (e.type === "dragenter" || e.type === "dragover") {
+			show(sheet);
+			return;
+		}
+		hide(sheet);
+		var form = document.getElementById(sheet.getAttribute("data-tc-drop"));
+		var input = form && form.querySelector('input[type="file"]');
+		if (!input || !e.dataTransfer.files.length) return;
+		input.files = e.dataTransfer.files;
+		form.submit();
+	}
+
+	// A check that switches a field of its form off while it is ticked
+	// (data-tc-disables, FormRow.Disables): the field is off and not sent.
+	function syncDisables(box) {
+		var scope = box.form || document;
+		var name = box.getAttribute("data-tc-disables");
+		scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
+			f.disabled = box.checked;
+		});
+	}
+
+	function initDisables(root) {
+		root.querySelectorAll("input[data-tc-disables]").forEach(syncDisables);
+	}
+
+	function onChange(e) {
+		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 	}
 
 	function onSegKey(e) {
@@ -339,10 +443,15 @@
 		initDynamic(root);
 		initMenus(root);
 		initLayers(root);
+		initDisables(root);
 		layoutUpdates();
 	}
 
 	document.addEventListener("click", onClick);
+	document.addEventListener("change", onChange);
+	["dragenter", "dragover", "dragleave", "drop"].forEach(function (t) {
+		document.addEventListener(t, onDrag);
+	});
 	document.addEventListener("keydown", onKeydown);
 	if (typeof ResizeObserver !== "undefined") {
 		var ro = new ResizeObserver(function () {

@@ -475,6 +475,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row{display:grid;align-items:center;gap:12px;padding-left:var(--tc-page-gutter);padding-right:var(--tc-page-gutter);
   min-height:38px;border-bottom:.5px solid var(--tc-hair)}
 .tc-row.is-on{background:var(--tc-card)}
+/* Плотные строки (Compact rows, решение 28.09.2026): 30 px вместо 38; на телефоне плотность молчит. */
+.tc-list.is-compact .tc-row{min-height:30px}
 .tc-row .tc-mark{width:3px;height:22px;border-radius:1px}
 .tc-row .tc-row__title{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* Значок и имя файла — одна строка: .tc-root svg{display:block} иначе ставит значок над именем. */
@@ -603,6 +605,9 @@ label.tc-check{position:relative;cursor:pointer}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 /* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */
+/* Лист открывается и по адресу (#id) — без сценариев: ссылка на него, крестик — ссылка «#». */
+.tc-scrim[hidden]{display:none}
+.tc-scrim[hidden]:target{display:flex}
 .tc-scrim{position:absolute;inset:0;z-index:7;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
@@ -925,8 +930,13 @@ label.tc-check{position:relative;cursor:pointer}
 @container tcbox (max-width:460px){
   .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0;font-size:0;gap:0}
 }
+/* Поле под пальцем — 16 px: при меньшем кегле телефон увеличивает страницу, когда встают в поле (решение 28.09.2026). */
+@media (pointer:coarse){
+  .tc-in,.tc-q{font-size:16px}
+}
 @container style(--tc-shell-mode: drawer){
   .tc-row{min-height:52px;gap:10px}
+  .tc-list.is-compact .tc-row{min-height:52px}
   .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
   .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
   .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
@@ -2650,9 +2660,10 @@ label.tc-check{position:relative;cursor:pointer}
   <a class="tc-btn" title="Nothing to export: the list is empty." aria-disabled="true">Export</a>
   <button class="tc-btn is-danger" type="submit" form="post-disconnect">Disconnect</button>
   <form class="tc-post" id="post-disconnect" action="/app/settings/connections/nextcloud/disconnect" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+  <form class="tc-post" id="post-import" action="/app/contacts/nextcloud/kontakty/import" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"><input type="file" name="file" aria-label="File"></form>
   </div>
 </div>
-<figcaption><b>Ссылка выглядит как кнопка</b> — первые две неотличимы: одна действует сценарием, другая ведёт по адресу. Недоступная ссылка — без адреса, с причиной в подсказке. <b>Кнопка вне формы</b> отправляет пустую форму по её имени (атрибут <code>form</code>): форма POST с полем CSRF стоит где угодно на странице и не видна, а кнопке не нужна обёртка.</figcaption>
+<figcaption><b>Ссылка выглядит как кнопка</b> — первые две неотличимы: одна действует сценарием, другая ведёт по адресу. Недоступная ссылка — без адреса, с причиной в подсказке. <b>Кнопка вне формы</b> отправляет пустую форму по её имени (атрибут <code>form</code>): форма POST с полем CSRF стоит где угодно на странице и не видна, а кнопке не нужна обёртка. Форма с файловым полем — та, которую отправляет бросок файла на список (лист «Drop to import», <code>data-tc-drop</code>).</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="components-38">
@@ -2661,13 +2672,22 @@ label.tc-check{position:relative;cursor:pointer}
   <form class="tc-form tc-form--pad0" action="/app/settings/account" method="post"><input type="hidden" name="csrf" value="7f3a91de">
     <div class="tc-field tc-field--md"><label>Display name</label><input class="tc-in" type="text" name="display" value="Mix" aria-label="Display name"></div>
     <div class="tc-field tc-field--sm"><label>Week starts on</label><select class="tc-in is-pick" name="week" aria-label="Week starts on"><option value="mon" selected>Monday</option><option value="sun">Sunday</option><option value="sat" disabled>Saturday</option></select></div>
-    <div class="tc-field"><label>Theme</label><span class="tc-seg" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="auto" checked>Auto</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="light">Light</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="dark">Dark</label></span></div>
+    <div class="tc-field"><label>Theme</label><span class="tc-seg" role="radiogroup" data-tc-theme-switch><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="auto" checked>Auto</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="light">Light</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="dark">Dark</label></span></div>
     <div class="tc-field is-own-line tc-grow tc-field--gap7"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1" checked><span class="tc-tickrow__tick"></span>Compact rows</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mono" value="1"><span class="tc-tickrow__tick"></span>Monospaced dates</label></div>
+    <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled></div>
+    <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="nopass" value="1" checked data-tc-disables="password"><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
+    <div class="tc-fset">
+      <div class="tc-rubric">Phone numbers</div>
+      <div class="tc-field tc-field--md"><label>Number</label><input class="tc-in is-mono" type="text" name="tel.0" value="+7 912 445-10-88" aria-label="Number"></div>
+      <template id="tpl-tel"><div class="tc-field tc-field--md"><label>Number</label><input class="tc-in is-mono" type="text" name="tel.{n}" aria-label="Number"></div></template>
+      <div class="tc-grow"></div>
+      <button class="tc-btn is-sm" type="submit" name="add" value="tel" data-tc-add="tpl-tel"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add phone</button>
+    </div>
     <div class="tc-field"><button class="tc-btn is-primary" type="submit" name="op" value="save">Save</button></div>
   </form>
   </div>
 </div>
-<figcaption><b>Форма — настоящая</b>: адрес, метод и скрытое поле CSRF. Выбор — <code>select</code> браузера с той же стрелкой; выключенный вариант виден, но не выбирается. Сегмент — радиокнопки, отметка — флажок: оба невидимы, а рисует их состояние CSS, поэтому переключаются и без сценариев. Кнопка отправки несёт имя и значение — какое действие нажато.</figcaption>
+<figcaption><b>Форма — настоящая</b>: адрес, метод и скрытое поле CSRF. Выбор — <code>select</code> браузера с той же стрелкой; выключенный вариант виден, но не выбирается. Сегмент — радиокнопки, отметка — флажок: оба невидимы, а рисует их состояние CSS, поэтому переключаются и без сценариев. Кнопка отправки несёт имя и значение — какое действие нажато. Отметка может выключать поле формы по его имени (<code>data-tc-disables</code>): стоит — поле выключено и не уходит; сценарий библиотеки переключает его на месте, без сценария — сервер при ответе. Сегмент темы (<code>data-tc-theme-switch</code>) пишет выбор в этот браузер: Auto — как в системе. <b>«Add phone»</b> — кнопка отправки «ещё строка»: без сценария сервер отвечает формой с ещё одной пустой строкой; сценарий добавляет строку на месте по шаблону (<code>template</code>), заменяя <code>{n}</code> в имени наименьшим свободным числом.</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="components-39">
@@ -2708,6 +2728,27 @@ label.tc-check{position:relative;cursor:pointer}
 </div>
 <figcaption><b>Картинка стоит на месте, которое кадры рисуют цветом</b>, и заполняет его, обрезаясь по краям (object-fit: cover): аватар строки и карточки, миниатюра файла, фотография в поле контакта, кадрирование, код устройства. Пока картинки нет или она не пришла — видно место, как на всех остальных кадрах. Аватар — без подписи для чтеца: имя стоит рядом; у миниатюры — имя файла; код — «QR».</figcaption>
 </figure>
+
+<figure>
+<div class="frame" data-frame="components-41">
+  <div class="frame-label"><span>Плотные строки и лист по адресу</span><span class="frag">компонент</span><i>tc-list.is-compact, .tc-scrim:target</i></div>
+  <div class="tc-root tc-root--on-surface tc-root--top tc-root--pad18-20">
+  <div class="tc-list is-compact">
+    <div class="tc-row tc-row--excerpt"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__title">Заметка со встречи 10.08</span><span class="tc-row__excerpt">Договорились заморозить ветку в среду…</span><span class="tc-row__cell tc-row__tags"><span class="tc-tag">встречи</span></span><span class="tc-mono tc-row__date">10 Aug</span><span class="tc-row__cell tc-row__source">nextcloud · Записи</span></div>
+    <div class="tc-row tc-row--excerpt"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__title">Что почитать про CRDT</span><span class="tc-row__excerpt">Договорились заморозить ветку в среду…</span><span class="tc-row__cell tc-row__tags"><span class="tc-tag">встречи</span></span><span class="tc-mono tc-row__date">10 Aug</span><span class="tc-row__cell tc-row__source">nextcloud · Записи</span></div>
+  </div>
+  <div class="tc-bar"><a class="tc-btn" href="#sources-demo"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg>Sources</a></div>
+  <div class="tc-scrim" id="sources-demo" hidden>
+      <div class="tc-sheet">
+        <div class="tc-sheet__head"><b class="tc-sheet__title">Sources</b><a class="tc-btn tc-close" href="#" title="Close" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></a></div>
+        <div class="tc-sheet__body"><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The rail’s sources, on a narrow screen.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Плотные строки</b> — отметка «Compact rows» у списка: строка 30 px вместо 38, остальное как есть; на телефоне плотность молчит — строка под палец. <b>Лист, который открывается по адресу:</b> кнопка — ссылка на <code>#id</code> листа, крестик — ссылка «#», и без сценариев лист открывается и закрывается адресом. Так на узком экране открываются источники рейла (U-8). Со сценарием то же нажатие открывает лист на месте, как раньше.</figcaption>
+</figure>
+
 
 <p><code>.m-close</code> — крестик закрытия: та же кнопка, что в шапке листа и в панели, стоит в ряду с другими действиями. <code>.m-danger-zone</code> — подвал карточки с разрушительным действием: отдельная полоса с волосяной линией сверху, тревожный текст рядом с кнопкой.</p>
 
@@ -8030,7 +8071,7 @@ Read  2 min ago</div>
           </div>
         </div>
       </div>
-      <div class="tc-scrim tc-scrim--padt38">
+      <div class="tc-scrim tc-scrim--padt38" data-tc-drop="post-import">
         <div class="tc-empty tc-empty--drop">
           <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
           <b class="tc-empty__lead">Drop to import</b>

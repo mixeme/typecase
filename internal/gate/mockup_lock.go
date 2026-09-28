@@ -31,9 +31,13 @@ func mockupClasslessOK(n *htmlNode) bool {
 		"thead", "tbody", "tfoot", "tr", "th", "td",
 		"dt", "dd", "li", "option", "label":
 		return true
+	case "template":
+		// The row a button «Add …» adds: not drawn.
+		return true
 	case "input":
-		// A hidden field of a form is data, not a drawn element: CSRF, a version.
-		return n.attrs["type"] == "hidden"
+		// A hidden field of a form is data, not a drawn element: CSRF, a
+		// version; a file field is the form's that a dropped file goes with.
+		return n.attrs["type"] == "hidden" || n.attrs["type"] == "file"
 	}
 	return false
 }

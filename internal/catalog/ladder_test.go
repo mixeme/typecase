@@ -36,7 +36,7 @@ func TestFramesBesideWidgets(t *testing.T) {
 			t.Errorf("%s (%s): its block %q has no widget in the catalog", f.ID, f.Caption, f.Block)
 		}
 	}
-	if n != 152 {
-		t.Errorf("%d component and fragment frames, want 152 (Р-16; the 5 candidates are skipped)", n)
+	if n != 153 {
+		t.Errorf("%d component and fragment frames, want 153 (Р-16; the 5 candidates are skipped)", n)
 	}
 }

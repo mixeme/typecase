@@ -294,6 +294,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row{display:grid;align-items:center;gap:12px;padding-left:var(--tc-page-gutter);padding-right:var(--tc-page-gutter);
   min-height:38px;border-bottom:.5px solid var(--tc-hair)}
 .tc-row.is-on{background:var(--tc-card)}
+/* Плотные строки (Compact rows, решение 28.09.2026): 30 px вместо 38; на телефоне плотность молчит. */
+.tc-list.is-compact .tc-row{min-height:30px}
 .tc-row .tc-mark{width:3px;height:22px;border-radius:1px}
 .tc-row .tc-row__title{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* Значок и имя файла — одна строка: .tc-root svg{display:block} иначе ставит значок над именем. */
@@ -422,6 +424,9 @@ label.tc-check{position:relative;cursor:pointer}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 /* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */
+/* Лист открывается и по адресу (#id) — без сценариев: ссылка на него, крестик — ссылка «#». */
+.tc-scrim[hidden]{display:none}
+.tc-scrim[hidden]:target{display:flex}
 .tc-scrim{position:absolute;inset:0;z-index:7;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}
 .tc-sheet{width:560px;max-width:92%;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:5px;display:flex;flex-direction:column;position:relative;container:tcbox / inline-size}
@@ -744,8 +749,13 @@ label.tc-check{position:relative;cursor:pointer}
 @container tcbox (max-width:460px){
   .tc-top .tc-btn:has(> svg:only-child){width:38px;padding:0;font-size:0;gap:0}
 }
+/* Поле под пальцем — 16 px: при меньшем кегле телефон увеличивает страницу, когда встают в поле (решение 28.09.2026). */
+@media (pointer:coarse){
+  .tc-in,.tc-q{font-size:16px}
+}
 @container style(--tc-shell-mode: drawer){
   .tc-row{min-height:52px;gap:10px}
+  .tc-list.is-compact .tc-row{min-height:52px}
   .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
   .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
   .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}

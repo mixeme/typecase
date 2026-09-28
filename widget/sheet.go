@@ -327,7 +327,7 @@ func (p ScrimPad) class() string {
 // Scrim — tc-scrim
 //
 // Роль. Затемнение страницы под листом: страница видна, но недоступна, пока лист открыт.
-// Вход. Scrim{Content, Pad, ID, Closed}.
+// Вход. Scrim{Content, Pad, ID, Closed, Drop}.
 // Состояния. plain | pad.
 // Инварианты. На затемнении одно: лист или пустое состояние; отступ сверху — перечисление; затемнение печатает фрагмент своего кадра.
 // Поведение. Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте.
@@ -339,13 +339,17 @@ type Scrim struct {
 	Pad     ScrimPad
 	ID      string // what a button's Opens names
 	Closed  bool   // printed closed, for a button to open in place
+	// Drop is the ID of the PostForm with a file field a dropped file is sent
+	// with: the library's script shows the scrim while a file is dragged over
+	// the page and sends the form on the drop.
+	Drop string
 }
 
 // Render prints the scrim.
 func (c Scrim) Render() string { return c.html(nil) }
 
 func (c Scrim) html(m mix) string {
-	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + attr("id", c.ID) + flag("hidden", c.Closed) + `>`
+	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + attr("id", c.ID) + flag("hidden", c.Closed) + attr("data-tc-drop", c.Drop) + `>`
 	if c.Content != nil {
 		s += c.Content.html(nil)
 	}

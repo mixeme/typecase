@@ -187,12 +187,23 @@ func CheckVerifiable(p ModulePaths, catalog []CatalogEntry) error {
 }
 
 // CheckUniqueIDs rejects duplicate id attributes in catalog HTML.
+var templateID = regexp.MustCompile(`<template\s+id="([^"]+)"`)
+
 func CheckUniqueIDs(catalog []CatalogEntry) error {
 	seen := make(map[string]string)
 	var dups []string
 	for _, e := range catalog {
+		templates := map[string]bool{}
+		for _, m := range templateID.FindAllStringSubmatch(e.HTML, -1) {
+			templates[m[1]] = true
+		}
 		for _, m := range idAttr.FindAllStringSubmatch(e.HTML, -1) {
 			id := m[1]
+			// A template (the row «Add …» adds) is the same rows wherever it
+			// stands: the catalog shows a set of fields alone and in its form.
+			if templates[id] {
+				continue
+			}
 			if prev, ok := seen[id]; ok {
 				dups = append(dups, id+" in "+prev+" and "+e.Widget+"/"+e.State)
 				continue

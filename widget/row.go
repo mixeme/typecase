@@ -484,16 +484,17 @@ func (r PhoneRow) html(m mix) string {
 // List — tc-list
 //
 // Роль. Список строк: записи раздела, найденное, выбор в листе.
-// Вход. List{Rows, Inset}.
-// Состояния. plain | inset.
+// Вход. List{Rows, Inset, Compact}.
+// Состояния. plain | inset | compact.
 // Инварианты. В списке только строки; список печатает фрагмент своего кадра.
 // Поведение. Стрелки ходят по строкам; Enter открывает строку.
 // Эталон. кадр `components-12`, фрагмент `.tc-list`.
 // Содержимое. Строки любого из типов колонок.
 // Чего нет. Заголовков групп и пустого состояния: они стоят рядом со списком.
 type List struct {
-	Rows  []ListRow
-	Inset bool // set in a card: out to its edges
+	Rows    []ListRow
+	Inset   bool // set in a card: out to its edges
+	Compact bool // rows of 30 px instead of 38 (Compact rows); a phone keeps its own
 }
 
 // Render prints the list.
@@ -501,7 +502,7 @@ func (l List) Render() string { return l.html(nil) }
 
 func (l List) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-list", pick(l.Inset, "tc-list--mx-14")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-list", is("compact", l.Compact), pick(l.Inset, "tc-list--mx-14")) + `>`)
 	for _, r := range l.Rows {
 		s.WriteString(r.html(nil))
 	}

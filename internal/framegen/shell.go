@@ -891,6 +891,9 @@ func (g *gen) list(e *El) string {
 	if e.Has("tc-list--mx-14") {
 		f = append(f, "Inset: true")
 	}
+	if e.Has("is-compact") {
+		f = append(f, "Compact: true")
+	}
 	return "w.List{" + join(f, ", ") + "}"
 }
 
@@ -1091,14 +1094,29 @@ func (g *gen) scrim(e *El) string {
 		} else if e.Has("tc-scrim--padt26") {
 			pad = ", Pad: w.ScrimPad26"
 		}
-		return "w.Scrim{Content: " + g.anyblock(e.Els()[0]) + pad + "}"
+		return "w.Scrim{Content: " + g.anyblock(e.Els()[0]) + pad + scrimAttrs(e) + "}"
 	}
 	pad := ""
 	for _, v := range allOf(e, []kv{{"tc-scrim--padt26", "ScrimPad26"}, {"tc-scrim--padt38", "ScrimPad38"}}) {
 		pad = ", Pad: w." + v
 	}
 	content := tryWait(func() string { return g.sheet(s) }, `w.Sheet{Title: "Sheet"}`)
-	return "w.Scrim{Content: " + content + pad + "}"
+	return "w.Scrim{Content: " + content + pad + scrimAttrs(e) + "}"
+}
+
+// scrimAttrs are a scrim's name, its closed state and the form a drop sends.
+func scrimAttrs(e *El) string {
+	s := ""
+	if v := e.Attr("id"); v != "" {
+		s += ", ID: " + q(v)
+	}
+	if e.HasAttr("hidden") {
+		s += ", Closed: true"
+	}
+	if v := e.Attr("data-tc-drop"); v != "" {
+		s += ", Drop: " + q(v)
+	}
+	return s
 }
 
 func (g *gen) overlay(e *El) string {

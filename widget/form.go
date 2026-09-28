@@ -253,8 +253,27 @@ type FieldSetPart interface {
 	fieldSetPart()
 }
 
-func (Field) fieldSetPart()     {}
-func (Button) fieldSetPart()    {}
+func (Field) fieldSetPart()    {}
+func (Button) fieldSetPart()   {}
+func (Template) fieldSetPart() {}
+
+// Template is the row a button «Add …» adds (Button.Adds): its fields, with
+// «{n}» in their names for the library's script to replace by the smallest
+// number the form does not use yet. It is not drawn.
+type Template struct {
+	ID    string
+	Items []FieldSetPart
+}
+
+func (t Template) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<template` + attr("id", t.ID) + `>`)
+	for _, it := range t.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</template>`)
+	return s.String()
+}
 func (Line) fieldSetPart()      {}
 func (Grow) fieldSetPart()      {}
 func (FieldGrid) fieldSetPart() {}
@@ -471,7 +490,7 @@ func (h Hidden) html(mix) string {
 // PostForm — tc-post
 //
 // Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).
-// Вход. PostForm{ID, Action, Fields}.
+// Вход. PostForm{ID, Action, Fields, File}.
 // Состояния. default.
 // Инварианты. Форму не видно: в ней только скрытые поля; форма печатает фрагмент своего кадра.
 // Поведение. Отправку делает браузер — сценарий не нужен.
@@ -482,6 +501,7 @@ type PostForm struct {
 	ID     string
 	Action string
 	Fields []Hidden
+	File   string // the name of a file field: the form a dropped file is sent with
 }
 
 // Render prints the form.
@@ -489,9 +509,12 @@ func (f PostForm) Render() string { return f.html(nil) }
 
 func (f PostForm) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post">`)
+	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post"` + attr("enctype", pick(f.File != "", "multipart/form-data")) + `>`)
 	for _, h := range f.Fields {
 		s.WriteString(h.html(nil))
+	}
+	if f.File != "" {
+		s.WriteString(`<input type="file"` + attr("name", f.File) + ` aria-label="File">`)
 	}
 	s.WriteString(`</form>`)
 	return s.String()

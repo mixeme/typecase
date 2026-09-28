@@ -24,6 +24,14 @@ do, not what the authors did.
 - **Pictures in their places.** `Avatar`, `Thumb` (with `Alt`), the field's
   `Photo`, `PhotoCrop` and `CardQR` take `Src`: the picture fills the place
   the frames draw in a colour, cropped to it (components-40).
+- **The rest that screens need without their own markup.** `List.Compact`
+  (rows of 30 px; a phone keeps its own), inputs of 16 px under a finger
+  (pointer: coarse), a sheet that opens by its address with no script
+  (`.tc-scrim:target`, `Close.Href`), `Check.Disables` (a check that switches
+  a field off), `Button.Adds` with `Template` (a row added in place; without a
+  script the button submits), `Seg.Theme` (the theme kept in this browser),
+  `Scrim.Drop` with `PostForm.File` (a file dropped on the page is sent). A
+  closed scrim is hidden by the CSS too, not only by the script.
 - **`frame2go -self`** prints a frame's draft as a Go file of its own that
   builds in the client's module with the widget package alone.
 

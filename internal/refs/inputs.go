@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("template-row", w.Input{Name: "tel.{n}", Label: "Number", Mono: true}, "components-38", "tc-in", 5),
 	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 1),
 	form("disabled-text", w.Input{Value: "anna@example.org", Label: "Email", Disabled: true}, "s-auth-12", "tc-in", 2),
 	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 3),

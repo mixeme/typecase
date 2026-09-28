@@ -431,6 +431,8 @@ var _ = add(
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("plain-head", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.Dim{Parts: []w.Inline{w.Text("The rail’s sources, on a narrow screen.")}, Size: w.Dim11_5, Variant: w.DimWrap}}}, "components-41", "tc-sheet", 1),
 	overlay("plain-accent", w.Sheet{Icon: "plus", Title: "New folder", Body: []w.SheetPart{
 		w.Field{Label: "On which server", Parts: []w.FieldPart{w.Pick{Value: "sftpgo · vps"}}, Width: w.FieldW100},
 		w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Value: "Scans", Label: "Name", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("A folder's name is its address: there is nothing else to ask.")}, Variant: w.HintSmall}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Create", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-20", "tc-sheet", 1),

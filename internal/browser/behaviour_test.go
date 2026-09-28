@@ -257,3 +257,109 @@ func TestFormsWithoutScripts(t *testing.T) {
 		t.Errorf("the link button differs from the button in %v", differ)
 	}
 }
+
+// TestNoScriptSheetAndChecks (task 29, step 4): a sheet opens by its address
+// with no script; with the library's script a check switches its field off,
+// the theme's switch keeps the choice, and a compact list has 30 px rows.
+func TestNoScriptSheetAndChecks(t *testing.T) {
+	needChrome(t)
+	sheet := `<div class="tc-root"><div class="tc-bar">` + w.Button{Label: "Sources", Href: "#src"}.Render() + `</div>` +
+		w.Scrim{ID: "src", Closed: true, Content: w.Sheet{Title: "Sources", Body: []w.SheetPart{w.Area{Label: "Text"}}}}.Render() + `</div>`
+	h := browser.NewHarness(t)
+	bare := h.RegisterPage("sheet", strings.Replace(browser.PageHTML(sheet, ""), `<script src="/tc.js"></script>`, "", 1))
+	shown := `(() => { const s = document.getElementById("src"); return s.getClientRects().length > 0; })()`
+	var closed, open bool
+	if err := h.Run(bare, 900, 600, chromedp.Evaluate(shown, &closed)); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(bare+"#src", 900, 600, chromedp.Evaluate(shown, &open)); err != nil {
+		t.Fatal(err)
+	}
+	if closed || !open {
+		t.Errorf("without a script: shown at start %v, shown at #src %v", closed, open)
+	}
+
+	form := w.Form{Action: "/x", Items: []w.FormPart{
+		w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"}}},
+		w.Field{Parts: []w.FieldPart{w.Check{Name: "nopass", Value: "1", Disables: "password", Parts: []w.CheckPart{w.Text("The server asks no password")}}}},
+		w.Field{Label: "Theme", Parts: []w.FieldPart{w.Seg{Name: "theme", Theme: true, Options: []w.SegOption{{Label: "Auto", Value: "auto", On: true}, {Label: "Dark", Value: "dark"}}}}},
+	}}
+	row := w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка")}, Date: "10 Aug", Source: "nextcloud"}
+	list := w.List{Compact: true, Rows: []w.ListRow{row, row}}
+	page := h.RegisterPage("checks", browser.PageHTML(`<div class="tc-root"><div class="tc-main">`+form.Render()+list.Render()+`</div></div>`, flush))
+	var off0, off1, back bool
+	var theme, stored string
+	var height float64
+	err := h.Run(page, 1200, 700,
+		chromedp.Evaluate(`document.querySelector('[name=password]').disabled`, &off0),
+		chromedp.Click(`.tc-check`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector('[name=password]').disabled`, &off1),
+		chromedp.Click(`.tc-check`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector('[name=password]').disabled`, &back),
+		chromedp.Click(`.tc-seg__opt:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.documentElement.getAttribute("data-tc-theme")`, &theme),
+		chromedp.Evaluate(`localStorage.getItem("tc-theme") || ""`, &stored),
+		chromedp.Evaluate(`document.querySelector(".tc-list.is-compact .tc-row").getBoundingClientRect().height`, &height),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if off0 || !off1 || back {
+		t.Errorf("password off: at start %v, ticked %v, unticked %v; want false, true, false", off0, off1, back)
+	}
+	if theme != "dark" || stored != "dark" {
+		t.Errorf("theme %q, stored %q; want dark, dark", theme, stored)
+	}
+	if height < 29.5 || height > 31.5 {
+		t.Errorf("a compact row is %.1f px high, want 30", height)
+	}
+}
+
+// TestAddRowAndDrop (task 29, step 4): «Add phone» adds its template's row
+// with the next free number in its name; a file dropped on the page shows the
+// drop sheet and sends the named form with the file.
+func TestAddRowAndDrop(t *testing.T) {
+	needChrome(t)
+	num := func(name string) w.Field {
+		return w.Field{Label: "Number", Parts: []w.FieldPart{w.Input{Name: name, Mono: true, Label: "Number"}}}
+	}
+	set := w.FieldSet{Rubric: w.Rubric{Text: "Phone numbers"}, Items: []w.FieldSetPart{
+		num("tel.0"), w.Template{ID: "tpl-tel", Items: []w.FieldSetPart{num("tel.{n}")}},
+		w.Button{Label: "Add phone", Small: true, Submit: true, Name: "add", Value: "tel", Adds: "tpl-tel"}}}
+	form := w.Form{Action: "/x", Items: []w.FormPart{set}}
+	post := w.PostForm{ID: "post-import", Action: "/import", File: "file"}
+	drop := w.Scrim{ID: "drop", Closed: true, Drop: "post-import", Content: w.Sheet{Title: "Drop to import", Body: []w.SheetPart{w.Area{Label: "Text"}}}}
+	body := `<div class="tc-root">` + form.Render() + post.Render() + drop.Render() + `</div>`
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("addrow", browser.PageHTML(body, ""))
+	var names string
+	var shown, sent bool
+	err := h.Run(url, 900, 600,
+		chromedp.Click(`[data-tc-add]`, chromedp.ByQuery),
+		chromedp.Click(`[data-tc-add]`, chromedp.ByQuery),
+		chromedp.Evaluate(`[...document.querySelectorAll("form.tc-form input")].map(i => i.name).join(",")`, &names),
+		chromedp.Evaluate(`(() => {
+			window.__sent = false;
+			HTMLFormElement.prototype.submit = function () { window.__sent = this.id === "post-import" && this.querySelector("input[type=file]").files.length === 1; };
+			const dt = new DataTransfer();
+			dt.items.add(new File(["BEGIN:VCARD"], "a.vcf"));
+			document.dispatchEvent(new DragEvent("dragenter", {dataTransfer: dt, bubbles: true, cancelable: true}));
+			return document.getElementById("drop").getClientRects().length > 0;
+		})()`, &shown),
+		chromedp.Evaluate(`(() => {
+			const dt = new DataTransfer();
+			dt.items.add(new File(["BEGIN:VCARD"], "a.vcf"));
+			document.dispatchEvent(new DragEvent("drop", {dataTransfer: dt, bubbles: true, cancelable: true}));
+			return window.__sent;
+		})()`, &sent),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if names != "tel.0,tel.1,tel.2" {
+		t.Errorf("rows after two «Add»: %s, want tel.0,tel.1,tel.2", names)
+	}
+	if !shown || !sent {
+		t.Errorf("drop sheet shown while dragging %v, form sent with the file %v", shown, sent)
+	}
+}

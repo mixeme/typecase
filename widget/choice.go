@@ -29,7 +29,7 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary, Name}.
+// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme}.
 // Состояния. default | start | compact | icons | radio.
 // Инварианты. Выбран ровно один вариант; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
@@ -44,6 +44,9 @@ type Seg struct {
 	// Name makes the options radio buttons of a form: the chosen one sends
 	// its Value, and the switch works without scripts.
 	Name string
+	// Theme makes the switch the theme's: options auto, light, dark; the
+	// library's script keeps the choice in this browser (tc-theme).
+	Theme bool
 }
 
 // Render prints the switch.
@@ -51,7 +54,7 @@ func (g Seg) Render() string { return g.html(nil) }
 
 func (g Seg) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup">`)
+	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
 		if g.Name != "" {
 			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="radio"` + attr("name", g.Name) + attr("value", o.Value) +
@@ -100,7 +103,7 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет.
-// Вход. Check{On, Parts, Label, Tertiary, Name, Value}.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables}.
 // Состояния. on | off | rich | tertiary | box.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже.
@@ -115,6 +118,9 @@ type Check struct {
 	// it switches without scripts.
 	Name  string
 	Value string
+	// Disables is the name of the form's field the check switches off while
+	// it is ticked: «The server asks no password» and Password.
+	Disables string
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool
 }
@@ -126,7 +132,7 @@ func (c Check) html(m mix) string {
 	var s strings.Builder
 	if c.Name != "" {
 		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="checkbox"` + attr("name", c.Name) + attr("value", c.Value) +
-			attr("aria-label", c.Label) + flag("checked", c.On) + `><span class="tc-tickrow__tick"></span>`)
+			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span class="tc-tickrow__tick"></span>`)
 		for _, p := range c.Parts {
 			s.WriteString(p.html(nil))
 		}

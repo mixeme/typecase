@@ -146,7 +146,8 @@ func Io1() Screen {
 					},
 					Variant: w.EmptyDrop,
 				},
-				Pad: w.ScrimPad38,
+				Pad:  w.ScrimPad38,
+				Drop: "post-import",
 			},
 		},
 	}

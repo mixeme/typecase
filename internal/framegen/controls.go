@@ -117,7 +117,11 @@ func (g *gen) button1(e *El) string {
 		if lab == "" {
 			lab = "Close"
 		}
-		return "w.Close{Label: " + q(lab) + placef(e) + "}"
+		href := ""
+		if h := e.Attr("href"); h != "" {
+			href = ", Href: " + q(h)
+		}
+		return "w.Close{Label: " + q(lab) + placef(e) + href + "}"
 	}
 	s := g.button0(e)
 	var extra []string
@@ -133,7 +137,7 @@ func (g *gen) button1(e *El) string {
 	if e.Has("is-3rd") {
 		extra = append(extra, "Tertiary: true")
 	}
-	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}} {
+	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}, {"data-tc-add", "Adds"}} {
 		if v := e.Attr(a.k); v != "" {
 			extra = append(extra, a.v+": "+q(v))
 		}
@@ -414,6 +418,9 @@ func (g *gen) seg(x *El) string {
 	if name != "" {
 		n = ", Name: " + q(name)
 	}
+	if x.HasAttr("data-tc-theme-switch") {
+		n += ", Theme: true"
+	}
 	return "w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}" + g.ev(x, "SegVariant", "Variant") + placesec(x) + n + "}"
 }
 
@@ -456,6 +463,9 @@ func (g *gen) check(x *El) string {
 		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
 		if v := box.Attr("aria-label"); v != "" {
 			f = append(f, "Label: "+q(v))
+		}
+		if v := box.Attr("data-tc-disables"); v != "" {
+			f = append(f, "Disables: "+q(v))
 		}
 	} else if tick != nil && !tick.Has("is-off") {
 		f = append(f, "On: true")
@@ -720,6 +730,8 @@ func (g *gen) fsetPart(k *El) string {
 		return g.line(k)
 	case k.Has("tc-grow") && len(k.Els()) == 0 && k.Text() == "":
 		return "w.Grow{}"
+	case k.Tag == "template":
+		return "w.Template{ID: " + q(k.Attr("id")) + ", Items: []w.FieldSetPart{" + g.each(k.Els(), g.fsetPart) + "}}"
 	}
 	return g.anyblock(k)
 }
@@ -1034,8 +1046,20 @@ func hiddens(es []*El) string {
 // postForm is a form without visible fields that buttons submit by its ID.
 func (g *gen) postForm(e *El) string {
 	f := []string{"ID: " + q(e.Attr("id")), "Action: " + q(e.Attr("action"))}
-	if len(e.Els()) > 0 {
-		f = append(f, "Fields: "+hiddens(e.Els()))
+	var hid []*El
+	file := ""
+	for _, k := range e.Els() {
+		if k.Attr("type") == "file" {
+			file = k.Attr("name")
+		} else {
+			hid = append(hid, k)
+		}
+	}
+	if len(hid) > 0 {
+		f = append(f, "Fields: "+hiddens(hid))
+	}
+	if file != "" {
+		f = append(f, "File: "+q(file))
 	}
 	return "w.PostForm{" + join(f, ", ") + "}"
 }
