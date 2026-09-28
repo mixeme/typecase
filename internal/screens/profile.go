@@ -2028,9 +2028,7 @@ func Profile9() Screen {
 							Parts: []w.MsgPart{
 								w.Text("The calendar and all "),
 								w.Strong("51"),
-								w.Text(" events in it are deleted on "),
-								w.Mono{Text: "cloud.example.org"},
-								w.Text(". Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with."),
+								w.Text(" events in it are deleted on nextcloud. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,

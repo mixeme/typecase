@@ -1503,7 +1503,9 @@ func Notes10() Screen {
 							},
 						},
 						w.Dim{
-							Parts:   []w.Inline{w.Text("A task with no due date is a task all the same — the field may stay empty.")},
+							Parts: []w.Inline{
+								w.Text("No time means the whole day. A task with no due date is a task all the same — both may stay empty."),
+							},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},

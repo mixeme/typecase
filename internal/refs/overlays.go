@@ -8,6 +8,12 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("after-rule", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "home", On: true},
+		w.MenuItem{Label: "work"},
+		w.MenuItem{Label: "other"},
+		w.MenuSep{},
+		w.MenuItem{Label: "дача"}}, Width: w.MenuWidth212}, "s-contacts-22", "tc-menu", 1),
 	overlay("disabled-icons", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename", Reason: "This is the whole storage, not a folder in it."},
 		w.MenuItem{Icon: "dup", Label: "Copy to another server"},
@@ -426,8 +432,9 @@ var _ = add(
 		w.Field{Label: "On which server", Parts: []w.FieldPart{w.Pick{Value: "sftpgo · vps"}}, Width: w.FieldW100},
 		w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Value: "Scans", Label: "Name", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("A folder's name is its address: there is nothing else to ask.")}, Variant: w.HintSmall}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Create", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-20", "tc-sheet", 1),
 	overlay("danger-block", w.Sheet{Icon: "trash", Tone: w.SheetIconDanger, Title: "Delete on the server", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("sftpgo · vps · Documents")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
-		w.Msg{Parts: []w.MsgPart{w.Text("The folder and all "), w.Strong("412"), w.Text(" files in it are deleted on "), w.Mono{Text: "files.example.org"}, w.Text(". Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.Msg{Parts: []w.MsgPart{w.Text("The folder and all "), w.Strong("412"), w.Text(" files in it are deleted on sftpgo · vps. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
 		w.SheetBlock{Title: w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "Attachments", Note: w.Dim{Parts: []w.Inline{w.Text("— the attachment folder is in it; new attachments will have nowhere to go")}}}, {Name: "Backup job «Личное на домашний диск»", Note: w.Dim{Parts: []w.Inline{w.Text("— copies this folder; it will run one short and say so")}}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the files back into a "), w.Strong("new"), w.Text(" folder — not into this one, and not to this address.")}, Space: w.MsgFlush},
 		w.Line{Items: []w.LinePart{w.Button{Label: "Open in Files", Icon: "file"}, w.Dim{Parts: []w.Inline{w.Text("Download what you need from it there first.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
 		w.Field{Label: "Type the name to confirm", Parts: []w.FieldPart{w.Input{Placeholder: "Documents", Label: "Type the name to confirm", Focus: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-19", "tc-sheet", 1),
 	overlay("refusal", w.Sheet{Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "Documents / carrel / 2026-08", Variant: w.PickT12W240, Place: w.Pushed}}, Body: []w.SheetPart{
