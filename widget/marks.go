@@ -245,23 +245,27 @@ func (s AvatarSize) class() string {
 // Avatar — tc-avatar
 //
 // Роль. Лицо записи: инициалы или фотография.
-// Вход. Avatar{Initials, Photo, Size}.
-// Состояния. initials | photo | sized.
+// Вход. Avatar{Initials, Photo, Size, Src}.
+// Состояния. initials | photo | sized | image.
 // Инварианты. Аватар не пуст: инициалы или фотография; квадрат, размер — перечисление; аватар печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `components-12`, фрагмент `.tc-avatar`.
 // Содержимое. нет.
-// Чего нет. Самой фотографии: макет рисует её место, а не картинку, поэтому и библиотека печатает место.
+// Чего нет. Подписи для чтеца: имя стоит рядом; без картинки (Src) — место фотографии, как в кадрах.
 type Avatar struct {
 	Initials string
 	Photo    bool
 	Size     AvatarSize
+	Src      string // the photo's address: the picture fills the place
 }
 
 // Render prints the avatar.
 func (a Avatar) Render() string { return a.html(nil) }
 
 func (a Avatar) html(m mix) string {
+	if a.Src != "" {
+		return `<span` + class(m, "tc-avatar", "is-photo", a.Size.class()) + `><img class="tc-avatar__img"` + attr("src", a.Src) + ` alt=""></span>`
+	}
 	text := a.Initials
 	if a.Photo {
 		text = ""

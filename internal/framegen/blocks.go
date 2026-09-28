@@ -290,7 +290,12 @@ func (g *gen) empty(e *El) string {
 }
 
 func (g *gen) thumb(e *El) string {
-	f := []string{"Icon: " + icon(svgs(e)[0])}
+	var f []string
+	if img := e.Kid("tc-thumb__img"); img != nil {
+		f = append(f, "Src: "+q(img.Attr("src")), "Alt: "+q(img.Attr("alt")))
+	} else {
+		f = append(f, "Icon: "+icon(svgs(e)[0]))
+	}
 	for _, v := range allOf(e, []kv{{"tc-thumb--on-card", "ThumbOnCard"}, {"tc-thumb--preview", "ThumbPreview"}, {"tc-thumb--wide", "ThumbWide"}, {"tc-thumb--tile", "ThumbSquare"}}) {
 		f = append(f, "Form: w."+v)
 	}
@@ -600,6 +605,10 @@ func (g *gen) card(e *El) string {
 				}
 				return g.dimx(x)
 			})
+			if img := qr.Kid("tc-card__qr-img"); img != nil {
+				items = append(items, "w.CardQR{Colour: "+q(qr.Attr("data-tc-colour"))+", Src: "+q(img.Attr("src"))+", Side: []w.CardQRPart{"+sp+"}}")
+				break
+			}
 			var use *El
 			for _, x := range qr.Els()[0].Els() {
 				if x.Tag == "use" {

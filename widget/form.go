@@ -137,12 +137,18 @@ func (g Group) html(mix) string {
 type Photo struct {
 	Initials string // shown while there is no photo
 	Side     []FieldPart
+	Src      string // the photo's address: the picture fills the place
 }
 
 func (p Photo) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-field__photo-row"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != "")) + `>` +
-		esc(p.Initials) + `</span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
+	if p.Src != "" {
+		s.WriteString(`<div class="tc-field__photo-row"><span class="tc-avatar--photo"><img class="tc-avatar__img"` + attr("src", p.Src) +
+			` alt=""></span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
+	} else {
+		s.WriteString(`<div class="tc-field__photo-row"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != "")) + `>` +
+			esc(p.Initials) + `</span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
+	}
 	for _, it := range p.Side {
 		s.WriteString(it.html(nil))
 	}

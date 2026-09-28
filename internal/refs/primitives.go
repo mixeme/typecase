@@ -127,6 +127,8 @@ var _ = add(
 	primitive("default", w.Plain{Text: "2 active"}, "account-1", "tc-plain", 1),
 
 	// tc-avatar
+	primitive("image-44", w.Avatar{Src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E", Size: w.Avatar44}, "components-40", "tc-avatar", 2),
+	primitive("image", w.Avatar{Src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E"}, "components-40", "tc-avatar", 1),
 	primitive("initials", w.Avatar{Initials: "АК"}, "components-12", "tc-avatar", 1),
 	primitive("photo", w.Avatar{Photo: true}, "components-12", "tc-avatar", 2),
 	primitive("sized", w.Avatar{Initials: "АК", Size: w.Avatar34}, "m-phone-4", "tc-avatar", 1),

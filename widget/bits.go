@@ -520,16 +520,18 @@ const (
 // Thumb — tc-thumb
 //
 // Роль. Миниатюра файла: место картинки со значком рода.
-// Вход. Thumb{Icon, Form}.
-// Состояния. tile | card | preview | wide | square.
+// Вход. Thumb{Icon, Form, Src, Alt}.
+// Состояния. tile | card | preview | wide | square | image.
 // Инварианты. Вид — перечисление; миниатюра печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `s-files-5`, фрагмент `.tc-thumb`.
 // Содержимое. Значок.
-// Чего нет. Самой картинки: макет рисует её место.
+// Чего нет. Своего размера: картинка (Src) заполняет место миниатюры, обрезаясь по нему.
 type Thumb struct {
 	Icon Icon
 	Form ThumbForm
+	Src  string // the picture's address: it takes the icon's place
+	Alt  string // what the picture is: the file's name
 }
 
 // Render prints the thumbnail.
@@ -537,6 +539,20 @@ func (t Thumb) Render() string { return t.html(nil) }
 
 func (t Thumb) html(m mix) string {
 	round := `viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"`
+	if t.Src != "" {
+		pic := `<img class="tc-thumb__img"` + attr("src", t.Src) + ` alt="` + esc(t.Alt) + `">`
+		switch t.Form {
+		case ThumbOnCard:
+			return `<div` + class(m, "tc-thumb", "tc-thumb--on-card") + `>` + pic + `</div>`
+		case ThumbPreview:
+			return `<div` + class(m, "tc-thumb", "tc-thumb--preview") + `>` + pic + `</div>`
+		case ThumbWide:
+			return `<div` + class(m, "tc-thumb", "tc-thumb--wide") + `>` + pic + `</div>`
+		case ThumbSquare:
+			return `<span` + class(m, "tc-thumb", "tc-thumb--tile") + `>` + pic + `</span>`
+		}
+		return `<div` + class(m, "tc-thumb") + `>` + pic + `</div>`
+	}
 	switch t.Form {
 	case ThumbOnCard:
 		return `<div` + class(m, "tc-thumb", "tc-thumb--on-card") + `><svg>` + t.Icon.use() + `</svg></div>`

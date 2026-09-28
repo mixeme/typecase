@@ -761,12 +761,7 @@ func (g *gen) row0(e *El) string {
 		return "w.TimeRow{" + join(f, ", ") + "}"
 	case e.Has("tc-row--avatarcols"):
 		f = append(f, "Mark: "+g.mark(els[0]))
-		a := e.Kid("tc-avatar")
-		if a.Has("is-photo") {
-			f = append(f, "Avatar: w.Avatar{Photo: true}")
-		} else {
-			f = append(f, "Avatar: w.Avatar{Initials: "+q(a.Text())+"}")
-		}
+		f = append(f, "Avatar: "+g.avatar(e.Kid("tc-avatar")))
 		f = append(f, g.titleFields(e.Kid("tc-row__title"), "Title")...)
 		f = append(f, "Subtitle: "+text("tc-row__subtitle"), "Detail: "+text("tc-row__detail"), "Caption: "+text("tc-row__caption"))
 		f = g.src(e, f)
@@ -1187,7 +1182,11 @@ func (g *gen) dialog(e *El) string {
 					aft = y
 				}
 			}
-			s := "w.PhotoCrop{Colour: " + q(ph.Attr("data-tc-colour")) + ", Note: " + q(side.Els()[0].Text()) + ", Fields: []w.Field{" + join(flds, ", ") + "}"
+			src := ""
+			if img := ph.Kid("tc-dialog__photo-img"); img != nil {
+				src = ", Src: " + q(img.Attr("src"))
+			}
+			s := "w.PhotoCrop{Colour: " + q(ph.Attr("data-tc-colour")) + src + ", Note: " + q(side.Els()[0].Text()) + ", Fields: []w.Field{" + join(flds, ", ") + "}"
 			if aft != nil {
 				s += ", After: &w.Dim{Parts: []w.Inline{w.Text(" + q(aft.Text()) + ")}, Size: w.Dim11}"
 			}
@@ -1323,7 +1322,7 @@ func (g *gen) child(e *El) string {
 	table := []struct {
 		c  string
 		fn func(*El) string
-	}{{"tc-btn", g.button}, {"tc-badge", g.badge}, {"tc-tag", g.tag}, {"tc-rubric", func(x *El) string { return g.rubric(x, "") }}, {"tc-tickrow", g.tickrow},
+	}{{"tc-btn", g.button}, {"tc-avatar", g.avatar}, {"tc-badge", g.badge}, {"tc-tag", g.tag}, {"tc-rubric", func(x *El) string { return g.rubric(x, "") }}, {"tc-tickrow", g.tickrow},
 		{"tc-tree", g.tree}, {"tc-nav", g.nav}, {"tc-mono", g.mono}, {"tc-emblem", emblem}, {"tc-railstatus", g.railnote},
 		{"tc-usermenu", usermenu}, {"tc-search", g.search}, {"tc-brand", g.brand}}
 	for _, t := range table {
@@ -1557,4 +1556,22 @@ func (g *gen) page(root *El) string {
 		s += ", Variant: w." + v
 	}
 	return s + "}"
+}
+
+// avatar is a record's face: its initials, the place of a photo, or the
+// photo itself (an img in the place).
+func (g *gen) avatar(a *El) string {
+	var f []string
+	switch img := a.Kid("tc-avatar__img"); {
+	case img != nil:
+		f = append(f, "Src: "+q(img.Attr("src")))
+	case a.Has("is-photo"):
+		f = append(f, "Photo: true")
+	default:
+		f = append(f, "Initials: "+q(a.Text()))
+	}
+	for _, v := range allOf(a, []kv{{"tc-avatar--sq34-t12", "Avatar34"}, {"tc-avatar--sq44-t15-r4", "Avatar44"}}) {
+		f = append(f, "Size: w."+v)
+	}
+	return "w.Avatar{" + join(f, ", ") + "}"
 }

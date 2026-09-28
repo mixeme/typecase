@@ -113,6 +113,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 	case e.Has("tc-nav"), e.Has("tc-railsec"), e.Has("tc-railfoot"), e.Has("tc-badge"), e.Has("tc-tag"),
 		e.Has("tc-emblem"), e.Has("tc-railstatus"), e.Has("tc-usermenu"), e.Has("tc-search"), e.Has("tc-brand"):
 		return g.child(e), ""
+	case e.Has("tc-avatar"):
+		return g.avatar(e), ""
 	case e.Has("tc-post"):
 		return g.postForm(e), ""
 	case e.Has("tc-mark"):

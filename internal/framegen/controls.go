@@ -551,6 +551,9 @@ func (g *gen) fieldPart(x *El) string {
 		if t := ph.Text(); t != "" {
 			ini = "Initials: " + q(t) + ", "
 		}
+		if img := ph.Kid("tc-avatar__img"); img != nil {
+			ini = "Src: " + q(img.Attr("src")) + ", "
+		}
 		return "w.Photo{" + ini + "Side: []w.FieldPart{" + g.each(side.Els(), g.fieldPart) + "}}"
 	case x.Has("tc-line"):
 		return g.line(x)

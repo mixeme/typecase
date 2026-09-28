@@ -98,6 +98,7 @@ func (l Lede) html(mix) string { return `<p class="tc-dialog__lede">` + esc(l.Te
 // picture with its frame and rules, a note, the fields.
 type PhotoCrop struct {
 	Colour string // the picture's place, in a colour
+	Src    string // the picture being cropped
 	Note   string
 	Fields []Field
 	After  *Dim // what is done to the file on its way in
@@ -105,7 +106,11 @@ type PhotoCrop struct {
 
 func (p PhotoCrop) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-dialog__split"><div` + attr("data-tc-colour", p.Colour) + ` class="tc-dialog__photo"><div class="tc-dialog__photo-frame"></div>` +
+	pic := ""
+	if p.Src != "" {
+		pic = `<img class="tc-dialog__photo-img"` + attr("src", p.Src) + ` alt="">`
+	}
+	s.WriteString(`<div class="tc-dialog__split"><div` + attr("data-tc-colour", p.Colour) + ` class="tc-dialog__photo">` + pic + `<div class="tc-dialog__photo-frame"></div>` +
 		`<div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--gap-10 tc-dialog__side">` +
 		`<span class="tc-dim--muted tc-dim--t12-5">` + esc(p.Note) + `</span>`)
 	for _, f := range p.Fields {

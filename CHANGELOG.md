@@ -21,6 +21,9 @@ do, not what the authors did.
   the mockup, `Check(frame, html)` compares the make-up — elements, order,
   classes and states — and not words or data: a run of rows may be longer or
   shorter, a link stands for a button, a select for a pick.
+- **Pictures in their places.** `Avatar`, `Thumb` (with `Alt`), the field's
+  `Photo`, `PhotoCrop` and `CardQR` take `Src`: the picture fills the place
+  the frames draw in a colour, cropped to it (components-40).
 - **`frame2go -self`** prints a frame's draft as a Go file of its own that
   builds in the client's module with the widget package alone.
 

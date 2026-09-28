@@ -198,12 +198,18 @@ type CardQR struct {
 	Colour string // the code's paper
 	Symbol string // the code in the sprite, drawn in a 27 box
 	Side   []CardQRPart
+	Src    string // the code as a picture from the server, instead of the sprite
 }
 
 func (q CardQR) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-card__split"><div` + attr("data-tc-colour", q.Colour) + ` class="tc-card__qr"><svg width="104" height="104" viewBox="-1 -1 27 27" role="img" aria-label="QR">` +
-		`<rect x="-1" y="-1" width="27" height="27"` + attr("fill", q.Colour) + `/><use href="#` + esc(q.Symbol) + `"/></svg></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side">`)
+	if q.Src != "" {
+		s.WriteString(`<div class="tc-card__split"><div` + attr("data-tc-colour", q.Colour) + ` class="tc-card__qr"><img class="tc-card__qr-img"` + attr("src", q.Src) +
+			` width="104" height="104" alt="QR"></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side">`)
+	} else {
+		s.WriteString(`<div class="tc-card__split"><div` + attr("data-tc-colour", q.Colour) + ` class="tc-card__qr"><svg width="104" height="104" viewBox="-1 -1 27 27" role="img" aria-label="QR">` +
+			`<rect x="-1" y="-1" width="27" height="27"` + attr("fill", q.Colour) + `/><use href="#` + esc(q.Symbol) + `"/></svg></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side">`)
+	}
 	for _, it := range q.Side {
 		s.WriteString(it.html(nil))
 	}
