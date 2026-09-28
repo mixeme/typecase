@@ -54,6 +54,12 @@ var _ = add(
 	shell("selection", w.Bar{Items: []w.BarPart{w.Button{Icon: "down", Title: "More"}, w.Button{Icon: "move", Title: "More"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, w.Button{Icon: "close", Title: "More", Place: w.Pushed}}, Count: &w.BarCount{Text: "2 selected", Small: true}, Variant: w.BarSelection}, "m-phone-6", "tc-bar", 1),
 
 	// tc-main
+	shell("cards", w.Main{Items: []w.MainPart{
+		w.MainCards{Cards: []w.Card{w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
+			w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12},
+			w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk},
+			w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Done"}}}}, Variant: w.CardChosen}}}}}, "s-admin-17", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "down"}}}, Wide: true},
 		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8}}}, "s-publish-16", "tc-main", 1),

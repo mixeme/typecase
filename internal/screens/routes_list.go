@@ -119,6 +119,7 @@ var Routes = []Route{
 	{Frame: "s-admin-7", Caption: "Администрирование · журнал", Screen: Admin7},
 	{Frame: "s-auth-1", Caption: "Вход", Screen: Auth1},
 	{Frame: "s-auth-2", Caption: "Регистрация и подтверждение", Screen: Auth2},
+	{Frame: "s-auth-12", Caption: "Приглашение · свой логин и пароль", Screen: Auth12},
 	{Frame: "s-auth-3", Caption: "Письмо ушло", Screen: Auth3},
 	{Frame: "s-auth-4", Caption: "Первый запуск", Screen: Auth4},
 	{Frame: "s-auth-5", Caption: "Забыли пароль · логин или почта", Screen: Auth5},

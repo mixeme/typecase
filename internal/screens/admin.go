@@ -153,7 +153,7 @@ func Admin1() Screen {
 					w.ListGroup{Title: w.Rubric{Text: "Pending invitations", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.Table{
 						Cols: []w.TableCol{
-							{Label: "Login"},
+							{Label: "Address"},
 							{Label: "Delivery"},
 							{Label: "Status", Rank: w.Rank3},
 							{Label: "Mail", Rank: w.Rank4},
@@ -179,7 +179,7 @@ func Admin1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.Text("anna")}},
+									{Parts: []w.CellPart{w.Text("anna@example.org")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("email")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("pending")}},
 									{Parts: []w.CellPart{w.Text("failed — 550 mailbox unavailable")}, Mono: true, Tone: w.CellDanger},
@@ -934,6 +934,7 @@ func Admin6() Screen {
 										},
 										Place: w.Grown,
 									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Save"}}},
 								},
 								Variant: w.FieldSetLead,
 							},

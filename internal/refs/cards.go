@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("bot12", w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12}, "s-admin-17", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush}, "s-admin-14", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 12 records.")}}, "s-contacts-21", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("No link has gone to "), w.Mono{Text: "new@example.org"}, w.Text(": until one is opened, "), w.Mono{Text: "mix@example.org"}, w.Text(" stays in use. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-10", "tc-msg", 1),
@@ -315,6 +316,19 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "m-desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("closed", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Self-registration"},
+		w.CardText{Kind: w.CardLede, Parts: []w.CardTextPart{w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.")}},
+		w.Check{Parts: []w.CheckPart{w.Text("Publish the registration form")}},
+		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Title: "Mail is not set up: nobody who registers could confirm the address.", State: w.ButtonDisabled}}}}}, "s-admin-18", "tc-card", 2),
+	cards("off-send", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Invitation", Items: []w.RubricPart{w.Plain{Text: "chooses their own password"}}},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Parts: []w.FieldPart{w.Input{Placeholder: "anna@example.org", Label: "Or send to"}}, Width: w.FieldMD}, w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", State: w.ButtonDisabled}}, Wide: true, Rule: true}}}, "s-admin-18", "tc-card", 1),
+	cards("issued-card", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12},
+		w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk},
+		w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Done"}}}}, Variant: w.CardChosen}, "s-admin-17", "tc-card", 1),
 	cards("issued", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
 		w.Diag{Text: "login     anna\npassword  4c1-tide-oven", Variant: w.DiagInk},
@@ -640,9 +654,9 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "over 2 MB · as a link", On: true}}}}, State: w.RowOn},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "договор-подряда.pdf"}}}, {Parts: []w.CellPart{w.Text("840 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "объект-фасад.jpg"}}}, {Parts: []w.CellPart{w.Text("1.6 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}}}}, "s-mail-6", "tc-table", 1),
-	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Delivery"}, {Label: "Status", Rank: w.Rank3}, {Label: "Mail", Rank: w.Rank4}, {Label: "Expires"}, {}}, Rows: []w.TableRow{
+	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Address"}, {Label: "Delivery"}, {Label: "Status", Rank: w.Rank3}, {Label: "Mail", Rank: w.Rank4}, {Label: "Expires"}, {}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("link")}, Mono: true}, {Parts: []w.CellPart{w.Text("pending")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("2026-08-18 12:00")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Copy link", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("email")}, Mono: true}, {Parts: []w.CellPart{w.Text("pending")}}, {Parts: []w.CellPart{w.Text("failed — 550 mailbox unavailable")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("2026-08-17 09:30")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Resend", Small: true}, w.Button{Label: "Copy link", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-admin-1", "tc-table", 1),
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("email")}, Mono: true}, {Parts: []w.CellPart{w.Text("pending")}}, {Parts: []w.CellPart{w.Text("failed — 550 mailbox unavailable")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("2026-08-17 09:30")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Resend", Small: true}, w.Button{Label: "Copy link", Small: true}, w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}}}}, "s-admin-1", "tc-table", 1),
 	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Role"}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "Last login", Rank: w.Rank4}, {Label: "DAV"}, {Label: "Sessions"}, {Label: "Escrow"}, {}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}, Name: true}, {Parts: []w.CellPart{w.Text("Administrator")}}, {Parts: []w.CellPart{w.Text("2026-02-11")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("3")}, Mono: true}, {Parts: []w.CellPart{w.Text("2")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("User")}}, {Parts: []w.CellPart{w.Text("2026-03-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-14 18:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("1")}, Mono: true}, {Parts: []w.CellPart{w.Text("1")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "deposited"}}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},

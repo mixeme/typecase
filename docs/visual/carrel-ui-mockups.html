@@ -2985,8 +2985,8 @@ Read  2 min ago</div>
             <div class="tc-field tc-field--md"><label>Number</label><input class="tc-in is-mono" type="text" value="+7 912 445-10-88" aria-label="Number"></div>
             <button class="tc-btn is-danger" type="button">Remove</button>
             <div class="tc-grow"></div>
-            <div class="tc-field tc-field--xs"><input class="tc-in" type="text" value="work"></div>
-            <div class="tc-field tc-field--md"><input class="tc-in is-mono" type="text" value="+7 495 120-45-00"></div>
+            <div class="tc-field tc-field--xs"><input class="tc-in" type="text" value="work" aria-label="Label"></div>
+            <div class="tc-field tc-field--md"><input class="tc-in is-mono" type="text" value="+7 495 120-45-00" aria-label="Number"></div>
             <button class="tc-btn is-danger" type="button">Remove</button>
             <div class="tc-grow"></div>
             <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add phone</button>
@@ -3002,18 +3002,31 @@ Read  2 min ago</div>
           </div>
 
           <div class="tc-fset">
+            <div class="tc-rubric">Addresses</div>
+            <div class="tc-field tc-field--xs"><label>Label</label><button class="tc-in is-pick" type="button">home</button></div>
+            <div class="tc-field tc-field--lg"><label>Street</label><input class="tc-in" type="text" value="ул. Садовая, 12, кв. 5" aria-label="Street"></div>
+            <div class="tc-field tc-field--sm"><label>City</label><input class="tc-in" type="text" value="Москва" aria-label="City"></div>
+            <div class="tc-field tc-field--sm"><label>Region</label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Region"></div>
+            <div class="tc-field tc-field--xs"><label>Postcode</label><input class="tc-in is-mono" type="text" value="123001" aria-label="Postcode"></div>
+            <div class="tc-field tc-field--sm"><label>Country</label><input class="tc-in" type="text" value="Россия" aria-label="Country"></div>
+            <button class="tc-btn is-danger" type="button">Remove</button>
+            <div class="tc-grow"></div>
+            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add address</button>
+          </div>
+
+          <div class="tc-fset">
             <div class="tc-rubric">Other</div>
             <div class="tc-field tc-field--lg"><label>Tags</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Tags"></div>
             <div class="tc-field tc-field--full"><label>Note</label><textarea class="tc-in is-area">Пишет по вторникам, отвечает в тот же день.</textarea></div>
-            <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
           </div>
+          <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
         </div>
         <div class="tc-formfoot"><span class="tc-dim tc-dim--t11-5">Properties Carrel does not know are kept unchanged.</span></div>
       </div>
     </div>
   </div>
 </div>
-<figcaption><b>День рождения набирают, а не листают.</b> Поле текстовое, не выбор даты: до 1987 года в календаре сорок лет прокрутки, а набрать восемь цифр — секунда. Год можно не писать — vCard это допускает, а выбор даты нет. Телефоны и почта — повторяющиеся строки с кнопкой «Add», а не заранее насыпанные пустые поля. Кадрирование фотографии — отдельный слой с перетаскиванием; числа остаются запасным путём на клавиатуре (и единственным на узком экране, где U-9 просит центральный кроп). Формат даты — плейсхолдер пустого поля; набранное значение само его показывает. ETag из шапки убран — человеку с ним делать нечего; конфликт сам покажет, что разошлось.</figcaption>
+<figcaption><b>День рождения набирают, а не листают.</b> Поле текстовое, не выбор даты: до 1987 года в календаре сорок лет прокрутки, а набрать восемь цифр — секунда. Год можно не писать — vCard это допускает, а выбор даты нет. Телефоны, почта и адреса — повторяющиеся строки с кнопкой «Add», а не заранее насыпанные пустые поля; подписи — над первой строкой, у каждой строки свой Remove. Пустые поля свёрнуты в одну кнопку в конце формы: «Show 6 empty fields» — сколько их у этой карточки, и у карточки без адресов туда же уходит «Add address». Кадрирование фотографии — отдельный слой с перетаскиванием; числа остаются запасным путём на клавиатуре (и единственным на узком экране, где U-9 просит центральный кроп). Формат даты — плейсхолдер пустого поля; набранное значение само его показывает. ETag из шапки убран — человеку с ним делать нечего; конфликт сам покажет, что разошлось.</figcaption>
 </figure>
 
 <div class="frames">
@@ -4163,6 +4176,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-fset">
             <div class="tc-rubric">Reminders</div>
             <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
+            <div class="tc-field tc-field--md"><label>Reminder</label><button class="tc-in is-pick" type="button">1 day before</button></div>
             <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
           </div>
 
@@ -4196,7 +4210,7 @@ SEQUENCE  2</div>
     </div>
   </div>
 </div>
-<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: показывается, только когда пояс отличается от общего, а данные уже в <code>DTSTART</code>.</figcaption>
+<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: стоит у каждого события со временем, иначе пояс не сменить; у события в поясе экземпляра она этот пояс и показывает. Второе напоминание подписано «Reminder» — как строка, которую добавляет «Add reminder».</figcaption>
 </figure>
 
 <div class="frames">
@@ -9433,6 +9447,115 @@ Read  2 min ago</div>
 <figcaption>Правка такого подключения — та же форма с Save и Cancel; отметка стоит, поле пароля выключено и пусто. Подсказки «Leave it empty to keep the stored one» у выключенного поля нет: хранить нечего.</figcaption>
 </figure>
 
+<figure style="flex:0 1 250px">
+  <div class="frame" data-frame="s-profile-17">
+    <div class="frame-label"><span>Хранилище целиком · ⋯</span><span class="frag">меню</span><i>строка подключения, чья коллекция — сам адрес</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w212">
+        <button class="tc-menu__item" type="button" role="menuitem" title="This is the whole storage, not a folder in it." disabled><svg><use href="#i-pencil"/></svg>Rename</button>
+        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy to another server</button>
+        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button>
+        <span class="tc-menu__sep"></span>
+        <button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem" title="This is the whole storage, not a folder in it." disabled><svg><use href="#i-trash"/></svg>Delete on the server…</button>
+      </div>
+    </div>
+  </div>
+  <figcaption>Подключение, чья единственная коллекция — сам адрес хранилища: переименовать и удалить его отсюда нельзя — это всё хранилище, а не папка в нём; пункты на месте и выключены, причина — в подсказке. Перенести тоже нельзя: остаётся копия.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-profile-18">
+    <div class="frame-label"><span>Папка хранилища · переименование</span><span class="frag">фрагмент</span><i>лист из ⋯ → Rename</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
+        <b class="tc-sheet__title">Rename</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">sftpgo · vps · Documents</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Documents" aria-label="Name"></div>
+          <div class="tc-msg tc-msg--flush">A folder's name is its address: renaming it moves it on the server. Devices, published links and backup jobs pointing at the old address will see it vanish; the files inside stay as they are.</div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rename</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>У папки одно поле — имя, потому что имя и есть адрес; строка под ним говорит, что переименование двигает папку на сервере и кого это заденет.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-profile-19">
+    <div class="frame-label"><span>Папка хранилища · удаление</span><span class="frag">фрагмент</span><i>лист из ⋯ → Delete on the server…</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
+        <b class="tc-sheet__title">Delete on the server</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">sftpgo · vps · Documents</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush">The folder and all <b>412</b> files in it are deleted on <span class="tc-mono">files.example.org</span>. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.</div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>Attachments</b> <span class="tc-dim">— the attachment folder is in it; new attachments will have nowhere to go</span></span>
+              <span class="tc-stack__item"><b>Backup job «Личное на домашний диск»</b> <span class="tc-dim">— copies this folder; it will run one short and say so</span></span>
+            </div>
+          </div>
+          <div class="tc-line tc-line--gap-8">
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button>
+            <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Download what you need from it there first.</span>
+          </div>
+          <div class="tc-field tc-field--w100"><label>Type the name to confirm</label><input class="tc-in is-focus is-ph" type="text" placeholder="Documents" aria-label="Type the name to confirm"></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Delete on the server</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Как удаление коллекции: что исчезнет, что на неё смотрит, набор имени. Вместо «Download .ics first» — «Open in Files»: папку скачивают там, файлами или архивом.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-profile-20">
+    <div class="frame-label"><span>Новая папка</span><span class="frag">фрагмент</span><i>лист из New folder в карточке хранилища</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
+        <b class="tc-sheet__title">New folder</b>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-field tc-field--w100"><label>On which server</label><button class="tc-in is-pick" type="button">sftpgo · vps</button></div>
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Scans" aria-label="Name"><span class="tc-field__hint tc-field__hint--t11-dusty">A folder's name is its address: there is nothing else to ask.</span></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Лист новой коллекции для файлового хранилища: сервер и имя — без цвета, состава и адреса, имя папки и есть её адрес.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-profile-21">
+    <div class="frame-label"><span>Новая коллекция · никто не отвечает</span><span class="frag">фрагмент</span><i>лист New calendar</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
+        <b class="tc-sheet__title">New calendar</b>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush">No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there.</div>
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in" type="text" value="Поездки" aria-label="Name"></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" title="No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there." disabled>Create</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Не отвечает ни один сервер нужного рода: выбирать не из чего, поля сервера нет, лист говорит почему, Create выключена с той же причиной. Когда не отвечают не все — как в кадре выше: «One of three is listed: baikal, radicale · vps are not answering…».</figcaption>
+  </figure>
+
 <figure>
 <div class="frame" data-frame="s-profile-11">
   <div class="frame-label"><span>Подключение аккаунта · подпись занята</span><i>тот же диалог после Connect</i></div>
@@ -13116,11 +13239,11 @@ https://carrel.example/api/backup/run?job=personal</textarea>
         </div>
         <div class="tc-list__group"><span class="tc-rubric">Pending invitations</span><span class="tc-num">2</span></div>
         <table class="tc-table">
-          <thead><tr><th>Login</th><th>Delivery</th><th class="tc-table__n3">Status</th><th class="tc-table__n4">Mail</th><th>Expires</th><th></th></tr></thead>
+          <thead><tr><th>Address</th><th>Delivery</th><th class="tc-table__n3">Status</th><th class="tc-table__n4">Mail</th><th>Expires</th><th></th></tr></thead>
           <tbody>
             <tr><td>—</td><td class="tc-mono">link</td><td class="tc-table__n3">pending</td><td class="tc-table__n4">—</td><td class="tc-mono">2026-08-18 12:00</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button">Copy link</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-            <tr><td>anna</td><td class="tc-mono">email</td><td class="tc-table__n3">pending</td><td class="tc-mono tc-table__n4 tc-table__n4--danger">failed — 550 mailbox unavailable</td><td class="tc-mono">2026-08-17 09:30</td>
+            <tr><td class="tc-mono">anna@example.org</td><td class="tc-mono">email</td><td class="tc-table__n3">pending</td><td class="tc-mono tc-table__n4 tc-table__n4--danger">failed — 550 mailbox unavailable</td><td class="tc-mono">2026-08-17 09:30</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button">Resend</button><button class="tc-btn is-sm" type="button">Copy link</button><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
@@ -13128,8 +13251,76 @@ https://carrel.example/api/backup/run?job=personal</textarea>
     </div>
   </div>
 </div>
-<figcaption>Во всех трёх карточках роль стоит первой: она определяет, что человек сможет делать, и выбирается раньше, чем ему придумывают логин. Три способа — три карточки в ряд, а не три формы в столбик под общим заголовком: они равноправны, и выбор между ними — это выбор ситуации, а не настройки. Ссылка-приглашение появляется в той же карточке, где её создали, с кнопкой копирования. Неудачная отправка письма названа кодом ответа сервера, а не словом «ошибка».</figcaption>
+<figcaption>Во всех трёх карточках роль стоит первой: она определяет, что человек сможет делать, и выбирается раньше, чем ему придумывают логин. Три способа — три карточки в ряд, а не три формы в столбик под общим заголовком: они равноправны, и выбор между ними — это выбор ситуации, а не настройки. Ссылка-приглашение появляется в той же карточке, где её создали, с кнопкой копирования. Неудачная отправка письма названа кодом ответа сервера, а не словом «ошибка». Логин приглашённый выбирает сам, поэтому у ожидающего приглашения его нет: первая колонка — адрес, у приглашения ссылкой — «—».</figcaption>
 </figure>
+
+<div class="frames">
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-admin-17">
+    <div class="frame-label"><span>Add users · пользователь заведён</span><span class="frag">фрагмент</span><i>ответ на Create user</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-main__cards">
+          <div class="tc-card tc-card--edge-accent">
+            <div class="tc-rubric">Temporary password <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
+            <div class="tc-msg tc-msg--flush-bot12">The user <b>viktor</b> is created. Hand this over; until they change it, you can sign in as them.</div>
+            <div class="tc-diag tc-diag--top9-ink">login     viktor
+password  9f2-brick-lamp</div>
+            <div class="tc-line tc-line--gap-8 tc-card__top8"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button><button class="tc-btn" type="button">Done</button></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>После «Create user» временный пароль показан один раз — в той же карточке, как после сброса: логин и пароль вместе, одной кнопкой в буфер.</figcaption>
+  </figure>
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-admin-18">
+    <div class="frame-label"><span>Add users · почта не настроена</span><span class="frag">фрагмент</span><i>карточки без SMTP</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-main__cards">
+          <div class="tc-card">
+            <div class="tc-rubric">Invitation <span class="tc-plain">chooses their own password</span></div>
+            <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--rule">
+              <div class="tc-field tc-field--md"><label>Or send to</label><input class="tc-in is-ph" type="text" placeholder="anna@example.org" aria-label="Or send to"></div>
+              <button class="tc-btn" title="SMTP is not configured: no letter can go." type="button" disabled>Send invitation</button>
+            </div>
+          </div>
+          <div class="tc-card">
+            <div class="tc-rubric">Self-registration</div>
+            <div class="tc-card__lede">A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.</div>
+            <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Publish the registration form</button>
+            <div class="tc-card__top10"><button class="tc-btn" title="Mail is not set up: nobody who registers could confirm the address." type="button" disabled>Save</button></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Без почты письма не уйдут: «Send invitation» выключена, ссылка приглашения работает как прежде. Самостоятельная регистрация закрыта — без значка «open» и без адреса формы, Save выключена; причины — в подсказках кнопок.</figcaption>
+  </figure>
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-admin-19">
+    <div class="frame-label"><span>Add users · ошибки полей</span><span class="frag">фрагмент</span><i>карточка временного пароля</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-main__cards">
+          <div class="tc-card">
+            <div class="tc-rubric">Temporary password <span class="tc-badge is-alert">hand to hand</span></div>
+            <div class="tc-card__fields tc-card__fields--gap10-12">
+              <div class="tc-field tc-field--sm"><label>Login</label><input class="tc-in is-error" type="text" value="anna" aria-label="Login"><span class="tc-field__hint tc-dim--danger">Login is already taken.</span></div>
+              <div class="tc-field tc-field--md"><label>Email <span class="tc-dim">(optional)</span></label><input class="tc-in is-error" type="text" value="viktor@" aria-label="Email"><span class="tc-field__hint tc-dim--danger">Enter one address, like name@example.org.</span></div>
+              <div class="tc-field tc-field--md"><label>Temporary password</label><input class="tc-in is-mono is-error" type="text" value="9f2" aria-label="Temporary password"><span class="tc-field__hint tc-dim--danger">Password must be at least 8 characters.</span></div>
+              <button class="tc-btn is-primary" type="button">Create user</button>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Отказ стоит у своего поля и говорит правило: логин занят, не адрес, короткий пароль. Так же — у Login на странице приглашения.</figcaption>
+  </figure>
+</div>
 
 <div class="frames">
   <figure style="flex:0 1 250px">
@@ -13592,6 +13783,7 @@ password  4c1-tide-oven</div>
               <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>New accounts are covered</button>
             </div>
             <div class="tc-field tc-grow"><span class="tc-field__hint">Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision.</span></div>
+            <div class="tc-field"><button class="tc-btn" type="button">Save</button></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Master password</div>
@@ -13623,7 +13815,7 @@ password  4c1-tide-oven</div>
     </div>
   </div>
 </div>
-<figcaption>Самый опасный экран во всей администраторской части, и первое, что на нём стоит, — объяснение, чем депонирование <b>не</b> является. Текст взят из продукта дословно: он уже написан правильно и переписыванию не подлежит. Покрытие новых учёток — один флажок в Policy, не кнопка в шапке и флажок сразу: это одно и то же. Ниже — мастер-пароль, восстановление и таблица, отвечающая на вопрос, который администратор задаёт в первую очередь: <b>кого именно</b> этот мастер-пароль открывает. Строка «mix» с прочерками показывает, что администратор может не быть покрыт собственным механизмом, — это нормально и должно быть видно.</figcaption>
+<figcaption>Самый опасный экран во всей администраторской части, и первое, что на нём стоит, — объяснение, чем депонирование <b>не</b> является. Текст взят из продукта дословно: он уже написан правильно и переписыванию не подлежит. Покрытие новых учёток — один флажок в Policy со своей кнопкой Save, не кнопка в шапке и флажок сразу: это одно и то же. Ниже — мастер-пароль, восстановление и таблица, отвечающая на вопрос, который администратор задаёт в первую очередь: <b>кого именно</b> этот мастер-пароль открывает. Строка «mix» с прочерками показывает, что администратор может не быть покрыт собственным механизмом, — это нормально и должно быть видно.</figcaption>
 </figure>
 
 <figure>
@@ -13738,7 +13930,7 @@ password  4c1-tide-oven</div>
   </figure>
 
   <figure style="flex:1 1 100%">
-  <div class="frame" data-frame="s-auth-2" data-screen="/register /invite/{token}">
+  <div class="frame" data-frame="s-auth-2" data-screen="/register">
     <div class="frame-label"><span>Регистрация и подтверждение</span><i>/register</i></div>
     <div class="tc-root">
       <div class="tc-auth">
@@ -13758,6 +13950,29 @@ password  4c1-tide-oven</div>
     </div>
   </div>
   <figcaption>Предупреждение стоит над полями, а не под кнопкой: пароль здесь — единственный ключ к собственным данным, и узнать об этом надо до того, как он придуман, а не после.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-auth-12" data-screen="/invite/{token}">
+    <div class="frame-label"><span>Приглашение · свой логин и пароль</span><i>/invite/{token}</i></div>
+    <div class="tc-root">
+      <div class="tc-auth">
+        <div class="tc-dialog tc-dialog--max440-padt0-padb0">
+          <div class="tc-head__title tc-head__title--bot4">Join carrel.example</div>
+          <div class="tc-head__sub tc-head__sub--bot12">mix invited you. Choose a login and a password; the address is the one the invitation went to.</div>
+          <div class="tc-msg is-alert tc-msg--flush-bot12">Your password is the only key to your own data. Nobody — including this server — can recover it for you.</div>
+          <div class="tc-form tc-form--pad0">
+            <div class="tc-field tc-field--md"><label>Login</label><input class="tc-in is-focus" type="text" value="anna" aria-label="Login"></div>
+            <div class="tc-field tc-field--md"><label>Email</label><input class="tc-in" type="text" value="anna@example.org" aria-label="Email" disabled></div>
+            <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="text" value="••••••••••••" aria-label="Password"></div>
+            <div class="tc-field tc-field--md"><label>Repeat password</label><input class="tc-in" type="text" value="••••••••••••" aria-label="Repeat password"></div>
+          </div>
+          <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="button">Create account</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Страница приглашения спрашивает то, чего Carrel ещё не знает: логин и пароль. Адрес известен у приглашения письмом — он показан и не правится; у приглашения ссылкой поля адреса нет, адрес задают потом в учётной записи. Приглашение, названное логином раньше, показывает логин так же — выключенным полем. Предупреждение о пароле — то же, что у регистрации.</figcaption>
   </figure>
 
   <figure style="flex:1 1 100%">

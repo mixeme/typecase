@@ -8,6 +8,9 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 1),
+	form("disabled-text", w.Input{Value: "anna@example.org", Label: "Email", Disabled: true}, "s-auth-12", "tc-in", 2),
+	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 3),
 	form("focus", w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, "s-files-13", "tc-in", 1),
 	form("error", w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, "s-contacts-18", "tc-in", 1),
 	form("value", w.Input{Value: "Анна Ковалёва", Label: "Display name"}, "components-10", "tc-in", 1),
@@ -71,7 +74,8 @@ var _ = add(
 		w.Span{Face: w.FaceMuted, Text: "бел"}}}, "s-mail-3", "tc-in", 1),
 
 	// tc-in as a text area
-	form("plain", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Note"}, "s-contacts-3", "tc-in", 15),
+	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 15),
+	form("area", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 21),
 	form("body", w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}, "s-notes-5", "tc-in", 2),
 	form("title", w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Title"}, "s-notes-20", "tc-in", 1),
 	form("body", w.Area{Text: noteBody, Variant: w.AreaBody, Focus: true, Label: "Text"}, "s-notes-20", "tc-in", 7),

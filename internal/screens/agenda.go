@@ -586,6 +586,7 @@ func Agenda3() Screen {
 								Rubric: w.Rubric{Text: "Reminders"},
 								Items: []w.FieldSetPart{
 									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
+									w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
