@@ -13498,12 +13498,13 @@ password  9f2-brick-lamp</div>
           <div class="tc-field tc-field--w100"><label>Whose</label><button class="tc-in is-pick" type="button">anna · User</button></div>
           <div class="tc-msg is-alert tc-msg--flush">The passwords this person saved for DAV servers are sealed with their own password, and a reset destroys them: every account they connected has to be connected again, and their published links, devices and external backup triggers stop. Their records on the servers stay as they are.</div>
           <div class="tc-field tc-field--w100"><label>Temporary password</label><input class="tc-in is-mono" type="text" value="4c1-tide-oven" aria-label="Temporary password"><span class="tc-field__hint">Hand it over yourself; they choose their own at the next sign-in. If their key is deposited, recover the account in Key escrow instead: nothing is destroyed then.</span></div>
+          <div class="tc-field tc-field--w100"><label>Type the login to confirm</label><input class="tc-in is-focus is-ph" type="text" placeholder="anna" aria-label="Type the login to confirm"></div>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Reset password</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
-  <figcaption><b>Кнопка в шапке списка людей открывает лист, где выбирают, кого сбрасывать.</b> Последствие названо до нажатия: пароли от серверов запечатаны паролем человека и при сбросе пропадают: подключения придётся завести заново, а выданные ссылки, устройства и внешние запуски копий перестают работать. Временный пароль — здесь же, как у заведения пользователя; депонированный ключ — путь без потерь, и лист на него указывает. В «⋯» строки пользователя сброса нет.</figcaption>
+  <figcaption><b>Кнопка в шапке списка людей открывает лист, где выбирают, кого сбрасывать.</b> Последствие названо до нажатия: пароли от серверов запечатаны паролем человека и при сбросе пропадают: подключения придётся завести заново, а выданные ссылки, устройства и внешние запуски копий перестают работать. Временный пароль — здесь же, как у заведения пользователя; депонированный ключ — путь без потерь, и лист на него указывает. Логин набирают, как имя при удалении коллекции: сброс опустошает учётную запись, и выбор из списка не должен стать ошибкой одного нажатия (решение владельца). В «⋯» строки пользователя сброса нет.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -13554,6 +13555,16 @@ password  4c1-tide-oven</div>
     </div>
   </div>
   <figcaption>Отказ — у поля, словами правила, а не «ошибка»: временный пароль не короче восьми знаков.</figcaption>
+  </figure>
+
+<figure style="flex:0 1 330px">
+  <div class="frame" data-frame="s-admin-20">
+    <div class="frame-label"><span>Сброс пароля · не тот логин</span><span class="frag">фрагмент</span><i>поле листа</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-field tc-field--w100"><label>Type the login to confirm</label><input class="tc-in is-error is-focus" type="text" value="ana" aria-label="Type the login to confirm"><span class="tc-field__hint tc-dim--danger">Type anna to confirm whose password is reset.</span></div>
+    </div>
+  </div>
+  <figcaption>Набранное не совпало с выбранным в Whose — отказ у этой строки, ничего не сброшено; строка называет логин, который ждут.</figcaption>
   </figure>
 </div>
 
