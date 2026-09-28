@@ -59,6 +59,18 @@ go run carrel.dev/typecase/cmd/frame2go -self -root "$(go list -m -f '{{.Dir}}' 
 проектируется: он уже в макете. Если на узкой ширине экран плох — правка в
 макете, на всех экранах сразу.
 
+## 3½. Страница целиком
+
+Экран — это корень библиотеки; документ вокруг него — `page.Document`:
+
+```go
+doc := page.Document{Title: "Contacts", Assets: page.At("/static/tc"), Root: screen, Forms: forms}
+html, err := doc.Render()
+// и один раз: mux.Handle("/static/tc/", http.StripPrefix("/static/tc", page.Static()))
+```
+
+Голову, спрайт и сценарии пишет библиотека; своей разметки на странице нет.
+
 ## 4. Не собирается — это пробел
 
 Пробел — не повод для обхода на экране. Порядок один:

@@ -255,6 +255,11 @@ func checkMockupDeadRules(html string) error {
 		if mockupRuleLive(r.Selector, frames) {
 			continue
 		}
+		// The body of a page of the library (package page): a frame holds no
+		// body, so this rule is seen on no frame by design.
+		if strings.TrimSpace(r.Selector) == "body[data-tc-root]" {
+			continue
+		}
 		errs = append(errs, compactSel(r.Selector))
 	}
 	if len(errs) > 8 {

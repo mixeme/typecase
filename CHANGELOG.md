@@ -4,6 +4,19 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Added
+
+- **The page around a screen** (task 38 of Carrel's server). Package `page`:
+  `Document{Title, Lang, Assets, Root, Forms}` prints the head a page of the
+  library needs — the theme's script and the stylesheet by address, nothing
+  inline, so `script-src 'self'; style-src 'self'` holds — the hidden
+  sprite, one of the library's roots (`widget.Root`: a shell, a page, an
+  overlay; closed, so there is no place for markup of one's own) and the
+  PostForms. `page.Static()` serves the library's files from the binary;
+  `page.At(base)` names their addresses.
+
 ## typecase/v0.8.0 — 2026-09-28
 
 ### Added

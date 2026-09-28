@@ -200,3 +200,15 @@ type PrintNum struct {
 }
 
 func (n PrintNum) html(mix) string { return `<span class="tc-print__num">` + esc(n.Text) + `</span>` }
+
+// Root is what a page's body holds: the library's roots only — a shell, a
+// page without a shell, an overlay. The interface is closed, so a document
+// (package page) has no place for markup of its own.
+type Root interface {
+	Render() string
+	root()
+}
+
+func (Shell) root()   {}
+func (Page) root()    {}
+func (Overlay) root() {}

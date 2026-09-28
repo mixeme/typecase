@@ -14,6 +14,8 @@
 .tc-root--wrap.tc-root--wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
 .tc-root--col.tc-root--col{display:flex;flex-direction:column;flex-wrap:wrap;align-items:stretch;gap:10px}
 .tc-root--pad18-20.tc-root--pad18-20{padding:18px 20px}
+/* Тело страницы библиотеки (package page): без полей, фон и текст — токены. */
+body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-family:var(--tc-font-sans)}
 .tc-root *{box-sizing:border-box}
 .tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
 .tc-root ul{list-style:none}
