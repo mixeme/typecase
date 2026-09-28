@@ -419,6 +419,9 @@ func (g *gen) menuItem(k *El) string {
 	if k.Has("is-3rd") {
 		f = append(f, "Tertiary: true")
 	}
+	if r := k.Attr("title"); r != "" {
+		f = append(f, "Reason: "+q(r))
+	}
 	return "w.MenuItem{" + join(f, ", ") + "}"
 }
 

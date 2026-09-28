@@ -23,16 +23,26 @@ var _ = add(
 	document("read", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop}, "m-phone-7", "tc-prose", 1),
 
 	// tc-doc
+	document("foreign", w.Doc{Items: []w.DocPart{
+		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Label: "Text"},
+		w.DocFields{Items: []w.Field{w.Field{Label: "Notebook", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Записи"}}, Width: w.FieldFlex2_280}, w.Field{Label: "Date", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Date", Mono: true}}, Width: w.FieldFix150}, w.Field{Label: "Time", Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:05", Label: "Time", Mono: true}}, Width: w.FieldFix130}, w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "встречи, релиз", Label: "Tags"}}, Width: w.FieldFlex3_320}, w.Field{Label: "Related to", Parts: []w.FieldPart{w.Drop{Open: true, Trigger: w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "cal", Trail: w.Mono{Text: "10 Aug · Личный", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Звонок с Ковалёвой", On: true},
+			w.MenuItem{Icon: "task", Trail: w.Mono{Text: "task · Работа", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Ответить Анне по смете"},
+			w.MenuItem{Icon: "con", Trail: w.Mono{Text: "contact", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Анна Ковалёва"},
+			w.MenuSep{},
+			w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}}, Width: w.FieldFlex3_340}}},
+		w.Area{Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.", Variant: w.AreaBody, Label: "Text"},
+		w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — "), w.Mono{Text: "X-JTX-COLOR"}, w.Text(" and two more — are kept unchanged and not shown here.")}}}}, "s-notes-4", "tc-doc", 1),
 	document("read", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
 		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, "s-notes-2", "tc-doc", 1),
 	document("edit", w.Doc{Items: []w.DocPart{
-		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Title"},
-		w.DocFields{Items: []w.Field{w.Field{Label: "Notebook", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Date", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Time", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Related to", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
-		w.Area{Text: noteBody, Variant: w.AreaBody, Focus: true, Label: "Text"},
-		w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — "), w.Mono{Text: "X-JTX-COLOR"}, w.Text(" and two more — are kept unchanged and not shown here.")}}}}, "s-notes-20", "tc-doc", 1),
+		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Text"},
+		w.DocFields{Items: []w.Field{w.Field{Label: "Notebook", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Записи"}}, Width: w.FieldFlex2_280}, w.Field{Label: "Date", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Date", Mono: true}}, Width: w.FieldFix150}, w.Field{Label: "Time", Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:05", Label: "Time", Mono: true}}, Width: w.FieldFix130}, w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "встречи, релиз", Label: "Tags"}}, Width: w.FieldFlex3_320}, w.Field{Label: "Related to", Parts: []w.FieldPart{w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}}}}, Width: w.FieldFlex3_340}}},
+		w.Area{Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.", Variant: w.AreaBody, Focus: true, Label: "Text"},
+		w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here.")}}}}, "s-notes-20", "tc-doc", 1),
 	document("public", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},

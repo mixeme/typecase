@@ -526,8 +526,8 @@ func Contacts3() Screen {
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
 									w.Field{
-										Label: "Categories",
-										Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Categories"}},
+										Label: "Tags",
+										Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Tags"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
@@ -795,7 +795,7 @@ func Contacts6() Screen {
 								Face:  w.ValueMono,
 							},
 							{
-								Term:  "Categories",
+								Term:  "Tags",
 								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
 							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
@@ -993,8 +993,8 @@ func Contacts15() Screen {
 									Rubric: w.Rubric{Text: "Other"},
 									Items: []w.FieldSetPart{
 										w.Field{
-											Label: "Categories",
-											Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Categories"}},
+											Label: "Tags",
+											Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Tags"}},
 											Width: w.FieldLG,
 										},
 										w.Field{
@@ -1157,7 +1157,7 @@ func Contacts16() Screen {
 								Face:  w.ValueMono,
 							},
 							{
-								Term:  "Categories",
+								Term:  "Tags",
 								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
 							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
@@ -1432,7 +1432,7 @@ func Contacts7() Screen {
 								Face:  w.ValueMono,
 							},
 							{
-								Term:  "Categories",
+								Term:  "Tags",
 								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
 							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},

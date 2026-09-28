@@ -84,6 +84,8 @@ func Tasks1() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -463,11 +465,7 @@ func Tasks3() Screen {
 										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Location"}},
 										Width: w.FieldMD,
 									},
-									w.Field{
-										Label: "Categories",
-										Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Categories"}},
-										Width: w.FieldMD,
-									},
+									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Tags"}}, Width: w.FieldMD},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}},

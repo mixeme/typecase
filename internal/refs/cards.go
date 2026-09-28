@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush}, "s-admin-14", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 12 records.")}}, "s-contacts-21", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("No link has gone to "), w.Mono{Text: "new@example.org"}, w.Text(": until one is opened, "), w.Mono{Text: "mix@example.org"}, w.Text(" stays in use. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-10", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Drop files onto the window, or onto a folder in the list. A name that is already taken is refused rather than overwritten, and the queue says so.")}}, "s-files-1", "tc-msg", 1),
@@ -154,7 +155,7 @@ var _ = add(
 		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
 		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
-		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-6", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Organisation", Value: []w.ValuePart{w.Text("Издательство «Слово»")}},
@@ -171,7 +172,7 @@ var _ = add(
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
-		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-7", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
@@ -186,7 +187,7 @@ var _ = add(
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 		{Term: "Due", Value: []w.ValuePart{w.Text("2026-08-12 18:00")}, Face: w.ValueMono},
@@ -314,6 +315,10 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "m-desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("issued", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
+		w.Diag{Text: "login     anna\npassword  4c1-tide-oven", Variant: w.DiagInk},
+		w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Dim{Parts: []w.Inline{w.Text("Hand it over yourself; they choose their own at the next sign-in.")}, Size: w.Dim11_5, Variant: w.DimWrap}}}}, Variant: w.CardChosenFlushGrow}, "s-admin-14", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "xandikos"},
 		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("https://xandikos.home.example/ · mix · no password · last answer 2 min ago")}},

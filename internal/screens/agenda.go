@@ -382,7 +382,7 @@ func Agenda2() Screen {
 							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
+							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
 						},
 					},
 					w.Sec{
@@ -538,8 +538,8 @@ func Agenda3() Screen {
 							},
 							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Confirmed"}}, Width: w.FieldSM},
 							w.Field{
-								Label: "Categories",
-								Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Categories"}},
+								Label: "Tags",
+								Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Tags"}},
 								Width: w.FieldMD,
 							},
 							w.Field{

@@ -8,6 +8,11 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("disabled", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "anna · User", On: true},
+		w.MenuItem{Label: "olga · User"},
+		w.MenuItem{Label: "viktor · User", Reason: "Enable the account first: a disabled account gets no reset."},
+		w.MenuItem{Label: "mix · Administrator", Reason: "Your own password is changed in your account settings."}}, Width: w.MenuWidth290}, "s-admin-15", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Dim{Parts: []w.Inline{w.Text("event · 12 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Поездка в Казань"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Dim{Parts: []w.Inline{w.Text("task · 12 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Собрать чемодан"},
@@ -114,7 +119,7 @@ var _ = add(
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Email"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Organisation"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Birthday"},
-		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Categories"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tags"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Changed"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Source"},
 		w.MenuSep{},
@@ -411,6 +416,31 @@ var _ = add(
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("refusal", w.Sheet{Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "Documents / carrel / 2026-08", Variant: w.PickT12W240, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Where to put it"},
+			w.Line{Items: []w.LinePart{w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},
+			w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in carrel already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2},
+			w.Tree{Rows: []w.TreeRow{
+				{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
+				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40}}, On: 2}}, Variant: w.CardFlush},
+		w.Dim{Parts: []w.Inline{w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload 2 files", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-files-19", "tc-sheet", 1),
+	overlay("issued", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Reset a password", Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
+			w.Diag{Text: "login     anna\npassword  4c1-tide-oven", Variant: w.DiagInk},
+			w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Dim{Parts: []w.Inline{w.Text("Hand it over yourself; they choose their own at the next sign-in.")}, Size: w.Dim11_5, Variant: w.DimWrap}}}}, Variant: w.CardChosenFlushGrow}}, Foot: []w.SheetFootPart{w.Button{Label: "Done", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}}, Width: w.SheetWidth480}, "s-admin-14", "tc-sheet", 1),
+	overlay("tree", w.Sheet{Icon: "file", Title: "Attachment folder", Body: []w.SheetPart{
+		w.SheetNote{Text: "Where large attachments go: a folder of a file collection you can write to. Carrel makes it on first use."},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+			{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}}, Foot: []w.SheetFootPart{w.Button{Label: "Choose this folder", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "attachments-4", "tc-sheet", 1),
 	overlay("danger", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Withdraw my deposited key", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("After withdrawal nobody can recover this account, including you. The copy of your data key on this server is destroyed; your records and connections stay as they are.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "account-11", "tc-sheet", 1),
 	overlay("icon", w.Sheet{Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("to «Собрать чемодан»")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{

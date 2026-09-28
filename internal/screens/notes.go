@@ -233,9 +233,11 @@ func Notes2() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
+								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"}},
-							On:      1,
+								{Icon: "note", Label: "Что почитать про CRDT"},
+							},
+							On:      2,
 							Variant: w.TreePadded,
 						},
 					},
@@ -388,9 +390,11 @@ func Notes3() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
+								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"}},
-							On:      1,
+								{Icon: "note", Label: "Что почитать про CRDT"},
+							},
+							On:      2,
 							Variant: w.TreePadded,
 						},
 					},
@@ -526,9 +530,11 @@ func Notes20() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
+								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"}},
-							On:      1,
+								{Icon: "note", Label: "Что почитать про CRDT"},
+							},
+							On:      2,
 							Variant: w.TreePadded,
 						},
 					},
@@ -600,9 +606,7 @@ func Notes20() Screen {
 									},
 									w.DocNote{
 										Parts: []w.Inline{
-											w.Text("Properties Carrel does not know — "),
-											w.Mono{Text: "X-JTX-COLOR"},
-											w.Text(" and two more — are kept unchanged and not shown here."),
+											w.Text("Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here."),
 										},
 									},
 								},

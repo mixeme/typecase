@@ -35,6 +35,17 @@ var _ = add(
 	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "password · 401", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true, Trail: w.Button{Label: "Retry", Small: true}}, "m-phone-2", "tc-tickrow", 7),
 
 	// tc-tree
+	rows("new", w.Tree{Rows: []w.TreeRow{
+		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40}}, On: 2}, "s-files-19", "tc-tree", 1),
+	rows("target", w.Tree{Rows: []w.TreeRow{
+		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
+		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "attachments-4", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
@@ -42,13 +53,14 @@ var _ = add(
 		{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
 		{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
 		{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
-		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}}, "s-files-16", "tc-tree", 1),
+		{Icon: "file", Label: "Public", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}}}}, "s-files-16", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
 		{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}}}, On: 1, Variant: w.TreePadded}, "s-files-1", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
+		{Icon: "note", Label: "Планы на осень"},
 		{Icon: "note", Label: "Заметка со встречи"},
-		{Icon: "note", Label: "Что почитать про CRDT"}}, On: 1, Variant: w.TreePadded}, "s-notes-2", "tc-tree", 1),
+		{Icon: "note", Label: "Что почитать про CRDT"}}, On: 2, Variant: w.TreePadded}, "s-notes-2", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "attachments"},
 		{Icon: "file", Label: "2026", Indent: w.TreeLevel20},

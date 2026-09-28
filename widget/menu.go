@@ -43,6 +43,9 @@ type MenuItem struct {
 	Trail  MenuTrail
 	On     bool // the chosen or current item
 	Tone   MenuTone
+	// Reason, when set, switches the item off and says why: someone the
+	// list names but who cannot be chosen now.
+	Reason string
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
 	// shown on a phone only, where the item itself is under «⋯».
 	Tertiary bool
@@ -51,7 +54,8 @@ type MenuItem struct {
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<button` + class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary)) + ` type="button" role="menuitem"` +
-		attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true")) + `>`)
+		attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true")) +
+		attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	if it.Icon != "" {
 		s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 	}

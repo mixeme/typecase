@@ -4,6 +4,14 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Added
+
+- **A menu item that cannot be chosen now.** `MenuItem.Reason` switches the
+  item off and says why in its hint — someone a list names but who cannot be
+  picked, the role of the last administrator.
+
 ## typecase/v0.7.2 — 2026-09-28
 
 ### Fixed

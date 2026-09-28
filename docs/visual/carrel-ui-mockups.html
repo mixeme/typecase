@@ -611,6 +611,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-menu > .tc-in{display:block;width:100%;margin-bottom:4px}
 .tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
 .tc-menu__item.is-on{background:var(--tc-card)}
+.tc-menu__item:disabled{opacity:.45;cursor:default}
 .tc-menu__item > svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;opacity:.75}
 .tc-menu__item > .tc-kbd{margin-left:auto}
 /* Разделитель меню — 1 px: полпикселя на короткой линии пропадает. */
@@ -2365,7 +2366,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
     <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Email</button>
     <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Organisation</button>
     <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Birthday</button>
-    <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Categories</button>
+    <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Tags</button>
     <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Changed</button>
     <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Source</button>
     <span class="tc-menu__sep"></span>
@@ -3002,7 +3003,7 @@ Read  2 min ago</div>
 
           <div class="tc-fset">
             <div class="tc-rubric">Other</div>
-            <div class="tc-field tc-field--lg"><label>Categories</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Categories"></div>
+            <div class="tc-field tc-field--lg"><label>Tags</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Tags"></div>
             <div class="tc-field tc-field--full"><label>Note</label><textarea class="tc-in is-area">Пишет по вторникам, отвечает в тот же день.</textarea></div>
             <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
           </div>
@@ -3215,7 +3216,7 @@ Read  2 min ago</div>
           <dt>Email · second</dt><dd>anna.kovaleva@slovo.example</dd>
           <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
-          <dt>Categories</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
+          <dt>Tags</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
           <dt>Note</dt><dd>Пишет по вторникам, отвечает в тот же день.</dd>
         </dl>
         <div class="tc-sec">
@@ -3326,7 +3327,7 @@ Read  2 min ago · not changed on server</div>
 
           <div class="tc-fset">
             <div class="tc-rubric">Other</div>
-            <div class="tc-field tc-field--lg"><label>Categories</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Categories"></div>
+            <div class="tc-field tc-field--lg"><label>Tags</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Tags"></div>
             <div class="tc-field tc-field--full"><label>Note</label><textarea class="tc-in is-area">Пишет по вторникам, отвечает в тот же день.</textarea></div>
             <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
           </div>
@@ -3421,7 +3422,7 @@ Read  2 min ago · not changed on server</div>
           <dt>Email · second</dt><dd>anna.kovaleva@slovo.example</dd>
           <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
-          <dt>Categories</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
+          <dt>Tags</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
           <dt>Note</dt><dd>Пишет по вторникам, отвечает в тот же день.</dd>
         </dl>
         <div class="tc-sec">
@@ -3553,7 +3554,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">The address</div>
             <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>a.kovaleva@example.org → a.kovaleva@slovo.example</b> <span class="tc-dim">— 3 events and tasks name the old one</span></span>
+              <span class="tc-stack__item"><b>a.kovaleva@example.org → a.kovaleva@slovo.example</b> <span class="tc-dim">— 2 events and tasks name the old one</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
@@ -3716,7 +3717,7 @@ Read  2 min ago · not changed on server</div>
           <dt>Email · work</dt><dd>a.kovaleva@example.org</dd>
           <dt>Email · second</dt><dd>anna.kovaleva@slovo.example</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
-          <dt>Categories</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
+          <dt>Tags</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
           <dt>Note</dt><dd>Пишет по вторникам, отвечает в тот же день.</dd>
         </dl>
         <div class="tc-sec">
@@ -4051,7 +4052,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <dt>Reminders</dt><dd>10 minutes before</dd>
           <dt>Where</dt><dd>Переговорная 2</dd>
           <dt>Status</dt><dd>Confirmed</dd>
-          <dt>Categories</dt><dd><span class="tc-tag">release</span> <span class="tc-tag">team</span></dd>
+          <dt>Tags</dt><dd><span class="tc-tag">release</span> <span class="tc-tag">team</span></dd>
         </dl>
         <div class="tc-sec">
           <div class="tc-rubric">Description</div>
@@ -4146,7 +4147,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-field tc-field--xl"><label>Summary</label><input class="tc-in is-focus" type="text" value="Синк-ап по релизу" aria-label="Summary"></div>
           <div class="tc-field tc-field--lg"><label>Location</label><input class="tc-in" type="text" value="Переговорная 2" aria-label="Location"></div>
           <div class="tc-field tc-field--sm"><label>Status</label><button class="tc-in is-pick" type="button">Confirmed</button></div>
-          <div class="tc-field tc-field--md"><label>Categories</label><input class="tc-in" type="text" value="release, team" aria-label="Categories"></div>
+          <div class="tc-field tc-field--md"><label>Tags</label><input class="tc-in" type="text" value="release, team" aria-label="Tags"></div>
           <div class="tc-field tc-field--full"><label>Description</label><textarea class="tc-in is-area">Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.</textarea></div>
 
           <div class="tc-fset">
@@ -4337,7 +4338,7 @@ SEQUENCE  2</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined list</div><div class="tc-head__sub">2 of 3 lists · nextcloud · 30 tasks</div></div>
-          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
           <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 12</button><button class="tc-seg__opt" type="button">Done 48</button><button class="tc-seg__opt" type="button">All 60</button></span>
@@ -4592,7 +4593,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-fset">
             <div class="tc-rubric">Other</div>
             <div class="tc-field tc-field--md"><label>Location</label><input class="tc-in is-ph" type="text" placeholder="optional" aria-label="Location"></div>
-            <div class="tc-field tc-field--md"><label>Categories</label><input class="tc-in" type="text" value="дом" aria-label="Categories"></div>
+            <div class="tc-field tc-field--md"><label>Tags</label><input class="tc-in" type="text" value="дом" aria-label="Tags"></div>
             <div class="tc-field tc-field--lg"><label>Related to</label>
               <span class="tc-in tc-in--tags">
                 <span class="tc-tag tc-tag--pill">Забрать документы
@@ -4694,6 +4695,22 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
   <figcaption>Список поля — записи, которые уже загружены, с меткой коллекции и родом; поиска по мере ввода нет, пока его нет у сервера. Последний пункт — «By UID…»: связь с записью, которой нет среди загруженных.</figcaption>
+  </figure>
+
+<figure style="flex:0 1 360px">
+  <div class="frame" data-frame="s-tasks-11">
+    <div class="frame-label"><span>Related to · вне загруженного</span><span class="frag">фрагмент</span><i>поле правки задачи и заметки</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-form tc-form--pad0">
+        <div class="tc-field tc-field--w100"><label>Related to</label><span class="tc-in tc-in--tags"><span class="tc-tag tc-tag--pill">7c1e-40aa-b913
+          <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span></span><span class="tc-field__hint">A record that is not loaded here: its UID.</span></div>
+        <div class="tc-field tc-field--w100"><label>Related to</label><span class="tc-in tc-in--tags"><span class="tc-tag tc-tag--pill">Анна Ковалёва · contact
+          <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span></span></div>
+        <div class="tc-field tc-field--w100"><label>Related to</label><input class="tc-in is-mono is-focus is-ph" type="text" placeholder="UID of the record" aria-label="Related to"><span class="tc-field__hint">By UID: a record that is not among the loaded ones.</span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Связь одна: поле держит первую, остальные сервер хранит как есть. Запись, которой нет среди загруженных, — пилюля с её UID; карточка (заметка, заведённая из хронологии человека) — имя и «contact». «By UID…» открывает на месте поля строку для UID. У события поля нет.</figcaption>
   </figure>
 </div>
 
@@ -4883,6 +4900,7 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
           <div class="tc-tree tc-tree--padx8">
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Планы на осень</div>
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
           </div>
@@ -4995,6 +5013,7 @@ Read  2 min ago</div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
           <div class="tc-tree tc-tree--padx8">
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Планы на осень</div>
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
           </div>
@@ -5084,6 +5103,7 @@ Read  2 min ago</div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
           <div class="tc-tree tc-tree--padx8">
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Планы на осень</div>
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
           </div>
@@ -5138,7 +5158,7 @@ Read  2 min ago</div>
 ## Отложено до следующего спринта
 
 Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.</textarea>
-            <div class="tc-doc__note">Properties Carrel does not know — <span class="tc-mono">X-JTX-COLOR</span> and two more — are kept unchanged and not shown here.</div>
+            <div class="tc-doc__note">Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here.</div>
           </div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
@@ -6223,14 +6243,14 @@ Read  2 min ago</div>
             <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-doc"/></svg>release-checklist.md <span class="tc-push tc-dim tc-dim--t11">3 KB · inside</span></div>
             <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-doc"/></svg>смета-подрядчик.pdf <span class="tc-push tc-dim tc-dim--t11">1.2 MB · inside</span></div>
             <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-img"/></svg>2026-08-04-whiteboard.jpg <span class="tc-push tc-dim tc-dim--t11">2.8 MB · link</span></div>
-            <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Public <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
           </div>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" disabled>Attach</button><span class="tc-dim tc-dim--t11-5">Choose a file in the tree.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
-  <figcaption><b>«From Files» у Attach</b> открывает дерево переноса, которое выбирает файл: у открытой папки после её папок идут файлы, с размером — по нему видно, ляжет файл в запись (до 2 MB) или ссылкой. Хранилище только для чтения здесь источник и не выключено; подписанных папок нет, New folder нет: выбирают то, что уже лежит. Attach выключен, пока файл не выбран, причина — рядом.</figcaption>
+  <figcaption><b>«From Files» у Attach</b> открывает дерево переноса, которое выбирает файл: у открытой папки после её папок идут файлы, с размером — по нему видно, ляжет файл в запись (до 2 MB) или ссылкой. Хранилище только для чтения здесь источник — не приглушено и без значка: брать из него можно; подписанных папок нет, New folder нет: выбирают то, что уже лежит. Attach выключен, пока файл не выбран, причина — рядом.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -6258,6 +6278,37 @@ Read  2 min ago</div>
     </div>
   </div>
   <figcaption>Папка вложений не выбрана — ярлык остаётся и говорит «not set»; нажатие ведёт в Settings → Attachments, где её выбирают.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-files-19">
+    <div class="frame-label"><span>Upload · New folder, отказ</span><span class="frag">фрагмент</span><i>лист загрузки</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
+        <b class="tc-sheet__title">Upload files</b>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button">Documents / carrel / 2026-08</button>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-card tc-card--flush">
+            <div class="tc-rubric">Where to put it</div>
+            <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="button">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
+            <div class="tc-msg is-alert tc-msg--flush-top2">There is a folder called «2026-07» in carrel already. Choose another name.</div>
+            <div class="tc-tree">
+              <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+              <div class="is-on tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
+              <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>2026-07</div>
+              <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
+            </div>
+          </div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.</span>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Upload 2 files</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Отказ New folder в листе загрузки стоит там же, где в листе переноса: под строкой имени, строка остаётся открытой с набранным. Пояснение листа внизу на месте. Прочие отказы — недопустимое имя, папки уже нет, отказ сервера — тем же сообщением на том же месте.</figcaption>
   </figure>
 </div>
 
@@ -8720,6 +8771,19 @@ Read  2 min ago</div>
   </div>
   <figcaption>Администратор выключил депонирование — блок остаётся и говорит об этом, без кнопок: человек видит, что копии нет и сделать её нельзя.</figcaption>
   </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="account-14">
+    <div class="frame-label"><span>Key escrow · страница, схема выключена</span><span class="frag">фрагмент</span><i>страница /app/settings/escrow</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Key escrow</div></div></div>
+        <div class="tc-msg">Key escrow is disabled on this instance.</div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Страница депонирования, когда администратор выключил схему: без подзаголовка, рубрик и кнопок — одна строка о том, что здесь нечего сделать.</figcaption>
+  </figure>
   <figure style="flex:1 1 330px">
   <div class="frame" data-frame="account-7">
     <div class="frame-label"><span>Key escrow · ключ депонирован</span><span class="frag">фрагмент</span><i>блок Key escrow</i></div>
@@ -10364,6 +10428,32 @@ Read  2 min ago</div>
   </div>
   <figcaption>Дата впереди держит папку в порядке появления; имя записи — когда файлы ищут по тому, к чему они приложены.</figcaption>
   </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="attachments-4">
+    <div class="frame-label"><span>Вложения · Browse</span><span class="frag">фрагмент</span><i>лист из поля Folder in it</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w520">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-file"/></svg>
+        <b class="tc-sheet__title">Attachment folder</b>
+        </div>
+        <div class="tc-sheet__body">
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Where large attachments go: a folder of a file collection you can write to. Carrel makes it on first use.</span>
+          <div class="tc-tree">
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
+            <div class="is-on tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></div>
+            <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
+          </div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Choose this folder</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Browse у папки вложений — то же дерево, что у переноса: выбирают папку, куда писать, поэтому хранилище только для чтения приглушено. «Choose this folder» выключена, пока папка не выбрана, с причиной «Choose a folder in the tree.»; «Folder in it» получает её путь.</figcaption>
+  </figure>
 </div>
 
 <h2 id="s-plan">7.13 Настройки · новое устройство</h2>
@@ -11222,7 +11312,7 @@ Read  2 min ago</div>
     </div></div>
   </div>
 </div>
-<figcaption>Файловые коллекции в списке источников — по правилу равенства коллекций (<a href="#parity">2.1</a>), и рядом с каждой показан прошлый объём: два гигабайта и два мегабайта требуют разных решений о частоте и месте. Задачи и заметки отдельными строками не выбираются — они лежат в календарных коллекциях, и об этом сказано прямо, а не оставлено на догадку. Способ доставки — не настройка «куда положить файл», а выбор из трёх: на сервер, себе в браузер, и то и другое; у «себе» нет ни папки, ни срока хранения, ни расписания, потому что некому отдавать файл в три часа ночи. Источники выбираются тем же компонентом, что и везде: аккаунт с трёхпозиционным флажком, под ним коллекции с полосками. Ничего нового учить не нужно — это тот же рейл, только развёрнутый в сетку. <b>Шифрование архива — флажок, а не данность:</b> по умолчанию включено, но копия на диск, к которому и так никто, кроме вас, не подходит, вполне может лежать открытой — и тогда её распакует любой архиватор, без Carrel. Правило записано в S-24.2: включено по умолчанию, выключается осознанно, и там же сказано, чем это оборачивается вместе с сохранённым триггер-паролем (S-24.4).<br><br><b>Наружу отдаётся строка, а не пароль.</b> Тот, кто включил внешний триггер, пришёл не за секретом: ему нужно, чтобы копия снималась в три часа ночи, а для этого нужна строка в crontab на машине с часами. Пароль в ней уже стоит, поэтому отдельным полем он не нужен — собрать команду по документации человек может и сам, но это работа, которую мы умеем сделать за него, и делаем. Пароль сам по себе убран под раскрывашку внизу карточки: он нужен тому, кто дёргает API руками, и таких меньшинство — <a href="#trigger-secret">но им он нужен по-настоящему</a>, вместе с остальными эндпоинтами.<br><br><b>Строка одна и без переносов.</b> crontab не понимает продолжения по обратному слэшу, и красиво разложенная на четыре строки команда сломается ровно у того, кто ей поверил; перенос на экране делает браузер, а «Copy the line» кладёт в буфер одну строку. Время стоит внутри неё, а не полем на этой странице: расписание живёт на той машине, и два места, где оно якобы задаётся, разъехались бы в первый же месяц. Часов у Carrel нет не по недосмотру — планировщик внутри означал бы пароль, сохранённый на диске рядом с обёрткой ключа, то есть ровно ту уступку, которой S-2 избегает.<br><br><b>Пароль появляется по нажатию и виден один раз</b> — сразу, не дожидаясь сохранения задания: иначе человек сохраняет задание и остаётся с флажком, за которым ничего не видно. Токен выдаётся <b>на задание</b>, а не на аккаунт: машина, которая запускает рабочую копию по расписанию, не должна уметь запускать личную. Внешний запуск выключается той же отметкой: сняли «On a clock of your own» — строка перестаёт действовать, отдельного выключателя нет.</figcaption>
+<figcaption>Файловые коллекции в списке источников — по правилу равенства коллекций (<a href="#parity">2.1</a>), и рядом с каждой показан прошлый объём: два гигабайта и два мегабайта требуют разных решений о частоте и месте. Задачи и заметки отдельными строками не выбираются — они лежат в календарных коллекциях, и об этом сказано прямо, а не оставлено на догадку. Способ доставки — не настройка «куда положить файл», а выбор из трёх: на сервер, себе в браузер, и то и другое; у «себе» нет ни папки, ни срока хранения, ни расписания, потому что некому отдавать файл в три часа ночи. Источники выбираются тем же компонентом, что и везде: аккаунт с трёхпозиционным флажком, под ним коллекции с полосками. Ничего нового учить не нужно — это тот же рейл, только развёрнутый в сетку. <b>Шифрование архива — флажок, а не данность:</b> по умолчанию включено, но копия на диск, к которому и так никто, кроме вас, не подходит, вполне может лежать открытой — и тогда её распакует любой архиватор, без Carrel. Правило записано в S-24.2: включено по умолчанию, выключается осознанно, и там же сказано, чем это оборачивается вместе с сохранённым триггер-паролем (S-24.4).<br><br><b>Наружу отдаётся строка, а не пароль.</b> Тот, кто включил внешний триггер, пришёл не за секретом: ему нужно, чтобы копия снималась в три часа ночи, а для этого нужна строка в crontab на машине с часами. Пароль в ней уже стоит, поэтому отдельным полем он не нужен — собрать команду по документации человек может и сам, но это работа, которую мы умеем сделать за него, и делаем. Пароль сам по себе убран под раскрывашку внизу карточки: он нужен тому, кто дёргает API руками, и таких меньшинство — <a href="#trigger-secret">но им он нужен по-настоящему</a>, вместе с остальными эндпоинтами.<br><br><b>Строка одна и без переносов.</b> crontab не понимает продолжения по обратному слэшу, и красиво разложенная на четыре строки команда сломается ровно у того, кто ей поверил; перенос на экране делает браузер, а «Copy the line» кладёт в буфер одну строку. Время стоит внутри неё, а не полем на этой странице: расписание живёт на той машине, и два места, где оно якобы задаётся, разъехались бы в первый же месяц. Часов у Carrel нет не по недосмотру — планировщик внутри означал бы пароль, сохранённый на диске рядом с обёрткой ключа, то есть ровно ту уступку, которой S-2 избегает.<br><br><b>Пароль появляется по нажатию и виден один раз</b> — сразу, не дожидаясь сохранения задания: иначе человек сохраняет задание и остаётся с флажком, за которым ничего не видно. Токен выдаётся <b>на задание</b>, а не на аккаунт: машина, которая запускает рабочую копию по расписанию, не должна уметь запускать личную. Внешний запуск выключается той же отметкой: сняли «On a clock of your own» — строка перестаёт действовать и карточки со строкой нет: показывать и обновлять нечего; отдельного выключателя нет. Значок <span class="tc-badge is-local">local</span> — признак экземпляра, а не отметки: адрес в строке отвечает только изнутри своей сети.</figcaption>
 </figure>
 
 <div class="frames">
@@ -11590,7 +11680,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
 </figure>
 
 <h2 id="s-publish">7.16 Настройки · публикация по ссылке</h2>
-<p><b>Ссылка создаётся там, где лежит то, что отдают:</b> «Publish a link» в меню ⋯ строки списка (<a href="#components">компоненты</a>), в меню ⋯ карточки и в меню коллекции — в шапке раздела и в подключениях. Лист открывается поверх того же экрана, и его шапка называет, что уходит по ссылке. <b>Список выданных ссылок ничего не создаёт</b>: он для того, чтобы увидеть, что отдано, скопировать, отправить письмом и отозвать. Отдаётся только своё — запись, коллекция, файл или папка (S-25.1); подписка — чужая коллекция по ссылке, живёт в подключениях (<a href="#subscribe">7.11.2</a>) и дальше не публикуется.</p>
+<p><b>Ссылка создаётся там, где лежит то, что отдают:</b> «Publish a link» в меню ⋯ строки списка (<a href="#components">компоненты</a>), в меню ⋯ карточки и в меню коллекции в подключениях. Лист открывается поверх того же экрана, и его шапка называет, что уходит по ссылке. <b>Список выданных ссылок ничего не создаёт</b>: он для того, чтобы увидеть, что отдано, скопировать, отправить письмом и отозвать. Отдаётся только своё — запись, коллекция, файл или папка (S-25.1); подписка — чужая коллекция по ссылке, живёт в подключениях (<a href="#subscribe">7.11.2</a>) и дальше не публикуется.</p>
 
 <figure>
 <div class="frame" data-frame="s-publish-1" data-screen="/app/files/published">
@@ -11674,7 +11764,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Download .ics</button>
           </span>
         </div>
-        <div class="tc-head tc-head--snug"><div class="tc-head__titles"><div class="tc-head__title">Синк-ап по релизу</div><div class="tc-head__sub">Monday 10 August 2026, 10:00 – 11:00 · Переговорная 2</div></div></div>
+        <div class="tc-head tc-head--snug"><div class="tc-head__titles"><div class="tc-head__title">Синк-ап по релизу</div><div class="tc-head__sub">Monday, 10 August 2026, 10:00 – 11:00 · Переговорная 2</div></div></div>
       </div></div>
     </div>
   </div>
@@ -13124,12 +13214,12 @@ https://carrel.example/api/backup/run?job=personal</textarea>
               <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
-        <div class="tc-msg">Deleting an account and resetting a password are confirmed in a dialogue of their own, with the warning that a reset destroys the saved connections. A reset does not set a password: it issues the person the same two-step link the sign-in screen would have sent them.</div>
+        <div class="tc-msg">Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed.</div>
       </div>
     </div>
   </div>
 </div>
-<figcaption>Подтверждение удаления и сброса — в диалоге, предупреждение про уничтожение подключений остаётся при нём. <b>Сброс администратором — та же очистка, что по «Forgotten your password?»</b> (<a href="#rest">7.20</a>): выдаётся тот же токен, письмо уходит на подтверждённый адрес, а если адреса нет — администратор получает ссылку, чтобы передать её лично. Пароль за человека не задают: оба шага проходит владелец, и в журнале остаётся, кто сброс затеял. <b>Add users</b> стоит перед <b>Users</b>: список существующих открывают, чтобы посмотреть или поправить, а приходят в раздел чаще всего затем, чтобы кого-то завести. В таблице — данные, а не форма подтверждения в каждой строке: когда создан, когда входил, сколько подключений, покрыт ли депонированием.</figcaption>
+<figcaption>Удаление подтверждается в диалоге. <b>Сброс пароля — лист из шапки</b> (кадры ниже): администратор задаёт временный пароль и передаёт его сам, человек меняет его при следующем входе (S-10.6); что сброс уничтожает, лист называет до нажатия, а в журнале остаётся, кто сброс затеял. <b>Add users</b> стоит перед <b>Users</b>: список существующих открывают, чтобы посмотреть или поправить, а приходят в раздел чаще всего затем, чтобы кого-то завести. В таблице — данные, а не форма подтверждения в каждой строке: когда создан, когда входил, сколько подключений, покрыт ли депонированием.</figcaption>
 </figure>
 
 <div class="frames">
@@ -13146,7 +13236,7 @@ https://carrel.example/api/backup/run?job=personal</textarea>
       </div>
     </div>
   </div>
-  <figcaption>Ролей две, поэтому пункт один и переключает её: у пользователя — «Make administrator», у администратора — «Make user»; у последнего администратора пункт выключен с причиной «Someone has to stay an administrator». У отключённого вместо Disable — Enable. Действия равноправны, ни одно не главное, поэтому на виду только «⋯».</figcaption>
+  <figcaption>Ролей две, поэтому пункт один и переключает её: у пользователя — «Make administrator», у администратора — «Make user»; у последнего администратора пункт выключен с причиной «Someone has to stay an administrator.». У отключённого вместо Disable — Enable. Действия равноправны, ни одно не главное, поэтому на виду только «⋯».</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -13160,14 +13250,64 @@ https://carrel.example/api/backup/run?job=personal</textarea>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-field tc-field--w100"><label>Whose</label><button class="tc-in is-pick" type="button">anna · User</button></div>
-          <div class="tc-msg is-alert tc-msg--flush">The passwords this person saved for DAV servers are sealed with their own password, and a reset destroys them: every account they connected asks for its password again. Their records on the servers stay as they are.</div>
+          <div class="tc-msg is-alert tc-msg--flush">The passwords this person saved for DAV servers are sealed with their own password, and a reset destroys them: every account they connected has to be connected again, and their published links, devices and external backup triggers stop. Their records on the servers stay as they are.</div>
           <div class="tc-field tc-field--w100"><label>Temporary password</label><input class="tc-in is-mono" type="text" value="4c1-tide-oven" aria-label="Temporary password"><span class="tc-field__hint">Hand it over yourself; they choose their own at the next sign-in. If their key is deposited, recover the account in Key escrow instead: nothing is destroyed then.</span></div>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Reset password</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
-  <figcaption><b>Кнопка в шапке списка людей открывает лист, где выбирают, кого сбрасывать.</b> Последствие названо до нажатия: пароли от серверов запечатаны паролем человека и при сбросе пропадают, подключения придётся заполнить заново. Временный пароль — здесь же, как у заведения пользователя; депонированный ключ — путь без потерь, и лист на него указывает. В «⋯» строки пользователя сброса нет.</figcaption>
+  <figcaption><b>Кнопка в шапке списка людей открывает лист, где выбирают, кого сбрасывать.</b> Последствие названо до нажатия: пароли от серверов запечатаны паролем человека и при сбросе пропадают: подключения придётся завести заново, а выданные ссылки, устройства и внешние запуски копий перестают работать. Временный пароль — здесь же, как у заведения пользователя; депонированный ключ — путь без потерь, и лист на него указывает. В «⋯» строки пользователя сброса нет.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-admin-14">
+    <div class="frame-label"><span>Сброс пароля · готово</span><span class="frag">фрагмент</span><i>ответ на Reset password</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-shield"/></svg>
+        <b class="tc-sheet__title">Reset a password</b>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg tc-msg--flush">The password of <b>anna</b> is reset.</div>
+          <div class="tc-card tc-card--edge-accent tc-card--flush">
+            <div class="tc-rubric">Temporary password <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
+            <div class="tc-diag tc-diag--top9-ink">login     anna
+password  4c1-tide-oven</div>
+            <div class="tc-line tc-line--gap-8 tc-card__top8"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Hand it over yourself; they choose their own at the next sign-in.</span></div>
+          </div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Done</button><kbd class="tc-kbd">Enter</kbd></div>
+      </div>
+    </div>
+  </div>
+  <figcaption><b>Временный пароль показан один раз</b> — в ответе на сброс, как строка внешнего запуска копии: логин и пароль вместе, одной кнопкой в буфер. Вернуться к нему нельзя: забыли передать — сбрасывают снова.</figcaption>
+  </figure>
+
+<figure style="flex:0 1 330px">
+  <div class="frame" data-frame="s-admin-15">
+    <div class="frame-label"><span>Сброс пароля · Whose</span><span class="frag">меню</span><i>список поля</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w290">
+        <button class="tc-menu__item is-on" type="button" role="menuitem">anna · User</button>
+        <button class="tc-menu__item" type="button" role="menuitem">olga · User</button>
+        <button class="tc-menu__item" type="button" role="menuitem" title="Enable the account first: a disabled account gets no reset." disabled>viktor · User</button>
+        <button class="tc-menu__item" type="button" role="menuitem" title="Your own password is changed in your account settings." disabled>mix · Administrator</button>
+      </div>
+    </div>
+  </div>
+  <figcaption>В списке — все, но сбросить можно не всех: свой пароль меняют в своих настройках, отключённого сначала включают. Такие пункты выключены, причина — в подсказке пункта.</figcaption>
+  </figure>
+
+<figure style="flex:0 1 330px">
+  <div class="frame" data-frame="s-admin-16">
+    <div class="frame-label"><span>Сброс пароля · короткий пароль</span><span class="frag">фрагмент</span><i>поле листа</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-field tc-field--w100"><label>Temporary password</label><input class="tc-in is-mono is-error is-focus" type="text" value="4c1" aria-label="Temporary password"><span class="tc-field__hint tc-dim--danger">Password must be at least 8 characters.</span></div>
+    </div>
+  </div>
+  <figcaption>Отказ — у поля, словами правила, а не «ошибка»: временный пароль не короче восьми знаков.</figcaption>
   </figure>
 </div>
 
@@ -13989,7 +14129,7 @@ The account itself stays: same login, same confirmed address. Only the password 
           <dt>Email · second</dt><dd>anna.kovaleva@slovo.example</dd>
           <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
-          <dt>Categories</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
+          <dt>Tags</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
           <dt>Note</dt><dd>Пишет по вторникам, отвечает в тот же день.</dd>
         </dl>
         <div class="tc-sec">

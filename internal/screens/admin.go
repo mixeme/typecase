@@ -336,7 +336,7 @@ func Admin2() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Deleting an account and resetting a password are confirmed in a dialogue of their own, with the warning that a reset destroys the saved connections. A reset does not set a password: it issues the person the same two-step link the sign-in screen would have sent them."),
+							w.Text("Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed."),
 						},
 					},
 				},
