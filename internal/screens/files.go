@@ -857,7 +857,7 @@ func Files6() Screen {
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
-						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "plus", Title: "Open a folder to make one in it.", State: w.ButtonDisabled},
 						w.Button{Icon: "server", Title: "Connect account"},
 						w.Button{Icon: "link", Title: "Subscribe to a feed"},
 						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},

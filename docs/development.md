@@ -98,6 +98,7 @@
 | Формы блока в макете | `go run ./internal/fragment/cmd/shapes tc-tickrow` |
 | Значение эталона из кадра | `go run ./internal/framegen/cmd/record s-contacts-6 tc-danger 1` |
 | Пересобрать эталоны из кадров | `python internal/framegen/cmd/record/refresh.py s-contacts-6:tc-danger:1 …` |
+| Эталоны для новых форм | `python internal/framegen/cmd/record/add.py s-dup-7:tc-btn:3:disabled …` (кадр:класс:номер:состояние) |
 | Строки `allowed-diffs.md` по решению | `python internal/framegen/cmd/record/allow.py 2026-09-28 "что" s-tasks-2 …` |
 | Каталог | `go run ./cmd/catalog` → http://localhost:8080/ |
 | Демо-экраны | `go run ./cmd/screens` → http://localhost:8085/ |

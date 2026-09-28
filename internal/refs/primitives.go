@@ -20,6 +20,11 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("disabled", w.Button{Label: "Rewrite 0 records", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, "s-contacts-20", "tc-btn", 1),
+	primitive("disabled", w.Button{Icon: "plus", Title: "Open a folder to make one in it.", State: w.ButtonDisabled}, "s-files-6", "tc-btn", 3),
+	primitive("disabled", w.Button{Label: "New folder", Icon: "plus", State: w.ButtonDisabled}, "s-files-15", "tc-btn", 2),
+	primitive("disabled", w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, "s-files-15", "tc-btn", 1),
+	primitive("disabled", w.Button{Label: "Back to defaults", Small: true, Title: "Every weight is the default already.", State: w.ButtonDisabled}, "s-dup-7", "tc-btn", 3),
 	primitive("icon", w.Button{Label: "2 min ago", Icon: "refresh"}, "shell-1", "tc-btn", 2),
 	primitive("small", w.Button{Label: "Retry", Small: true}, "components-11", "tc-btn", 1),
 	primitive("normal", w.Button{Label: "Import"}, "components-9", "tc-btn", 2),

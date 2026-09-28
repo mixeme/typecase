@@ -10,6 +10,8 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 12 records.")}}, "s-contacts-21", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("No link has gone to "), w.Mono{Text: "new@example.org"}, w.Text(": until one is opened, "), w.Mono{Text: "mix@example.org"}, w.Text(" stays in use. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-10", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Drop files onto the window, or onto a folder in the list. A name that is already taken is refused rather than overwritten, and the queue says so.")}}, "s-files-1", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write. Connect an account that has a journal, or create a notebook after connecting — the note is not kept in this window.")}, Space: w.MsgFlush}, "s-notes-6", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12}, "s-admin-1", "tc-msg", 1),
@@ -312,6 +314,10 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "m-desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "xandikos"},
+		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("https://xandikos.home.example/ · mix · no password · last answer 2 min ago")}},
+		w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}}}}, "s-profile-15", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
 		w.Field{Label: "Markdown or a zip of them", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, "s-io-4", "tc-card", 1),

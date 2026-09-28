@@ -733,7 +733,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-menu.is-pop,.tc-drop{z-index:6;overflow:visible}
   .tc-crumbs{position:relative;z-index:1}
   .tc-shell__body .tc-main,.tc-shell__body .tc-bar,.tc-shell__body .tc-head,.tc-shell__body .tc-acts{overflow:visible}
-  .tc-form{flex-direction:column;flex-wrap:nowrap}
+  .tc-form{flex-direction:column;flex-wrap:nowrap;align-items:stretch}
   .tc-field,.tc-field--xs,.tc-field--sm,.tc-field--md,.tc-field--lg,.tc-field--xl,.tc-field--full{width:100%;min-width:0}
   .tc-fields{grid-template-columns:minmax(0,1fr)}
   .tc-head .tc-acts{flex:1 1 100%;justify-content:flex-start}
@@ -747,7 +747,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
   .tc-card{display:flex;flex-direction:column}
   /* Строка полей встаёт столбцом; фраза с полем-фишкой («старше [7] дней») — нет. */
-  .tc-form .tc-line:where(:not(:has(> .tc-in--chip))){flex-direction:column;align-items:stretch}
+  .tc-form .tc-line.tc-line:where(:not(:has(> .tc-in--chip))){flex-direction:column;align-items:stretch}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
     overflow-wrap:anywhere;min-width:0}
   /* input/textarea — replaced, без ::after: зону даёт поле. */

@@ -1076,6 +1076,7 @@ func Contacts15() Screen {
 								},
 							},
 						},
+						w.SheetNote{Text: "Collections that are not ticked were not looked in."},
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},

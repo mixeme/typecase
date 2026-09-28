@@ -8,6 +8,21 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Dim{Parts: []w.Inline{w.Text("event · 12 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Поездка в Казань"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Dim{Parts: []w.Inline{w.Text("task · 12 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Собрать чемодан"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Dim{Parts: []w.Inline{w.Text("note · 10 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Заметка со встречи 10.08"},
+		w.MenuSep{},
+		w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-tasks-10", "tc-menu", 1),
+	overlay("fields", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Points per signal", Items: []w.RubricPart{w.Push{Items: []w.PushPart{w.Text("Default")}}, w.RubricCol{Text: "Yours"}}, Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuField{Label: "Same UID", Default: w.Dim{Parts: []w.Inline{w.Text("80")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "80", Mono: true, Variant: w.InputChip, Label: "Same UID"}},
+		w.MenuField{Label: "Same email", Default: w.Dim{Parts: []w.Inline{w.Text("60")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "60", Mono: true, Variant: w.InputChip, Label: "Same email"}},
+		w.MenuField{Label: "Same phone", Default: w.Dim{Parts: []w.Inline{w.Text("60")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "60", Mono: true, Variant: w.InputChip, Label: "Same phone"}},
+		w.MenuField{Label: "Same name", Default: w.Dim{Parts: []w.Inline{w.Text("20")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "20", Mono: true, Variant: w.InputChip, Label: "Same name"}},
+		w.MenuField{Label: "Same birthday", Default: w.Dim{Parts: []w.Inline{w.Text("10")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "10", Mono: true, Variant: w.InputChip, Label: "Same birthday"}},
+		w.MenuField{Label: "Same title and date (events, tasks, notes)", Default: w.Dim{Parts: []w.Inline{w.Text("70")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "70", Mono: true, Variant: w.InputChip, Label: "Same title and date (events, tasks, notes)"}},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Back to defaults", Small: true, Title: "Every weight is the default already.", State: w.ButtonDisabled}}}}, Width: w.MenuWidth420, Fields: true}, "s-dup-7", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
@@ -396,6 +411,27 @@ var _ = add(
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("danger", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Withdraw my deposited key", Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("After withdrawal nobody can recover this account, including you. The copy of your data key on this server is destroyed; your records and connections stay as they are.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "account-11", "tc-sheet", 1),
+	overlay("icon", w.Sheet{Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("to «Собрать чемодан»")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.SheetNote{Text: "Attach a file that is in Files already. Up to 2 MB it is written into the record, as a file from this computer is; a larger one stays where it lies, and the record keeps a link to it."},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+			{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
+			{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
+			{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, w.Dim{Parts: []w.Inline{w.Text("Choose a file in the tree.")}, Size: w.Dim11_5}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-files-16", "tc-sheet", 1),
+	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 3 events and tasks name the old one")}}}}},
+		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}, {Name: "Общий · baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— could not be read: the server answered 401 Unauthorized. What it holds keeps the old address.")}}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Nothing here can be rewritten: every record that names the old address is read-only or could not be read.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 0 records", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-20", "tc-sheet", 1),
+	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 1 event or task names the old one; it drops out of the person’s timeline")}}}}},
+		w.SheetBlock{Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "1 record on a server that schedules", Note: w.Dim{Parts: []w.Inline{w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees")}}}}},
+		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "Общий · baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— could not be read: the server answered 401 Unauthorized. What it holds keeps the old address.")}}}}},
+		w.SheetNote{Text: "Collections that are not ticked were not looked in."}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 1 record", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-19", "tc-sheet", 1),
 	overlay("icon", w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Rubric{Text: "Write into"},
 		w.Tree{Rows: []w.TreeRow{
@@ -444,7 +480,8 @@ var _ = add(
 	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; they drop out of the person’s timeline")}}}}},
 		w.SheetBlock{Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "9 records on servers that schedule", Note: w.Dim{Parts: []w.Inline{w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees")}}}, {Name: "2 records on baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— the server did not say whether it schedules")}}}, {Name: "3 meetings organised by others", Note: w.Dim{Parts: []w.Inline{w.Text("— the organiser’s server may refuse the change, and its next update may undo it")}}}, {Name: "Past meetings", Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if the person had been invited at it")}}}}},
-		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-15", "tc-sheet", 1),
+		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}}},
+		w.SheetNote{Text: "Collections that are not ticked were not looked in."}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-15", "tc-sheet", 1),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "print", Label: "Print"}}, Width: w.MenuWidth212}, "s-files-7", "tc-menu", 1),
 	overlay("plain", w.Sheet{Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{

@@ -55,6 +55,9 @@ var _ = add(
 
 	// tc-main
 	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "down"}}}, Wide: true},
+		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8}}}, "s-publish-16", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}}},
 		w.Form{},
 		w.FormFoot{}}}, "s-contacts-3", "tc-main", 1),

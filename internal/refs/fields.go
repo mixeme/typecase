@@ -52,6 +52,8 @@ var _ = add(
 	form("labelled", field("On a connected server", w.FieldFill300, ln), "components-20", "tc-field", 1),
 	form("labelled", field("Date", w.FieldFix150, in), "s-notes-20", "tc-field", 2),
 	form("hint", field("Collection", w.FieldMD, pk, hint(t("Any file collection you can write to."))), "attachments-1", "tc-field", 2),
+	form("labelled", w.Field{Label: "Certificate fingerprint", LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}}, Parts: []w.FieldPart{w.Input{Placeholder: "only for a certificate the system does not trust", Label: "Certificate fingerprint", Mono: true}}, Width: w.FieldFull}, "s-profile-2", "tc-field", 5),
+	form("hint", w.Field{Label: "Birthday", Parts: []w.FieldPart{w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, w.FieldHint{Parts: []w.Inline{w.Text("Type the date as 14.03.1987, or 14.03 without the year.")}, Variant: w.HintDanger}}, Width: w.FieldSM}, "s-contacts-18", "tc-field", 1),
 	form("bare", w.Field{Gap: 7, Parts: []w.FieldPart{chk, chk, chk}}, "appearance-1", "tc-field", 3),
 	form("labelled", field("Notebook", w.FieldFlex2_280, pk), "s-notes-20", "tc-field", 1),
 	form("labelled", field("Tags", w.FieldFlex3_320, in), "s-notes-20", "tc-field", 4),

@@ -68,6 +68,7 @@ var Routes = []Route{
 	{Frame: "s-profile-1", Caption: "Настройки · подключения и подписки", Screen: Profile1},
 	{Frame: "s-profile-2", Caption: "Подключение аккаунта", Screen: Profile2},
 	{Frame: "s-profile-14", Caption: "Подключение аккаунта · сервер без пароля", Screen: Profile14},
+	{Frame: "s-profile-16", Caption: "Подключение без пароля · правка", Screen: Profile16},
 	{Frame: "s-profile-11", Caption: "Подключение аккаунта · подпись занята", Screen: Profile11},
 	{Frame: "s-profile-3", Caption: "Show password · вопрос", Screen: Profile3},
 	{Frame: "s-profile-4", Caption: "Show password · показано", Screen: Profile4},
