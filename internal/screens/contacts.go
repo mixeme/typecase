@@ -890,33 +890,12 @@ func Contacts15() Screen {
 		Body: w.Overlay{
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
-					w.Nav{
-						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
-							{Icon: "file", Label: "Files", Href: "#"},
-							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
-						},
-						On: 1,
-					},
-					w.RailSec{
-						Items: []w.RailSecPart{
-							w.TickRow{
-								Ticked:  w.TickedPart,
-								Kind:    w.TickRowAll,
-								Mark:    w.Mark{Kind: w.MarkMulti},
-								Label:   "Combined address book",
-								Meta:    "312",
-								Current: true,
-							},
-						},
-					},
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to the card", Href: "#"}}},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 						},
 					},
@@ -924,92 +903,115 @@ func Contacts15() Screen {
 				Main: w.Main{
 					Items: []w.MainPart{
 						w.Head{
-							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 312 cards")}}},
-							Acts: &w.Acts{
-								Items: []w.ActsPart{
-									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-									w.Button{Label: "Import", Icon: "up"},
-									w.Button{Label: "Export", Icon: "down"},
-									w.Button{Label: "Print", Icon: "print"},
+							Title: &w.HeadTitle{Text: "Анна Ковалёва"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
+							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						},
+						w.Form{
+							Items: []w.FormPart{
+								w.Field{
+									Label:     "Photo",
+									LabelSpan: true,
+									Parts: []w.FieldPart{
+										w.Photo{
+											Side: []w.FieldPart{
+												w.Line{Items: []w.LinePart{w.Button{Label: "Replace"}, w.Button{Label: "Crop"}}, Gap: w.LineGap6},
+												w.Button{Label: "Remove", Kind: w.ButtonDanger},
+												w.FieldHint{Parts: []w.Inline{w.Text("EXIF orientation applied, metadata stripped.")}, Variant: w.HintNarrow},
+											},
+										},
+									},
+									Width: w.FieldFixAuto,
+								},
+								w.FormCols{
+									Items: []w.Field{
+										w.Field{
+											Label: "Display name",
+											Parts: []w.FieldPart{w.Input{Value: "Анна Ковалёва", Label: "Display name", Focus: true}},
+											Width: w.FieldXL,
+										},
+										w.Field{Label: "Given", Parts: []w.FieldPart{w.Input{Value: "Анна", Label: "Given"}}, Width: w.FieldSM},
+										w.Field{Label: "Family", Parts: []w.FieldPart{w.Input{Value: "Ковалёва", Label: "Family"}}, Width: w.FieldSM},
+										w.Field{
+											Label: "Nickname",
+											Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Nickname"}},
+											Width: w.FieldSM,
+										},
+										w.Field{
+											Label: "Organisation",
+											Parts: []w.FieldPart{w.Input{Value: "Издательство «Слово»", Label: "Organisation"}},
+											Width: w.FieldMD,
+										},
+										w.Field{
+											Label: "Title",
+											Parts: []w.FieldPart{w.Input{Value: "Выпускающий редактор", Label: "Title"}},
+											Width: w.FieldMD,
+										},
+										w.Field{
+											Label: "Birthday",
+											Parts: []w.FieldPart{
+												w.Input{Value: "14.03.1987", Label: "Birthday", Mono: true, Numeric: true},
+												w.FieldHint{Parts: []w.Inline{w.Text("Type it: 14.03.1987, or 14.03 without the year.")}},
+											},
+											Width: w.FieldSM,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Phone numbers"},
+									Items: []w.FieldSetPart{
+										w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "mobile"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Number",
+											Parts: []w.FieldPart{w.Input{Value: "+7 912 445-10-88", Label: "Number", Mono: true}},
+											Width: w.FieldMD,
+										},
+										w.Button{Label: "Remove", Kind: w.ButtonDanger},
+										w.Grow{},
+										w.Field{Parts: []w.FieldPart{w.Input{Value: "work"}}, Width: w.FieldXS},
+										w.Field{Parts: []w.FieldPart{w.Input{Value: "+7 495 120-45-00", Mono: true}}, Width: w.FieldMD},
+										w.Button{Label: "Remove", Kind: w.ButtonDanger},
+										w.Grow{},
+										w.Button{Label: "Add phone", Icon: "plus", Small: true},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Email addresses"},
+									Items: []w.FieldSetPart{
+										w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Address",
+											Parts: []w.FieldPart{w.Input{Value: "a.kovaleva@slovo.example", Label: "Address"}},
+											Width: w.FieldLG,
+										},
+										w.Button{Label: "Remove", Kind: w.ButtonDanger},
+										w.Grow{},
+										w.Button{Label: "Add email", Icon: "plus", Small: true},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Other"},
+									Items: []w.FieldSetPart{
+										w.Field{
+											Label: "Categories",
+											Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Categories"}},
+											Width: w.FieldLG,
+										},
+										w.Field{
+											Label: "Note",
+											Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}},
+											Width: w.FieldFull,
+										},
+										w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+									},
 								},
 							},
 						},
-						w.Bar{
-							Items: []w.BarPart{
-								w.Filter{
-									Query:   w.Query{Value: "Filter the loaded cards", Label: "Filter the loaded cards"},
-									Waiting: true,
-									Variant: w.FilterH26W220,
-								},
-								w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
-								w.Button{Label: "Columns", Icon: "cols"},
-							},
-							More: &w.Button{Icon: "dots", Title: "More"},
-							Right: &w.BarRight{
-								Items:     []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Mono{Text: "312"}},
-								Secondary: true,
+						w.FormFoot{
+							Items: []w.FormFootPart{
+								w.Dim{Parts: []w.Inline{w.Text("Properties Carrel does not know are kept unchanged.")}, Size: w.Dim11_5},
 							},
 						},
-						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
-						w.List{
-							Rows: []w.ListRow{
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Strong:   true,
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@slovo.example",
-									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
-									On:       true,
-								},
-								w.FaceRow{
-									Mark:       w.Mark{Colour: "#6B4E7A"},
-									Avatar:     w.Avatar{Photo: true},
-									Title:      []w.Inline{w.Text("Артём Белов ")},
-									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
-									Subtitle:   "+7 903 118-22-04",
-									Detail:     "a.belov@example.org",
-									Caption:    "Тензор",
-									Source:     "radicale · vps · Команда",
-								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АС"},
-									Title:    []w.Inline{w.Text("Алексей Смирнов")},
-									Subtitle: "+7 916 200-71-15",
-									Detail:   "—",
-									Caption:  "—",
-									Source:   "nextcloud · Контакты",
-								},
-							},
-						},
-						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
-						w.List{
-							Rows: []w.ListRow{
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "ВГ"},
-									Title:    []w.Inline{w.Text("Виктор Гончаров")},
-									Subtitle: "—",
-									Detail:   "v.goncharov@example.org",
-									Caption:  "Городская библиотека №4",
-									Source:   "nextcloud · Контакты",
-								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#A05A2C"},
-									Avatar:   w.Avatar{Initials: "ВЛ"},
-									Title:    []w.Inline{w.Text("Вера Лебедева")},
-									Subtitle: "+7 905 331-09-42",
-									Detail:   "vera@example.net",
-									Caption:  "—",
-									Source:   "nextcloud · Архив",
-								},
-							},
-						},
-						w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty},
 					},
 				},
 				Height: w.ShellHeight560,
@@ -1325,7 +1327,7 @@ func Contacts7() Screen {
 						Items: []w.BarPart{
 							w.Range{
 								From: w.Input{Kind: w.InputDate, Value: "2026-01-01", Mono: true},
-								To:   w.Input{Value: "today", Mono: true},
+								To:   w.Input{Kind: w.InputDate, Value: "2026-11-10", Mono: true},
 								Show: w.Button{Label: "Show"},
 							},
 							w.Seg{

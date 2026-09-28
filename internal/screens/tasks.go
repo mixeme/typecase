@@ -301,7 +301,7 @@ func Tasks2() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments"},
+							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -412,10 +412,16 @@ func Tasks3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
+									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
 										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
 										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Start time",
+										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Due date",
@@ -439,6 +445,14 @@ func Tasks3() Screen {
 										Parts: []w.FieldPart{w.Input{Value: "0", Label: "Percent complete", Mono: true}},
 										Width: w.FieldSM,
 									},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("Done")}}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Reminders"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
 							w.FieldSet{

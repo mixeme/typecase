@@ -59,7 +59,7 @@ var _ = add(
 	form("default", w.Query{Value: "Search everything…", Label: "Search everything…"}, "shell-1", "tc-q", 1),
 
 	// tc-in as tags
-	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}, "s-tasks-3", "tc-in", 11),
+	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}, "s-tasks-3", "tc-in", 13),
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, "s-notes-4", "tc-in", 6),
 	form("wrap", w.TagInput{Wrap: true, Focus: true, Parts: []w.TagInputPart{
 		w.Tag{Label: "Анна Ковалёва · a.kovaleva@example.org", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}},

@@ -426,7 +426,7 @@ func Agenda2() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments"},
+							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{

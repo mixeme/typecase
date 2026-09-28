@@ -33,7 +33,7 @@ var _ = add(
 	primitive("danger-solid", w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, "components-9", "tc-btn", 5),
 	primitive("danger", w.Button{Label: "Disconnect", Kind: w.ButtonDanger}, "components-9", "tc-btn", 6),
 	primitive("small", w.Button{Label: "Add phone", Icon: "plus", Small: true}, "s-contacts-3", "tc-btn", 10),
-	primitive("danger", w.Button{Label: "End", Small: true, Kind: w.ButtonDanger}, "account-1", "tc-btn", 5),
+	primitive("danger", w.Button{Label: "End", Small: true, Kind: w.ButtonDanger}, "account-1", "tc-btn", 6),
 	primitive("focus", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn", 1),
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn", 3),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),

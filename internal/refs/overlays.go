@@ -302,7 +302,7 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "s-admin-11", "tc-menu", 1),
 	overlay("danger", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "Set role"},
+		w.MenuItem{Label: "Make administrator"},
 		w.MenuItem{Label: "Kill sessions"},
 		w.MenuItem{Label: "Disable"},
 		w.MenuSep{},

@@ -89,7 +89,7 @@ var _ = add(
 	form("gap", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Strong("nextcloud"), w.Dim{}, w.Mono{}, w.Dim{}, w.Mono{}, btn}}, "s-plan-4", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, btn, w.Dim{Place: w.Pushed}}}, "m-desktop-3", "tc-line", 2),
 	form("block", w.Line{Gap: w.LineGap4, Block: true, Items: []w.LinePart{w.Tag{}, w.Tag{}}}, "s-notes-2", "tc-line", 1),
-	form("span", w.Line{Items: []w.LinePart{w.Badge{Label: "badge"}}}, "account-1", "tc-line", 2),
+	form("span", w.Line{Items: []w.LinePart{w.Badge{Label: "badge"}}}, "account-1", "tc-line", 3),
 	form("gap", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Mark{}, w.Mono{}, w.Text("Синк-ап по релизу")}}, "m-desktop-8", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn,
 		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}}}, "s-agenda-3", "tc-line", 1),
