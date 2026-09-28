@@ -25,6 +25,9 @@ const MockupLadderProbeJS = `(() => {
   for (const el of root.querySelectorAll("*")) {
     const ox = getComputedStyle(el).overflowX;
     if (ox !== "auto" && ox !== "scroll") continue;
+    // A table in a text scrolls sideways by design: what does not fit after
+    // wrapping between words, or a row kept to one line (tc-doc__table).
+    if (el.classList && el.classList.contains("tc-doc__scroll")) continue;
     const d = el.scrollWidth - el.clientWidth;
     if (d > 2) issues.push("inner h-scroll " + cls(el).split(" ")[0] + " " + Math.round(d) + "px");
   }

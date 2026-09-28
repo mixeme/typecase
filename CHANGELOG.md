@@ -4,7 +4,7 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
-## Unreleased
+## typecase/v0.7.3 — 2026-09-28
 
 ### Added
 
@@ -17,6 +17,21 @@ do, not what the authors did.
   wrap; what does not fit scrolls inside the table. In a container of 640 px
   and less a Wrap / One line switch stands over it (`DocTableSwitch`,
   `SegCompactSmall`), and tc.js keeps the rows to one line when asked.
+
+### Mockup
+
+- Frames for the tasks of Carrel's server 26–28 and 30–34, with the owner's
+  decisions: a table in a note wraps between words, and on a narrow screen
+  has a Wrap / One line switch; the time zone row stands for every timed
+  event; «Tags» everywhere; a backup job with its external trigger off has
+  no card for the line; the reset sheet asks for the login. New frames:
+  the storage's own row menu, a storage folder's rename, delete and new
+  folder, a new collection with no server answering, the password reset's
+  answer, Whose and its refusals, the created user's password, the cards
+  without mail, field refusals, the invitation page, Related to outside the
+  loaded records, the escrow page with the scheme off, New folder's refusal
+  in the upload sheet, Browse of the attachment folder. The contact's edit
+  has its addresses, the event's edit a second reminder.
 
 ## typecase/v0.7.2 — 2026-09-28
 
