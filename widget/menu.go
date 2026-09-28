@@ -48,6 +48,13 @@ type MenuItem struct {
 	Reason string
 	// Href makes the item a link: a sheet or a page opens at the address.
 	Href string
+	// Name makes the item a checkbox of the menu's form (Menu.Action): ticked
+	// (Tick), it sends Value; the items' order is the order they are sent in.
+	// Fixed keeps it ticked and off: a column that is always shown.
+	Name  string
+	Value string
+	Fixed bool
+	Drag  bool // the drawn state of an item being dragged (the mockup's states)
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
 	// shown on a phone only, where the item itself is under «⋯».
 	Tertiary bool
@@ -58,6 +65,20 @@ func (it MenuItem) html(mix) string {
 	tag := "button"
 	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
+	if it.Name != "" {
+		cls = class(nil, is("on", it.On), is("drag", it.Drag), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
+		s.WriteString(`<label` + cls + ` role="menuitem"><input class="tc-check__box" type="checkbox"` + attr("name", it.Name) + attr("value", it.Value) +
+			flag("checked", it.Tick != nil && it.Tick.Ticked != TickedOff) + flag("disabled", it.Fixed) + `>`)
+		if it.Icon != "" {
+			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
+		}
+		s.WriteString(`<span class="tc-tickrow__tick"></span>` + esc(it.Label))
+		if it.Trail != nil {
+			s.WriteString(it.Trail.html(nil))
+		}
+		s.WriteString(`</label>`)
+		return s.String()
+	}
 	if it.Href != "" {
 		tag = "a"
 		if it.Reason != "" {
@@ -208,8 +229,8 @@ const (
 // Menu — tc-menu
 //
 // Роль. Меню: действия с записью, выбор значения, куда записать, подсказки поиска, настройка колонок.
-// Вход. Menu{Items, Width, Pop, Fields, Inline}.
-// Состояния. on | icons | marks | danger | heading | pop | fields | found.
+// Вход. Menu{Items, Width, Pop, Fields, Inline, Action, Hidden}.
+// Состояния. on | icons | marks | danger | heading | pop | fields | found | form.
 // Инварианты. Пункт — кнопка с ролью пункта меню; ширина и место — перечисления; меню печатает фрагмент своего кадра.
 // Поведение. Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла.
 // Эталон. кадр `components-1`, фрагмент `.tc-menu`.
@@ -221,6 +242,10 @@ type Menu struct {
 	Pop    MenuPop
 	Fields bool // rows that set values: taller rows
 	Inline bool // a span: a menu inside a line of a bar
+	// Action makes the menu a form that sends its checkbox items there, with
+	// its hidden Fields: the choice of columns.
+	Action string
+	Hidden []Hidden
 }
 
 // Render prints the menu.
@@ -234,8 +259,16 @@ func (u Menu) shown(m mix, open bool) string {
 	if u.Inline {
 		tag = "span"
 	}
+	form := ""
+	if u.Action != "" {
+		tag = "form"
+		form = attr("action", u.Action) + ` method="post"`
+	}
 	var s strings.Builder
-	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + ` role="menu"` + flag("hidden", !open) + `>`)
+	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + form + ` role="menu"` + flag("hidden", !open) + `>`)
+	for _, h := range u.Hidden {
+		s.WriteString(h.html(nil))
+	}
 	for _, it := range u.Items {
 		s.WriteString(it.html(nil))
 	}

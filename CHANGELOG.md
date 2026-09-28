@@ -16,6 +16,14 @@ do, not what the authors did.
   overlay; closed, so there is no place for markup of one's own) and the
   PostForms. `page.Static()` serves the library's files from the binary;
   `page.At(base)` names their addresses.
+- **Columns a person chooses** (the rest of task 29). `ColumnRow` is a row of
+  the chosen columns (`Column`, `ColumnCell`): the set and the order are the
+  person's, each column's width and the step it goes at are its kind's, and
+  the columns line up because every row of a list has the same cells. The
+  Columns menu is a form (`Menu.Action`, `Hidden`; `MenuItem.Name`, `Value`,
+  `Fixed`, `Drag`): its ticked items are sent in their order — ticks and
+  Apply work without a script, and with tc.js an item is dragged by its
+  handle or moved by Alt+↑ / Alt+↓. Frames components-42, s-contacts-23, -24.
 
 ## typecase/v0.8.0 — 2026-09-28
 

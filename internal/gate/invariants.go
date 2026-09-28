@@ -62,6 +62,7 @@ var invariantBindings = map[string][]string{
 	"Tree":        {"gate:enumerations", "gate:typed-input", "gate:widget-fragments"},
 	"List":        {"gate:container-pairs", "gate:widget-fragments"},
 	"TimeRow":     {"gate:container-pairs", "gate:widget-fragments", "gate:widget-fragments"},
+	"ColumnRow":   {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"SkelRow":     {"gate:container-pairs", "gate:widget-fragments", "gate:widget-fragments"},
 	"FaceRow":     {"gate:container-pairs", "gate:widget-fragments", "gate:widget-fragments"},
 	"FindRow":     {"gate:container-pairs", "gate:widget-fragments", "gate:widget-fragments"},

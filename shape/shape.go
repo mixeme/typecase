@@ -81,7 +81,7 @@ type node struct {
 // same is the frame's element for a tag that carries the meaning of HTML.
 var same = map[string]map[string]string{
 	"a":      {"tc-btn": "button", "tc-close": "button", "tc-menu__item": "button", "tc-row": "div", "tc-tree__row": "div"},
-	"label":  {"tc-check": "button", "tc-seg__opt": "button"},
+	"label":  {"tc-check": "button", "tc-seg__opt": "button", "tc-menu__item": "button"},
 	"select": {"tc-in": "button"},
 	"form":   {"tc-form": "div"},
 }

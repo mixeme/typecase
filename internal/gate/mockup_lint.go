@@ -359,8 +359,17 @@ var mockupButtonClass = map[string]bool{
 // it carries the meaning of HTML (components-37…39): a button or an item that
 // goes to an address is a link, a check or a segment of a form is a label
 // around its checkbox or radio button.
-var mockupButtonAlso = map[string]string{
-	"tc-btn": "a", "tc-close": "a", "tc-menu__item": "a", "tc-check": "label", "tc-seg__opt": "label",
+var mockupButtonAlso = map[string][]string{
+	"tc-btn": {"a"}, "tc-close": {"a"}, "tc-menu__item": {"a", "label"}, "tc-check": {"label"}, "tc-seg__opt": {"label"},
+}
+
+func mockupButtonAlsoOK(c, tag string) bool {
+	for _, t := range mockupButtonAlso[c] {
+		if t == tag {
+			return true
+		}
+	}
+	return false
 }
 
 func checkMockupFrameElements(html string) error {
@@ -385,7 +394,7 @@ func checkMockupFrameElements(html string) error {
 				return
 			}
 			for _, c := range n.class {
-				if mockupButtonClass[c] && n.tag != "button" && n.tag != mockupButtonAlso[c] {
+				if mockupButtonClass[c] && n.tag != "button" && !mockupButtonAlsoOK(c, n.tag) {
 					// a row that holds a control of its own cannot be a button: a
 					// control is never nested in another
 					if c == "tc-menu__item" && n.tag == "div" && (htmlNodeHasDescendantClass(n, "tc-seg") || htmlNodeHasDescendantClass(n, "tc-in")) {

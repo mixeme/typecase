@@ -363,3 +363,55 @@ func TestAddRowAndDrop(t *testing.T) {
 		t.Errorf("drop sheet shown while dragging %v, form sent with the file %v", shown, sent)
 	}
 }
+
+// TestColumnsMenu (the choice of columns): the menu is a form whose ticked
+// items are sent in their order; Alt+↓ moves an item down, the handle drags
+// one, and a click on an item ticks it without closing anything.
+func TestColumnsMenu(t *testing.T) {
+	needChrome(t)
+	item := func(label, value string, on bool) w.MenuItem {
+		tick := w.TickBox{}
+		if !on {
+			tick.Ticked = w.TickedOff
+		}
+		return w.MenuItem{Icon: "drag", Tick: &tick, Label: label, Name: "col", Value: value}
+	}
+	menu := w.Menu{Action: "/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "1"}}, Items: []w.MenuPart{
+		item("Email", "email", true), item("Birthday", "birthday", true), item("Phone", "phone", false),
+		w.MenuFoot{Items: []w.Button{{Label: "Apply", Small: true, Kind: w.ButtonPrimary, Submit: true}}}}}
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("columns", browser.PageHTML(`<div class="tc-root">`+menu.Render()+`</div>`, ""))
+	sent := `[...new FormData(document.querySelector("form.tc-menu")).getAll("col")].join(",")`
+	var before, ticked, moved, dragged string
+	err := h.Run(url, 900, 600,
+		chromedp.Evaluate(sent, &before),
+		chromedp.Click(`label.tc-menu__item:nth-of-type(3)`, chromedp.ByQuery),
+		chromedp.Evaluate(sent, &ticked),
+		chromedp.Evaluate(`(() => {
+			const box = document.querySelector("input[value=email]");
+			box.focus();
+			box.dispatchEvent(new KeyboardEvent("keydown", {key: "ArrowDown", altKey: true, bubbles: true, cancelable: true}));
+			return [...new FormData(document.querySelector("form.tc-menu")).getAll("col")].join(",");
+		})()`, &moved),
+		chromedp.Evaluate(`(() => {
+			const handle = document.querySelector("label.tc-menu__item:last-of-type > svg"), first = document.querySelector("label.tc-menu__item");
+			const hr = handle.getBoundingClientRect(), fr = first.getBoundingClientRect();
+			handle.dispatchEvent(new PointerEvent("pointerdown", {bubbles: true, clientX: hr.x + 2, clientY: hr.y + 2}));
+			document.dispatchEvent(new PointerEvent("pointermove", {bubbles: true, clientX: fr.x + 40, clientY: fr.y + 2}));
+			document.dispatchEvent(new PointerEvent("pointerup", {bubbles: true}));
+			return [...new FormData(document.querySelector("form.tc-menu")).getAll("col")].join(",");
+		})()`, &dragged),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if before != "email,birthday" || ticked != "email,birthday,phone" {
+		t.Errorf("sent %q, after ticking Phone %q", before, ticked)
+	}
+	if moved != "birthday,email,phone" {
+		t.Errorf("after Alt+↓ on Email: %q, want birthday,email,phone", moved)
+	}
+	if dragged != "phone,birthday,email" {
+		t.Errorf("after dragging Phone to the top: %q, want phone,birthday,email", dragged)
+	}
+}

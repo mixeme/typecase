@@ -447,8 +447,8 @@ select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-grad
 /* Отметка с настоящим флажком: флажок невидим, квадрат рисует его состояние — и без сценариев. */
 label.tc-check{position:relative;cursor:pointer}
 .tc-check__box,.tc-seg__box{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
-.tc-check__box:not(:checked) + .tc-tickrow__tick{background:transparent;border:.5px solid var(--tc-edge)}
-.tc-check__box:focus-visible + .tc-tickrow__tick{outline:1.5px solid var(--tc-accent);outline-offset:1px}
+.tc-check__box:not(:checked) ~ .tc-tickrow__tick{background:transparent;border:.5px solid var(--tc-edge)}
+.tc-check__box:focus-visible ~ .tc-tickrow__tick{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 /* поля формы: ширина по содержимому, не 100% */
 .tc-form{display:flex;flex-wrap:wrap;gap:13px 16px;padding:14px var(--tc-page-gutter);align-items:flex-start}
 .tc-form.is-tight{padding-top:4px}
@@ -492,6 +492,18 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row.is-done .tc-row__title{color:var(--tc-dusty);text-decoration:line-through}
 .tc-row.is-overdue .tc-mono{color:var(--tc-danger)}
 .tc-row--avatarcols{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr) 140px}
+/* Строка своих столбцов (Columns): набор и порядок — человека, ширина — рода столбца; столбцы ровны, потому что
+   у всех строк списка один набор в одном порядке. */
+.tc-row.tc-row--cols{display:flex}
+.tc-row--cols > *{flex:none}
+.tc-row--cols > .tc-col--name{flex:1.4 1 130px;min-width:0}
+.tc-row--cols > .tc-col--phone{width:142px}
+.tc-row--cols > .tc-col--email{flex:1.1 1 150px;min-width:0}
+.tc-row--cols > .tc-col--org{flex:.9 1 110px;min-width:0}
+.tc-row--cols > .tc-col--birthday{width:84px}
+.tc-row--cols > .tc-col--tags{flex:.8 1 100px;min-width:0}
+.tc-row--cols > .tc-col--changed{width:96px}
+.tc-row--cols > .tc-col--source{width:140px}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
 .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
 .tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
@@ -636,6 +648,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-menu > .tc-in{display:block;width:100%;margin-bottom:4px}
 .tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
 .tc-menu__item.is-on{background:var(--tc-card)}
+/* Пункт-флажок меню-формы (Columns): отмечен — столбец показан; ручка тянет пункт, порядок пунктов — порядок столбцов. */
+label.tc-menu__item{position:relative;cursor:pointer}
+.tc-menu__item.is-drag{opacity:.5}
+.tc-menu__item > .tc-ico--op-35:first-of-type{cursor:grab}
 .tc-menu__item:disabled{opacity:.45;cursor:default}
 .tc-menu__item > svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;opacity:.75}
 .tc-menu__item > .tc-kbd{margin-left:auto}
@@ -765,6 +781,7 @@ label.tc-check{position:relative;cursor:pointer}
   .tc-bar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
   /* Тяжёлая таблица — .tc-table--wide: целиком ей нужно около 790, поэтому is-2nd уходит с 800, а не с 700. */
   .tc-table--wide th.is-2nd,.tc-table--wide td.is-2nd{display:none}
+  .tc-row--cols > :is(.tc-col--org,.tc-col--birthday,.tc-col--tags,.tc-col--changed){display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr) 140px}
   .tc-row--avatarcols .tc-row__caption{display:none}
   .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 88px 140px}
@@ -797,6 +814,8 @@ label.tc-check{position:relative;cursor:pointer}
   .tc-row{padding-left:12px;padding-right:12px}
   /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
   .tc-head .tc-acts{flex:0 1 auto;min-width:0}
+  .tc-row--cols > .tc-col--email{display:none}
+  .tc-row--cols > .tc-col--phone{width:118px}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px 130px}
   .tc-row--avatarcols .tc-row__detail{display:none}
   .tc-row--timecols{grid-template-columns:3px 54px minmax(110px,1fr) 130px}
@@ -811,6 +830,7 @@ label.tc-check{position:relative;cursor:pointer}
   .tc-row--tickcols .tc-row__time{display:none}
 }
 @container tcbox (max-width:460px){
+  .tc-row--cols > .tc-col--source{display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(0,1fr) 118px}
   .tc-row--avatarcols .tc-row__source{display:none}
   .tc-row--timecols{grid-template-columns:3px 50px minmax(0,1fr)}
@@ -2423,6 +2443,28 @@ label.tc-check{position:relative;cursor:pointer}
 </div>
 </div>
 </figure>
+
+<figure style="flex:0 1 320px">
+<div class="frame" data-frame="components-42">
+  <div class="frame-label"><span>Выбор столбцов · форма</span><span class="frag">компонент</span><i>Columns без сценария и со сценарием</i></div>
+  <div class="tc-root tc-root--on-surface tc-root--top tc-root--pad18-20">
+  <form class="tc-menu" action="/app/contacts/nextcloud/kontakty/columns" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+    <button class="tc-rubric tc-menu__item tc-menu__item--pad5-8-7" type="button" role="menuitem">Columns</button>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="name" checked disabled><svg class="tc-ico--op-35"><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Name<span class="tc-push tc-dim tc-dim--t10-5">always</span></label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="email" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Email</label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="birthday" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Birthday</label>
+    <label class="tc-menu__item is-drag" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="tags" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Tags</label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="source" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Source</label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="phone"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Phone</label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="org"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Organisation</label>
+    <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="changed"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Changed</label>
+    <div class="tc-menu__foot"><button class="tc-btn is-sm is-primary" type="submit">Apply</button><button class="tc-btn is-sm" type="submit" name="col" value="default">Reset to defaults</button></div>
+  </form>
+  </div>
+</div>
+<figcaption><b>Меню столбцов — форма.</b> Пункт — флажок: отмечен — столбец показан; Name стоит всегда. <b>Порядок пунктов — порядок столбцов</b>: форма отправляет отмеченные в том порядке, в каком они стоят. Без сценария меняются отметки, и «Apply» их отправляет; со сценарием пункт тянут за ручку, или Alt+↑ / Alt+↓ на пункте, и порядок уходит тем же «Apply»; пункт, который тянут, бледнеет (Tags). «Reset to defaults» — отправка с одним значением default.</figcaption>
+</figure>
+
 <p>Кнопка стоит в панели управления, рядом с сортировкой и видом. Флажок включает столбец, ручка слева меняет порядок перетаскиванием, первый столбец выключить нельзя — это то, за что запись открывают. Пояснения к макету живут здесь, а не внутри него: на самом экране такого текста не будет.</p>
 <table class="doc">
   <tr><th style="width:30%">Вопрос</th><th>Ответ</th></tr>
@@ -3228,6 +3270,37 @@ Read  2 min ago</div>
     </div>
   </div>
   <figcaption>У адреса — типы vCard home, work, other. Подпись, которую написал другой клиент, стоит под чертой как есть: её не переводят в тип и не теряют.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-23">
+    <div class="frame-label"><span>Контакты · свои столбцы</span><span class="frag">фрагмент</span><i>список после «Columns»</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-list">
+    <div class="tc-row tc-row--cols is-on"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-avatar">АК</span><span class="tc-row__title is-strong tc-col--name">Анна Ковалёва</span><span class="tc-row__excerpt tc-col--email">a.kovaleva@example.org</span><span class="tc-row__excerpt tc-mono tc-col--birthday">14.03.1987</span><span class="tc-row__cell tc-row__tags tc-col--tags"><span class="tc-tag">работа</span><span class="tc-tag">издательство</span></span><span class="tc-row__cell tc-col--source">nextcloud · Контакты</span></div>
+    <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-avatar is-photo"></span><span class="tc-row__title tc-col--name">Артём Белов</span><span class="tc-row__excerpt tc-col--email">a.belov@example.org</span><span class="tc-row__excerpt tc-mono tc-col--birthday">02.11</span><span class="tc-row__cell tc-row__tags tc-col--tags"><span class="tc-tag">работа</span></span><span class="tc-row__cell tc-col--source">radicale · vps · Команда</span></div>
+    <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-avatar">АС</span><span class="tc-row__title tc-col--name">Алексей Смирнов</span><span class="tc-row__excerpt tc-col--email">—</span><span class="tc-row__excerpt tc-mono tc-col--birthday">—</span><span class="tc-row__cell tc-row__tags tc-col--tags"></span><span class="tc-row__cell tc-col--source">nextcloud · Контакты</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Список со столбцами из меню выше: Name, Email, Birthday, Tags, Source — Phone и Organisation сняты, Birthday и Tags добавлены, порядок свой. Ширина столбца — его рода: имя и почта тянутся, дата и источник — постоянной ширины. На узкой ширине второстепенные уходят первыми, как у обычного списка: дата, теги, «Changed», организация — у 800 px, почта — у 620, источник — у 460; имя остаётся всегда.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-24">
+    <div class="frame-label"><span>Контакты · телефон и организация</span><span class="frag">фрагмент</span><i>другой набор столбцов</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-list">
+    <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-avatar">АК</span><span class="tc-row__title tc-col--name">Анна Ковалёва</span><span class="tc-row__excerpt tc-mono tc-col--phone">+7 912 445-10-88</span><span class="tc-row__excerpt tc-col--org">Издательство «Слово»</span><span class="tc-row__cell tc-mono tc-col--changed">12 Aug</span><span class="tc-row__cell tc-col--source">nextcloud · Контакты</span></div>
+    <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-avatar is-photo"></span><span class="tc-row__title tc-col--name">Артём Белов</span><span class="tc-row__excerpt tc-mono tc-col--phone">+7 903 118-22-04</span><span class="tc-row__excerpt tc-col--org">Тензор</span><span class="tc-row__cell tc-mono tc-col--changed">3 Aug</span><span class="tc-row__cell tc-col--source">radicale · vps · Команда</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Другой набор: Name, Phone, Organisation, Changed, Source. Телефон и «Changed» — моноширинные, постоянной ширины; организация тянется. «Changed» — день последней правки на сервере, короткой формой списка.</figcaption>
   </figure>
 </div>
 

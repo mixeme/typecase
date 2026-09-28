@@ -14,6 +14,7 @@ type ListRow interface {
 }
 
 func (TimeRow) listRow()    {}
+func (ColumnRow) listRow()  {}
 func (SkelRow) listRow()    {}
 func (FaceRow) listRow()    {}
 func (FindRow) listRow()    {}
@@ -516,4 +517,80 @@ func rowTag(href string) string {
 		return "a"
 	}
 	return "div"
+}
+
+// Column is one column a person may choose for a list (Columns): what the
+// cell holds decides its width and when it goes on a narrow screen.
+type Column int
+
+const (
+	ColumnName     Column = iota // the record's name: stretches, stays always
+	ColumnPhone                  // monospaced, 142 px
+	ColumnEmail                  // stretches; goes at 620 px
+	ColumnOrg                    // stretches; goes at 800 px
+	ColumnBirthday               // monospaced, 84 px; goes at 800 px
+	ColumnTags                   // tags; goes at 800 px
+	ColumnChanged                // monospaced, 96 px; goes at 800 px
+	ColumnSource                 // 140 px; goes at 460 px
+)
+
+func (c Column) class() string {
+	return [...]string{"tc-row__title tc-col--name", "tc-row__excerpt tc-mono tc-col--phone", "tc-row__excerpt tc-col--email",
+		"tc-row__excerpt tc-col--org", "tc-row__excerpt tc-mono tc-col--birthday", "tc-row__cell tc-row__tags tc-col--tags",
+		"tc-row__cell tc-mono tc-col--changed", "tc-row__cell tc-col--source"}[c]
+}
+
+// ColumnCell is a cell of a row of chosen columns: its column and what it
+// shows — words, or tags in the tags column.
+type ColumnCell struct {
+	Column Column
+	Text   string
+	Tags   []RowTag
+}
+
+// ColumnRow — tc-row
+//
+// Роль. Строка списка со столбцами, которые выбрал человек (Columns): набор и порядок — его, ширина — рода столбца.
+// Вход. ColumnRow{Mark, Avatar, Cells, Strong, On, Href}.
+// Состояния. plain | on | link.
+// Инварианты. Столбцы ровны: у всех строк списка один набор в одном порядке; ширина столбца и ступень, на которой он уходит, — его рода; строка печатает фрагмент своего кадра.
+// Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись.
+// Эталон. кадр `s-contacts-23`, фрагмент `.tc-row--cols`.
+// Содержимое. Метка источника, аватар, ячейки столбцов: слова, моноширинное, теги.
+// Чего нет. Своих ширин: столбец задаёт род, а не данные строки.
+type ColumnRow struct {
+	Mark   Mark
+	Avatar *Avatar
+	Cells  []ColumnCell
+	Strong bool // the name in bold: the chosen row
+	On     bool
+	Href   string
+}
+
+// Render prints the row.
+func (r ColumnRow) Render() string { return r.html(nil) }
+
+func (r ColumnRow) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--cols", is("on", r.On)) + attr("href", r.Href) + `>` + r.Mark.html(nil))
+	if r.Avatar != nil {
+		s.WriteString(r.Avatar.html(nil))
+	}
+	for _, c := range r.Cells {
+		cls := c.Column.class()
+		if c.Column == ColumnName && r.Strong {
+			cls = "tc-row__title is-strong tc-col--name"
+		}
+		s.WriteString(`<span class="` + cls + `">`)
+		if c.Column == ColumnTags {
+			for _, t := range c.Tags {
+				s.WriteString(t.html(nil))
+			}
+		} else {
+			s.WriteString(esc(c.Text))
+		}
+		s.WriteString(`</span>`)
+	}
+	s.WriteString(`</` + rowTag(r.Href) + `>`)
+	return s.String()
 }

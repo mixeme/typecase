@@ -138,6 +138,10 @@ var _ = add(
 		w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Белов Артём")}, Subtitle: "+7 903 118-22-04", Detail: "belov@team.example", Caption: "—", Source: "radicale · vps · Команда", Inset: true}}, Inset: true}, "s-dup-1", "tc-list", 1),
 
 	// tc-row
+	rows("phone-org", w.ColumnRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: &w.Avatar{Initials: "АК"}, Cells: []w.ColumnCell{{Column: w.ColumnName, Text: "Анна Ковалёва"}, {Column: w.ColumnPhone, Text: "+7 912 445-10-88"}, {Column: w.ColumnOrg, Text: "Издательство «Слово»"}, {Column: w.ColumnChanged, Text: "12 Aug"}, {Column: w.ColumnSource, Text: "nextcloud · Контакты"}}}, "s-contacts-24", "tc-row", 1),
+	rows("bare", w.ColumnRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: &w.Avatar{Initials: "АС"}, Cells: []w.ColumnCell{{Column: w.ColumnName, Text: "Алексей Смирнов"}, {Column: w.ColumnEmail, Text: "—"}, {Column: w.ColumnBirthday, Text: "—"}, {Column: w.ColumnTags, Tags: []w.RowTag{}}, {Column: w.ColumnSource, Text: "nextcloud · Контакты"}}}, "s-contacts-23", "tc-row", 3),
+	rows("on", w.ColumnRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: &w.Avatar{Initials: "АК"}, Strong: true, Cells: []w.ColumnCell{{Column: w.ColumnName, Text: "Анна Ковалёва"}, {Column: w.ColumnEmail, Text: "a.kovaleva@example.org"}, {Column: w.ColumnBirthday, Text: "14.03.1987"}, {Column: w.ColumnTags, Tags: []w.RowTag{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}}, {Column: w.ColumnSource, Text: "nextcloud · Контакты"}}, On: true}, "s-contacts-23", "tc-row", 1),
+	rows("plain", w.ColumnRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: &w.Avatar{Photo: true}, Cells: []w.ColumnCell{{Column: w.ColumnName, Text: "Артём Белов"}, {Column: w.ColumnEmail, Text: "a.belov@example.org"}, {Column: w.ColumnBirthday, Text: "02.11"}, {Column: w.ColumnTags, Tags: []w.RowTag{w.Tag{Label: "работа"}}}, {Column: w.ColumnSource, Text: "radicale · vps · Команда"}}}, "s-contacts-23", "tc-row", 2),
 	rows("plain", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Source: "nextcloud · Личный"}, "s-agenda-1", "tc-row", 6),
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АС"}, Title: []w.Inline{w.Text("Алексей Смирнов")}, Subtitle: "+7 916 200-71-15", Detail: "—", Caption: "—", Source: "nextcloud · Контакты"}, "s-contacts-1", "tc-row", 3),
 	rows("strong", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Strong: true, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Личный"}, "components-12", "tc-row", 1),
@@ -197,7 +201,7 @@ var _ = add(
 )
 
 func init() {
-	Widgets = append(Widgets, w.TickRow{}, w.Skel{}, w.Tree{}, w.List{}, w.TimeRow{}, w.SkelRow{}, w.FaceRow{}, w.FindRow{},
+	Widgets = append(Widgets, w.TickRow{}, w.Skel{}, w.Tree{}, w.List{}, w.TimeRow{}, w.ColumnRow{}, w.SkelRow{}, w.FaceRow{}, w.FindRow{},
 		w.LinkedRow{}, w.ExcerptRow{}, w.BriefRow{}, w.DueRow{}, w.SizeRow{}, w.SlimRow{}, w.PhoneRow{})
-	Parts = append(Parts, w.TreeRow{}, w.TreeNote{}, w.TickBox{})
+	Parts = append(Parts, w.TreeRow{}, w.ColumnCell{}, w.TreeNote{}, w.TickBox{})
 }

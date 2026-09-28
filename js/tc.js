@@ -256,6 +256,12 @@
 			else openMenu(t);
 			return;
 		}
+		// A form menu (Columns): its items are checkboxes, its handle drags;
+		// neither closes the menu.
+		if (closest(e.target, "form.tc-menu label.tc-menu__item")) {
+			if (closest(e.target, "svg") && closest(e.target, "label") === closest(e.target, "label.tc-menu__item")) e.preventDefault();
+			return;
+		}
 		if (closest(e.target, '[role="menuitem"]') && openTrigger) {
 			closeMenu(true);
 			return;
@@ -394,6 +400,52 @@
 		form.submit();
 	}
 
+	// The items of a form menu are sent in their order (Columns): the handle
+	// drags an item along the menu; Alt+↑ / Alt+↓ on an item moves it.
+	var dragged = null;
+
+	function formItems(item) {
+		return Array.prototype.slice.call(closest(item, "form.tc-menu").querySelectorAll("label.tc-menu__item"));
+	}
+
+	function onDragStart(e) {
+		var handle = closest(e.target, "form.tc-menu label.tc-menu__item > svg");
+		if (!handle) return;
+		e.preventDefault();
+		dragged = closest(handle, "label.tc-menu__item");
+		dragged.classList.add("is-drag");
+	}
+
+	function onDragMove(e) {
+		if (!dragged) return;
+		var over = document.elementFromPoint(e.clientX, e.clientY);
+		var target = over && closest(over, "label.tc-menu__item");
+		if (!target || target === dragged || formItems(target).indexOf(dragged) < 0) return;
+		var r = target.getBoundingClientRect();
+		target.parentNode.insertBefore(dragged, e.clientY < r.top + r.height / 2 ? target : target.nextSibling);
+	}
+
+	function onDragEnd() {
+		if (!dragged) return;
+		dragged.classList.remove("is-drag");
+		dragged = null;
+	}
+
+	function onMoveKey(e) {
+		if (!e.altKey || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return false;
+		var item = closest(e.target, "form.tc-menu label.tc-menu__item");
+		if (!item) return false;
+		var items = formItems(item);
+		var i = items.indexOf(item) + (e.key === "ArrowUp" ? -1 : 1);
+		if (i < 0 || i >= items.length) return true;
+		e.preventDefault();
+		var other = items[i];
+		other.parentNode.insertBefore(item, e.key === "ArrowUp" ? other : other.nextSibling);
+		var box = item.querySelector("input");
+		if (box) box.focus();
+		return true;
+	}
+
 	// A check that switches a field of its form off while it is ticked
 	// (data-tc-disables, FormRow.Disables): the field is off and not sent.
 	function syncDisables(box) {
@@ -425,6 +477,7 @@
 	}
 
 	function onKeydown(e) {
+		if (onMoveKey(e)) return;
 		if (openTrigger && onMenuKey(e)) return;
 		if (onSegKey(e)) return;
 		if (e.key !== "Escape") return;
@@ -449,6 +502,10 @@
 
 	document.addEventListener("click", onClick);
 	document.addEventListener("change", onChange);
+	document.addEventListener("pointerdown", onDragStart);
+	document.addEventListener("pointermove", onDragMove);
+	document.addEventListener("pointerup", onDragEnd);
+	document.addEventListener("pointercancel", onDragEnd);
 	["dragenter", "dragover", "dragleave", "drop"].forEach(function (t) {
 		document.addEventListener(t, onDrag);
 	});

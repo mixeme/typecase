@@ -379,8 +379,18 @@ var menuTone = []kv{{"tc-menu__item--danger", "MenuToneDanger"}, {"tc-menu__item
 func (g *gen) menuItem(k *El) string {
 	var f []string
 	found := false
+	box := k.Kid("tc-check__box")
 	for _, x := range k.Els() {
 		switch {
+		case x == box:
+			continue
+		case box != nil && x.Has("tc-tickrow__tick"):
+			t := ""
+			if !box.HasAttr("checked") {
+				t = "Ticked: w.TickedOff"
+			}
+			f = append(f, "Tick: &w.TickBox{"+t+"}")
+			continue
 		case x.Tag == "svg":
 			f = append(f, "Icon: "+icon(x))
 			if x.Has("tc-ico--op-35") {
@@ -425,6 +435,15 @@ func (g *gen) menuItem(k *El) string {
 	if h := k.Attr("href"); h != "" {
 		f = append(f, "Href: "+q(h))
 	}
+	if box != nil {
+		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
+		if box.HasAttr("disabled") {
+			f = append(f, "Fixed: true")
+		}
+		if k.Has("is-drag") {
+			f = append(f, "Drag: true")
+		}
+	}
 	return "w.MenuItem{" + join(f, ", ") + "}"
 }
 
@@ -432,8 +451,11 @@ var menuWidth = []kv{{"tc-menu--w212", "MenuWidth212"}, {"tc-menu--w290", "MenuW
 
 func (g *gen) menu(e *El) string {
 	var items []string
+	var hidden []*El
 	for _, k := range e.Els() {
 		switch {
+		case k.Tag == "input" && k.Attr("type") == "hidden":
+			hidden = append(hidden, k)
 		case k.Has("tc-menu__sep"):
 			t := ""
 			if k.Has("is-3rd") {
@@ -499,6 +521,12 @@ func (g *gen) menu(e *El) string {
 	}
 	if e.Has("tc-menu--fields") {
 		f = append(f, "Fields: true")
+	}
+	if e.Tag == "form" {
+		f = append(f, "Action: "+q(e.Attr("action")))
+		if len(hidden) > 0 {
+			f = append(f, "Hidden: "+hiddens(hidden))
+		}
 	}
 	if e.Tag == "span" {
 		f = append(f, "Inline: true")
@@ -730,6 +758,8 @@ func (g *gen) row0(e *El) string {
 	els := e.Els()
 	text := func(c string) string { return q(e.Kid(c).Text()) }
 	switch {
+	case e.Has("tc-row--cols"):
+		return g.columnRow(e)
 	case e.Has("tc-row--timecols") && e.Kid("tc-skel") != nil:
 		r := map[string]string{"tc-row__detail--w40pc": "60", "tc-row__detail--w30pc": "45", "tc-row__detail--w25pc": "52"}
 		for _, c := range e.Kid("tc-row__detail").Cls() {
@@ -1592,4 +1622,42 @@ func (g *gen) avatar(a *El) string {
 		f = append(f, "Size: w."+v)
 	}
 	return "w.Avatar{" + join(f, ", ") + "}"
+}
+
+var columnOf = []kv{{"tc-col--name", "ColumnName"}, {"tc-col--phone", "ColumnPhone"}, {"tc-col--email", "ColumnEmail"}, {"tc-col--org", "ColumnOrg"},
+	{"tc-col--birthday", "ColumnBirthday"}, {"tc-col--tags", "ColumnTags"}, {"tc-col--changed", "ColumnChanged"}, {"tc-col--source", "ColumnSource"}}
+
+// columnRow is a row of the columns a person chose.
+func (g *gen) columnRow(e *El) string {
+	var f, cells []string
+	els := e.Els()
+	f = append(f, "Mark: "+g.mark(els[0]))
+	for _, k := range els[1:] {
+		if k.Has("tc-avatar") {
+			f = append(f, "Avatar: &"+g.avatar(k))
+			continue
+		}
+		for _, c := range columnOf {
+			if !k.Has(c.k) {
+				continue
+			}
+			if c.v == "ColumnTags" {
+				var tags []string
+				for _, t := range k.Els() {
+					tags = append(tags, g.tag(t))
+				}
+				cells = append(cells, "{Column: w.ColumnTags, Tags: []w.RowTag{"+join(tags, ", ")+"}}")
+			} else {
+				cells = append(cells, "{Column: w."+c.v+", Text: "+q(k.Text())+"}")
+			}
+			if c.v == "ColumnName" && k.Has("is-strong") {
+				f = append(f, "Strong: true")
+			}
+		}
+	}
+	f = append(f, "Cells: []w.ColumnCell{"+join(cells, ", ")+"}")
+	if e.Has("is-on") {
+		f = append(f, "On: true")
+	}
+	return "w.ColumnRow{" + join(f, ", ") + "}"
 }
