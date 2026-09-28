@@ -1107,7 +1107,7 @@ func Admin7() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("login")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("login.ok")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("mix")}},
 									{Parts: []w.CellPart{w.Text("—")}},
 									{Parts: []w.CellPart{w.Text("ip 10.0.0.4")}, Mono: true},
@@ -1116,7 +1116,7 @@ func Admin7() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("2026-08-14 22:07")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("login_failed")}, Mono: true, Tone: w.CellDanger},
+									{Parts: []w.CellPart{w.Text("login.fail")}, Mono: true, Tone: w.CellDanger},
 									{Parts: []w.CellPart{w.Text("—")}},
 									{Parts: []w.CellPart{w.Text("anna")}},
 									{Parts: []w.CellPart{w.Text("3rd attempt · rate-limited")}, Mono: true},
@@ -1125,7 +1125,7 @@ func Admin7() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("escrow_recover")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("escrow.recover")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("mix")}},
 									{Parts: []w.CellPart{w.Text("viktor")}},
 									{Parts: []w.CellPart{w.Text("notice mailed")}, Mono: true},
@@ -1134,7 +1134,7 @@ func Admin7() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("settings_update")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("settings.instance")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("mix")}},
 									{Parts: []w.CellPart{w.Text("—")}},
 									{Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true},

@@ -315,10 +315,10 @@ var _ = add(
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All actions", On: true},
 		w.MenuSep{},
-		w.MenuItem{Label: "login"},
-		w.MenuItem{Label: "login_failed"},
-		w.MenuItem{Label: "escrow_recover"},
-		w.MenuItem{Label: "settings_update"}}, Width: w.MenuWidth290}, "s-admin-10", "tc-menu", 1),
+		w.MenuItem{Label: "login.ok"},
+		w.MenuItem{Label: "login.fail"},
+		w.MenuItem{Label: "escrow.recover"},
+		w.MenuItem{Label: "settings.instance"}}, Width: w.MenuWidth290}, "s-admin-10", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "nextcloud · Контакты", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Анна Ковалёва", On: true},
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "nextcloud · Контакты", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Пётр Ковалёв"},
@@ -441,16 +441,12 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the records back into a "), w.Strong("new"), w.Text(" collection — not into this one, and not to this address.")}, Space: w.MsgFlush},
 		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
 		w.Field{Label: "Type the name to confirm", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-profile-9", "tc-sheet", 1),
-	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in her records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
-		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; she drops out of their timeline")}}}}},
-		w.SheetBlock{Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7}, Items: []w.SheetLine{
-			{Name: "9 records on servers that schedule", Note: w.Dim{Parts: []w.Inline{w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees")}}},
-			{Name: "2 records on baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— the server did not say whether it schedules")}}},
-			{Name: "3 meetings organised by others", Note: w.Dim{Parts: []w.Inline{w.Text("— the organiser’s server may refuse the change, and its next update may undo it")}}},
-			{Name: "Past meetings", Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if she had been invited at it")}}}}},
-		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}}}},
-		Foot:  []w.SheetFootPart{w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}},
-		Width: w.SheetWidth520}, "s-contacts-15", "tc-sheet", 1),
+	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; they drop out of the person’s timeline")}}}}},
+		w.SheetBlock{Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "9 records on servers that schedule", Note: w.Dim{Parts: []w.Inline{w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees")}}}, {Name: "2 records on baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— the server did not say whether it schedules")}}}, {Name: "3 meetings organised by others", Note: w.Dim{Parts: []w.Inline{w.Text("— the organiser’s server may refuse the change, and its next update may undo it")}}}, {Name: "Past meetings", Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if the person had been invited at it")}}}}},
+		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-15", "tc-sheet", 1),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "print", Label: "Print"}}, Width: w.MenuWidth212}, "s-files-7", "tc-menu", 1),
 	overlay("plain", w.Sheet{Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Your Carrel password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks credentials everywhere for five minutes: passwords, device profiles, anything else handed out.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Show", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc", Place: w.Pushed}}, Width: w.SheetWidth400}, "s-plan-3", "tc-sheet", 1),

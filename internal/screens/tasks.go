@@ -355,10 +355,7 @@ func Tasks2() Screen {
 							w.Diag{Text: "Path  /dav.php/calendars/mix/tasks/c41a.ics\nRead  2 min ago · not changed on server"},
 						},
 					},
-					w.Danger{
-						Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid},
-						Note:   "Удаление уходит на сервер сразу и отменить его нечем.",
-					},
+					w.Danger{Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},
@@ -496,10 +493,7 @@ func Tasks3() Screen {
 							},
 						},
 					},
-					w.Danger{
-						Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid},
-						Note:   "Удаление уходит на сервер сразу и отменить его нечем.",
-					},
+					w.Danger{Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},

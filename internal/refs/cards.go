@@ -24,15 +24,15 @@ var _ = add(
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Separate from the sign-in password: the destination may be somebody else’s hosting. Forget it and this job’s archives open for nobody, including you.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2}, "s-backup-2", "tc-msg", 3),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The data folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "m-desktop-12", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("baikal — the server replied 401. Check the saved password on the profile page.")}, Tone: w.MsgAlert}, "components-22", "tc-msg", 2),
-	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy here"), w.Text(".")}, Space: w.MsgFlushTop2}, "s-contacts-2", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-contacts-2", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-files-4", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 11 of 12 records."), w.Text(" «Планёрка редакции» was refused: its organiser’s server does not take changes to attendees. 2 records in Shared are read-only and keep the old address.")}, Tone: w.MsgAlert}, "s-contacts-16", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Written, but not every other record was deleted."), w.Text(" The merge was written and 0 records deleted; Белов Артём refused, and the rest were not tried. Nothing is undone.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-dup-5", "tc-msg", 1),
 	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent, Space: w.MsgFlushSides}, "s-dup-6", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send: until this address is confirmed, they go out without a reply address and say so at the foot. "), w.Button{Label: "Send confirmation", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "s-mail-9", "tc-msg", 1),
-	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send until you open the link we sent to "), w.Mono{Text: "mix@example.org"}, w.Text(" at 11:42. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-9", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send until you open the link we sent to "), w.Mono{Text: "mix@example.org"}, w.Text(" on 12 February at 11:42. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-9", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("Renaming is not moving: the address does not change, so devices, published links and backup jobs pointing here go on working. The new name and colour are written to the server — other clients will show them at their next sync.")}, Space: w.MsgFlushTop2}, "s-profile-7", "tc-msg", 1),
-	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Carrel creates a calendar there, copies all "), w.Strong("51"), w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path. Copy is this sheet with "), w.Strong("Copy here"), w.Text(", and the original stays.")}, Space: w.MsgFlushTop2}, "s-profile-8", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Carrel creates a calendar there, copies all "), w.Strong("51"), w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path.")}, Space: w.MsgFlushTop2}, "s-profile-8", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The calendar and all "), w.Strong("51"), w.Text(" events in it are deleted on "), w.Mono{Text: "cloud.example.org"}, w.Text(". Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the records back into a "), w.Strong("new"), w.Text(" collection — not into this one, and not to this address.")}, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list.")}, Tone: w.MsgAlert, Space: w.MsgInset20}, "s-profile-10", "tc-msg", 2),
@@ -62,7 +62,8 @@ var _ = add(
 	cards("danger", w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}, "s-io-9", "tc-diag", 2),
 
 	// tc-danger
-	cards("aside", w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, Note: "Удаление уходит на сервер сразу и отменить его нечем."}, "s-contacts-6", "tc-danger", 1),
+	cards("plain", w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}}, "s-contacts-6", "tc-danger", 1),
+	cards("aside", w.Danger{Button: w.Button{Label: "Delete event", Kind: w.ButtonDangerSolid}, Note: "Series is edited and deleted whole."}, "s-agenda-1", "tc-danger", 1),
 	cards("plain", w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}}, "s-contacts-1", "tc-danger", 1),
 	cards("end", w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}, "s-notes-2", "tc-danger", 1),
 	cards("end", w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, Space: w.DangerTight}, "components-34", "tc-danger", 1),
@@ -160,7 +161,7 @@ var _ = add(
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
-		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
@@ -176,7 +177,7 @@ var _ = add(
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-		{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Tag{Label: "team"}}}}}, "s-agenda-1", "tc-fields", 1),
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
@@ -652,10 +653,10 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("viktor")}}, {Parts: []w.CellPart{w.Text("2026-04-19")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}}}}}, "s-admin-6", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "When"}, {Label: "Action"}, {Label: "Actor", Rank: w.Rank3}, {Label: "Target", Rank: w.Rank4}, {Label: "Detail"}}, Rows: []w.TableRow{
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("login")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("ip 10.0.0.4")}, Mono: true}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 22:07")}, Mono: true}, {Parts: []w.CellPart{w.Text("login_failed")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("3rd attempt · rate-limited")}, Mono: true}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}, {Parts: []w.CellPart{w.Text("escrow_recover")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("viktor")}}, {Parts: []w.CellPart{w.Text("notice mailed")}, Mono: true}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings_update")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table", 1),
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("login.ok")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("ip 10.0.0.4")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 22:07")}, Mono: true}, {Parts: []w.CellPart{w.Text("login.fail")}, Mono: true, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("3rd attempt · rate-limited")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}, {Parts: []w.CellPart{w.Text("escrow.recover")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("viktor")}}, {Parts: []w.CellPart{w.Text("notice mailed")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings.instance")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table", 1),
 
 	// tc-docmeta
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{

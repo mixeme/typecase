@@ -135,7 +135,7 @@ func Notes1() Screen {
 							w.Button{Icon: "dots", Small: true, Title: "More"},
 						},
 						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Записи · "), w.Mono{Text: "10 Aug 2026 11:05"}}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Записи · "), w.Mono{Text: "10 August 2026, 11:05"}}},
 						},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,
@@ -233,11 +233,9 @@ func Notes2() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Что почитать про CRDT"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Про дорогу до дачи"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -250,7 +248,7 @@ func Notes2() Screen {
 							Parts: []w.HeadSubPart{
 								w.Mark{Colour: "#4A6B52", Size: w.MarkH12},
 								w.Text("nextcloud · Записи · "),
-								w.Mono{Text: "10 Aug 2026 11:05"},
+								w.Mono{Text: "10 August 2026, 11:05"},
 							},
 						},
 						Acts: &w.Acts{
@@ -390,11 +388,9 @@ func Notes3() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Что почитать про CRDT"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Про дорогу до дачи"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -407,7 +403,7 @@ func Notes3() Screen {
 							Parts: []w.HeadSubPart{
 								w.Mark{Colour: "#4A6B52", Size: w.MarkH12},
 								w.Text("nextcloud · Записи · "),
-								w.Mono{Text: "10 Aug 2026 11:05"},
+								w.Mono{Text: "10 August 2026, 11:05"},
 							},
 						},
 						Acts: &w.Acts{
@@ -530,11 +526,9 @@ func Notes20() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Что почитать про CRDT"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Про дорогу до дачи"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},

@@ -1706,9 +1706,7 @@ func Profile8() Screen {
 							Parts: []w.MsgPart{
 								w.Text("Carrel creates a calendar there, copies all "),
 								w.Strong("51"),
-								w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path. Copy is this sheet with "),
-								w.Strong("Copy here"),
-								w.Text(", and the original stays."),
+								w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path."),
 							},
 							Space: w.MsgFlushTop2,
 						},

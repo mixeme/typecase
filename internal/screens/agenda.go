@@ -256,7 +256,7 @@ func Agenda1() Screen {
 							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-							{Term: "Categories", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
+							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}},
 						},
 					},
 					w.Sec{
@@ -319,7 +319,10 @@ func Agenda1() Screen {
 							},
 						},
 					},
-					w.Danger{Button: w.Button{Label: "Delete event", Kind: w.ButtonDangerSolid}, Note: "Series is edited whole."},
+					w.Danger{
+						Button: w.Button{Label: "Delete event", Kind: w.ButtonDangerSolid},
+						Note:   "Series is edited and deleted whole.",
+					},
 				},
 			},
 		},

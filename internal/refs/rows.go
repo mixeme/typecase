@@ -39,9 +39,8 @@ var _ = add(
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
 		{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}}}, On: 1, Variant: w.TreePadded}, "s-files-1", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
-		{Icon: "note", Label: "Что почитать про CRDT"},
 		{Icon: "note", Label: "Заметка со встречи"},
-		{Icon: "note", Label: "Про дорогу до дачи"}}, On: 2, Variant: w.TreePadded}, "s-notes-2", "tc-tree", 1),
+		{Icon: "note", Label: "Что почитать про CRDT"}}, On: 1, Variant: w.TreePadded}, "s-notes-2", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "attachments"},
 		{Icon: "file", Label: "2026", Indent: w.TreeLevel20},

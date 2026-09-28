@@ -96,6 +96,9 @@
 | Экраны из макета | `go generate ./internal/screens` |
 | Функция экрана одного кадра | `go run ./cmd/frame2go s-find-2` |
 | Формы блока в макете | `go run ./internal/fragment/cmd/shapes tc-tickrow` |
+| Значение эталона из кадра | `go run ./internal/framegen/cmd/record s-contacts-6 tc-danger 1` |
+| Пересобрать эталоны из кадров | `python internal/framegen/cmd/record/refresh.py s-contacts-6:tc-danger:1 …` |
+| Строки `allowed-diffs.md` по решению | `python internal/framegen/cmd/record/allow.py 2026-09-28 "что" s-tasks-2 …` |
 | Каталог | `go run ./cmd/catalog` → http://localhost:8080/ |
 | Демо-экраны | `go run ./cmd/screens` → http://localhost:8085/ |
 | Всё без браузера | `go test $(go list ./... \| grep -v internal/browser)` |

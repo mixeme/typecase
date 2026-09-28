@@ -160,8 +160,8 @@ func Attachments1() Screen {
 											w.Pick{Value: "Date, then the original name"},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Mono{Text: "2026-08-10-sync-board.png"},
-													w.Text(". A name already taken is never overwritten: a counter is added, and the queue says so."),
+													w.Mono{Text: "2026-08-10 sync-board.png"},
+													w.Text(". A name already taken is never overwritten: a counter is added."),
 												},
 											},
 										},

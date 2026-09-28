@@ -184,7 +184,7 @@ func Contacts1() Screen {
 							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 							{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
 							{
-								Term:  "Categories",
+								Term:  "Tags",
 								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
 							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
@@ -391,9 +391,7 @@ func Contacts2() Screen {
 							Parts: []w.MsgPart{
 								w.Text("Inside one server this is "),
 								w.Mono{Text: "MOVE", Form: w.MonoCode},
-								w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "),
-								w.Strong("Copy here"),
-								w.Text("."),
+								w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after."),
 							},
 							Space: w.MsgFlushTop2,
 						},
@@ -870,10 +868,7 @@ func Contacts6() Screen {
 							w.Diag{Text: "Path  /dav.php/addressbooks/mix/contacts/2b7e.vcf\nRead  2 min ago · not changed on server"},
 						},
 					},
-					w.Danger{
-						Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid},
-						Note:   "Удаление уходит на сервер сразу и отменить его нечем.",
-					},
+					w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},
@@ -1022,7 +1017,7 @@ func Contacts15() Screen {
 			Scrim: w.Scrim{
 				Content: w.Sheet{
 					Icon:  "refresh",
-					Title: "Rewrite the address in her records?",
+					Title: "Rewrite the address in their records?",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Анна Ковалёва · saved")},
@@ -1037,7 +1032,9 @@ func Contacts15() Screen {
 							Items: []w.SheetLine{
 								{
 									Name: "a.kovaleva@example.org → a.kovaleva@slovo.example",
-									Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; she drops out of their timeline")}},
+									Note: w.Dim{
+										Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; they drop out of the person’s timeline")},
+									},
 								},
 							},
 						},
@@ -1064,7 +1061,7 @@ func Contacts15() Screen {
 								},
 								{
 									Name: "Past meetings",
-									Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if she had been invited at it")}},
+									Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if the person had been invited at it")}},
 								},
 							},
 						},
@@ -1230,10 +1227,7 @@ func Contacts16() Screen {
 							w.Diag{Text: "Path  /dav.php/addressbooks/mix/contacts/2b7e.vcf\nRead  2 min ago · not changed on server"},
 						},
 					},
-					w.Danger{
-						Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid},
-						Note:   "Удаление уходит на сервер сразу и отменить его нечем.",
-					},
+					w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},
@@ -1275,7 +1269,7 @@ func Contacts7() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
-							Meta:    "5",
+							Meta:    "20",
 							Current: true,
 						},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "9"},

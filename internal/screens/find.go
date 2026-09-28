@@ -42,7 +42,7 @@ func Find1() Screen {
 							Mark:      w.Mark{Colour: "#9A9280"},
 							Label:     "Общий",
 							Meta:      "no reply",
-							MetaTitle: "The server did not answer in time. The list below is from the last successful read.",
+							MetaTitle: "The server did not answer in time.",
 							Error:     true,
 							Trail:     w.Button{Label: "Retry", Small: true},
 						},
