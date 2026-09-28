@@ -8,6 +8,10 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("three", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "Monday", On: true},
+		w.MenuItem{Label: "Sunday"},
+		w.MenuItem{Label: "Saturday"}}, Width: w.MenuWidth212}, "appearance-2", "tc-menu", 1),
 	overlay("links", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
@@ -75,7 +79,9 @@ var _ = add(
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "work", On: true},
 		w.MenuItem{Label: "home"},
-		w.MenuItem{Label: "other"}}, Width: w.MenuWidth212}, "s-contacts-13", "tc-menu", 1),
+		w.MenuItem{Label: "other"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Личная"}}, Width: w.MenuWidth212}, "s-contacts-13", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "At the time"},
 		w.MenuItem{Label: "5 minutes before"},
@@ -150,7 +156,9 @@ var _ = add(
 		w.MenuItem{Label: "home"},
 		w.MenuItem{Label: "main"},
 		w.MenuItem{Label: "fax"},
-		w.MenuItem{Label: "other"}}, Width: w.MenuWidth212}, "s-contacts-12", "tc-menu", 1),
+		w.MenuItem{Label: "other"},
+		w.MenuSep{},
+		w.MenuItem{Label: "iPhone"}}, Width: w.MenuWidth212}, "s-contacts-12", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All 24", On: true},
 		w.MenuItem{Label: "Events 14"},

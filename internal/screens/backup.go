@@ -517,6 +517,11 @@ func Backup2() Screen {
 													},
 												},
 											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Turning it on stores this job's data key under the server's key — less protection, for convenience: the job can then read without you signed in."),
+												},
+											},
 										},
 										Gap:   8,
 										Place: w.Grown,
