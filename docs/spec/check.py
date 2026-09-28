@@ -28,11 +28,18 @@ def check(name, bad, note=""):
 # 4. Library independence: no cross-file links or domain words
 cross = re.findall(r'\((?:carrel-(?:common|client|server|desktop))\.md\)', uilib)
 domain = []
+# §L-2.2 lists them as negative examples: its lines are skipped, wherever it stands.
+l22 = uilib.index("### L-2.2")
+l22_end = uilib.index("\n### ", l22 + 1)
 for w in ["DAV", "vCard", "iCal", "контакт", "календар", "заметк", "коллекци", "аккаунт", "Carrel"]:
     for m in re.finditer(w, uilib, re.I):
+        if l22 <= m.start() < l22_end:
+            continue
+        # The mockup's file name is the one reference the spec keeps (Р-19).
+        if uilib[m.start():m.start() + 17].lower() == "carrel-ui-mockups":
+            continue
         line = uilib[:m.start()].count("\n") + 1
-        if line > 90:  # §L-2.2 lists them as negative examples
-            domain.append("%s:%d" % (w, line))
+        domain.append("%s:%d" % (w, line))
 check("4. typecase.md не ссылается на carrel-*.md", cross)
 check("4b. typecase.md без доменных слов", sorted(set(domain)))
 

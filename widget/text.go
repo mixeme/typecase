@@ -123,7 +123,7 @@ func (v DimVariant) class() string {
 
 // Dim — tc-dim
 //
-// Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», «nextcloud · Контакты».
+// Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», имя источника.
 // Вход. Dim{Parts, Size, Variant, Place}.
 // Состояния. plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
 // Инварианты. Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
