@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// Rest1 is frame «Ссылка-приглашение больше не работает» (rest-1).
+// Rest1 is frame «Ссылка больше не работает» (rest-1).
 func Rest1() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -12,10 +12,10 @@ func Rest1() Screen {
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Invitation", Gap: w.DialogTitleGap6},
+						w.DialogTitle{Text: "This link does not work", Gap: w.DialogTitleGap6},
 						w.Prose{
 							Parts: []w.Inline{
-								w.Text("This invitation link is not valid. It may have expired, already been used, or been revoked."),
+								w.Text("It may have expired, been used already, or been withdrawn. Ask whoever sent it for a new one."),
 							},
 							Variant: w.ProseMuted,
 						},

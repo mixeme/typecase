@@ -976,6 +976,8 @@ func (g *gen) sheet(e *El) string {
 				p = ", Place: w.Pushed"
 			}
 			hp = append(hp, `w.Close{Label: "Close"`+p+"}")
+		case x.Has("tc-badge"):
+			hp = append(hp, g.badge(x))
 		case x.Has("tc-tag"):
 			hp = append(hp, g.tag(x))
 		case x.Has("tc-btn"):

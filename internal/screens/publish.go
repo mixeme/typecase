@@ -212,6 +212,11 @@ func Publish2() Screen {
 				Content: w.Sheet{
 					Title: "Publish a calendar",
 					Head: []w.SheetHeadPart{
+						w.Badge{
+							Label: "local",
+							Tone:  w.BadgeLocal,
+							Title: "Local instance: the link will not open from outside your network",
+						},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("nextcloud · Личный")},
 							Size:    w.Dim11_5,

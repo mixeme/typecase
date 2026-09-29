@@ -317,7 +317,7 @@ func Auth6() Screen {
 										w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Ask the administrator")}},
 										w.Prose{
 											Parts: []w.Inline{
-												w.Text("This account deposited its encryption key. The administrator can recover it with the instance master password, and your data is kept. Shown only when deposit is on for this account."),
+												w.Text("This account deposited its encryption key. The administrator can recover it with the instance master password, and your data is kept."),
 											},
 											Variant: w.ProseMutedClose,
 										},

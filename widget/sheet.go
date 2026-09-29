@@ -32,6 +32,7 @@ func (Button) sheetHeadPart()       {}
 func (Close) sheetHeadPart()        {}
 func (SheetSubject) sheetHeadPart() {}
 func (Tag) sheetHeadPart()          {}
+func (Badge) sheetHeadPart()        {}
 func (Crumbs) sheetHeadPart()       {}
 
 // SheetSubject is what a sheet acts on, named in its head: a source's mark

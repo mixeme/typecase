@@ -4,6 +4,20 @@ All notable changes to Typecase are documented here. Versioning follows
 [semantic versioning](https://semver.org/). This file tells consumers what to
 do, not what the authors did.
 
+## Unreleased
+
+### Added
+
+- **A badge in a sheet's head** (`Badge` is a `SheetHeadPart`): «local» on the
+  publish sheet.
+
+### Mockup
+
+- Carrel's tasks 40–43: one page for any dead secret link, the same words and
+  one door to sign in; the note to the mockup's reader leaves the recovery
+  card for the caption; the publish sheet says the instance is local; a label
+  another client wrote is chosen on its own row.
+
 ## typecase/v0.10.0 — 2026-09-29
 
 ### Breaking

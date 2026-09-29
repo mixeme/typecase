@@ -27,11 +27,11 @@ var _ = add(
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
 	overlay("after-rule", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "home", On: true},
+		w.MenuItem{Label: "home"},
 		w.MenuItem{Label: "work"},
 		w.MenuItem{Label: "other"},
 		w.MenuSep{},
-		w.MenuItem{Label: "дача"}}, Width: w.MenuWidth212}, "s-contacts-22", "tc-menu", 1),
+		w.MenuItem{Label: "дача", On: true}}, Width: w.MenuWidth212}, "s-contacts-22", "tc-menu", 1),
 	overlay("disabled-icons", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename", Reason: "This is the whole storage, not a folder in it."},
 		w.MenuItem{Icon: "dup", Label: "Copy to another server"},
@@ -88,11 +88,11 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Icon: "trash", Label: "Delete", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "components-5", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "work", On: true},
+		w.MenuItem{Label: "work"},
 		w.MenuItem{Label: "home"},
 		w.MenuItem{Label: "other"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Личная"}}, Width: w.MenuWidth212}, "s-contacts-13", "tc-menu", 1),
+		w.MenuItem{Label: "Личная", On: true}}, Width: w.MenuWidth212}, "s-contacts-13", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "At the time"},
 		w.MenuItem{Label: "5 minutes before"},
@@ -162,14 +162,14 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "Команда"}}, Width: w.MenuWidth290}, "s-contacts-9", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "mobile", On: true},
+		w.MenuItem{Label: "mobile"},
 		w.MenuItem{Label: "work"},
 		w.MenuItem{Label: "home"},
 		w.MenuItem{Label: "main"},
 		w.MenuItem{Label: "fax"},
 		w.MenuItem{Label: "other"},
 		w.MenuSep{},
-		w.MenuItem{Label: "iPhone"}}, Width: w.MenuWidth212}, "s-contacts-12", "tc-menu", 1),
+		w.MenuItem{Label: "iPhone", On: true}}, Width: w.MenuWidth212}, "s-contacts-12", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All 24", On: true},
 		w.MenuItem{Label: "Events 14"},
@@ -562,11 +562,11 @@ var _ = add(
 	overlay("plain", w.Sheet{Title: "Show password", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Your Carrel password", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks credentials everywhere for five minutes: passwords, device profiles, anything else handed out.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Show", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc", Place: w.Pushed}}, Width: w.SheetWidth400}, "s-plan-3", "tc-sheet", 1),
-	overlay("plain", w.Sheet{Title: "Publish a calendar", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud · Личный")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
-		w.Field{Label: "How much of it", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
-		w.Line{Block: true, Gap: w.LineGap10, Items: []w.LinePart{w.Field{Label: "From", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "To", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
-		w.Field{Label: "Link lives for", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
-		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, "s-publish-2", "tc-sheet", 1),
+	overlay("plain", w.Sheet{Title: "Publish a calendar", Head: []w.SheetHeadPart{w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: the link will not open from outside your network"}, w.Dim{Parts: []w.Inline{w.Text("nextcloud · Личный")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Field{Label: "How much of it", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "A date range", On: true}, {Label: "The whole calendar"}}}}, Width: w.FieldW100},
+		w.Line{Items: []w.LinePart{w.Field{Label: "From", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}}, Width: w.FieldSM}, w.Field{Label: "To", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-31", Label: "To", Mono: true}}, Width: w.FieldSM}}, Gap: w.LineGap10, Block: true},
+		w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "30 days"}}, Width: w.FieldSM},
+		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")}}, w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}, "s-publish-2", "tc-sheet", 1),
 	overlay("close", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Field{Label: "To", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
 		w.Field{Label: "Subject", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},

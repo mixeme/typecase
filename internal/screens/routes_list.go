@@ -129,7 +129,7 @@ var Routes = []Route{
 	{Frame: "s-auth-9", Caption: "Забыли пароль · запрос администратору", Screen: Auth9},
 	{Frame: "s-auth-10", Caption: "Забыли пароль · подтверждение очистки", Screen: Auth10},
 	{Frame: "s-auth-11", Caption: "Забыли пароль · новый пароль", Screen: Auth11},
-	{Frame: "rest-1", Caption: "Ссылка-приглашение больше не работает", Screen: Rest1},
+	{Frame: "rest-1", Caption: "Ссылка больше не работает", Screen: Rest1},
 	{Frame: "rest-2", Caption: "Адрес подтверждён", Screen: Rest2},
 	{Frame: "rest-3", Caption: "О программе", Screen: Rest3},
 	{Frame: "m-states-1", Caption: "Ничего не подключено", Screen: States1},
