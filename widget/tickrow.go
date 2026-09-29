@@ -26,7 +26,7 @@ type Send struct {
 // box prints the tick box; label is what is ticked.
 func (t Ticked) box(label string, send Send, more ...string) string {
 	if send.Name != "" && send.Form == "" {
-		own := append([]string{"tc-tickrow__tick", pick(t == TickedPart, "is-part")}, more...)
+		own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)
 		return `<input` + class(nil, own...) + ` type="checkbox"` + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
 			flag("checked", t == TickedOn) + `>`
 	}

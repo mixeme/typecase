@@ -135,7 +135,7 @@ type PickOption struct {
 func (p Pick) html(m mix) string {
 	if p.Name != "" {
 		var s strings.Builder
-		s.WriteString(`<select` + class(m, "tc-in", is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
+		s.WriteString(`<select` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
 		for _, o := range p.Options {
 			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + `>` + esc(o.Label) + `</option>`)
 		}

@@ -46,6 +46,47 @@ func Auth1() Screen {
 	}
 }
 
+// Auth13 is frame «Вход · неверный пароль» (s-auth-13).
+func Auth13() Screen {
+	return w.Page{
+		Items: []w.PagePart{
+			w.Auth{
+				Dialog: w.Dialog{
+					Items: []w.DialogPart{
+						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
+						w.Tagline{
+							Lead:     "One desk. Every server.",
+							Text:     "Calendars, contacts, tasks, notes and files — one place.",
+							Centered: true,
+						},
+						w.AuthStack{
+							Items: []w.AuthStackPart{
+								w.Form{
+									Items: []w.FormPart{
+										w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Value: "mix", Label: "Login"}}, Width: w.FieldW100},
+										w.Field{
+											Label: "Password",
+											Parts: []w.FieldPart{
+												w.Input{Label: "Password", Focus: true, Error: true},
+												w.FieldHint{Parts: []w.Inline{w.Text("Login or password is wrong.")}, Variant: w.HintDanger},
+											},
+											Width: w.FieldW100,
+										},
+									},
+									Variant: w.FormColumnFlush,
+								},
+								w.Button{Label: "Sign in", Kind: w.ButtonPrimary},
+							},
+							Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}},
+						},
+					},
+					Variant: w.DialogNarrow,
+				},
+			},
+		},
+	}
+}
+
 // Auth2 is frame «Регистрация и подтверждение» (s-auth-2).
 func Auth2() Screen {
 	return w.Page{

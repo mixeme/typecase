@@ -8,11 +8,20 @@ do, not what the authors did.
 
 ### Added
 
+- **`shape` knows the meaning of HTML everywhere.** An element with classes
+  is compared by its classes, not its tag, so every link, form, checkbox and
+  select the widgets print for their meaning stands for the frame's element;
+  a select's insides are the browser's options. `TestMeaningIsNoDifference`
+  checks every demo screen with every meaning field set. A form's tick keeps
+  the frame's `is-off` and its `:checked` state overrides it.
+- **`frame2go -self` output is gofmt-clean** (no blank line at the end).
 - **A badge in a sheet's head** (`Badge` is a `SheetHeadPart`): «local» on the
   publish sheet.
 
 ### Mockup
 
+- Sign-in with a wrong login or password (s-auth-13): the same page, the
+  password field empty and in focus, one reason for both cases.
 - Carrel's tasks 40–43: one page for any dead secret link, the same words and
   one door to sign in; the note to the mockup's reader leaves the recovery
   card for the caption; the publish sheet says the instance is local; a label

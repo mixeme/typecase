@@ -16,11 +16,13 @@
 // the screen, any of them chosen or badged). So one of two buttons of one
 // shape side by side — Import next to Export — is not missed: words are not
 // compared. What is not compared: text, attributes,
-// the options of a select, the hidden fields of a form. The meaning of HTML
-// (docs/development.md, Р-25) is not a difference either: a button that is a
-// link, a check or a segment that is a label around its checkbox or radio
-// button, a pick that is a select, a form that is a form element — each is
-// the same element of the frame.
+// the options of a select, the hidden fields of a form. Nor is the element's
+// tag when it has classes: its look is its classes, and the meaning of HTML
+// (docs/development.md, Р-25, Р-27) changes the tag, not the look — a button
+// or words that are a link, a check or a segment that is a label around its
+// checkbox or radio button, a tick box that is a checkbox, a pick that is a
+// select, a form, a search or a filter that is a form element. The tag of an
+// element without classes (b, strong, td…) is compared.
 package shape
 
 import (
@@ -70,20 +72,13 @@ func (m *Mockup) Check(frameID, rendered string) error {
 	return nil
 }
 
-// node is an element's shape: its tag as the frame draws it, its classes and
-// the shapes of its element children, runs collapsed.
+// node is an element's shape: its classes — or, without them, its tag — and
+// the shapes of its element children, siblings of one kind in runs.
 type node struct {
 	tag     string
 	classes string
 	runs    [][]*node // the element children, siblings of one kind together
-}
-
-// same is the frame's element for a tag that carries the meaning of HTML.
-var same = map[string]map[string]string{
-	"a":      {"tc-btn": "button", "tc-close": "button", "tc-menu__item": "button", "tc-row": "div", "tc-tree__row": "div"},
-	"label":  {"tc-check": "button", "tc-seg__opt": "button", "tc-menu__item": "button"},
-	"select": {"tc-in": "button"},
-	"form":   {"tc-form": "div"},
+	opaque  bool      // a select: its insides are the browser's options, not the frame's drawing
 }
 
 // dropped are the elements of the meaning that the frame does not draw.
@@ -104,11 +99,12 @@ func dropped(n *fragment.Node) bool {
 }
 
 func of(n *fragment.Node) *node {
-	out := &node{tag: n.Tag, classes: strings.Join(n.Classes, " ")}
-	for _, c := range n.Classes {
-		if t, ok := same[n.Tag][c]; ok {
-			out.tag = t
-		}
+	out := &node{tag: n.Tag, classes: strings.Join(n.Classes, " "), opaque: n.Tag == "select"}
+	if out.classes != "" {
+		out.tag = ""
+	}
+	if out.opaque {
+		return out
 	}
 	for _, k := range n.Children {
 		if k.Tag == "" || dropped(k) {
@@ -146,7 +142,7 @@ func (n *node) label() string {
 	if n.classes == "" {
 		return n.tag
 	}
-	return n.tag + "." + strings.ReplaceAll(n.classes, " ", ".")
+	return "." + strings.ReplaceAll(n.classes, " ", ".")
 }
 
 func diff(want, got *node, path string) string {
@@ -155,6 +151,9 @@ func diff(want, got *node, path string) string {
 	}
 	if want.classes != got.classes {
 		return fmt.Sprintf("%s: class %q, screen %q", path, want.classes, got.classes)
+	}
+	if want.opaque || got.opaque {
+		return ""
 	}
 	n := len(want.runs)
 	if len(got.runs) < n {

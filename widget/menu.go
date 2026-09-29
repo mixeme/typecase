@@ -65,14 +65,14 @@ func (it MenuItem) html(mix) string {
 	tag := "button"
 	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
-	if it.Name != "" {
+	if it.Name != "" && it.Tick != nil {
 		cls = class(nil, is("on", it.On), is("drag", it.Drag), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
 		s.WriteString(`<label` + cls + ` role="menuitem"><input class="tc-check__box" type="checkbox"` + attr("name", it.Name) + attr("value", it.Value) +
 			flag("checked", it.Tick != nil && it.Tick.Ticked != TickedOff) + flag("disabled", it.Fixed) + `>`)
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 		}
-		s.WriteString(`<span class="tc-tickrow__tick"></span>` + esc(it.Label))
+		s.WriteString(`<span` + class(nil, "tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[it.Tick.Ticked]) + `></span>` + esc(it.Label))
 		if it.Trail != nil {
 			s.WriteString(it.Trail.html(nil))
 		}

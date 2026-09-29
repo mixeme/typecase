@@ -3,6 +3,7 @@ package shape_test
 import (
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -67,6 +68,17 @@ func TestShapeNotWords(t *testing.T) {
 	if err := m.Check("s-notes-1", link); err != nil {
 		t.Errorf("a button as a link: %v", err)
 	}
+	// Task 39: words and parts that are links stand for the frame's spans.
+	r2, _ := screens.Find("s-auth-1")
+	auth := r2.Screen().Render()
+	linked := strings.Replace(auth, `<span class="tc-auth__link">Forgotten your password?</span>`,
+		`<a class="tc-auth__link" href="/forgot">Forgotten your password?</a>`, 1)
+	if linked == auth {
+		t.Fatal("no auth link in s-auth-1")
+	}
+	if err := m.Check("s-auth-1", linked); err != nil {
+		t.Errorf("an auth link with its address: %v", err)
+	}
 	primary := `<button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>`
 	gone := strings.Replace(page, primary, "", 1)
 	if gone == page {
@@ -78,5 +90,91 @@ func TestShapeNotWords(t *testing.T) {
 	other := strings.Replace(page, `class="tc-btn is-primary"`, `class="tc-btn"`, 1)
 	if err := m.Check("s-notes-1", other); err == nil {
 		t.Error("another class passes")
+	}
+}
+
+// TestMeaningIsNoDifference: every demo screen with every meaning field set
+// (links, forms, names — Р-25, Р-27) still has its frame's shape, so a
+// client's screen with its addresses passes where the frame draws none.
+func TestMeaningIsNoDifference(t *testing.T) {
+	m := mockup(t)
+	for _, r := range screens.Routes {
+		v := clone(reflect.ValueOf(r.Screen()))
+		fill(v)
+		if err := m.Check(r.Frame, v.Interface().(interface{ Render() string }).Render()); err != nil {
+			t.Error(err)
+		}
+	}
+}
+
+var meaningFields = map[string]bool{"Href": true, "Form": true, "Name": true, "Action": true}
+
+func clone(v reflect.Value) reflect.Value {
+	switch v.Kind() {
+	case reflect.Pointer:
+		if v.IsNil() {
+			return v
+		}
+		c := reflect.New(v.Elem().Type())
+		c.Elem().Set(clone(v.Elem()))
+		return c
+	case reflect.Interface:
+		if v.IsNil() {
+			return v
+		}
+		c := reflect.New(v.Type()).Elem()
+		c.Set(clone(v.Elem()))
+		return c
+	case reflect.Slice:
+		if v.IsNil() {
+			return v
+		}
+		c := reflect.MakeSlice(v.Type(), v.Len(), v.Len())
+		for i := 0; i < v.Len(); i++ {
+			c.Index(i).Set(clone(v.Index(i)))
+		}
+		return c
+	case reflect.Struct:
+		c := reflect.New(v.Type()).Elem()
+		c.Set(v)
+		for i := 0; i < v.NumField(); i++ {
+			if c.Field(i).CanSet() {
+				c.Field(i).Set(clone(v.Field(i)))
+			}
+		}
+		return c
+	}
+	return v
+}
+
+func fill(v reflect.Value) {
+	switch v.Kind() {
+	case reflect.Pointer:
+		if !v.IsNil() {
+			fill(v.Elem())
+		}
+	case reflect.Interface:
+		if !v.IsNil() {
+			c := reflect.New(v.Elem().Type()).Elem()
+			c.Set(v.Elem())
+			fill(c)
+			v.Set(c)
+		}
+	case reflect.Struct:
+		for i := 0; i < v.NumField(); i++ {
+			f := v.Field(i)
+			if !v.Type().Field(i).IsExported() || !f.CanSet() {
+				continue
+			}
+			if meaningFields[v.Type().Field(i).Name] && f.Kind() == reflect.String && f.String() == "" {
+				f.SetString("m")
+				continue
+			}
+			fill(f)
+		}
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			fill(v.Index(i))
+		}
 	}
 }

@@ -68,7 +68,7 @@ func print(root string, frames []string, self bool) error {
 					if err != nil {
 						return err
 					}
-					fmt.Println(src)
+					fmt.Print(src)
 					found = true
 				}
 			}

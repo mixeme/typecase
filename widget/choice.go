@@ -132,7 +132,7 @@ func (c Check) html(m mix) string {
 	var s strings.Builder
 	if c.Name != "" {
 		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="checkbox"` + attr("name", c.Name) + attr("value", c.Value) +
-			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span class="tc-tickrow__tick"></span>`)
+			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
 		for _, p := range c.Parts {
 			s.WriteString(p.html(nil))
 		}
