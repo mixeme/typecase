@@ -416,9 +416,9 @@ func Auth10() Screen {
 						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGap8},
 						w.Prose{
 							Parts: []w.Inline{
-								w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps for "),
+								w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps encrypted for "),
 								w.Strong("mix"),
-								w.Text(": saved connections and their passwords, subscriptions, tags and the settings of this desk. Address books, calendars, tasks and notes on the servers are not touched — you connect to them again afterwards.\n\nThe account itself stays: same login, same confirmed address. Only the password is new, and you set it on the next screen."),
+								w.Text(": saved connections and their passwords, subscriptions, published links, devices, external backup triggers and the deposited copy of the key. Address books, calendars, tasks and notes on the servers are not touched — you connect to them again afterwards.\n\nThe account itself stays: same login, role and confirmed address, the same first day of the week and clock. Only the password is new, and you set it on the next screen."),
 							},
 							Variant: w.ProseMuted,
 						},

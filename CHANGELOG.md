@@ -16,7 +16,9 @@ do, not what the authors did.
 - Carrel's tasks 40–43: one page for any dead secret link, the same words and
   one door to sign in; the note to the mockup's reader leaves the recovery
   card for the caption; the publish sheet says the instance is local; a label
-  another client wrote is chosen on its own row.
+  another client wrote is chosen on its own row. The erase page names what goes (the
+  encrypted: connections, links, devices, triggers, the deposited key) and what
+  stays (login, role, address, first day of the week, the clock) — task 44.
 
 ## typecase/v0.10.0 — 2026-09-29
 
