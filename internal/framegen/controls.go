@@ -394,6 +394,24 @@ func (g *gen) area(x *El) string {
 	return "w.Area{" + join(f, ", ") + "}"
 }
 
+// segfold is a switch of links that folds on a narrow bar: its options are
+// read from the fold's menu (label, count, address) and the current one.
+func (g *gen) segfold(x *El) string {
+	var opts []string
+	for _, it := range x.Kid("tc-segfold__pick").Kid("tc-segfold__menu").Els() {
+		f := []string{"Label: " + q(it.OwnText())}
+		if c := it.Kid("tc-segfold__count"); c != nil {
+			f = append(f, "Count: "+q(c.Text()))
+		}
+		f = append(f, "Href: "+q(it.Attr("href")))
+		if it.Has("is-on") {
+			f = append(f, "On: true")
+		}
+		opts = append(opts, "{"+join(f, ", ")+"}")
+	}
+	return "w.SegFold{Seg: w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}}}"
+}
+
 func (g *gen) seg(x *El) string {
 	var opts []string
 	name := ""
@@ -405,6 +423,9 @@ func (g *gen) seg(x *El) string {
 		}
 		if s := svgs(o); len(s) > 0 {
 			f = append(f, "Icon: "+icon(s[0]))
+		}
+		if o.Tag == "a" {
+			f = append(f, "Href: "+q(o.Attr("href")))
 		}
 		if o.Has("is-on") || (box != nil && box.HasAttr("checked")) {
 			f = append(f, "On: true")
@@ -501,6 +522,8 @@ func (g *gen) control(x *El) string {
 		return g.tagInput(x)
 	case x.Tag == "textarea":
 		return g.area(x)
+	case x.Has("tc-segfold"):
+		return g.segfold(x)
 	case x.Has("tc-seg"):
 		return g.seg(x)
 	case x.Has("tc-check"):

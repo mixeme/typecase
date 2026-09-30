@@ -103,6 +103,7 @@ var invariantBindings = map[string][]string{
 	"tc-range":    {"gate:widget-fragments", "gate:widget-fragments"},
 	"tc-rubric":   {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"tc-seg":      {"gate:widget-fragments", "gate:a11y", "gate:widget-fragments"},
+	"tc-segfold":  {"gate:widget-fragments", "gate:widget-fragments", "browser:bar-one-row", "gate:widget-fragments"},
 	"tc-tag":      {"gate:inv-tag-not-editable", "gate:widget-fragments"},
 	"tc-tick":     {"gate:a11y", "gate:enumerations", "gate:widget-fragments"},
 }

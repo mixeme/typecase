@@ -102,6 +102,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 		return g.topAny(e), ""
 	case e.Has("tc-sheet"):
 		return g.sheet(e), ""
+	case e.Has("tc-segfold"):
+		return g.segfold(e), ""
 	case e.Has("tc-menu"):
 		return g.menu(e), ""
 	case e.Has("tc-row"):

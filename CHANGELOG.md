@@ -27,6 +27,12 @@ do, not what the authors did.
   person looks in — the name, grey and dotted, with a hint (Mentions,
   deferred).
 
+- **`SegFold`** — a crowded switch of links (the owner's decision of 30.09,
+  variant B): on a wide bar a segment, on a narrow one — where the bar hides
+  what is second (`is-2nd`) — a pick of the current option with a menu of the
+  rest, opened by `details` without a script. `SegOption.Href` and `Count`: an
+  option may be a link with its number (Carrel's task 50).
+
 ### Mockup
 
 - Sign-in with a wrong login or password (s-auth-13): the same page, the
@@ -94,6 +100,9 @@ do, not what the authors did.
   need no reference record, widget or nesting pair until it is taken into
   work (`fragment.Mockup.Built`); lint and the before/after comparison read
   them as all frames. Lint does not read a letter's original in `srcdoc`.
+- The filter by kind folds instead of going under «⋯» on a narrow bar: a
+  person's timeline (s-contacts-7), Mentions (mentions-2) and the timeline with
+  letters (s-mailbox-21); its options are links.
 
 ## typecase/v0.10.0 — 2026-09-29
 

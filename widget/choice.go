@@ -9,6 +9,8 @@ type SegOption struct {
 	On    bool
 	Title string // the accessible name of an option without a label
 	Value string // what the option sends when the switch has a Name
+	Href  string // the option is a link: a bar's order or filter by kind
+	Count string // how many the option holds, after its label ("All 24")
 }
 
 // SegVariant is the drawn size and alignment of a switch.
@@ -30,12 +32,12 @@ func (v SegVariant) class() string {
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
 // Вход. Seg{Options, Variant, Place, Secondary, Name, Theme}.
-// Состояния. default | start | compact | icons | radio.
+// Состояния. default | start | compact | icons | radio | links.
 // Инварианты. Выбран ровно один вариант; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
 // Эталон. кадр `components-13`, фрагмент `.tc-seg`.
-// Содержимое. Варианты: подпись, значок или оба.
-// Чего нет. Выпадающего списка: вариантов столько, сколько помещается; больше — это выбор (Pick).
+// Содержимое. Варианты: подпись, значок или оба, число; вариант — кнопка, радио формы или ссылка.
+// Чего нет. Выпадающего списка: вариантов столько, сколько помещается; тесно — SegFold, больше — выбор (Pick).
 type Seg struct {
 	Options   []SegOption
 	Variant   SegVariant
@@ -52,7 +54,55 @@ type Seg struct {
 // Render prints the switch.
 func (g Seg) Render() string { return g.html(nil) }
 
-func (g Seg) html(m mix) string {
+func (g Seg) html(m mix) string { return g.seg(m) }
+
+// SegFold — tc-segfold
+//
+// Роль. Сегмент, которому тесно: на широкой полосе — сомкнутый переключатель ссылок, на узкой — выпадающий выбор с текущим вариантом (решение 30.09.2026).
+// Вход. SegFold{Seg}.
+// Состояния. default.
+// Инварианты. Выбран ровно один вариант; у каждого варианта адрес; складывается там же, где полоса прячет второстепенное (is-2nd); виджет печатает фрагмент своего кадра.
+// Поведение. На узкой полосе нажатие на текущий вариант открывает меню остальных (details, без сценария); выбор — переход по ссылке.
+// Эталон. кадр `s-contacts-7`, фрагмент `.tc-segfold`.
+// Содержимое. Варианты: подпись и число; сегмент и меню из одних и тех же вариантов.
+// Чего нет. Кнопок и радио: вариант сложенного сегмента — всегда ссылка.
+type SegFold struct {
+	Seg Seg // the switch of links; its options are the fold's menu too
+}
+
+// Render prints the switch and its fold.
+func (f SegFold) Render() string { return f.html(nil) }
+
+func (f SegFold) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<span` + class(m, "tc-segfold") + `>` + f.Seg.seg(nil))
+	cur := ""
+	for _, o := range f.Seg.Options {
+		if o.On {
+			cur = o.label()
+		}
+	}
+	s.WriteString(`<details class="tc-segfold__pick"><summary class="tc-segfold__current">` + esc(cur) + `</summary><div class="tc-segfold__menu">`)
+	for _, o := range f.Seg.Options {
+		s.WriteString(`<a` + class(nil, is("on", o.On), "tc-segfold__item") + attr("href", o.Href) + attr("aria-current", pick(o.On, "true")) + `>` + esc(o.Label))
+		if o.Count != "" {
+			s.WriteString(`<span class="tc-segfold__count">` + esc(o.Count) + `</span>`)
+		}
+		s.WriteString(`</a>`)
+	}
+	s.WriteString(`</div></details></span>`)
+	return s.String()
+}
+
+// label is the option's words with its count.
+func (o SegOption) label() string {
+	if o.Count == "" {
+		return o.Label
+	}
+	return o.Label + " " + o.Count
+}
+
+func (g Seg) seg(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
@@ -63,6 +113,10 @@ func (g Seg) html(m mix) string {
 				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
 			}
 			s.WriteString(esc(o.Label) + `</label>`)
+			continue
+		}
+		if o.Href != "" {
+			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("aria-current", pick(o.On, "true")) + `>` + esc(o.label()) + `</a>`)
 			continue
 		}
 		s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="button" role="radio"` +

@@ -1356,15 +1356,37 @@ func Contacts7() Screen {
 								To:   w.Input{Kind: w.InputDate, Value: "2026-11-10", Mono: true},
 								Show: w.Button{Label: "Show"},
 							},
-							w.Seg{
-								Options: []w.SegOption{
-									{Label: "All 24", On: true},
-									{Label: "Events 14"},
-									{Label: "Tasks 2"},
-									{Label: "Notes 4"},
-									{Label: "Files 4"},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{
+											Label: "All",
+											Count: "24",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+											On:    true,
+										},
+										{
+											Label: "Events",
+											Count: "14",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event",
+										},
+										{
+											Label: "Tasks",
+											Count: "2",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task",
+										},
+										{
+											Label: "Notes",
+											Count: "4",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note",
+										},
+										{
+											Label: "Files",
+											Count: "4",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file",
+										},
+									},
 								},
-								Secondary: true,
 							},
 							w.Button{Label: "Columns", Icon: "cols", Secondary: true},
 						},

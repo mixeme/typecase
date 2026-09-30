@@ -1396,6 +1396,8 @@ func (g *gen) child(e *El) string {
 	switch {
 	case e.Has("tc-close"):
 		return g.button(e)
+	case e.Has("tc-segfold"):
+		return g.segfold(e)
 	case e.Has("tc-seg"):
 		return g.seg(e)
 	case e.Has("tc-field"):

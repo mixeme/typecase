@@ -365,7 +365,7 @@ var mockupButtonClass = map[string]bool{
 // goes to an address is a link, a check or a segment of a form is a label
 // around its checkbox or radio button.
 var mockupButtonAlso = map[string][]string{
-	"tc-btn": {"a"}, "tc-close": {"a"}, "tc-menu__item": {"a", "label"}, "tc-check": {"label"}, "tc-seg__opt": {"label"}, "tc-usermenu": {"a"},
+	"tc-btn": {"a"}, "tc-close": {"a"}, "tc-menu__item": {"a", "label"}, "tc-check": {"label"}, "tc-seg__opt": {"label", "a"}, "tc-usermenu": {"a"},
 }
 
 func mockupButtonAlsoOK(c, tag string) bool {

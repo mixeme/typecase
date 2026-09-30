@@ -747,6 +747,8 @@ func (g *gen) cellPart(x *El) string {
 		return g.line(x)
 	case x.Has("tc-mono"):
 		return g.mono(x)
+	case x.Has("tc-segfold"):
+		return g.segfold(x)
 	case x.Has("tc-seg"):
 		return g.seg(x)
 	case x.Tag == "svg" && x.Has("tc-ico--inline"):
