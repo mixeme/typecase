@@ -1637,12 +1637,22 @@ func (g *gen) avatar(a *El) string {
 }
 
 var columnOf = []kv{{"tc-col--name", "ColumnName"}, {"tc-col--phone", "ColumnPhone"}, {"tc-col--email", "ColumnEmail"}, {"tc-col--org", "ColumnOrg"},
-	{"tc-col--birthday", "ColumnBirthday"}, {"tc-col--tags", "ColumnTags"}, {"tc-col--changed", "ColumnChanged"}, {"tc-col--source", "ColumnSource"}}
+	{"tc-col--birthday", "ColumnBirthday"}, {"tc-col--tags", "ColumnTags"}, {"tc-col--changed", "ColumnChanged"}, {"tc-col--source", "ColumnSource"},
+	{"tc-col--due", "ColumnDue"}, {"tc-col--complete", "ColumnComplete"}, {"tc-col--priority", "ColumnPriority"}, {"tc-col--status", "ColumnStatus"},
+	{"tc-col--excerpt", "ColumnExcerpt"}, {"tc-col--date", "ColumnDate"}, {"tc-col--detail", "ColumnDetail"}, {"tc-col--kind", "ColumnKind"}}
 
 // columnRow is a row of the columns a person chose.
 func (g *gen) columnRow(e *El) string {
 	var f, cells []string
 	els := e.Els()
+	if els[0].Has("tc-tick") {
+		d := ""
+		if els[0].Has("is-done") {
+			d = "Done: true, "
+		}
+		f = append(f, "Tick: &w.Tick{"+d+`Label: "Done"}`)
+		els = els[1:]
+	}
 	f = append(f, "Mark: "+g.mark(els[0]))
 	for _, k := range els[1:] {
 		if k.Has("tc-avatar") {
@@ -1670,6 +1680,9 @@ func (g *gen) columnRow(e *El) string {
 	f = append(f, "Cells: []w.ColumnCell{"+join(cells, ", ")+"}")
 	if e.Has("is-on") {
 		f = append(f, "On: true")
+	}
+	if e.Has("is-overdue") {
+		f = append(f, "Overdue: true")
 	}
 	return "w.ColumnRow{" + join(f, ", ") + "}"
 }

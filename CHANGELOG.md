@@ -17,6 +17,12 @@ do, not what the authors did.
 - **`frame2go -self` output is gofmt-clean** (no blank line at the end).
 - **A badge in a sheet's head** (`Badge` is a `SheetHeadPart`): «local» on the
   publish sheet.
+- **Columns for every list** (Carrel's task 45). `Column` gains the kinds the
+  other lists need — `ColumnDue`, `ColumnComplete`, `ColumnPriority`,
+  `ColumnStatus`, `ColumnExcerpt`, `ColumnDate`, `ColumnDetail` (why a record
+  is in a timeline) and `ColumnKind` — each with its width and the step it goes
+  at on a narrow screen; `ColumnRow` takes a task's `Tick` and `Overdue` (only
+  the due is in the alert colour).
 
 ### Mockup
 
@@ -38,6 +44,18 @@ do, not what the authors did.
 - The comparison takes `TC_REFACTOR_TAB` (seconds) for a slow machine; the
   whole run on 30.09 was clean — the one difference, s-dup-3, is the frame
   label's «Меню» tag.
+- Columns in every list where the button stands (the owner's decisions of
+  29–30.09): the menu of tasks (s-tasks-12: Priority, Status and Changed can be
+  added), notes (s-notes-23: Changed), files (s-files-20), users (s-admin-21:
+  Address), the audit log (s-admin-23, and its bar has the button now) and a
+  person's timeline (s-contacts-25: why a record is there stays with its
+  title); lists with chosen columns — tasks in one list sorted by Recently
+  changed (s-tasks-13), notes (s-notes-24), users with Address (s-admin-22),
+  the timeline with the date last (s-contacts-26). Source is in the menu of
+  the combined view only. Sorting follows the columns: a sort shows its column.
+  The rules under «Выбор столбцов» say where the choice is kept (the server's
+  cookie per section), how columns go on a narrow screen and how sorting
+  follows. 335 frames.
 
 ## typecase/v0.10.0 — 2026-09-29
 

@@ -520,6 +520,10 @@ var _ = add(
 		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "desktop-5", "tc-card", 2),
 
 	// tc-table
+	cards("users-address", w.Table{Cols: []w.TableCol{{Label: "Login"}, {Label: "Address"}, {Label: "Role"}, {Label: "Last login", Rank: w.Rank4}, {Label: "Escrow"}, {}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}, Name: true}, {Parts: []w.CellPart{w.Text("mix@example.org")}}, {Parts: []w.CellPart{w.Text("Administrator")}}, {Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("anna@example.org")}}, {Parts: []w.CellPart{w.Text("User")}}, {Parts: []w.CellPart{w.Text("2026-08-14 18:02")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "deposited"}}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("viktor "), w.Badge{Label: "disabled"}}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("User")}}, {Parts: []w.CellPart{w.Text("2026-06-30 11:41")}, Mono: true}, {Parts: []w.CellPart{w.Badge{Label: "deposited"}}}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}, State: w.RowGone}}}, "s-admin-22", "tc-table", 1),
 	cards("checkboxes", w.Table{Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "pick", Value: "a.pdf"}}, {Parts: []w.CellPart{w.Text("смета.pdf")}}}},
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "pick", Value: "b.pdf"}}, {Parts: []w.CellPart{w.Text("договор.pdf")}}}}}}, "components-43", "tc-table", 1),

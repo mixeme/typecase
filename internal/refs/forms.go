@@ -36,6 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("sort-changed", w.Seg{Options: []w.SegOption{{Label: "By due"}, {Label: "By priority"}, {Label: "Recently changed", On: true}}}, "s-tasks-13", "tc-seg", 2),
 	form("radio", w.Seg{Options: []w.SegOption{{Label: "Auto", On: true, Value: "auto"}, {Label: "Light", Value: "light"}, {Label: "Dark", Value: "dark"}}, Name: "theme", Theme: true}, "components-38", "tc-seg", 1),
 	form("table-line", w.Seg{Options: []w.SegOption{{Label: "Wrap"}, {Label: "One line", On: true}}, Variant: w.SegCompactSmall}, "s-notes-22", "tc-seg", 1),
 	form("table-wrap", w.Seg{Options: []w.SegOption{{Label: "Wrap", On: true}, {Label: "One line"}}, Variant: w.SegCompactSmall}, "s-notes-21", "tc-seg", 1),

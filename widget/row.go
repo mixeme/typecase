@@ -535,12 +535,22 @@ const (
 	ColumnTags                   // tags; goes at 800 px
 	ColumnChanged                // monospaced, 96 px; goes at 800 px
 	ColumnSource                 // 140 px; goes at 460 px
+	ColumnDue                    // a task's due: monospaced, 96 px
+	ColumnComplete               // how much is done: monospaced, 48 px; goes at 800 px
+	ColumnPriority               // monospaced, 48 px; goes at 800 px
+	ColumnStatus                 // a task's status in words, 112 px; goes at 620 px
+	ColumnExcerpt                // the start of a text: stretches; goes at 620 px
+	ColumnDate                   // a record's date: monospaced, 62 px
+	ColumnDetail                 // why a record is in a person's timeline: stretches, stays with the name
+	ColumnKind                   // event, task, note or file: 56 px; goes at 460 px
 )
 
 func (c Column) class() string {
 	return [...]string{"tc-row__title tc-col--name", "tc-row__excerpt tc-mono tc-col--phone", "tc-row__excerpt tc-col--email",
 		"tc-row__excerpt tc-col--org", "tc-row__excerpt tc-mono tc-col--birthday", "tc-row__cell tc-row__tags tc-col--tags",
-		"tc-row__cell tc-mono tc-col--changed", "tc-row__cell tc-col--source"}[c]
+		"tc-row__cell tc-mono tc-col--changed", "tc-row__cell tc-col--source", "tc-mono tc-col--due", "tc-row__cell tc-mono tc-col--complete",
+		"tc-row__cell tc-mono tc-col--priority", "tc-row__cell tc-col--status", "tc-row__excerpt tc-col--excerpt", "tc-row__cell tc-mono tc-col--date",
+		"tc-row__excerpt tc-col--detail", "tc-row__cell tc-col--kind"}[c]
 }
 
 // ColumnCell is a cell of a row of chosen columns: its column and what it
@@ -554,20 +564,22 @@ type ColumnCell struct {
 // ColumnRow — tc-row
 //
 // Роль. Строка списка со столбцами, которые выбрал человек (Columns): набор и порядок — его, ширина — рода столбца.
-// Вход. ColumnRow{Mark, Avatar, Cells, Strong, On, Href}.
-// Состояния. plain | on | link.
+// Вход. ColumnRow{Tick, Mark, Avatar, Cells, Strong, On, Overdue, Href}.
+// Состояния. plain | on | overdue | done | link.
 // Инварианты. Столбцы ровны: у всех строк списка один набор в одном порядке; ширина столбца и ступень, на которой он уходит, — его рода; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись.
+// Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным.
 // Эталон. кадр `s-contacts-23`, фрагмент `.tc-row--cols`.
-// Содержимое. Метка источника, аватар, ячейки столбцов: слова, моноширинное, теги.
+// Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, теги.
 // Чего нет. Своих ширин: столбец задаёт род, а не данные строки.
 type ColumnRow struct {
-	Mark   Mark
-	Avatar *Avatar
-	Cells  []ColumnCell
-	Strong bool // the name in bold: the chosen row
-	On     bool
-	Href   string
+	Tick    *Tick // a task's tick, before the mark
+	Mark    Mark
+	Avatar  *Avatar
+	Cells   []ColumnCell
+	Strong  bool // the name in bold: the chosen row
+	On      bool
+	Overdue bool // a task past its due: the due in the alert colour
+	Href    string
 }
 
 // Render prints the row.
@@ -575,7 +587,12 @@ func (r ColumnRow) Render() string { return r.html(nil) }
 
 func (r ColumnRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--cols", is("on", r.On)) + attr("href", r.Href) + `>` + r.Mark.html(nil))
+	done := r.Tick != nil && r.Tick.Done
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--cols", is("on", r.On), is("overdue", r.Overdue), is("done", done)) + attr("href", r.Href) + `>`)
+	if r.Tick != nil {
+		s.WriteString(r.Tick.html(nil))
+	}
+	s.WriteString(r.Mark.html(nil))
 	if r.Avatar != nil {
 		s.WriteString(r.Avatar.html(nil))
 	}

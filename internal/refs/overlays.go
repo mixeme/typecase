@@ -8,6 +8,52 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("timeline-cols", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Title", Name: "col", Value: "title", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Date", Name: "col", Value: "date"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Kind", Name: "col", Value: "kind"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Source", Name: "col", Value: "source"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default"}}}}, Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-contacts-25", "tc-menu", 1),
+	overlay("cols-off3", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Title", Name: "col", Value: "title", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Tags", Name: "col", Value: "tags"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Due", Name: "col", Value: "due"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Complete", Name: "col", Value: "complete"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Source", Name: "col", Value: "source"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Priority", Name: "col", Value: "priority"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Status", Name: "col", Value: "status"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Changed", Name: "col", Value: "changed"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default"}}}}, Action: "/app/tasks/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-tasks-12", "tc-menu", 1),
+	overlay("cols-off1", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Title", Name: "col", Value: "title", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Excerpt", Name: "col", Value: "excerpt"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Tags", Name: "col", Value: "tags"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Date", Name: "col", Value: "date"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Source", Name: "col", Value: "source"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Changed", Name: "col", Value: "changed"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default"}}}}, Action: "/app/notes/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-notes-23", "tc-menu", 1),
+	overlay("log-cols", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "When", Name: "col", Value: "when", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Action", Name: "col", Value: "action"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Actor", Name: "col", Value: "actor"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Target", Name: "col", Value: "target"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Detail", Name: "col", Value: "detail"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default"}}}}, Action: "/admin/audit/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-admin-23", "tc-menu", 1),
+	overlay("users-cols", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Login", Name: "col", Value: "login", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Role", Name: "col", Value: "role"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Created", Name: "col", Value: "created"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Last login", Name: "col", Value: "last-login"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "DAV", Name: "col", Value: "dav"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Sessions", Name: "col", Value: "sessions"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Escrow", Name: "col", Value: "escrow"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Address", Name: "col", Value: "address"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default"}}}}, Action: "/admin/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-admin-21", "tc-menu", 1),
 	overlay("form", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
 		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Name", Name: "col", Value: "name", Fixed: true},

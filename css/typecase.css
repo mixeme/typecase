@@ -328,6 +328,15 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row--cols > .tc-col--tags{flex:.8 1 100px;min-width:0}
 .tc-row--cols > .tc-col--changed{width:96px}
 .tc-row--cols > .tc-col--source{width:140px}
+.tc-row--cols > .tc-col--due{width:96px}
+.tc-row--cols > :is(.tc-col--complete,.tc-col--priority){width:48px}
+.tc-row--cols > .tc-col--status{width:112px}
+.tc-row--cols > .tc-col--excerpt{flex:1.6 1 160px;min-width:0}
+.tc-row--cols > .tc-col--date{width:62px}
+.tc-row--cols > .tc-col--detail{flex:1 1 120px;min-width:0}
+.tc-row--cols > .tc-col--kind{width:56px}
+/* Просрочен срок, а не всё дело: остальные числа строки своего цвета. */
+.tc-row--cols.is-overdue > .tc-row__cell{color:var(--tc-dusty)}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
 .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
 .tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
@@ -605,7 +614,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
   /* Тяжёлая таблица — .tc-table--wide: целиком ей нужно около 790, поэтому is-2nd уходит с 800, а не с 700. */
   .tc-table--wide th.is-2nd,.tc-table--wide td.is-2nd{display:none}
-  .tc-row--cols > :is(.tc-col--org,.tc-col--birthday,.tc-col--tags,.tc-col--changed){display:none}
+  .tc-row--cols > :is(.tc-col--org,.tc-col--birthday,.tc-col--tags,.tc-col--changed,.tc-col--complete,.tc-col--priority){display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr) 140px}
   .tc-row--avatarcols .tc-row__caption{display:none}
   .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 88px 140px}
@@ -638,7 +647,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row{padding-left:12px;padding-right:12px}
   /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
   .tc-head .tc-acts{flex:0 1 auto;min-width:0}
-  .tc-row--cols > .tc-col--email{display:none}
+  .tc-row--cols > :is(.tc-col--email,.tc-col--status,.tc-col--excerpt){display:none}
   .tc-row--cols > .tc-col--phone{width:118px}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px 130px}
   .tc-row--avatarcols .tc-row__detail{display:none}
@@ -654,7 +663,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--tickcols .tc-row__time{display:none}
 }
 @container tcbox (max-width:460px){
-  .tc-row--cols > .tc-col--source{display:none}
+  .tc-row--cols > :is(.tc-col--source,.tc-col--kind){display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(0,1fr) 118px}
   .tc-row--avatarcols .tc-row__source{display:none}
   .tc-row--timecols{grid-template-columns:3px 50px minmax(0,1fr)}

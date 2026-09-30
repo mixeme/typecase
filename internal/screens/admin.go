@@ -1094,6 +1094,7 @@ func Admin7() Screen {
 							w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190},
 							w.Input{Kind: w.InputDate, Value: "2026-08-01", Mono: true, Variant: w.InputH26W120},
 							w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Security"}, {Label: "Failures"}}},
+							w.Button{Folds: true, Label: "Columns", Icon: "cols", Title: "Columns"},
 						},
 					},
 					w.Table{
