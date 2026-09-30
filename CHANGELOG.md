@@ -80,6 +80,20 @@ do, not what the authors did.
 - **`NavItem.Short`**: the label in the phone's bottom bar when the rail's is
   too long for it — «Back to list» in the rail, «Back» in the bar (the
   owner's decision: nothing to save at full width).
+- **Mail of one's own mailbox is approved and deferred** (the owner's
+  decisions of 30.09) and moves into the mockup as section 7.24, its 32 frames
+  (`s-mailbox-N`) marked «отложена»; `carrel-mailbox-mockups.html` is gone. Its
+  rules join `data-tc`, its icons the sprite (clip, eye, flag, forward, inbox,
+  mailopen, reply, replyall, send, spam); the old davloom mark and rail note
+  are the mockup's `tc-emblem` and `tc-railstatus`. Decided: a folder scrolls
+  on with «Show 50 more» instead of pages (s-mailbox-1); from a letter the way
+  back is «← Inbox» first, with small ↑ ↓ to its neighbours (s-mailbox-6); the
+  unread sum, Mail seventh in the phone bar and a dialog of its own to connect
+  a mailbox stay as drawn. 371 frames.
+- **Deferred frames** — a function approved and put off (mark «отложена») —
+  need no reference record, widget or nesting pair until it is taken into
+  work (`fragment.Mockup.Built`); lint and the before/after comparison read
+  them as all frames. Lint does not read a letter's original in `srcdoc`.
 
 ## typecase/v0.10.0 — 2026-09-29
 

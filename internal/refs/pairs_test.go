@@ -12,7 +12,7 @@ import (
 // and every nesting the types allow is drawn (step 3).
 func TestContainerPairs(t *testing.T) {
 	m := mockup(t)
-	if err := refs.CheckPairs(m.Pairs(), refs.Entries, refs.Widgets, refs.Parts...); err != nil {
+	if err := refs.CheckPairs(m.Built().Pairs(), refs.Entries, refs.Widgets, refs.Parts...); err != nil {
 		t.Fatal(err)
 	}
 }

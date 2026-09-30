@@ -104,7 +104,7 @@ func TestWidgetsList(t *testing.T) {
 // a pending entry with its reason (step 4); step 7 empties the pending list.
 func TestShapesCovered(t *testing.T) {
 	m := mockup(t)
-	if miss := refs.Uncovered(m, refs.Entries, refs.Waiting); len(miss) > 0 {
+	if miss := refs.Uncovered(m.Built(), refs.Entries, refs.Waiting); len(miss) > 0 {
 		t.Fatalf("%d forms without a record:\n  %s", len(miss), strings.Join(miss, "\n  "))
 	}
 	t.Logf("pending: %s", refs.WaitingSummary(refs.Waiting))

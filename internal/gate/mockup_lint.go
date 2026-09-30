@@ -87,11 +87,16 @@ func CheckMockupLintFile(root string) error {
 	return CheckMockupLint(string(data), MockupLintLive...)
 }
 
+var srcdocValue = regexp.MustCompile(`srcdoc="[^"]*"`)
+
 // CheckMockupLint runs the given rules against mockup HTML.
 func CheckMockupLint(html string, rules ...MockupLintRule) error {
 	if len(rules) == 0 {
 		rules = MockupLintLive
 	}
+	// A letter's original in its sandbox (srcdoc) is someone else's document,
+	// not the frame's markup: the rules of frames do not read it.
+	html = srcdocValue.ReplaceAllString(html, `srcdoc=""`)
 	var errs []string
 	for _, r := range rules {
 		switch r {

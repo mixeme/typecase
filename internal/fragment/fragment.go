@@ -77,6 +77,35 @@ func (f *Frame) Route() bool {
 	return true
 }
 
+// Deferred says whether a frame belongs to a function approved and put off
+// (mark «отложена»): drawn now, built later. Its forms need no reference
+// record and its nestings no widget until the function is taken into work.
+func (f *Frame) Deferred() bool {
+	for c := f.Node.FirstChild; c != nil; c = c.NextSibling {
+		if c.Type == html.ElementNode && hasClass(c, "frame-label") {
+			for s := c.FirstChild; s != nil; s = s.NextSibling {
+				if s.Type == html.ElementNode && hasClass(s, "frag") && strings.TrimSpace(text(s)) == "отложена" {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
+// Built is the mockup without its deferred frames: what the widgets and the
+// records must cover now.
+func (m *Mockup) Built() *Mockup {
+	c := *m
+	c.Frames = nil
+	for _, f := range m.Frames {
+		if !f.Deferred() {
+			c.Frames = append(c.Frames, f)
+		}
+	}
+	return &c
+}
+
 // blockOf is Block, with a page's root read as the block tc-root.
 func (f *Frame) blockOf(n *html.Node) string {
 	if f.Page {

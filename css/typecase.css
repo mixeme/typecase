@@ -1425,3 +1425,49 @@ label.tc-menu__item{position:relative;cursor:pointer}
    tc-row__subtitle
    — узел назван, вида у имени нет. Пустое правило — не правило: оно проходило
    classes-defined и уезжало в CSS библиотеки. Список читает линт. */
+
+/* Почта ящика — утверждена 30.09.2026, отложена (Carrel docs/spec/carrel-mailbox.md, раздел 7.24). */
+
+/* Строка письма: флажок выбора, «важное», отправитель, тема с началом
+   текста, скрепка, размер, дата. Источника нет: список — одна папка
+   одного ящика. */
+.tc-row--mailcols{grid-template-columns:16px 14px minmax(110px,190px) minmax(180px,1fr) 14px 64px 112px}
+.tc-row__flag,.tc-row__clip{display:flex;align-items:center;justify-content:center;width:14px;height:14px}
+.tc-row__flag svg,.tc-row__clip svg{width:13px;height:13px;stroke:var(--tc-dusty);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tc-row__flag:not(.is-on) svg{stroke:var(--tc-edge)}
+.tc-row__flag.is-on svg{stroke:var(--tc-accent);fill:var(--tc-accent)}
+.tc-row__letter{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--tc-muted)}
+.tc-row__topic{font-size:13px;color:var(--tc-ink)}
+.tc-row.is-unread .tc-row__title,.tc-row.is-unread .tc-row__topic{font-weight:600}
+.tc-row.is-unread .tc-row__date{color:var(--tc-ink)}
+
+/* Цитата в тексте письма: строки «>» и цитаты HTML (M-5). */
+.tc-quote{margin:0;padding:1px 0 1px 12px;border-left:2px solid var(--tc-edge);color:var(--tc-muted);
+  font-size:13.5px;line-height:1.65;white-space:pre-wrap}
+.tc-quote .tc-quote{margin-top:6px}
+
+/* Список в тексте письма — с маркерами: у заметки tc-doc__list держит флажки задач. */
+.tc-doc__list.tc-doc__list--bullets{padding-left:18px}
+.tc-doc__list--bullets > li{display:list-item;list-style:disc}
+
+/* Оригинал письма: iframe с sandbox. Белый фон — чужой документ, тема
+   Carrel на него не действует. */
+/* Оригинал идёт сразу под заголовком письма, без второго верхнего поля. */
+.tc-doc--flush-top{padding-top:0}
+.tc-original{display:block;width:100%;height:430px;border:.5px solid var(--tc-edge);border-radius:3px;background:#fff}
+
+@container tcbox (max-width:800px){
+  .tc-row--mailcols{grid-template-columns:16px 14px minmax(100px,160px) minmax(140px,1fr) 14px 104px}
+  .tc-row--mailcols .tc-row__size{display:none}
+}
+@container tcbox (max-width:460px){
+  .tc-row--mailcols{grid-template-columns:16px minmax(0,1fr) 14px auto;grid-template-areas:"tick who flag when" "tick what what what";
+    row-gap:1px;padding-top:7px;padding-bottom:7px}
+  .tc-row--mailcols > .tc-tickrow__tick{grid-area:tick;align-self:start;margin-top:4px}
+  .tc-row--mailcols .tc-row__title{grid-area:who}
+  .tc-row--mailcols .tc-row__flag{grid-area:flag}
+  .tc-row--mailcols .tc-row__date{grid-area:when}
+  .tc-row--mailcols .tc-row__letter{grid-area:what}
+  .tc-row--mailcols .tc-row__flag:not(.is-on){visibility:hidden}
+  .tc-row--mailcols .tc-row__clip{display:none}
+}
