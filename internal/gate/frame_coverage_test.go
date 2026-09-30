@@ -25,7 +25,7 @@ func TestFrameCoverageBites(t *testing.T) {
 			t.Errorf("%s: got %v, want %q", name, err, c.says)
 		}
 	}
-	if got := gapFrames("| Кадр | Подпись |\n|------|---|\n| s-auth-1 | Вход | x |\n| m-print-1 | Агенда | y |\n"); strings.Join(got, ",") != "s-auth-1,m-print-1" {
+	if got := gapFrames("| Кадр | Подпись |\n|------|---|\n| s-auth-1 | Вход | x |\n| print-1 | Агенда | y |\n"); strings.Join(got, ",") != "s-auth-1,print-1" {
 		t.Errorf("gap rows: %v", got)
 	}
 }

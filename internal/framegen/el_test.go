@@ -41,7 +41,7 @@ func TestSpaced(t *testing.T) {
 }
 
 func TestFuncName(t *testing.T) {
-	for id, want := range map[string]string{"s-find-2": "Find2", "m-desktop-10": "Desktop10", "rest-1": "Rest1", "s-auth_x-3": "AuthX3"} {
+	for id, want := range map[string]string{"s-find-2": "Find2", "desktop-10": "Desktop10", "rest-1": "Rest1", "s-auth_x-3": "AuthX3"} {
 		if got := funcName(id); got != want {
 			t.Errorf("%s: %s, want %s", id, got, want)
 		}

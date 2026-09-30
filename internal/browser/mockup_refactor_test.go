@@ -12,6 +12,7 @@ import (
 	"math"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -223,7 +224,7 @@ func TestMockupRefactor(t *testing.T) {
 			}
 			withTab := func(fn func(open func(html, id string) error, shot func(html, id string, width int) ([]byte, error)) error) error {
 				h := browser.NewHarness(t)
-				run, cancel := h.Tab(90 * time.Second)
+				run, cancel := h.Tab(refactorTabTimeout())
 				defer func() {
 					cancel()
 					h.CloseBrowser()
@@ -453,4 +454,14 @@ func cropPNG(src []byte, x, y, w, h, scale float64) ([]byte, error) {
 		return nil, err
 	}
 	return buf.Bytes(), nil
+}
+
+// refactorTabTimeout is the budget of one side of one stage: 90 s, or
+// TC_REFACTOR_TAB seconds on a loaded machine, where a snapshot can take
+// longer without hanging.
+func refactorTabTimeout() time.Duration {
+	if v, err := strconv.Atoi(strings.TrimSpace(os.Getenv("TC_REFACTOR_TAB"))); err == nil && v > 0 {
+		return time.Duration(v) * time.Second
+	}
+	return 90 * time.Second
 }

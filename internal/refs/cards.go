@@ -26,7 +26,7 @@ var _ = add(
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The profile carries passwords in cleartext."), w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-plan-1", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("A file collection is copied as files. Tasks and notes live inside calendar collections and are copied with them — they cannot be picked separately. The size beside each collection is what it took last time.")}, Space: w.MsgFlushTop4}, "s-backup-2", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Separate from the sign-in password: the destination may be somebody else’s hosting. Forget it and this job’s archives open for nobody, including you.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2}, "s-backup-2", "tc-msg", 3),
-	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The data folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "m-desktop-12", "tc-msg", 2),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The data folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "desktop-12", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("baikal — the server replied 401. Check the saved password on the profile page.")}, Tone: w.MsgAlert}, "components-22", "tc-msg", 2),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-contacts-2", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-files-4", "tc-msg", 1),
@@ -55,10 +55,10 @@ var _ = add(
 	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("This file is over the limit for an attachment, so the letter will carry a secret link to it instead. The link is listed in "), w.Strong("Published links"), w.Text(", works for 30 days, and revoking it there closes it for whoever got the letter.")}, Tone: w.MsgAccent, Space: w.MsgSheet}, "s-mail-6", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("Отвечать на это письмо не нужно: адрес почту не принимает. Свяжитесь с отправителем другим способом.")}, Space: w.MsgFlushTop11}, "s-mail-8", "tc-msg", 1),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them.")}, Tone: w.MsgAlert}, "s-admin-6", "tc-msg", 1),
-	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The mode changes by signing out: the app shows this screen again. The data ("), w.Mono{Text: "state.enc"}, w.Text(") lives in the OS user profile either way.")}, Space: w.MsgFlush}, "m-desktop-5", "tc-msg", 1),
-	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("What only works from outside."), w.Text(" A local Carrel is not visible from the internet, so "), w.Strong("published links"), w.Text(", "), w.Strong("devices over davloom"), w.Text(", "), w.Strong("backup started by an external request"), w.Text(" and "), w.Strong("invitation links"), w.Text(" either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "m-desktop-6", "tc-msg", 2),
-	cards("rich", w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" The app goes back to the first screen, where the mode is chosen again — a server or a local run. "), w.Strong("Your other devices stay signed in"), w.Text(" — those sessions end in Settings → Account, and they end there whether this app is running or not.")}, Space: w.MsgFlush}, "m-desktop-12", "tc-msg", 1),
-	cards("icon", w.Msg{Icon: "down", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, "m-desktop-14", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The mode changes by signing out: the app shows this screen again. The data ("), w.Mono{Text: "state.enc"}, w.Text(") lives in the OS user profile either way.")}, Space: w.MsgFlush}, "desktop-5", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("What only works from outside."), w.Text(" A local Carrel is not visible from the internet, so "), w.Strong("published links"), w.Text(", "), w.Strong("devices over davloom"), w.Text(", "), w.Strong("backup started by an external request"), w.Text(" and "), w.Strong("invitation links"), w.Text(" either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "desktop-6", "tc-msg", 2),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" The app goes back to the first screen, where the mode is chosen again — a server or a local run. "), w.Strong("Your other devices stay signed in"), w.Text(" — those sessions end in Settings → Account, and they end there whether this app is running or not.")}, Space: w.MsgFlush}, "desktop-12", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "down", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, "desktop-14", "tc-msg", 1),
 
 	// tc-diag
 	cards("plain", w.Diag{Text: "[discover] GET /.well-known/caldav → 200\n[principal] /principals/mix/"}, "components-30", "tc-diag", 1),
@@ -75,9 +75,9 @@ var _ = add(
 	// tc-meter
 	cards("plain", w.Meter{Percent: 83}, "components-16", "tc-meter", 1),
 	cards("track", w.Meter{Percent: 100, Track: 100}, "components-26", "tc-meter", 1),
-	cards("alert", w.Meter{Percent: 83, Alert: true}, "m-states-6", "tc-meter", 1),
-	cards("width", w.Meter{Percent: 83, Width: w.Meter60}, "m-phone-1", "tc-meter", 1),
-	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "m-desktop-14", "tc-meter", 1),
+	cards("alert", w.Meter{Percent: 83, Alert: true}, "states-6", "tc-meter", 1),
+	cards("width", w.Meter{Percent: 83, Width: w.Meter60}, "phone-1", "tc-meter", 1),
+	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
@@ -88,8 +88,8 @@ var _ = add(
 	cards("stop", w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Text("Done · 13 of 14 sources answered"), w.Mono{Text: "1.8 s"}, w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}}}}}, "s-find-1", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Text("11 checks · "), w.Span{Face: w.FaceAccent, Text: "8 fine"}, w.Text(" · "), w.Span{Face: w.FaceDanger, Text: "2 broken"}, w.Text(" · 1 warning"), w.Mono{Text: "4.2 s", Place: w.Pushed}}}, "s-admin-4", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 6 of 7 sources by the card's link "), w.Mono{Text: "urn:uuid:4f2b-9c31-a0e7"}, w.Text(" · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "mentions-2", "tc-runbar", 1),
-	cards("failed", w.Runbar{Meter: w.Meter{Percent: 0}, Parts: []w.RunbarPart{w.Text("No connection to carrel.example · last successful attempt 4 minutes ago "), w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}, Failed: true}, "m-states-5", "tc-runbar", 1),
-	cards("stop", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий: 401 Unauthorized"}, w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}}, "m-states-6", "tc-runbar", 1),
+	cards("failed", w.Runbar{Meter: w.Meter{Percent: 0}, Parts: []w.RunbarPart{w.Text("No connection to carrel.example · last successful attempt 4 minutes ago "), w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}, Failed: true}, "states-5", "tc-runbar", 1),
+	cards("stop", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий: 401 Unauthorized"}, w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}}}}, "states-6", "tc-runbar", 1),
 
 	// tc-queue
 	cards("flush", w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "12.4 MB", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Hide", Small: true}, Items: []w.QueueItem{{Name: "отчёт-июль.pdf", Meta: "4.1 MB · done", Meter: &w.Meter{Percent: 100, Track: 100}}, {Name: "плакат.png", Meta: "8.3 MB · 62%", Meter: &w.Meter{Percent: 62, Track: 100}}, {Name: "release-checklist.md", Meta: "name taken", Failed: true, Acts: []w.Button{w.Button{Label: "Keep both", Small: true}, w.Button{Label: "Replace", Small: true}, w.Button{Label: "Skip", Small: true}}}}, Variant: w.QueueFlushFull}, "components-26", "tc-queue", 1),
@@ -236,19 +236,19 @@ var _ = add(
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
-		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}}, "m-dark-1", "tc-fields", 1),
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}}, "dark-1", "tc-fields", 1),
 	cards("phone", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Break{}, w.Text("Monday, 10 August")}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
-		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}, Variant: w.Fields88}, "m-phone-3", "tc-fields", 1),
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}, Variant: w.Fields88}, "phone-3", "tc-fields", 1),
 	cards("phone", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMonoAccent},
 		{Term: "Email", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Face: w.ValueAccent},
-		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono}}, Variant: w.Fields88Pad}, "m-phone-5", "tc-fields", 1),
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono}}, Variant: w.Fields88Pad}, "phone-5", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}}},
-		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "m-desktop-1", "tc-fields", 1),
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "desktop-1", "tc-fields", 1),
 
 	// tc-sec
 	cards("plain", w.Sec{Items: []w.SecPart{
@@ -311,10 +311,10 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Анна Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Общий")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "А. Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· baikal · Работа")}}}}, Gap: 5}}}, "mentions-1", "tc-sec", 2),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attendees 4"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}}, "m-phone-3", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}}, "phone-3", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "m-desktop-1", "tc-sec", 1),
+		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "desktop-1", "tc-sec", 1),
 
 	// tc-card
 	cards("qr-image", w.Card{Items: []w.CardPart{
@@ -509,15 +509,15 @@ var _ = add(
 		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/register", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy", Small: true}}},
 		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save"}}}}}, "s-admin-1", "tc-card", 3),
 	cards("pick", w.Card{Items: []w.CardPart{
-		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, "m-desktop-3", "tc-card", 1),
+		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, "desktop-3", "tc-card", 1),
 	cards("pick", w.Card{Items: []w.CardPart{
-		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, "m-desktop-3", "tc-card", 2),
+		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, "desktop-3", "tc-card", 2),
 	cards("pick", w.Card{Items: []w.CardPart{
-		w.CardPick{Ticked: w.TickedOff, Title: "Portable — do not install", Note: []w.CardTextPart{w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.")}, Field: &w.Field{Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, Variant: w.CardFlush}, "m-desktop-3", "tc-card", 3),
+		w.CardPick{Ticked: w.TickedOff, Title: "Portable — do not install", Note: []w.CardTextPart{w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.")}, Field: &w.Field{Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, Variant: w.CardFlush}, "desktop-3", "tc-card", 3),
 	cards("pick", w.Card{Items: []w.CardPart{
-		w.CardPick{Title: "Local — run it here", Note: []w.CardTextPart{w.Text("Carrel runs inside the app, on this computer. Nothing to deploy.")}, Aside: "Suits one person and one computer. A phone cannot open this Carrel until access over the network is allowed."}}, Variant: w.CardChosenFlush}, "m-desktop-5", "tc-card", 1),
+		w.CardPick{Title: "Local — run it here", Note: []w.CardTextPart{w.Text("Carrel runs inside the app, on this computer. Nothing to deploy.")}, Aside: "Suits one person and one computer. A phone cannot open this Carrel until access over the network is allowed."}}, Variant: w.CardChosenFlush}, "desktop-5", "tc-card", 1),
 	cards("pick", w.Card{Items: []w.CardPart{
-		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "m-desktop-5", "tc-card", 2),
+		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "desktop-5", "tc-card", 2),
 
 	// tc-table
 	cards("checkboxes", w.Table{Rows: []w.TableRow{

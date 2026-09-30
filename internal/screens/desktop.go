@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// Desktop1 is frame «Окно приложения» (m-desktop-1).
+// Desktop1 is frame «Окно приложения» (desktop-1).
 func Desktop1() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -136,7 +136,7 @@ func Desktop1() Screen {
 	}
 }
 
-// Desktop3 is frame «Установка · кому эта копия» (m-desktop-3).
+// Desktop3 is frame «Установка · кому эта копия» (desktop-3).
 func Desktop3() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -230,7 +230,7 @@ func Desktop3() Screen {
 	}
 }
 
-// Desktop4 is frame «Portable · чем эта копия отличается» (m-desktop-4).
+// Desktop4 is frame «Portable · чем эта копия отличается» (desktop-4).
 func Desktop4() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -301,7 +301,7 @@ func Desktop4() Screen {
 	}
 }
 
-// Desktop5 is frame «Первый запуск · как работать» (m-desktop-5).
+// Desktop5 is frame «Первый запуск · как работать» (desktop-5).
 func Desktop5() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -350,7 +350,7 @@ func Desktop5() Screen {
 	}
 }
 
-// Desktop6 is frame «Локальный запуск» (m-desktop-6).
+// Desktop6 is frame «Локальный запуск» (desktop-6).
 func Desktop6() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -470,7 +470,7 @@ func Desktop6() Screen {
 	}
 }
 
-// Desktop7 is frame «Первый запуск · к какому экземпляру» (m-desktop-7).
+// Desktop7 is frame «Первый запуск · к какому экземпляру» (desktop-7).
 func Desktop7() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -516,7 +516,7 @@ func Desktop7() Screen {
 	}
 }
 
-// Desktop9 is frame «Заметка из любой программы» (m-desktop-9).
+// Desktop9 is frame «Заметка из любой программы» (desktop-9).
 func Desktop9() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -550,7 +550,7 @@ func Desktop9() Screen {
 	}
 }
 
-// Desktop10 is frame «Встреча из трея» (m-desktop-10).
+// Desktop10 is frame «Встреча из трея» (desktop-10).
 func Desktop10() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -610,7 +610,7 @@ func Desktop10() Screen {
 	}
 }
 
-// Desktop11 is frame «Напоминания» (m-desktop-11).
+// Desktop11 is frame «Напоминания» (desktop-11).
 func Desktop11() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -642,7 +642,7 @@ func Desktop11() Screen {
 	}
 }
 
-// Desktop12 is frame «Выход из учётной записи · удалять ли данные» (m-desktop-12).
+// Desktop12 is frame «Выход из учётной записи · удалять ли данные» (desktop-12).
 func Desktop12() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -693,7 +693,7 @@ func Desktop12() Screen {
 	}
 }
 
-// Desktop13 is frame «Настройки приложения» (m-desktop-13).
+// Desktop13 is frame «Настройки приложения» (desktop-13).
 func Desktop13() Screen {
 	return w.Shell{
 		Body: w.ShellBody{
@@ -843,7 +843,7 @@ func Desktop13() Screen {
 	}
 }
 
-// Desktop14 is frame «Обновление · скачано и ждёт» (m-desktop-14).
+// Desktop14 is frame «Обновление · скачано и ждёт» (desktop-14).
 func Desktop14() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -913,7 +913,7 @@ func Desktop14() Screen {
 	}
 }
 
-// Desktop15 is frame «Обновление · сервер отстал» (m-desktop-15).
+// Desktop15 is frame «Обновление · сервер отстал» (desktop-15).
 func Desktop15() Screen {
 	return w.Page{
 		Items: []w.PagePart{
@@ -959,7 +959,7 @@ func Desktop15() Screen {
 	}
 }
 
-// Desktop16 is frame «Папка на бумаге» (m-desktop-16).
+// Desktop16 is frame «Папка на бумаге» (desktop-16).
 func Desktop16() Screen {
 	return w.Page{
 		Items: []w.PagePart{

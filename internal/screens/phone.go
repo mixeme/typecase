@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// Phone1 is frame «Агенда» (m-phone-1).
+// Phone1 is frame «Агенда» (phone-1).
 func Phone1() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -79,7 +79,7 @@ func Phone1() Screen {
 	}
 }
 
-// Phone2 is frame «Выдвижной рейл источников» (m-phone-2).
+// Phone2 is frame «Выдвижной рейл источников» (phone-2).
 func Phone2() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -152,7 +152,7 @@ func Phone2() Screen {
 	}
 }
 
-// Phone3 is frame «Карточка события» (m-phone-3).
+// Phone3 is frame «Карточка события» (phone-3).
 func Phone3() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -215,7 +215,7 @@ func Phone3() Screen {
 	}
 }
 
-// Phone4 is frame «Контакты» (m-phone-4).
+// Phone4 is frame «Контакты» (phone-4).
 func Phone4() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -294,7 +294,7 @@ func Phone4() Screen {
 	}
 }
 
-// Phone5 is frame «Человек целиком» (m-phone-5).
+// Phone5 is frame «Человек целиком» (phone-5).
 func Phone5() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -339,7 +339,7 @@ func Phone5() Screen {
 	}
 }
 
-// Phone6 is frame «Файлы · выделение» (m-phone-6).
+// Phone6 is frame «Файлы · выделение» (phone-6).
 func Phone6() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -408,7 +408,7 @@ func Phone6() Screen {
 	}
 }
 
-// Phone7 is frame «Заметка · чтение и правка» (m-phone-7).
+// Phone7 is frame «Заметка · чтение и правка» (phone-7).
 func Phone7() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -463,7 +463,7 @@ func Phone7() Screen {
 	}
 }
 
-// Phone8 is frame «Рейл из значков» (m-phone-8).
+// Phone8 is frame «Рейл из значков» (phone-8).
 func Phone8() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -576,7 +576,7 @@ func Phone8() Screen {
 	}
 }
 
-// Phone9 is frame «Рейл из значков · источники открыты» (m-phone-9).
+// Phone9 is frame «Рейл из значков · источники открыты» (phone-9).
 func Phone9() Screen {
 	return w.Shell{
 		Top: &w.Top{

@@ -388,7 +388,7 @@ var _ = add(
 		w.MenuColumn{Label: "Theme", Control: w.Seg{Options: []w.SegOption{{Label: "Auto", On: true}, {Label: "Light"}, {Label: "Dark"}}, Variant: w.SegStartSmall}},
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Sign out…"}}, Width: w.MenuWidth290}, "m-desktop-2", "tc-menu", 1),
+		w.MenuItem{Label: "Sign out…"}}, Width: w.MenuWidth290}, "desktop-2", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Only as set in the event"},
 		w.MenuSep{},
@@ -397,7 +397,7 @@ var _ = add(
 		w.MenuItem{Label: "30 minutes · and as set in the event"},
 		w.MenuItem{Label: "1 hour · and as set in the event"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Never"}}, Width: w.MenuWidth290}, "m-desktop-20", "tc-menu", 1),
+		w.MenuItem{Label: "Never"}}, Width: w.MenuWidth290}, "desktop-20", "tc-menu", 1),
 
 	// tc-drop
 	overlay("more", w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
@@ -618,7 +618,7 @@ var _ = add(
 			w.Rubric{Text: "nextcloud"},
 			w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
 			w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
-			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true}}}}}, "m-phone-9", "tc-sheet", 1),
+			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true}}}}}, "phone-9", "tc-sheet", 1),
 
 	// tc-scrim
 	overlay("pad", w.Scrim{Content: w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{

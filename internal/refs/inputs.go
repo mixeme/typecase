@@ -48,13 +48,13 @@ var _ = add(
 	form("variant", w.Input{Value: "cbk_7f3a-91de-4402-lamp", Mono: true, Variant: w.InputKeySmFill, Label: "Token"}, "s-backup-5", "tc-in", 1),
 	form("variant", w.Input{Kind: w.InputDate, Value: "2026-08-01", Mono: true, Variant: w.InputH26W120, Label: "From"}, "s-admin-7", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "a-z 0-9 . _ -", Focus: true, Mono: true, Label: "Login"}, "s-auth-4", "tc-in", 1),
-	form("placeholder", w.Input{Placeholder: `E:\Carrel`, Mono: true, Variant: w.Input11Fill, Label: "Folder"}, "m-desktop-3", "tc-in", 1),
+	form("placeholder", w.Input{Placeholder: `E:\Carrel`, Mono: true, Variant: w.Input11Fill, Label: "Folder"}, "desktop-3", "tc-in", 1),
 
 	// tc-in as a pick
 	form("select", w.Pick{Name: "week", Options: []w.PickOption{{Value: "mon", Label: "Monday", On: true}, {Value: "sun", Label: "Sunday"}, {Value: "sat", Label: "Saturday", Unavailable: true}}, Label: "Week starts on"}, "components-38", "tc-in", 2),
 	form("value", w.Pick{Value: "Confirmed", Label: "Status"}, "components-10", "tc-in", 5),
 	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where to write"}, "s-notes-5", "tc-in", 1),
-	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12Fill, Label: "Where to write"}, "m-desktop-9", "tc-in", 2),
+	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12Fill, Label: "Where to write"}, "desktop-9", "tc-in", 2),
 	form("aside", w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, "s-agenda-3", "tc-in", 10),
 	form("variant", w.Pick{Value: "Documents / carrel / 2026-08", Variant: w.PickT12W240, Label: "Where to put it"}, "s-notes-11", "tc-in", 1),
 	form("focus", w.Pick{Value: "radicale · vps · Проекты", Focus: true, Label: "Restore into"}, "s-backup-8", "tc-in", 1),
@@ -87,7 +87,7 @@ var _ = add(
 	form("body", w.Area{Text: noteBody, Variant: w.AreaBody, Label: "Text"}, "s-notes-4", "tc-in", 7),
 	form("paste", w.Area{Text: pasteArgs, Variant: w.AreaPaste, Mono: true, Label: "Arguments"}, "s-backup-4", "tc-in", 5),
 	form("letter", w.Area{Text: "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.", Variant: w.AreaLetter, Label: "Note"}, "s-mail-1", "tc-in", 3),
-	form("tall", w.Area{Text: "Спросить у Виктора про миграцию — успеет ли до заморозки.", Variant: w.AreaTall, Focus: true, Label: "Text"}, "m-desktop-9", "tc-in", 1),
+	form("tall", w.Area{Text: "Спросить у Виктора про миграцию — успеет ли до заморозки.", Variant: w.AreaTall, Focus: true, Label: "Text"}, "desktop-9", "tc-in", 1),
 )
 
 const noteBody = `Договорились заморозить ветку в среду.

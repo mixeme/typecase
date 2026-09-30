@@ -9,7 +9,7 @@ func shell(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-brand
 	shell("logo", w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, "shell-1", "tc-brand", 1),
-	shell("title", w.Brand{Title: "Combined calendar"}, "m-phone-1", "tc-brand", 1),
+	shell("title", w.Brand{Title: "Combined calendar"}, "phone-1", "tc-brand", 1),
 
 	// tc-search
 	shell("form", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…", Name: "q"}, Action: "/app/find"}, "components-43", "tc-search", 1),
@@ -263,7 +263,7 @@ var _ = add(
 	shell("tags", w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}}, "s-contacts-1", "tc-railsec", 4),
 	shell("empty", w.RailSec{Items: []w.RailSecPart{
-		w.Rubric{Text: "Sources"}}, Note: "Nothing connected yet"}, "m-states-1", "tc-railsec", 1),
+		w.Rubric{Text: "Sources"}}, Note: "Nothing connected yet"}, "states-1", "tc-railsec", 1),
 
 	// tc-railstatus
 	shell("running", w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}, "components-35", "tc-railstatus", 1),
@@ -278,7 +278,7 @@ var _ = add(
 
 	// tc-top
 	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top", 1),
-	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "More"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "More"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "More"}}, Tight: true}, "m-phone-1", "tc-top", 1),
+	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "More"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "More"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "More"}}, Tight: true}, "phone-1", "tc-top", 1),
 )
 
 func init() {

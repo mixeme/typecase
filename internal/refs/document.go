@@ -20,7 +20,7 @@ var _ = add(
 	document("top", w.Prose{Parts: []w.Inline{w.Text("This is a connection point for clients, not a page to read. Enter the address in anything that speaks CalDAV, CardDAV or WebDAV — DAVx5, Thunderbird, Calendar and Contacts on Apple, a file manager mounting a network drive. The user name is your Carrel one; the password is the device password issued in Carrel.")}, Variant: w.ProseTop}, "s-davloom-4", "tc-prose", 1),
 	document("rich", w.Prose{Parts: []w.Inline{w.Text("The letter went to "), w.Mono{Text: "v@example.org"}, w.Text(". The account cannot be used until you open the link in it.\n\nSending again with the same login and address, while the account is unconfirmed, simply replaces the letter and the password.")}, Variant: w.ProseMuted}, "s-auth-3", "tc-prose", 1),
 	document("rich", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет "), w.Link{Text: "@Анна Ковалёва", Href: "#"}, w.Text(", черновик к вечеру вторника.")}}, "mentions-4", "tc-prose", 1),
-	document("read", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop}, "m-phone-7", "tc-prose", 1),
+	document("read", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop}, "phone-7", "tc-prose", 1),
 
 	// tc-doc
 	document("table", w.Doc{Items: []w.DocPart{
@@ -69,7 +69,7 @@ var _ = add(
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
 		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
-		w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}}, "m-phone-7", "tc-doc", 1),
+		w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}}, "phone-7", "tc-doc", 1),
 
 	// tc-docbar
 	document("plain", w.Docbar{Items: []w.DocbarPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.BarSep{}, w.Button{Label: "B", Bold: true}, w.Button{Label: "I", Variant: w.ButtonItalic}, w.Button{Label: "H2", Tertiary: true}, w.Button{Label: "• list", Tertiary: true}, w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true}, w.Button{Icon: "link", Title: "Link", Tertiary: true}, w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"}}, More: &w.Button{Icon: "dots", Title: "More"}, End: []w.DocbarEnd{w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, w.DraftNote{Text: "Draft in this window ·", Time: w.Mono{Text: "11:42"}, Secondary: true}, w.Kbd{Keys: "Ctrl+S", Secondary: true}, w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}, Secondary: true}, w.Button{Folds: true, Label: "Focus", Icon: "focus", Title: "Focus"}}}, "s-notes-20", "tc-docbar", 1),

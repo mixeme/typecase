@@ -20,7 +20,7 @@ const (
 	MockupStyleBlocks MockupLintRule = "style-blocks"
 	// MockupFrameClasses requires classes inside .frame (except the frame
 	// chrome and its label) to be tc-*, is-*, or mk-* (mk-* only in
-	// m-desktop frames). .mock is forbidden.
+	// desktop frames). .mock is forbidden.
 	MockupFrameClasses MockupLintRule = "frame-classes"
 	// MockupFrameElements requires real controls in frames: button, kbd.
 	MockupFrameElements MockupLintRule = "frame-elements"
@@ -316,7 +316,7 @@ func checkMockupFrameClasses(html string) error {
 			return err
 		}
 		id := attrs["data-frame"]
-		desktop := strings.HasPrefix(id, "m-desktop")
+		desktop := strings.HasPrefix(id, "desktop-")
 		walkHTML(parseHTML(outer), func(n *htmlNode) {
 			if n.tag == "#root" || n.tag == "script" || n.tag == "style" {
 				return
@@ -333,7 +333,7 @@ func checkMockupFrameClasses(html string) error {
 					label = "(no data-frame)"
 				}
 				if strings.HasPrefix(c, "mk-") {
-					errs = append(errs, fmt.Sprintf("%s: mk-* class %s outside m-desktop", label, c))
+					errs = append(errs, fmt.Sprintf("%s: mk-* class %s outside desktop", label, c))
 					continue
 				}
 				errs = append(errs, fmt.Sprintf("%s: class %s", label, c))

@@ -26,7 +26,7 @@ type Section struct {
 type Gap struct{ Frame, Caption, Why string }
 
 // catalogOnly are the frames Р-16 leaves out of the routes.
-var catalogOnly = map[string]bool{"m-desktop-2": true, "m-desktop-8": true}
+var catalogOnly = map[string]bool{"desktop-2": true, "desktop-8": true}
 
 var (
 	frameOpen = regexp.MustCompile(`<div class="frame([^"]*)" data-frame="([^"]+)"`)
@@ -133,7 +133,7 @@ var nameSplit = regexp.MustCompile(`[-_]`)
 // funcName is the Go name of a frame's screen: s-find-2 is Find2.
 func funcName(id string) string {
 	s := id
-	if strings.HasPrefix(id, "s-") || strings.HasPrefix(id, "m-") {
+	if strings.HasPrefix(id, "s-") {
 		s = id[2:]
 	}
 	var b strings.Builder

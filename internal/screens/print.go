@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// Print1 is frame «Агенда на бумаге» (m-print-1).
+// Print1 is frame «Агенда на бумаге» (print-1).
 func Print1() Screen {
 	return w.Page{
 		Items: []w.PagePart{

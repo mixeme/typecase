@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// States1 is frame «Ничего не подключено» (m-states-1).
+// States1 is frame «Ничего не подключено» (states-1).
 func States1() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -58,7 +58,7 @@ func States1() Screen {
 	}
 }
 
-// States2 is frame «Файлы есть в навигации always» (m-states-2).
+// States2 is frame «Файлы есть в навигации always» (states-2).
 func States2() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -113,7 +113,7 @@ func States2() Screen {
 	}
 }
 
-// States3 is frame «Загрузка» (m-states-3).
+// States3 is frame «Загрузка» (states-3).
 func States3() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -189,7 +189,7 @@ func States3() Screen {
 	}
 }
 
-// States4 is frame «Только для чтения» (m-states-4).
+// States4 is frame «Только для чтения» (states-4).
 func States4() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -281,7 +281,7 @@ func States4() Screen {
 	}
 }
 
-// States5 is frame «Нет сети» (m-states-5).
+// States5 is frame «Нет сети» (states-5).
 func States5() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -399,7 +399,7 @@ func States5() Screen {
 	}
 }
 
-// States6 is frame «Источник не ответил» (m-states-6).
+// States6 is frame «Источник не ответил» (states-6).
 func States6() Screen {
 	return w.Shell{
 		Top: &w.Top{

@@ -4,7 +4,7 @@ package screens
 
 import w "carrel.dev/typecase/widget"
 
-// Dark1 is frame «Календарь · тёмная тема» (m-dark-1).
+// Dark1 is frame «Календарь · тёмная тема» (dark-1).
 func Dark1() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -133,7 +133,7 @@ func Dark1() Screen {
 	}
 }
 
-// Dark2 is frame «Контакты и накладка перетаскивания · тёмная тема» (m-dark-2).
+// Dark2 is frame «Контакты и накладка перетаскивания · тёмная тема» (dark-2).
 func Dark2() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -281,7 +281,7 @@ func Dark2() Screen {
 	}
 }
 
-// Dark3 is frame «Файлы плитками · тёмная тема» (m-dark-3).
+// Dark3 is frame «Файлы плитками · тёмная тема» (dark-3).
 func Dark3() Screen {
 	return w.Shell{
 		Top: &w.Top{

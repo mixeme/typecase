@@ -94,7 +94,7 @@ func TestCheckMockupLint_frameClasses(t *testing.T) {
 	if err := CheckMockupLint(ok, MockupFrameClasses); err != nil {
 		t.Fatal(err)
 	}
-	desktop := `<div class="frame" data-frame="m-desktop-1"><div class="mk-win"><div class="tc-root"></div></div></div>`
+	desktop := `<div class="frame" data-frame="desktop-1"><div class="mk-win"><div class="tc-root"></div></div></div>`
 	if err := CheckMockupLint(desktop, MockupFrameClasses); err != nil {
 		t.Fatal(err)
 	}
@@ -114,7 +114,7 @@ func TestCheckMockupLint_frameClasses(t *testing.T) {
 		`<div class="frame" data-frame="s-notes-1"><div class="mk-win"></div></div>`,
 		MockupFrameClasses,
 	); err == nil {
-		t.Fatal("expected mk-* outside m-desktop to fail")
+		t.Fatal("expected mk-* outside desktop to fail")
 	}
 	labelOK := `<div class="frame" data-frame="s-notes-1"><div class="frame-label"><span class="frag">компонент</span></div><div class="tc-root"></div></div>`
 	if err := CheckMockupLint(labelOK, MockupFrameClasses); err != nil {

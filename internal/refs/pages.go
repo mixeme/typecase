@@ -485,7 +485,7 @@ var _ = add(
 			w.PrintFoot{Text: "Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources"},
 		},
 		Variant: w.PagePrint,
-	}, "m-print-1", "tc-root", 1),
+	}, "print-1", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -575,7 +575,7 @@ var _ = add(
 				Gap: w.WindowGap13,
 			},
 		},
-	}, "m-desktop-3", "tc-root", 1),
+	}, "desktop-3", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -642,7 +642,7 @@ var _ = add(
 				Gap: w.WindowGap12,
 			},
 		},
-	}, "m-desktop-4", "tc-root", 1),
+	}, "desktop-4", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -687,7 +687,7 @@ var _ = add(
 				Gap: w.WindowGap14,
 			},
 		},
-	}, "m-desktop-5", "tc-root", 1),
+	}, "desktop-5", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -803,7 +803,7 @@ var _ = add(
 				Gap: w.WindowGap13,
 			},
 		},
-	}, "m-desktop-6", "tc-root", 1),
+	}, "desktop-6", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -845,7 +845,7 @@ var _ = add(
 				Gap: w.WindowGap14,
 			},
 		},
-	}, "m-desktop-7", "tc-root", 1),
+	}, "desktop-7", "tc-root", 1),
 	page("on-background", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -870,7 +870,7 @@ var _ = add(
 			},
 		},
 		Variant: w.PageOnBackground,
-	}, "m-desktop-9", "tc-root", 1),
+	}, "desktop-9", "tc-root", 1),
 	page("on-background", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -926,7 +926,7 @@ var _ = add(
 			},
 		},
 		Variant: w.PageOnBackground,
-	}, "m-desktop-10", "tc-root", 1),
+	}, "desktop-10", "tc-root", 1),
 	page("on-background-column", w.Page{
 		Items: []w.PagePart{
 			w.Form{
@@ -954,7 +954,7 @@ var _ = add(
 			},
 		},
 		Variant: w.PageOnBackgroundColumn,
-	}, "m-desktop-11", "tc-root", 1),
+	}, "desktop-11", "tc-root", 1),
 	page("on-background", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -1001,7 +1001,7 @@ var _ = add(
 			},
 		},
 		Variant: w.PageOnBackground,
-	}, "m-desktop-12", "tc-root", 1),
+	}, "desktop-12", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Msg{
@@ -1067,7 +1067,7 @@ var _ = add(
 				Gap: w.WindowGap12,
 			},
 		},
-	}, "m-desktop-14", "tc-root", 1),
+	}, "desktop-14", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -1109,7 +1109,7 @@ var _ = add(
 				Gap: w.WindowGap12,
 			},
 		},
-	}, "m-desktop-15", "tc-root", 1),
+	}, "desktop-15", "tc-root", 1),
 	page("print", w.Page{
 		Items: []w.PagePart{
 			w.PrintTitle{Text: "Documents / carrel / attachments"},
@@ -1149,7 +1149,7 @@ var _ = add(
 			},
 		},
 		Variant: w.PagePrint,
-	}, "m-desktop-16", "tc-root", 1),
+	}, "desktop-16", "tc-root", 1),
 )
 
 func init() {

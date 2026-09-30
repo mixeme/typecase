@@ -37,10 +37,10 @@ var _ = add(
 	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026 · the page is read from the server on every visit")}}}, Pad: w.HeadPadBottom8}, "s-publish-6", "tc-head", 1),
 	shell("crumbs", w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}}, Pad: w.HeadPadBottom8}, "s-publish-12", "tc-head", 1),
 	shell("avatar", w.Head{Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar44}, Kicker: &w.Rubric{Text: "Mentions", Variant: w.RubricBottom2}, Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Where she is named, not where she takes part · the timeline has that")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Write a note", Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "Timeline", Icon: "all"}}}, Pad: w.HeadPadBottom10}, "mentions-2", "tc-head", 1),
-	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · the server granted no write access")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}}, "m-states-4", "tc-head", 1),
-	shell("plain", w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("shown from this session’s memory")}}}}, "m-states-5", "tc-head", 1),
-	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}}}, Pad: w.HeadPadBottom8}, "m-phone-3", "tc-head", 1),
-	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Application", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Account and collection settings are inside, in Settings")}}}, Pad: w.HeadPadBottom6}, "m-desktop-13", "tc-head", 1),
+	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · the server granted no write access")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}}, "states-4", "tc-head", 1),
+	shell("plain", w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("shown from this session’s memory")}}}}, "states-5", "tc-head", 1),
+	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}}}, Pad: w.HeadPadBottom8}, "phone-3", "tc-head", 1),
+	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Application", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Account and collection settings are inside, in Settings")}}}, Pad: w.HeadPadBottom6}, "desktop-13", "tc-head", 1),
 
 	// tc-bar
 	shell("selection", w.Bar{Items: []w.BarPart{w.Mono{Text: "412 KB", Variant: w.MonoMuted}, w.BarSep{}, w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"}, w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename"}, w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}}, Count: &w.BarCount{Text: "1 selected"}, Right: &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}}, Variant: w.BarSelection}, "components-16", "tc-bar", 1),
@@ -51,7 +51,7 @@ var _ = add(
 	shell("right", w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Value: "Filter the loaded cards", Label: "Filter the loaded cards"}, Waiting: true}, w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}}, Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "248"}}, Secondary: true}}, "s-io-1", "tc-bar", 1),
 	shell("wide", w.Bar{Items: []w.BarPart{w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-01-01", Mono: true, Label: "Date"}, To: w.Input{Value: "today", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}}, w.Seg{Options: []w.SegOption{{Label: "All 24", On: true}, {Label: "Events 14"}, {Label: "Tasks 2"}, {Label: "Notes 4"}, {Label: "Files 4"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols", Secondary: true}}, More: &w.Button{Icon: "dots", Title: "More"}, Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "newest first"}}, Secondary: true}, Variant: w.BarWide}, "s-contacts-7", "tc-bar", 1),
 	shell("selection", w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Label: "Restore into", Icon: "back"}, w.Button{Label: "Skip"}}, Count: &w.BarCount{Text: "3 selected"}, Right: &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true}}}, Variant: w.BarSelection}, "s-backup-8", "tc-bar", 1),
-	shell("selection", w.Bar{Items: []w.BarPart{w.Button{Icon: "down", Title: "More"}, w.Button{Icon: "move", Title: "More"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, w.Button{Icon: "close", Title: "More", Place: w.Pushed}}, Count: &w.BarCount{Text: "2 selected", Small: true}, Variant: w.BarSelection}, "m-phone-6", "tc-bar", 1),
+	shell("selection", w.Bar{Items: []w.BarPart{w.Button{Icon: "down", Title: "More"}, w.Button{Icon: "move", Title: "More"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, w.Button{Icon: "close", Title: "More", Place: w.Pushed}}, Count: &w.BarCount{Text: "2 selected", Small: true}, Variant: w.BarSelection}, "phone-6", "tc-bar", 1),
 
 	// tc-main
 	shell("cards", w.Main{Items: []w.MainPart{
@@ -389,7 +389,7 @@ var _ = add(
 		w.ListGroup{Title: w.Rubric{Text: "Tue · 11 Aug"}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.PhoneRow{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH32}, Title: "Ревью архитектуры", Sub: []w.Inline{w.Mono{Text: "09:30"}, w.Text(" · Переговорная 1")}, Aside: "Проекты"}}},
-		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 2}}}, "m-phone-1", "tc-main", 1),
+		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 2}}}, "phone-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}}}, Pad: w.HeadPadBottom8},
 		w.Fields{Items: []w.FieldsItem{
@@ -403,7 +403,7 @@ var _ = add(
 		w.Sec{Items: []w.SecPart{
 			w.Rubric{Text: "Attendees 4"},
 			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}},
-		w.FootActs{Items: []w.Button{w.Button{Label: "Write a note"}, w.Button{Label: "Delete", Kind: w.ButtonDangerSolid}}}}}, "m-phone-3", "tc-main", 1),
+		w.FootActs{Items: []w.Button{w.Button{Label: "Write a note"}, w.Button{Label: "Delete", Kind: w.ButtonDangerSolid}}}}}, "phone-3", "tc-main", 1),
 	shell("phone", w.Main{Items: []w.MainPart{
 		w.ListGroup{Title: w.Rubric{Text: "А"}, Count: &w.Num{Value: 3}},
 		w.List{Rows: []w.ListRow{
@@ -413,7 +413,7 @@ var _ = add(
 		w.ListGroup{Title: w.Rubric{Text: "В"}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34}, Title: "Виктор Гончаров", Sub: []w.Inline{w.Text("v.goncharov@example.org")}, Aside: "Контакты"}}},
-		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 1}}}, "m-phone-4", "tc-main", 1),
+		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 1}}}, "phone-4", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Person{Initials: "АК", Name: "Анна Ковалёва", Sub: "Издательство «Слово»", Badge: &w.Badge{Label: "in 2 books", Tone: w.BadgeLinked}, Acts: []w.Button{w.Button{Label: "Call"}, w.Button{Label: "Email"}, w.Button{Icon: "quill", Title: "More"}}},
 		w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Card", On: true}, {Label: "Connections 27"}}}}},
@@ -421,14 +421,14 @@ var _ = add(
 			{Term: "Phone", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMonoAccent},
 			{Term: "Email", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Face: w.ValueAccent},
 			{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono}}, Variant: w.Fields88Pad},
-		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 1}}}, "m-phone-5", "tc-main", 1),
+		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 1}}}, "phone-5", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Bar{Items: []w.BarPart{w.Button{Icon: "down", Title: "More"}, w.Button{Icon: "move", Title: "More"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, w.Button{Icon: "close", Title: "More", Place: w.Pushed}}, Count: &w.BarCount{Text: "2 selected"}, Variant: w.BarSelection},
 		w.List{Rows: []w.ListRow{
 			w.PhoneRow{Pick: &w.TickBox{}, Icon: "img", Title: "2026-08-10-sync-board.png", Sub: []w.Inline{w.Text("412 KB · image/png")}, SubMono: true, More: &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}, On: true},
 			w.PhoneRow{Pick: &w.TickBox{}, Icon: "doc", Title: "release-checklist.md", Sub: []w.Inline{w.Text("3 KB · text/markdown")}, SubMono: true, More: &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}, On: true},
 			w.PhoneRow{Pick: &w.TickBox{Ticked: w.TickedOff}, Icon: "file", Title: "2026-07", Sub: []w.Inline{w.Text("34 items")}, SubMono: true, More: &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}}}},
-		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 5}}}, "m-phone-6", "tc-main", 1),
+		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 5}}}, "phone-6", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Doc{Items: []w.DocPart{
 			w.DocTitle{Text: "Заметка со встречи 10.08"},
@@ -436,7 +436,7 @@ var _ = add(
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
 			w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
 			w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}},
-		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 4}}}, "m-phone-7", "tc-main", 1),
+		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 4}}}, "phone-7", "tc-main", 1),
 
 	// tc-side
 	shell("plain", w.Side{Items: []w.SidePart{w.Head{Photo: &w.HeadPhoto{Initials: "АК"}, Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19}, Tools: []w.Button{w.Button{Label: "Edit", Small: true}, w.Button{Label: "All records", Small: true}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Icon: "close", Title: "Close the panel"}}}, Middle: true}, w.Fields{Items: []w.FieldsItem{
@@ -615,7 +615,7 @@ var _ = add(
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}}}, Height: w.ShellHeight390}}, "m-desktop-1", "tc-shell", 1),
+		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}}}, Height: w.ShellHeight390}}, "desktop-1", "tc-shell", 1),
 )
 
 func init() {

@@ -56,7 +56,7 @@ type Frame struct {
 
 // catalogOnly are frames without a mark that still go to the catalog, not to
 // a route (Р-16, docs/development.md): the desktop app's user menu and the tray menu.
-var catalogOnly = map[string]bool{"m-desktop-2": true, "m-desktop-8": true}
+var catalogOnly = map[string]bool{"desktop-2": true, "desktop-8": true}
 
 // Route says whether a frame is a route of the demo screens (Р-16): its
 // label carries no mark (span.frag: компонент, фрагмент, список, меню,

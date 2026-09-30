@@ -28,6 +28,16 @@ do, not what the authors did.
   another client wrote is chosen on its own row. The erase page names what goes (the
   encrypted: connections, links, devices, triggers, the deposited key) and what
   stays (login, role, address, first day of the week, the clock) — task 44.
+- **Frames of chapters 8–12 lose the `m-` prefix** (the owner's decision):
+  `m-states-N` → `states-N`, and so `dark-`, `phone-`, `print-`, `desktop-`,
+  like `components-`, `account-` and `rest-`. `m-` was the mockup's own mark
+  from before the library; `tc-` stays the prefix of classes and variables
+  only, and frame names are not classes. Go names of the screens are the same
+  (`Desktop3`). The prose's last `.m-*` class names are the `tc-*` ones from
+  `rename.tsv`, and a dead link to `#m-io` points at 7.9.
+- The comparison takes `TC_REFACTOR_TAB` (seconds) for a slow machine; the
+  whole run on 30.09 was clean — the one difference, s-dup-3, is the frame
+  label's «Меню» tag.
 
 ## typecase/v0.10.0 — 2026-09-29
 

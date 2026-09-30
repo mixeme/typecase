@@ -281,10 +281,10 @@ func TestMockupDarkRules(t *testing.T) {
 	}
 
 	for _, c := range []struct{ frame, sel, prop, want string }{
-		{"m-dark-2", ".tc-avatar", "background-color", "rgb(58, 70, 61)"},
-		{"m-dark-2", ".tc-avatar", "color", "rgb(201, 191, 166)"},
-		{"m-dark-2", ".tc-scrim", "background-color", "rgba(0, 0, 0, 0.42)"},
-		{"m-dark-3", ".tc-thumb", "background-color", "rgb(51, 64, 58)"},
+		{"dark-2", ".tc-avatar", "background-color", "rgb(58, 70, 61)"},
+		{"dark-2", ".tc-avatar", "color", "rgb(201, 191, 166)"},
+		{"dark-2", ".tc-scrim", "background-color", "rgba(0, 0, 0, 0.42)"},
+		{"dark-3", ".tc-thumb", "background-color", "rgb(51, 64, 58)"},
 	} {
 		frame, ok := byID[c.frame]
 		if !ok {
