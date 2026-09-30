@@ -72,6 +72,11 @@ do, not what the authors did.
   card's timeline has no matches by name any more — the server has none
   (s-contacts-6, -16). The group card (mentions-9, a candidate): members from
   `MEMBER`, found in the books looked in. 339 frames.
+- The phone's bottom bar: the sections and «Back to list» are items of one
+  bar, all of one width, the way back last behind a hairline — as in the
+  rail; before, the two halves split the bar and the way back stood alone on
+  the right (the owner's decision of 30.09: the button goes down with the
+  rail).
 
 ## typecase/v0.10.0 — 2026-09-29
 

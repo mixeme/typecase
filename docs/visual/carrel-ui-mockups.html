@@ -913,8 +913,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
     border-right:0;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);
     overflow:visible;align-items:stretch}
   .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
-  .tc-shell__rail .tc-nav{
-    display:flex;flex-direction:row;width:100%;padding:0;gap:0;align-items:stretch}
+  /* Разделы и возврат — пункты одной панели равной ширины: возврат идёт за разделами, как в рейле, за чертой. */
+  .tc-shell__rail .tc-nav{display:contents}
+  .tc-shell__rail .tc-nav--top2 .tc-nav__item{border-left:.5px solid var(--tc-rule)}
   .tc-shell__rail .tc-nav .tc-nav__item{
     flex:1;flex-direction:column;justify-content:center;gap:3px;height:auto;width:auto;
     padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
