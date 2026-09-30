@@ -37,6 +37,6 @@ func TestFramesBesideWidgets(t *testing.T) {
 		}
 	}
 	if n != 167 {
-		t.Errorf("%d component and fragment frames, want 167 (Р-16; the 5 candidates are skipped)", n)
+		t.Errorf("%d component and fragment frames, want 167 (Р-16; the frames of Mentions, approved and deferred, and the group card, a candidate, are skipped)", n)
 	}
 }

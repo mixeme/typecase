@@ -32,7 +32,7 @@ func Frames(root string) ([]Frame, error) {
 	}
 	var out []Frame
 	for _, f := range m.Frames {
-		if f.Route() || mark(f) == "кандидат" {
+		if f.Route() || mark(f) == "кандидат" || mark(f) == "отложена" {
 			continue
 		}
 		r, err := f.Root()
@@ -49,8 +49,9 @@ func Frames(root string) ([]Frame, error) {
 }
 
 // mark is the mark of a frame's label (компонент, фрагмент, список, меню,
-// кандидат), or "". A candidate is a frame of a function not taken into
-// work: neither a route nor a catalog entry (Р-16).
+// кандидат, отложена), or "". A candidate is a frame of a function not taken into
+// work, a deferred one of a function approved and put off: neither is a route
+// nor a catalog entry (Р-16).
 func mark(f *fragment.Frame) string {
 	for c := f.Node.FirstChild; c != nil; c = c.NextSibling {
 		if c.Type == html.ElementNode && hasClass(c, "frame-label") {

@@ -80,8 +80,9 @@ var _ = add(
 	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Span{Face: w.FaceDanger, Text: "1 unavailable"}}}, "dark-1", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
-	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 6 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "mentions-5", "tc-runbar", 1),
+	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 5 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}, w.Text(" · radicale · vps · Архив does not keep links")}}, "mentions-5", "tc-runbar", 1),
 	cards("stop", w.Runbar{Meter: w.Meter{Percent: 71}, Parts: []w.RunbarPart{w.Text("Polled 5 of 7 sources · 12 records · 1 unavailable"), w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true}}}}}, "components-22", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 calendars · matched by "), w.Mono{Text: "a.kovaleva@example.org"}, w.Text(", "), w.Mono{Text: "anna.kovaleva@slovo.example"}, w.Text(" and the name · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}}}, "s-contacts-7", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Span{Face: w.FaceDanger, Text: "baikal unavailable"}, w.Mono{Text: "from cache · 2 min ago", Place: w.Pushed}}}, "s-agenda-1", "tc-runbar", 1),
@@ -150,6 +151,13 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
 
 	// tc-fields
+	cards("plain-two", w.Fields{Items: []w.FieldsItem{
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("redaktsiya@slovo.example")}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Кто готовит сборник к печати.")}}}}, "mentions-9", "tc-fields", 1),
+	cards("related", w.Fields{Items: []w.FieldsItem{
+		{Term: "Related · colleague", Value: []w.ValuePart{w.Text("Артём Белов")}, Face: w.ValueAccent},
+		{Term: "Related · spouse", Value: []w.ValuePart{w.Text("urn:uuid:9c1e-07f2-b4a1 "), w.Dim{Parts: []w.Inline{w.Text("· not in the books you look in")}}}, Face: w.ValueMono},
+		{Term: "Nickname", Value: []w.ValuePart{w.Text("Аня")}}}}, "mentions-6", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
@@ -308,7 +316,7 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("The link and your line — nothing of the calendar itself")}, []w.SecItemPart{w.Text("Revoking the link closes it for this recipient too")}, []w.SecItemPart{w.Text("It expires on 8 September, as the link does")}}, Gap: 5, Muted: true}}, Flush: true}, "s-mail-4", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "The same person in other books"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Анна Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Общий")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "А. Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· baikal · Работа")}}}}, Gap: 5}}}, "mentions-1", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Анна Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Общий")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "А. Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· baikal · Работа")}}}}, Gap: 5}}}, "mentions-1", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attendees 4"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}}, "phone-3", "tc-sec", 2),

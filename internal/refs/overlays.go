@@ -8,6 +8,27 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("long", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "contact"},
+		w.MenuItem{Label: "acquaintance"},
+		w.MenuItem{Label: "friend"},
+		w.MenuItem{Label: "met"},
+		w.MenuItem{Label: "co-worker"},
+		w.MenuItem{Label: "colleague", On: true},
+		w.MenuItem{Label: "co-resident"},
+		w.MenuItem{Label: "neighbor"},
+		w.MenuItem{Label: "child"},
+		w.MenuItem{Label: "parent"},
+		w.MenuItem{Label: "sibling"},
+		w.MenuItem{Label: "spouse"},
+		w.MenuItem{Label: "kin"},
+		w.MenuItem{Label: "muse"},
+		w.MenuItem{Label: "crush"},
+		w.MenuItem{Label: "date"},
+		w.MenuItem{Label: "sweetheart"},
+		w.MenuItem{Label: "me"},
+		w.MenuItem{Label: "agent"},
+		w.MenuItem{Label: "emergency"}}}, "mentions-8", "tc-menu", 1),
 	overlay("timeline-cols", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
 		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Title", Name: "col", Value: "title", Fixed: true},

@@ -49,12 +49,13 @@ type Inline interface {
 	inline()
 }
 
-func (Text) inline()   {}
-func (Strong) inline() {}
-func (Hint) inline()   {}
-func (Dot) inline()    {}
-func (Mono) inline()   {}
-func (Span) inline()   {}
+func (Text) inline()    {}
+func (Strong) inline()  {}
+func (Hint) inline()    {}
+func (Dot) inline()     {}
+func (Mono) inline()    {}
+func (Span) inline()    {}
+func (Mention) inline() {}
 
 // Face is a face without a block of its own: a tone or a size of dim text
 // set by its variant alone («another tone is the variant instead of the
@@ -76,6 +77,17 @@ const (
 func (f Face) class() string {
 	return [...]string{"tc-dim--muted", "tc-dim--accent", "tc-dim--danger", "tc-dim--accent tc-dim--t12",
 		"tc-dim--accent tc-dim--t11-5", "tc-dim--danger tc-dim--t11-5", "tc-dim--t12-5", "tc-dim--t12", "tc-dim--muted tc-dim--t12"}[f]
+}
+
+// Mention is a mention of a card whose card is not in the books a person
+// looks in (Mentions, approved and deferred): the name the text keeps, not a
+// link, with a hint that says why. A mention whose card is found is a Link.
+type Mention struct {
+	Name string // as the text writes it, with its @
+}
+
+func (x Mention) html(mix) string {
+	return `<span class="tc-mention is-lost" title="This card is not in the books you look in">` + esc(x.Name) + `</span>`
 }
 
 // Span is words in a face of their own.

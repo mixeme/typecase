@@ -4,6 +4,7 @@ import w "carrel.dev/typecase/widget"
 
 var _ = add(
 	// tc-head
+	shell("group", w.Head{Avatar: &w.Avatar{Initials: "РС", Size: w.Avatar44}, Title: &w.HeadTitle{Text: "Редакция «Слово»"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Group · 4 members")}}, w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary}, w.Button{Label: "Print", Icon: "print"}, w.Button{Icon: "dots", Title: "More"}}}}, "mentions-9", "tc-head", 1),
 	shell("acts", w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 312 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "up"}, w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}}, "s-contacts-1", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Photo"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Анна Ковалёва · metadata will be stripped")}}}}, "s-contacts-5", "tc-head", 1),
 	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}}}, "s-contacts-3", "tc-head", 1),

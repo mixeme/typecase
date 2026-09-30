@@ -23,6 +23,9 @@ do, not what the authors did.
   is in a timeline) and `ColumnKind` — each with its width and the step it goes
   at on a narrow screen; `ColumnRow` takes a task's `Tick` and `Overdue` (only
   the due is in the alert colour).
+- **`Mention`**: a mention in running text whose card is not in the books a
+  person looks in — the name, grey and dotted, with a hint (Mentions,
+  deferred).
 
 ### Mockup
 
@@ -56,6 +59,19 @@ do, not what the authors did.
   The rules under «Выбор столбцов» say where the choice is kept (the server's
   cookie per section), how columns go on a narrow screen and how sorting
   follows. 335 frames.
+- **Mentions are approved and deferred** (the owner's decisions of 30.09):
+  built after Carrel's first working version; section 7.23 draws them to the
+  decisions, and its frames carry the mark «отложена» — neither routes nor
+  catalog, like a candidate's. The card folds rare fields under More fields
+  (mentions-1, opened in mentions-6; in the form, mentions-7): Related with
+  its kind from RFC 6350 (mentions-8), Nickname, Anniversary, Gender,
+  Language, Time zone, Geo, Role; messengers stay as the server sent them. A
+  link to a card not in the books looked in keeps its name or UID, grey and
+  not a link (mentions-4, -6, -7); a server that loses `RELATED` is named
+  (mentions-5); the screen has Columns like the timeline (mentions-2). The
+  card's timeline has no matches by name any more — the server has none
+  (s-contacts-6, -16). The group card (mentions-9, a candidate): members from
+  `MEMBER`, found in the books looked in. 339 frames.
 
 ## typecase/v0.10.0 — 2026-09-29
 

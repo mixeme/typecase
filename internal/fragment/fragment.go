@@ -60,7 +60,7 @@ var catalogOnly = map[string]bool{"desktop-2": true, "desktop-8": true}
 
 // Route says whether a frame is a route of the demo screens (Р-16): its
 // label carries no mark (span.frag: компонент, фрагмент, список, меню,
-// кандидат) and it is not one of the menus kept for the catalog.
+// кандидат, отложена) and it is not one of the menus kept for the catalog.
 func (f *Frame) Route() bool {
 	if catalogOnly[f.ID] {
 		return false

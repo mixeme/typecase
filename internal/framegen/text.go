@@ -199,6 +199,9 @@ func (g *gen) inlineEl(k *El) string {
 	if k.Has("tc-dim__hint") {
 		return g.hint(k)
 	}
+	if k.Has("tc-mention") {
+		return "w.Mention{Name: " + q(k.Text()) + "}"
+	}
 	for _, c := range k.Cls() {
 		if strings.HasPrefix(c, "tc-dot--") {
 			return "w.Dot{Tone: w.Dot" + dotTone[c[8:]] + "}"
@@ -445,6 +448,8 @@ func (g *gen) rawparts(e *El) string {
 				parts = append(parts, "w.Link{Text: "+q(v.Text())+`, Href: "#"}`)
 			case v.Has("tc-mono"):
 				parts = append(parts, g.mono(v))
+			case v.Has("tc-mention"):
+				parts = append(parts, "w.Mention{Name: "+q(v.Text())+"}")
 			default:
 				stop("prose? " + join(v.Cls(), " "))
 			}

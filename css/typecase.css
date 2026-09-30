@@ -337,6 +337,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row--cols > .tc-col--kind{width:56px}
 /* Просрочен срок, а не всё дело: остальные числа строки своего цвета. */
 .tc-row--cols.is-overdue > .tc-row__cell{color:var(--tc-dusty)}
+/* Упоминание карточки, которой в отмеченных книгах нет: имя, не ссылка. */
+.tc-mention.is-lost{color:var(--tc-dusty);text-decoration:underline dotted;text-underline-offset:2px}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
 .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
 .tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
