@@ -780,7 +780,7 @@ func Contacts6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -1135,7 +1135,7 @@ func Contacts16() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -1288,7 +1288,7 @@ func Contacts7() Screen {
 					On: 1,
 				},
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}, Apart: true},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}, Apart: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Where to look"},

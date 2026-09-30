@@ -19,7 +19,7 @@ func Conflict1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -126,7 +126,7 @@ func Conflict3() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -203,7 +203,7 @@ func Conflict4() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -282,7 +282,7 @@ func Conflict5() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},

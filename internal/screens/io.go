@@ -342,7 +342,7 @@ func Io3() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -427,7 +427,7 @@ func Io4() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -535,7 +535,7 @@ func Io5() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -636,7 +636,7 @@ func Io6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -767,7 +767,7 @@ func Io7() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -896,7 +896,7 @@ func Io8() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -1021,7 +1021,7 @@ func Io9() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},

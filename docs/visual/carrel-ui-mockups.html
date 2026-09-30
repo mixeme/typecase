@@ -916,6 +916,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* Разделы и возврат — пункты одной панели равной ширины: возврат идёт за разделами, как в рейле, за чертой. */
   .tc-shell__rail .tc-nav{display:contents}
   .tc-shell__rail .tc-nav--top2 .tc-nav__item{border-left:.5px solid var(--tc-rule)}
+  /* Внизу подпись короче: «Back», а не «Back to list» — в панели из восьми пунктов длинной тесно. */
+  .tc-shell__rail .tc-nav__full{display:none}
+  .tc-shell__rail .tc-nav__short{display:inline}
   .tc-shell__rail .tc-nav .tc-nav__item{
     flex:1;flex-direction:column;justify-content:center;gap:3px;height:auto;width:auto;
     padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
@@ -1400,6 +1403,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
 .tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
+.tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
 .tc-print__row--3col.tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
 .tc-prose--t13.tc-prose--t13{font-size:13px}
@@ -3486,7 +3490,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -3691,7 +3695,7 @@ Read  2 min ago · not changed on server</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -3929,7 +3933,7 @@ Read  2 min ago · not changed on server</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
-        <div class="tc-nav tc-nav--top2"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav tc-nav--top2"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">Where to look</div>
           <div class="tc-tickrow is-all is-on"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined calendar</span><span class="tc-tickrow__meta">20</span></div>
@@ -4359,7 +4363,7 @@ Read  2 min ago · changed on server 3 days ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">128</span></div>
@@ -4837,7 +4841,7 @@ SEQUENCE  2</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">21</span></div>
@@ -5304,7 +5308,7 @@ Read  2 min ago · not changed on server</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -5458,7 +5462,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -5548,7 +5552,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -7949,7 +7953,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -8019,7 +8023,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">7</span></div>
@@ -8076,7 +8080,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">3</span></div>
@@ -8132,7 +8136,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -8473,7 +8477,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -8541,7 +8545,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -8619,7 +8623,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -8673,7 +8677,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">7</span></div>
@@ -8751,7 +8755,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">21</span></div>
@@ -8825,7 +8829,7 @@ Read  2 min ago</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">64</span></div>
@@ -8886,7 +8890,7 @@ Read  2 min ago</div>
       </div>
       <div class="tc-shell__body">
         <div class="tc-shell__rail">
-          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
           <div class="tc-railsec">
             <div class="tc-rubric">nextcloud</div>
             <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -14876,7 +14880,7 @@ The account itself stays: same login, role and confirmed address, the same first
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>
@@ -14979,7 +14983,7 @@ Read  2 min ago · not changed on server</div>
           <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
           <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
         </div>
-        <div class="tc-nav tc-nav--top2"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav tc-nav--top2"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">Where to look</div>
           <div class="tc-tickrow is-all is-on"><button class="tc-tickrow__tick is-part" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">All sources</span><span class="tc-tickrow__meta">8</span></div>
@@ -15204,7 +15208,7 @@ Read  2 min ago · not changed on server</div>
     </div>
     <div class="tc-shell__body">
       <div class="tc-shell__rail">
-        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to list</a></div>
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">248</span></div>

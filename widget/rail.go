@@ -8,6 +8,7 @@ type NavItem struct {
 	Icon   Icon
 	Emblem *Emblem // a service's emblem instead of the icon
 	Label  string
+	Short  string // the label in the phone's bottom bar, when Label is too long for it
 	Count  *Num
 	Href   string
 	Title  string // the name of an item drawn without a label
@@ -22,7 +23,11 @@ func (it NavItem) html(on bool, opens string) string {
 	} else {
 		s.WriteString(`<svg>` + it.Icon.use() + `</svg>`)
 	}
-	s.WriteString(esc(it.Label))
+	if it.Short != "" {
+		s.WriteString(`<span class="tc-nav__full">` + esc(it.Label) + `</span><span class="tc-nav__short">` + esc(it.Short) + `</span>`)
+	} else {
+		s.WriteString(esc(it.Label))
+	}
 	if it.Count != nil {
 		s.WriteString(it.Count.html(nil))
 	}

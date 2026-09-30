@@ -220,7 +220,7 @@ func Notes2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -377,7 +377,7 @@ func Notes3() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
@@ -517,7 +517,7 @@ func Notes20() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to list", Href: "#"}}},
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},

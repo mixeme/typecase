@@ -1297,6 +1297,9 @@ func navItem(a *El) string {
 	if t := a.OwnText(); t != "" {
 		f = append(f, "Label: "+q(t))
 	}
+	if full := a.Kid("tc-nav__full"); full != nil {
+		f = append(f, "Label: "+q(full.Text()), "Short: "+q(a.Kid("tc-nav__short").Text()))
+	}
 	if n := a.Kid("tc-num"); n != nil {
 		s := "Count: &w.Num{Value: " + n.Text()
 		if n.Has("is-alert") {

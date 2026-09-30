@@ -735,6 +735,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* Разделы и возврат — пункты одной панели равной ширины: возврат идёт за разделами, как в рейле, за чертой. */
   .tc-shell__rail .tc-nav{display:contents}
   .tc-shell__rail .tc-nav--top2 .tc-nav__item{border-left:.5px solid var(--tc-rule)}
+  /* Внизу подпись короче: «Back», а не «Back to list» — в панели из восьми пунктов длинной тесно. */
+  .tc-shell__rail .tc-nav__full{display:none}
+  .tc-shell__rail .tc-nav__short{display:inline}
   .tc-shell__rail .tc-nav .tc-nav__item{
     flex:1;flex-direction:column;justify-content:center;gap:3px;height:auto;width:auto;
     padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0;overflow:visible}
@@ -1219,6 +1222,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
 .tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
+.tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
 .tc-print__row--3col.tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
 .tc-prose--t13.tc-prose--t13{font-size:13px}

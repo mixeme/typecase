@@ -44,6 +44,8 @@ var _ = add(
 	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 4", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 1"}, {Label: "Notes 1"}}}, w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}}, Stack: true}, "s-dup-1", "tc-acts", 1),
 
 	// tc-nav
+	shell("back-short", w.Nav{Items: []w.NavItem{
+		{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}}, "s-contacts-6", "tc-nav", 1),
 	shell("back", w.Nav{Items: []w.NavItem{
 		{Icon: "back", Label: "Back to the card", Href: "#"}}}, "s-contacts-3", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
@@ -140,7 +142,7 @@ var _ = add(
 		{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 5}, "s-davloom-1", "tc-nav", 2),
 	shell("apart", w.Nav{Items: []w.NavItem{
-		{Icon: "back", Label: "Back to list", Href: "#"}}, Apart: true}, "s-contacts-7", "tc-nav", 2),
+		{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}, Apart: true}, "s-contacts-7", "tc-nav", 2),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},

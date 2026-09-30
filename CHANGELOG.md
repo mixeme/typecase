@@ -77,6 +77,9 @@ do, not what the authors did.
   rail; before, the two halves split the bar and the way back stood alone on
   the right (the owner's decision of 30.09: the button goes down with the
   rail).
+- **`NavItem.Short`**: the label in the phone's bottom bar when the rail's is
+  too long for it — «Back to list» in the rail, «Back» in the bar (the
+  owner's decision: nothing to save at full width).
 
 ## typecase/v0.10.0 — 2026-09-29
 
