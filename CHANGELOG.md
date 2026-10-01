@@ -130,6 +130,9 @@ do, not what the authors did.
   quick contact sheet's address is `/new/quick` (s-notes-8).
 - Every phone and every address of a card is a link (`tel:`, `mailto:`),
   not only the first (s-contacts-6, Carrel's task 58).
+- The full new-contact form has its frame (s-contacts-27, `/new`): the edit's
+  form, empty, «Back to list» and «New contact» — the card does not exist yet
+  (Carrel's task 59). 373 frames.
 
 ## typecase/v0.10.0 — 2026-09-29
 

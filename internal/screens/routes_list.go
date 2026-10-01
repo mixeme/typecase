@@ -8,6 +8,7 @@ var Routes = []Route{
 	{Frame: "s-contacts-2", Caption: "Контакт · переместить в другую книгу", Screen: Contacts2},
 	{Frame: "s-contacts-3", Caption: "Контакт · правка, фотография", Screen: Contacts3},
 	{Frame: "s-contacts-4", Caption: "Контакт · правка, нет фотографии", Screen: Contacts4},
+	{Frame: "s-contacts-27", Caption: "Контакт · новый, полная форма", Screen: Contacts27},
 	{Frame: "s-contacts-5", Caption: "Фотография контакта · кадрирование", Screen: Contacts5},
 	{Frame: "s-contacts-6", Caption: "Контакт · карточка, чтение", Screen: Contacts6},
 	{Frame: "s-contacts-15", Caption: "Контакт · адрес заменён — переписать участников?", Screen: Contacts15},
