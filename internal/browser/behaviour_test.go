@@ -452,3 +452,43 @@ func TestSignInOutsideItsForm(t *testing.T) {
 		t.Errorf("the link under the button goes to %q", href)
 	}
 }
+
+// TestClosedMenuWithoutScripts (Carrel's task 60): a closed menu is a details,
+// so its button opens it without a script (U-8); with the library's script
+// it opens, closes on Esc and on a click elsewhere.
+func TestClosedMenuWithoutScripts(t *testing.T) {
+	needChrome(t)
+	drop := w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "Export", Href: "/x.vcf"}}}}
+	body := `<div class="tc-root"><div class="tc-main"><div class="tc-bar">` + drop.Render() + `</div><p class="away">away</p></div></div>`
+	h := browser.NewHarness(t)
+	shown := `(() => { const m = document.querySelector("details.tc-drop .tc-menu"); return !!m && m.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true}); })()`
+	bare := h.RegisterPage("drop-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	var before, after bool
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(shown, &before),
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(shown, &after),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before || !after {
+		t.Errorf("without a script: shown at start %v, after a click %v; want false, true", before, after)
+	}
+	page := h.RegisterPage("drop", browser.PageHTML(body, ""))
+	var opened, escaped, again, away bool
+	if err := h.Run(page, 900, 600,
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(shown, &opened),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(shown, &escaped),
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(shown, &again),
+		chromedp.Click(`.away`, chromedp.ByQuery),
+		chromedp.Evaluate(shown, &away),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !opened || escaped || !again || away {
+		t.Errorf("with the script: opened %v, after Esc %v, again %v, after a click away %v; want true, false, true, false", opened, escaped, again, away)
+	}
+}

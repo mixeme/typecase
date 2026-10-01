@@ -493,6 +493,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-menu.is-pop.is-right{left:auto;right:0}
 /* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
+/* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
+details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
+.tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
+.tc-drop > summary::-webkit-details-marker,.tc-drop__anchor > summary::-webkit-details-marker{display:none}
 .tc-field:has(> .tc-menu.is-pop){position:relative}
 /* Раскрытая кнопка — точка отсчёта для своего меню. */
 .tc-btn:has(> .tc-menu.is-pop){position:relative}

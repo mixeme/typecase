@@ -133,7 +133,8 @@ const FramesInvariantsJS = `(function(max){
   var out = [];
   function add(s){ if (out.length < max) out.push(s); }
   function label(n){ var c = (n.getAttribute("class") || "").trim(); return n.tagName.toLowerCase() + (c ? "." + c.split(/\s+/).join(".") : ""); }
-  function shown(el){ var r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden"; }
+  // checkVisibility also sees what a closed details hides (content-visibility).
+  function shown(el){ var r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== "hidden" && (!el.checkVisibility || el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})); }
   var all = [root].concat(Array.prototype.slice.call(root.querySelectorAll("*")));
   all.forEach(function(el){
     if (el.namespaceURI !== "http://www.w3.org/1999/xhtml") return;

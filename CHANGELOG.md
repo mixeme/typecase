@@ -19,6 +19,12 @@ do, not what the authors did.
   sort, tag, kind (task 65).
 - **`MenuItem.Form`**: an item that submits a `PostForm` by its name — Sign out
   (task 68; drawn so in account-5).
+- **A closed menu opens without a script** (task 60, U-8): a closed `Drop` or
+  `TopDrop` is a `details` whose `summary` is its button, in the button's
+  look; the library's script opens and closes the details and closes it on Esc
+  and on a click elsewhere. The card's «⋯» is drawn so (s-contacts-6, -7).
+  `TestClosedMenuWithoutScripts`. The ladders see what a closed details hides
+  (`checkVisibility`).
 
 ### Mockup
 

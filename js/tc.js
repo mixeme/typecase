@@ -62,6 +62,13 @@
 		return null;
 	}
 
+	// holder is the details a closed menu waits in: it opens without a script,
+	// and the script opens and closes the details instead of the popup.
+	function holder(pop) {
+		var d = pop.parentElement;
+		return d && d.tagName === "DETAILS" ? d : null;
+	}
+
 	function menuIn(popup) {
 		return popup.classList.contains("tc-menu") ? popup : popup.querySelector(".tc-menu");
 	}
@@ -73,9 +80,10 @@
 			var pop = popupOf(t);
 			if (!pop) return;
 			t.setAttribute("aria-haspopup", "menu");
-			var open = !pop.hidden;
+			var d = holder(pop);
+			var open = d ? d.open : !pop.hidden;
 			t.setAttribute("aria-expanded", open ? "true" : "false");
-			if (!open) hide(pop);
+			if (!open && !d) hide(pop);
 		});
 	}
 
@@ -97,7 +105,9 @@
 		var pop = popupOf(trigger);
 		if (!pop) return;
 		closeMenu(false);
-		show(pop);
+		var d = holder(pop);
+		if (d) d.open = true;
+		else show(pop);
 		trigger.setAttribute("aria-expanded", "true");
 		openTrigger = trigger;
 		placeMenu(trigger, pop);
@@ -109,7 +119,11 @@
 		var t = openTrigger;
 		if (!t) return false;
 		var pop = popupOf(t);
-		if (pop) hide(pop);
+		if (pop) {
+			var d = holder(pop);
+			if (d) d.open = false;
+			else hide(pop);
+		}
 		t.setAttribute("aria-expanded", "false");
 		openTrigger = null;
 		if (restoreFocus) t.focus();

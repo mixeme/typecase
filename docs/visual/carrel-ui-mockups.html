@@ -674,6 +674,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-menu.is-pop.is-right{left:auto;right:0}
 /* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
+/* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
+details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
+.tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
+.tc-drop > summary::-webkit-details-marker,.tc-drop__anchor > summary::-webkit-details-marker{display:none}
 .tc-field:has(> .tc-menu.is-pop){position:relative}
 /* Раскрытая кнопка — точка отсчёта для своего меню. */
 .tc-btn:has(> .tc-menu.is-pop){position:relative}
@@ -3664,7 +3668,7 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg>Edit</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
-            <span class="tc-drop"><button class="tc-btn" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><div class="tc-menu is-pop is-right tc-menu--w212" hidden><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></span>
+            <details class="tc-drop"><summary class="tc-btn" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></details>
           </div>
         </div>
         <dl class="tc-fields">
@@ -4167,7 +4171,7 @@ Read  2 min ago · not changed on server</div>
             <span class="tc-avatar--photo is-ph tc-avatar--photo--sq76-t20">АК</span>
             <div class="tc-head__text">
               <div class="tc-rubric">Card</div>
-              <div class="tc-line tc-line--gap-5 tc-sec__acts"><button class="tc-btn is-sm" type="button">Open the card</button><button class="tc-btn is-sm" type="button">Edit</button><span class="tc-drop"><button class="tc-btn is-sm" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><div class="tc-menu is-pop tc-menu--w212" hidden><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></span></div>
+              <div class="tc-line tc-line--gap-5 tc-sec__acts"><button class="tc-btn is-sm" type="button">Open the card</button><button class="tc-btn is-sm" type="button">Edit</button><details class="tc-drop"><summary class="tc-btn is-sm" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></details></div>
             </div>
           </div>
           <div class="tc-acts"><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>

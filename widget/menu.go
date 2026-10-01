@@ -300,7 +300,7 @@ func (TagInput) dropTrigger() {}
 // Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус.
 // Эталон. кадр `components-19`, фрагмент `.tc-drop`.
 // Содержимое. Кнопка или поле выбора, меню.
-// Чего нет. Своего вида: вид у кнопки и меню. Без сценария закрытое меню не открыть.
+// Чего нет. Своего вида: вид у кнопки и меню; закрытая открывается и без сценария (details).
 type Drop struct {
 	Trigger DropTrigger
 	Menu    Menu
@@ -316,5 +316,22 @@ func (d Drop) html(m mix) string {
 	if d.More {
 		t = mix{"tc-bar__more"}
 	}
+	if !d.Open {
+		if sum, ok := summaryOf(d.Trigger.html(t)); ok {
+			// Closed, the menu opens without a script (U-8): details and its summary.
+			return `<details` + class(m, "tc-drop") + `>` + sum + d.Menu.shown(nil, true) + `</details>`
+		}
+	}
 	return `<span` + class(m, "tc-drop") + `>` + d.Trigger.html(t) + d.Menu.shown(nil, d.Open) + `</span>`
+}
+
+// summaryOf turns a trigger button into the summary of a details: the same
+// look, opening its menu without a script. A link cannot be one.
+func summaryOf(button string) (string, bool) {
+	if !strings.HasPrefix(button, "<button") || !strings.HasSuffix(button, "</button>") {
+		return "", false
+	}
+	s := "<summary" + strings.TrimSuffix(strings.TrimPrefix(button, "<button"), "</button>") + "</summary>"
+	s = strings.Replace(s, ` type="button"`, "", 1)
+	return s, true
 }

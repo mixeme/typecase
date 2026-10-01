@@ -934,7 +934,7 @@ func (g *gen) drop(e *El) string {
 		f = append(f, "More: true")
 	}
 	f = append(f, "Menu: "+g.menu(m))
-	if m.HasAttr("hidden") {
+	if m.HasAttr("hidden") || (e.Tag == "details" && !e.HasAttr("open")) {
 		return "w.Drop{" + join(f, ", ") + "}"
 	}
 	return "w.Drop{Open: true, " + join(f, ", ") + "}"

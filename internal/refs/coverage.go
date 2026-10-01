@@ -74,3 +74,9 @@ func WaitingSummary(waiting []Pending) string {
 	sort.Strings(parts)
 	return strings.Join(parts, "; ")
 }
+
+// The summary of a closed menu (details.tc-drop) is printed by Drop from its
+// trigger: the button's look on a summary, which no Button record prints.
+var summaryOfDrop = wait("printed by Drop: the summary of a closed menu",
+	fragment.Ref{Frame: "s-contacts-6", Class: "tc-btn", N: 6},
+	fragment.Ref{Frame: "s-contacts-7", Class: "tc-btn", N: 13})

@@ -34,6 +34,11 @@ func (d TopDrop) html(mix) string {
 	if d.End {
 		panel = "tc-drop__panel--right"
 	}
+	if !d.Open {
+		if sum, ok := summaryOf(d.Trigger.html(nil)); ok {
+			return `<details class="tc-drop__anchor">` + sum + `<span class="` + panel + `">` + d.Menu.html(nil) + `</span></details>`
+		}
+	}
 	return `<span class="tc-drop__anchor">` + d.Trigger.html(nil) + `<span class="` + panel + `"` + flag("hidden", !d.Open) + `>` + d.Menu.html(nil) + `</span></span>`
 }
 

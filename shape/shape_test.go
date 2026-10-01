@@ -198,7 +198,8 @@ func TestAvatarPhotoIsData(t *testing.T) {
 	}
 }
 
-// Carrel's task 49: a head's «⋯» with its menu, closed, is the frame's «⋯».
+// Carrel's task 49: a head's «⋯» with its menu is its button: the frame
+// draws the closed menu (details), a screen with the bare button passes too.
 func TestClosedMenuIsItsButton(t *testing.T) {
 	m := mockup(t)
 	r, ok := screens.Find("s-contacts-6")
@@ -206,12 +207,16 @@ func TestClosedMenuIsItsButton(t *testing.T) {
 		t.Fatal("no s-contacts-6")
 	}
 	page := r.Screen().Render()
-	dots := w.Button{Icon: "dots", Title: "More"}.Render()
-	if !strings.Contains(page, dots) {
-		t.Fatal("no «⋯» in s-contacts-6")
+	i := strings.Index(page, `<details class="tc-drop">`)
+	if i < 0 {
+		t.Fatal("no closed menu in s-contacts-6")
 	}
-	menu := w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "Export .vcf", Href: "/app/contacts/x/y/z.vcf"}}}}.Render()
-	if err := m.Check("s-contacts-6", strings.Replace(page, dots, menu, 1)); err != nil {
+	j := strings.Index(page[i:], "</details>") + i + len("</details>")
+	bare := page[:i] + w.Button{Icon: "dots", Title: "More"}.Render() + page[j:]
+	if err := m.Check("s-contacts-6", bare); err != nil {
+		t.Errorf("«⋯» without its menu: %v", err)
+	}
+	if err := m.Check("s-contacts-6", page); err != nil {
 		t.Errorf("«⋯» with its menu: %v", err)
 	}
 }
