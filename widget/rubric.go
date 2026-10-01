@@ -47,6 +47,7 @@ func (RubricAside) rubricPart() {}
 func (RubricCol) rubricPart()   {}
 func (Button) rubricPart()      {}
 func (Plain) rubricPart()       {}
+func (Drop) rubricPart()        {}
 
 // RubricAside is the quieter side of a rubric: what the heading's group is.
 type RubricAside struct {
@@ -88,7 +89,7 @@ func (c RubricCol) html(mix) string { return `<span class="tc-rubric__col">` + e
 // Инварианты. Рубрика — не заголовок документа: она называет группу, а не страницу; кнопка в рубрике — обычным регистром (Р-12); рубрика печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `shell-1`, фрагмент `.tc-rubric`.
-// Содержимое. Слова, моноширинное перед словами (Lead) или после, число, бейдж, приглушённая сторона, строка кнопок, прижатая группа.
+// Содержимое. Слова, моноширинное перед словами (Lead) или после, число, бейдж, приглушённая сторона, строка кнопок, кнопка с меню (Drop), прижатая группа.
 // Чего нет. Уровней: рубрика одна, без h1–h6.
 type Rubric struct {
 	Text    string

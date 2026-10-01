@@ -211,7 +211,22 @@ func Tasks1() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+							w.Rubric{
+								Text: "Attachments",
+								Items: []w.RubricPart{
+									w.Drop{
+										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{Icon: "file", Label: "From Files"},
+											},
+											Width: w.MenuWidth212,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -307,7 +322,22 @@ func Tasks2() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+							w.Rubric{
+								Text: "Attachments",
+								Items: []w.RubricPart{
+									w.Drop{
+										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{Icon: "file", Label: "From Files"},
+											},
+											Width: w.MenuWidth212,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -486,7 +516,17 @@ func Tasks3() Screen {
 								Items: []w.FieldSetPart{
 									w.Line{
 										Items: []w.LinePart{
-											w.Button{Label: "Attach", Menu: true, Icon: "up"},
+											w.Drop{
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Icon: "up", Label: "From this computer"},
+														w.MenuItem{Icon: "file", Label: "From Files"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.Dim{Parts: []w.Inline{w.Text("Ничего не вложено")}, Size: w.Dim11_5, Variant: w.DimWrap},
 										},
 										Gap:   w.LineGap8,

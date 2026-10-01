@@ -36,6 +36,10 @@ do, not what the authors did.
 - **`Seg.Multiple`**: a switch with a Name may be a row of checkboxes —
   several options at once, each ticked one sent: the days of a repeat
   (s-agenda-3, task 72).
+- **`Drop` in a rubric and in a line** (task 71): Attach with its arrow —
+  «From this computer», «From Files» — stands in the Attachments rubric of a
+  card and in the attachments line of an edit, closed, opening without a
+  script (s-agenda-1, -2, -3, s-tasks-1..3, s-notes-1..3, -20, s-io-2).
 - **`shape` compares a repeating row of rows at any length** (task 61): a
   month and its records, a term and its value — the screen may repeat the
   block any number of times, each like one of the frame's; terms and values

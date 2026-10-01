@@ -100,7 +100,7 @@ func TestMeaningIsNoDifference(t *testing.T) {
 	m := mockup(t)
 	for _, r := range screens.Routes {
 		v := clone(reflect.ValueOf(r.Screen()))
-		fill(v)
+		fill(v, false)
 		if err := m.Check(r.Frame, v.Interface().(interface{ Render() string }).Render()); err != nil {
 			t.Error(err)
 		}
@@ -147,34 +147,44 @@ func clone(v reflect.Value) reflect.Value {
 	return v
 }
 
-func fill(v reflect.Value) {
+// fill sets the meaning fields of v. A struct whose Action it sets is a
+// form, and a form within a form is not HTML (the inner end closes the outer):
+// inside one, Action is left empty.
+func fill(v reflect.Value, inForm bool) {
 	switch v.Kind() {
 	case reflect.Pointer:
 		if !v.IsNil() {
-			fill(v.Elem())
+			fill(v.Elem(), inForm)
 		}
 	case reflect.Interface:
 		if !v.IsNil() {
 			c := reflect.New(v.Elem().Type()).Elem()
 			c.Set(v.Elem())
-			fill(c)
+			fill(c, inForm)
 			v.Set(c)
 		}
 	case reflect.Struct:
+		if f := v.FieldByName("Action"); f.IsValid() && f.Kind() == reflect.String && f.CanSet() {
+			if f.String() == "" && !inForm {
+				f.SetString("m")
+			}
+			inForm = inForm || f.String() != ""
+		}
 		for i := 0; i < v.NumField(); i++ {
 			f := v.Field(i)
-			if !v.Type().Field(i).IsExported() || !f.CanSet() {
+			name := v.Type().Field(i).Name
+			if !v.Type().Field(i).IsExported() || !f.CanSet() || name == "Action" {
 				continue
 			}
-			if meaningFields[v.Type().Field(i).Name] && f.Kind() == reflect.String && f.String() == "" {
+			if meaningFields[name] && f.Kind() == reflect.String && f.String() == "" {
 				f.SetString("m")
 				continue
 			}
-			fill(f)
+			fill(f, inForm)
 		}
 	case reflect.Slice, reflect.Array:
 		for i := 0; i < v.Len(); i++ {
-			fill(v.Index(i))
+			fill(v.Index(i), inForm)
 		}
 	}
 }

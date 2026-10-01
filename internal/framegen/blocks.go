@@ -1013,6 +1013,8 @@ func (g *gen) rub(k *El) string {
 			items = append(items, g.button(x))
 		} else if x.Has("tc-badge") {
 			items = append(items, g.badge(x))
+		} else if x.Has("tc-drop") {
+			items = append(items, g.drop(x))
 		}
 	}
 	s := "w.Rubric{Text: " + q(k.OwnText())

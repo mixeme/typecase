@@ -99,6 +99,8 @@ const MockupLadderProbeJS = `(() => {
     for (const el of sels) {
       const cs = getComputedStyle(el);
       if (cs.display === "none" || cs.visibility === "hidden") continue;
+      // What a closed details hides keeps its box: checkVisibility sees it.
+      if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) continue;
       const r = el.getBoundingClientRect();
       if (r.width < 0.5 || r.height < 0.5) continue;
       if (r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) continue;

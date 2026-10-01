@@ -750,6 +750,8 @@ func (g *gen) linePart(x *El) string {
 		return g.line(x)
 	case x.Has("tc-push"):
 		return g.push(x)
+	case x.Has("tc-drop"):
+		return g.drop(x)
 	case x.Tag == "b":
 		return "w.Strong(" + q(x.Text()) + ")"
 	}
@@ -1044,6 +1046,8 @@ func (g *gen) rubricItem(x *El) string {
 		return g.button(x)
 	case x.Has("tc-plain"):
 		return "w.Plain{Text: " + q(x.Text()) + "}"
+	case x.Has("tc-drop"):
+		return g.drop(x)
 	}
 	stop("rubric item? " + join(x.Cls(), " "))
 	return ""

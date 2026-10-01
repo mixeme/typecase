@@ -277,7 +277,22 @@ func Io2() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+							w.Rubric{
+								Text: "Attachments",
+								Items: []w.RubricPart{
+									w.Drop{
+										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{Icon: "file", Label: "From Files"},
+											},
+											Width: w.MenuWidth212,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{

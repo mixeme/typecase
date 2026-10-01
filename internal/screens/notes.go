@@ -165,7 +165,22 @@ func Notes1() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+							w.Rubric{
+								Text: "Attachments",
+								Items: []w.RubricPart{
+									w.Drop{
+										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{Icon: "file", Label: "From Files"},
+											},
+											Width: w.MenuWidth212,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -319,7 +334,22 @@ func Notes2() Screen {
 										},
 									},
 									{
-										Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+										Title: w.Rubric{
+											Text: "Attachments",
+											Items: []w.RubricPart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{Icon: "file", Label: "From Files"},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnder,
+													},
+												},
+											},
+										},
 										Items: []w.DocmetaPart{
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",
@@ -480,7 +510,22 @@ func Notes3() Screen {
 										},
 									},
 									{
-										Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+										Title: w.Rubric{
+											Text: "Attachments",
+											Items: []w.RubricPart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{Icon: "file", Label: "From Files"},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnder,
+													},
+												},
+											},
+										},
 										Items: []w.DocmetaPart{
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",
@@ -626,7 +671,22 @@ func Notes20() Screen {
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
 									{
-										Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}},
+										Title: w.Rubric{
+											Text: "Attachments",
+											Items: []w.RubricPart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{Icon: "file", Label: "From Files"},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnder,
+													},
+												},
+											},
+										},
 										Items: []w.DocmetaPart{
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",

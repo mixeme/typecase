@@ -45,6 +45,7 @@ func (Faced) linePart()  {}
 func (Push) linePart()   {}
 func (Seg) linePart()    {}
 func (Line) linePart()   {}
+func (Drop) linePart()   {}
 
 // Faced is a piece of a line in a face of its own that holds blocks: a file
 // name with its type and a badge after it.
@@ -71,7 +72,7 @@ func (f Faced) html(mix) string {
 // Инварианты. Зазор — перечисление, а не число; строка не переносит чужие отступы; строка печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `s-contacts-3`, фрагмент `.tc-line`.
-// Содержимое. Кнопки, поля, клавиши, метки, теги, бейджи, приглушённое, моноширинное, поля формы, жирное и простой текст.
+// Содержимое. Кнопки, кнопки с меню (Drop), поля, клавиши, метки, теги, бейджи, приглушённое, моноширинное, поля формы, жирное и простой текст.
 // Чего нет. Своего фона и рамки: это раскладка, а не блок с видом.
 type Line struct {
 	Items []LinePart

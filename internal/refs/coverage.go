@@ -79,4 +79,6 @@ func WaitingSummary(waiting []Pending) string {
 // trigger: the button's look on a summary, which no Button record prints.
 var summaryOfDrop = wait("printed by Drop: the summary of a closed menu",
 	fragment.Ref{Frame: "s-contacts-6", Class: "tc-btn", N: 6},
-	fragment.Ref{Frame: "s-contacts-7", Class: "tc-btn", N: 13})
+	fragment.Ref{Frame: "s-contacts-7", Class: "tc-btn", N: 13},
+	fragment.Ref{Frame: "s-agenda-1", Class: "tc-btn", N: 18},
+	fragment.Ref{Frame: "s-agenda-3", Class: "tc-btn", N: 6})

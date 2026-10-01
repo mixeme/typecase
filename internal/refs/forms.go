@@ -93,7 +93,9 @@ var _ = add(
 	form("span", w.Line{Gap: w.LineGap6, Items: []w.LinePart{btn, btn}}, "s-contacts-3", "tc-line", 1),
 	form("span", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Input{Label: "x"}, btn}}, "components-20", "tc-line", 1),
 	form("gap", w.Line{Gap: w.LineGap7, Items: []w.LinePart{btn, w.Kbd{Keys: "Esc"}}}, "s-contacts-2", "tc-line", 1),
-	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, w.Dim{}}}, "s-tasks-3", "tc-line", 1),
+	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Icon: "up", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, w.Dim{}}}, "s-tasks-3", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap12, Block: true, Items: []w.LinePart{chk, chk}}, "s-dup-1", "tc-line", 1),
 	form("gap", w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{}, w.Mark{}, w.Mark{}, w.Mark{}}}, "s-davloom-1", "tc-line", 2),
 	form("gap", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Strong("nextcloud"), w.Dim{}, w.Mono{}, w.Dim{}, w.Mono{}, btn}}, "s-plan-4", "tc-line", 1),
@@ -101,7 +103,9 @@ var _ = add(
 	form("block", w.Line{Gap: w.LineGap4, Block: true, Items: []w.LinePart{w.Tag{}, w.Tag{}}}, "s-notes-2", "tc-line", 1),
 	form("span", w.Line{Items: []w.LinePart{w.Badge{Label: "badge"}}}, "account-1", "tc-line", 3),
 	form("gap", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Mark{}, w.Mono{}, w.Text("Синк-ап по релизу")}}, "desktop-8", "tc-line", 1),
-	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn,
+	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Icon: "up", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}},
 		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}}}, "s-agenda-3", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 1),
 	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 1),

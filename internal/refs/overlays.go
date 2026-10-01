@@ -100,6 +100,9 @@ var _ = add(
 		w.MenuItem{Label: "Monday", On: true},
 		w.MenuItem{Label: "Sunday"},
 		w.MenuItem{Label: "Saturday"}}, Width: w.MenuWidth212}, "appearance-2", "tc-menu", 1),
+	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 2),
 	overlay("links", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
@@ -482,6 +485,9 @@ var _ = add(
 		w.MenuItem{Icon: "dup", Label: "Copy"},
 		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "s-contacts-6", "tc-drop", 1),
+	overlay("closed", w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 2),
 	overlay("more", w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
 		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "components-19", "tc-drop", 1),
