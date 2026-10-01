@@ -31,6 +31,10 @@ do, not what the authors did.
   script until `tc.js` runs (`data-tc-noscript` on `html`, printed by `page`).
   Drawn so in the lists' bars (s-contacts-1, -2, s-agenda-1);
   `TestCheckFormSubmits`.
+- **`shape` compares a repeating row of rows at any length** (task 61): a
+  month and its records, a term and its value — the screen may repeat the
+  block any number of times, each like one of the frame's; terms and values
+  repeat by tag, so `dd` and `dd.tc-mono` are one value. `TestRepeatsAnyLength`.
 
 ### Mockup
 

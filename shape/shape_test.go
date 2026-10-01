@@ -220,3 +220,36 @@ func TestClosedMenuIsItsButton(t *testing.T) {
 		t.Errorf("«⋯» with its menu: %v", err)
 	}
 }
+
+// Carrel's task 61: a repeating row of rows is compared at any length — one
+// month of a timeline where the frame draws two, six fields of a card where
+// it draws eight.
+func TestRepeatsAnyLength(t *testing.T) {
+	m := mockup(t)
+	r, ok := screens.Find("s-contacts-7")
+	if !ok {
+		t.Fatal("no s-contacts-7")
+	}
+	page := r.Screen().Render()
+	g := `<div class="tc-list__group">`
+	first := strings.Index(page, g)
+	second := strings.Index(page[first+len(g):], g) + first + len(g)
+	if first < 0 || second <= first {
+		t.Fatal("no two months in s-contacts-7")
+	}
+	end := strings.Index(page[second:], `<div class="tc-empty`) + second
+	one := page[:second] + page[end:]
+	if err := m.Check("s-contacts-7", one); err != nil {
+		t.Errorf("one month: %v", err)
+	}
+	r, _ = screens.Find("s-contacts-6")
+	card := r.Screen().Render()
+	i := strings.Index(card, "<dt>Address · work</dt>")
+	j := strings.Index(card, "<dt>Tags</dt>")
+	if i < 0 || j < i {
+		t.Fatal("no address and birthday in s-contacts-6")
+	}
+	if err := m.Check("s-contacts-6", card[:i]+card[j:]); err != nil {
+		t.Errorf("six fields: %v", err)
+	}
+}

@@ -78,6 +78,7 @@ func (m *Mockup) Check(frameID, rendered string) error {
 // the shapes of its element children, siblings of one kind in runs.
 type node struct {
 	tag     string
+	name    string // the element's own tag, kept when its classes stand for it
 	classes string
 	runs    [][]*node // the element children, siblings of one kind together
 	opaque  bool      // a select: its insides are the browser's options, not the frame's drawing
@@ -155,7 +156,7 @@ func of(n *fragment.Node) *node {
 			cls = append(cls, c)
 		}
 	}
-	out := &node{tag: n.Tag, classes: strings.Join(cls, " "), opaque: n.Tag == "select"}
+	out := &node{tag: n.Tag, name: n.Tag, classes: strings.Join(cls, " "), opaque: n.Tag == "select"}
 	if out.classes != "" {
 		out.tag = ""
 	}
@@ -211,31 +212,41 @@ func diff(want, got *node, path string) string {
 	if want.opaque || got.opaque {
 		return ""
 	}
+	if pre, p, wn, gn, ok := repeat(want.runs, got.runs); ok {
+		// A repeating row of rows (a month and its records, a term and its
+		// value) is compared as a run: any number of repeats on the screen,
+		// each like one of the frame's (Carrel's task 61).
+		for i := 0; i < pre; i++ {
+			if d := runDiff(want.runs[i], got.runs[i], path, i); d != "" {
+				return d
+			}
+		}
+		for u := 0; u < gn; u++ {
+			for j := 0; j < p; j++ {
+				gr := got.runs[pre+u*p+j]
+				var pool []*node
+				for v := 0; v < wn; v++ {
+					pool = append(pool, want.runs[pre+v*p+j]...)
+				}
+				if d := poolDiff(pool, gr, path, pre+u*p+j); d != "" {
+					return d
+				}
+			}
+		}
+		for k := 0; pre+wn*p+k < len(want.runs); k++ {
+			if d := runDiff(want.runs[pre+wn*p+k], got.runs[pre+gn*p+k], path, pre+gn*p+k); d != "" {
+				return d
+			}
+		}
+		return ""
+	}
 	n := len(want.runs)
 	if len(got.runs) < n {
 		n = len(got.runs)
 	}
 	for i := 0; i < n; i++ {
-		wr, gr := want.runs[i], got.runs[i]
-		p := fmt.Sprintf("%s > %s[%d]", path, wr[0].label(), i+1)
-		if wr[0].kind() != gr[0].kind() {
-			return fmt.Sprintf("%s: the screen has <%s> where the frame has <%s>", p, gr[0].label(), wr[0].label())
-		}
-		for _, g := range gr {
-			first := ""
-			for _, w := range wr {
-				d := diff(w, g, p)
-				if d == "" {
-					first = ""
-					break
-				}
-				if first == "" {
-					first = d
-				}
-			}
-			if first != "" {
-				return first
-			}
+		if d := runDiff(want.runs[i], got.runs[i], path, i); d != "" {
+			return d
 		}
 	}
 	if len(want.runs) > n {
@@ -245,4 +256,144 @@ func diff(want, got *node, path string) string {
 		return fmt.Sprintf("%s: the screen has <%s> the frame does not draw", path, got.runs[n][0].label())
 	}
 	return ""
+}
+
+// poolDiff compares a run of the screen with the frame's runs at the same
+// place of a repeat: each element like one of them, whatever its kind.
+func poolDiff(pool, gr []*node, path string, i int) string {
+	p := fmt.Sprintf("%s > %s[%d]", path, gr[0].label(), i+1)
+	for _, g := range gr {
+		first := ""
+		for _, w := range pool {
+			d := diff(w, g, p)
+			if d == "" {
+				first = ""
+				break
+			}
+			if first == "" {
+				first = d
+			}
+		}
+		if first != "" {
+			return first
+		}
+	}
+	return ""
+}
+
+// runDiff compares a run of the screen with the frame's: of one kind, and
+// each element of it like one of the frame's.
+func runDiff(wr, gr []*node, path string, i int) string {
+	p := fmt.Sprintf("%s > %s[%d]", path, wr[0].label(), i+1)
+	if wr[0].kind() != gr[0].kind() {
+		return fmt.Sprintf("%s: the screen has <%s> where the frame has <%s>", p, gr[0].label(), wr[0].label())
+	}
+	for _, g := range gr {
+		first := ""
+		for _, w := range wr {
+			d := diff(w, g, p)
+			if d == "" {
+				first = ""
+				break
+			}
+			if first == "" {
+				first = d
+			}
+		}
+		if first != "" {
+			return first
+		}
+	}
+	return ""
+}
+
+// repeat finds, in the frame's runs, a block of p runs repeated at least
+// twice, after the same first runs and before the same last ones as the
+// screen's, where the screen repeats the same block any number of times.
+// Runs are alike by kind, or — in a list of terms and values, where a
+// value's classes vary (dd and dd.tc-mono) — by tag.
+func repeat(want, got [][]*node) (pre, p, wn, gn int, ok bool) {
+	for _, byTag := range []bool{false, true} {
+		key := func(r []*node) string { return r[0].kind() }
+		if byTag {
+			key = func(r []*node) string { return r[0].name }
+		}
+		wk, gk := keys(want, key), keys(got, key)
+		for p = 2; p <= 3; p++ {
+			for pre = 0; pre+2*p <= len(wk); pre++ {
+				base := wk[pre : pre+p]
+				if distinct(base) < 2 {
+					continue
+				}
+				if byTag && !termsAndValues(base) {
+					continue
+				}
+				wn = reps(wk[pre:], base)
+				if wn < 2 {
+					continue
+				}
+				suf := wk[pre+wn*p:]
+				if len(gk) < pre+len(suf)+p || !same(gk[:pre], wk[:pre]) || !same(gk[len(gk)-len(suf):], suf) {
+					continue
+				}
+				mid := gk[pre : len(gk)-len(suf)]
+				if len(mid)%p != 0 || reps(mid, base) != len(mid)/p {
+					continue
+				}
+				if len(mid)/p == wn && same(gk, wk) && !byTag {
+					return 0, 0, 0, 0, false // the same rows: the plain walk compares them
+				}
+				return pre, p, wn, len(mid) / p, true
+			}
+		}
+	}
+	return 0, 0, 0, 0, false
+}
+
+func keys(runs [][]*node, key func([]*node) string) []string {
+	out := make([]string, len(runs))
+	for i, r := range runs {
+		out[i] = key(r)
+	}
+	return out
+}
+
+func reps(ks, base []string) int {
+	n := 0
+	for len(ks) >= len(base) && same(ks[:len(base)], base) {
+		ks = ks[len(base):]
+		n++
+	}
+	return n
+}
+
+func same(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+// termsAndValues says whether a block is a list's terms and values (dt,
+// dd): the one place a row's tag, not its classes, makes the repeat.
+func termsAndValues(base []string) bool {
+	for _, k := range base {
+		if k != "dt" && k != "dd" {
+			return false
+		}
+	}
+	return true
+}
+
+func distinct(ks []string) int {
+	m := map[string]bool{}
+	for _, k := range ks {
+		m[k] = true
+	}
+	return len(m)
 }
