@@ -108,8 +108,11 @@ const FramesWalkJS = `(function(max){
     for (var j = 0; j < PROPS.length; j++) if (ca[PROPS[j]] !== cb[PROPS[j]]) add(path, PROPS[j], ca[PROPS[j]], cb[PROPS[j]]);
     var ia = items(a, null), ib = items(b, null);
     if (ia.length !== ib.length) { add(path, "children", ia.length, ib.length); return; }
+    // A parent drawn as display:contents has no box of its own: its children
+    // are placed in its parent's (the bottom bar's navs, task «Back»).
+    var ox = ca.display === "contents" ? pa : x, oy = cb.display === "contents" ? pb : y;
     for (var k = 0; k < ia.length; k++) {
-      var fa = ia[k][1] ? inner(ia[k][1]) : x, fb = ib[k][1] ? inner(ib[k][1]) : y;
+      var fa = ia[k][1] ? inner(ia[k][1]) : ox, fb = ib[k][1] ? inner(ib[k][1]) : oy;
       walk(ia[k][0], ib[k][0], fa, fb, path + " > " + label(ia[k][0]) + "[" + (k + 1) + "]");
     }
   }
