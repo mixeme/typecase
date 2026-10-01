@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/chromedp/chromedp"
 
@@ -490,5 +491,48 @@ func TestClosedMenuWithoutScripts(t *testing.T) {
 	}
 	if !opened || escaped || !again || away {
 		t.Errorf("with the script: opened %v, after Esc %v, again %v, after a click away %v; want true, false, true, false", opened, escaped, again, away)
+	}
+}
+
+// TestCheckFormSubmits (Carrel's task 67): a bar's «Compact rows» is a GET
+// form — without a script its Apply sends it, with the library's script a
+// change of the check does, and Apply is not shown.
+func TestCheckFormSubmits(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	form := func(action string) string {
+		f := w.CheckForm{Check: w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, Action: action, Hidden: []w.Hidden{{Name: "sort", Value: "az"}}, Apply: w.Button{Label: "Apply", Small: true, Submit: true}}
+		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar">` + f.Render() + `</div></div></div>`
+	}
+	bareURL := h.RegisterPage("checkform-bare", "")
+	h.RegisterPage("checkform-bare", strings.Replace(browser.PageHTML(form(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))
+	var applyShown bool
+	var search string
+	if err := h.Run(bareURL, 900, 600,
+		chromedp.Evaluate(`document.querySelector(".tc-checkform button").checkVisibility()`, &applyShown),
+		chromedp.Click(`.tc-checkform .tc-check`, chromedp.ByQuery),
+		chromedp.Click(`.tc-checkform button`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !applyShown || !strings.Contains(search, "compact=1") || !strings.Contains(search, "sort=az") {
+		t.Errorf("without a script: Apply shown %v, sent %q; want true and compact=1, sort=az", applyShown, search)
+	}
+	pageURL := h.RegisterPage("checkform", "")
+	h.RegisterPage("checkform", browser.PageHTML(form(pageURL), ""))
+	var hidden bool
+	search = ""
+	if err := h.Run(pageURL, 900, 600,
+		chromedp.Evaluate(`!document.querySelector(".tc-checkform button").checkVisibility()`, &hidden),
+		chromedp.Click(`.tc-checkform .tc-check`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !hidden || !strings.Contains(search, "compact=1") {
+		t.Errorf("with the script: no Apply %v, sent %q; want true and compact=1", hidden, search)
 	}
 }

@@ -493,6 +493,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-menu.is-pop.is-right{left:auto;right:0}
 /* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
+/* Отметка полосы формой (Compact rows): форма не рисуется; Apply — только пока страница без сценария (data-tc-noscript снимает tc.js). */
+.tc-checkform{display:inline-flex;align-items:center;gap:6px}
+.tc-checkform__apply{display:none}
+[data-tc-noscript] .tc-checkform__apply{display:contents}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}

@@ -202,6 +202,36 @@ func (c Check) html(m mix) string {
 	return s.String()
 }
 
+// CheckForm — tc-checkform
+//
+// Роль. Отметка полосы, которая сама — форма: «Compact rows» уходит GET-запросом с остальными выборами списка.
+// Вход. CheckForm{Check, Action, Hidden, Apply}.
+// Состояния. default.
+// Инварианты. Отметка — флажок формы (Check.Name); форма отправляет её и скрытые поля; без сценария — кнопкой Apply, со сценарием — при смене; виджет печатает фрагмент своего кадра.
+// Поведение. Смена отметки отправляет форму (сценарий); без сценария — Apply рядом.
+// Эталон. кадр `s-contacts-1`, фрагмент `.tc-checkform`.
+// Содержимое. Флажок с подписью, скрытые поля, Apply для работы без сценария.
+// Чего нет. Своего вида: вид у флажка; Apply виден, только пока страница без сценария (data-tc-noscript на html, его снимает tc.js).
+type CheckForm struct {
+	Check  Check    // a checkbox of the form: Name and Value set
+	Action string   // where the form goes (GET)
+	Hidden []Hidden // the list's other choices that go with it
+	Apply  Button   // what sends it on a page without a script: Apply, small, a submit
+}
+
+// Render prints the form.
+func (f CheckForm) Render() string { return f.html(nil) }
+
+func (f CheckForm) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<form` + class(m, "tc-checkform") + attr("action", f.Action) + ` method="get">` + f.Check.html(nil))
+	for _, h := range f.Hidden {
+		s.WriteString(h.html(nil))
+	}
+	s.WriteString(`<span class="tc-checkform__apply">` + f.Apply.html(nil) + `</span></form>`)
+	return s.String()
+}
+
 // Range — tc-range
 //
 // Роль. Диапазон дат: два поля, стрелка между ними и кнопка, которая показывает.

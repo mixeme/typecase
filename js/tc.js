@@ -7,6 +7,10 @@
 	// hidden attribute, backed by an inline display where a rule of the
 	// mockup would show the element anyway (a scrim is a flex box).
 
+	// The page says it has no script until this one runs: what only a page
+	// without a script shows (a form check's Apply) goes.
+	document.documentElement.removeAttribute("data-tc-noscript");
+
 	var focusableSel =
 		'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -261,6 +265,18 @@
 		});
 		return n;
 	}
+
+	// A bar's check that is a form (Compact rows) sends itself when it changes;
+	// without a script its Apply does.
+	document.addEventListener("change", function (e) {
+		var box = e.target;
+		if (!box || !box.classList || !box.classList.contains("tc-check__box")) return;
+		var f = closest(box, "form.tc-checkform");
+		if (f) {
+			if (f.requestSubmit) f.requestSubmit();
+			else f.submit();
+		}
+	});
 
 	function onClick(e) {
 		var t = closest(e.target, triggerSel);

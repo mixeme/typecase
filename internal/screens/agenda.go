@@ -143,8 +143,8 @@ func Agenda1() Screen {
 										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true},
+											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true},
+											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true},
 											Show: w.Button{Label: "Show"},
 											Wrap: true,
 										},
@@ -156,7 +156,16 @@ func Agenda1() Screen {
 								},
 							},
 						},
-						Right:   &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.CheckForm{
+									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Action: "/app/calendar",
+									Apply:  w.Button{Label: "Apply", Small: true},
+								},
+							},
+							Secondary: true,
+						},
 						Variant: w.BarWide,
 					},
 					w.Runbar{

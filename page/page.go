@@ -53,7 +53,7 @@ func (d Document) Render() (string, error) {
 		lang = "en"
 	}
 	var b strings.Builder
-	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root><head><meta charset="utf-8">` +
+	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript><head><meta charset="utf-8">` +
 		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` +
 		`<script src="` + html.EscapeString(d.Assets.Theme) + `"></script>` +
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)

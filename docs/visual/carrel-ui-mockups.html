@@ -674,6 +674,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-menu.is-pop.is-right{left:auto;right:0}
 /* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
+/* Отметка полосы формой (Compact rows): форма не рисуется; Apply — только пока страница без сценария (data-tc-noscript снимает tc.js). */
+.tc-checkform{display:inline-flex;align-items:center;gap:6px}
+.tc-checkform__apply{display:none}
+[data-tc-noscript] .tc-checkform__apply{display:contents}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
@@ -3011,7 +3015,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
           <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">A–Z</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
-          <span class="tc-bar__right is-2nd"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Compact rows</button><span class="tc-mono">312</span></span>
+          <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/contacts" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-mono">312</span></span>
         </div>
 
         <div class="tc-list__group"><span class="tc-rubric">А</span><span class="tc-num">3</span></div>
@@ -3181,7 +3185,7 @@ Read  2 min ago</div>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">A–Z</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
             <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
-            <span class="tc-bar__right is-2nd"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Compact rows</button><span class="tc-mono">312</span></span>
+            <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/contacts" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-mono">312</span></span>
           </div>
 
           <div class="tc-list__group"><span class="tc-rubric">А</span><span class="tc-num">3</span></div>
@@ -4369,11 +4373,11 @@ Read  2 min ago</div>
               <button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
               <button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Notes</button>
               <span class="tc-menu__sep is-3rd"></span>
-              <span class="tc-range tc-range--wrap"><input class="tc-in is-mono" type="date" value="2026-08-10"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16"><button class="tc-btn" type="button">Show</button></span>
+              <span class="tc-range tc-range--wrap"><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" aria-label="To"><button class="tc-btn" type="button">Show</button></span>
               <span class="tc-menu__sep"></span>
               <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Compact rows</button>
             </span></span>
-          <span class="tc-bar__right is-2nd"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Compact rows</button></span>
+          <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
         </div>
         <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <span class="tc-dim--danger">baikal unavailable</span><span class="tc-mono tc-push">from cache · 2 min ago</span></div>
 

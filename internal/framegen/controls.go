@@ -404,6 +404,25 @@ func (g *gen) area(x *El) string {
 
 // segfold is a switch of links that folds on a narrow bar: its options are
 // read from the fold's menu (label, count, address) and the current one.
+// checkForm is a bar's check that is a form: its check, address and hidden
+// fields.
+func (g *gen) checkForm(x *El) string {
+	s := "w.CheckForm{Check: " + g.check(x.Kid("tc-check")) + ", Action: " + q(x.Attr("action"))
+	var hs []string
+	for _, k := range x.Els() {
+		if k.Tag == "input" && k.Attr("type") == "hidden" {
+			hs = append(hs, "{Name: "+q(k.Attr("name"))+", Value: "+q(k.Attr("value"))+"}")
+		}
+	}
+	if len(hs) > 0 {
+		s += ", Hidden: []w.Hidden{" + join(hs, ", ") + "}"
+	}
+	if ap := x.Kid("tc-checkform__apply"); ap != nil {
+		s += ", Apply: " + g.button(ap.Kid("tc-btn"))
+	}
+	return s + "}"
+}
+
 func (g *gen) segfold(x *El) string {
 	var opts []string
 	for _, it := range x.Kid("tc-segfold__pick").Kid("tc-segfold__menu").Els() {
@@ -532,6 +551,8 @@ func (g *gen) control(x *El) string {
 		return g.area(x)
 	case x.Has("tc-segfold"):
 		return g.segfold(x)
+	case x.Has("tc-checkform"):
+		return g.checkForm(x)
 	case x.Has("tc-seg"):
 		return g.seg(x)
 	case x.Has("tc-check"):

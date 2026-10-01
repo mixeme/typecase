@@ -522,14 +522,14 @@ var _ = add(
 	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}}, w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Overdue"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}}, "components-19", "tc-bar", 1),
-	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Secondary: true}, w.BarSep{Secondary: true}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Notes")}, Tertiary: true}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOn}, Label: "Events", Tertiary: true},
+	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Secondary: true, Action: "/app/calendar"}, w.BarSep{Secondary: true}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true}, w.Check{Parts: []w.CheckPart{w.Text("Notes")}, Tertiary: true}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
 		w.MenuSep{Tertiary: true},
-		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Wrap: true},
+		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Check: w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
 	overlay("plain-head", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}, Body: []w.SheetPart{

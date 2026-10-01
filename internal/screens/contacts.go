@@ -96,7 +96,14 @@ func Contacts1() Screen {
 						},
 						More: &w.Button{Icon: "dots", Title: "More"},
 						Right: &w.BarRight{
-							Items:     []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Mono{Text: "312"}},
+							Items: []w.BarPart{
+								w.CheckForm{
+									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Action: "/app/contacts",
+									Apply:  w.Button{Label: "Apply", Small: true},
+								},
+								w.Mono{Text: "312"},
+							},
 							Secondary: true,
 						},
 					},
@@ -282,7 +289,14 @@ func Contacts2() Screen {
 							},
 							More: &w.Button{Icon: "dots", Title: "More"},
 							Right: &w.BarRight{
-								Items:     []w.BarPart{w.Check{Parts: []w.CheckPart{w.Text("Compact rows")}}, w.Mono{Text: "312"}},
+								Items: []w.BarPart{
+									w.CheckForm{
+										Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+										Action: "/app/contacts",
+										Apply:  w.Button{Label: "Apply", Small: true},
+									},
+									w.Mono{Text: "312"},
+								},
 								Secondary: true,
 							},
 						},

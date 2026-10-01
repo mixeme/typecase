@@ -8,17 +8,18 @@ type BarPart interface {
 	barPart()
 }
 
-func (Button) barPart()  {}
-func (Check) barPart()   {}
-func (Input) barPart()   {}
-func (Filter) barPart()  {}
-func (Pick) barPart()    {}
-func (Mono) barPart()    {}
-func (Range) barPart()   {}
-func (Seg) barPart()     {}
-func (SegFold) barPart() {}
-func (BarSep) barPart()  {}
-func (Drop) barPart()    {}
+func (Button) barPart()    {}
+func (Check) barPart()     {}
+func (CheckForm) barPart() {}
+func (Input) barPart()     {}
+func (Filter) barPart()    {}
+func (Pick) barPart()      {}
+func (Mono) barPart()      {}
+func (Range) barPart()     {}
+func (Seg) barPart()       {}
+func (SegFold) barPart()   {}
+func (BarSep) barPart()    {}
+func (Drop) barPart()      {}
 
 // BarSep is a thin rule between groups of a bar.
 type BarSep struct {

@@ -25,6 +25,12 @@ do, not what the authors did.
   and on a click elsewhere. The card's «⋯» is drawn so (s-contacts-6, -7).
   `TestClosedMenuWithoutScripts`. The ladders see what a closed details hides
   (`checkVisibility`).
+- **`CheckForm`** (task 67): a bar's check that is a GET form — «Compact rows»
+  goes with the list's other choices; with the library's script a change
+  sends it, on a page without a script its Apply does. A page says it has no
+  script until `tc.js` runs (`data-tc-noscript` on `html`, printed by `page`).
+  Drawn so in the lists' bars (s-contacts-1, -2, s-agenda-1);
+  `TestCheckFormSubmits`.
 
 ### Mockup
 

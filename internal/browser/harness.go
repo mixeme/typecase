@@ -214,7 +214,7 @@ func (h *Harness) Tab(timeout time.Duration) (run func(actions ...chromedp.Actio
 // PageHTML builds a minimal document around a demo fragment.
 func PageHTML(body string, extraCSS string) string {
 	return fmt.Sprintf(`<!DOCTYPE html>
-<html lang="en" data-tc-root>
+<html lang="en" data-tc-root data-tc-noscript>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

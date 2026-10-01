@@ -257,7 +257,7 @@ func checkMockupDeadRules(html string) error {
 		}
 		// The body of a page of the library (package page): a frame holds no
 		// body, so this rule is seen on no frame by design.
-		if strings.TrimSpace(r.Selector) == "body[data-tc-root]" {
+		if sel := strings.TrimSpace(r.Selector); sel == "body[data-tc-root]" || strings.HasPrefix(sel, "[data-tc-noscript] ") {
 			continue
 		}
 		errs = append(errs, compactSel(r.Selector))
