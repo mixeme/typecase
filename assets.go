@@ -26,6 +26,13 @@ func JS() ([]byte, error) {
 	return jsFS.ReadFile("js/tc.js")
 }
 
+// LiveJS returns the library's live layer (tc-live.js, L-1): requests to
+// the addresses the markup names, for the library's own areas. A page that
+// wants it loads it after tc.js.
+func LiveJS() ([]byte, error) {
+	return jsFS.ReadFile("js/tc-live.js")
+}
+
 // ThemeJS returns the theme boot script that must run before first paint (L-5.3).
 func ThemeJS() ([]byte, error) {
 	return jsFS.ReadFile("js/theme.js")

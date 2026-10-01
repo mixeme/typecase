@@ -23,13 +23,14 @@ type Assets struct {
 	CSS   string // the stylesheet; the fonts lie at ../fonts/ from it
 	Theme string // the theme's script, run before the first paint
 	JS    string // the library's script, run after the body
+	Live  string // the library's live layer, run after JS when the document asks for it
 }
 
 // At is the addresses of Static mounted at base: base/css/typecase.css,
-// base/fonts/…, base/js/theme.js, base/js/tc.js.
+// base/fonts/…, base/js/theme.js, base/js/tc.js, base/js/tc-live.js.
 func At(base string) Assets {
 	base = strings.TrimRight(base, "/")
-	return Assets{CSS: base + "/css/typecase.css", Theme: base + "/js/theme.js", JS: base + "/js/tc.js"}
+	return Assets{CSS: base + "/css/typecase.css", Theme: base + "/js/theme.js", JS: base + "/js/tc.js", Live: base + "/js/tc-live.js"}
 }
 
 // Document is a whole page: its title and language, the library's files and
@@ -40,6 +41,9 @@ type Document struct {
 	Assets Assets
 	Root   widget.Root
 	Forms  []widget.PostForm // forms buttons outside a form submit (Button.Form)
+	// Live loads the library's live layer after its script (L-1): a tag
+	// field's suggestions; without it they are plain forms.
+	Live bool
 }
 
 // Render prints the document.
@@ -64,12 +68,16 @@ func (d Document) Render() (string, error) {
 	for _, f := range d.Forms {
 		b.WriteString(f.Render())
 	}
-	b.WriteString(`<script src="` + html.EscapeString(d.Assets.JS) + `"></script></body></html>`)
+	b.WriteString(`<script src="` + html.EscapeString(d.Assets.JS) + `"></script>`)
+	if d.Live && d.Assets.Live != "" {
+		b.WriteString(`<script src="` + html.EscapeString(d.Assets.Live) + `"></script>`)
+	}
+	b.WriteString(`</body></html>`)
 	return b.String(), nil
 }
 
 // Static serves the library's files from the binary in the layout At names:
-// css/typecase.css, fonts/*, js/theme.js, js/tc.js. Mount it under a prefix
+// css/typecase.css, fonts/*, js/theme.js, js/tc.js, js/tc-live.js. Mount it under a prefix
 // with http.StripPrefix.
 func Static() http.Handler {
 	mux := http.NewServeMux()
@@ -95,6 +103,7 @@ func Static() http.Handler {
 	}
 	mux.HandleFunc("/js/theme.js", script(typecase.ThemeJS))
 	mux.HandleFunc("/js/tc.js", script(typecase.JS))
+	mux.HandleFunc("/js/tc-live.js", script(typecase.LiveJS))
 	mux.Handle("/fonts/", http.FileServer(http.FS(typecase.Fonts())))
 	return mux
 }

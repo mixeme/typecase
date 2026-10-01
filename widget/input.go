@@ -241,7 +241,7 @@ func (Span) tagInputPart() {}
 // Вход. TagInput{Parts, Wrap, Focus, Columns, Name, Add}.
 // Состояния. tags | wrap | focus | columns | add.
 // Инварианты. Выбранное — теги, их снимают крестиком, а не правят; поле печатает фрагмент своего кадра.
-// Поведение. С Name каждый тег отправляет своё значение, снятый крестиком — нет, и без сценария тоже. Набор открывает подсказки под полем (Add.Suggest: сервер отвечает пунктами меню); выбор добавляет тег; крестик и Backspace в пустой строке снимают тег; Esc закрывает подсказки.
+// Поведение. С Name каждый тег отправляет своё значение, снятый крестиком — нет, и без сценария тоже. С живым слоем (tc-live.js) набор открывает подсказки под полем (Add.Suggest: сервер отвечает пунктами меню); выбор добавляет тег; крестик и Backspace в пустой строке снимают тег; Enter не отправляет форму; Esc закрывает подсказки.
 // Эталон. кадр `s-tasks-3`, фрагмент `span.tc-in.tc-in--tags`.
 // Содержимое. Теги и набранный текст.
 // Чего нет. Ввода UID руками вне подсказок: его пункт стоит в конце списка подсказок.
@@ -264,8 +264,9 @@ type TagAdd struct {
 	Placeholder string // «Name or address»
 	Label       string
 	Value       string // what is typed: the frames of suggestions
-	// Suggest is where the suggestions come from: the library's script asks
-	// Suggest?q=… as one types and shows the menu items the server answers;
+	// Suggest is where the suggestions come from: the library's live layer
+	// (tc-live.js, L-1) asks Suggest?q=… as one types and shows the menu items
+	// the server answers;
 	// an item's Adds is the tag it adds, with the field's Name (MenuItems
 	// prints the answer).
 	Suggest string

@@ -25,6 +25,14 @@ do, not what the authors did.
   and `Fixed` (a pill without a cross: the organiser). `SecList.Columns` sets a
   section's list in columns. Enter in the typing line chooses and never sends
   the edit; a cross and Backspace take a tag away. `TestAttendeesSuggest`.
+- **The live layer, `tc-live.js`** (the owner's decision of 02.10, L-1): the
+  library's second script, loaded after `tc.js` when a page asks for it
+  (`page.Document.Live`; `page.At` names `js/tc-live.js`, `page.Static` and
+  `typecase.LiveJS` serve it). It asks only addresses the markup names, of
+  the page's own site, and puts the HTML of the library's widgets where the
+  markup says; the core, `tc.js`, has no network and no storage, and opens
+  `window.__tc.menuOf`, `showMenu` and `closeMenu` to the layer. A tag field's
+  suggestions live there; without it the typed words go with the form.
 
 - **`Query.Placeholder`**: what an empty search line says — «Search
   everything…», «Filter the loaded cards» — is a placeholder, not a value; the

@@ -53,6 +53,10 @@ func NewHarness(t *testing.T) *Harness {
 	if err != nil {
 		t.Fatalf("js: %v", err)
 	}
+	live, err := typecase.LiveJS()
+	if err != nil {
+		t.Fatalf("js: %v", err)
+	}
 
 	h := &Harness{t: t, pages: make(map[string]string)}
 	mux := http.NewServeMux()
@@ -73,6 +77,10 @@ func NewHarness(t *testing.T) *Harness {
 	mux.HandleFunc("/tc.js", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
 		_, _ = w.Write(js)
+	})
+	mux.HandleFunc("/tc-live.js", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
+		_, _ = w.Write(live)
 	})
 	mux.HandleFunc("/page/", func(w http.ResponseWriter, r *http.Request) {
 		id, err := url.PathUnescape(r.URL.Path[len("/page/"):])
@@ -229,6 +237,7 @@ body { margin: 0; padding: 16px; background: var(--tc-bg); color: var(--tc-ink);
 <body data-tc-root>
 <div class="demo">%s</div>
 <script src="/tc.js"></script>
+<script src="/tc-live.js"></script>
 </body>
 </html>`, extraCSS, body)
 }

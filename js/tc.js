@@ -180,43 +180,19 @@
 		return true;
 	}
 
-	// Tag fields with suggestions (attendees, Carrel's task 77): typing asks
-	// the server, which answers with menu items; an item's template is the
-	// tag it adds, before the typing line.
-	var suggestTimer = 0;
-
-	function suggest(line) {
-		var field = closest(line, "[data-tc-suggest]");
-		var pop = field && popupOf(field);
+	// A tag field's suggestions (attendees, Carrel's task 77) come from the
+	// live layer (tc-live.js): it puts the server's items into the field's
+	// menu and shows them here, the focus staying in the typing line. The core
+	// chooses, takes tags away and keeps Enter from sending the edit.
+	function showMenu(trigger) {
+		var pop = popupOf(trigger);
 		if (!pop) return;
-		clearTimeout(suggestTimer);
-		var q = line.value.trim();
-		if (!q) {
-			if (openTrigger === field) closeMenu(false);
-			return;
-		}
-		suggestTimer = setTimeout(function () {
-			var url = field.getAttribute("data-tc-suggest");
-			url += (url.indexOf("?") < 0 ? "?" : "&") + "q=" + encodeURIComponent(q);
-			fetch(url, { credentials: "same-origin", headers: { Accept: "text/html" } })
-				.then(function (r) {
-					return r.ok ? r.text() : "";
-				})
-				.then(function (html) {
-					if (line.value.trim() !== q) return;
-					var menu = menuIn(pop);
-					menu.innerHTML = html.trim();
-					if (!menu.children.length) {
-						if (openTrigger === field) closeMenu(false);
-						return;
-					}
-					if (openTrigger !== field) closeMenu(false);
-					show(pop);
-					field.setAttribute("aria-expanded", "true");
-					openTrigger = field;
-				})
-				.catch(function () {});
-		}, 150);
+		if (openTrigger !== trigger) closeMenu(false);
+		var d = holder(pop);
+		if (d) d.open = true;
+		else show(pop);
+		trigger.setAttribute("aria-expanded", "true");
+		openTrigger = trigger;
 	}
 
 	function addTag(field, item) {
@@ -706,10 +682,7 @@
 
 	document.addEventListener("click", onClick);
 	document.addEventListener("change", onChange);
-	document.addEventListener("input", function (e) {
-		if (e.target.classList && e.target.classList.contains("tc-in__add")) suggest(e.target);
-		else onInput(e);
-	});
+	document.addEventListener("input", onInput);
 	document.addEventListener("pointerdown", onDragStart);
 	document.addEventListener("pointermove", onDragMove);
 	document.addEventListener("pointerup", onDragEnd);
@@ -737,7 +710,20 @@
 	}
 	window.addEventListener("resize", layoutUpdates);
 
-	window.__tc = { init: init, layoutUpdates: layoutUpdates, shellMode: shellMode };
+	// The live layer (tc-live.js) builds on these and on nothing else.
+	window.__tc = {
+		init: init,
+		layoutUpdates: layoutUpdates,
+		shellMode: shellMode,
+		menuOf: function (trigger) {
+			var pop = popupOf(trigger);
+			return pop && menuIn(pop);
+		},
+		showMenu: showMenu,
+		closeMenu: function (trigger) {
+			if (openTrigger === trigger) closeMenu(false);
+		}
+	};
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", function () {
 			init(document);
