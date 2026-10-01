@@ -12,11 +12,11 @@ var _ = add(
 	shell("title", w.Brand{Title: "Combined calendar"}, "phone-1", "tc-brand", 1),
 
 	// tc-search
-	shell("form", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…", Name: "q"}, Action: "/app/find"}, "components-43", "tc-search", 1),
-	shell("plain", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, "shell-1", "tc-search", 1),
-	shell("focus", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}, Focus: true, Variant: w.SearchFull}, "s-find-2", "tc-search", 1),
+	shell("form", w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…", Name: "q"}, Action: "/app/find"}, "components-43", "tc-search", 1),
+	shell("plain", w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, "shell-1", "tc-search", 1),
+	shell("focus", w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Focus: true, Variant: w.SearchFull}, "s-find-2", "tc-search", 1),
 	shell("clear", w.Search{Query: w.Query{Value: "ковал", Label: "Search everything…"}, Clear: true}, "s-find-1", "tc-search", 1),
-	shell("variant", w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill}, "s-conflict-2", "tc-search", 1),
+	shell("variant", w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill}, "s-conflict-2", "tc-search", 1),
 
 	// tc-usermenu
 	shell("link", w.UserMenu{Name: "mix", Href: "/app/settings/account"}, "components-43", "tc-usermenu", 1),
@@ -279,7 +279,7 @@ var _ = add(
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New notebook"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}, Strip: true}, "components-36", "tc-railfoot", 1),
 
 	// tc-top
-	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top", 1),
+	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top", 1),
 	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "More"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "More"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "More"}}, Tight: true}, "phone-1", "tc-top", 1),
 )
 

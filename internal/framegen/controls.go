@@ -324,7 +324,11 @@ func queryOf(qq *El) string {
 	if v := qq.Attr("name"); v != "" {
 		n = ", Name: " + q(v)
 	}
-	return "w.Query{Value: " + q(qq.Attr("value")) + ", Label: " + q(qq.Attr("aria-label")) + n + "}"
+	v := "Value: " + q(qq.Attr("value"))
+	if ph := qq.Attr("placeholder"); ph != "" {
+		v = "Placeholder: " + q(ph)
+	}
+	return "w.Query{" + v + ", Label: " + q(qq.Attr("aria-label")) + n + "}"
 }
 
 func (g *gen) filter(x *El) string {

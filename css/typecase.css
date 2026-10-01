@@ -176,6 +176,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 :where(.tc-root) :where(textarea){field-sizing:content;resize:none}
 :where(.tc-root) :where(button[role=menuitem],a[role=menuitem]){width:100%}
 .tc-root .tc-q{flex:1;min-width:0;min-height:0;overflow:hidden}
+/* Подсказка пустого поля — тем же цветом, что набранное: поле само тихое (U-1). */
+.tc-root .tc-q::placeholder{color:inherit;opacity:1;font:inherit;letter-spacing:inherit;line-height:inherit}
 .tc-acts > .tc-drop{flex:none}
 /* действия шапки в два яруса: второй ярус — уточнение к первому (порог под фильтром) */
 .tc-acts--stack{flex-direction:column;align-items:flex-end}

@@ -9,7 +9,7 @@ func Conflict1() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
-			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
@@ -120,7 +120,7 @@ func Conflict3() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
-			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
@@ -201,7 +201,7 @@ func Conflict4() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
-			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
@@ -284,7 +284,7 @@ func Conflict5() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
-			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
@@ -369,8 +369,11 @@ func Conflict5() Screen {
 func Conflict2() Screen {
 	return w.Shell{
 		Top: &w.Top{
-			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
-			Search: &w.Search{Query: w.Query{Value: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill},
+			Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{
+				Query:   w.Query{Placeholder: "Search everything…", Label: "Search everything…"},
+				Variant: w.SearchFill,
+			},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
 				w.UserMenu{Name: "mix", NoArrow: true},

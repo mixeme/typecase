@@ -196,7 +196,7 @@ func Find2() Screen {
 		Top: &w.Top{
 			Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{
-				Query:   w.Query{Value: "Search everything…", Label: "Search everything…"},
+				Query:   w.Query{Placeholder: "Search everything…", Label: "Search everything…"},
 				Focus:   true,
 				Variant: w.SearchFull,
 			},

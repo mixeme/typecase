@@ -6,6 +6,17 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Added
+
+- **`Query.Placeholder`**: what an empty search line says — «Search
+  everything…», «Filter the loaded cards» — is a placeholder, not a value; the
+  frames draw it so, in the colour of the text (Carrel's task 69).
+
+### Mockup
+
+- The timeline is where a person takes part, not where they are mentioned:
+  the glossary and the captions say so (Carrel's task 70).
+
 ## typecase/v0.11.0 — 2026-10-01
 
 ### Breaking

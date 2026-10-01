@@ -153,7 +153,7 @@ func (p Pick) html(m mix) string {
 // Query — tc-q
 //
 // Роль. Строка запроса внутри поля поиска или фильтра.
-// Вход. Query{Value, Label, Name}.
+// Вход. Query{Value, Placeholder, Label, Name}.
 // Состояния. нет.
 // Инварианты. Тип поля — search; у строки есть доступное имя; строка печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; Esc очищает, если поле не пусто.
@@ -161,16 +161,17 @@ func (p Pick) html(m mix) string {
 // Содержимое. нет.
 // Чего нет. Рамки и значка: их рисует поле вокруг.
 type Query struct {
-	Value string
-	Label string
-	Name  string // what the search sends it as: q
+	Value       string
+	Placeholder string // what the empty line says: «Search everything…»
+	Label       string
+	Name        string // what the search sends it as: q
 }
 
 // Render prints the query line.
 func (q Query) Render() string { return q.html(nil) }
 
 func (q Query) html(m mix) string {
-	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("aria-label", q.Label) + `>`
+	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + `>`
 }
 
 // FilterVariant is the drawn size of a filter.
