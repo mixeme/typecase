@@ -118,6 +118,9 @@ type SecList struct {
 	Items [][]SecItemPart
 	Gap   int  // 5 or 6 px between the items; 0: no column
 	Muted bool // quieter: what a letter carries
+	// Columns sets the items in columns across the width: the attendees of
+	// an event (Carrel's task 77).
+	Columns bool
 }
 
 func (l SecList) html(mix) string {
@@ -126,7 +129,7 @@ func (l SecList) html(mix) string {
 	if l.Gap > 0 {
 		col = "tc-stack tc-stack--gap-" + itoa(l.Gap)
 	}
-	s.WriteString(`<ul` + class(nil, col, "tc-sec__list", pick(l.Muted, "tc-sec__list--muted")) + `>`)
+	s.WriteString(`<ul` + class(nil, col, "tc-sec__list", pick(l.Muted, "tc-sec__list--muted"), pick(l.Columns, "tc-sec__list--cols")) + `>`)
 	for _, it := range l.Items {
 		s.WriteString(`<li>` + joined(it) + `</li>`)
 	}
@@ -251,7 +254,6 @@ type SecPart interface {
 func (Rubric) secPart()   {}
 func (List) secPart()     {}
 func (Prose) secPart()    {}
-func (Table) secPart()    {}
 func (Msg) secPart()      {}
 func (Line) secPart()     {}
 func (SecList) secPart()  {}

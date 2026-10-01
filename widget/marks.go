@@ -64,12 +64,12 @@ func (k Mark) html(m mix) string {
 // Tag — tc-tag
 //
 // Роль. Метка категории: тег записи, фильтр по тегу, приложенная вещь, связанная запись.
-// Вход. Tag{Label, On, Icon, Mark, Removable, Place, Href}.
-// Состояния. plain | on | icon | mark | removable.
+// Вход. Tag{Label, On, Icon, Mark, Removable, Fixed, Place, Href, Address, Aside, Title, Name, Value}.
+// Состояния. plain | on | icon | mark | removable | person.
 // Инварианты. Тег не правится на месте: он или выбран, или снимается крестиком; тег печатает фрагмент своего кадра.
 // Поведение. Выбранный фильтр (On) снимается нажатием; тег с крестиком убирается крестиком.
 // Эталон. кадр `s-contacts-1`, фрагмент `.tc-tag`.
-// Содержимое. Значок или метка перед подписью, крестик после.
+// Содержимое. Значок или метка перед подписью, приглушённое после неё, крестик в конце.
 // Чего нет. Своего цвета: цвет несёт метка внутри.
 type Tag struct {
 	Label     string
@@ -77,26 +77,59 @@ type Tag struct {
 	Icon      Icon
 	Mark      *Mark
 	Removable bool // a pill with a cross after the label
+	Fixed     bool // a pill that stays: the organiser among the attendees
 	Place     Place
 	Href      string // the tag goes somewhere: the list filtered by it
+	Address   *Mono  // an address instead of the label: a person who is in no address book
+	Aside     *Dim   // what the tag's person said: «· accepted»
+	Title     string // what a pointer over it shows: the person's address
+	// Value is what the tag sends as Name (or as its TagInput's Name): the
+	// address of an attendee. With a cross it is a checkbox the cross
+	// unticks; without, a hidden field.
+	Name  string
+	Value string
 }
 
 // Render prints the tag.
 func (t Tag) Render() string { return t.html(nil) }
 
-func (t Tag) html(m mix) string {
+func (t Tag) html(m mix) string { return t.in(m, "") }
+
+// in prints the tag, in a TagInput sending its value as name when name is
+// set: a tag with a cross is then a label around a checkbox that the cross
+// unticks; a fixed one carries a hidden field.
+func (t Tag) in(m mix, name string) string {
 	tag := "span"
 	if t.Href != "" {
 		tag = "a"
 	}
-	s := `<` + tag + class(m, "tc-tag", is("on", t.On), pick(t.Removable, "tc-tag--pill"), t.Place.class()) + attr("href", t.Href) + `>`
+	field := ""
+	if t.Name != "" {
+		name = t.Name
+	}
+	if t.Value != "" {
+		if t.Removable {
+			tag = "label"
+			field = `<input class="tc-check__box" type="checkbox"` + attr("name", name) + attr("value", t.Value) + ` checked>`
+		} else {
+			field = `<input type="hidden"` + attr("name", name) + attr("value", t.Value) + `>`
+		}
+	}
+	s := `<` + tag + class(m, "tc-tag", is("on", t.On), pick(t.Removable || t.Fixed, "tc-tag--pill"), t.Place.class()) + attr("href", t.Href) + attr("title", t.Title) + `>` + field
 	if t.Icon != "" {
 		s += `<svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none">` + t.Icon.use() + `</svg> `
 	}
 	if t.Mark != nil {
 		s += t.Mark.html(nil)
 	}
-	s += esc(t.Label)
+	if t.Address != nil {
+		s += t.Address.html(nil)
+	} else {
+		s += esc(t.Label)
+	}
+	if t.Aside != nil {
+		s += " " + t.Aside.html(nil)
+	}
 	if t.Removable {
 		s += ` <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none">` + Icon("close").use() + `</svg>`
 	}

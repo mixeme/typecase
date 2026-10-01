@@ -150,6 +150,9 @@ func (g *gen) badge(e *El) string {
 
 func (g *gen) tag(e *El) string {
 	f := []string{"Label: " + q(e.OwnText())}
+	if m := e.Kid("tc-mono"); m != nil && e.Has("tc-tag--pill") {
+		f = []string{"Address: &" + g.mono(m)}
+	}
 	if e.Has("is-on") {
 		f = append(f, "On: true")
 	}
@@ -160,8 +163,24 @@ func (g *gen) tag(e *El) string {
 	if m := e.Kid("tc-mark"); m != nil {
 		f = append(f, "Mark: &"+g.mark(m))
 	}
-	if e.Has("tc-tag--pill") {
+	if e.Has("tc-tag--pill") && len(s) > 0 {
 		f = append(f, "Removable: true")
+	} else if e.Has("tc-tag--pill") {
+		f = append(f, "Fixed: true")
+	}
+	if d := e.Kid("tc-dim"); d != nil && e.Has("tc-tag--pill") {
+		f = append(f, "Aside: &"+g.dimx(d))
+	}
+	if t := e.Attr("title"); t != "" {
+		f = append(f, "Title: "+q(t))
+	}
+	for _, k := range e.Els() {
+		if k.Tag == "input" {
+			if n := k.Attr("name"); n != "" {
+				f = append(f, "Name: "+q(n))
+			}
+			f = append(f, "Value: "+q(k.Attr("value")))
+		}
 	}
 	return "w.Tag{" + join(f, ", ") + placef(e) + "}"
 }

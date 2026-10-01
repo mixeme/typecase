@@ -477,6 +477,9 @@ func (g *gen) sec(e *El) string {
 			if k.Has("tc-sec__list--muted") {
 				s += ", Muted: true"
 			}
+			if k.Has("tc-sec__list--cols") {
+				s += ", Columns: true"
+			}
 			items = append(items, s+"}")
 		case k.Has("tc-field__hint"):
 			s := "w.SecHint{Text: " + q(k.Text())

@@ -602,3 +602,69 @@ func TestZonePick(t *testing.T) {
 			focused, left, value, open, back)
 	}
 }
+
+// TestAttendeesSuggest (Carrel's task 77): the attendees of an event are a
+// tag field — with the library's script typing asks the server and an
+// item's template is the tag it adds, a cross takes a tag away, Enter does
+// not send the edit; without a script a cross unticks the tag and the typed
+// words go with the form for the server to find.
+func TestAttendeesSuggest(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	person := func(name, mail, colour string) *w.Tag {
+		return &w.Tag{Label: name, Mark: &w.Mark{Colour: colour, Size: w.MarkH11}, Removable: true, Title: mail, Name: "attendee", Value: "mailto:" + mail}
+	}
+	items := w.MenuItems(w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Вера Лебедева", Adds: person("Вера Лебедева", "vera@example.net", "#A05A2C")},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Вениамин Орлов", Adds: person("Вениамин Орлов", "orlov@example.com", "#4A6B52")})
+	sug := h.RegisterPage("attendees-suggest", items)
+	form := func(action string) string {
+		field := w.Drop{Trigger: w.TagInput{Columns: true, Name: "attendee", Parts: []w.TagInputPart{
+			w.Tag{Label: "Мария Лебедева", Fixed: true, Value: "mailto:m.lebedeva@example.org"},
+			*person("Анна Ковалёва", "a.kovaleva@example.org", "#4A6B52")},
+			Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: sug}},
+			Menu: w.Menu{Width: w.MenuWidth420, Pop: w.MenuUnder}}
+		return `<div class="tc-root"><div class="tc-main"><form action="` + action + `" method="get"><div class="tc-field tc-field--full">` + field.Render() +
+			`</div><button class="send" type="submit">Save</button></form></div></div>`
+	}
+	bareURL := h.RegisterPage("attendees-bare", "")
+	h.RegisterPage("attendees-bare", strings.Replace(browser.PageHTML(form(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))
+	var search string
+	if err := h.Run(bareURL, 900, 600,
+		chromedp.Click(`label.tc-tag--pill svg`, chromedp.ByQuery),
+		chromedp.SendKeys(`.tc-in__add`, "ivan@mail.example", chromedp.ByQuery),
+		chromedp.Click(`.send`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`decodeURIComponent(location.search)`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(search, "attendee=mailto:m.lebedeva") || strings.Contains(search, "kovaleva") || !strings.Contains(search, "attendee.add=ivan@mail.example") {
+		t.Errorf("without a script: sent %q; want the organiser and the typed address, not the untick one", search)
+	}
+	page := h.RegisterPage("attendees", browser.PageHTML(form("/x"), ""))
+	var shown, after, added string
+	var open, gone bool
+	var where string
+	visible := `[...document.querySelectorAll(".tc-drop .tc-menu .tc-menu__item")].filter(e => e.checkVisibility()).map(e => e.textContent.trim()).join("|")`
+	if err := h.Run(page, 900, 600,
+		chromedp.SendKeys(`.tc-in__add`, "ве", chromedp.ByQuery),
+		chromedp.WaitVisible(`.tc-drop .tc-menu .tc-menu__item`, chromedp.ByQuery),
+		chromedp.Evaluate(visible, &shown),
+		chromedp.Click(`.tc-drop .tc-menu .tc-menu__item`, chromedp.ByQuery),
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-in--tags .tc-check__box")].map(b => b.name + "=" + b.value).join("|")`, &added),
+		chromedp.Evaluate(`!document.querySelector(".tc-drop .tc-menu").checkVisibility()`, &gone),
+		chromedp.Click(`label.tc-tag--pill[title="a.kovaleva@example.org"] svg`, chromedp.ByQuery),
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-in--tags .tc-tag")].map(e => e.textContent.trim()).join("|")`, &after),
+		chromedp.Focus(`.tc-in__add`, chromedp.ByQuery),
+		chromedp.KeyEvent("\r"),
+		chromedp.Sleep(200*time.Millisecond),
+		chromedp.Evaluate(`location.pathname`, &where),
+		chromedp.Evaluate(`!!document.querySelector(".tc-drop .tc-menu") && document.querySelector(".tc-drop .tc-menu").checkVisibility()`, &open),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if shown != "Вера Лебедева|Вениамин Орлов" || !gone || !strings.Contains(added, "attendee=mailto:vera@example.net") ||
+		after != "Мария Лебедева|Вера Лебедева" || strings.HasSuffix(where, "/x") || open {
+		t.Errorf("with the script: shown %q, closed %v, ticks %q, tags after a cross %q, Enter went to %q (menu open %v)", shown, gone, added, after, where, open)
+	}
+}

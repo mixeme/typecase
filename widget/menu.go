@@ -64,7 +64,15 @@ type MenuItem struct {
 	// Form is the ID of a PostForm the item submits (Sign out): the item is a
 	// submit button then, sending Name and Value when they are set.
 	Form string
+	// Adds is the tag the item adds to its TagInput: a suggestion of a person
+	// (Carrel's task 77). It waits in a template; the library's script puts it
+	// before the typing line.
+	Adds *Tag
 }
+
+// MenuItems prints menu items without their menu: what a server answers a
+// TagInput's suggestions with (TagAdd.Suggest).
+func MenuItems(items ...MenuPart) string { return joined(items) }
 
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
@@ -132,6 +140,9 @@ func (it MenuItem) html(mix) string {
 	}
 	if it.Trail != nil {
 		s.WriteString(it.Trail.html(nil))
+	}
+	if it.Adds != nil {
+		s.WriteString(`<template>` + it.Adds.html(nil) + `</template>`)
 	}
 	s.WriteString(`</` + tag + `>`)
 	return s.String()

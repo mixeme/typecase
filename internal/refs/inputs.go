@@ -73,6 +73,9 @@ var _ = add(
 	// tc-in as tags
 	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}, "s-tasks-3", "tc-in", 13),
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, "s-notes-4", "tc-in", 6),
+	form("add", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}}, Columns: true, Name: "attendee", Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-3", "tc-in", 14),
+	form("add", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}}, Columns: true, Name: "attendee", Add: &w.TagAdd{Name: "attendee.add", Value: "ве", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-12", "tc-in", 1),
+	form("columns", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}}, Columns: true}, "s-agenda-14", "tc-in", 1),
 	form("wrap", w.TagInput{Wrap: true, Focus: true, Parts: []w.TagInputPart{
 		w.Tag{Label: "Анна Ковалёва · a.kovaleva@example.org", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}},
 		w.Tag{Label: "Артём Белов · a.belov@example.org", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}}}}, "s-mail-1", "tc-in", 1),

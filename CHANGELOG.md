@@ -6,7 +6,25 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Breaking
+
+- `Sec` no longer takes a `Table`: no frame puts one in a section since the
+  attendees became a `SecList` with `Columns` (Carrel's task 77).
+
 ### Added
+
+- **A tag field that is a part of its form, with suggestions** (Carrel's task
+  77, the attendees of an event): `TagInput.Columns` (tags in columns across
+  the width), `TagInput.Name` (each tag with a `Value` sends it; a tag with a
+  cross is a checkbox the cross unticks, so without a script too), `TagInput.Add`
+  (`TagAdd`: the typing line, sent as `Name` without a script; `Suggest` — the
+  library's script asks `Suggest?q=…` and shows the menu items the server
+  answers). `MenuItem.Adds` is the tag an item adds (a template), and
+  `MenuItems` prints the items of that answer. `Tag` gains `Address` (an
+  unknown person, monospaced), `Aside` (their reply), `Title`, `Name`, `Value`
+  and `Fixed` (a pill without a cross: the organiser). `SecList.Columns` sets a
+  section's list in columns. Enter in the typing line chooses and never sends
+  the edit; a cross and Backspace take a tag away. `TestAttendeesSuggest`.
 
 - **`Query.Placeholder`**: what an empty search line says — «Search
   everything…», «Filter the loaded cards» — is a placeholder, not a value; the
@@ -74,6 +92,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- The attendees of an event (Carrel's task 77, the owner's decisions of
+  01.10): in the card a list in columns — a known person by the colour of
+  their book and a link, an unknown one by the address (s-agenda-1, -2,
+  phone-3); in the edit a tag field in columns with suggestions from the
+  ticked books and «Add ‹address›» (s-agenda-3, -12, -13); an invited person
+  sees the same tags without crosses (s-agenda-14). 382 frames.
 - The calendar's frames by the owner's decisions of 01.10 (Carrel's task 77):
   Previous · Today · Next lead the agenda's bar (links; on a narrow screen
   Events · Tasks due · Notes go under «⋯», and the bar's second rank from

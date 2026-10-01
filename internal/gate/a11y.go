@@ -98,19 +98,29 @@ var interactiveHTML = map[string]bool{
 }
 
 // nestedInteractive reports a control inside a link or a button: invalid HTML,
-// and a press on the inner control also fires the outer one.
+// and a press on the inner control also fires the outer one. A template's
+// contents are not the button's: they wait inert for a script (the tag a
+// suggestion adds, Carrel's task 77).
 func nestedInteractive(html string) []string {
 	var bad []string
+	var inside func(outer, n *htmlNode)
+	inside = func(outer, n *htmlNode) {
+		if n.tag == "template" {
+			return
+		}
+		if interactiveHTML[n.tag] {
+			bad = append(bad, "nested-interactive "+describeNode(outer)+" > "+describeNode(n))
+		}
+		for _, k := range n.children {
+			inside(outer, k)
+		}
+	}
 	walkHTML(parseHTML(html), func(outer *htmlNode) {
 		if outer.tag != "a" && outer.tag != "button" {
 			return
 		}
 		for _, kid := range outer.children {
-			walkHTML(kid, func(inner *htmlNode) {
-				if interactiveHTML[inner.tag] {
-					bad = append(bad, "nested-interactive "+describeNode(outer)+" > "+describeNode(inner))
-				}
-			})
+			inside(outer, kid)
 		}
 	})
 	return bad

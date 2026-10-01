@@ -238,17 +238,37 @@ func (Span) tagInputPart() {}
 // TagInput — tc-in
 //
 // Роль. Поле, в котором выбранное стоит тегами, а новое набирают тут же: связанные записи, получатели письма.
-// Вход. TagInput{Parts, Wrap, Focus}.
-// Состояния. tags | wrap | focus.
+// Вход. TagInput{Parts, Wrap, Focus, Columns, Name, Add}.
+// Состояния. tags | wrap | focus | columns | add.
 // Инварианты. Выбранное — теги, их снимают крестиком, а не правят; поле печатает фрагмент своего кадра.
-// Поведение. Набор открывает подсказки под полем; выбор добавляет тег; Backspace в пустой строке снимает последний.
+// Поведение. С Name каждый тег отправляет своё значение, снятый крестиком — нет, и без сценария тоже. Набор открывает подсказки под полем (Add.Suggest: сервер отвечает пунктами меню); выбор добавляет тег; крестик и Backspace в пустой строке снимают тег; Esc закрывает подсказки.
 // Эталон. кадр `s-tasks-3`, фрагмент `span.tc-in.tc-in--tags`.
 // Содержимое. Теги и набранный текст.
 // Чего нет. Ввода UID руками вне подсказок: его пункт стоит в конце списка подсказок.
 type TagInput struct {
-	Parts []TagInputPart
-	Wrap  bool // tags wrap onto more lines: the recipients of a letter
-	Focus bool
+	Parts   []TagInputPart
+	Wrap    bool // tags wrap onto more lines: the recipients of a letter
+	Focus   bool
+	Columns bool // tags stand in columns across the width: the attendees of an event
+	// Name makes the field a part of its form: each tag with a Value sends
+	// it as Name; a tag the cross unticks is not sent.
+	Name string
+	Add  *TagAdd // the line the next tag is typed in
+}
+
+// TagAdd is the line of a TagInput where the next tag is typed.
+type TagAdd struct {
+	// Name is what the typed words are sent as: without a script the server
+	// finds them itself (a name in the contacts, or an address).
+	Name        string
+	Placeholder string // «Name or address»
+	Label       string
+	Value       string // what is typed: the frames of suggestions
+	// Suggest is where the suggestions come from: the library's script asks
+	// Suggest?q=… as one types and shows the menu items the server answers;
+	// an item's Adds is the tag it adds, with the field's Name (MenuItems
+	// prints the answer).
+	Suggest string
 }
 
 // Render prints the tag field.
@@ -260,9 +280,20 @@ func (t TagInput) html(m mix) string {
 	if t.Wrap {
 		variant = "tc-in--wrap-gap5"
 	}
-	s.WriteString(`<span` + class(m, "tc-in", is("focus", t.Focus), variant) + `>`)
+	sug := ""
+	if t.Add != nil {
+		sug = t.Add.Suggest
+	}
+	s.WriteString(`<span` + class(m, "tc-in", is("focus", t.Focus), variant, pick(t.Columns, "tc-in--cols")) + attr("data-tc-suggest", sug) + `>`)
 	for _, p := range t.Parts {
+		if g, ok := p.(Tag); ok {
+			s.WriteString(" " + g.in(nil, t.Name))
+			continue
+		}
 		s.WriteString(" " + p.html(nil))
+	}
+	if a := t.Add; a != nil {
+		s.WriteString(` <input class="tc-in__add" type="text"` + attr("name", a.Name) + attr("value", a.Value) + attr("placeholder", a.Placeholder) + attr("aria-label", a.Label) + ` autocomplete="off">`)
 	}
 	s.WriteString(` </span>`)
 	return s.String()

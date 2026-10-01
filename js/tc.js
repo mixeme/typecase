@@ -136,7 +136,7 @@
 		}
 		t.setAttribute("aria-expanded", "false");
 		openTrigger = null;
-		if (restoreFocus) t.focus();
+		if (restoreFocus) (t.querySelector(".tc-in__add") || t).focus();
 		return true;
 	}
 
@@ -163,8 +163,8 @@
 			document.activeElement.click();
 			return true;
 		} else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-			// Letters typed in a menu's search line are the search's.
-			if (closest(document.activeElement, '.tc-menu > input[type="search"]')) return false;
+			// Letters typed in a menu's search line or a tag field's line are theirs.
+			if (closest(document.activeElement, '.tc-menu > input[type="search"], .tc-in__add')) return false;
 			var ch = e.key.toLowerCase();
 			for (var n = 1; n <= items.length; n++) {
 				var j = (i + n + items.length) % items.length;
@@ -178,6 +178,56 @@
 		e.preventDefault();
 		items[next].focus();
 		return true;
+	}
+
+	// Tag fields with suggestions (attendees, Carrel's task 77): typing asks
+	// the server, which answers with menu items; an item's template is the
+	// tag it adds, before the typing line.
+	var suggestTimer = 0;
+
+	function suggest(line) {
+		var field = closest(line, "[data-tc-suggest]");
+		var pop = field && popupOf(field);
+		if (!pop) return;
+		clearTimeout(suggestTimer);
+		var q = line.value.trim();
+		if (!q) {
+			if (openTrigger === field) closeMenu(false);
+			return;
+		}
+		suggestTimer = setTimeout(function () {
+			var url = field.getAttribute("data-tc-suggest");
+			url += (url.indexOf("?") < 0 ? "?" : "&") + "q=" + encodeURIComponent(q);
+			fetch(url, { credentials: "same-origin", headers: { Accept: "text/html" } })
+				.then(function (r) {
+					return r.ok ? r.text() : "";
+				})
+				.then(function (html) {
+					if (line.value.trim() !== q) return;
+					var menu = menuIn(pop);
+					menu.innerHTML = html.trim();
+					if (!menu.children.length) {
+						if (openTrigger === field) closeMenu(false);
+						return;
+					}
+					if (openTrigger !== field) closeMenu(false);
+					show(pop);
+					field.setAttribute("aria-expanded", "true");
+					openTrigger = field;
+				})
+				.catch(function () {});
+		}, 150);
+	}
+
+	function addTag(field, item) {
+		var tpl = item.querySelector("template");
+		var line = field.querySelector(".tc-in__add");
+		if (tpl && line) {
+			field.insertBefore(document.importNode(tpl.content, true), line);
+			field.insertBefore(document.createTextNode(" "), line);
+			line.value = "";
+		}
+		closeMenu(true);
 	}
 
 	// Layers: a sheet on its scrim, a side panel. What opens one is a control
@@ -294,6 +344,32 @@
 	});
 
 	function onClick(e) {
+		// A tag field: its cross takes the tag away, a press elsewhere goes to
+		// its typing line; its menu is its suggestions, and an item's template
+		// is the tag it adds.
+		var cross = closest(e.target, "svg");
+		var pill = cross && closest(cross, ".tc-in--tags > .tc-tag--pill");
+		if (pill && pill.querySelector(".tc-check__box")) {
+			e.preventDefault();
+			var line = pill.parentElement.querySelector(".tc-in__add");
+			pill.remove();
+			if (line) line.focus();
+			return;
+		}
+		var field = closest(e.target, "[data-tc-suggest]");
+		if (field) {
+			if (!closest(e.target, ".tc-tag")) {
+				var add = field.querySelector(".tc-in__add");
+				if (add && e.target !== add) add.focus();
+			}
+			return;
+		}
+		var sug = openTrigger && openTrigger.hasAttribute("data-tc-suggest") && closest(e.target, '[role="menuitem"]');
+		if (sug) {
+			e.preventDefault();
+			addTag(openTrigger, sug);
+			return;
+		}
 		var t = closest(e.target, triggerSel);
 		if (t && popupOf(t)) {
 			e.preventDefault();
@@ -582,7 +658,29 @@
 		return true;
 	}
 
+	function onTagKey(e) {
+		var line = e.target;
+		if (!line.classList || !line.classList.contains("tc-in__add")) return false;
+		var field = closest(line, ".tc-in--tags");
+		if (e.key === "Enter") {
+			e.preventDefault();
+			var first = openTrigger === field && menuItems()[0];
+			if (first) addTag(field, first);
+			return true;
+		}
+		if (e.key === "Backspace" && !line.value) {
+			var pills = field.querySelectorAll(":scope > .tc-tag--pill:has(> .tc-check__box)");
+			if (pills.length) {
+				e.preventDefault();
+				pills[pills.length - 1].remove();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	function onKeydown(e) {
+		if (onTagKey(e)) return;
 		if (onMoveKey(e)) return;
 		if (openTrigger && onMenuKey(e)) return;
 		if (onSegKey(e)) return;
@@ -608,7 +706,10 @@
 
 	document.addEventListener("click", onClick);
 	document.addEventListener("change", onChange);
-	document.addEventListener("input", onInput);
+	document.addEventListener("input", function (e) {
+		if (e.target.classList && e.target.classList.contains("tc-in__add")) suggest(e.target);
+		else onInput(e);
+	});
 	document.addEventListener("pointerdown", onDragStart);
 	document.addEventListener("pointermove", onDragMove);
 	document.addEventListener("pointerup", onDragEnd);
@@ -617,6 +718,11 @@
 		document.addEventListener(t, onDrag);
 	});
 	document.addEventListener("keydown", onKeydown);
+	// Enter in a tag field's typing line chooses, it never sends the edit —
+	// on keypress too, where implicit submission happens.
+	document.addEventListener("keypress", function (e) {
+		if (e.key === "Enter" && e.target.classList && e.target.classList.contains("tc-in__add")) e.preventDefault();
+	});
 	if (typeof ResizeObserver !== "undefined") {
 		var ro = new ResizeObserver(function () {
 			layoutUpdates();

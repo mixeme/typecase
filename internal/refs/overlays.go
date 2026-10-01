@@ -281,6 +281,23 @@ var _ = add(
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
+	// Carrel's task 77: the suggestions of attendees — people of the ticked books, or the address typed.
+	overlay("found", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Found: []w.Inline{w.Strong("Ве"), w.Text("ра Лебедева")}, Detail: &w.Mono{Text: "vera@example.net", Variant: w.Mono11}, Trail: w.Mono{Text: "Архив", Variant: w.Mono10Dusty, Place: w.Pushed},
+			Adds: &w.Tag{Label: "Вера Лебедева", Mark: &w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, Removable: true, Title: "vera@example.net", Name: "attendee", Value: "mailto:vera@example.net"}},
+		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Found: []w.Inline{w.Strong("Ве"), w.Text("ра Лебедева")}, Detail: &w.Mono{Text: "vera.l@work.example", Variant: w.Mono11}, Trail: w.Mono{Text: "Архив", Variant: w.Mono10Dusty, Place: w.Pushed},
+			Adds: &w.Tag{Label: "Вера Лебедева", Mark: &w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, Removable: true, Title: "vera.l@work.example", Name: "attendee", Value: "mailto:vera.l@work.example"}},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Found: []w.Inline{w.Strong("Ве"), w.Text("ниамин Орлов")}, Detail: &w.Mono{Text: "orlov@example.com", Variant: w.Mono11}, Trail: w.Mono{Text: "Контакты", Variant: w.Mono10Dusty, Place: w.Pushed},
+			Adds: &w.Tag{Label: "Вениамин Орлов", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Title: "orlov@example.com", Name: "attendee", Value: "mailto:orlov@example.com"}},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Found: []w.Inline{w.Text("Се"), w.Strong("ве"), w.Text("рин Ким")}, Detail: &w.Mono{Text: "s.kim@example.org", Variant: w.Mono11}, Trail: w.Mono{Text: "Команда", Variant: w.Mono10Dusty, Place: w.Pushed},
+			Adds: &w.Tag{Label: "Северин Ким", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Removable: true, Title: "s.kim@example.org", Name: "attendee", Value: "mailto:s.kim@example.org"}},
+	}, Width: w.MenuWidth420}, "s-agenda-12", "tc-menu", 1),
+	overlay("on", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "plus", Label: "Add", Detail: &w.Mono{Text: "ivan.petrov@mail.example", Variant: w.Mono11}, On: true,
+			Adds: &w.Tag{Address: &w.Mono{Text: "ivan.petrov@mail.example"}, Removable: true, Title: "ivan.petrov@mail.example", Name: "attendee", Value: "mailto:ivan.petrov@mail.example"}},
+		w.MenuSep{},
+		w.MenuItem{Label: "Not in the ticked address books.", Tone: w.MenuToneAside}}, Width: w.MenuWidth420}, "s-agenda-13", "tc-menu", 1),
+	overlay("pop", w.Menu{Width: w.MenuWidth420, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 2),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},

@@ -353,6 +353,8 @@ func (g *gen) tagInput(x *El) string {
 			parts = append(parts, g.tag(k))
 		case k.Has("tc-dim"):
 			parts = append(parts, g.dimx(k))
+		case k.Has("tc-in__add"):
+			continue
 		default:
 			parts = append(parts, g.inlineEl(k))
 		}
@@ -360,6 +362,34 @@ func (g *gen) tagInput(x *El) string {
 	f := []string{"Parts: []w.TagInputPart{" + join(parts, ", ") + "}"}
 	if x.Has("tc-in--wrap-gap5") {
 		f = append(f, "Wrap: true")
+	}
+	if x.Has("tc-in--cols") {
+		f = append(f, "Columns: true")
+	}
+	name := ""
+	for _, k := range x.Els() {
+		if k.Has("tc-tag") && name == "" {
+			for _, i := range k.Els() {
+				if i.Tag == "input" && i.Attr("name") != "" {
+					name = i.Attr("name")
+				}
+			}
+		}
+	}
+	if name != "" {
+		f = append(f, "Name: "+q(name))
+	}
+	if a := x.Kid("tc-in__add"); a != nil {
+		af := []string{}
+		for _, kv := range [][2]string{{"Name", "name"}, {"Value", "value"}, {"Placeholder", "placeholder"}, {"Label", "aria-label"}} {
+			if v := a.Attr(kv[1]); v != "" {
+				af = append(af, kv[0]+": "+q(v))
+			}
+		}
+		if v := x.Attr("data-tc-suggest"); v != "" {
+			af = append(af, "Suggest: "+q(v))
+		}
+		f = append(f, "Add: &w.TagAdd{"+join(af, ", ")+"}")
 	}
 	if x.Has("is-focus") {
 		f = append(f, "Focus: true")

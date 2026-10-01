@@ -293,12 +293,30 @@ func Agenda1() Screen {
 							w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
 							w.SecList{
 								Items: [][]w.SecItemPart{
-									[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}},
-									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
-									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
-									[]w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Мария Лебедева", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Анна Ковалёва", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· accepted")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Артём Белов", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· tentative")}},
+									},
+									[]w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
 								},
-								Gap: 5,
+								Columns: true,
 							},
 						},
 					},
@@ -436,39 +454,33 @@ func Agenda2() Screen {
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
-							w.Table{
-								Rows: []w.TableRow{
-									{
-										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Мария Лебедева")}},
-											{Parts: []w.CellPart{w.Text("m.lebedeva@example.org")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("organiser")}, Tone: w.CellDusty, Rank: w.Rank3},
-										},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Мария Лебедева", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
 									},
-									{
-										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Анна Ковалёва")}},
-											{Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("accepted")}, Tone: w.CellDusty, Rank: w.Rank3},
-										},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Анна Ковалёва", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· accepted")}},
 									},
-									{
-										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Артём Белов")}},
-											{Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("tentative")}, Tone: w.CellDusty, Rank: w.Rank3},
-										},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "Артём Белов", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· tentative")}},
 									},
-									{
-										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Виктор Гончаров")}},
-											{Parts: []w.CellPart{w.Text("v@example.org")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("no reply")}, Tone: w.CellDusty, Rank: w.Rank3},
-										},
-									},
+									[]w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
 								},
+								Columns: true,
 							},
-							w.SecHint{Text: "Read only: Carrel does not send invitations and does not answer them."},
 						},
 					},
 					w.Sec{
@@ -673,6 +685,71 @@ func Agenda3() Screen {
 									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
 									w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attendees"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.TagInput{
+													Parts: []w.TagInputPart{
+														w.Tag{
+															Label: "Мария Лебедева",
+															Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+															Fixed: true,
+															Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
+															Title: "m.lebedeva@example.org",
+															Name:  "attendee",
+															Value: "mailto:m.lebedeva@example.org",
+														},
+														w.Tag{
+															Label:     "Анна Ковалёва",
+															Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+															Removable: true,
+															Aside:     &w.Dim{Parts: []w.Inline{w.Text("· accepted")}},
+															Title:     "a.kovaleva@example.org",
+															Name:      "attendee",
+															Value:     "mailto:a.kovaleva@example.org",
+														},
+														w.Tag{
+															Label:     "Артём Белов",
+															Mark:      &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+															Removable: true,
+															Aside:     &w.Dim{Parts: []w.Inline{w.Text("· tentative")}},
+															Title:     "a.belov@example.org",
+															Name:      "attendee",
+															Value:     "mailto:a.belov@example.org",
+														},
+														w.Tag{
+															Address:   &w.Mono{Text: "v@example.org"},
+															Removable: true,
+															Aside:     &w.Dim{Parts: []w.Inline{w.Text("· no reply")}},
+															Title:     "v@example.org",
+															Name:      "attendee",
+															Value:     "mailto:v@example.org",
+														},
+													},
+													Columns: true,
+													Name:    "attendee",
+													Add: &w.TagAdd{
+														Name:        "attendee.add",
+														Placeholder: "Name or address",
+														Label:       "Add attendee",
+														Suggest:     "/app/contacts/suggest",
+													},
+												},
+												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
 								},
 							},
 							w.FieldSet{
