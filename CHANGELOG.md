@@ -35,6 +35,10 @@ do, not what the authors did.
   month and its records, a term and its value — the screen may repeat the
   block any number of times, each like one of the frame's; terms and values
   repeat by tag, so `dd` and `dd.tc-mono` are one value. `TestRepeatsAnyLength`.
+- Frames drawn whole (task 62, the owner's decision of 01.10): the read-only
+  book with its bar and groups (states-4), the edit without a photo and the new
+  contact with their whole forms (s-contacts-4, -27); the second phone's label
+  is a pick, as the form sends (s-contacts-3). 373 frames.
 
 ### Mockup
 

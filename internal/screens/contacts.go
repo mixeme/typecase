@@ -521,7 +521,7 @@ func Contacts3() Screen {
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},
 									w.Grow{},
-									w.Field{Parts: []w.FieldPart{w.Input{Value: "work", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "work", Label: "Label"}}, Width: w.FieldXS},
 									w.Field{
 										Parts: []w.FieldPart{w.Input{Value: "+7 495 120-45-00", Label: "Number", Mono: true}},
 										Width: w.FieldMD,
@@ -695,6 +695,58 @@ func Contacts4() Screen {
 									w.Button{Label: "Add phone", Icon: "plus", Small: true},
 								},
 							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Email addresses"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Address",
+										Parts: []w.FieldPart{w.Input{Value: "a.kovaleva@example.org", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Button{Label: "Add email", Icon: "plus", Small: true},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Addresses"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "home"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Street",
+										Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}},
+										Width: w.FieldLG,
+									},
+									w.Field{Label: "City", Parts: []w.FieldPart{w.Input{Value: "Москва", Label: "City"}}, Width: w.FieldSM},
+									w.Field{Label: "Region", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Region"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Postcode",
+										Parts: []w.FieldPart{w.Input{Value: "123001", Label: "Postcode", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{Label: "Country", Parts: []w.FieldPart{w.Input{Value: "Россия", Label: "Country"}}, Width: w.FieldSM},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Button{Label: "Add address", Icon: "plus", Small: true},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Tags",
+										Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Tags"}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Note",
+										Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}},
+										Width: w.FieldFull,
+									},
+								},
+							},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
 						},
 					},
 					w.FormFoot{
@@ -802,6 +854,32 @@ func Contacts27() Screen {
 									w.Button{Label: "Add phone", Icon: "plus", Small: true},
 								},
 							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Email addresses"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Address",
+										Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Button{Label: "Add email", Icon: "plus", Small: true},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Addresses"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add address", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldLG},
+									w.Field{Label: "Note", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
+								},
+							},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
 						},
 					},
 				},

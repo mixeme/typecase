@@ -273,6 +273,44 @@ func States4() Screen {
 							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}},
 						},
 					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+								Waiting: true,
+								Variant: w.FilterH26W220,
+							},
+							w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						More: &w.Button{Icon: "dots", Title: "More"},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.CheckForm{
+									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Action: "/app/contacts",
+									Apply:  w.Button{Label: "Apply", Small: true},
+								},
+								w.Mono{Text: "13"},
+							},
+							Secondary: true,
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "И", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Initials: "ИФ"},
+								Title:    []w.Inline{w.Text("Ирина Фомина")},
+								Subtitle: "+7 900 000-00-00",
+								Detail:   "—",
+								Caption:  "—",
+								Source:   "radicale · vps · Команда",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "К", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
@@ -281,15 +319,6 @@ func States4() Screen {
 								Title:    []w.Inline{w.Text("Пётр Ковалёв")},
 								Subtitle: "—",
 								Detail:   "p.kovalev@example.org",
-								Caption:  "—",
-								Source:   "radicale · vps · Команда",
-							},
-							w.FaceRow{
-								Mark:     w.Mark{Colour: "#6B4E7A"},
-								Avatar:   w.Avatar{Initials: "ИФ"},
-								Title:    []w.Inline{w.Text("Ирина Фомина")},
-								Subtitle: "+7 900 000-00-00",
-								Detail:   "—",
 								Caption:  "—",
 								Source:   "radicale · vps · Команда",
 							},

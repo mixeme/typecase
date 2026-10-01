@@ -3318,7 +3318,7 @@ Read  2 min ago</div>
             <div class="tc-field tc-field--md"><label>Number</label><input class="tc-in is-mono" type="text" value="+7 912 445-10-88" aria-label="Number"></div>
             <button class="tc-btn is-danger" type="button">Remove</button>
             <div class="tc-grow"></div>
-            <div class="tc-field tc-field--xs"><input class="tc-in" type="text" value="work" aria-label="Label"></div>
+            <div class="tc-field tc-field--xs"><button class="tc-in is-pick" type="button" aria-label="Label">work</button></div>
             <div class="tc-field tc-field--md"><input class="tc-in is-mono" type="text" value="+7 495 120-45-00" aria-label="Number"></div>
             <button class="tc-btn is-danger" type="button">Remove</button>
             <div class="tc-grow"></div>
@@ -3502,6 +3502,35 @@ Read  2 min ago</div>
             <div class="tc-grow"></div>
             <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add phone</button>
           </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Email addresses</div>
+            <div class="tc-field tc-field--xs"><label>Label</label><button class="tc-in is-pick" type="button">work</button></div>
+            <div class="tc-field tc-field--lg"><label>Address</label><input class="tc-in" type="text" value="a.kovaleva@example.org" aria-label="Address"></div>
+            <button class="tc-btn is-danger" type="button">Remove</button>
+            <div class="tc-grow"></div>
+            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add email</button>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Addresses</div>
+            <div class="tc-field tc-field--xs"><label>Label</label><button class="tc-in is-pick" type="button">home</button></div>
+            <div class="tc-field tc-field--lg"><label>Street</label><input class="tc-in" type="text" value="ул. Садовая, 12, кв. 5" aria-label="Street"></div>
+            <div class="tc-field tc-field--sm"><label>City</label><input class="tc-in" type="text" value="Москва" aria-label="City"></div>
+            <div class="tc-field tc-field--sm"><label>Region</label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Region"></div>
+            <div class="tc-field tc-field--xs"><label>Postcode</label><input class="tc-in is-mono" type="text" value="123001" aria-label="Postcode"></div>
+            <div class="tc-field tc-field--sm"><label>Country</label><input class="tc-in" type="text" value="Россия" aria-label="Country"></div>
+            <button class="tc-btn is-danger" type="button">Remove</button>
+            <div class="tc-grow"></div>
+            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add address</button>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Other</div>
+            <div class="tc-field tc-field--lg"><label>Tags</label><input class="tc-in" type="text" value="работа, издательство" aria-label="Tags"></div>
+            <div class="tc-field tc-field--full"><label>Note</label><textarea class="tc-in is-area">Пишет по вторникам, отвечает в тот же день.</textarea></div>
+          </div>
+          <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
         </div>
         <div class="tc-formfoot"><span class="tc-dim tc-dim--t11-5">Properties Carrel does not know are kept unchanged.</span></div>
       </div>
@@ -3568,6 +3597,27 @@ Read  2 min ago</div>
             <div class="tc-grow"></div>
             <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add phone</button>
           </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Email addresses</div>
+            <div class="tc-field tc-field--xs"><label>Label</label><button class="tc-in is-pick" type="button">work</button></div>
+            <div class="tc-field tc-field--lg"><label>Address</label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Address"></div>
+            <button class="tc-btn is-danger" type="button">Remove</button>
+            <div class="tc-grow"></div>
+            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add email</button>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Addresses</div>
+            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add address</button>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Other</div>
+            <div class="tc-field tc-field--lg"><label>Tags</label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Tags"></div>
+            <div class="tc-field tc-field--full"><label>Note</label><textarea class="tc-in is-area"></textarea></div>
+          </div>
+          <div class="tc-field"><button class="tc-btn" type="button">Show 6 empty fields</button></div>
         </div>
       </div>
     </div>
@@ -17610,9 +17660,20 @@ SMTP  mail.home.example:465  TLS
         <div class="tc-main">
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Команда <span class="tc-badge">read-only</span></div><div class="tc-head__sub">radicale · vps · the server granted no write access</div></div>
             <div class="tc-acts"><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div></div>
+          <div class="tc-bar">
+            <label class="tc-in is-ph tc-in--h26-w220"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter the loaded cards" aria-label="Filter the loaded cards"></label>
+            <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">A–Z</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+            <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+            <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/contacts" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-mono">13</span></span>
+          </div>
+          <div class="tc-list__group"><span class="tc-rubric">И</span><span class="tc-num">1</span></div>
+          <div class="tc-list">
+            <div class="tc-row tc-row--avatarcols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-avatar">ИФ</span><span class="tc-row__title">Ирина Фомина</span><span class="tc-row__excerpt tc-mono tc-row__subtitle">+7 900 000-00-00</span><span class="tc-row__excerpt tc-row__detail">—</span><span class="tc-row__excerpt tc-row__caption">—</span><span class="tc-row__cell tc-row__source">radicale · vps · Команда</span></div>
+          </div>
+          <div class="tc-list__group"><span class="tc-rubric">К</span><span class="tc-num">1</span></div>
           <div class="tc-list">
             <div class="tc-row tc-row--avatarcols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-avatar">ПК</span><span class="tc-row__title">Пётр Ковалёв</span><span class="tc-row__excerpt tc-mono tc-row__subtitle">—</span><span class="tc-row__excerpt tc-row__detail">p.kovalev@example.org</span><span class="tc-row__excerpt tc-row__caption">—</span><span class="tc-row__cell tc-row__source">radicale · vps · Команда</span></div>
-            <div class="tc-row tc-row--avatarcols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-avatar">ИФ</span><span class="tc-row__title">Ирина Фомина</span><span class="tc-row__excerpt tc-mono tc-row__subtitle">+7 900 000-00-00</span><span class="tc-row__excerpt tc-row__detail">—</span><span class="tc-row__excerpt tc-row__caption">—</span><span class="tc-row__cell tc-row__source">radicale · vps · Команда</span></div>
           </div>
         </div>
       </div>

@@ -83,6 +83,7 @@ var _ = add(
 	// tc-in as a text area
 	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 15),
 	form("area", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 21),
+	form("area-empty", w.Area{Label: "Text"}, "s-contacts-27", "tc-in", 13),
 	form("body", w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}, "s-notes-5", "tc-in", 2),
 	form("title", w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Title"}, "s-notes-20", "tc-in", 1),
 	form("body", w.Area{Text: noteBody, Variant: w.AreaBody, Focus: true, Label: "Text"}, "s-notes-20", "tc-in", 7),
