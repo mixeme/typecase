@@ -48,6 +48,11 @@ var _ = add(
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn", 3),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
 	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-mail-1", "tc-btn", 3),
+	// The summary of a closed menu is its button (Drop prints it so).
+	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 18),
+	primitive("menu", w.Button{Label: "Attach", Icon: "up", Menu: true}, "s-agenda-3", "tc-btn", 6),
+	primitive("icon", w.Button{Icon: "dots", Title: "More"}, "s-contacts-6", "tc-btn", 6),
+	primitive("small", w.Button{Icon: "dots", Title: "More", Small: true}, "s-contacts-7", "tc-btn", 13),
 	primitive("variant", w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Sections"}, "phone-1", "tc-btn", 1),
 	primitive("with-content", w.Button{Label: "B", Bold: true}, "components-29", "tc-btn", 3),
 	primitive("variant", w.Button{Icon: "quill", IconBox: w.IconBox16, Variant: w.ButtonPadX8, Kind: w.ButtonPrimary, Title: "New note"}, "phone-1", "tc-btn", 3),

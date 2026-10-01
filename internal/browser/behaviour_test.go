@@ -536,3 +536,69 @@ func TestCheckFormSubmits(t *testing.T) {
 		t.Errorf("with the script: no Apply %v, sent %q; want true and compact=1", hidden, search)
 	}
 }
+
+// TestZonePick (Carrel's task 73): a time zone is a pick with a menu of radio
+// items — without a script the chosen one goes with the form (the search line
+// is not shown: there is nothing to search with); with the library's script
+// the search keeps what matches, and the choice becomes the pick's value.
+func TestZonePick(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	zone := func(label, value string, on bool) w.MenuItem {
+		return w.MenuItem{Label: label, Name: "tz", Value: value, On: on}
+	}
+	drop := w.Drop{Trigger: w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"},
+		Menu: w.Menu{Items: []w.MenuPart{
+			w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+			w.Rubric{Text: "As sent", Form: w.RubricInline},
+			zone("Europe/Moscow", "Europe/Moscow", true),
+			w.MenuSep{},
+			zone("Asia/Yekaterinburg", "Asia/Yekaterinburg", false),
+			zone("UTC", "UTC", false),
+			w.MenuSep{},
+			zone("Floating — the same clock time anywhere", "floating", false)}, Width: w.MenuWidth290, Pop: w.MenuUnder}}
+	form := func(action string) string {
+		return `<div class="tc-root"><div class="tc-main"><form action="` + action + `" method="get">` + drop.Render() +
+			`<button class="send" type="submit">Save</button></form></div></div>`
+	}
+	bareURL := h.RegisterPage("zone-bare", "")
+	h.RegisterPage("zone-bare", strings.Replace(browser.PageHTML(form(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))
+	var searchShown bool
+	var search string
+	if err := h.Run(bareURL, 900, 600,
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector('.tc-menu > input[type="search"]').checkVisibility()`, &searchShown),
+		chromedp.Click(`label:has(> input[value="UTC"])`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector(".tc-drop").open = false`, nil),
+		chromedp.Click(`.send`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if searchShown || !strings.Contains(search, "tz=UTC") {
+		t.Errorf("without a script: search shown %v, sent %q; want false, tz=UTC", searchShown, search)
+	}
+	page := h.RegisterPage("zone", browser.PageHTML(form("/x"), ""))
+	var focused, left, value, back string
+	var open bool
+	visibleItems := `[...document.querySelectorAll(".tc-menu > :not(input)")].filter(e => e.checkVisibility()).map(e => e.textContent.trim() || e.className).join("|")`
+	if err := h.Run(page, 900, 600,
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.activeElement.type`, &focused),
+		chromedp.SendKeys(`.tc-menu > input[type="search"]`, "yek", chromedp.ByQuery),
+		chromedp.Evaluate(visibleItems, &left),
+		chromedp.Click(`label:has(> input[value="Asia/Yekaterinburg"])`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector("details.tc-drop > summary").textContent`, &value),
+		chromedp.Evaluate(`document.querySelector("details.tc-drop").open`, &open),
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Click(`label:has(> input[value="Europe/Moscow"])`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector("details.tc-drop > summary").textContent`, &back),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if focused != "search" || left != "Asia/Yekaterinburg" || value != "Asia/Yekaterinburg" || open || back != "Europe/Moscow as sent" {
+		t.Errorf("with the script: focus %q, left %q, value %q, open %v, back %q; want search, Asia/Yekaterinburg, Asia/Yekaterinburg, false, Europe/Moscow as sent",
+			focused, left, value, open, back)
+	}
+}

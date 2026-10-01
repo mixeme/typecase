@@ -50,7 +50,10 @@ type MenuItem struct {
 	Href string
 	// Name makes the item a checkbox of the menu's form (Menu.Action): ticked
 	// (Tick), it sends Value; the items' order is the order they are sent in.
-	// Fixed keeps it ticked and off: a column that is always shown.
+	// Fixed keeps it ticked and off: a column that is always shown. Without a
+	// Tick, a Form or an Href, Name makes it a radio button of the form the
+	// menu stands in: one of the items, the chosen one (On) sends its Value —
+	// a time zone (Carrel's task 73).
 	Name  string
 	Value string
 	Fixed bool
@@ -76,6 +79,19 @@ func (it MenuItem) html(mix) string {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 		}
 		s.WriteString(`<span` + class(nil, "tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[it.Tick.Ticked]) + `></span>` + esc(it.Label))
+		if it.Trail != nil {
+			s.WriteString(it.Trail.html(nil))
+		}
+		s.WriteString(`</label>`)
+		return s.String()
+	}
+	if it.Name != "" && it.Form == "" && it.Href == "" {
+		s.WriteString(`<label` + cls + `><input class="tc-seg__box" type="radio" role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
+			flag("checked", it.On) + flag("disabled", it.Reason != "") + `>`)
+		if it.Icon != "" {
+			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
+		}
+		s.WriteString(esc(it.Label))
 		if it.Trail != nil {
 			s.WriteString(it.Trail.html(nil))
 		}
@@ -235,11 +251,11 @@ const (
 //
 // Роль. Меню: действия с записью, выбор значения, куда записать, подсказки поиска, настройка колонок.
 // Вход. Menu{Items, Width, Pop, Fields, Inline, Action, Hidden}.
-// Состояния. on | icons | marks | danger | heading | pop | fields | found | form.
+// Состояния. on | icons | marks | danger | heading | pop | fields | found | form | radio.
 // Инварианты. Пункт — кнопка с ролью пункта меню; ширина и место — перечисления; меню печатает фрагмент своего кадра.
-// Поведение. Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла.
+// Поведение. Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла; строка поиска оставляет пункты, где есть набранное (без сценария её нет).
 // Эталон. кадр `components-1`, фрагмент `.tc-menu`.
-// Содержимое. Пункты (значок, метка, галка, название, приглушённый хвост, клавиша), разделители, заголовки, поле, строка с переключателем, диапазон, подвал.
+// Содержимое. Пункты (значок, метка, галка, название, приглушённый хвост, клавиша; радио формы вокруг), строка поиска, разделители, заголовки, поле, строка с переключателем, диапазон, подвал.
 // Чего нет. Вложенных меню: второй уровень — лист или страница.
 type Menu struct {
 	Items  []MenuPart
@@ -297,7 +313,7 @@ func (TagInput) dropTrigger() {}
 // Вход. Drop{Trigger, Menu, More, Open}.
 // Состояния. more | pick.
 // Инварианты. Меню стоит сразу за тем, что его открывает; «⋯» бара — кнопка бара и тогда, когда она в выпадашке; выпадашка печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус.
+// Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус; у выбора с меню из радио (пояс) выбранный пункт становится значением выбора.
 // Эталон. кадр `components-19`, фрагмент `.tc-drop`.
 // Содержимое. Кнопка или поле выбора, меню.
 // Чего нет. Своего вида: вид у кнопки и меню; закрытая открывается и без сценария (details).

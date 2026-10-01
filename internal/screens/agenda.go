@@ -631,7 +631,23 @@ func Agenda3() Screen {
 									w.Field{
 										Label: "Time zone",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}},
+											w.Drop{
+												Trigger: w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+														w.Rubric{Text: "As sent", Form: w.RubricInline},
+														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+														w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 										},
 										Width: w.FieldMD,
 									},

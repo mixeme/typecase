@@ -36,6 +36,13 @@ do, not what the authors did.
 - **`Seg.Multiple`**: a switch with a Name may be a row of checkboxes —
   several options at once, each ticked one sent: the days of a repeat
   (s-agenda-3, task 72).
+- **A pick with a menu to search and choose from** (task 73): a time zone
+  is a closed `Drop` with a `Pick` and a menu of radio items (`MenuItem` with
+  a `Name` and no `Tick`) — a search line, «As sent», rules. Without a script
+  the chosen zone goes with the edit form and the search line is not shown;
+  with the library's script the search keeps what matches and the choice
+  becomes the pick's value (s-agenda-3, -8). `TestZonePick`. A record may
+  stand on a closed menu's `summary`: it is its trigger button.
 - **`shape` is strict about what is missing** (task 76): a run of the screen
   is no shorter than the frame's, and each element the frame draws in it is
   on the screen but for its states — a head's Print, a card's Related, a

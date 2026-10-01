@@ -272,15 +272,24 @@ var _ = add(
 		w.MenuItem{Label: "Tentative"},
 		w.MenuItem{Label: "Confirmed", On: true},
 		w.MenuItem{Label: "Cancelled"}}, Width: w.MenuWidth212}, "s-agenda-7", "tc-menu", 1),
-	overlay("on", w.Menu{Items: []w.MenuPart{
+	overlay("radio", w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
-		w.MenuItem{Label: "Europe/Moscow", On: true},
+		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Asia/Yekaterinburg"},
-		w.MenuItem{Label: "UTC"},
+		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Floating — the same clock time anywhere"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
+		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
+	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+		w.Rubric{Text: "As sent", Form: w.RubricInline},
+		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Does not repeat"},
 		w.MenuSep{},
@@ -488,6 +497,15 @@ var _ = add(
 	overlay("closed", w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 2),
+	overlay("pick", w.Drop{Trigger: w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, Menu: w.Menu{Items: []w.MenuPart{
+		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+		w.Rubric{Text: "As sent", Form: w.RubricInline},
+		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, "s-agenda-3", "tc-drop", 1),
 	overlay("more", w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
 		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "components-19", "tc-drop", 1),

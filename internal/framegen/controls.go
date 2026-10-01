@@ -556,7 +556,7 @@ func (g *gen) control(x *El) string {
 	switch {
 	case x.Tag == "input" && x.Has("tc-in"):
 		return g.input(x)
-	case (x.Tag == "button" || x.Tag == "select") && x.Has("tc-in") && x.Has("is-pick"):
+	case (x.Tag == "button" || x.Tag == "select" || x.Tag == "summary") && x.Has("tc-in") && x.Has("is-pick"):
 		return g.pick(x)
 	case (x.Tag == "label" || x.Tag == "form") && x.Has("tc-in"):
 		return g.filter(x)

@@ -497,6 +497,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* Выбор из меню с поиском (пояс): без сценария искать нечем — строки поиска нет, пункты-радио уходят с формой. */
+[data-tc-noscript] .tc-menu > .tc-in[type=search]{display:none}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
@@ -511,7 +513,7 @@ details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 /* Поиск в длинном списке — поле во всю ширину меню, над строками. */
 .tc-menu > .tc-in{display:block;width:100%;margin-bottom:4px}
 .tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
-.tc-menu__item.is-on{background:var(--tc-card)}
+.tc-menu__item.is-on,.tc-menu__item:has(> .tc-seg__box:checked){background:var(--tc-card)}
 /* Пункт-флажок меню-формы (Columns): отмечен — столбец показан; ручка тянет пункт, порядок пунктов — порядок столбцов. */
 label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__item.is-drag{opacity:.5}

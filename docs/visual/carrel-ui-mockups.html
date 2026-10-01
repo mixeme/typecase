@@ -678,6 +678,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* Выбор из меню с поиском (пояс): без сценария искать нечем — строки поиска нет, пункты-радио уходят с формой. */
+[data-tc-noscript] .tc-menu > .tc-in[type=search]{display:none}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
@@ -692,7 +694,7 @@ details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 /* Поиск в длинном списке — поле во всю ширину меню, над строками. */
 .tc-menu > .tc-in{display:block;width:100%;margin-bottom:4px}
 .tc-menu__item{display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;font-size:12.5px}
-.tc-menu__item.is-on{background:var(--tc-card)}
+.tc-menu__item.is-on,.tc-menu__item:has(> .tc-seg__box:checked){background:var(--tc-card)}
 /* Пункт-флажок меню-формы (Columns): отмечен — столбец показан; ручка тянет пункт, порядок пунктов — порядок столбцов. */
 label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__item.is-drag{opacity:.5}
@@ -4709,7 +4711,7 @@ Read  2 min ago · changed on server 3 days ago</div>
             <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="10:00" aria-label="Start time"></div>
             <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="End date"></div>
             <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="11:00" aria-label="End time"></div>
-            <div class="tc-field tc-field--md"><label>Time zone</label><button class="tc-in is-pick" type="button">Europe/Moscow <span class="tc-dim tc-dim--ml6">as sent</span></button></div>
+            <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Europe/Moscow <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow" checked>Europe/Moscow</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg">Asia/Yekaterinburg</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
           </div>
 
           <div class="tc-fset">
@@ -4775,12 +4777,12 @@ SEQUENCE  2</div>
       <div class="tc-menu tc-menu--w290">
         <input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone">
         <span class="tc-rubric">As sent</span>
-        <button class="is-on tc-menu__item" type="button" role="menuitem">Europe/Moscow</button>
+        <label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow" checked>Europe/Moscow</label>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">Asia/Yekaterinburg</button>
-        <button class="tc-menu__item" type="button" role="menuitem">UTC</button>
+        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg">Asia/Yekaterinburg</label>
+        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">Floating — the same clock time anywhere</button>
+        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label>
       </div>
     </div>
   </div>

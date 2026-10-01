@@ -114,8 +114,14 @@
 		else show(pop);
 		trigger.setAttribute("aria-expanded", "true");
 		openTrigger = trigger;
+		// A menu with a search (a time zone) opens whole, on its search line.
+		var q = pop.querySelector('.tc-menu > input[type="search"]');
+		if (q && q.value) {
+			q.value = "";
+			onInput({ target: q });
+		}
 		placeMenu(trigger, pop);
-		var first = pop.querySelector('[role="menuitem"]');
+		var first = pop.querySelector('.tc-menu > input[type="search"], [role="menuitem"], [role="menuitemradio"]');
 		if (first) first.focus();
 	}
 
@@ -137,7 +143,10 @@
 	function menuItems() {
 		if (!openTrigger) return [];
 		var pop = popupOf(openTrigger);
-		return pop ? Array.prototype.slice.call(pop.querySelectorAll('[role="menuitem"]')) : [];
+		if (!pop) return [];
+		return Array.prototype.filter.call(pop.querySelectorAll('[role="menuitem"], [role="menuitemradio"]'), function (el) {
+			return visible(closest(el, ".tc-menu__item") || el);
+		});
 	}
 
 	function onMenuKey(e) {
@@ -149,7 +158,13 @@
 		else if (e.key === "ArrowUp") next = i < 0 ? items.length - 1 : Math.max(i - 1, 0);
 		else if (e.key === "Home") next = 0;
 		else if (e.key === "End") next = items.length - 1;
-		else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+		else if (e.key === "Enter" && document.activeElement && document.activeElement.type === "radio" && items.indexOf(document.activeElement) >= 0) {
+			e.preventDefault();
+			document.activeElement.click();
+			return true;
+		} else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+			// Letters typed in a menu's search line are the search's.
+			if (closest(document.activeElement, '.tc-menu > input[type="search"]')) return false;
 			var ch = e.key.toLowerCase();
 			for (var n = 1; n <= items.length; n++) {
 				var j = (i + n + items.length) % items.length;
@@ -492,6 +507,67 @@
 
 	function onChange(e) {
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		if (e.target.matches && e.target.matches('.tc-menu__item > input[type="radio"]')) choosePick(e.target);
+	}
+
+	// A pick's menu of radio items (a time zone): the chosen item's words
+	// become the pick's value — the value it came with keeps its aside («as
+	// sent») — and the menu closes. Without the script the radio is chosen
+	// all the same and goes with the form.
+	function choosePick(radio) {
+		var menu = closest(radio, ".tc-menu");
+		menu.querySelectorAll('.tc-menu__item > input[name="' + radio.name + '"]').forEach(function (r) {
+			closest(r, ".tc-menu__item").classList.toggle("is-on", r === radio);
+		});
+		var d = holder(menu);
+		var pick = d && d.firstElementChild;
+		if (!pick || !pick.classList.contains("is-pick")) return;
+		if (!pick.hasAttribute("data-tc-first")) pick.setAttribute("data-tc-first", pick.innerHTML);
+		if (radio.defaultChecked) pick.innerHTML = pick.getAttribute("data-tc-first");
+		else pick.textContent = closest(radio, ".tc-menu__item").textContent.trim();
+		if (openTrigger === pick) closeMenu(true);
+		else d.open = false;
+	}
+
+	// A menu's search line keeps the items that have what is typed; a heading
+	// or a rule with nothing left beside it goes too.
+	function onInput(e) {
+		var q = e.target;
+		if (!q.matches || !q.matches('.tc-menu > input[type="search"]')) return;
+		var text = q.value.trim().toLowerCase();
+		var groups = [[]];
+		Array.prototype.forEach.call(q.parentElement.children, function (el) {
+			if (el === q) return;
+			if (el.classList.contains("tc-menu__sep")) groups.push(el, []);
+			else groups[groups.length - 1].push(el);
+		});
+		var shown = [];
+		groups.forEach(function (g, i) {
+			if (!Array.isArray(g)) return;
+			var any = false;
+			g.forEach(function (el) {
+				if (!el.classList.contains("tc-menu__item")) return;
+				var ok = !text || el.textContent.toLowerCase().indexOf(text) >= 0;
+				if (ok) show(el);
+				else hide(el);
+				any = any || ok;
+			});
+			g.forEach(function (el) {
+				if (el.classList.contains("tc-menu__item")) return;
+				if (any) show(el);
+				else hide(el);
+			});
+			shown[i] = any;
+		});
+		groups.forEach(function (g, i) {
+			if (Array.isArray(g)) return;
+			// A rule stands between what is left: something above it, and its
+			// own group below.
+			var before = false;
+			for (var j = i - 1; j >= 0; j--) if (Array.isArray(groups[j]) && shown[j]) before = true;
+			if (before && shown[i + 1]) show(g);
+			else hide(g);
+		});
 	}
 
 	function onSegKey(e) {
@@ -532,6 +608,7 @@
 
 	document.addEventListener("click", onClick);
 	document.addEventListener("change", onChange);
+	document.addEventListener("input", onInput);
 	document.addEventListener("pointerdown", onDragStart);
 	document.addEventListener("pointermove", onDragMove);
 	document.addEventListener("pointerup", onDragEnd);

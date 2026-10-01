@@ -380,9 +380,10 @@ func (g *gen) menuItem(k *El) string {
 	var f []string
 	found := false
 	box := k.Kid("tc-check__box")
+	radio := k.Kid("tc-seg__box")
 	for _, x := range k.Els() {
 		switch {
-		case x == box:
+		case x == box || x == radio:
 			continue
 		case box != nil && x.Has("tc-tickrow__tick"):
 			t := ""
@@ -440,6 +441,9 @@ func (g *gen) menuItem(k *El) string {
 		if v := k.Attr("name"); v != "" {
 			f = append(f, "Name: "+q(v), "Value: "+q(k.Attr("value")))
 		}
+	}
+	if radio != nil {
+		f = append(f, "Name: "+q(radio.Attr("name")), "Value: "+q(radio.Attr("value")))
 	}
 	if box != nil {
 		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
