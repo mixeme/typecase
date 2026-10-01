@@ -6,6 +6,13 @@ do, not what the authors did.
 
 ## Unreleased
 
+## typecase/v0.11.0 — 2026-10-01
+
+### Breaking
+
+- **`Head.Tools` is `[]HeadTool`** — a `Button` or a `Drop` — instead of
+  `[]Button`: a panel's «⋯» stands among its tools with its menu.
+
 ### Added
 
 - **`shape` knows the meaning of HTML everywhere.** An element with classes
@@ -45,6 +52,9 @@ do, not what the authors did.
 - **`FieldsItem.Href`**: a card's value goes somewhere — `mailto:`, `tel:`, the
   linked record; it looks like the value, underlined under the pointer, and
   `shape` reads the link as the value (Carrel's task 52).
+
+- `TestFramesLadder` measures a child from the nearest box above when its
+  parent is `display:contents` (the phone bar's navs).
 
 ### Mockup
 
