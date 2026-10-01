@@ -271,6 +271,8 @@ func (g *gen) empty(e *El) string {
 				ps = append(ps, g.dimx(v))
 			case v.Tag == "b" && v.Has("tc-dim--accent"):
 				ps = append(ps, "w.Emphasis("+q(v.Text())+")")
+			case v.Tag == "b" && len(v.Cls()) == 0:
+				ps = append(ps, "w.Strong("+q(v.Text())+")")
 			case v.Has("tc-mono"):
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-kbd"):

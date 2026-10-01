@@ -39,6 +39,11 @@ do, not what the authors did.
   book with its bar and groups (states-4), the edit without a photo and the new
   contact with their whole forms (s-contacts-4, -27); the second phone's label
   is a pick, as the form sends (s-contacts-3). 373 frames.
+- The states of contacts have their frames (task 66), in the chapter of
+  states: no book ticked (states-7), the poll still running (states-8), a source
+  refused (states-9), an empty book (states-10), a book whose server did not
+  answer (states-11), an edit whose save lost properties (states-12). 379
+  frames.
 
 ### Mockup
 

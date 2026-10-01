@@ -10,6 +10,8 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep these properties."), w.Text(" Other clients will not see them either: "), w.Mono{Text: "X-ABLABEL"}, w.Text(", "), w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"}, w.Text(", "), w.Mono{Text: "X-EVOLUTION-FILE-AS"}, w.Text(".")}, Space: w.MsgFlushTop2}, "states-12", "tc-msg", 1),
+	cards("titled-alert", w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, "states-11", "tc-msg", 1),
 	cards("titled-action", w.Msg{Parts: []w.MsgPart{w.Strong("The server did not take tasks."), w.Text(" The server made «Дом» for events only and said nothing of the tasks you asked for. Tasks need another calendar: make one for them on this server or another. "), w.Button{Label: "New calendar", Small: true}}}, "s-agenda-11", "tc-msg", 1),
 	cards("bot12", w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12}, "s-admin-17", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush}, "s-admin-14", "tc-msg", 1),
@@ -81,6 +83,7 @@ var _ = add(
 	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
+	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards")}}, "states-8", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Span{Face: w.FaceDanger, Text: "1 unavailable"}}}, "dark-1", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 5 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}, w.Text(" · radicale · vps · Архив does not keep links")}}, "mentions-5", "tc-runbar", 1),
@@ -122,6 +125,7 @@ var _ = add(
 		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}}}}, "s-conflict-2", "tc-diff", 1),
 
 	// tc-empty
+	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("No books are ticked."), w.Text(" Tick the books to show in the rail, or all of them at once. "), w.Button{Label: "Tick every book", Kind: w.ButtonPrimary}}}, "states-7", "tc-empty", 1),
 	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Span{Face: w.FaceAccent, Text: "Show 50 more", Href: "/app/mail/home/inbox?shown=100"}}, Variant: w.EmptyDusty}, "s-mailbox-1", "tc-empty", 1),
 	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing this day.")}, Variant: w.EmptySmall}, "s-agenda-1", "tc-empty", 1),
 	cards("action", w.Empty{Parts: []w.EmptyPart{w.Text("No contacts in this address book."), w.Button{Label: "New contact", Kind: w.ButtonPrimary}}}, "components-22", "tc-empty", 1),

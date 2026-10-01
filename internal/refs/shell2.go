@@ -59,6 +59,10 @@ var _ = add(
 	shell("selection", w.Bar{Items: []w.BarPart{w.Button{Icon: "down", Title: "More"}, w.Button{Icon: "move", Title: "More"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"}, w.Button{Icon: "close", Title: "More", Place: w.Pushed}}, Count: &w.BarCount{Text: "2 selected", Small: true}, Variant: w.BarSelection}, "phone-6", "tc-bar", 1),
 
 	// tc-main
+	shell("alert-diag", w.Main{Items: []w.MainPart{
+		w.Head{Title: &w.HeadTitle{Text: "Контакты"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "up"}}}},
+		w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert},
+		w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-main", 1),
 	shell("cards", w.Main{Items: []w.MainPart{
 		w.MainCards{Cards: []w.Card{w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
