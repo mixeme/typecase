@@ -275,18 +275,18 @@ var _ = add(
 	overlay("radio", w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
-		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+		w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
-		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+		w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
@@ -497,12 +497,12 @@ var _ = add(
 	overlay("closed", w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 2),
-	overlay("pick", w.Drop{Trigger: w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, Menu: w.Menu{Items: []w.MenuPart{
+	overlay("pick", w.Drop{Trigger: w.Pick{Value: "Asia/Yekaterinburg", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
-		w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+		w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+		w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, "s-agenda-3", "tc-drop", 1),
@@ -546,7 +546,15 @@ var _ = add(
 	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}}, w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Overdue"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}}, "components-19", "tc-bar", 1),
-	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Secondary: true, Action: "/app/calendar"}, w.BarSep{Secondary: true}, w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+	overlay("closed", w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+		w.MenuSep{Tertiary: true},
+		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
+		w.MenuSep{},
+		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}, "states-3", "tc-drop", 1),
+	overlay("more", w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, w.Button{Label: "Today", Href: "/app/calendar"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"}, w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Secondary: true, Action: "/app/calendar"}, w.BarSep{Secondary: true}, w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},

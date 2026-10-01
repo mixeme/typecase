@@ -414,7 +414,7 @@ var _ = add(
 			w.Prose{Parts: []w.Inline{w.Text("Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.")}, Variant: w.Prose13}}},
 		w.Sec{Items: []w.SecPart{
 			w.Rubric{Text: "Attendees 4"},
-			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}},
+			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Gap: 5}}},
 		w.FootActs{Items: []w.Button{w.Button{Label: "Write a note"}, w.Button{Label: "Delete", Kind: w.ButtonDangerSolid}}}}}, "phone-3", "tc-main", 1),
 	shell("phone", w.Main{Items: []w.MainPart{
 		w.ListGroup{Title: w.Rubric{Text: "А"}, Count: &w.Num{Value: 3}},

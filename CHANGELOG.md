@@ -74,6 +74,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- The calendar's frames by the owner's decisions of 01.10 (Carrel's task 77):
+  Previous · Today · Next lead the agenda's bar (links; on a narrow screen
+  Events · Tasks due · Notes go under «⋯», and the bar's second rank from
+  1100), New event has its arrow, the agenda names both its addresses, rails
+  keep the server's order, the organiser is the attendees' first row, an event
+  is edited in its own zone (s-agenda-1..3, -8, phone-3); the states of loading
+  and of a source that did not answer have the whole rail, head and bar
+  (states-3, -6). A new icon: `next`.
 - The timeline is where a person takes part, not where they are mentioned:
   the glossary and the captions say so (Carrel's task 70).
 

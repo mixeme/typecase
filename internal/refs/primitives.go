@@ -49,7 +49,8 @@ var _ = add(
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
 	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-mail-1", "tc-btn", 3),
 	// The summary of a closed menu is its button (Drop prints it so).
-	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 18),
+	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 21),
+	primitive("link", w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, "s-agenda-1", "tc-btn", 11),
 	primitive("menu", w.Button{Label: "Attach", Icon: "up", Menu: true}, "s-agenda-3", "tc-btn", 6),
 	primitive("icon", w.Button{Icon: "dots", Title: "More"}, "s-contacts-6", "tc-btn", 6),
 	primitive("small", w.Button{Icon: "dots", Title: "More", Small: true}, "s-contacts-7", "tc-btn", 13),
@@ -97,7 +98,7 @@ var _ = add(
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH32}, "phone-1", "tc-mark", 1),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 1),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH19}, "s-agenda-1", "tc-mark", 17),
-	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 6),
+	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 11),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH12}, "s-notes-2", "tc-mark", 3),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH14}, "desktop-8", "tc-mark", 1),
 	primitive("focus", w.Mark{Colour: "#8C6239", Size: w.MarkH18, Focus: true}, "s-profile-10", "tc-mark", 12),

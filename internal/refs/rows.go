@@ -20,7 +20,7 @@ var _ = add(
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312"}, "s-io-1", "tc-tickrow", 1),
 	rows("nested", w.TickRow{Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "cal."}, "s-backup-2", "tc-tickrow", 3),
 	rows("nested", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowNested, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "cal."}, "s-backup-2", "tc-tickrow", 4),
-	rows("loading", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 2),
+	rows("loading", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 3),
 	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"}, "phone-2", "tc-tickrow", 3),
 	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "ro"}, "components-11", "tc-tickrow", 6),
 	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "ro", Hidden: true}, "s-agenda-1", "tc-tickrow", 9),
@@ -198,11 +198,11 @@ var _ = add(
 	rows("pick", w.PhoneRow{Pick: &w.TickBox{Ticked: w.TickedOff}, Icon: "file", Title: "2026-07", Sub: []w.Inline{w.Text("34 items")}, SubMono: true, More: &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}}, "phone-6", "tc-row", 3),
 
 	// tc-skel
-	rows("fill", w.Skel{}, "states-3", "tc-skel", 5),
+	rows("fill", w.Skel{}, "states-3", "tc-skel", 8),
 	rows("sized", w.Skel{Width: w.Skel16}, "states-3", "tc-skel", 1),
-	rows("sized", w.Skel{Width: w.Skel60}, "states-3", "tc-skel", 6),
-	rows("sized", w.Skel{Width: w.Skel45}, "states-3", "tc-skel", 10),
-	rows("sized", w.Skel{Width: w.Skel52}, "states-3", "tc-skel", 14),
+	rows("sized", w.Skel{Width: w.Skel60}, "states-3", "tc-skel", 9),
+	rows("sized", w.Skel{Width: w.Skel45}, "states-3", "tc-skel", 13),
+	rows("sized", w.Skel{Width: w.Skel52}, "states-3", "tc-skel", 17),
 )
 
 func init() {

@@ -730,7 +730,25 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}
 }
 @container tcbox (min-width:461px){
-  .tc-menu .is-3rd{display:none}
+  .tc-menu:not(.tc-bar--wide .tc-menu) .is-3rd{display:none}
+}
+/* Полоса агенды начинается листанием (Previous · Today · Next, задача 77): целиком
+   ей нужно около 1070 px, поэтому её is-2nd уходит под «⋯» с 1100. */
+@container tcbox (max-width:1100px){
+  .tc-bar--wide:has(> .tc-btn:first-child) .is-2nd{display:none}
+  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Полоса агенды с листанием (задача 77): Previous · Today · Next стоят первыми, и
+   с отметками третьего ранга ей нужно около 625 px — уже 640 они уходят под «⋯»,
+   а их двойники в меню видны. */
+@container tcbox (max-width:640px){
+  .tc-bar--wide > .is-3rd{display:none}
+  .tc-bar--wide:has(> .is-3rd) .tc-bar__more,.tc-bar--wide:has(> .is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(> .is-3rd) .tc-bar__more + .tc-menu{display:block}
+}
+@container tcbox (min-width:641px){
+  .tc-bar--wide .tc-menu .is-3rd{display:none}
 }
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){

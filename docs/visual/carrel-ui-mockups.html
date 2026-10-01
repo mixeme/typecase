@@ -911,7 +911,25 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}
 }
 @container tcbox (min-width:461px){
-  .tc-menu .is-3rd{display:none}
+  .tc-menu:not(.tc-bar--wide .tc-menu) .is-3rd{display:none}
+}
+/* Полоса агенды начинается листанием (Previous · Today · Next, задача 77): целиком
+   ей нужно около 1070 px, поэтому её is-2nd уходит под «⋯» с 1100. */
+@container tcbox (max-width:1100px){
+  .tc-bar--wide:has(> .tc-btn:first-child) .is-2nd{display:none}
+  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Полоса агенды с листанием (задача 77): Previous · Today · Next стоят первыми, и
+   с отметками третьего ранга ей нужно около 625 px — уже 640 они уходят под «⋯»,
+   а их двойники в меню видны. */
+@container tcbox (max-width:640px){
+  .tc-bar--wide > .is-3rd{display:none}
+  .tc-bar--wide:has(> .is-3rd) .tc-bar__more,.tc-bar--wide:has(> .is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(> .is-3rd) .tc-bar__more + .tc-menu{display:block}
+}
+@container tcbox (min-width:641px){
+  .tc-bar--wide .tc-menu .is-3rd{display:none}
 }
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){
@@ -1821,7 +1839,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V4h10v5"/><rect x="4" y="9" width="16" height="7" rx="1"/><rect x="7" y="14" width="10" height="6"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V6"/><path d="M7 11l5-5 5 5"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v14"/><path d="M7 13l5 5 5-5"/></symbol>
-  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
   <symbol id="i-dots" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.3l3 1.7"/></symbol>
   <symbol id="i-link" viewBox="0 0 24 24"><path d="M10.5 13.5a4 4 0 0 0 5.7 0l2.3-2.3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M13.5 10.5a4 4 0 0 0-5.7 0l-2.3 2.3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
@@ -4338,8 +4356,8 @@ Read  2 min ago</div>
 <div class="note"><b>Единый вид живёт здесь, а не в отдельном разделе.</b> Первая строка в списке источников — <b>Combined calendar</b>. Флажки решают, что опрашивается; полоска собрана из цветов всех коллекций. Выбор одной коллекции ниже сужает тот же экран до одного источника — устройство страницы не меняется. То же в контактах (<b>Combined address book</b>), задачах (<b>Combined list</b>) и заметках (<b>Combined notebook</b>).<br><br><b>Почему не «All».</b> Флажки решают, что опрашивается, и «все» — только один случай из многих. Имя в единственном числе верно при любом наборе галочек: <b>это один календарь, собранный из нескольких</b>, — трёхпозиционный флажок показывает, из скольких. В файлах приставки нет: <b>Selected collections</b> — корень раздела, не единый вид; содержимое хранилищ не смешивается.</div>
 
 <figure>
-<div class="frame" data-frame="s-agenda-1" data-screen="/app/calendar/{account}/{col}">
-  <div class="frame-label"><span>Календарь · агенда со списком и карточкой</span><i>/app/calendar/{account}/{col}</i></div>
+<div class="frame" data-frame="s-agenda-1" data-screen="/app/calendar /app/calendar/{account}/{col}">
+  <div class="frame-label"><span>Календарь · агенда со списком и карточкой</span><i>/app/calendar · /app/calendar/{account}/{col}</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -4365,14 +4383,14 @@ Read  2 min ago</div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">7</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">radicale · vps</div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">2</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-tickrow__meta">1</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">2</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">baikal</div>
@@ -4405,13 +4423,14 @@ Read  2 min ago</div>
             <div class="tc-head__sub">5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · <span class="tc-mono">Europe/Moscow</span></div>
           </div>
           <div class="tc-acts">
-            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event</button>
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
           </div>
         </div>
         <div class="tc-bar tc-bar--wide">
+          <a class="tc-btn" href="/app/calendar?from=2026-08-03" title="Previous week"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg></a><a class="tc-btn" href="/app/calendar">Today</a><a class="tc-btn" href="/app/calendar?from=2026-08-17" title="Next week"><svg viewBox="0 0 24 24"><use href="#i-next"/></svg></a>
           <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
           <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-bar__sep is-2nd"></span>
@@ -4514,6 +4533,7 @@ Read  2 min ago</div>
         <div class="tc-sec">
           <div class="tc-rubric">Attendees <span class="tc-mono tc-mono--ls0">4</span></div>
           <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+            <li>Мария Лебедева <span class="tc-dim">· organiser</span></li>
             <li>Анна Ковалёва <span class="tc-dim">· accepted</span></li>
             <li>Артём Белов <span class="tc-dim">· tentative</span></li>
             <li>Виктор Гончаров <span class="tc-dim">· no reply</span></li>
@@ -4539,8 +4559,8 @@ Read  2 min ago · changed on server 3 days ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Это и есть единый вид.</b> Открыт <b>Combined calendar</b>: события пяти коллекций с трёх серверов в одной хронологии, у каждой строки — своя полоска и своя колонка источника. Отдельный раздел «всё сразу» для этого не нужен и убран. <b>Что ещё изменилось.</b> Время — моноширинным в своей колонке, как в брендбуке. Появились колонки «место», «состояние» и «источник»: именно они оправдывают ширину. Полоска коллекции — 3&nbsp;px слева, единственное цветное пятно. Недоступный <code>baikal</code> помечен в рейле «password · 401» и кнопкой <b>Retry</b> рядом с ним — голый код без слова и без действия был тупиком. Одной строкой то же самое стоит в панели опроса — поверх списка ничего не выпадает. <b>Исходный часовой пояс</b> стоит меткой рядом со временем и только тогда, когда он отличается от общего: встреча, заведённая в другом поясе, иначе показывается «не в то время», и человек не понимает, ошибка это или так задумано. Данные для метки уже лежат в <code>DTSTART</code> с <code>TZID</code> — это S-22 — прозрачность, которая дешевле любой новой функции: данные уже получены. Карточка открывается справа, список остаётся на месте: просмотр десяти событий — десять нажатий, а не двадцать переходов. Блок <b>Source</b> — это S-22: когда коллекцию читали и когда её меняли на сервере, показывается там, где данные уже есть.
-<br><br><b>Day / Week / Month / Range</b> — четыре масштаба одной агенды, а не четыре разных экрана. День — та же лента, один день; его не хватало между неделей и произвольным диапазоном, и без него переключатель врал, что ближайший шаг от «сейчас» — неделя. Месяц собирает дни в сетку, Range оставляет поля дат, которые уже стоят рядом.
+<figcaption><b>Это и есть единый вид.</b> Открыт <b>Combined calendar</b>: события пяти коллекций с трёх серверов в одной хронологии, у каждой строки — своя полоска и своя колонка источника. Отдельный раздел «всё сразу» для этого не нужен и убран. <b>Что ещё изменилось.</b> Время — моноширинным в своей колонке, как в брендбуке. Появились колонки «место», «состояние» и «источник»: именно они оправдывают ширину. Полоска коллекции — 3&nbsp;px слева, единственное цветное пятно. Недоступный <code>baikal</code> помечен в рейле «password · 401» и кнопкой <b>Retry</b> рядом с ним — голый код без слова и без действия был тупиком. Одной строкой то же самое стоит в панели опроса — поверх списка ничего не выпадает. <b>Исходный часовой пояс</b> в строке не стоит: время строки — в поясе человека, и лента читается подряд. Пояс, в котором событие заведено, назван в карточке — меткой у When, — там, где его и сверяют (S-22, данные уже лежат в <code>DTSTART</code> с <code>TZID</code>). Карточка открывается справа, список остаётся на месте: просмотр десяти событий — десять нажатий, а не двадцать переходов. Блок <b>Source</b> — это S-22: когда коллекцию читали и когда её меняли на сервере, показывается там, где данные уже есть.
+<br><br><b>Previous · Today · Next</b> стоят в полосе перед масштабом и листают его шаг — день, неделю, месяц; это ссылки, они работают и без сценария. <b>New event</b> со стрелкой: в едином виде он спрашивает, в какой календарь писать, как New contact в едином списке.<br><br><b>Day / Week / Month / Range</b> — четыре масштаба одной агенды, а не четыре разных экрана. День — та же лента, один день; его не хватало между неделей и произвольным диапазоном, и без него переключатель врал, что ближайший шаг от «сейчас» — неделя. Месяц собирает дни в сетку, Range оставляет поля дат, которые уже стоят рядом.
 <br><br><b>Флажки «Events / Tasks due / Notes»</b> в панели диапазона — то, что было смешанной хронологией «Everything»: задача со сроком и заметка за этот день встают в ту же ленту, к своей дате. Это единственное место, где виды записей смешиваются, и оно там, где смешивать их осмысленно — на календарной оси. Одно дежурство в двух календарях стоит двумя строками, каждая со своим календарём, и ничем не помечено: подозрение на дубликат не висит вопросом во время работы. Если две записи мешают, путь — экран дубликатов; если пара найдена по ошибке, она никого не отвлекает. В одну строку «2 sources» их сворачивает только связывание.
 <br><br><b>Теги стоят в рейле</b> — как у задач и заметок: фильтр по <code>CATEGORIES</code>, а не только поле Categories на карточке события.</figcaption>
 </figure>
@@ -4580,9 +4600,9 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">128</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">41</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
@@ -4614,6 +4634,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-sec">
           <div class="tc-rubric">Attendees <span class="tc-mono tc-mono--ls0">4</span></div>
           <table class="tc-table">
+            <tr><td>Мария Лебедева</td><td class="tc-mono">m.lebedeva@example.org</td><td class="tc-table__n3 tc-table__n3--dusty">organiser</td></tr>
             <tr><td>Анна Ковалёва</td><td class="tc-mono">a.kovaleva@example.org</td><td class="tc-table__n3 tc-table__n3--dusty">accepted</td></tr>
             <tr><td>Артём Белов</td><td class="tc-mono">a.belov@example.org</td><td class="tc-table__n3 tc-table__n3--dusty">tentative</td></tr>
             <tr><td>Виктор Гончаров</td><td class="tc-mono">v@example.org</td><td class="tc-table__n3 tc-table__n3--dusty">no reply</td></tr>
@@ -4686,9 +4707,9 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
           <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">7</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
@@ -4708,10 +4729,10 @@ Read  2 min ago · changed on server 3 days ago</div>
             <div class="tc-rubric">When</div>
             <div class="tc-field"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
             <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="Start date"></div>
-            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="10:00" aria-label="Start time"></div>
+            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="12:00" aria-label="Start time"></div>
             <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="End date"></div>
-            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="11:00" aria-label="End time"></div>
-            <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Europe/Moscow <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow" checked>Europe/Moscow</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg">Asia/Yekaterinburg</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
+            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="13:00" aria-label="End time"></div>
+            <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Asia/Yekaterinburg <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg" checked>Asia/Yekaterinburg</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow">Europe/Moscow</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
           </div>
 
           <div class="tc-fset">
@@ -4751,7 +4772,7 @@ SEQUENCE  2</div>
     </div>
   </div>
 </div>
-<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: стоит у каждого события со временем, иначе пояс не сменить; у события в поясе экземпляра она этот пояс и показывает. Второе напоминание подписано «Reminder» — как строка, которую добавляет «Add reminder».</figcaption>
+<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: стоит у каждого события со временем, иначе пояс не сменить; у события в поясе экземпляра она этот пояс и показывает. Событие заведено в Asia/Yekaterinburg — и правится в нём: 12:00–13:00 там — это 10:00–11:00 в Москве, как в карточке. Второе напоминание подписано «Reminder» — как строка, которую добавляет «Add reminder».</figcaption>
 </figure>
 
 <div class="frames">
@@ -4777,9 +4798,9 @@ SEQUENCE  2</div>
       <div class="tc-menu tc-menu--w290">
         <input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone">
         <span class="tc-rubric">As sent</span>
-        <label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow" checked>Europe/Moscow</label>
+        <label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg" checked>Asia/Yekaterinburg</label>
         <span class="tc-menu__sep"></span>
-        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg">Asia/Yekaterinburg</label>
+        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow">Europe/Moscow</label>
         <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label>
         <span class="tc-menu__sep"></span>
         <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label>
@@ -17579,19 +17600,45 @@ SMTP  mail.home.example:465  TLS
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">nextcloud</div>
+            <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-skel tc-skel--w16"></span></div>
             <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-skel tc-skel--w16"></span></div>
             <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-skel tc-skel--w16"></span></div>
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">radicale · vps</div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-skel tc-skel--w16"></span></div>
             <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-skel tc-skel--w16"></span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">baikal</div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-skel tc-skel--w16"></span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Subscriptions <span class="tc-badge">external</span></div>
+            <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">ro</span></div>
+            <div class="tc-tickrow is-ext is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Расписание лиги</span><span class="tc-tickrow__meta">ro</span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Tags</div>
+            <div class="tc-line tc-line--gap-4 tc-railsec__tags">
+              <span class="tc-tag is-on">all</span><span class="tc-tag">релиз</span><span class="tc-tag">работа</span>
+            </div>
           </div>
           <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
         </div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">5 of 7 calendars · 10 – 16 August 2026</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
+          </div>
+          <div class="tc-bar tc-bar--wide">
+            <a class="tc-btn" href="/app/calendar?from=2026-08-03" title="Previous week"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg></a><a class="tc-btn" href="/app/calendar">Today</a><a class="tc-btn" href="/app/calendar?from=2026-08-17" title="Next week"><svg viewBox="0 0 24 24"><use href="#i-next"/></svg></a>
+            <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
+            <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
+            <span class="tc-bar__sep is-2nd"></span>
+            <form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
+            <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right"><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick"></span>Events</button><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Tasks due</button><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Notes</button><span class="tc-menu__sep is-3rd"></span><span class="tc-range tc-range--wrap"><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" aria-label="To"><button class="tc-btn" type="button">Show</button></span><span class="tc-menu__sep"></span><button class="tc-menu__item" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Compact rows</button></span></details>
+            <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
           </div>
           <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="22%"></i></span>Polling 6 sources…<span class="tc-mono tc-push">0.4 s</span></div>
           <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span></div>
@@ -17765,19 +17812,45 @@ SMTP  mail.home.example:465  TLS
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">nextcloud</div>
+            <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
             <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">1</span></div>
             <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">1</span></div>
           </div>
           <div class="tc-railsec">
+            <div class="tc-rubric">radicale · vps</div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-tickrow__meta">0</span></div>
+            <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">0</span></div>
+          </div>
+          <div class="tc-railsec">
             <div class="tc-rubric">baikal</div>
             <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Subscriptions <span class="tc-badge">external</span></div>
+            <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">ro</span></div>
+            <div class="tc-tickrow is-ext is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Расписание лиги</span><span class="tc-tickrow__meta">ro</span></div>
+          </div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Tags</div>
+            <div class="tc-line tc-line--gap-4 tc-railsec__tags">
+              <span class="tc-tag is-on">all</span><span class="tc-tag">релиз</span><span class="tc-tag">работа</span>
+            </div>
           </div>
           <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
         </div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">6 of 7 calendars · one source did not answer</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
+          </div>
+          <div class="tc-bar tc-bar--wide">
+            <a class="tc-btn" href="/app/calendar?from=2026-08-03" title="Previous week"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg></a><a class="tc-btn" href="/app/calendar">Today</a><a class="tc-btn" href="/app/calendar?from=2026-08-17" title="Next week"><svg viewBox="0 0 24 24"><use href="#i-next"/></svg></a>
+            <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
+            <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
+            <span class="tc-bar__sep is-2nd"></span>
+            <form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
+            <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right"><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick"></span>Events</button><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Tasks due</button><button class="tc-menu__item is-3rd" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Notes</button><span class="tc-menu__sep is-3rd"></span><span class="tc-range tc-range--wrap"><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" aria-label="To"><button class="tc-btn" type="button">Show</button></span><span class="tc-menu__sep"></span><button class="tc-menu__item" type="button" role="menuitem"><span class="tc-tickrow__tick is-off"></span>Compact rows</button></span></details>
+            <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
           </div>
           <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="83%"></i></span>Polled 5 of 6 · <span class="tc-dim--danger">baikal · Общий: 401 Unauthorized</span><span class="tc-push"><button class="tc-btn is-sm" type="button">Retry</button></span></div>
           <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">2</span></div>
@@ -18613,7 +18686,7 @@ dav: HTTP 503: the server is busy</div></div>
           <dt>Status</dt><dd>Confirmed</dd>
         </dl>
         <div class="tc-sec"><div class="tc-rubric">Description</div><div class="tc-prose tc-prose--t13">Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.</div></div>
-        <div class="tc-sec"><div class="tc-rubric">Attendees 4</div><ul class="tc-stack tc-stack--gap-5 tc-sec__list"><li>Анна Ковалёва <span class="tc-dim">· accepted</span></li><li>Артём Белов <span class="tc-dim">· tentative</span></li></ul></div>
+        <div class="tc-sec"><div class="tc-rubric">Attendees 4</div><ul class="tc-stack tc-stack--gap-5 tc-sec__list"><li>Мария Лебедева <span class="tc-dim">· organiser</span></li><li>Анна Ковалёва <span class="tc-dim">· accepted</span></li><li>Артём Белов <span class="tc-dim">· tentative</span></li><li>Виктор Гончаров <span class="tc-dim">· no reply</span></li></ul></div>
         <div class="tc-line tc-line--gap-8 tc-main__foot-acts">
           <button class="tc-btn tc-btn--jc-center-fill" type="button">Write a note</button>
           <button class="tc-btn is-danger-solid tc-btn--jc-center" type="button">Delete</button>

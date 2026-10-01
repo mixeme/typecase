@@ -40,7 +40,7 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.Input11Fill, Label: "Link"}, "s-admin-1", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Documents · sftpgo / carrel-backup/…", Variant: w.Input11Fill, Label: "Folder"}, "components-20", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"}, "s-agenda-8", "tc-in", 1),
-	form("aside", w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, "s-agenda-3", "tc-in", 10),
+	form("aside", w.Pick{Value: "Asia/Yekaterinburg", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, "s-agenda-3", "tc-in", 10),
 	form("error", w.Input{Value: "nextcloud", Error: true, Focus: true, Label: "Label"}, "s-profile-11", "tc-in", 1),
 	form("disabled", w.Input{Kind: w.InputPassword, Label: "Password", Disabled: true}, "s-profile-14", "tc-in", 4),
 	form("variant", w.Input{Value: "…/remote.php/dav/calendars/mix/birthdays/", Mono: true, Variant: w.InputDusty, Label: "Address"}, "s-profile-7", "tc-in", 2),

@@ -303,7 +303,7 @@ var _ = add(
 		w.SecHint{Text: "Linked on the duplicates screen. The records stay on their own servers; here they are shown as one person.", Apart: true}}}, "s-contacts-7", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTightPlain}}},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Gap: 5}}}, "s-agenda-1", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Gap: 5}}}, "s-agenda-1", "tc-sec", 2),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("посадочный-казань.pdf "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}}, w.Text(" "), w.Badge{Label: "in the task"}}}, Gap: 6},
@@ -333,7 +333,7 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Анна Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Общий")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "А. Ковалёва"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· baikal · Работа")}}}}, Gap: 5}}}, "mentions-1", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attendees 4"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}}, Gap: 5}}}, "phone-3", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Gap: 5}}}, "phone-3", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "desktop-1", "tc-sec", 1),
@@ -564,6 +564,7 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("administrator")}}, {Parts: []w.CellPart{w.Text("2026-03-12")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 09:14")}, Mono: true}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("anna")}}, {Parts: []w.CellPart{w.Text("user")}}, {Parts: []w.CellPart{w.Text("2026-04-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:02")}, Mono: true}}, State: w.RowPicked}}}, "components-23", "tc-table", 1),
 	cards("plain", w.Table{Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Мария Лебедева")}}, {Parts: []w.CellPart{w.Text("m.lebedeva@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("organiser")}, Tone: w.CellDusty, Rank: w.Rank3}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("accepted")}, Tone: w.CellDusty, Rank: w.Rank3}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("tentative")}, Tone: w.CellDusty, Rank: w.Rank3}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Виктор Гончаров")}}, {Parts: []w.CellPart{w.Text("v@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("no reply")}, Tone: w.CellDusty, Rank: w.Rank3}}}}}, "s-agenda-2", "tc-table", 1),

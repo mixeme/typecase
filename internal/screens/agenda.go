@@ -44,16 +44,16 @@ func Agenda1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
 					},
 				},
 				w.RailSec{
@@ -109,7 +109,7 @@ func Agenda1() Screen {
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
 								w.Button{Label: "Import", Icon: "up"},
 								w.Button{Label: "Export", Icon: "down"},
 								w.Button{Label: "Print", Icon: "print"},
@@ -118,6 +118,9 @@ func Agenda1() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
+							w.Button{Label: "Today", Href: "/app/calendar"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
 							w.Seg{
 								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
 							},
@@ -290,6 +293,7 @@ func Agenda1() Screen {
 							w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
 							w.SecList{
 								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}},
 									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
 									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
 									[]w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
@@ -380,9 +384,9 @@ func Agenda2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "128", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "41"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 					},
 				},
 				w.RailFoot{
@@ -434,6 +438,13 @@ func Agenda2() Screen {
 							w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
 							w.Table{
 								Rows: []w.TableRow{
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Мария Лебедева")}},
+											{Parts: []w.CellPart{w.Text("m.lebedeva@example.org")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("organiser")}, Tone: w.CellDusty, Rank: w.Rank3},
+										},
+									},
 									{
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Анна Ковалёва")}},
@@ -562,9 +573,9 @@ func Agenda3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 					},
 				},
 				w.RailFoot{
@@ -615,7 +626,7 @@ func Agenda3() Screen {
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "10:00", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "12:00", Label: "Start time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -625,21 +636,24 @@ func Agenda3() Screen {
 									},
 									w.Field{
 										Label: "End time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:00", Label: "End time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "13:00", Label: "End time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Time zone",
 										Parts: []w.FieldPart{
 											w.Drop{
-												Trigger: w.Pick{Value: "Europe/Moscow", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}},
+												Trigger: w.Pick{
+													Value: "Asia/Yekaterinburg",
+													Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent},
+												},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 														w.Rubric{Text: "As sent", Form: w.RubricInline},
-														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+														w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 														w.MenuSep{},
-														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+														w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 														w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 														w.MenuSep{},
 														w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"},

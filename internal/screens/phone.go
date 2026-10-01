@@ -196,8 +196,10 @@ func Phone3() Screen {
 							w.Rubric{Text: "Attendees 4"},
 							w.SecList{
 								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}},
 									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
 									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
+									[]w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
 								},
 								Gap: 5,
 							},
