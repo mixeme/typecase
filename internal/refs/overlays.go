@@ -8,6 +8,16 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("closed", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "move", Label: "Move"},
+		w.MenuItem{Icon: "dup", Label: "Copy"},
+		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 1),
+	overlay("closed-end", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "move", Label: "Move"},
+		w.MenuItem{Icon: "dup", Label: "Copy"},
+		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-contacts-6", "tc-menu", 1),
 	overlay("long", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "contact"},
 		w.MenuItem{Label: "acquaintance"},

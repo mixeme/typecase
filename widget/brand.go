@@ -265,6 +265,7 @@ func (Badge) actsPart()  {}
 func (Field) actsPart()  {}
 func (Filter) actsPart() {}
 func (Seg) actsPart()    {}
+func (Drop) actsPart()   {}
 
 // Acts — tc-acts
 //

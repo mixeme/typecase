@@ -36,6 +36,7 @@ type FieldsItem struct {
 	Term  string
 	Value []ValuePart
 	Face  ValueFace
+	Href  string // the value goes somewhere: mailto:, tel:, the linked record
 }
 
 // FieldsVariant is the drawn form of a panel's fields.
@@ -79,8 +80,14 @@ func (f Fields) html(m mix) string {
 	s.WriteString(`<dl` + class(m, "tc-fields", f.Place.class(), f.Variant.class()) + `>`)
 	for _, it := range f.Items {
 		s.WriteString(`<dt>` + esc(it.Term) + `</dt><dd` + class(nil, it.Face.class()) + `>`)
+		if it.Href != "" {
+			s.WriteString(`<a class="tc-fields__link"` + attr("href", it.Href) + `>`)
+		}
 		for _, p := range it.Value {
 			s.WriteString(p.html(nil))
+		}
+		if it.Href != "" {
+			s.WriteString(`</a>`)
 		}
 		s.WriteString(`</dd>`)
 	}

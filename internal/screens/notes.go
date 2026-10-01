@@ -129,7 +129,7 @@ func Notes1() Screen {
 				Items: []w.SidePart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Заметка со встречи 10.08", Size: w.HeadTitle19},
-						Tools: []w.Button{
+						Tools: []w.HeadTool{
 							w.Button{Label: "Edit", Small: true},
 							w.Button{Icon: "expand", Small: true, Title: "Open the note page"},
 							w.Button{Icon: "dots", Small: true, Title: "More"},

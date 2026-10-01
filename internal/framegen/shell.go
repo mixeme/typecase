@@ -75,7 +75,7 @@ func (g *gen) titlesInto(box *El, f []string) []string {
 			}
 			f = append(f, "Kicker: &w.Rubric{Text: "+q(k.OwnText())+v+"}")
 		case k.Has("tc-sec__acts"):
-			f = append(f, "Tools: []w.Button{"+g.buttons(k.Els())+"}")
+			f = append(f, "Tools: []w.HeadTool{"+g.buttons(k.Els())+"}")
 		case k.Has("tc-head__text"):
 			f = g.titlesInto(k, f)
 		case k.Has("tc-avatar--photo"):
@@ -1392,6 +1392,9 @@ func (g *gen) child(e *El) string {
 		if e.Has(t.c) {
 			return t.fn(e)
 		}
+	}
+	if e.Has("tc-drop") {
+		return g.drop(e)
 	}
 	switch {
 	case e.Has("tc-close"):

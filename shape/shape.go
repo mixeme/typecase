@@ -16,7 +16,9 @@
 // the screen, any of them chosen or badged). So one of two buttons of one
 // shape side by side — Import next to Export — is not missed: words are not
 // compared. What is not compared: text, attributes,
-// the options of a select, the hidden fields of a form. Nor is the element's
+// the options of a select, the hidden fields of a form, a picture in an
+// avatar or a thumbnail (Src: data, the frame draws the place), the menu
+// of a button with its menu (the frames draw it beside the screen). Nor is the element's
 // tag when it has classes: its look is its classes, and the meaning of HTML
 // (docs/development.md, Р-25, Р-27) changes the tag, not the look — a button
 // or words that are a link, a check or a segment that is a label around its
@@ -94,19 +96,76 @@ func dropped(n *fragment.Node) bool {
 		if c == "tc-check__box" || c == "tc-seg__box" || c == "tc-post" {
 			return true
 		}
+		// A picture in its place is data, not drawing: the frame draws the
+		// place (initials on a colour, a tile), the screen fills it (Src).
+		if c == "tc-avatar__img" || c == "tc-thumb__img" {
+			return true
+		}
 	}
 	return n.Tag == "option"
 }
 
+// dataClass says whether a class of an element is its data, not its kind:
+// an avatar with a photo or with initials is the same avatar.
+func dataClass(classes []string, c string) bool {
+	if c != "is-photo" {
+		return false
+	}
+	for _, x := range classes {
+		if x == "tc-avatar" {
+			return true
+		}
+	}
+	return false
+}
+
+// kids are an element's children, with a value's link (tc-fields__link)
+// opened: the link is the value's meaning, its words are the value (task 52).
+func kids(n *fragment.Node) []*fragment.Node {
+	var out []*fragment.Node
+	for _, k := range n.Children {
+		link := false
+		for _, c := range k.Classes {
+			if c == "tc-fields__link" {
+				link = true
+			}
+		}
+		if link {
+			out = append(out, kids(k)...)
+			continue
+		}
+		out = append(out, k)
+	}
+	return out
+}
+
 func of(n *fragment.Node) *node {
-	out := &node{tag: n.Tag, classes: strings.Join(n.Classes, " "), opaque: n.Tag == "select"}
+	// A button with its menu (tc-drop, tc-drop__anchor) is its button: the
+	// frames draw the button where it stands and the menu's contents in a
+	// frame of its own beside the screen (Carrel's task 49).
+	for _, c := range n.Classes {
+		if c == "tc-drop" || c == "tc-drop__anchor" {
+			for _, k := range n.Children {
+				if k.Tag != "" && !dropped(k) {
+					return of(k)
+				}
+			}
+		}
+	}
+	var cls []string
+	for _, c := range n.Classes {
+		if !dataClass(n.Classes, c) {
+			cls = append(cls, c)
+		}
+	}
+	out := &node{tag: n.Tag, classes: strings.Join(cls, " "), opaque: n.Tag == "select"}
 	if out.classes != "" {
 		out.tag = ""
 	}
 	if out.opaque {
 		return out
 	}
-	for _, k := range n.Children {
+	for _, k := range kids(n) {
 		if k.Tag == "" || dropped(k) {
 			continue
 		}

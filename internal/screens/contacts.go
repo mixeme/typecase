@@ -166,7 +166,7 @@ func Contacts1() Screen {
 					w.Head{
 						Photo: &w.HeadPhoto{Initials: "АК"},
 						Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19},
-						Tools: []w.Button{
+						Tools: []w.HeadTool{
 							w.Button{Label: "Edit", Small: true},
 							w.Button{Label: "All records", Small: true},
 							w.Button{Icon: "dots", Small: true, Title: "More"},
@@ -803,15 +803,36 @@ func Contacts6() Screen {
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
 								w.Button{Label: "Send", Icon: "mail"},
 								w.Button{Label: "Print", Icon: "print"},
-								w.Button{Icon: "dots", Title: "More"},
+								w.Drop{
+									Trigger: w.Button{Icon: "dots", Title: "More"},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{Icon: "move", Label: "Move"},
+											w.MenuItem{Icon: "dup", Label: "Copy"},
+											w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+											w.MenuItem{Icon: "link", Label: "Publish a link"},
+										},
+										Width: w.MenuWidth212,
+										Pop:   w.MenuUnderEnd,
+									},
+								},
 							},
 						},
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+							{
+								Term:  "Phone · mobile",
+								Value: []w.ValuePart{w.Text("+7 912 445-10-88")},
+								Face:  w.ValueMono,
+								Href:  "tel:+79124451088",
+							},
 							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
-							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+							{
+								Term:  "Email · work",
+								Value: []w.ValuePart{w.Text("a.kovaleva@example.org")},
+								Href:  "mailto:a.kovaleva@example.org",
+							},
 							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
 							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 							{
@@ -1352,9 +1373,10 @@ func Contacts7() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Range{
-								From: w.Input{Kind: w.InputDate, Value: "2026-01-01", Mono: true},
-								To:   w.Input{Kind: w.InputDate, Value: "2026-11-10", Mono: true},
-								Show: w.Button{Label: "Show"},
+								From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-01-01", Label: "From", Mono: true},
+								To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-10", Label: "To", Mono: true},
+								Show:   w.Button{Label: "Show"},
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
 							},
 							w.SegFold{
 								Seg: w.Seg{
@@ -1458,10 +1480,22 @@ func Contacts7() Screen {
 					w.Head{
 						Photo:  &w.HeadPhoto{Initials: "АК", Large: true},
 						Kicker: &w.Rubric{Text: "Card"},
-						Tools: []w.Button{
+						Tools: []w.HeadTool{
 							w.Button{Label: "Open the card", Small: true},
 							w.Button{Label: "Edit", Small: true},
-							w.Button{Icon: "dots", Small: true, Title: "More"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Small: true, Title: "More"},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Icon: "move", Label: "Move"},
+										w.MenuItem{Icon: "dup", Label: "Copy"},
+										w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+										w.MenuItem{Icon: "link", Label: "Publish a link"},
+									},
+									Width: w.MenuWidth212,
+									Pop:   w.MenuUnder,
+								},
+							},
 						},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,

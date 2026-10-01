@@ -33,6 +33,19 @@ do, not what the authors did.
   rest, opened by `details` without a script. `SegOption.Href` and `Count`: an
   option may be a link with its number (Carrel's task 50).
 
+- **`shape` reads a picture in an avatar or a thumbnail as data** — the frame
+  draws the place, the screen fills it (`Src`); an avatar's `is-photo` is data
+  too (Carrel's task 48).
+- **Closed menus** (Carrel's task 49): a button with its menu (`Drop`,
+  `TopDrop`) is, for `shape`, its button — the frames draw the menu's contents
+  beside the screen. `Drop` stands in a head's actions (`Acts`) and among its
+  tools: `Head.Tools` is `[]HeadTool` (breaking), `Button` or `Drop`.
+- **`Range.Action`**: a bar's range is a GET form — From and To go as fields,
+  Show submits it, no script (Carrel's task 51).
+- **`FieldsItem.Href`**: a card's value goes somewhere — `mailto:`, `tel:`, the
+  linked record; it looks like the value, underlined under the pointer, and
+  `shape` reads the link as the value (Carrel's task 52).
+
 ### Mockup
 
 - Sign-in with a wrong login or password (s-auth-13): the same page, the
@@ -103,6 +116,12 @@ do, not what the authors did.
 - The filter by kind folds instead of going under «⋯» on a narrow bar: a
   person's timeline (s-contacts-7), Mentions (mentions-2) and the timeline with
   letters (s-mailbox-21); its options are links.
+- The contact card's «⋯» and the card's in a timeline are drawn closed with
+  their menus (s-contacts-6, -7); a card's phone and address are links
+  (s-contacts-6); the bar's range of the timeline and the agenda is a form
+  (s-contacts-7, s-agenda-1). A calendar the server made with less than was
+  asked for says so over its lists, with «New calendar» (s-agenda-11, Carrel's
+  task 53). 372 frames.
 
 ## typecase/v0.10.0 — 2026-09-29
 

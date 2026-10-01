@@ -93,6 +93,15 @@ func (p HeadPad) class() string {
 	return [...]string{"", "tc-head--padt11", "tc-head--padb6", "tc-head--snug", "tc-head--padb10", "tc-head--rule"}[p]
 }
 
+// HeadTool is a small button under a head's lines, or one with its menu.
+type HeadTool interface {
+	part
+	headTool()
+}
+
+func (Button) headTool() {}
+func (Drop) headTool()   {}
+
 // Head — tc-head
 //
 // Роль. Шапка страницы или панели: заголовок, строки под ним, действия справа.
@@ -110,8 +119,8 @@ type Head struct {
 	Title   *HeadTitle
 	Crumbs  *Crumbs
 	Subs    []HeadSub
-	Tools   []Button // small buttons under the lines: a panel's own actions
-	Meta    *HeadSub // a single line instead of the titles: a document's head
+	Tools   []HeadTool // small buttons under the lines: a panel's own actions, and its «⋯» with the menu
+	Meta    *HeadSub   // a single line instead of the titles: a document's head
 	Acts    *Acts
 	Grouped bool // the photo and the titles side by side as one group
 	Middle  bool // the actions centred on the titles, not on their top

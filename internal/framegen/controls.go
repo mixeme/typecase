@@ -236,6 +236,10 @@ func (g *gen) button(e *El) string {
 func (g *gen) buttons(es []*El) string {
 	var out []string
 	for _, b := range es {
+		if b.Has("tc-drop") {
+			out = append(out, g.drop(b))
+			continue
+		}
 		out = append(out, g.button(b))
 	}
 	return join(out, ", ")
@@ -896,6 +900,9 @@ func (g *gen) barItem(k *El) string {
 		if k.Has("is-2nd") {
 			s += ", Secondary: true"
 		}
+		if k.Tag == "form" {
+			s += ", Action: " + q(k.Attr("action"))
+		}
 		return s + "}"
 	}
 	if c := g.control(k); c != "" {
@@ -923,6 +930,9 @@ func (g *gen) drop(e *El) string {
 		f = append(f, "More: true")
 	}
 	f = append(f, "Menu: "+g.menu(m))
+	if m.HasAttr("hidden") {
+		return "w.Drop{" + join(f, ", ") + "}"
+	}
 	return "w.Drop{Open: true, " + join(f, ", ") + "}"
 }
 

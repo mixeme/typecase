@@ -205,10 +205,10 @@ func (c Check) html(m mix) string {
 // Range — tc-range
 //
 // Роль. Диапазон дат: два поля, стрелка между ними и кнопка, которая показывает.
-// Вход. Range{From, To, Show, Wrap, Secondary}.
-// Состояния. default | wrap.
+// Вход. Range{From, To, Show, Wrap, Secondary, Action}.
+// Состояния. default | wrap | form.
 // Инварианты. Начало — слева, конец — справа, между ними стрелка; диапазон печатает фрагмент своего кадра.
-// Поведение. Show применяет диапазон; Enter в поле — то же.
+// Поведение. Show применяет диапазон; Enter в поле — то же. С адресом (Action) диапазон — форма GET: From и To уходят полями, Show её отправляет, без сценария.
 // Эталон. кадр `components-18`, фрагмент `.tc-range`.
 // Содержимое. Два поля и кнопка.
 // Чего нет. Выбора диапазона в одном поле: две даты — два поля.
@@ -218,14 +218,20 @@ type Range struct {
 	Show      Button
 	Wrap      bool // the range wraps inside a narrow menu
 	Secondary bool
+	Action    string // the range is a form that sends From and To there (GET)
 }
 
 // Render prints the range.
 func (r Range) Render() string { return r.html(nil) }
 
 func (r Range) html(m mix) string {
-	return `<span` + class(m, "tc-range", pick(r.Wrap, "tc-range--wrap"), rank(r.Secondary)) + `>` + r.From.html(nil) +
-		`<i class="tc-range__dash">→</i>` + r.To.html(nil) + r.Show.html(nil) + `</span>`
+	tag, form := "span", ""
+	if r.Action != "" {
+		tag, form = "form", attr("action", r.Action)+` method="get"`
+		r.Show.Submit = true
+	}
+	return `<` + tag + class(m, "tc-range", pick(r.Wrap, "tc-range--wrap"), rank(r.Secondary)) + form + `>` + r.From.html(nil) +
+		`<i class="tc-range__dash">→</i>` + r.To.html(nil) + r.Show.html(nil) + `</` + tag + `>`
 }
 
 func boolText(on bool) string {

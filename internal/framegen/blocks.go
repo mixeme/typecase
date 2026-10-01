@@ -349,6 +349,11 @@ func (g *gen) fields(e *El) string {
 			face = "ValueAccent"
 		}
 		var vp []string
+		href := ""
+		if a := dd.Kid("tc-fields__link"); a != nil {
+			href = a.Attr("href")
+			dd = a
+		}
 		for _, k := range dd.Kids {
 			switch v := k.(type) {
 			case string:
@@ -380,6 +385,9 @@ func (g *gen) fields(e *El) string {
 		s := "{Term: " + q(dt.Text()) + ", Value: []w.ValuePart{" + join(vp, ", ") + "}"
 		if face != "" {
 			s += ", Face: w." + face
+		}
+		if href != "" {
+			s += ", Href: " + q(href)
 		}
 		its = append(its, s+"}")
 	}

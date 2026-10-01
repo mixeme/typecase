@@ -178,3 +178,40 @@ func fill(v reflect.Value) {
 		}
 	}
 }
+
+// Carrel's task 48: a row's avatar with a photo is the frame's avatar with
+// initials — the picture is data.
+func TestAvatarPhotoIsData(t *testing.T) {
+	m := mockup(t)
+	r, ok := screens.Find("s-contacts-1")
+	if !ok {
+		t.Fatal("no s-contacts-1")
+	}
+	page := r.Screen().Render()
+	initials := w.Avatar{Initials: "АК"}.Render()
+	if !strings.Contains(page, initials) {
+		t.Fatal("no avatar АК in s-contacts-1")
+	}
+	photo := strings.Replace(page, initials, w.Avatar{Initials: "АК", Src: "/app/contacts/x/y/z/photo"}.Render(), 1)
+	if err := m.Check("s-contacts-1", photo); err != nil {
+		t.Errorf("an avatar with a photo: %v", err)
+	}
+}
+
+// Carrel's task 49: a head's «⋯» with its menu, closed, is the frame's «⋯».
+func TestClosedMenuIsItsButton(t *testing.T) {
+	m := mockup(t)
+	r, ok := screens.Find("s-contacts-6")
+	if !ok {
+		t.Fatal("no s-contacts-6")
+	}
+	page := r.Screen().Render()
+	dots := w.Button{Icon: "dots", Title: "More"}.Render()
+	if !strings.Contains(page, dots) {
+		t.Fatal("no «⋯» in s-contacts-6")
+	}
+	menu := w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "Export .vcf", Href: "/app/contacts/x/y/z.vcf"}}}}.Render()
+	if err := m.Check("s-contacts-6", strings.Replace(page, dots, menu, 1)); err != nil {
+		t.Errorf("«⋯» with its menu: %v", err)
+	}
+}

@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("titled-action", w.Msg{Parts: []w.MsgPart{w.Strong("The server did not take tasks."), w.Text(" The server made «Дом» for events only and said nothing of the tasks you asked for. Tasks need another calendar: make one for them on this server or another. "), w.Button{Label: "New calendar", Small: true}}}, "s-agenda-11", "tc-msg", 1),
 	cards("bot12", w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12}, "s-admin-17", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush}, "s-admin-14", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 12 records.")}}, "s-contacts-21", "tc-msg", 1),
@@ -151,6 +152,15 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
 
 	// tc-fields
+	cards("plain-card", w.Fields{Items: []w.FieldsItem{
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@slovo.example")}},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-16", "tc-fields", 1),
 	cards("plain-two", w.Fields{Items: []w.FieldsItem{
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("redaktsiya@slovo.example")}},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Кто готовит сборник к печати.")}}}}, "mentions-9", "tc-fields", 1),
@@ -159,9 +169,9 @@ var _ = add(
 		{Term: "Related · spouse", Value: []w.ValuePart{w.Text("urn:uuid:9c1e-07f2-b4a1 "), w.Dim{Parts: []w.Inline{w.Text("· not in the books you look in")}}}, Face: w.ValueMono},
 		{Term: "Nickname", Value: []w.ValuePart{w.Text("Аня")}}}}, "mentions-6", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
-		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
 		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
 		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},

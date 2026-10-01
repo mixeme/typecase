@@ -353,6 +353,9 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row--cols > .tc-col--kind{width:56px}
 /* Просрочен срок, а не всё дело: остальные числа строки своего цвета. */
 .tc-row--cols.is-overdue > .tc-row__cell{color:var(--tc-dusty)}
+/* Значение поля, которое куда-то ведёт (почта, телефон, связанная запись): вид значения, подчёркивание — при наведении. */
+.tc-fields__link{color:inherit;text-decoration:none}
+.tc-fields__link:hover{text-decoration:underline}
 /* Упоминание карточки, которой в отмеченных книгах нет: имя, не ссылка. */
 .tc-mention.is-lost{color:var(--tc-dusty);text-decoration:underline dotted;text-underline-offset:2px}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}

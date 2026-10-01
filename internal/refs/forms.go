@@ -84,6 +84,7 @@ var _ = add(
 	form("rich", check(false, w.Dim{Parts: []w.Inline{w.Text("Start at sign-in — not available in a portable copy")}}), "desktop-4", "tc-check", 1),
 
 	// tc-range
+	form("form", w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-01-01", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-10", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline"}, "s-contacts-7", "tc-range", 1),
 	form("default", w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-01-01", Mono: true, Label: "From"}, To: w.Input{Value: "today", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}}, "components-18", "tc-range", 1),
 	form("wrap", w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true}, "s-agenda-1", "tc-range", 2),
 

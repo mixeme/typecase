@@ -122,10 +122,11 @@ func Agenda1() Screen {
 								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
 							},
 							w.Range{
-								From:      w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true},
-								To:        w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true},
+								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
 								Show:      w.Button{Label: "Show"},
 								Secondary: true,
+								Action:    "/app/calendar",
 							},
 							w.BarSep{Secondary: true},
 							w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true},

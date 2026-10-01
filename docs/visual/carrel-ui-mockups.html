@@ -534,6 +534,9 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-row--cols > .tc-col--kind{width:56px}
 /* Просрочен срок, а не всё дело: остальные числа строки своего цвета. */
 .tc-row--cols.is-overdue > .tc-row__cell{color:var(--tc-dusty)}
+/* Значение поля, которое куда-то ведёт (почта, телефон, связанная запись): вид значения, подчёркивание — при наведении. */
+.tc-fields__link{color:inherit;text-decoration:none}
+.tc-fields__link:hover{text-decoration:underline}
 /* Упоминание карточки, которой в отмеченных книгах нет: имя, не ссылка. */
 .tc-mention.is-lost{color:var(--tc-dusty);text-decoration:underline dotted;text-underline-offset:2px}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
@@ -3589,13 +3592,13 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg>Edit</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
-            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+            <span class="tc-drop"><button class="tc-btn" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><div class="tc-menu is-pop is-right tc-menu--w212" hidden><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></span>
           </div>
         </div>
         <dl class="tc-fields">
-          <dt>Phone · mobile</dt><dd class="tc-mono">+7 912 445-10-88</dd>
+          <dt>Phone · mobile</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+79124451088">+7 912 445-10-88</a></dd>
           <dt>Phone · work</dt><dd class="tc-mono">+7 495 120-45-00</dd>
-          <dt>Email · work</dt><dd>a.kovaleva@example.org</dd>
+          <dt>Email · work</dt><dd><a class="tc-fields__link" href="mailto:a.kovaleva@example.org">a.kovaleva@example.org</a></dd>
           <dt>Email · second</dt><dd>anna.kovaleva@slovo.example</dd>
           <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
@@ -4045,7 +4048,7 @@ Read  2 min ago · not changed on server</div>
           </div>
         </div>
         <div class="tc-bar tc-bar--wide">
-          <span class="tc-range"><input class="tc-in is-mono" type="date" value="2026-01-01"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-11-10"><button class="tc-btn" type="button">Show</button></span>
+          <form class="tc-range" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline" method="get"><input class="tc-in is-mono" type="date" value="2026-01-01" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-11-10" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-segfold"><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All 24</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events 14</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks 2</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes 4</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files 4</a></span><details class="tc-segfold__pick"><summary class="tc-segfold__current">All 24</summary><div class="tc-segfold__menu"><a class="is-on tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All<span class="tc-segfold__count">24</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events<span class="tc-segfold__count">14</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks<span class="tc-segfold__count">2</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes<span class="tc-segfold__count">4</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files<span class="tc-segfold__count">4</span></a></div></details></span>
           <button class="tc-btn is-2nd" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
@@ -4089,7 +4092,7 @@ Read  2 min ago · not changed on server</div>
             <span class="tc-avatar--photo is-ph tc-avatar--photo--sq76-t20">АК</span>
             <div class="tc-head__text">
               <div class="tc-rubric">Card</div>
-              <div class="tc-line tc-line--gap-5 tc-sec__acts"><button class="tc-btn is-sm" type="button">Open the card</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></div>
+              <div class="tc-line tc-line--gap-5 tc-sec__acts"><button class="tc-btn is-sm" type="button">Open the card</button><button class="tc-btn is-sm" type="button">Edit</button><span class="tc-drop"><button class="tc-btn is-sm" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><div class="tc-menu is-pop tc-menu--w212" hidden><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-link"/></svg>Publish a link</button></div></span></div>
             </div>
           </div>
           <div class="tc-acts"><button class="tc-btn tc-close" title="Close the panel" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
@@ -4275,7 +4278,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-bar tc-bar--wide">
           <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
-          <span class="tc-range is-2nd"><input class="tc-in is-mono" type="date" value="2026-08-10"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16"><button class="tc-btn" type="button">Show</button></span>
+          <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-bar__sep is-2nd"></span>
           <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick"></span>Events</button>
           <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
@@ -4683,6 +4686,18 @@ SEQUENCE  2</div>
     </div>
   </div>
   <figcaption>Частота; всё тоньше — дни недели, «до» и «сколько раз» — рядом полями, а редкие правила — в Advanced RRULE.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-agenda-11">
+    <div class="frame-label"><span>Календарь, в который сервер взял не всё</span><span class="frag">фрагмент</span><i>над списками календаря · iCloud</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-msg"><b>The server did not take tasks.</b> The server made «Дом» for events only and said nothing of the tasks you asked for. Tasks need another calendar: make one for them on this server or another. <button class="tc-btn is-sm" type="button">New calendar</button></div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>iCloud заводит календарь с одним родом из тех, что просили (SV-52): «события и задачи» становятся календарём событий, и сервер молчит. Списки такого календаря — агенда, задачи, заметки — начинаются с этого уведомления: что сервер оставил, чего не взял и куда девать не взятое. Уведомление — сведение, не тревога: ничего не сломано, календарь работает для событий. «New calendar» открывает лист новой коллекции с нужным родом — на этом сервере или другом.</figcaption>
   </figure>
 </div>
 
