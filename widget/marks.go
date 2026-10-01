@@ -64,7 +64,7 @@ func (k Mark) html(m mix) string {
 // Tag — tc-tag
 //
 // Роль. Метка категории: тег записи, фильтр по тегу, приложенная вещь, связанная запись.
-// Вход. Tag{Label, On, Icon, Mark, Removable, Place}.
+// Вход. Tag{Label, On, Icon, Mark, Removable, Place, Href}.
 // Состояния. plain | on | icon | mark | removable.
 // Инварианты. Тег не правится на месте: он или выбран, или снимается крестиком; тег печатает фрагмент своего кадра.
 // Поведение. Выбранный фильтр (On) снимается нажатием; тег с крестиком убирается крестиком.
@@ -78,13 +78,18 @@ type Tag struct {
 	Mark      *Mark
 	Removable bool // a pill with a cross after the label
 	Place     Place
+	Href      string // the tag goes somewhere: the list filtered by it
 }
 
 // Render prints the tag.
 func (t Tag) Render() string { return t.html(nil) }
 
 func (t Tag) html(m mix) string {
-	s := `<span` + class(m, "tc-tag", is("on", t.On), pick(t.Removable, "tc-tag--pill"), t.Place.class()) + `>`
+	tag := "span"
+	if t.Href != "" {
+		tag = "a"
+	}
+	s := `<` + tag + class(m, "tc-tag", is("on", t.On), pick(t.Removable, "tc-tag--pill"), t.Place.class()) + attr("href", t.Href) + `>`
 	if t.Icon != "" {
 		s += `<svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none">` + t.Icon.use() + `</svg> `
 	}
@@ -95,7 +100,7 @@ func (t Tag) html(m mix) string {
 	if t.Removable {
 		s += ` <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none">` + Icon("close").use() + `</svg>`
 	}
-	return s + `</span>`
+	return s + `</` + tag + `>`
 }
 
 // BadgeTone is what the badge says about its row.

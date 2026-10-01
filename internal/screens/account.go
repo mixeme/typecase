@@ -670,7 +670,7 @@ func Account5() Screen {
 							},
 							w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
 							w.MenuSep{},
-							w.MenuItem{Label: "Sign out"},
+							w.MenuItem{Label: "Sign out", Form: "post-signout"},
 						},
 						Width: w.MenuWidth290,
 					},

@@ -11,6 +11,14 @@ do, not what the authors did.
 - **`Query.Placeholder`**: what an empty search line says — «Search
   everything…», «Filter the loaded cards» — is a placeholder, not a value; the
   frames draw it so, in the colour of the text (Carrel's task 69).
+- **`Tag.Href`**: a tag goes somewhere — the list filtered by it (task 63); in
+  a row that is a link itself a tag stays words, not a link inside a link.
+- **`HeadPhoto.Src`**: the photo in a card's head and a timeline's panel (task
+  64); for `shape` the picture and the placeholder's `is-ph` are data.
+- **`Filter.Hidden`**: what a filter's form sends with the query — the list's
+  sort, tag, kind (task 65).
+- **`MenuItem.Form`**: an item that submits a `PostForm` by its name — Sign out
+  (task 68; drawn so in account-5).
 
 ### Mockup
 

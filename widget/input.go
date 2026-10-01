@@ -190,7 +190,7 @@ func (v FilterVariant) class() string {
 // Filter — tc-in
 //
 // Роль. Фильтр списка: значок поиска и строка запроса в одной рамке.
-// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action}.
+// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action, Hidden}.
 // Состояния. waiting | quiet.
 // Инварианты. Значок — первый узел поля, строка занимает остаток; фильтр печатает фрагмент своего кадра.
 // Поведение. Сужает список по мере набора; Esc очищает.
@@ -203,7 +203,8 @@ type Filter struct {
 	Quiet   bool // a smaller, dusty icon: a filter inside a sheet
 	Variant FilterVariant
 	Place   Place
-	Action  string // the filter is a form that sends its query there (GET)
+	Action  string   // the filter is a form that sends its query there (GET)
+	Hidden  []Hidden // what the form sends with the query: the list's other choices (sort, tag)
 }
 
 // Render prints the filter.
@@ -216,6 +217,9 @@ func (f Filter) html(m mix) string {
 	}
 	inner := icon + Icon("search").use() + `</svg>` + f.Query.html(nil)
 	if f.Action != "" {
+		for _, h := range f.Hidden {
+			inner += h.html(nil)
+		}
 		return `<form` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + attr("action", f.Action) + ` method="get">` + inner + `</form>`
 	}
 	return `<label` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + `>` + inner + `</label>`

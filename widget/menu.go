@@ -58,6 +58,9 @@ type MenuItem struct {
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
 	// shown on a phone only, where the item itself is under «⋯».
 	Tertiary bool
+	// Form is the ID of a PostForm the item submits (Sign out): the item is a
+	// submit button then, sending Name and Value when they are set.
+	Form string
 }
 
 func (it MenuItem) html(mix) string {
@@ -86,6 +89,8 @@ func (it MenuItem) html(mix) string {
 		} else {
 			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + `>`)
 		}
+	} else if it.Form != "" {
+		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else {
 		s.WriteString(`<button` + cls + ` type="button" role="menuitem"` + checked + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	}

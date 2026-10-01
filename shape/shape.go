@@ -108,11 +108,8 @@ func dropped(n *fragment.Node) bool {
 // dataClass says whether a class of an element is its data, not its kind:
 // an avatar with a photo or with initials is the same avatar.
 func dataClass(classes []string, c string) bool {
-	if c != "is-photo" {
-		return false
-	}
 	for _, x := range classes {
-		if x == "tc-avatar" {
+		if (c == "is-photo" && x == "tc-avatar") || (c == "is-ph" && x == "tc-avatar--photo") {
 			return true
 		}
 	}

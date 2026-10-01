@@ -89,14 +89,24 @@ func source(text, hint string, badge *Badge) string {
 	return s + `</span>`
 }
 
-func tags(items []RowTag) string {
+func tags(items []RowTag, inLink bool) string {
 	var s strings.Builder
 	s.WriteString(`<span class="tc-row__cell tc-row__tags">`)
 	for _, t := range items {
-		s.WriteString(t.html(nil))
+		s.WriteString(rowTagHTML(t, inLink))
 	}
 	s.WriteString(`</span>`)
 	return s.String()
+}
+
+// rowTagHTML prints a tag of a row; in a row that is a link itself a tag
+// is words, not a link inside a link (HTML has none).
+func rowTagHTML(t RowTag, inLink bool) string {
+	if tg, ok := t.(Tag); ok && inLink {
+		tg.Href = ""
+		return tg.html(nil)
+	}
+	return t.html(nil)
 }
 
 // inset is the variant of a row set in a card: 14 px at the sides.
@@ -299,7 +309,7 @@ func (r ExcerptRow) Render() string { return r.html(nil) }
 
 func (r ExcerptRow) html(m mix) string {
 	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset)) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
-		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") + tags(r.Tags) +
+		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") + tags(r.Tags, r.Href != "") +
 		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil) + `</` + rowTag(r.Href) + `>`
 }
 
@@ -361,7 +371,7 @@ func (r DueRow) Render() string { return r.html(nil) }
 
 func (r DueRow) html(m mix) string {
 	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset)) + `>` +
-		r.Tick.html(nil) + r.Mark.html(nil) + title(r.Title, r.Strong, r.TitleBadge) + tags(r.Tags) +
+		r.Tick.html(nil) + r.Mark.html(nil) + title(r.Title, r.Strong, r.TitleBadge) + tags(r.Tags, false) +
 		cell(r.Due, "tc-mono", "tc-row__due") + cell(r.Progress, "tc-row__cell", "tc-mono", "tc-row__progress") +
 		source(r.Source, r.SourceHint, nil) + `</div>`
 }
@@ -604,7 +614,7 @@ func (r ColumnRow) html(m mix) string {
 		s.WriteString(`<span class="` + cls + `">`)
 		if c.Column == ColumnTags {
 			for _, t := range c.Tags {
-				s.WriteString(t.html(nil))
+				s.WriteString(rowTagHTML(t, r.Href != ""))
 			}
 		} else {
 			s.WriteString(esc(c.Text))

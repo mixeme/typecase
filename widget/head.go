@@ -70,10 +70,14 @@ func (b HeadSub) html(own ...string) string {
 // or initials while there is none.
 type HeadPhoto struct {
 	Initials string
-	Large    bool // 76 px: a card
+	Large    bool   // 76 px: a card
+	Src      string // the photo itself; without it the place shows the initials
 }
 
 func (p HeadPhoto) html() string {
+	if p.Src != "" {
+		return `<span` + class(nil, "tc-avatar--photo", pick(p.Large, "tc-avatar--photo--sq76-t20")) + `><img class="tc-avatar__img"` + attr("src", p.Src) + ` alt=""></span>`
+	}
 	return `<span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != ""), pick(p.Large, "tc-avatar--photo--sq76-t20")) + `>` + esc(p.Initials) + `</span>`
 }
 

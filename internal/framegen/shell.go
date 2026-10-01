@@ -435,6 +435,12 @@ func (g *gen) menuItem(k *El) string {
 	if h := k.Attr("href"); h != "" {
 		f = append(f, "Href: "+q(h))
 	}
+	if fm := k.Attr("form"); fm != "" && box == nil {
+		f = append(f, "Form: "+q(fm))
+		if v := k.Attr("name"); v != "" {
+			f = append(f, "Name: "+q(v), "Value: "+q(k.Attr("value")))
+		}
+	}
 	if box != nil {
 		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
 		if box.HasAttr("disabled") {
