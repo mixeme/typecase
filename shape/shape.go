@@ -10,12 +10,18 @@
 //
 // What is compared: each element's class list and its place among its
 // siblings. Siblings of one kind — one tag and one class list but for the
-// states a record sets (is-on, is-done…) — are a run: the screen's run may be longer or shorter than the
-// frame's, and each of its elements must have the shape of one of the frame's
-// (three rows in the frame, one chosen and one with a badge; twelve rows on
-// the screen, any of them chosen or badged). So one of two buttons of one
-// shape side by side — Import next to Export — is not missed: words are not
-// compared. What is not compared: text, attributes,
+// states a record sets (is-on, is-done…) — are a run: the screen's run may be
+// longer than the frame's, not shorter, each of its elements must have the
+// shape of one of the frame's, and each of the frame's must be on the screen
+// but for its states (three rows in the frame, one with a badge; twelve rows
+// on the screen, one of them at least with a badge, any of them chosen). What
+// the frame draws, the screen has (Carrel's task 76): a button of the head, a
+// section of the card, the time in a field's value — words are not compared,
+// so of two buttons of one shape a missing one is told by their number. A
+// repeating row of rows (a month and its records, a term and its value, a day
+// with records or with nothing) may repeat any number of times; repeated as
+// often as the frame draws it or more, it has each part the frame draws in
+// it. What is not compared: text, attributes, a template's contents,
 // the options of a select, the hidden fields of a form, a picture in an
 // avatar or a thumbnail (Src: data, the frame draws the place), the menu
 // of a button with its menu (the frames draw it beside the screen). Nor is the element's
@@ -68,7 +74,8 @@ func (m *Mockup) Check(frameID, rendered string) error {
 	}
 	want := of(m.m.Normalize(root))
 	got := of(m.m.Normalize(nodes[0]))
-	if d := diff(want, got, want.label()); d != "" {
+	c := &cmp{memo: map[pair]string{}}
+	if d := c.diff(want, got, want.label()); d != "" {
 		return fmt.Errorf("%s: %s", frameID, d)
 	}
 	return nil
@@ -80,8 +87,9 @@ type node struct {
 	tag     string
 	name    string // the element's own tag, kept when its classes stand for it
 	classes string
-	runs    [][]*node // the element children, siblings of one kind together
-	opaque  bool      // a select: its insides are the browser's options, not the frame's drawing
+	runs    [][]*node        // the element children, siblings of one kind together
+	opaque  bool             // a select: its insides are the browser's options, not the frame's drawing
+	with    map[string]*node // the node with another element's states (as), made once
 }
 
 // dropped are the elements of the meaning that the frame does not draw.
@@ -103,7 +111,9 @@ func dropped(n *fragment.Node) bool {
 			return true
 		}
 	}
-	return n.Tag == "option"
+	// A template is what a script copies in (another phone, another
+	// reminder), not what the page shows (Carrel's task 75).
+	return n.Tag == "option" || n.Tag == "template"
 }
 
 // dataClass says whether a class of an element is its data, not its kind:
@@ -195,6 +205,54 @@ func (n *node) kind() string {
 	return n.tag + "." + strings.Join(cs, ".")
 }
 
+// covered says whether each of the frame's elements is like one of the
+// screen's, but for its states.
+func (c *cmp) covered(wr, gr []*node, p string) string {
+	for k, w := range wr {
+		first := ""
+		for _, g := range gr {
+			d := c.diff(w.as(g), g, p)
+			if d == "" {
+				first = ""
+				break
+			}
+			if first == "" && w.kind() == g.kind() {
+				first = d
+			}
+		}
+		if first != "" {
+			return first // where the nearest of the screen's parts from it
+		}
+		found := false
+		for _, g := range gr {
+			found = found || c.diff(w.as(g), g, p) == ""
+		}
+		if !found {
+			return fmt.Sprintf("%s: the screen has none like the frame's <%s> #%d", p, w.label(), k+1)
+		}
+	}
+	return ""
+}
+
+// as is the node with the states of g: a frame's element is found on the
+// screen whatever record is chosen or done there.
+func (n *node) as(g *node) *node {
+	if n.kind() != g.kind() || n.classes == g.classes {
+		return n
+	}
+	if n.with == nil {
+		n.with = map[string]*node{}
+	}
+	if c, ok := n.with[g.classes]; ok {
+		return c
+	}
+	c := *n
+	c.classes = g.classes
+	c.with = nil
+	n.with[g.classes] = &c
+	return &c
+}
+
 func (n *node) label() string {
 	if n.classes == "" {
 		return n.tag
@@ -202,7 +260,25 @@ func (n *node) label() string {
 	return "." + strings.ReplaceAll(n.classes, " ", ".")
 }
 
-func diff(want, got *node, path string) string {
+// cmp compares a frame with a screen, each pair of elements once: a run is
+// matched both ways, and the same pair comes back.
+type cmp struct {
+	memo map[pair]string
+}
+
+type pair struct{ want, got *node }
+
+func (c *cmp) diff(want, got *node, path string) string {
+	k := pair{want, got}
+	if d, ok := c.memo[k]; ok {
+		return d
+	}
+	d := c.walk(want, got, path)
+	c.memo[k] = d
+	return d
+}
+
+func (c *cmp) walk(want, got *node, path string) string {
 	if want.tag != got.tag {
 		return fmt.Sprintf("%s: tag <%s>, screen <%s>", path, want.tag, got.tag)
 	}
@@ -217,7 +293,7 @@ func diff(want, got *node, path string) string {
 		// value) is compared as a run: any number of repeats on the screen,
 		// each like one of the frame's (Carrel's task 61).
 		for i := 0; i < pre; i++ {
-			if d := runDiff(want.runs[i], got.runs[i], path, i); d != "" {
+			if d := c.runDiff(want.runs[i], got.runs[i], path, i); d != "" {
 				return d
 			}
 		}
@@ -228,13 +304,30 @@ func diff(want, got *node, path string) string {
 				for v := 0; v < wn; v++ {
 					pool = append(pool, want.runs[pre+v*p+j]...)
 				}
-				if d := poolDiff(pool, gr, path, pre+u*p+j); d != "" {
+				if d := c.poolDiff(pool, gr, path, pre+u*p+j); d != "" {
+					return d
+				}
+			}
+		}
+		if gn >= wn {
+			// As many repeats as the frame draws, or more: each element the
+			// frame draws at a place of the block is on the screen at that
+			// place (Carrel's task 76) — a field's time and badge as well.
+			for j := 0; j < p; j++ {
+				var pool, gr []*node
+				for v := 0; v < wn; v++ {
+					pool = append(pool, want.runs[pre+v*p+j]...)
+				}
+				for u := 0; u < gn; u++ {
+					gr = append(gr, got.runs[pre+u*p+j]...)
+				}
+				if d := c.covered(pool, gr, fmt.Sprintf("%s > %s[%d]", path, pool[0].label(), pre+j+1)); d != "" {
 					return d
 				}
 			}
 		}
 		for k := 0; pre+wn*p+k < len(want.runs); k++ {
-			if d := runDiff(want.runs[pre+wn*p+k], got.runs[pre+gn*p+k], path, pre+gn*p+k); d != "" {
+			if d := c.runDiff(want.runs[pre+wn*p+k], got.runs[pre+gn*p+k], path, pre+gn*p+k); d != "" {
 				return d
 			}
 		}
@@ -245,7 +338,7 @@ func diff(want, got *node, path string) string {
 		n = len(got.runs)
 	}
 	for i := 0; i < n; i++ {
-		if d := runDiff(want.runs[i], got.runs[i], path, i); d != "" {
+		if d := c.runDiff(want.runs[i], got.runs[i], path, i); d != "" {
 			return d
 		}
 	}
@@ -260,12 +353,12 @@ func diff(want, got *node, path string) string {
 
 // poolDiff compares a run of the screen with the frame's runs at the same
 // place of a repeat: each element like one of them, whatever its kind.
-func poolDiff(pool, gr []*node, path string, i int) string {
+func (c *cmp) poolDiff(pool, gr []*node, path string, i int) string {
 	p := fmt.Sprintf("%s > %s[%d]", path, gr[0].label(), i+1)
 	for _, g := range gr {
 		first := ""
 		for _, w := range pool {
-			d := diff(w, g, p)
+			d := c.diff(w, g, p)
 			if d == "" {
 				first = ""
 				break
@@ -281,17 +374,25 @@ func poolDiff(pool, gr []*node, path string, i int) string {
 	return ""
 }
 
-// runDiff compares a run of the screen with the frame's: of one kind, and
-// each element of it like one of the frame's.
-func runDiff(wr, gr []*node, path string, i int) string {
+// runDiff compares a run of the screen with the frame's: of one kind, each
+// element of it like one of the frame's, and — what the frame draws, the
+// screen has (Carrel's task 76) — no shorter than the frame's, each of the
+// frame's elements like one of the screen's but for its states.
+func (c *cmp) runDiff(wr, gr []*node, path string, i int) string {
 	p := fmt.Sprintf("%s > %s[%d]", path, wr[0].label(), i+1)
 	if wr[0].kind() != gr[0].kind() {
 		return fmt.Sprintf("%s: the screen has <%s> where the frame has <%s>", p, gr[0].label(), wr[0].label())
 	}
+	if len(gr) < len(wr) {
+		return fmt.Sprintf("%s: the screen has %d where the frame draws %d", p, len(gr), len(wr))
+	}
+	if d := c.covered(wr, gr, p); d != "" {
+		return d
+	}
 	for _, g := range gr {
 		first := ""
 		for _, w := range wr {
-			d := diff(w, g, p)
+			d := c.diff(w, g, p)
 			if d == "" {
 				first = ""
 				break
@@ -309,9 +410,12 @@ func runDiff(wr, gr []*node, path string, i int) string {
 
 // repeat finds, in the frame's runs, a block of p runs repeated at least
 // twice, after the same first runs and before the same last ones as the
-// screen's, where the screen repeats the same block any number of times.
-// Runs are alike by kind, or — in a list of terms and values, where a
-// value's classes vary (dd and dd.tc-mono) — by tag.
+// screen's, where the screen repeats such blocks any number of times. Runs are
+// alike by kind, or — in a list of terms and values, where a value's classes
+// vary (dd and dd.tc-mono) — by tag. Beside the repeated block, the frame may
+// draw others with the same head — a day with nothing, after the days with
+// records: the screen's blocks are any of them, in any order (Carrel's task
+// 75), each place of a block one the frame draws at that place.
 func repeat(want, got [][]*node) (pre, p, wn, gn int, ok bool) {
 	for _, byTag := range []bool{false, true} {
 		key := func(r []*node) string { return r[0].kind() }
@@ -328,26 +432,69 @@ func repeat(want, got [][]*node) (pre, p, wn, gn int, ok bool) {
 				if byTag && !termsAndValues(base) {
 					continue
 				}
-				wn = reps(wk[pre:], base)
-				if wn < 2 {
+				if reps(wk[pre:], base) < 2 {
 					continue
 				}
-				suf := wk[pre+wn*p:]
-				if len(gk) < pre+len(suf)+p || !same(gk[:pre], wk[:pre]) || !same(gk[len(gk)-len(suf):], suf) {
+				start, end := pre, pre+reps(wk[pre:], base)*p
+				for start-p >= 0 && headed(wk[start-p:start], base[0]) {
+					start -= p
+				}
+				for end+p <= len(wk) && headed(wk[end:end+p], base[0]) {
+					end += p
+				}
+				allowed := make([]map[string]bool, p)
+				for j := range allowed {
+					allowed[j] = map[string]bool{}
+					for b := start; b < end; b += p {
+						allowed[j][wk[b+j]] = true
+					}
+				}
+				suf := wk[end:]
+				if len(gk) < start+len(suf)+p || !same(gk[:start], wk[:start]) || !same(gk[len(gk)-len(suf):], suf) {
 					continue
 				}
-				mid := gk[pre : len(gk)-len(suf)]
-				if len(mid)%p != 0 || reps(mid, base) != len(mid)/p {
+				mid := gk[start : len(gk)-len(suf)]
+				if len(mid)%p != 0 || !blocks(mid, base[0], allowed) {
 					continue
 				}
-				if len(mid)/p == wn && same(gk, wk) && !byTag {
+				if same(gk, wk) && !byTag {
 					return 0, 0, 0, 0, false // the same rows: the plain walk compares them
 				}
-				return pre, p, wn, len(mid) / p, true
+				return start, p, (end - start) / p, len(mid) / p, true
 			}
 		}
 	}
 	return 0, 0, 0, 0, false
+}
+
+// headed says whether a block begins with the head and has it nowhere else.
+func headed(block []string, head string) bool {
+	if block[0] != head {
+		return false
+	}
+	for _, k := range block[1:] {
+		if k == head {
+			return false
+		}
+	}
+	return true
+}
+
+// blocks says whether runs are blocks that each begin with the head and have,
+// at each place, a kind the frame draws there.
+func blocks(ks []string, head string, allowed []map[string]bool) bool {
+	p := len(allowed)
+	for b := 0; b < len(ks); b += p {
+		if ks[b] != head {
+			return false
+		}
+		for j := 0; j < p; j++ {
+			if !allowed[j][ks[b+j]] {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 func keys(runs [][]*node, key func([]*node) string) []string {

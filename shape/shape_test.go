@@ -263,3 +263,65 @@ func TestRepeatsAnyLength(t *testing.T) {
 		t.Errorf("six fields: %v", err)
 	}
 }
+
+// Carrel's task 75: a template is not drawn — the reminder a script copies in
+// is no field of the row; and the days of a week are any of the frame's
+// blocks, in any order: five days with nothing, between and after the days
+// with records.
+func TestTemplatesAndTailBlocks(t *testing.T) {
+	m := mockup(t)
+	r, _ := screens.Find("s-agenda-3")
+	edit := r.Screen().Render()
+	add := "Add reminder</button></div>"
+	if !strings.Contains(edit, add) {
+		t.Fatal("no Add reminder in s-agenda-3")
+	}
+	tpl := strings.Replace(edit, add, add+`<template id="tpl-reminder"><div class="tc-field tc-field--md"><label>Reminder</label><select class="tc-in is-pick"></select></div></template>`, 1)
+	if err := m.Check("s-agenda-3", tpl); err != nil {
+		t.Errorf("a template after Add reminder: %v", err)
+	}
+
+	r, _ = screens.Find("s-agenda-1")
+	week := r.Screen().Render()
+	g := `<div class="tc-list__group">`
+	e := strings.Index(week, "Nothing this day.")
+	k := strings.LastIndex(week[:e], g)
+	end := strings.Index(week[e:], "</div>") + e + len("</div>")
+	first := strings.Index(week, g)
+	second := strings.Index(week[first+len(g):], g) + first + len(g)
+	if e < 0 || k < 0 || second <= first || second >= k {
+		t.Fatal("no two days and an empty one in s-agenda-1")
+	}
+	empty := week[k:end]
+	five := week[:second] + empty + week[second:end] + strings.Repeat(empty, 4) + week[end:]
+	if err := m.Check("s-agenda-1", five); err != nil {
+		t.Errorf("a week with five empty days: %v", err)
+	}
+	nothing := empty[strings.Index(empty, `<div class="tc-empty`):]
+	if err := m.Check("s-agenda-1", week[:second]+nothing+week[second:]); err == nil {
+		t.Error("an empty day without its heading passes")
+	}
+}
+
+// Carrel's task 76: what the frame draws, the screen has — a button of the
+// head, a section of the card, a piece of a field's value missing is red.
+func TestMissingIsRed(t *testing.T) {
+	m := mockup(t)
+	r, _ := screens.Find("s-agenda-2")
+	card := r.Screen().Render()
+	cut := func(what, from, to string) {
+		t.Helper()
+		i := strings.Index(card, from)
+		if i < 0 {
+			t.Fatalf("no %s in s-agenda-2", what)
+		}
+		j := strings.Index(card[i:], to) + i + len(to)
+		if err := m.Check("s-agenda-2", card[:i]+card[j:]); err == nil {
+			t.Errorf("a card without %s passes", what)
+		}
+	}
+	cut("Print", `<button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>`, "</button>")
+	cut("Related", `<div class="tc-sec"><div class="tc-rubric">Related</div>`, "</ul></div>")
+	cut("the time of When", `<span class="tc-mono">10:00 – 11:00</span>`, "</span>")
+	cut("the badge of When", `<span class="tc-badge" title="Created in another time zone">`, "</span>")
+}

@@ -36,6 +36,17 @@ do, not what the authors did.
 - **`Seg.Multiple`**: a switch with a Name may be a row of checkboxes —
   several options at once, each ticked one sent: the days of a repeat
   (s-agenda-3, task 72).
+- **`shape` is strict about what is missing** (task 76): a run of the screen
+  is no shorter than the frame's, and each element the frame draws in it is
+  on the screen but for its states — a head's Print, a card's Related, a
+  field's time and badge missing is red. A repeat of rows keeps any length;
+  repeated as often as the frame draws it or more, it has each part the frame
+  draws. **A client whose list shows fewer rows than its frame now fails:
+  give the check the frame's records.**
+- **`shape` skips templates and takes a repeat's other blocks** (task 75):
+  a `<template>`'s contents are not compared; beside a repeated block the
+  frame may draw others with the same head — a day with nothing after days
+  with records — and the screen's blocks are any of them, in any order.
 - **`Drop` in a rubric and in a line** (task 71): Attach with its arrow —
   «From this computer», «From Files» — stands in the Attachments rubric of a
   card and in the attachments line of an edit, closed, opening without a
