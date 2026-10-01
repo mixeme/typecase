@@ -9,7 +9,6 @@ type BarPart interface {
 }
 
 func (Button) barPart()    {}
-func (Check) barPart()     {}
 func (CheckForm) barPart() {}
 func (Input) barPart()     {}
 func (Filter) barPart()    {}

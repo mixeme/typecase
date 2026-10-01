@@ -4413,9 +4413,7 @@ Read  2 min ago</div>
           <span class="tc-seg"><button class="tc-seg__opt" type="button">Day</button><button class="is-on tc-seg__opt" type="button">Week</button><button class="tc-seg__opt" type="button">Month</button><button class="tc-seg__opt" type="button">Range</button></span>
           <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-bar__sep is-2nd"></span>
-          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick"></span>Events</button>
-          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Tasks due</button>
-          <button class="tc-check is-3rd" type="button"><span class="tc-tickrow__tick is-off"></span>Notes</button>
+          <form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
           <span class="tc-drop"><button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg>
             
           </button><span class="tc-menu is-pop is-right">

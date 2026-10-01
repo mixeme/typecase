@@ -30,7 +30,9 @@ do, not what the authors did.
   sends it, on a page without a script its Apply does. A page says it has no
   script until `tc.js` runs (`data-tc-noscript` on `html`, printed by `page`).
   Drawn so in the lists' bars (s-contacts-1, -2, s-agenda-1);
-  `TestCheckFormSubmits`.
+  `TestCheckFormSubmits`. `CheckForm.Checks` holds several checks of one form:
+  the agenda's «Events · Tasks due · Notes» (s-agenda-1, task 74); with
+  `Tertiary` they go under «⋯» on a phone. A bar takes checks only so.
 - **`shape` compares a repeating row of rows at any length** (task 61): a
   month and its records, a term and its value — the screen may repeat the
   block any number of times, each like one of the frame's; terms and values

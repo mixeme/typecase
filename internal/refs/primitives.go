@@ -47,7 +47,7 @@ var _ = add(
 	primitive("focus", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn", 1),
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn", 3),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
-	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 17),
+	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 18),
 	primitive("variant", w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Sections"}, "phone-1", "tc-btn", 1),
 	primitive("with-content", w.Button{Label: "B", Bold: true}, "components-29", "tc-btn", 3),
 	primitive("variant", w.Button{Icon: "quill", IconBox: w.IconBox16, Variant: w.ButtonPadX8, Kind: w.ButtonPrimary, Title: "New note"}, "phone-1", "tc-btn", 3),

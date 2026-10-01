@@ -129,9 +129,16 @@ func Agenda1() Screen {
 								Action:    "/app/calendar",
 							},
 							w.BarSep{Secondary: true},
-							w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true},
-							w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true},
-							w.Check{Parts: []w.CheckPart{w.Text("Notes")}, Tertiary: true},
+							w.CheckForm{
+								Checks: []w.Check{
+									w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+									w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+									w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+								},
+								Action:   "/app/calendar",
+								Tertiary: true,
+								Apply:    w.Button{Label: "Apply", Small: true},
+							},
 							w.Drop{
 								Open:    true,
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -159,7 +166,7 @@ func Agenda1() Screen {
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
-									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/calendar",
 									Apply:  w.Button{Label: "Apply", Small: true},
 								},

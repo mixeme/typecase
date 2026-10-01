@@ -501,7 +501,7 @@ func TestCheckFormSubmits(t *testing.T) {
 	needChrome(t)
 	h := browser.NewHarness(t)
 	form := func(action string) string {
-		f := w.CheckForm{Check: w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, Action: action, Hidden: []w.Hidden{{Name: "sort", Value: "az"}}, Apply: w.Button{Label: "Apply", Small: true, Submit: true}}
+		f := w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: action, Hidden: []w.Hidden{{Name: "sort", Value: "az"}}, Apply: w.Button{Label: "Apply", Small: true, Submit: true}}
 		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar">` + f.Render() + `</div></div></div>`
 	}
 	bareURL := h.RegisterPage("checkform-bare", "")

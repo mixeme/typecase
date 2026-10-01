@@ -98,7 +98,7 @@ func Contacts1() Screen {
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
-									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true},
 								},
@@ -291,7 +291,7 @@ func Contacts2() Screen {
 							Right: &w.BarRight{
 								Items: []w.BarPart{
 									w.CheckForm{
-										Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+										Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 										Action: "/app/contacts",
 										Apply:  w.Button{Label: "Apply", Small: true},
 									},

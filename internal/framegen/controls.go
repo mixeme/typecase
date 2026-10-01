@@ -407,7 +407,16 @@ func (g *gen) area(x *El) string {
 // checkForm is a bar's check that is a form: its check, address and hidden
 // fields.
 func (g *gen) checkForm(x *El) string {
-	s := "w.CheckForm{Check: " + g.check(x.Kid("tc-check")) + ", Action: " + q(x.Attr("action"))
+	var cs []string
+	for _, k := range x.Els() {
+		if k.Has("tc-check") {
+			cs = append(cs, g.check(k))
+		}
+	}
+	s := "w.CheckForm{Checks: []w.Check{" + join(cs, ", ") + "}, Action: " + q(x.Attr("action"))
+	if x.Has("is-3rd") {
+		s += ", Tertiary: true"
+	}
 	var hs []string
 	for _, k := range x.Els() {
 		if k.Tag == "input" && k.Attr("type") == "hidden" {

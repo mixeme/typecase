@@ -45,7 +45,8 @@ var _ = add(
 	form("default", w.Seg{Options: seg(0, "Remote", "Local")}, "components-13", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Open 12", "Done 48", "All")}, "components-9", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "0°", "90°", "180°", "270°"), Variant: w.SegStart}, "s-contacts-5", "tc-seg", 1),
-	form("default", w.CheckForm{Check: w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, Action: "/app/contacts", Apply: w.Button{Label: "Apply", Small: true}}, "s-contacts-1", "tc-checkform", 1),
+	form("several", w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, "s-agenda-1", "tc-checkform", 1),
+	form("default", w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/contacts", Apply: w.Button{Label: "Apply", Small: true}}, "s-contacts-1", "tc-checkform", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "All 24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events 14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks 2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}, "s-contacts-7", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "To WebDAV", "Download", "Both"), Variant: w.SegStart}, "s-backup-2", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "Comfortable", "Compact"), Variant: w.SegStart}, "appearance-1", "tc-seg", 2),
@@ -72,8 +73,7 @@ var _ = add(
 	form("rich", check(true, w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")), "s-publish-2", "tc-check", 1),
 	form("box-off", w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}, "components-38", "tc-check", 2),
 	form("box", w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, "components-38", "tc-check", 1),
-	form("tertiary", w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}, Tertiary: true}, "s-agenda-1", "tc-check", 1),
-	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Tasks due")}, Tertiary: true}, "s-agenda-1", "tc-check", 2),
+	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, "s-notes-20", "tc-check", 1),
 	form("rich", check(false, w.Choice{Source: "Leave it out", Value: "—"}), "s-conflict-1", "tc-check", 2),
 	// s-backup-2 .tc-check #4 holds an input inside the button: nested controls
 	// (a11y). Its record waits for the owner's decision on the mockup.

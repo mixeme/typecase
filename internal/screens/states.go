@@ -287,7 +287,7 @@ func States4() Screen {
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
-									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true},
 								},
@@ -739,7 +739,7 @@ func States8() Screen {
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
-									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true},
 								},
@@ -897,7 +897,7 @@ func States9() Screen {
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
-									Check:  w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}},
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true},
 								},
