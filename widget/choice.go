@@ -31,9 +31,9 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme}.
-// Состояния. default | start | compact | icons | radio | links.
-// Инварианты. Выбран ровно один вариант; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
+// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple}.
+// Состояния. default | start | compact | icons | radio | links | several.
+// Инварианты. Выбран ровно один вариант, у ряда флажков (Multiple) — любые; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
 // Эталон. кадр `components-13`, фрагмент `.tc-seg`.
 // Содержимое. Варианты: подпись, значок или оба, число; вариант — кнопка, радио формы или ссылка.
@@ -49,6 +49,9 @@ type Seg struct {
 	// Theme makes the switch the theme's: options auto, light, dark; the
 	// library's script keeps the choice in this browser (tc-theme).
 	Theme bool
+	// Multiple makes a switch with a Name a row of checkboxes: several
+	// options at once, each ticked one sent (the days of a repeat).
+	Multiple bool
 }
 
 // Render prints the switch.
@@ -107,7 +110,11 @@ func (g Seg) seg(m mix) string {
 	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
 		if g.Name != "" {
-			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="radio"` + attr("name", g.Name) + attr("value", o.Value) +
+			kind := "radio"
+			if g.Multiple {
+				kind = "checkbox"
+			}
+			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="` + kind + `"` + attr("name", g.Name) + attr("value", o.Value) +
 				attr("aria-label", pick(o.Label == "", o.Title)) + flag("checked", o.On) + `>`)
 			if o.Icon != "" {
 				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)

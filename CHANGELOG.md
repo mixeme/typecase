@@ -33,6 +33,9 @@ do, not what the authors did.
   `TestCheckFormSubmits`. `CheckForm.Checks` holds several checks of one form:
   the agenda's «Events · Tasks due · Notes» (s-agenda-1, task 74); with
   `Tertiary` they go under «⋯» on a phone. A bar takes checks only so.
+- **`Seg.Multiple`**: a switch with a Name may be a row of checkboxes —
+  several options at once, each ticked one sent: the days of a repeat
+  (s-agenda-3, task 72).
 - **`shape` compares a repeating row of rows at any length** (task 61): a
   month and its records, a term and its value — the screen may repeat the
   block any number of times, each like one of the frame's; terms and values

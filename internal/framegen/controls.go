@@ -482,6 +482,12 @@ func (g *gen) seg(x *El) string {
 	if name != "" {
 		n = ", Name: " + q(name)
 	}
+	for _, o := range x.Els() {
+		if b := o.Kid("tc-seg__box"); b != nil && b.Attr("type") == "checkbox" {
+			n += ", Multiple: true"
+			break
+		}
+	}
 	if x.HasAttr("data-tc-theme-switch") {
 		n += ", Theme: true"
 	}

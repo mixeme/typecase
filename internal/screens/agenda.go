@@ -651,14 +651,16 @@ func Agenda3() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "MO", On: true},
-													{Label: "TU"},
-													{Label: "WE"},
-													{Label: "TH"},
-													{Label: "FR"},
-													{Label: "SA"},
-													{Label: "SU"},
+													{Label: "MO", On: true, Value: "MO"},
+													{Label: "TU", Value: "TU"},
+													{Label: "WE", Value: "WE"},
+													{Label: "TH", Value: "TH"},
+													{Label: "FR", Value: "FR"},
+													{Label: "SA", Value: "SA"},
+													{Label: "SU", Value: "SU"},
 												},
+												Name:     "byday",
+												Multiple: true,
 											},
 										},
 									},
