@@ -158,7 +158,6 @@ func Contacts1() Screen {
 							},
 						},
 					},
-					w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty},
 				},
 			},
 			Side: &w.Side{
@@ -252,6 +251,10 @@ func Contacts2() Screen {
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 						},
 					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
 				},
 				Main: w.Main{
 					Items: []w.MainPart{
@@ -341,7 +344,6 @@ func Contacts2() Screen {
 								},
 							},
 						},
-						w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty},
 					},
 				},
 				Height: w.ShellHeight560,
@@ -431,6 +433,10 @@ func Contacts3() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
 			Main: w.Main{
@@ -596,7 +602,12 @@ func Contacts4() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
 			Main: w.Main{
@@ -706,6 +717,10 @@ func Contacts5() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -787,6 +802,10 @@ func Contacts6() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
 			Main: w.Main{
@@ -944,6 +963,10 @@ func Contacts15() Screen {
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 					},
 				},
 				Main: w.Main{
@@ -1164,6 +1187,10 @@ func Contacts16() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -1344,6 +1371,10 @@ func Contacts7() Screen {
 							Hidden: true,
 						},
 					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
 			Main: w.Main{

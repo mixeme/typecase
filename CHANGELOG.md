@@ -122,6 +122,12 @@ do, not what the authors did.
   (s-contacts-7, s-agenda-1). A calendar the server made with less than was
   asked for says so over its lists, with «New calendar» (s-agenda-11, Carrel's
   task 53). 372 frames.
+- Carrel's tasks 54–57 (the owner's decisions of 01.10): every rail has its
+  foot — davloom's mark and the build line (C-13), on the card, the edit, the
+  wizards and the conflicts too (48 frames); the rails of a read-only book
+  (states-4) and of the full new-contact form (s-contacts-4) carry the whole
+  set of books; a finished list has no «Loading more…» (s-contacts-1, -2); the
+  quick contact sheet's address is `/new/quick` (s-notes-8).
 
 ## typecase/v0.10.0 — 2026-09-29
 

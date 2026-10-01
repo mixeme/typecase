@@ -122,10 +122,10 @@ var _ = add(
 		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}}}}, "s-conflict-2", "tc-diff", 1),
 
 	// tc-empty
+	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Span{Face: w.FaceAccent, Text: "Show 50 more", Href: "/app/mail/home/inbox?shown=100"}}, Variant: w.EmptyDusty}, "s-mailbox-1", "tc-empty", 1),
 	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing this day.")}, Variant: w.EmptySmall}, "s-agenda-1", "tc-empty", 1),
 	cards("action", w.Empty{Parts: []w.EmptyPart{w.Text("No contacts in this address book."), w.Button{Label: "New contact", Kind: w.ButtonPrimary}}}, "components-22", "tc-empty", 1),
 	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, "s-notes-6", "tc-empty", 1),
-	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Text("Loading more…")}, Variant: w.EmptyDusty}, "s-contacts-1", "tc-empty", 1),
 	cards("drop", w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, "s-io-1", "tc-empty", 1),
 	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing was looked for before January 2026. Widen the range if you need it.")}, Variant: w.EmptySmallTop}, "s-contacts-7", "tc-empty", 1),
 	cards("dashed", w.Empty{Parts: []w.EmptyPart{w.Text("Drop files here, or"), w.Emphasis("choose on the computer"), w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}}}, Variant: w.EmptyDashed}, "s-notes-11", "tc-empty", 1),

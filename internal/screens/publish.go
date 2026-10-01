@@ -177,6 +177,10 @@ func Publish2() Screen {
 							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 						},
 					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
 				},
 				Main: w.Main{
 					Items: []w.MainPart{
@@ -309,6 +313,10 @@ func Publish13() Screen {
 							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 						},
 					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
 				},
 				Main: w.Main{
 					Items: []w.MainPart{
@@ -423,6 +431,10 @@ func Publish3() Screen {
 							w.Rubric{Text: "radicale · vps"},
 							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Trail: w.Badge{Label: "ro"}},
 						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 					},
 				},
 				Main: w.Main{
@@ -548,6 +560,10 @@ func Publish4() Screen {
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
 							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 					},
 				},
 				Main: w.Main{

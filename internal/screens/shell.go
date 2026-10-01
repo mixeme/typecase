@@ -22,6 +22,10 @@ func Shell1() Screen {
 					Title: w.Rubric{Text: "Rail"},
 					Note:  w.Mono{Text: "264 px · sections + sources", Form: w.MonoLine, Variant: w.Mono11Top},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			RailForm: w.RailZone,
 			Main: w.Main{

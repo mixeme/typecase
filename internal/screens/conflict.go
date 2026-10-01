@@ -27,6 +27,10 @@ func Conflict1() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -135,6 +139,10 @@ func Conflict3() Screen {
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 					},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -210,6 +218,10 @@ func Conflict4() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Дела", Meta: "3", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
 			Main: w.Main{
@@ -290,6 +302,10 @@ func Conflict5() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 					},
 				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -361,8 +377,14 @@ func Conflict2() Screen {
 			},
 		},
 		Body: w.ShellBody{
-			Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
-				{Icon: "back", Href: "#", Title: "Back"}}}},
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Href: "#", Title: "Back"}}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
 			RailForm: w.RailIcons,
 			Main: w.Main{
 				Items: []w.MainPart{

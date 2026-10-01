@@ -28,7 +28,7 @@ var _ = add(
 	rows("root", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "2 of 3", Current: true}, "s-files-6", "tc-tickrow", 1),
 	rows("group", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "radicale · vps", Meta: "0 of 2"}, "s-backup-2", "tc-tickrow", 2),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Current: true, Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 1),
-	rows("current", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Current: true, Trail: w.Badge{Label: "ro"}}, "states-4", "tc-tickrow", 3),
+	rows("current", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Current: true, Trail: w.Badge{Label: "ro"}}, "states-4", "tc-tickrow", 4),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Form: w.TickRowTouch, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "14", Current: true}, "phone-2", "tc-tickrow", 1),
 	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true}, "phone-2", "tc-tickrow", 2),
 	rows("touch", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowTouch, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "phone-2", "tc-tickrow", 4),

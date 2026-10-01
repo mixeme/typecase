@@ -275,6 +275,8 @@ func (g *gen) empty(e *El) string {
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-kbd"):
 				ps = append(ps, "w.Kbd{Keys: "+q(v.Text())+"}")
+			case v.Tag == "a" && v.Has("tc-dim--accent"):
+				ps = append(ps, "w.Span{Face: w.FaceAccent, Text: "+q(v.Text())+", Href: "+q(v.Attr("href"))+"}")
 			default:
 				stop("empty? " + join(v.Cls(), " "))
 			}
