@@ -67,6 +67,9 @@ func (g *gen) diag(e *El) string {
 	if v := firstOf(e, []kv{{"tc-diag--top9-ink", "DiagInk"}, {"tc-diag--danger", "DiagDanger"}}); v != "" {
 		s += ", Variant: w." + v
 	}
+	if id := e.Attr("id"); id != "" {
+		s += ", ID: " + q(id)
+	}
 	return s + placef(e) + "}"
 }
 

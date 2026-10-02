@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -116,7 +116,13 @@ type Button struct {
 	// and the server answers with one more row.
 	Adds  string
 	Opens string // the ID of the sheet (Scrim) the button opens in place
-	Place Place
+	// SaveAs is the name of the file the button saves the text of the
+	// element SaveFrom names into, with the library's script (Carrel's task
+	// 94: a secret shown once has no address to download from). Without a
+	// script the button is not shown: Copy and selecting the text remain.
+	SaveAs   string
+	SaveFrom string
+	Place    Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
 	Secondary bool
 	// Tertiary goes under «⋯» on a phone, after the secondary ones.
@@ -155,7 +161,7 @@ func (b Button) html(m mix) string {
 			typ = "submit"
 		}
 		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) +
-			common + flag("disabled", b.State == ButtonDisabled) + `>`)
+			attr("data-tc-save", b.SaveAs) + attr("data-tc-from", b.SaveFrom) + common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))

@@ -686,6 +686,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* «Save as» показанного текста (задача 94): файл собирает сценарий страницы — без него кнопки нет. */
+[data-tc-noscript] [data-tc-save]{display:none}
 /* Двойник отметок в меню «⋯» (задача 82): та же форма, отметки — пункты-флажки столбиком; Apply без сценария — под ними. */
 .tc-menu .tc-checkform{display:flex;flex-direction:column;align-items:stretch;gap:0}
 [data-tc-noscript] .tc-menu .tc-checkform__apply{display:block;padding:4px 10px 6px}
@@ -12283,7 +12285,7 @@ Read  2 min ago</div>
             <div class="tc-diag tc-diag--top9-ink">0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'</div>
             <div class="tc-line tc-line--gap-8 tc-card__top8">
               <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the line</button>
-              <button class="tc-btn" type="button">Regenerate</button>
+              <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Runs at 03:00 · the time sits inside the line and is changed there</span>
             </div>
             <div class="tc-card__note">Paste into <span class="tc-mono">crontab -e</span> on the machine that is to hold the password. It is one line and stays one line — <span class="tc-mono">cron</span> understands no continuations; the wrap you see is this screen’s doing. <span class="tc-mono">-fsS</span> keeps it quiet while all is well and makes cron mail you when the request itself fails.</div>
@@ -12375,7 +12377,7 @@ Read  2 min ago</div>
         <div class="tc-rubric">The script to paste <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
         <div class="tc-card__above">Destination: <b class="tc-card__key">WebDAV and download</b> — two steps, so this is a file, not a line</div>
         <span class="tc-seg tc-seg--start"><button class="is-on tc-seg__opt" type="button">crontab</button><button class="tc-seg__opt" type="button">GoSentry</button><button class="tc-seg__opt" type="button">Gitea</button><button class="tc-seg__opt" type="button">curl</button></span>
-        <div class="tc-diag tc-diag--top9-ink">#!/bin/sh
+        <div class="tc-diag tc-diag--top9-ink" id="trigger-script">#!/bin/sh
 set -eu
 h='Authorization: Bearer cbk_7f3a-91de-4402-lamp'
 b=https://carrel.example/api/backup
@@ -12386,8 +12388,8 @@ until [ "$(curl -fsS -H "$h" "$b/status?id=$id")" != running ]; do sleep 20; don
 curl -fsS -H "$h" "$b/$id/download" -o "$out/carrel-personal-$(date +%F).zip"</div>
         <div class="tc-line tc-line--gap-8 tc-card__top8">
           <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the script</button>
-          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
-          <button class="tc-btn" type="button">Regenerate</button>
+          <button class="tc-btn" type="button" data-tc-save="carrel-personal.sh" data-tc-from="trigger-script"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
+          <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
         </div>
         <div class="tc-card__note">Put it where the password is to live, make it executable, and give <span class="tc-mono">crontab -e</span> one line: <span class="tc-mono">0 3 * * * /usr/local/bin/carrel-personal.sh</span> — the schedule stays a line, the work moves into the file. The date has to live in the script and not in the crontab line: <span class="tc-mono">cron</span> reads <span class="tc-mono">%</span> as a newline, so <span class="tc-mono">date +%F</span> written up there would break the entry.</div>
         <div class="tc-msg tc-msg--flush-top9">A copy that fails needs no separate check: the download answers with an error, <span class="tc-mono">set -eu</span> stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and <span class="tc-mono">409</span> until then means «not yet», not «broken».</div>
@@ -12458,13 +12460,72 @@ https://carrel.example/api/backup/run?job=personal</textarea>
             <span class="tc-stack__item"><span class="tc-mono">GET /api/backup/{id}/download</span><br><span class="tc-dim">the archive itself, once it is done — <span class="tc-mono">409</span> while it runs</span></span>
           </div>
           <div class="tc-msg is-alert tc-msg--flush-top11">No collections, no settings — but read the third line together with <b>Encrypt the archive</b> in this job: the password can pull the archive down as well, and an archive with encryption turned off is your data in the clear.</div>
-          <div class="tc-card__note-dusty">Every use is logged, naming this password. <b>Regenerate</b> replaces it on the spot — and every line already handed out stops working with it.</div>
+          <div class="tc-card__note-dusty">Every use is logged, naming this password. <b>New password</b> replaces it on the spot — and every line already handed out stops working with it.</div>
         </div>
       </div></div></div>
     </div>
   </div>
   <figcaption>Меньшинство, ради которого пароль всё-таки показывают отдельно: тот, кто пишет запрос руками и читал документацию. Ему нужен не только секрет, но и то, что им открывается, — поэтому рядом все три эндпоинта и границы области действия. Раскрывашка закрыта по умолчанию не из скрытности: девять из десяти пришли за строкой, и первое, что они видят, — строка.<br><br><b>Оговорка про шифрование стоит именно здесь.</b> Флажок «Encrypt the archive» выше кажется вопросом о папке назначения, а на самом деле он решает и это: тем же паролем, который лежит на машине с часами, архив можно забрать. Выключать шифрование можно там, где и триггер-пароль никуда с этой машины не уходит.</figcaption>
   </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-backup-10">
+    <div class="frame-label"><span>Внешний триггер · вкладка Gitea</span><span class="frag">фрагмент</span><i>карточка триггера на экране задания выше</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main"><div class="tc-form">
+        <div class="tc-card tc-grow tc-card--edge-accent-flush">
+          <div class="tc-rubric">The workflow to paste <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
+          <span class="tc-seg tc-seg--start"><button class="tc-seg__opt" type="button">crontab</button><button class="tc-seg__opt" type="button">GoSentry</button><button class="is-on tc-seg__opt" type="button">Gitea</button><button class="tc-seg__opt" type="button">curl</button></span>
+          <div class="tc-diag tc-diag--top9-ink" id="trigger-gitea">name: Carrel backup · personal
+on:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -m 30 -X POST -H "Authorization: Bearer ${{ secrets.CARREL_BACKUP }}" 'https://carrel.example/api/backup/run?job=personal'</div>
+          <div class="tc-line tc-line--gap-8 tc-card__top8">
+            <button class="tc-btn is-primary" type="button">Copy the workflow</button>
+            <button class="tc-btn" type="button" data-tc-save="carrel-personal.yaml" data-tc-from="trigger-gitea"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.yaml</span></button>
+            <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
+          </div>
+          <div class="tc-card__grid">
+            <span class="tc-dim tc-dim--t11">Secret</span>
+            <input class="tc-in is-mono tc-in--t11" type="text" aria-label="Secret" value="CARREL_BACKUP">
+            <button class="tc-btn is-sm" type="button">Copy</button>
+            <span class="tc-dim tc-dim--t11">Its value</span>
+            <input class="tc-in is-mono tc-in--t11" type="text" aria-label="Its value" value="cbk_7f3a-91de-4402-lamp">
+            <button class="tc-btn is-sm" type="button">Copy</button>
+          </div>
+          <div class="tc-card__note">Put the file into the repository as <span class="tc-mono">.gitea/workflows/carrel-personal.yaml</span> and the password into its secrets as <span class="tc-mono">CARREL_BACKUP</span>: the workflow names the secret, the password never sits in the file. A job that also <b>downloads</b> gets the script as a step, and the archive is kept with <span class="tc-mono">actions/upload-artifact</span>.</div>
+        </div>
+      </div></div></div>
+    </div>
+  </div>
+  <figcaption><b>Gitea — это workflow, а не строка</b>: расписание и шаг в одном файле Gitea Actions. Пароль — в секретах репозитория под именем, которое файл называет; в самом файле его нет, поэтому файл можно хранить в репозитории. Заданию со скачиванием шаг — тот же скрипт, а архив остаётся артефактом прогона (<span class="tc-mono">upload-artifact</span>). <b>Save as</b> сохраняет показанный текст файлом — это может только сценарий страницы: маршрута у файла нет, пароль показан один раз. Без сценария кнопки нет, остаются Copy и выделение текста.</figcaption>
+  </figure>
+
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-backup-11">
+    <div class="frame-label"><span>Внешний триггер · вкладка curl</span><span class="frag">фрагмент</span><i>карточка триггера на экране задания выше</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main"><div class="tc-form">
+        <div class="tc-card tc-grow tc-card--edge-accent-flush">
+          <div class="tc-rubric">The request to send <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
+          <span class="tc-seg tc-seg--start"><button class="tc-seg__opt" type="button">crontab</button><button class="tc-seg__opt" type="button">GoSentry</button><button class="tc-seg__opt" type="button">Gitea</button><button class="is-on tc-seg__opt" type="button">curl</button></span>
+          <div class="tc-diag tc-diag--top9-ink">curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'</div>
+          <div class="tc-line tc-line--gap-8 tc-card__top8">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the line</button>
+            <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
+          </div>
+          <div class="tc-card__note">For anything that can send a <span class="tc-mono">POST</span>: a scheduler of your own, a monitoring service, a hand at the terminal. The line is the whole of it; <span class="tc-mono">GET /api/backup/status?job=personal</span> answers when the last copy went through.</div>
+        </div>
+      </div></div></div>
+    </div>
+  </div>
+  <figcaption><b>curl — голая команда</b> для любого планировщика, которого нет среди вкладок: её и копируют (решение человека 02.10). Разбирать её на поля незачем — кто умеет только поля, тому вкладка GoSentry.</figcaption>
+  </figure>
+
 </div>
 
 <figure>

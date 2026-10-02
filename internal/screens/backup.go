@@ -552,7 +552,10 @@ func Backup2() Screen {
 												Gap:  8,
 												Items: []w.CardRowPart{
 													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary},
-													w.Button{Label: "Regenerate"},
+													w.Button{
+														Label: "New password",
+														Title: "The old password stops working; whatever runs this job has to be given the new one.",
+													},
 													w.Dim{
 														Parts:   []w.Inline{w.Text("Runs at 03:00 · the time sits inside the line and is changed there")},
 														Size:    w.Dim11_5,
@@ -746,14 +749,24 @@ func Backup3() Screen {
 									w.Diag{
 										Text:    "#!/bin/sh\nset -eu\nh='Authorization: Bearer cbk_7f3a-91de-4402-lamp'\nb=https://carrel.example/api/backup\nout=/var/backups\n\nid=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\")\nuntil [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done\ncurl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"",
 										Variant: w.DiagInk,
+										ID:      "trigger-script",
 									},
 									w.CardRow{
 										Kind: w.CardTop8,
 										Gap:  8,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary},
-											w.Button{Label: "Save as", Icon: "down", Aside: &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11}},
-											w.Button{Label: "Regenerate"},
+											w.Button{
+												Label:    "Save as",
+												Icon:     "down",
+												SaveAs:   "carrel-personal.sh",
+												SaveFrom: "trigger-script",
+												Aside:    &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11},
+											},
+											w.Button{
+												Label: "New password",
+												Title: "The old password stops working; whatever runs this job has to be given the new one.",
+											},
 										},
 									},
 									w.CardText{

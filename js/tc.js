@@ -371,6 +371,26 @@
 			return;
 		}
 
+		// Save as: the text of the element named becomes a file here, in the
+		// page (Carrel's task 94: a secret shown once has no address).
+		var save = closest(e.target, "[data-tc-save]");
+		if (save) {
+			var from = document.getElementById(save.getAttribute("data-tc-from"));
+			if (from) {
+				e.preventDefault();
+				var a = document.createElement("a");
+				a.href = URL.createObjectURL(new Blob([from.textContent], { type: "text/plain" }));
+				a.download = save.getAttribute("data-tc-save");
+				document.body.appendChild(a);
+				a.click();
+				a.remove();
+				setTimeout(function () {
+					URL.revokeObjectURL(a.href);
+				}, 1000);
+			}
+			return;
+		}
+
 		var add = closest(e.target, "[data-tc-add]");
 		if (add) {
 			var tpl = document.getElementById(add.getAttribute("data-tc-add"));

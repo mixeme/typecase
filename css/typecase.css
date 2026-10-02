@@ -505,6 +505,8 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* «Save as» показанного текста (задача 94): файл собирает сценарий страницы — без него кнопки нет. */
+[data-tc-noscript] [data-tc-save]{display:none}
 /* Двойник отметок в меню «⋯» (задача 82): та же форма, отметки — пункты-флажки столбиком; Apply без сценария — под ними. */
 .tc-menu .tc-checkform{display:flex;flex-direction:column;align-items:stretch;gap:0}
 [data-tc-noscript] .tc-menu .tc-checkform__apply{display:block;padding:4px 10px 6px}

@@ -15,6 +15,11 @@ do, not what the authors did.
 
 ### Added
 
+- **Save as** (Carrel's task 94): `Button.SaveAs` and `SaveFrom` save the
+  text of the element named (a `Diag` with its new `ID`) as a file, made in
+  the page by the library's script — a secret shown once has no address to
+  download from. Without a script the button is not shown; Copy and
+  selecting the text remain. `TestSaveAs`.
 - **Refused sources** (the owner's decision of 02.10: the fight with the
   length of a line is lost): a `TickRow` with `Error` and no `Meta` shows an
   error mark, its reason (`MetaTitle`) in the mark's hint (the icon `alert`);
@@ -116,6 +121,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's task 94 and the owner's decisions of 02.10: the external trigger
+  of a backup job has its Gitea tab — a Gitea Actions workflow, the password
+  in the repository's secrets under the name the file gives, the archive of a
+  job that downloads kept with `upload-artifact` (s-backup-10) — and its curl
+  tab, the bare command to copy (s-backup-11); «Regenerate» is «New password»,
+  its hint saying the old one stops working (s-backup-2, -3, -5). 392 frames.
 - Carrel's task 93 and the owner's decisions of 02.10: an event's save that
   lost properties has its frame, as a contact's (states-17); an attachment's
   name is a link in every card — in the record it downloads, in Files it

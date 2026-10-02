@@ -36,6 +36,8 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl", On: true}}, Variant: w.SegStart}, "s-backup-11", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea", On: true}, {Label: "curl"}}, Variant: w.SegStart}, "s-backup-10", "tc-seg", 1),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "All 4", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 1"}, {Label: "Notes 1"}}}, "s-dup-1", "tc-seg", 1),
 	form("default", w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "All", Count: "24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events", Count: "14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks", Count: "2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}}, "s-contacts-7", "tc-segfold", 1),
 	form("sort-changed", w.Seg{Options: []w.SegOption{{Label: "By due"}, {Label: "By priority"}, {Label: "Recently changed", On: true}}}, "s-tasks-13", "tc-seg", 2),

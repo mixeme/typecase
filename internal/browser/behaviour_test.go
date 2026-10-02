@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
 
 	"carrel.dev/typecase/internal/browser"
@@ -711,5 +712,37 @@ func TestCheckFormInMenu(t *testing.T) {
 	}
 	if applyShown || !strings.Contains(search, "compact=1") {
 		t.Errorf("with the script: Apply shown %v, sent %q; want false, compact=1", applyShown, search)
+	}
+}
+
+// TestSaveAs (Carrel's task 94): Save as makes a file of the text shown —
+// with the library's script, in the page; without a script the button is not
+// shown, and Copy and selecting the text remain.
+func TestSaveAs(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	body := `<div class="tc-root"><div class="tc-main">` + w.Diag{ID: "script", Text: "#!/bin/sh\necho hello"}.Render() +
+		w.Button{Label: "Save as", SaveAs: "carrel.sh", SaveFrom: "script"}.Render() + `</div></div>`
+	bare := h.RegisterPage("save-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	var shown bool
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(`document.querySelector("[data-tc-save]").checkVisibility()`, &shown),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if shown {
+		t.Error("without a script Save as is shown")
+	}
+	page := h.RegisterPage("save", browser.PageHTML(body, ""))
+	var got string
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(`window.__saved = []; HTMLAnchorElement.prototype.click = function () { const a = this; window.__saved.push(fetch(a.href).then(r => r.text()).then(x => a.download + "|" + x)); }; true`, nil),
+		chromedp.Click(`[data-tc-save]`, chromedp.ByQuery),
+		chromedp.Evaluate(`Promise.all(window.__saved).then(x => x.join(";"))`, &got, func(p *runtime.EvaluateParams) *runtime.EvaluateParams { return p.WithAwaitPromise(true) }),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if got != "carrel.sh|#!/bin/sh\necho hello" {
+		t.Errorf("with the script: saved %q; want carrel.sh with the text", got)
 	}
 }
