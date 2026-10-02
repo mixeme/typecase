@@ -84,7 +84,11 @@ func Notes1() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Input{Kind: w.InputSearch, Placeholder: "Filter by word", Label: "Filter by word", Variant: w.InputH26W200},
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
@@ -150,11 +154,8 @@ func Notes1() Screen {
 							},
 							w.SecTasks{
 								Items: []w.DocTask{
-									{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
-									{
-										Tick: w.Tick{Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"},
-										Text: "попросить у Артёма скриншоты",
-									},
+									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
+									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 								},
 							},
 						},
@@ -172,8 +173,13 @@ func Notes1() Screen {
 										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
-												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{
+													Icon:  "up",
+													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+													Label: "From this computer",
+												},
 												w.MenuItem{Icon: "file", Label: "From Files"},
+												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 											},
 											Width: w.MenuWidth212,
 											Pop:   w.MenuUnder,
@@ -301,11 +307,8 @@ func Notes2() Screen {
 									w.DocTasks{
 										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
 										Items: []w.DocTask{
-											{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
-											{
-												Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"},
-												Text: "попросить у Артёма скриншоты",
-											},
+											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
+											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 										},
 									},
 									w.Prose{
@@ -343,8 +346,13 @@ func Notes2() Screen {
 													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
-															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{
+																Icon:  "up",
+																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+																Label: "From this computer",
+															},
 															w.MenuItem{Icon: "file", Label: "From Files"},
+															w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 														},
 														Width: w.MenuWidth212,
 														Pop:   w.MenuUnder,
@@ -479,11 +487,8 @@ func Notes3() Screen {
 									w.DocTasks{
 										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
 										Items: []w.DocTask{
-											{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
-											{
-												Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"},
-												Text: "попросить у Артёма скриншоты",
-											},
+											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
+											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 										},
 									},
 									w.Prose{
@@ -521,8 +526,13 @@ func Notes3() Screen {
 													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
-															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{
+																Icon:  "up",
+																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+																Label: "From this computer",
+															},
 															w.MenuItem{Icon: "file", Label: "From Files"},
+															w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 														},
 														Width: w.MenuWidth212,
 														Pop:   w.MenuUnder,
@@ -607,8 +617,8 @@ func Notes20() Screen {
 				Items: []w.MainPart{
 					w.Docbar{
 						Items: []w.DocbarPart{
-							w.Button{Label: "Save", Kind: w.ButtonPrimary},
-							w.Button{Label: "Cancel"},
+							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-edit"},
+							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -631,27 +641,58 @@ func Notes20() Screen {
 						Items: []w.DocLayoutPart{
 							w.Doc{
 								Items: []w.DocPart{
-									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Text"},
+									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
 											w.Field{
 												Label: "Notebook",
-												Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Записи"}},
+												Parts: []w.FieldPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Записи",
+																	On:    true,
+																	Name:  "notebook",
+																	Value: "nextcloud/zapisi",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "nextcloud · Дневник",
+																	Name:  "notebook",
+																	Value: "nextcloud/dnevnik",
+																},
+																w.MenuItem{
+																	Mark:   &w.Mark{Colour: "#3F6E8C"},
+																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+																	Label:  "nextcloud · Общие с семьёй",
+																	Reason: "Read-only: this account cannot write here",
+																	Name:   "notebook",
+																	Value:  "nextcloud/semya",
+																},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
 												Width: w.FieldFlex2_280,
 											},
 											w.Field{
 												Label: "Date",
-												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Date", Mono: true}},
+												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},
 												Width: w.FieldFix150,
 											},
 											w.Field{
 												Label: "Time",
-												Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:05", Label: "Time", Mono: true}},
+												Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "dtstart.time", Value: "11:05", Label: "Time", Mono: true}},
 												Width: w.FieldFix130,
 											},
 											w.Field{
 												Label: "Tags",
-												Parts: []w.FieldPart{w.Input{Value: "встречи, релиз", Label: "Tags"}},
+												Parts: []w.FieldPart{w.Input{Name: "categories", Value: "встречи, релиз", Label: "Tags"}},
 												Width: w.FieldFlex3_320,
 											},
 											w.Field{
@@ -665,6 +706,7 @@ func Notes20() Screen {
 										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
 										Variant: w.AreaBody,
 										Focus:   true,
+										Name:    "description",
 										Label:   "Text",
 									},
 									w.DocNote{
@@ -673,6 +715,8 @@ func Notes20() Screen {
 										},
 									},
 								},
+								ID:     "note-edit",
+								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
 							},
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
@@ -684,8 +728,13 @@ func Notes20() Screen {
 													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
-															w.MenuItem{Icon: "up", Label: "From this computer"},
+															w.MenuItem{
+																Icon:  "up",
+																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+																Label: "From this computer",
+															},
 															w.MenuItem{Icon: "file", Label: "From Files"},
+															w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 														},
 														Width: w.MenuWidth212,
 														Pop:   w.MenuUnder,
@@ -758,8 +807,8 @@ func Notes4() Screen {
 				Items: []w.MainPart{
 					w.Docbar{
 						Items: []w.DocbarPart{
-							w.Button{Label: "Save", Kind: w.ButtonPrimary},
-							w.Button{Label: "Cancel"},
+							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-edit"},
+							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -782,27 +831,58 @@ func Notes4() Screen {
 						Items: []w.DocLayoutPart{
 							w.Doc{
 								Items: []w.DocPart{
-									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Label: "Text"},
+									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
 											w.Field{
 												Label: "Notebook",
-												Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Записи"}},
+												Parts: []w.FieldPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Записи",
+																	On:    true,
+																	Name:  "notebook",
+																	Value: "nextcloud/zapisi",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "nextcloud · Дневник",
+																	Name:  "notebook",
+																	Value: "nextcloud/dnevnik",
+																},
+																w.MenuItem{
+																	Mark:   &w.Mark{Colour: "#3F6E8C"},
+																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+																	Label:  "nextcloud · Общие с семьёй",
+																	Reason: "Read-only: this account cannot write here",
+																	Name:   "notebook",
+																	Value:  "nextcloud/semya",
+																},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
 												Width: w.FieldFlex2_280,
 											},
 											w.Field{
 												Label: "Date",
-												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Date", Mono: true}},
+												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},
 												Width: w.FieldFix150,
 											},
 											w.Field{
 												Label: "Time",
-												Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:05", Label: "Time", Mono: true}},
+												Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "dtstart.time", Value: "11:05", Label: "Time", Mono: true}},
 												Width: w.FieldFix130,
 											},
 											w.Field{
 												Label: "Tags",
-												Parts: []w.FieldPart{w.Input{Value: "встречи, релиз", Label: "Tags"}},
+												Parts: []w.FieldPart{w.Input{Name: "categories", Value: "встречи, релиз", Label: "Tags"}},
 												Width: w.FieldFlex3_320,
 											},
 											w.Field{
@@ -847,6 +927,7 @@ func Notes4() Screen {
 									w.Area{
 										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
 										Variant: w.AreaBody,
+										Name:    "description",
 										Label:   "Text",
 									},
 									w.DocNote{
@@ -857,6 +938,8 @@ func Notes4() Screen {
 										},
 									},
 								},
+								ID:     "note-edit",
+								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
 							},
 						},
 						View: w.DocViewFocus,

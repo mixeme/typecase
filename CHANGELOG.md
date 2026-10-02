@@ -15,6 +15,48 @@ do, not what the authors did.
 
 ### Added
 
+- **A document is a form in its edit** (Carrel's task 98): `Doc.Action`,
+  `Method`, `Fields` and `ID`, as `Form` has them. A note's edit sends its
+  fields without a script: the title (`summary`), the notebook, the date and
+  time, the tags, the text (`description`) — names the frames give and the
+  server may change; Save in the edit bar is the form's submit (`Form`),
+  Cancel a link back to the note (s-notes-4, -20).
+- **A pick of collections with their marks** (Carrel's task 103): `Pick.Mark`
+  shows the chosen collection's colour; a radio `MenuItem` prints its `Mark`,
+  and with a `Reason` it is shown and switched off, the reason in its hint —
+  a read-only notebook with its «ro» badge (`Trail`). Choosing an item, the
+  core script carries its mark into the pick. The Notebook field of a note's
+  edit is drawn so (s-notes-4, -20; its list s-notes-15, desktop-17).
+- **Parts of a document's text** (Carrel's task 102): `Em` (italic words),
+  `DocQuote` (a quotation), `DocCode` (a block of code as written; a long
+  line scrolls inside it), and a nested list — a `DocBullets` item's parts
+  may end with a `DocBullets`. A link and inline code (`Mono` chip) stand in
+  a paragraph and in an item as before. The new frame «Заметка · части
+  текста» (s-notes-25) draws them all.
+- **`SegFold.Phone`**: a short switch folds on a phone's bar only (640 px
+  and less), where the timeline's folds with the bar's second rank (960).
+- **`FilterH26W200`** (Carrel's task 100): a bar's filter of 200 px.
+- **`Tick.Sign`** (Carrel's task 99): a task's tick in a text — a note's
+  tasks, its side panel, a published page — is a sign that says «Done» or
+  «Not done» and is not pressed; the note is changed in its edit. The frames
+  of notes (s-notes-1, -2, -3, phone-7) and of a published page (s-publish-8)
+  draw it so.
+- **`TagAdd.Options`** (Carrel's task 96): the choices of a tag field's line
+  on a page without a script — a `datalist`, the browser's own list as one
+  types; a `ListOption`'s Value is sent (a record's UID, an address), its
+  Label shown beside it. Where the field has `Suggest`, the live layer takes
+  the list away so that it does not cover the menu.
+- **`Check.Disables` takes several names** (Carrel's task 111), separated by
+  spaces as classes are: All day switches off «start.time due.time». The
+  core script switches off each.
+- **A file without a script** (Carrel's task 109): `Button.File` and
+  `MenuItem.File` (a `FileField`: the `PostForm`'s ID, the field's name,
+  `Accept`, the input's accessible name) make the control the label of a file input, which
+  the browser opens without a script. With the library's script the picked
+  file sends its form at once; without one the input shows what was picked
+  and an «Upload» beside it — `Button.NoScript` / `MenuItem.NoScript`, shown
+  only on a page without a script — sends it. «From this computer» in every
+  Attach menu and the photo's Replace and Add are drawn so. `TestFilePick`.
 - **`Range.Hidden`** (Carrel's task 107): the range's form sends the list's
   other choices with it — `view=range`, without which a server shows the
   week from From. The agenda's ranges carry it.
@@ -127,6 +169,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- A segment's option that is a link is muted as a button option is; the
+  root's rule for links (`color: inherit`) had drawn it in ink (the
+  timeline s-contacts-7, Mentions, the mailbox s-mailbox-21, the agenda).
+- Carrel's task 100: the filter of the notebook (s-notes-1), of the users
+  (s-admin-2) and of the phone's notes (phone-8) is a `Filter` — a GET form
+  on the server's side, its search icon drawn — not a bare search input.
+- The agenda's Day / Week / Month / Range is a `SegFold` of links (s-agenda-1,
+  states-3, -6, -13, -15): a switch of views is a move to another address,
+  and buttons did nothing without a script; on a phone's bar (640 px and
+  less, `SegFold.Phone`) it folds to the current view with a menu of the
+  rest, so the bar fits a phone with no help from the script (`TestBarSafetyQuiet` was red at 390 px at
+  `bc575a8`). 393 frames.
 - The new event says «No status» and «Does not repeat», the words of its
   lists (s-agenda-15, Carrel's task 106).
 - Carrel's task 94 and the owner's decisions of 02.10: the external trigger

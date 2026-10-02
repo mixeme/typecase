@@ -99,7 +99,7 @@ func (v PickVariant) class() string {
 // Pick — tc-in
 //
 // Роль. Поле со списком: значение выбирают из списка, а не набирают.
-// Вход. Pick{Value, Aside, Unset, Label, Focus, Variant, Place, Name, Options}.
+// Вход. Pick{Value, Mark, Aside, Unset, Label, Focus, Variant, Place, Name, Options}.
 // Состояния. value | unset | aside | focus | variant | select.
 // Инварианты. Стрелку рисует система (is-pick), иначе список неотличим от строки ввода; пустой выбор выглядит плейсхолдером; выбор печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает список под полем; выбор закрывает его, фокус возвращается на поле.
@@ -113,8 +113,9 @@ type Pick struct {
 	Name    string
 	Options []PickOption
 	Value   string
-	Aside   *Dim // "as sent" after a time zone
-	Unset   bool // nothing is chosen: the value is a placeholder
+	Mark    *Mark // the colour of the chosen collection: a notebook (Carrel's task 103)
+	Aside   *Dim  // "as sent" after a time zone
+	Unset   bool  // nothing is chosen: the value is a placeholder
 	Label   string
 	Focus   bool
 	Variant PickVariant
@@ -143,7 +144,11 @@ func (p Pick) html(m mix) string {
 		return s.String()
 	}
 	s := `<button` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) +
-		` type="button"` + attr("aria-label", p.Label) + `>` + esc(p.Value)
+		` type="button"` + attr("aria-label", p.Label) + `>`
+	if p.Mark != nil {
+		s += p.Mark.html(nil)
+	}
+	s += esc(p.Value)
 	if p.Aside != nil {
 		s += " " + p.Aside.html(nil)
 	}
@@ -181,10 +186,11 @@ const (
 	FilterH26W220 FilterVariant = iota // a list's filter in its bar
 	FilterH26W190                      // the same, narrower
 	FilterT12W200                      // 12 px, in a sheet's head
+	FilterH26W200                      // a bar's filter beside a wider segment (notes, users)
 )
 
 func (v FilterVariant) class() string {
-	return [...]string{"tc-in--h26-w220", "tc-in--h26-w190", "tc-in--t12-w200"}[v]
+	return [...]string{"tc-in--h26-w220", "tc-in--h26-w190", "tc-in--t12-w200", "tc-in--h26-w200"}[v]
 }
 
 // Filter — tc-in
@@ -270,6 +276,17 @@ type TagAdd struct {
 	// an item's Adds is the tag it adds, with the field's Name (MenuItems
 	// prints the answer).
 	Suggest string
+	// Options are the choices of a page without a script (Carrel's task 96):
+	// a datalist of the line, the browser's own list as one types — Value is
+	// what is sent (a record's UID, an address), Label what is shown beside
+	// it. The live layer takes the list away where it asks Suggest.
+	Options []ListOption
+}
+
+// ListOption is a choice of a tag field's line on a page without a script.
+type ListOption struct {
+	Value string // what is sent
+	Label string // what is shown beside it
 }
 
 // Render prints the tag field.
@@ -294,7 +311,18 @@ func (t TagInput) html(m mix) string {
 		s.WriteString(" " + p.html(nil))
 	}
 	if a := t.Add; a != nil {
-		s.WriteString(` <input class="tc-in__add" type="text"` + attr("name", a.Name) + attr("value", a.Value) + attr("placeholder", a.Placeholder) + attr("aria-label", a.Label) + ` autocomplete="off">`)
+		list := ""
+		if len(a.Options) > 0 {
+			list = "tc-list-" + a.Name
+		}
+		s.WriteString(` <input class="tc-in__add" type="text"` + attr("name", a.Name) + attr("value", a.Value) + attr("placeholder", a.Placeholder) + attr("aria-label", a.Label) + attr("list", list) + ` autocomplete="off">`)
+		if list != "" {
+			s.WriteString(`<datalist` + attr("id", list) + `>`)
+			for _, o := range a.Options {
+				s.WriteString(`<option` + attr("value", o.Value) + attr("label", o.Label) + `></option>`)
+			}
+			s.WriteString(`</datalist>`)
+		}
 	}
 	s.WriteString(` </span>`)
 	return s.String()

@@ -3,6 +3,7 @@ package browser_test
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -284,12 +285,16 @@ func TestNoScriptSheetAndChecks(t *testing.T) {
 	form := w.Form{Action: "/x", Items: []w.FormPart{
 		w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"}}},
 		w.Field{Parts: []w.FieldPart{w.Check{Name: "nopass", Value: "1", Disables: "password", Parts: []w.CheckPart{w.Text("The server asks no password")}}}},
+		w.Field{Label: "Start time", Parts: []w.FieldPart{w.Input{Name: "start.time", Label: "Start time"}}},
+		w.Field{Label: "Due time", Parts: []w.FieldPart{w.Input{Name: "due.time", Label: "Due time"}}},
+		w.Field{Parts: []w.FieldPart{w.Check{Name: "allday", Value: "1", Disables: "start.time due.time", Parts: []w.CheckPart{w.Text("All day")}}}},
 		w.Field{Label: "Theme", Parts: []w.FieldPart{w.Seg{Name: "theme", Theme: true, Options: []w.SegOption{{Label: "Auto", Value: "auto", On: true}, {Label: "Dark", Value: "dark"}}}}},
 	}}
 	row := w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка")}, Date: "10 Aug", Source: "nextcloud"}
 	list := w.List{Compact: true, Rows: []w.ListRow{row, row}}
 	page := h.RegisterPage("checks", browser.PageHTML(`<div class="tc-root"><div class="tc-main">`+form.Render()+list.Render()+`</div></div>`, flush))
 	var off0, off1, back bool
+	var times string
 	var theme, stored string
 	var height float64
 	err := h.Run(page, 1200, 700,
@@ -298,6 +303,8 @@ func TestNoScriptSheetAndChecks(t *testing.T) {
 		chromedp.Evaluate(`document.querySelector('[name=password]').disabled`, &off1),
 		chromedp.Click(`.tc-check`, chromedp.ByQuery),
 		chromedp.Evaluate(`document.querySelector('[name=password]').disabled`, &back),
+		chromedp.Click(`label.tc-check:has([name=allday])`, chromedp.ByQuery),
+		chromedp.Evaluate(`[...document.querySelectorAll('[name="start.time"], [name="due.time"]')].map(f => f.disabled).join(" ")`, &times),
 		chromedp.Click(`.tc-seg__opt:nth-child(2)`, chromedp.ByQuery),
 		chromedp.Evaluate(`document.documentElement.getAttribute("data-tc-theme")`, &theme),
 		chromedp.Evaluate(`localStorage.getItem("tc-theme") || ""`, &stored),
@@ -308,6 +315,9 @@ func TestNoScriptSheetAndChecks(t *testing.T) {
 	}
 	if off0 || !off1 || back {
 		t.Errorf("password off: at start %v, ticked %v, unticked %v; want false, true, false", off0, off1, back)
+	}
+	if times != "true true" {
+		t.Errorf("All day ticked: Start time and Due time off %q; want both (Carrel's task 111)", times)
 	}
 	if theme != "dark" || stored != "dark" {
 		t.Errorf("theme %q, stored %q; want dark, dark", theme, stored)
@@ -744,5 +754,127 @@ func TestSaveAs(t *testing.T) {
 	}
 	if got != "carrel.sh|#!/bin/sh\necho hello" {
 		t.Errorf("with the script: saved %q; want carrel.sh with the text", got)
+	}
+}
+
+// TestFilePick: a button or a menu item that picks a file is the label of its
+// file input (Carrel's task 109). With the script a picked file sends its form
+// at once and «Upload» is not shown; without one the input shows what was
+// picked and «Upload» beside it sends it.
+func TestFilePick(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	photo := &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}
+	attach := &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}
+	body := `<form id="post-photo" method="post" action="/photo" enctype="multipart/form-data"></form>` +
+		`<form id="post-attach" method="post" action="/attach" enctype="multipart/form-data"></form>` +
+		`<div class="tc-root"><div class="tc-main">` +
+		w.Line{Items: []w.LinePart{w.Button{Label: "Replace", File: photo}, w.Button{Label: "Upload", Form: "post-photo", NoScript: true}}}.Render() +
+		w.Menu{Items: []w.MenuPart{w.MenuItem{Icon: "up", Label: "From this computer", File: attach}, w.MenuItem{Label: "Upload", Form: "post-attach", NoScript: true}}}.Render() +
+		`</div></div>`
+	f := filepath.Join(t.TempDir(), "anna.png")
+	if err := os.WriteFile(f, []byte("png"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	const shown = `[...document.querySelectorAll(".tc-file, .tc-nojs")].map(e => e.checkVisibility({opacityProperty: true})).join(" ")`
+	bare := h.RegisterPage("file-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	var got string
+	if err := h.Run(bare, 900, 600, chromedp.Evaluate(shown, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != "true true true true" {
+		t.Errorf("without a script: inputs and Upload shown %q; want all", got)
+	}
+	page := h.RegisterPage("file", browser.PageHTML(body, ""))
+	var sent string
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(shown, &got),
+		chromedp.Evaluate(`window.__sent = []; document.addEventListener("submit", e => { e.preventDefault(); window.__sent.push(e.target.id + ":" + new FormData(e.target).getAll(e.target.id == "post-photo" ? "photo" : "file").map(x => x.name).join()); }); true`, nil),
+		chromedp.SetUploadFiles(`label.tc-btn .tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.SetUploadFiles(`label.tc-menu__item .tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent.join(" ")`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if got != "false false false false" {
+		t.Errorf("with the script: inputs and Upload shown %q; want none", got)
+	}
+	if sent != "post-photo:anna.png post-attach:anna.png" {
+		t.Errorf("with the script: sent %q; want each form with its file", sent)
+	}
+}
+
+// TestTagList: a tag field's line has the browser's own list of choices on a
+// page without a script (Carrel's task 96); where the server suggests, the
+// live layer takes the list away, and keeps it where it does not.
+func TestTagList(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	opts := []w.ListOption{{Value: "7c1e-40aa", Label: "Поездка в Казань · event"}, {Value: "91de-4402", Label: "Собрать чемодан · task"}}
+	field := func(name, suggest string) string {
+		return w.TagInput{Name: name, Add: &w.TagAdd{Name: name + ".add", Label: "Related to", Suggest: suggest, Options: opts}}.Render()
+	}
+	body := `<div class="tc-root"><div class="tc-main"><form action="/x">` + field("related", "/suggest") + field("plain", "") + `</form></div></div>`
+	const lists = `[...document.querySelectorAll(".tc-in__add")].map(e => (e.list ? [...e.list.options].map(o => o.value + "=" + o.label).join(",") : "-")).join(" ")`
+	bare := h.RegisterPage("list-bare", strings.Replace(strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1), `<script src="/tc-live.js"></script>`, "", 1))
+	var got string
+	if err := h.Run(bare, 900, 600, chromedp.Evaluate(lists, &got)); err != nil {
+		t.Fatal(err)
+	}
+	both := "7c1e-40aa=Поездка в Казань · event,91de-4402=Собрать чемодан · task"
+	if got != both+" "+both {
+		t.Errorf("without a script: lists %q; want both choices on each line", got)
+	}
+	page := h.RegisterPage("list", browser.PageHTML(body, ""))
+	if err := h.Run(page, 900, 600,
+		chromedp.Click(`[name="related.add"]`, chromedp.ByQuery),
+		chromedp.Click(`[name="plain.add"]`, chromedp.ByQuery),
+		chromedp.Evaluate(lists, &got),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if got != "- "+both {
+		t.Errorf("with the live layer: lists %q; want none where the server suggests, the choices where it does not", got)
+	}
+}
+
+// TestNotebookPick: a pick of collections carries the chosen one's mark
+// (Carrel's task 103); a read-only collection is shown and is not chosen.
+func TestNotebookPick(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	book := func(label, value, colour string, on bool, reason string) w.MenuItem {
+		it := w.MenuItem{Mark: &w.Mark{Colour: colour}, Label: label, Name: "notebook", Value: value, On: on, Reason: reason}
+		if reason != "" {
+			it.Trail = w.Badge{Label: "ro", Place: w.Pushed}
+		}
+		return it
+	}
+	drop := w.Drop{Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Notebook"},
+		Menu: w.Menu{Items: []w.MenuPart{
+			book("nextcloud · Записи", "zapisi", "#4A6B52", true, ""),
+			book("nextcloud · Дневник", "dnevnik", "#6B4E7A", false, ""),
+			book("nextcloud · Общие с семьёй", "semya", "#3F6E8C", false, "Read-only: this account cannot write here")},
+			Width: w.MenuWidth290, Pop: w.MenuUnder}}
+	page := h.RegisterPage("notebook", browser.PageHTML(`<div class="tc-root"><div class="tc-main"><form action="/x">`+drop.Render()+`</form></div></div>`, ""))
+	const pick = `(() => { const p = document.querySelector("summary.is-pick"); const m = p.querySelector(".tc-mark"); return (m ? m.getAttribute("data-tc-colour") : "-") + " " + p.textContent.trim(); })()`
+	var chosen, after string
+	var off bool
+	if err := h.Run(page, 900, 600,
+		chromedp.Click(`summary.is-pick`, chromedp.ByQuery),
+		chromedp.Click(`label:has(> input[value="dnevnik"])`, chromedp.ByQuery),
+		chromedp.Evaluate(pick, &chosen),
+		chromedp.Evaluate(`document.querySelector('input[value="semya"]').disabled`, &off),
+		chromedp.Click(`summary.is-pick`, chromedp.ByQuery),
+		chromedp.Click(`label:has(> input[value="semya"])`, chromedp.ByQuery),
+		chromedp.Evaluate(pick, &after),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if chosen != "#6B4E7A nextcloud · Дневник" {
+		t.Errorf("chosen: pick %q; want Дневник with its mark", chosen)
+	}
+	if !off || after != chosen {
+		t.Errorf("read-only: off %v, pick after choosing it %q; want off and Дневник kept", off, after)
 	}
 }

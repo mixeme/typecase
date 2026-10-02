@@ -8,6 +8,17 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("radio", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
+	overlay("marks", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"}}, Width: w.MenuWidth290}, "s-notes-19", "tc-menu", 1),
+	overlay("picker", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"},
+		w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212}, "s-agenda-6", "tc-menu", 1),
 	overlay("closed", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
@@ -101,8 +112,9 @@ var _ = add(
 		w.MenuItem{Label: "Sunday"},
 		w.MenuItem{Label: "Saturday"}}, Width: w.MenuWidth212}, "appearance-2", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", Label: "From this computer"},
-		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 3),
+		w.MenuItem{Icon: "up", Label: "From this computer", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}},
+		w.MenuItem{Icon: "file", Label: "From Files"},
+		w.MenuItem{Label: "Upload", Form: "post-attach", NoScript: true}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 3),
 	overlay("links", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
@@ -183,8 +195,9 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Label: "No reminder"}}, Width: w.MenuWidth212}, "s-agenda-9", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true},
-		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник"}}, Width: w.MenuWidth290}, "s-notes-15", "tc-menu", 1),
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290}, "s-notes-15", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.Rubric{Text: "Write into", Form: w.RubricInline},
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Дела", On: true},
@@ -355,7 +368,7 @@ var _ = add(
 		w.MenuItem{Icon: "task", Trail: w.Mono{Text: "task · Работа", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Ответить Анне по смете"},
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "contact", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Анна Ковалёва"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}, "s-notes-4", "tc-menu", 1),
+		w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}, "s-notes-4", "tc-menu", 2),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "quill", Trail: w.Kbd{Keys: "N"}, Label: "Note", On: true},
 		w.MenuSep{},
@@ -549,7 +562,7 @@ var _ = add(
 		w.MenuItem{Icon: "task", Trail: w.Mono{Text: "task · Работа", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Ответить Анне по смете"},
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "contact", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Анна Ковалёва"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}, "s-notes-4", "tc-drop", 1),
+		w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}, "s-notes-4", "tc-drop", 2),
 
 	// the forms that waited for menus
 	overlay("suggest", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Focus: true, Variant: w.SearchFull}, Suggest: &w.Menu{Items: []w.MenuPart{
@@ -589,12 +602,10 @@ var _ = add(
 		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}, "states-3", "tc-drop", 1),
-	overlay("more", w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, w.Button{Label: "Today", Href: "/app/calendar"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"}, w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Secondary: true, Action: "/app/calendar", Hidden: []w.Hidden{{Name: "view", Value: "range"}}}, w.BarSep{Secondary: true}, w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+	overlay("more", w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, w.Button{Label: "Today", Href: "/app/calendar"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"}, w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, Phone: true}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Secondary: true, Action: "/app/calendar"}, w.BarSep{Secondary: true}, w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}},
 		w.MenuSep{Tertiary: true},
-		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
+		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Action: "/app/calendar", Wrap: true},
 		w.MenuSep{},
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 

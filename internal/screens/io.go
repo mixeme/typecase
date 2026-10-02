@@ -284,8 +284,13 @@ func Io2() Screen {
 										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
-												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{
+													Icon:  "up",
+													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+													Label: "From this computer",
+												},
 												w.MenuItem{Icon: "file", Label: "From Files"},
+												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 											},
 											Width: w.MenuWidth212,
 											Pop:   w.MenuUnder,

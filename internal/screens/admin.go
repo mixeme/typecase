@@ -264,11 +264,10 @@ func Admin2() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Input{
-								Kind:        w.InputSearch,
-								Placeholder: "Filter by login",
-								Label:       "Filter by login",
-								Variant:     w.InputH26W200,
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by login", Label: "Filter by login"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
 							},
 							w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Administrators"}, {Label: "Disabled"}}},
 							w.Button{Folds: true, Label: "Columns", Icon: "cols", Title: "Columns"},

@@ -995,11 +995,8 @@ func Publish8() Screen {
 									w.DocTasks{
 										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
 										Items: []w.DocTask{
-											{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
-											{
-												Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"},
-												Text: "попросить у Артёма скриншоты",
-											},
+											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
+											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 										},
 									},
 									w.DocFiles{

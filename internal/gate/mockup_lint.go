@@ -403,6 +403,10 @@ func checkMockupFrameElements(html string) error {
 					// a row that holds a control of its own cannot be a button: a
 					// control is never nested in another
 					// nor is a heading of a menu: a row of words, not a control
+					// a button that picks a file is the label of its file input
+					if c == "tc-btn" && n.tag == "label" && htmlNodeHasDescendantClass(n, "tc-file") {
+						continue
+					}
 					if c == "tc-menu__item" && n.tag == "div" && (htmlNodeHasDescendantClass(n, "tc-seg") || htmlNodeHasDescendantClass(n, "tc-in") || nodeHasClass(n, "tc-rubric")) {
 						continue
 					}

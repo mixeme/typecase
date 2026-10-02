@@ -220,8 +220,36 @@ func (g *gen) button2(e *El) string {
 
 // button is a button; an icon button the frame leaves unnamed is named by
 // its icon.
+// fileField is the file input inside a label that picks a file (Carrel's
+// task 109).
+func fileField(f *El) string {
+	s := "&w.FileField{Form: " + q(f.Attr("form")) + ", Name: " + q(f.Attr("name"))
+	if a := f.Attr("accept"); a != "" {
+		s += ", Accept: " + q(a)
+	}
+	return s + ", Label: " + q(f.Attr("aria-label")) + "}"
+}
+
 func (g *gen) button(e *El) string {
+	if f := e.Kid("tc-file"); f != nil {
+		// A label that picks a file: the button without its input, and the input as File.
+		c := *e
+		c.Tag = "button"
+		var kids []any
+		for _, k := range e.Kids {
+			if el, ok := k.(*El); ok && el == f {
+				continue
+			}
+			kids = append(kids, k)
+		}
+		c.Kids = kids
+		s := g.button(&c)
+		return s[:len(s)-1] + ", File: " + fileField(f) + "}"
+	}
 	s := g.button2(e)
+	if e.Has("tc-nojs") {
+		s = s[:len(s)-1] + ", NoScript: true}"
+	}
 	m := iconRe.FindStringSubmatch(s)
 	if strings.Contains(s, `Title: "More"`) && m != nil && m[1] != "dots" {
 		name, ok := iconNames[m[1]]
@@ -304,6 +332,9 @@ func (g *gen) pick(x *El) string {
 		return "w.Pick{" + join(f, ", ") + g.ev(x, "PickVariant", "Variant") + placef(x) + "}"
 	}
 	f := []string{"Value: " + q(x.OwnText())}
+	if m := x.Kid("tc-mark"); m != nil {
+		f = append(f, "Mark: &"+g.mark(m))
+	}
 	if d := x.Kid("tc-dim"); d != nil {
 		f = append(f, "Aside: &"+g.dimx(d))
 	}
@@ -484,7 +515,11 @@ func (g *gen) segfold(x *El) string {
 		}
 		opts = append(opts, "{"+join(f, ", ")+"}")
 	}
-	return "w.SegFold{Seg: w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}}}"
+	ph := ""
+	if x.Has("tc-segfold--phone") {
+		ph = ", Phone: true"
+	}
+	return "w.SegFold{Seg: w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}}" + ph + "}"
 }
 
 func (g *gen) seg(x *El) string {

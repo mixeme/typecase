@@ -26,8 +26,9 @@ const MockupLadderProbeJS = `(() => {
     const ox = getComputedStyle(el).overflowX;
     if (ox !== "auto" && ox !== "scroll") continue;
     // A table in a text scrolls sideways by design: what does not fit after
-    // wrapping between words, or a row kept to one line (tc-doc__table).
-    if (el.classList && el.classList.contains("tc-doc__scroll")) continue;
+    // wrapping between words, or a row kept to one line (tc-doc__table); so
+    // does a block of code, kept as written (tc-doc__code).
+    if (el.classList && (el.classList.contains("tc-doc__scroll") || el.classList.contains("tc-doc__code"))) continue;
     const d = el.scrollWidth - el.clientWidth;
     if (d > 2) issues.push("inner h-scroll " + cls(el).split(" ")[0] + " " + Math.round(d) + "px");
   }
@@ -75,6 +76,7 @@ const MockupLadderProbeJS = `(() => {
     // What a closed details hides keeps a box but is not shown.
     if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) return true;
     if (cs.textOverflow === "ellipsis") return true;
+    if (el.classList && el.classList.contains("tc-doc__code")) return true; // scrolls by design
     if (cs.overflow === "hidden" || cs.overflowX === "hidden" || cs.overflow === "clip") return true;
     if (el.matches("button, a[href], input, textarea, select, .tc-tag, .tc-btn, .tc-seg__opt")) return true;
     if (!el.childElementCount && !(el.textContent || "").trim()) return true;

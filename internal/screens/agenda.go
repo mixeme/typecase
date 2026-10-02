@@ -114,8 +114,16 @@ func Agenda1() Screen {
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
-							w.Seg{
-								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
 							},
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
@@ -347,8 +355,13 @@ func Agenda1() Screen {
 										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
-												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{
+													Icon:  "up",
+													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+													Label: "From this computer",
+												},
 												w.MenuItem{Icon: "file", Label: "From Files"},
+												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 											},
 											Width: w.MenuWidth212,
 											Pop:   w.MenuUnder,
@@ -511,8 +524,13 @@ func Agenda2() Screen {
 										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
-												w.MenuItem{Icon: "up", Label: "From this computer"},
+												w.MenuItem{
+													Icon:  "up",
+													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+													Label: "From this computer",
+												},
 												w.MenuItem{Icon: "file", Label: "From Files"},
+												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 											},
 											Width: w.MenuWidth212,
 											Pop:   w.MenuUnder,
@@ -781,8 +799,13 @@ func Agenda3() Screen {
 												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{Icon: "up", Label: "From this computer"},
+														w.MenuItem{
+															Icon:  "up",
+															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Label: "From this computer",
+														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
+														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,
@@ -1012,8 +1035,13 @@ func Agenda15() Screen {
 												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{Icon: "up", Label: "From this computer"},
+														w.MenuItem{
+															Icon:  "up",
+															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Label: "From this computer",
+														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
+														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,

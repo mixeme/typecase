@@ -537,6 +537,9 @@ func docTask(li *El) string {
 	if li.Kid("tc-tick").Has("is-done") {
 		d = "Done: true, "
 	}
+	if li.Kid("tc-tick").Tag == "span" {
+		return "{Tick: w.Tick{" + d + "Variant: w.TickNudge, Sign: true}, Text: " + q(li.Text()) + "}"
+	}
 	return "{Tick: w.Tick{" + d + "Variant: w.TickNudge, Label: " + q(li.Text()) + "}, Text: " + q(li.Text()) + "}"
 }
 
@@ -1049,8 +1052,11 @@ func (g *gen) tasks(k *El, phone bool) string {
 
 func (g *gen) doc(e *El) string {
 	var items []string
+	var hidden []*El
 	for _, k := range e.Els() {
 		switch {
+		case k.Tag == "input" && k.Attr("type") == "hidden":
+			hidden = append(hidden, k)
 		case k.Has("tc-doc__title"):
 			items = append(items, "w.DocTitle{Text: "+q(k.Text())+"}")
 		case k.Has("tc-head__sub--top6"):
@@ -1097,6 +1103,10 @@ func (g *gen) doc(e *El) string {
 			items = append(items, "w.DocBullets{Items: [][]w.Inline{"+g.each(k.Els(), g.inl2)+"}}")
 		case k.Has("tc-doc__body"):
 			items = append(items, "w.DocBody{Text: "+q(k.Text())+"}")
+		case k.Has("tc-doc__quote"):
+			items = append(items, "w.DocQuote{Parts: "+g.inl2(k)+"}")
+		case k.Has("tc-doc__code"):
+			items = append(items, "w.DocCode{Text: "+q(k.TextRaw())+"}")
 		case k.Has("tc-doc__table"):
 			items = append(items, g.docTable(k))
 		default:
@@ -1106,6 +1116,18 @@ func (g *gen) doc(e *El) string {
 	f := []string{"Items: []w.DocPart{\n\t\t" + join(items, ",\n\t\t") + "}"}
 	if e.Has("tc-stack") {
 		f = append(f, "Text: true")
+	}
+	if e.Tag == "form" {
+		if id := e.Attr("id"); id != "" {
+			f = append(f, "ID: "+q(id))
+		}
+		f = append(f, "Action: "+q(e.Attr("action")))
+		if m := e.Attr("method"); m != "" && m != "post" {
+			f = append(f, "Method: "+q(m))
+		}
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
+		}
 	}
 	return "w.Doc{" + join(f, ", ") + "}"
 }

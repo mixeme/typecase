@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("picker", w.Button{Label: "Replace", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, "s-contacts-3", "tc-btn", 5),
 	primitive("link-icon", w.Button{Label: "Sources", Icon: "cal", Href: "#sources-demo"}, "components-41", "tc-btn", 1),
 	primitive("post", w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Form: "post-disconnect"}, "components-37", "tc-btn", 5),
 	primitive("link-off", w.Button{Label: "Export", Title: "Nothing to export: the list is empty.", State: w.ButtonDisabled, Href: "#"}, "components-37", "tc-btn", 4),
@@ -129,8 +130,8 @@ var _ = add(
 	// tc-tick
 	primitive("done", w.Tick{Done: true, Label: "Done"}, "s-tasks-1", "tc-tick", 5),
 	primitive("open", w.Tick{Label: "Done"}, "s-tasks-1", "tc-tick", 1),
-	primitive("variant", w.Tick{Variant: w.TickNudge, Label: "Done"}, "s-notes-1", "tc-tick", 1),
-	primitive("done", w.Tick{Done: true, Variant: w.TickNudge, Label: "Done"}, "s-notes-2", "tc-tick", 2),
+	primitive("sign", w.Tick{Variant: w.TickNudge, Sign: true}, "s-notes-1", "tc-tick", 1),
+	primitive("sign", w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, "s-notes-2", "tc-tick", 2),
 	primitive("variant", w.Tick{Variant: w.TickEdgeDanger, Label: "Check"}, "s-admin-4", "tc-tick", 6),
 	primitive("glyph", w.Tick{Glyph: true}, "s-tasks-2", "tc-tick", 1),
 	primitive("variant", w.Tick{Variant: w.TickEdgeDusty, Label: "Check"}, "s-admin-4", "tc-tick", 8),

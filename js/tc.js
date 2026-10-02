@@ -567,9 +567,12 @@
 	// (data-tc-disables, FormRow.Disables): the field is off and not sent.
 	function syncDisables(box) {
 		var scope = box.form || document;
-		var name = box.getAttribute("data-tc-disables");
-		scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
-			f.disabled = box.checked;
+		// the names go separated by spaces, as classes do (Carrel's task 111)
+		box.getAttribute("data-tc-disables").split(/\s+/).forEach(function (name) {
+			if (!name) return;
+			scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
+				f.disabled = box.checked;
+			});
 		});
 	}
 
@@ -579,6 +582,12 @@
 
 	function onChange(e) {
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		// A file picked by a button or a menu item goes with its form at once
+		// (Carrel's task 109); without the script «Upload» sends it.
+		if (e.target.matches && e.target.matches(".tc-file") && e.target.files && e.target.files.length && e.target.form) {
+			if (e.target.form.requestSubmit) e.target.form.requestSubmit();
+			else e.target.form.submit();
+		}
 		if (e.target.matches && e.target.matches('.tc-menu__item > input[type="radio"]')) choosePick(e.target);
 	}
 
@@ -596,7 +605,13 @@
 		if (!pick || !pick.classList.contains("is-pick")) return;
 		if (!pick.hasAttribute("data-tc-first")) pick.setAttribute("data-tc-first", pick.innerHTML);
 		if (radio.defaultChecked) pick.innerHTML = pick.getAttribute("data-tc-first");
-		else pick.textContent = closest(radio, ".tc-menu__item").textContent.trim();
+		else {
+			// the item's words, and its collection's mark (Carrel's task 103)
+			var item = closest(radio, ".tc-menu__item");
+			var mark = item.querySelector(".tc-mark");
+			pick.textContent = item.textContent.trim();
+			if (mark) pick.insertBefore(mark.cloneNode(true), pick.firstChild);
+		}
 		if (openTrigger === pick) closeMenu(true);
 		else d.open = false;
 	}

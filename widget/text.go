@@ -12,6 +12,12 @@ type Strong string
 
 func (s Strong) html(mix) string { return `<b>` + esc(string(s)) + `</b>` }
 
+// Em is italic words in a document's text: Markdown's *emphasis* (Carrel's
+// task 102).
+type Em string
+
+func (e Em) html(mix) string { return `<em>` + esc(string(e)) + `</em>` }
+
 // Hint is a word with an explanation in a hint: «verified», with what was
 // verified.
 type Hint struct {
@@ -51,6 +57,7 @@ type Inline interface {
 
 func (Text) inline()    {}
 func (Strong) inline()  {}
+func (Em) inline()      {}
 func (Hint) inline()    {}
 func (Dot) inline()     {}
 func (Mono) inline()    {}

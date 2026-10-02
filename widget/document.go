@@ -194,7 +194,8 @@ type DocHeading struct {
 
 func (h DocHeading) html(mix) string { return `<div class="tc-doc__heading">` + esc(h.Text) + `</div>` }
 
-// DocBullets is a bulleted list inside a document's text.
+// DocBullets is a bulleted list inside a document's text. An item's parts
+// may end with a DocBullets: the list nested in it (Carrel's task 102).
 type DocBullets struct {
 	Items [][]Inline
 }
@@ -208,6 +209,27 @@ func (b DocBullets) html(mix) string {
 	s.WriteString(`</ul>`)
 	return s.String()
 }
+
+func (DocBullets) inline() {}
+
+// DocQuote is a quotation in a document's text: Markdown's «>» (Carrel's
+// task 102).
+type DocQuote struct {
+	Parts []Inline
+}
+
+func (q DocQuote) html(mix) string {
+	return `<blockquote class="tc-doc__quote">` + inlines(q.Parts) + `</blockquote>`
+}
+
+// DocCode is a block of code in a document's text, as written: Markdown's
+// fenced or indented code (Carrel's task 102). A line too long for the column
+// scrolls inside the block.
+type DocCode struct {
+	Text string
+}
+
+func (c DocCode) html(mix) string { return `<pre class="tc-doc__code">` + esc(c.Text) + `</pre>` }
 
 // DocBody is a plain paragraph inside a document's text.
 type DocBody struct {
@@ -291,20 +313,30 @@ func (DocHeading) docPart() {}
 func (DocBullets) docPart() {}
 func (DocBody) docPart()    {}
 func (DocTable) docPart()   {}
+func (DocQuote) docPart()   {}
+func (DocCode) docPart()    {}
 
 // Doc — tc-doc
 //
 // Роль. Документ: текст для чтения или в правке — заголовок, текст, дела, вложения.
-// Вход. Doc{Items, Text}.
+// Вход. Doc{Items, Text, Action, Method, Fields, ID}.
 // Состояния. read | edit | public | text | phone | table.
 // Инварианты. Заголовок — первым; дела — галки, а не строки текста с квадратными скобками; документ печатает фрагмент своего кадра.
-// Поведение. Галка отмечает дело прямо в тексте документа; над таблицей в узком контейнере переключатель «Wrap / One line» держит строки таблицы в одну линию.
+// Поведение. Галка дела в тексте — знак (Tick.Sign): дело отмечают в правке; над таблицей в узком контейнере переключатель «Wrap / One line» держит строки таблицы в одну линию.
 // Эталон. кадр `s-notes-2`, фрагмент `.tc-doc`.
-// Содержимое. Заголовок и строка под ним, абзацы, дела, вложения, связанное; в правке — поле заголовка, поля документа, поле текста, примечание; в тексте — подзаголовки, списки, абзацы, таблицы.
+// Содержимое. Заголовок и строка под ним, абзацы, дела, вложения, связанное; в правке — поле заголовка, поля документа, поле текста, примечание; в тексте — подзаголовки, списки и вложенные списки, абзацы с курсивом, ссылками и кодом, цитаты, блоки кода, таблицы.
 // Чего нет. Своего меню: действия — в шапке и в полосе правки.
 type Doc struct {
 	Items []DocPart
 	Text  bool // the rendered text of a note alone: a column with 14 px gaps
+	// Action makes the document in its edit a form that sends its fields
+	// there, as Form does (Carrel's task 98): Method is "post" when empty,
+	// Fields its hidden fields (CSRF, the record's version), ID what the
+	// edit bar's Save names in its Form.
+	Action string
+	Method string
+	Fields []Hidden
+	ID     string
 }
 
 // Render prints the document.
@@ -312,11 +344,20 @@ func (d Doc) Render() string { return d.html(nil) }
 
 func (d Doc) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + `>`)
+	tag := "div"
+	if d.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `">`)
+		for _, h := range d.Fields {
+			s.WriteString(h.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + `>`)
+	}
 	for _, it := range d.Items {
 		s.WriteString(it.html(nil))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

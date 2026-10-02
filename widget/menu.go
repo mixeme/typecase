@@ -64,6 +64,11 @@ type MenuItem struct {
 	// Form is the ID of a PostForm the item submits (Sign out): the item is a
 	// submit button then, sending Name and Value when they are set.
 	Form string
+	// File makes the item a label that picks a file for a PostForm (Carrel's
+	// task 109): «From this computer» opens the choice without a script.
+	File *FileField
+	// NoScript shows the item only on a page without a script: «Upload».
+	NoScript bool
 	// Adds is the tag the item adds to its TagInput: a suggestion of a person
 	// (Carrel's task 77). It waits in a template; the library's script puts it
 	// before the typing line.
@@ -77,7 +82,15 @@ func MenuItems(items ...MenuPart) string { return joined(items) }
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
 	tag := "button"
-	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
+	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary), pick(it.NoScript, "tc-nojs"))
+	if it.File != nil {
+		s.WriteString(`<label` + cls + ` role="menuitem">`)
+		if it.Icon != "" {
+			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
+		}
+		s.WriteString(esc(it.Label) + it.File.input() + `</label>`)
+		return s.String()
+	}
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
 	if it.Name != "" && it.Tick != nil {
 		cls = class(nil, is("on", it.On), is("drag", it.Drag), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
@@ -94,10 +107,15 @@ func (it MenuItem) html(mix) string {
 		return s.String()
 	}
 	if it.Name != "" && it.Form == "" && it.Href == "" {
-		s.WriteString(`<label` + cls + `><input class="tc-seg__box" type="radio" role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
+		// a collection that cannot be chosen is shown and switched off, its
+		// reason in the hint: read-only (Carrel's task 103)
+		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio" role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
 			flag("checked", it.On) + flag("disabled", it.Reason != "") + `>`)
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
+		}
+		if it.Mark != nil {
+			s.WriteString(it.Mark.html(nil))
 		}
 		s.WriteString(esc(it.Label))
 		if it.Trail != nil {

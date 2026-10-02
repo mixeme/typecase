@@ -197,19 +197,23 @@ func (v TickVariant) class() string {
 // Tick — tc-tick
 //
 // Роль. Галка отметки: задача сделана, пункт списка выполнен.
-// Вход. Tick{Done, Variant, Glyph, Label, Send}.
-// Состояния. open | done | variant | glyph.
-// Инварианты. Отметка — кнопка с доступным именем, кроме знака внутри другой кнопки; сделано или нет — одно поле; отметка печатает фрагмент своего кадра.
-// Поведение. Нажатие переключает отметку; знак (Glyph) не нажимается: нажимается кнопка, в которой он стоит.
+// Вход. Tick{Done, Variant, Glyph, Sign, Label, Send}.
+// Состояния. open | done | variant | glyph | sign.
+// Инварианты. Отметка — кнопка с доступным именем, кроме знака внутри другой кнопки и знака в тексте (Sign: картинка «Done» или «Not done»); сделано или нет — одно поле; отметка печатает фрагмент своего кадра.
+// Поведение. Нажатие переключает отметку; знак (Glyph) не нажимается: нажимается кнопка, в которой он стоит; галка дела в тексте (Sign) — тоже: заметка правится в правке (задача Carrel 99).
 // Эталон. кадр `s-tasks-1`, фрагмент `.tc-tick`.
 // Содержимое. нет.
 // Чего нет. Подписи: подпись — у строки или кнопки рядом.
 type Tick struct {
 	Done    bool
 	Variant TickVariant
-	Glyph   bool   // only the drawn box, inside another button
-	Label   string // the accessible name: what is ticked
-	Send    Send   // what pressing sends: the task done or not, without a script
+	Glyph   bool // only the drawn box, inside another button
+	// Sign is a task's tick in a text (a note's tasks, its side panel, a
+	// published page): it says done or not and is not pressed (Carrel's
+	// task 99).
+	Sign  bool
+	Label string // the accessible name: what is ticked
+	Send  Send   // what pressing sends: the task done or not, without a script
 }
 
 // Render prints the tick.
@@ -219,6 +223,9 @@ func (t Tick) html(m mix) string {
 	c := class(m, "tc-tick", is("done", t.Done), t.Variant.class())
 	if t.Glyph {
 		return `<span` + c + `></span>`
+	}
+	if t.Sign {
+		return `<span` + c + ` role="img"` + attr("aria-label", pick(t.Done, "Done")+pick(!t.Done, "Not done")) + `></span>`
 	}
 	typ := "button"
 	if t.Send.Form != "" {

@@ -356,7 +356,7 @@ func (g *gen) trail(k *El) string {
 		return g.dimx(k)
 	case k.Has("tc-badge"):
 		b := g.badge(k)
-		if k.Has("tc-push") {
+		if k.Has("tc-push") && !strings.Contains(b, "Place:") {
 			return b[:len(b)-1] + ", Place: w.Pushed}"
 		}
 		return b
@@ -410,6 +410,8 @@ func (g *gen) menuItem(k *El) string {
 			found = true
 		case x.Tag == "template":
 			f = append(f, "Adds: &"+g.tag(x.Els()[0]))
+		case x.Has("tc-file"):
+			f = append(f, "File: "+fileField(x))
 		case x.Has("tc-dim--danger"):
 			f = append(f, "Note: &w.Span{Face: w.FaceDanger, Text: "+q(x.Text())+"}")
 		case x.Has("tc-mono") && !x.Has("tc-push"):
@@ -431,6 +433,9 @@ func (g *gen) menuItem(k *El) string {
 	}
 	if k.Has("is-3rd") {
 		f = append(f, "Tertiary: true")
+	}
+	if k.Has("tc-nojs") {
+		f = append(f, "NoScript: true")
 	}
 	if r := k.Attr("title"); r != "" {
 		f = append(f, "Reason: "+q(r))

@@ -36,9 +36,11 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("buttons", w.Seg{Options: []w.SegOption{{Label: "Apple"}, {Label: "Android", On: true}, {Label: "Thunderbird"}, {Label: "Anything else"}}}, "s-plan-2", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl", On: true}}, Variant: w.SegStart}, "s-backup-11", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea", On: true}, {Label: "curl"}}, Variant: w.SegStart}, "s-backup-10", "tc-seg", 1),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "All 4", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 1"}, {Label: "Notes 1"}}}, "s-dup-1", "tc-seg", 1),
+	form("views", w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, Phone: true}, "s-agenda-1", "tc-segfold", 1),
 	form("default", w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "All", Count: "24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events", Count: "14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks", Count: "2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}}, "s-contacts-7", "tc-segfold", 1),
 	form("sort-changed", w.Seg{Options: []w.SegOption{{Label: "By due"}, {Label: "By priority"}, {Label: "Recently changed", On: true}}}, "s-tasks-13", "tc-seg", 2),
 	form("radio", w.Seg{Options: []w.SegOption{{Label: "Auto", On: true, Value: "auto"}, {Label: "Light", Value: "light"}, {Label: "Dark", Value: "dark"}}, Name: "theme", Theme: true}, "components-38", "tc-seg", 1),
@@ -52,7 +54,7 @@ var _ = add(
 	form("links", w.Seg{Options: []w.SegOption{{Label: "All 24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events 14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks 2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}, "s-contacts-7", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "To WebDAV", "Download", "Both"), Variant: w.SegStart}, "s-backup-2", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "Comfortable", "Compact"), Variant: w.SegStart}, "appearance-1", "tc-seg", 2),
-	form("default", w.Seg{Options: seg(1, "Day", "Week", "Month", "Range")}, "s-agenda-1", "tc-seg", 1),
+	form("default", w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, "s-agenda-1", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu"}, {Label: "Tiles", Icon: "grid", On: true}}}, "s-files-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "Auto", "Light", "Dark"), Variant: w.SegStartSmall}, "account-5", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-1", "tc-seg", 1),
@@ -94,7 +96,9 @@ var _ = add(
 	form("wrap", w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar", Hidden: []w.Hidden{{Name: "view", Value: "range"}}}, "s-agenda-1", "tc-range", 2),
 
 	// tc-line, tc-stack, tc-grow, tc-push
-	form("span", w.Line{Gap: w.LineGap6, Items: []w.LinePart{btn, btn}}, "s-contacts-3", "tc-line", 1),
+	form("picker", w.Line{Items: []w.LinePart{w.Button{Label: "Add", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, w.Button{Label: "Upload", Form: "post-photo", NoScript: true}}, Gap: w.LineGap6}, "s-contacts-4", "tc-line", 1),
+	form("span", w.Line{Items: []w.LinePart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Show password", Small: true}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGap6}, "s-profile-1", "tc-line", 1),
+	form("span", w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Replace", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, w.Button{Label: "Upload", Form: "post-photo", NoScript: true}, w.Button{Label: "Crop"}}}, "s-contacts-3", "tc-line", 1),
 	form("span", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Input{Label: "x"}, btn}}, "components-20", "tc-line", 1),
 	form("gap", w.Line{Gap: w.LineGap7, Items: []w.LinePart{btn, w.Kbd{Keys: "Esc"}}}, "s-contacts-2", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Icon: "up", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{

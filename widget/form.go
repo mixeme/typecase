@@ -488,6 +488,22 @@ func (h Hidden) html(mix) string {
 	return `<input type="hidden"` + attr("name", h.Name) + attr("value", h.Value) + `>`
 }
 
+// FileField is the file a button or a menu item picks for a PostForm
+// (Carrel's task 109): the control is a label around the file input, which
+// the browser opens without a script; with the library's script the choice
+// sends the form at once, without one the input shows what was chosen and a
+// NoScript «Upload» beside it sends it.
+type FileField struct {
+	Form   string // the PostForm's ID
+	Name   string // the field's name: PostForm.File
+	Accept string // image/*, for a photo
+	Label  string // the input's accessible name
+}
+
+func (f FileField) input() string {
+	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) + `>`
+}
+
 // PostForm — tc-post
 //
 // Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).

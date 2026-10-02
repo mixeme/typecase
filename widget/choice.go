@@ -62,15 +62,18 @@ func (g Seg) html(m mix) string { return g.seg(m) }
 // SegFold — tc-segfold
 //
 // Роль. Сегмент, которому тесно: на широкой полосе — сомкнутый переключатель ссылок, на узкой — выпадающий выбор с текущим вариантом (решение 30.09.2026).
-// Вход. SegFold{Seg}.
+// Вход. SegFold{Seg, Phone}.
 // Состояния. default.
 // Инварианты. Выбран ровно один вариант; у каждого варианта адрес; складывается там же, где полоса прячет второстепенное (is-2nd); виджет печатает фрагмент своего кадра.
-// Поведение. На узкой полосе нажатие на текущий вариант открывает меню остальных (details, без сценария); выбор — переход по ссылке.
+// Поведение. На узкой полосе нажатие на текущий вариант открывает меню остальных (details, без сценария); выбор — переход по ссылке. Короткий переключатель (`Phone`) складывается только на полосе телефона, 640&nbsp;px и уже: Day / Week / Month / Range агенды.
 // Эталон. кадр `s-contacts-7`, фрагмент `.tc-segfold`.
 // Содержимое. Варианты: подпись и число; сегмент и меню из одних и тех же вариантов.
 // Чего нет. Кнопок и радио: вариант сложенного сегмента — всегда ссылка.
 type SegFold struct {
 	Seg Seg // the switch of links; its options are the fold's menu too
+	// Phone folds it on a phone's bar only (640 px and less): a short switch
+	// that a wider bar holds — the agenda's Day / Week / Month / Range.
+	Phone bool
 }
 
 // Render prints the switch and its fold.
@@ -78,7 +81,7 @@ func (f SegFold) Render() string { return f.html(nil) }
 
 func (f SegFold) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-segfold") + `>` + f.Seg.seg(nil))
+	s.WriteString(`<span` + class(m, "tc-segfold", pick(f.Phone, "tc-segfold--phone")) + `>` + f.Seg.seg(nil))
 	cur := ""
 	for _, o := range f.Seg.Options {
 		if o.On {
@@ -179,8 +182,10 @@ type Check struct {
 	// it switches without scripts.
 	Name  string
 	Value string
-	// Disables is the name of the form's field the check switches off while
-	// it is ticked: «The server asks no password» and Password.
+	// Disables names the form's fields the check switches off while it is
+	// ticked, separated by spaces as classes are: «The server asks no
+	// password» and Password; All day and «start.time due.time» (Carrel's
+	// task 111).
 	Disables string
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool

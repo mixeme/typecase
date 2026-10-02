@@ -485,7 +485,17 @@ func Contacts3() Screen {
 								Parts: []w.FieldPart{
 									w.Photo{
 										Side: []w.FieldPart{
-											w.Line{Items: []w.LinePart{w.Button{Label: "Replace"}, w.Button{Label: "Crop"}}, Gap: w.LineGap6},
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{
+														Label: "Replace",
+														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+													},
+													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
+													w.Button{Label: "Crop"},
+												},
+												Gap: w.LineGap6,
+											},
 											w.Button{Label: "Remove", Kind: w.ButtonDanger},
 											w.FieldHint{Parts: []w.Inline{w.Text("EXIF orientation applied, metadata stripped.")}, Variant: w.HintNarrow},
 										},
@@ -657,7 +667,16 @@ func Contacts4() Screen {
 									w.Photo{
 										Initials: "АК",
 										Side: []w.FieldPart{
-											w.Button{Label: "Add"},
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{
+														Label: "Add",
+														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+													},
+													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
+												},
+												Gap: w.LineGap6,
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("JPEG, PNG, GIF or WebP.")}, Variant: w.HintNarrow},
 										},
 									},
@@ -827,7 +846,16 @@ func Contacts27() Screen {
 								Parts: []w.FieldPart{
 									w.Photo{
 										Side: []w.FieldPart{
-											w.Button{Label: "Add"},
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{
+														Label: "Add",
+														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+													},
+													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
+												},
+												Gap: w.LineGap6,
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("JPEG, PNG, GIF or WebP.")}, Variant: w.HintNarrow},
 										},
 									},
@@ -1211,7 +1239,17 @@ func Contacts15() Screen {
 									Parts: []w.FieldPart{
 										w.Photo{
 											Side: []w.FieldPart{
-												w.Line{Items: []w.LinePart{w.Button{Label: "Replace"}, w.Button{Label: "Crop"}}, Gap: w.LineGap6},
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{
+															Label: "Replace",
+															File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+														},
+														w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
+														w.Button{Label: "Crop"},
+													},
+													Gap: w.LineGap6,
+												},
 												w.Button{Label: "Remove", Kind: w.ButtonDanger},
 												w.FieldHint{Parts: []w.Inline{w.Text("EXIF orientation applied, metadata stripped.")}, Variant: w.HintNarrow},
 											},

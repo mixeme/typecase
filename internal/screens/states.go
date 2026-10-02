@@ -220,8 +220,16 @@ func States3() Screen {
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
-							w.Seg{
-								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
 							},
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
@@ -647,8 +655,16 @@ func States6() Screen {
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
-							w.Seg{
-								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
 							},
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
@@ -975,8 +991,13 @@ func States17() Screen {
 												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{Icon: "up", Label: "From this computer"},
+														w.MenuItem{
+															Icon:  "up",
+															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Label: "From this computer",
+														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
+														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,
@@ -1763,7 +1784,16 @@ func States12() Screen {
 									w.Photo{
 										Initials: "АК",
 										Side: []w.FieldPart{
-											w.Button{Label: "Add"},
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{
+														Label: "Add",
+														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+													},
+													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
+												},
+												Gap: w.LineGap6,
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("JPEG, PNG, GIF or WebP.")}, Variant: w.HintNarrow},
 										},
 									},
@@ -1991,8 +2021,16 @@ func States13() Screen {
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
-							w.Seg{
-								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
 							},
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
@@ -2323,8 +2361,16 @@ func States15() Screen {
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichny?from=2026-10-26"},
 							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichny"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichny?from=2026-11-09"},
-							w.Seg{
-								Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
 							},
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-11-02", Label: "From", Mono: true},

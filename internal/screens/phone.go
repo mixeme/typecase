@@ -461,11 +461,8 @@ func Phone7() Screen {
 							w.DocTasks{
 								Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7},
 								Items: []w.DocTask{
-									{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"},
-									{
-										Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"},
-										Text: "попросить скриншоты",
-									},
+									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
+									{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить скриншоты"},
 								},
 								Phone: true,
 							},
@@ -562,7 +559,11 @@ func Phone8() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Input{Kind: w.InputSearch, Placeholder: "Filter by word", Label: "Filter by word", Variant: w.InputH26W200},
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},

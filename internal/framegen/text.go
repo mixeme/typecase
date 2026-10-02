@@ -418,6 +418,10 @@ func (g *gen) inl2(e *El) string {
 			switch {
 			case v.Tag == "b":
 				x = "w.Strong(" + q(v.Text()) + ")"
+			case v.Tag == "em":
+				x = "w.Em(" + q(v.Text()) + ")"
+			case v.Has("tc-doc__bullets"):
+				x = "w.DocBullets{Items: [][]w.Inline{" + g.each(v.Els(), g.inl2) + "}}"
 			case v.Tag == "a":
 				x = "w.Link{Text: " + q(v.Text()) + `, Href: "#"}`
 			case v.Has("tc-mono"):
@@ -463,6 +467,8 @@ func (g *gen) rawparts(e *El) string {
 			switch {
 			case v.Tag == "b":
 				parts = append(parts, "w.Strong("+q(v.Text())+")")
+			case v.Tag == "em":
+				parts = append(parts, "w.Em("+q(v.Text())+")")
 			case v.Tag == "a":
 				parts = append(parts, "w.Link{Text: "+q(v.Text())+`, Href: "#"}`)
 			case v.Has("tc-mono"):

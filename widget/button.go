@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, File, NoScript, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -122,6 +122,12 @@ type Button struct {
 	// script the button is not shown: Copy and selecting the text remain.
 	SaveAs   string
 	SaveFrom string
+	// File makes the button a label that picks a file for a PostForm
+	// (Carrel's task 109): the browser opens the choice without a script.
+	File *FileField
+	// NoScript shows the button only on a page without a script: the
+	// «Upload» that sends a picked file there (Carrel's tasks 109, 90).
+	NoScript bool
 	Place    Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
 	Secondary bool
@@ -147,9 +153,12 @@ func (b Button) html(m mix) string {
 		state = "is-off"
 	}
 	tag := "button"
-	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary))
+	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens)
-	if b.Href != "" {
+	if b.File != nil {
+		tag = "label"
+		s.WriteString(`<label` + cls + common + `>`)
+	} else if b.Href != "" {
 		tag = "a"
 		if b.State == ButtonDisabled {
 			s.WriteString(`<a` + cls + common + ` aria-disabled="true">`)
@@ -186,6 +195,9 @@ func (b Button) html(m mix) string {
 	}
 	if b.Menu {
 		s.WriteString(`<svg viewBox="0 0 24 24">` + Icon("chev").use() + `</svg>`)
+	}
+	if b.File != nil {
+		s.WriteString(b.File.input())
 	}
 	s.WriteString(`</` + tag + `>`)
 	return s.String()

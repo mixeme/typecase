@@ -235,6 +235,9 @@ a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
 .tc-segfold__item.is-on{background:var(--tc-card)}
 .tc-segfold__count{margin-left:auto;color:var(--tc-dusty)}
 .tc-seg__opt.is-on{background:var(--tc-card);color:var(--tc-ink);font-weight:600}
+/* Вариант-ссылка — того же цвета, что вариант-кнопка: правило ссылок корня (color:inherit) его не перекрашивает. */
+.tc-root a.tc-seg__opt{color:var(--tc-muted)}
+.tc-root a.tc-seg__opt.is-on{color:var(--tc-ink)}
 /* Сегмент на радиокнопках: выбранный — тот, чья кнопка отмечена. */
 label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-seg__opt:has(> .tc-seg__box:checked){background:var(--tc-card);color:var(--tc-ink);font-weight:600}
@@ -510,6 +513,10 @@ a.tc-row__title:hover{text-decoration:underline}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
 /* «Save as» показанного текста (задача 94): файл собирает сценарий страницы — без него кнопки нет. */
 [data-tc-noscript] [data-tc-save]{display:none}
+/* Файл без сценария (задача 109): кнопка и пункт — подпись поля файла, браузер открывает выбор сам. Со сценарием выбор сразу отправляет форму; без него поле видно, и Upload отправляет. */
+.tc-file{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
+:root:not([data-tc-noscript]) .tc-nojs{display:none}
+[data-tc-noscript] .tc-file{position:static;opacity:1;width:auto;height:auto;max-width:200px;font-size:11px;pointer-events:auto}
 /* Двойник отметок в меню «⋯» (задача 82): та же форма, отметки — пункты-флажки столбиком; Apply без сценария — под ними. */
 .tc-menu .tc-checkform{display:flex;flex-direction:column;align-items:stretch;gap:0}
 [data-tc-noscript] .tc-menu .tc-checkform__apply{display:block;padding:4px 10px 6px}
@@ -535,6 +542,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__item.is-drag{opacity:.5}
 .tc-menu__item > .tc-ico--op-35:first-of-type{cursor:grab}
 .tc-menu__item:disabled{opacity:.45;cursor:default}
+/* Выбор коллекции (задача 103): метка — и в пункте, и в поле; коллекция только для чтения видна со значком ro, не выбирается, причина — в подсказке. */
+.tc-menu__item:has(> .tc-seg__box:disabled){cursor:default}
+.tc-in.is-pick > .tc-mark{margin-right:7px}
 .tc-menu__item > svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;opacity:.75}
 .tc-menu__item > .tc-kbd{margin-left:auto}
 /* Разделитель меню — 1 px: полпикселя на короткой линии пропадает. */
@@ -556,6 +566,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Форма POST без полей — для кнопок вне формы (атрибут form): её не видно. */
 .tc-post{display:none}
 .tc-doc__table{margin:14px 0 4px}
+/* Части текста заметки (задача 102): цитата — приглушённый текст за чертой; код — как написан, длинная строка прокручивается в блоке; вложенный список — кружками. */
+.tc-doc__quote{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--tc-rule);color:var(--tc-muted);font-size:14.5px;line-height:1.7}
+.tc-doc__code{margin:0;font-family:var(--tc-font-mono);font-size:12px;line-height:1.6;background:var(--tc-card);border-radius:3px;padding:10px 12px;overflow-x:auto;white-space:pre;scrollbar-width:thin}
+.tc-doc__bullets .tc-doc__bullets.tc-doc__bullets{margin-top:6px;list-style:circle}
 .tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
 .tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}
 .tc-doc__grid{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.45}
@@ -649,6 +663,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar--wide .tc-segfold__pick{display:block}
   .tc-bar--wide:has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar--wide:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Короткий переключатель (.tc-segfold--phone, Day / Week / Month / Range агенды) широкая полоса держит целиком: он складывается только на телефоне, с 640. */
+@container tcbox (min-width:641px){
+  .tc-bar .tc-segfold.tc-segfold--phone > .tc-seg{display:inline-flex}
+  .tc-bar .tc-segfold.tc-segfold--phone > .tc-segfold__pick{display:none}
 }
 /* Без is-2nd панели правки нужно 740: дальше кнопки теряют подписи, не действия, и стоят плотнее. */
 @container tcbox (max-width:740px){

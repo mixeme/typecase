@@ -42,6 +42,13 @@
 		}, 150);
 	}
 
+	// Where the server suggests, the line's own list (a page without a
+	// script, Carrel's task 96) would cover the menu: it goes.
+	document.addEventListener("focusin", function (e) {
+		var t = e.target;
+		if (t.classList && t.classList.contains("tc-in__add") && t.hasAttribute("list") && t.closest("[data-tc-suggest]")) t.removeAttribute("list");
+	});
+
 	document.addEventListener("input", function (e) {
 		var t = e.target;
 		if (t.classList && t.classList.contains("tc-in__add") && t.closest("[data-tc-suggest]")) suggest(t);
