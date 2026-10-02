@@ -142,6 +142,7 @@ var Routes = []Route{
 	{Frame: "states-4", Caption: "Только для чтения", Screen: States4},
 	{Frame: "states-5", Caption: "Нет сети", Screen: States5},
 	{Frame: "states-6", Caption: "Источник не ответил", Screen: States6},
+	{Frame: "states-17", Caption: "Событие · сервер не сохранил свойства", Screen: States17},
 	{Frame: "states-7", Caption: "Контакты · ни одна книга не отмечена", Screen: States7},
 	{Frame: "states-8", Caption: "Контакты · опрос идёт", Screen: States8},
 	{Frame: "states-9", Caption: "Контакты · источник недоступен", Screen: States9},

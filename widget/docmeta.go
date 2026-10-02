@@ -52,10 +52,17 @@ type DocAttach struct {
 	Name  string
 	Size  Dim
 	Where Badge
+	// Href makes the name a link (the owner's decision of 02.10): an
+	// attachment in the record downloads, one in Files opens there.
+	Href string
 }
 
 func (a DocAttach) html(mix) string {
-	return `<div class="tc-line__text">` + esc(a.Name) + ` ` + a.Size.html(nil) + ` ` + a.Where.html(nil) + `</div>`
+	name := esc(a.Name)
+	if a.Href != "" {
+		name = Link{Text: a.Name, Href: a.Href}.html(nil)
+	}
+	return `<div class="tc-line__text">` + name + ` ` + a.Size.html(nil) + ` ` + a.Where.html(nil) + `</div>`
 }
 
 // DocmetaSec is a section of a document's side column.

@@ -11,6 +11,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 var _ = add(
 	// tc-msg
 	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep these properties."), w.Text(" Other clients will not see them either: "), w.Mono{Text: "X-ABLABEL"}, w.Text(", "), w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"}, w.Text(", "), w.Mono{Text: "X-EVOLUTION-FILE-AS"}, w.Text(".")}, Space: w.MsgFlushTop2}, "states-12", "tc-msg", 1),
+	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep these properties."), w.Text(" Other clients will not see them either: "), w.Mono{Text: "X-CALENDARSERVER-PRIVATE-COMMENT"}, w.Text(", "), w.Mono{Text: "X-MICROSOFT-CDO-BUSYSTATUS"}, w.Text(".")}, Space: w.MsgFlushTop2}, "states-17", "tc-msg", 1),
 	cards("titled-alert", w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, "states-11", "tc-msg", 1),
 	cards("titled-action", w.Msg{Parts: []w.MsgPart{w.Strong("The server did not take tasks."), w.Text(" The server made «Дом» for events only and said nothing of the tasks you asked for. Tasks need another calendar: make one for them on this server or another. "), w.Button{Label: "New calendar", Small: true}}}, "s-agenda-11", "tc-msg", 1),
 	cards("bot12", w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12}, "s-admin-17", "tc-msg", 1),
@@ -291,7 +292,7 @@ var _ = add(
 		w.SecActs{Items: []w.Button{w.Button{Label: "Open the timeline", Icon: "all"}}}}}, "s-contacts-6", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("release-checklist.md "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "The same event in other calendars"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}}}}, Gap: 5}}}, "s-agenda-2", "tc-sec", 5),
@@ -307,20 +308,20 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Мария Лебедева", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Анна Ковалёва", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Артём Белов", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Columns: true}}}, "s-agenda-1", "tc-sec", 2),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("посадочный-казань.pdf "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}}, w.Text(" "), w.Badge{Label: "in the task"}}}, Gap: 6},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "посадочный-казань.pdf", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}}, w.Text(" "), w.Badge{Label: "in the task"}}}, Gap: 6},
 		w.SecHint{Text: "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.", Apart: true}}}, "s-tasks-1", "tc-sec", 3),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseRead},
 		w.SecTasks{Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}}}}, "s-notes-1", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("2026-08-10-sync-board.png "), w.Dim{Parts: []w.Inline{w.Text("image/png · 412 KB")}}, w.Text(" "), w.Badge{Label: "in the note"}}, []w.SecItemPart{w.Text("запись-встречи.m4a "), w.Dim{Parts: []w.Inline{w.Text("audio/mp4 · 24 MB")}}, w.Text(" "), w.Badge{Label: "Documents / carrel"}}}, Gap: 6}}}, "s-notes-1", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "2026-08-10-sync-board.png", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("image/png · 412 KB")}}, w.Text(" "), w.Badge{Label: "in the note"}}, []w.SecItemPart{w.Link{Text: "запись-встречи.m4a", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("audio/mp4 · 24 MB")}}, w.Text(" "), w.Badge{Label: "Documents / carrel"}}}, Gap: 6}}}, "s-notes-1", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Links"},
 		w.SecNote{Text: "Carrel keeps no index of what points at this file. It may be attached to a note or an event — check before deleting."}}}, "s-files-1", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("release-checklist.md "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
 		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, "s-io-2", "tc-sec", 1),
 	cards("flush", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Push{Items: []w.PushPart{w.Text("Attach")}}}, Variant: w.RubricItemLine},
@@ -717,16 +718,16 @@ var _ = add(
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
 		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-2", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-3", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
 		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-20", "tc-docmeta", 1),
 )

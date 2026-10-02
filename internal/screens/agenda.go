@@ -357,7 +357,8 @@ func Agenda1() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Text("release-checklist.md "),
+										w.Link{Text: "release-checklist.md", Href: "#"},
+										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
@@ -520,7 +521,8 @@ func Agenda2() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Text("release-checklist.md "),
+										w.Link{Text: "release-checklist.md", Href: "#"},
+										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
@@ -793,6 +795,7 @@ func Agenda3() Screen {
 													w.Badge{Label: "in the event"},
 												},
 											},
+											w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
 										},
 										Gap:   w.LineGap8,
 										Block: true,

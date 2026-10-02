@@ -230,7 +230,8 @@ func Tasks1() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Text("посадочный-казань.pdf "),
+										w.Link{Text: "посадочный-казань.pdf", Href: "#"},
+										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the task"},
@@ -341,7 +342,8 @@ func Tasks2() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Text("посадочный-казань.pdf "),
+										w.Link{Text: "посадочный-казань.pdf", Href: "#"},
+										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the task"},

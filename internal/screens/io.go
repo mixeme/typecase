@@ -296,7 +296,8 @@ func Io2() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Text("release-checklist.md "),
+										w.Link{Text: "release-checklist.md", Href: "#"},
+										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},

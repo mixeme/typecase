@@ -970,7 +970,11 @@ func (g *gen) docmeta(e *El) string {
 				}
 				its = append(its, "w.DocRefs{Items: []w.DocRef{"+join(refs, ", ")+"}}")
 			case x.Has("tc-line__text"):
-				its = append(its, "w.DocAttach{Name: "+q(x.OwnText())+", Size: "+dimText(x.Kid("tc-dim").Text())+", Where: "+g.badge(x.Kid("tc-badge"))+"}")
+				name, href := x.OwnText(), ""
+				if a := x.Kid("tc-dim--accent"); a != nil {
+					name, href = a.Text(), ", Href: "+q(a.Attr("href"))
+				}
+				its = append(its, "w.DocAttach{Name: "+q(name)+", Size: "+dimText(x.Kid("tc-dim").Text())+", Where: "+g.badge(x.Kid("tc-badge"))+href+"}")
 			default:
 				stop("docmeta? " + join(x.Cls(), " "))
 			}

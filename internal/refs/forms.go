@@ -107,7 +107,7 @@ var _ = add(
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Icon: "up", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}},
-		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}}}, "s-agenda-3", "tc-line", 1),
+		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}, w.Button{Label: "Remove", Small: true, Kind: w.ButtonDanger}}}, "s-agenda-3", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 1),
 	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, btn, w.Push{Face: faceOf(w.FaceAccent11_5), Items: []w.PushPart{w.Text("Add a second instance")}}}}, "desktop-7", "tc-line", 1),

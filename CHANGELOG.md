@@ -116,6 +116,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's task 93 and the owner's decisions of 02.10: an event's save that
+  lost properties has its frame, as a contact's (states-17); an attachment's
+  name is a link in every card — in the record it downloads, in Files it
+  opens there (`DocAttach.Href`); Remove stands on the edit only
+  (s-agenda-3). 390 frames.
 - Carrel's tasks 78–82 and the owner's decisions of 02.10: no backup jobs —
   no backups line in the rail and no count by Backup (s-backup-6, 78); the
   invitation by link has its own frame (s-auth-14, 79), and both invitations
