@@ -72,6 +72,8 @@ const MockupLadderProbeJS = `(() => {
         tag === "B" || tag === "STRONG" || tag === "KBD") return true;
     const cs = getComputedStyle(el);
     if (cs.display === "none" || cs.visibility === "hidden") return true;
+    // What a closed details hides keeps a box but is not shown.
+    if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) return true;
     if (cs.textOverflow === "ellipsis") return true;
     if (cs.overflow === "hidden" || cs.overflowX === "hidden" || cs.overflow === "clip") return true;
     if (el.matches("button, a[href], input, textarea, select, .tc-tag, .tc-btn, .tc-seg__opt")) return true;

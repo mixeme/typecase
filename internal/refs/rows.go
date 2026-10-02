@@ -13,7 +13,7 @@ var _ = add(
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "169", Current: true}, "components-11", "tc-tickrow", 1),
 	rows("current", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true}, "s-contacts-3", "tc-tickrow", 1),
 	rows("hidden", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "components-11", "tc-tickrow", 4),
-	rows("error", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "password · 401", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true, Trail: w.Button{Label: "Retry", Small: true}}, "components-11", "tc-tickrow", 5),
+	rows("error", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "components-11", "tc-tickrow", 5),
 	rows("hidden", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#9A9280"}, Label: "Public", Hidden: true, Trail: w.Badge{Label: "ro"}}, "s-files-1", "tc-tickrow", 3),
 	rows("one", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Trail: w.Badge{Label: "ro"}}, "s-contacts-1", "tc-tickrow", 4),
 	rows("root", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "2 of 3"}, "s-files-1", "tc-tickrow", 1),
@@ -34,7 +34,7 @@ var _ = add(
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Form: w.TickRowTouch, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "14", Current: true}, "phone-2", "tc-tickrow", 1),
 	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true}, "phone-2", "tc-tickrow", 2),
 	rows("touch", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowTouch, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "phone-2", "tc-tickrow", 4),
-	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "password · 401", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true, Trail: w.Button{Label: "Retry", Small: true}}, "phone-2", "tc-tickrow", 7),
+	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow", 7),
 
 	// tc-tree
 	rows("links", w.Tree{Rows: []w.TreeRow{

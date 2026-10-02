@@ -120,6 +120,8 @@ func (g *gen) runbar(e *El) string {
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-line"):
 				ps = append(ps, g.line(v))
+			case v.Has("tc-drop"):
+				ps = append(ps, g.drop(v))
 			case v.Has("tc-push"):
 				ps = append(ps, "w.Push{Items: []w.PushPart{"+g.buttons(v.Els())+"}}")
 			default:

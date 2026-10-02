@@ -507,6 +507,10 @@ func (g *gen) menu(e *El) string {
 			i := k.Kid("tc-in")
 			f = append(f, "Input: w.Input{Value: "+q(i.Attr("value"))+", Mono: true, Variant: w.InputChip, Label: "+q(i.Attr("aria-label"))+"}")
 			items = append(items, "w.MenuField{"+join(f, ", ")+"}")
+		case k.Has("tc-menu__refusal"):
+			r := k.Kid("tc-menu__what")
+			items = append(items, "w.MenuRefusal{Mark: "+g.mark(k.Kid("tc-mark"))+", Source: "+q(r.Kid("tc-menu__source").Text())+
+				", Answer: "+q(r.Kid("tc-menu__answer").Text())+", Retry: "+g.button(k.Kid("tc-btn"))+"}")
 		case k.Has("tc-menu__foot"):
 			items = append(items, "w.MenuFoot{Items: []w.Button{"+g.buttons(k.Els())+"}}")
 		case k.Has("tc-menu__item"):

@@ -482,35 +482,14 @@ func States5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#4A6B52"},
-							Label:     "Личный",
-							Meta:      "offline",
-							MetaTitle: "This device is offline. Retry when the network is back.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#3F6E8C"},
-							Label:     "Работа",
-							Meta:      "offline",
-							MetaTitle: "This device is offline. Retry when the network is back.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Error: true},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#6B4E7A"},
-							Label:     "Проекты",
-							Meta:      "offline",
-							MetaTitle: "This device is offline. Retry when the network is back.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Error: true},
 					},
 				},
 				w.RailFoot{
@@ -620,14 +599,7 @@ func States6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#9A9280"},
-							Label:     "Общий",
-							Meta:      "password · 401",
-							MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
 					},
 				},
 				w.RailSec{
@@ -658,7 +630,7 @@ func States6() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("6 of 7 calendars · one source did not answer")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("6 of 7 calendars · one source failed")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -744,9 +716,22 @@ func States6() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 83, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 5 of 6 · "),
-							w.Span{Face: w.FaceDanger, Text: "baikal · Общий: 401 Unauthorized"},
-							w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}},
+							w.Text("Polled 5 of 6 sources · 2 events · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
@@ -1091,14 +1076,7 @@ func States9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#6B4E7A"},
-							Label:     "Команда",
-							Meta:      "unavailable · 503",
-							MetaTitle: "The server answered 503 Service Unavailable.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Error: true},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 					},
 				},
@@ -1157,9 +1135,22 @@ func States9() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 2 of 3 sources · 5 cards · 1 refused · "),
-							w.Span{Face: w.FaceDanger, Text: "radicale · vps · Команда: The server answered 503 Service Unavailable."},
-							w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}},
+							w.Text("Polled 2 of 3 sources · 5 cards · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+											Source: "radicale · vps · Команда",
+											Answer: "REPORT /dav/addressbooks/team/ → 503 Service Unavailable",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
@@ -1656,14 +1647,7 @@ func States13() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#9A9280"},
-							Label:     "Общий",
-							Meta:      "password · 401",
-							MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
 					},
 				},
 				w.RailSec{
@@ -1781,7 +1765,21 @@ func States13() Screen {
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
 							w.Text("Polled 4 of 6 sources · 9 events · "),
-							w.Span{Face: w.FaceDanger, Text: "baikal · Общий: 401 Unauthorized"},
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
 							w.Mono{Text: "0.8 s", Place: w.Pushed},
 						},
 					},

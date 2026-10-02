@@ -50,14 +50,7 @@ func Dark1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#8C6239"},
-							Label:     "Общий",
-							Meta:      "password · 401",
-							MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Общий", Error: true},
 					},
 				},
 				w.RailFoot{
@@ -79,7 +72,24 @@ func Dark1() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 83},
-						Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Span{Face: w.FaceDanger, Text: "1 unavailable"}},
+						Parts: []w.RunbarPart{
+							w.Text("Polled 5 of 6 sources · 14 events · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{

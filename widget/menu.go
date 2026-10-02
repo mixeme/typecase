@@ -203,6 +203,23 @@ func (c MenuColumn) html(mix) string {
 		c.Control.html(nil) + `</div>`
 }
 
+// MenuRefusal is a row of a menu of refusals (Carrel's decision of 02.10): a
+// source that did not answer, what was asked and what it answered, in full,
+// and its Retry. The rail only marks the source; the reason is here.
+type MenuRefusal struct {
+	Mark   Mark
+	Source string // «radicale · vps · Дежурства»
+	Answer string // «REPORT /dav/duty/ → 503 Service Unavailable»
+	Retry  Button
+}
+
+func (r MenuRefusal) html(mix) string {
+	m := r.Mark
+	m.Size = MarkH11
+	return `<div class="tc-menu__refusal">` + m.html(nil) + `<span class="tc-menu__what"><span class="tc-menu__source">` + esc(r.Source) +
+		`</span><span class="tc-menu__answer">` + esc(r.Answer) + `</span></span>` + r.Retry.html(nil) + `</div>`
+}
+
 // MenuFoot is the last row of a menu that edits: save, go back.
 type MenuFoot struct {
 	Items []Button
@@ -230,6 +247,7 @@ func (MenuHeading) menuPart() {}
 func (MenuField) menuPart()   {}
 func (MenuColumn) menuPart()  {}
 func (MenuFoot) menuPart()    {}
+func (MenuRefusal) menuPart() {}
 func (Rubric) menuPart()      {}
 func (Input) menuPart()       {}
 func (Range) menuPart()       {}
@@ -267,7 +285,7 @@ const (
 // Инварианты. Пункт — кнопка с ролью пункта меню; ширина и место — перечисления; меню печатает фрагмент своего кадра.
 // Поведение. Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла; строка поиска оставляет пункты, где есть набранное (без сценария её нет).
 // Эталон. кадр `components-1`, фрагмент `.tc-menu`.
-// Содержимое. Пункты (значок, метка, галка, название, приглушённый хвост, клавиша; радио формы вокруг), строка поиска, разделители, заголовки, поле, строка с переключателем, диапазон, отметки-форма (CheckForm), подвал.
+// Содержимое. Пункты (значок, метка, галка, название, приглушённый хвост, клавиша; радио формы вокруг), строка поиска, разделители, заголовки, поле, строка с переключателем, диапазон, отметки-форма (CheckForm), отказы источников (MenuRefusal), подвал.
 // Чего нет. Вложенных меню: второй уровень — лист или страница.
 type Menu struct {
 	Items  []MenuPart

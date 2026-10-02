@@ -1580,14 +1580,7 @@ func Contacts7() Screen {
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
-						w.TickRow{
-							Mark:      w.Mark{Colour: "#9A9280"},
-							Label:     "Общий",
-							Meta:      "password · 401",
-							MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
-							Error:     true,
-							Trail:     w.Button{Label: "Retry", Small: true},
-						},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
 						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "ro"},
 						w.TickRow{
 							Ticked: w.TickedOff,
@@ -1682,7 +1675,21 @@ func Contacts7() Screen {
 							w.Text(", "),
 							w.Mono{Text: "anna.kovaleva@slovo.example"},
 							w.Text(" and the name · "),
-							w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"},
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},

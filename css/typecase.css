@@ -99,6 +99,14 @@ input.tc-tickrow__tick.tc-tickrow__tick:checked{background:var(--tc-ink);border:
 .tc-tickrow.is-on{background:var(--tc-card);font-weight:600}
 .tc-tickrow.is-off .tc-tickrow__label{color:var(--tc-dusty)}
 .tc-tickrow.is-error .tc-tickrow__meta{color:var(--tc-danger)}
+/* Отказ источника (решение человека 02.10): в рейле — значок, причина — в его подсказке; полностью — в меню отказов полосы хода. Борьба с длиной строки обречена. */
+.tc-tickrow__err{margin-left:auto;display:inline-flex;align-items:center;color:var(--tc-danger);flex:none}
+.tc-tickrow__err svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.tc-menu__refusal{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 8px;align-items:start;padding:8px 12px;border-bottom:.5px solid var(--tc-hair)}
+.tc-menu__refusal > .tc-mark{margin-top:3px}
+.tc-menu__what{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tc-menu__source{font-size:12.5px;color:var(--tc-ink)}
+.tc-menu__answer{font-family:var(--tc-font-mono);font-size:11px;color:var(--tc-danger);white-space:normal;overflow-wrap:anywhere}
 /* Combined … — единый вид раздела. Полоска из цветов всех коллекций. */
 .tc-tickrow.is-all{margin-bottom:2px}
 /* Корень файлов — навигация, не единый вид: значок раздела вместо сборной

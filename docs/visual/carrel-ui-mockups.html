@@ -280,6 +280,14 @@ input.tc-tickrow__tick.tc-tickrow__tick:checked{background:var(--tc-ink);border:
 .tc-tickrow.is-on{background:var(--tc-card);font-weight:600}
 .tc-tickrow.is-off .tc-tickrow__label{color:var(--tc-dusty)}
 .tc-tickrow.is-error .tc-tickrow__meta{color:var(--tc-danger)}
+/* Отказ источника (решение человека 02.10): в рейле — значок, причина — в его подсказке; полностью — в меню отказов полосы хода. Борьба с длиной строки обречена. */
+.tc-tickrow__err{margin-left:auto;display:inline-flex;align-items:center;color:var(--tc-danger);flex:none}
+.tc-tickrow__err svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.tc-menu__refusal{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 8px;align-items:start;padding:8px 12px;border-bottom:.5px solid var(--tc-hair)}
+.tc-menu__refusal > .tc-mark{margin-top:3px}
+.tc-menu__what{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tc-menu__source{font-size:12.5px;color:var(--tc-ink)}
+.tc-menu__answer{font-family:var(--tc-font-mono);font-size:11px;color:var(--tc-danger);white-space:normal;overflow-wrap:anywhere}
 /* Combined … — единый вид раздела. Полоска из цветов всех коллекций. */
 .tc-tickrow.is-all{margin-bottom:2px}
 /* Корень файлов — навигация, не единый вид: значок раздела вместо сборной
@@ -1872,7 +1880,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   <symbol id="i-quill" viewBox="0 0 24 24"><path d="M5 19l7-7"/><path d="M11 12c5-1 8-4 9-9-5 1-8 4-9 9z"/><path d="M9 15l6-3"/></symbol>
   <symbol id="i-clip" viewBox="0 0 24 24"><path d="M16.5 7.5l-7.8 7.8a2 2 0 0 0 2.8 2.8l8-8a4 4 0 0 0-5.7-5.7l-8 8a6 6 0 0 0 8.5 8.5l6.2-6.2"/></symbol>
   <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
-  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2.5 4L17 12H6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3 20h18Z"/><path d="M12 10v4.5"/><path d="M12 17.5v.5"/></symbol><symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-2.5 4L17 12H6"/></symbol>
   <symbol id="i-forward" viewBox="0 0 24 24"><path d="M14 7l5 5-5 5"/><path d="M19 12h-9a5 5 0 0 0-5 5v2"/></symbol>
   <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13l2.5-7h13L21 13v6H3z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/></symbol>
   <symbol id="i-mailopen" viewBox="0 0 24 24"><path d="M3 10l9-6 9 6v10H3z"/><path d="M3.6 10.5l8.4 5.5 8.4-5.5"/></symbol>
@@ -2226,7 +2234,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
     <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">128</span></div>
     <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">41</span></div>
     <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
-    <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+    <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
   </div>
   <div class="tc-railsec tc-railsec--top14">
     <div class="tc-rubric tc-rubric--pad0-14-6">Subscriptions <span class="tc-badge">external</span></div>
@@ -4194,7 +4202,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">4</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-tickrow__meta">0</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">ro</span></div>
           <div class="tc-tickrow is-ext is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Расписание лиги</span><span class="tc-tickrow__meta">ro</span></div>
         </div>
@@ -4226,7 +4234,7 @@ Read  2 min ago · not changed on server</div>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">newest first</span></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 calendars · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> and the name · <span class="tc-dim--danger">baikal · Общий unavailable</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 calendars · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> and the name · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
 
         <div class="tc-list__group"><span class="tc-rubric">August 2026</span><span class="tc-num">3</span></div>
         <div class="tc-list">
@@ -4413,7 +4421,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">baikal</div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Subscriptions <span class="tc-badge">external</span></div>
@@ -4454,18 +4462,10 @@ Read  2 min ago</div>
           <form class="tc-range is-2nd" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-bar__sep is-2nd"></span>
           <form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
-          <span class="tc-drop"><button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg>
-            
-          </button><span class="tc-menu is-pop is-right">
-              <form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
-              <span class="tc-menu__sep is-3rd"></span>
-              <form class="tc-range tc-range--wrap" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
-              <span class="tc-menu__sep"></span>
-              <form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form>
-            </span></span>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right"><form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-menu__sep is-3rd"></span><form class="tc-range tc-range--wrap" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form><span class="tc-menu__sep"></span><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span></details>
           <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <span class="tc-dim--danger">baikal unavailable</span><span class="tc-mono tc-push">from cache · 2 min ago</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">from cache · 2 min ago</span></div>
 
         <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">4</span></div>
         <div class="tc-list">
@@ -4990,6 +4990,16 @@ SEQUENCE  2</div>
   </div>
   <figcaption>Кнопка берёт файл с этого компьютера — это частый случай. Стрелка добавляет второй: файл, который уже лежит в Files, выбирается тем же деревом, что при переносе. Стрелка у Attach одна везде — в форме, на карточке и в правке заметки.</figcaption>
   </figure>
+  <figure style="flex:0 1 270px">
+  <div class="frame" data-frame="s-agenda-16">
+    <div class="frame-label"><span>Полоса агенды · ⋯</span><span class="frag">меню</span><i>узкая колонка</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu"><form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-menu__sep is-3rd"></span><form class="tc-range tc-range--wrap" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form><span class="tc-menu__sep"></span><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></div>
+    </div>
+  </div>
+  <figcaption>Под «⋯» уходит то, чему на полосе нет места: на телефоне — Events · Tasks due · Notes, уже — диапазон дат, и всегда — Compact rows. Отметки здесь — флажки той же формы, что на полосе: без сценария их отправляет Apply.</figcaption>
+  </figure>
+
 </div>
 
 <h2 id="s-tasks">7.3 Задачи</h2>
@@ -7589,7 +7599,7 @@ Read  2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">0</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">0</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-tickrow__meta">0</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="The server did not answer in time.">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="The server did not answer in time." title="The server did not answer in time."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">0</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">1</span></div>
@@ -15411,7 +15421,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">2</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
@@ -15436,7 +15446,7 @@ Read  2 min ago · not changed on server</div>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">newest first</span></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="80%"></i></span>Looked in 6 of 7 sources by the card's link <span class="tc-mono">urn:uuid:4f2b-9c31-a0e7</span> · <span class="tc-dim--danger">baikal · Общий unavailable</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="80%"></i></span>Looked in 6 of 7 sources by the card's link <span class="tc-mono">urn:uuid:4f2b-9c31-a0e7</span> · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
 
         <div class="tc-list__group"><span class="tc-rubric">In other cards</span><span class="tc-num">3</span></div>
         <div class="tc-list">
@@ -16635,7 +16645,7 @@ Read    2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">0</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Archive</span><span class="tc-tickrow__meta" title="The mail server did not answer in 8 s. Everything else is already in the list.">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Archive</span><span class="tc-tickrow__err" role="img" aria-label="The mail server did not answer in 8 s. Everything else is already in the list." title="The mail server did not answer in 8 s. Everything else is already in the list."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Sent</span><span class="tc-tickrow__meta">—</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -17034,7 +17044,7 @@ DATA                → 550 5.7.1 Daily sending limit reached
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Inbox</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Sent</span><span class="tc-tickrow__meta">2</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">home · Archive</span><span class="tc-tickrow__meta">1</span></div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__meta" title="mail.office.example did not answer in 8 s">no reply</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">office · Inbox</span><span class="tc-tickrow__err" role="img" aria-label="mail.office.example did not answer in 8 s" title="mail.office.example did not answer in 8 s"><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
@@ -17062,7 +17072,7 @@ DATA                → 550 5.7.1 Daily sending limit reached
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">newest first</span></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="80%"></i></span>Polled 4 calendars and 3 of 4 mail folders · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> · <span class="tc-dim--danger">office · Inbox did not answer</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="80%"></i></span>Polled 4 calendars and 3 of 4 mail folders · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span><span class="tc-menu__what"><span class="tc-menu__source">office · Inbox</span><span class="tc-menu__answer">IMAP mail.office.example → no answer in 8 s</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
 
         <div class="tc-list__group"><span class="tc-rubric">September 2026</span><span class="tc-num">4</span></div>
         <div class="tc-list">
@@ -17897,12 +17907,12 @@ SMTP  mail.home.example:465  TLS
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">nextcloud</div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta" title="This device is offline. Retry when the network is back.">offline</span><button class="tc-btn is-sm" type="button">Retry</button></div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta" title="This device is offline. Retry when the network is back.">offline</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__err" role="img" aria-label="This device is offline. Retry when the network is back." title="This device is offline. Retry when the network is back."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__err" role="img" aria-label="This device is offline. Retry when the network is back." title="This device is offline. Retry when the network is back."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">radicale · vps</div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta" title="This device is offline. Retry when the network is back.">offline</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__err" role="img" aria-label="This device is offline. Retry when the network is back." title="This device is offline. Retry when the network is back."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           </div>
           <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
         </div>
@@ -17964,7 +17974,7 @@ SMTP  mail.home.example:465  TLS
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">baikal</div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">Subscriptions <span class="tc-badge">external</span></div>
@@ -17981,7 +17991,7 @@ SMTP  mail.home.example:465  TLS
         </div>
         <div class="tc-main">
           <div class="tc-head">
-            <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">6 of 7 calendars · one source did not answer</div></div>
+            <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">6 of 7 calendars · one source failed</div></div>
             <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar tc-bar--wide">
@@ -17993,7 +18003,7 @@ SMTP  mail.home.example:465  TLS
             <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right"><form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-menu__sep is-3rd"></span><form class="tc-range tc-range--wrap" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form><span class="tc-menu__sep"></span><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span></details>
             <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
           </div>
-          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="83%"></i></span>Polled 5 of 6 · <span class="tc-dim--danger">baikal · Общий: 401 Unauthorized</span><span class="tc-push"><button class="tc-btn is-sm" type="button">Retry</button></span></div>
+          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 2 events · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
           <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">2</span></div>
           <div class="tc-list">
             <div class="tc-row tc-row--timecols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-mono tc-row__lead">10:00</span><span class="tc-row__title">Синк-ап по релизу</span><span class="tc-row__excerpt tc-row__detail">Переговорная 2</span><span class="tc-row__cell tc-row__caption"></span><span class="tc-row__cell tc-row__source">nextcloud · Личный</span></div>
@@ -18006,6 +18016,16 @@ SMTP  mail.home.example:465  TLS
   </div>
   <figcaption>Частичный ответ — обычное состояние, а не ошибка: список показывается, а недостающее названо словами.</figcaption>
   </figure>
+  <figure style="flex:0 1 460px">
+  <div class="frame" data-frame="states-16">
+    <div class="frame-label"><span>Отказы источников</span><span class="frag">меню</span><i>кнопка «N failed» в полосе хода</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#8C6239"></span><span class="tc-menu__what"><span class="tc-menu__source">radicale · vps · Дежурства</span><span class="tc-menu__answer">REPORT /dav/calendars/duty/ → 503 Service Unavailable</span></span><button class="tc-btn is-sm" type="button">Retry</button></div><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span><span class="tc-menu__what"><span class="tc-menu__source">radicale · vps · Проекты</span><span class="tc-menu__answer">REPORT /dav/calendars/projects/ → 503 Service Unavailable</span></span><button class="tc-btn is-sm" type="button">Retry</button></div><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div><div class="tc-menu__foot"><button class="tc-btn is-sm" type="button">Retry all</button></div></div>
+    </div>
+  </div>
+  <figcaption>Отказ источника в рейле — только значок, причина в его подсказке: борьба с длиной строки обречена (решение человека 02.10). Целиком отказы — здесь: что спросили и что ответил сервер, моноширинным, без экономии места, у каждого свой Retry, внизу Retry all, если отказов больше одного. Полоса хода говорит одно — «N failed» — и открывает это меню.</figcaption>
+  </figure>
+
 
 <figure style="flex:1 1 100%">
   <div class="frame" data-frame="states-7" data-screen="/app/contacts" data-part="empty">
@@ -18180,7 +18200,7 @@ SMTP  mail.home.example:465  TLS
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">radicale · vps</div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Команда</span><span class="tc-tickrow__meta" title="The server answered 503 Service Unavailable.">unavailable · 503</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Команда</span><span class="tc-tickrow__err" role="img" aria-label="The server answered 503 Service Unavailable." title="The server answered 503 Service Unavailable."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
             <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Рассылки</span><span class="tc-tickrow__meta">—</span></div>
           </div>
           <div class="tc-railsec">
@@ -18207,7 +18227,7 @@ SMTP  mail.home.example:465  TLS
             <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
             <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/contacts" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-mono">5</span></span>
           </div>
-          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="62%"></i></span>Polled 2 of 3 sources · 5 cards · 1 refused · <span class="tc-dim--danger">radicale · vps · Команда: The server answered 503 Service Unavailable.</span><span class="tc-push"><button class="tc-btn is-sm" type="button">Retry</button></span></div>
+          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="62%"></i></span>Polled 2 of 3 sources · 5 cards · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span><span class="tc-menu__what"><span class="tc-menu__source">radicale · vps · Команда</span><span class="tc-menu__answer">REPORT /dav/addressbooks/team/ → 503 Service Unavailable</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
           <div class="tc-list__group"><span class="tc-rubric">А</span><span class="tc-num">2</span></div>
           <div class="tc-list">
             <div class="tc-row tc-row--avatarcols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-avatar">АК</span><span class="tc-row__title">Анна Ковалёва</span><span class="tc-row__excerpt tc-mono tc-row__subtitle">+7 912 445-10-88</span><span class="tc-row__excerpt tc-row__detail">a.kovaleva@example.org</span><span class="tc-row__excerpt tc-row__caption">Издательство «Слово»</span><span class="tc-row__cell tc-row__source">nextcloud · Контакты</span></div>
@@ -18490,7 +18510,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">baikal</div>
-            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+            <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
           </div>
           <div class="tc-railsec">
             <div class="tc-rubric">Subscriptions <span class="tc-badge">external</span></div>
@@ -18519,7 +18539,7 @@ dav: HTTP 503: the server is busy</div></div>
             <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right"><form class="tc-checkform is-3rd" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="events" checked><span class="tc-tickrow__tick"></span>Events</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="tasks"><span class="tc-tickrow__tick is-off"></span>Tasks due</label><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="show" value="notes"><span class="tc-tickrow__tick is-off"></span>Notes</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form><span class="tc-menu__sep is-3rd"></span><form class="tc-range tc-range--wrap" action="/app/calendar" method="get"><input class="tc-in is-mono" type="date" value="2026-08-10" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-08-16" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form><span class="tc-menu__sep"></span><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span></details>
             <span class="tc-bar__right is-2nd"><form class="tc-checkform" action="/app/calendar" method="get"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1"><span class="tc-tickrow__tick is-off"></span>Compact rows</label><span class="tc-checkform__apply"><button class="tc-btn is-sm" type="submit">Apply</button></span></form></span>
           </div>
-          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="62%"></i></span>Polled 4 of 6 sources · 9 events · <span class="tc-dim--danger">baikal · Общий: 401 Unauthorized</span><span class="tc-mono tc-push">0.8 s</span></div>
+          <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="62%"></i></span>Polled 4 of 6 sources · 9 events · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">0.8 s</span></div>
           <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">2</span></div>
           <div class="tc-list">
             <div class="tc-row tc-row--timecols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-mono tc-row__lead">10:00</span><span class="tc-row__title">Синк-ап по релизу</span><span class="tc-row__excerpt tc-row__detail">Переговорная 2</span><span class="tc-row__cell tc-row__caption"></span><span class="tc-row__cell tc-row__source">nextcloud · Личный</span></div>
@@ -18709,7 +18729,7 @@ dav: HTTP 503: the server is busy</div></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">baikal</div>
-          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
@@ -18718,7 +18738,7 @@ dav: HTTP 503: the server is busy</div></div>
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">5 of 7 calendars · 10 – 16 August 2026</div></div>
           <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button">Export</button></div>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <span class="tc-dim--danger">1 unavailable</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="83%"></i></span>Polled 5 of 6 sources · 14 events · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
         <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">3</span></div>
         <div class="tc-list">
           <div class="tc-row tc-row--timecols is-on"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-mono tc-row__lead">10:00</span><span class="tc-row__title is-strong">Синк-ап по релизу</span><span class="tc-row__excerpt tc-row__detail">Переговорная 2</span><span class="tc-row__cell tc-row__caption"><span class="tc-badge">4 attendees</span></span><span class="tc-row__cell tc-row__source">nextcloud · Личный</span></div>
@@ -18956,7 +18976,7 @@ dav: HTTP 503: the server is busy</div></div>
       </div>
       <div class="tc-shell__body tc-shell__body--no-rail">
         <div class="tc-main">
-          <div class="tc-runbar"><span class="tc-meter tc-meter--w60"><i class="tc-meter__bar" data-tc-width="83%"></i></span>5 of 6 · 14 events · <span class="tc-dim--danger">1 unavailable</span></div>
+          <div class="tc-runbar"><span class="tc-meter tc-meter--w60"><i class="tc-meter__bar" data-tc-width="83%"></i></span>5 of 6 · 14 events · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details></div>
           <div class="tc-list__group"><span class="tc-rubric">Mon · 10 Aug</span><span class="tc-num">3</span></div>
           <div class="tc-list">
             <div class="tc-row tc-row--phone">
@@ -19023,7 +19043,7 @@ dav: HTTP 503: the server is busy</div></div>
         </div>
         <div class="tc-railsec tc-railsec--top14">
           <div class="tc-rubric tc-rubric--pad0-14-6">baikal</div>
-          <div class="tc-tickrow is-error tc-tickrow--h44"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta" title="401 Unauthorized — the saved password was refused. Open Connections to update it.">password · 401</span><button class="tc-btn is-sm" type="button">Retry</button></div>
+          <div class="tc-tickrow is-error tc-tickrow--h44"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__err" role="img" aria-label="401 Unauthorized — the saved password was refused. Open Connections to update it." title="401 Unauthorized — the saved password was refused. Open Connections to update it."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
         </div>
         <div class="tc-empty tc-empty--t12-pad14-20">Unticked collections are not polled at all, which saves both time and mobile traffic.</div>
       </div></div>

@@ -73,9 +73,8 @@ type TickRowTrail interface {
 	tickRowTrail()
 }
 
-func (Badge) tickRowTrail()  {}
-func (Button) tickRowTrail() {}
-func (Skel) tickRowTrail()   {}
+func (Badge) tickRowTrail() {}
+func (Skel) tickRowTrail()  {}
 
 func (TickRow) fieldGridPart() {}
 
@@ -87,7 +86,7 @@ func (TickRow) fieldGridPart() {}
 // Инварианты. Галка — кнопка с доступным именем; её состояния, род строки и место строки — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие на галку показывает или скрывает источник; галка группы ставит или снимает все галки под ней.
 // Эталон. кадр `components-11`, фрагмент `.tc-tickrow`.
-// Содержимое. Галка, метка источника (у корня — значок), название, число или причина ошибки, бейдж, кнопка повтора или заготовка.
+// Содержимое. Галка, метка источника (у корня — значок), название, число, значок ошибки с причиной в подсказке, бейдж, кнопка повтора или заготовка.
 // Чего нет. Своего меню: действия с источником — в меню раздела рейла.
 type TickRow struct {
 	Ticked    Ticked
@@ -118,7 +117,11 @@ func (r TickRow) html(m mix) string {
 		s.WriteString(r.Mark.html(nil))
 	}
 	s.WriteString(`<span` + class(nil, "tc-tickrow__label", pick(r.Form == TickRowGroup, "tc-tickrow__label--fw600")) + `>` + esc(r.Label) + `</span>`)
-	if r.Meta != "" {
+	if r.Error && r.Meta == "" {
+		// A source that did not answer: a mark of the error, the reason in
+		// its hint; in full — in the runbar's menu of refusals (02.10).
+		s.WriteString(`<span class="tc-tickrow__err" role="img"` + attr("aria-label", r.MetaTitle) + attr("title", r.MetaTitle) + `><svg viewBox="0 0 24 24">` + Icon("alert").use() + `</svg></span>`)
+	} else if r.Meta != "" {
 		s.WriteString(`<span class="tc-tickrow__meta"` + attr("title", r.MetaTitle) + `>` + esc(r.Meta) + `</span>`)
 	}
 	if r.Trail != nil {

@@ -27,7 +27,24 @@ func Phone1() Screen {
 				Items: []w.MainPart{
 					w.Runbar{
 						Meter: w.Meter{Percent: 83, Width: w.Meter60},
-						Parts: []w.RunbarPart{w.Text("5 of 6 · 14 events · "), w.Span{Face: w.FaceDanger, Text: "1 unavailable"}},
+						Parts: []w.RunbarPart{
+							w.Text("5 of 6 · 14 events · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Mon · 10 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -130,15 +147,7 @@ func Phone2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "baikal", Variant: w.RubricRail},
-							w.TickRow{
-								Form:      w.TickRowTouch,
-								Mark:      w.Mark{Colour: "#9A9280"},
-								Label:     "Общий",
-								Meta:      "password · 401",
-								MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.",
-								Error:     true,
-								Trail:     w.Button{Label: "Retry", Small: true},
-							},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
 						},
 						Apart: true,
 					},

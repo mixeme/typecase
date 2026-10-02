@@ -8,11 +8,22 @@ do, not what the authors did.
 
 ### Breaking
 
+- `TickRow.Trail` no longer takes a `Button`: a refused source has no Retry
+  in the rail any more (the owner's decision of 02.10, below).
 - `Sec` no longer takes a `Table`: no frame puts one in a section since the
   attendees became a `SecList` with `Columns` (Carrel's task 77).
 
 ### Added
 
+- **Refused sources** (the owner's decision of 02.10: the fight with the
+  length of a line is lost): a `TickRow` with `Error` and no `Meta` shows an
+  error mark, its reason (`MetaTitle`) in the mark's hint (the icon `alert`);
+  the runbar says «N failed» in red — a closed `Drop` (now a `RunbarPart`)
+  whose menu has a `MenuRefusal` per source: its mark, what was asked and
+  what the server answered, in full, and its Retry, with Retry all below
+  (`states-16`). Every frame with a refusal is drawn so; the agenda's «⋯»
+  is closed on the screen and its menu has a frame of its own (s-agenda-16).
+  The ladder does not measure what a closed details hides.
 - **A bar's checks under «⋯»** (Carrel's task 82): `CheckForm` is a
   `MenuPart` — in a menu its checks are menu items with tick boxes, in the same
   GET form, so the twin of Compact rows works without a script too (Apply

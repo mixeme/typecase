@@ -12,7 +12,7 @@ var _ = add(
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
 		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
-		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 1),
+		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 2),
 	overlay("closed-end", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
@@ -102,7 +102,7 @@ var _ = add(
 		w.MenuItem{Label: "Saturday"}}, Width: w.MenuWidth212}, "appearance-2", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer"},
-		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 2),
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 3),
 	overlay("links", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
@@ -264,6 +264,12 @@ var _ = add(
 		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar"},
 		w.MenuSep{},
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}, "s-agenda-1", "tc-menu", 1),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}},
+		w.MenuSep{Tertiary: true},
+		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar"},
+		w.MenuSep{},
+		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}}, "s-agenda-16", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "No status"},
 		w.MenuSep{},
@@ -279,6 +285,14 @@ var _ = add(
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
+	// The owner's decision of 02.10: the sources that did not answer, in full, under the runbar's button.
+	overlay("refusals", w.Menu{Items: []w.MenuPart{
+		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280"}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}, "s-contacts-7", "tc-menu", 1),
+	overlay("refusals", w.Menu{Items: []w.MenuPart{
+		w.MenuRefusal{Mark: w.Mark{Colour: "#8C6239"}, Source: "radicale · vps · Дежурства", Answer: "REPORT /dav/calendars/duty/ → 503 Service Unavailable", Retry: w.Button{Label: "Retry", Small: true}},
+		w.MenuRefusal{Mark: w.Mark{Colour: "#6B4E7A"}, Source: "radicale · vps · Проекты", Answer: "REPORT /dav/calendars/projects/ → 503 Service Unavailable", Retry: w.Button{Label: "Retry", Small: true}},
+		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280"}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Retry all", Small: true}}}}, Width: w.MenuWidth420}, "states-16", "tc-menu", 1),
 	// Carrel's task 82: the list's «⋯» — the sort and Compact rows, twins of what goes under it.
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
@@ -517,7 +531,7 @@ var _ = add(
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "s-contacts-6", "tc-drop", 1),
 	overlay("closed", w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer"},
-		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 2),
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 3),
 	overlay("pick", w.Drop{Trigger: w.Pick{Value: "Asia/Yekaterinburg", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
