@@ -75,6 +75,9 @@ var _ = add(
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, "s-notes-4", "tc-in", 6),
 	form("add", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}}, Columns: true, Name: "attendee", Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-3", "tc-in", 14),
 	form("add", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}}, Columns: true, Name: "attendee", Add: &w.TagAdd{Name: "attendee.add", Value: "ве", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-12", "tc-in", 1),
+	form("value", w.Pick{Value: "Europe/Moscow"}, "s-agenda-15", "tc-in", 10),
+	form("add", w.TagInput{Columns: true, Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-15", "tc-in", 13),
+	form("date", w.Input{Kind: w.InputDate, Mono: true, Label: "Until"}, "s-agenda-15", "tc-in", 16),
 	form("columns", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}}, Columns: true}, "s-agenda-14", "tc-in", 1),
 	form("wrap", w.TagInput{Wrap: true, Focus: true, Parts: []w.TagInputPart{
 		w.Tag{Label: "Анна Ковалёва · a.kovaleva@example.org", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}},

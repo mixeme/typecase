@@ -56,6 +56,7 @@ var _ = add(
 	form("default", w.Seg{Options: seg(0, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-1", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "Read only", "Read and write"), Variant: w.SegStart}, "s-davloom-2", "tc-seg", 1),
 	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", On: true, Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-3", "tc-seg", 1),
+	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-15", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(1, "Full width", "Reading width")}, "s-notes-3", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", On: true, Title: "List"}, {Icon: "grid", Title: "Tiles"}}}, "s-files-1", "tc-seg", 2),
 	form("default", w.Seg{Options: seg(0, "All", "Contacts", "Events", "Tasks", "Notes", "Files")}, "s-find-1", "tc-seg", 1),

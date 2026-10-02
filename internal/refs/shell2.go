@@ -73,6 +73,11 @@ var _ = add(
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "down"}}}, Wide: true},
 		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8}}}, "s-publish-16", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
+		w.Head{}, w.Bar{},
+		w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 3, Alert: true}}, w.List{},
+		w.ListGroup{Title: w.Rubric{Text: "This week", Form: w.RubricInline}, Count: &w.Num{Value: 5}}, w.List{},
+		w.ListGroup{Title: w.Rubric{Text: "No due date", Form: w.RubricInline}, Count: &w.Num{Value: 4}}, w.List{}}}, "s-tasks-1", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}}},
 		w.Form{},
 		w.FormFoot{}}}, "s-contacts-3", "tc-main", 1),
@@ -116,9 +121,7 @@ var _ = add(
 		w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.TimeRow{Mark: w.Mark{Colour: "#6B4E7A"}, Time: "09:30", Title: []w.Inline{w.Text("Ревью архитектуры")}, Detail: "Переговорная 1", Caption: &w.Badge{Label: "2 attendees"}, Source: "radicale · vps · Проекты"},
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Source: "nextcloud · Личный"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Wednesday · 12 August", Form: w.RubricInline}, Count: &w.Num{Value: 0}},
-		w.Empty{Parts: []w.EmptyPart{w.Text("Nothing this day.")}, Variant: w.EmptySmall}}}, "s-agenda-1", "tc-main", 1),
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Source: "nextcloud · Личный"}}}}}, "s-agenda-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Head{Meta: &w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52"}, w.Text("nextcloud · Записи · "), w.Mono{Text: "10 Aug 2026 11:05"}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary}, w.Button{Label: "Export Markdown"}, w.Button{Label: "Print", Icon: "print"}, w.Button{Label: "Source"}, w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}}, w.Button{Icon: "panel", Title: "Hide the side column"}, w.Button{Icon: "dots", Title: "More"}}}, Pad: w.HeadRule},
 		w.DocLayout{Items: []w.DocLayoutPart{w.Doc{Items: []w.DocPart{

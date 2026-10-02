@@ -26,6 +26,7 @@ var _ = add(
 	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "ro", Hidden: true}, "s-agenda-1", "tc-tickrow", 9),
 	rows("group", w.TickRow{Ticked: w.TickedPart, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "nextcloud", Meta: "4 of 6"}, "s-backup-2", "tc-tickrow", 1),
 	rows("all", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—"}, "s-notes-6", "tc-tickrow", 1),
+	rows("all", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—", Current: true}, "states-14", "tc-tickrow", 1),
 	rows("root", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "2 of 3", Current: true}, "s-files-6", "tc-tickrow", 1),
 	rows("group", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "radicale · vps", Meta: "0 of 2"}, "s-backup-2", "tc-tickrow", 2),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Current: true, Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 1),

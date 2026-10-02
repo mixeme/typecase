@@ -76,10 +76,10 @@ do, not what the authors did.
   repeated as often as the frame draws it or more, it has each part the frame
   draws. **A client whose list shows fewer rows than its frame now fails:
   give the check the frame's records.**
-- **`shape` skips templates and takes a repeat's other blocks** (task 75):
-  a `<template>`'s contents are not compared; beside a repeated block the
-  frame may draw others with the same head — a day with nothing after days
-  with records — and the screen's blocks are any of them, in any order.
+- **`shape` skips templates** (task 75): a `<template>`'s contents are not
+  compared. (A repeat's blocks of another kind — the empty days of a week —
+  are not needed: by the owner's decision of 02.10 a day without events is
+  not printed.)
 - **`Drop` in a rubric and in a line** (task 71): Attach with its arrow —
   «From this computer», «From Files» — stands in the Attachments rubric of a
   card and in the attachments line of an edit, closed, opening without a
@@ -105,7 +105,14 @@ do, not what the authors did.
   their book and a link, an unknown one by the address (s-agenda-1, -2,
   phone-3); in the edit a tag field in columns with suggestions from the
   ticked books and «Add ‹address›» (s-agenda-3, -12, -13); an invited person
-  sees the same tags without crosses (s-agenda-14). 382 frames.
+  sees the same tags without crosses (s-agenda-14).
+- The calendar's new frames (Carrel's task 77, as tasks 59 and 66): a new
+  event — the edit's form, empty, one reminder by default, no «Kept as…» and
+  no Delete (s-agenda-15); the agenda while the poll runs (states-13), with
+  nothing ticked (states-14), and one calendar's empty week — one line, not
+  seven empty days (states-15). A day without events is not printed: the
+  agenda's empty Wednesday goes (s-agenda-1, the owner's decision of 02.10).
+  386 frames.
 - The calendar's frames by the owner's decisions of 01.10 (Carrel's task 77):
   Previous · Today · Next lead the agenda's bar (links; on a narrow screen
   Events · Tasks due · Notes go under «⋯», and the bar's second rank from

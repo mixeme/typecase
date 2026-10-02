@@ -265,10 +265,9 @@ func TestRepeatsAnyLength(t *testing.T) {
 }
 
 // Carrel's task 75: a template is not drawn — the reminder a script copies in
-// is no field of the row; and the days of a week are any of the frame's
-// blocks, in any order: five days with nothing, between and after the days
-// with records.
-func TestTemplatesAndTailBlocks(t *testing.T) {
+// is no field of the row. And a day without events is not printed (the
+// owner's decision of 02.10): a week that adds one is red.
+func TestTemplatesAndEmptyDays(t *testing.T) {
 	m := mockup(t)
 	r, _ := screens.Find("s-agenda-3")
 	edit := r.Screen().Render()
@@ -284,22 +283,18 @@ func TestTemplatesAndTailBlocks(t *testing.T) {
 	r, _ = screens.Find("s-agenda-1")
 	week := r.Screen().Render()
 	g := `<div class="tc-list__group">`
-	e := strings.Index(week, "Nothing this day.")
-	k := strings.LastIndex(week[:e], g)
-	end := strings.Index(week[e:], "</div>") + e + len("</div>")
 	first := strings.Index(week, g)
 	second := strings.Index(week[first+len(g):], g) + first + len(g)
-	if e < 0 || k < 0 || second <= first || second >= k {
-		t.Fatal("no two days and an empty one in s-agenda-1")
+	if first < 0 || second <= first {
+		t.Fatal("no two days in s-agenda-1")
 	}
-	empty := week[k:end]
-	five := week[:second] + empty + week[second:end] + strings.Repeat(empty, 4) + week[end:]
-	if err := m.Check("s-agenda-1", five); err != nil {
-		t.Errorf("a week with five empty days: %v", err)
+	empty := `<div class="tc-list__group"><span class="tc-rubric">Wednesday · 12 August</span><span class="tc-num">0</span></div>` +
+		`<div class="tc-empty tc-empty--t12-pad14-20">Nothing this day.</div>`
+	if err := m.Check("s-agenda-1", week[:second]+empty+week[second:]); err == nil {
+		t.Error("an empty day passes")
 	}
-	nothing := empty[strings.Index(empty, `<div class="tc-empty`):]
-	if err := m.Check("s-agenda-1", week[:second]+nothing+week[second:]); err == nil {
-		t.Error("an empty day without its heading passes")
+	if err := m.Check("s-agenda-1", week); err != nil {
+		t.Errorf("the week: %v", err)
 	}
 }
 

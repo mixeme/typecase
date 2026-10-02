@@ -19,7 +19,7 @@
 // section of the card, the time in a field's value — words are not compared,
 // so of two buttons of one shape a missing one is told by their number. A
 // repeating row of rows (a month and its records, a term and its value, a day
-// with records or with nothing) may repeat any number of times; repeated as
+// and its records) may repeat any number of times; repeated as
 // often as the frame draws it or more, it has each part the frame draws in
 // it. What is not compared: text, attributes, a template's contents,
 // the options of a select, the hidden fields of a form, a picture in an
@@ -410,12 +410,9 @@ func (c *cmp) runDiff(wr, gr []*node, path string, i int) string {
 
 // repeat finds, in the frame's runs, a block of p runs repeated at least
 // twice, after the same first runs and before the same last ones as the
-// screen's, where the screen repeats such blocks any number of times. Runs are
-// alike by kind, or — in a list of terms and values, where a value's classes
-// vary (dd and dd.tc-mono) — by tag. Beside the repeated block, the frame may
-// draw others with the same head — a day with nothing, after the days with
-// records: the screen's blocks are any of them, in any order (Carrel's task
-// 75), each place of a block one the frame draws at that place.
+// screen's, where the screen repeats the same block any number of times.
+// Runs are alike by kind, or — in a list of terms and values, where a
+// value's classes vary (dd and dd.tc-mono) — by tag.
 func repeat(want, got [][]*node) (pre, p, wn, gn int, ok bool) {
 	for _, byTag := range []bool{false, true} {
 		key := func(r []*node) string { return r[0].kind() }
@@ -432,69 +429,26 @@ func repeat(want, got [][]*node) (pre, p, wn, gn int, ok bool) {
 				if byTag && !termsAndValues(base) {
 					continue
 				}
-				if reps(wk[pre:], base) < 2 {
+				wn = reps(wk[pre:], base)
+				if wn < 2 {
 					continue
 				}
-				start, end := pre, pre+reps(wk[pre:], base)*p
-				for start-p >= 0 && headed(wk[start-p:start], base[0]) {
-					start -= p
-				}
-				for end+p <= len(wk) && headed(wk[end:end+p], base[0]) {
-					end += p
-				}
-				allowed := make([]map[string]bool, p)
-				for j := range allowed {
-					allowed[j] = map[string]bool{}
-					for b := start; b < end; b += p {
-						allowed[j][wk[b+j]] = true
-					}
-				}
-				suf := wk[end:]
-				if len(gk) < start+len(suf)+p || !same(gk[:start], wk[:start]) || !same(gk[len(gk)-len(suf):], suf) {
+				suf := wk[pre+wn*p:]
+				if len(gk) < pre+len(suf)+p || !same(gk[:pre], wk[:pre]) || !same(gk[len(gk)-len(suf):], suf) {
 					continue
 				}
-				mid := gk[start : len(gk)-len(suf)]
-				if len(mid)%p != 0 || !blocks(mid, base[0], allowed) {
+				mid := gk[pre : len(gk)-len(suf)]
+				if len(mid)%p != 0 || reps(mid, base) != len(mid)/p {
 					continue
 				}
-				if same(gk, wk) && !byTag {
+				if len(mid)/p == wn && same(gk, wk) && !byTag {
 					return 0, 0, 0, 0, false // the same rows: the plain walk compares them
 				}
-				return start, p, (end - start) / p, len(mid) / p, true
+				return pre, p, wn, len(mid) / p, true
 			}
 		}
 	}
 	return 0, 0, 0, 0, false
-}
-
-// headed says whether a block begins with the head and has it nowhere else.
-func headed(block []string, head string) bool {
-	if block[0] != head {
-		return false
-	}
-	for _, k := range block[1:] {
-		if k == head {
-			return false
-		}
-	}
-	return true
-}
-
-// blocks says whether runs are blocks that each begin with the head and have,
-// at each place, a kind the frame draws there.
-func blocks(ks []string, head string, allowed []map[string]bool) bool {
-	p := len(allowed)
-	for b := 0; b < len(ks); b += p {
-		if ks[b] != head {
-			return false
-		}
-		for j := 0; j < p; j++ {
-			if !allowed[j][ks[b+j]] {
-				return false
-			}
-		}
-	}
-	return true
 }
 
 func keys(runs [][]*node, key func([]*node) string) []string {

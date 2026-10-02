@@ -127,7 +127,8 @@ var _ = add(
 	// tc-empty
 	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("No books are ticked."), w.Text(" Tick the books to show in the rail, or all of them at once. "), w.Button{Label: "Tick every book", Kind: w.ButtonPrimary}}}, "states-7", "tc-empty", 1),
 	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Span{Face: w.FaceAccent, Text: "Show 50 more", Href: "/app/mail/home/inbox?shown=100"}}, Variant: w.EmptyDusty}, "s-mailbox-1", "tc-empty", 1),
-	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing this day.")}, Variant: w.EmptySmall}, "s-agenda-1", "tc-empty", 1),
+	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("What arrived in time is shown. Records from the unavailable source are missing — not “there are none”, but “we have not seen them”.")}, Variant: w.EmptySmall}, "states-6", "tc-empty", 1),
+	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("No events this week."), w.Text(" Nothing in Личный from 2 to 8 November.")}}, "states-15", "tc-empty", 1),
 	cards("action", w.Empty{Parts: []w.EmptyPart{w.Text("No contacts in this address book."), w.Button{Label: "New contact", Kind: w.ButtonPrimary}}}, "components-22", "tc-empty", 1),
 	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, "s-notes-6", "tc-empty", 1),
 	cards("drop", w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, "s-io-1", "tc-empty", 1),
