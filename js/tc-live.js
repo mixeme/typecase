@@ -49,6 +49,52 @@
 		if (t.classList && t.classList.contains("tc-in__add") && t.hasAttribute("list") && t.closest("[data-tc-suggest]")) t.removeAttribute("list");
 	});
 
+	// An edit's Save that sends files shows how far it went (the owner's
+	// decision of 02.10): the line naming the form (data-tc-progress) shows,
+	// its meter moves, its Mono says «3.2 of 24 MB»; the answer is the page the
+	// server sends, as a plain Save would have it.
+	document.addEventListener("submit", function (e) {
+		var form = e.target;
+		if (e.defaultPrevented || !form.id || !window.FormData || !window.XMLHttpRequest) return;
+		var line = document.querySelector('[data-tc-progress="' + form.id + '"]');
+		if (!line) return;
+		var data = new FormData(form, e.submitter || undefined);
+		var files = false;
+		data.forEach(function (v) {
+			if (v && typeof v === "object" && v.size) files = true;
+		});
+		if (!files) return;
+		e.preventDefault();
+		var bar = line.querySelector(".tc-meter__bar"), words = line.querySelector(".tc-mono");
+		line.hidden = false;
+		Array.prototype.forEach.call(document.querySelectorAll('[form="' + form.id + '"], #' + form.id + ' [type="submit"]'), function (b) {
+			b.disabled = true;
+		});
+		var mb = function (b) {
+			return (b / 1024 / 1024).toFixed(1);
+		};
+		var x = new XMLHttpRequest();
+		x.open((form.getAttribute("method") || "get").toUpperCase(), (e.submitter && e.submitter.getAttribute("formaction")) || form.action);
+		x.upload.onprogress = function (p) {
+			if (!p.lengthComputable) return;
+			if (bar) bar.style.width = Math.round((p.loaded / p.total) * 100) + "%";
+			if (words) words.textContent = mb(p.loaded) + " of " + mb(p.total) + " MB";
+		};
+		x.onload = function () {
+			if (x.responseURL && x.responseURL !== form.action) {
+				location.assign(x.responseURL);
+				return;
+			}
+			document.open();
+			document.write(x.responseText);
+			document.close();
+		};
+		x.onerror = function () {
+			form.submit();
+		};
+		x.send(data);
+	});
+
 	document.addEventListener("input", function (e) {
 		var t = e.target;
 		if (t.classList && t.classList.contains("tc-in__add") && t.closest("[data-tc-suggest]")) suggest(t);

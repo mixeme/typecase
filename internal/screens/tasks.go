@@ -454,6 +454,11 @@ func Tasks3() Screen {
 						},
 						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "task-edit",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
 					w.Form{
 						Items: []w.FormPart{
 							w.Field{
@@ -538,21 +543,31 @@ func Tasks3() Screen {
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon:  "up",
-															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Icon: "up",
+															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "task-attachments"},
+															Row: w.Line{
+																Items: []w.LinePart{
+																	w.Faced{
+																		Face:  w.FaceLarge,
+																		Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																	},
+																	w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Gap: w.LineGap8,
+															},
 															Label: "From this computer",
 														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
-														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,
 												},
 											},
-											w.Dim{Parts: []w.Inline{w.Text("Ничего не вложено")}, Size: w.Dim11_5, Variant: w.DimWrap},
+											w.Dim{Parts: []w.Inline{w.Text("Nothing attached")}, Size: w.Dim11_5, Variant: w.DimWrap, Empty: true},
 										},
 										Gap:   w.LineGap8,
 										Block: true,
+										ID:    "task-attachments",
 										Place: w.Grown,
 									},
 								},

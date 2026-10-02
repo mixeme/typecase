@@ -605,7 +605,9 @@ type ColumnRow struct {
 	Strong  bool // the name in bold: the chosen row
 	On      bool
 	Overdue bool // a task past its due: the due in the alert colour
-	Href    string
+	// Href makes the row a link to the record; a row with a Tick cannot be
+	// one, its name is the link then, as DueRow's title (Carrel's task 123).
+	Href string
 }
 
 // Render prints the row.
@@ -614,7 +616,8 @@ func (r ColumnRow) Render() string { return r.html(nil) }
 func (r ColumnRow) html(m mix) string {
 	var s strings.Builder
 	done := r.Tick != nil && r.Tick.Done
-	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--cols", is("on", r.On), is("overdue", r.Overdue), is("done", done)) + attr("href", r.Href) + `>`)
+	row := pick(r.Tick == nil, r.Href) // a row with its own control is not a link
+	s.WriteString(`<` + rowTag(row) + class(m, "tc-row", "tc-row--cols", is("on", r.On), is("overdue", r.Overdue), is("done", done)) + attr("href", row) + `>`)
 	if r.Tick != nil {
 		s.WriteString(r.Tick.html(nil))
 	}
@@ -627,16 +630,20 @@ func (r ColumnRow) html(m mix) string {
 		if c.Column == ColumnName && r.Strong {
 			cls = "tc-row__title is-strong tc-col--name"
 		}
-		s.WriteString(`<span class="` + cls + `">`)
+		tag := "span"
+		if c.Column == ColumnName && row == "" && r.Href != "" {
+			tag = "a"
+		}
+		s.WriteString(`<` + tag + ` class="` + cls + `"` + attr("href", pick(tag == "a", r.Href)) + `>`)
 		if c.Column == ColumnTags {
 			for _, t := range c.Tags {
-				s.WriteString(rowTagHTML(t, r.Href != ""))
+				s.WriteString(rowTagHTML(t, row != ""))
 			}
 		} else {
 			s.WriteString(esc(c.Text))
 		}
-		s.WriteString(`</span>`)
+		s.WriteString(`</` + tag + `>`)
 	}
-	s.WriteString(`</` + rowTag(r.Href) + `>`)
+	s.WriteString(`</` + rowTag(row) + `>`)
 	return s.String()
 }

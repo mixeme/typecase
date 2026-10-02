@@ -8,6 +8,22 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("edit", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"}, Row: w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGap8}, Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 3),
+	overlay("edit", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 2),
+	overlay("row", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mail", Label: "Send"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-publish-1", "tc-menu", 1),
+	overlay("sort", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents?sort=name"},
+		w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
+		w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}, Pop: w.MenuUnderEnd, Inline: true}, "s-files-1", "tc-menu", 1),
+	overlay("more", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "cols", Label: "Columns"}}, Pop: w.MenuUnderEnd, Inline: true}, "s-contacts-7", "tc-menu", 1),
 	overlay("radio", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
@@ -23,7 +39,7 @@ var _ = add(
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
 		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
-		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 2),
+		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 3),
 	overlay("closed-end", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
@@ -264,12 +280,6 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Label: "iPhone", On: true}}, Width: w.MenuWidth212}, "s-contacts-12", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "All 24", On: true},
-		w.MenuItem{Label: "Events 14"},
-		w.MenuItem{Label: "Tasks 2"},
-		w.MenuItem{Label: "Notes 4"},
-		w.MenuItem{Label: "Files 4"},
-		w.MenuSep{},
 		w.MenuItem{Icon: "cols", Label: "Columns"}}, Width: w.MenuWidth212}, "s-contacts-14", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}},
@@ -300,7 +310,7 @@ var _ = add(
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
 	// The owner's decision of 02.10: the sources that did not answer, in full, under the runbar's button.
 	overlay("refusals", w.Menu{Items: []w.MenuPart{
-		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280"}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}, "s-contacts-7", "tc-menu", 1),
+		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280"}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}, "s-contacts-7", "tc-menu", 2),
 	overlay("refusals", w.Menu{Items: []w.MenuPart{
 		w.MenuRefusal{Mark: w.Mark{Colour: "#8C6239"}, Source: "radicale · vps · Дежурства", Answer: "REPORT /dav/calendars/duty/ → 503 Service Unavailable", Retry: w.Button{Label: "Retry", Small: true}},
 		w.MenuRefusal{Mark: w.Mark{Colour: "#6B4E7A"}, Source: "radicale · vps · Проекты", Answer: "REPORT /dav/calendars/projects/ → 503 Service Unavailable", Retry: w.Button{Label: "Retry", Small: true}},
@@ -537,6 +547,10 @@ var _ = add(
 		w.MenuItem{Label: "Never"}}, Width: w.MenuWidth290}, "desktop-20", "tc-menu", 1),
 
 	// tc-drop
+	overlay("row", w.Drop{Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, Row: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mail", Label: "Send"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "s-publish-1", "tc-drop", 1),
 	overlay("closed", w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},

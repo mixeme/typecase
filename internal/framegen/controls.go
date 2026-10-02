@@ -145,6 +145,9 @@ func (g *gen) button1(e *El) string {
 	if e.Tag == "a" && e.Attr("aria-disabled") == "true" {
 		extra = append(extra, `Href: "#"`)
 	}
+	if e.HasAttr("data-tc-remove") {
+		extra = append(extra, "Removes: true")
+	}
 	var bs []*El
 	for _, k := range e.Els() {
 		if k.Tag == "b" {
@@ -222,12 +225,37 @@ func (g *gen) button2(e *El) string {
 // its icon.
 // fileField is the file input inside a label that picks a file (Carrel's
 // task 109).
-func fileField(f *El) string {
+func (g *gen) fileField(f *El) string {
 	s := "&w.FileField{Form: " + q(f.Attr("form")) + ", Name: " + q(f.Attr("name"))
 	if a := f.Attr("accept"); a != "" {
 		s += ", Accept: " + q(a)
 	}
-	return s + ", Label: " + q(f.Attr("aria-label")) + "}"
+	s += ", Label: " + q(f.Attr("aria-label"))
+	for _, a := range []kv{{"data-tc-to", "To"}, {"data-tc-list", "List"}, {"data-tc-preview", "Preview"}} {
+		if v := f.Attr(a.k); v != "" {
+			s += ", " + a.v + ": " + q(v)
+		}
+	}
+	return s + "}"
+}
+
+// pickedRow is the row a file picked by a menu item becomes.
+func (g *gen) pickedRow(tpl *El) string {
+	r := tpl.Els()[0]
+	if r.Has("tc-line__text") {
+		return g.docAttach(r)
+	}
+	return g.line(r)
+}
+
+// rowTemplate is the template of a picked file's row beside a file input.
+func rowTemplate(e *El) *El {
+	for _, k := range e.Els() {
+		if k.Tag == "template" && k.HasAttr("data-tc-row") {
+			return k
+		}
+	}
+	return nil
 }
 
 func (g *gen) button(e *El) string {
@@ -236,15 +264,16 @@ func (g *gen) button(e *El) string {
 		c := *e
 		c.Tag = "button"
 		var kids []any
+		row := rowTemplate(e)
 		for _, k := range e.Kids {
-			if el, ok := k.(*El); ok && el == f {
+			if el, ok := k.(*El); ok && (el == f || el == row) {
 				continue
 			}
 			kids = append(kids, k)
 		}
 		c.Kids = kids
 		s := g.button(&c)
-		return s[:len(s)-1] + ", File: " + fileField(f) + "}"
+		return s[:len(s)-1] + ", File: " + g.fileField(f) + "}"
 	}
 	s := g.button2(e)
 	if e.Has("tc-nojs") {
@@ -712,6 +741,9 @@ func (g *gen) fieldPart(x *El) string {
 		if img := ph.Kid("tc-avatar__img"); img != nil {
 			ini = "Src: " + q(img.Attr("src")) + ", "
 		}
+		if id := ph.Attr("id"); id != "" {
+			ini += "ID: " + q(id) + ", "
+		}
 		return "w.Photo{" + ini + "Side: []w.FieldPart{" + g.each(side.Els(), g.fieldPart) + "}}"
 	case x.Has("tc-line"):
 		return g.line(x)
@@ -864,6 +896,9 @@ func (g *gen) line(e *El) string {
 	}
 	if e.Tag == "div" {
 		f = append(f, "Block: true")
+	}
+	if id := e.Attr("id"); id != "" {
+		f = append(f, "ID: "+q(id))
 	}
 	return "w.Line{" + join(f, ", ") + placef(e) + "}"
 }
@@ -1050,6 +1085,9 @@ func (g *gen) drop(e *El) string {
 	f := []string{"Trigger: " + tr}
 	if t.Has("tc-bar__more") {
 		f = append(f, "More: true")
+	}
+	if t.Has("tc-acts__more") {
+		f = append(f, "Row: true")
 	}
 	f = append(f, "Menu: "+g.menu(m))
 	if m.HasAttr("hidden") || (e.Tag == "details" && !e.HasAttr("open")) {

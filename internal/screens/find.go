@@ -73,9 +73,24 @@ func Find1() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 100},
+						Meter: w.Meter{Percent: 100, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Done · 13 of 14 sources answered"),
+							w.Text("Done · 13 of 14 sources answered · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+											Source: "baikal · Общий",
+											Answer: "REPORT /dav.php/calendars/mix/obshchiy/ → no answer in 10 s; the search went on without it.",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
 							w.Mono{Text: "1.8 s"},
 							w.Line{
 								Items: []w.LinePart{w.Mono{Text: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}},

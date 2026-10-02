@@ -137,11 +137,14 @@ type TableCell struct {
 	Mono  bool
 	Dim   bool // the whole cell dim
 	Tone  CellTone
-	Small bool     // 11 px
-	Pick  *Ticked  // a tick box that picks the row
-	Send  Send     // what the pick sends: the row's name in a bulk action's form
-	Acts  bool     // the row's buttons
-	More  *Button  // the row's «⋯»: shown only when the row's is-2nd buttons have no room
+	Small bool    // 11 px
+	Pick  *Ticked // a tick box that picks the row
+	Send  Send    // what the pick sends: the row's name in a bulk action's form
+	Acts  bool    // the row's buttons
+	More  *Button // the row's «⋯»: shown only when the row's is-2nd buttons have no room
+	// Drop is the row's «⋯» with its menu, in place of More: the twins of
+	// the row's is-2nd buttons; it opens without a script (Carrel's task 117).
+	Drop  *Drop
 	Unset bool     // a placeholder value
 	Name  bool     // the name column of a narrow list
 	Span  int      // the cell spans that many columns
@@ -242,6 +245,11 @@ func (t Table) html(m mix) string {
 			}
 			if c.More != nil {
 				s.WriteString(c.More.html(mix{"tc-acts__more"}))
+			}
+			if c.Drop != nil {
+				d := *c.Drop
+				d.Row = true
+				s.WriteString(d.html(nil))
 			}
 			s.WriteString(`</td>`)
 		}

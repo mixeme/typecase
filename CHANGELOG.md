@@ -15,6 +15,38 @@ do, not what the authors did.
 
 ### Added
 
+- **A file of an edit goes with its Save** (the owner's decisions of 02.10:
+  an edit is not reloaded midway, the same in every edit). `FileField.List`
+  makes the field one of its form's: the library's script shows a picked file
+  as the menu item's `Row` (`PickedRow`: a `DocAttach` or a `Line`,
+  «{name}» and «{size}» in its words) at the end of the list named, the input
+  inside it; `Button.Removes` takes the row back before Save; `Dim.Empty`
+  («Nothing attached») hides while a row stands. `FileField.Preview` shows a
+  picked photo at once in its `Photo.ID`. `Runbar.Progress` is the Save line
+  of a form that sends files: hidden until then, the live layer moves its
+  meter and writes «1.5 of 3.0 MB» (`Saving` draws it so). `Line.ID`,
+  `DocmetaSec.ID` name the lists, `DocAttach.Remove` is Remove on an edit. A
+  picked file sends its form at once only where the field names a `Form` or a
+  `To`. The note's, the event's, the new event's, the task's and the
+  contact's edits draw it so (s-notes-20, s-agenda-3, -15, s-tasks-3,
+  s-contacts-3, -4, -15, -27, states-12); the new frame «Правка заметки ·
+  Save с файлом» (s-notes-26) draws a picked file and the Save line.
+  `TestEditFile`.
+- **A menu item and a file that send the form they stand in** (Carrel's task
+  122): `MenuItem.To` is a submit button of the surrounding form with its own
+  address (`formaction`), as `Button.To`; `FileField.To`, without `Form`,
+  sends the surrounding form there when a file is picked. Attach on a new
+  event and in a task's edit keeps what is typed (s-agenda-15, s-tasks-3).
+  `TestFileInForm`.
+- **`ColumnRow.Href` with a tick** (Carrel's task 123): the row is not a
+  link, its name is, as `DueRow`'s title.
+- **A row's «⋯» with its menu** (Carrel's task 117): `TableCell.Drop` — the
+  row's «⋯» and the twins of its is-2nd buttons, a details that opens without
+  a script; `Drop.Row` draws its trigger as the row's «⋯». The rows of shared
+  links (s-publish-1, s-mail-4) carry Send and Revoke under it.
+- **A link option of a segment keeps its icon** (Carrel's task 115): an
+  option with `Href` prints `Icon`, and `Title` names an option without
+  words — the folder's List / Tiles (s-files-1, -5, dark-3).
 - **A document is a form in its edit** (Carrel's task 98): `Doc.Action`,
   `Method`, `Fields` and `ID`, as `Form` has them. A note's edit sends its
   fields without a script: the title (`summary`), the notebook, the date and
@@ -169,6 +201,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's task 113: search draws its refused source as every list does —
+  the mark in the rail, the reason in its hint, and in the poll bar a red
+  «1 failed» whose menu says what was asked and what the server answered,
+  with Retry for that source (s-find-1).
+- Carrel's tasks 112, 117: every list's «⋯» opens its menu without a script —
+  the timeline (s-contacts-7: Columns; its menu frame s-contacts-14 now holds
+  only what goes under «⋯», the kinds fold in their own pick), the states of
+  contacts (states-4, -8, -9, s-contacts-2 — as s-contacts-1), the folder
+  (s-files-1: Name / Size / Changed). The order of contacts and of a folder
+  and the folder's view are links (`?sort=…`, `?view=…`), as their twins.
 - A segment's option that is a link is muted as a button option is; the
   root's rule for links (`color: inherit`) had drawn it in ink (the
   timeline s-contacts-7, Mentions, the mailbox s-mailbox-21, the agenda).

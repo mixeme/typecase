@@ -55,6 +55,9 @@ type DocAttach struct {
 	// Href makes the name a link (the owner's decision of 02.10): an
 	// attachment in the record downloads, one in Files opens there.
 	Href string
+	// Remove takes the attachment off: on an edit only (the owner's decision
+	// of 02.10).
+	Remove *Button
 }
 
 func (a DocAttach) html(mix) string {
@@ -62,13 +65,21 @@ func (a DocAttach) html(mix) string {
 	if a.Href != "" {
 		name = Link{Text: a.Name, Href: a.Href}.html(nil)
 	}
-	return `<div class="tc-line__text">` + name + ` ` + a.Size.html(nil) + ` ` + a.Where.html(nil) + `</div>`
+	s := `<div class="tc-line__text">` + name + ` ` + a.Size.html(nil)
+	if a.Where.Label != "" {
+		s += ` ` + a.Where.html(nil)
+	}
+	if a.Remove != nil {
+		s += ` ` + a.Remove.html(nil)
+	}
+	return s + `</div>`
 }
 
 // DocmetaSec is a section of a document's side column.
 type DocmetaSec struct {
 	Title Rubric
 	Items []DocmetaPart
+	ID    string // the list a picked file joins on an edit (FileField.List)
 }
 
 // Docmeta — tc-docmeta
@@ -93,7 +104,7 @@ func (d Docmeta) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-docmeta") + `>`)
 	for _, sec := range d.Sections {
-		s.WriteString(`<div class="tc-docmeta__sec">` + sec.Title.html(nil))
+		s.WriteString(`<div class="tc-docmeta__sec"` + attr("id", sec.ID) + `>` + sec.Title.html(nil))
 		for _, it := range sec.Items {
 			s.WriteString(it.html(nil))
 		}

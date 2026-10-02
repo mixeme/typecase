@@ -138,15 +138,16 @@ type Photo struct {
 	Initials string // shown while there is no photo
 	Side     []FieldPart
 	Src      string // the photo's address: the picture fills the place
+	ID       string // the place a picked photo shows in at once (FileField.Preview)
 }
 
 func (p Photo) html(mix) string {
 	var s strings.Builder
 	if p.Src != "" {
-		s.WriteString(`<div class="tc-field__photo-row"><span class="tc-avatar--photo"><img class="tc-avatar__img"` + attr("src", p.Src) +
+		s.WriteString(`<div class="tc-field__photo-row"><span class="tc-avatar--photo"` + attr("id", p.ID) + `><img class="tc-avatar__img"` + attr("src", p.Src) +
 			` alt=""></span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
 	} else {
-		s.WriteString(`<div class="tc-field__photo-row"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != "")) + `>` +
+		s.WriteString(`<div class="tc-field__photo-row"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != "")) + attr("id", p.ID) + `>` +
 			esc(p.Initials) + `</span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
 	}
 	for _, it := range p.Side {
@@ -498,10 +499,35 @@ type FileField struct {
 	Name   string // the field's name: PostForm.File
 	Accept string // image/*, for a photo
 	Label  string // the input's accessible name
+	// To, without Form, sends the form the field stands in to this address
+	// when a file is picked: a new record's form keeps what is typed
+	// (Carrel's task 122); without a script, an item or a button with the
+	// same To sends it.
+	To string
+	// List makes the field one of an edit's (the owner's decision of 02.10):
+	// it belongs to its form and goes with its Save — an edit is not reloaded
+	// midway. The library's script shows a picked file as the row of the
+	// menu item it stands in (MenuItem.Row) at the end of the element List
+	// names. Without a script the field shows what was picked.
+	List string
+	// Preview is the ID of the picture that shows a picked photo at once:
+	// the photo of a contact's edit, sent with Save.
+	Preview string
 }
 
+// PickedRow is the row a picked file of an edit becomes: a document's
+// attachment, a line of a form's.
+type PickedRow interface {
+	part
+	pickedRow()
+}
+
+func (DocAttach) pickedRow() {}
+func (Line) pickedRow()      {}
+
 func (f FileField) input() string {
-	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) + `>`
+	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) +
+		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + `>`
 }
 
 // PostForm — tc-post

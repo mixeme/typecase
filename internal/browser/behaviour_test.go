@@ -878,3 +878,108 @@ func TestNotebookPick(t *testing.T) {
 		t.Errorf("read-only: off %v, pick after choosing it %q; want off and Дневник kept", off, after)
 	}
 }
+
+// TestFileInForm: on a new record a picked file goes with the form it stands
+// in to the attach address, and what is typed goes with it (Carrel's task
+// 122); without a script Upload sends the same form there.
+func TestFileInForm(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	const to = "/app/calendar/new/attach"
+	menu := w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer", File: &w.FileField{Name: "file", Label: "From this computer", To: to}},
+		w.MenuItem{Label: "Upload", To: to, NoScript: true}}}
+	body := `<div class="tc-root"><div class="tc-main"><form action="/app/calendar/new" method="post" enctype="multipart/form-data"><input name="title" value="Поездка">` +
+		menu.Render() + `</form></div></div>`
+	f := filepath.Join(t.TempDir(), "plan.pdf")
+	if err := os.WriteFile(f, []byte("pdf"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	const catch = `window.__sent = []; document.addEventListener("submit", e => { e.preventDefault(); const fd = new FormData(e.target, e.submitter); window.__sent.push(new URL((e.submitter && e.submitter.formAction) || e.target.action).pathname + " " + fd.get("title") + " " + (fd.get("file") && fd.get("file").name)); }); true`
+	var sent, action string
+	page := h.RegisterPage("file-in-form", browser.PageHTML(body, ""))
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(catch, nil),
+		chromedp.SetUploadFiles(`.tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent.join("|")`, &sent),
+		chromedp.Evaluate(`new URL(document.querySelector("form").action).pathname`, &action),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if sent != to+" Поездка plan.pdf" || action != "/app/calendar/new" {
+		t.Errorf("with the script: sent %q, the form's action after %q; want the whole form to %s, its action kept", sent, action, to)
+	}
+	bare := h.RegisterPage("file-in-form-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(catch, nil),
+		chromedp.SetUploadFiles(`.tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Click(`.tc-nojs`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent.join("|")`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if sent != to+" Поездка plan.pdf" {
+		t.Errorf("without a script: Upload sent %q; want the whole form to %s", sent, to)
+	}
+}
+
+// TestEditFile: a file of an edit waits for Save (the owner's decision of
+// 02.10): picked, it stands as its list's row, «Nothing attached» gives way,
+// Remove takes it back; a photo shows at once; Save with files shows how far
+// the upload went.
+func TestEditFile(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	row := w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}},
+		w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}}
+	attach := w.Drop{Trigger: w.Button{Label: "Attach", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "up", Label: "From this computer", File: &w.FileField{Name: "file", Label: "From this computer", List: "files"}, Row: row}}}}
+	list := w.Line{ID: "files", Gap: w.LineGap8, Items: []w.LinePart{attach, w.Dim{Parts: []w.Inline{w.Text("Nothing attached")}, Empty: true}}}
+	photo := w.Photo{ID: "photo", Initials: "АК", Side: []w.FieldPart{w.Button{Label: "Add", File: &w.FileField{Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"}}}}
+	save := w.Runbar{Meter: w.Meter{}, Parts: []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}}, Progress: "edit"}
+	body := `<div class="tc-root"><div class="tc-main">` + save.Render() + `<form id="edit" action="/save" method="post" enctype="multipart/form-data"><input name="title" value="Поездка">` +
+		list.Render() + w.Field{Parts: []w.FieldPart{photo}}.Render() + `<button class="send" type="submit">Save</button></form></div></div>`
+	dir := t.TempDir()
+	f := filepath.Join(dir, "plan.pdf")
+	if err := os.WriteFile(f, make([]byte, 3000), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	img := filepath.Join(dir, "anna.png")
+	if err := os.WriteFile(img, []byte("\x89PNG\r\n\x1a\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	page := h.RegisterPage("edit-file", browser.PageHTML(body, ""))
+	const rows = `[...document.querySelectorAll("#files > [data-tc-picked]")].map(r => r.textContent.trim().replace(/\s+/g, " ")).join("|") + " · empty " + document.querySelector("[data-tc-empty]").hidden`
+	var picked, removed, preview, line, sent string
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(`window.__submits = 0; document.addEventListener("submit", () => window.__submits++); true`, nil),
+		chromedp.SetUploadFiles(`#files .tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Evaluate(rows+` + " · in the row " + !!document.querySelector("#files > [data-tc-picked] .tc-file") + " · submits " + window.__submits`, &picked),
+		chromedp.Click(`#files > [data-tc-picked] [data-tc-remove]`, chromedp.ByQuery),
+		chromedp.Evaluate(rows, &removed),
+		chromedp.SetUploadFiles(`#files .tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.SetUploadFiles(`.tc-field__photo-row .tc-file`, []string{img}, chromedp.ByQuery),
+		chromedp.Evaluate(`(() => { const i = document.querySelector("#photo img"); return i ? i.src.slice(0, 5) : "-"; })()`, &preview),
+		chromedp.Evaluate(`window.__xhr = ""; XMLHttpRequest.prototype.send = function (d) { window.__xhr = [...d.keys()].join(","); this.upload.onprogress({lengthComputable: true, loaded: 1572864, total: 3145728}); }; true`, nil),
+		chromedp.Click(`.send`, chromedp.ByQuery),
+		chromedp.Evaluate(`(() => { const l = document.querySelector("[data-tc-progress]"); return l.hidden + " " + l.querySelector(".tc-meter__bar").style.width + " " + l.querySelector(".tc-mono").textContent; })()`, &line),
+		chromedp.Evaluate(`window.__xhr`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if picked != "plan.pdf 3 KBRemove · empty true · in the row true · submits 0" {
+		t.Errorf("picked: %q; want the row with the name and the size, the input in it, nothing sent", picked)
+	}
+	if removed != " · empty false" {
+		t.Errorf("removed: %q; want no row and «Nothing attached» back", removed)
+	}
+	if preview != "blob:" {
+		t.Errorf("the photo: %q; want the picked picture at once", preview)
+	}
+	if line != "false 50% 1.5 of 3.0 MB" {
+		t.Errorf("Save: the line %q; want it shown, half the way", line)
+	}
+	if !strings.Contains(sent, "title") || !strings.Contains(sent, "file") || !strings.Contains(sent, "photo") {
+		t.Errorf("Save sent %q; want the title, the file and the photo", sent)
+	}
+}

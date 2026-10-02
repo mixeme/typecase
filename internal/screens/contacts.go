@@ -91,7 +91,13 @@ func Contacts1() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W220,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "A–Z", Href: "/app/contacts?sort=az", On: true},
+									{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+								},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -301,10 +307,33 @@ func Contacts2() Screen {
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
-								w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "A–Z", Href: "/app/contacts?sort=az", On: true},
+										{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+									},
+									Secondary: true,
+								},
 								w.Button{Label: "Columns", Icon: "cols"},
+								w.Drop{
+									Trigger: w.Button{Icon: "dots", Title: "More"},
+									More:    true,
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
+											w.MenuItem{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+											w.MenuSep{},
+											w.CheckForm{
+												Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+												Action: "/app/contacts",
+												Apply:  w.Button{Label: "Apply", Small: true},
+											},
+										},
+										Pop:    w.MenuUnderEnd,
+										Inline: true,
+									},
+								},
 							},
-							More: &w.Button{Icon: "dots", Title: "More"},
 							Right: &w.BarRight{
 								Items: []w.BarPart{
 									w.CheckForm{
@@ -477,6 +506,11 @@ func Contacts3() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "contact-edit",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
 					w.Form{
 						Items: []w.FormPart{
 							w.Field{
@@ -484,14 +518,14 @@ func Contacts3() Screen {
 								LabelSpan: true,
 								Parts: []w.FieldPart{
 									w.Photo{
+										ID: "photo",
 										Side: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
 													w.Button{
 														Label: "Replace",
-														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+														File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
 													},
-													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
 													w.Button{Label: "Crop"},
 												},
 												Gap: w.LineGap6,
@@ -658,6 +692,11 @@ func Contacts4() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "contact-edit",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
 					w.Form{
 						Items: []w.FormPart{
 							w.Field{
@@ -666,14 +705,14 @@ func Contacts4() Screen {
 								Parts: []w.FieldPart{
 									w.Photo{
 										Initials: "АК",
+										ID:       "photo",
 										Side: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
 													w.Button{
 														Label: "Add",
-														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+														File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
 													},
-													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
 												},
 												Gap: w.LineGap6,
 											},
@@ -845,14 +884,14 @@ func Contacts27() Screen {
 								LabelSpan: true,
 								Parts: []w.FieldPart{
 									w.Photo{
+										ID: "photo",
 										Side: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
 													w.Button{
 														Label: "Add",
-														File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+														File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
 													},
-													w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
 												},
 												Gap: w.LineGap6,
 											},
@@ -1238,14 +1277,14 @@ func Contacts15() Screen {
 									LabelSpan: true,
 									Parts: []w.FieldPart{
 										w.Photo{
+											ID: "photo",
 											Side: []w.FieldPart{
 												w.Line{
 													Items: []w.LinePart{
 														w.Button{
 															Label: "Replace",
-															File:  &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"},
+															File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
 														},
-														w.Button{Label: "Upload", Form: "post-photo", NoScript: true},
 														w.Button{Label: "Crop"},
 													},
 													Gap: w.LineGap6,
@@ -1700,8 +1739,17 @@ func Contacts7() Screen {
 								},
 							},
 							w.Button{Label: "Columns", Icon: "cols", Secondary: true},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Icon: "cols", Label: "Columns"}},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
 						},
-						More:    &w.Button{Icon: "dots", Title: "More"},
 						Right:   &w.BarRight{Items: []w.BarPart{w.Mono{Text: "newest first"}}, Secondary: true},
 						Variant: w.BarWide,
 					},

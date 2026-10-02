@@ -320,6 +320,19 @@
 	});
 
 	function onClick(e) {
+		// A picked file's Remove takes its row away, the file with it: it
+		// does not go with Save.
+		var removes = closest(e.target, "[data-tc-remove]");
+		if (removes) {
+			e.preventDefault();
+			var picked = closest(removes, "[data-tc-picked]");
+			if (picked) {
+				var list = picked.parentNode;
+				picked.remove();
+				emptyWords(list);
+			}
+			return;
+		}
 		// A tag field: its cross takes the tag away, a press elsewhere goes to
 		// its typing line; its menu is its suggestions, and an item's template
 		// is the tag it adds.
@@ -584,11 +597,84 @@
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 		// A file picked by a button or a menu item goes with its form at once
 		// (Carrel's task 109); without the script «Upload» sends it.
-		if (e.target.matches && e.target.matches(".tc-file") && e.target.files && e.target.files.length && e.target.form) {
-			if (e.target.form.requestSubmit) e.target.form.requestSubmit();
-			else e.target.form.submit();
+		if (e.target.matches && e.target.matches(".tc-file[data-tc-list], .tc-file[data-tc-preview]") && e.target.files && e.target.files.length) pickFile(e.target);
+		else if (e.target.matches && e.target.matches(".tc-file[form], .tc-file[data-tc-to]") && e.target.files && e.target.files.length && e.target.form) {
+			// a file of a new record's form goes with the whole form to its
+			// own address (Carrel's task 122)
+			var form = e.target.form, to = e.target.getAttribute("data-tc-to"), was = form.getAttribute("action");
+			if (to) form.setAttribute("action", to);
+			if (form.requestSubmit) form.requestSubmit();
+			else form.submit();
+			if (to) {
+				if (was === null) form.removeAttribute("action");
+				else form.setAttribute("action", was);
+			}
 		}
 		if (e.target.matches && e.target.matches('.tc-menu__item > input[type="radio"]')) choosePick(e.target);
+	}
+
+	// A file of an edit goes with its Save (the owner's decision of 02.10):
+	// picked, it shows as its list's row at the list's end, the input inside
+	// the row, and a fresh input waits for the next file; a photo shows in
+	// its picture at once.
+	function pickFile(input) {
+		var preview = document.getElementById(input.getAttribute("data-tc-preview") || "");
+		if (preview && input.files[0]) {
+			var img = preview.querySelector("img");
+			if (!img) {
+				// initials give way to the picture
+				img = document.createElement("img");
+				img.className = "tc-avatar__img";
+				img.alt = "";
+				preview.textContent = "";
+				preview.classList.remove("is-ph");
+				preview.appendChild(img);
+			}
+			img.src = URL.createObjectURL(input.files[0]);
+		}
+		var list = document.getElementById(input.getAttribute("data-tc-list") || "");
+		var tpl = input.parentNode.querySelector("template[data-tc-row]");
+		if (!list || !tpl || !tpl.content.firstElementChild) return;
+		var names = [], bytes = 0;
+		Array.prototype.forEach.call(input.files, function (f) {
+			names.push(f.name);
+			bytes += f.size;
+		});
+		var row = tpl.content.firstElementChild.cloneNode(true);
+		fillWords(row, { "{name}": names.join(", "), "{size}": fileSize(bytes) });
+		row.setAttribute("data-tc-picked", "");
+		var fresh = input.cloneNode(false);
+		input.parentNode.insertBefore(fresh, input);
+		row.appendChild(input);
+		list.appendChild(row);
+		emptyWords(list);
+		if (!closeMenu(true)) {
+			var d = closest(fresh, "details");
+			if (d) d.open = false;
+		}
+	}
+
+	// «Nothing attached» stands while the list has nothing picked.
+	function emptyWords(list) {
+		var any = !!list.querySelector(":scope > [data-tc-picked]");
+		Array.prototype.forEach.call(list.querySelectorAll(":scope > [data-tc-empty]"), function (w) {
+			w.hidden = any;
+		});
+	}
+
+	function fillWords(el, words) {
+		var walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+		for (var n = walk.nextNode(); n; n = walk.nextNode()) {
+			Object.keys(words).forEach(function (k) {
+				if (n.nodeValue.indexOf(k) >= 0) n.nodeValue = n.nodeValue.split(k).join(words[k]);
+			});
+		}
+	}
+
+	function fileSize(b) {
+		if (b < 1024) return b + " B";
+		if (b < 1024 * 1024) return Math.round(b / 1024) + " KB";
+		return (b / 1024 / 1024).toFixed(b < 10 * 1024 * 1024 ? 1 : 0) + " MB";
 	}
 
 	// A pick's menu of radio items (a time zone): the chosen item's words

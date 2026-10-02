@@ -293,7 +293,11 @@ func (g *gen) dimparts(e *El) []string {
 }
 
 func (g *gen) dimx(e *El) string {
-	return "w.Dim{Parts: []w.Inline{" + join(g.dimparts(e), ", ") + "}" + g.ev(e, "DimSize", "Size") + g.ev(e, "DimVariant", "Variant") + placef(e) + "}"
+	empty := ""
+	if e.HasAttr("data-tc-empty") {
+		empty = ", Empty: true"
+	}
+	return "w.Dim{Parts: []w.Inline{" + join(g.dimparts(e), ", ") + "}" + g.ev(e, "DimSize", "Size") + g.ev(e, "DimVariant", "Variant") + placef(e) + empty + "}"
 }
 
 // unq reverses q.

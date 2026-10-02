@@ -241,7 +241,7 @@ func (Drop) runbarPart() {}
 // Runbar — tc-runbar
 //
 // Роль. Ход опроса над списком: шкала, что опрошено, что не ответило, когда, остановить.
-// Вход. Runbar{Meter, Parts, Failed}.
+// Вход. Runbar{Meter, Parts, Failed, Progress, Saving}.
 // Состояния. plain | failed | stop.
 // Инварианты. Шкала — первой; неответившее — кнопкой «N did not answer» с меню отказов (Drop, MenuRefusal), где каждый расписан полностью; строка печатает фрагмент своего кадра.
 // Поведение. «Stop» прерывает опрос.
@@ -252,6 +252,11 @@ type Runbar struct {
 	Meter  Meter
 	Parts  []RunbarPart
 	Failed bool // the run failed as a whole
+	// Progress makes the line the Save of the form it names, which sends
+	// files: hidden until then; the live layer moves the meter and writes
+	// «3.2 of 24 MB» into the line's Mono. Saving draws it as during Save.
+	Progress string
+	Saving   bool
 }
 
 // Render prints the line.
@@ -259,7 +264,7 @@ func (r Runbar) Render() string { return r.html(nil) }
 
 func (r Runbar) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + `>` + r.Meter.html(nil))
+	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
 	for _, p := range r.Parts {
 		s.WriteString(p.html(nil))
 	}

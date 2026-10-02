@@ -126,7 +126,14 @@ func (g Seg) seg(m mix) string {
 			continue
 		}
 		if o.Href != "" {
-			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("aria-current", pick(o.On, "true")) + `>` + esc(o.label()) + `</a>`)
+			// a link keeps its icon and the name of an option without words
+			// (Carrel's task 115: the view of a folder, list or tiles)
+			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("aria-current", pick(o.On, "true")) +
+				attr("aria-label", pick(o.Label == "", o.Title)) + attr("title", pick(o.Label == "", o.Title)) + `>`)
+			if o.Icon != "" {
+				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
+			}
+			s.WriteString(esc(o.label()) + `</a>`)
 			continue
 		}
 		s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="button" role="radio"` +

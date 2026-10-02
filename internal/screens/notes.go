@@ -637,6 +637,11 @@ func Notes20() Screen {
 							w.Button{Folds: true, Label: "Focus", Icon: "focus", Title: "Focus"},
 						},
 					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "note-edit",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
 					w.DocLayout{
 						Items: []w.DocLayoutPart{
 							w.Doc{
@@ -729,12 +734,16 @@ func Notes20() Screen {
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon:  "up",
-																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+																Icon: "up",
+																File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"},
+																Row: w.DocAttach{
+																	Name:   "{name}",
+																	Size:   w.Dim{Parts: []w.Inline{w.Text("· {size}")}},
+																	Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
 																Label: "From this computer",
 															},
 															w.MenuItem{Icon: "file", Label: "From Files"},
-															w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 														},
 														Width: w.MenuWidth212,
 														Pop:   w.MenuUnder,
@@ -744,18 +753,21 @@ func Notes20() Screen {
 										},
 										Items: []w.DocmetaPart{
 											w.DocAttach{
-												Name:  "2026-08-10-sync-board.png",
-												Size:  w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
-												Where: w.Badge{Label: "in the note"},
-												Href:  "#",
+												Name:   "2026-08-10-sync-board.png",
+												Size:   w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
+												Where:  w.Badge{Label: "in the note"},
+												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Href:   "#",
 											},
 											w.DocAttach{
-												Name:  "запись-встречи.m4a",
-												Size:  w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
-												Where: w.Badge{Label: "Documents / carrel"},
-												Href:  "#",
+												Name:   "запись-встречи.m4a",
+												Size:   w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
+												Where:  w.Badge{Label: "Documents / carrel"},
+												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Href:   "#",
 											},
 										},
+										ID: "note-attachments",
 									},
 									{
 										Title: w.Rubric{

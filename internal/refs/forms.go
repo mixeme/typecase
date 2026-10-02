@@ -36,6 +36,8 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("order", w.Seg{Options: []w.SegOption{{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true}, {Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"}, {Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}}, "s-files-1", "tc-seg", 1),
+	form("links", w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}}, "s-contacts-1", "tc-seg", 1),
 	form("buttons", w.Seg{Options: []w.SegOption{{Label: "Apple"}, {Label: "Android", On: true}, {Label: "Thunderbird"}, {Label: "Anything else"}}}, "s-plan-2", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl", On: true}}, Variant: w.SegStart}, "s-backup-11", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea", On: true}, {Label: "curl"}}, Variant: w.SegStart}, "s-backup-10", "tc-seg", 1),
@@ -55,14 +57,14 @@ var _ = add(
 	form("start", w.Seg{Options: seg(0, "To WebDAV", "Download", "Both"), Variant: w.SegStart}, "s-backup-2", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "Comfortable", "Compact"), Variant: w.SegStart}, "appearance-1", "tc-seg", 2),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, "s-agenda-1", "tc-seg", 1),
-	form("icons", w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu"}, {Label: "Tiles", Icon: "grid", On: true}}}, "s-files-5", "tc-seg", 1),
+	form("icons", w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"}, {Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true}}}, "s-files-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "Auto", "Light", "Dark"), Variant: w.SegStartSmall}, "account-5", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-1", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "Read only", "Read and write"), Variant: w.SegStart}, "s-davloom-2", "tc-seg", 1),
 	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", On: true, Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-3", "tc-seg", 1),
 	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-15", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(1, "Full width", "Reading width")}, "s-notes-3", "tc-seg", 1),
-	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", On: true, Title: "List"}, {Icon: "grid", Title: "Tiles"}}}, "s-files-1", "tc-seg", 2),
+	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents?view=list", On: true, Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", Title: "Tiles"}}}, "s-files-1", "tc-seg", 2),
 	form("default", w.Seg{Options: seg(0, "All", "Contacts", "Events", "Tasks", "Notes", "Files")}, "s-find-1", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(2, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-4", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(3, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-5", "tc-seg", 1),
@@ -96,9 +98,10 @@ var _ = add(
 	form("wrap", w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar", Hidden: []w.Hidden{{Name: "view", Value: "range"}}}, "s-agenda-1", "tc-range", 2),
 
 	// tc-line, tc-stack, tc-grow, tc-push
-	form("picker", w.Line{Items: []w.LinePart{w.Button{Label: "Add", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, w.Button{Label: "Upload", Form: "post-photo", NoScript: true}}, Gap: w.LineGap6}, "s-contacts-4", "tc-line", 1),
+	form("picked", w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGap8}, "s-agenda-3", "tc-line", 2),
+	form("picker", w.Line{Items: []w.LinePart{w.Button{Label: "Add", File: &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"}}}, Gap: w.LineGap6}, "s-contacts-4", "tc-line", 1),
 	form("span", w.Line{Items: []w.LinePart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Show password", Small: true}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGap6}, "s-profile-1", "tc-line", 1),
-	form("span", w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Replace", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, w.Button{Label: "Upload", Form: "post-photo", NoScript: true}, w.Button{Label: "Crop"}}}, "s-contacts-3", "tc-line", 1),
+	form("span", w.Line{Items: []w.LinePart{w.Button{Label: "Replace", File: &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"}}, w.Button{Label: "Crop"}}, Gap: w.LineGap6}, "s-contacts-3", "tc-line", 1),
 	form("span", w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Input{Label: "x"}, btn}}, "components-20", "tc-line", 1),
 	form("gap", w.Line{Gap: w.LineGap7, Items: []w.LinePart{btn, w.Kbd{Keys: "Esc"}}}, "s-contacts-2", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Icon: "up", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{

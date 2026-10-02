@@ -227,7 +227,13 @@ func Dark2() Screen {
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
-								w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "A–Z", Href: "/app/contacts?sort=az", On: true},
+										{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+									},
+									Secondary: true,
+								},
 								w.Button{Label: "Columns", Icon: "cols"},
 							},
 							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "248"}}, Secondary: true},
@@ -380,7 +386,12 @@ func Dark3() Screen {
 						Crumbs: &w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}}, Current: "2026-07"},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu"}, {Label: "Tiles", Icon: "grid", On: true}}},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"},
+										{Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true},
+									},
+								},
 							},
 						},
 						Pad: w.HeadPadBottom6,

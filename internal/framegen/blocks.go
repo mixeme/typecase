@@ -105,6 +105,12 @@ func (g *gen) meter(e *El) string {
 
 func (g *gen) runbar(e *El) string {
 	f := []string{"Meter: " + g.meter(e.Kid("tc-meter"))}
+	if p := e.Attr("data-tc-progress"); p != "" {
+		f = append(f, "Progress: "+q(p))
+		if !e.HasAttr("hidden") {
+			f = append(f, "Saving: true")
+		}
+	}
 	var ps []string
 	for _, k := range e.Kids {
 		switch v := k.(type) {
@@ -856,6 +862,9 @@ func (g *gen) table(e *El) string {
 				case *El:
 					if v.Has("tc-acts__more") {
 						more = "More: &" + g.button(v)
+					} else if v.Has("tc-drop") && v.Kid("tc-acts__more") != nil {
+						// «⋯» with its menu (Carrel's task 117)
+						more = "Drop: &" + g.drop(v)
 					} else if v.Has("tc-tickrow__tick") {
 						f = append(f, "Pick: ptr("+tickedOf(v)+")")
 						if s := sendOf(v); s != "" {
@@ -976,16 +985,16 @@ func (g *gen) docmeta(e *El) string {
 				}
 				its = append(its, "w.DocRefs{Items: []w.DocRef{"+join(refs, ", ")+"}}")
 			case x.Has("tc-line__text"):
-				name, href := x.OwnText(), ""
-				if a := x.Kid("tc-dim--accent"); a != nil {
-					name, href = a.Text(), ", Href: "+q(a.Attr("href"))
-				}
-				its = append(its, "w.DocAttach{Name: "+q(name)+", Size: "+dimText(x.Kid("tc-dim").Text())+", Where: "+g.badge(x.Kid("tc-badge"))+href+"}")
+				its = append(its, g.docAttach(x))
 			default:
 				stop("docmeta? " + join(x.Cls(), " "))
 			}
 		}
-		secs = append(secs, "{Title: "+g.rub(k.Els()[0])+", Items: []w.DocmetaPart{"+join(its, ", ")+"}}")
+		id := ""
+		if v := k.Attr("id"); v != "" {
+			id = ", ID: " + q(v)
+		}
+		secs = append(secs, "{Title: "+g.rub(k.Els()[0])+", Items: []w.DocmetaPart{"+join(its, ", ")+"}"+id+"}")
 	}
 	s := "w.Docmeta{Sections: []w.DocmetaSec{\n\t\t" + join(secs, ",\n\t\t") + "}"
 	if danger != "" {
@@ -1204,4 +1213,21 @@ func (g *gen) docbar(e *El) string {
 		out = append(out, "Rule: true")
 	}
 	return "w.Docbar{" + join(out, ", ") + "}"
+}
+
+// docAttach is an attachment in a document's column: its name (a link when
+// it opens), size, where it lies, Remove on an edit.
+func (g *gen) docAttach(x *El) string {
+	name, href := strings.TrimSpace(x.OwnText()), ""
+	if a := x.Kid("tc-dim--accent"); a != nil {
+		name, href = a.Text(), ", Href: "+q(a.Attr("href"))
+	}
+	s := "w.DocAttach{Name: " + q(name) + ", Size: " + dimText(x.Kid("tc-dim").Text())
+	if b := x.Kid("tc-badge"); b != nil {
+		s += ", Where: " + g.badge(b)
+	}
+	if b := x.Kid("tc-btn"); b != nil {
+		s += ", Remove: &" + g.button(b)
+	}
+	return s + href + "}"
 }

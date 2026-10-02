@@ -397,7 +397,19 @@ func Mail4() Screen {
 												w.Button{Label: "Send", Small: true, Secondary: true},
 												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 											},
-											More: &w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Icon: "mail", Label: "Send"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
 											Acts: true,
 										},
 									},
@@ -416,7 +428,19 @@ func Mail4() Screen {
 												w.Button{Label: "Send", Small: true, Secondary: true},
 												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 											},
-											More: &w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Icon: "mail", Label: "Send"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
 											Acts: true,
 										},
 									},

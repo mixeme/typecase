@@ -84,7 +84,13 @@ func Io1() Screen {
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
-								w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "A–Z", Href: "/app/contacts?sort=az", On: true},
+										{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+									},
+									Secondary: true,
+								},
 								w.Button{Label: "Columns", Icon: "cols"},
 							},
 							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "248"}}, Secondary: true},

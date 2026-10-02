@@ -408,10 +408,12 @@ func (g *gen) menuItem(k *El) string {
 		case x.Has("tc-menu__label"):
 			f = append(f, "Found: "+g.inl(x))
 			found = true
+		case x.Tag == "template" && x.HasAttr("data-tc-row"):
+			f = append(f, "Row: "+g.pickedRow(x))
 		case x.Tag == "template":
 			f = append(f, "Adds: &"+g.tag(x.Els()[0]))
 		case x.Has("tc-file"):
-			f = append(f, "File: "+fileField(x))
+			f = append(f, "File: "+g.fileField(x))
 		case x.Has("tc-dim--danger"):
 			f = append(f, "Note: &w.Span{Face: w.FaceDanger, Text: "+q(x.Text())+"}")
 		case x.Has("tc-mono") && !x.Has("tc-push"):
@@ -442,6 +444,9 @@ func (g *gen) menuItem(k *El) string {
 	}
 	if h := k.Attr("href"); h != "" {
 		f = append(f, "Href: "+q(h))
+	}
+	if to := k.Attr("formaction"); to != "" {
+		f = append(f, "To: "+q(to))
 	}
 	if fm := k.Attr("form"); fm != "" && box == nil {
 		f = append(f, "Form: "+q(fm))

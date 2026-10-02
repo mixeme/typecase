@@ -67,7 +67,7 @@ func (f Faced) html(mix) string {
 // Line — tc-line
 //
 // Роль. Строка: несколько вещей в ряд с одним зазором — кнопки и клавиша, поле и кнопка, метки, теги.
-// Вход. Line{Items, Gap, Block, Place}.
+// Вход. Line{Items, Gap, Block, Place, ID}.
 // Состояния. span | block | gap.
 // Инварианты. Зазор — перечисление, а не число; строка не переносит чужие отступы; строка печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -79,6 +79,7 @@ type Line struct {
 	Gap   LineGap
 	Block bool // a line of its own (div), not a piece of a row (span)
 	Place Place
+	ID    string // the list a picked file joins on an edit (FileField.List)
 }
 
 // Render prints the line.
@@ -90,7 +91,7 @@ func (l Line) html(m mix) string {
 		tag = "div"
 	}
 	var s strings.Builder
-	s.WriteString(`<` + tag + class(m, "tc-line", l.Gap.class(), l.Place.class()) + `>`)
+	s.WriteString(`<` + tag + class(m, "tc-line", l.Gap.class(), l.Place.class()) + attr("id", l.ID) + `>`)
 	for _, p := range l.Items {
 		s.WriteString(p.html(nil))
 	}

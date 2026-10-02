@@ -123,13 +123,34 @@ func Files1() Screen {
 								Variant: w.FilterH26W190,
 							},
 							w.Seg{
-								Options:   []w.SegOption{{Label: "Name", On: true}, {Label: "Size"}, {Label: "Changed"}},
+								Options: []w.SegOption{
+									{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"},
+								},
 								Secondary: true,
 							},
-							w.Seg{Options: []w.SegOption{{Icon: "menu", On: true}, {Icon: "grid"}}},
+							w.Seg{
+								Options: []w.SegOption{
+									{Icon: "menu", Href: "/app/files/sftpgo/documents?view=list", On: true, Title: "List"},
+									{Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", Title: "Tiles"},
+								},
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
 						},
-						More:  &w.Button{Icon: "dots", Title: "More"},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
 					},
 					w.Table{
@@ -754,7 +775,12 @@ func Files5() Screen {
 						Crumbs: &w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}}, Current: "2026-07"},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu"}, {Label: "Tiles", Icon: "grid", On: true}}},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"},
+										{Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true},
+									},
+								},
 							},
 						},
 						Pad: w.HeadPadBottom6,

@@ -64,9 +64,17 @@ type MenuItem struct {
 	// Form is the ID of a PostForm the item submits (Sign out): the item is a
 	// submit button then, sending Name and Value when they are set.
 	Form string
+	// To makes the item a submit button of the form it stands in, sending
+	// that form to its own address (formaction), as Button.To does: Upload
+	// on a new record keeps what is typed (Carrel's task 122).
+	To string
 	// File makes the item a label that picks a file for a PostForm (Carrel's
 	// task 109): «From this computer» opens the choice without a script.
 	File *FileField
+	// Row is the row a file picked by the item becomes in its edit's list
+	// (File.List) — the list's own row, «{name}» and «{size}» in its words; a
+	// button of the row with Removes takes it away before Save.
+	Row PickedRow
 	// NoScript shows the item only on a page without a script: «Upload».
 	NoScript bool
 	// Adds is the tag the item adds to its TagInput: a suggestion of a person
@@ -88,7 +96,11 @@ func (it MenuItem) html(mix) string {
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 		}
-		s.WriteString(esc(it.Label) + it.File.input() + `</label>`)
+		s.WriteString(esc(it.Label) + it.File.input())
+		if it.Row != nil {
+			s.WriteString(`<template data-tc-row>` + it.Row.html(nil) + `</template>`)
+		}
+		s.WriteString(`</label>`)
 		return s.String()
 	}
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
@@ -131,6 +143,8 @@ func (it MenuItem) html(mix) string {
 		} else {
 			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + `>`)
 		}
+	} else if it.To != "" {
+		s.WriteString(`<button` + cls + ` type="submit"` + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else if it.Form != "" {
 		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else {
@@ -362,7 +376,7 @@ func (TagInput) dropTrigger() {}
 // Drop — tc-drop
 //
 // Роль. Кнопка или выбор вместе с меню, которое они открывают.
-// Вход. Drop{Trigger, Menu, More, Open}.
+// Вход. Drop{Trigger, Menu, More, Row, Open}.
 // Состояния. more | pick.
 // Инварианты. Меню стоит сразу за тем, что его открывает; «⋯» бара — кнопка бара и тогда, когда она в выпадашке; выпадашка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус; у выбора с меню из радио (пояс) выбранный пункт становится значением выбора.
@@ -373,6 +387,7 @@ type Drop struct {
 	Trigger DropTrigger
 	Menu    Menu
 	More    bool // the trigger is its bar's «⋯»
+	Row     bool // the trigger is a table row's «⋯» (TableCell.Drop, Carrel's task 117)
 	Open    bool // drawn open, as the frames draw it; closed, the menu waits hidden for its button
 }
 
@@ -383,6 +398,9 @@ func (d Drop) html(m mix) string {
 	t := mix(nil)
 	if d.More {
 		t = mix{"tc-bar__more"}
+	}
+	if d.Row {
+		t = mix{"tc-acts__more"}
 	}
 	if !d.Open {
 		if sum, ok := summaryOf(d.Trigger.html(t)); ok {
