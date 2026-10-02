@@ -274,7 +274,7 @@ func (f CheckForm) inMenu() string {
 // Range — tc-range
 //
 // Роль. Диапазон дат: два поля, стрелка между ними и кнопка, которая показывает.
-// Вход. Range{From, To, Show, Wrap, Secondary, Action}.
+// Вход. Range{From, To, Show, Wrap, Secondary, Action, Hidden}.
 // Состояния. default | wrap | form.
 // Инварианты. Начало — слева, конец — справа, между ними стрелка; диапазон печатает фрагмент своего кадра.
 // Поведение. Show применяет диапазон; Enter в поле — то же. С адресом (Action) диапазон — форма GET: From и To уходят полями, Show её отправляет, без сценария.
@@ -288,6 +288,9 @@ type Range struct {
 	Wrap      bool // the range wraps inside a narrow menu
 	Secondary bool
 	Action    string // the range is a form that sends From and To there (GET)
+	// Hidden are the list's other choices that go with it: view=range
+	// (Carrel's task 107).
+	Hidden []Hidden
 }
 
 // Render prints the range.
@@ -299,7 +302,13 @@ func (r Range) html(m mix) string {
 		tag, form = "form", attr("action", r.Action)+` method="get"`
 		r.Show.Submit = true
 	}
-	return `<` + tag + class(m, "tc-range", pick(r.Wrap, "tc-range--wrap"), rank(r.Secondary)) + form + `>` + r.From.html(nil) +
+	hidden := ""
+	if r.Action != "" {
+		for _, h := range r.Hidden {
+			hidden += h.html(nil)
+		}
+	}
+	return `<` + tag + class(m, "tc-range", pick(r.Wrap, "tc-range--wrap"), rank(r.Secondary)) + form + `>` + hidden + r.From.html(nil) +
 		`<i class="tc-range__dash">→</i>` + r.To.html(nil) + r.Show.html(nil) + `</` + tag + `>`
 }
 

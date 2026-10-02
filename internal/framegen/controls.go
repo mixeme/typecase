@@ -972,12 +972,18 @@ func (g *gen) barItem(k *El) string {
 	}
 	if k.Has("tc-range") {
 		var ins []*El
+		var hs []string
 		for _, i := range k.Els() {
-			if i.Tag == "input" {
+			if i.Tag == "input" && i.Attr("type") == "hidden" {
+				hs = append(hs, "{Name: "+q(i.Attr("name"))+", Value: "+q(i.Attr("value"))+"}")
+			} else if i.Tag == "input" {
 				ins = append(ins, i)
 			}
 		}
 		s := "w.Range{From: " + g.input(ins[0]) + ", To: " + g.input(ins[1]) + ", Show: " + g.button(k.Kid("tc-btn"))
+		if len(hs) > 0 {
+			s += ", Hidden: []w.Hidden{" + join(hs, ", ") + "}"
+		}
 		if k.Has("is-2nd") {
 			s += ", Secondary: true"
 		}

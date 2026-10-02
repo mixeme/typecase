@@ -15,6 +15,9 @@ do, not what the authors did.
 
 ### Added
 
+- **`Range.Hidden`** (Carrel's task 107): the range's form sends the list's
+  other choices with it — `view=range`, without which a server shows the
+  week from From. The agenda's ranges carry it.
 - **`DueRow.Href`** (Carrel's task 95): a task's row opens its record without
   a script — its title is the link, the row cannot be one with its own tick.
   The list of tasks draws it so (s-tasks-1).
