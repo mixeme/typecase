@@ -246,18 +246,30 @@ func States3() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+										w.CheckForm{
+											Checks: []w.Check{
+												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+											},
+											Action:   "/app/calendar",
+											Tertiary: true,
+											Apply:    w.Button{Label: "Apply", Small: true},
+										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true},
-											Show: w.Button{Label: "Show"},
-											Wrap: true,
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show"},
+											Action: "/app/calendar",
+											Wrap:   true,
 										},
 										w.MenuSep{},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
@@ -687,18 +699,30 @@ func States6() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+										w.CheckForm{
+											Checks: []w.Check{
+												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+											},
+											Action:   "/app/calendar",
+											Tertiary: true,
+											Apply:    w.Button{Label: "Apply", Small: true},
+										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true},
-											Show: w.Button{Label: "Show"},
-											Wrap: true,
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show"},
+											Action: "/app/calendar",
+											Wrap:   true,
 										},
 										w.MenuSep{},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
@@ -833,7 +857,14 @@ func States7() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 4 books · 0 accounts")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{
@@ -919,7 +950,14 @@ func States8() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -1053,7 +1091,14 @@ func States9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Trail: w.Badge{Label: "ro"}},
+						w.TickRow{
+							Mark:      w.Mark{Colour: "#6B4E7A"},
+							Label:     "Команда",
+							Meta:      "unavailable · 503",
+							MetaTitle: "The server answered 503 Service Unavailable.",
+							Error:     true,
+							Trail:     w.Button{Label: "Retry", Small: true},
+						},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 					},
 				},
@@ -1077,7 +1122,14 @@ func States9() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 5 cards")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -1251,6 +1303,8 @@ func States10() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
 								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
 					},
@@ -1343,6 +1397,8 @@ func States11() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
 								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
 					},
@@ -1452,7 +1508,7 @@ func States12() Screen {
 									w.Field{
 										Label: "Birthday",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "DD.MM.YYYY", Label: "Birthday", Mono: true, Numeric: true},
+											w.Input{Value: "14.03.1987", Label: "Birthday", Mono: true, Numeric: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("Type it: 14.03.1987, or 14.03 without the year.")}},
 										},
 										Width: w.FieldSM,
@@ -1466,6 +1522,13 @@ func States12() Screen {
 									w.Field{
 										Label: "Number",
 										Parts: []w.FieldPart{w.Input{Value: "+7 912 445-10-88", Label: "Number", Mono: true}},
+										Width: w.FieldMD,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "work", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{
+										Parts: []w.FieldPart{w.Input{Value: "+7 495 120-45-00", Label: "Number", Mono: true}},
 										Width: w.FieldMD,
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},
@@ -1672,18 +1735,30 @@ func States13() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+										w.CheckForm{
+											Checks: []w.Check{
+												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+											},
+											Action:   "/app/calendar",
+											Tertiary: true,
+											Apply:    w.Button{Label: "Apply", Small: true},
+										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true},
-											Show: w.Button{Label: "Show"},
-											Wrap: true,
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show"},
+											Action: "/app/calendar",
+											Wrap:   true,
 										},
 										w.MenuSep{},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
@@ -1976,18 +2051,30 @@ func States15() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+										w.CheckForm{
+											Checks: []w.Check{
+												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+											},
+											Action:   "/app/calendar",
+											Tertiary: true,
+											Apply:    w.Button{Label: "Apply", Small: true},
+										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-11-02", Label: "From", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-11-08", Label: "To", Mono: true},
-											Show: w.Button{Label: "Show"},
-											Wrap: true,
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-11-02", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-08", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show"},
+											Action: "/app/calendar",
+											Wrap:   true,
 										},
 										w.MenuSep{},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,

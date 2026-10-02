@@ -497,6 +497,9 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* Двойник отметок в меню «⋯» (задача 82): та же форма, отметки — пункты-флажки столбиком; Apply без сценария — под ними. */
+.tc-menu .tc-checkform{display:flex;flex-direction:column;align-items:stretch;gap:0}
+[data-tc-noscript] .tc-menu .tc-checkform__apply{display:block;padding:4px 10px 6px}
 /* Выбор из меню с поиском (пояс): без сценария искать нечем — строки поиска нет, пункты-радио уходят с формой. */
 [data-tc-noscript] .tc-menu > .tc-in[type=search]{display:none}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
@@ -1012,7 +1015,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-sec__acts.tc-sec__acts{margin-top:7px}
 .tc-field__photo-row.tc-field__photo-row{align-items:flex-start;display:flex;gap:14px}
 .tc-field__photo-side.tc-field__photo-side{align-items:flex-start}
-.tc-form__cols.tc-form__cols{align-content:flex-start;flex:1 1 420px;gap:13px 16px}
+.tc-form__cols.tc-form__cols{align-content:flex-start;align-items:flex-start;flex:1 1 420px;gap:13px 16px}
 .tc-dialog__split.tc-dialog__split{align-items:flex-start;display:flex;flex-wrap:wrap;gap:18px}
 .tc-dialog__photo.tc-dialog__photo{position:relative;height:190px;border-radius:4px;overflow:hidden;flex:none;width:190px}
 .tc-dialog__photo-img.tc-dialog__photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}

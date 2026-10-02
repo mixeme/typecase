@@ -442,6 +442,15 @@ func (g *gen) checkForm(x *El) string {
 		if k.Has("tc-check") {
 			cs = append(cs, g.check(k))
 		}
+		if k.Has("tc-menu__item") {
+			// The twin in a menu: the item's checkbox is the check.
+			b := k.Kid("tc-check__box")
+			c := "w.Check{"
+			if b.HasAttr("checked") {
+				c += "On: true, "
+			}
+			cs = append(cs, c+"Name: "+q(b.Attr("name"))+", Value: "+q(b.Attr("value"))+", Parts: []w.CheckPart{w.Text("+q(k.OwnText())+")}}")
+		}
 	}
 	s := "w.CheckForm{Checks: []w.Check{" + join(cs, ", ") + "}, Action: " + q(x.Attr("action"))
 	if x.Has("is-3rd") {

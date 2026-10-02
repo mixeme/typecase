@@ -148,18 +148,30 @@ func Agenda1() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+										w.CheckForm{
+											Checks: []w.Check{
+												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
+												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
+												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
+											},
+											Action:   "/app/calendar",
+											Tertiary: true,
+											Apply:    w.Button{Label: "Apply", Small: true},
+										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
-											From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true},
-											To:   w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true},
-											Show: w.Button{Label: "Show"},
-											Wrap: true,
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show"},
+											Action: "/app/calendar",
+											Wrap:   true,
 										},
 										w.MenuSep{},
-										w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,

@@ -12,7 +12,7 @@ var _ = add(
 	form("error-empty", w.Input{Label: "Password", Focus: true, Error: true}, "s-auth-13", "tc-in", 2),
 	form("template-row", w.Input{Name: "tel.{n}", Label: "Number", Mono: true}, "components-38", "tc-in", 5),
 	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 1),
-	form("disabled-text", w.Input{Value: "anna@example.org", Label: "Email", Disabled: true}, "s-auth-12", "tc-in", 2),
+	form("value", w.Input{Value: "anna@example.org", Label: "Email"}, "s-auth-12", "tc-in", 2),
 	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 3),
 	form("focus", w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, "s-files-13", "tc-in", 1),
 	form("error", w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, "s-contacts-18", "tc-in", 1),

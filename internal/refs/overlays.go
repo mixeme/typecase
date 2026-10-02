@@ -259,13 +259,11 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Icon: "cols", Label: "Columns"}}, Width: w.MenuWidth212}, "s-contacts-14", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOn}, Label: "Events", Tertiary: true},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Notes", Tertiary: true},
+		w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}},
 		w.MenuSep{Tertiary: true},
-		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Mono: true, Label: "Date"}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Mono: true, Label: "Date"}, Show: w.Button{Label: "Show"}, Wrap: true},
+		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar"},
 		w.MenuSep{},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}, "s-agenda-1", "tc-menu", 1),
+		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}, "s-agenda-1", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "No status"},
 		w.MenuSep{},
@@ -281,6 +279,12 @@ var _ = add(
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290}, "s-agenda-8", "tc-menu", 1),
+	// Carrel's task 82: the list's «⋯» — the sort and Compact rows, twins of what goes under it.
+	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
+		w.MenuItem{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+		w.MenuSep{},
+		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/contacts", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}, "s-contacts-1", "tc-menu", 1),
 	// Carrel's task 77: the suggestions of attendees — people of the ticked books, or the address typed.
 	overlay("found", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Found: []w.Inline{w.Strong("Ве"), w.Text("ра Лебедева")}, Detail: &w.Mono{Text: "vera@example.net", Variant: w.Mono11}, Trail: w.Mono{Text: "Архив", Variant: w.Mono10Dusty, Place: w.Pushed},
@@ -570,7 +574,7 @@ var _ = add(
 		w.MenuSep{Tertiary: true},
 		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}, "states-3", "tc-drop", 1),
+		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}, "states-3", "tc-drop", 1),
 	overlay("more", w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, w.Button{Label: "Today", Href: "/app/calendar"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"}, w.Seg{Options: []w.SegOption{{Label: "Day"}, {Label: "Week", On: true}, {Label: "Month"}, {Label: "Range"}}}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Secondary: true, Action: "/app/calendar"}, w.BarSep{Secondary: true}, w.CheckForm{Checks: []w.Check{w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}}, w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}}}, Action: "/app/calendar", Tertiary: true, Apply: w.Button{Label: "Apply", Small: true}}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Tick: &w.TickBox{}, Label: "Events", Tertiary: true},
 		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tasks due", Tertiary: true},
@@ -578,7 +582,7 @@ var _ = add(
 		w.MenuSep{Tertiary: true},
 		w.Range{From: w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show"}, Wrap: true},
 		w.MenuSep{},
-		w.MenuItem{Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Compact rows"}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
+		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
 	overlay("plain-head", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}, Body: []w.SheetPart{

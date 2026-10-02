@@ -217,7 +217,7 @@ func (c Check) html(m mix) string {
 // Инварианты. Отметки — флажки формы (Check.Name); форма отправляет её и скрытые поля; без сценария — кнопкой Apply, со сценарием — при смене; виджет печатает фрагмент своего кадра.
 // Поведение. Смена отметки отправляет форму (сценарий); без сценария — Apply рядом.
 // Эталон. кадр `s-contacts-1`, фрагмент `.tc-checkform`.
-// Содержимое. Флажок с подписью, скрытые поля, Apply для работы без сценария.
+// Содержимое. Флажок с подписью, скрытые поля, Apply для работы без сценария; в меню «⋯» — те же отметки пунктами-флажками (двойник отметок полосы, Carrel's task 82).
 // Чего нет. Своего вида: вид у флажка; Apply виден, только пока страница без сценария (data-tc-noscript на html, его снимает tc.js).
 type CheckForm struct {
 	Checks []Check  // the checkboxes of the form: Name and Value set
@@ -236,6 +236,33 @@ func (f CheckForm) html(m mix) string {
 	s.WriteString(`<form` + class(m, "tc-checkform", rank3(f.Tertiary)) + attr("action", f.Action) + ` method="get">`)
 	for _, c := range f.Checks {
 		s.WriteString(c.html(nil))
+	}
+	for _, h := range f.Hidden {
+		s.WriteString(h.html(nil))
+	}
+	s.WriteString(`<span class="tc-checkform__apply">` + f.Apply.html(nil) + `</span></form>`)
+	return s.String()
+}
+
+// inMenu prints the form inside a menu — the twin of a bar's checks under
+// «⋯»: the same GET form, its checks menu items with tick boxes.
+func (f CheckForm) inMenu() string {
+	var s strings.Builder
+	s.WriteString(`<form` + class(nil, "tc-checkform", rank3(f.Tertiary)) + attr("action", f.Action) + ` method="get">`)
+	for _, c := range f.Checks {
+		t := TickedOff
+		if c.On {
+			t = TickedOn
+		}
+		label := c.Label
+		if label == "" {
+			for _, p := range c.Parts {
+				if x, ok := p.(Text); ok {
+					label += string(x)
+				}
+			}
+		}
+		s.WriteString(MenuItem{Name: c.Name, Value: c.Value, Tick: &TickBox{Ticked: t}, Label: label}.html(nil))
 	}
 	for _, h := range f.Hidden {
 		s.WriteString(h.html(nil))

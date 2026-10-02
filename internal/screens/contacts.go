@@ -93,8 +93,25 @@ func Contacts1() Screen {
 							},
 							w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}, Secondary: true},
 							w.Button{Label: "Columns", Icon: "cols"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
+										w.MenuItem{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+										w.MenuSep{},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/contacts",
+											Apply:  w.Button{Label: "Apply", Small: true},
+										},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
 						},
-						More: &w.Button{Icon: "dots", Title: "More"},
 						Right: &w.BarRight{
 							Items: []w.BarPart{
 								w.CheckForm{
@@ -674,7 +691,7 @@ func Contacts4() Screen {
 									w.Field{
 										Label: "Birthday",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "DD.MM.YYYY", Label: "Birthday", Mono: true, Numeric: true},
+											w.Input{Value: "14.03.1987", Label: "Birthday", Mono: true, Numeric: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("Type it: 14.03.1987, or 14.03 without the year.")}},
 										},
 										Width: w.FieldSM,
@@ -688,6 +705,13 @@ func Contacts4() Screen {
 									w.Field{
 										Label: "Number",
 										Parts: []w.FieldPart{w.Input{Value: "+7 912 445-10-88", Label: "Number", Mono: true}},
+										Width: w.FieldMD,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "work", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{
+										Parts: []w.FieldPart{w.Input{Value: "+7 495 120-45-00", Label: "Number", Mono: true}},
 										Width: w.FieldMD,
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},

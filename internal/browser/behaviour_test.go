@@ -668,3 +668,48 @@ func TestAttendeesSuggest(t *testing.T) {
 		t.Errorf("with the script: shown %q, closed %v, ticks %q, tags after a cross %q, Enter went to %q (menu open %v)", shown, gone, added, after, where, open)
 	}
 }
+
+// TestCheckFormInMenu (Carrel's task 82): a bar's Compact rows has its twin
+// under «⋯» — the same GET form, the check a menu item: without a script its
+// Apply sends it, with the library's script a change does.
+func TestCheckFormInMenu(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	page := func(action string) string {
+		more := w.Drop{More: true, Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
+			w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: action, Hidden: []w.Hidden{{Name: "sort", Value: "az"}}, Apply: w.Button{Label: "Apply", Small: true, Submit: true}}},
+			Pop: w.MenuUnderEnd, Inline: true}}
+		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar"><span class="tc-seg is-2nd"><button class="tc-seg__opt" type="button">A–Z</button></span>` + more.Render() + `</div></div></div>`
+	}
+	bareURL := h.RegisterPage("menu-checkform-bare", "")
+	h.RegisterPage("menu-checkform-bare", strings.Replace(browser.PageHTML(page(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))
+	var search string
+	if err := h.Run(bareURL, 380, 600,
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Click(`.tc-menu label.tc-menu__item`, chromedp.ByQuery),
+		chromedp.Click(`.tc-checkform__apply button`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(search, "compact=1") || !strings.Contains(search, "sort=az") {
+		t.Errorf("without a script: sent %q; want compact=1 and sort=az", search)
+	}
+	liveURL := h.RegisterPage("menu-checkform", "")
+	h.RegisterPage("menu-checkform", browser.PageHTML(page(liveURL), ""))
+	var applyShown bool
+	search = ""
+	if err := h.Run(liveURL, 380, 600,
+		chromedp.Click(`details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.querySelector(".tc-checkform__apply button").checkVisibility()`, &applyShown),
+		chromedp.Click(`.tc-menu label.tc-menu__item`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if applyShown || !strings.Contains(search, "compact=1") {
+		t.Errorf("with the script: Apply shown %v, sent %q; want false, compact=1", applyShown, search)
+	}
+}

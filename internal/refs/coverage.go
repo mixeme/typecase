@@ -74,3 +74,9 @@ func WaitingSummary(waiting []Pending) string {
 	sort.Strings(parts)
 	return strings.Join(parts, "; ")
 }
+
+// A bar's check form under «⋯» is printed by Menu: its checks as menu items
+// with tick boxes, in the same form (Carrel's task 82).
+var checkFormInMenu = wait("printed by Menu: a bar's check form as its twin under «⋯»",
+	fragment.Ref{Frame: "s-contacts-1", Class: "tc-checkform", N: 1},
+	fragment.Ref{Frame: "s-agenda-1", Class: "tc-checkform", N: 2})

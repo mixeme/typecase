@@ -820,7 +820,7 @@ func Backup6() Screen {
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
-								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Href: "#"},
 								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
 								{Icon: "theme", Label: "Appearance", Href: "#"},
 							},
@@ -833,18 +833,6 @@ func Backup6() Screen {
 						w.RailStatus{
 							Text:   "davloom · running · 3 devices",
 							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
-						},
-						w.RailStatus{
-							Text: "Backups are running",
-							Detail: w.Dim{
-								Parts: []w.Inline{
-									w.Text("Last backup "),
-									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text(" · "),
-									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
-								},
-								Size: w.Dim11,
-							},
 						},
 					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},

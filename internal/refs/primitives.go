@@ -39,7 +39,7 @@ var _ = add(
 	primitive("primary", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, "components-9", "tc-btn", 7),
 	primitive("variant", w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, "s-profile-1", "tc-btn", 10),
 	primitive("folds", w.Button{Label: "Download", Icon: "down", Folds: true, Title: "Download"}, "components-16", "tc-btn", 1),
-	primitive("small", w.Button{Icon: "dots", Small: true, Title: "More"}, "s-contacts-1", "tc-btn", 15),
+	primitive("small", w.Button{Icon: "dots", Small: true, Title: "More"}, "s-contacts-1", "tc-btn", 16),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, "components-9", "tc-btn", 5),
 	primitive("danger", w.Button{Label: "Disconnect", Kind: w.ButtonDanger}, "components-9", "tc-btn", 6),
 	primitive("small", w.Button{Label: "Add phone", Icon: "plus", Small: true}, "s-contacts-3", "tc-btn", 10),
@@ -49,7 +49,7 @@ var _ = add(
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
 	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-mail-1", "tc-btn", 3),
 	// The summary of a closed menu is its button (Drop prints it so).
-	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 21),
+	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 23),
 	primitive("link", w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, "s-agenda-1", "tc-btn", 11),
 	primitive("menu", w.Button{Label: "Attach", Icon: "up", Menu: true}, "s-agenda-3", "tc-btn", 6),
 	primitive("icon", w.Button{Icon: "dots", Title: "More"}, "s-contacts-6", "tc-btn", 6),

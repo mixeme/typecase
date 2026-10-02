@@ -87,6 +87,16 @@ var _ = add(
 		{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 6}, "s-backup-1", "tc-nav", 2),
+	// Carrel's task 78: no backup jobs — no count by Backup, and no backups line in the foot.
+	shell("plain", w.Nav{Items: []w.NavItem{
+		{Icon: "user", Label: "Account", Href: "#"},
+		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "file", Label: "Attachments", Href: "#"},
+		{Icon: "device", Label: "New device", Href: "#"},
+		{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "archive", Label: "Backup", Href: "#"},
+		{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 6}, "s-backup-6", "tc-nav", 2),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},

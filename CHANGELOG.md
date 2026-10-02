@@ -13,6 +13,11 @@ do, not what the authors did.
 
 ### Added
 
+- **A bar's checks under «⋯»** (Carrel's task 82): `CheckForm` is a
+  `MenuPart` — in a menu its checks are menu items with tick boxes, in the same
+  GET form, so the twin of Compact rows works without a script too (Apply
+  shows only then). «⋯» with its menu is `Drop{More: true}` among a bar's
+  `Items`; `Bar.More` stays a bare button. `TestCheckFormInMenu`.
 - **A tag field that is a part of its form, with suggestions** (Carrel's task
   77, the attendees of an event): `TagInput.Columns` (tags in columns across
   the width), `TagInput.Name` (each tag with a `Value` sends it; a tag with a
@@ -100,6 +105,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's tasks 78–82 and the owner's decisions of 02.10: no backup jobs —
+  no backups line in the rail and no count by Backup (s-backup-6, 78); the
+  invitation by link has its own frame (s-auth-14, 79), and both invitations
+  show the address and let it change, another one confirmed by a letter
+  (s-auth-12, -14); the states of contacts have whole heads, and a refused
+  source shows in the rail too (states-7…-11, 80); Anna's data is the same in
+  every edit (s-contacts-4, states-12, 81); fields in a form's columns stand
+  by their tops (a birthday with its hint no longer floats up). 387 frames.
 - The attendees of an event (Carrel's task 77, the owner's decisions of
   01.10): in the card a list in columns — a known person by the colour of
   their book and a link, an unknown one by the address (s-agenda-1, -2,

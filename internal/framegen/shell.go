@@ -516,6 +516,8 @@ func (g *gen) menu(e *El) string {
 		case k.Has("tc-range"):
 			b := g.barItem(k)
 			items = append(items, b[:len(b)-1]+", Wrap: true}")
+		case k.Has("tc-checkform"):
+			items = append(items, g.checkForm(k))
 		default:
 			stop("menu? " + join(k.Cls(), " "))
 		}
