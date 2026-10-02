@@ -15,6 +15,9 @@ do, not what the authors did.
 
 ### Added
 
+- **`DueRow.Href`** (Carrel's task 95): a task's row opens its record without
+  a script — its title is the link, the row cannot be one with its own tick.
+  The list of tasks draws it so (s-tasks-1).
 - **Save as** (Carrel's task 94): `Button.SaveAs` and `SaveFrom` save the
   text of the element named (a `Diag` with its new `ID`) as a file, made in
   the page by the library's script — a secret shown once has no address to
@@ -121,6 +124,8 @@ do, not what the authors did.
 
 ### Mockup
 
+- The new event says «No status» and «Does not repeat», the words of its
+  lists (s-agenda-15, Carrel's task 106).
 - Carrel's task 94 and the owner's decisions of 02.10: the external trigger
   of a backup job has its Gitea tab — a Gitea Actions workflow, the password
   in the repository's secrets under the name the file gives, the archive of a

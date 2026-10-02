@@ -915,7 +915,7 @@ func Agenda15() Screen {
 								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Location"}},
 								Width: w.FieldLG,
 							},
-							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "None"}}, Width: w.FieldSM},
+							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "No status"}}, Width: w.FieldSM},
 							w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
 							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 							w.FieldSet{
@@ -1028,7 +1028,7 @@ func Agenda15() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Never"}}, Width: w.FieldSM},
+									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
 									w.Field{
 										Label: "Every",
 										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},

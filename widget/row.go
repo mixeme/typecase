@@ -80,6 +80,19 @@ func title(parts []Inline, strong bool, badge *Badge, own ...string) string {
 	return s + `</span>`
 }
 
+// linkTitle is the row's title, a link to the record when href is set: in a
+// row with a control of its own the title, not the row, goes there.
+func linkTitle(href string, parts []Inline, strong bool, badge *Badge) string {
+	if href == "" {
+		return title(parts, strong, badge)
+	}
+	s := `<a` + class(nil, "tc-row__title", is("strong", strong)) + attr("href", href) + `>` + inlines(parts)
+	if badge != nil {
+		s += " " + badge.html(nil)
+	}
+	return s + `</a>`
+}
+
 // source prints the source cell: where the record lives.
 func source(text, hint string, badge *Badge) string {
 	s := `<span class="tc-row__cell tc-row__source"` + attr("title", hint) + `>` + esc(text)
@@ -343,7 +356,7 @@ func (r BriefRow) html(m mix) string {
 // DueRow — tc-row
 //
 // Роль. Строка дела: галка, название, теги, срок, сколько сделано, источник.
-// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Tags, Due, Progress, Source, SourceHint, On, Overdue, Inset}.
+// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Tags, Due, Progress, Source, SourceHint, On, Overdue, Inset, Href}.
 // Состояния. plain | on | overdue | done | inset | found.
 // Инварианты. Сделано ли дело, говорит одна галка: строка берёт это из неё; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка отмечает дело сделанным; нажатие на строку открывает его.
@@ -364,6 +377,9 @@ type DueRow struct {
 	On         bool
 	Overdue    bool
 	Inset      bool
+	// Href makes the title a link to the record (Carrel's task 95): the row
+	// itself cannot be one, its tick is a control of its own.
+	Href string
 }
 
 // Render prints the row.
@@ -371,7 +387,7 @@ func (r DueRow) Render() string { return r.html(nil) }
 
 func (r DueRow) html(m mix) string {
 	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset)) + `>` +
-		r.Tick.html(nil) + r.Mark.html(nil) + title(r.Title, r.Strong, r.TitleBadge) + tags(r.Tags, false) +
+		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Title, r.Strong, r.TitleBadge) + tags(r.Tags, false) +
 		cell(r.Due, "tc-mono", "tc-row__due") + cell(r.Progress, "tc-row__cell", "tc-mono", "tc-row__progress") +
 		source(r.Source, r.SourceHint, nil) + `</div>`
 }

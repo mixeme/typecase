@@ -869,6 +869,9 @@ func (g *gen) row0(e *El) string {
 		if e.Has("tc-row--tickmarkcols--padl14-padr14") {
 			f = append(f, "Inset: true")
 		}
+		if t := e.Kid("tc-row__title"); t != nil && t.Tag == "a" {
+			f = append(f, "Href: "+q(t.Attr("href")))
+		}
 		return "w.DueRow{" + join(f, ", ") + "}"
 	case e.Has("tc-row--tickcols"):
 		if els[0].Has("is-off") {
