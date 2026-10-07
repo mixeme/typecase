@@ -56,7 +56,7 @@ var _ = add(
 		{Icon: "file", Label: "Documents", Href: "/app/files/sftpgo/documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/sftpgo/documents/carrel"}}, On: 2}, "components-39", "tc-tree", 1),
 	rows("new", w.Tree{Rows: []w.TreeRow{
-		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+		{Icon: "file", Label: "Documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
 		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58}}, On: 3}, "s-files-19", "tc-tree", 1),
@@ -91,12 +91,11 @@ var _ = add(
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Shared", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 2}, "s-contacts-2", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
-		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+		{Icon: "file", Label: "Documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Trail: w.Badge{Label: "attachment folder"}},
 		{Icon: "file", Label: "2026-08", Indent: w.TreeLevel58, Trail: w.Badge{Label: "just created"}},
 		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
-		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
 		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 4}, "s-notes-11", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}, Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},

@@ -276,6 +276,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- The owner's decision of 07.10 (Р-37, second part): the tree of the upload
+  sheet shows the storages of the server chosen in the head and their
+  folders — the storages of other servers and the marks of the server on the
+  rows are gone (s-notes-11, s-files-19).
 - The owner's decisions of 07.10. A count and «ro» stand apart in a rail
   (Р-34): a subscription has its count — «—» when not ticked — and «ro» as a
   badge beside it, as a read-only book of contacts has; so has the read-only

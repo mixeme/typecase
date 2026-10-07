@@ -2164,7 +2164,7 @@ func Notes11() Screen {
 								},
 								w.Tree{
 									Rows: []w.TreeRow{
-										{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+										{Icon: "file", Label: "Documents"},
 										{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 										{
 											Icon:   "file",
@@ -2174,7 +2174,6 @@ func Notes11() Screen {
 										},
 										{Icon: "file", Label: "2026-08", Indent: w.TreeLevel58, Trail: w.Badge{Label: "just created"}},
 										{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
-										{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
 										{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}},
 									},
 									On: 4,

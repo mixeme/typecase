@@ -658,7 +658,7 @@ var _ = add(
 			w.Line{Items: []w.LinePart{w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},
 			w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in attachments already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2},
 			w.Tree{Rows: []w.TreeRow{
-				{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+				{Icon: "file", Label: "Documents"},
 				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
 				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58}}, On: 3}}, Variant: w.CardFlush},
