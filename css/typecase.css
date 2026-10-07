@@ -465,6 +465,13 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:14px;padding:14px var(--tc-page-gutter)}
 .tc-tile{border:.5px solid var(--tc-hair);border-radius:4px;background:var(--tc-surface);padding:7px;display:flex;flex-direction:column;gap:6px}
 .tc-tile.is-sel{border-color:var(--tc-accent);background:var(--tc-card)}
+.tc-tile:has(> .tc-tile__box){position:relative}
+.tc-tile__box{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.tc-tile:has(> .tc-tile__box:checked){border-color:var(--tc-accent);background:var(--tc-card)}
+.tc-tile.is-sel:has(> .tc-tile__box:not(:checked)){border-color:var(--tc-hair);background:var(--tc-surface)}
+.tc-tile:has(> .tc-tile__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:1px}
+.tc-tile__box ~ a.tc-tile__name{position:relative;z-index:1}
+a.tc-tile__name:hover,a.tc-table__filename:hover{text-decoration:underline}
 .tc-thumb{aspect-ratio:4/3;border-radius:3px;background:#D9D2BE;display:flex;align-items:center;justify-content:center}
 [data-tc-theme="dark"] .tc-thumb{background:#33403A}
 .tc-thumb svg{width:22px;height:22px;stroke:var(--tc-muted);stroke-width:1.2;fill:none}
@@ -487,6 +494,11 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-tree{display:flex;flex-direction:column;gap:1px;font-size:12.5px}
 .tc-tree__row{display:flex;align-items:center;gap:7px;height:26px;padding:0 8px;border-radius:3px}
 .tc-tree__row.is-on{background:var(--tc-card);font-weight:600}
+.tc-tree__box{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+label.tc-tree__row{cursor:pointer}
+.tc-tree__row:has(> .tc-tree__box:checked){background:var(--tc-card);font-weight:600}
+.tc-tree__row.is-on:has(> .tc-tree__box:not(:checked)){background:none;font-weight:400}
+.tc-tree__row:has(> .tc-tree__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
@@ -515,6 +527,7 @@ a.tc-row__title:hover{text-decoration:underline}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
 /* «Save as» показанного текста (задача 94): файл собирает сценарий страницы — без него кнопки нет. */
 [data-tc-noscript] [data-tc-save]{display:none}
+[data-tc-noscript] button[data-tc-copy],[data-tc-noscript] button[data-tc-copy-from]{display:none}
 /* Файл без сценария (задача 109): кнопка и пункт — подпись поля файла, браузер открывает выбор сам. Со сценарием выбор сразу отправляет форму; без него поле видно, и Upload отправляет. */
 .tc-file{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
 :root:not([data-tc-noscript]) .tc-nojs{display:none}
@@ -529,7 +542,7 @@ a.tc-row__title:hover{text-decoration:underline}
 /* Полоса правки без сценария (задача 104, решения 02.10): правка не перезагружается — остаются Save (submit) и Cancel (ссылка); разметка, автосохранение, ширина, фокус и «⋯» живут сценарием. */
 [data-tc-noscript] .tc-docbar--edit > :not(button[type="submit"]):not(a.tc-btn){display:none}
 /* Файл правки уходит по Save (решение 02.10): выбранный — строкой списка; «Nothing attached» прячется, пока она стоит; полоса Save ждёт отправки с файлами. */
-.tc-runbar[hidden],[data-tc-empty][hidden]{display:none}
+.tc-runbar[hidden],[data-tc-empty][hidden],.tc-fset > [hidden]{display:none}
 /* Строка имени файла импорта (задача 133): без сценария имя показывает само поле файла рядом с Browse — строка не нужна. */
 [data-tc-noscript] [data-tc-filename]{display:none}
 [data-tc-noscript] .tc-file{position:static;opacity:1;width:auto;height:auto;max-width:200px;font-size:11px;pointer-events:auto}
@@ -923,6 +936,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-check::after,.tc-tick::after,.tc-tickrow__tick::after,.tc-seg__opt::after,.tc-menu__item::after{
     content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;
     transform:translate(-50%,-50%);pointer-events:auto}
+  /* Имя-ссылка с многоточием обрезала бы свою зону: зона — её собственные поля (задача 114). */
+  .tc-table__file a.tc-table__filename{overflow:hidden;padding:15px 8px;margin:-15px -8px;min-width:44px}
+  .tc-table__file a.tc-table__filename::after{content:none}
+  /* У имени плитки зона обычная, а длинное имя под пальцем переносится, а не вылезает. */
+  .tc-tile a.tc-tile__name{white-space:normal;overflow-wrap:anywhere}
   .tc-in.is-pick::before{pointer-events:auto;width:44px;height:44px;top:50%;bottom:auto;right:auto;left:50%;
     transform:translate(-50%,-50%);background:transparent}
   .tc-menu.is-pop,.tc-drop{z-index:6;overflow:visible}
@@ -1529,6 +1547,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-tree__row--op-55.tc-tree__row--op-55{opacity:.55}
 .tc-tree__row--padl22.tc-tree__row--padl22{padding-left:22px}
 .tc-tree__row--padl40.tc-tree__row--padl40{padding-left:40px}
+.tc-tree__row--padl58.tc-tree__row--padl58{padding-left:58px}
 .tc-tree__row--padl44.tc-tree__row--padl44{padding-left:44px}
 .tc-tree__row--padl36.tc-tree__row--padl36{padding-left:36px}
 .tc-sec__list.tc-sec__list{font-size:12.5px}

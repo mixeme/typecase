@@ -12,11 +12,12 @@ const (
 	TreeLevel36            // two levels down in a picker of folders
 	TreeLevel40            // two levels down
 	TreeLevel44            // two levels down, under a row with an icon
+	TreeLevel58            // three levels down
 )
 
 func (i TreeIndent) class() string {
 	return [...]string{"", "tc-tree__row--padl1-25rem", "tc-tree__row--padl22", "tc-tree__row--padl36",
-		"tc-tree__row--padl40", "tc-tree__row--padl44"}[i]
+		"tc-tree__row--padl40", "tc-tree__row--padl44", "tc-tree__row--padl58"}[i]
 }
 
 // TreeTrail is what stands at the end of a row of a tree, pushed to it.
@@ -50,11 +51,23 @@ type TreeRow struct {
 	Unavailable bool // cannot be chosen: read-only, already there
 	Trail       TreeTrail
 	Href        string // the node is a link: a folder opens at the address
+	// Send makes the node a radio button of the form the tree stands in: the
+	// chosen node's Value goes under the tree's Name — where to put a thing
+	// (Carrel's task 116). The chosen one is the tree's On; an unavailable
+	// node cannot be chosen.
+	Send Send
 }
 
 func (r TreeRow) html(on bool) string {
 	var s strings.Builder
-	s.WriteString(`<` + rowTag(r.Href) + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", r.Href) + `>`)
+	tag := rowTag(r.Href)
+	if r.Send.Name != "" {
+		tag = "label"
+	}
+	s.WriteString(`<` + tag + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", pick(tag == "a", r.Href)) + `>`)
+	if tag == "label" {
+		s.WriteString(`<input class="tc-tree__box" type="radio"` + attr("name", r.Send.Name) + attr("value", r.Send.Value) + flag("checked", on) + flag("disabled", r.Unavailable) + `>`)
+	}
 	switch {
 	case r.Mark != nil:
 		s.WriteString(r.Mark.html(nil))
@@ -69,7 +82,7 @@ func (r TreeRow) html(on bool) string {
 	if r.Trail != nil {
 		s.WriteString(" " + r.Trail.html(mix{"tc-push"}))
 	}
-	s.WriteString(`</` + rowTag(r.Href) + `>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 
@@ -92,7 +105,7 @@ func (v TreeVariant) class() string {
 // Вход. Tree{Rows, On, Variant}.
 // Состояния. plain | padded | narrow.
 // Инварианты. Уровень строки и отступ дерева — перечисления; выбранная строка — одна, её номер, а не флаг у каждой строки; дерево печатает фрагмент своего кадра.
-// Поведение. Нажатие на строку выбирает её; недоступную строку выбрать нельзя.
+// Поведение. Нажатие на строку выбирает её; недоступную строку выбрать нельзя; строка с `Send` — радиокнопка формы, в которой стоит дерево, и выбирает без сценария.
 // Эталон. кадр `s-notes-11`, фрагмент `.tc-tree`.
 // Содержимое. Строки: значок или метка источника, название (или путь моноширинным), прижатая к концу пометка — приглушённое, моноширинное, бейдж, примечание.
 // Чего нет. Сворачивания ветвей: макет рисует дерево раскрытым.

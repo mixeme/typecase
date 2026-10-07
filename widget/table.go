@@ -104,6 +104,10 @@ type TableFile struct {
 	Mark   *Mark
 	Name   string
 	Accent bool // a link to go up: «..»
+	// Href makes the name a link: a folder opens, a file is chosen (Carrel's
+	// task 114). The row cannot be one, its tick and buttons are controls of
+	// their own.
+	Href string
 }
 
 func (f TableFile) html(mix) string {
@@ -113,7 +117,11 @@ func (f TableFile) html(mix) string {
 	} else {
 		s += `<svg>` + f.Icon.use() + `</svg>`
 	}
-	return s + `<span` + class(nil, "tc-table__filename", pick(f.Accent, "tc-table__filename--accent")) + `>` + esc(f.Name) + `</span></span>`
+	name := "span"
+	if f.Href != "" {
+		name = "a"
+	}
+	return s + `<` + name + class(nil, "tc-table__filename", pick(f.Accent, "tc-table__filename--accent")) + attr("href", f.Href) + `>` + esc(f.Name) + `</` + name + `></span>`
 }
 
 // CellWrap lets the pieces of a cell wrap: a device's rights.
@@ -196,7 +204,7 @@ func (v TableVariant) class() string {
 // Вход. Table{Cols, Rows, Variant, Place}.
 // Состояния. plain | head | picked | folder | off | acts | wide | fit.
 // Инварианты. Ширина и ранг колонки — перечисления, и ячейки колонки берут их из её заголовка; третья и четвёртая колонки уходят первыми на узком экране; таблица печатает фрагмент своего кадра.
-// Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню.
+// Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню; имя со ссылкой (`TableFile.Href`) открывает строку.
 // Эталон. кадр `s-files-1`, фрагмент `.tc-table`.
 // Содержимое. Заголовки колонок, строки: имя со значком или меткой, значения, моноширинное, две строки, метки, теги, бейджи, галка, кнопки, выпадашка.
 // Чего нет. Сортировки по заголовку: сортирует переключатель бара.

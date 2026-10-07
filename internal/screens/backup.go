@@ -755,7 +755,7 @@ func Backup3() Screen {
 										Kind: w.CardTop8,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary},
+											w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary, CopyFrom: "trigger-script"},
 											w.Button{
 												Label:    "Save as",
 												Icon:     "down",

@@ -15,6 +15,37 @@ do, not what the authors did.
 
 ### Added
 
+- **A file's name and a tile are links, a tile is picked without a script**
+  (Carrel's task 114). `TableFile.Href` makes the name of a table's row the
+  link — a folder opens, a file is chosen; the row is not a link, its tick
+  and buttons are controls of their own, so `TableRow` has no `Href`.
+  `Tile.Href` does the same for a tile's name; `Tile.Send` makes the tile a
+  checkbox of the form it stands in (`tc-tile__box`, over the whole tile and
+  with no look of its own: the picked tile is the outlined one). Drawn in
+  s-files-1, -5, -6 and s-publish-1; the shape check takes a screen with or
+  without them. Under a finger the link of a table's name has its 44 px zone
+  in its own padding, and a tile's long name wraps. `TestTilePick`.
+- **A tree's third level and a node that sends its value** (Carrel's task
+  116). `TreeLevel58` is three levels down. `TreeRow.Send` makes a node a
+  radio button of the form the tree stands in (`tc-tree__box`): the chosen
+  folder goes under the tree's name with the sheet's button, without a
+  script; the tree's `On` is the checked one, an unavailable node is
+  disabled. Drawn in the sheet of s-files-4 (`to`), which is a form there
+  with «Move here» as its submit; the generator of screens reads a sheet's
+  form and a submit button (`Sheet.Action`, `Button.Submit`). `TestTreeSend`.
+- **Remove of a repeated field's row, in place** (Carrel's task 86):
+  `Button.Removes` on the Remove of a phone, an address — with the library's
+  script the row's fields are emptied and hidden where they stand, under
+  their names, and the labels of the first row go to the row that is first
+  now; without a script the button submits (`Submit`, `Name`, `Value`) as
+  before. `TestRemoveRow`.
+- **Copy** (Carrel's task 118): `Button.Copy` is the text the button puts on
+  the clipboard, `Button.CopyFrom` the ID of the element whose text it puts
+  there (an `Input`'s value, a `Diag`'s text) — with the library's script
+  (`data-tc-copy`, `data-tc-copy-from`). Without a script a button is not
+  shown and the text is selected by hand; a button with `Href` stays a link
+  to the page that shows the text. Drawn on the published links (s-publish-1)
+  and on the script of a backup job (s-backup-3). `TestCopy`.
 - **An import's file field as drawn** (Carrel's task 133): Browse is the
   label of the file input (`Button.File`); `FileField.Shows` names the line
   that shows the picked file's name — `Input{Picked: true, ID}`, read-only,
@@ -240,6 +271,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's task 116: the files of «attachments» in the sheet From Files
+  stand a level under their folder, not beside it (s-files-16).
+- Carrel's tasks 105 and 127: the rail of notes has its third notebook, the
+  read-only «Общие с семьёй», not ticked — the head's «2 of 3 notebooks» and
+  the Notebook pick of an edit name it (s-notes-1, -2, -3, -10, -20, -26,
+  -27, s-conflict-5, s-io-4, -8, s-publish-4, phone-8, -9); the note's panel shows
+  what its page shows — the second task done and struck, two related records
+  (s-notes-1; `SecTasks` strikes a done task as `DocTasks` does).
 - Carrel's task 128 (the owner's decision of 03.10): a folder's count and a
   picture's dimensions stand only where they are known without a request of
   their own — a folder without a count is «folder» in the list (s-files-1)

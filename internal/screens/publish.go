@@ -89,7 +89,15 @@ func Publish1() Screen {
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("file")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-10")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("No expiry")}, Mono: true},
@@ -97,7 +105,7 @@ func Publish1() Screen {
 									{Parts: []w.CellPart{w.Text("0")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Copy", Small: true},
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e"},
 											w.Button{Label: "Send", Small: true, Secondary: true},
 											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 										},
@@ -120,7 +128,15 @@ func Publish1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный · 10–31 August"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Mark: &w.Mark{Colour: "#4A6B52"},
+												Name: "Личный · 10–31 August",
+												Href: "/app/agenda/nextcloud/lichny?view=range&from=2026-08-10&to=2026-08-31",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-09")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-09-08")}, Mono: true},
@@ -128,7 +144,7 @@ func Publish1() Screen {
 									{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Copy", Small: true},
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics"},
 											w.Button{Label: "Send", Small: true, Secondary: true},
 											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 										},
@@ -583,6 +599,13 @@ func Publish4() Screen {
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
 							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Label:  "Общие с семьёй",
+								Hidden: true,
+								Trail:  w.Badge{Label: "ro"},
+							},
 						},
 					},
 					w.RailFoot{

@@ -670,7 +670,7 @@ func (g *gen) tickrow(e *El) string {
 }
 
 var treeIndent = []kv{{"tc-tree__row--padl1-25rem", "TreeLevel20"}, {"tc-tree__row--padl22", "TreeLevel22"}, {"tc-tree__row--padl36", "TreeLevel36"},
-	{"tc-tree__row--padl40", "TreeLevel40"}, {"tc-tree__row--padl44", "TreeLevel44"}}
+	{"tc-tree__row--padl40", "TreeLevel40"}, {"tc-tree__row--padl44", "TreeLevel44"}, {"tc-tree__row--padl58", "TreeLevel58"}}
 
 func (g *gen) tree(e *El) string {
 	var f, rows []string
@@ -684,6 +684,10 @@ func (g *gen) tree(e *El) string {
 			on = i + 1
 		}
 		els := r.Els()
+		box := r.Kid("tc-tree__box")
+		if box != nil {
+			els = els[1:]
+		}
 		if lead := els[0]; lead.Tag == "svg" {
 			x = append(x, "Icon: "+icon(lead))
 		} else if lead.Has("tc-mark") {
@@ -711,6 +715,9 @@ func (g *gen) tree(e *El) string {
 		}
 		if h := r.Attr("href"); h != "" {
 			x = append(x, "Href: "+q(h))
+		}
+		if box != nil {
+			x = append(x, "Send: "+sendOf(box))
 		}
 		if t := tr; t != nil {
 			switch {
@@ -988,6 +995,24 @@ var sheetWidth = []kv{{"tc-sheet--w400", "SheetWidth400"}, {"tc-sheet--w480", "S
 
 func (g *gen) sheet(e *El) string {
 	var f []string
+	if e.Tag == "form" {
+		if id := e.Attr("id"); id != "" {
+			f = append(f, "ID: "+q(id))
+		}
+		f = append(f, "Action: "+q(e.Attr("action")))
+		if m := e.Attr("method"); m != "" && m != "post" {
+			f = append(f, "Method: "+q(m))
+		}
+		var hidden []*El
+		for _, k := range e.Els() {
+			if k.Tag == "input" && k.Attr("type") == "hidden" {
+				hidden = append(hidden, k)
+			}
+		}
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
+		}
+	}
 	head := e.Kid("tc-sheet__head")
 	if s := svgs(head); len(s) > 0 {
 		f = append(f, "Icon: "+icon(s[0]))

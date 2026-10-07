@@ -110,7 +110,7 @@ func Contacts1() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/contacts",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -123,7 +123,7 @@ func Contacts1() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 								w.Mono{Text: "312"},
 							},
@@ -326,7 +326,7 @@ func Contacts2() Screen {
 											w.CheckForm{
 												Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 												Action: "/app/contacts",
-												Apply:  w.Button{Label: "Apply", Small: true},
+												Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 											},
 										},
 										Pop:    w.MenuUnderEnd,
@@ -339,7 +339,7 @@ func Contacts2() Screen {
 									w.CheckForm{
 										Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 										Action: "/app/contacts",
-										Apply:  w.Button{Label: "Apply", Small: true},
+										Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 									},
 									w.Mono{Text: "312"},
 								},
@@ -1703,7 +1703,7 @@ func Contacts7() Screen {
 							w.Range{
 								From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-01-01", Label: "From", Mono: true},
 								To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-10", Label: "To", Mono: true},
-								Show:   w.Button{Label: "Show"},
+								Show:   w.Button{Label: "Show", Submit: true},
 								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
 							},
 							w.SegFold{

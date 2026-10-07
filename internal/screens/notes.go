@@ -46,6 +46,13 @@ func Notes1() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
@@ -155,7 +162,7 @@ func Notes1() Screen {
 							w.SecTasks{
 								Items: []w.DocTask{
 									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
-									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
+									{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 								},
 							},
 						},
@@ -218,7 +225,13 @@ func Notes1() Screen {
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}},
 									},
+									[]w.SecItemPart{
+										w.Span{Face: w.FaceAccent, Text: "Дописать раздел про кэш"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· task")}},
+									},
 								},
+								Gap: 6,
 							},
 						},
 					},
@@ -249,6 +262,13 @@ func Notes2() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
@@ -452,6 +472,13 @@ func Notes27() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
@@ -641,6 +668,13 @@ func Notes3() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
@@ -827,6 +861,13 @@ func Notes20() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
@@ -1898,6 +1939,13 @@ func Notes10() Screen {
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
 							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Label:  "Общие с семьёй",
+								Hidden: true,
+								Trail:  w.Badge{Label: "ro"},
+							},
 						},
 					},
 					w.RailFoot{

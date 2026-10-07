@@ -164,12 +164,24 @@ func Files1() Screen {
 						},
 						Rows: []w.TableRow{
 							{
-								Cells: []w.TableCell{{}, {Parts: []w.CellPart{w.TableFile{Icon: "back", Name: "up one folder", Accent: true}}, Span: 5}},
+								Cells: []w.TableCell{
+									{},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+										},
+										Span: 5,
+									},
+								},
 							},
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
@@ -180,7 +192,15 @@ func Files1() Screen {
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOn)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-10-sync-board.png",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
@@ -197,7 +217,15 @@ func Files1() Screen {
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "release-checklist.md",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
@@ -213,7 +241,15 @@ func Files1() Screen {
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
@@ -229,7 +265,15 @@ func Files1() Screen {
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-04-whiteboard.jpg",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
@@ -643,8 +687,9 @@ func Files4() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "move",
-					Title: "Move 3 items",
+					Action: "/app/files/sftpgo/documents/op/carrel/attachments?op=move",
+					Icon:   "move",
+					Title:  "Move 3 items",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("from Documents / carrel / attachments")},
@@ -660,12 +705,43 @@ func Files4() Screen {
 						},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
-								{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
-								{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
-								{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
-								{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
-								{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}},
+								{
+									Icon:  "file",
+									Label: "Documents",
+									Send:  w.Send{Name: "to", Value: "sftpgo/documents"},
+									Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11},
+								},
+								{
+									Icon:   "file",
+									Label:  "carrel",
+									Indent: w.TreeLevel22,
+									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel"},
+								},
+								{
+									Icon:   "file",
+									Label:  "2026-07",
+									Indent: w.TreeLevel40,
+									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/2026-07"},
+								},
+								{
+									Icon:   "file",
+									Label:  "attachments",
+									Indent: w.TreeLevel40,
+									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"},
+								},
+								{
+									Icon:  "file",
+									Label: "Files",
+									Send:  w.Send{Name: "to", Value: "nextcloud/files"},
+									Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11},
+								},
+								{
+									Icon:        "file",
+									Label:       "Public",
+									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "sftpgo/public"},
+									Trail:       w.Badge{Label: "read-only"},
+								},
 							},
 							On: 3,
 						},
@@ -679,7 +755,7 @@ func Files4() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Move here", Kind: w.ButtonPrimary},
+						w.Button{Label: "Move here", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
@@ -800,13 +876,56 @@ func Files5() Screen {
 					},
 					w.Grid{
 						Tiles: []w.Tile{
-							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "whiteboard.jpg", Meta: "2.8 MB · 4032×3024", Selected: true},
-							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-1.png", Meta: "640 KB"},
-							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-2.png", Meta: "712 KB"},
-							w.Tile{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, Name: "смета.pdf", Meta: "1.2 MB"},
-							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "архив", Meta: ""},
-							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "черновики", Meta: "0 items"},
-							w.Tile{Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard}, Name: "панорама.tif", Meta: "84 MB · too large"},
+							w.Tile{
+								Thumb:    w.Thumb{Icon: "img"},
+								Name:     "whiteboard.jpg",
+								Meta:     "2.8 MB · 4032×3024",
+								Selected: true,
+								Href:     "/app/files/sftpgo/documents/carrel/attachments/2026-07/whiteboard.jpg",
+								Send:     w.Send{Name: "item", Value: "whiteboard.jpg"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "img"},
+								Name:  "схема-1.png",
+								Meta:  "640 KB",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-1.png",
+								Send:  w.Send{Name: "item", Value: "схема-1.png"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "img"},
+								Name:  "схема-2.png",
+								Meta:  "712 KB",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-2.png",
+								Send:  w.Send{Name: "item", Value: "схема-2.png"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard},
+								Name:  "смета.pdf",
+								Meta:  "1.2 MB",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/смета.pdf",
+								Send:  w.Send{Name: "item", Value: "смета.pdf"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard},
+								Name:  "архив",
+								Meta:  "",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/архив",
+								Send:  w.Send{Name: "item", Value: "архив"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard},
+								Name:  "черновики",
+								Meta:  "0 items",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/черновики",
+								Send:  w.Send{Name: "item", Value: "черновики"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard},
+								Name:  "панорама.tif",
+								Meta:  "84 MB · too large",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/панорама.tif",
+								Send:  w.Send{Name: "item", Value: "панорама.tif"},
+							},
 						},
 					},
 				},
@@ -910,7 +1029,9 @@ func Files6() Screen {
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Documents"}}},
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Documents", Href: "/app/files/sftpgo/documents"}},
+									},
 									{Parts: []w.CellPart{w.Text("sftpgo · vps")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("rw")}, Mono: true},
 									{Parts: []w.CellPart{w.Badge{Label: "attachments"}}},
@@ -919,7 +1040,7 @@ func Files6() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Files"}}},
+									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "Files", Href: "/app/files/nextcloud/files"}}},
 									{Parts: []w.CellPart{w.Text("nextcloud")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("rw")}, Mono: true},
 									{},

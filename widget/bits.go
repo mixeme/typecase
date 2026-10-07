@@ -576,10 +576,10 @@ func (t Thumb) html(m mix) string {
 // Tile — tc-tile
 //
 // Роль. Плитка файла в сетке: миниатюра, имя, размер.
-// Вход. Tile{Thumb, Name, Meta, Selected}.
-// Состояния. plain | selected.
+// Вход. Tile{Thumb, Name, Meta, Selected, Href, Send}.
+// Состояния. plain | selected | pick.
 // Инварианты. Имя — одной строкой с многоточием; плитка печатает фрагмент своего кадра.
-// Поведение. Нажатие выбирает плитку; двойное — открывает файл.
+// Поведение. Нажатие выбирает плитку: с `Send` она — флажок формы во всю плитку, без своего вида, выбранную рисует рамка; нажатие на имя со ссылкой открывает файл.
 // Эталон. кадр `components-25`, фрагмент `.tc-tile`.
 // Содержимое. Миниатюра, имя, размер.
 // Чего нет. Действий на плитке: они в баре выделения.
@@ -588,14 +588,26 @@ type Tile struct {
 	Name     string
 	Meta     string
 	Selected bool
+	// Href makes the name a link to the file (Carrel's task 114).
+	Href string
+	// Send makes the tile a checkbox of the form it stands in: its Name and
+	// Value go with a bulk action, and the tile is picked without a script.
+	Send Send
 }
 
 // Render prints the tile.
 func (t Tile) Render() string { return t.html(nil) }
 
 func (t Tile) html(m mix) string {
-	return `<div` + class(m, "tc-tile", is("sel", t.Selected)) + `>` + t.Thumb.html(nil) + `<span class="tc-tile__name">` + esc(t.Name) +
-		`</span><span class="tc-tile__meta">` + esc(t.Meta) + `</span></div>`
+	name, box := "span", ""
+	if t.Href != "" {
+		name = "a"
+	}
+	if t.Send.Name != "" {
+		box = `<input class="tc-tile__box" type="checkbox"` + attr("name", t.Send.Name) + attr("value", t.Send.Value) + attr("aria-label", "Pick "+t.Name) + flag("checked", t.Selected) + `>`
+	}
+	return `<div` + class(m, "tc-tile", is("sel", t.Selected)) + `>` + box + t.Thumb.html(nil) + `<` + name + ` class="tc-tile__name"` + attr("href", t.Href) + `>` + esc(t.Name) +
+		`</` + name + `><span class="tc-tile__meta">` + esc(t.Meta) + `</span></div>`
 }
 
 // Grid — tc-grid

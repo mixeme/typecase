@@ -1061,3 +1061,179 @@ func TestConflictForm(t *testing.T) {
 		t.Errorf("sent %q; want choice.1=server", sent)
 	}
 }
+
+// TestCopy (Carrel's task 118): Copy puts the text it names, or the text of
+// the element it names, on the clipboard — with the library's script. Without
+// a script a button is not shown and the text is selected by hand; a link
+// stays a link to the page that shows the text.
+func TestCopy(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	body := `<div class="tc-root"><div class="tc-main">` + w.Diag{ID: "script", Text: "#!/bin/sh\necho hello"}.Render() +
+		w.Button{Label: "Copy the script", CopyFrom: "script"}.Render() +
+		w.Button{Label: "Copy", Copy: "https://carrel.example/p/9c1f4e"}.Render() +
+		w.Button{Label: "Copy link", Href: "/app/files/published/9c1f4e", Copy: "https://carrel.example/p/9c1f4e"}.Render() + `</div></div>`
+	bare := h.RegisterPage("copy-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	var shown string
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(`[...document.querySelectorAll("[data-tc-copy], [data-tc-copy-from]")].map(b => b.tagName + ":" + b.checkVisibility()).join(" ")`, &shown),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if shown != "BUTTON:false BUTTON:false A:true" {
+		t.Errorf("without a script: %q; want the buttons not shown and the link shown", shown)
+	}
+	page := h.RegisterPage("copy", browser.PageHTML(body, ""))
+	var got, at string
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(`window.__copied = []; Object.defineProperty(navigator, "clipboard", {value: {writeText: x => { window.__copied.push(x); return Promise.resolve(); }}, configurable: true}); true`, nil),
+		chromedp.Click(`[data-tc-copy-from]`, chromedp.ByQuery),
+		chromedp.Click(`button[data-tc-copy]`, chromedp.ByQuery),
+		chromedp.Click(`a[data-tc-copy]`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__copied.join("|")`, &got),
+		chromedp.Evaluate(`location.pathname`, &at),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if want := "#!/bin/sh\necho hello|https://carrel.example/p/9c1f4e|https://carrel.example/p/9c1f4e"; got != want {
+		t.Errorf("with the script: copied %q; want %q", got, want)
+	}
+	if strings.Contains(at, "published") {
+		t.Errorf("with the script the Copy link went to %s; want it to stay", at)
+	}
+}
+
+// TestTilePick (Carrel's task 114): a tile with Send is a checkbox of its
+// form — a press anywhere but the name picks it without a script, the picked
+// one is the outlined one, a press again takes it back, and the name is a
+// link.
+func TestTilePick(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	grid := w.Grid{Tiles: []w.Tile{
+		{Thumb: w.Thumb{Icon: "img"}, Name: "a.jpg", Meta: "2 MB", Selected: true, Href: "/files/a.jpg", Send: w.Send{Name: "item", Value: "a.jpg"}},
+		{Thumb: w.Thumb{Icon: "img"}, Name: "b.png", Meta: "1 MB", Href: "/files/b.png", Send: w.Send{Name: "item", Value: "b.png"}}}}
+	body := `<div class="tc-root"><div class="tc-main"><form id="sel" action="/x" method="post">` + grid.Render() + `</form>` +
+		w.Button{Label: "Delete", Form: "sel"}.Render() + `</div></div>`
+	bare := h.RegisterPage("tile-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	const marked = `[...document.querySelectorAll(".tc-tile")].map(c => c.querySelector(":checked") ? "on" : "off").join(" ")`
+	const edges = `[...document.querySelectorAll(".tc-tile")].map(c => getComputedStyle(c).borderTopColor).join("|")`
+	var before, after, sent, e0, e1, href string
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(marked, &before),
+		chromedp.Evaluate(edges, &e0),
+		chromedp.Click(`.tc-tile:nth-child(1) .tc-thumb`, chromedp.ByQuery),
+		chromedp.Click(`.tc-tile:nth-child(2) .tc-thumb`, chromedp.ByQuery),
+		chromedp.Evaluate(marked, &after),
+		chromedp.Evaluate(edges, &e1),
+		chromedp.Evaluate(`(() => { const r = document.querySelector(".tc-tile:nth-child(2) .tc-tile__name").getBoundingClientRect(); const a = document.elementFromPoint(r.x + 3, r.y + r.height / 2); return a.getAttribute("href") || a.tagName; })()`, &href),
+		chromedp.Evaluate(`document.addEventListener("submit", e => { e.preventDefault(); window.__sent = new URLSearchParams(new FormData(e.target)).toString(); }); true`, nil),
+		chromedp.Click(`.tc-btn`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "on off" || after != "off on" {
+		t.Errorf("picked: before %q, after %q; want on off, off on", before, after)
+	}
+	a, b := strings.Split(e0, "|"), strings.Split(e1, "|")
+	if len(a) != 2 || len(b) != 2 || a[0] == a[1] || a[0] != b[1] || a[1] != b[0] {
+		t.Errorf("the outline: before %q, after %q; want it to move from the first tile to the second", e0, e1)
+	}
+	if href != "/files/b.png" {
+		t.Errorf("under the name stands %q; want the link /files/b.png", href)
+	}
+	if sent != "item=b.png" {
+		t.Errorf("sent %q; want item=b.png", sent)
+	}
+}
+
+// TestTreeSend (Carrel's task 116): a tree's nodes with Send are radio buttons
+// of the sheet's form — a press chooses a folder without a script, the chosen
+// one is the marked one, an unavailable one cannot be chosen, and the sheet's
+// button sends the choice.
+func TestTreeSend(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	node := func(label, v string, indent w.TreeIndent, off bool) w.TreeRow {
+		return w.TreeRow{Icon: "file", Label: label, Indent: indent, Unavailable: off, Send: w.Send{Name: "to", Value: v}}
+	}
+	sheet := w.Sheet{Title: "Move 3 items", Action: "/x", Body: []w.SheetPart{w.Tree{Rows: []w.TreeRow{
+		node("Documents", "documents", w.TreeLevel0, false), node("carrel", "documents/carrel", w.TreeLevel22, false),
+		node("2026-07", "documents/carrel/2026-07", w.TreeLevel40, false), node("Public", "public", w.TreeLevel0, true)}, On: 3}},
+		Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary, Submit: true}}}
+	body := `<div class="tc-root">` + sheet.Render() + `</div>`
+	bare := h.RegisterPage("tree-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	const marked = `[...document.querySelectorAll(".tc-tree__row")].map(c => getComputedStyle(c).fontWeight === "600" ? "on" : "off").join(" ")`
+	var before, after, sent string
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(marked, &before),
+		chromedp.Click(`.tc-tree__row:nth-child(4)`, chromedp.ByQuery),
+		chromedp.Click(`.tc-tree__row:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(marked, &after),
+		chromedp.Evaluate(`document.addEventListener("submit", e => { e.preventDefault(); window.__sent = new URLSearchParams(new FormData(e.target)).toString(); }); true`, nil),
+		chromedp.Click(`.tc-btn.is-primary`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "off off on off" || after != "off on off off" {
+		t.Errorf("the chosen folder marked: before %q, after %q; want the third, then the second", before, after)
+	}
+	if sent != "to=documents%2Fcarrel" {
+		t.Errorf("sent %q; want to=documents%%2Fcarrel", sent)
+	}
+}
+
+// TestRemoveRow (Carrel's task 86): Remove of a repeated field's row empties
+// the row's fields and hides them in place — they stay in the form under
+// their names, the other rows keep theirs, and the labels of the first row go
+// to the row that is first now. Without a script the button submits.
+func TestRemoveRow(t *testing.T) {
+	needChrome(t)
+	row := func(n, v string, labels bool) []w.FieldSetPart {
+		lab := ""
+		if labels {
+			lab = "Number"
+		}
+		return []w.FieldSetPart{w.Field{Label: lab, Parts: []w.FieldPart{w.Input{Name: "tel." + n, Value: v, Mono: true, Label: "Number"}}},
+			w.Button{Label: "Remove", Kind: w.ButtonDanger, Submit: true, Name: "remove", Value: "tel." + n, Removes: true}, w.Grow{}}
+	}
+	items := append(row("0", "+7 912 445-10-88", true), row("1", "+7 495 120-45-00", false)...)
+	set := w.FieldSet{Rubric: w.Rubric{Text: "Phone numbers"}, Items: items}
+	form := w.Form{Action: "/x", Items: []w.FormPart{set}}
+	body := `<div class="tc-root">` + form.Render() + `</div>`
+	h := browser.NewHarness(t)
+	const state = `[...document.querySelectorAll("form.tc-form input")].map(i => i.name + "=" + i.value + (i.checkVisibility() ? "" : " hidden")).join(",")`
+	const sends = `document.addEventListener("submit", e => { e.preventDefault(); window.__sent = (e.submitter && e.submitter.value) || "?"; }); true`
+	var got, lab, sent string
+	var buttons int
+	if err := h.Run(h.RegisterPage("removerow", browser.PageHTML(body, "")), 900, 600,
+		chromedp.Evaluate(sends, nil),
+		chromedp.Click(`[data-tc-remove]`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &got),
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-field")].filter(f => f.checkVisibility()).map(f => (f.querySelector("label") || {textContent: "-"}).textContent).join(",")`, &lab),
+		chromedp.Evaluate(`[...document.querySelectorAll("[data-tc-remove]")].filter(b => b.checkVisibility()).length`, &buttons),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if got != "tel.0= hidden,tel.1=+7 495 120-45-00" {
+		t.Errorf("after Remove of the first row: %s; want tel.0 empty and hidden, tel.1 as it was", got)
+	}
+	if lab != "Number" || buttons != 1 || sent != "" {
+		t.Errorf("the row left: label %q, %d Remove, sent %q; want Number, 1, nothing sent", lab, buttons, sent)
+	}
+	bare := h.RegisterPage("removerow-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(sends, nil),
+		chromedp.Click(`[data-tc-remove]`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &got),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if sent != "tel.0" || strings.Contains(got, "hidden") {
+		t.Errorf("without a script: sent %q, fields %s; want remove=tel.0 sent and nothing hidden", sent, got)
+	}
+}

@@ -178,7 +178,14 @@ func (t SecTasks) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
 	for _, it := range t.Items {
-		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil) + esc(it.Text) + `</li>`)
+		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil))
+		if it.Tick.Done {
+			// a done task is struck, as on the note's page
+			s.WriteString(Dim{Parts: []Inline{Text(it.Text)}, Variant: DimStruck}.html(nil))
+		} else {
+			s.WriteString(esc(it.Text))
+		}
+		s.WriteString(`</li>`)
 	}
 	s.WriteString(`</ul>`)
 	return s.String()

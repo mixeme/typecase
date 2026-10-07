@@ -388,6 +388,13 @@ func Conflict5() Screen {
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailFoot{

@@ -234,7 +234,7 @@ func States3() Screen {
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-								Show:      w.Button{Label: "Show"},
+								Show:      w.Button{Label: "Show", Submit: true},
 								Hidden:    []w.Hidden{{Name: "view", Value: "range"}},
 								Secondary: true,
 								Action:    "/app/calendar",
@@ -248,7 +248,7 @@ func States3() Screen {
 								},
 								Action:   "/app/calendar",
 								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true},
+								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 							},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -263,13 +263,13 @@ func States3() Screen {
 											},
 											Action:   "/app/calendar",
 											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true},
+											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-											Show:   w.Button{Label: "Show"},
+											Show:   w.Button{Label: "Show", Submit: true},
 											Hidden: []w.Hidden{{Name: "view", Value: "range"}},
 											Action: "/app/calendar",
 											Wrap:   true,
@@ -278,7 +278,7 @@ func States3() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/calendar",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -291,7 +291,7 @@ func States3() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/calendar",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 							},
 							Secondary: true,
@@ -422,7 +422,7 @@ func States4() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/contacts",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -435,7 +435,7 @@ func States4() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 								w.Mono{Text: "13"},
 							},
@@ -692,7 +692,7 @@ func States6() Screen {
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-								Show:      w.Button{Label: "Show"},
+								Show:      w.Button{Label: "Show", Submit: true},
 								Hidden:    []w.Hidden{{Name: "view", Value: "range"}},
 								Secondary: true,
 								Action:    "/app/calendar",
@@ -706,7 +706,7 @@ func States6() Screen {
 								},
 								Action:   "/app/calendar",
 								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true},
+								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 							},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -721,13 +721,13 @@ func States6() Screen {
 											},
 											Action:   "/app/calendar",
 											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true},
+											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-											Show:   w.Button{Label: "Show"},
+											Show:   w.Button{Label: "Show", Submit: true},
 											Hidden: []w.Hidden{{Name: "view", Value: "range"}},
 											Action: "/app/calendar",
 											Wrap:   true,
@@ -736,7 +736,7 @@ func States6() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/calendar",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -749,7 +749,7 @@ func States6() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/calendar",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 							},
 							Secondary: true,
@@ -1312,7 +1312,7 @@ func States8() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/contacts",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -1325,7 +1325,7 @@ func States8() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 								w.Mono{Text: "5"},
 							},
@@ -1500,7 +1500,7 @@ func States9() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/contacts",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -1513,7 +1513,7 @@ func States9() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/contacts",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 								w.Mono{Text: "5"},
 							},
@@ -2104,7 +2104,7 @@ func States13() Screen {
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-								Show:      w.Button{Label: "Show"},
+								Show:      w.Button{Label: "Show", Submit: true},
 								Hidden:    []w.Hidden{{Name: "view", Value: "range"}},
 								Secondary: true,
 								Action:    "/app/calendar",
@@ -2118,7 +2118,7 @@ func States13() Screen {
 								},
 								Action:   "/app/calendar",
 								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true},
+								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 							},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -2133,13 +2133,13 @@ func States13() Screen {
 											},
 											Action:   "/app/calendar",
 											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true},
+											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
-											Show:   w.Button{Label: "Show"},
+											Show:   w.Button{Label: "Show", Submit: true},
 											Hidden: []w.Hidden{{Name: "view", Value: "range"}},
 											Action: "/app/calendar",
 											Wrap:   true,
@@ -2148,7 +2148,7 @@ func States13() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/calendar",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -2161,7 +2161,7 @@ func States13() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/calendar",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 							},
 							Secondary: true,
@@ -2444,7 +2444,7 @@ func States15() Screen {
 							w.Range{
 								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-11-02", Label: "From", Mono: true},
 								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-08", Label: "To", Mono: true},
-								Show:      w.Button{Label: "Show"},
+								Show:      w.Button{Label: "Show", Submit: true},
 								Hidden:    []w.Hidden{{Name: "view", Value: "range"}},
 								Secondary: true,
 								Action:    "/app/calendar",
@@ -2458,7 +2458,7 @@ func States15() Screen {
 								},
 								Action:   "/app/calendar",
 								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true},
+								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 							},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
@@ -2473,13 +2473,13 @@ func States15() Screen {
 											},
 											Action:   "/app/calendar",
 											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true},
+											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-11-02", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-08", Label: "To", Mono: true},
-											Show:   w.Button{Label: "Show"},
+											Show:   w.Button{Label: "Show", Submit: true},
 											Hidden: []w.Hidden{{Name: "view", Value: "range"}},
 											Action: "/app/calendar",
 											Wrap:   true,
@@ -2488,7 +2488,7 @@ func States15() Screen {
 										w.CheckForm{
 											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 											Action: "/app/calendar",
-											Apply:  w.Button{Label: "Apply", Small: true},
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 										},
 									},
 									Pop:    w.MenuUnderEnd,
@@ -2501,7 +2501,7 @@ func States15() Screen {
 								w.CheckForm{
 									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
 									Action: "/app/calendar",
-									Apply:  w.Button{Label: "Apply", Small: true},
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
 							},
 							Secondary: true,

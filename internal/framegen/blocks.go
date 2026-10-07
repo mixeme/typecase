@@ -329,8 +329,15 @@ func (g *gen) thumb(e *El) string {
 
 func (g *gen) tile(e *El) string {
 	s := "w.Tile{Thumb: " + g.thumb(e.Kid("tc-thumb")) + ", Name: " + q(e.Kid("tc-tile__name").Text()) + ", Meta: " + q(e.Kid("tc-tile__meta").Text())
+	box := e.Kid("tc-tile__box")
 	if e.Has("is-sel") {
 		s += ", Selected: true"
+	}
+	if h := e.Kid("tc-tile__name").Attr("href"); h != "" {
+		s += ", Href: " + q(h)
+	}
+	if box != nil {
+		s += ", Send: " + sendOf(box)
 	}
 	return s + "}"
 }
@@ -758,6 +765,9 @@ func (g *gen) cellPart(x *El) string {
 		f = append(f, "Name: "+q(name.Text()))
 		if name.Has("tc-table__filename--accent") {
 			f = append(f, "Accent: true")
+		}
+		if h := name.Attr("href"); h != "" {
+			f = append(f, "Href: "+q(h))
 		}
 		return "w.TableFile{" + join(f, ", ") + "}"
 	case x.Tag == "br":

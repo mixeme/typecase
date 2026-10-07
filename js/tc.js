@@ -330,6 +330,8 @@
 				var list = picked.parentNode;
 				picked.remove();
 				emptyWords(list);
+			} else {
+				removeRow(removes);
 			}
 			return;
 		}
@@ -402,6 +404,20 @@
 				}, 1000);
 			}
 			return;
+		}
+
+		// Copy: the text named, or the text of the element named, goes to the
+		// clipboard (Carrel's task 118). A browser that refuses lets the press
+		// go on: a link goes to the page that shows the text.
+		var copy = closest(e.target, "[data-tc-copy], [data-tc-copy-from]");
+		if (copy && navigator.clipboard && navigator.clipboard.writeText) {
+			var src = document.getElementById(copy.getAttribute("data-tc-copy-from") || "");
+			var text = src ? ("value" in src ? src.value : src.textContent) : copy.getAttribute("data-tc-copy");
+			if (text) {
+				e.preventDefault();
+				navigator.clipboard.writeText(text);
+				return;
+			}
 		}
 
 		var add = closest(e.target, "[data-tc-add]");
@@ -498,6 +514,39 @@
 		var first = row.querySelector("input, select, textarea");
 		tpl.parentNode.insertBefore(row, tpl);
 		if (first) first.focus();
+	}
+
+	// Remove of a row of a repeated field (a phone, an address): the row's
+	// fields are emptied and hidden where they stand — they stay in the form
+	// under their names, and the server drops the empty row with Save
+	// (Carrel's task 86). The labels the first row carries go to the row that
+	// is first now.
+	function removeRow(btn) {
+		var isField = function (n) {
+			return n && n.classList.contains("tc-field");
+		};
+		var row = [];
+		for (var n = btn.previousElementSibling; isField(n); n = n.previousElementSibling) row.unshift(n);
+		var gap = btn.nextElementSibling;
+		var after = [];
+		for (var m = gap && gap.classList.contains("tc-grow") ? gap.nextElementSibling : null; isField(m); m = m.nextElementSibling) after.push(m);
+		row.forEach(function (f, i) {
+			var lab = f.querySelector(":scope > label");
+			var to = after[i];
+			if (lab && to && !to.querySelector(":scope > label")) {
+				lab.removeAttribute("for");
+				to.insertBefore(lab, to.firstChild);
+			}
+			f.querySelectorAll("input, textarea").forEach(function (x) {
+				if (x.type === "checkbox" || x.type === "radio") x.checked = false;
+				else if (x.type !== "hidden") x.value = "";
+			});
+			f.hidden = true;
+		});
+		btn.hidden = true;
+		if (gap && gap.classList.contains("tc-grow")) gap.hidden = true;
+		var next = after[0] && after[0].querySelector("input, select, textarea, button");
+		if (next) next.focus();
 	}
 
 	// A file dragged over the page shows the drop sheet (data-tc-drop); the

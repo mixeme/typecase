@@ -102,7 +102,7 @@ var _ = add(
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 1),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH19}, "s-agenda-1", "tc-mark", 18),
 	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 11),
-	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH12}, "s-notes-2", "tc-mark", 3),
+	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH12}, "s-notes-2", "tc-mark", 4),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH14}, "desktop-8", "tc-mark", 1),
 	primitive("focus", w.Mark{Colour: "#8C6239", Size: w.MarkH18, Focus: true}, "s-profile-10", "tc-mark", 12),
 
@@ -126,7 +126,7 @@ var _ = add(
 	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 5),
 	primitive("accent", w.Badge{Label: "credentials unlocked · 4:12", Accent: true}, "s-profile-4", "tc-badge", 1),
 	primitive("local", w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}, "s-plan-1", "tc-badge", 2),
-	primitive("icon", w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}, "s-notes-1", "tc-badge", 2),
+	primitive("icon", w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}, "s-notes-1", "tc-badge", 3),
 
 	// tc-tick
 	primitive("done", w.Tick{Done: true, Label: "Done"}, "s-tasks-1", "tc-tick", 5),

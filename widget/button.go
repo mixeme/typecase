@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -122,13 +122,24 @@ type Button struct {
 	// script the button is not shown: Copy and selecting the text remain.
 	SaveAs   string
 	SaveFrom string
+	// Copy is the text the button puts on the clipboard, CopyFrom the ID of
+	// the element whose text it puts there, with the library's script
+	// (Carrel's task 118). Without a script a button is not shown — the text
+	// is selected by hand; one with Href stays a link to the page that shows
+	// the text.
+	Copy     string
+	CopyFrom string
 	// Swap, with Href, names the elements (IDs, separated by spaces) the
 	// library's live layer takes from the page at Href and puts in place of
 	// the same ones here — no reload; without the layer the link goes there
 	// (Source, the width of a note's text; Carrel's task 104).
 	Swap string
-	// Removes takes away the row of a picked file it stands in, before Save
-	// (FileField.Row); the button sends nothing.
+	// Removes takes away the row it stands in, with the library's script:
+	// the row of a picked file, before Save (FileField.Row) — the button
+	// sends nothing; or the row of a repeated field in a FieldSet, the fields
+	// before it — they are emptied and hidden in place, under their names
+	// (Carrel's task 86). Without a script the second one submits (Submit,
+	// Name, Value) and the server answers without the row.
 	Removes bool
 	// File makes the button a label that picks a file for a PostForm
 	// (Carrel's task 109): the browser opens the choice without a script.
@@ -163,6 +174,7 @@ func (b Button) html(m mix) string {
 	tag := "button"
 	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens)
+	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom)
 	if b.File != nil {
 		tag = "label"
 		s.WriteString(`<label` + cls + common + `>`)
@@ -171,14 +183,14 @@ func (b Button) html(m mix) string {
 		if b.State == ButtonDisabled {
 			s.WriteString(`<a` + cls + common + ` aria-disabled="true">`)
 		} else {
-			s.WriteString(`<a` + cls + attr("href", b.Href) + attr("data-tc-swap", b.Swap) + common + `>`)
+			s.WriteString(`<a` + cls + attr("href", b.Href) + attr("data-tc-swap", b.Swap) + copies + common + `>`)
 		}
 	} else {
 		if b.Form != "" {
 			typ = "submit"
 		}
 		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) + flag("data-tc-remove", b.Removes) +
-			attr("data-tc-save", b.SaveAs) + attr("data-tc-from", b.SaveFrom) + common + flag("disabled", b.State == ButtonDisabled) + `>`)
+			attr("data-tc-save", b.SaveAs) + attr("data-tc-from", b.SaveFrom) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))

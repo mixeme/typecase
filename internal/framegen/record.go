@@ -133,6 +133,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 		return g.mark(e), ""
 	case e.Has("tc-dim"):
 		return g.dimx(e), ""
+	case e.Has("tc-tile"):
+		return g.tile(e), ""
 	}
 	return g.blockChild(e), ""
 }

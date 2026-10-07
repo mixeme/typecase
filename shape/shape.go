@@ -102,7 +102,7 @@ func dropped(n *fragment.Node) bool {
 		}
 	}
 	for _, c := range n.Classes {
-		if c == "tc-check__box" || c == "tc-seg__box" || c == "tc-post" {
+		if c == "tc-check__box" || c == "tc-seg__box" || c == "tc-tile__box" || c == "tc-tree__box" || c == "tc-post" {
 			return true
 		}
 		// A picture in its place is data, not drawing: the frame draws the
