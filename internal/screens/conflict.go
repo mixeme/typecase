@@ -56,8 +56,19 @@ func Conflict1() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}},
 										},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}},
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "none",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
 										},
 									},
 									{
@@ -67,8 +78,19 @@ func Conflict1() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "both changed"}},
 										},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}},
+											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}},
+											},
+											w.Check{
+												Name:  "choice.2",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
+											},
 										},
 									},
 									{
@@ -79,10 +101,18 @@ func Conflict1() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
+												Name:  "choice.3",
+												Value: "mine",
+												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}},
 											},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}},
+											w.Check{
+												Name:  "choice.3",
+												Value: "none",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
 										},
 									},
 									{
@@ -92,18 +122,31 @@ func Conflict1() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}},
 										},
 										Options: []w.Check{
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}},
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}},
+											w.Check{
+												Name:  "choice.4",
+												Value: "mine",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
+											},
+											w.Check{
+												Name:  "choice.4",
+												Value: "server",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}},
+											},
 										},
 									},
 								},
+								ID:     "conflict",
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary},
-									w.Button{Label: "Use only my edit"},
-									w.Button{Label: "Use only the server version"},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
 								},
 								Variant: w.FormFootWrap,
 							},
@@ -162,8 +205,19 @@ func Conflict3() Screen {
 									{
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Синк-ап по релизу и демо"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Синк-ап перенесён"}}},
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Синк-ап по релизу и демо"}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Синк-ап перенесён"}},
+											},
 										},
 									},
 									{
@@ -173,18 +227,31 @@ func Conflict3() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}},
 										},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Переговорная 2"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}},
+											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Переговорная 2"}},
+											},
+											w.Check{
+												Name:  "choice.2",
+												Value: "none",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
 										},
 									},
 								},
+								ID:     "conflict",
+								Action: "/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict",
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary},
-									w.Button{Label: "Use only my edit"},
-									w.Button{Label: "Use only the server version"},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Cancel", Href: "/app/calendar/nextcloud/lichnyy/5d1a-77c0"},
 								},
 								Variant: w.FormFootWrap,
 							},
@@ -243,10 +310,18 @@ func Conflict4() Screen {
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
 											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Отправить документы в МФЦ до пятницы"}},
 											},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Документы в МФЦ"}}},
+											w.Check{
+												Name:  "choice.1",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Документы в МФЦ"}},
+											},
 										},
 									},
 									{
@@ -256,18 +331,31 @@ func Conflict4() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}},
 										},
 										Options: []w.Check{
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}},
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "2026-08-14 18:00"}}},
+											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
+											},
+											w.Check{
+												Name:  "choice.2",
+												Value: "server",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "2026-08-14 18:00"}},
+											},
 										},
 									},
 								},
+								ID:     "conflict",
+								Action: "/app/tasks/nextcloud/dela/4c1d-8e20-71fa/conflict",
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary},
-									w.Button{Label: "Use only my edit"},
-									w.Button{Label: "Use only the server version"},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Cancel", Href: "/app/tasks/nextcloud/dela/4c1d-8e20-71fa"},
 								},
 								Variant: w.FormFootWrap,
 							},
@@ -326,10 +414,18 @@ func Conflict5() Screen {
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
 											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Заметка со встречи 10.08 — дополнено"}},
 											},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Встреча 10.08"}}},
+											w.Check{
+												Name:  "choice.1",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Встреча 10.08"}},
+											},
 										},
 									},
 									{
@@ -340,20 +436,30 @@ func Conflict5() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Договорились: демо в пятницу, релиз в понедельник."}},
 											},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Договорились: демо в пятницу."}}},
+											w.Check{
+												Name:  "choice.2",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Договорились: демо в пятницу."}},
+											},
 										},
 									},
 								},
+								ID:     "conflict",
+								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict",
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary},
-									w.Button{Label: "Use only my edit"},
-									w.Button{Label: "Use only the server version"},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
 								},
 								Variant: w.FormFootWrap,
 							},
@@ -407,8 +513,19 @@ func Conflict2() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "both changed"}},
 										},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}},
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "server",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
+											},
 										},
 									},
 									{
@@ -418,17 +535,30 @@ func Conflict2() Screen {
 											Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}},
 										},
 										Options: []w.Check{
-											w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}},
-											w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}},
+											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}},
+											},
+											w.Check{
+												Name:  "choice.2",
+												Value: "none",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
 										},
 									},
 								},
+								ID:     "conflict",
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary},
-									w.Button{Label: "Use only my edit"},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
 								},
 								Variant: w.FormFootWrap,
 							},

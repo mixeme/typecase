@@ -1331,7 +1331,11 @@ func Profile5() Screen {
 						w.Field{
 							Label: "Colour",
 							Parts: []w.FieldPart{
-								w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 2},
+								w.Swatches{
+									Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"},
+									On:      2,
+									Name:    "colour",
+								},
 								w.FieldHint{
 									Parts: []w.Inline{
 										w.Text("Written to the server as "),
@@ -1654,7 +1658,11 @@ func Profile7() Screen {
 						w.Field{
 							Label: "Colour",
 							Parts: []w.FieldPart{
-								w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 3},
+								w.Swatches{
+									Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"},
+									On:      3,
+									Name:    "colour",
+								},
 							},
 							Width: w.FieldW100,
 						},

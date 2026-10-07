@@ -395,7 +395,7 @@ func (r DueRow) html(m mix) string {
 // SizeRow — tc-row
 //
 // Роль. Строка вещи с размером: галка, значок и имя, размер, когда менялась, права, источник.
-// Вход. SizeRow{Ticked, Icon, Name, Bytes, Time, Access, Source, Send}.
+// Вход. SizeRow{Ticked, Icon, Name, Bytes, Time, Access, Source, Send, Href}.
 // Состояния. found.
 // Инварианты. Галка — кнопка с доступным именем; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка выбирает вещь для действий шапки; нажатие на имя открывает её.
@@ -411,14 +411,21 @@ type SizeRow struct {
 	Time   string
 	Access string // rw, ro
 	Source string
+	// Href makes the name a link to the file (Carrel's task 129): the row
+	// cannot be one, its tick is a control of its own.
+	Href string
 }
 
 // Render prints the row.
 func (r SizeRow) Render() string { return r.html(nil) }
 
 func (r SizeRow) html(m mix) string {
+	name := "span"
+	if r.Href != "" {
+		name = "a"
+	}
 	return `<div` + class(m, "tc-row", "tc-row--tickcols") + `>` + r.Ticked.box(plain(r.Name), r.Send) +
-		`<span class="tc-row__title tc-row__name"><svg>` + r.Icon.use() + `</svg><span class="tc-row__file">` + inlines(r.Name) + `</span></span>` +
+		`<` + name + ` class="tc-row__title tc-row__name"` + attr("href", r.Href) + `><svg>` + r.Icon.use() + `</svg><span class="tc-row__file">` + inlines(r.Name) + `</span></` + name + `>` +
 		cell(r.Bytes, "tc-row__excerpt", "tc-mono", "tc-row__size") + cell(r.Time, "tc-row__excerpt", "tc-mono", "tc-row__time") +
 		cell(r.Access, "tc-row__cell", "tc-mono", "tc-row__detail") + source(r.Source, "", nil) + `</div>`
 }

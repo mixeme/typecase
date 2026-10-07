@@ -47,7 +47,7 @@ func (v InputVariant) class() string {
 // Input — tc-in
 //
 // Роль. Поле ввода одной строки: текст, дата, время, поиск, пароль.
-// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required}.
+// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required, ID, Picked}.
 // Состояния. value | placeholder | mono | focus | error | disabled | variant.
 // Инварианты. Плейсхолдер выглядит плейсхолдером всегда: is-ph ставит виджет, когда значения нет; род поля — перечисление; у поля есть доступное имя; поле печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется.
@@ -69,6 +69,12 @@ type Input struct {
 	Required    bool // the form is not sent without it
 	Variant     InputVariant
 	Place       Place
+	// ID is what a file field beside it names (FileField.Shows): the line
+	// shows the picked file's name, read-only; without a script it is not
+	// shown — the file input shows the name itself (Carrel's task 133).
+	ID string
+	// Picked marks such a line: what was picked beside it.
+	Picked bool
 }
 
 // Render prints the input.
@@ -78,7 +84,8 @@ func (i Input) html(m mix) string {
 	return `<input` + class(m, "tc-in", is("mono", i.Mono), is("ph", i.Value == "" && i.Placeholder != ""),
 		is("focus", i.Focus), is("error", i.Error), i.Variant.class(), i.Place.class()) +
 		` type="` + i.Kind.attr() + `"` + attr("name", i.Name) + attr("value", i.Value) +
-		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + flag("readonly", i.ReadOnly) + flag("required", i.Required) + `>`
+		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + flag("readonly", i.ReadOnly || i.Picked) + flag("required", i.Required) +
+		attr("id", i.ID) + flag("data-tc-filename", i.Picked) + `>`
 }
 
 // PickVariant is the drawn size of a pick where it is not its column's.

@@ -95,6 +95,46 @@
 		x.send(data);
 	});
 
+	// A link with data-tc-swap changes the page in place (Carrel's task 104):
+	// the page at its address is asked for, and the elements it names are put
+	// in place of the same ones here; the address goes to the history. Without
+	// the layer — or when the answer has not them — the link simply goes.
+	document.addEventListener("click", function (e) {
+		var a = e.target.closest && e.target.closest("a[data-tc-swap]");
+		if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+		var ids = a.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
+		if (!ids.length || !window.DOMParser) return;
+		e.preventDefault();
+		var href = a.href;
+		fetch(href, { credentials: "same-origin", headers: { Accept: "text/html" } })
+			.then(function (r) {
+				if (!r.ok) throw new Error(r.status);
+				return r.text();
+			})
+			.then(function (html) {
+				var doc = new DOMParser().parseFromString(html, "text/html");
+				var pairs = ids.map(function (id) {
+					return [document.getElementById(id), doc.getElementById(id)];
+				});
+				if (pairs.some(function (p) { return !p[0] || !p[1]; })) throw new Error("no " + ids.join(" "));
+				pairs.forEach(function (p) {
+					var fresh = document.importNode(p[1], true);
+					p[0].replaceWith(fresh);
+					if (tc.init) tc.init(fresh);
+				});
+				history.pushState({ tcSwap: true }, "", href);
+				swapped = true;
+			})
+			.catch(function () {
+				location.assign(href);
+			});
+	});
+	// Back and forward over swapped pages load the page of the address.
+	var swapped = false;
+	window.addEventListener("popstate", function () {
+		if (swapped) location.reload();
+	});
+
 	document.addEventListener("input", function (e) {
 		var t = e.target;
 		if (t.classList && t.classList.contains("tc-in__add") && t.closest("[data-tc-suggest]")) suggest(t);

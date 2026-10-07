@@ -23,6 +23,7 @@ var Routes = []Route{
 	{Frame: "s-tasks-3", Caption: "Задача · правка, срок, выполнение", Screen: Tasks3},
 	{Frame: "s-notes-1", Caption: "Заметки · список и заметка в панели", Screen: Notes1},
 	{Frame: "s-notes-2", Caption: "Заметка · чтение на весь экран", Screen: Notes2},
+	{Frame: "s-notes-27", Caption: "Заметка · исходник", Screen: Notes27},
 	{Frame: "s-notes-3", Caption: "Заметка · чтение, Reading width", Screen: Notes3},
 	{Frame: "s-notes-20", Caption: "Заметка · правка", Screen: Notes20},
 	{Frame: "s-notes-4", Caption: "Заметка · правка на весь экран, режим сосредоточения", Screen: Notes4},

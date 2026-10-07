@@ -31,7 +31,7 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple}.
+// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple, Swap}.
 // Состояния. default | start | compact | icons | radio | links | several.
 // Инварианты. Выбран ровно один вариант, у ряда флажков (Multiple) — любые; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
@@ -52,6 +52,9 @@ type Seg struct {
 	// Multiple makes a switch with a Name a row of checkboxes: several
 	// options at once, each ticked one sent (the days of a repeat).
 	Multiple bool
+	// Swap is Button.Swap for the options that are links: the width of a
+	// note's text changes in place with the live layer.
+	Swap string
 }
 
 // Render prints the switch.
@@ -128,7 +131,7 @@ func (g Seg) seg(m mix) string {
 		if o.Href != "" {
 			// a link keeps its icon and the name of an option without words
 			// (Carrel's task 115: the view of a folder, list or tiles)
-			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("aria-current", pick(o.On, "true")) +
+			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("data-tc-swap", g.Swap) + attr("aria-current", pick(o.On, "true")) +
 				attr("aria-label", pick(o.Label == "", o.Title)) + attr("title", pick(o.Label == "", o.Title)) + `>`)
 			if o.Icon != "" {
 				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
@@ -174,7 +177,7 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет.
-// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables}.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio}.
 // Состояния. on | off | rich | tertiary | box.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже.
@@ -194,6 +197,9 @@ type Check struct {
 	// password» and Password; All day and «start.time due.time» (Carrel's
 	// task 111).
 	Disables string
+	// Radio makes a check with a Name one of several of that name: a
+	// property's version in a conflict (Carrel's task 132).
+	Radio bool
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool
 }
@@ -204,8 +210,12 @@ func (c Check) Render() string { return c.html(nil) }
 func (c Check) html(m mix) string {
 	var s strings.Builder
 	if c.Name != "" {
-		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="checkbox"` + attr("name", c.Name) + attr("value", c.Value) +
-			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
+		kind := "checkbox"
+		if c.Radio {
+			kind = "radio"
+		}
+		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="` + kind + `"` + attr("name", c.Name) + attr("value", c.Value) +
+			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On || c.Radio, "is-off")) + `></span>`)
 		for _, p := range c.Parts {
 			s.WriteString(p.html(nil))
 		}

@@ -171,7 +171,7 @@ func Files1() Screen {
 									{Pick: ptr(w.TickedOff)},
 									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("folder · 34 items")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
 									{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
 								},
@@ -272,6 +272,7 @@ func Files1() Screen {
 						Items: []w.FieldsItem{
 							{Term: "Size", Value: []w.ValuePart{w.Text("412 KB")}, Face: w.ValueMono},
 							{Term: "Type", Value: []w.ValuePart{w.Text("image/png")}, Face: w.ValueMono},
+							{Term: "Dimensions", Value: []w.ValuePart{w.Text("1920×1080")}, Face: w.ValueMono},
 							{Term: "Changed", Value: []w.ValuePart{w.Text("2026-08-10 11:07")}, Face: w.ValueMono},
 							{
 								Term:  "Path",
@@ -800,10 +801,11 @@ func Files5() Screen {
 					w.Grid{
 						Tiles: []w.Tile{
 							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "whiteboard.jpg", Meta: "2.8 MB · 4032×3024", Selected: true},
-							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-1.png", Meta: "640 KB · 1920×1080"},
-							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-2.png", Meta: "712 KB · 1920×1080"},
+							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-1.png", Meta: "640 KB"},
+							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-2.png", Meta: "712 KB"},
 							w.Tile{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, Name: "смета.pdf", Meta: "1.2 MB"},
-							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "архив", Meta: "12 items"},
+							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "архив", Meta: ""},
+							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "черновики", Meta: "0 items"},
 							w.Tile{Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard}, Name: "панорама.tif", Meta: "84 MB · too large"},
 						},
 					},

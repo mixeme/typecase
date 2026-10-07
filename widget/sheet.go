@@ -257,7 +257,7 @@ func (w SheetWidth) class() string {
 // Sheet — tc-sheet
 //
 // Роль. Лист поверх страницы: быстрая запись, перенос, выбор, подтверждение — одно дело и выход из него.
-// Вход. Sheet{Icon, Tone, Title, Head, Body, Flush, Foot, Width}.
+// Вход. Sheet{Icon, Tone, Title, Head, Body, Flush, Foot, Width, Action, Method, Fields, ID}.
 // Состояния. plain | icon | close | danger | pick.
 // Инварианты. Заголовок — один, жирным; главная кнопка — первой в подвале, отмена — в конце; ширина — перечисление; лист печатает фрагмент своего кадра.
 // Поведение. Esc закрывает лист и возвращает фокус тому, что его открыло; Enter делает главное.
@@ -273,6 +273,13 @@ type Sheet struct {
 	Flush bool // the body has no padding: a picker fills it
 	Foot  []SheetFootPart
 	Width SheetWidth
+	// Action makes the sheet a form that sends its fields there, as Form
+	// and Doc do (Carrel's task 134): Method is "post" when empty, Fields
+	// its hidden fields, ID what a button outside it names.
+	Action string
+	Method string
+	Fields []Hidden
+	ID     string
 }
 
 // Render prints the sheet.
@@ -280,7 +287,17 @@ func (h Sheet) Render() string { return h.html(nil) }
 
 func (h Sheet) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-sheet", h.Width.class()) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `><div class="tc-sheet__head">`)
+	tag := "div"
+	if h.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + attr("action", h.Action) + ` method="` + method(h.Method) + `" role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `>`)
+		for _, f := range h.Fields {
+			s.WriteString(f.html(nil))
+		}
+		s.WriteString(`<div class="tc-sheet__head">`)
+	} else {
+		s.WriteString(`<div` + class(m, "tc-sheet", h.Width.class()) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `><div class="tc-sheet__head">`)
+	}
 	if h.Icon != "" {
 		s.WriteString(h.Tone.svg() + h.Icon.use() + `</svg>`)
 	}
@@ -300,7 +317,7 @@ func (h Sheet) html(m mix) string {
 		}
 		s.WriteString(`</div>`)
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

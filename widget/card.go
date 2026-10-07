@@ -370,7 +370,7 @@ func (v CardVariant) class() string {
 // Card — tc-card
 //
 // Роль. Карточка: подключение, кандидат в дубли, путь из мастера, ключ для вставки, письмо, выбор режима.
-// Вход. Card{Items, Variant, Place}.
+// Вход. Card{Items, Variant, Place, Action, Method, Fields, ID}.
 // Состояния. plain | alert | apart | snug | flush | chosen | pick.
 // Инварианты. Вид — перечисление; части карточки — именованные, а не произвольная разметка; карточка печатает фрагмент своего кадра.
 // Поведение. нет: поведение у того, что в ней.
@@ -381,6 +381,13 @@ type Card struct {
 	Items   []CardPart
 	Variant CardVariant
 	Place   Place
+	// Action makes the card a form (Carrel's task 131): a group of
+	// duplicates sends its choices and the button pressed; Method, Fields
+	// and ID as Form's.
+	Action string
+	Method string
+	Fields []Hidden
+	ID     string
 }
 
 // Render prints the card.
@@ -388,11 +395,20 @@ func (c Card) Render() string { return c.html(nil) }
 
 func (c Card) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-card", c.Place.class(), c.Variant.class()) + `>`)
+	tag := "div"
+	if c.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-card", c.Place.class(), c.Variant.class()) + attr("id", c.ID) + attr("action", c.Action) + ` method="` + method(c.Method) + `">`)
+		for _, f := range c.Fields {
+			s.WriteString(f.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-card", c.Place.class(), c.Variant.class()) + `>`)
+	}
 	for _, it := range c.Items {
 		s.WriteString(it.html(nil))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

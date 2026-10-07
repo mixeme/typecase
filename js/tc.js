@@ -597,6 +597,11 @@
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 		// A file picked by a button or a menu item goes with its form at once
 		// (Carrel's task 109); without the script «Upload» sends it.
+		if (e.target.matches && e.target.matches(".tc-file[data-tc-shows]")) {
+			// the line beside the field shows what was picked (Carrel's task 133)
+			var line = document.getElementById(e.target.getAttribute("data-tc-shows"));
+			if (line) line.value = Array.prototype.map.call(e.target.files, function (f) { return f.name; }).join(", ");
+		}
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-list], .tc-file[data-tc-preview]") && e.target.files && e.target.files.length) pickFile(e.target);
 		else if (e.target.matches && e.target.matches(".tc-file[form], .tc-file[data-tc-to]") && e.target.files && e.target.files.length && e.target.form) {
 			// a file of a new record's form goes with the whole form to its

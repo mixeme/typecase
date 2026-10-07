@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, File, NoScript, Removes, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -122,6 +122,11 @@ type Button struct {
 	// script the button is not shown: Copy and selecting the text remain.
 	SaveAs   string
 	SaveFrom string
+	// Swap, with Href, names the elements (IDs, separated by spaces) the
+	// library's live layer takes from the page at Href and puts in place of
+	// the same ones here — no reload; without the layer the link goes there
+	// (Source, the width of a note's text; Carrel's task 104).
+	Swap string
 	// Removes takes away the row of a picked file it stands in, before Save
 	// (FileField.Row); the button sends nothing.
 	Removes bool
@@ -166,7 +171,7 @@ func (b Button) html(m mix) string {
 		if b.State == ButtonDisabled {
 			s.WriteString(`<a` + cls + common + ` aria-disabled="true">`)
 		} else {
-			s.WriteString(`<a` + cls + attr("href", b.Href) + common + `>`)
+			s.WriteString(`<a` + cls + attr("href", b.Href) + attr("data-tc-swap", b.Swap) + common + `>`)
 		}
 	} else {
 		if b.Form != "" {

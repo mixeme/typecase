@@ -137,7 +137,7 @@ func (g *gen) button1(e *El) string {
 	if e.Has("is-3rd") {
 		extra = append(extra, "Tertiary: true")
 	}
-	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}, {"data-tc-add", "Adds"}, {"data-tc-save", "SaveAs"}, {"data-tc-from", "SaveFrom"}} {
+	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}, {"data-tc-add", "Adds"}, {"data-tc-save", "SaveAs"}, {"data-tc-from", "SaveFrom"}, {"data-tc-swap", "Swap"}} {
 		if v := e.Attr(a.k); v != "" {
 			extra = append(extra, a.v+": "+q(v))
 		}
@@ -231,7 +231,7 @@ func (g *gen) fileField(f *El) string {
 		s += ", Accept: " + q(a)
 	}
 	s += ", Label: " + q(f.Attr("aria-label"))
-	for _, a := range []kv{{"data-tc-to", "To"}, {"data-tc-list", "List"}, {"data-tc-preview", "Preview"}} {
+	for _, a := range []kv{{"data-tc-to", "To"}, {"data-tc-list", "List"}, {"data-tc-preview", "Preview"}, {"data-tc-shows", "Shows"}} {
 		if v := f.Attr(a.k); v != "" {
 			s += ", " + a.v + ": " + q(v)
 		}
@@ -329,7 +329,10 @@ func (g *gen) input(x *El) string {
 	if x.HasAttr("disabled") {
 		f = append(f, "Disabled: true")
 	}
-	if x.HasAttr("readonly") {
+	if x.HasAttr("data-tc-filename") {
+		// the line of a picked file's name: read-only by itself (Carrel's task 133)
+		f = append(f, "Picked: true", "ID: "+q(x.Attr("id")))
+	} else if x.HasAttr("readonly") {
 		f = append(f, "ReadOnly: true")
 	}
 	if x.HasAttr("required") {
@@ -594,6 +597,9 @@ func (g *gen) seg(x *El) string {
 	if x.HasAttr("data-tc-theme-switch") {
 		n += ", Theme: true"
 	}
+	if a := x.Kid("tc-seg__opt"); a != nil && a.Attr("data-tc-swap") != "" {
+		n += ", Swap: " + q(a.Attr("data-tc-swap"))
+	}
 	return "w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}" + g.ev(x, "SegVariant", "Variant") + placesec(x) + n + "}"
 }
 
@@ -634,6 +640,9 @@ func (g *gen) check(x *El) string {
 			f = append(f, "On: true")
 		}
 		f = append(f, "Name: "+q(box.Attr("name")), "Value: "+q(box.Attr("value")))
+		if box.Attr("type") == "radio" {
+			f = append(f, "Radio: true")
+		}
 		if v := box.Attr("aria-label"); v != "" {
 			f = append(f, "Label: "+q(v))
 		}
@@ -713,16 +722,23 @@ func (g *gen) fieldPart(x *El) string {
 		return g.hintw(x)
 	case x.Has("tc-field__swatches"):
 		var cols []string
-		on := -1
+		on, name := -1, ""
 		for i, y := range x.Els() {
 			cols = append(cols, q(y.Attr("data-tc-colour")))
-			if on < 0 && y.Has("tc-field__swatch--on") {
+			box := y.Kid("tc-seg__box")
+			if on < 0 && (y.Has("tc-field__swatch--on") || box != nil && box.HasAttr("checked")) {
 				on = i
+			}
+			if box != nil {
+				name = box.Attr("name")
 			}
 		}
 		s := "w.Swatches{Colours: []string{" + join(cols, ", ") + "}"
 		if on > 0 {
 			s += ", On: " + itoa(on)
+		}
+		if name != "" {
+			s += ", Name: " + q(name)
 		}
 		return s + "}"
 	case x.Has("tc-field__zoom"):
@@ -827,6 +843,9 @@ func (g *gen) field(k *El) string {
 	}
 	if k.Has("is-own-line") {
 		f = append(f, "OwnLine: true")
+	}
+	if k.Tag == "form" {
+		f = append(f, "Action: "+q(k.Attr("action")))
 	}
 	return "w.Field{" + join(f, ", ") + placef(k) + "}"
 }

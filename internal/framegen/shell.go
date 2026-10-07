@@ -305,6 +305,9 @@ func (g *gen) main(e *El) string {
 	for _, v := range allOf(e, mainVariant) {
 		f = append(f, "Variant: w."+v)
 	}
+	if id := e.Attr("id"); id != "" {
+		f = append(f, "ID: "+q(id))
+	}
 	return "w.Main{" + join(f, ", ") + "}"
 }
 

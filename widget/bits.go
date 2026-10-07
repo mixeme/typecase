@@ -672,7 +672,7 @@ type DiffItem struct {
 // Diff — tc-diff
 //
 // Роль. Сравнение версий при конфликте: по каждому свойству — чья версия остаётся.
-// Вход. Diff{Items}.
+// Вход. Diff{Items, Action, Method, Fields, ID}.
 // Состояния. plain.
 // Инварианты. У свойства выбран ровно один вариант; варианты — столбцом; сравнение печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант свойства.
@@ -681,6 +681,13 @@ type DiffItem struct {
 // Чего нет. Слияния значений: выбирается одно.
 type Diff struct {
 	Items []DiffItem
+	// Action makes the comparison a form (Carrel's task 132): each property's
+	// versions are radios of its own name (Check.Radio), «Write this
+	// combination» sends them; Method, Fields and ID as Form's.
+	Action string
+	Method string
+	Fields []Hidden
+	ID     string
 }
 
 // Render prints the comparison.
@@ -688,7 +695,16 @@ func (d Diff) Render() string { return d.html(nil) }
 
 func (d Diff) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-diff") + `>`)
+	tag := "div"
+	if d.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-diff") + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `">`)
+		for _, f := range d.Fields {
+			s.WriteString(f.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-diff") + `>`)
+	}
 	for _, it := range d.Items {
 		s.WriteString(`<div class="tc-diff__item">` + it.Title.html(nil) + `<div class="tc-diff__options">`)
 		for _, o := range it.Options {
@@ -696,7 +712,7 @@ func (d Diff) html(m mix) string {
 		}
 		s.WriteString(`</div></div>`)
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

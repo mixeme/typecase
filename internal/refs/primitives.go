@@ -70,7 +70,7 @@ var _ = add(
 	primitive("primary", w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "Where to write"}, "components-9", "tc-btn", 8),
 	primitive("with-content", w.Button{Label: "Columns", Icon: "cols", Variant: w.ButtonOnCard, Aside: &w.Mono{Text: "5", Variant: w.MonoDusty11}}, "components-21", "tc-btn", 1),
 	primitive("with-content", w.Button{Label: "Mark done", Tick: &w.Tick{Glyph: true}}, "s-tasks-2", "tc-btn", 4),
-	primitive("variant", w.Button{Label: "Focus", Icon: "focus", Folds: true, Variant: w.ButtonOnCard, Title: "Focus"}, "s-notes-4", "tc-btn", 13),
+	primitive("variant", w.Button{Label: "Focus", Icon: "focus", Folds: true, Variant: w.ButtonOnCard, Title: "Focus"}, "s-notes-4", "tc-btn", 14),
 	primitive("variant", w.Button{Icon: "panel", Variant: w.ButtonOnCard, Title: "Details"}, "s-files-1", "tc-btn", 9),
 	primitive("disabled", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled, Reason: "Общий is read-only"}, "s-dup-1", "tc-btn", 18),
 	primitive("primary", w.Button{Label: "Save", Small: true, Kind: w.ButtonPrimary}, "s-dup-3", "tc-btn", 2),

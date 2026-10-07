@@ -63,7 +63,7 @@ var _ = add(
 	form("start", w.Seg{Options: seg(1, "Read only", "Read and write"), Variant: w.SegStart}, "s-davloom-2", "tc-seg", 1),
 	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", On: true, Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-3", "tc-seg", 1),
 	form("several", w.Seg{Options: []w.SegOption{{Label: "MO", Value: "MO"}, {Label: "TU", Value: "TU"}, {Label: "WE", Value: "WE"}, {Label: "TH", Value: "TH"}, {Label: "FR", Value: "FR"}, {Label: "SA", Value: "SA"}, {Label: "SU", Value: "SU"}}, Name: "byday", Multiple: true}, "s-agenda-15", "tc-seg", 1),
-	form("default", w.Seg{Options: seg(1, "Full width", "Reading width")}, "s-notes-3", "tc-seg", 1),
+	form("default", w.Seg{Options: []w.SegOption{{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full"}, {Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read", On: true}}, Swap: "note-main"}, "s-notes-3", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents?view=list", On: true, Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", Title: "Tiles"}}}, "s-files-1", "tc-seg", 2),
 	form("default", w.Seg{Options: seg(0, "All", "Contacts", "Events", "Tasks", "Notes", "Files")}, "s-find-1", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(2, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-4", "tc-seg", 1),
@@ -76,12 +76,14 @@ var _ = add(
 	// tc-check
 	form("off", check(false, w.Text("Print with photos")), "components-10", "tc-check", 2),
 	form("on", check(true, w.Text("All day")), "components-10", "tc-check", 1),
-	form("rich", check(true, w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}), "s-conflict-1", "tc-check", 1),
+	form("radio", w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Белов Артём")}}, "s-dup-1", "tc-check", 2),
+	form("radio-on", w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Артём Белов")}}, "s-dup-1", "tc-check", 1),
+	form("rich", w.Check{On: true, Name: "choice.1", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, "s-conflict-1", "tc-check", 1),
 	form("rich", check(true, w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")), "s-publish-2", "tc-check", 1),
 	form("box-off", w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}, "components-38", "tc-check", 2),
 	form("box", w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, "components-38", "tc-check", 1),
 	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, "s-notes-20", "tc-check", 1),
-	form("rich", check(false, w.Choice{Source: "Leave it out", Value: "—"}), "s-conflict-1", "tc-check", 2),
+	form("rich", w.Check{Name: "choice.1", Value: "none", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}, "s-conflict-1", "tc-check", 2),
 	// s-backup-2 .tc-check #4 holds an input inside the button: nested controls
 	// (a11y). Its record waits for the owner's decision on the mockup.
 	form("rich", check(false, w.Text("Tasks"), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}), "s-davloom-2", "tc-check", 3),

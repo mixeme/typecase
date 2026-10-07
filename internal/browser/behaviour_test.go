@@ -983,3 +983,81 @@ func TestEditFile(t *testing.T) {
 		t.Errorf("Save sent %q; want the title, the file and the photo", sent)
 	}
 }
+
+// TestSwap: a link with Swap changes the page in place with the live layer —
+// the column of the page at its address, no reload, the address in the
+// history (Carrel's task 104); an edit's bar without a script keeps only its
+// Save and Cancel.
+func TestSwap(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	page := func(text, other string, on bool) string {
+		acts := w.Seg{Options: []w.SegOption{{Label: "Full width", Href: other + "?w=full", On: on}, {Label: "Reading width", Href: other + "?w=read", On: !on}}, Swap: "note-main"}
+		return `<div class="tc-root"><div class="tc-main" id="note-main">` + acts.Render() + `<p class="text">` + text + `</p>` +
+			w.Button{Label: "Source", Href: other + "?view=source", Swap: "note-main"}.Render() + `</div></div>`
+	}
+	read := h.RegisterPage("swap-read", "")
+	full := h.RegisterPage("swap-full", "")
+	h.RegisterPage("swap-read", browser.PageHTML(page("narrow", full, false), ""))
+	h.RegisterPage("swap-full", browser.PageHTML(page("wide", read, true), ""))
+	var text, path string
+	var kept bool
+	if err := h.Run(full, 900, 600,
+		chromedp.Evaluate(`window.__kept = true; true`, nil),
+		chromedp.Click(`a.tc-seg__opt:not(.is-on)`, chromedp.ByQuery),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(`document.querySelector(".text").textContent`, &text),
+		chromedp.Evaluate(`location.pathname + location.search`, &path),
+		chromedp.Evaluate(`window.__kept === true`, &kept),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if text != "narrow" || !kept || !strings.HasSuffix(path, "?w=read") {
+		t.Errorf("with the live layer: text %q, page kept %v, address %q; want the other column in place, no reload, the address", text, kept, path)
+	}
+	bar := w.Docbar{Edit: true, Items: []w.DocbarPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-edit"}, w.Button{Label: "Cancel", Href: "/x"},
+		w.Button{Label: "B"}, w.Button{Label: "H2"}}, End: []w.DocbarEnd{w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}}}}
+	bare := h.RegisterPage("edit-bar-bare", strings.Replace(browser.PageHTML(`<div class="tc-root">`+bar.Render()+`</div>`, ""), `<script src="/tc.js"></script>`, "", 1))
+	var shown string
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-docbar *")].filter(e => (e.matches(".tc-btn, .tc-check")) && e.checkVisibility()).map(e => e.textContent.trim()).join(" ")`, &shown),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if shown != "Save Cancel" {
+		t.Errorf("an edit's bar without a script shows %q; want Save Cancel", shown)
+	}
+}
+
+// TestConflictForm: a conflict is a form (Carrel's task 132): a property's
+// versions are radios, the chosen one is marked, «Write this combination»
+// sends the choices — without a script too.
+func TestConflictForm(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	opt := func(n, v, src, val string, on bool) w.Check {
+		return w.Check{Name: "choice." + n, Value: v, Radio: true, On: on, Parts: []w.CheckPart{w.Choice{Source: src, Value: val}}}
+	}
+	diff := w.Diff{ID: "conflict", Action: "/x", Items: []w.DiffItem{
+		{Title: w.Rubric{Text: "EMAIL"}, Options: []w.Check{opt("1", "mine", "Your edit", "a@example.org", true), opt("1", "server", "Server", "b@example.org", false)}}}}
+	body := `<div class="tc-root"><div class="tc-main">` + diff.Render() + w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"}.Render() + `</div></div>`
+	bare := h.RegisterPage("conflict-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	const marked = `[...document.querySelectorAll(".tc-diff__options .tc-check")].map(c => getComputedStyle(c).borderTopColor === getComputedStyle(document.querySelector(".tc-btn.is-primary")).backgroundColor ? "on" : "off").join(" ")`
+	var before, after, sent string
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(marked, &before),
+		chromedp.Click(`label.tc-check:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(marked, &after),
+		chromedp.Evaluate(`document.addEventListener("submit", e => { e.preventDefault(); window.__sent = new URLSearchParams(new FormData(e.target)).toString(); }); true`, nil),
+		chromedp.Click(`.tc-btn.is-primary`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "on off" || after != "off on" {
+		t.Errorf("the chosen version marked: before %q, after %q; want on off, off on", before, after)
+	}
+	if sent != "choice.1=server" {
+		t.Errorf("sent %q; want choice.1=server", sent)
+	}
+}

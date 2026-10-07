@@ -65,12 +65,21 @@ func (h FieldHint) html(mix) string {
 type Swatches struct {
 	Colours []string
 	On      int // the index of the chosen colour
+	// Name makes the colours radio buttons of a form: the chosen one sends
+	// its colour, without a script too (Carrel's task 135).
+	Name string
 }
 
 func (w Swatches) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<span class="tc-line tc-line--gap-9 tc-field__swatches" role="radiogroup">`)
 	for i, c := range w.Colours {
+		if w.Name != "" {
+			// the chosen one is outlined by its checked radio, not by a class
+			s.WriteString(`<label` + attr("data-tc-colour", c) + class(nil, "tc-field__swatch") + `><input class="tc-seg__box" type="radio"` +
+				attr("name", w.Name) + attr("value", c) + attr("aria-label", c) + flag("checked", i == w.On) + `></label>`)
+			continue
+		}
 		s.WriteString(`<span` + attr("data-tc-colour", c) + class(nil, "tc-field__swatch", pick(i == w.On, "tc-field__swatch--on")) +
 			` role="radio"` + attr("aria-checked", boolText(i == w.On)) + attr("aria-label", c) + `></span>`)
 	}
@@ -203,7 +212,7 @@ func (w FieldWidth) class() string {
 // Field — tc-field
 //
 // Роль. Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
-// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place}.
+// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action}.
 // Состояния. labelled | bare | hint | group | swatches | zoom | photo | row | own-line.
 // Инварианты. Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
 // Поведение. нет: поведение у контролов.
@@ -219,6 +228,9 @@ type Field struct {
 	Gap        int // 7 or 8 between several checks; 0 is the form's
 	OwnLine    bool
 	Place      Place
+	// Action makes the field a GET form of its own: Enter in its line sends
+	// it — the duplicates' threshold in the head (Carrel's task 131).
+	Action string
 }
 
 // Render prints the field.
@@ -230,7 +242,11 @@ func (f Field) html(m mix) string {
 	if f.Gap != 0 {
 		gap = "tc-field--gap" + strconv.Itoa(f.Gap)
 	}
-	s.WriteString(`<div` + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + `>`)
+	tag := "div"
+	if f.Action != "" {
+		tag = "form"
+	}
+	s.WriteString(`<` + tag + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + attr("action", f.Action) + pick(f.Action != "", ` method="get"`) + `>`)
 	switch {
 	case f.LabelSpan:
 		s.WriteString(`<span class="tc-field__label">` + esc(f.Label) + `</span>`)
@@ -244,7 +260,7 @@ func (f Field) html(m mix) string {
 	for _, p := range f.Parts {
 		s.WriteString(p.html(nil))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 
@@ -510,6 +526,10 @@ type FileField struct {
 	// menu item it stands in (MenuItem.Row) at the end of the element List
 	// names. Without a script the field shows what was picked.
 	List string
+	// Shows is the ID of the line that shows the picked file's name
+	// (Input.Picked): an import's file, sent with its form (Carrel's task
+	// 133).
+	Shows string
 	// Preview is the ID of the picture that shows a picked photo at once:
 	// the photo of a contact's edit, sent with Save.
 	Preview string
@@ -527,7 +547,7 @@ func (Line) pickedRow()      {}
 
 func (f FileField) input() string {
 	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) +
-		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + `>`
+		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + attr("data-tc-shows", f.Shows) + `>`
 }
 
 // PostForm — tc-post

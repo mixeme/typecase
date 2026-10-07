@@ -220,14 +220,24 @@ func (g *gen) diff(e *El) string {
 			tick := c.Kid("tc-tickrow__tick")
 			v := c.Kid("tc-diff__value")
 			on := ""
-			if !tick.Has("is-off") {
+			if b := c.Kid("tc-check__box"); b != nil {
+				// a version of a property is a radio of its form (Carrel's task 132)
+				on = "Name: " + q(b.Attr("name")) + ", Value: " + q(b.Attr("value")) + ", Radio: true, "
+				if b.HasAttr("checked") {
+					on += "On: true, "
+				}
+			} else if !tick.Has("is-off") {
 				on = "On: true, "
 			}
 			opts = append(opts, "w.Check{"+on+"Parts: []w.CheckPart{w.Choice{Source: "+q(v.Kid("tc-diff__source").Text())+", Value: "+q(v.OwnText())+"}}}")
 		}
 		its = append(its, "{Title: "+title+", Options: []w.Check{"+join(opts, ", ")+"}}")
 	}
-	return "w.Diff{Items: []w.DiffItem{\n\t\t" + join(its, ",\n\t\t") + "}}"
+	s := "w.Diff{Items: []w.DiffItem{\n\t\t" + join(its, ",\n\t\t") + "}"
+	if e.Tag == "form" {
+		s += ", ID: " + q(e.Attr("id")) + ", Action: " + q(e.Attr("action"))
+	}
+	return s + "}"
 }
 
 var emptyVariant = []kv{{"tc-empty--t12-pad14-20", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"}, {"tc-empty--t12-pad12-20", "EmptySmallTop"},
@@ -527,6 +537,8 @@ func (g *gen) sec(e *El) string {
 			items = append(items, "w.SecOpen{Items: []w.SecOpenPart{"+join(ps, ", ")+"}}")
 		case k.Has("tc-rubric"):
 			items = append(items, g.rubric(k, ""))
+		case g.docText(k) != "":
+			items = append(items, g.docText(k)) // a note's text in its panel (Carrel's task 125)
 		default:
 			items = append(items, g.anyblock(k))
 		}
@@ -705,6 +717,13 @@ func (g *gen) card(e *El) string {
 	}
 	if e.Has("tc-grow") {
 		f = append(f, "Place: w.Grown")
+	}
+	if e.Tag == "form" {
+		// a group of duplicates sends its choices (Carrel's task 131)
+		if id := e.Attr("id"); id != "" {
+			f = append(f, "ID: "+q(id))
+		}
+		f = append(f, "Action: "+q(e.Attr("action")))
 	}
 	return "w.Card{" + join(f, ", ") + "}"
 }
@@ -1115,7 +1134,11 @@ func (g *gen) doc(e *El) string {
 		case k.Has("tc-doc__quote"):
 			items = append(items, "w.DocQuote{Parts: "+g.inl2(k)+"}")
 		case k.Has("tc-doc__code"):
-			items = append(items, "w.DocCode{Text: "+q(k.TextRaw())+"}")
+			w := ""
+			if k.Has("is-wrap") {
+				w = ", Wrap: true"
+			}
+			items = append(items, "w.DocCode{Text: "+q(k.TextRaw())+w+"}")
 		case k.Has("tc-doc__table"):
 			items = append(items, g.docTable(k))
 		default:
@@ -1177,6 +1200,8 @@ func (g *gen) docbar(e *El) string {
 			items = append(items, "w.BarSep{}")
 		case k.Has("tc-bar__more"):
 			f = append(f, "More: &"+g.button(k))
+		case k.Has("tc-drop"):
+			items = append(items, g.drop(k)) // Attach with its menu (Carrel's task 126)
 		case k.Has("tc-bar__right"):
 			for _, x := range k.Els() {
 				sec := ""
@@ -1212,6 +1237,9 @@ func (g *gen) docbar(e *El) string {
 	if e.Has("tc-docbar--rule") {
 		out = append(out, "Rule: true")
 	}
+	if e.Has("tc-docbar--edit") {
+		out = append(out, "Edit: true")
+	}
 	return "w.Docbar{" + join(out, ", ") + "}"
 }
 
@@ -1230,4 +1258,26 @@ func (g *gen) docAttach(x *El) string {
 		s += ", Remove: &" + g.button(b)
 	}
 	return s + href + "}"
+}
+
+// docText is a part of a document's text: a heading, a list, a quote, code,
+// a table — on a page and in a panel alike.
+func (g *gen) docText(k *El) string {
+	switch {
+	case k.Has("tc-doc__heading"):
+		return "w.DocHeading{Text: " + q(k.Text()) + "}"
+	case k.Has("tc-doc__bullets"):
+		return "w.DocBullets{Items: [][]w.Inline{" + g.each(k.Els(), g.inl2) + "}}"
+	case k.Has("tc-doc__quote"):
+		return "w.DocQuote{Parts: " + g.inl2(k) + "}"
+	case k.Has("tc-doc__code"):
+		w := ""
+		if k.Has("is-wrap") {
+			w = ", Wrap: true"
+		}
+		return "w.DocCode{Text: " + q(k.TextRaw()) + w + "}"
+	case k.Has("tc-doc__table"):
+		return g.docTable(k)
+	}
+	return ""
 }

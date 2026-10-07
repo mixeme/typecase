@@ -265,6 +265,14 @@ func (SecFiles) secPart() {}
 func (SecOpen) secPart()  {}
 func (Empty) secPart()    {}
 
+// A note's text in its panel has the parts it has on its page (Carrel's task
+// 125): headings, lists, quotes, code, tables.
+func (DocHeading) secPart() {}
+func (DocBullets) secPart() {}
+func (DocQuote) secPart()   {}
+func (DocCode) secPart()    {}
+func (DocTable) secPart()   {}
+
 // Sec — tc-sec
 //
 // Роль. Секция панели или листа: рубрика и то, что под ней, — поля, связанное, дела, вложения.

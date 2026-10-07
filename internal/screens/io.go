@@ -410,8 +410,17 @@ func Io3() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Variant: w.InputFill},
-													w.Button{Label: "Browse"},
+													w.Input{
+														Placeholder: "Разное (mix).vcf",
+														Label:       "Разное (mix).vcf",
+														Picked:      true,
+														ID:          "import-file",
+														Variant:     w.InputFill,
+													},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"},
+													},
 													w.Button{Label: "Preview file", Kind: w.ButtonPrimary},
 												},
 												Gap: w.LineGap8,
@@ -499,8 +508,17 @@ func Io4() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Placeholder: "заметки-2026.zip", Label: "заметки-2026.zip", Variant: w.InputFill},
-													w.Button{Label: "Browse"},
+													w.Input{
+														Placeholder: "заметки-2026.zip",
+														Label:       "заметки-2026.zip",
+														Picked:      true,
+														ID:          "import-file",
+														Variant:     w.InputFill,
+													},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".md,.zip", Label: "Markdown or a zip of them", Shows: "import-file"},
+													},
 													w.Button{Label: "Preview file", Kind: w.ButtonPrimary},
 												},
 												Gap: w.LineGap8,

@@ -116,7 +116,7 @@ func (v MainVariant) class() string {
 // Main — tc-main
 //
 // Роль. Страница в середине оболочки: шапка, бар, списки по группам, формы, документ.
-// Вход. Main{Items, Variant}.
+// Вход. Main{Items, Variant, ID}.
 // Состояния. plain | groups | zone | variant | phone.
 // Инварианты. Страница прокручивается сама, оболочка — нет; порядок — шапка, бар, содержимое; страница печатает фрагмент своего кадра.
 // Поведение. нет: поведение у того, что в ней.
@@ -126,6 +126,7 @@ func (v MainVariant) class() string {
 type Main struct {
 	Items   []MainPart
 	Variant MainVariant
+	ID      string // what a link with Swap names: the column it puts in place
 }
 
 // Render prints the page.
@@ -133,7 +134,7 @@ func (p Main) Render() string { return p.html(nil) }
 
 func (p Main) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + `>`)
+	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + attr("id", p.ID) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}

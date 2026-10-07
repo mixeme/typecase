@@ -58,10 +58,11 @@ func Dup1() Screen {
 								w.Field{
 									Label: "Match threshold",
 									Parts: []w.FieldPart{
-										w.Input{Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52},
+										w.Input{Name: "threshold", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52},
 										w.Button{Label: "Weights", Small: true},
 									},
-									Width: w.FieldInline,
+									Width:  w.FieldInline,
+									Action: "/app/duplicates",
 								},
 							},
 							Stack: true,
@@ -123,8 +124,8 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Parts: []w.CheckPart{w.Text("Артём Белов")}},
-															w.Check{Parts: []w.CheckPart{w.Text("Белов Артём")}},
+															w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Артём Белов")}},
+															w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Белов Артём")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -136,8 +137,8 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Parts: []w.CheckPart{w.Text("Тензор")}},
-															w.Check{Parts: []w.CheckPart{w.Text("—")}},
+															w.Check{On: true, Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Тензор")}},
+															w.Check{Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("—")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -149,8 +150,8 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Parts: []w.CheckPart{w.Text("nextcloud")}},
-															w.Check{On: true, Parts: []w.CheckPart{w.Text("radicale")}},
+															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud")}},
+															w.Check{On: true, Name: "choice.PHOTO", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("radicale")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -163,12 +164,13 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary},
-											w.Button{Label: "Not duplicates"},
-											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed},
+											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"},
+											w.Button{Label: "Not duplicates", Name: "op", Value: "not"},
+											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"},
 										},
 									},
 								},
+								Action: "/app/duplicates/g1",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -217,12 +219,13 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary},
-											w.Button{Label: "Not duplicates"},
-											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed},
+											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"},
+											w.Button{Label: "Not duplicates", Name: "op", Value: "not"},
+											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"},
 										},
 									},
 								},
+								Action: "/app/duplicates/g2",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -266,12 +269,13 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary},
-											w.Button{Label: "Not duplicates"},
-											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed},
+											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"},
+											w.Button{Label: "Not duplicates", Name: "op", Value: "not"},
+											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"},
 										},
 									},
 								},
+								Action: "/app/duplicates/g3",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -319,12 +323,13 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary},
-											w.Button{Label: "Not duplicates"},
-											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed},
+											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"},
+											w.Button{Label: "Not duplicates", Name: "op", Value: "not"},
+											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"},
 										},
 									},
 								},
+								Action: "/app/duplicates/g4",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -385,8 +390,14 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Parts: []w.CheckPart{w.Text("nextcloud")}},
-															w.Check{On: true, Parts: []w.CheckPart{w.Text("radicale · vps")}},
+															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.PHOTO",
+																Value: "2",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("radicale · vps")},
+															},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -399,8 +410,8 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary},
-											w.Button{Label: "Unlink"},
+											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "op", Value: "keep"},
+											w.Button{Label: "Unlink", Name: "op", Value: "unlink"},
 											w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, State: w.ButtonDisabled},
 										},
 									},
@@ -409,6 +420,7 @@ func Dup1() Screen {
 										Parts: []w.CardTextPart{w.Text("Общий is read-only: its record could be neither rewritten nor deleted.")},
 									},
 								},
+								Action: "/app/duplicates/g5",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -446,8 +458,13 @@ func Dup1() Screen {
 										},
 										Inset: true,
 									},
-									w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again"}}},
+									w.CardRow{
+										Kind:  w.CardActs,
+										Gap:   8,
+										Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "op", Value: "offer"}},
+									},
 								},
+								Action: "/app/duplicates/g6",
 							},
 						},
 					},

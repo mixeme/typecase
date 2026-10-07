@@ -15,6 +15,45 @@ do, not what the authors did.
 
 ### Added
 
+- **An import's file field as drawn** (Carrel's task 133): Browse is the
+  label of the file input (`Button.File`); `FileField.Shows` names the line
+  that shows the picked file's name — `Input{Picked: true, ID}`, read-only,
+  not shown without a script, where the file input shows the name itself;
+  Preview file sends the form (s-io-3, -4).
+- **A group of duplicates is a form** (Carrel's task 131): `Card.Action`,
+  `Method`, `Fields`, `ID`; a property's values are radios
+  (`choice.FN`, `choice.ORG`, `choice.PHOTO`), the card's buttons send `op`
+  (link, not, merge, keep, unlink, offer). `Field.Action` makes a field a GET
+  form of its own: the threshold in the head goes with Enter (s-dup-1, -3,
+  -7).
+- **A conflict is a form** (Carrel's task 132): `Diff.Action`, `Method`,
+  `Fields`, `ID`; a property's versions are radios of its own name
+  (`Check.Radio`, `choice.<n>`), «Write this combination» sends them, «Use
+  only my edit» and «Use only the server version» send `all`, Cancel is a
+  link back (s-conflict-1…5).
+- **`SizeRow.Href`** (Carrel's task 129): a found file's name is the link.
+- **A sheet is a form** (Carrel's task 134): `Sheet.Action`, `Method`,
+  `Fields`, `ID`, as `Form` and `Doc` have them.
+- **`Swatches.Name`** (Carrel's task 135): the colours are radio buttons of
+  the form, the chosen one sends its colour without a script; the checked
+  one is outlined. The new collection's sheets draw it so (s-profile-5, -7,
+  s-mailbox-22, -27).
+- **A note's text in its panel** (Carrel's task 125): `Sec` takes the parts
+  of a document's text — `DocHeading`, `DocBullets`, `DocQuote`, `DocCode`,
+  `DocTable`. The new frame «Заметка в панели · части текста» (s-notes-28).
+- **A drop in an edit's bar** (Carrel's task 126): `Docbar` takes a `Drop` —
+  Attach of a note's edit is the menu it is in the column (s-notes-4, -20).
+- **A note without a script** (Carrel's task 104, the owner's decisions of
+  02.10). `Docbar.Edit`: an edit's bar keeps only Save and Cancel without a
+  script — an edit is not reloaded midway; the marks, Auto-save, the draft,
+  Ctrl+S, the width, Focus and «⋯» need the page's script. On the reading
+  page Source, the width of the text, the side column and «⋯» are links
+  (`?view=source`, `?width=…`, `?side=0`; «⋯» opens its menu of links):
+  `Button.Swap` and `Seg.Swap` name what the live layer takes from the page
+  at the address and puts in place — no reload, the address in the history
+  (`Main.ID` names the column); without the layer the link goes there. The
+  source of a note is its own page — the new frame «Заметка · исходник»
+  (s-notes-27), Rendered goes back. `TestSwap`.
 - **A file of an edit goes with its Save** (the owner's decisions of 02.10:
   an edit is not reloaded midway, the same in every edit). `FileField.List`
   makes the field one of its form's: the library's script shows a picked file
@@ -201,6 +240,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- Carrel's task 128 (the owner's decision of 03.10): a folder's count and a
+  picture's dimensions stand only where they are known without a request of
+  their own — a folder without a count is «folder» in the list (s-files-1)
+  and has an empty meta on its tile, «0 items» is a read empty one, a tile of
+  a picture not chosen shows its size alone (s-files-5); the chosen picture's
+  panel has Dimensions after Type (s-files-1).
 - Carrel's task 113: search draws its refused source as every list does —
   the mark in the rail, the reason in its hint, and in the poll bar a red
   «1 failed» whose menu says what was asked and what the server answered,

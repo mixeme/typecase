@@ -526,8 +526,12 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-docmeta__sec > .tc-line__text:has(> .tc-btn){display:flex;align-items:center;flex-wrap:wrap;column-gap:5px;row-gap:4px}
 .tc-docmeta__sec > .tc-line__text > .tc-btn{margin-left:auto}
 .tc-docmeta__sec > .tc-line__text:has(> .tc-btn) + .tc-line__text{margin-top:6px}
+/* Полоса правки без сценария (задача 104, решения 02.10): правка не перезагружается — остаются Save (submit) и Cancel (ссылка); разметка, автосохранение, ширина, фокус и «⋯» живут сценарием. */
+[data-tc-noscript] .tc-docbar--edit > :not(button[type="submit"]):not(a.tc-btn){display:none}
 /* Файл правки уходит по Save (решение 02.10): выбранный — строкой списка; «Nothing attached» прячется, пока она стоит; полоса Save ждёт отправки с файлами. */
 .tc-runbar[hidden],[data-tc-empty][hidden]{display:none}
+/* Строка имени файла импорта (задача 133): без сценария имя показывает само поле файла рядом с Browse — строка не нужна. */
+[data-tc-noscript] [data-tc-filename]{display:none}
 [data-tc-noscript] .tc-file{position:static;opacity:1;width:auto;height:auto;max-width:200px;font-size:11px;pointer-events:auto}
 /* Двойник отметок в меню «⋯» (задача 82): та же форма, отметки — пункты-флажки столбиком; Apply без сценария — под ними. */
 .tc-menu .tc-checkform{display:flex;flex-direction:column;align-items:stretch;gap:0}
@@ -582,6 +586,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-doc__quote{margin:0;padding:2px 0 2px 14px;border-left:2px solid var(--tc-rule);color:var(--tc-muted);font-size:14.5px;line-height:1.7}
 .tc-doc__code{margin:0;font-family:var(--tc-font-mono);font-size:12px;line-height:1.6;background:var(--tc-card);border-radius:3px;padding:10px 12px;overflow-x:auto;white-space:pre;scrollbar-width:thin}
 .tc-doc__bullets .tc-doc__bullets.tc-doc__bullets{margin-top:6px;list-style:circle}
+/* Текст заметки в панели (задача 125): части текста отделены друг от друга, как абзацы. */
+.tc-sec > :is(.tc-doc__heading,.tc-doc__bullets,.tc-doc__quote,.tc-doc__code,.tc-doc__table){margin-top:10px}
+.tc-doc__code.is-wrap{white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:visible}
 .tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
 .tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}
 .tc-doc__grid{border-collapse:collapse;width:100%;font-size:13.5px;line-height:1.45}
@@ -632,7 +639,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-diff__item > .tc-rubric{margin-bottom:8px}
 .tc-diff__options{display:flex;flex-direction:column;gap:6px}
 .tc-diff__options .tc-check{align-items:flex-start;padding:7px 8px;border:.5px solid var(--tc-hair);border-radius:3px}
-.tc-diff__options .tc-check:has(.tc-tickrow__tick:not(.is-off)){border-color:var(--tc-accent);
+.tc-diff__options .tc-check:not(:has(> .tc-check__box)):has(.tc-tickrow__tick:not(.is-off)),.tc-diff__options .tc-check:has(> .tc-check__box:checked){border-color:var(--tc-accent);
   background:color-mix(in srgb,var(--tc-accent) 7%,transparent)}
 .tc-diff__value{display:flex;flex-direction:column;gap:1px;min-width:0}
 .tc-diff__source{font-size:11px;color:var(--tc-dusty)}
@@ -1454,7 +1461,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__item-indent.tc-menu__item-indent{padding-left:23px}
 .tc-field__swatches.tc-field__swatches{height:22px}
 .tc-field__swatch.tc-field__swatch{height:17px;border-radius:50%;width:17px}
-.tc-field__swatch--on.tc-field__swatch--on{outline:1.5px solid var(--tc-accent);outline-offset:2px}
+.tc-field__swatch--on.tc-field__swatch--on,.tc-field__swatch:has(> .tc-seg__box:checked){outline:1.5px solid var(--tc-accent);outline-offset:2px}
+label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-dim--lh1-55.tc-dim--lh1-55{line-height:1.55}
 .tc-field__row.tc-field__row{margin-top:2px}
 

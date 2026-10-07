@@ -227,9 +227,14 @@ func (q DocQuote) html(mix) string {
 // scrolls inside the block.
 type DocCode struct {
 	Text string
+	// Wrap wraps the lines at the column: a note's source, written as prose
+	// (Carrel's task 104), not code.
+	Wrap bool
 }
 
-func (c DocCode) html(mix) string { return `<pre class="tc-doc__code">` + esc(c.Text) + `</pre>` }
+func (c DocCode) html(mix) string {
+	return `<pre` + class(nil, "tc-doc__code", is("wrap", c.Wrap)) + `>` + esc(c.Text) + `</pre>`
+}
 
 // DocBody is a plain paragraph inside a document's text.
 type DocBody struct {
@@ -369,6 +374,7 @@ type DocbarPart interface {
 
 func (Button) docbarPart() {}
 func (BarSep) docbarPart() {}
+func (Drop) docbarPart()   {}
 
 // DraftNote says where the draft is kept and when it was saved.
 type DraftNote struct {
@@ -396,7 +402,7 @@ func (Button) docbarEnd()    {}
 // Docbar — tc-docbar
 //
 // Роль. Полоса правки над документом: сохранить, отменить, разметка, вложения; справа — черновик и вид.
-// Вход. Docbar{Items, More, End, Rule}.
+// Вход. Docbar{Edit, Items, More, End, Rule}.
 // Состояния. plain | rule.
 // Инварианты. Полоса — одна строка: второстепенное уходит под «⋯» первым; сохранить — первой кнопкой; полоса печатает фрагмент своего кадра.
 // Поведение. Ctrl+S сохраняет; «⋯» открывает то, что не поместилось.
@@ -404,6 +410,10 @@ func (Button) docbarEnd()    {}
 // Содержимое. Кнопки, разделители, «⋯»; в конце — автосохранение, черновик, клавиша, ширина текста, фокус.
 // Чего нет. Второй строки: то, что не влезло, уходит под «⋯».
 type Docbar struct {
+	// Edit is an edit's bar: without a script only its Save and Cancel stand
+	// — an edit is not reloaded midway, and the rest needs the page's script
+	// (the owner's decisions of 02.10, Carrel's task 104).
+	Edit  bool
 	Items []DocbarPart
 	More  *Button
 	End   []DocbarEnd
@@ -415,7 +425,7 @@ func (b Docbar) Render() string { return b.html(nil) }
 
 func (b Docbar) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-docbar", pick(b.Rule, "tc-docbar--rule")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-docbar", pick(b.Rule, "tc-docbar--rule"), pick(b.Edit, "tc-docbar--edit")) + `>`)
 	for _, it := range b.Items {
 		s.WriteString(it.html(nil))
 	}
