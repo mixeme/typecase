@@ -691,11 +691,11 @@ func Files4() Screen {
 					Icon:   "move",
 					Title:  "Move 3 items",
 					Head: []w.SheetHeadPart{
+						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("from Documents / carrel / attachments")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
-							Place:   w.Pushed,
 						},
 					},
 					Body: []w.SheetPart{
@@ -705,12 +705,7 @@ func Files4() Screen {
 						},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{
-									Icon:  "file",
-									Label: "Documents",
-									Send:  w.Send{Name: "to", Value: "sftpgo/documents"},
-									Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11},
-								},
+								{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
 								{
 									Icon:   "file",
 									Label:  "carrel",
@@ -728,12 +723,6 @@ func Files4() Screen {
 									Label:  "2026-07",
 									Indent: w.TreeLevel58,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"},
-								},
-								{
-									Icon:  "file",
-									Label: "Files",
-									Send:  w.Send{Name: "to", Value: "nextcloud/files"},
-									Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11},
 								},
 								{
 									Icon:        "file",

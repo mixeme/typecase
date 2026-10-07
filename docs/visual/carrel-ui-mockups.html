@@ -7106,7 +7106,7 @@ Read  2 min ago</div>
       </div>
     </div>
   </div>
-  <figcaption>Поле в шапке листа загрузки выбирает <b>сервер</b>, на который ляжет файл; рядом с ним — полный путь выбранной папки. Остальное — в дереве ниже: хранилища выбранного сервера верхними строками и папки в них; хранилищ других серверов в дереве нет.</figcaption>
+  <figcaption>Поле в шапке листа загрузки выбирает <b>сервер</b>, на который ляжет файл; рядом с ним — полный путь выбранной папки. То же поле — в шапке листов переноса, копирования и Attach from Files. Остальное — в дереве ниже: хранилища выбранного сервера верхними строками и папки в них; хранилищ других серверов в дереве нет.</figcaption>
   </figure>
 
 </div>
@@ -7349,16 +7349,16 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-dup"/></svg>
         <b class="tc-sheet__title">Copy 3 items</b>
-        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
             <div data-part="children" class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
             <div data-part="children" class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
             <div class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><svg><use href="#i-file"/></svg>2026-07</div>
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></div>
             <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
           </div>
           <div class="tc-msg tc-msg--flush-top2">A copy travels through Carrel even inside one server: each file is downloaded and uploaded again, one at a time.</div>
@@ -7388,18 +7388,18 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
         <b class="tc-sheet__title">Move 3 items</b>
-        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-rubric">Where to put it</div>
           <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="button">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
           <div class="tc-msg is-alert tc-msg--flush-top2">There is a folder called «2026-07» in attachments already. Choose another name.</div>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
             <div data-part="children" class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
             <div class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><svg><use href="#i-file"/></svg>attachments</div>
             <div data-part="children" class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-file"/></svg>2026-07</div>
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></div>
             <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
           </div>
         </div>
@@ -7436,18 +7436,19 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-file"/></svg>
         <b class="tc-sheet__title">Attach from Files</b>
-        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">to «Собрать чемодан»</span>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">to «Собрать чемодан»</span>
         </div>
         <div class="tc-sheet__body">
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Attach a file that is in Files already. Up to 2 MB it is written into the record, as a file from this computer is; a larger one stays where it lies, and the record keeps a link to it.</span>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
             <div class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
             <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
             <div class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-doc"/></svg>release-checklist.md <span class="tc-push tc-dim tc-dim--t11">3 KB · inside</span></div>
             <div class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-doc"/></svg>смета-подрядчик.pdf <span class="tc-push tc-dim tc-dim--t11">1.2 MB · inside</span></div>
             <div class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-img"/></svg>2026-08-04-whiteboard.jpg <span class="tc-push tc-dim tc-dim--t11">2.8 MB · link</span></div>
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Public <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Public</div>
           </div>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" disabled>Attach</button><span class="tc-dim tc-dim--t11-5">Choose a file in the tree.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
@@ -7719,16 +7720,16 @@ Read  2 min ago</div>
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
               <b class="tc-sheet__title">Move 3 items</b>
-              <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
+              <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+              <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
               <div class="tc-tree">
-            <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></label>
+            <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents"><svg><use href="#i-file"/></svg>Documents</label>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel"><svg><use href="#i-file"/></svg>carrel</label>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments"><svg><use href="#i-file"/></svg>attachments</label>
             <label class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" checked><svg><use href="#i-file"/></svg>2026-07</label>
-            <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="nextcloud/files"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></label>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
               <div class="tc-msg tc-msg--flush-top2">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.</div>
@@ -7739,7 +7740,7 @@ Read  2 min ago</div>
       </div>
     </div>
   </div>
-  <figcaption>Дерево показывает все подключённые хранилища сразу — это и есть единый вид в файлах. Коллекция только для чтения видна, но целью быть не может. <b>«New folder» стоит в дереве</b>, как в быстрой загрузке: папку заводят в тот момент, когда выбирают куда класть, и сразу кладут туда. Copy открывает этот же лист, с кнопкой Copy here.</figcaption>
+  <figcaption>Сервер выбирают в шапке листа, остальное — в дереве: оно показывает хранилища выбранного сервера и папки в них. Хранилище только для чтения видно, но целью быть не может. <b>«New folder» стоит в дереве</b>, как в быстрой загрузке: папку заводят в тот момент, когда выбирают куда класть, и сразу кладут туда. Copy открывает этот же лист, с кнопкой Copy here.</figcaption>
   </figure>
 
   <figure style="flex:1 1 100%">
@@ -11775,10 +11776,9 @@ Read  2 min ago</div>
         <div class="tc-sheet__body">
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Where large attachments go: a folder of a file collection you can write to. Carrel makes it on first use.</span>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents <span class="tc-push tc-dim tc-dim--t11">sftpgo</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
             <div class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
             <div class="is-on tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></div>
             <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
           </div>
         </div>

@@ -276,6 +276,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- The owner's decision of 07.10 (Р-37, the other sheets): the sheets of a
+  move, a copy and Attach from Files have the pick of the server in their
+  head, and their tree shows the storages of that server only, without the
+  marks of the server (s-files-4, -11, -13, -16); the tree of «Attachments ·
+  Browse» lost the storage of the other server (attachments-4).
 - The owner's decision of 07.10 (Р-37, second part): the tree of the upload
   sheet shows the storages of the server chosen in the head and their
   folders — the storages of other servers and the marks of the server on the

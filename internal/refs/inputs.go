@@ -14,7 +14,7 @@ var _ = add(
 	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 1),
 	form("value", w.Input{Value: "anna@example.org", Label: "Email"}, "s-auth-12", "tc-in", 2),
 	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 3),
-	form("focus", w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, "s-files-13", "tc-in", 1),
+	form("focus", w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, "s-files-13", "tc-in", 2),
 	form("error", w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, "s-contacts-18", "tc-in", 1),
 	form("value", w.Input{Value: "Анна Ковалёва", Label: "Display name"}, "components-10", "tc-in", 1),
 	form("mono", w.Input{Value: "8765", Mono: true, Label: "Port"}, "components-13", "tc-in", 1),

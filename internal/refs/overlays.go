@@ -631,15 +631,23 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
-	overlay("form", w.Sheet{Action: "/app/files/sftpgo/documents/op/carrel/attachments?op=move", Icon: "move", Title: "Move 3 items", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("from Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+	overlay("server", w.Sheet{Icon: "dup", Title: "Copy 3 items", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("from Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.Rubric{Text: "Where to put it", Items: []w.RubricPart{w.Button{Label: "New folder", Icon: "plus", Small: true}}},
 		w.Tree{Rows: []w.TreeRow{
-			{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}, Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Documents"},
+			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+			{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
+			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 4},
+		w.Msg{Parts: []w.MsgPart{w.Text("A copy travels through Carrel even inside one server: each file is downloaded and uploaded again, one at a time.")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Copy here", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-files-11", "tc-sheet", 1),
+	overlay("form", w.Sheet{Action: "/app/files/sftpgo/documents/op/carrel/attachments?op=move", Icon: "move", Title: "Move 3 items", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("from Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
+		w.Rubric{Text: "Where to put it", Items: []w.RubricPart{w.Button{Label: "New folder", Icon: "plus", Small: true}}},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
 			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
-			{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/2026-07"}},
 			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}},
-			{Icon: "file", Label: "Files", Send: w.Send{Name: "to", Value: "nextcloud/files"}, Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
-			{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 3},
+			{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}},
+			{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 4},
 		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-files-4", "tc-sheet", 1),
 	overlay("plain-head", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Dim{Parts: []w.Inline{w.Text("The rail’s sources, on a narrow screen.")}, Size: w.Dim11_5, Variant: w.DimWrap}}}, "components-41", "tc-sheet", 1),
@@ -679,16 +687,16 @@ var _ = add(
 			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}}, Foot: []w.SheetFootPart{w.Button{Label: "Choose this folder", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "attachments-4", "tc-sheet", 1),
 	overlay("danger", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Withdraw my deposited key", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("After withdrawal nobody can recover this account, including you. The copy of your data key on this server is destroyed; your records and connections stay as they are.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "account-11", "tc-sheet", 1),
-	overlay("icon", w.Sheet{Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("to «Собрать чемодан»")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+	overlay("icon", w.Sheet{Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("to «Собрать чемодан»")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.SheetNote{Text: "Attach a file that is in Files already. Up to 2 MB it is written into the record, as a file from this computer is; a larger one stays where it lies, and the record keeps a link to it."},
 		w.Tree{Rows: []w.TreeRow{
-			{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Documents"},
 			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 			{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
-			{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
-			{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
-			{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel40, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
-			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, w.Dim{Parts: []w.Inline{w.Text("Choose a file in the tree.")}, Size: w.Dim11_5}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-files-16", "tc-sheet", 1),
+			{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
+			{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
+			{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
+			{Icon: "file", Label: "Public"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, w.Dim{Parts: []w.Inline{w.Text("Choose a file in the tree.")}, Size: w.Dim11_5}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-files-16", "tc-sheet", 1),
 	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 3 events and tasks name the old one")}}}}},
 		w.SheetBlock{Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "2 records in Shared", Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}}}, {Name: "Общий · baikal", Note: w.Dim{Parts: []w.Inline{w.Text("— could not be read: the server answered 401 Unauthorized. What it holds keeps the old address.")}}}}},
