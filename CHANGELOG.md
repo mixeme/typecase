@@ -15,6 +15,34 @@ do, not what the authors did.
 
 ### Added
 
+- **The states of tasks and notes are frames** (Carrel's tasks 97, 124), the
+  same set contacts have. Tasks: nothing ticked, the poll running, a source
+  refused, an empty list, a list whose server did not answer, a read-only
+  list, the loss report of an edit (states-18 … -24); a new task (s-tasks-14)
+  and one list (s-tasks-15). Notes: the same seven (states-25 … -31), a new
+  note (s-notes-30) and one notebook (s-notes-31). s-tasks-1 and s-notes-1
+  now name the combined view's address (`/app/tasks`, `/app/notes`); the
+  address of a collection belongs to the frames of one list and one
+  notebook. One summary of a poll for every section: «N failed» with its
+  menu (Р-31). In a read-only list the row's tick is a sign, not a button:
+  `DueRow` prints `Tick.Sign` (state `sign`), and the generator reads it
+  from a `span.tc-tick` in the row.
+- **The calendar's state frames are drawn like its list** (Carrel's task 108
+  and the rest of 106). states-3, -6, -13, -14 and -15 have the counts of the
+  navigation and the buttons of the rail's foot; states-13 draws two days.
+  One calendar has a frame of its own, s-agenda-17, and s-agenda-1 names
+  `/app/calendar` only. One way for every section: a view with nothing
+  ticked has no tags in the rail and a disabled Refresh («Nothing is ticked
+  to ask.» — states-7, -14, -18, -25); while a poll runs Refresh is disabled
+  («The poll is still running.») and the poll's bar says how long it has
+  been running (states-3, -8, -13, -19, -26); a poll that ended with a
+  refusal says under the list what is missing (s-agenda-1, as states-6 and
+  -9). A source whose server did not answer has the sign in the rail, not a
+  dash, in the frames of one collection too (states-11, -22, -29). The
+  poll's meter is red only when the poll has ended with a refusal, and green
+  while it runs (the owner's decision of 07.10, Р-40: s-agenda-1,
+  s-contacts-7, dark-1, phone-1, mentions-2, s-mailbox-21). A new note that
+  is still empty shows no draft (Р-41). 416 frames.
 - **`Button.Copied`** (the owner's decision of 07.10, Р-36): what a Copy
   button says for a moment after it has copied (`data-tc-copied`). Its right
   edge stays where it is and the button grows or shrinks to the left, with

@@ -71,7 +71,7 @@ func Dark1() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 83},
+						Meter: w.Meter{Percent: 83, Alert: true},
 						Parts: []w.RunbarPart{
 							w.Text("Polled 5 of 6 sources · 14 events · "),
 							w.Drop{

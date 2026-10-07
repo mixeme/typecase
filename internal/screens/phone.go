@@ -26,7 +26,7 @@ func Phone1() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Runbar{
-						Meter: w.Meter{Percent: 83, Width: w.Meter60},
+						Meter: w.Meter{Percent: 83, Alert: true, Width: w.Meter60},
 						Parts: []w.RunbarPart{
 							w.Text("5 of 6 · 14 events · "),
 							w.Drop{

@@ -1761,7 +1761,7 @@ func Contacts7() Screen {
 						Variant: w.BarWide,
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 83},
+						Meter: w.Meter{Percent: 83, Alert: true},
 						Parts: []w.RunbarPart{
 							w.Text("Polled 5 of 6 calendars · matched by "),
 							w.Mono{Text: "a.kovaleva@example.org"},

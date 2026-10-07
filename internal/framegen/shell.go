@@ -875,7 +875,11 @@ func (g *gen) row0(e *El) string {
 		if els[0].Has("is-done") {
 			d = "Done: true, "
 		}
-		f = append(f, "Tick: w.Tick{"+d+`Label: "Done"}`, "Mark: "+g.mark(els[1]))
+		tick := "Tick: w.Tick{" + d + `Label: "Done"}`
+		if els[0].Tag == "span" { // a read-only list: the tick is a sign (Carrel's task 124)
+			tick = "Tick: w.Tick{" + d + "Sign: true}"
+		}
+		f = append(f, tick, "Mark: "+g.mark(els[1]))
 		f = append(f, g.titleFields(e.Kid("tc-row__title"), "Title")...)
 		f = g.tagsf(e, f)
 		f = append(f, "Due: "+text("tc-row__due"), "Progress: "+text("tc-row__progress"))

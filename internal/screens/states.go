@@ -121,7 +121,7 @@ func States3() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The poll is still running.", State: w.ButtonDisabled},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -129,12 +129,12 @@ func States3() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -204,7 +204,12 @@ func States3() Screen {
 					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
 				},
 				w.RailFoot{
-					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
@@ -600,12 +605,12 @@ func States6() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -669,7 +674,12 @@ func States6() Screen {
 					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
 				},
 				w.RailFoot{
-					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
@@ -1129,7 +1139,7 @@ func States7() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "Nothing is ticked to ask.", State: w.ButtonDisabled},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1178,11 +1188,6 @@ func States7() Screen {
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 					},
 				},
-				w.RailSec{
-					Items: []w.RailSecPart{
-						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}},
-				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
 						w.Button{Icon: "plus", Title: "New address book"},
@@ -1228,7 +1233,7 @@ func States8() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The poll is still running.", State: w.ButtonDisabled},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1346,7 +1351,10 @@ func States8() Screen {
 							Secondary: true,
 						},
 					},
-					w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards")}},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62},
+						Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
@@ -1755,7 +1763,7 @@ func States11() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "—", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Current: true, Error: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
 					},
 				},
@@ -2011,7 +2019,7 @@ func States13() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The poll is still running.", State: w.ButtonDisabled},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2019,12 +2027,12 @@ func States13() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -2088,7 +2096,12 @@ func States13() Screen {
 					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
 				},
 				w.RailFoot{
-					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
@@ -2192,7 +2205,7 @@ func States13() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 4 of 6 sources · 9 events · "),
+							w.Text("Polled 4 of 6 sources · 3 events · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -2230,6 +2243,18 @@ func States13() Screen {
 							},
 						},
 					},
+					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Time:   "11:00",
+								Title:  []w.Inline{w.Text("Ревью макетов")},
+								Detail: "Переговорная 1",
+								Source: "nextcloud · Работа",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -2244,7 +2269,7 @@ func States14() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "Nothing is ticked to ask.", State: w.ButtonDisabled},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2252,12 +2277,12 @@ func States14() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -2317,13 +2342,13 @@ func States14() Screen {
 						},
 					},
 				},
-				w.RailSec{
-					Items: []w.RailSecPart{
-						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
-				},
 				w.RailFoot{
-					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
@@ -2370,12 +2395,12 @@ func States15() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -2437,7 +2462,12 @@ func States15() Screen {
 					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
 				},
 				w.RailFoot{
-					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
 					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 				},
 			},
@@ -2540,6 +2570,1884 @@ func States15() Screen {
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{w.Strong("No events this week."), w.Text(" Nothing in Личный from 2 to 8 November.")},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States18 is frame «Задачи · ни один список не отмечен» (states-18).
+func States18() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "Nothing is ticked to ask.", State: w.ButtonDisabled},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined list",
+							Meta:   "30",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9", Hidden: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Праздники РФ",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 3 lists · 0 accounts")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("No lists are ticked."),
+							w.Text(" Tick the lists to show in the rail, or all of them at once. "),
+							w.Button{Label: "Tick every list", Kind: w.ButtonPrimary},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States19 is frame «Задачи · опрос идёт» (states-19).
+func States19() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The poll is still running.", State: w.ButtonDisabled},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined list",
+							Meta:    "30",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Праздники РФ",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+					},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62},
+						Parts: []w.RunbarPart{w.Text("Polled 1 of 2 sources · 2 tasks"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 1, Alert: true}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
+								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
+								Due:      "7 Aug",
+								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Overdue:  true,
+								Href:     "#",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "This week", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Собрать чемодан")},
+								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
+								Due:      "12 Aug 18:00",
+								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Href:     "#",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States20 is frame «Задачи · источник недоступен» (states-20).
+func States20() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined list",
+							Meta:    "30",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Error: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Праздники РФ",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 2 tasks")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+					},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62, Alert: true},
+						Parts: []w.RunbarPart{
+							w.Text("Polled 1 of 2 sources · 2 tasks · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#3F6E8C", Size: w.MarkH11},
+											Source: "nextcloud · Работа",
+											Answer: "REPORT /remote.php/dav/calendars/mix/rabota/ → 503 Service Unavailable",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 1, Alert: true}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
+								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
+								Due:      "7 Aug",
+								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Overdue:  true,
+								Href:     "#",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "This week", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Собрать чемодан")},
+								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
+								Due:      "12 Aug 18:00",
+								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Href:     "#",
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Text("What arrived in time is shown. Tasks from the unavailable list are missing — not “there are none”, but “we have not seen them”."),
+						},
+						Variant: w.EmptySmall,
+					},
+				},
+			},
+		},
+	}
+}
+
+// States21 is frame «Список задач пуст» (states-21).
+func States21() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined list",
+							Meta:   "30",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "0", Current: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Праздники РФ",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#3F6E8C", Size: w.MarkH20}, Text: "Работа"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 0 tasks")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("This list is empty."),
+							w.Text(" Add a task, or import a file of them. "),
+							w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
+							w.Text(" "),
+							w.Button{Label: "Import", Icon: "up"},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States22 is frame «Список задач · сервер не ответил» (states-22).
+func States22() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined list",
+							Meta:   "30",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Current: true, Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Праздники РФ",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Дела"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Дела is unavailable."),
+							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Button{Label: "Try again", Small: true},
+						},
+						Tone: w.MsgAlert,
+					},
+					w.MainDiag{
+						Diag: w.Diag{Text: "REPORT /remote.php/dav/calendars/mix/dela/\nnextcloud\ndav: HTTP 503: the server is busy"},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States23 is frame «Список задач только для чтения» (states-23).
+func States23() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 3,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined list",
+							Meta:   "30",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Kind:    w.TickRowExternal,
+							Mark:    w.Mark{Colour: "#8C6239"},
+							Label:   "Праздники РФ",
+							Meta:    "2",
+							Current: true,
+							Trail:   w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New list"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{
+							Mark:  &w.Mark{Colour: "#8C6239", Size: w.MarkH20},
+							Text:  "Праздники РФ",
+							Badge: &w.Badge{Label: "read-only"},
+						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Subscriptions · a feed can only be read")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "This week", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#8C6239"},
+								Title:    []w.Inline{w.Text("День Воздушного флота — поздравить отца")},
+								Due:      "12 Aug",
+								Progress: "—",
+								Source:   "Праздники РФ",
+								Href:     "#",
+							},
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#8C6239"},
+								Title:    []w.Inline{w.Text("День археолога — открытка Вере")},
+								Due:      "15 Aug",
+								Progress: "—",
+								Source:   "Праздники РФ",
+								Href:     "#",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States24 is frame «Задача · сервер не сохранил свойства» (states-24).
+func States24() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to the card", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Отправить документы в МФЦ"},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{w.Text("nextcloud · Дела · "), w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}},
+							},
+						},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "task-edit-loss",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("The change was saved, but the server did not keep these properties."),
+							w.Text(" Other clients will not see them either: "),
+							w.Mono{Text: "X-APPLE-SORT-ORDER"},
+							w.Text(", "),
+							w.Mono{Text: "X-OC-HIDESUBTASKS"},
+							w.Text("."),
+						},
+						Space: w.MsgFlushTop2,
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Summary",
+								Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Label: "Description",
+								Parts: []w.FieldPart{w.Area{Text: "Опись, копия паспорта и заявление. Приём до 18:00, окно 4.", Label: "Text"}},
+								Width: w.FieldFull,
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "When"},
+								Items: []w.FieldSetPart{
+									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{
+										Label: "Start date",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Start time",
+										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Due date",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-07", Label: "Due date", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Due time",
+										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Due time", Mono: true}},
+										Width: w.FieldXS,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Progress"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Needs action"}}, Width: w.FieldSM},
+									w.Field{Label: "Priority", Parts: []w.FieldPart{w.Pick{Value: "High · 1"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Percent complete",
+										Parts: []w.FieldPart{w.Input{Value: "0", Label: "Percent complete", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("Done")}}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Reminders"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Location",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Location"}},
+										Width: w.FieldMD,
+									},
+									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}},
+										Width: w.FieldLG,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attachments"},
+								Items: []w.FieldSetPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Drop{
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Icon: "up",
+															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "task-loss-attachments"},
+															Row: w.Line{
+																Items: []w.LinePart{
+																	w.Faced{
+																		Face:  w.FaceLarge,
+																		Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																	},
+																	w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Gap: w.LineGap8,
+															},
+															Label: "From this computer",
+														},
+														w.MenuItem{Icon: "file", Label: "From Files"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnder,
+												},
+											},
+											w.Dim{Parts: []w.Inline{w.Text("Nothing attached")}, Size: w.Dim11_5, Variant: w.DimWrap, Empty: true},
+										},
+										Gap:   w.LineGap8,
+										Block: true,
+										ID:    "task-loss-attachments",
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Source"},
+								Items: []w.FieldSetPart{
+									w.Fields{
+										Items: []w.FieldsItem{
+											{
+												Term:  "Path",
+												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")},
+												Face:  w.ValueMono,
+											},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · не менялась на сервере")}},
+										},
+										Place: w.Grown,
+									},
+								},
+							},
+						},
+					},
+					w.Danger{Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid}},
+				},
+			},
+		},
+	}
+}
+
+// States25 is frame «Заметки · ни одна тетрадь не отмечена» (states-25).
+func States25() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "Nothing is ticked to ask.", State: w.ButtonDisabled},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined notebook",
+							Meta:   "86",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 3 notebooks · 0 accounts")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("No notebooks are ticked."),
+							w.Text(" Tick the notebooks to show in the rail, or all of them at once. "),
+							w.Button{Label: "Tick every notebook", Kind: w.ButtonPrimary},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States26 is frame «Заметки · опрос идёт» (states-26).
+func States26() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The poll is still running.", State: w.ButtonDisabled},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined notebook",
+							Meta:    "86",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{
+						w.Tag{Label: "all", On: true},
+						w.Tag{Label: "встречи"},
+						w.Tag{Label: "идеи"},
+						w.Tag{Label: "книги"},
+						w.Tag{Label: "рецепты"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
+							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
+					},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62},
+						Parts: []w.RunbarPart{w.Text("Polled 1 of 2 sources · 2 notes"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
+								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
+								Date:    "10 Aug",
+								Source:  "nextcloud · Записи",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
+								Date:    "8 Aug",
+								Source:  "nextcloud · Записи",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States27 is frame «Заметки · источник недоступен» (states-27).
+func States27() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined notebook",
+							Meta:    "86",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Error: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{
+						w.Tag{Label: "all", On: true},
+						w.Tag{Label: "встречи"},
+						w.Tag{Label: "идеи"},
+						w.Tag{Label: "книги"},
+						w.Tag{Label: "рецепты"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 2 notes · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
+							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
+					},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62, Alert: true},
+						Parts: []w.RunbarPart{
+							w.Text("Polled 1 of 2 sources · 2 notes · "),
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+											Source: "nextcloud · Дневник",
+											Answer: "REPORT /remote.php/dav/calendars/mix/dnevnik/ → 503 Service Unavailable",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
+								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
+								Date:    "10 Aug",
+								Source:  "nextcloud · Записи",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
+								Date:    "8 Aug",
+								Source:  "nextcloud · Записи",
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Text("What arrived in time is shown. Notes from the unavailable notebook are missing — not “there are none”, but “we have not seen them”."),
+						},
+						Variant: w.EmptySmall,
+					},
+				},
+			},
+		},
+	}
+}
+
+// States28 is frame «Тетрадь пуста» (states-28).
+func States28() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined notebook",
+							Meta:   "86",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "0", Current: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{
+						w.Tag{Label: "all", On: true},
+						w.Tag{Label: "встречи"},
+						w.Tag{Label: "идеи"},
+						w.Tag{Label: "книги"},
+						w.Tag{Label: "рецепты"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH20}, Text: "Дневник"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 0 notes · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("This notebook is empty."),
+							w.Text(" Write a note, or import a file of them. "),
+							w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
+							w.Text(" "),
+							w.Button{Label: "Import", Icon: "up"},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States29 is frame «Тетрадь · сервер не ответил» (states-29).
+func States29() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined notebook",
+							Meta:   "86",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Current: true, Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{
+						w.Tag{Label: "all", On: true},
+						w.Tag{Label: "встречи"},
+						w.Tag{Label: "идеи"},
+						w.Tag{Label: "книги"},
+						w.Tag{Label: "рецепты"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Записи"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "up"},
+								w.Button{Label: "Export", Icon: "down"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Записи is unavailable."),
+							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Button{Label: "Try again", Small: true},
+						},
+						Tone: w.MsgAlert,
+					},
+					w.MainDiag{
+						Diag: w.Diag{Text: "REPORT /remote.php/dav/calendars/mix/zapisi/\nnextcloud\ndav: HTTP 503: the server is busy"},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States30 is frame «Тетрадь только для чтения» (states-30).
+func States30() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined notebook",
+							Meta:   "86",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#3F6E8C"},
+							Label:   "Общие с семьёй",
+							Meta:    "2",
+							Current: true,
+							Trail:   w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{
+						w.Tag{Label: "all", On: true},
+						w.Tag{Label: "встречи"},
+						w.Tag{Label: "идеи"},
+						w.Tag{Label: "книги"},
+						w.Tag{Label: "рецепты"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{
+							Mark:  &w.Mark{Colour: "#3F6E8C", Size: w.MarkH20},
+							Text:  "Общие с семьёй",
+							Badge: &w.Badge{Label: "read-only"},
+						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · the server granted no write access")}}},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}}},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
+							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Title:   []w.Inline{w.Text("Список на дачу")},
+								Excerpt: "Семена, шланг, две банки краски для забора…",
+								Date:    "6 Aug",
+								Source:  "nextcloud · Общие с семьёй",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Title:   []w.Inline{w.Text("Рецепт бабушкиного пирога")},
+								Excerpt: "Мука — три стакана, кефир — стакан, яблоки кислые…",
+								Tags:    []w.RowTag{w.Tag{Label: "рецепты"}},
+								Date:    "19 Jul",
+								Source:  "nextcloud · Общие с семьёй",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States31 is frame «Заметка · сервер не сохранил свойства» (states-31).
+func States31() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Neighbours"},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "note", Label: "Планы на осень"},
+								{Icon: "note", Label: "Заметка со встречи"},
+								{Icon: "note", Label: "Что почитать про CRDT"},
+							},
+							On:      2,
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Docbar{
+						Items: []w.DocbarPart{
+							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-loss"},
+							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
+							w.BarSep{},
+							w.Button{Label: "B", Bold: true},
+							w.Button{Label: "I", Variant: w.ButtonItalic},
+							w.Button{Label: "H2", Tertiary: true},
+							w.Button{Label: "• list", Tertiary: true},
+							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true},
+							w.Button{Icon: "link", Title: "Link", Tertiary: true},
+							w.Drop{
+								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{
+											Icon: "up",
+											File: &w.FileField{Form: "note-loss", Name: "file", Label: "From this computer", List: "note-loss-attachments"},
+											Row: w.DocAttach{
+												Name:   "{name}",
+												Size:   w.Dim{Parts: []w.Inline{w.Text("· {size}")}},
+												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+											},
+											Label: "From this computer",
+										},
+										w.MenuItem{Icon: "file", Label: "From Files"},
+									},
+									Width: w.MenuWidth212,
+									Pop:   w.MenuUnder,
+								},
+							},
+						},
+						More: &w.Button{Icon: "dots", Title: "More"},
+						End: []w.DocbarEnd{
+							w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true},
+							w.DraftNote{Text: "Draft in this window ·", Time: w.Mono{Text: "11:42"}, Secondary: true},
+							w.Kbd{Keys: "Ctrl+S", Secondary: true},
+							w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}, Secondary: true},
+							w.Button{Folds: true, Label: "Focus", Icon: "focus", Title: "Focus"},
+						},
+						Edit: true,
+					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "note-loss",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("The change was saved, but the server did not keep these properties."),
+							w.Text(" Other clients will not see them either: "),
+							w.Mono{Text: "X-EVOLUTION-MEMO-COLOR"},
+							w.Text(", "),
+							w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"},
+							w.Text("."),
+						},
+						Space: w.MsgFlushTop2,
+					},
+					w.DocLayout{
+						Items: []w.DocLayoutPart{
+							w.Doc{
+								Items: []w.DocPart{
+									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
+									w.DocFields{
+										Items: []w.Field{
+											w.Field{
+												Label: "Notebook",
+												Parts: []w.FieldPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Записи",
+																	On:    true,
+																	Name:  "notebook",
+																	Value: "nextcloud/zapisi",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "nextcloud · Дневник",
+																	Name:  "notebook",
+																	Value: "nextcloud/dnevnik",
+																},
+																w.MenuItem{
+																	Mark:   &w.Mark{Colour: "#3F6E8C"},
+																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+																	Label:  "nextcloud · Общие с семьёй",
+																	Reason: "Read-only: this account cannot write here",
+																	Name:   "notebook",
+																	Value:  "nextcloud/semya",
+																},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+												Width: w.FieldFlex2_280,
+											},
+											w.Field{
+												Label: "Date",
+												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},
+												Width: w.FieldFix150,
+											},
+											w.Field{
+												Label: "Time",
+												Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "dtstart.time", Value: "11:05", Label: "Time", Mono: true}},
+												Width: w.FieldFix130,
+											},
+											w.Field{
+												Label: "Tags",
+												Parts: []w.FieldPart{w.Input{Name: "categories", Value: "встречи, релиз", Label: "Tags"}},
+												Width: w.FieldFlex3_320,
+											},
+											w.Field{
+												Label: "Related to",
+												Parts: []w.FieldPart{w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}}}},
+												Width: w.FieldFlex3_340,
+											},
+										},
+									},
+									w.Area{
+										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
+										Variant: w.AreaBody,
+										Focus:   true,
+										Name:    "description",
+										Label:   "Text",
+									},
+									w.DocNote{
+										Parts: []w.Inline{
+											w.Text("Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here."),
+										},
+									},
+								},
+								ID:     "note-loss",
+								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+							},
+							w.Docmeta{
+								Sections: []w.DocmetaSec{
+									{
+										Title: w.Rubric{
+											Text: "Attachments",
+											Items: []w.RubricPart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{
+																Icon: "up",
+																File: &w.FileField{Form: "note-loss", Name: "file", Label: "From this computer", List: "note-loss-attachments"},
+																Row: w.DocAttach{
+																	Name:   "{name}",
+																	Size:   w.Dim{Parts: []w.Inline{w.Text("· {size}")}},
+																	Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Label: "From this computer",
+															},
+															w.MenuItem{Icon: "file", Label: "From Files"},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnder,
+													},
+												},
+											},
+										},
+										Items: []w.DocmetaPart{
+											w.DocAttach{
+												Name:   "2026-08-10-sync-board.png",
+												Size:   w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
+												Where:  w.Badge{Label: "in the note"},
+												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Href:   "#",
+											},
+											w.DocAttach{
+												Name:   "запись-встречи.m4a",
+												Size:   w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
+												Where:  w.Badge{Label: "Documents / carrel"},
+												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Href:   "#",
+											},
+										},
+										ID: "note-loss-attachments",
+									},
+									{
+										Title: w.Rubric{
+											Text:  "The same note in other notebooks",
+											Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}},
+										},
+										Items: []w.DocmetaPart{
+											w.DocRefs{
+												Items: []w.DocRef{
+													{
+														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+														Name: "nextcloud · Дневник",
+														Href: "#",
+														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
+													},
+												},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{Text: "Source"},
+										Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}},
+									},
+								},
+								Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd},
+							},
+						},
 					},
 				},
 			},

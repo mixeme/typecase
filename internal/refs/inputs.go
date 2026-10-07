@@ -72,6 +72,7 @@ var _ = add(
 	form("typed", w.Query{Value: "ковал", Label: "Search everything…"}, "s-find-1", "tc-q", 1),
 
 	// tc-in as tags
+	form("tags", w.TagInput{Parts: []w.TagInputPart{}}, "s-tasks-14", "tc-in", 12),
 	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}}, "s-tasks-3", "tc-in", 13),
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Dim{Parts: []w.Inline{w.Text("ковал")}}}, Focus: true}, "s-notes-4", "tc-in", 6),
 	form("add", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}, w.Tag{Label: "x", Removable: true}}, Columns: true, Name: "attendee", Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-3", "tc-in", 14),
@@ -89,6 +90,8 @@ var _ = add(
 
 	// tc-in as a text area
 	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 15),
+	form("body", w.Area{Text: "", Variant: w.AreaBody, Name: "description", Label: "Text"}, "s-notes-30", "tc-in", 7),
+	form("title", w.Area{Text: "", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"}, "s-notes-30", "tc-in", 1),
 	form("area", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 21),
 	form("area-empty", w.Area{Label: "Text"}, "s-contacts-27", "tc-in", 13),
 	form("body", w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}, "s-notes-5", "tc-in", 2),

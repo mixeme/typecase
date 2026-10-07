@@ -80,11 +80,11 @@ var _ = add(
 	cards("plain", w.Meter{Percent: 83}, "components-16", "tc-meter", 1),
 	cards("track", w.Meter{Percent: 100, Track: 100}, "components-26", "tc-meter", 1),
 	cards("alert", w.Meter{Percent: 83, Alert: true}, "states-6", "tc-meter", 1),
-	cards("width", w.Meter{Percent: 83, Width: w.Meter60}, "phone-1", "tc-meter", 1),
+	cards("width", w.Meter{Percent: 83, Alert: true, Width: w.Meter60}, "phone-1", "tc-meter", 1),
 	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
-	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards")}}, "states-8", "tc-runbar", 1),
+	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}}}, "states-8", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events · "), w.Drop{Trigger: w.Button{Label: "1 failed", Small: true, Menu: true, Kind: w.ButtonDanger}}}}, "dark-1", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 5 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}, w.Text(" · radicale · vps · Архив does not keep links")}}, "mentions-5", "tc-runbar", 1),
@@ -758,6 +758,10 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings.instance")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table", 1),
 
 	// tc-docmeta
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-new", Name: "file", Label: "From this computer", List: "note-new-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{}, ID: "note-new-attachments"}}}, "s-notes-30", "tc-docmeta", 1),
 	cards("picked", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "saving-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
