@@ -284,6 +284,10 @@ do, not what the authors did.
   «2026-07» and «2026-08» under it, the crumbs of the tiles say
   Documents / carrel / attachments / 2026-07, a taken name is refused «in
   attachments already» (s-files-4, -5, -11, -13, -19, s-notes-11, dark-3).
+  The head of the upload sheet has the pick of the server and the full path
+  of the chosen folder beside it (Carrel's task 120; s-notes-11, s-files-19);
+  what the pick opens is the new frame «Upload · сервер» (s-notes-29).
+  397 frames.
 - Carrel's task 116: the files of «attachments» in the sheet From Files
   stand a level under their folder, not beside it (s-files-16).
 - Carrel's tasks 105 and 127: the rail of notes has its third notebook, the

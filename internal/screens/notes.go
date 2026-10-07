@@ -2138,7 +2138,12 @@ func Notes11() Screen {
 					Icon:  "up",
 					Title: "Upload files",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "Documents / carrel / attachments / 2026-08", Variant: w.PickT12W240, Place: w.Pushed},
+						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Documents / carrel / attachments / 2026-08")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
 						w.Close{Label: "Close"},
 					},
 					Body: []w.SheetPart{

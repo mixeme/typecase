@@ -59,7 +59,7 @@ var _ = add(
 	form("value", w.Pick{Value: "Confirmed", Label: "Status"}, "components-10", "tc-in", 5),
 	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where to write"}, "s-notes-5", "tc-in", 1),
 	form("variant", w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12Fill, Label: "Where to write"}, "desktop-9", "tc-in", 2),
-	form("variant", w.Pick{Value: "Documents / carrel / attachments / 2026-08", Variant: w.PickT12W240}, "s-notes-11", "tc-in", 1),
+	form("variant", w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240}, "s-notes-11", "tc-in", 1),
 	form("focus", w.Pick{Value: "radicale · vps · Проекты", Focus: true, Label: "Restore into"}, "s-backup-8", "tc-in", 1),
 	form("unset", w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190, Label: "Action"}, "s-admin-7", "tc-in", 1),
 

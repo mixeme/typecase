@@ -8,6 +8,9 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("radio", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "sftpgo · vps", On: true, Name: "server", Value: "sftpgo"},
+		w.MenuItem{Label: "nextcloud", Name: "server", Value: "nextcloud"}}, Width: w.MenuWidth290}, "s-notes-29", "tc-menu", 1),
 	overlay("more", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/move"},
 		w.MenuItem{Icon: "dup", Label: "Copy", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/copy"},
@@ -649,7 +652,7 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the files back into a "), w.Strong("new"), w.Text(" folder — not into this one, and not to this address.")}, Space: w.MsgFlush},
 		w.Line{Items: []w.LinePart{w.Button{Label: "Open in Files", Icon: "file"}, w.Dim{Parts: []w.Inline{w.Text("Download what you need from it there first.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
 		w.Field{Label: "Type the name to confirm", Parts: []w.FieldPart{w.Input{Placeholder: "Documents", Label: "Type the name to confirm", Focus: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-19", "tc-sheet", 1),
-	overlay("refusal", w.Sheet{Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "Documents / carrel / attachments", Variant: w.PickT12W240, Place: w.Pushed}}, Body: []w.SheetPart{
+	overlay("refusal", w.Sheet{Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Where to put it"},
 			w.Line{Items: []w.LinePart{w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},

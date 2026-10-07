@@ -7061,7 +7061,8 @@ Read  2 min ago</div>
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
               <b class="tc-sheet__title">Upload files</b>
-              <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button">Documents / carrel / attachments / 2026-08</button>
+              <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+              <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments / 2026-08</span>
               <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
             </div>
             <div class="tc-sheet__body">
@@ -7094,6 +7095,19 @@ Read  2 min ago</div>
     </div>
   </div>
   <figcaption><b>Это тот пункт, ради которого лист и понадобился.</b> С экрана календаря текущей папки нет, а молча положить файл в первую попавшуюся коллекцию нельзя — это чужой сервер. Папка видна в шапке, дерево под областью броска показывает её в контексте, подписью сказано, откуда умолчание. <b>Дерево — то же самое, что в «Move»</b> (7.5): один способ выбирать папку на весь продукт. <b>«New folder» стоит в дереве, а не отдельным пунктом меню:</b> папку заводят, когда выбирают куда класть файл, и сразу кладут туда. Строка про занятое имя стоит здесь же, до броска. <b>Потолка размера у Carrel нет:</b> файл идёт потоком на чужой WebDAV, размер решает тот сервер.</figcaption>
+  </figure>
+
+  <figure style="flex:0 1 300px">
+  <div class="frame" data-frame="s-notes-29">
+    <div class="frame-label"><span>Upload · сервер</span><span class="frag">список</span><i>поле в шапке листа</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w290">
+        <label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="server" value="sftpgo" checked>sftpgo · vps</label>
+        <label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="server" value="nextcloud">nextcloud</label>
+      </div>
+    </div>
+  </div>
+  <figcaption>Поле в шапке листа загрузки выбирает <b>сервер</b>, на который ляжет файл; рядом с ним — полный путь выбранной папки. Папку на сервере выбирают в дереве ниже.</figcaption>
   </figure>
 
 </div>
@@ -7479,7 +7493,8 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
         <b class="tc-sheet__title">Upload files</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button">Documents / carrel / attachments</button>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-card tc-card--flush">
