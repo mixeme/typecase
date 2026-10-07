@@ -719,15 +719,15 @@ func Files4() Screen {
 								},
 								{
 									Icon:   "file",
-									Label:  "2026-07",
-									Indent: w.TreeLevel40,
-									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/2026-07"},
-								},
-								{
-									Icon:   "file",
 									Label:  "attachments",
 									Indent: w.TreeLevel40,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"},
+								},
+								{
+									Icon:   "file",
+									Label:  "2026-07",
+									Indent: w.TreeLevel58,
+									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"},
 								},
 								{
 									Icon:  "file",
@@ -743,7 +743,7 @@ func Files4() Screen {
 									Trail:       w.Badge{Label: "read-only"},
 								},
 							},
-							On: 3,
+							On: 4,
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
@@ -848,8 +848,11 @@ func Files5() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title:  &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
-						Crumbs: &w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}}, Current: "2026-07"},
+						Title: &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
+						Crumbs: &w.Crumbs{
+							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+							Current: "2026-07",
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{

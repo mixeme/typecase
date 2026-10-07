@@ -1071,7 +1071,7 @@ func TestCopy(t *testing.T) {
 	h := browser.NewHarness(t)
 	body := `<div class="tc-root"><div class="tc-main">` + w.Diag{ID: "script", Text: "#!/bin/sh\necho hello"}.Render() +
 		w.Button{Label: "Copy the script", CopyFrom: "script"}.Render() +
-		w.Button{Label: "Copy", Copy: "https://carrel.example/p/9c1f4e"}.Render() +
+		w.Button{Label: "Copy", Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"}.Render() + w.Button{Label: "Send"}.Render() +
 		w.Button{Label: "Copy link", Href: "/app/files/published/9c1f4e", Copy: "https://carrel.example/p/9c1f4e"}.Render() + `</div></div>`
 	bare := h.RegisterPage("copy-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
 	var shown string
@@ -1084,11 +1084,15 @@ func TestCopy(t *testing.T) {
 		t.Errorf("without a script: %q; want the buttons not shown and the link shown", shown)
 	}
 	page := h.RegisterPage("copy", browser.PageHTML(body, ""))
-	var got, at string
+	// what the button says, its right edge, its padding and where its neighbour stands
+	const place = `(() => { const b = document.querySelector("button[data-tc-copy]"), r = b.getBoundingClientRect(), c = getComputedStyle(b); return b.textContent + " " + r.right + " " + c.paddingLeft + " " + c.paddingRight + " " + b.nextElementSibling.getBoundingClientRect().x; })()`
+	var got, at, was, now string
 	if err := h.Run(page, 900, 600,
 		chromedp.Evaluate(`window.__copied = []; Object.defineProperty(navigator, "clipboard", {value: {writeText: x => { window.__copied.push(x); return Promise.resolve(); }}, configurable: true}); true`, nil),
 		chromedp.Click(`[data-tc-copy-from]`, chromedp.ByQuery),
+		chromedp.Evaluate(place, &was),
 		chromedp.Click(`button[data-tc-copy]`, chromedp.ByQuery),
+		chromedp.Evaluate(place, &now),
 		chromedp.Click(`a[data-tc-copy]`, chromedp.ByQuery),
 		chromedp.Evaluate(`window.__copied.join("|")`, &got),
 		chromedp.Evaluate(`location.pathname`, &at),
@@ -1097,6 +1101,9 @@ func TestCopy(t *testing.T) {
 	}
 	if want := "#!/bin/sh\necho hello|https://carrel.example/p/9c1f4e|https://carrel.example/p/9c1f4e"; got != want {
 		t.Errorf("with the script: copied %q; want %q", got, want)
+	}
+	if !strings.HasPrefix(was, "Copy ") || !strings.HasPrefix(now, "Copied ") || strings.TrimPrefix(was, "Copy ") != strings.TrimPrefix(now, "Copied ") {
+		t.Errorf("the pressed button: %q, then %q; want Copy, then Copied, the same right edge and padding, the neighbour in its place", was, now)
 	}
 	if strings.Contains(at, "published") {
 		t.Errorf("with the script the Copy link went to %s; want it to stay", at)

@@ -65,14 +65,21 @@ func Agenda1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
-						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "ro"},
+						w.TickRow{
+							Kind:  w.TickRowExternal,
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Праздники РФ",
+							Meta:  "0",
+							Trail: w.Badge{Label: "ro"},
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
-							Meta:   "ro",
+							Meta:   "—",
 							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
 						},
 					},
 				},

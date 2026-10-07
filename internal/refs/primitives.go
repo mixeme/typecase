@@ -20,6 +20,8 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("copies", w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"}, "s-publish-1", "tc-btn", 3),
+	primitive("copies", w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary, CopyFrom: "trigger-script", Copied: "Copied"}, "s-backup-3", "tc-btn", 6),
 	primitive("more", w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, "s-publish-1", "tc-btn", 6),
 	primitive("picker", w.Button{Label: "Replace", File: &w.FileField{Form: "post-photo", Name: "photo", Accept: "image/*", Label: "Photo"}}, "s-contacts-3", "tc-btn", 5),
 	primitive("link-icon", w.Button{Label: "Sources", Icon: "cal", Href: "#sources-demo"}, "components-41", "tc-btn", 1),
@@ -123,7 +125,7 @@ var _ = add(
 	// tc-badge
 	primitive("neutral", w.Badge{Label: "external"}, "components-11", "tc-badge", 1),
 	primitive("linked", w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, "components-12", "tc-badge", 1),
-	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 5),
+	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 7),
 	primitive("accent", w.Badge{Label: "credentials unlocked · 4:12", Accent: true}, "s-profile-4", "tc-badge", 1),
 	primitive("local", w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}, "s-plan-1", "tc-badge", 2),
 	primitive("icon", w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}, "s-notes-1", "tc-badge", 3),

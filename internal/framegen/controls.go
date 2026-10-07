@@ -137,7 +137,7 @@ func (g *gen) button1(e *El) string {
 	if e.Has("is-3rd") {
 		extra = append(extra, "Tertiary: true")
 	}
-	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}, {"data-tc-add", "Adds"}, {"data-tc-save", "SaveAs"}, {"data-tc-from", "SaveFrom"}, {"data-tc-copy", "Copy"}, {"data-tc-copy-from", "CopyFrom"}, {"data-tc-swap", "Swap"}} {
+	for _, a := range []kv{{"href", "Href"}, {"form", "Form"}, {"formaction", "To"}, {"name", "Name"}, {"value", "Value"}, {"data-tc-add", "Adds"}, {"data-tc-save", "SaveAs"}, {"data-tc-from", "SaveFrom"}, {"data-tc-copy", "Copy"}, {"data-tc-copy-from", "CopyFrom"}, {"data-tc-copied", "Copied"}, {"data-tc-swap", "Swap"}} {
 		if v := e.Attr(a.k); v != "" {
 			extra = append(extra, a.v+": "+q(v))
 		}

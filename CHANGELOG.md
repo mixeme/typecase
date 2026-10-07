@@ -15,6 +15,11 @@ do, not what the authors did.
 
 ### Added
 
+- **`Button.Copied`** (the owner's decision of 07.10, Р-36): what a Copy
+  button says for a moment after it has copied (`data-tc-copied`). Its right
+  edge stays where it is and the button grows or shrinks to the left, with
+  its usual padding, so the buttons after it do not move (s-publish-1,
+  s-backup-3).
 - **A file's name and a tile are links, a tile is picked without a script**
   (Carrel's task 114). `TableFile.Href` makes the name of a table's row the
   link — a folder opens, a file is chosen; the row is not a link, its tick
@@ -271,6 +276,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- The owner's decisions of 07.10. A count and «ro» stand apart in a rail
+  (Р-34): a subscription has its count — «—» when not ticked — and «ro» as a
+  badge beside it, as a read-only book of contacts has; so has the read-only
+  notebook (the rails of the calendar, tasks and notes, 30 rows). Dated
+  folders lie in «attachments» (Р-35): the trees of the file sheets draw
+  «2026-07» and «2026-08» under it, the crumbs of the tiles say
+  Documents / carrel / attachments / 2026-07, a taken name is refused «in
+  attachments already» (s-files-4, -5, -11, -13, -19, s-notes-11, dark-3).
 - Carrel's task 116: the files of «attachments» in the sheet From Files
   stand a level under their folder, not beside it (s-files-16).
 - Carrel's tasks 105 and 127: the rail of notes has its third notebook, the

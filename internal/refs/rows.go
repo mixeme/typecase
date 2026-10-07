@@ -8,6 +8,7 @@ func rows(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-tickrow
+	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"}, "s-find-1", "tc-tickrow", 9),
 	rows("off-badge", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Hidden: true, Trail: w.Badge{Label: "ro"}}, "states-7", "tc-tickrow", 4),
 	rows("one", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "128"}, "components-11", "tc-tickrow", 2),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "169", Current: true}, "components-11", "tc-tickrow", 1),
@@ -22,8 +23,8 @@ var _ = add(
 	rows("nested", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowNested, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "cal."}, "s-backup-2", "tc-tickrow", 4),
 	rows("loading", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 3),
 	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"}, "phone-2", "tc-tickrow", 3),
-	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "ro"}, "components-11", "tc-tickrow", 6),
-	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "ro", Hidden: true}, "s-agenda-1", "tc-tickrow", 9),
+	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0", Trail: w.Badge{Label: "ro"}}, "components-11", "tc-tickrow", 6),
+	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}, "s-agenda-1", "tc-tickrow", 9),
 	rows("group", w.TickRow{Ticked: w.TickedPart, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "nextcloud", Meta: "4 of 6"}, "s-backup-2", "tc-tickrow", 1),
 	rows("all", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—"}, "s-notes-6", "tc-tickrow", 1),
 	rows("all", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—", Current: true}, "states-14", "tc-tickrow", 1),
@@ -40,25 +41,25 @@ var _ = add(
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
 		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
 		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-13", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
 		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
-		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-11", "tc-tree", 1),
+		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 4}, "s-files-11", "tc-tree", 1),
 	rows("links", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Href: "/app/files/sftpgo/documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/sftpgo/documents/carrel"}}, On: 2}, "components-39", "tc-tree", 1),
 	rows("new", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
-		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40}}, On: 2}, "s-files-19", "tc-tree", 1),
+		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58}}, On: 3}, "s-files-19", "tc-tree", 1),
 	rows("target", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
@@ -93,17 +94,17 @@ var _ = add(
 		{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Trail: w.Badge{Label: "attachment folder"}},
-		{Icon: "file", Label: "2026-08", Indent: w.TreeLevel40, Trail: w.Badge{Label: "just created"}},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "2026-08", Indent: w.TreeLevel58, Trail: w.Badge{Label: "just created"}},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
 		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
 		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 4}, "s-notes-11", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}, Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/2026-07"}},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}},
 		{Icon: "file", Label: "Files", Send: w.Send{Name: "to", Value: "nextcloud/files"}, Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
-		{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-4", "tc-tree", 2),
+		{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 4}, "s-files-4", "tc-tree", 2),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
 		{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}}}, Variant: w.TreePadded}, "s-files-6", "tc-tree", 1),

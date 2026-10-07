@@ -416,6 +416,7 @@
 			if (text) {
 				e.preventDefault();
 				navigator.clipboard.writeText(text);
+				said(copy);
 				return;
 			}
 		}
@@ -514,6 +515,34 @@
 		var first = row.querySelector("input, select, textarea");
 		tpl.parentNode.insertBefore(row, tpl);
 		if (first) first.focus();
+	}
+
+	// A button that has copied says so for a moment (data-tc-copied). Its
+	// right edge stays where it is: the other word takes or gives room at
+	// the left, by a margin, so nothing after the button moves.
+	function said(btn) {
+		var word = btn.getAttribute("data-tc-copied");
+		if (!word || btn.hasAttribute("data-tc-said")) return;
+		var label = btn.querySelector(".tc-btn__label");
+		if (!label) {
+			for (var n = btn.lastChild; n; n = n.previousSibling) {
+				if (n.nodeType === 3 && n.nodeValue.trim()) {
+					label = n;
+					break;
+				}
+			}
+		}
+		if (!label) return;
+		var was = label.textContent;
+		var width = btn.getBoundingClientRect().width;
+		btn.setAttribute("data-tc-said", "");
+		label.textContent = word;
+		btn.style.marginLeft = width - btn.getBoundingClientRect().width + "px";
+		setTimeout(function () {
+			label.textContent = was;
+			btn.style.marginLeft = "";
+			btn.removeAttribute("data-tc-said");
+		}, 1600);
 	}
 
 	// Remove of a row of a repeated field (a phone, an address): the row's

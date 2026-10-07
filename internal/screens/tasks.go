@@ -58,6 +58,7 @@ func Tasks1() Screen {
 							Label:  "Праздники РФ",
 							Meta:   "—",
 							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
 						},
 					},
 				},

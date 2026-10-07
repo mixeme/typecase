@@ -105,7 +105,7 @@ func Publish1() Screen {
 									{Parts: []w.CellPart{w.Text("0")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e"},
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"},
 											w.Button{Label: "Send", Small: true, Secondary: true},
 											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 										},
@@ -144,7 +144,7 @@ func Publish1() Screen {
 									{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics"},
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
 											w.Button{Label: "Send", Small: true, Secondary: true},
 											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
 										},
@@ -603,6 +603,7 @@ func Publish4() Screen {
 								Ticked: w.TickedOff,
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Label:  "Общие с семьёй",
+								Meta:   "—",
 								Hidden: true,
 								Trail:  w.Badge{Label: "ro"},
 							},

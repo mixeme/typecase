@@ -273,7 +273,7 @@
 #### `tc-btn` — кнопка
 
 - **Роль.** Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}`.
+- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}`.
 - **Состояния.** normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 - **Инварианты.** Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 - **Поведение.** Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.

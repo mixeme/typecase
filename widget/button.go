@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -129,6 +129,10 @@ type Button struct {
 	// the text.
 	Copy     string
 	CopyFrom string
+	// Copied is what the button says for a moment after it has copied
+	// («Copied»). Its right edge stays where it is and the button grows or
+	// shrinks to the left, so the buttons after it do not move.
+	Copied string
 	// Swap, with Href, names the elements (IDs, separated by spaces) the
 	// library's live layer takes from the page at Href and puts in place of
 	// the same ones here — no reload; without the layer the link goes there
@@ -174,7 +178,7 @@ func (b Button) html(m mix) string {
 	tag := "button"
 	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens)
-	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom)
+	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom) + attr("data-tc-copied", b.Copied)
 	if b.File != nil {
 		tag = "label"
 		s.WriteString(`<label` + cls + common + `>`)

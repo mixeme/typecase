@@ -392,6 +392,7 @@ func Conflict5() Screen {
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},

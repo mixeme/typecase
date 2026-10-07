@@ -382,8 +382,11 @@ func Dark3() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title:  &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
-						Crumbs: &w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}}, Current: "2026-07"},
+						Title: &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
+						Crumbs: &w.Crumbs{
+							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+							Current: "2026-07",
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{
