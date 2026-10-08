@@ -28,7 +28,7 @@ func Phone1() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 83, Alert: true, Width: w.Meter60},
 						Parts: []w.RunbarPart{
-							w.Text("5 of 6 · 14 events · "),
+							w.Text("5 of 6 · 6 events · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -46,7 +46,7 @@ func Phone1() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Mon · 10 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "Mon · 10 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 					w.List{
 						Rows: []w.ListRow{
 							w.PhoneRow{
@@ -54,6 +54,12 @@ func Phone1() Screen {
 								Title: "Синк-ап по релизу",
 								Sub:   []w.Inline{w.Mono{Text: "10:00 – 11:00"}, w.Text(" · Переговорная 2")},
 								Aside: "Личный",
+							},
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#3F6E8C", Size: w.MarkH32},
+								Title: "Дежурство: первая линия",
+								Sub:   []w.Inline{w.Mono{Text: "all day"}, w.Text(" · repeats")},
+								Aside: "Работа",
 							},
 							w.PhoneRow{
 								Mark:  &w.Mark{Colour: "#8C6239", Size: w.MarkH32},
@@ -77,6 +83,12 @@ func Phone1() Screen {
 								Title: "Ревью архитектуры",
 								Sub:   []w.Inline{w.Mono{Text: "09:30"}, w.Text(" · Переговорная 1")},
 								Aside: "Проекты",
+							},
+							w.PhoneRow{
+								Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH32},
+								Title: "Забрать документы",
+								Sub:   []w.Inline{w.Mono{Text: "18:00"}, w.Text(" · МФЦ, Мясницкая 13")},
+								Aside: "Личный",
 							},
 						},
 					},
@@ -115,7 +127,7 @@ func Phone2() Screen {
 								Form:    w.TickRowTouch,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined calendar",
-								Meta:    "14",
+								Meta:    "6",
 								Current: true,
 							},
 						},
@@ -123,8 +135,8 @@ func Phone2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud", Variant: w.RubricRail},
-							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
-							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 							w.TickRow{
 								Ticked: w.TickedOff,
 								Form:   w.TickRowTouch,
@@ -139,7 +151,7 @@ func Phone2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps", Variant: w.RubricRail},
-							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
 						},
 						Apart: true,
@@ -304,6 +316,13 @@ func Phone4() Screen {
 								Title:  "Виктор Гончаров",
 								Sub:    []w.Inline{w.Text("v.goncharov@example.org")},
 								Aside:  "Контакты",
+							},
+							w.PhoneRow{
+								Mark:   &w.Mark{Colour: "#A05A2C", Size: w.MarkH34},
+								Avatar: &w.Avatar{Initials: "ВЛ", Size: w.Avatar34},
+								Title:  "Вера Лебедева",
+								Sub:    []w.Inline{w.Text("vera@example.net")},
+								Aside:  "Архив",
 							},
 						},
 					},
@@ -505,10 +524,10 @@ func Phone8() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -521,7 +540,7 @@ func Phone8() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "86",
+							Meta:    "3",
 							Current: true,
 						},
 					},
@@ -529,8 +548,8 @@ func Phone8() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -556,7 +575,7 @@ func Phone8() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 86 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 3 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -575,9 +594,9 @@ func Phone8() Screen {
 							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "86"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 9}},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -629,10 +648,10 @@ func Phone9() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -645,7 +664,7 @@ func Phone9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "86",
+							Meta:    "3",
 							Current: true,
 						},
 					},
@@ -653,8 +672,8 @@ func Phone9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -680,7 +699,7 @@ func Phone9() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 86 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 3 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -689,7 +708,7 @@ func Phone9() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 9}},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -701,6 +720,21 @@ func Phone9() Screen {
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
+								Date:    "8 Aug",
+								Source:  "nextcloud · Записи",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#6B4E7A"},
+								Title:   []w.Inline{w.Text("Про дорогу до дачи")},
+								Excerpt: "Съезд после заправки, потом грунтовка два километра…",
+								Date:    "3 Aug",
+								Source:  "nextcloud · Дневник",
 							},
 						},
 					},
@@ -716,7 +750,7 @@ func Phone9() Screen {
 											Kind:    w.TickRowAll,
 											Mark:    w.Mark{Kind: w.MarkMulti},
 											Label:   "Combined notebook",
-											Meta:    "86",
+											Meta:    "3",
 											Current: true,
 										},
 									},
@@ -724,8 +758,8 @@ func Phone9() Screen {
 								w.RailSec{
 									Items: []w.RailSecPart{
 										w.Rubric{Text: "nextcloud"},
-										w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
-										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+										w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
+										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
 										w.TickRow{
 											Ticked: w.TickedOff,
 											Mark:   w.Mark{Colour: "#3F6E8C"},

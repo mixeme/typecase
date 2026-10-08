@@ -94,7 +94,10 @@ func linkTitle(href string, parts []Inline, strong bool, badge *Badge) string {
 }
 
 // source prints the source cell: where the record lives.
-func source(text, hint string, badge *Badge) string {
+func source(text, hint string, badge *Badge, single ...bool) string {
+	if len(single) > 0 && single[0] {
+		return ""
+	}
 	s := `<span class="tc-row__cell tc-row__source"` + attr("title", hint) + `>` + esc(text)
 	if badge != nil {
 		s += " " + badge.html(nil)
@@ -130,7 +133,7 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Short, Href}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Single, Short, Href}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
@@ -148,6 +151,7 @@ type TimeRow struct {
 	On      bool
 	Past    bool // gone by: faded
 	Inset   bool
+	Single  bool   // the list of one collection: the row has no source column
 	Short   bool   // the lead is a time of day only: its column as narrow as the time (search results)
 	Href    string // the row is a link to its record
 }
@@ -157,7 +161,7 @@ func (r TimeRow) Render() string { return r.html(nil) }
 
 func (r TimeRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + attr("href", r.Href) + `>`)
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Single, "tc-row--single"), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + attr("href", r.Href) + `>`)
 	s.WriteString(r.Mark.html(nil))
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))
@@ -167,7 +171,7 @@ func (r TimeRow) html(m mix) string {
 		s.WriteString(r.Caption.html(nil))
 	}
 	s.WriteString(`</span>`)
-	s.WriteString(source(r.Source, "", nil))
+	s.WriteString(source(r.Source, "", nil, r.Single))
 	s.WriteString(`</` + rowTag(r.Href) + `>`)
 	return s.String()
 }
@@ -203,7 +207,7 @@ func (r SkelRow) html(m mix) string {
 // FaceRow — tc-row
 //
 // Роль. Строка человека: аватар, имя, телефон, почта, организация.
-// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Href}.
+// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Single, Href}.
 // Состояния. plain | on | strong | badge | inset | found.
 // Инварианты. Колонки строки — её тип: у строки человека есть аватар и нет времени; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает карточку; стрелки ходят по строкам списка.
@@ -223,6 +227,7 @@ type FaceRow struct {
 	SourceBadge *Badge
 	On          bool
 	Inset       bool
+	Single      bool   // the list of one collection: the row has no source column
 	Href        string // the row is a link to its record
 }
 
@@ -230,10 +235,10 @@ type FaceRow struct {
 func (r FaceRow) Render() string { return r.html(nil) }
 
 func (r FaceRow) html(m mix) string {
-	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset)) + attr("href", r.Href) + `>` +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` +
 		r.Mark.html(nil) + r.Avatar.html(nil) + title(r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Subtitle, "tc-row__excerpt", "tc-mono", "tc-row__subtitle") + cell(r.Detail, "tc-row__excerpt", "tc-row__detail") +
-		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, "", r.SourceBadge) + `</` + rowTag(r.Href) + `>`
+		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, "", r.SourceBadge, r.Single) + `</` + rowTag(r.Href) + `>`
 }
 
 // FindRow — tc-row
@@ -295,7 +300,7 @@ func (r LinkedRow) html(m mix) string {
 // ExcerptRow — tc-row
 //
 // Роль. Строка текста: название, начало текста, теги, дата, источник.
-// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Href}.
+// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Single, Href}.
 // Состояния. plain | on | badge | inset | found | link.
 // Инварианты. Колонки строки — её тип; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает текст; стрелки ходят по строкам списка.
@@ -314,6 +319,7 @@ type ExcerptRow struct {
 	SourceHint string // the sources in full when there are several
 	On         bool
 	Inset      bool
+	Single     bool   // the list of one collection: the row has no source column
 	Href       string // the row is a link to its record
 }
 
@@ -321,9 +327,9 @@ type ExcerptRow struct {
 func (r ExcerptRow) Render() string { return r.html(nil) }
 
 func (r ExcerptRow) html(m mix) string {
-	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset)) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
 		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") + tags(r.Tags, r.Href != "") +
-		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil) + `</` + rowTag(r.Href) + `>`
+		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil, r.Single) + `</` + rowTag(r.Href) + `>`
 }
 
 // BriefRow — tc-row
@@ -356,7 +362,7 @@ func (r BriefRow) html(m mix) string {
 // DueRow — tc-row
 //
 // Роль. Строка дела: галка, название, теги, срок, сколько сделано, источник.
-// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Tags, Due, Progress, Source, SourceHint, On, Overdue, Inset, Href}.
+// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Tags, Due, Progress, Source, SourceHint, On, Overdue, Inset, Single, Href}.
 // Состояния. plain | on | overdue | done | inset | found | sign.
 // Инварианты. Сделано ли дело, говорит одна галка: строка берёт это из неё; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка отмечает дело сделанным; нажатие на строку открывает его; в списке только для чтения галка — знак (Tick.Sign): дело не отметить.
@@ -377,6 +383,7 @@ type DueRow struct {
 	On         bool
 	Overdue    bool
 	Inset      bool
+	Single     bool // the list of one collection: the row has no source column
 	// Href makes the title a link to the record (Carrel's task 95): the row
 	// itself cannot be one, its tick is a control of its own.
 	Href string
@@ -386,10 +393,10 @@ type DueRow struct {
 func (r DueRow) Render() string { return r.html(nil) }
 
 func (r DueRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset)) + `>` +
+	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset), pick(r.Single, "tc-row--single")) + `>` +
 		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Title, r.Strong, r.TitleBadge) + tags(r.Tags, false) +
 		cell(r.Due, "tc-mono", "tc-row__due") + cell(r.Progress, "tc-row__cell", "tc-mono", "tc-row__progress") +
-		source(r.Source, r.SourceHint, nil) + `</div>`
+		source(r.Source, r.SourceHint, nil, r.Single) + `</div>`
 }
 
 // SizeRow — tc-row

@@ -20,10 +20,10 @@ func Files1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -90,7 +90,11 @@ func Files1() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
 							Current: "attachments",
 						},
-						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
+							},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
@@ -156,7 +160,7 @@ func Files1() Screen {
 								},
 							},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
 					},
 					w.Table{
 						Cols: []w.TableCol{
@@ -361,10 +365,10 @@ func Files2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -431,7 +435,11 @@ func Files2() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
 							Current: "attachments",
 						},
-						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
+							},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
@@ -497,7 +505,7 @@ func Files2() Screen {
 								},
 							},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
 					},
 					w.Table{
 						Cols: []w.TableCol{
@@ -679,10 +687,10 @@ func Files4() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -749,7 +757,11 @@ func Files4() Screen {
 								Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
 								Current: "attachments",
 							},
-							Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}}}},
+							Subs: []w.HeadSub{
+								w.HeadSub{
+									Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
+								},
+							},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
@@ -815,7 +827,7 @@ func Files4() Screen {
 									},
 								},
 							},
-							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
+							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
 						},
 						w.Table{
 							Cols: []w.TableCol{
@@ -1045,10 +1057,10 @@ func Files5() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1115,7 +1127,7 @@ func Files5() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
 							Current: "2026-07",
 						},
-						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps")}}},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 7 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
@@ -1261,10 +1273,10 @@ func Files6() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},

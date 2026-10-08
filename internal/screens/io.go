@@ -21,10 +21,10 @@ func Io1() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -37,21 +37,21 @@ func Io1() Screen {
 								Kind:   w.TickRowAll,
 								Mark:   w.Mark{Kind: w.MarkMulti},
 								Label:  "Combined address book",
-								Meta:   "312",
+								Meta:   "5",
 							},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
 						},
 					},
 					w.RailFoot{
@@ -68,7 +68,7 @@ func Io1() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Контакты"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 248 cards")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 3 cards")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -93,9 +93,9 @@ func Io1() Screen {
 								},
 								w.Button{Label: "Columns", Icon: "cols"},
 							},
-							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "248"}}, Secondary: true},
+							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
 						},
-						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
@@ -105,7 +105,7 @@ func Io1() Screen {
 									Subtitle: "+7 912 445-10-88",
 									Detail:   "a.kovaleva@example.org",
 									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
+									Single:   true,
 								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
@@ -114,11 +114,11 @@ func Io1() Screen {
 									Subtitle: "+7 916 200-71-15",
 									Detail:   "—",
 									Caption:  "—",
-									Source:   "nextcloud · Контакты",
+									Single:   true,
 								},
 							},
 						},
-						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
@@ -128,7 +128,7 @@ func Io1() Screen {
 									Subtitle: "—",
 									Detail:   "v.goncharov@example.org",
 									Caption:  "Городская библиотека №4",
-									Source:   "nextcloud · Контакты",
+									Single:   true,
 								},
 							},
 						},
@@ -175,10 +175,10 @@ func Io2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -191,7 +191,7 @@ func Io2() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
-							Meta:    "14",
+							Meta:    "6",
 							Current: true,
 						},
 					},
@@ -199,15 +199,49 @@ func Io2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "baikal"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Kind:  w.TickRowExternal,
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Праздники РФ",
+							Meta:  "0",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Расписание лиги",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -223,7 +257,15 @@ func Io2() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 10 – 16 August 2026")}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "),
+									w.Mono{Text: "Europe/Moscow"},
+									w.Text(" · 6 events"),
+								},
+							},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
@@ -232,7 +274,7 @@ func Io2() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
@@ -246,23 +288,48 @@ func Io2() Screen {
 								On:      true,
 							},
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#3F6E8C"},
-								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Созвон с подрядчиком")},
-								Detail: "Jitsi",
-								Source: "nextcloud · Работа",
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "nextcloud · Работа",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#8C6239"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "15:00",
+								Title:   []w.Inline{w.Text("Созвон с подрядчиком")},
+								Detail:  "Jitsi",
+								Caption: &w.Badge{Label: "tentative", Tone: w.BadgeAlert},
+								Source:  "nextcloud · Работа",
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#6B4E7A"},
-								Time:   "09:30",
-								Title:  []w.Inline{w.Text("Ревью архитектуры")},
-								Detail: "Переговорная 1",
-								Source: "radicale · vps · Проекты",
+								Mark:    w.Mark{Colour: "#6B4E7A"},
+								Time:    "09:30",
+								Title:   []w.Inline{w.Text("Ревью архитектуры")},
+								Detail:  "Переговорная 1",
+								Caption: &w.Badge{Label: "2 attendees"},
+								Source:  "radicale · vps · Проекты",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "18:00",
+								Title:  []w.Inline{w.Text("Забрать документы")},
+								Detail: "МФЦ, Мясницкая 13",
+								Source: "nextcloud · Личный",
 							},
 						},
 					},
@@ -373,8 +440,8 @@ func Io3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
 				w.RailFoot{
@@ -471,8 +538,8 @@ func Io4() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -600,8 +667,8 @@ func Io5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
 				w.RailFoot{
@@ -705,8 +772,8 @@ func Io6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -840,8 +907,8 @@ func Io7() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "9"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -973,8 +1040,8 @@ func Io8() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1110,8 +1177,8 @@ func Io9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
 				w.RailFoot{
@@ -1177,8 +1244,8 @@ func Io14() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 					},
 				},

@@ -752,6 +752,9 @@ func (g *gen) titleFields(t *El, name string) []string {
 }
 
 func (g *gen) src(e *El, f []string) []string {
+	if e.Has("tc-row--single") {
+		f = append(f, "Single: true")
+	}
 	s := e.Kid("tc-row__source")
 	if s == nil {
 		return f

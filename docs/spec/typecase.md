@@ -673,7 +673,7 @@
 #### `tc-row` — строка со временем
 
 - **Роль.** Строка со временем: событие дня, приглашение, запись журнала.
-- **Вход.** `TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Short, Href}`.
+- **Вход.** `TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Single, Short, Href}`.
 - **Состояния.** plain | on | caption | past | inset | found.
 - **Инварианты.** Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 - **Поведение.** Нажатие открывает запись; стрелки ходят по строкам списка.
@@ -684,7 +684,7 @@
 #### `tc-row` — строка человека
 
 - **Роль.** Строка человека: аватар, имя, телефон, почта, организация.
-- **Вход.** `FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Href}`.
+- **Вход.** `FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Single, Href}`.
 - **Состояния.** plain | on | strong | badge | inset | found.
 - **Инварианты.** Колонки строки — её тип: у строки человека есть аватар и нет времени; метка источника — первой; строка печатает фрагмент своего кадра.
 - **Поведение.** Нажатие открывает карточку; стрелки ходят по строкам списка.
@@ -695,7 +695,7 @@
 #### `tc-row` — строка текста
 
 - **Роль.** Строка текста: название, начало текста, теги, дата, источник.
-- **Вход.** `ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Href}`.
+- **Вход.** `ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Single, Href}`.
 - **Состояния.** plain | on | badge | inset | found | link.
 - **Инварианты.** Колонки строки — её тип; метка источника — первой; строка печатает фрагмент своего кадра.
 - **Поведение.** Нажатие открывает текст; стрелки ходят по строкам списка.

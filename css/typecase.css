@@ -377,6 +377,11 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
 .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
 .tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
+/* Список одной коллекции: источника у строки нет — нет и его столбца. */
+.tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr)}
+.tc-row--timecols.tc-row--single{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px}
+.tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px}
+.tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px}
 .tc-row--find{grid-template-columns:3px 76px minmax(208px,2.4fr) minmax(120px,1fr) 74px 140px}
 .tc-row--tickcols{grid-template-columns:16px minmax(208px,2.4fr) 90px 130px 60px 140px}
 .tc-row--phone{grid-template-columns:3px minmax(0,1fr) auto;align-items:center}
@@ -746,6 +751,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
   .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) minmax(70px,auto) 80px 140px}
   .tc-row--excerpt > :nth-child(3){display:none}
+  .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr)}
+  .tc-row--timecols.tc-row--single{grid-template-columns:3px 60px minmax(116px,2fr) 88px}
+  .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(112px,2fr) minmax(60px,auto) 74px}
+  .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(116px,1.4fr) minmax(70px,auto) 80px}
 }
 @container tcbox (max-width:620px){
   .tc-row{padding-left:12px;padding-right:12px}
@@ -763,6 +772,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--tickmarkcols .tc-row__tags{display:none}
   .tc-row--excerpt{grid-template-columns:3px minmax(100px,1.4fr) 74px 130px}
   .tc-row--excerpt .tc-row__tags{display:none}
+  .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px}
+  .tc-row--timecols.tc-row--single{grid-template-columns:3px 54px minmax(110px,1fr)}
+  .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(100px,2fr) 70px}
+  .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(100px,1.4fr) 74px}
   .tc-row--tickcols{grid-template-columns:16px minmax(120px,2fr) 78px 130px}
   .tc-row--tickcols .tc-row__time{display:none}
 }
@@ -778,6 +791,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--excerpt .tc-row__source{display:none}
   .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(0,1fr) 66px}
   .tc-row--tickmarkcols .tc-row__source{display:none}
+  .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(0,1fr) 118px}
+  .tc-row--timecols.tc-row--single{grid-template-columns:3px 50px minmax(0,1fr)}
+  .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(0,1fr) 70px}
+  .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(0,1fr) 66px}
   .tc-row--tickcols{grid-template-columns:16px minmax(0,1fr) 74px}
   .tc-row--tickcols .tc-row__source{display:none}
   .tc-table .tc-table__n3,.tc-table .tc-table__n3,

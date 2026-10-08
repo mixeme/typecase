@@ -141,7 +141,7 @@ var _ = add(
 	// tc-kbd, tc-num, tc-plain
 	primitive("default", w.Kbd{Keys: "Ctrl+S"}, "components-29", "tc-kbd", 1),
 	primitive("normal", w.Num{Value: 3}, "components-12", "tc-num", 1),
-	primitive("alert", w.Num{Value: 3, Alert: true}, "s-tasks-1", "tc-num", 6),
+	primitive("alert", w.Num{Value: 2, Alert: true}, "s-tasks-1", "tc-num", 6),
 	primitive("default", w.Plain{Text: "2 active"}, "account-1", "tc-plain", 1),
 
 	// tc-avatar

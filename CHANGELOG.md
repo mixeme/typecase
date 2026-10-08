@@ -20,6 +20,26 @@ do, not what the authors did.
 
 ### Added
 
+- **The numbers of the frames are the numbers of the rows drawn** (Carrel's
+  task 143; the owner's decision of 08.10, Р-47). The count of a rubric is
+  the number of rows under it; segments, subtitle, poll bar and rail are
+  sums of what is drawn. One set for every frame, taken from the combined
+  views: 5 contacts, 6 events of the week, 6 tasks (5 open and one done), 3 notes; the navigation
+  says Contacts 5, Calendar 6, Tasks 2 (overdue), Notes 3. A frame of one
+  collection draws its rows of the combined view (s-tasks-15, s-notes-31); a
+  frame with a list under a sheet draws the whole screen: its subtitle, its
+  rail and every row. Every kind counts in its subtitle, a folder of files
+  too («5 items»), and a read-only collection counts before its reason.
+- **Frames of one collection, the calendar subtitle, the poll bar**
+  (Carrel's tasks 137–142; Р-48). A row in the list of one collection has no
+  source and no column for it — `Single` of `TimeRow`, `FaceRow`,
+  `ExcerptRow` and `DueRow` (`tc-row--single`) —, and a linked row names its sources in the hint of its badge; with
+  nothing ticked the combined row of the rail is open and counts nothing
+  (states-7, -18, -25); the subtitle of a calendar names the week, the
+  zone and the count of events, as the other sections count (states-13,
+  -15); a poll that has ended says how
+  long ago at the right of its bar («2 min ago»); the head of one book has its
+  mark (states-10, -11); Related to has the row a link is typed into.
 - **The frames of search, duplicates and the conflict agree with the rest**
   (Carrel's task 136; the owner's decision of 08.10, Р-46). «Duplicates N»
   of the navigation, «N to look at» and the segments count the groups that
