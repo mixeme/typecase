@@ -8,6 +8,9 @@ func rows(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-tickrow
+	rows("root", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "0 of 3", Current: true}, "states-35", "tc-tickrow", 1),
+	rows("on", w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Public", Current: true, Trail: w.Badge{Label: "ro"}}, "states-34", "tc-tickrow", 3),
+	rows("root", w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "3 of 3"}, "states-34", "tc-tickrow", 1),
 	rows("error", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Current: true, Error: true}, "states-11", "tc-tickrow", 2),
 	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "2", Current: true, Trail: w.Badge{Label: "ro"}}, "states-23", "tc-tickrow", 4),
 	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"}, "s-find-1", "tc-tickrow", 9),

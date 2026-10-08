@@ -7570,8 +7570,8 @@ Read  2 min ago</div>
 <div class="note"><b>Единого вида в файлах нет, и он тут не нужен.</b> В остальных разделах единый вид складывает записи разных коллекций в один список — у события или карточки нет места, кроме самой записи. У файла место есть: путь, и путь принадлежит своему хранилищу. Сложить два дерева в одно можно только придумав, чей каталог главнее, — а придумывать такое интерфейс не вправе.<br><br>Строка <b>Selected collections</b> — <b>корень раздела</b>: список отмеченных хранилищ как папок верхнего уровня. Дальше — дерево одной коллекции. Сборной полоски нет: собирать нечего. Флажок трёхпозиционный, как у «Combined&nbsp;…»: отмеченные хранилища и есть содержимое корня. Имя не «All»: снятая коллекция из корня исчезает, и «все» над списком из двух при трёх подключённых читалось бы как ошибка. В таблице равенства у файлов так и стоит — «корень, а не единый вид».</div>
 
 <figure>
-<div class="frame" data-frame="s-files-1" data-screen="/app/files/{account}/{col}">
-  <div class="frame-label"><span>Файлы · обзор папки, свойства выбранного</span><i>/app/files/{account}/{col}</i></div>
+<div class="frame" data-frame="s-files-1" data-screen="/app/files/{account}/{col}/{path…}">
+  <div class="frame-label"><span>Файлы · обзор папки, свойства выбранного</span><i>/app/files/{account}/{col}/{path…}</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -7647,10 +7647,10 @@ Read  2 min ago</div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
-          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents?sort=changed">Changed</a></span>
-          <span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="tc-seg__opt" href="/app/files/sftpgo/documents?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
-          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents?sort=changed" role="menuitem">Changed</a></span></details>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed" role="menuitem">Changed</a></span></details>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">14 items · 38.2 MB</span></span>
         </div>
 
@@ -7665,6 +7665,10 @@ Read  2 min ago</div>
               <td><span class="tc-table__file"><svg><use href="#i-file"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-07">2026-07</a></span></td>
               <td class="tc-mono tc-table__n3">—</td><td class="tc-mono is-2nd tc-table__n4">folder</td><td class="tc-mono">2026-07-01 09:12</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
+              <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
               <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
@@ -7676,10 +7680,6 @@ Read  2 min ago</div>
             <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
               <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
-              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
-              <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
               <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
@@ -7865,6 +7865,87 @@ Read  2 min ago</div>
   </figure>
 
 <figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-files-21">
+    <div class="frame-label"><span>Файл · переименование</span><span class="frag">фрагмент</span><i>лист из Rename</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
+        <b class="tc-sheet__title">Rename</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="release-checklist.md" aria-label="Name"></div>
+          <div class="tc-msg tc-msg--flush">The name of a file is its address: a note or an event that keeps a link to it, and a published link, will not find it under the new name.</div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rename</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Переименование файла или папки — тот же лист, что у папки хранилища: одно поле с нынешним именем и строка о том, кого заденет новый адрес. Занятое имя — отказ под полем, как у New folder.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-files-22">
+    <div class="frame-label"><span>Файлы · удаление</span><span class="frag">фрагмент</span><i>лист из Delete</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
+        <b class="tc-sheet__title">Delete 3 items</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush"><b>3</b> files, 4.4 MB, are deleted on sftpgo · vps. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.</div>
+          <div class="tc-msg tc-msg--flush">Carrel keeps no index of what points at these files. They may be attached to a note or an event — check before deleting.</div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Delete</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>Удаление спрашивает один раз и говорит главное: сколько исчезнет, что копии нет и что ссылки на файлы никто не считал. Имени набирать не просят — это файлы, а не хранилище; у папки строка говорит «The folder and everything in it».</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-files-23">
+    <div class="frame-label"><span>New folder · в папке</span><span class="frag">фрагмент</span><i>лист из New folder</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w480">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
+        <b class="tc-sheet__title">New folder</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">in Documents / carrel / attachments</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="2026-07" aria-label="Name"></div>
+          <div class="tc-msg is-alert tc-msg--flush">There is a folder called «2026-07» in attachments already. Choose another name.</div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption>New folder из шапки папки и из подвала рейла — лист с одним полем, как Rename; папка заводится в той, что открыта. Отказ занятого имени — та же фраза, что в листе переноса, лист остаётся с набранным.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-files-24">
+    <div class="frame-label"><span>Очередь · сервер отказал</span><span class="frag">фрагмент</span><i>тот же угол колонки</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-queue">
+          <div class="tc-queue__head"><b>Uploaded 1 of 2</b><span class="tc-mono tc-push tc-mono--dusty">4.1 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
+          <ul class="tc-queue__list">
+            <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
+            <li><div class="tc-queue__row"><span class="tc-dim--danger">архив-2025.zip</span><span class="tc-dim--danger">the server needs the size</span></div></li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Отказ, на который нечего ответить, — строка без кнопок: имя и причина тревожным цветом, как «name taken», но без вопроса. Файл не загружен; очередь считает загруженные.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
   <div class="frame" data-frame="s-files-15">
     <div class="frame-label"><span>Папка только для чтения · Upload</span><span class="frag">фрагмент</span><i>шапка папки</i></div>
     <div class="tc-root tc-shell">
@@ -8030,10 +8111,14 @@ Read  2 min ago</div>
           <div class="tc-head__titles">
             <div class="tc-head__title">attachments</div>
             <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<b>attachments</b></nav>
+            <div class="tc-head__sub">sftpgo · vps · <span class="tc-badge">attachment folder</span></div>
           </div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
         <div class="tc-bar tc-bar--sel">
@@ -8046,13 +8131,42 @@ Read  2 min ago</div>
           <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
           <span class="tc-bar__right"><button class="tc-btn is-sm" type="button">Clear selection</button></span>
         </div>
+        <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed" role="menuitem">Changed</a></span></details>
+          <span class="tc-bar__right is-2nd"><span class="tc-mono">14 items · 38.2 MB</span></span>
+        </div>
+
         <table class="tc-table">
-          <thead><tr><th class="tc-table__col--tick"><button class="tc-tickrow__tick is-part" type="button"></button></th><th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th></tr></thead>
+          <thead><tr>
+            <th class="tc-table__col--tick"><button class="tc-tickrow__tick is-part" type="button"></button></th>
+            <th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="is-2nd tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th><th class="tc-table__col--num"></th>
+          </tr></thead>
           <tbody>
-            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-img"/></svg><span class="tc-table__filename">2026-08-10-sync-board.png</span></span></td><td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td></tr>
-            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">release-checklist.md</span></span></td><td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td></tr>
-            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-img"/></svg><span class="tc-table__filename">2026-08-04-whiteboard.jpg</span></span></td><td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td></tr>
-            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">смета-подрядчик.pdf</span></span></td><td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td></tr>
+            <tr><td></td><td colspan="5"><span class="tc-table__file"><svg><use href="#i-back"/></svg><a class="tc-table__filename tc-table__filename--accent" href="/app/files/sftpgo/documents/carrel">up one folder</a></span></td></tr>
+            <tr class="is-folder"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-file"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-07">2026-07</a></span></td>
+              <td class="tc-mono tc-table__n3">—</td><td class="tc-mono is-2nd tc-table__n4">folder</td><td class="tc-mono">2026-07-01 09:12</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
+              <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
+              <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/release-checklist.md">release-checklist.md</a></span></td>
+              <td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono is-2nd tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
+              <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
         <div class="tc-queue">
@@ -8139,16 +8253,20 @@ Read  2 min ago</div>
           </div>
           <div class="tc-main">
             <div class="tc-head">
-              <div class="tc-head__titles">
-                <div class="tc-head__title">attachments</div>
-                <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<b>attachments</b></nav>
-              </div>
-              <div class="tc-acts">
-                <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
-                <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
-              </div>
-            </div>
-            <div class="tc-bar tc-bar--sel">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">attachments</div>
+            <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<b>attachments</b></nav>
+            <div class="tc-head__sub">sftpgo · vps · <span class="tc-badge">attachment folder</span></div>
+          </div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+          </div>
+        </div>
+        <div class="tc-bar tc-bar--sel">
               <span class="tc-bar__count">3 selected</span><span class="tc-mono tc-mono--muted">4.4 MB</span>
               <span class="tc-bar__sep"></span>
               <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
@@ -8158,15 +8276,44 @@ Read  2 min ago</div>
               <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
               <span class="tc-bar__right"><button class="tc-btn is-sm" type="button">Clear selection</button></span>
             </div>
-            <table class="tc-table">
-              <thead><tr><th class="tc-table__col--tick"><button class="tc-tickrow__tick is-part" type="button"></button></th><th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th></tr></thead>
-              <tbody>
-                <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-img"/></svg><span class="tc-table__filename">2026-08-10-sync-board.png</span></span></td><td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td></tr>
-                <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">release-checklist.md</span></span></td><td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td></tr>
-                <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-img"/></svg><span class="tc-table__filename">2026-08-04-whiteboard.jpg</span></span></td><td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td></tr>
-                <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td><td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">смета-подрядчик.pdf</span></span></td><td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td></tr>
-              </tbody>
-            </table>
+            <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments?sort=changed" role="menuitem">Changed</a></span></details>
+          <span class="tc-bar__right is-2nd"><span class="tc-mono">14 items · 38.2 MB</span></span>
+        </div>
+
+        <table class="tc-table">
+          <thead><tr>
+            <th class="tc-table__col--tick"><button class="tc-tickrow__tick is-part" type="button"></button></th>
+            <th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="is-2nd tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th><th class="tc-table__col--num"></th>
+          </tr></thead>
+          <tbody>
+            <tr><td></td><td colspan="5"><span class="tc-table__file"><svg><use href="#i-back"/></svg><a class="tc-table__filename tc-table__filename--accent" href="/app/files/sftpgo/documents/carrel">up one folder</a></span></td></tr>
+            <tr class="is-folder"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-file"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-07">2026-07</a></span></td>
+              <td class="tc-mono tc-table__n3">—</td><td class="tc-mono is-2nd tc-table__n4">folder</td><td class="tc-mono">2026-07-01 09:12</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
+              <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
+              <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="is-sel"><td><button class="tc-tickrow__tick" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/release-checklist.md">release-checklist.md</a></span></td>
+              <td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono is-2nd tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
+              <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+          </tbody>
+        </table>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
@@ -8248,10 +8395,18 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-main">
-        <div class="tc-head tc-head--padb6">
-          <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t18">2026-07</div><nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<a class="tc-crumbs__link" href="#">attachments</a>/<b>2026-07</b></nav></div>
+        <div class="tc-head">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">2026-07</div>
+            <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<a class="tc-crumbs__link" href="#">attachments</a>/<b>2026-07</b></nav>
+            <div class="tc-head__sub">sftpgo · vps</div>
+          </div>
           <div class="tc-acts">
-            <span class="tc-seg"><a class="tc-seg__opt" href="/app/files/sftpgo/documents?view=list"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg>List</a><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents?view=tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg>Tiles</a></span>
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
         <div class="tc-bar tc-bar--sel">
@@ -8260,7 +8415,15 @@ Read  2 min ago</div>
           <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Rename" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="button"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
+          <button class="tc-btn" title="Copy" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
           <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
+        </div>
+        <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed" role="menuitem">Changed</a></span></details>
+          <span class="tc-bar__right is-2nd"><span class="tc-mono">7 items · 89.4 MB</span></span>
         </div>
         <div class="tc-grid">
           <div class="tc-tile is-sel"><input class="tc-tile__box" type="checkbox" name="item" value="whiteboard.jpg" aria-label="Pick whiteboard.jpg" checked><div class="tc-thumb"><svg><use href="#i-img"/></svg></div><a class="tc-tile__name" href="/app/files/sftpgo/documents/carrel/attachments/2026-07/whiteboard.jpg">whiteboard.jpg</a><span class="tc-tile__meta">2.8 MB · 4032×3024</span></div>
@@ -20716,6 +20879,304 @@ Read  2 min ago</div>
 </div>
 <figcaption><b>Записано, но не всё</b> — как у контакта, события и задачи: сервер принял правку заметки и молча выбросил часть свойств; после записи Carrel перечитывает заметку и называет, чего не стало. Правка открыта — та же, что была до записи.</figcaption>
 </figure>
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="states-32" data-screen="/app/files/{account}/{col}/{path…}" data-part="empty">
+    <div class="frame-label"><span>Папка пуста</span><i>одна папка</i></div>
+    <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+          <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-tickrow is-root"><button class="tc-tickrow__tick is-part" type="button"></button><svg viewBox="0 0 24 24"><use href="#i-file"/></svg><span class="tc-tickrow__label">Selected collections</span><span class="tc-tickrow__meta">2 of 3</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">sftpgo · vps</div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__meta">rw</span></div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Public</span><span class="tc-badge">ro</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Files</span><span class="tc-tickrow__meta">rw</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Shortcuts</div>
+          <div class="tc-tree tc-tree--padx8">
+            <div class="is-on tc-tree__row"><svg><use href="#i-file"/></svg>Attachments<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">Documents / carrel</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-link"/></svg>Published<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">2</span></div>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+          <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">2026-08</div>
+            <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<a class="tc-crumbs__link" href="#">attachments</a>/<b>2026-08</b></nav>
+            <div class="tc-head__sub">sftpgo · vps · 0 items</div>
+          </div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+          </div>
+        </div>
+        <div class="tc-empty"><b>This folder is empty.</b> Upload files into it, or drop them onto the window. <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <figcaption>Пустая папка говорит, что с ней сделать: загрузить файлы или завести папку. Полос и таблицы нет — фильтровать и показывать нечего; наверх ведут крошки.</figcaption>
+  </figure>
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="states-33" data-screen="/app/files/{account}/{col}" data-part="source-error">
+    <div class="frame-label"><span>Хранилище · сервер не ответил</span><i>одно хранилище, ошибка источника</i></div>
+    <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+          <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-tickrow is-root"><button class="tc-tickrow__tick is-part" type="button"></button><svg viewBox="0 0 24 24"><use href="#i-file"/></svg><span class="tc-tickrow__label">Selected collections</span><span class="tc-tickrow__meta">2 of 3</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">sftpgo · vps</div>
+          <div class="tc-tickrow is-error is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__err" role="img" aria-label="The server answered 503: the server is busy." title="The server answered 503: the server is busy."><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg></span></div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Public</span><span class="tc-badge">ro</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Files</span><span class="tc-tickrow__meta">rw</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Shortcuts</div>
+          <div class="tc-tree tc-tree--padx8">
+            <div class="is-on tc-tree__row"><svg><use href="#i-file"/></svg>Attachments<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">Documents / carrel</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-link"/></svg>Published<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">2</span></div>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+          <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">Documents</div>
+            <div class="tc-head__sub">sftpgo · vps</div>
+          </div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+          </div>
+        </div>
+        <div class="tc-msg is-alert"><b>Documents is unavailable.</b> The server did not answer as expected, so nothing on this screen comes from it. <button class="tc-btn is-sm" type="button">Try again</button></div>
+        <div class="tc-main__diag"><div class="tc-diag">PROPFIND /dav/Documents/
+sftpgo · vps
+dav: HTTP 503: the server is busy</div></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <figcaption>Хранилище, чей сервер не ответил: на экране ничего от него нет, и это сказано первым. Под тревогой — что спросили и что ответили; Try again спрашивает снова. В рейле у хранилища знак с причиной вместо доступа (Р-39).</figcaption>
+  </figure>
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="states-34" data-screen="/app/files/{account}/{col}" data-part="readonly">
+    <div class="frame-label"><span>Хранилище только для чтения</span><i>одно хранилище</i></div>
+    <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+          <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-tickrow is-root"><button class="tc-tickrow__tick" type="button"></button><svg viewBox="0 0 24 24"><use href="#i-file"/></svg><span class="tc-tickrow__label">Selected collections</span><span class="tc-tickrow__meta">3 of 3</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">sftpgo · vps</div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__meta">rw</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Public</span><span class="tc-badge">ro</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Files</span><span class="tc-tickrow__meta">rw</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Shortcuts</div>
+          <div class="tc-tree tc-tree--padx8">
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Attachments<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">Documents / carrel</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-link"/></svg>Published<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">2</span></div>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+          <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Public</div><div class="tc-head__sub">sftpgo · vps · read-only: nothing can be uploaded or made here</div></div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+          </div>
+        </div>
+        <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/public?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/public?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/public?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/public?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="tc-seg__opt" href="/app/files/sftpgo/public?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/public?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/public?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/public?sort=changed" role="menuitem">Changed</a></span></details>
+          <span class="tc-bar__right is-2nd"><span class="tc-mono">2 items · 5.3 MB</span></span>
+        </div>
+        <table class="tc-table">
+          <thead><tr>
+            <th class="tc-table__col--tick"><button class="tc-tickrow__tick is-off" type="button"></button></th>
+            <th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="is-2nd tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th><th class="tc-table__col--num"></th>
+          </tr></thead>
+          <tbody>
+            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/public/прайс-2026.pdf">прайс-2026.pdf</a></span></td>
+              <td class="tc-mono tc-table__n3">1.1 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-07-28 10:15</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+              <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/public/схема-проезда.png">схема-проезда.png</a></span></td>
+              <td class="tc-mono tc-table__n3">4.2 MB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-06-02 16:40</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+  <figcaption>В хранилище только для чтения Upload и New folder на месте, но выключены, и причина — в строке под заголовком (кадр «Папка только для чтения · Upload»). Файл можно отметить, открыть и скачать; в строке остаётся одно скачивание.</figcaption>
+  </figure>
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="states-35" data-screen="/app/files" data-part="empty">
+    <div class="frame-label"><span>Файлы · ни одно хранилище не отмечено</span><i>корень раздела, рейл пуст</i></div>
+    <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Contacts<span class="tc-num">312</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-cal"/></svg>Calendar<span class="tc-num">14</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-task"/></svg>Tasks<span class="tc-num">3</span></a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-note"/></svg>Notes<span class="tc-num">86</span></a>
+          <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Files</a>
+          <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Duplicates<span class="tc-num">3</span></a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-tickrow is-on is-root"><button class="tc-tickrow__tick is-off" type="button"></button><svg viewBox="0 0 24 24"><use href="#i-file"/></svg><span class="tc-tickrow__label">Selected collections</span><span class="tc-tickrow__meta">0 of 3</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">sftpgo · vps</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__meta">rw</span></div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Public</span><span class="tc-badge">ro</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Files</span><span class="tc-tickrow__meta">rw</span></div>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Shortcuts</div>
+          <div class="tc-tree tc-tree--padx8">
+            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Attachments<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">Documents / carrel</span></div>
+            <div class="tc-tree__row"><svg><use href="#i-link"/></svg>Published<span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">2</span></div>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
+          <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
+          <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head tc-head--snug">
+          <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t18">Selected collections</div>
+            <div class="tc-head__sub">0 of 3 storages</div></div>
+        </div>
+        <div class="tc-empty"><b>No storages are ticked.</b> Tick the storages to show in the rail, or all of them at once. <button class="tc-btn is-primary" type="button">Tick every storage</button></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <figcaption>Пустой корень файлов — как пустой общий список у остальных разделов: не «файлов нет», а «ничего не выбрано». Одна кнопка отмечает все хранилища разом.</figcaption>
+  </figure>
 </div>
 
 <h2 id="dark">9. Тёмная тема</h2>
@@ -20952,10 +21413,18 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-main">
-        <div class="tc-head tc-head--padb6">
-          <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t18">2026-07</div><nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<a class="tc-crumbs__link" href="#">attachments</a>/<b>2026-07</b></nav></div>
+        <div class="tc-head">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">2026-07</div>
+            <nav class="tc-crumbs"><a class="tc-crumbs__link" href="#">Documents</a>/<a class="tc-crumbs__link" href="#">carrel</a>/<a class="tc-crumbs__link" href="#">attachments</a>/<b>2026-07</b></nav>
+            <div class="tc-head__sub">sftpgo · vps</div>
+          </div>
           <div class="tc-acts">
-            <span class="tc-seg"><a class="tc-seg__opt" href="/app/files/sftpgo/documents?view=list"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg>List</a><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents?view=tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg>Tiles</a></span>
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
+            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
         <div class="tc-bar tc-bar--sel">
@@ -20964,7 +21433,15 @@ Read  2 min ago</div>
           <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Rename" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="button"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
+          <button class="tc-btn" title="Copy" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
           <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
+        </div>
+        <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
+          <span class="tc-seg is-2nd"><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name">Name</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size">Size</a><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed">Changed</a></span>
+          <span class="tc-seg"><a class="tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list" aria-label="List" title="List"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-menu"/></svg></a><a class="is-on tc-seg__opt" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles" aria-label="Tiles" title="Tiles"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-grid"/></svg></a></span>
+          <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name" role="menuitem">Name</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size" role="menuitem">Size</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed" role="menuitem">Changed</a></span></details>
+          <span class="tc-bar__right is-2nd"><span class="tc-mono">7 items · 89.4 MB</span></span>
         </div>
         <div class="tc-grid">
           <div class="tc-tile is-sel"><div class="tc-thumb"><svg><use href="#i-img"/></svg></div><span class="tc-tile__name">whiteboard.jpg</span><span class="tc-tile__meta">2.8 MB · 4032×3024</span></div>

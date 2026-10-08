@@ -124,16 +124,21 @@ func Files1() Screen {
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true},
-									{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
-									{Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"},
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
 								},
 								Secondary: true,
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Icon: "menu", Href: "/app/files/sftpgo/documents?view=list", On: true, Title: "List"},
-									{Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", Title: "Tiles"},
+									{
+										Icon:  "menu",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+										On:    true,
+										Title: "List",
+									},
+									{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
 								},
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
@@ -142,9 +147,9 @@ func Files1() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents?sort=name"},
-										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
-										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"},
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
@@ -188,6 +193,30 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
 								},
 								State: w.RowFolder,
+							},
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOff)},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-04-whiteboard.jpg",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "dots", Small: true, Title: "More"},
+										},
+										Acts: true,
+									},
+								},
 							},
 							{
 								Cells: []w.TableCell{
@@ -253,30 +282,6 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
-									{
-										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
-											w.Button{Icon: "dots", Small: true, Title: "More"},
-										},
-										Acts: true,
-									},
-								},
-							},
-							{
-								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
-									{
-										Parts: []w.CellPart{
-											w.TableFile{
-												Icon: "img",
-												Name: "2026-08-04-whiteboard.jpg",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
-											},
-										},
-									},
-									{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
 									{
 										Parts: []w.CellPart{
 											w.Button{Icon: "down", Small: true, Title: "Download"},
@@ -426,10 +431,14 @@ func Files2() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
 							Current: "attachments",
 						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "dots", Title: "More"},
 							},
 						},
 					},
@@ -447,52 +456,182 @@ func Files2() Screen {
 						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
 						Variant: w.BarSelection,
 					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Waiting: true,
+								Variant: w.FilterH26W190,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+								},
+								Secondary: true,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{
+										Icon:  "menu",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+										On:    true,
+										Title: "List",
+									},
+									{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
+								},
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
+					},
 					w.Table{
 						Cols: []w.TableCol{
 							{Width: w.ColTick, Tick: ptr(w.TickedPart)},
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
-							{Label: "Type", Width: w.ColType, Rank: w.Rank4},
+							{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
 							{Label: "Changed", Width: w.ColTime},
+							{Width: w.ColNum},
 						},
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}},
-									{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
+									{},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+										},
+										Span: 5,
+									},
 								},
-								State: w.RowPicked,
+							},
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOff)},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
+								},
+								State: w.RowFolder,
 							},
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOn)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}},
-									{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
-								},
-								State: w.RowPicked,
-							},
-							{
-								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-04-whiteboard.jpg",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "dots", Small: true, Title: "More"},
+										},
+										Acts: true,
+									},
+								},
+								State: w.RowPicked,
+							},
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOn)},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-10-sync-board.png",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "dots", Small: true, Title: "More"},
+										},
+										Acts: true,
+									},
+								},
+								State: w.RowPicked,
+							},
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOn)},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "release-checklist.md",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "dots", Small: true, Title: "More"},
+										},
+										Acts: true,
+									},
 								},
 								State: w.RowPicked,
 							},
 							{
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff)},
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "dots", Small: true, Title: "More"},
+										},
+										Acts: true,
+									},
 								},
 							},
 						},
@@ -610,10 +749,14 @@ func Files4() Screen {
 								Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
 								Current: "attachments",
 							},
+							Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
 									w.Button{Label: "New folder", Icon: "plus"},
+									w.Button{Icon: "refresh", Title: "Refresh"},
+									w.Button{Icon: "panel", Title: "Details"},
+									w.Button{Icon: "dots", Title: "More"},
 								},
 							},
 						},
@@ -631,52 +774,182 @@ func Files4() Screen {
 							Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
 							Variant: w.BarSelection,
 						},
+						w.Bar{
+							Items: []w.BarPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+									Waiting: true,
+									Variant: w.FilterH26W190,
+								},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
+										{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+										{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+									},
+									Secondary: true,
+								},
+								w.Seg{
+									Options: []w.SegOption{
+										{
+											Icon:  "menu",
+											Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+											On:    true,
+											Title: "List",
+										},
+										{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
+									},
+								},
+								w.Button{Label: "Columns", Icon: "cols"},
+								w.Drop{
+									Trigger: w.Button{Icon: "dots", Title: "More"},
+									More:    true,
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
+											w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
+											w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+										},
+										Pop:    w.MenuUnderEnd,
+										Inline: true,
+									},
+								},
+							},
+							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "14 items · 38.2 MB"}}, Secondary: true},
+						},
 						w.Table{
 							Cols: []w.TableCol{
 								{Width: w.ColTick, Tick: ptr(w.TickedPart)},
 								{Label: "Name"},
 								{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
-								{Label: "Type", Width: w.ColType, Rank: w.Rank4},
+								{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
 								{Label: "Changed", Width: w.ColTime},
+								{Width: w.ColNum},
 							},
 							Rows: []w.TableRow{
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}},
-										{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
+										{},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+											},
+											Span: 5,
+										},
 									},
-									State: w.RowPicked,
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOff)},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
+									},
+									State: w.RowFolder,
 								},
 								{
 									Cells: []w.TableCell{
 										{Pick: ptr(w.TickedOn)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}},
-										{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
-									},
-									State: w.RowPicked,
-								},
-								{
-									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{
+													Icon: "img",
+													Name: "2026-08-04-whiteboard.jpg",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+												},
+											},
+										},
 										{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "dots", Small: true, Title: "More"},
+											},
+											Acts: true,
+										},
+									},
+									State: w.RowPicked,
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{
+													Icon: "img",
+													Name: "2026-08-10-sync-board.png",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "dots", Small: true, Title: "More"},
+											},
+											Acts: true,
+										},
+									},
+									State: w.RowPicked,
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{
+													Icon: "doc",
+													Name: "release-checklist.md",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "dots", Small: true, Title: "More"},
+											},
+											Acts: true,
+										},
 									},
 									State: w.RowPicked,
 								},
 								{
 									Cells: []w.TableCell{
 										{Pick: ptr(w.TickedOff)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
+										{
+											Parts: []w.CellPart{
+												w.TableFile{
+													Icon: "doc",
+													Name: "смета-подрядчик.pdf",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+												},
+											},
+										},
 										{Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "dots", Small: true, Title: "More"},
+											},
+											Acts: true,
+										},
 									},
 								},
 							},
@@ -837,22 +1110,21 @@ func Files5() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
+						Title: &w.HeadTitle{Text: "2026-07"},
 						Crumbs: &w.Crumbs{
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
 							Current: "2026-07",
 						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Seg{
-									Options: []w.SegOption{
-										{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"},
-										{Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true},
-									},
-								},
+								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "New folder", Icon: "plus"},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "dots", Title: "More"},
 							},
 						},
-						Pad: w.HeadPadBottom6,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -861,10 +1133,57 @@ func Files5() Screen {
 							w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
 							w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename"},
 							w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
 							w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
 						},
 						Count:   &w.BarCount{Text: "1 selected"},
 						Variant: w.BarSelection,
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Waiting: true,
+								Variant: w.FilterH26W190,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed"},
+								},
+								Secondary: true,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{
+										Icon:  "menu",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list",
+										Title: "List",
+									},
+									{
+										Icon:  "grid",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles",
+										On:    true,
+										Title: "Tiles",
+									},
+								},
+							},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed"},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "7 items · 89.4 MB"}}, Secondary: true},
 					},
 					w.Grid{
 						Tiles: []w.Tile{

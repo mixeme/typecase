@@ -631,6 +631,9 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("danger", w.Sheet{Icon: "trash", Tone: w.SheetIconDanger, Title: "Delete 3 items", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Strong("3"), w.Text(" files, 4.4 MB, are deleted on sftpgo · vps. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.Msg{Parts: []w.MsgPart{w.Text("Carrel keeps no index of what points at these files. They may be attached to a note or an event — check before deleting.")}, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete", Kind: w.ButtonDangerSolid}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-files-22", "tc-sheet", 1),
 	overlay("server", w.Sheet{Icon: "dup", Title: "Copy 3 items", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("from Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.Rubric{Text: "Where to put it", Items: []w.RubricPart{w.Button{Label: "New folder", Icon: "plus", Small: true}}},
 		w.Tree{Rows: []w.TreeRow{

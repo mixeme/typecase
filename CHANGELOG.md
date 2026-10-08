@@ -17,6 +17,16 @@ do, not what the authors did.
 
 ### Added
 
+- **The files frames agree with each other, and the missing ones are drawn**
+  (Carrel's task 121; the owner's decision of 08.10, Р-44). The selection
+  bar stands above the filter bar and replaces nothing; every folder frame
+  has the same head (s-files-2, -4, -5, dark-3 follow s-files-1). s-files-1
+  names the address of a folder, `/app/files/{account}/{col}/{path…}`, and
+  sorts by name. New state frames: an empty folder, a storage whose server
+  did not answer, a read-only storage, no storage ticked (states-32 … -35).
+  New fragments: the sheets of Rename, Delete and New folder of a folder
+  (s-files-21 … -23) and a refused row of the queue (s-files-24). 424
+  frames.
 - **The frames of tasks and notes agree with each other** (Carrel's tasks
   105, 127; the owner's decisions of 08.10, Р-42, Р-43). The card of a task
   that is not overdue says nothing of it, and its due date is in the full

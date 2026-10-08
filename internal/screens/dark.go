@@ -382,22 +382,21 @@ func Dark3() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Text: "2026-07", Size: w.HeadTitle18},
+						Title: &w.HeadTitle{Text: "2026-07"},
 						Crumbs: &w.Crumbs{
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
 							Current: "2026-07",
 						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Seg{
-									Options: []w.SegOption{
-										{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"},
-										{Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true},
-									},
-								},
+								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "New folder", Icon: "plus"},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "dots", Title: "More"},
 							},
 						},
-						Pad: w.HeadPadBottom6,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -406,10 +405,57 @@ func Dark3() Screen {
 							w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
 							w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename"},
 							w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
 							w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
 						},
 						Count:   &w.BarCount{Text: "1 selected"},
 						Variant: w.BarSelection,
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Waiting: true,
+								Variant: w.FilterH26W190,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed"},
+								},
+								Secondary: true,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{
+										Icon:  "menu",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list",
+										Title: "List",
+									},
+									{
+										Icon:  "grid",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles",
+										On:    true,
+										Title: "Tiles",
+									},
+								},
+							},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?sort=changed"},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "7 items · 89.4 MB"}}, Secondary: true},
 					},
 					w.Grid{
 						Tiles: []w.Tile{

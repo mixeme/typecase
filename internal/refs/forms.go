@@ -36,6 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list", Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles", On: true, Title: "Tiles"}}}, "s-files-5", "tc-seg", 2),
 	form("order", w.Seg{Options: []w.SegOption{{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true}, {Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"}, {Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}}, "s-files-1", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}}, "s-contacts-1", "tc-seg", 1),
 	form("buttons", w.Seg{Options: []w.SegOption{{Label: "Apple"}, {Label: "Android", On: true}, {Label: "Thunderbird"}, {Label: "Anything else"}}}, "s-plan-2", "tc-seg", 1),
@@ -57,7 +58,6 @@ var _ = add(
 	form("start", w.Seg{Options: seg(0, "To WebDAV", "Download", "Both"), Variant: w.SegStart}, "s-backup-2", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "Comfortable", "Compact"), Variant: w.SegStart}, "appearance-1", "tc-seg", 2),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, "s-agenda-1", "tc-seg", 1),
-	form("icons", w.Seg{Options: []w.SegOption{{Label: "List", Icon: "menu", Href: "/app/files/sftpgo/documents?view=list"}, {Label: "Tiles", Icon: "grid", Href: "/app/files/sftpgo/documents?view=tiles", On: true}}}, "s-files-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "Auto", "Light", "Dark"), Variant: w.SegStartSmall}, "account-5", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-1", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "Read only", "Read and write"), Variant: w.SegStart}, "s-davloom-2", "tc-seg", 1),

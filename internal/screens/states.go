@@ -4456,3 +4456,483 @@ func States31() Screen {
 		},
 	}
 }
+
+// States32 is frame «Папка пуста» (states-32).
+func States32() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 5,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowRoot,
+							Icon:   "file",
+							Label:  "Selected collections",
+							Meta:   "2 of 3",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "sftpgo · vps"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#9A9280"},
+							Label:  "Public",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Shortcuts"},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
+								{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}},
+							},
+							On:      1,
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "2026-08"},
+						Crumbs: &w.Crumbs{
+							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+							Current: "2026-08",
+						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 0 items")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "New folder", Icon: "plus"},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "dots", Title: "More"},
+							},
+						},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("This folder is empty."),
+							w.Text(" Upload files into it, or drop them onto the window. "),
+							w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+							w.Text(" "),
+							w.Button{Label: "New folder", Icon: "plus"},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States33 is frame «Хранилище · сервер не ответил» (states-33).
+func States33() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 5,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowRoot,
+							Icon:   "file",
+							Label:  "Selected collections",
+							Meta:   "2 of 3",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "sftpgo · vps"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Current: true, Error: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#9A9280"},
+							Label:  "Public",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Shortcuts"},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
+								{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}},
+							},
+							On:      1,
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Documents"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "New folder", Icon: "plus"},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "dots", Title: "More"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Documents is unavailable."),
+							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Button{Label: "Try again", Small: true},
+						},
+						Tone: w.MsgAlert,
+					},
+					w.MainDiag{Diag: w.Diag{Text: "PROPFIND /dav/Documents/\nsftpgo · vps\ndav: HTTP 503: the server is busy"}},
+				},
+			},
+		},
+	}
+}
+
+// States34 is frame «Хранилище только для чтения» (states-34).
+func States34() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 5,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "3 of 3"}},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "sftpgo · vps"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Public", Current: true, Trail: w.Badge{Label: "ro"}},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Shortcuts"},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
+								{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}},
+							},
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Public"},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · read-only: nothing can be uploaded or made here")}},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary, State: w.ButtonDisabled},
+								w.Button{Label: "New folder", Icon: "plus", State: w.ButtonDisabled},
+								w.Button{Icon: "refresh", Title: "Refresh"},
+								w.Button{Icon: "panel", Title: "Details"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Waiting: true,
+								Variant: w.FilterH26W190,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "Name", Href: "/app/files/sftpgo/public?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/public?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/public?sort=changed"},
+								},
+								Secondary: true,
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Icon: "menu", Href: "/app/files/sftpgo/public?view=list", On: true, Title: "List"},
+									{Icon: "grid", Href: "/app/files/sftpgo/public?view=tiles", Title: "Tiles"},
+								},
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/public?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/public?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/public?sort=changed"},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2 items · 5.3 MB"}}, Secondary: true},
+					},
+					w.Table{
+						Cols: []w.TableCol{
+							{Width: w.ColTick, Tick: ptr(w.TickedOff)},
+							{Label: "Name"},
+							{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
+							{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
+							{Label: "Changed", Width: w.ColTime},
+							{Width: w.ColNum},
+						},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOff)},
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "прайс-2026.pdf", Href: "/app/files/sftpgo/public/прайс-2026.pdf"}},
+									},
+									{Parts: []w.CellPart{w.Text("1.1 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-07-28 10:15")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "Download"}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Pick: ptr(w.TickedOff)},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "схема-проезда.png", Href: "/app/files/sftpgo/public/схема-проезда.png"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-06-02 16:40")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "Download"}}, Acts: true},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States35 is frame «Файлы · ни одно хранилище не отмечено» (states-35).
+func States35() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+					},
+					On: 5,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedOff,
+							Kind:    w.TickRowRoot,
+							Icon:    "file",
+							Label:   "Selected collections",
+							Meta:    "0 of 3",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "sftpgo · vps"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#9A9280"},
+							Label:  "Public",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw", Hidden: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Shortcuts"},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
+								{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}},
+							},
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Selected collections", Size: w.HeadTitle18},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 3 storages")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Strong("No storages are ticked."),
+							w.Text(" Tick the storages to show in the rail, or all of them at once. "),
+							w.Button{Label: "Tick every storage", Kind: w.ButtonPrimary},
+						},
+					},
+				},
+			},
+		},
+	}
+}
