@@ -872,7 +872,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
@@ -902,7 +902,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "14", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
@@ -941,7 +941,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "14"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},

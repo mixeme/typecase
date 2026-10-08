@@ -42,7 +42,7 @@ var _ = add(
 
 	// tc-acts
 	shell("row", w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Button{Label: "All records", Small: true}}}, "components-14", "tc-acts", 1),
-	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 4", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 1"}, {Label: "Notes 1"}}}, w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}}, Stack: true}, "s-dup-1", "tc-acts", 1),
+	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}}, Stack: true}, "s-dup-1", "tc-acts", 1),
 
 	// tc-nav
 	shell("back-short", w.Nav{Items: []w.NavItem{
@@ -55,14 +55,14 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 2}, "s-agenda-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, "s-agenda-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 1}, "s-contacts-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, "s-contacts-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
@@ -78,7 +78,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 5}, "s-files-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 5}, "s-files-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
@@ -104,7 +104,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 4}, "s-notes-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 4}, "s-notes-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Href: "#"},
 		{Icon: "cal", Label: "Calendar", Href: "#"},
@@ -136,7 +136,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Href: "#"},
 		{Icon: "note", Label: "Notes", Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Href: "#"}}, On: 6}, "s-dup-2", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Href: "#"}}, On: 6}, "s-dup-6", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
@@ -169,21 +169,21 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 3}, "s-tasks-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 3}, "s-tasks-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
-		{Icon: "con", Label: "Contacts", Href: "#"},
-		{Icon: "cal", Label: "Calendar", Href: "#"},
-		{Icon: "task", Label: "Tasks", Href: "#"},
-		{Icon: "note", Label: "Notes", Href: "#"},
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}}, "s-find-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}}, "s-find-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
-		{Icon: "con", Label: "Contacts", Href: "#"},
-		{Icon: "cal", Label: "Calendar", Href: "#"},
-		{Icon: "task", Label: "Tasks", Href: "#"},
-		{Icon: "note", Label: "Notes", Href: "#"},
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 6}, "s-dup-1", "tc-nav", 1),
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 6}, "s-dup-1", "tc-nav", 1),
 	shell("icons", w.Nav{Items: []w.NavItem{
 		{Icon: "back", Href: "#", Title: "Back"}}}, "s-conflict-2", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
@@ -286,7 +286,6 @@ var _ = add(
 	// tc-railfoot
 	shell("plain", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New address book"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}, "s-contacts-1", "tc-railfoot", 1),
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}}, Strip: true}, "components-35", "tc-railfoot", 1),
-	shell("about", w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}, "s-dup-1", "tc-railfoot", 1),
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New notebook"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}, Strip: true}, "components-36", "tc-railfoot", 1),
 
 	// tc-top

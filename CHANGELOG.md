@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- `RailFoot` has no state «about» any more: no frame draws a rail foot of
+  the build line alone since the duplicates frames got the davloom mark
+  (Carrel's task 136). The widget prints what it printed.
 - `Badge.Icon` is gone: no frame draws a badge with an icon since the
   «linked» badge left the tags column of the notes list (Carrel's task 105).
 - `TickRow.Trail` no longer takes a `Button`: a refused source has no Retry
@@ -17,6 +20,22 @@ do, not what the authors did.
 
 ### Added
 
+- **The frames of search, duplicates and the conflict agree with the rest**
+  (Carrel's task 136; the owner's decision of 08.10, Р-46). «Duplicates N»
+  of the navigation, «N to look at» and the segments count the groups that
+  wait for a decision — two, in every frame; what the lists draw as linked
+  («Собрать чемодан», «Что почитать про CRDT») is linked on s-dup-1, with
+  Unlink and the merge. The rail of the duplicates frames names every source
+  of the four kinds, as the rail of search does, with the number of records
+  compared, and its foot has the davloom mark; s-dup-6 (nothing loaded) is
+  the page of duplicates, not a dialog. The second copy of Артём lies in
+  «Архив», where a record can be deleted; the options of a value are named
+  by the source of the record. s-find-1 has the navigation of every other
+  frame. The tablet frame of the conflict (s-conflict-2) draws the same four
+  properties and four buttons as s-conflict-1. s-dup-4, -5, -6 name their
+  address (`data-screen`, `data-part`). A new frame, s-io-14: the report of
+  an import that skipped records of another kind has a fourth card,
+  «Skipped», of the look of «Failed» without the alarm. 425 frames.
 - **The files frames agree with each other, and the missing ones are drawn**
   (Carrel's task 121; the owner's decision of 08.10, Р-44). The selection
   bar stands above the filter bar and replaces nothing; every folder frame

@@ -66,6 +66,7 @@ var Routes = []Route{
 	{Frame: "s-io-7", Caption: "Импорт задач · шаг 2 из 3, предпросмотр", Screen: Io7},
 	{Frame: "s-io-8", Caption: "Импорт заметок · шаг 2 из 3, предпросмотр", Screen: Io8},
 	{Frame: "s-io-9", Caption: "Отчёт об импорте · шаг 3", Screen: Io9},
+	{Frame: "s-io-14", Caption: "Отчёт об импорте · с пропущенным", Screen: Io14},
 	{Frame: "account-1", Caption: "Настройки · учётная запись", Screen: Account1},
 	{Frame: "account-2", Caption: "Депонирование ключа · подтверждение", Screen: Account2},
 	{Frame: "s-mail-9", Caption: "Учётная запись · адрес не подтверждён, письмо не отправлено", Screen: Mail9},

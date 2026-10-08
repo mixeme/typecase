@@ -138,45 +138,45 @@ var _ = add(
 			{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
 			{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}}}}}, "s-notes-2", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Text: "Duplicates"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("361 records compared · 4 to look at")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 4", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 1"}, {Label: "Notes 1"}}}, w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}}, Stack: true}},
+		w.Head{Title: &w.HeadTitle{Text: "Duplicates"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("451 records compared · 2 to look at")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, w.Field{Label: "Match threshold", Parts: []w.FieldPart{w.Input{Name: "threshold", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52}, w.Button{Label: "Weights", Small: true}}, Width: w.FieldInline, Action: "/app/duplicates"}}, Stack: true}},
 		w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent},
 		w.MainResults{Items: []w.ResultsPart{w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Артём Белов"},
+			w.Rubric{Text: "Артём Белов", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АБ"}, Title: []w.Inline{w.Text("Артём Белов")}, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор", Source: "nextcloud · Контакты", Inset: true},
-				w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Белов Артём")}, Subtitle: "+7 903 118-22-04", Detail: "belov@team.example", Caption: "—", Source: "radicale · vps · Команда", Inset: true}}, Inset: true},
-			w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Display name", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Organisation", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Photo", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Дежурство: первая линия"},
+				w.FaceRow{Mark: w.Mark{Colour: "#A05A2C"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Белов Артём")}, Subtitle: "+7 903 118-22-04", Detail: "belov@team.example", Caption: "—", Source: "nextcloud · Архив", Inset: true}}, Inset: true},
+			w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Display name", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Артём Белов")}}, w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Белов Артём")}}}, Gap: w.LineGap12, Block: true}}}, w.Field{Label: "Organisation", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Check{On: true, Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Тензор")}}, w.Check{Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("—")}}}, Gap: w.LineGap12, Block: true}}}, w.Field{Label: "Photo", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}}, w.Check{On: true, Name: "choice.PHOTO", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Архив")}}}, Gap: w.LineGap12, Block: true}}}}},
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link", Submit: true}, w.Button{Label: "Not duplicates", Name: "op", Value: "not", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g1"}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Дежурство: первая линия", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "70 points · same title, same start", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "nextcloud · Работа", Inset: true},
 				w.TimeRow{Mark: w.Mark{Colour: "#8C6239"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "radicale · vps · Дежурства", Inset: true}}, Inset: true},
 			w.CardHint{Parts: []w.CardTextPart{w.Text("The same duty in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.")}, Line: true},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Собрать чемодан"},
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link", Submit: true}, w.Button{Label: "Not duplicates", Name: "op", Value: "not", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g2"}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Собрать чемодан", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, w.Mono{Text: "70 points · same title, same due date", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Tags: []w.RowTag{w.Tag{Label: "дом"}}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
 				w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug", Progress: "—", Source: "radicale · vps · Личное", Inset: true}}, Inset: true},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Что почитать про CRDT"},
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g3"}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Что почитать про CRDT", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, w.Mono{Text: "70 points · same title, same date", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Tags: []w.RowTag{w.Tag{Label: "книги"}}, Date: "8 Aug", Source: "nextcloud · Записи", Inset: true},
 				w.ExcerptRow{Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Date: "8 Aug", Source: "radicale · vps · Дневник", Inset: true}}, Inset: true},
-			w.CardHint{Parts: []w.CardTextPart{w.Text("Same title and the same date: a note copied into a second notebook. Linking keeps both; merging writes one and deletes the other.")}, Line: true},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary}, w.Button{Label: "Not duplicates"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}}}}, w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Анна Ковалёва"},
+			w.CardHint{Parts: []w.CardTextPart{w.Text("Same title and the same date: a note copied into a second notebook. Linked, the two are shown as one row; merging writes one and deletes the other.")}, Line: true},
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g4"}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Анна Ковалёва", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×3", Tone: w.BadgeLinked}, w.Mono{Text: "80 points · same email, same name", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", Inset: true},
 				w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "—", Source: "radicale · vps · Команда", Inset: true},
 				w.FaceRow{Mark: w.Mark{Colour: "#9A9280"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("А. Ковалёва")}, Subtitle: "—", Detail: "a.kovaleva@example.org", Caption: "Слово", Source: "baikal · Общий", SourceBadge: &w.Badge{Label: "ro"}, Inset: true}}, Inset: true},
-			w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Photo", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Keep these values", Kind: w.ButtonPrimary}, w.Button{Label: "Unlink"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed}}},
-			w.CardText{Kind: w.CardWhy, Parts: []w.CardTextPart{w.Text("Общий is read-only: its record could be neither rewritten nor deleted.")}}}}, w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Сергей Орлов"},
+			w.CardRow{Kind: w.CardTop11, Gap: 22, Items: []w.CardRowPart{w.Field{Label: "Photo", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}}, w.Check{On: true, Name: "choice.PHOTO", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("radicale · vps · Команда")}}}, Gap: w.LineGap12, Block: true}}}}},
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "op", Value: "keep", Submit: true}, w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, State: w.ButtonDisabled}}},
+			w.CardText{Kind: w.CardWhy, Parts: []w.CardTextPart{w.Text("Общий is read-only: its record could be neither rewritten nor deleted.")}}}, Action: "/app/duplicates/g5"}, w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Сергей Орлов", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "not duplicates"}, w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
 				w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "СО"}, Title: []w.Inline{w.Text("Сергей Орлов")}, Subtitle: "+7 495 120-45-00", Detail: "s.orlov@slovo.example", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", Inset: true},
 				w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "МО"}, Title: []w.Inline{w.Text("Мария Орлова")}, Subtitle: "+7 495 120-45-00", Detail: "m.orlova@slovo.example", Caption: "Издательство «Слово»", Source: "radicale · vps · Команда", Inset: true}}, Inset: true},
-			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again"}}}}}}}}}, "s-dup-1", "tc-main", 1),
+			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "op", Value: "offer", Submit: true}}}}, Action: "/app/duplicates/g6"}}}}}, "s-dup-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "down"}}}, Wide: true},
 		w.Strip{Label: "Subscribe in your own client", Items: []w.StripPart{w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Mono: true, Variant: w.InputLineFill, Label: "Address"}, w.Button{Label: "Copy", Small: true}, w.Button{Label: "Open in calendar app", Small: true}, w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11}}},
@@ -227,22 +227,23 @@ var _ = add(
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "62%", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Show", Small: true}, Min: true}}, Variant: w.MainShort}, "s-files-3", "tc-main", 1),
 	shell("groups", w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Text: "«ковал»"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("6 of 7 collections · 7 records · 1 source timed out")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Contacts"}, {Label: "Events"}, {Label: "Tasks"}, {Label: "Notes"}, {Label: "Files"}}}}}},
-		w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Text("Done · 5 of 6 sources answered"), w.Mono{Text: "1.8 s"}, w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}}}}},
-		w.ListGroup{Title: w.Rubric{Text: "Contacts"}, Count: &w.Num{Value: 2}},
+		w.Head{Title: &w.HeadTitle{Text: "«ковал»"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("14 of 14 collections · 7 records · 1 source timed out")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Contacts"}, {Label: "Events"}, {Label: "Tasks"}, {Label: "Notes"}, {Label: "Files"}}}}}},
+		w.Runbar{Meter: w.Meter{Percent: 100, Alert: true}, Parts: []w.RunbarPart{w.Text("Done · 13 of 14 sources answered · "), w.Drop{Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280", Size: w.MarkH11}, Source: "baikal · Общий", Answer: "REPORT /dav.php/calendars/mix/obshchiy/ → no answer in 10 s; the search went on without it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}}, w.Mono{Text: "1.8 s"}, w.Line{Items: []w.LinePart{w.Mono{Text: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}}, Gap: w.LineGap8, Place: w.Pushed}}},
+		w.ListGroup{Title: w.Rubric{Text: "Contacts", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Strong("Ковал"), w.Text("ёва Анна")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты"},
 			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "ПК"}, Title: []w.Inline{w.Strong("Ковал"), w.Text("ёв Пётр")}, Subtitle: "—", Detail: "p.kovalev@example.org", Caption: "—", Source: "radicale · vps · Команда"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Events"}, Count: &w.Num{Value: 1}},
+		w.ListGroup{Title: w.Rubric{Text: "Events", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "15:00", Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Detail: "Zoom", Source: "nextcloud · Личный"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Tasks"}, Count: &w.Num{Value: 1}},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "15:00", Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Detail: "Zoom", Source: "nextcloud · Личный", Short: true}}},
+		w.ListGroup{Title: w.Rubric{Text: "Tasks", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
 			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#3F6E8C"}, Title: []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")}, Tags: []w.RowTag{w.Tag{Label: "релиз"}}, Due: "12 Aug", Progress: "40%", Source: "nextcloud · Работа"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Notes"}, Count: &w.Num{Value: 1}},
+		w.ListGroup{Title: w.Rubric{Text: "Notes", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
 			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")}, Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Files"}, Count: &w.Num{Value: 2}},
+		w.ListGroup{Title: w.Rubric{Text: "Files", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.SizeRow{Ticked: w.TickedOff, Icon: "doc", Name: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")}, Bytes: "240 KB", Time: "2026-08-04 11:20", Access: "rw", Source: "sftpgo · vps · Documents"},
 			w.SizeRow{Ticked: w.TickedOff, Icon: "doc", Name: []w.Inline{w.Strong("Ковал"), w.Text("ёва — правки по обложке.md")}, Bytes: "6 KB", Time: "2026-07-21 16:02", Access: "rw", Source: "sftpgo · vps · Documents"}}},
@@ -507,7 +508,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
@@ -538,7 +539,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "312", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
@@ -582,7 +583,7 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
-		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "14", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
 		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
@@ -596,15 +597,17 @@ var _ = add(
 			w.TimeRow{Mark: w.Mark{Colour: "#6B4E7A"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ на Ленина", Source: "radicale · vps · Проекты"}}}}}, Height: w.ShellHeight340}}, "s-notes-7", "tc-shell", 1),
 	shell("zone", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Zone{Title: w.Rubric{Text: "Rail"}, Note: w.Mono{Text: "264 px · sections + sources", Form: w.MonoLine, Variant: w.Mono11Top}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, RailForm: w.RailZone, Main: w.Main{Items: []w.MainPart{
 		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Form: w.MonoLine, Variant: w.Mono11Top}}}, Variant: w.MainZone}, Side: &w.Side{Items: []w.SidePart{w.Zone{Title: w.Rubric{Text: "Details"}, Note: w.Mono{Text: "400 px · closes by ✕", Form: w.MonoLine, Variant: w.Mono11Top}}}, Variant: w.SideZone}, Height: w.ShellHeight230}}, "shell-1", "tc-shell", 1),
-	shell("icons", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill}, Actions: []w.TopAction{w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, w.UserMenu{Name: "mix", NoArrow: true}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
+	shell("icons", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Variant: w.SearchFill}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.UserMenu{Name: "mix", NoArrow: true}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "back", Href: "#", Title: "Back"}}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, RailForm: w.RailIcons, Main: w.Main{Items: []w.MainPart{
 		w.Dialog{Items: []w.DialogPart{
-			w.Head{Title: &w.HeadTitle{Text: "Conflict"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing has been overwritten.")}}}},
+			w.Head{Title: &w.HeadTitle{Text: "Conflict"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Another client changed this contact while you were editing it. Nothing has been overwritten.")}}}},
 			w.DiffAgree{Property: w.Mono{Text: "FN"}, Text: "agrees — kept as it is."},
 			w.Diff{Items: []w.DiffItem{
-				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
-				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}}}},
-			w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Write this combination", Kind: w.ButtonPrimary}, w.Button{Label: "Use only my edit"}, w.Button{Label: "Cancel"}}, Variant: w.FormFootWrap}}}}}}}, "s-conflict-2", "tc-shell", 1),
+				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{Name: "choice.1", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Name: "choice.1", Value: "none", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{Name: "choice.2", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Name: "choice.2", Value: "server", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
+				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{Name: "choice.3", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}}}, w.Check{Name: "choice.3", Value: "none", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+				{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Name: "choice.4", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{Name: "choice.4", Value: "server", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}, ID: "conflict", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"},
+			w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"}, w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"}, w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"}, w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"}}, Variant: w.FormFootWrap}}}}}}}, "s-conflict-2", "tc-shell", 1),
 	shell("plain", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "back", Label: "Back to app", Href: "#"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Settings"},

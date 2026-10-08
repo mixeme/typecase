@@ -20,39 +20,51 @@ func Dup1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
 					On: 6,
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "2 / 3", Variant: w.MonoTight}}},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "13"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "9"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 					},
 				},
-				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Duplicates"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("361 records compared · 4 to look at")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("451 records compared · 2 to look at")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{
 									Options: []w.SegOption{
-										{Label: "All 4", On: true},
+										{Label: "All 2", On: true},
 										{Label: "Contacts 1"},
 										{Label: "Events 1"},
-										{Label: "Tasks 1"},
-										{Label: "Notes 1"},
+										{Label: "Tasks 0"},
+										{Label: "Notes 0"},
 									},
 								},
 								w.Field{
@@ -103,13 +115,13 @@ func Dup1() Screen {
 												Inset:    true,
 											},
 											w.FaceRow{
-												Mark:     w.Mark{Colour: "#6B4E7A"},
+												Mark:     w.Mark{Colour: "#A05A2C"},
 												Avatar:   w.Avatar{Photo: true},
 												Title:    []w.Inline{w.Text("Белов Артём")},
 												Subtitle: "+7 903 118-22-04",
 												Detail:   "belov@team.example",
 												Caption:  "—",
-												Source:   "radicale · vps · Команда",
+												Source:   "nextcloud · Архив",
 												Inset:    true,
 											},
 										},
@@ -150,8 +162,14 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud")}},
-															w.Check{On: true, Name: "choice.PHOTO", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("radicale")}},
+															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.PHOTO",
+																Value: "2",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("nextcloud · Архив")},
+															},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -249,7 +267,7 @@ func Dup1() Screen {
 											w.RubricAside{
 												Text: "",
 												Items: []w.RubricAsidePart{
-													w.Badge{Label: "candidate ×2"},
+													w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 													w.Mono{Text: "70 points · same title, same due date", Variant: w.MonoTightDusty},
 												},
 											},
@@ -283,8 +301,7 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link", Submit: true},
-											w.Button{Label: "Not duplicates", Name: "op", Value: "not", Submit: true},
+											w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true},
 											w.Button{
 												Label:  "Merge on the server",
 												Kind:   w.ButtonDanger,
@@ -306,7 +323,7 @@ func Dup1() Screen {
 											w.RubricAside{
 												Text: "",
 												Items: []w.RubricAsidePart{
-													w.Badge{Label: "candidate ×2"},
+													w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 													w.Mono{Text: "70 points · same title, same date", Variant: w.MonoTightDusty},
 												},
 											},
@@ -336,7 +353,7 @@ func Dup1() Screen {
 									},
 									w.CardHint{
 										Parts: []w.CardTextPart{
-											w.Text("Same title and the same date: a note copied into a second notebook. Linking keeps both; merging writes one and deletes the other."),
+											w.Text("Same title and the same date: a note copied into a second notebook. Linked, the two are shown as one row; merging writes one and deletes the other."),
 										},
 										Line: true,
 									},
@@ -344,8 +361,7 @@ func Dup1() Screen {
 										Kind: w.CardActs,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link", Submit: true},
-											w.Button{Label: "Not duplicates", Name: "op", Value: "not", Submit: true},
+											w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true},
 											w.Button{
 												Label:  "Merge on the server",
 												Kind:   w.ButtonDanger,
@@ -418,13 +434,13 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud")}},
+															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
 															w.Check{
 																On:    true,
 																Name:  "choice.PHOTO",
 																Value: "2",
 																Radio: true,
-																Parts: []w.CheckPart{w.Text("radicale · vps")},
+																Parts: []w.CheckPart{w.Text("radicale · vps · Команда")},
 															},
 														},
 														Gap:   w.LineGap12,
@@ -518,24 +534,36 @@ func Dup2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
 					On: 6,
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "2 / 3", Variant: w.MonoTight}}},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "13"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "9"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 					},
 				},
-				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -567,14 +595,14 @@ func Dup2() Screen {
 									w.Rubric{Text: "Deleted afterwards"},
 									w.CardText{
 										Kind:  w.CardLine,
-										Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Команда")}}},
+										Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Архив")}}},
 									},
 								},
 							},
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{Text: "The kept record gains"},
-									w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from radicale · vps · Команда)"}},
+									w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from nextcloud · Архив)"}},
 								},
 							},
 							w.FormFoot{
@@ -609,24 +637,36 @@ func Dup4() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
 					On: 6,
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "2 / 3", Variant: w.MonoTight}}},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "13"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "9"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 					},
 				},
-				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -710,24 +750,36 @@ func Dup5() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Href: "#"},
-						{Icon: "cal", Label: "Calendar", Href: "#"},
-						{Icon: "task", Label: "Tasks", Href: "#"},
-						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
 					On: 6,
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "2 / 3", Variant: w.MonoTight}}},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "13"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "9"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "21"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "64"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "22"},
 					},
 				},
-				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
@@ -751,7 +803,7 @@ func Dup5() Screen {
 									w.CardList{
 										Items: []string{
 											"Kept and rewritten: Артём Белов · nextcloud · Контакты",
-											"Still there: Белов Артём · radicale · vps · Команда",
+											"Still there: Белов Артём · nextcloud · Архив",
 										},
 									},
 								},
@@ -799,36 +851,55 @@ func Dup6() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "2 / 3", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "248"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "13"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "51"},
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "0 / 12", Variant: w.MonoTight}}},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "—"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "—"},
 					},
 				},
-				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
-					w.Dialog{
-						Items: []w.DialogPart{
-							w.Head{
-								Title: &w.HeadTitle{Text: "Duplicates"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 records compared")}}},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
+					w.Head{
+						Title: &w.HeadTitle{Text: "Duplicates"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 records compared")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Label: "Match threshold",
+									Parts: []w.FieldPart{
+										w.Input{Name: "threshold", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52},
+										w.Button{Label: "Weights", Small: true},
+									},
+									Width:  w.FieldInline,
+									Action: "/app/duplicates",
 								},
-								Tone:  w.MsgAccent,
-								Space: w.MsgFlushSides,
 							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Strong("Nothing is loaded yet."),
-									w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back."),
-								},
-								Space: w.MsgFlushSides,
-							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
+						},
+						Tone: w.MsgAccent,
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Nothing is loaded yet."),
+							w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back."),
 						},
 					},
 				},

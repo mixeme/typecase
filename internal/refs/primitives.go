@@ -74,7 +74,7 @@ var _ = add(
 	primitive("with-content", w.Button{Label: "Mark done", Tick: &w.Tick{Glyph: true}}, "s-tasks-2", "tc-btn", 4),
 	primitive("variant", w.Button{Label: "Focus", Icon: "focus", Folds: true, Variant: w.ButtonOnCard, Title: "Focus"}, "s-notes-4", "tc-btn", 14),
 	primitive("variant", w.Button{Icon: "panel", Variant: w.ButtonOnCard, Title: "Details"}, "s-files-1", "tc-btn", 9),
-	primitive("disabled", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled, Reason: "Общий is read-only"}, "s-dup-1", "tc-btn", 18),
+	primitive("disabled", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled, Reason: "Общий is read-only"}, "s-dup-1", "tc-btn", 16),
 	primitive("primary", w.Button{Label: "Save", Small: true, Kind: w.ButtonPrimary}, "s-dup-3", "tc-btn", 2),
 	primitive("with-content", w.Button{Label: "Download", Icon: "down", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, "s-profile-9", "tc-btn", 9),
 	primitive("with-content", w.Button{Label: "Save as", Icon: "down", Aside: &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11}}, "s-backup-3", "tc-btn", 7),

@@ -26,7 +26,7 @@ func Io1() Screen {
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
-							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
 						On: 1,
 					},
@@ -180,7 +180,7 @@ func Io2() Screen {
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
-						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
 					On: 2,
 				},
@@ -1143,6 +1143,80 @@ func Io9() Screen {
 								Items: []w.CardPart{
 									w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
 									w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger},
+								},
+							},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Back to list", Kind: w.ButtonPrimary}},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog520,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io14 is frame «Отчёт об импорте · с пропущенным» (s-io-14).
+func Io14() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "7", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 3},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Import report"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Created"},
+									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("84")}}},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "UID collisions", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
+									w.Diag{Text: "7c1e-22ab-90f4 → e410-5b7d-3a96\n0d5a-b8c3-41e7 → 2f96-c07a-88d1"},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
+									w.Diag{Text: "— (no SUMMARY): DTSTART without DTEND or DURATION", Variant: w.DiagDanger},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Skipped", Items: []w.RubricPart{w.Mono{Text: "6", Variant: w.MonoTight}}},
+									w.Diag{Text: "Купить билеты · VTODO: a calendar takes events — import it into a list of tasks"},
 								},
 							},
 							w.FormFoot{
