@@ -8,6 +8,8 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("disabled", w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true, Disabled: true}, "s-tasks-3", "tc-in", 4),
+	form("placeholder", w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true}, "s-tasks-14", "tc-in", 4),
 	form("focus-empty", w.Input{Label: "Display name", Focus: true}, "s-contacts-27", "tc-in", 1),
 	form("error-empty", w.Input{Label: "Password", Focus: true, Error: true}, "s-auth-13", "tc-in", 2),
 	form("template-row", w.Input{Name: "tel.{n}", Label: "Number", Mono: true}, "components-38", "tc-in", 5),
@@ -33,7 +35,7 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11, Label: "Address"}, "s-davloom-3", "tc-in", 2),
 	form("variant", w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Mono: true, Variant: w.InputLineFill, Label: "Link"}, "s-publish-6", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Filter this folder", Variant: w.InputW190, Label: "Filter this folder"}, "components-16", "tc-in", 1),
-	form("placeholder", w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Mono: true, Label: "Start date"}, "s-tasks-3", "tc-in", 3),
+	form("placeholder", w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}, "s-tasks-3", "tc-in", 3),
 	form("variant", w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, "s-dup-1", "tc-in", 1),
 	form("focus", w.Input{Value: "https://dav.office.example/dav.php/", Mono: true, Focus: true, Label: "Server URL"}, "s-profile-2", "tc-in", 2),
 	form("variant", w.Input{Value: "Carrel · personal", Variant: w.Input11, Label: "Name"}, "s-backup-4", "tc-in", 1),
@@ -113,9 +115,7 @@ const noteBody = `Договорились заморозить ветку в с
 - [ ] проверить changelog
 - [x] попросить у Артёма скриншоты
 
-## Отложено до следующего спринта
-
-Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.`
+Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.`
 
 const pasteArgs = `-fsS
 -m

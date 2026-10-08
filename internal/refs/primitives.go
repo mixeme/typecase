@@ -128,7 +128,6 @@ var _ = add(
 	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 7),
 	primitive("accent", w.Badge{Label: "credentials unlocked · 4:12", Accent: true}, "s-profile-4", "tc-badge", 1),
 	primitive("local", w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}, "s-plan-1", "tc-badge", 2),
-	primitive("icon", w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}, "s-notes-1", "tc-badge", 3),
 
 	// tc-tick
 	primitive("done", w.Tick{Done: true, Label: "Done"}, "s-tasks-1", "tc-tick", 5),

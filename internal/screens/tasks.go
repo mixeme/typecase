@@ -189,9 +189,9 @@ func Tasks1() Screen {
 					w.Fields{
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-							{Term: "Due", Value: []w.ValuePart{w.Text("2026-08-12 18:00")}, Face: w.ValueMono},
-							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+							{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
+							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}},
 						},
 					},
@@ -199,20 +199,6 @@ func Tasks1() Screen {
 						Items: []w.SecPart{
 							w.Rubric{Text: "Description"},
 							w.Prose{Parts: []w.Inline{w.Text("Зарядки, переходник, распечатать посадочный.")}, Variant: w.Prose13},
-						},
-					},
-					w.Sec{
-						Items: []w.SecPart{
-							w.Rubric{Text: "Related"},
-							w.SecList{
-								Items: [][]w.SecItemPart{
-									[]w.SecItemPart{
-										w.Span{Face: w.FaceAccent, Text: "Поездка в Казань"},
-										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· event")}},
-									},
-								},
-							},
 						},
 					},
 					w.Sec{
@@ -254,6 +240,26 @@ func Tasks1() Screen {
 								Text:  "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.",
 								Apart: true,
 							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Related"},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Span{Face: w.FaceAccent, Text: "Поездка в Казань"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· event")}},
+									},
+								},
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Source"},
+							w.Diag{Text: "Path  /remote.php/dav/calendars/mix/dela/c41a.ics\nRead  2 min ago · not changed on server"},
 						},
 					},
 					w.Danger{Button: w.Button{Label: "Delete task", Kind: w.ButtonDangerSolid}},
@@ -454,11 +460,7 @@ func Tasks2() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Собрать чемодан"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("nextcloud · Дела · "), w.Span{Face: w.FaceDanger, Text: "overdue by 3 days"}},
-							},
-						},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Дела")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
@@ -471,14 +473,7 @@ func Tasks2() Screen {
 					w.Fields{
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-							{
-								Term: "Due",
-								Value: []w.ValuePart{
-									w.Mono{Text: "2026-08-12 18:00"},
-									w.Text(" "),
-									w.Span{Face: w.FaceDanger, Text: "· overdue by 3 days"},
-								},
-							},
+							{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
 							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
 							{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
@@ -565,7 +560,7 @@ func Tasks2() Screen {
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Source"},
-							w.Diag{Text: "Path  /dav.php/calendars/mix/tasks/c41a.ics\nRead  2 min ago · not changed on server"},
+							w.Diag{Text: "Path  /remote.php/dav/calendars/mix/dela/c41a.ics\nRead  2 min ago · not changed on server"},
 						},
 					},
 					w.Danger{Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid}},
@@ -634,7 +629,7 @@ func Tasks3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{Parts: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
 										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
@@ -642,7 +637,7 @@ func Tasks3() Screen {
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true, Disabled: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -652,7 +647,7 @@ func Tasks3() Screen {
 									},
 									w.Field{
 										Label: "Due time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Due time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true, Disabled: true}},
 										Width: w.FieldXS,
 									},
 								},
@@ -742,7 +737,7 @@ func Tasks3() Screen {
 												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")},
 												Face:  w.ValueMono,
 											},
-											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · не менялась на сервере")}},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
 										},
 										Place: w.Grown,
 									},
@@ -816,7 +811,7 @@ func Tasks14() Screen {
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -826,7 +821,7 @@ func Tasks14() Screen {
 									},
 									w.Field{
 										Label: "Due time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Due time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true}},
 										Width: w.FieldXS,
 									},
 								},

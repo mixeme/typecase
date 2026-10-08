@@ -3367,7 +3367,7 @@ func States24() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{Parts: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
 										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
@@ -3375,7 +3375,7 @@ func States24() Screen {
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true, Disabled: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -3385,7 +3385,7 @@ func States24() Screen {
 									},
 									w.Field{
 										Label: "Due time",
-										Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Due time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true, Disabled: true}},
 										Width: w.FieldXS,
 									},
 								},
@@ -3475,7 +3475,7 @@ func States24() Screen {
 												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")},
 												Face:  w.ValueMono,
 											},
-											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · не менялась на сервере")}},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
 										},
 										Place: w.Grown,
 									},
@@ -4361,7 +4361,7 @@ func States31() Screen {
 										},
 									},
 									w.Area{
-										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
+										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.",
 										Variant: w.AreaBody,
 										Focus:   true,
 										Name:    "description",
@@ -4369,7 +4369,9 @@ func States31() Screen {
 									},
 									w.DocNote{
 										Parts: []w.Inline{
-											w.Text("Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here."),
+											w.Text("Properties Carrel does not know — "),
+											w.Mono{Text: "X-JTX-COLOR"},
+											w.Text(" and two more — are kept unchanged and not shown here."),
 										},
 									},
 								},

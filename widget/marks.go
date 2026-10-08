@@ -153,17 +153,16 @@ func (t BadgeTone) class() string {
 // Badge — tc-badge
 //
 // Роль. Короткая пометка рядом с именем: «read-only», «linked ×2», «tentative».
-// Вход. Badge{Label, Tone, Icon, Accent, Title, Place}.
-// Состояния. neutral | linked | alert | local | accent | icon.
+// Вход. Badge{Label, Tone, Accent, Title, Place}.
+// Состояния. neutral | linked | alert | local | accent.
 // Инварианты. В бейдже есть текст; бейдж не ссылка и не кнопка; бейдж печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `components-11`, фрагмент `.tc-badge`.
-// Содержимое. Значок перед текстом.
+// Содержимое. Текст.
 // Чего нет. Действия: что с помеченным делать, говорит строка, не бейдж.
 type Badge struct {
 	Label  string
 	Tone   BadgeTone
-	Icon   Icon
 	Accent bool   // accent edge and text: an unlocked state that runs out
 	Title  string // what the badge means, as a hint
 	Place  Place
@@ -173,11 +172,7 @@ type Badge struct {
 func (b Badge) Render() string { return b.html(nil) }
 
 func (b Badge) html(m mix) string {
-	s := `<span` + class(m, "tc-badge", b.Tone.class(), pick(b.Accent, "tc-badge--edge-accent-accent"), b.Place.class()) + attr("title", b.Title) + `>`
-	if b.Icon != "" {
-		s += `<svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="tc-ico--inline">` + b.Icon.use() + `</svg> `
-	}
-	return s + esc(b.Label) + `</span>`
+	return `<span` + class(m, "tc-badge", b.Tone.class(), pick(b.Accent, "tc-badge--edge-accent-accent"), b.Place.class()) + attr("title", b.Title) + `>` + esc(b.Label) + `</span>`
 }
 
 // TickVariant is a drawn variant of the tick's box.

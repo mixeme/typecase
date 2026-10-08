@@ -129,7 +129,6 @@ func Notes1() Screen {
 								Mark:    w.Mark{Colour: "#6B4E7A"},
 								Title:   []w.Inline{w.Text("Про дорогу до дачи")},
 								Excerpt: "Съезд после заправки, потом грунтовка два километра…",
-								Tags:    []w.RowTag{w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}},
 								Date:    "3 Aug",
 								Source:  "nextcloud · Дневник",
 							},
@@ -688,7 +687,7 @@ func Notes27() Screen {
 								Items: []w.DocPart{
 									w.DocTitle{Text: "Заметка со встречи 10.08"},
 									w.DocCode{
-										Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
+										Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.",
 										Wrap: true,
 									},
 								},
@@ -962,6 +961,24 @@ func Notes3() Screen {
 										},
 									},
 									{
+										Title: w.Rubric{
+											Text:  "The same note in other notebooks",
+											Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}},
+										},
+										Items: []w.DocmetaPart{
+											w.DocRefs{
+												Items: []w.DocRef{
+													{
+														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+														Name: "nextcloud · Дневник",
+														Href: "#",
+														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
+													},
+												},
+											},
+										},
+									},
+									{
 										Title: w.Rubric{Text: "Source"},
 										Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}},
 									},
@@ -1143,7 +1160,7 @@ func Notes20() Screen {
 										},
 									},
 									w.Area{
-										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
+										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.",
 										Variant: w.AreaBody,
 										Focus:   true,
 										Name:    "description",
@@ -1151,7 +1168,9 @@ func Notes20() Screen {
 									},
 									w.DocNote{
 										Parts: []w.Inline{
-											w.Text("Properties Carrel does not know — X-JTX-COLOR and two more — are kept unchanged and not shown here."),
+											w.Text("Properties Carrel does not know — "),
+											w.Mono{Text: "X-JTX-COLOR"},
+											w.Text(" and two more — are kept unchanged and not shown here."),
 										},
 									},
 								},
@@ -1559,23 +1578,23 @@ func Notes4() Screen {
 														Menu: w.Menu{
 															Items: []w.MenuPart{
 																w.MenuItem{
-																	Icon:  "cal",
-																	Trail: w.Mono{Text: "10 Aug · Личный", Variant: w.Mono10Dusty, Place: w.Pushed},
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Trail: w.Dim{Parts: []w.Inline{w.Text("event · 10 Aug")}, Size: w.Dim11, Place: w.Pushed},
 																	Label: "Звонок с Ковалёвой",
 																	On:    true,
 																},
 																w.MenuItem{
-																	Icon:  "task",
-																	Trail: w.Mono{Text: "task · Работа", Variant: w.Mono10Dusty, Place: w.Pushed},
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Trail: w.Dim{Parts: []w.Inline{w.Text("task · 14 Aug")}, Size: w.Dim11, Place: w.Pushed},
 																	Label: "Ответить Анне по смете",
 																},
 																w.MenuItem{
-																	Icon:  "con",
-																	Trail: w.Mono{Text: "contact", Variant: w.Mono10Dusty, Place: w.Pushed},
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Trail: w.Dim{Parts: []w.Inline{w.Text("contact")}, Size: w.Dim11, Place: w.Pushed},
 																	Label: "Анна Ковалёва",
 																},
 																w.MenuSep{},
-																w.MenuItem{Label: "Enter a UID by hand", Tone: w.MenuToneDusty},
+																w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty},
 															},
 															Width: w.MenuWidthFull,
 															Pop:   w.MenuUnder,
@@ -1587,7 +1606,7 @@ func Notes4() Screen {
 										},
 									},
 									w.Area{
-										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\n## Отложено до следующего спринта\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще.",
+										Text:    "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.",
 										Variant: w.AreaBody,
 										Name:    "description",
 										Label:   "Text",
@@ -2342,7 +2361,7 @@ func Notes10() Screen {
 								},
 								w.Field{
 									Label: "Due time",
-									Parts: []w.FieldPart{w.Input{Placeholder: "--:--", Label: "Due time", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true}},
 									Width: w.FieldFix96,
 								},
 							},

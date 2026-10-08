@@ -136,9 +136,6 @@ func (g *gen) badge(e *El) string {
 	if t := g.en.of(e, "BadgeTone"); t != "" {
 		f = append(f, "Tone: "+t)
 	}
-	if s := svgs(e); len(s) > 0 {
-		f = append(f, "Icon: "+icon(s[0]))
-	}
 	if e.Has("tc-badge--edge-accent-accent") {
 		f = append(f, "Accent: true")
 	}

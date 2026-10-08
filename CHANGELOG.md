@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Badge.Icon` is gone: no frame draws a badge with an icon since the
+  «linked» badge left the tags column of the notes list (Carrel's task 105).
 - `TickRow.Trail` no longer takes a `Button`: a refused source has no Retry
   in the rail any more (the owner's decision of 02.10, below).
 - `Sec` no longer takes a `Table`: no frame puts one in a section since the
@@ -15,6 +17,18 @@ do, not what the authors did.
 
 ### Added
 
+- **The frames of tasks and notes agree with each other** (Carrel's tasks
+  105, 127; the owner's decisions of 08.10, Р-42, Р-43). The card of a task
+  that is not overdue says nothing of it, and its due date is in the full
+  form («12 August 2026, 18:00»), in the panel too; the panel has the card's
+  order of fields and sections and a Source block. A task just ticked stays
+  under Open, struck through, until the list is read again. A due date
+  without a time has All day ticked and both times disabled; an empty time
+  is a field of time. The words of the task's edit are English. The source
+  of the note is the text its reading draws; Reading width has «The same
+  note in other notebooks»; the name of an unknown property is monospaced
+  everywhere. The search by typing in Related to (s-notes-4) is the picture
+  of the live layer, with the rows of the field's list (s-tasks-10).
 - **The states of tasks and notes are frames** (Carrel's tasks 97, 124), the
   same set contacts have. Tasks: nothing ticked, the poll running, a source
   refused, an empty list, a list whose server did not answer, a read-only

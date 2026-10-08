@@ -220,20 +220,20 @@ var _ = add(
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-		{Term: "Due", Value: []w.ValuePart{w.Text("2026-08-12 18:00")}, Face: w.ValueMono},
-		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
 		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
+		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-		{Term: "Due", Value: []w.ValuePart{w.Mono{Text: "2026-08-12 18:00"}, w.Span{Face: w.FaceDanger, Text: "· overdue by 3 days"}}},
+		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
 		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
 		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-2", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Path", Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")}, Face: w.ValueMono},
-		{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · не менялась на сервере")}}}}, "s-tasks-3", "tc-fields", 1),
+		{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}}}}, "s-tasks-3", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}}, "s-notes-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
@@ -324,7 +324,7 @@ var _ = add(
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "посадочный-казань.pdf", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}}, w.Text(" "), w.Badge{Label: "in the task"}}}, Gap: 6},
-		w.SecHint{Text: "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.", Apart: true}}}, "s-tasks-1", "tc-sec", 3),
+		w.SecHint{Text: "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.", Apart: true}}}, "s-tasks-1", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseRead},
 		w.SecTasks{Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}}}}, "s-notes-1", "tc-sec", 1),
@@ -777,8 +777,12 @@ var _ = add(
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
-		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-3", "tc-docmeta", 1),
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "up", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Href: "#"}}},
+		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-3", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},

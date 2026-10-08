@@ -602,7 +602,6 @@ func Phone8() Screen {
 								Mark:    w.Mark{Colour: "#6B4E7A"},
 								Title:   []w.Inline{w.Text("Про дорогу до дачи")},
 								Excerpt: "Съезд после заправки, потом грунтовка два километра…",
-								Tags:    []w.RowTag{w.Badge{Label: "linked", Tone: w.BadgeLinked, Icon: "link"}},
 								Date:    "3 Aug",
 								Source:  "nextcloud · Дневник",
 							},
