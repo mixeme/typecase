@@ -298,6 +298,33 @@ func TestTemplatesAndEmptyDays(t *testing.T) {
 	}
 }
 
+// Carrel's task 146: a datalist is not drawn — the choices of a tag field's
+// line on a page without a script (TagAdd.Options) are no part of the field.
+func TestDatalistIsNotDrawn(t *testing.T) {
+	m := mockup(t)
+	for _, id := range []string{"s-tasks-3", "s-tasks-14", "s-notes-20", "s-notes-30"} {
+		r, ok := screens.Find(id)
+		if !ok {
+			t.Fatalf("no screen %s", id)
+		}
+		page := r.Screen().Render()
+		add := ` autocomplete="off">`
+		i := strings.Index(page, `name="related.add"`)
+		if i < 0 {
+			t.Fatalf("no related.add in %s", id)
+		}
+		j := strings.Index(page[i:], add)
+		if j < 0 {
+			t.Fatalf("no end of the line in %s", id)
+		}
+		j += i + len(add)
+		list := `<datalist id="tc-list-related.add"><option value="c41a" label="Собрать чемодан"></option></datalist>`
+		if err := m.Check(id, page[:j]+list+page[j:]); err != nil {
+			t.Errorf("a datalist beside the line: %v", err)
+		}
+	}
+}
+
 // Carrel's task 76: what the frame draws, the screen has — a button of the
 // head, a section of the card, a piece of a field's value missing is red.
 func TestMissingIsRed(t *testing.T) {

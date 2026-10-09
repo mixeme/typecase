@@ -22,7 +22,7 @@
 // and its records) may repeat any number of times; repeated as
 // often as the frame draws it or more, it has each part the frame draws in
 // it. What is not compared: text, attributes, a template's contents,
-// the options of a select, the hidden fields of a form, a picture in an
+// the options of a select, a datalist, the hidden fields of a form, a picture in an
 // avatar or a thumbnail (Src: data, the frame draws the place), the menu
 // of a button with its menu (the frames draw it beside the screen). Nor is the element's
 // tag when it has classes: its look is its classes, and the meaning of HTML
@@ -112,8 +112,10 @@ func dropped(n *fragment.Node) bool {
 		}
 	}
 	// A template is what a script copies in (another phone, another
-	// reminder), not what the page shows (Carrel's task 75).
-	return n.Tag == "option" || n.Tag == "template"
+	// reminder), not what the page shows (Carrel's task 75). Nor does a
+	// datalist show anything: it is the choices of a line as one types
+	// (TagAdd.Options, Carrel's task 146).
+	return n.Tag == "option" || n.Tag == "template" || n.Tag == "datalist"
 }
 
 // dataClass says whether a class of an element is its data, not its kind:
