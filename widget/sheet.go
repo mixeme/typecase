@@ -318,7 +318,7 @@ func (h Sheet) html(m mix) string {
 		s.WriteString(`</div>`)
 	}
 	s.WriteString(`</` + tag + `>`)
-	return s.String()
+	return multipart(s.String())
 }
 
 // ScrimPart is what stands on a scrim.

@@ -290,6 +290,9 @@ func (g *gen) empty(e *El) string {
 				ps = append(ps, "w.Aside{Face: w."+face+", Parts: []w.Inline{"+join(its, ", ")+"}}")
 			case v.Has("tc-dim"):
 				ps = append(ps, g.dimx(v))
+			case v.Has("tc-empty__pick"):
+				// words that pick a file: the label of its input (Carrel's task 119)
+				ps = append(ps, "w.FilePick{Label: "+q(v.Text())+", File: "+g.fileField(v.Kid("tc-file"))[1:]+"}")
 			case v.Tag == "b" && v.Has("tc-dim--accent"):
 				ps = append(ps, "w.Emphasis("+q(v.Text())+")")
 			case v.Tag == "b" && len(v.Cls()) == 0:

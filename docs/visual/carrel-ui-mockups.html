@@ -716,6 +716,8 @@ label.tc-tree__row{cursor:pointer}
 [data-tc-noscript] button[data-tc-copy],[data-tc-noscript] button[data-tc-copy-from]{display:none}
 /* Файл без сценария (задача 109): кнопка и пункт — подпись поля файла, браузер открывает выбор сам. Со сценарием выбор сразу отправляет форму; без него поле видно, и Upload отправляет. */
 .tc-file{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
+/* Слова области броска, выбирающие файл (задача 119): подпись своего поля файла, как кнопка и пункт. */
+.tc-empty__pick{cursor:pointer}
 :root:not([data-tc-noscript]) .tc-nojs{display:none}
 /* Полоса опроса с отказом и своей кнопкой (поиск: «1 failed» и Search again) на телефоне переносится: строкам — зазор, чтобы зоны нажатия не налезали. */
 @container tcbox (max-width:460px){
@@ -7854,7 +7856,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-empty tc-empty--dashed">
-                Drop files here, or <b class="tc-dim--accent">choose on the computer</b>
+                Drop files here, or <label class="tc-empty__pick"><b class="tc-dim--accent">choose on the computer</b><input class="tc-file" type="file" name="file" aria-label="Files" data-tc-size="size" multiple></label>
                 <span class="tc-dim--t12">A name already taken is refused, not overwritten</span>
               </div>
               <div class="tc-card tc-card--flush">
@@ -8084,8 +8086,9 @@ Read  2 min ago</div>
     <div class="frame-label"><span>Upload · стрелка</span><span class="frag">меню</span><i>что загружать</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w212">
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-doc"/></svg>Files</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>Folder</button>
+        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-doc"/></svg>Files<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" multiple></label>
+        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-file"/></svg>Folder<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Folder" data-tc-size="size" multiple webkitdirectory></label>
+        <button class="tc-menu__item tc-nojs" type="submit" form="post-upload" role="menuitem">Upload</button>
       </div>
     </div>
   </div>

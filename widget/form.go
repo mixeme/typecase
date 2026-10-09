@@ -484,7 +484,7 @@ func (f Form) html(m mix) string {
 		s.WriteString(it.html(nil))
 	}
 	s.WriteString(`</` + tag + `>`)
-	return s.String()
+	return multipart(s.String())
 }
 
 func method(m string) string {
@@ -533,6 +533,19 @@ type FileField struct {
 	// Preview is the ID of the picture that shows a picked photo at once:
 	// the photo of a contact's edit, sent with Save.
 	Preview string
+	// Many lets several files be picked at once: the Files of an upload
+	// (Carrel's task 119).
+	Many bool
+	// Folder picks a folder, in the system's own dialog for one: every file
+	// in it goes, named by its path inside the folder — the browser does it
+	// without a script.
+	Folder bool
+	// Size is the name of the fields that tell each file's length before
+	// the files themselves: «size» sends «size.<name>» in bytes, the name
+	// being the file's — its path inside the folder for a Folder. Only the
+	// library's script knows the lengths and writes the fields when the
+	// files are picked: without one they are not sent.
+	Size string
 }
 
 // PickedRow is the row a picked file of an edit becomes: a document's
@@ -547,7 +560,31 @@ func (Line) pickedRow()      {}
 
 func (f FileField) input() string {
 	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) +
-		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + attr("data-tc-shows", f.Shows) + `>`
+		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + attr("data-tc-shows", f.Shows) +
+		attr("data-tc-size", f.Size) + flag("multiple", f.Many || f.Folder) + flag("webkitdirectory", f.Folder) + `>`
+}
+
+// multipart makes a printed form one that sends files, when a file field
+// of its own stands in it (a FileField without Form): a browser sends only
+// the names of the files of a form that does not say so, script or none
+// (Carrel's task 119). A field that names another form is that form's.
+func multipart(form string) string {
+	field, open := `<input class="tc-file" type="file"`, `" method="post"`
+	end := strings.Index(form, ">")
+	at := strings.Index(form[:end+1], open)
+	if !strings.HasPrefix(form, "<form") || at < 0 {
+		return form
+	}
+	for rest := form; ; {
+		i := strings.Index(rest, field)
+		if i < 0 {
+			return form
+		}
+		rest = rest[i+len(field):]
+		if j := strings.Index(rest, ">"); !strings.Contains(rest[:j], ` form="`) {
+			return form[:at+len(open)] + ` enctype="multipart/form-data"` + form[at+len(open):]
+		}
+	}
 }
 
 // PostForm — tc-post

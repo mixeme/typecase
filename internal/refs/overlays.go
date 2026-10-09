@@ -8,6 +8,10 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("picker", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "doc", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}, Label: "Files"},
+		w.MenuItem{Icon: "file", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Folder", Size: "size", Folder: true}, Label: "Folder"},
+		w.MenuItem{Label: "Upload", NoScript: true, Form: "post-upload"}}, Width: w.MenuWidth212}, "s-files-8", "tc-menu", 1),
 	overlay("danger", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-publish-17", "tc-menu", 1),
 	overlay("radio", w.Menu{Items: []w.MenuPart{

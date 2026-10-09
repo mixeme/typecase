@@ -20,6 +20,25 @@ do, not what the authors did.
 
 ### Added
 
+- **An upload without a script, wider** (Carrel's task 119). `FileField`
+  has `Many` (several files at once), `Folder` (the system's dialog for a
+  folder; every file goes named by its path inside it — the browser does
+  that itself) and `Size`: with `Size: "size"` the library's script writes a
+  hidden «size.<name>» with the length in bytes before each picked file, so
+  that a server passing the body on as a stream knows it; without a script
+  the fields are not sent. The words of a drop place that pick a file are a
+  new part of `Empty`, `FilePick{Label, File}` — the label of its file
+  input; its files wait for the button of the form they stand in. Frames:
+  the Files and Folder of the Upload menu (s-files-8) are labels of file
+  inputs with a no-script «Upload» under them, «choose on the computer» of
+  the upload sheet (s-notes-11) is a `FilePick`; nothing looks different.
+  Two file inputs of one name in one form: the one left empty goes as a part
+  without a file name, as a browser sends it — the server skips it.
+- **A form with a file field of its own sends files.** `Form`, `Doc`,
+  `Card` and `Sheet` with `Action` print `enctype="multipart/form-data"` when
+  a `FileField` without `Form` stands in them: an edit's Save (the owner's
+  decision of 02.10) and an upload sheet sent only the files' names before,
+  script or none. Nothing to do on the consumer's side.
 - **The published links have no Kind column on the phone** (the owner's
   decision of 09.10): the word broke in the middle («cale/ndar») and the
   rows stood at different heights. The column is of the fourth rank

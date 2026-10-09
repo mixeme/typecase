@@ -234,10 +234,15 @@ func (g *gen) fileField(f *El) string {
 		s += ", Accept: " + q(a)
 	}
 	s += ", Label: " + q(f.Attr("aria-label"))
-	for _, a := range []kv{{"data-tc-to", "To"}, {"data-tc-list", "List"}, {"data-tc-preview", "Preview"}, {"data-tc-shows", "Shows"}} {
+	for _, a := range []kv{{"data-tc-to", "To"}, {"data-tc-list", "List"}, {"data-tc-preview", "Preview"}, {"data-tc-shows", "Shows"}, {"data-tc-size", "Size"}} {
 		if v := f.Attr(a.k); v != "" {
 			s += ", " + a.v + ": " + q(v)
 		}
+	}
+	if f.HasAttr("webkitdirectory") {
+		s += ", Folder: true"
+	} else if f.HasAttr("multiple") {
+		s += ", Many: true"
 	}
 	return s + "}"
 }

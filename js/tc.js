@@ -673,6 +673,7 @@
 
 	function onChange(e) {
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		if (e.target.matches && e.target.matches(".tc-file[data-tc-size]")) sizeFields(e.target);
 		// A file picked by a button or a menu item goes with its form at once
 		// (Carrel's task 109); without the script «Upload» sends it.
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-shows]")) {
@@ -694,6 +695,26 @@
 			}
 		}
 		if (e.target.matches && e.target.matches('.tc-menu__item > input[type="radio"]')) choosePick(e.target);
+	}
+
+	// The lengths of the picked files go before the files themselves
+	// (data-tc-size, FileField.Size; Carrel's task 119): a hidden field
+	// «size.<name>» in bytes for each, the name being the file's — its path
+	// inside the folder, where a folder was picked. A server that passes the
+	// body on as a stream learns its length from them.
+	function sizeFields(input) {
+		var name = input.getAttribute("data-tc-size");
+		if (!name) return;
+		for (var old = input.previousElementSibling; old && old.hasAttribute("data-tc-size-of"); old = input.previousElementSibling) old.remove();
+		Array.prototype.forEach.call(input.files, function (f) {
+			var h = document.createElement("input");
+			h.type = "hidden";
+			h.name = name + "." + (f.webkitRelativePath || f.name);
+			h.value = f.size;
+			h.setAttribute("data-tc-size-of", "");
+			if (input.hasAttribute("form")) h.setAttribute("form", input.getAttribute("form"));
+			input.parentNode.insertBefore(h, input);
+		});
 	}
 
 	// A file of an edit goes with its Save (the owner's decision of 02.10):
@@ -726,8 +747,14 @@
 		var row = tpl.content.firstElementChild.cloneNode(true);
 		fillWords(row, { "{name}": names.join(", "), "{size}": fileSize(bytes) });
 		row.setAttribute("data-tc-picked", "");
+		// the lengths of its files stand before it and go with it
+		var sizes = [];
+		for (var s = input.previousElementSibling; s && s.hasAttribute("data-tc-size-of"); s = s.previousElementSibling) sizes.unshift(s);
 		var fresh = input.cloneNode(false);
-		input.parentNode.insertBefore(fresh, input);
+		input.parentNode.insertBefore(fresh, sizes[0] || input);
+		sizes.forEach(function (s) {
+			row.appendChild(s);
+		});
 		row.appendChild(input);
 		list.appendChild(row);
 		emptyWords(list);

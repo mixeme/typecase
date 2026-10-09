@@ -804,6 +804,63 @@ func TestFilePick(t *testing.T) {
 	}
 }
 
+// TestFileSizes: an upload picks several files or a folder, and the lengths
+// of the picked files go before them as «size.<name>» (Carrel's task 119); the
+// words of a drop place pick files too, and those wait for their form's
+// button. The pick of a folder itself is the system's dialog and is not made
+// here: the input is checked to ask for one. A form with a file field of its
+// own says it sends files.
+func TestFileSizes(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	menu := w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "doc", Label: "Files", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}},
+		w.MenuItem{Icon: "file", Label: "Folder", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Folder", Size: "size", Folder: true}},
+		w.MenuItem{Label: "Upload", Form: "post-upload", NoScript: true}}}
+	place := w.Empty{Variant: w.EmptyDashed, Parts: []w.EmptyPart{w.Text("Drop files here, or "),
+		w.FilePick{Label: "choose on the computer", File: w.FileField{Name: "file", Label: "Files", Size: "size", Many: true}}}}
+	body := `<form id="post-upload" method="post" action="/upload" enctype="multipart/form-data"></form>` +
+		`<div class="tc-root"><div class="tc-main">` + menu.Render() +
+		w.Sheet{Title: "Upload files", ID: "sheet", Action: "/sheet", Body: []w.SheetPart{place}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}}}.Render() +
+		`</div></div>`
+	dir := t.TempDir()
+	a, b := filepath.Join(dir, "plan.md"), filepath.Join(dir, "kazan.png")
+	if err := os.WriteFile(a, []byte("abc"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(b, []byte("abcde"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	const catch = `window.__sent = []; document.addEventListener("submit", e => { e.preventDefault(); window.__sent.push(e.target.id + ": " + [...new FormData(e.target)].map(([k, v]) => k + "=" + (v instanceof File ? v.name : v)).join(" ")); }); true`
+	page := h.RegisterPage("file-sizes", browser.PageHTML(body, ""))
+	var attrs, sent, waits, button string
+	if err := h.Run(page, 900, 600,
+		chromedp.Evaluate(catch, nil),
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-file")].map(f => (f.multiple ? "many" : "one") + (f.webkitdirectory ? "+folder" : "") + (f.labels.length ? "" : " no label")).join(" ") + " · " + document.getElementById("sheet").enctype`, &attrs),
+		chromedp.SetUploadFiles(`label.tc-menu__item .tc-file`, []string{a, b}, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent.join(" | ")`, &sent),
+		chromedp.SetUploadFiles(`.tc-empty__pick .tc-file`, []string{b}, chromedp.ByQuery),
+		chromedp.Evaluate(`String(window.__sent.length)`, &waits),
+		chromedp.Click(`#sheet button`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent.slice(1).join(" | ")`, &button),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if attrs != "many many+folder many · multipart/form-data" {
+		t.Errorf("the inputs: %q; want Files and the words many, Folder a folder, each in its label, and the sheet a form that sends files", attrs)
+	}
+	// Folder's input, empty, goes as a part without a name: a browser sends it so
+	if sent != "post-upload: size.plan.md=3 size.kazan.png=5 file=plan.md file=kazan.png file=" {
+		t.Errorf("Files: sent %q; want the lengths before the files", sent)
+	}
+	if waits != "1" {
+		t.Errorf("the words of the place: %s forms sent after the pick; want the files to wait for the button", waits)
+	}
+	if button != "sheet: size.kazan.png=5 file=kazan.png" {
+		t.Errorf("the button: sent %q; want the place's file with its length", button)
+	}
+}
+
 // TestTagList: a tag field's line has the browser's own list of choices on a
 // page without a script (Carrel's task 96); where the server suggests, the
 // live layer takes the list away, and keeps it where it does not.

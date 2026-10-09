@@ -33,6 +33,20 @@ type Emphasis string
 
 func (e Emphasis) html(mix) string { return `<b class="tc-dim--accent">` + esc(string(e)) + `</b>` }
 
+// FilePick is the words of an Empty that pick a file: «choose on the
+// computer» of a place files are dropped into (Carrel's task 119). They are
+// the label of their file input, which the browser opens without a script;
+// there the input shows what was picked. The files wait for the button of
+// the form the words stand in (File.Form and File.To stay empty).
+type FilePick struct {
+	Label string
+	File  FileField
+}
+
+func (p FilePick) html(mix) string {
+	return `<label class="tc-empty__pick">` + Emphasis(p.Label).html(nil) + p.File.input() + `</label>`
+}
+
 // joined prints pieces of running text one after another.
 func joined[T part](parts []T) string {
 	var s strings.Builder
@@ -441,6 +455,7 @@ func (Mono) emptyPart()     {}
 func (Strong) emptyPart()   {}
 func (Text) emptyPart()     {}
 func (Emphasis) emptyPart() {}
+func (FilePick) emptyPart() {}
 func (Dim) emptyPart()      {}
 func (Aside) emptyPart()    {}
 

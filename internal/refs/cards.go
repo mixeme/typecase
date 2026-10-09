@@ -148,7 +148,7 @@ var _ = add(
 	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, "s-notes-6", "tc-empty", 1),
 	cards("drop", w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, "s-io-1", "tc-empty", 1),
 	cards("small", w.Empty{Parts: []w.EmptyPart{w.Text("Nothing was looked for before January 2026. Widen the range if you need it.")}, Variant: w.EmptySmallTop}, "s-contacts-7", "tc-empty", 1),
-	cards("dashed", w.Empty{Parts: []w.EmptyPart{w.Text("Drop files here, or"), w.Emphasis("choose on the computer"), w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}}}, Variant: w.EmptyDashed}, "s-notes-11", "tc-empty", 1),
+	cards("dashed", w.Empty{Parts: []w.EmptyPart{w.Text("Drop files here, or"), w.FilePick{Label: "choose on the computer", File: w.FileField{Form: "", Name: "file", Label: "Files", Size: "size", Many: true}}, w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}}}, Variant: w.EmptyDashed}, "s-notes-11", "tc-empty", 1),
 	cards("drop", w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}, "s-io-2", "tc-empty", 1),
 	cards("plain", w.Empty{Parts: []w.EmptyPart{w.Text("Carrel copies raw"), w.Mono{Text: ".ics"}, w.Text(", "), w.Mono{Text: ".vcf"}, w.Text(" and files to storage of your own, with a manifest and a read-back check. Nothing is kept here. "), w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("Already have an archive from another instance?"), w.Strong("Restore"), w.Text("takes it from a file — a job is not needed for that.")}}}}, "s-backup-6", "tc-empty", 1),
 
@@ -816,5 +816,5 @@ func init() {
 		w.SecTasks{}, w.SecFile{}, w.SecFiles{}, w.SecOpened{}, w.SecOpen{}, w.CardText{}, w.CardHint{}, w.CardRow{}, w.FillHint{}, w.Turn{},
 		w.CardList{}, w.CardFields{}, w.CardQR{}, w.CardPick{}, w.CardGrid{}, w.CardRowsItem{}, w.CardRows{}, w.CardHeadLine{}, w.CardHead{},
 		w.SpacedField{}, w.TableCol{}, w.TableCell{}, w.TableRow{}, w.TableFile{}, w.CellWrap{}, w.Chevron{}, w.DocRef{}, w.DocRefs{},
-		w.DocAttach{}, w.DocmetaSec{}, w.MainResults{}, w.MainCards{}, w.MainDiag{}, w.MainThumbs{}, w.Bold{}, w.Emphasis(""), w.Aside{})
+		w.DocAttach{}, w.DocmetaSec{}, w.MainResults{}, w.MainCards{}, w.MainDiag{}, w.MainThumbs{}, w.Bold{}, w.Emphasis(""), w.FilePick{}, w.Aside{})
 }

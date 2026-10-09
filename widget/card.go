@@ -409,7 +409,7 @@ func (c Card) html(m mix) string {
 		s.WriteString(it.html(nil))
 	}
 	s.WriteString(`</` + tag + `>`)
-	return s.String()
+	return multipart(s.String())
 }
 
 // ResultsPart is what a page's column of results holds.

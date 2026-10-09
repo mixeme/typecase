@@ -2851,7 +2851,10 @@ func Notes11() Screen {
 						w.Empty{
 							Parts: []w.EmptyPart{
 								w.Text("Drop files here, or "),
-								w.Emphasis("choose on the computer"),
+								w.FilePick{
+									Label: "choose on the computer",
+									File:  w.FileField{Form: "", Name: "file", Label: "Files", Size: "size", Many: true},
+								},
 								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
 							},

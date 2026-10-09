@@ -363,7 +363,7 @@ func (d Doc) html(m mix) string {
 		s.WriteString(it.html(nil))
 	}
 	s.WriteString(`</` + tag + `>`)
-	return s.String()
+	return multipart(s.String())
 }
 
 // DocbarPart is what an edit bar holds before its end.
