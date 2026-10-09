@@ -5852,9 +5852,13 @@ Read  2 min ago · not changed on server</div>
 
 <figure style="flex:0 1 360px">
   <div class="frame" data-frame="s-tasks-11">
-    <div class="frame-label"><span>Related to · вне загруженного</span><span class="frag">фрагмент</span><i>поле правки задачи и заметки</i></div>
+    <div class="frame-label"><span>Related to · несколько связей, вне загруженного</span><span class="frag">фрагмент</span><i>поле правки задачи и заметки</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-form tc-form--pad0">
+        <div class="tc-field tc-field--w100"><label>Related to</label><span class="tc-in tc-in--tags"><span class="tc-tag tc-tag--pill">Забрать документы
+          <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span> <span class="tc-tag tc-tag--pill">Синк-ап по релизу
+          <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span> <span class="tc-tag tc-tag--pill">7c1e-40aa-b913
+          <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span> <input class="tc-in__add" type="text" name="related.add" placeholder="Title or UID" aria-label="Add a link" autocomplete="off"> </span></div>
         <div class="tc-field tc-field--w100"><label>Related to</label><span class="tc-in tc-in--tags"><span class="tc-tag tc-tag--pill">7c1e-40aa-b913
           <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span> <input class="tc-in__add" type="text" name="related.add" placeholder="Title or UID" aria-label="Add a link" autocomplete="off"> </span><span class="tc-field__hint">A record that is not loaded here: its UID.</span></div>
         <div class="tc-field tc-field--w100"><label>Related to</label><span class="tc-in tc-in--tags"><span class="tc-tag tc-tag--pill">Анна Ковалёва · contact
@@ -5863,7 +5867,7 @@ Read  2 min ago · not changed on server</div>
       </div>
     </div>
   </div>
-  <figcaption>Связь одна: поле держит первую, остальные сервер хранит как есть. Запись, которой нет среди загруженных, — пилюля с её UID; карточка (заметка, заведённая из хронологии человека) — имя и «contact». «By UID…» открывает на месте поля строку для UID. У события поля нет.</figcaption>
+  <figcaption>Связей у записи сколько угодно (RFC 5545, <code>RELATED-TO</code>): поле держит все пилюлями, у каждой свой крестик, строка ввода стоит после последней и добавляет ещё одну; пилюли переносятся, строка уходит на новую строку, когда ей тесно. Пилюля называет запись, а не род связи — <code>RELTYPE</code> сервер хранит как есть. Запись, которой нет среди загруженных, — пилюля с её UID; карточка (заметка, заведённая из хронологии человека) — имя и «contact». «By UID…» открывает на месте поля строку для UID. У события поля нет.</figcaption>
   </figure>
 </div>
 
