@@ -1237,7 +1237,7 @@ func TestTreeSend(t *testing.T) {
 	sheet := w.Sheet{Title: "Move 3 items", Action: "/x", Body: []w.SheetPart{w.Tree{Rows: []w.TreeRow{
 		node("Documents", "documents", w.TreeLevel0, false), node("carrel", "documents/carrel", w.TreeLevel22, false),
 		node("2026-07", "documents/carrel/2026-07", w.TreeLevel40, false), node("Public", "public", w.TreeLevel0, true)}, On: 3}},
-		Foot: []w.SheetFootPart{w.Button{Label: "Move here", Kind: w.ButtonPrimary, Submit: true}}}
+		Foot: []w.SheetFootPart{w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true}}}
 	body := `<div class="tc-root">` + sheet.Render() + `</div>`
 	bare := h.RegisterPage("tree-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
 	const marked = `[...document.querySelectorAll(".tc-tree__row")].map(c => getComputedStyle(c).fontWeight === "600" ? "on" : "off").join(" ")`

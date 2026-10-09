@@ -1029,7 +1029,7 @@ func Files4() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Move here", Kind: w.ButtonPrimary, Submit: true},
+						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},

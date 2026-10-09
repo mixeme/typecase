@@ -2033,7 +2033,7 @@ func Profile8() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Move here", Kind: w.ButtonPrimary},
+						w.Button{Label: "Move", Kind: w.ButtonPrimary},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
