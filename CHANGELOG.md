@@ -20,6 +20,11 @@ do, not what the authors did.
 
 ### Added
 
+- **The published links have no Kind column on the phone** (the owner's
+  decision of 09.10): the word broke in the middle («cale/ndar») and the
+  rows stood at different heights. The column is of the fourth rank
+  (`TableCol.Rank: Rank4`, s-publish-1, -17) and leaves at 460 px, as
+  Expires does; wider, nothing changes.
 - **Published links on an instance without mail** (the rest of Carrel's
   task 121): a new fragment s-publish-17 — the rows have Copy and Revoke and
   no Send, neither as a button nor in «⋯»; on a narrow width «⋯» holds

@@ -79,7 +79,7 @@ func Publish1() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "What is published"},
-							{Label: "Kind"},
+							{Label: "Kind", Rank: w.Rank4},
 							{Label: "Created", Rank: w.Rank3, Secondary: true},
 							{Label: "Expires", Rank: w.Rank4},
 							{Label: "Last opened", Secondary: true},
