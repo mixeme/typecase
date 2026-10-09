@@ -219,15 +219,15 @@ var _ = add(
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-7", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
-		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
-		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),

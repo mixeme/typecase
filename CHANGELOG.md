@@ -20,6 +20,14 @@ do, not what the authors did.
 
 ### Added
 
+- **Published links on an instance without mail** (the rest of Carrel's
+  task 121): a new fragment s-publish-17 — the rows have Copy and Revoke and
+  no Send, neither as a button nor in «⋯»; on a narrow width «⋯» holds
+  Revoke alone. 426 frames.
+- **Both reminders where the event is read** (the rest of Carrel's task
+  106): the panel (s-agenda-1) and the card (s-agenda-2) say «10 minutes
+  before · 1 day before», as the edit does (s-agenda-3, states-17); in the
+  panel Reminders stand after Repeats, as on the card.
 - **The numbers of the frames are the numbers of the rows drawn** (Carrel's
   task 143; the owner's decision of 08.10, Р-47). The count of a rubric is
   the number of rows under it; segments, subtitle, poll bar and rail are

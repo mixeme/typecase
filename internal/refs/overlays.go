@@ -8,6 +8,8 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("danger", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-publish-17", "tc-menu", 1),
 	overlay("radio", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "sftpgo · vps", On: true, Name: "server", Value: "sftpgo"},
 		w.MenuItem{Label: "nextcloud", Name: "server", Value: "nextcloud"}}, Width: w.MenuWidth290}, "s-notes-29", "tc-menu", 1),
