@@ -15,25 +15,26 @@ import (
 	"carrel.dev/typecase/internal/gate"
 )
 
-// TestMockupComputedStyles compares what the mockup's CSS computes to, node by
-// node, between HEAD and the working tree.
+// TestMockupStrays finds the frames that changed though nobody changed them
+// (docs/development.md, Р-52): the working mockup against HEAD.
 //
-// This is the check for a change that is not supposed to move anything — a
-// rename, a regrouping of rules. The frames are then the same tree, so if
-// every node computes to the same values it renders the same, and a difference
-// is named as the node and the property instead of as a count of pixels. It
-// takes minutes, not half an hour, because nothing is screenshotted.
+// A frame whose own HTML changed was meant to change — a person looks at its
+// picture; it is named here and not measured. A frame whose HTML is the same
+// can only have moved through the CSS or the sprite. When neither changed
+// there is nothing to measure and no browser is started; when a rule changed,
+// the frames its selectors can reach are measured on every step of the
+// ladder — each node's box and everything its CSS computes to — and a frame
+// that differs is a stray: red, named with the first node and property.
 //
-// It is not a replacement for TestMockupRefactor: the trees have to match, so
-// it says nothing about a change that adds or moves a node, and it does not
-// see the sprite, the fonts or the page's own CSS. Point it at another commit
-// with TYPECASE_MOCKUP_BASE.
-func TestMockupComputedStyles(t *testing.T) {
-	if !browser.ChromeAvailable() {
-		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
-	}
+// Red is not a table to fill in. A stray is either mended or shown to the
+// owner with the frames that were meant; the commit says which frames
+// changed. After the commit HEAD is the new base.
+//
+// Another base: TYPECASE_MOCKUP_BASE=<commit>. Some frames only:
+// TC_STRAYS_ONLY=s-dup-1,s-plan-2.
+func TestMockupStrays(t *testing.T) {
 	if os.Getenv("CI") == "" && testing.Short() {
-		t.Skip("needs Chrome; skip with -short outside CI")
+		t.Skip("skip with -short outside CI")
 	}
 	root := browser.ModuleRoot(t)
 	base := strings.TrimSpace(os.Getenv("TYPECASE_MOCKUP_BASE"))
@@ -59,20 +60,67 @@ func TestMockupComputedStyles(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	beforeByID := map[string]gate.MockupFrame{}
-	for _, f := range before.Frames {
-		beforeByID[f.ID] = f
+	plan := gate.PlanStrays(before, after)
+	t.Logf("against %s: %d frames meant to change %v, %d new %v, %d gone %v, %d the same",
+		base, len(plan.Meant), plan.Meant, len(plan.New), plan.New, len(plan.Gone), plan.Gone, plan.Same)
+	check := plan.Check
+	if only := strings.TrimSpace(os.Getenv("TC_STRAYS_ONLY")); only != "" {
+		want := map[string]bool{}
+		for _, id := range strings.Split(only, ",") {
+			want[strings.TrimSpace(id)] = true
+		}
+		check = nil
+		for _, id := range plan.Check {
+			if want[id] {
+				check = append(check, id)
+			}
+		}
 	}
+	if len(check) == 0 {
+		t.Logf("nothing can stray: %s", orNothing(plan.Why))
+		return
+	}
+	if !browser.ChromeAvailable() {
+		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
+	}
+	t.Logf("%s: %d frames to measure", plan.Why, len(check))
+	strays := measureStrays(t, before, after, check)
+	ids := make([]string, 0, len(strays))
+	for id := range strays {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	for _, id := range ids {
+		t.Errorf("%s strayed: %s", id, strays[id])
+	}
+	t.Logf("%d of %d frames strayed against %s", len(ids), len(check), base)
+}
 
-	side := func(parts gate.MockupParts, pick func(id string) (string, bool)) map[string][]string {
+func orNothing(why string) string {
+	if why == "" {
+		return "the CSS and the sprite are the same"
+	}
+	return why + ", and no unchanged frame is in reach"
+}
+
+// measureStrays measures the named frames with the CSS of both sides and says
+// for each frame that differs where it does: the steps of the ladder and the
+// first node and properties at the widest of them.
+func measureStrays(t *testing.T, before, after gate.MockupParts, ids []string) map[string]string {
+	t.Helper()
+	want := map[string]bool{}
+	for _, id := range ids {
+		want[id] = true
+	}
+	side := func(parts gate.MockupParts) map[string][]string {
 		t.Helper()
 		h := browser.NewHarness(t)
-		run, cancel := h.Tab(20 * time.Minute)
+		run, cancel := h.Tab(50 * time.Minute)
 		defer func() {
 			cancel()
 			h.CloseBrowser()
 		}()
-		url := h.RegisterPage("styles", browser.MockupShotShell(parts.Styles, parts.Sprite))
+		url := h.RegisterPage("strays", browser.MockupShotShell(parts.Styles, parts.Sprite))
 		if err := run(
 			chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
 			chromedp.Navigate(url),
@@ -85,15 +133,14 @@ func TestMockupComputedStyles(t *testing.T) {
 		}
 		out := map[string][]string{}
 		for _, fr := range parts.Frames {
-			html, ok := pick(fr.ID)
-			if !ok {
+			if !want[fr.ID] {
 				continue
 			}
-			raw, err := json.Marshal(html)
+			raw, err := json.Marshal(fr.HTML)
 			if err != nil {
 				t.Fatal(err)
 			}
-			for _, w := range browser.MockupRefactorWidths {
+			for _, w := range browser.MockupLadderWidths {
 				var got []string
 				js := fmt.Sprintf(computedStylesJS, raw, w, w)
 				if err := run(chromedp.Evaluate(js, &got)); err != nil {
@@ -104,55 +151,110 @@ func TestMockupComputedStyles(t *testing.T) {
 		}
 		return out
 	}
+	now, was := side(after), side(before)
 
-	afterStyles := side(after, func(id string) (string, bool) {
-		fr, ok := beforeByID[id]
-		_ = fr
-		if !ok {
-			return "", false // not in the base: the compare skips it too
-		}
-		for _, f := range after.Frames {
-			if f.ID == id {
-				return f.HTML, true
+	out := map[string]string{}
+	for _, id := range ids {
+		var widths []string
+		first := ""
+		for _, w := range browser.MockupLadderWidths {
+			k := fmt.Sprintf("%s@%d", id, w)
+			a, b := now[k], was[k]
+			d := ""
+			if len(a) != len(b) {
+				d = fmt.Sprintf("%d nodes, were %d", len(a), len(b))
 			}
-		}
-		return "", false
-	})
-	beforeStyles := side(before, func(id string) (string, bool) {
-		fr, ok := beforeByID[id]
-		return fr.HTML, ok
-	})
-
-	keys := make([]string, 0, len(afterStyles))
-	for k := range afterStyles {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-
-	bad := 0
-	for _, k := range keys {
-		a, b := afterStyles[k], beforeStyles[k]
-		if len(a) != len(b) {
-			t.Errorf("%s: %d nodes in the working tree, %d in %s — this check "+
-				"needs the same tree on both sides", k, len(a), len(b), base)
-			bad++
-			continue
-		}
-		for i := range a {
-			if a[i] == b[i] {
+			for i := 0; d == "" && i < len(a); i++ {
+				if a[i] != b[i] {
+					d = fmt.Sprintf("node %d <%s>: %s", i, nodeTag(a[i]), strings.Join(firstFew(propDiff(b[i], a[i]), 4), ", "))
+				}
+			}
+			if d == "" {
 				continue
 			}
-			bad++
-			if bad <= 24 {
-				t.Errorf("%s node %d <%s>: %s", k, i, nodeTag(a[i]),
-					strings.Join(propDiff(b[i], a[i]), ", "))
+			widths = append(widths, fmt.Sprint(w))
+			if first == "" {
+				first = d
 			}
 		}
+		if len(widths) == 0 {
+			continue
+		}
+		at := strings.Join(widths, ", ")
+		if len(widths) == len(browser.MockupLadderWidths) {
+			at = "all widths"
+		}
+		out[id] = fmt.Sprintf("at %s — %s", at, first)
 	}
-	if bad > 20 {
-		t.Errorf("… %d differing nodes in all", bad)
+	return out
+}
+
+func firstFew(s []string, n int) []string {
+	if len(s) <= n {
+		return s
 	}
-	t.Logf("compared %d frame×width pairs against %s", len(keys), base)
+	return append(s[:n:n], fmt.Sprintf("… %d more", len(s)-n))
+}
+
+// TestMockupStraysBite: a rule changed for one class moves a frame that has
+// the class and nobody edited — the plan sends it to be measured, the measure
+// names it; the frame the rule cannot reach is not measured at all.
+func TestMockupStraysBite(t *testing.T) {
+	if !browser.ChromeAvailable() {
+		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
+	}
+	if os.Getenv("CI") == "" && testing.Short() {
+		t.Skip("needs Chrome; skip with -short outside CI")
+	}
+	root := browser.ModuleRoot(t)
+	html, err := browser.LoadMockupHTML(root, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	all, err := gate.ParseMockupParts(string(html))
+	if err != nil {
+		t.Fatal(err)
+	}
+	before := gate.MockupParts{Styles: all.Styles, Sprite: all.Sprite}
+	for _, f := range all.Frames {
+		// a sheet with a key hint, a row of the queue without one, a frame far away
+		if f.ID == "s-files-11" || f.ID == "s-files-24" || f.ID == "s-auth-1" {
+			before.Frames = append(before.Frames, f)
+		}
+	}
+	if len(before.Frames) != 3 {
+		t.Fatalf("%d of the three frames found", len(before.Frames))
+	}
+	for _, c := range []struct {
+		name, css string
+		check     []string
+		stray     []string
+	}{
+		// the colour moves no box: a compare of boxes alone would pass it
+		{"a colour", ".tc-kbd{color:rgb(1, 2, 3)}", []string{"s-files-11"}, []string{"s-files-11"}},
+		{"a width", ".tc-kbd{padding-left:40px}", []string{"s-files-11"}, []string{"s-files-11"}},
+		{"a rule that changes nothing", ".tc-kbd{}", []string{"s-files-11"}, nil},
+	} {
+		after := before
+		after.Styles = before.Styles + "<style>" + c.css + "</style>"
+		plan := gate.PlanStrays(before, after)
+		if fmt.Sprint(plan.Check) != fmt.Sprint(c.check) {
+			t.Errorf("%s: to measure %v, want %v (%s)", c.name, plan.Check, c.check, plan.Why)
+			continue
+		}
+		got := measureStrays(t, before, after, plan.Check)
+		var ids []string
+		for id := range got {
+			ids = append(ids, id)
+		}
+		sort.Strings(ids)
+		if fmt.Sprint(ids) != fmt.Sprint(c.stray) {
+			t.Errorf("%s: strayed %v, want %v", c.name, got, c.stray)
+		}
+		for id, d := range got {
+			t.Logf("%s: %s %s", c.name, id, d)
+		}
+	}
 }
 
 // fontsReadyJS waits for the webfonts, or gives up after two seconds.
@@ -208,8 +310,9 @@ func propDiff(before, after string) []string {
 }
 
 // computedStylesJS injects one frame, sets its width, and returns one line per
-// node: its tag and every computed property that the product CSS can set.
-// Class names are left out on purpose — the rename changes them by design.
+// node: its tag, its box in the frame and every computed property that the
+// product CSS can set. Class names are left out on purpose — a rename changes
+// them by design.
 const computedStylesJS = `(function(){
   var host = document.getElementById("host");
   host.innerHTML = %s;
@@ -220,6 +323,7 @@ const computedStylesJS = `(function(){
   f.style.margin = "0";
   void f.offsetHeight;
   var out = [];
+  var origin = f.getBoundingClientRect();
   var nodes = f.querySelectorAll("*");
   for (var i = 0; i < nodes.length; i++) {
     var el = nodes[i];
@@ -230,7 +334,7 @@ const computedStylesJS = `(function(){
       parts.push(p + ":" + cs.getPropertyValue(p));
     }
     var r = el.getBoundingClientRect();
-    parts.push("rect:" + Math.round(r.width) + "x" + Math.round(r.height));
+    parts.push("rect:" + Math.round(r.left - origin.left) + "," + Math.round(r.top - origin.top) + " " + Math.round(r.width) + "x" + Math.round(r.height));
     // sorted: custom properties are enumerated in an order that depends on
     // which rules declare them, so adding a rule reshuffles the list
     parts.sort();
