@@ -41,10 +41,20 @@ func (e Emphasis) html(mix) string { return `<b class="tc-dim--accent">` + esc(s
 type FilePick struct {
 	Label string
 	File  FileField
+	// Row is the row each picked file becomes in the list File.List names
+	// (the owner's decision of 09.10: what was picked is shown by name) —
+	// «{name}» and «{size}» in its words, the name being the file's path
+	// inside a picked folder; a button of the row with Removes takes the
+	// file back.
+	Row *Line
 }
 
 func (p FilePick) html(mix) string {
-	return `<label class="tc-empty__pick">` + Emphasis(p.Label).html(nil) + p.File.input() + `</label>`
+	row := ""
+	if p.Row != nil {
+		row = `<template data-tc-row>` + p.Row.html(nil) + `</template>`
+	}
+	return `<label class="tc-empty__pick">` + Emphasis(p.Label).html(nil) + p.File.input() + row + `</label>`
 }
 
 // joined prints pieces of running text one after another.
@@ -456,6 +466,7 @@ func (Strong) emptyPart()   {}
 func (Text) emptyPart()     {}
 func (Emphasis) emptyPart() {}
 func (FilePick) emptyPart() {}
+func (Line) emptyPart()     {}
 func (Dim) emptyPart()      {}
 func (Aside) emptyPart()    {}
 

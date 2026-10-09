@@ -34,6 +34,15 @@ do, not what the authors did.
   the upload sheet (s-notes-11) is a `FilePick`; nothing looks different.
   Two file inputs of one name in one form: the one left empty goes as a part
   without a file name, as a browser sends it — the server skips it.
+- **The picked files of an upload sheet are shown by name** (the owner's
+  decisions of 09.10). `FilePick.Row` (a `*Line`) with `File.List` makes
+  each picked file a row of the list — its name, its size, a Remove of its
+  own (every file gets an input of its own, so a Remove takes one file
+  back); a picked folder is one row, «сканы/ 14 files, 38 MB». The list is
+  a `Line` inside the `Empty` (a new part of it), under the words of the
+  place, and takes no room while it is empty. s-notes-11 draws three rows;
+  the sheet's button says «Upload», without a number (s-notes-11,
+  s-files-19). Without a script the browser's own field names the files.
 - **A form with a file field of its own sends files.** `Form`, `Doc`,
   `Card` and `Sheet` with `Action` print `enctype="multipart/form-data"` when
   a `FileField` without `Form` stands in them: an edit's Save (the owner's

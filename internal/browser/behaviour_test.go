@@ -807,7 +807,8 @@ func TestFilePick(t *testing.T) {
 // TestFileSizes: an upload picks several files or a folder, and the lengths
 // of the picked files go before them as «size.<name>» (Carrel's task 119); the
 // words of a drop place pick files too, and those wait for their form's
-// button. The pick of a folder itself is the system's dialog and is not made
+// button, each a row of the place's list with a Remove of its own (the
+// owner's decision of 09.10). The pick of a folder itself is the system's dialog and is not made
 // here: the input is checked to ask for one. A form with a file field of its
 // own says it sends files.
 func TestFileSizes(t *testing.T) {
@@ -818,7 +819,11 @@ func TestFileSizes(t *testing.T) {
 		w.MenuItem{Icon: "file", Label: "Folder", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Folder", Size: "size", Folder: true}},
 		w.MenuItem{Label: "Upload", Form: "post-upload", NoScript: true}}}
 	place := w.Empty{Variant: w.EmptyDashed, Parts: []w.EmptyPart{w.Text("Drop files here, or "),
-		w.FilePick{Label: "choose on the computer", File: w.FileField{Name: "file", Label: "Files", Size: "size", Many: true}}}}
+		w.FilePick{Label: "choose on the computer", File: w.FileField{Name: "file", Label: "Files", List: "picked", Size: "size", Many: true},
+			Row: &w.Line{Place: w.Grown, Gap: w.LineGap8, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}},
+				w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true}}}},
+		w.Line{Block: true, Gap: w.LineGap8, Place: w.Grown, ID: "picked"}}}
+
 	body := `<form id="post-upload" method="post" action="/upload" enctype="multipart/form-data"></form>` +
 		`<div class="tc-root"><div class="tc-main">` + menu.Render() +
 		w.Sheet{Title: "Upload files", ID: "sheet", Action: "/sheet", Body: []w.SheetPart{place}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}}}.Render() +
@@ -833,15 +838,17 @@ func TestFileSizes(t *testing.T) {
 	}
 	const catch = `window.__sent = []; document.addEventListener("submit", e => { e.preventDefault(); window.__sent.push(e.target.id + ": " + [...new FormData(e.target)].map(([k, v]) => k + "=" + (v instanceof File ? v.name : v)).join(" ")); }); true`
 	page := h.RegisterPage("file-sizes", browser.PageHTML(body, ""))
-	var attrs, sent, waits, button string
+	var attrs, sent, waits, rows, button string
 	if err := h.Run(page, 900, 600,
 		chromedp.Evaluate(catch, nil),
 		chromedp.Evaluate(`[...document.querySelectorAll(".tc-file")].map(f => (f.multiple ? "many" : "one") + (f.webkitdirectory ? "+folder" : "") + (f.labels.length ? "" : " no label")).join(" ") + " · " + document.getElementById("sheet").enctype`, &attrs),
 		chromedp.SetUploadFiles(`label.tc-menu__item .tc-file`, []string{a, b}, chromedp.ByQuery),
 		chromedp.Evaluate(`window.__sent.join(" | ")`, &sent),
-		chromedp.SetUploadFiles(`.tc-empty__pick .tc-file`, []string{b}, chromedp.ByQuery),
+		chromedp.SetUploadFiles(`.tc-empty__pick .tc-file`, []string{a, b}, chromedp.ByQuery),
 		chromedp.Evaluate(`String(window.__sent.length)`, &waits),
-		chromedp.Click(`#sheet button`, chromedp.ByQuery),
+		chromedp.Evaluate(`[...document.querySelectorAll("#picked > [data-tc-picked]")].map(r => r.textContent.replace("Remove", "").trim()).join(" | ")`, &rows),
+		chromedp.Click(`#picked > [data-tc-picked] button`, chromedp.ByQuery),
+		chromedp.Click(`.tc-sheet__foot button`, chromedp.ByQuery),
 		chromedp.Evaluate(`window.__sent.slice(1).join(" | ")`, &button),
 	); err != nil {
 		t.Fatal(err)
@@ -856,8 +863,13 @@ func TestFileSizes(t *testing.T) {
 	if waits != "1" {
 		t.Errorf("the words of the place: %s forms sent after the pick; want the files to wait for the button", waits)
 	}
-	if button != "sheet: size.kazan.png=5 file=kazan.png" {
-		t.Errorf("the button: sent %q; want the place's file with its length", button)
+	if rows != "plan.md 3 B | kazan.png 5 B" {
+		t.Errorf("the picked files: rows %q; want a row for each, its name and size", rows)
+	}
+	// the first file's Remove was pressed: it does not go, nor does its length;
+	// the input waiting for the next pick goes empty
+	if button != "sheet: file= size.kazan.png=5 file=kazan.png" {
+		t.Errorf("the button: sent %q; want the file left in the list, with its length", button)
 	}
 }
 

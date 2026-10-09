@@ -2853,10 +2853,63 @@ func Notes11() Screen {
 								w.Text("Drop files here, or "),
 								w.FilePick{
 									Label: "choose on the computer",
-									File:  w.FileField{Form: "", Name: "file", Label: "Files", Size: "size", Many: true},
+									File:  w.FileField{Form: "", Name: "file", Label: "Files", List: "upload-files", Size: "size", Many: true},
+									Row: &w.Line{
+										Items: []w.LinePart{
+											w.Faced{
+												Face:  w.FaceLarge,
+												Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+											},
+											w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
+										},
+										Gap:   w.LineGap8,
+										Place: w.Grown,
+									},
 								},
 								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
+								w.Text(" "),
+								w.Line{
+									Items: []w.LinePart{
+										w.Line{
+											Items: []w.LinePart{
+												w.Faced{
+													Face:  w.FaceLarge,
+													Items: []w.LinePart{w.Text("договор-аренды.pdf "), w.Dim{Parts: []w.Inline{w.Text("412 KB")}}},
+												},
+												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
+											},
+											Gap:   w.LineGap8,
+											Place: w.Grown,
+										},
+										w.Line{
+											Items: []w.LinePart{
+												w.Faced{
+													Face:  w.FaceLarge,
+													Items: []w.LinePart{w.Text("план-этажа.png "), w.Dim{Parts: []w.Inline{w.Text("2.1 MB")}}},
+												},
+												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
+											},
+											Gap:   w.LineGap8,
+											Place: w.Grown,
+										},
+										w.Line{
+											Items: []w.LinePart{
+												w.Faced{
+													Face:  w.FaceLarge,
+													Items: []w.LinePart{w.Text("сканы/ "), w.Dim{Parts: []w.Inline{w.Text("14 files, 38 MB")}}},
+												},
+												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
+											},
+											Gap:   w.LineGap8,
+											Place: w.Grown,
+										},
+									},
+									Gap:   w.LineGap8,
+									Block: true,
+									ID:    "upload-files",
+									Place: w.Grown,
+								},
 							},
 							Variant: w.EmptyDashed,
 						},
@@ -2894,7 +2947,7 @@ func Notes11() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Upload 2 files", Kind: w.ButtonPrimary},
+						w.Button{Label: "Upload", Kind: w.ButtonPrimary},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},

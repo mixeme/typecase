@@ -267,6 +267,9 @@ func (g *gen) empty(e *El) string {
 			case v.Tag == "svg" || v.Has("tc-empty__lead") || v.Has("tc-empty__lead-sm"):
 			case v.Has("tc-btn"):
 				ps = append(ps, g.button(v))
+			case v.Has("tc-line"):
+				// the list of the picked files
+				ps = append(ps, g.line(v))
 			case v.Has("tc-dim--t12-5") || v.Has("tc-dim--t12"):
 				face := "FaceSmall"
 				if v.Has("tc-dim--t12-5") {
@@ -292,7 +295,11 @@ func (g *gen) empty(e *El) string {
 				ps = append(ps, g.dimx(v))
 			case v.Has("tc-empty__pick"):
 				// words that pick a file: the label of its input (Carrel's task 119)
-				ps = append(ps, "w.FilePick{Label: "+q(v.Text())+", File: "+g.fileField(v.Kid("tc-file"))[1:]+"}")
+				pick := "w.FilePick{Label: " + q(v.Kid("tc-dim--accent").Text()) + ", File: " + g.fileField(v.Kid("tc-file"))[1:]
+				if tpl := rowTemplate(v); tpl != nil {
+					pick += ", Row: &" + g.line(tpl.Els()[0])
+				}
+				ps = append(ps, pick+"}")
 			case v.Tag == "b" && v.Has("tc-dim--accent"):
 				ps = append(ps, "w.Emphasis("+q(v.Text())+")")
 			case v.Tag == "b" && len(v.Cls()) == 0:

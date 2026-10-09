@@ -718,6 +718,9 @@ label.tc-tree__row{cursor:pointer}
 .tc-file{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
 /* Слова области броска, выбирающие файл (задача 119): подпись своего поля файла, как кнопка и пункт. */
 .tc-empty__pick{cursor:pointer}
+/* Список выбранных файлов в области броска: имена — цветом текста, размер приглушён; пока пуст, места не занимает. */
+.tc-empty > .tc-line{color:var(--tc-ink)}
+.tc-empty > .tc-line:empty{display:none}
 :root:not([data-tc-noscript]) .tc-nojs{display:none}
 /* Полоса опроса с отказом и своей кнопкой (поиск: «1 failed» и Search again) на телефоне переносится: строкам — зазор, чтобы зоны нажатия не налезали. */
 @container tcbox (max-width:460px){
@@ -7856,8 +7859,9 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-empty tc-empty--dashed">
-                Drop files here, or <label class="tc-empty__pick"><b class="tc-dim--accent">choose on the computer</b><input class="tc-file" type="file" name="file" aria-label="Files" data-tc-size="size" multiple></label>
+                Drop files here, or <label class="tc-empty__pick"><b class="tc-dim--accent">choose on the computer</b><input class="tc-file" type="file" name="file" aria-label="Files" data-tc-list="upload-files" data-tc-size="size" multiple><template data-tc-row><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">{name} <span class="tc-dim">{size}</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span></template></label>
                 <span class="tc-dim--t12">A name already taken is refused, not overwritten</span>
+                <div class="tc-grow tc-line tc-line--gap-8" id="upload-files"><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">договор-аренды.pdf <span class="tc-dim">412 KB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">план-этажа.png <span class="tc-dim">2.1 MB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">сканы/ <span class="tc-dim">14 files, 38 MB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span></div>
               </div>
               <div class="tc-card tc-card--flush">
                 <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
@@ -7873,7 +7877,7 @@ Read  2 min ago</div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here. Change it here and the next upload from this menu goes to the new one.</span>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button">Upload 2 files</button>
+              <button class="tc-btn is-primary" type="button">Upload</button>
               <kbd class="tc-kbd">Enter</kbd>
               <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
             </div>
@@ -8381,7 +8385,7 @@ Read  2 min ago</div>
           </div>
           <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Upload 2 files</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Upload</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>

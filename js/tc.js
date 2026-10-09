@@ -739,28 +739,51 @@
 		var list = document.getElementById(input.getAttribute("data-tc-list") || "");
 		var tpl = input.parentNode.querySelector("template[data-tc-row]");
 		if (!list || !tpl || !tpl.content.firstElementChild) return;
-		var names = [], bytes = 0;
-		Array.prototype.forEach.call(input.files, function (f) {
-			names.push(f.name);
-			bytes += f.size;
-		});
-		var row = tpl.content.firstElementChild.cloneNode(true);
-		fillWords(row, { "{name}": names.join(", "), "{size}": fileSize(bytes) });
-		row.setAttribute("data-tc-picked", "");
-		// the lengths of its files stand before it and go with it
-		var sizes = [];
-		for (var s = input.previousElementSibling; s && s.hasAttribute("data-tc-size-of"); s = s.previousElementSibling) sizes.unshift(s);
+		// the lengths written at the pick are written again in the rows
+		for (var old = input.previousElementSibling; old && old.hasAttribute("data-tc-size-of"); old = input.previousElementSibling) old.remove();
 		var fresh = input.cloneNode(false);
-		input.parentNode.insertBefore(fresh, sizes[0] || input);
-		sizes.forEach(function (s) {
-			row.appendChild(s);
+		fresh.value = "";
+		var picked = eachPicked(input);
+		input.parentNode.replaceChild(fresh, input);
+		picked.forEach(function (one) {
+			var row = tpl.content.firstElementChild.cloneNode(true);
+			fillWords(row, { "{name}": one.name, "{size}": one.size });
+			row.setAttribute("data-tc-picked", "");
+			row.appendChild(one.input);
+			sizeFields(one.input);
+			list.appendChild(row);
 		});
-		row.appendChild(input);
-		list.appendChild(row);
 		emptyWords(list);
 		if (!closeMenu(true)) {
 			var d = closest(fresh, "details");
 			if (d) d.open = false;
+		}
+	}
+
+	// What was picked, a row each (the owner's decision of 09.10: the files
+	// are shown by name): every file of several gets an input of its own, so
+	// that Remove takes one file back; a folder is one row — its name and
+	// how much is in it — for a file keeps its path only in the input it was
+	// picked with. Where a browser cannot fill an input, the pick is one row.
+	function eachPicked(input) {
+		var files = Array.prototype.slice.call(input.files), bytes = 0;
+		files.forEach(function (f) {
+			bytes += f.size;
+		});
+		if (files[0] && files[0].webkitRelativePath) {
+			return [{ input: input, name: files[0].webkitRelativePath.split("/")[0] + "/", size: files.length + " files, " + fileSize(bytes) }];
+		}
+		var whole = [{ input: input, name: files.map(function (f) { return f.name; }).join(", "), size: fileSize(bytes) }];
+		if (files.length < 2 || !window.DataTransfer) return whole;
+		try {
+			return files.map(function (f) {
+				var one = input.cloneNode(false), dt = new DataTransfer();
+				dt.items.add(f);
+				one.files = dt.files;
+				return { input: one, name: f.name, size: fileSize(f.size) };
+			});
+		} catch (e) {
+			return whole;
 		}
 	}
 

@@ -537,6 +537,9 @@ label.tc-tree__row{cursor:pointer}
 .tc-file{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
 /* Слова области броска, выбирающие файл (задача 119): подпись своего поля файла, как кнопка и пункт. */
 .tc-empty__pick{cursor:pointer}
+/* Список выбранных файлов в области броска: имена — цветом текста, размер приглушён; пока пуст, места не занимает. */
+.tc-empty > .tc-line{color:var(--tc-ink)}
+.tc-empty > .tc-line:empty{display:none}
 :root:not([data-tc-noscript]) .tc-nojs{display:none}
 /* Полоса опроса с отказом и своей кнопкой (поиск: «1 failed» и Search again) на телефоне переносится: строкам — зазор, чтобы зоны нажатия не налезали. */
 @container tcbox (max-width:460px){
