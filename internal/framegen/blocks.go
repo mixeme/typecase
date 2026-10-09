@@ -864,6 +864,9 @@ func (g *gen) table(e *El) string {
 			if th.Has("tc-table__n4") {
 				f = append(f, "Rank: w.Rank4")
 			}
+			if th.Has("tc-table__n1") {
+				f = append(f, "Rank: w.Rank1")
+			}
 			if th.Has("is-2nd") {
 				f = append(f, "Secondary: true")
 			}
@@ -960,6 +963,9 @@ func (g *gen) table(e *El) string {
 				if td.Has("tc-table__n4") {
 					f = append(f, "Rank: w.Rank4")
 				}
+				if td.Has("tc-table__n1") {
+					f = append(f, "Rank: w.Rank1")
+				}
 				for _, v := range allOf(td, colWidth) {
 					f = append(f, "Width: w."+v)
 				}
@@ -977,7 +983,7 @@ func (g *gen) table(e *El) string {
 		f = append(f, "Cols: []w.TableCol{"+join(cols, ", ")+"}")
 	}
 	f = append(f, "Rows: []w.TableRow{\n\t\t"+join(rows, ",\n\t\t")+"}")
-	for _, v := range allOf(e, []kv{{"tc-table--fit", "TableFit"}, {"tc-table--wide", "TableWide"}, {"tc-table--mx-20", "TableInset"}}) {
+	for _, v := range allOf(e, []kv{{"tc-table--fit", "TableFit"}, {"tc-table--wide", "TableWide"}, {"tc-table--mx-20", "TableInset"}, {"tc-table--packed", "TablePacked"}}) {
 		f = append(f, "Variant: w."+v)
 	}
 	return "w.Table{" + join(f, ", ") + placef(e) + "}"

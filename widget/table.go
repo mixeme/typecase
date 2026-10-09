@@ -33,15 +33,20 @@ func (w ColWidth) class() string {
 
 // ColRank is which of the columns that narrow tables drop a column is: the
 // third or the fourth. The rank goes on the column's head and every cell.
+// Rank1 is the column of a packed table (TablePacked) that leaves first,
+// where it does not fit.
 type ColRank int
 
 const (
 	RankKept ColRank = iota
 	Rank3
 	Rank4
+	Rank1
 )
 
-func (r ColRank) class() string { return [...]string{"", "tc-table__n3", "tc-table__n4"}[r] }
+func (r ColRank) class() string {
+	return [...]string{"", "tc-table__n3", "tc-table__n4", "tc-table__n1"}[r]
+}
 
 // TableCol is a column of a table: its head and what every cell of it
 // shares.
@@ -192,10 +197,15 @@ const (
 	TableFit                // its content's width
 	TableWide               // wider than its page: scrolls
 	TableInset              // out to a card's edges
+	// TablePacked is a table of many narrow columns whose words are never
+	// broken (the owner's decisions of 09.10): a column that does not fit
+	// leaves — Rank1 first, Rank3 after it — and does not come back as its
+	// panel narrows.
+	TablePacked
 )
 
 func (v TableVariant) class() string {
-	return [...]string{"", "tc-table--fit", "tc-table--wide", "tc-table--mx-20"}[v]
+	return [...]string{"", "tc-table--fit", "tc-table--wide", "tc-table--mx-20", "tc-table--packed"}[v]
 }
 
 // Table — tc-table

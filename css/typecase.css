@@ -805,6 +805,17 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table .tc-table__n3,.tc-table .tc-table__n3,
   .tc-table .tc-table__n4,.tc-table .tc-table__n4{display:none}
 }
+/* Плотная таблица (ссылки; решения человека 09.10): моноширинное не переносится — слово и дата стоят целиком
+   или столбца нет. Что не помещается, уходит — первым n1 (Kind), за ним n3 (Created) — и, пока ширина рейла та
+   же, не возвращается: пороги — по ширине панели. Когда рейл сворачивается, панель становится шире, и столбцы,
+   которым снова есть место, стоят снова. Last opened уходит как is-2nd (700), Expires — на телефоне (n4). */
+.tc-table--packed td.tc-mono{white-space:nowrap}
+@container tcbox (max-width:880px){
+  .tc-table--packed .tc-table__n1{display:none}
+}
+@container tcbox (max-width:752px){
+  .tc-table--packed .tc-table__n3{display:none}
+}
 /* Телефон (≤460), третий ранг бара (Р-4): is-3rd уходит под «⋯» вслед за is-2nd.
    В меню «⋯» у него двойник с тем же is-3rd — виден только здесь, пока сам элемент
    спрятан. Кнопка бара со складной подписью остаётся значком; поля диапазона в баре

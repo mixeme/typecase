@@ -48,11 +48,14 @@ do, not what the authors did.
   a `FileField` without `Form` stands in them: an edit's Save (the owner's
   decision of 02.10) and an upload sheet sent only the files' names before,
   script or none. Nothing to do on the consumer's side.
-- **The published links have no Kind column on the phone** (the owner's
-  decision of 09.10): the word broke in the middle («cale/ndar») and the
-  rows stood at different heights. The column is of the fourth rank
-  (`TableCol.Rank: Rank4`, s-publish-1, -17) and leaves at 460 px, as
-  Expires does; wider, nothing changes.
+- **The table of published links breaks no word and no date** (the
+  owner's decisions of 09.10). A `Table` with `Variant: TablePacked` keeps
+  its mono cells on one line; a column that does not fit leaves, and one
+  that has left does not come back while the rail's width is the same.
+  Kind leaves first (`TableCol.Rank: Rank1`, at 880 px of the panel),
+  Created after it (`Rank3`, at 752 px), Last opened as a secondary column
+  does (700 px), Expires on the phone (s-publish-1, -17). When the rail
+  folds the panel is wider, and the columns it has room for stand again.
 - **Published links on an instance without mail** (the rest of Carrel's
   task 121): a new fragment s-publish-17 — the rows have Copy and Revoke and
   no Send, neither as a button nor in «⋯»; on a narrow width «⋯» holds
