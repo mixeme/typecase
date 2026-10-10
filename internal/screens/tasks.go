@@ -20,10 +20,10 @@ func Tasks1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -36,7 +36,7 @@ func Tasks1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
-							Meta:    "6",
+							Meta:    "7",
 							Current: true,
 						},
 					},
@@ -45,7 +45,7 @@ func Tasks1() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailSec{
@@ -108,7 +108,6 @@ func Tasks1() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "7 Aug",
 								Progress: "—",
 								Source:   "nextcloud · Дела",
@@ -119,7 +118,6 @@ func Tasks1() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#3F6E8C"},
 								Title:    []w.Inline{w.Text("Ответить подрядчику по смете")},
-								Tags:     []w.RowTag{w.Tag{Label: "релиз"}},
 								Due:      "8 Aug",
 								Progress: "40%",
 								Source:   "nextcloud · Работа",
@@ -137,11 +135,10 @@ func Tasks1() Screen {
 								Title:      []w.Inline{w.Text("Собрать чемодан ")},
 								Strong:     true,
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
-								Tags:       []w.RowTag{w.Tag{Label: "дом"}},
 								Due:        "12 Aug 18:00",
 								Progress:   "—",
 								Source:     "2 sources",
-								SourceHint: "nextcloud · Дела, radicale · vps · Личное",
+								SourceHint: "nextcloud · Дела, nextcloud · Работа",
 								On:         true,
 								Href:       "#",
 							},
@@ -149,7 +146,6 @@ func Tasks1() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#3F6E8C"},
 								Title:    []w.Inline{w.Text("Дописать раздел про кэш")},
-								Tags:     []w.RowTag{w.Tag{Label: "релиз"}},
 								Due:      "14 Aug",
 								Progress: "70%",
 								Source:   "nextcloud · Работа",
@@ -285,10 +281,10 @@ func Tasks15() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -301,7 +297,7 @@ func Tasks15() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "6",
+							Meta:   "7",
 						},
 					},
 				},
@@ -309,7 +305,7 @@ func Tasks15() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailSec{
@@ -372,7 +368,6 @@ func Tasks15() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "7 Aug",
 								Progress: "—",
 								Single:   true,
@@ -389,7 +384,6 @@ func Tasks15() Screen {
 								Mark:       w.Mark{Colour: "#4A6B52"},
 								Title:      []w.Inline{w.Text("Собрать чемодан ")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked, Title: "nextcloud · Дела, nextcloud · Работа"},
-								Tags:       []w.RowTag{w.Tag{Label: "дом"}},
 								Due:        "12 Aug 18:00",
 								Progress:   "—",
 								Single:     true,
@@ -437,7 +431,7 @@ func Tasks2() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -537,7 +531,7 @@ func Tasks2() Screen {
 									[]w.SecItemPart{
 										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "radicale · vps · Личное", Href: "#"},
+										w.Link{Text: "nextcloud · Работа", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Time differ")}},
 									},
@@ -579,7 +573,7 @@ func Tasks3() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -766,7 +760,7 @@ func Tasks14() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailFoot{

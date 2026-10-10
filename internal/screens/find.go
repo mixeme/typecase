@@ -20,10 +20,10 @@ func Find1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -142,7 +142,6 @@ func Find1() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#3F6E8C"},
 								Title:    []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")},
-								Tags:     []w.RowTag{w.Tag{Label: "релиз"}},
 								Due:      "12 Aug",
 								Progress: "40%",
 								Source:   "nextcloud · Работа",
@@ -156,7 +155,6 @@ func Find1() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")},
 								Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -241,10 +239,10 @@ func Find2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -257,7 +255,7 @@ func Find2() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "5",
+							Meta:    "7",
 							Current: true,
 						},
 					},
@@ -265,7 +263,7 @@ func Find2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -290,7 +288,7 @@ func Find2() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 5 cards")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
@@ -348,6 +346,20 @@ func Find2() Screen {
 								Detail:   "vera@example.net",
 								Caption:  "—",
 								Source:   "nextcloud · Архив",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Лебедева Вера")},
+								Subtitle: "+7 905 331-09-42",
+								Detail:   "v.lebedeva@example.org",
+								Caption:  "Библиотека №4",
+								Source:   "nextcloud · Контакты",
 							},
 						},
 					},
@@ -419,10 +431,10 @@ func Find3() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -468,7 +480,7 @@ func Find3() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{

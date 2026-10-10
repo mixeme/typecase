@@ -74,10 +74,10 @@ func States2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -129,10 +129,10 @@ func States3() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -184,7 +184,7 @@ func States3() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "—",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -348,10 +348,10 @@ func States4() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -364,14 +364,14 @@ func States4() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
-							Meta:   "6",
+							Meta:   "7",
 						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -381,7 +381,7 @@ func States4() Screen {
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#6B4E7A"},
 							Label:   "Команда",
-							Meta:    "2",
+							Meta:    "1",
 							Current: true,
 							Trail:   w.Badge{Label: "ro"},
 						},
@@ -408,7 +408,7 @@ func States4() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}},
 						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 2 cards · the server granted no write access")}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 1 card · the server granted no write access")}},
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}},
@@ -455,36 +455,22 @@ func States4() Screen {
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
-								w.Mono{Text: "2"},
+								w.Mono{Text: "1"},
 							},
 							Secondary: true,
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "И", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
-								Avatar:   w.Avatar{Initials: "ИФ"},
-								Title:    []w.Inline{w.Text("Ирина Фомина")},
-								Subtitle: "+7 900 000-00-00",
-								Detail:   "—",
-								Caption:  "—",
-								Source:   "radicale · vps · Команда",
-							},
-						},
-					},
-					w.ListGroup{Title: w.Rubric{Text: "К", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.FaceRow{
-								Mark:     w.Mark{Colour: "#6B4E7A"},
-								Avatar:   w.Avatar{Initials: "ПК"},
-								Title:    []w.Inline{w.Text("Пётр Ковалёв")},
-								Subtitle: "—",
-								Detail:   "p.kovalev@example.org",
-								Caption:  "—",
-								Source:   "radicale · vps · Команда",
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Артём Белов")},
+								Subtitle: "+7 903 118-22-04",
+								Detail:   "a.belov@example.org",
+								Caption:  "Тензор",
+								Single:   true,
 							},
 						},
 					},
@@ -611,10 +597,10 @@ func States6() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -660,7 +646,7 @@ func States6() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -1162,10 +1148,10 @@ func States7() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1186,7 +1172,7 @@ func States7() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Hidden: true},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1", Hidden: true},
 					},
 				},
@@ -1257,10 +1243,10 @@ func States8() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1273,7 +1259,7 @@ func States8() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "5",
+							Meta:    "—",
 							Current: true,
 						},
 					},
@@ -1281,8 +1267,8 @@ func States8() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
 				w.RailSec{
@@ -1362,16 +1348,16 @@ func States8() Screen {
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
-								w.Mono{Text: "5"},
+								w.Mono{Text: "6"},
 							},
 							Secondary: true,
 						},
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Text("Polling · 2 of 3 answered · 6 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
@@ -1385,6 +1371,15 @@ func States8() Screen {
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АБ"},
+								Title:    []w.Inline{w.Text("Артём Белов")},
+								Subtitle: "+7 903 118-22-04",
+								Detail:   "a.belov@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Контакты",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
 								Avatar:   w.Avatar{Initials: "АС"},
 								Title:    []w.Inline{w.Text("Алексей Смирнов")},
 								Subtitle: "+7 916 200-71-15",
@@ -1394,7 +1389,7 @@ func States8() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
@@ -1415,14 +1410,19 @@ func States8() Screen {
 								Caption:  "—",
 								Source:   "nextcloud · Архив",
 							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#A05A2C"},
-								Avatar:   w.Avatar{Initials: "ВП"},
-								Title:    []w.Inline{w.Text("Вадим Петров")},
-								Subtitle: "—",
-								Detail:   "v.petrov@example.net",
-								Caption:  "—",
-								Source:   "nextcloud · Архив",
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Лебедева Вера")},
+								Subtitle: "+7 905 331-09-42",
+								Detail:   "v.lebedeva@example.org",
+								Caption:  "Библиотека №4",
+								Source:   "nextcloud · Контакты",
 							},
 						},
 					},
@@ -1448,10 +1448,10 @@ func States9() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1464,7 +1464,7 @@ func States9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "5",
+							Meta:    "6",
 							Current: true,
 						},
 					},
@@ -1472,8 +1472,8 @@ func States9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
 				w.RailSec{
@@ -1502,7 +1502,7 @@ func States9() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 5 cards")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -1553,7 +1553,7 @@ func States9() Screen {
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
-								w.Mono{Text: "5"},
+								w.Mono{Text: "6"},
 							},
 							Secondary: true,
 						},
@@ -1561,7 +1561,7 @@ func States9() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 2 of 3 sources · 5 cards · "),
+							w.Text("Polled 2 of 3 sources · 6 cards · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -1580,7 +1580,7 @@ func States9() Screen {
 							w.Mono{Text: "2 min ago", Place: w.Pushed},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
@@ -1594,6 +1594,15 @@ func States9() Screen {
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АБ"},
+								Title:    []w.Inline{w.Text("Артём Белов")},
+								Subtitle: "+7 903 118-22-04",
+								Detail:   "a.belov@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Контакты",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
 								Avatar:   w.Avatar{Initials: "АС"},
 								Title:    []w.Inline{w.Text("Алексей Смирнов")},
 								Subtitle: "+7 916 200-71-15",
@@ -1603,7 +1612,7 @@ func States9() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
@@ -1624,14 +1633,19 @@ func States9() Screen {
 								Caption:  "—",
 								Source:   "nextcloud · Архив",
 							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#A05A2C"},
-								Avatar:   w.Avatar{Initials: "ВП"},
-								Title:    []w.Inline{w.Text("Вадим Петров")},
-								Subtitle: "—",
-								Detail:   "v.petrov@example.net",
-								Caption:  "—",
-								Source:   "nextcloud · Архив",
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Лебедева Вера")},
+								Subtitle: "+7 905 331-09-42",
+								Detail:   "v.lebedeva@example.org",
+								Caption:  "Библиотека №4",
+								Source:   "nextcloud · Контакты",
 							},
 						},
 					},
@@ -1663,10 +1677,10 @@ func States10() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1679,14 +1693,14 @@ func States10() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
-							Meta:   "5",
+							Meta:   "7",
 						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -1764,10 +1778,10 @@ func States11() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1861,7 +1875,7 @@ func States12() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -2051,10 +2065,10 @@ func States13() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2067,7 +2081,7 @@ func States13() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
-							Meta:    "3",
+							Meta:    "—",
 							Current: true,
 						},
 					},
@@ -2100,7 +2114,7 @@ func States13() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -2233,7 +2247,7 @@ func States13() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 4 of 6 sources · 3 events · "),
+							w.Text("Polling · 4 of 6 answered · 3 events · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -2305,10 +2319,10 @@ func States14() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2423,10 +2437,10 @@ func States15() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2470,7 +2484,7 @@ func States15() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -2625,10 +2639,10 @@ func States18() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2650,7 +2664,7 @@ func States18() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3", Hidden: true},
 					},
 				},
 				w.RailSec{
@@ -2720,10 +2734,10 @@ func States19() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2736,7 +2750,7 @@ func States19() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
-							Meta:    "2",
+							Meta:    "—",
 							Current: true,
 						},
 					},
@@ -2744,7 +2758,7 @@ func States19() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "—"},
 					},
 				},
@@ -2793,7 +2807,7 @@ func States19() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
+							w.Seg{Options: []w.SegOption{{Label: "Open 3", On: true}, {Label: "Done 1"}, {Label: "All 4"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
 								Secondary: true,
@@ -2803,7 +2817,7 @@ func States19() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polled 1 of 2 sources · 2 tasks"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Text("Polling · 1 of 2 answered · 4 tasks"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 1, Alert: true}},
 					w.List{
@@ -2812,7 +2826,6 @@ func States19() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "7 Aug",
 								Progress: "—",
 								Source:   "nextcloud · Дела",
@@ -2828,9 +2841,22 @@ func States19() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Собрать чемодан")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "12 Aug 18:00",
 								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Href:     "#",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "No due date", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Done: true, Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Продлить страховку")},
+								Due:      "—",
+								Progress: "100%",
 								Source:   "nextcloud · Дела",
 								Href:     "#",
 							},
@@ -2858,10 +2884,10 @@ func States20() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -2874,7 +2900,7 @@ func States20() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
-							Meta:    "2",
+							Meta:    "4",
 							Current: true,
 						},
 					},
@@ -2882,7 +2908,7 @@ func States20() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Error: true},
 					},
 				},
@@ -2919,7 +2945,7 @@ func States20() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 2 tasks")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 4 tasks")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -2931,7 +2957,7 @@ func States20() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
+							w.Seg{Options: []w.SegOption{{Label: "Open 3", On: true}, {Label: "Done 1"}, {Label: "All 4"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
 								Secondary: true,
@@ -2942,7 +2968,7 @@ func States20() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 1 of 2 sources · 2 tasks · "),
+							w.Text("Polled 1 of 2 sources · 4 tasks · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -2968,7 +2994,6 @@ func States20() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "7 Aug",
 								Progress: "—",
 								Source:   "nextcloud · Дела",
@@ -2984,9 +3009,22 @@ func States20() Screen {
 								Tick:     w.Tick{Label: "Done"},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Собрать чемодан")},
-								Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 								Due:      "12 Aug 18:00",
 								Progress: "—",
+								Source:   "nextcloud · Дела",
+								Href:     "#",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "No due date", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Done: true, Label: "Done"},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Продлить страховку")},
+								Due:      "—",
+								Progress: "100%",
 								Source:   "nextcloud · Дела",
 								Href:     "#",
 							},
@@ -3020,10 +3058,10 @@ func States21() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3121,10 +3159,10 @@ func States22() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3137,7 +3175,7 @@ func States22() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "2",
+							Meta:   "3",
 						},
 					},
 				},
@@ -3145,7 +3183,7 @@ func States22() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailSec{
@@ -3224,10 +3262,10 @@ func States23() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3240,7 +3278,7 @@ func States23() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "8",
+							Meta:   "7",
 						},
 					},
 				},
@@ -3248,7 +3286,7 @@ func States23() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailSec{
@@ -3545,10 +3583,10 @@ func States25() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3570,7 +3608,7 @@ func States25() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2", Hidden: true},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -3633,10 +3671,10 @@ func States26() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3649,7 +3687,7 @@ func States26() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "2",
+							Meta:    "—",
 							Current: true,
 						},
 					},
@@ -3672,13 +3710,7 @@ func States26() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -3717,7 +3749,7 @@ func States26() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polled 1 of 2 sources · 2 notes"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Text("Polling · 1 of 2 answered · 2 notes"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -3726,7 +3758,6 @@ func States26() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -3734,7 +3765,6 @@ func States26() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -3762,10 +3792,10 @@ func States27() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3801,13 +3831,7 @@ func States27() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -3873,7 +3897,6 @@ func States27() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -3881,7 +3904,6 @@ func States27() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -3915,10 +3937,10 @@ func States28() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -3953,13 +3975,7 @@ func States28() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -4015,10 +4031,10 @@ func States29() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -4031,7 +4047,7 @@ func States29() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
-							Meta:   "1",
+							Meta:   "2",
 						},
 					},
 				},
@@ -4039,7 +4055,7 @@ func States29() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -4053,13 +4069,7 @@ func States29() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -4117,10 +4127,10 @@ func States30() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -4133,7 +4143,7 @@ func States30() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
-							Meta:   "5",
+							Meta:   "6",
 						},
 					},
 				},
@@ -4141,7 +4151,7 @@ func States30() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#3F6E8C"},
 							Label:   "Общие с семьёй",
@@ -4157,8 +4167,8 @@ func States30() Screen {
 					Tags: []w.Tag{
 						w.Tag{Label: "all", On: true},
 						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
 						w.Tag{Label: "книги"},
+						w.Tag{Label: "релиз"},
 						w.Tag{Label: "рецепты"},
 					},
 				},
@@ -4218,7 +4228,6 @@ func States30() Screen {
 								Mark:    w.Mark{Colour: "#3F6E8C"},
 								Title:   []w.Inline{w.Text("Рецепт бабушкиного пирога")},
 								Excerpt: "Мука — три стакана, кефир — стакан, яблоки кислые…",
-								Tags:    []w.RowTag{w.Tag{Label: "рецепты"}},
 								Date:    "19 Jul",
 								Single:  true,
 							},
@@ -4250,7 +4259,7 @@ func States31() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -4266,11 +4275,9 @@ func States31() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -4523,10 +4530,10 @@ func States32() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -4635,10 +4642,10 @@ func States33() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -4743,10 +4750,10 @@ func States34() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -4907,10 +4914,10 @@ func States35() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},

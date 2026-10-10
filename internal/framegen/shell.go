@@ -771,19 +771,6 @@ func (g *gen) src(e *El, f []string) []string {
 	return f
 }
 
-func (g *gen) tagsf(e *El, f []string) []string {
-	items := g.each(e.Kid("tc-row__tags").Els(), func(k *El) string {
-		if k.Has("tc-tag") {
-			return g.tag(k)
-		}
-		return g.badge(k)
-	})
-	if items != "" {
-		f = append(f, "Tags: []w.RowTag{"+items+"}")
-	}
-	return f
-}
-
 // row is a row of a list; a row that links to its record has its address.
 func (g *gen) row(e *El) string {
 	s := g.row0(e)
@@ -863,7 +850,6 @@ func (g *gen) row0(e *El) string {
 		f = append(f, "Mark: "+g.mark(els[0]))
 		f = append(f, g.titleFields(e.Kid("tc-row__title"), "Title")...)
 		f = append(f, "Excerpt: "+text("tc-row__excerpt"))
-		f = g.tagsf(e, f)
 		f = append(f, "Date: "+text("tc-row__date"))
 		f = g.src(e, f)
 		if on {
@@ -884,7 +870,6 @@ func (g *gen) row0(e *El) string {
 		}
 		f = append(f, tick, "Mark: "+g.mark(els[1]))
 		f = append(f, g.titleFields(e.Kid("tc-row__title"), "Title")...)
-		f = g.tagsf(e, f)
 		f = append(f, "Due: "+text("tc-row__due"), "Progress: "+text("tc-row__progress"))
 		f = g.src(e, f)
 		if on {
@@ -1740,7 +1725,16 @@ func (g *gen) columnRow(e *El) string {
 			if c.v == "ColumnTags" {
 				var tags []string
 				for _, t := range k.Els() {
-					tags = append(tags, g.tag(t))
+					if t.Has("tc-tag") {
+						tags = append(tags, g.tag(t))
+					}
+				}
+				// the cell draws the first tag and counts the rest; its
+				// hint names them all
+				if all := strings.Split(k.Attr("title"), ", "); len(all) > 1 {
+					for _, l := range all[1:] {
+						tags = append(tags, "w.Tag{Label: "+q(l)+"}")
+					}
 				}
 				cells = append(cells, "{Column: w.ColumnTags, Tags: []w.RowTag{"+join(tags, ", ")+"}}")
 			} else {

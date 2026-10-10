@@ -276,7 +276,6 @@ func Dup1() Screen {
 												Tick:     w.Tick{Label: "Done"},
 												Mark:     w.Mark{Colour: "#4A6B52"},
 												Title:    []w.Inline{w.Text("Собрать чемодан")},
-												Tags:     []w.RowTag{w.Tag{Label: "дом"}},
 												Due:      "12 Aug 18:00",
 												Progress: "—",
 												Source:   "nextcloud · Дела",
@@ -332,7 +331,6 @@ func Dup1() Screen {
 												Mark:    w.Mark{Colour: "#4A6B52"},
 												Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 												Excerpt: "Кляйн, глава 5; статья Шапиро 2011…",
-												Tags:    []w.RowTag{w.Tag{Label: "книги"}},
 												Date:    "8 Aug",
 												Source:  "nextcloud · Записи",
 												Inset:   true,
@@ -520,10 +518,10 @@ func Dup2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -532,18 +530,18 @@ func Dup2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "1"},
-						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "0"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -557,7 +555,7 @@ func Dup2() Screen {
 						Items: []w.DialogPart{
 							w.Head{
 								Title: &w.HeadTitle{Text: "Merge on the server"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Артём Белов · 2 records")}}},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
@@ -568,10 +566,16 @@ func Dup2() Screen {
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "Kept and rewritten"},
+									w.Rubric{Text: "Where the merged record stays"},
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "nextcloud · Архив", Href: "/app/duplicates/merge?group=g1&keep=1", On: true},
+											{Label: "nextcloud · Контакты", Href: "/app/duplicates/merge?group=g1&keep=2"},
+										},
+									},
 									w.CardText{
 										Kind:  w.CardLine,
-										Parts: []w.CardTextPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}},
+										Parts: []w.CardTextPart{w.Dim{Parts: []w.Inline{w.Text("Вера Лебедева there is rewritten with the values you chose.")}}},
 									},
 								},
 								Variant: w.CardApart,
@@ -581,21 +585,20 @@ func Dup2() Screen {
 									w.Rubric{Text: "Deleted afterwards"},
 									w.CardText{
 										Kind:  w.CardLine,
-										Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Архив")}}},
+										Parts: []w.CardTextPart{w.Text("Лебедева Вера "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}},
 									},
 								},
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "The kept record gains"},
-									w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from nextcloud · Архив)"}},
+									w.Rubric{Text: "The record that stays gains"},
+									w.CardList{Items: []string{"EMAIL;TYPE=work: v.lebedeva@example.org", "PHOTO (from nextcloud · Контакты)"}},
 								},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write the merge and delete the rest", Kind: w.ButtonDangerSolid},
 									w.Button{Label: "Cancel"},
-									w.Button{Label: "Keep Белов Артём instead", Place: w.Pushed},
 								},
 								Variant: w.FormFootNoRule,
 							},
@@ -623,10 +626,10 @@ func Dup4() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -635,18 +638,18 @@ func Dup4() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "1"},
-						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "0"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -671,10 +674,18 @@ func Dup4() Screen {
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "Kept and rewritten"},
+									w.Rubric{Text: "Where the merged record stays"},
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "nextcloud · Работа", Href: "/app/duplicates/merge?group=g2&keep=1", On: true},
+											{Label: "radicale · vps · Дежурства", Href: "/app/duplicates/merge?group=g2&keep=2"},
+										},
+									},
 									w.CardText{
-										Kind:  w.CardLine,
-										Parts: []w.CardTextPart{w.Text("Дежурство: первая линия "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Работа")}}},
+										Kind: w.CardLine,
+										Parts: []w.CardTextPart{
+											w.Dim{Parts: []w.Inline{w.Text("Дежурство: первая линия there is rewritten with the values you chose.")}},
+										},
 									},
 								},
 								Variant: w.CardApart,
@@ -690,7 +701,7 @@ func Dup4() Screen {
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "The kept record gains"},
+									w.Rubric{Text: "The record that stays gains"},
 									w.CardList{Items: []string{"2 reminders from the others"}},
 								},
 							},
@@ -708,7 +719,6 @@ func Dup4() Screen {
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write the merge and delete the rest", Kind: w.ButtonDangerSolid},
 									w.Button{Label: "Cancel"},
-									w.Button{Label: "Keep the radicale · vps copy instead", Place: w.Pushed},
 								},
 								Variant: w.FormFootNoRule,
 							},
@@ -736,10 +746,10 @@ func Dup5() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -748,18 +758,18 @@ func Dup5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "1"},
-						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "0"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -773,12 +783,12 @@ func Dup5() Screen {
 						Items: []w.DialogPart{
 							w.Head{
 								Title: &w.HeadTitle{Text: "Merge on the server"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Артём Белов · 2 records")}}},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Strong("Written, but not every other record was deleted."),
-									w.Text(" The merge was written and 0 records deleted; Белов Артём refused, and the rest were not tried. Nothing is undone."),
+									w.Text(" The merge was written and 0 records deleted; Лебедева Вера refused, and the rest were not tried. Nothing is undone."),
 								},
 								Tone:  w.MsgAlert,
 								Space: w.MsgFlushSides,
@@ -788,8 +798,8 @@ func Dup5() Screen {
 									w.Rubric{Text: "What happened"},
 									w.CardList{
 										Items: []string{
-											"Kept and rewritten: Артём Белов · nextcloud · Контакты",
-											"Still there: Белов Артём · nextcloud · Архив",
+											"Kept and rewritten: Вера Лебедева · nextcloud · Архив",
+											"Still there: Лебедева Вера · nextcloud · Контакты",
 										},
 									},
 								},

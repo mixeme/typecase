@@ -326,6 +326,18 @@ func Phone4() Screen {
 							},
 						},
 					},
+					w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.PhoneRow{
+								Mark:   &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar: &w.Avatar{Photo: true, Size: w.Avatar34},
+								Title:  "Лебедева Вера",
+								Sub:    []w.Inline{w.Text("v.lebedeva@example.org")},
+								Aside:  "Контакты",
+							},
+						},
+					},
 					w.BottomNav{
 						Items: []w.BottomItem{
 							{Icon: "con", Label: "Contacts", Href: "#"},
@@ -524,10 +536,10 @@ func Phone8() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -540,7 +552,7 @@ func Phone8() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "3",
+							Meta:    "4",
 							Current: true,
 						},
 					},
@@ -549,7 +561,7 @@ func Phone8() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -604,7 +616,6 @@ func Phone8() Screen {
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:  true,
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
@@ -613,7 +624,6 @@ func Phone8() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -648,10 +658,10 @@ func Phone9() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -664,7 +674,7 @@ func Phone9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "3",
+							Meta:    "4",
 							Current: true,
 						},
 					},
@@ -673,7 +683,7 @@ func Phone9() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -716,7 +726,6 @@ func Phone9() Screen {
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:  true,
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
@@ -725,7 +734,6 @@ func Phone9() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:    []w.RowTag{w.Tag{Label: "книги"}},
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -750,7 +758,7 @@ func Phone9() Screen {
 											Kind:    w.TickRowAll,
 											Mark:    w.Mark{Kind: w.MarkMulti},
 											Label:   "Combined notebook",
-											Meta:    "3",
+											Meta:    "4",
 											Current: true,
 										},
 									},
@@ -759,7 +767,7 @@ func Phone9() Screen {
 									Items: []w.RailSecPart{
 										w.Rubric{Text: "nextcloud"},
 										w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 										w.TickRow{
 											Ticked: w.TickedOff,
 											Mark:   w.Mark{Colour: "#3F6E8C"},

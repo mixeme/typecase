@@ -280,6 +280,8 @@ select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-grad
 .tc-field > .tc-seg,.tc-form > .tc-seg,.tc-fset > .tc-seg{height:28px}
 /* Переключатель в поле — по своим вариантам, не во всю ширину поля. */
 .tc-field > .tc-seg{align-self:flex-start}
+/* Переключатель в карточке — своей ширины и на телефоне, где карточка ставит части столбцом. */
+.tc-card > .tc-seg{align-self:flex-start}
 :where(div,span,label,p):has(> .tc-in) > .tc-btn,
 :where(div,span,label,p):has(> .tc-in) > .tc-seg,
 :where(div,span,label,p):has(> .tc-field) > .tc-btn,
@@ -358,6 +360,8 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-row--cols > .tc-col--org{flex:.9 1 110px;min-width:0}
 .tc-row--cols > .tc-col--birthday{width:84px}
 .tc-row--cols > .tc-col--tags{flex:.8 1 100px;min-width:0}
+/* Столбец тегов показывает первый тег и считает остальные; все — в подсказке ячейки (Р-53). */
+.tc-row__tags > .tc-row__more{margin-left:5px;color:var(--tc-dusty)}
 .tc-row--cols > .tc-col--changed{width:96px}
 .tc-row--cols > .tc-col--source{width:140px}
 .tc-row--cols > .tc-col--due{width:96px}
@@ -375,13 +379,13 @@ a.tc-row__title:hover{text-decoration:underline}
 /* Упоминание карточки, которой в отмеченных книгах нет: имя, не ссылка. */
 .tc-mention.is-lost{color:var(--tc-dusty);text-decoration:underline dotted;text-underline-offset:2px}
 .tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
-.tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px 140px}
-.tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px 140px}
+.tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) 84px 44px 140px}
+.tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) 80px 140px}
 /* Список одной коллекции: источника у строки нет — нет и его столбца. */
 .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr)}
 .tc-row--timecols.tc-row--single{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px}
-.tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(178px,2fr) minmax(90px,auto) 84px 44px}
-.tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) minmax(70px,auto) 80px}
+.tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(178px,2fr) 84px 44px}
+.tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) 80px}
 .tc-row--find{grid-template-columns:3px 76px minmax(208px,2.4fr) minmax(120px,1fr) 74px 140px}
 .tc-row--tickcols{grid-template-columns:16px minmax(208px,2.4fr) 90px 130px 60px 140px}
 .tc-row--phone{grid-template-columns:3px minmax(0,1fr) auto;align-items:center}
@@ -611,6 +615,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-doc__bullets .tc-doc__bullets.tc-doc__bullets{margin-top:6px;list-style:circle}
 /* Текст заметки в панели (задача 125): части текста отделены друг от друга, как абзацы. */
 .tc-sec > :is(.tc-doc__heading,.tc-doc__bullets,.tc-doc__quote,.tc-doc__code,.tc-doc__table){margin-top:10px}
+/* Абзац после списка дел отделён так же. */
+.tc-sec > .tc-doc__list + .tc-prose{margin-top:10px}
 .tc-doc__code.is-wrap{white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:visible}
 .tc-doc__tablebar{display:none;justify-content:flex-end;margin-bottom:6px}
 .tc-doc__scroll{overflow-x:auto;scrollbar-width:thin}
@@ -735,7 +741,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--timecols .tc-row__detail{display:none}
   .tc-row--find{grid-template-columns:3px 70px minmax(136px,2.4fr) 66px 140px}
   .tc-row--find .tc-row__detail{display:none}
-  .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(112px,2fr) minmax(60px,auto) 74px 140px}
+  .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(112px,2fr) 74px 140px}
   .tc-row--tickmarkcols .tc-row__progress{display:none}
   .tc-row--tickcols{grid-template-columns:16px minmax(176px,2.4fr) 84px 124px 140px}
   .tc-row--tickcols .tc-row__detail{display:none}
@@ -754,12 +760,12 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table--fit td.tc-mono,.tc-table--fit td .tc-mono{overflow-wrap:break-word}
   .tc-table--fit .tc-acts{justify-content:flex-start}
   .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
-  .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) minmax(70px,auto) 80px 140px}
+  .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) 80px 140px}
   .tc-row--excerpt > :nth-child(3){display:none}
   .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr)}
   .tc-row--timecols.tc-row--single{grid-template-columns:3px 60px minmax(116px,2fr) 88px}
-  .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(112px,2fr) minmax(60px,auto) 74px}
-  .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(116px,1.4fr) minmax(70px,auto) 80px}
+  .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(112px,2fr) 74px}
+  .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(116px,1.4fr) 80px}
 }
 @container tcbox (max-width:620px){
   .tc-row{padding-left:12px;padding-right:12px}
@@ -774,9 +780,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--find{grid-template-columns:3px 62px minmax(110px,2fr) 130px}
   .tc-row--find .tc-row__caption{display:none}
   .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(100px,2fr) 70px 130px}
-  .tc-row--tickmarkcols .tc-row__tags{display:none}
   .tc-row--excerpt{grid-template-columns:3px minmax(100px,1.4fr) 74px 130px}
-  .tc-row--excerpt .tc-row__tags{display:none}
   .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px}
   .tc-row--timecols.tc-row--single{grid-template-columns:3px 54px minmax(110px,1fr)}
   .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(100px,2fr) 70px}

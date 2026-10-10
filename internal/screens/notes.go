@@ -20,10 +20,10 @@ func Notes1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -36,7 +36,7 @@ func Notes1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "3",
+							Meta:    "4",
 							Current: true,
 						},
 					},
@@ -45,7 +45,7 @@ func Notes1() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -59,13 +59,7 @@ func Notes1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -110,7 +104,6 @@ func Notes1() Screen {
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:  true,
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
@@ -120,10 +113,9 @@ func Notes1() Screen {
 								Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:       []w.RowTag{w.Tag{Label: "книги"}},
 								Date:       "8 Aug",
 								Source:     "2 sources",
-								SourceHint: "nextcloud · Записи, radicale · vps · Дневник",
+								SourceHint: "nextcloud · Записи, nextcloud · Дневник",
 							},
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#6B4E7A"},
@@ -159,11 +151,18 @@ func Notes1() Screen {
 								},
 								Variant: w.ProseRead,
 							},
+							w.DocHeading{Text: "Что делаем"},
 							w.SecTasks{
 								Items: []w.DocTask{
 									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 									{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 								},
+							},
+							w.Prose{
+								Parts: []w.Inline{
+									w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг."),
+								},
+								Variant: w.ProseRead,
 							},
 						},
 					},
@@ -257,10 +256,10 @@ func Notes31() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -273,7 +272,7 @@ func Notes31() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
-							Meta:   "3",
+							Meta:   "4",
 						},
 					},
 				},
@@ -281,7 +280,7 @@ func Notes31() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -295,13 +294,7 @@ func Notes31() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{
-						w.Tag{Label: "all", On: true},
-						w.Tag{Label: "встречи"},
-						w.Tag{Label: "идеи"},
-						w.Tag{Label: "книги"},
-						w.Tag{Label: "рецепты"},
-					},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -345,7 +338,6 @@ func Notes31() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 								Date:    "10 Aug",
 								Single:  true,
 							},
@@ -354,7 +346,6 @@ func Notes31() Screen {
 								Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked, Title: "nextcloud · Записи, nextcloud · Дневник"},
 								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-								Tags:       []w.RowTag{w.Tag{Label: "книги"}},
 								Date:       "8 Aug",
 								Single:     true,
 							},
@@ -386,7 +377,7 @@ func Notes2() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -402,11 +393,9 @@ func Notes2() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -597,7 +586,7 @@ func Notes27() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -613,11 +602,9 @@ func Notes27() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -794,7 +781,7 @@ func Notes3() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -810,11 +797,9 @@ func Notes3() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -1006,7 +991,7 @@ func Notes20() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1022,11 +1007,9 @@ func Notes20() Screen {
 						w.Rubric{Text: "Neighbours"},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "note", Label: "Планы на осень"},
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"},
-							},
-							On:      2,
+								{Icon: "note", Label: "Что почитать про CRDT"}},
+							On:      1,
 							Variant: w.TreePadded,
 						},
 					},
@@ -1272,7 +1255,7 @@ func Notes30() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1650,10 +1633,10 @@ func Notes5() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 						},
 						On: 2,
@@ -1698,7 +1681,7 @@ func Notes5() Screen {
 								Kind:  w.TickRowExternal,
 								Mark:  w.Mark{Colour: "#8C6239"},
 								Label: "Праздники РФ",
-								Meta:  "0",
+								Meta:  "3",
 								Trail: w.Badge{Label: "ro"},
 							},
 							w.TickRow{
@@ -1936,10 +1919,10 @@ func Notes7() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -1985,7 +1968,7 @@ func Notes7() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -2110,10 +2093,10 @@ func Notes8() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -2159,7 +2142,7 @@ func Notes8() Screen {
 								Kind:  w.TickRowExternal,
 								Mark:  w.Mark{Colour: "#8C6239"},
 								Label: "Праздники РФ",
-								Meta:  "0",
+								Meta:  "3",
 								Trail: w.Badge{Label: "ro"},
 							},
 							w.TickRow{
@@ -2330,10 +2313,10 @@ func Notes9() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -2346,7 +2329,7 @@ func Notes9() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "5",
+								Meta:    "7",
 								Current: true,
 							},
 						},
@@ -2354,7 +2337,7 @@ func Notes9() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						},
 					},
@@ -2379,7 +2362,7 @@ func Notes9() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 5 cards")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}}},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
@@ -2437,6 +2420,20 @@ func Notes9() Screen {
 									Detail:   "vera@example.net",
 									Caption:  "—",
 									Source:   "nextcloud · Архив",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Лебедева Вера")},
+									Subtitle: "+7 905 331-09-42",
+									Detail:   "v.lebedeva@example.org",
+									Caption:  "Библиотека №4",
+									Source:   "nextcloud · Контакты",
 								},
 							},
 						},
@@ -2521,10 +2518,10 @@ func Notes10() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -2537,7 +2534,7 @@ func Notes10() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined notebook",
-								Meta:    "3",
+								Meta:    "4",
 								Current: true,
 							},
 						},
@@ -2546,7 +2543,7 @@ func Notes10() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 							w.TickRow{
 								Ticked: w.TickedOff,
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2560,13 +2557,7 @@ func Notes10() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Tags"}},
-						Tags: []w.Tag{
-							w.Tag{Label: "all", On: true},
-							w.Tag{Label: "встречи"},
-							w.Tag{Label: "идеи"},
-							w.Tag{Label: "книги"},
-							w.Tag{Label: "рецепты"},
-						},
+						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
 					},
 					w.RailFoot{
 						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
@@ -2588,7 +2579,6 @@ func Notes10() Screen {
 									Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 									Strong:  true,
 									Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-									Tags:    []w.RowTag{w.Tag{Label: "встречи"}},
 									Date:    "10 Aug",
 									Source:  "nextcloud · Записи",
 									On:      true,
@@ -2598,10 +2588,9 @@ func Notes10() Screen {
 									Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
-									Tags:       []w.RowTag{w.Tag{Label: "книги"}},
 									Date:       "8 Aug",
 									Source:     "2 sources",
-									SourceHint: "nextcloud · Записи, radicale · vps · Дневник",
+									SourceHint: "nextcloud · Записи, nextcloud · Дневник",
 								},
 								w.ExcerptRow{
 									Mark:    w.Mark{Colour: "#6B4E7A"},
@@ -2680,10 +2669,10 @@ func Notes11() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -2729,7 +2718,7 @@ func Notes11() Screen {
 								Kind:  w.TickRowExternal,
 								Mark:  w.Mark{Colour: "#8C6239"},
 								Label: "Праздники РФ",
-								Meta:  "0",
+								Meta:  "3",
 								Trail: w.Badge{Label: "ro"},
 							},
 							w.TickRow{

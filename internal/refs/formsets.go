@@ -47,7 +47,7 @@ var _ = add(
 	// tc-formfoot
 	form("flush", w.FormFoot{Variant: w.FormFootFlush, Items: footItems(bt, bt, w.Push{})}, "s-contacts-5", "tc-formfoot", 1),
 	form("plain", w.FormFoot{Items: footItems(w.Dim{})}, "s-contacts-3", "tc-formfoot", 1),
-	form("no-rule", w.FormFoot{Variant: w.FormFootNoRule, Items: footItems(bt, bt, w.Button{Label: "x", Place: w.Pushed})}, "s-dup-2", "tc-formfoot", 1),
+	form("no-rule", w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Write the merge and delete the rest", Kind: w.ButtonDangerSolid}, w.Button{Label: "Cancel"}}, Variant: w.FormFootNoRule}, "s-dup-2", "tc-formfoot", 1),
 	form("wrap", w.FormFoot{Variant: w.FormFootWrap, Items: footItems(bt, bt, bt, bt)}, "s-conflict-1", "tc-formfoot", 1),
 	form("no-rule", w.FormFoot{Variant: w.FormFootNoRule, Items: footItems(bt, bt)}, "s-dup-5", "tc-formfoot", 1),
 	form("flush", w.FormFoot{Variant: w.FormFootFlush, Items: footItems(bt, w.Span{Face: w.FaceAccent12, Text: "Already have an account? Sign in"})}, "s-auth-2", "tc-formfoot", 1),

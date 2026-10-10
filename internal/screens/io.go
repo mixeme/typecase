@@ -21,10 +21,10 @@ func Io1() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -37,14 +37,14 @@ func Io1() Screen {
 								Kind:   w.TickRowAll,
 								Mark:   w.Mark{Kind: w.MarkMulti},
 								Label:  "Combined address book",
-								Meta:   "5",
+								Meta:   "7",
 							},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						},
 					},
@@ -175,10 +175,10 @@ func Io2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -224,7 +224,7 @@ func Io2() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
@@ -440,7 +440,7 @@ func Io3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -539,7 +539,7 @@ func Io4() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -667,7 +667,7 @@ func Io5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},
@@ -908,7 +908,7 @@ func Io7() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -1041,7 +1041,7 @@ func Io8() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1177,7 +1177,7 @@ func Io9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 					},
 				},

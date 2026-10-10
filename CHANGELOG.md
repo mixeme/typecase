@@ -8,6 +8,14 @@ do, not what the authors did.
 
 ### Breaking
 
+- `DueRow.Tags` and `ExcerptRow.Tags` are gone: a row of a list has no tags
+  by default in any kind (the owner's decision of 10.10, Р-53) — they stand
+  in the record's panel and in the rail. Tags in a row are the column a
+  person turns on: `ColumnRow` with `ColumnTags`, whose cell now shows the
+  first of `ColumnCell.Tags` and counts the rest («работа +1»), naming them
+  all in its hint. Pass all the record's tags; put the one the list is
+  filtered by first. The grids of `tc-row--tickmarkcols` and
+  `tc-row--excerpt` have no tags column.
 - `RailFoot` has no state «about» any more: no frame draws a rail foot of
   the build line alone since the duplicates frames got the davloom mark
   (Carrel's task 136). The widget prints what it printed.

@@ -1,6 +1,9 @@
 package widget
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 // A row of a list is laid out in columns, and the frames draw nine sets of
 // them. Each set is a type of its own, so a row gets exactly the cells its
@@ -105,16 +108,6 @@ func source(text, hint string, badge *Badge, single ...bool) string {
 	return s + `</span>`
 }
 
-func tags(items []RowTag, inLink bool) string {
-	var s strings.Builder
-	s.WriteString(`<span class="tc-row__cell tc-row__tags">`)
-	for _, t := range items {
-		s.WriteString(rowTagHTML(t, inLink))
-	}
-	s.WriteString(`</span>`)
-	return s.String()
-}
-
 // rowTagHTML prints a tag of a row; in a row that is a link itself a tag
 // is words, not a link inside a link (HTML has none).
 func rowTagHTML(t RowTag, inLink bool) string {
@@ -123,6 +116,17 @@ func rowTagHTML(t RowTag, inLink bool) string {
 		return tg.html(nil)
 	}
 	return t.html(nil)
+}
+
+// rowTagLabel is the words of a tag of a row.
+func rowTagLabel(t RowTag) string {
+	switch v := t.(type) {
+	case Tag:
+		return v.Label
+	case Badge:
+		return v.Label
+	}
+	return ""
 }
 
 // inset is the variant of a row set in a card: 14 px at the sides.
@@ -299,21 +303,20 @@ func (r LinkedRow) html(m mix) string {
 
 // ExcerptRow — tc-row
 //
-// Роль. Строка текста: название, начало текста, теги, дата, источник.
-// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Tags, Date, Source, SourceHint, On, Inset, Single, Href}.
+// Роль. Строка текста: название, начало текста, дата, источник.
+// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Date, Source, SourceHint, On, Inset, Single, Href}.
 // Состояния. plain | on | badge | inset | found | link.
 // Инварианты. Колонки строки — её тип; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает текст; стрелки ходят по строкам списка.
 // Эталон. кадр `s-notes-1`, фрагмент `.tc-row`.
-// Содержимое. Метка, название (с найденным жирным и бейджем), начало текста, теги и бейджи, дата моноширинным, источник (с подсказкой, когда их несколько).
-// Чего нет. Всего текста: строка показывает начало, текст открывается.
+// Содержимое. Метка, название (с найденным жирным и бейджем), начало текста, дата моноширинным, источник (с подсказкой, когда их несколько).
+// Чего нет. Всего текста: строка показывает начало, текст открывается. Тегов: они в панели записи и в рейле, в строке — столбцом, который включил человек (ColumnRow, Р-53).
 type ExcerptRow struct {
 	Mark       Mark
 	Title      []Inline
 	Strong     bool
 	TitleBadge *Badge
 	Excerpt    string
-	Tags       []RowTag
 	Date       string
 	Source     string
 	SourceHint string // the sources in full when there are several
@@ -328,7 +331,7 @@ func (r ExcerptRow) Render() string { return r.html(nil) }
 
 func (r ExcerptRow) html(m mix) string {
 	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
-		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") + tags(r.Tags, r.Href != "") +
+		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") +
 		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil, r.Single) + `</` + rowTag(r.Href) + `>`
 }
 
@@ -361,21 +364,20 @@ func (r BriefRow) html(m mix) string {
 
 // DueRow — tc-row
 //
-// Роль. Строка дела: галка, название, теги, срок, сколько сделано, источник.
-// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Tags, Due, Progress, Source, SourceHint, On, Overdue, Inset, Single, Href}.
+// Роль. Строка дела: галка, название, срок, сколько сделано, источник.
+// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Due, Progress, Source, SourceHint, On, Overdue, Inset, Single, Href}.
 // Состояния. plain | on | overdue | done | inset | found | sign.
 // Инварианты. Сделано ли дело, говорит одна галка: строка берёт это из неё; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка отмечает дело сделанным; нажатие на строку открывает его; в списке только для чтения галка — знак (Tick.Sign): дело не отметить.
 // Эталон. кадр `s-tasks-1`, фрагмент `.tc-row`.
-// Содержимое. Галка, метка, название (с найденным жирным и бейджем), теги, срок и доля моноширинным, источник.
-// Чего нет. Подзадач: они — в панели дела.
+// Содержимое. Галка, метка, название (с найденным жирным и бейджем), срок и доля моноширинным, источник.
+// Чего нет. Подзадач: они — в панели дела. Тегов: они в панели дела и в рейле, в строке — столбцом, который включил человек (ColumnRow, Р-53).
 type DueRow struct {
 	Tick       Tick
 	Mark       Mark
 	Title      []Inline
 	Strong     bool
 	TitleBadge *Badge
-	Tags       []RowTag
 	Due        string
 	Progress   string
 	Source     string
@@ -394,7 +396,7 @@ func (r DueRow) Render() string { return r.html(nil) }
 
 func (r DueRow) html(m mix) string {
 	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset), pick(r.Single, "tc-row--single")) + `>` +
-		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Title, r.Strong, r.TitleBadge) + tags(r.Tags, false) +
+		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Due, "tc-mono", "tc-row__due") + cell(r.Progress, "tc-row__cell", "tc-mono", "tc-row__progress") +
 		source(r.Source, r.SourceHint, nil, r.Single) + `</div>`
 }
@@ -594,7 +596,10 @@ func (c Column) class() string {
 }
 
 // ColumnCell is a cell of a row of chosen columns: its column and what it
-// shows — words, or tags in the tags column.
+// shows — words, or tags in the tags column. Tags are all the record's
+// tags: the cell shows the first and counts the rest («работа +1»), its
+// hint names them all (Р-53). The one a person filters by goes first — the
+// consumer puts it there.
 type ColumnCell struct {
 	Column Column
 	Text   string
@@ -609,7 +614,7 @@ type ColumnCell struct {
 // Инварианты. Столбцы ровны: у всех строк списка один набор в одном порядке; ширина столбца и ступень, на которой он уходит, — его рода; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным.
 // Эталон. кадр `s-contacts-23`, фрагмент `.tc-row--cols`.
-// Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, теги.
+// Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, первый тег со счётчиком остальных.
 // Чего нет. Своих ширин: столбец задаёт род, а не данные строки.
 type ColumnRow struct {
 	Tick    *Tick // a task's tick, before the mark
@@ -648,10 +653,21 @@ func (r ColumnRow) html(m mix) string {
 		if c.Column == ColumnName && row == "" && r.Href != "" {
 			tag = "a"
 		}
-		s.WriteString(`<` + tag + ` class="` + cls + `"` + attr("href", pick(tag == "a", r.Href)) + `>`)
-		if c.Column == ColumnTags {
+		hint := ""
+		if c.Column == ColumnTags && len(c.Tags) > 1 {
+			var all []string
 			for _, t := range c.Tags {
-				s.WriteString(rowTagHTML(t, row != ""))
+				all = append(all, rowTagLabel(t))
+			}
+			hint = strings.Join(all, ", ")
+		}
+		s.WriteString(`<` + tag + ` class="` + cls + `"` + attr("href", pick(tag == "a", r.Href)) + attr("title", hint) + `>`)
+		if c.Column == ColumnTags {
+			if len(c.Tags) > 0 {
+				s.WriteString(rowTagHTML(c.Tags[0], row != ""))
+			}
+			if n := len(c.Tags) - 1; n > 0 {
+				s.WriteString(`<span class="tc-row__more">+` + strconv.Itoa(n) + `</span>`)
 			}
 		} else {
 			s.WriteString(esc(c.Text))

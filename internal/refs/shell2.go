@@ -44,7 +44,7 @@ var _ = add(
 	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026 · the page is read from the server on every visit")}}}, Pad: w.HeadPadBottom8}, "s-publish-6", "tc-head", 1),
 	shell("crumbs", w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}}, Pad: w.HeadPadBottom8}, "s-publish-12", "tc-head", 1),
 	shell("avatar", w.Head{Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar44}, Kicker: &w.Rubric{Text: "Mentions", Variant: w.RubricBottom2}, Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Where she is named, not where she takes part · the timeline has that")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Write a note", Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "Timeline", Icon: "all"}}}, Pad: w.HeadPadBottom10}, "mentions-2", "tc-head", 1),
-	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 2 cards · the server granted no write access")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}}, "states-4", "tc-head", 1),
+	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 1 card · the server granted no write access")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}}, "states-4", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("shown from this session’s memory")}}}}, "states-5", "tc-head", 1),
 	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}}}, Pad: w.HeadPadBottom8}, "phone-3", "tc-head", 1),
 	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Application", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Account and collection settings are inside, in Settings")}}}, Pad: w.HeadPadBottom6}, "desktop-13", "tc-head", 1),
@@ -90,8 +90,8 @@ var _ = add(
 		w.Bar{Items: []w.BarPart{w.Input{Kind: w.InputSearch, Placeholder: "Filter by word", Variant: w.InputH26W200, Label: "Filter by word"}, w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}}, w.Button{Label: "Columns", Icon: "cols"}}, Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "86"}}, Secondary: true}},
 		w.ListGroup{Title: w.Rubric{Text: "August 2026"}, Count: &w.Num{Value: 9}},
 		w.List{Rows: []w.ListRow{
-			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Strong: true, Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи", On: true},
-			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…", Tags: []w.RowTag{w.Tag{Label: "книги"}}, Date: "8 Aug", Source: "2 sources", SourceHint: "nextcloud · Записи, radicale · vps · Дневник"},
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Strong: true, Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…", Date: "10 Aug", Source: "nextcloud · Записи", On: true},
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…", Date: "8 Aug", Source: "2 sources", SourceHint: "nextcloud · Записи, radicale · vps · Дневник"},
 			w.ExcerptRow{Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Про дорогу до дачи")}, Excerpt: "Съезд после заправки, потом грунтовка два километра…", Date: "3 Aug", Source: "nextcloud · Дневник"}}}}}, "s-notes-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "up"}, w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}}}},
@@ -163,12 +163,12 @@ var _ = add(
 			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link", Submit: true}, w.Button{Label: "Not duplicates", Name: "op", Value: "not", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g2"}, w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Собрать чемодан", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, w.Mono{Text: "70 points · same title, same due date", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
-				w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Tags: []w.RowTag{w.Tag{Label: "дом"}}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
+				w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
 				w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug", Progress: "—", Source: "radicale · vps · Личное", Inset: true}}, Inset: true},
 			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g3"}, w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Что почитать про CRDT", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, w.Mono{Text: "70 points · same title, same date", Variant: w.MonoTightDusty}}}}},
 			w.List{Rows: []w.ListRow{
-				w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Tags: []w.RowTag{w.Tag{Label: "книги"}}, Date: "8 Aug", Source: "nextcloud · Записи", Inset: true},
+				w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Date: "8 Aug", Source: "nextcloud · Записи", Inset: true},
 				w.ExcerptRow{Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Date: "8 Aug", Source: "radicale · vps · Дневник", Inset: true}}, Inset: true},
 			w.CardHint{Parts: []w.CardTextPart{w.Text("Same title and the same date: a note copied into a second notebook. Linked, the two are shown as one row; merging writes one and deletes the other.")}, Line: true},
 			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g4"}, w.Card{Items: []w.CardPart{
@@ -247,10 +247,10 @@ var _ = add(
 			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "15:00", Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Detail: "Zoom", Source: "nextcloud · Личный", Short: true}}},
 		w.ListGroup{Title: w.Rubric{Text: "Tasks", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#3F6E8C"}, Title: []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")}, Tags: []w.RowTag{w.Tag{Label: "релиз"}}, Due: "12 Aug", Progress: "40%", Source: "nextcloud · Работа"}}},
+			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#3F6E8C"}, Title: []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")}, Due: "12 Aug", Progress: "40%", Source: "nextcloud · Работа"}}},
 		w.ListGroup{Title: w.Rubric{Text: "Notes", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")}, Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…", Tags: []w.RowTag{w.Tag{Label: "встречи"}}, Date: "10 Aug", Source: "nextcloud · Записи"}}},
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")}, Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…", Date: "10 Aug", Source: "nextcloud · Записи"}}},
 		w.ListGroup{Title: w.Rubric{Text: "Files", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
 			w.SizeRow{Ticked: w.TickedOff, Icon: "doc", Name: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")}, Bytes: "240 KB", Time: "2026-08-04 11:20", Access: "rw", Source: "sftpgo · vps · Documents"},
@@ -438,14 +438,18 @@ var _ = add(
 			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Мария Лебедева", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Анна Ковалёва", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "Артём Белов", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Columns: true}}},
 		w.FootActs{Items: []w.Button{w.Button{Label: "Write a note"}, w.Button{Label: "Delete", Kind: w.ButtonDangerSolid}}}}}, "phone-3", "tc-main", 1),
 	shell("phone", w.Main{Items: []w.MainPart{
-		w.ListGroup{Title: w.Rubric{Text: "А"}, Count: &w.Num{Value: 3}},
+		w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 		w.List{Rows: []w.ListRow{
 			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar34}, Title: "Анна Ковалёва", Sub: []w.Inline{w.Text("+7 912 445-10-88")}, SubMono: true, Aside: "Контакты"},
 			w.PhoneRow{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH34}, Avatar: &w.Avatar{Photo: true, Size: w.Avatar34}, Title: "Артём Белов", TitleBadge: &w.Badge{Label: "×2", Tone: w.BadgeLinked}, Sub: []w.Inline{w.Text("+7 903 118-22-04")}, SubMono: true, Aside: "Команда"},
 			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "АС", Size: w.Avatar34}, Title: "Алексей Смирнов", Sub: []w.Inline{w.Text("+7 916 200-71-15")}, SubMono: true, Aside: "Контакты"}}},
-		w.ListGroup{Title: w.Rubric{Text: "В"}, Count: &w.Num{Value: 2}},
+		w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
-			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34}, Title: "Виктор Гончаров", Sub: []w.Inline{w.Text("v.goncharov@example.org")}, Aside: "Контакты"}}},
+			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34}, Title: "Виктор Гончаров", Sub: []w.Inline{w.Text("v.goncharov@example.org")}, Aside: "Контакты"},
+			w.PhoneRow{Mark: &w.Mark{Colour: "#A05A2C", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "ВЛ", Size: w.Avatar34}, Title: "Вера Лебедева", Sub: []w.Inline{w.Text("vera@example.net")}, Aside: "Архив"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Photo: true, Size: w.Avatar34}, Title: "Лебедева Вера", Sub: []w.Inline{w.Text("v.lebedeva@example.org")}, Aside: "Контакты"}}},
 		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 1}}}, "phone-4", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Person{Initials: "АК", Name: "Анна Ковалёва", Sub: "Издательство «Слово»", Badge: &w.Badge{Label: "in 2 books", Tone: w.BadgeLinked}, Acts: []w.Button{w.Button{Label: "Call"}, w.Button{Label: "Email"}, w.Button{Icon: "quill", Title: "More"}}},

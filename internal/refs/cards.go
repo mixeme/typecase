@@ -37,7 +37,7 @@ var _ = add(
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-contacts-2", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.")}, Space: w.MsgFlushTop2}, "s-files-4", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 11 of 12 records."), w.Text(" «Планёрка редакции» was refused: its organiser’s server does not take changes to attendees. 2 records in Shared are read-only and keep the old address.")}, Tone: w.MsgAlert}, "s-contacts-16", "tc-msg", 1),
-	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Written, but not every other record was deleted."), w.Text(" The merge was written and 0 records deleted; Белов Артём refused, and the rest were not tried. Nothing is undone.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-dup-5", "tc-msg", 1),
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Written, but not every other record was deleted."), w.Text(" The merge was written and 0 records deleted; Лебедева Вера refused, and the rest were not tried. Nothing is undone.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-dup-5", "tc-msg", 1),
 	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent}, "s-dup-6", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send: until this address is confirmed, they go out without a reply address and say so at the foot. "), w.Button{Label: "Send confirmation", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "s-mail-9", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Nobody can reply to letters you send until you open the link we sent to "), w.Mono{Text: "mix@example.org"}, w.Text(" on 12 February at 11:42. "), w.Button{Label: "Send again", Small: true}}, Tone: w.MsgAlert, Space: w.MsgFlushTop4}, "account-9", "tc-msg", 1),
@@ -86,12 +86,12 @@ var _ = add(
 	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
-	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polled 2 of 3 sources · 5 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}}}, "states-8", "tc-runbar", 1),
+	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polling · 2 of 3 answered · 6 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}}}, "states-8", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 6 events · "), w.Drop{Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280", Size: w.MarkH11}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}}, w.Mono{Text: "from cache · 2 min ago", Place: w.Pushed}}}, "dark-1", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 14 events"), w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "components-16", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 80}, Parts: []w.RunbarPart{w.Text("Looked in 5 of 7 sources · "), w.Span{Face: w.FaceDanger, Text: "baikal · Общий unavailable"}, w.Text(" · radicale · vps · Архив does not keep links")}}, "mentions-5", "tc-runbar", 1),
-	cards("stop", w.Runbar{Meter: w.Meter{Percent: 71}, Parts: []w.RunbarPart{w.Text("Polled 5 of 7 sources · 12 records · 1 unavailable"), w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true}}}}}, "components-22", "tc-runbar", 1),
+	cards("stop", w.Runbar{Meter: w.Meter{Percent: 71}, Parts: []w.RunbarPart{w.Text("Polling · 5 of 7 answered · 12 records · 1 unavailable"), w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true}}}}}, "components-22", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 calendars · matched by "), w.Mono{Text: "a.kovaleva@example.org"}, w.Text(", "), w.Mono{Text: "anna.kovaleva@slovo.example"}, w.Text(" and the name · "), w.Drop{Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280", Size: w.MarkH11}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}}, Width: w.MenuWidth420, Pop: w.MenuUnderEnd}}, w.Mono{Text: "2 min ago", Place: w.Pushed}}}, "s-contacts-7", "tc-runbar", 1),
 	cards("plain", w.Runbar{Meter: w.Meter{Percent: 83, Alert: true}, Parts: []w.RunbarPart{w.Text("Polled 5 of 6 sources · 6 events · "), w.Drop{Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
@@ -340,7 +340,9 @@ var _ = add(
 		w.SecHint{Text: "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.", Apart: true}}}, "s-tasks-1", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseRead},
-		w.SecTasks{Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}}}}, "s-notes-1", "tc-sec", 1),
+		w.DocHeading{Text: "Что делаем"},
+		w.SecTasks{Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
+		w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseRead}}}, "s-notes-1", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attachments"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "2026-08-10-sync-board.png", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("image/png · 412 KB")}}, w.Text(" "), w.Badge{Label: "in the note"}}, []w.SecItemPart{w.Link{Text: "запись-встречи.m4a", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("audio/mp4 · 24 MB")}}, w.Text(" "), w.Badge{Label: "Documents / carrel"}}}, Gap: 6}}}, "s-notes-1", "tc-sec", 2),
@@ -422,11 +424,12 @@ var _ = add(
 		w.CardHint{Parts: []w.CardTextPart{w.Text("The same duty in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.")}, Line: true},
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"}, w.Button{Label: "Not duplicates", Name: "op", Value: "not"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"}}}}, Action: "/app/duplicates/g2"}, "s-dup-1", "tc-card", 2),
 	cards("apart", w.Card{Items: []w.CardPart{
-		w.Rubric{Text: "Kept and rewritten"},
-		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}}}, Variant: w.CardApart}, "s-dup-2", "tc-card", 1),
+		w.Rubric{Text: "Where the merged record stays"},
+		w.Seg{Options: []w.SegOption{{Label: "nextcloud · Архив", Href: "/app/duplicates/merge?group=g1&keep=1", On: true}, {Label: "nextcloud · Контакты", Href: "/app/duplicates/merge?group=g1&keep=2"}}},
+		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Dim{Parts: []w.Inline{w.Text("Вера Лебедева there is rewritten with the values you chose.")}}}}}, Variant: w.CardApart}, "s-dup-2", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Deleted afterwards"},
-		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Белов Артём "), w.Dim{Parts: []w.Inline{w.Text("· radicale · vps · Команда")}}}}}}, "s-dup-2", "tc-card", 2),
+		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("Лебедева Вера "), w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}}}}, "s-dup-2", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "The kept record gains"},
 		w.CardList{Items: []string{"2 reminders from the others"}}}}, "s-dup-4", "tc-card", 3),
@@ -465,7 +468,7 @@ var _ = add(
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Собрать чемодан", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, w.Mono{Text: "70 points · same title, same due date", Variant: w.MonoTightDusty}}}}},
 		w.List{Rows: []w.ListRow{
-			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Tags: []w.RowTag{w.Tag{Label: "дом"}}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
+			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true},
 			w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug", Progress: "—", Source: "radicale · vps · Личное", Inset: true}}, Inset: true},
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "op", Value: "unlink", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/g3"}, "s-dup-1", "tc-card", 3),
 	cards("plain", w.Card{Items: []w.CardPart{
@@ -484,10 +487,10 @@ var _ = add(
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "op", Value: "offer"}}}}, Action: "/app/duplicates/g6"}, "s-dup-1", "tc-card", 6),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "The kept record gains"},
-		w.CardList{Items: []string{"EMAIL;TYPE=work: belov@team.example", "PHOTO (from nextcloud · Архив)"}}}}, "s-dup-2", "tc-card", 3),
+		w.CardList{Items: []string{"EMAIL;TYPE=work: v.lebedeva@example.org", "PHOTO (from nextcloud · Контакты)"}}}}, "s-dup-2", "tc-card", 3),
 	cards("apart", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "What happened"},
-		w.CardList{Items: []string{"Kept and rewritten: Артём Белов · nextcloud · Контакты", "Still there: Белов Артём · nextcloud · Архив"}}}, Variant: w.CardApart}, "s-dup-5", "tc-card", 1),
+		w.CardList{Items: []string{"Kept and rewritten: Вера Лебедева · nextcloud · Архив", "Still there: Лебедева Вера · nextcloud · Контакты"}}}, Variant: w.CardApart}, "s-dup-5", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
 		w.Field{Label: "vCard file", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},

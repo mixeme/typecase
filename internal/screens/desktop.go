@@ -20,10 +20,10 @@ func Desktop1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 					},
 					On: 2,
@@ -68,7 +68,7 @@ func Desktop1() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
-							Meta:  "0",
+							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
 						w.TickRow{
