@@ -181,7 +181,7 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "last used", Variant: w.Mono10Dusty}, "components-6", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5Dusty}, "s-profile-1", "tc-mono", 5),
 	primitive("variant", w.Mono{Text: "412 KB", Variant: w.MonoMuted}, "components-16", "tc-mono", 1),
-	primitive("variant", w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 3),
+	primitive("variant", w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 3),
 	primitive("variant", w.Mono{Text: "5", Variant: w.MonoDusty11}, "components-21", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "1.6×", Variant: w.Mono11Dusty}, "s-contacts-5", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: "12.4 MB", Variant: w.MonoDusty}, "components-26", "tc-mono", 1),

@@ -20,10 +20,10 @@ func Dup1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 3}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
 						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 					},
@@ -32,18 +32,18 @@ func Dup1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "12 / 12", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "5"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "1"},
-						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "0"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -55,7 +55,7 @@ func Dup1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Duplicates"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("21 records compared · 2 to look at")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("27 records compared · 2 to look at")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{
@@ -91,37 +91,34 @@ func Dup1() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
-										Text: "Артём Белов",
+										Text: "Вера Лебедева",
 										Items: []w.RubricPart{
 											w.RubricAside{
-												Text: "",
-												Items: []w.RubricAsidePart{
-													w.Badge{Label: "candidate ×2"},
-													w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty},
-												},
+												Text:  "",
+												Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}},
 											},
 										},
 									},
 									w.List{
 										Rows: []w.ListRow{
 											w.FaceRow{
-												Mark:     w.Mark{Colour: "#4A6B52"},
-												Avatar:   w.Avatar{Initials: "АБ"},
-												Title:    []w.Inline{w.Text("Артём Белов")},
-												Subtitle: "+7 903 118-22-04",
-												Detail:   "a.belov@example.org",
-												Caption:  "Тензор",
-												Source:   "nextcloud · Контакты",
+												Mark:     w.Mark{Colour: "#A05A2C"},
+												Avatar:   w.Avatar{Initials: "ВЛ"},
+												Title:    []w.Inline{w.Text("Вера Лебедева")},
+												Subtitle: "+7 905 331-09-42",
+												Detail:   "vera@example.net",
+												Caption:  "—",
+												Source:   "nextcloud · Архив",
 												Inset:    true,
 											},
 											w.FaceRow{
-												Mark:     w.Mark{Colour: "#A05A2C"},
+												Mark:     w.Mark{Colour: "#4A6B52"},
 												Avatar:   w.Avatar{Photo: true},
-												Title:    []w.Inline{w.Text("Белов Артём")},
-												Subtitle: "+7 903 118-22-04",
-												Detail:   "belov@team.example",
-												Caption:  "—",
-												Source:   "nextcloud · Архив",
+												Title:    []w.Inline{w.Text("Лебедева Вера")},
+												Subtitle: "+7 905 331-09-42",
+												Detail:   "v.lebedeva@example.org",
+												Caption:  "Библиотека №4",
+												Source:   "nextcloud · Контакты",
 												Inset:    true,
 											},
 										},
@@ -136,8 +133,8 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Артём Белов")}},
-															w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Белов Артём")}},
+															w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Вера Лебедева")}},
+															w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Лебедева Вера")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -149,8 +146,8 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Тензор")}},
-															w.Check{Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("—")}},
+															w.Check{Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("—")}},
+															w.Check{On: true, Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Библиотека №4")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -162,13 +159,13 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
+															w.Check{Name: "choice.PHOTO", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Архив")}},
 															w.Check{
 																On:    true,
 																Name:  "choice.PHOTO",
 																Value: "2",
 																Radio: true,
-																Parts: []w.CheckPart{w.Text("nextcloud · Архив")},
+																Parts: []w.CheckPart{w.Text("nextcloud · Контакты")},
 															},
 														},
 														Gap:   w.LineGap12,
@@ -287,11 +284,11 @@ func Dup1() Screen {
 											},
 											w.DueRow{
 												Tick:     w.Tick{Label: "Done"},
-												Mark:     w.Mark{Colour: "#6B4E7A"},
+												Mark:     w.Mark{Colour: "#3F6E8C"},
 												Title:    []w.Inline{w.Text("Собрать чемодан")},
 												Due:      "12 Aug",
 												Progress: "—",
-												Source:   "radicale · vps · Личное",
+												Source:   "nextcloud · Работа",
 												Inset:    true,
 											},
 										},
@@ -345,7 +342,7 @@ func Dup1() Screen {
 												Title:   []w.Inline{w.Text("Что почитать про CRDT")},
 												Excerpt: "Кляйн, глава 5; статья Шапиро 2011…",
 												Date:    "8 Aug",
-												Source:  "radicale · vps · Дневник",
+												Source:  "nextcloud · Дневник",
 												Inset:   true,
 											},
 										},
@@ -378,13 +375,13 @@ func Dup1() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
-										Text: "Анна Ковалёва",
+										Text: "Артём Белов",
 										Items: []w.RubricPart{
 											w.RubricAside{
 												Text: "",
 												Items: []w.RubricAsidePart{
-													w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
-													w.Mono{Text: "80 points · same email, same name", Variant: w.MonoTightDusty},
+													w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+													w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty},
 												},
 											},
 										},
@@ -393,34 +390,23 @@ func Dup1() Screen {
 										Rows: []w.ListRow{
 											w.FaceRow{
 												Mark:     w.Mark{Colour: "#4A6B52"},
-												Avatar:   w.Avatar{Initials: "АК"},
-												Title:    []w.Inline{w.Text("Анна Ковалёва")},
-												Subtitle: "+7 912 445-10-88",
-												Detail:   "a.kovaleva@example.org",
-												Caption:  "Издательство «Слово»",
+												Avatar:   w.Avatar{Initials: "АБ"},
+												Title:    []w.Inline{w.Text("Артём Белов")},
+												Subtitle: "+7 903 118-22-04",
+												Detail:   "a.belov@example.org",
+												Caption:  "—",
 												Source:   "nextcloud · Контакты",
 												Inset:    true,
 											},
 											w.FaceRow{
 												Mark:     w.Mark{Colour: "#6B4E7A"},
 												Avatar:   w.Avatar{Photo: true},
-												Title:    []w.Inline{w.Text("Анна Ковалёва")},
-												Subtitle: "+7 912 445-10-88",
-												Detail:   "a.kovaleva@example.org",
-												Caption:  "—",
+												Title:    []w.Inline{w.Text("Артём Белов")},
+												Subtitle: "+7 903 118-22-04",
+												Detail:   "a.belov@example.org",
+												Caption:  "Тензор",
 												Source:   "radicale · vps · Команда",
 												Inset:    true,
-											},
-											w.FaceRow{
-												Mark:        w.Mark{Colour: "#9A9280"},
-												Avatar:      w.Avatar{Initials: "АК"},
-												Title:       []w.Inline{w.Text("А. Ковалёва")},
-												Subtitle:    "—",
-												Detail:      "a.kovaleva@example.org",
-												Caption:     "Слово",
-												Source:      "baikal · Общий",
-												SourceBadge: &w.Badge{Label: "ro"},
-												Inset:       true,
 											},
 										},
 										Inset: true,
@@ -461,7 +447,7 @@ func Dup1() Screen {
 									},
 									w.CardText{
 										Kind:  w.CardWhy,
-										Parts: []w.CardTextPart{w.Text("Общий is read-only: its record could be neither rewritten nor deleted.")},
+										Parts: []w.CardTextPart{w.Text("Команда is read-only: its record could be neither rewritten nor deleted.")},
 									},
 								},
 								Action: "/app/duplicates/g5",
@@ -469,7 +455,7 @@ func Dup1() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
-										Text: "Сергей Орлов",
+										Text: "Анна Ковалёва",
 										Items: []w.RubricPart{
 											w.RubricAside{
 												Text:  "",
@@ -481,22 +467,22 @@ func Dup1() Screen {
 										Rows: []w.ListRow{
 											w.FaceRow{
 												Mark:     w.Mark{Colour: "#4A6B52"},
-												Avatar:   w.Avatar{Initials: "СО"},
-												Title:    []w.Inline{w.Text("Сергей Орлов")},
+												Avatar:   w.Avatar{Initials: "АК"},
+												Title:    []w.Inline{w.Text("Анна Ковалёва")},
 												Subtitle: "+7 495 120-45-00",
-												Detail:   "s.orlov@slovo.example",
+												Detail:   "a.kovaleva@example.org",
 												Caption:  "Издательство «Слово»",
 												Source:   "nextcloud · Контакты",
 												Inset:    true,
 											},
 											w.FaceRow{
-												Mark:     w.Mark{Colour: "#6B4E7A"},
-												Avatar:   w.Avatar{Initials: "МО"},
-												Title:    []w.Inline{w.Text("Мария Орлова")},
+												Mark:     w.Mark{Colour: "#4A6B52"},
+												Avatar:   w.Avatar{Initials: "АС"},
+												Title:    []w.Inline{w.Text("Алексей Смирнов")},
 												Subtitle: "+7 495 120-45-00",
-												Detail:   "m.orlova@slovo.example",
-												Caption:  "Издательство «Слово»",
-												Source:   "radicale · vps · Команда",
+												Detail:   "—",
+												Caption:  "—",
+												Source:   "nextcloud · Контакты",
 												Inset:    true,
 											},
 										},
