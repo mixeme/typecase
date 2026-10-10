@@ -613,7 +613,7 @@ func States6() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
-							Meta:    "2",
+							Meta:    "6",
 							Current: true,
 						},
 					},
@@ -622,15 +622,15 @@ func States6() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
 					},
 				},
 				w.RailSec{
@@ -684,7 +684,7 @@ func States6() Screen {
 								Parts: []w.HeadSubPart{
 									w.Text("6 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "),
 									w.Mono{Text: "Europe/Moscow"},
-									w.Text(" · 2 events"),
+									w.Text(" · 6 events"),
 								},
 							},
 						},
@@ -783,7 +783,7 @@ func States6() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 83, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 5 of 6 sources · 2 events · "),
+							w.Text("Polled 5 of 6 sources · 6 events · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -802,22 +802,60 @@ func States6() Screen {
 							w.Mono{Text: "2 min ago", Place: w.Pushed},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Detail: "Переговорная 2",
-								Source: "nextcloud · Личный",
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Time:    "10:00",
+								Title:   []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail:  "Переговорная 2",
+								Caption: &w.Badge{Label: "4 attendees"},
+								Source:  "nextcloud · Личный",
 							},
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#3F6E8C"},
-								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Созвон с подрядчиком")},
-								Detail: "Jitsi",
-								Source: "nextcloud · Работа",
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "nextcloud · Работа",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#8C6239"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "15:00",
+								Title:   []w.Inline{w.Text("Созвон с подрядчиком")},
+								Detail:  "Jitsi",
+								Caption: &w.Badge{Label: "tentative", Tone: w.BadgeAlert},
+								Source:  "nextcloud · Работа",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#6B4E7A"},
+								Time:    "09:30",
+								Title:   []w.Inline{w.Text("Ревью архитектуры")},
+								Detail:  "Переговорная 1",
+								Caption: &w.Badge{Label: "2 attendees"},
+								Source:  "radicale · vps · Проекты",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "18:00",
+								Title:  []w.Inline{w.Text("Забрать документы")},
+								Detail: "МФЦ, Мясницкая 13",
+								Source: "nextcloud · Личный",
 							},
 						},
 					},
@@ -2090,15 +2128,15 @@ func States13() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "—"},
 					},
 				},
 				w.RailSec{
@@ -2247,7 +2285,7 @@ func States13() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Text("Polling · 4 of 6 answered · 3 events · "),
+							w.Text("Polling · 4 of 6 answered · 5 events · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -2266,22 +2304,40 @@ func States13() Screen {
 							w.Mono{Text: "0.8 s", Place: w.Pushed},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Detail: "Переговорная 2",
-								Source: "nextcloud · Личный",
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Time:    "10:00",
+								Title:   []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail:  "Переговорная 2",
+								Caption: &w.Badge{Label: "4 attendees"},
+								Source:  "nextcloud · Личный",
 							},
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#3F6E8C"},
-								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Созвон с подрядчиком")},
-								Detail: "Jitsi",
-								Source: "nextcloud · Работа",
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "nextcloud · Работа",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#8C6239"},
+								Time:    "all day",
+								Title:   []w.Inline{w.Text("Дежурство: первая линия")},
+								Detail:  "—",
+								Caption: &w.Badge{Label: "repeats weekly"},
+								Source:  "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:    w.Mark{Colour: "#3F6E8C"},
+								Time:    "15:00",
+								Title:   []w.Inline{w.Text("Созвон с подрядчиком")},
+								Detail:  "Jitsi",
+								Caption: &w.Badge{Label: "tentative", Tone: w.BadgeAlert},
+								Source:  "nextcloud · Работа",
 							},
 						},
 					},
@@ -2289,11 +2345,11 @@ func States13() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#3F6E8C"},
-								Time:   "11:00",
-								Title:  []w.Inline{w.Text("Ревью макетов")},
-								Detail: "Переговорная 1",
-								Source: "nextcloud · Работа",
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "18:00",
+								Title:  []w.Inline{w.Text("Забрать документы")},
+								Detail: "МФЦ, Мясницкая 13",
+								Source: "nextcloud · Личный",
 							},
 						},
 					},
