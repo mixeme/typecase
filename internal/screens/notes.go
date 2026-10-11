@@ -2465,17 +2465,17 @@ func Notes9() Screen {
 								},
 								w.Field{
 									Label: "Date",
-									Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-11", Label: "Date", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "date", Value: "2026-08-11", Label: "Date", Mono: true}},
 									Width: w.FieldFix130,
 								},
 								w.Field{
 									Label: "Start",
-									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "18:00", Label: "Start", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "start", Value: "18:00", Label: "Start", Mono: true}},
 									Width: w.FieldFix96,
 								},
 								w.Field{
 									Label: "End",
-									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "18:40", Label: "End", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "end", Value: "18:40", Label: "End", Mono: true, Follows: "start"}},
 									Width: w.FieldFix96,
 								},
 								w.Field{

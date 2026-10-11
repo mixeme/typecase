@@ -28,6 +28,18 @@ do, not what the authors did.
 
 ### Added
 
+- **An end follows its start** (Carrel's task 152, the owner's decision of
+  11.10). `Input.Follows` names the field of the same form an end's date or
+  time follows; when the start is changed, the library's script moves the
+  end by as much, so the length stays: 10:00–11:00 with the start set to
+  10:30 ends at 11:30. `Input.Day` names the date field that holds a time's
+  day — an end carried over midnight takes its date along. An empty end
+  stays empty, a field switched off (`Check.Disables`, «All day») is not
+  touched, an end set by hand follows with its new length. Without a script
+  nothing moves: what is on the screen is sent. The frames name the fields
+  of an event's form: `start.date`, `start.time`, `end.date`, `end.time`
+  (s-agenda-3, s-agenda-15, states-17) and `date`, `start`, `end` of the
+  quick sheet (s-notes-9).
 - **An upload without a script, wider** (Carrel's task 119). `FileField`
   has `Many` (several files at once), `Folder` (the system's dialog for a
   folder; every file goes named by its path inside it — the browser does

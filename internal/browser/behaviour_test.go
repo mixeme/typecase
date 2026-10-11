@@ -1313,3 +1313,69 @@ func TestRemoveRow(t *testing.T) {
 		t.Errorf("without a script: sent %q, fields %s; want remove=tel.0 sent and nothing hidden", sent, got)
 	}
 }
+
+// TestEndFollowsStart (Carrel's task 152): an end named as following its
+// start (Input.Follows) moves by as much as the start was moved — the length
+// stays. A time and its day are one pair (Input.Day): an end carried over
+// midnight takes its date along. An empty end stays empty, a time switched
+// off by «All day» is not touched, an end set by hand follows with its new
+// length. Without a script nothing moves: what is on the screen is sent.
+func TestEndFollowsStart(t *testing.T) {
+	needChrome(t)
+	in := func(kind w.InputKind, name, value, follows, day string) w.Field {
+		return w.Field{Label: name, Parts: []w.FieldPart{w.Input{Kind: kind, Name: name, Value: value, Mono: true, Follows: follows, Day: day}}}
+	}
+	form := func(sd, st, ed, et string) string {
+		f := w.Form{Action: "/x", Items: []w.FormPart{w.FieldSet{Rubric: w.Rubric{Text: "When"}, Items: []w.FieldSetPart{
+			w.Field{Parts: []w.FieldPart{w.Check{Name: "start.allday", Value: "1", Parts: []w.CheckPart{w.Text("All day")}, Disables: "start.time end.time"}}},
+			in(w.InputDate, "start.date", sd, "", ""), in(w.InputTime, "start.time", st, "", ""),
+			in(w.InputDate, "end.date", ed, "start.date", ""), in(w.InputTime, "end.time", et, "start.time", "end.date"),
+		}}}}
+		return `<div class="tc-root">` + f.Render() + `</div>`
+	}
+	// set types a value into a field as a person does: the value and a change
+	const set = `(n, v) => { const f = document.querySelector('[name="' + n + '"]'); f.value = v; f.dispatchEvent(new Event("change", {bubbles: true})); }`
+	const state = `["start.date", "start.time", "end.date", "end.time"].map(n => document.querySelector('[name="' + n + '"]').value).join(" ")`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name           string
+		sd, st, ed, et string
+		steps          string
+		want           string
+		bare           bool
+	}{
+		{"the start half an hour later", "2026-08-10", "10:00", "2026-08-10", "11:00",
+			`set("start.time", "10:30")`, "2026-08-10 10:30 2026-08-10 11:30", false},
+		{"the start a day later", "2026-08-10", "10:00", "2026-08-10", "11:00",
+			`set("start.date", "2026-08-11")`, "2026-08-11 10:00 2026-08-11 11:00", false},
+		{"an end past midnight comes back to the start's day", "2026-08-10", "23:30", "2026-08-11", "00:30",
+			`set("start.time", "22:00")`, "2026-08-10 22:00 2026-08-10 23:00", false},
+		{"an end goes over midnight with its date", "2026-08-31", "22:00", "2026-08-31", "23:00",
+			`set("start.time", "23:30")`, "2026-08-31 23:30 2026-09-01 00:30", false},
+		{"an empty end stays empty", "2026-08-10", "10:00", "", "",
+			`set("start.time", "10:30"); set("start.date", "2026-08-12")`, "2026-08-12 10:30  ", false},
+		{"an end set by hand follows with its new length", "2026-08-10", "10:00", "2026-08-10", "11:00",
+			`set("end.time", "12:00"); set("start.time", "11:00")`, "2026-08-10 11:00 2026-08-10 13:00", false},
+		{"two moves in a row", "2026-08-10", "10:00", "2026-08-10", "11:00",
+			`set("start.time", "10:30"); set("start.time", "09:00")`, "2026-08-10 09:00 2026-08-10 10:00", false},
+		{"all day: the dates go, the times are not touched", "2026-08-10", "10:00", "2026-08-11", "11:00",
+			`document.querySelector('[name="start.allday"]').click(); set("start.date", "2026-08-12")`, "2026-08-12 10:00 2026-08-13 11:00", false},
+		{"without a script nothing moves", "2026-08-10", "10:00", "2026-08-10", "11:00",
+			`set("start.time", "10:30")`, "2026-08-10 10:30 2026-08-10 11:00", true},
+	} {
+		page := browser.PageHTML(form(c.sd, c.st, c.ed, c.et), "")
+		if c.bare {
+			page = strings.Replace(page, `<script src="/tc.js"></script>`, "", 1)
+		}
+		var got string
+		if err := h.Run(h.RegisterPage("follows", page), 900, 600,
+			chromedp.Evaluate(`(() => { const set = `+set+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}

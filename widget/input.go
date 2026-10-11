@@ -47,10 +47,10 @@ func (v InputVariant) class() string {
 // Input — tc-in
 //
 // Роль. Поле ввода одной строки: текст, дата, время, поиск, пароль.
-// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required, ID, Picked}.
+// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required, ID, Picked, Follows, Day}.
 // Состояния. value | placeholder | mono | focus | error | disabled | variant.
 // Инварианты. Плейсхолдер выглядит плейсхолдером всегда: is-ph ставит виджет, когда значения нет; род поля — перечисление; у поля есть доступное имя; поле печатает фрагмент своего кадра.
-// Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется.
+// Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, названный идущим за началом (Follows), сценарий сдвигает на столько же, на сколько сдвинули начало; без сценария он стоит.
 // Эталон. кадр `components-10`, фрагмент `.tc-in`.
 // Содержимое. нет.
 // Чего нет. Своей подписи: подпись — у поля формы (tc-field), вокруг.
@@ -75,6 +75,15 @@ type Input struct {
 	ID string
 	// Picked marks such a line: what was picked beside it.
 	Picked bool
+	// Follows names the field of the same form this one follows (Carrel's
+	// task 152): an end's date or time names its start's. When the start is
+	// changed, the script moves this field by as much — the length stays;
+	// an empty field stays empty, a switched off one is not touched. Without
+	// a script nothing moves: what is on the screen is sent.
+	Follows string
+	// Day names the date field that holds this time's day: a time carried
+	// over midnight takes its date along.
+	Day string
 }
 
 // Render prints the input.
@@ -85,7 +94,7 @@ func (i Input) html(m mix) string {
 		is("focus", i.Focus), is("error", i.Error), i.Variant.class(), i.Place.class()) +
 		` type="` + i.Kind.attr() + `"` + attr("name", i.Name) + attr("value", i.Value) +
 		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + flag("readonly", i.ReadOnly || i.Picked) + flag("required", i.Required) +
-		attr("id", i.ID) + flag("data-tc-filename", i.Picked) + `>`
+		attr("id", i.ID) + flag("data-tc-filename", i.Picked) + attr("data-tc-follows", i.Follows) + attr("data-tc-day", i.Day) + `>`
 }
 
 // PickVariant is the drawn size of a pick where it is not its column's.

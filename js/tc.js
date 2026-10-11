@@ -671,8 +671,67 @@
 		root.querySelectorAll("input[data-tc-disables]").forEach(syncDisables);
 	}
 
+	// An end that follows its start (data-tc-follows, Input.Follows; Carrel's
+	// task 152): moved by as much as the start was, so the length stays. The
+	// start keeps what it held before the change in data-tc-was.
+	function startOf(end) {
+		var scope = end.form || document;
+		return scope.querySelector('[name="' + end.getAttribute("data-tc-follows") + '"]');
+	}
+
+	function initFollows(root) {
+		root.querySelectorAll("[data-tc-follows]").forEach(function (end) {
+			var start = startOf(end);
+			if (start && !start.hasAttribute("data-tc-was")) start.setAttribute("data-tc-was", start.value);
+		});
+	}
+
+	function minutesOf(v) {
+		var m = /^(\d\d):(\d\d)/.exec(v);
+		return m ? +m[1] * 60 + +m[2] : null;
+	}
+
+	function dayOf(v) {
+		var m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(v);
+		return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5 : null;
+	}
+
+	function dayText(n) {
+		return new Date(n * 864e5).toISOString().slice(0, 10);
+	}
+
+	function two(n) {
+		return (n < 10 ? "0" : "") + n;
+	}
+
+	function follow(start) {
+		var was = start.getAttribute("data-tc-was"), now = start.value;
+		start.setAttribute("data-tc-was", now);
+		if (!was || !now || !start.name) return;
+		var scope = start.form || document;
+		scope.querySelectorAll('[data-tc-follows="' + start.name + '"]').forEach(function (end) {
+			// an empty end stays empty; one switched off is not touched
+			if (!end.value || end.disabled) return;
+			if (start.type === "date" && end.type === "date") {
+				var d = dayOf(end.value), a = dayOf(was), b = dayOf(now);
+				if (d !== null && a !== null && b !== null) end.value = dayText(d + b - a);
+				return;
+			}
+			var t = minutesOf(end.value), from = minutesOf(was), to = minutesOf(now);
+			if (t === null || from === null || to === null) return;
+			var total = t + to - from, carry = Math.floor(total / 1440);
+			total -= carry * 1440;
+			end.value = two(Math.floor(total / 60)) + ":" + two(total % 60);
+			// a time and its day are one pair: over midnight the date goes along
+			var day = carry && end.getAttribute("data-tc-day");
+			var date = day && scope.querySelector('[name="' + day + '"]');
+			if (date && date.value && !date.disabled && dayOf(date.value) !== null) date.value = dayText(dayOf(date.value) + carry);
+		});
+	}
+
 	function onChange(e) {
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		if (e.target.hasAttribute && e.target.hasAttribute("data-tc-was")) follow(e.target);
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-size]")) sizeFields(e.target);
 		// A file picked by a button or a menu item goes with its form at once
 		// (Carrel's task 109); without the script «Upload» sends it.
@@ -931,6 +990,7 @@
 		initMenus(root);
 		initLayers(root);
 		initDisables(root);
+		initFollows(root);
 		layoutUpdates();
 	}
 

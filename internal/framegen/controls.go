@@ -346,6 +346,12 @@ func (g *gen) input(x *El) string {
 	if x.HasAttr("required") {
 		f = append(f, "Required: true")
 	}
+	if v := x.Attr("data-tc-follows"); v != "" {
+		f = append(f, "Follows: "+q(v))
+	}
+	if v := x.Attr("data-tc-day"); v != "" {
+		f = append(f, "Day: "+q(v))
+	}
 	return "w.Input{" + join(f, ", ") + g.ev(x, "InputVariant", "Variant") + placef(x) + "}"
 }
 

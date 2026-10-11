@@ -876,22 +876,41 @@ func Agenda3() Screen {
 									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Start date", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "12:00", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "start.time", Value: "12:00", Label: "Start time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "End date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "End date", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputDate,
+												Name:    "end.date",
+												Value:   "2026-08-10",
+												Label:   "End date",
+												Mono:    true,
+												Follows: "start.date",
+											},
+										},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "End time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "13:00", Label: "End time", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputTime,
+												Name:    "end.time",
+												Value:   "13:00",
+												Label:   "End time",
+												Mono:    true,
+												Follows: "start.time",
+												Day:     "end.date",
+											},
+										},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -1169,22 +1188,41 @@ func Agenda15() Screen {
 									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "Start date", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "10:00", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "start.time", Value: "10:00", Label: "Start time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "End date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-10", Label: "End date", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputDate,
+												Name:    "end.date",
+												Value:   "2026-08-10",
+												Label:   "End date",
+												Mono:    true,
+												Follows: "start.date",
+											},
+										},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "End time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Value: "11:00", Label: "End time", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputTime,
+												Name:    "end.time",
+												Value:   "11:00",
+												Label:   "End time",
+												Mono:    true,
+												Follows: "start.time",
+												Day:     "end.date",
+											},
+										},
 										Width: w.FieldXS,
 									},
 									w.Field{

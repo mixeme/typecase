@@ -5002,10 +5002,10 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-fset">
             <div class="tc-rubric">When</div>
             <div class="tc-field"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
-            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="Start date"></div>
-            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="12:00" aria-label="Start time"></div>
-            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="End date"></div>
-            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="13:00" aria-label="End time"></div>
+            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" name="start.date" value="2026-08-10" aria-label="Start date"></div>
+            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" name="start.time" value="12:00" aria-label="Start time"></div>
+            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" name="end.date" value="2026-08-10" aria-label="End date" data-tc-follows="start.date"></div>
+            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" name="end.time" value="13:00" aria-label="End time" data-tc-follows="start.time" data-tc-day="end.date"></div>
             <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Asia/Yekaterinburg <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg" checked>Asia/Yekaterinburg</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow">Europe/Moscow</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
           </div>
 
@@ -5094,10 +5094,10 @@ SEQUENCE  2</div>
           <div class="tc-fset">
             <div class="tc-rubric">When</div>
             <div class="tc-field"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
-            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="Start date"></div>
-            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="10:00" aria-label="Start time"></div>
-            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="End date"></div>
-            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="11:00" aria-label="End time"></div>
+            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" name="start.date" value="2026-08-10" aria-label="Start date"></div>
+            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" name="start.time" value="10:00" aria-label="Start time"></div>
+            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" name="end.date" value="2026-08-10" aria-label="End date" data-tc-follows="start.date"></div>
+            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" name="end.time" value="11:00" aria-label="End time" data-tc-follows="start.time" data-tc-day="end.date"></div>
             <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Europe/Moscow</summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow" checked>Europe/Moscow</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg">Asia/Yekaterinburg</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
           </div>
 
@@ -7632,9 +7632,9 @@ Read  2 min ago</div>
             <div class="tc-sheet__body">
               <div class="tc-line tc-sheet__fields">
                 <div class="tc-field tc-grow"><label>Title</label><input class="tc-in is-focus" type="text" value="Забрать документы" aria-label="Title"></div>
-                <div class="tc-field tc-field--fix130"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-11" aria-label="Date"></div>
-                <div class="tc-field tc-field--fix96"><label>Start</label><input class="tc-in is-mono" type="time" value="18:00" aria-label="Start"></div>
-                <div class="tc-field tc-field--fix96"><label>End</label><input class="tc-in is-mono" type="time" value="18:40" aria-label="End"></div>
+                <div class="tc-field tc-field--fix130"><label>Date</label><input class="tc-in is-mono" type="date" name="date" value="2026-08-11" aria-label="Date"></div>
+                <div class="tc-field tc-field--fix96"><label>Start</label><input class="tc-in is-mono" type="time" name="start" value="18:00" aria-label="Start"></div>
+                <div class="tc-field tc-field--fix96"><label>End</label><input class="tc-in is-mono" type="time" name="end" value="18:40" aria-label="End" data-tc-follows="start"></div>
                 <div class="tc-field tc-field--fill120"><label>&nbsp;</label><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
                 <div class="tc-field tc-field--fill200"><label>Remind</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
               </div>
@@ -20223,10 +20223,10 @@ SMTP  mail.home.example:465  TLS
           <div class="tc-fset">
             <div class="tc-rubric">When</div>
             <div class="tc-field"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
-            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="Start date"></div>
-            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" value="12:00" aria-label="Start time"></div>
-            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" value="2026-08-10" aria-label="End date"></div>
-            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" value="13:00" aria-label="End time"></div>
+            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" name="start.date" value="2026-08-10" aria-label="Start date"></div>
+            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" name="start.time" value="12:00" aria-label="Start time"></div>
+            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" name="end.date" value="2026-08-10" aria-label="End date" data-tc-follows="start.date"></div>
+            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" name="end.time" value="13:00" aria-label="End time" data-tc-follows="start.time" data-tc-day="end.date"></div>
             <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Asia/Yekaterinburg <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg" checked>Asia/Yekaterinburg</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow">Europe/Moscow</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
           </div>
 
