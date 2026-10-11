@@ -144,33 +144,12 @@ func Agenda1() Screen {
 								Secondary: true,
 								Action:    "/app/calendar",
 							},
-							w.BarSep{Secondary: true},
-							w.CheckForm{
-								Checks: []w.Check{
-									w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
-									w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
-									w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
-								},
-								Action:   "/app/calendar",
-								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
-							},
+							w.Button{Label: "Columns", Icon: "cols"},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.CheckForm{
-											Checks: []w.Check{
-												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
-												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
-												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
-											},
-											Action:   "/app/calendar",
-											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
-										},
-										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
@@ -567,33 +546,12 @@ func Agenda17() Screen {
 								Secondary: true,
 								Action:    "/app/calendar",
 							},
-							w.BarSep{Secondary: true},
-							w.CheckForm{
-								Checks: []w.Check{
-									w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
-									w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
-									w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
-								},
-								Action:   "/app/calendar",
-								Tertiary: true,
-								Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
-							},
+							w.Button{Label: "Columns", Icon: "cols"},
 							w.Drop{
 								Trigger: w.Button{Icon: "dots", Title: "More"},
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.CheckForm{
-											Checks: []w.Check{
-												w.Check{On: true, Name: "show", Value: "events", Parts: []w.CheckPart{w.Text("Events")}},
-												w.Check{Name: "show", Value: "tasks", Parts: []w.CheckPart{w.Text("Tasks due")}},
-												w.Check{Name: "show", Value: "notes", Parts: []w.CheckPart{w.Text("Notes")}},
-											},
-											Action:   "/app/calendar",
-											Tertiary: true,
-											Apply:    w.Button{Label: "Apply", Small: true, Submit: true},
-										},
-										w.MenuSep{Tertiary: true},
 										w.Range{
 											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
 											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},

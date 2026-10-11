@@ -54,7 +54,7 @@ var _ = add(
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
 	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-mail-1", "tc-btn", 3),
 	// The summary of a closed menu is its button (Drop prints it so).
-	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 24),
+	primitive("menu", w.Button{Label: "Attach", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 23),
 	primitive("link", w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, "s-agenda-1", "tc-btn", 10),
 	primitive("menu", w.Button{Label: "Attach", Icon: "up", Menu: true}, "s-agenda-3", "tc-btn", 6),
 	primitive("icon", w.Button{Icon: "dots", Title: "More"}, "s-contacts-6", "tc-btn", 6),
