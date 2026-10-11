@@ -356,9 +356,9 @@ func (g *gen) input(x *El) string {
 }
 
 func (g *gen) pick(x *El) string {
-	if x.Tag == "select" {
+	if list := x.Kid("tc-in__list"); list != nil {
 		var opts []string
-		for _, o := range x.Els() {
+		for _, o := range list.Els() {
 			o2 := []string{"Value: " + q(o.Attr("value")), "Label: " + q(o.Text())}
 			if o.HasAttr("selected") {
 				o2 = append(o2, "On: true")
@@ -368,9 +368,15 @@ func (g *gen) pick(x *El) string {
 			}
 			opts = append(opts, "{"+join(o2, ", ")+"}")
 		}
-		f := []string{"Name: " + q(x.Attr("name")), "Options: []w.PickOption{" + join(opts, ", ") + "}"}
-		if v := x.Attr("aria-label"); v != "" {
+		f := []string{"Name: " + q(list.Attr("name")), "Options: []w.PickOption{" + join(opts, ", ") + "}"}
+		if v := list.Attr("aria-label"); v != "" {
 			f = append(f, "Label: "+q(v))
+		}
+		if m := x.Kid("tc-mark"); m != nil {
+			f = append(f, "Mark: &"+g.mark(m))
+		}
+		if x.Has("is-ph") {
+			f = append(f, "Unset: true")
 		}
 		if x.Has("is-focus") {
 			f = append(f, "Focus: true")
@@ -682,7 +688,7 @@ func (g *gen) control(x *El) string {
 	switch {
 	case x.Tag == "input" && x.Has("tc-in"):
 		return g.input(x)
-	case (x.Tag == "button" || x.Tag == "select" || x.Tag == "summary") && x.Has("tc-in") && x.Has("is-pick"):
+	case x.Has("tc-in") && x.Has("is-pick"):
 		return g.pick(x)
 	case (x.Tag == "label" || x.Tag == "form") && x.Has("tc-in"):
 		return g.filter(x)

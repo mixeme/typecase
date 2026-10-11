@@ -1788,8 +1788,9 @@ func Notes5() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "quill",
-					Title: "New note",
+					Action: "/app/notes/nextcloud/zapisi/quick",
+					Icon:   "quill",
+					Title:  "New note",
 					Head: []w.SheetHeadPart{
 						w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Place: w.Pushed},
 						w.Close{Label: "Close"},
@@ -1799,11 +1800,12 @@ func Notes5() Screen {
 							Text:    "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.",
 							Variant: w.AreaBodySm,
 							Focus:   true,
+							Name:    "description",
 							Label:   "Text",
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Save note", Kind: w.ButtonPrimary},
+						w.Button{Label: "Save note", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Ctrl+Enter"},
 						w.Button{Label: "Open the card", Icon: "expand"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
@@ -2255,8 +2257,9 @@ func Notes8() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "con",
-					Title: "New contact",
+					Action: "/app/contacts/nextcloud/kontakty/quick",
+					Icon:   "con",
+					Title:  "New contact",
 					Head: []w.SheetHeadPart{
 						w.Pick{Value: "nextcloud · Контакты", Variant: w.PickT12W200, Place: w.Pushed},
 						w.Close{Label: "Close"},
@@ -2266,17 +2269,17 @@ func Notes8() Screen {
 							Items: []w.Field{
 								w.Field{
 									Label: "Display name",
-									Parts: []w.FieldPart{w.Input{Value: "Пётр Ковалёв", Label: "Display name", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "fn", Value: "Пётр Ковалёв", Label: "Display name", Focus: true}},
 									Place: w.Grown,
 								},
 								w.Field{
 									Label: "Phone",
-									Parts: []w.FieldPart{w.Input{Placeholder: "+7 …", Label: "Phone", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Name: "tel", Placeholder: "+7 …", Label: "Phone", Mono: true}},
 									Width: w.FieldFill200,
 								},
 								w.Field{
 									Label: "Email",
-									Parts: []w.FieldPart{w.Input{Placeholder: "name@example.org", Label: "Email"}},
+									Parts: []w.FieldPart{w.Input{Name: "email", Placeholder: "name@example.org", Label: "Email"}},
 									Width: w.FieldFill200,
 								},
 							},
@@ -2290,7 +2293,7 @@ func Notes8() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Save contact", Kind: w.ButtonPrimary},
+						w.Button{Label: "Save contact", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the card", Icon: "expand"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
@@ -2449,8 +2452,9 @@ func Notes9() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "cal",
-					Title: "New event",
+					Action: "/app/calendar/nextcloud/lichnyj/quick",
+					Icon:   "cal",
+					Title:  "New event",
 					Head: []w.SheetHeadPart{
 						w.Pick{Value: "nextcloud · Личный", Variant: w.PickT12W200, Place: w.Pushed},
 						w.Close{Label: "Close"},
@@ -2460,7 +2464,7 @@ func Notes9() Screen {
 							Items: []w.Field{
 								w.Field{
 									Label: "Title",
-									Parts: []w.FieldPart{w.Input{Value: "Забрать документы", Label: "Title", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "title", Value: "Забрать документы", Label: "Title", Focus: true}},
 									Place: w.Grown,
 								},
 								w.Field{
@@ -2480,10 +2484,20 @@ func Notes9() Screen {
 								},
 								w.Field{
 									Label: "\u00a0",
-									Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}},
+									Parts: []w.FieldPart{w.Check{Name: "allday", Value: "1", Disables: "start end", Parts: []w.CheckPart{w.Text("All day")}}},
 									Width: w.FieldFill120,
 								},
-								w.Field{Label: "Remind", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldFill200},
+								w.Field{
+									Label: "Remind",
+									Parts: []w.FieldPart{
+										w.Pick{
+											Name:    "remind",
+											Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}},
+											Label:   "Remind",
+										},
+									},
+									Width: w.FieldFill200,
+								},
 							},
 						},
 						w.Dim{
@@ -2495,7 +2509,7 @@ func Notes9() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Save event", Kind: w.ButtonPrimary},
+						w.Button{Label: "Save event", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the card", Icon: "expand"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
@@ -2613,25 +2627,28 @@ func Notes10() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "task",
-					Title: "New task",
-					Head:  []w.SheetHeadPart{w.Pick{Value: "nextcloud · Дела", Variant: w.PickT12W200, Place: w.Pushed}, w.Close{Label: "Close"}},
+					Action: "/app/tasks/nextcloud/dela/quick",
+					Icon:   "task",
+					Title:  "New task",
+					Head:   []w.SheetHeadPart{w.Pick{Value: "nextcloud · Дела", Variant: w.PickT12W200, Place: w.Pushed}, w.Close{Label: "Close"}},
 					Body: []w.SheetPart{
 						w.SheetFields{
 							Items: []w.Field{
 								w.Field{
 									Label: "Summary",
-									Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
 									Place: w.Grown,
 								},
 								w.Field{
 									Label: "Due date",
-									Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Due date", Mono: true}},
+									Parts: []w.FieldPart{
+										w.Input{Kind: w.InputDate, Name: "due.date", Placeholder: "YYYY-MM-DD", Label: "Due date", Mono: true},
+									},
 									Width: w.FieldFix130,
 								},
 								w.Field{
 									Label: "Due time",
-									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true}},
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "due.time", Placeholder: "--:--", Label: "Due time", Mono: true}},
 									Width: w.FieldFix96,
 								},
 							},
@@ -2645,7 +2662,7 @@ func Notes10() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Save task", Kind: w.ButtonPrimary},
+						w.Button{Label: "Save task", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the card", Icon: "expand"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},

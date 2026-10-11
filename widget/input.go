@@ -125,7 +125,9 @@ func (v PickVariant) class() string {
 type Pick struct {
 	// Name and Options make the pick a list of the browser (select): it
 	// sends the chosen option's value and works without scripts. Value and
-	// Aside are then not drawn — the chosen option is.
+	// Aside are then not drawn — the chosen option is. The field draws the
+	// frame and the arrow, as a pick that is a button does; the browser's
+	// list inside it (tc-in__list) draws the words only (Carrel's task 149).
 	Name    string
 	Options []PickOption
 	Value   string
@@ -152,11 +154,15 @@ type PickOption struct {
 func (p Pick) html(m mix) string {
 	if p.Name != "" {
 		var s strings.Builder
-		s.WriteString(`<select` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
+		s.WriteString(`<span` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) + `>`)
+		if p.Mark != nil {
+			s.WriteString(p.Mark.html(nil))
+		}
+		s.WriteString(`<select class="tc-in__list"` + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
 		for _, o := range p.Options {
 			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + `>` + esc(o.Label) + `</option>`)
 		}
-		s.WriteString(`</select>`)
+		s.WriteString(`</select></span>`)
 		return s.String()
 	}
 	s := `<button` + class(m, "tc-in", is("ph", p.Unset), is("focus", p.Focus), "is-pick", p.Variant.class(), p.Place.class()) +

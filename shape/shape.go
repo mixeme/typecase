@@ -102,7 +102,9 @@ func dropped(n *fragment.Node) bool {
 		}
 	}
 	for _, c := range n.Classes {
-		if c == "tc-check__box" || c == "tc-seg__box" || c == "tc-tile__box" || c == "tc-tree__box" || c == "tc-post" {
+		// tc-in__list: the browser's list inside a pick — the frame draws the
+		// pick's words, the screen may send them (Carrel's task 149).
+		if c == "tc-check__box" || c == "tc-seg__box" || c == "tc-tile__box" || c == "tc-tree__box" || c == "tc-post" || c == "tc-in__list" {
 			return true
 		}
 		// A picture in its place is data, not drawing: the frame draws the
@@ -116,6 +118,20 @@ func dropped(n *fragment.Node) bool {
 	// datalist show anything: it is the choices of a line as one types
 	// (TagAdd.Options, Carrel's task 146).
 	return n.Tag == "option" || n.Tag == "template" || n.Tag == "datalist"
+}
+
+// holdsList says whether an element is a pick that holds the browser's list
+// (tc-in__list): what stands in it is the list's, not the frame's drawing —
+// a frame draws the chosen words, a mark, an aside; the screen its options.
+func holdsList(n *fragment.Node) bool {
+	for _, k := range n.Children {
+		for _, c := range k.Classes {
+			if c == "tc-in__list" {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // dataClass says whether a class of an element is its data, not its kind:
@@ -168,7 +184,7 @@ func of(n *fragment.Node) *node {
 			cls = append(cls, c)
 		}
 	}
-	out := &node{tag: n.Tag, name: n.Tag, classes: strings.Join(cls, " "), opaque: n.Tag == "select"}
+	out := &node{tag: n.Tag, name: n.Tag, classes: strings.Join(cls, " "), opaque: n.Tag == "select" || holdsList(n)}
 	if out.classes != "" {
 		out.tag = ""
 	}

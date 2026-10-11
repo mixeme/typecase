@@ -249,14 +249,16 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-ph{color:var(--tc-dusty)}
 /* Поле-список: стрелку рисует система (.is-pick). */
 .tc-in.is-pick{padding-right:26px;position:relative}
+/* Список браузера в поле-списке: поле рисует рамку и стрелку, список — только слова (задача 149). */
+.tc-in.is-pick > .tc-in__list{appearance:none;border:0;background:transparent;font:inherit;color:inherit;letter-spacing:inherit;padding:0;margin:0;flex:1 1 auto;min-width:0;width:100%;outline:0;cursor:pointer}
+/* Отметка-флажок в поле формы — отметка, а не подпись поля. */
+.tc-field > label.tc-check{font-size:12.5px;letter-spacing:normal;color:inherit}
 /* Стрелка в правых 24 px; маска цвета поля закрывает хвост текста. */
 .tc-in.is-pick::before{content:"";position:absolute;right:0;top:0;bottom:0;width:24px;
   background:var(--tc-surface);pointer-events:none;border-radius:0 3px 3px 0;z-index:1}
 .tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
   margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
-/* Выбор списком браузера: та же стрелка, нарисованная фоном, — у select нет ::before и ::after. */
-select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,color-mix(in srgb,currentColor 50%,transparent) 50%),linear-gradient(135deg,color-mix(in srgb,currentColor 50%,transparent) 50%,transparent 50%);background-position:calc(100% - 13px) 50%,calc(100% - 9px) 50%;background-size:4px 4px;background-repeat:no-repeat}
 .tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
 /* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
 .tc-in.is-error{border-color:var(--tc-danger)}

@@ -430,14 +430,16 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-ph{color:var(--tc-dusty)}
 /* Поле-список: стрелку рисует система (.is-pick). */
 .tc-in.is-pick{padding-right:26px;position:relative}
+/* Список браузера в поле-списке: поле рисует рамку и стрелку, список — только слова (задача 149). */
+.tc-in.is-pick > .tc-in__list{appearance:none;border:0;background:transparent;font:inherit;color:inherit;letter-spacing:inherit;padding:0;margin:0;flex:1 1 auto;min-width:0;width:100%;outline:0;cursor:pointer}
+/* Отметка-флажок в поле формы — отметка, а не подпись поля. */
+.tc-field > label.tc-check{font-size:12.5px;letter-spacing:normal;color:inherit}
 /* Стрелка в правых 24 px; маска цвета поля закрывает хвост текста. */
 .tc-in.is-pick::before{content:"";position:absolute;right:0;top:0;bottom:0;width:24px;
   background:var(--tc-surface);pointer-events:none;border-radius:0 3px 3px 0;z-index:1}
 .tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
   margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
-/* Выбор списком браузера: та же стрелка, нарисованная фоном, — у select нет ::before и ::after. */
-select.tc-in.is-pick{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,color-mix(in srgb,currentColor 50%,transparent) 50%),linear-gradient(135deg,color-mix(in srgb,currentColor 50%,transparent) 50%,transparent 50%);background-position:calc(100% - 13px) 50%,calc(100% - 9px) 50%;background-size:4px 4px;background-repeat:no-repeat}
 .tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
 /* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
 .tc-in.is-error{border-color:var(--tc-danger)}
@@ -2988,7 +2990,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <div class="tc-root tc-root--on-surface tc-root--pad18-20">
   <form class="tc-form tc-form--pad0" action="/app/settings/account" method="post"><input type="hidden" name="csrf" value="7f3a91de">
     <div class="tc-field tc-field--md"><label>Display name</label><input class="tc-in" type="text" name="display" value="Mix" aria-label="Display name"></div>
-    <div class="tc-field tc-field--sm"><label>Week starts on</label><select class="tc-in is-pick" name="week" aria-label="Week starts on"><option value="mon" selected>Monday</option><option value="sun">Sunday</option><option value="sat" disabled>Saturday</option></select></div>
+    <div class="tc-field tc-field--sm"><label>Week starts on</label><span class="tc-in is-pick"><select class="tc-in__list" name="week" aria-label="Week starts on"><option value="mon" selected>Monday</option><option value="sun">Sunday</option><option value="sat" disabled>Saturday</option></select></span></div>
     <div class="tc-field"><label>Theme</label><span class="tc-seg" role="radiogroup" data-tc-theme-switch><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="auto" checked>Auto</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="light">Light</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="dark">Dark</label></span></div>
     <div class="tc-field is-own-line tc-grow tc-field--gap7"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="compact" value="1" checked><span class="tc-tickrow__tick"></span>Compact rows</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mono" value="1"><span class="tc-tickrow__tick is-off"></span>Monospaced dates</label></div>
     <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled></div>
@@ -7104,7 +7106,7 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-scrim">
-        <div class="tc-sheet">
+        <form class="tc-sheet" action="/app/notes/nextcloud/zapisi/quick" method="post">
           <div class="tc-sheet__head">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-quill"/></svg>
             <b class="tc-sheet__title">New note</b>
@@ -7112,15 +7114,15 @@ Read  2 min ago</div>
             <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
           </div>
           <div class="tc-sheet__body">
-            <textarea class="tc-in is-area is-focus tc-in--body-sm">Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.</textarea>
+            <textarea class="tc-in is-area is-focus tc-in--body-sm" name="description">Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.</textarea>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button">Save note</button>
+            <button class="tc-btn is-primary" type="submit">Save note</button>
             <kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg>Open the card</button>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -7470,7 +7472,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet">
+          <form class="tc-sheet" action="/app/contacts/nextcloud/kontakty/quick" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-con"/></svg>
               <b class="tc-sheet__title">New contact</b>
@@ -7479,19 +7481,19 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-line tc-sheet__fields">
-                <div class="tc-field tc-grow"><label>Display name</label><input class="tc-in is-focus" type="text" value="Пётр Ковалёв" aria-label="Display name"></div>
-                <div class="tc-field tc-field--fill200"><label>Phone</label><input class="tc-in is-mono is-ph" type="text" placeholder="+7 …" aria-label="Phone"></div>
-                <div class="tc-field tc-field--fill200"><label>Email</label><input class="tc-in is-ph" type="text" placeholder="name@example.org" aria-label="Email"></div>
+                <div class="tc-field tc-grow"><label>Display name</label><input class="tc-in is-focus" type="text" name="fn" value="Пётр Ковалёв" aria-label="Display name"></div>
+                <div class="tc-field tc-field--fill200"><label>Phone</label><input class="tc-in is-mono is-ph" type="text" name="tel" placeholder="+7 …" aria-label="Phone"></div>
+                <div class="tc-field tc-field--fill200"><label>Email</label><input class="tc-in is-ph" type="text" name="email" placeholder="name@example.org" aria-label="Email"></div>
               </div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The first word is Given, the rest Family — «Пётр Ковалёв», not «Ковалёв Пётр». Everything else is filled in on the card.</span>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button">Save contact</button>
+              <button class="tc-btn is-primary" type="submit">Save contact</button>
               <kbd class="tc-kbd">Enter</kbd>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg>Open the card</button>
               <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -7622,7 +7624,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet">
+          <form class="tc-sheet" action="/app/calendar/nextcloud/lichnyj/quick" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-cal"/></svg>
               <b class="tc-sheet__title">New event</b>
@@ -7631,22 +7633,22 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-line tc-sheet__fields">
-                <div class="tc-field tc-grow"><label>Title</label><input class="tc-in is-focus" type="text" value="Забрать документы" aria-label="Title"></div>
+                <div class="tc-field tc-grow"><label>Title</label><input class="tc-in is-focus" type="text" name="title" value="Забрать документы" aria-label="Title"></div>
                 <div class="tc-field tc-field--fix130"><label>Date</label><input class="tc-in is-mono" type="date" name="date" value="2026-08-11" aria-label="Date"></div>
                 <div class="tc-field tc-field--fix96"><label>Start</label><input class="tc-in is-mono" type="time" name="start" value="18:00" aria-label="Start"></div>
                 <div class="tc-field tc-field--fix96"><label>End</label><input class="tc-in is-mono" type="time" name="end" value="18:40" aria-label="End" data-tc-follows="start"></div>
-                <div class="tc-field tc-field--fill120"><label>&nbsp;</label><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
-                <div class="tc-field tc-field--fill200"><label>Remind</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
+                <div class="tc-field tc-field--fill120"><label>&nbsp;</label><label class="tc-check"><input class="tc-check__box" type="checkbox" name="allday" value="1" data-tc-disables="start end"><span class="tc-tickrow__tick is-off"></span>All day</label></div>
+                <div class="tc-field tc-field--fill200"><label>Remind</label><span class="tc-in is-pick"><select class="tc-in__list" name="remind" aria-label="Remind"><option value="10.minutes.before" selected>10 minutes before</option></select></span></div>
               </div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Repeats, guests and more live on the card. A reminder is set here because that is why most events are created.</span>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button">Save event</button>
+              <button class="tc-btn is-primary" type="submit">Save event</button>
               <kbd class="tc-kbd">Enter</kbd>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg>Open the card</button>
               <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -7764,7 +7766,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--w520">
+          <form class="tc-sheet tc-sheet--w520" action="/app/tasks/nextcloud/dela/quick" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-task"/></svg>
               <b class="tc-sheet__title">New task</b>
@@ -7773,19 +7775,19 @@ Read  2 min ago</div>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-line tc-sheet__fields">
-                <div class="tc-field tc-grow"><label>Summary</label><input class="tc-in is-focus" type="text" value="Отправить документы в МФЦ" aria-label="Summary"></div>
-                <div class="tc-field tc-field--fix130"><label>Due date</label><input class="tc-in is-mono is-ph" type="date" placeholder="YYYY-MM-DD" aria-label="Due date"></div>
-                <div class="tc-field tc-field--fix96"><label>Due time</label><input class="tc-in is-mono is-ph" type="time" placeholder="--:--" aria-label="Due time"></div>
+                <div class="tc-field tc-grow"><label>Summary</label><input class="tc-in is-focus" type="text" name="summary" value="Отправить документы в МФЦ" aria-label="Summary"></div>
+                <div class="tc-field tc-field--fix130"><label>Due date</label><input class="tc-in is-mono is-ph" type="date" name="due.date" placeholder="YYYY-MM-DD" aria-label="Due date"></div>
+                <div class="tc-field tc-field--fix96"><label>Due time</label><input class="tc-in is-mono is-ph" type="time" name="due.time" placeholder="--:--" aria-label="Due time"></div>
               </div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">No time means the whole day. A task with no due date is a task all the same — both may stay empty.</span>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button">Save task</button>
+              <button class="tc-btn is-primary" type="submit">Save task</button>
               <kbd class="tc-kbd">Enter</kbd>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-expand"/></svg>Open the card</button>
               <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

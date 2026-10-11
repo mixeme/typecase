@@ -28,6 +28,14 @@ do, not what the authors did.
 
 ### Added
 
+- **A pick that sends looks like every other pick** (Carrel's task 149).
+  `Pick` with `Name` and `Options` prints the field `tc-in is-pick` with the
+  browser's list inside it (`select.tc-in__list`): the field draws the frame
+  and the arrow, the list only the words — before, the `select` drew an arrow
+  of its own and stood 2 px lower than a pick that is a button. `Pick.Mark`
+  is drawn in it too. `shape` drops the list and does not look into such a
+  pick. A check that is a checkbox looks like a check when it stands in a
+  field of a form. Nothing changes in the consumer's code.
 - **An end follows its start** (Carrel's task 152, the owner's decision of
   11.10). `Input.Follows` names the field of the same form an end's date or
   time follows; when the start is changed, the library's script moves the
