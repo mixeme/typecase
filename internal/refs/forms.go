@@ -36,6 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("radio-start", w.Seg{Options: []w.SegOption{{Label: "Markdown · .md", On: true, Value: "markdown.md"}, {Label: "Source · .ics", Value: "source.ics"}}, Variant: w.SegStart, Name: "send.it.as"}, "s-mail-5", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list", Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles", On: true, Title: "Tiles"}}}, "s-files-5", "tc-seg", 2),
 	form("order", w.Seg{Options: []w.SegOption{{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true}, {Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"}, {Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}}, "s-files-1", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}}, "s-contacts-1", "tc-seg", 1),

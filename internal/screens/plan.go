@@ -454,12 +454,15 @@ func Plan3() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Title: "Show password",
-					Head:  []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
+					Action: "/app/settings/devices/password",
+					Title:  "Show password",
+					Head:   []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "Your Carrel password",
-							Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Your Carrel password", Focus: true}},
+							Parts: []w.FieldPart{
+								w.Input{Name: "your.carrel.password", Value: "••••••••••", Label: "Your Carrel password", Focus: true},
+							},
 							Width: w.FieldW100,
 						},
 						w.Dim{
@@ -471,7 +474,7 @@ func Plan3() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Show", Kind: w.ButtonPrimary},
+						w.Button{Label: "Show", Kind: w.ButtonPrimary, Submit: true},
 						w.Button{Label: "Cancel"},
 						w.Kbd{Keys: "Esc", Place: w.Pushed},
 					},

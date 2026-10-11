@@ -1035,13 +1035,16 @@ func Profile3() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "shield",
-					Title: "Show password",
-					Head:  []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
+					Action: "/app/settings/connections/nextcloud/password",
+					Icon:   "shield",
+					Title:  "Show password",
+					Head:   []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "Your Carrel password",
-							Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Your Carrel password", Focus: true}},
+							Parts: []w.FieldPart{
+								w.Input{Name: "your.carrel.password", Value: "••••••••••", Label: "Your Carrel password", Focus: true},
+							},
 							Width: w.FieldW100,
 						},
 						w.Dim{
@@ -1053,7 +1056,7 @@ func Profile3() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Show", Kind: w.ButtonPrimary},
+						w.Button{Label: "Show", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
@@ -1383,13 +1386,18 @@ func Profile5() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "plus",
-					Title: "New calendar",
+					Action: "/app/collections/new",
+					Icon:   "plus",
+					Title:  "New calendar",
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "On which server",
 							Parts: []w.FieldPart{
-								w.Pick{Value: "nextcloud"},
+								w.Pick{
+									Name:    "on.which.server",
+									Options: []w.PickOption{{Value: "nextcloud", Label: "nextcloud", On: true}},
+									Label:   "On which server",
+								},
 								w.FieldHint{
 									Parts: []w.Inline{
 										w.Text("Two of three are listed: "),
@@ -1403,7 +1411,7 @@ func Profile5() Screen {
 						},
 						w.Field{
 							Label: "Name",
-							Parts: []w.FieldPart{w.Input{Value: "Поездки", Label: "Name", Focus: true}},
+							Parts: []w.FieldPart{w.Input{Name: "name", Value: "Поездки", Label: "Name", Focus: true}},
 							Width: w.FieldW100,
 						},
 						w.Field{
@@ -1430,9 +1438,9 @@ func Profile5() Screen {
 							Parts: []w.FieldPart{
 								w.Group{
 									Items: []w.FieldPart{
-										w.Check{On: true, Parts: []w.CheckPart{w.Text("Events")}},
-										w.Check{On: true, Parts: []w.CheckPart{w.Text("Tasks")}},
-										w.Check{Parts: []w.CheckPart{w.Text("Notes")}},
+										w.Check{On: true, Name: "events", Value: "1", Parts: []w.CheckPart{w.Text("Events")}},
+										w.Check{On: true, Name: "tasks", Value: "1", Parts: []w.CheckPart{w.Text("Tasks")}},
+										w.Check{Name: "notes", Value: "1", Parts: []w.CheckPart{w.Text("Notes")}},
 									},
 								},
 								w.FieldHint{
@@ -1449,7 +1457,7 @@ func Profile5() Screen {
 						w.Field{
 							Label: "Address",
 							Parts: []w.FieldPart{
-								w.Input{Value: "poezdki", Label: "Address", Mono: true},
+								w.Input{Name: "address", Value: "poezdki", Label: "Address", Mono: true},
 								w.FieldHint{
 									Parts: []w.Inline{
 										w.Mono{Text: "…/remote.php/dav/calendars/mix/poezdki/"},
@@ -1462,7 +1470,7 @@ func Profile5() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Create", Kind: w.ButtonPrimary},
+						w.Button{Label: "Create", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
@@ -1802,13 +1810,14 @@ func Profile7() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "pencil",
-					Title: "Rename and colour",
-					Head:  []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
+					Action: "/app/collections/nextcloud/dni-rozhdeniya/rename",
+					Icon:   "pencil",
+					Title:  "Rename and colour",
+					Head:   []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "Name",
-							Parts: []w.FieldPart{w.Input{Value: "Дни рождения", Label: "Name", Focus: true}},
+							Parts: []w.FieldPart{w.Input{Name: "name", Value: "Дни рождения", Label: "Name", Focus: true}},
 							Width: w.FieldW100,
 						},
 						w.Field{
@@ -1827,6 +1836,7 @@ func Profile7() Screen {
 							LabelAside: w.Dim{Parts: []w.Inline{w.Text("— stays as it is")}},
 							Parts: []w.FieldPart{
 								w.Input{
+									Name:    "address.stays.as.it.is",
 									Value:   "…/remote.php/dav/calendars/mix/birthdays/",
 									Label:   "Address",
 									Mono:    true,
@@ -1843,7 +1853,7 @@ func Profile7() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Save", Kind: w.ButtonPrimary},
+						w.Button{Label: "Save", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
@@ -2176,9 +2186,10 @@ func Profile9() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "trash",
-					Tone:  w.SheetIconDanger,
-					Title: "Delete on the server",
+					Action: "/app/collections/nextcloud/dni-rozhdeniya/delete",
+					Icon:   "trash",
+					Tone:   w.SheetIconDanger,
+					Title:  "Delete on the server",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("nextcloud · Дни рождения")},
@@ -2238,12 +2249,19 @@ func Profile9() Screen {
 						},
 						w.Field{
 							Label: "Type the name to confirm",
-							Parts: []w.FieldPart{w.Input{Placeholder: "Дни рождения", Label: "Type the name to confirm", Focus: true}},
+							Parts: []w.FieldPart{
+								w.Input{
+									Name:        "type.the.name.to.confirm",
+									Placeholder: "Дни рождения",
+									Label:       "Type the name to confirm",
+									Focus:       true,
+								},
+							},
 							Width: w.FieldW100,
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid},
+						w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
 				},

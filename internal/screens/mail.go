@@ -204,9 +204,10 @@ func Mail1() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "mail",
-					Title: "Letter",
-					Head:  []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}},
+					Action: "/app/mail/send",
+					Icon:   "mail",
+					Title:  "Letter",
+					Head:   []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "To",
@@ -225,12 +226,13 @@ func Mail1() Screen {
 						},
 						w.Field{
 							Label: "Subject",
-							Parts: []w.FieldPart{w.Input{Value: "Контакты подрядчика и смета", Label: "Subject"}},
+							Parts: []w.FieldPart{w.Input{Name: "subject", Value: "Контакты подрядчика и смета", Label: "Subject"}},
 							Width: w.FieldW100,
 						},
 						w.Area{
 							Text:    "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.",
 							Variant: w.AreaLetter,
+							Name:    "text",
 							Label:   "Text",
 						},
 						w.Sec{
@@ -293,7 +295,7 @@ func Mail1() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary},
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
 						w.Button{Label: "Preview"},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Signed "), w.Strong("Михаил Енученко"), w.Text(" · replies go to mix@example.org")},
@@ -452,8 +454,9 @@ func Mail4() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "mail",
-					Title: "Send this link",
+					Action: "/app/mail/send",
+					Icon:   "mail",
+					Title:  "Send this link",
 					Head: []w.SheetHeadPart{
 						w.SheetSubject{Mark: w.Mark{Colour: "#4A6B52"}, Text: "Личный · 10–31 August"},
 						w.Close{Label: "Close"},
@@ -461,12 +464,12 @@ func Mail4() Screen {
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "To",
-							Parts: []w.FieldPart{w.Input{Value: "n.orlova@example.org", Label: "To", Focus: true}},
+							Parts: []w.FieldPart{w.Input{Name: "to", Value: "n.orlova@example.org", Label: "To", Focus: true}},
 							Width: w.FieldW100,
 						},
 						w.Field{
 							Label: "A line from you",
-							Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "A line from you"}},
+							Parts: []w.FieldPart{w.Input{Name: "a.line.from.you", Placeholder: "optional", Label: "A line from you"}},
 							Width: w.FieldW100,
 						},
 						w.SheetFrom{
@@ -498,7 +501,7 @@ func Mail4() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary},
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
 						w.Button{Label: "Copy link instead"},
 						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}},
 					},

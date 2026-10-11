@@ -12101,18 +12101,18 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-profile-18">
     <div class="frame-label"><span>Папка хранилища · переименование</span><span class="frag">фрагмент</span><i>лист из ⋯ → Rename</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/app/files/sftpgo/documents/rename" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
         <b class="tc-sheet__title">Rename</b>
         <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">sftpgo · vps · Documents</span>
         </div>
         <div class="tc-sheet__body">
-          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Documents" aria-label="Name"></div>
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Documents" aria-label="Name"></div>
           <div class="tc-msg tc-msg--flush">A folder's name is its address: renaming it moves it on the server. Devices, published links and backup jobs pointing at the old address will see it vanish; the files inside stay as they are.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rename</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rename</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>У папки одно поле — имя, потому что имя и есть адрес; строка под ним говорит, что переименование двигает папку на сервере и кого это заденет.</figcaption>
@@ -12122,7 +12122,7 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-profile-19">
     <div class="frame-label"><span>Папка хранилища · удаление</span><span class="frag">фрагмент</span><i>лист из ⋯ → Delete on the server…</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/app/files/sftpgo/documents/delete" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
         <b class="tc-sheet__title">Delete on the server</b>
@@ -12142,10 +12142,10 @@ Read  2 min ago</div>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Download what you need from it there first.</span>
           </div>
-          <div class="tc-field tc-field--w100"><label>Type the name to confirm</label><input class="tc-in is-focus is-ph" type="text" placeholder="Documents" aria-label="Type the name to confirm"></div>
+          <div class="tc-field tc-field--w100"><label>Type the name to confirm</label><input class="tc-in is-focus is-ph" type="text" name="type.the.name.to.confirm" placeholder="Documents" aria-label="Type the name to confirm"></div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Delete on the server</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Delete on the server</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Как удаление коллекции: что исчезнет, что на неё смотрит, набор имени. Вместо «Download .ics first» — «Open in Files»: папку скачивают там, файлами или архивом. Строка архива — как у коллекции: задание копирования на папку смотрит.</figcaption>
@@ -12155,17 +12155,17 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-profile-20">
     <div class="frame-label"><span>Новая папка</span><span class="frag">фрагмент</span><i>лист из New folder в карточке хранилища</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/app/files/sftpgo/mkcol" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
         <b class="tc-sheet__title">New folder</b>
         </div>
         <div class="tc-sheet__body">
-          <div class="tc-field tc-field--w100"><label>On which server</label><button class="tc-in is-pick" type="button">sftpgo · vps</button></div>
-          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Scans" aria-label="Name"><span class="tc-field__hint tc-field__hint--t11-dusty">A folder's name is its address: there is nothing else to ask.</span></div>
+          <div class="tc-field tc-field--w100"><label>On which server</label><span class="tc-in is-pick"><select class="tc-in__list" name="on.which.server" aria-label="On which server"><option value="sftpgo.vps" selected>sftpgo · vps</option></select></span></div>
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Scans" aria-label="Name"><span class="tc-field__hint tc-field__hint--t11-dusty">A folder's name is its address: there is nothing else to ask.</span></div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Лист новой коллекции для файлового хранилища: сервер и имя — без цвета, состава и адреса, имя папки и есть её адрес.</figcaption>
@@ -12175,17 +12175,17 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-profile-21">
     <div class="frame-label"><span>Новая коллекция · никто не отвечает</span><span class="frag">фрагмент</span><i>лист New calendar</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/app/collections/new" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
         <b class="tc-sheet__title">New calendar</b>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-msg is-alert tc-msg--flush">No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there.</div>
-          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in" type="text" value="Поездки" aria-label="Name"></div>
+          <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in" type="text" name="name" value="Поездки" aria-label="Name"></div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" title="No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there." disabled>Create</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" title="No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there." disabled>Create</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Не отвечает ни один сервер нужного рода: выбирать не из чего, поля сервера нет, лист говорит почему, Create выключена с той же причиной. Когда не отвечают не все — как в кадре выше: «One of three is listed: baikal, radicale · vps are not answering…».</figcaption>
@@ -12297,18 +12297,18 @@ Read  2 min ago</div>
           </div>
         </div></div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--w400">
+          <form class="tc-sheet tc-sheet--w400" action="/app/settings/connections/nextcloud/password" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-shield"/></svg>
               <b class="tc-sheet__title">Show password</b>
               <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">nextcloud</span>
             </div>
             <div class="tc-sheet__body">
-              <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" value="••••••••••" aria-label="Your Carrel password"></div>
+              <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="your.carrel.password" value="••••••••••" aria-label="Your Carrel password"></div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Unlocks credentials everywhere for five minutes: passwords, device profiles, key escrow — anything handed out or handed over.</span>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Show</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Show</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
         </div>
       </div>
     </div>
@@ -12523,16 +12523,16 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet">
+          <form class="tc-sheet" action="/app/collections/new" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-plus"/></svg>
               <b class="tc-sheet__title">New calendar</b>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-field tc-field--w100"><label>On which server</label>
-                <button class="tc-in is-pick" type="button">nextcloud</button>
+                <span class="tc-in is-pick"><select class="tc-in__list" name="on.which.server" aria-label="On which server"><option value="nextcloud" selected>nextcloud</option></select></span>
                 <span class="tc-field__hint tc-field__hint--t11-dusty">Two of three are listed: <span class="tc-mono">baikal</span> is not answering, and until it does there is nothing to create there.</span></div>
-              <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Поездки" aria-label="Name"></div>
+              <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Поездки" aria-label="Name"></div>
               <div class="tc-field tc-field--w100"><label>Colour</label>
                 <span class="tc-line tc-line--gap-9 tc-field__swatches">
                   <label data-tc-colour="#4A6B52" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#4A6B52" aria-label="#4A6B52"></label>
@@ -12545,17 +12545,17 @@ Read  2 min ago</div>
                 <span class="tc-field__hint tc-field__hint--t11-dusty">Written to the server as <span class="tc-mono">calendar-color</span> — DAVx5 and Thunderbird will show the same one.</span></div>
               <div class="tc-field tc-field--w100"><label>What goes in it</label>
                 <div class="tc-line tc-line--gap-14 tc-card__top2">
-                  <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Events</button>
-                  <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Tasks</button>
-                  <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Notes</button>
+                  <label class="tc-check"><input class="tc-check__box" type="checkbox" name="events" value="1" checked><span class="tc-tickrow__tick"></span>Events</label>
+                  <label class="tc-check"><input class="tc-check__box" type="checkbox" name="tasks" value="1" checked><span class="tc-tickrow__tick"></span>Tasks</label>
+                  <label class="tc-check"><input class="tc-check__box" type="checkbox" name="notes" value="1"><span class="tc-tickrow__tick is-off"></span>Notes</label>
                 </div>
                 <span class="tc-field__hint tc-field__hint--t11-dusty">Most servers settle this when the collection is made and will not change it afterwards. A collection holding only tasks appears in <b>Tasks</b>, not here — the rail follows what is inside, not where it was made.</span></div>
               <div class="tc-field tc-field--w100"><label>Address</label>
-                <input class="tc-in is-mono" type="text" value="poezdki" aria-label="Address">
+                <input class="tc-in is-mono" type="text" name="address" value="poezdki" aria-label="Address">
                 <span class="tc-field__hint tc-field__hint--t11-dusty"><span class="tc-mono">…/remote.php/dav/calendars/mix/poezdki/</span> — taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show.</span></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
         </div>
       </div>
     </div>
@@ -12788,14 +12788,14 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--w520">
+          <form class="tc-sheet tc-sheet--w520" action="/app/collections/nextcloud/dni-rozhdeniya/rename" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
               <b class="tc-sheet__title">Rename and colour</b>
               <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">nextcloud</span>
             </div>
             <div class="tc-sheet__body">
-              <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="Дни рождения" aria-label="Name"></div>
+              <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Дни рождения" aria-label="Name"></div>
               <div class="tc-field tc-field--w100"><label>Colour</label>
                 <span class="tc-line tc-line--gap-9 tc-field__swatches">
                   <label data-tc-colour="#4A6B52" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#4A6B52" aria-label="#4A6B52"></label>
@@ -12806,11 +12806,11 @@ Read  2 min ago</div>
                   <label data-tc-colour="#9A9280" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#9A9280" aria-label="#9A9280"></label>
                 </span></div>
               <div class="tc-field tc-field--w100"><label>Address <span class="tc-dim">— stays as it is</span></label>
-                <input class="tc-in is-mono tc-in--dusty" type="text" value="…/remote.php/dav/calendars/mix/birthdays/" aria-label="Address"></div>
+                <input class="tc-in is-mono tc-in--dusty" type="text" name="address.stays.as.it.is" value="…/remote.php/dav/calendars/mix/birthdays/" aria-label="Address"></div>
               <div class="tc-msg tc-msg--flush-top2">Renaming is not moving: the address does not change, so devices, published links and backup jobs pointing here go on working. The new name and colour are written to the server — other clients will show them at their next sync.</div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Save</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Save</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
         </div>
       </div>
     </div>
@@ -12973,7 +12973,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet">
+          <form class="tc-sheet" action="/app/collections/nextcloud/dni-rozhdeniya/delete" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
               <b class="tc-sheet__title">Delete on the server</b>
@@ -12994,10 +12994,10 @@ Read  2 min ago</div>
                 <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Download <span class="tc-mono tc-mono--t11">.ics</span> first</button>
                 <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">51 events, one file, straight to you</span>
               </div>
-              <div class="tc-field tc-field--w100"><label>Type the name to confirm</label><input class="tc-in is-focus is-ph" type="text" placeholder="Дни рождения" aria-label="Type the name to confirm"></div>
+              <div class="tc-field tc-field--w100"><label>Type the name to confirm</label><input class="tc-in is-focus is-ph" type="text" name="type.the.name.to.confirm" placeholder="Дни рождения" aria-label="Type the name to confirm"></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Delete on the server</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Delete on the server</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
         </div>
       </div>
     </div>
@@ -13593,14 +13593,14 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--w400">
+          <form class="tc-sheet tc-sheet--w400" action="/app/settings/devices/password" method="post">
             <div class="tc-sheet__head"><b class="tc-sheet__title">Show password</b><span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">nextcloud</span></div>
             <div class="tc-sheet__body">
-              <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" value="••••••••••" aria-label="Your Carrel password"></div>
+              <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="your.carrel.password" value="••••••••••" aria-label="Your Carrel password"></div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Unlocks credentials everywhere for five minutes: passwords, device profiles, anything else handed out.</span>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Show</button><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd tc-push">Esc</kbd></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Show</button><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd tc-push">Esc</kbd></div>
+          </form>
         </div>
       </div>
     </div>
@@ -15729,7 +15729,7 @@ jobs:
         </div>
       </div>
       <div class="tc-scrim">
-        <div class="tc-sheet tc-sheet--w680">
+        <form class="tc-sheet tc-sheet--w680" action="/app/mail/send" method="post">
           <div class="tc-sheet__head">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-mail"/></svg>
             <b class="tc-sheet__title">Letter</b>
@@ -15743,8 +15743,8 @@ jobs:
                 <span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Артём Белов · a.belov@example.org</span>
               </span>
               <span class="tc-field__hint">2 of 10 recipients. Everyone sees the whole list.</span></div>
-            <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" value="Контакты подрядчика и смета" aria-label="Subject"></div>
-            <textarea class="tc-in is-area tc-in--note">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.</textarea>
+            <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" name="subject" value="Контакты подрядчика и смета" aria-label="Subject"></div>
+            <textarea class="tc-in is-area tc-in--note" name="text">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.</textarea>
             <div class="tc-sec tc-sec--flush-flush-padt11">
               <div class="tc-rubric tc-line tc-line--gap-8">Attached<span class="tc-num">4</span>
                 <span class="tc-push tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span></div>
@@ -15774,12 +15774,12 @@ jobs:
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
             <button class="tc-btn" type="button">Preview</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Signed <b>Михаил Енученко</b> · replies go to mix@example.org</span>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -15887,7 +15887,7 @@ jobs:
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--max100pc-full">
+          <form class="tc-sheet tc-sheet--max100pc-full" action="/app/mail/send" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-mail"/></svg>
               <b class="tc-sheet__title">Send this link</b>
@@ -15895,8 +15895,8 @@ jobs:
               <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
             </div>
             <div class="tc-sheet__body">
-              <div class="tc-field tc-field--w100"><label>To</label><input class="tc-in is-focus" type="text" value="n.orlova@example.org" aria-label="To"></div>
-              <div class="tc-field tc-field--w100"><label>A line from you</label><input class="tc-in is-ph" type="text" placeholder="optional" aria-label="A line from you"></div>
+              <div class="tc-field tc-field--w100"><label>To</label><input class="tc-in is-focus" type="text" name="to" value="n.orlova@example.org" aria-label="To"></div>
+              <div class="tc-field tc-field--w100"><label>A line from you</label><input class="tc-in is-ph" type="text" name="a.line.from.you" placeholder="optional" aria-label="A line from you"></div>
               <div class="tc-line tc-line--gap-8 tc-sheet__from">
                 <span class="tc-dim tc-dim--fix">Sent as</span>
                 <span class="tc-line__item"><b>Михаил Енученко</b> <span class="tc-mono tc-mono--t11">&lt;mix@carrel.example&gt;</span><br>Replies go to <span class="tc-mono tc-mono--t11">mix@example.org</span> · <span class="tc-dim--accent">change in Account</span></span>
@@ -15911,11 +15911,11 @@ jobs:
               </div>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+              <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
               <button class="tc-btn" type="button">Copy link instead</button>
               <span class="tc-push"><button class="tc-btn" type="button">Cancel</button></span>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -15931,11 +15931,11 @@ jobs:
 <div class="frame cap900" data-frame="s-mail-5">
   <div class="frame-label"><span>Выбрать заметку</span><span class="frag">фрагмент</span><i>лист поверх листа письма, экран целиком — выше</i></div>
   <div class="tc-root tc-root--on-bg tc-root--pad16">
-    <div class="tc-sheet tc-sheet--max100pc-full">
+    <form class="tc-sheet tc-sheet--max100pc-full" action="/app/mail/attach" method="post">
       <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-note"/></svg>
         <b class="tc-sheet__title">Attach a note</b>
-        <label class="tc-in tc-push tc-in--t12-w200"><svg width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none" class="tc-ico--dusty"><use href="#i-search"/></svg><input class="tc-q" type="search" value="подряд" aria-label="подряд"></label>
+        <label class="tc-in tc-push tc-in--t12-w200"><svg width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none" class="tc-ico--dusty"><use href="#i-search"/></svg><input class="tc-q" type="search" name="field" value="подряд" aria-label="подряд"></label>
         <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
       </div>
       <div class="tc-sheet__body tc-sheet__body--pad0">
@@ -15961,16 +15961,16 @@ jobs:
         </div>
         <div class="tc-sec">
           <div class="tc-field tc-field--w100"><label>Send it as</label>
-            <span class="tc-seg tc-seg--start"><button class="is-on tc-seg__opt" type="button">Markdown · .md</button><button class="tc-seg__opt" type="button">Source · .ics</button></span>
+            <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="send.it.as" value="markdown.md" checked>Markdown · .md</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="send.it.as" value="source.ics">Source · .ics</label></span>
             <span class="tc-field__hint">Markdown is what a person opens and reads; it carries the text and links to attachments, not the foreign properties another client wrote. The source <span class="tc-mono">.ics</span> is the faithful copy and needs a client that reads VJOURNAL — jtx Board, Evolution.</span></div>
         </div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="button">Attach</button>
+        <button class="tc-btn is-primary" type="submit">Attach</button>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">1 note · <span class="tc-mono">.md</span> · 4 KB · goes as a file</span>
         <span class="tc-push"><button class="tc-btn" type="button">Cancel</button></span>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 <figcaption><b>Тот же рейл источников и тот же список, что в разделе заметок</b> — не потому, что лень рисовать другое, а потому, что искать здесь будут ровно так же, как ищут всегда: сначала «в какой тетради», потом глазами по списку. Новый способ выбора означал бы, что человек учит второй интерфейс ради одного действия.<br><br><b>Формат заметки — единственное место во всём разделе, где вопрос настоящий.</b> У контакта он один — <code>.vcf</code>, у события — <code>.ics</code>; заметка же существует в двух видах сразу, потому что Carrel даёт ей Markdown-представление, которого нет больше ни у кого. Отсюда выбор из двух, и подпись под ним говорит не «форматы разные», а что каждый теряет: Markdown читает человек, но чужие <code>X-</code>свойства в него не попадают; исходный <code>.ics</code> несёт всё, но открывается только клиентом, понимающим VJOURNAL. По умолчанию — Markdown: письмо идёт человеку, а не его календарю.<br><br><b>Строка у кнопки — та же, что потом окажется в списке вложений:</b> что выбрано, чем уйдёт, сколько весит и файлом это будет или ссылкой. Она стоит здесь, чтобы решение «ссылкой» не оказалось новостью на следующем экране.</figcaption>
