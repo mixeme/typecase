@@ -3404,7 +3404,7 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-scrim tc-scrim--padt26">
-        <div class="tc-sheet tc-sheet--w520">
+        <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/move" method="post">
           <div class="tc-sheet__head">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
             <b class="tc-sheet__title">Move contact</b>
@@ -3413,15 +3413,15 @@ Read  2 min ago</div>
           <div class="tc-sheet__body">
             <div class="tc-rubric">Write into</div>
             <div class="tc-tree">
-              <div class="tc-tree__row tc-tree__row--op-55"><span class="tc-mark" data-tc-colour="#4A6B52"></span>Контакты <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></div>
-              <div class="is-on tc-tree__row"><span class="tc-mark" data-tc-colour="#A05A2C"></span>Архив <span class="tc-mono tc-push tc-mono--t10-dusty">nextcloud</span></div>
-              <div class="tc-tree__row"><span class="tc-mark" data-tc-colour="#8C6239"></span>Рассылки <span class="tc-mono tc-push tc-mono--t10-dusty">radicale</span></div>
-              <div class="tc-tree__row tc-tree__row--op-55"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>Команда <span class="tc-badge tc-push">read-only</span></div>
+              <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="nextcloud/kontakty" disabled><span class="tc-mark" data-tc-colour="#4A6B52"></span>Контакты <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></label>
+              <label class="is-on tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="nextcloud/arhiv" checked><span class="tc-mark" data-tc-colour="#A05A2C"></span>Архив <span class="tc-mono tc-push tc-mono--t10-dusty">nextcloud</span></label>
+              <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="radicale/rassylki"><span class="tc-mark" data-tc-colour="#8C6239"></span>Рассылки <span class="tc-mono tc-push tc-mono--t10-dusty">radicale</span></label>
+              <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="radicale/komanda" disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>Команда <span class="tc-badge tc-push">read-only</span></label>
             </div>
             <div class="tc-msg tc-msg--flush-top2">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after.</div>
           </div>
-          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-        </div>
+          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        </form>
       </div>
     </div>
   </div>
@@ -4174,7 +4174,7 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="s-contacts-17">
     <div class="frame-label"><span>Копировать контакт · лист</span><span class="frag">фрагмент</span><i>тот же лист с Copy</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/copy" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-dup"/></svg>
         <b class="tc-sheet__title">Copy contact</b>
@@ -4183,15 +4183,15 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-sheet__body">
           <div class="tc-rubric">Write into</div>
           <div class="tc-tree">
-              <div class="tc-tree__row tc-tree__row--op-55"><span class="tc-mark" data-tc-colour="#4A6B52"></span>Контакты <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></div>
-              <div class="is-on tc-tree__row"><span class="tc-mark" data-tc-colour="#A05A2C"></span>Архив <span class="tc-mono tc-push tc-mono--t10-dusty">nextcloud</span></div>
-              <div class="tc-tree__row"><span class="tc-mark" data-tc-colour="#8C6239"></span>Рассылки <span class="tc-mono tc-push tc-mono--t10-dusty">radicale</span></div>
-              <div class="tc-tree__row tc-tree__row--op-55"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>Команда <span class="tc-badge tc-push">read-only</span></div>
+              <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="nextcloud/kontakty" disabled><span class="tc-mark" data-tc-colour="#4A6B52"></span>Контакты <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></label>
+              <label class="is-on tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="nextcloud/arhiv" checked><span class="tc-mark" data-tc-colour="#A05A2C"></span>Архив <span class="tc-mono tc-push tc-mono--t10-dusty">nextcloud</span></label>
+              <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="radicale/rassylki"><span class="tc-mark" data-tc-colour="#8C6239"></span>Рассылки <span class="tc-mono tc-push tc-mono--t10-dusty">radicale</span></label>
+              <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="radicale/komanda" disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>Команда <span class="tc-badge tc-push">read-only</span></label>
             </div>
           <div class="tc-msg tc-msg--flush-top2">A copy is written into the chosen address book whole, with the same UID; the card here stays as it is.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Copy</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Copy</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Копия записи — тот же лист, что перенос: заголовок «Copy contact», кнопка «Copy», и сообщение о копии: запись пишется целиком, с тем же UID, а карточка здесь остаётся. Цель на другом аккаунте — сообщение об этой цели, как у файлов.</figcaption>
@@ -4218,7 +4218,7 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="s-contacts-19">
     <div class="frame-label"><span>Переписать · одна запись</span><span class="frag">фрагмент</span><i>лист после Save</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
         <b class="tc-sheet__title">Rewrite the address in their records?</b>
@@ -4245,8 +4245,8 @@ Read  2 min ago · not changed on server</div>
           </div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Collections that are not ticked were not looked in.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rewrite 1 record</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rewrite 1 record</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Одна запись — единственное число во всех строках. Отмеченная коллекция, которая не ответила, стоит в «What will not change» с причиной; неотмеченные коллекции не просматриваются, и лист говорит это строкой внизу.</figcaption>
@@ -4256,7 +4256,7 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="s-contacts-20">
     <div class="frame-label"><span>Переписать · нечего</span><span class="frag">фрагмент</span><i>лист после Save</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
         <b class="tc-sheet__title">Rewrite the address in their records?</b>
@@ -4278,8 +4278,8 @@ Read  2 min ago · not changed on server</div>
           </div>
           <div class="tc-msg is-alert tc-msg--flush">Nothing here can be rewritten: every record that names the old address is read-only or could not be read.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" disabled>Rewrite 0 records</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Rewrite 0 records</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Все записи со старым адресом только для чтения или не прочитались — переписывать нечего: кнопка «Rewrite 0 records» выключена, причина — сообщением над ней.</figcaption>
@@ -11087,18 +11087,18 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-scrim tc-scrim--padt26">
-        <div class="tc-sheet tc-sheet--w480">
+        <form class="tc-sheet tc-sheet--w480" action="/app/settings/escrow/deposit" method="post">
           <div class="tc-sheet__head">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
             <b class="tc-sheet__title">Deposit my key</b>
           </div>
           <div class="tc-sheet__body">
             <div class="tc-msg is-alert tc-msg--flush">An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account.</div>
-            <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" value="••••••••••" aria-label="Your Carrel password">
+            <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="password" value="••••••••••" aria-label="Your Carrel password">
               <span class="tc-field__hint">Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password.</span></div>
           </div>
-          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Deposit my key</button><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd tc-push">Esc</kbd></div>
-        </div>
+          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Deposit my key</button><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd tc-push">Esc</kbd></div>
+        </form>
       </div>
     </div>
   </div>
@@ -11229,7 +11229,7 @@ Read  2 min ago</div>
   <div class="frame" data-frame="account-11">
     <div class="frame-label"><span>Отзыв ключа · подтверждение</span><span class="frag">фрагмент</span><i>лист поверх Account</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/app/settings/escrow/withdraw" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-shield"/></svg>
         <b class="tc-sheet__title">Withdraw my deposited key</b>
@@ -11237,8 +11237,8 @@ Read  2 min ago</div>
         <div class="tc-sheet__body">
           <div class="tc-msg is-alert tc-msg--flush">After withdrawal nobody can recover this account, including you. The copy of your data key on this server is destroyed; your records and connections stay as they are.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Withdraw my deposited key</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Withdraw my deposited key</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Отзыв уничтожает копию ключа, поэтому кнопка залита и повторена в заголовке: что нажимают, то и происходит. Одно предупреждение — о том, чего больше не будет: восстановить учётную запись станет нечем.</figcaption>
@@ -16442,19 +16442,19 @@ password  9f2-brick-lamp</div>
   <div class="frame" data-frame="s-admin-13">
     <div class="frame-label"><span>Сброс пароля · кого</span><span class="frag">фрагмент</span><i>лист из шапки Users → Reset a password</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w480">
+      <form class="tc-sheet tc-sheet--w480" action="/admin/users/reset" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-shield"/></svg>
         <b class="tc-sheet__title">Reset a password</b>
         </div>
         <div class="tc-sheet__body">
-          <div class="tc-field tc-field--w100"><label>Whose</label><button class="tc-in is-pick" type="button">anna · User</button></div>
+          <div class="tc-field tc-field--w100"><label>Whose</label><span class="tc-in is-pick"><select class="tc-in__list" name="login" aria-label="Whose"><option value="anna.user" selected>anna · User</option></select></span></div>
           <div class="tc-msg is-alert tc-msg--flush">The passwords this person saved for DAV servers are sealed with their own password, and a reset destroys them: every account they connected has to be connected again, and their published links, devices and external backup triggers stop. Their records on the servers stay as they are.</div>
-          <div class="tc-field tc-field--w100"><label>Temporary password</label><input class="tc-in is-mono" type="text" value="4c1-tide-oven" aria-label="Temporary password"><span class="tc-field__hint">Hand it over yourself; they choose their own at the next sign-in. If their key is deposited, recover the account in Key escrow instead: nothing is destroyed then.</span></div>
-          <div class="tc-field tc-field--w100"><label>Type the login to confirm</label><input class="tc-in is-focus is-ph" type="text" placeholder="anna" aria-label="Type the login to confirm"></div>
+          <div class="tc-field tc-field--w100"><label>Temporary password</label><input class="tc-in is-mono" type="text" name="password" value="4c1-tide-oven" aria-label="Temporary password"><span class="tc-field__hint">Hand it over yourself; they choose their own at the next sign-in. If their key is deposited, recover the account in Key escrow instead: nothing is destroyed then.</span></div>
+          <div class="tc-field tc-field--w100"><label>Type the login to confirm</label><input class="tc-in is-focus is-ph" type="text" name="confirm" placeholder="anna" aria-label="Type the login to confirm"></div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Reset password</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Reset password</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption><b>Кнопка в шапке списка людей открывает лист, где выбирают, кого сбрасывать.</b> Последствие названо до нажатия: пароли от серверов запечатаны паролем человека и при сбросе пропадают: подключения придётся завести заново, а выданные ссылки, устройства и внешние запуски копий перестают работать. Временный пароль — здесь же, как у заведения пользователя; депонированный ключ — путь без потерь, и лист на него указывает. Логин набирают, как имя при удалении коллекции: сброс опустошает учётную запись, и выбор из списка не должен стать ошибкой одного нажатия (решение владельца). В «⋯» строки пользователя сброса нет.</figcaption>

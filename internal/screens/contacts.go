@@ -450,8 +450,9 @@ func Contacts2() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "move",
-					Title: "Move contact",
+					Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/move",
+					Icon:   "move",
+					Title:  "Move contact",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")},
@@ -468,22 +469,26 @@ func Contacts2() Screen {
 									Mark:        &w.Mark{Colour: "#4A6B52"},
 									Label:       "Контакты",
 									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "nextcloud/kontakty"},
 									Trail:       w.Mono{Text: "already there", Variant: w.Mono10Dusty},
 								},
 								{
 									Mark:  &w.Mark{Colour: "#A05A2C"},
 									Label: "Архив",
+									Send:  w.Send{Name: "to", Value: "nextcloud/arhiv"},
 									Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty},
 								},
 								{
 									Mark:  &w.Mark{Colour: "#8C6239"},
 									Label: "Рассылки",
+									Send:  w.Send{Name: "to", Value: "radicale/rassylki"},
 									Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty},
 								},
 								{
 									Mark:        &w.Mark{Colour: "#6B4E7A"},
 									Label:       "Команда",
 									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "radicale/komanda"},
 									Trail:       w.Badge{Label: "read-only"},
 								},
 							},
@@ -499,7 +504,7 @@ func Contacts2() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Move", Kind: w.ButtonPrimary},
+						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},

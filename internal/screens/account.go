@@ -273,9 +273,10 @@ func Account2() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "shield",
-					Tone:  w.SheetIconInk,
-					Title: "Deposit my key",
+					Action: "/app/settings/escrow/deposit",
+					Icon:   "shield",
+					Tone:   w.SheetIconInk,
+					Title:  "Deposit my key",
 					Body: []w.SheetPart{
 						w.Msg{
 							Parts: []w.MsgPart{
@@ -287,7 +288,7 @@ func Account2() Screen {
 						w.Field{
 							Label: "Your Carrel password",
 							Parts: []w.FieldPart{
-								w.Input{Value: "••••••••••", Label: "Your Carrel password", Focus: true},
+								w.Input{Name: "password", Value: "••••••••••", Label: "Your Carrel password", Focus: true},
 								w.FieldHint{
 									Parts: []w.Inline{
 										w.Text("Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password."),
@@ -298,7 +299,7 @@ func Account2() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Deposit my key", Kind: w.ButtonPrimary},
+						w.Button{Label: "Deposit my key", Kind: w.ButtonPrimary, Submit: true},
 						w.Button{Label: "Cancel"},
 						w.Kbd{Keys: "Esc", Place: w.Pushed},
 					},
