@@ -1322,7 +1322,7 @@ func Contacts15() Screen {
 									LabelSpan: true,
 									Parts: []w.FieldPart{
 										w.Photo{
-											ID: "photo",
+											ID: "photo-saved",
 											Side: []w.FieldPart{
 												w.Line{
 													Items: []w.LinePart{
@@ -1345,30 +1345,38 @@ func Contacts15() Screen {
 									Items: []w.Field{
 										w.Field{
 											Label: "Display name",
-											Parts: []w.FieldPart{w.Input{Value: "Анна Ковалёва", Label: "Display name", Focus: true}},
+											Parts: []w.FieldPart{w.Input{Name: "display.name", Value: "Анна Ковалёва", Label: "Display name", Focus: true}},
 											Width: w.FieldXL,
 										},
-										w.Field{Label: "Given", Parts: []w.FieldPart{w.Input{Value: "Анна", Label: "Given"}}, Width: w.FieldSM},
-										w.Field{Label: "Family", Parts: []w.FieldPart{w.Input{Value: "Ковалёва", Label: "Family"}}, Width: w.FieldSM},
+										w.Field{
+											Label: "Given",
+											Parts: []w.FieldPart{w.Input{Name: "given", Value: "Анна", Label: "Given"}},
+											Width: w.FieldSM,
+										},
+										w.Field{
+											Label: "Family",
+											Parts: []w.FieldPart{w.Input{Name: "family", Value: "Ковалёва", Label: "Family"}},
+											Width: w.FieldSM,
+										},
 										w.Field{
 											Label: "Nickname",
-											Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Nickname"}},
+											Parts: []w.FieldPart{w.Input{Name: "nickname", Placeholder: "—", Label: "Nickname"}},
 											Width: w.FieldSM,
 										},
 										w.Field{
 											Label: "Organisation",
-											Parts: []w.FieldPart{w.Input{Value: "Издательство «Слово»", Label: "Organisation"}},
+											Parts: []w.FieldPart{w.Input{Name: "organisation", Value: "Издательство «Слово»", Label: "Organisation"}},
 											Width: w.FieldMD,
 										},
 										w.Field{
 											Label: "Title",
-											Parts: []w.FieldPart{w.Input{Value: "Выпускающий редактор", Label: "Title"}},
+											Parts: []w.FieldPart{w.Input{Name: "title", Value: "Выпускающий редактор", Label: "Title"}},
 											Width: w.FieldMD,
 										},
 										w.Field{
 											Label: "Birthday",
 											Parts: []w.FieldPart{
-												w.Input{Value: "14.03.1987", Label: "Birthday", Mono: true, Numeric: true},
+												w.Input{Name: "birthday", Value: "14.03.1987", Label: "Birthday", Mono: true, Numeric: true},
 												w.FieldHint{Parts: []w.Inline{w.Text("Type it: 14.03.1987, or 14.03 without the year.")}},
 											},
 											Width: w.FieldSM,
@@ -1378,16 +1386,25 @@ func Contacts15() Screen {
 								w.FieldSet{
 									Rubric: w.Rubric{Text: "Phone numbers"},
 									Items: []w.FieldSetPart{
-										w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "mobile"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Label",
+											Parts: []w.FieldPart{
+												w.Pick{Name: "label", Options: []w.PickOption{{Value: "mobile", Label: "mobile", On: true}}, Label: "Label"},
+											},
+											Width: w.FieldXS,
+										},
 										w.Field{
 											Label: "Number",
-											Parts: []w.FieldPart{w.Input{Value: "+7 912 445-10-88", Label: "Number", Mono: true}},
+											Parts: []w.FieldPart{w.Input{Name: "number", Value: "+7 912 445-10-88", Label: "Number", Mono: true}},
 											Width: w.FieldMD,
 										},
 										w.Button{Label: "Remove", Kind: w.ButtonDanger},
 										w.Grow{},
-										w.Field{Parts: []w.FieldPart{w.Input{Value: "work"}}, Width: w.FieldXS},
-										w.Field{Parts: []w.FieldPart{w.Input{Value: "+7 495 120-45-00", Mono: true}}, Width: w.FieldMD},
+										w.Field{Parts: []w.FieldPart{w.Input{Name: "label", Value: "work", Label: "Label"}}, Width: w.FieldXS},
+										w.Field{
+											Parts: []w.FieldPart{w.Input{Name: "number", Value: "+7 495 120-45-00", Label: "Number", Mono: true}},
+											Width: w.FieldMD,
+										},
 										w.Button{Label: "Remove", Kind: w.ButtonDanger},
 										w.Grow{},
 										w.Button{Label: "Add phone", Icon: "plus", Small: true},
@@ -1396,10 +1413,16 @@ func Contacts15() Screen {
 								w.FieldSet{
 									Rubric: w.Rubric{Text: "Email addresses"},
 									Items: []w.FieldSetPart{
-										w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Label",
+											Parts: []w.FieldPart{
+												w.Pick{Name: "label", Options: []w.PickOption{{Value: "work", Label: "work", On: true}}, Label: "Label"},
+											},
+											Width: w.FieldXS,
+										},
 										w.Field{
 											Label: "Address",
-											Parts: []w.FieldPart{w.Input{Value: "a.kovaleva@slovo.example", Label: "Address"}},
+											Parts: []w.FieldPart{w.Input{Name: "address", Value: "a.kovaleva@slovo.example", Label: "Address"}},
 											Width: w.FieldLG,
 										},
 										w.Button{Label: "Remove", Kind: w.ButtonDanger},
@@ -1412,18 +1435,20 @@ func Contacts15() Screen {
 									Items: []w.FieldSetPart{
 										w.Field{
 											Label: "Tags",
-											Parts: []w.FieldPart{w.Input{Value: "работа, издательство", Label: "Tags"}},
+											Parts: []w.FieldPart{w.Input{Name: "tags", Value: "работа, издательство", Label: "Tags"}},
 											Width: w.FieldLG,
 										},
 										w.Field{
 											Label: "Note",
-											Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}},
+											Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Name: "note", Label: "Text"}},
 											Width: w.FieldFull,
 										},
 										w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
 									},
 								},
 							},
+							ID:     "contact-edit",
+							Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/edit",
 						},
 						w.FormFoot{
 							Items: []w.FormFootPart{
@@ -1497,7 +1522,7 @@ func Contacts15() Screen {
 						w.SheetNote{Text: "Collections that are not ticked were not looked in."},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},
+						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary, Form: "contact-edit"},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Gap:   w.LineGap7,

@@ -333,10 +333,12 @@ func Backup2() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Name",
-								Parts: []w.FieldPart{w.Input{Value: "Личное на домашний диск", Label: "Name", Focus: true}},
+								Parts: []w.FieldPart{w.Input{Name: "name", Value: "Личное на домашний диск", Label: "Name", Focus: true}},
 								Width: w.FieldLG,
 							},
-							w.Field{Parts: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("Job is on")}}}},
+							w.Field{
+								Parts: []w.FieldPart{w.Check{On: true, Name: "job.is.on", Value: "1", Parts: []w.CheckPart{w.Text("Job is on")}}},
+							},
 							w.FieldSet{
 								Rubric: w.Rubric{
 									Text:  "What to copy",
@@ -415,22 +417,37 @@ func Backup2() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "To WebDAV", On: true}, {Label: "Download"}, {Label: "Both"}},
+												Options: []w.SegOption{
+													{Label: "To WebDAV", On: true, Value: "to.webdav"},
+													{Label: "Download", Value: "download"},
+													{Label: "Both", Value: "both"},
+												},
 												Variant: w.SegStart,
+												Name:    "where",
 											},
 										},
 										OwnLine: true,
 										Place:   w.Grown,
 									},
-									w.Field{Label: "Collection", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Files"}}, Width: w.FieldLG},
+									w.Field{
+										Label: "Collection",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "collection",
+												Options: []w.PickOption{{Value: "nextcloud.files", Label: "nextcloud · Files", On: true}},
+												Label:   "Collection",
+											},
+										},
+										Width: w.FieldLG,
+									},
 									w.Field{
 										Label: "Folder",
-										Parts: []w.FieldPart{w.Input{Value: "carrel-backup", Label: "Folder", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder", Mono: true}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Keep copies",
-										Parts: []w.FieldPart{w.Input{Value: "8", Label: "Keep copies", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "keep.copies", Value: "8", Label: "Keep copies", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -464,7 +481,12 @@ func Backup2() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{On: true, Parts: []w.CheckPart{w.Text("Encrypt the archive")}},
+											w.Check{
+												On:    true,
+												Name:  "encrypt.the.archive",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("Encrypt the archive")},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."),
@@ -476,7 +498,7 @@ func Backup2() Screen {
 									},
 									w.Field{
 										Label: "Archive password",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Archive password"}},
+										Parts: []w.FieldPart{w.Input{Name: "archive.password", Value: "••••••••••••", Label: "Archive password"}},
 										Width: w.FieldLG,
 									},
 									w.Msg{
@@ -494,18 +516,30 @@ func Backup2() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{On: true, Parts: []w.CheckPart{w.Text("On demand — the button in the job list")}},
+											w.Check{
+												On:    true,
+												Name:  "on.demand.the.button.in.the.job.list",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("On demand — the button in the job list")},
+											},
 											w.Line{
 												Items: []w.LinePart{
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("On sign-in, if the last copy is older than")}},
-													w.Input{Value: "7", Label: "Days", Mono: true, Variant: w.InputChip},
+													w.Check{
+														On:    true,
+														Name:  "on.sign.in.if.the.last.copy.is.older.than",
+														Value: "1",
+														Parts: []w.CheckPart{w.Text("On sign-in, if the last copy is older than")},
+													},
+													w.Input{Name: "days", Value: "7", Label: "Days", Mono: true, Variant: w.InputChip},
 													w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}},
 												},
 												Gap:   w.LineGap7,
 												Block: true,
 											},
 											w.Check{
-												On: true,
+												On:    true,
+												Name:  "on.a.clock.of.your.own.cron.gosentry.a.job.in.gitea.local",
+												Value: "1",
 												Parts: []w.CheckPart{
 													w.Text("On a clock of your own — "),
 													w.Mono{Text: "cron"},
@@ -540,8 +574,14 @@ func Backup2() Screen {
 												Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}},
 											},
 											w.Seg{
-												Options: []w.SegOption{{Label: "crontab", On: true}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl"}},
+												Options: []w.SegOption{
+													{Label: "crontab", On: true, Value: "crontab"},
+													{Label: "GoSentry", Value: "gosentry"},
+													{Label: "Gitea", Value: "gitea"},
+													{Label: "curl", Value: "curl"},
+												},
 												Variant: w.SegStart,
+												Name:    "trigger",
 											},
 											w.Diag{
 												Text:    "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'",
@@ -551,7 +591,7 @@ func Backup2() Screen {
 												Kind: w.CardTop8,
 												Gap:  8,
 												Items: []w.CardRowPart{
-													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary},
+													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary, Submit: true},
 													w.Button{
 														Label: "New password",
 														Title: "The old password stops working; whatever runs this job has to be given the new one.",
@@ -612,6 +652,7 @@ func Backup2() Screen {
 								},
 							},
 						},
+						Action: "/app/settings/backup/job",
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete job", Kind: w.ButtonDangerSolid},

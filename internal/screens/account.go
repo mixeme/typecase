@@ -499,17 +499,17 @@ func Account3() Screen {
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Current password",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Current password"}},
+										Parts: []w.FieldPart{w.Input{Name: "current.password", Value: "••••••••••", Label: "Current password"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "New password",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "New password", Focus: true}},
+										Parts: []w.FieldPart{w.Input{Name: "new.password", Value: "••••••••••••", Label: "New password", Focus: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Repeat new password",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat new password"}},
+										Parts: []w.FieldPart{w.Input{Name: "repeat.new.password", Value: "••••••••••••", Label: "Repeat new password"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
@@ -523,10 +523,15 @@ func Account3() Screen {
 										Place: w.Grown,
 									},
 								},
+								ID:      "password",
+								Action:  "/app/settings/account/password",
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
-								Items:   []w.FormFootPart{w.Button{Label: "Change password", Kind: w.ButtonPrimary}, w.Button{Label: "Back to settings"}},
+								Items: []w.FormFootPart{
+									w.Button{Label: "Change password", Kind: w.ButtonPrimary, Form: "password"},
+									w.Button{Label: "Back to settings"},
+								},
 								Variant: w.FormFootFlush,
 							},
 						},

@@ -821,21 +821,24 @@ func Admin5() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Server URL",
-								Parts: []w.FieldPart{w.Input{Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true}},
+								Parts: []w.FieldPart{
+									w.Input{Name: "server.url", Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true},
+								},
 								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Username",
-								Parts: []w.FieldPart{w.Input{Value: "m.yenuchenko", Label: "Username"}},
+								Parts: []w.FieldPart{w.Input{Name: "username", Value: "m.yenuchenko", Label: "Username"}},
 								Width: w.FieldMD,
 							},
 							w.Field{
 								Label: "Password",
-								Parts: []w.FieldPart{w.Input{Value: "••••••••", Label: "Password"}},
+								Parts: []w.FieldPart{w.Input{Name: "password", Value: "••••••••", Label: "Password"}},
 								Width: w.FieldMD,
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary}}},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, Submit: true}}},
 						},
+						Action: "/admin/dav/check",
 					},
 					w.MainDiag{
 						Diag: w.Diag{

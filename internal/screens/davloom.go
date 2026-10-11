@@ -332,7 +332,7 @@ func Davloom2() Screen {
 									w.Field{
 										Label: "Name",
 										Parts: []w.FieldPart{
-											w.Input{Value: "Телефон · DAVx5", Label: "Name", Focus: true},
+											w.Input{Name: "name", Value: "Телефон · DAVx5", Label: "Name", Focus: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("For you: this is how you will know what you are revoking later.")}},
 										},
 										Width: w.FieldW100,
@@ -341,8 +341,12 @@ func Davloom2() Screen {
 										Label: "What this device may do",
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "Read only"}, {Label: "Read and write", On: true}},
+												Options: []w.SegOption{
+													{Label: "Read only", Value: "read.only"},
+													{Label: "Read and write", On: true, Value: "read.and.write"},
+												},
 												Variant: w.SegStart,
+												Name:    "what.this.device.may.do",
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -358,16 +362,22 @@ func Davloom2() Screen {
 										Parts: []w.FieldPart{
 											w.Group{
 												Items: []w.FieldPart{
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("Calendars")}},
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("Address books")}},
+													w.Check{On: true, Name: "calendars", Value: "1", Parts: []w.CheckPart{w.Text("Calendars")}},
+													w.Check{On: true, Name: "address.books", Value: "1", Parts: []w.CheckPart{w.Text("Address books")}},
 													w.Check{
+														Name:  "tasks.vtodo.not.every.client.understands.them",
+														Value: "1",
 														Parts: []w.CheckPart{w.Text("Tasks "), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}},
 													},
 													w.Check{
+														Name:  "notes.vjournal.a.different.subset.of.clients",
+														Value: "1",
 														Parts: []w.CheckPart{w.Text("Notes "), w.Dim{Parts: []w.Inline{w.Text("· VJOURNAL — a different subset of clients")}}},
 													},
 													w.Check{
 														On:    true,
+														Name:  "webdav.folders.mount.as.a.network.drive",
+														Value: "1",
 														Parts: []w.CheckPart{w.Text("WebDAV folders "), w.Dim{Parts: []w.Inline{w.Text("· mount as a network drive")}}},
 													},
 												},
@@ -381,12 +391,17 @@ func Davloom2() Screen {
 										Parts: []w.FieldPart{
 											w.Group{
 												Items: []w.FieldPart{
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("nextcloud · Личный")}},
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("nextcloud · Работа")}},
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
-													w.Check{Parts: []w.CheckPart{w.Text("radicale · vps · Проекты")}},
-													w.Check{Parts: []w.CheckPart{w.Text("radicale · vps · Команда")}},
-													w.Check{On: true, Parts: []w.CheckPart{w.Text("sftpgo · vps · Documents")}},
+													w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Личный")}},
+													w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Работа")}},
+													w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
+													w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Проекты")}},
+													w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Команда")}},
+													w.Check{
+														On:    true,
+														Name:  "sftpgo.vps.documents",
+														Value: "1",
+														Parts: []w.CheckPart{w.Text("sftpgo · vps · Documents")},
+													},
 												},
 												Form: w.GroupColumn,
 											},
@@ -394,6 +409,8 @@ func Davloom2() Screen {
 										Width: w.FieldW100,
 									},
 								},
+								ID:      "device",
+								Action:  "/app/settings/davloom/devices/new",
 								Variant: w.FormFlush,
 							},
 							w.Msg{
@@ -404,7 +421,7 @@ func Davloom2() Screen {
 								Space: w.MsgFlushSides,
 							},
 							w.FormFoot{
-								Items:   []w.FormFootPart{w.Button{Label: "Create password", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
+								Items:   []w.FormFootPart{w.Button{Label: "Create password", Kind: w.ButtonPrimary, Form: "device"}, w.Button{Label: "Cancel"}},
 								Variant: w.FormFootFlush,
 							},
 						},
@@ -504,21 +521,34 @@ func Davloom3() Screen {
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Address",
-										Parts: []w.FieldPart{w.Input{Value: "https://carrel.example/dav/", Label: "Address", Mono: true, Variant: w.Input11}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:    "address",
+												Value:   "https://carrel.example/dav/",
+												Label:   "Address",
+												Mono:    true,
+												Variant: w.Input11,
+											},
+										},
 										Width: w.FieldW100,
 									},
 									w.Field{
 										Label: "User name",
 										Parts: []w.FieldPart{
-											w.Input{Value: "mix", Label: "User name", Mono: true},
+											w.Input{Name: "user.name", Value: "mix", Label: "User name", Mono: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("Your Carrel login; the password is the device’s, not yours.")}},
 										},
 										Width: w.FieldW100,
 									},
 								},
+								ID:      "device",
+								Action:  "/app/settings/davloom/devices/new",
 								Variant: w.FormFlush,
 							},
-							w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Done", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Done", Kind: w.ButtonPrimary, Form: "device"}},
+								Variant: w.FormFootFlush,
+							},
 						},
 						Variant: w.Dialog520,
 					},
