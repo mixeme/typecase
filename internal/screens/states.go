@@ -3467,8 +3467,10 @@ func States24() Screen {
 										Label: "Related to",
 										Parts: []w.FieldPart{
 											w.TagInput{
-												Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}},
-												Add:   &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+												Parts: []w.TagInputPart{
+													w.Tag{Label: "Забрать документы", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true},
+												},
+												Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
 											},
 										},
 										Width: w.FieldLG,
@@ -4381,8 +4383,11 @@ func States31() Screen {
 												Label: "Related to",
 												Parts: []w.FieldPart{
 													w.TagInput{
-														Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}},
-														Add:   &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+														Parts: []w.TagInputPart{
+															w.Tag{Label: "Синк-ап по релизу", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true},
+															w.Tag{Label: "Дописать раздел про кэш", Mark: &w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, Removable: true},
+														},
+														Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
 													},
 												},
 												Width: w.FieldFlex3_340,

@@ -109,10 +109,11 @@ var _ = add(
 	primitive("focus", w.Mark{Colour: "#8C6239", Size: w.MarkH18, Focus: true}, "s-profile-10", "tc-mark", 12),
 
 	// tc-tag
+	primitive("unloaded", w.Tag{Label: "7c1e-40aa-b913", Removable: true}, "s-tasks-11", "tc-tag", 3),
 	primitive("plain", w.Tag{Label: "работа"}, "s-contacts-1", "tc-tag", 2),
 	primitive("on", w.Tag{Label: "all", On: true}, "s-contacts-1", "tc-tag", 1),
 	primitive("icon", w.Tag{Label: "smirnov.vcf", Icon: "con"}, "s-mail-7", "tc-tag", 1),
-	primitive("removable", w.Tag{Label: "Забрать документы", Removable: true}, "s-tasks-3", "tc-tag", 1),
+	primitive("removable", w.Tag{Label: "Забрать документы", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true}, "s-tasks-3", "tc-tag", 1),
 	// Carrel's task 77: the attendees — a known person by the colour of their book and name, an unknown one by the address.
 	primitive("person", w.Tag{Label: "Мария Лебедева", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Fixed: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}}, Title: "m.lebedeva@example.org", Value: "mailto:m.lebedeva@example.org"}, "s-agenda-3", "tc-tag", 1),
 	primitive("person", w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· accepted")}}, Title: "a.kovaleva@example.org", Value: "mailto:a.kovaleva@example.org"}, "s-agenda-3", "tc-tag", 2),

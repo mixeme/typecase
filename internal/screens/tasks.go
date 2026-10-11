@@ -668,8 +668,10 @@ func Tasks3() Screen {
 										Label: "Related to",
 										Parts: []w.FieldPart{
 											w.TagInput{
-												Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}},
-												Add:   &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+												Parts: []w.TagInputPart{
+													w.Tag{Label: "Забрать документы", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true},
+												},
+												Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
 											},
 										},
 										Width: w.FieldLG,
