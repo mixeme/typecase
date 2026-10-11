@@ -3590,6 +3590,27 @@ Read  2 min ago</div>
   <figcaption>У адреса — типы vCard home, work, other. Подпись, которую написал другой клиент, стоит под чертой как есть: её не переводят в тип и не теряют. Предлагается она только строке, у которой она своя, — и там она выбрана.</figcaption>
   </figure>
 
+<figure style="flex:0 1 300px">
+  <div class="frame" data-frame="s-contacts-28">
+    <div class="frame-label"><span>Контакты · Columns</span><span class="frag">меню</span><i>меню полосы списка контактов</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-menu" action="/app/contacts/columns" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-rubric tc-menu__item tc-menu__item--pad5-8-7" role="presentation">Columns</div>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="name" checked disabled><svg class="tc-ico--op-35"><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Name<span class="tc-push tc-dim tc-dim--t10-5">always</span></label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="phone" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Phone</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="email" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Email</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="org" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Organisation</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="source" checked><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick"></span>Source</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="birthday"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Birthday</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="tags"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Tags</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="changed"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Changed</label>
+        <div class="tc-menu__foot"><button class="tc-btn is-sm is-primary" type="submit">Apply</button><button class="tc-btn is-sm" type="submit" name="col" value="default">Reset to defaults</button></div>
+      </form>
+    </div>
+  </div>
+  <figcaption>Отмечено то, что стоит в списке контактов по умолчанию, в том же порядке: имя, телефон, почта, организация, источник; Birthday, Tags и Changed добавляют. Name стоит всегда — за него карточку открывают. Source — только в едином виде, как у задач и заметок. Меню то же, что у остальных родов (равенство коллекций): тегов в строке по умолчанию нет ни у одного, столбец включают здесь.</figcaption>
+  </figure>
+
 <figure style="flex:1 1 100%">
   <div class="frame" data-frame="s-contacts-23">
     <div class="frame-label"><span>Контакты · свои столбцы</span><span class="frag">фрагмент</span><i>список после «Columns»</i></div>
@@ -3603,7 +3624,7 @@ Read  2 min ago</div>
       </div></div>
     </div>
   </div>
-  <figcaption>Список со столбцами из меню выше: Name, Email, Birthday, Tags, Source — Phone и Organisation сняты, Birthday и Tags добавлены, порядок свой. Ширина столбца — его рода: имя и почта тянутся, дата и источник — постоянной ширины. На узкой ширине второстепенные уходят первыми, как у обычного списка: дата, теги, «Changed», организация — у 800 px, почта — у 620, источник — у 460; имя остаётся всегда.</figcaption>
+  <figcaption>Список после меню «Columns» (выше — набор по умолчанию): Name, Email, Birthday, Tags, Source — Phone и Organisation сняты, Birthday и Tags добавлены, порядок свой. Ширина столбца — его рода: имя и почта тянутся, дата и источник — постоянной ширины. На узкой ширине второстепенные уходят первыми, как у обычного списка: дата, теги, «Changed», организация — у 800 px, почта — у 620, источник — у 460; имя остаётся всегда.</figcaption>
   </figure>
 
 <figure style="flex:1 1 100%">

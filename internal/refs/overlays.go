@@ -8,6 +8,17 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("columns", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
+		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Name", Name: "col", Value: "name", Fixed: true},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Phone", Name: "col", Value: "phone"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Email", Name: "col", Value: "email"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Organisation", Name: "col", Value: "org"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{}, Label: "Source", Name: "col", Value: "source"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Birthday", Name: "col", Value: "birthday"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Tags", Name: "col", Value: "tags"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Changed", Name: "col", Value: "changed"},
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true, Submit: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default", Submit: true}}}}, Action: "/app/contacts/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-contacts-28", "tc-menu", 1),
 	overlay("picker", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "doc", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}, Label: "Files"},
 		w.MenuItem{Icon: "file", File: &w.FileField{Form: "post-upload", Name: "file", Label: "Folder", Size: "size", Folder: true}, Label: "Folder"},
