@@ -4814,6 +4814,24 @@ func States34() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.BarSep{},
+							w.Button{
+								Folds: true,
+								Label: "Download",
+								Icon:  "down",
+								Title: "Download",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "download",
+							},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"},
+						},
+						Count:    &w.BarCount{Text: "With the ticked"},
+						Variant:  w.BarSelection,
+						NoScript: true,
+					},
+					w.Bar{
+						Items: []w.BarPart{
 							w.Filter{
 								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
 								Waiting: true,
@@ -4862,7 +4880,7 @@ func States34() Screen {
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "прайс-2026.pdf"}},
 									{
 										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "прайс-2026.pdf", Href: "/app/files/sftpgo/public/прайс-2026.pdf"}},
 									},
@@ -4874,7 +4892,7 @@ func States34() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "схема-проезда.png"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{Icon: "img", Name: "схема-проезда.png", Href: "/app/files/sftpgo/public/схема-проезда.png"},
@@ -4887,6 +4905,11 @@ func States34() Screen {
 								},
 							},
 						},
+					},
+					w.PostForm{
+						ID:     "files-sel",
+						Action: "/app/files/sftpgo/public/op",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},

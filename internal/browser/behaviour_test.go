@@ -1419,3 +1419,44 @@ func TestThumbPictureGone(t *testing.T) {
 		}
 	}
 }
+
+// TestSelectionForm (Carrel's task 148): the ticks of a table and of tiles
+// belong to a form they do not stand in (Send.Of), and the selection bar's
+// buttons send that form — the ticked names and which action. The bar of an
+// empty selection (Bar.NoScript) stands on a page without a script and is not
+// drawn on one with it. The bite: the same page with tc.js has no bar.
+func TestSelectionForm(t *testing.T) {
+	needChrome(t)
+	off := w.TickedOff
+	bar := w.Bar{Variant: w.BarSelection, NoScript: true, Count: &w.BarCount{Text: "With the ticked"},
+		Items: []w.BarPart{w.Button{Label: "Delete", Form: "sel", Name: "op", Value: "delete"}}}
+	table := w.Table{Rows: []w.TableRow{{Cells: []w.TableCell{{Pick: &off, Send: w.Send{Of: "sel", Name: "item", Value: "t.pdf"}}, {Parts: []w.CellPart{w.Text("t.pdf")}}}}}}
+	grid := w.Grid{Tiles: []w.Tile{
+		{Thumb: w.Thumb{Icon: "img"}, Name: "a.jpg", Meta: "2 MB", Send: w.Send{Of: "sel", Name: "item", Value: "a.jpg"}},
+		{Thumb: w.Thumb{Icon: "img"}, Name: "b.png", Meta: "1 MB", Send: w.Send{Of: "sel", Name: "item", Value: "b.png"}}}}
+	body := `<div class="tc-root"><div class="tc-main">` + bar.Render() + table.Render() + grid.Render() +
+		w.PostForm{ID: "sel", Action: "/x", Fields: []w.Hidden{{Name: "csrf", Value: "k"}}}.Render() + `</div></div>`
+	h := browser.NewHarness(t)
+	const shown = `document.querySelector(".tc-bar").getClientRects().length > 0 ? "bar" : "no bar"`
+	var with, without, sent string
+	if err := h.Run(h.RegisterPage("sel", browser.PageHTML(body, "")), 900, 600, chromedp.Evaluate(shown, &with)); err != nil {
+		t.Fatal(err)
+	}
+	bare := h.RegisterPage("sel-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	if err := h.Run(bare, 900, 600,
+		chromedp.Evaluate(shown, &without),
+		chromedp.Click(`.tc-table input`, chromedp.ByQuery),
+		chromedp.Click(`.tc-tile:nth-child(2) .tc-thumb`, chromedp.ByQuery),
+		chromedp.Evaluate(`document.addEventListener("submit", e => { e.preventDefault(); window.__sent = new URLSearchParams(new FormData(e.target, e.submitter)).toString(); }); true`, nil),
+		chromedp.Click(`.tc-bar .tc-btn`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__sent || ""`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if with != "no bar" || without != "bar" {
+		t.Errorf("the bar of an empty selection: with a script %q, without %q; want no bar, bar", with, without)
+	}
+	if sent != "op=delete&item=t.pdf&item=b.png&csrf=k" {
+		t.Errorf("sent %q; want op=delete&item=t.pdf&item=b.png&csrf=k", sent)
+	}
+}

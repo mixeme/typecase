@@ -629,6 +629,7 @@ var _ = add(
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Sign out"}}, Width: w.MenuWidth290}, End: true}}}, "account-5", "tc-top", 1),
+	overlay("selection", w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download", Form: "files-sel", Name: "op", Value: "download"}, w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"}}, Count: &w.BarCount{Text: "With the ticked"}, Variant: w.BarSelection}, "states-34", "tc-bar", 1),
 	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}}, w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Overdue"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}}, "components-19", "tc-bar", 1),

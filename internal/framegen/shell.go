@@ -157,11 +157,16 @@ func (g *gen) bar(e *El) string {
 	for _, v := range allOf(e, []kv{{"tc-bar--sel", "BarSelection"}, {"tc-bar--wide", "BarWide"}}) {
 		f = append(f, "Variant: w."+v)
 	}
+	if e.Has("tc-nojs") {
+		f = append(f, "NoScript: true")
+	}
 	return "w.Bar{" + join(f, ", ") + "}"
 }
 
 func (g *gen) blockChild(k *El) string {
 	switch {
+	case k.Has("tc-post"):
+		return g.postForm(k)
 	case k.Has("tc-form"):
 		return g.form(k)
 	case k.Has("tc-formfoot"):

@@ -109,11 +109,44 @@ func Files1() Screen {
 						Items: []w.BarPart{
 							w.Mono{Text: "412 KB", Variant: w.MonoMuted},
 							w.BarSep{},
-							w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
-							w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename"},
-							w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
-							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
-							w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
+							w.Button{
+								Folds: true,
+								Label: "Download",
+								Icon:  "down",
+								Title: "Download",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "download",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Rename",
+								Icon:  "pencil",
+								Title: "Rename",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "rename",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Move",
+								Icon:  "move",
+								Title: "Move",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "move",
+							},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"},
+							w.Button{
+								Folds: true,
+								Label: "Delete",
+								Icon:  "trash",
+								Kind:  w.ButtonDangerSolid,
+								Title: "Delete",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "delete",
+							},
 						},
 						Count:   &w.BarCount{Text: "1 selected"},
 						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
@@ -185,7 +218,7 @@ func Files1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
@@ -200,7 +233,10 @@ func Files1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{
+										Pick: ptr(w.TickedOff),
+										Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-04-whiteboard.jpg"},
+									},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -224,7 +260,10 @@ func Files1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
+									{
+										Pick: ptr(w.TickedOn),
+										Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-10-sync-board.png"},
+									},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -249,7 +288,7 @@ func Files1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -273,7 +312,7 @@ func Files1() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "смета-подрядчик.pdf"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -296,6 +335,11 @@ func Files1() Screen {
 								},
 							},
 						},
+					},
+					w.PostForm{
+						ID:     "files-sel",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -454,11 +498,45 @@ func Files2() Screen {
 						Items: []w.BarPart{
 							w.Mono{Text: "4.4 MB", Variant: w.MonoMuted},
 							w.BarSep{},
-							w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
-							w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename", State: w.ButtonOff},
-							w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
-							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
-							w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
+							w.Button{
+								Folds: true,
+								Label: "Download",
+								Icon:  "down",
+								Title: "Download",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "download",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Rename",
+								Icon:  "pencil",
+								Title: "Rename",
+								State: w.ButtonOff,
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "rename",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Move",
+								Icon:  "move",
+								Title: "Move",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "move",
+							},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"},
+							w.Button{
+								Folds: true,
+								Label: "Delete",
+								Icon:  "trash",
+								Kind:  w.ButtonDangerSolid,
+								Title: "Delete",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "delete",
+							},
 						},
 						Count:   &w.BarCount{Text: "3 selected"},
 						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
@@ -530,7 +608,7 @@ func Files2() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
@@ -545,7 +623,10 @@ func Files2() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
+									{
+										Pick: ptr(w.TickedOn),
+										Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-04-whiteboard.jpg"},
+									},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -570,7 +651,10 @@ func Files2() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
+									{
+										Pick: ptr(w.TickedOn),
+										Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-10-sync-board.png"},
+									},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -595,7 +679,7 @@ func Files2() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOn)},
+									{Pick: ptr(w.TickedOn), Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -620,7 +704,7 @@ func Files2() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff)},
+									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "смета-подрядчик.pdf"}},
 									{
 										Parts: []w.CellPart{
 											w.TableFile{
@@ -643,6 +727,11 @@ func Files2() Screen {
 								},
 							},
 						},
+					},
+					w.PostForm{
+						ID:     "files-sel",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.Queue{
 						Title:  "Uploading 2 of 3",
@@ -776,11 +865,45 @@ func Files4() Screen {
 							Items: []w.BarPart{
 								w.Mono{Text: "4.4 MB", Variant: w.MonoMuted},
 								w.BarSep{},
-								w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
-								w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename", State: w.ButtonOff},
-								w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
-								w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
-								w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
+								w.Button{
+									Folds: true,
+									Label: "Download",
+									Icon:  "down",
+									Title: "Download",
+									Form:  "files-sel",
+									Name:  "op",
+									Value: "download",
+								},
+								w.Button{
+									Folds: true,
+									Label: "Rename",
+									Icon:  "pencil",
+									Title: "Rename",
+									State: w.ButtonOff,
+									Form:  "files-sel",
+									Name:  "op",
+									Value: "rename",
+								},
+								w.Button{
+									Folds: true,
+									Label: "Move",
+									Icon:  "move",
+									Title: "Move",
+									Form:  "files-sel",
+									Name:  "op",
+									Value: "move",
+								},
+								w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"},
+								w.Button{
+									Folds: true,
+									Label: "Delete",
+									Icon:  "trash",
+									Kind:  w.ButtonDangerSolid,
+									Title: "Delete",
+									Form:  "files-sel",
+									Name:  "op",
+									Value: "delete",
+								},
 							},
 							Count:   &w.BarCount{Text: "3 selected"},
 							Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
@@ -852,7 +975,7 @@ func Files4() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOff)},
+										{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
 										{
 											Parts: []w.CellPart{
 												w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
@@ -867,7 +990,10 @@ func Files4() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
+										{
+											Pick: ptr(w.TickedOn),
+											Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-04-whiteboard.jpg"},
+										},
 										{
 											Parts: []w.CellPart{
 												w.TableFile{
@@ -892,7 +1018,10 @@ func Files4() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
+										{
+											Pick: ptr(w.TickedOn),
+											Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-10-sync-board.png"},
+										},
 										{
 											Parts: []w.CellPart{
 												w.TableFile{
@@ -917,7 +1046,7 @@ func Files4() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
+										{Pick: ptr(w.TickedOn), Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 										{
 											Parts: []w.CellPart{
 												w.TableFile{
@@ -942,7 +1071,7 @@ func Files4() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOff)},
+										{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "смета-подрядчик.pdf"}},
 										{
 											Parts: []w.CellPart{
 												w.TableFile{
@@ -965,6 +1094,11 @@ func Files4() Screen {
 									},
 								},
 							},
+						},
+						w.PostForm{
+							ID:     "files-sel",
+							Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						},
 					},
 				},
@@ -1142,11 +1276,44 @@ func Files5() Screen {
 						Items: []w.BarPart{
 							w.Mono{Text: "2.8 MB", Variant: w.MonoMuted},
 							w.BarSep{},
-							w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download"},
-							w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Rename"},
-							w.Button{Folds: true, Label: "Move", Icon: "move", Title: "Move"},
-							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy"},
-							w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
+							w.Button{
+								Folds: true,
+								Label: "Download",
+								Icon:  "down",
+								Title: "Download",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "download",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Rename",
+								Icon:  "pencil",
+								Title: "Rename",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "rename",
+							},
+							w.Button{
+								Folds: true,
+								Label: "Move",
+								Icon:  "move",
+								Title: "Move",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "move",
+							},
+							w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"},
+							w.Button{
+								Folds: true,
+								Label: "Delete",
+								Icon:  "trash",
+								Kind:  w.ButtonDangerSolid,
+								Title: "Delete",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "delete",
+							},
 						},
 						Count:   &w.BarCount{Text: "1 selected"},
 						Variant: w.BarSelection,
@@ -1204,14 +1371,14 @@ func Files5() Screen {
 								Name:  "архив",
 								Meta:  "",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/архив",
-								Send:  w.Send{Name: "item", Value: "архив"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "архив"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "file", Form: w.ThumbFolder},
 								Name:  "черновики",
 								Meta:  "0 items",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/черновики",
-								Send:  w.Send{Name: "item", Value: "черновики"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "черновики"},
 							},
 							w.Tile{
 								Thumb:    w.Thumb{Icon: "img"},
@@ -1219,37 +1386,42 @@ func Files5() Screen {
 								Meta:     "2.8 MB · 4032×3024",
 								Selected: true,
 								Href:     "/app/files/sftpgo/documents/carrel/attachments/2026-07/whiteboard.jpg",
-								Send:     w.Send{Name: "item", Value: "whiteboard.jpg"},
+								Send:     w.Send{Of: "files-sel", Name: "item", Value: "whiteboard.jpg"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard},
 								Name:  "панорама.tif",
 								Meta:  "84 MB · too large",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/панорама.tif",
-								Send:  w.Send{Name: "item", Value: "панорама.tif"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "панорама.tif"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard},
 								Name:  "смета.pdf",
 								Meta:  "1.2 MB",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/смета.pdf",
-								Send:  w.Send{Name: "item", Value: "смета.pdf"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "смета.pdf"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "img"},
 								Name:  "схема-1.png",
 								Meta:  "640 KB",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-1.png",
-								Send:  w.Send{Name: "item", Value: "схема-1.png"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "схема-1.png"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "img"},
 								Name:  "схема-2.png",
 								Meta:  "712 KB",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-2.png",
-								Send:  w.Send{Name: "item", Value: "схема-2.png"},
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "схема-2.png"},
 							},
 						},
+					},
+					w.PostForm{
+						ID:     "files-sel",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-07",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},

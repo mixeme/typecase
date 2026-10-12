@@ -15,19 +15,21 @@ const (
 // Send is what pressing a tick box sends. With Form it is a submit button of
 // that form, a toggle that acts at once — a source of the rail, a card's
 // choice; with a Name only, a checkbox of the form it stands in, a choice
-// acted on later — rows before a bulk action. Empty, the box is the
-// script's.
+// acted on later — rows before a bulk action; Of names that form when the
+// checkbox stands outside it (a PostForm the selection bar's buttons send:
+// Carrel's task 148). Empty, the box is the script's.
 type Send struct {
 	Form  string
 	Name  string
 	Value string
+	Of    string // the ID of the form a checkbox belongs to without standing in it
 }
 
 // box prints the tick box; label is what is ticked.
 func (t Ticked) box(label string, send Send, more ...string) string {
 	if send.Name != "" && send.Form == "" {
 		own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)
-		return `<input` + class(nil, own...) + ` type="checkbox"` + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
+		return `<input` + class(nil, own...) + ` type="checkbox"` + attr("form", send.Of) + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
 			flag("checked", t == TickedOn) + `>`
 	}
 	own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)

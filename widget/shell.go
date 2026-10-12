@@ -83,6 +83,7 @@ type MainPart interface {
 
 func (Head) mainPart()      {}
 func (Bar) mainPart()       {}
+func (PostForm) mainPart()  {}
 func (List) mainPart()      {}
 func (ListGroup) mainPart() {}
 func (Form) mainPart()      {}

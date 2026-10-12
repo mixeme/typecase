@@ -31,6 +31,17 @@ do, not what the authors did.
 
 ### Added
 
+- **The selection bar sends without a script** (Carrel's task 148; the
+  owner's decision of 09.10: without scripts the bar stands always). The
+  ticks of a table's rows and of tiles are checkboxes of a form they do not
+  stand in: `Send.Of` is the ID of a `PostForm`, printed as `form=` on the
+  checkbox (`TableCell.Send`, `Tile.Send`). No form wraps the list — the
+  bar under it holds forms of its own, and a form holds no form. The bar's
+  buttons send that form with which action was pressed (`Button.Form`,
+  `Name`, `Value`). `PostForm` is a part of `Main`. `Bar.NoScript` is the
+  bar of an empty selection: a page with a script does not draw it (the bar
+  comes with the first tick), a page without one always does.
+  `TestSelectionForm`.
 - **A thumbnail whose picture did not arrive keeps its icon** (Carrel's task
   148). `.tc-thumb__img` stands over the icon of the file's kind
   (`position:absolute`); `tc.js` takes away a picture whose address refused
@@ -470,6 +481,14 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The files' ticks and selection bar are a form** (Carrel's task 148):
+  `s-files-1`, `-2`, `-4` — the ticks of the table are checkboxes named
+  `item`, `s-files-5` — the tiles' boxes, all of the form `files-sel` that
+  stands after the list; the bar's Download, Rename, Move, Copy and Delete
+  send it with `op`. `states-34` (a read-only storage, nothing ticked) has
+  the bar of an empty selection, «With the ticked» with Download and Copy,
+  which only a page without a script shows. The frames look the same, to the
+  pixel. The names of the fields are an illustration.
 - **The settings rail counts what its pages draw** (Carrel's task 148; the
   owner left the numbers to the mockup, 12.10). The Connections page draws a
   fourth server, radicale · vps, with the collections the record frames

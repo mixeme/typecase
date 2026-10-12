@@ -623,7 +623,7 @@ func (t Tile) html(m mix) string {
 		name = "a"
 	}
 	if t.Send.Name != "" {
-		box = `<input class="tc-tile__box" type="checkbox"` + attr("name", t.Send.Name) + attr("value", t.Send.Value) + attr("aria-label", "Pick "+t.Name) + flag("checked", t.Selected) + `>`
+		box = `<input class="tc-tile__box" type="checkbox"` + attr("form", t.Send.Of) + attr("name", t.Send.Name) + attr("value", t.Send.Value) + attr("aria-label", "Pick "+t.Name) + flag("checked", t.Selected) + `>`
 	}
 	return `<div` + class(m, "tc-tile", is("sel", t.Selected)) + `>` + box + t.Thumb.html(nil) + `<` + name + ` class="tc-tile__name"` + attr("href", t.Href) + `>` + esc(t.Name) +
 		`</` + name + `><span class="tc-tile__meta">` + esc(t.Meta) + `</span></div>`

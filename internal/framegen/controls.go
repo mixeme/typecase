@@ -1290,6 +1290,9 @@ func (g *gen) listGroup(k *El) string {
 func sendOf(t *El) string {
 	var f []string
 	for _, a := range []kv{{"form", "Form"}, {"name", "Name"}, {"value", "Value"}} {
+		if a.k == "form" && t.Attr("type") == "checkbox" {
+			a.v = "Of"
+		}
 		if v := t.Attr(a.k); v != "" {
 			f = append(f, a.v+": "+q(v))
 		}
