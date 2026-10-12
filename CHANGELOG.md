@@ -31,6 +31,15 @@ do, not what the authors did.
 
 ### Added
 
+- **A tree's node that is a tick and has an address** (Carrel's task 158).
+  `TreeRow` with `Send`, `Href` and `Swap`: the node stays a radio button of
+  its form, `Href` is the address of the page drawn with this node chosen
+  (`data-tc-href`), `Swap` the IDs of what to change (`data-tc-swap` — the
+  sheet's `ID`). The live layer asks the address when the node is chosen
+  and puts the sheet in place — the folder opens, the button that could not
+  act can; the address does not go to the history. Without the layer the
+  form's «Open the folder» button does the same through the server.
+  `TestTreeNodeSwap`.
 - **The selection bar sends without a script** (Carrel's task 148; the
   owner's decision of 09.10: without scripts the bar stands always). The
   ticks of a table's rows and of tiles are checkboxes of a form they do not

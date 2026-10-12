@@ -1106,6 +1106,7 @@ func Files4() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
+					ID:     "move-sheet",
 					Action: "/app/files/sftpgo/documents/op/carrel/attachments?op=move",
 					Icon:   "move",
 					Title:  "Move 3 items",
@@ -1124,24 +1125,36 @@ func Files4() Screen {
 						},
 						w.Tree{
 							Rows: []w.TreeRow{
-								{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
+								{
+									Icon:  "file",
+									Label: "Documents",
+									Send:  w.Send{Name: "to", Value: "sftpgo/documents"},
+									Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents",
+									Swap:  "move-sheet",
+								},
 								{
 									Icon:   "file",
 									Label:  "carrel",
 									Indent: w.TreeLevel22,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel"},
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel",
+									Swap:   "move-sheet",
 								},
 								{
 									Icon:   "file",
 									Label:  "attachments",
 									Indent: w.TreeLevel40,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"},
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel/attachments",
+									Swap:   "move-sheet",
 								},
 								{
 									Icon:   "file",
 									Label:  "2026-07",
 									Indent: w.TreeLevel58,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"},
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel/attachments/2026-07",
+									Swap:   "move-sheet",
 								},
 								{
 									Icon:        "file",

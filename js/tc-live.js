@@ -99,13 +99,7 @@
 	// the page at its address is asked for, and the elements it names are put
 	// in place of the same ones here; the address goes to the history. Without
 	// the layer — or when the answer has not them — the link simply goes.
-	document.addEventListener("click", function (e) {
-		var a = e.target.closest && e.target.closest("a[data-tc-swap]");
-		if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-		var ids = a.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
-		if (!ids.length || !window.DOMParser) return;
-		e.preventDefault();
-		var href = a.href;
+	function swap(href, ids, done, failed) {
 		fetch(href, { credentials: "same-origin", headers: { Accept: "text/html" } })
 			.then(function (r) {
 				if (!r.ok) throw new Error(r.status);
@@ -122,12 +116,38 @@
 					p[0].replaceWith(fresh);
 					if (tc.init) tc.init(fresh);
 				});
-				history.pushState({ tcSwap: true }, "", href);
-				swapped = true;
+				if (done) done();
 			})
 			.catch(function () {
-				location.assign(href);
+				if (failed) failed();
 			});
+	}
+
+	document.addEventListener("click", function (e) {
+		var a = e.target.closest && e.target.closest("a[data-tc-swap]");
+		if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+		var ids = a.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
+		if (!ids.length || !window.DOMParser) return;
+		e.preventDefault();
+		var href = a.href;
+		swap(href, ids, function () {
+			history.pushState({ tcSwap: true }, "", href);
+			swapped = true;
+		}, function () {
+			location.assign(href);
+		});
+	});
+
+	// A tree's node that is a radio button and has an address (TreeRow with
+	// Send and Href, Carrel's task 158): choosing it asks the page drawn with
+	// this node chosen and puts the named elements — the sheet — in place.
+	// The address does not go to the history: the sheet is one place. When
+	// the answer fails the choice stays, and the form's own buttons act.
+	document.addEventListener("change", function (e) {
+		var t = e.target;
+		if (!t.matches || !t.matches('input[type="radio"][data-tc-href][data-tc-swap]') || !window.DOMParser) return;
+		var ids = t.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
+		if (ids.length) swap(t.getAttribute("data-tc-href"), ids);
 	});
 	// Back and forward over swapped pages load the page of the address.
 	var swapped = false;

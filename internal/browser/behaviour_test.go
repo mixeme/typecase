@@ -1460,3 +1460,47 @@ func TestSelectionForm(t *testing.T) {
 		t.Errorf("sent %q; want op=delete&item=t.pdf&item=b.png&csrf=k", sent)
 	}
 }
+
+// TestTreeNodeSwap (Carrel's task 158): a tree's node that is a radio button
+// and has an address — choosing it asks the page drawn with that node chosen
+// and puts the sheet it names in place: the button that was off is on, the
+// page is not loaded again. The bite: without the live layer the choice
+// moves and the button stays as the server drew it.
+func TestTreeNodeSwap(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	page := func(a, b string, on int) string {
+		move := w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true}
+		if on == 1 {
+			move.State = w.ButtonDisabled
+		}
+		sheet := w.Sheet{Title: "Move 3 items", Action: "/x", ID: "move-sheet", Body: []w.SheetPart{w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "here", Send: w.Send{Name: "to", Value: "here"}, Href: a, Swap: "move-sheet"},
+			{Icon: "file", Label: "there", Send: w.Send{Name: "to", Value: "there"}, Href: b, Swap: "move-sheet"}}, On: on}},
+			Foot: []w.SheetFootPart{move}}
+		return `<div class="tc-root">` + sheet.Render() + `</div>`
+	}
+	here := h.RegisterPage("node-here", "")
+	there := h.RegisterPage("node-there", "")
+	h.RegisterPage("node-here", browser.PageHTML(page(here, there, 1), ""))
+	h.RegisterPage("node-there", browser.PageHTML(page(here, there, 2), ""))
+	bare := h.RegisterPage("node-bare", strings.Replace(browser.PageHTML(page(here, there, 1), ""), `<script src="/tc-live.js"></script>`, "", 1))
+	const state = `(document.querySelector(".tc-btn.is-primary").disabled ? "off" : "on") + " " + document.querySelector("input:checked").value + " " + (window.__kept === true)`
+	for _, c := range []struct{ name, url, want string }{
+		{"with the live layer", here, "on there true"},
+		{"without it", bare, "off there true"},
+	} {
+		var got string
+		if err := h.Run(c.url, 900, 600,
+			chromedp.Evaluate(`window.__kept = true; true`, nil),
+			chromedp.Click(`.tc-tree__row:nth-child(2)`, chromedp.ByQuery),
+			chromedp.Sleep(1500*time.Millisecond),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}

@@ -50,7 +50,13 @@ type TreeRow struct {
 	Indent      TreeIndent
 	Unavailable bool // cannot be chosen: read-only, already there
 	Trail       TreeTrail
-	Href        string // the node is a link: a folder opens at the address
+	// Href makes the node a link: a folder opens at the address. With Send the
+	// node stays a radio button and Href is the address of the page drawn
+	// with this node chosen: the live layer asks it when the node is chosen
+	// and puts the elements Swap names in place of the same ones here
+	// (Carrel's task 158); without the layer the form's «Open» button does it.
+	Href string
+	Swap string // the IDs of the elements to change, separated by spaces
 	// Send makes the node a radio button of the form the tree stands in: the
 	// chosen node's Value goes under the tree's Name — where to put a thing
 	// (Carrel's task 116). The chosen one is the tree's On; an unavailable
@@ -66,7 +72,8 @@ func (r TreeRow) html(on bool) string {
 	}
 	s.WriteString(`<` + tag + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", pick(tag == "a", r.Href)) + `>`)
 	if tag == "label" {
-		s.WriteString(`<input class="tc-tree__box" type="radio"` + attr("name", r.Send.Name) + attr("value", r.Send.Value) + flag("checked", on) + flag("disabled", r.Unavailable) + `>`)
+		s.WriteString(`<input class="tc-tree__box" type="radio"` + attr("name", r.Send.Name) + attr("value", r.Send.Value) + flag("checked", on) + flag("disabled", r.Unavailable) +
+			attr("data-tc-href", pick(r.Swap != "", r.Href)) + attr("data-tc-swap", pick(r.Href != "", r.Swap)) + `>`)
 	}
 	switch {
 	case r.Mark != nil:

@@ -723,6 +723,9 @@ func (g *gen) tree(e *El) string {
 		}
 		if box != nil {
 			x = append(x, "Send: "+sendOf(box))
+			if h := box.Attr("data-tc-href"); h != "" {
+				x = append(x, "Href: "+q(h), "Swap: "+q(box.Attr("data-tc-swap")))
+			}
 		}
 		if t := tr; t != nil {
 			switch {
