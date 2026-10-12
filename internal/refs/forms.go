@@ -140,7 +140,7 @@ var _ = add(
 	form("item", w.Rubric{Text: "Write into", Form: w.RubricItem}, "components-6", "tc-rubric", 1),
 	form("variant", w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBottom7}, "s-profile-9", "tc-rubric", 3),
 	form("variant", w.Rubric{Text: "DAV servers", Variant: w.RubricSplit, Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}}, "s-profile-1", "tc-rubric", 2),
-	form("variant", w.Rubric{Text: "baikal", Variant: w.RubricDanger, Items: []w.RubricPart{w.Line{}}}, "s-profile-1", "tc-rubric", 5),
+	form("variant", w.Rubric{Text: "baikal", Variant: w.RubricDanger, Items: []w.RubricPart{w.Line{}}}, "s-profile-1", "tc-rubric", 6),
 	form("variant", w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, "s-notes-2", "tc-rubric", 3),
 	form("variant", w.Rubric{Text: "nextcloud", Variant: w.RubricRail}, "phone-2", "tc-rubric", 1),
 	form("variant", w.Rubric{Text: "Timeline", Variant: w.RubricBottom2}, "s-contacts-7", "tc-rubric", 2),

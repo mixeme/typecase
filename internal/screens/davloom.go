@@ -26,7 +26,7 @@ func Davloom1() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -108,7 +108,7 @@ func Davloom1() Screen {
 						},
 						Tone: w.MsgAccent,
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Device"},
@@ -171,6 +171,33 @@ func Davloom1() Screen {
 									},
 									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Планшет · Календарь iOS"}}},
+									{
+										Parts: []w.CellPart{
+											w.CellWrap{
+												Items: []w.CellPart{
+													w.Line{
+														Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
+														Gap:   w.LineGap3,
+													},
+													w.Mono{Text: "Calendars", Variant: w.Mono11},
+													w.Button{Label: "3 collections · Change", Small: true},
+													w.Seg{
+														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Variant: w.SegCompact,
+														Place:   w.Pushed,
+													},
+												},
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("2026-07-19")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-14 21:15")}, Mono: true},
 									{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
 								},
 							},
@@ -283,7 +310,7 @@ func Davloom2() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -455,7 +482,7 @@ func Davloom3() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},

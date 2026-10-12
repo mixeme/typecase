@@ -26,7 +26,7 @@ func Profile1() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -66,7 +66,7 @@ func Profile1() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 3 servers · 12 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 15 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -80,7 +80,7 @@ func Profile1() Screen {
 						Items: []w.ResultsPart{
 							w.Rubric{
 								Text:    "DAV servers",
-								Items:   []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}},
+								Items:   []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}},
 								Variant: w.RubricSplit,
 							},
 							w.Card{
@@ -282,6 +282,81 @@ func Profile1() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
+										Text: "radicale · vps",
+										Items: []w.RubricPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{Label: "New collection", Icon: "plus", Small: true},
+													w.Button{Label: "Show password", Small: true},
+													w.Button{Label: "Test", Small: true},
+													w.Button{Label: "Edit", Small: true},
+													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+												},
+												Gap: w.LineGap6,
+											},
+										},
+									},
+									w.Mono{
+										Text:    "https://dav.vps.example/radicale/ · mix · last answer 4 min ago",
+										Form:    w.MonoLine,
+										Variant: w.Mono11_5Dusty,
+									},
+									w.Table{
+										Cols: []w.TableCol{
+											{Width: w.ColTickSmall},
+											{Label: "Collection"},
+											{Label: "What is in it", Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
+											{Label: "Changed on the server", Width: w.ColChanged},
+											{Width: w.ColMenu},
+										},
+										Rows: []w.TableRow{
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
+													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("42")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
+													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("18")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("36")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
 										Text: "baikal",
 										Items: []w.RubricPart{
 											w.Line{
@@ -445,7 +520,7 @@ func Profile2() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -580,7 +655,7 @@ func Profile14() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -717,7 +792,7 @@ func Profile16() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -850,7 +925,7 @@ func Profile11() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -980,7 +1055,7 @@ func Profile3() Screen {
 							w.Nav{
 								Items: []w.NavItem{
 									{Icon: "user", Label: "Account", Href: "#"},
-									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 									{Icon: "file", Label: "Attachments", Href: "#"},
 									{Icon: "device", Label: "New device", Href: "#"},
 									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -1018,7 +1093,7 @@ func Profile3() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Pad:   w.HeadPadBottom8,
 						},
 						w.Pad{
@@ -1126,7 +1201,7 @@ func Profile4() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -1164,7 +1239,7 @@ func Profile4() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Badge{Label: "credentials unlocked · 4:12", Accent: true},
@@ -1738,7 +1813,7 @@ func Profile7() Screen {
 							w.Nav{
 								Items: []w.NavItem{
 									{Icon: "user", Label: "Account", Href: "#"},
-									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 									{Icon: "file", Label: "Attachments", Href: "#"},
 									{Icon: "device", Label: "New device", Href: "#"},
 									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -1776,7 +1851,7 @@ func Profile7() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadPadBottom8,
 						},
@@ -1924,7 +1999,7 @@ func Profile8() Screen {
 							w.Nav{
 								Items: []w.NavItem{
 									{Icon: "user", Label: "Account", Href: "#"},
-									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 									{Icon: "file", Label: "Attachments", Href: "#"},
 									{Icon: "device", Label: "New device", Href: "#"},
 									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -1962,7 +2037,7 @@ func Profile8() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadPadBottom8,
 						},
@@ -2123,7 +2198,7 @@ func Profile9() Screen {
 							w.Nav{
 								Items: []w.NavItem{
 									{Icon: "user", Label: "Account", Href: "#"},
-									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 									{Icon: "file", Label: "Attachments", Href: "#"},
 									{Icon: "device", Label: "New device", Href: "#"},
 									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -2161,7 +2236,7 @@ func Profile9() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadPadBottom8,
 						},
@@ -2338,7 +2413,7 @@ func Profile10() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -2378,7 +2453,7 @@ func Profile10() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 3 servers · 12 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 15 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -2392,7 +2467,7 @@ func Profile10() Screen {
 						Items: []w.ResultsPart{
 							w.Rubric{
 								Text:    "DAV servers",
-								Items:   []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}},
+								Items:   []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}},
 								Variant: w.RubricSplit,
 							},
 							w.Card{
@@ -2568,6 +2643,81 @@ func Profile10() Screen {
 													},
 												},
 												State: w.RowOff,
+											},
+										},
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
+										Text: "radicale · vps",
+										Items: []w.RubricPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{Label: "New collection", Icon: "plus", Small: true},
+													w.Button{Label: "Show password", Small: true},
+													w.Button{Label: "Test", Small: true},
+													w.Button{Label: "Edit", Small: true},
+													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+												},
+												Gap: w.LineGap6,
+											},
+										},
+									},
+									w.Mono{
+										Text:    "https://dav.vps.example/radicale/ · mix · last answer 4 min ago",
+										Form:    w.MonoLine,
+										Variant: w.Mono11_5Dusty,
+									},
+									w.Table{
+										Cols: []w.TableCol{
+											{Width: w.ColTickSmall},
+											{Label: "Collection"},
+											{Label: "What is in it", Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
+											{Label: "Changed on the server", Width: w.ColChanged},
+											{Width: w.ColMenu},
+										},
+										Rows: []w.TableRow{
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
+													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("42")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
+													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("18")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("36")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
 											},
 										},
 									},

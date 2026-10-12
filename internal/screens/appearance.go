@@ -26,7 +26,7 @@ func Appearance1() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},

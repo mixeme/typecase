@@ -26,7 +26,7 @@ func Account1() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -217,7 +217,7 @@ func Account2() Screen {
 							w.Nav{
 								Items: []w.NavItem{
 									{Icon: "user", Label: "Account", Href: "#"},
-									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 									{Icon: "file", Label: "Attachments", Href: "#"},
 									{Icon: "device", Label: "New device", Href: "#"},
 									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -338,7 +338,7 @@ func Mail9() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -460,7 +460,7 @@ func Account3() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
@@ -574,7 +574,7 @@ func Account4() Screen {
 						w.Nav{
 							Items: []w.NavItem{
 								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
 								{Icon: "file", Label: "Attachments", Href: "#"},
 								{Icon: "device", Label: "New device", Href: "#"},
 								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},

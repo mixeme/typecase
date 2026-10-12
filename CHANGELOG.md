@@ -470,6 +470,14 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The settings rail counts what its pages draw** (Carrel's task 148; the
+  owner left the numbers to the mockup, 12.10). The Connections page draws a
+  fourth server, radicale · vps, with the collections the record frames
+  already name (`s-profile-1`, `-10`); the heads say «4 servers · 15
+  collections», the rails «Connections 4» (6 in the four mail frames, with
+  the two mailboxes). The davloom page draws a third device, as the rail and
+  the rail's foot count (`s-davloom-1`). «Backup 3» is its three jobs. 39
+  frames, numbers and rows only.
 - The owner's decision of 07.10 (Р-37, the other sheets): the sheets of a
   move, a copy and Attach from Files have the pick of the server in their
   head, and their tree shows the storages of that server only, without the
