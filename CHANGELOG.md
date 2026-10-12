@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Thumb` with `Src` prints its icon too, under the picture (Carrel's task
+  148): pass `Icon` with `Src`, as for a file without a thumbnail — a `Thumb`
+  that has only `Src` prints an icon with no name.
 - `DueRow.Tags` and `ExcerptRow.Tags` are gone: a row of a list has no tags
   by default in any kind (the owner's decision of 10.10, Р-53) — they stand
   in the record's panel and in the rail. Tags in a row are the column a
@@ -28,6 +31,14 @@ do, not what the authors did.
 
 ### Added
 
+- **A thumbnail whose picture did not arrive keeps its icon** (Carrel's task
+  148). `.tc-thumb__img` stands over the icon of the file's kind
+  (`position:absolute`); `tc.js` takes away a picture whose address refused
+  or whose file is no picture, and the tile shows the icon, as a file without
+  a thumbnail does. With a script the icon is not drawn under a picture that
+  arrived (a transparent one shows the thumbnail's colour, not the icon);
+  without a script the icon stays under the picture. Nothing to do beyond
+  passing `Icon` (above); `TestThumbPictureGone`.
 - **A group of fields that is a form of its own** (Carrel's task 149).
   `FieldSet.Action` (with `Method`, `Fields`) prints the group as a form: a
   page of settings holds several — a name with its Save, an address with its
@@ -445,6 +456,20 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Files after Carrel's second scan** (task 148). `s-files-5`: the tiles go
+  as the table does — folders first, then files by name. `s-files-16`: the
+  folder «attachments» holds what every other frame draws in it — the folder
+  `2026-07` and four files by name. `s-publish-18` (new): the list of
+  published links when there are none — one line under the head that says so
+  and where a link is made; no table, no button, no count in the rail. The
+  caption of `s-publish-3` says «Photo» decides about the photo in the `.vcf`
+  only. `components-40`: the thumbnail keeps its icon under the picture; the
+  frame looks the same. 429 frames.
+- **A folder's tile is not a file's** (the owner's decision of 12.10): no
+  card under the icon, a large folder in the accent colour —
+  `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
+  `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
+  folder stands first too).
 - The owner's decision of 07.10 (Р-37, the other sheets): the sheets of a
   move, a copy and Attach from Files have the pick of the server in their
   head, and their tree shows the storages of that server only, without the

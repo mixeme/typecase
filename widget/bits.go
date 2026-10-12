@@ -548,22 +548,23 @@ const (
 	ThumbPreview                  // a preview in a side panel
 	ThumbWide                     // a wide preview on a public page
 	ThumbSquare                   // a square: a file that cannot be shown
+	ThumbFolder                   // a folder in a tile: no card, a large folder in the accent colour
 )
 
 // Thumb — tc-thumb
 //
 // Роль. Миниатюра файла: место картинки со значком рода.
 // Вход. Thumb{Icon, Form, Src, Alt}.
-// Состояния. tile | card | preview | wide | square | image.
+// Состояния. tile | card | folder | preview | wide | square | image.
 // Инварианты. Вид — перечисление; миниатюра печатает фрагмент своего кадра.
-// Поведение. нет.
+// Поведение. Картинку, которая не пришла, сценарий убирает: остаётся значок.
 // Эталон. кадр `s-files-5`, фрагмент `.tc-thumb`.
-// Содержимое. Значок.
+// Содержимое. Значок; картинка (Src) стоит поверх него.
 // Чего нет. Своего размера: картинка (Src) заполняет место миниатюры, обрезаясь по нему.
 type Thumb struct {
 	Icon Icon
 	Form ThumbForm
-	Src  string // the picture's address: it takes the icon's place
+	Src  string // the picture's address: it stands over the icon, which shows when it does not arrive
 	Alt  string // what the picture is: the file's name
 }
 
@@ -572,31 +573,23 @@ func (t Thumb) Render() string { return t.html(nil) }
 
 func (t Thumb) html(m mix) string {
 	round := `viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"`
+	pic := ""
 	if t.Src != "" {
-		pic := `<img class="tc-thumb__img"` + attr("src", t.Src) + ` alt="` + esc(t.Alt) + `">`
-		switch t.Form {
-		case ThumbOnCard:
-			return `<div` + class(m, "tc-thumb", "tc-thumb--on-card") + `>` + pic + `</div>`
-		case ThumbPreview:
-			return `<div` + class(m, "tc-thumb", "tc-thumb--preview") + `>` + pic + `</div>`
-		case ThumbWide:
-			return `<div` + class(m, "tc-thumb", "tc-thumb--wide") + `>` + pic + `</div>`
-		case ThumbSquare:
-			return `<span` + class(m, "tc-thumb", "tc-thumb--tile") + `>` + pic + `</span>`
-		}
-		return `<div` + class(m, "tc-thumb") + `>` + pic + `</div>`
+		pic = `<img class="tc-thumb__img"` + attr("src", t.Src) + ` alt="` + esc(t.Alt) + `">`
 	}
 	switch t.Form {
 	case ThumbOnCard:
-		return `<div` + class(m, "tc-thumb", "tc-thumb--on-card") + `><svg>` + t.Icon.use() + `</svg></div>`
+		return `<div` + class(m, "tc-thumb", "tc-thumb--on-card") + `><svg>` + t.Icon.use() + `</svg>` + pic + `</div>`
 	case ThumbPreview:
-		return `<div` + class(m, "tc-thumb", "tc-thumb--preview") + `><svg ` + round + `>` + t.Icon.use() + `</svg></div>`
+		return `<div` + class(m, "tc-thumb", "tc-thumb--preview") + `><svg ` + round + `>` + t.Icon.use() + `</svg>` + pic + `</div>`
 	case ThumbWide:
-		return `<div` + class(m, "tc-thumb", "tc-thumb--wide") + `><svg ` + round + ` class="tc-ico--sq34">` + t.Icon.use() + `</svg></div>`
+		return `<div` + class(m, "tc-thumb", "tc-thumb--wide") + `><svg ` + round + ` class="tc-ico--sq34">` + t.Icon.use() + `</svg>` + pic + `</div>`
+	case ThumbFolder:
+		return `<div` + class(m, "tc-thumb", "tc-thumb--folder") + `><svg>` + t.Icon.use() + `</svg>` + pic + `</div>`
 	case ThumbSquare:
-		return `<span` + class(m, "tc-thumb", "tc-thumb--tile") + `><svg ` + round + ` class="tc-ico--sq30">` + t.Icon.use() + `</svg></span>`
+		return `<span` + class(m, "tc-thumb", "tc-thumb--tile") + `><svg ` + round + ` class="tc-ico--sq30">` + t.Icon.use() + `</svg>` + pic + `</span>`
 	}
-	return `<div` + class(m, "tc-thumb") + `><svg>` + t.Icon.use() + `</svg></div>`
+	return `<div` + class(m, "tc-thumb") + `><svg>` + t.Icon.use() + `</svg>` + pic + `</div>`
 }
 
 // Tile — tc-tile

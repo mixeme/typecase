@@ -1379,3 +1379,43 @@ func TestEndFollowsStart(t *testing.T) {
 		}
 	}
 }
+
+// TestThumbPictureGone: a thumbnail's picture that did not arrive goes, and
+// the icon under it is what the tile shows; one that arrived hides the icon.
+// Without a script the icon stays under the picture either way. The bite: a
+// page without tc.js keeps the broken picture.
+func TestThumbPictureGone(t *testing.T) {
+	needChrome(t)
+	const ok = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='30'%3E%3Crect width='40' height='30' fill='%239FB4C7'/%3E%3C/svg%3E`
+	body := `<div class="tc-root"><div id="a">` + w.Thumb{Icon: "img", Src: "/no-such-thumbnail.png", Alt: "a.png"}.Render() +
+		`</div><div id="b">` + w.Thumb{Icon: "img", Src: ok, Alt: "b.png"}.Render() + `</div></div>`
+	// state says, for each thumbnail, whether its picture and its icon are drawn.
+	const state = `(async () => {
+		await Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.addEventListener("load", r); i.addEventListener("error", r) })));
+		const drawn = el => el.getClientRects().length > 0 ? "shown" : "gone";
+		return ["a", "b"].map(id => id + ": picture " + drawn(document.querySelector("#" + id + " img")) + ", icon " + drawn(document.querySelector("#" + id + " svg"))).join("; ");
+	})()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name string
+		bare bool
+		want string
+	}{
+		{"with the script", false, "a: picture gone, icon shown; b: picture shown, icon gone"},
+		{"without a script", true, "a: picture shown, icon shown; b: picture shown, icon shown"},
+	} {
+		page := browser.PageHTML(body, "")
+		if c.bare {
+			page = strings.Replace(page, `<script src="/tc.js"></script>`, "", 1)
+		}
+		var got string
+		if err := h.Run(h.RegisterPage("thumb", page), 900, 600,
+			chromedp.Evaluate(state, &got, func(p *runtime.EvaluateParams) *runtime.EvaluateParams { return p.WithAwaitPromise(true) }),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}

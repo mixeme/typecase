@@ -985,8 +985,28 @@
 		closeLayer(layers[layers.length - 1]);
 	}
 
+	// Pictures. A thumbnail's picture stands over the icon of its kind. One
+	// that did not arrive — the address refused, the file is no picture —
+	// goes, and the tile shows the icon, as a file without a thumbnail does.
+	function initPictures(root) {
+		root.querySelectorAll("img.tc-thumb__img").forEach(function (img) {
+			if (img.complete && img.naturalWidth === 0) hide(img);
+		});
+	}
+
+	// error does not bubble: it is caught on its way down.
+	document.addEventListener(
+		"error",
+		function (e) {
+			var el = e.target;
+			if (el && el.classList && el.classList.contains("tc-thumb__img")) hide(el);
+		},
+		true
+	);
+
 	function init(root) {
 		initDynamic(root);
+		initPictures(root);
 		initMenus(root);
 		initLayers(root);
 		initDisables(root);

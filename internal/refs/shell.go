@@ -45,6 +45,15 @@ var _ = add(
 	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, w.Field{Label: "Match threshold", Width: w.FieldInline, Parts: []w.FieldPart{w.Input{Value: "60", Mono: true, Variant: w.InputW52, Label: "Match threshold"}, w.Button{Label: "Weights", Small: true}}}}, Stack: true}, "s-dup-1", "tc-acts", 1),
 
 	// tc-nav
+	shell("plain", w.Nav{Items: []w.NavItem{
+		{Icon: "user", Label: "Account", Href: "#"},
+		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "file", Label: "Attachments", Href: "#"},
+		{Icon: "device", Label: "New device", Href: "#"},
+		{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "link", Label: "Published links", Href: "#"},
+		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 7}, "s-publish-18", "tc-nav", 2),
 	shell("back-short", w.Nav{Items: []w.NavItem{
 		{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}}, "s-contacts-6", "tc-nav", 1),
 	shell("back", w.Nav{Items: []w.NavItem{

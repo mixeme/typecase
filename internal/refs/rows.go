@@ -73,9 +73,11 @@ var _ = add(
 		{Icon: "file", Label: "Documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
+		{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
+		{Icon: "img", Label: "2026-08-10-sync-board.png", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("412 KB · inside")}, Size: w.Dim11}},
 		{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
 		{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
-		{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
 		{Icon: "file", Label: "Public"}}}, "s-files-16", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},

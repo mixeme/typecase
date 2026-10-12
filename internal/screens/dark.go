@@ -530,12 +530,12 @@ func Dark3() Screen {
 					},
 					w.Grid{
 						Tiles: []w.Tile{
+							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbFolder}, Name: "архив", Meta: "12 items"},
 							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "whiteboard.jpg", Meta: "2.8 MB · 4032×3024", Selected: true},
+							w.Tile{Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard}, Name: "панорама.tif", Meta: "84 MB · too large"},
+							w.Tile{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, Name: "смета.pdf", Meta: "1.2 MB"},
 							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-1.png", Meta: "640 KB · 1920×1080"},
 							w.Tile{Thumb: w.Thumb{Icon: "img"}, Name: "схема-2.png", Meta: "712 KB · 1920×1080"},
-							w.Tile{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbOnCard}, Name: "смета.pdf", Meta: "1.2 MB"},
-							w.Tile{Thumb: w.Thumb{Icon: "file", Form: w.ThumbOnCard}, Name: "архив", Meta: "12 items"},
-							w.Tile{Thumb: w.Thumb{Icon: "img", Form: w.ThumbOnCard}, Name: "панорама.tif", Meta: "84 MB · too large"},
 						},
 					},
 				},

@@ -326,12 +326,11 @@ func (g *gen) empty(e *El) string {
 
 func (g *gen) thumb(e *El) string {
 	var f []string
+	f = append(f, "Icon: "+icon(svgs(e)[0]))
 	if img := e.Kid("tc-thumb__img"); img != nil {
 		f = append(f, "Src: "+q(img.Attr("src")), "Alt: "+q(img.Attr("alt")))
-	} else {
-		f = append(f, "Icon: "+icon(svgs(e)[0]))
 	}
-	for _, v := range allOf(e, []kv{{"tc-thumb--on-card", "ThumbOnCard"}, {"tc-thumb--preview", "ThumbPreview"}, {"tc-thumb--wide", "ThumbWide"}, {"tc-thumb--tile", "ThumbSquare"}}) {
+	for _, v := range allOf(e, []kv{{"tc-thumb--on-card", "ThumbOnCard"}, {"tc-thumb--preview", "ThumbPreview"}, {"tc-thumb--wide", "ThumbWide"}, {"tc-thumb--tile", "ThumbSquare"}, {"tc-thumb--folder", "ThumbFolder"}}) {
 		f = append(f, "Form: w."+v)
 	}
 	return "w.Thumb{" + join(f, ", ") + "}"
