@@ -76,8 +76,8 @@ func Account1() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Value: "Михаил Енученко", Label: "Display name", Variant: w.InputFill},
-													w.Button{Label: "Save"},
+													w.Input{Name: "display.name", Value: "Михаил Енученко", Label: "Display name", Variant: w.InputFill},
+													w.Button{Label: "Save", Submit: true},
 												},
 												Gap: w.LineGap8,
 											},
@@ -89,6 +89,7 @@ func Account1() Screen {
 									},
 								},
 								Variant: w.FieldSetLead,
+								Action:  "/app/settings/account/name",
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Email"},
@@ -97,8 +98,11 @@ func Account1() Screen {
 										Label: "Address",
 										Parts: []w.FieldPart{
 											w.Line{
-												Items: []w.LinePart{w.Input{Value: "mix@example.org", Variant: w.InputFill}, w.Button{Label: "Change"}},
-												Gap:   w.LineGap8,
+												Items: []w.LinePart{
+													w.Input{Name: "address", Value: "mix@example.org", Label: "Address", Variant: w.InputFill},
+													w.Button{Label: "Change", Submit: true},
+												},
+												Gap: w.LineGap8,
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -112,6 +116,7 @@ func Account1() Screen {
 										Width: w.FieldLG,
 									},
 								},
+								Action: "/app/settings/account/email",
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Password"},
@@ -398,8 +403,11 @@ func Mail9() Screen {
 										Label: "Address",
 										Parts: []w.FieldPart{
 											w.Line{
-												Items: []w.LinePart{w.Input{Value: "mix@example.org", Variant: w.InputFill}, w.Button{Label: "Change"}},
-												Gap:   w.LineGap8,
+												Items: []w.LinePart{
+													w.Input{Name: "address", Value: "mix@example.org", Label: "Address", Variant: w.InputFill},
+													w.Button{Label: "Change", Submit: true},
+												},
+												Gap: w.LineGap8,
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -420,6 +428,7 @@ func Mail9() Screen {
 										Width: w.FieldLG,
 									},
 								},
+								Action: "/app/settings/account/email",
 							},
 						},
 					},

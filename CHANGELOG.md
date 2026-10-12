@@ -28,6 +28,12 @@ do, not what the authors did.
 
 ### Added
 
+- **A group of fields that is a form of its own** (Carrel's task 149).
+  `FieldSet.Action` (with `Method`, `Fields`) prints the group as a form: a
+  page of settings holds several — a name with its Save, an address with its
+  Change — and each button sends its own group's fields. Such a group stands
+  in a `Form` without an `Action`; inside a form that sends, the library
+  prints it as a plain group — a form holds no form.
 - **A pick that sends looks like every other pick** (Carrel's task 149).
   `Pick` with `Name` and `Options` prints the field `tc-in is-pick` with the
   browser's list inside it (`select.tc-in__list`): the field draws the frame

@@ -351,7 +351,7 @@ func Admin3() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Form: "admin-settings"},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -406,28 +406,34 @@ func Admin3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Invite lifetime, h",
-										Parts: []w.FieldPart{w.Input{Value: "72", Label: "Invite lifetime, h", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "invite.lifetime.h", Value: "72", Label: "Invite lifetime, h", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Idle timeout, h",
-										Parts: []w.FieldPart{w.Input{Value: "12", Label: "Idle timeout, h", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "idle.timeout.h", Value: "12", Label: "Idle timeout, h", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Session life, d",
-										Parts: []w.FieldPart{w.Input{Value: "30", Label: "Session life, d", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "session.life.d", Value: "30", Label: "Session life, d", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Instance name",
-										Parts: []w.FieldPart{w.Input{Value: "Carrel", Label: "Instance name"}},
+										Parts: []w.FieldPart{w.Input{Name: "instance.name", Value: "Carrel", Label: "Instance name"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Public address",
 										Parts: []w.FieldPart{
-											w.Input{Value: "https://carrel.example", Label: "Public address", Mono: true, ReadOnly: true},
+											w.Input{
+												Name:     "public.address",
+												Value:    "https://carrel.example",
+												Label:    "Public address",
+												Mono:     true,
+												ReadOnly: true,
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
 										},
 										Width: w.FieldLG,
@@ -440,33 +446,43 @@ func Admin3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Host",
-										Parts: []w.FieldPart{w.Input{Placeholder: "smtp.example.org", Label: "Host", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "host", Placeholder: "smtp.example.org", Label: "Host", Mono: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Port",
-										Parts: []w.FieldPart{w.Input{Value: "587", Label: "Port", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "port", Value: "587", Label: "Port", Mono: true}},
 										Width: w.FieldXS,
 									},
-									w.Field{Label: "Encryption", Parts: []w.FieldPart{w.Pick{Value: "STARTTLS"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Encryption",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "encryption",
+												Options: []w.PickOption{{Value: "starttls", Label: "STARTTLS", On: true}},
+												Label:   "Encryption",
+											},
+										},
+										Width: w.FieldSM,
+									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "username", Placeholder: "—", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Placeholder: "leave blank to keep the current one", Label: "Password"}},
+										Parts: []w.FieldPart{w.Input{Name: "password", Placeholder: "leave blank to keep the current one", Label: "Password"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "From address",
-										Parts: []w.FieldPart{w.Input{Placeholder: "carrel@example.org", Label: "From address"}},
+										Parts: []w.FieldPart{w.Input{Name: "from.address", Placeholder: "carrel@example.org", Label: "From address"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "From name",
-										Parts: []w.FieldPart{w.Input{Placeholder: "Carrel", Label: "From name"}},
+										Parts: []w.FieldPart{w.Input{Name: "from.name", Placeholder: "Carrel", Label: "From name"}},
 										Width: w.FieldMD,
 									},
 								},
@@ -476,7 +492,11 @@ func Admin3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")}},
+											w.Check{
+												Name:  "let.users.send.letters.and.links.from.carrel",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
@@ -490,8 +510,12 @@ func Admin3() Screen {
 										Label: "Sender address",
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "noreply@carrel.example", On: true}, {Label: "login@carrel.example"}},
+												Options: []w.SegOption{
+													{Label: "noreply@carrel.example", On: true, Value: "noreply.carrel.example"},
+													{Label: "login@carrel.example", Value: "login.carrel.example"},
+												},
 												Variant: w.SegStart,
+												Name:    "sender.address",
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -505,22 +529,22 @@ func Admin3() Screen {
 									},
 									w.Field{
 										Label: "Attachment, MB",
-										Parts: []w.FieldPart{w.Input{Value: "2", Label: "Attachment, MB", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "attachment.mb", Value: "2", Label: "Attachment, MB", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Letter, MB",
-										Parts: []w.FieldPart{w.Input{Value: "8", Label: "Letter, MB", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "letter.mb", Value: "8", Label: "Letter, MB", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Recipients",
-										Parts: []w.FieldPart{w.Input{Value: "10", Label: "Recipients", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "recipients", Value: "10", Label: "Recipients", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Letters a day",
-										Parts: []w.FieldPart{w.Input{Value: "50", Label: "Letters a day", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "letters.a.day", Value: "50", Label: "Letters a day", Mono: true}},
 										Width: w.FieldXS,
 									},
 								},
@@ -533,7 +557,12 @@ func Admin3() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Placeholder: "you@example.org", Label: "Send test message to", Variant: w.InputFill},
+													w.Input{
+														Name:        "send.test.message.to",
+														Placeholder: "you@example.org",
+														Label:       "Send test message to",
+														Variant:     w.InputFill,
+													},
 													w.Button{Label: "Send test", State: w.ButtonDisabled},
 												},
 												Gap: w.LineGap8,
@@ -545,6 +574,8 @@ func Admin3() Screen {
 								},
 							},
 						},
+						ID:     "admin-settings",
+						Action: "/admin/settings",
 					},
 				},
 			},
@@ -922,7 +953,14 @@ func Admin6() Screen {
 								Rubric: w.Rubric{Text: "Policy"},
 								Items: []w.FieldSetPart{
 									w.Field{
-										Parts: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("New accounts are covered")}}},
+										Parts: []w.FieldPart{
+											w.Check{
+												On:    true,
+												Name:  "new.accounts.are.covered",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("New accounts are covered")},
+											},
+										},
 										Gap:   7,
 										Place: w.Grown,
 									},
@@ -936,29 +974,30 @@ func Admin6() Screen {
 										},
 										Place: w.Grown,
 									},
-									w.Field{Parts: []w.FieldPart{w.Button{Label: "Save"}}},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Save", Submit: true}}},
 								},
 								Variant: w.FieldSetLead,
+								Action:  "/admin/escrow/policy",
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Master password"},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Current",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••••••", Label: "Current"}},
+										Parts: []w.FieldPart{w.Input{Name: "current", Value: "••••••••••••••••", Label: "Current"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "New",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••••••", Label: "New"}},
+										Parts: []w.FieldPart{w.Input{Name: "new", Value: "••••••••••••••••", Label: "New"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Repeat",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••••••", Label: "Repeat"}},
+										Parts: []w.FieldPart{w.Input{Name: "repeat", Value: "••••••••••••••••", Label: "Repeat"}},
 										Width: w.FieldLG,
 									},
-									w.Field{Parts: []w.FieldPart{w.Button{Label: "Change"}}},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Change", Submit: true}}},
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
@@ -970,22 +1009,34 @@ func Admin6() Screen {
 										Place: w.Grown,
 									},
 								},
+								Action: "/admin/escrow/master",
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Recover an account"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Account", Parts: []w.FieldPart{w.Input{Value: "viktor", Label: "Account"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Account",
+										Parts: []w.FieldPart{w.Input{Name: "account", Value: "viktor", Label: "Account"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Master password",
-										Parts: []w.FieldPart{w.Input{Value: "••••••••••••••••", Label: "Master password"}},
+										Parts: []w.FieldPart{w.Input{Name: "master.password", Value: "••••••••••••••••", Label: "Master password"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Temporary password for the user",
-										Parts: []w.FieldPart{w.Input{Value: "9f2-brick-lamp", Label: "Temporary password for the user", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:  "temporary.password.for.the.user",
+												Value: "9f2-brick-lamp",
+												Label: "Temporary password for the user",
+												Mono:  true,
+											},
+										},
 										Width: w.FieldMD,
 									},
-									w.Field{Parts: []w.FieldPart{w.Button{Label: "Recover", Kind: w.ButtonDanger}}},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Recover", Kind: w.ButtonDanger, Submit: true}}},
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
@@ -997,6 +1048,7 @@ func Admin6() Screen {
 										Place: w.Grown,
 									},
 								},
+								Action: "/admin/escrow/recover",
 							},
 						},
 					},

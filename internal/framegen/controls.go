@@ -980,6 +980,13 @@ func (g *gen) fset(e *El) string {
 	if v := g.en.of(e, "FieldSetVariant"); v != "" {
 		f = append(f, "Variant: "+v)
 	}
+	if a := e.Attr("action"); a != "" {
+		// a group that is a form of its own (Carrel's task 149)
+		f = append(f, "Action: "+q(a))
+		if m := e.Attr("method"); m != "" && m != "post" {
+			f = append(f, "Method: "+q(m))
+		}
+	}
 	return "w.FieldSet{" + join(f, ", ") + "}"
 }
 

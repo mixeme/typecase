@@ -332,10 +332,10 @@ func (v FieldSetVariant) class() string {
 // FieldSet — tc-fset
 //
 // Роль. Группа полей формы под рубрикой: «Phone numbers», «Email», «Password».
-// Вход. FieldSet{Rubric, Items, Variant}.
+// Вход. FieldSet{Rubric, Items, Variant, Action, Method, Fields}.
 // Состояния. plain | lead.
 // Инварианты. Рубрика — первой, поля — после неё; первая группа формы без линейки сверху; группа печатает фрагмент своего кадра.
-// Поведение. нет.
+// Поведение. Группа с адресом (Action) — своя форма: её кнопка шлёт её поля, а не поля соседних групп.
 // Эталон. кадр `s-contacts-3`, фрагмент `.tc-fset`.
 // Содержимое. Поля, кнопки, строки, переносы, сетка выбора, сообщение, таблица.
 // Чего нет. Сворачивания: группа всегда открыта.
@@ -343,6 +343,13 @@ type FieldSet struct {
 	Rubric  FieldSetRubric
 	Items   []FieldSetPart
 	Variant FieldSetVariant
+	// Action makes the group a form of its own (Carrel's task 149): a page
+	// of settings holds several — a name with its Save, an address with its
+	// Change — and each button sends its own group's fields. Such a group
+	// stands in a Form without an Action: a form holds no form.
+	Action string
+	Method string
+	Fields []Hidden
 }
 
 // FieldSetRubric is the heading of a group of fields.
@@ -356,14 +363,26 @@ func (g FieldSet) Render() string { return g.html(nil) }
 
 func (g FieldSet) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-fset", g.Variant.class()) + `>`)
+	tag := "div"
+	if g.Action != "" {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-fset", g.Variant.class()) + attr("action", g.Action) + ` method="` + method(g.Method) + `">`)
+		for _, h := range g.Fields {
+			s.WriteString(h.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-fset", g.Variant.class()) + `>`)
+	}
 	if g.Rubric != nil {
 		s.WriteString(g.Rubric.html(nil))
 	}
 	for _, it := range g.Items {
 		s.WriteString(it.html(nil))
 	}
-	s.WriteString(`</div>`)
+	s.WriteString(`</` + tag + `>`)
+	if g.Action != "" {
+		return multipart(s.String())
+	}
 	return s.String()
 }
 
@@ -481,6 +500,11 @@ func (f Form) html(m mix) string {
 		s.WriteString(`<div` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + `>`)
 	}
 	for _, it := range f.Items {
+		// a form holds no form: inside a form that sends, a group is a group
+		if g, ok := it.(FieldSet); ok && f.Action != "" {
+			g.Action = ""
+			it = g
+		}
 		s.WriteString(it.html(nil))
 	}
 	s.WriteString(`</` + tag + `>`)

@@ -72,7 +72,7 @@ var _ = add(
 	form("default", w.Seg{Options: seg(3, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(1, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 2),
-	form("start", w.Seg{Options: seg(2, "To WebDAV", "Download", "Both"), Variant: w.SegStart}, "s-backup-3", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", Value: "to.webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", On: true, Value: "both"}}, Variant: w.SegStart, Name: "where"}, "s-backup-3", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "crontab", "GoSentry", "Gitea", "curl"), Variant: w.SegStart}, "s-backup-4", "tc-seg", 1),
 
 	// tc-check

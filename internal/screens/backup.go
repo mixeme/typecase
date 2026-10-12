@@ -745,17 +745,32 @@ func Backup3() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "To WebDAV"}, {Label: "Download"}, {Label: "Both", On: true}},
+												Options: []w.SegOption{
+													{Label: "To WebDAV", Value: "to.webdav"},
+													{Label: "Download", Value: "download"},
+													{Label: "Both", On: true, Value: "both"},
+												},
 												Variant: w.SegStart,
+												Name:    "where",
 											},
 										},
 										OwnLine: true,
 										Place:   w.Grown,
 									},
-									w.Field{Label: "Collection", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Files"}}, Width: w.FieldLG},
+									w.Field{
+										Label: "Collection",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "collection",
+												Options: []w.PickOption{{Value: "nextcloud.files", Label: "nextcloud · Files", On: true}},
+												Label:   "Collection",
+											},
+										},
+										Width: w.FieldLG,
+									},
 									w.Field{
 										Label: "Folder",
-										Parts: []w.FieldPart{w.Input{Value: "carrel-backup", Label: "Folder", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder", Mono: true}},
 										Width: w.FieldMD,
 									},
 									w.Msg{
@@ -784,8 +799,14 @@ func Backup3() Screen {
 										},
 									},
 									w.Seg{
-										Options: []w.SegOption{{Label: "crontab", On: true}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl"}},
+										Options: []w.SegOption{
+											{Label: "crontab", On: true, Value: "crontab"},
+											{Label: "GoSentry", Value: "gosentry"},
+											{Label: "Gitea", Value: "gitea"},
+											{Label: "curl", Value: "curl"},
+										},
 										Variant: w.SegStart,
+										Name:    "trigger",
 									},
 									w.Diag{
 										Text:    "#!/bin/sh\nset -eu\nh='Authorization: Bearer cbk_7f3a-91de-4402-lamp'\nb=https://carrel.example/api/backup\nout=/var/backups\n\nid=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\")\nuntil [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done\ncurl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"",
@@ -802,6 +823,7 @@ func Backup3() Screen {
 												Kind:     w.ButtonPrimary,
 												CopyFrom: "trigger-script",
 												Copied:   "Copied",
+												Submit:   true,
 											},
 											w.Button{
 												Label:    "Save as",
@@ -847,6 +869,8 @@ func Backup3() Screen {
 								Place:   w.Grown,
 							},
 						},
+						ID:     "backup-job",
+						Action: "/app/settings/backup/job",
 					},
 				},
 			},
