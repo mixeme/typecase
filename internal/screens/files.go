@@ -1165,6 +1165,7 @@ func Files4() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
+						w.Button{Label: "Open the folder", Name: "open", Value: "1", Submit: true, NoScript: true},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
 					Width: w.SheetWidth520,

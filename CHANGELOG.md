@@ -486,6 +486,16 @@ do, not what the authors did.
   one, with the note «the items are here»; it can be ticked, for «New
   folder» makes a folder in it; Move is disabled with its reason beside it,
   «These items are already here.» (the owner's rule of 09.10). 430 frames.
+- **A tree's folder opens without a script** (Carrel's task 158): the
+  sheets whose tree chooses a folder have a second button of their form,
+  «Open the folder» (`Button.NoScript`, `name="open"`), which only a page
+  without a script shows — the server answers with the same sheet, the
+  ticked node chosen and opened (`s-files-4`, `-13`, `-19`, `-25`). «Send
+  test» of the administrator's settings is a button of the page's form with
+  an address of its own (`s-admin-3`): it sends what is typed, saved or not,
+  and saves nothing. The caption of `appearance-1` says where the theme, the
+  density and the columns are kept: the server puts them into a cookie of
+  this browser. The frames look the same.
 - **A button beside a rubric's words stands level with them** (the owner's
   remark of 12.10): `.tc-rubric` that holds a button or a menu is a flex row
   centred across (`:has(> .tc-btn)`, `:has(> .tc-drop)`), gap 4 px. The

@@ -604,7 +604,7 @@ func Admin3() Screen {
 														Label:       "Send test message to",
 														Variant:     w.InputFill,
 													},
-													w.Button{Label: "Send test", State: w.ButtonDisabled},
+													w.Button{Label: "Send test", To: "/admin/settings/mail/test", Submit: true, State: w.ButtonDisabled},
 												},
 												Gap: w.LineGap8,
 											},

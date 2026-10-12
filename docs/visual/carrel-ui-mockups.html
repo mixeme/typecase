@@ -8286,7 +8286,7 @@ Read  2 min ago</div>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -8314,11 +8314,11 @@ Read  2 min ago</div>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Move</button><span class="tc-dim tc-dim--t11-5">These items are already here.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Move</button><span class="tc-dim tc-dim--t11-5">These items are already here.</span><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
-  <figcaption><b>Лист открывается с папкой, где вещи лежат, выбранной</b> (задача 158): отсюда «New folder» заводит папку рядом и сразу выбирает её. Целью эта папка быть не может, и об этом сказано дважды — пометкой у самой папки и причиной у выключенной «Move» (правило владельца 09.10: чего нельзя сделать, то выключено). Отметить её можно: она остаётся местом для новой папки. Выбор другой папки включает «Move».</figcaption>
+  <figcaption><b>Лист открывается с папкой, где вещи лежат, выбранной</b> (задача 158): отсюда «New folder» заводит папку рядом и сразу выбирает её. Целью эта папка быть не может, и об этом сказано дважды — пометкой у самой папки и причиной у выключенной «Move» (правило владельца 09.10: чего нельзя сделать, то выключено). Отметить её можно: она остаётся местом для новой папки. Выбор другой папки включает «Move». <b>Без сценариев</b> у листа есть вторая кнопка формы, «Open the folder» (на странице со сценарием её нет): отметил папку, нажал — сервер отвечает тем же листом с этой папкой выбранной и раскрытой, и «Move» стоит так, как для неё положено. Со сценарием то же делает выбор узла.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -8504,7 +8504,7 @@ Read  2 min ago</div>
           </div>
           <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -8796,7 +8796,7 @@ Read  2 min ago</div>
           </div>
               <div class="tc-msg tc-msg--flush-top2">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.</div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -15776,7 +15776,7 @@ jobs:
     </div></div>
   </div>
 </div>
-<figcaption>Последний пункт рейла. <b>Два места хранения, и они не смешиваются.</b> Тема, плотность и колонки списка — этот браузер, <code>localStorage</code>: заводить поле на сервере ради переключателя темы значит писать в базу при каждом клике. Первый день недели и 12/24 часа — <b>аккаунт</b>: время собирается на сервере, и другой браузер должен увидеть те же часы. Часовой пояс — одно на экземпляр, его ставит администратор. Подзаголовок не говорит «Kept in this browser» про весь экран: для часов это неверно.</figcaption>
+<figcaption>Последний пункт рейла. <b>Два места хранения, и они не смешиваются.</b> Тема, плотность и колонки списка — этот браузер: форма шлёт их серверу вместе с остальным, и он кладёт их в куку этого браузера, а не в аккаунт (задача 158) — другой браузер их не видит, и в базу ради переключателя темы ничего не пишется. Первый день недели и 12/24 часа — <b>аккаунт</b>: время собирается на сервере, и другой браузер должен увидеть те же часы. Часовой пояс — одно на экземпляр, его ставит администратор. Подзаголовок не говорит «Kept in this browser» про весь экран: для часов это неверно.</figcaption>
 </figure>
 
 <div class="frames">
@@ -16736,14 +16736,14 @@ password  4c1-tide-oven</div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
             <div class="tc-field tc-field--md"><label>Send test message to</label>
-              <span class="tc-line tc-line--gap-8"><input class="tc-in is-ph tc-in--fill" type="text" name="send.test.message.to" placeholder="you@example.org" aria-label="Send test message to"><button class="tc-btn" type="button" disabled>Send test</button></span>
+              <span class="tc-line tc-line--gap-8"><input class="tc-in is-ph tc-in--fill" type="text" name="send.test.message.to" placeholder="you@example.org" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail/test" disabled>Send test</button></span>
               <span class="tc-field__hint">Mail is not configured: there is nothing to send through yet.</span></div>
           </div>
         </form>
       </div></div>
     </div>
   </div>
-  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — своя форма</b> со своей кнопкой: она ничего не сохраняет, и «Save» остальных блоков её не задевает; пока почта не настроена, кнопка выключена и говорит почему. <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах.</figcaption>
+  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; пока почта не настроена, кнопка выключена и говорит почему. <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах.</figcaption>
   </figure>
 
 <div class="frames">
