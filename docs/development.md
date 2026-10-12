@@ -103,6 +103,9 @@
 | Значение эталона из кадра | `go run ./internal/framegen/cmd/record s-contacts-6 tc-danger 1` |
 | Пересобрать эталоны из кадров | `python internal/framegen/cmd/record/refresh.py s-contacts-6:tc-danger:1 …` |
 | Эталоны для новых форм | `python internal/framegen/cmd/record/add.py s-dup-7:tc-btn:3:disabled …` (кадр:класс:номер:состояние) |
+| Контейнер кадра — формой (задача 149) | `MSYS_NO_PATHCONV=1 python internal/framegen/cmd/record/toform.py s-notes-9 tc-sheet /app/calendar/…/quick` |
+| Перечитать красные эталоны | `bash internal/framegen/cmd/record/fixrefs.sh` |
+| Снимки кадров до и после, по пикселям | `bash internal/browser/pixpair.sh s-notes-9 s-notes-10` (1351, 820, 460; «до» — HEAD) |
 | Каталог | `go run ./cmd/catalog` → http://localhost:8080/ |
 | Демо-экраны | `go run ./cmd/screens` → http://localhost:8085/ |
 | Всё без браузера | `go test $(go list ./... \| grep -v internal/browser)` |
