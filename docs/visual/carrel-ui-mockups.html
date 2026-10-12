@@ -256,6 +256,7 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-num{margin-left:auto;font-family:var(--tc-font-mono);font-size:11px;color:var(--tc-dusty)}
 .tc-num.is-alert{color:var(--tc-danger)}
 .tc-rubric{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--tc-dusty);font-weight:600}
+.tc-rubric:has(> .tc-btn),.tc-rubric:has(> .tc-drop){display:flex;align-items:center;gap:4px}
 .tc-railsec{display:flex;flex-direction:column;gap:3px}
 .tc-railsec > .tc-rubric{padding:0 16px;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
 /* Три фиксированные колонки, хвост (ro, Retry) раскладывается сам. */
@@ -8290,6 +8291,34 @@ Read  2 min ago</div>
     </div>
   </div>
   <figcaption>«New folder» в листе спрашивает имя строкой над деревом, в той папке, что выбрана в дереве; «Create» заводит её и сразу выбирает. Отказ — сообщением под строкой: имя занято или папка только для чтения.</figcaption>
+  </figure>
+
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-files-25">
+    <div class="frame-label"><span>Перенос · лист сразу после открытия</span><span class="frag">фрагмент</span><i>выбрана папка, где вещи лежат</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet tc-sheet--w520" action="/app/files/sftpgo/documents/op/carrel/attachments?op=move" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
+        <b class="tc-sheet__title">Move 3 items</b>
+        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
+          <div class="tc-tree">
+            <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents"><svg><use href="#i-file"/></svg>Documents</label>
+            <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel"><svg><use href="#i-file"/></svg>carrel</label>
+            <label class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked><svg><use href="#i-file"/></svg>attachments <span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">the items are here</span></label>
+            <label data-part="children" class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07"><svg><use href="#i-file"/></svg>2026-07</label>
+            <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
+          </div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Move</button><span class="tc-dim tc-dim--t11-5">These items are already here.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+    </div>
+  </div>
+  <figcaption><b>Лист открывается с папкой, где вещи лежат, выбранной</b> (задача 158): отсюда «New folder» заводит папку рядом и сразу выбирает её. Целью эта папка быть не может, и об этом сказано дважды — пометкой у самой папки и причиной у выключенной «Move» (правило владельца 09.10: чего нельзя сделать, то выключено). Отметить её можно: она остаётся местом для новой папки. Выбор другой папки включает «Move».</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">

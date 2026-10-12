@@ -75,6 +75,7 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-num{margin-left:auto;font-family:var(--tc-font-mono);font-size:11px;color:var(--tc-dusty)}
 .tc-num.is-alert{color:var(--tc-danger)}
 .tc-rubric{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--tc-dusty);font-weight:600}
+.tc-rubric:has(> .tc-btn),.tc-rubric:has(> .tc-drop){display:flex;align-items:center;gap:4px}
 .tc-railsec{display:flex;flex-direction:column;gap:3px}
 .tc-railsec > .tc-rubric{padding:0 16px;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
 /* Три фиксированные колонки, хвост (ro, Retry) раскладывается сам. */

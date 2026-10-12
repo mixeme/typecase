@@ -47,6 +47,12 @@ var _ = add(
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
+		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}, Trail: w.TreeNote{Text: "the items are here"}},
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}},
+		{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-25", "tc-tree", 1),
+	rows("plain", w.Tree{Rows: []w.TreeRow{
+		{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
+		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}},
 		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}},
 		{Icon: "file", Label: "Public", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo/public"}, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-13", "tc-tree", 1),

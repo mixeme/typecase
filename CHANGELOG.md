@@ -481,6 +481,17 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The move sheet as it opens** (Carrel's task 158; the owner accepted it,
+  12.10): `s-files-25`, new — the folder the things lie in is the chosen
+  one, with the note «the items are here»; it can be ticked, for «New
+  folder» makes a folder in it; Move is disabled with its reason beside it,
+  «These items are already here.» (the owner's rule of 09.10). 430 frames.
+- **A button beside a rubric's words stands level with them** (the owner's
+  remark of 12.10): `.tc-rubric` that holds a button or a menu is a flex row
+  centred across (`:has(> .tc-btn)`, `:has(> .tc-drop)`), gap 4 px. The
+  words move up by a pixel or two where they hung below the button's middle
+  («Where to put it · New folder»); a rubric with a menu («Attachments ·
+  Attach») moves by less than a pixel.
 - **The files' ticks and selection bar are a form** (Carrel's task 148):
   `s-files-1`, `-2`, `-4` — the ticks of the table are checkboxes named
   `item`, `s-files-5` — the tiles' boxes, all of the form `files-sel` that
