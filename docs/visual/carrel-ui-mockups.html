@@ -12885,7 +12885,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet tc-sheet--w520">
+          <form class="tc-sheet tc-sheet--w520" action="/app/collections/nextcloud/dni-rozhdeniya/move" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
               <b class="tc-sheet__title">Move calendar</b>
@@ -12894,15 +12894,15 @@ Read  2 min ago</div>
             <div class="tc-sheet__body">
               <div class="tc-rubric">Write onto</div>
               <div class="tc-tree">
-                <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-server"/></svg>nextcloud <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></div>
-                <div class="is-on tc-tree__row"><svg><use href="#i-server"/></svg>radicale · vps <span class="tc-mono tc-push tc-mono--t10-dusty">calendars</span></div>
-                <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-server"/></svg>baikal <span class="tc-mono tc-push tc-mono--t10-dusty">password · 401</span></div>
-                <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-server"/></svg>sftpgo · vps <span class="tc-mono tc-push tc-mono--t10-dusty">files only</span></div>
+                <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="nextcloud" disabled><svg><use href="#i-server"/></svg>nextcloud <span class="tc-mono tc-push tc-mono--t10-dusty">already there</span></label>
+                <label class="is-on tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="radicale" checked><svg><use href="#i-server"/></svg>radicale · vps <span class="tc-mono tc-push tc-mono--t10-dusty">calendars</span></label>
+                <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="baikal" disabled><svg><use href="#i-server"/></svg>baikal <span class="tc-mono tc-push tc-mono--t10-dusty">password · 401</span></label>
+                <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo" disabled><svg><use href="#i-server"/></svg>sftpgo · vps <span class="tc-mono tc-push tc-mono--t10-dusty">files only</span></label>
               </div>
               <div class="tc-msg tc-msg--flush-top2">Carrel creates a calendar there, copies all <b>51</b> events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path.</div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-          </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
         </div>
       </div>
     </div>
@@ -16164,44 +16164,44 @@ jobs:
         </div>
         <div class="tc-main__cards">
 
-          <div class="tc-card">
+          <form class="tc-card" action="/admin/users/invite" method="post">
             <div class="tc-rubric">Invitation <span class="tc-plain">chooses their own password</span></div>
             <div class="tc-card__fields tc-card__fields--gap10-12">
-              <div class="tc-field tc-field--sm"><label>Role</label><button class="tc-in is-pick" type="button">User</button></div>
-              <button class="tc-btn is-primary" type="button">Create link</button>
+              <div class="tc-field tc-field--sm"><label>Role</label><span class="tc-in is-pick"><select class="tc-in__list" name="role" aria-label="Role"><option value="user" selected>User</option></select></span></div>
+              <button class="tc-btn is-primary" type="submit">Create link</button>
             </div>
             <div class="tc-line tc-line--gap-6 tc-card__top10">
-              <input class="tc-in is-mono tc-in--t11-fill" type="text" value="https://carrel.example/invite/7f3a…">
+              <input class="tc-in is-mono tc-in--t11-fill" type="text" value="https://carrel.example/invite/7f3a…" aria-label="Invitation link">
               <button class="tc-btn is-sm" type="button">Copy</button>
             </div>
             <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--rule">
-              <div class="tc-field tc-field--md"><label>Or send to</label><input class="tc-in is-ph" type="text" placeholder="anna@example.org" aria-label="Or send to"></div>
+              <div class="tc-field tc-field--md"><label>Or send to</label><input class="tc-in is-ph" type="text" name="or.send.to" placeholder="anna@example.org" aria-label="Or send to"></div>
               <button class="tc-btn" type="button">Send invitation</button>
             </div>
-          </div>
+          </form>
 
-          <div class="tc-card">
+          <form class="tc-card" action="/admin/users/new" method="post">
             <div class="tc-rubric">Temporary password <span class="tc-badge is-alert">hand to hand</span></div>
             <div class="tc-msg is-alert tc-msg--flush-bot12">Until the user changes this password, you can sign in as them.</div>
             <div class="tc-card__fields tc-card__fields--gap10-12">
-              <div class="tc-field tc-field--xs"><label>Role</label><button class="tc-in is-pick" type="button">User</button></div>
-              <div class="tc-field tc-field--sm"><label>Login</label><input class="tc-in" type="text" value="viktor" aria-label="Login"></div>
-              <div class="tc-field tc-field--md"><label>Email <span class="tc-dim">(optional)</span></label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Email"></div>
-              <div class="tc-field tc-field--md"><label>Temporary password</label><input class="tc-in is-mono" type="text" value="9f2-brick-lamp" aria-label="Temporary password"></div>
-              <button class="tc-btn is-primary" type="button">Create user</button>
+              <div class="tc-field tc-field--xs"><label>Role</label><span class="tc-in is-pick"><select class="tc-in__list" name="role" aria-label="Role"><option value="user" selected>User</option></select></span></div>
+              <div class="tc-field tc-field--sm"><label>Login</label><input class="tc-in" type="text" name="login" value="viktor" aria-label="Login"></div>
+              <div class="tc-field tc-field--md"><label>Email <span class="tc-dim">(optional)</span></label><input class="tc-in is-ph" type="text" name="email.optional" placeholder="—" aria-label="Email"></div>
+              <div class="tc-field tc-field--md"><label>Temporary password</label><input class="tc-in is-mono" type="text" name="temporary.password" value="9f2-brick-lamp" aria-label="Temporary password"></div>
+              <button class="tc-btn is-primary" type="submit">Create user</button>
             </div>
-          </div>
+          </form>
 
-          <div class="tc-card">
+          <form class="tc-card" action="/admin/users/registration" method="post">
             <div class="tc-rubric">Self-registration <span class="tc-badge">open</span></div>
             <div class="tc-card__lede">A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.</div>
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Publish the registration form</button>
+            <label class="tc-check"><input class="tc-check__box" type="checkbox" name="publish.the.registration.form" value="1" checked><span class="tc-tickrow__tick"></span>Publish the registration form</label>
             <div class="tc-line tc-line--gap-6 tc-card__top10">
-              <input class="tc-in is-mono tc-in--t11-fill" type="text" value="https://carrel.example/register">
+              <input class="tc-in is-mono tc-in--t11-fill" type="text" value="https://carrel.example/register" aria-label="Registration address">
               <button class="tc-btn is-sm" type="button">Copy</button>
             </div>
-            <div class="tc-card__top10"><button class="tc-btn" type="button">Save</button></div>
-          </div>
+            <div class="tc-card__top10"><button class="tc-btn" type="submit">Save</button></div>
+          </form>
 
         </div>
         <div class="tc-list__group"><span class="tc-rubric">Pending invitations</span><span class="tc-num">2</span></div>
@@ -16247,19 +16247,19 @@ password  9f2-brick-lamp</div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-main__cards">
-          <div class="tc-card">
+          <form class="tc-card" action="/admin/users/invite" method="post">
             <div class="tc-rubric">Invitation <span class="tc-plain">chooses their own password</span></div>
             <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--rule">
-              <div class="tc-field tc-field--md"><label>Or send to</label><input class="tc-in is-ph" type="text" placeholder="anna@example.org" aria-label="Or send to"></div>
-              <button class="tc-btn" title="SMTP is not configured: no letter can go." type="button" disabled>Send invitation</button>
+              <div class="tc-field tc-field--md"><label>Or send to</label><input class="tc-in is-ph" type="text" name="or.send.to" placeholder="anna@example.org" aria-label="Or send to"></div>
+              <button class="tc-btn" title="SMTP is not configured: no letter can go." type="submit" disabled>Send invitation</button>
             </div>
-          </div>
-          <div class="tc-card">
+          </form>
+          <form class="tc-card" action="/admin/users/registration" method="post">
             <div class="tc-rubric">Self-registration</div>
             <div class="tc-card__lede">A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.</div>
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Publish the registration form</button>
-            <div class="tc-card__top10"><button class="tc-btn" title="Mail is not set up: nobody who registers could confirm the address." type="button" disabled>Save</button></div>
-          </div>
+            <label class="tc-check"><input class="tc-check__box" type="checkbox" name="publish.the.registration.form" value="1"><span class="tc-tickrow__tick is-off"></span>Publish the registration form</label>
+            <div class="tc-card__top10"><button class="tc-btn" title="Mail is not set up: nobody who registers could confirm the address." type="submit" disabled>Save</button></div>
+          </form>
         </div>
       </div></div>
     </div>
@@ -16272,15 +16272,15 @@ password  9f2-brick-lamp</div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-main__cards">
-          <div class="tc-card">
+          <form class="tc-card" action="/admin/users/new" method="post">
             <div class="tc-rubric">Temporary password <span class="tc-badge is-alert">hand to hand</span></div>
             <div class="tc-card__fields tc-card__fields--gap10-12">
-              <div class="tc-field tc-field--sm"><label>Login</label><input class="tc-in is-error" type="text" value="anna" aria-label="Login"><span class="tc-field__hint tc-dim--danger">Login is already taken.</span></div>
-              <div class="tc-field tc-field--md"><label>Email <span class="tc-dim">(optional)</span></label><input class="tc-in is-error" type="text" value="viktor@" aria-label="Email"><span class="tc-field__hint tc-dim--danger">Enter one address, like name@example.org.</span></div>
-              <div class="tc-field tc-field--md"><label>Temporary password</label><input class="tc-in is-mono is-error" type="text" value="9f2" aria-label="Temporary password"><span class="tc-field__hint tc-dim--danger">Password must be at least 8 characters.</span></div>
-              <button class="tc-btn is-primary" type="button">Create user</button>
+              <div class="tc-field tc-field--sm"><label>Login</label><input class="tc-in is-error" type="text" name="login" value="anna" aria-label="Login"><span class="tc-field__hint tc-dim--danger">Login is already taken.</span></div>
+              <div class="tc-field tc-field--md"><label>Email <span class="tc-dim">(optional)</span></label><input class="tc-in is-error" type="text" name="email.optional" value="viktor@" aria-label="Email"><span class="tc-field__hint tc-dim--danger">Enter one address, like name@example.org.</span></div>
+              <div class="tc-field tc-field--md"><label>Temporary password</label><input class="tc-in is-mono is-error" type="text" name="temporary.password" value="9f2" aria-label="Temporary password"><span class="tc-field__hint tc-dim--danger">Password must be at least 8 characters.</span></div>
+              <button class="tc-btn is-primary" type="submit">Create user</button>
             </div>
-          </div>
+          </form>
         </div>
       </div></div>
     </div>

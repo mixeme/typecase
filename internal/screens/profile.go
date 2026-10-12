@@ -2033,8 +2033,9 @@ func Profile8() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "move",
-					Title: "Move calendar",
+					Action: "/app/collections/nextcloud/dni-rozhdeniya/move",
+					Icon:   "move",
+					Title:  "Move calendar",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("nextcloud · Дни рождения")},
@@ -2051,19 +2052,27 @@ func Profile8() Screen {
 									Icon:        "server",
 									Label:       "nextcloud",
 									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "nextcloud"},
 									Trail:       w.Mono{Text: "already there", Variant: w.Mono10Dusty},
 								},
-								{Icon: "server", Label: "radicale · vps", Trail: w.Mono{Text: "calendars", Variant: w.Mono10Dusty}},
+								{
+									Icon:  "server",
+									Label: "radicale · vps",
+									Send:  w.Send{Name: "to", Value: "radicale"},
+									Trail: w.Mono{Text: "calendars", Variant: w.Mono10Dusty},
+								},
 								{
 									Icon:        "server",
 									Label:       "baikal",
 									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "baikal"},
 									Trail:       w.Mono{Text: "password · 401", Variant: w.Mono10Dusty},
 								},
 								{
 									Icon:        "server",
 									Label:       "sftpgo · vps",
 									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "sftpgo"},
 									Trail:       w.Mono{Text: "files only", Variant: w.Mono10Dusty},
 								},
 							},
@@ -2079,7 +2088,7 @@ func Profile8() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Move", Kind: w.ButtonPrimary},
+						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},

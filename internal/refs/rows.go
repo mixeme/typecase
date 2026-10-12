@@ -114,10 +114,10 @@ var _ = add(
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 		{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}}}, On: 2}, "s-io-4", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
-		{Icon: "server", Label: "nextcloud", Unavailable: true, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
-		{Icon: "server", Label: "radicale · vps", Trail: w.Mono{Text: "calendars", Variant: w.Mono10Dusty}},
-		{Icon: "server", Label: "baikal", Unavailable: true, Trail: w.Mono{Text: "password · 401", Variant: w.Mono10Dusty}},
-		{Icon: "server", Label: "sftpgo · vps", Unavailable: true, Trail: w.Mono{Text: "files only", Variant: w.Mono10Dusty}}}, On: 2}, "s-profile-8", "tc-tree", 1),
+		{Icon: "server", Label: "nextcloud", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud"}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Icon: "server", Label: "radicale · vps", Send: w.Send{Name: "to", Value: "radicale"}, Trail: w.Mono{Text: "calendars", Variant: w.Mono10Dusty}},
+		{Icon: "server", Label: "baikal", Unavailable: true, Send: w.Send{Name: "to", Value: "baikal"}, Trail: w.Mono{Text: "password · 401", Variant: w.Mono10Dusty}},
+		{Icon: "server", Label: "sftpgo · vps", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo"}, Trail: w.Mono{Text: "files only", Variant: w.Mono10Dusty}}}, On: 2}, "s-profile-8", "tc-tree", 1),
 	rows("narrow", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "/dav/", Code: true, Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11}},
 		{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},

@@ -390,11 +390,11 @@ var _ = add(
 	cards("closed", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Self-registration"},
 		w.CardText{Kind: w.CardLede, Parts: []w.CardTextPart{w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.")}},
-		w.Check{Parts: []w.CheckPart{w.Text("Publish the registration form")}},
-		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Title: "Mail is not set up: nobody who registers could confirm the address.", State: w.ButtonDisabled}}}}}, "s-admin-18", "tc-card", 2),
+		w.Check{Name: "publish.the.registration.form", Value: "1", Parts: []w.CheckPart{w.Text("Publish the registration form")}},
+		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Title: "Mail is not set up: nobody who registers could confirm the address.", Submit: true, State: w.ButtonDisabled}}}}, Action: "/admin/users/registration"}, "s-admin-18", "tc-card", 2),
 	cards("off-send", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Invitation", Items: []w.RubricPart{w.Plain{Text: "chooses their own password"}}},
-		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Parts: []w.FieldPart{w.Input{Placeholder: "anna@example.org", Label: "Or send to"}}, Width: w.FieldMD}, w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", State: w.ButtonDisabled}}, Wide: true, Rule: true}}}, "s-admin-18", "tc-card", 1),
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Parts: []w.FieldPart{w.Input{Name: "or.send.to", Placeholder: "anna@example.org", Label: "Or send to"}}, Width: w.FieldMD}, w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", Submit: true, State: w.ButtonDisabled}}, Wide: true, Rule: true}}, Action: "/admin/users/invite"}, "s-admin-18", "tc-card", 1),
 	cards("issued-card", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12},
@@ -561,20 +561,20 @@ var _ = add(
 		w.CardRow{Kind: w.CardAttached, Gap: 6, Items: []w.CardRowPart{w.Tag{Label: "smirnov.vcf"}, w.Tag{Label: "vstrecha.ics"}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("Отвечать на это письмо не нужно: адрес почту не принимает. Свяжитесь с отправителем другим способом.")}, Space: w.MsgFlushTop11}}, Variant: w.CardFlush}, "s-mail-8", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
-		w.Rubric{Text: "Invitation"},
-		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Create link", Kind: w.ButtonPrimary}}, Wide: true},
-		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy", Small: true}}},
-		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Send invitation"}}, Wide: true, Rule: true}}}, "s-admin-1", "tc-card", 1),
+		w.Rubric{Text: "Invitation", Items: []w.RubricPart{w.Plain{Text: "chooses their own password"}}},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Parts: []w.FieldPart{w.Pick{Name: "role", Options: []w.PickOption{{Value: "user", Label: "User", On: true}}, Label: "Role"}}, Width: w.FieldSM}, w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true}}, Wide: true},
+		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/invite/7f3a…", Label: "Invitation link", Mono: true, Variant: w.Input11Fill}, w.Button{Label: "Copy", Small: true}}},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Parts: []w.FieldPart{w.Input{Name: "or.send.to", Placeholder: "anna@example.org", Label: "Or send to"}}, Width: w.FieldMD}, w.Button{Label: "Send invitation"}}, Wide: true, Rule: true}}, Action: "/admin/users/invite"}, "s-admin-1", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
-		w.Rubric{Text: "Temporary password"},
+		w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Badge{Label: "hand to hand", Tone: w.BadgeAlert}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12},
-		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Login", Width: w.FieldSM, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Email (optional)", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Field{Label: "Temporary password", Width: w.FieldMD, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Button{Label: "Create user", Kind: w.ButtonPrimary}}, Wide: true}}}, "s-admin-1", "tc-card", 2),
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Parts: []w.FieldPart{w.Pick{Name: "role", Options: []w.PickOption{{Value: "user", Label: "User", On: true}}, Label: "Role"}}, Width: w.FieldXS}, w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Name: "login", Value: "viktor", Label: "Login"}}, Width: w.FieldSM}, w.Field{Label: "Email", LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}}, Parts: []w.FieldPart{w.Input{Name: "email.optional", Placeholder: "—", Label: "Email"}}, Width: w.FieldMD}, w.Field{Label: "Temporary password", Parts: []w.FieldPart{w.Input{Name: "temporary.password", Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true}}, Width: w.FieldMD}, w.Button{Label: "Create user", Kind: w.ButtonPrimary, Submit: true}}, Wide: true}}, Action: "/admin/users/new"}, "s-admin-1", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
-		w.Rubric{Text: "Self-registration"},
+		w.Rubric{Text: "Self-registration", Items: []w.RubricPart{w.Badge{Label: "open"}}},
 		w.CardText{Kind: w.CardLede, Parts: []w.CardTextPart{w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.")}},
-		w.Check{Parts: []w.CheckPart{w.Text("Publish the registration form")}},
-		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/register", Mono: true, Variant: w.InputKeyFill, Label: "Key"}, w.Button{Label: "Copy", Small: true}}},
-		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save"}}}}}, "s-admin-1", "tc-card", 3),
+		w.Check{On: true, Name: "publish.the.registration.form", Value: "1", Parts: []w.CheckPart{w.Text("Publish the registration form")}},
+		w.CardRow{Kind: w.CardTop10, Gap: 6, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/register", Label: "Registration address", Mono: true, Variant: w.Input11Fill}, w.Button{Label: "Copy", Small: true}}},
+		w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Submit: true}}}}, Action: "/admin/users/registration"}, "s-admin-1", "tc-card", 3),
 	cards("pick", w.Card{Items: []w.CardPart{
 		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, "desktop-3", "tc-card", 1),
 	cards("pick", w.Card{Items: []w.CardPart{

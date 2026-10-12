@@ -68,8 +68,14 @@ func Admin1() Screen {
 									w.Rubric{Text: "Invitation", Items: []w.RubricPart{w.Plain{Text: "chooses their own password"}}},
 									w.CardFields{
 										Items: []w.CardFieldsPart{
-											w.Field{Label: "Role", Parts: []w.FieldPart{w.Pick{Value: "User"}}, Width: w.FieldSM},
-											w.Button{Label: "Create link", Kind: w.ButtonPrimary},
+											w.Field{
+												Label: "Role",
+												Parts: []w.FieldPart{
+													w.Pick{Name: "role", Options: []w.PickOption{{Value: "user", Label: "User", On: true}}, Label: "Role"},
+												},
+												Width: w.FieldSM,
+											},
+											w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
 										},
 										Wide: true,
 									},
@@ -77,7 +83,12 @@ func Admin1() Screen {
 										Kind: w.CardTop10,
 										Gap:  6,
 										Items: []w.CardRowPart{
-											w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.Input11Fill},
+											w.Input{
+												Value:   "https://carrel.example/invite/7f3a…",
+												Label:   "Invitation link",
+												Mono:    true,
+												Variant: w.Input11Fill,
+											},
 											w.Button{Label: "Copy", Small: true},
 										},
 									},
@@ -85,7 +96,7 @@ func Admin1() Screen {
 										Items: []w.CardFieldsPart{
 											w.Field{
 												Label: "Or send to",
-												Parts: []w.FieldPart{w.Input{Placeholder: "anna@example.org", Label: "Or send to"}},
+												Parts: []w.FieldPart{w.Input{Name: "or.send.to", Placeholder: "anna@example.org", Label: "Or send to"}},
 												Width: w.FieldMD,
 											},
 											w.Button{Label: "Send invitation"},
@@ -94,6 +105,7 @@ func Admin1() Screen {
 										Rule: true,
 									},
 								},
+								Action: "/admin/users/invite",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -108,24 +120,37 @@ func Admin1() Screen {
 									},
 									w.CardFields{
 										Items: []w.CardFieldsPart{
-											w.Field{Label: "Role", Parts: []w.FieldPart{w.Pick{Value: "User"}}, Width: w.FieldXS},
-											w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Value: "viktor", Label: "Login"}}, Width: w.FieldSM},
+											w.Field{
+												Label: "Role",
+												Parts: []w.FieldPart{
+													w.Pick{Name: "role", Options: []w.PickOption{{Value: "user", Label: "User", On: true}}, Label: "Role"},
+												},
+												Width: w.FieldXS,
+											},
+											w.Field{
+												Label: "Login",
+												Parts: []w.FieldPart{w.Input{Name: "login", Value: "viktor", Label: "Login"}},
+												Width: w.FieldSM,
+											},
 											w.Field{
 												Label:      "Email",
 												LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}},
-												Parts:      []w.FieldPart{w.Input{Placeholder: "—", Label: "Email"}},
+												Parts:      []w.FieldPart{w.Input{Name: "email.optional", Placeholder: "—", Label: "Email"}},
 												Width:      w.FieldMD,
 											},
 											w.Field{
 												Label: "Temporary password",
-												Parts: []w.FieldPart{w.Input{Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true}},
+												Parts: []w.FieldPart{
+													w.Input{Name: "temporary.password", Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true},
+												},
 												Width: w.FieldMD,
 											},
-											w.Button{Label: "Create user", Kind: w.ButtonPrimary},
+											w.Button{Label: "Create user", Kind: w.ButtonPrimary, Submit: true},
 										},
 										Wide: true,
 									},
 								},
+								Action: "/admin/users/new",
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -136,17 +161,28 @@ func Admin1() Screen {
 											w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works."),
 										},
 									},
-									w.Check{On: true, Parts: []w.CheckPart{w.Text("Publish the registration form")}},
+									w.Check{
+										On:    true,
+										Name:  "publish.the.registration.form",
+										Value: "1",
+										Parts: []w.CheckPart{w.Text("Publish the registration form")},
+									},
 									w.CardRow{
 										Kind: w.CardTop10,
 										Gap:  6,
 										Items: []w.CardRowPart{
-											w.Input{Value: "https://carrel.example/register", Mono: true, Variant: w.Input11Fill},
+											w.Input{
+												Value:   "https://carrel.example/register",
+												Label:   "Registration address",
+												Mono:    true,
+												Variant: w.Input11Fill,
+											},
 											w.Button{Label: "Copy", Small: true},
 										},
 									},
-									w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save"}}},
+									w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Submit: true}}},
 								},
+								Action: "/admin/users/registration",
 							},
 						},
 					},
