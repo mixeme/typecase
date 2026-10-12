@@ -325,7 +325,7 @@ func Backup2() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "Cancel"},
 								w.Button{Label: "Run now"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "backup-job"},
 							},
 						},
 					},
@@ -591,7 +591,7 @@ func Backup2() Screen {
 												Kind: w.CardTop8,
 												Gap:  8,
 												Items: []w.CardRowPart{
-													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary, Submit: true},
+													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary},
 													w.Button{
 														Label: "New password",
 														Title: "The old password stops working; whatever runs this job has to be given the new one.",
@@ -652,6 +652,7 @@ func Backup2() Screen {
 								},
 							},
 						},
+						ID:     "backup-job",
 						Action: "/app/settings/backup/job",
 					},
 					w.Danger{
@@ -733,7 +734,7 @@ func Backup3() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "Cancel"},
 								w.Button{Label: "Run now"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "backup-job"},
 							},
 						},
 					},
@@ -823,7 +824,6 @@ func Backup3() Screen {
 												Kind:     w.ButtonPrimary,
 												CopyFrom: "trigger-script",
 												Copied:   "Copied",
-												Submit:   true,
 											},
 											w.Button{
 												Label:    "Save as",

@@ -67,7 +67,13 @@ func Attachments1() Screen {
 						Subs: []w.HeadSub{
 							w.HeadSub{Parts: []w.HeadSubPart{w.Text("Where a file attached to a note, an event or a task is put")}},
 						},
-						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Open in Files", Icon: "file"}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Open in Files", Icon: "file"},
+								w.Button{Label: "Discard", Href: "/app/settings/attachments"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "attachments"},
+							},
+						},
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -113,7 +119,11 @@ func Attachments1() Screen {
 									w.Field{
 										Label: "Collection",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "sftpgo · vps · Documents"},
+											w.Pick{
+												Name:    "collection",
+												Options: []w.PickOption{{Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents", On: true}},
+												Label:   "Collection",
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any file collection you can write to.")}},
 										},
 										Width: w.FieldMD,
@@ -122,8 +132,11 @@ func Attachments1() Screen {
 										Label: "Folder in it",
 										Parts: []w.FieldPart{
 											w.Line{
-												Items: []w.LinePart{w.Input{Value: "/carrel/attachments", Mono: true, Variant: w.InputFill}, w.Button{Label: "Browse"}},
-												Gap:   w.LineGap8,
+												Items: []w.LinePart{
+													w.Input{Name: "folder.in.it", Value: "/carrel/attachments", Mono: true, Variant: w.InputFill},
+													w.Button{Label: "Browse"},
+												},
+												Gap: w.LineGap8,
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -135,7 +148,12 @@ func Attachments1() Screen {
 									},
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{On: true, Parts: []w.CheckPart{w.Text("A subfolder per month")}},
+											w.Check{
+												On:    true,
+												Name:  "a.subfolder.per.month",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("A subfolder per month")},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: "2026-07"},
@@ -157,7 +175,11 @@ func Attachments1() Screen {
 									w.Field{
 										Label: "Written as",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "Date, then the original name"},
+											w.Pick{
+												Name:    "written.as",
+												Options: []w.PickOption{{Value: "date.then.the.original.name", Label: "Date, then the original name", On: true}},
+												Label:   "Written as",
+											},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: "2026-08-10 sync-board.png"},
@@ -198,6 +220,8 @@ func Attachments1() Screen {
 								},
 							},
 						},
+						ID:     "attachments",
+						Action: "/app/settings/attachments",
 					},
 					w.Msg{
 						Parts: []w.MsgPart{

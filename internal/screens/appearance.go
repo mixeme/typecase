@@ -67,6 +67,12 @@ func Appearance1() Screen {
 						Subs: []w.HeadSub{
 							w.HeadSub{Parts: []w.HeadSubPart{w.Text("Theme in this browser · week start and clock in the account")}},
 						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Discard", Href: "/app/settings/appearance"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "appearance"},
+							},
+						},
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -76,8 +82,13 @@ func Appearance1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "Auto", On: true}, {Label: "Light"}, {Label: "Dark"}},
+												Options: []w.SegOption{
+													{Label: "Auto", On: true, Value: "auto"},
+													{Label: "Light", Value: "light"},
+													{Label: "Dark", Value: "dark"},
+												},
 												Variant: w.SegStart,
+												Name:    "theme",
 											},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("“Auto” follows the system. Kept in this browser — another device does not see it.")},
@@ -92,7 +103,11 @@ func Appearance1() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Seg{Options: []w.SegOption{{Label: "Comfortable", On: true}, {Label: "Compact"}}, Variant: w.SegStart},
+											w.Seg{
+												Options: []w.SegOption{{Label: "Comfortable", On: true, Value: "comfortable"}, {Label: "Compact", Value: "compact"}},
+												Variant: w.SegStart,
+												Name:    "density",
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("List row height: 38 or 32 px. On a phone always 52. This browser.")}},
 										},
 									},
@@ -103,9 +118,23 @@ func Appearance1() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{On: true, Parts: []w.CheckPart{w.Text("Keep the details panel open")}},
-											w.Check{On: true, Parts: []w.CheckPart{w.Text("Show the source column")}},
-											w.Check{Parts: []w.CheckPart{w.Text("Open notes in full width")}},
+											w.Check{
+												On:    true,
+												Name:  "keep.the.details.panel.open",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("Keep the details panel open")},
+											},
+											w.Check{
+												On:    true,
+												Name:  "show.the.source.column",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("Show the source column")},
+											},
+											w.Check{
+												Name:  "open.notes.in.full.width",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("Open notes in full width")},
+											},
 										},
 										Gap:   7,
 										Place: w.Grown,
@@ -124,11 +153,29 @@ func Appearance1() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Dates and times"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Week starts on", Parts: []w.FieldPart{w.Pick{Value: "Monday"}}, Width: w.FieldMD},
-									w.Field{Label: "Time", Parts: []w.FieldPart{w.Pick{Value: "24-hour"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Week starts on",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "week.starts.on",
+												Options: []w.PickOption{{Value: "monday", Label: "Monday", On: true}},
+												Label:   "Week starts on",
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Time",
+										Parts: []w.FieldPart{
+											w.Pick{Name: "time", Options: []w.PickOption{{Value: "24.hour", Label: "24-hour", On: true}}, Label: "Time"},
+										},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Time zone",
-										Parts: []w.FieldPart{w.Input{Value: "Europe/Moscow · this instance", Label: "Time zone", ReadOnly: true}},
+										Parts: []w.FieldPart{
+											w.Input{Name: "time.zone", Value: "Europe/Moscow · this instance", Label: "Time zone", ReadOnly: true},
+										},
 										Width: w.FieldLG,
 									},
 									w.Field{
@@ -144,6 +191,8 @@ func Appearance1() Screen {
 								},
 							},
 						},
+						ID:     "appearance",
+						Action: "/app/settings/appearance",
 					},
 				},
 			},

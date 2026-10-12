@@ -1313,7 +1313,9 @@ func Contacts15() Screen {
 						w.Head{
 							Title: &w.HeadTitle{Text: "Анна Ковалёва"},
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
-							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "contact-edit"}},
+							},
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -1522,7 +1524,7 @@ func Contacts15() Screen {
 						w.SheetNote{Text: "Collections that are not ticked were not looked in."},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary, Form: "contact-edit"},
+						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Gap:   w.LineGap7,

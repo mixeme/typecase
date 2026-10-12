@@ -387,7 +387,7 @@ func Admin3() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Form: "admin-settings"},
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -433,7 +433,12 @@ func Admin3() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Settings"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Global settings and mail")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Discard", Href: "/admin/settings"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "admin-settings"},
+							},
+						},
 					},
 					w.Form{
 						Items: []w.FormPart{

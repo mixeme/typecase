@@ -3992,7 +3992,7 @@ Read  2 min ago · not changed on server</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title">Анна Ковалёва</div><div class="tc-head__sub">nextcloud · Контакты</div></div>
-          <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Save</button></div>
+          <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="submit" form="contact-edit">Save</button></div>
         </div>
         <form class="tc-form" id="contact-edit" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/edit" method="post">
           <div class="tc-field tc-field--fixauto">
@@ -4079,7 +4079,7 @@ Read  2 min ago · not changed on server</div>
             </div>
             <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Collections that are not ticked were not looked in.</span>
           </div>
-          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" form="contact-edit">Rewrite 12 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rewrite 12 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
         </div>
       </div>
     </div>
@@ -13253,9 +13253,9 @@ Read  2 min ago</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title">Attachments</div><div class="tc-head__sub">Where a file attached to a note, an event or a task is put</div></div>
-          <div class="tc-acts"><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button></div>
+          <div class="tc-acts"><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button><a class="tc-btn" href="/app/settings/attachments">Discard</a><button class="tc-btn is-primary" type="submit" form="attachments">Save</button></div>
         </div>
-        <div class="tc-form">
+        <form class="tc-form" id="attachments" action="/app/settings/attachments" method="post">
           <div class="tc-fset tc-fset--lead">
             <div class="tc-rubric">Small files stay in the record</div>
             <dl class="tc-fields tc-grow tc-fields--bleed tc-fields--cols130">
@@ -13266,19 +13266,19 @@ Read  2 min ago</div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Folder</div>
-            <div class="tc-field tc-field--md"><label>Collection</label><button class="tc-in is-pick" type="button">sftpgo · vps · Documents</button>
+            <div class="tc-field tc-field--md"><label>Collection</label><span class="tc-in is-pick"><select class="tc-in__list" name="collection" aria-label="Collection"><option value="sftpgo.vps.documents" selected>sftpgo · vps · Documents</option></select></span>
               <span class="tc-field__hint">Any file collection you can write to.</span></div>
             <div class="tc-field tc-field--lg"><label>Folder in it</label>
               <span class="tc-line tc-line--gap-8">
-                <input class="tc-in is-mono tc-in--fill" type="text" value="/carrel/attachments"><button class="tc-btn" type="button">Browse</button></span>
+                <input class="tc-in is-mono tc-in--fill" type="text" name="folder.in.it" value="/carrel/attachments"><button class="tc-btn" type="button">Browse</button></span>
               <span class="tc-field__hint">Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel.</span></div>
             <div class="tc-field is-own-line tc-grow tc-field--gap7">
-              <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>A subfolder per month</button>
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="a.subfolder.per.month" value="1" checked><span class="tc-tickrow__tick"></span>A subfolder per month</label>
               <span class="tc-field__hint"><span class="tc-mono">2026-07</span>, <span class="tc-mono">2026-08</span>. Off means one flat folder — fine for a hundred files, not for ten thousand.</span></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">File name</div>
-            <div class="tc-field tc-field--lg"><label>Written as</label><button class="tc-in is-pick" type="button">Date, then the original name</button>
+            <div class="tc-field tc-field--lg"><label>Written as</label><span class="tc-in is-pick"><select class="tc-in__list" name="written.as" aria-label="Written as"><option value="date.then.the.original.name" selected>Date, then the original name</option></select></span>
               <span class="tc-field__hint"><span class="tc-mono">2026-08-10 sync-board.png</span>. A name already taken is never overwritten: a counter is added.</span></div>
           </div>
           <div class="tc-fset">
@@ -13290,7 +13290,7 @@ Read  2 min ago</div>
             </dl>
             <div class="tc-field tc-grow"><span class="tc-field__hint">Carrel keeps no index of what points at these files. Nothing here deletes them: an attachment is removed from the record it hangs on, in that record.</span></div>
           </div>
-        </div>
+        </form>
         <div class="tc-msg">Changing the folder moves nothing. Records already written carry the old path and keep working; only new attachments go to the new place.</div>
       </div>
     </div>
@@ -14132,9 +14132,9 @@ Read  2 min ago</div>
       <div class="tc-main">
       <div class="tc-head">
         <div class="tc-head__titles"><div class="tc-head__title">Личное на домашний диск</div><div class="tc-head__sub">Job · last copy 2 days ago</div></div>
-        <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn" type="button">Run now</button><button class="tc-btn is-primary" type="button">Save</button></div>
+        <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn" type="button">Run now</button><button class="tc-btn is-primary" type="submit" form="backup-job">Save</button></div>
       </div>
-      <form class="tc-form" action="/app/settings/backup/job" method="post">
+      <form class="tc-form" id="backup-job" action="/app/settings/backup/job" method="post">
         <div class="tc-field tc-field--lg"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Личное на домашний диск" aria-label="Name"></div>
         <div class="tc-field"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="job.is.on" value="1" checked><span class="tc-tickrow__tick"></span>Job is on</label></div>
 
@@ -14192,7 +14192,7 @@ Read  2 min ago</div>
             <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="trigger" value="crontab" checked>crontab</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="trigger" value="gosentry">GoSentry</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="trigger" value="gitea">Gitea</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="trigger" value="curl">curl</label></span>
             <div class="tc-diag tc-diag--top9-ink">0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'</div>
             <div class="tc-line tc-line--gap-8 tc-card__top8">
-              <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the line</button>
+              <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the line</button>
               <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Runs at 03:00 · the time sits inside the line and is changed there</span>
             </div>
@@ -14267,7 +14267,7 @@ Read  2 min ago</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title">Личное на домашний диск</div><div class="tc-head__sub">Job · destination <b>WebDAV and download</b> · last copy 2 days ago</div></div>
-          <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn" type="button">Run now</button><button class="tc-btn is-primary" type="button">Save</button></div>
+          <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn" type="button">Run now</button><button class="tc-btn is-primary" type="submit" form="backup-job">Save</button></div>
         </div>
         <form class="tc-form" id="backup-job" action="/app/settings/backup/job" method="post">
         <div class="tc-fset tc-fset--lead">
@@ -14295,7 +14295,7 @@ id=$(curl -fsS -X POST -H "$h" "$b/run?job=personal")
 until [ "$(curl -fsS -H "$h" "$b/status?id=$id")" != running ]; do sleep 20; done
 curl -fsS -H "$h" "$b/$id/download" -o "$out/carrel-personal-$(date +%F).zip"</div>
         <div class="tc-line tc-line--gap-8 tc-card__top8">
-          <button class="tc-btn is-primary" type="submit" data-tc-copy-from="trigger-script" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the script</button>
+          <button class="tc-btn is-primary" type="button" data-tc-copy-from="trigger-script" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the script</button>
           <button class="tc-btn" type="button" data-tc-save="carrel-personal.sh" data-tc-from="trigger-script"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
           <button class="tc-btn" type="button" title="The old password stops working; whatever runs this job has to be given the new one.">New password</button>
         </div>
@@ -15601,36 +15601,36 @@ jobs:
         </div>
       </div>
     <div class="tc-main">
-      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Appearance</div><div class="tc-head__sub">Theme in this browser · week start and clock in the account</div></div></div>
-      <div class="tc-form">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Appearance</div><div class="tc-head__sub">Theme in this browser · week start and clock in the account</div></div><div class="tc-acts"><a class="tc-btn" href="/app/settings/appearance">Discard</a><button class="tc-btn is-primary" type="submit" form="appearance">Save</button></div></div>
+      <form class="tc-form" id="appearance" action="/app/settings/appearance" method="post">
         <div class="tc-fset tc-fset--lead">
           <div class="tc-rubric">Theme</div>
-          <div class="tc-field"><span class="tc-seg tc-seg--start"><button class="is-on tc-seg__opt" type="button">Auto</button><button class="tc-seg__opt" type="button">Light</button><button class="tc-seg__opt" type="button">Dark</button></span>
+          <div class="tc-field"><span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="auto" checked>Auto</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="light">Light</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="theme" value="dark">Dark</label></span>
             <span class="tc-field__hint">“Auto” follows the system. Kept in this browser — another device does not see it.</span></div>
         </div>
         <div class="tc-fset">
           <div class="tc-rubric">Density</div>
-          <div class="tc-field"><span class="tc-seg tc-seg--start"><button class="is-on tc-seg__opt" type="button">Comfortable</button><button class="tc-seg__opt" type="button">Compact</button></span>
+          <div class="tc-field"><span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="density" value="comfortable" checked>Comfortable</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="density" value="compact">Compact</label></span>
             <span class="tc-field__hint">List row height: 38 or 32&nbsp;px. On a phone always 52. This browser.</span></div>
         </div>
         <div class="tc-fset">
           <div class="tc-rubric">Lists</div>
           <div class="tc-field tc-grow tc-field--gap7">
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Keep the details panel open</button>
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Show the source column</button>
-            <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Open notes in full width</button>
+            <label class="tc-check"><input class="tc-check__box" type="checkbox" name="keep.the.details.panel.open" value="1" checked><span class="tc-tickrow__tick"></span>Keep the details panel open</label>
+            <label class="tc-check"><input class="tc-check__box" type="checkbox" name="show.the.source.column" value="1" checked><span class="tc-tickrow__tick"></span>Show the source column</label>
+            <label class="tc-check"><input class="tc-check__box" type="checkbox" name="open.notes.in.full.width" value="1"><span class="tc-tickrow__tick is-off"></span>Open notes in full width</label>
           </div>
           <div class="tc-field tc-grow"><span class="tc-field__hint">Column sets are remembered per section, in this browser — the button below resets them.</span></div>
           <div class="tc-field"><button class="tc-btn" type="button">Reset remembered view settings</button></div>
         </div>
         <div class="tc-fset">
           <div class="tc-rubric">Dates and times</div>
-          <div class="tc-field tc-field--md"><label>Week starts on</label><button class="tc-in is-pick" type="button">Monday</button></div>
-          <div class="tc-field tc-field--md"><label>Time</label><button class="tc-in is-pick" type="button">24-hour</button></div>
-          <div class="tc-field tc-field--lg"><label>Time zone</label><input class="tc-in" type="text" value="Europe/Moscow · this instance" aria-label="Time zone" readonly></div>
+          <div class="tc-field tc-field--md"><label>Week starts on</label><span class="tc-in is-pick"><select class="tc-in__list" name="week.starts.on" aria-label="Week starts on"><option value="monday" selected>Monday</option></select></span></div>
+          <div class="tc-field tc-field--md"><label>Time</label><span class="tc-in is-pick"><select class="tc-in__list" name="time" aria-label="Time"><option value="24.hour" selected>24-hour</option></select></span></div>
+          <div class="tc-field tc-field--lg"><label>Time zone</label><input class="tc-in" type="text" name="time.zone" value="Europe/Moscow · this instance" aria-label="Time zone" readonly></div>
           <div class="tc-field tc-grow"><span class="tc-field__hint">Week start and 12/24-hour clock live in the account: time is assembled on the server, so another browser sees the same. Time zone is one per instance, set by the administrator — an event shown in two zones to two people is a source of mistakes, not a convenience.</span></div>
         </div>
-      </div>
+      </form>
     </div></div>
   </div>
 </div>
@@ -16531,7 +16531,7 @@ password  4c1-tide-oven</div>
         <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
         <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
         <div class="tc-top__actions">
-          <button class="tc-btn is-primary" type="submit" form="admin-settings"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
           <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
         </div>
@@ -16558,7 +16558,7 @@ password  4c1-tide-oven</div>
           </div>
         </div>
         <div class="tc-main">
-        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Settings</div><div class="tc-head__sub">Global settings and mail</div></div><div class="tc-acts"><button class="tc-btn is-primary" type="button">Save</button></div></div>
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Settings</div><div class="tc-head__sub">Global settings and mail</div></div><div class="tc-acts"><a class="tc-btn" href="/admin/settings">Discard</a><button class="tc-btn is-primary" type="submit" form="admin-settings">Save</button></div></div>
         <form class="tc-form" id="admin-settings" action="/admin/settings" method="post">
           <div class="tc-fset tc-fset--lead">
             <div class="tc-rubric">Global</div>
