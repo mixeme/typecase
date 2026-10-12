@@ -697,17 +697,17 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the files back into a "), w.Strong("new"), w.Text(" folder — not into this one, and not to this address.")}, Space: w.MsgFlush},
 		w.Line{Items: []w.LinePart{w.Button{Label: "Open in Files", Icon: "file"}, w.Dim{Parts: []w.Inline{w.Text("Download what you need from it there first.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
 		w.Field{Label: "Type the name to confirm", Parts: []w.FieldPart{w.Input{Name: "type.the.name.to.confirm", Placeholder: "Documents", Label: "Type the name to confirm", Focus: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-19", "tc-sheet", 1),
-	overlay("refusal", w.Sheet{Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
+	overlay("refusal", w.Sheet{Action: "/app/files/sftpgo/documents/upload/carrel/attachments", Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Where to put it"},
-			w.Line{Items: []w.LinePart{w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},
+			w.Line{Items: []w.LinePart{w.Input{Name: "name", Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true, To: "/app/files/sftpgo/documents/mkcol/carrel/attachments", Submit: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},
 			w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in attachments already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2},
 			w.Tree{Rows: []w.TreeRow{
-				{Icon: "file", Label: "Documents"},
-				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
-				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40},
-				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58}}, On: 3}}, Variant: w.CardFlush},
-		w.Dim{Parts: []w.Inline{w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload 2 files", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-files-19", "tc-sheet", 1),
+				{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
+				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
+				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}},
+				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}}}, On: 3}}, Variant: w.CardFlush},
+		w.Dim{Parts: []w.Inline{w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-files-19", "tc-sheet", 1),
 	overlay("issued", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Reset a password", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush},
 		w.Card{Items: []w.CardPart{

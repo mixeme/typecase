@@ -7933,7 +7933,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <div class="tc-sheet">
+          <form class="tc-sheet" action="/app/files/sftpgo/documents/upload/carrel/attachments/2026-08" method="post" enctype="multipart/form-data">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
               <b class="tc-sheet__title">Upload files</b>
@@ -7961,11 +7961,11 @@ Read  2 min ago</div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here. Change it here and the next upload from this menu goes to the new one.</span>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="button">Upload</button>
+              <button class="tc-btn is-primary" type="submit">Upload</button>
               <kbd class="tc-kbd">Enter</kbd>
               <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -8262,7 +8262,7 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-files-13">
     <div class="frame-label"><span>New folder · имя и отказ</span><span class="frag">фрагмент</span><i>в листе переноса</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" action="/app/files/sftpgo/documents/op/carrel/attachments?op=move" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
         <b class="tc-sheet__title">Move 3 items</b>
@@ -8271,18 +8271,18 @@ Read  2 min ago</div>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-rubric">Where to put it</div>
-          <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="button">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
+          <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" name="name" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="submit" formaction="/app/files/sftpgo/documents/mkcol/carrel/attachments">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
           <div class="tc-msg is-alert tc-msg--flush-top2">There is a folder called «2026-07» in attachments already. Choose another name.</div>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
-            <div data-part="children" class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
-            <div class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><svg><use href="#i-file"/></svg>attachments</div>
-            <div data-part="children" class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-file"/></svg>2026-07</div>
-            <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
+            <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents"><svg><use href="#i-file"/></svg>Documents</label>
+            <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel"><svg><use href="#i-file"/></svg>carrel</label>
+            <label class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked><svg><use href="#i-file"/></svg>attachments</label>
+            <label data-part="children" class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07"><svg><use href="#i-file"/></svg>2026-07</label>
+            <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>«New folder» в листе спрашивает имя строкой над деревом, в той папке, что выбрана в дереве; «Create» заводит её и сразу выбирает. Отказ — сообщением под строкой: имя занято или папка только для чтения.</figcaption>
@@ -8448,7 +8448,7 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-files-19">
     <div class="frame-label"><span>Upload · New folder, отказ</span><span class="frag">фрагмент</span><i>лист загрузки</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet">
+      <form class="tc-sheet" action="/app/files/sftpgo/documents/upload/carrel/attachments" method="post">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-up"/></svg>
         <b class="tc-sheet__title">Upload files</b>
@@ -8458,19 +8458,19 @@ Read  2 min ago</div>
         <div class="tc-sheet__body">
           <div class="tc-card tc-card--flush">
             <div class="tc-rubric">Where to put it</div>
-            <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="button">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
+            <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" name="name" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="submit" formaction="/app/files/sftpgo/documents/mkcol/carrel/attachments">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
             <div class="tc-msg is-alert tc-msg--flush-top2">There is a folder called «2026-07» in attachments already. Choose another name.</div>
             <div class="tc-tree">
-              <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
-              <div class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
-              <div class="is-on tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
-              <div class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-file"/></svg>2026-07</div>
+              <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents"><svg><use href="#i-file"/></svg>Documents</label>
+              <label class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel"><svg><use href="#i-file"/></svg>carrel</label>
+              <label class="is-on tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked><svg><use href="#i-file"/></svg>attachments</label>
+              <label class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07"><svg><use href="#i-file"/></svg>2026-07</label>
             </div>
           </div>
           <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Upload</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Отказ New folder в листе загрузки стоит там же, где в листе переноса: под строкой имени, строка остаётся открытой с набранным. Пояснение листа внизу на месте. Прочие отказы — недопустимое имя, папки уже нет, отказ сервера — тем же сообщением на том же месте.</figcaption>

@@ -2848,8 +2848,9 @@ func Notes11() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "up",
-					Title: "Upload files",
+					Action: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
+					Icon:   "up",
+					Title:  "Upload files",
 					Head: []w.SheetHeadPart{
 						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},
 						w.Dim{
@@ -2959,7 +2960,7 @@ func Notes11() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Upload", Kind: w.ButtonPrimary},
+						w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
 					},
