@@ -1797,3 +1797,97 @@ func TestRunFollows(t *testing.T) {
 		t.Errorf("without the layer: the line says %q; want 0 of 6", got)
 	}
 }
+
+// TestShortcuts (Carrel's task 87): what is pressed carries its key as data.
+// A letter presses its button and a sign puts the focus into the search —
+// not while the cursor is in a field, and not from under a sheet; «?» opens
+// the sheet of keys through an item of a menu that is closed; a chord with
+// Ctrl works in a field, for the button of that field's form, on a layout
+// without Latin letters too; what destroys carries no key. The arrows walk
+// the rows of a list.
+func TestShortcuts(t *testing.T) {
+	needChrome(t)
+	form := func(id string) string {
+		return `<form id="` + id + `" action="/x" method="post">` + w.Input{Name: "t", Label: "Text"}.Render() +
+			w.Button{Label: "Save", Submit: true, Name: "from", Value: id, Key: "Ctrl+S"}.Render() + `</form>`
+	}
+	row := func(s string) w.ListRow {
+		return w.ExcerptRow{Title: []w.Inline{w.Text(s)}, Href: "#" + s}
+	}
+	body := `<div class="tc-root">` +
+		w.Search{Query: w.Query{Label: "Search", Name: "q", Key: "/"}}.Render() +
+		w.Button{Label: "New note", Opens: "quick", Key: "n"}.Render() +
+		w.Button{Label: "Delete", Kind: w.ButtonDangerSolid, Key: "d"}.Render() +
+		w.Drop{Trigger: w.Button{Label: "mix", Menu: true}, Menu: w.Menu{Pop: w.MenuUnder, Items: []w.MenuPart{
+			w.MenuItem{Label: "Keyboard shortcuts", Href: "#keys", Key: "?"},
+			w.MenuItem{Label: "Delete account", Tone: w.MenuToneDanger, Key: "x"}}}}.Render() +
+		form("fa") + form("fb") +
+		w.List{Rows: []w.ListRow{row("One"), row("Two"), row("Three")}}.Render() +
+		w.Scrim{ID: "quick", Closed: true, Content: w.Sheet{Title: "Quick note", Action: "/q",
+			Body: []w.SheetPart{w.Field{Label: "Text", Parts: []w.FieldPart{w.Input{Name: "body"}}}},
+			Foot: []w.SheetFootPart{w.Button{Label: "Save", Submit: true, Name: "from", Value: "quick", Key: "Ctrl+Enter"}}}}.Render() +
+		w.Scrim{ID: "keys", Closed: true, Content: w.Sheet{Title: "Keyboard shortcuts", Head: []w.SheetHeadPart{w.Close{Label: "Close"}}}}.Render() +
+		`</div>`
+	h := browser.NewHarness(t)
+	const prep = `(() => { window.__sent = []; document.addEventListener("submit", e => { e.preventDefault(); window.__sent.push(e.submitter ? e.submitter.value : "?"); });
+		window.__open = id => document.getElementById(id).getClientRects().length ? "open" : "closed";
+		window.__key = (o) => { (document.activeElement || document.body).dispatchEvent(new KeyboardEvent("keydown", Object.assign({bubbles: true, cancelable: true}, o))); return true };
+		window.__at = () => { const a = document.activeElement; return a.type === "search" ? "search" : (a.textContent || a.tagName).trim() }; return true })()`
+	var inField, pressed, under, chord, other, slash, keys, keysEsc, own, first, danger, walked string
+	if err := h.Run(h.RegisterPage("shortcuts", browser.PageHTML(body, "")), 900, 700,
+		chromedp.Evaluate(prep, nil),
+		chromedp.Focus(`#fa input`, chromedp.ByQuery),
+		chromedp.KeyEvent("n"),
+		chromedp.Evaluate(`__open("quick") + " " + document.querySelector("#fa input").value`, &inField),
+		chromedp.Evaluate(`document.activeElement.blur(); true`, nil),
+		chromedp.KeyEvent("n"),
+		chromedp.Evaluate(`__open("quick") + " " + (document.getElementById("quick").contains(document.activeElement) ? "inside" : "outside")`, &pressed),
+		chromedp.Evaluate(`document.querySelector("#quick button[type=submit]").focus(); true`, nil),
+		chromedp.KeyEvent("/"),
+		chromedp.Evaluate(`__at()`, &under),
+		chromedp.Evaluate(`document.querySelector("#quick input").focus(); __key({key: "s", code: "KeyS", ctrlKey: true}); __sent.join(",")`, &other),
+		chromedp.Evaluate(`__key({key: "Enter", code: "Enter", ctrlKey: true}); __sent.join(",")`, &chord),
+		chromedp.Evaluate(`document.getElementById("quick").click(); document.activeElement.blur(); true`, nil),
+		chromedp.KeyEvent("/"),
+		chromedp.Evaluate(`__at()`, &slash),
+		chromedp.Evaluate(`document.activeElement.blur(); true`, nil),
+		chromedp.KeyEvent("?"),
+		chromedp.Evaluate(`__open("keys")`, &keys),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(`__open("keys")`, &keysEsc),
+		chromedp.Evaluate(`document.querySelector("#fb input").focus(); __key({key: "ы", code: "KeyS", ctrlKey: true}); __sent.join(",")`, &own),
+		chromedp.Evaluate(`document.activeElement.blur(); __key({key: "s", code: "KeyS", ctrlKey: true}); __sent.join(",")`, &first),
+		chromedp.Evaluate(`String(document.querySelectorAll(".is-danger-solid[data-tc-key], .tc-menu__item--danger[data-tc-key]").length)`, &danger),
+		chromedp.Evaluate(`(() => { const got = []; document.querySelector(".tc-list a").focus();
+			for (const k of ["ArrowDown", "End", "ArrowUp", "Home", "ArrowUp"]) { __key({key: k}); got.push(__at()); } return got.join(",") })()`, &walked),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if inField != "closed n" {
+		t.Errorf("«n» typed in a field: %s; want the sheet closed and the letter in the field", inField)
+	}
+	if pressed != "open inside" {
+		t.Errorf("«n» outside a field: %s; want the sheet open, the focus in it", pressed)
+	}
+	if under == "search" {
+		t.Errorf("«/» over an open sheet put the focus into the search under it")
+	}
+	if other != "" || chord != "quick" {
+		t.Errorf("in the sheet's field: after Ctrl+S sent %q, after Ctrl+Enter %q; want nothing, then quick", other, chord)
+	}
+	if slash != "search" {
+		t.Errorf("«/»: the focus is in %q; want the search", slash)
+	}
+	if keys != "open" || keysEsc != "closed" {
+		t.Errorf("«?»: the sheet of keys is %s, after Esc %s; want open, closed", keys, keysEsc)
+	}
+	if own != "quick,fb" || first != "quick,fb,fa" {
+		t.Errorf("Ctrl+S in the second form's field sent %q, outside a field %q; want quick,fb and quick,fb,fa", own, first)
+	}
+	if danger != "0" {
+		t.Errorf("%s of what destroys carry a key; want none", danger)
+	}
+	if walked != "Two,Three,Two,One,One" {
+		t.Errorf("the arrows in a list: %s; want Two,Three,Two,One,One", walked)
+	}
+}

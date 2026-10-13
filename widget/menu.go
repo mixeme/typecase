@@ -81,6 +81,12 @@ type MenuItem struct {
 	// (Carrel's task 77). It waits in a template; the library's script puts it
 	// before the typing line.
 	Adds *Tag
+	// Key is the key that presses the item, with the library's script, the
+	// menu open or closed (Carrel's task 87): «?» on «Keyboard shortcuts». It
+	// does nothing while the cursor is in a field. An item that destroys
+	// (MenuToneDanger) takes no key, nor does an item that is a tick, a
+	// radio button or a file's label.
+	Key string
 }
 
 // MenuItems prints menu items without their menu: what a server answers a
@@ -104,6 +110,7 @@ func (it MenuItem) html(mix) string {
 		return s.String()
 	}
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
+	key := attr("data-tc-key", pick(it.Tone != MenuToneDanger, it.Key))
 	if it.Name != "" && it.Tick != nil {
 		cls = class(nil, is("on", it.On), is("drag", it.Drag), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
 		s.WriteString(`<label` + cls + ` role="menuitem"><input class="tc-check__box" type="checkbox"` + attr("name", it.Name) + attr("value", it.Value) +
@@ -141,14 +148,14 @@ func (it MenuItem) html(mix) string {
 		if it.Reason != "" {
 			s.WriteString(`<a` + cls + ` role="menuitem"` + checked + attr("title", it.Reason) + ` aria-disabled="true">`)
 		} else {
-			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + `>`)
+			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + key + `>`)
 		}
 	} else if it.To != "" {
-		s.WriteString(`<button` + cls + ` type="submit"` + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+		s.WriteString(`<button` + cls + ` type="submit"` + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else if it.Form != "" {
-		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else {
-		s.WriteString(`<button` + cls + ` type="button" role="menuitem"` + checked + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+		s.WriteString(`<button` + cls + ` type="button" role="menuitem"` + checked + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	}
 	if it.Icon != "" {
 		s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)

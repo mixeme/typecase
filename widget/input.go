@@ -187,10 +187,10 @@ func (p Pick) html(m mix) string {
 // Query — tc-q
 //
 // Роль. Строка запроса внутри поля поиска или фильтра.
-// Вход. Query{Value, Placeholder, Label, Name}.
+// Вход. Query{Value, Placeholder, Label, Name, Key}.
 // Состояния. нет.
 // Инварианты. Тип поля — search; у строки есть доступное имя; строка печатает фрагмент своего кадра.
-// Поведение. Ввод — браузера; Esc очищает, если поле не пусто.
+// Поведение. Ввод — браузера; Esc очищает, если поле не пусто; клавиша (Key) ставит в строку фокус.
 // Эталон. кадр `shell-1`, фрагмент `.tc-q`.
 // Содержимое. нет.
 // Чего нет. Рамки и значка: их рисует поле вокруг.
@@ -199,13 +199,17 @@ type Query struct {
 	Placeholder string // what the empty line says: «Search everything…»
 	Label       string
 	Name        string // what the search sends it as: q
+	// Key is the key that puts the focus into the line, with the library's
+	// script (Carrel's task 87): «/». It does nothing while the cursor is in
+	// a field.
+	Key string
 }
 
 // Render prints the query line.
 func (q Query) Render() string { return q.html(nil) }
 
 func (q Query) html(m mix) string {
-	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + `>`
+	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + attr("data-tc-key", q.Key) + `>`
 }
 
 // FilterVariant is the drawn size of a filter.

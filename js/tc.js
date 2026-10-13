@@ -998,11 +998,99 @@
 		return false;
 	}
 
+	// A list's rows: the arrows walk them, Home and End go to its ends; Enter
+	// opens the row that has the focus — it is a link, or its title is.
+	function rowLink(row) {
+		return row.tagName === "A" ? row : row.querySelector("a.tc-row__title");
+	}
+
+	function onListKey(e) {
+		if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return false;
+		if (["ArrowDown", "ArrowUp", "Home", "End"].indexOf(e.key) < 0) return false;
+		var row = closest(e.target, ".tc-list .tc-row");
+		if (!row || closest(e.target, 'input:not([type="checkbox"]), textarea, select')) return false;
+		var links = Array.prototype.map.call(closest(row, ".tc-list").querySelectorAll(".tc-row"), rowLink).filter(function (a) {
+			return a && visible(a);
+		});
+		var i = links.indexOf(rowLink(row));
+		var next = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: links.length - 1 }[e.key];
+		// At an end the arrow is the page's again: it scrolls.
+		if (!links[next] || next === i) return false;
+		e.preventDefault();
+		links[next].focus();
+		return true;
+	}
+
+	// Shortcuts (Carrel's task 87). What is pressed carries its key as data
+	// (data-tc-key: «n», «/», «?», «Ctrl+S», «Ctrl+Enter»): the key presses it,
+	// or puts the focus into it when it is a field. A letter or a sign does
+	// nothing while the cursor is in a field or a menu is open; a chord with a
+	// modifier works in a field too, for a button of that field's form only.
+	// Nothing that destroys is pressed by a key, and nothing under a sheet.
+	function chordOf(e) {
+		var k = e.key;
+		if (!k || k === "Control" || k === "Shift" || k === "Alt" || k === "Meta") return "";
+		// A layout without Latin letters: the key's place says which it is.
+		if (k.length === 1 && k.charCodeAt(0) > 127 && /^Key[A-Z]$/.test(e.code || "")) k = e.code.charAt(3);
+		// Shift is a part of a chord with a letter or a named key; a sign («?»)
+		// is typed with it or without, as the layout has it.
+		var shift = e.shiftKey && (k.length > 1 || k.toLowerCase() !== k.toUpperCase());
+		return (e.ctrlKey || e.metaKey ? "ctrl+" : "") + (e.altKey ? "alt+" : "") + (shift ? "shift+" : "") + k.toLowerCase();
+	}
+
+	function onShortcut(e) {
+		if (e.repeat || e.isComposing) return false;
+		var chord = chordOf(e);
+		if (!chord) return false;
+		var mod = e.ctrlKey || e.metaKey || e.altKey;
+		var field = closest(e.target, "input, textarea, select, [contenteditable]");
+		if (!mod && (field || openTrigger)) return false;
+		// Enter and the space bar press what has the focus.
+		if (!mod && (chord === "enter" || chord === " ") && closest(e.target, focusableSel)) return false;
+		var layers = openLayers();
+		var top = layers.length ? layers[layers.length - 1] : null;
+		if (top && !top.classList.contains("tc-scrim")) top = null;
+		var found = Array.prototype.filter.call(document.querySelectorAll("[data-tc-key]"), function (el) {
+			if (el.getAttribute("data-tc-key").replace(/\s+/g, "").toLowerCase() !== chord) return false;
+			if (el.disabled || el.getAttribute("aria-disabled") === "true") return false;
+			if (el.matches(".is-danger, .is-danger-solid, .tc-menu__item--danger, .tc-nojs")) return false;
+			if (top && !top.contains(el)) return false;
+			if (field && (!field.form || el.form !== field.form)) return false;
+			return true;
+		});
+		// What is on the screen first; then an item of a menu that is closed.
+		var el =
+			found.filter(visible)[0] ||
+			found.filter(function (el) {
+				var layer = layerOf(el);
+				return closest(el, ".tc-menu") && (!layer || visible(layer));
+			})[0];
+		if (!el) return false;
+		e.preventDefault();
+		if (el.matches("input, textarea, select")) {
+			el.focus();
+			if (el.select) el.select();
+			return true;
+		}
+		var was = document.activeElement;
+		el.click();
+		// A sheet opened by an item nobody sees gives the focus back to where
+		// it was.
+		if (!visible(el)) {
+			openLayers().forEach(function (layer) {
+				if (openers.get(layer) === el) openers.set(layer, was);
+			});
+		}
+		return true;
+	}
+
 	function onKeydown(e) {
 		if (onTagKey(e)) return;
 		if (onMoveKey(e)) return;
 		if (openTrigger && onMenuKey(e)) return;
 		if (onSegKey(e)) return;
+		if (onListKey(e)) return;
+		if (onShortcut(e)) return;
 		if (e.key !== "Escape") return;
 		if (closeMenu(true)) {
 			e.preventDefault();

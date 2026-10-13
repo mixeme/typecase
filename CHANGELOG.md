@@ -48,6 +48,20 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **Shortcuts are data** (Carrel's task 87). `Button.Key`, `MenuItem.Key`
+  and `Query.Key` name the key that presses the button or the item, or puts
+  the focus into the search line (`data-tc-key`: «n», «/», «?», «Ctrl+S»,
+  «Ctrl+Enter»); the library has no keys of its own besides Esc, Tab and
+  the arrows. A letter or a sign does nothing while the cursor is in a
+  field or a menu is open; a chord with Ctrl (Cmd) works in a field too,
+  for a button of that field's form only. Under an open sheet nothing is
+  pressed. An item of a closed menu is pressed as well: «?» on «Keyboard
+  shortcuts» opens the sheet its `Href` names. A button or an item that
+  destroys (`ButtonDanger`, `ButtonDangerSolid`, `MenuToneDanger`) does not
+  print its key. On a layout without Latin letters the key's place names
+  the letter. In a `List` the arrows, Home and End move the focus along the
+  rows that are links (or whose title is one); Enter opens the row, as a
+  link does. Tab still visits every row. `TestShortcuts`.
 - **A run's line follows its run** (Carrel's task 85). `Runbar` that is a
   zone names a stream of events — `Stream`, with the events' names
   `Changed` and `Ended` — and a poll address, `Poll`, asked every `Every`

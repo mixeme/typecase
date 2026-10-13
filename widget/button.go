@@ -73,10 +73,10 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
-// Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
+// Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
 // Эталон. кадр `components-9`, фрагмент `.tc-btn`; формы — в таблице эталонов.
 // Содержимое. Значок, подпись (жирная или уходящая при сужении), моноширинный хвост с текстом после, отметка перед подписью, стрелка.
 // Чего нет. Своего цвета и своих отступов: кнопка-ссылка и кнопка отправки выглядят как любая другая; причину недоступности кнопка показывает подсказкой, а строкой под рядом — её контейнер.
@@ -164,6 +164,13 @@ type Button struct {
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
 	Target string
+	// Key is the key that presses the button, with the library's script
+	// (Carrel's task 87): «n», «?», «Ctrl+S», «Ctrl+Enter». A letter or a sign
+	// does nothing while the cursor is in a field; a chord with Ctrl works
+	// there too, for a button of that field's form only. A button that
+	// destroys (ButtonDanger, ButtonDangerSolid) takes no key: it is not
+	// printed.
+	Key string
 }
 
 // Render prints the button.
@@ -185,7 +192,8 @@ func (b Button) html(m mix) string {
 	}
 	tag := "button"
 	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.NoScript, "tc-nojs"))
-	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens)
+	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) +
+		attr("data-tc-key", pick(b.Kind != ButtonDanger && b.Kind != ButtonDangerSolid, b.Key))
 	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom) + attr("data-tc-copied", b.Copied)
 	if b.File != nil {
 		tag = "label"
