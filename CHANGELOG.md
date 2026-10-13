@@ -505,6 +505,13 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The agenda in chosen columns** (Carrel's task 154; the owner, 13.10).
+  `s-agenda-20`, new: the agenda as rows of columns in its default set —
+  Time, Title, Where, «Attendees and status», Source. `s-agenda-21`, new: an
+  example of another choice, not a default — Where and Source off, Tags and
+  Changed on. The row is `ColumnRow` as it is: the time is `ColumnDate`,
+  first, before the name; where is `ColumnDetail`; attendees and status are
+  `ColumnStatus`, in words, not a badge. The days' groups stay. 435 frames.
 - **The tails of task 149 and task 155** (the owner accepted them, 13.10).
   `s-backup-7`, the first step of a restore, is a form: the dialog sends,
   «Where the archive is» is a segment of links, the table's ticks are radio

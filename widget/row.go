@@ -580,10 +580,10 @@ const (
 	ColumnDue                    // a task's due: monospaced, 96 px
 	ColumnComplete               // how much is done: monospaced, 48 px; goes at 800 px
 	ColumnPriority               // monospaced, 48 px; goes at 800 px
-	ColumnStatus                 // a task's status in words, 112 px; goes at 620 px
+	ColumnStatus                 // a task's status, an event's attendees or status, in words, 112 px; goes at 620 px
 	ColumnExcerpt                // the start of a text: stretches; goes at 620 px
-	ColumnDate                   // a record's date: monospaced, 62 px
-	ColumnDetail                 // why a record is in a person's timeline: stretches, stays with the name
+	ColumnDate                   // a record's date, an event's time in the agenda (first, before the name): monospaced, 62 px
+	ColumnDetail                 // why a record is in a person's timeline, where an event is: stretches, stays with the name
 	ColumnKind                   // event, task, note or file: 56 px; goes at 460 px
 )
 

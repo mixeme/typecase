@@ -4797,6 +4797,56 @@ Read  2 min ago · changed on server 3 days ago</div>
   </div>
   <figcaption>Набросок. Отмечено то, что стоит в ленте по умолчанию: время, название, место, значок участников или статуса, источник; Tags и Changed добавляют. Time и Title стоят всегда.</figcaption>
   </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-agenda-20">
+    <div class="frame-label"><span>Календарь · свои столбцы</span><span class="frag">фрагмент</span><i>лента столбцами: набор по умолчанию</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-bar">
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+        </div>
+        <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">4</span></div>
+        <div class="tc-list">
+          <div class="tc-row tc-row--cols is-on"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__cell tc-mono tc-col--date">10:00</span><span class="tc-row__title is-strong tc-col--name">Синк-ап по релизу</span><span class="tc-row__excerpt tc-col--detail">Переговорная 2</span><span class="tc-row__cell tc-col--status">4 attendees</span><span class="tc-row__cell tc-col--source">nextcloud · Личный</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-row__cell tc-mono tc-col--date">all day</span><span class="tc-row__title tc-col--name">Дежурство: первая линия</span><span class="tc-row__excerpt tc-col--detail">—</span><span class="tc-row__cell tc-col--status">repeats weekly</span><span class="tc-row__cell tc-col--source">nextcloud · Работа</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-row__cell tc-mono tc-col--date">all day</span><span class="tc-row__title tc-col--name">Дежурство: первая линия</span><span class="tc-row__excerpt tc-col--detail">—</span><span class="tc-row__cell tc-col--status">repeats weekly</span><span class="tc-row__cell tc-col--source">radicale · vps · Дежурства</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-row__cell tc-mono tc-col--date">15:00</span><span class="tc-row__title tc-col--name">Созвон с подрядчиком</span><span class="tc-row__excerpt tc-col--detail">Jitsi</span><span class="tc-row__cell tc-col--status">tentative</span><span class="tc-row__cell tc-col--source">nextcloud · Работа</span></div>
+        </div>
+        <div class="tc-list__group"><span class="tc-rubric">Tuesday · 11 August</span><span class="tc-num">2</span></div>
+        <div class="tc-list">
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-row__cell tc-mono tc-col--date">09:30</span><span class="tc-row__title tc-col--name">Ревью архитектуры</span><span class="tc-row__excerpt tc-col--detail">Переговорная 1</span><span class="tc-row__cell tc-col--status">2 attendees</span><span class="tc-row__cell tc-col--source">radicale · vps · Проекты</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__cell tc-mono tc-col--date">18:00</span><span class="tc-row__title tc-col--name">Забрать документы</span><span class="tc-row__excerpt tc-col--detail">МФЦ, Мясницкая 13</span><span class="tc-row__cell tc-col--status">—</span><span class="tc-row__cell tc-col--source">nextcloud · Личный</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption><b>Лента в столбцах, которые выбрал человек</b> (задача 154): та же строка со столбцами, что у задач, заметок и контактов. Кадр рисует набор по умолчанию — Time, Title, Where, «Attendees and status», Source (решение владельца 13.10): время стоит первым, перед названием, и остаётся всегда, как само название; Where — растягивающийся столбец сразу после названия, прочерк, когда места нет; «Attendees and status» в столбцах — слова, а не значок: «4 attendees», «repeats weekly», «tentative», прочерк, когда сказать нечего; Source — последним. Группы по дням остаются. <b>Tags и Changed в ленте по умолчанию нет</b> (Р-53): это столбцы, которые включают, — тогда они встают перед Source, как в остальных списках: тег — первым и счётом остальных, Changed — датой и временем. На узкой ширине статус уходит с 620 px, Source — с 460; время, название и место остаются.</figcaption>
+  </figure>
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-agenda-21">
+    <div class="frame-label"><span>Календарь · свои столбцы, другой выбор</span><span class="frag">фрагмент</span><i>не умолчание: Where и Source сняты, Tags и Changed включены</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-bar">
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
+        </div>
+        <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">4</span></div>
+        <div class="tc-list">
+          <div class="tc-row tc-row--cols is-on"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__cell tc-mono tc-col--date">10:00</span><span class="tc-row__title is-strong tc-col--name">Синк-ап по релизу</span><span class="tc-row__cell tc-col--status">4 attendees</span><span class="tc-row__cell tc-row__tags tc-col--tags" title="release, team"><span class="tc-tag">release</span><span class="tc-row__more">+1</span></span><span class="tc-row__cell tc-mono tc-col--changed">10 Aug 08:41</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-row__cell tc-mono tc-col--date">all day</span><span class="tc-row__title tc-col--name">Дежурство: первая линия</span><span class="tc-row__cell tc-col--status">repeats weekly</span><span class="tc-row__cell tc-row__tags tc-col--tags"><span class="tc-tag">дежурство</span></span><span class="tc-row__cell tc-mono tc-col--changed">3 Aug 12:10</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-row__cell tc-mono tc-col--date">all day</span><span class="tc-row__title tc-col--name">Дежурство: первая линия</span><span class="tc-row__cell tc-col--status">repeats weekly</span><span class="tc-row__cell tc-row__tags tc-col--tags"></span><span class="tc-row__cell tc-mono tc-col--changed">3 Aug 12:10</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-row__cell tc-mono tc-col--date">15:00</span><span class="tc-row__title tc-col--name">Созвон с подрядчиком</span><span class="tc-row__cell tc-col--status">tentative</span><span class="tc-row__cell tc-row__tags tc-col--tags"><span class="tc-tag">смета</span></span><span class="tc-row__cell tc-mono tc-col--changed">9 Aug 18:02</span></div>
+        </div>
+        <div class="tc-list__group"><span class="tc-rubric">Tuesday · 11 August</span><span class="tc-num">2</span></div>
+        <div class="tc-list">
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-row__cell tc-mono tc-col--date">09:30</span><span class="tc-row__title tc-col--name">Ревью архитектуры</span><span class="tc-row__cell tc-col--status">2 attendees</span><span class="tc-row__cell tc-row__tags tc-col--tags"><span class="tc-tag">release</span></span><span class="tc-row__cell tc-mono tc-col--changed">7 Aug 16:55</span></div>
+          <div class="tc-row tc-row--cols"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-row__cell tc-mono tc-col--date">18:00</span><span class="tc-row__title tc-col--name">Забрать документы</span><span class="tc-row__cell tc-col--status">—</span><span class="tc-row__cell tc-row__tags tc-col--tags"></span><span class="tc-row__cell tc-mono tc-col--changed">11 Aug 09:03</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption><b>Тот же список после выбора в «Columns» — пример, а не умолчание</b> (задача 154, набор из просьбы Carrel; владелец 13.10: дополнительным кадром). Человек снял Where и Source и включил Tags и Changed: Tags — первым тегом и счётом остальных («release +1»), все — в подсказке ячейки; пустая ячейка у события без тегов; Changed — датой и временем. Время и название остаются всегда. На узкой ширине Tags и Changed уходят с 800 px, статус — с 620.</figcaption>
+  </figure>
 
 
 <figure>
