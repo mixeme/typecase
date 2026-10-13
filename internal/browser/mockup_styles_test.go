@@ -388,7 +388,9 @@ func TestMockupDarkRules(t *testing.T) {
 		{"dark-2", ".tc-avatar", "background-color", "rgb(58, 70, 61)"},
 		{"dark-2", ".tc-avatar", "color", "rgb(201, 191, 166)"},
 		{"dark-2", ".tc-scrim", "background-color", "rgba(0, 0, 0, 0.42)"},
-		{"dark-3", ".tc-thumb", "background-color", "rgb(51, 64, 58)"},
+		// a file's thumbnail: a folder's has no ground of its own (tc-thumb--folder)
+		{"dark-3", ".tc-thumb:not(.tc-thumb--folder)", "background-color", "rgb(51, 64, 58)"},
+		{"dark-3", ".tc-thumb--folder", "background-color", "rgba(0, 0, 0, 0)"},
 	} {
 		frame, ok := byID[c.frame]
 		if !ok {
