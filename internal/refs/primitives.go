@@ -157,7 +157,7 @@ var _ = add(
 	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
 
 	// tc-dim
-	primitive("plain", dim(w.DimText, w.DimInline, w.Text("· in 7 months")), "s-contacts-6", "tc-dim", 1),
+	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("Команда")}}, "s-contacts-6", "tc-dim", 1),
 	primitive("mixed", dim(w.Dim11, w.DimInline, w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}), "components-35", "tc-dim", 1),
 	primitive("sized", dim(w.Dim11, w.DimInline, w.Text("No device connects until it is started.")), "components-35", "tc-dim", 2),
 	primitive("mixed", dim(w.Dim11, w.DimInline, w.Text("Last backup"), w.Mono{Text: "2026-08-16 03:10"}, w.Text("·"),

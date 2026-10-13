@@ -16,6 +16,11 @@ func (Badge) valuePart() {}
 func (Tag) valuePart()   {}
 func (Break) valuePart() {}
 
+// A mark in a value names the collection the value came from: a card of a
+// linked record shows the fields of all its copies, and a value that is not
+// in the copy opened carries the mark and the name of its own (Р-58).
+func (Mark) valuePart() {}
+
 // ValueFace is how a value of a panel's fields is set.
 type ValueFace int
 
@@ -37,6 +42,9 @@ type FieldsItem struct {
 	Value []ValuePart
 	Face  ValueFace
 	Href  string // the value goes somewhere: mailto:, tel:, the linked record
+	// After stands after a value that is a link, outside the link: the mark
+	// and the name of the collection a value came from (Р-58).
+	After []ValuePart
 }
 
 // FieldsVariant is the drawn form of a panel's fields.
@@ -88,6 +96,9 @@ func (f Fields) html(m mix) string {
 		}
 		if it.Href != "" {
 			s.WriteString(`</a>`)
+		}
+		for _, p := range it.After {
+			s.WriteString(" " + p.html(nil))
 		}
 		s.WriteString(`</dd>`)
 	}

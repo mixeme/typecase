@@ -194,9 +194,9 @@ var _ = add(
 		{Term: "Nickname", Value: []w.ValuePart{w.Text("Аня")}}}}, "mentions-6", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
-		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono, Href: "tel:+74951204500"},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono, Href: "tel:+74951204500", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
-		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}, Href: "mailto:anna.kovaleva@slovo.example"},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}, Href: "mailto:anna.kovaleva@slovo.example", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
 		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},

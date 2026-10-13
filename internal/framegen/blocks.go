@@ -391,8 +391,23 @@ func (g *gen) fields(e *El) string {
 		}
 		var vp []string
 		href := ""
+		var after []string
 		if a := dd.Kid("tc-fields__link"); a != nil {
 			href = a.Attr("href")
+			// what stands after the link, outside it: the collection a value came from
+			past := false
+			for _, k := range dd.Els() {
+				switch {
+				case k == a:
+					past = true
+				case past && k.Has("tc-mark"):
+					after = append(after, g.mark(k))
+				case past && k.Has("tc-dim"):
+					after = append(after, g.dimx(k))
+				case past:
+					stop("dd after its link? " + join(k.Cls(), " "))
+				}
+			}
 			dd = a
 		}
 		for _, k := range dd.Kids {
@@ -429,6 +444,9 @@ func (g *gen) fields(e *El) string {
 		}
 		if href != "" {
 			s += ", Href: " + q(href)
+		}
+		if len(after) > 0 {
+			s += ", After: []w.ValuePart{" + join(after, ", ") + "}"
 		}
 		its = append(its, s+"}")
 	}

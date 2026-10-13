@@ -505,6 +505,13 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **A value that came from another copy is marked** (Carrel's task 153; the
+  owner's decision of 13.10, Р-58). The card of a linked record shows the
+  fields of all its copies; a value that is not in the copy opened carries,
+  after it, the mark and the name of the collection it came from —
+  `s-contacts-6`, the work phone and the second address. `FieldsItem.After`
+  holds what stands after a value that is a link, outside the link; a
+  `Mark` is a part of a value.
 - **Which copy of a linked record is edited or marked done** (Carrel's task
   153; the owner's decisions of 11.10 and 13.10, Р-58). An edit of a record
   with linked copies is written into one copy, and the person chooses which
