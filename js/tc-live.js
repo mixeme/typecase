@@ -182,7 +182,16 @@
 		if (only && only.getAttribute("data-tc-zone") === zone.getAttribute("data-tc-zone")) {
 			// the widget of the zone itself: it takes the zone's place whole
 			zone.parentNode.replaceChild(only, zone);
-			if (tc.init) tc.init(only);
+			// the core's init looks inside what it is given: the widget is
+			// held in a box for the call, so that it is looked at too
+			if (tc.init) {
+				var box = document.createElement("div");
+				only.parentNode.insertBefore(box, only);
+				box.appendChild(only);
+				tc.init(box);
+				box.parentNode.insertBefore(only, box);
+				box.parentNode.removeChild(box);
+			}
 			return;
 		}
 		while (zone.firstChild) zone.removeChild(zone.firstChild);

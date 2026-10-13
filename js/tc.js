@@ -452,7 +452,7 @@
 			}
 			return;
 		}
-		var close = closest(e.target, ".tc-close");
+		var close = closest(e.target, ".tc-close, [data-tc-close]");
 		if (close) {
 			var layer = layerOf(close);
 			if (layer) {

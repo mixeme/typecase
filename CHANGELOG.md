@@ -47,8 +47,17 @@ do, not what the authors did.
   the document names; the zone named in `Zones.Address` puts a link's
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
-  form. `TestZones` (browser and `page`). Not yet: a sheet arriving into
-  its layer, the rail as a zone, targets on the other widgets with links.
+  form. `TestZones` (browser and `page`). Not yet: the rail as a zone,
+  targets on the other widgets with links.
+- **A sheet that comes as an answer, and a Cancel that closes** (Carrel's
+  task 84). `Scrim` with a `Zone` is the layer of sheets: a link or a form
+  whose target is that zone gets the sheet as its answer, the sheet lies in
+  the layer, the focus stays inside it, and it is closed by Esc, a click on
+  the scrim or its Cancel without a request. `Button.Closes` makes a button
+  close the sheet or panel it stands in (`data-tc-close`); without a script
+  it is what it is besides — a link back or a plain button. Before, a
+  sheet's Cancel had no behaviour of the library at all: only the «×»
+  button, the scrim and Esc closed. `TestZoneSheet`.
 - **A dialog that is a form** (Carrel's task 149). `Dialog.Action` (with
   `Method`, `Fields`) prints the dialog as a form: a step of a wizard whose
   fields stand in several cards sends them all. A form holds no form — a

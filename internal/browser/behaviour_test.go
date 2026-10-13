@@ -1606,3 +1606,53 @@ func TestZones(t *testing.T) {
 		}
 	}
 }
+
+// TestZoneSheet (Carrel's task 84): a sheet that comes as an answer lies in
+// the layer of sheets — the scrim the application named as a zone — and is
+// closed by its Cancel (Button.Closes), by a click on the scrim or by Esc
+// without a request and without leaving the page;
+// the focus is kept inside it while it is open.
+func TestZoneSheet(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	sheet := w.Scrim{Zone: "sheet", Content: w.Sheet{Title: "Rename", Action: "/x", Body: []w.SheetPart{w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Value: "a.txt"}}}},
+		Foot: []w.SheetFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel", Href: "/back", Closes: true}}}}
+	part := h.RegisterPage("sheet-part", page.Fragment{Body: []page.Part{sheet}}.Render())
+	body := `<div class="tc-root">` + w.Button{Label: "Rename", Href: part, Target: "sheet"}.Render() + w.Scrim{Zone: "sheet", Closed: true}.Render() + `</div>`
+	url := h.RegisterPage("sheet-page", browser.PageHTML(body, ""))
+	const state = `(() => { const s = document.querySelector(".tc-scrim"); return (s.getClientRects().length ? "open" : "closed") + " " + (s.querySelector(".tc-sheet__title") ? s.querySelector(".tc-sheet__title").textContent : "empty") + " " + (window.__asked || 0) + " " + (s.contains(document.activeElement) ? "inside" : "outside") })()`
+	const spy = `(() => { window.__asked = 0; const f = window.fetch; window.fetch = (u, o) => { window.__asked++; return f(u, o); }; return true })()`
+	var opened, closed, again, esc, cancelled string
+	if err := h.Run(url, 900, 600,
+		chromedp.Evaluate(spy, nil),
+		chromedp.Click(`a.tc-btn`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(`document.querySelector(".tc-sheet input").focus(); true`, nil),
+		chromedp.Evaluate(state, &opened),
+		chromedp.Evaluate(`document.querySelector(".tc-scrim").click(); true`, nil),
+		chromedp.Evaluate(state, &closed),
+		chromedp.Click(`a.tc-btn`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(state, &again),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(state, &esc),
+		chromedp.Click(`a.tc-btn`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Click(`.tc-sheet__foot a.tc-btn`, chromedp.ByQuery),
+		chromedp.Evaluate(state+` + " " + location.pathname.split("/").pop()`, &cancelled),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if opened != "open Rename 1 inside" {
+		t.Errorf("after the link: %s; want open Rename 1 inside", opened)
+	}
+	if !strings.HasPrefix(closed, "closed Rename 1") {
+		t.Errorf("after a click on the scrim: %s; want closed, and no request more", closed)
+	}
+	if !strings.HasPrefix(again, "open Rename 2") || !strings.HasPrefix(esc, "closed Rename 2") {
+		t.Errorf("opened again: %s; after Esc: %s; want open with a second request, then closed without a third", again, esc)
+	}
+	if !strings.HasPrefix(cancelled, "closed Rename 3") || !strings.HasSuffix(cancelled, "sheet-page") {
+		t.Errorf("after Cancel: %s; want closed on the same page, the link not followed", cancelled)
+	}
+}

@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Target}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама.
@@ -156,6 +156,10 @@ type Button struct {
 	Secondary bool
 	// Tertiary goes under «⋯» on a phone, after the secondary ones.
 	Tertiary bool
+	// Closes makes the button close the sheet or panel it stands in, with
+	// the library's script and without a request: a sheet's Cancel. Without a
+	// script it is what it is besides — a link back (Href) or a button.
+	Closes bool
 	// Target is the name of the zone the links and forms inside ask their
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
@@ -191,13 +195,13 @@ func (b Button) html(m mix) string {
 		if b.State == ButtonDisabled {
 			s.WriteString(`<a` + cls + common + ` aria-disabled="true">`)
 		} else {
-			s.WriteString(`<a` + cls + attr("href", b.Href) + attr("data-tc-swap", b.Swap) + attr("data-tc-target", b.Target) + copies + common + `>`)
+			s.WriteString(`<a` + cls + attr("href", b.Href) + attr("data-tc-swap", b.Swap) + attr("data-tc-target", b.Target) + flag("data-tc-close", b.Closes) + copies + common + `>`)
 		}
 	} else {
 		if b.Form != "" {
 			typ = "submit"
 		}
-		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("data-tc-target", b.Target) + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) + flag("data-tc-remove", b.Removes) +
+		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("data-tc-target", b.Target) + flag("data-tc-close", b.Closes) + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) + flag("data-tc-remove", b.Removes) +
 			attr("data-tc-save", b.SaveAs) + attr("data-tc-from", b.SaveFrom) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
