@@ -1015,6 +1015,27 @@ func Agenda3() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{
+											w.TagInput{
+												Parts: []w.TagInputPart{
+													w.Tag{
+														Label:     "Заметка со встречи 10.08",
+														Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+														Removable: true,
+													},
+												},
+												Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+											},
+										},
+										Width: w.FieldLG,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Attachments"},
 								Items: []w.FieldSetPart{
 									w.Line{
@@ -1281,6 +1302,21 @@ func Agenda15() Screen {
 											},
 										},
 										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{
+											w.TagInput{
+												Parts: []w.TagInputPart{},
+												Add:   &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+											},
+										},
+										Width: w.FieldLG,
 									},
 								},
 							},

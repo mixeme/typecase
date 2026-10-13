@@ -490,6 +490,11 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **An event has «Related to»** (Carrel's task 160; the owner accepted it,
+  13.10): the edit and the new form of an event have the group «Other» with
+  the field «Related to» before «Attachments», as a task's form has —
+  `s-agenda-3` with a pill, `s-agenda-15` empty. The card and the panel of
+  an event drew «Related» already (`s-agenda-2`, `s-agenda-1`).
 - **The move sheet as it opens** (Carrel's task 158; the owner accepted it,
   12.10): `s-files-25`, new — the folder the things lie in is the chosen
   one, with the note «the items are here»; it can be ticked, for «New
