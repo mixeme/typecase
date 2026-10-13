@@ -8,6 +8,23 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa01"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "17 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa04"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Detail: &w.Mono{Text: "19 Aug", Variant: w.Mono11}, Label: "Демо для команды", Href: "/app/calendar/radicale/proekty/aa05"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "24 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa06"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "26 Aug", Variant: w.Mono11}, Label: "Разбор инцидента", Href: "/app/calendar/nextcloud/rabota/aa07"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "31 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa08"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "2 Sep", Variant: w.Mono11}, Label: "Планирование Q4", Href: "/app/calendar/nextcloud/rabota/aa03"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Detail: &w.Mono{Text: "4 Sep", Variant: w.Mono11}, Label: "Подготовить отчёт · task", Href: "/app/tasks/nextcloud/dela/aa09"}}, Width: w.MenuWidth290}, "s-contacts-30", "tc-menu", 1),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#9A9280"}, Detail: &w.Mono{Text: "12 Aug", Variant: w.Mono11}, Label: "Общий созвон", Href: "/app/calendar/baikal/obshchiy/bb01"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#9A9280"}, Detail: &w.Mono{Text: "21 Aug", Variant: w.Mono11}, Label: "Демо для заказчика", Href: "/app/calendar/baikal/obshchiy/bb02"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-contacts-29", "tc-menu", 2),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa01"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "2 Sep", Variant: w.Mono11}, Label: "Планирование Q4", Href: "/app/calendar/nextcloud/rabota/aa03"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-contacts-29", "tc-menu", 1),
 	overlay("columns", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
 		w.MenuItem{Icon: "drag", Faint: true, Tick: &w.TickBox{}, Trail: w.Dim{Parts: []w.Inline{w.Text("always")}, Size: w.Dim10_5, Place: w.Pushed}, Label: "Time", Name: "col", Value: "time", Fixed: true},
@@ -648,6 +665,33 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("plain", w.Sheet{Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite", Icon: "refresh", Title: "Rewrite the addresses in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Rubric{Text: "The addresses"},
+		w.Line{Items: []w.LinePart{w.Mono{Text: "a.kovaleva@example.org"}, w.Dim{Parts: []w.Inline{w.Text("14 records name it")}, Size: w.Dim11_5}}, Gap: w.LineGap8, Block: true},
+		w.Line{Items: []w.LinePart{w.Mono{Text: "→"}, w.Pick{Name: "to.1", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true}, {Value: "anna@home.example", Label: "anna@home.example"}, {Value: "", Label: "Do not rewrite"}}, Label: "Rewrite a.kovaleva@example.org to", Variant: w.PickT12W240}}, Gap: w.LineGap8, Block: true},
+		w.Line{Items: []w.LinePart{w.Mono{Text: "anna@oldfirm.example"}, w.Dim{Parts: []w.Inline{w.Text("3 records name it; they keep it")}, Size: w.Dim11_5}}, Gap: w.LineGap8, Block: true},
+		w.Line{Items: []w.LinePart{w.Mono{Text: "→"}, w.Pick{Name: "to.2", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example"}, {Value: "anna@home.example", Label: "anna@home.example"}, {Value: "", Label: "Do not rewrite", On: true}}, Label: "Rewrite anna@oldfirm.example to", Variant: w.PickT12W240}}, Gap: w.LineGap8, Block: true},
+		w.Rubric{Text: "What rewriting can set off"},
+		w.Line{Items: []w.LinePart{w.Check{On: true, Name: "group", Value: "scheduling", Parts: []w.CheckPart{w.Text("On servers that schedule")}}, w.Drop{Trigger: w.Button{Label: "9 records", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa01"},
+			w.MenuItem{Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
+			w.MenuItem{Detail: &w.Mono{Text: "2 Sep", Variant: w.Mono11}, Label: "Планирование Q4", Href: "/app/calendar/nextcloud/rabota/aa03"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Gap: w.LineGap8, Block: true},
+		w.Dim{Parts: []w.Inline{w.Text("The server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees.")}, Size: w.Dim11_5, Variant: w.DimWrap},
+		w.Line{Items: []w.LinePart{w.Check{On: true, Name: "group", Value: "unknown", Parts: []w.CheckPart{w.Text("On baikal")}}, w.Drop{Trigger: w.Button{Label: "2 records", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Detail: &w.Mono{Text: "12 Aug", Variant: w.Mono11}, Label: "Общий созвон", Href: "/app/calendar/baikal/obshchiy/bb01"},
+			w.MenuItem{Detail: &w.Mono{Text: "21 Aug", Variant: w.Mono11}, Label: "Демо для заказчика", Href: "/app/calendar/baikal/obshchiy/bb02"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Gap: w.LineGap8, Block: true},
+		w.Dim{Parts: []w.Inline{w.Text("The server did not say whether it schedules.")}, Size: w.Dim11_5, Variant: w.DimWrap},
+		w.Line{Items: []w.LinePart{w.Check{Name: "group", Value: "others", Parts: []w.CheckPart{w.Text("Meetings organised by others")}}, w.Drop{Trigger: w.Button{Label: "3 records", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
+			w.MenuItem{Detail: &w.Mono{Text: "18 Aug", Variant: w.Mono11}, Label: "Встреча с подрядчиком", Href: "/app/calendar/nextcloud/rabota/cc01"},
+			w.MenuItem{Detail: &w.Mono{Text: "5 Sep", Variant: w.Mono11}, Label: "Юбилей отдела", Href: "/app/calendar/nextcloud/rabota/cc02"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Gap: w.LineGap8, Block: true},
+		w.Dim{Parts: []w.Inline{w.Text("Not ticked: these stay as they are. The organiser’s server may refuse the change, and its next update may undo it.")}, Size: w.Dim11_5, Variant: w.DimWrap},
+		w.Line{Items: []w.LinePart{w.Check{On: true, Name: "group", Value: "past", Parts: []w.CheckPart{w.Text("Past meetings")}}, w.Drop{Trigger: w.Button{Label: "5 records", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Detail: &w.Mono{Text: "3 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/dd01"},
+			w.MenuItem{Detail: &w.Mono{Text: "27 Jul", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/dd02"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Gap: w.LineGap8, Block: true},
+		w.Dim{Parts: []w.Inline{w.Text("They will show the new address, as if the person had been invited at it.")}, Size: w.Dim11_5, Variant: w.DimWrap},
+		w.Msg{Parts: []w.MsgPart{w.Text("A record that stands in two groups is rewritten only when both are ticked: «Ретро спринта» is on a server that schedules and is organised by another, so it stays.")}, Space: w.MsgFlush},
+		w.SheetNote{Text: "2 records in Shared are read-only and keep the old address. Collections that are not ticked were not looked in."}}, Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 9 records", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "s-contacts-29", "tc-sheet", 1),
 	overlay("plain-w520", w.Sheet{Action: "/app/collections/nextcloud/dni-rozhdeniya/move", Icon: "move", Title: "Move calendar", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud · Дни рождения")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Rubric{Text: "Write onto"},
 		w.Tree{Rows: []w.TreeRow{

@@ -499,6 +499,17 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **«Rewrite the address»: several replacements, groups by a tick**
+  (Carrel's task 157; the owner's decisions of 12.10, accepted 13.10).
+  `s-contacts-29`, new: each replacement is the old address with its count
+  and, under it, a pick of the card's addresses and «Do not rewrite»; each
+  group of risk is a tick with its count as a button that opens the list of
+  its records; an unticked group is left out and the button counts the
+  rest. A record that stands in two groups is rewritten only when both are
+  ticked, and the sheet says so. `s-contacts-30`, new: that list — the
+  collection's mark, the title, the date; a row is a link. No new block:
+  `Line` with `Check` and `Drop`, `Pick` with options, a menu of links. 433
+  frames.
 - **The steps of a wizard stand in one place** (the owner's remark of
   13.10): a step whose content is narrow is a dialog as wide as the wizard's
   widest step, and what is under the steps and the head keeps its own width

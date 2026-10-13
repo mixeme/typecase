@@ -4294,6 +4294,60 @@ Read  2 min ago · not changed on server</div>
   <figcaption>Все записи со старым адресом только для чтения или не прочитались — переписывать нечего: кнопка «Rewrite 0 records» выключена, причина — сообщением над ней.</figcaption>
   </figure>
 
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-29">
+    <div class="frame-label"><span>Переписать · несколько замен, группы по отметке</span><span class="frag">фрагмент</span><i>лист после Save</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
+        <b class="tc-sheet__title">Rewrite the addresses in their records?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва · saved</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-rubric">The addresses</div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">a.kovaleva@example.org</span><span class="tc-dim tc-dim--t11-5">14 records name it</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">→</span><span class="tc-in is-pick tc-in--t12-w240"><select class="tc-in__list" name="to.1" aria-label="Rewrite a.kovaleva@example.org to"><option value="a.kovaleva@slovo.example" selected>a.kovaleva@slovo.example</option><option value="anna@home.example">anna@home.example</option><option value="">Do not rewrite</option></select></span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">anna@oldfirm.example</span><span class="tc-dim tc-dim--t11-5">3 records name it; they keep it</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">→</span><span class="tc-in is-pick tc-in--t12-w240"><select class="tc-in__list" name="to.2" aria-label="Rewrite anna@oldfirm.example to"><option value="a.kovaleva@slovo.example">a.kovaleva@slovo.example</option><option value="anna@home.example">anna@home.example</option><option value="" selected>Do not rewrite</option></select></span></div>
+          <div class="tc-rubric">What rewriting can set off</div>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="scheduling" checked><span class="tc-tickrow__tick"></span>On servers that schedule</label><details class="tc-drop"><summary class="tc-btn is-sm">9 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">10 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Ретро спринта <span class="tc-mono tc-mono--t11">14 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa03" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Планирование Q4 <span class="tc-mono tc-mono--t11">2 Sep</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="unknown" checked><span class="tc-tickrow__tick"></span>On baikal</label><details class="tc-drop"><summary class="tc-btn is-sm">2 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/bb01" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>Общий созвон <span class="tc-mono tc-mono--t11">12 Aug</span></a><a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/bb02" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>Демо для заказчика <span class="tc-mono tc-mono--t11">21 Aug</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The server did not say whether it schedules.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="others"><span class="tc-tickrow__tick is-off"></span>Meetings organised by others</label><details class="tc-drop"><summary class="tc-btn is-sm">3 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Ретро спринта <span class="tc-mono tc-mono--t11">14 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/cc01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Встреча с подрядчиком <span class="tc-mono tc-mono--t11">18 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/cc02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Юбилей отдела <span class="tc-mono tc-mono--t11">5 Sep</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Not ticked: these stay as they are. The organiser’s server may refuse the change, and its next update may undo it.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="past" checked><span class="tc-tickrow__tick"></span>Past meetings</label><details class="tc-drop"><summary class="tc-btn is-sm">5 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/dd01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">3 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/dd02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">27 Jul</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">They will show the new address, as if the person had been invited at it.</span>
+          <div class="tc-msg tc-msg--flush">A record that stands in two groups is rewritten only when both are ticked: «Ретро спринта» is on a server that schedules and is organised by another, so it stays.</div>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">2 records in Shared are read-only and keep the old address. Collections that are not ticked were not looked in.</span>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rewrite 9 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+    </div>
+  </div>
+  <figcaption><b>Несколько замен в одной правке и группы, которые можно исключить</b> (решения владельца 12.10, задача 157). Каждая замена — строка «старый адрес → выбор»: в выборе нынешние адреса карточки и «Do not rewrite»; сервер предлагает адрес, набранный в той же строке формы, иначе «Do not rewrite». Группы риска — отметки: снятая исключает группу, и кнопка считает остаток. Счёт группы — кнопка: под ней список её записей — метка коллекции, название и дата, каждая — ссылка. <b>Запись в двух группах переписывается, только когда отмечены обе</b>: снять одну отметку значит «этих не трогать», и запись остаётся, в какой бы ещё группе она ни стояла; лист говорит это и называет такую запись. Одна замена и ни одной снятой отметки — прежний лист (кадр выше).</figcaption>
+  </figure>
+  <figure style="flex:0 1 330px">
+  <div class="frame" data-frame="s-contacts-30">
+    <div class="frame-label"><span>Переписать · записи группы</span><span class="frag">список</span><i>кнопка «9 records»</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w290">
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">10 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Ретро спринта <span class="tc-mono tc-mono--t11">14 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa04" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">17 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/radicale/proekty/aa05" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>Демо для команды <span class="tc-mono tc-mono--t11">19 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa06" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">24 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa07" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Разбор инцидента <span class="tc-mono tc-mono--t11">26 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa08" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">31 Aug</span></a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa03" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Планирование Q4 <span class="tc-mono tc-mono--t11">2 Sep</span></a>
+        <a class="tc-menu__item" href="/app/tasks/nextcloud/dela/aa09" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>Подготовить отчёт · task <span class="tc-mono tc-mono--t11">4 Sep</span></a>
+      </div>
+    </div>
+  </div>
+  <figcaption>Список под счётом группы: записи, которых коснётся переписывание, — метка коллекции, название и дата, по дате; строка — ссылка на запись. У задачи после названия стоит «· task».</figcaption>
+  </figure>
+
 <figure style="flex:1 1 330px">
   <div class="frame" data-frame="s-contacts-21">
     <div class="frame-label"><span>Переписать · итог</span><span class="frag">фрагмент</span><i>сообщение на карточке</i></div>
