@@ -36,7 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
-	form("start-buttons", w.Seg{Options: []w.SegOption{{Label: "From a job", On: true}, {Label: "From a server"}, {Label: "From this computer"}}, Variant: w.SegStart}, "s-backup-7", "tc-seg", 1),
+	form("start-buttons", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job", On: true}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file"}}, Variant: w.SegStart}, "s-backup-7", "tc-seg", 1),
 	form("radio-four", w.Seg{Options: []w.SegOption{{Label: "crontab", On: true, Value: "crontab"}, {Label: "GoSentry", Value: "gosentry"}, {Label: "Gitea", Value: "gitea"}, {Label: "curl", Value: "curl"}}, Variant: w.SegStart, Name: "choice"}, "s-backup-2", "tc-seg", 2),
 	form("radio-start", w.Seg{Options: []w.SegOption{{Label: "Markdown · .md", On: true, Value: "markdown.md"}, {Label: "Source · .ics", Value: "source.ics"}}, Variant: w.SegStart, Name: "send.it.as"}, "s-mail-5", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list", Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles", On: true, Title: "Tiles"}}}, "s-files-5", "tc-seg", 2),

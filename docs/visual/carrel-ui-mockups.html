@@ -6095,7 +6095,7 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-list">
           <div class="tc-row tc-row--excerpt is-on">
             <span class="tc-mark" data-tc-colour="#4A6B52"></span>
-            <span class="tc-row__title is-strong">Заметка со встречи 10.08</span>
+            <span class="tc-row__title is-strong">Заметка со встречи 10.08 <span class="tc-badge is-linked">linked ×2</span></span>
             <span class="tc-row__excerpt">Договорились заморозить ветку в среду; письмо пользователям пишет Анна…</span>
 
             <span class="tc-mono tc-row__date">10 Aug</span>
@@ -6791,7 +6791,7 @@ Read  2 min ago</div>
             <div class="tc-docmeta__sec" id="note-attachments">
               <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-up"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-edit" aria-label="From this computer" data-tc-list="note-attachments"><template data-tc-row><div class="tc-line__text">{name} <span class="tc-dim">· {size}</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span> <span class="tc-badge">in the note</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
-              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
+              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
@@ -6811,7 +6811,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом. <b>У Focus свой значок — рамка видоискателя.</b> Стрелки наружу во всём макете значат одно: «открыть крупнее» — страницу заметки из панели, карточку из листа «New …»; одним значком для двух действий было бы не понять, что откроется.</figcaption>
+<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. <b>У вложения, которое лежит в папке Files, кнопка другая</b> (задача 155): не тревожная «Remove», а простая «Unlink» (в подсказке — «Remove the link; the file stays in …») — уходит связь, файл остаётся там, где лежит, и значок рядом называет это место; «Remove» цветом тревоги — у вложения, записанного в саму заметку: оно удаляется вместе с ней. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом. <b>У Focus свой значок — рамка видоискателя.</b> Стрелки наружу во всём макете значат одно: «открыть крупнее» — страницу заметки из панели, карточку из листа «New …»; одним значком для двух действий было бы не понять, что откроется.</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="s-notes-30" data-screen="/app/notes/{account}/{col}/new">
@@ -6970,7 +6970,7 @@ Read  2 min ago</div>
             <div class="tc-docmeta__sec" id="saving-attachments">
               <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-up"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-edit" aria-label="From this computer" data-tc-list="saving-attachments"><template data-tc-row><div class="tc-line__text">{name} <span class="tc-dim">· {size}</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span> <span class="tc-badge">in the note</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
-              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
+              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
               <div class="tc-line__text">план-поездки.pdf <span class="tc-dim">· 24 MB</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -7844,7 +7844,7 @@ Read  2 min ago</div>
         <div class="tc-list">
           <div class="tc-row tc-row--excerpt is-on">
             <span class="tc-mark" data-tc-colour="#4A6B52"></span>
-            <span class="tc-row__title is-strong">Заметка со встречи 10.08</span>
+            <span class="tc-row__title is-strong">Заметка со встречи 10.08 <span class="tc-badge is-linked">linked ×2</span></span>
             <span class="tc-row__excerpt">Договорились заморозить ветку в среду; письмо пользователям пишет Анна…</span>
 
             <span class="tc-mono tc-row__date">10 Aug</span>
@@ -11290,11 +11290,13 @@ Read  2 min ago</div>
         <div class="tc-main">
         <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Account</div><div class="tc-head__sub">mix · created 11 February 2026</div></div></div>
         <div class="tc-form">
-          <div class="tc-fset tc-fset--lead">
-            <div class="tc-rubric">Name</div>
-            <div class="tc-field tc-field--lg"><label>Display name</label><input class="tc-in" type="text" value="Михаил Енученко" aria-label="Display name">
-              <span class="tc-field__hint">Shown as the sender and used as the signature in letters you send. Blank means your login.</span></div>
-          </div>
+          <form class="tc-fset tc-fset--lead" action="/app/settings/account/name" method="post">
+          <div class="tc-rubric">Name</div>
+          <div class="tc-field tc-field--lg"><label>Display name</label>
+            <span class="tc-line tc-line--gap-8">
+              <input class="tc-in tc-in--fill" type="text" name="display.name" value="Михаил Енученко" aria-label="Display name"><button class="tc-btn" type="submit">Save</button></span>
+            <span class="tc-field__hint">Shown as the sender and used as the signature in letters you send. Blank means your login.</span></div>
+        </form>
           <form class="tc-fset" action="/app/settings/account/email" method="post">
             <div class="tc-rubric">Email</div>
             <div class="tc-field tc-field--lg"><label>Address</label>
@@ -14724,32 +14726,32 @@ jobs:
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
-      <div class="tc-main"><div class="tc-dialog is-wide tc-dialog--step760">
+      <div class="tc-main"><form class="tc-dialog is-wide tc-dialog--step760" action="/app/settings/backup/restore" method="post">
       <div class="tc-steps"><span class="is-on tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore</div><div class="tc-head__sub">Nothing is written until you have seen what goes where</div></div></div>
       <div class="tc-field is-own-line">
         <label>Where the archive is</label>
-        <span class="tc-seg tc-seg--start"><button class="is-on tc-seg__opt" type="button">From a job</button><button class="tc-seg__opt" type="button">From a server</button><button class="tc-seg__opt" type="button">From this computer</button></span>
+        <span class="tc-seg tc-seg--start"><a class="is-on tc-seg__opt" href="/app/settings/backup/restore?from=job">From a job</a><a class="tc-seg__opt" href="/app/settings/backup/restore?from=server">From a server</a><a class="tc-seg__opt" href="/app/settings/backup/restore?from=file">From this computer</a></span>
         <span class="tc-field__hint">One archive, one of three. The other two stay empty until you switch.</span>
       </div>
       <div class="tc-card">
         <div class="tc-rubric">From a job</div>
         <table class="tc-table">
           <tbody>
-            <tr class="is-sel"><td class="tc-table__col--tick"><button class="tc-tickrow__tick" type="button"></button></td><td>Личное на домашний диск</td><td class="tc-mono tc-table__n3">2026-08-14 09:12</td><td class="tc-mono tc-table__n4">2.1 GB</td><td class="tc-mono">4 collections</td></tr>
-            <tr><td><button class="tc-tickrow__tick is-off" type="button"></button></td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3">2026-08-16 03:10</td><td class="tc-mono tc-table__n4">18.4 MB</td><td class="tc-mono">3 collections</td></tr>
+            <tr class="is-sel"><td class="tc-table__col--tick"><input class="tc-tickrow__tick" type="radio" name="archive" value="lichnoe-na-domashniy-disk" aria-label="Pick" checked></td><td>Личное на домашний диск</td><td class="tc-mono tc-table__n3">2026-08-14 09:12</td><td class="tc-mono tc-table__n4">2.1 GB</td><td class="tc-mono">4 collections</td></tr>
+            <tr><td><input class="tc-tickrow__tick is-off" type="radio" name="archive" value="rabochee-ezhednevno" aria-label="Pick"></td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3">2026-08-16 03:10</td><td class="tc-mono tc-table__n4">18.4 MB</td><td class="tc-mono">3 collections</td></tr>
           </tbody>
         </table>
       </div>
       <div class="tc-card">
         <div class="tc-rubric">Archive password</div>
         <div class="tc-card__fields">
-          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="text" value="••••••••••••" aria-label="Archive password"></div>
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"></div>
           <span class="tc-dim--muted tc-dim--t12">The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections.</span>
         </div>
       </div>
-      <div class="tc-formfoot"><button class="tc-btn is-primary" type="button">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
-    </div></div></div>
+      <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
+    </form></div></div>
   </div>
 </div>
 <figcaption>Восстановиться можно не только там, где уже есть задания, — иначе пропадает случай, ради которого копия и делалась. <b>Источник один.</b> Переключатель сверху — задание, сервер или этот компьютер; в примере выбрано задание, и других полей нет, чтобы не казалось, что архив берётся сразу из трёх мест. Пароль архива спрашивается здесь же и первым делом: без него нельзя прочитать даже манифест, и узнать об этом лучше до того, как человек выбрал коллекции.</figcaption>
@@ -15376,7 +15378,7 @@ jobs:
         <div class="tc-list">
           <div class="tc-row tc-row--excerpt is-on">
             <span class="tc-mark" data-tc-colour="#4A6B52"></span>
-            <span class="tc-row__title is-strong">Заметка со встречи 10.08</span>
+            <span class="tc-row__title is-strong">Заметка со встречи 10.08 <span class="tc-badge is-linked">linked ×2</span></span>
             <span class="tc-row__excerpt">Договорились заморозить ветку в среду; письмо пользователям пишет Анна…</span>
 
             <span class="tc-mono tc-row__date">10 Aug</span>
@@ -22313,7 +22315,7 @@ dav: HTTP 503: the server is busy</div></div>
             <div class="tc-docmeta__sec" id="note-loss-attachments">
               <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-up"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-loss" aria-label="From this computer" data-tc-list="note-loss-attachments"><template data-tc-row><div class="tc-line__text">{name} <span class="tc-dim">· {size}</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span> <span class="tc-badge">in the note</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
-              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
+              <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>

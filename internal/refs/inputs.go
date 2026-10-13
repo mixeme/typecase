@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("password", w.Input{Kind: w.InputPassword, Name: "password", Value: "••••••••••••", Label: "Archive password", Focus: true}, "s-backup-7", "tc-in", 1),
 	form("disabled", w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true, Disabled: true}, "s-tasks-3", "tc-in", 4),
 	form("placeholder", w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true}, "s-tasks-14", "tc-in", 4),
 	form("focus-empty", w.Input{Label: "Display name", Focus: true}, "s-contacts-27", "tc-in", 1),

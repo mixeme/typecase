@@ -23,13 +23,18 @@ type Send struct {
 	Name  string
 	Value string
 	Of    string // the ID of the form a checkbox belongs to without standing in it
+	One   bool   // one of several under the Name: a radio button, not a checkbox
 }
 
 // box prints the tick box; label is what is ticked.
 func (t Ticked) box(label string, send Send, more ...string) string {
 	if send.Name != "" && send.Form == "" {
 		own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)
-		return `<input` + class(nil, own...) + ` type="checkbox"` + attr("form", send.Of) + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
+		kind := "checkbox"
+		if send.One {
+			kind = "radio"
+		}
+		return `<input` + class(nil, own...) + ` type="` + kind + `"` + attr("form", send.Of) + attr("name", send.Name) + attr("value", send.Value) + attr("aria-label", label) +
 			flag("checked", t == TickedOn) + `>`
 	}
 	own := append([]string{"tc-tickrow__tick", [...]string{"", "is-part", "is-off"}[t]}, more...)

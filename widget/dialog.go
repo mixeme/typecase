@@ -177,7 +177,7 @@ func (v DialogVariant) class() string {
 // Dialog — tc-dialog
 //
 // Роль. Центрированное полотно страницы: формы, мастера, подтверждения, вход в приложение.
-// Вход. Dialog{Items, Variant}.
+// Вход. Dialog{Items, Variant, Action, Method, Fields}.
 // Состояния. narrow | wide | width | page | canvas.
 // Инварианты. Ширина и поля — перечисление; главная кнопка — в подвале формы или в действиях шапки; диалог печатает фрагмент своего кадра.
 // Поведение. Esc закрывает диалог, если он открыт поверх страницы, и возвращает фокус.
@@ -187,6 +187,14 @@ func (v DialogVariant) class() string {
 type Dialog struct {
 	Items   []DialogPart
 	Variant DialogVariant
+	// Action makes the dialog a form that sends its fields there, as Sheet
+	// does: a step of a wizard whose fields stand in several cards (Carrel's
+	// task 149). Method is "post" when empty, Fields its hidden fields. A
+	// form holds no form: when a part of the dialog is a form of its own,
+	// the dialog is printed plain and that part sends.
+	Action string
+	Method string
+	Fields []Hidden
 }
 
 // Render prints the dialog.
@@ -194,11 +202,24 @@ func (d Dialog) Render() string { return d.html(nil) }
 
 func (d Dialog) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-dialog", d.Variant.class()) + `>`)
+	var body strings.Builder
 	for _, it := range d.Items {
-		s.WriteString(it.html(nil))
+		body.WriteString(it.html(nil))
 	}
-	s.WriteString(`</div>`)
+	// A form holds no form: a dialog one of whose parts is a form of its
+	// own is printed plain, and that part sends.
+	tag := "div"
+	if d.Action != "" && !strings.Contains(body.String(), "<form") {
+		tag = "form"
+		s.WriteString(`<form` + class(m, "tc-dialog", d.Variant.class()) + attr("action", d.Action) + ` method="` + method(d.Method) + `">`)
+		for _, h := range d.Fields {
+			s.WriteString(h.html(nil))
+		}
+	} else {
+		s.WriteString(`<div` + class(m, "tc-dialog", d.Variant.class()) + `>`)
+	}
+	s.WriteString(body.String())
+	s.WriteString(`</` + tag + `>`)
 	return s.String()
 }
 

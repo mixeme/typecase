@@ -1026,7 +1026,11 @@ func Backup7() Screen {
 								Label: "Where the archive is",
 								Parts: []w.FieldPart{
 									w.Seg{
-										Options: []w.SegOption{{Label: "From a job", On: true}, {Label: "From a server"}, {Label: "From this computer"}},
+										Options: []w.SegOption{
+											{Label: "From a job", Href: "/app/settings/backup/restore?from=job", On: true},
+											{Label: "From a server", Href: "/app/settings/backup/restore?from=server"},
+											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file"},
+										},
 										Variant: w.SegStart,
 									},
 									w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}},
@@ -1040,7 +1044,11 @@ func Backup7() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Width: w.ColTick},
+													{
+														Pick:  ptr(w.TickedOn),
+														Send:  w.Send{Name: "archive", Value: "lichnoe-na-domashniy-disk", One: true},
+														Width: w.ColTick,
+													},
 													{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
 													{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true, Rank: w.Rank3},
 													{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true, Rank: w.Rank4},
@@ -1050,7 +1058,7 @@ func Backup7() Screen {
 											},
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff)},
+													{Pick: ptr(w.TickedOff), Send: w.Send{Name: "archive", Value: "rabochee-ezhednevno", One: true}},
 													{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
 													{Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true, Rank: w.Rank3},
 													{Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true, Rank: w.Rank4},
@@ -1067,7 +1075,15 @@ func Backup7() Screen {
 									w.CardFields{
 										Items: []w.CardFieldsPart{
 											w.Field{
-												Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Archive password", Focus: true}},
+												Parts: []w.FieldPart{
+													w.Input{
+														Kind:  w.InputPassword,
+														Name:  "password",
+														Value: "••••••••••••",
+														Label: "Archive password",
+														Focus: true,
+													},
+												},
 												Width: w.FieldLG,
 											},
 											w.Span{
@@ -1079,10 +1095,11 @@ func Backup7() Screen {
 								},
 							},
 							w.FormFoot{
-								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
+								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel"}},
 							},
 						},
 						Variant: w.DialogStep760,
+						Action:  "/app/settings/backup/restore",
 					},
 				},
 			},

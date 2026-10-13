@@ -4471,7 +4471,7 @@ func States31() Screen {
 												Name:   "запись-встречи.m4a",
 												Size:   w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
 												Where:  w.Badge{Label: "Documents / carrel"},
-												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"},
 												Href:   "#",
 											},
 										},

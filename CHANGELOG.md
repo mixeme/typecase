@@ -31,6 +31,12 @@ do, not what the authors did.
 
 ### Added
 
+- **A dialog that is a form** (Carrel's task 149). `Dialog.Action` (with
+  `Method`, `Fields`) prints the dialog as a form: a step of a wizard whose
+  fields stand in several cards sends them all. A form holds no form — a
+  dialog one of whose parts is a form of its own is printed plain, and that
+  part sends. `Send.One` makes a row's tick a radio button: one of several
+  under the name (the archive to restore from).
 - **An option of a pick that shows fields** (Carrel's task 156).
   `PickOption.Shows` names the fields of the form that are shown only while
   the option is chosen (`data-tc-shows`): «Custom…» of a reminder opens its
@@ -499,6 +505,16 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The tails of task 149 and task 155** (the owner accepted them, 13.10).
+  `s-backup-7`, the first step of a restore, is a form: the dialog sends,
+  «Where the archive is» is a segment of links, the table's ticks are radio
+  buttons, the password has its name; it looks the same. `s-mail-9`: «Name»
+  has its form and «Save», as the frame beside it. An attachment that lies
+  in Files has a plain «Unlink» (hint: «Remove the link; the file stays in
+  …») in place of the alarming «Remove» — `s-notes-20`, `-26`, `states-31`.
+  The row of «Заметка со встречи 10.08» carries «linked ×2» where its
+  neighbour does (`s-notes-1`, `-10`, `s-publish-4`): six frames draw that
+  note with a linked copy, and the list now agrees with them.
 - **«Rewrite the address»: several replacements, groups by a tick**
   (Carrel's task 157; the owner's decisions of 12.10, accepted 13.10).
   `s-contacts-29`, new: each replacement is the old address with its count

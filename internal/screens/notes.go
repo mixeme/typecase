@@ -100,13 +100,14 @@ func Notes1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
-								Mark:    w.Mark{Colour: "#4A6B52"},
-								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-								Strong:  true,
-								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Date:    "10 Aug",
-								Source:  "nextcloud · Записи",
-								On:      true,
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Title:      []w.Inline{w.Text("Заметка со встречи 10.08 ")},
+								Strong:     true,
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+								Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Date:       "10 Aug",
+								Source:     "nextcloud · Записи",
+								On:         true,
 							},
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
@@ -1199,7 +1200,7 @@ func Notes20() Screen {
 												Name:   "запись-встречи.m4a",
 												Size:   w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
 												Where:  w.Badge{Label: "Documents / carrel"},
-												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+												Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"},
 												Href:   "#",
 											},
 										},
@@ -2595,13 +2596,14 @@ func Notes10() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.ExcerptRow{
-									Mark:    w.Mark{Colour: "#4A6B52"},
-									Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-									Strong:  true,
-									Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-									Date:    "10 Aug",
-									Source:  "nextcloud · Записи",
-									On:      true,
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Title:      []w.Inline{w.Text("Заметка со встречи 10.08 ")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+									Date:       "10 Aug",
+									Source:     "nextcloud · Записи",
+									On:         true,
 								},
 								w.ExcerptRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},

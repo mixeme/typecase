@@ -1306,6 +1306,9 @@ func sendOf(t *El) string {
 	if len(f) == 0 {
 		return ""
 	}
+	if t.Attr("type") == "radio" {
+		f = append(f, "One: true")
+	}
 	return "w.Send{" + join(f, ", ") + "}"
 }
 

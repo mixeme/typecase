@@ -1230,8 +1230,11 @@ var dialogVariant = []kv{{"tc-dialog--step520", "DialogStep520"}, {"tc-dialog--s
 
 func (g *gen) dialog(e *El) string {
 	var items []string
+	var hidden []*El
 	for _, x := range e.Els() {
 		switch {
+		case x.Tag == "input" && x.Attr("type") == "hidden":
+			hidden = append(hidden, x)
 		case x.Has("tc-head"):
 			items = append(items, g.head(x))
 		case x.Has("tc-form"):
@@ -1312,6 +1315,15 @@ func (g *gen) dialog(e *El) string {
 	// a step of a wizard is wide and names its content's width: one variant
 	for _, v := range allOf(e, dialogVariant)[:min(1, len(allOf(e, dialogVariant)))] {
 		f = append(f, "Variant: w."+v)
+	}
+	if e.Tag == "form" {
+		f = append(f, "Action: "+q(e.Attr("action")))
+		if m := e.Attr("method"); m != "" && m != "post" {
+			f = append(f, "Method: "+q(m))
+		}
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
+		}
 	}
 	return "w.Dialog{" + join(f, ", ") + "}"
 }

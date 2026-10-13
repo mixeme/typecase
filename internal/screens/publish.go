@@ -847,13 +847,14 @@ func Publish4() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.ExcerptRow{
-									Mark:    w.Mark{Colour: "#4A6B52"},
-									Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-									Strong:  true,
-									Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-									Date:    "10 Aug",
-									Source:  "nextcloud · Записи",
-									On:      true,
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Title:      []w.Inline{w.Text("Заметка со встречи 10.08 ")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+									Date:       "10 Aug",
+									Source:     "nextcloud · Записи",
+									On:         true,
 								},
 								w.ExcerptRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
