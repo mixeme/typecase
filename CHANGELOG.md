@@ -505,6 +505,19 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The sheet that asks before a save** (Carrel's task 151; the owner's
+  decision of 11.10, accepted 13.10). Where an edit does not show what the
+  person meant and a wrong guess loses their data, one sheet asks before
+  anything is written. `s-agenda-22`: a series was cut short or its rule
+  changed, and the meetings moved by hand are left without their day —
+  «Keep the meetings that were moved by hand?», what was changed, the list
+  with its count, and three answers: «Keep as events» (the default),
+  «Remove», «Cancel». `s-agenda-23`: one meeting, the singular.
+  `s-agenda-24`: a separate event could not be written — what was written,
+  what was not and why; it stays in the series; «Try again» or «Leave it in
+  the series». The sheet is the pattern for other such questions: a
+  question, what changed, the list of what is touched, two or three
+  answers, one of them the default. No new block. 438 frames.
 - **The agenda in chosen columns** (Carrel's task 154; the owner, 13.10).
   `s-agenda-20`, new: the agenda as rows of columns in its default set —
   Time, Title, Where, «Attendees and status», Source. `s-agenda-21`, new: an
