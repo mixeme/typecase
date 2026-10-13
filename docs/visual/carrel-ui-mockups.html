@@ -4347,6 +4347,50 @@ Read  2 min ago · not changed on server</div>
   </div>
   <figcaption>Список под счётом группы: записи, которых коснётся переписывание, — метка коллекции, название и дата, по дате; строка — ссылка на запись. У задачи после названия стоит «· task».</figcaption>
   </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-31">
+    <div class="frame-label"><span>Связанная запись · форма выбранной копии</span><span class="frag">фрагмент</span><i>после листа «какую копию»</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Вера Лебедева</div><div class="tc-head__sub">nextcloud · Архив</div></div>
+          <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Save</button></div>
+        </div>
+        <div class="tc-msg">Saving changes this copy only — nextcloud · Архив. The others stay as they are.</div>
+        <div class="tc-form">
+          <div class="tc-field tc-field--lg"><label>Name</label><input class="tc-in" type="text" name="name" value="Вера Лебедева" aria-label="Name"></div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Email addresses</div>
+            <div class="tc-field tc-field--lg"><label>Email</label><input class="tc-in" type="text" name="email" value="vera@arhiv.example" aria-label="Email"></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Форма после листа — обычная форма копии, которую выбрали: под шапкой, до полей, одна строка о том, куда пишется правка. Блока других копий в форме нет — выбор уже сделан в листе. Поля — поля этой копии, а не слитые: адрес почты здесь тот, что в «Архиве».</figcaption>
+  </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-32">
+    <div class="frame-label"><span>Связанная запись · какую копию править</span><span class="frag">фрагмент</span><i>лист перед правкой</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-sheet tc-sheet--w520">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
+        <b class="tc-sheet__title">Which copy to edit?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Вера Лебедева · 3 copies</span>
+        </div>
+        <div class="tc-sheet__body">
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">This person stands in three books. Saving changes one copy only; the others stay as they are.</span>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span><a class="tc-btn is-sm" href="/app/contacts/nextcloud/arhiv/8d21-55ce-0b17/edit">nextcloud · Архив</a><span class="tc-dim tc-dim--t11-5">the copy you opened · vera@arhiv.example</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span><a class="tc-btn is-sm" href="/app/contacts/nextcloud/kontakty/8d21-55ce-0b17/edit">nextcloud · Контакты</a><span class="tc-dim tc-dim--t11-5">Email differ · v.lebedeva@example.org</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><a class="tc-btn is-sm" aria-disabled="true">baikal · Общий</a><span class="tc-dim tc-dim--t11-5">Phone differ · read-only: it cannot be edited</span></div>
+        </div>
+        <div class="tc-sheet__foot"><span class="tc-dim tc-dim--t11-5">Press a copy to open its form.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </div>
+    </div>
+  </div>
+  <figcaption><b>Правка связанной записи пишется в одну копию, и человек выбирает какую — до формы</b> (решения владельца 11.10 и 13.10, задача 153, Р-58). Edit у записи со связанными копиями сначала открывает этот лист: строка на копию — метка и источник кнопкой, которая открывает форму этой копии, и чем копия разнится; копия только для чтения выключена, причина рядом. Лист один для всех родов: у события, задачи и заметки те же строки, заголовок тот же. У записи без связанных копий листа нет: Edit открывает форму сразу. Вариант, где форма открывалась сразу и сама называла копию и соседние, отвергнут как слишком сложный для понимания.</figcaption>
+  </figure>
 
 <figure style="flex:1 1 330px">
   <div class="frame" data-frame="s-contacts-21">

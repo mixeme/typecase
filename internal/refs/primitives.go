@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("link", w.Button{Label: "nextcloud · Архив", Small: true, Href: "/app/contacts/nextcloud/arhiv/8d21-55ce-0b17/edit"}, "s-contacts-32", "tc-btn", 1),
 	primitive("disabled-plain", w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", Submit: true, State: w.ButtonDisabled}, "s-admin-18", "tc-btn", 1),
 	primitive("copies", w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"}, "s-publish-1", "tc-btn", 3),
 	primitive("copies", w.Button{Label: "Copy the script", Icon: "dup", Kind: w.ButtonPrimary, CopyFrom: "trigger-script", Copied: "Copied"}, "s-backup-3", "tc-btn", 6),

@@ -505,6 +505,16 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **Which copy of a linked record is edited** (Carrel's task 153; the
+  owner's decisions of 11.10 and 13.10, Р-58). An edit of a record with
+  linked copies is written into one copy, and the person chooses which
+  before the form: Edit opens the sheet «Which copy to edit?» —
+  `s-contacts-32`, new — a row for each copy with its mark, its source as a
+  button that opens that copy's form, and what differs; a read-only copy is
+  off, with its reason. `s-contacts-31`, new: the form of the chosen copy
+  says where the edit goes, «Saving changes this copy only — …», in one
+  line under the head. A record without linked copies has no sheet. 440
+  frames.
 - **The sheet that asks before a save** (Carrel's task 151; the owner's
   decision of 11.10, accepted 13.10). Where an edit does not show what the
   person meant and a wrong guess loses their data, one sheet asks before
