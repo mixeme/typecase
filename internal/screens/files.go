@@ -343,7 +343,7 @@ func Files1() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Drop files onto the window, or onto a folder in the list. A name that is already taken is refused rather than overwritten, and the queue says so."),
+							w.Text("Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so."),
 						},
 					},
 				},
