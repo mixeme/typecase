@@ -670,7 +670,10 @@ func Agenda2() Screen {
 							},
 							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
 							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
-							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+							{
+								Term:  "Where",
+								Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+							},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}},
 						},
@@ -770,7 +773,7 @@ func Agenda2() Screen {
 						Items: []w.SecPart{
 							w.Rubric{
 								Text:  "The same event in other calendars",
-								Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}},
+								Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}},
 							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
@@ -780,6 +783,13 @@ func Agenda2() Screen {
 										w.Link{Text: "radicale · vps · Проекты", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "baikal · Общий", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Where differ")}},
 									},
 								},
 								Gap: 5,

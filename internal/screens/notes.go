@@ -480,7 +480,7 @@ func Notes2() Screen {
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
 									{
-										Title: w.Rubric{Text: "Tags"},
+										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
 											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
 										},
@@ -545,7 +545,7 @@ func Notes2() Screen {
 														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
-														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
+														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
 													},
 												},
 											},
@@ -675,7 +675,7 @@ func Notes27() Screen {
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
 									{
-										Title: w.Rubric{Text: "Tags"},
+										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
 											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
 										},
@@ -740,7 +740,7 @@ func Notes27() Screen {
 														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
-														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
+														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
 													},
 												},
 											},
@@ -884,7 +884,7 @@ func Notes3() Screen {
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
 									{
-										Title: w.Rubric{Text: "Tags"},
+										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
 											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
 										},
@@ -949,7 +949,7 @@ func Notes3() Screen {
 														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
-														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
+														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
 													},
 												},
 											},
@@ -1205,24 +1205,6 @@ func Notes20() Screen {
 											},
 										},
 										ID: "note-attachments",
-									},
-									{
-										Title: w.Rubric{
-											Text:  "The same note in other notebooks",
-											Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}},
-										},
-										Items: []w.DocmetaPart{
-											w.DocRefs{
-												Items: []w.DocRef{
-													{
-														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
-														Name: "nextcloud · Дневник",
-														Href: "#",
-														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
-													},
-												},
-											},
-										},
 									},
 									{
 										Title: w.Rubric{Text: "Source"},

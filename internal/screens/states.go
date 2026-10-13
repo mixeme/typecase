@@ -4478,24 +4478,6 @@ func States31() Screen {
 										ID: "note-loss-attachments",
 									},
 									{
-										Title: w.Rubric{
-											Text:  "The same note in other notebooks",
-											Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}},
-										},
-										Items: []w.DocmetaPart{
-											w.DocRefs{
-												Items: []w.DocRef{
-													{
-														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
-														Name: "nextcloud · Дневник",
-														Href: "#",
-														What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}},
-													},
-												},
-											},
-										},
-									},
-									{
 										Title: w.Rubric{Text: "Source"},
 										Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}},
 									},

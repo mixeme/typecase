@@ -1181,7 +1181,7 @@ func Contacts6() Screen {
 								Value: []w.ValuePart{w.Text("+7 495 120-45-00")},
 								Face:  w.ValueMono,
 								Href:  "tel:+74951204500",
-								After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}},
+								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
 							},
 							{
 								Term:  "Email · work",
@@ -1192,7 +1192,7 @@ func Contacts6() Screen {
 								Term:  "Email · second",
 								Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")},
 								Href:  "mailto:anna.kovaleva@slovo.example",
-								After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}},
+								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
 							},
 							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 							{

@@ -185,9 +185,17 @@ func Tasks1() Screen {
 					w.Fields{
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-							{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
+							{
+								Term:  "Due",
+								Value: []w.ValuePart{w.Text("12 August 2026, 18:00 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+								Face:  w.ValueMono,
+							},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+							{
+								Term:  "Priority",
+								Value: []w.ValuePart{w.Text("5 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+								Face:  w.ValueMono,
+							},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}},
 						},
 					},
@@ -456,9 +464,17 @@ func Tasks2() Screen {
 					w.Fields{
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-							{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
+							{
+								Term:  "Due",
+								Value: []w.ValuePart{w.Text("12 August 2026, 18:00 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+								Face:  w.ValueMono,
+							},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-							{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+							{
+								Term:  "Priority",
+								Value: []w.ValuePart{w.Text("5 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+								Face:  w.ValueMono,
+							},
 							{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}},
 						},
@@ -533,7 +549,7 @@ func Tasks2() Screen {
 										w.Text(" "),
 										w.Link{Text: "nextcloud · Работа", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· Time differ")}},
+										w.Dim{Parts: []w.Inline{w.Text("· Time, priority differ")}},
 									},
 								},
 								Gap: 5,

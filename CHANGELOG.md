@@ -505,13 +505,20 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
-- **A value that came from another copy is marked** (Carrel's task 153; the
-  owner's decision of 13.10, Р-58). The card of a linked record shows the
-  fields of all its copies; a value that is not in the copy opened carries,
-  after it, the mark and the name of the collection it came from —
-  `s-contacts-6`, the work phone and the second address. `FieldsItem.After`
-  holds what stands after a value that is a link, outside the link; a
-  `Mark` is a part of a value.
+- **Two cards of a linked record** (Carrel's task 153; the owner's
+  decisions of 13.10, Р-58). Opened from the combined view, the card shows
+  what the person chose in the duplicates section, and a value where there
+  was a choice carries, after it, the mark and the name of the collection
+  it was taken from — `s-contacts-33`, new. Opened from a collection, the
+  card shows that collection's own data, as its edit does, and a field
+  where there could be a choice carries the badge «linked» —
+  `s-contacts-6`, `s-agenda-2`, `s-tasks-1`, `-2`, `s-notes-2`, `-3`, `-27`
+  (a note's badge stands at the rubric «Tags»). A record is linked only by
+  such a choice; without one it is a candidate. `FieldsItem.After` holds
+  what stands after a value that is a link, outside the link; a `Mark` is a
+  part of a value. The block «The same note in other notebooks» is gone
+  from a note's edit (`s-notes-20`, `-26`, `states-31`) and stays in its
+  reading. 442 frames.
 - **Which copy of a linked record is edited or marked done** (Carrel's task
   153; the owner's decisions of 11.10 and 13.10, Р-58). An edit of a record
   with linked copies is written into one copy, and the person chooses which

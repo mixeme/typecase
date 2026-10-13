@@ -3930,9 +3930,9 @@ Read  2 min ago</div>
         </div>
         <dl class="tc-fields">
           <dt>Phone · mobile</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+79124451088">+7 912 445-10-88</a></dd>
-          <dt>Phone · work</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+74951204500">+7 495 120-45-00</a> <span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <span class="tc-dim">Команда</span></dd>
+          <dt>Phone · work</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+74951204500">+7 495 120-45-00</a> <span class="tc-badge is-linked">linked</span></dd>
           <dt>Email · work</dt><dd><a class="tc-fields__link" href="mailto:a.kovaleva@example.org">a.kovaleva@example.org</a></dd>
-          <dt>Email · second</dt><dd><a class="tc-fields__link" href="mailto:anna.kovaleva@slovo.example">anna.kovaleva@slovo.example</a> <span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <span class="tc-dim">Команда</span></dd>
+          <dt>Email · second</dt><dd><a class="tc-fields__link" href="mailto:anna.kovaleva@slovo.example">anna.kovaleva@slovo.example</a> <span class="tc-badge is-linked">linked</span></dd>
           <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
           <dt>Birthday</dt><dd class="tc-mono">1987-03-14 <span class="tc-dim">· in 7 months</span></dd>
           <dt>Tags</dt><dd><span class="tc-tag">работа</span> <span class="tc-tag">издательство</span></dd>
@@ -3969,7 +3969,7 @@ Read  2 min ago · not changed on server</div>
   </div>
 </div>
 <figcaption><b>Карточке нужен свой экран, и хронология его не заменяет.</b> Раньше по этому адресу открывалась хронология записей о человеке, а сама карточка стояла в панели справа — той, которую закрывают крестиком. Получалось, что у единственной записи из пяти родов нет места, где её просто читают: чтобы посмотреть второй телефон, надо было держать открытой панель на экране, который вообще про другое. Теперь <b>карточка — это содержимое</b>: телефоны с метками, адреса, день рождения, чужие свойства, тот же человек в других книгах.
-<br><br><b>Хронология стоит здесь врезкой, а не словом-ссылкой.</b> Рубрика с числом, три последние записи со столбцом «почему совпало» и кнопка <b>Open the timeline</b> — потому что ради этой хронологии четыре раздела и стоят рядом, и человек, который на неё не перейдёт, обязан увидеть, что она есть. Врезка не заменяет хронологию: там свой диапазон дат, свои столбцы и свой адрес. Каждый телефон и каждый адрес — ссылка: <code>tel:</code> из цифр и плюса, <code>mailto:</code>; вид — значения, подчёркивание при наведении. <b>Значение, которого нет в открытой копии, помечено</b> (решение владельца 13.10, задача 153, Р-58): после него стоят метка и название коллекции, из которой оно пришло, — рабочий телефон и второй адрес здесь из «Команды». У значений открытой копии пометки нет.</figcaption>
+<br><br><b>Хронология стоит здесь врезкой, а не словом-ссылкой.</b> Рубрика с числом, три последние записи со столбцом «почему совпало» и кнопка <b>Open the timeline</b> — потому что ради этой хронологии четыре раздела и стоят рядом, и человек, который на неё не перейдёт, обязан увидеть, что она есть. Врезка не заменяет хронологию: там свой диапазон дат, свои столбцы и свой адрес. Каждый телефон и каждый адрес — ссылка: <code>tel:</code> из цифр и плюса, <code>mailto:</code>; вид — значения, подчёркивание при наведении. <b>Карточка, открытая из коллекции, показывает данные своей коллекции</b> (решение владельца 13.10, задача 153, Р-58): то же, что откроет её правка. У поля, где при объединении дубликатов был выбор, — где у другой копии своё значение, — стоит значок «linked»: рабочий телефон и второй адрес здесь разнятся с «Командой». Какие копии и чем разнятся, называет блок «The same person in other books». Запись целиком, с выбранными значениями, — карточка из объединённого вида (кадр ниже).</figcaption>
 </figure>
 
 <figure>
@@ -4390,6 +4390,32 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
   <figcaption><b>Правка связанной записи пишется в одну копию, и человек выбирает какую — до формы</b> (решения владельца 11.10 и 13.10, задача 153, Р-58). Edit у записи со связанными копиями сначала открывает этот лист: строка на копию — метка, отметка выбора с источником и чем копия разнится. <b>Копии — отметки, не кнопки:</b> нажатие на копию только выбирает её, форму открывает главная кнопка «Edit this copy». Отмечена та копия, которую открыли. Копия только для чтения стоит строкой без отметки, с причиной. Лист один для всех родов: у события, задачи и заметки те же строки. У записи без связанных копий листа нет: Edit открывает форму сразу. Вариант, где форма открывалась сразу и сама называла копию и соседние, отвергнут как слишком сложный для понимания.</figcaption>
+  </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-contacts-33">
+    <div class="frame-label"><span>Связанная запись · карточка из объединённого вида</span><span class="frag">фрагмент</span><i>выбранные значения, метка — откуда взято</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Анна Ковалёва</div><div class="tc-head__sub">All address books · in 2 books</div></div></div>
+        <dl class="tc-fields">
+          <dt>Phone · mobile</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+79124451088">+7 912 445-10-88</a></dd>
+          <dt>Phone · work</dt><dd class="tc-mono"><a class="tc-fields__link" href="tel:+74951204577">+7 495 120-45-77</a> <span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <span class="tc-dim">Команда</span></dd>
+          <dt>Email · work</dt><dd><a class="tc-fields__link" href="mailto:a.kovaleva@example.org">a.kovaleva@example.org</a></dd>
+          <dt>Email · second</dt><dd><a class="tc-fields__link" href="mailto:anna.kovaleva@slovo.example">anna.kovaleva@slovo.example</a> <span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <span class="tc-dim">Контакты</span></dd>
+          <dt>Address · work</dt><dd>Москва, Тверская 12, стр. 3</dd>
+          <dt>Note</dt><dd>Пишет по вторникам, отвечает в тот же день.</dd>
+        </dl>
+        <div class="tc-sec">
+          <div class="tc-rubric">Where this person is kept <span class="tc-badge is-linked">2</span></div>
+          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/kontakty/2b7e">nextcloud · Контакты</a></li>
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/2b7e">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
+          </ul>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption><b>Карточка, открытая из объединённого вида, показывает то, что человек сам выбрал</b> (решение владельца 13.10, задача 153, Р-58): значения, выбранные в разделе дубликатов при связывании. У значения, где был выбор, после него стоят метка и название коллекции, из которой оно взято: рабочий телефон здесь из «Команды», второй адрес — из «Контактов». У значений, где выбирать было не из чего, метки нет. Связанной запись становится только после такого выбора; пока его нет, это кандидат в дубликаты, а не связанная запись. Блок внизу называет копии — каждая ведёт на карточку своей коллекции, где показаны её собственные данные и значок «linked» у полей с выбором.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -5158,7 +5184,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <dt>When</dt><dd><span class="tc-mono">10:00 – 11:00</span>, Monday 10 August <span class="tc-badge" title="Created in another time zone">created 12:00 Asia/Yekaterinburg</span></dd>
           <dt>Repeats</dt><dd>Weekly on Mon <span class="tc-badge">until 2026-12-28</span></dd>
           <dt>Reminders</dt><dd>10 minutes before · 1 day before</dd>
-          <dt>Where</dt><dd>Переговорная 2</dd>
+          <dt>Where</dt><dd>Переговорная 2 <span class="tc-badge is-linked">linked</span></dd>
           <dt>Status</dt><dd>Confirmed</dd>
           <dt>Tags</dt><dd><span class="tc-tag">релиз</span> <span class="tc-tag">работа</span></dd>
         </dl>
@@ -5181,9 +5207,10 @@ Read  2 min ago · changed on server 3 days ago</div>
           <ul class="tc-sec__list"><li><span class="tc-dim--accent">Заметка со встречи 10.08</span> <span class="tc-dim">· note</span></li></ul>
         </div>
         <div class="tc-sec">
-          <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">1</span></div>
+          <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">2</span></div>
           <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">radicale · vps · Проекты</a> <span class="tc-dim">· Holds the same</span></li>
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="#">baikal · Общий</a> <span class="tc-dim">· Where differ</span></li>
           </ul>
         </div>
         <div class="tc-sec">
@@ -5677,9 +5704,9 @@ SEQUENCE  2</div>
         </div>
         <dl class="tc-fields">
           <dt>Status</dt><dd>Needs action</dd>
-          <dt>Due</dt><dd class="tc-mono">12 August 2026, 18:00</dd>
+          <dt>Due</dt><dd class="tc-mono">12 August 2026, 18:00 <span class="tc-badge is-linked">linked</span></dd>
           <dt>Complete</dt><dd class="tc-mono">0%</dd>
-          <dt>Priority</dt><dd class="tc-mono">5</dd>
+          <dt>Priority</dt><dd class="tc-mono">5 <span class="tc-badge is-linked">linked</span></dd>
           <dt>Tags</dt><dd><span class="tc-tag">дом</span></dd>
         </dl>
         <div class="tc-sec"><div class="tc-rubric">Description</div><div class="tc-prose tc-prose--t13">Зарядки, переходник, распечатать посадочный.</div></div>
@@ -5908,9 +5935,9 @@ Read  2 min ago · not changed on server</div>
         </div>
         <dl class="tc-fields">
           <dt>Status</dt><dd>Needs action</dd>
-          <dt>Due</dt><dd class="tc-mono">12 August 2026, 18:00</dd>
+          <dt>Due</dt><dd class="tc-mono">12 August 2026, 18:00 <span class="tc-badge is-linked">linked</span></dd>
           <dt>Complete</dt><dd class="tc-mono">0%</dd>
-          <dt>Priority</dt><dd class="tc-mono">5</dd>
+          <dt>Priority</dt><dd class="tc-mono">5 <span class="tc-badge is-linked">linked</span></dd>
           <dt>Reminders</dt><dd>1 day before</dd>
           <dt>Tags</dt><dd><span class="tc-tag">дом</span></dd>
         </dl>
@@ -5931,7 +5958,7 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-sec">
           <div class="tc-rubric">The same task in other lists <span class="tc-badge is-linked">1</span></div>
           <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
-            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Работа</a> <span class="tc-dim">· Time differ</span></li>
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Работа</a> <span class="tc-dim">· Time, priority differ</span></li>
           </ul>
         </div>
         <div class="tc-sec">
@@ -6584,7 +6611,7 @@ Read  2 min ago · not changed on server</div>
           </div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
-              <div class="tc-rubric">Tags</div>
+              <div class="tc-rubric">Tags <span class="tc-badge is-linked">linked</span></div>
               <div class="tc-line tc-line--gap-4"><span class="tc-tag">встречи</span><span class="tc-tag">релиз</span></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -6602,7 +6629,7 @@ Read  2 min ago · not changed on server</div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
               <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
+                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
             <div class="tc-docmeta__sec">
@@ -6680,7 +6707,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
-              <div class="tc-rubric">Tags</div>
+              <div class="tc-rubric">Tags <span class="tc-badge is-linked">linked</span></div>
               <div class="tc-line tc-line--gap-4"><span class="tc-tag">встречи</span><span class="tc-tag">релиз</span></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -6698,7 +6725,7 @@ Read  2 min ago</div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
               <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
+                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
             <div class="tc-docmeta__sec">
@@ -6882,7 +6909,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
-              <div class="tc-rubric">Tags</div>
+              <div class="tc-rubric">Tags <span class="tc-badge is-linked">linked</span></div>
               <div class="tc-line tc-line--gap-4"><span class="tc-tag">встречи</span><span class="tc-tag">релиз</span></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -6900,7 +6927,7 @@ Read  2 min ago</div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
               <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
+                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
             <div class="tc-docmeta__sec">
@@ -7006,12 +7033,6 @@ Read  2 min ago</div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
             </div>
             <div class="tc-docmeta__sec">
-              <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
-              </div>
-            </div>
-            <div class="tc-docmeta__sec">
               <div class="tc-rubric">Source</div>
               <div class="tc-diag">UID   9e31-40b7-c012
 Read  2 min ago</div>
@@ -7023,7 +7044,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, та же заметка в других тетрадях, источник и удаление. <b>У вложения, которое лежит в папке Files, кнопка другая</b> (задача 155): не тревожная «Remove», а простая «Unlink» (в подсказке — «Remove the link; the file stays in …») — уходит связь, файл остаётся там, где лежит, и значок рядом называет это место; «Remove» цветом тревоги — у вложения, записанного в саму заметку: оно удаляется вместе с ней. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом. <b>У Focus свой значок — рамка видоискателя.</b> Стрелки наружу во всём макете значат одно: «открыть крупнее» — страницу заметки из панели, карточку из листа «New …»; одним значком для двух действий было бы не понять, что откроется.</figcaption>
+<figcaption><b>Правка там же, где чтение.</b> Edit — в панели над текстом или в панели заметки у списка — открывает эту страницу в правке: рейл с соседними заметками и колонка справа остаются на месте, меняется только колонка текста — вместо прочитанного поле заголовка, поля «когда» и «куда» и поле текста. <b>Tags и Related из колонки на время правки уходят</b>: они стали полями под заголовком, и два места для одного значения заставили бы гадать, какое из них настоящее. В колонке остаётся то, что правкой не меняется: вложения, источник и удаление. Блока «та же заметка в других тетрадях» в правке нет (решение владельца 13.10, Р-58): копию выбирают в листе до формы, и форма — форма одной копии; блок стоит в чтении. <b>У вложения, которое лежит в папке Files, кнопка другая</b> (задача 155): не тревожная «Remove», а простая «Unlink» (в подсказке — «Remove the link; the file stays in …») — уходит связь, файл остаётся там, где лежит, и значок рядом называет это место; «Remove» цветом тревоги — у вложения, записанного в саму заметку: оно удаляется вместе с ней. Save и Cancel возвращают к чтению. <b>Focus</b> — кнопка справа в панели — убирает рейл и колонку, когда писать долго; этот режим — кадр следом. <b>У Focus свой значок — рамка видоискателя.</b> Стрелки наружу во всём макете значат одно: «открыть крупнее» — страницу заметки из панели, карточку из листа «New …»; одним значком для двух действий было бы не понять, что откроется.</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="s-notes-30" data-screen="/app/notes/{account}/{col}/new">
@@ -7184,12 +7205,6 @@ Read  2 min ago</div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span> <span class="tc-badge">in the note</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
               <div class="tc-line__text">план-поездки.pdf <span class="tc-dim">· 24 MB</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div>
-            </div>
-            <div class="tc-docmeta__sec">
-              <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
-              </div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Source</div>
@@ -22528,12 +22543,6 @@ dav: HTTP 503: the server is busy</div></div>
               <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm">Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-up"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-loss" aria-label="From this computer" data-tc-list="note-loss-attachments"><template data-tc-row><div class="tc-line__text">{name} <span class="tc-dim">· {size}</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span> <span class="tc-badge">in the note</span> <button class="tc-btn is-sm is-danger" type="button">Remove</button></div>
               <div class="tc-line__text"><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span> <span class="tc-badge">Documents / carrel</span> <button class="tc-btn is-sm" type="button" title="Remove the link; the file stays in Documents / carrel">Unlink</button></div>
-            </div>
-            <div class="tc-docmeta__sec">
-              <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
-                <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text differ</span></span>
-              </div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Source</div>

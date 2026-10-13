@@ -404,6 +404,8 @@ func (g *gen) fields(e *El) string {
 					after = append(after, g.mark(k))
 				case past && k.Has("tc-dim"):
 					after = append(after, g.dimx(k))
+				case past && k.Has("tc-badge"):
+					after = append(after, g.badge(k))
 				case past:
 					stop("dd after its link? " + join(k.Cls(), " "))
 				}

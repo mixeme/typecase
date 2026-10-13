@@ -176,6 +176,13 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
 
 	// tc-fields
+	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-77")}, Face: w.ValueMono, Href: "tel:+74951204577", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
+		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}, Href: "mailto:anna.kovaleva@slovo.example", After: []w.ValuePart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Контакты")}}}},
+		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-33", "tc-fields", 1),
 	cards("plain-card", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
@@ -194,9 +201,9 @@ var _ = add(
 		{Term: "Nickname", Value: []w.ValuePart{w.Text("Аня")}}}}, "mentions-6", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
-		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono, Href: "tel:+74951204500", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
+		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono, Href: "tel:+74951204500", After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
-		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}, Href: "mailto:anna.kovaleva@slovo.example", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
+		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}, Href: "mailto:anna.kovaleva@slovo.example", After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}}, Face: w.ValueMono},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
@@ -229,20 +236,20 @@ var _ = add(
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
-		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-2", "tc-fields", 1),
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-2", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
+		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}, Face: w.ValueMono},
 		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+		{Term: "Priority", Value: []w.ValuePart{w.Text("5 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}, Face: w.ValueMono},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
-		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00")}, Face: w.ValueMono},
+		{Term: "Due", Value: []w.ValuePart{w.Text("12 August 2026, 18:00 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}, Face: w.ValueMono},
 		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-		{Term: "Priority", Value: []w.ValuePart{w.Text("5")}, Face: w.ValueMono},
+		{Term: "Priority", Value: []w.ValuePart{w.Text("5 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}, Face: w.ValueMono},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-2", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
@@ -294,6 +301,12 @@ var _ = add(
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "desktop-1", "tc-fields", 1),
 
 	// tc-sec
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Where this person is kept", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Контакты", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}}, Gap: 5}}}, "s-contacts-33", "tc-sec", 1),
+	cards("plain", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "The same task in other lists", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Работа", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Time differ")}}}}, Gap: 5}}}, "s-tasks-2", "tc-sec", 4),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Related"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Синк-ап по релизу"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, []w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Дописать раздел про кэш"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· task")}}}}, Gap: 6}}}, "s-notes-1", "tc-sec", 3),
@@ -323,8 +336,8 @@ var _ = add(
 		w.Rubric{Text: "Attachments"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
-		w.Rubric{Text: "The same event in other calendars"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}}}}, Gap: 5}}}, "s-agenda-2", "tc-sec", 5),
+		w.Rubric{Text: "The same event in other calendars", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Where differ")}}}}, Gap: 5}}}, "s-agenda-2", "tc-sec", 5),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "The same person in other books"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}}}}, Gap: 5}}}, "s-contacts-6", "tc-sec", 2),
@@ -795,8 +808,7 @@ var _ = add(
 	cards("picked", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "saving-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
-			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "план-поездки.pdf", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}}, ID: "saving-attachments"},
-		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"}, Href: "#"}, w.DocAttach{Name: "план-поездки.pdf", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}}, ID: "saving-attachments"},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-26", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
@@ -816,8 +828,7 @@ var _ = add(
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
-			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}}, ID: "note-attachments"},
-		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"}, Href: "#"}}, ID: "note-attachments"},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-20", "tc-docmeta", 1),
 )
 
