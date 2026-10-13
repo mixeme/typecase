@@ -468,7 +468,7 @@ func (v FormVariant) class() string {
 // Form — tc-form
 //
 // Роль. Форма: поля и группы полей, которые переносятся по ширине.
-// Вход. Form{Items, Variant, Tight, Action, Method, Fields, ID}.
+// Вход. Form{Items, Variant, Tight, Action, Method, Fields, ID, Target}.
 // Состояния. plain | tight | flush | column | columns | action.
 // Инварианты. Поля переносятся, а не сжимаются; отступы формы — перечисление; форма печатает фрагмент своего кадра.
 // Поведение. Enter в поле формы отправляет форму.
@@ -486,6 +486,10 @@ type Form struct {
 	Method string
 	Fields []Hidden
 	ID     string // what a button outside the form names in its Form: «Sign in» under the fields
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the form.
@@ -496,7 +500,7 @@ func (f Form) html(m mix) string {
 	tag := "div"
 	if f.Action != "" {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + attr("id", f.ID) + attr("action", f.Action) + ` method="` + method(f.Method) + `">`)
+		s.WriteString(`<form` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + attr("id", f.ID) + attr("action", f.Action) + ` method="` + method(f.Method) + `"` + attr("data-tc-target", f.Target) + `>`)
 		for _, h := range f.Fields {
 			s.WriteString(h.html(nil))
 		}

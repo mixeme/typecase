@@ -59,7 +59,7 @@ func (v BarVariant) class() string {
 // Bar — tc-bar
 //
 // Роль. Бар над списком: фильтр, сортировка, вид, «⋯»; при выделении — что сделать с выделенным.
-// Вход. Bar{Count, Items, More, Right, Variant, NoScript}.
+// Вход. Bar{Count, Items, More, Right, Variant, NoScript, Target}.
 // Состояния. plain | selection | wide | more | right.
 // Инварианты. Бар — одна строка: второстепенное (is-2nd) уходит под «⋯» первым, третьестепенное (is-3rd) — на телефоне, порядок и пороги — в CSS; «⋯» — одна кнопка перед концом бара; бар печатает фрагмент своего кадра.
 // Поведение. «⋯» открывает меню с тем, что не поместилось.
@@ -77,6 +77,10 @@ type Bar struct {
 	// tick, without one it stands always (the owner's decision of 09.10,
 	// Carrel's task 148).
 	NoScript bool
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the bar.
@@ -84,7 +88,7 @@ func (b Bar) Render() string { return b.html(nil) }
 
 func (b Bar) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-bar", b.Variant.class(), pick(b.NoScript, "tc-nojs")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-bar", b.Variant.class(), pick(b.NoScript, "tc-nojs")) + attr("data-tc-target", b.Target) + `>`)
 	if b.Count != nil {
 		s.WriteString(`<span` + class(nil, "tc-bar__count", pick(b.Count.Small, "tc-bar__count--t12-5")) + `>` + esc(b.Count.Text) + `</span>`)
 	}

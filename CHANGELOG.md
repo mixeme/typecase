@@ -31,6 +31,24 @@ do, not what the authors did.
 
 ### Added
 
+- **Zones: a part of the page changes without a page load** (Carrel's task
+  84, the engine). A link or a form inside a widget that names a `Target`
+  asks, with the live layer, the same address as without it, with the
+  headers the document names — `page.Document.Zones{ViewHeader, ViewValue,
+  TargetHeader, TokenField, TokenHeader, Address}` — and the answer is put
+  into the zones: `page.Fragment{Body, Extra}` prints the part asked for
+  and, after it, each other zone in a `<template data-tc-zone>`. A zone is
+  a widget the application named: `Zone` on `Main`, `Side`, `Top`,
+  `Runbar`, `Queue`, `Scrim`; `Target` on `Nav`, `List`, `Bar`, `Form`,
+  `Sheet`, `Button`. A widget that carries the zone's name takes its place
+  whole, anything else becomes its content; an empty answer empties and
+  hides it. An answer that is not HTML, not 2xx or redirected sends the
+  page to the address the plain way; a form's token goes into the header
+  the document names; the zone named in `Zones.Address` puts a link's
+  address into the history. A form that sends files still loads its answer
+  whole, with its progress. Without the layer everything is a plain link or
+  form. `TestZones` (browser and `page`). Not yet: a sheet arriving into
+  its layer, the rail as a zone, targets on the other widgets with links.
 - **A dialog that is a form** (Carrel's task 149). `Dialog.Action` (with
   `Method`, `Fields`) prints the dialog as a form: a step of a wizard whose
   fields stand in several cards sends them all. A form holds no form — a

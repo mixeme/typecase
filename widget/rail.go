@@ -38,7 +38,7 @@ func (it NavItem) html(on bool, opens string) string {
 // Nav — tc-nav
 //
 // Роль. Навигация по разделам: в рейле приложения, в рейле настроек, строка «назад».
-// Вход. Nav{Items, On, Apart, Opens}.
+// Вход. Nav{Items, On, Apart, Opens, Target}.
 // Состояния. plain | back | apart | icons.
 // Инварианты. Текущий раздел — один, его номер, а не флаг у каждого пункта; пункт — ссылка; навигация печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает раздел; текущий помечен для чтения (aria-current). В рейле из значков (641–1007) повторное нажатие на текущий раздел открывает лист его источников (Opens).
@@ -52,6 +52,10 @@ type Nav struct {
 	// Opens is the ID of the sheet (Scrim) with the section's sources: in the
 	// rail of icons (Р-3, rail) pressing the current section again opens it.
 	Opens string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the navigation.
@@ -59,7 +63,7 @@ func (n Nav) Render() string { return n.html(nil) }
 
 func (n Nav) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-nav", pick(n.Apart, "tc-nav--top2")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-nav", pick(n.Apart, "tc-nav--top2")) + attr("data-tc-target", n.Target) + `>`)
 	for i, it := range n.Items {
 		s.WriteString(it.html(i+1 == n.On, n.Opens))
 	}

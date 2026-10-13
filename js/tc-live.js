@@ -155,6 +155,143 @@
 		if (swapped) location.reload();
 	});
 
+	// Zones (Carrel's task 84). A link or a form inside an element that
+	// names a target (data-tc-target — the name of a zone) is asked for from
+	// the page: the same address as without the layer, with the headers the
+	// document names (data-tc-view-header and -value say «a part of the page
+	// is wanted», data-tc-target-header names the zone). The answer is HTML:
+	// what goes into the target, and after it other zones, each in a
+	// <template data-tc-zone>. A zone is an element that carries its name
+	// (data-tc-zone); the names are the consumer's, the layer has none.
+	// An empty answer empties the zone and hides it — a panel or a sheet
+	// closes, the messages go. What was put in goes through the core's init.
+	// An answer that is not HTML, not 2xx, or redirected: the page goes to
+	// the address the plain way. The zone the document names as the one that
+	// owns the address (data-tc-address-zone) puts the address into the
+	// history; Back loads the page whole.
+	var doc = document.documentElement;
+
+	function zoneOf(name) {
+		var all = document.querySelectorAll("[data-tc-zone]");
+		for (var i = 0; i < all.length; i++) if (all[i].getAttribute("data-tc-zone") === name) return all[i];
+		return null;
+	}
+
+	function fill(zone, nodes) {
+		var only = nodes.children.length === 1 && !nodes.textContent.replace(nodes.firstElementChild.textContent, "").trim() ? nodes.firstElementChild : null;
+		if (only && only.getAttribute("data-tc-zone") === zone.getAttribute("data-tc-zone")) {
+			// the widget of the zone itself: it takes the zone's place whole
+			zone.parentNode.replaceChild(only, zone);
+			if (tc.init) tc.init(only);
+			return;
+		}
+		while (zone.firstChild) zone.removeChild(zone.firstChild);
+		zone.appendChild(nodes);
+		var empty = !zone.firstElementChild && !zone.textContent.trim();
+		zone.hidden = empty;
+		zone.style.display = empty ? "none" : "";
+		if (!empty && tc.init) tc.init(zone);
+	}
+
+	function put(target, html) {
+		var zone = zoneOf(target);
+		if (!zone) return false;
+		var box = document.createElement("template");
+		box.innerHTML = html;
+		var extra = [];
+		Array.prototype.forEach.call(box.content.querySelectorAll("template[data-tc-zone]"), function (t) {
+			if (t.parentNode === box.content) extra.push(t);
+		});
+		extra.forEach(function (t) {
+			box.content.removeChild(t);
+		});
+		fill(zone, box.content);
+		extra.forEach(function (t) {
+			var z = zoneOf(t.getAttribute("data-tc-zone"));
+			if (z) fill(z, t.content);
+		});
+		if (tc.layoutUpdates) tc.layoutUpdates();
+		return true;
+	}
+
+	function ask(url, method, body, target, plain) {
+		var headers = { Accept: "text/html" };
+		var view = doc.getAttribute("data-tc-view-header"), zoneHeader = doc.getAttribute("data-tc-target-header");
+		if (view) headers[view] = doc.getAttribute("data-tc-view-value") || "1";
+		if (zoneHeader) headers[zoneHeader] = target;
+		var field = doc.getAttribute("data-tc-token-field"), tokenHeader = doc.getAttribute("data-tc-token-header");
+		if (body && field && tokenHeader && body.get(field)) headers[tokenHeader] = body.get(field);
+		fetch(url, { method: method, body: body || undefined, headers: headers, credentials: "same-origin" })
+			.then(function (r) {
+				var type = r.headers.get("Content-Type") || "";
+				if (!r.ok || r.redirected || type.indexOf("text/html") !== 0) throw new Error("not a part");
+				return r.text();
+			})
+			.then(function (html) {
+				if (!put(target, html)) throw new Error("no zone " + target);
+				if (method === "GET" && doc.getAttribute("data-tc-address-zone") === target) {
+					history.pushState({ tcSwap: true }, "", url);
+					swapped = true;
+				}
+			})
+			.catch(plain);
+	}
+
+	function targetOf(el) {
+		var t = el && el.closest && el.closest("[data-tc-target]");
+		return t ? t.getAttribute("data-tc-target") : "";
+	}
+
+	function sameSite(url) {
+		try {
+			return new URL(url, location.href).origin === location.origin;
+		} catch (err) {
+			return false;
+		}
+	}
+
+	document.addEventListener("click", function (e) {
+		var a = e.target.closest && e.target.closest("a[href]");
+		if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+		if (a.hasAttribute("data-tc-swap") || a.hasAttribute("download") || (a.target && a.target !== "_self")) return;
+		var target = targetOf(a);
+		if (!target || !sameSite(a.href) || !zoneOf(target)) return;
+		e.preventDefault();
+		var href = a.href;
+		ask(href, "GET", null, target, function () {
+			location.assign(href);
+		});
+	});
+
+	var sentPlain = false;
+	document.addEventListener("submit", function (e) {
+		var form = e.target, by = e.submitter || null;
+		if (e.defaultPrevented || sentPlain || !window.FormData) return;
+		var target = targetOf(by) || targetOf(form);
+		if (!target || !zoneOf(target)) return;
+		var action = (by && by.getAttribute("formaction")) || form.getAttribute("action") || location.href;
+		if (!sameSite(action)) return;
+		var method = ((by && by.getAttribute("formmethod")) || form.getAttribute("method") || "get").toUpperCase();
+		var data = new FormData(form, by || undefined);
+		var files = false;
+		data.forEach(function (v) {
+			if (v && typeof v === "object" && v.size) files = true;
+		});
+		if (files) return; // a form that sends files shows its progress and loads the answer whole
+		e.preventDefault();
+		var url = new URL(action, location.href), body = data;
+		if (method === "GET") {
+			url.search = new URLSearchParams(data).toString();
+			body = null;
+		}
+		ask(url.href, method, body, target, function () {
+			sentPlain = true;
+			if (form.requestSubmit && by) form.requestSubmit(by);
+			else form.submit();
+			sentPlain = false;
+		});
+	});
+
 	document.addEventListener("input", function (e) {
 		var t = e.target;
 		if (t.classList && t.classList.contains("tc-in__add") && t.closest("[data-tc-suggest]")) suggest(t);

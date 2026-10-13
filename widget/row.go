@@ -530,7 +530,7 @@ func (r PhoneRow) html(m mix) string {
 // List — tc-list
 //
 // Роль. Список строк: записи раздела, найденное, выбор в листе.
-// Вход. List{Rows, Inset, Compact}.
+// Вход. List{Rows, Inset, Compact, Target}.
 // Состояния. plain | inset | compact.
 // Инварианты. В списке только строки; список печатает фрагмент своего кадра.
 // Поведение. Стрелки ходят по строкам; Enter открывает строку.
@@ -541,6 +541,10 @@ type List struct {
 	Rows    []ListRow
 	Inset   bool // set in a card: out to its edges
 	Compact bool // rows of 30 px instead of 38 (Compact rows); a phone keeps its own
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the list.
@@ -548,7 +552,7 @@ func (l List) Render() string { return l.html(nil) }
 
 func (l List) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-list", is("compact", l.Compact), pick(l.Inset, "tc-list--mx-14")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-list", is("compact", l.Compact), pick(l.Inset, "tc-list--mx-14")) + attr("data-tc-target", l.Target) + `>`)
 	for _, r := range l.Rows {
 		s.WriteString(r.html(nil))
 	}

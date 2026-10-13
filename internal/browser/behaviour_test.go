@@ -13,6 +13,7 @@ import (
 
 	"carrel.dev/typecase/internal/browser"
 	"carrel.dev/typecase/internal/refs"
+	"carrel.dev/typecase/page"
 	w "carrel.dev/typecase/widget"
 )
 
@@ -1539,6 +1540,63 @@ func TestPickShows(t *testing.T) {
 		var got string
 		if err := h.Run(h.RegisterPage("shows", page), 900, 600,
 			chromedp.Evaluate(`(() => { const choose = `+choose+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
+// zonePart is fixed markup as a part of a fragment.
+type zonePart string
+
+func (z zonePart) Render() string { return string(z) }
+
+// TestZones (Carrel's task 84): a link or a form whose container names a
+// target asks its own address from the page with the headers the document
+// names, and the answer — the part and the other zones in templates — is put
+// into the zones; the zone that owns the address puts it into the history;
+// an empty answer empties and hides the zone; a widget carrying the zone's
+// name takes its place whole; an answer that is no part sends the page there
+// the plain way. The bite: without the live layer the link loads the page.
+func TestZones(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	part := h.RegisterPage("zone-part", page.Fragment{Body: []page.Part{zonePart(`<p class="got">new main</p>`)},
+		Extra: []page.ZonePart{{Zone: "notices", Body: []page.Part{zonePart(`<p>saved</p>`)}}}}.Render())
+	empty := h.RegisterPage("zone-empty", page.Fragment{}.Render())
+	whole := h.RegisterPage("zone-whole", page.Fragment{Body: []page.Part{zonePart(`<div data-tc-zone="main" class="whole">a new zone</div>`)}}.Render())
+	missing := h.RegisterPage("zone-missing", "")
+	missing = strings.Replace(missing, "zone-missing", "zone-not-there", 1)
+	nav := w.Nav{Target: "main", Items: []w.NavItem{{Label: "Part", Href: part}, {Label: "Empty", Href: empty}, {Label: "Whole", Href: whole}, {Label: "Gone", Href: missing}}}
+	form := w.Form{Action: part, Method: "post", Target: "main", Fields: []w.Hidden{{Name: "csrf", Value: "tok"}},
+		Items: []w.FormPart{w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Value: "x"}, w.Button{Label: "Send", Submit: true}}}}}
+	body := `<div class="tc-root">` + nav.Render() + form.Render() + `<div data-tc-zone="main"><p>old main</p></div><div data-tc-zone="notices"><p>old notice</p></div></div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`,
+		`data-tc-noscript data-tc-view-header="X-View" data-tc-view-value="part" data-tc-target-header="X-Target" data-tc-token-field="csrf" data-tc-token-header="X-Token" data-tc-address-zone="main">`, 1)
+	with := h.RegisterPage("zones", doc)
+	bare := h.RegisterPage("zones-bare", strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1))
+	const spy = `(() => { window.__kept = true; window.__asked = []; const f = window.fetch;
+		window.fetch = (u, o) => { const h = (o && o.headers) || {}; window.__asked.push((o && o.method) + " " + ["X-View", "X-Target", "X-Token"].map(k => h[k] || "-").join(" ")); return f(u, o); }; return true })()`
+	const state = `(() => { const z = n => { const e = document.querySelector('[data-tc-zone="' + n + '"]'); return e ? (e.getClientRects().length ? e.textContent.trim() : "hidden") + (e.className ? "." + e.className : "") : "no zone"; };
+		return z("main") + " | " + z("notices") + " | " + (window.__kept === true ? "kept" : "loaded") + " | " + location.pathname.split("/").pop() + " | " + (window.__asked || []).join(",") })()`
+	for _, c := range []struct{ name, url, click, want string }{
+		{"a link's part and another zone", with, `.tc-nav__item:nth-child(1)`, "new main | saved | kept | zone-part | GET part main -"},
+		{"an empty answer", with, `.tc-nav__item:nth-child(2)`, "hidden | old notice | kept | zone-empty | GET part main -"},
+		{"the zone's own widget", with, `.tc-nav__item:nth-child(3)`, "a new zone.whole | old notice | kept | zone-whole | GET part main -"},
+		{"a form with its token", with, `.tc-form .tc-btn`, "new main | saved | kept | zones | POST part main tok"},
+		{"no part at the address", with, `.tc-nav__item:nth-child(4)`, "no zone | no zone | loaded | zone-not-there | "},
+		// the page went to the address: what is shown is the answer itself, its other zone a template
+		{"without the layer", bare, `.tc-nav__item:nth-child(1)`, "no zone | hidden | loaded | zone-part | "},
+	} {
+		var got string
+		if err := h.Run(c.url, 900, 600,
+			chromedp.Evaluate(spy, nil),
+			chromedp.Click(c.click, chromedp.ByQuery),
+			chromedp.Sleep(1500*time.Millisecond),
 			chromedp.Evaluate(state, &got),
 		); err != nil {
 			t.Fatal(err)

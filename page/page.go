@@ -44,6 +44,72 @@ type Document struct {
 	// Live loads the library's live layer after its script (L-1): a tag
 	// field's suggestions; without it they are plain forms.
 	Live bool
+	// Zones is what the live layer says when it asks the server for a part
+	// of the page (Carrel's task 84); the names are the application's.
+	Zones Zones
+}
+
+// Zones names the headers of a request for a part of a page and the zone
+// whose content owns the address. The live layer sends ViewHeader with
+// ViewValue to say a part is wanted and TargetHeader with the name of the
+// zone asked for; a form's token — its field TokenField — goes into
+// TokenHeader as well. Address is the zone whose answer to a link puts the
+// link's address into the history.
+type Zones struct {
+	ViewHeader   string
+	ViewValue    string
+	TargetHeader string
+	TokenField   string
+	TokenHeader  string
+	Address      string
+}
+
+func (z Zones) attrs() string {
+	var b strings.Builder
+	for _, a := range [][2]string{{"data-tc-view-header", z.ViewHeader}, {"data-tc-view-value", z.ViewValue}, {"data-tc-target-header", z.TargetHeader},
+		{"data-tc-token-field", z.TokenField}, {"data-tc-token-header", z.TokenHeader}, {"data-tc-address-zone", z.Address}} {
+		if a[1] != "" {
+			b.WriteString(` ` + a[0] + `="` + html.EscapeString(a[1]) + `"`)
+		}
+	}
+	return b.String()
+}
+
+// Part is what an answer puts into a zone: a widget of the library.
+type Part interface{ Render() string }
+
+// Fragment is the answer to a request for a part of a page: Body is what
+// goes into the zone that was asked for, Extra the other zones the answer
+// changes with it — the messages, the count in the rail. A widget that
+// carries its zone's name (Zone) takes the place of the zone whole; anything
+// else becomes the zone's content. An empty Body empties the zone: a panel
+// or a sheet closes.
+type Fragment struct {
+	Body  []Part
+	Extra []ZonePart
+}
+
+// ZonePart is one more zone of an answer and what goes into it.
+type ZonePart struct {
+	Zone string
+	Body []Part
+}
+
+// Render prints the answer: the body, then each other zone in a template
+// that names it.
+func (f Fragment) Render() string {
+	var b strings.Builder
+	for _, p := range f.Body {
+		b.WriteString(p.Render())
+	}
+	for _, z := range f.Extra {
+		b.WriteString(`<template data-tc-zone="` + html.EscapeString(z.Zone) + `">`)
+		for _, p := range z.Body {
+			b.WriteString(p.Render())
+		}
+		b.WriteString(`</template>`)
+	}
+	return b.String()
 }
 
 // Render prints the document.
@@ -57,7 +123,7 @@ func (d Document) Render() (string, error) {
 		lang = "en"
 	}
 	var b strings.Builder
-	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript><head><meta charset="utf-8">` +
+	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.Zones.attrs() + `><head><meta charset="utf-8">` +
 		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` +
 		`<script src="` + html.EscapeString(d.Assets.Theme) + `"></script>` +
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)

@@ -257,7 +257,7 @@ func (w SheetWidth) class() string {
 // Sheet — tc-sheet
 //
 // Роль. Лист поверх страницы: быстрая запись, перенос, выбор, подтверждение — одно дело и выход из него.
-// Вход. Sheet{Icon, Tone, Title, Head, Body, Flush, Foot, Width, Action, Method, Fields, ID}.
+// Вход. Sheet{Icon, Tone, Title, Head, Body, Flush, Foot, Width, Action, Method, Fields, ID, Target}.
 // Состояния. plain | icon | close | danger | pick.
 // Инварианты. Заголовок — один, жирным; главная кнопка — первой в подвале, отмена — в конце; ширина — перечисление; лист печатает фрагмент своего кадра.
 // Поведение. Esc закрывает лист и возвращает фокус тому, что его открыло; Enter делает главное.
@@ -280,6 +280,10 @@ type Sheet struct {
 	Method string
 	Fields []Hidden
 	ID     string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the sheet.
@@ -290,7 +294,7 @@ func (h Sheet) html(m mix) string {
 	tag := "div"
 	if h.Action != "" {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + attr("action", h.Action) + ` method="` + method(h.Method) + `" role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `>`)
+		s.WriteString(`<form` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + attr("action", h.Action) + ` method="` + method(h.Method) + `"` + attr("data-tc-target", h.Target) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `>`)
 		for _, f := range h.Fields {
 			s.WriteString(f.html(nil))
 		}
@@ -345,7 +349,7 @@ func (p ScrimPad) class() string {
 // Scrim — tc-scrim
 //
 // Роль. Затемнение страницы под листом: страница видна, но недоступна, пока лист открыт.
-// Вход. Scrim{Content, Pad, ID, Closed, Drop}.
+// Вход. Scrim{Content, Pad, ID, Closed, Drop, Zone}.
 // Состояния. plain | pad.
 // Инварианты. На затемнении одно: лист или пустое состояние; отступ сверху — перечисление; затемнение печатает фрагмент своего кадра.
 // Поведение. Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте.
@@ -361,13 +365,17 @@ type Scrim struct {
 	// with: the library's script shows the scrim while a file is dragged over
 	// the page and sends the form on the drop.
 	Drop string
+	// Zone is the name the consumer gives this area of the page: the live
+	// layer puts an answer for that name here (Carrel's task 84). The library
+	// has no names of its own.
+	Zone string
 }
 
 // Render prints the scrim.
 func (c Scrim) Render() string { return c.html(nil) }
 
 func (c Scrim) html(m mix) string {
-	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + attr("id", c.ID) + flag("hidden", c.Closed) + attr("data-tc-drop", c.Drop) + `>`
+	s := `<div` + class(m, "tc-scrim", c.Pad.class()) + attr("id", c.ID) + attr("data-tc-zone", c.Zone) + flag("hidden", c.Closed) + attr("data-tc-drop", c.Drop) + `>`
 	if c.Content != nil {
 		s += c.Content.html(nil)
 	}

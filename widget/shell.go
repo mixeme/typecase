@@ -117,7 +117,7 @@ func (v MainVariant) class() string {
 // Main — tc-main
 //
 // Роль. Страница в середине оболочки: шапка, бар, списки по группам, формы, документ.
-// Вход. Main{Items, Variant, ID}.
+// Вход. Main{Items, Variant, ID, Zone}.
 // Состояния. plain | groups | zone | variant | phone.
 // Инварианты. Страница прокручивается сама, оболочка — нет; порядок — шапка, бар, содержимое; страница печатает фрагмент своего кадра.
 // Поведение. нет: поведение у того, что в ней.
@@ -128,6 +128,10 @@ type Main struct {
 	Items   []MainPart
 	Variant MainVariant
 	ID      string // what a link with Swap names: the column it puts in place
+	// Zone is the name the consumer gives this area of the page: the live
+	// layer puts an answer for that name here (Carrel's task 84). The library
+	// has no names of its own.
+	Zone string
 }
 
 // Render prints the page.
@@ -135,7 +139,7 @@ func (p Main) Render() string { return p.html(nil) }
 
 func (p Main) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + attr("id", p.ID) + `>`)
+	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + attr("id", p.ID) + attr("data-tc-zone", p.Zone) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -186,7 +190,7 @@ func (v SideVariant) class() string {
 // Side — tc-side
 //
 // Роль. Панель справа: подробности выбранной строки, её поля и действия.
-// Вход. Side{Items, Variant}.
+// Вход. Side{Items, Variant, Zone}.
 // Состояния. plain | acts | drop | zone.
 // Инварианты. Ширина — токен оболочки, а не свойство панели; панель закрывается крестиком шапки; панель печатает фрагмент своего кадра.
 // Поведение. Esc закрывает панель и возвращает фокус строке, которая её открыла.
@@ -196,6 +200,10 @@ func (v SideVariant) class() string {
 type Side struct {
 	Items   []SidePart
 	Variant SideVariant
+	// Zone is the name the consumer gives this area of the page: the live
+	// layer puts an answer for that name here (Carrel's task 84). The library
+	// has no names of its own.
+	Zone string
 }
 
 // Render prints the panel.
@@ -203,7 +211,7 @@ func (p Side) Render() string { return p.html(nil) }
 
 func (p Side) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + `>`)
+	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + attr("data-tc-zone", p.Zone) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}

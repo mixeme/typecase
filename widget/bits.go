@@ -265,7 +265,7 @@ func (Drop) runbarPart() {}
 // Runbar — tc-runbar
 //
 // Роль. Ход опроса над списком: шкала, что опрошено, что не ответило, когда, остановить.
-// Вход. Runbar{Meter, Parts, Failed, Progress, Saving}.
+// Вход. Runbar{Meter, Parts, Failed, Progress, Saving, Zone}.
 // Состояния. plain | failed | stop.
 // Инварианты. Шкала — первой; неответившее — кнопкой «N did not answer» с меню отказов (Drop, MenuRefusal), где каждый расписан полностью; строка печатает фрагмент своего кадра.
 // Поведение. «Stop» прерывает опрос.
@@ -281,6 +281,10 @@ type Runbar struct {
 	// «3.2 of 24 MB» into the line's Mono. Saving draws it as during Save.
 	Progress string
 	Saving   bool
+	// Zone is the name the consumer gives this area of the page: the live
+	// layer puts an answer for that name here (Carrel's task 84). The library
+	// has no names of its own.
+	Zone string
 }
 
 // Render prints the line.
@@ -288,7 +292,7 @@ func (r Runbar) Render() string { return r.html(nil) }
 
 func (r Runbar) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
+	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-zone", r.Zone) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
 	for _, p := range r.Parts {
 		s.WriteString(p.html(nil))
 	}
@@ -308,7 +312,7 @@ type QueueItem struct {
 // Queue — tc-queue
 //
 // Роль. Очередь загрузки: что грузится, сколько, что не вышло и что с ним сделать.
-// Вход. Queue{Title, Total, Toggle, Items, Min, Variant}.
+// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone}.
 // Состояния. min | flush.
 // Инварианты. Заголовок — сколько из скольких; ошибка — словами у файла, а не общей плашкой; очередь печатает фрагмент своего кадра.
 // Поведение. «Hide» сворачивает очередь в строку, «Show» разворачивает.
@@ -322,6 +326,10 @@ type Queue struct {
 	Items   []QueueItem
 	Min     bool // folded to its head
 	Variant QueueVariant
+	// Zone is the name the consumer gives this area of the page: the live
+	// layer puts an answer for that name here (Carrel's task 84). The library
+	// has no names of its own.
+	Zone string
 }
 
 // QueueVariant is where a queue stands.
@@ -342,7 +350,7 @@ func (q Queue) Render() string { return q.html(nil) }
 
 func (q Queue) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + `><div class="tc-queue__head"><b>` + esc(q.Title) + `</b>` +
+	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + attr("data-tc-zone", q.Zone) + `><div class="tc-queue__head"><b>` + esc(q.Title) + `</b>` +
 		q.Total.html(nil) + q.Toggle.html(nil) + `</div>`)
 	if len(q.Items) > 0 {
 		s.WriteString(`<ul class="tc-queue__list">`)
