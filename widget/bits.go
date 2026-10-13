@@ -325,7 +325,7 @@ type QueueItem struct {
 // Queue — tc-queue
 //
 // Роль. Очередь загрузки: что грузится, сколько, что не вышло и что с ним сделать.
-// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone}.
+// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone, Progress, Row}.
 // Состояния. min | flush.
 // Инварианты. Заголовок — сколько из скольких; ошибка — словами у файла, а не общей плашкой; очередь печатает фрагмент своего кадра.
 // Поведение. «Hide» сворачивает очередь в строку, «Show» разворачивает.
@@ -343,6 +343,16 @@ type Queue struct {
 	// layer puts an answer for that name here (Carrel's task 84). The library
 	// has no names of its own.
 	Zone string
+	// Progress is the ID of the form whose upload the queue shows, with the
+	// library's live layer (Carrel's task 88): sent with files, the form
+	// goes in place, the queue shows, every file gets a row printed from
+	// Row, and the rows' meters move. The words in braces are the queue's:
+	// «{name}», «{size}» and «{percent}» in a row; «{count}», «{done}»,
+	// «{sent}» and «{total}» in the title and the total. A queue that has a
+	// Progress and no Items waits hidden. Without the layer the form loads
+	// its answer, and the queue is what the server printed.
+	Progress string
+	Row      *QueueItem
 }
 
 // QueueVariant is where a queue stands.
@@ -363,33 +373,43 @@ func (q Queue) Render() string { return q.html(nil) }
 
 func (q Queue) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + attr("data-tc-zone", q.Zone) + `><div class="tc-queue__head"><b>` + esc(q.Title) + `</b>` +
+	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + attr("data-tc-zone", q.Zone) + attr("data-tc-progress", q.Progress) +
+		flag("hidden", q.Progress != "" && len(q.Items) == 0) + `><div class="tc-queue__head"><b>` + esc(q.Title) + `</b>` +
 		q.Total.html(nil) + q.Toggle.html(nil) + `</div>`)
-	if len(q.Items) > 0 {
+	if q.Row != nil {
+		s.WriteString(`<template data-tc-row>` + q.Row.html() + `</template>`)
+	}
+	if len(q.Items) > 0 || q.Row != nil {
 		s.WriteString(`<ul class="tc-queue__list">`)
 		for _, it := range q.Items {
-			s.WriteString(`<li><div class="tc-queue__row">`)
-			if it.Failed {
-				s.WriteString(`<span class="tc-dim--danger">` + esc(it.Name) + `</span><span class="tc-dim--danger">` + esc(it.Meta) + `</span>`)
-			} else {
-				s.WriteString(`<span class="tc-queue__name">` + esc(it.Name) + `</span><span class="tc-queue__meta">` + esc(it.Meta) + `</span>`)
-			}
-			s.WriteString(`</div>`)
-			if it.Meter != nil {
-				s.WriteString(it.Meter.html(nil))
-			}
-			if len(it.Acts) > 0 {
-				s.WriteString(`<div class="tc-line tc-line--gap-6 tc-queue__acts">`)
-				for _, b := range it.Acts {
-					s.WriteString(b.html(nil))
-				}
-				s.WriteString(`</div>`)
-			}
-			s.WriteString(`</li>`)
+			s.WriteString(it.html())
 		}
 		s.WriteString(`</ul>`)
 	}
 	s.WriteString(`</div>`)
+	return s.String()
+}
+
+func (it QueueItem) html() string {
+	var s strings.Builder
+	s.WriteString(`<li><div class="tc-queue__row">`)
+	if it.Failed {
+		s.WriteString(`<span class="tc-dim--danger">` + esc(it.Name) + `</span><span class="tc-dim--danger">` + esc(it.Meta) + `</span>`)
+	} else {
+		s.WriteString(`<span class="tc-queue__name">` + esc(it.Name) + `</span><span class="tc-queue__meta">` + esc(it.Meta) + `</span>`)
+	}
+	s.WriteString(`</div>`)
+	if it.Meter != nil {
+		s.WriteString(it.Meter.html(nil))
+	}
+	if len(it.Acts) > 0 {
+		s.WriteString(`<div class="tc-line tc-line--gap-6 tc-queue__acts">`)
+		for _, b := range it.Acts {
+			s.WriteString(b.html(nil))
+		}
+		s.WriteString(`</div>`)
+	}
+	s.WriteString(`</li>`)
 	return s.String()
 }
 

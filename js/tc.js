@@ -601,11 +601,49 @@
 			return;
 		}
 		hide(sheet);
-		var form = document.getElementById(sheet.getAttribute("data-tc-drop"));
-		var input = form && form.querySelector('input[type="file"]');
-		if (!input || !e.dataTransfer.files.length) return;
-		input.files = e.dataTransfer.files;
-		form.submit();
+		give(document.getElementById(sheet.getAttribute("data-tc-drop")), e.dataTransfer.files);
+	}
+
+	// A file that was dropped or came from the clipboard goes into the file
+	// field of the form named, as a file picked there: a field that keeps
+	// its files for Save shows them in its list, any other sends its form —
+	// by its submit event, so that the live layer can send it in place.
+	function give(form, files) {
+		var input =
+			form &&
+			Array.prototype.filter.call(form.elements, function (x) {
+				return x.type === "file";
+			})[0];
+		if (!input || !files || !files.length) return false;
+		try {
+			input.files = files;
+		} catch (err) {
+			return false;
+		}
+		if (input.classList.contains("tc-file")) input.dispatchEvent(new Event("change", { bubbles: true }));
+		else if (form.requestSubmit) form.requestSubmit();
+		else form.submit();
+		return true;
+	}
+
+	// A file pasted from the clipboard (Carrel's task 88). Outside a field it
+	// goes where a dropped one would: to the form of the page's drop sheet.
+	// In a field it is taken only by a text that names a form (data-tc-paste,
+	// Area.Attach) and only when the clipboard has no words — a picture
+	// becomes an attachment; anything else is the browser's paste.
+	function onPaste(e) {
+		var clip = e.clipboardData;
+		if (!clip || !clip.files || !clip.files.length) return;
+		var field = closest(e.target, "input, textarea, select, [contenteditable]");
+		var id = "";
+		if (field) {
+			if (Array.prototype.indexOf.call(clip.types || [], "text/plain") >= 0) return;
+			id = field.getAttribute("data-tc-paste");
+		} else {
+			var sheet = dropSheet();
+			id = sheet && sheet.getAttribute("data-tc-drop");
+		}
+		if (id && give(document.getElementById(id), clip.files)) e.preventDefault();
 	}
 
 	// The items of a form menu are sent in their order (Columns): the handle
@@ -884,12 +922,25 @@
 		});
 	}
 
+	// The words in braces a template was printed with («{name}») become
+	// what they name; the text as printed is remembered, so that words that
+	// change — how far an upload went — are written again.
+	var worded = new WeakMap();
+
 	function fillWords(el, words) {
 		var walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
 		for (var n = walk.nextNode(); n; n = walk.nextNode()) {
+			var was = worded.get(n);
+			if (was === undefined) {
+				if (n.nodeValue.indexOf("{") < 0) continue;
+				was = n.nodeValue;
+				worded.set(n, was);
+			}
+			var now = was;
 			Object.keys(words).forEach(function (k) {
-				if (n.nodeValue.indexOf(k) >= 0) n.nodeValue = n.nodeValue.split(k).join(words[k]);
+				now = now.split(k).join(words[k]);
 			});
+			if (now !== n.nodeValue) n.nodeValue = now;
 		}
 	}
 
@@ -1156,6 +1207,7 @@
 		document.addEventListener(t, onDrag);
 	});
 	document.addEventListener("keydown", onKeydown);
+	document.addEventListener("paste", onPaste);
 	// Enter in a tag field's typing line chooses, it never sends the edit —
 	// on keypress too, where implicit submission happens.
 	document.addEventListener("keypress", function (e) {
@@ -1179,6 +1231,8 @@
 			return pop && menuIn(pop);
 		},
 		showMenu: showMenu,
+		fillWords: fillWords,
+		fileSize: fileSize,
 		closeMenu: function (trigger) {
 			if (openTrigger === trigger) closeMenu(false);
 		}

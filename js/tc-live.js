@@ -49,41 +49,105 @@
 		if (t.classList && t.classList.contains("tc-in__add") && t.hasAttribute("list") && t.closest("[data-tc-suggest]")) t.removeAttribute("list");
 	});
 
-	// An edit's Save that sends files shows how far it went (the owner's
-	// decision of 02.10): the line naming the form (data-tc-progress) shows,
-	// its meter moves, its Mono says «3.2 of 24 MB»; the answer is the page the
-	// server sends, as a plain Save would have it.
-	document.addEventListener("submit", function (e) {
-		var form = e.target;
-		if (e.defaultPrevented || !form.id || !window.FormData || !window.XMLHttpRequest) return;
-		var line = document.querySelector('[data-tc-progress="' + form.id + '"]');
-		if (!line) return;
-		var data = new FormData(form, e.submitter || undefined);
-		var files = false;
-		data.forEach(function (v) {
-			if (v && typeof v === "object" && v.size) files = true;
+	// A form that sends files goes from the page when a line shows how far
+	// it went or its answer is a part of the page. The line naming the form
+	// (data-tc-progress) shows: a run's line moves its meter and its Mono
+	// says «3.2 of 24 MB» (an edit's Save, the owner's decision of 02.10); a
+	// queue gets a row for every file from its template, and the rows' meters
+	// and words move (Carrel's task 88). A form whose target is a zone asks as
+	// any form of a zone does, and its answer is put into the zones; any
+	// other answer is the page the server sends, as a plain send would have it.
+	function queued(queue, files) {
+		var tpl = queue.querySelector(":scope > template[data-tc-row]"), list = queue.querySelector(":scope > .tc-queue__list");
+		var head = queue.querySelector(":scope > .tc-queue__head"), total = 0, rows = [];
+		files.forEach(function (f) {
+			total += f.size;
+			if (!tpl || !list || !tpl.content.firstElementChild) return;
+			var row = tpl.content.firstElementChild.cloneNode(true);
+			list.appendChild(row);
+			rows.push({ el: row, size: f.size, name: f.webkitRelativePath || f.name });
 		});
-		if (!files) return;
+		return function (part) {
+			var sent = part * total, before = 0, done = 0;
+			rows.forEach(function (r) {
+				var p = r.size ? Math.max(0, Math.min(1, (sent - before) / r.size)) : 1;
+				before += r.size;
+				if (p >= 1) done++;
+				var pc = Math.round(p * 100);
+				tc.fillWords(r.el, { "{name}": r.name, "{size}": tc.fileSize(r.size), "{percent}": pc });
+				var bar = r.el.querySelector(".tc-meter__bar");
+				if (bar) {
+					bar.style.setProperty("--tc-width", pc + "%");
+					bar.setAttribute("aria-valuenow", pc);
+				}
+			});
+			if (head) tc.fillWords(head, { "{count}": files.length, "{done}": done, "{sent}": tc.fileSize(Math.round(sent)), "{total}": tc.fileSize(total) });
+		};
+	}
+
+	document.addEventListener("submit", function (e) {
+		var form = e.target, by = e.submitter || null;
+		if (e.defaultPrevented || sentPlain || !window.FormData || !window.XMLHttpRequest) return;
+		var line = form.id ? document.querySelector('[data-tc-progress="' + form.id + '"]') : null;
+		var action = (by && by.getAttribute("formaction")) || form.action;
+		var target = targetOf(by) || targetOf(form), zone = target ? zoneOf(target) : null;
+		if (zone && (!shows(zone) || !sameSite(action))) zone = null;
+		if (!line && !zone) return;
+		var data = new FormData(form, by || undefined);
+		var files = [];
+		data.forEach(function (v) {
+			if (v && typeof v === "object" && v.size) files.push(v);
+		});
+		if (!files.length) return;
 		e.preventDefault();
-		var bar = line.querySelector(".tc-meter__bar"), words = line.querySelector(".tc-mono");
-		line.hidden = false;
-		Array.prototype.forEach.call(document.querySelectorAll('[form="' + form.id + '"], #' + form.id + ' [type="submit"]'), function (b) {
+		var url = new URL(action, location.href).href;
+		var queue = line && line.classList.contains("tc-queue") ? queued(line, files) : null;
+		var bar = line && !queue && line.querySelector(".tc-meter__bar"), words = line && !queue && line.querySelector(".tc-mono");
+		if (line) {
+			line.hidden = false;
+			line.style.display = "";
+		}
+		if (queue) queue(0);
+		var buttons = Array.prototype.filter.call(document.querySelectorAll('[form="' + form.id + '"], [type="submit"]'), function (b) {
+			return b.form === form && !b.disabled;
+		});
+		buttons.forEach(function (b) {
 			b.disabled = true;
 		});
 		var mb = function (b) {
 			return (b / 1024 / 1024).toFixed(1);
 		};
 		var x = new XMLHttpRequest();
-		x.open((form.getAttribute("method") || "get").toUpperCase(), (e.submitter && e.submitter.getAttribute("formaction")) || form.action);
+		x.open((form.getAttribute("method") || "get").toUpperCase(), url);
+		if (zone) {
+			var heads = headers(target, data);
+			Object.keys(heads).forEach(function (k) {
+				x.setRequestHeader(k, heads[k]);
+			});
+		}
 		x.upload.onprogress = function (p) {
 			if (!p.lengthComputable) return;
+			if (queue) queue(p.loaded / p.total);
 			if (bar) bar.style.width = Math.round((p.loaded / p.total) * 100) + "%";
 			if (words) words.textContent = mb(p.loaded) + " of " + mb(p.total) + " MB";
 		};
 		x.onload = function () {
-			if (x.responseURL && x.responseURL !== form.action) {
+			if (x.responseURL && x.responseURL !== url) {
 				location.assign(x.responseURL);
 				return;
+			}
+			var type = x.getResponseHeader("Content-Type") || "";
+			if (zone && x.status >= 200 && x.status < 300 && type.indexOf("text/html") === 0) {
+				// the files are sent: the form is as it was, for the next ones
+				if (queue) queue(1);
+				buttons.forEach(function (b) {
+					b.disabled = false;
+				});
+				Array.prototype.forEach.call(form.elements, function (f) {
+					if (f.type === "file") f.value = "";
+				});
+				if (line && !queue) line.hidden = true;
+				if (put(target, x.responseText)) return;
 			}
 			document.open();
 			document.write(x.responseText);
@@ -234,14 +298,20 @@
 		return true;
 	}
 
-	function ask(url, method, body, target, plain, then) {
-		var headers = { Accept: "text/html" };
+	// What a request for a part of the page says: that a part is wanted,
+	// which zone, and the form's token in the header the document names.
+	function headers(target, body) {
+		var h = { Accept: "text/html" };
 		var view = doc.getAttribute("data-tc-view-header"), zoneHeader = doc.getAttribute("data-tc-target-header");
-		if (view) headers[view] = doc.getAttribute("data-tc-view-value") || "1";
-		if (zoneHeader) headers[zoneHeader] = target;
+		if (view) h[view] = doc.getAttribute("data-tc-view-value") || "1";
+		if (zoneHeader) h[zoneHeader] = target;
 		var field = doc.getAttribute("data-tc-token-field"), tokenHeader = doc.getAttribute("data-tc-token-header");
-		if (body && field && tokenHeader && body.get(field)) headers[tokenHeader] = body.get(field);
-		fetch(url, { method: method, body: body || undefined, headers: headers, credentials: "same-origin" })
+		if (body && field && tokenHeader && body.get(field)) h[tokenHeader] = body.get(field);
+		return h;
+	}
+
+	function ask(url, method, body, target, plain, then) {
+		fetch(url, { method: method, body: body || undefined, headers: headers(target, body), credentials: "same-origin" })
 			.then(function (r) {
 				var type = r.headers.get("Content-Type") || "";
 				if (!r.ok || r.redirected || type.indexOf("text/html") !== 0) throw new Error("not a part");
@@ -372,7 +442,7 @@
 		data.forEach(function (v) {
 			if (v && typeof v === "object" && v.size) files = true;
 		});
-		if (files) return; // a form that sends files shows its progress and loads the answer whole
+		if (files) return; // a form that sends files is sent above, or loads its answer whole
 		e.preventDefault();
 		var url = new URL(action, location.href), body = data;
 		if (method === "GET") {

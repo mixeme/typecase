@@ -622,7 +622,7 @@ func multipart(form string) string {
 // PostForm — tc-post
 //
 // Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).
-// Вход. PostForm{ID, Action, Fields, File}.
+// Вход. PostForm{ID, Action, Fields, File, Target}.
 // Состояния. default.
 // Инварианты. Форму не видно: в ней только скрытые поля; форма печатает фрагмент своего кадра.
 // Поведение. Отправку делает браузер — сценарий не нужен.
@@ -634,6 +634,10 @@ type PostForm struct {
 	Action string
 	Fields []Hidden
 	File   string // the name of a file field: the form a dropped file is sent with
+	// Target is the name of the zone the form asks its address for with the
+	// live layer, instead of loading the page (Carrel's task 84): a dropped
+	// or pasted file goes in place, its answer into the zones (task 88).
+	Target string
 }
 
 // Render prints the form.
@@ -641,7 +645,7 @@ func (f PostForm) Render() string { return f.html(nil) }
 
 func (f PostForm) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post"` + attr("enctype", pick(f.File != "", "multipart/form-data")) + `>`)
+	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post"` + attr("enctype", pick(f.File != "", "multipart/form-data")) + attr("data-tc-target", f.Target) + `>`)
 	for _, h := range f.Fields {
 		s.WriteString(h.html(nil))
 	}

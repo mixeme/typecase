@@ -356,7 +356,7 @@ func TestAddRowAndDrop(t *testing.T) {
 		chromedp.Evaluate(`[...document.querySelectorAll("form.tc-form input")].map(i => i.name).join(",")`, &names),
 		chromedp.Evaluate(`(() => {
 			window.__sent = false;
-			HTMLFormElement.prototype.submit = function () { window.__sent = this.id === "post-import" && this.querySelector("input[type=file]").files.length === 1; };
+			document.addEventListener("submit", e => { e.preventDefault(); window.__sent = e.target.id === "post-import" && e.target.querySelector("input[type=file]").files.length === 1; });
 			const dt = new DataTransfer();
 			dt.items.add(new File(["BEGIN:VCARD"], "a.vcf"));
 			document.dispatchEvent(new DragEvent("dragenter", {dataTransfer: dt, bubbles: true, cancelable: true}));
@@ -1889,5 +1889,72 @@ func TestShortcuts(t *testing.T) {
 	}
 	if walked != "Two,Three,Two,One,One" {
 		t.Errorf("the arrows in a list: %s; want Two,Three,Two,One,One", walked)
+	}
+}
+
+// TestPasteAndQueue (Carrel's task 88): a picture pasted into a text that
+// names a form becomes a file of that form's field — words are pasted as
+// words; files pasted outside a field go where dropped ones would, to the
+// form of the drop sheet. That form, whose target is a zone, is sent from
+// the page: the queue naming it shows a row for every file, and the answer
+// is put into the zone. Without the layer the form loads its answer.
+func TestPasteAndQueue(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	up := h.RegisterStream("upload", func(rw http.ResponseWriter, r *http.Request) {
+		var names []string
+		if err := r.ParseMultipartForm(1 << 20); err == nil {
+			for _, f := range r.MultipartForm.File["file"] {
+				names = append(names, f.Filename)
+			}
+		}
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		fmt.Fprint(rw, page.Fragment{Body: []page.Part{zonePart(`<p class="got">` + strings.Join(names, ",") + " " + r.Header.Get("X-Target") + `</p>`)}}.Render())
+	})
+	queue := w.Queue{Zone: "queue", Progress: "up", Title: "Uploading {count}", Total: w.Mono{Text: "{total}"}, Toggle: w.Button{Label: "Hide", Small: true},
+		Row: &w.QueueItem{Name: "{name}", Meta: "{size} · {percent}%", Meter: &w.Meter{Track: 100}}}
+	body := `<div class="tc-root">` + w.Area{Name: "text", Label: "Text", Attach: "edit"}.Render() +
+		`<form id="edit" action="/x" method="post"></form>` + w.Button{Label: "Attach", File: &w.FileField{Name: "att", Form: "edit"}}.Render() +
+		w.PostForm{ID: "up", Action: up, File: "file", Target: "main"}.Render() +
+		w.Scrim{ID: "drop", Closed: true, Drop: "up", Content: w.Sheet{Title: "Drop to upload"}}.Render() + queue.Render() +
+		`<div data-tc-zone="main"><p>old</p></div></div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`, `data-tc-noscript data-tc-target-header="X-Target">`, 1)
+	const prep = `(() => { window.__kept = true; document.addEventListener("submit", e => { if (e.target.id === "edit") e.preventDefault(); }, true);
+		window.__paste = (at, names, words) => { const dt = new DataTransfer(); names.forEach(n => dt.items.add(new File(["abc"], n))); if (words) dt.setData("text/plain", words);
+			const ev = new ClipboardEvent("paste", {clipboardData: dt, bubbles: true, cancelable: true}); at.dispatchEvent(ev);
+			return (ev.defaultPrevented ? "taken" : "left") + " " + [...document.querySelector('input[form="edit"]').files].map(f => f.name).join(",") }; return true })()`
+	const state = `(() => { const q = document.querySelector(".tc-queue"); return document.querySelector('[data-tc-zone="main"]').textContent.trim() + " | " + (q.getClientRects().length ? "shown" : "hidden") + " " +
+		q.querySelector(".tc-queue__head").textContent.trim() + " | " + [...q.querySelectorAll("li")].map(l => l.textContent.trim() + " " + l.querySelector(".tc-meter__bar").getAttribute("aria-valuenow")).join(",") + " | " + (window.__kept ? "kept" : "loaded") })()`
+	var words, picture, before, after, bare string
+	if err := h.Run(h.RegisterPage("paste", doc), 900, 600,
+		chromedp.Evaluate(prep, nil),
+		chromedp.Evaluate(`__paste(document.querySelector("textarea"), ["p.png"], "hello")`, &words),
+		chromedp.Evaluate(`__paste(document.querySelector("textarea"), ["p.png"])`, &picture),
+		chromedp.Evaluate(state, &before),
+		chromedp.Evaluate(`__paste(document.body, ["a.txt", "b.txt"]); true`, nil),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(state, &after),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if words != "left " || picture != "taken p.png" {
+		t.Errorf("pasted into the text: with words %q, a picture alone %q; want «left », «taken p.png»", words, picture)
+	}
+	if before != "old | hidden Uploading {count}{total}Hide |  | kept" {
+		t.Errorf("before an upload: %s; want the queue hidden and empty", before)
+	}
+	if after != "a.txt,b.txt main | shown Uploading 26 BHide | a.txt3 B · 100% 100,b.txt3 B · 100% 100 | kept" {
+		t.Errorf("after files pasted outside a field: %s; want the answer in the zone, the queue shown with two rows done, the page kept", after)
+	}
+	if err := h.Run(h.RegisterPage("paste-bare", strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1)), 900, 600,
+		chromedp.Evaluate(prep, nil),
+		chromedp.Evaluate(`__paste(document.body, ["a.txt"]); true`, nil),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(`document.body.textContent.trim() + " | " + (window.__kept ? "kept" : "loaded")`, &bare),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if bare != "a.txt | loaded" {
+		t.Errorf("without the layer: %q; want the answer loaded as a page", bare)
 	}
 }

@@ -382,7 +382,7 @@ func (v AreaVariant) class() string {
 // Area — tc-in
 //
 // Роль. Многострочное поле: примечание к записи, текст документа, заголовок, который растёт.
-// Вход. Area{Name, Text, Variant, Mono, Focus, Label}.
+// Вход. Area{Name, Text, Variant, Mono, Focus, Label, Attach}.
 // Состояния. plain | title | body | letter | paste | tall | focus.
 // Инварианты. Текст — как есть, с переводами строк; поле растёт по содержимому, а не прокручивается внутри; поле печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера.
@@ -396,6 +396,11 @@ type Area struct {
 	Mono    bool
 	Focus   bool
 	Label   string
+	// Attach is the ID of the form whose file field takes a picture pasted
+	// into the text, with the library's script (Carrel's task 88): it
+	// becomes an attachment, as a file picked there. Words are pasted as
+	// words; without a script nothing is taken.
+	Attach string
 }
 
 // Render prints the text area.
@@ -403,5 +408,5 @@ func (a Area) Render() string { return a.html(nil) }
 
 func (a Area) html(m mix) string {
 	return `<textarea` + class(m, "tc-in", a.Variant.class(), is("mono", a.Mono), is("focus", a.Focus)) +
-		attr("name", a.Name) + attr("aria-label", a.Label) + `>` + esc(a.Text) + `</textarea>`
+		attr("name", a.Name) + attr("aria-label", a.Label) + attr("data-tc-paste", a.Attach) + `>` + esc(a.Text) + `</textarea>`
 }

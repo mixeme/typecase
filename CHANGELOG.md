@@ -48,6 +48,24 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **A pasted file, and an upload that stays on the page** (Carrel's task
+  88, without the drop on a folder). `Area.Attach` names the form whose
+  file field takes a picture pasted into the text — it becomes a file
+  picked there; words are pasted as words. Files pasted outside a field go
+  where dropped ones would: to the form of the page's drop sheet
+  (`Scrim.Drop`). A dropped or pasted file now sends its form by the
+  form's submit event (`requestSubmit`), so the live layer can take it.
+  `PostForm.Target` names the zone such a form asks for: with the live
+  layer a form that sends files and has a target goes from the page — the
+  same headers as any form of a zone — and its answer is put into the
+  zones. `Queue.Progress` names the form whose upload the queue shows and
+  `Queue.Row` is the row every file gets: the words «{name}», «{size}»,
+  «{percent}» in the row and «{count}», «{done}», «{sent}», «{total}» in
+  the title and the total are written as the upload goes, and the rows'
+  meters move. A queue with a `Progress` and no `Items` is printed hidden.
+  One request carries all the files, so a row's share is counted from the
+  bytes sent so far. Without the layer the form loads its answer.
+  `TestPasteAndQueue`.
 - **Shortcuts are data** (Carrel's task 87). `Button.Key`, `MenuItem.Key`
   and `Query.Key` name the key that presses the button or the item, or puts
   the focus into the search line (`data-tc-key`: «n», «/», «?», «Ctrl+S»,
