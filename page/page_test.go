@@ -63,6 +63,19 @@ func TestZones(t *testing.T) {
 	if got := (page.Fragment{}).Render(); got != "" {
 		t.Errorf("an empty fragment prints %q", got)
 	}
+	shell := w.Shell{Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Label: "Tasks", Href: "/tasks"}}}}, RailZoneName: "rail", RailTarget: "main",
+		Main: w.Main{Zone: "main", Target: "panel"}, Side: &w.Side{Zone: "panel", Closed: true}}}.Render()
+	for _, want := range []string{`class="tc-shell__rail" data-tc-zone="rail" data-tc-target="main"`, `class="tc-main" data-tc-zone="main" data-tc-target="panel"`,
+		`class="tc-side" data-tc-zone="panel" hidden`, `<div class="tc-shell__body">`} {
+		if !strings.Contains(shell, want) {
+			t.Errorf("the shell has no %s: %s", want, shell)
+		}
+	}
+	// a message with its technical block, printed for a zone (task 83)
+	notice := page.Printed(w.PrintMain(w.Msg{Parts: []w.MsgPart{w.Text("Read from the copy")}}, w.MainDiag{Diag: w.Diag{Text: "GET /dav → 503"}})).Render()
+	if !strings.HasPrefix(notice, `<div class="tc-msg">Read from the copy</div><div class="tc-main__diag"><div class="tc-diag">`) {
+		t.Errorf("the notice: %s", notice)
+	}
 	nav := w.Nav{Target: "main", Items: []w.NavItem{{Label: "Tasks", Href: "/tasks"}}}.Render()
 	if !strings.Contains(nav, `class="tc-nav" data-tc-target="main"`) {
 		t.Errorf("the nav does not name its target: %s", nav)

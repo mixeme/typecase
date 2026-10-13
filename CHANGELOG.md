@@ -47,8 +47,20 @@ do, not what the authors did.
   the document names; the zone named in `Zones.Address` puts a link's
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
-  form. `TestZones` (browser and `page`). Not yet: the rail as a zone,
-  targets on the other widgets with links.
+  form. `TestZones` (browser and `page`).
+- **Zones, the rest** (Carrel's tasks 84 and 83). The rail is a zone:
+  `ShellBody.RailZoneName`, and `RailTarget` for its links. `Target` stands
+  on the areas too — `Main`, `Side`, `Top` — and on `Menu`, `Seg`, `Tree`,
+  `Table`, `Crumbs`: the nearest ancestor that names a target decides.
+  `Side.Closed` prints a panel that waits for its answer; the shell's body
+  makes room for a panel that arrives and takes it back when it is closed
+  or emptied. **A zone the mockup does not draw at this width is not
+  filled**: the side panel on a narrow screen — the link or form goes the
+  plain way, to the page that shows the thing whole. `widget.PrintMain`
+  prints parts of a page without the page, and `page.Printed` carries them
+  in a fragment: a message with its technical block (`MainDiag`) for a zone
+  of messages. Bars and heads that arrive later are watched for their width
+  as those of the first page are. `TestZonePanel`.
 - **A sheet that comes as an answer, and a Cancel that closes** (Carrel's
   task 84). `Scrim` with a `Zone` is the layer of sheets: a link or a form
   whose target is that zone gets the sheet as its answer, the sheet lies in

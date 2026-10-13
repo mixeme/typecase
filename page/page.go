@@ -78,6 +78,15 @@ func (z Zones) attrs() string {
 // Part is what an answer puts into a zone: a widget of the library.
 type Part interface{ Render() string }
 
+// Printed is what the library's widgets printed, as a part of an answer:
+// widget.PrintMain's result — parts of a page that are no widgets by
+// themselves, a message's technical block among them. It is not a door for
+// markup of the application's own.
+type Printed string
+
+// Render gives the printed parts back.
+func (p Printed) Render() string { return string(p) }
+
 // Fragment is the answer to a request for a part of a page: Body is what
 // goes into the zone that was asked for, Extra the other zones the answer
 // changes with it — the messages, the count in the rail. A widget that

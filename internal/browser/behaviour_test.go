@@ -1656,3 +1656,63 @@ func TestZoneSheet(t *testing.T) {
 		t.Errorf("after Cancel: %s; want closed on the same page, the link not followed", cancelled)
 	}
 }
+
+// TestZonePanel (Carrel's tasks 83 and 84): a row of a list whose target is
+// the side panel fills the panel that stood closed, and the shell's body
+// makes room for it; the answer brings a message with its technical block
+// into the zone of messages; the panel's «×» closes it without a request and
+// the room is taken back; an empty answer does the same.
+func TestZonePanel(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	panel := w.Side{Zone: "panel", Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Acts: &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close"}}}}}}
+	notice := page.Printed(w.PrintMain(w.Msg{Parts: []w.MsgPart{w.Text("Read from the copy")}}, w.MainDiag{Diag: w.Diag{Text: "GET /dav → 503"}}))
+	part := h.RegisterPage("panel-part", page.Fragment{Body: []page.Part{panel}, Extra: []page.ZonePart{{Zone: "notices", Body: []page.Part{notice}}}}.Render())
+	empty := h.RegisterPage("panel-empty", "")
+	list := w.List{Target: "panel", Rows: []w.ListRow{w.FaceRow{Title: []w.Inline{w.Text("Анна Ковалёва")}, Href: part}, w.FaceRow{Title: []w.Inline{w.Text("Вера Лебедева")}, Href: empty}}}
+	shell := w.Shell{Body: w.ShellBody{Main: w.Main{Zone: "main", Items: []w.MainPart{list}}, Side: &w.Side{Zone: "panel", Closed: true}}}
+	body := shell.Render() + `<div data-tc-zone="notices"></div>`
+	url := h.RegisterPage("panel-page", browser.PageHTML(body, ""))
+	const state = `(() => { const p = document.querySelector(".tc-side"), b = document.querySelector(".tc-shell__body"), n = document.querySelector('[data-tc-zone="notices"]');
+		return (p.getClientRects().length ? "open" : "closed") + " " + (b.classList.contains("tc-shell__body--side") ? "room" : "no room") + " | " + (n.querySelector(".tc-msg") ? "msg" : "-") + " " + (n.querySelector(".tc-main__diag .tc-diag") ? "diag" : "-") + " | " + (window.__asked || 0) })()`
+	const spy = `(() => { window.__asked = 0; const f = window.fetch; window.fetch = (u, o) => { window.__asked++; return f(u, o); }; return true })()`
+	var before, opened, closed, again, emptied string
+	if err := h.Run(url, 1500, 700,
+		chromedp.Evaluate(spy, nil),
+		chromedp.Evaluate(state, &before),
+		chromedp.Click(`.tc-row:nth-child(1)`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(state, &opened),
+		chromedp.Evaluate(`document.querySelector(".tc-side .tc-close").click(); true`, nil),
+		chromedp.Evaluate(state, &closed),
+		chromedp.Click(`.tc-row:nth-child(1)`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(state, &again),
+		chromedp.Click(`.tc-row:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(state, &emptied),
+	); err != nil {
+		t.Fatal(err)
+	}
+	// On a narrow screen the mockup does not draw the panel: the row's link
+	// loads its address, it does not fill a panel nobody sees.
+	var narrow string
+	if err := h.Run(url, 900, 700,
+		chromedp.Evaluate(spy, nil),
+		chromedp.Click(`.tc-row:nth-child(1)`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(`location.pathname.split("/").pop() + " " + (window.__asked === undefined ? "loaded" : "kept")`, &narrow),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if narrow != "panel-part loaded" {
+		t.Errorf("on a narrow screen: %s; want the page at the row's address", narrow)
+	}
+	for _, c := range [][3]string{{"as printed", before, "closed no room | - - | 0"}, {"after a row", opened, "open room | msg diag | 1"},
+		{"after «×»", closed, "closed no room | msg diag | 1"}, {"after the row again", again, "open room | msg diag | 2"},
+		{"after an empty answer", emptied, "closed no room | msg diag | 3"}} {
+		if c[1] != c[2] {
+			t.Errorf("%s: %s; want %s", c[0], c[1], c[2])
+		}
+	}
+}

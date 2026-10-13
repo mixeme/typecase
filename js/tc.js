@@ -1034,7 +1034,19 @@
 		true
 	);
 
+	// The bars, heads and shells whose width decides their layout are
+	// watched; what the live layer puts in later is watched too.
+	var sizes = null;
+
+	function watch(root) {
+		if (!sizes) return;
+		root.querySelectorAll(".tc-shell, .tc-bar, .tc-docbar, .tc-head").forEach(function (el) {
+			sizes.observe(el);
+		});
+	}
+
 	function init(root) {
+		watch(root);
 		initDynamic(root);
 		initPictures(root);
 		initMenus(root);
@@ -1062,16 +1074,10 @@
 		if (e.key === "Enter" && e.target.classList && e.target.classList.contains("tc-in__add")) e.preventDefault();
 	});
 	if (typeof ResizeObserver !== "undefined") {
-		var ro = new ResizeObserver(function () {
+		sizes = new ResizeObserver(function () {
 			layoutUpdates();
 		});
-		var observe = function () {
-			document.querySelectorAll(".tc-shell, .tc-bar, .tc-docbar, .tc-head").forEach(function (el) {
-				ro.observe(el);
-			});
-		};
-		if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe);
-		else observe();
+		if (document.readyState !== "loading") watch(document);
 	}
 	window.addEventListener("resize", layoutUpdates);
 

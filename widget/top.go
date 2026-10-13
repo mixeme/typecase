@@ -45,7 +45,7 @@ func (d TopDrop) html(mix) string {
 // Top — tc-top
 //
 // Роль. Верхняя полоса приложения: знак, поиск по всему, главные действия и учётная запись.
-// Вход. Top{Lead, Brand, Search, Suggest, Actions, Tight, Zone}.
+// Вход. Top{Lead, Brand, Search, Suggest, Actions, Tight, Zone, Target}.
 // Состояния. plain | phone | suggest | drop.
 // Инварианты. Знак — один и первый, после кнопки рейла на телефоне; действия — в конце полосы; полоса печатает фрагмент своего кадра.
 // Поведение. нет: поведение у поиска, кнопок и меню учётной записи.
@@ -63,6 +63,10 @@ type Top struct {
 	// layer puts an answer for that name here (Carrel's task 84). The library
 	// has no names of its own.
 	Zone string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the bar.
@@ -70,7 +74,7 @@ func (t Top) Render() string { return t.html(nil) }
 
 func (t Top) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-top") + attr("data-tc-zone", t.Zone) + `>`)
+	s.WriteString(`<div` + class(m, "tc-top") + attr("data-tc-zone", t.Zone) + attr("data-tc-target", t.Target) + `>`)
 	if t.Lead != nil {
 		s.WriteString(t.Lead.html(nil))
 	}

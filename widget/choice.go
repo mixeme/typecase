@@ -31,7 +31,7 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple, Swap}.
+// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple, Swap, Target}.
 // Состояния. default | start | compact | icons | radio | links | several.
 // Инварианты. Выбран ровно один вариант, у ряда флажков (Multiple) — любые; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
@@ -55,6 +55,10 @@ type Seg struct {
 	// Swap is Button.Swap for the options that are links: the width of a
 	// note's text changes in place with the live layer.
 	Swap string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the switch.
@@ -113,7 +117,7 @@ func (o SegOption) label() string {
 
 func (g Seg) seg(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
+	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + attr("data-tc-target", g.Target) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
 		if g.Name != "" {
 			kind := "radio"

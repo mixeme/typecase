@@ -223,7 +223,7 @@ type Crumb struct {
 // Crumbs — tc-crumbs
 //
 // Роль. Путь до открытой папки: шаги назад ссылками, где мы — жирным.
-// Вход. Crumbs{Path, Current, Aside}.
+// Вход. Crumbs{Path, Current, Aside, Target}.
 // Состояния. path | aside.
 // Инварианты. Последний шаг — не ссылка; путь печатает фрагмент своего кадра.
 // Поведение. Нажатие на шаг открывает ту папку.
@@ -234,6 +234,10 @@ type Crumbs struct {
 	Path    []Crumb
 	Current string
 	Aside   *Dim // what is in it: a count and a size
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the path.
@@ -241,7 +245,7 @@ func (c Crumbs) Render() string { return c.html(nil) }
 
 func (c Crumbs) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<nav` + class(m, "tc-crumbs") + `>`)
+	s.WriteString(`<nav` + class(m, "tc-crumbs") + attr("data-tc-target", c.Target) + `>`)
 	for _, p := range c.Path {
 		s.WriteString(`<a class="tc-crumbs__link"` + attr("href", p.Href) + `>` + esc(p.Label) + `</a>/`)
 	}

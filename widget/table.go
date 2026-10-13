@@ -211,7 +211,7 @@ func (v TableVariant) class() string {
 // Table — tc-table
 //
 // Роль. Таблица: файлы папки, строки мастера, задания копирования, устройства.
-// Вход. Table{Cols, Rows, Variant, Place}.
+// Вход. Table{Cols, Rows, Variant, Place, Target}.
 // Состояния. plain | head | picked | folder | off | acts | wide | fit.
 // Инварианты. Ширина и ранг колонки — перечисления, и ячейки колонки берут их из её заголовка; третья и четвёртая колонки уходят первыми на узком экране; таблица печатает фрагмент своего кадра.
 // Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню; имя со ссылкой (`TableFile.Href`) открывает строку.
@@ -223,6 +223,10 @@ type Table struct {
 	Rows    []TableRow
 	Variant TableVariant
 	Place   Place
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the table.
@@ -237,7 +241,7 @@ func (t Table) col(i int, c TableCell) TableCol {
 
 func (t Table) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<table` + class(m, "tc-table", t.Place.class(), t.Variant.class()) + `>`)
+	s.WriteString(`<table` + class(m, "tc-table", t.Place.class(), t.Variant.class()) + attr("data-tc-target", t.Target) + `>`)
 	if len(t.Cols) > 0 {
 		s.WriteString(`<thead><tr>`)
 		for _, c := range t.Cols {

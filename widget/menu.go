@@ -312,7 +312,7 @@ const (
 // Menu — tc-menu
 //
 // Роль. Меню: действия с записью, выбор значения, куда записать, подсказки поиска, настройка колонок.
-// Вход. Menu{Items, Width, Pop, Fields, Inline, Action, Hidden}.
+// Вход. Menu{Items, Width, Pop, Fields, Inline, Action, Hidden, Target}.
 // Состояния. on | icons | marks | danger | heading | pop | fields | found | form | radio.
 // Инварианты. Пункт — кнопка с ролью пункта меню; ширина и место — перечисления; меню печатает фрагмент своего кадра.
 // Поведение. Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла; строка поиска оставляет пункты, где есть набранное (без сценария её нет).
@@ -329,6 +329,10 @@ type Menu struct {
 	// its hidden Fields: the choice of columns.
 	Action string
 	Hidden []Hidden
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the menu.
@@ -348,7 +352,7 @@ func (u Menu) shown(m mix, open bool) string {
 		form = attr("action", u.Action) + ` method="post"`
 	}
 	var s strings.Builder
-	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + form + ` role="menu"` + flag("hidden", !open) + `>`)
+	s.WriteString(`<` + tag + class(m, "tc-menu", is("pop", u.Pop != MenuInPlace), is("right", u.Pop == MenuUnderEnd), u.Width.class(), pick(u.Fields, "tc-menu--fields")) + form + attr("data-tc-target", u.Target) + ` role="menu"` + flag("hidden", !open) + `>`)
 	for _, h := range u.Hidden {
 		s.WriteString(h.html(nil))
 	}

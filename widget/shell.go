@@ -117,7 +117,7 @@ func (v MainVariant) class() string {
 // Main — tc-main
 //
 // Роль. Страница в середине оболочки: шапка, бар, списки по группам, формы, документ.
-// Вход. Main{Items, Variant, ID, Zone}.
+// Вход. Main{Items, Variant, ID, Zone, Target}.
 // Состояния. plain | groups | zone | variant | phone.
 // Инварианты. Страница прокручивается сама, оболочка — нет; порядок — шапка, бар, содержимое; страница печатает фрагмент своего кадра.
 // Поведение. нет: поведение у того, что в ней.
@@ -132,6 +132,10 @@ type Main struct {
 	// layer puts an answer for that name here (Carrel's task 84). The library
 	// has no names of its own.
 	Zone string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the page.
@@ -139,7 +143,7 @@ func (p Main) Render() string { return p.html(nil) }
 
 func (p Main) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + attr("id", p.ID) + attr("data-tc-zone", p.Zone) + `>`)
+	s.WriteString(`<div` + class(m, "tc-main", p.Variant.class()) + attr("id", p.ID) + attr("data-tc-zone", p.Zone) + attr("data-tc-target", p.Target) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -190,7 +194,7 @@ func (v SideVariant) class() string {
 // Side — tc-side
 //
 // Роль. Панель справа: подробности выбранной строки, её поля и действия.
-// Вход. Side{Items, Variant, Zone}.
+// Вход. Side{Items, Variant, Zone, Target, Closed}.
 // Состояния. plain | acts | drop | zone.
 // Инварианты. Ширина — токен оболочки, а не свойство панели; панель закрывается крестиком шапки; панель печатает фрагмент своего кадра.
 // Поведение. Esc закрывает панель и возвращает фокус строке, которая её открыла.
@@ -204,6 +208,24 @@ type Side struct {
 	// layer puts an answer for that name here (Carrel's task 84). The library
 	// has no names of its own.
 	Zone string
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
+	// Closed prints the panel hidden: a zone that waits for its answer.
+	Closed bool
+}
+
+// PrintMain prints parts of a page one after another, without the page: what
+// an answer puts into a zone of the page — a message with its technical
+// block, a bar with a list (Carrel's tasks 83 and 84). The parts are the
+// library's; the result goes into a page.Fragment as page.Printed.
+func PrintMain(items ...MainPart) string {
+	var s strings.Builder
+	for _, it := range items {
+		s.WriteString(it.html(nil))
+	}
+	return s.String()
 }
 
 // Render prints the panel.
@@ -211,7 +233,7 @@ func (p Side) Render() string { return p.html(nil) }
 
 func (p Side) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + attr("data-tc-zone", p.Zone) + `>`)
+	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + attr("data-tc-zone", p.Zone) + attr("data-tc-target", p.Target) + flag("hidden", p.Closed) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -264,6 +286,10 @@ type ShellBody struct {
 	Main     Main
 	Side     *Side
 	Height   ShellHeight
+	// RailZoneName names the rail as a zone and RailTarget the zone the
+	// rail's links ask their address for (Carrel's task 84).
+	RailZoneName string
+	RailTarget   string
 }
 
 func (b ShellBody) html(mix) string {
@@ -271,16 +297,16 @@ func (b ShellBody) html(mix) string {
 	for i, r := range b.Rail {
 		rail[i] = r
 	}
-	return shellBody(rail, b.RailForm, b.Main, b.Side, b.Height)
+	return shellBody(rail, b.RailForm, b.Main, b.Side, b.Height, attr("data-tc-zone", b.RailZoneName)+attr("data-tc-target", b.RailTarget))
 }
 
 // shellBody prints the shell's body, in the shell or under an overlay.
-func shellBody(rail []part, form RailForm, main Main, side *Side, height ShellHeight) string {
+func shellBody(rail []part, form RailForm, main Main, side *Side, height ShellHeight, railAttrs string) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, "tc-shell__body", pick(len(rail) == 0, "tc-shell__body--no-rail"), pick(side != nil, "tc-shell__body--side"),
+	s.WriteString(`<div` + class(nil, "tc-shell__body", pick(len(rail) == 0, "tc-shell__body--no-rail"), pick(side != nil && !side.Closed, "tc-shell__body--side"),
 		height.class(), pick(form == RailIcons, "tc-shell__body--tcrail-56")) + `>`)
 	if len(rail) > 0 {
-		s.WriteString(`<div` + class(nil, "tc-shell__rail", [...]string{"", "tc-shell__rail--icons", "tc-shell__rail--zone"}[form]) + `>`)
+		s.WriteString(`<div` + class(nil, "tc-shell__rail", [...]string{"", "tc-shell__rail--icons", "tc-shell__rail--zone"}[form]) + railAttrs + `>`)
 		for _, it := range rail {
 			s.WriteString(it.html(nil))
 		}

@@ -177,6 +177,14 @@
 		return null;
 	}
 
+	// The shell's body makes room for a side panel that is shown and takes
+	// it back when the panel is not: the class the core takes away on close.
+	function room(panel) {
+		var body = panel.parentElement;
+		if (!panel.classList.contains("tc-side") || !body || !body.classList.contains("tc-shell__body")) return;
+		body.classList.toggle("tc-shell__body--side", !panel.hidden);
+	}
+
 	function fill(zone, nodes) {
 		var only = nodes.children.length === 1 && !nodes.textContent.replace(nodes.firstElementChild.textContent, "").trim() ? nodes.firstElementChild : null;
 		if (only && only.getAttribute("data-tc-zone") === zone.getAttribute("data-tc-zone")) {
@@ -192,6 +200,7 @@
 				box.parentNode.insertBefore(only, box);
 				box.parentNode.removeChild(box);
 			}
+			room(only);
 			return;
 		}
 		while (zone.firstChild) zone.removeChild(zone.firstChild);
@@ -199,6 +208,7 @@
 		var empty = !zone.firstElementChild && !zone.textContent.trim();
 		zone.hidden = empty;
 		zone.style.display = empty ? "none" : "";
+		room(zone);
 		if (!empty && tc.init) tc.init(zone);
 	}
 
@@ -246,6 +256,24 @@
 			.catch(plain);
 	}
 
+	// A zone the mockup's CSS does not draw at this width — the side panel on
+	// a narrow screen — cannot take an answer: the link or form goes the plain
+	// way, to the page that shows the thing whole. The zone is tried as it
+	// would stand filled: shown, the shell's body with room for it.
+	function shows(zone) {
+		var body = zone.parentElement;
+		var side = zone.classList.contains("tc-side") && body && body.classList.contains("tc-shell__body");
+		var was = { hidden: zone.hidden, display: zone.style.display, room: side && body.classList.contains("tc-shell__body--side") };
+		zone.hidden = false;
+		zone.style.display = "";
+		if (side) body.classList.add("tc-shell__body--side");
+		var drawn = getComputedStyle(zone).display !== "none";
+		zone.hidden = was.hidden;
+		zone.style.display = was.display;
+		if (side && !was.room) body.classList.remove("tc-shell__body--side");
+		return drawn;
+	}
+
 	function targetOf(el) {
 		var t = el && el.closest && el.closest("[data-tc-target]");
 		return t ? t.getAttribute("data-tc-target") : "";
@@ -264,7 +292,7 @@
 		if (!a || e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
 		if (a.hasAttribute("data-tc-swap") || a.hasAttribute("download") || (a.target && a.target !== "_self")) return;
 		var target = targetOf(a);
-		if (!target || !sameSite(a.href) || !zoneOf(target)) return;
+		if (!target || !sameSite(a.href) || !zoneOf(target) || !shows(zoneOf(target))) return;
 		e.preventDefault();
 		var href = a.href;
 		ask(href, "GET", null, target, function () {
@@ -277,7 +305,7 @@
 		var form = e.target, by = e.submitter || null;
 		if (e.defaultPrevented || sentPlain || !window.FormData) return;
 		var target = targetOf(by) || targetOf(form);
-		if (!target || !zoneOf(target)) return;
+		if (!target || !zoneOf(target) || !shows(zoneOf(target))) return;
 		var action = (by && by.getAttribute("formaction")) || form.getAttribute("action") || location.href;
 		if (!sameSite(action)) return;
 		var method = ((by && by.getAttribute("formmethod")) || form.getAttribute("method") || "get").toUpperCase();

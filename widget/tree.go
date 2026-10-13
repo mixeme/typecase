@@ -109,7 +109,7 @@ func (v TreeVariant) class() string {
 // Tree — tc-tree
 //
 // Роль. Дерево: папки, источники и их разделы, куда положить или откуда взять.
-// Вход. Tree{Rows, On, Variant}.
+// Вход. Tree{Rows, On, Variant, Target}.
 // Состояния. plain | padded | narrow.
 // Инварианты. Уровень строки и отступ дерева — перечисления; выбранная строка — одна, её номер, а не флаг у каждой строки; дерево печатает фрагмент своего кадра.
 // Поведение. Нажатие на строку выбирает её; недоступную строку выбрать нельзя; строка с `Send` — радиокнопка формы, в которой стоит дерево, и выбирает без сценария.
@@ -120,6 +120,10 @@ type Tree struct {
 	Rows    []TreeRow
 	On      int // the chosen row, counted from 1; 0 for none
 	Variant TreeVariant
+	// Target is the name of the zone the links and forms inside ask their
+	// address for with the live layer, instead of loading the page (Carrel's
+	// task 84); without the layer they are plain links and forms.
+	Target string
 }
 
 // Render prints the tree.
@@ -127,7 +131,7 @@ func (t Tree) Render() string { return t.html(nil) }
 
 func (t Tree) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-tree", t.Variant.class()) + `>`)
+	s.WriteString(`<div` + class(m, "tc-tree", t.Variant.class()) + attr("data-tc-target", t.Target) + `>`)
 	for i, r := range t.Rows {
 		s.WriteString(r.html(i+1 == t.On))
 	}

@@ -405,7 +405,7 @@ func (b OverlayBody) html() string {
 	for i, r := range b.Rail {
 		rail[i] = r
 	}
-	return shellBody(rail, RailFull, b.Main, nil, b.Height)
+	return shellBody(rail, RailFull, b.Main, nil, b.Height, "")
 }
 
 // Overlay — tc-overlay
