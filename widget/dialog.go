@@ -159,11 +159,19 @@ const (
 	DialogPage440                        // 440 px, no padding above and below: a page of the sign-in flow
 	DialogPage520                        // 520 px, no padding above and below
 	DialogCanvas420                      // 420 px, flush: the canvas drawn alone
+	// A step of a wizard whose widest step holds a table: the dialog is as
+	// wide as that step, so the steps and the head stand where they stand
+	// there, and what is under them keeps its own width (the owner's
+	// decision of 13.10).
+	DialogStep520 // the content 520 px
+	DialogStep560 // the content 560 px
+	DialogStep760 // the content 760 px
 )
 
 func (v DialogVariant) class() string {
 	return [...]string{"", "is-wide", "is-narrow tc-dialog--padt0-padb0", "tc-dialog--max520", "tc-dialog--max540", "tc-dialog--max560",
-		"tc-dialog--max440-padt0-padb0", "tc-dialog--max520-padt0-padb0", "tc-dialog--max420-flush"}[v]
+		"tc-dialog--max440-padt0-padb0", "tc-dialog--max520-padt0-padb0", "tc-dialog--max420-flush",
+		"is-wide tc-dialog--step520", "is-wide tc-dialog--step560", "is-wide tc-dialog--step760"}[v]
 }
 
 // Dialog — tc-dialog

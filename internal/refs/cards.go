@@ -506,7 +506,7 @@ var _ = add(
 		w.CardRow{Kind: w.CardTop8, Gap: 10, Items: []w.CardRowPart{w.FillHint{Parts: []w.CardTextPart{w.Text("Every "), w.Mono{Text: ".md"}, w.Text(" directly in that folder. Subfolders are not walked, nothing on the server is moved or deleted — the files stay where they were.")}}, w.Button{Label: "Preview folder", Kind: w.ButtonPrimary}}}}, Variant: w.CardChosen}, "s-io-4", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Created"},
-		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}}}, "s-io-9", "tc-card", 1),
+		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("117")}}}}, "s-io-9", "tc-card", 1),
 	cards("chosen", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "nextcloud"},
 		w.Mono{Text: "https://cloud.example.org/remote.php/dav/", Form: w.MonoLine, Variant: w.Mono11_5DustyGap},

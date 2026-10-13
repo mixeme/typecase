@@ -1224,7 +1224,7 @@ func (g *gen) overlay(e *El) string {
 	return "w.Overlay{" + join(f, ", ") + "}"
 }
 
-var dialogVariant = []kv{{"is-wide", "DialogWide"}, {"is-narrow", "DialogNarrow"}, {"tc-dialog--max520", "Dialog520"}, {"tc-dialog--max540", "Dialog540"},
+var dialogVariant = []kv{{"tc-dialog--step520", "DialogStep520"}, {"tc-dialog--step560", "DialogStep560"}, {"tc-dialog--step760", "DialogStep760"}, {"is-wide", "DialogWide"}, {"is-narrow", "DialogNarrow"}, {"tc-dialog--max520", "Dialog520"}, {"tc-dialog--max540", "Dialog540"},
 	{"tc-dialog--max560", "Dialog560"}, {"tc-dialog--max440-padt0-padb0", "DialogPage440"}, {"tc-dialog--max520-padt0-padb0", "DialogPage520"},
 	{"tc-dialog--max420-flush", "DialogCanvas420"}}
 
@@ -1309,7 +1309,8 @@ func (g *gen) dialog(e *El) string {
 		}
 	}
 	f := []string{"Items: []w.DialogPart{\n\t\t" + join(items, ",\n\t\t") + "}"}
-	for _, v := range allOf(e, dialogVariant) {
+	// a step of a wizard is wide and names its content's width: one variant
+	for _, v := range allOf(e, dialogVariant)[:min(1, len(allOf(e, dialogVariant)))] {
 		f = append(f, "Variant: w."+v)
 	}
 	return "w.Dialog{" + join(f, ", ") + "}"

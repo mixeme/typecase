@@ -511,7 +511,7 @@ func Io3() Screen {
 								},
 							},
 						},
-						Variant: w.Dialog560,
+						Variant: w.DialogStep560,
 					},
 				},
 			},
@@ -640,7 +640,7 @@ func Io4() Screen {
 								},
 							},
 						},
-						Variant: w.Dialog560,
+						Variant: w.DialogStep560,
 					},
 				},
 			},
@@ -1250,12 +1250,12 @@ func Io9() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{Text: "Created"},
-									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}},
+									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("117")}}},
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "UID collisions", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
-									w.Diag{Text: "1a77-40de-bb02 → 9c02-4411-7ee1\n33b0-9ffa-1120 → 55da-8e10-02cc"},
+									w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
+									w.Diag{Text: "Артём Белов · 1a77-40de-bb02\nИрина Соколова · 33b0-9ffa-1120"},
 								},
 							},
 							w.Card{
@@ -1269,7 +1269,7 @@ func Io9() Screen {
 								Variant: w.FormFootFlush,
 							},
 						},
-						Variant: w.Dialog520,
+						Variant: w.DialogStep520,
 					},
 				},
 			},
@@ -1318,12 +1318,12 @@ func Io14() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{Text: "Created"},
-									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("84")}}},
+									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("81")}}},
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "UID collisions", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
-									w.Diag{Text: "7c1e-22ab-90f4 → e410-5b7d-3a96\n0d5a-b8c3-41e7 → 2f96-c07a-88d1"},
+									w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
+									w.Diag{Text: "Синк-ап по релизу · 7c1e-22ab-90f4\nПоездка в Казань · 0d5a-b8c3-41e7"},
 								},
 							},
 							w.Card{
@@ -1343,7 +1343,7 @@ func Io14() Screen {
 								Variant: w.FormFootFlush,
 							},
 						},
-						Variant: w.Dialog520,
+						Variant: w.DialogStep520,
 					},
 				},
 			},

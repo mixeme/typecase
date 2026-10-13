@@ -499,6 +499,20 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The steps of a wizard stand in one place** (the owner's remark of
+  13.10): a step whose content is narrow is a dialog as wide as the wizard's
+  widest step, and what is under the steps and the head keeps its own width
+  — `Dialog{Variant: DialogStep520 | DialogStep560 | DialogStep760}`
+  (`tc-dialog is-wide tc-dialog--step520` …). `s-io-3`, `-4`, `-9`, `-14`,
+  `s-backup-7`: the steps and the title no longer jump by 280 px between a
+  step with a table and a step without one. Use it for every step of a
+  wizard that has a `DialogWide` step.
+- **The import report names what was already here** (Carrel's task 159):
+  «Created 117» and the card «Already here, skipped 5» with a name and a
+  UID, in place of «UID collisions» with arrows (`s-io-9`, `s-io-14`); the
+  card is «Replaced» or «Imported as copies» for the other answers. The
+  caption of `s-io-5` gives the words of the other two answers and of
+  «nothing to import».
 - **Import asks about what is already here** (Carrel's task 159; the
   owner's decision of 12.10, accepted 13.10): the four previews
   (`s-io-5`…`-8`) have, beside «Into», the question «5 records of this file

@@ -1665,6 +1665,31 @@ var _ = add(
 	}, "s-publish-2", "tc-overlay", 1),
 
 	// tc-dialog
+	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Head{Title: &w.HeadTitle{Text: "Key escrow"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("A copy of your key on this server")}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
+			{Term: "Last recovery", Value: []w.ValuePart{w.Text("never")}, Face: w.ValueMono}}, Variant: w.FieldsBleed},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid}, w.Dim{Parts: []w.Inline{w.Text("After withdrawal nobody can recover this account, including you.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.FormFootFlush}}, Variant: w.Dialog560}, "account-4", "tc-dialog", 1),
+	overlay("width", w.Dialog{Items: []w.DialogPart{
+		w.Head{Title: &w.HeadTitle{Text: "Add device"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("An app password for one device, with its own key wrapper")}}}},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Value: "Телефон · DAVx5", Label: "Name", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("For you: this is how you will know what you are revoking later.")}}}, Width: w.FieldW100}, w.Field{Label: "What this device may do", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "Read only", Value: "read.only"}, {Label: "Read and write", On: true, Value: "read.and.write"}}, Variant: w.SegStart, Name: "what.this.device.may.do"}, w.FieldHint{Parts: []w.Inline{w.Text("Read only: the device syncs, and whatever it sends back is refused. Changed later in the device’s row, without a new password.")}}}, Width: w.FieldW100}, w.Field{Label: "What the device will see", LabelAside: w.Dim{Parts: []w.Inline{w.Text("— changed later too, without re-issuing the password")}}, Parts: []w.FieldPart{w.Group{Items: []w.FieldPart{w.Check{On: true, Name: "calendars", Value: "1", Parts: []w.CheckPart{w.Text("Calendars")}}, w.Check{On: true, Name: "address.books", Value: "1", Parts: []w.CheckPart{w.Text("Address books")}}, w.Check{Name: "tasks.vtodo.not.every.client.understands.them", Value: "1", Parts: []w.CheckPart{w.Text("Tasks "), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}}}, w.Check{Name: "notes.vjournal.a.different.subset.of.clients", Value: "1", Parts: []w.CheckPart{w.Text("Notes "), w.Dim{Parts: []w.Inline{w.Text("· VJOURNAL — a different subset of clients")}}}}, w.Check{On: true, Name: "webdav.folders.mount.as.a.network.drive", Value: "1", Parts: []w.CheckPart{w.Text("WebDAV folders "), w.Dim{Parts: []w.Inline{w.Text("· mount as a network drive")}}}}}, Form: w.GroupColumn}}, Width: w.FieldW100}, w.Field{Label: "Collections", Parts: []w.FieldPart{w.Group{Items: []w.FieldPart{w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Личный")}}, w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Работа")}}, w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}}, w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Проекты")}}, w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Команда")}}, w.Check{On: true, Name: "sftpgo.vps.documents", Value: "1", Parts: []w.CheckPart{w.Text("sftpgo · vps · Documents")}}}, Form: w.GroupColumn}}, Width: w.FieldW100}}, ID: "device", Action: "/app/settings/davloom/devices/new", Variant: w.FormFlush},
+		w.Msg{Parts: []w.MsgPart{w.Text("The password is shown once and stored nowhere. Lose it and you create a new one and revoke this — it cannot be recovered.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Create password", Kind: w.ButtonPrimary, Form: "device"}, w.Button{Label: "Cancel"}}, Variant: w.FormFootFlush}}, Variant: w.Dialog520}, "s-davloom-2", "tc-dialog", 1),
+	overlay("page", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
+		w.Head{Title: &w.HeadTitle{Text: "Restore"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}}},
+		w.Field{Label: "Where the archive is", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "From a job", On: true}, {Label: "From a server"}, {Label: "From this computer"}}, Variant: w.SegStart}, w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}}}, OwnLine: true},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "From a job"},
+			w.Table{Rows: []w.TableRow{
+				{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Width: w.ColTick}, {Parts: []w.CellPart{w.Text("Личное на домашний диск")}}, {Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("4 collections")}, Mono: true}}, State: w.RowPicked},
+				{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}}, {Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("3 collections")}, Mono: true}}}}}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Archive password"},
+			w.CardFields{Items: []w.CardFieldsPart{w.Field{Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Archive password", Focus: true}}, Width: w.FieldLG}, w.Span{Face: w.FaceMuted12, Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections."}}}}},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}}}}, Variant: w.DialogStep760}, "s-backup-7", "tc-dialog", 1),
 	overlay("links", w.Dialog{Items: []w.DialogPart{
 		w.AuthStack{Items: []w.AuthStackPart{w.Form{Items: []w.FormPart{w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Login"}}, Width: w.FieldMD}}, ID: "signin", Action: "/login", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Variant: w.FormFlushAll}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary, Form: "signin"}}, Links: []w.Link{{Text: "Forgotten your password?", Href: "/forgot"}, {Text: "Create an account", Href: "/register"}}}}, Variant: w.DialogPage440}, "components-43", "tc-dialog", 1),
 	overlay("crop-image", w.Dialog{Items: []w.DialogPart{
@@ -1702,23 +1727,23 @@ var _ = add(
 		w.Head{Title: &w.HeadTitle{Text: "Import report"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}}},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Created"},
-			w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("122")}}}},
+			w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("117")}}}},
 		w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "UID collisions", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTightPlain}}},
-			w.Diag{Text: "1a77-40de-bb02 → 9c02-4411-7ee1 33b0-9ffa-1120 → 55da-8e10-02cc"}}},
+			w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
+			w.Diag{Text: "Артём Белов · 1a77-40de-bb02\nИрина Соколова · 33b0-9ffa-1120"}}},
 		w.Card{Items: []w.CardPart{
-			w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTightPlain}}},
+			w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
 			w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}}},
-		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Back to list", Kind: w.ButtonPrimary}}}}, Variant: w.Dialog520}, "s-io-9", "tc-dialog", 1),
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Back to list", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush}}, Variant: w.DialogStep520}, "s-io-9", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
 		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}},
-		w.Form{},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Into", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Контакты"}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}}}, Width: w.FieldW100}}, Variant: w.FormBottom12, Tight: true},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "From a file"},
-			w.Field{Label: "vCard file", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
+			w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, ID: "import-file", Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
 			w.CardHint{Parts: []w.CardTextPart{w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}},
-		w.Msg{Parts: []w.MsgPart{w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed.")}}}, Variant: w.Dialog560}, "s-io-3", "tc-dialog", 1),
+		w.Msg{Parts: []w.MsgPart{w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed.")}}}, Variant: w.DialogStep560}, "s-io-3", "tc-dialog", 1),
 	overlay("narrow", w.Dialog{Items: []w.DialogPart{
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
 		w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},

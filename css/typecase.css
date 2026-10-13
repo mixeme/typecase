@@ -1099,6 +1099,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dialog--max520.tc-dialog--max520{max-width:520px}
 .tc-dialog--max560.tc-dialog--max560{max-width:560px}
 .tc-dialog--max540.tc-dialog--max540{max-width:540px}
+.tc-dialog--step520 > *{max-width:calc(520px - 2*var(--tc-page-gutter))}
+.tc-dialog--step560 > *{max-width:calc(560px - 2*var(--tc-page-gutter))}
+.tc-dialog--step760 > *{max-width:calc(760px - 2*var(--tc-page-gutter))}
 .tc-dialog--padt0-padb0.tc-dialog--padt0-padb0{padding-top:0;padding-bottom:0}
 .tc-dialog--max440-padt0-padb0.tc-dialog--max440-padt0-padb0{max-width:440px;padding-top:0;padding-bottom:0}
 .tc-zone.tc-zone{text-align:center}

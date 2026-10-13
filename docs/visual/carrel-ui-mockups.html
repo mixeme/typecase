@@ -1280,6 +1280,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dialog--max520.tc-dialog--max520{max-width:520px}
 .tc-dialog--max560.tc-dialog--max560{max-width:560px}
 .tc-dialog--max540.tc-dialog--max540{max-width:540px}
+.tc-dialog--step520 > *{max-width:calc(520px - 2*var(--tc-page-gutter))}
+.tc-dialog--step560 > *{max-width:calc(560px - 2*var(--tc-page-gutter))}
+.tc-dialog--step760 > *{max-width:calc(760px - 2*var(--tc-page-gutter))}
 .tc-dialog--padt0-padb0.tc-dialog--padt0-padb0{padding-top:0;padding-bottom:0}
 .tc-dialog--max440-padt0-padb0.tc-dialog--max440-padt0-padb0{max-width:440px;padding-top:0;padding-bottom:0}
 .tc-zone.tc-zone{text-align:center}
@@ -10547,7 +10550,7 @@ Read  2 min ago</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog tc-dialog--max560">
+        <div class="tc-dialog is-wide tc-dialog--step560">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
@@ -10616,7 +10619,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
-      <div class="tc-main"><div class="tc-dialog tc-dialog--max560">
+      <div class="tc-main"><div class="tc-dialog is-wide tc-dialog--step560">
       <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import notes</div></div></div>
       <div class="tc-form is-tight tc-form--padb12">
@@ -10726,7 +10729,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption>Импорт — мастер: файл → предпросмотр → отчёт. Первая из четырёх таблиц: у карточки читают <b>имя</b>, колонки — источник, имя, UID, результат; ломается по-своему — <code>quoted-printable</code> из vCard&nbsp;2.1, который нечем разобрать.<br><br><b>Коллекция назначения — поле, а не надпись.</b> Предпросмотр даёт повод её сменить: счёт совпадений UID считается по ней. «Into» стоит над счётом, списком (<code>is-pick</code>) — все книги, куда разрешено писать, со всех подключённых серверов, — и его смена перестраивает таблицу. Шапка держит то, что не меняется: файл, размер и разобранный формат.</figcaption>
+<figcaption><b>Записи, которые уже есть, — вопрос, а не молчаливая копия</b> (решение владельца 12.10, задача 159). Вопрос стоит рядом с «Into»: «уже есть» считается относительно выбранной коллекции. Ответ — сегмент ссылок на тот же предпросмотр; кадр рисует «Skip them», ответ по умолчанию. При «Replace them» подсказка — «The ones here are overwritten with the file's version.», строка записи — «Replaces the one here», кнопка считает и их: «Import 122 contacts». При «Import as copies» подсказка — «Each gets a new UID and stands beside the one here.», строка — «New UID will be assigned», кнопка — «Import 122 contacts». Когда писать нечего — всё, что прочиталось, уже есть, и выбран «Skip», — кнопка выключена, причина рядом: «Nothing to import: every record is already here.» Счёт «already here» от ответа не зависит.<br><br>Импорт — мастер: файл → предпросмотр → отчёт. Первая из четырёх таблиц: у карточки читают <b>имя</b>, колонки — источник, имя, UID, результат; ломается по-своему — <code>quoted-printable</code> из vCard&nbsp;2.1, который нечем разобрать.<br><br><b>Коллекция назначения — поле, а не надпись.</b> Предпросмотр даёт повод её сменить: счёт совпадений UID считается по ней. «Into» стоит над счётом, списком (<code>is-pick</code>) — все книги, куда разрешено писать, со всех подключённых серверов, — и его смена перестраивает таблицу. Шапка держит то, что не меняется: файл, размер и разобранный формат.</figcaption>
 </figure>
 
 <figure>
@@ -10976,13 +10979,13 @@ Read  2 min ago</div>
           <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
         </div>
         <div class="tc-main">
-          <div class="tc-dialog tc-dialog--max520">
+          <div class="tc-dialog is-wide tc-dialog--step520">
             <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">3 · Report</span></div>
             <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import report</div><div class="tc-head__sub">nextcloud · Контакты</div></div></div>
-            <div class="tc-card"><div class="tc-rubric">Created</div><div class="tc-card__num">122</div></div>
-            <div class="tc-card"><div class="tc-rubric">UID collisions <span class="tc-mono tc-mono--ls0">5</span></div>
-              <div class="tc-diag">1a77-40de-bb02 → 9c02-4411-7ee1
-33b0-9ffa-1120 → 55da-8e10-02cc</div></div>
+            <div class="tc-card"><div class="tc-rubric">Created</div><div class="tc-card__num">117</div></div>
+            <div class="tc-card"><div class="tc-rubric">Already here, skipped <span class="tc-mono tc-mono--ls0">5</span></div>
+              <div class="tc-diag">Артём Белов · 1a77-40de-bb02
+Ирина Соколова · 33b0-9ffa-1120</div></div>
             <div class="tc-card"><div class="tc-rubric">Failed <span class="tc-mono tc-mono--ls0">3</span></div>
               <div class="tc-diag tc-diag--danger">line 12: cannot decode quoted-printable</div></div>
             <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="button">Back to list</button></div>
@@ -10991,7 +10994,7 @@ Read  2 min ago</div>
       </div>
     </div>
   </div>
-  <figcaption>Числа набраны крупно антиквой: отчёт читают ради них. Таблицы созданного здесь нет — созданное лежит в списке, куда ведёт «Back to list». Пропущенное (чужой род в файле, <code>s-io-6</code>) — четвёртая карточка «Skipped» того же вида, что «Failed»; когда пропущенного нет, нет и карточки.</figcaption>
+  <figcaption>Числа набраны крупно антиквой: отчёт читают ради них. Таблицы созданного здесь нет — созданное лежит в списке, куда ведёт «Back to list». Пропущенное (чужой род в файле, <code>s-io-6</code>) — четвёртая карточка «Skipped» того же вида, что «Failed»; когда пропущенного нет, нет и карточки. <b>Вторая карточка — про записи, которые в коллекции уже были</b> (задача 159), и называется по ответу предпросмотра: «Already here, skipped» — имя и UID оставленных как есть; «Replaced» — имя и UID переписанных версией файла; «Imported as copies» — старый UID → новый, как было раньше. Когда таких записей в файле не было, нет и карточки.</figcaption>
   </figure>
   <figure style="flex:1 1 100%">
   <div class="frame" data-frame="s-io-14" data-screen="/app/calendar/{account}/{col}/import" data-part="report-skipped">
@@ -11018,13 +11021,13 @@ Read  2 min ago</div>
           <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
         </div>
         <div class="tc-main">
-          <div class="tc-dialog tc-dialog--max520">
+          <div class="tc-dialog is-wide tc-dialog--step520">
             <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">3 · Report</span></div>
             <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import report</div><div class="tc-head__sub">nextcloud · Личный</div></div></div>
-            <div class="tc-card"><div class="tc-rubric">Created</div><div class="tc-card__num">84</div></div>
-            <div class="tc-card"><div class="tc-rubric">UID collisions <span class="tc-mono tc-mono--ls0">3</span></div>
-              <div class="tc-diag">7c1e-22ab-90f4 → e410-5b7d-3a96
-0d5a-b8c3-41e7 → 2f96-c07a-88d1</div></div>
+            <div class="tc-card"><div class="tc-rubric">Created</div><div class="tc-card__num">81</div></div>
+            <div class="tc-card"><div class="tc-rubric">Already here, skipped <span class="tc-mono tc-mono--ls0">3</span></div>
+              <div class="tc-diag">Синк-ап по релизу · 7c1e-22ab-90f4
+Поездка в Казань · 0d5a-b8c3-41e7</div></div>
             <div class="tc-card"><div class="tc-rubric">Failed <span class="tc-mono tc-mono--ls0">2</span></div>
               <div class="tc-diag tc-diag--danger">— (no SUMMARY): DTSTART without DTEND or DURATION</div></div>
             <div class="tc-card"><div class="tc-rubric">Skipped <span class="tc-mono tc-mono--ls0">6</span></div>
@@ -14667,7 +14670,7 @@ jobs:
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
-      <div class="tc-main"><div class="tc-dialog">
+      <div class="tc-main"><div class="tc-dialog is-wide tc-dialog--step760">
       <div class="tc-steps"><span class="is-on tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore</div><div class="tc-head__sub">Nothing is written until you have seen what goes where</div></div></div>
       <div class="tc-field is-own-line">
@@ -14687,7 +14690,7 @@ jobs:
       <div class="tc-card">
         <div class="tc-rubric">Archive password</div>
         <div class="tc-card__fields">
-          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="text" value="••••••••••••"></div>
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="text" value="••••••••••••" aria-label="Archive password"></div>
           <span class="tc-dim--muted tc-dim--t12">The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections.</span>
         </div>
       </div>

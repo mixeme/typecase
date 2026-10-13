@@ -1066,7 +1066,10 @@ func Backup7() Screen {
 									w.Rubric{Text: "Archive password"},
 									w.CardFields{
 										Items: []w.CardFieldsPart{
-											w.Field{Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Focus: true}}, Width: w.FieldLG},
+											w.Field{
+												Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Archive password", Focus: true}},
+												Width: w.FieldLG,
+											},
 											w.Span{
 												Face: w.FaceMuted12,
 												Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections.",
@@ -1079,6 +1082,7 @@ func Backup7() Screen {
 								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
 							},
 						},
+						Variant: w.DialogStep760,
 					},
 				},
 			},
