@@ -1504,3 +1504,47 @@ func TestTreeNodeSwap(t *testing.T) {
 		}
 	}
 }
+
+// TestPickShows (Carrel's task 156): an option of a pick shows fields of its
+// form while it is chosen — «Custom…» of a reminder opens the number and the
+// unit; another option hides them again, and a hidden field is not sent.
+// Without a script the fields stay as the server printed them. The bite: the
+// page without tc.js keeps them hidden after the choice.
+func TestPickShows(t *testing.T) {
+	needChrome(t)
+	form := w.Form{Action: "/x", Items: []w.FormPart{w.FieldSet{Rubric: w.Rubric{Text: "Reminders"}, Items: []w.FieldSetPart{
+		w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Name: "reminder", Label: "First", Options: []w.PickOption{
+			{Value: "10", Label: "10 minutes before", On: true}, {Value: "custom", Label: "Custom…", Shows: "count unit"}}}}},
+		w.Field{Label: "How long", Hidden: true, Parts: []w.FieldPart{w.Input{Name: "count", Value: "2", Mono: true}}},
+		w.Field{Label: "Unit", Hidden: true, Parts: []w.FieldPart{w.Pick{Name: "unit", Label: "Unit", Options: []w.PickOption{{Value: "days", Label: "days before", On: true}}}}},
+	}}}}
+	body := `<div class="tc-root">` + form.Render() + `</div>`
+	const choose = `v => { const s = document.querySelector('[name="reminder"]'); s.value = v; s.dispatchEvent(new Event("change", {bubbles: true})); }`
+	const state = `(() => { const shown = n => document.querySelector('[name="' + n + '"]').getClientRects().length > 0 ? "shown" : "hidden";
+		return shown("count") + " " + shown("unit") + " | " + new URLSearchParams(new FormData(document.querySelector("form"))).toString(); })()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name, steps, want string
+		bare              bool
+	}{
+		{"as printed", ``, "hidden hidden | reminder=10", false},
+		{"Custom… chosen", `choose("custom")`, "shown shown | reminder=custom&count=2&unit=days", false},
+		{"and a step again", `choose("custom"); choose("10")`, "hidden hidden | reminder=10", false},
+		{"without a script", `choose("custom")`, "hidden hidden | reminder=custom&count=2&unit=days", true},
+	} {
+		page := browser.PageHTML(body, "")
+		if c.bare {
+			page = strings.Replace(page, `<script src="/tc.js"></script>`, "", 1)
+		}
+		var got string
+		if err := h.Run(h.RegisterPage("shows", page), 900, 600,
+			chromedp.Evaluate(`(() => { const choose = `+choose+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}

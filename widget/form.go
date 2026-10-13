@@ -212,7 +212,7 @@ func (w FieldWidth) class() string {
 // Field — tc-field
 //
 // Роль. Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
-// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action}.
+// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Hidden}.
 // Состояния. labelled | bare | hint | group | swatches | zoom | photo | row | own-line.
 // Инварианты. Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
 // Поведение. нет: поведение у контролов.
@@ -231,6 +231,10 @@ type Field struct {
 	// Action makes the field a GET form of its own: Enter in its line sends
 	// it — the duplicates' threshold in the head (Carrel's task 131).
 	Action string
+	// Hidden is a field that is in the form and not on the screen: one that
+	// an option of a pick shows (PickOption.Shows). Its controls are not
+	// sent while it is hidden.
+	Hidden bool
 }
 
 // Render prints the field.
@@ -246,7 +250,7 @@ func (f Field) html(m mix) string {
 	if f.Action != "" {
 		tag = "form"
 	}
-	s.WriteString(`<` + tag + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + attr("action", f.Action) + pick(f.Action != "", ` method="get"`) + `>`)
+	s.WriteString(`<` + tag + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + attr("action", f.Action) + pick(f.Action != "", ` method="get"`) + flag("hidden", f.Hidden) + `>`)
 	switch {
 	case f.LabelSpan:
 		s.WriteString(`<span class="tc-field__label">` + esc(f.Label) + `</span>`)

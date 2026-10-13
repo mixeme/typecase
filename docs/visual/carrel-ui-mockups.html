@@ -743,7 +743,7 @@ label.tc-tree__row{cursor:pointer}
 /* Полоса правки без сценария (задача 104, решения 02.10): правка не перезагружается — остаются Save (submit) и Cancel (ссылка); разметка, автосохранение, ширина, фокус и «⋯» живут сценарием. */
 [data-tc-noscript] .tc-docbar--edit > :not(button[type="submit"]):not(a.tc-btn){display:none}
 /* Файл правки уходит по Save (решение 02.10): выбранный — строкой списка; «Nothing attached» прячется, пока она стоит; полоса Save ждёт отправки с файлами. */
-.tc-runbar[hidden],[data-tc-empty][hidden],.tc-fset > [hidden]{display:none}
+.tc-runbar[hidden],[data-tc-empty][hidden],.tc-fset > [hidden],.tc-field[hidden]{display:none}
 /* Строка имени файла импорта (задача 133): без сценария имя показывает само поле файла рядом с Browse — строка не нужна. */
 [data-tc-noscript] [data-tc-filename]{display:none}
 [data-tc-noscript] .tc-file{position:static;opacity:1;width:auto;height:auto;max-width:200px;font-size:11px;pointer-events:auto}
@@ -5261,24 +5261,26 @@ SEQUENCE  2</div>
       <div class="tc-form tc-form--pad0">
           <div class="tc-fset">
             <div class="tc-rubric">Reminders</div>
-            <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
-            <div class="tc-field tc-field--md"><label>Reminder</label><button class="tc-in is-pick" type="button">Custom…</button></div>
-            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.count" value="2" aria-label="How long"></div>
-            <div class="tc-field tc-field--sm"><label>Unit</label><button class="tc-in is-pick" type="button">days before</button></div>
+            <div class="tc-field tc-field--md"><label>First</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.1" aria-label="First"><option value="at.the.time">At the time</option><option value="5.minutes.before">5 minutes before</option><option value="10.minutes.before" selected>10 minutes before</option><option value="30.minutes.before">30 minutes before</option><option value="1.hour.before">1 hour before</option><option value="1.day.before">1 day before</option><option value="custom" data-tc-shows="reminder.1.count reminder.1.unit">Custom…</option><option value="none">No reminder</option></select></span></div>
+            <div class="tc-field tc-field--xs" hidden><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.1.count" value="1" aria-label="How long"></div>
+            <div class="tc-field tc-field--sm" hidden><label>Unit</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.1.unit" aria-label="Unit"><option value="minutes">minutes before</option><option value="hours">hours before</option><option value="days" selected>days before</option><option value="weeks">weeks before</option></select></span></div>
+            <div class="tc-field tc-field--md"><label>Reminder</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.2" aria-label="Reminder"><option value="at.the.time">At the time</option><option value="5.minutes.before">5 minutes before</option><option value="10.minutes.before">10 minutes before</option><option value="30.minutes.before">30 minutes before</option><option value="1.hour.before">1 hour before</option><option value="1.day.before">1 day before</option><option value="custom" selected data-tc-shows="reminder.2.count reminder.2.unit">Custom…</option><option value="none">No reminder</option></select></span></div>
+            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.2.count" value="2" aria-label="How long"></div>
+            <div class="tc-field tc-field--sm"><label>Unit</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.2.unit" aria-label="Unit"><option value="minutes">minutes before</option><option value="hours">hours before</option><option value="days" selected>days before</option><option value="weeks">weeks before</option></select></span></div>
             <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Reminders</div>
-            <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">Custom…</button></div>
-            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.count" value="1" aria-label="How long"></div>
-            <div class="tc-field tc-field--sm"><label>Unit</label><button class="tc-in is-pick" type="button">days before</button></div>
-            <div class="tc-field tc-field--xs"><label>At</label><input class="tc-in is-mono" type="time" name="reminder.at" value="09:00" aria-label="At"></div>
+            <div class="tc-field tc-field--md"><label>First</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.1" aria-label="First"><option value="at.the.time">At the time</option><option value="5.minutes.before">5 minutes before</option><option value="10.minutes.before">10 minutes before</option><option value="30.minutes.before">30 minutes before</option><option value="1.hour.before">1 hour before</option><option value="1.day.before">1 day before</option><option value="custom" selected data-tc-shows="reminder.1.count reminder.1.unit reminder.1.at">Custom…</option><option value="none">No reminder</option></select></span></div>
+            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.1.count" value="1" aria-label="How long"></div>
+            <div class="tc-field tc-field--sm"><label>Unit</label><span class="tc-in is-pick"><select class="tc-in__list" name="reminder.1.unit" aria-label="Unit"><option value="minutes">minutes before</option><option value="hours">hours before</option><option value="days" selected>days before</option><option value="weeks">weeks before</option></select></span></div>
+            <div class="tc-field tc-field--xs"><label>At</label><input class="tc-in is-mono" type="time" name="reminder.1.at" value="09:00" aria-label="At"></div>
             <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
           </div>
       </div>
     </div>
   </div>
-  <figcaption><b>Свой отступ — «Custom…» в списке напоминания</b> (решение владельца 12.10, задача 156): строка остаётся строкой напоминания, рядом с выбором встают число и единица — minutes, hours, days, weeks before. Наверху — событие со временем: «за 2 дня». Внизу — событие на весь день: у него ещё и час, «накануне в 09:00» — это «1 day before» и «At 09:00». Напоминание с отступом не из шести шагов, записанное другим клиентом, приходит в форму этой же строкой, а не лишним пунктом списка. На карточке и в панели такое напоминание — словами: «2 days before», «1 day before, 09:00». Быстрый лист держит тот же список с «Custom…» и те же поля в своей строке. Без сценариев «Custom…» выбирают и жмут «Add reminder» или «Save» — сервер отвечает формой с открытыми полями.</figcaption>
+  <figcaption><b>Свой отступ — «Custom…» в списке напоминания</b> (решение владельца 12.10, задача 156): строка остаётся строкой напоминания, рядом с выбором встают число и единица — minutes, hours, days, weeks before. Наверху — событие со временем: «за 2 дня». Внизу — событие на весь день: у него ещё и час, «накануне в 09:00» — это «1 day before» и «At 09:00». Напоминание с отступом не из шести шагов, записанное другим клиентом, приходит в форму этой же строкой, а не лишним пунктом списка. На карточке и в панели такое напоминание — словами: «2 days before», «1 day before, 09:00». Быстрый лист держит тот же список с «Custom…» и те же поля в своей строке. Поля числа и единицы есть у каждой строки и скрыты, пока выбран готовый шаг: со сценарием их открывает сам выбор «Custom…», без сценариев «Custom…» выбирают и жмут «Add reminder» или «Save» — сервер отвечает формой с открытыми полями. Со сценарием скрытое поле не отправляется; без него сервер скрытых полей не читает.</figcaption>
   </figure>
 
 <figure style="flex:1 1 100%">

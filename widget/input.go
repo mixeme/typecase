@@ -149,6 +149,13 @@ type PickOption struct {
 	Label       string
 	On          bool // chosen
 	Unavailable bool // shown, not chosen: a kind the server does not take
+	// Shows names the fields of the form that are shown only while this
+	// option is chosen (data-tc-shows; Carrel's task 156: «Custom…» of a
+	// reminder opens its number and unit). The names go separated by spaces.
+	// A field that is not shown is printed Hidden; the library's script
+	// shows and hides them as the choice changes, and a hidden one is not
+	// sent. Without a script the server answers with the form as chosen.
+	Shows string
 }
 
 func (p Pick) html(m mix) string {
@@ -160,7 +167,7 @@ func (p Pick) html(m mix) string {
 		}
 		s.WriteString(`<select class="tc-in__list"` + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
 		for _, o := range p.Options {
-			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + `>` + esc(o.Label) + `</option>`)
+			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + attr("data-tc-shows", o.Shows) + `>` + esc(o.Label) + `</option>`)
 		}
 		s.WriteString(`</select></span>`)
 		return s.String()

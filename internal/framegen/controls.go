@@ -366,6 +366,9 @@ func (g *gen) pick(x *El) string {
 			if o.HasAttr("disabled") {
 				o2 = append(o2, "Unavailable: true")
 			}
+			if v := o.Attr("data-tc-shows"); v != "" {
+				o2 = append(o2, "Shows: "+q(v))
+			}
 			opts = append(opts, "{"+join(o2, ", ")+"}")
 		}
 		f := []string{"Name: " + q(list.Attr("name")), "Options: []w.PickOption{" + join(opts, ", ") + "}"}
@@ -804,6 +807,9 @@ var fieldGap = regexp.MustCompile(`^tc-field--gap(\d+)$`)
 
 func (g *gen) field(k *El) string {
 	var f []string
+	if k.HasAttr("hidden") {
+		f = append(f, "Hidden: true")
+	}
 	var skip *El
 	var lab *El
 	for _, x := range k.Els() {

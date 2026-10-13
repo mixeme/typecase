@@ -667,6 +667,35 @@
 		});
 	}
 
+	// An option of a pick that shows fields of its form while it is chosen
+	// (data-tc-shows, PickOption.Shows; Carrel's task 156): the fields the
+	// list's options name are shown for the chosen option and hidden for the
+	// others — a hidden field's controls are off and not sent.
+	function syncShows(list) {
+		var scope = list.form || document, on = {}, all = {};
+		Array.prototype.forEach.call(list.options, function (o) {
+			(o.getAttribute("data-tc-shows") || "").split(/\s+/).forEach(function (name) {
+				if (!name) return;
+				all[name] = true;
+				if (o.selected) on[name] = true;
+			});
+		});
+		Object.keys(all).forEach(function (name) {
+			scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
+				var field = f.closest(".tc-field") || f;
+				if (on[name]) show(field);
+				else hide(field);
+				f.disabled = !on[name];
+			});
+		});
+	}
+
+	function initShows(root) {
+		root.querySelectorAll("select").forEach(function (list) {
+			if (list.querySelector("option[data-tc-shows]")) syncShows(list);
+		});
+	}
+
 	function initDisables(root) {
 		root.querySelectorAll("input[data-tc-disables]").forEach(syncDisables);
 	}
@@ -731,6 +760,7 @@
 
 	function onChange(e) {
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		if (e.target.matches && e.target.matches("select") && e.target.querySelector("option[data-tc-shows]")) syncShows(e.target);
 		if (e.target.hasAttribute && e.target.hasAttribute("data-tc-was")) follow(e.target);
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-size]")) sizeFields(e.target);
 		// A file picked by a button or a menu item goes with its form at once
@@ -1010,6 +1040,7 @@
 		initMenus(root);
 		initLayers(root);
 		initDisables(root);
+		initShows(root);
 		initFollows(root);
 		layoutUpdates();
 	}

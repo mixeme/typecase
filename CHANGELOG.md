@@ -31,6 +31,15 @@ do, not what the authors did.
 
 ### Added
 
+- **An option of a pick that shows fields** (Carrel's task 156).
+  `PickOption.Shows` names the fields of the form that are shown only while
+  the option is chosen (`data-tc-shows`): «Custom…» of a reminder opens its
+  number and unit. A field that is not shown is printed with `Field.Hidden`
+  (`.tc-field[hidden]`); `tc.js` shows and hides them as the choice changes
+  and switches a hidden field's controls off, so it is not sent. Without a
+  script the fields stay as printed and the server answers with the form as
+  chosen — it must not read the fields of an option that is not chosen.
+  `TestPickShows`.
 - **A tree's node that is a tick and has an address** (Carrel's task 158).
   `TreeRow` with `Send`, `Href` and `Swap`: the node stays a radio button of
   its form, `Href` is the address of the page drawn with this node chosen

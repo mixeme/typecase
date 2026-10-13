@@ -528,7 +528,7 @@
 #### `tc-field` — поле формы
 
 - **Роль.** Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
-- **Вход.** `Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action}`.
+- **Вход.** `Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Hidden}`.
 - **Состояния.** labelled | bare | hint | group | swatches | zoom | photo | row | own-line.
 - **Инварианты.** Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
 - **Поведение.** нет: поведение у контролов.
