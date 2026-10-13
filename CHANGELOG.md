@@ -48,6 +48,17 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **A run's line follows its run** (Carrel's task 85). `Runbar` that is a
+  zone names a stream of events — `Stream`, with the events' names
+  `Changed` and `Ended` — and a poll address, `Poll`, asked every `Every`
+  seconds. With the live layer the line takes each event's fragment (the
+  line as it is now, and whatever other zones changed) and closes the
+  stream on the event that ends the run; with no stream, or one that
+  refused or broke, it asks the poll address for as long as the line that
+  comes back names one and is shown. One run is followed once, whatever
+  comes to replace its line. Without the layer the run shows after a
+  reload. `TestRunFollows`: a stream, a poll, a stream that refuses, and
+  the page without the layer.
 - **Zones, the rest** (Carrel's tasks 84 and 83). The rail is a zone:
   `ShellBody.RailZoneName`, and `RailTarget` for its links. `Target` stands
   on the areas too — `Main`, `Side`, `Top` — and on `Menu`, `Seg`, `Tree`,

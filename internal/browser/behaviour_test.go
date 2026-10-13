@@ -1,10 +1,13 @@
 package browser_test
 
 import (
+	"context"
 	"fmt"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -1714,5 +1717,83 @@ func TestZonePanel(t *testing.T) {
 		if c[1] != c[2] {
 			t.Errorf("%s: %s; want %s", c[0], c[1], c[2])
 		}
+	}
+}
+
+// TestRunFollows (Carrel's task 85): a run's line that is a zone follows its
+// run. With a stream it takes each event's fragment and closes the stream on
+// the event that ends the run; with no stream, or one that refused, it asks
+// its poll address every so many seconds for as long as the line that comes
+// back names one. The bite: without the live layer the line stays as printed.
+func TestRunFollows(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	bar := func(text, stream, poll string) w.Runbar {
+		return w.Runbar{Zone: "run", Meter: w.Meter{Percent: 50, Track: 100}, Parts: []w.RunbarPart{w.Text(text)},
+			Stream: stream, Changed: "changed", Ended: "ended", Poll: poll, Every: 1}
+	}
+	frag := func(b w.Runbar) string {
+		return strings.ReplaceAll(page.Fragment{Body: []page.Part{b}}.Render(), "\n", " ")
+	}
+	const text = `(document.querySelector(".tc-runbar") || {textContent: "no line"}).textContent.trim()`
+	wait := chromedp.Sleep(2600 * time.Millisecond)
+
+	// a stream: two events, the second ends the run
+	var opened int32
+	stream := h.RegisterStream("run", func(rw http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&opened, 1)
+		rw.Header().Set("Content-Type", "text/event-stream")
+		fl, _ := rw.(http.Flusher)
+		fmt.Fprintf(rw, "event: changed\ndata: %s\n\n", frag(bar("2 of 6", r.URL.Path, "")))
+		fl.Flush()
+		time.Sleep(400 * time.Millisecond)
+		fmt.Fprintf(rw, "event: ended\ndata: %s\n\n", frag(w.Runbar{Zone: "run", Meter: w.Meter{Percent: 100, Track: 100}, Parts: []w.RunbarPart{w.Text("6 of 6")}}))
+		fl.Flush()
+	})
+	var got string
+	if err := h.Run(h.RegisterPage("run-stream", browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", stream, "").Render()+`</div>`, "")), 900, 400,
+		wait, chromedp.Evaluate(text, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != "6 of 6" || atomic.LoadInt32(&opened) != 1 {
+		t.Errorf("a stream: the line says %q after %d openings; want 6 of 6 after one — the stream closed on the event that ends the run", got, opened)
+	}
+
+	// a poll: the line that comes back names the poll, then does not
+	pollURL := h.RegisterPage("run-poll", "")
+	h.RegisterPage("run-poll", frag(bar("3 of 6", "", pollURL)))
+	var first, last string
+	url := h.RegisterPage("run-polled", browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", "", pollURL).Render()+`</div>`, ""))
+	if err := h.Run(url, 900, 400,
+		chromedp.Sleep(1600*time.Millisecond), chromedp.Evaluate(text, &first),
+		chromedp.ActionFunc(func(context.Context) error {
+			h.RegisterPage("run-poll", frag(w.Runbar{Zone: "run", Meter: w.Meter{Percent: 100, Track: 100}, Parts: []w.RunbarPart{w.Text("done")}}))
+			return nil
+		}),
+		wait, chromedp.Evaluate(text, &last)); err != nil {
+		t.Fatal(err)
+	}
+	if first != "3 of 6" || last != "done" {
+		t.Errorf("a poll: %q, then %q; want 3 of 6, then done", first, last)
+	}
+
+	// a stream that refuses: the poll takes over
+	h.RegisterPage("run-poll", frag(w.Runbar{Zone: "run", Meter: w.Meter{Percent: 100, Track: 100}, Parts: []w.RunbarPart{w.Text("polled")}}))
+	refused := strings.Replace(stream, "/stream/run", "/stream/none", 1)
+	if err := h.Run(h.RegisterPage("run-refused", browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", refused, pollURL).Render()+`</div>`, "")), 900, 400,
+		wait, chromedp.Evaluate(text, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != "polled" {
+		t.Errorf("a stream that refused: the line says %q; want polled", got)
+	}
+
+	// without the layer the line stays as printed
+	bare := strings.Replace(browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", stream, pollURL).Render()+`</div>`, ""), `<script src="/tc-live.js"></script>`, "", 1)
+	if err := h.Run(h.RegisterPage("run-bare", bare), 900, 400, wait, chromedp.Evaluate(text, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != "0 of 6" {
+		t.Errorf("without the layer: the line says %q; want 0 of 6", got)
 	}
 }

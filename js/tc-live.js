@@ -230,10 +230,11 @@
 			if (z) fill(z, t.content);
 		});
 		if (tc.layoutUpdates) tc.layoutUpdates();
+		follow();
 		return true;
 	}
 
-	function ask(url, method, body, target, plain) {
+	function ask(url, method, body, target, plain, then) {
 		var headers = { Accept: "text/html" };
 		var view = doc.getAttribute("data-tc-view-header"), zoneHeader = doc.getAttribute("data-tc-target-header");
 		if (view) headers[view] = doc.getAttribute("data-tc-view-value") || "1";
@@ -252,6 +253,7 @@
 					history.pushState({ tcSwap: true }, "", url);
 					swapped = true;
 				}
+				if (then) then();
 			})
 			.catch(plain);
 	}
@@ -272,6 +274,62 @@
 		zone.style.display = was.display;
 		if (side && !was.room) body.classList.remove("tc-shell__body--side");
 		return drawn;
+	}
+
+	// A run's line that is a zone follows its run (Carrel's task 85). It
+	// names a stream of events (data-tc-stream) and the events' names: each
+	// event carries a fragment, put as an answer is; on the event that ends
+	// the run the stream is closed. With no stream, or one that refused or
+	// broke, the line's poll address (data-tc-poll) is asked every
+	// data-tc-every seconds for as long as the line that comes back names
+	// one and is shown. One run is followed once, whatever comes to replace
+	// its line.
+	var runs = {};
+
+	function poll(name) {
+		var bar = zoneOf(name);
+		var url = bar && !bar.hidden && bar.getAttribute("data-tc-poll");
+		if (!url || runs[name]) return;
+		var every = (parseFloat(bar.getAttribute("data-tc-every")) || 5) * 1000;
+		runs[name] = {
+			timer: setTimeout(function () {
+				var again = function () {
+					delete runs[name];
+					poll(name);
+				};
+				ask(url, "GET", null, name, again, again);
+			}, every)
+		};
+	}
+
+	function follow() {
+		Array.prototype.forEach.call(document.querySelectorAll(".tc-runbar[data-tc-zone]"), function (bar) {
+			var name = bar.getAttribute("data-tc-zone"), stream = bar.getAttribute("data-tc-stream");
+			if (runs[name]) return;
+			if (!stream || !window.EventSource) {
+				poll(name);
+				return;
+			}
+			var source = new EventSource(stream);
+			var over = function () {
+				source.close();
+				delete runs[name];
+			};
+			runs[name] = { source: source };
+			source.addEventListener(bar.getAttribute("data-tc-changed") || "message", function (e) {
+				put(name, e.data);
+			});
+			if (bar.getAttribute("data-tc-ended")) {
+				source.addEventListener(bar.getAttribute("data-tc-ended"), function (e) {
+					over();
+					put(name, e.data);
+				});
+			}
+			source.onerror = function () {
+				over();
+				poll(name);
+			};
+		});
 	}
 
 	function targetOf(el) {
@@ -328,6 +386,9 @@
 			sentPlain = false;
 		});
 	});
+
+	if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", follow);
+	else follow();
 
 	document.addEventListener("input", function (e) {
 		var t = e.target;

@@ -35,6 +35,7 @@ type Harness struct {
 	t       *testing.T
 	server  *httptest.Server
 	pages   map[string]string
+	streams map[string]http.HandlerFunc
 	browser *instance
 }
 
@@ -58,7 +59,7 @@ func NewHarness(t *testing.T) *Harness {
 		t.Fatalf("js: %v", err)
 	}
 
-	h := &Harness{t: t, pages: make(map[string]string)}
+	h := &Harness{t: t, pages: make(map[string]string), streams: make(map[string]http.HandlerFunc)}
 	mux := http.NewServeMux()
 	root, err := gate.FindModuleRoot()
 	if err != nil {
@@ -95,6 +96,13 @@ func NewHarness(t *testing.T) *Harness {
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(html))
+	})
+	mux.HandleFunc("/stream/", func(w http.ResponseWriter, r *http.Request) {
+		if fn, ok := h.streams[r.URL.Path[len("/stream/"):]]; ok {
+			fn(w, r)
+			return
+		}
+		http.NotFound(w, r)
 	})
 	mux.HandleFunc("/css/", func(w http.ResponseWriter, r *http.Request) {
 		id, err := url.PathUnescape(r.URL.Path[len("/css/"):])
@@ -140,6 +148,13 @@ func (h *Harness) CloseBrowser() {
 func (h *Harness) RegisterPage(id, html string) string {
 	h.pages[id] = html
 	return h.server.URL + "/page/" + url.PathEscape(id)
+}
+
+// RegisterStream serves a handler of the test's own — a stream of events —
+// and returns its URL.
+func (h *Harness) RegisterStream(id string, fn http.HandlerFunc) string {
+	h.streams[id] = fn
+	return h.server.URL + "/stream/" + url.PathEscape(id)
 }
 
 // RegisterCSS stores a stylesheet and returns its URL.

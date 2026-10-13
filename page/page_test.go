@@ -76,6 +76,10 @@ func TestZones(t *testing.T) {
 	if !strings.HasPrefix(notice, `<div class="tc-msg">Read from the copy</div><div class="tc-main__diag"><div class="tc-diag">`) {
 		t.Errorf("the notice: %s", notice)
 	}
+	run := w.Runbar{Zone: "run", Stream: "/run/events", Changed: "changed", Ended: "ended", Poll: "/run", Every: 5}.Render()
+	if !strings.Contains(run, `data-tc-zone="run" data-tc-stream="/run/events" data-tc-changed="changed" data-tc-ended="ended" data-tc-poll="/run" data-tc-every="5"`) {
+		t.Errorf("the run's line does not name its stream and poll: %s", run)
+	}
 	nav := w.Nav{Target: "main", Items: []w.NavItem{{Label: "Tasks", Href: "/tasks"}}}.Render()
 	if !strings.Contains(nav, `class="tc-nav" data-tc-target="main"`) {
 		t.Errorf("the nav does not name its target: %s", nav)

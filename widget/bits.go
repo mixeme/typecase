@@ -265,10 +265,10 @@ func (Drop) runbarPart() {}
 // Runbar — tc-runbar
 //
 // Роль. Ход опроса над списком: шкала, что опрошено, что не ответило, когда, остановить.
-// Вход. Runbar{Meter, Parts, Failed, Progress, Saving, Zone}.
+// Вход. Runbar{Meter, Parts, Failed, Progress, Saving, Zone, Stream, Changed, Ended, Poll, Every}.
 // Состояния. plain | failed | stop.
 // Инварианты. Шкала — первой; неответившее — кнопкой «N did not answer» с меню отказов (Drop, MenuRefusal), где каждый расписан полностью; строка печатает фрагмент своего кадра.
-// Поведение. «Stop» прерывает опрос.
+// Поведение. «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама.
 // Эталон. кадр `components-16`, фрагмент `.tc-runbar`.
 // Содержимое. Шкала, текст, красные куски, моноширинное время, прижатая кнопка.
 // Чего нет. Своей кнопки закрытия: строка уходит, когда опрос кончился.
@@ -285,6 +285,18 @@ type Runbar struct {
 	// layer puts an answer for that name here (Carrel's task 84). The library
 	// has no names of its own.
 	Zone string
+	// A line that is a zone follows its run with the live layer (Carrel's
+	// task 85). Stream is the address of a stream of events: Changed and
+	// Ended are the names of its events, each carrying a fragment — the line
+	// as it is now and whatever other zones changed; on Ended the stream is
+	// closed. Poll is the address asked instead, every Every seconds, when
+	// there is no stream or it broke, for as long as the line that comes
+	// back names it. Without the layer the run shows after a reload.
+	Stream  string
+	Changed string
+	Ended   string
+	Poll    string
+	Every   int
 }
 
 // Render prints the line.
@@ -292,7 +304,8 @@ func (r Runbar) Render() string { return r.html(nil) }
 
 func (r Runbar) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-zone", r.Zone) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
+	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-zone", r.Zone) + attr("data-tc-stream", r.Stream) + attr("data-tc-changed", r.Changed) + attr("data-tc-ended", r.Ended) +
+		attr("data-tc-poll", r.Poll) + attr("data-tc-every", pick(r.Every > 0, strconv.Itoa(r.Every))) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
 	for _, p := range r.Parts {
 		s.WriteString(p.html(nil))
 	}
