@@ -4373,7 +4373,7 @@ Read  2 min ago · not changed on server</div>
   <div class="frame" data-frame="s-contacts-32">
     <div class="frame-label"><span>Связанная запись · какую копию править</span><span class="frag">фрагмент</span><i>лист перед правкой</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" action="/app/contacts/linked/8d21-55ce-0b17/edit" method="get">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-pencil"/></svg>
         <b class="tc-sheet__title">Which copy to edit?</b>
@@ -4381,15 +4381,15 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-sheet__body">
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">This person stands in three books. Saving changes one copy only; the others stay as they are.</span>
-          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span><a class="tc-btn is-sm" href="/app/contacts/nextcloud/arhiv/8d21-55ce-0b17/edit">nextcloud · Архив</a><span class="tc-dim tc-dim--t11-5">the copy you opened · vera@arhiv.example</span></div>
-          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span><a class="tc-btn is-sm" href="/app/contacts/nextcloud/kontakty/8d21-55ce-0b17/edit">nextcloud · Контакты</a><span class="tc-dim tc-dim--t11-5">Email differ · v.lebedeva@example.org</span></div>
-          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><a class="tc-btn is-sm" aria-disabled="true">baikal · Общий</a><span class="tc-dim tc-dim--t11-5">Phone differ · read-only: it cannot be edited</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#A05A2C"></span><label class="tc-check"><input class="tc-check__box" type="radio" name="copy" value="nextcloud/arhiv" checked><span class="tc-tickrow__tick is-off"></span>nextcloud · Архив</label><span class="tc-dim tc-dim--t11-5">the copy you opened · vera@arhiv.example</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span><label class="tc-check"><input class="tc-check__box" type="radio" name="copy" value="nextcloud/kontakty"><span class="tc-tickrow__tick is-off"></span>nextcloud · Контакты</label><span class="tc-dim tc-dim--t11-5">Email differ · v.lebedeva@example.org</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-dim">baikal · Общий</span><span class="tc-dim tc-dim--t11-5">Phone differ · read-only: it cannot be edited</span></div>
         </div>
-        <div class="tc-sheet__foot"><span class="tc-dim tc-dim--t11-5">Press a copy to open its form.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Edit this copy</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
-  <figcaption><b>Правка связанной записи пишется в одну копию, и человек выбирает какую — до формы</b> (решения владельца 11.10 и 13.10, задача 153, Р-58). Edit у записи со связанными копиями сначала открывает этот лист: строка на копию — метка и источник кнопкой, которая открывает форму этой копии, и чем копия разнится; копия только для чтения выключена, причина рядом. Лист один для всех родов: у события, задачи и заметки те же строки, заголовок тот же. У записи без связанных копий листа нет: Edit открывает форму сразу. Вариант, где форма открывалась сразу и сама называла копию и соседние, отвергнут как слишком сложный для понимания.</figcaption>
+  <figcaption><b>Правка связанной записи пишется в одну копию, и человек выбирает какую — до формы</b> (решения владельца 11.10 и 13.10, задача 153, Р-58). Edit у записи со связанными копиями сначала открывает этот лист: строка на копию — метка, отметка выбора с источником и чем копия разнится. <b>Копии — отметки, не кнопки:</b> нажатие на копию только выбирает её, форму открывает главная кнопка «Edit this copy». Отмечена та копия, которую открыли. Копия только для чтения стоит строкой без отметки, с причиной. Лист один для всех родов: у события, задачи и заметки те же строки. У записи без связанных копий листа нет: Edit открывает форму сразу. Вариант, где форма открывалась сразу и сама называла копию и соседние, отвергнут как слишком сложный для понимания.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -6218,6 +6218,27 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
   <figcaption>Связей у записи сколько угодно (RFC 5545, <code>RELATED-TO</code>): поле держит все пилюлями, у каждой свой крестик, строка ввода стоит после последней и добавляет ещё одну; пилюли переносятся, строка уходит на новую строку, когда ей тесно. Пилюля называет запись, а не род связи — <code>RELTYPE</code> сервер хранит как есть. Запись, которой нет среди загруженных, — пилюля с её UID; карточка (заметка, заведённая из хронологии человека) — имя и «contact». «By UID…» открывает на месте поля строку для UID. У события поля нет.</figcaption>
+  </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-tasks-16">
+    <div class="frame-label"><span>Связанная задача · какую копию отметить</span><span class="frag">фрагмент</span><i>лист по галке в списке</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet tc-sheet--w520" action="/app/tasks/done" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-task"/></svg>
+        <b class="tc-sheet__title">Which copy to mark done?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Собрать чемодан · 2 copies</span>
+        </div>
+        <div class="tc-sheet__body">
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">This task stands in two lists. Tick the copy that is done; a copy that is not ticked stays as it is.</span>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="copy" value="nextcloud/dela" checked><span class="tc-tickrow__tick"></span>nextcloud · Дела</label><span class="tc-dim tc-dim--t11-5">due 12 Aug 18:00</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="copy" value="nextcloud/rabota"><span class="tc-tickrow__tick is-off"></span>nextcloud · Работа</label><span class="tc-dim tc-dim--t11-5">Due differ · due 13 Aug</span></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Mark done</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+    </div>
+  </div>
+  <figcaption><b>Галка у связанной задачи в списке открывает лист «какую копию отметить»</b> (решения владельца 13.10, задача 153, Р-58): строка задачи в списке одна на все копии, а отметка пишется в ту, которую выбрали. Копии — отметки выбора, не кнопки: нажатие на копию ничего не делает, пока не нажата главная кнопка «Mark done». По умолчанию отмечена первая копия; можно отметить и обе. «Cancel» закрывает лист, ничего не записав. У задачи без связанных копий листа нет — галка в списке отмечает сразу.</figcaption>
   </figure>
 </div>
 
