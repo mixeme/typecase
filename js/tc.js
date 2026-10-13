@@ -466,21 +466,45 @@
 
 	// A segmented switch is a radio group: pressing an option chooses it, the
 	// arrows move the choice along the switch (L-4 tc-seg).
-	function chooseSeg(opt) {
-		var seg = closest(opt, ".tc-seg");
-		if (!seg) return;
+	function markSeg(seg, opt) {
 		seg.querySelectorAll(".tc-seg__opt").forEach(function (o) {
 			o.classList.toggle("is-on", o === opt);
 			if (o === opt) o.setAttribute("aria-checked", "true");
 			else o.removeAttribute("aria-checked");
 		});
+	}
+
+	function chooseSeg(opt) {
+		var seg = closest(opt, ".tc-seg");
+		if (!seg) return;
+		markSeg(seg, opt);
 		// Over a table in a text the switch is Wrap / One line (tc-doc__table).
 		var table = closest(seg, ".tc-doc__table");
 		if (table) table.classList.toggle("is-line", opt !== seg.querySelector(".tc-seg__opt"));
-		if (seg.hasAttribute("data-tc-theme-switch")) {
-			var box = opt.querySelector("input");
-			setTheme((box ? box.value : opt.textContent).trim().toLowerCase());
-		}
+		if (seg.hasAttribute("data-tc-theme-switch")) setTheme(themeOf(opt));
+	}
+
+	function themeOf(opt) {
+		var box = opt.querySelector("input");
+		return (box ? box.value : opt.textContent).trim().toLowerCase();
+	}
+
+	// The theme's switch shows the choice kept in this browser, not the one
+	// the server printed: the server does not know it (Carrel's task 89).
+	function initTheme(root) {
+		var kept = null;
+		try {
+			kept = localStorage.getItem("tc-theme");
+		} catch (e) {}
+		if (kept !== "light" && kept !== "dark") kept = "auto";
+		root.querySelectorAll(".tc-seg[data-tc-theme-switch]").forEach(function (seg) {
+			seg.querySelectorAll(".tc-seg__opt").forEach(function (opt) {
+				if (themeOf(opt) !== kept) return;
+				var box = opt.querySelector("input");
+				if (box) box.checked = true;
+				else markSeg(seg, opt);
+			});
+		});
 	}
 
 	// The theme's switch keeps the choice in this browser, where theme.js
@@ -1188,6 +1212,7 @@
 		watch(root);
 		initDynamic(root);
 		initPictures(root);
+		initTheme(root);
 		initMenus(root);
 		initLayers(root);
 		initDisables(root);

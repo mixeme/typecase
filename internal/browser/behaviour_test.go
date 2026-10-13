@@ -1958,3 +1958,27 @@ func TestPasteAndQueue(t *testing.T) {
 		t.Errorf("without the layer: %q; want the answer loaded as a page", bare)
 	}
 }
+
+// TestThemeShowsKept (Carrel's task 89): the theme's switch shows the choice
+// kept in this browser, not the one the server printed — as radio buttons
+// and as buttons; with nothing kept it shows «Auto».
+func TestThemeShowsKept(t *testing.T) {
+	needChrome(t)
+	opts := []w.SegOption{{Label: "Auto", Value: "auto"}, {Label: "Light", Value: "light", On: true}, {Label: "Dark", Value: "dark"}}
+	body := `<div class="tc-root">` + w.Seg{Name: "theme", Theme: true, Options: opts}.Render() + w.Seg{Theme: true, Options: opts}.Render() + `</div>`
+	h := browser.NewHarness(t)
+	const state = `document.querySelector(".tc-seg input:checked").value + " " + document.querySelector(".tc-seg button.is-on").textContent + " " + document.querySelectorAll(".tc-seg button[aria-checked]").length`
+	var none, kept string
+	if err := h.Run(h.RegisterPage("theme-kept", browser.PageHTML(body, "")), 900, 300,
+		chromedp.Evaluate(state, &none),
+		chromedp.Evaluate(`localStorage.setItem("tc-theme", "dark"); true`, nil),
+		chromedp.Reload(),
+		chromedp.Evaluate(state+` + " " + document.documentElement.getAttribute("data-tc-theme")`, &kept),
+		chromedp.Evaluate(`localStorage.removeItem("tc-theme"); true`, nil),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if none != "auto Auto 1" || kept != "dark Dark 1 dark" {
+		t.Errorf("the theme's switch: with nothing kept %q, with dark kept %q; want «auto Auto 1», «dark Dark 1 dark»", none, kept)
+	}
+}

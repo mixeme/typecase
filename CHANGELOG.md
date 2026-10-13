@@ -48,6 +48,10 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **The theme's switch shows what this browser keeps** (Carrel's task 89,
+  the theme). A `Seg` with `Theme` shows on load the choice kept under
+  `tc-theme` — «Auto» when nothing is kept — whatever option the server
+  printed as chosen: print any. `TestThemeShowsKept`.
 - **A pasted file, and an upload that stays on the page** (Carrel's task
   88, without the drop on a folder). `Area.Attach` names the form whose
   file field takes a picture pasted into the text — it becomes a file
