@@ -685,7 +685,7 @@ func Io5() Screen {
 								Title: &w.HeadTitle{Text: "Import contacts"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Разное (mix).vcf"}, w.Text(" · 84 KB · vCard 3.0")}}},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 122 contacts", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 117 contacts", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -695,19 +695,33 @@ func Io5() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{Value: "nextcloud · Контакты"},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Any address book you may write to. The UID collisions below are counted against it.")},
+												Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")},
 											},
 										},
 										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "5 records of this file are already in Контакты",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "Skip them", Href: "/app/contacts/nextcloud/kontakty/import?existing=skip", On: true},
+													{Label: "Replace them", Href: "/app/contacts/nextcloud/kontakty/import?existing=replace"},
+													{Label: "Import as copies", Href: "/app/contacts/nextcloud/kontakty/import?existing=copy"},
+												},
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}},
+										},
+										OwnLine: true,
 									},
 								},
 								Tight: true,
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "122", Label: "ready"},
+									w.Stat{Value: "117", Label: "ready"},
 									w.Stat{Value: "3", Label: "with errors", Error: true},
-									w.Stat{Value: "5", Label: "UID collisions"},
+									w.Stat{Value: "5", Label: "already here"},
 								},
 							},
 							w.Table{
@@ -726,7 +740,7 @@ func Io5() Screen {
 											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Артём Белов")}},
 											{Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("New UID will be assigned")}},
+											{Parts: []w.CellPart{w.Text("Already here — skipped")}},
 										},
 									},
 									{
@@ -740,9 +754,7 @@ func Io5() Screen {
 								},
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Import always creates. A UID that already exists gets a new one and is listed in the report."),
-								},
+								Parts: []w.MsgPart{w.Text("What is skipped is listed in the report, and so is what could not be read.")},
 							},
 						},
 						Variant: w.DialogWide,
@@ -792,7 +804,7 @@ func Io6() Screen {
 									w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Личный 2026.ics"}, w.Text(" · 210 KB · iCalendar 2.0")}},
 								},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 84 events", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 81 events", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -807,14 +819,28 @@ func Io6() Screen {
 										},
 										Width: w.FieldLG,
 									},
+									w.Field{
+										Label: "3 events of this file are already in Личный",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "Skip them", Href: "/app/calendar/nextcloud/lichny/import?existing=skip", On: true},
+													{Label: "Replace them", Href: "/app/calendar/nextcloud/lichny/import?existing=replace"},
+													{Label: "Import as copies", Href: "/app/calendar/nextcloud/lichny/import?existing=copy"},
+												},
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}},
+										},
+										OwnLine: true,
+									},
 								},
 								Tight: true,
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "84", Label: "ready"},
+									w.Stat{Value: "81", Label: "ready"},
 									w.Stat{Value: "2", Label: "with errors", Error: true},
-									w.Stat{Value: "3", Label: "UID collisions"},
+									w.Stat{Value: "3", Label: "already here"},
 									w.Stat{Value: "6", Label: "skipped"},
 								},
 							},
@@ -875,9 +901,7 @@ func Io6() Screen {
 								},
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Import always creates. A repeating event keeps its rule: the series is one record, not fifty-two."),
-								},
+								Parts: []w.MsgPart{w.Text("A repeating event keeps its rule: the series is one record, not fifty-two.")},
 							},
 						},
 						Variant: w.DialogWide,
@@ -925,7 +949,7 @@ func Io7() Screen {
 								Title: &w.HeadTitle{Text: "Import tasks"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Дела.ics"}, w.Text(" · 12 KB · iCalendar 2.0")}}},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 29 tasks", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 27 tasks", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -940,14 +964,28 @@ func Io7() Screen {
 										},
 										Width: w.FieldLG,
 									},
+									w.Field{
+										Label: "2 tasks of this file are already in Дела",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "Skip them", Href: "/app/tasks/nextcloud/dela/import?existing=skip", On: true},
+													{Label: "Replace them", Href: "/app/tasks/nextcloud/dela/import?existing=replace"},
+													{Label: "Import as copies", Href: "/app/tasks/nextcloud/dela/import?existing=copy"},
+												},
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}},
+										},
+										OwnLine: true,
+									},
 								},
 								Tight: true,
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "29", Label: "ready"},
+									w.Stat{Value: "27", Label: "ready"},
 									w.Stat{Value: "1", Label: "with errors", Error: true},
-									w.Stat{Value: "2", Label: "UID collisions"},
+									w.Stat{Value: "2", Label: "already here"},
 									w.Stat{Value: "5", Label: "skipped"},
 								},
 							},
@@ -1066,7 +1104,7 @@ func Io8() Screen {
 								Title: &w.HeadTitle{Text: "Import notes"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "заметки-2026.zip"}, w.Text(" · 1.2 MB · 64 files")}}},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 61 notes", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 60 notes", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -1083,14 +1121,28 @@ func Io8() Screen {
 										},
 										Width: w.FieldLG,
 									},
+									w.Field{
+										Label: "1 note of this file is already in Записи",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "Skip it", Href: "/app/notes/nextcloud/zapisi/import?existing=skip", On: true},
+													{Label: "Replace it", Href: "/app/notes/nextcloud/zapisi/import?existing=replace"},
+													{Label: "Import as a copy", Href: "/app/notes/nextcloud/zapisi/import?existing=copy"},
+												},
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("It stays as it is here; the file's version is not written.")}},
+										},
+										OwnLine: true,
+									},
 								},
 								Tight: true,
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "61", Label: "ready"},
+									w.Stat{Value: "60", Label: "ready"},
 									w.Stat{Value: "2", Label: "with errors", Error: true},
-									w.Stat{Value: "1", Label: "UID collision"},
+									w.Stat{Value: "1", Label: "already here"},
 									w.Stat{Value: "1", Label: "skipped"},
 								},
 							},
@@ -1120,7 +1172,7 @@ func Io8() Screen {
 											{Parts: []w.CellPart{w.Text("doroga.md")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Про дорогу до дачи")}},
 											{Parts: []w.CellPart{w.Text("2026-06-30")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("New UID will be assigned")}},
+											{Parts: []w.CellPart{w.Text("Already here — skipped")}},
 										},
 									},
 									{

@@ -10699,26 +10699,28 @@ Read  2 min ago</div>
         <div class="tc-dialog is-wide">
           <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div><div class="tc-head__sub"><span class="tc-mono">Разное (mix).vcf</span> · 84 KB · vCard 3.0</div></div>
-            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 122 contacts</button></div>
+            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 117 contacts</button></div>
           </div>
           <div class="tc-form is-tight">
             <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button">nextcloud · Контакты</button>
-              <span class="tc-field__hint">Any address book you may write to. The UID collisions below are counted against it.</span></div>
+              <span class="tc-field__hint">Any address book you may write to. What is already here is counted against it.</span></div>
+            <div class="tc-field is-own-line"><label>5 records of this file are already in Контакты</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=copy">Import as copies</a></span>
+              <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
           </div>
           <div class="tc-stats">
-            <span class="tc-stat"><b>122</b> ready</span>
+            <span class="tc-stat"><b>117</b> ready</span>
             <span class="tc-stat is-error"><b>3</b> with errors</span>
-            <span class="tc-stat"><b>5</b> UID collisions</span>
+            <span class="tc-stat"><b>5</b> already here</span>
           </div>
           <table class="tc-table">
             <thead><tr><th>Source</th><th>Name</th><th class="tc-table__n3">UID</th><th class="tc-table__n4">Result</th></tr></thead>
             <tbody>
               <tr><td class="tc-mono">Разное (mix).vcf</td><td>Анна Ковалёва</td><td class="tc-mono tc-table__n3">4f2b-9c31-a0e7</td><td class="tc-table__n4">Ready</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Артём Белов</td><td class="tc-mono tc-table__n3">1a77-40de-bb02</td><td class="tc-table__n4">New UID will be assigned</td></tr>
+              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Артём Белов</td><td class="tc-mono tc-table__n3">1a77-40de-bb02</td><td class="tc-table__n4">Already here — skipped</td></tr>
               <tr><td class="tc-mono">Разное (mix).vcf</td><td class="tc-dim">— (no FN)</td><td class="tc-mono tc-table__n3">—</td><td class="tc-table__n4 tc-table__n4--danger">vCard 2.1 quoted-printable: cannot decode line 12</td></tr>
             </tbody>
           </table>
-          <div class="tc-msg">Import always creates. A UID that already exists gets a new one and is listed in the report.</div>
+          <div class="tc-msg">What is skipped is listed in the report, and so is what could not be read.</div>
         </div>
       </div>
     </div>
@@ -10754,16 +10756,18 @@ Read  2 min ago</div>
         <div class="tc-dialog is-wide">
           <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import events</div><div class="tc-head__sub"><span class="tc-mono">Личный 2026.ics</span> · 210 KB · iCalendar 2.0</div></div>
-            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 84 events</button></div>
+            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 81 events</button></div>
           </div>
           <div class="tc-form is-tight">
             <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button">nextcloud · Личный</button>
               <span class="tc-field__hint">Calendars only. A list of tasks is a different collection and takes different components.</span></div>
+            <div class="tc-field is-own-line"><label>3 events of this file are already in Личный</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=copy">Import as copies</a></span>
+              <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
           </div>
           <div class="tc-stats">
-            <span class="tc-stat"><b>84</b> ready</span>
+            <span class="tc-stat"><b>81</b> ready</span>
             <span class="tc-stat is-error"><b>2</b> with errors</span>
-            <span class="tc-stat"><b>3</b> UID collisions</span>
+            <span class="tc-stat"><b>3</b> already here</span>
             <span class="tc-stat"><b>6</b> skipped</span>
           </div>
           <table class="tc-table">
@@ -10776,7 +10780,7 @@ Read  2 min ago</div>
               <tr><td class="tc-mono">Личный 2026.ics</td><td class="tc-dim">— (no SUMMARY)</td><td class="tc-mono tc-table__n3">2026-05-04</td><td class="tc-table__n4 tc-table__n4--danger">DTSTART without DTEND or DURATION: cannot tell how long it lasts</td></tr>
             </tbody>
           </table>
-          <div class="tc-msg">Import always creates. A repeating event keeps its rule: the series is one record, not fifty-two.</div>
+          <div class="tc-msg">A repeating event keeps its rule: the series is one record, not fifty-two.</div>
         </div>
       </div>
     </div>
@@ -10833,16 +10837,18 @@ Read  2 min ago</div>
         <div class="tc-dialog is-wide">
           <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import tasks</div><div class="tc-head__sub"><span class="tc-mono">Дела.ics</span> · 12 KB · iCalendar 2.0</div></div>
-            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 29 tasks</button></div>
+            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 27 tasks</button></div>
           </div>
           <div class="tc-form is-tight">
             <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button">nextcloud · Дела</button>
               <span class="tc-field__hint">Lists of tasks only. A calendar is a different collection: events go there, not here.</span></div>
+            <div class="tc-field is-own-line"><label>2 tasks of this file are already in Дела</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=copy">Import as copies</a></span>
+              <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
           </div>
           <div class="tc-stats">
-            <span class="tc-stat"><b>29</b> ready</span>
+            <span class="tc-stat"><b>27</b> ready</span>
             <span class="tc-stat is-error"><b>1</b> with errors</span>
-            <span class="tc-stat"><b>2</b> UID collisions</span>
+            <span class="tc-stat"><b>2</b> already here</span>
             <span class="tc-stat"><b>5</b> skipped</span>
           </div>
           <table class="tc-table">
@@ -10909,16 +10915,18 @@ Read  2 min ago</div>
         <div class="tc-dialog is-wide">
           <div class="tc-steps"><span class="tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import notes</div><div class="tc-head__sub"><span class="tc-mono">заметки-2026.zip</span> · 1.2 MB · 64 files</div></div>
-            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 61 notes</button></div>
+            <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 60 notes</button></div>
           </div>
           <div class="tc-form is-tight">
             <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button">nextcloud · Записи</button>
               <span class="tc-field__hint">Any notebook you may write to. A WebDAV folder from the step before lands in this same table.</span></div>
+            <div class="tc-field is-own-line"><label>1 note of this file is already in Записи</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=skip">Skip it</a><a class="tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=replace">Replace it</a><a class="tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=copy">Import as a copy</a></span>
+              <span class="tc-field__hint">It stays as it is here; the file's version is not written.</span></div>
           </div>
           <div class="tc-stats">
-            <span class="tc-stat"><b>61</b> ready</span>
+            <span class="tc-stat"><b>60</b> ready</span>
             <span class="tc-stat is-error"><b>2</b> with errors</span>
-            <span class="tc-stat"><b>1</b> UID collision</span>
+            <span class="tc-stat"><b>1</b> already here</span>
             <span class="tc-stat"><b>1</b> skipped</span>
           </div>
           <table class="tc-table">
@@ -10926,7 +10934,7 @@ Read  2 min ago</div>
             <tbody>
               <tr><td class="tc-mono">2026-03-11-podryadchik.md</td><td>Встреча с подрядчиком</td><td class="tc-mono tc-table__n3">2026-03-11</td><td class="tc-table__n4">Ready — title, date and tags from front matter</td></tr>
               <tr><td class="tc-mono">idei/crdt.md</td><td>Что почитать про CRDT</td><td class="tc-mono tc-table__n3">2026-08-04</td><td class="tc-table__n4">Ready — no front matter: title from the first heading, date from the file</td></tr>
-              <tr><td class="tc-mono">doroga.md</td><td>Про дорогу до дачи</td><td class="tc-mono tc-table__n3">2026-06-30</td><td class="tc-table__n4">New UID will be assigned</td></tr>
+              <tr><td class="tc-mono">doroga.md</td><td>Про дорогу до дачи</td><td class="tc-mono tc-table__n3">2026-06-30</td><td class="tc-table__n4">Already here — skipped</td></tr>
               <tr><td class="tc-mono">skan.pdf</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3">—</td><td class="tc-table__n4 tc-table__n4--dusty">Skipped: not Markdown</td></tr>
               <tr><td class="tc-mono">pustoj.md</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3">—</td><td class="tc-table__n4 tc-table__n4--danger">Empty file: nothing to store and nothing to name it by</td></tr>
             </tbody>

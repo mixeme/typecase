@@ -50,7 +50,7 @@ var _ = add(
 	form("hint-xl", w.Field{Label: "Advanced RRULE", Parts: []w.FieldPart{w.Input{Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261228", Label: "Advanced RRULE", Mono: true}, w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}}}, Width: w.FieldXL}, "s-agenda-3", "tc-field", 22),
 	form("error-aside", w.Field{Label: "Email", LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}}, Parts: []w.FieldPart{w.Input{Value: "viktor@", Label: "Email", Error: true}, w.FieldHint{Parts: []w.Inline{w.Text("Enter one address, like name@example.org.")}, Variant: w.HintDanger}}, Width: w.FieldMD}, "s-admin-19", "tc-field", 2),
 	form("labelled", w.Field{Label: "Every", Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}}, Width: w.FieldXS}, "s-agenda-3", "tc-field", 18),
-	form("hint", field("Into", w.FieldLG, pk, hint(t("Any address book you may write to. The UID collisions below are counted against it."))), "s-io-5", "tc-field", 1),
+	form("hint", w.Field{Label: "Into", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Контакты"}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")}}}, Width: w.FieldLG}, "s-io-5", "tc-field", 1),
 	form("labelled", w.Field{Label: "Street", Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}}, Width: w.FieldLG}, "s-contacts-3", "tc-field", 16),
 	form("labelled", field("Time", w.FieldFix130, in), "s-notes-20", "tc-field", 3),
 	form("labelled", field("Start", w.FieldFix96, in), "s-notes-9", "tc-field", 3),

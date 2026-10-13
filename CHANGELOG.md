@@ -499,6 +499,14 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **Import asks about what is already here** (Carrel's task 159; the
+  owner's decision of 12.10, accepted 13.10): the four previews
+  (`s-io-5`…`-8`) have, beside «Into», the question «5 records of this file
+  are already in Контакты» with a segment of links — «Skip them» (chosen),
+  «Replace them», «Import as copies» — and a hint that says what the chosen
+  one does. The count reads «already here», not «UID collisions»; «ready»
+  and the button count what will be written; such a row says «Already here
+  — skipped»; the step's message no longer says import always creates.
 - **A reminder of one's own** (Carrel's task 156; the owner's decision of
   12.10, accepted 13.10): the lists of a reminder have «Custom…»
   (`s-agenda-9`, `s-notes-18`, `desktop-18`), and `s-agenda-19`, new, draws
