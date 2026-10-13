@@ -5230,12 +5230,13 @@ SEQUENCE  2</div>
         <button class="tc-menu__item" type="button" role="menuitem">30 minutes before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 hour before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 day before</button>
+        <button class="tc-menu__item" type="button" role="menuitem">Custom…</button>
         <span class="tc-menu__sep"></span>
         <button class="tc-menu__item" type="button" role="menuitem">No reminder</button>
       </div>
     </div>
   </div>
-  <figcaption>Шаги, которыми напоминания задают почти все клиенты. Своё число минут приходит с сервера как есть и встаёт в этот список строкой.</figcaption>
+  <figcaption>Шаги, которыми напоминания задают почти все клиенты, и <b>«Custom…»</b> — свой отступ (решение владельца 12.10, задача 156): он открывает в строке напоминания число и единицу, кадр ниже.</figcaption>
   </figure>
   <figure style="flex:0 1 250px">
   <div class="frame" data-frame="s-agenda-10">
@@ -5252,6 +5253,32 @@ SEQUENCE  2</div>
     </div>
   </div>
   <figcaption>Частота; всё тоньше — дни недели, «до» и «сколько раз» — рядом полями, а редкие правила — в Advanced RRULE.</figcaption>
+  </figure>
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-agenda-19">
+    <div class="frame-label"><span>Напоминание · свой отступ</span><span class="frag">фрагмент</span><i>группа Reminders правки события</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-form tc-form--pad0">
+          <div class="tc-fset">
+            <div class="tc-rubric">Reminders</div>
+            <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
+            <div class="tc-field tc-field--md"><label>Reminder</label><button class="tc-in is-pick" type="button">Custom…</button></div>
+            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.count" value="2" aria-label="How long"></div>
+            <div class="tc-field tc-field--sm"><label>Unit</label><button class="tc-in is-pick" type="button">days before</button></div>
+            <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Reminders</div>
+            <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">Custom…</button></div>
+            <div class="tc-field tc-field--xs"><label>How long</label><input class="tc-in is-mono" type="text" inputmode="numeric" name="reminder.count" value="1" aria-label="How long"></div>
+            <div class="tc-field tc-field--sm"><label>Unit</label><button class="tc-in is-pick" type="button">days before</button></div>
+            <div class="tc-field tc-field--xs"><label>At</label><input class="tc-in is-mono" type="time" name="reminder.at" value="09:00" aria-label="At"></div>
+            <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <figcaption><b>Свой отступ — «Custom…» в списке напоминания</b> (решение владельца 12.10, задача 156): строка остаётся строкой напоминания, рядом с выбором встают число и единица — minutes, hours, days, weeks before. Наверху — событие со временем: «за 2 дня». Внизу — событие на весь день: у него ещё и час, «накануне в 09:00» — это «1 day before» и «At 09:00». Напоминание с отступом не из шести шагов, записанное другим клиентом, приходит в форму этой же строкой, а не лишним пунктом списка. На карточке и в панели такое напоминание — словами: «2 days before», «1 day before, 09:00». Быстрый лист держит тот же список с «Custom…» и те же поля в своей строке. Без сценариев «Custom…» выбирают и жмут «Add reminder» или «Save» — сервер отвечает формой с открытыми полями.</figcaption>
   </figure>
 
 <figure style="flex:1 1 100%">
@@ -7699,6 +7726,7 @@ Read  2 min ago</div>
         <button class="tc-menu__item" type="button" role="menuitem">30 minutes before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 hour before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 day before</button>
+        <button class="tc-menu__item" type="button" role="menuitem">Custom…</button>
         <span class="tc-menu__sep"></span>
         <button class="tc-menu__item" type="button" role="menuitem">No reminder</button>
       </div>
@@ -23990,6 +24018,7 @@ dav: HTTP 503: the server is busy</div></div>
         <button class="tc-menu__item" type="button" role="menuitem">30 minutes before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 hour before</button>
         <button class="tc-menu__item" type="button" role="menuitem">1 day before</button>
+        <button class="tc-menu__item" type="button" role="menuitem">Custom…</button>
         <span class="tc-menu__sep"></span>
         <button class="tc-menu__item" type="button" role="menuitem">No reminder</button>
       </div>

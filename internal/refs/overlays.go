@@ -242,6 +242,7 @@ var _ = add(
 		w.MenuItem{Label: "30 minutes before"},
 		w.MenuItem{Label: "1 hour before"},
 		w.MenuItem{Label: "1 day before"},
+		w.MenuItem{Label: "Custom…"},
 		w.MenuSep{},
 		w.MenuItem{Label: "No reminder"}}, Width: w.MenuWidth212}, "s-agenda-9", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{

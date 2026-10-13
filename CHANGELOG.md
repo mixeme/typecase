@@ -490,6 +490,12 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **A reminder of one's own** (Carrel's task 156; the owner's decision of
+  12.10, accepted 13.10): the lists of a reminder have «Custom…»
+  (`s-agenda-9`, `s-notes-18`, `desktop-18`), and `s-agenda-19`, new, draws
+  what it opens — beside the pick stand «How long» and «Unit» (minutes,
+  hours, days, weeks before), and for an all-day event «At», the hour. 431
+  frames.
 - **An event has «Related to»** (Carrel's task 160; the owner accepted it,
   13.10): the edit and the new form of an event have the group «Other» with
   the field «Related to» before «Attachments», as a task's form has —
