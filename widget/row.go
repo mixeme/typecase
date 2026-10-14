@@ -137,27 +137,29 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Caption, Source, On, Past, Inset, Single, Short, Href}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Badges, Source, On, Past, Inset, Single, Short, Href}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
 // Эталон. кадр `s-agenda-1`, фрагмент `.tc-row`.
-// Содержимое. Метка, время моноширинным, название (с найденным жирным), место, бейдж, источник.
+// Содержимое. Метка, время моноширинным, название (с найденным жирным), место, плашки по важности (видны те, что умещаются целыми; подсказка ячейки называет все, когда их больше одной), источник.
 // Чего нет. Своих кнопок: действия с записью — в панели и в меню «⋯» шапки.
 type TimeRow struct {
-	Mark    Mark
-	Time    string
-	Title   []Inline
-	Strong  bool // not seen yet
-	Detail  string
-	Caption *Badge
-	Source  string
-	On      bool
-	Past    bool // gone by: faded
-	Inset   bool
-	Single  bool   // the list of one collection: the row has no source column
-	Short   bool   // the lead is a time of day only: its column as narrow as the time (search results)
-	Href    string // the row is a link to its record
+	Mark   Mark
+	Time   string
+	Title  []Inline
+	Strong bool // not seen yet
+	Detail string
+	// Badges are the event's badges by importance — its status, attendees,
+	// repeat; the row shows those that fit whole, two side by side.
+	Badges []Badge
+	Source string
+	On     bool
+	Past   bool // gone by: faded
+	Inset  bool
+	Single bool   // the list of one collection: the row has no source column
+	Short  bool   // the lead is a time of day only: its column as narrow as the time (search results)
+	Href   string // the row is a link to its record
 }
 
 // Render prints the row.
@@ -170,11 +172,7 @@ func (r TimeRow) html(m mix) string {
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))
 	s.WriteString(cell(r.Detail, "tc-row__excerpt", "tc-row__detail"))
-	s.WriteString(`<span class="tc-row__cell tc-row__caption">`)
-	if r.Caption != nil {
-		s.WriteString(r.Caption.html(nil))
-	}
-	s.WriteString(`</span>`)
+	s.WriteString(badgesCell("tc-row__cell tc-row__caption", r.Badges))
 	s.WriteString(source(r.Source, "", nil, r.Single))
 	s.WriteString(`</` + rowTag(r.Href) + `>`)
 	return s.String()
@@ -560,6 +558,25 @@ func (l List) html(m mix) string {
 	return s.String()
 }
 
+// badgesCell prints a cell of a row's badges: those that do not fit whole
+// go to the cell's hidden second line, and the hint names them all when
+// there is more than one.
+func badgesCell(cls string, badges []Badge) string {
+	hint := ""
+	if len(badges) > 1 {
+		var all []string
+		for _, b := range badges {
+			all = append(all, b.Label)
+		}
+		hint = strings.Join(all, ", ")
+	}
+	var parts []string
+	for _, b := range badges {
+		parts = append(parts, b.html(nil))
+	}
+	return `<span class="` + cls + `"` + attr("title", hint) + `>` + strings.Join(parts, " ") + `</span>`
+}
+
 // rowTag is a row's element: a link when it has an address.
 func rowTag(href string) string {
 	if href != "" {
@@ -589,6 +606,7 @@ const (
 	ColumnDate                   // a record's date, an event's time in the agenda (first, before the name): monospaced, 62 px
 	ColumnDetail                 // why a record is in a person's timeline, where an event is: stretches, stays with the name
 	ColumnKind                   // event, task, note or file: 56 px; goes at 460 px
+	ColumnBadges                 // an event's badges by importance, as TimeRow's: 168 px; goes at 620 px
 )
 
 func (c Column) class() string {
@@ -596,11 +614,12 @@ func (c Column) class() string {
 		"tc-row__excerpt tc-col--org", "tc-row__excerpt tc-mono tc-col--birthday", "tc-row__cell tc-row__tags tc-col--tags",
 		"tc-row__cell tc-mono tc-col--changed", "tc-row__cell tc-col--source", "tc-mono tc-col--due", "tc-row__cell tc-mono tc-col--complete",
 		"tc-row__cell tc-mono tc-col--priority", "tc-row__cell tc-col--status", "tc-row__excerpt tc-col--excerpt", "tc-row__cell tc-mono tc-col--date",
-		"tc-row__excerpt tc-col--detail", "tc-row__cell tc-col--kind"}[c]
+		"tc-row__excerpt tc-col--detail", "tc-row__cell tc-col--kind", "tc-row__cell tc-col--badges"}[c]
 }
 
 // ColumnCell is a cell of a row of chosen columns: its column and what it
-// shows — words, or tags in the tags column. Tags are all the record's
+// shows — words, tags in the tags column, badges in the badges column (all
+// the event's, by importance: the cell shows those that fit whole). Tags are all the record's
 // tags: the cell shows the first and counts the rest («работа +1»), its
 // hint names them all (Р-53). The one a person filters by goes first — the
 // consumer puts it there.
@@ -608,6 +627,7 @@ type ColumnCell struct {
 	Column Column
 	Text   string
 	Tags   []RowTag
+	Badges []Badge
 }
 
 // ColumnRow — tc-row
@@ -618,7 +638,7 @@ type ColumnCell struct {
 // Инварианты. Столбцы ровны: у всех строк списка один набор в одном порядке; ширина столбца и ступень, на которой он уходит, — его рода; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным.
 // Эталон. кадр `s-contacts-23`, фрагмент `.tc-row--cols`.
-// Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, первый тег со счётчиком остальных.
+// Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, первый тег со счётчиком остальных, плашки события.
 // Чего нет. Своих ширин: столбец задаёт род, а не данные строки.
 type ColumnRow struct {
 	Tick    *Tick // a task's tick, before the mark
@@ -649,6 +669,10 @@ func (r ColumnRow) html(m mix) string {
 		s.WriteString(r.Avatar.html(nil))
 	}
 	for _, c := range r.Cells {
+		if c.Column == ColumnBadges {
+			s.WriteString(badgesCell(c.Column.class(), c.Badges))
+			continue
+		}
 		cls := c.Column.class()
 		if c.Column == ColumnName && r.Strong {
 			cls = "tc-row__title is-strong tc-col--name"

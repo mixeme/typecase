@@ -128,7 +128,7 @@ var _ = add(
 	// tc-badge
 	primitive("neutral", w.Badge{Label: "external"}, "components-11", "tc-badge", 1),
 	primitive("linked", w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, "components-12", "tc-badge", 1),
-	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 7),
+	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 8),
 	primitive("accent", w.Badge{Label: "credentials unlocked · 4:12", Accent: true}, "s-profile-4", "tc-badge", 1),
 	primitive("local", w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}, "s-plan-1", "tc-badge", 2),
 

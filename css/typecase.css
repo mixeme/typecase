@@ -372,6 +372,9 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-row--cols > .tc-col--due{width:96px}
 .tc-row--cols > :is(.tc-col--complete,.tc-col--priority){width:48px}
 .tc-row--cols > .tc-col--status{width:112px}
+.tc-row--cols > .tc-col--badges{width:168px}
+/* Плашки события по важности: стоят те, что умещаются целыми, — следующая уходит на вторую строку ячейки и не видна, а не обрезается; подсказка ячейки называет все. */
+.tc-row--timecols > .tc-row__caption,.tc-row--cols > .tc-col--badges{white-space:normal;max-height:18px}
 .tc-row--cols > .tc-col--excerpt{flex:1.6 1 160px;min-width:0}
 .tc-row--cols > .tc-col--date{width:62px}
 .tc-row--cols > .tc-col--detail{flex:1 1 120px;min-width:0}
@@ -383,12 +386,12 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-fields__link:hover{text-decoration:underline}
 /* Упоминание карточки, которой в отмеченных книгах нет: имя, не ссылка. */
 .tc-mention.is-lost{color:var(--tc-dusty);text-decoration:underline dotted;text-underline-offset:2px}
-.tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
+.tc-row--timecols{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 168px 140px}
 .tc-row--tickmarkcols{grid-template-columns:14px 3px minmax(178px,2fr) 84px 44px 140px}
 .tc-row--excerpt{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) 80px 140px}
 /* Список одной коллекции: источника у строки нет — нет и его столбца. */
 .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr)}
-.tc-row--timecols.tc-row--single{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 96px}
+.tc-row--timecols.tc-row--single{grid-template-columns:3px 62px minmax(168px,2fr) minmax(110px,1fr) 168px}
 .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(178px,2fr) 84px 44px}
 .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(118px,1.2fr) minmax(170px,2fr) 80px}
 .tc-row--find{grid-template-columns:3px 76px minmax(208px,2.4fr) minmax(120px,1fr) 74px 140px}
@@ -746,7 +749,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--cols > :is(.tc-col--org,.tc-col--birthday,.tc-col--tags,.tc-col--changed,.tc-col--complete,.tc-col--priority){display:none}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr) 140px}
   .tc-row--avatarcols .tc-row__caption{display:none}
-  .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 88px 140px}
+  .tc-row--timecols{grid-template-columns:3px 60px minmax(116px,2fr) 168px 140px}
   .tc-row--timecols .tc-row__detail{display:none}
   .tc-row--find{grid-template-columns:3px 70px minmax(136px,2.4fr) 66px 140px}
   .tc-row--find .tc-row__detail{display:none}
@@ -772,7 +775,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) 80px 140px}
   .tc-row--excerpt > :nth-child(3){display:none}
   .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr)}
-  .tc-row--timecols.tc-row--single{grid-template-columns:3px 60px minmax(116px,2fr) 88px}
+  .tc-row--timecols.tc-row--single{grid-template-columns:3px 60px minmax(116px,2fr) 168px}
   .tc-row--tickmarkcols.tc-row--single{grid-template-columns:14px 3px minmax(112px,2fr) 74px}
   .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(116px,1.4fr) 80px}
 }
@@ -780,7 +783,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row{padding-left:12px;padding-right:12px}
   /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
   .tc-head .tc-acts{flex:0 1 auto;min-width:0}
-  .tc-row--cols > :is(.tc-col--email,.tc-col--status,.tc-col--excerpt){display:none}
+  .tc-row--cols > :is(.tc-col--email,.tc-col--status,.tc-col--badges,.tc-col--excerpt){display:none}
   .tc-row--cols > .tc-col--phone{width:118px}
   .tc-row--avatarcols{grid-template-columns:3px 28px minmax(100px,1.6fr) 118px 130px}
   .tc-row--avatarcols .tc-row__detail{display:none}
@@ -1437,9 +1440,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-row--tickmarkcols--padl14-padr14.tc-row--tickmarkcols--padl14-padr14{padding-left:14px;padding-right:14px}
 .tc-row--timecols--padl14-padr14.tc-row--timecols--padl14-padr14{padding-left:14px;padding-right:14px}
 .tc-row--timecols--op-7.tc-row--timecols--op-7{opacity:.7}
-.tc-row--timecols--time.tc-row--timecols--time{grid-template-columns:3px 37px minmax(168px,2fr) minmax(110px,1fr) 96px 140px}
+.tc-row--timecols--time.tc-row--timecols--time{grid-template-columns:3px 37px minmax(168px,2fr) minmax(110px,1fr) 168px 140px}
 @container tcbox (max-width:800px){
-  .tc-row--timecols--time.tc-row--timecols--time{grid-template-columns:3px 37px minmax(116px,2fr) 88px 140px}
+  .tc-row--timecols--time.tc-row--timecols--time{grid-template-columns:3px 37px minmax(116px,2fr) 168px 140px}
 }
 @container tcbox (max-width:620px){
   .tc-row--timecols--time.tc-row--timecols--time{grid-template-columns:3px 37px minmax(110px,1fr) 130px}

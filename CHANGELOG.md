@@ -8,6 +8,13 @@ do, not what the authors did.
 
 ### Breaking
 
+- `TimeRow.Caption *Badge` is now `TimeRow.Badges []Badge` (the owner's
+  decision of 14.10, Р-61): pass all the event's badges by importance —
+  `AgendaRow.Badges` as it is; the row shows those that fit whole, two side
+  by side («4 attendees» «repeats weekly»), a badge that does not fit is
+  not drawn rather than cut, and the cell's hint names them all when there
+  is more than one. The badges column of `tc-row--timecols` is 168 px at
+  every width where it stands (it was 96 and 88).
 - `Thumb` with `Src` prints its icon too, under the picture (Carrel's task
   148): pass `Icon` with `Src`, as for a file without a thumbnail — a `Thumb`
   that has only `Src` prints an icon with no name.
@@ -31,6 +38,11 @@ do, not what the authors did.
 
 ### Added
 
+- **`ColumnBadges`, `ColumnCell.Badges`**: the agenda in chosen columns
+  keeps the badges (Р-61) — the column «Attendees and status» is
+  `ColumnBadges` with the event's badges, as `TimeRow`'s, 168 px, gone at
+  620 px; an event with nothing to say has an empty cell. `ColumnStatus`
+  stays a task's status in words.
 - **Zones: a part of the page changes without a page load** (Carrel's task
   84, the engine). A link or a form inside a widget that names a `Target`
   asks, with the live layer, the same address as without it, with the
@@ -663,6 +675,15 @@ do, not what the authors did.
   the series». The sheet is the pattern for other such questions: a
   question, what changed, the list of what is touched, two or three
   answers, one of them the default. No new block. 438 frames.
+- **The agenda's badges stand side by side** (the owner's decision of
+  14.10, Р-61). «Синк-ап по релизу» repeats weekly, so its row has both
+  badges, «4 attendees» and «repeats weekly», in every frame of that week
+  (s-agenda-1, -17, s-notes-5, -7, -8, -11, s-find-3, s-io-2, account-5,
+  -6, s-profile-5, -6, states-6, -13, dark-1, desktop-1). The badges
+  column is 168 px, so «repeats weekly» is no longer cut at 88 px and the
+  title column is 48 px narrower in every agenda list (also s-dup-1,
+  s-find-1, s-publish-2, -6, -13, states-3, -5). The agenda in columns
+  (s-agenda-20, -21) draws badges, not words, in «Attendees and status».
 - **The days of a series a server lost, in words** (Carrel's task 151, the
   question left open; the owner's answer of 14.10, Р-60). `states-36`
   (new), «Событие · сервер не сохранил дни серии»: the form of

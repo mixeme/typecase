@@ -812,7 +812,11 @@ func (g *gen) row0(e *El) string {
 		f = append(f, g.titleFields(e.Kid("tc-row__title"), "Title")...)
 		f = append(f, "Detail: "+text("tc-row__detail"))
 		if c := e.Kid("tc-row__caption"); len(c.Els()) > 0 {
-			f = append(f, "Caption: &"+g.badge(c.Els()[0]))
+			var bs []string
+			for _, b := range c.Els() {
+				bs = append(bs, g.badge(b))
+			}
+			f = append(f, "Badges: []w.Badge{"+join(bs, ", ")+"}")
 		}
 		f = g.src(e, f)
 		if on {
@@ -1722,7 +1726,7 @@ func (g *gen) avatar(a *El) string {
 var columnOf = []kv{{"tc-col--name", "ColumnName"}, {"tc-col--phone", "ColumnPhone"}, {"tc-col--email", "ColumnEmail"}, {"tc-col--org", "ColumnOrg"},
 	{"tc-col--birthday", "ColumnBirthday"}, {"tc-col--tags", "ColumnTags"}, {"tc-col--changed", "ColumnChanged"}, {"tc-col--source", "ColumnSource"},
 	{"tc-col--due", "ColumnDue"}, {"tc-col--complete", "ColumnComplete"}, {"tc-col--priority", "ColumnPriority"}, {"tc-col--status", "ColumnStatus"},
-	{"tc-col--excerpt", "ColumnExcerpt"}, {"tc-col--date", "ColumnDate"}, {"tc-col--detail", "ColumnDetail"}, {"tc-col--kind", "ColumnKind"}}
+	{"tc-col--excerpt", "ColumnExcerpt"}, {"tc-col--date", "ColumnDate"}, {"tc-col--detail", "ColumnDetail"}, {"tc-col--kind", "ColumnKind"}, {"tc-col--badges", "ColumnBadges"}}
 
 // columnRow is a row of the columns a person chose.
 func (g *gen) columnRow(e *El) string {
@@ -1761,6 +1765,12 @@ func (g *gen) columnRow(e *El) string {
 					}
 				}
 				cells = append(cells, "{Column: w.ColumnTags, Tags: []w.RowTag{"+join(tags, ", ")+"}}")
+			} else if c.v == "ColumnBadges" {
+				var bs []string
+				for _, b := range k.Els() {
+					bs = append(bs, g.badge(b))
+				}
+				cells = append(cells, "{Column: w.ColumnBadges, Badges: []w.Badge{"+join(bs, ", ")+"}}")
 			} else {
 				cells = append(cells, "{Column: w."+c.v+", Text: "+q(k.Text())+"}")
 			}

@@ -434,8 +434,8 @@ var _ = add(
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Дежурство: первая линия", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "70 points · same title, same start", Variant: w.MonoTightDusty}}}}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "nextcloud · Работа", Inset: true},
-			w.TimeRow{Mark: w.Mark{Colour: "#8C6239"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Caption: &w.Badge{Label: "repeats weekly"}, Source: "radicale · vps · Дежурства", Inset: true}}, Inset: true},
+			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{{Label: "repeats weekly"}}, Source: "nextcloud · Работа", Inset: true},
+			w.TimeRow{Mark: w.Mark{Colour: "#8C6239"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{{Label: "repeats weekly"}}, Source: "radicale · vps · Дежурства", Inset: true}}, Inset: true},
 		w.CardHint{Parts: []w.CardTextPart{w.Text("The same duty in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.")}, Line: true},
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "op", Value: "link"}, w.Button{Label: "Not duplicates", Name: "op", Value: "not"}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "op", Value: "merge"}}}}, Action: "/app/duplicates/g2"}, "s-dup-1", "tc-card", 2),
 	cards("apart", w.Card{Items: []w.CardPart{
