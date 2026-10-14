@@ -917,6 +917,12 @@ func (g *gen) row0(e *El) string {
 			if first.Has("is-off") {
 				t = "Ticked: w.TickedOff"
 			}
+			if snd := sendOf(first); snd != "" {
+				if t != "" {
+					t += ", "
+				}
+				t += "Send: " + snd
+			}
 			f = append(f, "Pick: &w.TickBox{"+t+"}")
 		} else {
 			f = append(f, "Mark: &"+g.mark(first))

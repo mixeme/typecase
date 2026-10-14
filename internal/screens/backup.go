@@ -1179,13 +1179,20 @@ func Backup8() Screen {
 									},
 								},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Restore 3 collections", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{
+										w.Button{Label: "Cancel"},
+										w.Button{Label: "Restore 3 collections", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true},
+									},
 								},
 							},
 							w.Bar{
-								Items:   []w.BarPart{w.BarSep{}, w.Button{Label: "Restore into", Icon: "back"}, w.Button{Label: "Skip"}},
+								Items: []w.BarPart{
+									w.BarSep{},
+									w.Button{Label: "Restore into", Icon: "back", Name: "op", Value: "into", Submit: true},
+									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
+								},
 								Count:   &w.BarCount{Text: "3 selected"},
-								Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true}}},
+								Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true, ScriptOnly: true}}},
 								Variant: w.BarSelection,
 							},
 							w.Table{
@@ -1199,7 +1206,7 @@ func Backup8() Screen {
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
-											{Pick: ptr(w.TickedOn)},
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
 											{Parts: []w.CellPart{w.Text("312")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
@@ -1209,7 +1216,7 @@ func Backup8() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Pick: ptr(w.TickedOn)},
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}},
 											{Parts: []w.CellPart{w.Text("86")}, Mono: true},
 											{
@@ -1237,7 +1244,7 @@ func Backup8() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Pick: ptr(w.TickedOn)},
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
 											{Parts: []w.CellPart{w.Text("140")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный "), w.Chevron{}}, Mono: true},
@@ -1247,7 +1254,7 @@ func Backup8() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Pick: ptr(w.TickedOff)},
+											{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}},
 											{Parts: []w.CellPart{w.Text("51")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty},
@@ -1267,6 +1274,7 @@ func Backup8() Screen {
 							},
 						},
 						Variant: w.DialogWide,
+						Action:  "/app/settings/backup/restore/match",
 					},
 				},
 			},

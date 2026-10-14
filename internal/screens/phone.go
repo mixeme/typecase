@@ -414,10 +414,17 @@ func Phone6() Screen {
 				Items: []w.MainPart{
 					w.Bar{
 						Items: []w.BarPart{
-							w.Button{Icon: "down", Title: "Download"},
-							w.Button{Icon: "move", Title: "Move"},
-							w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete"},
-							w.Button{Icon: "close", Title: "Close", Place: w.Pushed},
+							w.Button{Icon: "down", Title: "Download", Form: "files-sel", Name: "op", Value: "download"},
+							w.Button{Icon: "move", Title: "Move", Form: "files-sel", Name: "op", Value: "move"},
+							w.Button{
+								Icon:  "trash",
+								Kind:  w.ButtonDangerSolid,
+								Title: "Delete",
+								Form:  "files-sel",
+								Name:  "op",
+								Value: "delete",
+							},
+							w.Button{Icon: "close", Title: "Clear selection", Place: w.Pushed, ScriptOnly: true},
 						},
 						Count:   &w.BarCount{Text: "2 selected", Small: true},
 						Variant: w.BarSelection,
@@ -425,7 +432,7 @@ func Phone6() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.PhoneRow{
-								Pick:    &w.TickBox{},
+								Pick:    &w.TickBox{Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-10-sync-board.png"}},
 								Icon:    "img",
 								Title:   "2026-08-10-sync-board.png",
 								Sub:     []w.Inline{w.Text("412 KB · image/png")},
@@ -434,7 +441,7 @@ func Phone6() Screen {
 								On:      true,
 							},
 							w.PhoneRow{
-								Pick:    &w.TickBox{},
+								Pick:    &w.TickBox{Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 								Icon:    "doc",
 								Title:   "release-checklist.md",
 								Sub:     []w.Inline{w.Text("3 KB · text/markdown")},
@@ -443,7 +450,7 @@ func Phone6() Screen {
 								On:      true,
 							},
 							w.PhoneRow{
-								Pick:    &w.TickBox{Ticked: w.TickedOff},
+								Pick:    &w.TickBox{Ticked: w.TickedOff, Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
 								Icon:    "file",
 								Title:   "2026-07",
 								Sub:     []w.Inline{w.Text("34 items")},
@@ -451,6 +458,11 @@ func Phone6() Screen {
 								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
 							},
 						},
+					},
+					w.PostForm{
+						ID:     "files-sel",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.BottomNav{
 						Items: []w.BottomItem{

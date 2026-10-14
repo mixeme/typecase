@@ -721,6 +721,18 @@ do, not what the authors did.
   22, 2 in Shared are read-only and 3 stand in the unticked «Meetings
   organised by others». The sheet carries its tally; the caption says how
   it counts.
+- **The last selections become forms** (a tail of Carrel's tasks 148, 149;
+  the owner's decision of 12.10 to carry forms through every frame).
+  s-backup-8: the dialog is a form — the rows' ticks are checkboxes
+  `collection`, «Restore into», «Skip» and «Restore 3 collections» send it
+  with `op`, «Select all» shows only with a script (`tc-js`). phone-6 and
+  dark-3 are the files' form as s-files-1 and s-files-5 draw it: ticks
+  `item` of `files-sel`, the bar sends it with `op`, the tiles of dark-3 have
+  their box and their name as a link; «Clear selection» on the phone shows
+  only with a script. s-mailbox-3 (mail is put off) and components-16, -17
+  (the bar alone, no list to send) stay as they are. `tc-js` and `tc-nojs`
+  are mixins of a block, as `tc-push`: a button that carries one is still a
+  button.
 - **The agenda's badges stand side by side** (the owner's decision of
   14.10, Р-61). «Синк-ап по релизу» repeats weekly, so its row has both
   badges, «4 attendees» and «repeats weekly», in every frame of that week

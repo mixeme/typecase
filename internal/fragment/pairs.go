@@ -102,8 +102,8 @@ func hasElementClass(n *html.Node) bool {
 
 func blockRank(c string) int {
 	switch c {
-	case "tc-push", "tc-grow":
-		return 0
+	case "tc-push", "tc-grow", "tc-js", "tc-nojs":
+		return 0 // where it sits, or whether a page without a script shows it
 	case "tc-line", "tc-stack":
 		return 1
 	case "tc-btn":

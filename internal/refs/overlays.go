@@ -1732,6 +1732,22 @@ var _ = add(
 	}, "s-publish-2", "tc-overlay", 1),
 
 	// tc-dialog
+	overlay("wide", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 2},
+		w.Head{Title: &w.HeadTitle{Text: "Restore from 2026-08-14"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 1 214 records · "), w.Mono{Text: "carrel-backup/2026-08-14T09-12.zip"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Restore 3 collections", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true}}}},
+		w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Label: "Restore into", Icon: "back", Name: "op", Value: "into", Submit: true}, w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true}}, Count: &w.BarCount{Text: "3 selected"}, Right: &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true, ScriptOnly: true}}}, Variant: w.BarSelection},
+		w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedPart)}, {Label: "In the archive"}, {Label: "Records", Rank: w.Rank3, Secondary: true}, {Label: "Restore into", Width: w.Col26, Rank: w.Rank4}, {Label: "What will happen"}}, Rows: []w.TableRow{
+			{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("312")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}}}, State: w.RowPicked},
+			{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Open: true, Trigger: w.Pick{Value: "radicale · vps · Проекты", Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
+				w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true},
+				w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный"},
+				w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
+				w.MenuSep{},
+				w.MenuItem{Icon: "plus", Label: "New collection"},
+				w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty}}, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — no differences")}}}, State: w.RowPicked},
+			{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}}, {Parts: []w.CellPart{w.Text("140")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный "), w.Chevron{}}, Mono: true}, {Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger}}, State: w.RowPicked},
+			{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("skip")}, Dim: true}}}}, Variant: w.TableFit},
+		w.Msg{Parts: []w.MsgPart{w.Text("Restoring "), w.Strong("creates"), w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes.")}, Tone: w.MsgAlert}}, Variant: w.DialogWide, Action: "/app/settings/backup/restore/match"}, "s-backup-8", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Head{Title: &w.HeadTitle{Text: "Key escrow"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("A copy of your key on this server")}}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},

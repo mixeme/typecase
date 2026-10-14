@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 )
 
@@ -85,10 +86,12 @@ func launchChrome() (*instance, error) {
 	if chromeExec == "" {
 		return nil, exec.ErrNotFound
 	}
+	sweepOrphans()
 	dir, err := os.MkdirTemp("", profilePrefix)
 	if err != nil {
 		return nil, fmt.Errorf("profile dir: %w", err)
 	}
+	_ = os.WriteFile(filepath.Join(dir, ownerFile), []byte(strconv.Itoa(os.Getpid())), 0o644)
 	cmd := exec.Command(chromeExec,
 		"--headless",
 		"--disable-gpu",
@@ -186,6 +189,73 @@ func (in *instance) stop() {
 	}
 }
 
+// ownerFile, in a profile directory, names the test process that started
+// its browser.
+const ownerFile = "typecase-owner"
+
+// sweepOrphans closes the browsers whose test process is gone, and removes
+// their profiles. A test run cut short — by a timeout, by a kill — never runs
+// its cleanup, and its browser stays: on 14.10.2026 27 of them, 240
+// processes, were found after a day of runs, slowing every run after them.
+// A profile with no owner file is an orphan once it is an hour old.
+func sweepOrphans() {
+	entries, err := os.ReadDir(os.TempDir())
+	if err != nil {
+		return
+	}
+	var orphans []string
+	for _, e := range entries {
+		if !e.IsDir() || !strings.HasPrefix(e.Name(), profilePrefix) {
+			continue
+		}
+		dir := filepath.Join(os.TempDir(), e.Name())
+		if b, err := os.ReadFile(filepath.Join(dir, ownerFile)); err == nil {
+			if pid, err := strconv.Atoi(strings.TrimSpace(string(b))); err == nil && alive(pid) {
+				continue
+			}
+		} else if info, err := e.Info(); err != nil || time.Since(info.ModTime()) < time.Hour {
+			continue
+		}
+		orphans = append(orphans, dir)
+	}
+	if len(orphans) == 0 {
+		return
+	}
+	list := processList()
+	for _, dir := range orphans {
+		for _, pid := range parseProcessList(list, filepath.Base(dir), browserNames()) {
+			kill(pid)
+		}
+		_ = os.RemoveAll(dir)
+	}
+}
+
+// alive says whether the process pid runs.
+func alive(pid int) bool {
+	if pid <= 0 {
+		return false
+	}
+	if runtime.GOOS == "windows" {
+		out, err := exec.Command("tasklist", "/FI", "PID eq "+strconv.Itoa(pid), "/NH").Output()
+		return err == nil && strings.Contains(string(out), " "+strconv.Itoa(pid)+" ")
+	}
+	p, err := os.FindProcess(pid)
+	return err == nil && p.Signal(syscall.Signal(0)) == nil
+}
+
+func kill(pid int) {
+	if pid <= 0 || pid == os.Getpid() {
+		return
+	}
+	if runtime.GOOS == "windows" {
+		_ = exec.Command("taskkill", "/T", "/F", "/PID", strconv.Itoa(pid)).Run()
+		return
+	}
+	if p, err := os.FindProcess(pid); err == nil {
+		_ = p.Kill()
+	}
+}
+
 // killProfileHolders kills browser processes that still name dir as their
 // --user-data-dir.
 //
@@ -230,18 +300,18 @@ var processListPS = "Get-CimInstance Win32_Process | ForEach-Object { \"$($_.Pro
 
 // profileHolders returns the pids of browser processes holding dir.
 func profileHolders(dir string) []int {
-	marker := filepath.Base(dir)
+	return parseProcessList(processList(), filepath.Base(dir), browserNames())
+}
+
+// processList is every process: pid, name and command line, a line each.
+func processList() string {
 	var out []byte
-	var err error
 	if runtime.GOOS == "windows" {
-		out, err = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", processListPS).Output()
+		out, _ = exec.Command("powershell", "-NoProfile", "-NonInteractive", "-Command", processListPS).Output()
 	} else {
-		out, err = exec.Command("ps", "-A", "-o", "pid=,comm=,args=").Output()
+		out, _ = exec.Command("ps", "-A", "-o", "pid=,comm=,args=").Output()
 	}
-	if err != nil && len(out) == 0 {
-		return nil
-	}
-	return parseProcessList(string(out), marker, browserNames())
+	return string(out)
 }
 
 // parseProcessList picks the pids whose command line names marker and whose
