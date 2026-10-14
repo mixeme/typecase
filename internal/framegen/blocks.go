@@ -1032,7 +1032,8 @@ func (g *gen) docmeta(e *El) string {
 			case x.Has("tc-diag"):
 				its = append(its, g.diag(x))
 			case x.Has("tc-line") && !x.Has("tc-line__text"):
-				its = append(its, "w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{"+g.each(x.Els(), g.tag)+"}}")
+				// tags, and where they come from when there was a choice (Р-58)
+				its = append(its, "w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{"+g.each(x.Els(), g.linePart)+"}}")
 			case x.Has("tc-stack"):
 				var refs []string
 				for _, it := range x.Els() {
@@ -1053,7 +1054,10 @@ func (g *gen) docmeta(e *El) string {
 					} else {
 						s += "Name: " + q(it.Kid("tc-dim--accent").Text())
 					}
-					refs = append(refs, s+", What: "+dimText(it.Kid("tc-dim").Text())+"}")
+					if d := it.Kid("tc-dim"); d != nil {
+						s += ", What: " + dimText(d.Text())
+					}
+					refs = append(refs, s+"}")
 				}
 				its = append(its, "w.DocRefs{Items: []w.DocRef{"+join(refs, ", ")+"}}")
 			case x.Has("tc-line__text"):

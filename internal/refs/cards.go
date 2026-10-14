@@ -178,6 +178,13 @@ var _ = add(
 
 	// tc-fields
 	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("Личный")}}}},
+		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-25", "tc-fields", 1),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-77")}, Face: w.ValueMono, Href: "tel:+74951204577", After: []w.ValuePart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Команда")}}}},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
@@ -302,6 +309,9 @@ var _ = add(
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "desktop-1", "tc-fields", 1),
 
 	// tc-sec
+	cards("list", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Where this event is kept", Items: []w.RubricPart{w.Badge{Label: "3", Tone: w.BadgeLinked}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Личный", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Where differ")}}}}, Gap: 5}}}, "s-agenda-25", "tc-sec", 1),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Where this person is kept", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Контакты", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}}, Gap: 5}}}, "s-contacts-33", "tc-sec", 1),
@@ -802,6 +812,9 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings.instance")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table", 1),
 
 	// tc-docmeta
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}, w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Dim{Parts: []w.Inline{w.Text("Дневник")}}}}}},
+		{Title: w.Rubric{Text: "Where this note is kept", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Записи", Href: "#"}, {Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}}}}}}}}}, "s-notes-32", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-new", Name: "file", Label: "From this computer", List: "note-new-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},

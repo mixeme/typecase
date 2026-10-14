@@ -542,7 +542,7 @@ func Notes2() Screen {
 											w.DocRefs{
 												Items: []w.DocRef{
 													{
-														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+														Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
 														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
@@ -737,7 +737,7 @@ func Notes27() Screen {
 											w.DocRefs{
 												Items: []w.DocRef{
 													{
-														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+														Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
 														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
@@ -946,7 +946,7 @@ func Notes3() Screen {
 											w.DocRefs{
 												Items: []w.DocRef{
 													{
-														Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+														Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 														Name: "nextcloud · Дневник",
 														Href: "#",
 														What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},

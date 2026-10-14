@@ -40,7 +40,10 @@ func (r DocRefs) html(mix) string {
 		} else {
 			s.WriteString(`<span class="tc-dim--accent">` + esc(it.Name) + `</span>`)
 		}
-		s.WriteString(" " + it.What.html(nil) + `</span>`)
+		if len(it.What.Parts) > 0 { // a copy that holds the same says nothing
+			s.WriteString(" " + it.What.html(nil))
+		}
+		s.WriteString(`</span>`)
 	}
 	s.WriteString(`</div>`)
 	return s.String()

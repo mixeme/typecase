@@ -700,6 +700,15 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The other cards of a linked record from the combined view** (after
+  `s-contacts-33`, Р-58; accepted by the owner 15.10). An event
+  (`s-agenda-25`: the place taken from «Личный», its mark after it), a task
+  (`s-tasks-17`: the due date from «Дела», the priority from «Работа») and
+  a note (`s-notes-32`: «text from Записи» in the subtitle, the tags from
+  «Дневник») — new fragments. The mark of «Дневник» in the blocks of copies
+  is violet, `#6B4E7A`, as in the rail (it was green): `s-notes-2`, `-3`,
+  `-27`. `DocRefs` prints no empty note after a copy that holds the same.
+  446 frames.
 - **Two cards of a linked record** (Carrel's task 153; the owner's
   decisions of 13.10, Р-58). Opened from the combined view, the card shows
   what the person chose in the duplicates section, and a value where there
