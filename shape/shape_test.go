@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"sync"
 	"testing"
 
 	"carrel.dev/typecase/internal/screens"
@@ -12,17 +13,28 @@ import (
 	w "carrel.dev/typecase/widget"
 )
 
+var (
+	once    sync.Once
+	parsed  *shape.Mockup
+	readErr error
+)
+
+// mockup is the mockup read once for the package's tests: a Check does not
+// change it, and reading 2.7 MB in each test cost two seconds (the review of
+// 14.10).
 func mockup(t *testing.T) *shape.Mockup {
 	t.Helper()
-	b, err := os.ReadFile(filepath.Join("..", "docs", "visual", "carrel-ui-mockups.html"))
-	if err != nil {
-		t.Fatal(err)
+	once.Do(func() {
+		var b []byte
+		b, readErr = os.ReadFile(filepath.Join("..", "docs", "visual", "carrel-ui-mockups.html"))
+		if readErr == nil {
+			parsed, readErr = shape.Parse(string(b))
+		}
+	})
+	if readErr != nil {
+		t.Fatal(readErr)
 	}
-	m, err := shape.Parse(string(b))
-	if err != nil {
-		t.Fatal(err)
-	}
-	return m
+	return parsed
 }
 
 // TestScreensHaveTheirShape: every demo screen, built of widgets, has the
@@ -388,5 +400,50 @@ func TestHiddenIsNotDrawn(t *testing.T) {
 	k := j + strings.Index(page[j:], "</div>") + len("</div>")
 	if err := m.Check("states-24", page[:j]+page[k:]); err == nil {
 		t.Error("states-24 without its hidden progress bar passes; want it missing")
+	}
+}
+
+// The review of 14.10: the rules no test held. A hidden field of a form, a
+// tick's box, the options of a select are no drawing — one more or one less
+// passes; a select is opaque, whatever stands in it; a screen is one element.
+func TestDroppedAndOpaque(t *testing.T) {
+	m := mockup(t)
+	find := func(needle string) (string, string) {
+		t.Helper()
+		for _, r := range screens.Routes {
+			if p := r.Screen().Render(); strings.Contains(p, needle) {
+				return r.Frame, p
+			}
+		}
+		t.Fatalf("no screen with %s", needle)
+		return "", ""
+	}
+	after := func(page, open string) int {
+		i := strings.Index(page, open)
+		return i + strings.Index(page[i:], ">") + 1
+	}
+	pass := func(id, page, what string) {
+		t.Helper()
+		if err := m.Check(id, page); err != nil {
+			t.Errorf("%s (%s): %v", what, id, err)
+		}
+	}
+
+	id, page := find("<form")
+	j := after(page, "<form")
+	pass(id, page[:j]+`<input type="hidden" name="more" value="1">`+page[j:], "a hidden field more")
+
+	id, page = find(`<input class="tc-check__box"`)
+	i := strings.Index(page, `<input class="tc-check__box"`)
+	j = i + strings.Index(page[i:], ">") + 1
+	pass(id, page[:i]+page[j:], "a tick without its box")
+
+	id, page = find("<select")
+	j = after(page, "<select")
+	pass(id, page[:j]+`<option value="z">another</option>`+page[j:], "another option")
+	pass(id, page[:j]+`<optgroup label="g"><option value="y">in a group</option></optgroup>`+page[j:], "a select's other insides")
+
+	if err := m.Check(id, page+page); err == nil {
+		t.Error("two top elements pass")
 	}
 }

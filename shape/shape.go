@@ -33,6 +33,32 @@
 // checkbox or radio button, a tick box that is a checkbox, a pick that is a
 // select, a form, a search or a filter that is a form element. The tag of an
 // element without classes (b, strong, td…) is compared.
+//
+// The rules one by one (the review of 14.10), each with its test:
+//
+//   - classes are compared, the tag only without classes; words and
+//     attributes are not (TestShapeNotWords);
+//   - siblings of one kind but for states are a run, the screen's no shorter
+//     than the frame's; each of its elements is like one of the frame's, and
+//     each of the frame's is on the screen but for its states
+//     (TestShapeNotWords, TestMissingIsRed);
+//   - a block of runs the frame repeats repeats any number of times; with as
+//     many repeats as the frame or more, each element the frame draws at a
+//     place is on the screen there (TestRepeatsAnyLength, TestMissingIsRed).
+//     With fewer, nothing is required of the repeats: even what every
+//     repeat of the frame has is data — a day without a meeting with
+//     attendees has no badge;
+//   - not drawn: a hidden field of a form, a tick's box, a picture in an
+//     avatar or a thumbnail, an option, a template, a datalist, an element
+//     with hidden but for the progress bar, a menu and the scrim
+//     (TestDroppedAndOpaque, TestAvatarPhotoIsData, TestTemplatesAndEmptyDays,
+//     TestDatalistIsNotDrawn, TestHiddenIsNotDrawn);
+//   - a select, and a pick that holds the browser's list, are opaque
+//     (TestDroppedAndOpaque);
+//   - a closed menu is its button (TestClosedMenuIsItsButton);
+//   - a value's link stands for its words (TestMeaningIsNoDifference);
+//   - is-photo of an avatar is data (TestAvatarPhotoIsData);
+//   - a screen is one element (TestDroppedAndOpaque).
 package shape
 
 import (
