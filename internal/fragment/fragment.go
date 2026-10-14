@@ -453,9 +453,70 @@ func (m *Mockup) Compare(r Ref, rendered string) error {
 		return fmt.Errorf("%s: the widget prints block %q, want %q", r, b, cls)
 	}
 	if d := Diff(want, got); d != "" {
+		if k := m.moved(r, got); k > 0 {
+			return fmt.Errorf("%s: %s — the frame's #%d has this form now: renumber the record to #%d", r, d, k, k)
+		}
 		return fmt.Errorf("%s: %s", r, d)
 	}
 	return nil
+}
+
+// moved finds where a record's fragment went when something was put in
+// before it: the one other occurrence of the class the widget's markup
+// matches, or 0 — none or more than one (task: the review of 14.10; a
+// badge put before an alert badge made its record point at the plain one).
+func (m *Mockup) moved(r Ref, got *Node) int {
+	f, ok := m.byID[r.Frame]
+	if !ok {
+		return 0
+	}
+	k := 0
+	for i, b := range f.all(r.Class) {
+		if i+1 == r.N {
+			continue
+		}
+		if Diff(WithoutMixins(r.Class, m.Own(b, false)), got) == "" {
+			if k > 0 {
+				return 0
+			}
+			k = i + 1
+		}
+	}
+	return k
+}
+
+// RootState is the classes the block at r has of its own on its root — its
+// variants and states (is-on, tc-badge--…), not the container's mixins:
+// what a record must keep when it is redrafted.
+func (m *Mockup) RootState(r Ref) ([]string, error) {
+	b, err := m.Block(r)
+	if err != nil {
+		return nil, err
+	}
+	return state(r.Class, m.Own(b, false)), nil
+}
+
+// RenderedState is RootState of a widget's markup.
+func RenderedState(block, rendered string) ([]string, error) {
+	nodes, err := Fragment(rendered)
+	if err != nil {
+		return nil, err
+	}
+	if len(nodes) != 1 {
+		return nil, fmt.Errorf("the widget printed %d top elements, want 1", len(nodes))
+	}
+	m := &Mockup{}
+	return state(block, m.Own(nodes[0], false)), nil
+}
+
+func state(block string, n *Node) []string {
+	var out []string
+	for _, c := range n.Classes {
+		if c != block && OwnClass(block, c) {
+			out = append(out, c)
+		}
+	}
+	return out
 }
 
 // asSummary is a button as the summary of a closed menu: Drop prints its

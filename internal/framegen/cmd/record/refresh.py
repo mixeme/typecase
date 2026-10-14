@@ -4,12 +4,27 @@
 
 For each frame:class:n it runs `go run ./internal/framegen/cmd/record` and puts
 the expression in place of the value of the record in internal/refs that
-points at that fragment. Run from the module root; gofmt afterwards.
+points at that fragment. Run from the module root; gofmt afterwards. It
+refuses a redraft that would change a record's variant, tone or state —
+renumber it instead, or pass --force when the frame's element changed so on
+purpose.
 """
 import glob, re, subprocess, sys
 
-for arg in sys.argv[1:]:
+args = [a for a in sys.argv[1:] if a != "--force"]
+force = len(args) != len(sys.argv) - 1
+refused = []
+for arg in args:
     frame, cls, n = arg.split(":")
+    # a redraft must not change what the record stands for (its variant,
+    # tone, state): record -check refuses then (the review of 14.10)
+    if not force:
+        chk = subprocess.run(["go", "run", "./internal/framegen/cmd/record", "-check", frame, cls, n],
+                             capture_output=True, text=True, encoding="utf-8")
+        if chk.returncode != 0:
+            print(chk.stderr.strip())
+            refused.append(arg)
+            continue
     expr = subprocess.run(["go", "run", "./internal/framegen/cmd/record", frame, cls, n],
                           capture_output=True, text=True, encoding="utf-8")
     if expr.returncode != 0:
@@ -32,3 +47,5 @@ for arg in sys.argv[1:]:
         break
     if not hit:
         sys.exit("%s: no record points at it" % arg)
+if refused:
+    sys.exit("refused: " + " ".join(refused))

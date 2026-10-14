@@ -70,6 +70,29 @@ func TestNormalize(t *testing.T) {
 	}
 }
 
+// The review of 14.10: a record whose fragment moved — something was put in
+// before it — is told where it went, and the state of a record and of a
+// frame's element are its root's own classes.
+func TestMovedAndState(t *testing.T) {
+	m := parsed(t)
+	err := m.Compare(Ref{"a-1", "tc-btn", 1}, `<button class="tc-btn" type="button">Cancel</button>`)
+	if err == nil || !strings.Contains(err.Error(), "renumber the record to #2") {
+		t.Fatalf("Cancel against #1: %v; want it told to renumber to #2", err)
+	}
+	err = m.Compare(Ref{"a-1", "tc-btn", 1}, `<button class="tc-btn is-danger" type="button">Delete</button>`)
+	if err == nil || strings.Contains(err.Error(), "renumber") {
+		t.Fatalf("a form the frame does not draw: %v; want a plain difference", err)
+	}
+	want, err := m.RootState(Ref{"a-1", "tc-btn", 1})
+	if err != nil || strings.Join(want, " ") != "is-primary" {
+		t.Fatalf("the state of #1: %v %v; want is-primary", want, err)
+	}
+	got, err := RenderedState("tc-btn", `<button class="tc-btn tc-push" type="button">Cancel</button>`)
+	if err != nil || len(got) != 0 {
+		t.Fatalf("a mixin is no state: %v %v", got, err)
+	}
+}
+
 func TestShapes(t *testing.T) {
 	m := parsed(t)
 	shapes := m.Shapes("tc-btn")
