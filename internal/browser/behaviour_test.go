@@ -1963,7 +1963,13 @@ func TestRunFollows(t *testing.T) {
 	var first, last string
 	url := h.RegisterPage("run-polled", browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", "", pollURL).Render()+`</div>`, ""))
 	if err := h.Run(url, 900, 400,
-		chromedp.Sleep(1600*time.Millisecond), chromedp.Evaluate(text, &first),
+		// the first answer of the poll: in a second, or later on a loaded
+		// machine (1.6 s were too few in a whole run of 14.10)
+		await(`(async () => {
+			const said = () => `+text+`;
+			for (let i = 0; i < 60 && said() === "0 of 6"; i++) await new Promise(r => setTimeout(r, 100));
+			return said();
+		})()`, &first),
 		chromedp.ActionFunc(func(context.Context) error {
 			h.RegisterPage("run-poll", frag(w.Runbar{Zone: "run", Meter: w.Meter{Percent: 100, Track: 100}, Parts: []w.RunbarPart{w.Text("done")}}))
 			return nil
@@ -1971,6 +1977,7 @@ func TestRunFollows(t *testing.T) {
 		wait, chromedp.Evaluate(text, &last)); err != nil {
 		t.Fatal(err)
 	}
+	first = strings.Trim(first, `"`)
 	if first != "3 of 6" || last != "done" {
 		t.Errorf("a poll: %q, then %q; want 3 of 6, then done", first, last)
 	}
