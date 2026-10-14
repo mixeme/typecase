@@ -887,7 +887,7 @@ func (g *gen) linePart(x *El) string {
 	case x.Has("tc-field"):
 		return g.field(x)
 	case x.Has("tc-kbd"):
-		return "w.Kbd{Keys: " + q(x.Text()) + placesec(x) + "}"
+		return g.kbd(x)
 	case x.Has("tc-dim"):
 		return g.dimx(x)
 	case x.Has("tc-mark"):
@@ -1070,7 +1070,7 @@ func (g *gen) formFootPart(k *El) string {
 	case k.Has("tc-dim"):
 		return g.dimx(k)
 	case k.Has("tc-push"):
-		return "w.Push{Items: []w.PushPart{" + g.each(k.Els(), g.pushItem) + "}}"
+		return g.push(k)
 	}
 	cl := join(k.Cls(), " ")
 	if f, ok := g.faces[cl]; ok && k.Tag == "span" {
@@ -1196,11 +1196,7 @@ func (g *gen) rubricItem(x *El) string {
 	case x.Has("tc-num"):
 		return g.num(x)
 	case x.Has("tc-push"):
-		s := "w.Push{Items: []w.PushPart{" + g.each(x.Els(), g.pushItem)
-		if t := x.OwnText(); t != "" && len(x.Els()) == 0 {
-			s += "w.Text(" + q(t) + ")"
-		}
-		return s + "}}"
+		return g.push(x)
 	case x.Has("tc-rubric__aside"):
 		its := g.each(x.Els(), func(y *El) string {
 			if y.Has("tc-badge") {

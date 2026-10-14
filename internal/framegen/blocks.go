@@ -123,9 +123,9 @@ func (g *gen) runbar(e *El) string {
 			switch {
 			case v.Has("tc-meter"):
 			case v.Has("tc-dim--danger"):
-				ps = append(ps, "w.Span{Face: w.FaceDanger, Text: "+q(v.Text())+"}")
+				ps = append(ps, g.span(v, "FaceDanger"))
 			case v.Has("tc-dim--accent"):
-				ps = append(ps, "w.Span{Face: w.FaceAccent, Text: "+q(v.Text())+"}")
+				ps = append(ps, g.span(v, "FaceAccent"))
 			case v.Has("tc-mono"):
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-line"):
@@ -133,7 +133,7 @@ func (g *gen) runbar(e *El) string {
 			case v.Has("tc-drop"):
 				ps = append(ps, g.drop(v))
 			case v.Has("tc-push"):
-				ps = append(ps, "w.Push{Items: []w.PushPart{"+g.buttons(v.Els())+"}}")
+				ps = append(ps, g.push(v))
 			default:
 				stop("runbar? " + join(v.Cls(), " "))
 			}
@@ -308,7 +308,7 @@ func (g *gen) empty(e *El) string {
 			case v.Has("tc-mono"):
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-kbd"):
-				ps = append(ps, "w.Kbd{Keys: "+q(v.Text())+"}")
+				ps = append(ps, g.kbd(v))
 			case v.Tag == "a" && v.Has("tc-dim--accent"):
 				ps = append(ps, "w.Span{Face: w.FaceAccent, Text: "+q(v.Text())+", Href: "+q(v.Attr("href"))+"}")
 			default:
@@ -432,7 +432,7 @@ func (g *gen) fields(e *El) string {
 				case v.Has("tc-mono"):
 					vp = append(vp, g.mono(v))
 				case v.Has("tc-dim--danger"):
-					vp = append(vp, "w.Span{Face: w.FaceDanger, Text: "+q(v.Text())+"}")
+					vp = append(vp, g.span(v, "FaceDanger"))
 				case v.Has("tc-dim"):
 					vp = append(vp, g.dimx(v))
 				default:
@@ -615,7 +615,11 @@ func (g *gen) rowPart(x *El) string {
 	case x.Has("tc-dim"):
 		return g.dimx(x)
 	case x.Has("tc-in"):
-		return g.input(x)
+		// by its tag, as anywhere (the review of 14.10: it took every
+		// tc-in for a line to type in)
+		if c := g.control(x); c != "" {
+			return c
+		}
 	}
 	stop("card row? " + join(x.Cls(), " "))
 	return ""
@@ -1258,7 +1262,7 @@ func (g *gen) docbar(e *El) string {
 				case x.Has("tc-check"), x.Has("tc-seg"):
 					end = append(end, g.barItem(x))
 				case x.Has("tc-kbd"):
-					end = append(end, "w.Kbd{Keys: "+q(x.Text())+sec+"}")
+					end = append(end, g.kbd(x))
 				case x.Has("tc-btn"):
 					end = append(end, g.button(x))
 				default:
@@ -1274,6 +1278,8 @@ func (g *gen) docbar(e *El) string {
 				b = `w.Button{Label: "I", Variant: w.ButtonItalic}`
 			}
 			items = append(items, b)
+		default:
+			stop("docbar? " + join(k.Cls(), " ")) // nothing is dropped unsaid (the review of 14.10)
 		}
 	}
 	out := append([]string{"Items: []w.DocbarPart{" + join(items, ", ") + "}"}, f...)

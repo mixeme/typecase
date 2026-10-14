@@ -15,7 +15,7 @@ func (g *gen) subparts(d *El) string {
 			case v.Tag == "b":
 				parts = append(parts, "w.Strong("+q(v.Text())+")")
 			case v.Has("tc-dim--danger"):
-				parts = append(parts, "w.Span{Face: w.FaceDanger, Text: "+q(v.Text())+"}")
+				parts = append(parts, g.span(v, "FaceDanger"))
 			case v.Has("tc-mono"):
 				parts = append(parts, g.mono(v))
 			case v.Has("tc-mark"):
@@ -363,19 +363,11 @@ func (g *gen) trail(k *El) string {
 	case k.Has("tc-dim"):
 		return g.dimx(k)
 	case k.Has("tc-badge"):
-		b := g.badge(k)
-		if k.Has("tc-push") && !strings.Contains(b, "Place:") {
-			return b[:len(b)-1] + ", Place: w.Pushed}"
-		}
-		return b
+		return g.badge(k)
 	case k.Has("tc-kbd"):
-		s := "w.Kbd{Keys: " + q(k.Text())
-		if k.Has("tc-push") {
-			s += ", Place: w.Pushed"
-		}
-		return s + "}"
+		return g.kbd(k)
 	case k.Has("tc-push"):
-		return "w.Push{Items: []w.PushPart{w.Text(" + q(k.Text()) + ")}}"
+		return g.push(k)
 	}
 	stop("trail? " + join(k.Cls(), " "))
 	return ""
@@ -423,11 +415,11 @@ func (g *gen) menuItem(k *El) string {
 		case x.Has("tc-file"):
 			f = append(f, "File: "+g.fileField(x))
 		case x.Has("tc-dim--danger"):
-			f = append(f, "Note: &w.Span{Face: w.FaceDanger, Text: "+q(x.Text())+"}")
+			f = append(f, "Note: &"+g.span(x, "FaceDanger"))
 		case x.Has("tc-mono") && !x.Has("tc-push"):
 			f = append(f, "Detail: &"+g.mono(x))
 		case x.Has("tc-tag"):
-			f = append(f, "Trail: w.Tag{Label: "+q(x.Text())+", Place: w.Pushed}")
+			f = append(f, "Trail: "+g.tag(x))
 		default:
 			f = append(f, "Trail: "+g.trail(x))
 		}
@@ -730,6 +722,8 @@ func (g *gen) tree(e *El) string {
 				x = append(x, "Href: "+q(h), "Swap: "+q(box.Attr("data-tc-swap")))
 			}
 		}
+		// the tree pushes a row's trail itself: the trail's tc-push in the
+		// frame is the tree's, not the trail's own place
 		if t := tr; t != nil {
 			switch {
 			case t.Has("tc-tickrow__meta"):
@@ -1050,7 +1044,7 @@ func (g *gen) sheet(e *El) string {
 			hp = append(hp, g.button(x))
 		case x.Has("tc-in") && x.Has("is-pick"):
 			hp = append(hp, g.pick(x))
-		case x.Has("tc-in"):
+		case x.Has("tc-in") && (x.Tag == "label" || x.Tag == "form"):
 			hp = append(hp, g.filter(x))
 		case x.Has("tc-crumbs"):
 			hp = append(hp, g.crumbs(x))
@@ -1161,22 +1155,13 @@ func (g *gen) sheet(e *El) string {
 			case x.Has("tc-btn"):
 				fp = append(fp, g.button(x))
 			case x.Has("tc-kbd"):
-				p := ""
-				if x.Has("tc-push") {
-					p = ", Place: w.Pushed"
-				}
-				fp = append(fp, "w.Kbd{Keys: "+q(x.Text())+p+"}")
+				fp = append(fp, g.kbd(x))
 			case x.Has("tc-line"):
-				fp = append(fp, "w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{"+g.each(x.Els(), func(y *El) string {
-					if y.Has("tc-btn") {
-						return g.button(y)
-					}
-					return "w.Kbd{Keys: " + q(y.Text()) + "}"
-				})+"}}")
+				fp = append(fp, g.line(x))
 			case x.Has("tc-dim"):
 				fp = append(fp, g.dimx(x))
 			case x.Has("tc-push"):
-				fp = append(fp, "w.Push{Items: []w.PushPart{"+g.buttons(x.Els())+"}}")
+				fp = append(fp, g.push(x))
 			default:
 				stop("foot? " + join(x.Cls(), " "))
 			}

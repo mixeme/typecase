@@ -31,6 +31,24 @@ func placef(e *El) string {
 	return ""
 }
 
+// kbd is a key: its words, where it stands and whether it is secondary —
+// the same in every container (the review of 14.10: six copies kept four
+// different parts of it).
+func (g *gen) kbd(e *El) string {
+	return "w.Kbd{Keys: " + q(e.Text()) + placesec(e) + "}"
+}
+
+// span is words in a face: the face its classes name with their size, or
+// the colour alone when no face has exactly them (the review of 14.10: the
+// copies dropped the size).
+func (g *gen) span(e *El, colour string) string {
+	face := colour
+	if f, ok := g.faces[join(e.Cls(), " ")]; ok {
+		face = f
+	}
+	return "w.Span{Face: w." + face + ", Text: " + q(e.Text()) + "}"
+}
+
 func placesec(e *El) string {
 	s := placef(e)
 	if e.Has("is-2nd") {
@@ -360,15 +378,15 @@ func (g *gen) tparts(e *El, typ string) string {
 			case v.Has("tc-mono") || v.Tag == "code":
 				x = g.mono(v)
 			case v.Has("tc-dim--accent"):
-				x = "w.Span{Face: w.FaceAccent, Text: " + q(v.Text()) + "}"
+				x = g.span(v, "FaceAccent")
 			case v.Has("tc-dim--danger"):
-				x = "w.Span{Face: w.FaceDanger, Text: " + q(v.Text()) + "}"
+				x = g.span(v, "FaceDanger")
 			case v.Has("tc-dim"):
 				x = g.dimx(v)
 			case v.Has("tc-badge"):
 				x = g.badge(v)
 			case v.Has("tc-kbd"):
-				x = "w.Kbd{Keys: " + q(v.Text()) + "}"
+				x = g.kbd(v)
 			case v.Has("tc-btn"):
 				x = g.button(v)
 			case v.Has("tc-mark"):
@@ -428,7 +446,7 @@ func (g *gen) inl2(e *El) string {
 			case v.Has("tc-mono"):
 				x = g.mono(v)
 			case v.Has("tc-dim--accent"):
-				x = "w.Span{Face: w.FaceAccent, Text: " + q(v.Text()) + "}"
+				x = g.span(v, "FaceAccent")
 			default:
 				stop("inline? " + join(v.Cls(), " "))
 			}

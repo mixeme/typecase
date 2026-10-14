@@ -302,7 +302,7 @@ func Mail1() Screen {
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth680,
 				},

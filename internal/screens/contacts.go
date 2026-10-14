@@ -506,7 +506,7 @@ func Contacts2() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -1529,9 +1529,9 @@ func Contacts15() Screen {
 						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}},
 							Gap:   w.LineGap7,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}},
 						},
 					},
 					Width: w.SheetWidth520,

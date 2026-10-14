@@ -1169,7 +1169,7 @@ func Profile3() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Show", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth400,
 				},
@@ -1583,7 +1583,7 @@ func Profile5() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -1966,7 +1966,7 @@ func Profile7() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -2165,7 +2165,7 @@ func Profile8() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -2382,7 +2382,7 @@ func Profile9() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true},
-						w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},
 				Pad: w.ScrimPad26,
