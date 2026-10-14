@@ -100,6 +100,17 @@ func launchChrome() (*instance, error) {
 		"--disable-extensions",
 		"--disable-background-networking",
 		"--disable-sync",
+		// what chromedp gives a browser it starts itself: a tab in the
+		// background is neither slowed nor frozen, and a busy page is not
+		// taken for a hung one — each check opens its own tab
+		"--disable-background-timer-throttling",
+		"--disable-backgrounding-occluded-windows",
+		"--disable-renderer-backgrounding",
+		"--disable-hang-monitor",
+		"--disable-ipc-flooding-protection",
+		"--disable-popup-blocking",
+		"--disable-prompt-on-repost",
+		"--disable-breakpad",
 		"--remote-allow-origins=*",
 		"--user-data-dir="+dir,
 		"--remote-debugging-port=0",

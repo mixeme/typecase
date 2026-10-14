@@ -2,6 +2,7 @@ package browser
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net"
 	"net/http"
@@ -177,6 +178,31 @@ func (h *Harness) Run(pageURL string, width, height int, actions ...chromedp.Act
 		height = 600
 	}
 
+	for try := 1; ; try++ {
+		err := h.run(pageURL, width, height, actions)
+		if err == nil {
+			return nil
+		}
+		if !errors.Is(err, errNotOpened) || try == 2 {
+			return fmt.Errorf("chromedp: %w", err)
+		}
+		// On a long run the browser now and then loses a new tab before the
+		// page is in it (14.10.2026: TestBarSafetyQuiet, TestBite_catalogSeg);
+		// the page is opened again in another tab. What the test does in the
+		// tab is not tried again.
+		h.t.Logf("browser: %s did not open in %s; opened again in a new tab", pageURL, openTimeout)
+	}
+}
+
+// openTimeout is how long a new tab may take to have its page; it is
+// tens of milliseconds as a rule.
+const openTimeout = 30 * time.Second
+
+// errNotOpened is a tab that did not have its page in openTimeout.
+var errNotOpened = errors.New("the tab did not open the page")
+
+// run opens the page in a new tab and does the actions there.
+func (h *Harness) run(pageURL string, width, height int, actions []chromedp.Action) error {
 	allocCtx, cancelAlloc := chromedp.NewRemoteAllocator(context.Background(), h.browser.endpoint)
 	defer cancelAlloc()
 	ctx, cancelCtx := chromedp.NewContext(allocCtx)
@@ -184,16 +210,28 @@ func (h *Harness) Run(pageURL string, width, height int, actions ...chromedp.Act
 	ctx, cancelTimeout := context.WithTimeout(ctx, 90*time.Second)
 	defer cancelTimeout()
 
-	all := []chromedp.Action{
-		chromedp.EmulateViewport(int64(width), int64(height)),
-		chromedp.Navigate(pageURL),
-		chromedp.WaitReady("body"),
+	opened := make(chan error, 1)
+	go func() {
+		opened <- chromedp.Run(ctx,
+			chromedp.EmulateViewport(int64(width), int64(height)),
+			chromedp.Navigate(pageURL),
+			chromedp.WaitReady("body"),
+		)
+	}()
+	select {
+	case err := <-opened:
+		if err != nil {
+			return err
+		}
+	case <-time.After(openTimeout):
+		cancelCtx()
+		select {
+		case <-opened:
+		case <-time.After(5 * time.Second): // a tab that ignores the cancel is left behind
+		}
+		return errNotOpened
 	}
-	all = append(all, actions...)
-	if err := chromedp.Run(ctx, all...); err != nil {
-		return fmt.Errorf("chromedp: %w", err)
-	}
-	return nil
+	return chromedp.Run(ctx, actions...)
 }
 
 // Tab runs chromedp actions in one tab until cancel is called.

@@ -310,22 +310,52 @@
 		return h;
 	}
 
+	// A request that is not GET is sent once (Carrel's note 58): when its
+	// answer has come, whatever it is, the form is not sent again the plain
+	// way — that would write twice. An address it was sent on to is gone to,
+	// any other answer is shown whole, as the plain way shows it. Only a
+	// request that had no answer at all goes the plain way.
 	function ask(url, method, body, target, plain, then) {
+		var once = method !== "GET", answered = false;
+		var whole = function (r, text) {
+			if (r.redirected) location.assign(r.url);
+			else {
+				document.open();
+				document.write(text);
+				document.close();
+			}
+		};
 		fetch(url, { method: method, body: body || undefined, headers: headers(target, body), credentials: "same-origin" })
 			.then(function (r) {
+				answered = true;
 				var type = r.headers.get("Content-Type") || "";
-				if (!r.ok || r.redirected || type.indexOf("text/html") !== 0) throw new Error("not a part");
-				return r.text();
+				if (!r.ok || r.redirected || type.indexOf("text/html") !== 0) {
+					if (!once) throw new Error("not a part");
+					return r.text().then(function (text) {
+						whole(r, text);
+						return null;
+					});
+				}
+				return r.text().then(function (html) {
+					if (once && !put(target, html)) {
+						whole(r, html);
+						return null;
+					}
+					return html;
+				});
 			})
 			.then(function (html) {
-				if (!put(target, html)) throw new Error("no zone " + target);
+				if (html === null) return;
+				if (!once && !put(target, html)) throw new Error("no zone " + target);
 				if (method === "GET" && doc.getAttribute("data-tc-address-zone") === target) {
 					history.pushState({ tcSwap: true }, "", url);
 					swapped = true;
 				}
 				if (then) then();
 			})
-			.catch(plain);
+			.catch(function () {
+				if (!(once && answered)) plain();
+			});
 	}
 
 	// A zone the mockup's CSS does not draw at this width — the side panel on

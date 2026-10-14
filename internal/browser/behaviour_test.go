@@ -1709,6 +1709,60 @@ func TestZones(t *testing.T) {
 	}
 }
 
+// TestZoneFormOnce (Carrel's note 58): a form that is not GET, sent by the
+// live layer, is sent once — an answer sent on to another address goes
+// there, an answer that is not a part is shown whole, and neither is sent
+// again the plain way. A GET form whose answer is not a part still goes the
+// plain way: asking again changes nothing. The bite: the old layer sent
+// each of them twice.
+func TestZoneFormOnce(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var sent atomic.Int32
+	done := h.RegisterPage("once-done", browser.PageHTML(`<p class="done">written</p>`, ""))
+	at := map[string]string{}
+	at["once-moved"] = h.RegisterStream("once-moved", func(w http.ResponseWriter, r *http.Request) {
+		sent.Add(1)
+		http.Redirect(w, r, done, http.StatusSeeOther)
+	})
+	at["once-refused"] = h.RegisterStream("once-refused", func(w http.ResponseWriter, r *http.Request) {
+		sent.Add(1)
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(`<!doctype html><p class="refused">the server refused</p>`))
+	})
+	at["once-asked"] = h.RegisterStream("once-asked", func(w http.ResponseWriter, r *http.Request) {
+		sent.Add(1)
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		_, _ = w.Write([]byte("not a part"))
+	})
+	for _, c := range []struct {
+		name, stream, method, want string
+		times                      int32
+	}{
+		{"sent on", "once-moved", "post", "written | once-done", 1},
+		{"refused", "once-refused", "post", "the server refused", 1},
+		{"asked by GET", "once-asked", "get", "not a part", 2},
+	} {
+		sent.Store(0)
+		form := w.Form{Action: at[c.stream], Method: c.method, Target: "main",
+			Items: []w.FormPart{w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Value: "x"}, w.Button{Label: "Send", Submit: true}}}}}
+		body := `<div class="tc-root">` + form.Render() + `<div data-tc-zone="main"><p>old main</p></div></div>`
+		doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`, `data-tc-noscript data-tc-view-header="X-View" data-tc-target-header="X-Target">`, 1)
+		var got string
+		if err := h.Run(h.RegisterPage("once-"+c.stream, doc), 900, 600,
+			chromedp.Click(`.tc-form .tc-btn`, chromedp.ByQuery),
+			chromedp.Sleep(1500*time.Millisecond),
+			chromedp.Evaluate(`(() => { const d = document.querySelector(".done"); return d ? d.textContent + " | " + location.pathname.split("/").pop() : document.body.textContent.trim(); })()`, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want || sent.Load() != c.times {
+			t.Errorf("%s: %q, sent %d times; want %q, %d", c.name, got, sent.Load(), c.want, c.times)
+		}
+	}
+}
+
 // TestZoneSheet (Carrel's task 84): a sheet that comes as an answer lies in
 // the layer of sheets — the scrim the application named as a zone — and is
 // closed by its Cancel (Button.Closes), by a click on the scrim or by Esc

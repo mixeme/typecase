@@ -8,6 +8,12 @@ do, not what the authors did.
 
 ### Breaking
 
+- **The live layer sends a form that is not GET once** (Carrel's note 58):
+  when its answer has come, it is not sent again the plain way — an answer
+  sent on to another address goes there, any other answer that is no part
+  (an error, a page without the zone) is shown whole, as the plain way
+  shows it. Only a request that had no answer goes the plain way. A link and
+  a GET form still go the plain way when the answer is no part.
 - `Pick` prints `value` on every option, the empty one too: an option
   without it sent its words — «Do not rewrite» went as those words, not as
   the empty value the server waits for.
