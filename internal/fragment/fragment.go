@@ -256,6 +256,9 @@ type Node struct {
 	Attrs    []string // "name=value", sorted; only attributes that change the picture
 	Text     string
 	Children []*Node
+	// Hidden says the element has the hidden attribute: shape does not
+	// count it as drawn (Carrel's task 161); fragments do not compare it.
+	Hidden bool
 }
 
 // compared lists the attributes kept per tag; data-tc-* data is kept on any tag.
@@ -303,6 +306,7 @@ func (m *Mockup) norm(n *html.Node, pre bool) *Node {
 		}
 	}
 	sort.Strings(out.Attrs)
+	_, out.Hidden = attrOK(n, "hidden")
 	for _, c := range children(n) {
 		switch c.Type {
 		case html.ElementNode:

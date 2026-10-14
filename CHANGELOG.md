@@ -38,6 +38,19 @@ do, not what the authors did.
 
 ### Added
 
+- **`shape` does not count an element with `hidden` as drawn** (Carrel's
+  task 161): a screen may print a field hidden — the fields «Custom…» at a
+  reminder of a ready step — that its frame does not draw, and a frame may
+  draw one the screen does not print. Kept are the places a script opens
+  or fills, which the frames draw hidden so that the screen has them: the
+  progress bar (`tc-runbar`), a menu (`tc-menu`), the scrim. Shown, such a
+  field is an extra element, as before.
+- **A row added from a template numbers what its options show** (Carrel's
+  task 161): `tc.js` replaces «{n}» in `data-tc-shows` of the row's options
+  (`PickOption.Shows: "reminder.{n}.count …"`) as in the names of its
+  fields, and sets the added row's fields by its choice — «Custom…» of an
+  added reminder opens that reminder's fields, which are sent under its
+  number; until then they are hidden and not sent.
 - **`ColumnBadges`, `ColumnCell.Badges`**: the agenda in chosen columns
   keeps the badges (Р-61) — the column «Attendees and status» is
   `ColumnBadges` with the event's badges, as `TimeRow`'s, 168 px, gone at

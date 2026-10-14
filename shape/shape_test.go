@@ -347,3 +347,46 @@ func TestMissingIsRed(t *testing.T) {
 	cut("the time of When", `<span class="tc-mono">10:00 – 11:00</span>`, "</span>")
 	cut("the badge of When", `<span class="tc-badge" title="Created in another time zone">`, "</span>")
 }
+
+// Carrel's task 161: an element with hidden is not drawn — a field
+// «Custom…» hidden at a reminder of a ready step is no part of the frame,
+// shown it is an extra field. A place a script opens, drawn hidden by the
+// frame (the progress bar), is still the frame's.
+func TestHiddenIsNotDrawn(t *testing.T) {
+	m := mockup(t)
+	r, ok := screens.Find("s-tasks-3")
+	if !ok {
+		t.Fatal("no s-tasks-3")
+	}
+	page := r.Screen().Render()
+	first := `<button class="tc-in is-pick" type="button">1 day before</button></div>`
+	i := strings.Index(page, first)
+	if i < 0 {
+		t.Fatal("no first reminder in s-tasks-3")
+	}
+	i += len(first)
+	field := func(attr string) string {
+		return `<div class="tc-field tc-field--xs"` + attr + `><label>How long</label><input class="tc-in is-mono" type="text" name="reminder.1.count" value="" aria-label="How long"></div>`
+	}
+	if err := m.Check("s-tasks-3", page[:i]+field(" hidden")+page[i:]); err != nil {
+		t.Errorf("a hidden field «Custom…»: %v", err)
+	}
+	if err := m.Check("s-tasks-3", page[:i]+field("")+page[i:]); err == nil {
+		t.Error("a field «Custom…» shown passes; want an extra field")
+	}
+
+	r, ok = screens.Find("states-24")
+	if !ok {
+		t.Fatal("no states-24")
+	}
+	page = r.Screen().Render()
+	bar := `<div class="tc-runbar"`
+	j := strings.Index(page, bar)
+	if j < 0 {
+		t.Fatal("no progress bar in states-24")
+	}
+	k := j + strings.Index(page[j:], "</div>") + len("</div>")
+	if err := m.Check("states-24", page[:j]+page[k:]); err == nil {
+		t.Error("states-24 without its hidden progress bar passes; want it missing")
+	}
+}

@@ -1554,6 +1554,46 @@ func TestPickShows(t *testing.T) {
 	}
 }
 
+// TestTemplateShows (Carrel's task 161): a row added from a template
+// numbers what its options show as it numbers its fields — «Custom…» of an
+// added reminder opens that reminder's number, the number is sent under the
+// row's name, and as added the hidden field is not sent. The bite: with the
+// names of data-tc-shows left as «{n}», the choice opens nothing.
+func TestTemplateShows(t *testing.T) {
+	needChrome(t)
+	row := []w.FieldSetPart{
+		w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Name: "reminder.{n}", Label: "Reminder", Options: []w.PickOption{
+			{Value: "10", Label: "10 minutes before", On: true}, {Value: "custom", Label: "Custom…", Shows: "reminder.{n}.count"}}}}},
+		w.Field{Label: "How long", Hidden: true, Parts: []w.FieldPart{w.Input{Name: "reminder.{n}.count", Value: "2", Mono: true}}},
+	}
+	form := w.Form{Action: "/x", Items: []w.FormPart{w.FieldSet{Rubric: w.Rubric{Text: "Reminders"}, Items: []w.FieldSetPart{
+		w.Template{ID: "tpl-rem", Items: row},
+		w.Button{Label: "Add reminder", Small: true, Submit: true, Name: "add", Value: "reminder", Adds: "tpl-rem"},
+	}}}}
+	body := `<div class="tc-root">` + form.Render() + `</div>`
+	const add = `document.querySelector('[data-tc-adds]') ? document.querySelector('[data-tc-adds]').click() : document.querySelector('button[name="add"]').click()`
+	const choose = `v => { const s = document.querySelector('[name="reminder.0"]'); s.value = v; s.dispatchEvent(new Event("change", {bubbles: true})); }`
+	const state = `(() => { const f = document.querySelector('[name="reminder.0.count"]');
+		return (f && f.getClientRects().length > 0 ? "shown" : "hidden") + " | " + new URLSearchParams(new FormData(document.querySelector("form"))).toString(); })()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct{ name, steps, want string }{
+		{"added", add, "hidden | reminder.0=10"},
+		{"Custom… chosen", add + `; choose("custom")`, "shown | reminder.0=custom&reminder.0.count=2"},
+		{"and a step again", add + `; choose("custom"); choose("10")`, "hidden | reminder.0=10"},
+	} {
+		var got string
+		if err := h.Run(h.RegisterPage("tplshows", browser.PageHTML(body, "")), 900, 600,
+			chromedp.Evaluate(`(() => { const choose = `+choose+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
 // zonePart is fixed markup as a part of a fragment.
 type zonePart string
 

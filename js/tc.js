@@ -536,8 +536,18 @@
 		named.forEach(function (f) {
 			f.setAttribute("name", f.getAttribute("name").split("{n}").join(String(n)));
 		});
+		// The fields an option shows are named with the row's number too
+		// (Carrel's task 161).
+		var shows = row.querySelectorAll("[data-tc-shows*='{n}']");
+		shows.forEach(function (o) {
+			o.setAttribute("data-tc-shows", o.getAttribute("data-tc-shows").split("{n}").join(String(n)));
+		});
+		var lists = Array.prototype.filter.call(row.querySelectorAll("select"), function (l) {
+			return l.querySelector("option[data-tc-shows]");
+		});
 		var first = row.querySelector("input, select, textarea");
 		tpl.parentNode.insertBefore(row, tpl);
+		lists.forEach(syncShows);
 		if (first) first.focus();
 	}
 

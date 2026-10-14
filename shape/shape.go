@@ -22,7 +22,9 @@
 // and its records) may repeat any number of times; repeated as
 // often as the frame draws it or more, it has each part the frame draws in
 // it. What is not compared: text, attributes, a template's contents,
-// the options of a select, a datalist, the hidden fields of a form, a picture in an
+// the options of a select, a datalist, the hidden fields of a form, an
+// element with hidden but for the progress bar, a menu and the scrim (a
+// script opens those, and the frame draws them hidden), a picture in an
 // avatar or a thumbnail (Src: data, the frame draws the place), the menu
 // of a button with its menu (the frames draw it beside the screen). Nor is the element's
 // tag when it has classes: its look is its classes, and the meaning of HTML
@@ -94,6 +96,13 @@ type node struct {
 
 // dropped are the elements of the meaning that the frame does not draw.
 func dropped(n *fragment.Node) bool {
+	// An element with hidden is not drawn, and a frame need not draw it — a
+	// field «Custom…» hidden until its choice (Carrel's task 161). Kept are
+	// the places a script opens or fills, which a frame draws hidden so that
+	// the screen has them: the progress bar, a menu, the scrim.
+	if n.Hidden && !opened(n) {
+		return true
+	}
 	if n.Tag == "input" {
 		for _, a := range n.Attrs {
 			if a == "type=hidden" {
@@ -118,6 +127,16 @@ func dropped(n *fragment.Node) bool {
 	// datalist show anything: it is the choices of a line as one types
 	// (TagAdd.Options, Carrel's task 146).
 	return n.Tag == "option" || n.Tag == "template" || n.Tag == "datalist"
+}
+
+// opened says whether a hidden element is a place a script opens or fills.
+func opened(n *fragment.Node) bool {
+	for _, c := range n.Classes {
+		if c == "tc-runbar" || c == "tc-menu" || c == "tc-scrim" {
+			return true
+		}
+	}
+	return false
 }
 
 // holdsList says whether an element is a pick that holds the browser's list
