@@ -381,6 +381,50 @@ func TestAddRowAndDrop(t *testing.T) {
 	}
 }
 
+// TestSideDrop (a tail of Carrel's task 88, frame s-io-2): a file over the
+// open card's panel marks the panel and keeps the page's drop sheet away;
+// dropped there, it goes to the panel's form, not the sheet's. Off the panel
+// the sheet is the target, and over the sheet the panel under it still wins.
+func TestSideDrop(t *testing.T) {
+	needChrome(t)
+	side := w.Side{Drop: "post-attach", Items: []w.SidePart{w.Msg{Parts: []w.MsgPart{w.Text("Синк-ап по релизу")}}}}
+	body := `<div class="tc-root"><div style="display:flex"><div id="away" style="flex:1;height:400px"></div>` + side.Render() + `</div>` +
+		w.PostForm{ID: "post-attach", Action: "/attach", File: "file"}.Render() + w.PostForm{ID: "post-import", Action: "/import", File: "file"}.Render() +
+		w.Scrim{ID: "drop", Closed: true, Drop: "post-import", Content: w.Sheet{Title: "Drop to import"}}.Render() + `</div>`
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("side-drop", browser.PageHTML(body, ""))
+	var got string
+	err := h.Run(url, 900, 600,
+		chromedp.Evaluate(`(() => {
+			const said = [];
+			document.addEventListener("submit", e => { e.preventDefault(); said.push("sent " + e.target.id); });
+			const at = el => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+			const panel = document.querySelector(".tc-side"), sheet = document.getElementById("drop");
+			const [px, py] = at(panel), [ax, ay] = at(document.getElementById("away"));
+			const drag = (type, x, y) => {
+				const dt = new DataTransfer();
+				dt.items.add(new File(["x"], "release-checklist.md"));
+				document.elementFromPoint(x, y).dispatchEvent(new DragEvent(type, {dataTransfer: dt, clientX: x, clientY: y, bubbles: true, cancelable: true}));
+			};
+			const state = what => said.push(what + ": panel " + panel.classList.contains("tc-side--drop") + ", sheet " + (sheet.getClientRects().length > 0));
+			drag("dragenter", px, py); state("over the panel");
+			drag("dragover", ax, ay); state("off it");
+			drag("dragover", px, py); state("back over it");
+			drag("drop", px, py); state("dropped on it");
+			drag("dragenter", ax, ay); drag("drop", ax, ay); state("dropped off it");
+			return said.join("; ");
+		})()`, &got),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := "over the panel: panel true, sheet false; off it: panel false, sheet true; back over it: panel true, sheet false; " +
+		"sent post-attach; dropped on it: panel false, sheet false; sent post-import; dropped off it: panel false, sheet false"
+	if got != want {
+		t.Errorf("a file over the card's panel:\n got %s\nwant %s", got, want)
+	}
+}
+
 // TestColumnsMenu (the choice of columns): the menu is a form whose ticked
 // items are sent in their order; Alt+↓ moves an item down, the handle drags
 // one, and a click on an item ticks it without closing anything.

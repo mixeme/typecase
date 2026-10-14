@@ -74,7 +74,7 @@
 | `PhoneRow` | `tc-row` | Нажатие открывает запись; галка выбирает её. | без сценария (ссылка, форма, `details`) |
 | `Pick` | `tc-in` | Нажатие открывает список под полем; выбор закрывает его, фокус возвращается на поле. | тест: `TestFormsWithoutScripts`, `TestNotebookPick`, `TestPickShows`, `TestTemplateShows`, `TestZonePick` |
 | `Plain` | `tc-plain` | нет. | — |
-| `PostForm` | `tc-post` | Отправку делает браузер — сценарий не нужен. | тест: `TestAddRowAndDrop`, `TestPasteAndQueue`, `TestSelectionForm` |
+| `PostForm` | `tc-post` | Отправку делает браузер — сценарий не нужен. | тест: `TestAddRowAndDrop`, `TestPasteAndQueue`, `TestSelectionForm`, `TestSideDrop` |
 | `Prose` | `tc-prose` | нет. | — |
 | `Push` | `tc-push` | нет. | — |
 | `Query` | `tc-q` | Ввод — браузера; Esc очищает, если поле не пусто; клавиша (Key) ставит в строку фокус. | тест: `TestSearchSuggest`, `TestShortcuts` |
@@ -85,14 +85,14 @@
 | `Range` | `tc-range` | Show применяет диапазон; Enter в поле — то же. С адресом (Action) диапазон — форма GET: From и To уходят полями, Show её отправляет, без сценария. | без сценария (ссылка, форма, `details`) |
 | `Rubric` | `tc-rubric` | нет. | тест: `TestAddRowAndDrop`, `TestConflictForm`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestSearchSuggest`, `TestTemplateShows`, `TestZonePick` |
 | `Runbar` | `tc-runbar` | «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама. | тест: `TestEditFile`, `TestRunFollows` |
-| `Scrim` | `tc-scrim` | Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте. | тест: `TestAddRowAndDrop`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestZoneSheet` |
+| `Scrim` | `tc-scrim` | Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте. | тест: `TestAddRowAndDrop`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestSideDrop`, `TestZoneSheet` |
 | `Search` | `tc-search` | Ввод ищет; Esc очищает запрос и закрывает подсказки. | тест: `TestSearchSuggest`, `TestShortcuts` |
 | `Sec` | `tc-sec` | нет. | — |
 | `Seg` | `tc-seg` | Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя. | тест: `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestSwap`, `TestThemeShowsKept` |
 | `SegFold` | `tc-segfold` | На узкой полосе нажатие на текущий вариант открывает меню остальных (details, без сценария); выбор — переход по ссылке. Короткий переключатель (`Phone`) складывается только на полосе телефона, 640&nbsp;px и уже: Day / Week / Month / Range агенды. | без сценария (ссылка, форма, `details`) |
 | `Sheet` | `tc-sheet` | Esc закрывает лист и возвращает фокус тому, что его открыло; Enter делает главное. | тест: `TestAddRowAndDrop`, `TestFileSizes`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestTallyCount`, `TestTreeNodeSwap`, `TestTreeSend`, `TestZoneSheet` |
 | `Shell` | `tc-shell` | На узком экране рейл становится ящиком, панель — листом поверх страницы. | тест: `TestRailReopensSources`, `TestZonePanel` |
-| `Side` | `tc-side` | Esc закрывает панель и возвращает фокус строке, которая её открыла. | тест: `TestZonePanel` |
+| `Side` | `tc-side` | Esc закрывает панель и возвращает фокус строке, которая её открыла. Панель с Drop: файл над ней отмечает её (drop) вместо листа броска страницы, брошенный — уходит в названную форму. | тест: `TestSideDrop`, `TestZonePanel` |
 | `SizeRow` | `tc-row` | Галка выбирает вещь для действий шапки; нажатие на имя открывает её. | без сценария (ссылка, форма, `details`) |
 | `Skel` | `tc-skel` | нет. | — |
 | `SkelRow` | `tc-row` | нет. | — |

@@ -47,6 +47,20 @@ do, not what the authors did.
 
 ### Added
 
+- **A page checks how its parts name each other** (the owner's thought
+  after the review: the constructor must not break when it is put
+  together). `page.Check(html)` and `Document.Check()` read a whole printed
+  page as the browser and the library's script will and return a `Problem`
+  for every name that does not hold: an id given twice; `form`, `list`,
+  `for`, `aria-*`, `data-tc-progress`, `data-tc-add`, `data-tc-open`,
+  `data-tc-swap` and the other ids a part gives — naming nothing, or the
+  wrong thing (`data-tc-drop` and `data-tc-paste` want a form with a file
+  field, `data-tc-add` a template, `for` a control); `data-tc-disables`,
+  `data-tc-follows` and an option's `data-tc-shows` — naming no field of
+  their form; `data-tc-target` and the document's address zone — naming no
+  zone on the page. Names with «{n}» are the template's and are left. Such
+  a page renders and looks right; what breaks is what is pressed. Run it in
+  your tests over the pages you print. `TestCheck`.
 - **A queue folds in place** (a tail of Carrel's task 88): `Queue.Fold`
   (`QueueFold{Hide, Show, Total}`) — with the library's script its Toggle
   hides the list and says Show, the total says `Total` («{percent}%») once
@@ -158,6 +172,13 @@ do, not what the authors did.
   One request carries all the files, so a row's share is counted from the
   bytes sent so far. Without the layer the form loads its answer.
   `TestPasteAndQueue`.
+- **A file dropped on the open card** (a tail of Carrel's task 88, frame
+  `s-io-2`). `Side.Drop` names the form with a file field a file dropped
+  on the panel is sent with (`data-tc-drop`). With the library's script a
+  file over the panel marks it (`tc-side--drop`) and keeps the page's drop
+  sheet away — the open card wins over the page; dropped there, the file
+  goes to the panel's form, off the panel to the sheet's. Without a script
+  nothing is dropped: the card's «Attach» stays. `TestSideDrop`.
 - **Shortcuts are data** (Carrel's task 87). `Button.Key`, `MenuItem.Key`
   and `Query.Key` name the key that presses the button or the item, or puts
   the focus into the search line (`data-tc-key`: «n», «/», «?», «Ctrl+S»,

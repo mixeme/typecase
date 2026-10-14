@@ -651,20 +651,48 @@
 		return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") >= 0;
 	}
 
+	// A panel that names a form (Side.Drop) takes a file dropped on it: the
+	// open card wins over the page's sheet (frame s-io-2). While the file is
+	// over the panel the panel is marked and the sheet stays away; the panel
+	// is found under the sheet too, by the point the file is at.
+	function dropPanel(e) {
+		var at = document.elementsFromPoint && typeof e.clientX === "number" ? document.elementsFromPoint(e.clientX, e.clientY) : [e.target];
+		for (var i = 0; i < at.length; i++) {
+			var p = closest(at[i], ".tc-side[data-tc-drop]");
+			if (p) return p;
+		}
+		return null;
+	}
+
+	var dropOver = null;
+	function markDrop(panel) {
+		if (dropOver === panel) return;
+		if (dropOver) dropOver.classList.remove("tc-side--drop");
+		dropOver = panel;
+		if (panel) panel.classList.add("tc-side--drop");
+	}
+
 	function onDrag(e) {
-		var sheet = dropSheet();
-		if (!sheet || !carriesFiles(e)) return;
+		if (!carriesFiles(e)) return;
+		var sheet = dropSheet(), panel = dropPanel(e);
+		if (!sheet && !panel && !dropOver) return;
 		e.preventDefault();
 		if (e.type === "dragleave") {
-			if (!e.relatedTarget) hide(sheet);
+			if (e.relatedTarget) return;
+			markDrop(null);
+			if (sheet) hide(sheet);
 			return;
 		}
 		if (e.type === "dragenter" || e.type === "dragover") {
-			show(sheet);
+			markDrop(panel);
+			if (sheet && panel) hide(sheet);
+			else if (sheet) show(sheet);
 			return;
 		}
-		hide(sheet);
-		give(document.getElementById(sheet.getAttribute("data-tc-drop")), e.dataTransfer.files);
+		markDrop(null);
+		if (sheet) hide(sheet);
+		var to = panel || sheet;
+		if (to) give(document.getElementById(to.getAttribute("data-tc-drop")), e.dataTransfer.files);
 	}
 
 	// A file that was dropped or came from the clipboard goes into the file

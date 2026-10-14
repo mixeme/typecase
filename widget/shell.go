@@ -194,10 +194,10 @@ func (v SideVariant) class() string {
 // Side — tc-side
 //
 // Роль. Панель справа: подробности выбранной строки, её поля и действия.
-// Вход. Side{Items, Variant, Zone, Target, Closed}.
+// Вход. Side{Items, Variant, Zone, Target, Closed, Drop}.
 // Состояния. plain | acts | drop | zone.
 // Инварианты. Ширина — токен оболочки, а не свойство панели; панель закрывается крестиком шапки; панель печатает фрагмент своего кадра.
-// Поведение. Esc закрывает панель и возвращает фокус строке, которая её открыла.
+// Поведение. Esc закрывает панель и возвращает фокус строке, которая её открыла. Панель с Drop: файл над ней отмечает её (drop) вместо листа броска страницы, брошенный — уходит в названную форму.
 // Эталон. кадр `s-contacts-1`, фрагмент `.tc-side`.
 // Содержимое. Шапка, секции, поля, опасная зона, форма, сообщение, строка кнопок.
 // Чего нет. Второй панели: подробности подробностей открываются страницей.
@@ -214,6 +214,11 @@ type Side struct {
 	Target string
 	// Closed prints the panel hidden: a zone that waits for its answer.
 	Closed bool
+	// Drop is the ID of the form with a file field a file dropped on the
+	// panel is sent with (a tail of Carrel's task 88, frame s-io-2): with the
+	// library's script the panel is marked while a file is over it and wins
+	// over the page's drop sheet; without one nothing is dropped.
+	Drop string
 }
 
 // PrintMain prints parts of a page one after another, without the page: what
@@ -233,7 +238,7 @@ func (p Side) Render() string { return p.html(nil) }
 
 func (p Side) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + attr("data-tc-zone", p.Zone) + attr("data-tc-target", p.Target) + flag("hidden", p.Closed) + `>`)
+	s.WriteString(`<div` + class(m, "tc-side", p.Variant.class()) + attr("data-tc-zone", p.Zone) + attr("data-tc-target", p.Target) + attr("data-tc-drop", p.Drop) + flag("hidden", p.Closed) + `>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}
