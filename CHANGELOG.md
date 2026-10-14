@@ -47,6 +47,13 @@ do, not what the authors did.
 
 ### Added
 
+- **A queue folds in place** (a tail of Carrel's task 88): `Queue.Fold`
+  (`QueueFold{Hide, Show, Total}`) — with the library's script its Toggle
+  hides the list and says Show, the total says `Total` («{percent}%») once
+  the live layer knows the upload, and pressed again it unfolds, with no
+  request; without a script Toggle is the server's link. The live layer
+  gives a queue's title and total «{percent}» too. The mockup's folding
+  queues carry it.
 - **A button counts what its form's choices write** (the owner's decision
   of 14.10, Р-62): `Button.Count` («Rewrite {n} records») and
   `Button.CountOne` («Rewrite 1 record»), with `Tally` in the sheet — one

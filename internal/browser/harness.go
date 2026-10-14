@@ -194,9 +194,10 @@ func (h *Harness) Run(pageURL string, width, height int, actions ...chromedp.Act
 	}
 }
 
-// openTimeout is how long a new tab may take to have its page; it is
-// tens of milliseconds as a rule.
-const openTimeout = 30 * time.Second
+// openTimeout is how long a new tab may take to have its page: tens of
+// milliseconds as a rule, seconds for the catalog of every record, and more
+// than 30 s for it late in a full run (14.10.2026: the catalog tests).
+const openTimeout = 60 * time.Second
 
 // errNotOpened is a tab that did not have its page in openTimeout.
 var errNotOpened = errors.New("the tab did not open the page")
@@ -207,8 +208,6 @@ func (h *Harness) run(pageURL string, width, height int, actions []chromedp.Acti
 	defer cancelAlloc()
 	ctx, cancelCtx := chromedp.NewContext(allocCtx)
 	defer cancelCtx()
-	ctx, cancelTimeout := context.WithTimeout(ctx, 90*time.Second)
-	defer cancelTimeout()
 
 	opened := make(chan error, 1)
 	go func() {
@@ -231,6 +230,9 @@ func (h *Harness) run(pageURL string, width, height int, actions []chromedp.Acti
 		}
 		return errNotOpened
 	}
+	// what the test does has its own 90 s, however long the page took
+	ctx, cancelTimeout := context.WithTimeout(ctx, 90*time.Second)
+	defer cancelTimeout()
 	return chromedp.Run(ctx, actions...)
 }
 

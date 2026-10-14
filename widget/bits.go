@@ -331,10 +331,10 @@ type QueueItem struct {
 // Queue — tc-queue
 //
 // Роль. Очередь загрузки: что грузится, сколько, что не вышло и что с ним сделать.
-// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone, Progress, Row}.
+// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone, Progress, Row, Fold}.
 // Состояния. min | flush.
 // Инварианты. Заголовок — сколько из скольких; ошибка — словами у файла, а не общей плашкой; очередь печатает фрагмент своего кадра.
-// Поведение. «Hide» сворачивает очередь в строку, «Show» разворачивает.
+// Поведение. «Hide» сворачивает очередь в строку, «Show» разворачивает: со сценарием — на месте (Fold), без него — ответом сервера.
 // Эталон. кадр `components-26`, фрагмент `.tc-queue`.
 // Содержимое. Заголовок, общий объём, кнопка сворачивания, строки файлов со шкалой, кнопки у ошибки.
 // Чего нет. Отмены всех загрузок одной кнопкой.
@@ -354,11 +354,22 @@ type Queue struct {
 	// goes in place, the queue shows, every file gets a row printed from
 	// Row, and the rows' meters move. The words in braces are the queue's:
 	// «{name}», «{size}» and «{percent}» in a row; «{count}», «{done}»,
-	// «{sent}» and «{total}» in the title and the total. A queue that has a
+	// «{sent}», «{total}» and «{percent}» in the title and the total. A queue that has a
 	// Progress and no Items waits hidden. Without the layer the form loads
 	// its answer, and the queue is what the server printed.
 	Progress string
 	Row      *QueueItem
+	// Fold, with the library's script, folds the queue in place when its
+	// Toggle is pressed: the list hides, Toggle says Show, and the total says
+	// Total — the words of the live layer's upload («{percent}%») once it
+	// knows them; pressed again, it unfolds. Without a script Toggle is
+	// what the server answers (Hide and Show as links).
+	Fold *QueueFold
+}
+
+// QueueFold is what a queue says folded and unfolded (Queue.Fold).
+type QueueFold struct {
+	Hide, Show, Total string
 }
 
 // QueueVariant is where a queue stands.
@@ -379,7 +390,7 @@ func (q Queue) Render() string { return q.html(nil) }
 
 func (q Queue) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + attr("data-tc-zone", q.Zone) + attr("data-tc-progress", q.Progress) +
+	s.WriteString(`<div` + class(m, "tc-queue", is("min", q.Min), q.Variant.class()) + attr("data-tc-zone", q.Zone) + attr("data-tc-progress", q.Progress) + q.Fold.attrs() +
 		flag("hidden", q.Progress != "" && len(q.Items) == 0) + `><div class="tc-queue__head"><b>` + esc(q.Title) + `</b>` +
 		q.Total.html(nil) + q.Toggle.html(nil) + `</div>`)
 	if q.Row != nil {
@@ -394,6 +405,13 @@ func (q Queue) html(m mix) string {
 	}
 	s.WriteString(`</div>`)
 	return s.String()
+}
+
+func (f *QueueFold) attrs() string {
+	if f == nil {
+		return ""
+	}
+	return attr("data-tc-fold-hide", f.Hide) + attr("data-tc-fold-show", f.Show) + attr("data-tc-fold-total", f.Total)
 }
 
 func (it QueueItem) html() string {

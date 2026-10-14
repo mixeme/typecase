@@ -758,6 +758,7 @@ func Files2() Screen {
 								},
 							},
 						},
+						Fold: &w.QueueFold{Hide: "Hide", Show: "Show", Total: "{percent}%"},
 					},
 				},
 				Variant: w.MainRoomy,

@@ -319,7 +319,34 @@
 		}
 	});
 
+	// A queue that folds in place (data-tc-fold-…, Queue.Fold): its toggle
+	// hides the list and says Show, the total says what the queue says
+	// folded once the upload's words are known; pressed again, it unfolds.
+	function fold(btn) {
+		var q = closest(btn, ".tc-queue");
+		if (!q || !q.hasAttribute("data-tc-fold-show") || !closest(btn, ".tc-queue__head")) return false;
+		var min = !q.classList.contains("is-min");
+		q.classList.toggle("is-min", min);
+		var label = labelOf(btn);
+		if (label) label.textContent = q.getAttribute(min ? "data-tc-fold-show" : "data-tc-fold-hide");
+		var list = q.querySelector(":scope > .tc-queue__list");
+		if (list) (min ? hide : show)(list);
+		var head = q.querySelector(":scope > .tc-queue__head"), total = head && head.querySelector(":scope > .tc-mono");
+		var said = head && lastWords.get(head), text = total && total.firstChild;
+		if (said && text && text.nodeType === 3) {
+			if (!folded.has(text)) folded.set(text, worded.get(text) || text.nodeValue);
+			worded.set(text, min ? q.getAttribute("data-tc-fold-total") : folded.get(text));
+			fillWords(head, said);
+		}
+		return true;
+	}
+
 	function onClick(e) {
+		var toggle = closest(e.target, ".tc-queue__head .tc-btn");
+		if (toggle && fold(toggle)) {
+			e.preventDefault();
+			return;
+		}
 		// A picked file's Remove takes its row away, the file with it: it
 		// does not go with Save.
 		var removes = closest(e.target, "[data-tc-remove]");
@@ -1001,9 +1028,10 @@
 	// The words in braces a template was printed with («{name}») become
 	// what they name; the text as printed is remembered, so that words that
 	// change — how far an upload went — are written again.
-	var worded = new WeakMap();
+	var worded = new WeakMap(), folded = new WeakMap(), lastWords = new WeakMap();
 
 	function fillWords(el, words) {
+		lastWords.set(el, words);
 		var walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
 		for (var n = walk.nextNode(); n; n = walk.nextNode()) {
 			var was = worded.get(n);

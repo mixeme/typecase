@@ -81,7 +81,7 @@
 					bar.setAttribute("aria-valuenow", pc);
 				}
 			});
-			if (head) tc.fillWords(head, { "{count}": files.length, "{done}": done, "{sent}": tc.fileSize(Math.round(sent)), "{total}": tc.fileSize(total) });
+			if (head) tc.fillWords(head, { "{count}": files.length, "{done}": done, "{sent}": tc.fileSize(Math.round(sent)), "{total}": tc.fileSize(total), "{percent}": Math.round(part * 100) });
 		};
 	}
 

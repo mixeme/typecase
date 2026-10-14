@@ -1763,6 +1763,51 @@ func TestZoneFormOnce(t *testing.T) {
 	}
 }
 
+// TestQueueFolds (a tail of task 88): «Hide» folds the queue in place — the
+// list hides, the toggle says Show, the total says the percent once the
+// upload's words are known — and «Show» unfolds it, with no request.
+// Without a script the toggle is the server's link. The bite: before, the
+// toggle only went to the server.
+func TestQueueFolds(t *testing.T) {
+	needChrome(t)
+	q := w.Queue{Title: "Uploading 2 of 3", Total: w.Mono{Text: "{sent} of {total}", Variant: w.MonoDusty, Place: w.Pushed},
+		Toggle: w.Button{Label: "Hide", Small: true, Href: "/elsewhere"}, Variant: w.QueueFlushAuto,
+		Items: []w.QueueItem{{Name: "a.pdf", Meta: "done"}, {Name: "b.png", Meta: "40%"}},
+		Fold:  &w.QueueFold{Hide: "Hide", Show: "Show", Total: "{percent}%"}}
+	body := `<div class="tc-root">` + q.Render() + `</div>`
+	const fill = `(() => { const h = document.querySelector(".tc-queue__head"); window.__tc.fillWords(h, {"{sent}": "3 MB", "{total}": "5 MB", "{percent}": 62}); return true })()`
+	const press = `document.querySelector(".tc-queue__head .tc-btn").click(); true`
+	const state = `(() => { const q = document.querySelector(".tc-queue"), l = q.querySelector(".tc-queue__list");
+		return (q.classList.contains("is-min") ? "folded" : "open") + " | " + (l.getClientRects().length ? "list" : "no list") + " | " +
+			q.querySelector(".tc-queue__head .tc-mono").textContent + " | " + q.querySelector(".tc-queue__head .tc-btn").textContent.trim() + " | " + location.pathname.split("/").pop() })()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name, steps, want string
+		bare              bool
+	}{
+		{"hidden", press, "folded | no list | {sent} of {total} | Show | queue", false},
+		{"shown again", press + ";" + press, "open | list | {sent} of {total} | Hide | queue", false},
+		{"hidden while uploading", fill + ";" + press, "folded | no list | 62% | Show | queue", false},
+		{"shown while uploading", fill + ";" + press + ";" + press, "open | list | 3 MB of 5 MB | Hide | queue", false},
+	} {
+		page := browser.PageHTML(body, "")
+		if c.bare {
+			page = strings.Replace(page, `<script src="/tc.js"></script>`, "", 1)
+		}
+		var got string
+		if err := h.Run(h.RegisterPage("queue", page), 900, 600,
+			chromedp.Evaluate(`(() => { `+c.steps+`; return true })()`, nil),
+			chromedp.Sleep(300*time.Millisecond),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
 // TestZoneSheet (Carrel's task 84): a sheet that comes as an answer lies in
 // the layer of sheets — the scrim the application named as a zone — and is
 // closed by its Cancel (Button.Closes), by a click on the scrim or by Esc
@@ -1939,6 +1984,25 @@ func TestRunFollows(t *testing.T) {
 	}
 	if got != "polled" {
 		t.Errorf("a stream that refused: the line says %q; want polled", got)
+	}
+
+	// a stream that breaks midway (a tail of 14.10): one event, then the
+	// connection ends with no event that ends the run — the poll takes over,
+	// and the stream is not opened again
+	var broke int32
+	breaking := h.RegisterStream("run-breaks", func(rw http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&broke, 1)
+		rw.Header().Set("Content-Type", "text/event-stream")
+		fmt.Fprintf(rw, "event: changed\ndata: %s\n\n", frag(bar("2 of 6", r.URL.Path, pollURL)))
+		rw.(http.Flusher).Flush()
+	})
+	var mid string
+	if err := h.Run(h.RegisterPage("run-breaking", browser.PageHTML(`<div class="tc-root">`+bar("0 of 6", breaking, pollURL).Render()+`</div>`, "")), 900, 400,
+		wait, chromedp.Evaluate(text, &mid)); err != nil {
+		t.Fatal(err)
+	}
+	if mid != "polled" || atomic.LoadInt32(&broke) != 1 {
+		t.Errorf("a stream that broke: the line says %q after %d openings; want polled after one", mid, broke)
 	}
 
 	// without the layer the line stays as printed

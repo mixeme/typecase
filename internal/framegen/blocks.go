@@ -175,6 +175,9 @@ func (g *gen) queue(e *El) string {
 	for _, v := range allOf(e, []kv{{"tc-queue--flush-full", "QueueFlushFull"}, {"tc-queue--flush-wauto", "QueueFlushAuto"}}) {
 		f = append(f, "Variant: w."+v)
 	}
+	if h := e.Attr("data-tc-fold-hide"); h != "" {
+		f = append(f, "Fold: &w.QueueFold{Hide: "+q(h)+", Show: "+q(e.Attr("data-tc-fold-show"))+", Total: "+q(e.Attr("data-tc-fold-total"))+"}")
+	}
 	return "w.Queue{" + join(f, ", ") + "}"
 }
 
