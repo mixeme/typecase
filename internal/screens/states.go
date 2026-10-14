@@ -865,6 +865,11 @@ func States17() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "event-edit-loss",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Strong("The change was saved, but the server did not keep these properties."),
@@ -1182,6 +1187,11 @@ func States36() Screen {
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "event-edit-loss-days",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -2219,6 +2229,11 @@ func States12() Screen {
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "contact-edit-loss",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
 					},
 					w.Msg{
 						Parts: []w.MsgPart{

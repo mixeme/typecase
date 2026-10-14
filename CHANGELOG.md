@@ -700,6 +700,11 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **The Save bar in every frame of a loss report** (Carrel's task 162; the
+  kinds are equal): `states-12` (a contact), `states-17` and `states-36` (an
+  event) carry the edit's hidden Save bar under the head, as `states-24`
+  and `states-31` do — the edit after the report is the same form with the
+  same Save. Pixels the same at 1351, 820 and 460.
 - **The other cards of a linked record from the combined view** (after
   `s-contacts-33`, Р-58; accepted by the owner 15.10). An event
   (`s-agenda-25`: the place taken from «Личный», its mark after it), a task
