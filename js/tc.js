@@ -551,21 +551,23 @@
 		if (first) first.focus();
 	}
 
+	// labelOf is the words of a button: its label, or its last words.
+	function labelOf(btn) {
+		var label = btn.querySelector(".tc-btn__label");
+		if (label) return label;
+		for (var n = btn.lastChild; n; n = n.previousSibling) {
+			if (n.nodeType === 3 && n.nodeValue.trim()) return n;
+		}
+		return null;
+	}
+
 	// A button that has copied says so for a moment (data-tc-copied). Its
 	// right edge stays where it is: the other word takes or gives room at
 	// the left, by a margin, so nothing after the button moves.
 	function said(btn) {
 		var word = btn.getAttribute("data-tc-copied");
 		if (!word || btn.hasAttribute("data-tc-said")) return;
-		var label = btn.querySelector(".tc-btn__label");
-		if (!label) {
-			for (var n = btn.lastChild; n; n = n.previousSibling) {
-				if (n.nodeType === 3 && n.nodeValue.trim()) {
-					label = n;
-					break;
-				}
-			}
-		}
+		var label = labelOf(btn);
 		if (!label) return;
 		var was = label.textContent;
 		var width = btn.getBoundingClientRect().width;
@@ -762,6 +764,45 @@
 		});
 	}
 
+	// A button that counts (data-tc-count, Button.Count; the owner's decision
+	// of 14.10): the records of its form's tally (template[data-tc-tally])
+	// whose conditions hold — «name=value» a tick or a choice of that name
+	// with that value, «name» a field of that name not empty, «a|b» either —
+	// said again at each change of the form; none turns the button off.
+	function tally(form) {
+		var tpl = form.querySelector("template[data-tc-tally]");
+		var btns = form.querySelectorAll("[data-tc-count]");
+		if (!tpl || !btns.length) return;
+		var holds = function (a) {
+			var i = a.indexOf("="), name = i < 0 ? a : a.slice(0, i), value = i < 0 ? null : a.slice(i + 1);
+			return Array.prototype.some.call(form.elements, function (f) {
+				if (f.name !== name || f.disabled) return false;
+				if (f.type === "checkbox" || f.type === "radio") return f.checked && (value === null || f.value === value);
+				return value === null ? f.value !== "" : f.value === value;
+			});
+		};
+		var n = 0;
+		tpl.content.querySelectorAll("[data-tc-if]").forEach(function (r) {
+			var all = r.getAttribute("data-tc-if").split(/\s+/).every(function (t) {
+				return !t || t.split("|").some(holds);
+			});
+			if (all) n++;
+		});
+		btns.forEach(function (b) {
+			var label = labelOf(b);
+			if (!label) return;
+			var one = b.getAttribute("data-tc-count-1");
+			label.textContent = n === 1 && one ? one : b.getAttribute("data-tc-count").split("{n}").join(String(n));
+			b.disabled = n === 0;
+		});
+	}
+
+	function initTally(root) {
+		root.querySelectorAll("form").forEach(function (f) {
+			if (f.querySelector("template[data-tc-tally]")) tally(f);
+		});
+	}
+
 	function initShows(root) {
 		root.querySelectorAll("select").forEach(function (list) {
 			if (list.querySelector("option[data-tc-shows]")) syncShows(list);
@@ -834,6 +875,7 @@
 		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 		if (e.target.matches && e.target.matches("select") && e.target.querySelector("option[data-tc-shows]")) syncShows(e.target);
 		if (e.target.hasAttribute && e.target.hasAttribute("data-tc-was")) follow(e.target);
+		if (e.target.form && e.target.form.querySelector("template[data-tc-tally]")) tally(e.target.form);
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-size]")) sizeFields(e.target);
 		// A file picked by a button or a menu item goes with its form at once
 		// (Carrel's task 109); without the script «Upload» sends it.
@@ -1351,6 +1393,7 @@
 		initLayers(root);
 		initDisables(root);
 		initShows(root);
+		initTally(root);
 		initFollows(root);
 		layoutUpdates();
 	}

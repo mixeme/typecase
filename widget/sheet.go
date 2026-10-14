@@ -70,6 +70,7 @@ func (SheetChecks) sheetPart() {}
 func (Check) sheetPart()       {}
 func (SheetFrom) sheetPart()   {}
 func (SheetPick) sheetPart()   {}
+func (Tally) sheetPart()       {}
 
 // SheetFields is a row of fields in a sheet: the first takes the rest of it.
 type SheetFields struct {
@@ -437,3 +438,24 @@ func (o Overlay) html(m mix) string {
 
 func (Overlay) shellContent() {}
 func (Scrim) mainPart()       {}
+
+// Tally is what a button's count counts (Button.Count): one record a line,
+// each the conditions on which it is written — separated by spaces, all of
+// them hold; «name=value» holds while the form's tick or choice of that name
+// has that value, «name» while the field of that name is not empty, and
+// alternatives are joined by «|» («to.1|to.2»: it names either address). It
+// is not drawn; the library's script counts the records whose conditions
+// hold.
+type Tally struct {
+	Records []string
+}
+
+func (t Tally) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<template data-tc-tally>`)
+	for _, r := range t.Records {
+		s.WriteString(`<i` + attr("data-tc-if", r) + `></i>`)
+	}
+	s.WriteString(`</template>`)
+	return s.String()
+}

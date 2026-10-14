@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Pick` prints `value` on every option, the empty one too: an option
+  without it sent its words — «Do not rewrite» went as those words, not as
+  the empty value the server waits for.
 - `TimeRow.Caption *Badge` is now `TimeRow.Badges []Badge` (the owner's
   decision of 14.10, Р-61): pass all the event's badges by importance —
   `AgendaRow.Badges` as it is; the row shows those that fit whole, two side
@@ -38,6 +41,17 @@ do, not what the authors did.
 
 ### Added
 
+- **A button counts what its form's choices write** (the owner's decision
+  of 14.10, Р-62): `Button.Count` («Rewrite {n} records») and
+  `Button.CountOne` («Rewrite 1 record»), with `Tally` in the sheet — one
+  record a line, each the conditions on which it is written: `name=value`
+  (a tick or choice of that name has that value), `name` (that field is not
+  empty), `a|b` (either), all of them at once. `tc.js` says the count again
+  at each change of the form and turns the button off at none; without a
+  script the label stays as printed. In «Rewrite the addresses» (s-contacts-29)
+  a record is the address it names and its groups — `to.1 group=scheduling
+  group=others` — so a record of two groups counts only while both are
+  ticked, as the sheet says.
 - **`shape` does not count an element with `hidden` as drawn** (Carrel's
   task 161): a screen may print a field hidden — the fields «Custom…» at a
   reminder of a ready step — that its frame does not draw, and a frame may
@@ -688,6 +702,12 @@ do, not what the authors did.
   the series». The sheet is the pattern for other such questions: a
   question, what changed, the list of what is touched, two or three
   answers, one of them the default. No new block. 438 frames.
+- **«Rewrite the addresses»: the counts agree, and the button counts on the
+  spot** (Р-62). s-contacts-29: «22 records name it» (it was 14, fewer than
+  the groups hold), and the button «Rewrite 17 records» (it was 9): of the
+  22, 2 in Shared are read-only and 3 stand in the unticked «Meetings
+  organised by others». The sheet carries its tally; the caption says how
+  it counts.
 - **The agenda's badges stand side by side** (the owner's decision of
   14.10, Р-61). «Синк-ап по релизу» repeats weekly, so its row has both
   badges, «4 attendees» and «repeats weekly», in every frame of that week

@@ -167,7 +167,9 @@ func (p Pick) html(m mix) string {
 		}
 		s.WriteString(`<select class="tc-in__list"` + attr("name", p.Name) + attr("aria-label", p.Label) + `>`)
 		for _, o := range p.Options {
-			s.WriteString(`<option` + attr("value", o.Value) + flag("selected", o.On) + flag("disabled", o.Unavailable) + attr("data-tc-shows", o.Shows) + `>` + esc(o.Label) + `</option>`)
+			// the value always: an option without one sends its words
+			// («Do not rewrite» is the empty value, not those words)
+			s.WriteString(`<option value="` + esc(o.Value) + `"` + flag("selected", o.On) + flag("disabled", o.Unavailable) + attr("data-tc-shows", o.Shows) + `>` + esc(o.Label) + `</option>`)
 		}
 		s.WriteString(`</select></span>`)
 		return s.String()

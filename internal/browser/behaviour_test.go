@@ -1594,6 +1594,64 @@ func TestTemplateShows(t *testing.T) {
 	}
 }
 
+// TestTallyCount (the owner's decision of 14.10): the button of the sheet
+// «Rewrite the addresses» says how many records its choices rewrite, at each
+// tick and each choice of an address — a record of two groups only while
+// both are ticked, an address left as it is takes its records away, none
+// turns the button off, one is said in the singular. Without a script the
+// label stays as printed. The bite: without the tally the label never moves.
+func TestTallyCount(t *testing.T) {
+	needChrome(t)
+	var sheet w.Sheet
+	for _, e := range refs.Entries {
+		if s, ok := e.Fixture.(w.Sheet); ok && e.Ref.Frame == "s-contacts-29" {
+			sheet = s
+		}
+	}
+	if sheet.Title == "" {
+		t.Fatal("no sheet of s-contacts-29 in the references")
+	}
+	one := w.Sheet{Action: "/x", Title: "One", Body: []w.SheetPart{
+		w.Check{On: true, Name: "group", Value: "a", Parts: []w.CheckPart{w.Text("A")}},
+		w.Tally{Records: []string{"group=a", "group=a group=b"}}},
+		Foot: []w.SheetFootPart{w.Button{Label: "Rewrite 1 record", Kind: w.ButtonPrimary, Submit: true, Count: "Rewrite {n} records", CountOne: "Rewrite 1 record"}}}
+	const set = `(n, v, on) => { const f = [...document.querySelectorAll('[name="' + n + '"]')].find(x => x.tagName === "SELECT" || x.value === v);
+		if (f.tagName === "SELECT") f.value = v; else f.checked = on; f.dispatchEvent(new Event("change", {bubbles: true})); }`
+	const state = `(() => { const b = document.querySelector("[data-tc-count]"); return b.textContent.trim() + (b.disabled ? " (off)" : ""); })()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name  string
+		body  w.Sheet
+		steps string
+		want  string
+		bare  bool
+	}{
+		{"as printed", sheet, ``, "Rewrite 17 records", false},
+		{"past meetings left", sheet, `set("group", "past", false)`, "Rewrite 12 records", false},
+		{"organised by others ticked", sheet, `set("group", "others", true)`, "Rewrite 20 records", false},
+		{"the first address kept", sheet, `set("to.1", "")`, "Rewrite 0 records (off)", false},
+		{"only the second rewritten", sheet, `set("to.1", ""); set("to.2", "anna@home.example")`, "Rewrite 3 records", false},
+		{"one", one, `set("group", "a", true)`, "Rewrite 1 record", false},
+		{"none", one, `set("group", "a", false)`, "Rewrite 0 records (off)", false},
+		{"without a script", sheet, `set("group", "past", false)`, "Rewrite 17 records", true},
+	} {
+		page := browser.PageHTML(`<div class="tc-root">`+c.body.Render()+`</div>`, "")
+		if c.bare {
+			page = strings.Replace(page, `<script src="/tc.js"></script>`, "", 1)
+		}
+		var got string
+		if err := h.Run(h.RegisterPage("tally", page), 900, 900,
+			chromedp.Evaluate(`(() => { const set = `+set+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
 // zonePart is fixed markup as a part of a fragment.
 type zonePart string
 

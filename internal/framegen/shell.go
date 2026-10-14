@@ -1067,6 +1067,12 @@ func (g *gen) sheet(e *El) string {
 	var bp []string
 	for _, x := range body.Els() {
 		switch {
+		case x.Tag == "template" && x.HasAttr("data-tc-tally"):
+			var rs []string
+			for _, r := range x.Els() {
+				rs = append(rs, q(r.Attr("data-tc-if")))
+			}
+			bp = append(bp, "w.Tally{Records: []string{"+join(rs, ", ")+"}}")
 		case x.Has("tc-rubric"):
 			bp = append(bp, g.rubric(x, ""))
 		case x.Has("tc-tree"):
