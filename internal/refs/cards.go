@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep two days of the series."), w.Text(" Other clients will not see them either: the meeting of 24 August, which was skipped, is back; the meeting of 31 August, which was moved to 1 September, 15:00, is back on its day at 12:00.")}, Space: w.MsgFlushTop2}, "states-36", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}, "s-dup-6", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("3"), w.Text(" files, 4.4 MB, are deleted on sftpgo · vps. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-files-22", "tc-msg", 1),
 	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep these properties."), w.Text(" Other clients will not see them either: "), w.Mono{Text: "X-ABLABEL"}, w.Text(", "), w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"}, w.Text(", "), w.Mono{Text: "X-EVOLUTION-FILE-AS"}, w.Text(".")}, Space: w.MsgFlushTop2}, "states-12", "tc-msg", 1),

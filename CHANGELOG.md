@@ -663,6 +663,16 @@ do, not what the authors did.
   the series». The sheet is the pattern for other such questions: a
   question, what changed, the list of what is touched, two or three
   answers, one of them the default. No new block. 438 frames.
+- **The days of a series a server lost, in words** (Carrel's task 151, the
+  question left open; the owner's answer of 14.10, Р-60). `states-36`
+  (new), «Событие · сервер не сохранил дни серии»: the form of
+  `states-17`, and the report after the save names the days instead of
+  `EXDATE` and `RECURRENCE-ID` — «The change was saved, but the server did
+  not keep two days of the series.», then each day and what became of it:
+  a skip lost, the meeting is back; a move lost, the meeting is back on its
+  day and hour. Properties that have no day keep their names, as in
+  `states-17` and `states-24`. A shape of `tc-msg` without a mono part; no
+  new block. 443 frames.
 - **The agenda in chosen columns** (Carrel's task 154; the owner, 13.10).
   `s-agenda-20`, new: the agenda as rows of columns in its default set —
   Time, Title, Where, «Attendees and status», Source. `s-agenda-21`, new: an
