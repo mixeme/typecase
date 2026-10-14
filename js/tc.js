@@ -1003,11 +1003,31 @@
 	// or a rule with nothing left beside it goes too.
 	function onInput(e) {
 		var q = e.target;
+		if (q.matches && q.matches(".tc-top__search input") && suggestOf(q) && suggestOf(q).querySelector("[data-tc-when]")) {
+			filterSuggest(q);
+			show(suggestOf(q));
+		}
 		if (!q.matches || !q.matches('.tc-menu > input[type="search"]')) return;
 		var text = q.value.trim().toLowerCase();
+		showGroups(
+			Array.prototype.filter.call(q.parentElement.children, function (el) {
+				return el !== q;
+			}),
+			function (el) {
+				return el.classList.contains("tc-menu__item");
+			},
+			function (el) {
+				return !text || el.textContent.toLowerCase().indexOf(text) >= 0;
+			}
+		);
+	}
+
+	// The rows of a menu shown by a test, the rest hidden; what is not a
+	// row — a heading — goes with its group, and a rule stands between groups
+	// that are left.
+	function showGroups(els, isItem, test) {
 		var groups = [[]];
-		Array.prototype.forEach.call(q.parentElement.children, function (el) {
-			if (el === q) return;
+		els.forEach(function (el) {
 			if (el.classList.contains("tc-menu__sep")) groups.push(el, []);
 			else groups[groups.length - 1].push(el);
 		});
@@ -1016,14 +1036,14 @@
 			if (!Array.isArray(g)) return;
 			var any = false;
 			g.forEach(function (el) {
-				if (!el.classList.contains("tc-menu__item")) return;
-				var ok = !text || el.textContent.toLowerCase().indexOf(text) >= 0;
+				if (!isItem(el)) return;
+				var ok = test(el);
 				if (ok) show(el);
 				else hide(el);
 				any = any || ok;
 			});
 			g.forEach(function (el) {
-				if (el.classList.contains("tc-menu__item")) return;
+				if (isItem(el)) return;
 				if (any) show(el);
 				else hide(el);
 			});
@@ -1038,6 +1058,108 @@
 			if (before && shown[i + 1]) show(g);
 			else hide(g);
 		});
+	}
+
+	// A search's suggestions (Carrel's task 92): the menu under the search
+	// line is printed whole — recent searches, jumps to what the page already
+	// holds, the rows that ask the servers — and shows what fits what is
+	// typed (MenuItem.When): with nothing typed, the history and its row;
+	// with something typed, the jumps whose words hold it, the typed set bold,
+	// and the rows that send it, «{q}» in their words being what is typed.
+	// Enter sends the search's form: all the results. The menu shows while
+	// the line or the menu has the focus; Esc hides it, ↓ goes into it.
+	function suggestOf(line) {
+		var search = closest(line, ".tc-top__search");
+		return search && search.querySelector(".tc-top__suggest");
+	}
+
+	var plainLabel = new WeakMap();
+
+	function boldFound(label, text) {
+		if (!plainLabel.has(label)) plainLabel.set(label, label.textContent);
+		var words = plainLabel.get(label);
+		var at = text ? words.toLowerCase().indexOf(text.toLowerCase()) : -1;
+		label.textContent = "";
+		if (at < 0) {
+			label.textContent = words;
+			return;
+		}
+		var b = document.createElement("b");
+		b.textContent = words.slice(at, at + text.length);
+		label.appendChild(document.createTextNode(words.slice(0, at)));
+		label.appendChild(b);
+		label.appendChild(document.createTextNode(words.slice(at + text.length)));
+	}
+
+	function filterSuggest(line) {
+		var box = suggestOf(line);
+		var menu = box && box.querySelector(".tc-menu");
+		if (!menu) return;
+		var text = line.value.trim(), low = text.toLowerCase();
+		fillWords(menu, { "{q}": text });
+		showGroups(
+			Array.prototype.slice.call(menu.children),
+			function (el) {
+				return el.getAttribute("role") === "menuitem" || el.hasAttribute("data-tc-when");
+			},
+			function (el) {
+				var when = el.getAttribute("data-tc-when");
+				if (when === "empty") return !text;
+				if (when === "typed") return !!text;
+				if (when !== "found") return true;
+				var label = el.querySelector(".tc-menu__label");
+				var ok = !!text && (plainLabel.get(label) || el.textContent).toLowerCase().indexOf(low) >= 0;
+				if (label) boldFound(label, ok ? text : "");
+				return ok;
+			}
+		);
+	}
+
+	function initSuggest(root) {
+		root.querySelectorAll(".tc-top__suggest").forEach(function (box) {
+			var line = closest(box, ".tc-top__search").querySelector("input");
+			if (!line || !box.querySelector("[data-tc-when]")) return;
+			if (document.activeElement === line) filterSuggest(line);
+			else hide(box);
+		});
+	}
+
+	document.addEventListener("focusin", function (e) {
+		var line = e.target.matches && e.target.matches(".tc-top__search input") ? e.target : null;
+		var box = line && suggestOf(line);
+		if (!box || !box.querySelector("[data-tc-when]")) return;
+		filterSuggest(line);
+		show(box);
+	});
+
+	document.addEventListener("focusout", function (e) {
+		var search = closest(e.target, ".tc-top__search");
+		var box = search && search.querySelector(".tc-top__suggest");
+		if (!box || !box.querySelector("[data-tc-when]")) return;
+		if (e.relatedTarget && search.contains(e.relatedTarget)) return;
+		hide(box);
+	});
+
+	function onSuggestKey(e) {
+		var search = closest(e.target, ".tc-top__search");
+		var box = search && search.querySelector(".tc-top__suggest");
+		if (!box || !box.querySelector("[data-tc-when]") || box.hidden) return false;
+		var line = search.querySelector("input");
+		var items = Array.prototype.filter.call(box.querySelectorAll('[role="menuitem"]'), visible);
+		var i = items.indexOf(document.activeElement);
+		if (e.key === "Escape") {
+			e.preventDefault();
+			// the line takes the focus back first: the menu it would show goes
+			if (i >= 0) line.focus();
+			hide(box);
+			return true;
+		}
+		var next = e.key === "ArrowDown" ? i + 1 : e.key === "ArrowUp" ? i - 1 : null;
+		if (next === null || !items.length) return false;
+		e.preventDefault();
+		if (next < 0) line.focus();
+		else items[Math.min(next, items.length - 1)].focus();
+		return true;
 	}
 
 	function onSegKey(e) {
@@ -1161,6 +1283,7 @@
 
 	function onKeydown(e) {
 		if (onTagKey(e)) return;
+		if (onSuggestKey(e)) return;
 		if (onMoveKey(e)) return;
 		if (openTrigger && onMenuKey(e)) return;
 		if (onSegKey(e)) return;
@@ -1213,6 +1336,7 @@
 		initDynamic(root);
 		initPictures(root);
 		initTheme(root);
+		initSuggest(root);
 		initMenus(root);
 		initLayers(root);
 		initDisables(root);

@@ -30,6 +30,22 @@ func (Badge) menuTrail() {}
 func (Kbd) menuTrail()   {}
 func (Tag) menuTrail()   {}
 
+// MenuWhen is when an item of a search's suggestions (Top.Suggest) is
+// shown, with the library's script, by what is typed in the search line
+// (Carrel's task 92). Without a script all are shown as printed.
+type MenuWhen int
+
+const (
+	WhenAlways MenuWhen = iota // a recent search
+	WhenEmpty                  // only while the line is empty: «Type to search everything»
+	WhenTyped                  // only while something is typed: «Show all results for «{q}»», the words in braces being what is typed
+	WhenFound                  // only while its words hold what is typed, set bold: a jump to what the page already holds
+)
+
+func (w MenuWhen) attr() string {
+	return attr("data-tc-when", [...]string{"", "empty", "typed", "found"}[w])
+}
+
 // MenuItem is a row of a menu that does one thing.
 type MenuItem struct {
 	Icon   Icon
@@ -90,6 +106,9 @@ type MenuItem struct {
 	// (MenuToneDanger) takes no key, nor does an item that is a tick, a
 	// radio button or a file's label.
 	Key string
+	// When is when the item of a search's suggestions is shown (Carrel's
+	// task 92).
+	When MenuWhen
 }
 
 // MenuItems prints menu items without their menu: what a server answers a
@@ -113,7 +132,7 @@ func (it MenuItem) html(mix) string {
 		return s.String()
 	}
 	checked := attr("aria-checked", pick(it.Tick != nil && it.Tick.Ticked != TickedOff, "true"))
-	key := attr("data-tc-key", pick(it.Tone != MenuToneDanger, it.Key))
+	key := attr("data-tc-key", pick(it.Tone != MenuToneDanger, it.Key)) + it.When.attr()
 	if it.Name != "" && it.Tick != nil {
 		cls = class(nil, is("on", it.On), is("drag", it.Drag), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary))
 		s.WriteString(`<label` + cls + ` role="menuitem"><input class="tc-check__box" type="checkbox"` + attr("name", it.Name) + attr("value", it.Value) +
@@ -171,6 +190,9 @@ func (it MenuItem) html(mix) string {
 	}
 	if it.Found != nil {
 		s.WriteString(`<span class="tc-menu__label">` + inlines(it.Found) + `</span>`)
+	} else if it.When == WhenFound {
+		// the words the script sets what is typed bold in
+		s.WriteString(`<span class="tc-menu__label">` + esc(it.Label) + `</span>`)
 	} else {
 		s.WriteString(esc(it.Label))
 	}

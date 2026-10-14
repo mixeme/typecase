@@ -48,6 +48,17 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **A search's suggestions follow what is typed** (Carrel's task 92).
+  `MenuItem.When` says when an item of the menu under the search line
+  (`Top.Suggest`) is shown: `WhenEmpty` — only while the line is empty
+  («Type to search everything»), `WhenTyped` — only while something is
+  typed, «{q}» in its words being what is typed («Show all results for
+  «{q}»»), `WhenFound` — only while its words hold what is typed, which is
+  set bold (a jump to what the page already holds); an item without `When`
+  — a recent search — always. Print the menu whole: every jump the page
+  can offer. With the script the menu shows while the line or the menu has
+  the focus, ↓ and ↑ walk it, Esc hides it; Enter sends the search's form.
+  Without a script it stands as printed. `TestSearchSuggest`.
 - **Installed as an application** (Carrel's task 91). `page.Document.App`
   names the application's manifest, the colour of the browser's bar
   (`theme-color`) and the icon — the head prints them; the manifest and

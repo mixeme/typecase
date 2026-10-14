@@ -13,6 +13,7 @@ import (
 
 	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
+	"github.com/chromedp/chromedp/kb"
 
 	"carrel.dev/typecase/internal/browser"
 	"carrel.dev/typecase/internal/refs"
@@ -2003,5 +2004,57 @@ func TestScriptOnly(t *testing.T) {
 	}
 	if with != "Drop files,Paste" || bare != "Needs scripts,Upload" {
 		t.Errorf("shown with a script %q, without %q; want «Drop files,Paste», «Needs scripts,Upload»", with, bare)
+	}
+}
+
+// TestSearchSuggest (Carrel's task 92): the suggestions printed under the
+// search line show while it has the focus and follow what is typed — with
+// nothing typed, the history and its row; with something typed, the jumps
+// whose words hold it, set bold, and the row that sends it with the typed
+// words in it. ↓ goes into the menu, Esc hides it, leaving the line hides it.
+func TestSearchSuggest(t *testing.T) {
+	needChrome(t)
+	top := w.Top{Search: &w.Search{Query: w.Query{Name: "q", Label: "Search everything…"}, Action: "/find", Variant: w.SearchFull},
+		Suggest: &w.Menu{Width: w.MenuWidthFull, Items: []w.MenuPart{
+			w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
+			w.MenuItem{Icon: "clock", Label: "смета", Href: "#h"},
+			w.MenuSep{},
+			w.MenuItem{Label: "Type to search everything", Tone: w.MenuToneDusty, When: w.WhenEmpty},
+			w.MenuSep{},
+			w.MenuHeading{Rubric: w.Rubric{Text: "Jump to", Form: w.RubricItem}},
+			w.MenuItem{Icon: "con", Label: "Анна Ковалёва", Href: "#a", When: w.WhenFound},
+			w.MenuItem{Icon: "file", Label: "отчёт.pdf", Href: "#f", When: w.WhenFound},
+			w.MenuSep{},
+			w.MenuItem{Icon: "search", Label: "Show all results for «{q}»", When: w.WhenTyped},
+		}}}
+	body := `<div class="tc-root">` + top.Render() + `<button id="away">Away</button></div>`
+	h := browser.NewHarness(t)
+	const state = `(() => { const box = document.querySelector(".tc-top__suggest"); if (!box.getClientRects().length) return "hidden";
+		const b = box.querySelector(".tc-menu__label b");
+		return [...box.querySelectorAll(".tc-menu > *")].filter(e => e.getClientRects().length && !e.classList.contains("tc-menu__sep")).map(e => e.textContent.trim()).join(",") + (b ? " bold:" + b.textContent : "") })()`
+	var before, empty, typed, down, esc, away string
+	if err := h.Run(h.RegisterPage("suggest", browser.PageHTML(body, "")), 900, 600,
+		chromedp.Evaluate(state, &before),
+		chromedp.Click(`.tc-top__search input`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &empty),
+		chromedp.SendKeys(`.tc-top__search input`, "ковал", chromedp.ByQuery),
+		chromedp.Evaluate(state, &typed),
+		chromedp.KeyEvent(kb.ArrowDown),
+		chromedp.Evaluate(`document.activeElement.textContent.trim()`, &down),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(state+` + " " + (document.activeElement.matches(".tc-q") ? "line" : "elsewhere")`, &esc),
+		chromedp.Focus(`#away`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &away),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "hidden" || empty != "Recent searches,смета,Type to search everything" {
+		t.Errorf("before the focus %q, with the line empty %q; want hidden, then the history and its row", before, empty)
+	}
+	if typed != "Recent searches,смета,Jump to,Анна Ковалёва,Show all results for «ковал» bold:Ковал" {
+		t.Errorf("with «ковал» typed: %q; want the history, the jump that holds it set bold, the row that sends it", typed)
+	}
+	if down != "смета" || esc != "hidden line" || away != "hidden" {
+		t.Errorf("↓: %q; Esc: %q; leaving: %q; want смета, the menu hidden with the focus in the line, hidden", down, esc, away)
 	}
 }
