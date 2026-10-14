@@ -29,8 +29,29 @@
 		);
 	});
 
+	// A worker of another version takes over: what the one before kept
+	// outside this one's base — the library's files of a base gone, an
+	// offline page renamed — goes; the files under the base stay, refreshed
+	// as they are loaded.
 	self.addEventListener("activate", function (e) {
-		e.waitUntil(self.clients.claim());
+		e.waitUntil(
+			caches
+				.open(kept)
+				.then(function (c) {
+					return c.keys().then(function (ks) {
+						return Promise.all(
+							ks.map(function (k) {
+								var p = new URL(k.url).pathname;
+								if (p === offline || (base && p.indexOf(base) === 0)) return null;
+								return c.delete(k);
+							})
+						);
+					});
+				})
+				.then(function () {
+					return self.clients.claim();
+				})
+		);
 	});
 
 	self.addEventListener("fetch", function (e) {

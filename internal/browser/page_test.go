@@ -1,13 +1,19 @@
 package browser_test
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"image"
+	"image/color"
+	"image/draw"
+	"image/png"
 	"net/http"
 	"net/http/httptest"
 	"sync/atomic"
 	"testing"
 
+	cdppage "github.com/chromedp/cdproto/page"
 	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
 
@@ -128,5 +134,158 @@ func TestAppWorker(t *testing.T) {
 	}
 	if gone != "You are offline" {
 		t.Errorf("with the server gone a page shows %q; want the offline page", gone)
+	}
+}
+
+// await evaluates a script whose value is a promise and keeps what it gives.
+func await(script string, got *string) chromedp.Action {
+	return chromedp.ActionFunc(func(ctx context.Context) error {
+		v, exc, err := runtime.Evaluate(script).WithAwaitPromise(true).Do(ctx)
+		if err != nil {
+			return err
+		}
+		if exc != nil {
+			return fmt.Errorf("%s: %s", script, exc.Text)
+		}
+		if got != nil {
+			*got = string(v.Value)
+		}
+		return nil
+	})
+}
+
+// TestAppWorkerUpdates (task 91, not checked before): the application
+// serves the library at a new base — a new version — and the page that
+// loads registers the worker anew; the new worker takes over and keeps the
+// new files and the offline page, the files of the old base are gone.
+func TestAppWorkerUpdates(t *testing.T) {
+	needChrome(t)
+	render := func(base string) string {
+		doc := page.Document{Title: "App", Assets: page.At(base),
+			App:  &page.App{Manifest: "/manifest.json", Offline: "/offline"},
+			Root: w.Page{Items: []w.PagePart{w.Msg{Parts: []w.MsgPart{w.Text("Online")}}}}}
+		html, err := doc.Render()
+		if err != nil {
+			t.Fatal(err)
+		}
+		return html
+	}
+	one, two := render("/static/1/tc"), render("/static/2/tc")
+	var second atomic.Bool
+	mux := http.NewServeMux()
+	mux.Handle("/static/1/tc/", http.StripPrefix("/static/1/tc", page.Static()))
+	mux.Handle("/static/2/tc/", http.StripPrefix("/static/2/tc", page.Static()))
+	mux.HandleFunc("/offline", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(`<!doctype html><title>Offline</title><p>You are offline</p>`))
+	})
+	mux.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		if second.Load() {
+			_, _ = rw.Write([]byte(two))
+			return
+		}
+		_, _ = rw.Write([]byte(one))
+	})
+	srv := httptest.NewServer(mux)
+	defer srv.Close()
+	h := browser.NewHarness(t)
+	// the worker at work and its copies made: the active worker's address
+	// names the base, and the cache holds the files under it
+	settled := func(base string) chromedp.Action {
+		return await(fmt.Sprintf(`(async () => {
+			for (let i = 0; i < 100; i++) {
+				const r = await navigator.serviceWorker.getRegistration();
+				const a = r && r.active, c = navigator.serviceWorker.controller;
+				if (a && a.state === "activated" && a.scriptURL.includes(%[1]q) && c && c.scriptURL === a.scriptURL) return;
+				await new Promise(r => setTimeout(r, 100));
+			}
+			throw new Error("no worker of " + %[1]q + " took over");
+		})()`, base), nil)
+	}
+	keys := `caches.open("tc-offline").then(c => c.keys()).then(ks => ks.map(k => new URL(k.url).pathname).sort().join(" "))`
+	var before, after string
+	err := h.Run(srv.URL+"/one", 900, 600,
+		settled("/static/1/tc/"),
+		await(keys, &before),
+		chromedp.ActionFunc(func(ctx context.Context) error { second.Store(true); return nil }),
+		chromedp.Navigate(srv.URL+"/two"),
+		settled("/static/2/tc/"),
+		await(keys, &after),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if before != `"/offline /static/1/tc/css/typecase.css /static/1/tc/js/tc.js /static/1/tc/js/theme.js"` {
+		t.Errorf("the first worker keeps %s; want the offline page and the files of the first base", before)
+	}
+	if after != `"/offline /static/2/tc/css/typecase.css /static/2/tc/js/tc.js /static/2/tc/js/theme.js"` {
+		t.Errorf("the new worker keeps %s; want the offline page and the files of the new base only", after)
+	}
+}
+
+// TestAppInstalls (task 91, not checked before): with the application's
+// manifest and icon, a page whose document names them is one the browser
+// offers to install — it finds nothing missing.
+func TestAppInstalls(t *testing.T) {
+	needChrome(t)
+	doc := page.Document{Title: "App", Assets: page.At("/static/tc"),
+		App:  &page.App{Manifest: "/manifest.json", ThemeColor: "#2f4a36", Icon: "/icon.png", Offline: "/offline"},
+		Root: w.Page{Items: []w.PagePart{w.Msg{Parts: []w.MsgPart{w.Text("Online")}}}}}
+	html, err := doc.Render()
+	if err != nil {
+		t.Fatal(err)
+	}
+	icon := func(size int) []byte {
+		img := image.NewRGBA(image.Rect(0, 0, size, size))
+		draw.Draw(img, img.Bounds(), &image.Uniform{color.RGBA{0x2f, 0x4a, 0x36, 0xff}}, image.Point{}, draw.Src)
+		var b bytes.Buffer
+		if err := png.Encode(&b, img); err != nil {
+			t.Fatal(err)
+		}
+		return b.Bytes()
+	}
+	big := icon(512)
+	mux := http.NewServeMux()
+	mux.Handle("/static/tc/", http.StripPrefix("/static/tc", page.Static()))
+	mux.HandleFunc("/manifest.json", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "application/manifest+json")
+		_, _ = rw.Write([]byte(`{"name":"App","short_name":"App","start_url":"/","scope":"/","display":"standalone",
+			"background_color":"#2f4a36","theme_color":"#2f4a36",
+			"icons":[{"src":"/icon.png","sizes":"512x512","type":"image/png"}]}`))
+	})
+	mux.HandleFunc("/icon.png", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "image/png")
+		_, _ = rw.Write(big)
+	})
+	mux.HandleFunc("/offline", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(`<!doctype html><title>Offline</title><p>You are offline</p>`))
+	})
+	mux.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(html))
+	})
+	srv := httptest.NewServer(mux)
+	defer srv.Close()
+	h := browser.NewHarness(t)
+	var errs []*cdppage.InstallabilityError
+	err = h.Run(srv.URL+"/", 900, 600,
+		await(`navigator.serviceWorker.ready.then(() => new Promise(r => setTimeout(r, 300)))`, nil),
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			var err error
+			errs, err = cdppage.GetInstallabilityErrors().Do(ctx)
+			return err
+		}),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, e := range errs {
+		args := ""
+		for _, a := range e.ErrorArguments {
+			args += " " + a.Name + "=" + a.Value
+		}
+		t.Errorf("the browser would not install the page: %s%s", e.ErrorID, args)
 	}
 }

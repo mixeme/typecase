@@ -122,7 +122,11 @@ do, not what the authors did.
   base, the fonts as they are asked for, and the offline page — nothing
   of the application's: pages and data always come from the network, and
   a page that cannot load is the offline page. `At` names the worker too.
-  `TestAppWorker`.
+  Serve the library at a new base for a new version: the page registers the
+  worker anew, the new one takes over and drops the copies kept outside its
+  base. With a manifest that has a name, `start_url`, `display` and an icon
+  of 512 px, the browser finds nothing missing to install the page.
+  `TestAppWorker`, `TestAppWorkerUpdates`, `TestAppInstalls`.
 - **What needs a script, and the words when there is none** (Carrel's task
   90). The mockup's CSS has the rule opposite to `tc-nojs`: `tc-js` is not
   shown while the page runs no script. `Msg.ScriptOnly` and `Msg.NoScript`,
