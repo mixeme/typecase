@@ -59,6 +59,7 @@ func (g *gen) msg(e *El) string {
 	if e.Has("tc-grow") {
 		f = append(f, "Place: w.Grown")
 	}
+	f = append(f, scripted(e)...)
 	return "w.Msg{" + join(f, ", ") + "}"
 }
 
@@ -1325,4 +1326,17 @@ func (g *gen) docText(k *El) string {
 		return g.docTable(k)
 	}
 	return ""
+}
+
+// scripted is the fields of a widget shown only with a script or only
+// without one (tc-js, tc-nojs).
+func scripted(e *El) []string {
+	var f []string
+	if e.Has("tc-js") {
+		f = append(f, "ScriptOnly: true")
+	}
+	if e.Has("tc-nojs") {
+		f = append(f, "NoScript: true")
+	}
+	return f
 }

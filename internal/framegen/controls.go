@@ -287,6 +287,9 @@ func (g *gen) button(e *El) string {
 	if e.Has("tc-nojs") {
 		s = s[:len(s)-1] + ", NoScript: true}"
 	}
+	if e.Has("tc-js") {
+		s = s[:len(s)-1] + ", ScriptOnly: true}"
+	}
 	m := iconRe.FindStringSubmatch(s)
 	if strings.Contains(s, `Title: "More"`) && m != nil && m[1] != "dots" {
 		name, ok := iconNames[m[1]]

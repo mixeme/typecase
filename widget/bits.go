@@ -102,7 +102,7 @@ func (s MsgSpace) class() string {
 // Msg — tc-msg
 //
 // Роль. Сообщение: что произошло, чего нельзя отменить, что получилось.
-// Вход. Msg{Parts, Tone, Icon, End, Space, Place}.
+// Вход. Msg{Parts, Tone, Icon, End, Space, Place, NoScript, ScriptOnly}.
 // Состояния. plain | alert | accent | icon | flush | rich.
 // Инварианты. Тон — перечисление, и тревожный тон не единственный носитель смысла: сказано словами; сообщение печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -116,13 +116,19 @@ type Msg struct {
 	End   *Push // buttons at the end of a message in a row: install, later
 	Space MsgSpace
 	Place Place
+	// NoScript shows the message only on a page without a script: it says
+	// what needs one and is not there — a drop, a paste, the live queue
+	// (Carrel's task 90). ScriptOnly shows it only with one: the words about
+	// what a script does.
+	NoScript   bool
+	ScriptOnly bool
 }
 
 // Render prints the message.
 func (g Msg) Render() string { return g.html(nil) }
 
 func (g Msg) html(m mix) string {
-	s := `<div` + class(m, "tc-msg", g.Tone.class(), is("row", g.Icon != ""), g.Space.class(), g.Place.class()) + `>`
+	s := `<div` + class(m, "tc-msg", g.Tone.class(), is("row", g.Icon != ""), g.Space.class(), g.Place.class(), pick(g.ScriptOnly, "tc-js"), pick(g.NoScript, "tc-nojs")) + `>`
 	if g.Icon != "" {
 		s += `<svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` +
 			g.Icon.use() + `</svg><span class="tc-msg__aside">` + joined(g.Parts) + `</span>`

@@ -551,6 +551,9 @@ label.tc-tree__row{cursor:pointer}
 .tc-empty > .tc-line{color:var(--tc-ink)}
 .tc-empty > .tc-line:empty{display:none}
 :root:not([data-tc-noscript]) .tc-nojs{display:none}
+/* Обратное: то, что работает только со сценарием (бросок, вставка, живая очередь), пока страница без сценария не показывается —
+   вместо него стоит сказанное словами (tc-nojs): недоступное названо на экране, а не замолчано (задача 90). */
+[data-tc-noscript] .tc-js{display:none}
 /* Полоса опроса с отказом и своей кнопкой (поиск: «1 failed» и Search again) на телефоне переносится: строкам — зазор, чтобы зоны нажатия не налезали. */
 @container tcbox (max-width:460px){
   .tc-runbar:has(> .tc-drop):has(> .tc-push .tc-btn){row-gap:22px}

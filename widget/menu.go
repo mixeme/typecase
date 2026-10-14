@@ -77,6 +77,9 @@ type MenuItem struct {
 	Row PickedRow
 	// NoScript shows the item only on a page without a script: «Upload».
 	NoScript bool
+	// ScriptOnly shows the item only on a page with a script (Carrel's task
+	// 90): what it does needs one.
+	ScriptOnly bool
 	// Adds is the tag the item adds to its TagInput: a suggestion of a person
 	// (Carrel's task 77). It waits in a template; the library's script puts it
 	// before the typing line.
@@ -96,7 +99,7 @@ func MenuItems(items ...MenuPart) string { return joined(items) }
 func (it MenuItem) html(mix) string {
 	var s strings.Builder
 	tag := "button"
-	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary), pick(it.NoScript, "tc-nojs"))
+	cls := class(nil, is("on", it.On), "tc-menu__item", it.Tone.class(), rank3(it.Tertiary), pick(it.ScriptOnly, "tc-js"), pick(it.NoScript, "tc-nojs"))
 	if it.File != nil {
 		s.WriteString(`<label` + cls + ` role="menuitem">`)
 		if it.Icon != "" {

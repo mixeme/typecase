@@ -447,6 +447,9 @@ func (g *gen) menuItem(k *El) string {
 	if k.Has("tc-nojs") {
 		f = append(f, "NoScript: true")
 	}
+	if k.Has("tc-js") {
+		f = append(f, "ScriptOnly: true")
+	}
 	if r := k.Attr("title"); r != "" {
 		f = append(f, "Reason: "+q(r))
 	}

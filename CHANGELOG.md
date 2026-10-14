@@ -48,6 +48,15 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **What needs a script, and the words when there is none** (Carrel's task
+  90). The mockup's CSS has the rule opposite to `tc-nojs`: `tc-js` is not
+  shown while the page runs no script. `Msg.ScriptOnly` and `Msg.NoScript`,
+  `Button.ScriptOnly`, `MenuItem.ScriptOnly` print them. `s-files-1` shows
+  both: the line about dropping onto the window with a script, and «Dropping
+  files onto the window and the upload queue need scripts, and this page
+  runs none. Upload sends the files; a name that is already taken is
+  refused rather than overwritten.» without one (accepted by the owner on
+  14.10). `TestScriptOnly`.
 - **The theme's switch shows what this browser keeps** (Carrel's task 89,
   the theme). A `Seg` with `Theme` shows on load the choice kept under
   `tc-theme` — «Auto» when nothing is kept — whatever option the server

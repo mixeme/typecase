@@ -73,7 +73,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
@@ -151,7 +151,11 @@ type Button struct {
 	// NoScript shows the button only on a page without a script: the
 	// «Upload» that sends a picked file there (Carrel's tasks 109, 90).
 	NoScript bool
-	Place    Place
+	// ScriptOnly shows the button only on a page with a script: what it does
+	// needs one, and without it a message says so (Msg.NoScript; Carrel's
+	// task 90).
+	ScriptOnly bool
+	Place      Place
 	// Secondary is the first to go under «⋯» when its bar narrows.
 	Secondary bool
 	// Tertiary goes under «⋯» on a phone, after the secondary ones.
@@ -191,7 +195,7 @@ func (b Button) html(m mix) string {
 		state = "is-off"
 	}
 	tag := "button"
-	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.NoScript, "tc-nojs"))
+	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.ScriptOnly, "tc-js"), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) +
 		attr("data-tc-key", pick(b.Kind != ButtonDanger && b.Kind != ButtonDangerSolid, b.Key))
 	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom) + attr("data-tc-copied", b.Copied)

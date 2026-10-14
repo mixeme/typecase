@@ -1982,3 +1982,26 @@ func TestThemeShowsKept(t *testing.T) {
 		t.Errorf("the theme's switch: with nothing kept %q, with dark kept %q; want «auto Auto 1», «dark Dark 1 dark»", none, kept)
 	}
 }
+
+// TestScriptOnly (Carrel's task 90): what needs a script is shown only on a
+// page that runs one (ScriptOnly), and the words that say so only on a page
+// that runs none (NoScript).
+func TestScriptOnly(t *testing.T) {
+	needChrome(t)
+	body := `<div class="tc-root">` + w.Msg{Parts: []w.MsgPart{w.Text("Drop files")}, ScriptOnly: true}.Render() +
+		w.Msg{Parts: []w.MsgPart{w.Text("Needs scripts")}, NoScript: true}.Render() +
+		w.Button{Label: "Paste", ScriptOnly: true}.Render() + w.Button{Label: "Upload", NoScript: true}.Render() + `</div>`
+	h := browser.NewHarness(t)
+	const shown = `[...document.querySelectorAll(".tc-msg, .tc-btn")].filter(e => e.getClientRects().length).map(e => e.textContent).join(",")`
+	var with, bare string
+	if err := h.Run(h.RegisterPage("scriptonly", browser.PageHTML(body, "")), 900, 300, chromedp.Evaluate(shown, &with)); err != nil {
+		t.Fatal(err)
+	}
+	doc := strings.Replace(strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1), `<script src="/tc-live.js"></script>`, "", 1)
+	if err := h.Run(h.RegisterPage("scriptonly-bare", doc), 900, 300, chromedp.Evaluate(shown, &bare)); err != nil {
+		t.Fatal(err)
+	}
+	if with != "Drop files,Paste" || bare != "Needs scripts,Upload" {
+		t.Errorf("shown with a script %q, without %q; want «Drop files,Paste», «Needs scripts,Upload»", with, bare)
+	}
+}

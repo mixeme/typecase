@@ -285,7 +285,7 @@
 #### `tc-btn` — кнопка
 
 - **Роль.** Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key}`.
+- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly}`.
 - **Состояния.** normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 - **Инварианты.** Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 - **Поведение.** Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
@@ -1201,7 +1201,7 @@
 #### `tc-msg` — сообщение
 
 - **Роль.** Сообщение: что произошло, чего нельзя отменить, что получилось.
-- **Вход.** `Msg{Parts, Tone, Icon, End, Space, Place}`.
+- **Вход.** `Msg{Parts, Tone, Icon, End, Space, Place, NoScript, ScriptOnly}`.
 - **Состояния.** plain | alert | accent | icon | flush | rich.
 - **Инварианты.** Тон — перечисление, и тревожный тон не единственный носитель смысла: сказано словами; сообщение печатает фрагмент своего кадра.
 - **Поведение.** нет.
