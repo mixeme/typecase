@@ -1246,6 +1246,28 @@
 	}
 	window.addEventListener("resize", layoutUpdates);
 
+	// A page installed as an application (Carrel's task 91): the document
+	// names the library's worker and the page it shows offline; the worker
+	// learns from its address what to keep — the library's files this page
+	// loaded, under their base, and that page.
+	function register() {
+		var root = document.documentElement;
+		var worker = root.getAttribute("data-tc-worker"), offline = root.getAttribute("data-tc-offline");
+		if (!worker || !offline || !navigator.serviceWorker) return;
+		var path = function (u) {
+			return new URL(u, location.href).pathname;
+		};
+		var base = path(worker).replace(/js\/[^\/]*$/, "");
+		var files = [];
+		document.querySelectorAll('link[rel="stylesheet"][href], script[src]').forEach(function (el) {
+			var p = path(el.getAttribute("href") || el.getAttribute("src"));
+			if (p.indexOf(base) === 0) files.push(p);
+		});
+		var url = worker + "?base=" + encodeURIComponent(base) + "&offline=" + encodeURIComponent(path(offline)) + "&files=" + encodeURIComponent(files.join(" "));
+		navigator.serviceWorker.register(url, { scope: root.getAttribute("data-tc-scope") || "/" }).catch(function () {});
+	}
+	register();
+
 	// The live layer (tc-live.js) builds on these and on nothing else.
 	window.__tc = {
 		init: init,

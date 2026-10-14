@@ -38,6 +38,13 @@ func ThemeJS() ([]byte, error) {
 	return jsFS.ReadFile("js/theme.js")
 }
 
+// WorkerJS returns the library's worker for a page installed as an
+// application (tc-sw.js, Carrel's task 91): it keeps the library's own files
+// and the page shown offline, nothing else.
+func WorkerJS() ([]byte, error) {
+	return jsFS.ReadFile("js/tc-sw.js")
+}
+
 // Fonts returns the embedded font files.
 func Fonts() fs.FS {
 	return fontFS

@@ -24,13 +24,18 @@ type Assets struct {
 	Theme string // the theme's script, run before the first paint
 	JS    string // the library's script, run after the body
 	Live  string // the library's live layer, run after JS when the document asks for it
+	// Worker is the library's worker for a page installed as an application
+	// (Document.App); Static serves it allowed to serve the whole site.
+	Worker string
 }
 
 // At is the addresses of Static mounted at base: base/css/typecase.css,
-// base/fonts/…, base/js/theme.js, base/js/tc.js, base/js/tc-live.js.
+// base/fonts/…, base/js/theme.js, base/js/tc.js, base/js/tc-live.js,
+// base/js/tc-sw.js.
 func At(base string) Assets {
 	base = strings.TrimRight(base, "/")
-	return Assets{CSS: base + "/css/typecase.css", Theme: base + "/js/theme.js", JS: base + "/js/tc.js", Live: base + "/js/tc-live.js"}
+	return Assets{CSS: base + "/css/typecase.css", Theme: base + "/js/theme.js", JS: base + "/js/tc.js", Live: base + "/js/tc-live.js",
+		Worker: base + "/js/tc-sw.js"}
 }
 
 // Document is a whole page: its title and language, the library's files and
@@ -47,6 +52,51 @@ type Document struct {
 	// Zones is what the live layer says when it asks the server for a part
 	// of the page (Carrel's task 84); the names are the application's.
 	Zones Zones
+	// App makes the page one that can be installed as an application
+	// (Carrel's task 91); nil, it is a page.
+	App *App
+}
+
+// App is what a page installed as an application names: the manifest and
+// the icons are the application's own files, served by it. With Offline the
+// library's worker (Assets.Worker) is registered by tc.js: it keeps the
+// library's files and that page, shown when the network is gone, and
+// nothing else — the application's pages and data always come from the
+// network.
+type App struct {
+	Manifest   string // the address of the web app manifest
+	ThemeColor string // the colour of the browser's bar around the page: "#2f4a36"
+	Icon       string // the address of the page's icon
+	Offline    string // the address of the page shown offline; empty, no worker
+	Scope      string // the addresses the worker serves; "/" when empty
+}
+
+func (a *App) head() string {
+	if a == nil {
+		return ""
+	}
+	s := ""
+	if a.ThemeColor != "" {
+		s += `<meta name="theme-color" content="` + html.EscapeString(a.ThemeColor) + `">`
+	}
+	if a.Manifest != "" {
+		s += `<link rel="manifest" href="` + html.EscapeString(a.Manifest) + `">`
+	}
+	if a.Icon != "" {
+		s += `<link rel="icon" href="` + html.EscapeString(a.Icon) + `">`
+	}
+	return s
+}
+
+func (a *App) attrs(worker string) string {
+	if a == nil || a.Offline == "" || worker == "" {
+		return ""
+	}
+	scope := a.Scope
+	if scope == "" {
+		scope = "/"
+	}
+	return ` data-tc-worker="` + html.EscapeString(worker) + `" data-tc-offline="` + html.EscapeString(a.Offline) + `" data-tc-scope="` + html.EscapeString(scope) + `"`
 }
 
 // Zones names the headers of a request for a part of a page and the zone
@@ -132,8 +182,8 @@ func (d Document) Render() (string, error) {
 		lang = "en"
 	}
 	var b strings.Builder
-	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.Zones.attrs() + `><head><meta charset="utf-8">` +
-		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` +
+	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.Zones.attrs() + d.App.attrs(d.Assets.Worker) + `><head><meta charset="utf-8">` +
+		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` + d.App.head() +
 		`<script src="` + html.EscapeString(d.Assets.Theme) + `"></script>` +
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)
 	b.WriteString(`<div hidden>` + string(sprite) + `</div>`)
@@ -179,6 +229,12 @@ func Static() http.Handler {
 	mux.HandleFunc("/js/theme.js", script(typecase.ThemeJS))
 	mux.HandleFunc("/js/tc.js", script(typecase.JS))
 	mux.HandleFunc("/js/tc-live.js", script(typecase.LiveJS))
+	worker := script(typecase.WorkerJS)
+	mux.HandleFunc("/js/tc-sw.js", func(w http.ResponseWriter, r *http.Request) {
+		// the worker lies with the library's files and serves the whole site
+		w.Header().Set("Service-Worker-Allowed", "/")
+		worker(w, r)
+	})
 	mux.Handle("/fonts/", http.FileServer(http.FS(typecase.Fonts())))
 	return mux
 }

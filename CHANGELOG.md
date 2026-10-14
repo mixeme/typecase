@@ -48,6 +48,18 @@ do, not what the authors did.
   address into the history. A form that sends files still loads its answer
   whole, with its progress. Without the layer everything is a plain link or
   form. `TestZones` (browser and `page`).
+- **Installed as an application** (Carrel's task 91). `page.Document.App`
+  names the application's manifest, the colour of the browser's bar
+  (`theme-color`) and the icon — the head prints them; the manifest and
+  the icons are the application's files. With `App.Offline`, the address
+  of the page shown when the network is gone, tc.js registers the
+  library's worker (`Assets.Worker`, `js/tc-sw.js`, served by `Static`
+  with `Service-Worker-Allowed: /`; scope `App.Scope`, «/» by default). It
+  keeps the stylesheet and the scripts the page loaded from the library's
+  base, the fonts as they are asked for, and the offline page — nothing
+  of the application's: pages and data always come from the network, and
+  a page that cannot load is the offline page. `At` names the worker too.
+  `TestAppWorker`.
 - **What needs a script, and the words when there is none** (Carrel's task
   90). The mockup's CSS has the rule opposite to `tc-nojs`: `tc-js` is not
   shown while the page runs no script. `Msg.ScriptOnly` and `Msg.NoScript`,
