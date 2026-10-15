@@ -721,6 +721,17 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Deleting a record that has something to lose; the edit forms' tails**
+  (Carrel's tasks 166 and 169, accepted by the owner 16.10).
+  `s-agenda-26` (new): the sheet of deleting an event in full — no copy
+  in Carrel, what points at it (a published link, related records), that
+  the server may tell the attendees, which attachments go and which stay
+  (a linked file may be ticked to go too), its copies in other calendars
+  by ticks; «Delete» in the danger tone. `s-tasks-18` (new): the simple
+  case, one line; a record with nothing to lose is deleted at once, as
+  before. A task's edit (`s-tasks-3`) gets «Kept as the server sent them»,
+  an event's (`s-agenda-3`) «Source», so both forms end alike. The
+  event's path is Nextcloud's (`/remote.php/dav/…`) in its card too.
 - **The buttons of a card, after Carrel's tasks 167–174** (accepted by the
   owner 15.10). The cards of an event, a task and a note (`s-agenda-2`,
   `s-tasks-2`, `s-notes-2`) get «Send», as a contact's has; «New task» goes

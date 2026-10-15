@@ -397,7 +397,7 @@ func Agenda1() Screen {
 						Items: []w.SecPart{
 							w.Rubric{Text: "Source"},
 							w.Diag{
-								Text: "Path  /dav.php/calendars/mix/personal/8f1c.ics\nRead  2 min ago · changed on server 3 days ago",
+								Text: "Path  /remote.php/dav/calendars/mix/personal/8f1c.ics\nRead  2 min ago · changed on server 3 days ago",
 							},
 						},
 					},
@@ -800,7 +800,7 @@ func Agenda2() Screen {
 						Items: []w.SecPart{
 							w.Rubric{Text: "Source"},
 							w.Diag{
-								Text: "Path  /dav.php/calendars/mix/personal/8f1c.ics\nRead  2 min ago · changed on server 3 days ago",
+								Text: "Path  /remote.php/dav/calendars/mix/personal/8f1c.ics\nRead  2 min ago · changed on server 3 days ago",
 							},
 						},
 					},
@@ -1141,6 +1141,22 @@ func Agenda3() Screen {
 								Items: []w.FieldSetPart{
 									w.Diag{
 										Text:  "X-MOZ-GENERATION  3\nX-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC\nSEQUENCE  2",
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Source"},
+								Items: []w.FieldSetPart{
+									w.Fields{
+										Items: []w.FieldsItem{
+											{
+												Term:  "Path",
+												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/personal/8f1c.ics")},
+												Face:  w.ValueMono,
+											},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
+										},
 										Place: w.Grown,
 									},
 								},

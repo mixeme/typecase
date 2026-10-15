@@ -4905,7 +4905,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Source</div>
-          <div class="tc-diag">Path  /dav.php/calendars/mix/personal/8f1c.ics
+          <div class="tc-diag">Path  /remote.php/dav/calendars/mix/personal/8f1c.ics
 Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-danger"><button class="tc-btn is-danger-solid" type="button">Delete event</button>Series is edited and deleted whole.</div>
@@ -5313,7 +5313,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Source</div>
-          <div class="tc-diag">Path  /dav.php/calendars/mix/personal/8f1c.ics
+          <div class="tc-diag">Path  /remote.php/dav/calendars/mix/personal/8f1c.ics
 Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-danger"><button class="tc-btn is-danger-solid" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg>Delete event</button>Series is edited and deleted whole.</div>
@@ -5325,6 +5325,45 @@ Read  2 min ago · changed on server 3 days ago</div>
 </figure>
 
 <div class="frames">
+  <figure style="flex:1 1 600px">
+  <div class="frame" data-frame="s-agenda-26">
+    <div class="frame-label"><span>Событие · удаление, есть что терять</span><span class="frag">фрагмент</span><i>лист из Delete event</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet" action="/app/calendar/nextcloud/lichnyy/8f1c/delete" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
+        <b class="tc-sheet__title">Delete event</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Синк-ап по релизу</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush">The event is deleted on nextcloud · Личный. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.</div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>1 published link</b> <span class="tc-dim">— answers “not found” from that moment</span></span>
+              <span class="tc-stack__item"><b>2 records related to it</b> <span class="tc-dim">— among the loaded ones; their link is left pointing at nothing</span></span>
+            </div>
+          </div>
+          <div class="tc-msg tc-msg--flush">The event has 3 attendees, and nextcloud sends invitations itself: the server may tell them the meeting is cancelled.</div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">Attachments</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>release-checklist.md</b> <span class="tc-dim">— written into the event, goes with it</span></span>
+              <span class="tc-stack__item"><b>agenda-10-08.pdf</b> <span class="tc-dim">— a link to Documents / carrel / attachments, the file stays</span></span>
+            </div>
+          </div>
+          <label class="tc-check"><input class="tc-check__box" type="checkbox" name="attachment" value="documents/carrel/attachments/agenda-10-08.pdf"><span class="tc-tickrow__tick is-off"></span>Delete agenda-10-08.pdf too</label>
+          <div class="tc-rubric">The same event in other calendars</div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="copy" value="nextcloud/lichnyy" checked><span class="tc-tickrow__tick"></span>nextcloud · Личный</label><span class="tc-dim tc-dim--t11-5">the copy you opened</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="copy" value="radicale/proekty"><span class="tc-tickrow__tick is-off"></span>radicale · vps · Проекты</label><span class="tc-dim tc-dim--t11-5">Holds the same</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="copy" value="baikal/obshchiy"><span class="tc-tickrow__tick is-off"></span>baikal · Общий</label><span class="tc-dim tc-dim--t11-5">Where differ</span></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Delete</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+    </div>
+  </div>
+  <figcaption><b>Лист удаления записи — только когда есть что терять</b> (решения владельца 12.10, А8, А3, А12); простая запись удаляется сразу, как прежде. Здесь полный набор. «What is pointing at it now» — тот же перечень, что у удаления коллекции (<code>s-profile-9</code>): опубликованная ссылка и записи, которые на неё ссылаются (<code>RELATED-TO</code>), — счёт из загруженного, и строка так и говорит. Об отмене — словом «may», как в листах переноса: сообщит ли сервер участникам, решает он. Вложение, записанное в событие, уходит с ним; вложение-ссылка остаётся, и его можно удалить вместе — отметка снята. Копии — отметками: отмечена та, из которой пришли, остальные можно отметить и удалить вместе. Delete — тревожная, без набора имени: запись одна, перечень виден целиком.</figcaption>
+  </figure>
   <figure style="flex:0 1 250px">
   <div class="frame" data-frame="s-agenda-5">
     <div class="frame-label"><span>Карточка события · ⋯</span><span class="frag">меню</span><i>шапка карточки</i></div>
@@ -5433,13 +5472,20 @@ Read  2 min ago · changed on server 3 days ago</div>
 X-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC
 SEQUENCE  2</div>
           </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Source</div>
+            <dl class="tc-fields tc-grow">
+              <dt>Path</dt><dd class="tc-mono">/remote.php/dav/calendars/mix/personal/8f1c.ics</dd>
+              <dt>Read</dt><dd>2 min ago · not changed on server</dd>
+            </dl>
+          </div>
         </div>
         <div class="tc-danger"><button class="tc-btn is-danger-solid" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg>Delete event</button>Series is edited and deleted whole.</div>
       </div>
     </div>
   </div>
 </div>
-<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: стоит у каждого события со временем, иначе пояс не сменить; у события в поясе экземпляра она этот пояс и показывает. Событие заведено в Asia/Yekaterinburg — и правится в нём: 12:00–13:00 там — это 10:00–11:00 в Москве, как в карточке. <b>Участники</b> — плашки колонками: знакомый — меткой своей книги и именем, незнакомый — адресом; организатор без крестика. Новых набирают с подсказками из отмеченных книг (кадры рядом); приглашения рассылает сервер при записи, если умеет (RFC 6638), — подсказка под полем так и говорит. Второе напоминание подписано «Reminder» — как строка, которую добавляет «Add reminder».</figcaption>
+<figcaption><b>Форма занимает ширину, а поля — нет.</b> Дата — 140&nbsp;px, время — 96, повторение собирается в одну строку вместо семи флажков в столбик. <b>Напоминания и вложения стоят здесь же</b> — тот же блок, что у задачи и заметки: равенство коллекций не делает из события исключение, а <code>VALARM</code> и <code>ATTACH</code> в модели уже есть. Чужие свойства показаны моноширинным блоком с честной подписью: они сохраняются байт в байт и не предлагаются к правке. Строка часового пояса — S-22 и C-10: стоит у каждого события со временем, иначе пояс не сменить; у события в поясе экземпляра она этот пояс и показывает. Событие заведено в Asia/Yekaterinburg — и правится в нём: 12:00–13:00 там — это 10:00–11:00 в Москве, как в карточке. <b>Участники</b> — плашки колонками: знакомый — меткой своей книги и именем, незнакомый — адресом; организатор без крестика. Новых набирают с подсказками из отмеченных книг (кадры рядом); приглашения рассылает сервер при записи, если умеет (RFC 6638), — подсказка под полем так и говорит. Второе напоминание подписано «Reminder» — как строка, которую добавляет «Add reminder». <b>Source — последней рубрикой, как у задачи</b> (<code>s-tasks-3</code>): путь, когда прочитано и сравнение с сервером; у нового события её нет, как у новой задачи.</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="s-agenda-15" data-screen="/app/calendar/{account}/{col}/new">
@@ -6080,6 +6126,31 @@ Read  2 min ago · not changed on server</div>
 </figure>
 
 <div class="frames">
+  <figure style="flex:1 1 480px">
+  <div class="frame" data-frame="s-tasks-18">
+    <div class="frame-label"><span>Задача · удаление, одна ссылка</span><span class="frag">фрагмент</span><i>лист из Delete task</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet tc-sheet--w480" action="/app/tasks/nextcloud/dela/aa10/delete" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
+        <b class="tc-sheet__title">Delete task</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Отправить документы в МФЦ</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush">The task is deleted on nextcloud · Дела. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.</div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>1 published link</b> <span class="tc-dim">— answers “not found” from that moment</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Delete</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+    </div>
+  </div>
+  <figcaption><b>Простой случай — одна строка.</b> Терять есть что — опубликованная ссылка, — и лист называет только её: сообщение о том, что копии нет, и перечень из одной строки. Каждая строка полного листа (<code>s-agenda-26</code>) появляется, только когда есть что называть; лист без единой строки не открывается — запись удаляется сразу.</figcaption>
+  </figure>
   <figure style="flex:0 1 250px">
   <div class="frame" data-frame="s-tasks-6">
     <div class="frame-label"><span>Карточка задачи · ⋯</span><span class="frag">меню</span><i>шапка карточки</i></div>
@@ -6169,6 +6240,12 @@ Read  2 min ago · not changed on server</div>
             </div>
           </div>
           <div class="tc-fset">
+            <div class="tc-rubric">Kept as the server sent them</div>
+            <div class="tc-diag tc-grow">X-APPLE-SORT-ORDER  712
+X-OC-HIDESUBTASKS  0
+SEQUENCE  1</div>
+          </div>
+          <div class="tc-fset">
             <div class="tc-rubric">Source</div>
             <dl class="tc-fields tc-grow">
               <dt>Path</dt><dd class="tc-mono">/remote.php/dav/calendars/mix/dela/aa10.ics</dd>
@@ -6181,7 +6258,7 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
 </div>
-<figcaption><b>Правка задачи</b> — тот же род экрана, что у контакта, события и заметки (§2.1). Поля — те, что отдаёт форма: срок разделён на дату и время, потому что у задачи «до вторника» и «до вторника 18:00» это разные обещания. <b>Просрочка названа в подзаголовке</b>, а не только цветом строки в списке: цвет говорит «что-то не так», а «overdue by 3 days» говорит, насколько. <b>Percent complete — поле, а не ползунок</b>: значение уходит на чужой сервер как число, и вводить его надо тем же способом, каким оно хранится. <b>Поля разложены по рубрикам</b> — When, Progress, Other, — как «When» у события: иначе на широком экране они текут по ширине и срок встаёт рядом с описанием. <b>Save и Cancel — одна пара, в шапке</b>, там же, где на карточке стоит Edit: вторая пара внизу делала бы то же самое. Внизу — только удаление, как на карточке. «⋯» в шапке правки нет: всё, что делают с задачей кроме правки, живёт в карточке. «Related to» — тот же поиск по мере набора, что у заметки, и здесь он связывает задачу с событием «Забрать документы».</figcaption>
+<figcaption><b>Правка задачи</b> — тот же род экрана, что у контакта, события и заметки (§2.1). Поля — те, что отдаёт форма: срок разделён на дату и время, потому что у задачи «до вторника» и «до вторника 18:00» это разные обещания. <b>Просрочка названа в подзаголовке</b>, а не только цветом строки в списке: цвет говорит «что-то не так», а «overdue by 3 days» говорит, насколько. <b>Percent complete — поле, а не ползунок</b>: значение уходит на чужой сервер как число, и вводить его надо тем же способом, каким оно хранится. <b>Поля разложены по рубрикам</b> — When, Progress, Other, — как «When» у события: иначе на широком экране они текут по ширине и срок встаёт рядом с описанием. <b>Save и Cancel — одна пара, в шапке</b>, там же, где на карточке стоит Edit: вторая пара внизу делала бы то же самое. Внизу — только удаление, как на карточке. «⋯» в шапке правки нет: всё, что делают с задачей кроме правки, живёт в карточке. «Related to» — тот же поиск по мере набора, что у заметки, и здесь он связывает задачу с событием «Забрать документы». <b>«Kept as the server sent them» — как у события</b> (<code>s-agenda-3</code>): свойства, которых Carrel не знает, тем же моноширинным блоком, после «Attachments», перед «Source»; они сохраняются байт в байт и к правке не предлагаются. Заметка показывает их строкой под текстом (<code>s-notes-20</code>), контакт — на карточке.</figcaption>
 </figure>
 
 <figure>

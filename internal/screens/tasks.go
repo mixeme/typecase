@@ -745,6 +745,10 @@ func Tasks3() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Kept as the server sent them"},
+								Items:  []w.FieldSetPart{w.Diag{Text: "X-APPLE-SORT-ORDER  712\nX-OC-HIDESUBTASKS  0\nSEQUENCE  1", Place: w.Grown}},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Source"},
 								Items: []w.FieldSetPart{
 									w.Fields{
