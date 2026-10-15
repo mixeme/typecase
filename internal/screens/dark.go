@@ -286,8 +286,8 @@ func Dark2() Screen {
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-									w.Button{Label: "Import", Icon: "up"},
-									w.Button{Label: "Export", Icon: "down"},
+									w.Button{Label: "Import", Icon: "import"},
+									w.Button{Label: "Export", Icon: "export"},
 								},
 							},
 						},
@@ -351,7 +351,7 @@ func Dark2() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Empty{
-					Icon: "up",
+					Icon: "import",
 					Lead: "Drop to import",
 					Parts: []w.EmptyPart{
 						w.Aside{
@@ -461,7 +461,7 @@ func Dark3() Screen {
 						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 6 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},

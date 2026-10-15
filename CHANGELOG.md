@@ -60,6 +60,12 @@ do, not what the authors did.
 
 ### Added
 
+- **`Seg.Tertiary`** — a switch of the third rank: it goes on a phone where
+  it means nothing (a note's width of text, narrower than the reading
+  width anyway).
+- Icons `i-import` and `i-export` (a page with an arrow into it and out of
+  it), `i-upload` (an arrow up out of a tray, the twin of `i-download`),
+  `i-code` (angle brackets: a record's source).
 - **Checks of what a widget promises, not of the frame** (Р-65). The width
   ladder now asks every field of a date or a time, button, option of a
   switch, tag, badge and pick whether it holds its content, and every
@@ -715,6 +721,20 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The buttons of a card, after Carrel's tasks 167–174** (accepted by the
+  owner 15.10). The cards of an event, a task and a note (`s-agenda-2`,
+  `s-tasks-2`, `s-notes-2`) get «Send», as a contact's has; «New task» goes
+  from the cards (`s-contacts-6`, `s-agenda-2`, `s-tasks-2`, `s-notes-2`) —
+  a task is made in tasks. «Print» is of the third rank in a card's head:
+  on a phone it goes into «⋯», its first line (`s-contacts-6`, `-8`, `-10`,
+  `s-agenda-4`, `-5`, `s-tasks-4`, `-6`, `s-notes-14`). A note's «Export
+  Markdown» is the export icon and «.md», «Source» the code icon alone, the
+  width switch of the third rank (`s-notes-2`, `-3`, `-27`); a note's «⋯»
+  exports «.ics» too (`s-notes-14`, task 174).
+- **Icons that read at once** (accepted 15.10): «Attach» has the paperclip
+  in every frame, 31 buttons; Import and Export the new `i-import` and
+  `i-export` (57 and 37), Upload `i-upload` (39), the rest of Download
+  `i-download` (14).
 - **Reliability on a phone** (Р-65, Р-66; the cards, the run bar and the icons accepted by the owner
   15.10): the date fields of the timeline (`s-contacts-7`, `s-mailbox-21`)
   and of the audit log (`s-admin-7`) hold their calendar; the bars of

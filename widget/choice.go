@@ -31,7 +31,7 @@ func (v SegVariant) class() string {
 // Seg — tc-seg
 //
 // Роль. Сомкнутый переключатель: один из нескольких вариантов, все на виду.
-// Вход. Seg{Options, Variant, Place, Secondary, Name, Theme, Multiple, Swap, Target}.
+// Вход. Seg{Options, Variant, Place, Secondary, Tertiary, Name, Theme, Multiple, Swap, Target}.
 // Состояния. default | start | compact | icons | radio | links | several.
 // Инварианты. Выбран ровно один вариант, у ряда флажков (Multiple) — любые; у варианта без подписи есть доступное имя; переключатель печатает фрагмент своего кадра.
 // Поведение. Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя.
@@ -43,6 +43,9 @@ type Seg struct {
 	Variant   SegVariant
 	Place     Place
 	Secondary bool
+	// Tertiary goes on a phone, where the switch means nothing: a card's
+	// width of text when the screen is narrower than the reading width.
+	Tertiary bool
 	// Name makes the options radio buttons of a form: the chosen one sends
 	// its Value, and the switch works without scripts.
 	Name string
@@ -117,7 +120,7 @@ func (o SegOption) label() string {
 
 func (g Seg) seg(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary)) + attr("data-tc-target", g.Target) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
+	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary), rank3(g.Tertiary)) + attr("data-tc-target", g.Target) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
 		if g.Name != "" {
 			kind := "radio"

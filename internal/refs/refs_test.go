@@ -49,12 +49,12 @@ func TestBite_widgetFragments(t *testing.T) {
 	ref := fragment.Ref{Frame: "components-19", Class: "tc-menu", N: 1}
 	good := raw(`<div class="tc-menu is-pop is-right tc-menu--w212">
   <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-pencil"/></svg>Rename</button>
-  <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button>
+  <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-export"/></svg>Export <span class="tc-mono tc-mono--t11">.vcf</span></button>
 </div>`)
 	if err := m.Compare(ref, good.Render()); err != nil {
 		t.Fatalf("the frame's own fragment is red: %v", err)
 	}
-	spoiled := raw(strings.Replace(string(good), `<button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/>`, `<button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-down"/>`, 1))
+	spoiled := raw(strings.Replace(string(good), `<button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-export"/>`, `<button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-export"/>`, 1))
 	err := m.Compare(ref, spoiled.Render())
 	if err == nil {
 		t.Fatal("a spoiled class passed")

@@ -72,7 +72,7 @@ func TestShapeNotWords(t *testing.T) {
 	if err := m.Check("s-notes-1", more); err != nil {
 		t.Errorf("more rows, other words, rows as links: %v", err)
 	}
-	link := strings.Replace(page, `<button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button>`,
+	link := strings.Replace(page, `<button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button>`,
 		w.Button{Label: "Import", Icon: "up", Href: "/app/notes/import"}.Render(), 1)
 	if link == page {
 		t.Fatal("no Import button in s-notes-1")
@@ -354,7 +354,7 @@ func TestMissingIsRed(t *testing.T) {
 			t.Errorf("a card without %s passes", what)
 		}
 	}
-	cut("Print", `<button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>`, "</button>")
+	cut("Print", `<button class="tc-btn is-3rd" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>`, "</button>")
 	cut("Related", `<div class="tc-sec"><div class="tc-rubric">Related</div>`, "</ul></div>")
 	cut("the time of When", `<span class="tc-mono">10:00 – 11:00</span>`, "</span>")
 	cut("the badge of When", `<span class="tc-badge" title="Created in another time zone">`, "</span>")

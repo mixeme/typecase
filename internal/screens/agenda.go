@@ -114,8 +114,8 @@ func Agenda1() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -348,11 +348,11 @@ func Agenda1() Screen {
 								Text: "Attachments",
 								Items: []w.RubricPart{
 									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
 												w.MenuItem{
-													Icon:  "up",
+													Icon:  "upload",
 													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 													Label: "From this computer",
 												},
@@ -516,8 +516,8 @@ func Agenda17() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -652,8 +652,8 @@ func Agenda2() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
-								w.Button{Label: "New task", Icon: "task"},
-								w.Button{Label: "Print", Icon: "print"},
+								w.Button{Label: "Send", Icon: "mail"},
+								w.Button{Label: "Print", Icon: "print", Tertiary: true},
 								w.Button{Icon: "dots", Title: "More"},
 							},
 						},
@@ -724,11 +724,11 @@ func Agenda2() Screen {
 								Text: "Attachments",
 								Items: []w.RubricPart{
 									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
 												w.MenuItem{
-													Icon:  "up",
+													Icon:  "upload",
 													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 													Label: "From this computer",
 												},
@@ -1051,11 +1051,11 @@ func Agenda3() Screen {
 									w.Line{
 										Items: []w.LinePart{
 											w.Drop{
-												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon: "up",
+															Icon: "upload",
 															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
 															Row: w.Line{
 																Items: []w.LinePart{
@@ -1336,11 +1336,11 @@ func Agenda15() Screen {
 									w.Line{
 										Items: []w.LinePart{
 											w.Drop{
-												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon: "up",
+															Icon: "upload",
 															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
 															Row: w.Line{
 																Items: []w.LinePart{

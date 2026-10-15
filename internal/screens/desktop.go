@@ -926,7 +926,7 @@ func Desktop14() Screen {
 	return w.Page{
 		Items: []w.PagePart{
 			w.Msg{
-				Icon: "down",
+				Icon: "download",
 				Parts: []w.MsgPart{
 					w.Strong("Carrel 0.8.0 is ready to install."),
 					w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was."),

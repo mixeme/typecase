@@ -242,7 +242,7 @@ func Mail1() Screen {
 									Items: []w.RubricPart{
 										w.Num{Value: 4},
 										w.Line{
-											Items: []w.LinePart{w.Button{Label: "Attach", Menu: true, Small: true}},
+											Items: []w.LinePart{w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}},
 											Gap:   w.LineGap6,
 											Place: w.Pushed,
 										},

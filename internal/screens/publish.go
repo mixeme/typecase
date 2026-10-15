@@ -1013,7 +1013,7 @@ func Publish5() Screen {
 							},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
-									w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+									w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 									w.Button{Label: "New folder", Icon: "plus"},
 								},
 							},
@@ -1102,7 +1102,7 @@ func Publish6() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "down"}},
+							Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download"}},
 						},
 						Wide: true,
 					},
@@ -1171,7 +1171,7 @@ func Publish7() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "down"}},
+							Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "download"}},
 						},
 						Wide: true,
 					},
@@ -1258,7 +1258,7 @@ func Publish8() Screen {
 							Place: w.Pushed,
 							Items: []w.LinePart{
 								w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}},
-								w.Button{Label: "Download .md", Icon: "down"},
+								w.Button{Label: "Download .md", Icon: "download"},
 							},
 						},
 					},
@@ -1383,7 +1383,7 @@ func Publish11() Screen {
 						Thumb:    w.Thumb{Icon: "doc", Form: w.ThumbSquare},
 						Title:    "макет-обложки.psd",
 						Meta:     w.Mono{Text: "image/vnd.adobe.photoshop · 84.2 MB · changed 2026-08-04"},
-						Download: w.Button{Label: "Download 84.2 MB", Icon: "down", Kind: w.ButtonPrimary},
+						Download: w.Button{Label: "Download 84.2 MB", Icon: "download", Kind: w.ButtonPrimary},
 						Note:     "This file cannot be shown in a browser, and Carrel does not try. It is streamed with its own type, transcoded nowhere and stored nowhere.",
 					},
 					w.MainFoot{Text: "This link works until 19 August 2026."},
@@ -1405,7 +1405,7 @@ func Publish12() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "down"}},
+							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download"}},
 						},
 					},
 					w.Head{

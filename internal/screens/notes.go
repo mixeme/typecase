@@ -79,8 +79,8 @@ func Notes1() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -180,11 +180,11 @@ func Notes1() Screen {
 								Text: "Attachments",
 								Items: []w.RubricPart{
 									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
 												w.MenuItem{
-													Icon:  "up",
+													Icon:  "upload",
 													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 													Label: "From this computer",
 												},
@@ -318,8 +318,8 @@ func Notes31() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -425,15 +425,22 @@ func Notes2() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
-								w.Button{Label: "Export Markdown"},
-								w.Button{Label: "Print", Icon: "print"},
-								w.Button{Label: "Source", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?view=source", Swap: "note-main"},
+								w.Button{Label: ".md", Icon: "export", Title: "Export Markdown"},
+								w.Button{Label: "Send", Icon: "mail"},
+								w.Button{Label: "Print", Icon: "print", Tertiary: true},
+								w.Button{
+									Icon:  "code",
+									Title: "Source",
+									Href:  "/app/notes/nextcloud/zapisi/9e31-40b7-c012?view=source",
+									Swap:  "note-main",
+								},
 								w.Seg{
 									Options: []w.SegOption{
 										{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full", On: true},
 										{Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read"},
 									},
-									Swap: "note-main",
+									Swap:     "note-main",
+									Tertiary: true,
 								},
 								w.Button{
 									Icon:  "panel",
@@ -507,11 +514,11 @@ func Notes2() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon:  "up",
+																Icon:  "upload",
 																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 																Label: "From this computer",
 															},
@@ -634,7 +641,7 @@ func Notes27() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
-								w.Button{Label: "Export Markdown"},
+								w.Button{Label: ".md", Icon: "export", Title: "Export Markdown"},
 								w.Button{Label: "Print", Icon: "print"},
 								w.Button{Label: "Rendered", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012", Swap: "note-main"},
 								w.Seg{
@@ -642,7 +649,8 @@ func Notes27() Screen {
 										{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full", On: true},
 										{Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read"},
 									},
-									Swap: "note-main",
+									Swap:     "note-main",
+									Tertiary: true,
 								},
 								w.Button{
 									Icon:  "panel",
@@ -702,11 +710,11 @@ func Notes27() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon:  "up",
+																Icon:  "upload",
 																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 																Label: "From this computer",
 															},
@@ -829,15 +837,21 @@ func Notes3() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
-								w.Button{Label: "Export Markdown"},
+								w.Button{Label: ".md", Icon: "export", Title: "Export Markdown"},
 								w.Button{Label: "Print", Icon: "print"},
-								w.Button{Label: "Source", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?view=source", Swap: "note-main"},
+								w.Button{
+									Icon:  "code",
+									Title: "Source",
+									Href:  "/app/notes/nextcloud/zapisi/9e31-40b7-c012?view=source",
+									Swap:  "note-main",
+								},
 								w.Seg{
 									Options: []w.SegOption{
 										{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full"},
 										{Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read", On: true},
 									},
-									Swap: "note-main",
+									Swap:     "note-main",
+									Tertiary: true,
 								},
 								w.Button{
 									Icon:  "panel",
@@ -911,11 +925,11 @@ func Notes3() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon:  "up",
+																Icon:  "upload",
 																File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 																Label: "From this computer",
 															},
@@ -1040,11 +1054,11 @@ func Notes20() Screen {
 							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true},
 							w.Button{Icon: "link", Title: "Link", Tertiary: true},
 							w.Drop{
-								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"},
+								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"},
 								Menu: w.Menu{
 									Items: []w.MenuPart{
 										w.MenuItem{
-											Icon: "up",
+											Icon: "upload",
 											File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"},
 											Row: w.DocAttach{
 												Name:   "{name}",
@@ -1173,11 +1187,11 @@ func Notes20() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon: "up",
+																Icon: "upload",
 																File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"},
 																Row: w.DocAttach{
 																	Name:   "{name}",
@@ -1277,11 +1291,11 @@ func Notes30() Screen {
 							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true},
 							w.Button{Icon: "link", Title: "Link", Tertiary: true},
 							w.Drop{
-								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"},
+								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"},
 								Menu: w.Menu{
 									Items: []w.MenuPart{
 										w.MenuItem{
-											Icon: "up",
+											Icon: "upload",
 											File: &w.FileField{Form: "note-new", Name: "file", Label: "From this computer", List: "note-new-attachments"},
 											Row: w.DocAttach{
 												Name:   "{name}",
@@ -1393,11 +1407,11 @@ func Notes30() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon: "up",
+																Icon: "upload",
 																File: &w.FileField{Form: "note-new", Name: "file", Label: "From this computer", List: "note-new-attachments"},
 																Row: w.DocAttach{
 																	Name:   "{name}",
@@ -1454,11 +1468,11 @@ func Notes4() Screen {
 							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task"},
 							w.Button{Icon: "link", Title: "Link"},
 							w.Drop{
-								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"},
+								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"},
 								Menu: w.Menu{
 									Items: []w.MenuPart{
 										w.MenuItem{
-											Icon: "up",
+											Icon: "upload",
 											File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"},
 											Row: w.DocAttach{
 												Name:   "{name}",
@@ -1902,7 +1916,7 @@ func Notes7() Screen {
 							w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
 							w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
 							w.MenuSep{},
-							w.MenuItem{Icon: "up", Label: "Upload file"},
+							w.MenuItem{Icon: "upload", Label: "Upload file"},
 							w.MenuSep{},
 							w.MenuItem{Icon: "mail", Label: "Letter"},
 						},
@@ -2849,7 +2863,7 @@ func Notes11() Screen {
 			Scrim: w.Scrim{
 				Content: w.Sheet{
 					Action: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
-					Icon:   "up",
+					Icon:   "upload",
 					Title:  "Upload files",
 					Head: []w.SheetHeadPart{
 						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},

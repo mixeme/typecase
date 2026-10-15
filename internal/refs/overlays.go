@@ -11,6 +11,11 @@ var _ = add(
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Run"},
 		w.MenuItem{Label: "Edit"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
+	overlay("icons", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "move", Label: "Move"},
+		w.MenuItem{Icon: "dup", Label: "Copy"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212}, "s-contacts-11", "tc-menu", 1),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa01"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
@@ -63,10 +68,10 @@ var _ = add(
 		w.MenuItem{Icon: "dup", Label: "Copy", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/copy"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/publish"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-notes-2", "tc-menu", 1),
 	overlay("edit", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"}, Row: w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGap8}, Label: "From this computer"},
+		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"}, Row: w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGap8}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 3),
 	overlay("edit", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
+		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
 	overlay("row", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "mail", Label: "Send"},
@@ -86,18 +91,19 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"}}, Width: w.MenuWidth290}, "s-notes-19", "tc-menu", 1),
 	overlay("picker", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"},
 		w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212}, "s-agenda-6", "tc-menu", 1),
 	overlay("closed", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-contacts-7", "tc-menu", 3),
 	overlay("closed-end", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-contacts-6", "tc-menu", 1),
 	overlay("long", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "contact"},
@@ -183,9 +189,9 @@ var _ = add(
 		w.MenuItem{Label: "Sunday"},
 		w.MenuItem{Label: "Saturday"}}, Width: w.MenuWidth212}, "appearance-2", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", Label: "From this computer", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}},
+		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"},
-		w.MenuItem{Label: "Upload", Form: "post-attach", NoScript: true}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 3),
+		w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-1", "tc-menu", 3),
 	overlay("links", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour", Href: "/app/collections/rename?c=lichny"},
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/publish?c=lichny"}}, Width: w.MenuWidth212}, "components-39", "tc-menu", 1),
@@ -222,16 +228,17 @@ var _ = add(
 		w.MenuField{Label: "Same title and date (events, tasks, notes)", Default: w.Dim{Parts: []w.Inline{w.Text("70")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "70", Mono: true, Variant: w.InputChip, Label: "Same title and date (events, tasks, notes)"}},
 		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Back to defaults", Small: true, Title: "Every weight is the default already.", State: w.ButtonDisabled}}}}, Width: w.MenuWidth420, Fields: true}, "s-dup-7", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212}, "s-contacts-8", "tc-menu", 1),
 	overlay("danger", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Label: "Open"},
 		w.MenuItem{Icon: "pencil", Label: "Edit"},
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "trash", Label: "Delete contact", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "components-1", "tc-menu", 1),
@@ -275,8 +282,10 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Дела", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа"}}, Width: w.MenuWidth290}, "s-tasks-5", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212}, "s-notes-14", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true},
@@ -296,7 +305,7 @@ var _ = add(
 		w.MenuItem{Label: "New notebook"}}, Width: w.MenuWidth290}, "s-io-11", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "components-19", "tc-menu", 1),
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "components-19", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "components-19", "tc-menu", 2),
@@ -306,8 +315,8 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "Команда"}}}, "components-6", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", Label: "Import"},
-		w.MenuItem{Icon: "down", Label: "Export"},
+		w.MenuItem{Icon: "import", Label: "Import"},
+		w.MenuItem{Icon: "export", Label: "Export"},
 		w.MenuItem{Icon: "print", Label: "Print"}}}, "components-8", "tc-menu", 1),
 	overlay("heading", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
@@ -415,7 +424,7 @@ var _ = add(
 	overlay("danger", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".md", Variant: w.Mono11Dusty}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".md", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "trash", Label: "Delete note", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "s-notes-12", "tc-menu", 1),
@@ -432,7 +441,7 @@ var _ = add(
 		w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
 		w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
 		w.MenuSep{},
-		w.MenuItem{Icon: "up", Label: "Upload file"},
+		w.MenuItem{Icon: "upload", Label: "Upload file"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "mail", Label: "Letter"}}}, "s-notes-7", "tc-menu", 1),
 	overlay("heading", w.Menu{Items: []w.MenuPart{
@@ -490,7 +499,7 @@ var _ = add(
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour"},
 		w.MenuItem{Icon: "move", Label: "Move to another server"},
 		w.MenuItem{Icon: "dup", Label: "Copy to another server"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11Dusty}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "trash", Label: "Delete on the server…", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-profile-1", "tc-menu", 1),
@@ -600,10 +609,10 @@ var _ = add(
 	overlay("closed", w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 		w.MenuItem{Icon: "link", Label: "Publish a link"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "s-contacts-6", "tc-drop", 1),
 	overlay("closed", w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "up", Label: "From this computer"},
+		w.MenuItem{Icon: "upload", Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, "s-agenda-1", "tc-drop", 3),
 	overlay("pick", w.Drop{Trigger: w.Pick{Value: "Asia/Yekaterinburg", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
@@ -616,7 +625,7 @@ var _ = add(
 		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, "s-agenda-3", "tc-drop", 1),
 	overlay("more", w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
-		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "components-19", "tc-drop", 1),
+		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "components-19", "tc-drop", 1),
 	overlay("pick", w.Drop{Open: true, Trigger: w.Pick{Value: "Синк-ап по релизу ковал", Label: "Where"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "cal", Trail: w.Mono{Text: "10 Aug · Личный", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Звонок с Ковалёвой", On: true},
 		w.MenuItem{Icon: "task", Trail: w.Mono{Text: "task · Работа", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Ответить Анне по смете"},
@@ -639,7 +648,7 @@ var _ = add(
 		w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
 		w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
 		w.MenuSep{},
-		w.MenuItem{Icon: "up", Label: "Upload file"},
+		w.MenuItem{Icon: "upload", Label: "Upload file"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "mail", Label: "Letter"}}}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "s-notes-7", "tc-top", 1),
 	overlay("drop", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.TopDrop{Open: true, Trigger: w.UserMenu{Name: "mix", Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
@@ -651,7 +660,7 @@ var _ = add(
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Sign out"}}, Width: w.MenuWidth290}, End: true}}}, "account-5", "tc-top", 1),
-	overlay("selection", w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Folds: true, Label: "Download", Icon: "down", Title: "Download", Form: "files-sel", Name: "op", Value: "download"}, w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"}}, Count: &w.BarCount{Text: "With the ticked"}, Variant: w.BarSelection}, "states-34", "tc-bar", 1),
+	overlay("selection", w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Folds: true, Label: "Download", Icon: "download", Title: "Download", Form: "files-sel", Name: "op", Value: "download"}, w.Button{Folds: true, Label: "Copy", Icon: "dup", Title: "Copy", Form: "files-sel", Name: "op", Value: "copy"}}, Count: &w.BarCount{Text: "With the ticked"}, Variant: w.BarSelection}, "states-34", "tc-bar", 1),
 	overlay("more", w.Bar{Items: []w.BarPart{w.Seg{Options: []w.SegOption{{Label: "A–Z", On: true}, {Label: "Recently changed"}}}, w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Overdue"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All", On: true},
 		w.MenuItem{Label: "Overdue"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}}, "components-19", "tc-bar", 1),
@@ -770,17 +779,17 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the files back into a "), w.Strong("new"), w.Text(" folder — not into this one, and not to this address.")}, Space: w.MsgFlush},
 		w.Line{Items: []w.LinePart{w.Button{Label: "Open in Files", Icon: "file"}, w.Dim{Parts: []w.Inline{w.Text("Download what you need from it there first.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
 		w.Field{Label: "Type the name to confirm", Parts: []w.FieldPart{w.Input{Name: "type.the.name.to.confirm", Placeholder: "Documents", Label: "Type the name to confirm", Focus: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "s-profile-19", "tc-sheet", 1),
-	overlay("refusal", w.Sheet{Action: "/app/files/sftpgo/documents/upload/carrel/attachments", Icon: "up", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
+	overlay("refusal", w.Sheet{ID: "upload-sheet", Action: "/app/files/sftpgo/documents/upload/carrel/attachments", Icon: "upload", Title: "Upload files", Head: []w.SheetHeadPart{w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("Documents / carrel / attachments")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Where to put it"},
 			w.Line{Items: []w.LinePart{w.Input{Name: "name", Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Small: true, To: "/app/files/sftpgo/documents/mkcol/carrel/attachments", Submit: true}, w.Button{Label: "Cancel", Small: true}}, Gap: w.LineGap8, Block: true},
 			w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in attachments already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushTop2},
 			w.Tree{Rows: []w.TreeRow{
-				{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents"}},
-				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel"}},
-				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments"}},
-				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07"}}}, On: 3}}, Variant: w.CardFlush},
-		w.Dim{Parts: []w.Inline{w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Open the folder", Name: "open", Value: "1", Submit: true, NoScript: true}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-files-19", "tc-sheet", 1),
+				{Icon: "file", Label: "Documents", Send: w.Send{Name: "to", Value: "sftpgo/documents", One: true}, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents", Swap: "upload-sheet"},
+				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel", One: true}, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel", Swap: "upload-sheet"},
+				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments", One: true}, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments", Swap: "upload-sheet"},
+				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Send: w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07", One: true}, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07", Swap: "upload-sheet"}}, On: 3}}, Variant: w.CardFlush},
+		w.Dim{Parts: []w.Inline{w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Open the folder", Name: "open", Value: "1", Submit: true, NoScript: true}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}}, "s-files-19", "tc-sheet", 1),
 	overlay("issued", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Reset a password", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush},
 		w.Card{Items: []w.CardPart{
@@ -859,7 +868,7 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("The calendar and all "), w.Strong("51"), w.Text(" events in it are deleted on nextcloud. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
 		w.SheetBlock{Title: w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "1 published link", Note: w.Dim{Parts: []w.Inline{w.Text("— answers “not found” from that moment")}}}, {Name: "Backup job «Личное на домашний диск»", Note: w.Dim{Parts: []w.Inline{w.Text("— copies this collection; it will run one short and say so")}}}, {Name: "3 devices through davloom", Note: w.Dim{Parts: []w.Inline{w.Text("— it disappears for them at the next sync")}}}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("Last time it was in an archive: "), w.Mono{Text: "2026-08-14"}, w.Text(". Restoring brings the records back into a "), w.Strong("new"), w.Text(" collection — not into this one, and not to this address.")}, Space: w.MsgFlush},
-		w.Line{Items: []w.LinePart{w.Button{Label: "Download", Icon: "down", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, w.Dim{Parts: []w.Inline{w.Text("51 events, one file, straight to you")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
+		w.Line{Items: []w.LinePart{w.Button{Label: "Download", Icon: "download", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, w.Dim{Parts: []w.Inline{w.Text("51 events, one file, straight to you")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Gap: w.LineGap8, Block: true},
 		w.Field{Label: "Type the name to confirm", Parts: []w.FieldPart{w.Input{Name: "type.the.name.to.confirm", Placeholder: "Дни рождения", Label: "Type the name to confirm", Focus: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}, "s-profile-9", "tc-sheet", 1),
 	overlay("icon", w.Sheet{Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.SheetBlock{Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7}, Items: []w.SheetLine{{Name: "a.kovaleva@example.org → a.kovaleva@slovo.example", Note: w.Dim{Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; they drop out of the person’s timeline")}}}}},
@@ -940,7 +949,7 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy"), w.Text(".")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}, "s-contacts-2", "tc-scrim", 1),
 	overlay("plain", w.Scrim{Content: w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}}, Foot: []w.SheetFootPart{w.Button{Label: "Save note", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Ctrl+Enter"}, w.Button{Label: "Open the card", Icon: "expand"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}}, "s-notes-5", "tc-scrim", 1),
-	overlay("pad", w.Scrim{Content: w.Empty{Icon: "up", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, Pad: w.ScrimPad38}, "s-io-1", "tc-scrim", 1),
+	overlay("pad", w.Scrim{Content: w.Empty{Icon: "import", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, Pad: w.ScrimPad38}, "s-io-1", "tc-scrim", 1),
 
 	// tc-overlay
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
@@ -1188,8 +1197,8 @@ var _ = add(
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},

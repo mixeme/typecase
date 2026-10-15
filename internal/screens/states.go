@@ -225,8 +225,8 @@ func States3() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -390,7 +390,7 @@ func States4() Screen {
 							w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 1 card · the server granted no write access")}},
 						},
 						Acts: &w.Acts{
-							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}},
+							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}},
 						},
 					},
 					w.Bar{
@@ -670,8 +670,8 @@ func States6() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -1056,11 +1056,11 @@ func States17() Screen {
 									w.Line{
 										Items: []w.LinePart{
 											w.Drop{
-												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon:  "up",
+															Icon:  "upload",
 															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 															Label: "From this computer",
 														},
@@ -1375,11 +1375,11 @@ func States36() Screen {
 									w.Line{
 										Items: []w.LinePart{
 											w.Drop{
-												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon:  "up",
+															Icon:  "upload",
 															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 															Label: "From this computer",
 														},
@@ -1547,8 +1547,8 @@ func States7() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -1640,8 +1640,8 @@ func States8() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -1845,8 +1845,8 @@ func States9() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -2080,8 +2080,8 @@ func States10() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -2092,7 +2092,7 @@ func States10() Screen {
 							w.Text(" Add a contact, or import a file of them. "),
 							w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
 							w.Text(" "),
-							w.Button{Label: "Import", Icon: "up"},
+							w.Button{Label: "Import", Icon: "import"},
 						},
 					},
 				},
@@ -2174,8 +2174,8 @@ func States11() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -2499,8 +2499,8 @@ func States13() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -2743,8 +2743,8 @@ func States14() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -2866,8 +2866,8 @@ func States15() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3019,8 +3019,8 @@ func States18() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3119,8 +3119,8 @@ func States19() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3274,8 +3274,8 @@ func States20() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3452,8 +3452,8 @@ func States21() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3464,7 +3464,7 @@ func States21() Screen {
 							w.Text(" Add a task, or import a file of them. "),
 							w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
 							w.Text(" "),
-							w.Button{Label: "Import", Icon: "up"},
+							w.Button{Label: "Import", Icon: "import"},
 						},
 					},
 				},
@@ -3553,8 +3553,8 @@ func States22() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -3657,7 +3657,7 @@ func States23() Screen {
 						},
 						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Subscriptions · 2 tasks · a feed can only be read")}}},
 						Acts: &w.Acts{
-							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}, w.Button{Label: "Print", Icon: "print"}},
+							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}},
 						},
 					},
 					w.Bar{
@@ -3846,11 +3846,11 @@ func States24() Screen {
 									w.Line{
 										Items: []w.LinePart{
 											w.Drop{
-												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "up"},
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon: "up",
+															Icon: "upload",
 															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "task-loss-attachments"},
 															Row: w.Line{
 																Items: []w.LinePart{
@@ -3974,8 +3974,8 @@ func States25() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -4067,8 +4067,8 @@ func States26() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -4191,8 +4191,8 @@ func States27() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -4338,8 +4338,8 @@ func States28() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -4349,7 +4349,7 @@ func States28() Screen {
 							w.Text(" Write a note, or import a file of them. "),
 							w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
 							w.Text(" "),
-							w.Button{Label: "Import", Icon: "up"},
+							w.Button{Label: "Import", Icon: "import"},
 						},
 					},
 				},
@@ -4432,8 +4432,8 @@ func States29() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -4538,7 +4538,7 @@ func States30() Screen {
 								Parts: []w.HeadSubPart{w.Text("nextcloud · 2 notes · VJOURNAL · the server granted no write access")},
 							},
 						},
-						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "down"}}},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "export"}}},
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -4647,11 +4647,11 @@ func States31() Screen {
 							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true},
 							w.Button{Icon: "link", Title: "Link", Tertiary: true},
 							w.Drop{
-								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "up", Title: "Attach"},
+								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"},
 								Menu: w.Menu{
 									Items: []w.MenuPart{
 										w.MenuItem{
-											Icon: "up",
+											Icon: "upload",
 											File: &w.FileField{Form: "note-loss", Name: "file", Label: "From this computer", List: "note-loss-attachments"},
 											Row: w.DocAttach{
 												Name:   "{name}",
@@ -4791,11 +4791,11 @@ func States31() Screen {
 											Text: "Attachments",
 											Items: []w.RubricPart{
 												w.Drop{
-													Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
 															w.MenuItem{
-																Icon: "up",
+																Icon: "upload",
 																File: &w.FileField{Form: "note-loss", Name: "file", Label: "From this computer", List: "note-loss-attachments"},
 																Row: w.DocAttach{
 																	Name:   "{name}",
@@ -4934,7 +4934,7 @@ func States32() Screen {
 						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 0 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},
@@ -4946,7 +4946,7 @@ func States32() Screen {
 						Parts: []w.EmptyPart{
 							w.Strong("This folder is empty."),
 							w.Text(" Upload files into it, or drop them onto the window. "),
-							w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+							w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 							w.Text(" "),
 							w.Button{Label: "New folder", Icon: "plus"},
 						},
@@ -5042,7 +5042,7 @@ func States33() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},
@@ -5140,7 +5140,7 @@ func States34() Screen {
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary, State: w.ButtonDisabled},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary, State: w.ButtonDisabled},
 								w.Button{Label: "New folder", Icon: "plus", State: w.ButtonDisabled},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},

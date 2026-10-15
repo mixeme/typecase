@@ -158,7 +158,7 @@ func Profile1() Screen {
 																		w.MenuItem{Icon: "pencil", Label: "Rename and colour"},
 																		w.MenuItem{Icon: "move", Label: "Move to another server"},
 																		w.MenuItem{Icon: "dup", Label: "Copy to another server"},
-																		w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11}, Label: "Export"},
+																		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".ics", Variant: w.Mono11}, Label: "Export"},
 																		w.MenuItem{Icon: "link", Label: "Publish a link"},
 																		w.MenuSep{},
 																		w.MenuItem{Icon: "trash", Label: "Delete on the server…", Tone: w.MenuToneDanger},
@@ -2357,7 +2357,7 @@ func Profile9() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{
-								w.Button{Label: "Download", Icon: "down", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"},
+								w.Button{Label: "Download", Icon: "download", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"},
 								w.Dim{
 									Parts:   []w.Inline{w.Text("51 events, one file, straight to you")},
 									Size:    w.Dim11_5,

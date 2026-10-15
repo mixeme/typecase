@@ -72,8 +72,8 @@ func Io1() Screen {
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-									w.Button{Label: "Import", Icon: "up"},
-									w.Button{Label: "Export", Icon: "down"},
+									w.Button{Label: "Import", Icon: "import"},
+									w.Button{Label: "Export", Icon: "export"},
 								},
 							},
 						},
@@ -137,7 +137,7 @@ func Io1() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Empty{
-					Icon: "up",
+					Icon: "import",
 					Lead: "Drop to import",
 					Parts: []w.EmptyPart{
 						w.Aside{
@@ -269,8 +269,8 @@ func Io2() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 							},
 						},
 					},
@@ -354,11 +354,11 @@ func Io2() Screen {
 								Text: "Attachments",
 								Items: []w.RubricPart{
 									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Small: true},
+										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
 										Menu: w.Menu{
 											Items: []w.MenuPart{
 												w.MenuItem{
-													Icon:  "up",
+													Icon:  "upload",
 													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
 													Label: "From this computer",
 												},

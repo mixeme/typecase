@@ -878,7 +878,7 @@ func Backup3() Screen {
 											},
 											w.Button{
 												Label:    "Save as",
-												Icon:     "down",
+												Icon:     "download",
 												SaveAs:   "carrel-personal.sh",
 												SaveFrom: "trigger-script",
 												Aside:    &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11},

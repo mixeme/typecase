@@ -856,6 +856,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
    кнопки строки таблицы в своей ячейке и подвал листа. Решение человека 2026-09-26: без прокрутки. */
 @container tcbox (max-width:460px){
   .tc-bar > .is-3rd,.tc-bar__right > .is-3rd,.tc-docbar > .is-3rd{display:none}
+  /* шапка карточки: третий ранг (Print) уходит под её «⋯» */
+  .tc-head .tc-acts > .is-3rd{display:none}
   .tc-bar:has(> .is-3rd) .tc-bar__more,.tc-bar:has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
   .tc-docbar:has(.is-3rd) .tc-bar__more,.tc-docbar:has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}

@@ -48,7 +48,8 @@ var (
 	buttonPad  = []kv{{"tc-btn--padx3", "ButtonPadX3"}, {"tc-btn--padx4", "ButtonPadX4"}, {"tc-btn--padx6", "ButtonPadX6"},
 		{"tc-btn--padx8", "ButtonPadX8"}, {"tc-btn--on-card", "ButtonOnCard"}}
 	iconNames = map[string]string{"down": "Download", "close": "Close", "back": "Back", "quill": "New note", "menu": "Menu",
-		"search": "Search", "link": "Link", "up": "Upload", "refresh": "Refresh", "move": "Move"}
+		"search": "Search", "link": "Link", "up": "Upload", "refresh": "Refresh", "move": "Move",
+		"download": "Download", "upload": "Upload", "import": "Import", "export": "Export"}
 	iconRe = regexp.MustCompile(`Icon: "([a-z-]+)"`)
 )
 
@@ -625,6 +626,9 @@ func (g *gen) seg(x *El) string {
 	}
 	if a := x.Kid("tc-seg__opt"); a != nil && a.Attr("data-tc-swap") != "" {
 		n += ", Swap: " + q(a.Attr("data-tc-swap"))
+	}
+	if x.Has("is-3rd") {
+		n += ", Tertiary: true"
 	}
 	return "w.Seg{Options: []w.SegOption{" + join(opts, ", ") + "}" + g.ev(x, "SegVariant", "Variant") + placesec(x) + n + "}"
 }

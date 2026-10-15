@@ -143,9 +143,12 @@ func Plan1() Screen {
 												},
 											},
 											w.CardRow{
-												Kind:  w.CardTop9,
-												Gap:   6,
-												Items: []w.CardRowPart{w.Button{Label: "Download profile", Icon: "down"}, w.Button{Label: "Revoke", Kind: w.ButtonDanger}},
+												Kind: w.CardTop9,
+												Gap:  6,
+												Items: []w.CardRowPart{
+													w.Button{Label: "Download profile", Icon: "download"},
+													w.Button{Label: "Revoke", Kind: w.ButtonDanger},
+												},
 											},
 										},
 									},

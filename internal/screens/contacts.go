@@ -78,8 +78,8 @@ func Contacts1() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Import", Icon: "up"},
-								w.Button{Label: "Export", Icon: "down"},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
@@ -320,8 +320,8 @@ func Contacts2() Screen {
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
-									w.Button{Label: "Import", Icon: "up"},
-									w.Button{Label: "Export", Icon: "down"},
+									w.Button{Label: "Import", Icon: "import"},
+									w.Button{Label: "Export", Icon: "export"},
 									w.Button{Label: "Print", Icon: "print"},
 								},
 							},
@@ -1151,14 +1151,15 @@ func Contacts6() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
 								w.Button{Label: "Send", Icon: "mail"},
-								w.Button{Label: "Print", Icon: "print"},
+								w.Button{Label: "Print", Icon: "print", Tertiary: true},
 								w.Drop{
 									Trigger: w.Button{Icon: "dots", Title: "More"},
 									Menu: w.Menu{
 										Items: []w.MenuPart{
+											w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
 											w.MenuItem{Icon: "move", Label: "Move"},
 											w.MenuItem{Icon: "dup", Label: "Copy"},
-											w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+											w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 											w.MenuItem{Icon: "link", Label: "Publish a link"},
 										},
 										Width: w.MenuWidth212,
@@ -1922,7 +1923,7 @@ func Contacts7() Screen {
 									Items: []w.MenuPart{
 										w.MenuItem{Icon: "move", Label: "Move"},
 										w.MenuItem{Icon: "dup", Label: "Copy"},
-										w.MenuItem{Icon: "down", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+										w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
 										w.MenuItem{Icon: "link", Label: "Publish a link"},
 									},
 									Width: w.MenuWidth212,

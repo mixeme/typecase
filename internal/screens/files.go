@@ -97,7 +97,7 @@ func Files1() Screen {
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Variant: w.ButtonOnCard, Title: "Details"},
@@ -493,7 +493,7 @@ func Files2() Screen {
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},
@@ -861,7 +861,7 @@ func Files4() Screen {
 							},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
-									w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+									w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 									w.Button{Label: "New folder", Icon: "plus"},
 									w.Button{Icon: "refresh", Title: "Refresh"},
 									w.Button{Icon: "panel", Title: "Details"},
@@ -1286,7 +1286,7 @@ func Files5() Screen {
 						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 7 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Upload", Menu: true, Icon: "up", Kind: w.ButtonPrimary},
+								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
 								w.Button{Icon: "panel", Title: "Details"},
