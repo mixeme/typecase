@@ -7,7 +7,7 @@ var MockupLadderWidths = []int{1351, 1191, 1190, 1008, 1007, 820, 641, 640, 460,
 // MockupLadderProbeJS checks one painted frame: no horizontal scroll of the
 // frame or of any box inside it (a scrolling .tc-main hid a too-wide bar),
 // in-flow siblings do not overlap, text stays in its box except ellipsis,
-// and in drawer mode every tappable has a 44 px hit zone (same idea as tapHitJS).
+// a widget holds its own content (Р-65), and in drawer mode every tappable has a 44 px hit zone (same idea as tapHitJS).
 const MockupLadderProbeJS = `(() => {
   const root = document.querySelector(".tc-root");
   const frame = document.querySelector(".frame");
@@ -92,6 +92,7 @@ const MockupLadderProbeJS = `(() => {
   };
   walkText(root);
 
+
   const body = root.querySelector(".tc-shell__body");
   const mode = body ? getComputedStyle(body).getPropertyValue("--tc-shell-mode").trim() : "";
   const taps = [];
@@ -128,5 +129,46 @@ const MockupLadderProbeJS = `(() => {
       }
     }
   }
-  return {issues: issues.slice(0, 8), taps: taps.slice(0, 8), mode};
+  // (after the taps: the hit zones are put away while the widgets are measured)
+  // A widget holds its own (Р-65): a field of a fixed form (a date, a time),
+  // a button, an option of a switch, a tag, a badge, a pick shows all it has
+  // inside its box, unless it declares an ellipsis. Measured on the widget,
+  // not against the frame: a frame drawn wrong is wrong here too. A text
+  // field scrolls its value by nature and is not asked. The hit zone of a
+  // phone (an ::after of 44 px) is bigger than the widget on purpose: it is
+  // put away while the widgets are measured.
+  const noZones = document.createElement("style");
+  noZones.textContent = ".tc-root *::after{content:none !important}";
+  document.head.appendChild(noZones);
+  for (const el of root.querySelectorAll("input[type=date], input[type=time], input[type=datetime-local], .tc-btn, .tc-seg__opt, .tc-tag, .tc-badge, .tc-in.is-pick, select")) {
+    const cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) continue;
+    // an ellipsis is a declared cut — but not for a field of a date or a
+    // time: the browser draws it and cuts nothing
+    if (cs.textOverflow === "ellipsis" && el.tagName !== "INPUT") continue;
+    const d = el.scrollWidth - el.clientWidth;
+    if (d > 1) issues.push("holds " + cls(el).split(" ").join(".") + " " + d + "px");
+  }
+  // ... and is seen whole (Р-65): the nearest ancestor that cuts (overflow
+  // hidden or clip) does not hide a part of it. An ancestor that scrolls
+  // shows it by scrolling and is the end of the question.
+  for (const el of root.querySelectorAll(".tc-btn, .tc-seg, .tc-in, .tc-tag, .tc-badge, .tc-check, select, input:not([type=hidden])")) {
+    const cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+      const ox = getComputedStyle(a).overflowX;
+      if (ox === "auto" || ox === "scroll") break;
+      if (ox !== "hidden" && ox !== "clip") continue;
+      const ar = a.getBoundingClientRect();
+      const cut = Math.max(r.right - ar.right, ar.left - r.left);
+      if (cut > 1) issues.push("cut " + cls(el).split(" ").join(".") + " by " + cls(a).split(" ")[0] + " " + Math.round(cut) + "px");
+      break;
+    }
+  }
+  noZones.remove();
+  return {issues: issues.slice(0, 12), taps: taps.slice(0, 8), mode};
 })()`

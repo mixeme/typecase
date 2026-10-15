@@ -68,7 +68,7 @@ var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
 	MockupDeadRules, MockupNamedContainer, MockupTokenVars, MockupEmptyRules,
-	MockupNoNumberedClasses, MockupNesting,
+	MockupNoNumberedClasses, MockupNesting, MockupContextMinimum,
 }
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
@@ -142,6 +142,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupNesting:
 			if err := checkMockupNesting(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupContextMinimum:
+			if err := checkMockupContextMinimum(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		case MockupClassesDefined:

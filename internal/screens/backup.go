@@ -70,7 +70,7 @@ func Backup1() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New job", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Restore", Icon: "back"},
+								w.Button{Label: "Restore", Icon: "restore"},
 							},
 						},
 					},
@@ -82,7 +82,7 @@ func Backup1() Screen {
 							{Label: "Where to", Rank: w.Rank4, Secondary: true},
 							{Label: "When"},
 							{Label: "Keep", Secondary: true},
-							{Label: "Last backup"},
+							{Label: "Last backup", Main: true},
 							{Width: w.ColTime},
 						},
 						Rows: []w.TableRow{
@@ -117,8 +117,22 @@ func Backup1() Screen {
 										Mono:  true,
 									},
 									{
-										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
-										Acts:  true,
+										Parts: []w.CellPart{
+											w.Button{Label: "Run", Small: true, Secondary: true},
+											w.Button{Label: "Edit", Small: true, Secondary: true},
+										},
+										Drop: &w.Drop{
+											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Row:     true,
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{Label: "Run"},
+													w.MenuItem{Label: "Edit"}},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnderEnd,
+											},
+										},
+										Acts: true,
 									},
 								},
 							},
@@ -152,8 +166,22 @@ func Backup1() Screen {
 										Mono:  true,
 									},
 									{
-										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
-										Acts:  true,
+										Parts: []w.CellPart{
+											w.Button{Label: "Run", Small: true, Secondary: true},
+											w.Button{Label: "Edit", Small: true, Secondary: true},
+										},
+										Drop: &w.Drop{
+											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Row:     true,
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{Label: "Run"},
+													w.MenuItem{Label: "Edit"}},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnderEnd,
+											},
+										},
+										Acts: true,
 									},
 								},
 							},
@@ -177,8 +205,22 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 									{
-										Parts: []w.CellPart{w.Button{Label: "Run", Small: true}, w.Button{Label: "Edit", Small: true}},
-										Acts:  true,
+										Parts: []w.CellPart{
+											w.Button{Label: "Run", Small: true, Secondary: true},
+											w.Button{Label: "Edit", Small: true, Secondary: true},
+										},
+										Drop: &w.Drop{
+											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Row:     true,
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{Label: "Run"},
+													w.MenuItem{Label: "Edit"}},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnderEnd,
+											},
+										},
+										Acts: true,
 									},
 								},
 								State: w.RowFaded,
@@ -211,8 +253,8 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("cron")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Restore", Small: true},
-											w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											w.Button{Label: "Restore", Icon: "restore", Small: true},
+											w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
 										},
 										Acts: true,
 									},
@@ -224,12 +266,21 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
 									{Parts: []w.CellPart{w.Text("18.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2 / 3")}, Mono: true, Tone: w.CellDanger},
-									{Parts: []w.CellPart{w.Text("baikal · Общий: 401")}, Tone: w.CellDanger},
+									{
+										Parts: []w.CellPart{
+											w.Text("read back · "),
+											w.Span{
+												Face:  w.FaceDanger,
+												Text:  "1 not copied",
+												Title: "baikal · Общий: the server answered 401, so this collection is not in the archive. The other two were read back.",
+											},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("cron")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Restore", Small: true},
-											w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											w.Button{Label: "Restore", Icon: "restore", Small: true},
+											w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
 										},
 										Acts: true,
 									},
@@ -245,8 +296,8 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Label: "Restore", Small: true},
-											w.Button{Icon: "down", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											w.Button{Label: "Restore", Icon: "restore", Small: true},
+											w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
 										},
 										Acts: true,
 									},
@@ -930,7 +981,7 @@ func Backup6() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New job", Icon: "plus", Kind: w.ButtonPrimary},
-								w.Button{Label: "Restore", Icon: "back"},
+								w.Button{Label: "Restore", Icon: "restore"},
 							},
 						},
 					},
@@ -1181,14 +1232,21 @@ func Backup8() Screen {
 								Acts: &w.Acts{
 									Items: []w.ActsPart{
 										w.Button{Label: "Cancel"},
-										w.Button{Label: "Restore 3 collections", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true},
+										w.Button{
+											Label:  "Restore 3 collections",
+											Icon:   "restore",
+											Kind:   w.ButtonPrimary,
+											Name:   "op",
+											Value:  "restore",
+											Submit: true,
+										},
 									},
 								},
 							},
 							w.Bar{
 								Items: []w.BarPart{
 									w.BarSep{},
-									w.Button{Label: "Restore into", Icon: "back", Name: "op", Value: "into", Submit: true},
+									w.Button{Label: "Restore into", Icon: "restore", Name: "op", Value: "into", Submit: true},
 									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
 								},
 								Count:   &w.BarCount{Text: "3 selected"},

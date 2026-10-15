@@ -264,6 +264,7 @@ type RunbarPart interface {
 func (Text) runbarPart() {}
 func (Span) runbarPart() {}
 func (Mono) runbarPart() {}
+func (Say) runbarPart()  {}
 func (Push) runbarPart() {}
 func (Line) runbarPart() {}
 func (Drop) runbarPart() {}

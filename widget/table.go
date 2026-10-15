@@ -57,6 +57,12 @@ type TableCol struct {
 	Secondary bool    // the first to go when the table narrows
 	Tick      *Ticked // a tick box in the head: all rows at once
 	Send      Send    // what the head's tick sends
+	// Main is the column that matters (the owner's decision of 15.10,
+	// Р-66): on a phone a row is a card of its name, this column under it,
+	// named by its Label, and «⋯»; the other columns go and the row's
+	// buttons are in «⋯». Which column matters is the table's sense: the
+	// frame names it.
+	Main bool
 }
 
 // CellTone is the colour of a cell's words.
@@ -89,6 +95,7 @@ func (CellWrap) cellPart()  {}
 func (Chevron) cellPart()   {}
 func (Mono) cellPart()      {}
 func (Seg) cellPart()       {}
+func (Span) cellPart()      {}
 
 // Break ends a line inside a cell: a second line under the first.
 type Break struct{}
@@ -214,7 +221,7 @@ func (v TableVariant) class() string {
 // Вход. Table{Cols, Rows, Variant, Place, Target}.
 // Состояния. plain | head | picked | folder | off | acts | wide | fit.
 // Инварианты. Ширина и ранг колонки — перечисления, и ячейки колонки берут их из её заголовка; третья и четвёртая колонки уходят первыми на узком экране; таблица печатает фрагмент своего кадра.
-// Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню; имя со ссылкой (`TableFile.Href`) открывает строку.
+// Поведение. Галка выбирает строку для действий бара; кнопки строки с `is-2nd` на узкой ширине уходят под «⋯» строки (`TableCell.More`), и «⋯» открывает её меню; имя со ссылкой (`TableFile.Href`) открывает строку. На телефоне таблица с главной колонкой (`TableCol.Main`) — карточки: имя и «⋯», под ними главное с подписью колонки (Р-66).
 // Эталон. кадр `s-files-1`, фрагмент `.tc-table`.
 // Содержимое. Заголовки колонок, строки: имя со значком или меткой, значения, моноширинное, две строки, метки, теги, бейджи, галка, кнопки, выпадашка.
 // Чего нет. Сортировки по заголовку: сортирует переключатель бара.
@@ -245,7 +252,7 @@ func (t Table) html(m mix) string {
 	if len(t.Cols) > 0 {
 		s.WriteString(`<thead><tr>`)
 		for _, c := range t.Cols {
-			s.WriteString(`<th` + class(nil, c.Width.class(), c.Rank.class(), rank(c.Secondary)) + `>`)
+			s.WriteString(`<th` + class(nil, c.Width.class(), c.Rank.class(), rank(c.Secondary), pick(c.Main, "tc-table__main")) + `>`)
 			if c.Tick != nil {
 				s.WriteString(c.Tick.box("All", c.Send))
 			}
@@ -258,7 +265,7 @@ func (t Table) html(m mix) string {
 		s.WriteString(`<tr` + class(nil, r.State.class()) + `>`)
 		for i, c := range r.Cells {
 			col := t.col(i, c)
-			s.WriteString(`<td` + class(nil, c.classes(col)...) + attr("colspan", pick(c.Span > 1, strconv.Itoa(c.Span))) + attr("rowspan", pick(c.Rows > 1, strconv.Itoa(c.Rows))) + `>`)
+			s.WriteString(`<td` + class(nil, c.classes(col)...) + attr("data-tc-label", pick(col.Main, col.Label)) + attr("colspan", pick(c.Span > 1, strconv.Itoa(c.Span))) + attr("rowspan", pick(c.Rows > 1, strconv.Itoa(c.Rows))) + `>`)
 			if c.Pick != nil {
 				s.WriteString(c.Pick.box("Pick", c.Send))
 			}
@@ -283,7 +290,7 @@ func (t Table) html(m mix) string {
 
 func (c TableCell) classes(col TableCol) []string {
 	out := []string{pick(c.Mono, "tc-mono"), pick(c.Dim, "tc-dim"), pick(c.Acts, "tc-acts"), pick(c.Name, "tc-table__name"),
-		pick(c.Unset, "is-ph"), col.Rank.class(), rank(col.Secondary)}
+		pick(c.Unset, "is-ph"), col.Rank.class(), rank(col.Secondary), pick(col.Main, "tc-table__main")}
 	if c.Width != ColAuto {
 		out = append(out, c.Width.class())
 	}

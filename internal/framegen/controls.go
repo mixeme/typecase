@@ -892,6 +892,8 @@ func (g *gen) linePart(x *El) string {
 		return g.dimx(x)
 	case x.Has("tc-mark"):
 		return g.mark(x)
+	case x.Has("tc-say"):
+		return g.say(x)
 	case x.Has("tc-mono"):
 		return g.mono(x)
 	case x.Has("tc-tag"):

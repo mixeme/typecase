@@ -8,6 +8,9 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "Run"},
+		w.MenuItem{Label: "Edit"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11}, Label: "Синк-ап по релизу", Href: "/app/calendar/nextcloud/rabota/aa01"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11}, Label: "Ретро спринта", Href: "/app/calendar/nextcloud/rabota/aa02"},
@@ -240,7 +243,7 @@ var _ = add(
 		w.MenuItem{Label: "radicale · vps"}}, Width: w.MenuWidth212}, "s-profile-13", "tc-menu", 1),
 	overlay("danger", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "doc", Label: "Open"},
-		w.MenuItem{Icon: "down", Label: "Download"},
+		w.MenuItem{Icon: "download", Label: "Download"},
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},

@@ -1309,7 +1309,7 @@ func Publish9() Screen {
 					w.Banner{
 						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
 						Badge: &w.Badge{Label: "read-only"},
-						End:   w.Push{Items: []w.PushPart{w.Button{Label: "Download", Icon: "down", Kind: w.ButtonPrimary}}},
+						End:   w.Push{Items: []w.PushPart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary}}},
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle19},
@@ -1338,7 +1338,7 @@ func Publish10() Screen {
 							Place: w.Pushed,
 							Items: []w.LinePart{
 								w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}},
-								w.Button{Label: "Download", Icon: "down"},
+								w.Button{Label: "Download", Icon: "download"},
 							},
 						},
 					},

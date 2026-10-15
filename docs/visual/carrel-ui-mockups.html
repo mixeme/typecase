@@ -201,7 +201,7 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
 .tc-root ul{list-style:none}
 .tc-root a{color:inherit;text-decoration:none}
-.tc-root code,.tc-root .tc-mono{font-family:var(--tc-font-mono);font-size:11.5px}
+.tc-root code,.tc-root .tc-mono,.tc-root .tc-say--mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .tc-root svg{display:block}
 [data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
   --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
@@ -348,7 +348,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-bar .tc-bar__more + .tc-menu,.tc-docbar .tc-bar__more + .tc-menu{display:none}
 /* .tc-bar__sep и .tc-range — элементы панели: диапазон уходит в «...» целиком.
    В панели сжимается только поле, не ниже 96 px; переключатель не сжимается. */
-.tc-bar > .tc-in{min-width:88px;overflow:hidden;white-space:nowrap}
+/* Поле со значком поиска внутри (фильтр) держит свой минимум само (Р-65), где бы ни стояло:
+   сначала сжимается до него, растёт до ширины своего класса — так ряд переносится, только
+   когда и минимума не хватает. Класс размера фильтра поэтому держит и max-width. */
+.tc-in:has(> .tc-q){min-width:88px;overflow:hidden;white-space:nowrap;flex:1 1 88px}
 .tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
 .tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
 .tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}
@@ -446,6 +449,13 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-error{border-color:var(--tc-danger)}
 .tc-in:disabled{opacity:.45;cursor:default}
 .tc-in[type=date],.tc-in[type=time]{-webkit-appearance:none;appearance:none}
+/* Поле даты и времени само держит свой минимум (Р-65): его естественная ширина —
+   значение со значком календаря; ни контекст, ни класс размера его не сжимают. */
+.tc-in[type=date],.tc-in[type=time],.tc-in[type=datetime-local]{min-width:max-content}
+.tc-say__short{display:none}
+/* Выбор с многоточием, поле тегов и строка поиска сжимаются сами: у выбора обрезка
+   объявлена многоточием, теги переносятся, значение поиска прокручивается (Р-65). */
+.tc-in.is-pick,.tc-in.tc-in--cols,.tc-search{min-width:0}
 .tc-field > .tc-in[type=date],.tc-field > .tc-in[type=time]{width:100%}
 .tc-in.is-area{height:auto;min-height:76px;align-items:flex-start;padding:7px 9px;line-height:1.5;
   white-space:pre-wrap;overflow:visible;text-overflow:clip}
@@ -634,6 +644,11 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
 .tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
 .tc-table .tc-acts{justify-content:flex-start;flex-wrap:nowrap;white-space:nowrap}
+/* Ячейка кнопок строки остаётся ячейкой таблицы (Р-65): с display:flex она выпадала
+   из таблицы, и линия строки на ней обрывалась. Кнопки стоят в строку с отступом. */
+.tc-table td.tc-acts{display:table-cell;vertical-align:middle}
+.tc-table td.tc-acts > * + *{margin-left:6px}
+.tc-table td.tc-acts > *{vertical-align:middle}
 /* «⋯» строки — голая кнопка или раскрытие с меню (задача 117): на широкой не видно ни того, ни другого. */
 .tc-acts__more,.tc-acts > .tc-drop:has(> .tc-acts__more){display:none}
 @container tcbox (max-width:640px){
@@ -952,7 +967,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* --fit: break-word, не anywhere — иначе «4 calendars · 1 book» по буквам. */
   .tc-table--fit td.tc-mono,.tc-table--fit td .tc-mono{overflow-wrap:break-word}
   .tc-table--fit .tc-acts{justify-content:flex-start}
-  .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
   .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) 80px 140px}
   .tc-row--excerpt > :nth-child(3){display:none}
   .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr)}
@@ -1015,16 +1029,43 @@ label.tc-menu__item{position:relative;cursor:pointer}
 }
 /* Телефон (≤460), третий ранг бара (Р-4): is-3rd уходит под «⋯» вслед за is-2nd.
    В меню «⋯» у него двойник с тем же is-3rd — виден только здесь, пока сам элемент
-   спрятан. Кнопка бара со складной подписью остаётся значком; поля диапазона в баре
-   сжимаются, а не выдавливают «⋯». Решение человека 2026-09-26: без прокрутки. */
+   спрятан. Кнопка бара со складной подписью остаётся значком. Бар своих элементов
+   не сжимает и краем не режет (Р-65): бар с тем, что в «⋯» не уходит, — диапазоном,
+   полем, поиском, — переносит не поместившееся на следующую строку (бар из кнопок и
+   переключателей держится рангами и «⋯»: перенос в нём раздувал коробку с открытым
+   меню на высоту меню); так же панель документа, диапазон внутри себя,
+   кнопки строки таблицы в своей ячейке и подвал листа. Решение человека 2026-09-26: без прокрутки. */
 @container tcbox (max-width:460px){
   .tc-bar > .is-3rd,.tc-bar__right > .is-3rd,.tc-docbar > .is-3rd{display:none}
   .tc-bar:has(> .is-3rd) .tc-bar__more,.tc-bar:has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
   .tc-docbar:has(.is-3rd) .tc-bar__more,.tc-docbar:has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar .tc-btn > .tc-btn__label{display:none}
-  .tc-bar > .tc-range{flex:0 1 auto;min-width:0}
-  .tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}
+  .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
+  .tc-docbar{flex-wrap:wrap}
+  .tc-bar > .tc-range{flex-wrap:wrap}
+  .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
+  .tc-sheet__foot{flex-wrap:wrap}
+  /* строка хода: кнопка со складной подписью остаётся значком, как в баре */
+  .tc-runbar .tc-btn > .tc-btn__label{display:none}
+  /* Таблица с главной колонкой — карточки (Р-66): имя и «⋯» первой строкой, под ними
+     главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯». */
+  .tc-table:has(td.tc-table__main),.tc-table:has(td.tc-table__main) > tbody{display:block;width:100%}
+  .tc-table:has(td.tc-table__main) > thead{display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:4px;
+    align-items:center;padding:10px var(--tc-page-gutter-narrow);border-bottom:.5px solid var(--tc-hair)}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td{display:none;padding:0;border:0}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-table__file),
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name{display:block;grid-column:2;grid-row:1;min-width:0}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > :not(.tc-acts__more):not(.tc-drop:has(> .tc-acts__more)){display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts .tc-acts__more,
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .tc-drop:has(> .tc-acts__more){display:inline-flex}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main{display:block;grid-column:2 / 4;grid-row:2;font-size:12px;white-space:normal}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main::before{content:attr(data-tc-label) " · ";color:var(--tc-dusty);font-family:var(--tc-font-sans)}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br{display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br + .tc-dim::before{content:" · "}
 }
 @container tcbox (min-width:461px){
   .tc-menu:not(.tc-bar--wide .tc-menu) .is-3rd{display:none}
@@ -1051,7 +1092,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
   .tc-nav .tc-num{display:none}
   /* Крылья brand/actions остаются flex:1 1 0 — поиск по центру, сжимается. */
-  .tc-top .tc-search{flex:0 1 560px;width:auto;min-width:0;max-width:560px}
+  .tc-top .tc-search{flex:0 1 560px;width:auto;max-width:560px}
 }
 /* Ящик: ≤640. Состояние — на детях корня; вид потомков — style(), иначе
    панель 440 px и лист 560 px на широком корне тоже попали бы в max-width:640. */
@@ -1104,13 +1145,21 @@ label.tc-menu__item{position:relative;cursor:pointer}
     width:38px;height:38px;padding:0;gap:0;margin-left:auto;overflow:hidden;position:relative;
     background:var(--tc-surface)}
   .tc-top .tc-search svg{width:20px;height:20px;flex:none}
-  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;min-width:0;height:auto;padding:0;border:0}
+  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;height:auto;padding:0;border:0}
   /* Запрос открыт (крестик очистки) — поле остаётся полем. */
-  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
+  .tc-top .tc-search.tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
     padding:0 9px;justify-content:flex-start;gap:7px;margin-left:0;overflow:visible}
-  .tc-top .tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
+  .tc-top .tc-search.tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
     padding:0 28px 0 36px;flex:none}
-  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
+  .tc-top .tc-search.tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
+  .tc-top .tc-search.tc-search:has(> svg + svg) svg + svg{margin-left:auto}
+  /* слова в двух длинах: на телефоне — короткие (Р-65) */
+  .tc-say__full{display:none}
+  .tc-say__short{display:inline}
+  /* Запрос открыт, а места нет: поиск встаёт второй строкой шапки во всю ширину, а не
+     сжимается до значка с крестиком (Р-65). */
+  .tc-top:has(.tc-search > svg + svg){flex-wrap:wrap;height:auto;row-gap:8px}
+  .tc-top .tc-search.tc-search:has(> svg + svg){order:9;flex:1 1 100%;max-width:none}
   .tc-top .tc-brand{flex:1 1 auto;min-width:0}
   .tc-top .tc-brand:has(.tc-brand__logo){flex:none;width:auto}
   /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
@@ -1118,7 +1167,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
   .tc-sheet{width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
-  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
@@ -1142,6 +1191,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
   .tc-nav--bottom svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:1}
   .tc-btn,.tc-in,.tc-seg,.tc-segfold__current{height:38px}
+  /* маленькая кнопка на телефоне — той же мишенью, что остальные (Р-66) */
+  .tc-btn.is-sm.is-sm{height:38px;min-width:38px;padding:0 10px;font-size:12.5px;justify-content:center}
   .tc-segfold__item{height:40px}
   .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
   .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn,
@@ -1175,7 +1226,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
   .tc-sheet{width:100%;max-width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
-  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
@@ -1476,10 +1527,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-ico--sq19.tc-ico--sq19{height:19px;width:19px}
 .tc-in--w190.tc-in--w190{width:190px}
 .tc-in--w52{width:52px}
-.tc-in--t12-w200.tc-in--t12-w200{font-size:12px;width:200px}
+.tc-in--t12-w200.tc-in--t12-w200{font-size:12px;width:200px;max-width:200px}
 .tc-in--body-sm.tc-in--body-sm{min-height:132px;font-size:14px;line-height:1.6}
 .tc-in--t12-w240.tc-in--t12-w240{font-size:12px;width:240px}
-.tc-in--h26-w190.tc-in--h26-w190{height:26px;width:190px}
+.tc-in--h26-w190.tc-in--h26-w190{height:26px;width:190px;max-width:190px}
 .tc-in--fill.tc-in--fill{flex:1}
 .tc-in--dusty.tc-in--dusty{color:var(--tc-dusty)}
 .tc-in--t11-5.tc-in--t11-5{font-size:11.5px}
@@ -1498,7 +1549,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--h26-w120.tc-in--h26-w120{height:26px;width:120px}
 .tc-in--minh104-t13-5.tc-in--minh104-t13-5{min-height:104px;font-size:13.5px}
 .tc-in--t12-fill.tc-in--t12-fill{font-size:12px;flex:1}
-.tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px}
+.tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px;max-width:220px}
 .tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
 /* Плашки колонками — участники события (задача 77): знакомый — меткой книги и именем, незнакомый — адресом; строка набора — в следующей клетке. */
 .tc-in--cols.tc-in--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 10px;align-items:center;justify-items:start;padding:5px 8px}
@@ -1507,12 +1558,12 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Снятая крестиком плашка без сценария: не уйдёт с формой и так и выглядит. */
 .tc-tag--pill:has(> .tc-check__box:not(:checked)){text-decoration:line-through;opacity:.55}
 .tc-drop:has(> .tc-in--cols){display:flex;flex-direction:column;align-items:stretch;gap:4px}
-.tc-drop > .tc-in--cols{flex:1 1 auto;min-width:0}
+.tc-drop > .tc-in--cols{flex:1 1 auto}
 .tc-sec__list--cols.tc-sec__list--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 18px}
 .tc-sec__list--cols > li{display:flex;align-items:center;gap:5px;min-width:0;white-space:nowrap}
 /* Метка — по середине прописных, а не всей строки с выносными: на 1 px выше. */
 .tc-sec__list--cols > li > .tc-mark{transform:translateY(-1px)}
-.tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px}
+.tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px;max-width:200px}
 .tc-in--title.tc-in--title{height:auto;font-family:var(--tc-font-serif);font-size:24px;padding:7px 12px}
 .tc-in--body.tc-in--body{min-height:260px;font-size:14.5px;line-height:1.7;padding:14px 16px}
 .tc-doc__task.tc-doc__task{align-items:baseline;display:flex;gap:9px}
@@ -1783,7 +1834,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-doc__bullets.tc-doc__bullets{font-size:14px;line-height:1.6;padding-left:18px;list-style:disc}
 .tc-usermenu.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-dim.tc-dim{color:var(--tc-dusty)}
-/* names-without-rule: tc-shell tc-row__lead tc-row__due tc-row__date tc-row__size
+/* names-without-rule: tc-shell tc-say tc-say__full tc-row__lead tc-row__due tc-row__date tc-row__size
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
    tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item
@@ -1978,6 +2029,8 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.6 7l8.4 6 8.4-6"/></symbol>
   <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M5 17l4.5-4.5 3 3L16 12l3 3"/></symbol>
   <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/></symbol>
+  <symbol id="i-restore" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M5 15.5V19h14v-3.5"/></symbol>
   <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 4h4M6.5 7l1 13h9l1-13"/></symbol>
   <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></symbol>
   <symbol id="i-move" viewBox="0 0 24 24"><path d="M4 12h13"/><path d="M13 7l5 5-5 5"/></symbol>
@@ -2441,7 +2494,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <div class="tc-bar tc-bar--sel">
     <span class="tc-bar__count">1 selected</span><span class="tc-mono tc-mono--muted">412 KB</span>
     <span class="tc-bar__sep"></span>
-    <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+    <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
     <button class="tc-btn" title="Rename" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
     <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
     <span class="tc-bar__right"><button class="tc-btn is-sm" type="button">Clear selection</button></span>
@@ -2468,7 +2521,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <div class="tc-bar tc-bar--sel">
     <span class="tc-bar__count">1 selected</span><span class="tc-mono tc-mono--muted">412 KB</span>
     <span class="tc-bar__sep"></span>
-    <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+    <button class="tc-btn" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
     <button class="tc-btn" title="Rename" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
     <button class="tc-btn is-danger-solid" title="Delete" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
     <span class="tc-bar__right"><button class="tc-btn is-sm" type="button">Clear selection</button></span>
@@ -2607,7 +2660,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w212">
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-doc"/></svg>Open</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Download</button>
+        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-download"/></svg>Download</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-pencil"/></svg>Rename</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button>
@@ -8491,7 +8544,7 @@ Read  2 min ago</div>
         <div class="tc-bar tc-bar--sel">
           <span class="tc-bar__count">1 selected</span><span class="tc-mono tc-mono--muted">412 KB</span>
           <span class="tc-bar__sep"></span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Rename" type="submit" form="files-sel" name="op" value="rename"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
@@ -8521,19 +8574,19 @@ Read  2 min ago</div>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="2026-08-04-whiteboard.jpg" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
               <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="2026-08-10-sync-board.png" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
               <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="release-checklist.md" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/release-checklist.md">release-checklist.md</a></span></td>
               <td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono is-2nd tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="смета-подрядчик.pdf" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
               <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
@@ -8548,7 +8601,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-pad"><div class="tc-thumb tc-thumb--preview"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><use href="#i-img"/></svg></div></div>
         <div class="tc-line tc-line--gap-6 tc-side__acts">
-          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Download</button>
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Download</button>
           <button class="tc-btn" type="button">Open</button>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg>Rename</button>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg>Move</button>
@@ -8620,7 +8673,7 @@ Read  2 min ago</div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w212">
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-doc"/></svg>Open</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-down"/></svg>Download</button>
+        <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-download"/></svg>Download</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-pencil"/></svg>Rename</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-move"/></svg>Move</button>
         <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-dup"/></svg>Copy</button>
@@ -9010,7 +9063,7 @@ Read  2 min ago</div>
         <div class="tc-bar tc-bar--sel">
           <span class="tc-bar__count">3 selected</span><span class="tc-mono tc-mono--muted">4.4 MB</span>
           <span class="tc-bar__sep"></span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn is-off" title="Rename" type="submit" form="files-sel" name="op" value="rename"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
@@ -9040,19 +9093,19 @@ Read  2 min ago</div>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="2026-08-04-whiteboard.jpg" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
               <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="2026-08-10-sync-board.png" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
               <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="release-checklist.md" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/release-checklist.md">release-checklist.md</a></span></td>
               <td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono is-2nd tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="смета-подрядчик.pdf" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
               <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
@@ -9156,7 +9209,7 @@ Read  2 min ago</div>
         <div class="tc-bar tc-bar--sel">
               <span class="tc-bar__count">3 selected</span><span class="tc-mono tc-mono--muted">4.4 MB</span>
               <span class="tc-bar__sep"></span>
-              <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+              <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
               <button class="tc-btn is-off" title="Rename" type="submit" form="files-sel" name="op" value="rename"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
               <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
               <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
@@ -9186,19 +9239,19 @@ Read  2 min ago</div>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="2026-08-04-whiteboard.jpg" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg">2026-08-04-whiteboard.jpg</a></span></td>
               <td class="tc-mono tc-table__n3">2.8 MB</td><td class="tc-mono is-2nd tc-table__n4">image/jpeg</td><td class="tc-mono">2026-08-04 17:03</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="2026-08-10-sync-board.png" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png">2026-08-10-sync-board.png</a></span></td>
               <td class="tc-mono tc-table__n3">412 KB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-08-10 11:07</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr class="is-sel"><td><input class="tc-tickrow__tick" type="checkbox" form="files-sel" name="item" value="release-checklist.md" aria-label="Pick" checked></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/release-checklist.md">release-checklist.md</a></span></td>
               <td class="tc-mono tc-table__n3">3 KB</td><td class="tc-mono is-2nd tc-table__n4">text/markdown</td><td class="tc-mono">2026-08-09 18:44</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="смета-подрядчик.pdf" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td>
               <td class="tc-mono tc-table__n3">1.2 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-08-05 14:20</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
@@ -9300,7 +9353,7 @@ Read  2 min ago</div>
         <div class="tc-bar tc-bar--sel">
           <span class="tc-bar__count">1 selected</span><span class="tc-mono tc-mono--muted">2.8 MB</span>
           <span class="tc-bar__sep"></span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Rename" type="submit" form="files-sel" name="op" value="rename"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
@@ -9465,7 +9518,7 @@ Read  2 min ago</div>
           <div class="tc-head__titles"><div class="tc-head__title">«ковал»</div><div class="tc-head__sub">14 of 14 collections · 7 records · 1 source timed out</div></div>
           <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All</button><button class="tc-seg__opt" type="button">Contacts</button><button class="tc-seg__opt" type="button">Events</button><button class="tc-seg__opt" type="button">Tasks</button><button class="tc-seg__opt" type="button">Notes</button><button class="tc-seg__opt" type="button">Files</button></span></div>
         </div>
-        <div class="tc-runbar" data-part="results"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="100%"></i></span>Done · 13 of 14 sources answered · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">REPORT /dav.php/calendars/mix/obshchiy/ → no answer in 10 s; the search went on without it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono">1.8 s</span><span class="tc-push tc-line tc-line--gap-8"><span class="tc-mono">answered 11:42</span><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Search again</button></span></div>
+        <div class="tc-runbar" data-part="results"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="100%"></i></span><span class="tc-say"><span class="tc-say__full">Done · 13 of 14 sources answered</span><span class="tc-say__short">13 of 14</span></span> · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">REPORT /dav.php/calendars/mix/obshchiy/ → no answer in 10 s; the search went on without it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono">1.8 s</span><span class="tc-push tc-line tc-line--gap-8"><span class="tc-say tc-say--mono"><span class="tc-say__full">answered 11:42</span><span class="tc-say__short">11:42</span></span><button class="tc-btn is-sm" title="Search again" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg><span class="tc-btn__label">Search again</span></button></span></div>
         <div class="tc-list__group" data-part="results"><span class="tc-rubric">Contacts</span><span class="tc-num">2</span></div>
         <div class="tc-list" data-part="results">
           <div class="tc-row tc-row--avatarcols">
@@ -9526,12 +9579,12 @@ Read  2 min ago</div>
             <span class="tc-row__cell tc-row__source">sftpgo · vps · Documents</span>
           </div>
         </div>
-        <div class="tc-msg" data-part="results">Files are searched by name: <span class="tc-mono">PROPFIND</span> returns names anyway, and walking a folder costs one request per folder. Carrel does not look inside files — and says so here, so that “nothing found” is not read as “not in the files”.</div>
+        <div class="tc-msg" data-part="results">Files are found by their names; what is inside them is not searched.</div>
       </div>
     </div>
   </div>
 </div>
-<figcaption><b>Выдача показывает все пять родов записей их собственным видом,</b> а не одной универсальной строкой: контакт — с аватаром и телефоном, событие — временем, задача — флажком и сроком, заметка — абзацем, файл — именем и размером. Фильтр сверху называет те же пять, включая Files. <b>Файлы участвуют в поиске</b> — по имени; содержимое документов не индексируется и не будет, потому что Carrel ничего у себя не хранит. Поиск перестаёт быть отдельной страницей с полем ввода: запрос вводится в шапке из любого места, а этот экран — только результаты. Совпадение подсвечено начертанием, а не цветом — цвет в строке зарезервирован за источником. Источник, не ответивший вовремя, помечен в рейле значком, причина — в его подсказке; в полосе опроса — красная «1 failed», её меню называет, что спросили и что ответил сервер, и даёт «Retry» этому источнику (решение 02.10 об отказах, задача 113).<br><br><b>Выдача помечена временем, и её можно собрать заново.</b> «Answered 11:42» и <b>Search again</b> стоят в полосе опроса, потому что относятся ко всему обходу, а не к одному источнику: «Retry» у не ответившего спрашивает <i>его одного</i>, «Search again» идёт по всем четырнадцати заново. Разница видна на самом частом случае — человек вернулся к старому запросу через час: находки те же, что он видел, и это правильно, но сервер за час мог измениться, и знать, что перед тобой ответ часовой давности, надо до того, как на него положишься. Время в полосе отвечает на это раньше, чем возникнет вопрос.<br><br><b>Ни один раздел в рейле не подсвечен, и это не пропуск.</b> Выдача не раздел: она пересекает все сразу, и подсветить один значило бы соврать. Где человек находится, говорят три вещи — запрос остаётся набранным в поле шапки, пока открыта выдача; «Sources · 14 / 14» с числом находок у каждого источника; заголовок «ковал» над списком. Строки «Search» в рейле нет вовсе — <a href="#hints">почему, сказано ниже</a>.</figcaption>
+<figcaption><b>Выдача показывает все пять родов записей их собственным видом,</b> а не одной универсальной строкой: контакт — с аватаром и телефоном, событие — временем, задача — флажком и сроком, заметка — абзацем, файл — именем и размером. Фильтр сверху называет те же пять, включая Files. <b>Файлы участвуют в поиске</b> — по имени; содержимое документов не индексируется и не будет, потому что Carrel ничего у себя не хранит. Поиск перестаёт быть отдельной страницей с полем ввода: запрос вводится в шапке из любого места, а этот экран — только результаты. Совпадение подсвечено начертанием, а не цветом — цвет в строке зарезервирован за источником. Источник, не ответивший вовремя, помечен в рейле значком, причина — в его подсказке; в полосе опроса — красная «1 failed», её меню называет, что спросили и что ответил сервер, и даёт «Retry» этому источнику (решение 02.10 об отказах, задача 113).<br><br><b>Выдача помечена временем, и её можно собрать заново.</b> «Answered 11:42» и <b>Search again</b> стоят в полосе опроса, потому что относятся ко всему обходу, а не к одному источнику: «Retry» у не ответившего спрашивает <i>его одного</i>, «Search again» идёт по всем четырнадцати заново. Разница видна на самом частом случае — человек вернулся к старому запросу через час: находки те же, что он видел, и это правильно, но сервер за час мог измениться, и знать, что перед тобой ответ часовой давности, надо до того, как на него положишься. Время в полосе отвечает на это раньше, чем возникнет вопрос.<br><br><b>Ни один раздел в рейле не подсвечен, и это не пропуск.</b> Выдача не раздел: она пересекает все сразу, и подсветить один значило бы соврать. Где человек находится, говорят три вещи — запрос остаётся набранным в поле шапки, пока открыта выдача; «Sources · 14 / 14» с числом находок у каждого источника; заголовок «ковал» над списком. Строки «Search» в рейле нет вовсе — <a href="#hints">почему, сказано ниже</a>. <b>Строка о файлах — для человека:</b> ищется только имя, внутрь не заглядывают, — чтобы «ничего не найдено» не прочли как «в файлах этого нет». Почему так (имена и так приходят ответом <code>PROPFIND</code>, а обход папок стоит запроса на папку) — дело сервера, не экрана.</figcaption>
 </figure>
 
 
@@ -14566,10 +14619,10 @@ Read  2 min ago</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title">Backup</div><div class="tc-head__sub">Three jobs · their own sources, destinations and triggers</div></div>
-          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New job</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg>Restore</button></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New job</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore</button></div>
         </div>
         <table class="tc-table tc-table--wide">
-          <thead><tr><th class="tc-table__col--tick"></th><th>Job</th><th class="is-2nd tc-table__n3">What it copies</th><th class="tc-table__n4 is-2nd">Where to</th><th>When</th><th class="is-2nd">Keep</th><th>Last backup</th><th class="tc-table__col--time"></th></tr></thead>
+          <thead><tr><th class="tc-table__col--tick"></th><th>Job</th><th class="is-2nd tc-table__n3">What it copies</th><th class="tc-table__n4 is-2nd">Where to</th><th>When</th><th class="is-2nd">Keep</th><th class="tc-table__main">Last backup</th><th class="tc-table__col--time"></th></tr></thead>
           <tbody>
             <tr>
               <td><button class="tc-tickrow__tick" type="button"></button></td>
@@ -14578,8 +14631,8 @@ Read  2 min ago</div>
               <td class="tc-mono tc-table__n4 is-2nd">sftpgo · vps · Documents<br><span class="tc-dim">/backup/work</span></td>
               <td class="tc-mono">cron · 03:00<br><span class="tc-dim">external trigger</span></td>
               <td class="tc-mono is-2nd">14</td>
-              <td class="tc-mono">2026-08-16 03:10<br><span title="Read back from the destination; checksum matched" class="tc-dim">18.4 MB · verified</span></td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
+              <td class="tc-mono tc-table__main" data-tc-label="Last backup">2026-08-16 03:10<br><span title="Read back from the destination; checksum matched" class="tc-dim">18.4 MB · verified</span></td>
+              <td class="tc-acts"><button class="tc-btn is-sm is-2nd" type="button">Run</button><button class="tc-btn is-sm is-2nd" type="button">Edit</button><details class="tc-drop"><summary class="tc-btn is-sm tc-btn--padx3 tc-acts__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="button" role="menuitem">Run</button><button class="tc-menu__item" type="button" role="menuitem">Edit</button></div></details></td>
             </tr>
             <tr>
               <td><button class="tc-tickrow__tick" type="button"></button></td>
@@ -14588,8 +14641,8 @@ Read  2 min ago</div>
               <td class="tc-mono tc-table__n4 is-2nd">nextcloud · Files<br><span class="tc-dim">/carrel-backup</span></td>
               <td class="tc-mono">on sign-in<br><span class="tc-dim">if older than 7 days</span></td>
               <td class="tc-mono is-2nd">8</td>
-              <td class="tc-mono">2026-08-14 09:12<br><span title="Read back from the destination; checksum matched" class="tc-dim">2.1 GB · verified</span></td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
+              <td class="tc-mono tc-table__main" data-tc-label="Last backup">2026-08-14 09:12<br><span title="Read back from the destination; checksum matched" class="tc-dim">2.1 GB · verified</span></td>
+              <td class="tc-acts"><button class="tc-btn is-sm is-2nd" type="button">Run</button><button class="tc-btn is-sm is-2nd" type="button">Edit</button><details class="tc-drop"><summary class="tc-btn is-sm tc-btn--padx3 tc-acts__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="button" role="menuitem">Run</button><button class="tc-menu__item" type="button" role="menuitem">Edit</button></div></details></td>
             </tr>
             <tr class="tc-table__row--dim">
               <td><button class="tc-tickrow__tick is-off" type="button"></button></td>
@@ -14598,8 +14651,8 @@ Read  2 min ago</div>
               <td class="tc-mono tc-table__n4 is-2nd">download in browser<br><span class="tc-dim">nothing is written</span></td>
               <td class="tc-mono">on demand</td>
               <td class="tc-mono is-2nd">—</td>
-              <td class="tc-mono tc-mono--dusty">never</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Run</button><button class="tc-btn is-sm" type="button">Edit</button></td>
+              <td class="tc-mono tc-mono--dusty tc-table__main" data-tc-label="Last backup">never</td>
+              <td class="tc-acts"><button class="tc-btn is-sm is-2nd" type="button">Run</button><button class="tc-btn is-sm is-2nd" type="button">Edit</button><details class="tc-drop"><summary class="tc-btn is-sm tc-btn--padx3 tc-acts__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="button" role="menuitem">Run</button><button class="tc-menu__item" type="button" role="menuitem">Edit</button></div></details></td>
             </tr>
           </tbody>
         </table>
@@ -14609,11 +14662,11 @@ Read  2 min ago</div>
           <thead><tr><th>When</th><th>Job</th><th class="tc-table__n3 is-2nd">Size</th><th class="tc-table__n4">Collections</th><th>Verified</th><th class="is-2nd">Trigger</th><th class="tc-table__col--time"></th></tr></thead>
           <tbody>
             <tr><td class="tc-mono">2026-08-16 03:10</td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3 is-2nd">18.4 MB</td><td class="tc-mono tc-table__n4">3 / 3</td><td>read back</td><td class="tc-mono is-2nd">cron</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
-            <tr><td class="tc-mono">2026-08-15 03:10</td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3 is-2nd">18.2 MB</td><td class="tc-mono tc-table__n4 tc-table__n4--danger">2 / 3</td><td class="tc-dim--danger">baikal · Общий: 401</td><td class="tc-mono is-2nd">cron</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></td></tr>
+            <tr><td class="tc-mono">2026-08-15 03:10</td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3 is-2nd">18.2 MB</td><td class="tc-mono tc-table__n4 tc-table__n4--danger">2 / 3</td><td>read back · <span class="tc-dim--danger" title="baikal · Общий: the server answered 401, so this collection is not in the archive. The other two were read back.">1 not copied</span></td><td class="tc-mono is-2nd">cron</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></td></tr>
             <tr><td class="tc-mono">2026-08-14 09:12</td><td>Личное на домашний диск</td><td class="tc-mono tc-table__n3 is-2nd">2.1 GB</td><td class="tc-mono tc-table__n4">2 / 2 + 1 240 files</td><td>read back</td><td class="tc-mono is-2nd">on sign-in</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button">Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore</button><button class="tc-btn is-sm tc-btn--padx3" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></td></tr>
           </tbody>
         </table>
       </div>
@@ -15005,7 +15058,7 @@ jobs:
       <div class="tc-main">
       <div class="tc-head">
         <div class="tc-head__titles"><div class="tc-head__title">Backup</div><div class="tc-head__sub">No jobs yet</div></div>
-        <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New job</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg>Restore</button></div>
+        <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New job</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore</button></div>
       </div>
       <div class="tc-empty">
         Carrel copies raw <span class="tc-mono">.ics</span>, <span class="tc-mono">.vcf</span> and files to storage of your own, with a manifest and a read-back check. Nothing is kept here.
@@ -15124,12 +15177,12 @@ jobs:
       <div class="tc-main"><form class="tc-dialog is-wide" action="/app/settings/backup/restore/match" method="post">
       <div class="tc-steps"><span class="tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore from 2026-08-14</div><div class="tc-head__sub">Job «Личное на домашний диск» · manifest read · 4 collections · 1 214 records · <span class="tc-mono">carrel-backup/2026-08-14T09-12.zip</span></div></div>
-        <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="submit" name="op" value="restore">Restore 3 collections</button></div>
+        <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="submit" name="op" value="restore"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore 3 collections</button></div>
       </div>
       <div class="tc-bar tc-bar--sel">
         <span class="tc-bar__count">3 selected</span>
         <span class="tc-bar__sep"></span>
-        <button class="tc-btn" type="submit" name="op" value="into"><svg viewBox="0 0 24 24"><use href="#i-back"/></svg>Restore into</button>
+        <button class="tc-btn" type="submit" name="op" value="into"><svg viewBox="0 0 24 24"><use href="#i-restore"/></svg>Restore into</button>
         <button class="tc-btn" type="submit" name="op" value="skip">Skip</button>
         <span class="tc-bar__right"><button class="tc-btn is-sm tc-js" type="button">Select all</button></span>
       </div>
@@ -16012,7 +16065,7 @@ jobs:
         <div class="tc-line tc-line--gap-12 tc-main__banner--12">
           <svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
           <span class="tc-badge">read-only</span>
-          <span class="tc-push"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Download</button></span>
+          <span class="tc-push"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Download</button></span>
         </div>
         <div class="tc-head tc-head--padb6">
           <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t19">2026-08-10-sync-board.png</div>
@@ -16040,7 +16093,7 @@ jobs:
           <span class="tc-badge">read-only</span>
           <span class="tc-push tc-line tc-line--gap-6">
             <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Full width</button><button class="tc-seg__opt" type="button">Reading width</button></span>
-            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Download</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Download</button>
           </span>
         </div>
         <div class="tc-head tc-head--padb6">
@@ -18877,17 +18930,17 @@ Read  2 min ago · not changed on server</div>
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg>Add to calendar</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-con"/></svg><span class="tc-table__filename">Пётр Смирнов</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.vcf · 3 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-con"/></svg>Add to address book</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">правки-сборник-v3.pdf</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">2.4 MB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Save to files</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
               </div>
             </div>
           </div>
@@ -19051,17 +19104,17 @@ Read    2 min ago</div>
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg>Add to calendar</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-con"/></svg><span class="tc-table__filename">Пётр Смирнов</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.vcf · 3 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-con"/></svg>Add to address book</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">правки-сборник-v3.pdf</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">2.4 MB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Save to files</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
               </div>
             </div>
           </div>
@@ -19332,7 +19385,7 @@ Read    2 min ago</div>
           <div class="tc-head__titles"><div class="tc-head__title">«смета»</div><div class="tc-head__sub">10 of 11 sources · 7 found · 1 source timed out</div></div>
           <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All</button><button class="tc-seg__opt" type="button">Contacts</button><button class="tc-seg__opt" type="button">Events</button><button class="tc-seg__opt" type="button">Tasks</button><button class="tc-seg__opt" type="button">Notes</button><button class="tc-seg__opt" type="button">Files</button><button class="tc-seg__opt" type="button">Mail</button></span></div>
         </div>
-        <div class="tc-runbar" data-part="results"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="100%"></i></span>Done · 9 of 10 sources answered<span class="tc-mono">2.4 s</span><span class="tc-push tc-line tc-line--gap-8"><span class="tc-mono">answered 11:42</span><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>Search again</button></span></div>
+        <div class="tc-runbar" data-part="results"><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="100%"></i></span>Done · 9 of 10 sources answered<span class="tc-mono">2.4 s</span><span class="tc-push tc-line tc-line--gap-8"><span class="tc-say tc-say--mono"><span class="tc-say__full">answered 11:42</span><span class="tc-say__short">11:42</span></span><button class="tc-btn is-sm" title="Search again" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg><span class="tc-btn__label">Search again</span></button></span></div>
         <div class="tc-list__group" data-part="results"><span class="tc-rubric">Tasks</span><span class="tc-num">1</span></div>
         <div class="tc-list" data-part="results">
           <div class="tc-row tc-row--tickmarkcols">
@@ -19490,17 +19543,17 @@ Read    2 min ago</div>
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg>Add to calendar</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-con"/></svg><span class="tc-table__filename">Пётр Смирнов</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.vcf · 3 KB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-con"/></svg>Add to address book</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
                 <div class="tc-line tc-line--gap-9 tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">правки-сборник-v3.pdf</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">2.4 MB</span>
                   <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Save to files</button>
-                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Download" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></div>
               </div>
             </div>
           </div>
@@ -22967,7 +23020,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-bar tc-bar--sel tc-nojs">
           <span class="tc-bar__count">With the ticked</span>
           <span class="tc-bar__sep"></span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
         </div>
         <div class="tc-bar">
@@ -22987,11 +23040,11 @@ dav: HTTP 503: the server is busy</div></div>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="прайс-2026.pdf" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/public/прайс-2026.pdf">прайс-2026.pdf</a></span></td>
               <td class="tc-mono tc-table__n3">1.1 MB</td><td class="tc-mono is-2nd tc-table__n4">application/pdf</td><td class="tc-mono">2026-07-28 10:15</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></td></tr>
             <tr><td><input class="tc-tickrow__tick is-off" type="checkbox" form="files-sel" name="item" value="схема-проезда.png" aria-label="Pick"></td>
               <td><span class="tc-table__file"><svg><use href="#i-img"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/public/схема-проезда.png">схема-проезда.png</a></span></td>
               <td class="tc-mono tc-table__n3">4.2 MB</td><td class="tc-mono is-2nd tc-table__n4">image/png</td><td class="tc-mono">2026-06-02 16:40</td>
-              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button></td></tr>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button></td></tr>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/public/op" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
@@ -23381,7 +23434,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-bar tc-bar--sel">
           <span class="tc-bar__count">1 selected</span><span class="tc-mono tc-mono--muted">2.8 MB</span>
           <span class="tc-bar__sep"></span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
           <button class="tc-btn" title="Rename" type="submit" form="files-sel" name="op" value="rename"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
@@ -23682,7 +23735,7 @@ dav: HTTP 503: the server is busy</div></div>
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-bar tc-bar--sel">
           <span class="tc-bar__count tc-bar__count--t12-5">2 selected</span>
-          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg></button>
+          <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg></button>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg></button>
           <button class="tc-btn is-danger-solid" title="Delete" type="submit" form="files-sel" name="op" value="delete"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg></button>
           <button class="tc-btn tc-push tc-js" title="Clear selection" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>

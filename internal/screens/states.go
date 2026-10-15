@@ -5153,7 +5153,7 @@ func States34() Screen {
 							w.Button{
 								Folds: true,
 								Label: "Download",
-								Icon:  "down",
+								Icon:  "download",
 								Title: "Download",
 								Form:  "files-sel",
 								Name:  "op",
@@ -5222,7 +5222,7 @@ func States34() Screen {
 									{Parts: []w.CellPart{w.Text("1.1 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-07-28 10:15")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "Download"}}, Acts: true},
+									{Parts: []w.CellPart{w.Button{Icon: "download", Small: true, Title: "Download"}}, Acts: true},
 								},
 							},
 							{
@@ -5236,7 +5236,7 @@ func States34() Screen {
 									{Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-06-02 16:40")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Icon: "down", Small: true, Title: "Download"}}, Acts: true},
+									{Parts: []w.CellPart{w.Button{Icon: "download", Small: true, Title: "Download"}}, Acts: true},
 								},
 							},
 						},

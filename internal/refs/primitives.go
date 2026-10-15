@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("folds", w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"}, "s-find-1", "tc-btn", 5),
 	primitive("link", w.Button{Label: "Edit this copy", Kind: w.ButtonPrimary, Submit: true}, "s-contacts-32", "tc-btn", 1),
 	primitive("disabled-plain", w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", Submit: true, State: w.ButtonDisabled}, "s-admin-18", "tc-btn", 1),
 	primitive("copies", w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"}, "s-publish-1", "tc-btn", 3),
@@ -45,7 +46,7 @@ var _ = add(
 	primitive("primary", w.Button{Label: "Save", Kind: w.ButtonPrimary}, "components-9", "tc-btn", 1),
 	primitive("primary", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, "components-9", "tc-btn", 7),
 	primitive("variant", w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, "s-profile-1", "tc-btn", 10),
-	primitive("folds", w.Button{Label: "Download", Icon: "down", Folds: true, Title: "Download"}, "components-16", "tc-btn", 1),
+	primitive("folds", w.Button{Folds: true, Label: "Download", Icon: "download", Title: "Download"}, "components-16", "tc-btn", 1),
 	primitive("small", w.Button{Icon: "dots", Small: true, Title: "More"}, "s-contacts-1", "tc-btn", 16),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, "components-9", "tc-btn", 5),
 	primitive("danger", w.Button{Label: "Disconnect", Kind: w.ButtonDanger}, "components-9", "tc-btn", 6),
@@ -178,6 +179,9 @@ var _ = add(
 	primitive("mixed", dim(w.Dim11_5, w.DimWrap, w.Dot{Tone: w.DotAccent}, w.Text("server stopped")), "desktop-6", "tc-dim", 1),
 
 	// tc-mono
+	// words in two lengths (Р-65): the run of a search, its answer's time
+	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
+	primitive("mono", w.Say{Full: "answered 11:42", Short: "11:42", Mono: true}, "s-find-1", "tc-say", 2),
 	primitive("span", w.Mono{Text: "14 items · 38.2 MB"}, "components-16", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: ".vcf", Variant: w.Mono11}, "components-19", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "12", Variant: w.MonoTight}, "components-11", "tc-mono", 1),
@@ -207,6 +211,6 @@ func dim(size w.DimSize, variant w.DimVariant, parts ...w.Inline) w.Dim {
 func init() {
 	Widgets = append(Widgets,
 		w.Button{}, w.Close{}, w.Mark{}, w.Tag{}, w.Badge{}, w.Tick{}, w.Kbd{}, w.Num{},
-		w.Avatar{}, w.Dim{}, w.Mono{}, w.Plain{},
+		w.Avatar{}, w.Dim{}, w.Mono{}, w.Plain{}, w.Say{},
 	)
 }

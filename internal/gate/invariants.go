@@ -85,6 +85,7 @@ var invariantBindings = map[string][]string{
 	"Input":        {"gate:widget-fragments", "gate:enumerations", "gate:a11y", "gate:widget-fragments"},
 	"tc-plain":     {"gate:widget-fragments", "gate:widget-fragments"},
 	"tc-mono":      {"gate:enumerations", "gate:widget-fragments"},
+	"tc-say":       {"gate:css-from-mockup", "gate:widget-fragments"},
 	"tc-dim":       {"gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
 	"tc-avatar":    {"gate:widget-fragments", "gate:enumerations", "gate:widget-fragments"},
 	"tc-badge":     {"gate:inv-badge-has-text", "gate:inv-badge-not-link", "gate:widget-fragments"},

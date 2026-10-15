@@ -126,6 +126,8 @@ func (g *gen) runbar(e *El) string {
 				ps = append(ps, g.span(v, "FaceDanger"))
 			case v.Has("tc-dim--accent"):
 				ps = append(ps, g.span(v, "FaceAccent"))
+			case v.Has("tc-say"):
+				ps = append(ps, g.say(v))
 			case v.Has("tc-mono"):
 				ps = append(ps, g.mono(v))
 			case v.Has("tc-line"):
@@ -809,6 +811,13 @@ func (g *gen) cellPart(x *El) string {
 		return "w.TableFile{" + join(f, ", ") + "}"
 	case x.Tag == "br":
 		return "w.Break{}"
+	case x.Tag == "span" && x.Has("tc-dim--danger") && len(x.Cls()) == 1:
+		// a failure in short words, said in full in its hint
+		t := ""
+		if h := x.Attr("title"); h != "" {
+			t = ", Title: " + q(h)
+		}
+		return "w.Span{Face: w.FaceDanger, Text: " + q(x.Text()) + t + "}"
 	case x.Has("tc-tick"):
 		v := ""
 		if x.Has("tc-tick--edge-danger") {
@@ -896,6 +905,9 @@ func (g *gen) table(e *El) string {
 			}
 			if th.Has("is-2nd") {
 				f = append(f, "Secondary: true")
+			}
+			if th.Has("tc-table__main") {
+				f = append(f, "Main: true") // Р-66
 			}
 			if t := th.Kid("tc-tickrow__tick"); t != nil {
 				f = append(f, "Tick: ptr("+tickedOf(t)+")")

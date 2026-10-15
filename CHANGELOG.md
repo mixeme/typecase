@@ -8,6 +8,19 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A widget holds its own; a container does not take its minimum** (the
+  owner's decision of 15.10, Р-65). On a phone (a column of 460 px or
+  less) a bar, a document's bar, a range inside itself, the buttons of a
+  table's row in their cell and a sheet's foot wrap what does not fit after
+  the ranks and «⋯», instead of squeezing it or cutting it at the edge. A
+  bar is one row while it fits. A field of a date or a time is never
+  narrower than its value and its calendar (`min-width:max-content`); a
+  filter field (a field with a search line inside) keeps its 88 px itself.
+  A search of the top bar with an open query takes a row of its own on a
+  phone, its query seen — its rules never applied before (a weight that
+  lost to the folded search). On a phone a small button is 38 px like the
+  rest. The cell of a row's buttons stays a table cell: the row's line no
+  longer breaks at it.
 - **The live layer sends a form that is not GET once** (Carrel's note 58):
   when its answer has come, it is not sent again the plain way — an answer
   sent on to another address goes there, any other answer that is no part
@@ -47,6 +60,22 @@ do, not what the authors did.
 
 ### Added
 
+- **Checks of what a widget promises, not of the frame** (Р-65). The width
+  ladder now asks every field of a date or a time, button, option of a
+  switch, tag, badge and pick whether it holds its content, and every
+  control whether an ancestor that cuts hides a part of it — measured on
+  the widget, so a frame drawn wrong is red too. The gate `context-minimum`
+  refuses a rule of a context that sets another control's min-width to
+  zero or cuts it; the one exception (the folded search) is listed with
+  its reason.
+- **`Say{Full, Short, Mono}`** — words in two lengths: the short ones show
+  where the column is 640 px or less, to say it shorter instead of
+  squeezing it («Done · 13 of 14 sources answered» → «13 of 14»).
+- **`TableCol.Main`** — the column that matters (Р-66): on a phone a table
+  with one is cards — the name and «⋯», under them this column named by
+  its label; the other columns go, the row's buttons are in «⋯».
+- `Span.Title` and a `Span` in a table's cell: a failure in short words,
+  said in full in its hint («1 not copied»).
 - **A page checks how its parts name each other** (the owner's thought
   after the review: the constructor must not break when it is put
   together). `page.Check(html)` and `Document.Check()` read a whole printed
@@ -686,6 +715,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Reliability on a phone** (Р-65, Р-66; the cards, the run bar and the icons accepted by the owner
+  15.10): the date fields of the timeline (`s-contacts-7`, `s-mailbox-21`)
+  and of the audit log (`s-admin-7`) hold their calendar; the bars of
+  tasks, files, the audit log and the others wrap instead of being cut;
+  the jobs of `s-backup-1` are cards on a phone with «Last backup» under
+  the name (`Run`, `Edit` in «⋯»), and its history says «read back · 1 not
+  copied» with the reason in the hint, Restore stays; the search of
+  `s-find-1` keeps its query in a row of its own, its run bar says «13 of
+  14 · 1 failed · 1.8 s · 11:42 · ↻» on a phone, and its line about files
+  is one sentence for a person. New icons: `i-download` (an arrow into a
+  tray) on every Download button, 32; `i-restore` (an arrow back round) on
+  every Restore button, 7.
 - **Files after Carrel's second scan** (task 148). `s-files-5`: the tiles go
   as the table does — folders first, then files by name. `s-files-16`: the
   folder «attachments» holds what every other frame draws in it — the folder

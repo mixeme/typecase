@@ -414,7 +414,7 @@ func Phone6() Screen {
 				Items: []w.MainPart{
 					w.Bar{
 						Items: []w.BarPart{
-							w.Button{Icon: "down", Title: "Download", Form: "files-sel", Name: "op", Value: "download"},
+							w.Button{Icon: "download", Title: "Download", Form: "files-sel", Name: "op", Value: "download"},
 							w.Button{Icon: "move", Title: "Move", Form: "files-sel", Name: "op", Value: "move"},
 							w.Button{
 								Icon:  "trash",

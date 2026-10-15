@@ -20,7 +20,7 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
 .tc-root ul{list-style:none}
 .tc-root a{color:inherit;text-decoration:none}
-.tc-root code,.tc-root .tc-mono{font-family:var(--tc-font-mono);font-size:11.5px}
+.tc-root code,.tc-root .tc-mono,.tc-root .tc-say--mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .tc-root svg{display:block}
 [data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
   --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
@@ -167,7 +167,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-bar .tc-bar__more + .tc-menu,.tc-docbar .tc-bar__more + .tc-menu{display:none}
 /* .tc-bar__sep и .tc-range — элементы панели: диапазон уходит в «...» целиком.
    В панели сжимается только поле, не ниже 96 px; переключатель не сжимается. */
-.tc-bar > .tc-in{min-width:88px;overflow:hidden;white-space:nowrap}
+/* Поле со значком поиска внутри (фильтр) держит свой минимум само (Р-65), где бы ни стояло:
+   сначала сжимается до него, растёт до ширины своего класса — так ряд переносится, только
+   когда и минимума не хватает. Класс размера фильтра поэтому держит и max-width. */
+.tc-in:has(> .tc-q){min-width:88px;overflow:hidden;white-space:nowrap;flex:1 1 88px}
 .tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
 .tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
 .tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}
@@ -265,6 +268,13 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-error{border-color:var(--tc-danger)}
 .tc-in:disabled{opacity:.45;cursor:default}
 .tc-in[type=date],.tc-in[type=time]{-webkit-appearance:none;appearance:none}
+/* Поле даты и времени само держит свой минимум (Р-65): его естественная ширина —
+   значение со значком календаря; ни контекст, ни класс размера его не сжимают. */
+.tc-in[type=date],.tc-in[type=time],.tc-in[type=datetime-local]{min-width:max-content}
+.tc-say__short{display:none}
+/* Выбор с многоточием, поле тегов и строка поиска сжимаются сами: у выбора обрезка
+   объявлена многоточием, теги переносятся, значение поиска прокручивается (Р-65). */
+.tc-in.is-pick,.tc-in.tc-in--cols,.tc-search{min-width:0}
 .tc-field > .tc-in[type=date],.tc-field > .tc-in[type=time]{width:100%}
 .tc-in.is-area{height:auto;min-height:76px;align-items:flex-start;padding:7px 9px;line-height:1.5;
   white-space:pre-wrap;overflow:visible;text-overflow:clip}
@@ -453,6 +463,11 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-table tr td:first-child,.tc-table tr th:first-child{padding-left:var(--tc-page-gutter)}
 .tc-table tr td:last-child,.tc-table tr th:last-child{padding-right:var(--tc-page-gutter)}
 .tc-table .tc-acts{justify-content:flex-start;flex-wrap:nowrap;white-space:nowrap}
+/* Ячейка кнопок строки остаётся ячейкой таблицы (Р-65): с display:flex она выпадала
+   из таблицы, и линия строки на ней обрывалась. Кнопки стоят в строку с отступом. */
+.tc-table td.tc-acts{display:table-cell;vertical-align:middle}
+.tc-table td.tc-acts > * + *{margin-left:6px}
+.tc-table td.tc-acts > *{vertical-align:middle}
 /* «⋯» строки — голая кнопка или раскрытие с меню (задача 117): на широкой не видно ни того, ни другого. */
 .tc-acts__more,.tc-acts > .tc-drop:has(> .tc-acts__more){display:none}
 @container tcbox (max-width:640px){
@@ -771,7 +786,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* --fit: break-word, не anywhere — иначе «4 calendars · 1 book» по буквам. */
   .tc-table--fit td.tc-mono,.tc-table--fit td .tc-mono{overflow-wrap:break-word}
   .tc-table--fit .tc-acts{justify-content:flex-start}
-  .tc-table--fit td.tc-acts{display:table-cell;vertical-align:middle}
   .tc-row--excerpt{grid-template-columns:3px minmax(116px,1.4fr) 80px 140px}
   .tc-row--excerpt > :nth-child(3){display:none}
   .tc-row--avatarcols.tc-row--single{grid-template-columns:3px 28px minmax(100px,1.4fr) 130px minmax(120px,1fr)}
@@ -834,16 +848,43 @@ label.tc-menu__item{position:relative;cursor:pointer}
 }
 /* Телефон (≤460), третий ранг бара (Р-4): is-3rd уходит под «⋯» вслед за is-2nd.
    В меню «⋯» у него двойник с тем же is-3rd — виден только здесь, пока сам элемент
-   спрятан. Кнопка бара со складной подписью остаётся значком; поля диапазона в баре
-   сжимаются, а не выдавливают «⋯». Решение человека 2026-09-26: без прокрутки. */
+   спрятан. Кнопка бара со складной подписью остаётся значком. Бар своих элементов
+   не сжимает и краем не режет (Р-65): бар с тем, что в «⋯» не уходит, — диапазоном,
+   полем, поиском, — переносит не поместившееся на следующую строку (бар из кнопок и
+   переключателей держится рангами и «⋯»: перенос в нём раздувал коробку с открытым
+   меню на высоту меню); так же панель документа, диапазон внутри себя,
+   кнопки строки таблицы в своей ячейке и подвал листа. Решение человека 2026-09-26: без прокрутки. */
 @container tcbox (max-width:460px){
   .tc-bar > .is-3rd,.tc-bar__right > .is-3rd,.tc-docbar > .is-3rd{display:none}
   .tc-bar:has(> .is-3rd) .tc-bar__more,.tc-bar:has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
   .tc-docbar:has(.is-3rd) .tc-bar__more,.tc-docbar:has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar .tc-btn > .tc-btn__label{display:none}
-  .tc-bar > .tc-range{flex:0 1 auto;min-width:0}
-  .tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}
+  .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
+  .tc-docbar{flex-wrap:wrap}
+  .tc-bar > .tc-range{flex-wrap:wrap}
+  .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
+  .tc-sheet__foot{flex-wrap:wrap}
+  /* строка хода: кнопка со складной подписью остаётся значком, как в баре */
+  .tc-runbar .tc-btn > .tc-btn__label{display:none}
+  /* Таблица с главной колонкой — карточки (Р-66): имя и «⋯» первой строкой, под ними
+     главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯». */
+  .tc-table:has(td.tc-table__main),.tc-table:has(td.tc-table__main) > tbody{display:block;width:100%}
+  .tc-table:has(td.tc-table__main) > thead{display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:4px;
+    align-items:center;padding:10px var(--tc-page-gutter-narrow);border-bottom:.5px solid var(--tc-hair)}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td{display:none;padding:0;border:0}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-table__file),
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name{display:block;grid-column:2;grid-row:1;min-width:0}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > :not(.tc-acts__more):not(.tc-drop:has(> .tc-acts__more)){display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts .tc-acts__more,
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .tc-drop:has(> .tc-acts__more){display:inline-flex}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main{display:block;grid-column:2 / 4;grid-row:2;font-size:12px;white-space:normal}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main::before{content:attr(data-tc-label) " · ";color:var(--tc-dusty);font-family:var(--tc-font-sans)}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br{display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br + .tc-dim::before{content:" · "}
 }
 @container tcbox (min-width:461px){
   .tc-menu:not(.tc-bar--wide .tc-menu) .is-3rd{display:none}
@@ -870,7 +911,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
   .tc-nav .tc-num{display:none}
   /* Крылья brand/actions остаются flex:1 1 0 — поиск по центру, сжимается. */
-  .tc-top .tc-search{flex:0 1 560px;width:auto;min-width:0;max-width:560px}
+  .tc-top .tc-search{flex:0 1 560px;width:auto;max-width:560px}
 }
 /* Ящик: ≤640. Состояние — на детях корня; вид потомков — style(), иначе
    панель 440 px и лист 560 px на широком корне тоже попали бы в max-width:640. */
@@ -923,13 +964,21 @@ label.tc-menu__item{position:relative;cursor:pointer}
     width:38px;height:38px;padding:0;gap:0;margin-left:auto;overflow:hidden;position:relative;
     background:var(--tc-surface)}
   .tc-top .tc-search svg{width:20px;height:20px;flex:none}
-  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;min-width:0;height:auto;padding:0;border:0}
+  .tc-top .tc-search .tc-q{position:absolute;inset:0;opacity:0;width:auto;height:auto;padding:0;border:0}
   /* Запрос открыт (крестик очистки) — поле остаётся полем. */
-  .tc-top .tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
+  .tc-top .tc-search.tc-search:has(> svg + svg){width:auto;flex:1 1 160px;min-width:44px;max-width:560px;height:38px;
     padding:0 9px;justify-content:flex-start;gap:7px;margin-left:0;overflow:visible}
-  .tc-top .tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
+  .tc-top .tc-search.tc-search:has(> svg + svg) .tc-q{position:absolute;inset:0;opacity:1;width:auto;height:auto;
     padding:0 28px 0 36px;flex:none}
-  .tc-top .tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
+  .tc-top .tc-search.tc-search:has(> svg + svg) svg{width:13px;height:13px;position:relative;z-index:2}
+  .tc-top .tc-search.tc-search:has(> svg + svg) svg + svg{margin-left:auto}
+  /* слова в двух длинах: на телефоне — короткие (Р-65) */
+  .tc-say__full{display:none}
+  .tc-say__short{display:inline}
+  /* Запрос открыт, а места нет: поиск встаёт второй строкой шапки во всю ширину, а не
+     сжимается до значка с крестиком (Р-65). */
+  .tc-top:has(.tc-search > svg + svg){flex-wrap:wrap;height:auto;row-gap:8px}
+  .tc-top .tc-search.tc-search:has(> svg + svg){order:9;flex:1 1 100%;max-width:none}
   .tc-top .tc-brand{flex:1 1 auto;min-width:0}
   .tc-top .tc-brand:has(.tc-brand__logo){flex:none;width:auto}
   /* Лист и крошки — по ширине ближайшего tcbox (сам лист 560), не оболочки.
@@ -937,7 +986,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
   .tc-sheet{width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
-  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
@@ -961,6 +1010,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-nav--bottom .tc-nav__item.is-on{color:var(--tc-accent);background:transparent;font-weight:400}
   .tc-nav--bottom svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:1}
   .tc-btn,.tc-in,.tc-seg,.tc-segfold__current{height:38px}
+  /* маленькая кнопка на телефоне — той же мишенью, что остальные (Р-66) */
+  .tc-btn.is-sm.is-sm{height:38px;min-width:38px;padding:0 10px;font-size:12.5px;justify-content:center}
   .tc-segfold__item{height:40px}
   .tc-bar .tc-btn,.tc-docbar .tc-btn,.tc-head .tc-acts .tc-btn,.tc-formfoot .tc-btn,
   .tc-queue__head .tc-btn:not(.is-sm),.tc-sheet__head .tc-btn,
@@ -994,7 +1045,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-scrim,.tc-sheet,.tc-sheet__head,.tc-sheet__body,.tc-sheet__foot{min-width:0;max-width:100%}
   .tc-sheet{width:100%;max-width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
-  .tc-sheet__head .tc-in{width:auto;max-width:100%;min-width:0;flex:1 1 8em}
+  .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
@@ -1295,10 +1346,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-ico--sq19.tc-ico--sq19{height:19px;width:19px}
 .tc-in--w190.tc-in--w190{width:190px}
 .tc-in--w52{width:52px}
-.tc-in--t12-w200.tc-in--t12-w200{font-size:12px;width:200px}
+.tc-in--t12-w200.tc-in--t12-w200{font-size:12px;width:200px;max-width:200px}
 .tc-in--body-sm.tc-in--body-sm{min-height:132px;font-size:14px;line-height:1.6}
 .tc-in--t12-w240.tc-in--t12-w240{font-size:12px;width:240px}
-.tc-in--h26-w190.tc-in--h26-w190{height:26px;width:190px}
+.tc-in--h26-w190.tc-in--h26-w190{height:26px;width:190px;max-width:190px}
 .tc-in--fill.tc-in--fill{flex:1}
 .tc-in--dusty.tc-in--dusty{color:var(--tc-dusty)}
 .tc-in--t11-5.tc-in--t11-5{font-size:11.5px}
@@ -1317,7 +1368,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--h26-w120.tc-in--h26-w120{height:26px;width:120px}
 .tc-in--minh104-t13-5.tc-in--minh104-t13-5{min-height:104px;font-size:13.5px}
 .tc-in--t12-fill.tc-in--t12-fill{font-size:12px;flex:1}
-.tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px}
+.tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px;max-width:220px}
 .tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
 /* Плашки колонками — участники события (задача 77): знакомый — меткой книги и именем, незнакомый — адресом; строка набора — в следующей клетке. */
 .tc-in--cols.tc-in--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 10px;align-items:center;justify-items:start;padding:5px 8px}
@@ -1326,12 +1377,12 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Снятая крестиком плашка без сценария: не уйдёт с формой и так и выглядит. */
 .tc-tag--pill:has(> .tc-check__box:not(:checked)){text-decoration:line-through;opacity:.55}
 .tc-drop:has(> .tc-in--cols){display:flex;flex-direction:column;align-items:stretch;gap:4px}
-.tc-drop > .tc-in--cols{flex:1 1 auto;min-width:0}
+.tc-drop > .tc-in--cols{flex:1 1 auto}
 .tc-sec__list--cols.tc-sec__list--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 18px}
 .tc-sec__list--cols > li{display:flex;align-items:center;gap:5px;min-width:0;white-space:nowrap}
 /* Метка — по середине прописных, а не всей строки с выносными: на 1 px выше. */
 .tc-sec__list--cols > li > .tc-mark{transform:translateY(-1px)}
-.tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px}
+.tc-in--h26-w200.tc-in--h26-w200{height:26px;width:200px;max-width:200px}
 .tc-in--title.tc-in--title{height:auto;font-family:var(--tc-font-serif);font-size:24px;padding:7px 12px}
 .tc-in--body.tc-in--body{min-height:260px;font-size:14.5px;line-height:1.7;padding:14px 16px}
 .tc-doc__task.tc-doc__task{align-items:baseline;display:flex;gap:9px}
@@ -1602,7 +1653,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-doc__bullets.tc-doc__bullets{font-size:14px;line-height:1.6;padding-left:18px;list-style:disc}
 .tc-usermenu.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-dim.tc-dim{color:var(--tc-dusty)}
-/* names-without-rule: tc-shell tc-row__lead tc-row__due tc-row__date tc-row__size
+/* names-without-rule: tc-shell tc-say tc-say__full tc-row__lead tc-row__due tc-row__date tc-row__size
    tc-head__text tc-docmeta__sec tc-queue__list tc-queue__name tc-queue__meta
    tc-menu__label tc-auth__tagline tc-auth__link tc-print__cell
    tc-msg__aside tc-stack__item tc-sheet__block tc-line__item

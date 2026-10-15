@@ -102,13 +102,16 @@ type Span struct {
 	Face Face
 	Text string
 	Href string // words in the accent that go somewhere: a link
+	// Title is what the words say in full when they are short: «1 not
+	// copied» names the collection and why in its hint.
+	Title string
 }
 
 func (s Span) html(mix) string {
 	if s.Href != "" {
 		return `<a class="` + s.Face.class() + `"` + attr("href", s.Href) + `>` + esc(s.Text) + `</a>`
 	}
-	return `<span class="` + s.Face.class() + `">` + esc(s.Text) + `</span>`
+	return `<span class="` + s.Face.class() + `"` + attr("title", s.Title) + `>` + esc(s.Text) + `</span>`
 }
 
 // DimSize is the size of a dim line where it is not the running text's.
@@ -216,6 +219,30 @@ func (v MonoVariant) class() string {
 		"tc-mono--t11-5-dusty tc-mono--bot9", "tc-mono--muted", "tc-mono--ls0-dusty", "tc-mono--dusty-t11",
 		"tc-mono--t11-dusty", "tc-mono--dusty", "tc-mono--t11-dusty-ls0", "tc-mono--ls0-danger", "tc-mono--f-mono",
 		"tc-mono--t11-top4", "tc-mono--t11-ml4", "tc-mono--ls0-tt-none", "tc-mono--t11-muted", "tc-mono--chip"}[v]
+}
+
+// Say — tc-say
+//
+// Роль. Слова в двух длинах: полные и короткие для узкого экрана — сказать короче, а не сжать (Р-65); смысл и числа в обеих те же.
+// Вход. Say{Full, Short, Mono}.
+// Состояния. plain | mono.
+// Инварианты. Видна одна длина: короткая — где колонка не шире 640 px; кусок печатает фрагмент своего кадра.
+// Поведение. нет: длину выбирает CSS по ширине.
+// Эталон. кадр `s-find-1`, фрагмент `.tc-say`.
+// Содержимое. Два текста.
+// Чего нет. Третьей длины и сценария.
+type Say struct {
+	Full  string
+	Short string
+	Mono  bool // monospaced: a time, a count
+}
+
+// Render prints the words.
+func (s Say) Render() string { return s.html(nil) }
+
+func (s Say) html(m mix) string {
+	return `<span` + class(m, "tc-say", pick(s.Mono, "tc-say--mono")) + `><span class="tc-say__full">` + esc(s.Full) +
+		`</span><span class="tc-say__short">` + esc(s.Short) + `</span></span>`
 }
 
 // Mono — tc-mono

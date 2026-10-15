@@ -75,7 +75,8 @@ func Find1() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 100, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Done · 13 of 14 sources answered · "),
+							w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"},
+							w.Text(" · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -93,7 +94,10 @@ func Find1() Screen {
 							},
 							w.Mono{Text: "1.8 s"},
 							w.Line{
-								Items: []w.LinePart{w.Mono{Text: "answered 11:42"}, w.Button{Label: "Search again", Icon: "refresh", Small: true}},
+								Items: []w.LinePart{
+									w.Say{Full: "answered 11:42", Short: "11:42", Mono: true},
+									w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"},
+								},
 								Gap:   w.LineGap8,
 								Place: w.Pushed,
 							},
@@ -183,13 +187,7 @@ func Find1() Screen {
 							},
 						},
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Files are searched by name: "),
-							w.Mono{Text: "PROPFIND"},
-							w.Text(" returns names anyway, and walking a folder costs one request per folder. Carrel does not look inside files — and says so here, so that “nothing found” is not read as “not in the files”."),
-						},
-					},
+					w.Msg{Parts: []w.MsgPart{w.Text("Files are found by their names; what is inside them is not searched.")}},
 				},
 			},
 		},

@@ -385,3 +385,27 @@ func TestMockupNesting(t *testing.T) {
 		t.Fatal("expected an unclosed <span> to fail")
 	}
 }
+
+// TestContextMinimum (Р-65): a context that takes a control's minimum or
+// cuts it is red — the rule that let a date field be squeezed until its
+// calendar left its box; the control's own rule, a context that gives more
+// room, and the listed folded search pass.
+func TestContextMinimum(t *testing.T) {
+	page := func(css string) string {
+		return `<style data-tc>` + css + `</style><div class="frame" data-frame="x"><div class="tc-root"></div></div>`
+	}
+	for css, want := range map[string]bool{
+		`.tc-bar > .tc-range > .tc-in{flex:0 1 auto;min-width:0;width:auto}`: true,
+		`.tc-bar > .tc-in{min-width:88px;overflow:hidden}`:                   true,
+		`.tc-runbar .tc-btn{text-overflow:ellipsis}`:                         true,
+		`.tc-in.is-pick{min-width:0}`:                                        false, // its own rule
+		`.tc-top .tc-btn:has(> svg:only-child){min-width:38px}`:              false, // more room
+		`.tc-row--cols > .tc-col--name{min-width:0}`:                         false, // not a control
+		`.tc-top .tc-search.tc-search{overflow:hidden}`:                      false, // listed
+	} {
+		err := CheckMockupLint(page(css), MockupContextMinimum)
+		if (err != nil) != want {
+			t.Errorf("%s: %v, want red %v", css, err, want)
+		}
+	}
+}

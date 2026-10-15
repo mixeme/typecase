@@ -112,7 +112,7 @@ func Files1() Screen {
 							w.Button{
 								Folds: true,
 								Label: "Download",
-								Icon:  "down",
+								Icon:  "download",
 								Title: "Download",
 								Form:  "files-sel",
 								Name:  "op",
@@ -251,7 +251,7 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -278,7 +278,7 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -303,7 +303,7 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -327,7 +327,7 @@ func Files1() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -366,7 +366,7 @@ func Files1() Screen {
 					w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}},
 					w.SideActs{
 						Items: []w.Button{
-							w.Button{Label: "Download", Icon: "down", Kind: w.ButtonPrimary},
+							w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary},
 							w.Button{Label: "Open"},
 							w.Button{Label: "Rename", Icon: "pencil"},
 							w.Button{Label: "Move", Icon: "move"},
@@ -508,7 +508,7 @@ func Files2() Screen {
 							w.Button{
 								Folds: true,
 								Label: "Download",
-								Icon:  "down",
+								Icon:  "download",
 								Title: "Download",
 								Form:  "files-sel",
 								Name:  "op",
@@ -648,7 +648,7 @@ func Files2() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -676,7 +676,7 @@ func Files2() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -701,7 +701,7 @@ func Files2() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -726,7 +726,7 @@ func Files2() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
 									{
 										Parts: []w.CellPart{
-											w.Button{Icon: "down", Small: true, Title: "Download"},
+											w.Button{Icon: "download", Small: true, Title: "Download"},
 											w.Button{Icon: "dots", Small: true, Title: "More"},
 										},
 										Acts: true,
@@ -876,7 +876,7 @@ func Files4() Screen {
 								w.Button{
 									Folds: true,
 									Label: "Download",
-									Icon:  "down",
+									Icon:  "download",
 									Title: "Download",
 									Form:  "files-sel",
 									Name:  "op",
@@ -1016,7 +1016,7 @@ func Files4() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
 										{
 											Parts: []w.CellPart{
-												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "download", Small: true, Title: "Download"},
 												w.Button{Icon: "dots", Small: true, Title: "More"},
 											},
 											Acts: true,
@@ -1044,7 +1044,7 @@ func Files4() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
 										{
 											Parts: []w.CellPart{
-												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "download", Small: true, Title: "Download"},
 												w.Button{Icon: "dots", Small: true, Title: "More"},
 											},
 											Acts: true,
@@ -1069,7 +1069,7 @@ func Files4() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
 										{
 											Parts: []w.CellPart{
-												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "download", Small: true, Title: "Download"},
 												w.Button{Icon: "dots", Small: true, Title: "More"},
 											},
 											Acts: true,
@@ -1094,7 +1094,7 @@ func Files4() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
 										{
 											Parts: []w.CellPart{
-												w.Button{Icon: "down", Small: true, Title: "Download"},
+												w.Button{Icon: "download", Small: true, Title: "Download"},
 												w.Button{Icon: "dots", Small: true, Title: "More"},
 											},
 											Acts: true,
@@ -1301,7 +1301,7 @@ func Files5() Screen {
 							w.Button{
 								Folds: true,
 								Label: "Download",
-								Icon:  "down",
+								Icon:  "download",
 								Title: "Download",
 								Form:  "files-sel",
 								Name:  "op",

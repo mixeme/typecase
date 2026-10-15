@@ -36,6 +36,7 @@ func (Dim) linePart()    {}
 func (Check) linePart()  {}
 func (Mark) linePart()   {}
 func (Mono) linePart()   {}
+func (Say) linePart()    {}
 func (Tag) linePart()    {}
 func (Badge) linePart()  {}
 func (Field) linePart()  {}

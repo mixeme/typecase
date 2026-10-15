@@ -476,7 +476,7 @@ func Dark3() Screen {
 							w.Button{
 								Folds: true,
 								Label: "Download",
-								Icon:  "down",
+								Icon:  "download",
 								Title: "Download",
 								Form:  "files-sel",
 								Name:  "op",
