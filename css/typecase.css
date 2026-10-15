@@ -967,6 +967,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-form .tc-btn:not(.is-sm),.tc-fset .tc-btn:not(.is-sm),.tc-field .tc-btn:not(.is-sm),
   .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
   .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
+  /* поле полосы — той же высоты, что полоса, поверх своего класса размера (tc-in--h26-…) */
+  .tc-bar .tc-in.tc-in,.tc-docbar .tc-in.tc-in,.tc-head .tc-acts .tc-in.tc-in{height:38px}
   .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
   button,.tc-in,.tc-seg__opt,.tc-check,.tc-nav__item,.tc-tick,.tc-tickrow__tick,.tc-tag,a[href]{
     position:relative;overflow:visible;z-index:1;appearance:none}

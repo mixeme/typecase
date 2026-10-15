@@ -93,6 +93,11 @@ func Tasks1() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 1"}, {Label: "All 6"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
@@ -361,6 +366,11 @@ func Tasks15() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Open 3", On: true}, {Label: "Done 1"}, {Label: "All 4"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},

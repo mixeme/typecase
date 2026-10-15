@@ -3127,6 +3127,11 @@ func States19() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Open 3", On: true}, {Label: "Done 1"}, {Label: "All 4"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
@@ -3277,6 +3282,11 @@ func States20() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Open 3", On: true}, {Label: "Done 1"}, {Label: "All 4"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
@@ -3652,6 +3662,11 @@ func States23() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
 							w.Seg{Options: []w.SegOption{{Label: "Open 2", On: true}, {Label: "Done 0"}, {Label: "All 2"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
@@ -4064,7 +4079,10 @@ func States26() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
@@ -4185,7 +4203,10 @@ func States27() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
@@ -4526,7 +4547,10 @@ func States30() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},

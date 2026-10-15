@@ -1148,6 +1148,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-form .tc-btn:not(.is-sm),.tc-fset .tc-btn:not(.is-sm),.tc-field .tc-btn:not(.is-sm),
   .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
   .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
+  /* поле полосы — той же высоты, что полоса, поверх своего класса размера (tc-in--h26-…) */
+  .tc-bar .tc-in.tc-in,.tc-docbar .tc-in.tc-in,.tc-head .tc-acts .tc-in.tc-in{height:38px}
   .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
   button,.tc-in,.tc-seg__opt,.tc-check,.tc-nav__item,.tc-tick,.tc-tickrow__tick,.tc-tag,a[href]{
     position:relative;overflow:visible;z-index:1;appearance:none}
@@ -5688,6 +5690,7 @@ SEQUENCE  2</div>
           <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
           <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 5</button><button class="tc-seg__opt" type="button">Done 1</button><button class="tc-seg__opt" type="button">All 6</button></span>
           <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
@@ -5820,6 +5823,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
           <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 3</button><button class="tc-seg__opt" type="button">Done 1</button><button class="tc-seg__opt" type="button">All 4</button></span>
           <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
@@ -5871,11 +5875,12 @@ Read  2 min ago · not changed on server</div>
         <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="priority"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Priority</label>
         <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="status"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Status</label>
         <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="changed"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Changed</label>
+        <label class="tc-menu__item" role="menuitem"><input class="tc-check__box" type="checkbox" name="col" value="where"><svg><use href="#i-drag"/></svg><span class="tc-tickrow__tick is-off"></span>Where</label>
         <div class="tc-menu__foot"><button class="tc-btn is-sm is-primary" type="submit">Apply</button><button class="tc-btn is-sm" type="submit" name="col" value="default">Reset to defaults</button></div>
       </form>
     </div>
   </div>
-  <figcaption>Отмечено то, что стоит в списке задач по умолчанию, в том же порядке; Tags, Priority, Status и Changed добавляют. Тегов в строке по умолчанию нет ни у одного рода: они в панели записи и в рейле; включённый столбец показывает первый тег и счётчик остальных («работа +1»), все — в подсказке. Title стоит всегда — за него дело открывают. <b>Source — только в едином виде</b> («Combined list»): у одного списка источник один и назван в заголовке, и пункта Source в его меню нет.</figcaption>
+  <figcaption>Отмечено то, что стоит в списке задач по умолчанию, в том же порядке; Tags, Priority, Status, Changed и Where добавляют. Where — место задачи (LOCATION), как у агенды (<code>s-agenda-18</code>): та же ячейка и та же ширина, что у столбца Where ленты. Тегов в строке по умолчанию нет ни у одного рода: они в панели записи и в рейле; включённый столбец показывает первый тег и счётчик остальных («работа +1»), все — в подсказке. Title стоит всегда — за него дело открывают. <b>Source — только в едином виде</b> («Combined list»): у одного списка источник один и назван в заголовке, и пункта Source в его меню нет.</figcaption>
   </figure>
 
 <figure style="flex:1 1 100%">
@@ -5884,8 +5889,9 @@ Read  2 min ago · not changed on server</div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
           <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 4</button><button class="tc-seg__opt" type="button">Done 0</button><button class="tc-seg__opt" type="button">All 4</button></span>
-          <span class="tc-seg"><button class="tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="is-on tc-seg__opt" type="button">Recently changed</button></span>
+          <span class="tc-seg is-2nd"><button class="tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="is-on tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
         </div>
         <div class="tc-list">
@@ -6386,7 +6392,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-          <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+          <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">3</span></span>
         </div>
@@ -6512,7 +6518,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-          <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+          <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">2</span></span>
         </div>
@@ -8191,7 +8197,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <form class="tc-sheet tc-sheet--w520" action="/app/tasks/nextcloud/dela/quick" method="post">
+          <form class="tc-sheet" action="/app/tasks/nextcloud/dela/quick" method="post">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-task"/></svg>
               <b class="tc-sheet__title">New task</b>
@@ -8203,6 +8209,7 @@ Read  2 min ago</div>
                 <div class="tc-field tc-grow"><label>Summary</label><input class="tc-in is-focus" type="text" name="summary" value="Отправить документы в МФЦ" aria-label="Summary"></div>
                 <div class="tc-field tc-field--fix130"><label>Due date</label><input class="tc-in is-mono is-ph" type="date" name="due.date" placeholder="YYYY-MM-DD" aria-label="Due date"></div>
                 <div class="tc-field tc-field--fix96"><label>Due time</label><input class="tc-in is-mono is-ph" type="time" name="due.time" placeholder="--:--" aria-label="Due time"></div>
+                <div class="tc-field tc-field--fill200"><label>Remind</label><span class="tc-in is-pick"><select class="tc-in__list" name="remind" aria-label="Remind"><option value="" selected>No reminder</option></select></span></div>
               </div>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">No time means the whole day. A task with no due date is a task all the same — both may stay empty.</span>
             </div>
@@ -8217,7 +8224,7 @@ Read  2 min ago</div>
       </div>
     </div>
   </div>
-  <figcaption><b>Срок можно не ставить, а время — тем более:</b> дата без времени — срок на весь день, флажка All day на быстром листе нет (решение владельца), он есть в полной правке. <b>Срок можно не ставить.</b> Задача без срока — обычная задача, и лист об этом говорит прямо, а не встречает пустым обязательным полем. Список в шапке — тот же выбор «куда», что у заметки и контакта.</figcaption>
+  <figcaption><b>Срок можно не ставить, а время — тем более:</b> дата без времени — срок на весь день, флажка All day на быстром листе нет (решение владельца), он есть в полной правке. <b>Срок можно не ставить.</b> Задача без срока — обычная задача, и лист об этом говорит прямо, а не встречает пустым обязательным полем. Список в шапке — тот же выбор «куда», что у заметки и контакта. <b>Remind — как у события</b> (<code>s-notes-9</code>, список — <code>s-agenda-9</code>): тот же список и то же место, после времени; лист той же ширины, что у события. У задачи без срока напоминанию не от чего отсчитывать — по умолчанию «No reminder»; срок и шаг ставят вместе.</figcaption>
   </figure>
   <figure style="flex:0 1 300px">
   <div class="frame" data-frame="s-notes-19">
@@ -21803,6 +21810,7 @@ dav: HTTP 503: the server is busy</div></div>
             <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
+            <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
             <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 3</button><button class="tc-seg__opt" type="button">Done 1</button><button class="tc-seg__opt" type="button">All 4</button></span>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
@@ -21895,6 +21903,7 @@ dav: HTTP 503: the server is busy</div></div>
             <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New task<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-up"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
+            <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
             <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 3</button><button class="tc-seg__opt" type="button">Done 1</button><button class="tc-seg__opt" type="button">All 4</button></span>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
@@ -22113,6 +22122,7 @@ dav: HTTP 503: the server is busy</div></div>
             <div class="tc-acts"><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-down"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
+            <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
             <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Open 2</button><button class="tc-seg__opt" type="button">Done 0</button><button class="tc-seg__opt" type="button">All 2</button></span>
             <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">By due</button><button class="tc-seg__opt" type="button">By priority</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
@@ -22330,7 +22340,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-            <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+            <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
             <span class="tc-bar__right is-2nd"><span class="tc-mono">2</span></span>
           </div>
@@ -22413,7 +22423,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-            <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+            <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
             <span class="tc-bar__right is-2nd"><span class="tc-mono">2</span></span>
           </div>
@@ -22616,7 +22626,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-            <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+            <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
             <span class="tc-bar__right is-2nd"><span class="tc-mono">2</span></span>
           </div>
@@ -23806,7 +23816,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
-            <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button></span>
+            <span class="tc-seg is-2nd"><button class="is-on tc-seg__opt" type="button">Newest</button><button class="tc-seg__opt" type="button">Oldest</button><button class="tc-seg__opt" type="button">Title</button><button class="tc-seg__opt" type="button">Recently changed</button></span>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
             <span class="tc-bar__right is-2nd"><span class="tc-mono">3</span></span>
           </div>

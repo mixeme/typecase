@@ -700,6 +700,23 @@ do, not what the authors did.
   `.tc-thumb--folder`, `Thumb{Form: ThumbFolder}`; a folder with
   `ThumbOnCard` still prints, as a file does. `s-files-5`, `dark-3` (its
   folder stands first too).
+- **Lists of tasks and notes after Carrel's tasks 167 and 170** (the owner
+  accepted 15.10; Р-63). Tasks get «Filter by word» first in the bar, as
+  notes have — a task has no sort by title: the date matters there (the
+  server's «Title» order is not drawn). Notes get a fourth order, «Recently
+  changed»; their orders hide under 800 px of the column, as the tasks'
+  do (`is-2nd`) — four did not fit at 460. All the bars of both kinds:
+  `s-tasks-1`, `-13`, `-15`, `states-19`, `-20`, `-23`, `s-notes-1`, `-31`,
+  `states-26`, `-27`, `-30`, `phone-8`. The quick sheet of a task
+  (`s-notes-10`) has «Remind» after «Due time», the event's list, «No
+  reminder» by default, and the event sheet's width. The columns menu of
+  tasks (`s-tasks-12`) has «Where» last, off.
+- **A field of a bar is as tall as the bar on a narrow screen**: in the
+  drawer mode a field kept its size class (`tc-in--h26-…`) and stood 26 px
+  among 38 px buttons. `.tc-bar .tc-in.tc-in` and the same in a docbar and
+  a head's actions are 38 px. Lists with a filter at 641 px and less:
+  `s-contacts-1`, `-2`, `s-files-1`, `-2`, `-4`, `-5`, `s-io-1`, `s-admin-2`,
+  `-7`, `dark-2`, `-3`, `states-4`, `-8`, `-9`, `-34`.
 - **The Save bar in every frame of a loss report** (Carrel's task 162; the
   kinds are equal): `states-12` (a contact), `states-17` and `states-36` (an
   event) carry the edit's hidden Save bar under the head, as `states-24`

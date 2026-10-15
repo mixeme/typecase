@@ -91,7 +91,10 @@ func Notes1() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
@@ -327,7 +330,10 @@ func Notes31() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "2"}}, Secondary: true},
@@ -2635,6 +2641,17 @@ func Notes10() Screen {
 									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "due.time", Placeholder: "--:--", Label: "Due time", Mono: true}},
 									Width: w.FieldFix96,
 								},
+								w.Field{
+									Label: "Remind",
+									Parts: []w.FieldPart{
+										w.Pick{
+											Name:    "remind",
+											Options: []w.PickOption{{Value: "", Label: "No reminder", On: true}},
+											Label:   "Remind",
+										},
+									},
+									Width: w.FieldFill200,
+								},
 							},
 						},
 						w.Dim{
@@ -2651,7 +2668,6 @@ func Notes10() Screen {
 						w.Button{Label: "Open the card", Icon: "expand"},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
-					Width: w.SheetWidth520,
 				},
 				Pad: w.ScrimPad26,
 			},

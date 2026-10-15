@@ -615,7 +615,10 @@ func Phone8() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}}},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
