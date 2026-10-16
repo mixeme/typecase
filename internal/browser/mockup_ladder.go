@@ -7,7 +7,7 @@ var MockupLadderWidths = []int{1351, 1191, 1190, 1008, 1007, 820, 641, 640, 460,
 // MockupLadderProbeJS checks one painted frame: no horizontal scroll of the
 // frame or of any box inside it (a scrolling .tc-main hid a too-wide bar),
 // in-flow siblings do not overlap, text stays in its box except ellipsis,
-// a widget holds its own content (Р-65), and in drawer mode every tappable has a 44 px hit zone (same idea as tapHitJS).
+// a widget holds its own content and a date or time field is no wider than it (Р-65), and in drawer mode every tappable has a 44 px hit zone (same idea as tapHitJS).
 const MockupLadderProbeJS = `(() => {
   const root = document.querySelector(".tc-root");
   const frame = document.querySelector(".frame");
@@ -149,6 +149,21 @@ const MockupLadderProbeJS = `(() => {
     if (cs.textOverflow === "ellipsis" && el.tagName !== "INPUT") continue;
     const d = el.scrollWidth - el.clientWidth;
     if (d > 1) issues.push("holds " + cls(el).split(" ").join(".") + " " + d + "px");
+  }
+  // ... and is no wider than its content where the content is fixed: a
+  // field of a date or a time is its value and its icon, not the width a
+  // context gave it (the owner, 16.10: a date field of 140 px with room to
+  // spare).
+  for (const el of root.querySelectorAll("input[type=date], input[type=time], input[type=datetime-local]")) {
+    const cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    if (el.checkVisibility && !el.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true})) continue;
+    const was = el.offsetWidth;
+    const keep = el.style.width;
+    el.style.width = "max-content";
+    const own = el.offsetWidth;
+    el.style.width = keep;
+    if (was - own > 2) issues.push("wide " + cls(el).split(" ").join(".") + " " + (was - own) + "px");
   }
   // ... and is seen whole (Р-65): the nearest ancestor that cuts (overflow
   // hidden or clip) does not hide a part of it. An ancestor that scrolls

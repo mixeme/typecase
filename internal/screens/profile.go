@@ -903,6 +903,303 @@ func Profile16() Screen {
 	}
 }
 
+// Profile22 is frame «Подключение · правка, другой адрес и опубликованные ссылки» (s-profile-22).
+func Profile22() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Edit connection"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Server URL",
+										Parts: []w.FieldPart{
+											w.Input{Name: "server.url", Value: "https://cloud.home.example/", Label: "Server URL", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
+											w.Check{
+												On:    true,
+												Name:  "the.server.asks.no.password",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label:      "Certificate fingerprint",
+										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:        "certificate.fingerprint.sha.256.optional",
+												Placeholder: "only for a certificate the system does not trust",
+												Label:       "Certificate fingerprint",
+												Mono:        true,
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Changed: []string{"server.url", "username"},
+										Label:   "Published links",
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "published.links",
+												Value: "keep",
+												Radio: true,
+												Parts: []w.CheckPart{w.Text("Keep them: they open on what the connection points at now")},
+											},
+											w.Check{Name: "published.links", Value: "revoke", Radio: true, Parts: []w.CheckPart{w.Text("Revoke them")}},
+											w.FieldHint{Parts: []w.Inline{w.Text("1 published link uses this connection.")}},
+										},
+										Width: w.FieldFull,
+									},
+								},
+								ID:      "connection-links",
+								Action:  "/app/settings/connections/sftpgo/edit",
+								Variant: w.FormFlush,
+							},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "connection-links"}, w.Button{Label: "Cancel"}},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog540,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Profile23 is frame «Подключение · Save без ответа о ссылках» (s-profile-23).
+func Profile23() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Edit connection"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Server URL",
+										Parts: []w.FieldPart{
+											w.Input{Name: "server.url", Value: "https://cloud.home.example/", Label: "Server URL", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
+											w.Check{
+												On:    true,
+												Name:  "the.server.asks.no.password",
+												Value: "1",
+												Parts: []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label:      "Certificate fingerprint",
+										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:        "certificate.fingerprint.sha.256.optional",
+												Placeholder: "only for a certificate the system does not trust",
+												Label:       "Certificate fingerprint",
+												Mono:        true,
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Changed: []string{"server.url", "username"},
+										Label:   "Published links",
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "published.links",
+												Value: "keep",
+												Radio: true,
+												Parts: []w.CheckPart{w.Text("Keep them: they open on what the connection points at now")},
+											},
+											w.Check{Name: "published.links", Value: "revoke", Radio: true, Parts: []w.CheckPart{w.Text("Revoke them")}},
+											w.FieldHint{Parts: []w.Inline{w.Text("1 published link uses this connection.")}},
+											w.FieldHint{Parts: []w.Inline{w.Text("Choose what becomes of them before saving.")}, Variant: w.HintDanger},
+										},
+										Width: w.FieldFull,
+									},
+								},
+								ID:      "connection-links",
+								Action:  "/app/settings/connections/sftpgo/edit",
+								Variant: w.FormFlush,
+							},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "connection-links"}, w.Button{Label: "Cancel"}},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog540,
+					},
+				},
+			},
+		},
+	}
+}
+
 // Profile11 is frame «Подключение аккаунта · подпись занята» (s-profile-11).
 func Profile11() Screen {
 	return w.Shell{

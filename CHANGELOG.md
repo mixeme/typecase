@@ -8,6 +8,15 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A field of a date or a time is as wide as its value** (the owner,
+  16.10): not narrower and not wider — its value and its icon, whatever
+  the size class of the field around it; the field around it takes that
+  width too. A date of 140 px with room to spare is now about 125 px; on
+  a phone a date field no longer stretches across the column. The width
+  ladder asks it both ways (a new check «wide»).
+- **A check of one of several (`Check{Radio: true}`) is a circle**, the
+  chosen one with a dot: a square promised that the next one could be
+  ticked too (the owner, 16.10). 56 of them in the mockup changed so.
 - **A widget holds its own; a container does not take its minimum** (the
   owner's decision of 15.10, Р-65). On a phone (a column of 460 px or
   less) a bar, a document's bar, a range inside itself, the buttons of a
@@ -60,6 +69,14 @@ do, not what the authors did.
 
 ### Added
 
+- **`Field.Changed`** — a field that a change brings: printed hidden, it
+  shows while one of the named fields of its form differs from what the
+  page brought and goes when the edit is undone; a field the page brought
+  shown is left alone. Without the script the screen asks after Save
+  (the owner, 16.10: the question about published links comes at once).
+- **`SecFile.Terms`, `SecFile.Change`** — a file of a letter that goes as
+  a link: the link's terms in words and the button that opens the publish
+  sheet over the letter (Carrel's task 165).
 - **`Seg.Tertiary`** — a switch of the third rank: it goes on a phone where
   it means nothing (a note's width of text, narrower than the reading
   width anyway).
@@ -721,6 +738,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Publishing, a connection's links, a letter's links** (Carrel's tasks
+  163–165, accepted by the owner 16.10). `s-publish-2`: «What the visitor
+  sees» — time always, title on, place, description, attendees,
+  attachments and tags to tick; without the title an event shows as
+  «Busy»; «Show event descriptions» goes into it. `s-publish-19` (new):
+  the same sheet for one event or task. `s-profile-22` (new, an extra
+  frame): the address of a connection with published links is being
+  edited — «Published links», keep or revoke, comes at once
+  (`Field.Changed`); `s-profile-23` (new, an extra frame): Save without
+  an answer — the dialog comes back with the reason in red. A label,
+  password or fingerprint moves the links silently. `s-mail-1`: a file
+  that goes as a link shows its term («30 days») and «Change…», which
+  opens the publish sheet over the letter.
 - **Deleting a record that has something to lose; the edit forms' tails**
   (Carrel's tasks 166 and 169, accepted by the owner 16.10).
   `s-agenda-26` (new): the sheet of deleting an event in full — no copy

@@ -270,6 +270,8 @@ func Mail1() Screen {
 											Name:   "смета-подрядчик.pdf",
 											Size:   w.Mono{Text: "4.2 MB", Variant: w.MonoDusty11},
 											Tag:    w.Tag{Label: "as a link", On: true},
+											Terms:  &w.Mono{Text: "30 days", Variant: w.MonoDusty11},
+											Change: &w.Button{Label: "Change…", Small: true},
 											Remove: w.Button{Icon: "close", Small: true, Title: "Close"},
 										},
 										{
@@ -277,13 +279,15 @@ func Mail1() Screen {
 											Name:   "Договор подряда · 9 файлов",
 											Size:   w.Mono{Text: "folder", Variant: w.MonoDusty11},
 											Tag:    w.Tag{Label: "as a link", On: true},
+											Terms:  &w.Mono{Text: "30 days", Variant: w.MonoDusty11},
+											Change: &w.Button{Label: "Change…", Small: true},
 											Remove: w.Button{Icon: "close", Small: true, Title: "Close"},
 										},
 									},
 								},
 								w.Msg{
 									Parts: []w.MsgPart{
-										w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Both links live 30 days and can be revoked in "),
+										w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Each link can be revoked in "),
 										w.Strong("Published links"),
 										w.Text(" — including for the people in this letter."),
 									},

@@ -205,10 +205,16 @@ func (t SecTasks) html(mix) string {
 // SecFile is a thing attached to a letter: its icon and name, its kind and
 // size, what it is, the button that takes it off.
 type SecFile struct {
-	Icon   Icon
-	Name   string
-	Size   Mono
-	Tag    Tag
+	Icon Icon
+	Name string
+	Size Mono
+	Tag  Tag
+	// Terms and Change are for a file that goes as a link (the owner's
+	// decision of 12.10, Б38): the link's terms in words, as the list of
+	// links says them («30 days»), and the button that opens the publish
+	// sheet over the letter.
+	Terms  *Mono
+	Change *Button
 	Remove Button
 }
 
@@ -222,7 +228,14 @@ func (f SecFiles) html(mix) string {
 	s.WriteString(`<div class="tc-stack tc-stack--gap-6 tc-card__top8">`)
 	for _, it := range f.Items {
 		s.WriteString(`<div class="tc-line tc-line--gap-9 tc-line__text"><span class="tc-table__file tc-table__file--fill"><svg>` + it.Icon.use() +
-			`</svg><span class="tc-table__filename">` + esc(it.Name) + `</span></span>` + it.Size.html(nil) + it.Tag.html(nil) + it.Remove.html(nil) + `</div>`)
+			`</svg><span class="tc-table__filename">` + esc(it.Name) + `</span></span>` + it.Size.html(nil) + it.Tag.html(nil))
+		if it.Terms != nil {
+			s.WriteString(it.Terms.html(nil))
+		}
+		if it.Change != nil {
+			s.WriteString(it.Change.html(nil))
+		}
+		s.WriteString(it.Remove.html(nil) + `</div>`)
 	}
 	s.WriteString(`</div>`)
 	return s.String()

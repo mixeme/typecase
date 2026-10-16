@@ -419,16 +419,37 @@ func Publish2() Screen {
 							Gap:   w.LineGap10,
 							Block: true,
 						},
-						w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "30 days"}}, Width: w.FieldSM},
+						w.Field{
+							Label: "What the visitor sees",
+							Parts: []w.FieldPart{
+								w.Group{
+									Items: []w.FieldPart{
+										w.Check{
+											On:    true,
+											Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}},
+										},
+										w.Check{On: true, Parts: []w.CheckPart{w.Text("Title")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Location")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Description")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Attendees")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Attachments")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Tags")}},
+									},
+									Form: w.GroupColumnLoose,
+								},
+								w.FieldHint{Parts: []w.Inline{w.Text("Without the title an event shows as “Busy”.")}},
+							},
+							Width: w.FieldW100,
+						},
 						w.SheetChecks{
 							Items: []w.Check{
 								w.Check{
 									On:    true,
 									Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")},
 								},
-								w.Check{Parts: []w.CheckPart{w.Text("Show event descriptions")}},
 							},
 						},
+						w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "30 days"}}, Width: w.FieldSM},
 					},
 					Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
 				},
@@ -587,6 +608,176 @@ func Publish13() Screen {
 						w.Button{Label: "Open the link"},
 						w.Button{Label: "All published links"},
 					},
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Publish19 is frame «Событие и задача · создать ссылку» (s-publish-19).
+func Publish19() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+						},
+						On: 2,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked: w.TickedPart,
+								Kind:   w.TickRowAll,
+								Mark:   w.Mark{Kind: w.MarkMulti},
+								Label:  "Combined calendar",
+								Meta:   "6",
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "radicale · vps"},
+							w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "baikal"},
+							w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+							w.TickRow{
+								Kind:  w.TickRowExternal,
+								Mark:  w.Mark{Colour: "#8C6239"},
+								Label: "Праздники РФ",
+								Meta:  "3",
+								Trail: w.Badge{Label: "ro"},
+							},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Kind:   w.TickRowExternal,
+								Mark:   w.Mark{Colour: "#6B4E7A"},
+								Label:  "Расписание лиги",
+								Meta:   "—",
+								Hidden: true,
+								Trail:  w.Badge{Label: "ro"},
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Tags"}},
+						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Личный"},
+							Subs: []w.HeadSub{
+								w.HeadSub{
+									Parts: []w.HeadSubPart{w.Text("nextcloud · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 2 events")},
+								},
+							},
+							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary}}},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "10:00",
+									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+									Detail: "Переговорная 2",
+									Source: "nextcloud · Личный",
+								},
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "18:00",
+									Title:  []w.Inline{w.Text("Забрать документы")},
+									Detail: "МФЦ на Ленина",
+									Source: "nextcloud · Личный",
+								},
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight390,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Title: "Publish an event",
+					Head: []w.SheetHeadPart{
+						w.Dim{Parts: []w.Inline{w.Text("Синк-ап по релизу")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed},
+					},
+					Body: []w.SheetPart{
+						w.Field{
+							Label: "What the visitor sees",
+							Parts: []w.FieldPart{
+								w.Group{
+									Items: []w.FieldPart{
+										w.Check{
+											On:    true,
+											Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}},
+										},
+										w.Check{On: true, Parts: []w.CheckPart{w.Text("Title")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Location")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Description")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Attendees")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Attachments")}},
+										w.Check{Parts: []w.CheckPart{w.Text("Tags")}},
+									},
+									Form: w.GroupColumnLoose,
+								},
+								w.FieldHint{Parts: []w.Inline{w.Text("Without the title the event shows as “Busy”.")}},
+							},
+							Width: w.FieldW100,
+						},
+						w.SheetChecks{
+							Items: []w.Check{
+								w.Check{
+									On:    true,
+									Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")},
+								},
+							},
+						},
+						w.Field{Label: "Link lives for", Parts: []w.FieldPart{w.Pick{Value: "30 days"}}, Width: w.FieldSM},
+					},
+					Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}},
 				},
 				Pad: w.ScrimPad26,
 			},

@@ -817,6 +817,13 @@ func (g *gen) field(k *El) string {
 	if k.HasAttr("hidden") {
 		f = append(f, "Hidden: true")
 	}
+	if c := k.Attr("data-tc-changed"); c != "" {
+		var ns []string
+		for _, n := range strings.Fields(c) {
+			ns = append(ns, q(n))
+		}
+		f = append(f, "Changed: []string{"+join(ns, ", ")+"}")
+	}
 	var skip *El
 	var lab *El
 	for _, x := range k.Els() {

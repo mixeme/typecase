@@ -1429,6 +1429,53 @@ func TestEndFollowsStart(t *testing.T) {
 	}
 }
 
+// TestFieldChanged: a field brought by a change (Field.Changed; the owner,
+// 16.10) shows while a named field differs from what the page brought, goes
+// again when the edit is undone, sends nothing while hidden, and is not
+// touched when the page brought it shown (the screen asked after Save).
+func TestFieldChanged(t *testing.T) {
+	needChrome(t)
+	form := func(hidden bool) string {
+		f := w.Form{Action: "/x", Items: []w.FormPart{
+			w.Field{Label: "Server URL", Parts: []w.FieldPart{w.Input{Kind: w.InputText, Name: "server.url", Value: "https://dav.home.example/"}}},
+			w.Field{Label: "Username", Parts: []w.FieldPart{w.Input{Kind: w.InputText, Name: "username", Value: "mix"}}},
+			w.Field{Label: "Label", Parts: []w.FieldPart{w.Input{Kind: w.InputText, Name: "label", Value: ""}}},
+			w.Field{Label: "Published links", Changed: []string{"server.url", "username"}, Hidden: hidden, Parts: []w.FieldPart{
+				w.Check{Name: "published.links", Value: "keep", Radio: true, Parts: []w.CheckPart{w.Text("Keep them")}},
+				w.Check{Name: "published.links", Value: "revoke", Radio: true, Parts: []w.CheckPart{w.Text("Revoke them")}},
+			}},
+		}}
+		return `<div class="tc-root">` + f.Render() + `</div>`
+	}
+	const typ = `(n, v) => { const f = document.querySelector('[name="' + n + '"]'); f.value = v; f.dispatchEvent(new Event("input", {bubbles: true})); }`
+	const state = `(() => { const f = document.querySelector("[data-tc-changed]"); const b = f.querySelector("input"); return (f.hidden ? "hidden" : "shown") + (b.disabled ? " off" : " on"); })()`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name   string
+		hidden bool
+		steps  string
+		want   string
+	}{
+		{"untouched", true, ``, "hidden on"},
+		{"another label asks nothing", true, `typ("label", "Home")`, "hidden on"},
+		{"another address asks", true, `typ("server.url", "https://cloud.home.example/")`, "shown on"},
+		{"another login asks", true, `typ("username", "anna")`, "shown on"},
+		{"the address back: the question goes", true, `typ("server.url", "https://cloud.home.example/"); typ("server.url", "https://dav.home.example/")`, "hidden off"},
+		{"brought shown after Save: left alone", false, `typ("server.url", "https://dav.home.example/x")`, "shown on"},
+	} {
+		var got string
+		if err := h.Run(h.RegisterPage("changed", browser.PageHTML(form(c.hidden), "")), 900, 600,
+			chromedp.Evaluate(`(() => { const typ = `+typ+`; `+c.steps+`; return true })()`, nil),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
 // TestThumbPictureGone: a thumbnail's picture that did not arrive goes, and
 // the icon under it is what the tile shows; one that arrived hides the icon.
 // Without a script the icon stays under the picture either way. The bite: a

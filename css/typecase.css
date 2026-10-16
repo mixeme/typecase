@@ -268,14 +268,17 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-error{border-color:var(--tc-danger)}
 .tc-in:disabled{opacity:.45;cursor:default}
 .tc-in[type=date],.tc-in[type=time]{-webkit-appearance:none;appearance:none}
-/* Поле даты и времени само держит свой минимум (Р-65): его естественная ширина —
-   значение со значком календаря; ни контекст, ни класс размера его не сжимают. */
-.tc-in[type=date],.tc-in[type=time],.tc-in[type=datetime-local]{min-width:max-content}
+/* Поле даты и времени само знает свою ширину (Р-65): это значение со значком
+   календаря или часов — не уже и не шире; ни контекст, ни класс размера её не
+   задают. Поле формы вокруг него — по нему же (ниже, у .tc-field). */
+.tc-in[type=date],.tc-in[type=time],.tc-in[type=datetime-local]{min-width:max-content;width:max-content}
 .tc-say__short{display:none}
 /* Выбор с многоточием, поле тегов и строка поиска сжимаются сами: у выбора обрезка
    объявлена многоточием, теги переносятся, значение поиска прокручивается (Р-65). */
 .tc-in.is-pick,.tc-in.tc-in--cols,.tc-search{min-width:0}
-.tc-field > .tc-in[type=date],.tc-field > .tc-in[type=time]{width:100%}
+/* поле формы с датой или временем — по ширине своего значения, а не по классу
+   размера: класс задаёт ширину полю, которое своей не знает (решение владельца 16.10) */
+.tc-field:has(> .tc-in[type=date]),.tc-field:has(> .tc-in[type=time]),.tc-field:has(> .tc-in[type=datetime-local]){width:fit-content;flex:0 0 auto}
 .tc-in.is-area{height:auto;min-height:76px;align-items:flex-start;padding:7px 9px;line-height:1.5;
   white-space:pre-wrap;overflow:visible;text-overflow:clip}
 .tc-in.is-mono{font-family:var(--tc-font-mono);font-size:11.5px}
@@ -318,6 +321,10 @@ label.tc-check{position:relative;cursor:pointer}
 .tc-check__box:not(:checked) ~ .tc-tickrow__tick{background:transparent;border:.5px solid var(--tc-edge)}
 .tc-check__box:checked ~ .tc-tickrow__tick.tc-tickrow__tick{background:var(--tc-ink);border:0}
 .tc-check__box:focus-visible ~ .tc-tickrow__tick{outline:1.5px solid var(--tc-accent);outline-offset:1px}
+/* Один из нескольких (radio) — кружок, выбранный — с точкой: квадрат обещал бы, что можно
+   отметить и соседний (решение владельца 16.10). Форму знает сам флажок, не место. */
+.tc-check__box[type=radio] ~ .tc-tickrow__tick.tc-tickrow__tick{border-radius:50%}
+.tc-check__box[type=radio]:checked ~ .tc-tickrow__tick.tc-tickrow__tick{background:radial-gradient(circle,var(--tc-ink) 0 2.5px,transparent 3px);border:1px solid var(--tc-ink)}
 /* поля формы: ширина по содержимому, не 100% */
 .tc-form{display:flex;flex-wrap:wrap;gap:13px 16px;padding:14px var(--tc-page-gutter);align-items:flex-start}
 .tc-form.is-tight{padding-top:4px}

@@ -212,10 +212,10 @@ func (w FieldWidth) class() string {
 // Field — tc-field
 //
 // Роль. Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
-// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Hidden}.
+// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Hidden, Changed}.
 // Состояния. labelled | bare | hint | group | swatches | zoom | photo | row | own-line.
 // Инварианты. Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
-// Поведение. нет: поведение у контролов.
+// Поведение. Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов.
 // Эталон. кадр `components-10`, фрагмент `.tc-field`.
 // Содержимое. Контролы (ввод, выбор, текст, теги, сегмент, флажки, кнопки, строка), подсказка, образцы цвета, масштаб, ряд меток, группа флажков, фотография, выпадашка и меню под полем.
 // Чего нет. Проверки значения: что неверно, говорит подсказка, которую ставит экран.
@@ -235,6 +235,13 @@ type Field struct {
 	// an option of a pick shows (PickOption.Shows). Its controls are not
 	// sent while it is hidden.
 	Hidden bool
+	// Changed names the fields of the form whose change brings this one:
+	// a question that only an edit of them raises — «Published links» when
+	// the address or the login of a connection changes (the owner, 16.10).
+	// Printed hidden, the library's script shows it while one of them
+	// differs from what the page brought and hides it again when the edit
+	// is undone; without the script the screen asks after Save.
+	Changed []string
 }
 
 // Render prints the field.
@@ -250,7 +257,7 @@ func (f Field) html(m mix) string {
 	if f.Action != "" {
 		tag = "form"
 	}
-	s.WriteString(`<` + tag + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + attr("action", f.Action) + pick(f.Action != "", ` method="get"`) + flag("hidden", f.Hidden) + `>`)
+	s.WriteString(`<` + tag + class(m, "tc-field", is("own-line", f.OwnLine), f.Width.class(), gap, f.Place.class()) + attr("action", f.Action) + pick(f.Action != "", ` method="get"`) + attr("data-tc-changed", strings.Join(f.Changed, " ")) + flag("hidden", f.Hidden) + `>`)
 	switch {
 	case f.LabelSpan:
 		s.WriteString(`<span class="tc-field__label">` + esc(f.Label) + `</span>`)

@@ -876,6 +876,43 @@
 		return scope.querySelector('[name="' + end.getAttribute("data-tc-follows") + '"]');
 	}
 
+	// A field brought by a change (data-tc-changed, Field.Changed; the owner,
+	// 16.10): a field the page brought hidden shows while one of the named
+	// fields of its form differs from what it was when the page came, and
+	// hides again when they are as they were. A field the page brought shown
+	// (the screen asked after Save) is not touched.
+	function initChanged(root) {
+		root.querySelectorAll(".tc-field[data-tc-changed][hidden]").forEach(function (field) {
+			var scope = field.closest("form") || document.getElementById(field.getAttribute("form") || "") || document;
+			var was = {};
+			field.getAttribute("data-tc-changed").split(/\s+/).forEach(function (name) {
+				scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
+					was[name] = f.type === "checkbox" || f.type === "radio" ? f.checked : f.value;
+				});
+			});
+			field.tcWas = was;
+		});
+	}
+
+	function syncChanged(target) {
+		if (!target.name) return;
+		var scope = target.form || document;
+		scope.querySelectorAll(".tc-field[data-tc-changed]").forEach(function (field) {
+			var was = field.tcWas;
+			if (!was || !(target.name in was)) return;
+			var differs = Object.keys(was).some(function (name) {
+				return Array.prototype.some.call(scope.querySelectorAll('[name="' + name + '"]'), function (f) {
+					return (f.type === "checkbox" || f.type === "radio" ? f.checked : f.value) !== was[name];
+				});
+			});
+			if (differs) show(field);
+			else hide(field);
+			field.querySelectorAll("input, select, textarea").forEach(function (f) {
+				f.disabled = !differs;
+			});
+		});
+	}
+
 	function initFollows(root) {
 		root.querySelectorAll("[data-tc-follows]").forEach(function (end) {
 			var start = startOf(end);
@@ -1111,6 +1148,7 @@
 	// or a rule with nothing left beside it goes too.
 	function onInput(e) {
 		var q = e.target;
+		if (q.form && q.form.querySelector(".tc-field[data-tc-changed]")) syncChanged(q);
 		if (q.matches && q.matches(".tc-top__search input") && suggestOf(q) && suggestOf(q).querySelector("[data-tc-when]")) {
 			filterSuggest(q);
 			show(suggestOf(q));
@@ -1451,6 +1489,7 @@
 		initShows(root);
 		initTally(root);
 		initFollows(root);
+		initChanged(root);
 		layoutUpdates();
 	}
 

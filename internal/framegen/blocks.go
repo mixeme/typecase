@@ -560,8 +560,23 @@ func (g *gen) sec(e *El) string {
 			var fs []string
 			for _, ln := range k.Els() {
 				fl := ln.Kid("tc-table__file")
-				fs = append(fs, "{Icon: "+icon(fl.Els()[0])+", Name: "+q(fl.Els()[1].Text())+", Size: "+g.mono(ln.Kid("tc-mono"))+", Tag: "+
-					g.tag(ln.Kid("tc-tag"))+", Remove: "+g.button(ln.Kid("tc-btn"))+"}")
+				var monos, btns []*El
+				for _, x := range ln.Els() {
+					if x.Has("tc-mono") {
+						monos = append(monos, x)
+					} else if x.Has("tc-btn") {
+						btns = append(btns, x)
+					}
+				}
+				f := "{Icon: " + icon(fl.Els()[0]) + ", Name: " + q(fl.Els()[1].Text()) + ", Size: " + g.mono(monos[0]) + ", Tag: " + g.tag(ln.Kid("tc-tag"))
+				// a file that goes as a link: its terms and «Change…» (Б38)
+				if len(monos) > 1 {
+					f += ", Terms: &" + g.mono(monos[1])
+				}
+				if len(btns) > 1 {
+					f += ", Change: &" + g.button(btns[0])
+				}
+				fs = append(fs, f+", Remove: "+g.button(btns[len(btns)-1])+"}")
 			}
 			items = append(items, "w.SecFiles{Items: []w.SecFile{"+join(fs, ", ")+"}}")
 		case k.Has("tc-line__text") && k.Has("tc-stack"):
