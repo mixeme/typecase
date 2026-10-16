@@ -629,7 +629,35 @@ func Tasks3() Screen {
 							w.Field{
 								Label: "Summary",
 								Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
-								Width: w.FieldFull,
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "List",
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Дела",
+													On:    true,
+													Name:  "list",
+													Value: "nextcloud/dela",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "list",
+													Value: "nextcloud/rabota",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
 							},
 							w.Field{
 								Label: "Description",
@@ -683,6 +711,34 @@ func Tasks3() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attendees"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.TagInput{
+													Parts:   []w.TagInputPart{},
+													Columns: true,
+													Add: &w.TagAdd{
+														Name:        "attendee.add",
+														Placeholder: "Name or address",
+														Label:       "Add attendee",
+														Suggest:     "/app/contacts/suggest",
+													},
+												},
+												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
 									w.Field{
@@ -691,6 +747,11 @@ func Tasks3() Screen {
 										Width: w.FieldMD,
 									},
 									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{
@@ -741,6 +802,53 @@ func Tasks3() Screen {
 										Block: true,
 										ID:    "task-attachments",
 										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Repeats"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Every",
+										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "On",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "MO", Value: "MO"},
+													{Label: "TU", Value: "TU"},
+													{Label: "WE", Value: "WE"},
+													{Label: "TH", Value: "TH"},
+													{Label: "FR", Value: "FR"},
+													{Label: "SA", Value: "SA"},
+													{Label: "SU", Value: "SU"},
+												},
+												Name:     "byday",
+												Multiple: true,
+											},
+										},
+									},
+									w.Field{
+										Label: "Until",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Advanced RRULE",
+										Parts: []w.FieldPart{
+											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("The advanced value takes precedence when set. A task repeats from its start date, or from the due date if it has none."),
+												},
+											},
+										},
+										Width: w.FieldXL,
 									},
 								},
 							},
@@ -818,7 +926,35 @@ func Tasks14() Screen {
 							w.Field{
 								Label: "Summary",
 								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Summary", Focus: true}},
-								Width: w.FieldFull,
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "List",
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Дела",
+													On:    true,
+													Name:  "list",
+													Value: "nextcloud/dela",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "list",
+													Value: "nextcloud/rabota",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
 							},
 							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 							w.FieldSet{
@@ -845,6 +981,28 @@ func Tasks14() Screen {
 										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true}},
 										Width: w.FieldXS,
 									},
+									w.Field{
+										Label: "Time zone",
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.Pick{Value: "Europe/Moscow"},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+														w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
+										},
+										Width: w.FieldMD,
+									},
 								},
 							},
 							w.FieldSet{
@@ -865,6 +1023,34 @@ func Tasks14() Screen {
 								Items:  []w.FieldSetPart{w.Field{Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}}},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attendees"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.TagInput{
+													Parts:   []w.TagInputPart{},
+													Columns: true,
+													Add: &w.TagAdd{
+														Name:        "attendee.add",
+														Placeholder: "Name or address",
+														Label:       "Add attendee",
+														Suggest:     "/app/contacts/suggest",
+													},
+												},
+												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
 									w.Field{
@@ -873,6 +1059,11 @@ func Tasks14() Screen {
 										Width: w.FieldMD,
 									},
 									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{
@@ -921,6 +1112,53 @@ func Tasks14() Screen {
 										Block: true,
 										ID:    "task-new-attachments",
 										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Repeats"},
+								Items: []w.FieldSetPart{
+									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Every",
+										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "On",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "MO", Value: "MO"},
+													{Label: "TU", Value: "TU"},
+													{Label: "WE", Value: "WE"},
+													{Label: "TH", Value: "TH"},
+													{Label: "FR", Value: "FR"},
+													{Label: "SA", Value: "SA"},
+													{Label: "SU", Value: "SU"},
+												},
+												Name:     "byday",
+												Multiple: true,
+											},
+										},
+									},
+									w.Field{
+										Label: "Until",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Advanced RRULE",
+										Parts: []w.FieldPart{
+											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("The advanced value takes precedence when set. A task repeats from its start date, or from the due date if it has none."),
+												},
+											},
+										},
+										Width: w.FieldXL,
 									},
 								},
 							},

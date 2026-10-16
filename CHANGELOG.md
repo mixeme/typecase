@@ -738,6 +738,23 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The edit forms of a task, an event, a note and a contact** (Carrel's
+  tasks 171–173, 175, 179–181, accepted by the owner 16.10). A task's edit
+  (`s-tasks-3`, new `s-tasks-14`): «List» beside the summary — saving into
+  another list moves it; «Attendees», the event's field (Р-64); «Link» in
+  «Other»; «Repeats», the event's rubric, its hint saying a task repeats
+  from its start date or its due date; the new task's «When» has «Time
+  zone» (a task all day has none, as an event). An event's edit
+  (`s-agenda-3`, `-15`): «Calendar» last in the head, «Link» in «Other».
+  A note's fields (`s-notes-4`, `-20`, `-26`, `-30`, `states-31`):
+  «Link» after Tags. The task columns menu (`s-tasks-12`): «Attendees»
+  last, off. A contact: «Websites» rows as the email's, after «Addresses»;
+  «Dates» rows — what a date marks and the date — instead of one
+  «Anniversary» (`s-contacts-34`, new): vCard has one ANNIVERSARY and no
+  label, so the server writes them as Apple does (`X-ABDATE` with
+  `X-ABLabel`). Empty, both fold into «Show N empty fields» of a card
+  (`s-contacts-3`, `-4`, `-15`, `states-12`: 7), a new contact shows them
+  (`s-contacts-27`).
 - **Publishing, a connection's links, a letter's links** (Carrel's tasks
   163–165, accepted by the owner 16.10). `s-publish-2`: «What the visitor
   sees» — time always, title on, place, description, attendees,

@@ -874,6 +874,34 @@ func Agenda3() Screen {
 								Width: w.FieldMD,
 							},
 							w.Field{
+								Label: "Calendar",
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Личный",
+													On:    true,
+													Name:  "calendar",
+													Value: "nextcloud/lichnyy",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "calendar",
+													Value: "nextcloud/rabota",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
+							w.Field{
 								Label: "Description",
 								Parts: []w.FieldPart{
 									w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.", Label: "Text"},
@@ -1027,6 +1055,11 @@ func Agenda3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{
@@ -1228,6 +1261,34 @@ func Agenda15() Screen {
 							},
 							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "No status"}}, Width: w.FieldSM},
 							w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
+							w.Field{
+								Label: "Calendar",
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Личный",
+													On:    true,
+													Name:  "calendar",
+													Value: "nextcloud/lichnyy",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "calendar",
+													Value: "nextcloud/rabota",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
 							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
@@ -1334,6 +1395,11 @@ func Agenda15() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{

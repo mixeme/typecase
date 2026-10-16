@@ -254,8 +254,8 @@ func TestParseMockupParts_live(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.Frames) != 451 {
-		t.Fatalf("frames: got %d, want 451", len(p.Frames))
+	if len(p.Frames) != 452 {
+		t.Fatalf("frames: got %d, want 452", len(p.Frames))
 	}
 	if p.Frames[0].ID != "shell-1" || !strings.Contains(p.Frames[0].HTML, "data-frame=\"shell-1\"") {
 		t.Fatalf("first frame: %+v", p.Frames[0].ID)

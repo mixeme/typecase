@@ -688,7 +688,7 @@ func Contacts3() Screen {
 									},
 								},
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 7 empty fields"}}},
 						},
 					},
 					w.FormFoot{
@@ -873,7 +873,7 @@ func Contacts4() Screen {
 									},
 								},
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 7 empty fields"}}},
 						},
 					},
 					w.FormFoot{
@@ -1009,13 +1009,21 @@ func Contacts27() Screen {
 								Items:  []w.FieldSetPart{w.Button{Label: "Add address", Icon: "plus", Small: true}},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Websites"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add website", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Dates"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add date", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
 									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldLG},
 									w.Field{Label: "Note", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 								},
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 5 empty fields"}}},
 						},
 					},
 				},
@@ -1448,7 +1456,7 @@ func Contacts15() Screen {
 											Parts: []w.FieldPart{w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Name: "note", Label: "Text"}},
 											Width: w.FieldFull,
 										},
-										w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+										w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 7 empty fields"}}},
 									},
 								},
 							},

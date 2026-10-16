@@ -2379,7 +2379,7 @@ func States12() Screen {
 									},
 								},
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 6 empty fields"}}},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 7 empty fields"}}},
 						},
 					},
 					w.FormFoot{
@@ -4750,6 +4750,11 @@ func States31() Screen {
 												Label: "Tags",
 												Parts: []w.FieldPart{w.Input{Name: "categories", Value: "встречи, релиз", Label: "Tags"}},
 												Width: w.FieldFlex3_320,
+											},
+											w.Field{
+												Label: "Link",
+												Parts: []w.FieldPart{w.Input{Name: "url", Placeholder: "optional", Label: "Link"}},
+												Width: w.FieldFlex2_280,
 											},
 											w.Field{
 												Label: "Related to",

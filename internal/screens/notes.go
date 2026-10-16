@@ -1148,6 +1148,11 @@ func Notes20() Screen {
 												Width: w.FieldFlex3_320,
 											},
 											w.Field{
+												Label: "Link",
+												Parts: []w.FieldPart{w.Input{Name: "url", Placeholder: "optional", Label: "Link"}},
+												Width: w.FieldFlex2_280,
+											},
+											w.Field{
 												Label: "Related to",
 												Parts: []w.FieldPart{
 													w.TagInput{
@@ -1384,6 +1389,11 @@ func Notes30() Screen {
 												Width: w.FieldFlex3_320,
 											},
 											w.Field{
+												Label: "Link",
+												Parts: []w.FieldPart{w.Input{Name: "url", Placeholder: "optional", Label: "Link"}},
+												Width: w.FieldFlex2_280,
+											},
+											w.Field{
 												Label: "Related to",
 												Parts: []w.FieldPart{
 													w.TagInput{
@@ -1555,6 +1565,11 @@ func Notes4() Screen {
 												Label: "Tags",
 												Parts: []w.FieldPart{w.Input{Name: "categories", Value: "встречи, релиз", Label: "Tags"}},
 												Width: w.FieldFlex3_320,
+											},
+											w.Field{
+												Label: "Link",
+												Parts: []w.FieldPart{w.Input{Name: "url", Placeholder: "optional", Label: "Link"}},
+												Width: w.FieldFlex2_280,
 											},
 											w.Field{
 												Label: "Related to",

@@ -9,6 +9,9 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("pop", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "calendar", Value: "nextcloud/lichnyy"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "calendar", Value: "nextcloud/rabota"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
+	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Run"},
 		w.MenuItem{Label: "Edit"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
@@ -69,7 +72,7 @@ var _ = add(
 		w.MenuItem{Icon: "link", Label: "Publish a link", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/publish"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-notes-2", "tc-menu", 1),
 	overlay("edit", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"}, Row: w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGap8}, Label: "From this computer"},
-		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 3),
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 4),
 	overlay("edit", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
@@ -144,6 +147,7 @@ var _ = add(
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Status", Name: "col", Value: "status"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Changed", Name: "col", Value: "changed"},
 		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Where", Name: "col", Value: "where"},
+		w.MenuItem{Icon: "drag", Tick: &w.TickBox{Ticked: w.TickedOff}, Label: "Attendees", Name: "col", Value: "attendees"},
 		w.MenuFoot{Items: []w.Button{w.Button{Label: "Apply", Kind: w.ButtonPrimary, Small: true, Submit: true}, w.Button{Label: "Reset to defaults", Small: true, Name: "col", Value: "default", Submit: true}}}}, Action: "/app/tasks/columns", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-tasks-12", "tc-menu", 1),
 	overlay("cols-off1", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Columns", Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
@@ -393,7 +397,7 @@ var _ = add(
 			Adds: &w.Tag{Address: &w.Mono{Text: "ivan.petrov@mail.example"}, Removable: true, Title: "ivan.petrov@mail.example", Name: "attendee", Value: "mailto:ivan.petrov@mail.example"}},
 		w.MenuSep{},
 		w.MenuItem{Label: "Not in the ticked address books.", Tone: w.MenuToneAside}}, Width: w.MenuWidth420}, "s-agenda-13", "tc-menu", 1),
-	overlay("pop", w.Menu{Width: w.MenuWidth420, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 2),
+	overlay("pop", w.Menu{Width: w.MenuWidth420, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 3),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
 		w.Rubric{Text: "As sent", Form: w.RubricInline},
@@ -402,7 +406,7 @@ var _ = add(
 		w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
+		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 2),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Does not repeat"},
 		w.MenuSep{},
@@ -622,7 +626,7 @@ var _ = add(
 		w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
 		w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, "s-agenda-3", "tc-drop", 1),
+		w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, "s-agenda-3", "tc-drop", 2),
 	overlay("more", w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename"},
 		w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11Dusty}, Label: "Export"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}, "components-19", "tc-drop", 1),
