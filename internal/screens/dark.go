@@ -198,8 +198,10 @@ func Dark1() Screen {
 				Items: []w.SidePart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Close{Label: "Close the panel"}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+						},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Close{Label: "Close the panel"}}},
 					},
 					w.Fields{
 						Items: []w.FieldsItem{

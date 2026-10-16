@@ -376,6 +376,10 @@ func (Button) docbarPart() {}
 func (BarSep) docbarPart() {}
 func (Drop) docbarPart()   {}
 
+// Field in an edit's bar is where the record is saved: a note's notebook
+// after Cancel (the owner's decision of 16.10).
+func (Field) docbarPart() {}
+
 // DraftNote says where the draft is kept and when it was saved.
 type DraftNote struct {
 	Text      string
@@ -407,7 +411,7 @@ func (Button) docbarEnd()    {}
 // Инварианты. Полоса — одна строка, пока помещается: второстепенное уходит под «⋯» первым, не поместившееся после этого — переносится, краем не режется (Р-65); сохранить — первой кнопкой; полоса печатает фрагмент своего кадра.
 // Поведение. Ctrl+S сохраняет; «⋯» открывает то, что не поместилось.
 // Эталон. кадр `components-29`, фрагмент `.tc-docbar`.
-// Содержимое. Кнопки, разделители, «⋯»; в конце — автосохранение, черновик, клавиша, ширина текста, фокус.
+// Содержимое. Кнопки, разделители, «⋯», поле — куда сохраняется запись; в конце — автосохранение, черновик, клавиша, ширина текста, фокус.
 // Чего нет. Второй строки: то, что не влезло, уходит под «⋯».
 type Docbar struct {
 	// Edit is an edit's bar: without a script only its Save and Cancel stand

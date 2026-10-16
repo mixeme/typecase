@@ -142,7 +142,13 @@ func Notes1() Screen {
 							w.Button{Icon: "dots", Small: true, Title: "More"},
 						},
 						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Записи · "), w.Mono{Text: "10 August 2026, 11:05"}}},
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+									w.Text("nextcloud · Записи · "),
+									w.Mono{Text: "10 August 2026, 11:05"},
+								},
+							},
 						},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,
@@ -1046,6 +1052,41 @@ func Notes20() Screen {
 						Items: []w.DocbarPart{
 							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-edit"},
 							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Записи",
+													On:    true,
+													Name:  "notebook",
+													Value: "nextcloud/zapisi",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "nextcloud · Дневник",
+													Name:  "notebook",
+													Value: "nextcloud/dnevnik",
+												},
+												w.MenuItem{
+													Mark:   &w.Mark{Colour: "#3F6E8C"},
+													Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+													Label:  "nextcloud · Общие с семьёй",
+													Reason: "Read-only: this account cannot write here",
+													Name:   "notebook",
+													Value:  "nextcloud/semya",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -1096,42 +1137,6 @@ func Notes20() Screen {
 									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
-											w.Field{
-												Label: "Notebook",
-												Parts: []w.FieldPart{
-													w.Drop{
-														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
-														Menu: w.Menu{
-															Items: []w.MenuPart{
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#4A6B52"},
-																	Label: "nextcloud · Записи",
-																	On:    true,
-																	Name:  "notebook",
-																	Value: "nextcloud/zapisi",
-																},
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#6B4E7A"},
-																	Label: "nextcloud · Дневник",
-																	Name:  "notebook",
-																	Value: "nextcloud/dnevnik",
-																},
-																w.MenuItem{
-																	Mark:   &w.Mark{Colour: "#3F6E8C"},
-																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
-																	Label:  "nextcloud · Общие с семьёй",
-																	Reason: "Read-only: this account cannot write here",
-																	Name:   "notebook",
-																	Value:  "nextcloud/semya",
-																},
-															},
-															Width: w.MenuWidth290,
-															Pop:   w.MenuUnder,
-														},
-													},
-												},
-												Width: w.FieldFlex2_280,
-											},
 											w.Field{
 												Label: "Date",
 												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},
@@ -1288,6 +1293,41 @@ func Notes30() Screen {
 						Items: []w.DocbarPart{
 							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-new"},
 							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi"},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Записи",
+													On:    true,
+													Name:  "notebook",
+													Value: "nextcloud/zapisi",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "nextcloud · Дневник",
+													Name:  "notebook",
+													Value: "nextcloud/dnevnik",
+												},
+												w.MenuItem{
+													Mark:   &w.Mark{Colour: "#3F6E8C"},
+													Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+													Label:  "nextcloud · Общие с семьёй",
+													Reason: "Read-only: this account cannot write here",
+													Name:   "notebook",
+													Value:  "nextcloud/semya",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -1337,42 +1377,6 @@ func Notes30() Screen {
 									w.Area{Text: "", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
-											w.Field{
-												Label: "Notebook",
-												Parts: []w.FieldPart{
-													w.Drop{
-														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
-														Menu: w.Menu{
-															Items: []w.MenuPart{
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#4A6B52"},
-																	Label: "nextcloud · Записи",
-																	On:    true,
-																	Name:  "notebook",
-																	Value: "nextcloud/zapisi",
-																},
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#6B4E7A"},
-																	Label: "nextcloud · Дневник",
-																	Name:  "notebook",
-																	Value: "nextcloud/dnevnik",
-																},
-																w.MenuItem{
-																	Mark:   &w.Mark{Colour: "#3F6E8C"},
-																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
-																	Label:  "nextcloud · Общие с семьёй",
-																	Reason: "Read-only: this account cannot write here",
-																	Name:   "notebook",
-																	Value:  "nextcloud/semya",
-																},
-															},
-															Width: w.MenuWidth290,
-															Pop:   w.MenuUnder,
-														},
-													},
-												},
-												Width: w.FieldFlex2_280,
-											},
 											w.Field{
 												Label: "Date",
 												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},
@@ -1470,6 +1474,41 @@ func Notes4() Screen {
 						Items: []w.DocbarPart{
 							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-edit"},
 							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Записи",
+													On:    true,
+													Name:  "notebook",
+													Value: "nextcloud/zapisi",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "nextcloud · Дневник",
+													Name:  "notebook",
+													Value: "nextcloud/dnevnik",
+												},
+												w.MenuItem{
+													Mark:   &w.Mark{Colour: "#3F6E8C"},
+													Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+													Label:  "nextcloud · Общие с семьёй",
+													Reason: "Read-only: this account cannot write here",
+													Name:   "notebook",
+													Value:  "nextcloud/semya",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -1515,42 +1554,6 @@ func Notes4() Screen {
 									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
-											w.Field{
-												Label: "Notebook",
-												Parts: []w.FieldPart{
-													w.Drop{
-														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
-														Menu: w.Menu{
-															Items: []w.MenuPart{
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#4A6B52"},
-																	Label: "nextcloud · Записи",
-																	On:    true,
-																	Name:  "notebook",
-																	Value: "nextcloud/zapisi",
-																},
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#6B4E7A"},
-																	Label: "nextcloud · Дневник",
-																	Name:  "notebook",
-																	Value: "nextcloud/dnevnik",
-																},
-																w.MenuItem{
-																	Mark:   &w.Mark{Colour: "#3F6E8C"},
-																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
-																	Label:  "nextcloud · Общие с семьёй",
-																	Reason: "Read-only: this account cannot write here",
-																	Name:   "notebook",
-																	Value:  "nextcloud/semya",
-																},
-															},
-															Width: w.MenuWidth290,
-															Pop:   w.MenuUnder,
-														},
-													},
-												},
-												Width: w.FieldFlex2_280,
-											},
 											w.Field{
 												Label: "Date",
 												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},

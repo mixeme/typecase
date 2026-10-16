@@ -862,8 +862,39 @@ func States17() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Личный",
+														On:    true,
+														Name:  "calendar",
+														Value: "nextcloud/lichnyy",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "calendar",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -1185,8 +1216,39 @@ func States36() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Личный",
+														On:    true,
+														Name:  "calendar",
+														Value: "nextcloud/lichnyy",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "calendar",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -2227,8 +2289,34 @@ func States12() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Контакты",
+														On:    true,
+														Name:  "book",
+														Value: "nextcloud/kontakty",
+													},
+													w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "book", Value: "nextcloud/arhiv"},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -3735,13 +3823,41 @@ func States24() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Отправить документы в МФЦ"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("nextcloud · Дела · "), w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}},
+						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Дела",
+														On:    true,
+														Name:  "list",
+														Value: "nextcloud/dela",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "list",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
 							},
 						},
-						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -3764,7 +3880,7 @@ func States24() Screen {
 							w.Field{
 								Label: "Summary",
 								Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
-								Width: w.FieldFull,
+								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Description",
@@ -3818,6 +3934,34 @@ func States24() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attendees"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.TagInput{
+													Parts:   []w.TagInputPart{},
+													Columns: true,
+													Add: &w.TagAdd{
+														Name:        "attendee.add",
+														Placeholder: "Name or address",
+														Label:       "Add attendee",
+														Suggest:     "/app/contacts/suggest",
+													},
+												},
+												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Other"},
 								Items: []w.FieldSetPart{
 									w.Field{
@@ -3826,6 +3970,11 @@ func States24() Screen {
 										Width: w.FieldMD,
 									},
 									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Related to",
 										Parts: []w.FieldPart{
@@ -3876,6 +4025,56 @@ func States24() Screen {
 										Block: true,
 										ID:    "task-loss-attachments",
 										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Repeats"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "Does not repeat"},
+											w.FieldHint{Parts: []w.Inline{w.Text("Repeats from the start date, or from the due date when there is none.")}},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Every",
+										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "On",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "MO", Value: "MO"},
+													{Label: "TU", Value: "TU"},
+													{Label: "WE", Value: "WE"},
+													{Label: "TH", Value: "TH"},
+													{Label: "FR", Value: "FR"},
+													{Label: "SA", Value: "SA"},
+													{Label: "SU", Value: "SU"},
+												},
+												Name:     "byday",
+												Multiple: true,
+											},
+										},
+									},
+									w.Field{
+										Label: "Until",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Advanced RRULE",
+										Parts: []w.FieldPart{
+											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
+										},
+										Width: w.FieldXL,
 									},
 								},
 							},
@@ -4639,6 +4838,41 @@ func States31() Screen {
 						Items: []w.DocbarPart{
 							w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "note-loss"},
 							w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Записи",
+													On:    true,
+													Name:  "notebook",
+													Value: "nextcloud/zapisi",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "nextcloud · Дневник",
+													Name:  "notebook",
+													Value: "nextcloud/dnevnik",
+												},
+												w.MenuItem{
+													Mark:   &w.Mark{Colour: "#3F6E8C"},
+													Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+													Label:  "nextcloud · Общие с семьёй",
+													Reason: "Read-only: this account cannot write here",
+													Name:   "notebook",
+													Value:  "nextcloud/semya",
+												},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+								Width: w.FieldMD,
+							},
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
@@ -4700,42 +4934,6 @@ func States31() Screen {
 									w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
 									w.DocFields{
 										Items: []w.Field{
-											w.Field{
-												Label: "Notebook",
-												Parts: []w.FieldPart{
-													w.Drop{
-														Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
-														Menu: w.Menu{
-															Items: []w.MenuPart{
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#4A6B52"},
-																	Label: "nextcloud · Записи",
-																	On:    true,
-																	Name:  "notebook",
-																	Value: "nextcloud/zapisi",
-																},
-																w.MenuItem{
-																	Mark:  &w.Mark{Colour: "#6B4E7A"},
-																	Label: "nextcloud · Дневник",
-																	Name:  "notebook",
-																	Value: "nextcloud/dnevnik",
-																},
-																w.MenuItem{
-																	Mark:   &w.Mark{Colour: "#3F6E8C"},
-																	Trail:  w.Badge{Label: "ro", Place: w.Pushed},
-																	Label:  "nextcloud · Общие с семьёй",
-																	Reason: "Read-only: this account cannot write here",
-																	Name:   "notebook",
-																	Value:  "nextcloud/semya",
-																},
-															},
-															Width: w.MenuWidth290,
-															Pop:   w.MenuUnder,
-														},
-													},
-												},
-												Width: w.FieldFlex2_280,
-											},
 											w.Field{
 												Label: "Date",
 												Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}},

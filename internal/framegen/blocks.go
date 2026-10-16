@@ -1286,6 +1286,8 @@ func (g *gen) docbar(e *El) string {
 			f = append(f, "More: &"+g.button(k))
 		case k.Has("tc-drop"):
 			items = append(items, g.drop(k)) // Attach with its menu (Carrel's task 126)
+		case k.Has("tc-field"):
+			items = append(items, g.field(k)) // where the note is saved (the owner, 16.10)
 		case k.Has("tc-bar__right"):
 			for _, x := range k.Els() {
 				sec := ""

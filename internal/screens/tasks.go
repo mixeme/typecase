@@ -178,7 +178,9 @@ func Tasks1() Screen {
 				Items: []w.SidePart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Собрать чемодан", Size: w.HeadTitle19},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Дела")}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Дела")}},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Small: true},
@@ -461,7 +463,9 @@ func Tasks2() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Собрать чемодан"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Дела")}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Дела")}},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
@@ -560,7 +564,7 @@ func Tasks2() Screen {
 										w.Text(" "),
 										w.Link{Text: "nextcloud · Работа", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· Time, priority differ")}},
+										w.Dim{Parts: []w.Inline{w.Text("· Due, priority differ")}},
 									},
 								},
 								Gap: 5,
@@ -611,13 +615,41 @@ func Tasks3() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Отправить документы в МФЦ"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("nextcloud · Дела · "), w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}},
+						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Дела",
+														On:    true,
+														Name:  "list",
+														Value: "nextcloud/dela",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "list",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
 							},
 						},
-						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -630,34 +662,6 @@ func Tasks3() Screen {
 								Label: "Summary",
 								Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
-							},
-							w.Field{
-								Label: "List",
-								Parts: []w.FieldPart{
-									w.Drop{
-										Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#4A6B52"},
-													Label: "nextcloud · Дела",
-													On:    true,
-													Name:  "list",
-													Value: "nextcloud/dela",
-												},
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#3F6E8C"},
-													Label: "nextcloud · Работа",
-													Name:  "list",
-													Value: "nextcloud/rabota",
-												},
-											},
-											Width: w.MenuWidth290,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
-								Width: w.FieldMD,
 							},
 							w.Field{
 								Label: "Description",
@@ -912,9 +916,40 @@ func Tasks14() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "New task"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Дела")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Title: &w.HeadTitle{Text: "New task"},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Дела",
+														On:    true,
+														Name:  "list",
+														Value: "nextcloud/dela",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "list",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -927,34 +962,6 @@ func Tasks14() Screen {
 								Label: "Summary",
 								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
-							},
-							w.Field{
-								Label: "List",
-								Parts: []w.FieldPart{
-									w.Drop{
-										Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#4A6B52"},
-													Label: "nextcloud · Дела",
-													On:    true,
-													Name:  "list",
-													Value: "nextcloud/dela",
-												},
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#3F6E8C"},
-													Label: "nextcloud · Работа",
-													Name:  "list",
-													Value: "nextcloud/rabota",
-												},
-											},
-											Width: w.MenuWidth290,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
-								Width: w.FieldMD,
 							},
 							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 							w.FieldSet{

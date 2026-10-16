@@ -75,7 +75,7 @@ var _ = add(
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 4),
 	overlay("edit", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
-		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 2),
 	overlay("row", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "mail", Label: "Send"},
 		w.MenuSep{},
@@ -89,7 +89,7 @@ var _ = add(
 	overlay("radio", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 2),
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"}}, Width: w.MenuWidth290}, "s-notes-19", "tc-menu", 1),

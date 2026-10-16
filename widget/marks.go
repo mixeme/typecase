@@ -25,7 +25,6 @@ const (
 	MarkH12
 	MarkH14
 	MarkH18
-	MarkH19
 	MarkH20
 	MarkH32
 	MarkH34
@@ -34,7 +33,7 @@ const (
 
 func (s MarkSize) class() string {
 	return [...]string{"", "tc-mark--h11", "tc-mark--h11 tc-mark--inline", "tc-mark--h12", "tc-mark--h14",
-		"tc-mark--h18", "tc-mark--h19", "tc-mark--h20", "tc-mark--h32", "tc-mark--h34", "tc-mark--on-hair"}[s]
+		"tc-mark--h18", "tc-mark--h20", "tc-mark--h32", "tc-mark--h34", "tc-mark--on-hair"}[s]
 }
 
 // Mark — tc-mark

@@ -548,8 +548,34 @@ func Contacts3() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Контакты",
+														On:    true,
+														Name:  "book",
+														Value: "nextcloud/kontakty",
+													},
+													w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "book", Value: "nextcloud/arhiv"},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -734,8 +760,34 @@ func Contacts4() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Контакты",
+														On:    true,
+														Name:  "book",
+														Value: "nextcloud/kontakty",
+													},
+													w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "book", Value: "nextcloud/arhiv"},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -919,8 +971,34 @@ func Contacts27() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "New contact"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Контакты",
+														On:    true,
+														Name:  "book",
+														Value: "nextcloud/kontakty",
+													},
+													w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "book", Value: "nextcloud/arhiv"},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -1323,9 +1401,33 @@ func Contacts15() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Анна Ковалёва"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
 							Acts: &w.Acts{
-								Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "contact-edit"}},
+								Items: []w.ActsPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															On:    true,
+															Name:  "book",
+															Value: "nextcloud/kontakty",
+														},
+														w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "book", Value: "nextcloud/arhiv"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Button{Label: "Cancel"},
+									w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "contact-edit"},
+								},
 							},
 						},
 						w.Form{

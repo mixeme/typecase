@@ -274,8 +274,10 @@ func Agenda1() Screen {
 			Side: &w.Side{
 				Items: []w.SidePart{
 					w.Head{
-						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH19}, Text: "Синк-ап по релизу", Size: w.HeadTitle19},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
+						Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Small: true},
@@ -647,8 +649,10 @@ func Agenda2() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH19}, Text: "Синк-ап по релизу"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
+						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
@@ -847,8 +851,39 @@ func Agenda3() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Личный",
+														On:    true,
+														Name:  "calendar",
+														Value: "nextcloud/lichnyy",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "calendar",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -871,34 +906,6 @@ func Agenda3() Screen {
 							w.Field{
 								Label: "Tags",
 								Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Tags"}},
-								Width: w.FieldMD,
-							},
-							w.Field{
-								Label: "Calendar",
-								Parts: []w.FieldPart{
-									w.Drop{
-										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#4A6B52"},
-													Label: "nextcloud · Личный",
-													On:    true,
-													Name:  "calendar",
-													Value: "nextcloud/lichnyy",
-												},
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#3F6E8C"},
-													Label: "nextcloud · Работа",
-													Name:  "calendar",
-													Value: "nextcloud/rabota",
-												},
-											},
-											Width: w.MenuWidth290,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
 								Width: w.FieldMD,
 							},
 							w.Field{
@@ -1239,8 +1246,39 @@ func Agenda15() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "New event"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
-						Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Личный",
+														On:    true,
+														Name:  "calendar",
+														Value: "nextcloud/lichnyy",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "calendar",
+														Value: "nextcloud/rabota",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+							},
+						},
 					},
 					w.Runbar{
 						Meter:    w.Meter{Percent: 0},
@@ -1261,34 +1299,6 @@ func Agenda15() Screen {
 							},
 							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "No status"}}, Width: w.FieldSM},
 							w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
-							w.Field{
-								Label: "Calendar",
-								Parts: []w.FieldPart{
-									w.Drop{
-										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#4A6B52"},
-													Label: "nextcloud · Личный",
-													On:    true,
-													Name:  "calendar",
-													Value: "nextcloud/lichnyy",
-												},
-												w.MenuItem{
-													Mark:  &w.Mark{Colour: "#3F6E8C"},
-													Label: "nextcloud · Работа",
-													Name:  "calendar",
-													Value: "nextcloud/rabota",
-												},
-											},
-											Width: w.MenuWidth290,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
-								Width: w.FieldMD,
-							},
 							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},

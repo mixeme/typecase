@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `MarkH19` is gone: no frame draws a mark of 19 px since a record's head
+  carries its collection's mark beside the collection's name.
 - **A field of a date or a time is as wide as its value** (the owner,
   16.10): not narrower and not wider — its value and its icon, whatever
   the size class of the field around it; the field around it takes that
@@ -69,6 +71,8 @@ do, not what the authors did.
 
 ### Added
 
+- **A `Field` in an edit's bar (`Docbar`)**: where a note is saved, after
+  Cancel (the owner, 16.10).
 - **`Field.Changed`** — a field that a change brings: printed hidden, it
   shows while one of the named fields of its form differs from what the
   page brought and goes when the edit is undone; a field the page brought
@@ -738,6 +742,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Where a record is saved, and its collection's mark** (the owner's
+  decisions of 16.10; Carrel's task 182). A record's head carries the
+  collection's mark beside the collection's name under the title, not at
+  the title (16 heads of cards and panels; a collection's own head keeps
+  its mark at its name). An edit does not name its collection under the
+  title: the choice of it is in the head, left of Cancel — «List»,
+  «Calendar», and now «Address book» for a contact too (moving is common,
+  Р-63); a note's «Notebook» stands right of Cancel in its bar. 13 edit
+  frames of tasks, events and contacts, 5 of notes; the frames of states
+  caught up with their forms (List, Attendees, Link, Repeats of a task;
+  Calendar of an event). The line «Saving changes this copy only…» is
+  gone from the form of a chosen copy (`s-contacts-31`) — the field says
+  it. A task's copy differs in «Due», not «Time» (`s-tasks-2`).
 - **The edit forms of a task, an event, a note and a contact** (Carrel's
   tasks 171–173, 175, 179–181, accepted by the owner 16.10). A task's edit
   (`s-tasks-3`, new `s-tasks-14`): «List» beside the summary — saving into
