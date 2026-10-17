@@ -74,9 +74,9 @@ var _ = add(
 	form("hint", w.Field{Label: "Birthday", Parts: []w.FieldPart{w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, w.FieldHint{Parts: []w.Inline{w.Text("Type the date as 14.03.1987, or 14.03 without the year.")}, Variant: w.HintDanger}}, Width: w.FieldSM}, "s-contacts-18", "tc-field", 1),
 	form("bare", w.Field{Gap: 7, Parts: []w.FieldPart{chk, chk, chk}}, "appearance-1", "tc-field", 3),
 	form("labelled", w.Field{Parts: []w.FieldPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Width: w.FieldMD}, "s-notes-20", "tc-field", 1),
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi", Of: "note-edit"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik", Of: "note-edit"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya", Of: "note-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Width: w.FieldMD}, "s-notes-20", "tc-field", 1),
 	form("labelled", field("Tags", w.FieldFlex3_320, in), "s-notes-20", "tc-field", 4),
 	form("labelled", field("Related to", w.FieldFlex3_340, tags), "s-notes-20", "tc-field", 6),
 	form("labelled", field(" ", w.FieldFill120, chk), "s-notes-9", "tc-field", 5),

@@ -9,8 +9,8 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("pop", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "calendar", Value: "nextcloud/lichnyy"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "calendar", Value: "nextcloud/rabota"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "calendar", Value: "nextcloud/lichnyy", Of: "event-edit"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "calendar", Value: "nextcloud/rabota", Of: "event-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Run"},
 		w.MenuItem{Label: "Edit"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
@@ -87,9 +87,9 @@ var _ = add(
 	overlay("more", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "cols", Label: "Columns"}}, Pop: w.MenuUnderEnd, Inline: true}, "s-contacts-7", "tc-menu", 1),
 	overlay("radio", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true, Name: "notebook", Value: "nextcloud/zapisi", Of: "note-edit"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "notebook", Value: "nextcloud/dnevnik", Of: "note-edit"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya", Of: "note-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"}}, Width: w.MenuWidth290}, "s-notes-19", "tc-menu", 1),

@@ -71,6 +71,12 @@ do, not what the authors did.
 
 ### Added
 
+- **`MenuItem.Of`** — the form a radio item of a menu belongs to without
+  standing in it (Carrel's task 203): the collection chosen in an edit's
+  head stands outside the edit's form, and without `form="…"` the browser
+  sent none of it. A menu item with `Name` outside a form that sends is
+  right when it names its form with `Of` (`docs/guide/screen.md`, «Проверка»);
+  `page.Check` asks the ID to name a form on the page.
 - **`widget.Slug`, `Input.From`, `SlugOf`** — a field derived from another
   (Carrel's task 200): a new collection's address from its name. `Slug` is
   the one rule (NFD, the Cyrillic table, lower case, spaces and hyphens to
@@ -755,6 +761,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- The collection's radio items in an edit's head name the edit's form
+  (`form="…"`, Carrel's task 203): `s-tasks-3`, `-14`, `s-agenda-3`, `-15`,
+  `-27`, `s-contacts-3`, `-4`, `-27`, `-31`, `states-12`, `-17`, `-24`,
+  `-36` (the notes and `s-contacts-15` named it already). The look is the
+  same.
 - `s-profile-5`: the address of a new collection shows the derived
   `poezdki` as its placeholder, and the path under it ends with it (the
   owner's decision Кл5, Carrel's task 200).

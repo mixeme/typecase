@@ -68,10 +68,14 @@ type MenuItem struct {
 	// (Tick), it sends Value; the items' order is the order they are sent in.
 	// Fixed keeps it ticked and off: a column that is always shown. Without a
 	// Tick, a Form or an Href, Name makes it a radio button of the form the
-	// menu stands in: one of the items, the chosen one (On) sends its Value —
-	// a time zone (Carrel's task 73).
+	// menu stands in, or of the form Of names: one of the items, the chosen
+	// one (On) sends its Value — a time zone (Carrel's task 73).
 	Name  string
 	Value string
+	// Of is the ID of the form a radio item (Name) belongs to without
+	// standing in it: the collection chosen in an edit's head, outside the
+	// edit's form (Carrel's task 203).
+	Of    string
 	Fixed bool
 	Drag  bool // the drawn state of an item being dragged (the mockup's states)
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
@@ -150,7 +154,7 @@ func (it MenuItem) html(mix) string {
 	if it.Name != "" && it.Form == "" && it.Href == "" {
 		// a collection that cannot be chosen is shown and switched off, its
 		// reason in the hint: read-only (Carrel's task 103)
-		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio" role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
+		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio"` + attr("form", it.Of) + ` role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
 			flag("checked", it.On) + flag("disabled", it.Reason != "") + `>`)
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
