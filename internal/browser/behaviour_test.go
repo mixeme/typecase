@@ -555,6 +555,56 @@ func TestClosedMenuWithoutScripts(t *testing.T) {
 	}
 }
 
+// TestBarFormSubmits (Carrel's task 195): the journal's action and day are a
+// GET form — without a script its Show sends them with the hidden segment,
+// an empty action too; with the library's script choosing an action in the
+// menu does, and Show is not shown.
+func TestBarFormSubmits(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	form := func(action string) string {
+		f := w.BarForm{Items: []w.BarFormPart{
+			w.Drop{Trigger: w.Pick{Value: "All actions"}, Menu: w.Menu{Items: []w.MenuPart{
+				w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
+				w.MenuItem{Label: "login.fail", Name: "action", Value: "login.fail"}}, Pop: w.MenuUnder}},
+			w.Dim{Parts: []w.Inline{w.Text("since")}},
+			w.Input{Kind: w.InputDate, Name: "since", Value: "2026-08-01", Label: "Since"}},
+			Action: action, Hidden: []w.Hidden{{Name: "show", Value: "failures"}}, Show: w.Button{Label: "Show"}}
+		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar">` + f.Render() + `</div></div></div>`
+	}
+	bareURL := h.RegisterPage("barform-bare", "")
+	h.RegisterPage("barform-bare", strings.Replace(browser.PageHTML(form(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))
+	var showShown bool
+	var search string
+	if err := h.Run(bareURL, 900, 600,
+		chromedp.Evaluate(`document.querySelector(".tc-barform__show button").checkVisibility()`, &showShown),
+		chromedp.Click(`.tc-barform__show button`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !showShown || !strings.Contains(search, "action=&") || !strings.Contains(search, "since=2026-08-01") || !strings.Contains(search, "show=failures") {
+		t.Errorf("without a script: Show shown %v, sent %q; want true and action=, since=2026-08-01, show=failures", showShown, search)
+	}
+	pageURL := h.RegisterPage("barform", "")
+	h.RegisterPage("barform", browser.PageHTML(form(pageURL), ""))
+	var hidden bool
+	search = ""
+	if err := h.Run(pageURL, 900, 600,
+		chromedp.Evaluate(`!document.querySelector(".tc-barform__show button").checkVisibility()`, &hidden),
+		chromedp.Click(`.tc-barform details.tc-drop > summary`, chromedp.ByQuery),
+		chromedp.Click(`input[value="login.fail"]`, chromedp.ByQuery),
+		chromedp.Sleep(300*time.Millisecond),
+		chromedp.Evaluate(`location.search`, &search),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !hidden || !strings.Contains(search, "action=login.fail") || !strings.Contains(search, "show=failures") {
+		t.Errorf("with the script: no Show %v, sent %q; want true and action=login.fail, show=failures", hidden, search)
+	}
+}
+
 // TestCheckFormSubmits (Carrel's task 67): a bar's «Compact rows» is a GET
 // form — without a script its Apply sends it, with the library's script a
 // change of the check does, and Apply is not shown.

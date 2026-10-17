@@ -1388,9 +1388,43 @@ func Admin7() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190},
-							w.Input{Kind: w.InputDate, Value: "2026-08-01", Mono: true, Variant: w.InputH26W120},
-							w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Security"}, {Label: "Failures"}}},
+							w.BarForm{
+								Items: []w.BarFormPart{
+									w.Drop{
+										Trigger: w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
+												w.MenuSep{},
+												w.MenuItem{Label: "login.ok", Name: "action", Value: "login.ok"},
+												w.MenuItem{Label: "login.fail", Name: "action", Value: "login.fail"},
+												w.MenuItem{Label: "escrow.recover", Name: "action", Value: "escrow.recover"},
+												w.MenuItem{Label: "settings.instance", Name: "action", Value: "settings.instance"},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+									w.Dim{Parts: []w.Inline{w.Text("since")}},
+									w.Input{
+										Kind:    w.InputDate,
+										Name:    "since",
+										Value:   "2026-08-01",
+										Label:   "Since",
+										Mono:    true,
+										Variant: w.InputH26W120,
+									},
+								},
+								Action: "/admin/audit",
+								Show:   w.Button{Label: "Show", Submit: true},
+							},
+							w.Seg{
+								Options: []w.SegOption{
+									{Label: "All", Href: "/admin/audit?since=2026-08-01", On: true},
+									{Label: "Security", Href: "/admin/audit?show=security&since=2026-08-01"},
+									{Label: "Failures", Href: "/admin/audit?show=failures&since=2026-08-01"},
+								},
+							},
 							w.Button{Folds: true, Label: "Columns", Icon: "cols", Title: "Columns"},
 						},
 					},
@@ -1409,7 +1443,7 @@ func Admin7() Screen {
 									{Parts: []w.CellPart{w.Text("login.ok")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("mix")}},
 									{Parts: []w.CellPart{w.Text("—")}},
-									{Parts: []w.CellPart{w.Text("ip 10.0.0.4")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},
 							{
@@ -1418,7 +1452,7 @@ func Admin7() Screen {
 									{Parts: []w.CellPart{w.Text("login.fail")}, Mono: true, Tone: w.CellDanger},
 									{Parts: []w.CellPart{w.Text("—")}},
 									{Parts: []w.CellPart{w.Text("anna")}},
-									{Parts: []w.CellPart{w.Text("3rd attempt · rate-limited")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("3rd attempt · ip 203.0.113.9 · rate-limited")}, Mono: true},
 								},
 							},
 							{

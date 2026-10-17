@@ -308,11 +308,13 @@
 	}
 
 	// A bar's check that is a form (Compact rows) sends itself when it changes;
-	// without a script its Apply does.
+	// without a script its Apply does. So does a bar's filter that is a form
+	// (BarForm: the journal's action and day), whatever field of it changes.
 	document.addEventListener("change", function (e) {
 		var box = e.target;
-		if (!box || !box.classList || !box.classList.contains("tc-check__box")) return;
-		var f = closest(box, "form.tc-checkform");
+		if (!box || !box.classList) return;
+		var f = box.classList.contains("tc-check__box") ? closest(box, "form.tc-checkform") : null;
+		if (!f && box.name) f = closest(box, "form.tc-barform");
 		if (f) {
 			if (f.requestSubmit) f.requestSubmit();
 			else f.submit();

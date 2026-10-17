@@ -8,6 +8,13 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("radio", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
+		w.MenuSep{},
+		w.MenuItem{Label: "login.ok", Name: "action", Value: "login.ok"},
+		w.MenuItem{Label: "login.fail", Name: "action", Value: "login.fail"},
+		w.MenuItem{Label: "escrow.recover", Name: "action", Value: "escrow.recover"},
+		w.MenuItem{Label: "settings.instance", Name: "action", Value: "settings.instance"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-admin-7", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "calendar", Value: "nextcloud/lichnyy", Of: "event-edit"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "calendar", Value: "nextcloud/rabota", Of: "event-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
@@ -573,12 +580,12 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Label: "None"}}, Width: w.MenuWidth212}, "s-admin-9", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "All actions", On: true},
+		w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
 		w.MenuSep{},
-		w.MenuItem{Label: "login.ok"},
-		w.MenuItem{Label: "login.fail"},
-		w.MenuItem{Label: "escrow.recover"},
-		w.MenuItem{Label: "settings.instance"}}, Width: w.MenuWidth290}, "s-admin-10", "tc-menu", 1),
+		w.MenuItem{Label: "login.ok", Name: "action", Value: "login.ok"},
+		w.MenuItem{Label: "login.fail", Name: "action", Value: "login.fail"},
+		w.MenuItem{Label: "escrow.recover", Name: "action", Value: "escrow.recover"},
+		w.MenuItem{Label: "settings.instance", Name: "action", Value: "settings.instance"}}, Width: w.MenuWidth290}, "s-admin-10", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "nextcloud · Контакты", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Анна Ковалёва", On: true},
 		w.MenuItem{Icon: "con", Trail: w.Mono{Text: "nextcloud · Контакты", Variant: w.Mono10Dusty, Place: w.Pushed}, Label: "Пётр Ковалёв"},

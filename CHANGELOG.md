@@ -71,6 +71,15 @@ do, not what the authors did.
 
 ### Added
 
+- **`widget.BarForm`** — a bar's filter that is a GET form (Carrel's task
+  195): its fields (a pick with a menu of radios, a date, a dim word) stand
+  in the bar as its own; with the library's script a change sends it,
+  without one its Show does (shown only then). A bar holding one wraps
+  what does not fit at any width. A menu's radio item always carries its
+  value, an empty one too («All actions»).
+- **`Input.Of`** — the form a field belongs to without standing in it, as
+  `MenuItem.Of` and `Send.Of`: an address in a head beside the button
+  that sends it.
 - **A button that waits for its form — `ButtonWaits`, `Check.Required`**
   (Carrel's task 198). A radio with `Required` must be chosen before its
   form goes; a button of `ButtonWaits` looks disabled while a required
@@ -770,6 +779,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-admin-7`: the journal's bar is a form — the action and the day
+  («since», from that day on) go together, Show without a script; the
+  segments are links. A login that succeeded has no address; refusals in a
+  row by one account are one line with a count, «3rd attempt · ip
+  203.0.113.9 · rate-limited» (the owner, 16.10). `s-admin-10`: the
+  actions are radios of that form (Carrel's task 195 p. 2, 3; accepted by
+  the owner 17.10).
 - **The conflict screen's states** (Carrel's tasks 191, 198; the owner's
   decisions Р-67, Р-69; accepted by the owner 17.10). The form's names follow C-5: radios `choice.0…` with
   `mine` / `theirs` («Leave it out» is `theirs`), hidden `etag` and

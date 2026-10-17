@@ -364,6 +364,10 @@ func (g *gen) input(x *El) string {
 	if v := x.Attr("data-tc-from"); v != "" {
 		f = append(f, "From: "+q(v))
 	}
+	if v := x.Attr("form"); v != "" {
+		// a field of a form it does not stand in (Carrel's task 195)
+		f = append(f, "Of: "+q(v))
+	}
 	return "w.Input{" + join(f, ", ") + g.ev(x, "InputVariant", "Variant") + placef(x) + "}"
 }
 
@@ -1138,12 +1142,35 @@ func (g *gen) barItem(k *El) string {
 		}
 		return s + "}"
 	}
+	if k.Has("tc-barform") {
+		// a bar's filter that is a form (Carrel's task 195): its fields stand
+		// in the bar, Show sends it without a script
+		var its, hs []string
+		show := ""
+		for _, i := range k.Els() {
+			switch {
+			case i.Tag == "input" && i.Attr("type") == "hidden":
+				hs = append(hs, "{Name: "+q(i.Attr("name"))+", Value: "+q(i.Attr("value"))+"}")
+			case i.Has("tc-barform__show"):
+				show = g.button(i.Kid("tc-btn"))
+			default:
+				its = append(its, g.barItem(i))
+			}
+		}
+		s := "w.BarForm{Items: []w.BarFormPart{" + join(its, ", ") + "}, Action: " + q(k.Attr("action"))
+		if len(hs) > 0 {
+			s += ", Hidden: []w.Hidden{" + join(hs, ", ") + "}"
+		}
+		return s + ", Show: " + show + "}"
+	}
 	if c := g.control(k); c != "" {
 		return c
 	}
 	switch {
 	case k.Has("tc-mono"):
 		return g.mono(k)
+	case k.Has("tc-dim"):
+		return g.dimx(k)
 	case k.Has("tc-drop"):
 		return g.drop(k)
 	}

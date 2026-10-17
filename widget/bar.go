@@ -19,6 +19,7 @@ func (Seg) barPart()       {}
 func (SegFold) barPart()   {}
 func (BarSep) barPart()    {}
 func (Drop) barPart()      {}
+func (BarForm) barPart()   {}
 
 // BarSep is a thin rule between groups of a bar.
 type BarSep struct {
@@ -106,5 +107,51 @@ func (b Bar) html(m mix) string {
 		s.WriteString(`</span>`)
 	}
 	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// BarForm — tc-barform
+//
+// Роль. Фильтр полосы, который сам — форма: действие и день журнала уходят GET-запросом вместе (задача Carrel 195).
+// Вход. BarForm{Items, Action, Hidden, Show}.
+// Состояния. default.
+// Инварианты. Поля внутри — поля формы (Name); форма отправляет их и скрытые поля; со сценарием — при смене, без сценария — кнопкой Show; виджет печатает фрагмент своего кадра.
+// Поведение. Смена поля или выбор пункта меню отправляет форму (сценарий); без сценария — Show в конце.
+// Эталон. кадр `s-admin-7`, фрагмент `.tc-barform`.
+// Содержимое. Поля полосы: выбор с меню из радио, поле даты, приглушённая подпись; скрытые поля; Show для работы без сценария.
+// Чего нет. Своего вида: форма не рисуется, её поля стоят в полосе как свои; Show виден, только пока страница без сценария (data-tc-noscript на html, его снимает tc.js).
+type BarForm struct {
+	Items  []BarFormPart
+	Action string   // where the form goes (GET)
+	Hidden []Hidden // the list's other choices that go with it: the segment chosen
+	Show   Button   // what sends it on a page without a script: Show, a submit
+}
+
+// BarFormPart is what a bar's filter form holds.
+type BarFormPart interface {
+	part
+	barFormPart()
+}
+
+func (Drop) barFormPart()  {}
+func (Input) barFormPart() {}
+func (Pick) barFormPart()  {}
+func (Dim) barFormPart()   {}
+
+// Render prints the form.
+func (f BarForm) Render() string { return f.html(nil) }
+
+func (f BarForm) html(m mix) string {
+	var s strings.Builder
+	s.WriteString(`<form` + class(m, "tc-barform") + attr("action", f.Action) + ` method="get">`)
+	for _, it := range f.Items {
+		s.WriteString(it.html(nil))
+	}
+	for _, h := range f.Hidden {
+		s.WriteString(h.html(nil))
+	}
+	show := f.Show
+	show.Submit = true
+	s.WriteString(`<span class="tc-barform__show">` + show.html(nil) + `</span></form>`)
 	return s.String()
 }

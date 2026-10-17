@@ -106,6 +106,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 		return g.segfold(e), ""
 	case e.Has("tc-checkform"):
 		return g.checkForm(e), ""
+	case e.Has("tc-barform"):
+		return g.barItem(e), ""
 	case e.Has("tc-drop") && e.Tag == "details":
 		return g.drop(e), ""
 	case e.Has("tc-range"):

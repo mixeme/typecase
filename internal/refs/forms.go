@@ -56,6 +56,13 @@ var _ = add(
 	form("default", w.Seg{Options: seg(0, "Remote", "Local")}, "components-13", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Open 12", "Done 48", "All")}, "components-9", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(0, "0°", "90°", "180°", "270°"), Variant: w.SegStart}, "s-contacts-5", "tc-seg", 1),
+	form("default", w.BarForm{Items: []w.BarFormPart{w.Drop{Trigger: w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
+		w.MenuSep{},
+		w.MenuItem{Label: "login.ok", Name: "action", Value: "login.ok"},
+		w.MenuItem{Label: "login.fail", Name: "action", Value: "login.fail"},
+		w.MenuItem{Label: "escrow.recover", Name: "action", Value: "escrow.recover"},
+		w.MenuItem{Label: "settings.instance", Name: "action", Value: "settings.instance"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.Dim{Parts: []w.Inline{w.Text("since")}}, w.Input{Kind: w.InputDate, Name: "since", Value: "2026-08-01", Label: "Since", Mono: true, Variant: w.InputH26W120}}, Action: "/admin/audit", Show: w.Button{Label: "Show", Submit: true}}, "s-admin-7", "tc-barform", 1),
 	form("default", w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/contacts", Apply: w.Button{Label: "Apply", Small: true}}, "s-contacts-1", "tc-checkform", 2),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "All 24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events 14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks 2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}, "s-contacts-7", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", On: true, Value: "to.webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", Value: "both"}}, Variant: w.SegStart, Name: "choice"}, "s-backup-2", "tc-seg", 1),
@@ -159,5 +166,5 @@ var _ = add(
 func faceOf(f w.Face) *w.Face { return &f }
 
 func init() {
-	Widgets = append(Widgets, w.Seg{}, w.SegFold{}, w.CheckForm{}, w.Check{}, w.Range{}, w.Line{}, w.Stack{}, w.Grow{}, w.Push{}, w.Rubric{})
+	Widgets = append(Widgets, w.Seg{}, w.SegFold{}, w.CheckForm{}, w.BarForm{}, w.Check{}, w.Range{}, w.Line{}, w.Stack{}, w.Grow{}, w.Push{}, w.Rubric{})
 }

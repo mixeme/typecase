@@ -570,6 +570,12 @@ label.tc-tree__row{cursor:pointer}
 .tc-checkform{display:inline-flex;align-items:center;gap:6px}
 .tc-checkform__apply{display:none}
 [data-tc-noscript] .tc-checkform__apply{display:contents}
+/* Фильтр полосы формой (действие и день журнала): форма не рисуется — её поля стоят в полосе; Show — только пока страница без сценария. */
+.tc-barform{display:contents}
+.tc-barform__show{display:none}
+[data-tc-noscript] .tc-barform__show{display:contents}
+/* Полоса с такой формой переносит, что не влезло, на любой ширине: ряд, пока влезает. */
+.tc-bar:has(> .tc-barform){flex-wrap:wrap}
 /* «Save as» показанного текста (задача 94): файл собирает сценарий страницы — без него кнопки нет. */
 [data-tc-noscript] [data-tc-save]{display:none}
 [data-tc-noscript] button[data-tc-copy],[data-tc-noscript] button[data-tc-copy-from]{display:none}
@@ -1034,7 +1040,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
   /* поле полосы — той же высоты, что полоса, поверх своего класса размера (tc-in--h26-…) */
   .tc-bar .tc-in.tc-in,.tc-docbar .tc-in.tc-in,.tc-head .tc-acts .tc-in.tc-in{height:38px}
-  .tc-seg,.tc-bar > .tc-in,.tc-in{overflow:visible}
+  .tc-seg,.tc-bar > .tc-in,.tc-barform > .tc-in,.tc-in{overflow:visible}
   button,.tc-in,.tc-seg__opt,.tc-check,.tc-nav__item,.tc-tick,.tc-tickrow__tick,.tc-tag,a[href]{
     position:relative;overflow:visible;z-index:1;appearance:none}
   button:not(.is-pick)::after,a[href]::after,input:not(.is-pick)::after,textarea::after,select::after,

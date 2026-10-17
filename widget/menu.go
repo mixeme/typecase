@@ -69,7 +69,8 @@ type MenuItem struct {
 	// Fixed keeps it ticked and off: a column that is always shown. Without a
 	// Tick, a Form or an Href, Name makes it a radio button of the form the
 	// menu stands in, or of the form Of names: one of the items, the chosen
-	// one (On) sends its Value — a time zone (Carrel's task 73).
+	// one (On) sends its Value, empty too («All actions» of a filter) — a
+	// time zone (Carrel's task 73).
 	Name  string
 	Value string
 	// Of is the ID of the form a radio item (Name) belongs to without
@@ -154,7 +155,7 @@ func (it MenuItem) html(mix) string {
 	if it.Name != "" && it.Form == "" && it.Href == "" {
 		// a collection that cannot be chosen is shown and switched off, its
 		// reason in the hint: read-only (Carrel's task 103)
-		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio"` + attr("form", it.Of) + ` role="menuitemradio"` + attr("name", it.Name) + attr("value", it.Value) +
+		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio"` + attr("form", it.Of) + ` role="menuitemradio"` + attr("name", it.Name) + ` value="` + esc(it.Value) + `"` +
 			flag("checked", it.On) + flag("disabled", it.Reason != "") + `>`)
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
