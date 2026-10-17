@@ -55,6 +55,24 @@ type Document struct {
 	// App makes the page one that can be installed as an application
 	// (Carrel's task 91); nil, it is a page.
 	App *App
+	// Theme is the theme the server chose for this browser (Carrel's task
+	// 186: the choice is kept in a cookie): "light" or "dark" is printed on
+	// the page, so a page without scripts shows it too; "auto" leaves it to
+	// the system. Either way theme.js and the theme's switch keep it and do
+	// not read or write what this browser remembers. Empty, the library
+	// decides as before: the address's ?theme=, what this browser
+	// remembers, the system.
+	Theme string
+}
+
+func (d Document) themeAttrs() string {
+	switch d.Theme {
+	case "light", "dark":
+		return ` data-tc-theme="` + d.Theme + `" data-tc-theme-set="` + d.Theme + `"`
+	case "auto":
+		return ` data-tc-theme-set="auto"`
+	}
+	return ""
 }
 
 // App is what a page installed as an application names: the manifest and
@@ -182,7 +200,7 @@ func (d Document) Render() (string, error) {
 		lang = "en"
 	}
 	var b strings.Builder
-	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.Zones.attrs() + d.App.attrs(d.Assets.Worker) + `><head><meta charset="utf-8">` +
+	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.themeAttrs() + d.Zones.attrs() + d.App.attrs(d.Assets.Worker) + `><head><meta charset="utf-8">` +
 		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` + d.App.head() +
 		`<script src="` + html.EscapeString(d.Assets.Theme) + `"></script>` +
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)

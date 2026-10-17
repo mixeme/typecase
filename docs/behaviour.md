@@ -45,7 +45,7 @@
 | `Empty` | `tc-empty` | Бросок файла на зону загружает его. | тест: `TestFileSizes` |
 | `ExcerptRow` | `tc-row` | Нажатие открывает текст; стрелки ходят по строкам списка. | тест: `TestNoScriptSheetAndChecks`, `TestShortcuts` |
 | `FaceRow` | `tc-row` | Нажатие открывает карточку; стрелки ходят по строкам списка. | тест: `TestZonePanel` |
-| `Field` | `tc-field` | нет: поведение у контролов. | тест: `TestAddRowAndDrop`, `TestEditFile`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZoneSheet`, `TestZones` |
+| `Field` | `tc-field` | Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов. | тест: `TestAddRowAndDrop`, `TestEditFile`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZoneSheet`, `TestZones`, `TestFieldChanged` |
 | `FieldSet` | `tc-fset` | Группа с адресом (Action) — своя форма: её кнопка шлёт её поля, а не поля соседних групп. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestTemplateShows` |
 | `Fields` | `tc-fields` | нет. | — |
 | `Filter` | `tc-in` | Сужает список по мере набора; Esc очищает. | **описание обещало несделанное — исправлено** (14.10) |
@@ -88,7 +88,7 @@
 | `Scrim` | `tc-scrim` | Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте. | тест: `TestAddRowAndDrop`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestSideDrop`, `TestZoneSheet` |
 | `Search` | `tc-search` | Ввод ищет; Esc очищает запрос и закрывает подсказки. | тест: `TestSearchSuggest`, `TestShortcuts` |
 | `Sec` | `tc-sec` | нет. | — |
-| `Seg` | `tc-seg` | Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя. | тест: `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestSwap`, `TestThemeShowsKept` |
+| `Seg` | `tc-seg` | Нажатие выбирает вариант; стрелки ходят по вариантам внутри переключателя. | тест: `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestSwap`, `TestThemeShowsKept`, `TestThemeFromServer` |
 | `SegFold` | `tc-segfold` | На узкой полосе нажатие на текущий вариант открывает меню остальных (details, без сценария); выбор — переход по ссылке. Короткий переключатель (`Phone`) складывается только на полосе телефона, 640&nbsp;px и уже: Day / Week / Month / Range агенды. | без сценария (ссылка, форма, `details`) |
 | `Sheet` | `tc-sheet` | Esc закрывает лист и возвращает фокус тому, что его открыло; Enter делает главное. | тест: `TestAddRowAndDrop`, `TestFileSizes`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestTallyCount`, `TestTreeNodeSwap`, `TestTreeSend`, `TestZoneSheet` |
 | `Shell` | `tc-shell` | На узком экране рейл становится ящиком, панель — листом поверх страницы. | тест: `TestRailReopensSources`, `TestZonePanel` |

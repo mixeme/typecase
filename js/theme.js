@@ -33,5 +33,14 @@
 		return systemDark() ? "dark" : "light";
 	}
 
-	document.documentElement.setAttribute("data-tc-theme", resolveTheme());
+	// The server chose (page.Document.Theme): light or dark is printed
+	// already; auto is the system's. What this browser remembers is not read.
+	var root = document.documentElement;
+	var set = root.getAttribute("data-tc-theme-set");
+	if (set === "light" || set === "dark") return;
+	if (set === "auto") {
+		root.setAttribute("data-tc-theme", systemDark() ? "dark" : "light");
+		return;
+	}
+	root.setAttribute("data-tc-theme", resolveTheme());
 })();

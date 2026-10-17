@@ -71,6 +71,11 @@ do, not what the authors did.
 
 ### Added
 
+- **`page.Document.Theme`** — the theme the server chose for this browser
+  (Carrel's task 186; a cookie): «light» or «dark» is printed on `<html>`
+  and shows without scripts, «auto» leaves it to the system; theme.js and
+  the theme's switch keep the server's choice and neither read nor write
+  what the browser remembers. Empty, the library decides as before.
 - **A `Field` in an edit's bar (`Docbar`)**: where a note is saved, after
   Cancel (the owner, 16.10).
 - **`Field.Changed`** — a field that a change brings: printed hidden, it

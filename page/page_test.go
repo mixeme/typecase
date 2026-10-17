@@ -33,6 +33,30 @@ func TestDocument(t *testing.T) {
 	}
 }
 
+// TestTheme (Carrel's task 186): a theme the server chose is printed on the
+// page — light or dark as the theme itself, auto only as the server's mark —
+// and nothing is printed when the server did not choose.
+func TestTheme(t *testing.T) {
+	for theme, want := range map[string]string{
+		"dark":  ` data-tc-theme="dark" data-tc-theme-set="dark"`,
+		"light": ` data-tc-theme="light" data-tc-theme-set="light"`,
+		"auto":  ` data-tc-theme-set="auto"`,
+		"":      ``,
+	} {
+		s, err := page.Document{Assets: page.At("/s/"), Theme: theme}.Render()
+		if err != nil {
+			t.Fatal(err)
+		}
+		head := s[:strings.Index(s, "<head>")]
+		if !strings.Contains(head, `data-tc-noscript`+want+`>`) && !strings.Contains(head, `data-tc-noscript`+want+` `) {
+			t.Errorf("Theme %q: the page opens %s; want %q after data-tc-noscript", theme, head, want)
+		}
+		if theme == "" && strings.Contains(head, "data-tc-theme") {
+			t.Errorf("no theme chosen, yet the page names one: %s", head)
+		}
+	}
+}
+
 // TestZones (Carrel's task 84): the document names the headers of a request
 // for a part of the page and the zone that owns the address; a fragment is
 // the part asked for and, after it, the other zones in templates; widgets

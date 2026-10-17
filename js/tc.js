@@ -517,12 +517,19 @@
 	}
 
 	// The theme's switch shows the choice kept in this browser, not the one
-	// the server printed: the server does not know it (Carrel's task 89).
+	// the server printed: the server does not know it (Carrel's task 89) —
+	// unless the server chose it (page.Document.Theme, Carrel's task 186).
+	function serverTheme() {
+		return document.documentElement.getAttribute("data-tc-theme-set");
+	}
+
 	function initTheme(root) {
-		var kept = null;
-		try {
-			kept = localStorage.getItem("tc-theme");
-		} catch (e) {}
+		var kept = serverTheme();
+		if (!kept) {
+			try {
+				kept = localStorage.getItem("tc-theme");
+			} catch (e) {}
+		}
 		if (kept !== "light" && kept !== "dark") kept = "auto";
 		root.querySelectorAll(".tc-seg[data-tc-theme-switch]").forEach(function (seg) {
 			seg.querySelectorAll(".tc-seg__opt").forEach(function (opt) {
@@ -537,10 +544,15 @@
 	// The theme's switch keeps the choice in this browser, where theme.js
 	// reads it before the first paint: light or dark, or auto — the system's.
 	function setTheme(v) {
-		try {
-			if (v === "light" || v === "dark") localStorage.setItem("tc-theme", v);
-			else localStorage.removeItem("tc-theme");
-		} catch (e) {}
+		// a theme the server chose goes to it with its form; this browser
+		// keeps nothing of its own then
+		if (serverTheme()) document.documentElement.setAttribute("data-tc-theme-set", v === "light" || v === "dark" ? v : "auto");
+		else {
+			try {
+				if (v === "light" || v === "dark") localStorage.setItem("tc-theme", v);
+				else localStorage.removeItem("tc-theme");
+			} catch (e) {}
+		}
 		if (v !== "light" && v !== "dark") v = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 		document.documentElement.setAttribute("data-tc-theme", v);
 	}

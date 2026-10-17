@@ -2298,6 +2298,34 @@ func TestThemeShowsKept(t *testing.T) {
 	}
 }
 
+// TestThemeFromServer (Carrel's task 186): a theme the server chose wins over
+// what this browser remembers, the switch shows it, and choosing on the
+// switch changes the page without writing to this browser's memory.
+func TestThemeFromServer(t *testing.T) {
+	needChrome(t)
+	opts := []w.SegOption{{Label: "Auto", Value: "auto"}, {Label: "Light", Value: "light"}, {Label: "Dark", Value: "dark", On: true}}
+	body := `<div class="tc-root">` + w.Seg{Theme: true, Options: opts}.Render() + `</div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`, `data-tc-noscript data-tc-theme="dark" data-tc-theme-set="dark">`, 1)
+	h := browser.NewHarness(t)
+	const state = `document.documentElement.getAttribute("data-tc-theme") + " " + document.querySelector(".tc-seg button.is-on").textContent + " " + localStorage.getItem("tc-theme")`
+	var first, after string
+	if err := h.Run(h.RegisterPage("theme-server", doc), 900, 300,
+		chromedp.Evaluate(`localStorage.setItem("tc-theme", "light"); true`, nil),
+		chromedp.Reload(),
+		chromedp.Evaluate(state, &first),
+		chromedp.Evaluate(`[...document.querySelectorAll(".tc-seg__opt")].find(b => b.textContent === "Auto").click(); true`, nil),
+		chromedp.Evaluate(state, &after),
+		chromedp.Evaluate(`localStorage.removeItem("tc-theme"); true`, nil),
+	); err != nil {
+		t.Fatal(err)
+	}
+	// Auto is the system's: light in the harness; the memory keeps «light»
+	// (written, Auto would have removed it)
+	if first != "dark Dark light" || after != "light Auto light" {
+		t.Errorf("the server's dark with light remembered: %q, after choosing Auto %q; want «dark Dark light», «light Auto light» (memory untouched)", first, after)
+	}
+}
+
 // TestScriptOnly (Carrel's task 90): what needs a script is shown only on a
 // page that runs one (ScriptOnly), and the words that say so only on a page
 // that runs none (NoScript).
