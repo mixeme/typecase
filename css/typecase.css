@@ -204,6 +204,11 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-btn:disabled{opacity:.45;cursor:default}
 /* Кнопка-ссылка — та же кнопка: адрес вместо действия. Недоступная — без адреса. */
 a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
+/* Кнопка ждёт свою форму: пока в форме, диалоге или листе вокруг пусто
+   обязательное поле, она бледнеет, как недоступная, причина — в подсказке;
+   нажатую браузер не отправит и назовёт поле. Заполнили — готова; решает
+   :has(), сценарий не нужен. Что выбрать, экран говорит над полями. */
+:is(form,.tc-dialog,.tc-sheet):has(:invalid) .tc-btn.is-wait{opacity:.45;cursor:default}
 /* Заливка — уничтожение; рамка — отвязать. Подпись на заливке — --tc-surface:
    в тёмной теме белое на --tc-danger даёт 3.9, бумага — 5.5. */
 .tc-btn.is-danger-solid{background:var(--tc-danger);border-color:var(--tc-danger);color:var(--tc-surface)}

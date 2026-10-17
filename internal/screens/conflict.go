@@ -57,15 +57,15 @@ func Conflict1() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.1",
+												Name:  "choice.0",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}},
 											},
 											w.Check{
-												Name:  "choice.1",
-												Value: "none",
+												Name:  "choice.0",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
 											},
@@ -79,15 +79,15 @@ func Conflict1() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.2",
+												Name:  "choice.1",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}},
 											},
 											w.Check{
-												Name:  "choice.2",
-												Value: "server",
+												Name:  "choice.1",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
 											},
@@ -101,15 +101,15 @@ func Conflict1() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.3",
+												Name:  "choice.2",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}},
 											},
 											w.Check{
-												Name:  "choice.3",
-												Value: "none",
+												Name:  "choice.2",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
 											},
@@ -123,14 +123,14 @@ func Conflict1() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.4",
+												Name:  "choice.3",
 												Value: "mine",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
 											},
 											w.Check{
-												Name:  "choice.4",
-												Value: "server",
+												Name:  "choice.3",
+												Value: "theirs",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}},
@@ -140,12 +140,13 @@ func Conflict1() Screen {
 								},
 								ID:     "conflict",
 								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
-									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
-									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
 									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
 								},
 								Variant: w.FormFootWrap,
@@ -206,15 +207,15 @@ func Conflict3() Screen {
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.1",
+												Name:  "choice.0",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Синк-ап по релизу и демо"}},
 											},
 											w.Check{
-												Name:  "choice.1",
-												Value: "server",
+												Name:  "choice.0",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Синк-ап перенесён"}},
 											},
@@ -228,15 +229,15 @@ func Conflict3() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.2",
+												Name:  "choice.1",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Переговорная 2"}},
 											},
 											w.Check{
-												Name:  "choice.2",
-												Value: "none",
+												Name:  "choice.1",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
 											},
@@ -245,12 +246,13 @@ func Conflict3() Screen {
 								},
 								ID:     "conflict",
 								Action: "/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
-									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
-									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
 									w.Button{Label: "Cancel", Href: "/app/calendar/nextcloud/lichnyy/5d1a-77c0"},
 								},
 								Variant: w.FormFootWrap,
@@ -310,15 +312,15 @@ func Conflict4() Screen {
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.1",
+												Name:  "choice.0",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Отправить документы в МФЦ до пятницы"}},
 											},
 											w.Check{
-												Name:  "choice.1",
-												Value: "server",
+												Name:  "choice.0",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Документы в МФЦ"}},
 											},
@@ -332,14 +334,14 @@ func Conflict4() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.2",
+												Name:  "choice.1",
 												Value: "mine",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
 											},
 											w.Check{
-												Name:  "choice.2",
-												Value: "server",
+												Name:  "choice.1",
+												Value: "theirs",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "2026-08-14 18:00"}},
@@ -349,12 +351,13 @@ func Conflict4() Screen {
 								},
 								ID:     "conflict",
 								Action: "/app/tasks/nextcloud/dela/4c1d-8e20-71fa/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
-									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
-									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
 									w.Button{Label: "Cancel", Href: "/app/tasks/nextcloud/dela/4c1d-8e20-71fa"},
 								},
 								Variant: w.FormFootWrap,
@@ -422,15 +425,15 @@ func Conflict5() Screen {
 										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.1",
+												Name:  "choice.0",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Заметка со встречи 10.08 — дополнено"}},
 											},
 											w.Check{
-												Name:  "choice.1",
-												Value: "server",
+												Name:  "choice.0",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Встреча 10.08"}},
 											},
@@ -444,15 +447,15 @@ func Conflict5() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.2",
+												Name:  "choice.1",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Договорились: демо в пятницу, релиз в понедельник."}},
 											},
 											w.Check{
-												Name:  "choice.2",
-												Value: "server",
+												Name:  "choice.1",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Договорились: демо в пятницу."}},
 											},
@@ -461,12 +464,13 @@ func Conflict5() Screen {
 								},
 								ID:     "conflict",
 								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
-									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
-									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
 									w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
 								},
 								Variant: w.FormFootWrap,
@@ -528,15 +532,15 @@ func Conflict2() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.1",
+												Name:  "choice.0",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}},
 											},
 											w.Check{
-												Name:  "choice.1",
-												Value: "none",
+												Name:  "choice.0",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
 											},
@@ -550,15 +554,15 @@ func Conflict2() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.2",
+												Name:  "choice.1",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}},
 											},
 											w.Check{
-												Name:  "choice.2",
-												Value: "server",
+												Name:  "choice.1",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
 											},
@@ -572,15 +576,15 @@ func Conflict2() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.3",
+												Name:  "choice.2",
 												Value: "mine",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}},
 											},
 											w.Check{
-												Name:  "choice.3",
-												Value: "none",
+												Name:  "choice.2",
+												Value: "theirs",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
 											},
@@ -594,14 +598,14 @@ func Conflict2() Screen {
 										},
 										Options: []w.Check{
 											w.Check{
-												Name:  "choice.4",
+												Name:  "choice.3",
 												Value: "mine",
 												Radio: true,
 												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
 											},
 											w.Check{
-												Name:  "choice.4",
-												Value: "server",
+												Name:  "choice.3",
+												Value: "theirs",
 												Radio: true,
 												On:    true,
 												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}},
@@ -611,13 +615,685 @@ func Conflict2() Screen {
 								},
 								ID:     "conflict",
 								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
-									w.Button{Label: "Use only my edit", Form: "conflict", Name: "all", Value: "mine"},
-									w.Button{Label: "Use only the server version", Form: "conflict", Name: "all", Value: "server"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
 									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
+								},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict6 is frame «Конфликт · чья правка — не известно» (s-conflict-6).
+func Conflict6() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Conflict"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{
+											w.Text("Another client changed this contact while you were editing it. Nothing has been overwritten."),
+										},
+									},
+									w.HeadSub{Parts: []w.HeadSubPart{w.Text("Choose a side for every property.")}},
+								},
+							},
+							w.Diff{
+								Items: []w.DiffItem{
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}},
+										Options: []w.Check{
+											w.Check{
+												Name:     "choice.0",
+												Value:    "mine",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Your form", Value: "+7 495 120-45-00"}},
+											},
+											w.Check{
+												Name:     "choice.0",
+												Value:    "theirs",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Server", Value: "—"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}},
+										Options: []w.Check{
+											w.Check{
+												Name:     "choice.1",
+												Value:    "mine",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Your form", Value: "a.kovaleva@example.org"}},
+											},
+											w.Check{
+												Name:     "choice.1",
+												Value:    "theirs",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}},
+										Options: []w.Check{
+											w.Check{
+												Name:     "choice.2",
+												Value:    "mine",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Your form", Value: "Пишет по вторникам, отвечает в тот же день."}},
+											},
+											w.Check{
+												Name:     "choice.2",
+												Value:    "theirs",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Server", Value: "—"}},
+											},
+										},
+									},
+								},
+								ID:     "conflict",
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{
+										Label:  "Write this combination",
+										Kind:   w.ButtonPrimary,
+										Reason: "Choose a side for every property.",
+										State:  w.ButtonWaits,
+										Form:   "conflict",
+									},
+									w.Button{Label: "Use only my form", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
+								},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict7 is frame «Конфликт · запись удалили на сервере» (s-conflict-7).
+func Conflict7() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Conflict"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{w.Text("Another client deleted this contact while you were editing it. Nothing has been written.")},
+									},
+									w.HeadSub{Parts: []w.HeadSubPart{w.Text("Choose a side.")}},
+								},
+							},
+							w.Diff{
+								Items: []w.DiffItem{
+									{
+										Title: w.Rubric{Text: "Анна Ковалёва"},
+										Options: []w.Check{
+											w.Check{
+												Name:     "choice.0",
+												Value:    "mine",
+												Radio:    true,
+												Required: true,
+												Parts: []w.CheckPart{
+													w.Choice{
+														Source: "Your edit · write it back",
+														Value:  "Анна Ковалёва · +7 495 120-45-00 · a.kovaleva@example.org",
+													},
+												},
+											},
+											w.Check{
+												Name:     "choice.0",
+												Value:    "theirs",
+												Radio:    true,
+												Required: true,
+												Parts:    []w.CheckPart{w.Choice{Source: "Server · leave it deleted", Value: "—"}},
+											},
+										},
+									},
+								},
+								ID:     "conflict",
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{
+										Label:  "Write this choice",
+										Kind:   w.ButtonPrimary,
+										Reason: "Choose a side.",
+										State:  w.ButtonWaits,
+										Form:   "conflict",
+									},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
+								},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict8 is frame «Конфликт · такое сочетание не записать» (s-conflict-8).
+func Conflict8() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Conflict"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{w.Text("Another client changed this event while you were editing it. Nothing has been overwritten.")},
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{w.Strong("This combination cannot be written.")},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Diag{Text: "Fields\nend: The end is before the start."},
+							w.DiffAgree{Property: w.Mono{Text: "SUMMARY"}, Text: "agrees — kept as it is."},
+							w.Diff{
+								Items: []w.DiffItem{
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "DTSTART"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.0",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "2026-08-12 11:00"}},
+											},
+											w.Check{
+												Name:  "choice.0",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "2026-08-12 10:15"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "DTEND"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "2026-08-12 12:00"}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "theirs",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "2026-08-12 10:30"}},
+											},
+										},
+									},
+								},
+								ID:     "conflict",
+								Action: "/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
+									w.Button{Label: "Cancel", Href: "/app/calendar/nextcloud/lichnyy/5d1a-77c0"},
+								},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict9 is frame «Конфликт · сервер отказал при записи» (s-conflict-9).
+func Conflict9() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Conflict"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{
+											w.Text("Another client changed this contact while you were editing it. Nothing has been overwritten."),
+										},
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{w.Strong("The server refused the change."), w.Text(" Nothing was written.")},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Diag{
+								Text: "PUT /alice/contacts/kontakty/4f2b-9c31-a0e7.vcf\nnextcloud /alice/contacts/kontakty/4f2b-9c31-a0e7.vcf\ndav: HTTP 507: insufficient storage",
+							},
+							w.DiffAgree{Property: w.Mono{Text: "FN"}, Text: "agrees — kept as it is."},
+							w.Diff{
+								Items: []w.DiffItem{
+									{
+										Title: w.Rubric{
+											Text:  "",
+											Lead:  &w.Mono{Text: "TEL;work"},
+											Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}},
+										},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.0",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}},
+											},
+											w.Check{
+												Name:  "choice.0",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{
+											Text:  "",
+											Lead:  &w.Mono{Text: "EMAIL;work"},
+											Items: []w.RubricPart{w.RubricAside{Text: "both changed"}},
+										},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{
+											Text:  "",
+											Lead:  &w.Mono{Text: "NOTE"},
+											Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}},
+										},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.2",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}},
+											},
+											w.Check{
+												Name:  "choice.2",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{
+											Text:  "",
+											Lead:  &w.Mono{Text: "X-EVOLUTION-FILE-AS"},
+											Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}},
+										},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.3",
+												Value: "mine",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}},
+											},
+											w.Check{
+												Name:  "choice.3",
+												Value: "theirs",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}},
+											},
+										},
+									},
+								},
+								ID:     "conflict",
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"},
+								},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict10 is frame «Конфликт · сервер не ответил» (s-conflict-10).
+func Conflict10() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{Title: &w.HeadTitle{Text: "Conflict"}},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Контакты is unavailable."),
+									w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+									w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"},
+								},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"}},
+								Variant: w.FormFootWrap,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Conflict11 is frame «Конфликт · заметка ещё не перенесена» (s-conflict-11).
+func Conflict11() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Conflict"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{w.Text("Another client changed this note while you were editing it. Nothing has been overwritten.")},
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Not moved yet."),
+									w.Text(" Your edit also moves this note to "),
+									w.Mark{Colour: "#6B4E7A"},
+									w.Text(" nextcloud · Дневник."),
+								},
+								Space: w.MsgFlushSides,
+							},
+							w.DiffAgree{Property: w.Mono{Text: "CATEGORIES"}, Text: "agrees — kept as it is."},
+							w.Diff{
+								Items: []w.DiffItem{
+									{
+										Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "SUMMARY"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.0",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Заметка со встречи 10.08 — дополнено"}},
+											},
+											w.Check{
+												Name:  "choice.0",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Встреча 10.08"}},
+											},
+										},
+									},
+									{
+										Title: w.Rubric{
+											Text:  "",
+											Lead:  &w.Mono{Text: "DESCRIPTION"},
+											Items: []w.RubricPart{w.RubricAside{Text: "both changed"}},
+										},
+										Options: []w.Check{
+											w.Check{
+												Name:  "choice.1",
+												Value: "mine",
+												Radio: true,
+												On:    true,
+												Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "Договорились: демо в пятницу, релиз в понедельник."}},
+											},
+											w.Check{
+												Name:  "choice.1",
+												Value: "theirs",
+												Radio: true,
+												Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "Договорились: демо в пятницу."}},
+											},
+										},
+									},
+								},
+								ID:     "conflict",
+								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"},
+									w.Button{Label: "Use only my edit", Form: "conflict.mine"},
+									w.Button{Label: "Use only the server version", Form: "conflict.theirs"},
+									w.Button{Label: "Cancel", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012"},
 								},
 								Variant: w.FormFootWrap,
 							},

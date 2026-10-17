@@ -71,6 +71,15 @@ do, not what the authors did.
 
 ### Added
 
+- **A button that waits for its form — `ButtonWaits`, `Check.Required`**
+  (Carrel's task 198). A radio with `Required` must be chosen before its
+  form goes; a button of `ButtonWaits` looks disabled while a required
+  field of the form, dialog or sheet around it is empty, and the browser
+  refuses it then, naming the field; its `Reason` is its title. What to
+  choose the screen says above the fields, not beside the button (the
+  owner, 17.10). All by CSS (`:has(:invalid)`): it works without a script.
+- A `Msg` takes a `Mark` (a collection named in a message); a `Dialog`
+  takes a `Diag` (what was asked and answered, under a message).
 - **`MenuItem.Of`** — the form a radio item of a menu belongs to without
   standing in it (Carrel's task 203): the collection chosen in an edit's
   head stands outside the edit's form, and without `form="…"` the browser
@@ -761,6 +770,20 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The conflict screen's states** (Carrel's tasks 191, 198; the owner's
+  decisions Р-67, Р-69; accepted by the owner 17.10). The form's names follow C-5: radios `choice.0…` with
+  `mine` / `theirs` («Leave it out» is `theirs`), hidden `etag` and
+  `op=combine`; «Use only my edit» and «Use only the server version» submit
+  forms of their own (`conflict.mine`, `conflict.theirs`). Extra frames:
+  `s-conflict-6` — whose change is not known: «Your form» and «Use only my
+  form», no kind of difference, nothing chosen, «Choose a side for every
+  property.» under the title, «Write this combination» waits for a side of
+  every card; `-7` — deleted on the server while edited: the edit («write
+  it back») against the deleted record («leave it deleted»), nothing
+  chosen, «Write this choice» waits; `-8` — a combination that cannot be written, its
+  fields; `-9` — the server refused the write; `-10` — the server did not
+  answer; `-11` — a note's move that waits. When nothing differs there is
+  no conflict screen: nothing is asked (the owner, 17.10).
 - The collection's radio items in an edit's head name the edit's form
   (`form="…"`, Carrel's task 203): `s-tasks-3`, `-14`, `s-agenda-3`, `-15`,
   `-27`, `s-contacts-3`, `-4`, `-27`, `-31`, `states-12`, `-17`, `-24`,

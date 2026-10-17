@@ -82,12 +82,12 @@ var _ = add(
 	form("rich", w.Check{On: true, Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}}}, "s-publish-2", "tc-check", 1),
 	form("radio", w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Лебедева Вера")}}, "s-dup-1", "tc-check", 2),
 	form("radio-on", w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Вера Лебедева")}}, "s-dup-1", "tc-check", 1),
-	form("rich", w.Check{On: true, Name: "choice.1", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, "s-conflict-1", "tc-check", 1),
+	form("rich", w.Check{On: true, Name: "choice.0", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, "s-conflict-1", "tc-check", 1),
 	form("rich", check(true, w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")), "s-publish-2", "tc-check", 8),
 	form("box-off", w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}, "components-38", "tc-check", 2),
 	form("box", w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, "components-38", "tc-check", 1),
 	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, "s-notes-20", "tc-check", 1),
-	form("rich", w.Check{Name: "choice.1", Value: "none", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}, "s-conflict-1", "tc-check", 2),
+	form("rich", w.Check{Name: "choice.0", Value: "theirs", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}, "s-conflict-1", "tc-check", 2),
 	// s-backup-2 .tc-check #4 holds an input inside the button: nested controls
 	// (a11y). Its record waits for the owner's decision on the mockup.
 	form("rich", w.Check{Name: "tasks.vtodo.not.every.client.understands.them", Value: "1", Parts: []w.CheckPart{w.Text("Tasks "), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}}}, "s-davloom-2", "tc-check", 3),
@@ -136,6 +136,7 @@ var _ = add(
 	form("default", w.Push{Items: []w.PushPart{w.Text("Default")}}, "s-dup-3", "tc-push", 1),
 
 	// tc-rubric
+	form("block", w.Rubric{Text: "", Items: []w.RubricPart{w.Mono{Text: "TEL;work"}}}, "s-conflict-6", "tc-rubric", 2),
 	form("block", w.Rubric{Text: "Rail"}, "shell-1", "tc-rubric", 1),
 	form("inline", w.Rubric{Text: "А", Form: w.RubricInline}, "components-12", "tc-rubric", 1),
 	form("block", w.Rubric{Text: "nextcloud", Items: []w.RubricPart{w.Mono{Text: "12", Variant: w.MonoTight}}}, "components-11", "tc-rubric", 1),

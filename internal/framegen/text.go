@@ -385,6 +385,9 @@ func (g *gen) tparts(e *El, typ string) string {
 				x = "w.Bold{Parts: " + g.tparts(v, "[]w.Inline{") + "}"
 			case v.Tag == "b":
 				x = "w.Strong(" + q(v.Text()) + ")"
+			case v.Tag == "a" && v.Has("tc-btn"):
+				// a button that leads: Try again of a message
+				x = g.button(v)
 			case v.Tag == "a":
 				x = "w.Link{Text: " + q(v.Text()) + `, Href: "#"}`
 			case v.Has("tc-mono") || v.Tag == "code":

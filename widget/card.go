@@ -492,6 +492,7 @@ func (Sec) sidePart()    {}
 
 func (Card) dialogPart()   {}
 func (Diff) dialogPart()   {}
+func (Diag) dialogPart()   {}
 func (Fields) dialogPart() {}
 func (Msg) dialogPart()    {}
 func (Stats) dialogPart()  {}

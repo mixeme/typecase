@@ -184,7 +184,7 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет; или один из нескольких (Radio) — тогда кружок, выбранный с точкой.
-// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio}.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio, Required}.
 // Состояния. on | off | rich | tertiary | box | radio.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже.
@@ -207,6 +207,10 @@ type Check struct {
 	// Radio makes a check with a Name one of several of that name: a
 	// property's version in a conflict (Carrel's task 132).
 	Radio bool
+	// Required makes a check with a Name one the form cannot be sent
+	// without: of a Radio, one of its name must be chosen (Carrel's task
+	// 198: a conflict's card with no side chosen beforehand).
+	Required bool
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool
 }
@@ -222,7 +226,7 @@ func (c Check) html(m mix) string {
 			kind = "radio"
 		}
 		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="` + kind + `"` + attr("name", c.Name) + attr("value", c.Value) +
-			attr("aria-label", c.Label) + flag("checked", c.On) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On || c.Radio, "is-off")) + `></span>`)
+			attr("aria-label", c.Label) + flag("checked", c.On) + flag("required", c.Required) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On || c.Radio, "is-off")) + `></span>`)
 		for _, p := range c.Parts {
 			s.WriteString(p.html(nil))
 		}

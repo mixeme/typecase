@@ -32,6 +32,12 @@ const (
 	ButtonReady    ButtonState = iota
 	ButtonOff                  // shown in a selection bar but not for this selection
 	ButtonDisabled             // cannot be pressed now; Reason says why
+	// ButtonWaits waits for its form (Carrel's task 198): while a required
+	// field of the form, dialog or sheet around it is empty, it looks
+	// disabled and the browser refuses it, naming the field; filled, it is
+	// ready — without a script too. Reason says why it waits, in its title;
+	// what to choose the screen says above the fields.
+	ButtonWaits
 )
 
 // ButtonVariant is a drawn variant of the button's box.
@@ -74,7 +80,7 @@ func (b IconBox) class() string {
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
 // Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly}.
-// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
+// Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | wait | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
 // Эталон. кадр `components-9`, фрагмент `.tc-btn`; формы — в таблице эталонов.
@@ -201,6 +207,9 @@ func (b Button) html(m mix) string {
 	state := ""
 	if b.State == ButtonOff {
 		state = "is-off"
+	}
+	if b.State == ButtonWaits {
+		state = "is-wait"
 	}
 	tag := "button"
 	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.ScriptOnly, "tc-js"), pick(b.NoScript, "tc-nojs"))

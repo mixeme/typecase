@@ -218,9 +218,21 @@ func (g *gen) steps(e *El) string {
 
 func (g *gen) diff(e *El) string {
 	var its []string
+	var hidden []*El
 	for _, it := range e.Els() {
+		if it.Tag == "input" && it.Attr("type") == "hidden" {
+			hidden = append(hidden, it)
+			continue
+		}
 		r := it.Kid("tc-rubric")
-		title := `w.Rubric{Text: "", Lead: &w.Mono{Text: ` + q(r.Kid("tc-mono").Text()) + "}, Items: []w.RubricPart{w.RubricAside{Text: " + q(r.Kid("tc-rubric__aside").Text()) + "}}}"
+		title := `w.Rubric{Text: ` + q(r.OwnText())
+		if m := r.Kid("tc-mono"); m != nil {
+			title += `, Lead: &w.Mono{Text: ` + q(m.Text()) + "}"
+		}
+		if a := r.Kid("tc-rubric__aside"); a != nil {
+			title += ", Items: []w.RubricPart{w.RubricAside{Text: " + q(a.Text()) + "}}"
+		}
+		title += "}"
 		var opts []string
 		for _, c := range it.Kid("tc-diff__options").Els() {
 			tick := c.Kid("tc-tickrow__tick")
@@ -232,6 +244,10 @@ func (g *gen) diff(e *El) string {
 				if b.HasAttr("checked") {
 					on += "On: true, "
 				}
+				if b.HasAttr("required") {
+					// no side chosen beforehand: the form waits for one (Carrel's task 198)
+					on += "Required: true, "
+				}
 			} else if !tick.Has("is-off") {
 				on = "On: true, "
 			}
@@ -242,6 +258,9 @@ func (g *gen) diff(e *El) string {
 	s := "w.Diff{Items: []w.DiffItem{\n\t\t" + join(its, ",\n\t\t") + "}"
 	if e.Tag == "form" {
 		s += ", ID: " + q(e.Attr("id")) + ", Action: " + q(e.Attr("action"))
+		if len(hidden) > 0 {
+			s += ", Fields: " + hiddens(hidden)
+		}
 	}
 	return s + "}"
 }

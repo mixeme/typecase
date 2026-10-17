@@ -19,6 +19,7 @@ func (Span) msgPart()   {}
 func (Link) msgPart()   {}
 func (Break) msgPart()  {}
 func (Button) msgPart() {}
+func (Mark) msgPart()   {}
 
 // Bold is bold running text that holds more than words: a name with an
 // address in it.

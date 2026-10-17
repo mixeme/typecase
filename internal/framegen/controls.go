@@ -132,6 +132,11 @@ func (g *gen) button1(e *El) string {
 	if e.Has("is-off") {
 		extra = append(extra, "State: w.ButtonOff")
 	}
+	if e.Has("is-wait") {
+		// waits for its form: its title is why (Carrel's task 198)
+		extra = append(extra, "State: w.ButtonWaits")
+		s = strings.Replace(s, "Title: ", "Reason: ", 1)
+	}
 	if e.Valued("disabled") || e.Attr("aria-disabled") == "true" {
 		extra = append(extra, "State: w.ButtonDisabled")
 	}
