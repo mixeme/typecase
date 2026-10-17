@@ -2,6 +2,7 @@ package browser_test
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -2323,6 +2324,49 @@ func TestThemeFromServer(t *testing.T) {
 	// (written, Auto would have removed it)
 	if first != "dark Dark light" || after != "light Auto light" {
 		t.Errorf("the server's dark with light remembered: %q, after choosing Auto %q; want «dark Dark light», «light Auto light» (memory untouched)", first, after)
+	}
+}
+
+// TestSlugAgrees (Carrel's task 200): a field derived from another shows, as
+// its placeholder, what widget.Slug derives on the server — the script's rule
+// and Go's agree on every name here — and the hint's piece follows it; what
+// is typed in the field wins.
+func TestSlugAgrees(t *testing.T) {
+	needChrome(t)
+	names := []string{"Поездки", "Мой  Календарь — 2026", "Ёлка и йод", "Café Élan", "---", "  ", "Щука-Ъ", "Їжак ґ є", "日本", "Work / Home", "  Дела  "}
+	form := w.Form{Action: "/x", Items: []w.FormPart{
+		w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Kind: w.InputText, Name: "name"}}},
+		w.Field{Label: "Address", Parts: []w.FieldPart{w.Input{Kind: w.InputText, Name: "address", Mono: true, From: "name"},
+			w.FieldHint{Parts: []w.Inline{w.Mono{Text: "…/calendars/mix/"}, w.SlugOf{Of: "address", Text: "…"}, w.Mono{Text: "/"}}}}},
+	}}
+	page := browser.PageHTML(`<div class="tc-root">`+form.Render()+`</div>`, "")
+	var want []string
+	for _, n := range names {
+		want = append(want, w.Slug(n))
+	}
+	js, _ := json.Marshal(names)
+	const typ = `(n, v) => { const f = document.querySelector('[name="' + n + '"]'); f.value = v; f.dispatchEvent(new Event("input", {bubbles: true})); }`
+	var got []string
+	var typed string
+	h := browser.NewHarness(t)
+	if err := h.Run(h.RegisterPage("slug", page), 900, 400,
+		chromedp.Evaluate(`(() => { const typ = `+typ+`; return `+string(js)+`.map(v => { typ("name", v); const a = document.querySelector('[name="address"]'); const p = document.querySelector("[data-tc-slug-of]").textContent; return (a.placeholder || "…") === p ? p : a.placeholder + " ≠ " + p; }); })()`, &got),
+		chromedp.Evaluate(`(() => { const typ = `+typ+`; typ("name", "Поездки"); typ("address", "trips"); return document.querySelector("[data-tc-slug-of]").textContent + " " + document.querySelector('[name="address"]').placeholder; })()`, &typed),
+	); err != nil {
+		t.Fatal(err)
+	}
+	for i := range names {
+		// an empty name leaves no placeholder: the piece says «…»
+		w := want[i]
+		if strings.TrimSpace(names[i]) == "" {
+			w = "…"
+		}
+		if i >= len(got) || got[i] != w {
+			t.Errorf("%q: the script says %q; Slug says %q", names[i], got[i], w)
+		}
+	}
+	if typed != "trips poezdki" {
+		t.Errorf("typed «trips» over the name «Поездки»: %q; want «trips poezdki»", typed)
 	}
 }
 

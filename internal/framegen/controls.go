@@ -356,6 +356,9 @@ func (g *gen) input(x *El) string {
 	if v := x.Attr("data-tc-day"); v != "" {
 		f = append(f, "Day: "+q(v))
 	}
+	if v := x.Attr("data-tc-from"); v != "" {
+		f = append(f, "From: "+q(v))
+	}
 	return "w.Input{" + join(f, ", ") + g.ev(x, "InputVariant", "Variant") + placef(x) + "}"
 }
 

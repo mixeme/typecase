@@ -71,6 +71,14 @@ do, not what the authors did.
 
 ### Added
 
+- **`widget.Slug`, `Input.From`, `SlugOf`** — a field derived from another
+  (Carrel's task 200): a new collection's address from its name. `Slug` is
+  the one rule (NFD, the Cyrillic table, lower case, spaces and hyphens to
+  one hyphen, `[a-z0-9-]`, empty — `col`) for the server; the library's
+  script derives the same as the name is typed, into the field's
+  placeholder and the `SlugOf` pieces of its hint; what is typed in the
+  field wins. Without a script the field shows the placeholder the server
+  printed. Typecase now requires `golang.org/x/text` (NFD).
 - **`page.Document.Theme`** — the theme the server chose for this browser
   (Carrel's task 186; a cookie): «light» or «dark» is printed on `<html>`
   and shows without scripts, «auto» leaves it to the system; theme.js and
@@ -747,6 +755,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-profile-5`: the address of a new collection shows the derived
+  `poezdki` as its placeholder, and the path under it ends with it (the
+  owner's decision Кл5, Carrel's task 200).
 - **The series question and the rewrite sheet over their screens**
   (Carrel's tasks 184, 185, 197 p. 2; accepted by the owner 17.10).
   `s-agenda-27` (new, extra): the question before saving a series is the

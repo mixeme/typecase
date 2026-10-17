@@ -55,7 +55,7 @@
 | `Grid` | `tc-grid` | Стрелки ходят по плиткам. | тест: `TestSelectionForm`, `TestTilePick` |
 | `Grow` | `tc-grow` | нет. | тест: `TestRemoveRow` |
 | `Head` | `tc-head` | нет: поведение у действий. | тест: `TestRailReopensSources`, `TestZonePanel` |
-| `Input` | `tc-in` | Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, названный идущим за началом (Follows), сценарий сдвигает на столько же, на сколько сдвинули начало; без сценария он стоит. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZonePick`, `TestZoneSheet`, `TestZones` |
+| `Input` | `tc-in` | Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, идущий за началом (Follows), сдвигается вместе с ним; поле, выводимое из другого (From), показывает образцом Slug набранного там. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZonePick`, `TestZoneSheet`, `TestZones`, `TestSlugAgrees` |
 | `Kbd` | `tc-kbd` | нет. | — |
 | `Line` | `tc-line` | нет. | тест: `TestEditFile`, `TestFilePick`, `TestFileSizes` |
 | `LinkedRow` | `tc-row` | Нажатие открывает запись. | без сценария (ссылка, форма, `details`) |

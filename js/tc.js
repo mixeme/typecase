@@ -925,6 +925,55 @@
 		});
 	}
 
+	// A field derived from another (data-tc-from, Input.From; Carrel's task
+	// 200): the address of a new collection shows Slug of its name as its
+	// placeholder at every keystroke, and the pieces of a hint that name it
+	// (data-tc-slug-of) say what is typed in it, else that placeholder. The
+	// rule is widget.Slug's: NFD, the table, lower case, spaces and hyphens
+	// to one hyphen, [a-z0-9-] only, empty — «col».
+	var slugTable = {"а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ж": "zh", "з": "z",
+		"и": "i", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p", "р": "r",
+		"с": "s", "т": "t", "у": "u", "ф": "f", "х": "kh", "ц": "ts", "ч": "ch", "ш": "sh",
+		"щ": "shch", "ъ": "", "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya",
+		"і": "i", "є": "ye", "ґ": "g"};
+
+	function slugOf(name) {
+		var out = "", pending = false;
+		Array.from(String(name).normalize("NFD")).forEach(function (ch) {
+			var r = ch.toLowerCase();
+			if (/\s/.test(r) || r === "-") {
+				pending = out.length > 0;
+				return;
+			}
+			var t = Object.prototype.hasOwnProperty.call(slugTable, r) ? slugTable[r] : r;
+			Array.from(t).forEach(function (c) {
+				if (/[a-z0-9]/.test(c)) {
+					if (pending) {
+						out += "-";
+						pending = false;
+					}
+					out += c;
+				}
+			});
+		});
+		return out || "col";
+	}
+
+	function showSlug(field) {
+		var scope = field.form || document;
+		scope.querySelectorAll('[data-tc-slug-of="' + field.name + '"]').forEach(function (el) {
+			el.textContent = field.value || field.placeholder || "…";
+		});
+	}
+
+	function deriveFrom(source) {
+		var scope = source.form || document;
+		scope.querySelectorAll('input[data-tc-from="' + source.name + '"]').forEach(function (field) {
+			field.placeholder = source.value.trim() ? slugOf(source.value) : "";
+			showSlug(field);
+		});
+	}
+
 	function initFollows(root) {
 		root.querySelectorAll("[data-tc-follows]").forEach(function (end) {
 			var start = startOf(end);
@@ -1160,6 +1209,8 @@
 	// or a rule with nothing left beside it goes too.
 	function onInput(e) {
 		var q = e.target;
+		if (q.name && q.form && q.form.querySelector('input[data-tc-from="' + q.name + '"]')) deriveFrom(q);
+		if (q.matches && q.matches("input[data-tc-from]")) showSlug(q);
 		if (q.form && q.form.querySelector(".tc-field[data-tc-changed]")) syncChanged(q);
 		if (q.matches && q.matches(".tc-top__search input") && suggestOf(q) && suggestOf(q).querySelector("[data-tc-when]")) {
 			filterSuggest(q);

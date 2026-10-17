@@ -236,6 +236,9 @@ func (g *gen) inlineEl(k *El) string {
 		}
 		return "w.Link{Text: " + q(k.Text()) + ", Href: " + q(href) + "}"
 	}
+	if k.Has("tc-mono") && k.HasAttr("data-tc-slug-of") {
+		return "w.SlugOf{Of: " + q(k.Attr("data-tc-slug-of")) + ", Text: " + q(k.Text()) + "}"
+	}
 	if k.Has("tc-mono") || k.Tag == "code" {
 		return g.mono(k)
 	}

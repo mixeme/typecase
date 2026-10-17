@@ -1865,10 +1865,12 @@ func Profile5() Screen {
 						w.Field{
 							Label: "Address",
 							Parts: []w.FieldPart{
-								w.Input{Name: "address", Value: "poezdki", Label: "Address", Mono: true},
+								w.Input{Name: "address", Placeholder: "poezdki", Label: "Address", Mono: true, From: "name"},
 								w.FieldHint{
 									Parts: []w.Inline{
-										w.Mono{Text: "…/remote.php/dav/calendars/mix/poezdki/"},
+										w.Mono{Text: "…/remote.php/dav/calendars/mix/"},
+										w.SlugOf{Of: "address", Text: "poezdki"},
+										w.Mono{Text: "/"},
 										w.Text(" — taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show."),
 									},
 									Variant: w.HintSmall,

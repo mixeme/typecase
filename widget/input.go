@@ -47,10 +47,10 @@ func (v InputVariant) class() string {
 // Input — tc-in
 //
 // Роль. Поле ввода одной строки: текст, дата, время, поиск, пароль.
-// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required, ID, Picked, Follows, Day}.
+// Вход. Input{Kind, Name, Value, Placeholder, Label, Mono, Focus, Error, Numeric, Disabled, Variant, Place, ReadOnly, Required, ID, Picked, Follows, Day, From}.
 // Состояния. value | placeholder | mono | focus | error | disabled | variant.
 // Инварианты. Плейсхолдер выглядит плейсхолдером всегда: is-ph ставит виджет, когда значения нет; род поля — перечисление; у поля есть доступное имя; поле печатает фрагмент своего кадра.
-// Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, названный идущим за началом (Follows), сценарий сдвигает на столько же, на сколько сдвинули начало; без сценария он стоит.
+// Поведение. Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, названный идущим за началом (Follows), сценарий сдвигает на столько же, на сколько сдвинули начало; без сценария он стоит. Поле, выводимое из другого (From), сценарий показывает образцом (Slug) на каждый ввод в том; набранное в нём главнее.
 // Эталон. кадр `components-10`, фрагмент `.tc-in`.
 // Содержимое. нет.
 // Чего нет. Своей подписи: подпись — у поля формы (tc-field), вокруг.
@@ -84,6 +84,13 @@ type Input struct {
 	// Day names the date field that holds this time's day: a time carried
 	// over midnight takes its date along.
 	Day string
+	// From names the field of the same form this one is derived from
+	// (Carrel's task 200): a new collection's address from its name. The
+	// library's script puts Slug of what is typed there into this field's
+	// placeholder at every keystroke, and into the SlugOf pieces that name
+	// this field; what is typed here wins. Without a script the field shows
+	// the Placeholder the server printed.
+	From string
 }
 
 // Render prints the input.
@@ -94,7 +101,7 @@ func (i Input) html(m mix) string {
 		is("focus", i.Focus), is("error", i.Error), i.Variant.class(), i.Place.class()) +
 		` type="` + i.Kind.attr() + `"` + attr("name", i.Name) + attr("value", i.Value) +
 		attr("placeholder", i.Placeholder) + attr("inputmode", pick(i.Numeric, "numeric")) + attr("aria-label", i.Label) + pick(i.Disabled, " disabled") + flag("readonly", i.ReadOnly || i.Picked) + flag("required", i.Required) +
-		attr("id", i.ID) + flag("data-tc-filename", i.Picked) + attr("data-tc-follows", i.Follows) + attr("data-tc-day", i.Day) + `>`
+		attr("id", i.ID) + flag("data-tc-filename", i.Picked) + attr("data-tc-follows", i.Follows) + attr("data-tc-day", i.Day) + attr("data-tc-from", i.From) + `>`
 }
 
 // PickVariant is the drawn size of a pick where it is not its column's.
