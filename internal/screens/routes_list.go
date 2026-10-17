@@ -138,6 +138,8 @@ var Routes = []Route{
 	{Frame: "s-admin-24", Caption: "Сброс пароля · лист поверх Users", Screen: Admin24},
 	{Frame: "s-admin-3", Caption: "Администрирование · настройки", Screen: Admin3},
 	{Frame: "s-admin-4", Caption: "Администрирование · проверка установки", Screen: Admin4},
+	{Frame: "s-admin-25", Caption: "Проверка установки · ещё не запускалась", Screen: Admin25},
+	{Frame: "s-admin-26", Caption: "Проверка установки · негодный адрес", Screen: Admin26},
 	{Frame: "s-admin-5", Caption: "Администрирование · проверка сервера DAV", Screen: Admin5},
 	{Frame: "s-admin-6", Caption: "Администрирование · депонирование ключей", Screen: Admin6},
 	{Frame: "s-admin-7", Caption: "Администрирование · журнал", Screen: Admin7},

@@ -866,7 +866,8 @@ func Admin4() Screen {
 							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 						w.RailStatus{
-							Text:   "Checks passed",
+							Tone:   w.RailStatusAlert,
+							Text:   "2 checks failed",
 							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
 						},
 					},
@@ -885,10 +886,19 @@ func Admin4() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Field{
-									Parts: []w.FieldPart{w.Input{Value: "https://carrel.example", Mono: true, Variant: w.Input11_5}},
+									Parts: []w.FieldPart{
+										w.Input{
+											Name:    "url",
+											Value:   "https://carrel.example",
+											Label:   "Base address",
+											Mono:    true,
+											Of:      "install",
+											Variant: w.Input11_5,
+										},
+									},
 									Width: w.FieldW280,
 								},
-								w.Button{Label: "Run the check", Kind: w.ButtonPrimary},
+								w.Button{Label: "Run the check", Kind: w.ButtonPrimary, Form: "install"},
 							},
 						},
 					},
@@ -899,7 +909,7 @@ func Admin4() Screen {
 							w.Span{Face: w.FaceAccent, Text: "8 fine"},
 							w.Text(" · "),
 							w.Span{Face: w.FaceDanger, Text: "2 broken"},
-							w.Text(" · 1 warning"),
+							w.Text(" · 1 not measured"),
 							w.Mono{Text: "4.2 s", Place: w.Pushed},
 						},
 					},
@@ -1026,6 +1036,188 @@ func Admin4() Screen {
 							},
 						},
 					},
+					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin25 is frame «Проверка установки · ещё не запускалась» (s-admin-25).
+func Admin25() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "shield", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 4,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Tone:   w.RailStatusOff,
+							Text:   "Not checked yet",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Run the check once Carrel is behind its proxy.")}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Installation check"},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{w.Text("Carrel asks itself from outside, at the address you declared as the base one")},
+							},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Input{
+											Name:    "url",
+											Value:   "https://carrel.example",
+											Label:   "Base address",
+											Mono:    true,
+											Of:      "install",
+											Variant: w.Input11_5,
+										},
+									},
+									Width: w.FieldW280,
+								},
+								w.Button{Label: "Run the check", Kind: w.ButtonPrimary, Form: "install"},
+							},
+						},
+					},
+					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin26 is frame «Проверка установки · негодный адрес» (s-admin-26).
+func Admin26() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "shield", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 4,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Tone:   w.RailStatusAlert,
+							Text:   "2 checks failed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Installation check"},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{w.Text("Carrel asks itself from outside, at the address you declared as the base one")},
+							},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Input{
+											Name:    "url",
+											Value:   "carrel.example",
+											Label:   "Base address",
+											Mono:    true,
+											Error:   true,
+											Of:      "install",
+											Variant: w.Input11_5,
+										},
+									},
+									Width: w.FieldW280,
+								},
+								w.Button{Label: "Run the check", Kind: w.ButtonPrimary, Form: "install"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{w.Text("Give the address people open Carrel at, like https://carrel.example.org.")},
+						Tone:  w.MsgAlert,
+					},
+					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),

@@ -779,6 +779,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-admin-4`: the address and «Run the check» are one form (the field and
+  the button name the page's `tc-post` form `install`); «1 not measured»
+  instead of «1 warning»; the rail says «2 checks failed». Extra frames
+  `s-admin-25` (never run: no table, «Not checked yet» in the rail) and
+  `s-admin-26` (an address that is no address: the field in error, the
+  reason under the head, no table). No frame for «running»: the check is
+  one request (Carrel's task 195 p. 1; accepted by the owner 18.10).
 - `s-admin-7`: the journal's bar is a form — the action and the day
   («since», from that day on) go together, Show without a script; the
   segments are links. A login that succeeded has no address; refusals in a
