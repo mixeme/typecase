@@ -779,6 +779,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-notes-2`, `-20` say in their labels that they draw the full width a
+  person chose in Appearance; the default is the reading width
+  (`s-notes-3`, `appearance-1`) — Carrel's task 204, the owner 18.10.
 - `s-admin-4`: the address and «Run the check» are one form (the field and
   the button name the page's `tc-post` form `install`); «1 not measured»
   instead of «1 warning»; the rail says «2 checks failed». Extra frames
