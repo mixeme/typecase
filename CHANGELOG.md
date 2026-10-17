@@ -742,6 +742,17 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The series question and the rewrite sheet over their screens**
+  (Carrel's tasks 184, 185, 197 p. 2; accepted by the owner 17.10).
+  `s-agenda-27` (new, extra): the question before saving a series is the
+  answer to the edit's POST — over the edit with what was typed (until
+  18 January 2027); «What you changed» says what changed, shortly.
+  `s-agenda-28` (new, extra): the series written in part, over its card;
+  «Try again» goes with `op=apart` and the days in its address
+  (`s-agenda-24` too). `s-contacts-15`: the rewrite sheet is one sheet for
+  any number of replacements — lines «old → choice», the groups of risk as
+  ticks, all ticked by default («Rewrite 20 records»), a form;
+  `s-contacts-29` is an example of an answer (one group unticked).
 - **Sheets over a screen with their own address; second buttons without a
   script** (Carrel's tasks 183, 187, 197, 199; accepted by the owner
   16.10). New route frames: «Which copy to edit?» over the address book

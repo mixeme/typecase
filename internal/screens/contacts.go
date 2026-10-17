@@ -1585,8 +1585,9 @@ func Contacts15() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Icon:  "refresh",
-					Title: "Rewrite the address in their records?",
+					Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite",
+					Icon:   "refresh",
+					Title:  "Rewrite the addresses in their records?",
 					Head: []w.SheetHeadPart{
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Анна Ковалёва · saved")},
@@ -1596,60 +1597,263 @@ func Contacts15() Screen {
 						},
 					},
 					Body: []w.SheetPart{
-						w.SheetBlock{
-							Title: w.Rubric{Text: "The address", Variant: w.RubricBottom7},
-							Items: []w.SheetLine{
-								{
-									Name: "a.kovaleva@example.org → a.kovaleva@slovo.example",
-									Note: w.Dim{
-										Parts: []w.Inline{w.Text("— 14 events and tasks name the old one; they drop out of the person’s timeline")},
+						w.Rubric{Text: "The addresses"},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mono{Text: "a.kovaleva@example.org"},
+								w.Dim{Parts: []w.Inline{w.Text("22 records name it")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mono{Text: "→"},
+								w.Pick{
+									Name: "to.1",
+									Options: []w.PickOption{
+										{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true},
+										{Value: "anna@home.example", Label: "anna@home.example"},
+										{Value: "", Label: "Do not rewrite"},
 									},
+									Label:   "Rewrite a.kovaleva@example.org to",
+									Variant: w.PickT12W240,
 								},
 							},
+							Gap:   w.LineGap8,
+							Block: true,
 						},
-						w.SheetBlock{
-							Title: w.Rubric{Text: "What rewriting can set off", Variant: w.RubricBottom7},
-							Items: []w.SheetLine{
-								{
-									Name: "9 records on servers that schedule",
-									Note: w.Dim{
-										Parts: []w.Inline{
-											w.Text("— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees"),
+						w.Line{
+							Items: []w.LinePart{
+								w.Mono{Text: "anna@oldfirm.example"},
+								w.Dim{Parts: []w.Inline{w.Text("3 records name it; they keep it")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mono{Text: "→"},
+								w.Pick{
+									Name: "to.2",
+									Options: []w.PickOption{
+										{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example"},
+										{Value: "anna@home.example", Label: "anna@home.example"},
+										{Value: "", Label: "Do not rewrite", On: true},
+									},
+									Label:   "Rewrite anna@oldfirm.example to",
+									Variant: w.PickT12W240,
+								},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Rubric{Text: "What rewriting can set off"},
+						w.Line{
+							Items: []w.LinePart{
+								w.Check{
+									On:    true,
+									Name:  "group",
+									Value: "scheduling",
+									Parts: []w.CheckPart{w.Text("On servers that schedule")},
+								},
+								w.Drop{
+									Trigger: w.Button{Label: "9 records", Menu: true, Small: true},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "10 Aug", Variant: w.Mono11},
+												Label:  "Синк-ап по релизу",
+												Href:   "/app/calendar/nextcloud/rabota/aa01",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11},
+												Label:  "Ретро спринта",
+												Href:   "/app/calendar/nextcloud/rabota/aa02",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "2 Sep", Variant: w.Mono11},
+												Label:  "Планирование Q4",
+												Href:   "/app/calendar/nextcloud/rabota/aa03",
+											},
 										},
+										Width: w.MenuWidth290,
+										Pop:   w.MenuUnder,
 									},
 								},
-								{
-									Name: "2 records on baikal",
-									Note: w.Dim{Parts: []w.Inline{w.Text("— the server did not say whether it schedules")}},
-								},
-								{
-									Name: "3 meetings organised by others",
-									Note: w.Dim{
-										Parts: []w.Inline{w.Text("— the organiser’s server may refuse the change, and its next update may undo it")},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Dim{
+							Parts: []w.Inline{
+								w.Text("The server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees."),
+							},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Check{On: true, Name: "group", Value: "unknown", Parts: []w.CheckPart{w.Text("On baikal")}},
+								w.Drop{
+									Trigger: w.Button{Label: "2 records", Menu: true, Small: true},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#9A9280"},
+												Detail: &w.Mono{Text: "12 Aug", Variant: w.Mono11},
+												Label:  "Общий созвон",
+												Href:   "/app/calendar/baikal/obshchiy/bb01",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#9A9280"},
+												Detail: &w.Mono{Text: "21 Aug", Variant: w.Mono11},
+												Label:  "Демо для заказчика",
+												Href:   "/app/calendar/baikal/obshchiy/bb02",
+											},
+										},
+										Width: w.MenuWidth290,
+										Pop:   w.MenuUnder,
 									},
 								},
-								{
-									Name: "Past meetings",
-									Note: w.Dim{Parts: []w.Inline{w.Text("— will show the new address, as if the person had been invited at it")}},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("The server did not say whether it schedules.")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Check{
+									On:    true,
+									Name:  "group",
+									Value: "others",
+									Parts: []w.CheckPart{w.Text("Meetings organised by others")},
+								},
+								w.Drop{
+									Trigger: w.Button{Label: "3 records", Menu: true, Small: true},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "14 Aug", Variant: w.Mono11},
+												Label:  "Ретро спринта",
+												Href:   "/app/calendar/nextcloud/rabota/aa02",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "18 Aug", Variant: w.Mono11},
+												Label:  "Встреча с подрядчиком",
+												Href:   "/app/calendar/nextcloud/rabota/cc01",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "5 Sep", Variant: w.Mono11},
+												Label:  "Юбилей отдела",
+												Href:   "/app/calendar/nextcloud/rabota/cc02",
+											},
+										},
+										Width: w.MenuWidth290,
+										Pop:   w.MenuUnder,
+									},
 								},
 							},
+							Gap:   w.LineGap8,
+							Block: true,
 						},
-						w.SheetBlock{
-							Title: w.Rubric{Text: "What will not change", Variant: w.RubricBottom7},
-							Items: []w.SheetLine{
-								{
-									Name: "2 records in Shared",
-									Note: w.Dim{Parts: []w.Inline{w.Text("— read-only; they keep the old address")}},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("The organiser’s server may refuse the change, and its next update may undo it.")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Check{On: true, Name: "group", Value: "past", Parts: []w.CheckPart{w.Text("Past meetings")}},
+								w.Drop{
+									Trigger: w.Button{Label: "5 records", Menu: true, Small: true},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "3 Aug", Variant: w.Mono11},
+												Label:  "Синк-ап по релизу",
+												Href:   "/app/calendar/nextcloud/rabota/dd01",
+											},
+											w.MenuItem{
+												Mark:   &w.Mark{Colour: "#3F6E8C"},
+												Detail: &w.Mono{Text: "27 Jul", Variant: w.Mono11},
+												Label:  "Синк-ап по релизу",
+												Href:   "/app/calendar/nextcloud/rabota/dd02",
+											},
+										},
+										Width: w.MenuWidth290,
+										Pop:   w.MenuUnder,
+									},
 								},
 							},
+							Gap:   w.LineGap8,
+							Block: true,
 						},
-						w.SheetNote{Text: "Collections that are not ticked were not looked in."},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("They will show the new address, as if the person had been invited at it.")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.SheetNote{
+							Text: "2 records in Shared are read-only and keep the old address. Collections that are not ticked were not looked in.",
+						},
+						w.Tally{
+							Records: []string{
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling",
+								"to.1 group=scheduling group=others",
+								"to.1 group=others",
+								"to.1 group=others",
+								"to.1 group=past",
+								"to.1 group=past",
+								"to.1 group=past",
+								"to.1 group=past",
+								"to.1 group=past",
+								"to.1 group=unknown",
+								"to.1 group=unknown",
+								"to.1",
+								"to.1",
+								"to.2",
+								"to.2",
+								"to.2",
+							},
+						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Rewrite 12 records", Kind: w.ButtonPrimary},
+						w.Button{
+							Label:    "Rewrite 20 records",
+							Kind:     w.ButtonPrimary,
+							Count:    "Rewrite {n} records",
+							CountOne: "Rewrite 1 record",
+							Submit:   true,
+						},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
-							Items: []w.LinePart{w.Button{Label: "Leave as is"}, w.Kbd{Keys: "Esc"}},
+							Items: []w.LinePart{
+								w.Button{
+									Label:  "Leave as is",
+									To:     "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave",
+									Submit: true,
+								},
+								w.Kbd{Keys: "Esc"},
+							},
 							Gap:   w.LineGap7,
 							Place: w.Pushed,
 						},

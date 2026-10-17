@@ -4171,43 +4171,37 @@ Read  2 min ago · not changed on server</div>
       </div>
     </div>
       <div class="tc-scrim tc-scrim--padt26">
-        <div class="tc-sheet tc-sheet--w520">
-          <div class="tc-sheet__head">
-            <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
-            <b class="tc-sheet__title">Rewrite the address in their records?</b>
-            <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва · saved</span>
-          </div>
-          <div class="tc-sheet__body">
-            <div class="tc-sheet__block">
-              <div class="tc-rubric tc-rubric--bot7">The address</div>
-              <div class="tc-stack tc-stack--gap-6 tc-line__text">
-                <span class="tc-stack__item"><b>a.kovaleva@example.org → a.kovaleva@slovo.example</b> <span class="tc-dim">— 14 events and tasks name the old one; they drop out of the person’s timeline</span></span>
-              </div>
-            </div>
-            <div class="tc-sheet__block">
-              <div class="tc-rubric tc-rubric--bot7">What rewriting can set off</div>
-              <div class="tc-stack tc-stack--gap-6 tc-line__text">
-                <span class="tc-stack__item"><b>9 records on servers that schedule</b> <span class="tc-dim">— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees</span></span>
-                <span class="tc-stack__item"><b>2 records on baikal</b> <span class="tc-dim">— the server did not say whether it schedules</span></span>
-                <span class="tc-stack__item"><b>3 meetings organised by others</b> <span class="tc-dim">— the organiser’s server may refuse the change, and its next update may undo it</span></span>
-                <span class="tc-stack__item"><b>Past meetings</b> <span class="tc-dim">— will show the new address, as if the person had been invited at it</span></span>
-              </div>
-            </div>
-            <div class="tc-sheet__block">
-              <div class="tc-rubric tc-rubric--bot7">What will not change</div>
-              <div class="tc-stack tc-stack--gap-6 tc-line__text">
-                <span class="tc-stack__item"><b>2 records in Shared</b> <span class="tc-dim">— read-only; they keep the old address</span></span>
-              </div>
-            </div>
-            <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Collections that are not ticked were not looked in.</span>
-          </div>
-          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rewrite 12 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <form class="tc-sheet tc-sheet--w520" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
+        <b class="tc-sheet__title">Rewrite the addresses in their records?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва · saved</span>
         </div>
+        <div class="tc-sheet__body">
+          <div class="tc-rubric">The addresses</div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">a.kovaleva@example.org</span><span class="tc-dim tc-dim--t11-5">22 records name it</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">→</span><span class="tc-in is-pick tc-in--t12-w240"><select class="tc-in__list" name="to.1" aria-label="Rewrite a.kovaleva@example.org to"><option value="a.kovaleva@slovo.example" selected>a.kovaleva@slovo.example</option><option value="anna@home.example">anna@home.example</option><option value="">Do not rewrite</option></select></span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">anna@oldfirm.example</span><span class="tc-dim tc-dim--t11-5">3 records name it; they keep it</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">→</span><span class="tc-in is-pick tc-in--t12-w240"><select class="tc-in__list" name="to.2" aria-label="Rewrite anna@oldfirm.example to"><option value="a.kovaleva@slovo.example">a.kovaleva@slovo.example</option><option value="anna@home.example">anna@home.example</option><option value="" selected>Do not rewrite</option></select></span></div>
+          <div class="tc-rubric">What rewriting can set off</div>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="scheduling" checked><span class="tc-tickrow__tick"></span>On servers that schedule</label><details class="tc-drop"><summary class="tc-btn is-sm">9 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">10 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Ретро спринта <span class="tc-mono tc-mono--t11">14 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa03" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Планирование Q4 <span class="tc-mono tc-mono--t11">2 Sep</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="unknown" checked><span class="tc-tickrow__tick"></span>On baikal</label><details class="tc-drop"><summary class="tc-btn is-sm">2 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/bb01" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>Общий созвон <span class="tc-mono tc-mono--t11">12 Aug</span></a><a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/bb02" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>Демо для заказчика <span class="tc-mono tc-mono--t11">21 Aug</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The server did not say whether it schedules.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="others" checked><span class="tc-tickrow__tick"></span>Meetings organised by others</label><details class="tc-drop"><summary class="tc-btn is-sm">3 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Ретро спринта <span class="tc-mono tc-mono--t11">14 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/cc01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Встреча с подрядчиком <span class="tc-mono tc-mono--t11">18 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/cc02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Юбилей отдела <span class="tc-mono tc-mono--t11">5 Sep</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The organiser’s server may refuse the change, and its next update may undo it.</span>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="past" checked><span class="tc-tickrow__tick"></span>Past meetings</label><details class="tc-drop"><summary class="tc-btn is-sm">5 records<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/dd01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">3 Aug</span></a><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/dd02" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">27 Jul</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">They will show the new address, as if the person had been invited at it.</span>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">2 records in Shared are read-only and keep the old address. Collections that are not ticked were not looked in.</span>
+          <template data-tc-tally><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling"></i><i data-tc-if="to.1 group=scheduling group=others"></i><i data-tc-if="to.1 group=others"></i><i data-tc-if="to.1 group=others"></i><i data-tc-if="to.1 group=past"></i><i data-tc-if="to.1 group=past"></i><i data-tc-if="to.1 group=past"></i><i data-tc-if="to.1 group=past"></i><i data-tc-if="to.1 group=past"></i><i data-tc-if="to.1 group=unknown"></i><i data-tc-if="to.1 group=unknown"></i><i data-tc-if="to.1"></i><i data-tc-if="to.1"></i><i data-tc-if="to.2"></i><i data-tc-if="to.2"></i><i data-tc-if="to.2"></i></template>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" data-tc-count="Rewrite {n} records" data-tc-count-1="Rewrite 1 record">Rewrite 20 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
       </div>
     </div>
   </div>
 </div>
-<figcaption><b>Заменили адрес и нажали Save — лист поверх правки предлагает переписать его в записях, где человек участник.</b> Хронология строится по адресам: встречи и задачи со старым выпадают из неё, поэтому главная кнопка — переписать. Правка участника — действие в чужом расписании, и лист называет последствия до нажатия: сервер с планированием может разослать письма, во встречах, созванных другими, правку может отвергнуть или затереть организатор, прошедшие встречи покажут новый адрес; где сервер не сказал, умеет ли он планирование, так и написано. Удалили адрес и ничего не добавили — листа нет. Заменили несколько — каждый убранный переписывается на адрес карточки по умолчанию, и лист называет каждую пару «старый → новый».</figcaption>
+<figcaption><b>Заменили адрес и нажали Save — лист поверх правки предлагает переписать его в записях, где человек участник</b> (решения владельца 12.10 и 14.10, задачи Carrel 157, 185). Хронология строится по адресам: встречи и задачи со старым выпадают из неё, поэтому главная кнопка — переписать. Лист один при любом числе замен: каждая — строка «старый адрес → выбор», группы риска — отметки, по умолчанию отмечены все (так переписывалось всё и до решения); снятая исключает группу, кнопка считает остаток. Строка о записи в двух группах появляется, только когда из-за снятой отметки запись остаётся как была (пример — s-contacts-29). Без сценария лист — форма: Rewrite отправляет её, Leave as is — её же с <code>?op=leave</code>.</figcaption>
 </figure>
 
 <figure>
@@ -4442,7 +4436,7 @@ Read  2 min ago · not changed on server</div>
       </form>
     </div>
   </div>
-  <figcaption><b>Несколько замен в одной правке и группы, которые можно исключить</b> (решения владельца 12.10, задача 157). Каждая замена — строка «старый адрес → выбор»: в выборе нынешние адреса карточки и «Do not rewrite»; сервер предлагает адрес, набранный в той же строке формы, иначе «Do not rewrite». Группы риска — отметки: снятая исключает группу, и кнопка считает остаток — <b>на месте, при каждой отметке и каждом выборе адреса</b> (решение владельца 14.10): лист несёт невидимый список записей, у каждой — условия, при которых она переписывается (адрес, который она называет, и её группы), сценарий считает те, у которых условия выполнены; «Rewrite 1 record» — в единственном числе, ноль выключает кнопку. Без сценария число — то, что напечатал сервер. Числа кадра: адрес называют 22 записи, 2 из них в Shared только для чтения; из 20 остальных 3 стоят в снятой группе «Meetings organised by others» — переписываются 17. Счёт группы — кнопка: под ней список её записей — метка коллекции, название и дата, каждая — ссылка. <b>Запись в двух группах переписывается, только когда отмечены обе</b>: снять одну отметку значит «этих не трогать», и запись остаётся, в какой бы ещё группе она ни стояла; лист говорит это и называет такую запись. Одна замена и ни одной снятой отметки — прежний лист (кадр выше).</figcaption>
+  <figcaption><b>Несколько замен в одной правке и группы, которые можно исключить</b> — пример ответа: «Meetings organised by others» человек снял сам, по умолчанию отмечены все (s-contacts-15) (решения владельца 12.10, задача 157). Каждая замена — строка «старый адрес → выбор»: в выборе нынешние адреса карточки и «Do not rewrite»; сервер предлагает адрес, набранный в той же строке формы, иначе «Do not rewrite». Группы риска — отметки: снятая исключает группу, и кнопка считает остаток — <b>на месте, при каждой отметке и каждом выборе адреса</b> (решение владельца 14.10): лист несёт невидимый список записей, у каждой — условия, при которых она переписывается (адрес, который она называет, и её группы), сценарий считает те, у которых условия выполнены; «Rewrite 1 record» — в единственном числе, ноль выключает кнопку. Без сценария число — то, что напечатал сервер. Числа кадра: адрес называют 22 записи, 2 из них в Shared только для чтения; из 20 остальных 3 стоят в снятой группе «Meetings organised by others» — переписываются 17. Счёт группы — кнопка: под ней список её записей — метка коллекции, название и дата, каждая — ссылка. <b>Запись в двух группах переписывается, только когда отмечены обе</b>: снять одну отметку значит «этих не трогать», и запись остаётся, в какой бы ещё группе она ни стояла; лист говорит это и называет такую запись. Одна замена и ни одной снятой отметки — прежний лист (кадр выше).</figcaption>
   </figure>
   <figure style="flex:0 1 330px">
   <div class="frame" data-frame="s-contacts-30">
@@ -5276,12 +5270,261 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-msg is-alert tc-msg--flush">The meeting of 2 February was not made a separate event: it stays in the series, with its change, as it was before you saved.</div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Nothing is lost: what could not be written apart is still in the series.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Try again</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar/nextcloud/rabota/7c1e-22ab-90f4">Leave it in the series</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/calendar/nextcloud/rabota/7c1e-22ab-90f4/edit?op=apart&amp;day=2027-02-02">Try again</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar/nextcloud/rabota/7c1e-22ab-90f4">Leave it in the series</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
   <figcaption>Отказ: отдельное событие не записалось — перенос остался в серии. Лист остаётся и говорит, что записано, что нет и почему; сообщение называет встречу и то, где она теперь. Ответы — повторить или оставить как есть; ничего не потеряно ни в том, ни в другом случае.</figcaption>
   </figure>
+
+<figure style="flex:1 1 100%">
+<div class="frame" data-frame="s-agenda-27" data-screen="/app/calendar/{account}/{col}/{uid}/edit" data-part="ask">
+  <div class="frame-label"><span>Событие · вопрос перед сохранением серии, поверх правки</span><i>дополнительный кадр: ответ на Save правки серии</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-overlay">
+      <div class="tc-shell__body tc-shell__body--minh560">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to the card</a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">2</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">2</span></div>
+        </div>
+        <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Синк-ап по релизу</div></div>
+          <div class="tc-acts"><div class="tc-field tc-field--md"><details class="tc-drop"><summary class="tc-in is-pick" title="Calendar"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</summary><div class="tc-menu is-pop tc-menu--w290"><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="calendar" value="nextcloud/lichnyy" checked><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="calendar" value="nextcloud/rabota"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</label></div></details></div><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Save</button></div>
+        </div>
+        <div class="tc-runbar" data-tc-progress="event-edit" hidden><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="0%"></i></span>Saving · <span class="tc-mono">0 of 0 MB</span></div>
+        <div class="tc-form">
+          <div class="tc-field tc-field--xl"><label>Summary</label><input class="tc-in is-focus" type="text" value="Синк-ап по релизу" aria-label="Summary"></div>
+          <div class="tc-field tc-field--lg"><label>Location</label><input class="tc-in" type="text" value="Переговорная 2" aria-label="Location"></div>
+          <div class="tc-field tc-field--sm"><label>Status</label><button class="tc-in is-pick" type="button">Confirmed</button></div>
+          <div class="tc-field tc-field--md"><label>Tags</label><input class="tc-in" type="text" value="release, team" aria-label="Tags"></div>
+          <div class="tc-field tc-field--full"><label>Description</label><textarea class="tc-in is-area">Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.</textarea></div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">When</div>
+            <div class="tc-field"><button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>All day</button></div>
+            <div class="tc-field tc-field--sm"><label>Start date</label><input class="tc-in is-mono" type="date" name="start.date" value="2026-08-10" aria-label="Start date"></div>
+            <div class="tc-field tc-field--xs"><label>Start time</label><input class="tc-in is-mono" type="time" name="start.time" value="12:00" aria-label="Start time"></div>
+            <div class="tc-field tc-field--sm"><label>End date</label><input class="tc-in is-mono" type="date" name="end.date" value="2026-08-10" aria-label="End date" data-tc-follows="start.date"></div>
+            <div class="tc-field tc-field--xs"><label>End time</label><input class="tc-in is-mono" type="time" name="end.time" value="13:00" aria-label="End time" data-tc-follows="start.time" data-tc-day="end.date"></div>
+            <div class="tc-field tc-field--md"><label>Time zone</label><details class="tc-drop"><summary class="tc-in is-pick">Asia/Yekaterinburg <span class="tc-dim tc-dim--ml6">as sent</span></summary><div class="tc-menu is-pop tc-menu--w290"><input class="tc-in is-ph" type="search" placeholder="Find a zone" aria-label="Find a zone"><span class="tc-rubric">As sent</span><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Asia/Yekaterinburg" checked>Asia/Yekaterinburg</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="Europe/Moscow">Europe/Moscow</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="UTC">UTC</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="tz" value="floating">Floating — the same clock time anywhere</label></div></details></div>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Reminders</div>
+            <div class="tc-field tc-field--md"><label>First</label><button class="tc-in is-pick" type="button">10 minutes before</button></div>
+            <div class="tc-field tc-field--md"><label>Reminder</label><button class="tc-in is-pick" type="button">1 day before</button></div>
+            <div class="tc-field"><label>&nbsp;</label><button class="tc-btn" type="button">Add reminder</button></div>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Attendees</div>
+            <div class="tc-field tc-field--full"><span class="tc-drop"><span class="tc-in tc-in--tags tc-in--cols" data-tc-suggest="/app/contacts/suggest"> <span class="tc-tag tc-tag--pill" title="m.lebedeva@example.org"><input type="hidden" name="attendee" value="mailto:m.lebedeva@example.org"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Мария Лебедева <span class="tc-dim">· organiser</span></span> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="attendee" value="mailto:a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· accepted</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <label class="tc-tag tc-tag--pill" title="a.belov@example.org"><input class="tc-check__box" type="checkbox" name="attendee" value="mailto:a.belov@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Артём Белов <span class="tc-dim">· tentative</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <label class="tc-tag tc-tag--pill" title="v@example.org"><input class="tc-check__box" type="checkbox" name="attendee" value="mailto:v@example.org" checked><span class="tc-mono">v@example.org</span> <span class="tc-dim">· no reply</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="attendee.add" placeholder="Name or address" aria-label="Add attendee" autocomplete="off"> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span><span class="tc-field__hint">A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Other</div>
+            <div class="tc-field tc-field--md"><label>Link</label><input class="tc-in is-ph" type="text" placeholder="optional" aria-label="Link"></div>
+            <div class="tc-field tc-field--lg"><label>Related to</label>
+              <span class="tc-in tc-in--tags">
+                <span class="tc-tag tc-tag--pill"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Заметка со встречи 10.08
+                  <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></span> <input class="tc-in__add" type="text" name="related.add" placeholder="Title or UID" aria-label="Add a link" autocomplete="off"> </span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Attachments</div>
+            <div class="tc-grow tc-line tc-line--gap-8" id="event-attachments">
+              <details class="tc-drop"><summary class="tc-btn"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" aria-label="From this computer" data-tc-list="event-attachments"><template data-tc-row><span class="tc-line tc-line--gap-8"><span class="tc-dim--t12-5">{name} <span class="tc-dim">{size}</span></span><button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></span></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details>
+              <span class="tc-dim--t12-5">release-checklist.md <span class="tc-dim">text/markdown · 3 KB</span> <span class="tc-badge">in the event</span></span><button class="tc-btn is-sm is-danger" type="button">Remove</button>
+            </div>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Repeats</div>
+            <div class="tc-field tc-field--sm"><label>Frequency</label><button class="tc-in is-pick" type="button">Weekly</button></div>
+            <div class="tc-field tc-field--xs"><label>Every</label><input class="tc-in is-mono" type="text" value="1" aria-label="Every"></div>
+            <div class="tc-field"><label>On</label><span class="tc-seg"><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="MO" checked>MO</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="TU">TU</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="WE">WE</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="TH">TH</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="FR">FR</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="SA">SA</label><label class="tc-seg__opt"><input class="tc-seg__box" type="checkbox" name="byday" value="SU">SU</label></span></div>
+            <div class="tc-field tc-field--sm"><label>Until</label><input class="tc-in is-mono" type="date" value="2027-01-18" aria-label="Until"></div>
+            <div class="tc-field tc-field--xs"><label>Count</label><input class="tc-in is-ph" type="text" placeholder="—" aria-label="Count"></div>
+            <div class="tc-field tc-field--xl"><label>Advanced RRULE</label><input class="tc-in is-mono is-ph" type="text" placeholder="FREQ=WEEKLY;BYDAY=MO;UNTIL=20270118" aria-label="Advanced RRULE"><span class="tc-field__hint">The advanced value takes precedence when set.</span></div>
+          </div>
+
+          <div class="tc-fset">
+            <div class="tc-rubric">Kept as the server sent them</div>
+            <div class="tc-diag tc-grow">X-MOZ-GENERATION  3
+X-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC
+SEQUENCE  2</div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Source</div>
+            <dl class="tc-fields tc-grow">
+              <dt>Path</dt><dd class="tc-mono">/remote.php/dav/calendars/mix/personal/8f1c.ics</dd>
+              <dt>Read</dt><dd>2 min ago · not changed on server</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="tc-danger"><button class="tc-btn is-danger-solid" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg>Delete event</button>Series is edited and deleted whole.</div>
+      </div>
+    </div>
+      <div class="tc-scrim tc-scrim--padt26">
+        <form class="tc-sheet tc-sheet--w520" action="/app/calendar/nextcloud/lichnyy/8f1c/edit" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
+        <b class="tc-sheet__title">Keep the meetings that were moved by hand?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Синк-ап по релизу · not saved yet</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">What you changed</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>The series ends on 18 January</b> <span class="tc-dim">— it ran weekly until 28 December</span></span>
+            </div>
+          </div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">Left without their day · 3</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>25 January, 14:00 — Синк-ап по релизу</b> <span class="tc-dim">— it was the meeting of 25 January, 12:00</span></span>
+              <span class="tc-stack__item"><b>1 February, 12:00 — Синк-ап: ретро</b> <span class="tc-dim">— its title was changed</span></span>
+              <span class="tc-stack__item"><b>15 February, 16:30 — Синк-ап по релизу</b> <span class="tc-dim">— it was the meeting of 15 February, 12:00</span></span>
+            </div>
+          </div>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Kept, each becomes an event of its own, with what was changed in it. Removed, they go with the rest of the series after 18 January.</span>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as events</button><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Кадр маршрута вопроса перед сохранением серии</b> (задача Carrel 184): без сценария вопрос — ответ на POST правки, поэтому адрес — правки, под затемнением — та же правка с набранным (Until 18.01.2027). Содержимое и варианты листа — фрагменты s-agenda-22, -23. Задача с повтором — тот же лист: «Keep the tasks that were moved by hand?», «Keep as tasks», «a task of its own». «What you changed» говорит, что изменилось, коротко: «The series ends on 18 January — it ran weekly until 28 December», «The series repeats every two weeks — it repeated weekly», «The series no longer repeats».</figcaption>
+</figure>
+
+<figure style="flex:1 1 100%">
+<div class="frame" data-frame="s-agenda-28" data-screen="/app/calendar/{account}/{col}/{uid}/edit" data-part="refused">
+  <div class="frame-label"><span>Событие · серия записана не вся, поверх карточки</span><i>дополнительный кадр: сервер записал не всё</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-overlay">
+      <div class="tc-shell__body tc-shell__body--minh560">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">nextcloud</div>
+          <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Дни рождения</span><span class="tc-tickrow__meta">—</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">2</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">2</span></div>
+        </div>
+        <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles">
+            <div class="tc-head__title">Синк-ап по релизу</div>
+            <div class="tc-head__sub"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>nextcloud · Личный</div>
+          </div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg>Edit</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+            <button class="tc-btn is-3rd" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
+          </div>
+        </div>
+        <dl class="tc-fields">
+          <dt>When</dt><dd><span class="tc-mono">10:00 – 11:00</span>, Monday 10 August <span class="tc-badge" title="Created in another time zone">created 12:00 Asia/Yekaterinburg</span></dd>
+          <dt>Repeats</dt><dd>Weekly on Mon <span class="tc-badge">until 2027-01-18</span></dd>
+          <dt>Reminders</dt><dd>10 minutes before · 1 day before</dd>
+          <dt>Where</dt><dd>Переговорная 2 <span class="tc-badge is-linked">linked</span></dd>
+          <dt>Status</dt><dd>Confirmed</dd>
+          <dt>Tags</dt><dd><span class="tc-tag">релиз</span> <span class="tc-tag">работа</span></dd>
+        </dl>
+        <div class="tc-sec">
+          <div class="tc-rubric">Description</div>
+          <div class="tc-prose">Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.</div>
+        </div>
+        <div class="tc-sec">
+          <div class="tc-rubric">Attendees <span class="tc-mono tc-mono--ls0">4</span></div>
+          <ul class="tc-sec__list tc-sec__list--cols"><li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">Мария Лебедева</a> <span class="tc-dim">· organiser</span></li><li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">Анна Ковалёва</a> <span class="tc-dim">· accepted</span></li><li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">Артём Белов</a> <span class="tc-dim">· tentative</span></li><li><span class="tc-mono">v@example.org</span> <span class="tc-dim">· no reply</span></li></ul>
+        </div>
+        <div class="tc-sec">
+          <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div>
+          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+            <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3 KB</span> <span class="tc-badge">in the event</span></li>
+          </ul>
+        </div>
+        <div class="tc-sec">
+          <div class="tc-rubric">Related</div>
+          <ul class="tc-sec__list"><li><span class="tc-dim--accent">Заметка со встречи 10.08</span> <span class="tc-dim">· note</span></li></ul>
+        </div>
+        <div class="tc-sec">
+          <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">2</span></div>
+          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">radicale · vps · Проекты</a> <span class="tc-dim">· Holds the same</span></li>
+            <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="#">baikal · Общий</a> <span class="tc-dim">· Where differ</span></li>
+          </ul>
+        </div>
+        <div class="tc-sec">
+          <div class="tc-rubric">Source</div>
+          <div class="tc-diag">Path  /remote.php/dav/calendars/mix/personal/8f1c.ics
+Read  2 min ago · changed on server 3 days ago</div>
+        </div>
+        <div class="tc-danger"><button class="tc-btn is-danger-solid" type="button"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg>Delete event</button>Series is edited and deleted whole.</div>
+      </div>
+    </div>
+      <div class="tc-scrim tc-scrim--padt26">
+        <form class="tc-sheet tc-sheet--w520" action="/app/calendar/nextcloud/lichnyy/8f1c/edit" method="post">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-refresh"/></svg>
+        <b class="tc-sheet__title">Keep the meetings that were moved by hand?</b>
+        <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Синк-ап по релизу · saved in part</span>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">Written</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>The series ends on 18 January</b> <span class="tc-dim">— saved</span></span>
+              <span class="tc-stack__item"><b>2 separate events</b> <span class="tc-dim">— 25 January, 14:00 and 15 February, 16:30</span></span>
+            </div>
+          </div>
+          <div class="tc-sheet__block">
+            <div class="tc-rubric tc-rubric--bot7">Not written · 1</div>
+            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+              <span class="tc-stack__item"><b>1 February, 12:00 — Синк-ап: ретро</b> <span class="tc-dim">— the server answered 507 Insufficient Storage</span></span>
+            </div>
+          </div>
+          <div class="tc-msg is-alert tc-msg--flush">The meeting of 1 February was not made a separate event: it stays in the series, with its change, as it was before you saved.</div>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Nothing is lost: what could not be written apart is still in the series.</span>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/calendar/nextcloud/lichnyy/8f1c/edit?op=apart&amp;day=2027-02-01">Try again</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar/nextcloud/lichnyy/8f1c">Leave it in the series</a><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Отказ — поверх карточки серии</b> (задача Carrel 184): серия к этому времени уже записана, правки повторять нечего, поэтому под затемнением — карточка, а «Try again» шлёт <code>op=apart</code> с днями встреч, которые не стали отдельными событиями. Содержимое листа — фрагмент s-agenda-24.</figcaption>
+</figure>
 <figure style="flex:1 1 100%">
   <div class="frame" data-frame="s-agenda-25">
     <div class="frame-label"><span>Связанная запись · событие из объединённого вида</span><span class="frag">фрагмент</span><i>выбранные значения, метка — откуда взято</i></div>

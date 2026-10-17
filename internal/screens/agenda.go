@@ -413,6 +413,728 @@ func Agenda1() Screen {
 	}
 }
 
+// Agenda27 is frame «Событие · вопрос перед сохранением серии, поверх правки» (s-agenda-27).
+func Agenda27() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to the card", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Личный",
+															On:    true,
+															Name:  "calendar",
+															Value: "nextcloud/lichnyy",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "nextcloud · Работа",
+															Name:  "calendar",
+															Value: "nextcloud/rabota",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Button{Label: "Cancel"},
+									w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								},
+							},
+						},
+						w.Runbar{
+							Meter:    w.Meter{Percent: 0},
+							Progress: "event-edit",
+							Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+						},
+						w.Form{
+							Items: []w.FormPart{
+								w.Field{
+									Label: "Summary",
+									Parts: []w.FieldPart{w.Input{Value: "Синк-ап по релизу", Label: "Summary", Focus: true}},
+									Width: w.FieldXL,
+								},
+								w.Field{
+									Label: "Location",
+									Parts: []w.FieldPart{w.Input{Value: "Переговорная 2", Label: "Location"}},
+									Width: w.FieldLG,
+								},
+								w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Confirmed"}}, Width: w.FieldSM},
+								w.Field{
+									Label: "Tags",
+									Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Tags"}},
+									Width: w.FieldMD,
+								},
+								w.Field{
+									Label: "Description",
+									Parts: []w.FieldPart{
+										w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.", Label: "Text"},
+									},
+									Width: w.FieldFull,
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "When"},
+									Items: []w.FieldSetPart{
+										w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+										w.Field{
+											Label: "Start date",
+											Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
+											Width: w.FieldSM,
+										},
+										w.Field{
+											Label: "Start time",
+											Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "start.time", Value: "12:00", Label: "Start time", Mono: true}},
+											Width: w.FieldXS,
+										},
+										w.Field{
+											Label: "End date",
+											Parts: []w.FieldPart{
+												w.Input{
+													Kind:    w.InputDate,
+													Name:    "end.date",
+													Value:   "2026-08-10",
+													Label:   "End date",
+													Mono:    true,
+													Follows: "start.date",
+												},
+											},
+											Width: w.FieldSM,
+										},
+										w.Field{
+											Label: "End time",
+											Parts: []w.FieldPart{
+												w.Input{
+													Kind:    w.InputTime,
+													Name:    "end.time",
+													Value:   "13:00",
+													Label:   "End time",
+													Mono:    true,
+													Follows: "start.time",
+													Day:     "end.date",
+												},
+											},
+											Width: w.FieldXS,
+										},
+										w.Field{
+											Label: "Time zone",
+											Parts: []w.FieldPart{
+												w.Drop{
+													Trigger: w.Pick{
+														Value: "Asia/Yekaterinburg",
+														Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent},
+													},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+															w.Rubric{Text: "As sent", Form: w.RubricInline},
+															w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
+															w.MenuSep{},
+															w.MenuItem{Label: "Europe/Moscow", Name: "tz", Value: "Europe/Moscow"},
+															w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+															w.MenuSep{},
+															w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"},
+														},
+														Width: w.MenuWidth290,
+														Pop:   w.MenuUnder,
+													},
+												},
+											},
+											Width: w.FieldMD,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Reminders"},
+									Items: []w.FieldSetPart{
+										w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
+										w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+										w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Attendees"},
+									Items: []w.FieldSetPart{
+										w.Field{
+											Parts: []w.FieldPart{
+												w.Drop{
+													Trigger: w.TagInput{
+														Parts: []w.TagInputPart{
+															w.Tag{
+																Label: "Мария Лебедева",
+																Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+																Fixed: true,
+																Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
+																Title: "m.lebedeva@example.org",
+																Name:  "attendee",
+																Value: "mailto:m.lebedeva@example.org",
+															},
+															w.Tag{
+																Label:     "Анна Ковалёва",
+																Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+																Removable: true,
+																Aside:     &w.Dim{Parts: []w.Inline{w.Text("· accepted")}},
+																Title:     "a.kovaleva@example.org",
+																Name:      "attendee",
+																Value:     "mailto:a.kovaleva@example.org",
+															},
+															w.Tag{
+																Label:     "Артём Белов",
+																Mark:      &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+																Removable: true,
+																Aside:     &w.Dim{Parts: []w.Inline{w.Text("· tentative")}},
+																Title:     "a.belov@example.org",
+																Name:      "attendee",
+																Value:     "mailto:a.belov@example.org",
+															},
+															w.Tag{
+																Address:   &w.Mono{Text: "v@example.org"},
+																Removable: true,
+																Aside:     &w.Dim{Parts: []w.Inline{w.Text("· no reply")}},
+																Title:     "v@example.org",
+																Name:      "attendee",
+																Value:     "mailto:v@example.org",
+															},
+														},
+														Columns: true,
+														Name:    "attendee",
+														Add: &w.TagAdd{
+															Name:        "attendee.add",
+															Placeholder: "Name or address",
+															Label:       "Add attendee",
+															Suggest:     "/app/contacts/suggest",
+														},
+													},
+													Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+												},
+												w.FieldHint{
+													Parts: []w.Inline{
+														w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
+													},
+												},
+											},
+											Width: w.FieldFull,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Other"},
+									Items: []w.FieldSetPart{
+										w.Field{
+											Label: "Link",
+											Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+											Width: w.FieldMD,
+										},
+										w.Field{
+											Label: "Related to",
+											Parts: []w.FieldPart{
+												w.TagInput{
+													Parts: []w.TagInputPart{
+														w.Tag{
+															Label:     "Заметка со встречи 10.08",
+															Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+															Removable: true,
+														},
+													},
+													Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+												},
+											},
+											Width: w.FieldLG,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Attachments"},
+									Items: []w.FieldSetPart{
+										w.Line{
+											Items: []w.LinePart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{
+																Icon: "upload",
+																File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
+																Row: w.Line{
+																	Items: []w.LinePart{
+																		w.Faced{
+																			Face:  w.FaceLarge,
+																			Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																		},
+																		w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																	},
+																	Gap: w.LineGap8,
+																},
+																Label: "From this computer",
+															},
+															w.MenuItem{Icon: "file", Label: "From Files"},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnder,
+													},
+												},
+												w.Faced{
+													Face: w.FaceLarge,
+													Items: []w.LinePart{
+														w.Text("release-checklist.md "),
+														w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+														w.Text(" "),
+														w.Badge{Label: "in the event"},
+													},
+												},
+												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+											},
+											Gap:   w.LineGap8,
+											Block: true,
+											ID:    "event-attachments",
+											Place: w.Grown,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Repeats"},
+									Items: []w.FieldSetPart{
+										w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Weekly"}}, Width: w.FieldSM},
+										w.Field{
+											Label: "Every",
+											Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+											Width: w.FieldXS,
+										},
+										w.Field{
+											Label: "On",
+											Parts: []w.FieldPart{
+												w.Seg{
+													Options: []w.SegOption{
+														{Label: "MO", On: true, Value: "MO"},
+														{Label: "TU", Value: "TU"},
+														{Label: "WE", Value: "WE"},
+														{Label: "TH", Value: "TH"},
+														{Label: "FR", Value: "FR"},
+														{Label: "SA", Value: "SA"},
+														{Label: "SU", Value: "SU"},
+													},
+													Name:     "byday",
+													Multiple: true,
+												},
+											},
+										},
+										w.Field{
+											Label: "Until",
+											Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2027-01-18", Label: "Until", Mono: true}},
+											Width: w.FieldSM,
+										},
+										w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Advanced RRULE",
+											Parts: []w.FieldPart{
+												w.Input{Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270118", Label: "Advanced RRULE", Mono: true},
+												w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
+											},
+											Width: w.FieldXL,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Kept as the server sent them"},
+									Items: []w.FieldSetPart{
+										w.Diag{
+											Text:  "X-MOZ-GENERATION  3\nX-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC\nSEQUENCE  2",
+											Place: w.Grown,
+										},
+									},
+								},
+								w.FieldSet{
+									Rubric: w.Rubric{Text: "Source"},
+									Items: []w.FieldSetPart{
+										w.Fields{
+											Items: []w.FieldsItem{
+												{
+													Term:  "Path",
+													Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/personal/8f1c.ics")},
+													Face:  w.ValueMono,
+												},
+												{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
+											},
+											Place: w.Grown,
+										},
+									},
+								},
+							},
+						},
+						w.Danger{
+							Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
+							Note:   "Series is edited and deleted whole.",
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+					Icon:   "refresh",
+					Title:  "Keep the meetings that were moved by hand?",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Синк-ап по релизу · not saved yet")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.SheetBlock{
+							Title: w.Rubric{Text: "What you changed", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "The series ends on 18 January",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— it ran weekly until 28 December")}},
+								},
+							},
+						},
+						w.SheetBlock{
+							Title: w.Rubric{Text: "Left without their day · 3", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "25 January, 14:00 — Синк-ап по релизу",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— it was the meeting of 25 January, 12:00")}},
+								},
+								{
+									Name: "1 February, 12:00 — Синк-ап: ретро",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— its title was changed")}},
+								},
+								{
+									Name: "15 February, 16:30 — Синк-ап по релизу",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— it was the meeting of 15 February, 12:00")}},
+								},
+							},
+						},
+						w.SheetNote{
+							Text: "Kept, each becomes an event of its own, with what was changed in it. Removed, they go with the rest of the series after 18 January.",
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Keep as events", Kind: w.ButtonPrimary, Name: "left", Value: "keep", Submit: true},
+						w.Button{Label: "Remove", Name: "left", Value: "remove", Submit: true},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Name: "left", Value: "cancel", Submit: true}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth520,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Agenda28 is frame «Событие · серия записана не вся, поверх карточки» (s-agenda-28).
+func Agenda28() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
+							Subs: []w.HeadSub{
+								w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
+									w.Button{Label: "Send", Icon: "mail"},
+									w.Button{Label: "Print", Icon: "print", Tertiary: true},
+									w.Button{Icon: "dots", Title: "More"},
+								},
+							},
+						},
+						w.Fields{
+							Items: []w.FieldsItem{
+								{
+									Term: "When",
+									Value: []w.ValuePart{
+										w.Mono{Text: "10:00 – 11:00"},
+										w.Text(", Monday 10 August "),
+										w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"},
+									},
+								},
+								{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2027-01-18"}}},
+								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+								{
+									Term:  "Where",
+									Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+								},
+								{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+								{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{Text: "Description"},
+								w.Prose{
+									Parts: []w.Inline{w.Text("Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.")},
+								},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
+								w.SecList{
+									Items: [][]w.SecItemPart{
+										[]w.SecItemPart{
+											w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "Мария Лебедева", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
+										},
+										[]w.SecItemPart{
+											w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "Анна Ковалёва", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· accepted")}},
+										},
+										[]w.SecItemPart{
+											w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "Артём Белов", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· tentative")}},
+										},
+										[]w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
+									},
+									Columns: true,
+								},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{
+									Text: "Attachments",
+									Items: []w.RubricPart{
+										w.Drop{
+											Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Icon:  "upload",
+														File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+														Label: "From this computer",
+													},
+													w.MenuItem{Icon: "file", Label: "From Files"},
+													w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
+												},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+								},
+								w.SecList{
+									Items: [][]w.SecItemPart{
+										[]w.SecItemPart{
+											w.Link{Text: "release-checklist.md", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+											w.Text(" "),
+											w.Badge{Label: "in the event"},
+										},
+									},
+									Gap: 6,
+								},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{Text: "Related"},
+								w.SecList{
+									Items: [][]w.SecItemPart{
+										[]w.SecItemPart{
+											w.Span{Face: w.FaceAccent, Text: "Заметка со встречи 10.08"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· note")}},
+										},
+									},
+								},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{
+									Text:  "The same event in other calendars",
+									Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}},
+								},
+								w.SecList{
+									Items: [][]w.SecItemPart{
+										[]w.SecItemPart{
+											w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "radicale · vps · Проекты", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}},
+										},
+										[]w.SecItemPart{
+											w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "baikal · Общий", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· Where differ")}},
+										},
+									},
+									Gap: 5,
+								},
+							},
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{Text: "Source"},
+								w.Diag{
+									Text: "Path  /remote.php/dav/calendars/mix/personal/8f1c.ics\nRead  2 min ago · changed on server 3 days ago",
+								},
+							},
+						},
+						w.Danger{
+							Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
+							Note:   "Series is edited and deleted whole.",
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+					Icon:   "refresh",
+					Title:  "Keep the meetings that were moved by hand?",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Синк-ап по релизу · saved in part")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.SheetBlock{
+							Title: w.Rubric{Text: "Written", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{Name: "The series ends on 18 January", Note: w.Dim{Parts: []w.Inline{w.Text("— saved")}}},
+								{
+									Name: "2 separate events",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— 25 January, 14:00 and 15 February, 16:30")}},
+								},
+							},
+						},
+						w.SheetBlock{
+							Title: w.Rubric{Text: "Not written · 1", Variant: w.RubricBottom7},
+							Items: []w.SheetLine{
+								{
+									Name: "1 February, 12:00 — Синк-ап: ретро",
+									Note: w.Dim{Parts: []w.Inline{w.Text("— the server answered 507 Insufficient Storage")}},
+								},
+							},
+						},
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("The meeting of 1 February was not made a separate event: it stays in the series, with its change, as it was before you saved."),
+							},
+							Tone:  w.MsgAlert,
+							Space: w.MsgFlush,
+						},
+						w.SheetNote{Text: "Nothing is lost: what could not be written apart is still in the series."},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{
+							Label:  "Try again",
+							Kind:   w.ButtonPrimary,
+							To:     "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=apart&day=2027-02-01",
+							Submit: true,
+						},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{
+								w.Button{Label: "Leave it in the series", Href: "/app/calendar/nextcloud/lichnyy/8f1c"},
+								w.Kbd{Keys: "Esc"},
+							},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth520,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
 // Agenda17 is frame «Календарь · один календарь» (s-agenda-17).
 func Agenda17() Screen {
 	return w.Shell{

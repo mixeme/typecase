@@ -16,6 +16,8 @@ var Routes = []Route{
 	{Frame: "s-contacts-35", Caption: "Связанная запись · какую копию править, лист поверх книги", Screen: Contacts35},
 	{Frame: "s-contacts-7", Caption: "Человек · хронология", Screen: Contacts7},
 	{Frame: "s-agenda-1", Caption: "Календарь · агенда со списком и карточкой", Screen: Agenda1},
+	{Frame: "s-agenda-27", Caption: "Событие · вопрос перед сохранением серии, поверх правки", Screen: Agenda27},
+	{Frame: "s-agenda-28", Caption: "Событие · серия записана не вся, поверх карточки", Screen: Agenda28},
 	{Frame: "s-agenda-17", Caption: "Календарь · один календарь", Screen: Agenda17},
 	{Frame: "s-agenda-2", Caption: "Событие · чтение", Screen: Agenda2},
 	{Frame: "s-agenda-3", Caption: "Событие · правка, повторение", Screen: Agenda3},
