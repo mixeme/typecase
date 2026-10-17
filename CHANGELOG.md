@@ -742,6 +742,24 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Sheets over a screen with their own address; second buttons without a
+  script** (Carrel's tasks 183, 187, 197, 199; accepted by the owner
+  16.10). New route frames: «Which copy to edit?» over the address book
+  (`s-contacts-35`), «Which copy to mark done?» over the task list
+  (`s-tasks-19`), the password reset over Users (`s-admin-24`); the quick
+  sheets of an event and a task, and the escrow deposit, carry their own
+  address; «nothing to write into» (`s-notes-6`) is a state, not a route.
+  Under a sheet is the screen it was opened from, the same body: the move
+  sheet's rail foot is the book's (`s-contacts-2`), its books go in the
+  rail's order, the account named in full. Second buttons of forms have an
+  address of their own — `formaction` (Test only, Check the address, Open
+  the card, Leave as is, Attach, Preview, Copy link instead, Send
+  invitation, Reset remembered view settings), a name and value (Cancel of
+  the series question), a link (Cancel of every sheet, Leave it in the
+  series, Download .ics first, Open in Files, Done); Copy buttons say what
+  they copy, their fields are read-only. The import preview's rail shows
+  the unticked calendar too (`s-io-6`); the refusal to create a collection
+  no longer promises what Carrel cannot tell (`s-profile-6`).
 - **Where a record is saved, and its collection's mark** (the owner's
   decisions of 16.10; Carrel's task 182). A record's head carries the
   collection's mark beside the collection's name under the title, not at

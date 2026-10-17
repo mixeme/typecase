@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("primary", w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/admin/users"}, "s-admin-14", "tc-btn", 2),
 	primitive("disabled", w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, "s-files-16", "tc-btn", 1),
 	primitive("menu", w.Button{Label: "9 records", Menu: true, Small: true}, "s-contacts-29", "tc-btn", 1),
 	primitive("folds", w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"}, "s-find-1", "tc-btn", 5),
@@ -82,7 +83,7 @@ var _ = add(
 	primitive("variant", w.Button{Icon: "panel", Variant: w.ButtonOnCard, Title: "Details"}, "s-files-1", "tc-btn", 9),
 	primitive("disabled", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled, Reason: "Общий is read-only"}, "s-dup-1", "tc-btn", 16),
 	primitive("primary", w.Button{Label: "Save", Small: true, Kind: w.ButtonPrimary}, "s-dup-3", "tc-btn", 2),
-	primitive("with-content", w.Button{Label: "Download", Icon: "download", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, "s-profile-9", "tc-btn", 9),
+	primitive("with-content", w.Button{Label: "Download", Icon: "download", Href: "/app/collections/nextcloud/dni-rozhdeniya/export", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, "s-profile-9", "tc-btn", 9),
 	primitive("with-content", w.Button{Label: "Save as", Icon: "download", SaveAs: "carrel-personal.sh", SaveFrom: "trigger-script", Aside: &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11}}, "s-backup-3", "tc-btn", 7),
 	primitive("tertiary", w.Button{Label: "H2", Tertiary: true}, "s-notes-20", "tc-btn", 7),
 	primitive("tertiary", w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true}, "s-notes-20", "tc-btn", 9),

@@ -96,10 +96,10 @@ var _ = add(
 		{Icon: "file", Label: "2026", Indent: w.TreeLevel20},
 		{Icon: "file", Label: "смета", Indent: w.TreeLevel20}}, On: 1}, "components-28", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty"}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Send: w.Send{Name: "to", Value: "nextcloud/arhiv"}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki"}, Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda"}, Trail: w.Badge{Label: "read-only"}}}, On: 2}, "s-contacts-2", "tc-tree", 1),
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Badge{Label: "read-only"}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 2}, "s-contacts-2", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},

@@ -1300,8 +1300,13 @@ func Publish6() Screen {
 					w.Strip{
 						Label: "Subscribe in your own client",
 						Items: []w.StripPart{
-							w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Mono: true, Variant: w.InputLineFill},
-							w.Button{Label: "Copy", Small: true},
+							w.Input{
+								Value:    "webcal://carrel.example/p/7f3ac9/personal.ics",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
+							w.Button{Label: "Copy", Small: true, Copy: "webcal://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
 							w.Button{Label: "Open in calendar app", Small: true},
 							w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11},
 						},
@@ -1369,8 +1374,13 @@ func Publish7() Screen {
 					w.Strip{
 						Label: "Address of this book",
 						Items: []w.StripPart{
-							w.Input{Value: "https://carrel.example/p/2b91f4/team.vcf", Mono: true, Variant: w.InputLineFill},
-							w.Button{Label: "Copy", Small: true},
+							w.Input{
+								Value:    "https://carrel.example/p/2b91f4/team.vcf",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
+							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/2b91f4/team.vcf", Copied: "Copied"},
 							w.Dim{
 								Parts: []w.Inline{w.Text("another Carrel can subscribe to it; other clients import it")},
 								Size:  w.Dim11,
@@ -1607,8 +1617,8 @@ func Publish12() Screen {
 					w.Strip{
 						Label: "Mount as a drive",
 						Items: []w.StripPart{
-							w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Mono: true, Variant: w.InputLineFill},
-							w.Button{Label: "Copy", Small: true},
+							w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Mono: true, ReadOnly: true, Variant: w.InputLineFill},
+							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/5c40e2/dav/", Copied: "Copied"},
 							w.Button{Label: "How to mount", Small: true},
 							w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11},
 						},

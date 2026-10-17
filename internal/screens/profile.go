@@ -619,7 +619,7 @@ func Profile2() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only"},
+									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,
@@ -756,7 +756,7 @@ func Profile14() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only"},
+									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,
@@ -1315,7 +1315,7 @@ func Profile11() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only"},
+									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,
@@ -1880,7 +1880,11 @@ func Profile5() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -2076,7 +2080,7 @@ func Profile6() Screen {
 							Text: "[create]  MKCALENDAR /dav.php/calendars/m.yenuchenko/poezdki/ → 403\n              <D:error><D:need-privileges/></D:error>\n              no DAV:bind on the calendar home-set",
 						},
 						w.SheetNote{
-							Text: "This account may sign in and read, but not create. Either the user has no such right on the server, or the account was connected with a password issued read-only. Neither is something Carrel can fix from here — but it can say which of the two it is.",
+							Text: "This account may sign in and read, but not create. Either the user has no such right on the server, or the account was connected with a password issued read-only. Neither is something Carrel can fix from here.",
 						},
 					},
 					Foot: []w.SheetFootPart{w.Button{Label: "Back to the form", Kind: w.ButtonPrimary}, w.Button{Label: "Try again"}},
@@ -2263,7 +2267,11 @@ func Profile7() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -2462,7 +2470,11 @@ func Profile8() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -2654,7 +2666,13 @@ func Profile9() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{
-								w.Button{Label: "Download", Icon: "download", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"},
+								w.Button{
+									Label: "Download",
+									Icon:  "download",
+									Href:  "/app/collections/nextcloud/dni-rozhdeniya/export",
+									Aside: &w.Mono{Text: ".ics", Variant: w.Mono11},
+									After: "first",
+								},
 								w.Dim{
 									Parts:   []w.Inline{w.Text("51 events, one file, straight to you")},
 									Size:    w.Dim11_5,
@@ -2679,7 +2697,11 @@ func Profile9() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Delete on the server", Kind: w.ButtonDangerSolid, Submit: true},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3199,7 +3221,11 @@ func Profile10() Screen {
 								},
 								Width: w.FieldW100,
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Check the address"}}, Width: w.FieldW100, OwnLine: true},
+							w.Field{
+								Parts:   []w.FieldPart{w.Button{Label: "Check the address", To: "/app/settings/connections/subscribe/check", Submit: true}},
+								Width:   w.FieldW100,
+								OwnLine: true,
+							},
 							w.Field{
 								Parts: []w.FieldPart{
 									w.Diag{

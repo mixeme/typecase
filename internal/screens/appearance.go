@@ -147,7 +147,11 @@ func Appearance1() Screen {
 										},
 										Place: w.Grown,
 									},
-									w.Field{Parts: []w.FieldPart{w.Button{Label: "Reset remembered view settings"}}},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Button{Label: "Reset remembered view settings", To: "/app/settings/appearance?op=reset", Submit: true},
+										},
+									},
 								},
 							},
 							w.FieldSet{

@@ -308,7 +308,12 @@ func Contacts2() Screen {
 						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}},
 					},
 					w.RailFoot{
-						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						Items: []w.RailFootPart{
+							w.Button{Icon: "plus", Title: "New address book"},
+							w.Button{Icon: "server", Title: "Connect account"},
+							w.Button{Icon: "link", Title: "Subscribe to a feed"},
+							w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+						},
 						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
 					},
 				},
@@ -479,17 +484,17 @@ func Contacts2() Screen {
 									Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty},
 								},
 								{
-									Mark:  &w.Mark{Colour: "#8C6239"},
-									Label: "Рассылки",
-									Send:  w.Send{Name: "to", Value: "radicale/rassylki", One: true},
-									Trail: w.Mono{Text: "radicale", Variant: w.Mono10Dusty},
-								},
-								{
 									Mark:        &w.Mark{Colour: "#6B4E7A"},
 									Label:       "Команда",
 									Unavailable: true,
 									Send:        w.Send{Name: "to", Value: "radicale/komanda", One: true},
 									Trail:       w.Badge{Label: "read-only"},
+								},
+								{
+									Mark:  &w.Mark{Colour: "#8C6239"},
+									Label: "Рассылки",
+									Send:  w.Send{Name: "to", Value: "radicale/rassylki", One: true},
+									Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty},
 								},
 							},
 							On: 2,
@@ -506,7 +511,11 @@ func Contacts2() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth520,
 				},
@@ -1794,6 +1803,280 @@ func Contacts16() Screen {
 					},
 					w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
+			},
+		},
+	}
+}
+
+// Contacts35 is frame «Связанная запись · какую копию править, лист поверх книги» (s-contacts-35).
+func Contacts35() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+						},
+						On: 1,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked:  w.TickedPart,
+								Kind:    w.TickRowAll,
+								Mark:    w.Mark{Kind: w.MarkMulti},
+								Label:   "Combined address book",
+								Meta:    "7",
+								Current: true,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "radicale · vps"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Tags"}},
+						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.Button{Icon: "plus", Title: "New address book"},
+							w.Button{Icon: "server", Title: "Connect account"},
+							w.Button{Icon: "link", Title: "Subscribe to a feed"},
+							w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Import", Icon: "import"},
+									w.Button{Label: "Export", Icon: "export"},
+									w.Button{Label: "Print", Icon: "print"},
+								},
+							},
+						},
+						w.Bar{
+							Items: []w.BarPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+									Waiting: true,
+									Variant: w.FilterH26W220,
+								},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "A–Z", Href: "/app/contacts?sort=az", On: true},
+										{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+									},
+									Secondary: true,
+								},
+								w.Button{Label: "Columns", Icon: "cols"},
+								w.Drop{
+									Trigger: w.Button{Icon: "dots", Title: "More"},
+									More:    true,
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
+											w.MenuItem{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
+											w.MenuSep{},
+											w.CheckForm{
+												Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+												Action: "/app/contacts",
+												Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
+											},
+										},
+										Pop:    w.MenuUnderEnd,
+										Inline: true,
+									},
+								},
+							},
+							Right: &w.BarRight{
+								Items: []w.BarPart{
+									w.CheckForm{
+										Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+										Action: "/app/contacts",
+										Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
+									},
+									w.Mono{Text: "6"},
+								},
+								Secondary: true,
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@example.org",
+									Caption:  "Издательство «Слово»",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
+									Mark:       w.Mark{Colour: "#6B4E7A"},
+									Avatar:     w.Avatar{Photo: true},
+									Title:      []w.Inline{w.Text("Артём Белов ")},
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Subtitle:   "+7 903 118-22-04",
+									Detail:     "a.belov@example.org",
+									Caption:    "Тензор",
+									Source:     "radicale · vps · Команда",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АС"},
+									Title:    []w.Inline{w.Text("Алексей Смирнов")},
+									Subtitle: "+7 916 200-71-15",
+									Detail:   "—",
+									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВГ"},
+									Title:    []w.Inline{w.Text("Виктор Гончаров")},
+									Subtitle: "—",
+									Detail:   "v.goncharov@example.org",
+									Caption:  "Городская библиотека №4",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#A05A2C"},
+									Avatar:   w.Avatar{Initials: "ВЛ"},
+									Title:    []w.Inline{w.Text("Вера Лебедева")},
+									Strong:   true,
+									Subtitle: "+7 905 331-09-42",
+									Detail:   "vera@example.net",
+									Caption:  "—",
+									Source:   "nextcloud · Архив",
+									On:       true,
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Л", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Лебедева Вера")},
+									Subtitle: "+7 905 331-09-42",
+									Detail:   "v.lebedeva@example.org",
+									Caption:  "Библиотека №4",
+									Source:   "nextcloud · Контакты",
+								},
+							},
+						},
+					},
+				},
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/contacts/linked/8d21-55ce-0b17/edit",
+					Method: "get",
+					Icon:   "pencil",
+					Title:  "Which copy to edit?",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Вера Лебедева · 3 copies")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.SheetNote{Text: "Saving changes one copy only; the others stay as they are."},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#A05A2C", Size: w.MarkH11},
+								w.Check{
+									On:    true,
+									Name:  "copy",
+									Value: "nextcloud/arhiv",
+									Radio: true,
+									Parts: []w.CheckPart{w.Text("nextcloud · Архив")},
+								},
+								w.Dim{Parts: []w.Inline{w.Text("the copy you opened · vera@arhiv.example")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+								w.Check{
+									Name:  "copy",
+									Value: "nextcloud/kontakty",
+									Radio: true,
+									Parts: []w.CheckPart{w.Text("nextcloud · Контакты")},
+								},
+								w.Dim{Parts: []w.Inline{w.Text("Email differ · v.lebedeva@example.org")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#9A9280", Size: w.MarkH11},
+								w.Dim{Parts: []w.Inline{w.Text("baikal · Общий")}},
+								w.Dim{Parts: []w.Inline{w.Text("Phone differ · read-only: it cannot be edited")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Edit this copy", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts/linked/8d21-55ce-0b17"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth520,
+				},
+				Pad: w.ScrimPad26,
 			},
 		},
 	}

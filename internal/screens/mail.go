@@ -242,7 +242,9 @@ func Mail1() Screen {
 									Items: []w.RubricPart{
 										w.Num{Value: 4},
 										w.Line{
-											Items: []w.LinePart{w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}},
+											Items: []w.LinePart{
+												w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true, To: "/app/mail/send?op=attach", Submit: true},
+											},
 											Gap:   w.LineGap6,
 											Place: w.Pushed,
 										},
@@ -300,7 +302,7 @@ func Mail1() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Preview"},
+						w.Button{Label: "Preview", To: "/app/mail/send?op=preview", Submit: true},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Signed "), w.Strong("Михаил Енученко"), w.Text(" · replies go to mix@example.org")},
 							Size:    w.Dim11_5,
@@ -506,7 +508,7 @@ func Mail4() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Copy link instead"},
+						w.Button{Label: "Copy link instead", To: "/app/mail/send?op=link", Submit: true},
 						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel"}}},
 					},
 					Width: w.SheetWidthFull,

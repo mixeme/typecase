@@ -1828,7 +1828,12 @@ func Notes5() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save note", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Ctrl+Enter"},
-						w.Button{Label: "Open the card", Icon: "expand"},
+						w.Button{
+							Label:  "Open the card",
+							Icon:   "expand",
+							To:     "/app/notes/nextcloud/zapisi/quick?op=open",
+							Submit: true,
+						},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},
@@ -2316,7 +2321,12 @@ func Notes8() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save contact", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Button{Label: "Open the card", Icon: "expand"},
+						w.Button{
+							Label:  "Open the card",
+							Icon:   "expand",
+							To:     "/app/contacts/nextcloud/kontakty/quick?op=open",
+							Submit: true,
+						},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},
@@ -2532,7 +2542,12 @@ func Notes9() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save event", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Button{Label: "Open the card", Icon: "expand"},
+						w.Button{
+							Label:  "Open the card",
+							Icon:   "expand",
+							To:     "/app/calendar/nextcloud/lichnyj/quick?op=open",
+							Submit: true,
+						},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},
@@ -2697,7 +2712,7 @@ func Notes10() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Save task", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Button{Label: "Open the card", Icon: "expand"},
+						w.Button{Label: "Open the card", Icon: "expand", To: "/app/tasks/nextcloud/dela/quick?op=open", Submit: true},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 				},

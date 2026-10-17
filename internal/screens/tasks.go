@@ -1176,3 +1176,226 @@ func Tasks14() Screen {
 		},
 	}
 }
+
+// Tasks19 is frame «Связанная задача · какую копию отметить, лист поверх списка» (s-tasks-19).
+func Tasks19() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+						},
+						On: 3,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked:  w.TickedPart,
+								Kind:    w.TickRowAll,
+								Mark:    w.Mark{Kind: w.MarkMulti},
+								Label:   "Combined list",
+								Meta:    "7",
+								Current: true,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Kind:   w.TickRowExternal,
+								Mark:   w.Mark{Colour: "#8C6239"},
+								Label:  "Праздники РФ",
+								Meta:   "—",
+								Hidden: true,
+								Trail:  w.Badge{Label: "ro"},
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Tags"}},
+						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.Button{Icon: "plus", Title: "New list"},
+							w.Button{Icon: "server", Title: "Connect account"},
+							w.Button{Icon: "link", Title: "Subscribe to a feed"},
+							w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 6 tasks")}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Import", Icon: "import"},
+									w.Button{Label: "Export", Icon: "export"},
+									w.Button{Label: "Print", Icon: "print"},
+								},
+							},
+						},
+						w.Bar{
+							Items: []w.BarPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+									Waiting: true,
+									Variant: w.FilterH26W200,
+								},
+								w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 1"}, {Label: "All 6"}}},
+								w.Seg{
+									Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
+									Secondary: true,
+								},
+								w.Button{Label: "Columns", Icon: "cols"},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 2, Alert: true}},
+						w.List{
+							Rows: []w.ListRow{
+								w.DueRow{
+									Tick:     w.Tick{Label: "Done"},
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
+									Due:      "7 Aug",
+									Progress: "—",
+									Source:   "nextcloud · Дела",
+									Overdue:  true,
+									Href:     "#",
+								},
+								w.DueRow{
+									Tick:     w.Tick{Label: "Done"},
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Title:    []w.Inline{w.Text("Ответить подрядчику по смете")},
+									Due:      "8 Aug",
+									Progress: "40%",
+									Source:   "nextcloud · Работа",
+									Overdue:  true,
+									Href:     "#",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "This week", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.DueRow{
+									Tick:       w.Tick{Label: "Done"},
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Title:      []w.Inline{w.Text("Собрать чемодан ")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Due:        "12 Aug 18:00",
+									Progress:   "—",
+									Source:     "2 sources",
+									SourceHint: "nextcloud · Дела, nextcloud · Работа",
+									On:         true,
+									Href:       "#",
+								},
+								w.DueRow{
+									Tick:     w.Tick{Label: "Done"},
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Title:    []w.Inline{w.Text("Дописать раздел про кэш")},
+									Due:      "14 Aug",
+									Progress: "70%",
+									Source:   "nextcloud · Работа",
+									Href:     "#",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "No due date", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.DueRow{
+									Tick:     w.Tick{Done: true, Label: "Done"},
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Title:    []w.Inline{w.Text("Продлить страховку")},
+									Due:      "—",
+									Progress: "100%",
+									Source:   "nextcloud · Дела",
+									Href:     "#",
+								},
+							},
+						},
+					},
+				},
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/tasks/done",
+					Icon:   "task",
+					Title:  "Which copy to mark done?",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Собрать чемодан · 2 copies")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.SheetNote{Text: "A copy that is not ticked stays as it is."},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+								w.Check{On: true, Name: "copy", Value: "nextcloud/dela", Parts: []w.CheckPart{w.Text("nextcloud · Дела")}},
+								w.Dim{Parts: []w.Inline{w.Text("due 12 Aug 18:00")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#3F6E8C", Size: w.MarkH11},
+								w.Check{Name: "copy", Value: "nextcloud/rabota", Parts: []w.CheckPart{w.Text("nextcloud · Работа")}},
+								w.Dim{Parts: []w.Inline{w.Text("Due differ · due 13 Aug")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Mark done", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/tasks"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth520,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
