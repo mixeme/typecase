@@ -18339,7 +18339,7 @@ password  9f2-brick-lamp</div>
         <button class="tc-menu__item" type="button" role="menuitem">Kill sessions</button>
         <button class="tc-menu__item" type="button" role="menuitem">Disable</button>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-trash"/></svg>Delete</button>
+        <a class="tc-menu__item tc-menu__item--danger" href="/admin/delete?target=u-anna" role="menuitem"><svg><use href="#i-trash"/></svg>Delete</a>
       </div>
     </div>
   </div>
@@ -18446,6 +18446,84 @@ password  9f2-brick-lamp</div>
   </div>
 </div>
 <figcaption><b>Кадр маршрута листа сброса пароля</b> (задача Carrel 197 п. 1): без сценария лист — своя страница <code>/admin/reset</code>, под затемнением — Users (s-admin-2), откуда его открыли. Состояния листа — фрагменты: кого (s-admin-13), список Whose (s-admin-15), готово (s-admin-14). Cancel — ссылка назад на Users.</figcaption>
+</figure>
+
+<figure style="flex:1 1 100%">
+<div class="frame" data-frame="s-admin-34" data-screen="/admin/delete">
+  <div class="frame-label"><span>Удаление учётной записи · лист поверх Users</span><i>/admin/delete</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-overlay">
+      <div class="tc-shell__body tc-shell__body--minh560">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Administration</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Users</div><div class="tc-head__sub">6 accounts · 2 administrators · 4 covered by escrow</div></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Add user</button><button class="tc-btn" type="button">Reset a password</button></div>
+        </div>
+        <div class="tc-bar">
+          <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by login" aria-label="Filter by login"></label>
+          <span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All</button><button class="tc-seg__opt" type="button">Administrators</button><button class="tc-seg__opt" type="button">Disabled</button></span>
+          <button class="tc-btn" title="Columns" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg><span class="tc-btn__label">Columns</span></button>
+        </div>
+        <table class="tc-table">
+          <thead><tr><th>Login</th><th>Role</th><th class="tc-table__n3 is-2nd">Created</th><th class="tc-table__n4">Last login</th><th>DAV</th><th>Sessions</th><th>Escrow</th><th></th></tr></thead>
+          <tbody>
+            <tr><td class="tc-table__name">mix</td><td>Administrator</td><td class="tc-mono tc-table__n3 is-2nd">2026-02-11</td><td class="tc-mono tc-table__n4">2026-08-15 09:20</td><td class="tc-mono">3</td><td class="tc-mono">2</td><td>—</td>
+              <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr><td>anna</td><td>User</td><td class="tc-mono tc-table__n3 is-2nd">2026-03-02</td><td class="tc-mono tc-table__n4">2026-08-14 18:02</td><td class="tc-mono">1</td><td class="tc-mono">1</td><td><span class="tc-badge">deposited</span></td>
+              <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+            <tr class="tc-table__row--off"><td>viktor <span class="tc-badge">disabled</span></td><td>User</td><td class="tc-mono tc-table__n3 is-2nd">2026-04-19</td><td class="tc-mono tc-table__n4">2026-06-30 11:41</td><td class="tc-mono">2</td><td class="tc-mono">0</td><td><span class="tc-badge">deposited</span></td>
+              <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+          </tbody>
+        </table>
+        <div class="tc-msg">Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed.</div>
+      </div>
+    </div>
+      <div class="tc-scrim tc-scrim--padt26">
+        <form class="tc-sheet tc-sheet--w480" action="/admin/" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="delete"><input type="hidden" name="target" value="u-anna">
+        <div class="tc-sheet__head">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-trash"/></svg>
+        <b class="tc-sheet__title">Delete anna</b>
+        </div>
+        <div class="tc-sheet__body">
+          <div class="tc-msg is-alert tc-msg--flush">Carrel forgets this account: its connections and saved passwords, published links, devices, backups and the history of its password. Its records on the servers stay as they are.</div>
+          <div class="tc-field tc-field--w100"><label>Type the login to confirm</label><input class="tc-in is-focus is-ph" type="text" name="login" placeholder="anna" aria-label="Type the login to confirm" required></div>
+        </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Delete account</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/admin/">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Удаление учётной записи</b> (задача Carrel 195 п. 6) — лист со своим адресом поверх Users, открывается пунктом Delete в «⋯» строки (ссылка <code>/admin/delete?target=</code>). Что уходит — сказано до нажатия; что остаётся на серверах — тоже. Логин набирают, как при сбросе пароля: одно нажатие не удаляет. У последнего администратора пункт выключен с причиной.</figcaption>
 </figure>
 
 <figure style="flex:1 1 330px">

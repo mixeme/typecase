@@ -573,7 +573,7 @@ var _ = add(
 		w.MenuItem{Label: "Kill sessions"},
 		w.MenuItem{Label: "Disable"},
 		w.MenuSep{},
-		w.MenuItem{Icon: "trash", Label: "Delete", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "s-admin-12", "tc-menu", 1),
+		w.MenuItem{Icon: "trash", Label: "Delete", Tone: w.MenuToneDanger, Href: "/admin/delete?target=u-anna"}}, Width: w.MenuWidth212}, "s-admin-12", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "STARTTLS", On: true},
 		w.MenuItem{Label: "TLS"},
@@ -689,6 +689,9 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("danger", w.Sheet{Action: "/admin/", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "delete"}, {Name: "target", Value: "u-anna"}}, Icon: "trash", Tone: w.SheetIconDanger, Title: "Delete anna", Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("Carrel forgets this account: its connections and saved passwords, published links, devices, backups and the history of its password. Its records on the servers stay as they are.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
+		w.Field{Label: "Type the login to confirm", Parts: []w.FieldPart{w.Input{Name: "login", Placeholder: "anna", Label: "Type the login to confirm", Focus: true, Required: true}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Delete account", Kind: w.ButtonDangerSolid, Submit: true}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/admin/"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Width: w.SheetWidth480}, "s-admin-34", "tc-sheet", 1),
 	overlay("plain", w.Sheet{Title: "Publish an event", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Синк-ап по релизу")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "What the visitor sees", Parts: []w.FieldPart{w.Group{Items: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}}}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Title")}}, w.Check{Parts: []w.CheckPart{w.Text("Location")}}, w.Check{Parts: []w.CheckPart{w.Text("Description")}}, w.Check{Parts: []w.CheckPart{w.Text("Attendees")}}, w.Check{Parts: []w.CheckPart{w.Text("Attachments")}}, w.Check{Parts: []w.CheckPart{w.Text("Tags")}}}, Form: w.GroupColumnLoose}, w.FieldHint{Parts: []w.Inline{w.Text("Without the title the event shows as “Busy”.")}}}, Width: w.FieldW100},
 		w.SheetChecks{Items: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")}}}},

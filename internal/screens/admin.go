@@ -582,6 +582,190 @@ func Admin24() Screen {
 	}
 }
 
+// Admin34 is frame «Удаление учётной записи · лист поверх Users» (s-admin-34).
+func Admin34() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Administration"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+									{Icon: "adm", Label: "Settings", Href: "#"},
+									{Icon: "shield", Label: "Installation", Href: "#"},
+									{Icon: "search", Label: "DAV validator", Href: "#"},
+									{Icon: "dup", Label: "Key escrow", Href: "#"},
+									{Icon: "clock", Label: "Audit log", Href: "#"},
+								},
+								On: 2,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Tone:   w.RailStatusAlert,
+								Text:   "SMTP not configured",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("No mail is going out.")}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text:   "Checks passed",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Users"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("6 accounts · 2 administrators · 4 covered by escrow")}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "Add user", Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Reset a password"},
+								},
+							},
+						},
+						w.Bar{
+							Items: []w.BarPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by login", Label: "Filter by login"},
+									Waiting: true,
+									Variant: w.FilterH26W200,
+								},
+								w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Administrators"}, {Label: "Disabled"}}},
+								w.Button{Folds: true, Label: "Columns", Icon: "cols", Title: "Columns"},
+							},
+						},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "Login"},
+								{Label: "Role"},
+								{Label: "Created", Rank: w.Rank3, Secondary: true},
+								{Label: "Last login", Rank: w.Rank4},
+								{Label: "DAV"},
+								{Label: "Sessions"},
+								{Label: "Escrow"},
+								{},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("mix")}, Name: true},
+										{Parts: []w.CellPart{w.Text("Administrator")}},
+										{Parts: []w.CellPart{w.Text("2026-02-11")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 09:20")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("3")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("anna")}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-03-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-14 18:02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("viktor "), w.Badge{Label: "disabled"}}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-04-19")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-06-30 11:41")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+									State: w.RowGone,
+								},
+							},
+						},
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed."),
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/admin/",
+					Fields: []w.Hidden{
+						{Name: "csrf", Value: "7f3a91de"},
+						{Name: "action", Value: "delete"},
+						{Name: "target", Value: "u-anna"},
+					},
+					Icon:  "trash",
+					Tone:  w.SheetIconDanger,
+					Title: "Delete anna",
+					Body: []w.SheetPart{
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("Carrel forgets this account: its connections and saved passwords, published links, devices, backups and the history of its password. Its records on the servers stay as they are."),
+							},
+							Tone:  w.MsgAlert,
+							Space: w.MsgFlush,
+						},
+						w.Field{
+							Label: "Type the login to confirm",
+							Parts: []w.FieldPart{
+								w.Input{Name: "login", Placeholder: "anna", Label: "Type the login to confirm", Focus: true, Required: true},
+							},
+							Width: w.FieldW100,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Delete account", Kind: w.ButtonDangerSolid, Submit: true},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/admin/"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth480,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
 // Admin3 is frame «Администрирование · настройки» (s-admin-3).
 func Admin3() Screen {
 	return w.Shell{

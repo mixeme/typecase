@@ -781,6 +781,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- New `s-admin-34`: deleting an account — a sheet with its own address
+  over Users, what goes said before the button, the login typed to
+  confirm; Delete in the row's «⋯» (`s-admin-12`) leads there (Carrel's
+  task 195 p. 6; accepted by the owner 18.10).
 - `s-admin-3`: the settings form names its fields as the server does;
   «Send test» is never off — it sends what is typed, and with no Host its
   answer says so; a password field; a wider test address. Extra frames

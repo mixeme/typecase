@@ -136,6 +136,7 @@ var Routes = []Route{
 	{Frame: "s-admin-1", Caption: "Администрирование · как заводят пользователей", Screen: Admin1},
 	{Frame: "s-admin-2", Caption: "Администрирование · пользователи", Screen: Admin2},
 	{Frame: "s-admin-24", Caption: "Сброс пароля · лист поверх Users", Screen: Admin24},
+	{Frame: "s-admin-34", Caption: "Удаление учётной записи · лист поверх Users", Screen: Admin34},
 	{Frame: "s-admin-3", Caption: "Администрирование · настройки", Screen: Admin3},
 	{Frame: "s-admin-32", Caption: "Настройки · почта настроена, проба ушла", Screen: Admin32},
 	{Frame: "s-admin-33", Caption: "Настройки · отказ поля", Screen: Admin33},
