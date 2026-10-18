@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Turn` (the arrow at a card's foot) and `Card` as a part of a
+  `FieldSet`, and `Badge` as a part of a `Check` are gone: no frame draws
+  them since the backup job lost its trigger card (Carrel's task 193).
 - `MarkH19` is gone: no frame draws a mark of 19 px since a record's head
   carries its collection's mark beside the collection's name.
 - **A field of a date or a time is as wide as its value** (the owner,
@@ -80,6 +83,8 @@ do, not what the authors did.
 - **`Input.Of`** — the form a field belongs to without standing in it, as
   `MenuItem.Of` and `Send.Of`: an address in a head beside the button
   that sends it.
+- **`FieldGridColumn`** — a column of a grid of choices: a source and
+  what is chosen under it, together however the grid wraps.
 - **`CardFields.Top`** — a card's row of fields aligned by their tops:
   refusals under some do not lift the others; a button stands in a
   `Field` with an empty label.
@@ -791,6 +796,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The backup job's form** (`s-backup-2`, `-3`; Carrel's task 193 p. 1,
+  2; accepted by the owner 19.10): «What to copy» — a column a connection,
+  collections are checkboxes `src` of the form, a connection's tick only
+  shows how many; the destination a pick with the collections' marks; the
+  folder a field with Browse; one line about the archive's forms;
+  «When» — one checkbox (on sign-in) and a list of the other ways to start
+  it; the trigger card is the job page's, not the form's; no Run now in
+  the form's head; the archive password a password field.
 - **Administration without polling, the cards whole** (Carrel's task 195
   p. 8; accepted by the owner 18.10): no «2 min ago» in any administration
   frame (19); Users has six rows for «6 accounts · 2 administrators · 4

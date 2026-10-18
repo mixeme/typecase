@@ -167,7 +167,6 @@ type CheckPart interface {
 func (Text) checkPart()   {}
 func (Dim) checkPart()    {}
 func (Mono) checkPart()   {}
-func (Badge) checkPart()  {}
 func (Choice) checkPart() {}
 
 // Choice is one side of a conflict in a check's label: where the value comes

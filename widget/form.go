@@ -327,6 +327,25 @@ func (g FieldGrid) html(mix) string {
 	return s.String()
 }
 
+// FieldGridColumn is a column of a grid of choices: a source and what is
+// chosen under it, kept together however the grid wraps (Carrel's task
+// 193).
+type FieldGridColumn struct {
+	Items []TickRow
+}
+
+func (FieldGridColumn) fieldGridPart() {}
+
+func (c FieldGridColumn) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-fset__col">`)
+	for _, it := range c.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
 // FieldSetVariant is the drawn form of a group of fields.
 type FieldSetVariant int
 

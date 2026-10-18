@@ -645,8 +645,6 @@ func (g *gen) rowPart(x *El) string {
 		return g.field(x)
 	case x.Has("tc-tag"):
 		return g.tag(x)
-	case x.Tag == "svg" && x.Has("tc-ico--turn"):
-		return "w.Turn{}"
 	case x.Has("tc-field__hint--flush-fill"):
 		return "w.FillHint{Parts: " + g.tparts(x, "[]w.CardTextPart{") + "}"
 	case x.Has("tc-dim--t12-5") && !x.Has("tc-dim"):

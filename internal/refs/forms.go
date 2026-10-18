@@ -36,9 +36,9 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("links", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"}, {Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"}}, Variant: w.SegStart}, "s-backup-3", "tc-seg", 2),
 	form("plain", w.Seg{Options: []w.SegOption{{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full", On: true}, {Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read"}}, Swap: "note-main", Tertiary: true}, "s-notes-2", "tc-seg", 1),
 	form("start-buttons", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job", On: true}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file"}}, Variant: w.SegStart}, "s-backup-7", "tc-seg", 1),
-	form("radio-four", w.Seg{Options: []w.SegOption{{Label: "crontab", On: true, Value: "crontab"}, {Label: "GoSentry", Value: "gosentry"}, {Label: "Gitea", Value: "gitea"}, {Label: "curl", Value: "curl"}}, Variant: w.SegStart, Name: "choice"}, "s-backup-2", "tc-seg", 2),
 	form("radio-start", w.Seg{Options: []w.SegOption{{Label: "Markdown · .md", On: true, Value: "markdown.md"}, {Label: "Source · .ics", Value: "source.ics"}}, Variant: w.SegStart, Name: "send.it.as"}, "s-mail-5", "tc-seg", 1),
 	form("icons", w.Seg{Options: []w.SegOption{{Icon: "menu", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=list", Title: "List"}, {Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07?view=tiles", On: true, Title: "Tiles"}}}, "s-files-5", "tc-seg", 2),
 	form("order", w.Seg{Options: []w.SegOption{{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true}, {Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"}, {Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}}, "s-files-1", "tc-seg", 1),
@@ -65,7 +65,7 @@ var _ = add(
 		w.MenuItem{Label: "settings.instance", Name: "action", Value: "settings.instance"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.Dim{Parts: []w.Inline{w.Text("since")}}, w.Input{Kind: w.InputDate, Name: "since", Value: "2026-08-01", Label: "Since", Mono: true, Variant: w.InputH26W120}}, Action: "/admin/audit", Show: w.Button{Label: "Show", Submit: true}}, "s-admin-7", "tc-barform", 1),
 	form("default", w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/contacts", Apply: w.Button{Label: "Apply", Small: true}}, "s-contacts-1", "tc-checkform", 2),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "All 24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events 14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks 2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files 4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}, "s-contacts-7", "tc-seg", 1),
-	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", On: true, Value: "to.webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", Value: "both"}}, Variant: w.SegStart, Name: "choice"}, "s-backup-2", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", On: true, Value: "webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", Value: "both"}}, Variant: w.SegStart, Name: "mode"}, "s-backup-2", "tc-seg", 1),
 	form("start", w.Seg{Options: []w.SegOption{{Label: "Comfortable", On: true, Value: "comfortable"}, {Label: "Compact", Value: "compact"}}, Variant: w.SegStart, Name: "density"}, "appearance-1", "tc-seg", 2),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, "s-agenda-1", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "Auto", "Light", "Dark"), Variant: w.SegStartSmall}, "account-5", "tc-seg", 1),
@@ -80,7 +80,7 @@ var _ = add(
 	form("default", w.Seg{Options: seg(3, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(1, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 2),
-	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", Value: "to.webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", On: true, Value: "both"}}, Variant: w.SegStart, Name: "where"}, "s-backup-3", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", Value: "webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", On: true, Value: "both"}}, Variant: w.SegStart, Name: "mode"}, "s-backup-3", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "crontab", "GoSentry", "Gitea", "curl"), Variant: w.SegStart}, "s-backup-4", "tc-seg", 1),
 
 	// tc-check
@@ -99,7 +99,6 @@ var _ = add(
 	// (a11y). Its record waits for the owner's decision on the mockup.
 	form("rich", w.Check{Name: "tasks.vtodo.not.every.client.understands.them", Value: "1", Parts: []w.CheckPart{w.Text("Tasks "), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}}}, "s-davloom-2", "tc-check", 3),
 	form("rich", w.Check{On: true, Name: "webdav.folders.mount.as.a.network.drive", Value: "1", Parts: []w.CheckPart{w.Text("WebDAV folders "), w.Dim{Parts: []w.Inline{w.Text("· mount as a network drive")}}}}, "s-davloom-2", "tc-check", 5),
-	form("rich", w.Check{On: true, Name: "on.a.clock.of.your.own.cron.gosentry.a.job.in.gitea.local", Value: "1", Parts: []w.CheckPart{w.Text("On a clock of your own — "), w.Mono{Text: "cron"}, w.Text(", GoSentry, a job in Gitea "), w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: the address in the line answers only from inside your own network"}}}, "s-backup-2", "tc-check", 5),
 	form("rich", check(false, w.Text("Allow"), w.Mono{Text: ".vcf"}, w.Text("download and subscription")), "s-publish-3", "tc-check", 6),
 	form("rich", check(false, w.Dim{Parts: []w.Inline{w.Text("Start at sign-in — not available in a portable copy")}}), "desktop-4", "tc-check", 1),
 
@@ -135,7 +134,7 @@ var _ = add(
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}},
 		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}, w.Button{Label: "Remove", Small: true, Kind: w.ButtonDanger}}}, "s-agenda-3", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 1),
-	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 1),
+	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 2),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, btn, w.Push{Face: faceOf(w.FaceAccent11_5), Items: []w.PushPart{w.Text("Add a second instance")}}}}, "desktop-7", "tc-line", 1),
 	form("default", w.Stack{Gap: w.StackGap9, Items: []w.StackPart{btn}}, "components-21", "tc-stack", 1),
 	form("default", w.Grow{}, "s-contacts-3", "tc-grow", 1),

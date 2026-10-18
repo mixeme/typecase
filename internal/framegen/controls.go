@@ -985,7 +985,13 @@ func (g *gen) line(e *El) string {
 func (g *gen) fsetPart(k *El) string {
 	switch {
 	case k.Has("tc-fset__grid"):
-		return "w.FieldGrid{Items: []w.FieldGridPart{" + g.each(k.Els(), g.tickrow) + "}}"
+		return "w.FieldGrid{Items: []w.FieldGridPart{" + g.each(k.Els(), func(x *El) string {
+			if x.Has("tc-fset__col") {
+				// a source and its choices, one column (Carrel's task 193)
+				return "w.FieldGridColumn{Items: []w.TickRow{" + g.each(x.Els(), g.tickrow) + "}}"
+			}
+			return g.tickrow(x)
+		}) + "}}"
 	case k.Has("tc-field"):
 		return g.field(k)
 	case k.Has("tc-btn"):

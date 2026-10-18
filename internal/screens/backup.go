@@ -373,11 +373,7 @@ func Backup2() Screen {
 						Title: &w.HeadTitle{Text: "Личное на домашний диск"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Job · last copy 2 days ago")}}},
 						Acts: &w.Acts{
-							Items: []w.ActsPart{
-								w.Button{Label: "Cancel"},
-								w.Button{Label: "Run now"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "backup-job"},
-							},
+							Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "backup-job"}},
 						},
 					},
 					w.Form{
@@ -388,74 +384,133 @@ func Backup2() Screen {
 								Width: w.FieldLG,
 							},
 							w.Field{
-								Parts: []w.FieldPart{w.Check{On: true, Name: "job.is.on", Value: "1", Parts: []w.CheckPart{w.Text("Job is on")}}},
+								Parts: []w.FieldPart{w.Check{On: true, Name: "on", Value: "1", Parts: []w.CheckPart{w.Text("Job is on")}}},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{
 									Text:  "What to copy",
-									Items: []w.RubricPart{w.Plain{Text: "2 collections and 1 folder chosen · 2.1 GB last time"}},
+									Items: []w.RubricPart{w.Plain{Text: "4 collections and 1 folder chosen · 2.1 GB last time"}},
 								},
 								Items: []w.FieldSetPart{
 									w.FieldGrid{
 										Items: []w.FieldGridPart{
-											w.TickRow{
-												Ticked: w.TickedPart,
-												Form:   w.TickRowGroup,
-												Mark:   w.Mark{Kind: w.MarkMulti},
-												Label:  "nextcloud",
-												Meta:   "4 of 6",
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedPart,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "nextcloud",
+														Meta:   "4 of 6",
+													},
+													w.TickRow{
+														Send:  w.Send{Name: "src", Value: "nextcloud|lichnyy"},
+														Form:  w.TickRowNested,
+														Mark:  w.Mark{Colour: "#4A6B52"},
+														Label: "Личный",
+														Meta:  "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|rabota"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#3F6E8C"},
+														Label:  "Работа",
+														Meta:   "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|dela"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Дела",
+														Meta:   "tasks",
+													},
+													w.TickRow{
+														Send:  w.Send{Name: "src", Value: "nextcloud|kontakty"},
+														Form:  w.TickRowNested,
+														Mark:  w.Mark{Colour: "#4A6B52"},
+														Label: "Контакты",
+														Meta:  "book",
+													},
+													w.TickRow{
+														Send:  w.Send{Name: "src", Value: "nextcloud|arhiv"},
+														Form:  w.TickRowNested,
+														Mark:  w.Mark{Colour: "#A05A2C"},
+														Label: "Архив",
+														Meta:  "book",
+													},
+													w.TickRow{
+														Send:  w.Send{Name: "src", Value: "nextcloud|zapisi"},
+														Form:  w.TickRowNested,
+														Mark:  w.Mark{Colour: "#4A6B52"},
+														Label: "Записи",
+														Meta:  "notes",
+													},
+												},
 											},
-											w.TickRow{
-												Ticked: w.TickedOff,
-												Form:   w.TickRowGroup,
-												Mark:   w.Mark{Kind: w.MarkMulti},
-												Label:  "radicale · vps",
-												Meta:   "0 of 2",
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "radicale · vps",
+														Meta:   "0 of 2",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "radicale|proekty"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#6B4E7A"},
+														Label:  "Проекты",
+														Meta:   "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "radicale|dezhurstva"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#8C6239"},
+														Label:  "Дежурства",
+														Meta:   "cal.",
+													},
+												},
 											},
-											w.TickRow{Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "cal."},
-											w.TickRow{
-												Ticked: w.TickedOff,
-												Form:   w.TickRowNested,
-												Mark:   w.Mark{Colour: "#6B4E7A"},
-												Label:  "Проекты",
-												Meta:   "cal.",
-											},
-											w.TickRow{
-												Ticked: w.TickedOff,
-												Form:   w.TickRowNested,
-												Mark:   w.Mark{Colour: "#3F6E8C"},
-												Label:  "Работа",
-												Meta:   "cal.",
-											},
-											w.TickRow{
-												Ticked: w.TickedOff,
-												Form:   w.TickRowNested,
-												Mark:   w.Mark{Colour: "#8C6239"},
-												Label:  "Дежурства",
-												Meta:   "cal.",
-											},
-											w.TickRow{Form: w.TickRowNested, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "book"},
-											w.TickRow{
-												Ticked: w.TickedPart,
-												Form:   w.TickRowGroup,
-												Mark:   w.Mark{Kind: w.MarkMulti},
-												Label:  "sftpgo · vps",
-												Meta:   "1 of 2",
-											},
-											w.TickRow{Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "notes"},
-											w.TickRow{Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "files · 2.0 GB"},
-											w.TickRow{
-												Ticked: w.TickedOff,
-												Form:   w.TickRowNested,
-												Mark:   w.Mark{Colour: "#9A9280"},
-												Label:  "Public",
-												Meta:   "files · ro",
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedPart,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "sftpgo · vps",
+														Meta:   "1 of 2",
+													},
+													w.TickRow{
+														Send:  w.Send{Name: "src", Value: "sftpgo|documents"},
+														Form:  w.TickRowNested,
+														Mark:  w.Mark{Colour: "#4A6B52"},
+														Label: "Documents",
+														Meta:  "files · 2.0 GB",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "sftpgo|public"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#9A9280"},
+														Label:  "Public",
+														Meta:   "files · ro",
+													},
+												},
 											},
 										},
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
-											w.Text("A file collection is copied as files. Tasks and notes live inside calendar collections and are copied with them — they cannot be picked separately. The size beside each collection is what it took last time."),
+											w.Text("Files go as files; calendars, tasks and notes as "),
+											w.Mono{Text: ".ics"},
+											w.Text(", address books as "),
+											w.Mono{Text: ".vcf"},
+											w.Text("."),
 										},
 										Space: w.MsgFlushTop4,
 										Place: w.Grown,
@@ -469,12 +524,12 @@ func Backup2() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "To WebDAV", On: true, Value: "to.webdav"},
+													{Label: "To WebDAV", On: true, Value: "webdav"},
 													{Label: "Download", Value: "download"},
 													{Label: "Both", Value: "both"},
 												},
 												Variant: w.SegStart,
-												Name:    "where",
+												Name:    "mode",
 											},
 										},
 										OwnLine: true,
@@ -483,22 +538,55 @@ func Backup2() Screen {
 									w.Field{
 										Label: "Collection",
 										Parts: []w.FieldPart{
-											w.Pick{
-												Name:    "collection",
-												Options: []w.PickOption{{Value: "nextcloud.files", Label: "nextcloud · Files", On: true}},
-												Label:   "Collection",
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Files", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Files",
+															On:    true,
+															Name:  "dest",
+															Value: "nextcloud|files",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "sftpgo · vps · Documents",
+															Name:  "dest",
+															Value: "sftpgo|documents",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#9A9280"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "sftpgo · vps · Public files",
+															Reason: "Read-only: this account cannot write here",
+															Name:   "dest",
+															Value:  "sftpgo|public",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
 											},
 										},
 										Width: w.FieldLG,
 									},
 									w.Field{
-										Label: "Folder",
-										Parts: []w.FieldPart{w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder", Mono: true}},
-										Width: w.FieldMD,
+										Label: "Folder in it",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder in it", Mono: true, Variant: w.InputFill},
+													w.Button{Label: "Browse", To: "/app/settings/backup?op=browse&job=personal", Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Keep copies",
-										Parts: []w.FieldPart{w.Input{Name: "keep.copies", Value: "8", Label: "Keep copies", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "keep", Value: "8", Label: "Keep copies", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -532,12 +620,7 @@ func Backup2() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{
-												On:    true,
-												Name:  "encrypt.the.archive",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("Encrypt the archive")},
-											},
+											w.Check{On: true, Name: "encrypted", Value: "1", Parts: []w.CheckPart{w.Text("Encrypt the archive")}},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."),
@@ -549,7 +632,9 @@ func Backup2() Screen {
 									},
 									w.Field{
 										Label: "Archive password",
-										Parts: []w.FieldPart{w.Input{Name: "archive.password", Value: "••••••••••••", Label: "Archive password"}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Placeholder: "••••••••••••", Label: "Archive password"},
+										},
 										Width: w.FieldLG,
 									},
 									w.Msg{
@@ -567,45 +652,19 @@ func Backup2() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{
-												On:    true,
-												Name:  "on.demand.the.button.in.the.job.list",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("On demand — the button in the job list")},
-											},
 											w.Line{
 												Items: []w.LinePart{
 													w.Check{
 														On:    true,
-														Name:  "on.sign.in.if.the.last.copy.is.older.than",
-														Value: "1",
+														Name:  "signin.on",
+														Value: "on",
 														Parts: []w.CheckPart{w.Text("On sign-in, if the last copy is older than")},
 													},
-													w.Input{Name: "days", Value: "7", Label: "Days", Mono: true, Variant: w.InputChip},
+													w.Input{Name: "signin", Value: "7", Label: "Days", Mono: true, Variant: w.InputChip},
 													w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}},
 												},
 												Gap:   w.LineGap7,
 												Block: true,
-											},
-											w.Check{
-												On:    true,
-												Name:  "on.a.clock.of.your.own.cron.gosentry.a.job.in.gitea.local",
-												Value: "1",
-												Parts: []w.CheckPart{
-													w.Text("On a clock of your own — "),
-													w.Mono{Text: "cron"},
-													w.Text(", GoSentry, a job in Gitea "),
-													w.Badge{
-														Label: "local",
-														Tone:  w.BadgeLocal,
-														Title: "Local instance: the address in the line answers only from inside your own network",
-													},
-												},
-											},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Turning it on stores this job's data key under the server's key — less protection, for convenience: the job can then read without you signed in."),
-												},
 											},
 										},
 										Gap:   8,
@@ -613,98 +672,25 @@ func Backup2() Screen {
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
-											w.Text("No time picker here, and that is deliberate: Carrel keeps no clock of its own, so whoever holds the schedule holds the password. What it hands you instead is the line to paste where the clock already is."),
+											w.Strong("Also started by"),
+											w.Break{},
+											w.Text("• Run now — in the job list"),
+											w.Break{},
+											w.Text("• Your own clock — "),
+											w.Mono{Text: "cron"},
+											w.Text(", GoSentry, a job in Gitea, "),
+											w.Mono{Text: "curl"},
+											w.Text(": the line to paste is on the job’s page"),
 										},
 										Space: w.MsgFlushTop4,
 										Place: w.Grown,
-									},
-									w.Card{
-										Items: []w.CardPart{
-											w.Rubric{
-												Text:  "The line to paste",
-												Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}},
-											},
-											w.Seg{
-												Options: []w.SegOption{
-													{Label: "crontab", On: true, Value: "crontab"},
-													{Label: "GoSentry", Value: "gosentry"},
-													{Label: "Gitea", Value: "gitea"},
-													{Label: "curl", Value: "curl"},
-												},
-												Variant: w.SegStart,
-												Name:    "trigger",
-											},
-											w.Diag{
-												Text:    "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_7f3a-91de-4402-lamp' 'https://carrel.example/api/backup/run?job=personal'",
-												Variant: w.DiagInk,
-											},
-											w.CardRow{
-												Kind: w.CardTop8,
-												Gap:  8,
-												Items: []w.CardRowPart{
-													w.Button{Label: "Copy the line", Icon: "dup", Kind: w.ButtonPrimary},
-													w.Button{
-														Label: "New password",
-														Title: "The old password stops working; whatever runs this job has to be given the new one.",
-													},
-													w.Dim{
-														Parts:   []w.Inline{w.Text("Runs at 03:00 · the time sits inside the line and is changed there")},
-														Size:    w.Dim11_5,
-														Variant: w.DimWrap,
-													},
-												},
-											},
-											w.CardText{
-												Kind: w.CardUsage,
-												Parts: []w.CardTextPart{
-													w.Text("Paste into "),
-													w.Mono{Text: "crontab -e"},
-													w.Text(" on the machine that is to hold the password. It is one line and stays one line — "),
-													w.Mono{Text: "cron"},
-													w.Text(" understands no continuations; the wrap you see is this screen’s doing. "),
-													w.Mono{Text: "-fsS"},
-													w.Text(" keeps it quiet while all is well and makes cron mail you when the request itself fails."),
-												},
-											},
-											w.Msg{
-												Parts: []w.MsgPart{
-													w.Text("This line "),
-													w.Strong("starts"),
-													w.Text(" a copy; it does not wait for one. The answer comes back at once and says the job was accepted, nothing more. Whether the copy went through is on this page and in the history — and can be watched from outside, which is what the "),
-													w.Strong("GoSentry"),
-													w.Text(" tab is for."),
-													w.Break{},
-													w.Break{},
-													w.Text("Starting it is all there is to do "),
-													w.Strong("because this job writes to WebDAV"),
-													w.Text(". Put "),
-													w.Strong("Download"),
-													w.Text(" in the destination and what is handed over here becomes a short script instead: the archive is a stream, and somebody has to be at the other end to take it."),
-												},
-												Space: w.MsgFlushTop9,
-											},
-											w.CardRow{
-												Kind: w.CardFoot,
-												Gap:  7,
-												Items: []w.CardRowPart{
-													w.Turn{},
-													w.Span{Face: w.FaceLarge, Text: "The password on its own, and the other endpoints"},
-													w.Dim{
-														Parts:   []w.Inline{w.Text("— for a request written by hand; the line above already carries it")},
-														Size:    w.Dim11_5,
-														Variant: w.DimWrap,
-													},
-												},
-											},
-										},
-										Variant: w.CardChosenFlushGrow,
-										Place:   w.Grown,
 									},
 								},
 							},
 						},
 						ID:     "backup-job",
-						Action: "/app/settings/backup/job",
+						Action: "/app/settings/backup?op=save&job=personal",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete job", Kind: w.ButtonDangerSolid},
@@ -798,12 +784,12 @@ func Backup3() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "To WebDAV", Value: "to.webdav"},
+													{Label: "To WebDAV", Value: "webdav"},
 													{Label: "Download", Value: "download"},
 													{Label: "Both", On: true, Value: "both"},
 												},
 												Variant: w.SegStart,
-												Name:    "where",
+												Name:    "mode",
 											},
 										},
 										OwnLine: true,
@@ -812,18 +798,51 @@ func Backup3() Screen {
 									w.Field{
 										Label: "Collection",
 										Parts: []w.FieldPart{
-											w.Pick{
-												Name:    "collection",
-												Options: []w.PickOption{{Value: "nextcloud.files", Label: "nextcloud · Files", On: true}},
-												Label:   "Collection",
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Files", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Files",
+															On:    true,
+															Name:  "dest",
+															Value: "nextcloud|files",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "sftpgo · vps · Documents",
+															Name:  "dest",
+															Value: "sftpgo|documents",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#9A9280"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "sftpgo · vps · Public files",
+															Reason: "Read-only: this account cannot write here",
+															Name:   "dest",
+															Value:  "sftpgo|public",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
 											},
 										},
 										Width: w.FieldLG,
 									},
 									w.Field{
-										Label: "Folder",
-										Parts: []w.FieldPart{w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder", Mono: true}},
-										Width: w.FieldMD,
+										Label: "Folder in it",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder in it", Mono: true, Variant: w.InputFill},
+													w.Button{Label: "Browse", To: "/app/settings/backup?op=browse&job=personal", Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldLG,
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
@@ -852,13 +871,12 @@ func Backup3() Screen {
 									},
 									w.Seg{
 										Options: []w.SegOption{
-											{Label: "crontab", On: true, Value: "crontab"},
-											{Label: "GoSentry", Value: "gosentry"},
-											{Label: "Gitea", Value: "gitea"},
-											{Label: "curl", Value: "curl"},
+											{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true},
+											{Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"},
+											{Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"},
+											{Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"},
 										},
 										Variant: w.SegStart,
-										Name:    "trigger",
 									},
 									w.Diag{
 										Text:    "#!/bin/sh\nset -eu\nh='Authorization: Bearer cbk_7f3a-91de-4402-lamp'\nb=https://carrel.example/api/backup\nout=/var/backups\n\nid=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\")\nuntil [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done\ncurl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"",

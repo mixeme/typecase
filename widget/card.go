@@ -102,7 +102,6 @@ func (Tag) cardRowPart()      {}
 func (Dim) cardRowPart()      {}
 func (Span) cardRowPart()     {}
 func (FillHint) cardRowPart() {}
-func (Turn) cardRowPart()     {}
 
 // FillHint is an explanation that takes the rest of a card's row.
 type FillHint struct {
@@ -111,14 +110,6 @@ type FillHint struct {
 
 func (h FillHint) html(mix) string {
 	return `<span class="tc-field__hint tc-field__hint--flush-fill">` + joined(h.Parts) + `</span>`
-}
-
-// Turn is the arrow at a card's foot that points back up: this follows from
-// the above.
-type Turn struct{}
-
-func (Turn) html(mix) string {
-	return `<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" class="tc-ico--turn">` + Icon("chev").use() + `</svg>`
 }
 
 // CardRow is a row of a card.
@@ -513,7 +504,6 @@ func (Table) sheetPart() {}
 func (Card) formPart() {}
 func (Msg) formPart()  {}
 
-func (Card) fieldSetPart()   {}
 func (Diag) fieldSetPart()   {}
 func (Fields) fieldSetPart() {}
 func (Msg) fieldSetPart()    {}
