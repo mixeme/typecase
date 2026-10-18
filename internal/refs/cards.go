@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert}, "s-admin-28", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("This combination cannot be written.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-conflict-8", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Not moved yet."), w.Text(" Your edit also moves this note to "), w.Mark{Colour: "#6B4E7A"}, w.Text(" nextcloud · Дневник.")}, Space: w.MsgFlushSides}, "s-conflict-11", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"}}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-conflict-10", "tc-msg", 1),
@@ -622,6 +623,11 @@ var _ = add(
 		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "desktop-5", "tc-card", 2),
 
 	// tc-table
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColMenu}, {Label: "Operation", Width: w.Col26}, {Label: "What happened", Rank: w.Rank3}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Create, read back, delete · event")}}, {Parts: []w.CellPart{w.Text("PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/personal/carrel-check.ics → 201 · 200 · 204")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Create, read back, delete · task")}}, {Parts: []w.CellPart{w.Text("PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/tasks/carrel-check.ics → 201 · 200 · 204")}, Mono: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDanger}}}, {Parts: []w.CellPart{w.Text("Create, read back, delete · contact")}, Tone: w.CellDanger}, {Parts: []w.CellPart{w.Text("PUT /dav.php/addressbooks/m.yenuchenko/contacts/carrel-check.vcf → 403 Forbidden")}, Mono: true}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}}, {Parts: []w.CellPart{w.Text("Create, read back, delete · file")}}, {Parts: []w.CellPart{w.Text("PUT · GET · DELETE /dav.php/files/m.yenuchenko/carrel-check.txt → 201 · 200 · 204")}, Mono: true}}}}}, "s-admin-29", "tc-table", 1),
 	cards("plain", w.Table{Cols: []w.TableCol{{Width: w.ColTickSmall}, {Label: "Collection"}, {Label: "What is in it", Rank: w.Rank3}, {Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true}, {Label: "Changed on the server", Width: w.ColChanged}, {Width: w.ColMenu}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("42")}, Mono: true}, {Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}}, {Parts: []w.CellPart{w.Text("calendar")}, Mono: true}, {Parts: []w.CellPart{w.Text("18")}, Mono: true}, {Parts: []w.CellPart{w.Text("yesterday")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}}, Acts: true}}},

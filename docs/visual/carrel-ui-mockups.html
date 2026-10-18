@@ -18824,11 +18824,12 @@ password  4c1-tide-oven</div>
         </div>
         <div class="tc-main">
         <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">DAV validator</div><div class="tc-head__sub">Discovery without saving credentials</div></div></div>
-        <form class="tc-form" action="/admin/dav/check" method="post">
-          <div class="tc-field tc-field--xl"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://dav.office.example/dav.php/" aria-label="Server URL"></div>
-          <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="m.yenuchenko" aria-label="Username"></div>
-          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="text" name="password" value="••••••••" aria-label="Password"></div>
-          <div class="tc-field"><button class="tc-btn is-primary" type="submit">Test discovery</button></div>
+        <form class="tc-form" id="dav" action="/admin/dav" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-field tc-field--xl"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL" required></div>
+          <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Asked each time, never kept.</span></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+          <div class="tc-field"><button class="tc-btn is-primary" type="submit" formaction="/admin/dav?op=test">Test discovery</button></div>
         </form>
         <div class="tc-main__diag">
           <div class="tc-diag">[well-known]  GET /.well-known/caldav → 301 → /dav.php/
@@ -18837,11 +18838,186 @@ password  4c1-tide-oven</div>
 [home-set]    addressbook-home-set → /dav.php/addressbooks/m.yenuchenko/
 [collections] 4 calendars, 1 address book, 0 plain folders</div>
         </div>
-        <div class="tc-msg">The second, mutating stage — create test objects, exercise the operations, read them back, delete them — never runs silently: it is agreed to explicitly and written to the audit log.</div>
+        <div class="tc-form">
+          <div class="tc-field tc-field--full"><label class="tc-check"><input class="tc-check__box" type="checkbox" form="dav" name="agree" value="on"><span class="tc-tickrow__tick is-off"></span>Create test objects, read them back and delete them</label><span class="tc-field__hint">The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log.</span></div>
+          <div class="tc-field"><button class="tc-btn is-danger" type="submit" form="dav" formaction="/admin/dav?op=exercise">Run the full check</button></div>
+        </div>
       </div></div>
     </div>
   </div>
-  <figcaption>След — моноширинным блоком, по шагам, с тем, что ответил сервер. Это и есть обещание README: не «cannot connect», а какой шаг сломался.</figcaption>
+  <figcaption>След — моноширинным блоком, по шагам, с тем, что ответил сервер: не «cannot connect», а какой шаг сломался. Пароль спрашивается каждый раз и обратно не печатается. Отпечаток — для сервера с сертификатом, которому система не доверяет, как в подключении (решение владельца 16.10, задача 201). Обнаружение прошло — открывается второй этап: отметка согласия и «Run the full check»; без отметки он не идёт.</figcaption>
+  </figure>
+
+<figure>
+  <div class="frame" data-frame="s-admin-27" data-screen="/admin/dav" data-part="empty">
+    <div class="frame-label"><span>Проверка DAV · до проверки</span><i>дополнительный кадр: empty · /admin/dav</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Administration</div>
+            <div class="tc-nav">
+              <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+            </div>
+          </div>
+          <div class="tc-railfoot">
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">DAV validator</div><div class="tc-head__sub">Discovery without saving credentials</div></div></div>
+        <form class="tc-form" id="dav" action="/admin/dav" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-field tc-field--xl"><label>Server URL</label><input class="tc-in is-mono is-ph" type="text" name="server" placeholder="https://dav.example.org/" aria-label="Server URL" required></div>
+          <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Asked each time, never kept.</span></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+          <div class="tc-field"><button class="tc-btn is-primary" type="submit" formaction="/admin/dav?op=test">Test discovery</button></div>
+        </form>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>До проверки: только поля и Test discovery. Следа нет, второго этапа нет.</figcaption>
+  </figure>
+
+<figure>
+  <div class="frame" data-frame="s-admin-28" data-screen="/admin/dav" data-part="broken">
+    <div class="frame-label"><span>Проверка DAV · сломанный шаг</span><i>дополнительный кадр: broken · /admin/dav</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Administration</div>
+            <div class="tc-nav">
+              <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+            </div>
+          </div>
+          <div class="tc-railfoot">
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">DAV validator</div><div class="tc-head__sub">Discovery without saving credentials</div></div></div>
+        <form class="tc-form" id="dav" action="/admin/dav" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-field tc-field--xl"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL" required></div>
+          <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Asked each time, never kept.</span></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+          <div class="tc-field"><button class="tc-btn is-primary" type="submit" formaction="/admin/dav?op=test">Test discovery</button></div>
+        </form>
+        <div class="tc-msg is-alert"><b>Discovery stopped at the principal.</b></div>
+        <div class="tc-main__diag">
+          <div class="tc-diag">[well-known]  GET /.well-known/caldav → 301 → /dav.php/
+[principal]   PROPFIND /dav.php/ → 401 Unauthorized</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Обнаружение остановилось: под полями — на каком шаге, ниже — след до этого шага с ответом сервера. Второй этап не предлагается.</figcaption>
+  </figure>
+
+<figure>
+  <div class="frame" data-frame="s-admin-29" data-screen="/admin/dav" data-part="exercised">
+    <div class="frame-label"><span>Проверка DAV · второй этап пройден</span><i>дополнительный кадр: exercised · /admin/dav</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Administration</div>
+            <div class="tc-nav">
+              <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+            </div>
+          </div>
+          <div class="tc-railfoot">
+            <div class="tc-railstatus is-alert"><span class="tc-dot--danger"></span>SMTP not configured<br><span class="tc-dim tc-dim--t11">No mail is going out.</span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">DAV validator</div><div class="tc-head__sub">Discovery without saving credentials</div></div></div>
+        <form class="tc-form" id="dav" action="/admin/dav" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-field tc-field--xl"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL" required></div>
+          <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+          <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Asked each time, never kept.</span></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+          <div class="tc-field"><button class="tc-btn is-primary" type="submit" formaction="/admin/dav?op=test">Test discovery</button></div>
+        </form>
+        <div class="tc-main__diag">
+          <div class="tc-diag">[well-known]  GET /.well-known/caldav → 301 → /dav.php/
+[principal]   PROPFIND /dav.php/ → 207, principal /dav.php/principals/m.yenuchenko/
+[home-set]    calendar-home-set → /dav.php/calendars/m.yenuchenko/
+[home-set]    addressbook-home-set → /dav.php/addressbooks/m.yenuchenko/
+[collections] 4 calendars, 1 address book, 0 plain folders</div>
+        </div>
+        <div class="tc-form">
+          <div class="tc-field tc-field--full"><label class="tc-check"><input class="tc-check__box" type="checkbox" form="dav" name="agree" value="on"><span class="tc-tickrow__tick is-off"></span>Create test objects, read them back and delete them</label><span class="tc-field__hint">The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log.</span></div>
+          <div class="tc-field"><button class="tc-btn is-danger" type="submit" form="dav" formaction="/admin/dav?op=exercise">Run the full check</button></div>
+        </div>
+        <table class="tc-table">
+          <thead><tr><th class="tc-table__col--menu"></th><th class="tc-table__col--w26">Operation</th><th class="tc-table__n3">What happened</th></tr></thead>
+          <tbody>
+            <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · event</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/personal/carrel-check.ics → 201 · 200 · 204</td></tr>
+            <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · task</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/tasks/carrel-check.ics → 201 · 200 · 204</td></tr>
+            <tr class="is-sel"><td><button class="tc-tick tc-tick--edge-danger" type="button"></button></td><td class="tc-dim--danger">Create, read back, delete · contact</td><td class="tc-mono tc-table__n3">PUT /dav.php/addressbooks/m.yenuchenko/contacts/carrel-check.vcf → 403 Forbidden</td></tr>
+            <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · file</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/files/m.yenuchenko/carrel-check.txt → 201 · 200 · 204</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Второй этап прошёл: по строке на род записи — создать, прочесть, удалить, — с тем, что ответил сервер. Строка с отказом — красная. Что прогон был, пишет журнал (dav.exercise).</figcaption>
   </figure>
 
 <figure>

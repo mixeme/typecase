@@ -1288,32 +1288,491 @@ func Admin5() Screen {
 							w.Field{
 								Label: "Server URL",
 								Parts: []w.FieldPart{
-									w.Input{Name: "server.url", Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true},
+									w.Input{
+										Name:     "server",
+										Value:    "https://dav.office.example/dav.php/",
+										Label:    "Server URL",
+										Mono:     true,
+										Required: true,
+									},
 								},
 								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Username",
-								Parts: []w.FieldPart{w.Input{Name: "username", Value: "m.yenuchenko", Label: "Username"}},
+								Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
 								Width: w.FieldMD,
 							},
 							w.Field{
 								Label: "Password",
-								Parts: []w.FieldPart{w.Input{Name: "password", Value: "••••••••", Label: "Password"}},
+								Parts: []w.FieldPart{
+									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+								},
 								Width: w.FieldMD,
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, Submit: true}}},
+							w.Field{
+								Label:      "Certificate fingerprint",
+								LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:        "certFingerprint",
+										Placeholder: "only for a certificate the system does not trust",
+										Label:       "Certificate fingerprint",
+										Mono:        true,
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}},
+							},
 						},
-						Action: "/admin/dav/check",
+						ID:     "dav",
+						Action: "/admin/dav",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.MainDiag{
 						Diag: w.Diag{
 							Text: "[well-known]  GET /.well-known/caldav → 301 → /dav.php/\n[principal]   PROPFIND /dav.php/ → 207, principal /dav.php/principals/m.yenuchenko/\n[home-set]    calendar-home-set → /dav.php/calendars/m.yenuchenko/\n[home-set]    addressbook-home-set → /dav.php/addressbooks/m.yenuchenko/\n[collections] 4 calendars, 1 address book, 0 plain folders",
 						},
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("The second, mutating stage — create test objects, exercise the operations, read them back, delete them — never runs silently: it is agreed to explicitly and written to the audit log."),
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Check{
+										Name:  "agree",
+										Value: "on",
+										Of:    "dav",
+										Parts: []w.CheckPart{w.Text("Create test objects, read them back and delete them")},
+									},
+									w.FieldHint{
+										Parts: []w.Inline{
+											w.Text("The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log."),
+										},
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Button{Label: "Run the full check", Kind: w.ButtonDanger, Form: "dav", To: "/admin/dav?op=exercise"},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin27 is frame «Проверка DAV · до проверки» (s-admin-27).
+func Admin27() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "dup", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 5,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Tone:   w.RailStatusAlert,
+							Text:   "SMTP not configured",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("No mail is going out.")}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "DAV validator"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Discovery without saving credentials")}}},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Server URL",
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:        "server",
+										Placeholder: "https://dav.example.org/",
+										Label:       "Server URL",
+										Mono:        true,
+										Required:    true,
+									},
+								},
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "Username",
+								Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label: "Password",
+								Parts: []w.FieldPart{
+									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+								},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label:      "Certificate fingerprint",
+								LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:        "certFingerprint",
+										Placeholder: "only for a certificate the system does not trust",
+										Label:       "Certificate fingerprint",
+										Mono:        true,
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}},
+							},
+						},
+						ID:     "dav",
+						Action: "/admin/dav",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin28 is frame «Проверка DAV · сломанный шаг» (s-admin-28).
+func Admin28() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "dup", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 5,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Tone:   w.RailStatusAlert,
+							Text:   "SMTP not configured",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("No mail is going out.")}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "DAV validator"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Discovery without saving credentials")}}},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Server URL",
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:     "server",
+										Value:    "https://dav.office.example/dav.php/",
+										Label:    "Server URL",
+										Mono:     true,
+										Required: true,
+									},
+								},
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "Username",
+								Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label: "Password",
+								Parts: []w.FieldPart{
+									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+								},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label:      "Certificate fingerprint",
+								LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:        "certFingerprint",
+										Placeholder: "only for a certificate the system does not trust",
+										Label:       "Certificate fingerprint",
+										Mono:        true,
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}},
+							},
+						},
+						ID:     "dav",
+						Action: "/admin/dav",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+					w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert},
+					w.MainDiag{
+						Diag: w.Diag{
+							Text: "[well-known]  GET /.well-known/caldav → 301 → /dav.php/\n[principal]   PROPFIND /dav.php/ → 401 Unauthorized",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin29 is frame «Проверка DAV · второй этап пройден» (s-admin-29).
+func Admin29() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "dup", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 5,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Tone:   w.RailStatusAlert,
+							Text:   "SMTP not configured",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("No mail is going out.")}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "DAV validator"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Discovery without saving credentials")}}},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Server URL",
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:     "server",
+										Value:    "https://dav.office.example/dav.php/",
+										Label:    "Server URL",
+										Mono:     true,
+										Required: true,
+									},
+								},
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "Username",
+								Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label: "Password",
+								Parts: []w.FieldPart{
+									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+								},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label:      "Certificate fingerprint",
+								LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+								Parts: []w.FieldPart{
+									w.Input{
+										Name:        "certFingerprint",
+										Placeholder: "only for a certificate the system does not trust",
+										Label:       "Certificate fingerprint",
+										Mono:        true,
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}},
+							},
+						},
+						ID:     "dav",
+						Action: "/admin/dav",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+					w.MainDiag{
+						Diag: w.Diag{
+							Text: "[well-known]  GET /.well-known/caldav → 301 → /dav.php/\n[principal]   PROPFIND /dav.php/ → 207, principal /dav.php/principals/m.yenuchenko/\n[home-set]    calendar-home-set → /dav.php/calendars/m.yenuchenko/\n[home-set]    addressbook-home-set → /dav.php/addressbooks/m.yenuchenko/\n[collections] 4 calendars, 1 address book, 0 plain folders",
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Check{
+										Name:  "agree",
+										Value: "on",
+										Of:    "dav",
+										Parts: []w.CheckPart{w.Text("Create test objects, read them back and delete them")},
+									},
+									w.FieldHint{
+										Parts: []w.Inline{
+											w.Text("The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log."),
+										},
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.Button{Label: "Run the full check", Kind: w.ButtonDanger, Form: "dav", To: "/admin/dav?op=exercise"},
+								},
+							},
+						},
+					},
+					w.Table{
+						Cols: []w.TableCol{{Width: w.ColMenu}, {Label: "Operation", Width: w.Col26}, {Label: "What happened", Rank: w.Rank3}},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}},
+									{Parts: []w.CellPart{w.Text("Create, read back, delete · event")}},
+									{
+										Parts: []w.CellPart{
+											w.Text("PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/personal/carrel-check.ics → 201 · 200 · 204"),
+										},
+										Mono: true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}},
+									{Parts: []w.CellPart{w.Text("Create, read back, delete · task")}},
+									{
+										Parts: []w.CellPart{
+											w.Text("PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/tasks/carrel-check.ics → 201 · 200 · 204"),
+										},
+										Mono: true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDanger}}},
+									{Parts: []w.CellPart{w.Text("Create, read back, delete · contact")}, Tone: w.CellDanger},
+									{
+										Parts: []w.CellPart{w.Text("PUT /dav.php/addressbooks/m.yenuchenko/contacts/carrel-check.vcf → 403 Forbidden")},
+										Mono:  true,
+									},
+								},
+								State: w.RowPicked,
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}},
+									{Parts: []w.CellPart{w.Text("Create, read back, delete · file")}},
+									{
+										Parts: []w.CellPart{w.Text("PUT · GET · DELETE /dav.php/files/m.yenuchenko/carrel-check.txt → 201 · 200 · 204")},
+										Mono:  true,
+									},
+								},
+							},
 						},
 					},
 				},

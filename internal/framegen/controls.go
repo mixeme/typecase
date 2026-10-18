@@ -691,6 +691,12 @@ func (g *gen) check(x *El) string {
 		if v := box.Attr("data-tc-disables"); v != "" {
 			f = append(f, "Disables: "+q(v))
 		}
+		if v := box.Attr("form"); v != "" {
+			f = append(f, "Of: "+q(v))
+		}
+		if box.HasAttr("required") {
+			f = append(f, "Required: true")
+		}
 	} else if tick != nil && !tick.Has("is-off") {
 		f = append(f, "On: true")
 	}

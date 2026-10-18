@@ -80,6 +80,8 @@ do, not what the authors did.
 - **`Input.Of`** — the form a field belongs to without standing in it, as
   `MenuItem.Of` and `Send.Of`: an address in a head beside the button
   that sends it.
+- **`Check.Of`** — the same for a check: the consent to the DAV
+  validator's second stage under its trace.
 - **A button that waits for its form — `ButtonWaits`, `Check.Required`**
   (Carrel's task 198). A radio with `Required` must be chosen before its
   form goes; a button of `ButtonWaits` looks disabled while a required
@@ -779,6 +781,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-admin-5`: the DAV validator's fields are its form (server, login, a
+  password field — «Asked each time, never kept.» —, «Certificate
+  fingerprint · SHA-256 · optional» as in a connection, Carrel's task
+  201); Test discovery, its trace, then the second stage: the consent and
+  «Run the full check». Extra frames `s-admin-27` (before a check),
+  `-28` (a broken step), `-29` (the second stage's report, a row a kind)
+  — Carrel's task 195 p. 8; accepted by the owner 18.10.
 - `s-notes-2`, `-20` say in their labels that they draw the full width a
   person chose in Appearance; the default is the reading width
   (`s-notes-3`, `appearance-1`) — Carrel's task 204, the owner 18.10.

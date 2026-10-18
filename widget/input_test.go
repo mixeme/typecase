@@ -15,3 +15,10 @@ func TestInputOf(t *testing.T) {
 		t.Errorf("a field without Of names a form: %s", got)
 	}
 }
+
+// TestCheckOf: a check outside its form names the form (Carrel's task 195).
+func TestCheckOf(t *testing.T) {
+	if got := (Check{Name: "agree", Value: "on", Of: "dav", Parts: []CheckPart{Text("Agree")}}).Render(); !strings.Contains(got, ` form="dav" name="agree"`) {
+		t.Errorf("the check does not name its form: %s", got)
+	}
+}
