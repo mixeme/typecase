@@ -781,6 +781,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- The arrow of a pick (and of a folded switch) stands 1.5 px higher: its
+  middle on the middle of the words beside it (the owner, 18.10). No box
+  moves.
 - New `s-admin-34`: deleting an account — a sheet with its own address
   over Users, what goes said before the button, the login typed to
   confirm; Delete in the row's «⋯» (`s-admin-12`) leads there (Carrel's

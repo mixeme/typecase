@@ -236,7 +236,7 @@ a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
   font-size:12.5px;display:flex;align-items:center;color:var(--tc-ink);white-space:nowrap;position:relative;list-style:none;cursor:pointer}
 .tc-segfold__current::-webkit-details-marker{display:none}
 .tc-segfold__current::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
-  margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
+  margin-top:-5.5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;pointer-events:none}
 .tc-segfold__menu{position:absolute;top:100%;left:0;margin-top:4px;z-index:6;width:180px;
   background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:4px;padding:4px}
@@ -266,7 +266,7 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-pick::before{content:"";position:absolute;right:0;top:0;bottom:0;width:24px;
   background:var(--tc-surface);pointer-events:none;border-radius:0 3px 3px 0;z-index:1}
 .tc-in.is-pick::after{content:"";position:absolute;right:9px;top:50%;width:6px;height:6px;
-  margin-top:-4px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
+  margin-top:-5.5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;
   transform:rotate(45deg);opacity:.5;z-index:2;pointer-events:none}
 .tc-in.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:1px;border-color:var(--tc-accent)}
 /* Поле, значение которого сервер не принял: рамка — цвет опасности, причина — подсказкой под ним. */
