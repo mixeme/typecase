@@ -70,7 +70,7 @@ func (r TreeRow) html(on bool) string {
 	if r.Send.Name != "" {
 		tag = "label"
 	}
-	s.WriteString(`<` + tag + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", pick(tag == "a", r.Href)) + `>`)
+	s.WriteString(`<` + tag + class(nil, is("on", on), "tc-tree__row", r.Indent.class(), pick(r.Unavailable, "tc-tree__row--op-55")) + attr("href", pick(tag == "a", r.Href)) + attr("data-tc-swap", pick(tag == "a", r.Swap)) + `>`)
 	if tag == "label" {
 		s.WriteString(`<input class="tc-tree__box" type="radio"` + attr("name", r.Send.Name) + attr("value", r.Send.Value) + flag("checked", on) + flag("disabled", r.Unavailable) +
 			attr("data-tc-href", pick(r.Swap != "", r.Href)) + attr("data-tc-swap", pick(r.Href != "", r.Swap)) + `>`)

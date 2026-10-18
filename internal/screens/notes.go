@@ -2908,13 +2908,24 @@ func Notes11() Screen {
 					Icon:   "upload",
 					Title:  "Upload files",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},
+						w.Drop{
+							Trigger: w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{Label: "sftpgo · vps", On: true, Href: "/app/files/picker?server=sftpgo", Swap: "upload-sheet"},
+									w.MenuItem{Label: "nextcloud", Href: "/app/files/picker?server=nextcloud", Swap: "upload-sheet"},
+									w.MenuItem{Label: "webdav · nas", Reason: "webdav · nas did not answer.", Href: "#"},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Documents / carrel / attachments / 2026-08")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Close{Label: "Close"},
 					},
 					Body: []w.SheetPart{
 						w.Empty{
@@ -2938,47 +2949,7 @@ func Notes11() Screen {
 								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
 								w.Text(" "),
-								w.Line{
-									Items: []w.LinePart{
-										w.Line{
-											Items: []w.LinePart{
-												w.Faced{
-													Face:  w.FaceLarge,
-													Items: []w.LinePart{w.Text("договор-аренды.pdf "), w.Dim{Parts: []w.Inline{w.Text("412 KB")}}},
-												},
-												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
-											},
-											Gap:   w.LineGap8,
-											Place: w.Grown,
-										},
-										w.Line{
-											Items: []w.LinePart{
-												w.Faced{
-													Face:  w.FaceLarge,
-													Items: []w.LinePart{w.Text("план-этажа.png "), w.Dim{Parts: []w.Inline{w.Text("2.1 MB")}}},
-												},
-												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
-											},
-											Gap:   w.LineGap8,
-											Place: w.Grown,
-										},
-										w.Line{
-											Items: []w.LinePart{
-												w.Faced{
-													Face:  w.FaceLarge,
-													Items: []w.LinePart{w.Text("сканы/ "), w.Dim{Parts: []w.Inline{w.Text("14 files, 38 MB")}}},
-												},
-												w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
-											},
-											Gap:   w.LineGap8,
-											Place: w.Grown,
-										},
-									},
-									Gap:   w.LineGap8,
-									Block: true,
-									ID:    "upload-files",
-									Place: w.Grown,
-								},
+								w.Line{Items: []w.LinePart{}, Gap: w.LineGap8, Block: true, ID: "upload-files", Place: w.Grown},
 							},
 							Variant: w.EmptyDashed,
 						},
@@ -2990,29 +2961,48 @@ func Notes11() Screen {
 								},
 								w.Tree{
 									Rows: []w.TreeRow{
-										{Icon: "file", Label: "Documents"},
-										{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+										{
+											Icon:  "file",
+											Label: "Documents",
+											Href:  "/app/files/picker?to=sftpgo/documents",
+											Swap:  "upload-sheet",
+										},
+										{
+											Icon:   "file",
+											Label:  "carrel",
+											Indent: w.TreeLevel22,
+											Href:   "/app/files/picker?to=sftpgo/documents/carrel",
+											Swap:   "upload-sheet",
+										},
 										{
 											Icon:   "file",
 											Label:  "attachments",
 											Indent: w.TreeLevel40,
+											Href:   "/app/files/picker?to=sftpgo/documents/carrel/attachments",
+											Swap:   "upload-sheet",
 											Trail:  w.Badge{Label: "attachment folder"},
 										},
-										{Icon: "file", Label: "2026-08", Indent: w.TreeLevel58, Trail: w.Badge{Label: "just created"}},
-										{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
+										{
+											Icon:   "file",
+											Label:  "2026-08",
+											Indent: w.TreeLevel58,
+											Href:   "/app/files/picker?to=sftpgo/documents/carrel/attachments/2026-08",
+											Swap:   "upload-sheet",
+											Trail:  w.Badge{Label: "just created"},
+										},
+										{
+											Icon:   "file",
+											Label:  "2026-07",
+											Indent: w.TreeLevel58,
+											Href:   "/app/files/picker?to=sftpgo/documents/carrel/attachments/2026-07",
+											Swap:   "upload-sheet",
+										},
 										{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}},
 									},
 									On: 4,
 								},
 							},
 							Variant: w.CardFlush,
-						},
-						w.Dim{
-							Parts: []w.Inline{
-								w.Text("The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here. Change it here and the next upload from this menu goes to the new one."),
-							},
-							Size:    w.Dim11_5,
-							Variant: w.DimWrap,
 						},
 					},
 					Foot: []w.SheetFootPart{

@@ -33,7 +33,7 @@ var (
 		{"tc-table__col--w110", "Col110"}, {"tc-table__col--w120", "Col120"}}
 	msgSpace = []kv{{"tc-msg--flush", "MsgFlush"}, {"tc-msg--flush-top2", "MsgFlushTop2"}, {"tc-msg--flush-top4", "MsgFlushTop4"},
 		{"tc-msg--flush-top11", "MsgFlushTop11"}, {"tc-msg--flush-bot12", "MsgFlushBottom12"}, {"tc-msg--mr0-ml0", "MsgFlushSides"},
-		{"tc-msg--flush-top9", "MsgFlushTop9"}, {"tc-msg--flush-r0", "MsgFlushEnd"}, {"tc-msg--mx20", "MsgInset20"}, {"tc-msg--m0-14-12", "MsgSheet"}}
+		{"tc-msg--flush-top9", "MsgFlushTop9"}, {"tc-msg--flush-r0", "MsgFlushEnd"}, {"tc-msg--mx20", "MsgInset20"}, {"tc-msg--m0-14-12", "MsgSheet"}, {"tc-msg--my8", "MsgFlushY8"}}
 )
 
 func (g *gen) msg(e *El) string {

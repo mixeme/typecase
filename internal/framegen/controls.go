@@ -1210,6 +1210,10 @@ func (g *gen) drop(e *El) string {
 		f = append(f, "Row: true")
 	}
 	f = append(f, "Menu: "+g.menu(m))
+	if e.Has("tc-push") {
+		// pushed to the end of a sheet's head (Carrel's task 205)
+		f = append(f, "Place: w.Pushed")
+	}
 	if m.HasAttr("hidden") || (e.Tag == "details" && !e.HasAttr("open")) {
 		return "w.Drop{" + join(f, ", ") + "}"
 	}

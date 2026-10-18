@@ -793,6 +793,9 @@ label.tc-tree__row{cursor:pointer}
 [data-tc-noscript] .tc-menu > .tc-in[type=search]{display:none}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
+/* Выпадашка в шапке листа сжимается, как поле на её месте: выбор подключения не выталкивает строку пути. */
+.tc-sheet__head > .tc-drop{display:flex;min-width:0;flex:0 1 auto}
+.tc-sheet__head > .tc-drop > .tc-in{flex:1 1 auto}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
 .tc-drop > summary::-webkit-details-marker,.tc-drop__anchor > summary::-webkit-details-marker{display:none}
 .tc-field:has(> .tc-menu.is-pop){position:relative}
@@ -1062,6 +1065,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar .tc-btn > .tc-btn__label{display:none}
   .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
+  .tc-bar.tc-bar--sel{flex-wrap:wrap}
   .tc-docbar{flex-wrap:wrap}
   .tc-bar > .tc-range{flex-wrap:wrap}
   .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
@@ -1188,6 +1192,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-sheet{width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
   .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
+  .tc-sheet__head > .tc-drop{flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
@@ -1247,6 +1252,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-sheet{width:100%;max-width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
   .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
+  .tc-sheet__head > .tc-drop{flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
@@ -1653,6 +1659,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-msg--mx20.tc-msg--mx20{margin:0 20px}
 .tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
 .tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
+.tc-msg--my8.tc-msg--my8{margin:8px 0}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
 .tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
@@ -9123,28 +9130,26 @@ Read  2 min ago</div>
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-upload"/></svg>
               <b class="tc-sheet__title">Upload files</b>
-              <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+              <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/picker?server=sftpgo" data-tc-swap="upload-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/picker?server=nextcloud" data-tc-swap="upload-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments / 2026-08</span>
-              <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
             </div>
             <div class="tc-sheet__body">
               <div class="tc-empty tc-empty--dashed">
                 Drop files here, or <label class="tc-empty__pick"><b class="tc-dim--accent">choose on the computer</b><input class="tc-file" type="file" name="file" aria-label="Files" data-tc-list="upload-files" data-tc-size="size" multiple><template data-tc-row><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">{name} <span class="tc-dim">{size}</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span></template></label>
                 <span class="tc-dim--t12">A name already taken is refused, not overwritten</span>
-                <div class="tc-grow tc-line tc-line--gap-8" id="upload-files"><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">договор-аренды.pdf <span class="tc-dim">412 KB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">план-этажа.png <span class="tc-dim">2.1 MB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span><span class="tc-grow tc-line tc-line--gap-8"><span class="tc-dim--t12-5">сканы/ <span class="tc-dim">14 files, 38 MB</span></span><button class="tc-btn is-sm is-danger tc-push" type="button" data-tc-remove>Remove</button></span></div>
+                <div class="tc-grow tc-line tc-line--gap-8" id="upload-files"></div>
               </div>
               <div class="tc-card tc-card--flush">
                 <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
                 <div class="tc-tree">
-                  <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
-                  <div class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
-                  <div class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments <span class="tc-badge tc-push">attachment folder</span></div>
-                  <div class="is-on tc-tree__row tc-tree__row--padl58"><svg><use href="#i-file"/></svg>2026-08 <span class="tc-badge tc-push">just created</span></div>
-                  <div class="tc-tree__row tc-tree__row--padl58"><svg><use href="#i-file"/></svg>2026-07</div>
+                  <a class="tc-tree__row" href="/app/files/picker?to=sftpgo/documents" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>Documents</a>
+                  <a class="tc-tree__row tc-tree__row--padl22" href="/app/files/picker?to=sftpgo/documents/carrel" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>carrel</a>
+                  <a class="tc-tree__row tc-tree__row--padl40" href="/app/files/picker?to=sftpgo/documents/carrel/attachments" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-badge tc-push">attachment folder</span></a>
+                  <a class="is-on tc-tree__row tc-tree__row--padl58" href="/app/files/picker?to=sftpgo/documents/carrel/attachments/2026-08" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>2026-08 <span class="tc-badge tc-push">just created</span></a>
+                  <a class="tc-tree__row tc-tree__row--padl58" href="/app/files/picker?to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>2026-07</a>
                   <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
                 </div>
               </div>
-              <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here. Change it here and the next upload from this menu goes to the new one.</span>
             </div>
             <div class="tc-sheet__foot">
               <button class="tc-btn is-primary" type="submit">Upload</button>
@@ -9265,7 +9270,7 @@ Read  2 min ago</div>
 
         <table class="tc-table">
           <thead><tr>
-            <th class="tc-table__col--tick"><button class="tc-tickrow__tick is-off" type="button"></button></th>
+            <th class="tc-table__col--tick"><button class="tc-tickrow__tick is-part" type="button"></button></th>
             <th>Name</th><th class="tc-table__n3 tc-table__col--size">Size</th><th class="is-2nd tc-table__n4 tc-table__col--type">Type</th><th class="tc-table__col--time">Changed</th><th class="tc-table__col--num"></th>
           </tr></thead>
           <tbody>
@@ -9411,26 +9416,26 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-files-11">
     <div class="frame-label"><span>Копирование файлов · лист</span><span class="frag">фрагмент</span><i>тот же лист с Copy</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <form class="tc-sheet tc-sheet--w520" id="copy-sheet" action="/app/files/sftpgo/documents/op/carrel/attachments?op=copy" method="post">
         <div class="tc-sheet__head">
-        <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-dup"/></svg>
-        <b class="tc-sheet__title">Copy 3 items</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
-        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-dup"/></svg>
+          <b class="tc-sheet__title">Copy 3 items</b>
+          <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;server=sftpgo" data-tc-swap="copy-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;server=nextcloud" data-tc-swap="copy-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-rubric">Where to put it <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
           <div class="tc-tree">
-            <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Documents</div>
-            <div data-part="children" class="tc-tree__row tc-tree__row--padl22"><svg><use href="#i-file"/></svg>carrel</div>
-            <div data-part="children" class="tc-tree__row tc-tree__row--padl40"><svg><use href="#i-file"/></svg>attachments</div>
-            <div class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><svg><use href="#i-file"/></svg>2026-07</div>
-            <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
-          </div>
+        <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>Documents</label>
+        <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>carrel</label>
+        <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>attachments</label>
+        <label class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" checked data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
+        <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
+      </div>
           <div class="tc-msg tc-msg--flush-top2">A copy travels through Carrel even inside one server: each file is downloaded and uploaded again, one at a time.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Copy</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Copy</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption>Копия — тот же лист, что перенос, с «Copy». Сообщение другое: копия идёт через Carrel даже внутри одного сервера — каждый файл скачивается и загружается заново, по одному.</figcaption>
@@ -9440,7 +9445,7 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-files-12">
     <div class="frame-label"><span>Перенос · на другое хранилище</span><span class="frag">фрагмент</span><i>сообщение листа</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-msg">This goes to another storage, so nothing moves on a server: Carrel downloads each file and uploads it there, and deletes the original only once its copy is complete.</div>
+      <div class="tc-msg tc-msg--flush-top2">This goes to another storage, so nothing moves on a server: Carrel downloads each file and uploads it there, and deletes the original only once its copy is complete.</div>
     </div>
   </div>
   <figcaption>Цель на другом хранилище: сообщение листа говорит об этой цели, а не о переносе внутри сервера. Оригинал удаляется, только когда копия цела. У записи — то же про другой аккаунт.</figcaption>
@@ -9454,7 +9459,7 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
         <b class="tc-sheet__title">Move 3 items</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=sftpgo" data-tc-swap="move-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=nextcloud" data-tc-swap="move-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
@@ -9468,6 +9473,7 @@ Read  2 min ago</div>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
+          <div class="tc-msg tc-msg--flush-top2">Inside one server this is <code class="tc-mono">MOVE</code>: instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after.</div>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Move</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
@@ -9484,7 +9490,7 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
         <b class="tc-sheet__title">Move 3 items</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=sftpgo" data-tc-swap="move-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=nextcloud" data-tc-swap="move-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
@@ -9611,7 +9617,7 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-file"/></svg>
         <b class="tc-sheet__title">Attach from Files</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=sftpgo" data-tc-swap="upload-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=nextcloud" data-tc-swap="upload-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">to «Собрать чемодан»</span>
         </div>
         <div class="tc-sheet__body">
@@ -9670,22 +9676,21 @@ Read  2 min ago</div>
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-upload"/></svg>
         <b class="tc-sheet__title">Upload files</b>
-        <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=sftpgo" data-tc-swap="upload-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=nextcloud" data-tc-swap="upload-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Documents / carrel / attachments</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-card tc-card--flush">
             <div class="tc-rubric">Where to put it</div>
             <div class="tc-line tc-line--gap-8"><input class="tc-in is-focus tc-in--fill" type="text" name="name" value="2026-07" aria-label="Name of the new folder"><button class="tc-btn is-sm is-primary" type="submit" formaction="/app/files/sftpgo/documents/mkcol/carrel/attachments">Create</button><button class="tc-btn is-sm" type="button">Cancel</button></div>
-            <div class="tc-msg is-alert tc-msg--flush-top2">There is a folder called «2026-07» in attachments already. Choose another name.</div>
+            <div class="tc-msg is-alert tc-msg--my8">There is a folder called «2026-07» in attachments already. Choose another name.</div>
             <div class="tc-tree">
-              <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents" data-tc-href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>Documents</label>
-              <label class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel" data-tc-href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>carrel</label>
-              <label class="is-on tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked data-tc-href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>attachments</label>
-              <label class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" data-tc-href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
+              <a class="tc-tree__row" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>Documents</a>
+              <a class="tc-tree__row tc-tree__row--padl22" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>carrel</a>
+              <a class="is-on tc-tree__row tc-tree__row--padl40" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-badge tc-push">attachment folder</span></a>
+              <a class="tc-tree__row tc-tree__row--padl58" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>2026-07</a>
             </div>
           </div>
-          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The folder is the attachment folder from Settings → Attachments, named once and remembered — unless you make a new one here.</span>
         </div>
         <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
@@ -9759,7 +9764,7 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
-            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" title="Choose one file to see its details." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
@@ -9813,12 +9818,13 @@ Read  2 min ago</div>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-queue" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%">
-          <div class="tc-queue__head"><b>Uploading 2 of 3</b><span class="tc-mono tc-push tc-mono--dusty">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
+          <div class="tc-queue__head"><b>Uploading 2 of 4</b><span class="tc-mono tc-push tc-mono--dusty">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
           <ul class="tc-queue__list">
             <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-queue__name">плакат.png</span><span class="tc-queue__meta">8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-dim--danger">release-checklist.md</span><span class="tc-dim--danger">name taken</span></div>
               <div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button">Keep both</button><button class="tc-btn is-sm" type="button">Replace</button><button class="tc-btn is-sm" type="button">Skip</button></div></li>
+            <li><div class="tc-queue__row"><span class="tc-dim--danger">архив-2025.zip</span><span class="tc-dim--danger">the server needs the size</span></div></li>
           </ul>
         </div>
       </div>
@@ -9965,7 +9971,7 @@ Read  2 min ago</div>
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-move"/></svg>
               <b class="tc-sheet__title">Move 3 items</b>
-              <button class="tc-in is-pick tc-push tc-in--t12-w240" type="button" aria-label="Server">sftpgo · vps</button>
+              <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=sftpgo" data-tc-swap="move-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=nextcloud" data-tc-swap="move-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
               <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">from Documents / carrel / attachments</span>
             </div>
             <div class="tc-sheet__body">
@@ -9986,6 +9992,20 @@ Read  2 min ago</div>
     </div>
   </div>
   <figcaption>Сервер выбирают в шапке листа, остальное — в дереве: оно показывает хранилища выбранного сервера и папки в них. Хранилище только для чтения видно, но целью быть не может. <b>«New folder» стоит в дереве</b>, как в быстрой загрузке: папку заводят в тот момент, когда выбирают куда класть, и сразу кладут туда. Copy открывает этот же лист, с кнопкой Copy.</figcaption>
+  </figure>
+
+<figure style="flex:0 1 330px">
+  <div class="frame" data-frame="s-files-26">
+    <div class="frame-label"><span>Лист · подключение</span><span class="frag">меню</span><i>шапка листа переноса, загрузки, выбора</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <div class="tc-menu tc-menu--w290" role="menu">
+        <a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=sftpgo" data-tc-swap="move-sheet" role="menuitem">sftpgo · vps</a>
+        <a class="tc-menu__item" href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;server=nextcloud" data-tc-swap="move-sheet" role="menuitem">nextcloud</a>
+        <a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a>
+      </div>
+    </div>
+  </div>
+  <figcaption>Подключения с хранилищами; у открытого — отметка. Пункт — ссылка на тот же лист над этим подключением; со сценарием лист ставится на место, как при выборе узла дерева. Подключение, которое не ответило, — выключено, причина в подсказке (задача Carrel 205 п. 8).</figcaption>
   </figure>
 
   <figure style="flex:1 1 100%">
@@ -10061,6 +10081,7 @@ Read  2 min ago</div>
           <button class="tc-btn" title="Move" type="submit" form="files-sel" name="op" value="move"><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
           <button class="tc-btn is-danger-solid" title="Delete" type="submit" form="files-sel" name="op" value="delete"><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
+          <span class="tc-bar__right"><button class="tc-btn is-sm" type="button">Clear selection</button></span>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
@@ -16441,6 +16462,61 @@ jobs:
   </div>
 </div>
 <figcaption><b>Адрес — <code>/app/files/published</code></b>; сюда ведут ярлык <b>Published</b> в рейле файлов и <b>Published links</b> в настройках. <b>Кнопки «Publish» здесь нет:</b> создают там, где лежит то, что отдают, — ссылка, заведённая со списка, начиналась бы с вопроса «что публикуем» и выбора из всего аккаунта, а у строки и карточки ответ уже есть. Новые сверху: только что выданная ссылка стоит там, куда человек смотрит, нажав «All published links». У строки три кнопки — Copy, Send, Revoke: места хватает, прятать их незачем. Когда ширины не хватает, Send и Revoke уходят под «⋯» (кадр ниже), Copy остаётся. Send стоит, когда на экземпляре настроена почта (<a href="#s-mail">7.18</a>). На телефоне столбца Kind нет: слово в нём рвалось посреди, а что отдано, называет сама строка. Столбцы «последний заход» и «заходов» — это не статистика ради статистики: по секретной ссылке отдают чужим людям, и единственный способ понять, что ссылка ушла дальше, чем предполагалось, — увидеть, что по ней ходят. «Не открывали» написано словами, потому что ноль в этом столбце читается хуже.<br><br><b>Подписок в этом списке нет.</b> Подписка — чужая коллекция, взятая по ссылке; она живёт в подключениях (<a href="#subscribe">7.11.2</a>), а дальше не отдаётся: выдать чужой фид своей ссылкой значило бы раздавать чужое от своего имени, и сервер такую ссылку не создаёт.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-publish-20" data-screen="/app/files/published" data-part="no-mail">
+  <div class="frame-label"><span>Опубликованное · почта не настроена</span><i>дополнительный кадр: no-mail · /app/files/published</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Published links <span class="tc-badge is-local" title="Local instance: may be unreachable from outside">local</span></div><div class="tc-head__sub">Read-only, one object or one collection per link · <span class="tc-dim--danger">this instance is local: the link opens only from your network</span></div></div>
+        </div>
+        <table class="tc-table tc-table--packed">
+          <thead><tr><th>What is published</th><th class="tc-table__n1">Kind</th><th class="is-2nd tc-table__n3">Created</th><th class="tc-table__n4">Expires</th><th class="is-2nd">Last opened</th><th>Opens</th><th class="tc-table__col--w120"></th></tr></thead>
+          <tbody>
+            <tr><td><span class="tc-table__file"><svg><use href="#i-doc"/></svg><a class="tc-table__filename" href="/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf">смета-подрядчик.pdf</a></span></td><td class="tc-mono tc-table__n1">file</td><td class="tc-mono is-2nd tc-table__n3">2026-08-10</td><td class="tc-mono tc-table__n4">No expiry</td><td class="tc-mono is-2nd tc-mono--dusty">never opened</td><td class="tc-mono">0</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/p/9c1f4e" data-tc-copied="Copied">Copy</button><button class="tc-btn is-sm is-danger is-2nd" type="button">Revoke</button><details class="tc-drop"><summary class="tc-btn is-sm tc-btn--padx3 tc-acts__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><span class="tc-menu__sep"></span><button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem">Revoke</button></div></details></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><a class="tc-table__filename" href="/app/agenda/nextcloud/lichny?view=range&from=2026-08-10&to=2026-08-31">Личный · 10–31 August</a></span></td><td class="tc-mono tc-table__n1">calendar</td><td class="tc-mono is-2nd tc-table__n3">2026-08-09</td><td class="tc-mono tc-table__n4">2026-09-08</td><td class="tc-mono is-2nd">2026-08-10 08:41</td><td class="tc-mono">12</td>
+              <td class="tc-acts"><button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/p/7f3ac9/personal.ics" data-tc-copied="Copied">Copy</button><button class="tc-btn is-sm is-danger is-2nd" type="button">Revoke</button><details class="tc-drop"><summary class="tc-btn is-sm tc-btn--padx3 tc-acts__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><span class="tc-menu__sep"></span><button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem">Revoke</button></div></details></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Страница списка на экземпляре без почты: у строк Send нет — ни кнопкой, ни в меню (как в строках s-publish-17); остальное как у s-publish-1.</figcaption>
 </figure>
 
 <figure>
@@ -24935,11 +25011,11 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
-            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" title="Choose one file to see its details." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
-        <div class="tc-empty"><b>This folder is empty.</b> Upload files into it, or drop them onto the window. <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
+        <div class="tc-empty"><b>This folder is empty.</b> Upload files into it, or drop them onto the window. <label class="tc-btn is-primary"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" multiple></label> <button class="tc-btn tc-nojs" type="submit" form="post-upload">Send</button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
       </div>
     </div>
   </div>
@@ -25006,7 +25082,7 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
-            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" title="Choose one file to see its details." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
@@ -25077,14 +25153,17 @@ dav: HTTP 503: the server is busy</div></div>
             <button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg></button>
-            <button class="tc-btn" title="Details" type="button"><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
+            <button class="tc-btn" title="Choose one file to see its details." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-panel"/></svg></button>
           </div>
         </div>
         <div class="tc-bar tc-bar--sel tc-nojs">
           <span class="tc-bar__count">With the ticked</span>
           <span class="tc-bar__sep"></span>
           <button class="tc-btn" title="Download" type="submit" form="files-sel" name="op" value="download"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg><span class="tc-btn__label">Download</span></button>
+          <button class="tc-btn" title="Public is read-only." type="submit" form="files-sel" name="op" value="rename" disabled><svg viewBox="0 0 24 24"><use href="#i-pencil"/></svg><span class="tc-btn__label">Rename</span></button>
+          <button class="tc-btn" title="Public is read-only." type="submit" form="files-sel" name="op" value="move" disabled><svg viewBox="0 0 24 24"><use href="#i-move"/></svg><span class="tc-btn__label">Move</span></button>
           <button class="tc-btn" title="Copy" type="submit" form="files-sel" name="op" value="copy"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg><span class="tc-btn__label">Copy</span></button>
+          <button class="tc-btn is-danger-solid" title="Public is read-only." type="submit" form="files-sel" name="op" value="delete" disabled><svg viewBox="0 0 24 24"><use href="#i-trash"/></svg><span class="tc-btn__label">Delete</span></button>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w190"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter this folder" aria-label="Filter this folder"></label>
@@ -25160,7 +25239,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
         </div>
         <div class="tc-railfoot">
-          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="Open a folder to make one in it." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
           <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>

@@ -80,6 +80,13 @@ do, not what the authors did.
 - **`Input.Of`** — the form a field belongs to without standing in it, as
   `MenuItem.Of` and `Send.Of`: an address in a head beside the button
   that sends it.
+- `MsgFlushY8` — a message 8 px from what stands above and below it,
+  none at the sides: a refusal between a field and a tree in a card.
+- **A sheet's head takes a `Drop`** (`Drop.Place` pushes it to the end),
+  and **`MenuItem.Swap`** puts a link item's answer in place with the
+  live layer, as a tree's node does; a tree's link row carries its `Swap`
+  too — the connection of a sheet's tree chosen in its head (Carrel's
+  task 205).
 - **`Check.Of`** — the same for a check: the consent to the DAV
   validator's second stage under its trace.
 - **A button that waits for its form — `ButtonWaits`, `Check.Required`**
@@ -784,6 +791,25 @@ do, not what the authors did.
 - The arrow of a pick (and of a folded switch) stands 1.5 px higher: its
   middle on the middle of the words beside it (the owner, 18.10). No box
   moves.
+- **Files against «what cannot be done is off»** (Carrel's task 205):
+  New folder off in the root's rail (`states-35`), Details off until one
+  file is chosen (`s-files-2`, `states-32`…`-34`), Rename, Move and Delete
+  off in a read-only storage's selection bar (`states-34`); the head's
+  tick `is-part` when a part is chosen (`s-files-1`); Clear selection with
+  tiles (`s-files-5`); a refused upload in the page's queue (`s-files-2`);
+  an empty folder's Upload picks files itself, Send without a script
+  (`states-32`). Sheets: the connection in the head is a drop of links
+  (new `s-files-26` draws it open); the copy sheet is the move sheet's
+  form with Copy and «Open the folder» (`s-files-11`); the New folder
+  refusal keeps the sheet's message (`s-files-13`); `s-files-12`'s message
+  as in the sheet; the upload picker's list of picked files is empty as
+  the server prints it, no cross, its tree links to the sheet over that
+  folder (`s-notes-11`, `s-files-19`); no line under the tree — the
+  attachment folder's badge says it; the refusal in the upload sheet 8 px
+  from the field (`MsgFlushY8`). New `s-publish-20`: the published links'
+  page without mail. Accepted by the owner 18.10. On a phone a selection
+  bar wraps what does not fit (Р-65): Clear selection takes a row of its
+  own.
 - New `s-admin-34`: deleting an account — a sheet with its own address
   over Users, what goes said before the button, the login typed to
   confirm; Delete in the row's «⋯» (`s-admin-12`) leads there (Carrel's

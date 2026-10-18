@@ -174,6 +174,170 @@ func Publish1() Screen {
 	}
 }
 
+// Publish20 is frame «Опубликованное · почта не настроена» (s-publish-20).
+func Publish20() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 7,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{
+							Text:  "Published links",
+							Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"},
+						},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("Read-only, one object or one collection per link · "),
+									w.Span{Face: w.FaceDanger, Text: "this instance is local: the link opens only from your network"},
+								},
+							},
+						},
+					},
+					w.Table{
+						Cols: []w.TableCol{
+							{Label: "What is published"},
+							{Label: "Kind", Rank: w.Rank1},
+							{Label: "Created", Rank: w.Rank3, Secondary: true},
+							{Label: "Expires", Rank: w.Rank4},
+							{Label: "Last opened", Secondary: true},
+							{Label: "Opens"},
+							{Width: w.Col120},
+						},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "doc",
+												Name: "смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("file")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-10")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("No expiry")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never opened")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"},
+											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+										},
+										Drop: &w.Drop{
+											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Row:     true,
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuSep{},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnderEnd,
+											},
+										},
+										Acts: true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Mark: &w.Mark{Colour: "#4A6B52"},
+												Name: "Личный · 10–31 August",
+												Href: "/app/agenda/nextcloud/lichny?view=range&from=2026-08-10&to=2026-08-31",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-09-08")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-10 08:41")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("12")}, Mono: true},
+									{
+										Parts: []w.CellPart{
+											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
+											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+										},
+										Drop: &w.Drop{
+											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+											Row:     true,
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuSep{},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}},
+												Width: w.MenuWidth212,
+												Pop:   w.MenuUnderEnd,
+											},
+										},
+										Acts: true,
+									},
+								},
+							},
+						},
+						Variant: w.TablePacked,
+					},
+				},
+			},
+		},
+	}
+}
+
 // Publish18 is frame «Публикация · ссылок нет» (s-publish-18).
 func Publish18() Screen {
 	return w.Shell{

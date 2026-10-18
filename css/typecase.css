@@ -612,6 +612,9 @@ label.tc-tree__row{cursor:pointer}
 [data-tc-noscript] .tc-menu > .tc-in[type=search]{display:none}
 /* Закрытая выпадашка — details: меню открывается и без сценария (U-8); кнопка — её summary. */
 details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
+/* Выпадашка в шапке листа сжимается, как поле на её месте: выбор подключения не выталкивает строку пути. */
+.tc-sheet__head > .tc-drop{display:flex;min-width:0;flex:0 1 auto}
+.tc-sheet__head > .tc-drop > .tc-in{flex:1 1 auto}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
 .tc-drop > summary::-webkit-details-marker,.tc-drop__anchor > summary::-webkit-details-marker{display:none}
 .tc-field:has(> .tc-menu.is-pop){position:relative}
@@ -881,6 +884,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar .tc-btn > .tc-btn__label{display:none}
   .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
+  .tc-bar.tc-bar--sel{flex-wrap:wrap}
   .tc-docbar{flex-wrap:wrap}
   .tc-bar > .tc-range{flex-wrap:wrap}
   .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
@@ -1007,6 +1011,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-sheet{width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
   .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
+  .tc-sheet__head > .tc-drop{flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
@@ -1066,6 +1071,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-sheet{width:100%;max-width:100%;margin:0}
   .tc-sheet__head{flex-wrap:wrap}
   .tc-sheet__head .tc-in{width:auto;max-width:100%;flex:1 1 8em}
+  .tc-sheet__head > .tc-drop{flex:1 1 8em}
   .tc-scrim{padding:12px var(--tc-page-gutter-narrow);align-items:stretch}
   .tc-dialog{padding:16px var(--tc-page-gutter-narrow) 20px;min-width:0;max-width:100%}
   .tc-doc__layout{grid-template-columns:minmax(0,1fr)}
@@ -1472,6 +1478,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-msg--mx20.tc-msg--mx20{margin:0 20px}
 .tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
 .tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
+.tc-msg--my8.tc-msg--my8{margin:8px 0}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
 .tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}

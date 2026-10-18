@@ -447,6 +447,12 @@ func (g *gen) menuItem(k *El) string {
 	}
 	if h := k.Attr("href"); h != "" {
 		f = append(f, "Href: "+q(h))
+		if sw := k.Attr("data-tc-swap"); sw != "" {
+			f = append(f, "Swap: "+q(sw))
+		}
+	} else if k.Tag == "a" && k.Attr("aria-disabled") == "true" {
+		// a link that cannot be followed now: its reason is its title
+		f = append(f, `Href: "#"`)
 	}
 	if to := k.Attr("formaction"); to != "" {
 		f = append(f, "To: "+q(to))
@@ -718,6 +724,9 @@ func (g *gen) tree(e *El) string {
 		}
 		if h := r.Attr("href"); h != "" {
 			x = append(x, "Href: "+q(h))
+			if sw := r.Attr("data-tc-swap"); sw != "" {
+				x = append(x, "Swap: "+q(sw))
+			}
 		}
 		if box != nil {
 			x = append(x, "Send: "+sendOf(box))
@@ -1055,6 +1064,8 @@ func (g *gen) sheet(e *El) string {
 			hp = append(hp, g.pick(x))
 		case x.Has("tc-in") && (x.Tag == "label" || x.Tag == "form"):
 			hp = append(hp, g.filter(x))
+		case x.Has("tc-drop"):
+			hp = append(hp, g.drop(x))
 		case x.Has("tc-crumbs"):
 			hp = append(hp, g.crumbs(x))
 		case x.Has("tc-table__file"):

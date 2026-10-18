@@ -32,6 +32,7 @@ func (Button) sheetHeadPart()       {}
 func (Close) sheetHeadPart()        {}
 func (SheetSubject) sheetHeadPart() {}
 func (Tag) sheetHeadPart()          {}
+func (Drop) sheetHeadPart()         {}
 func (Badge) sheetHeadPart()        {}
 func (Crumbs) sheetHeadPart()       {}
 

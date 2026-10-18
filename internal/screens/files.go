@@ -197,7 +197,7 @@ func Files1() Screen {
 					},
 					w.Table{
 						Cols: []w.TableCol{
-							{Width: w.ColTick, Tick: ptr(w.TickedOff)},
+							{Width: w.ColTick, Tick: ptr(w.TickedPart)},
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
 							{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
@@ -496,7 +496,7 @@ func Files2() Screen {
 								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
 								w.Button{Label: "New folder", Icon: "plus"},
 								w.Button{Icon: "refresh", Title: "Refresh"},
-								w.Button{Icon: "panel", Title: "Details"},
+								w.Button{Icon: "panel", Title: "Choose one file to see its details.", State: w.ButtonDisabled},
 								w.Button{Icon: "dots", Title: "More"},
 							},
 						},
@@ -741,7 +741,7 @@ func Files2() Screen {
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.Queue{
-						Title:  "Uploading 2 of 3",
+						Title:  "Uploading 2 of 4",
 						Total:  w.Mono{Text: "12.4 MB", Variant: w.MonoDusty, Place: w.Pushed},
 						Toggle: w.Button{Label: "Hide", Small: true},
 						Items: []w.QueueItem{
@@ -757,6 +757,7 @@ func Files2() Screen {
 									w.Button{Label: "Skip", Small: true},
 								},
 							},
+							{Name: "архив-2025.zip", Meta: "the server needs the size", Failed: true},
 						},
 						Fold: &w.QueueFold{Hide: "Hide", Show: "Show", Total: "{percent}%"},
 					},
@@ -1119,7 +1120,28 @@ func Files4() Screen {
 					Icon:   "move",
 					Title:  "Move 3 items",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240, Place: w.Pushed},
+						w.Drop{
+							Trigger: w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Label: "sftpgo · vps",
+										On:    true,
+										Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&server=sftpgo",
+										Swap:  "move-sheet",
+									},
+									w.MenuItem{
+										Label: "nextcloud",
+										Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&server=nextcloud",
+										Swap:  "move-sheet",
+									},
+									w.MenuItem{Label: "webdav · nas", Reason: "webdav · nas did not answer.", Href: "#"},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("from Documents / carrel / attachments")},
 							Size:    w.Dim11_5,
@@ -1338,6 +1360,7 @@ func Files5() Screen {
 							},
 						},
 						Count:   &w.BarCount{Text: "1 selected"},
+						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
 						Variant: w.BarSelection,
 					},
 					w.Bar{

@@ -20,6 +20,9 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("disabled", w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "rename", State: w.ButtonDisabled}, "states-34", "tc-btn", 11),
+	primitive("disabled", w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "delete", State: w.ButtonDisabled}, "states-34", "tc-btn", 14),
+	primitive("with-content", w.Button{Label: "Upload", Icon: "upload", Kind: w.ButtonPrimary, File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}}, "states-32", "tc-btn", 11),
 	primitive("wait", w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Reason: "Choose a side for every property.", State: w.ButtonWaits, Form: "conflict"}, "s-conflict-6", "tc-btn", 3),
 	primitive("link", w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"}, "s-conflict-10", "tc-btn", 3),
 	primitive("primary", w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/admin/users"}, "s-admin-14", "tc-btn", 2),

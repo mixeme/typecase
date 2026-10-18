@@ -116,6 +116,7 @@ var Routes = []Route{
 	{Frame: "s-backup-7", Caption: "Восстановление · шаг 1, какой архив", Screen: Backup7},
 	{Frame: "s-backup-8", Caption: "Восстановление · что и куда ляжет", Screen: Backup8},
 	{Frame: "s-publish-1", Caption: "Публикация · выданные ссылки", Screen: Publish1},
+	{Frame: "s-publish-20", Caption: "Опубликованное · почта не настроена", Screen: Publish20},
 	{Frame: "s-publish-18", Caption: "Публикация · ссылок нет", Screen: Publish18},
 	{Frame: "s-publish-2", Caption: "Календарь · создать ссылку", Screen: Publish2},
 	{Frame: "s-publish-13", Caption: "Календарь · ссылка создана", Screen: Publish13},

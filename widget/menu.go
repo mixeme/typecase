@@ -64,6 +64,10 @@ type MenuItem struct {
 	Reason string
 	// Href makes the item a link: a sheet or a page opens at the address.
 	Href string
+	// Swap is Button.Swap for an item that is a link: with the live layer
+	// the elements it names are put in place from the answer — the
+	// connection of a sheet's tree chosen in its head (Carrel's task 205).
+	Swap string
 	// Name makes the item a checkbox of the menu's form (Menu.Action): ticked
 	// (Tick), it sends Value; the items' order is the order they are sent in.
 	// Fixed keeps it ticked and off: a column that is always shown. Without a
@@ -175,7 +179,7 @@ func (it MenuItem) html(mix) string {
 		if it.Reason != "" {
 			s.WriteString(`<a` + cls + ` role="menuitem"` + checked + attr("title", it.Reason) + ` aria-disabled="true">`)
 		} else {
-			s.WriteString(`<a` + cls + attr("href", it.Href) + ` role="menuitem"` + checked + key + `>`)
+			s.WriteString(`<a` + cls + attr("href", it.Href) + attr("data-tc-swap", it.Swap) + ` role="menuitem"` + checked + key + `>`)
 		}
 	} else if it.To != "" {
 		s.WriteString(`<button` + cls + ` type="submit"` + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
@@ -417,7 +421,7 @@ func (TagInput) dropTrigger() {}
 // Drop — tc-drop
 //
 // Роль. Кнопка или выбор вместе с меню, которое они открывают.
-// Вход. Drop{Trigger, Menu, More, Row, Open}.
+// Вход. Drop{Trigger, Menu, More, Row, Open, Place}.
 // Состояния. more | pick.
 // Инварианты. Меню стоит сразу за тем, что его открывает; «⋯» бара — кнопка бара и тогда, когда она в выпадашке; выпадашка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус; у выбора с меню из радио (пояс) выбранный пункт становится значением выбора.
@@ -430,6 +434,9 @@ type Drop struct {
 	More    bool // the trigger is its bar's «⋯»
 	Row     bool // the trigger is a table row's «⋯» (TableCell.Drop, Carrel's task 117)
 	Open    bool // drawn open, as the frames draw it; closed, the menu waits hidden for its button
+	// Place is where the drop stands in its row: pushed to the end of a
+	// sheet's head (Carrel's task 205).
+	Place Place
 }
 
 // Render prints the drop.
@@ -446,10 +453,10 @@ func (d Drop) html(m mix) string {
 	if !d.Open {
 		if sum, ok := summaryOf(d.Trigger.html(t)); ok {
 			// Closed, the menu opens without a script (U-8): details and its summary.
-			return `<details` + class(m, "tc-drop") + `>` + sum + d.Menu.shown(nil, true) + `</details>`
+			return `<details` + class(m, "tc-drop", d.Place.class()) + `>` + sum + d.Menu.shown(nil, true) + `</details>`
 		}
 	}
-	return `<span` + class(m, "tc-drop") + `>` + d.Trigger.html(t) + d.Menu.shown(nil, d.Open) + `</span>`
+	return `<span` + class(m, "tc-drop", d.Place.class()) + `>` + d.Trigger.html(t) + d.Menu.shown(nil, d.Open) + `</span>`
 }
 
 // summaryOf turns a trigger button into the summary of a details: the same

@@ -93,11 +93,12 @@ const (
 	MsgFlushEnd                      // no margin at the end: beside a meter
 	MsgInset20                       // 20 px at the sides: in a side panel
 	MsgSheet                         // 0 14 12: in a sheet's picker
+	MsgFlushY8                       // 8 px above and below, none at the sides: a refusal between a field and what follows
 )
 
 func (s MsgSpace) class() string {
 	return [...]string{"", "tc-msg--flush", "tc-msg--flush-top2", "tc-msg--flush-top4", "tc-msg--flush-top11", "tc-msg--flush-bot12", "tc-msg--mr0-ml0",
-		"tc-msg--flush-top9", "tc-msg--flush-r0", "tc-msg--mx20", "tc-msg--m0-14-12"}[s]
+		"tc-msg--flush-top9", "tc-msg--flush-r0", "tc-msg--mx20", "tc-msg--m0-14-12", "tc-msg--my8"}[s]
 }
 
 // Msg — tc-msg
