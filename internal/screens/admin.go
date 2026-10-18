@@ -1837,7 +1837,7 @@ func Admin6() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them."),
+							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
 						},
 						Tone: w.MsgAlert,
 					},
@@ -1848,12 +1848,7 @@ func Admin6() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
-											w.Check{
-												On:    true,
-												Name:  "new.accounts.are.covered",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("New accounts are covered")},
-											},
+											w.Check{On: true, Name: "coverNew", Value: "on", Parts: []w.CheckPart{w.Text("New accounts are covered")}},
 										},
 										Gap:   7,
 										Place: w.Grown,
@@ -1871,24 +1866,25 @@ func Admin6() Screen {
 									w.Field{Parts: []w.FieldPart{w.Button{Label: "Save", Submit: true}}},
 								},
 								Variant: w.FieldSetLead,
-								Action:  "/admin/escrow/policy",
+								Action:  "/admin/escrow",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "policy"}},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Master password"},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Current",
-										Parts: []w.FieldPart{w.Input{Name: "current", Value: "••••••••••••••••", Label: "Current"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "current", Label: "Current", Required: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "New",
-										Parts: []w.FieldPart{w.Input{Name: "new", Value: "••••••••••••••••", Label: "New"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master", Label: "New", Required: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Repeat",
-										Parts: []w.FieldPart{w.Input{Name: "repeat", Value: "••••••••••••••••", Label: "Repeat"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master2", Label: "Repeat", Required: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{Parts: []w.FieldPart{w.Button{Label: "Change", Submit: true}}},
@@ -1903,29 +1899,31 @@ func Admin6() Screen {
 										Place: w.Grown,
 									},
 								},
-								Action: "/admin/escrow/master",
+								Action: "/admin/escrow",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "master"}},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Recover an account"},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Account",
-										Parts: []w.FieldPart{w.Input{Name: "account", Value: "viktor", Label: "Account"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "viktor", Label: "Account", Required: true}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Master password",
-										Parts: []w.FieldPart{w.Input{Name: "master.password", Value: "••••••••••••••••", Label: "Master password"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master", Label: "Master password", Required: true}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Temporary password for the user",
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:  "temporary.password.for.the.user",
-												Value: "9f2-brick-lamp",
-												Label: "Temporary password for the user",
-												Mono:  true,
+												Name:     "temp",
+												Value:    "9f2-brick-lamp",
+												Label:    "Temporary password for the user",
+												Mono:     true,
+												Required: true,
 											},
 										},
 										Width: w.FieldMD,
@@ -1935,14 +1933,15 @@ func Admin6() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Connections survive a recovery: the deposited key is opened with the master password and re-wrapped under a temporary one. The user is mailed about it — always, not at the administrator’s discretion."),
+													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
 												},
 											},
 										},
 										Place: w.Grown,
 									},
 								},
-								Action: "/admin/escrow/recover",
+								Action: "/admin/escrow",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "recover"}},
 							},
 						},
 					},
@@ -1969,12 +1968,373 @@ func Admin6() Screen {
 							},
 							{
 								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("olga")}},
+									{Parts: []w.CellPart{w.Text("2026-05-11")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("petr")}},
+									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("ivan")}},
+									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("mix")}},
 									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},
 						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin30 is frame «Депонирование · учётная запись восстановлена» (s-admin-30).
+func Admin30() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "shield", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Key escrow"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 of 6 accounts open with the master password")}}},
+					},
+					w.Msg{
+						Icon: "shield",
+						Parts: []w.MsgPart{
+							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
+						},
+						Tone: w.MsgAlert,
+					},
+					w.Msg{Parts: []w.MsgPart{w.Text("The account of "), w.Strong("viktor"), w.Text(" is recovered.")}},
+					w.Pad{
+						Items: []w.PadPart{
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
+										Text:  "Temporary password",
+										Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}},
+									},
+									w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk, ID: "s-admin-30-secret"},
+									w.CardRow{
+										Kind: w.CardTop8,
+										Gap:  8,
+										Items: []w.CardRowPart{
+											w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary, CopyFrom: "s-admin-30-secret", Copied: "Copied"},
+											w.Button{Label: "Done", Href: "/admin/escrow"},
+											w.Dim{
+												Parts:   []w.Inline{w.Text("No letter went: viktor has no confirmed address. Tell them yourself.")},
+												Size:    w.Dim11_5,
+												Variant: w.DimWrap,
+											},
+										},
+									},
+								},
+								Variant: w.CardChosenFlushGrow,
+							},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Policy"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{On: true, Name: "coverNew", Value: "on", Parts: []w.CheckPart{w.Text("New accounts are covered")}},
+										},
+										Gap:   7,
+										Place: w.Grown,
+									},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Save", Submit: true}}},
+								},
+								Variant: w.FieldSetLead,
+								Action:  "/admin/escrow",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "policy"}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Master password"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Current",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "current", Label: "Current", Required: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "New",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master", Label: "New", Required: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Repeat",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master2", Label: "Repeat", Required: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Change", Submit: true}}},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+								},
+								Action: "/admin/escrow",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "master"}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Recover an account"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Account",
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "viktor", Label: "Account", Required: true}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Master password",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master", Label: "Master password", Required: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Temporary password for the user",
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:     "temp",
+												Value:    "9f2-brick-lamp",
+												Label:    "Temporary password for the user",
+												Mono:     true,
+												Required: true,
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Recover", Kind: w.ButtonDanger, Submit: true}}},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+								},
+								Action: "/admin/escrow",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "recover"}},
+							},
+						},
+					},
+					w.ListGroup{
+						Title: w.Rubric{Text: "Whom the master password opens", Form: w.RubricInline},
+						Count: &w.Num{Value: 4},
+					},
+					w.Table{
+						Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited"}, {Label: "Last recovery", Rank: w.Rank3}},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("anna")}},
+									{Parts: []w.CellPart{w.Text("2026-03-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("viktor")}},
+									{Parts: []w.CellPart{w.Text("2026-04-19")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("olga")}},
+									{Parts: []w.CellPart{w.Text("2026-05-11")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("petr")}},
+									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("ivan")}},
+									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("mix")}},
+									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin31 is frame «Депонирование · не включено» (s-admin-31).
+func Admin31() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "shield", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Key escrow"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Off")}}},
+					},
+					w.Msg{
+						Icon: "shield",
+						Parts: []w.MsgPart{
+							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
+						},
+						Tone: w.MsgAlert,
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Master password",
+								Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master", Label: "Master password", Required: true}},
+								Width: w.FieldLG,
+							},
+							w.Field{
+								Label: "Repeat",
+								Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "master2", Label: "Repeat", Required: true}},
+								Width: w.FieldLG,
+							},
+							w.Field{Parts: []w.FieldPart{w.Button{Label: "Turn on key escrow", Kind: w.ButtonPrimary, Submit: true}}},
+							w.Field{
+								Parts: []w.FieldPart{
+									w.FieldHint{
+										Parts: []w.Inline{w.Text("If you lose this password, deposited keys cannot be opened. This is not backup.")},
+									},
+								},
+								Place: w.Grown,
+							},
+						},
+						Action: "/admin/escrow",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "enable"}},
 					},
 				},
 			},

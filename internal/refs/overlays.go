@@ -1818,6 +1818,7 @@ var _ = add(
 		w.Fields{Items: []w.FieldsItem{
 			{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
 			{Term: "Last recovery", Value: []w.ValuePart{w.Text("never")}, Face: w.ValueMono}}, Variant: w.FieldsBleed},
+		w.Field{Label: "Password history", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Value: "https://carrel.example/password-history/k7q2-m9xd-41fa", Label: "Password history", Mono: true, ReadOnly: true, Variant: w.InputFill}, w.Button{Label: "Copy", Icon: "dup", Small: true, Copy: "https://carrel.example/password-history/k7q2-m9xd-41fa", Copied: "Copied"}}, Gap: w.LineGap6}, w.FieldHint{Parts: []w.Inline{w.Text("Keep this link: it shows what was done to your password and by whom, also when you cannot sign in. It never changes.")}}}, Width: w.FieldFull},
 		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid}, w.Dim{Parts: []w.Inline{w.Text("After withdrawal nobody can recover this account, including you.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.FormFootFlush}}, Variant: w.Dialog560}, "account-4", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Head{Title: &w.HeadTitle{Text: "Add device"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("An app password for one device, with its own key wrapper")}}}},

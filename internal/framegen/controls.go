@@ -1001,7 +1001,15 @@ func (g *gen) fsetPart(k *El) string {
 }
 
 func (g *gen) fset(e *El) string {
-	kids := e.Els()
+	var kids, hidden []*El
+	for _, k := range e.Els() {
+		if k.Tag == "input" && k.Attr("type") == "hidden" {
+			// the hidden fields of a group that is a form (Carrel's task 195)
+			hidden = append(hidden, k)
+			continue
+		}
+		kids = append(kids, k)
+	}
 	var r *El
 	if len(kids) > 0 && kids[0].Has("tc-rubric") {
 		r = kids[0]
@@ -1025,6 +1033,9 @@ func (g *gen) fset(e *El) string {
 		f = append(f, "Action: "+q(a))
 		if m := e.Attr("method"); m != "" && m != "post" {
 			f = append(f, "Method: "+q(m))
+		}
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
 		}
 	}
 	return "w.FieldSet{" + join(f, ", ") + "}"

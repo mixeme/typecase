@@ -504,6 +504,49 @@ func Auth9() Screen {
 	}
 }
 
+// Auth15 is frame «История пароля» (s-auth-15).
+func Auth15() Screen {
+	return w.Page{
+		Items: []w.PagePart{
+			w.Auth{
+				Dialog: w.Dialog{
+					Items: []w.DialogPart{
+						w.DialogTitle{Text: "Password history of viktor", Gap: w.DialogTitleGap8},
+						w.Prose{Parts: []w.Inline{w.Text("Times are Europe/Moscow.")}, Variant: w.ProseMutedClose},
+						w.Table{
+							Cols: []w.TableCol{{Label: "When"}, {Label: "What"}, {Label: "Who"}},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-14 19:02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Password changed")}},
+										{Parts: []w.CellPart{w.Text("viktor")}},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Opened with the master password; a temporary password set")}},
+										{Parts: []w.CellPart{w.Text("mix")}},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-05-03 10:15")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Password changed")}},
+										{Parts: []w.CellPart{w.Text("viktor")}},
+									},
+								},
+							},
+						},
+					},
+					Variant: w.DialogPage520,
+				},
+			},
+		},
+	}
+}
+
 // Auth10 is frame «Забыли пароль · подтверждение очистки» (s-auth-10).
 func Auth10() Screen {
 	return w.Page{

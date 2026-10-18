@@ -781,6 +781,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Key escrow and the password's history** (Carrel's tasks 195 p. 4, 202
+  p. 1; accepted by the owner 18.10). `s-admin-6`: the forms are one page
+  form each (`action` hidden), password fields, «… logged and shown to
+  them», the line under Recover names the history link, six accounts for
+  «4 of 6». Extra frames `s-admin-30` (recovered: the temporary password
+  once, and whether a letter went) and `s-admin-31` (escrow off: the
+  master password twice, «Turn on key escrow»). `account-4`: the
+  permanent link to the password's history with Copy; shorter words by
+  Withdraw. New `s-auth-15`: the history page by that link, without
+  sign-in.
 - `s-admin-5`: the DAV validator's fields are its form (server, login, a
   password field — «Asked each time, never kept.» —, «Certificate
   fingerprint · SHA-256 · optional» as in a connection, Carrel's task

@@ -637,11 +637,39 @@ func Account4() Screen {
 								},
 								Variant: w.FieldsBleed,
 							},
+							w.Field{
+								Label: "Password history",
+								Parts: []w.FieldPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Input{
+												Value:    "https://carrel.example/password-history/k7q2-m9xd-41fa",
+												Label:    "Password history",
+												Mono:     true,
+												ReadOnly: true,
+												Variant:  w.InputFill,
+											},
+											w.Button{
+												Label:  "Copy",
+												Icon:   "dup",
+												Small:  true,
+												Copy:   "https://carrel.example/password-history/k7q2-m9xd-41fa",
+												Copied: "Copied",
+											},
+										},
+										Gap: w.LineGap6,
+									},
+									w.FieldHint{
+										Parts: []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+									},
+								},
+								Width: w.FieldFull,
+							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid},
 									w.Dim{
-										Parts:   []w.Inline{w.Text("After withdrawal nobody can recover this account, including you.")},
+										Parts:   []w.Inline{w.Text("Then nobody can recover the account.")},
 										Size:    w.Dim11_5,
 										Variant: w.DimWrap,
 									},

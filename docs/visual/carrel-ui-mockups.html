@@ -12992,12 +12992,13 @@ dav: HTTP 503: the server is busy</div>
         <dt>Deposited</dt><dd class="tc-mono">2026-03-02</dd>
         <dt>Last recovery</dt><dd class="tc-mono">never</dd>
       </dl>
+      <div class="tc-field tc-field--full"><label>Password history</label><span class="tc-line tc-line--gap-6"><input class="tc-in is-mono tc-in--fill" type="text" value="https://carrel.example/password-history/k7q2-m9xd-41fa" aria-label="Password history" readonly><button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/password-history/k7q2-m9xd-41fa" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button></span><span class="tc-field__hint">Keep it: it shows what was done to your password, even when you cannot sign in.</span></div>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-danger-solid" type="button">Withdraw my deposited key</button>
-        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">After withdrawal nobody can recover this account, including you.</span></div>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Then nobody can recover the account.</span></div>
     </div></div></div>
   </div>
 </div>
-<figcaption><b>Это уже после.</b> Сюда попадают с листа подтверждения, не с кнопки напрямую. Текст оставлен дословно: он честный и его менять незачем. Меняется только вид — предупреждение отделено от фактов, факты сведены в пары «подпись — значение». Отказ здесь возможен, и кнопка стоит прямо под фактами: это решение владельца ключа.</figcaption>
+<figcaption><b>Это уже после.</b> Сюда попадают с листа подтверждения, не с кнопки напрямую. Текст оставлен дословно: он честный и его менять незачем. Меняется только вид — предупреждение отделено от фактов, факты сведены в пары «подпись — значение». Отказ здесь возможен, и кнопка стоит прямо под фактами: это решение владельца ключа. Ссылка на историю пароля — постоянная, выдана при депонировании и стоит здесь всегда, и после отзыва копии тоже (решение владельца 16.10).</figcaption>
 </figure>
 
 <h3 id="usermenu">Меню в шапке и порядок настроек</h3>
@@ -19060,32 +19061,32 @@ password  4c1-tide-oven</div>
         </div>
         <div class="tc-msg is-alert is-row">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span class="tc-msg__aside">Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and mailed to them.</span>
+          <span class="tc-msg__aside">Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them.</span>
         </div>
         <div class="tc-form">
-          <form class="tc-fset tc-fset--lead" action="/admin/escrow/policy" method="post">
+          <form class="tc-fset tc-fset--lead" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="policy">
             <div class="tc-rubric">Policy</div>
             <div class="tc-field tc-grow tc-field--gap7">
-              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="new.accounts.are.covered" value="1" checked><span class="tc-tickrow__tick"></span>New accounts are covered</label>
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="coverNew" value="on" checked><span class="tc-tickrow__tick"></span>New accounts are covered</label>
             </div>
             <div class="tc-field tc-grow"><span class="tc-field__hint">Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision.</span></div>
             <div class="tc-field"><button class="tc-btn" type="submit">Save</button></div>
           </form>
-          <form class="tc-fset" action="/admin/escrow/master" method="post">
+          <form class="tc-fset" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="master">
             <div class="tc-rubric">Master password</div>
-            <div class="tc-field tc-field--lg"><label>Current</label><input class="tc-in" type="text" name="current" value="••••••••••••••••" aria-label="Current"></div>
-            <div class="tc-field tc-field--lg"><label>New</label><input class="tc-in" type="text" name="new" value="••••••••••••••••" aria-label="New"></div>
-            <div class="tc-field tc-field--lg"><label>Repeat</label><input class="tc-in" type="text" name="repeat" value="••••••••••••••••" aria-label="Repeat"></div>
+            <div class="tc-field tc-field--lg"><label>Current</label><input class="tc-in" type="password" name="current" aria-label="Current" required></div>
+            <div class="tc-field tc-field--lg"><label>New</label><input class="tc-in" type="password" name="master" aria-label="New" required></div>
+            <div class="tc-field tc-field--lg"><label>Repeat</label><input class="tc-in" type="password" name="master2" aria-label="Repeat" required></div>
             <div class="tc-field"><button class="tc-btn" type="submit">Change</button></div>
             <div class="tc-field tc-grow"><span class="tc-field__hint">Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again.</span></div>
           </form>
-          <form class="tc-fset" action="/admin/escrow/recover" method="post">
+          <form class="tc-fset" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="recover">
             <div class="tc-rubric">Recover an account</div>
-            <div class="tc-field tc-field--md"><label>Account</label><input class="tc-in" type="text" name="account" value="viktor" aria-label="Account"></div>
-            <div class="tc-field tc-field--lg"><label>Master password</label><input class="tc-in" type="text" name="master.password" value="••••••••••••••••" aria-label="Master password"></div>
-            <div class="tc-field tc-field--md"><label>Temporary password for the user</label><input class="tc-in is-mono" type="text" name="temporary.password.for.the.user" value="9f2-brick-lamp" aria-label="Temporary password for the user"></div>
+            <div class="tc-field tc-field--md"><label>Account</label><input class="tc-in" type="text" name="login" value="viktor" aria-label="Account" required></div>
+            <div class="tc-field tc-field--lg"><label>Master password</label><input class="tc-in" type="password" name="master" aria-label="Master password" required></div>
+            <div class="tc-field tc-field--md"><label>Temporary password for the user</label><input class="tc-in is-mono" type="text" name="temp" value="9f2-brick-lamp" aria-label="Temporary password for the user" required></div>
             <div class="tc-field"><button class="tc-btn is-danger" type="submit">Recover</button></div>
-            <div class="tc-field tc-grow"><span class="tc-field__hint">Connections survive a recovery: the deposited key is opened with the master password and re-wrapped under a temporary one. The user is mailed about it — always, not at the administrator’s discretion.</span></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them.</span></div>
           </form>
         </div>
         <div class="tc-list__group"><span class="tc-rubric">Whom the master password opens</span><span class="tc-num">4</span></div>
@@ -19094,6 +19095,9 @@ password  4c1-tide-oven</div>
           <tbody>
             <tr><td>anna</td><td class="tc-mono">2026-03-02</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
             <tr><td>viktor</td><td class="tc-mono">2026-04-19</td><td class="tc-mono tc-table__n3">2026-08-14 18:40</td></tr>
+            <tr><td>olga</td><td class="tc-mono">2026-05-11</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
+            <tr><td>petr</td><td class="tc-mono">2026-06-02</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
+            <tr><td>ivan</td><td class="tc-mono tc-mono--dusty">not deposited</td><td class="tc-mono tc-table__n3">—</td></tr>
             <tr><td>mix</td><td class="tc-mono tc-mono--dusty">not deposited</td><td class="tc-mono tc-table__n3">—</td></tr>
           </tbody>
         </table>
@@ -19101,7 +19105,158 @@ password  4c1-tide-oven</div>
     </div>
   </div>
 </div>
-<figcaption>Самый опасный экран во всей администраторской части, и первое, что на нём стоит, — объяснение, чем депонирование <b>не</b> является. Текст взят из продукта дословно: он уже написан правильно и переписыванию не подлежит. Покрытие новых учёток — один флажок в Policy со своей кнопкой Save, не кнопка в шапке и флажок сразу: это одно и то же. Ниже — мастер-пароль, восстановление и таблица, отвечающая на вопрос, который администратор задаёт в первую очередь: <b>кого именно</b> этот мастер-пароль открывает. Строка «mix» с прочерками показывает, что администратор может не быть покрыт собственным механизмом, — это нормально и должно быть видно.</figcaption>
+<figcaption>Самый опасный экран во всей администраторской части, и первое, что на нём стоит, — объяснение, чем депонирование <b>не</b> является. Текст взят из продукта; после решения владельца 16.10 о ссылке на историю пароля восстановление не «mailed», а «shown to them». Покрытие новых учёток — один флажок в Policy со своей кнопкой Save, не кнопка в шапке и флажок сразу: это одно и то же. Ниже — мастер-пароль, восстановление и таблица, отвечающая на вопрос, который администратор задаёт в первую очередь: <b>кого именно</b> этот мастер-пароль открывает. Строка «mix» с прочерками показывает, что администратор может не быть покрыт собственным механизмом, — это нормально и должно быть видно.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-admin-30" data-screen="/admin/escrow" data-part="recovered">
+  <div class="frame-label"><span>Депонирование · учётная запись восстановлена</span><i>дополнительный кадр: recovered · /admin/escrow</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Administration</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Key escrow</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">4 of 6 accounts open with the master password</div></div>
+        </div>
+        <div class="tc-msg is-alert is-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
+          <span class="tc-msg__aside">Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them.</span>
+        </div>
+        <div class="tc-msg">The account of <b>viktor</b> is recovered.</div>
+        <div class="tc-pad">
+          <div class="tc-card tc-card--edge-accent tc-card--flush">
+            <div class="tc-rubric">Temporary password <span class="tc-mono tc-mono--ls0-danger">visible only now</span></div>
+            <div class="tc-diag tc-diag--top9-ink" id="s-admin-30-secret">login     viktor
+password  9f2-brick-lamp</div>
+            <div class="tc-line tc-line--gap-8 tc-card__top8"><button class="tc-btn is-primary" type="button" data-tc-copy-from="s-admin-30-secret" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button><a class="tc-btn" href="/admin/escrow">Done</a><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">No letter went: viktor has no confirmed address. Tell them yourself.</span></div>
+          </div>
+        </div>
+        <div class="tc-form">
+          <form class="tc-fset tc-fset--lead" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="policy">
+            <div class="tc-rubric">Policy</div>
+            <div class="tc-field tc-grow tc-field--gap7">
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="coverNew" value="on" checked><span class="tc-tickrow__tick"></span>New accounts are covered</label>
+            </div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision.</span></div>
+            <div class="tc-field"><button class="tc-btn" type="submit">Save</button></div>
+          </form>
+          <form class="tc-fset" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="master">
+            <div class="tc-rubric">Master password</div>
+            <div class="tc-field tc-field--lg"><label>Current</label><input class="tc-in" type="password" name="current" aria-label="Current" required></div>
+            <div class="tc-field tc-field--lg"><label>New</label><input class="tc-in" type="password" name="master" aria-label="New" required></div>
+            <div class="tc-field tc-field--lg"><label>Repeat</label><input class="tc-in" type="password" name="master2" aria-label="Repeat" required></div>
+            <div class="tc-field"><button class="tc-btn" type="submit">Change</button></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again.</span></div>
+          </form>
+          <form class="tc-fset" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="recover">
+            <div class="tc-rubric">Recover an account</div>
+            <div class="tc-field tc-field--md"><label>Account</label><input class="tc-in" type="text" name="login" value="viktor" aria-label="Account" required></div>
+            <div class="tc-field tc-field--lg"><label>Master password</label><input class="tc-in" type="password" name="master" aria-label="Master password" required></div>
+            <div class="tc-field tc-field--md"><label>Temporary password for the user</label><input class="tc-in is-mono" type="text" name="temp" value="9f2-brick-lamp" aria-label="Temporary password for the user" required></div>
+            <div class="tc-field"><button class="tc-btn is-danger" type="submit">Recover</button></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them.</span></div>
+          </form>
+        </div>
+        <div class="tc-list__group"><span class="tc-rubric">Whom the master password opens</span><span class="tc-num">4</span></div>
+        <table class="tc-table">
+          <thead><tr><th>Account</th><th>Deposited</th><th class="tc-table__n3">Last recovery</th></tr></thead>
+          <tbody>
+            <tr><td>anna</td><td class="tc-mono">2026-03-02</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
+            <tr><td>viktor</td><td class="tc-mono">2026-04-19</td><td class="tc-mono tc-table__n3">2026-08-14 18:40</td></tr>
+            <tr><td>olga</td><td class="tc-mono">2026-05-11</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
+            <tr><td>petr</td><td class="tc-mono">2026-06-02</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">never</td></tr>
+            <tr><td>ivan</td><td class="tc-mono tc-mono--dusty">not deposited</td><td class="tc-mono tc-table__n3">—</td></tr>
+            <tr><td>mix</td><td class="tc-mono tc-mono--dusty">not deposited</td><td class="tc-mono tc-table__n3">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Ответ на Recover — как ответ на сброс (s-admin-14): временный пароль один раз, логин и пароль вместе, Copy, Done. Рядом — ушло ли письмо и почему нет: здесь у человека нет подтверждённого адреса. Что сделано с паролем, человек увидит по своей ссылке на историю.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-admin-31" data-screen="/admin/escrow" data-part="off">
+  <div class="frame-label"><span>Депонирование · не включено</span><i>дополнительный кадр: off · /admin/escrow</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Administration</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Key escrow</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">Off</div></div>
+        </div>
+        <div class="tc-msg is-alert is-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
+          <span class="tc-msg__aside">Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them.</span>
+        </div>
+        <form class="tc-form" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="enable">
+          <div class="tc-field tc-field--lg"><label>Master password</label><input class="tc-in" type="password" name="master" aria-label="Master password" required></div>
+          <div class="tc-field tc-field--lg"><label>Repeat</label><input class="tc-in" type="password" name="master2" aria-label="Repeat" required></div>
+          <div class="tc-field"><button class="tc-btn is-primary" type="submit">Turn on key escrow</button></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint">If you lose this password, deposited keys cannot be opened. This is not backup.</span></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Схема не включена: предупреждение то же, ниже — мастер-пароль дважды и «Turn on key escrow». Политики, восстановления и таблицы нет, пока включать нечего.</figcaption>
 </figure>
 
 <figure>
@@ -19474,6 +19629,29 @@ If you deposited the encryption key, ask the administrator in person. Otherwise 
     </div>
   </div>
   <figcaption>Запрос не подменяет депонирование: без master password администратор по-прежнему ничего не расшифрует.</figcaption>
+  </figure>
+
+  <figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-auth-15" data-screen="/password-history/{token}">
+    <div class="frame-label"><span>История пароля</span><i>/password-history/{token}</i></div>
+    <div class="tc-root">
+      <div class="tc-auth">
+        <div class="tc-dialog tc-dialog--max520-padt0-padb0">
+          <div class="tc-head__title tc-head__title--bot8">Password history of viktor</div>
+          <div class="tc-prose tc-prose--muted-flush-bot10">Times are Europe/Moscow.</div>
+          <table class="tc-table">
+            <thead><tr><th>When</th><th>What</th><th>Who</th></tr></thead>
+            <tbody>
+              <tr><td class="tc-mono">2026-08-14 19:02</td><td>Password changed</td><td>viktor</td></tr>
+              <tr><td class="tc-mono">2026-08-14 18:40</td><td>Opened with the master password; a temporary password set</td><td>mix</td></tr>
+              <tr><td class="tc-mono">2026-05-03 10:15</td><td>Password changed</td><td>viktor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption><b>Страница по постоянной ссылке</b> (решение владельца 16.10): без входа, только события пароля этой учётной записи — когда, что, кто, новые сверху. Ссылку не гасит ни человек, ни администратор. Пусто — «Nothing has been done to this password.»</figcaption>
   </figure>
 
   <figure style="flex:1 1 100%">
