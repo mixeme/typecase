@@ -12,7 +12,6 @@ func Admin1() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -97,16 +96,17 @@ func Admin1() Screen {
 										Items: []w.CardFieldsPart{
 											w.Field{
 												Label: "Or send to",
-												Parts: []w.FieldPart{w.Input{Name: "or.send.to", Placeholder: "anna@example.org", Label: "Or send to"}},
+												Parts: []w.FieldPart{w.Input{Name: "email", Placeholder: "anna@example.org", Label: "Or send to"}},
 												Width: w.FieldMD,
 											},
-											w.Button{Label: "Send invitation", To: "/admin/users/invite/mail", Submit: true},
+											w.Button{Label: "Send invitation", To: "/admin/invites?action=send", Submit: true},
 										},
 										Wide: true,
 										Rule: true,
 									},
 								},
-								Action: "/admin/users/invite",
+								Action: "/admin/invites?action=link",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -136,14 +136,12 @@ func Admin1() Screen {
 											w.Field{
 												Label:      "Email",
 												LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}},
-												Parts:      []w.FieldPart{w.Input{Name: "email.optional", Placeholder: "—", Label: "Email"}},
+												Parts:      []w.FieldPart{w.Input{Name: "email", Label: "Email"}},
 												Width:      w.FieldMD,
 											},
 											w.Field{
 												Label: "Temporary password",
-												Parts: []w.FieldPart{
-													w.Input{Name: "temporary.password", Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true},
-												},
+												Parts: []w.FieldPart{w.Input{Name: "password", Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true}},
 												Width: w.FieldMD,
 											},
 											w.Button{Label: "Create user", Kind: w.ButtonPrimary, Submit: true},
@@ -151,7 +149,8 @@ func Admin1() Screen {
 										Wide: true,
 									},
 								},
-								Action: "/admin/users/new",
+								Action: "/admin/invites",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "user"}},
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -164,8 +163,8 @@ func Admin1() Screen {
 									},
 									w.Check{
 										On:    true,
-										Name:  "publish.the.registration.form",
-										Value: "1",
+										Name:  "selfReg",
+										Value: "on",
 										Parts: []w.CheckPart{w.Text("Publish the registration form")},
 									},
 									w.CardRow{
@@ -184,7 +183,8 @@ func Admin1() Screen {
 									},
 									w.CardRow{Kind: w.CardTop10, Items: []w.CardRowPart{w.Button{Label: "Save", Submit: true}}},
 								},
-								Action: "/admin/users/registration",
+								Action: "/admin/invites",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "selfreg"}},
 							},
 						},
 					},
@@ -248,7 +248,6 @@ func Admin2() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -369,11 +368,51 @@ func Admin2() Screen {
 								},
 								State: w.RowGone,
 							},
-						},
-					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed."),
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("olga")}},
+									{Parts: []w.CellPart{w.Text("Administrator")}},
+									{Parts: []w.CellPart{w.Text("2026-05-11")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-16 08:55")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+									{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+									{
+										Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("petr")}},
+									{Parts: []w.CellPart{w.Text("User")}},
+									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-12 21:14")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+									{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+									{
+										Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("ivan")}},
+									{Parts: []w.CellPart{w.Text("User")}},
+									{Parts: []w.CellPart{w.Text("2026-07-20")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-15 10:30")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("—")}},
+									{
+										Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+										Acts:  true,
+									},
+								},
+							},
 						},
 					},
 				},
@@ -390,7 +429,6 @@ func Admin24() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -512,11 +550,51 @@ func Admin24() Screen {
 									},
 									State: w.RowGone,
 								},
-							},
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed."),
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("olga")}},
+										{Parts: []w.CellPart{w.Text("Administrator")}},
+										{Parts: []w.CellPart{w.Text("2026-05-11")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-16 08:55")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("petr")}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-12 21:14")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("ivan")}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-07-20")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 10:30")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
 							},
 						},
 					},
@@ -590,7 +668,6 @@ func Admin34() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -712,11 +789,51 @@ func Admin34() Screen {
 									},
 									State: w.RowGone,
 								},
-							},
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Deleting an account is confirmed in a dialogue of its own. Reset a password, in the head, sets a temporary password and names what a reset destroys before it is pressed."),
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("olga")}},
+										{Parts: []w.CellPart{w.Text("Administrator")}},
+										{Parts: []w.CellPart{w.Text("2026-05-11")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-16 08:55")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("petr")}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-12 21:14")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+										{Parts: []w.CellPart{w.Badge{Label: "deposited"}}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("ivan")}},
+										{Parts: []w.CellPart{w.Text("User")}},
+										{Parts: []w.CellPart{w.Text("2026-07-20")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 10:30")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}},
+										{
+											Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+											Acts:  true,
+										},
+									},
+								},
 							},
 						},
 					},
@@ -774,7 +891,6 @@ func Admin3() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1020,7 +1136,6 @@ func Admin32() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1279,7 +1394,6 @@ func Admin33() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1537,7 +1651,6 @@ func Admin4() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1759,7 +1872,6 @@ func Admin25() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1847,7 +1959,6 @@ func Admin26() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1940,7 +2051,6 @@ func Admin5() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2079,7 +2189,6 @@ func Admin27() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2188,7 +2297,6 @@ func Admin28() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2303,7 +2411,6 @@ func Admin29() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2492,7 +2599,6 @@ func Admin6() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2713,7 +2819,6 @@ func Admin30() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -2962,7 +3067,6 @@ func Admin31() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -3053,7 +3157,6 @@ func Admin7() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
 		},

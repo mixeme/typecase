@@ -672,7 +672,13 @@ var cardVariants = []cardVariant{{"tc-card--edge-accent", "tc-card--flush", "Car
 
 func (g *gen) card(e *El) string {
 	var items []string
+	var hidden []*El
 	for _, k := range e.Els() {
+		if k.Tag == "input" && k.Attr("type") == "hidden" {
+			// the hidden fields of a card that is a form (Carrel's task 195)
+			hidden = append(hidden, k)
+			continue
+		}
 		kind := firstOf(k, cardText)
 		row := firstOf(k, cardRow)
 		switch {
@@ -715,6 +721,9 @@ func (g *gen) card(e *El) string {
 			}
 			if k.Has("tc-card__fields--rule") {
 				s += ", Rule: true"
+			}
+			if k.Has("tc-card__fields--top") {
+				s += ", Top: true"
 			}
 			items = append(items, s+"}")
 		case k.Has("tc-card__split"):
@@ -804,6 +813,9 @@ func (g *gen) card(e *El) string {
 			f = append(f, "ID: "+q(id))
 		}
 		f = append(f, "Action: "+q(e.Attr("action")))
+		if len(hidden) > 0 {
+			f = append(f, "Fields: "+hiddens(hidden))
+		}
 	}
 	return "w.Card{" + join(f, ", ") + "}"
 }

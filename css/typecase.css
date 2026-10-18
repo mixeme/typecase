@@ -1280,6 +1280,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-card__fields--gap10-12.tc-card__fields--gap10-12{gap:10px 12px}
 .tc-card__top10.tc-card__top10{margin-top:10px}
 .tc-card__fields--rule.tc-card__fields--rule{margin-top:12px;padding-top:11px;border-top:.5px solid var(--tc-hair)}
+/* Ряд полей с отказами под ними: поля — по верху, чтобы отказ не поднимал соседей. */
+.tc-card__fields--top.tc-card__fields--top{align-items:flex-start}
 .tc-card__lede.tc-card__lede{font-size:12.5px;color:var(--tc-muted);margin-bottom:10px}
 .tc-main__diag.tc-main__diag{padding:0 20px 14px}
 .tc-dialog__logo.tc-dialog__logo{justify-content:center;margin:0 0 13px}

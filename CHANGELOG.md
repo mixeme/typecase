@@ -80,6 +80,9 @@ do, not what the authors did.
 - **`Input.Of`** — the form a field belongs to without standing in it, as
   `MenuItem.Of` and `Send.Of`: an address in a head beside the button
   that sends it.
+- **`CardFields.Top`** — a card's row of fields aligned by their tops:
+  refusals under some do not lift the others; a button stands in a
+  `Field` with an empty label.
 - `MsgFlushY8` — a message 8 px from what stands above and below it,
   none at the sides: a refusal between a field and a tree in a card.
 - **A sheet's head takes a `Drop`** (`Drop.Place` pushes it to the end),
@@ -788,6 +791,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Administration without polling, the cards whole** (Carrel's task 195
+  p. 8; accepted by the owner 18.10): no «2 min ago» in any administration
+  frame (19); Users has six rows for «6 accounts · 2 administrators · 4
+  covered» and no line under the table; `s-admin-18` keeps Role and Create
+  link with only Send invitation off; `s-admin-19` keeps Role and the
+  warning, its fields on one line; the optional email is empty, no «—»;
+  the forms name their fields as the server does.
 - The arrow of a pick (and of a folded switch) stands 1.5 px higher: its
   middle on the middle of the words beside it (the owner, 18.10). No box
   moves.

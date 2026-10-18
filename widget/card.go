@@ -172,11 +172,15 @@ type CardFields struct {
 	Items []CardFieldsPart
 	Wide  bool // 10/12 px gaps
 	Rule  bool // a rule above: another way to do it
+	// Top aligns the fields by their tops: refusals under some of them do
+	// not lift the others; a button stands in a Field with an empty label
+	// to keep the inputs' line (Carrel's task 195).
+	Top bool
 }
 
 func (f CardFields) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, "tc-card__fields", pick(f.Wide, "tc-card__fields--gap10-12"), pick(f.Rule, "tc-card__fields--rule")) + `>`)
+	s.WriteString(`<div` + class(nil, "tc-card__fields", pick(f.Wide, "tc-card__fields--gap10-12"), pick(f.Rule, "tc-card__fields--rule"), pick(f.Top, "tc-card__fields--top")) + `>`)
 	for _, it := range f.Items {
 		s.WriteString(it.html(nil))
 	}

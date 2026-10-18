@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("value", w.Input{Name: "email", Label: "Email"}, "s-admin-1", "tc-in", 6),
 	form("placeholder", w.Input{Kind: w.InputPassword, Name: "password", Placeholder: "leave blank to keep the current one", Label: "Password"}, "s-admin-3", "tc-in", 10),
 	form("value", w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"}, "s-admin-5", "tc-in", 3),
 	form("error", w.Input{Name: "url", Value: "carrel.example", Label: "Base address", Mono: true, Error: true, Of: "install", Variant: w.Input11_5}, "s-admin-26", "tc-in", 1),
@@ -17,9 +18,9 @@ var _ = add(
 	form("focus-empty", w.Input{Label: "Display name", Focus: true}, "s-contacts-27", "tc-in", 2),
 	form("error-empty", w.Input{Label: "Password", Focus: true, Error: true}, "s-auth-13", "tc-in", 2),
 	form("template-row", w.Input{Name: "tel.{n}", Label: "Number", Mono: true}, "components-38", "tc-in", 5),
-	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 1),
+	form("error", w.Input{Value: "anna", Label: "Login", Error: true}, "s-admin-19", "tc-in", 2),
 	form("value", w.Input{Value: "anna@example.org", Label: "Email"}, "s-auth-12", "tc-in", 2),
-	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 3),
+	form("error-mono", w.Input{Value: "9f2", Label: "Temporary password", Mono: true, Error: true}, "s-admin-19", "tc-in", 4),
 	form("focus", w.Input{Value: "2026-07", Label: "Name of the new folder", Focus: true, Variant: w.InputFill}, "s-files-13", "tc-in", 2),
 	form("error", w.Input{Value: "31.02.1987", Label: "Birthday", Mono: true, Focus: true, Error: true, Numeric: true}, "s-contacts-18", "tc-in", 1),
 	form("value", w.Input{Value: "Анна Ковалёва", Label: "Display name"}, "components-10", "tc-in", 1),
