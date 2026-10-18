@@ -137,6 +137,8 @@ var Routes = []Route{
 	{Frame: "s-admin-2", Caption: "Администрирование · пользователи", Screen: Admin2},
 	{Frame: "s-admin-24", Caption: "Сброс пароля · лист поверх Users", Screen: Admin24},
 	{Frame: "s-admin-3", Caption: "Администрирование · настройки", Screen: Admin3},
+	{Frame: "s-admin-32", Caption: "Настройки · почта настроена, проба ушла", Screen: Admin32},
+	{Frame: "s-admin-33", Caption: "Настройки · отказ поля", Screen: Admin33},
 	{Frame: "s-admin-4", Caption: "Администрирование · проверка установки", Screen: Admin4},
 	{Frame: "s-admin-25", Caption: "Проверка установки · ещё не запускалась", Screen: Admin25},
 	{Frame: "s-admin-26", Caption: "Проверка установки · негодный адрес", Screen: Admin26},

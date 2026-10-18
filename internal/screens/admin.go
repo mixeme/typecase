@@ -649,29 +649,29 @@ func Admin3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Invite lifetime, h",
-										Parts: []w.FieldPart{w.Input{Name: "invite.lifetime.h", Value: "72", Label: "Invite lifetime, h", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "inviteTTL", Value: "72", Label: "Invite lifetime, h", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Idle timeout, h",
-										Parts: []w.FieldPart{w.Input{Name: "idle.timeout.h", Value: "12", Label: "Idle timeout, h", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "idle", Value: "12", Label: "Idle timeout, h", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Session life, d",
-										Parts: []w.FieldPart{w.Input{Name: "session.life.d", Value: "30", Label: "Session life, d", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "session", Value: "30", Label: "Session life, d", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Instance name",
-										Parts: []w.FieldPart{w.Input{Name: "instance.name", Value: "Carrel", Label: "Instance name"}},
+										Parts: []w.FieldPart{w.Input{Name: "name", Value: "Carrel", Label: "Instance name"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Public address",
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:     "public.address",
+												Name:     "publicURL",
 												Value:    "https://carrel.example",
 												Label:    "Public address",
 												Mono:     true,
@@ -701,7 +701,7 @@ func Admin3() Screen {
 										Label: "Encryption",
 										Parts: []w.FieldPart{
 											w.Pick{
-												Name:    "encryption",
+												Name:    "security",
 												Options: []w.PickOption{{Value: "starttls", Label: "STARTTLS", On: true}},
 												Label:   "Encryption",
 											},
@@ -715,17 +715,24 @@ func Admin3() Screen {
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Name: "password", Placeholder: "leave blank to keep the current one", Label: "Password"}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:        w.InputPassword,
+												Name:        "password",
+												Placeholder: "leave blank to keep the current one",
+												Label:       "Password",
+											},
+										},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "From address",
-										Parts: []w.FieldPart{w.Input{Name: "from.address", Placeholder: "carrel@example.org", Label: "From address"}},
+										Parts: []w.FieldPart{w.Input{Name: "from", Placeholder: "carrel@example.org", Label: "From address"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "From name",
-										Parts: []w.FieldPart{w.Input{Name: "from.name", Placeholder: "Carrel", Label: "From name"}},
+										Parts: []w.FieldPart{w.Input{Name: "fromName", Placeholder: "Carrel", Label: "From name"}},
 										Width: w.FieldMD,
 									},
 								},
@@ -736,8 +743,8 @@ func Admin3() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Check{
-												Name:  "let.users.send.letters.and.links.from.carrel",
-												Value: "1",
+												Name:  "people",
+												Value: "on",
 												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
 											},
 											w.FieldHint{
@@ -754,11 +761,11 @@ func Admin3() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "noreply@carrel.example", On: true, Value: "noreply.carrel.example"},
-													{Label: "login@carrel.example", Value: "login.carrel.example"},
+													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
+													{Label: "login@carrel.example", Value: "login"},
 												},
 												Variant: w.SegStart,
-												Name:    "sender.address",
+												Name:    "sender",
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -772,12 +779,12 @@ func Admin3() Screen {
 									},
 									w.Field{
 										Label: "Attachment, MB",
-										Parts: []w.FieldPart{w.Input{Name: "attachment.mb", Value: "2", Label: "Attachment, MB", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "attach", Value: "2", Label: "Attachment, MB", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Letter, MB",
-										Parts: []w.FieldPart{w.Input{Name: "letter.mb", Value: "8", Label: "Letter, MB", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "letter", Value: "8", Label: "Letter, MB", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -787,7 +794,7 @@ func Admin3() Screen {
 									},
 									w.Field{
 										Label: "Letters a day",
-										Parts: []w.FieldPart{w.Input{Name: "letters.a.day", Value: "50", Label: "Letters a day", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "perDay", Value: "50", Label: "Letters a day", Mono: true}},
 										Width: w.FieldXS,
 									},
 								},
@@ -800,25 +807,537 @@ func Admin3() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{
-														Name:        "send.test.message.to",
-														Placeholder: "you@example.org",
-														Label:       "Send test message to",
-														Variant:     w.InputFill,
-													},
-													w.Button{Label: "Send test", To: "/admin/settings/mail/test", Submit: true, State: w.ButtonDisabled},
+													w.Input{Name: "to", Placeholder: "you@example.org", Label: "Send test message to", Variant: w.InputFill},
+													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
 												},
 												Gap: w.LineGap8,
 											},
-											w.FieldHint{Parts: []w.Inline{w.Text("Mail is not configured: there is nothing to send through yet.")}},
 										},
-										Width: w.FieldMD,
+										Width: w.FieldLG,
 									},
 								},
 							},
 						},
 						ID:     "admin-settings",
 						Action: "/admin/settings",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin32 is frame «Настройки · почта настроена, проба ушла» (s-admin-32).
+func Admin32() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "dup", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 3,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Settings"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Global settings and mail")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Discard", Href: "/admin/settings"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "admin-settings"},
+							},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Global"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Invite lifetime, h",
+										Parts: []w.FieldPart{w.Input{Name: "inviteTTL", Value: "72", Label: "Invite lifetime, h", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Idle timeout, h",
+										Parts: []w.FieldPart{w.Input{Name: "idle", Value: "12", Label: "Idle timeout, h", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Session life, d",
+										Parts: []w.FieldPart{w.Input{Name: "session", Value: "30", Label: "Session life, d", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Instance name",
+										Parts: []w.FieldPart{w.Input{Name: "name", Value: "Carrel", Label: "Instance name"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Public address",
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:     "publicURL",
+												Value:    "https://carrel.example",
+												Label:    "Public address",
+												Mono:     true,
+												ReadOnly: true,
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
+										},
+										Width: w.FieldLG,
+									},
+								},
+								Variant: w.FieldSetLead,
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Mail"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Host",
+										Parts: []w.FieldPart{w.Input{Name: "host", Value: "smtp.slovo.example", Label: "Host", Mono: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Port",
+										Parts: []w.FieldPart{w.Input{Name: "port", Value: "587", Label: "Port", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Encryption",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "security",
+												Options: []w.PickOption{{Value: "starttls", Label: "STARTTLS", On: true}},
+												Label:   "Encryption",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "username", Value: "carrel", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:        w.InputPassword,
+												Name:        "password",
+												Placeholder: "leave blank to keep the current one",
+												Label:       "Password",
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "From address",
+										Parts: []w.FieldPart{w.Input{Name: "from", Value: "carrel@slovo.example", Label: "From address"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "From name",
+										Parts: []w.FieldPart{w.Input{Name: "fromName", Placeholder: "Carrel", Label: "From name"}},
+										Width: w.FieldMD,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Letters from users", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "people",
+												Value: "on",
+												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
+												},
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Field{
+										Label: "Sender address",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
+													{Label: "login@carrel.example", Value: "login"},
+												},
+												Variant: w.SegStart,
+												Name:    "sender",
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
+													w.Mono{Text: "noreply@carrel.example"},
+													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Field{
+										Label: "Attachment, MB",
+										Parts: []w.FieldPart{w.Input{Name: "attach", Value: "2", Label: "Attachment, MB", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Letter, MB",
+										Parts: []w.FieldPart{w.Input{Name: "letter", Value: "8", Label: "Letter, MB", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Recipients",
+										Parts: []w.FieldPart{w.Input{Name: "recipients", Value: "10", Label: "Recipients", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Letters a day",
+										Parts: []w.FieldPart{w.Input{Name: "perDay", Value: "50", Label: "Letters a day", Mono: true}},
+										Width: w.FieldXS,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Test"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Send test message to",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Name: "to", Value: "mix@slovo.example", Label: "Send test message to", Variant: w.InputFill},
+													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Msg{
+												Parts: []w.MsgPart{
+													w.Strong("Sent."),
+													w.Text(" The relay answered "),
+													w.Mono{Text: "250 2.0.0 Ok: queued as 4FB1C2"},
+													w.Text("."),
+												},
+												Space: w.MsgFlush,
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+						},
+						ID:     "admin-settings",
+						Action: "/admin/settings",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Admin33 is frame «Настройки · отказ поля» (s-admin-33).
+func Admin33() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Administration"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},
+								{Icon: "adm", Label: "Settings", Href: "#"},
+								{Icon: "shield", Label: "Installation", Href: "#"},
+								{Icon: "search", Label: "DAV validator", Href: "#"},
+								{Icon: "dup", Label: "Key escrow", Href: "#"},
+								{Icon: "clock", Label: "Audit log", Href: "#"},
+							},
+							On: 3,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "Mail is going out",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last sent "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text:   "Checks passed",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last check "), w.Mono{Text: "2026-08-16 09:12"}}, Size: w.Dim11},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Settings"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Global settings and mail")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Discard", Href: "/admin/settings"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "admin-settings"},
+							},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Global"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Invite lifetime, h",
+										Parts: []w.FieldPart{w.Input{Name: "inviteTTL", Value: "72", Label: "Invite lifetime, h", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Idle timeout, h",
+										Parts: []w.FieldPart{w.Input{Name: "idle", Value: "12", Label: "Idle timeout, h", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Session life, d",
+										Parts: []w.FieldPart{w.Input{Name: "session", Value: "30", Label: "Session life, d", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Instance name",
+										Parts: []w.FieldPart{w.Input{Name: "name", Value: "Carrel", Label: "Instance name"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Public address",
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:     "publicURL",
+												Value:    "https://carrel.example",
+												Label:    "Public address",
+												Mono:     true,
+												ReadOnly: true,
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
+										},
+										Width: w.FieldLG,
+									},
+								},
+								Variant: w.FieldSetLead,
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Mail"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Host",
+										Parts: []w.FieldPart{w.Input{Name: "host", Value: "smtp.slovo.example", Label: "Host", Mono: true}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Port",
+										Parts: []w.FieldPart{
+											w.Input{Name: "port", Value: "70000", Label: "Port", Mono: true, Error: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("A port from 1 to 65535.")}, Variant: w.HintDanger},
+										},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Encryption",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "security",
+												Options: []w.PickOption{{Value: "starttls", Label: "STARTTLS", On: true}},
+												Label:   "Encryption",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "username", Value: "carrel", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:        w.InputPassword,
+												Name:        "password",
+												Placeholder: "leave blank to keep the current one",
+												Label:       "Password",
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "From address",
+										Parts: []w.FieldPart{w.Input{Name: "from", Value: "carrel@slovo.example", Label: "From address"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "From name",
+										Parts: []w.FieldPart{w.Input{Name: "fromName", Placeholder: "Carrel", Label: "From name"}},
+										Width: w.FieldMD,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Letters from users", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "people",
+												Value: "on",
+												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
+												},
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Field{
+										Label: "Sender address",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
+													{Label: "login@carrel.example", Value: "login"},
+												},
+												Variant: w.SegStart,
+												Name:    "sender",
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
+													w.Mono{Text: "noreply@carrel.example"},
+													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Field{
+										Label: "Attachment, MB",
+										Parts: []w.FieldPart{w.Input{Name: "attach", Value: "2", Label: "Attachment, MB", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Letter, MB",
+										Parts: []w.FieldPart{w.Input{Name: "letter", Value: "8", Label: "Letter, MB", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Recipients",
+										Parts: []w.FieldPart{w.Input{Name: "recipients", Value: "10", Label: "Recipients", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Letters a day",
+										Parts: []w.FieldPart{w.Input{Name: "perDay", Value: "50", Label: "Letters a day", Mono: true}},
+										Width: w.FieldXS,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Test"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Send test message to",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Name: "to", Value: "mix@slovo.example", Label: "Send test message to", Variant: w.InputFill},
+													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Msg{
+												Parts: []w.MsgPart{w.Text("The relay as typed cannot be used: see the marked fields.")},
+												Tone:  w.MsgAlert,
+												Space: w.MsgFlush,
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+						},
+						ID:     "admin-settings",
+						Action: "/admin/settings",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},

@@ -18545,49 +18545,210 @@ password  4c1-tide-oven</div>
         </div>
         <div class="tc-main">
         <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Settings</div><div class="tc-head__sub">Global settings and mail</div></div><div class="tc-acts"><a class="tc-btn" href="/admin/settings">Discard</a><button class="tc-btn is-primary" type="submit" form="admin-settings">Save</button></div></div>
-        <form class="tc-form" id="admin-settings" action="/admin/settings" method="post">
+        <form class="tc-form" id="admin-settings" action="/admin/settings" method="post"><input type="hidden" name="csrf" value="7f3a91de">
           <div class="tc-fset tc-fset--lead">
             <div class="tc-rubric">Global</div>
-            <div class="tc-field tc-field--xs"><label>Invite lifetime, h</label><input class="tc-in is-mono" type="text" name="invite.lifetime.h" value="72" aria-label="Invite lifetime, h"></div>
-            <div class="tc-field tc-field--xs"><label>Idle timeout, h</label><input class="tc-in is-mono" type="text" name="idle.timeout.h" value="12" aria-label="Idle timeout, h"></div>
-            <div class="tc-field tc-field--xs"><label>Session life, d</label><input class="tc-in is-mono" type="text" name="session.life.d" value="30" aria-label="Session life, d"></div>
-            <div class="tc-field tc-field--md"><label>Instance name</label><input class="tc-in" type="text" name="instance.name" value="Carrel" aria-label="Instance name"></div>
-            <div class="tc-field tc-field--lg"><label>Public address</label><input class="tc-in is-mono" type="text" name="public.address" value="https://carrel.example" aria-label="Public address" readonly>
+            <div class="tc-field tc-field--xs"><label>Invite lifetime, h</label><input class="tc-in is-mono" type="text" name="inviteTTL" value="72" aria-label="Invite lifetime, h"></div>
+            <div class="tc-field tc-field--xs"><label>Idle timeout, h</label><input class="tc-in is-mono" type="text" name="idle" value="12" aria-label="Idle timeout, h"></div>
+            <div class="tc-field tc-field--xs"><label>Session life, d</label><input class="tc-in is-mono" type="text" name="session" value="30" aria-label="Session life, d"></div>
+            <div class="tc-field tc-field--md"><label>Instance name</label><input class="tc-in" type="text" name="name" value="Carrel" aria-label="Instance name"></div>
+            <div class="tc-field tc-field--lg"><label>Public address</label><input class="tc-in is-mono" type="text" name="publicURL" value="https://carrel.example" aria-label="Public address" readonly>
               <span class="tc-field__hint">Links in letters start with it. Set with CARREL_PUBLIC_URL.</span></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Mail <span class="tc-badge is-alert">not configured</span></div>
             <div class="tc-field tc-field--lg"><label>Host</label><input class="tc-in is-mono is-ph" type="text" name="host" placeholder="smtp.example.org" aria-label="Host"></div>
             <div class="tc-field tc-field--xs"><label>Port</label><input class="tc-in is-mono" type="text" name="port" value="587" aria-label="Port"></div>
-            <div class="tc-field tc-field--sm"><label>Encryption</label><span class="tc-in is-pick"><select class="tc-in__list" name="encryption" aria-label="Encryption"><option value="starttls" selected>STARTTLS</option></select></span></div>
+            <div class="tc-field tc-field--sm"><label>Encryption</label><span class="tc-in is-pick"><select class="tc-in__list" name="security" aria-label="Encryption"><option value="starttls" selected>STARTTLS</option></select></span></div>
             <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in is-ph" type="text" name="username" placeholder="—" aria-label="Username"></div>
-            <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="text" name="password" placeholder="leave blank to keep the current one" aria-label="Password"></div>
-            <div class="tc-field tc-field--md"><label>From address</label><input class="tc-in is-ph" type="text" name="from.address" placeholder="carrel@example.org" aria-label="From address"></div>
-            <div class="tc-field tc-field--md"><label>From name</label><input class="tc-in is-ph" type="text" name="from.name" placeholder="Carrel" aria-label="From name"></div>
+            <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="password" name="password" placeholder="leave blank to keep the current one" aria-label="Password"></div>
+            <div class="tc-field tc-field--md"><label>From address</label><input class="tc-in is-ph" type="text" name="from" placeholder="carrel@example.org" aria-label="From address"></div>
+            <div class="tc-field tc-field--md"><label>From name</label><input class="tc-in is-ph" type="text" name="fromName" placeholder="Carrel" aria-label="From name"></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
-            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="let.users.send.letters.and.links.from.carrel" value="1"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
               <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
             <div class="tc-field tc-grow"><label>Sender address</label>
-              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender.address" value="noreply.carrel.example" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender.address" value="login.carrel.example">login@carrel.example</label></span>
+              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
               <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
-            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attachment.mb" value="2" aria-label="Attachment, MB"></div>
-            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter.mb" value="8" aria-label="Letter, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
             <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
-            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="letters.a.day" value="50" aria-label="Letters a day"></div>
+            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
-            <div class="tc-field tc-field--md"><label>Send test message to</label>
-              <span class="tc-line tc-line--gap-8"><input class="tc-in is-ph tc-in--fill" type="text" name="send.test.message.to" placeholder="you@example.org" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail/test" disabled>Send test</button></span>
-              <span class="tc-field__hint">Mail is not configured: there is nothing to send through yet.</span></div>
+            <div class="tc-field tc-field--lg"><label>Send test message to</label>
+              <span class="tc-line tc-line--gap-8"><input class="tc-in is-ph tc-in--fill" type="text" name="to" placeholder="you@example.org" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail-test">Send test</button></span></div>
           </div>
         </form>
       </div></div>
     </div>
   </div>
-  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; пока почта не настроена, кнопка выключена и говорит почему. <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах.</figcaption>
+  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; кнопка не выключается никогда: без сервера в поле Host ответ на неё — «Mail is not configured: there is nothing to send through yet.» (кнопка, выключенная по сохранённому, без сценария не включилась бы от набранного; задача 195 п. 5). <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах.</figcaption>
+  </figure>
+
+<figure>
+  <div class="frame" data-frame="s-admin-32" data-screen="/admin/settings" data-part="sent">
+    <div class="frame-label"><span>Настройки · почта настроена, проба ушла</span><i>дополнительный кадр: sent · /admin/settings</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Administration</div>
+            <div class="tc-nav">
+              <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+            </div>
+          </div>
+          <div class="tc-railfoot">
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Settings</div><div class="tc-head__sub">Global settings and mail</div></div><div class="tc-acts"><a class="tc-btn" href="/admin/settings">Discard</a><button class="tc-btn is-primary" type="submit" form="admin-settings">Save</button></div></div>
+        <form class="tc-form" id="admin-settings" action="/admin/settings" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-fset tc-fset--lead">
+            <div class="tc-rubric">Global</div>
+            <div class="tc-field tc-field--xs"><label>Invite lifetime, h</label><input class="tc-in is-mono" type="text" name="inviteTTL" value="72" aria-label="Invite lifetime, h"></div>
+            <div class="tc-field tc-field--xs"><label>Idle timeout, h</label><input class="tc-in is-mono" type="text" name="idle" value="12" aria-label="Idle timeout, h"></div>
+            <div class="tc-field tc-field--xs"><label>Session life, d</label><input class="tc-in is-mono" type="text" name="session" value="30" aria-label="Session life, d"></div>
+            <div class="tc-field tc-field--md"><label>Instance name</label><input class="tc-in" type="text" name="name" value="Carrel" aria-label="Instance name"></div>
+            <div class="tc-field tc-field--lg"><label>Public address</label><input class="tc-in is-mono" type="text" name="publicURL" value="https://carrel.example" aria-label="Public address" readonly>
+              <span class="tc-field__hint">Links in letters start with it. Set with CARREL_PUBLIC_URL.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Mail</div>
+            <div class="tc-field tc-field--lg"><label>Host</label><input class="tc-in is-mono" type="text" name="host" value="smtp.slovo.example" aria-label="Host"></div>
+            <div class="tc-field tc-field--xs"><label>Port</label><input class="tc-in is-mono" type="text" name="port" value="587" aria-label="Port"></div>
+            <div class="tc-field tc-field--sm"><label>Encryption</label><span class="tc-in is-pick"><select class="tc-in__list" name="security" aria-label="Encryption"><option value="starttls" selected>STARTTLS</option></select></span></div>
+            <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="carrel" aria-label="Username"></div>
+            <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="password" name="password" placeholder="leave blank to keep the current one" aria-label="Password"></div>
+            <div class="tc-field tc-field--md"><label>From address</label><input class="tc-in" type="text" name="from" value="carrel@slovo.example" aria-label="From address"></div>
+            <div class="tc-field tc-field--md"><label>From name</label><input class="tc-in is-ph" type="text" name="fromName" placeholder="Carrel" aria-label="From name"></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
+              <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
+            <div class="tc-field tc-grow"><label>Sender address</label>
+              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
+              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
+            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
+            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Test</div>
+            <div class="tc-field tc-field--lg"><label>Send test message to</label>
+              <span class="tc-line tc-line--gap-8"><input class="tc-in tc-in--fill" type="text" name="to" value="mix@slovo.example" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail-test">Send test</button></span></div>
+            <div class="tc-field tc-field--full"><div class="tc-msg tc-msg--flush"><b>Sent.</b> The relay answered <span class="tc-mono">250 2.0.0 Ok: queued as 4FB1C2</span>.</div></div>
+          </div>
+        </form>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Почта настроена: у рубрики Mail бейджа нет. Проба ушла — под полем ответ релея как есть, моноширинно; ничего не сохранено.</figcaption>
+  </figure>
+
+<figure>
+  <div class="frame" data-frame="s-admin-33" data-screen="/admin/settings" data-part="refused">
+    <div class="frame-label"><span>Настройки · отказ поля</span><i>дополнительный кадр: refused · /admin/settings</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-shell__body">
+        <div class="tc-shell__rail">
+          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+          <div class="tc-railsec">
+            <div class="tc-rubric">Administration</div>
+            <div class="tc-nav">
+              <a class="tc-nav__item" href="#"><svg><use href="#i-plus"/></svg>Add users<span class="tc-num">2</span></a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-con"/></svg>Users<span class="tc-num">6</span></a>
+              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-adm"/></svg>Settings</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-shield"/></svg>Installation</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-search"/></svg>DAV validator</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-dup"/></svg>Key escrow</a>
+              <a class="tc-nav__item" href="#"><svg><use href="#i-clock"/></svg>Audit log</a>
+            </div>
+          </div>
+          <div class="tc-railfoot">
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Mail is going out<br><span class="tc-dim tc-dim--t11">Last sent <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Checks passed<br><span class="tc-dim tc-dim--t11">Last check <span class="tc-mono">2026-08-16 09:12</span></span></div>
+            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+          </div>
+        </div>
+        <div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Settings</div><div class="tc-head__sub">Global settings and mail</div></div><div class="tc-acts"><a class="tc-btn" href="/admin/settings">Discard</a><button class="tc-btn is-primary" type="submit" form="admin-settings">Save</button></div></div>
+        <form class="tc-form" id="admin-settings" action="/admin/settings" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+          <div class="tc-fset tc-fset--lead">
+            <div class="tc-rubric">Global</div>
+            <div class="tc-field tc-field--xs"><label>Invite lifetime, h</label><input class="tc-in is-mono" type="text" name="inviteTTL" value="72" aria-label="Invite lifetime, h"></div>
+            <div class="tc-field tc-field--xs"><label>Idle timeout, h</label><input class="tc-in is-mono" type="text" name="idle" value="12" aria-label="Idle timeout, h"></div>
+            <div class="tc-field tc-field--xs"><label>Session life, d</label><input class="tc-in is-mono" type="text" name="session" value="30" aria-label="Session life, d"></div>
+            <div class="tc-field tc-field--md"><label>Instance name</label><input class="tc-in" type="text" name="name" value="Carrel" aria-label="Instance name"></div>
+            <div class="tc-field tc-field--lg"><label>Public address</label><input class="tc-in is-mono" type="text" name="publicURL" value="https://carrel.example" aria-label="Public address" readonly>
+              <span class="tc-field__hint">Links in letters start with it. Set with CARREL_PUBLIC_URL.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Mail</div>
+            <div class="tc-field tc-field--lg"><label>Host</label><input class="tc-in is-mono" type="text" name="host" value="smtp.slovo.example" aria-label="Host"></div>
+            <div class="tc-field tc-field--xs"><label>Port</label><input class="tc-in is-mono is-error" type="text" name="port" value="70000" aria-label="Port"><span class="tc-field__hint tc-dim--danger">A port from 1 to 65535.</span></div>
+            <div class="tc-field tc-field--sm"><label>Encryption</label><span class="tc-in is-pick"><select class="tc-in__list" name="security" aria-label="Encryption"><option value="starttls" selected>STARTTLS</option></select></span></div>
+            <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="carrel" aria-label="Username"></div>
+            <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="password" name="password" placeholder="leave blank to keep the current one" aria-label="Password"></div>
+            <div class="tc-field tc-field--md"><label>From address</label><input class="tc-in" type="text" name="from" value="carrel@slovo.example" aria-label="From address"></div>
+            <div class="tc-field tc-field--md"><label>From name</label><input class="tc-in is-ph" type="text" name="fromName" placeholder="Carrel" aria-label="From name"></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
+              <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
+            <div class="tc-field tc-grow"><label>Sender address</label>
+              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
+              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
+            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
+            <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
+            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Test</div>
+            <div class="tc-field tc-field--lg"><label>Send test message to</label>
+              <span class="tc-line tc-line--gap-8"><input class="tc-in tc-in--fill" type="text" name="to" value="mix@slovo.example" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail-test">Send test</button></span></div>
+            <div class="tc-field tc-field--full"><div class="tc-msg is-alert tc-msg--flush">The relay as typed cannot be used: see the marked fields.</div></div>
+          </div>
+        </form>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Набранное не годится: поле с ошибкой, причина под ним — она же граница числа. Проба по такому релею не идёт, ответ под полем пробы называет причину. Save отказывает так же, у тех же полей.</figcaption>
   </figure>
 
 <div class="frames">

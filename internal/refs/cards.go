@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Sent."), w.Text(" The relay answered "), w.Mono{Text: "250 2.0.0 Ok: queued as 4FB1C2"}, w.Text(".")}, Space: w.MsgFlush}, "s-admin-32", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert}, "s-admin-28", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("This combination cannot be written.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-conflict-8", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Not moved yet."), w.Text(" Your edit also moves this note to "), w.Mark{Colour: "#6B4E7A"}, w.Text(" nextcloud · Дневник.")}, Space: w.MsgFlushSides}, "s-conflict-11", "tc-msg", 1),

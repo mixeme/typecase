@@ -781,6 +781,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- `s-admin-3`: the settings form names its fields as the server does;
+  «Send test» is never off — it sends what is typed, and with no Host its
+  answer says so; a password field; a wider test address. Extra frames
+  `s-admin-32` (mail configured, the relay's answer to the test) and `-33`
+  (a field refused: «A port from 1 to 65535.» — the bounds of a number are
+  said by its refusal; the test not sent) — Carrel's task 195 p. 5;
+  accepted by the owner 18.10.
 - **Key escrow and the password's history** (Carrel's tasks 195 p. 4, 202
   p. 1; accepted by the owner 18.10). `s-admin-6`: the forms are one page
   form each (`action` hidden), password fields, «… logged and shown to
