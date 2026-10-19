@@ -103,6 +103,8 @@ var Routes = []Route{
 	{Frame: "s-plan-1", Caption: "Новое устройство · профиль Apple", Screen: Plan1},
 	{Frame: "s-plan-2", Caption: "Android · DAVx5", Screen: Plan2},
 	{Frame: "s-plan-3", Caption: "Показать пароль", Screen: Plan3},
+	{Frame: "s-davloom-5", Caption: "davloom · пароль перед выдачей", Screen: Davloom5},
+	{Frame: "account-15", Caption: "Учётная запись · удаление", Screen: Account15},
 	{Frame: "s-plan-4", Caption: "Thunderbird", Screen: Plan4},
 	{Frame: "s-plan-5", Caption: "Anything else", Screen: Plan5},
 	{Frame: "s-davloom-1", Caption: "davloom · точка подключения и устройства", Screen: Davloom1},

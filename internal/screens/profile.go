@@ -1443,22 +1443,24 @@ func Profile3() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/settings/connections/nextcloud/password",
-					Icon:   "shield",
-					Title:  "Show password",
-					Head:   []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
+					Action: "/app/settings/unlock",
+					Fields: []w.Hidden{
+						{Name: "csrf", Value: "7f3a91de"},
+						{Name: "back", Value: "/app/settings/connections"},
+						{Name: "for", Value: "nextcloud"},
+					},
+					Title: "Show password",
+					Head:  []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "Your Carrel password",
 							Parts: []w.FieldPart{
-								w.Input{Name: "your.carrel.password", Value: "••••••••••", Label: "Your Carrel password", Focus: true},
+								w.Input{Kind: w.InputPassword, Name: "password", Label: "Your Carrel password", Focus: true, Required: true},
 							},
 							Width: w.FieldW100,
 						},
 						w.Dim{
-							Parts: []w.Inline{
-								w.Text("Unlocks credentials everywhere for five minutes: passwords, device profiles, key escrow — anything handed out or handed over."),
-							},
+							Parts:   []w.Inline{w.Text("Unlocks stored credentials for five minutes.")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
@@ -1466,7 +1468,11 @@ func Profile3() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Show", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth400,
 				},

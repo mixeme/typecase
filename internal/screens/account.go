@@ -186,7 +186,7 @@ func Account1() Screen {
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete account", Kind: w.ButtonDangerSolid},
-						Note:   "Deletes the account and the saved connections. Data on the DAV servers stays: Carrel never touches it.",
+						Note:   "Deletes the account and the saved connections. Data on the DAV servers stays.",
 					},
 				},
 			},

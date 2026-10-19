@@ -796,6 +796,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The password sheet, one for every handing out** (Carrel's task 193
+  p. 3, 4; accepted by the owner 19.10): its title says what for, the
+  subject whose, the main button the act; a password field; one line
+  «Unlocks stored credentials for five minutes.»; Cancel a link to the
+  screen under it. `s-plan-3` is «Generate profile» (it said «Show
+  password · nextcloud»). New `s-davloom-5` (over the device form, what
+  was typed kept, «Create password») and `account-15` (Delete account: the
+  password is the confirmation; no line about five minutes). «Carrel
+  never touches it» is gone from the account's deletion: not true.
 - **The backup job's form** (`s-backup-2`, `-3`; Carrel's task 193 p. 1,
   2; accepted by the owner 19.10): «What to copy» — a column a connection,
   collections are checkboxes `src` of the form, a connection's tick only
