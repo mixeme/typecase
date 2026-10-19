@@ -837,6 +837,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Appearance: the time zone as a line of text** (Carrel's task 193;
+  accepted by the owner 19.10): «Time zone · Europe/Moscow · this
+  instance» instead of a read-only field that went with the form; the
+  hint under the dates and times is two short sentences.
 - **Connections: «Update collection list», a row's tick that sends
   itself, the shown password on the page** (Carrel's task 193; accepted by
   the owner 19.10). Each card that answers has «Update collection list»

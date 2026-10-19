@@ -19837,14 +19837,14 @@ jobs:
           <div class="tc-rubric">Dates and times</div>
           <div class="tc-field tc-field--md"><label>Week starts on</label><span class="tc-in is-pick"><select class="tc-in__list" name="week.starts.on" aria-label="Week starts on"><option value="monday" selected>Monday</option></select></span></div>
           <div class="tc-field tc-field--md"><label>Time</label><span class="tc-in is-pick"><select class="tc-in__list" name="time" aria-label="Time"><option value="24.hour" selected>24-hour</option></select></span></div>
-          <div class="tc-field tc-field--lg"><label>Time zone</label><input class="tc-in" type="text" name="time.zone" value="Europe/Moscow · this instance" aria-label="Time zone" readonly></div>
-          <div class="tc-field tc-grow"><span class="tc-field__hint">Week start and 12/24-hour clock live in the account: time is assembled on the server, so another browser sees the same. Time zone is one per instance, set by the administrator — an event shown in two zones to two people is a source of mistakes, not a convenience.</span></div>
+          <dl class="tc-fields tc-grow tc-fields--bleed tc-fields--cols130"><dt>Time zone</dt><dd><span class="tc-mono">Europe/Moscow</span> · this instance</dd></dl>
+          <div class="tc-field tc-grow"><span class="tc-field__hint">Week start and the clock are kept in the account: another browser shows the same. The time zone is the instance’s, set by the administrator.</span></div>
         </div>
       </form>
     </div></div>
   </div>
 </div>
-<figcaption>Последний пункт рейла. <b>Два места хранения, и они не смешиваются.</b> Тема, плотность и колонки списка — этот браузер: форма шлёт их серверу вместе с остальным, и он кладёт их в куку этого браузера, а не в аккаунт (задача 158) — другой браузер их не видит, и в базу ради переключателя темы ничего не пишется. Первый день недели и 12/24 часа — <b>аккаунт</b>: время собирается на сервере, и другой браузер должен увидеть те же часы. Часовой пояс — одно на экземпляр, его ставит администратор. Подзаголовок не говорит «Kept in this browser» про весь экран: для часов это неверно.</figcaption>
+<figcaption>Последний пункт рейла. <b>Два места хранения, и они не смешиваются.</b> Тема, плотность и колонки списка — этот браузер: форма шлёт их серверу вместе с остальным, и он кладёт их в куку этого браузера, а не в аккаунт (задача 158) — другой браузер их не видит, и в базу ради переключателя темы ничего не пишется. Первый день недели и 12/24 часа — <b>аккаунт</b>: время собирается на сервере, и другой браузер должен увидеть те же часы. Часовой пояс — одно на экземпляр, его ставит администратор: здесь он строкой текста, не полем — менять его тут нечем (Carrel 193). Подзаголовок не говорит «Kept in this browser» про весь экран: для часов это неверно.</figcaption>
 </figure>
 
 <div class="frames">

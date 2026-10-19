@@ -191,6 +191,8 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
 
 	// tc-fields
+	cards("mono-line", w.Fields{Items: []w.FieldsItem{
+		{Term: "Time zone", Value: []w.ValuePart{w.Mono{Text: "Europe/Moscow"}, w.Text(" · this instance")}}}, Variant: w.FieldsBleed130}, "appearance-1", "tc-fields", 1),
 	cards("rich", w.Fields{Items: []w.FieldsItem{
 		{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
 		{Term: "Recovered", Value: []w.ValuePart{w.Mono{Text: "2026-07-11 14:02"}, w.Text(" · olga, administrator: the password was reset")}}}, Variant: w.FieldsBleed}, "account-16", "tc-fields", 1),

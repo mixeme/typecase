@@ -175,18 +175,18 @@ func Appearance1() Screen {
 										},
 										Width: w.FieldMD,
 									},
-									w.Field{
-										Label: "Time zone",
-										Parts: []w.FieldPart{
-											w.Input{Name: "time.zone", Value: "Europe/Moscow · this instance", Label: "Time zone", ReadOnly: true},
+									w.Fields{
+										Items: []w.FieldsItem{
+											{Term: "Time zone", Value: []w.ValuePart{w.Mono{Text: "Europe/Moscow"}, w.Text(" · this instance")}},
 										},
-										Width: w.FieldLG,
+										Variant: w.FieldsBleed130,
+										Place:   w.Grown,
 									},
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Week start and 12/24-hour clock live in the account: time is assembled on the server, so another browser sees the same. Time zone is one per instance, set by the administrator — an event shown in two zones to two people is a source of mistakes, not a convenience."),
+													w.Text("Week start and the clock are kept in the account: another browser shows the same. The time zone is the instance’s, set by the administrator."),
 												},
 											},
 										},
