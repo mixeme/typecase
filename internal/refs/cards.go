@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The archive is larger than 16 MB. Choose a folder of your storage for it, or put it there and choose "), w.Strong("From a server"), w.Text(".")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12}, "s-backup-16", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("• 10 collections"), w.Break{}, w.Text("• 1 published link"), w.Break{}, w.Text("• 1 source of a backup job"), w.Break{}, w.Text("• 1 davloom device’s sync of them")}, Space: w.MsgFlush}, "s-profile-26", "tc-msg", 2),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Strong("Also started by"), w.Break{}, w.Text("• Run now — in the job list"), w.Break{}, w.Text("• Your own clock — "), w.Mono{Text: "cron"}, w.Text(", GoSentry, a job in Gitea, "), w.Mono{Text: "curl"}, w.Text(": External trigger in the job’s menu")}, Space: w.MsgFlushTop4}, "s-backup-2", "tc-msg", 4),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in attachments already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushY8}, "s-files-19", "tc-msg", 1),
@@ -410,6 +411,9 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("fields", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "From this computer"},
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Archive", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}}}, Gap: w.LineGap8}}, Width: w.FieldFull}, w.Field{Label: "Storage for a large archive", Parts: []w.FieldPart{w.Pick{Name: "store", Options: []w.PickOption{{Value: "", Label: "None — up to 16 MB"}, {Value: "nextcloud|files", Label: "nextcloud · Files"}, {Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true}}, Label: "Storage for a large archive"}}, Width: w.FieldMD}, w.Field{Label: "Folder in it", Parts: []w.FieldPart{w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true}, w.FieldHint{Parts: []w.Inline{w.Text("An archive larger than 16 MB is put into this folder and read from there: Carrel keeps no copy of it.")}}}, Width: w.FieldLG}}, Wide: true, Top: true}}}, "s-backup-15", "tc-card", 1),
 	cards("flush", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "The line to paste", Items: []w.RubricPart{w.Badge{Label: "local", Tone: w.BadgeLocal}}},
 		w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup/trigger?job=work&tab=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup/trigger?job=work&tab=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup/trigger?job=work&tab=gitea"}, {Label: "curl", Href: "/app/settings/backup/trigger?job=work&tab=curl"}}, Variant: w.SegStart},
@@ -597,7 +601,7 @@ var _ = add(
 		w.CardText{Kind: w.CardSmallPrint, Parts: []w.CardTextPart{w.Text("Every use is logged, naming the password.")}}}, Variant: w.CardFlush}, "s-backup-5", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Archive password"},
-		w.CardFields{Items: []w.CardFieldsPart{w.Field{Width: w.FieldLG, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}, w.Span{Face: w.FaceMuted12, Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections."}}}}}, "s-backup-7", "tc-card", 2),
+		w.CardFields{Items: []w.CardFieldsPart{w.Field{Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "••••••••••••", Label: "Archive password", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}}}, Width: w.FieldLG}}}}}, "s-backup-7", "tc-card", 2),
 	cards("flush", w.Card{Items: []w.CardPart{
 		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>"}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Mono{Text: "mix@example.org"}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
 		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже. Михаил Енученко")}, Variant: w.Prose13Card},

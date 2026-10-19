@@ -2168,12 +2168,9 @@ func Backup7() Screen {
 														Label: "Archive password",
 														Focus: true,
 													},
+													w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}},
 												},
 												Width: w.FieldLG,
-											},
-											w.Span{
-												Face: w.FaceMuted12,
-												Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections.",
 											},
 										},
 									},
@@ -2185,6 +2182,343 @@ func Backup7() Screen {
 						},
 						Variant: w.DialogStep760,
 						Action:  "/app/settings/backup/restore",
+					},
+				},
+			},
+		},
+	}
+}
+
+// Backup15 is frame «Восстановление · с этого компьютера» (s-backup-15).
+func Backup15() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Restore"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}},
+							},
+							w.Field{
+								Label: "Where the archive is",
+								Parts: []w.FieldPart{
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "From a job", Href: "/app/settings/backup/restore?from=job"},
+											{Label: "From a server", Href: "/app/settings/backup/restore?from=server"},
+											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true},
+										},
+										Variant: w.SegStart,
+									},
+									w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}},
+								},
+								OwnLine: true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From this computer"},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Label: "Archive",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}},
+														},
+														Gap: w.LineGap8,
+													},
+												},
+												Width: w.FieldFull,
+											},
+											w.Field{
+												Label: "Storage for a large archive",
+												Parts: []w.FieldPart{
+													w.Pick{
+														Name: "store",
+														Options: []w.PickOption{
+															{Value: "", Label: "None — up to 16 MB"},
+															{Value: "nextcloud|files", Label: "nextcloud · Files"},
+															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true},
+														},
+														Label: "Storage for a large archive",
+													},
+												},
+												Width: w.FieldMD,
+											},
+											w.Field{
+												Label: "Folder in it",
+												Parts: []w.FieldPart{
+													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true},
+													w.FieldHint{
+														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
+													},
+												},
+												Width: w.FieldLG,
+											},
+										},
+										Wide: true,
+										Top:  true,
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Archive password"},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Parts: []w.FieldPart{
+													w.Input{
+														Kind:  w.InputPassword,
+														Name:  "password",
+														Value: "••••••••••••",
+														Label: "Archive password",
+														Focus: true,
+													},
+													w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}},
+												},
+												Width: w.FieldLG,
+											},
+										},
+									},
+								},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel"}},
+							},
+						},
+						Variant: w.DialogStep760,
+						Action:  "/app/settings/backup/restore?from=file",
+						Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Backup16 is frame «Восстановление · архив больше 16 MB, папки нет» (s-backup-16).
+func Backup16() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Restore"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}},
+							},
+							w.Field{
+								Label: "Where the archive is",
+								Parts: []w.FieldPart{
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "From a job", Href: "/app/settings/backup/restore?from=job"},
+											{Label: "From a server", Href: "/app/settings/backup/restore?from=server"},
+											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true},
+										},
+										Variant: w.SegStart,
+									},
+									w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}},
+								},
+								OwnLine: true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From this computer"},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Text("The archive is larger than 16 MB. Choose a folder of your storage for it, or put it there and choose "),
+											w.Strong("From a server"),
+											w.Text("."),
+										},
+										Tone:  w.MsgAlert,
+										Space: w.MsgFlushBottom12,
+									},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Label: "Archive",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}},
+														},
+														Gap: w.LineGap8,
+													},
+												},
+												Width: w.FieldFull,
+											},
+											w.Field{
+												Label: "Storage for a large archive",
+												Parts: []w.FieldPart{
+													w.Pick{
+														Name: "store",
+														Options: []w.PickOption{
+															{Value: "", Label: "None — up to 16 MB", On: true},
+															{Value: "nextcloud|files", Label: "nextcloud · Files"},
+															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents"},
+														},
+														Label: "Storage for a large archive",
+													},
+												},
+												Width: w.FieldMD,
+											},
+											w.Field{
+												Label: "Folder in it",
+												Parts: []w.FieldPart{
+													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true, Disabled: true},
+													w.FieldHint{
+														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
+													},
+												},
+												Width: w.FieldLG,
+											},
+										},
+										Wide: true,
+										Top:  true,
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Archive password"},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Parts: []w.FieldPart{
+													w.Input{
+														Kind:  w.InputPassword,
+														Name:  "password",
+														Value: "••••••••••••",
+														Label: "Archive password",
+														Focus: true,
+													},
+													w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}},
+												},
+												Width: w.FieldLG,
+											},
+										},
+									},
+								},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel"}},
+							},
+						},
+						Variant: w.DialogStep760,
+						Action:  "/app/settings/backup/restore?from=file",
+						Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},

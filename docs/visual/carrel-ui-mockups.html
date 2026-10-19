@@ -17773,8 +17773,7 @@ jobs:
       <div class="tc-card">
         <div class="tc-rubric">Archive password</div>
         <div class="tc-card__fields">
-          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"></div>
-          <span class="tc-dim--muted tc-dim--t12">The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections.</span>
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"><span class="tc-field__hint">The one set in the job, not your sign-in password.</span></div>
         </div>
       </div>
       <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
@@ -17782,6 +17781,135 @@ jobs:
   </div>
 </div>
 <figcaption>Восстановиться можно не только там, где уже есть задания, — иначе пропадает случай, ради которого копия и делалась. <b>Источник один.</b> Переключатель сверху — задание, сервер или этот компьютер; в примере выбрано задание, и других полей нет, чтобы не казалось, что архив берётся сразу из трёх мест. Пароль архива спрашивается здесь же и первым делом: без него нельзя прочитать даже манифест, и узнать об этом лучше до того, как человек выбрал коллекции.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-backup-15" data-screen="/app/settings/backup/restore" data-part="file">
+  <div class="frame-label"><span>Восстановление · с этого компьютера</span><i>дополнительный кадр: file · /app/settings/backup/restore</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><form class="tc-dialog is-wide tc-dialog--step760" action="/app/settings/backup/restore?from=file" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de">
+      <div class="tc-steps"><span class="is-on tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore</div><div class="tc-head__sub">Nothing is written until you have seen what goes where</div></div></div>
+      <div class="tc-field is-own-line">
+        <label>Where the archive is</label>
+        <span class="tc-seg tc-seg--start"><a class="tc-seg__opt" href="/app/settings/backup/restore?from=job">From a job</a><a class="tc-seg__opt" href="/app/settings/backup/restore?from=server">From a server</a><a class="is-on tc-seg__opt" href="/app/settings/backup/restore?from=file">From this computer</a></span>
+        <span class="tc-field__hint">One archive, one of three. The other two stay empty until you switch.</span>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">From this computer</div>
+        <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--top">
+          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive"></label></span></div>
+          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="">None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents" selected>sftpgo · vps · Documents</option></select></span></div>
+          <div class="tc-field tc-field--lg"><label>Folder in it</label><input class="tc-in is-mono" type="text" name="folder" value="/carrel/restore" aria-label="Folder in it"><span class="tc-field__hint">A larger archive is put here, read from there and deleted after the restore.</span></div>
+        </div>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">Archive password</div>
+        <div class="tc-card__fields">
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"><span class="tc-field__hint">The one set in the job, not your sign-in password.</span></div>
+        </div>
+      </div>
+      <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
+    </form></div></div>
+  </div>
+</div>
+<figcaption><b>Архив с этого компьютера на диск Carrel не копируется</b> (решение владельца 19.10, S-24.3). До 16&nbsp;MB он держится в памяти сеанса; больший уходит тем же потоком в папку хранилища, выбранную здесь, и читается оттуда — только нужное. Хранилище — первым полем выбора «None — up to 16 MB»; папка — моноширинно, с подсказкой: архив кладётся сюда и после восстановления удаляется (владелец, 19.10). Пароль архива и Open the manifest — как у «From a job».</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-backup-16" data-screen="/app/settings/backup/restore" data-part="too-large">
+  <div class="frame-label"><span>Восстановление · архив больше 16 MB, папки нет</span><i>дополнительный кадр: too-large · /app/settings/backup/restore</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><form class="tc-dialog is-wide tc-dialog--step760" action="/app/settings/backup/restore?from=file" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de">
+      <div class="tc-steps"><span class="is-on tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore</div><div class="tc-head__sub">Nothing is written until you have seen what goes where</div></div></div>
+      <div class="tc-field is-own-line">
+        <label>Where the archive is</label>
+        <span class="tc-seg tc-seg--start"><a class="tc-seg__opt" href="/app/settings/backup/restore?from=job">From a job</a><a class="tc-seg__opt" href="/app/settings/backup/restore?from=server">From a server</a><a class="is-on tc-seg__opt" href="/app/settings/backup/restore?from=file">From this computer</a></span>
+        <span class="tc-field__hint">One archive, one of three. The other two stay empty until you switch.</span>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">From this computer</div>
+        <div class="tc-msg is-alert tc-msg--flush-bot12">The archive is larger than 16 MB. Choose a folder of your storage for it, or put it there and choose <b>From a server</b>.</div>
+        <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--top">
+          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive"></label></span></div>
+          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="" selected>None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents">sftpgo · vps · Documents</option></select></span></div>
+          <div class="tc-field tc-field--lg"><label>Folder in it</label><input class="tc-in is-mono" type="text" name="folder" value="/carrel/restore" aria-label="Folder in it" disabled><span class="tc-field__hint">A larger archive is put here, read from there and deleted after the restore.</span></div>
+        </div>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">Archive password</div>
+        <div class="tc-card__fields">
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"><span class="tc-field__hint">The one set in the job, not your sign-in password.</span></div>
+        </div>
+      </div>
+      <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
+    </form></div></div>
+  </div>
+</div>
+<figcaption>Хранилище не выбрано, а архив больше 16&nbsp;MB: ничего не принято, шаг вернулся с тем, что было выбрано, и отказом наверху карточки. Поле папки выключено, пока хранилище — «None».</figcaption>
 </figure>
 
 <figure>

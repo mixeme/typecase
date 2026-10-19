@@ -814,6 +814,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Restore from this computer: no copy of the archive on Carrel** (Carrel's
+  task 213 p. 1; accepted by the owner 19.10). `s-backup-15` — the step
+  with «From this computer»: Choose a file, «Storage for a large archive»
+  («None — up to 16 MB» first), «Folder in it» with «A larger archive is
+  put here, read from there and deleted after the restore.»;
+  `s-backup-16` — refused, larger than 16 MB with no folder, the folder
+  off while the storage is «None». The archive password's note is a
+  field hint now: «The one set in the job, not your sign-in password.»
+  (`s-backup-7` too).
 - **davloom: no devices, a device's scope, off; the tree behind a
   button** (Carrel's task 193 p. 5; accepted by the owner 19.10).
   `s-davloom-6` — «No devices yet.», the rail without a count;

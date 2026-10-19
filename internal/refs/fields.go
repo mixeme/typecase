@@ -121,7 +121,7 @@ var _ = add(
 	form("group", field("Collections", w.FieldW100, w.Group{Form: w.GroupColumn, Items: []w.FieldPart{chk, chk, chk, chk, chk, chk}}), "s-davloom-2", "tc-field", 4),
 	form("hint", field("", w.FieldAuto, hint(t("Copies past the eighth are deleted"), b("after"), t("the new one has been read back and checked, not before. The file is dated and never overwritten."))), "s-backup-2", "tc-field", 7),
 	form("own-line", w.Field{Label: "Where the archive is", OwnLine: true, Parts: []w.FieldPart{sg, hint(t("One archive, one of three. The other two stay empty until you switch."))}}, "s-backup-7", "tc-field", 1),
-	form("bare", field("", w.FieldLG, in), "s-backup-7", "tc-field", 2),
+	form("bare", w.Field{Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "••••••••••••", Label: "Archive password", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}}}, Width: w.FieldLG}, "s-backup-7", "tc-field", 2),
 	form("group", field("What the visitor sees", w.FieldW100, w.Group{Form: w.GroupColumnLoose, Items: []w.FieldPart{chk, chk, chk, chk, chk}}), "s-publish-3", "tc-field", 1),
 	form("group", w.Field{Label: "Attachments", LabelAside: w.Plain{Text: "2 files · 3.2 MB"}, Width: w.FieldW100, Parts: []w.FieldPart{w.Group{Form: w.GroupColumnLoose, Items: []w.FieldPart{chk,
 		hint(t("The links are created together with this one, expire with it and are revoked with it. Without this the page says how many files there are, but not their names: a file name gives away more than it looks."))}}}}, "s-publish-4", "tc-field", 1),

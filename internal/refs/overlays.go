@@ -1859,6 +1859,18 @@ var _ = add(
 	}, "s-publish-2", "tc-overlay", 1),
 
 	// tc-dialog
+	overlay("step", w.Dialog{Items: []w.DialogPart{
+		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
+		w.Head{Title: &w.HeadTitle{Text: "Restore"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}}},
+		w.Field{Label: "Where the archive is", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job"}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true}}, Variant: w.SegStart}, w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}}}, OwnLine: true},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "From this computer"},
+			w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Archive", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}}}, Gap: w.LineGap8}}, Width: w.FieldLG}}, Top: true},
+			w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Storage for a large archive", Parts: []w.FieldPart{w.Pick{Name: "store", Options: []w.PickOption{{Value: "", Label: "None — up to 16 MB"}, {Value: "nextcloud|files", Label: "nextcloud · Files"}, {Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true}}, Label: "Storage for a large archive"}}, Width: w.FieldMD}, w.Field{Label: "Folder in it", Parts: []w.FieldPart{w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true}, w.FieldHint{Parts: []w.Inline{w.Text("An archive larger than 16 MB is put into this folder and read from there: Carrel keeps no copy of it.")}}}, Width: w.FieldLG}}, Top: true}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Archive password"},
+			w.CardFields{Items: []w.CardFieldsPart{w.Field{Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "••••••••••••", Label: "Archive password", Focus: true}}, Width: w.FieldLG}, w.Span{Face: w.FaceMuted12, Text: "The one set in the job, not your sign-in password. Without it the manifest cannot be read — Carrel will not even see the list of collections."}}}}},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel"}}}}, Variant: w.DialogStep760, Action: "/app/settings/backup/restore?from=file", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-backup-15", "tc-dialog", 1),
 	overlay("wide", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 2},
 		w.Head{Title: &w.HeadTitle{Text: "Restore from 2026-08-14"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 1 214 records · "), w.Mono{Text: "carrel-backup/2026-08-14T09-12.zip"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Restore 3 collections", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true}}}},
