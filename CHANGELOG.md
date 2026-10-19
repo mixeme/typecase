@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Chevron` (the small arrow after a cell's value) is gone with its rule
+  (`.tc-ico--inline`): a cell's value that can be changed is a closed
+  choice (Carrel's task 212).
 - `MainTree` is gone with its rule (`.tc-main__tree`): davloom's tree is
   a sheet now, behind «What the client sees» (the owner, 19.10).
 - `RubricGap13` is gone with its rule (`.tc-rubric--m13-0-6`): «What it
@@ -834,6 +837,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The restore's match: a closed choice of the target in every row, and
+  beside the bar's Restore into** (Carrel's task 212 pp. 6, 7; accepted by
+  the owner 19.10): `s-backup-8` — `into.N` per row and `into` in the bar,
+  radios of the collections with their marks, New collection, Skip this
+  one; no open menu, no text with an arrow.
 - **A davloom device's row** (Carrel's task 215): its access options send
   the page's `davloom-acts` form to their own address; «… collections ·
   Change» is a link to the device's scope sheet. The look is the same

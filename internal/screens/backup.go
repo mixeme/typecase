@@ -3197,6 +3197,37 @@ func Backup8() Screen {
 								Items: []w.BarPart{
 									w.BarSep{},
 									w.Button{Label: "Restore into", Icon: "restore", Name: "op", Value: "into", Submit: true},
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "radicale · vps · Проекты",
+													Name:  "into",
+													Value: "radicale|proekty",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Личный",
+													On:    true,
+													Name:  "into",
+													Value: "nextcloud|lichnyj",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "into",
+													Value: "nextcloud|rabota",
+												},
+												w.MenuSep{},
+												w.MenuItem{Label: "New collection", Name: "into", Value: "new"},
+												w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into", Value: "skip"},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
 									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
 								},
 								Count:   &w.BarCount{Text: "3 selected"},
@@ -3217,7 +3248,41 @@ func Backup8() Screen {
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
 											{Parts: []w.CellPart{w.Text("312")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	Name:  "into.1",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	On:    true,
+																	Name:  "into.1",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.1",
+																	Value: "nextcloud|rabota",
+																},
+																w.MenuSep{},
+																w.MenuItem{Label: "New collection", Name: "into.1", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.1", Value: "skip"},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+											},
 											{Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}},
 										},
 										State: w.RowPicked,
@@ -3230,18 +3295,34 @@ func Backup8() Screen {
 											{
 												Parts: []w.CellPart{
 													w.Drop{
-														Open:    true,
-														Trigger: w.Pick{Value: "radicale · vps · Проекты", Focus: true},
+														Trigger: w.Pick{Value: "radicale · vps · Проекты", Mark: &w.Mark{Colour: "#6B4E7A"}},
 														Menu: w.Menu{
 															Items: []w.MenuPart{
-																w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true},
-																w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный"},
-																w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	On:    true,
+																	Name:  "into.2",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	Name:  "into.2",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.2",
+																	Value: "nextcloud|rabota",
+																},
 																w.MenuSep{},
-																w.MenuItem{Icon: "plus", Label: "New collection"},
-																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty},
+																w.MenuItem{Label: "New collection", Name: "into.2", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.2", Value: "skip"},
 															},
-															Pop: w.MenuUnder,
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
 														},
 													},
 												},
@@ -3255,7 +3336,41 @@ func Backup8() Screen {
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
 											{Parts: []w.CellPart{w.Text("140")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("nextcloud · Личный "), w.Chevron{}}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	Name:  "into.3",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	On:    true,
+																	Name:  "into.3",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.3",
+																	Value: "nextcloud|rabota",
+																},
+																w.MenuSep{},
+																w.MenuItem{Label: "New collection", Name: "into.3", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.3", Value: "skip"},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+											},
 											{Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger},
 										},
 										State: w.RowPicked,

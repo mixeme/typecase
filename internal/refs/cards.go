@@ -642,6 +642,29 @@ var _ = add(
 		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "desktop-5", "tc-card", 2),
 
 	// tc-table
+	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedPart)}, {Label: "In the archive"}, {Label: "Records", Rank: w.Rank3, Secondary: true}, {Label: "Restore into", Width: w.Col26, Rank: w.Rank4}, {Label: "What will happen"}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("312")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", Name: "into.1", Value: "radicale|proekty"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "into.1", Value: "nextcloud|lichnyj"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "into.1", Value: "nextcloud|rabota"},
+			w.MenuSep{},
+			w.MenuItem{Label: "New collection", Name: "into.1", Value: "new"},
+			w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.1", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Pick{Value: "radicale · vps · Проекты", Mark: &w.Mark{Colour: "#6B4E7A"}}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true, Name: "into.2", Value: "radicale|proekty"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", Name: "into.2", Value: "nextcloud|lichnyj"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "into.2", Value: "nextcloud|rabota"},
+			w.MenuSep{},
+			w.MenuItem{Label: "New collection", Name: "into.2", Value: "new"},
+			w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.2", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — no differences")}}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}}, {Parts: []w.CellPart{w.Text("140")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", Name: "into.3", Value: "radicale|proekty"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "into.3", Value: "nextcloud|lichnyj"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "into.3", Value: "nextcloud|rabota"},
+			w.MenuSep{},
+			w.MenuItem{Label: "New collection", Name: "into.3", Value: "new"},
+			w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.3", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger}}, State: w.RowPicked},
+		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("skip")}, Dim: true}}}}, Variant: w.TableFit}, "s-backup-8", "tc-table", 1),
 	cards("report", w.Table{Cols: []w.TableCol{{Label: "In the archive"}, {Label: "Restored into", Width: w.Col26, Rank: w.Rank4}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "What happened"}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("4")}, Mono: true}, {Parts: []w.CellPart{w.Text("4 missing records created")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("radicale · vps · Проекты")}, Mono: true}, {Parts: []w.CellPart{w.Text("0")}, Mono: true}, {Parts: []w.CellPart{w.Text("no differences")}, Dim: true}}},
@@ -845,17 +868,6 @@ var _ = add(
 	cards("picked", w.Table{Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "archive", Value: "lichnoe-na-domashniy-disk", One: true}, Width: w.ColTick}, {Parts: []w.CellPart{w.Text("Личное на домашний диск")}}, {Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("4 collections")}, Mono: true}}, State: w.RowPicked},
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "archive", Value: "rabochee-ezhednevno", One: true}}, {Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}}, {Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true, Rank: w.Rank3}, {Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true, Rank: w.Rank4}, {Parts: []w.CellPart{w.Text("3 collections")}, Mono: true}}}}}, "s-backup-7", "tc-table", 1),
-	cards("fit", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedPart)}, {Label: "In the archive"}, {Label: "Records", Rank: w.Rank3, Secondary: true}, {Label: "Restore into", Width: w.Col26, Rank: w.Rank4}, {Label: "What will happen"}}, Rows: []w.TableRow{
-		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("312")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}}}, State: w.RowPicked},
-		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Open: true, Trigger: w.Pick{Value: "radicale · vps · Проекты", Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
-			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true},
-			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный"},
-			w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
-			w.MenuSep{},
-			w.MenuItem{Icon: "plus", Label: "New collection"},
-			w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty}}, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — no differences")}}}, State: w.RowPicked},
-		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}}, {Parts: []w.CellPart{w.Text("140")}, Mono: true}, {Parts: []w.CellPart{w.Text("nextcloud · Личный "), w.Chevron{}}, Mono: true}, {Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger}}, State: w.RowPicked},
-		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("skip")}, Dim: true}}}}, Variant: w.TableFit}, "s-backup-8", "tc-table", 1),
 	cards("picked", w.Table{Cols: []w.TableCol{{Width: w.ColTick, Tick: ptr(w.TickedOff)}, {Label: "Name"}, {Label: "Size", Width: w.ColSize, Rank: w.Rank3}, {Label: "Type", Width: w.ColType, Rank: w.Rank4}, {Label: "Changed", Width: w.ColTime}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOff)}, {Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 34 items")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true}}, State: w.RowFolder},
 		{Cells: []w.TableCell{{Pick: ptr(w.TickedOn)}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}}, {Parts: []w.CellPart{w.Text("412 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/png")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}}, State: w.RowPicked},
@@ -945,6 +957,6 @@ func init() {
 	Parts = append(Parts, w.Break{}, w.Key(""), w.QueueItem{}, w.DiffItem{}, w.FieldsItem{}, w.SecList{}, w.SecHint{}, w.SecNote{}, w.SecActs{},
 		w.SecTasks{}, w.SecFile{}, w.SecFiles{}, w.SecOpened{}, w.SecOpen{}, w.CardText{}, w.CardHint{}, w.CardRow{}, w.FillHint{},
 		w.CardList{}, w.CardFields{}, w.CardQR{}, w.CardPick{}, w.CardGrid{}, w.CardRowsItem{}, w.CardRows{}, w.CardHeadLine{}, w.CardHead{},
-		w.SpacedField{}, w.TableCol{}, w.TableCell{}, w.TableRow{}, w.TableFile{}, w.CellWrap{}, w.Chevron{}, w.DocRef{}, w.DocRefs{},
+		w.SpacedField{}, w.TableCol{}, w.TableCell{}, w.TableRow{}, w.TableFile{}, w.CellWrap{}, w.DocRef{}, w.DocRefs{},
 		w.DocAttach{}, w.DocmetaSec{}, w.MainResults{}, w.MainCards{}, w.MainDiag{}, w.MainThumbs{}, w.Bold{}, w.Emphasis(""), w.FilePick{}, w.Aside{})
 }

@@ -92,7 +92,6 @@ func (Tag) cellPart()       {}
 func (Tick) cellPart()      {}
 func (Drop) cellPart()      {}
 func (CellWrap) cellPart()  {}
-func (Chevron) cellPart()   {}
 func (Mono) cellPart()      {}
 func (Seg) cellPart()       {}
 func (Span) cellPart()      {}
@@ -101,13 +100,6 @@ func (Span) cellPart()      {}
 type Break struct{}
 
 func (Break) html(mix) string { return `<br>` }
-
-// Chevron is the small arrow after a cell's value that can be changed.
-type Chevron struct{}
-
-func (Chevron) html(mix) string {
-	return `<svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none" class="tc-ico--inline">` + Icon("chev").use() + `</svg>`
-}
 
 // TableFile is the name cell of a table: an icon or a source's mark, then
 // the name.
