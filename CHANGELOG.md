@@ -800,6 +800,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The external trigger is a sheet over the job list, with its password
+  as a row** (Carrel's task 207; accepted by the owner 19.10): «External
+  trigger» in a job's «⋯» menu opens `/app/settings/backup/trigger` — off
+  (`s-backup-14`: the price, Turn on), on (`s-backup-12`: the password
+  row — issued, last run and from where, runs — with New password and
+  Revoke; the tabs and the line with the password hidden), issued
+  (`s-backup-13`: the password and the line whole, «visible only now»).
+  The commands are seen without opening the job's form; the job's page
+  (`s-backup-2`) has no trigger card. The history says «external», the
+  password and the address of each run, a refused one in red
+  (`s-backup-1`). The script of a job that also downloads (`s-backup-3`)
+  and the GoSentry, Gitea and curl tabs are fragments of the sheet; Run
+  now is gone from the job's head.
 - **The Email block says its state with a badge in its title** (accepted
   by the owner 19.10): «not confirmed» (alert), «not confirmed» and «link
   sent 12 February 11:42», «confirmed» (no date), «pending» and

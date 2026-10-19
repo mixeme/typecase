@@ -127,7 +127,9 @@ func Backup1() Screen {
 											Menu: w.Menu{
 												Items: []w.MenuPart{
 													w.MenuItem{Label: "Run"},
-													w.MenuItem{Label: "Edit"}},
+													w.MenuItem{Label: "Edit"},
+													w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=work"},
+												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
 											},
@@ -176,7 +178,9 @@ func Backup1() Screen {
 											Menu: w.Menu{
 												Items: []w.MenuPart{
 													w.MenuItem{Label: "Run"},
-													w.MenuItem{Label: "Edit"}},
+													w.MenuItem{Label: "Edit"},
+													w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=personal"},
+												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
 											},
@@ -215,7 +219,9 @@ func Backup1() Screen {
 											Menu: w.Menu{
 												Items: []w.MenuPart{
 													w.MenuItem{Label: "Run"},
-													w.MenuItem{Label: "Edit"}},
+													w.MenuItem{Label: "Edit"},
+													w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=contacts"},
+												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
 											},
@@ -231,7 +237,7 @@ func Backup1() Screen {
 					w.MainHint{
 						Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
 					},
-					w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 12}},
+					w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "When"},
@@ -250,7 +256,10 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("3 / 3")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("read back")}},
-									{Parts: []w.CellPart{w.Text("cron")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+										Mono:  true,
+									},
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Restore", Icon: "restore", Small: true},
@@ -258,6 +267,20 @@ func Backup1() Screen {
 										},
 										Acts: true,
 									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.Text("2026-08-15 21:40")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+									{Parts: []w.CellPart{w.Span{Face: w.FaceDanger, Text: "refused: not this job’s password"}}},
+									{
+										Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…91de · 203.0.113.7")}}},
+										Mono:  true,
+									},
+									{Acts: true},
 								},
 							},
 							{
@@ -276,7 +299,10 @@ func Backup1() Screen {
 											},
 										},
 									},
-									{Parts: []w.CellPart{w.Text("cron")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+										Mono:  true,
+									},
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Restore", Icon: "restore", Small: true},
@@ -680,7 +706,7 @@ func Backup2() Screen {
 											w.Mono{Text: "cron"},
 											w.Text(", GoSentry, a job in Gitea, "),
 											w.Mono{Text: "curl"},
-											w.Text(": the line to paste is on the job’s page"),
+											w.Text(": External trigger in the job’s menu"),
 										},
 										Space: w.MsgFlushTop4,
 										Place: w.Grown,
@@ -702,8 +728,8 @@ func Backup2() Screen {
 	}
 }
 
-// Backup3 is frame «Резервная копия · задание, что и куда» (s-backup-3).
-func Backup3() Screen {
+// Backup12 is frame «Внешний запуск · включён» (s-backup-12).
+func Backup12() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
@@ -714,234 +740,1211 @@ func Backup3() Screen {
 				w.UserMenu{Name: "mix"},
 			},
 		},
-		Body: w.ShellBody{
-			Rail: []w.RailPart{
-				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
-				w.RailSec{
-					Items: []w.RailSecPart{
-						w.Rubric{Text: "Settings"},
-						w.Nav{
-							Items: []w.NavItem{
-								{Icon: "user", Label: "Account", Href: "#"},
-								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
-								{Icon: "file", Label: "Attachments", Href: "#"},
-								{Icon: "device", Label: "New device", Href: "#"},
-								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
-								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
-								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
-								{Icon: "theme", Label: "Appearance", Href: "#"},
-							},
-							On: 6,
-						},
-					},
-				},
-				w.RailFoot{
-					Items: []w.RailFootPart{
-						w.RailStatus{
-							Text:   "davloom · running · 3 devices",
-							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
-						},
-						w.RailStatus{
-							Text: "Backups are running",
-							Detail: w.Dim{
-								Parts: []w.Inline{
-									w.Text("Last backup "),
-									w.Mono{Text: "2026-08-16 03:10"},
-									w.Text(" · "),
-									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
 								},
-								Size: w.Dim11,
+								On: 6,
 							},
 						},
 					},
-					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
 				},
-			},
-			Main: w.Main{
-				Items: []w.MainPart{
-					w.Head{
-						Title: &w.HeadTitle{Text: "Личное на домашний диск"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Job · destination "), w.Strong("WebDAV and download"), w.Text(" · last copy 2 days ago")},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Backup"},
+							Subs: []w.HeadSub{
+								w.HeadSub{Parts: []w.HeadSubPart{w.Text("Three jobs · their own sources, destinations and triggers")}},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New job", Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Restore", Icon: "restore"},
+								},
 							},
 						},
-						Acts: &w.Acts{
-							Items: []w.ActsPart{
-								w.Button{Label: "Cancel"},
-								w.Button{Label: "Run now"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "backup-job"},
+						w.Table{
+							Cols: []w.TableCol{
+								{Width: w.ColTick},
+								{Label: "Job"},
+								{Label: "What it copies", Rank: w.Rank3, Secondary: true},
+								{Label: "Where to", Rank: w.Rank4, Secondary: true},
+								{Label: "When"},
+								{Label: "Keep", Secondary: true},
+								{Label: "Last backup", Main: true},
+								{Width: w.ColTime},
 							},
-						},
-					},
-					w.Form{
-						Items: []w.FormPart{
-							w.FieldSet{
-								Rubric: w.Rubric{Text: "Where to"},
-								Items: []w.FieldSetPart{
-									w.Field{
-										Parts: []w.FieldPart{
-											w.Seg{
-												Options: []w.SegOption{
-													{Label: "To WebDAV", Value: "webdav"},
-													{Label: "Download", Value: "download"},
-													{Label: "Both", On: true, Value: "both"},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Рабочее, ежедневно"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#3F6E8C"},
+														w.Mark{Colour: "#6B4E7A"},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "3 collections", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
 												},
-												Variant: w.SegStart,
-												Name:    "mode",
 											},
 										},
-										OwnLine: true,
-										Place:   w.Grown,
-									},
-									w.Field{
-										Label: "Collection",
-										Parts: []w.FieldPart{
-											w.Drop{
-												Trigger: w.Pick{Value: "nextcloud · Files", Mark: &w.Mark{Colour: "#4A6B52"}},
+										{
+											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{
-															Mark:  &w.Mark{Colour: "#4A6B52"},
-															Label: "nextcloud · Files",
-															On:    true,
-															Name:  "dest",
-															Value: "nextcloud|files",
-														},
-														w.MenuItem{
-															Mark:  &w.Mark{Colour: "#3F6E8C"},
-															Label: "sftpgo · vps · Documents",
-															Name:  "dest",
-															Value: "sftpgo|documents",
-														},
-														w.MenuItem{
-															Mark:   &w.Mark{Colour: "#9A9280"},
-															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
-															Label:  "sftpgo · vps · Public files",
-															Reason: "Read-only: this account cannot write here",
-															Name:   "dest",
-															Value:  "sftpgo|public",
-														},
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=work"},
 													},
-													Width: w.MenuWidth290,
-													Pop:   w.MenuUnder,
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
 												},
 											},
+											Acts: true,
 										},
-										Width: w.FieldLG,
-									},
-									w.Field{
-										Label: "Folder in it",
-										Parts: []w.FieldPart{
-											w.Line{
-												Items: []w.LinePart{
-													w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder in it", Mono: true, Variant: w.InputFill},
-													w.Button{Label: "Browse", To: "/app/settings/backup?op=browse&job=personal", Submit: true},
-												},
-												Gap: w.LineGap8,
-											},
-										},
-										Width: w.FieldLG,
-									},
-									w.Msg{
-										Parts: []w.MsgPart{
-											w.Strong("Both"),
-											w.Text(" writes to WebDAV and still has to be taken — so the trigger below is a script, not a line. This is the same job editor as above; only this control changed."),
-										},
-										Space: w.MsgFlushTop4,
-										Place: w.Grown,
 									},
 								},
-								Variant: w.FieldSetLead,
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Личное на домашний диск"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#A05A2C"},
+														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("nextcloud · Files"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/carrel-backup")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("on sign-in"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("if older than 7 days")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("8")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-14 09:12"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("2.1 GB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=personal"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOff)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Contacts archive, by hand"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{w.Mark{Colour: "#A05A2C"}, w.Mono{Text: "1 book", Variant: w.Mono11Indent}},
+													Gap:   w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=contacts"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+									State: w.RowFaded,
+								},
 							},
-							w.Card{
-								Items: []w.CardPart{
-									w.Rubric{
-										Text:  "The script to paste",
-										Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}},
-									},
-									w.CardText{
-										Kind: w.CardAbove,
-										Parts: []w.CardTextPart{
-											w.Text("Destination: "),
-											w.Key("WebDAV and download"),
-											w.Text(" — two steps, so this is a file, not a line"),
+							Variant: w.TableWide,
+						},
+						w.MainHint{
+							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+						},
+						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "When"},
+								{Label: "Job"},
+								{Label: "Size", Rank: w.Rank3, Secondary: true},
+								{Label: "Collections", Rank: w.Rank4},
+								{Label: "Verified"},
+								{Label: "Trigger", Secondary: true},
+								{Width: w.ColTime},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("3 / 3")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
 										},
-									},
-									w.Seg{
-										Options: []w.SegOption{
-											{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true},
-											{Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"},
-											{Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"},
-											{Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"},
-										},
-										Variant: w.SegStart,
-									},
-									w.Diag{
-										Text:    "#!/bin/sh\nset -eu\nh='Authorization: Bearer cbk_7f3a-91de-4402-lamp'\nb=https://carrel.example/api/backup\nout=/var/backups\n\nid=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\")\nuntil [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done\ncurl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"",
-										Variant: w.DiagInk,
-										ID:      "trigger-script",
-									},
-									w.CardRow{
-										Kind: w.CardTop8,
-										Gap:  8,
-										Items: []w.CardRowPart{
-											w.Button{
-												Label:    "Copy the script",
-												Icon:     "dup",
-												Kind:     w.ButtonPrimary,
-												CopyFrom: "trigger-script",
-												Copied:   "Copied",
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
 											},
-											w.Button{
-												Label:    "Save as",
-												Icon:     "download",
-												SaveAs:   "carrel-personal.sh",
-												SaveFrom: "trigger-script",
-												Aside:    &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11},
-											},
-											w.Button{
-												Label: "New password",
-												Title: "The old password stops working; whatever runs this job has to be given the new one.",
-											},
+											Acts: true,
 										},
-									},
-									w.CardText{
-										Kind: w.CardUsage,
-										Parts: []w.CardTextPart{
-											w.Text("Put it where the password is to live, make it executable, and give "),
-											w.Mono{Text: "crontab -e"},
-											w.Text(" one line: "),
-											w.Mono{Text: "0 3 * * * /usr/local/bin/carrel-personal.sh"},
-											w.Text(" — the schedule stays a line, the work moves into the file. The date has to live in the script and not in the crontab line: "),
-											w.Mono{Text: "cron"},
-											w.Text(" reads "),
-											w.Mono{Text: "%"},
-											w.Text(" as a newline, so "),
-											w.Mono{Text: "date +%F"},
-											w.Text(" written up there would break the entry."),
-										},
-									},
-									w.Msg{
-										Parts: []w.MsgPart{
-											w.Text("A copy that fails needs no separate check: the download answers with an error, "),
-											w.Mono{Text: "set -eu"},
-											w.Text(" stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and "),
-											w.Mono{Text: "409"},
-											w.Text(" until then means «not yet», not «broken»."),
-										},
-										Space: w.MsgFlushTop9,
 									},
 								},
-								Variant: w.CardChosenFlush,
-								Place:   w.Grown,
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 21:40")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Span{Face: w.FaceDanger, Text: "refused: not this job’s password"}}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…91de · 203.0.113.7")}}},
+											Mono:  true,
+										},
+										{Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.2 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 3")}, Mono: true, Tone: w.CellDanger},
+										{
+											Parts: []w.CellPart{
+												w.Text("read back · "),
+												w.Span{
+													Face:  w.FaceDanger,
+													Text:  "1 not copied",
+													Title: "baikal · Общий: the server answered 401, so this collection is not in the archive. The other two were read back.",
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
+										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
 							},
 						},
-						ID:     "backup-job",
-						Action: "/app/settings/backup/job",
 					},
 				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/settings/backup/trigger?job=work",
+					Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					Title:  "External trigger",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Рабочее, ежедневно")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.Card{
+							Items: []w.CardPart{
+								w.Rubric{Text: "Password"},
+								w.Line{
+									Items: []w.LinePart{
+										w.Mono{Text: "cbk_…lamp"},
+										w.Dim{
+											Parts: []w.Inline{
+												w.Text("issued 2 August · last run 16 August 03:10 from "),
+												w.Mono{Text: "10.0.0.5"},
+												w.Text(" · 14 runs"),
+											},
+											Size: w.Dim11_5,
+										},
+										w.Line{
+											Items: []w.LinePart{
+												w.Button{Label: "New password", To: "/app/settings/backup/trigger?job=work&op=new", Submit: true},
+												w.Button{
+													Label:  "Revoke",
+													Kind:   w.ButtonDanger,
+													To:     "/app/settings/backup/trigger?job=work&op=revoke",
+													Submit: true,
+												},
+											},
+											Gap:   w.LineGap7,
+											Place: w.Pushed,
+										},
+									},
+									Gap:   w.LineGap8,
+									Block: true,
+								},
+							},
+							Variant: w.CardFlush,
+						},
+						w.Card{
+							Items: []w.CardPart{
+								w.Rubric{Text: "The line to paste", Items: []w.RubricPart{w.Badge{Label: "local", Tone: w.BadgeLocal}}},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "crontab", Href: "/app/settings/backup/trigger?job=work&tab=crontab", On: true},
+										{Label: "GoSentry", Href: "/app/settings/backup/trigger?job=work&tab=gosentry"},
+										{Label: "Gitea", Href: "/app/settings/backup/trigger?job=work&tab=gitea"},
+										{Label: "curl", Href: "/app/settings/backup/trigger?job=work&tab=curl"},
+									},
+									Variant: w.SegStart,
+								},
+								w.Diag{
+									Text:    "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_••••' 'https://carrel.example/api/backup/run?job=work'",
+									Variant: w.DiagInk,
+								},
+								w.CardText{
+									Kind: w.CardUsage,
+									Parts: []w.CardTextPart{
+										w.Text("The password was shown once and is hidden here. "),
+										w.Strong("New password"),
+										w.Text(" shows the line whole; the old one stops working."),
+									},
+								},
+							},
+							Variant: w.CardFlush,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Backup13 is frame «Внешний запуск · пароль выдан» (s-backup-13).
+func Backup13() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
+								},
+								On: 6,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Backup"},
+							Subs: []w.HeadSub{
+								w.HeadSub{Parts: []w.HeadSubPart{w.Text("Three jobs · their own sources, destinations and triggers")}},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New job", Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Restore", Icon: "restore"},
+								},
+							},
+						},
+						w.Table{
+							Cols: []w.TableCol{
+								{Width: w.ColTick},
+								{Label: "Job"},
+								{Label: "What it copies", Rank: w.Rank3, Secondary: true},
+								{Label: "Where to", Rank: w.Rank4, Secondary: true},
+								{Label: "When"},
+								{Label: "Keep", Secondary: true},
+								{Label: "Last backup", Main: true},
+								{Width: w.ColTime},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Рабочее, ежедневно"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#3F6E8C"},
+														w.Mark{Colour: "#6B4E7A"},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "3 collections", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=work"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Личное на домашний диск"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#A05A2C"},
+														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("nextcloud · Files"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/carrel-backup")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("on sign-in"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("if older than 7 days")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("8")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-14 09:12"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("2.1 GB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=personal"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOff)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Contacts archive, by hand"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{w.Mark{Colour: "#A05A2C"}, w.Mono{Text: "1 book", Variant: w.Mono11Indent}},
+													Gap:   w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=contacts"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+									State: w.RowFaded,
+								},
+							},
+							Variant: w.TableWide,
+						},
+						w.MainHint{
+							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+						},
+						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "When"},
+								{Label: "Job"},
+								{Label: "Size", Rank: w.Rank3, Secondary: true},
+								{Label: "Collections", Rank: w.Rank4},
+								{Label: "Verified"},
+								{Label: "Trigger", Secondary: true},
+								{Width: w.ColTime},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("3 / 3")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 21:40")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Span{Face: w.FaceDanger, Text: "refused: not this job’s password"}}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…91de · 203.0.113.7")}}},
+											Mono:  true,
+										},
+										{Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.2 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 3")}, Mono: true, Tone: w.CellDanger},
+										{
+											Parts: []w.CellPart{
+												w.Text("read back · "),
+												w.Span{
+													Face:  w.FaceDanger,
+													Text:  "1 not copied",
+													Title: "baikal · Общий: the server answered 401, so this collection is not in the archive. The other two were read back.",
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
+										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/settings/backup/trigger?job=work",
+					Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					Title:  "External trigger",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Рабочее, ежедневно")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.Card{
+							Items: []w.CardPart{
+								w.Rubric{
+									Text:  "Password",
+									Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}},
+								},
+								w.Line{
+									Items: []w.LinePart{
+										w.Input{
+											Value:    "cbk_2c9e-07ab-5d31-fern",
+											Label:    "Password",
+											Mono:     true,
+											ReadOnly: true,
+											Variant:  w.InputKeySmFill,
+										},
+										w.Button{Label: "Copy", CopyFrom: "trigger-pw", Copied: "Copied"},
+									},
+									Gap:   w.LineGap8,
+									Block: true,
+								},
+							},
+							Variant: w.CardFlush,
+						},
+						w.Card{
+							Items: []w.CardPart{
+								w.Rubric{Text: "The line to paste", Items: []w.RubricPart{w.Badge{Label: "local", Tone: w.BadgeLocal}}},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "crontab", Href: "/app/settings/backup/trigger?job=work&tab=crontab", On: true},
+										{Label: "GoSentry", Href: "/app/settings/backup/trigger?job=work&tab=gosentry"},
+										{Label: "Gitea", Href: "/app/settings/backup/trigger?job=work&tab=gitea"},
+										{Label: "curl", Href: "/app/settings/backup/trigger?job=work&tab=curl"},
+									},
+									Variant: w.SegStart,
+								},
+								w.Diag{
+									Text:    "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_2c9e-07ab-5d31-fern' 'https://carrel.example/api/backup/run?job=work'",
+									Variant: w.DiagInk,
+									ID:      "trigger-line",
+								},
+								w.CardRow{
+									Kind: w.CardTop8,
+									Gap:  8,
+									Items: []w.CardRowPart{
+										w.Button{
+											Label:    "Copy the line",
+											Icon:     "dup",
+											Kind:     w.ButtonPrimary,
+											CopyFrom: "trigger-line",
+											Copied:   "Copied",
+										},
+									},
+								},
+								w.CardText{
+									Kind: w.CardUsage,
+									Parts: []w.CardTextPart{
+										w.Text("Every use is logged, naming this password. The old one stopped working when this one was issued."),
+									},
+								},
+							},
+							Variant: w.CardFlush,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Backup14 is frame «Внешний запуск · выключен» (s-backup-14).
+func Backup14() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
+								},
+								On: 6,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Backup"},
+							Subs: []w.HeadSub{
+								w.HeadSub{Parts: []w.HeadSubPart{w.Text("Three jobs · their own sources, destinations and triggers")}},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "New job", Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Restore", Icon: "restore"},
+								},
+							},
+						},
+						w.Table{
+							Cols: []w.TableCol{
+								{Width: w.ColTick},
+								{Label: "Job"},
+								{Label: "What it copies", Rank: w.Rank3, Secondary: true},
+								{Label: "Where to", Rank: w.Rank4, Secondary: true},
+								{Label: "When"},
+								{Label: "Keep", Secondary: true},
+								{Label: "Last backup", Main: true},
+								{Width: w.ColTime},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Рабочее, ежедневно"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#3F6E8C"},
+														w.Mark{Colour: "#6B4E7A"},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "3 collections", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=work"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOn)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Личное на домашний диск"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#A05A2C"},
+														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+													},
+													Gap: w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("nextcloud · Files"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/carrel-backup")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{w.Text("on sign-in"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("if older than 7 days")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("8")}, Mono: true},
+										{
+											Parts: []w.CellPart{w.Text("2026-08-14 09:12"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("2.1 GB · verified")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=personal"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Pick: ptr(w.TickedOff)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "archive", Name: "Contacts archive, by hand"}}},
+										{
+											Parts: []w.CellPart{
+												w.Line{
+													Items: []w.LinePart{w.Mark{Colour: "#A05A2C"}, w.Mono{Text: "1 book", Variant: w.Mono11Indent}},
+													Gap:   w.LineGap3,
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
+											Mono:  true,
+										},
+										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Run", Small: true, Secondary: true},
+												w.Button{Label: "Edit", Small: true, Secondary: true},
+											},
+											Drop: &w.Drop{
+												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
+												Row:     true,
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{Label: "Run"},
+														w.MenuItem{Label: "Edit"},
+														w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=contacts"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnderEnd,
+												},
+											},
+											Acts: true,
+										},
+									},
+									State: w.RowFaded,
+								},
+							},
+							Variant: w.TableWide,
+						},
+						w.MainHint{
+							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+						},
+						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "When"},
+								{Label: "Job"},
+								{Label: "Size", Rank: w.Rank3, Secondary: true},
+								{Label: "Collections", Rank: w.Rank4},
+								{Label: "Verified"},
+								{Label: "Trigger", Secondary: true},
+								{Width: w.ColTime},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-16 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.4 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("3 / 3")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 21:40")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Span{Face: w.FaceDanger, Text: "refused: not this job’s password"}}},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…91de · 203.0.113.7")}}},
+											Mono:  true,
+										},
+										{Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-15 03:10")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Рабочее, ежедневно")}},
+										{Parts: []w.CellPart{w.Text("18.2 MB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 3")}, Mono: true, Tone: w.CellDanger},
+										{
+											Parts: []w.CellPart{
+												w.Text("read back · "),
+												w.Span{
+													Face:  w.FaceDanger,
+													Text:  "1 not copied",
+													Title: "baikal · Общий: the server answered 401, so this collection is not in the archive. The other two were read back.",
+												},
+											},
+										},
+										{
+											Parts: []w.CellPart{w.Text("external"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("cbk_…lamp · 10.0.0.5")}}},
+											Mono:  true,
+										},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
+										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("read back")}},
+										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
+										{
+											Parts: []w.CellPart{
+												w.Button{Label: "Restore", Icon: "restore", Small: true},
+												w.Button{Icon: "download", Small: true, Variant: w.ButtonPadX3, Title: "Download"},
+											},
+											Acts: true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/settings/backup/trigger?job=personal",
+					Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					Title:  "External trigger",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Личное на домашний диск")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("Turning it on stores this job’s data key under the server’s key — less protection, for convenience: the job can then read without you signed in."),
+							},
+							Tone:  w.MsgAlert,
+							Space: w.MsgFlush,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{
+							Label:  "Turn on",
+							Kind:   w.ButtonPrimary,
+							To:     "/app/settings/backup/trigger?job=personal&op=on",
+							Submit: true,
+						},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+				Pad: w.ScrimPad26,
 			},
 		},
 	}

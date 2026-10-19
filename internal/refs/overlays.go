@@ -31,7 +31,8 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "calendar", Value: "nextcloud/rabota", Of: "event-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-agenda-3", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Run"},
-		w.MenuItem{Label: "Edit"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
+		w.MenuItem{Label: "Edit"},
+		w.MenuItem{Label: "External trigger", Href: "/app/settings/backup/trigger?job=work"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-backup-1", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "move", Label: "Move"},
 		w.MenuItem{Icon: "dup", Label: "Copy"},
@@ -701,6 +702,17 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("plain", w.Sheet{Action: "/app/settings/backup/trigger?job=work", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Title: "External trigger", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Рабочее, ежедневно")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Password"},
+			w.Line{Items: []w.LinePart{w.Mono{Text: "cbk_…lamp"}, w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, w.Line{Items: []w.LinePart{w.Button{Label: "New password", To: "/app/settings/backup/trigger?job=work&op=new", Submit: true}, w.Button{Label: "Revoke", Kind: w.ButtonDanger, To: "/app/settings/backup/trigger?job=work&op=revoke", Submit: true}}, Gap: w.LineGap7, Place: w.Pushed}}, Gap: w.LineGap8, Block: true}}, Variant: w.CardFlush},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "The line to paste", Items: []w.RubricPart{w.Badge{Label: "local", Tone: w.BadgeLocal}}},
+			w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup/trigger?job=work&tab=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup/trigger?job=work&tab=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup/trigger?job=work&tab=gitea"}, {Label: "curl", Href: "/app/settings/backup/trigger?job=work&tab=curl"}}, Variant: w.SegStart},
+			w.Diag{Text: "0 3 * * * curl -fsS -m 30 -X POST -H 'Authorization: Bearer cbk_••••' 'https://carrel.example/api/backup/run?job=work'", Variant: w.DiagInk},
+			w.CardText{Kind: w.CardUsage, Parts: []w.CardTextPart{w.Text("The password was shown once and is hidden here. "), w.Strong("New password"), w.Text(" shows the line whole; the old one stops working.")}}}, Variant: w.CardFlush}}, Foot: []w.SheetFootPart{w.Line{Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Width: w.SheetWidth680}, "s-backup-12", "tc-sheet", 1),
+	overlay("plain", w.Sheet{Action: "/app/settings/backup/trigger?job=personal", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Title: "External trigger", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Личное на домашний диск")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("Turning it on stores this job’s data key under the server’s key — less protection, for convenience: the job can then read without you signed in.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Turn on", Kind: w.ButtonPrimary, To: "/app/settings/backup/trigger?job=personal&op=on", Submit: true}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Width: w.SheetWidth680}, "s-backup-14", "tc-sheet", 1),
 	overlay("plain", w.Sheet{Action: "/app/settings/unlock", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "back", Value: "/app/settings/davloom/devices/new"}}, Title: "Add device", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Телефон · DAVx5")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Field{Label: "Your Carrel password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Your Carrel password", Focus: true, Required: true}}, Width: w.FieldW100},
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks stored credentials for five minutes.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Create password", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/davloom/devices/new"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Width: w.SheetWidth400}, "s-davloom-5", "tc-sheet", 1),

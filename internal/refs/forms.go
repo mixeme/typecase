@@ -36,7 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
-	form("links", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"}, {Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"}}, Variant: w.SegStart}, "s-backup-3", "tc-seg", 2),
+	form("links", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"}, {Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"}}, Variant: w.SegStart}, "s-backup-3", "tc-seg", 1),
 	form("plain", w.Seg{Options: []w.SegOption{{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full", On: true}, {Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read"}}, Swap: "note-main", Tertiary: true}, "s-notes-2", "tc-seg", 1),
 	form("start-buttons", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job", On: true}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file"}}, Variant: w.SegStart}, "s-backup-7", "tc-seg", 1),
 	form("radio-start", w.Seg{Options: []w.SegOption{{Label: "Markdown · .md", On: true, Value: "markdown.md"}, {Label: "Source · .ics", Value: "source.ics"}}, Variant: w.SegStart, Name: "send.it.as"}, "s-mail-5", "tc-seg", 1),
@@ -80,7 +80,6 @@ var _ = add(
 	form("default", w.Seg{Options: seg(3, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(1, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 2),
-	form("start", w.Seg{Options: []w.SegOption{{Label: "To WebDAV", Value: "webdav"}, {Label: "Download", Value: "download"}, {Label: "Both", On: true, Value: "both"}}, Variant: w.SegStart, Name: "mode"}, "s-backup-3", "tc-seg", 1),
 	form("start", w.Seg{Options: seg(1, "crontab", "GoSentry", "Gitea", "curl"), Variant: w.SegStart}, "s-backup-4", "tc-seg", 1),
 
 	// tc-check
