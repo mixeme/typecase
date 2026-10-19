@@ -831,6 +831,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The account: the own session's End off with its reason; the password
+  change in two cases** (Carrel's task 193; accepted by the owner 19.10).
+  The own session's End is off — «This is the session you are using: sign
+  out instead.» (`account-1`, `-15`, `s-mail-9`). `account-3` is the
+  ordinary change, Back to settings a link; `account-17` the forced one:
+  the red line, no way back, no rail, search or New note — only the
+  user menu to sign out. Password fields are password fields.
 - **The queue's answers to a taken name bring the file again** (Carrel's
   task 214 p. 1): the server keeps no file while it asks, so Keep both and
   Replace are file picks of the answer's form (`keep`, `replace`), sent at

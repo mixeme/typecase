@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("danger-off", w.Button{Label: "End", Kind: w.ButtonDanger, Small: true, Title: "This is the session you are using: sign out instead.", State: w.ButtonDisabled}, "account-1", "tc-btn", 6),
 	primitive("picks-small", w.Button{Label: "Keep both", Small: true, File: &w.FileField{Form: "taken-release", Name: "keep", Label: "Keep both"}}, "components-26", "tc-btn", 2),
 	primitive("disabled", w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "rename", State: w.ButtonDisabled}, "states-34", "tc-btn", 11),
 	primitive("disabled", w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "delete", State: w.ButtonDisabled}, "states-34", "tc-btn", 14),
@@ -61,7 +62,7 @@ var _ = add(
 	primitive("danger-solid", w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}, "components-9", "tc-btn", 5),
 	primitive("danger", w.Button{Label: "Disconnect", Kind: w.ButtonDanger}, "components-9", "tc-btn", 6),
 	primitive("small", w.Button{Label: "Add phone", Icon: "plus", Small: true}, "s-contacts-3", "tc-btn", 10),
-	primitive("danger", w.Button{Label: "End", Small: true, Kind: w.ButtonDanger}, "account-1", "tc-btn", 6),
+	primitive("danger", w.Button{Label: "End", Small: true, Kind: w.ButtonDanger}, "account-1", "tc-btn", 7),
 	primitive("focus", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn", 1),
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn", 3),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),

@@ -12628,7 +12628,7 @@ dav: HTTP 503: the server is busy</div>
           <table class="tc-table tc-grow tc-table--mx-20">
             <thead><tr><th>Where</th><th>Started</th><th class="tc-table__n3">Last seen</th><th class="tc-table__n4 tc-table__col--w120"></th></tr></thead>
             <tbody>
-              <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-table__n4"></td></tr>
+              <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" title="This is the session you are using: sign out instead." type="button" disabled>End</button></td></tr>
               <tr><td>Carrel desktop · Windows</td><td class="tc-mono">2026-08-14 18:40</td><td class="tc-mono tc-table__n3">2 hours ago</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" type="button">End</button></td></tr>
             </tbody>
           </table>
@@ -12778,7 +12778,7 @@ dav: HTTP 503: the server is busy</div>
             <table class="tc-table tc-grow tc-table--mx-20">
               <thead><tr><th>Where</th><th>Started</th><th class="tc-table__n3">Last seen</th><th class="tc-table__n4 tc-table__col--w120"></th></tr></thead>
               <tbody>
-                <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-table__n4"></td></tr>
+                <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" title="This is the session you are using: sign out instead." type="button" disabled>End</button></td></tr>
                 <tr><td>Carrel desktop · Windows</td><td class="tc-mono">2026-08-14 18:40</td><td class="tc-mono tc-table__n3">2 hours ago</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" type="button">End</button></td></tr>
               </tbody>
             </table>
@@ -12940,7 +12940,7 @@ dav: HTTP 503: the server is busy</div>
 
 <figure>
 <div class="frame" data-frame="account-3" data-screen="/app/password">
-  <div class="frame-label"><span>Смена пароля · обычная и вынужденная</span><i>/app/password</i></div>
+  <div class="frame-label"><span>Смена пароля · обычная</span><i>/app/password</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -12975,18 +12975,44 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max520">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Change password</div></div></div>
-      <div class="tc-msg is-alert tc-msg--mr0-ml0">You are signed in with a temporary password. Choose a new one before continuing.</div>
-      <form class="tc-form tc-form--padl0-padr0" id="password" action="/app/settings/account/password" method="post">
-        <div class="tc-field tc-field--lg"><label>Current password</label><input class="tc-in" type="text" name="current.password" value="••••••••••" aria-label="Current password"></div>
-        <div class="tc-field tc-field--lg"><label>New password</label><input class="tc-in is-focus" type="text" name="new.password" value="••••••••••••" aria-label="New password"></div>
-        <div class="tc-field tc-field--lg"><label>Repeat new password</label><input class="tc-in" type="text" name="repeat.new.password" value="••••••••••••" aria-label="Repeat new password"></div>
+      <form class="tc-form tc-form--padl0-padr0" id="password" action="/app/settings/account/password" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--lg"><label>Current password</label><input class="tc-in" type="password" name="current" value="xxxxxxxxxx" aria-label="Current password"></div>
+        <div class="tc-field tc-field--lg"><label>New password</label><input class="tc-in is-focus" type="password" name="password" value="xxxxxxxxxxxx" aria-label="New password"></div>
+        <div class="tc-field tc-field--lg"><label>Repeat new password</label><input class="tc-in" type="password" name="repeat" value="xxxxxxxxxxxx" aria-label="Repeat new password"></div>
         <div class="tc-field tc-grow"><span class="tc-field__hint">Your data stays encrypted under the same key; only the wrapping changes. Saved connections keep working.</span></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="password">Change password</button><button class="tc-btn" type="button">Back to settings</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="password">Change password</button><a class="tc-btn" href="/app/settings/account">Back to settings</a></div>
     </div></div></div>
   </div>
 </div>
-<figcaption>Один экран на два случая. Обычный — из «Account», с кнопкой «назад». Вынужденный — сразу после входа по временному паролю: тогда наверху стоит красная строка, а «назад» не показывается, потому что идти некуда: до смены пароля дальше не пускают. Подпись про перевязку ключа стоит под полями, а не в конце: она снимает главный страх — «не потеряю ли я подключения».</figcaption>
+<figcaption>Обычная смена — из «Account»: три поля, подпись про перевязку ключа под ними и «Back to settings» — ссылкой назад. Вынужденный случай — кадр ниже (account-17).</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="account-17" data-screen="/app/password" data-part="forced">
+  <div class="frame-label"><span>Смена пароля · вынужденная</span><i>дополнительный кадр: forced · /app/password</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-top__actions">
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body tc-shell__body--no-rail">
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max520">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Change password</div></div></div>
+      <div class="tc-msg is-alert tc-msg--mr0-ml0">You are signed in with a temporary password. Choose a new one before continuing.</div>
+      <form class="tc-form tc-form--padl0-padr0" id="password" action="/app/settings/account/password" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--lg"><label>Current password</label><input class="tc-in" type="password" name="current" value="xxxxxxxxxx" aria-label="Current password"></div>
+        <div class="tc-field tc-field--lg"><label>New password</label><input class="tc-in is-focus" type="password" name="password" value="xxxxxxxxxxxx" aria-label="New password"></div>
+        <div class="tc-field tc-field--lg"><label>Repeat new password</label><input class="tc-in" type="password" name="repeat" value="xxxxxxxxxxxx" aria-label="Repeat new password"></div>
+        <div class="tc-field tc-grow"><span class="tc-field__hint">Your data stays encrypted under the same key; only the wrapping changes. Saved connections keep working.</span></div>
+      </form>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="password">Change password</button></div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption>Вынужденная смена — сразу после входа по временному паролю: наверху красная строка, «назад» нет, рейла, поиска и New note нет — до смены пароля дальше не пускают; меню пользователя остаётся, чтобы выйти.</figcaption>
 </figure>
 
 <figure>
@@ -16180,7 +16206,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <table class="tc-table tc-grow tc-table--mx-20">
             <thead><tr><th>Where</th><th>Started</th><th class="tc-table__n3">Last seen</th><th class="tc-table__n4 tc-table__col--w120"></th></tr></thead>
             <tbody>
-              <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-table__n4"></td></tr>
+              <tr><td>Firefox · Windows <span class="tc-badge">this one</span></td><td class="tc-mono">2026-08-16 09:02</td><td class="tc-mono tc-table__n3">just now</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" title="This is the session you are using: sign out instead." type="button" disabled>End</button></td></tr>
               <tr><td>Carrel desktop · Windows</td><td class="tc-mono">2026-08-14 18:40</td><td class="tc-mono tc-table__n3">2 hours ago</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm is-danger" type="button">End</button></td></tr>
             </tbody>
           </table>

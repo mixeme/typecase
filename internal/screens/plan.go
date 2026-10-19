@@ -1002,7 +1002,18 @@ func Account15() Screen {
 														{Parts: []w.CellPart{w.Text("Firefox · Windows "), w.Badge{Label: "this one"}}},
 														{Parts: []w.CellPart{w.Text("2026-08-16 09:02")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("just now")}, Mono: true},
-														{},
+														{
+															Parts: []w.CellPart{
+																w.Button{
+																	Label: "End",
+																	Kind:  w.ButtonDanger,
+																	Small: true,
+																	Title: "This is the session you are using: sign out instead.",
+																	State: w.ButtonDisabled,
+																},
+															},
+															Acts: true,
+														},
 													},
 												},
 												{

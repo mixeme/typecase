@@ -147,7 +147,18 @@ func Account1() Screen {
 													{Parts: []w.CellPart{w.Text("Firefox · Windows "), w.Badge{Label: "this one"}}},
 													{Parts: []w.CellPart{w.Text("2026-08-16 09:02")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("just now")}, Mono: true},
-													{},
+													{
+														Parts: []w.CellPart{
+															w.Button{
+																Label: "End",
+																Kind:  w.ButtonDanger,
+																Small: true,
+																Title: "This is the session you are using: sign out instead.",
+																State: w.ButtonDisabled,
+															},
+														},
+														Acts: true,
+													},
 												},
 											},
 											{
@@ -459,7 +470,18 @@ func Mail9() Screen {
 													{Parts: []w.CellPart{w.Text("Firefox · Windows "), w.Badge{Label: "this one"}}},
 													{Parts: []w.CellPart{w.Text("2026-08-16 09:02")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("just now")}, Mono: true},
-													{},
+													{
+														Parts: []w.CellPart{
+															w.Button{
+																Label: "End",
+																Kind:  w.ButtonDanger,
+																Small: true,
+																Title: "This is the session you are using: sign out instead.",
+																State: w.ButtonDisabled,
+															},
+														},
+														Acts: true,
+													},
 												},
 											},
 											{
@@ -505,7 +527,7 @@ func Mail9() Screen {
 	}
 }
 
-// Account3 is frame «Смена пароля · обычная и вынужденная» (account-3).
+// Account3 is frame «Смена пароля · обычная» (account-3).
 func Account3() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -566,26 +588,23 @@ func Account3() Screen {
 					w.Dialog{
 						Items: []w.DialogPart{
 							w.Head{Title: &w.HeadTitle{Text: "Change password"}},
-							w.Msg{
-								Parts: []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
-							},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Current password",
-										Parts: []w.FieldPart{w.Input{Name: "current.password", Value: "••••••••••", Label: "Current password"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "current", Value: "xxxxxxxxxx", Label: "Current password"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "New password",
-										Parts: []w.FieldPart{w.Input{Name: "new.password", Value: "••••••••••••", Label: "New password", Focus: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxxxx", Label: "New password", Focus: true},
+										},
 										Width: w.FieldLG,
 									},
 									w.Field{
 										Label: "Repeat new password",
-										Parts: []w.FieldPart{w.Input{Name: "repeat.new.password", Value: "••••••••••••", Label: "Repeat new password"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "repeat", Value: "xxxxxxxxxxxx", Label: "Repeat new password"}},
 										Width: w.FieldLG,
 									},
 									w.Field{
@@ -601,13 +620,80 @@ func Account3() Screen {
 								},
 								ID:      "password",
 								Action:  "/app/settings/account/password",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Change password", Kind: w.ButtonPrimary, Form: "password"},
-									w.Button{Label: "Back to settings"},
+									w.Button{Label: "Back to settings", Href: "/app/settings/account"},
 								},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog520,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Account17 is frame «Смена пароля · вынужденная» (account-17).
+func Account17() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:   w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Actions: []w.TopAction{w.UserMenu{Name: "mix"}},
+		},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{Title: &w.HeadTitle{Text: "Change password"}},
+							w.Msg{
+								Parts: []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Current password",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "current", Value: "xxxxxxxxxx", Label: "Current password"}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "New password",
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxxxx", Label: "New password", Focus: true},
+										},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Repeat new password",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "repeat", Value: "xxxxxxxxxxxx", Label: "Repeat new password"}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Your data stays encrypted under the same key; only the wrapping changes. Saved connections keep working."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+								},
+								ID:      "password",
+								Action:  "/app/settings/account/password",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Variant: w.FormFlush,
+							},
+							w.FormFoot{
+								Items:   []w.FormFootPart{w.Button{Label: "Change password", Kind: w.ButtonPrimary, Form: "password"}},
 								Variant: w.FormFootFlush,
 							},
 						},
