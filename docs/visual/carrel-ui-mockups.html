@@ -469,6 +469,7 @@ label.tc-seg__opt{position:relative;cursor:pointer}
   white-space:pre-wrap;overflow:visible;text-overflow:clip}
 .tc-in.is-mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .tc-check{display:flex;align-items:center;gap:7px;font-size:12.5px}
+.tc-check:has(> .tc-check__box:disabled){opacity:.45;cursor:default}
 /* Подпись поля — label без класса; отметка-флажок (label.tc-check) подписью не считается. */
 /* Высота строки: 28 поле, 26 панель, 22 таблица. Всё в строке берёт её. */
 .tc-field > .tc-check:only-child,.tc-field > label + .tc-check:last-child,*:has(> .tc-field > label:not(.tc-check)) > .tc-field:not(.is-own-line) > .tc-check:first-child:has(+ .tc-field__hint),.tc-form > .tc-check,.tc-fset > .tc-check{min-height:28px}
@@ -18908,15 +18909,8 @@ password  4c1-tide-oven</div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
-            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check" title="Mail is not configured: there is nothing to send through yet."><input class="tc-check__box" type="checkbox" name="people" value="on" disabled><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
               <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
-            <div class="tc-field tc-grow"><label>Sender address</label>
-              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
-              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
-            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
-            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
-            <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
-            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
@@ -18927,7 +18921,7 @@ password  4c1-tide-oven</div>
       </div></div>
     </div>
   </div>
-  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; кнопка не выключается никогда: без сервера в поле Host ответ на неё — «Mail is not configured: there is nothing to send through yet.» (кнопка, выключенная по сохранённому, без сценария не включилась бы от набранного; задача 195 п. 5). <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах.</figcaption>
+  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; кнопка не выключается никогда: без сервера в поле Host ответ на неё — «Mail is not configured: there is nothing to send through yet.» (кнопка, выключенная по сохранённому, без сценария не включилась бы от набранного; задача 195 п. 5). <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах. <b>Письма людей — только через настроенную почту</b> (владелец, 19.10): пока почта не сохранена, флажок выключен с причиной; адреса отправителя и лимитов нет, пока отправка выключена, — флажок и Save, и они появляются (s-admin-32).</figcaption>
   </figure>
 
 <figure>
@@ -18986,12 +18980,12 @@ password  4c1-tide-oven</div>
             <div class="tc-field tc-field--md"><label>From name</label><input class="tc-in is-ph" type="text" name="fromName" placeholder="Carrel" aria-label="From name"></div>
           </div>
           <div class="tc-fset">
-            <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
-            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
+            <div class="tc-rubric">Letters from users <span class="tc-badge">on</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on" checked><span class="tc-tickrow__tick"></span>Let users send letters and links from Carrel</label>
               <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
             <div class="tc-field tc-grow"><label>Sender address</label>
-              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
-              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
+              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>carrel@slovo.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@slovo.example</label></span>
+              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">carrel@slovo.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
             <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
             <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
             <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
@@ -19069,13 +19063,6 @@ password  4c1-tide-oven</div>
             <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
             <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
               <span class="tc-field__hint">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
-            <div class="tc-field tc-grow"><label>Sender address</label>
-              <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>noreply@carrel.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@carrel.example</label></span>
-              <span class="tc-field__hint">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">noreply@carrel.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
-            <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
-            <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
-            <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
-            <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
@@ -19505,13 +19492,13 @@ password  4c1-tide-oven</div>
             <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · event</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/personal/carrel-check.ics → 201 · 200 · 204</td></tr>
             <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · task</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/calendars/m.yenuchenko/tasks/carrel-check.ics → 201 · 200 · 204</td></tr>
             <tr class="is-sel"><td><button class="tc-tick tc-tick--edge-danger" type="button"></button></td><td class="tc-dim--danger">Create, read back, delete · contact</td><td class="tc-mono tc-table__n3">PUT /dav.php/addressbooks/m.yenuchenko/contacts/carrel-check.vcf → 403 Forbidden</td></tr>
-            <tr><td><button class="tc-tick is-done" type="button"></button></td><td>Create, read back, delete · file</td><td class="tc-mono tc-table__n3">PUT · GET · DELETE /dav.php/files/m.yenuchenko/carrel-check.txt → 201 · 200 · 204</td></tr>
+            <tr><td><button class="tc-tick tc-tick--edge-dusty" type="button"></button></td><td class="tc-dim--muted">Create, read back, delete · file</td><td class="tc-mono tc-table__n3">skipped: no collection of this kind that can be written to</td></tr>
           </tbody>
         </table>
       </div></div>
     </div>
   </div>
-  <figcaption>Второй этап прошёл: по строке на род записи — создать, прочесть, удалить, — с тем, что ответил сервер. Строка с отказом — красная. Что прогон был, пишет журнал (dav.exercise).</figcaption>
+  <figcaption>Второй этап прошёл: по строке на род записи — создать, прочесть, удалить, — с тем, что ответил сервер. Строка с отказом — красная; пропущенная — серая, как неизмеримое у проверки установки: файловых коллекций на сервере нет (след: 0 plain folders). Что прогон был, пишет журнал (dav.exercise).</figcaption>
   </figure>
 
 <figure>

@@ -1043,9 +1043,10 @@ func Admin3() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Check{
-												Name:  "people",
-												Value: "on",
-												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
+												Name:   "people",
+												Value:  "on",
+												Reason: "Mail is not configured: there is nothing to send through yet.",
+												Parts:  []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -1055,47 +1056,6 @@ func Admin3() Screen {
 										},
 										OwnLine: true,
 										Place:   w.Grown,
-									},
-									w.Field{
-										Label: "Sender address",
-										Parts: []w.FieldPart{
-											w.Seg{
-												Options: []w.SegOption{
-													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
-													{Label: "login@carrel.example", Value: "login"},
-												},
-												Variant: w.SegStart,
-												Name:    "sender",
-											},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
-													w.Mono{Text: "noreply@carrel.example"},
-													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
-												},
-											},
-										},
-										Place: w.Grown,
-									},
-									w.Field{
-										Label: "Attachment, MB",
-										Parts: []w.FieldPart{w.Input{Name: "attach", Value: "2", Label: "Attachment, MB", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Letter, MB",
-										Parts: []w.FieldPart{w.Input{Name: "letter", Value: "8", Label: "Letter, MB", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Recipients",
-										Parts: []w.FieldPart{w.Input{Name: "recipients", Value: "10", Label: "Recipients", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Letters a day",
-										Parts: []w.FieldPart{w.Input{Name: "perDay", Value: "50", Label: "Letters a day", Mono: true}},
-										Width: w.FieldXS,
 									},
 								},
 							},
@@ -1282,11 +1242,12 @@ func Admin32() Screen {
 								},
 							},
 							w.FieldSet{
-								Rubric: w.Rubric{Text: "Letters from users", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Rubric: w.Rubric{Text: "Letters from users", Items: []w.RubricPart{w.Badge{Label: "on"}}},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Check{
+												On:    true,
 												Name:  "people",
 												Value: "on",
 												Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")},
@@ -1305,8 +1266,8 @@ func Admin32() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
-													{Label: "login@carrel.example", Value: "login"},
+													{Label: "carrel@slovo.example", On: true, Value: "noreply"},
+													{Label: "login@slovo.example", Value: "login"},
 												},
 												Variant: w.SegStart,
 												Name:    "sender",
@@ -1314,7 +1275,7 @@ func Admin32() Screen {
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
-													w.Mono{Text: "noreply@carrel.example"},
+													w.Mono{Text: "carrel@slovo.example"},
 													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
 												},
 											},
@@ -1560,47 +1521,6 @@ func Admin33() Screen {
 										},
 										OwnLine: true,
 										Place:   w.Grown,
-									},
-									w.Field{
-										Label: "Sender address",
-										Parts: []w.FieldPart{
-											w.Seg{
-												Options: []w.SegOption{
-													{Label: "noreply@carrel.example", On: true, Value: "noreply"},
-													{Label: "login@carrel.example", Value: "login"},
-												},
-												Variant: w.SegStart,
-												Name:    "sender",
-											},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
-													w.Mono{Text: "noreply@carrel.example"},
-													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
-												},
-											},
-										},
-										Place: w.Grown,
-									},
-									w.Field{
-										Label: "Attachment, MB",
-										Parts: []w.FieldPart{w.Input{Name: "attach", Value: "2", Label: "Attachment, MB", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Letter, MB",
-										Parts: []w.FieldPart{w.Input{Name: "letter", Value: "8", Label: "Letter, MB", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Recipients",
-										Parts: []w.FieldPart{w.Input{Name: "recipients", Value: "10", Label: "Recipients", Mono: true}},
-										Width: w.FieldXS,
-									},
-									w.Field{
-										Label: "Letters a day",
-										Parts: []w.FieldPart{w.Input{Name: "perDay", Value: "50", Label: "Letters a day", Mono: true}},
-										Width: w.FieldXS,
 									},
 								},
 							},
@@ -2575,10 +2495,10 @@ func Admin29() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.Tick{Done: true, Label: "Done"}}},
-									{Parts: []w.CellPart{w.Text("Create, read back, delete · file")}},
+									{Parts: []w.CellPart{w.Tick{Label: "Done", Variant: w.TickEdgeDusty}}},
+									{Parts: []w.CellPart{w.Text("Create, read back, delete · file")}, Tone: w.CellMuted},
 									{
-										Parts: []w.CellPart{w.Text("PUT · GET · DELETE /dav.php/files/m.yenuchenko/carrel-check.txt → 201 · 200 · 204")},
+										Parts: []w.CellPart{w.Text("skipped: no collection of this kind that can be written to")},
 										Mono:  true,
 									},
 								},

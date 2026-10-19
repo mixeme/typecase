@@ -22,3 +22,10 @@ func TestCheckOf(t *testing.T) {
 		t.Errorf("the check does not name its form: %s", got)
 	}
 }
+
+func TestCheckReason(t *testing.T) {
+	got := (Check{Name: "people", Value: "on", Reason: "Mail is not configured.", Parts: []CheckPart{Text("Let users send")}}).Render()
+	if !strings.Contains(got, `<label class="tc-check" title="Mail is not configured.">`) || !strings.Contains(got, ` disabled>`) {
+		t.Errorf("the check is not off with its reason: %s", got)
+	}
+}

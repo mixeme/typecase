@@ -183,10 +183,10 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет; или один из нескольких (Radio) — тогда кружок, выбранный с точкой.
-// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio, Required, Of}.
-// Состояния. on | off | rich | tertiary | box | radio.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio, Required, Of, Reason}.
+// Состояния. on | off | rich | tertiary | box | radio | disabled.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
-// Поведение. Нажатие переключает; пробел — тоже.
+// Поведение. Нажатие переключает; пробел — тоже. Флажок формы с Reason выключен, причина — его подсказка.
 // Эталон. кадр `components-10`, фрагмент `.tc-check`.
 // Содержимое. Подпись: текст, приглушённое пояснение, моноширинный кусок, бейдж, число внутри фразы, сторона конфликта.
 // Чего нет. Третьего состояния: частичный выбор — у строки источника (tc-tickrow), не у флажка.
@@ -216,6 +216,9 @@ type Check struct {
 	Of string
 	// Tertiary goes under «⋯» on a phone when the check stands in a bar.
 	Tertiary bool
+	// Reason turns a check with a Name off and says why: «Let users send
+	// letters» while mail is not configured (Carrel's task 208).
+	Reason string
 }
 
 // Render prints the check.
@@ -228,8 +231,8 @@ func (c Check) html(m mix) string {
 		if c.Radio {
 			kind = "radio"
 		}
-		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + `><input class="tc-check__box" type="` + kind + `"` + attr("form", c.Of) + attr("name", c.Name) + attr("value", c.Value) +
-			attr("aria-label", c.Label) + flag("checked", c.On) + flag("required", c.Required) + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On || c.Radio, "is-off")) + `></span>`)
+		s.WriteString(`<label` + class(m, "tc-check", rank3(c.Tertiary)) + attr("title", c.Reason) + `><input class="tc-check__box" type="` + kind + `"` + attr("form", c.Of) + attr("name", c.Name) + attr("value", c.Value) +
+			attr("aria-label", c.Label) + flag("checked", c.On) + flag("required", c.Required) + flag("disabled", c.Reason != "") + attr("data-tc-disables", c.Disables) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On || c.Radio, "is-off")) + `></span>`)
 		for _, p := range c.Parts {
 			s.WriteString(p.html(nil))
 		}

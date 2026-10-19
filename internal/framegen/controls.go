@@ -697,6 +697,9 @@ func (g *gen) check(x *El) string {
 		if box.HasAttr("required") {
 			f = append(f, "Required: true")
 		}
+		if box.HasAttr("disabled") {
+			f = append(f, "Reason: "+q(x.Attr("title")))
+		}
 	} else if tick != nil && !tick.Has("is-off") {
 		f = append(f, "On: true")
 	}

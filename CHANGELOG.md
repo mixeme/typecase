@@ -74,6 +74,10 @@ do, not what the authors did.
 
 ### Added
 
+- **`Check.Reason`** — a check of a form that is off, and why, as a
+  button's reason: the input is disabled, the reason the label's title,
+  the check dimmed (`.tc-check:has(> .tc-check__box:disabled)`). «Let
+  users send letters» while mail is not configured (Carrel's task 208).
 - **`widget.BarForm`** — a bar's filter that is a GET form (Carrel's task
   195): its fields (a pick with a menu of radios, a date, a dim word) stand
   in the bar as its own; with the library's script a change sends it,
@@ -796,6 +800,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Administration against its data** (Carrel's task 208; accepted by
+  the owner 19.10): letters from users only through configured mail —
+  in `s-admin-3` (mail not configured) the check is off with «Mail is not
+  configured: there is nothing to send through yet.», and with sending
+  off there is no Sender address and no limits (`s-admin-3`, `-33`);
+  `s-admin-32` has sending on, its sender the From address
+  `carrel@slovo.example` (no made-up `noreply@carrel.example`). The DAV
+  check's second stage (`s-admin-29`): the file row skipped, grey as an
+  unmeasured row of the installation check — «skipped: no collection of
+  this kind that can be written to» (the trace says 0 plain folders).
 - **Files: what cannot be done is off, and one tree for one set** (Carrel's
   task 206; accepted by the owner 19.10): in a read-only storage
   (`states-34`) the rail's New folder is off, its reason «This storage is

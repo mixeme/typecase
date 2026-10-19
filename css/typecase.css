@@ -288,6 +288,7 @@ label.tc-seg__opt{position:relative;cursor:pointer}
   white-space:pre-wrap;overflow:visible;text-overflow:clip}
 .tc-in.is-mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .tc-check{display:flex;align-items:center;gap:7px;font-size:12.5px}
+.tc-check:has(> .tc-check__box:disabled){opacity:.45;cursor:default}
 /* Подпись поля — label без класса; отметка-флажок (label.tc-check) подписью не считается. */
 /* Высота строки: 28 поле, 26 панель, 22 таблица. Всё в строке берёт её. */
 .tc-field > .tc-check:only-child,.tc-field > label + .tc-check:last-child,*:has(> .tc-field > label:not(.tc-check)) > .tc-field:not(.is-own-line) > .tc-check:first-child:has(+ .tc-field__hint),.tc-form > .tc-check,.tc-fset > .tc-check{min-height:28px}
