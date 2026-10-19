@@ -340,11 +340,12 @@ func TestCatalogBaseWithoutScript(t *testing.T) {
 	}
 }
 
-// segClickJS presses the second option of the first switch and reports where
+// segClickJS presses the second option of the first switch of buttons (a
+// switch of links goes to its address: no switching to see) and reports where
 // the mark and the announced state ended up; segKeyJS then moves the choice
 // with the arrow key from there.
 const segClickJS = `(() => {
-  const seg = [...document.querySelectorAll(".catalog-demo .tc-seg")].find(s => s.querySelectorAll(".tc-seg__opt").length > 2);
+  const seg = [...document.querySelectorAll(".catalog-demo .tc-seg")].find(s => s.querySelectorAll("button.tc-seg__opt").length > 2);
   if (!seg) return { missing: true };
   seg.id = "seg-under-test";
   const opts = [...seg.querySelectorAll(".tc-seg__opt")];

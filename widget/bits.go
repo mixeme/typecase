@@ -334,7 +334,7 @@ type QueueItem struct {
 // Queue — tc-queue
 //
 // Роль. Очередь загрузки: что грузится, сколько, что не вышло и что с ним сделать.
-// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone, Progress, Row, Fold}.
+// Вход. Queue{Title, Total, Toggle, Items, Min, Variant, Zone, Progress, Row, Fold, Taken}.
 // Состояния. min | flush.
 // Инварианты. Заголовок — сколько из скольких; ошибка — словами у файла, а не общей плашкой; очередь печатает фрагмент своего кадра.
 // Поведение. «Hide» сворачивает очередь в строку, «Show» разворачивает: со сценарием — на месте (Fold), без него — ответом сервера.
@@ -368,6 +368,10 @@ type Queue struct {
 	// knows them; pressed again, it unfolds. Without a script Toggle is
 	// what the server answers (Hide and Show as links).
 	Fold *QueueFold
+	// Taken is the row that asks about a file whose name is taken, before
+	// it goes (FileField.Taken, Carrel's task 214): «{name}» is the file's,
+	// its buttons' values say what to do — keep, replace or skip.
+	Taken *QueueItem
 }
 
 // QueueFold is what a queue says folded and unfolded (Queue.Fold).
@@ -399,7 +403,10 @@ func (q Queue) html(m mix) string {
 	if q.Row != nil {
 		s.WriteString(`<template data-tc-row>` + q.Row.html() + `</template>`)
 	}
-	if len(q.Items) > 0 || q.Row != nil {
+	if q.Taken != nil {
+		s.WriteString(`<template data-tc-taken>` + q.Taken.html() + `</template>`)
+	}
+	if len(q.Items) > 0 || q.Row != nil || q.Taken != nil {
 		s.WriteString(`<ul class="tc-queue__list">`)
 		for _, it := range q.Items {
 			s.WriteString(it.html())

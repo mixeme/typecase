@@ -594,6 +594,15 @@ type FileField struct {
 	// «offset-length», instead of the file. Without the layer the whole
 	// file goes.
 	Ranges string
+	// Taken is the address that says which of the picked files' names are
+	// taken where they go (Carrel's task 214: nothing of a file is kept
+	// while a question waits). With the live layer and a queue that shows
+	// the form (Queue.Progress, Queue.Taken) the form asks it first — its
+	// hidden fields and a «name» a file — and it answers the taken names, a
+	// line each; the queue asks about each, and the form goes when all are
+	// answered: skipped files left out, «taken.<name>» = keep or replace
+	// for the rest. Without the layer the server asks after the upload.
+	Taken string
 }
 
 // PickedRow is the row a picked file of an edit becomes: a document's
@@ -609,7 +618,7 @@ func (Line) pickedRow()      {}
 func (f FileField) input() string {
 	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) +
 		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + attr("data-tc-shows", f.Shows) +
-		attr("data-tc-size", f.Size) + attr("data-tc-ranges", f.Ranges) + flag("multiple", f.Many || f.Folder) + flag("webkitdirectory", f.Folder) + `>`
+		attr("data-tc-size", f.Size) + attr("data-tc-ranges", f.Ranges) + attr("data-tc-taken", f.Taken) + flag("multiple", f.Many || f.Folder) + flag("webkitdirectory", f.Folder) + `>`
 }
 
 // multipart makes a printed form one that sends files, when a file field

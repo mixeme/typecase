@@ -2566,3 +2566,73 @@ func TestFileRanges(t *testing.T) {
 		t.Errorf("without the layer the action got %q; want the whole file", got)
 	}
 }
+
+// TestFileTaken: a file field with data-tc-taken asks which picked names
+// are taken before the files go (Carrel's task 214): the taken one gets the
+// queue's question row, nothing is sent until it is answered; Replace sends
+// both with «taken.<name>=replace», Skip sends the other alone.
+func TestFileTaken(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var asked, got []string
+	taken := h.RegisterStream("taken", func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(w, err.Error(), 400)
+			return
+		}
+		asked = append(asked, r.FormValue("csrf")+" "+strings.Join(r.MultipartForm.Value["name"], ","))
+		_, _ = w.Write([]byte("b.txt\n"))
+	})
+	upload := h.RegisterStream("upload", func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(w, err.Error(), 400)
+			return
+		}
+		var names []string
+		for _, fh := range r.MultipartForm.File["file"] {
+			names = append(names, fh.Filename)
+		}
+		got = append(got, strings.Join(names, ",")+" "+r.FormValue("taken.b.txt"))
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write([]byte(`<!doctype html><p id="done">uploaded</p>`))
+	})
+	q := w.Queue{Title: "Uploading", Total: w.Mono{Text: "", Variant: w.MonoDusty, Place: w.Pushed}, Toggle: w.Button{Label: "Hide", Small: true}, Progress: "up",
+		Row: &w.QueueItem{Name: "{name}", Meta: "{size}"},
+		Taken: &w.QueueItem{Name: "{name}", Meta: "name taken", Failed: true, Acts: []w.Button{
+			{Label: "Keep both", Small: true, Name: "answer", Value: "keep"}, {Label: "Replace", Small: true, Name: "answer", Value: "replace"}, {Label: "Skip", Small: true, Name: "answer", Value: "skip"}}}}
+	body := `<div class="tc-root"><form id="up" action="` + upload + `" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="x1">` +
+		`<input class="tc-file" type="file" name="file" multiple aria-label="Files" data-tc-taken="` + taken + `"><button class="tc-btn" type="submit">Upload</button></form>` + q.Render() + `</div>`
+	dir := t.TempDir()
+	a, b := filepath.Join(dir, "a.txt"), filepath.Join(dir, "b.txt")
+	for _, f := range []string{a, b} {
+		if err := os.WriteFile(f, []byte("x"), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	for _, c := range []struct{ answer, want string }{{"replace", "a.txt,b.txt replace"}, {"skip", "a.txt "}} {
+		asked, got = nil, nil
+		var rows int
+		if err := h.Run(h.RegisterPage("taken-"+c.answer, browser.PageHTML(body, "")), 900, 600,
+			chromedp.SetUploadFiles(`.tc-file`, []string{a, b}, chromedp.ByQuery),
+			chromedp.Click(`button[type="submit"]`, chromedp.ByQuery),
+			chromedp.WaitVisible(`.tc-queue__list button[value="`+c.answer+`"]`, chromedp.ByQuery),
+			chromedp.Evaluate(`document.querySelectorAll(".tc-queue__list li").length`, &rows),
+			chromedp.ActionFunc(func(ctx context.Context) error {
+				if len(got) != 0 || rows != 1 {
+					t.Errorf("%s: before the answer %d rows and %q sent; want one question and nothing sent", c.answer, rows, got)
+				}
+				return nil
+			}),
+			chromedp.Click(`.tc-queue__list button[value="`+c.answer+`"]`, chromedp.ByQuery),
+			chromedp.WaitVisible(`#done`, chromedp.ByQuery),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if strings.Join(asked, "|") != "x1 a.txt,b.txt" {
+			t.Errorf("%s: the taken address was asked %q; want the hidden fields and both names", c.answer, asked)
+		}
+		if strings.Join(got, "|") != c.want {
+			t.Errorf("%s: the upload got %q; want %q", c.answer, got, c.want)
+		}
+	}
+}

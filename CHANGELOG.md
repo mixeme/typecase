@@ -83,6 +83,14 @@ do, not what the authors did.
 
 ### Added
 
+- **`FileField.Taken` and `Queue.Taken`** — the taken names asked before
+  the files go (Carrel's task 214: the server keeps nothing of a file while
+  a question waits). With the live layer a form whose queue shows it asks
+  the field's address first — its hidden fields and a «name» a file — and
+  the server answers the taken names, a line each; the queue asks about
+  each with a row of its `Taken` template (buttons valued keep, replace,
+  skip); when all are answered the skipped files leave the field, the
+  answers go as «taken.<name>», and the form goes with its progress.
 - **`FileField.Ranges`** — a file that goes in parts (Carrel's task 213 p.
   2: a large archive is read where it lies, never copied whole). With the
   live layer a form with such a field asks that address first — its other
@@ -823,6 +831,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The queue's answers to a taken name bring the file again** (Carrel's
+  task 214 p. 1): the server keeps no file while it asks, so Keep both and
+  Replace are file picks of the answer's form (`keep`, `replace`), sent at
+  once with the script and by Send without one; Skip is that form's
+  button (`s-files-2`, `components-26`). The look with a script is the
+  same.
 - **Restore from a server and its report, a new job, the escrow after a
   recovery** (Carrel's task 193 p. 5; accepted by the owner 19.10).
   `s-backup-17` — «From a server»: a collection and the archive's path in

@@ -740,6 +740,11 @@ func Files2() Screen {
 						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
+					w.PostForm{
+						ID:     "taken-release",
+						Action: "/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
 					w.Queue{
 						Title:  "Uploading 2 of 4",
 						Total:  w.Mono{Text: "12.4 MB", Variant: w.MonoDusty, Place: w.Pushed},
@@ -752,9 +757,18 @@ func Files2() Screen {
 								Meta:   "name taken",
 								Failed: true,
 								Acts: []w.Button{
-									w.Button{Label: "Keep both", Small: true},
-									w.Button{Label: "Replace", Small: true},
-									w.Button{Label: "Skip", Small: true},
+									w.Button{
+										Label: "Keep both",
+										Small: true,
+										File:  &w.FileField{Form: "taken-release", Name: "keep", Label: "Keep both"},
+									},
+									w.Button{
+										Label: "Replace",
+										Small: true,
+										File:  &w.FileField{Form: "taken-release", Name: "replace", Label: "Replace"},
+									},
+									w.Button{Label: "Send", Small: true, Form: "taken-release", NoScript: true},
+									w.Button{Label: "Skip", Small: true, Form: "taken-release", Name: "answer", Value: "skip"},
 								},
 							},
 							{Name: "архив-2025.zip", Meta: "the server needs the size", Failed: true},

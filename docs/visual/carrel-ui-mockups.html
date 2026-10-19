@@ -2910,9 +2910,10 @@ label.tc-field__swatch{position:relative;cursor:pointer}
       <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
       <li><div class="tc-queue__row"><span class="tc-queue__name">плакат.png</span><span class="tc-queue__meta">8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
       <li><div class="tc-queue__row"><span class="tc-dim--danger">release-checklist.md</span><span class="tc-dim--danger">name taken</span></div>
-        <div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button">Keep both</button><button class="tc-btn is-sm" type="button">Replace</button><button class="tc-btn is-sm" type="button">Skip</button></div></li>
+        <div class="tc-line tc-line--gap-6 tc-queue__acts"><label class="tc-btn is-sm">Keep both<input class="tc-file" type="file" name="keep" form="taken-release" aria-label="Keep both"></label><label class="tc-btn is-sm">Replace<input class="tc-file" type="file" name="replace" form="taken-release" aria-label="Replace"></label><button class="tc-btn is-sm tc-nojs" type="submit" form="taken-release">Send</button><button class="tc-btn is-sm" type="submit" form="taken-release" name="answer" value="skip">Skip</button></div></li>
     </ul>
   </div>
+  <form class="tc-post" id="taken-release" action="/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
 </div>
 </div>
 </figure>
@@ -9817,13 +9818,14 @@ Read  2 min ago</div>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <form class="tc-post" id="taken-release" action="/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-queue" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%">
           <div class="tc-queue__head"><b>Uploading 2 of 4</b><span class="tc-mono tc-push tc-mono--dusty">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
           <ul class="tc-queue__list">
             <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-queue__name">плакат.png</span><span class="tc-queue__meta">8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-dim--danger">release-checklist.md</span><span class="tc-dim--danger">name taken</span></div>
-              <div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button">Keep both</button><button class="tc-btn is-sm" type="button">Replace</button><button class="tc-btn is-sm" type="button">Skip</button></div></li>
+              <div class="tc-line tc-line--gap-6 tc-queue__acts"><label class="tc-btn is-sm">Keep both<input class="tc-file" type="file" name="keep" form="taken-release" aria-label="Keep both"></label><label class="tc-btn is-sm">Replace<input class="tc-file" type="file" name="replace" form="taken-release" aria-label="Replace"></label><button class="tc-btn is-sm tc-nojs" type="submit" form="taken-release">Send</button><button class="tc-btn is-sm" type="submit" form="taken-release" name="answer" value="skip">Skip</button></div></li>
             <li><div class="tc-queue__row"><span class="tc-dim--danger">архив-2025.zip</span><span class="tc-dim--danger">the server needs the size</span></div></li>
           </ul>
         </div>
@@ -9831,7 +9833,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption>Здесь же видно правило из <a href="#details-panel">§4.1</a>: выделено несколько — панель подробностей не открывается, список занимает всю ширину, а сводка по выделенному стоит в самой панели операций. Панель операций заменяет собой панель фильтров, пока что-то выделено. «Rename» приглушён — переименовать можно ровно один объект. <b>Очередь загрузок стоит в правом нижнем углу колонки содержимого</b>, не окна и не рейла, и не блокирует работу. Hide сворачивает её в строку того же угла; Show возвращает список. Когда загрузок нет, угла нет. Занятое имя не роняет загрузку молча, а спрашивает: <b>Keep both</b> берёт следующее свободное имя, <b>Replace</b> перезаписывает осознанно. Запрет перезаписи по умолчанию остаётся, но в момент столкновения это выбор человека, а не отказ без вариантов.</figcaption>
+<figcaption>Здесь же видно правило из <a href="#details-panel">§4.1</a>: выделено несколько — панель подробностей не открывается, список занимает всю ширину, а сводка по выделенному стоит в самой панели операций. Панель операций заменяет собой панель фильтров, пока что-то выделено. «Rename» приглушён — переименовать можно ровно один объект. <b>Очередь загрузок стоит в правом нижнем углу колонки содержимого</b>, не окна и не рейла, и не блокирует работу. Hide сворачивает её в строку того же угла; Show возвращает список. Когда загрузок нет, угла нет. Занятое имя не роняет загрузку молча, а спрашивает: <b>Keep both</b> берёт следующее свободное имя, <b>Replace</b> перезаписывает осознанно. Файла с занятым именем сервер не держит, пока ждёт ответа (S-17.3), поэтому Keep both и Replace приносят его снова: это выбор файла, со сценарием он уходит сразу, без сценария — по Send рядом; Skip — кнопка той же формы. Запрет перезаписи по умолчанию остаётся, но в момент столкновения это выбор человека, а не отказ без вариантов.</figcaption>
 </figure>
 
 <figure>

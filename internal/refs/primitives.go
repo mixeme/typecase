@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("picks-small", w.Button{Label: "Keep both", Small: true, File: &w.FileField{Form: "taken-release", Name: "keep", Label: "Keep both"}}, "components-26", "tc-btn", 2),
 	primitive("disabled", w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "rename", State: w.ButtonDisabled}, "states-34", "tc-btn", 11),
 	primitive("disabled", w.Button{Folds: true, Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "delete", State: w.ButtonDisabled}, "states-34", "tc-btn", 14),
 	primitive("with-content", w.Button{Label: "Upload", Icon: "upload", Kind: w.ButtonPrimary, File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}}, "states-32", "tc-btn", 11),

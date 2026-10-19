@@ -142,6 +142,82 @@
 			.catch(plain);
 	});
 
+	// A file field with data-tc-taken asks, before its files go, which of
+	// their names are taken where they go (Carrel's task 214: the server
+	// keeps nothing of a file while it asks). The form's hidden fields and a
+	// «name» a file go to that address; it answers the taken names, a line
+	// each. A row of the queue's template[data-tc-taken] asks about each —
+	// its buttons' values are keep, replace and skip — and when every one is
+	// answered, the skipped files leave the field, the answers go with the
+	// form as «taken.<name>», and the form is sent the way it would have
+	// been. Nothing taken, no queue to ask in, or the asking fails: the form
+	// is sent at once.
+	function askTaken(form, by, input, line) {
+		var files = Array.prototype.slice.call(input.files), nameOf = function (f) {
+			return f.webkitRelativePath || f.name;
+		};
+		var names = new FormData();
+		Array.prototype.forEach.call(form.elements, function (x) {
+			if (x.type === "hidden" && x.name && !x.hasAttribute("data-tc-answer")) names.append(x.name, x.value);
+		});
+		files.forEach(function (f) {
+			names.append("name", nameOf(f));
+		});
+		var go = function () {
+			form.__tcAsked = true;
+			if (form.requestSubmit) form.requestSubmit(by || undefined);
+			else form.submit();
+		};
+		fetch(new URL(input.getAttribute("data-tc-taken"), location.href).href, { method: "POST", body: names, credentials: "same-origin" })
+			.then(function (r) {
+				if (!r.ok) throw new Error("taken " + r.status);
+				return r.text();
+			})
+			.then(function (text) {
+				var taken = text.split(/\r?\n/).map(function (s) {
+					return s.trim();
+				});
+				var asked = files.filter(function (f) {
+					return taken.indexOf(nameOf(f)) >= 0;
+				});
+				var tpl = line && line.querySelector(":scope > template[data-tc-taken]"), list = line && line.querySelector(":scope > .tc-queue__list");
+				if (!asked.length || !tpl || !tpl.content.firstElementChild || !list) return go();
+				line.hidden = false;
+				line.style.display = "";
+				var left = asked.length, skipped = [];
+				asked.forEach(function (f) {
+					var row = tpl.content.firstElementChild.cloneNode(true);
+					tc.fillWords(row, { "{name}": nameOf(f) });
+					list.appendChild(row);
+					row.addEventListener("click", function (ev) {
+						var b = ev.target.closest && ev.target.closest("button[value]");
+						if (!b) return;
+						if (b.value === "skip") skipped.push(f);
+						else {
+							var h = document.createElement("input");
+							h.type = "hidden";
+							h.name = "taken." + nameOf(f);
+							h.value = b.value;
+							h.setAttribute("data-tc-answer", "");
+							form.appendChild(h);
+						}
+						row.remove();
+						if (--left) return;
+						if (skipped.length) {
+							var keep = new DataTransfer();
+							files.forEach(function (x) {
+								if (skipped.indexOf(x) < 0) keep.items.add(x);
+							});
+							input.files = keep.files;
+						}
+						if (input.files.length) go();
+						else if (!list.children.length) line.hidden = true;
+					});
+				});
+			})
+			.catch(go);
+	}
+
 	document.addEventListener("submit", function (e) {
 		var form = e.target, by = e.submitter || null;
 		if (e.defaultPrevented || sentPlain || !window.FormData || !window.XMLHttpRequest) return;
@@ -150,6 +226,15 @@
 		var target = targetOf(by) || targetOf(form), zone = target ? zoneOf(target) : null;
 		if (zone && (!shows(zone) || !sameSite(action))) zone = null;
 		if (!line && !zone) return;
+		var asker = Array.prototype.filter.call(form.elements, function (x) {
+			return x.type === "file" && x.hasAttribute("data-tc-taken") && x.files && x.files.length;
+		})[0];
+		if (asker && !form.__tcAsked && window.fetch) {
+			e.preventDefault();
+			askTaken(form, by, asker, line);
+			return;
+		}
+		form.__tcAsked = false;
 		var data = new FormData(form, by || undefined);
 		var files = [];
 		data.forEach(function (v) {
@@ -202,6 +287,9 @@
 				});
 				Array.prototype.forEach.call(form.elements, function (f) {
 					if (f.type === "file") f.value = "";
+				});
+				Array.prototype.forEach.call(form.querySelectorAll("[data-tc-answer]"), function (h) {
+					h.remove();
 				});
 				if (line && !queue) line.hidden = true;
 				if (put(target, x.responseText)) return;
