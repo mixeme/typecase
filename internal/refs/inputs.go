@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("key", w.Input{Value: "cbk_2c9e-07ab-5d31-fern", Label: "Password", Mono: true, ReadOnly: true, Variant: w.InputKeySmFill}, "s-backup-13", "tc-in", 1),
 	form("placeholder", w.Input{Name: "folder.in.it", Placeholder: "/carrel/attachments", Label: "Folder in it", Mono: true, Variant: w.InputFill}, "attachments-5", "tc-in", 2),
 	form("error", w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Error: true}, "s-profile-24", "tc-in", 4),
 	form("value", w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"}, "s-profile-2", "tc-in", 4),
@@ -64,7 +65,6 @@ var _ = add(
 	form("placeholder", w.Input{Placeholder: "Дни рождения", Focus: true, Label: "Type the name to confirm"}, "s-profile-9", "tc-in", 1),
 	form("focus", w.Input{Value: "https://feeds.example/ru-holidays.ics", Mono: true, Focus: true, Variant: w.Input11_5, Label: "Feed address"}, "s-profile-10", "tc-in", 1),
 	form("variant", w.Input{Value: "brick-lamp-9f2-carrel", Mono: true, Variant: w.InputKeyFill, Label: "Password"}, "s-davloom-3", "tc-in", 1),
-	form("variant", w.Input{Value: "cbk_7f3a-91de-4402-lamp", Mono: true, Variant: w.InputKeySmFill, Label: "Token"}, "s-backup-5", "tc-in", 1),
 	form("variant", w.Input{Kind: w.InputDate, Value: "2026-08-01", Mono: true, Variant: w.InputH26W120, Label: "From"}, "s-admin-7", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "a-z 0-9 . _ -", Focus: true, Mono: true, Label: "Login"}, "s-auth-4", "tc-in", 1),
 	form("placeholder", w.Input{Placeholder: `E:\Carrel`, Mono: true, Variant: w.Input11Fill, Label: "Folder"}, "desktop-3", "tc-in", 1),

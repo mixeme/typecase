@@ -164,7 +164,7 @@ var _ = add(
 	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
 
 	// tc-dim
-	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, "s-backup-12", "tc-dim", 14),
+	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, "s-backup-12", "tc-dim", 13),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}, "s-contacts-6", "tc-dim", 1),
 	primitive("mixed", dim(w.Dim11, w.DimInline, w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}), "components-35", "tc-dim", 1),
 	primitive("sized", dim(w.Dim11, w.DimInline, w.Text("No device connects until it is started.")), "components-35", "tc-dim", 2),
@@ -188,6 +188,7 @@ var _ = add(
 	// words in two lengths (Р-65): the run of a search, its answer's time
 	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
 	primitive("mono", w.Say{Full: "answered 11:42", Short: "11:42", Mono: true}, "s-find-1", "tc-say", 2),
+	primitive("danger", w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}, "s-backup-13", "tc-mono", 7),
 	primitive("span", w.Mono{Text: "14 items · 38.2 MB"}, "components-16", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: ".vcf", Variant: w.Mono11}, "components-19", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "12", Variant: w.MonoTight}, "components-11", "tc-mono", 1),
@@ -200,7 +201,6 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "12.4 MB", Variant: w.MonoDusty}, "components-26", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "8 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-2", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}, "s-profile-1", "tc-mono", 8),
-	primitive("variant", w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}, "s-backup-3", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "10:00", Variant: w.MonoFace}, "print-1", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "264 px · sections + sources", Form: w.MonoLine, Variant: w.Mono11Top}, "shell-1", "tc-mono", 1),
 	primitive("code", w.Mono{Text: "MOVE", Form: w.MonoCode}, "s-contacts-2", "tc-mono", 6),

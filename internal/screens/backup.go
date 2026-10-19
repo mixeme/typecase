@@ -107,10 +107,7 @@ func Backup1() Screen {
 										Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
 										Mono:  true,
 									},
-									{
-										Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
-										Mono:  true,
-									},
+									{Parts: []w.CellPart{w.Badge{Label: "trigger"}}},
 									{Parts: []w.CellPart{w.Text("14")}, Mono: true},
 									{
 										Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
@@ -147,8 +144,10 @@ func Backup1() Screen {
 											w.Line{
 												Items: []w.LinePart{
 													w.Mark{Colour: "#4A6B52"},
+													w.Mark{Colour: "#4A6B52"},
 													w.Mark{Colour: "#A05A2C"},
-													w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+													w.Mark{Colour: "#4A6B52"},
+													w.Mono{Text: "4 collections + files", Variant: w.Mono11Indent},
 												},
 												Gap: w.LineGap3,
 											},
@@ -205,7 +204,7 @@ func Backup1() Screen {
 										Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
 										Mono:  true,
 									},
-									{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 									{
@@ -317,7 +316,7 @@ func Backup1() Screen {
 									{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
 									{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("4 / 4 + 1 240 files")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("read back")}},
 									{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
 									{
@@ -505,6 +504,25 @@ func Backup2() Screen {
 											w.FieldGridColumn{
 												Items: []w.TickRow{
 													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "baikal",
+														Meta:   "0 of 1",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "baikal|obshchij"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#9A9280"},
+														Label:  "Общий",
+														Meta:   "cal.",
+													},
+												},
+											},
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
 														Ticked: w.TickedPart,
 														Form:   w.TickRowGroup,
 														Mark:   w.Mark{Kind: w.MarkMulti},
@@ -664,9 +682,7 @@ func Backup2() Screen {
 										Width: w.FieldLG,
 									},
 									w.Msg{
-										Parts: []w.MsgPart{
-											w.Text("Separate from the sign-in password: the destination may be somebody else’s hosting. Forget it and this job’s archives open for nobody, including you."),
-										},
+										Parts: []w.MsgPart{w.Text("Separate from the sign-in password.")},
 										Tone:  w.MsgAlert,
 										Space: w.MsgFlushTop2,
 										Place: w.Grown,
@@ -832,10 +848,7 @@ func Backup12() Screen {
 											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
 											Mono:  true,
 										},
-										{
-											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
-											Mono:  true,
-										},
+										{Parts: []w.CellPart{w.Badge{Label: "trigger"}}},
 										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
 										{
 											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
@@ -872,8 +885,10 @@ func Backup12() Screen {
 												w.Line{
 													Items: []w.LinePart{
 														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#4A6B52"},
 														w.Mark{Colour: "#A05A2C"},
-														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "4 collections + files", Variant: w.Mono11Indent},
 													},
 													Gap: w.LineGap3,
 												},
@@ -930,7 +945,7 @@ func Backup12() Screen {
 											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
 											Mono:  true,
 										},
-										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 										{
@@ -1042,7 +1057,7 @@ func Backup12() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
 										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("4 / 4 + 1 240 files")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("read back")}},
 										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
 										{
@@ -1255,10 +1270,7 @@ func Backup13() Screen {
 											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
 											Mono:  true,
 										},
-										{
-											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
-											Mono:  true,
-										},
+										{Parts: []w.CellPart{w.Badge{Label: "trigger"}}},
 										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
 										{
 											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
@@ -1295,8 +1307,10 @@ func Backup13() Screen {
 												w.Line{
 													Items: []w.LinePart{
 														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#4A6B52"},
 														w.Mark{Colour: "#A05A2C"},
-														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "4 collections + files", Variant: w.Mono11Indent},
 													},
 													Gap: w.LineGap3,
 												},
@@ -1353,7 +1367,7 @@ func Backup13() Screen {
 											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
 											Mono:  true,
 										},
-										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 										{
@@ -1465,7 +1479,7 @@ func Backup13() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
 										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("4 / 4 + 1 240 files")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("read back")}},
 										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
 										{
@@ -1679,10 +1693,7 @@ func Backup14() Screen {
 											Parts: []w.CellPart{w.Text("sftpgo · vps · Documents"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("/backup/work")}}},
 											Mono:  true,
 										},
-										{
-											Parts: []w.CellPart{w.Text("cron · 03:00"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("external trigger")}}},
-											Mono:  true,
-										},
+										{Parts: []w.CellPart{w.Badge{Label: "trigger"}}},
 										{Parts: []w.CellPart{w.Text("14")}, Mono: true},
 										{
 											Parts: []w.CellPart{w.Text("2026-08-16 03:10"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("18.4 MB · verified")}}},
@@ -1719,8 +1730,10 @@ func Backup14() Screen {
 												w.Line{
 													Items: []w.LinePart{
 														w.Mark{Colour: "#4A6B52"},
+														w.Mark{Colour: "#4A6B52"},
 														w.Mark{Colour: "#A05A2C"},
-														w.Mono{Text: "2 collections + files", Variant: w.Mono11Indent},
+														w.Mark{Colour: "#4A6B52"},
+														w.Mono{Text: "4 collections + files", Variant: w.Mono11Indent},
 													},
 													Gap: w.LineGap3,
 												},
@@ -1777,7 +1790,7 @@ func Backup14() Screen {
 											Parts: []w.CellPart{w.Text("download in browser"), w.Break{}, w.Dim{Parts: []w.Inline{w.Text("nothing is written")}}},
 											Mono:  true,
 										},
-										{Parts: []w.CellPart{w.Text("on demand")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("never")}, Mono: true, Tone: w.CellDusty},
 										{
@@ -1889,7 +1902,7 @@ func Backup14() Screen {
 										{Parts: []w.CellPart{w.Text("2026-08-14 09:12")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("Личное на домашний диск")}},
 										{Parts: []w.CellPart{w.Text("2.1 GB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2 / 2 + 1 240 files")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("4 / 4 + 1 240 files")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("read back")}},
 										{Parts: []w.CellPart{w.Text("on sign-in")}, Mono: true},
 										{

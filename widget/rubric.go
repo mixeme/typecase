@@ -20,7 +20,6 @@ const (
 	RubricBottom7                // 7 px below
 	RubricBottom8                // 8 px below: over a list in prose
 	RubricRail                   // the padding of a rail section
-	RubricGap13                  // 13 px above, 6 below
 	RubricSplit                  // words left, a count at the right edge, nudged
 	RubricDanger                 // a server that does not answer
 	RubricRow                    // a line: words, then items, 8 px apart
@@ -29,7 +28,7 @@ const (
 
 func (v RubricVariant) class() string {
 	return [...]string{"", "tc-rubric--bot2", "tc-rubric--bot7", "tc-rubric--bot8", "tc-rubric--pad0-14-6",
-		"tc-rubric--m13-0-6", "tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--gap-8", "tc-line"}[v]
+		"tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--gap-8", "tc-line"}[v]
 }
 
 // RubricPart is what a rubric holds after its words.

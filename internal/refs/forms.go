@@ -44,8 +44,8 @@ var _ = add(
 	form("order", w.Seg{Options: []w.SegOption{{Label: "Name", Href: "/app/files/sftpgo/documents?sort=name", On: true}, {Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"}, {Label: "Changed", Href: "/app/files/sftpgo/documents?sort=changed"}}}, "s-files-1", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}}, "s-contacts-1", "tc-seg", 1),
 	form("buttons", w.Seg{Options: []w.SegOption{{Label: "Apple"}, {Label: "Android", On: true}, {Label: "Thunderbird"}, {Label: "Anything else"}}}, "s-plan-2", "tc-seg", 1),
-	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea"}, {Label: "curl", On: true}}, Variant: w.SegStart}, "s-backup-11", "tc-seg", 1),
-	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab"}, {Label: "GoSentry"}, {Label: "Gitea", On: true}, {Label: "curl"}}, Variant: w.SegStart}, "s-backup-10", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup/trigger?job=personal&tab=crontab"}, {Label: "GoSentry", Href: "/app/settings/backup/trigger?job=personal&tab=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup/trigger?job=personal&tab=gitea"}, {Label: "curl", Href: "/app/settings/backup/trigger?job=personal&tab=curl", On: true}}, Variant: w.SegStart}, "s-backup-11", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup/trigger?job=personal&tab=crontab"}, {Label: "GoSentry", Href: "/app/settings/backup/trigger?job=personal&tab=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup/trigger?job=personal&tab=gitea", On: true}, {Label: "curl", Href: "/app/settings/backup/trigger?job=personal&tab=curl"}}, Variant: w.SegStart}, "s-backup-10", "tc-seg", 1),
 	form("default", w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, "s-dup-1", "tc-seg", 1),
 	form("views", w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, Phone: true}, "s-agenda-1", "tc-segfold", 1),
 	form("default", w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "All", Count: "24", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true}, {Label: "Events", Count: "14", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event"}, {Label: "Tasks", Count: "2", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task"}, {Label: "Notes", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note"}, {Label: "Files", Count: "4", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file"}}}}, "s-contacts-7", "tc-segfold", 1),
@@ -80,7 +80,7 @@ var _ = add(
 	form("default", w.Seg{Options: seg(3, "Apple", "Android", "Thunderbird", "Anything else")}, "s-plan-5", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(1, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 1),
 	form("compact", w.Seg{Options: seg(0, "read only", "read and write"), Variant: w.SegCompact}, "s-davloom-1", "tc-seg", 2),
-	form("start", w.Seg{Options: seg(1, "crontab", "GoSentry", "Gitea", "curl"), Variant: w.SegStart}, "s-backup-4", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup/trigger?job=personal&tab=crontab"}, {Label: "GoSentry", Href: "/app/settings/backup/trigger?job=personal&tab=gosentry", On: true}, {Label: "Gitea", Href: "/app/settings/backup/trigger?job=personal&tab=gitea"}, {Label: "curl", Href: "/app/settings/backup/trigger?job=personal&tab=curl"}}, Variant: w.SegStart}, "s-backup-4", "tc-seg", 1),
 
 	// tc-check
 	form("off", check(false, w.Text("Print with photos")), "components-10", "tc-check", 2),
@@ -158,7 +158,6 @@ var _ = add(
 	form("item", w.Rubric{Text: "mix", Form: w.RubricItem, Variant: w.RubricItemLine, Items: []w.RubricPart{w.Mono{}}}, "account-5", "tc-rubric", 1),
 	form("variant", w.Rubric{Text: "Subscriptions", Variant: w.RubricRail, Items: []w.RubricPart{w.Badge{Label: "badge"}}}, "components-11", "tc-rubric", 2),
 	form("item", w.Rubric{Text: "Points per signal", Form: w.RubricItem, Items: []w.RubricPart{w.Push{}, w.RubricCol{Text: "Yours"}}}, "s-dup-3", "tc-rubric", 1),
-	form("variant", w.Rubric{Text: "What it opens", Variant: w.RubricGap13}, "s-backup-5", "tc-rubric", 2),
 	form("row", w.Rubric{Text: "Attached", Variant: w.RubricRow, Items: []w.RubricPart{w.Num{}, w.Line{Place: w.Pushed}}}, "s-mail-1", "tc-rubric", 6),
 )
 

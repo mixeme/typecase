@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `RubricGap13` is gone with its rule (`.tc-rubric--m13-0-6`): «What it
+  opens» is the first rubric of its card now (Carrel's task 212).
 - `FieldRow`, `MarkH18` and `Mark.Focus` are gone, with their rules
   (`.tc-field__row`, `.tc-mark--h18`, `.tc-mark.is-focus`): the label
   colour of a feed is a choice now, `Swatches` with `Name` (Carrel's task
@@ -810,6 +812,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The external trigger's fragments as the sheet draws them; the job
+  list says what starts a job** (Carrel's task 212; accepted by the owner
+  19.10). The tabs' cards (`s-backup-3`, `-4`, `-10`, `-11`) are the
+  sheet's: a rubric a tab with `local`, «visible only now» only at the
+  password, the tabs links to the sheet. `s-backup-5` is «What it opens»
+  without the password: «The password downloads the archive too: with
+  Encrypt the archive off, that is your data in the clear.». «What to
+  copy» (`s-backup-2`) has baikal; the archive password's alarm is
+  «Separate from the sign-in password.». The job list (`s-backup-1` and
+  under the sheets) tells the home job as the form does — four
+  collections and files — and «When» says only what is set: the sign-in
+  rule, a `trigger` badge when an external password is issued, «—»
+  otherwise (no «cron · 03:00», no «on demand»).
 - **The upload sheet without «Open the folder»; the connection dialogs
   and the new device from the set** (Carrel's tasks 210, 211; accepted by
   the owner 19.10). `s-files-19`: its tree's rows are links, no button.
