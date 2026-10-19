@@ -800,6 +800,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Settings against themselves** (Carrel's task 209): `s-mail-9`
+  draws the account page whole — Password, Sessions, Key escrow and
+  Delete account under its Email block, as `account-1`. The connections
+  (`s-profile-1`, `-10`) draw the set the other frames draw: nextcloud
+  with nine collections (Личный, Дела, Работа, Дни рождения, Записи,
+  Дневник, Общие с семьёй, Контакты, Архив) and Files, radicale · vps
+  with four (Проекты, Дежурства, Команда, Рассылки), baikal, then
+  sftpgo · vps; the numbers of the fixtures; «Праздники РФ» lands in
+  Calendar and Tasks (3 and 1), the league's cache holds 2 events.
 - **Administration against its data** (Carrel's task 208; accepted by
   the owner 19.10): letters from users only through configured mail —
   in `s-admin-3` (mail not configured) the check is off with «Mail is not

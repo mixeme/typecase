@@ -437,7 +437,75 @@ func Mail9() Screen {
 								},
 								Action: "/app/settings/account/email",
 							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Password"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Change password"}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Sessions", Items: []w.RubricPart{w.Plain{Text: "2 active"}}},
+								Items: []w.FieldSetPart{
+									w.Table{
+										Cols: []w.TableCol{
+											{Label: "Where"},
+											{Label: "Started"},
+											{Label: "Last seen", Rank: w.Rank3},
+											{Width: w.Col120, Rank: w.Rank4},
+										},
+										Rows: []w.TableRow{
+											{
+												Cells: []w.TableCell{
+													{Parts: []w.CellPart{w.Text("Firefox · Windows "), w.Badge{Label: "this one"}}},
+													{Parts: []w.CellPart{w.Text("2026-08-16 09:02")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("just now")}, Mono: true},
+													{},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Parts: []w.CellPart{w.Text("Carrel desktop · Windows")}},
+													{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2 hours ago")}, Mono: true},
+													{Parts: []w.CellPart{w.Button{Label: "End", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+												},
+											},
+										},
+										Variant: w.TableInset,
+										Place:   w.Grown,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "End every other session", Kind: w.ButtonDanger}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Key escrow"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Field{Parts: []w.FieldPart{w.Button{Label: "Deposit my key"}}},
+								},
+							},
 						},
+					},
+					w.Danger{
+						Button: w.Button{Label: "Delete account", Kind: w.ButtonDangerSolid},
+						Note:   "Deletes the account and the saved connections. Data on the DAV servers stays.",
 					},
 				},
 			},

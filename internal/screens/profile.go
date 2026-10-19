@@ -66,7 +66,7 @@ func Profile1() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 15 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 19 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -120,7 +120,7 @@ func Profile1() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("128")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -131,9 +131,22 @@ func Profile1() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
+													{Parts: []w.CellPart{w.Text("tasks")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
-													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("74")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("4")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -146,7 +159,7 @@ func Profile1() Screen {
 													{Pick: ptr(w.TickedOff)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("31")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("12 August")}, Mono: true},
 													{
 														Parts: []w.CellPart{
@@ -176,22 +189,9 @@ func Profile1() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
-													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("248")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
 													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("86")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -202,59 +202,10 @@ func Profile1() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
-													{Parts: []w.CellPart{w.Text("tasks")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("30")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-							w.Card{
-								Items: []w.CardPart{
-									w.Rubric{
-										Text: "sftpgo · vps",
-										Items: []w.RubricPart{
-											w.Line{
-												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
-													w.Button{Label: "Show password", Small: true},
-													w.Button{Label: "Test", Small: true},
-													w.Button{Label: "Edit", Small: true},
-													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
-												},
-												Gap: w.LineGap6,
-											},
-										},
-									},
-									w.Mono{
-										Text:    "https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago",
-										Form:    w.MonoLine,
-										Variant: w.Mono11_5Dusty,
-									},
-									w.Table{
-										Cols: []w.TableCol{
-											{Width: w.ColTickSmall},
-											{Label: "Folder"},
-											{Label: "What is in it", Rank: w.Rank3},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
-											{Width: w.ColMenu},
-										},
-										Rows: []w.TableRow{
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
-													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("412")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
+													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
@@ -264,16 +215,55 @@ func Profile1() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOff)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("96")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
+													{Parts: []w.CellPart{w.Text("journal "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("10 August")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
 												State: w.RowOff,
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Files"}}},
+													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
 											},
 										},
 									},
@@ -316,7 +306,7 @@ func Profile1() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("42")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -329,7 +319,7 @@ func Profile1() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("18")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -341,14 +331,28 @@ func Profile1() Screen {
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
-													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("36")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOff)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Рассылки"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("3 August")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+												State: w.RowOff,
 											},
 										},
 									},
@@ -387,6 +391,69 @@ func Profile1() Screen {
 									},
 								},
 								Variant: w.CardAlert,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
+										Text: "sftpgo · vps",
+										Items: []w.RubricPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{Label: "New folder", Icon: "plus", Small: true},
+													w.Button{Label: "Show password", Small: true},
+													w.Button{Label: "Test", Small: true},
+													w.Button{Label: "Edit", Small: true},
+													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+												},
+												Gap: w.LineGap6,
+											},
+										},
+									},
+									w.Mono{
+										Text:    "https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago",
+										Form:    w.MonoLine,
+										Variant: w.Mono11_5Dusty,
+									},
+									w.Table{
+										Cols: []w.TableCol{
+											{Width: w.ColTickSmall},
+											{Label: "Folder"},
+											{Label: "What is in it", Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
+											{Label: "Changed on the server", Width: w.ColChanged},
+											{Width: w.ColMenu},
+										},
+										Rows: []w.TableRow{
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("9")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOff)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
+													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+												State: w.RowOff,
+											},
+										},
+									},
+								},
 							},
 							w.Rubric{
 								Text:    "Subscriptions · external, read-only",
@@ -428,8 +495,8 @@ func Profile1() Screen {
 													{
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}},
 													},
-													{Parts: []w.CellPart{w.Text("118")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 3},
+													{Parts: []w.CellPart{w.Text("3")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 2},
 												},
 											},
 											{
@@ -438,18 +505,9 @@ func Profile1() Screen {
 													{
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Tasks"}},
 													},
-													{Parts: []w.CellPart{w.Text("6")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 												},
 												State: w.RowOff,
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn)},
-													{
-														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Notes"}},
-													},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-												},
 											},
 										},
 									},
@@ -479,7 +537,7 @@ func Profile1() Screen {
 										Variant: w.Mono11_5DustyGap,
 									},
 									w.Diag{
-										Text: "[fetch]   GET /season.ics → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"league\"\n[cache]   46 events from yesterday are still shown, marked stale",
+										Text: "[fetch]   GET /season.ics → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"league\"\n[cache]   2 events from yesterday are still shown, marked stale",
 									},
 									w.CardText{
 										Kind: w.CardAlertText,
@@ -2780,7 +2838,7 @@ func Profile10() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 15 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 19 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -2834,7 +2892,7 @@ func Profile10() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("128")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2845,9 +2903,22 @@ func Profile10() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
+													{Parts: []w.CellPart{w.Text("tasks")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
-													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("74")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("4")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2860,8 +2931,48 @@ func Profile10() Screen {
 													{Pick: ptr(w.TickedOff)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("31")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("12 August")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+												State: w.RowOff,
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
+													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
+													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOff)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
+													{Parts: []w.CellPart{w.Text("journal "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("10 August")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
@@ -2874,7 +2985,7 @@ func Profile10() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("248")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2885,10 +2996,10 @@ func Profile10() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
-													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("86")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
@@ -2898,78 +3009,15 @@ func Profile10() Screen {
 											{
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
-													{Parts: []w.CellPart{w.Text("tasks")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("30")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-							w.Card{
-								Items: []w.CardPart{
-									w.Rubric{
-										Text: "sftpgo · vps",
-										Items: []w.RubricPart{
-											w.Line{
-												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
-													w.Button{Label: "Show password", Small: true},
-													w.Button{Label: "Test", Small: true},
-													w.Button{Label: "Edit", Small: true},
-													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
-												},
-												Gap: w.LineGap6,
-											},
-										},
-									},
-									w.Mono{
-										Text:    "https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago",
-										Form:    w.MonoLine,
-										Variant: w.Mono11_5Dusty,
-									},
-									w.Table{
-										Cols: []w.TableCol{
-											{Width: w.ColTickSmall},
-											{Label: "Folder"},
-											{Label: "What is in it", Rank: w.Rank3},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
-											{Label: "Changed on the server", Width: w.ColChanged},
-											{Width: w.ColMenu},
-										},
-										Rows: []w.TableRow{
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Files"}}},
 													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("412")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff)},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("96")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-												State: w.RowOff,
 											},
 										},
 									},
@@ -3012,7 +3060,7 @@ func Profile10() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("42")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -3025,7 +3073,7 @@ func Profile10() Screen {
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("18")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -3037,14 +3085,28 @@ func Profile10() Screen {
 												Cells: []w.TableCell{
 													{Pick: ptr(w.TickedOn)},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
-													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("36")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOff)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Рассылки"}}},
+													{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("3 August")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+												State: w.RowOff,
 											},
 										},
 									},
@@ -3083,6 +3145,69 @@ func Profile10() Screen {
 									},
 								},
 								Variant: w.CardAlert,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
+										Text: "sftpgo · vps",
+										Items: []w.RubricPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{Label: "New folder", Icon: "plus", Small: true},
+													w.Button{Label: "Show password", Small: true},
+													w.Button{Label: "Test", Small: true},
+													w.Button{Label: "Edit", Small: true},
+													w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+												},
+												Gap: w.LineGap6,
+											},
+										},
+									},
+									w.Mono{
+										Text:    "https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago",
+										Form:    w.MonoLine,
+										Variant: w.Mono11_5Dusty,
+									},
+									w.Table{
+										Cols: []w.TableCol{
+											{Width: w.ColTickSmall},
+											{Label: "Folder"},
+											{Label: "What is in it", Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
+											{Label: "Changed on the server", Width: w.ColChanged},
+											{Width: w.ColMenu},
+										},
+										Rows: []w.TableRow{
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOn)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("9")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+											},
+											{
+												Cells: []w.TableCell{
+													{Pick: ptr(w.TickedOff)},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
+													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
+													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
+													{
+														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+														Acts:  true,
+													},
+												},
+												State: w.RowOff,
+											},
+										},
+									},
+								},
 							},
 							w.Rubric{
 								Text:    "Subscriptions · external, read-only",
@@ -3124,8 +3249,8 @@ func Profile10() Screen {
 													{
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}},
 													},
-													{Parts: []w.CellPart{w.Text("118")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 3},
+													{Parts: []w.CellPart{w.Text("3")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 2},
 												},
 											},
 											{
@@ -3134,18 +3259,9 @@ func Profile10() Screen {
 													{
 														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Tasks"}},
 													},
-													{Parts: []w.CellPart{w.Text("6")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 												},
 												State: w.RowOff,
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn)},
-													{
-														Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Notes"}},
-													},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-												},
 											},
 										},
 									},
@@ -3175,7 +3291,7 @@ func Profile10() Screen {
 										Variant: w.Mono11_5DustyGap,
 									},
 									w.Diag{
-										Text: "[fetch]   GET /season.ics → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"league\"\n[cache]   46 events from yesterday are still shown, marked stale",
+										Text: "[fetch]   GET /season.ics → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"league\"\n[cache]   2 events from yesterday are still shown, marked stale",
 									},
 									w.CardText{
 										Kind: w.CardAlertText,
@@ -3237,7 +3353,7 @@ func Profile10() Screen {
 							w.Field{
 								Parts: []w.FieldPart{
 									w.Diag{
-										Text: "[fetch]   GET /ru-holidays.ics → 200 · 0.4 s · 34 KB\n[type]    text/calendar; charset=utf-8\n[parse]   VCALENDAR · 118 VEVENT · 6 VTODO · 2 VJOURNAL\n[name]    X-WR-CALNAME: Праздники России\n[access]  the server asked for no password",
+										Text: "[fetch]   GET /ru-holidays.ics → 200 · 0.4 s · 34 KB\n[type]    text/calendar; charset=utf-8\n[parse]   VCALENDAR · 3 VEVENT · 1 VTODO\n[name]    X-WR-CALNAME: Праздники России\n[access]  the server asked for no password",
 									},
 								},
 								Width: w.FieldW100,
@@ -3294,9 +3410,7 @@ func Profile10() Screen {
 							w.Field{
 								Label: "Sections",
 								Parts: []w.FieldPart{
-									w.TagInput{
-										Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 118"}, w.Tag{Label: "Tasks · 6"}, w.Tag{Label: "Notes · 2"}},
-									},
+									w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 3"}, w.Tag{Label: "Tasks · 1"}}},
 									w.FieldHint{
 										Parts: []w.Inline{
 											w.Text("Not a choice: a feed is one file, and all three kinds of record live in it. What it carries decides where it lands, and that is visible before subscribing."),

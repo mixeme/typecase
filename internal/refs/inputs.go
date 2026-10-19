@@ -85,7 +85,7 @@ var _ = add(
 
 	// tc-in as tags
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}, Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"}, Focus: true}, "s-tasks-10", "tc-in", 1),
-	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 118"}, w.Tag{Label: "Tasks · 6"}, w.Tag{Label: "Notes · 2"}}}, "s-profile-10", "tc-in", 3),
+	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 3"}, w.Tag{Label: "Tasks · 1"}}}, "s-profile-10", "tc-in", 3),
 	form("tags", w.TagInput{Parts: []w.TagInputPart{}, Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"}}, "s-tasks-14", "tc-in", 17),
 	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Removable: true}}, Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"}}, "s-tasks-3", "tc-in", 16),
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Синк-ап по релизу", Removable: true}, w.Tag{Label: "Дописать раздел про кэш", Removable: true}}, Add: &w.TagAdd{Name: "related.add", Value: "ковал", Placeholder: "Title or UID", Label: "Add a link"}, Focus: true}, "s-notes-4", "tc-in", 7),
