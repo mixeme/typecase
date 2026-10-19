@@ -13478,30 +13478,31 @@ dav: HTTP 503: the server is busy</div>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
           </div>
         </div>
+        <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-stack tc-stack--gap-10 tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
             <div class="tc-rubric">nextcloud
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=nextcloud">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|lichnyj" aria-label="Личный" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dela" aria-label="Дела" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
                   <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">20 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|rabota" aria-label="Работа" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|dni-rozhdeniya" aria-label="Дни рождения" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">12 August</td>
                   <td class="tc-acts"><span class="tc-drop"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg>
@@ -13514,27 +13515,27 @@ dav: HTTP 503: the server is busy</div>
                       <span class="tc-menu__sep"></span>
                       <button class="tc-menu__item tc-menu__item--danger" type="button" role="menuitem"><svg><use href="#i-trash"/></svg>Delete on the server…</button>
                     </div></span></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|zapisi" aria-label="Записи" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">2 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dnevnik" aria-label="Дневник" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">5 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|zapiski-obshchie" aria-label="Общие с семьёй" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
                   <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">10 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|kontakty" aria-label="Контакты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">5</td><td class="tc-mono">4 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|arhiv" aria-label="Архив" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">28 July</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|files" aria-label="Files" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13544,25 +13545,25 @@ dav: HTTP 503: the server is busy</div>
 
           <div class="tc-card">
             <div class="tc-rubric">radicale · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=radicale">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|proekty" aria-label="Проекты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">1 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|dezhurstva" aria-label="Дежурства" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|komanda" aria-label="Команда" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
                   <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="radicale|rassylki" aria-label="Рассылки" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">3 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13584,17 +13585,17 @@ dav: HTTP 503: the server is busy</div>
 
           <div class="tc-card">
             <div class="tc-rubric">sftpgo · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=sftpgo">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="sftpgo|documents" aria-label="Documents" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">9</td><td class="tc-mono">5 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="sftpgo|public" aria-label="Public" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
                   <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13612,11 +13613,11 @@ dav: HTTP 503: the server is busy</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="ru-holidays|calendar" aria-label="Calendar" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
                   <td class="tc-mono tc-table__n3">3</td>
                   <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="ru-holidays|tasks" aria-label="Tasks" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
                   <td class="tc-mono tc-table__n3">1</td></tr>
               </tbody>
@@ -13640,6 +13641,212 @@ dav: HTTP 503: the server is busy</div>
   </div>
 </div>
 <figcaption><b>Рейл один на весь раздел настроек.</b><br><br><b>«Show password» стоит и здесь</b> — пароль от чужого сервера человек доверил Carrel, и вернуть его по требованию — прямая обязанность читального зала. Механика <a href="#reveal">общая с экраном нового устройства</a> и описана там один раз: тот же лист, вопрос раз в сеанс, автоскрытие, журнал.<br><br><b>Диагностика перестаёт быть отладочным выводом и становится содержимым экрана.</b> Ровно этим Carrel отличается от клиентов, которые пишут «cannot connect»: видно, какой шаг сломался и что именно ответил сервер. Здесь она стоит у того аккаунта, к которому относится. <b>Коллекции стоят таблицей с шапкой</b>, а не сеткой строк рейла: сколько объектов и когда запись менялась на сервере — две величины на коллекцию, и их сравнивают по вертикали. Когда сервер отвечал — в шапке карточки, один раз на аккаунт. Снятая коллекция видна снятым флажком: её не опрашивают. <code>getctag</code> и ETag Carrel уже видит; нужно это, когда рядом работают DAVx5 на телефоне и Thunderbird на работе, данные разошлись, и причину иначе не установить. Журналом изменений это не является: журнал требует хранить содержимое, чего Carrel не делает.<br><br><b>Подписки стоят на этом же экране, ниже серверов</b> — и той же карточкой: для человека лента такой же источник записей, и разводить их по двум страницам значило бы спрашивать «это сервер или лента?» раньше, чем «откуда у меня эти события?». Разбор подписки — <a href="#subscribe">ниже</a>.<br><br><b>Здесь же коллекциями и распоряжаются</b> — «New collection» в шапке аккаунта, <span class="tc-mono">⋯</span> последней колонкой у каждой строки. Разобрано отдельно ниже (<a href="#collections">создать, переименовать, удалить</a>), но живёт не в отдельном разделе настроек: место, где перечислены сервер и всё, что на нём лежит, и есть место, где заводят ещё одну коллекцию.<br><br><b>«Remove» у аккаунта стало «Disconnect», и это не косметика.</b> Рядом появилась кнопка, которая удаляет данные на чужом сервере, — и две соседние кнопки со словом «удалить» и противоположными последствиями рано или поздно нажали бы не ту. «Disconnect» убирает подключение из Carrel и на сервере не трогает ничего; «Delete on the server…» в меню коллекции — наоборот. Слово выбрано так, чтобы разницу было видно до нажатия, а не в подтверждении.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-profile-27" data-screen="/app/settings/connections" data-part="found">
+  <div class="frame-label"><span>Подключения · после Update collection list</span><i>дополнительный кадр: found · /app/settings/connections</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Connections</div><div class="tc-head__sub">Signed in as <b>mix</b> · 4 servers · 19 collections · 2 subscriptions</div></div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Connect account</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
+          </div>
+        </div>
+        <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <div class="tc-msg tc-msg--mx20"><b>nextcloud:</b> 1 new collection — «Поездки». Tick it to see it in the rail.</div>
+        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">nextcloud
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=nextcloud">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|lichnyj" aria-label="Личный" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dela" aria-label="Дела" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
+                  <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">20 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|rabota" aria-label="Работа" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|dni-rozhdeniya" aria-label="Дни рождения" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">12 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|zapisi" aria-label="Записи" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">2 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dnevnik" aria-label="Дневник" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">5 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|zapiski-obshchie" aria-label="Общие с семьёй" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">10 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|kontakty" aria-label="Контакты" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">5</td><td class="tc-mono">4 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|arhiv" aria-label="Архив" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">28 July</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|poezdki" aria-label="Поездки" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Поездки</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar <span class="tc-badge">new</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">just now</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|files" aria-label="Files" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">radicale · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=radicale">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|proekty" aria-label="Проекты" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">1 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|dezhurstva" aria-label="Дежурства" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|komanda" aria-label="Команда" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="radicale|rassylki" aria-label="Рассылки" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">3 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">baikal
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused</div>
+            <div class="tc-diag">[well-known]  GET /.well-known/caldav → 404
+[base]        PROPFIND /dav.php/ → 401 Unauthorized
+              WWW-Authenticate: Basic realm="BaikalDAV"
+[principal]   не запрашивался: предыдущий шаг не прошёл</div>
+            <div class="tc-card__alert-note">The server refused the password. It may have been changed on the server: the one Carrel saved no longer fits.</div>
+          </div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">sftpgo · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=sftpgo">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="sftpgo|documents" aria-label="Documents" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">9</td><td class="tc-mono">5 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="sftpgo|public" aria-label="Public" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
+                  <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">Subscriptions · external, read-only<span class="tc-mono tc-mono--ls0">2</span></div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">Праздники РФ <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Check</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://feeds.example/ru-holidays.ics · no password · read 2 min ago · 34 KB · 0.4 s</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="ru-holidays|calendar" aria-label="Calendar" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
+                  <td class="tc-mono tc-table__n3">3</td>
+                  <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="ru-holidays|tasks" aria-label="Tasks" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
+                  <td class="tc-mono tc-table__n3">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">Расписание лиги <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Check again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">webcal://league.example/season.ics · password saved · last read yesterday</div>
+            <div class="tc-diag">[fetch]   GET /season.ics → 401 Unauthorized
+              WWW-Authenticate: Basic realm="league"
+[cache]   2 events from yesterday are still shown, marked stale</div>
+            <div class="tc-card__alert-note">The feed asks for a password and the saved one no longer fits. A feed that stopped answering must not look like a feed with nothing in it.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Update collection list</b> спрашивает сервер заново и говорит, что нашлось: новая коллекция — строкой с бейджем «new», снятой: в рейл и общие виды она попадает, когда её отметят. Пропавшая остаётся там, где была выбрана, с пометкой gone, и сообщение говорит это тем же местом.</figcaption>
 </figure>
 
 <figure>
@@ -13739,54 +13946,55 @@ dav: HTTP 503: the server is busy</div>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
           </div>
         </div>
+        <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-stack tc-stack--gap-10 tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
             <div class="tc-rubric">nextcloud
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=nextcloud">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|lichnyj" aria-label="Личный" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dela" aria-label="Дела" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
                   <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">20 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|rabota" aria-label="Работа" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|dni-rozhdeniya" aria-label="Дни рождения" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">12 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|zapisi" aria-label="Записи" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">2 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dnevnik" aria-label="Дневник" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">5 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|zapiski-obshchie" aria-label="Общие с семьёй" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
                   <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">10 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|kontakty" aria-label="Контакты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">5</td><td class="tc-mono">4 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|arhiv" aria-label="Архив" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">28 July</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|files" aria-label="Files" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13796,25 +14004,25 @@ dav: HTTP 503: the server is busy</div>
 
           <div class="tc-card">
             <div class="tc-rubric">radicale · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=radicale">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|proekty" aria-label="Проекты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">1 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|dezhurstva" aria-label="Дежурства" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|komanda" aria-label="Команда" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
                   <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="radicale|rassylki" aria-label="Рассылки" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">3 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13836,17 +14044,17 @@ dav: HTTP 503: the server is busy</div>
 
           <div class="tc-card">
             <div class="tc-rubric">sftpgo · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=sftpgo">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="sftpgo|documents" aria-label="Documents" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">9</td><td class="tc-mono">5 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="sftpgo|public" aria-label="Public" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
                   <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -13864,11 +14072,11 @@ dav: HTTP 503: the server is busy</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="ru-holidays|calendar" aria-label="Calendar" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
                   <td class="tc-mono tc-table__n3">3</td>
                   <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="ru-holidays|tasks" aria-label="Tasks" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
                   <td class="tc-mono tc-table__n3">1</td></tr>
               </tbody>
@@ -13963,7 +14171,7 @@ dav: HTTP 503: the server is busy</div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
@@ -14018,7 +14226,7 @@ well-known · ok · GET /.well-known/caldav → 301 → /dav.php/
 principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
@@ -14481,72 +14689,207 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
   <figcaption>Лист выходит поверх того экрана, с которого нажали, — как быстрая заметка (7.4) и по тем же причинам: список не перерисовывается, и видно, у какого именно аккаунта спрашивают. В шапке листа стоит его имя, чтобы «Show password» с двух карточек подряд нельзя было перепутать. Поле одно, <kbd class="tc-kbd" style="font-family:var(--tc-font-mono)">Enter</kbd> подтверждает, <kbd class="tc-kbd" style="font-family:var(--tc-font-mono)">Esc</kbd> закрывает.</figcaption>
   </figure>
 
-  <figure style="flex:1 1 100%">
-  <div class="frame" data-frame="s-profile-4">
-    <div class="frame-label"><span>Show password · показано</span><i>после подтверждения</i></div>
-    <div class="tc-root tc-shell">
-      <div class="tc-top">
-        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
-        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
-        <div class="tc-top__actions">
-          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
-          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
-          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+  <figure>
+<div class="frame" data-frame="s-profile-4" data-screen="/app/settings/connections" data-part="shown">
+  <div class="frame-label"><span>Show password · показано</span><i>дополнительный кадр: shown · /app/settings/connections</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
-      <div class="tc-shell__body tc-shell__body--minh280">
-        <div class="tc-shell__rail">
-          <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
-          <div class="tc-railsec">
-            <div class="tc-rubric">Settings</div>
-            <div class="tc-nav">
-              <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
-              <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
-              <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
-              <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
-              <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
-              <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
-              <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
-              <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
-            </div>
-          </div>
-          <div class="tc-railfoot">
-            <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
-            <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
-            <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Connections</div><div class="tc-head__sub">Signed in as <b>mix</b> · 4 servers · 19 collections · 2 subscriptions <span class="tc-badge tc-badge--edge-accent-accent">credentials unlocked · 4:12</span><button class="tc-btn is-sm" type="button">Lock now</button></div></div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Connect account</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
           </div>
         </div>
-        <div class="tc-main">
-        <div class="tc-head tc-head--snug">
-          <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t19">Connections</div><div class="tc-head__sub">4 servers · 15 collections · 2 subscriptions</div></div>
-          <div class="tc-acts"><span class="tc-badge tc-badge--edge-accent-accent">credentials unlocked · 4:12</span><button class="tc-btn is-sm" type="button">Lock now</button></div>
-        </div>
-        <div class="tc-pad">
+        <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
+
           <div class="tc-card tc-card--edge-accent">
             <div class="tc-rubric">nextcloud
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><a class="tc-btn is-sm" href="/app/settings/connections">Hide password</a><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=nextcloud">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
-            <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/</div>
-            <div class="tc-line tc-line--gap-12">
-              <div class="tc-field tc-field--fix150"><label>User name</label><input class="tc-in is-mono" type="text" value="mix" aria-label="User name"></div>
-              <div class="tc-field tc-field--fill300"><label>Password</label>
-                <span class="tc-line tc-line--gap-8">
-                  <input class="tc-in is-mono tc-in--fill" type="text" value="z3-brick-lamp-9f2">
-                  <button class="tc-btn" type="button">Copy</button><button class="tc-btn" type="button">Hide</button>
-                </span></div>
-            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
+            <div class="tc-line tc-line--gap-8 tc-card__top8"><input class="tc-in is-mono tc-in--key-sm tc-in--fill" type="text" value="z3-brick-lamp-9f2" aria-label="Password" id="pw-nextcloud" readonly><button class="tc-btn is-sm" type="button" data-tc-copy-from="pw-nextcloud" data-tc-copied="Copied">Copy</button></div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|lichnyj" aria-label="Личный" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dela" aria-label="Дела" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
+                  <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">20 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|rabota" aria-label="Работа" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|dni-rozhdeniya" aria-label="Дни рождения" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">12 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|zapisi" aria-label="Записи" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">2 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dnevnik" aria-label="Дневник" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">5 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|zapiski-obshchie" aria-label="Общие с семьёй" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">10 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|kontakty" aria-label="Контакты" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">5</td><td class="tc-mono">4 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|arhiv" aria-label="Архив" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">28 July</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|files" aria-label="Files" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
           </div>
+
           <div class="tc-card">
-            <div class="tc-rubric">sftpgo · vps <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button></span></div>
-            <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · last answer 5 min ago</div>
+            <div class="tc-rubric">radicale · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=radicale">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|proekty" aria-label="Проекты" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">1 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|dezhurstva" aria-label="Дежурства" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|komanda" aria-label="Команда" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="radicale|rassylki" aria-label="Рассылки" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">3 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
           </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">baikal
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused</div>
+            <div class="tc-diag">[well-known]  GET /.well-known/caldav → 404
+[base]        PROPFIND /dav.php/ → 401 Unauthorized
+              WWW-Authenticate: Basic realm="BaikalDAV"
+[principal]   не запрашивался: предыдущий шаг не прошёл</div>
+            <div class="tc-card__alert-note">The server refused the password. It may have been changed on the server: the one Carrel saved no longer fits.</div>
+          </div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">sftpgo · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=sftpgo">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="sftpgo|documents" aria-label="Documents" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">9</td><td class="tc-mono">5 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="sftpgo|public" aria-label="Public" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
+                  <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">Subscriptions · external, read-only<span class="tc-mono tc-mono--ls0">2</span></div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">Праздники РФ <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Check</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://feeds.example/ru-holidays.ics · no password · read 2 min ago · 34 KB · 0.4 s</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="ru-holidays|calendar" aria-label="Calendar" aria-pressed="true"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
+                  <td class="tc-mono tc-table__n3">3</td>
+                  <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="ru-holidays|tasks" aria-label="Tasks" aria-pressed="false"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
+                  <td class="tc-mono tc-table__n3">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">Расписание лиги <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Check again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">webcal://league.example/season.ics · password saved · last read yesterday</div>
+            <div class="tc-diag">[fetch]   GET /season.ics → 401 Unauthorized
+              WWW-Authenticate: Basic realm="league"
+[cache]   2 events from yesterday are still shown, marked stale</div>
+            <div class="tc-card__alert-note">The feed asks for a password and the saved one no longer fits. A feed that stopped answering must not look like a feed with nothing in it.</div>
+          </div>
+
         </div>
-        <div class="tc-msg">While credentials are unlocked, every account opens without a question — here, on the New device screen and when a profile is built. <b>Lock now</b> ends it at once; so does signing out.</div>
-      </div></div>
+      </div>
     </div>
   </div>
-  <figcaption>Пароль появляется в самой карточке, рядом с логином, а не в отдельном окне: то, что человек пришёл узнать, стоит там же, где всё остальное про этот сервер. Сколько ещё открыто — показывает значок в шапке, один на весь раздел, а не счётчик у каждой строки; «Hide» убирает пароль с экрана, не закрывая окна. У второй карточки кнопка осталась — но нажатие на неё вопроса уже не вызовет, и об этом сказано строкой под списком, а не выясняется опытным путём.</figcaption>
-  </figure>
+</div>
+<figcaption>Пароль появляется в самой карточке, рядом с логином, а не в отдельном окне: то, что человек пришёл узнать, стоит там же, где всё остальное про этот сервер. Сколько ещё открыто — показывает значок в подзаголовке, как у нового устройства, один на весь раздел, а не счётчик у каждой строки; «Hide» убирает пароль с экрана, не закрывая окна. У второй карточки кнопка осталась — но нажатие на неё вопроса уже не вызовет, и об этом сказано строкой под списком, а не выясняется опытным путём.</figcaption>
+</figure>
 </div>
 
 <h3 id="collections">Завести, переименовать, перенести и удалить коллекцию</h3>
@@ -15220,54 +15563,55 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
           </div>
         </div>
+        <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-stack tc-stack--gap-10 tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
             <div class="tc-rubric">nextcloud
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=nextcloud">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num is-2nd">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|lichnyj" aria-label="Личный" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4 is-2nd">2</td><td class="tc-mono">3 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dela" aria-label="Дела" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
                   <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4 is-2nd">4</td><td class="tc-mono">20 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|rabota" aria-label="Работа" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4 is-2nd">4</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|dni-rozhdeniya" aria-label="Дни рождения" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">12 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|zapisi" aria-label="Записи" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4 is-2nd">2</td><td class="tc-mono">2 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|dnevnik" aria-label="Дневник" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
                   <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">5 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="nextcloud|zapiski-obshchie" aria-label="Общие с семьёй" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
                   <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4 is-2nd">0</td><td class="tc-mono">10 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|kontakty" aria-label="Контакты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4 is-2nd">5</td><td class="tc-mono">4 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|arhiv" aria-label="Архив" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">28 July</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="nextcloud|files" aria-label="Files" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -15277,25 +15621,25 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 
           <div class="tc-card">
             <div class="tc-rubric">radicale · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=radicale">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num is-2nd">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|proekty" aria-label="Проекты" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">1 h ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|dezhurstva" aria-label="Дежурства" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
                   <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">yesterday</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="radicale|komanda" aria-label="Команда" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
                   <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4 is-2nd">1</td><td class="tc-mono">6 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="radicale|rassylki" aria-label="Рассылки" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
                   <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4 is-2nd">0</td><td class="tc-mono">3 August</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -15317,17 +15661,17 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 
           <div class="tc-card">
             <div class="tc-rubric">sftpgo · vps
-              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="submit" form="conn-picks" formaction="/app/settings/connections?op=rediscover&amp;account=sftpgo">Update collection list</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
             </div>
             <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num is-2nd">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="sftpgo|documents" aria-label="Documents" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
                   <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4 is-2nd">9</td><td class="tc-mono">5 min ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="sftpgo|public" aria-label="Public" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
                   <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4 is-2nd">2</td><td class="tc-mono">3 d ago</td>
                   <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
@@ -15345,11 +15689,11 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
             <table class="tc-table">
               <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num is-2nd">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
               <tbody>
-                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                <tr><td><button class="tc-tickrow__tick" type="submit" form="conn-picks" name="pick" value="ru-holidays|calendar" aria-label="Calendar" aria-pressed="true"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
                   <td class="tc-mono tc-table__n3 is-2nd">3</td>
                   <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
-                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="submit" form="conn-picks" name="pick" value="ru-holidays|tasks" aria-label="Tasks" aria-pressed="false"></button></td>
                   <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
                   <td class="tc-mono tc-table__n3 is-2nd">1</td></tr>
               </tbody>

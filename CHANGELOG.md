@@ -837,6 +837,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Connections: «Update collection list», a row's tick that sends
+  itself, the shown password on the page** (Carrel's task 193; accepted by
+  the owner 19.10). Each card that answers has «Update collection list»
+  after Test (the server asked again: new, renamed and gone collections;
+  the name the owner's). A collection row's tick is a submit button of
+  the page's `conn-picks` form (`pick` = account|collection): in the
+  combined views or out of them, without a script too. `s-profile-4` is
+  the whole page with nextcloud's password shown under its address, the
+  unlock badge and Lock now in the subtitle; `s-profile-27` — after
+  updating the list: «nextcloud: 1 new collection — «Поездки». Tick it to
+  see it in the rail.» and the new row, unticked, marked `new`. Server
+  URL's hint has one wording. `Badge` is no part of `Acts` any more.
 - **The restore's match: a closed choice of the target in every row, and
   beside the bar's Restore into** (Carrel's task 212 pp. 6, 7; accepted by
   the owner 19.10): `s-backup-8` — `into.N` per row and `into` in the bar,

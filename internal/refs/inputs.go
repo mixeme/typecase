@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("fill", w.Input{Value: "https://carrel.example/password-history/k7q2-m9xd-41fa", Label: "Password history", Mono: true, ReadOnly: true, Variant: w.InputFill}, "account-4", "tc-in", 1),
 	form("disabled", w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true, Disabled: true}, "s-backup-16", "tc-in", 2),
 	form("key", w.Input{Value: "cbk_2c9e-07ab-5d31-fern", Label: "Password", Mono: true, ReadOnly: true, Variant: w.InputKeySmFill}, "s-backup-13", "tc-in", 1),
 	form("placeholder", w.Input{Name: "folder.in.it", Placeholder: "/carrel/attachments", Label: "Folder in it", Mono: true, Variant: w.InputFill}, "attachments-5", "tc-in", 2),
@@ -37,7 +38,6 @@ var _ = add(
 	form("mono", w.Input{Kind: w.InputTime, Value: "10:00", Mono: true, Label: "Start time"}, "components-10", "tc-in", 3),
 	form("placeholder", w.Input{Placeholder: "DD.MM.YYYY", Mono: true, Numeric: true, Label: "Birthday"}, "components-10", "tc-in", 2),
 	form("variant", w.Input{Value: "80", Mono: true, Variant: w.InputChip, Label: "Same UID"}, "s-dup-3", "tc-in", 2),
-	form("variant", w.Input{Value: "z3-brick-lamp-9f2", Mono: true, Variant: w.InputFill, Label: "Password"}, "s-profile-4", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Разное (mix).vcf", Variant: w.InputFill, Label: "File name"}, "s-io-3", "tc-in", 2),
 	form("variant", w.Input{Value: "mix@example.org", Variant: w.InputFill, Label: "Address"}, "account-1", "tc-in", 2),
 	form("variant", w.Input{Value: "https://carrel.example", Mono: true, Variant: w.Input11_5, Label: "Address"}, "s-admin-4", "tc-in", 1),

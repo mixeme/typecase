@@ -265,7 +265,6 @@ type ActsPart interface {
 
 func (Button) actsPart() {}
 func (Close) actsPart()  {}
-func (Badge) actsPart()  {}
 func (Field) actsPart()  {}
 func (Filter) actsPart() {}
 func (Seg) actsPart()    {}

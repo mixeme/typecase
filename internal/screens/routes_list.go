@@ -87,6 +87,7 @@ var Routes = []Route{
 	{Frame: "account-5", Caption: "Меню пользователя", Screen: Account5},
 	{Frame: "account-6", Caption: "Клавиши · лист поверх текущего экрана", Screen: Account6},
 	{Frame: "s-profile-1", Caption: "Настройки · подключения и подписки", Screen: Profile1},
+	{Frame: "s-profile-27", Caption: "Подключения · после Update collection list", Screen: Profile27},
 	{Frame: "s-profile-25", Caption: "Подключения · ни одного", Screen: Profile25},
 	{Frame: "s-profile-26", Caption: "Отключить аккаунт · лист поверх Connections", Screen: Profile26},
 	{Frame: "s-profile-2", Caption: "Подключение аккаунта", Screen: Profile2},
