@@ -163,6 +163,134 @@ func Plan1() Screen {
 	}
 }
 
+// Plan6 is frame «Новое устройство · выдача закрыта» (s-plan-6).
+func Plan6() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 4,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Set up a new device"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Everything discovery found — as one file or one code")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Seg{
+									Options: []w.SegOption{{Label: "Apple", On: true}, {Label: "Android"}, {Label: "Thunderbird"}, {Label: "Anything else"}},
+								},
+							},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.FormColumn{
+								Wide: true,
+								Items: []w.FormColumnPart{
+									w.Card{
+										Items: []w.CardPart{
+											w.Rubric{Text: "What goes into the profile"},
+											w.List{
+												Rows: []w.ListRow{
+													w.SlimRow{
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "nextcloud · mix",
+														Inside: "· Личный, Работа, Контакты",
+														Aside:  "CalDAV, CardDAV",
+													},
+													w.SlimRow{
+														Ticked: w.TickedOff,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "radicale · vps · mix",
+														Inside: "· Проекты",
+														Aside:  "CalDAV",
+													},
+												},
+												Inset: true,
+											},
+										},
+									},
+									w.Msg{
+										Icon: "shield",
+										Parts: []w.MsgPart{
+											w.Strong("The profile carries passwords in cleartext."),
+											w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log."),
+										},
+										Tone:  w.MsgAlert,
+										Space: w.MsgFlush,
+									},
+								},
+							},
+							w.FormColumn{
+								Items: []w.FormColumnPart{
+									w.Card{
+										Items: []w.CardPart{
+											w.Rubric{Text: "Profile"},
+											w.CardHint{Parts: []w.CardTextPart{w.Text("Asks for your Carrel password first.")}},
+											w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "Generate profile", Kind: w.ButtonDanger}}},
+										},
+									},
+								},
+							},
+						},
+						Variant: w.FormFlushBottom,
+					},
+				},
+			},
+		},
+	}
+}
+
 // Plan2 is frame «Android · DAVx5» (s-plan-2).
 func Plan2() Screen {
 	return w.Shell{

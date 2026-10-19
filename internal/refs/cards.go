@@ -190,6 +190,8 @@ var _ = add(
 
 	// tc-fields
 	cards("plain", w.Fields{Items: []w.FieldsItem{
+		{Term: "Path", Value: []w.ValuePart{w.Text("https://files.example.org/dav/Documents/carrel/attachments/")}, Face: w.ValueMonoSmall}}, Variant: w.FieldsBleed130}, "attachments-6", "tc-fields", 2),
+	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon")}},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},

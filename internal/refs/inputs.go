@@ -8,6 +8,7 @@ func form(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-in as a line of input
+	form("placeholder", w.Input{Name: "folder.in.it", Placeholder: "/carrel/attachments", Label: "Folder in it", Mono: true, Variant: w.InputFill}, "attachments-5", "tc-in", 2),
 	form("error", w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Error: true}, "s-profile-24", "tc-in", 4),
 	form("value", w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"}, "s-profile-2", "tc-in", 4),
 	form("focus", w.Input{Kind: w.InputPassword, Name: "password", Label: "Your Carrel password", Focus: true, Required: true}, "s-profile-3", "tc-in", 1),
@@ -50,6 +51,7 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.Input11Fill, Label: "Link"}, "s-admin-1", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Documents · sftpgo / carrel-backup/…", Variant: w.Input11Fill, Label: "Folder"}, "components-20", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"}, "s-agenda-8", "tc-in", 1),
+	form("pick", w.Pick{Name: "collection", Options: []w.PickOption{{Value: "", Label: "Choose a collection", On: true}, {Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents"}}, Label: "Collection"}, "attachments-5", "tc-in", 1),
 	form("pick", w.Pick{Name: "to.1", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true}, {Value: "anna@home.example", Label: "anna@home.example"}, {Value: "", Label: "Do not rewrite"}}, Label: "Rewrite a.kovaleva@example.org to", Variant: w.PickT12W240}, "s-contacts-29", "tc-in", 1),
 	form("pick", w.Pick{Name: "reminder.1.unit", Options: []w.PickOption{{Value: "minutes", Label: "minutes before"}, {Value: "hours", Label: "hours before"}, {Value: "days", Label: "days before", On: true}, {Value: "weeks", Label: "weeks before"}}, Label: "Unit"}, "s-agenda-19", "tc-in", 3),
 	form("pick", w.Pick{Name: "reminder.1", Options: []w.PickOption{{Value: "at.the.time", Label: "At the time"}, {Value: "5.minutes.before", Label: "5 minutes before"}, {Value: "10.minutes.before", Label: "10 minutes before", On: true}, {Value: "30.minutes.before", Label: "30 minutes before"}, {Value: "1.hour.before", Label: "1 hour before"}, {Value: "1.day.before", Label: "1 day before"}, {Value: "custom", Label: "Custom…", Shows: "reminder.1.count reminder.1.unit"}, {Value: "none", Label: "No reminder"}}, Label: "First"}, "s-agenda-19", "tc-in", 1),

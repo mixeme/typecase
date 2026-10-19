@@ -800,6 +800,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Attachments and a new device: the states without frames** (Carrel's
+  task 193 p. 5; accepted by the owner 19.10): `attachments-5` — no folder
+  yet, «Folder [not set]», the collection to choose, the path a
+  placeholder, «Larger — wait for the folder below», Open in Files off;
+  `attachments-6` — the folder chosen but refused, «In this folder now
+  [unavailable]», the path and the server's answer instead of the counts,
+  Open in Files off with the reason; `s-plan-6` — a new device while the
+  unlock window is closed: no countdown, «Asks for your Carrel password
+  first.», no link card yet.
 - **Connections: the states without frames** (Carrel's task 193 p. 5;
   accepted by the owner 19.10): `s-profile-24` — the connect dialog after
   the server refused the login: «Could not connect. … Nothing was

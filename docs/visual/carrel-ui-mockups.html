@@ -15430,6 +15430,162 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 <figcaption><b>Вложение — обычный файл в обычной папке на вашем сервере</b>, а не запись в базе Carrel. Отсюда и вид экрана: коллекция, путь, и сразу под ними адрес целиком — тот, который можно подмонтировать сетевым диском и открыть без Carrel. Подпапка по месяцам — не украшение: плоская папка на десять тысяч файлов кладёт листинг у половины серверов DAV. <b>Мелкое вложение в папку не идёт вовсе.</b> До 2&nbsp;МБ файл ложится внутрь самой записи — двоичным <code>ATTACH</code>, — и запись едет целиком: телефон, у которого подключён один лишь календарь, получает вложение вместе с событием — без второго адреса, второго пароля и прав на файловый сервер. Дальше двух мегабайт так делать нельзя: запись пересылается целиком при каждой правке, и тридцать мегабайт base64 внутри <code>.ics</code> ломают синхронизацию всем клиентам коллекции, а не одному Carrel. Поэтому большое уходит в папку, а в записи остаётся ссылка. <b>Своего потолка на файл у Carrel по-прежнему нет:</b> в папке место чужое, и размер решает тот сервер; два мегабайта — не квота, а граница между двумя способами хранить.<br><br><b>«Смена папки ничего не переносит»</b> — единственная строка, которую этот экран обязан сказать вслух. Запись хранит путь к файлу; переложить файлы значило бы переписать чужие записи на чужом сервере пачкой, а этого Carrel не делает нигде.</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="attachments-5" data-screen="/app/settings/attachments" data-part="unset">
+  <div class="frame-label"><span>Вложения · папка не выбрана</span><i>дополнительный кадр: unset · /app/settings/attachments</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Attachments</div><div class="tc-head__sub">Where a file attached to a note, an event or a task is put</div></div>
+          <div class="tc-acts"><button class="tc-btn" title="No folder is chosen yet." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button><a class="tc-btn" href="/app/settings/attachments">Discard</a><button class="tc-btn is-primary" type="submit" form="attachments">Save</button></div>
+        </div>
+        <form class="tc-form" id="attachments" action="/app/settings/attachments" method="post">
+          <div class="tc-fset tc-fset--lead">
+            <div class="tc-rubric">Small files stay in the record</div>
+            <dl class="tc-fields tc-grow tc-fields--bleed tc-fields--cols130">
+              <dt>Up to 2 MB</dt><dd>written into the event, the task or the note itself, and travels with it</dd>
+              <dt>Larger</dt><dd>wait for the folder below</dd>
+            </dl>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">A collection that says it takes less (<span class="tc-mono">max-resource-size</span>) lowers the boundary for itself: <span class="tc-mono">nextcloud</span> 2 MB, <span class="tc-mono">radicale · vps</span> 1 MB. Nothing here raises it.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Folder <span class="tc-badge is-alert">not set</span></div>
+            <div class="tc-field tc-field--md"><label>Collection</label><span class="tc-in is-pick"><select class="tc-in__list" name="collection" aria-label="Collection"><option value="" selected>Choose a collection</option><option value="sftpgo.vps.documents">sftpgo · vps · Documents</option></select></span>
+              <span class="tc-field__hint">Any file collection you can write to.</span></div>
+            <div class="tc-field tc-field--lg"><label>Folder in it</label>
+              <span class="tc-line tc-line--gap-8">
+                <input class="tc-in is-mono is-ph tc-in--fill" type="text" name="folder.in.it" placeholder="/carrel/attachments" aria-label="Folder in it"><button class="tc-btn" type="button">Browse</button></span>
+              <span class="tc-field__hint">Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel.</span></div>
+            <div class="tc-field is-own-line tc-grow tc-field--gap7">
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="a.subfolder.per.month" value="1" checked><span class="tc-tickrow__tick"></span>A subfolder per month</label>
+              <span class="tc-field__hint"><span class="tc-mono">2026-07</span>, <span class="tc-mono">2026-08</span>. Off means one flat folder — fine for a hundred files, not for ten thousand.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">File name</div>
+            <div class="tc-field tc-field--lg"><label>Written as</label><span class="tc-in is-pick"><select class="tc-in__list" name="written.as" aria-label="Written as"><option value="date.then.the.original.name" selected>Date, then the original name</option></select></span>
+              <span class="tc-field__hint"><span class="tc-mono">2026-08-10 sync-board.png</span>. A name already taken is never overwritten: a counter is added.</span></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Папки ещё нет: в рубрике — «not set», выбор пустой, путь — образцом. Мелкое вложение по-прежнему ложится в запись; большое ждёт папку. Open in Files выключена: открывать нечего. Блока «In this folder now» и строки о смене папки нет — менять нечего.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="attachments-6" data-screen="/app/settings/attachments" data-part="unavailable">
+  <div class="frame-label"><span>Вложения · папка недоступна</span><i>дополнительный кадр: unavailable · /app/settings/attachments</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Attachments</div><div class="tc-head__sub">Where a file attached to a note, an event or a task is put</div></div>
+          <div class="tc-acts"><button class="tc-btn" title="sftpgo · vps refused the password." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-file"/></svg>Open in Files</button><a class="tc-btn" href="/app/settings/attachments">Discard</a><button class="tc-btn is-primary" type="submit" form="attachments">Save</button></div>
+        </div>
+        <form class="tc-form" id="attachments" action="/app/settings/attachments" method="post">
+          <div class="tc-fset tc-fset--lead">
+            <div class="tc-rubric">Small files stay in the record</div>
+            <dl class="tc-fields tc-grow tc-fields--bleed tc-fields--cols130">
+              <dt>Up to 2 MB</dt><dd>written into the event, the task or the note itself, and travels with it</dd>
+              <dt>Larger</dt><dd>put in the folder below; the record keeps a link to it</dd>
+            </dl>
+            <div class="tc-field tc-grow"><span class="tc-field__hint">A collection that says it takes less (<span class="tc-mono">max-resource-size</span>) lowers the boundary for itself: <span class="tc-mono">nextcloud</span> 2 MB, <span class="tc-mono">radicale · vps</span> 1 MB. Nothing here raises it.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Folder</div>
+            <div class="tc-field tc-field--md"><label>Collection</label><span class="tc-in is-pick"><select class="tc-in__list" name="collection" aria-label="Collection"><option value="sftpgo.vps.documents" selected>sftpgo · vps · Documents</option></select></span>
+              <span class="tc-field__hint">Any file collection you can write to.</span></div>
+            <div class="tc-field tc-field--lg"><label>Folder in it</label>
+              <span class="tc-line tc-line--gap-8">
+                <input class="tc-in is-mono tc-in--fill" type="text" name="folder.in.it" value="/carrel/attachments"><button class="tc-btn" type="button">Browse</button></span>
+              <span class="tc-field__hint">Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel.</span></div>
+            <div class="tc-field is-own-line tc-grow tc-field--gap7">
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="a.subfolder.per.month" value="1" checked><span class="tc-tickrow__tick"></span>A subfolder per month</label>
+              <span class="tc-field__hint"><span class="tc-mono">2026-07</span>, <span class="tc-mono">2026-08</span>. Off means one flat folder — fine for a hundred files, not for ten thousand.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">File name</div>
+            <div class="tc-field tc-field--lg"><label>Written as</label><span class="tc-in is-pick"><select class="tc-in__list" name="written.as" aria-label="Written as"><option value="date.then.the.original.name" selected>Date, then the original name</option></select></span>
+              <span class="tc-field__hint"><span class="tc-mono">2026-08-10 sync-board.png</span>. A name already taken is never overwritten: a counter is added.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">In this folder now <span class="tc-badge is-alert">unavailable</span></div>
+            <dl class="tc-fields tc-grow tc-fields--bleed tc-fields--cols130">
+                            <dt>Path</dt><dd class="tc-mono tc-mono--t11">https://files.example.org/dav/Documents/carrel/attachments/</dd>
+            </dl>
+            <div class="tc-diag tc-grow">PROPFIND /dav/Documents/carrel/attachments/ → 401 Unauthorized</div>
+          </div>
+        </form>
+        <div class="tc-msg">Changing the folder moves nothing. Records already written carry the old path and keep working; only new attachments go to the new place.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Папка выбрана, но её сервер не пускает: в рубрике «In this folder now» — «unavailable», вместо чисел — что ответил сервер. Мелкое вложение ложится в запись; большое не прикрепится, пока папка не ответит, и карточка записи скажет это своим отказом. Open in Files выключена с причиной.</figcaption>
+</figure>
+
 <div class="frames">
   <figure style="flex:0 1 300px">
   <div class="frame" data-frame="attachments-2">
@@ -15567,6 +15723,79 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
   </div>
 </div>
 <figcaption>Опасность названа словами и стоит рядом с кнопкой, а не в конце страницы: профиль Apple — это файл с паролями, и человек должен узнать об этом до того, как перешлёт его себе в мессенджер. Время у ссылки — не украшение: ссылка одноразовая, живёт пять минут и открывается только тому, кто вошёл в Carrel на этом устройстве, — копировать её некуда, поэтому и «Copy» у неё нет. Профиль выдаётся внутри общего окна разблокировки (<a href="#reveal">ниже</a>), своего поля пароля у экрана нет. <b>Выбор — по аккаунту целиком:</b> профиль берёт аккаунт, отдельную коллекцию из него не вынуть, поэтому галочка стоит у строки аккаунта, а логин — в её заголовке.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-plan-6" data-screen="/app/settings/devices" data-part="locked">
+  <div class="frame-label"><span>Новое устройство · выдача закрыта</span><i>дополнительный кадр: locked · /app/settings/devices</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Set up a new device</div><div class="tc-head__sub">Everything discovery found — as one file or one code </div></div>
+          <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Apple</button><button class="tc-seg__opt" type="button">Android</button><button class="tc-seg__opt" type="button">Thunderbird</button><button class="tc-seg__opt" type="button">Anything else</button></span></div>
+        </div>
+        <div class="tc-form tc-form--padb0">
+          <div class="tc-stack tc-stack--gap-12 tc-form__col--460">
+            <div class="tc-card">
+              <div class="tc-rubric">What goes into the profile</div>
+              <div class="tc-list tc-list--mx-14">
+                <div class="tc-row tc-row--slim">
+                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· Личный, Работа, Контакты</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                </div>
+                <div class="tc-row tc-row--slim">
+                  <button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· Проекты</span></span><span class="tc-row__cell">CalDAV</span>
+                </div>
+              </div>
+            </div>
+            <div class="tc-msg is-alert is-row tc-msg--flush">
+              <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
+              <span class="tc-msg__aside"><b>The profile carries passwords in cleartext.</b> It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log.</span>
+            </div>
+          </div>
+          <div class="tc-stack tc-stack--gap-12 tc-form__col--300">
+            <div class="tc-card">
+              <div class="tc-rubric">Profile</div>
+              <span class="tc-field__hint">Asks for your Carrel password first.</span>
+              <div class="tc-card__acts"><button class="tc-btn is-danger" type="button">Generate profile</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Окно выдачи закрыто: бейджа со сроком и «Lock now» нет. Generate profile открывает лист пароля (s-plan-3) и после него выдаёт профиль; ссылки ещё нет — карточки «Link ready» нет.</figcaption>
 </figure>
 
 <div class="frames">
