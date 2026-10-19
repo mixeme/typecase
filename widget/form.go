@@ -23,10 +23,8 @@ func (Line) fieldPart()      {}
 func (FieldHint) fieldPart() {}
 func (Swatches) fieldPart()  {}
 func (Zoom) fieldPart()      {}
-func (FieldRow) fieldPart()  {}
 func (Group) fieldPart()     {}
 func (Photo) fieldPart()     {}
-func (Mark) fieldPart()      {}
 func (Dim) fieldPart()       {}
 func (Drop) fieldPart()      {}
 func (Menu) fieldPart()      {}
@@ -95,22 +93,6 @@ type Zoom struct {
 func (z Zoom) html(mix) string {
 	return `<span class="tc-line tc-line--gap-9 tc-field__zoom"><span class="tc-field__rail"><span class="tc-field__fill"></span>` +
 		`<span class="tc-field__knob"></span></span>` + Mono{Text: z.Value, Variant: Mono11Dusty}.html(nil) + `</span>`
-}
-
-// FieldRow is a row of small things set in a field: marks of a colour with a
-// note after them.
-type FieldRow struct {
-	Items []FieldPart
-}
-
-func (r FieldRow) html(mix) string {
-	var s strings.Builder
-	s.WriteString(`<span class="tc-line tc-line--gap-6 tc-field__row">`)
-	for _, it := range r.Items {
-		s.WriteString(it.html(nil))
-	}
-	s.WriteString(`</span>`)
-	return s.String()
 }
 
 // GroupForm is how a group of checks sits under a label.
@@ -213,11 +195,11 @@ func (w FieldWidth) class() string {
 //
 // Роль. Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
 // Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Hidden, Changed}.
-// Состояния. labelled | bare | hint | group | swatches | zoom | photo | row | own-line.
+// Состояния. labelled | bare | hint | group | swatches | zoom | photo | own-line.
 // Инварианты. Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
 // Поведение. Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов.
 // Эталон. кадр `components-10`, фрагмент `.tc-field`.
-// Содержимое. Контролы (ввод, выбор, текст, теги, сегмент, флажки, кнопки, строка), подсказка, образцы цвета, масштаб, ряд меток, группа флажков, фотография, выпадашка и меню под полем.
+// Содержимое. Контролы (ввод, выбор, текст, теги, сегмент, флажки, кнопки, строка), подсказка, образцы цвета, масштаб, группа флажков, фотография, выпадашка и меню под полем.
 // Чего нет. Проверки значения: что неверно, говорит подсказка, которую ставит экран.
 type Field struct {
 	Label      string // " " keeps an empty label: the row lines up with its neighbours

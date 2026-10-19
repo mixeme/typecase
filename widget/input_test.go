@@ -29,3 +29,10 @@ func TestCheckReason(t *testing.T) {
 		t.Errorf("the check is not off with its reason: %s", got)
 	}
 }
+
+func TestSheetIDWithoutAction(t *testing.T) {
+	got := (Sheet{Title: "Attach from Files", ID: "picker-sheet"}).Render()
+	if !strings.HasPrefix(got, `<div class="tc-sheet" id="picker-sheet"`) {
+		t.Errorf("a sheet that is no form does not carry its id: %s", got)
+	}
+}

@@ -94,15 +94,23 @@ func Plan1() Screen {
 													w.SlimRow{
 														Mark:   w.Mark{Kind: w.MarkMulti},
 														Title:  "nextcloud · mix",
-														Inside: "· Личный, Работа, Контакты",
+														Inside: "· 9 collections",
 														Aside:  "CalDAV, CardDAV",
 													},
 													w.SlimRow{
 														Ticked: w.TickedOff,
 														Mark:   w.Mark{Kind: w.MarkMulti},
 														Title:  "radicale · vps · mix",
-														Inside: "· Проекты",
-														Aside:  "CalDAV",
+														Inside: "· 4 collections",
+														Aside:  "CalDAV, CardDAV",
+													},
+													w.SlimRow{
+														Ticked: w.TickedOff,
+														Reason: "The server refused the saved password.",
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "baikal · m.yenuchenko",
+														Inside: "· 1 collection",
+														Aside:  "password refused",
 													},
 												},
 												Inset: true,
@@ -245,15 +253,23 @@ func Plan6() Screen {
 													w.SlimRow{
 														Mark:   w.Mark{Kind: w.MarkMulti},
 														Title:  "nextcloud · mix",
-														Inside: "· Личный, Работа, Контакты",
+														Inside: "· 9 collections",
 														Aside:  "CalDAV, CardDAV",
 													},
 													w.SlimRow{
 														Ticked: w.TickedOff,
 														Mark:   w.Mark{Kind: w.MarkMulti},
 														Title:  "radicale · vps · mix",
-														Inside: "· Проекты",
-														Aside:  "CalDAV",
+														Inside: "· 4 collections",
+														Aside:  "CalDAV, CardDAV",
+													},
+													w.SlimRow{
+														Ticked: w.TickedOff,
+														Reason: "The server refused the saved password.",
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "baikal · m.yenuchenko",
+														Inside: "· 1 collection",
+														Aside:  "password refused",
 													},
 												},
 												Inset: true,
@@ -381,10 +397,23 @@ func Plan2() Screen {
 													w.SlimRow{
 														Mark:   w.Mark{Kind: w.MarkMulti},
 														Title:  "nextcloud · mix",
-														Inside: "· Личный, Работа, Контакты",
+														Inside: "· 9 collections",
 														Aside:  "CalDAV, CardDAV",
 													},
-													w.SlimRow{Mark: w.Mark{Kind: w.MarkMulti}, Title: "radicale · vps · mix", Inside: "· Проекты", Aside: "CalDAV"},
+													w.SlimRow{
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "radicale · vps · mix",
+														Inside: "· 4 collections",
+														Aside:  "CalDAV, CardDAV",
+													},
+													w.SlimRow{
+														Ticked: w.TickedOff,
+														Reason: "The server refused the saved password.",
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Title:  "baikal · m.yenuchenko",
+														Inside: "· 1 collection",
+														Aside:  "password refused",
+													},
 												},
 												Inset: true,
 											},
@@ -406,7 +435,7 @@ func Plan2() Screen {
 											w.Rubric{Text: "nextcloud · mix"},
 											w.CardQR{
 												Colour: "#FFFDF7",
-												Symbol: "qr-demo",
+												Src:    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==",
 												Side: []w.CardQRPart{
 													w.Dim{Parts: []w.Inline{w.Text("Address and login are in the code.")}, Size: w.Dim11_5, Variant: w.DimWrap},
 													w.Button{Label: "Open in DAVx5", Small: true},
@@ -434,7 +463,7 @@ func Plan2() Screen {
 											w.Rubric{Text: "radicale · vps · mix"},
 											w.CardQR{
 												Colour: "#FFFDF7",
-												Symbol: "qr-demo",
+												Src:    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==",
 												Side: []w.CardQRPart{
 													w.Dim{Parts: []w.Inline{w.Text("Address and login are in the code.")}, Size: w.Dim11_5, Variant: w.DimWrap},
 													w.Button{Label: "Open in DAVx5", Small: true},
@@ -1164,7 +1193,15 @@ func Plan4() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/personal/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyj/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dela/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},
@@ -1172,7 +1209,47 @@ func Plan4() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/work/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/rabota/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dni-rozhdeniya/")},
+										Mono:  true,
+										Small: true,
+									},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapisi/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dnevnik/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapiski-obshchie/")},
+										Mono:  true,
+										Small: true,
+									},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},
@@ -1180,8 +1257,86 @@ func Plan4() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/contacts/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/kontakty/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/arhiv/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Strong("radicale · vps"),
+													w.Dim{Parts: []w.Inline{w.Text("login")}},
+													w.Mono{Text: "mix"},
+													w.Dim{Parts: []w.Inline{w.Text("password")}},
+													w.Mono{Text: "q7-otter-fern-41c"},
+													w.Button{Label: "Copy password", Small: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Span: 4,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/proekty/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/dezhurstva/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/komanda/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Рассылки"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/rassylki/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Strong("baikal"),
+													w.Dim{Parts: []w.Inline{w.Text("login")}},
+													w.Mono{Text: "m.yenuchenko"},
+													w.Faced{Face: w.FaceDanger, Items: []w.LinePart{w.Text("the server refused the saved password")}},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Span: 4,
+									},
 								},
 							},
 						},
@@ -1307,7 +1462,15 @@ func Plan5() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/personal/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyj/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dela/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},
@@ -1315,7 +1478,47 @@ func Plan5() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/work/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/rabota/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dni-rozhdeniya/")},
+										Mono:  true,
+										Small: true,
+									},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapisi/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/dnevnik/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapiski-obshchie/")},
+										Mono:  true,
+										Small: true,
+									},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},
@@ -1323,8 +1526,94 @@ func Plan5() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/contacts/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/kontakty/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/addressbooks/mix/arhiv/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Files"}}},
+									{Parts: []w.CellPart{w.Text("WebDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/files/mix/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Strong("radicale · vps"),
+													w.Dim{Parts: []w.Inline{w.Text("login")}},
+													w.Mono{Text: "mix"},
+													w.Dim{Parts: []w.Inline{w.Text("password")}},
+													w.Mono{Text: "q7-otter-fern-41c"},
+													w.Button{Label: "Copy password", Small: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Span: 4,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/proekty/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
+									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/dezhurstva/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/komanda/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Рассылки"}}},
+									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("…/radicale/mix/rassylki/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Strong("baikal"),
+													w.Dim{Parts: []w.Inline{w.Text("login")}},
+													w.Mono{Text: "m.yenuchenko"},
+													w.Faced{Face: w.FaceDanger, Items: []w.LinePart{w.Text("the server refused the saved password")}},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Span: 4,
+									},
 								},
 							},
 							{
@@ -1352,6 +1641,14 @@ func Plan5() Screen {
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
 									{Parts: []w.CellPart{w.Text("WebDAV")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("https://files.example.org/dav/Documents/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
+									{Parts: []w.CellPart{w.Text("WebDAV "), w.Badge{Label: "ro"}}, Mono: true},
+									{Parts: []w.CellPart{w.Text("https://files.example.org/dav/Public/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},

@@ -1291,7 +1291,15 @@ func Profile2() Screen {
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"},
+											w.Check{
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -1432,7 +1440,15 @@ func Profile24() Screen {
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Error: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Error: true},
+											w.Check{
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -1545,7 +1561,7 @@ func Profile14() Screen {
 									w.Field{
 										Label: "Server URL",
 										Parts: []w.FieldPart{
-											w.Input{Name: "server.url", Value: "https://xandikos.home.example/", Label: "Server URL", Mono: true},
+											w.Input{Name: "server", Value: "https://xandikos.home.example/", Label: "Server URL", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: ".well-known", Form: w.MonoCode},
@@ -1557,7 +1573,7 @@ func Profile14() Screen {
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -1565,10 +1581,11 @@ func Profile14() Screen {
 										Parts: []w.FieldPart{
 											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
 											w.Check{
-												On:    true,
-												Name:  "the.server.asks.no.password",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("The server asks no password")},
+												On:       true,
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
 											},
 										},
 										Width: w.FieldMD,
@@ -1578,7 +1595,7 @@ func Profile14() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -1589,6 +1606,7 @@ func Profile14() Screen {
 								},
 								ID:      "connect",
 								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
@@ -1608,7 +1626,7 @@ func Profile14() Screen {
 	}
 }
 
-// Profile16 is frame «Подключение без пароля · правка» (s-profile-16).
+// Profile16 is frame «Подключение · правка» (s-profile-16).
 func Profile16() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -1676,13 +1694,13 @@ func Profile16() Screen {
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Label",
-										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Parts: []w.FieldPart{w.Input{Name: "label", Value: "nextcloud", Label: "Label"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Server URL",
 										Parts: []w.FieldPart{
-											w.Input{Name: "server.url", Value: "https://xandikos.home.example/", Label: "Server URL", Mono: true},
+											w.Input{Name: "server", Value: "https://cloud.example.org/remote.php/dav/", Label: "Server URL", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: ".well-known", Form: w.MonoCode},
@@ -1694,18 +1712,19 @@ func Profile16() Screen {
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
 										Parts: []w.FieldPart{
-											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+											w.FieldHint{Parts: []w.Inline{w.Text("Leave it empty to keep the stored one.")}},
 											w.Check{
-												On:    true,
-												Name:  "the.server.asks.no.password",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("The server asks no password")},
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
 											},
 										},
 										Width: w.FieldMD,
@@ -1715,7 +1734,7 @@ func Profile16() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -1725,7 +1744,8 @@ func Profile16() Screen {
 									},
 								},
 								ID:      "connection",
-								Action:  "/app/settings/connections/sftpgo/edit",
+								Action:  "/app/settings/connections/nextcloud/edit",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
@@ -1809,13 +1829,13 @@ func Profile22() Screen {
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Label",
-										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Parts: []w.FieldPart{w.Input{Name: "label", Value: "nextcloud", Label: "Label"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Server URL",
 										Parts: []w.FieldPart{
-											w.Input{Name: "server.url", Value: "https://cloud.home.example/", Label: "Server URL", Mono: true},
+											w.Input{Name: "server", Value: "https://cloud.home.example/remote.php/dav/", Label: "Server URL", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: ".well-known", Form: w.MonoCode},
@@ -1827,18 +1847,19 @@ func Profile22() Screen {
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
 										Parts: []w.FieldPart{
-											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+											w.FieldHint{Parts: []w.Inline{w.Text("Leave it empty to keep the stored one.")}},
 											w.Check{
-												On:    true,
-												Name:  "the.server.asks.no.password",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("The server asks no password")},
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
 											},
 										},
 										Width: w.FieldMD,
@@ -1848,7 +1869,7 @@ func Profile22() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -1873,7 +1894,8 @@ func Profile22() Screen {
 									},
 								},
 								ID:      "connection-links",
-								Action:  "/app/settings/connections/sftpgo/edit",
+								Action:  "/app/settings/connections/nextcloud/edit",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
@@ -1957,13 +1979,13 @@ func Profile23() Screen {
 								Items: []w.FormPart{
 									w.Field{
 										Label: "Label",
-										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Parts: []w.FieldPart{w.Input{Name: "label", Value: "nextcloud", Label: "Label"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Server URL",
 										Parts: []w.FieldPart{
-											w.Input{Name: "server.url", Value: "https://cloud.home.example/", Label: "Server URL", Mono: true},
+											w.Input{Name: "server", Value: "https://cloud.home.example/remote.php/dav/", Label: "Server URL", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Mono{Text: ".well-known", Form: w.MonoCode},
@@ -1975,18 +1997,19 @@ func Profile23() Screen {
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
 										Parts: []w.FieldPart{
-											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Disabled: true},
+											w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
+											w.FieldHint{Parts: []w.Inline{w.Text("Leave it empty to keep the stored one.")}},
 											w.Check{
-												On:    true,
-												Name:  "the.server.asks.no.password",
-												Value: "1",
-												Parts: []w.CheckPart{w.Text("The server asks no password")},
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
 											},
 										},
 										Width: w.FieldMD,
@@ -1996,7 +2019,7 @@ func Profile23() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -2022,7 +2045,8 @@ func Profile23() Screen {
 									},
 								},
 								ID:      "connection-links",
-								Action:  "/app/settings/connections/sftpgo/edit",
+								Action:  "/app/settings/connections/nextcloud/edit",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
@@ -2119,17 +2143,33 @@ func Profile11() Screen {
 									},
 									w.Field{
 										Label: "Server URL",
-										Parts: []w.FieldPart{w.Input{Name: "server.url", Value: "https://cloud.example.org/", Label: "Server URL", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{Name: "server", Value: "https://cloud.example.org/", Label: "Server URL", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed."),
+												},
+											},
+										},
 										Width: w.FieldFull,
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "mix.work", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "mix.work", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Name: "password", Value: "••••••••••", Label: "Password"}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"},
+											w.Check{
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -2137,7 +2177,7 @@ func Profile11() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -2148,6 +2188,7 @@ func Profile11() Screen {
 								},
 								ID:      "connect",
 								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
@@ -4153,16 +4194,12 @@ func Profile10() Screen {
 							w.Field{
 								Label: "Label colour",
 								Parts: []w.FieldPart{
-									w.FieldRow{
-										Items: []w.FieldPart{
-											w.Mark{Colour: "#8C6239", Size: w.MarkH18, Focus: true},
-											w.Mark{Colour: "#4A6B52", Size: w.MarkH18},
-											w.Mark{Colour: "#3F6E8C", Size: w.MarkH18},
-											w.Mark{Colour: "#A05A2C", Size: w.MarkH18},
-											w.Mark{Colour: "#6B4E7A", Size: w.MarkH18},
-											w.Dim{Parts: []w.Inline{w.Text("derived from the address")}, Size: w.Dim11, Variant: w.DimIndent},
-										},
+									w.Swatches{
+										Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"},
+										On:      4,
+										Name:    "colour",
 									},
+									w.Dim{Parts: []w.Inline{w.Text("derived from the address")}, Size: w.Dim11},
 									w.FieldHint{
 										Parts: []w.Inline{
 											w.Text("A feed sends no colour of its own: Carrel derives one, and hatches the strip so a feed is recognisable among your own collections."),
@@ -4193,7 +4230,7 @@ func Profile10() Screen {
 									w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 3"}, w.Tag{Label: "Tasks · 1"}}},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("Not a choice: a feed is one file, and all three kinds of record live in it. What it carries decides where it lands, and that is visible before subscribing."),
+											w.Text("Not a choice: a feed is one file. What it carries decides where it lands, and that is visible before subscribing."),
 										},
 									},
 								},

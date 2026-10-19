@@ -110,14 +110,12 @@ var _ = add(
 	primitive("sized", w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, "s-contacts-6", "tc-mark", 3),
 	primitive("external", w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, "s-profile-1", "tc-mark", 17),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, "s-agenda-17", "tc-mark", 10),
-	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH18}, "s-profile-10", "tc-mark", 20),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, "s-mail-1", "tc-mark", 16),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH32}, "phone-1", "tc-mark", 2),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 1),
 	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 11),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH12}, "s-notes-2", "tc-mark", 4),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH14}, "desktop-8", "tc-mark", 1),
-	primitive("focus", w.Mark{Colour: "#8C6239", Size: w.MarkH18, Focus: true}, "s-profile-10", "tc-mark", 19),
 
 	// tc-tag
 	primitive("unloaded", w.Tag{Label: "7c1e-40aa-b913", Removable: true}, "s-tasks-11", "tc-tag", 3),
@@ -181,7 +179,6 @@ var _ = add(
 	primitive("sized", dim(w.Dim11_5, w.DimInline, w.Text("Properties Carrel does not know are kept unchanged.")), "s-contacts-3", "tc-dim", 1),
 	primitive("mixed", dim(w.DimText, w.DimInline, w.Text("starts a copy · answers"), w.Mono{Text: "202"}, w.Text("and an id, a second one while it runs is refused")), "s-backup-5", "tc-dim", 1),
 	primitive("indent", dim(w.DimText, w.DimIndent, w.Text("as sent")), "s-agenda-3", "tc-dim", 1),
-	primitive("indent", dim(w.Dim11, w.DimIndent, w.Text("derived from the address")), "s-profile-10", "tc-dim", 3),
 	primitive("top", dim(w.Dim11, w.DimTop, w.Text("Arguments")), "s-backup-4", "tc-dim", 5),
 	primitive("mixed", dim(w.Dim11_5, w.DimWrap, w.Text("Signed"), w.Strong("Михаил Енученко"), w.Text("· replies go to mix@example.org")), "s-mail-1", "tc-dim", 1),
 	primitive("fixed", dim(w.DimText, w.DimFixed, w.Text("Sent as")), "s-mail-4", "tc-dim", 3),

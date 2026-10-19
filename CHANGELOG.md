@@ -8,6 +8,11 @@ do, not what the authors did.
 
 ### Breaking
 
+- `FieldRow`, `MarkH18` and `Mark.Focus` are gone, with their rules
+  (`.tc-field__row`, `.tc-mark--h18`, `.tc-mark.is-focus`): the label
+  colour of a feed is a choice now, `Swatches` with `Name` (Carrel's task
+  211), and no frame draws marks in a field any more. `Mark` is no part
+  of a `Field`.
 - `Turn` (the arrow at a card's foot) and `Card` as a part of a
   `FieldSet`, and `Badge` as a part of a `Check` are gone: no frame draws
   them since the backup job lost its trigger card (Carrel's task 193).
@@ -74,6 +79,11 @@ do, not what the authors did.
 
 ### Added
 
+- **`Sheet.ID` on a sheet that is no form** (Carrel's task 210): the id
+  a link's swap names — the file picker's servers.
+- **`SlimRow.Reason`** — the tick of a row off, and why, the aside as an
+  alarm: an account whose saved password the server refused cannot go
+  into a device's profile (Carrel's task 211).
 - **`Check.Reason`** — a check of a form that is off, and why, as a
   button's reason: the input is disabled, the reason the label's title,
   the check dimmed (`.tc-check:has(> .tc-check__box:disabled)`). «Let
@@ -800,6 +810,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The upload sheet without «Open the folder»; the connection dialogs
+  and the new device from the set** (Carrel's tasks 210, 211; accepted by
+  the owner 19.10). `s-files-19`: its tree's rows are links, no button.
+  The connect dialog (`s-profile-2`, `-11`, `-24`) carries «The server asks
+  no password», unticked, a password field, the server's field names.
+  Editing a connection (`s-profile-16`, `-22`, `-23`) edits nextcloud: its
+  label, «Leave it empty to keep the stored one.» under the password. The
+  feed's label colour (`s-profile-10`) is a choice of six. The new device's
+  tabs (`s-plan-1`, `-2`, `-4`, `-5`, `-6`): an account a row with its
+  count, baikal off with «password refused»; Thunderbird and Anything else
+  a row a collection, Anything else with the WebDAV ones; the Android code
+  a picture from the server.
 - **Attachments and a new device: the states without frames** (Carrel's
   task 193 p. 5; accepted by the owner 19.10): `attachments-5` — no folder
   yet, «Folder [not set]», the collection to choose, the path a

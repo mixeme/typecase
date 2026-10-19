@@ -277,7 +277,9 @@ type Sheet struct {
 	Width SheetWidth
 	// Action makes the sheet a form that sends its fields there, as Form
 	// and Doc do (Carrel's task 134): Method is "post" when empty, Fields
-	// its hidden fields, ID what a button outside it names.
+	// its hidden fields. ID is what a button outside it names, or what a
+	// link's swap puts in its place — on a sheet that is no form too: the
+	// file picker's servers (Carrel's task 210).
 	Action string
 	Method string
 	Fields []Hidden
@@ -302,7 +304,7 @@ func (h Sheet) html(m mix) string {
 		}
 		s.WriteString(`<div class="tc-sheet__head">`)
 	} else {
-		s.WriteString(`<div` + class(m, "tc-sheet", h.Width.class()) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `><div class="tc-sheet__head">`)
+		s.WriteString(`<div` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `><div class="tc-sheet__head">`)
 	}
 	if h.Icon != "" {
 		s.WriteString(h.Tone.svg() + h.Icon.use() + `</svg>`)

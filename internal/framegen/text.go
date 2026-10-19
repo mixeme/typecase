@@ -152,9 +152,6 @@ func (g *gen) mark(e *El) string {
 	if s := g.en.of(e, "MarkSize"); s != "" {
 		f = append(f, "Size: "+s)
 	}
-	if e.Has("is-focus") {
-		f = append(f, "Focus: true")
-	}
 	return "w.Mark{" + join(f, ", ") + "}"
 }
 

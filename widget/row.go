@@ -440,10 +440,10 @@ func (r SizeRow) html(m mix) string {
 // SlimRow — tc-row
 //
 // Роль. Узкая строка выбора: галка, метка, что выбрать и что в нём, род.
-// Вход. SlimRow{Ticked, Mark, Title, Inside, Aside, Send}.
-// Состояния. plain | off.
+// Вход. SlimRow{Ticked, Mark, Title, Inside, Aside, Send, Reason}.
+// Состояния. plain | off | disabled.
 // Инварианты. Галка — кнопка с доступным именем; строка печатает фрагмент своего кадра.
-// Поведение. Галка выбирает строку.
+// Поведение. Галка выбирает строку; с Reason галка выключена, причина — её подсказка, род справа — тревогой.
 // Эталон. кадр `s-plan-1`, фрагмент `.tc-row`.
 // Содержимое. Галка, метка, название с тем, что в нём, род справа.
 // Чего нет. Источника и даты.
@@ -454,14 +454,23 @@ type SlimRow struct {
 	Title  string
 	Inside string // what is in it, after the title
 	Aside  string
+	// Reason turns the tick off and says why; the aside says it as an
+	// alarm: an account whose saved password the server refused cannot go
+	// into a device's profile (Carrel's task 211).
+	Reason string
 }
 
 // Render prints the row.
 func (r SlimRow) Render() string { return r.html(nil) }
 
 func (r SlimRow) html(m mix) string {
-	return `<div` + class(m, "tc-row", "tc-row--slim") + `>` + r.Ticked.box(r.Title, r.Send) + r.Mark.html(nil) +
-		`<span class="tc-row__title">` + esc(r.Title) + ` ` + cell(r.Inside, "tc-row__cell") + `</span>` + cell(r.Aside, "tc-row__cell") + `</div>`
+	tick, aside := r.Ticked.box(r.Title, r.Send), cell(r.Aside, "tc-row__cell")
+	if r.Reason != "" {
+		tick = `<button class="tc-tickrow__tick is-off"` + attr("title", r.Reason) + ` type="button"` + attr("aria-label", r.Title) + ` disabled></button>`
+		aside = cell(r.Aside, "tc-row__cell", "tc-dim--danger")
+	}
+	return `<div` + class(m, "tc-row", "tc-row--slim") + `>` + tick + r.Mark.html(nil) +
+		`<span class="tc-row__title">` + esc(r.Title) + ` ` + cell(r.Inside, "tc-row__cell") + `</span>` + aside + `</div>`
 }
 
 // TickBox is a tick box in front of a phone's row.

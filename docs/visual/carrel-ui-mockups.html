@@ -1607,8 +1607,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-mark--h11.tc-mark--h11{height:11px}
 .tc-mark--inline.tc-mark--inline{vertical-align:-1px;display:inline-block}
 .tc-mark--h12.tc-mark--h12{height:12px}
-.tc-mark--h18.tc-mark--h18{height:18px}
-.tc-mark.is-focus{outline:1.5px solid var(--tc-accent);outline-offset:2px}
 
 
 .tc-mark--on-hair.tc-mark--on-hair{background:var(--tc-hair)}
@@ -1787,7 +1785,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-field__swatch--on.tc-field__swatch--on,.tc-field__swatch:has(> .tc-seg__box:checked){outline:1.5px solid var(--tc-accent);outline-offset:2px}
 label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-dim--lh1-55.tc-dim--lh1-55{line-height:1.55}
-.tc-field__row.tc-field__row{margin-top:2px}
 
 .tc-table__wrap.tc-table__wrap{align-items:center;display:flex;flex-wrap:wrap;gap:8px 10px;min-width:0;max-width:100%;overflow:hidden}
 .tc-table__wrap.tc-table__wrap .tc-line{flex-wrap:nowrap}
@@ -9697,7 +9694,7 @@ Read  2 min ago</div>
             </div>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Upload</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -13892,7 +13889,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
@@ -13947,7 +13944,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
@@ -13994,12 +13991,12 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post">
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://xandikos.home.example/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="mix" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="the.server.asks.no.password" value="1" checked><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://xandikos.home.example/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" checked data-tc-disables="password"><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
@@ -14024,7 +14021,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 
 <figure>
 <div class="frame" data-frame="s-profile-16">
-  <div class="frame-label"><span>Подключение без пароля · правка</span><i>диалог</i></div>
+  <div class="frame-label"><span>Подключение · правка</span><i>диалог</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -14059,18 +14056,18 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Edit connection</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connection" action="/app/settings/connections/sftpgo/edit" method="post">
-        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://xandikos.home.example/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="mix" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="the.server.asks.no.password" value="1" checked><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      <form class="tc-form tc-form--padl0-padr0" id="connection" action="/app/settings/connections/nextcloud/edit" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in" type="text" name="label" value="nextcloud" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://cloud.example.org/remote.php/dav/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Leave it empty to keep the stored one.</span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connection">Save</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
-<figcaption>Правка такого подключения — та же форма с Save и Cancel; отметка стоит, поле пароля выключено и пусто. Подсказки «Leave it empty to keep the stored one» у выключенного поля нет: хранить нечего.</figcaption>
+<figcaption>Правка подключения — та же форма с Save и Cancel, метка и адрес — как сохранены. Пароль не показывается: пустое поле значит «не менять», о чём и подсказка «Leave it empty to keep the stored one.». Отметка «The server asks no password» снята; отмеченная выключает поле, как при подключении (s-profile-14).</figcaption>
 </figure>
 
 <figure>
@@ -14110,12 +14107,12 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Edit connection</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connection-links" action="/app/settings/connections/sftpgo/edit" method="post">
-        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://cloud.home.example/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="mix" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="the.server.asks.no.password" value="1" checked><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      <form class="tc-form tc-form--padl0-padr0" id="connection-links" action="/app/settings/connections/nextcloud/edit" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in" type="text" name="label" value="nextcloud" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://cloud.home.example/remote.php/dav/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Leave it empty to keep the stored one.</span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
         <div class="tc-field tc-field--full" data-tc-changed="server.url username"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint">1 published link uses this connection.</span></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connection-links">Save</button><button class="tc-btn" type="button">Cancel</button></div>
@@ -14162,12 +14159,12 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Edit connection</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connection-links" action="/app/settings/connections/sftpgo/edit" method="post">
-        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://cloud.home.example/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="mix" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="the.server.asks.no.password" value="1" checked><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      <form class="tc-form tc-form--padl0-padr0" id="connection-links" action="/app/settings/connections/nextcloud/edit" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in" type="text" name="label" value="nextcloud" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://cloud.home.example/remote.php/dav/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint">Leave it empty to keep the stored one.</span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
         <div class="tc-field tc-field--full" data-tc-changed="server.url username"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint">1 published link uses this connection.</span><span class="tc-field__hint tc-dim--danger">Choose what becomes of them before saving.</span></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connection-links">Save</button><button class="tc-btn" type="button">Cancel</button></div>
@@ -14324,12 +14321,12 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post">
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-error is-focus" type="text" name="label" value="nextcloud" aria-label="Label"><span class="tc-field__hint tc-dim--danger">There is already a connection called “nextcloud”. Choose another label: it is how your sources are told apart.</span></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server.url" value="https://cloud.example.org/" aria-label="Server URL"></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="mix.work" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="text" name="password" value="••••••••••" aria-label="Password"></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://cloud.example.org/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix.work" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
@@ -15318,19 +15315,20 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-field tc-field--w100"><label>Name here</label><input class="tc-in" type="text" name="name.here" value="Праздники РФ" aria-label="Name here">
             <span class="tc-field__hint">Taken from the feed; change it if you like — other people’s feed names are often longer than the rail.</span></div>
           <div class="tc-field tc-field--w100"><label>Label colour</label>
-            <span class="tc-line tc-line--gap-6 tc-field__row">
-              <span class="tc-mark tc-mark--h18 is-focus" data-tc-colour="#8C6239"></span>
-              <span class="tc-mark tc-mark--h18" data-tc-colour="#4A6B52"></span>
-              <span class="tc-mark tc-mark--h18" data-tc-colour="#3F6E8C"></span>
-              <span class="tc-mark tc-mark--h18" data-tc-colour="#A05A2C"></span>
-              <span class="tc-mark tc-mark--h18" data-tc-colour="#6B4E7A"></span>
-              <span class="tc-dim tc-dim--t11 tc-dim--ml6">derived from the address</span>
+            <span class="tc-line tc-line--gap-9 tc-field__swatches">
+              <label data-tc-colour="#4A6B52" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#4A6B52" aria-label="#4A6B52"></label>
+              <label data-tc-colour="#3F6E8C" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#3F6E8C" aria-label="#3F6E8C"></label>
+              <label data-tc-colour="#6B4E7A" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#6B4E7A" aria-label="#6B4E7A"></label>
+              <label data-tc-colour="#A05A2C" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#A05A2C" aria-label="#A05A2C"></label>
+              <label data-tc-colour="#8C6239" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#8C6239" aria-label="#8C6239" checked></label>
+              <label data-tc-colour="#9A9280" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#9A9280" aria-label="#9A9280"></label>
             </span>
+            <span class="tc-dim tc-dim--t11">derived from the address</span>
             <span class="tc-field__hint">A feed sends no colour of its own: Carrel derives one, and hatches the strip so a feed is recognisable among your own collections.</span></div>
           <div class="tc-field is-own-line tc-field--w100">
             <label class="tc-check"><input class="tc-check__box" type="checkbox" name="this.feed.asks.for.a.password" value="1"><span class="tc-tickrow__tick is-off"></span>This feed asks for a password</label>
             <span class="tc-field__hint">The login and password are kept the way DAV credentials are: encrypted under your key. A secret link needs no password — the secret is already in the address.</span></div>
-          <div class="tc-field tc-field--w100"><label>Sections</label><span class="tc-in tc-in--tags"><span class="tc-tag">Calendar · 3</span><span class="tc-tag">Tasks · 1</span></span><span class="tc-field__hint">Not a choice: a feed is one file, and all three kinds of record live in it. What it carries decides where it lands, and that is visible before subscribing.</span></div>
+          <div class="tc-field tc-field--w100"><label>Sections</label><span class="tc-in tc-in--tags"><span class="tc-tag">Calendar · 3</span><span class="tc-tag">Tasks · 1</span></span><span class="tc-field__hint">Not a choice: a feed is one file. What it carries decides where it lands, and that is visible before subscribing.</span></div>
         </form>
         <div class="tc-msg is-alert tc-msg--mx20">The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list.</div>
         <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit" form="subscribe">Subscribe</button><button class="tc-btn" type="button">Cancel</button></div>
@@ -15690,10 +15688,13 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-rubric">What goes into the profile</div>
               <div class="tc-list tc-list--mx-14">
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· Личный, Работа, Контакты</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· 9 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
                 </div>
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· Проекты</span></span><span class="tc-row__cell">CalDAV</span>
+                  <button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· 4 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                </div>
+                <div class="tc-row tc-row--slim">
+                  <button class="tc-tickrow__tick is-off" title="The server refused the saved password." type="button" disabled></button><span class="tc-mark is-multi"></span><span class="tc-row__title">baikal · m.yenuchenko <span class="tc-row__cell">· 1 collection</span></span><span class="tc-row__cell tc-dim--danger">password refused</span>
                 </div>
               </div>
             </div>
@@ -15771,10 +15772,13 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-rubric">What goes into the profile</div>
               <div class="tc-list tc-list--mx-14">
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· Личный, Работа, Контакты</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· 9 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
                 </div>
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· Проекты</span></span><span class="tc-row__cell">CalDAV</span>
+                  <button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· 4 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                </div>
+                <div class="tc-row tc-row--slim">
+                  <button class="tc-tickrow__tick is-off" title="The server refused the saved password." type="button" disabled></button><span class="tc-mark is-multi"></span><span class="tc-row__title">baikal · m.yenuchenko <span class="tc-row__cell">· 1 collection</span></span><span class="tc-row__cell tc-dim--danger">password refused</span>
                 </div>
               </div>
             </div>
@@ -15845,10 +15849,13 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-rubric">Collections DAVx5 will see</div>
               <div class="tc-list tc-list--mx-14">
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· Личный, Работа, Контакты</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">nextcloud · mix <span class="tc-row__cell">· 9 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
                 </div>
                 <div class="tc-row tc-row--slim">
-                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· Проекты</span></span><span class="tc-row__cell">CalDAV</span>
+                  <button class="tc-tickrow__tick" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-row__title">radicale · vps · mix <span class="tc-row__cell">· 4 collections</span></span><span class="tc-row__cell">CalDAV, CardDAV</span>
+                </div>
+                <div class="tc-row tc-row--slim">
+                  <button class="tc-tickrow__tick is-off" title="The server refused the saved password." type="button" disabled></button><span class="tc-mark is-multi"></span><span class="tc-row__title">baikal · m.yenuchenko <span class="tc-row__cell">· 1 collection</span></span><span class="tc-row__cell tc-dim--danger">password refused</span>
                 </div>
               </div>
             </div>
@@ -15860,7 +15867,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-rubric">nextcloud · mix</div>
               <div class="tc-card__split">
                 <div data-tc-colour="#FFFDF7" class="tc-card__qr">
-                  <svg width="104" height="104" viewBox="-1 -1 27 27" role="img" aria-label="QR"><rect x="-1" y="-1" width="27" height="27" fill="#FFFDF7"/><use href="#qr-demo"/></svg>
+                  <img class="tc-card__qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==" width="104" height="104" alt="QR">
                 </div>
                 <div class="tc-stack tc-stack--gap-8 tc-card__qr-side">
                   <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span>
@@ -15874,7 +15881,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-rubric">radicale · vps · mix</div>
               <div class="tc-card__split">
                 <div data-tc-colour="#FFFDF7" class="tc-card__qr">
-                  <svg width="104" height="104" viewBox="-1 -1 27 27" role="img" aria-label="QR"><rect x="-1" y="-1" width="27" height="27" fill="#FFFDF7"/><use href="#qr-demo"/></svg>
+                  <img class="tc-card__qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==" width="104" height="104" alt="QR">
                 </div>
                 <div class="tc-stack tc-stack--gap-8 tc-card__qr-side">
                   <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span>
@@ -16196,9 +16203,21 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <thead><tr><th>Collection</th><th>Type</th><th class="tc-table__n3">URL</th><th class="tc-table__n4 tc-table__col--num"></th></tr></thead>
           <tbody>
             <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>nextcloud</b><span class="tc-dim">login</span><span class="tc-mono">mix</span><span class="tc-dim">password</span><span class="tc-mono">z3-brick-lamp-9f2</span><button class="tc-btn is-sm" type="button">Copy password</button></span></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/personal/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/work/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/contacts/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/lichnyj/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dela/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/rabota/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dni-rozhdeniya/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/zapisi/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dnevnik/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/zapiski-obshchie/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/kontakty/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/arhiv/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>radicale · vps</b><span class="tc-dim">login</span><span class="tc-mono">mix</span><span class="tc-dim">password</span><span class="tc-mono">q7-otter-fern-41c</span><button class="tc-btn is-sm" type="button">Copy password</button></span></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/proekty/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/dezhurstva/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/komanda/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/rassylki/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>baikal</b><span class="tc-dim">login</span><span class="tc-mono">m.yenuchenko</span><span class="tc-dim--danger">the server refused the saved password</span></span></td></tr>
           </tbody>
         </table>
         <div class="tc-msg is-row"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
@@ -16253,11 +16272,25 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <thead><tr><th>Collection</th><th>Type</th><th class="tc-table__n3">URL</th><th class="tc-table__n4 tc-table__col--num"></th></tr></thead>
           <tbody>
             <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>nextcloud</b><span class="tc-dim">login</span><span class="tc-mono">mix</span><span class="tc-dim">password</span><span class="tc-mono">z3-brick-lamp-9f2</span><button class="tc-btn is-sm" type="button">Copy password</button></span></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/personal/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/work/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
-            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/contacts/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/lichnyj/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dela/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/rabota/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dni-rozhdeniya/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/zapisi/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/dnevnik/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/calendars/mix/zapiski-obshchie/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/kontakty/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/addressbooks/mix/arhiv/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td><td class="tc-mono">WebDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/remote.php/dav/files/mix/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>radicale · vps</b><span class="tc-dim">login</span><span class="tc-mono">mix</span><span class="tc-dim">password</span><span class="tc-mono">q7-otter-fern-41c</span><button class="tc-btn is-sm" type="button">Copy password</button></span></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/proekty/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td><td class="tc-mono">CalDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/dezhurstva/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/komanda/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td><td class="tc-mono">CardDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">…/radicale/mix/rassylki/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>baikal</b><span class="tc-dim">login</span><span class="tc-mono">m.yenuchenko</span><span class="tc-dim--danger">the server refused the saved password</span></span></td></tr>
             <tr><td colspan="4"><span class="tc-line tc-line--gap-8"><b>sftpgo · vps</b><span class="tc-dim">login</span><span class="tc-mono">mix</span><span class="tc-dim">password</span><span class="tc-mono">m2-kettle-pine-08d</span><button class="tc-btn is-sm" type="button">Copy password</button></span></td></tr>
             <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td><td class="tc-mono">WebDAV</td><td class="tc-mono tc-table__n3 tc-table__n3--t11">https://files.example.org/dav/Documents/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
+            <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td><td class="tc-mono">WebDAV <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n3 tc-table__n3--t11">https://files.example.org/dav/Public/</td><td class="tc-acts tc-table__n4"><button class="tc-btn is-sm" type="button">Copy</button></td></tr>
           </tbody>
         </table>
         <div class="tc-msg is-row"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>

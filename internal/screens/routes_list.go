@@ -90,7 +90,7 @@ var Routes = []Route{
 	{Frame: "s-profile-2", Caption: "Подключение аккаунта", Screen: Profile2},
 	{Frame: "s-profile-24", Caption: "Подключение · сервер отказал во входе", Screen: Profile24},
 	{Frame: "s-profile-14", Caption: "Подключение аккаунта · сервер без пароля", Screen: Profile14},
-	{Frame: "s-profile-16", Caption: "Подключение без пароля · правка", Screen: Profile16},
+	{Frame: "s-profile-16", Caption: "Подключение · правка", Screen: Profile16},
 	{Frame: "s-profile-22", Caption: "Подключение · правка, другой адрес и опубликованные ссылки", Screen: Profile22},
 	{Frame: "s-profile-23", Caption: "Подключение · Save без ответа о ссылках", Screen: Profile23},
 	{Frame: "s-profile-11", Caption: "Подключение аккаунта · подпись занята", Screen: Profile11},

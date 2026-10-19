@@ -24,7 +24,6 @@ const (
 	MarkH11Inline // 11 px, set in a line of text
 	MarkH12
 	MarkH14
-	MarkH18
 	MarkH20
 	MarkH32
 	MarkH34
@@ -33,14 +32,14 @@ const (
 
 func (s MarkSize) class() string {
 	return [...]string{"", "tc-mark--h11", "tc-mark--h11 tc-mark--inline", "tc-mark--h12", "tc-mark--h14",
-		"tc-mark--h18", "tc-mark--h20", "tc-mark--h32", "tc-mark--h34", "tc-mark--on-hair"}[s]
+		"tc-mark--h20", "tc-mark--h32", "tc-mark--h34", "tc-mark--on-hair"}[s]
 }
 
 // Mark — tc-mark
 //
 // Роль. Цветная метка источника в строке, в рейле, в заголовке.
-// Вход. Mark{Colour, Kind, Size, Focus}.
-// Состояния. one | multi | external | sized | focus.
+// Вход. Mark{Colour, Kind, Size}.
+// Состояния. one | multi | external | sized.
 // Инварианты. Цвет приходит данными и становится свойством сценарием, а не стилем в разметке; род метки — перечисление; метка печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `components-11`, фрагмент `.tc-mark`.
@@ -50,14 +49,13 @@ type Mark struct {
 	Colour string // "#4A6B52"; empty for a multi mark or one on a hairline
 	Kind   MarkKind
 	Size   MarkSize
-	Focus  bool // the drawn keyboard focus of the mockup's states
 }
 
 // Render prints the mark.
 func (k Mark) Render() string { return k.html(nil) }
 
 func (k Mark) html(m mix) string {
-	return `<span` + class(m, "tc-mark", k.Kind.class(), k.Size.class(), is("focus", k.Focus)) + attr("data-tc-colour", k.Colour) + `></span>`
+	return `<span` + class(m, "tc-mark", k.Kind.class(), k.Size.class()) + attr("data-tc-colour", k.Colour) + `></span>`
 }
 
 // Tag — tc-tag

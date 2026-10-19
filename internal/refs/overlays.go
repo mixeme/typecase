@@ -861,7 +861,8 @@ var _ = add(
 				{Icon: "file", Label: "Documents", Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents", Swap: "upload-sheet"},
 				{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel", Swap: "upload-sheet"},
 				{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments", Swap: "upload-sheet", Trail: w.Badge{Label: "attachment folder"}},
-				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07", Swap: "upload-sheet"}}, On: 3}}, Variant: w.CardFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Open the folder", Name: "open", Value: "1", Submit: true, NoScript: true}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}}, "s-files-19", "tc-sheet", 1),
+				{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07", Swap: "upload-sheet"},
+				{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}}, Variant: w.CardFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}}, "s-files-19", "tc-sheet", 1),
 	overlay("issued", w.Sheet{Icon: "shield", Tone: w.SheetIconDanger, Title: "Reset a password", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush},
 		w.Card{Items: []w.CardPart{
@@ -878,9 +879,9 @@ var _ = add(
 			{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}}, Foot: []w.SheetFootPart{w.Button{Label: "Choose this folder", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, "attachments-4", "tc-sheet", 1),
 	overlay("danger", w.Sheet{Action: "/app/settings/escrow/withdraw", Icon: "shield", Tone: w.SheetIconDanger, Title: "Withdraw my deposited key", Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("After withdrawal nobody can recover this account, including you. The copy of your data key on this server is destroyed; your records and connections stay as they are.")}, Tone: w.MsgAlert, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid, Submit: true}, w.Line{Gap: w.LineGap7, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth480}, "account-11", "tc-sheet", 1),
-	overlay("icon", w.Sheet{Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Drop{Trigger: w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240}, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Label: "sftpgo · vps", On: true, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?server=sftpgo", Swap: "upload-sheet"},
-		w.MenuItem{Label: "nextcloud", Href: "/app/files/sftpgo/documents/upload/carrel/attachments?server=nextcloud", Swap: "upload-sheet"},
+	overlay("icon", w.Sheet{ID: "picker-sheet", Icon: "file", Title: "Attach from Files", Head: []w.SheetHeadPart{w.Drop{Trigger: w.Pick{Value: "sftpgo · vps", Label: "Server", Variant: w.PickT12W240}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Label: "sftpgo · vps", On: true, Href: "/app/files/picker?for=attach&server=sftpgo", Swap: "picker-sheet"},
+		w.MenuItem{Label: "nextcloud", Href: "/app/files/picker?for=attach&server=nextcloud", Swap: "picker-sheet"},
 		w.MenuItem{Label: "webdav · nas", Reason: "webdav · nas did not answer.", Href: "#"}}, Width: w.MenuWidth290, Pop: w.MenuUnderEnd}, Place: w.Pushed}, w.Dim{Parts: []w.Inline{w.Text("to «Собрать чемодан»")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Body: []w.SheetPart{
 		w.SheetNote{Text: "Attach a file that is in Files already. Up to 2 MB it is written into the record, as a file from this computer is; a larger one stays where it lies, and the record keeps a link to it."},
 		w.Tree{Rows: []w.TreeRow{

@@ -794,8 +794,6 @@ func (g *gen) fieldPart(x *El) string {
 		return s + "}"
 	case x.Has("tc-field__zoom"):
 		return "w.Zoom{Value: " + q(x.Kid("tc-mono").Text()) + "}"
-	case x.Has("tc-field__row"):
-		return "w.FieldRow{Items: []w.FieldPart{" + g.each(x.Els(), g.fieldPart) + "}}"
 	case x.Has("tc-card__top2"):
 		return g.group(x)
 	case x.Has("tc-field__photo-row"):

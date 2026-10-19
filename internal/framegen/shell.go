@@ -919,6 +919,9 @@ func (g *gen) row0(e *El) string {
 		if els[0].Has("is-off") {
 			f = append(f, "Ticked: w.TickedOff")
 		}
+		if els[0].HasAttr("disabled") {
+			f = append(f, "Reason: "+q(els[0].Attr("title")))
+		}
 		t := e.Kid("tc-row__title")
 		f = append(f, "Mark: "+g.mark(els[1]), "Title: "+q(t.OwnText()), "Inside: "+q(t.Kid("tc-row__cell").Text()), "Aside: "+q(els[len(els)-1].Text()))
 		return "w.SlimRow{" + join(f, ", ") + "}"
@@ -1014,10 +1017,10 @@ var sheetWidth = []kv{{"tc-sheet--w400", "SheetWidth400"}, {"tc-sheet--w480", "S
 
 func (g *gen) sheet(e *El) string {
 	var f []string
+	if id := e.Attr("id"); id != "" {
+		f = append(f, "ID: "+q(id))
+	}
 	if e.Tag == "form" {
-		if id := e.Attr("id"); id != "" {
-			f = append(f, "ID: "+q(id))
-		}
 		f = append(f, "Action: "+q(e.Attr("action")))
 		if m := e.Attr("method"); m != "" && m != "post" {
 			f = append(f, "Method: "+q(m))
