@@ -790,7 +790,7 @@ func Account15() Screen {
 									Action:  "/app/settings/account/name",
 								},
 								w.FieldSet{
-									Rubric: w.Rubric{Text: "Email"},
+									Rubric: w.Rubric{Text: "Email", Items: []w.RubricPart{w.Badge{Label: "pending"}, w.Plain{Text: "new@example.org"}}},
 									Items: []w.FieldSetPart{
 										w.Field{
 											Label: "Address",
@@ -809,7 +809,6 @@ func Account15() Screen {
 														w.Text(" on letters you send."),
 													},
 												},
-												w.Line{Items: []w.LinePart{w.Badge{Label: "pending: new@example.org"}}},
 											},
 											Width: w.FieldLG,
 										},

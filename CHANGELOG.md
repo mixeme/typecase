@@ -800,6 +800,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The Email block says its state with a badge in its title** (accepted
+  by the owner 19.10): «not confirmed» (alert), «not confirmed» and «link
+  sent 12 February 11:42», «confirmed» (no date), «pending» and
+  «new@example.org» or «new@example.org · link not sent» — the words
+  beside the badge plain, since a title prints its badge in capitals. No
+  red box under the address: Send confirmation and Send again stand
+  after Change, the field 420 px for the two buttons (`s-mail-9`,
+  `account-1`, `-8`, `-9`, `-10`, `-15`).
 - **Settings against themselves** (Carrel's task 209): `s-mail-9`
   draws the account page whole — Password, Sessions, Key escrow and
   Delete account under its Email block, as `account-1`. The connections

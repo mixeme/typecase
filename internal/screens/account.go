@@ -92,7 +92,7 @@ func Account1() Screen {
 								Action:  "/app/settings/account/name",
 							},
 							w.FieldSet{
-								Rubric: w.Rubric{Text: "Email"},
+								Rubric: w.Rubric{Text: "Email", Items: []w.RubricPart{w.Badge{Label: "pending"}, w.Plain{Text: "new@example.org"}}},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Address",
@@ -111,7 +111,6 @@ func Account1() Screen {
 													w.Text(" on letters you send."),
 												},
 											},
-											w.Line{Items: []w.LinePart{w.Badge{Label: "pending: new@example.org"}}},
 										},
 										Width: w.FieldLG,
 									},
@@ -404,7 +403,7 @@ func Mail9() Screen {
 								Action:  "/app/settings/account/name",
 							},
 							w.FieldSet{
-								Rubric: w.Rubric{Text: "Email"},
+								Rubric: w.Rubric{Text: "Email", Items: []w.RubricPart{w.Badge{Label: "not confirmed", Tone: w.BadgeAlert}}},
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Address",
@@ -413,6 +412,7 @@ func Mail9() Screen {
 												Items: []w.LinePart{
 													w.Input{Name: "address", Value: "mix@example.org", Label: "Address", Variant: w.InputFill},
 													w.Button{Label: "Change", Submit: true},
+													w.Button{Label: "Send confirmation", To: "/app/settings/account/email/confirm", Submit: true},
 												},
 												Gap: w.LineGap8,
 											},
@@ -423,16 +423,8 @@ func Mail9() Screen {
 													w.Text(" on letters you send."),
 												},
 											},
-											w.Msg{
-												Parts: []w.MsgPart{
-													w.Text("Nobody can reply to letters you send: until this address is confirmed, they go out without a reply address and say so at the foot. "),
-													w.Button{Label: "Send confirmation", Small: true},
-												},
-												Tone:  w.MsgAlert,
-												Space: w.MsgFlushTop4,
-											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldXL,
 									},
 								},
 								Action: "/app/settings/account/email",
