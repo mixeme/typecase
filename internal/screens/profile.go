@@ -556,6 +556,644 @@ func Profile1() Screen {
 	}
 }
 
+// Profile25 is frame «Подключения · ни одного» (s-profile-25).
+func Profile25() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Href: "#"},
+								{Icon: "archive", Label: "Backup", Href: "#"},
+								{Icon: "link", Label: "Published links", Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Connections"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Subscribe to a feed", Icon: "link"},
+							},
+						},
+					},
+					w.Empty{Parts: []w.EmptyPart{w.Strong("Nothing is connected yet.")}},
+				},
+			},
+		},
+	}
+}
+
+// Profile26 is frame «Отключить аккаунт · лист поверх Connections» (s-profile-26).
+func Profile26() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
+								},
+								On: 2,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Connections"},
+							Subs: []w.HeadSub{
+								w.HeadSub{
+									Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 19 collections · 2 subscriptions")},
+								},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
+									w.Button{Label: "Subscribe to a feed", Icon: "link"},
+								},
+							},
+						},
+						w.MainResults{
+							Items: []w.ResultsPart{
+								w.Rubric{
+									Text:    "DAV servers",
+									Items:   []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}},
+									Variant: w.RubricSplit,
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "nextcloud",
+											Items: []w.RubricPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "New collection", Icon: "plus", Small: true},
+														w.Button{Label: "Show password", Small: true},
+														w.Button{Label: "Test", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+										},
+										w.Mono{
+											Text:    "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5Dusty,
+										},
+										w.Table{
+											Cols: []w.TableCol{
+												{Width: w.ColTickSmall},
+												{Label: "Collection"},
+												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
+												{Label: "Changed on the server", Width: w.ColChanged},
+												{Width: w.ColMenu},
+											},
+											Rows: []w.TableRow{
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
+														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Дела"}}},
+														{Parts: []w.CellPart{w.Text("tasks")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("20 min ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
+														{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOff)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Дни рождения"}}},
+														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("12 August")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+													State: w.RowOff,
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
+														{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
+														{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOff)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
+														{Parts: []w.CellPart{w.Text("journal "), w.Badge{Label: "ro"}}, Mono: true},
+														{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("10 August")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+													State: w.RowOff,
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
+														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
+														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Files"}}},
+														{Parts: []w.CellPart{w.Text("files")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "radicale · vps",
+											Items: []w.RubricPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "New collection", Icon: "plus", Small: true},
+														w.Button{Label: "Show password", Small: true},
+														w.Button{Label: "Test", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+										},
+										w.Mono{
+											Text:    "https://dav.vps.example/radicale/ · mix · last answer 4 min ago",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5Dusty,
+										},
+										w.Table{
+											Cols: []w.TableCol{
+												{Width: w.ColTickSmall},
+												{Label: "Collection"},
+												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
+												{Label: "Changed on the server", Width: w.ColChanged},
+												{Width: w.ColMenu},
+											},
+											Rows: []w.TableRow{
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
+														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239"}, Name: "Дежурства"}}},
+														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
+														{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOff)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Рассылки"}}},
+														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3 August")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+													State: w.RowOff,
+												},
+											},
+										},
+									},
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "baikal",
+											Items: []w.RubricPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "Show password", Small: true},
+														w.Button{Label: "Test again", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+											Variant: w.RubricDanger,
+										},
+										w.Mono{
+											Text:    "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5DustyGap,
+										},
+										w.Diag{
+											Text: "[well-known]  GET /.well-known/caldav → 404\n[base]        PROPFIND /dav.php/ → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"BaikalDAV\"\n[principal]   не запрашивался: предыдущий шаг не прошёл",
+										},
+										w.CardText{
+											Kind: w.CardAlertText,
+											Parts: []w.CardTextPart{
+												w.Text("The server refused the password. It may have been changed on the server: the one Carrel saved no longer fits."),
+											},
+										},
+									},
+									Variant: w.CardAlert,
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "sftpgo · vps",
+											Items: []w.RubricPart{
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "New folder", Icon: "plus", Small: true},
+														w.Button{Label: "Show password", Small: true},
+														w.Button{Label: "Test", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+										},
+										w.Mono{
+											Text:    "https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5Dusty,
+										},
+										w.Table{
+											Cols: []w.TableCol{
+												{Width: w.ColTickSmall},
+												{Label: "Folder"},
+												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
+												{Label: "Changed on the server", Width: w.ColChanged},
+												{Width: w.ColMenu},
+											},
+											Rows: []w.TableRow{
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+														{Parts: []w.CellPart{w.Text("files")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("9")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOff)},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
+														{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
+														{
+															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
+															Acts:  true,
+														},
+													},
+													State: w.RowOff,
+												},
+											},
+										},
+									},
+								},
+								w.Rubric{
+									Text:    "Subscriptions · external, read-only",
+									Items:   []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}},
+									Variant: w.RubricSplit,
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "Праздники РФ",
+											Items: []w.RubricPart{
+												w.Badge{Label: "feed"},
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "Check", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Unsubscribe", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+										},
+										w.Mono{
+											Text:    "https://feeds.example/ru-holidays.ics · no password · read 2 min ago · 34 KB · 0.4 s",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5Dusty,
+										},
+										w.Table{
+											Cols: []w.TableCol{
+												{Width: w.ColTickSmall},
+												{Label: "Lands in"},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+												{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
+											},
+											Rows: []w.TableRow{
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOn)},
+														{
+															Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Calendar"}},
+														},
+														{Parts: []w.CellPart{w.Text("3")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true, Rows: 2},
+													},
+												},
+												{
+													Cells: []w.TableCell{
+														{Pick: ptr(w.TickedOff)},
+														{
+															Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, Name: "Tasks"}},
+														},
+														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+													},
+													State: w.RowOff,
+												},
+											},
+										},
+									},
+								},
+								w.Card{
+									Items: []w.CardPart{
+										w.Rubric{
+											Text: "Расписание лиги",
+											Items: []w.RubricPart{
+												w.Badge{Label: "feed"},
+												w.Line{
+													Items: []w.LinePart{
+														w.Button{Label: "Show password", Small: true},
+														w.Button{Label: "Check again", Small: true},
+														w.Button{Label: "Edit", Small: true},
+														w.Button{Label: "Unsubscribe", Kind: w.ButtonDanger, Small: true},
+													},
+													Gap: w.LineGap6,
+												},
+											},
+											Variant: w.RubricDanger,
+										},
+										w.Mono{
+											Text:    "webcal://league.example/season.ics · password saved · last read yesterday",
+											Form:    w.MonoLine,
+											Variant: w.Mono11_5DustyGap,
+										},
+										w.Diag{
+											Text: "[fetch]   GET /season.ics → 401 Unauthorized\n              WWW-Authenticate: Basic realm=\"league\"\n[cache]   2 events from yesterday are still shown, marked stale",
+										},
+										w.CardText{
+											Kind: w.CardAlertText,
+											Parts: []w.CardTextPart{
+												w.Text("The feed asks for a password and the saved one no longer fits. A feed that stopped answering must not look like a feed with nothing in it."),
+											},
+										},
+									},
+									Variant: w.CardAlert,
+								},
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/settings/connections/disconnect?account=nextcloud",
+					Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					Icon:   "server",
+					Tone:   w.SheetIconDanger,
+					Title:  "Disconnect",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("nextcloud · cloud.example.org")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.Msg{
+							Parts: []w.MsgPart{w.Text("Nothing is deleted on cloud.example.org. Carrel removes:")},
+							Tone:  w.MsgAlert,
+							Space: w.MsgFlush,
+						},
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("• 10 collections"),
+								w.Break{},
+								w.Text("• 1 published link"),
+								w.Break{},
+								w.Text("• 1 source of a backup job"),
+								w.Break{},
+								w.Text("• 1 davloom device’s sync of them"),
+							},
+							Space: w.MsgFlush,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Disconnect", Kind: w.ButtonDangerSolid, Submit: true},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth480,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
 // Profile2 is frame «Подключение аккаунта» (s-profile-2).
 func Profile2() Screen {
 	return w.Shell{
@@ -631,7 +1269,7 @@ func Profile2() Screen {
 										Label: "Server URL",
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:  "server.url",
+												Name:  "server",
 												Value: "https://dav.office.example/dav.php/",
 												Label: "Server URL",
 												Mono:  true,
@@ -648,12 +1286,12 @@ func Profile2() Screen {
 									},
 									w.Field{
 										Label: "Username",
-										Parts: []w.FieldPart{w.Input{Name: "username", Value: "m.yenuchenko", Label: "Username"}},
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
 										Label: "Password",
-										Parts: []w.FieldPart{w.Input{Name: "password", Value: "••••••••••", Label: "Password"}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -661,7 +1299,7 @@ func Profile2() Screen {
 										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
 										Parts: []w.FieldPart{
 											w.Input{
-												Name:        "certificate.fingerprint.sha.256.optional",
+												Name:        "certFingerprint",
 												Placeholder: "only for a certificate the system does not trust",
 												Label:       "Certificate fingerprint",
 												Mono:        true,
@@ -672,13 +1310,155 @@ func Profile2() Screen {
 								},
 								ID:      "connect",
 								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
 									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
-									w.Button{Label: "Cancel"},
+									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
+								},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog540,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Profile24 is frame «Подключение · сервер отказал во входе» (s-profile-24).
+func Profile24() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Connect account"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Could not connect."),
+									w.Text(" The server refused the login and password. Nothing was saved."),
+								},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Diag{
+								Text: "Discovery trace\nwell-known · ok · GET /.well-known/caldav → 301 → /dav.php/\nprincipal · bad · PROPFIND /dav.php/ → 401 Unauthorized",
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Server URL",
+										Parts: []w.FieldPart{
+											w.Input{Name: "server", Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed — which is the reliable path for Baikal."),
+												},
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password", Error: true}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label:      "Certificate fingerprint",
+										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:        "certFingerprint",
+												Placeholder: "only for a certificate the system does not trust",
+												Label:       "Certificate fingerprint",
+												Mono:        true,
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+								ID:      "connect",
+								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Variant: w.FormFlush,
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
+									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
+									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
 								Variant: w.FormFootFlush,
 							},

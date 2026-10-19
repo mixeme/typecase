@@ -47,6 +47,15 @@ var _ = add(
 	// tc-nav
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
+		{Icon: "server", Label: "Connections", Href: "#"},
+		{Icon: "file", Label: "Attachments", Href: "#"},
+		{Icon: "device", Label: "New device", Href: "#"},
+		{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Href: "#"},
+		{Icon: "archive", Label: "Backup", Href: "#"},
+		{Icon: "link", Label: "Published links", Href: "#"},
+		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 2}, "s-profile-25", "tc-nav", 2),
+	shell("plain", w.Nav{Items: []w.NavItem{
+		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 3}, Href: "#"},
 		{Icon: "file", Label: "Attachments", Href: "#"},
 		{Icon: "device", Label: "New device", Href: "#"},
@@ -293,6 +302,7 @@ var _ = add(
 	shell("off", w.RailStatus{Tone: w.RailStatusOff, Text: "davloom is off", Detail: w.Dim{Parts: []w.Inline{w.Text("No device connects until it is started.")}, Size: w.Dim11}}, "components-35", "tc-railstatus", 2),
 
 	// tc-railfoot
+	shell("plain", w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}, "s-profile-25", "tc-railfoot", 1),
 	shell("plain", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New address book"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}, "s-contacts-1", "tc-railfoot", 1),
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}}, Strip: true}, "components-35", "tc-railfoot", 1),
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New notebook"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}, Strip: true}, "components-36", "tc-railfoot", 1),

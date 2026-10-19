@@ -800,6 +800,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Connections: the states without frames** (Carrel's task 193 p. 5;
+  accepted by the owner 19.10): `s-profile-24` — the connect dialog after
+  the server refused the login: «Could not connect. … Nothing was
+  saved.», the discovery trace, what was typed kept, the password not
+  given back; `s-profile-25` — nothing connected: «Nothing is connected
+  yet.», the rail without counts and statuses; `s-profile-26` — the
+  Disconnect sheet at `/app/settings/connections/disconnect`: nothing is
+  deleted on the server, what Carrel removes in numbers without names.
+  `s-profile-2` takes the server's field names, a password field and
+  Cancel as a link.
 - **The external trigger is a sheet over the job list, with its password
   as a row** (Carrel's task 207; accepted by the owner 19.10): «External
   trigger» in a job's «⋯» menu opens `/app/settings/backup/trigger` — off

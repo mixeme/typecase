@@ -13569,6 +13569,269 @@ dav: HTTP 503: the server is busy</div>
 <figcaption><b>Рейл один на весь раздел настроек.</b><br><br><b>«Show password» стоит и здесь</b> — пароль от чужого сервера человек доверил Carrel, и вернуть его по требованию — прямая обязанность читального зала. Механика <a href="#reveal">общая с экраном нового устройства</a> и описана там один раз: тот же лист, вопрос раз в сеанс, автоскрытие, журнал.<br><br><b>Диагностика перестаёт быть отладочным выводом и становится содержимым экрана.</b> Ровно этим Carrel отличается от клиентов, которые пишут «cannot connect»: видно, какой шаг сломался и что именно ответил сервер. Здесь она стоит у того аккаунта, к которому относится. <b>Коллекции стоят таблицей с шапкой</b>, а не сеткой строк рейла: сколько объектов и когда запись менялась на сервере — две величины на коллекцию, и их сравнивают по вертикали. Когда сервер отвечал — в шапке карточки, один раз на аккаунт. Снятая коллекция видна снятым флажком: её не опрашивают. <code>getctag</code> и ETag Carrel уже видит; нужно это, когда рядом работают DAVx5 на телефоне и Thunderbird на работе, данные разошлись, и причину иначе не установить. Журналом изменений это не является: журнал требует хранить содержимое, чего Carrel не делает.<br><br><b>Подписки стоят на этом же экране, ниже серверов</b> — и той же карточкой: для человека лента такой же источник записей, и разводить их по двум страницам значило бы спрашивать «это сервер или лента?» раньше, чем «откуда у меня эти события?». Разбор подписки — <a href="#subscribe">ниже</a>.<br><br><b>Здесь же коллекциями и распоряжаются</b> — «New collection» в шапке аккаунта, <span class="tc-mono">⋯</span> последней колонкой у каждой строки. Разобрано отдельно ниже (<a href="#collections">создать, переименовать, удалить</a>), но живёт не в отдельном разделе настроек: место, где перечислены сервер и всё, что на нём лежит, и есть место, где заводят ещё одну коллекцию.<br><br><b>«Remove» у аккаунта стало «Disconnect», и это не косметика.</b> Рядом появилась кнопка, которая удаляет данные на чужом сервере, — и две соседние кнопки со словом «удалить» и противоположными последствиями рано или поздно нажали бы не ту. «Disconnect» убирает подключение из Carrel и на сервере не трогает ничего; «Delete on the server…» в меню коллекции — наоборот. Слово выбрано так, чтобы разницу было видно до нажатия, а не в подтверждении.</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="s-profile-25" data-screen="/app/settings/connections" data-part="empty">
+  <div class="frame-label"><span>Подключения · ни одного</span><i>дополнительный кадр: empty · /app/settings/connections</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Connections</div><div class="tc-head__sub">Signed in as <b>mix</b></div></div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Connect account</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
+          </div>
+        </div>
+        <div class="tc-empty"><b>Nothing is connected yet.</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption>Ни одного подключения: в шапке — Connect account и Subscribe to a feed, ниже — одна строка. Рейл без счёта.</figcaption>
+</figure>
+
+<figure style="flex:1 1 100%">
+  <div class="frame" data-frame="s-profile-26" data-screen="/app/settings/connections/disconnect" data-part="sheet">
+    <div class="frame-label"><span>Отключить аккаунт · лист поверх Connections</span><i>дополнительный кадр: sheet · /app/settings/connections/disconnect</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-top">
+        <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+        <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+        <div class="tc-top__actions">
+          <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+          <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+          <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+        </div>
+      </div>
+      <div class="tc-overlay">
+        <div class="tc-shell__body tc-shell__body--minh560">
+      <div class="tc-shell__rail">
+        <div class="tc-nav">
+          <a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a>
+        </div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+        <div class="tc-head">
+          <div class="tc-head__titles"><div class="tc-head__title">Connections</div><div class="tc-head__sub">Signed in as <b>mix</b> · 4 servers · 19 collections · 2 subscriptions</div></div>
+          <div class="tc-acts">
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>Connect account</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
+          </div>
+        </div>
+        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">nextcloud
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Личный</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Дела</span></span></td>
+                  <td class="tc-mono tc-table__n3">tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">20 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Работа</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar · tasks</td><td class="tc-mono tc-table__n4">4</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Дни рождения</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">12 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Записи</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">2 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Дневник</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">5 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Общие с семьёй</span></span></td>
+                  <td class="tc-mono tc-table__n3">journal <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">10 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Контакты</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">5</td><td class="tc-mono">4 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#A05A2C"></span><span class="tc-table__filename">Архив</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">28 July</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#3F6E8C"></span><span class="tc-table__filename">Files</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">radicale · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New collection</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://dav.vps.example/radicale/ · mix · last answer 4 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Collection</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Проекты</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">1 h ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Дежурства</span></span></td>
+                  <td class="tc-mono tc-table__n3">calendar</td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">yesterday</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Команда</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">1</td><td class="tc-mono">6 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">Рассылки</span></span></td>
+                  <td class="tc-mono tc-table__n3">address book</td><td class="tc-mono tc-table__n4">0</td><td class="tc-mono">3 August</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">baikal
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused</div>
+            <div class="tc-diag">[well-known]  GET /.well-known/caldav → 404
+[base]        PROPFIND /dav.php/ → 401 Unauthorized
+              WWW-Authenticate: Basic realm="BaikalDAV"
+[principal]   не запрашивался: предыдущий шаг не прошёл</div>
+            <div class="tc-card__alert-note">The server refused the password. It may have been changed on the server: the one Carrel saved no longer fits.</div>
+          </div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">sftpgo · vps
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Test</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Disconnect</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://files.example.org/dav/ · mix · plain WebDAV, no principal · last answer 5 min ago</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Folder</th><th class="tc-table__n3">What is in it</th><th class="tc-table__n4 tc-table__col--num">Objects</th><th class="tc-table__col--changed">Changed on the server</th><th class="tc-table__col--menu"></th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">Documents</span></span></td>
+                  <td class="tc-mono tc-table__n3">files</td><td class="tc-mono tc-table__n4">9</td><td class="tc-mono">5 min ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">Public</span></span></td>
+                  <td class="tc-mono tc-table__n3">files <span class="tc-badge">ro</span></td><td class="tc-mono tc-table__n4">2</td><td class="tc-mono">3 d ago</td>
+                  <td class="tc-acts"><button class="tc-btn is-sm tc-btn--padx3" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-rubric tc-rubric--split tc-rubric--nudge">Subscriptions · external, read-only<span class="tc-mono tc-mono--ls0">2</span></div>
+
+          <div class="tc-card">
+            <div class="tc-rubric">Праздники РФ <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Check</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty">https://feeds.example/ru-holidays.ics · no password · read 2 min ago · 34 KB · 0.4 s</div>
+            <table class="tc-table">
+              <thead><tr><th class="tc-table__col--tick-sm"></th><th>Lands in</th><th class="tc-table__n3 tc-table__col--num">Objects</th><th class="tc-table__n4 tc-table__col--changed">Changed on the server</th></tr></thead>
+              <tbody>
+                <tr><td><button class="tc-tickrow__tick" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Calendar</span></span></td>
+                  <td class="tc-mono tc-table__n3">3</td>
+                  <td class="tc-mono tc-table__n4" rowspan="2">yesterday</td></tr>
+                <tr class="is-off"><td><button class="tc-tickrow__tick is-off" type="button"></button></td>
+                  <td><span class="tc-table__file"><span class="tc-mark is-ext tc-table__filename" data-tc-colour="#8C6239"></span><span class="tc-table__filename">Tasks</span></span></td>
+                  <td class="tc-mono tc-table__n3">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tc-card tc-card--alert">
+            <div class="tc-rubric tc-rubric--danger">Расписание лиги <span class="tc-badge">feed</span>
+              <span class="tc-line tc-line--gap-6"><button class="tc-btn is-sm" type="button">Show password</button><button class="tc-btn is-sm" type="button">Check again</button><button class="tc-btn is-sm" type="button">Edit</button><button class="tc-btn is-sm is-danger" type="button">Unsubscribe</button></span>
+            </div>
+            <div class="tc-mono tc-mono--t11-5-dusty tc-mono--bot9">webcal://league.example/season.ics · password saved · last read yesterday</div>
+            <div class="tc-diag">[fetch]   GET /season.ics → 401 Unauthorized
+              WWW-Authenticate: Basic realm="league"
+[cache]   2 events from yesterday are still shown, marked stale</div>
+            <div class="tc-card__alert-note">The feed asks for a password and the saved one no longer fits. A feed that stopped answering must not look like a feed with nothing in it.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+        <div class="tc-scrim tc-scrim--padt26">
+          <form class="tc-sheet tc-sheet--w480" action="/app/settings/connections/disconnect?account=nextcloud" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+            <div class="tc-sheet__head"><svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.6" fill="none" class="tc-ico--danger"><use href="#i-server"/></svg><b class="tc-sheet__title">Disconnect</b><span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">nextcloud · cloud.example.org</span></div>
+            <div class="tc-sheet__body">
+              <div class="tc-msg is-alert tc-msg--flush">Nothing is deleted on cloud.example.org. Carrel removes:</div>
+              <div class="tc-msg tc-msg--flush">• 10 collections<br>• 1 published link<br>• 1 source of a backup job<br>• 1 davloom device’s sync of them</div>
+            </div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Disconnect</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/connections">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption><b>Disconnect</b> — лист со своим адресом поверх Connections. Что Carrel уберёт вместе с подключением — числами, без имён (владелец, 19.10): коллекции, ссылки, источники заданий копий, синхронизация устройств davloom. На сервере не удаляется ничего.</figcaption>
+  </figure>
+
 <div class="frames">
   <figure style="flex:0 1 250px">
   <div class="frame" data-frame="s-profile-12">
@@ -13625,18 +13888,73 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post">
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
-        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server.url" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
-        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="username" value="m.yenuchenko" aria-label="Username"></div>
-        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="text" name="password" value="••••••••••" aria-label="Password"></div>
-          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certificate.fingerprint.sha.256.optional" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
 <figcaption>«Test only» — та же проверка, что у администратора, без сохранения пароля.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-profile-24" data-screen="/app/settings/connections/new" data-part="refused">
+  <div class="frame-label"><span>Подключение · сервер отказал во входе</span><i>дополнительный кадр: refused · /app/settings/connections/new</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Could not connect.</b> The server refused the login and password. Nothing was saved.</div>
+      <div class="tc-diag">Discovery trace
+well-known · ok · GET /.well-known/caldav → 301 → /dav.php/
+principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed — which is the reliable path for Baikal.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      </form>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption>Сервер отказал в логине и пароле: ничего не сохранено, диалог — с набранным, пароль обратно не печатается. Над полями — что сказал сервер и на каком шаге, след целиком.</figcaption>
 </figure>
 
 <figure>

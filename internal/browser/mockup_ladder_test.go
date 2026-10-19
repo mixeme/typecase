@@ -39,6 +39,7 @@ type ladderProbe struct {
 // them still fails.
 var ladderPending = map[string]string{
 	"s-profile-1":   "a table on a phone: cards with the main column (Р-66) not yet",
+	"s-profile-26":  "s-profile-1 under the Disconnect sheet: its table on a phone, cards with the main column (Р-66) not yet",
 	"s-profile-10":  "a table on a phone: cards with the main column (Р-66) not yet",
 	"s-admin-2":     "a table on a phone: cards with the main column (Р-66) not yet",
 	"s-admin-24":    "the Users table of s-admin-2 under the reset sheet: cards (Р-66) not yet",

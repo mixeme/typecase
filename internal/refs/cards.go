@@ -10,6 +10,7 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("• 10 collections"), w.Break{}, w.Text("• 1 published link"), w.Break{}, w.Text("• 1 source of a backup job"), w.Break{}, w.Text("• 1 davloom device’s sync of them")}, Space: w.MsgFlush}, "s-profile-26", "tc-msg", 2),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Strong("Also started by"), w.Break{}, w.Text("• Run now — in the job list"), w.Break{}, w.Text("• Your own clock — "), w.Mono{Text: "cron"}, w.Text(", GoSentry, a job in Gitea, "), w.Mono{Text: "curl"}, w.Text(": External trigger in the job’s menu")}, Space: w.MsgFlushTop4}, "s-backup-2", "tc-msg", 4),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("There is a folder called «2026-07» in attachments already. Choose another name.")}, Tone: w.MsgAlert, Space: w.MsgFlushY8}, "s-files-19", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Sent."), w.Text(" The relay answered "), w.Mono{Text: "250 2.0.0 Ok: queued as 4FB1C2"}, w.Text(".")}, Space: w.MsgFlush}, "s-admin-32", "tc-msg", 1),
@@ -150,6 +151,7 @@ var _ = add(
 		{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Name: "choice.3", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{Name: "choice.3", Value: "theirs", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}, ID: "conflict", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}}}, "s-conflict-2", "tc-diff", 1),
 
 	// tc-empty
+	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("Nothing is connected yet.")}}, "s-profile-25", "tc-empty", 1),
 	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("This folder is empty."), w.Text(" Upload files into it, or drop them onto the window. "), w.Button{Label: "Upload", Icon: "upload", Kind: w.ButtonPrimary, File: &w.FileField{Form: "post-upload", Name: "file", Label: "Files", Size: "size", Many: true}}, w.Text(" "), w.Button{Label: "Send", Form: "post-upload", NoScript: true}, w.Text(" "), w.Button{Label: "New folder", Icon: "plus"}}}, "states-32", "tc-empty", 1),
 	cards("titled", w.Empty{Parts: []w.EmptyPart{w.Strong("No books are ticked."), w.Text(" Tick the books to show in the rail, or all of them at once. "), w.Button{Label: "Tick every book", Kind: w.ButtonPrimary}}}, "states-7", "tc-empty", 1),
 	cards("dusty", w.Empty{Parts: []w.EmptyPart{w.Span{Face: w.FaceAccent, Text: "Show 50 more", Href: "/app/mail/home/inbox?shown=100"}}, Variant: w.EmptyDusty}, "s-mailbox-1", "tc-empty", 1),
