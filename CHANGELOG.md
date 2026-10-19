@@ -823,6 +823,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Restore from a server and its report, a new job, the escrow after a
+  recovery** (Carrel's task 193 p. 5; accepted by the owner 19.10).
+  `s-backup-17` — «From a server»: a collection and the archive's path in
+  it with Browse; `s-backup-18` — step «3 · Report»: a row a collection,
+  where it went, how many created, what happened (a new UID, a refusal in
+  red), «Nothing on the server was deleted or overwritten.», Done;
+  `s-backup-19` — «New job»: the job's form empty, Create, no Delete job;
+  `account-16` — «Recovered · when · who: what» under «Deposited», a row a
+  recovery.
 - **Restore from this computer: no copy of the archive on Carrel** (Carrel's
   task 213 p. 1; accepted by the owner 19.10). `s-backup-15` — the step
   with «From this computer»: Choose a file, «Storage for a large archive»

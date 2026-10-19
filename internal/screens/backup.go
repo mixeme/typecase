@@ -744,6 +744,410 @@ func Backup2() Screen {
 	}
 }
 
+// Backup19 is frame «Резервная копия · новое задание» (s-backup-19).
+func Backup19() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "New job"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is copied until it is created")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Create", Kind: w.ButtonPrimary, Form: "backup-job"}},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Name",
+								Parts: []w.FieldPart{w.Input{Name: "name", Label: "Name", Focus: true, Required: true}},
+								Width: w.FieldLG,
+							},
+							w.Field{
+								Parts: []w.FieldPart{w.Check{On: true, Name: "on", Value: "1", Parts: []w.CheckPart{w.Text("Job is on")}}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "What to copy", Items: []w.RubricPart{w.Plain{Text: "nothing chosen"}}},
+								Items: []w.FieldSetPart{
+									w.FieldGrid{
+										Items: []w.FieldGridPart{
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "nextcloud",
+														Meta:   "0 of 6",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|lichnyy"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Личный",
+														Meta:   "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|rabota"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#3F6E8C"},
+														Label:  "Работа",
+														Meta:   "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|dela"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Дела",
+														Meta:   "tasks",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|kontakty"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Контакты",
+														Meta:   "book",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|arhiv"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#A05A2C"},
+														Label:  "Архив",
+														Meta:   "book",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "nextcloud|zapisi"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Записи",
+														Meta:   "notes",
+													},
+												},
+											},
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "radicale · vps",
+														Meta:   "0 of 2",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "radicale|proekty"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#6B4E7A"},
+														Label:  "Проекты",
+														Meta:   "cal.",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "radicale|dezhurstva"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#8C6239"},
+														Label:  "Дежурства",
+														Meta:   "cal.",
+													},
+												},
+											},
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "baikal",
+														Meta:   "0 of 1",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "baikal|obshchij"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#9A9280"},
+														Label:  "Общий",
+														Meta:   "cal.",
+													},
+												},
+											},
+											w.FieldGridColumn{
+												Items: []w.TickRow{
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Form:   w.TickRowGroup,
+														Mark:   w.Mark{Kind: w.MarkMulti},
+														Label:  "sftpgo · vps",
+														Meta:   "0 of 2",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "sftpgo|documents"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#4A6B52"},
+														Label:  "Documents",
+														Meta:   "files · 2.0 GB",
+													},
+													w.TickRow{
+														Ticked: w.TickedOff,
+														Send:   w.Send{Name: "src", Value: "sftpgo|public"},
+														Form:   w.TickRowNested,
+														Mark:   w.Mark{Colour: "#9A9280"},
+														Label:  "Public",
+														Meta:   "files · ro",
+													},
+												},
+											},
+										},
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Text("Files go as files; calendars, tasks and notes as "),
+											w.Mono{Text: ".ics"},
+											w.Text(", address books as "),
+											w.Mono{Text: ".vcf"},
+											w.Text("."),
+										},
+										Space: w.MsgFlushTop4,
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Where to"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "To WebDAV", On: true, Value: "webdav"},
+													{Label: "Download", Value: "download"},
+													{Label: "Both", Value: "both"},
+												},
+												Variant: w.SegStart,
+												Name:    "mode",
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Field{
+										Label: "Collection",
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Files", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Files",
+															On:    true,
+															Name:  "dest",
+															Value: "nextcloud|files",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "sftpgo · vps · Documents",
+															Name:  "dest",
+															Value: "sftpgo|documents",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#9A9280"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "sftpgo · vps · Public files",
+															Reason: "Read-only: this account cannot write here",
+															Name:   "dest",
+															Value:  "sftpgo|public",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
+										},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Folder in it",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Name: "folder", Value: "carrel-backup", Label: "Folder in it", Mono: true, Variant: w.InputFill},
+													w.Button{Label: "Browse", To: "/app/settings/backup?op=browse&job=personal", Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Keep copies",
+										Parts: []w.FieldPart{w.Input{Name: "keep", Value: "8", Label: "Keep copies", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Parts: []w.FieldPart{
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Copies past the eighth are deleted "),
+													w.Strong("after"),
+													w.Text(" the new one has been read back and checked, not before. The file is dated and never overwritten."),
+												},
+											},
+										},
+										Place: w.Grown,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Download"),
+											w.Text(" streams the archive out and writes nothing to the server: no folder, no retention — the copy is yours to keep. It can still run at three in the morning, but only on an external trigger, because a stream needs somebody at the other end: a browser is not there at that hour, a machine with a disk is. "),
+											w.Strong("Both"),
+											w.Text(" does the two at once — and then the trigger has "),
+											w.Strong("two steps"),
+											w.Text(", because the file still has to be taken."),
+										},
+										Space: w.MsgFlushTop4,
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "How the archive is closed"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{On: true, Name: "encrypted", Value: "1", Parts: []w.CheckPart{w.Text("Encrypt the archive")}},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."),
+												},
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Field{
+										Label: "Archive password",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Archive password", Required: true}},
+										Width: w.FieldLG,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{w.Text("Separate from the sign-in password.")},
+										Tone:  w.MsgAlert,
+										Space: w.MsgFlushTop2,
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "When"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Check{
+														On:    true,
+														Name:  "signin.on",
+														Value: "on",
+														Parts: []w.CheckPart{w.Text("On sign-in, if the last copy is older than")},
+													},
+													w.Input{Name: "signin", Value: "7", Label: "Days", Mono: true, Variant: w.InputChip},
+													w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}},
+												},
+												Gap:   w.LineGap7,
+												Block: true,
+											},
+										},
+										Gap:   8,
+										Place: w.Grown,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Also started by"),
+											w.Break{},
+											w.Text("• Run now — in the job list"),
+											w.Break{},
+											w.Text("• Your own clock — "),
+											w.Mono{Text: "cron"},
+											w.Text(", GoSentry, a job in Gitea, "),
+											w.Mono{Text: "curl"},
+											w.Text(": External trigger in the job’s menu"),
+										},
+										Space: w.MsgFlushTop4,
+										Place: w.Grown,
+									},
+								},
+							},
+						},
+						ID:     "backup-job",
+						Action: "/app/settings/backup?op=create",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
 // Backup12 is frame «Внешний запуск · включён» (s-backup-12).
 func Backup12() Screen {
 	return w.Shell{
@@ -2544,6 +2948,166 @@ func Backup16() Screen {
 	}
 }
 
+// Backup17 is frame «Восстановление · с сервера» (s-backup-17).
+func Backup17() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Restore"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}},
+							},
+							w.Field{
+								Label: "Where the archive is",
+								Parts: []w.FieldPart{
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "From a job", Href: "/app/settings/backup/restore?from=job"},
+											{Label: "From a server", Href: "/app/settings/backup/restore?from=server", On: true},
+											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file"},
+										},
+										Variant: w.SegStart,
+									},
+									w.FieldHint{Parts: []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")}},
+								},
+								OwnLine: true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From a server"},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Label: "Collection",
+												Parts: []w.FieldPart{
+													w.Pick{
+														Name: "store",
+														Options: []w.PickOption{
+															{Value: "nextcloud|files", Label: "nextcloud · Files"},
+															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true},
+														},
+														Label: "Collection",
+													},
+												},
+												Width: w.FieldMD,
+											},
+											w.Field{
+												Label: "Archive in it",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Input{
+																Name:    "path",
+																Value:   "/old-carrel/carrel-personal-2026-05-30.zip",
+																Label:   "Archive in it",
+																Mono:    true,
+																Variant: w.InputFill,
+															},
+															w.Button{Label: "Browse", To: "/app/settings/backup/restore?from=server&op=browse", Submit: true},
+														},
+														Gap: w.LineGap8,
+													},
+												},
+												Width: w.FieldXL,
+											},
+										},
+										Wide: true,
+										Top:  true,
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Archive password"},
+									w.CardFields{
+										Items: []w.CardFieldsPart{
+											w.Field{
+												Parts: []w.FieldPart{
+													w.Input{
+														Kind:  w.InputPassword,
+														Name:  "password",
+														Value: "••••••••••••",
+														Label: "Archive password",
+														Focus: true,
+													},
+													w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}},
+												},
+												Width: w.FieldLG,
+											},
+										},
+									},
+								},
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel"}},
+							},
+						},
+						Variant: w.DialogStep760,
+						Action:  "/app/settings/backup/restore?from=server",
+						Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+				},
+			},
+		},
+	}
+}
+
 // Backup8 is frame «Восстановление · что и куда ляжет» (s-backup-8).
 func Backup8() Screen {
 	return w.Shell{
@@ -2719,6 +3283,126 @@ func Backup8() Screen {
 						},
 						Variant: w.DialogWide,
 						Action:  "/app/settings/backup/restore/match",
+					},
+				},
+			},
+		},
+	}
+}
+
+// Backup18 is frame «Восстановление · шаг 3, что сделано» (s-backup-18).
+func Backup18() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 3},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Restored from 2026-08-14"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{w.Text("3 collections · 143 records created · 2 with a new UID · 1 not restored")},
+									},
+								},
+								Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/app/settings/backup"}}},
+							},
+							w.Table{
+								Cols: []w.TableCol{
+									{Label: "In the archive"},
+									{Label: "Restored into", Width: w.Col26, Rank: w.Rank4},
+									{Label: "Created", Rank: w.Rank3, Secondary: true},
+									{Label: "What happened"},
+								},
+								Rows: []w.TableRow{
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
+											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("4 missing records created")}},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}},
+											{Parts: []w.CellPart{w.Text("radicale · vps · Проекты")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("0")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("no differences")}, Dim: true},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
+											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("139")}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Text("2 with a new UID · "),
+													w.Span{Face: w.FaceDanger, Text: "1 not restored: the server refused it (413, too large)"},
+												},
+											},
+										},
+									},
+								},
+								Variant: w.TableFit,
+							},
+							w.Msg{Parts: []w.MsgPart{w.Text("Nothing on the server was deleted or overwritten.")}},
+						},
+						Variant: w.DialogWide,
 					},
 				},
 			},

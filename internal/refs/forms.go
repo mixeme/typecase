@@ -36,6 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("links", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job"}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server", On: true}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file"}}, Variant: w.SegStart}, "s-backup-17", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job"}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true}}, Variant: w.SegStart}, "s-backup-15", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"}, {Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"}}, Variant: w.SegStart}, "s-backup-3", "tc-seg", 1),
 	form("plain", w.Seg{Options: []w.SegOption{{Label: "Full width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=full", On: true}, {Label: "Reading width", Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?width=read"}}, Swap: "note-main", Tertiary: true}, "s-notes-2", "tc-seg", 1),

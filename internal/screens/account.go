@@ -745,6 +745,135 @@ func Account4() Screen {
 	}
 }
 
+// Account16 is frame «Депонирование ключа · ключ уже восстанавливали» (account-16).
+func Account16() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 1,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Key escrow"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("A copy of your key on this server")}}},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars."),
+								},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Fields{
+								Items: []w.FieldsItem{
+									{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
+									{
+										Term:  "Recovered",
+										Value: []w.ValuePart{w.Mono{Text: "2026-07-11 14:02"}, w.Text(" · olga, administrator: the password was reset")},
+									},
+								},
+								Variant: w.FieldsBleed,
+							},
+							w.Field{
+								Label: "Password history",
+								Parts: []w.FieldPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Input{
+												Value:    "https://carrel.example/password-history/k7q2-m9xd-41fa",
+												Label:    "Password history",
+												Mono:     true,
+												ReadOnly: true,
+												Variant:  w.InputFill,
+											},
+											w.Button{
+												Label:  "Copy",
+												Icon:   "dup",
+												Small:  true,
+												Copy:   "https://carrel.example/password-history/k7q2-m9xd-41fa",
+												Copied: "Copied",
+											},
+										},
+										Gap: w.LineGap6,
+									},
+									w.FieldHint{
+										Parts: []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+									},
+								},
+								Width: w.FieldFull,
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Withdraw my deposited key", Kind: w.ButtonDangerSolid},
+									w.Dim{
+										Parts:   []w.Inline{w.Text("Then nobody can recover the account.")},
+										Size:    w.Dim11_5,
+										Variant: w.DimWrap,
+									},
+								},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog560,
+					},
+				},
+			},
+		},
+	}
+}
+
 // Account5 is frame «Меню пользователя» (account-5).
 func Account5() Screen {
 	return w.Shell{

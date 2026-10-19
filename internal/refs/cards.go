@@ -190,6 +190,9 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad", 1),
 
 	// tc-fields
+	cards("rich", w.Fields{Items: []w.FieldsItem{
+		{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
+		{Term: "Recovered", Value: []w.ValuePart{w.Mono{Text: "2026-07-11 14:02"}, w.Text(" · olga, administrator: the password was reset")}}}, Variant: w.FieldsBleed}, "account-16", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Path", Value: []w.ValuePart{w.Text("https://files.example.org/dav/Documents/carrel/attachments/")}, Face: w.ValueMonoSmall}}, Variant: w.FieldsBleed130}, "attachments-6", "tc-fields", 2),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
@@ -639,6 +642,10 @@ var _ = add(
 		w.CardPick{Ticked: w.TickedOff, Title: "Remote — connect to a server", Note: []w.CardTextPart{w.Text("Carrel is already running — yours or a shared one. The app becomes its window.")}, Aside: "One instance for all your devices, with the same settings everywhere."}}, Variant: w.CardFlush}, "desktop-5", "tc-card", 2),
 
 	// tc-table
+	cards("report", w.Table{Cols: []w.TableCol{{Label: "In the archive"}, {Label: "Restored into", Width: w.Col26, Rank: w.Rank4}, {Label: "Created", Rank: w.Rank3, Secondary: true}, {Label: "What happened"}}, Rows: []w.TableRow{
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("4")}, Mono: true}, {Parts: []w.CellPart{w.Text("4 missing records created")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("radicale · vps · Проекты")}, Mono: true}, {Parts: []w.CellPart{w.Text("0")}, Mono: true}, {Parts: []w.CellPart{w.Text("no differences")}, Dim: true}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}}, {Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true}, {Parts: []w.CellPart{w.Text("139")}, Mono: true}, {Parts: []w.CellPart{w.Text("2 with a new UID · "), w.Span{Face: w.FaceDanger, Text: "1 not restored: the server refused it (413, too large)"}}}}}}, Variant: w.TableFit}, "s-backup-18", "tc-table", 1),
 	cards("plain", w.Table{Cols: []w.TableCol{{Label: "When"}, {Label: "What"}, {Label: "Who"}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 19:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("Password changed")}}, {Parts: []w.CellPart{w.Text("viktor")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-14 18:40")}, Mono: true}, {Parts: []w.CellPart{w.Text("Opened with the master password; a temporary password set")}}, {Parts: []w.CellPart{w.Text("mix")}}}},

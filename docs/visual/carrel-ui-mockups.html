@@ -13038,6 +13038,57 @@ dav: HTTP 503: the server is busy</div>
 <figcaption><b>Это уже после.</b> Сюда попадают с листа подтверждения, не с кнопки напрямую. Текст оставлен дословно: он честный и его менять незачем. Меняется только вид — предупреждение отделено от фактов, факты сведены в пары «подпись — значение». Отказ здесь возможен, и кнопка стоит прямо под фактами: это решение владельца ключа. Ссылка на историю пароля — постоянная, выдана при депонировании и стоит здесь всегда, и после отзыва копии тоже (решение владельца 16.10).</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="account-16" data-screen="/app/settings/escrow" data-part="history">
+  <div class="frame-label"><span>Депонирование ключа · ключ уже восстанавливали</span><i>дополнительный кадр: history · /app/settings/escrow</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max560">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">A copy of your key on this server</div></div></div>
+      <div class="tc-msg is-alert tc-msg--mr0-ml0">A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars.</div>
+      <dl class="tc-fields tc-fields--bleed">
+        <dt>Deposited</dt><dd class="tc-mono">2026-03-02</dd>
+        <dt>Recovered</dt><dd><span class="tc-mono">2026-07-11 14:02</span> · olga, administrator: the password was reset</dd>
+      </dl>
+      <div class="tc-field tc-field--full"><label>Password history</label><span class="tc-line tc-line--gap-6"><input class="tc-in is-mono tc-in--fill" type="text" value="https://carrel.example/password-history/k7q2-m9xd-41fa" aria-label="Password history" readonly><button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/password-history/k7q2-m9xd-41fa" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button></span><span class="tc-field__hint">Keep it: it shows what was done to your password, even when you cannot sign in.</span></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-danger-solid" type="button">Withdraw my deposited key</button>
+        <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Then nobody can recover the account.</span></div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption>Ключом уже восстанавливали учётную запись: под «Deposited» — строка на каждое восстановление, когда, кто и что сделал. Та же история — по ссылке Password history, когда войти нельзя.</figcaption>
+</figure>
+
 <h3 id="usermenu">Меню в шапке и порядок настроек</h3>
 <p>Пункты настроек идут по одному вопросу: <b>кто вы → откуда данные → как их забрать на устройства → куда сложить копию → что отдать наружу → как это выглядит</b>. Account стоял предпоследним, между «отдать наружу» и «как выглядит», — то есть нигде: собственная учётная запись не относится ни к тому, ни к другому, и ищут её первой.</p>
 <table class="doc">
@@ -17155,6 +17206,116 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 <figcaption>Файловые коллекции в списке источников — по правилу равенства коллекций (<a href="#parity">2.1</a>), и рядом с каждой показан прошлый объём: два гигабайта и два мегабайта требуют разных решений о частоте и месте. Задачи и заметки отдельными строками не выбираются — они лежат в календарных коллекциях, и об этом сказано прямо, а не оставлено на догадку. Способ доставки — не настройка «куда положить файл», а выбор из трёх: на сервер, себе в браузер, и то и другое; у «себе» нет ни папки, ни срока хранения, ни расписания, потому что некому отдавать файл в три часа ночи. Источники выбираются тем же компонентом, что и везде: аккаунт с трёхпозиционным флажком, под ним коллекции с полосками. Ничего нового учить не нужно — это тот же рейл, только развёрнутый в сетку. <b>Шифрование архива — флажок, а не данность:</b> по умолчанию включено, но копия на диск, к которому и так никто, кроме вас, не подходит, вполне может лежать открытой — и тогда её распакует любой архиватор, без Carrel. Правило записано в S-24.2: включено по умолчанию, выключается осознанно, и там же сказано, чем это оборачивается вместе с сохранённым триггер-паролем (S-24.4).<br><br><b>Наружу отдаётся строка, а не пароль.</b> Тот, кто включил внешний триггер, пришёл не за секретом: ему нужно, чтобы копия снималась в три часа ночи, а для этого нужна строка в crontab на машине с часами. Пароль в ней уже стоит, поэтому отдельным полем он не нужен — собрать команду по документации человек может и сам, но это работа, которую мы умеем сделать за него, и делаем. Пароль сам по себе убран под раскрывашку внизу карточки: он нужен тому, кто дёргает API руками, и таких меньшинство — <a href="#trigger-secret">но им он нужен по-настоящему</a>, вместе с остальными эндпоинтами.<br><br><b>Строка одна и без переносов.</b> crontab не понимает продолжения по обратному слэшу, и красиво разложенная на четыре строки команда сломается ровно у того, кто ей поверил; перенос на экране делает браузер, а «Copy the line» кладёт в буфер одну строку. Время стоит внутри неё, а не полем на этой странице: расписание живёт на той машине, и два места, где оно якобы задаётся, разъехались бы в первый же месяц. Часов у Carrel нет не по недосмотру — планировщик внутри означал бы пароль, сохранённый на диске рядом с обёрткой ключа, то есть ровно ту уступку, которой S-2 избегает.<br><br><b>Пароль появляется по нажатию и виден один раз</b> — сразу, не дожидаясь сохранения задания: иначе человек сохраняет задание и остаётся с флажком, за которым ничего не видно. Токен выдаётся <b>на задание</b>, а не на аккаунт: машина, которая запускает рабочую копию по расписанию, не должна уметь запускать личную. Цена включения названа до нажатия — подсказкой под отметкой, и у снятой тоже (S-24.4): ключ задания хранится под ключом сервера, это снижение защиты ради удобства. Внешний запуск выключается той же отметкой: сняли «On a clock of your own» — строка перестаёт действовать и карточки со строкой нет: показывать и обновлять нечего; отдельного выключателя нет. Значок <span class="tc-badge is-local">local</span> — признак экземпляра, а не отметки: адрес в строке отвечает только изнутри своей сети. <b>«When»</b> — один флажок «On sign-in»; другие способы запустить задание перечислены строками (владелец, 19.10): внешний запуск — не в правке задания: лист <b>External trigger</b> из меню строки в списке заданий (s-backup-12…14, владелец, 19.10) — включить, увидеть команду, сменить или отозвать пароль, не открывая правку.</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="s-backup-19" data-screen="/app/settings/backup/new" data-part="new">
+  <div class="frame-label"><span>Резервная копия · новое задание</span><i>дополнительный кадр: new · /app/settings/backup/new</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main">
+      <div class="tc-head">
+        <div class="tc-head__titles"><div class="tc-head__title">New job</div><div class="tc-head__sub">Nothing is copied until it is created</div></div>
+        <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="submit" form="backup-job">Create</button></div>
+      </div>
+      <form class="tc-form" id="backup-job" action="/app/settings/backup?op=create" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--lg"><label>Name</label><input class="tc-in is-focus" type="text" name="name" aria-label="Name" required></div>
+        <div class="tc-field"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="on" value="1" checked><span class="tc-tickrow__tick"></span>Job is on</label></div>
+
+        <div class="tc-fset">
+          <div class="tc-rubric">What to copy <span class="tc-plain">nothing chosen</span></div>
+          <div class="tc-grow tc-fset__grid">
+            <div class="tc-fset__col">
+              <div class="tc-tickrow tc-tickrow--padl0"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label tc-tickrow__label--fw600">nextcloud</span><span class="tc-tickrow__meta">0 of 6</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|lichnyy" aria-label="Личный"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">cal.</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|rabota" aria-label="Работа"><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Работа</span><span class="tc-tickrow__meta">cal.</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|dela" aria-label="Дела"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">tasks</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|kontakty" aria-label="Контакты"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Контакты</span><span class="tc-tickrow__meta">book</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|arhiv" aria-label="Архив"><span class="tc-mark" data-tc-colour="#A05A2C"></span><span class="tc-tickrow__label">Архив</span><span class="tc-tickrow__meta">book</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="nextcloud|zapisi" aria-label="Записи"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">notes</span></div>
+            </div>
+            <div class="tc-fset__col">
+              <div class="tc-tickrow tc-tickrow--padl0"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label tc-tickrow__label--fw600">radicale · vps</span><span class="tc-tickrow__meta">0 of 2</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="radicale|proekty" aria-label="Проекты"><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Проекты</span><span class="tc-tickrow__meta">cal.</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="radicale|dezhurstva" aria-label="Дежурства"><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Дежурства</span><span class="tc-tickrow__meta">cal.</span></div>
+            </div>
+            <div class="tc-fset__col">
+              <div class="tc-tickrow tc-tickrow--padl0"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label tc-tickrow__label--fw600">baikal</span><span class="tc-tickrow__meta">0 of 1</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="baikal|obshchij" aria-label="Общий"><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta">cal.</span></div>
+            </div>
+            <div class="tc-fset__col">
+              <div class="tc-tickrow tc-tickrow--padl0"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label tc-tickrow__label--fw600">sftpgo · vps</span><span class="tc-tickrow__meta">0 of 2</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="sftpgo|documents" aria-label="Documents"><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Documents</span><span class="tc-tickrow__meta">files · 2.0 GB</span></div>
+              <div class="tc-tickrow tc-tickrow--padl14"><input class="tc-tickrow__tick is-off" type="checkbox" name="src" value="sftpgo|public" aria-label="Public"><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Public</span><span class="tc-tickrow__meta">files · ro</span></div>
+            </div>
+          </div>
+          <div class="tc-msg tc-grow tc-msg--flush-top4">Files go as files; calendars, tasks and notes as <span class="tc-mono">.ics</span>, address books as <span class="tc-mono">.vcf</span>.</div>
+        </div>
+
+        <div class="tc-fset">
+          <div class="tc-rubric">Where to</div>
+          <div class="tc-field is-own-line tc-grow">
+            <span class="tc-seg tc-seg--start" role="radiogroup">
+              <label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="mode" value="webdav" checked>To WebDAV</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="mode" value="download">Download</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="mode" value="both">Both</label>
+            </span>
+          </div>
+          <div class="tc-field tc-field--lg"><label>Collection</label><details class="tc-drop"><summary class="tc-in is-pick" title="Collection"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Files</summary><div class="tc-menu is-pop tc-menu--w290"><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="dest" value="nextcloud|files" checked><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Files</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="dest" value="sftpgo|documents"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>sftpgo · vps · Documents</label><label class="tc-menu__item" title="Read-only: this account cannot write here"><input class="tc-seg__box" type="radio" role="menuitemradio" name="dest" value="sftpgo|public" disabled><span class="tc-mark" data-tc-colour="#9A9280"></span>sftpgo · vps · Public files<span class="tc-badge tc-push">ro</span></label></div></details></div>
+          <div class="tc-field tc-field--lg"><label>Folder in it</label><span class="tc-line tc-line--gap-8"><input class="tc-in is-mono tc-in--fill" type="text" name="folder" value="carrel-backup" aria-label="Folder in it"><button class="tc-btn" type="submit" formaction="/app/settings/backup?op=browse&amp;job=personal">Browse</button></span></div>
+          <div class="tc-field tc-field--xs"><label>Keep copies</label><input class="tc-in is-mono" type="text" name="keep" value="8" aria-label="Keep copies"></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint">Copies past the eighth are deleted <b>after</b> the new one has been read back and checked, not before. The file is dated and never overwritten.</span></div>
+          <div class="tc-msg tc-grow tc-msg--flush-top4"><b>Download</b> streams the archive out and writes nothing to the server: no folder, no retention — the copy is yours to keep. It can still run at three in the morning, but only on an external trigger, because a stream needs somebody at the other end: a browser is not there at that hour, a machine with a disk is. <b>Both</b> does the two at once — and then the trigger has <b>two steps</b>, because the file still has to be taken.</div>
+        </div>
+
+        <div class="tc-fset">
+          <div class="tc-rubric">How the archive is closed</div>
+          <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="encrypted" value="1" checked><span class="tc-tickrow__tick"></span>Encrypt the archive</label>
+            <span class="tc-field__hint">On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it.</span></div>
+          <div class="tc-field tc-field--lg"><label>Archive password</label><input class="tc-in" type="password" name="password" aria-label="Archive password" required></div>
+          <div class="tc-msg is-alert tc-grow tc-msg--flush-top2">Separate from the sign-in password.</div>
+        </div>
+
+        <div class="tc-fset">
+          <div class="tc-rubric">When</div>
+          <div class="tc-field tc-grow tc-field--gap8">
+            <div class="tc-line tc-line--gap-7"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="signin.on" value="on" checked><span class="tc-tickrow__tick"></span>On sign-in, if the last copy is older than</label><input class="tc-in is-mono tc-in--chip" type="text" name="signin" value="7" aria-label="Days"><span class="tc-dim--t12-5">days</span></div>
+          </div>
+          <div class="tc-msg tc-grow tc-msg--flush-top4"><b>Also started by</b><br>• Run now — in the job list<br>• Your own clock — <span class="tc-mono">cron</span>, GoSentry, a job in Gitea, <span class="tc-mono">curl</span>: External trigger in the job’s menu</div>
+        </div>
+      </form>
+    </div></div>
+  </div>
+</div>
+<figcaption>Новое задание — та же форма, пустая: имя, ни одного источника, назначение и срок хранения — по умолчанию, шифрование включено, пароль архива пуст и обязателен. Create вместо Save; Delete job нет — удалять нечего. Внешний запуск включают у сохранённого задания, из его меню в списке.</figcaption>
+</figure>
+
 <div class="frames">
   <figure style="flex:0 1 300px">
   <div class="frame" data-frame="s-backup-9">
@@ -17913,6 +18074,69 @@ jobs:
 </figure>
 
 <figure>
+<div class="frame" data-frame="s-backup-17" data-screen="/app/settings/backup/restore" data-part="server">
+  <div class="frame-label"><span>Восстановление · с сервера</span><i>дополнительный кадр: server · /app/settings/backup/restore</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><form class="tc-dialog is-wide tc-dialog--step760" action="/app/settings/backup/restore?from=server" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+      <div class="tc-steps"><span class="is-on tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restore</div><div class="tc-head__sub">Nothing is written until you have seen what goes where</div></div></div>
+      <div class="tc-field is-own-line">
+        <label>Where the archive is</label>
+        <span class="tc-seg tc-seg--start"><a class="tc-seg__opt" href="/app/settings/backup/restore?from=job">From a job</a><a class="is-on tc-seg__opt" href="/app/settings/backup/restore?from=server">From a server</a><a class="tc-seg__opt" href="/app/settings/backup/restore?from=file">From this computer</a></span>
+        <span class="tc-field__hint">One archive, one of three. The other two stay empty until you switch.</span>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">From a server</div>
+        <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--top">
+          <div class="tc-field tc-field--md"><label>Collection</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Collection"><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents" selected>sftpgo · vps · Documents</option></select></span></div>
+          <div class="tc-field tc-field--xl"><label>Archive in it</label><span class="tc-line tc-line--gap-8"><input class="tc-in is-mono tc-in--fill" type="text" name="path" value="/old-carrel/carrel-personal-2026-05-30.zip" aria-label="Archive in it"><button class="tc-btn" type="submit" formaction="/app/settings/backup/restore?from=server&amp;op=browse">Browse</button></span></div>
+        </div>
+      </div>
+      <div class="tc-card">
+        <div class="tc-rubric">Archive password</div>
+        <div class="tc-card__fields">
+          <div class="tc-field tc-field--lg"><input class="tc-in is-focus" type="password" name="password" value="••••••••••••" aria-label="Archive password"><span class="tc-field__hint">The one set in the job, not your sign-in password.</span></div>
+        </div>
+      </div>
+      <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit">Open the manifest</button><button class="tc-btn" type="button">Cancel</button></div>
+    </form></div></div>
+  </div>
+</div>
+<figcaption>Архив лежит в хранилище, а не там, куда его клало задание (его принесли сами или задания здесь нет): подключение и путь в нём, Browse — тот же выбор файла, что у папки задания. Архив читается на месте кусками (Range), на диск Carrel не копируется.</figcaption>
+</figure>
+
+<figure>
 <div class="frame" data-frame="s-backup-8">
   <div class="frame-label"><span>Восстановление · что и куда ляжет</span><i>шаг 2 из 3</i></div>
   <div class="tc-root tc-shell">
@@ -17991,6 +18215,61 @@ jobs:
   </div>
 </div>
 <figcaption><b>Как выбирают.</b> Флажок в строке — что восстанавливать; колонка «Restore into» — куда, и это обычный выпадающий список коллекций с полосками, а не угадывание по имени. Carrel заранее подставляет совпавшую по пути коллекцию, поэтому в обычном случае трогать её не нужно вовсе. Несколько строк отмечаются флажками (с <kbd class="tc-kbd" style="font-family:var(--tc-font-mono)">Shift</kbd> — диапазон), и тогда «Restore into» в панели сверху назначает цель всем сразу — иначе при двадцати коллекциях выбор пришлось бы повторять двадцать раз. Последний пункт списка — «Skip this one», потому что «не восстанавливать эту» — такой же выбор цели, как и остальные.<br><br>Главный экран всей функции: не «восстановить», а <b>что именно и куда</b>. Коллекция, чей сервер исчез, не блокирует восстановление — ей назначают другую цель прямо в строке. Обещание сформулировано так, чтобы его можно было выполнить: восстановление — это импорт, а не откат.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-backup-18" data-screen="/app/settings/backup/restore/report" data-part="report">
+  <div class="frame-label"><span>Восстановление · шаг 3, что сделано</span><i>дополнительный кадр: report · /app/settings/backup/restore/report</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog is-wide">
+      <div class="tc-steps"><span class="tc-steps__item">1 · Archive</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Match</span><i class="tc-steps__rule"></i><span class="is-on tc-steps__item">3 · Report</span></div>
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Restored from 2026-08-14</div><div class="tc-head__sub">3 collections · 143 records created · 2 with a new UID · 1 not restored</div></div>
+        <div class="tc-acts"><a class="tc-btn is-primary" href="/app/settings/backup">Done</a></div>
+      </div>
+      <table class="tc-table tc-table--fit">
+        <thead><tr><th>In the archive</th><th class="tc-table__n4 tc-table__col--w26">Restored into</th><th class="tc-table__n3 is-2nd">Created</th><th>What happened</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#4A6B52"></span><span class="tc-table__filename">nextcloud / personal</span></span></td><td class="tc-mono tc-table__n4">nextcloud · Личный</td><td class="tc-mono tc-table__n3 is-2nd">4</td><td>4 missing records created</td></tr>
+          <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#6B4E7A"></span><span class="tc-table__filename">radicale / projects</span></span></td><td class="tc-mono tc-table__n4">radicale · vps · Проекты</td><td class="tc-mono tc-table__n3 is-2nd">0</td><td class="tc-dim">no differences</td></tr>
+          <tr><td><span class="tc-table__file"><span class="tc-mark tc-table__filename" data-tc-colour="#9A9280"></span><span class="tc-table__filename">baikal / shared</span></span></td><td class="tc-mono tc-table__n4">nextcloud · Личный</td><td class="tc-mono tc-table__n3 is-2nd">139</td><td>2 with a new UID · <span class="tc-dim--danger">1 not restored: the server refused it (413, too large)</span></td></tr>
+        </tbody>
+      </table>
+      <div class="tc-msg">Nothing on the server was deleted or overwritten.</div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption>Отчёт — по строке на коллекцию: куда легло, сколько записей создано, у скольких новый UID (совпал с существующим), что не легло и почему. Ничего не удалено и не перезаписано — это сказано тем же сообщением, что на шаге 2. Done ведёт к заданиям.</figcaption>
 </figure>
 
 <h2 id="s-publish">7.16 Настройки · публикация по ссылке</h2>
