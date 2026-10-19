@@ -70,7 +70,8 @@ var _ = add(
 		{Icon: "file", Label: "Documents", Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents", Swap: "upload-sheet"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel", Swap: "upload-sheet"},
 		{Icon: "file", Label: "attachments", Indent: w.TreeLevel40, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments", Swap: "upload-sheet", Trail: w.Badge{Label: "attachment folder"}},
-		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07", Swap: "upload-sheet"}}, On: 3}, "s-files-19", "tc-tree", 1),
+		{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58, Href: "/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07", Swap: "upload-sheet"},
+		{Icon: "file", Label: "Public", Unavailable: true, Trail: w.Badge{Label: "read-only"}}}, On: 3}, "s-files-19", "tc-tree", 1),
 	rows("target", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},

@@ -5347,7 +5347,7 @@ func States34() Screen {
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
-						w.Button{Icon: "plus", Title: "New folder"},
+						w.Button{Icon: "plus", Title: "This storage is read-only.", State: w.ButtonDisabled},
 						w.Button{Icon: "server", Title: "Connect account"},
 						w.Button{Icon: "link", Title: "Subscribe to a feed"},
 						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
@@ -5359,11 +5359,7 @@ func States34() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Public"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 2 items · read-only: nothing can be uploaded or made here")},
-							},
-						},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 2 items · "), w.Badge{Label: "read-only"}}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary, State: w.ButtonDisabled},

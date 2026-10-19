@@ -796,6 +796,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Files: what cannot be done is off, and one tree for one set** (Carrel's
+  task 206; accepted by the owner 19.10): in a read-only storage
+  (`states-34`) the rail's New folder is off, its reason «This storage is
+  read-only.»; the subtitle there and in `s-files-15` says it with a
+  `read-only` badge instead of a sentence. The upload sheet's tree
+  (`s-files-19`) has the read-only Public row, dimmed, as `s-notes-11`
+  has. The sheet «Attach from Files» (`s-files-16`) is `picker-sheet`,
+  and its servers' menu swaps it at `/app/files/picker?for=attach`;
+  the upload sheet of `s-notes-11` is `upload-sheet`, the id its
+  links swap.
 - **The password sheet, one for every handing out** (Carrel's task 193
   p. 3, 4; accepted by the owner 19.10): its title says what for, the
   subject whose, the main button the act; a password field; one line

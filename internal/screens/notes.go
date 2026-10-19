@@ -2904,6 +2904,7 @@ func Notes11() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
+					ID:     "upload-sheet",
 					Action: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
 					Icon:   "upload",
 					Title:  "Upload files",

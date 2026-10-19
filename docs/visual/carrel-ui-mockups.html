@@ -9129,7 +9129,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-scrim tc-scrim--padt26">
-          <form class="tc-sheet" action="/app/files/sftpgo/documents/upload/carrel/attachments/2026-08" method="post" enctype="multipart/form-data">
+          <form class="tc-sheet" id="upload-sheet" action="/app/files/sftpgo/documents/upload/carrel/attachments/2026-08" method="post" enctype="multipart/form-data">
             <div class="tc-sheet__head">
               <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-upload"/></svg>
               <b class="tc-sheet__title">Upload files</b>
@@ -9600,7 +9600,7 @@ Read  2 min ago</div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
         <div class="tc-head">
-          <div class="tc-head__titles"><div class="tc-head__title">Public</div><div class="tc-head__sub">sftpgo · vps · read-only: nothing can be uploaded or made here</div></div>
+          <div class="tc-head__titles"><div class="tc-head__title">Public</div><div class="tc-head__sub">sftpgo · vps · <span class="tc-badge">read-only</span></div></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
@@ -9616,11 +9616,11 @@ Read  2 min ago</div>
   <div class="frame" data-frame="s-files-16">
     <div class="frame-label"><span>Attach · из Files</span><span class="frag">фрагмент</span><i>лист From Files</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-sheet tc-sheet--w520">
+      <div class="tc-sheet tc-sheet--w520" id="picker-sheet">
         <div class="tc-sheet__head">
         <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-file"/></svg>
         <b class="tc-sheet__title">Attach from Files</b>
-        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=sftpgo" data-tc-swap="upload-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/sftpgo/documents/upload/carrel/attachments?server=nextcloud" data-tc-swap="upload-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
+        <details class="tc-drop tc-push"><summary class="tc-in is-pick tc-in--t12-w240" aria-label="Server">sftpgo · vps</summary><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><a class="is-on tc-menu__item" href="/app/files/picker?for=attach&amp;server=sftpgo" data-tc-swap="picker-sheet" role="menuitem">sftpgo · vps</a><a class="tc-menu__item" href="/app/files/picker?for=attach&amp;server=nextcloud" data-tc-swap="picker-sheet" role="menuitem">nextcloud</a><a class="tc-menu__item" role="menuitem" title="webdav · nas did not answer." aria-disabled="true">webdav · nas</a></div></details>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">to «Собрать чемодан»</span>
         </div>
         <div class="tc-sheet__body">
@@ -9692,6 +9692,7 @@ Read  2 min ago</div>
               <a class="tc-tree__row tc-tree__row--padl22" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>carrel</a>
               <a class="is-on tc-tree__row tc-tree__row--padl40" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-badge tc-push">attachment folder</span></a>
               <a class="tc-tree__row tc-tree__row--padl58" href="/app/files/sftpgo/documents/upload/carrel/attachments?to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="upload-sheet"><svg><use href="#i-file"/></svg>2026-07</a>
+              <div class="tc-tree__row tc-tree__row--op-55"><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></div>
             </div>
           </div>
         </div>
@@ -25311,7 +25312,7 @@ dav: HTTP 503: the server is busy</div></div>
           </div>
         </div>
         <div class="tc-railfoot">
-          <button class="tc-btn" title="New folder" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
+          <button class="tc-btn" title="This storage is read-only." type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg></button>
           <button class="tc-btn" title="Connect account" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></button>
           <button class="tc-btn" title="Subscribe to a feed" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
           <svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>
@@ -25320,7 +25321,7 @@ dav: HTTP 503: the server is busy</div></div>
       </div>
       <div class="tc-main">
         <div class="tc-head">
-          <div class="tc-head__titles"><div class="tc-head__title">Public</div><div class="tc-head__sub">sftpgo · vps · 2 items · read-only: nothing can be uploaded or made here</div></div>
+          <div class="tc-head__titles"><div class="tc-head__title">Public</div><div class="tc-head__sub">sftpgo · vps · 2 items · <span class="tc-badge">read-only</span></div></div>
           <div class="tc-acts">
             <button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
             <button class="tc-btn" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button>
