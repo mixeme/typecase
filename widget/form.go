@@ -586,6 +586,14 @@ type FileField struct {
 	// library's script knows the lengths and writes the fields when the
 	// files are picked: without one they are not sent.
 	Size string
+	// Ranges is the address that names the parts of the file to send
+	// (Carrel's task 213: a large archive is read where it lies). With the
+	// live layer the form asks it first — the other fields, «<name>.name»
+	// and «<name>.size» — and it answers lines «offset length»; the form
+	// then sends those parts under the field's name, each called
+	// «offset-length», instead of the file. Without the layer the whole
+	// file goes.
+	Ranges string
 }
 
 // PickedRow is the row a picked file of an edit becomes: a document's
@@ -601,7 +609,7 @@ func (Line) pickedRow()      {}
 func (f FileField) input() string {
 	return `<input class="tc-file" type="file"` + attr("name", f.Name) + attr("form", f.Form) + attr("accept", f.Accept) + attr("aria-label", f.Label) +
 		attr("data-tc-to", f.To) + attr("data-tc-list", f.List) + attr("data-tc-preview", f.Preview) + attr("data-tc-shows", f.Shows) +
-		attr("data-tc-size", f.Size) + flag("multiple", f.Many || f.Folder) + flag("webkitdirectory", f.Folder) + `>`
+		attr("data-tc-size", f.Size) + attr("data-tc-ranges", f.Ranges) + flag("multiple", f.Many || f.Folder) + flag("webkitdirectory", f.Folder) + `>`
 }
 
 // multipart makes a printed form one that sends files, when a file field

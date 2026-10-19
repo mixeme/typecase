@@ -85,6 +85,63 @@
 		};
 	}
 
+	// A file field with data-tc-ranges sends only the parts of its file the
+	// server asks for (Carrel's task 213): a large archive is read where it
+	// lies and never copied whole. The form's other fields with the file's
+	// name and size («<name>.name», «<name>.size») go to that address first;
+	// it answers with lines «offset length»; the form then goes to its
+	// action with those parts under the field's name, each called
+	// «offset-length», instead of the file. The answer is the page, as a
+	// plain send would have it. Without the layer, or when the asking
+	// fails, the whole file goes.
+	document.addEventListener("submit", function (e) {
+		var form = e.target, by = e.submitter || null;
+		if (e.defaultPrevented || sentPlain || !window.FormData || !window.fetch) return;
+		var input = Array.prototype.filter.call(form.querySelectorAll('input[type="file"][data-tc-ranges]'), function (i) {
+			return !i.disabled && i.files && i.files.length;
+		})[0];
+		if (!input) return;
+		e.preventDefault();
+		var file = input.files[0], name = input.name;
+		var data = new FormData(form, by || undefined);
+		data.delete(name);
+		data.set(name + ".name", file.name);
+		data.set(name + ".size", String(file.size));
+		var action = new URL((by && by.getAttribute("formaction")) || form.getAttribute("action") || location.href, location.href).href;
+		var method = ((by && by.getAttribute("formmethod")) || form.getAttribute("method") || "post").toUpperCase();
+		var plain = function () {
+			sentPlain = true;
+			if (form.requestSubmit && by) form.requestSubmit(by);
+			else form.submit();
+			sentPlain = false;
+		};
+		fetch(new URL(input.getAttribute("data-tc-ranges"), location.href).href, { method: "POST", body: data, credentials: "same-origin" })
+			.then(function (r) {
+				if (!r.ok) throw new Error("ranges " + r.status);
+				return r.text();
+			})
+			.then(function (text) {
+				text.split(/\r?\n/).forEach(function (line) {
+					var p = line.trim().split(/\s+/), at = Number(p[0]), length = Number(p[1]);
+					if (p.length !== 2 || !(at >= 0) || !(length > 0)) return;
+					data.append(name, file.slice(at, at + length), at + "-" + length);
+				});
+				return fetch(action, { method: method, body: data, credentials: "same-origin" });
+			})
+			.then(function (r) {
+				if (r.redirected) {
+					location.assign(r.url);
+					return;
+				}
+				return r.text().then(function (html) {
+					document.open();
+					document.write(html);
+					document.close();
+				});
+			})
+			.catch(plain);
+	});
+
 	document.addEventListener("submit", function (e) {
 		var form = e.target, by = e.submitter || null;
 		if (e.defaultPrevented || sentPlain || !window.FormData || !window.XMLHttpRequest) return;

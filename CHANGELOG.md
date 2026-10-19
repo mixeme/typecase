@@ -83,6 +83,15 @@ do, not what the authors did.
 
 ### Added
 
+- **`FileField.Ranges`** — a file that goes in parts (Carrel's task 213 p.
+  2: a large archive is read where it lies, never copied whole). With the
+  live layer a form with such a field asks that address first — its other
+  fields, «<name>.name» and «<name>.size» — and the server answers lines
+  «offset length»; the form then goes to its action with those parts of
+  the file under the field's name, each called «offset-length», and the
+  answer is the page. Without the layer, or when the asking fails, the
+  whole file goes. The restore step `s-backup-15`, `-16` uses it
+  (`/app/settings/backup/restore?op=ranges`).
 - **`Sheet.ID` on a sheet that is no form** (Carrel's task 210): the id
   a link's swap names — the file picker's servers.
 - **`SlimRow.Reason`** — the tick of a row off, and why, the aside as an

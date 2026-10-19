@@ -2279,7 +2279,16 @@ func Backup15() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}},
+															w.Button{
+																Label: "Choose a file",
+																File: &w.FileField{
+																	Form:   "",
+																	Name:   "file",
+																	Accept: ".zip",
+																	Label:  "Archive",
+																	Ranges: "/app/settings/backup/restore?op=ranges",
+																},
+															},
 														},
 														Gap: w.LineGap8,
 													},
@@ -2452,7 +2461,16 @@ func Backup16() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Button{Label: "Choose a file", File: &w.FileField{Form: "", Name: "file", Accept: ".zip", Label: "Archive"}},
+															w.Button{
+																Label: "Choose a file",
+																File: &w.FileField{
+																	Form:   "",
+																	Name:   "file",
+																	Accept: ".zip",
+																	Label:  "Archive",
+																	Ranges: "/app/settings/backup/restore?op=ranges",
+																},
+															},
 														},
 														Gap: w.LineGap8,
 													},

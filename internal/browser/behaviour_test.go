@@ -4,9 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"testing"
@@ -2492,5 +2494,75 @@ func TestSearchSuggest(t *testing.T) {
 	}
 	if down != "смета" || esc != "hidden line" || away != "hidden" {
 		t.Errorf("↓: %q; Esc: %q; leaving: %q; want смета, the menu hidden with the focus in the line, hidden", down, esc, away)
+	}
+}
+
+// TestFileRanges: a file field with data-tc-ranges sends only the parts of
+// its file the server names (Carrel's task 213): the other fields with the
+// file's name and size go to the ranges address first, its lines «offset
+// length» come back, and the form goes to its action with those parts,
+// each called «offset-length», and no whole file. Without the live layer
+// the whole file goes.
+func TestFileRanges(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var asked, got []string
+	ranges := h.RegisterStream("ranges", func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(w, err.Error(), 400)
+			return
+		}
+		_, whole := r.MultipartForm.File["file"]
+		asked = append(asked, r.FormValue("csrf")+" "+r.FormValue("file.name")+" "+r.FormValue("file.size")+" "+strconv.FormatBool(whole))
+		_, _ = w.Write([]byte("0 4\n10 6\n"))
+	})
+	action := h.RegisterStream("open", func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(w, err.Error(), 400)
+			return
+		}
+		for _, fh := range r.MultipartForm.File["file"] {
+			f, _ := fh.Open()
+			b, _ := io.ReadAll(f)
+			f.Close()
+			got = append(got, fh.Filename+"="+string(b))
+		}
+		got = append(got, "size="+r.FormValue("file.size"))
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write([]byte(`<!doctype html><title>opened</title><p id="done">opened</p>`))
+	})
+	pick := w.Button{Label: "Choose a file", File: &w.FileField{Name: "file", Label: "Archive", Ranges: ranges}}
+	body := `<div class="tc-root"><form action="` + action + `" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="x1">` +
+		pick.Render() + `<button class="tc-btn is-primary" type="submit">Open the manifest</button></form></div>`
+	f := filepath.Join(t.TempDir(), "carrel.zip")
+	if err := os.WriteFile(f, []byte("PK0123456789abcdefghij"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	var title string
+	if err := h.Run(h.RegisterPage("ranges", browser.PageHTML(body, "")), 900, 600,
+		chromedp.SetUploadFiles(`.tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Click(`button[type="submit"]`, chromedp.ByQuery),
+		chromedp.WaitVisible(`#done`, chromedp.ByQuery),
+		chromedp.Title(&title),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if strings.Join(asked, "|") != "x1 carrel.zip 22 false" {
+		t.Errorf("the ranges address was asked with %q; want the other fields, the name and the size, no file", asked)
+	}
+	if strings.Join(got, "|") != "0-4=PK01|10-6=89abcd|size=22" {
+		t.Errorf("the action got %q; want the two parts named offset-length and the size, no whole file", got)
+	}
+	got = nil
+	bare := strings.Replace(browser.PageHTML(body, ""), `<script src="/tc-live.js"></script>`, "", 1)
+	if err := h.Run(h.RegisterPage("ranges-bare", bare), 900, 600,
+		chromedp.SetUploadFiles(`.tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Click(`button[type="submit"]`, chromedp.ByQuery),
+		chromedp.WaitVisible(`#done`, chromedp.ByQuery),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if strings.Join(got, "|") != "carrel.zip=PK0123456789abcdefghij|size=" {
+		t.Errorf("without the layer the action got %q; want the whole file", got)
 	}
 }
