@@ -1237,7 +1237,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-card__qr.tc-card__qr{border:.5px solid var(--tc-edge);border-radius:4px;flex:none;padding:8px}
 .tc-card__qr-img.tc-card__qr-img{display:block;width:104px;height:104px;image-rendering:pixelated}
 .tc-card__qr-side.tc-card__qr-side{flex:1 1 140px}
-.tc-main__tree.tc-main__tree{padding:10px 20px 16px}
 .tc-card__warn.tc-card__warn{font-size:11.5px;color:var(--tc-danger);margin-top:8px}
 .tc-main__hero.tc-main__hero{align-items:flex-start;display:flex;flex-wrap:wrap;gap:22px;padding:34px 24px}
 .tc-main__hero-side.tc-main__hero-side{min-width:0;flex:1 1 320px}

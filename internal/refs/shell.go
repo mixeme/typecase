@@ -47,6 +47,15 @@ var _ = add(
 	// tc-nav
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
+		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+		{Icon: "file", Label: "Attachments", Href: "#"},
+		{Icon: "device", Label: "New device", Href: "#"},
+		{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Href: "#"},
+		{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+		{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 5}, "s-davloom-6", "tc-nav", 2),
+	shell("plain", w.Nav{Items: []w.NavItem{
+		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Href: "#"},
 		{Icon: "file", Label: "Attachments", Href: "#"},
 		{Icon: "device", Label: "New device", Href: "#"},

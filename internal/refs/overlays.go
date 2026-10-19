@@ -702,6 +702,19 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar", 1),
 
 	// tc-sheet
+	overlay("plain", w.Sheet{Title: "What the client sees", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("https://carrel.example/dav/")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "file", Label: "/dav/", Code: true, Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11}},
+			{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},
+			{Icon: "cal", Label: "cal/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Calendars · events, tasks, notes")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/k4f2/%2F…%2Fpersonal%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Личный")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "c/k4f2/%2F…%2Fwork%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Работа")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "c/r9a1/%2Fmix%2Fprojects%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Проекты")}, Size: w.Dim11}},
+			{Icon: "con", Label: "card/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Address books")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/k4f2/%2F…%2Fcontacts%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Контакты")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "c/r9a1/%2Fmix%2Fteam%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Команда")}, Size: w.Dim11}},
+			{Icon: "file", Label: "files/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Files · plain WebDAV")}, Size: w.Dim11}},
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/s3c8/%2FDocuments%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Documents")}, Size: w.Dim11}}}, Variant: w.TreeNarrow}}, Foot: []w.SheetFootPart{w.Line{Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/davloom"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Width: w.SheetWidth680}, "s-davloom-9", "tc-sheet", 1),
 	overlay("plain", w.Sheet{Action: "/app/settings/backup/trigger?job=work", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Title: "External trigger", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Рабочее, ежедневно")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Password"},

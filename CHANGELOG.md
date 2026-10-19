@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `MainTree` is gone with its rule (`.tc-main__tree`): davloom's tree is
+  a sheet now, behind «What the client sees» (the owner, 19.10).
 - `RubricGap13` is gone with its rule (`.tc-rubric--m13-0-6`): «What it
   opens» is the first rubric of its card now (Carrel's task 212).
 - `FieldRow`, `MarkH18` and `Mark.Focus` are gone, with their rules
@@ -812,6 +814,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **davloom: no devices, a device's scope, off; the tree behind a
+  button** (Carrel's task 193 p. 5; accepted by the owner 19.10).
+  `s-davloom-6` — «No devices yet.», the rail without a count;
+  `s-davloom-7` — «… collections · Change» opens «What it sees» over
+  davloom (`/app/settings/davloom/scope`), the collections ticked by
+  connection, Save; `s-davloom-8` — «davloom [off]», Add device off with
+  its reason, the devices kept and revocable. The tree «What the client
+  sees» left the page for a sheet (`s-davloom-9`,
+  `/app/settings/davloom/tree`) behind a button by Copy; a device row's
+  «… collections · Change» stands at the right edge before its access.
 - **The external trigger's fragments as the sheet draws them; the job
   list says what starts a job** (Carrel's task 212; accepted by the owner
   19.10). The tabs' cards (`s-backup-3`, `-4`, `-10`, `-11`) are the

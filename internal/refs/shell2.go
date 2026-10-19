@@ -341,27 +341,6 @@ var _ = add(
 			w.CardText{Kind: w.CardAlertText, Parts: []w.CardTextPart{w.Text("The feed asks for a password and the saved one no longer fits. A feed that stopped answering must not look like a feed with nothing in it.")}}}, Variant: w.CardAlert}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("A feed is read again on every visit to the section, so there is nothing here to synchronise and nothing to refresh. "), w.Strong("Check"), w.Text(" asks whether the address still replies.")}}}}, "s-profile-10", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Text: "davloom", Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One address for every device instead of an account for every server · "), w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Add device", Icon: "plus", Kind: w.ButtonPrimary}}}},
-		w.Form{},
-		w.Msg{Parts: []w.MsgPart{w.Text("Changing your Carrel password does "), w.Strong("not"), w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it.")}, Tone: w.MsgAccent},
-		w.ListGroup{Title: w.Rubric{Text: "Devices"}, Count: &w.Num{Value: 2}},
-		w.Table{Cols: []w.TableCol{{Label: "Device"}, {Label: "What it can see and do"}, {Label: "Created", Rank: w.Rank4, Secondary: true}, {Label: "Last request", Secondary: true}, {Width: w.Col90}}, Rows: []w.TableRow{
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Телефон · DAVx5"}}}, {Parts: []w.CellPart{w.CellWrap{Items: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#6B4E7A"}, w.Mark{Colour: "#A05A2C"}}}, w.Mono{Text: "Calendars, Address books", Variant: w.Mono11}, w.Button{Label: "5 collections · Change", Small: true}, w.Seg{Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}}, Variant: w.SegCompact, Place: w.Pushed}}}}}, {Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 09:31")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Ноутбук · Thunderbird"}}}, {Parts: []w.CellPart{w.CellWrap{Items: []w.CellPart{w.Line{Gap: w.LineGap3, Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}}, w.Mono{Text: "all kinds", Variant: w.Mono11}, w.Button{Label: "12 collections · Change", Small: true}, w.Seg{Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}}, Variant: w.SegCompact, Place: w.Pushed}}}}}, {Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true}}}}, Variant: w.TableFit},
-		w.ListGroup{Title: w.Rubric{Text: "What the client sees"}},
-		w.MainTree{Tree: w.Tree{Rows: []w.TreeRow{
-			{Icon: "file", Label: "/dav/", Code: true, Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11}},
-			{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},
-			{Icon: "cal", Label: "cal/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Calendars · events, tasks, notes")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/k4f2/%2F…%2Fpersonal%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Личный")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "c/k4f2/%2F…%2Fwork%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Работа")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "c/r9a1/%2Fmix%2Fprojects%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Проекты")}, Size: w.Dim11}},
-			{Icon: "con", Label: "card/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Address books")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/k4f2/%2F…%2Fcontacts%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Контакты")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "c/r9a1/%2Fmix%2Fteam%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Команда")}, Size: w.Dim11}},
-			{Icon: "file", Label: "files/", Code: true, Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("Files · plain WebDAV")}, Size: w.Dim11}},
-			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "c/s3c8/%2FDocuments%2F/", Code: true, Indent: w.TreeLevel44, Trail: w.Dim{Parts: []w.Inline{w.Text("Documents")}, Size: w.Dim11}}}, Variant: w.TreeNarrow}}}}, "s-davloom-1", "tc-main", 1),
-	shell("variant", w.Main{Items: []w.MainPart{
 		w.Hero{Symbol: "davloom-tile", Label: "davloom", Title: "davloom", Sub: "DAV proxy for Carrel · one address instead of every configured account", Text: w.Prose{Parts: []w.Inline{w.Text("This is a connection point for clients, not a page to read. Enter the address in anything that speaks CalDAV, CardDAV or WebDAV — DAVx5, Thunderbird, Calendar and Contacts on Apple, a file manager mounting a network drive. The user name is your Carrel one; the password is the device password issued in Carrel.")}, Variant: w.ProseTop}, Fields: &w.Fields{Items: []w.FieldsItem{
 			{Term: "Address", Value: []w.ValuePart{w.Text("https://carrel.example/dav/")}, Face: w.ValueMono},
 			{Term: "Serves", Value: []w.ValuePart{w.Text("CalDAV · CardDAV · WebDAV")}, Face: w.ValueMono},
@@ -755,7 +734,7 @@ var _ = add(
 
 func init() {
 	Widgets = append(Widgets, w.Head{}, w.Bar{}, w.Main{}, w.Side{}, w.Shell{})
-	Parts = append(Parts, w.HeadTitle{}, w.HeadSub{}, w.HeadPhoto{}, w.BarSep{}, w.BarCount{}, w.BarRight{}, w.ListGroup{}, w.MainTree{},
+	Parts = append(Parts, w.HeadTitle{}, w.HeadSub{}, w.HeadPhoto{}, w.BarSep{}, w.BarCount{}, w.BarRight{}, w.ListGroup{},
 		w.MainHint{}, w.BottomNav{}, w.BottomItem{}, w.FootActs{}, w.SideActs{}, w.ShellBody{}, w.Banner{}, w.Strip{}, w.MainFoot{},
 		w.Stage{}, w.Person{})
 }

@@ -86,6 +86,7 @@ func Davloom1() Screen {
 										Items: []w.LinePart{
 											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
 											w.Button{Label: "Copy", Small: true},
+											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
 										Gap: w.LineGap8,
 									},
@@ -135,11 +136,10 @@ func Davloom1() Screen {
 														Gap: w.LineGap3,
 													},
 													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
-													w.Button{Label: "5 collections · Change", Small: true},
+													w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
 													w.Seg{
 														Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
 														Variant: w.SegCompact,
-														Place:   w.Pushed,
 													},
 												},
 											},
@@ -159,11 +159,10 @@ func Davloom1() Screen {
 												Items: []w.CellPart{
 													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
 													w.Mono{Text: "all kinds", Variant: w.Mono11},
-													w.Button{Label: "12 collections · Change", Small: true},
+													w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
 													w.Seg{
 														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
 														Variant: w.SegCompact,
-														Place:   w.Pushed,
 													},
 												},
 											},
@@ -186,11 +185,10 @@ func Davloom1() Screen {
 														Gap:   w.LineGap3,
 													},
 													w.Mono{Text: "Calendars", Variant: w.Mono11},
-													w.Button{Label: "3 collections · Change", Small: true},
+													w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
 													w.Seg{
 														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
 														Variant: w.SegCompact,
-														Place:   w.Pushed,
 													},
 												},
 											},
@@ -203,84 +201,6 @@ func Davloom1() Screen {
 							},
 						},
 						Variant: w.TableFit,
-					},
-					w.ListGroup{Title: w.Rubric{Text: "What the client sees", Form: w.RubricInline}},
-					w.MainTree{
-						Tree: w.Tree{
-							Rows: []w.TreeRow{
-								{
-									Icon:  "file",
-									Label: "/dav/",
-									Code:  true,
-									Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11},
-								},
-								{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},
-								{
-									Icon:   "cal",
-									Label:  "cal/",
-									Code:   true,
-									Indent: w.TreeLevel22,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Calendars · events, tasks, notes")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#4A6B52"},
-									Label:  "c/k4f2/%2F…%2Fpersonal%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Личный")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#3F6E8C"},
-									Label:  "c/k4f2/%2F…%2Fwork%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Работа")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#6B4E7A"},
-									Label:  "c/r9a1/%2Fmix%2Fprojects%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Проекты")}, Size: w.Dim11},
-								},
-								{
-									Icon:   "con",
-									Label:  "card/",
-									Code:   true,
-									Indent: w.TreeLevel22,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Address books")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#4A6B52"},
-									Label:  "c/k4f2/%2F…%2Fcontacts%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Контакты")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#6B4E7A"},
-									Label:  "c/r9a1/%2Fmix%2Fteam%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Команда")}, Size: w.Dim11},
-								},
-								{
-									Icon:   "file",
-									Label:  "files/",
-									Code:   true,
-									Indent: w.TreeLevel22,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Files · plain WebDAV")}, Size: w.Dim11},
-								},
-								{
-									Mark:   &w.Mark{Colour: "#4A6B52"},
-									Label:  "c/s3c8/%2FDocuments%2F/",
-									Code:   true,
-									Indent: w.TreeLevel44,
-									Trail:  w.Dim{Parts: []w.Inline{w.Text("Documents")}, Size: w.Dim11},
-								},
-							},
-							Variant: w.TreeNarrow,
-						},
 					},
 				},
 			},
@@ -615,6 +535,995 @@ func Davloom4() Screen {
 						Acts: []w.Button{w.Button{Label: "Source code", Kind: w.ButtonPrimary}, w.Button{Label: "Open Carrel"}},
 					},
 				},
+			},
+		},
+	}
+}
+
+// Davloom6 is frame «davloom · устройств нет» (s-davloom-6).
+func Davloom6() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 5,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · no devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{
+							Text:  "davloom",
+							Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"},
+						},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("One address for every device instead of an account for every server · "),
+									w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
+								},
+							},
+						},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Add device", Icon: "plus", Kind: w.ButtonPrimary}}},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Address for the client",
+								Parts: []w.FieldPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+											w.Button{Label: "Copy", Small: true},
+											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
+										},
+										Gap: w.LineGap8,
+									},
+									w.FieldHint{
+										Parts: []w.Inline{
+											w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
+										},
+									},
+								},
+								Width: w.FieldMax640Fill460,
+							},
+						},
+						Variant: w.FormBottom12,
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Text("Changing your Carrel password does "),
+							w.Strong("not"),
+							w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+						},
+						Tone: w.MsgAccent,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}},
+					w.Empty{Parts: []w.EmptyPart{w.Strong("No devices yet.")}},
+				},
+			},
+		},
+	}
+}
+
+// Davloom7 is frame «davloom · что видит устройство» (s-davloom-7).
+func Davloom7() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
+								},
+								On: 5,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{
+								Text:  "davloom",
+								Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"},
+							},
+							Subs: []w.HeadSub{
+								w.HeadSub{
+									Parts: []w.HeadSubPart{
+										w.Text("One address for every device instead of an account for every server · "),
+										w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
+									},
+								},
+							},
+							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Add device", Icon: "plus", Kind: w.ButtonPrimary}}},
+						},
+						w.Form{
+							Items: []w.FormPart{
+								w.Field{
+									Label: "Address for the client",
+									Parts: []w.FieldPart{
+										w.Line{
+											Items: []w.LinePart{
+												w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+												w.Button{Label: "Copy", Small: true},
+												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
+											},
+											Gap: w.LineGap8,
+										},
+										w.FieldHint{
+											Parts: []w.Inline{
+												w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
+											},
+										},
+									},
+									Width: w.FieldMax640Fill460,
+								},
+							},
+							Variant: w.FormBottom12,
+						},
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("Changing your Carrel password does "),
+								w.Strong("not"),
+								w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+							},
+							Tone: w.MsgAccent,
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "Device"},
+								{Label: "What it can see and do"},
+								{Label: "Created", Rank: w.Rank4, Secondary: true},
+								{Label: "Last request", Secondary: true},
+								{Width: w.Col90},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Телефон · DAVx5"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{
+															Items: []w.LinePart{
+																w.Mark{Colour: "#4A6B52"},
+																w.Mark{Colour: "#3F6E8C"},
+																w.Mark{Colour: "#6B4E7A"},
+																w.Mark{Colour: "#A05A2C"},
+															},
+															Gap: w.LineGap3,
+														},
+														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
+														w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 09:31")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Ноутбук · Thunderbird"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+														w.Mono{Text: "all kinds", Variant: w.Mono11},
+														w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Планшет · Календарь iOS"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{
+															Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
+															Gap:   w.LineGap3,
+														},
+														w.Mono{Text: "Calendars", Variant: w.Mono11},
+														w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-07-19")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-14 21:15")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+							},
+							Variant: w.TableFit,
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/settings/davloom/scope?device=phone",
+					Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					Title:  "What it sees",
+					Head: []w.SheetHeadPart{
+						w.Dim{Parts: []w.Inline{w.Text("Телефон · DAVx5")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed},
+					},
+					Body: []w.SheetPart{
+						w.Form{
+							Items: []w.FormPart{
+								w.FieldSet{
+									Items: []w.FieldSetPart{
+										w.FieldGrid{
+											Items: []w.FieldGridPart{
+												w.FieldGridColumn{
+													Items: []w.TickRow{
+														w.TickRow{
+															Ticked: w.TickedPart,
+															Form:   w.TickRowGroup,
+															Mark:   w.Mark{Kind: w.MarkMulti},
+															Label:  "nextcloud",
+															Meta:   "4 of 9",
+														},
+														w.TickRow{
+															Send:  w.Send{Name: "col", Value: "nextcloud|lichnyj"},
+															Form:  w.TickRowNested,
+															Mark:  w.Mark{Colour: "#4A6B52"},
+															Label: "Личный",
+															Meta:  "cal.",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "nextcloud|dela"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#4A6B52"},
+															Label:  "Дела",
+															Meta:   "tasks",
+														},
+														w.TickRow{
+															Send:  w.Send{Name: "col", Value: "nextcloud|rabota"},
+															Form:  w.TickRowNested,
+															Mark:  w.Mark{Colour: "#3F6E8C"},
+															Label: "Работа",
+															Meta:  "cal.",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "nextcloud|dni-rozhdeniya"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#A05A2C"},
+															Label:  "Дни рождения",
+															Meta:   "cal.",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "nextcloud|zapisi"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#4A6B52"},
+															Label:  "Записи",
+															Meta:   "notes",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "nextcloud|dnevnik"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#6B4E7A"},
+															Label:  "Дневник",
+															Meta:   "notes",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "nextcloud|zapiski-obshchie"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#3F6E8C"},
+															Label:  "Общие с семьёй",
+															Meta:   "notes",
+														},
+														w.TickRow{
+															Send:  w.Send{Name: "col", Value: "nextcloud|kontakty"},
+															Form:  w.TickRowNested,
+															Mark:  w.Mark{Colour: "#4A6B52"},
+															Label: "Контакты",
+															Meta:  "book",
+														},
+														w.TickRow{
+															Send:  w.Send{Name: "col", Value: "nextcloud|arhiv"},
+															Form:  w.TickRowNested,
+															Mark:  w.Mark{Colour: "#A05A2C"},
+															Label: "Архив",
+															Meta:  "book",
+														},
+													},
+												},
+												w.FieldGridColumn{
+													Items: []w.TickRow{
+														w.TickRow{
+															Ticked: w.TickedPart,
+															Form:   w.TickRowGroup,
+															Mark:   w.Mark{Kind: w.MarkMulti},
+															Label:  "radicale · vps",
+															Meta:   "1 of 4",
+														},
+														w.TickRow{
+															Send:  w.Send{Name: "col", Value: "radicale|proekty"},
+															Form:  w.TickRowNested,
+															Mark:  w.Mark{Colour: "#6B4E7A"},
+															Label: "Проекты",
+															Meta:  "cal.",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "radicale|dezhurstva"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#8C6239"},
+															Label:  "Дежурства",
+															Meta:   "cal.",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "radicale|komanda"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#6B4E7A"},
+															Label:  "Команда",
+															Meta:   "book",
+														},
+														w.TickRow{
+															Ticked: w.TickedOff,
+															Send:   w.Send{Name: "col", Value: "radicale|rassylki"},
+															Form:   w.TickRowNested,
+															Mark:   w.Mark{Colour: "#6B4E7A"},
+															Label:  "Рассылки",
+															Meta:   "book",
+														},
+													},
+												},
+											},
+										},
+									},
+									Variant: w.FieldSetLead,
+								},
+							},
+							Variant: w.FormFlush,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Save", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/davloom"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Davloom8 is frame «davloom · выключен» (s-davloom-8).
+func Davloom8() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 5,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Tone:   w.RailStatusOff,
+							Text:   "davloom is off",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("No device connects until it is started.")}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "davloom", Badge: &w.Badge{Label: "off", Tone: w.BadgeAlert}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("No device connects until it is started.")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{
+									Label: "Add device",
+									Icon:  "plus",
+									Kind:  w.ButtonPrimary,
+									Title: "davloom is off on this instance.",
+									State: w.ButtonDisabled,
+								},
+							},
+						},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Address for the client",
+								Parts: []w.FieldPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+											w.Button{Label: "Copy", Small: true},
+											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
+										},
+										Gap: w.LineGap8,
+									},
+									w.FieldHint{
+										Parts: []w.Inline{
+											w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
+										},
+									},
+								},
+								Width: w.FieldMax640Fill460,
+							},
+						},
+						Variant: w.FormBottom12,
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Text("Changing your Carrel password does "),
+							w.Strong("not"),
+							w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+						},
+						Tone: w.MsgAccent,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.Table{
+						Cols: []w.TableCol{
+							{Label: "Device"},
+							{Label: "What it can see and do"},
+							{Label: "Created", Rank: w.Rank4, Secondary: true},
+							{Label: "Last request", Secondary: true},
+							{Width: w.Col90},
+						},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Телефон · DAVx5"}}},
+									{
+										Parts: []w.CellPart{
+											w.CellWrap{
+												Items: []w.CellPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Mark{Colour: "#4A6B52"},
+															w.Mark{Colour: "#3F6E8C"},
+															w.Mark{Colour: "#6B4E7A"},
+															w.Mark{Colour: "#A05A2C"},
+														},
+														Gap: w.LineGap3,
+													},
+													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
+													w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+													w.Seg{
+														Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+														Variant: w.SegCompact,
+													},
+												},
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-15 09:31")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Ноутбук · Thunderbird"}}},
+									{
+										Parts: []w.CellPart{
+											w.CellWrap{
+												Items: []w.CellPart{
+													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+													w.Mono{Text: "all kinds", Variant: w.Mono11},
+													w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+													w.Seg{
+														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Variant: w.SegCompact,
+													},
+												},
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Планшет · Календарь iOS"}}},
+									{
+										Parts: []w.CellPart{
+											w.CellWrap{
+												Items: []w.CellPart{
+													w.Line{
+														Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
+														Gap:   w.LineGap3,
+													},
+													w.Mono{Text: "Calendars", Variant: w.Mono11},
+													w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+													w.Seg{
+														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Variant: w.SegCompact,
+													},
+												},
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("2026-07-19")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-14 21:15")}, Mono: true},
+									{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+								},
+							},
+						},
+						Variant: w.TableFit,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Davloom9 is frame «davloom · что видит клиент» (s-davloom-9).
+func Davloom9() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{Items: []w.NavItem{
+						{Icon: "back", Label: "Back to app", Href: "#"}}},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Settings"},
+							w.Nav{
+								Items: []w.NavItem{
+									{Icon: "user", Label: "Account", Href: "#"},
+									{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+									{Icon: "file", Label: "Attachments", Href: "#"},
+									{Icon: "device", Label: "New device", Href: "#"},
+									{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+									{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+									{Icon: "theme", Label: "Appearance", Href: "#"},
+								},
+								On: 5,
+							},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.RailStatus{
+								Text:   "davloom · running · 3 devices",
+								Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+							},
+							w.RailStatus{
+								Text: "Backups are running",
+								Detail: w.Dim{
+									Parts: []w.Inline{
+										w.Text("Last backup "),
+										w.Mono{Text: "2026-08-16 03:10"},
+										w.Text(" · "),
+										w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+									},
+									Size: w.Dim11,
+								},
+							},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{
+								Text:  "davloom",
+								Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"},
+							},
+							Subs: []w.HeadSub{
+								w.HeadSub{
+									Parts: []w.HeadSubPart{
+										w.Text("One address for every device instead of an account for every server · "),
+										w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
+									},
+								},
+							},
+							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Add device", Icon: "plus", Kind: w.ButtonPrimary}}},
+						},
+						w.Form{
+							Items: []w.FormPart{
+								w.Field{
+									Label: "Address for the client",
+									Parts: []w.FieldPart{
+										w.Line{
+											Items: []w.LinePart{
+												w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+												w.Button{Label: "Copy", Small: true},
+												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
+											},
+											Gap: w.LineGap8,
+										},
+										w.FieldHint{
+											Parts: []w.Inline{
+												w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
+											},
+										},
+									},
+									Width: w.FieldMax640Fill460,
+								},
+							},
+							Variant: w.FormBottom12,
+						},
+						w.Msg{
+							Parts: []w.MsgPart{
+								w.Text("Changing your Carrel password does "),
+								w.Strong("not"),
+								w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+							},
+							Tone: w.MsgAccent,
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.Table{
+							Cols: []w.TableCol{
+								{Label: "Device"},
+								{Label: "What it can see and do"},
+								{Label: "Created", Rank: w.Rank4, Secondary: true},
+								{Label: "Last request", Secondary: true},
+								{Width: w.Col90},
+							},
+							Rows: []w.TableRow{
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Телефон · DAVx5"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{
+															Items: []w.LinePart{
+																w.Mark{Colour: "#4A6B52"},
+																w.Mark{Colour: "#3F6E8C"},
+																w.Mark{Colour: "#6B4E7A"},
+																w.Mark{Colour: "#A05A2C"},
+															},
+															Gap: w.LineGap3,
+														},
+														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
+														w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 09:31")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Ноутбук · Thunderbird"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+														w.Mono{Text: "all kinds", Variant: w.Mono11},
+														w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-06-02")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-15 08:02")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+								{
+									Cells: []w.TableCell{
+										{Parts: []w.CellPart{w.TableFile{Icon: "device", Name: "Планшет · Календарь iOS"}}},
+										{
+											Parts: []w.CellPart{
+												w.CellWrap{
+													Items: []w.CellPart{
+														w.Line{
+															Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
+															Gap:   w.LineGap3,
+														},
+														w.Mono{Text: "Calendars", Variant: w.Mono11},
+														w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+														w.Seg{
+															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Variant: w.SegCompact,
+														},
+													},
+												},
+											},
+										},
+										{Parts: []w.CellPart{w.Text("2026-07-19")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("2026-08-14 21:15")}, Mono: true},
+										{Parts: []w.CellPart{w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true}}, Acts: true},
+									},
+								},
+							},
+							Variant: w.TableFit,
+						},
+					},
+				},
+				Height: w.ShellHeight560,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Title: "What the client sees",
+					Head: []w.SheetHeadPart{
+						w.Dim{
+							Parts:   []w.Inline{w.Text("https://carrel.example/dav/")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+							Place:   w.Pushed,
+						},
+					},
+					Body: []w.SheetPart{
+						w.Tree{
+							Rows: []w.TreeRow{
+								{
+									Icon:  "file",
+									Label: "/dav/",
+									Code:  true,
+									Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11},
+								},
+								{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},
+								{
+									Icon:   "cal",
+									Label:  "cal/",
+									Code:   true,
+									Indent: w.TreeLevel22,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Calendars · events, tasks, notes")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#4A6B52"},
+									Label:  "c/k4f2/%2F…%2Fpersonal%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Личный")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#3F6E8C"},
+									Label:  "c/k4f2/%2F…%2Fwork%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Работа")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#6B4E7A"},
+									Label:  "c/r9a1/%2Fmix%2Fprojects%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Проекты")}, Size: w.Dim11},
+								},
+								{
+									Icon:   "con",
+									Label:  "card/",
+									Code:   true,
+									Indent: w.TreeLevel22,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Address books")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#4A6B52"},
+									Label:  "c/k4f2/%2F…%2Fcontacts%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Контакты")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#6B4E7A"},
+									Label:  "c/r9a1/%2Fmix%2Fteam%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Команда")}, Size: w.Dim11},
+								},
+								{
+									Icon:   "file",
+									Label:  "files/",
+									Code:   true,
+									Indent: w.TreeLevel22,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Files · plain WebDAV")}, Size: w.Dim11},
+								},
+								{
+									Mark:   &w.Mark{Colour: "#4A6B52"},
+									Label:  "c/s3c8/%2FDocuments%2F/",
+									Code:   true,
+									Indent: w.TreeLevel44,
+									Trail:  w.Dim{Parts: []w.Inline{w.Text("Documents")}, Size: w.Dim11},
+								},
+							},
+							Variant: w.TreeNarrow,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/davloom"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+				Pad: w.ScrimPad26,
 			},
 		},
 	}

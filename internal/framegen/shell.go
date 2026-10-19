@@ -197,8 +197,6 @@ func (g *gen) main(e *El) string {
 		switch {
 		case k.Has("tc-list__group"):
 			items = append(items, g.listGroup(k))
-		case k.Has("tc-main__tree"):
-			items = append(items, "w.MainTree{Tree: "+g.tree(k.Els()[0])+"}")
 		case k.Has("tc-field__hint--gutter"):
 			items = append(items, "w.MainHint{Text: "+q(k.Text())+"}")
 		case k.Has("tc-nav--bottom"):

@@ -18,15 +18,6 @@ func (g ListGroup) html(mix) string {
 	return s + `</div>`
 }
 
-// MainTree is a tree set in a page with the page's gutters.
-type MainTree struct {
-	Tree Tree
-}
-
-func (t MainTree) html(mix) string {
-	return `<div class="tc-main__tree">` + t.Tree.html(nil) + `</div>`
-}
-
 // MainHint is a line of explanation in a page, set with the page's gutters.
 type MainHint struct {
 	Text string
@@ -88,7 +79,6 @@ func (List) mainPart()      {}
 func (ListGroup) mainPart() {}
 func (Form) mainPart()      {}
 func (FormFoot) mainPart()  {}
-func (MainTree) mainPart()  {}
 func (MainHint) mainPart()  {}
 func (RailSec) mainPart()   {}
 func (Zone) mainPart()      {}
