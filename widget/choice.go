@@ -11,6 +11,11 @@ type SegOption struct {
 	Value string // what the option sends when the switch has a Name
 	Href  string // the option is a link: a bar's order or filter by kind
 	Count string // how many the option holds, after its label ("All 24")
+	// Form makes the option a button that sends that form (its ID) to To:
+	// a davloom device's access — read only or read and write — chosen by
+	// a POST of its own, without a script too (Carrel's task 215).
+	Form string
+	To   string
 }
 
 // SegVariant is the drawn size and alignment of a switch.
@@ -144,6 +149,11 @@ func (g Seg) seg(m mix) string {
 				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
 			}
 			s.WriteString(esc(o.label()) + `</a>`)
+			continue
+		}
+		if o.Form != "" {
+			s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="submit"` + attr("form", o.Form) + attr("formaction", o.To) +
+				attr("aria-pressed", boolText(o.On)) + attr("aria-label", pick(o.Label == "", o.Title)) + `>` + esc(o.Label) + `</button>`)
 			continue
 		}
 		s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="button" role="radio"` +

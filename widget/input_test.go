@@ -36,3 +36,13 @@ func TestSheetIDWithoutAction(t *testing.T) {
 		t.Errorf("a sheet that is no form does not carry its id: %s", got)
 	}
 }
+
+func TestSegOptionForm(t *testing.T) {
+	got := (Seg{Options: []SegOption{{Label: "read only", Form: "acts", To: "/a?op=read"}, {Label: "read and write", On: true, Form: "acts", To: "/a?op=write"}}}).Render()
+	for _, want := range []string{`<button class="tc-seg__opt" type="submit" form="acts" formaction="/a?op=read" aria-pressed="false">read only</button>`,
+		`<button class="is-on tc-seg__opt" type="submit" form="acts" formaction="/a?op=write" aria-pressed="true">read and write</button>`} {
+		if !strings.Contains(got, want) {
+			t.Errorf("an option that sends a form: want %s in %s", want, got)
+		}
+	}
+}

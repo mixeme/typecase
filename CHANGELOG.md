@@ -83,6 +83,9 @@ do, not what the authors did.
 
 ### Added
 
+- **`SegOption.Form`, `SegOption.To`** — an option of a switch that sends
+  a form to its address, without a script too (Carrel's task 215): a
+  davloom device's access, read only or read and write, is a POST each.
 - **`FileField.Taken` and `Queue.Taken`** — the taken names asked before
   the files go (Carrel's task 214: the server keeps nothing of a file while
   a question waits). With the live layer a form whose queue shows it asks
@@ -831,6 +834,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A davloom device's row** (Carrel's task 215): its access options send
+  the page's `davloom-acts` form to their own address; «… collections ·
+  Change» is a link to the device's scope sheet. The look is the same
+  (pixel pair of `s-davloom-1`).
 - **The account: the own session's End off with its reason; the password
   change in two cases** (Carrel's task 193; accepted by the owner 19.10).
   The own session's End is off — «This is the session you are using: sign

@@ -136,9 +136,22 @@ func Davloom1() Screen {
 														Gap: w.LineGap3,
 													},
 													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
-													w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "5 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=phone",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+														Options: []w.SegOption{
+															{Label: "read only", Form: "davloom-acts", To: "/app/settings/davloom?op=read&device=phone"},
+															{
+																Label: "read and write",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=write&device=phone",
+																On:    true,
+															},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -159,9 +172,22 @@ func Davloom1() Screen {
 												Items: []w.CellPart{
 													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
 													w.Mono{Text: "all kinds", Variant: w.Mono11},
-													w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "12 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=laptop",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Options: []w.SegOption{
+															{
+																Label: "read only",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=read&device=laptop",
+																On:    true,
+															},
+															{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=laptop"},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -185,9 +211,22 @@ func Davloom1() Screen {
 														Gap:   w.LineGap3,
 													},
 													w.Mono{Text: "Calendars", Variant: w.Mono11},
-													w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "3 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=tablet",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Options: []w.SegOption{
+															{
+																Label: "read only",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=read&device=tablet",
+																On:    true,
+															},
+															{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=tablet"},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -201,6 +240,11 @@ func Davloom1() Screen {
 							},
 						},
 						Variant: w.TableFit,
+					},
+					w.PostForm{
+						ID:     "davloom-acts",
+						Action: "/app/settings/davloom",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},
@@ -786,9 +830,22 @@ func Davloom7() Screen {
 															Gap: w.LineGap3,
 														},
 														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
-														w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "5 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=phone",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+															Options: []w.SegOption{
+																{Label: "read only", Form: "davloom-acts", To: "/app/settings/davloom?op=read&device=phone"},
+																{
+																	Label: "read and write",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=write&device=phone",
+																	On:    true,
+																},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -809,9 +866,22 @@ func Davloom7() Screen {
 													Items: []w.CellPart{
 														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
 														w.Mono{Text: "all kinds", Variant: w.Mono11},
-														w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "12 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=laptop",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Options: []w.SegOption{
+																{
+																	Label: "read only",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=read&device=laptop",
+																	On:    true,
+																},
+																{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=laptop"},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -835,9 +905,22 @@ func Davloom7() Screen {
 															Gap:   w.LineGap3,
 														},
 														w.Mono{Text: "Calendars", Variant: w.Mono11},
-														w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "3 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=tablet",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Options: []w.SegOption{
+																{
+																	Label: "read only",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=read&device=tablet",
+																	On:    true,
+																},
+																{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=tablet"},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -851,6 +934,11 @@ func Davloom7() Screen {
 								},
 							},
 							Variant: w.TableFit,
+						},
+						w.PostForm{
+							ID:     "davloom-acts",
+							Action: "/app/settings/davloom",
+							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						},
 					},
 				},
@@ -1151,9 +1239,22 @@ func Davloom8() Screen {
 														Gap: w.LineGap3,
 													},
 													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
-													w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "5 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=phone",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+														Options: []w.SegOption{
+															{Label: "read only", Form: "davloom-acts", To: "/app/settings/davloom?op=read&device=phone"},
+															{
+																Label: "read and write",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=write&device=phone",
+																On:    true,
+															},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -1174,9 +1275,22 @@ func Davloom8() Screen {
 												Items: []w.CellPart{
 													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
 													w.Mono{Text: "all kinds", Variant: w.Mono11},
-													w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "12 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=laptop",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Options: []w.SegOption{
+															{
+																Label: "read only",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=read&device=laptop",
+																On:    true,
+															},
+															{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=laptop"},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -1200,9 +1314,22 @@ func Davloom8() Screen {
 														Gap:   w.LineGap3,
 													},
 													w.Mono{Text: "Calendars", Variant: w.Mono11},
-													w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+													w.Button{
+														Label: "3 collections · Change",
+														Small: true,
+														Place: w.Pushed,
+														Href:  "/app/settings/davloom/scope?device=tablet",
+													},
 													w.Seg{
-														Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+														Options: []w.SegOption{
+															{
+																Label: "read only",
+																Form:  "davloom-acts",
+																To:    "/app/settings/davloom?op=read&device=tablet",
+																On:    true,
+															},
+															{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=tablet"},
+														},
 														Variant: w.SegCompact,
 													},
 												},
@@ -1216,6 +1343,11 @@ func Davloom8() Screen {
 							},
 						},
 						Variant: w.TableFit,
+					},
+					w.PostForm{
+						ID:     "davloom-acts",
+						Action: "/app/settings/davloom",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},
@@ -1356,9 +1488,22 @@ func Davloom9() Screen {
 															Gap: w.LineGap3,
 														},
 														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
-														w.Button{Label: "5 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "5 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=phone",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only"}, {Label: "read and write", On: true}},
+															Options: []w.SegOption{
+																{Label: "read only", Form: "davloom-acts", To: "/app/settings/davloom?op=read&device=phone"},
+																{
+																	Label: "read and write",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=write&device=phone",
+																	On:    true,
+																},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -1379,9 +1524,22 @@ func Davloom9() Screen {
 													Items: []w.CellPart{
 														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
 														w.Mono{Text: "all kinds", Variant: w.Mono11},
-														w.Button{Label: "12 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "12 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=laptop",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Options: []w.SegOption{
+																{
+																	Label: "read only",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=read&device=laptop",
+																	On:    true,
+																},
+																{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=laptop"},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -1405,9 +1563,22 @@ func Davloom9() Screen {
 															Gap:   w.LineGap3,
 														},
 														w.Mono{Text: "Calendars", Variant: w.Mono11},
-														w.Button{Label: "3 collections · Change", Small: true, Place: w.Pushed},
+														w.Button{
+															Label: "3 collections · Change",
+															Small: true,
+															Place: w.Pushed,
+															Href:  "/app/settings/davloom/scope?device=tablet",
+														},
 														w.Seg{
-															Options: []w.SegOption{{Label: "read only", On: true}, {Label: "read and write"}},
+															Options: []w.SegOption{
+																{
+																	Label: "read only",
+																	Form:  "davloom-acts",
+																	To:    "/app/settings/davloom?op=read&device=tablet",
+																	On:    true,
+																},
+																{Label: "read and write", Form: "davloom-acts", To: "/app/settings/davloom?op=write&device=tablet"},
+															},
 															Variant: w.SegCompact,
 														},
 													},
@@ -1421,6 +1592,11 @@ func Davloom9() Screen {
 								},
 							},
 							Variant: w.TableFit,
+						},
+						w.PostForm{
+							ID:     "davloom-acts",
+							Action: "/app/settings/davloom",
+							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						},
 					},
 				},

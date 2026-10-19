@@ -608,6 +608,12 @@ func (g *gen) seg(x *El) string {
 		if o.Tag == "a" {
 			f = append(f, "Href: "+q(o.Attr("href")))
 		}
+		if o.Tag == "button" && o.Attr("type") == "submit" {
+			f = append(f, "Form: "+q(o.Attr("form")))
+			if v := o.Attr("formaction"); v != "" {
+				f = append(f, "To: "+q(v))
+			}
+		}
 		if o.Has("is-on") || (box != nil && box.HasAttr("checked")) {
 			f = append(f, "On: true")
 		}
