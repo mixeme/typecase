@@ -341,6 +341,12 @@ func Files1() Screen {
 						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
+					w.PostForm{
+						ID:        "post-upload",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments",
+						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+						Multipart: true,
+					},
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Text("Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so."),
@@ -352,6 +358,24 @@ func Files1() Screen {
 							w.Text("Dropping files onto the window and the upload queue need scripts, and this page runs none. Upload sends the files; a name that is already taken is refused rather than overwritten."),
 						},
 						NoScript: true,
+					},
+					w.Queue{
+						Title:    "Uploading {done} of {count}",
+						Total:    w.Mono{Text: "{sent}", Variant: w.MonoDusty, Place: w.Pushed},
+						Toggle:   w.Button{Label: "Hide", Small: true},
+						Progress: "post-upload",
+						Row:      &w.QueueItem{Name: "{name}", Meta: "{size} · {percent}%", Meter: &w.Meter{Percent: 0, Track: 100}},
+						Taken: &w.QueueItem{
+							Name:   "{name}",
+							Meta:   "name taken",
+							Failed: true,
+							Acts: []w.Button{
+								w.Button{Label: "Keep both", Small: true, Name: "answer", Value: "keep"},
+								w.Button{Label: "Replace", Small: true, Name: "answer", Value: "replace"},
+								w.Button{Label: "Skip", Small: true, Name: "answer", Value: "skip"},
+							},
+						},
+						Fold: &w.QueueFold{Hide: "Hide", Show: "Show", Total: "{percent}%"},
 					},
 				},
 			},
@@ -741,6 +765,12 @@ func Files2() Screen {
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.PostForm{
+						ID:        "post-upload",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments",
+						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+						Multipart: true,
+					},
+					w.PostForm{
 						ID:        "taken-release",
 						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
@@ -773,6 +803,18 @@ func Files2() Screen {
 								},
 							},
 							{Name: "архив-2025.zip", Meta: "the server needs the size", Failed: true},
+						},
+						Progress: "post-upload",
+						Row:      &w.QueueItem{Name: "{name}", Meta: "{size} · {percent}%", Meter: &w.Meter{Percent: 0, Track: 100}},
+						Taken: &w.QueueItem{
+							Name:   "{name}",
+							Meta:   "name taken",
+							Failed: true,
+							Acts: []w.Button{
+								w.Button{Label: "Keep both", Small: true, Name: "answer", Value: "keep"},
+								w.Button{Label: "Replace", Small: true, Name: "answer", Value: "replace"},
+								w.Button{Label: "Skip", Small: true, Name: "answer", Value: "skip"},
+							},
 						},
 						Fold: &w.QueueFold{Hide: "Hide", Show: "Show", Total: "{percent}%"},
 					},

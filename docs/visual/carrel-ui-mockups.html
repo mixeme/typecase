@@ -9301,8 +9301,10 @@ Read  2 min ago</div>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <form class="tc-post" id="post-upload" action="/app/files/sftpgo/documents/upload/carrel/attachments" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-msg tc-js">Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so.</div>
         <div class="tc-msg tc-nojs">Dropping files onto the window and the upload queue need scripts, and this page runs none. Upload sends the files; a name that is already taken is refused rather than overwritten.</div>
+        <div class="tc-queue" data-tc-progress="post-upload" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%" hidden><div class="tc-queue__head"><b>Uploading {done} of {count}</b><span class="tc-mono tc-push tc-mono--dusty">{sent}</span><button class="tc-btn is-sm" type="button">Hide</button></div><template data-tc-row><li><div class="tc-queue__row"><span class="tc-queue__name">{name}</span><span class="tc-queue__meta">{size} · {percent}%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="0%"></i></span></li></template><template data-tc-taken><li><div class="tc-queue__row"><span class="tc-dim--danger">{name}</span><span class="tc-dim--danger">name taken</span></div><div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button" name="answer" value="keep">Keep both</button><button class="tc-btn is-sm" type="button" name="answer" value="replace">Replace</button><button class="tc-btn is-sm" type="button" name="answer" value="skip">Skip</button></div></li></template><ul class="tc-queue__list"></ul></div>
       </div>
 
       <div class="tc-side">
@@ -9370,8 +9372,8 @@ Read  2 min ago</div>
     <div class="frame-label"><span>Upload · стрелка</span><span class="frag">меню</span><i>что загружать</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w212">
-        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-doc"/></svg>Files<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" multiple></label>
-        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-file"/></svg>Folder<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Folder" data-tc-size="size" multiple webkitdirectory></label>
+        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-doc"/></svg>Files<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" data-tc-taken="/app/files/sftpgo/documents/upload/carrel/attachments?op=taken" multiple></label>
+        <label class="tc-menu__item" role="menuitem"><svg><use href="#i-file"/></svg>Folder<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Folder" data-tc-size="size" data-tc-taken="/app/files/sftpgo/documents/upload/carrel/attachments?op=taken" multiple webkitdirectory></label>
         <button class="tc-menu__item tc-nojs" type="submit" form="post-upload" role="menuitem">Upload</button>
       </div>
     </div>
@@ -9821,9 +9823,10 @@ Read  2 min ago</div>
           </tbody>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <form class="tc-post" id="post-upload" action="/app/files/sftpgo/documents/upload/carrel/attachments" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <form class="tc-post" id="taken-release" action="/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-queue" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%">
-          <div class="tc-queue__head"><b>Uploading 2 of 4</b><span class="tc-mono tc-push tc-mono--dusty">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div>
+        <div class="tc-queue" data-tc-progress="post-upload" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%">
+          <div class="tc-queue__head"><b>Uploading 2 of 4</b><span class="tc-mono tc-push tc-mono--dusty">12.4 MB</span><button class="tc-btn is-sm" type="button">Hide</button></div><template data-tc-row><li><div class="tc-queue__row"><span class="tc-queue__name">{name}</span><span class="tc-queue__meta">{size} · {percent}%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="0%"></i></span></li></template><template data-tc-taken><li><div class="tc-queue__row"><span class="tc-dim--danger">{name}</span><span class="tc-dim--danger">name taken</span></div><div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button" name="answer" value="keep">Keep both</button><button class="tc-btn is-sm" type="button" name="answer" value="replace">Replace</button><button class="tc-btn is-sm" type="button" name="answer" value="skip">Skip</button></div></li></template>
           <ul class="tc-queue__list">
             <li><div class="tc-queue__row"><span class="tc-queue__name">отчёт-июль.pdf</span><span class="tc-queue__meta">4.1 MB · done</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="100%"></i></span></li>
             <li><div class="tc-queue__row"><span class="tc-queue__name">плакат.png</span><span class="tc-queue__meta">8.3 MB · 62%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="62%"></i></span></li>
@@ -28157,7 +28160,9 @@ Read  2 min ago</div>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           </div>
         </div>
-        <div class="tc-empty"><b>This folder is empty.</b> Upload files into it, or drop them onto the window. <label class="tc-btn is-primary"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" multiple></label> <button class="tc-btn tc-nojs" type="submit" form="post-upload">Send</button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
+        <div class="tc-empty"><b>This folder is empty.</b> Upload files into it, or drop them onto the window. <label class="tc-btn is-primary"><svg viewBox="0 0 24 24"><use href="#i-upload"/></svg>Upload<input class="tc-file" type="file" name="file" form="post-upload" aria-label="Files" data-tc-size="size" data-tc-taken="/app/files/sftpgo/documents/upload/carrel/attachments/2026-08?op=taken" multiple></label> <button class="tc-btn tc-nojs" type="submit" form="post-upload">Send</button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New folder</button></div>
+        <form class="tc-post" id="post-upload" action="/app/files/sftpgo/documents/upload/carrel/attachments/2026-08" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
+        <div class="tc-queue" data-tc-progress="post-upload" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%" hidden><div class="tc-queue__head"><b>Uploading {done} of {count}</b><span class="tc-mono tc-push tc-mono--dusty">{sent}</span><button class="tc-btn is-sm" type="button">Hide</button></div><template data-tc-row><li><div class="tc-queue__row"><span class="tc-queue__name">{name}</span><span class="tc-queue__meta">{size} · {percent}%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="0%"></i></span></li></template><template data-tc-taken><li><div class="tc-queue__row"><span class="tc-dim--danger">{name}</span><span class="tc-dim--danger">name taken</span></div><div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button" name="answer" value="keep">Keep both</button><button class="tc-btn is-sm" type="button" name="answer" value="replace">Replace</button><button class="tc-btn is-sm" type="button" name="answer" value="skip">Skip</button></div></li></template><ul class="tc-queue__list"></ul></div>
       </div>
     </div>
   </div>

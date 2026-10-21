@@ -86,6 +86,12 @@ do, not what the authors did.
 
 ### Added
 
+- **The answers about taken names go before the files** (Carrel's task
+  219): `taken.<name>` stands before the file field — with its `form`, as
+  the sizes do — so a server that reads the body as a stream has the answer
+  when the file comes. An earlier asking's answers are dropped.
+- The frame generator reads a queue's `Progress`, `Zone`, `Row` and `Taken`.
+
 - **`PickOption.Disables`** — an option of a pick switches fields of its
   form off while it is chosen (`data-tc-disables` on an option; Carrel's
   task 218): «None — up to 16 MB» and the folder for a large archive.
@@ -860,6 +866,14 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **A folder's upload queue waits in its frames** (Carrel's task 219):
+  `s-files-1` and the empty folder `states-32` carry the hidden queue of
+  the upload (`data-tc-progress="post-upload"`, the row and the taken-name
+  templates — Keep both · Replace · Skip) and the `post-upload` form;
+  `s-files-2`'s queue is the same with the server's rows; the Files and
+  Folder fields (`s-files-8`, `states-32`) ask about taken names first
+  (`data-tc-taken`). Pixel for pixel the same.
 
 - **A new device's addresses: «ro» at every read-only collection**
   (Carrel's task 217): `s-plan-4`, `-5` — «Общие с семьёй» and «Команда»

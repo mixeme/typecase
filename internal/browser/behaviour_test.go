@@ -2716,7 +2716,8 @@ func TestFileRanges(t *testing.T) {
 // TestFileTaken: a file field with data-tc-taken asks which picked names
 // are taken before the files go (Carrel's task 214): the taken one gets the
 // queue's question row, nothing is sent until it is answered; Replace sends
-// both with «taken.<name>=replace», Skip sends the other alone.
+// both with «taken.<name>=replace» before them (Carrel's task 219), Skip
+// sends the other alone.
 func TestFileTaken(t *testing.T) {
 	needChrome(t)
 	h := browser.NewHarness(t)
@@ -2730,15 +2731,32 @@ func TestFileTaken(t *testing.T) {
 		_, _ = w.Write([]byte("b.txt\n"))
 	})
 	upload := h.RegisterStream("upload", func(w http.ResponseWriter, r *http.Request) {
-		if err := r.ParseMultipartForm(1 << 20); err != nil {
+		// the body read as a stream, as the server reads it: an answer that
+		// comes after its file is too late (Carrel's task 219)
+		mr, err := r.MultipartReader()
+		if err != nil {
 			http.Error(w, err.Error(), 400)
 			return
 		}
 		var names []string
-		for _, fh := range r.MultipartForm.File["file"] {
-			names = append(names, fh.Filename)
+		answer := ""
+		for {
+			part, err := mr.NextPart()
+			if err != nil {
+				break
+			}
+			switch part.FormName() {
+			case "file":
+				names = append(names, part.FileName())
+			case "taken.b.txt":
+				v, _ := io.ReadAll(part)
+				answer = string(v)
+				if len(names) > 0 {
+					answer += " (after a file)"
+				}
+			}
 		}
-		got = append(got, strings.Join(names, ",")+" "+r.FormValue("taken.b.txt"))
+		got = append(got, strings.Join(names, ",")+" "+answer)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_, _ = w.Write([]byte(`<!doctype html><p id="done">uploaded</p>`))
 	})

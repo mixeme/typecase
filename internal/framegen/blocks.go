@@ -152,24 +152,8 @@ func (g *gen) queue(e *El) string {
 	h := e.Kid("tc-queue__head")
 	f := []string{"Title: " + q(h.Els()[0].Text()), "Total: w.Mono{Text: " + q(h.Kid("tc-mono").Text()) + ", Variant: w.MonoDusty, Place: w.Pushed}",
 		"Toggle: " + g.button(h.Kid("tc-btn"))}
-	if l := e.Kid("tc-queue__list"); l != nil {
-		var its []string
-		for _, li := range l.Els() {
-			row := li.Kid("tc-queue__row")
-			failed := row.Kid("tc-dim--danger") != nil
-			x := []string{"Name: " + q(row.Els()[0].Text()), "Meta: " + q(row.Els()[1].Text())}
-			if m := li.Kid("tc-meter"); m != nil {
-				x = append(x, "Meter: &"+g.meter(m))
-			}
-			if failed {
-				x = append(x, "Failed: true")
-			}
-			if a := li.Kid("tc-queue__acts"); a != nil {
-				x = append(x, "Acts: []w.Button{"+g.buttons(a.Els())+"}")
-			}
-			its = append(its, "{"+join(x, ", ")+"}")
-		}
-		f = append(f, "Items: []w.QueueItem{"+join(its, ", ")+"}")
+	if l := e.Kid("tc-queue__list"); l != nil && len(l.Els()) > 0 {
+		f = append(f, "Items: []w.QueueItem{"+g.each(l.Els(), g.queueItem)+"}")
 	}
 	if e.Has("is-min") {
 		f = append(f, "Min: true")
@@ -177,10 +161,45 @@ func (g *gen) queue(e *El) string {
 	for _, v := range allOf(e, []kv{{"tc-queue--flush-full", "QueueFlushFull"}, {"tc-queue--flush-wauto", "QueueFlushAuto"}}) {
 		f = append(f, "Variant: w."+v)
 	}
+	if v := e.Attr("data-tc-zone"); v != "" {
+		f = append(f, "Zone: "+q(v))
+	}
+	if v := e.Attr("data-tc-progress"); v != "" {
+		f = append(f, "Progress: "+q(v))
+	}
+	// the rows the live layer prints: a file that goes, a name that is taken
+	for _, k := range e.Els() {
+		if k.Tag != "template" || len(k.Els()) == 0 {
+			continue
+		}
+		if k.HasAttr("data-tc-row") {
+			f = append(f, "Row: &w.QueueItem"+g.queueItem(k.Els()[0]))
+		}
+		if k.HasAttr("data-tc-taken") {
+			f = append(f, "Taken: &w.QueueItem"+g.queueItem(k.Els()[0]))
+		}
+	}
 	if h := e.Attr("data-tc-fold-hide"); h != "" {
 		f = append(f, "Fold: &w.QueueFold{Hide: "+q(h)+", Show: "+q(e.Attr("data-tc-fold-show"))+", Total: "+q(e.Attr("data-tc-fold-total"))+"}")
 	}
 	return "w.Queue{" + join(f, ", ") + "}"
+}
+
+// queueItem is a row of a queue, «{…}» without its type.
+func (g *gen) queueItem(li *El) string {
+	row := li.Kid("tc-queue__row")
+	failed := row.Kid("tc-dim--danger") != nil
+	x := []string{"Name: " + q(row.Els()[0].Text()), "Meta: " + q(row.Els()[1].Text())}
+	if m := li.Kid("tc-meter"); m != nil {
+		x = append(x, "Meter: &"+g.meter(m))
+	}
+	if failed {
+		x = append(x, "Failed: true")
+	}
+	if a := li.Kid("tc-queue__acts"); a != nil {
+		x = append(x, "Acts: []w.Button{"+g.buttons(a.Els())+"}")
+	}
+	return "{" + join(x, ", ") + "}"
 }
 
 func (g *gen) stat(e *El) string {

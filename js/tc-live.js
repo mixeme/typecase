@@ -156,9 +156,15 @@
 		var files = Array.prototype.slice.call(input.files), nameOf = function (f) {
 			return f.webkitRelativePath || f.name;
 		};
+		// the answers of an earlier asking are not this one's
+		Array.prototype.filter.call(form.elements, function (x) {
+			return x.hasAttribute("data-tc-answer");
+		}).forEach(function (x) {
+			x.remove();
+		});
 		var names = new FormData();
 		Array.prototype.forEach.call(form.elements, function (x) {
-			if (x.type === "hidden" && x.name && !x.hasAttribute("data-tc-answer")) names.append(x.name, x.value);
+			if (x.type === "hidden" && x.name) names.append(x.name, x.value);
 		});
 		files.forEach(function (f) {
 			names.append("name", nameOf(f));
@@ -199,7 +205,11 @@
 							h.name = "taken." + nameOf(f);
 							h.value = b.value;
 							h.setAttribute("data-tc-answer", "");
-							form.appendChild(h);
+							// before the files, as their sizes: a server that
+							// reads the body as a stream knows what to do with a
+							// file when it comes (Carrel's task 219)
+							if (input.hasAttribute("form")) h.setAttribute("form", input.getAttribute("form"));
+							input.parentNode.insertBefore(h, input);
 						}
 						row.remove();
 						if (--left) return;
