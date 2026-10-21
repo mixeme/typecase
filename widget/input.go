@@ -167,6 +167,11 @@ type PickOption struct {
 	// shows and hides them as the choice changes, and a hidden one is not
 	// sent. Without a script the server answers with the form as chosen.
 	Shows string
+	// Disables names the fields of the form that are off while this option
+	// is chosen (data-tc-disables), as Check.Disables: «None — up to 16 MB»
+	// and the folder for a large archive (Carrel's task 218). The library's
+	// script switches them as the choice changes; an off field is not sent.
+	Disables string
 }
 
 func (p Pick) html(m mix) string {
@@ -180,7 +185,7 @@ func (p Pick) html(m mix) string {
 		for _, o := range p.Options {
 			// the value always: an option without one sends its words
 			// («Do not rewrite» is the empty value, not those words)
-			s.WriteString(`<option value="` + esc(o.Value) + `"` + flag("selected", o.On) + flag("disabled", o.Unavailable) + attr("data-tc-shows", o.Shows) + `>` + esc(o.Label) + `</option>`)
+			s.WriteString(`<option value="` + esc(o.Value) + `"` + flag("selected", o.On) + flag("disabled", o.Unavailable) + attr("data-tc-shows", o.Shows) + attr("data-tc-disables", o.Disables) + `>` + esc(o.Label) + `</option>`)
 		}
 		s.WriteString(`</select></span>`)
 		return s.String()

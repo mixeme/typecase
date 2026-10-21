@@ -220,7 +220,9 @@ func (d Dialog) html(m mix) string {
 	}
 	s.WriteString(body.String())
 	s.WriteString(`</` + tag + `>`)
-	return s.String()
+	// a file field among its parts: the form sends multipart (Carrel's
+	// task 218: the archive of a restore from this computer)
+	return multipart(s.String())
 }
 
 func (Dialog) mainPart() {}

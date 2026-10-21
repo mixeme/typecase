@@ -18369,9 +18369,9 @@ jobs:
       <div class="tc-card">
         <div class="tc-rubric">From this computer</div>
         <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--top">
-          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive" data-tc-ranges="/app/settings/backup/restore?op=ranges"></label></span></div>
-          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="">None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents" selected>sftpgo · vps · Documents</option></select></span></div>
+          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="" data-tc-disables="folder">None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents" selected>sftpgo · vps · Documents</option></select></span></div>
           <div class="tc-field tc-field--lg"><label>Folder in it</label><input class="tc-in is-mono" type="text" name="folder" value="/carrel/restore" aria-label="Folder in it"><span class="tc-field__hint">A larger archive is put here, read from there and deleted after the restore.</span></div>
+          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive" data-tc-ranges="/app/settings/backup/restore?op=ranges"></label></span></div>
         </div>
       </div>
       <div class="tc-card">
@@ -18384,7 +18384,7 @@ jobs:
     </form></div></div>
   </div>
 </div>
-<figcaption><b>Архив с этого компьютера на диск Carrel не копируется</b> (решение владельца 19.10, S-24.3). До 16&nbsp;MB он держится в памяти сеанса; больший уходит тем же потоком в папку хранилища, выбранную здесь, и читается оттуда — только нужное. Хранилище — первым полем выбора «None — up to 16 MB»; папка — моноширинно, с подсказкой: архив кладётся сюда и после восстановления удаляется (владелец, 19.10). Пароль архива и Open the manifest — как у «From a job».</figcaption>
+<figcaption><b>Архив с этого компьютера на диск Carrel не копируется</b> (решение владельца 19.10, S-24.3). <b>Поле архива — последним в карточке</b>: без сценария браузер шлёт части формы по порядку, и хранилище с папкой приходят раньше файла — серверу есть куда пустить больший архив. «None — up to 16 MB» выключает папку. До 16&nbsp;MB он держится в памяти сеанса; больший уходит тем же потоком в папку хранилища, выбранную здесь, и читается оттуда — только нужное. Хранилище — первым полем выбора «None — up to 16 MB»; папка — моноширинно, с подсказкой: архив кладётся сюда и после восстановления удаляется (владелец, 19.10). Пароль архива и Open the manifest — как у «From a job».</figcaption>
 </figure>
 
 <figure>
@@ -18434,9 +18434,9 @@ jobs:
         <div class="tc-rubric">From this computer</div>
         <div class="tc-msg is-alert tc-msg--flush-bot12">The archive is larger than 16 MB. Choose a folder of your storage for it, or put it there and choose <b>From a server</b>.</div>
         <div class="tc-card__fields tc-card__fields--gap10-12 tc-card__fields--top">
-          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive" data-tc-ranges="/app/settings/backup/restore?op=ranges"></label></span></div>
-          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="" selected>None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents">sftpgo · vps · Documents</option></select></span></div>
+          <div class="tc-field tc-field--md"><label>Storage for a large archive</label><span class="tc-in is-pick"><select class="tc-in__list" name="store" aria-label="Storage for a large archive"><option value="" selected data-tc-disables="folder">None — up to 16 MB</option><option value="nextcloud|files">nextcloud · Files</option><option value="sftpgo|documents">sftpgo · vps · Documents</option></select></span></div>
           <div class="tc-field tc-field--lg"><label>Folder in it</label><input class="tc-in is-mono" type="text" name="folder" value="/carrel/restore" aria-label="Folder in it" disabled><span class="tc-field__hint">A larger archive is put here, read from there and deleted after the restore.</span></div>
+          <div class="tc-field tc-field--full"><label>Archive</label><span class="tc-line tc-line--gap-8"><label class="tc-btn">Choose a file<input class="tc-file" type="file" name="file" accept=".zip" aria-label="Archive" data-tc-ranges="/app/settings/backup/restore?op=ranges"></label></span></div>
         </div>
       </div>
       <div class="tc-card">

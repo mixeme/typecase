@@ -2679,6 +2679,31 @@ func Backup15() Screen {
 									w.CardFields{
 										Items: []w.CardFieldsPart{
 											w.Field{
+												Label: "Storage for a large archive",
+												Parts: []w.FieldPart{
+													w.Pick{
+														Name: "store",
+														Options: []w.PickOption{
+															{Value: "", Label: "None — up to 16 MB", Disables: "folder"},
+															{Value: "nextcloud|files", Label: "nextcloud · Files"},
+															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true},
+														},
+														Label: "Storage for a large archive",
+													},
+												},
+												Width: w.FieldMD,
+											},
+											w.Field{
+												Label: "Folder in it",
+												Parts: []w.FieldPart{
+													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true},
+													w.FieldHint{
+														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
+													},
+												},
+												Width: w.FieldLG,
+											},
+											w.Field{
 												Label: "Archive",
 												Parts: []w.FieldPart{
 													w.Line{
@@ -2698,31 +2723,6 @@ func Backup15() Screen {
 													},
 												},
 												Width: w.FieldFull,
-											},
-											w.Field{
-												Label: "Storage for a large archive",
-												Parts: []w.FieldPart{
-													w.Pick{
-														Name: "store",
-														Options: []w.PickOption{
-															{Value: "", Label: "None — up to 16 MB"},
-															{Value: "nextcloud|files", Label: "nextcloud · Files"},
-															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents", On: true},
-														},
-														Label: "Storage for a large archive",
-													},
-												},
-												Width: w.FieldMD,
-											},
-											w.Field{
-												Label: "Folder in it",
-												Parts: []w.FieldPart{
-													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true},
-													w.FieldHint{
-														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
-													},
-												},
-												Width: w.FieldLG,
 											},
 										},
 										Wide: true,
@@ -2861,6 +2861,31 @@ func Backup16() Screen {
 									w.CardFields{
 										Items: []w.CardFieldsPart{
 											w.Field{
+												Label: "Storage for a large archive",
+												Parts: []w.FieldPart{
+													w.Pick{
+														Name: "store",
+														Options: []w.PickOption{
+															{Value: "", Label: "None — up to 16 MB", On: true, Disables: "folder"},
+															{Value: "nextcloud|files", Label: "nextcloud · Files"},
+															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents"},
+														},
+														Label: "Storage for a large archive",
+													},
+												},
+												Width: w.FieldMD,
+											},
+											w.Field{
+												Label: "Folder in it",
+												Parts: []w.FieldPart{
+													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true, Disabled: true},
+													w.FieldHint{
+														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
+													},
+												},
+												Width: w.FieldLG,
+											},
+											w.Field{
 												Label: "Archive",
 												Parts: []w.FieldPart{
 													w.Line{
@@ -2880,31 +2905,6 @@ func Backup16() Screen {
 													},
 												},
 												Width: w.FieldFull,
-											},
-											w.Field{
-												Label: "Storage for a large archive",
-												Parts: []w.FieldPart{
-													w.Pick{
-														Name: "store",
-														Options: []w.PickOption{
-															{Value: "", Label: "None — up to 16 MB", On: true},
-															{Value: "nextcloud|files", Label: "nextcloud · Files"},
-															{Value: "sftpgo|documents", Label: "sftpgo · vps · Documents"},
-														},
-														Label: "Storage for a large archive",
-													},
-												},
-												Width: w.FieldMD,
-											},
-											w.Field{
-												Label: "Folder in it",
-												Parts: []w.FieldPart{
-													w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder in it", Mono: true, Disabled: true},
-													w.FieldHint{
-														Parts: []w.Inline{w.Text("A larger archive is put here, read from there and deleted after the restore.")},
-													},
-												},
-												Width: w.FieldLG,
 											},
 										},
 										Wide: true,

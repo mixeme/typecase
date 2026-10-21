@@ -1754,6 +1754,52 @@ func TestFormRecount(t *testing.T) {
 	}
 }
 
+// TestPickDisables (Carrel's task 218): an option of a pick switches fields
+// of its form off while it is chosen — «None — up to 16 MB» and the folder
+// for a large archive; another option switches it on, and an off field is
+// not sent. The bite: without the library's script the field stays as the
+// server printed it.
+func TestPickDisables(t *testing.T) {
+	needChrome(t)
+	form := w.Form{Action: "/x", Items: []w.FormPart{
+		w.Field{Label: "Storage", Parts: []w.FieldPart{w.Pick{Name: "store", Label: "Storage", Options: []w.PickOption{
+			{Value: "", Label: "None — up to 16 MB", On: true, Disables: "folder"}, {Value: "nextcloud|files", Label: "nextcloud · Files"}}}}},
+		w.Field{Label: "Folder", Parts: []w.FieldPart{w.Input{Name: "folder", Value: "/carrel/restore", Label: "Folder"}}},
+	}}
+	body := `<div class="tc-root">` + form.Render() + `</div>`
+	const choose = `v => { const s = document.querySelector('[name="store"]'); s.value = v; s.dispatchEvent(new Event("change", {bubbles: true})); }`
+	const state = `(document.querySelector('[name="folder"]').disabled ? "off" : "on") + " | " + new URLSearchParams(new FormData(document.querySelector("form"))).toString()`
+	h := browser.NewHarness(t)
+	var start, chosen, back, bare string
+	if err := h.Run(h.RegisterPage("pick-disables", browser.PageHTML(body, "")), 900, 600,
+		chromedp.Evaluate(state, &start),
+		chromedp.Evaluate(`(`+choose+`)("nextcloud|files"); true`, nil),
+		chromedp.Evaluate(state, &chosen),
+		chromedp.Evaluate(`(`+choose+`)(""); true`, nil),
+		chromedp.Evaluate(state, &back),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(h.RegisterPage("pick-disables-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1)), 900, 600,
+		chromedp.Evaluate(`(`+choose+`)("nextcloud|files"); true`, nil),
+		chromedp.Evaluate(state, &bare),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if start != "off | store=" {
+		t.Errorf("as printed: %q; want the folder off and not sent", start)
+	}
+	if chosen != "on | store=nextcloud%7Cfiles&folder=%2Fcarrel%2Frestore" {
+		t.Errorf("a storage chosen: %q; want the folder on and sent", chosen)
+	}
+	if back != "off | store=" {
+		t.Errorf("None again: %q; want the folder off", back)
+	}
+	if bare != "on | store=nextcloud%7Cfiles&folder=%2Fcarrel%2Frestore" {
+		t.Errorf("without the script: %q; want the field as printed (on)", bare)
+	}
+}
+
 // TestPickShows (Carrel's task 156): an option of a pick shows fields of its
 // form while it is chosen — «Custom…» of a reminder opens the number and the
 // unit; another option hides them again, and a hidden field is not sent.

@@ -875,6 +875,23 @@
 	function initShows(root) {
 		root.querySelectorAll("select").forEach(function (list) {
 			if (list.querySelector("option[data-tc-shows]")) syncShows(list);
+			if (list.querySelector("option[data-tc-disables]")) syncPickDisables(list);
+		});
+	}
+
+	// An option of a pick switches fields of its form off while it is chosen
+	// (data-tc-disables, PickOption.Disables; Carrel's task 218): «None — up
+	// to 16 MB» and the folder for a large archive. The options not chosen
+	// switch theirs on first, then the chosen one off.
+	function syncPickDisables(list) {
+		var scope = list.form || document, opts = Array.prototype.slice.call(list.options);
+		opts.filter(function (o) { return !o.selected; }).concat(opts.filter(function (o) { return o.selected; })).forEach(function (o) {
+			(o.getAttribute("data-tc-disables") || "").split(/\s+/).forEach(function (name) {
+				if (!name) return;
+				scope.querySelectorAll('[name="' + name + '"]').forEach(function (f) {
+					f.disabled = o.selected;
+				});
+			});
 		});
 	}
 
@@ -1043,6 +1060,7 @@
 		if (e.target.matches && e.target.matches('input[type="radio"]') && e.target.name) syncGroup(e.target);
 		else if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 		if (e.target.matches && e.target.matches("select") && e.target.querySelector("option[data-tc-shows]")) syncShows(e.target);
+		if (e.target.matches && e.target.matches("select") && e.target.querySelector("option[data-tc-disables]")) syncPickDisables(e.target);
 		if (e.target.hasAttribute && e.target.hasAttribute("data-tc-was")) follow(e.target);
 		if (e.target.form && e.target.form.querySelector("template[data-tc-tally]")) tally(e.target.form);
 		if (e.target.matches && e.target.matches(".tc-file[data-tc-size]")) sizeFields(e.target);

@@ -86,6 +86,14 @@ do, not what the authors did.
 
 ### Added
 
+- **`PickOption.Disables`** — an option of a pick switches fields of its
+  form off while it is chosen (`data-tc-disables` on an option; Carrel's
+  task 218): «None — up to 16 MB» and the folder for a large archive.
+- **`PostForm.Multipart`** — a post form sends multipart without a file
+  field of its own: the answer to a taken name (Carrel's task 218).
+- `Dialog` with a file field among its parts sends multipart, as `Form`,
+  `Sheet` and `Card` do (Carrel's task 218).
+
 - **`SegOption.Disables`** — an option of a switch with a `Name` switches
   fields of its form off while it is chosen (`data-tc-disables` on a radio;
   Carrel's task 194): «The whole calendar» and the days of a range. The
@@ -852,6 +860,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Restore from this computer: the archive last** (Carrel's task 218;
+  accepted by the owner 21.10). `s-backup-15`, `-16`: Archive is the
+  card's last field, after the storage and the folder — without a script
+  the parts go in the form's order, and the server knows where a large
+  archive goes before it comes; «None — up to 16 MB» switches the folder
+  off.
 
 - **Publishing and mail without scripts** (Carrel's task 194; accepted by
   the owner 20–21.10). The publish sheets are forms (`how`, `from`, `to`,

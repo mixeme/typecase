@@ -741,9 +741,10 @@ func Files2() Screen {
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.PostForm{
-						ID:     "taken-release",
-						Action: "/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md",
-						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+						ID:        "taken-release",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md",
+						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+						Multipart: true,
 					},
 					w.Queue{
 						Title:  "Uploading 2 of 4",

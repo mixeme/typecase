@@ -385,6 +385,9 @@ func (g *gen) pick(x *El) string {
 			if v := o.Attr("data-tc-shows"); v != "" {
 				o2 = append(o2, "Shows: "+q(v))
 			}
+			if v := o.Attr("data-tc-disables"); v != "" {
+				o2 = append(o2, "Disables: "+q(v))
+			}
 			opts = append(opts, "{"+join(o2, ", ")+"}")
 		}
 		f := []string{"Name: " + q(list.Attr("name")), "Options: []w.PickOption{" + join(opts, ", ") + "}"}
@@ -1437,6 +1440,8 @@ func (g *gen) postForm(e *El) string {
 	}
 	if file != "" {
 		f = append(f, "File: "+q(file))
+	} else if e.Attr("enctype") == "multipart/form-data" {
+		f = append(f, "Multipart: true")
 	}
 	return "w.PostForm{" + join(f, ", ") + "}"
 }
