@@ -1259,7 +1259,7 @@ func Plan4() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
-									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("CalDAV "), w.Badge{Label: "ro"}}, Mono: true},
 									{
 										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapiski-obshchie/")},
 										Mono:  true,
@@ -1323,7 +1323,7 @@ func Plan4() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
-									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("CardDAV "), w.Badge{Label: "ro"}}, Mono: true},
 									{Parts: []w.CellPart{w.Text("…/radicale/mix/komanda/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
@@ -1528,7 +1528,7 @@ func Plan5() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Общие с семьёй"}}},
-									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("CalDAV "), w.Badge{Label: "ro"}}, Mono: true},
 									{
 										Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/zapiski-obshchie/")},
 										Mono:  true,
@@ -1600,7 +1600,7 @@ func Plan5() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
-									{Parts: []w.CellPart{w.Text("CardDAV")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("CardDAV "), w.Badge{Label: "ro"}}, Mono: true},
 									{Parts: []w.CellPart{w.Text("…/radicale/mix/komanda/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},

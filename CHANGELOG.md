@@ -861,6 +861,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A new device's addresses: «ro» at every read-only collection**
+  (Carrel's task 217): `s-plan-4`, `-5` — «Общие с семьёй» and «Команда»
+  carry «ro» beside their protocol, as Public does and as every other frame
+  draws them.
+
 - **Restore from this computer: the archive last** (Carrel's task 218;
   accepted by the owner 21.10). `s-backup-15`, `-16`: Archive is the
   card's last field, after the storage and the folder — without a script
