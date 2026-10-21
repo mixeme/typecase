@@ -177,7 +177,7 @@ func (v DialogVariant) class() string {
 // Dialog — tc-dialog
 //
 // Роль. Центрированное полотно страницы: формы, мастера, подтверждения, вход в приложение.
-// Вход. Dialog{Items, Variant, Action, Method, Fields}.
+// Вход. Dialog{Items, Variant, Action, Method, Fields, Ranges, RangesOf}.
 // Состояния. narrow | wide | width | page | canvas.
 // Инварианты. Ширина и поля — перечисление; главная кнопка — в подвале формы или в действиях шапки; диалог печатает фрагмент своего кадра.
 // Поведение. Esc закрывает диалог, если он открыт поверх страницы, и возвращает фокус.
@@ -195,6 +195,14 @@ type Dialog struct {
 	Action string
 	Method string
 	Fields []Hidden
+	// Ranges and RangesOf make the form send, with the library's live
+	// layer, parts of a file a step before it kept in the page — RangesOf
+	// names that step's field (FileField.Ranges) — instead of the file:
+	// Ranges is asked which parts, with this form's fields (Carrel's task
+	// 220: the records of the chosen collections, at Restore). Without the
+	// layer, or with no file kept, the form goes as it is.
+	Ranges   string
+	RangesOf string
 }
 
 // Render prints the dialog.
@@ -211,7 +219,7 @@ func (d Dialog) html(m mix) string {
 	tag := "div"
 	if d.Action != "" && !strings.Contains(body.String(), "<form") {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-dialog", d.Variant.class()) + attr("action", d.Action) + ` method="` + method(d.Method) + `">`)
+		s.WriteString(`<form` + class(m, "tc-dialog", d.Variant.class()) + attr("action", d.Action) + ` method="` + method(d.Method) + `"` + attr("data-tc-ranges", d.Ranges) + attr("data-tc-ranges-of", d.RangesOf) + `>`)
 		for _, h := range d.Fields {
 			s.WriteString(h.html(nil))
 		}

@@ -311,6 +311,13 @@ func (g *gen) main(e *El) string {
 	if id := e.Attr("id"); id != "" {
 		f = append(f, "ID: "+q(id))
 	}
+	// the page's zone and where its forms ask (Carrel's task 220)
+	if v := e.Attr("data-tc-zone"); v != "" {
+		f = append(f, "Zone: "+q(v))
+	}
+	if v := e.Attr("data-tc-target"); v != "" {
+		f = append(f, "Target: "+q(v))
+	}
 	return "w.Main{" + join(f, ", ") + "}"
 }
 
@@ -1345,6 +1352,9 @@ func (g *gen) dialog(e *El) string {
 		}
 		if len(hidden) > 0 {
 			f = append(f, "Fields: "+hiddens(hidden))
+		}
+		if v := e.Attr("data-tc-ranges"); v != "" {
+			f = append(f, "Ranges: "+q(v)+", RangesOf: "+q(e.Attr("data-tc-ranges-of")))
 		}
 	}
 	return "w.Dialog{" + join(f, ", ") + "}"

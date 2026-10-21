@@ -2761,6 +2761,8 @@ func Backup15() Screen {
 						Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
+				Zone:   "restore",
+				Target: "restore",
 			},
 		},
 	}
@@ -2943,6 +2945,8 @@ func Backup16() Screen {
 						Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
+				Zone:   "restore",
+				Target: "restore",
 			},
 		},
 	}
@@ -3400,6 +3404,307 @@ func Backup8() Screen {
 						Action:  "/app/settings/backup/restore/match",
 					},
 				},
+			},
+		},
+	}
+}
+
+// Backup20 is frame «Восстановление с этого компьютера · что и куда ляжет» (s-backup-20).
+func Backup20() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 6,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 2},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Restore from 2026-08-14"},
+								Subs: []w.HeadSub{
+									w.HeadSub{
+										Parts: []w.HeadSubPart{
+											w.Text("From this computer · manifest read · 4 collections · 1 214 records · "),
+											w.Mono{Text: "carrel-backup-2026-08-14.zip"},
+										},
+									},
+								},
+								Acts: &w.Acts{
+									Items: []w.ActsPart{
+										w.Button{Label: "Cancel"},
+										w.Button{
+											Label:  "Restore 3 collections",
+											Icon:   "restore",
+											Kind:   w.ButtonPrimary,
+											Name:   "op",
+											Value:  "restore",
+											Submit: true,
+										},
+									},
+								},
+							},
+							w.Bar{
+								Items: []w.BarPart{
+									w.BarSep{},
+									w.Button{Label: "Restore into", Icon: "restore", Name: "op", Value: "into", Submit: true},
+									w.Drop{
+										Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#6B4E7A"},
+													Label: "radicale · vps · Проекты",
+													Name:  "into",
+													Value: "radicale|proekty",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#4A6B52"},
+													Label: "nextcloud · Личный",
+													On:    true,
+													Name:  "into",
+													Value: "nextcloud|lichnyj",
+												},
+												w.MenuItem{
+													Mark:  &w.Mark{Colour: "#3F6E8C"},
+													Label: "nextcloud · Работа",
+													Name:  "into",
+													Value: "nextcloud|rabota",
+												},
+												w.MenuSep{},
+												w.MenuItem{Label: "New collection", Name: "into", Value: "new"},
+												w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into", Value: "skip"},
+											},
+											Width: w.MenuWidth290,
+											Pop:   w.MenuUnder,
+										},
+									},
+									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
+								},
+								Count:   &w.BarCount{Text: "3 selected"},
+								Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true, ScriptOnly: true}}},
+								Variant: w.BarSelection,
+							},
+							w.Table{
+								Cols: []w.TableCol{
+									{Width: w.ColTick, Tick: ptr(w.TickedPart)},
+									{Label: "In the archive"},
+									{Label: "Records", Rank: w.Rank3, Secondary: true},
+									{Label: "Restore into", Width: w.Col26, Rank: w.Rank4},
+									{Label: "What will happen"},
+								},
+								Rows: []w.TableRow{
+									{
+										Cells: []w.TableCell{
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}},
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
+											{Parts: []w.CellPart{w.Text("312")}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	Name:  "into.1",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	On:    true,
+																	Name:  "into.1",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.1",
+																	Value: "nextcloud|rabota",
+																},
+																w.MenuSep{},
+																w.MenuItem{Label: "New collection", Name: "into.1", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.1", Value: "skip"},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+											},
+											{Parts: []w.CellPart{w.Text("matched by path — compared when you restore")}},
+										},
+										State: w.RowPicked,
+									},
+									{
+										Cells: []w.TableCell{
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}},
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}},
+											{Parts: []w.CellPart{w.Text("86")}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "radicale · vps · Проекты", Mark: &w.Mark{Colour: "#6B4E7A"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	On:    true,
+																	Name:  "into.2",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	Name:  "into.2",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.2",
+																	Value: "nextcloud|rabota",
+																},
+																w.MenuSep{},
+																w.MenuItem{Label: "New collection", Name: "into.2", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.2", Value: "skip"},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+											},
+											{Parts: []w.CellPart{w.Text("matched by path — compared when you restore")}},
+										},
+										State: w.RowPicked,
+									},
+									{
+										Cells: []w.TableCell{
+											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "baikal/shared"}},
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
+											{Parts: []w.CellPart{w.Text("140")}, Mono: true},
+											{
+												Parts: []w.CellPart{
+													w.Drop{
+														Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+														Menu: w.Menu{
+															Items: []w.MenuPart{
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#6B4E7A"},
+																	Label: "radicale · vps · Проекты",
+																	Name:  "into.3",
+																	Value: "radicale|proekty",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#4A6B52"},
+																	Label: "nextcloud · Личный",
+																	On:    true,
+																	Name:  "into.3",
+																	Value: "nextcloud|lichnyj",
+																},
+																w.MenuItem{
+																	Mark:  &w.Mark{Colour: "#3F6E8C"},
+																	Label: "nextcloud · Работа",
+																	Name:  "into.3",
+																	Value: "nextcloud|rabota",
+																},
+																w.MenuSep{},
+																w.MenuItem{Label: "New collection", Name: "into.3", Value: "new"},
+																w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.3", Value: "skip"},
+															},
+															Width: w.MenuWidth290,
+															Pop:   w.MenuUnder,
+														},
+													},
+												},
+											},
+											{Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger},
+										},
+										State: w.RowPicked,
+									},
+									{
+										Cells: []w.TableCell{
+											{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}},
+											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}},
+											{Parts: []w.CellPart{w.Text("51")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty},
+											{Parts: []w.CellPart{w.Text("skip")}, Dim: true},
+										},
+									},
+								},
+								Variant: w.TableFit,
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Restoring "),
+									w.Strong("creates"),
+									w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes."),
+								},
+								Tone: w.MsgAlert,
+							},
+						},
+						Variant:  w.DialogWide,
+						Action:   "/app/settings/backup/restore/match",
+						Ranges:   "/app/settings/backup/restore?op=ranges",
+						RangesOf: "file",
+					},
+				},
+				Zone:   "restore",
+				Target: "restore",
 			},
 		},
 	}

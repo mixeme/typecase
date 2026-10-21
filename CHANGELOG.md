@@ -86,6 +86,15 @@ do, not what the authors did.
 
 ### Added
 
+- **`Dialog.Ranges`, `Dialog.RangesOf`** — a step sends parts of the file an
+  earlier step kept in the page (Carrel's task 220, Р-71): the live layer
+  keeps a `FileField.Ranges` file under its field's name; a dialog naming
+  that field asks the ranges address with its own fields — the chosen
+  collections — and sends the parts named then. A form that names a zone
+  (`Main.Zone`, `Main.Target`) takes the answer of a ranges send in place,
+  so the page and its file stay. Without the layer the whole file goes.
+- The frame generator reads a page column's `Zone` and `Target`.
+
 - **The answers about taken names go before the files** (Carrel's task
   219): `taken.<name>` stands before the file field — with its `form`, as
   the sizes do — so a server that reads the body as a stream has the answer
@@ -866,6 +875,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Restore from this computer: step 2 in place, records at Restore**
+  (Carrel's task 220; accepted by the owner 22.10, Р-71). `s-backup-15`,
+  `-16`: the page's column is the zone «restore»; new `s-backup-20` — step 2
+  of an archive from this computer: «From this computer» and «compared when
+  you restore» in «What will happen»; its form asks for the parts of the
+  chosen collections at Restore.
 
 - **A folder's upload queue waits in its frames** (Carrel's task 219):
   `s-files-1` and the empty folder `states-32` carry the hidden queue of

@@ -136,6 +136,7 @@ var Routes = []Route{
 	{Frame: "s-backup-16", Caption: "Восстановление · архив больше 16 MB, папки нет", Screen: Backup16},
 	{Frame: "s-backup-17", Caption: "Восстановление · с сервера", Screen: Backup17},
 	{Frame: "s-backup-8", Caption: "Восстановление · что и куда ляжет", Screen: Backup8},
+	{Frame: "s-backup-20", Caption: "Восстановление с этого компьютера · что и куда ляжет", Screen: Backup20},
 	{Frame: "s-backup-18", Caption: "Восстановление · шаг 3, что сделано", Screen: Backup18},
 	{Frame: "s-publish-1", Caption: "Публикация · выданные ссылки", Screen: Publish1},
 	{Frame: "s-publish-20", Caption: "Опубликованное · почта не настроена", Screen: Publish20},

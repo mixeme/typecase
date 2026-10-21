@@ -91,31 +91,48 @@
 	// name and size («<name>.name», «<name>.size») go to that address first;
 	// it answers with lines «offset length»; the form then goes to its
 	// action with those parts under the field's name, each called
-	// «offset-length», instead of the file. The answer is the page, as a
-	// plain send would have it. Without the layer, or when the asking
-	// fails, the whole file goes.
+	// «offset-length», instead of the file. The page keeps the file under the
+	// field's name, for a later step: a form with data-tc-ranges and
+	// data-tc-ranges-of (that name) sends parts of it the same way, asking
+	// with its own fields — the records of the collections chosen on the
+	// next step (Carrel's task 220). When the form names a zone, its answer
+	// goes there and the page stays — the file with it; else the answer is
+	// the page, as a plain send would have it. Without the layer, or when the
+	// asking fails, the form goes the plain way: the whole file.
+	var kept = {};
 	document.addEventListener("submit", function (e) {
 		var form = e.target, by = e.submitter || null;
 		if (e.defaultPrevented || sentPlain || !window.FormData || !window.fetch) return;
 		var input = Array.prototype.filter.call(form.querySelectorAll('input[type="file"][data-tc-ranges]'), function (i) {
 			return !i.disabled && i.files && i.files.length;
 		})[0];
-		if (!input) return;
+		var file, name, asked;
+		if (input) {
+			file = input.files[0];
+			name = input.name;
+			asked = input.getAttribute("data-tc-ranges");
+			kept[name] = file;
+		} else if (form.hasAttribute("data-tc-ranges") && kept[form.getAttribute("data-tc-ranges-of")]) {
+			name = form.getAttribute("data-tc-ranges-of");
+			file = kept[name];
+			asked = form.getAttribute("data-tc-ranges");
+		} else return;
 		e.preventDefault();
-		var file = input.files[0], name = input.name;
 		var data = new FormData(form, by || undefined);
 		data.delete(name);
 		data.set(name + ".name", file.name);
 		data.set(name + ".size", String(file.size));
 		var action = new URL((by && by.getAttribute("formaction")) || form.getAttribute("action") || location.href, location.href).href;
 		var method = ((by && by.getAttribute("formmethod")) || form.getAttribute("method") || "post").toUpperCase();
+		var target = targetOf(by) || targetOf(form);
+		if (target && !zoneOf(target)) target = "";
 		var plain = function () {
 			sentPlain = true;
 			if (form.requestSubmit && by) form.requestSubmit(by);
 			else form.submit();
 			sentPlain = false;
 		};
-		fetch(new URL(input.getAttribute("data-tc-ranges"), location.href).href, { method: "POST", body: data, credentials: "same-origin" })
+		fetch(new URL(asked, location.href).href, { method: "POST", body: data, credentials: "same-origin" })
 			.then(function (r) {
 				if (!r.ok) throw new Error("ranges " + r.status);
 				return r.text();
@@ -126,17 +143,20 @@
 					if (p.length !== 2 || !(at >= 0) || !(length > 0)) return;
 					data.append(name, file.slice(at, at + length), at + "-" + length);
 				});
-				return fetch(action, { method: method, body: data, credentials: "same-origin" });
-			})
-			.then(function (r) {
-				if (r.redirected) {
-					location.assign(r.url);
+				if (target) {
+					ask(action, method, data, target, plain);
 					return;
 				}
-				return r.text().then(function (html) {
-					document.open();
-					document.write(html);
-					document.close();
+				return fetch(action, { method: method, body: data, credentials: "same-origin" }).then(function (r) {
+					if (r.redirected) {
+						location.assign(r.url);
+						return;
+					}
+					return r.text().then(function (html) {
+						document.open();
+						document.write(html);
+						document.close();
+					});
 				});
 			})
 			.catch(plain);

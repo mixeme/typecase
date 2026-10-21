@@ -2713,6 +2713,100 @@ func TestFileRanges(t *testing.T) {
 	}
 }
 
+// TestRangesNextStep (Carrel's task 220, Р-71): the restore from this
+// computer keeps its file for the next step. Step 1 sends the parts the
+// server names; its form names a zone, so step 2 comes in place and the page
+// stays. Step 2's form (Dialog.Ranges, RangesOf) asks the same address with
+// its own fields — the chosen collections — and sends the parts named then,
+// of the file step 1 kept, never the whole file. The bite: without the
+// layer's keeping, step 2 sends no parts.
+func TestRangesNextStep(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var asked, got []string
+	ranges := h.RegisterStream("ranges2", func(rw http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(rw, err.Error(), 400)
+			return
+		}
+		asked = append(asked, r.FormValue("file.name")+" "+strings.Join(r.MultipartForm.Value["collection"], ","))
+		if len(r.MultipartForm.Value["collection"]) > 0 {
+			_, _ = rw.Write([]byte("10 6\n"))
+			return
+		}
+		_, _ = rw.Write([]byte("0 4\n"))
+	})
+	parts := func(r *http.Request) string {
+		var ps []string
+		for _, fh := range r.MultipartForm.File["file"] {
+			f, _ := fh.Open()
+			b, _ := io.ReadAll(f)
+			f.Close()
+			ps = append(ps, fh.Filename+"="+string(b))
+		}
+		return strings.Join(ps, ",")
+	}
+	var match string
+	open := h.RegisterStream("open2", func(rw http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(rw, err.Error(), 400)
+			return
+		}
+		got = append(got, "open "+parts(r))
+		step2 := w.Dialog{Action: match, Ranges: ranges, RangesOf: "file", Items: []w.DialogPart{
+			w.Form{Items: []w.FormPart{w.Field{Parts: []w.FieldPart{w.Check{Name: "collection", Value: "nextcloud/personal", On: true, Parts: []w.CheckPart{w.Text("personal")}}}}}},
+			w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Restore", Kind: w.ButtonPrimary, Submit: true}}}}}
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = io.WriteString(rw, step2.Render())
+	})
+	match = h.RegisterStream("match2", func(rw http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			http.Error(rw, err.Error(), 400)
+			return
+		}
+		got = append(got, "match "+strings.Join(r.MultipartForm.Value["collection"], ",")+" "+parts(r))
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = io.WriteString(rw, `<p id="done">restored</p>`)
+	})
+	page := func(live bool) string {
+		pick := w.Button{Label: "Choose a file", File: &w.FileField{Name: "file", Label: "Archive", Ranges: ranges}}
+		step1 := w.Dialog{Action: open, Items: []w.DialogPart{
+			w.Form{Items: []w.FormPart{w.Field{Parts: []w.FieldPart{pick}}}},
+			w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Open the manifest", Kind: w.ButtonPrimary, Submit: true}}}}}
+		main := w.Main{Zone: "restore", Target: "restore", Items: []w.MainPart{step1}}
+		doc := browser.PageHTML(`<div class="tc-root">`+main.Render()+`</div>`, "")
+		if !live {
+			doc = strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1)
+		}
+		return doc
+	}
+	f := filepath.Join(t.TempDir(), "carrel.zip")
+	if err := os.WriteFile(f, []byte("PK0123456789abcdefghij"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	var kept bool
+	if err := h.Run(h.RegisterPage("ranges-next", page(true)), 900, 600,
+		chromedp.Evaluate(`window.__stayed = true; true`, nil),
+		chromedp.SetUploadFiles(`.tc-file`, []string{f}, chromedp.ByQuery),
+		chromedp.Click(`button[type="submit"]`, chromedp.ByQuery),
+		chromedp.WaitVisible(`input[name="collection"]`, chromedp.ByQuery),
+		chromedp.Evaluate(`window.__stayed === true`, &kept),
+		chromedp.Click(`button[type="submit"]`, chromedp.ByQuery),
+		chromedp.WaitVisible(`#done`, chromedp.ByQuery),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !kept {
+		t.Error("step 2 loaded a page; want it in place, the page kept")
+	}
+	if strings.Join(asked, "|") != "carrel.zip |carrel.zip nextcloud/personal" {
+		t.Errorf("the ranges address was asked %q; want step 1 alone, then with the chosen collection", asked)
+	}
+	if strings.Join(got, "|") != "open 0-4=PK01|match nextcloud/personal 10-6=89abcd" {
+		t.Errorf("the steps got %q; want the parts named each time, never the whole file", got)
+	}
+}
+
 // TestFileTaken: a file field with data-tc-taken asks which picked names
 // are taken before the files go (Carrel's task 214): the taken one gets the
 // queue's question row, nothing is sent until it is answered; Replace sends
