@@ -249,11 +249,12 @@ const (
 	SheetWidth480
 	SheetWidth520
 	SheetWidth680
-	SheetWidthFull // the width of the page: a phone, a picker
+	SheetWidthFull // the width of the page: a phone
+	SheetWidth900  // a picker over a screen: a rail and a list (Carrel's task 194)
 )
 
 func (w SheetWidth) class() string {
-	return [...]string{"", "tc-sheet--w400", "tc-sheet--w480", "tc-sheet--w520", "tc-sheet--w680", "tc-sheet--max100pc-full"}[w]
+	return [...]string{"", "tc-sheet--w400", "tc-sheet--w480", "tc-sheet--w520", "tc-sheet--w680", "tc-sheet--max100pc-full", "tc-sheet--w900"}[w]
 }
 
 // Sheet — tc-sheet
@@ -294,9 +295,32 @@ type Sheet struct {
 func (h Sheet) Render() string { return h.html(nil) }
 
 func (h Sheet) html(m mix) string {
+	var in strings.Builder
+	if h.Icon != "" {
+		in.WriteString(h.Tone.svg() + h.Icon.use() + `</svg>`)
+	}
+	in.WriteString(`<b class="tc-sheet__title">` + esc(h.Title) + `</b>`)
+	for _, it := range h.Head {
+		in.WriteString(it.html(nil))
+	}
+	in.WriteString(`</div><div` + class(nil, "tc-sheet__body", pick(h.Flush, "tc-sheet__body--pad0")) + `>`)
+	for _, it := range h.Body {
+		in.WriteString(it.html(nil))
+	}
+	in.WriteString(`</div>`)
+	if len(h.Foot) > 0 {
+		in.WriteString(`<div class="tc-sheet__foot">`)
+		for _, it := range h.Foot {
+			in.WriteString(it.html(nil))
+		}
+		in.WriteString(`</div>`)
+	}
 	var s strings.Builder
 	tag := "div"
-	if h.Action != "" {
+	// A form holds no form: a sheet one of whose parts is a form of its own
+	// (the days of a calendar to attach, Carrel's task 194) is printed plain,
+	// as a dialog is.
+	if h.Action != "" && !strings.Contains(in.String(), "<form") {
 		tag = "form"
 		s.WriteString(`<form` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + attr("action", h.Action) + ` method="` + method(h.Method) + `"` + attr("data-tc-target", h.Target) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `>`)
 		for _, f := range h.Fields {
@@ -306,25 +330,7 @@ func (h Sheet) html(m mix) string {
 	} else {
 		s.WriteString(`<div` + class(m, "tc-sheet", h.Width.class()) + attr("id", h.ID) + ` role="dialog" aria-modal="true"` + attr("aria-label", h.Title) + `><div class="tc-sheet__head">`)
 	}
-	if h.Icon != "" {
-		s.WriteString(h.Tone.svg() + h.Icon.use() + `</svg>`)
-	}
-	s.WriteString(`<b class="tc-sheet__title">` + esc(h.Title) + `</b>`)
-	for _, it := range h.Head {
-		s.WriteString(it.html(nil))
-	}
-	s.WriteString(`</div><div` + class(nil, "tc-sheet__body", pick(h.Flush, "tc-sheet__body--pad0")) + `>`)
-	for _, it := range h.Body {
-		s.WriteString(it.html(nil))
-	}
-	s.WriteString(`</div>`)
-	if len(h.Foot) > 0 {
-		s.WriteString(`<div class="tc-sheet__foot">`)
-		for _, it := range h.Foot {
-			s.WriteString(it.html(nil))
-		}
-		s.WriteString(`</div>`)
-	}
+	s.WriteString(in.String())
 	s.WriteString(`</` + tag + `>`)
 	return multipart(s.String())
 }

@@ -100,12 +100,8 @@ var _ = add(
 	form("add", w.TagInput{Columns: true, Add: &w.TagAdd{Name: "attendee.add", Placeholder: "Name or address", Label: "Add attendee", Suggest: "/app/contacts/suggest"}}, "s-agenda-15", "tc-in", 14),
 	form("date", w.Input{Kind: w.InputDate, Mono: true, Label: "Until"}, "s-agenda-15", "tc-in", 19),
 	form("columns", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}, w.Tag{Label: "x", Fixed: true}}, Columns: true}, "s-agenda-14", "tc-in", 1),
-	form("wrap", w.TagInput{Wrap: true, Focus: true, Parts: []w.TagInputPart{
-		w.Tag{Label: "Анна Ковалёва · a.kovaleva@example.org", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}},
-		w.Tag{Label: "Артём Белов · a.belov@example.org", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}}}}, "s-mail-1", "tc-in", 1),
-	form("wrap", w.TagInput{Wrap: true, Focus: true, Parts: []w.TagInputPart{
-		w.Tag{Label: "Анна Ковалёва · a.kovaleva@example.org", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}},
-		w.Span{Face: w.FaceMuted, Text: "бел"}}}, "s-mail-3", "tc-in", 1),
+	form("wrap", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}, w.Tag{Label: "Артём Белов", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.belov@example.org")}}, Title: "a.belov@example.org", Name: "to", Value: "a.belov@example.org"}}, Name: "to", Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest"}, Focus: true}, "s-mail-1", "tc-in", 1),
+	form("wrap", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}}, Name: "to", Add: &w.TagAdd{Name: "to.add", Value: "бел", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest"}, Focus: true}, "s-mail-3", "tc-in", 1),
 
 	// tc-in as a text area
 	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 16),

@@ -150,7 +150,7 @@ func (v DimVariant) class() string {
 // Dim — tc-dim
 //
 // Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», имя источника.
-// Вход. Dim{Parts, Size, Variant, Place, Empty}.
+// Вход. Dim{Parts, Size, Variant, Place, Empty, ID}.
 // Состояния. plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
 // Инварианты. Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -165,6 +165,10 @@ type Dim struct {
 	// Empty is the words of an empty list: «Nothing attached»; the library's
 	// script hides them while a picked file stands in the list.
 	Empty bool
+	// ID names the line for a form that is asked again as it changes
+	// (Form.Recount): what the chosen days weigh, at Attach (Carrel's task
+	// 194).
+	ID string
 }
 
 // Render prints the dim line.
@@ -172,7 +176,7 @@ func (d Dim) Render() string { return d.html(nil) }
 
 func (d Dim) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class(), d.Place.class()) + flag("data-tc-empty", d.Empty) + `>`)
+	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class(), d.Place.class()) + attr("id", d.ID) + flag("data-tc-empty", d.Empty) + `>`)
 	for _, p := range d.Parts {
 		s.WriteString(p.html(nil))
 	}

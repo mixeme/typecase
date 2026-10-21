@@ -36,6 +36,7 @@ var btn = w.Button{Label: "x"}
 
 var _ = add(
 	// tc-seg
+	form("disables", w.Seg{Options: []w.SegOption{{Label: "A date range", On: true, Value: "range"}, {Label: "The whole calendar", Value: "whole", Disables: "from to"}}, Name: "how"}, "s-publish-2", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job"}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server", On: true}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file"}}, Variant: w.SegStart}, "s-backup-17", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "From a job", Href: "/app/settings/backup/restore?from=job"}, {Label: "From a server", Href: "/app/settings/backup/restore?from=server"}, {Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true}}, Variant: w.SegStart}, "s-backup-15", "tc-seg", 1),
 	form("links", w.Seg{Options: []w.SegOption{{Label: "crontab", Href: "/app/settings/backup?job=personal&trigger=crontab", On: true}, {Label: "GoSentry", Href: "/app/settings/backup?job=personal&trigger=gosentry"}, {Label: "Gitea", Href: "/app/settings/backup?job=personal&trigger=gitea"}, {Label: "curl", Href: "/app/settings/backup?job=personal&trigger=curl"}}, Variant: w.SegStart}, "s-backup-3", "tc-seg", 1),
@@ -88,11 +89,11 @@ var _ = add(
 	form("off", check(false, w.Text("Print with photos")), "components-10", "tc-check", 2),
 	form("on", check(true, w.Text("All day")), "components-10", "tc-check", 1),
 	form("disabled", w.Check{Name: "people", Value: "on", Reason: "Mail is not configured: there is nothing to send through yet.", Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")}}, "s-admin-3", "tc-check", 1),
-	form("rich", w.Check{On: true, Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}}}, "s-publish-2", "tc-check", 1),
+	form("rich", w.Check{On: true, Name: "time", Value: "1", Reason: "Always shown", Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}}}, "s-publish-2", "tc-check", 1),
 	form("radio", w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Лебедева Вера")}}, "s-dup-1", "tc-check", 2),
 	form("radio-on", w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Вера Лебедева")}}, "s-dup-1", "tc-check", 1),
 	form("rich", w.Check{On: true, Name: "choice.0", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, "s-conflict-1", "tc-check", 1),
-	form("rich", check(true, w.Text("Allow"), w.Mono{Text: ".ics"}, w.Text("download and subscription")), "s-publish-2", "tc-check", 8),
+	form("rich", w.Check{On: true, Name: "download", Value: "1", Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")}}, "s-publish-2", "tc-check", 8),
 	form("box-off", w.Check{Name: "mono", Value: "1", Parts: []w.CheckPart{w.Text("Monospaced dates")}}, "components-38", "tc-check", 2),
 	form("box", w.Check{On: true, Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}, "components-38", "tc-check", 1),
 	form("tertiary", w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, "s-notes-20", "tc-check", 1),
@@ -101,7 +102,7 @@ var _ = add(
 	// (a11y). Its record waits for the owner's decision on the mockup.
 	form("rich", w.Check{Name: "tasks.vtodo.not.every.client.understands.them", Value: "1", Parts: []w.CheckPart{w.Text("Tasks "), w.Dim{Parts: []w.Inline{w.Text("· VTODO — not every client understands them")}}}}, "s-davloom-2", "tc-check", 3),
 	form("rich", w.Check{On: true, Name: "webdav.folders.mount.as.a.network.drive", Value: "1", Parts: []w.CheckPart{w.Text("WebDAV folders "), w.Dim{Parts: []w.Inline{w.Text("· mount as a network drive")}}}}, "s-davloom-2", "tc-check", 5),
-	form("rich", check(false, w.Text("Allow"), w.Mono{Text: ".vcf"}, w.Text("download and subscription")), "s-publish-3", "tc-check", 6),
+	form("rich", w.Check{Name: "download", Value: "1", Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".vcf"}, w.Text(" download and subscription")}}, "s-publish-3", "tc-check", 6),
 	form("rich", check(false, w.Dim{Parts: []w.Inline{w.Text("Start at sign-in — not available in a portable copy")}}), "desktop-4", "tc-check", 1),
 
 	// tc-range
@@ -135,7 +136,7 @@ var _ = add(
 		w.MenuItem{Icon: "upload", Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}},
 		w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("release-checklist.md"), w.Dim{}, w.Badge{Label: "badge"}}}, w.Button{Label: "Remove", Small: true, Kind: w.ButtonDanger}}}, "s-agenda-3", "tc-line", 1),
-	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 1),
+	form("block", w.Line{Gap: w.LineGap10, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 7),
 	form("block", w.Line{Block: true, Gap: w.LineGap7, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 2),
 	form("block", w.Line{Gap: w.LineGap8, Block: true, Items: []w.LinePart{btn, btn, w.Push{Face: faceOf(w.FaceAccent11_5), Items: []w.PushPart{w.Text("Add a second instance")}}}}, "desktop-7", "tc-line", 1),
 	form("default", w.Stack{Gap: w.StackGap9, Items: []w.StackPart{btn}}, "components-21", "tc-stack", 1),

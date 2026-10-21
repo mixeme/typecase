@@ -387,7 +387,7 @@
 #### `tc-dim` — приглушённый текст
 
 - **Роль.** Приглушённый текст рядом с главным: «· in 7 months», «412 KB», имя источника.
-- **Вход.** `Dim{Parts, Size, Variant, Place, Empty}`.
+- **Вход.** `Dim{Parts, Size, Variant, Place, Empty, ID}`.
 - **Состояния.** plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
 - **Инварианты.** Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
 - **Поведение.** нет.
@@ -587,7 +587,7 @@
 #### `tc-form` — форма
 
 - **Роль.** Форма: поля и группы полей, которые переносятся по ширине.
-- **Вход.** `Form{Items, Variant, Tight, Action, Method, Fields, ID, Target}`.
+- **Вход.** `Form{Items, Variant, Tight, Action, Method, Fields, ID, Target, Recount}`.
 - **Состояния.** plain | tight | flush | column | columns | action.
 - **Инварианты.** Поля переносятся, а не сжимаются; отступы формы — перечисление; форма печатает фрагмент своего кадра.
 - **Поведение.** Enter в поле формы отправляет форму.

@@ -175,7 +175,7 @@ const (
 	RowOff             // switched off
 	RowOn              // the current row
 	RowFaded           // a job that does not run
-	RowGone            // a row that no longer applies
+	RowGone            // a row that no longer applies, or cannot be chosen here: a file in a folder picker
 )
 
 func (s RowState) class() string {

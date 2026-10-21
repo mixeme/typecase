@@ -1011,7 +1011,7 @@ func (g *gen) childRail(k *El) string {
 }
 
 var sheetWidth = []kv{{"tc-sheet--w400", "SheetWidth400"}, {"tc-sheet--w480", "SheetWidth480"}, {"tc-sheet--w520", "SheetWidth520"},
-	{"tc-sheet--w680", "SheetWidth680"}, {"tc-sheet--max100pc-full", "SheetWidthFull"}}
+	{"tc-sheet--w680", "SheetWidth680"}, {"tc-sheet--max100pc-full", "SheetWidthFull"}, {"tc-sheet--w900", "SheetWidth900"}}
 
 func (g *gen) sheet(e *El) string {
 	var f []string
@@ -1053,6 +1053,9 @@ func (g *gen) sheet(e *El) string {
 			p := ""
 			if x.Has("tc-push") {
 				p = ", Place: w.Pushed"
+			}
+			if x.Tag == "a" {
+				p += ", Href: " + q(x.Attr("href"))
 			}
 			hp = append(hp, `w.Close{Label: "Close"`+p+"}")
 		case x.Has("tc-badge"):

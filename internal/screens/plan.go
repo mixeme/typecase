@@ -142,7 +142,11 @@ func Plan1() Screen {
 											w.Rubric{
 												Text: "Link ready until 09:46",
 												Items: []w.RubricPart{
-													w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"},
+													w.Badge{
+														Label: "local",
+														Tone:  w.BadgeLocal,
+														Title: "Local instance: the link will not open from outside your network",
+													},
 												},
 											},
 											w.CardHint{

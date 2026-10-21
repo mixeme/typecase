@@ -86,6 +86,22 @@ do, not what the authors did.
 
 ### Added
 
+- **`SegOption.Disables`** — an option of a switch with a `Name` switches
+  fields of its form off while it is chosen (`data-tc-disables` on a radio;
+  Carrel's task 194): «The whole calendar» and the days of a range. The
+  core script goes over the whole group when another option is chosen.
+- **`Form.Recount` and `Dim.ID`** — a form asked again as it changes: with
+  the live layer a field that changes asks the form's address with its
+  fields (GET) and puts the elements it names in place — the line at Attach
+  that says what the chosen days weigh (Carrel's task 194). A field that is
+  off is not asked with. Without the layer the line says so after Attach.
+- **`SheetWidth900`** — a picker over a screen: a rail and a list (the
+  letter's attach sheets).
+- **`DocFile.Href` drafted from a frame** — a file published with its note
+  is a link on the public page.
+- `Sheet` with a form among its parts is printed plain: a form holds no
+  form (the calendar days to attach).
+
 - **`SegOption.Form`, `SegOption.To`** — an option of a switch that sends
   a form to its address, without a script too (Carrel's task 215): a
   davloom device's access, read only or read and write, is a POST each.
@@ -836,6 +852,26 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Publishing and mail without scripts** (Carrel's task 194; accepted by
+  the owner 20–21.10). The publish sheets are forms (`how`, `from`, `to`,
+  the ticks of what the visitor sees, `download`, `attachments`, `lives`);
+  «Time» is a check that is off — it cannot be taken away; «Link lives
+  for» is a drop of radios; «The whole calendar» switches the days off.
+  The screen under a sheet is the page it is opened from: Connections
+  under a calendar's, the card under a contact's, an event's, the note's
+  page under a note's, Published links under «Send this link». A letter's
+  recipients are tags with a cross and a line «Name or address»; Attach is
+  a menu of submits; the attach sheets are frames of their own at
+  `/app/mail/attach` (note, file, calendar, and new contact and folder),
+  900 px, one tree on the left, choices by address; the calendar's without
+  Show. «Send this link» opens from a link row's Send and from «Send by
+  letter» of a link just made: a link goes in a letter's text, never among
+  its attachments. New frames: a dead link's row (`s-publish-21`), a link
+  with no expiry and no mail (`s-publish-22`), a note's page whose files
+  were not published (`s-publish-23`). On a narrow sheet the line at the
+  main button goes above the buttons (the deferred mail client's reply
+  too); a picker's rail and list stack and stretch on a phone.
 
 - **Appearance: the time zone as a line of text** (Carrel's task 193;
   accepted by the owner 19.10): «Time zone · Europe/Moscow · this

@@ -45,6 +45,26 @@ var _ = add(
 	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow", 7),
 
 	// tc-tree
+	rows("links", w.Tree{Rows: []w.TreeRow{
+		{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=folder&dir=sftpgo"},
+		{Icon: "file", Label: "Documents", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents"},
+		{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka"},
+		{Icon: "file", Label: "Договор подряда", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada"},
+		{Icon: "file", Label: "Сканы", Indent: w.TreeLevel58, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada/skany"},
+		{Icon: "file", Label: "Подряд", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/podryad"},
+		{Icon: "file", Label: "Личное", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/lichnoe"}}, On: 4, Variant: w.TreePadded}, "s-mail-13", "tc-tree", 1),
+	rows("links", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Kind: w.MarkMulti}, Label: "All address books", Href: "/app/mail/attach?what=contact&q=смир"},
+		{Icon: "server", Label: "nextcloud"},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=lichnyj"},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=rabota"},
+		{Icon: "server", Label: "radicale · vps"},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=komanda"}}, On: 1, Variant: w.TreePadded}, "s-mail-12", "tc-tree", 1),
+	rows("links", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Kind: w.MarkMulti}, Label: "All notebooks", Href: "/app/mail/attach?what=note&q=подряд"},
+		{Icon: "server", Label: "nextcloud"},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Записи", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=note&q=подряд&c=zapisi"},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Рабочее", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=note&q=подряд&c=rabochee"}}, On: 1, Variant: w.TreePadded}, "s-mail-5", "tc-tree", 1),
 	rows("narrow", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "/dav/", Code: true, Trail: w.Dim{Parts: []w.Inline{w.Text("root")}, Size: w.Dim11}},
 		{Icon: "con", Label: "principal/", Code: true, Indent: w.TreeLevel22},
@@ -142,16 +162,17 @@ var _ = add(
 		{Icon: "server", Label: "sftpgo · vps", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo"}, Trail: w.Mono{Text: "files only", Variant: w.Mono10Dusty}}}, On: 2}, "s-profile-8", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "server", Label: "nextcloud"},
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22},
-		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=lichnyj"},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=rabota"},
 		{Icon: "server", Label: "radicale · vps"},
-		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22}}, On: 2, Variant: w.TreePadded}, "s-mail-10", "tc-tree", 1),
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=proekty"}}, On: 2, Variant: w.TreePadded}, "s-mail-10", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
-		{Icon: "server", Label: "sftpgo · vps"},
-		{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
-		{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36},
-		{Icon: "file", Label: "Подряд", Indent: w.TreeLevel44},
-		{Icon: "file", Label: "Личное", Indent: w.TreeLevel36}}, On: 4, Variant: w.TreePadded}, "s-mail-6", "tc-tree", 1),
+		{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=file&dir=sftpgo"},
+		{Icon: "file", Label: "Documents", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=file&dir=sftpgo/documents"},
+		{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka"},
+		{Icon: "file", Label: "Договор подряда", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/dogovor-podryada"},
+		{Icon: "file", Label: "Подряд", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/podryad"},
+		{Icon: "file", Label: "Личное", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/lichnoe"}}, On: 5, Variant: w.TreePadded}, "s-mail-6", "tc-tree", 1),
 
 	// tc-list
 	rows("compact", w.List{Rows: []w.ListRow{
@@ -184,6 +205,8 @@ var _ = add(
 	rows("plain", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Single: true}, "s-agenda-17", "tc-row", 2),
 	rows("plain", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Single: true}, "s-agenda-17", "tc-row", 1),
 	rows("plain", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Source: "nextcloud · Личный"}, "s-agenda-1", "tc-row", 6),
+	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "ИС"}, Title: []w.Inline{w.Text("Ирина Смирнова")}, Strong: true, Subtitle: "+7 903 221-08-64", Detail: "i.smirnova@example.org", Caption: "—", Source: "nextcloud · Личный", Href: "/app/mail/attach?what=contact&q=смир&uid=s1e8"}, "s-mail-12", "tc-row", 15),
+	rows("on", w.FaceRow{Mark: w.Mark{Colour: "#3F6E8C"}, Avatar: w.Avatar{Initials: "ПС"}, Title: []w.Inline{w.Text("Пётр Смирнов")}, Strong: true, Subtitle: "+7 916 330-41-27", Detail: "p.smirnov@example.org", Caption: "подрядчик", Source: "nextcloud · Работа", On: true, Href: "/app/mail/attach?what=contact&q=смир&uid=p7c2"}, "s-mail-12", "tc-row", 14),
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Single: true}, "s-io-1", "tc-row", 1),
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АС"}, Title: []w.Inline{w.Text("Алексей Смирнов")}, Subtitle: "+7 916 200-71-15", Detail: "—", Caption: "—", Source: "nextcloud · Контакты"}, "s-contacts-1", "tc-row", 3),
 	rows("strong", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Strong: true, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Личный"}, "components-12", "tc-row", 1),
@@ -216,7 +239,7 @@ var _ = add(
 	rows("found", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Strong("Ковал"), w.Text("ёва Анна")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты"}, "s-find-1", "tc-row", 1),
 	rows("inset", w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{{Label: "repeats weekly"}}, Source: "nextcloud · Работа", Inset: true}, "s-dup-1", "tc-row", 3),
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»"}, "s-publish-7", "tc-row", 2),
-	rows("plain", w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Подрядчики: кого смотрели", Date: w.Mono{Text: "02 Aug"}, Where: "nextcloud · Рабочее"}, "s-mail-5", "tc-row", 2),
+	rows("plain", w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Подрядчики: кого смотрели", Date: w.Mono{Text: "02 Aug"}, Where: "nextcloud · Рабочее", Href: "/app/mail/attach?what=note&q=подряд&uid=c27b"}, "s-mail-5", "tc-row", 15),
 	rows("past", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Source: "nextcloud · Личный", Past: true}, "states-5", "tc-row", 1),
 	rows("avatar", w.PhoneRow{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar34}, Title: "Анна Ковалёва", Sub: []w.Inline{w.Text("+7 912 445-10-88")}, SubMono: true, Aside: "Контакты"}, "phone-4", "tc-row", 1),
 	rows("on", w.PhoneRow{Pick: &w.TickBox{Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-08-10-sync-board.png"}}, Icon: "img", Title: "2026-08-10-sync-board.png", Sub: []w.Inline{w.Text("412 KB · image/png")}, SubMono: true, More: &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}, On: true}, "phone-6", "tc-row", 1),
@@ -236,7 +259,7 @@ var _ = add(
 	rows("inset", w.ExcerptRow{Mark: w.Mark{Colour: "#6B4E7A"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011…", Date: "8 Aug", Source: "nextcloud · Дневник", Inset: true}, "s-dup-1", "tc-row", 8),
 	rows("inset", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 495 120-45-00", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Контакты", Inset: true}, "s-dup-1", "tc-row", 11),
 	rows("strong", w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "АБ"}, Title: []w.Inline{w.Text("Артём Белов")}, Strong: true, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор"}, "s-publish-7", "tc-row", 1),
-	rows("on", w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Встреча с подрядчиком, итоги", Date: w.Mono{Text: "18 Aug"}, Where: "nextcloud · Рабочее", On: true}, "s-mail-5", "tc-row", 1),
+	rows("on", w.BriefRow{Mark: w.Mark{Colour: "#3F6E8C"}, Title: "Встреча с подрядчиком, итоги", Date: w.Mono{Text: "18 Aug"}, Where: "nextcloud · Рабочее", On: true, Href: "/app/mail/attach?what=note&q=подряд&uid=e41a"}, "s-mail-5", "tc-row", 14),
 	rows("loading", w.SkelRow{Title: w.Skel{Width: w.Skel60}}, "states-3", "tc-row", 1),
 	rows("loading", w.SkelRow{Title: w.Skel{Width: w.Skel45}}, "states-3", "tc-row", 2),
 	rows("loading", w.SkelRow{Title: w.Skel{Width: w.Skel52}}, "states-3", "tc-row", 3),

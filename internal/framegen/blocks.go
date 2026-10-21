@@ -1224,7 +1224,11 @@ func (g *gen) doc(e *El) string {
 		case k.Has("tc-doc__sec--rule"):
 			var fs []string
 			for _, it := range k.Kid("tc-doc__files").Els() {
-				fs = append(fs, "{Name: "+q(it.Els()[0].Text())+", Size: "+dimText(it.Els()[1].Text())+"}")
+				h := ""
+				if a := it.Els()[0]; a.Tag == "a" {
+					h = ", Href: " + q(a.Attr("href")) // a file published with its note (Carrel's task 194)
+				}
+				fs = append(fs, "{Name: "+q(it.Els()[0].Text())+", Size: "+dimText(it.Els()[1].Text())+h+"}")
 			}
 			items = append(items, "w.DocFiles{Title: "+g.rub(k.Kid("tc-rubric"))+", Items: []w.DocFile{"+join(fs, ", ")+"}}")
 		case k.Has("tc-doc__sec--rule16"):

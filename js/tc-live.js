@@ -358,6 +358,27 @@
 		var ids = t.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
 		if (ids.length) swap(t.getAttribute("data-tc-href"), ids);
 	});
+	// A form asked again as it changes (data-tc-recount, Form.Recount;
+	// Carrel's task 194): a field that changes asks the form's address with
+	// its fields, by GET, and puts the elements it names in place — the line
+	// at Attach says what the chosen days weigh before Attach. A field that
+	// is off is not asked with, as it is not sent. When the answer fails the
+	// line stays, and the server says it after the form is sent.
+	document.addEventListener("change", function (e) {
+		var f = e.target.form;
+		if (!f || !f.hasAttribute("data-tc-recount") || !window.DOMParser || !window.FormData || !window.URL) return;
+		var ids = f.getAttribute("data-tc-recount").split(/\s+/).filter(Boolean);
+		if (!ids.length) return;
+		var url = new URL(f.getAttribute("action") || location.href, location.href);
+		var data = new FormData(f);
+		data.forEach(function (v, k) {
+			url.searchParams.delete(k);
+		});
+		data.forEach(function (v, k) {
+			if (typeof v === "string") url.searchParams.append(k, v);
+		});
+		swap(url.href, ids);
+	});
 	// Back and forward over swapped pages load the page of the address.
 	var swapped = false;
 	window.addEventListener("popstate", function () {

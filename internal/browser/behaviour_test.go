@@ -335,6 +335,47 @@ func TestNoScriptSheetAndChecks(t *testing.T) {
 	}
 }
 
+// TestRadioDisables (Carrel's task 194): an option of a switch switches its
+// fields off while it is chosen — «The whole calendar» and the days of a
+// range —, and choosing another option of the same switch switches them on
+// again, though the change comes to that other option only.
+func TestRadioDisables(t *testing.T) {
+	needChrome(t)
+	form := func(whole bool) string {
+		return w.Form{Action: "/x", Items: []w.FormPart{
+			w.Field{Label: "How much of it", Parts: []w.FieldPart{w.Seg{Name: "how", Options: []w.SegOption{
+				{Label: "A date range", Value: "range", On: !whole},
+				{Label: "The whole calendar", Value: "whole", On: whole, Disables: "from to"}}}}},
+			w.Field{Label: "From", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "from", Label: "From"}}},
+			w.Field{Label: "To", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "to", Label: "To"}}},
+		}}.Render()
+	}
+	days := `[...document.querySelectorAll('[name=from], [name=to]')].map(f => f.disabled).join(" ")`
+	h := browser.NewHarness(t)
+	rng := h.RegisterPage("range", browser.PageHTML(`<div class="tc-root"><div class="tc-main">`+form(false)+`</div></div>`, ""))
+	whole := h.RegisterPage("whole", browser.PageHTML(`<div class="tc-root"><div class="tc-main">`+form(true)+`</div></div>`, ""))
+	var start, off, on, startWhole string
+	err := h.Run(rng, 900, 600,
+		chromedp.Evaluate(days, &start),
+		chromedp.Click(`.tc-seg__opt:nth-child(2)`, chromedp.ByQuery),
+		chromedp.Evaluate(days, &off),
+		chromedp.Click(`.tc-seg__opt:nth-child(1)`, chromedp.ByQuery),
+		chromedp.Evaluate(days, &on),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(whole, 900, 600, chromedp.Evaluate(days, &startWhole)); err != nil {
+		t.Fatal(err)
+	}
+	if start != "false false" || off != "true true" || on != "false false" {
+		t.Errorf("days off: range at start %q, whole chosen %q, range again %q; want false, true, false", start, off, on)
+	}
+	if startWhole != "true true" {
+		t.Errorf("days off on a form that opens with the whole calendar: %q; want true", startWhole)
+	}
+}
+
 // TestAddRowAndDrop (task 29, step 4): «Add phone» adds its template's row
 // with the next free number in its name; a file dropped on the page shows the
 // drop sheet and sends the named form with the file.
@@ -1651,6 +1692,65 @@ func TestTreeNodeSwap(t *testing.T) {
 		if got != c.want {
 			t.Errorf("%s: %s; want %s", c.name, got, c.want)
 		}
+	}
+}
+
+// TestFormRecount (Carrel's task 194): a form asked again as it changes —
+// a day of the calendar to attach changes, the live layer asks the form's
+// address with its fields and puts the line at Attach in place; a day that
+// is off is not asked with. The bite: without the live layer the line stays
+// as the server drew it.
+func TestFormRecount(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	asked := h.RegisterStream("recount", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		q := r.URL.Query()
+		_, _ = io.WriteString(rw, `<span id="attach-line">`+q.Get("what")+` `+q.Get("span")+` `+q.Get("from")+` `+q.Get("to")+`</span>`)
+	})
+	page := func(live bool) string {
+		form := w.Form{Action: asked + "?what=calendar", ID: "attach-calendar", Recount: "attach-line", Items: []w.FormPart{
+			w.Field{Label: "What goes in", Parts: []w.FieldPart{w.Seg{Name: "span", Options: []w.SegOption{
+				{Label: "Whole calendar", Value: "whole", Disables: "from to"}, {Label: "Dates", Value: "dates", On: true}}}}},
+			w.Field{Label: "From", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From"}}},
+			w.Field{Label: "To", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-31", Label: "To"}}},
+		}}
+		line := w.Dim{Parts: []w.Inline{w.Text("as drawn")}, ID: "attach-line"}
+		doc := browser.PageHTML(`<div class="tc-root">`+form.Render()+line.Render()+`</div>`, "")
+		if !live {
+			doc = strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1)
+		}
+		return doc
+	}
+	const set = `(() => { const f = document.querySelector('[name="to"]'); f.value = "2026-09-30"; f.dispatchEvent(new Event("change", {bubbles: true})); return true; })()`
+	const whole = `(() => { document.querySelector('[value="whole"]').click(); return true; })()`
+	const line = `document.getElementById("attach-line").textContent`
+	var days, wholeLine, bare string
+	if err := h.Run(h.RegisterPage("recount-live", page(true)), 900, 600,
+		chromedp.Evaluate(set, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(line, &days),
+		chromedp.Evaluate(whole, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(line, &wholeLine),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(h.RegisterPage("recount-bare", page(false)), 900, 600,
+		chromedp.Evaluate(set, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(line, &bare),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if days != "calendar dates 2026-08-10 2026-09-30" {
+		t.Errorf("the line after To changed: %q; want calendar dates 2026-08-10 2026-09-30", days)
+	}
+	if wholeLine != "calendar whole  " {
+		t.Errorf("the line after the whole calendar: %q; want the days not asked with", wholeLine)
+	}
+	if bare != "as drawn" {
+		t.Errorf("without the live layer: %q; want as drawn", bare)
 	}
 }
 

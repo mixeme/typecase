@@ -626,6 +626,9 @@ func (g *gen) seg(x *El) string {
 			if v := box.Attr("aria-label"); v != "" {
 				f = append(f, "Title: "+q(v))
 			}
+			if v := box.Attr("data-tc-disables"); v != "" {
+				f = append(f, "Disables: "+q(v))
+			}
 		}
 		opts = append(opts, "{"+join(f, ", ")+"}")
 	}
@@ -1107,6 +1110,9 @@ func (g *gen) form(e *El) string {
 		}
 		if len(hidden) > 0 {
 			f = append(f, "Fields: "+hiddens(hidden))
+		}
+		if v := e.Attr("data-tc-recount"); v != "" {
+			f = append(f, "Recount: "+q(v))
 		}
 	}
 	if v := g.en.of(e, "FormVariant"); v != "" {

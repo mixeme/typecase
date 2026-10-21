@@ -321,6 +321,9 @@ func (g *gen) dimx(e *El) string {
 	if e.HasAttr("data-tc-empty") {
 		empty = ", Empty: true"
 	}
+	if id := e.Attr("id"); id != "" {
+		empty += ", ID: " + q(id)
+	}
 	return "w.Dim{Parts: []w.Inline{" + join(g.dimparts(e), ", ") + "}" + g.ev(e, "DimSize", "Size") + g.ev(e, "DimVariant", "Variant") + placef(e) + empty + "}"
 }
 

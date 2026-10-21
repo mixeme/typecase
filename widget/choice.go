@@ -16,6 +16,10 @@ type SegOption struct {
 	// a POST of its own, without a script too (Carrel's task 215).
 	Form string
 	To   string
+	// Disables names the form's fields the option of a switch with a Name
+	// switches off while it is chosen, separated by spaces as classes are:
+	// «The whole calendar» and the days of a range (Carrel's task 194).
+	Disables string
 }
 
 // SegVariant is the drawn size and alignment of a switch.
@@ -133,7 +137,7 @@ func (g Seg) seg(m mix) string {
 				kind = "checkbox"
 			}
 			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="` + kind + `"` + attr("name", g.Name) + attr("value", o.Value) +
-				attr("aria-label", pick(o.Label == "", o.Title)) + flag("checked", o.On) + `>`)
+				attr("aria-label", pick(o.Label == "", o.Title)) + flag("checked", o.On) + attr("data-tc-disables", o.Disables) + `>`)
 			if o.Icon != "" {
 				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
 			}

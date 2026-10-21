@@ -878,8 +878,21 @@
 		});
 	}
 
+	// A radio switches its fields off while it is chosen (SegOption.Disables:
+	// «The whole calendar» and the days of a range; Carrel's task 194); a
+	// choice changes on the newly chosen radio only, so its whole group goes
+	// again — the ones not chosen first, then the chosen one.
+	function syncGroup(radio) {
+		var scope = radio.form || document, boxes = [];
+		scope.querySelectorAll('input[type="radio"][data-tc-disables]').forEach(function (r) {
+			if (r.name === radio.name) boxes.push(r);
+		});
+		boxes.filter(function (r) { return !r.checked; }).concat(boxes.filter(function (r) { return r.checked; })).forEach(syncDisables);
+	}
+
 	function initDisables(root) {
-		root.querySelectorAll("input[data-tc-disables]").forEach(syncDisables);
+		var boxes = Array.prototype.slice.call(root.querySelectorAll("input[data-tc-disables]"));
+		boxes.filter(function (b) { return !b.checked; }).concat(boxes.filter(function (b) { return b.checked; })).forEach(syncDisables);
 	}
 
 	// An end that follows its start (data-tc-follows, Input.Follows; Carrel's
@@ -1027,7 +1040,8 @@
 	}
 
 	function onChange(e) {
-		if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
+		if (e.target.matches && e.target.matches('input[type="radio"]') && e.target.name) syncGroup(e.target);
+		else if (e.target.matches && e.target.matches("input[data-tc-disables]")) syncDisables(e.target);
 		if (e.target.matches && e.target.matches("select") && e.target.querySelector("option[data-tc-shows]")) syncShows(e.target);
 		if (e.target.hasAttribute && e.target.hasAttribute("data-tc-was")) follow(e.target);
 		if (e.target.form && e.target.form.querySelector("template[data-tc-tally]")) tally(e.target.form);

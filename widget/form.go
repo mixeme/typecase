@@ -476,7 +476,7 @@ func (v FormVariant) class() string {
 // Form — tc-form
 //
 // Роль. Форма: поля и группы полей, которые переносятся по ширине.
-// Вход. Form{Items, Variant, Tight, Action, Method, Fields, ID, Target}.
+// Вход. Form{Items, Variant, Tight, Action, Method, Fields, ID, Target, Recount}.
 // Состояния. plain | tight | flush | column | columns | action.
 // Инварианты. Поля переносятся, а не сжимаются; отступы формы — перечисление; форма печатает фрагмент своего кадра.
 // Поведение. Enter в поле формы отправляет форму.
@@ -498,6 +498,12 @@ type Form struct {
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
 	Target string
+	// Recount names, by their IDs, the elements the live layer puts in place
+	// when a field of the form changes: it asks the form's address with its
+	// fields (GET) and takes them from the answer — the line at Attach that
+	// says what the chosen days weigh (Carrel's task 194). Without the layer
+	// the line says so after the form is sent.
+	Recount string
 }
 
 // Render prints the form.
@@ -508,7 +514,7 @@ func (f Form) html(m mix) string {
 	tag := "div"
 	if f.Action != "" {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + attr("id", f.ID) + attr("action", f.Action) + ` method="` + method(f.Method) + `"` + attr("data-tc-target", f.Target) + `>`)
+		s.WriteString(`<form` + class(m, "tc-form", is("tight", f.Tight), f.Variant.class()) + attr("id", f.ID) + attr("action", f.Action) + ` method="` + method(f.Method) + `"` + attr("data-tc-target", f.Target) + attr("data-tc-recount", f.Recount) + `>`)
 		for _, h := range f.Fields {
 			s.WriteString(h.html(nil))
 		}
