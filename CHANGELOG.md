@@ -884,6 +884,24 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Collection sheets: addresses, names, states** (Carrel's task 192;
+  accepted by the owner 22.10, Р-74, Р-75). The sheets post to C-5's
+  `/app/collections/{new,rename,move,delete}?a=…&c=…` (a new folder to
+  `new?kind=file&a=…`) with `account`, `components` (`VEVENT`, `VTODO`,
+  `VJOURNAL`) and `name`; the address in «Rename and colour» is read-only
+  and not sent. `s-profile-6`: radicale · vps refuses, the typed form rides
+  hidden, «Back to the form» posts `?op=back`; `s-profile-8`, `-9`: Личный,
+  with «nextcloud may tell the attendees of its meetings that they are
+  cancelled.»; `s-profile-21`: no fields, «Try again». New frames:
+  `s-profile-28` (no server holds calendars — Connect account), `-29` (New
+  collection without a kind, «What it is»), `-30` (rename refused in the
+  sheet), `-31` (delete refused, a notice on Connections), `-32` (a move
+  that kept the original), `-33` (a feed's name and colour), `-34` (Move
+  folder), `-35` (moving a whole storage); the whole storage's menu has Move
+  (`s-profile-17`), the folder's menu items are links (`s-profile-12`).
+  Operations on a collection stay in Connections (Р-75); the menu in the
+  head of an open collection is deferred.
+
 - **Import: step 1 of every kind, one rule of refusal, the report's places**
   (Carrel's task 188; accepted by the owner 22.10, Р-72, Р-73). New frames:
   `s-io-15`, `-16` — step 1 of the calendar and of the list of tasks with

@@ -3759,7 +3759,7 @@ func Profile5() Screen {
 							Label: "On which server",
 							Parts: []w.FieldPart{
 								w.Pick{
-									Name:    "on.which.server",
+									Name:    "account",
 									Options: []w.PickOption{{Value: "nextcloud", Label: "nextcloud", On: true}},
 									Label:   "On which server",
 								},
@@ -3803,9 +3803,9 @@ func Profile5() Screen {
 							Parts: []w.FieldPart{
 								w.Group{
 									Items: []w.FieldPart{
-										w.Check{On: true, Name: "events", Value: "1", Parts: []w.CheckPart{w.Text("Events")}},
-										w.Check{On: true, Name: "tasks", Value: "1", Parts: []w.CheckPart{w.Text("Tasks")}},
-										w.Check{Name: "notes", Value: "1", Parts: []w.CheckPart{w.Text("Notes")}},
+										w.Check{On: true, Name: "components", Value: "VEVENT", Parts: []w.CheckPart{w.Text("Events")}},
+										w.Check{On: true, Name: "components", Value: "VTODO", Parts: []w.CheckPart{w.Text("Tasks")}},
+										w.Check{Name: "components", Value: "VJOURNAL", Parts: []w.CheckPart{w.Text("Notes")}},
 									},
 								},
 								w.FieldHint{
@@ -4025,10 +4025,21 @@ func Profile6() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
+					Action: "/app/collections/new",
+					Fields: []w.Hidden{
+						{Name: "account", Value: "radicale"},
+						{Name: "name", Value: "Поездки"},
+						{Name: "colour", Value: "#6B4E7A"},
+						{Name: "components", Value: "VEVENT"},
+						{Name: "components", Value: "VTODO"},
+						{Name: "address", Value: "poezdki"},
+					},
 					Icon:  "plus",
 					Tone:  w.SheetIconDanger,
 					Title: "New calendar",
-					Head:  []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("baikal")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
+					Head: []w.SheetHeadPart{
+						w.Dim{Parts: []w.Inline{w.Text("radicale · vps")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed},
+					},
 					Body: []w.SheetPart{
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("The server would not make it. Nothing was created, and the form is as you left it.")},
@@ -4036,13 +4047,16 @@ func Profile6() Screen {
 							Space: w.MsgFlush,
 						},
 						w.Diag{
-							Text: "[create]  MKCALENDAR /dav.php/calendars/m.yenuchenko/poezdki/ → 403\n              <D:error><D:need-privileges/></D:error>\n              no DAV:bind on the calendar home-set",
+							Text: "[create]  MKCALENDAR /mix/poezdki/ → 403\n              <D:error><D:need-privileges/></D:error>\n              no DAV:bind on the calendar home-set",
 						},
 						w.SheetNote{
-							Text: "This account may sign in and read, but not create. Either the user has no such right on the server, or the account was connected with a password issued read-only. Neither is something Carrel can fix from here.",
+							Text: "This account may sign in and read, but radicale · vps would not let it create here. The server does not say why — no such right for the user, or a password issued read-only; whoever runs the server can tell.",
 						},
 					},
-					Foot: []w.SheetFootPart{w.Button{Label: "Back to the form", Kind: w.ButtonPrimary}, w.Button{Label: "Try again"}},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Back to the form", Kind: w.ButtonPrimary, To: "/app/collections/new?op=back", Submit: true},
+						w.Button{Label: "Try again", Submit: true},
+					},
 				},
 				Pad: w.ScrimPad26,
 			},
@@ -4181,7 +4195,7 @@ func Profile7() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/collections/nextcloud/dni-rozhdeniya/rename",
+					Action: "/app/collections/rename?a=nextcloud&c=dni-rozhdeniya",
 					Icon:   "pencil",
 					Title:  "Rename and colour",
 					Head:   []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}},
@@ -4207,11 +4221,11 @@ func Profile7() Screen {
 							LabelAside: w.Dim{Parts: []w.Inline{w.Text("— stays as it is")}},
 							Parts: []w.FieldPart{
 								w.Input{
-									Name:    "address.stays.as.it.is",
-									Value:   "…/remote.php/dav/calendars/mix/birthdays/",
-									Label:   "Address",
-									Mono:    true,
-									Variant: w.InputDusty,
+									Value:    "…/remote.php/dav/calendars/mix/birthdays/",
+									Label:    "Address",
+									Mono:     true,
+									ReadOnly: true,
+									Variant:  w.InputDusty,
 								},
 							},
 							Width: w.FieldW100,
@@ -4372,12 +4386,12 @@ func Profile8() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/collections/nextcloud/dni-rozhdeniya/move",
+					Action: "/app/collections/move?a=nextcloud&c=lichnyj",
 					Icon:   "move",
 					Title:  "Move calendar",
 					Head: []w.SheetHeadPart{
 						w.Dim{
-							Parts:   []w.Inline{w.Text("nextcloud · Дни рождения")},
+							Parts:   []w.Inline{w.Text("nextcloud · Личный")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 							Place:   w.Pushed,
@@ -4420,8 +4434,8 @@ func Profile8() Screen {
 						w.Msg{
 							Parts: []w.MsgPart{
 								w.Text("Carrel creates a calendar there, copies all "),
-								w.Strong("51"),
-								w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path."),
+								w.Strong("128"),
+								w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path. nextcloud may tell the attendees of its meetings that they are cancelled."),
 							},
 							Space: w.MsgFlushTop2,
 						},
@@ -4571,16 +4585,17 @@ func Profile9() Screen {
 						},
 					},
 				},
+				Height: w.ShellHeight560,
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/collections/nextcloud/dni-rozhdeniya/delete",
+					Action: "/app/collections/delete?a=nextcloud&c=lichnyj",
 					Icon:   "trash",
 					Tone:   w.SheetIconDanger,
 					Title:  "Delete on the server",
 					Head: []w.SheetHeadPart{
 						w.Dim{
-							Parts:   []w.Inline{w.Text("nextcloud · Дни рождения")},
+							Parts:   []w.Inline{w.Text("nextcloud · Личный")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 							Place:   w.Pushed,
@@ -4590,8 +4605,8 @@ func Profile9() Screen {
 						w.Msg{
 							Parts: []w.MsgPart{
 								w.Text("The calendar and all "),
-								w.Strong("51"),
-								w.Text(" events in it are deleted on nextcloud. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with."),
+								w.Strong("128"),
+								w.Text(" events in it are deleted on nextcloud. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with. nextcloud may tell the attendees of its meetings that they are cancelled."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,
@@ -4628,12 +4643,12 @@ func Profile9() Screen {
 								w.Button{
 									Label: "Download",
 									Icon:  "download",
-									Href:  "/app/collections/nextcloud/dni-rozhdeniya/export",
+									Href:  "/app/calendar/nextcloud/lichnyj/export",
 									Aside: &w.Mono{Text: ".ics", Variant: w.Mono11},
 									After: "first",
 								},
 								w.Dim{
-									Parts:   []w.Inline{w.Text("51 events, one file, straight to you")},
+									Parts:   []w.Inline{w.Text("128 events, one file, straight to you")},
 									Size:    w.Dim11_5,
 									Variant: w.DimWrap,
 								},
@@ -4643,14 +4658,7 @@ func Profile9() Screen {
 						},
 						w.Field{
 							Label: "Type the name to confirm",
-							Parts: []w.FieldPart{
-								w.Input{
-									Name:        "type.the.name.to.confirm",
-									Placeholder: "Дни рождения",
-									Label:       "Type the name to confirm",
-									Focus:       true,
-								},
-							},
+							Parts: []w.FieldPart{w.Input{Name: "name", Placeholder: "Личный", Label: "Type the name to confirm", Focus: true}},
 							Width: w.FieldW100,
 						},
 					},

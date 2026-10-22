@@ -64,7 +64,7 @@ var _ = add(
 	form("error", w.Input{Value: "nextcloud", Error: true, Focus: true, Label: "Label"}, "s-profile-11", "tc-in", 1),
 	form("disabled", w.Input{Kind: w.InputPassword, Label: "Password", Disabled: true}, "s-profile-14", "tc-in", 4),
 	form("variant", w.Input{Value: "…/remote.php/dav/calendars/mix/birthdays/", Mono: true, Variant: w.InputDusty, Label: "Address"}, "s-profile-7", "tc-in", 2),
-	form("placeholder", w.Input{Placeholder: "Дни рождения", Focus: true, Label: "Type the name to confirm"}, "s-profile-9", "tc-in", 1),
+	form("placeholder", w.Input{Name: "name", Placeholder: "Личный", Label: "Type the name to confirm", Focus: true}, "s-profile-9", "tc-in", 1),
 	form("focus", w.Input{Value: "https://feeds.example/ru-holidays.ics", Mono: true, Focus: true, Variant: w.Input11_5, Label: "Feed address"}, "s-profile-10", "tc-in", 1),
 	form("variant", w.Input{Value: "brick-lamp-9f2-carrel", Mono: true, Variant: w.InputKeyFill, Label: "Password"}, "s-davloom-3", "tc-in", 1),
 	form("variant", w.Input{Kind: w.InputDate, Value: "2026-08-01", Mono: true, Variant: w.InputH26W120, Label: "From"}, "s-admin-7", "tc-in", 2),
