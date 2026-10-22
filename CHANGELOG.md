@@ -86,6 +86,12 @@ do, not what the authors did.
 
 ### Added
 
+- **A button after a message's words stands apart from them**
+  (`.tc-msg > .tc-btn`, `.tc-msg__aside > .tc-btn`: 6 px to the left), and
+  a link button in an alert keeps the button's ink instead of the alert's
+  red (`.tc-msg.is-alert > a.tc-btn`) — the owner, 22.10 (Carrel's task
+  222). Ten frames gain the gap; `s-conflict-10`, `s-io-19`,
+  `s-profile-32` lose the red.
 - **`TagAdd.Enter`** (`TagEnter{Name, Value, Label, Of}`) — the unseen
   default button of a tag field's line (`.tc-in__enter`): without a script
   Enter in the line sends the form with it — the letter's «add the
@@ -883,6 +889,18 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Import after note 111** (Carrel's task 222; accepted by the owner 22.10,
+  Р-76). A card without FN gets it from N only, else «Unnamed contact» —
+  «Ready — name from N» (`s-io-5`); an event's or a task's default title is
+  shown, not written. The marks of «Ready — …» are joined by commas: «a
+  whole day (no end), no title» (`s-io-6`). An empty cell «—» is muted in
+  every import table (`s-io-5`…`-8`, `-19`). «With a new UID» holds only
+  what the answer did not do: «the file holds this UID twice», «the server
+  gave its own» (`s-io-9`). «Try again» in the unanswered collection's
+  notice (`s-io-19`). Words in the captions: the drop refusals by case
+  (`s-io-1`), the refusals of step 1 (`s-io-18`), the report's rows
+  (`s-io-9`), a set's subtitle and a zip in a set (`s-io-4`).
 
 - **Collection sheets: addresses, names, states** (Carrel's task 192;
   accepted by the owner 22.10, Р-74, Р-75). The sheets post to C-5's

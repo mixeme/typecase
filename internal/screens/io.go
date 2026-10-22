@@ -982,7 +982,8 @@ func Io19() Screen {
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Strong("nextcloud · Контакты did not answer"),
-									w.Text(", so what is already there cannot be told. Nothing is written; try again, or choose another address book under «Into»."),
+									w.Text(", so what is already there cannot be told. Nothing is written; try again, or choose another address book under «Into». "),
+									w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/import"},
 								},
 								Tone:  w.MsgAlert,
 								Space: w.MsgFlushSides,
@@ -1028,7 +1029,7 @@ func Io19() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
 										},
 									},
@@ -1287,6 +1288,14 @@ func Io5() Screen {
 									{
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Вера Лебедева")}},
+											{Parts: []w.CellPart{w.Text("8e20-5b1f-c7d4")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Ready — name from N")}},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Артём Белов")}},
 											{Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Already here — skipped")}},
@@ -1296,7 +1305,7 @@ func Io5() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
 										},
 									},
@@ -1431,7 +1440,7 @@ func Io6() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Купить билеты "), w.Badge{Label: "VTODO"}}},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{
 												Parts: []w.CellPart{w.Text("Skipped: a calendar takes events — import it into a list of tasks")},
 												Tone:  w.CellDusty,
@@ -1443,7 +1452,7 @@ func Io6() Screen {
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("2026-05-04 · all day")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("Ready — no end: a whole day; no title")}},
+											{Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}},
 										},
 									},
 								},
@@ -1593,7 +1602,7 @@ func Io7() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Сдать отчёт")}},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 88: cannot read DUE «2026-13-01»")}, Tone: w.CellDanger},
 										},
 									},
@@ -1734,7 +1743,7 @@ func Io8() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("skan.pdf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("Skipped: not Markdown")}, Tone: w.CellDusty},
 										},
 									},
@@ -1742,7 +1751,7 @@ func Io8() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("pustoj.md")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{
 												Parts: []w.CellPart{w.Text("Empty file: nothing to store and nothing to name it by")},
 												Tone:  w.CellDanger,
@@ -1820,7 +1829,7 @@ func Io9() Screen {
 								Items: []w.CardPart{
 									w.Rubric{Text: "With a new UID", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
 									w.Diag{
-										Text: "Вера Дорошенко · 2b7e-11aa → 9d04-77c1 · imported as a copy\nВиктор Панов · 51c0-3a8e → baikal-0412 · the server gave its own",
+										Text: "Вера Дорошенко · 2b7e-11aa → 9d04-77c1 · the file holds this UID twice\nВиктор Панов · 51c0-3a8e → c3e1-0412 · the server gave its own",
 									},
 								},
 							},

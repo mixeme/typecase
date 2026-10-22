@@ -454,6 +454,10 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-msg.is-row > svg{flex:none;margin-top:1px}
 .tc-msg.is-alert{border-left-color:var(--tc-danger);color:var(--tc-danger);background:transparent;border:.5px solid var(--tc-danger);border-left-width:2px}
 .tc-msg.is-accent{border-left-color:var(--tc-accent)}
+/* кнопка после слов сообщения — с зазором */
+.tc-msg > .tc-btn,.tc-msg__aside > .tc-btn{margin-left:6px}
+/* кнопка-ссылка в тревоге — цвета кнопки, а не тревоги */
+.tc-msg.is-alert > a.tc-btn{color:var(--tc-ink)}
 .tc-empty{padding:26px var(--tc-page-gutter);color:var(--tc-muted);font-size:13px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .tc-prose{max-width:72ch;font-size:13.5px;line-height:1.65;white-space:pre-wrap}
 .tc-diag{font-family:var(--tc-font-mono);font-size:11px;line-height:1.65;background:var(--tc-card);border-radius:3px;
