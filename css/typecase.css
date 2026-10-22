@@ -217,6 +217,7 @@ a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
 .tc-close{width:24px;height:24px;padding:0;justify-content:center;flex:none;margin-left:auto;
   border-color:transparent;background:transparent;color:var(--tc-muted)}
 .tc-close > svg{width:14px;height:14px}
+.tc-root a.tc-close{color:var(--tc-muted)}
 /* Один auto на ряд: иначе Apply / «куда» и крестик делят свободное место. */
 .tc-push + .tc-close,.tc-acts > .tc-close{margin-left:0}
 .tc-split{display:inline-flex;flex:none}
@@ -1403,6 +1404,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Плашки колонками — участники события (задача 77): знакомый — меткой книги и именем, незнакомый — адресом; строка набора — в следующей клетке. */
 .tc-in--cols.tc-in--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 10px;align-items:center;justify-items:start;padding:5px 8px}
 .tc-in__add{border:0;background:transparent;font:inherit;color:var(--tc-ink);outline:0;min-width:120px;flex:1 1 120px;padding:0;height:20px}
+.tc-in__enter{display:none}
 .tc-in__add::placeholder{color:var(--tc-dusty)}
 /* Снятая крестиком плашка без сценария: не уйдёт с формой и так и выглядит. */
 .tc-tag--pill:has(> .tc-check__box:not(:checked)){text-decoration:line-through;opacity:.55}

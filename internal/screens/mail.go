@@ -204,10 +204,14 @@ func Mail1() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
+					ID:     "letter",
 					Action: "/app/mail/send",
 					Icon:   "mail",
 					Title:  "Letter",
-					Head:   []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}},
+					Head: []w.SheetHeadPart{
+						w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed},
+						w.Close{Label: "Close", Href: "/app/contacts"},
+					},
 					Body: []w.SheetPart{
 						w.Field{
 							Label: "To",
@@ -240,6 +244,7 @@ func Mail1() Screen {
 											Placeholder: "Name or address",
 											Label:       "Add a recipient",
 											Suggest:     "/app/contacts/suggest",
+											Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
 										},
 										Focus: true,
 									},
@@ -475,17 +480,25 @@ func Mail4() Screen {
 										{
 											Parts: []w.CellPart{
 												w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"},
-												w.Button{Label: "Send", Small: true, Secondary: true},
-												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+												w.Button{Label: "Send", Small: true, Secondary: true, Href: "/app/mail/link?id=9c1f4e"},
+												w.Button{
+													Label:     "Revoke",
+													Kind:      w.ButtonDanger,
+													Small:     true,
+													Secondary: true,
+													Form:      "post-revoke",
+													Name:      "id",
+													Value:     "9c1f4e",
+												},
 											},
 											Drop: &w.Drop{
 												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 												Row:     true,
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{Icon: "mail", Label: "Send"},
+														w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=9c1f4e"},
 														w.MenuSep{},
-														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "9c1f4e"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnderEnd,
@@ -514,17 +527,25 @@ func Mail4() Screen {
 										{
 											Parts: []w.CellPart{
 												w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
-												w.Button{Label: "Send", Small: true, Secondary: true},
-												w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+												w.Button{Label: "Send", Small: true, Secondary: true, Href: "/app/mail/link?id=7f3ac9"},
+												w.Button{
+													Label:     "Revoke",
+													Kind:      w.ButtonDanger,
+													Small:     true,
+													Secondary: true,
+													Form:      "post-revoke",
+													Name:      "id",
+													Value:     "7f3ac9",
+												},
 											},
 											Drop: &w.Drop{
 												Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 												Row:     true,
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.MenuItem{Icon: "mail", Label: "Send"},
+														w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=7f3ac9"},
 														w.MenuSep{},
-														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+														w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "7f3ac9"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnderEnd,
@@ -537,6 +558,11 @@ func Mail4() Screen {
 							},
 							Variant: w.TablePacked,
 						},
+						w.PostForm{
+							ID:     "post-revoke",
+							Action: "/app/publish?op=revoke",
+							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+						},
 					},
 				},
 			},
@@ -547,7 +573,7 @@ func Mail4() Screen {
 					Title:  "Send this link",
 					Head: []w.SheetHeadPart{
 						w.SheetSubject{Mark: w.Mark{Colour: "#4A6B52"}, Text: "Личный · 10–31 August"},
-						w.Close{Label: "Close"},
+						w.Close{Label: "Close", Href: "/app/files/published"},
 					},
 					Body: []w.SheetPart{
 						w.Field{
@@ -557,7 +583,7 @@ func Mail4() Screen {
 						},
 						w.Field{
 							Label: "A line from you",
-							Parts: []w.FieldPart{w.Input{Name: "a.line.from.you", Placeholder: "optional", Label: "A line from you"}},
+							Parts: []w.FieldPart{w.Input{Name: "line", Placeholder: "optional", Label: "A line from you"}},
 							Width: w.FieldW100,
 						},
 						w.SheetFrom{
@@ -796,6 +822,12 @@ func Mail5() Screen {
 								},
 							},
 						},
+						w.PostForm{
+							ID:     "attach-search",
+							Action: "/app/mail/attach",
+							Fields: []w.Hidden{{Name: "what", Value: "note"}},
+							Method: "get",
+						},
 					},
 				},
 			},
@@ -806,12 +838,12 @@ func Mail5() Screen {
 					Title:  "Attach a note",
 					Head: []w.SheetHeadPart{
 						w.Filter{
-							Query:   w.Query{Value: "подряд", Label: "подряд", Name: "field"},
+							Query:   w.Query{Value: "подряд", Label: "Search", Name: "q", Of: "attach-search"},
 							Quiet:   true,
 							Variant: w.FilterT12W200,
 							Place:   w.Pushed,
 						},
-						w.Close{Label: "Close"},
+						w.Close{Label: "Close", Href: "/app/mail/compose"},
 					},
 					Body: []w.SheetPart{
 						w.SheetPick{
@@ -878,12 +910,9 @@ func Mail5() Screen {
 									Label: "Send it as",
 									Parts: []w.FieldPart{
 										w.Seg{
-											Options: []w.SegOption{
-												{Label: "Markdown · .md", On: true, Value: "markdown.md"},
-												{Label: "Source · .ics", Value: "source.ics"},
-											},
+											Options: []w.SegOption{{Label: "Markdown · .md", On: true, Value: "md"}, {Label: "Source · .ics", Value: "ics"}},
 											Variant: w.SegStart,
-											Name:    "send.it.as",
+											Name:    "format",
 										},
 										w.FieldHint{
 											Parts: []w.Inline{
@@ -1117,7 +1146,7 @@ func Mail10() Screen {
 				Content: w.Sheet{
 					Icon:  "cal",
 					Title: "Attach a calendar",
-					Head:  []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}},
+					Head:  []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed, Href: "/app/mail/compose"}},
 					Body: []w.SheetPart{
 						w.SheetPick{
 							Rail: []w.SheetPickRail{
@@ -1414,7 +1443,7 @@ func Mail6() Screen {
 					Title:  "Attach a file",
 					Head: []w.SheetHeadPart{
 						w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}}, Current: "Подряд"},
-						w.Close{Label: "Close"},
+						w.Close{Label: "Close", Href: "/app/mail/compose"},
 					},
 					Body: []w.SheetPart{
 						w.SheetPick{
@@ -1742,6 +1771,12 @@ func Mail12() Screen {
 								},
 							},
 						},
+						w.PostForm{
+							ID:     "attach-search",
+							Action: "/app/mail/attach",
+							Fields: []w.Hidden{{Name: "what", Value: "contact"}},
+							Method: "get",
+						},
 					},
 				},
 			},
@@ -1752,12 +1787,12 @@ func Mail12() Screen {
 					Title:  "Attach a contact",
 					Head: []w.SheetHeadPart{
 						w.Filter{
-							Query:   w.Query{Value: "смир", Label: "смир", Name: "field"},
+							Query:   w.Query{Value: "смир", Label: "Search", Name: "q", Of: "attach-search"},
 							Quiet:   true,
 							Variant: w.FilterT12W200,
 							Place:   w.Pushed,
 						},
-						w.Close{Label: "Close"},
+						w.Close{Label: "Close", Href: "/app/mail/compose"},
 					},
 					Body: []w.SheetPart{
 						w.SheetPick{
@@ -2052,7 +2087,7 @@ func Mail13() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}},
 							Current: "Договор подряда",
 						},
-						w.Close{Label: "Close"},
+						w.Close{Label: "Close", Href: "/app/mail/compose"},
 					},
 					Body: []w.SheetPart{
 						w.SheetPick{

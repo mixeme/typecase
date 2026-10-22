@@ -205,7 +205,7 @@ func (p Pick) html(m mix) string {
 // Query — tc-q
 //
 // Роль. Строка запроса внутри поля поиска или фильтра.
-// Вход. Query{Value, Placeholder, Label, Name, Key}.
+// Вход. Query{Value, Placeholder, Label, Name, Key, Of}.
 // Состояния. нет.
 // Инварианты. Тип поля — search; у строки есть доступное имя; строка печатает фрагмент своего кадра.
 // Поведение. Ввод — браузера; Esc очищает, если поле не пусто; клавиша (Key) ставит в строку фокус.
@@ -221,13 +221,17 @@ type Query struct {
 	// script (Carrel's task 87): «/». It does nothing while the cursor is in
 	// a field.
 	Key string
+	// Of is the ID of the form the line belongs to without standing in it,
+	// as Input.Of: a picker's search in a sheet that is a form of its own
+	// goes with a GET form of its own (PostForm.Method; Carrel's task 221).
+	Of string
 }
 
 // Render prints the query line.
 func (q Query) Render() string { return q.html(nil) }
 
 func (q Query) html(m mix) string {
-	return `<input` + class(m, "tc-q") + ` type="search"` + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + attr("data-tc-key", q.Key) + `>`
+	return `<input` + class(m, "tc-q") + ` type="search"` + attr("form", q.Of) + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + attr("data-tc-key", q.Key) + `>`
 }
 
 // FilterVariant is the drawn size of a filter.
@@ -332,6 +336,19 @@ type TagAdd struct {
 	// what is sent (a record's UID, an address), Label what is shown beside
 	// it. The live layer takes the list away where it asks Suggest.
 	Options []ListOption
+	// Enter is the form's default button, unseen, right after the line: on
+	// a page without a script Enter in the line sends the form with it — the
+	// letter's «add the recipient» — and not with the form's first button
+	// (Carrel's task 221: Attach's «Contact»). With the library's script
+	// Enter in the line adds a tag and sends nothing.
+	Enter *TagEnter
+}
+
+// TagEnter is the unseen default button of a tag field's line (TagAdd.Enter):
+// the pair it sends and its accessible name.
+type TagEnter struct {
+	Name, Value, Label string
+	Of                 string // the ID of its form: the line may stand outside it
 }
 
 // ListOption is a choice of a tag field's line on a page without a script.
@@ -367,6 +384,9 @@ func (t TagInput) html(m mix) string {
 			list = "tc-list-" + a.Name
 		}
 		s.WriteString(` <input class="tc-in__add" type="text"` + attr("name", a.Name) + attr("value", a.Value) + attr("placeholder", a.Placeholder) + attr("aria-label", a.Label) + attr("list", list) + ` autocomplete="off">`)
+		if e := a.Enter; e != nil {
+			s.WriteString(`<button class="tc-in__enter" type="submit"` + attr("form", e.Of) + attr("name", e.Name) + attr("value", e.Value) + ` hidden>` + esc(e.Label) + `</button>`)
+		}
 		if list != "" {
 			s.WriteString(`<datalist` + attr("id", list) + `>`)
 			for _, o := range a.Options {

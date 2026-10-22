@@ -135,9 +135,9 @@ var _ = add(
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-20", "tc-menu", 2),
 	overlay("row", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "mail", Label: "Send"},
+		w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=9c1f4e"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-publish-1", "tc-menu", 1),
+		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "9c1f4e"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-publish-1", "tc-menu", 1),
 	overlay("sort", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents?sort=name"},
 		w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents?sort=size"},
@@ -588,9 +588,9 @@ var _ = add(
 		w.MenuItem{Label: "New collection", Name: "into", Value: "new"},
 		w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}, "s-backup-8", "tc-menu", 1),
 	overlay("danger", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "mail", Label: "Send"},
+		w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=9c1f4e"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}}, Width: w.MenuWidth212}, "s-publish-15", "tc-menu", 1),
+		w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "9c1f4e"}}, Width: w.MenuWidth212}, "s-publish-15", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "7 days", Name: "lives", Value: "7"},
 		w.MenuItem{Label: "14 days", Name: "lives", Value: "14"},
@@ -1070,8 +1070,8 @@ var _ = add(
 			w.MenuItem{Label: "30 days", On: true, Name: "lives", Value: "30"},
 			w.MenuSep{},
 			w.MenuItem{Label: "No expiry", Name: "lives", Value: "never"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}, Width: w.FieldSM}}, Foot: []w.SheetFootPart{w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Cancel", Href: "/app/calendar"}}}, "s-publish-2", "tc-sheet", 1),
-	overlay("close", w.Sheet{Action: "/app/mail/send", Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
-		w.Field{Label: "To", Parts: []w.FieldPart{w.Drop{Trigger: w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}, w.Tag{Label: "Артём Белов", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.belov@example.org")}}, Title: "a.belov@example.org", Name: "to", Value: "a.belov@example.org"}}, Name: "to", Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest"}, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("2 of 10 recipients. Everyone sees the whole list.")}}}, Width: w.FieldW100},
+	overlay("close", w.Sheet{ID: "letter", Action: "/app/mail/send", Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close", Href: "/app/contacts"}}, Body: []w.SheetPart{
+		w.Field{Label: "To", Parts: []w.FieldPart{w.Drop{Trigger: w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}, w.Tag{Label: "Артём Белов", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.belov@example.org")}}, Title: "a.belov@example.org", Name: "to", Value: "a.belov@example.org"}}, Name: "to", Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest", Enter: &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"}}, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("2 of 10 recipients. Everyone sees the whole list.")}}}, Width: w.FieldW100},
 		w.Field{Label: "Subject", Parts: []w.FieldPart{w.Input{Name: "subject", Value: "Контакты подрядчика и смета", Label: "Subject"}}, Width: w.FieldW100},
 		w.Area{Text: "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.", Variant: w.AreaLetter, Name: "text", Label: "Text"},
 		w.Sec{Items: []w.SecPart{

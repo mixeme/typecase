@@ -110,17 +110,25 @@ func Publish1() Screen {
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"},
-											w.Button{Label: "Send", Small: true, Secondary: true},
-											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+											w.Button{Label: "Send", Small: true, Secondary: true, Href: "/app/mail/link?id=9c1f4e"},
+											w.Button{
+												Label:     "Revoke",
+												Kind:      w.ButtonDanger,
+												Small:     true,
+												Secondary: true,
+												Form:      "post-revoke",
+												Name:      "id",
+												Value:     "9c1f4e",
+											},
 										},
 										Drop: &w.Drop{
 											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 											Row:     true,
 											Menu: w.Menu{
 												Items: []w.MenuPart{
-													w.MenuItem{Icon: "mail", Label: "Send"},
+													w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=9c1f4e"},
 													w.MenuSep{},
-													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "9c1f4e"},
 												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
@@ -149,17 +157,25 @@ func Publish1() Screen {
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
-											w.Button{Label: "Send", Small: true, Secondary: true},
-											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+											w.Button{Label: "Send", Small: true, Secondary: true, Href: "/app/mail/link?id=7f3ac9"},
+											w.Button{
+												Label:     "Revoke",
+												Kind:      w.ButtonDanger,
+												Small:     true,
+												Secondary: true,
+												Form:      "post-revoke",
+												Name:      "id",
+												Value:     "7f3ac9",
+											},
 										},
 										Drop: &w.Drop{
 											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
 											Row:     true,
 											Menu: w.Menu{
 												Items: []w.MenuPart{
-													w.MenuItem{Icon: "mail", Label: "Send"},
+													w.MenuItem{Icon: "mail", Label: "Send", Href: "/app/mail/link?id=7f3ac9"},
 													w.MenuSep{},
-													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "7f3ac9"},
 												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
@@ -171,6 +187,11 @@ func Publish1() Screen {
 							},
 						},
 						Variant: w.TablePacked,
+					},
+					w.PostForm{
+						ID:     "post-revoke",
+						Action: "/app/publish?op=revoke",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},
@@ -284,7 +305,15 @@ func Publish20() Screen {
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/9c1f4e", Copied: "Copied"},
-											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+											w.Button{
+												Label:     "Revoke",
+												Kind:      w.ButtonDanger,
+												Small:     true,
+												Secondary: true,
+												Form:      "post-revoke",
+												Name:      "id",
+												Value:     "9c1f4e",
+											},
 										},
 										Drop: &w.Drop{
 											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
@@ -292,7 +321,8 @@ func Publish20() Screen {
 											Menu: w.Menu{
 												Items: []w.MenuPart{
 													w.MenuSep{},
-													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "9c1f4e"},
+												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
 											},
@@ -320,7 +350,15 @@ func Publish20() Screen {
 									{
 										Parts: []w.CellPart{
 											w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
-											w.Button{Label: "Revoke", Kind: w.ButtonDanger, Small: true, Secondary: true},
+											w.Button{
+												Label:     "Revoke",
+												Kind:      w.ButtonDanger,
+												Small:     true,
+												Secondary: true,
+												Form:      "post-revoke",
+												Name:      "id",
+												Value:     "7f3ac9",
+											},
 										},
 										Drop: &w.Drop{
 											Trigger: w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"},
@@ -328,7 +366,8 @@ func Publish20() Screen {
 											Menu: w.Menu{
 												Items: []w.MenuPart{
 													w.MenuSep{},
-													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger}},
+													w.MenuItem{Label: "Revoke", Tone: w.MenuToneDanger, Form: "post-revoke", Name: "id", Value: "7f3ac9"},
+												},
 												Width: w.MenuWidth212,
 												Pop:   w.MenuUnderEnd,
 											},
@@ -339,6 +378,11 @@ func Publish20() Screen {
 							},
 						},
 						Variant: w.TablePacked,
+					},
+					w.PostForm{
+						ID:     "post-revoke",
+						Action: "/app/publish?op=revoke",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
 			},

@@ -429,6 +429,9 @@ func queryOf(qq *El) string {
 	if v := qq.Attr("name"); v != "" {
 		n = ", Name: " + q(v)
 	}
+	if v := qq.Attr("form"); v != "" {
+		n += ", Of: " + q(v)
+	}
 	v := "Value: " + q(qq.Attr("value"))
 	if ph := qq.Attr("placeholder"); ph != "" {
 		v = "Placeholder: " + q(ph)
@@ -460,6 +463,8 @@ func (g *gen) tagInput(x *El) string {
 			parts = append(parts, g.dimx(k))
 		case k.Has("tc-in__add"):
 			continue
+		case k.Tag == "button" && k.HasAttr("hidden"):
+			continue // the line's Enter (TagAdd.Enter)
 		default:
 			parts = append(parts, g.inlineEl(k))
 		}
@@ -493,6 +498,11 @@ func (g *gen) tagInput(x *El) string {
 		}
 		if v := x.Attr("data-tc-suggest"); v != "" {
 			af = append(af, "Suggest: "+q(v))
+		}
+		for _, k := range x.Els() {
+			if k.Tag == "button" && k.HasAttr("hidden") {
+				af = append(af, "Enter: &w.TagEnter{Name: "+q(k.Attr("name"))+", Value: "+q(k.Attr("value"))+", Label: "+q(k.Text())+", Of: "+q(k.Attr("form"))+"}")
+			}
 		}
 		f = append(f, "Add: &w.TagAdd{"+join(af, ", ")+"}")
 	}
@@ -1442,6 +1452,9 @@ func (g *gen) postForm(e *El) string {
 		f = append(f, "File: "+q(file))
 	} else if e.Attr("enctype") == "multipart/form-data" {
 		f = append(f, "Multipart: true")
+	}
+	if m := e.Attr("method"); m != "" && m != "post" {
+		f = append(f, "Method: "+q(m))
 	}
 	return "w.PostForm{" + join(f, ", ") + "}"
 }

@@ -2713,6 +2713,43 @@ func TestFileRanges(t *testing.T) {
 	}
 }
 
+// TestTagEnter (Carrel's task 221): Enter in a tag field's line sends its
+// form with the line's unseen default button — the letter's «add the
+// recipient», op=add — and not with the form's first visible submit (Attach's
+// «Contact»). With the library's script Enter sends nothing: the line makes
+// a tag. The bite: without TagAdd.Enter the first submit goes.
+func TestTagEnter(t *testing.T) {
+	needChrome(t)
+	field := w.TagInput{Name: "to", Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient",
+		Enter: &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"}}}
+	body := `<div class="tc-root"><form id="letter" action="/x" method="post">` + field.Render() +
+		`<button class="tc-btn" type="submit" formaction="/x?op=attach&amp;what=contact">Contact</button></form></div>`
+	const catch = `document.addEventListener("submit", e => { e.preventDefault(); window.__sent = (e.submitter ? (e.submitter.name + "=" + e.submitter.value + " " + (e.submitter.getAttribute("formaction") || "")) : "none"); }); true`
+	h := browser.NewHarness(t)
+	for _, c := range []struct {
+		name string
+		live bool
+		want string
+	}{{"without a script", false, "op=add "}, {"with the script", true, ""}} {
+		doc := browser.PageHTML(body, "")
+		if !c.live {
+			doc = strings.Replace(strings.Replace(doc, `<script src="/tc.js"></script>`, "", 1), `<script src="/tc-live.js"></script>`, "", 1)
+		}
+		var sent string
+		if err := h.Run(h.RegisterPage("tag-enter-"+strconv.FormatBool(c.live), doc), 900, 600,
+			chromedp.Evaluate(catch, nil),
+			chromedp.SendKeys(`.tc-in__add`, "anna@example.org\r", chromedp.ByQuery),
+			chromedp.Sleep(500*time.Millisecond),
+			chromedp.Evaluate(`window.__sent || ""`, &sent),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if sent != c.want {
+			t.Errorf("%s: Enter sent %q; want %q", c.name, sent, c.want)
+		}
+	}
+}
+
 // TestRangesNextStep (Carrel's task 220, Р-71): the restore from this
 // computer keeps its file for the next step. Step 1 sends the parts the
 // server names; its form names a zone, so step 2 comes in place and the page

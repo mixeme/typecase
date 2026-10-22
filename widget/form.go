@@ -653,7 +653,7 @@ func multipart(form string) string {
 // PostForm — tc-post
 //
 // Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).
-// Вход. PostForm{ID, Action, Fields, File, Target, Multipart}.
+// Вход. PostForm{ID, Action, Fields, File, Target, Multipart, Method}.
 // Состояния. default.
 // Инварианты. Форму не видно: в ней только скрытые поля; форма печатает фрагмент своего кадра.
 // Поведение. Отправку делает браузер — сценарий не нужен.
@@ -673,6 +673,10 @@ type PostForm struct {
 	// own: the answer to a taken name goes with the file the upload's field
 	// holds (Carrel's task 218).
 	Multipart bool
+	// Method "get" makes it a search sent apart from the form around its
+	// field (Input.Of): a picker's search in the head of a sheet that is a
+	// form of its own (Carrel's task 221). POST when empty.
+	Method string
 }
 
 // Render prints the form.
@@ -680,7 +684,7 @@ func (f PostForm) Render() string { return f.html(nil) }
 
 func (f PostForm) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="post"` + attr("enctype", pick(f.File != "" || f.Multipart, "multipart/form-data")) + attr("data-tc-target", f.Target) + `>`)
+	s.WriteString(`<form` + class(m, "tc-post") + attr("id", f.ID) + attr("action", f.Action) + ` method="` + method(f.Method) + `"` + attr("enctype", pick(f.File != "" || f.Multipart, "multipart/form-data")) + attr("data-tc-target", f.Target) + `>`)
 	for _, h := range f.Fields {
 		s.WriteString(h.html(nil))
 	}

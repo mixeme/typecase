@@ -86,6 +86,14 @@ do, not what the authors did.
 
 ### Added
 
+- **`TagAdd.Enter`** (`TagEnter{Name, Value, Label, Of}`) — the unseen
+  default button of a tag field's line (`.tc-in__enter`): without a script
+  Enter in the line sends the form with it — the letter's «add the
+  recipient», `op=add` — not with the form's first submit (Carrel's task
+  221). With the library's script Enter makes a tag and sends nothing.
+- **`Query.Of`** and **`PostForm.Method`** — a picker's search in a sheet that
+  is a form of its own goes with a GET form of its own (Carrel's task 221).
+
 - **`Dialog.Ranges`, `Dialog.RangesOf`** — a step sends parts of the file an
   earlier step kept in the page (Carrel's task 220, Р-71): the live layer
   keeps a `FileField.Ranges` file under its field's name; a dialog naming
@@ -875,6 +883,16 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **The letter and the links after 194** (Carrel's task 221; the cross
+  accepted by the owner 22.10). «Send it as» is `format` (`md` | `ics`), the
+  link letter's line `line`, the attach pickers' search `q` in a GET form
+  `attach-search`; Published links' live rows: Send a link
+  `/app/mail/link?id=…`, Revoke a submit of `post-revoke` (`s-publish-1`,
+  `-15`, `-17`, `-20`, `s-mail-4`); the letter's line of recipients has its
+  Enter; the crosses of the letter's sheets are links back. A cross that is
+  a link is muted as a button cross is (`s-publish-13`, `-22`,
+  `components-41` — it was ink).
 
 - **Restore from this computer: step 2 in place, records at Restore**
   (Carrel's task 220; accepted by the owner 22.10, Р-71). `s-backup-15`,
