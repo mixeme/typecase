@@ -2702,7 +2702,7 @@ func Publish3() Screen {
 							Title: &w.HeadTitle{Text: "Анна Ковалёва"},
 							Subs: []w.HeadSub{
 								w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}},
-								w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}},
+								w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
 							},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{

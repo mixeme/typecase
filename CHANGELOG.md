@@ -884,6 +884,24 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Import: step 1 of every kind, one rule of refusal, the report's places**
+  (Carrel's task 188; accepted by the owner 22.10, Р-72, Р-73). New frames:
+  `s-io-15`, `-16` — step 1 of the calendar and of the list of tasks with
+  their own words; `s-io-17` — an empty «Into» from a combined view, Preview
+  file off with its reason; `s-io-18` — a refusal of step 1 (the other
+  refusals' words in its caption); `s-io-19` — the collection did not
+  answer on the preview, Import off. The file field of every step carries
+  its extensions under it; notes take `.ics` (journal entries) and several
+  files (`s-io-4`); the tasks' and the calendar's previews no longer refuse
+  a record without a title or an end — a default title and a short mark
+  (`s-io-6`, `-7`, `-14`); one phrase for one failure in the preview and
+  the report; the report has «With a new UID» and «Not kept by the server»
+  (`s-io-9`); «Into» and the preview's head carry the collection's mark
+  (`s-io-5`…`-9`, `-14`); the read-only notebook is in the notes' «Into»
+  (`s-io-11`); the import's messages stand flush with the column. A
+  contact's subtitle naming its address book carries the book's mark
+  (`s-contacts-1`, `-6`, `-16`, `s-publish-3`, `mentions-1`, `-9`).
+
 - **The letter and the links after 194** (Carrel's task 221; the cross
   accepted by the owner 22.10). «Send it as» is `format` (`md` | `ics`), the
   link letter's line `line`, the attach pickers' search `q` in a GET form

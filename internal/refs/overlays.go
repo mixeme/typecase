@@ -8,6 +8,11 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("marks", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
+		w.MenuSep{},
+		w.MenuItem{Label: "New task list"}}, Width: w.MenuWidth290}, "s-io-13", "tc-menu", 1),
 	overlay("submits", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
 		w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},
@@ -363,6 +368,7 @@ var _ = add(
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй"},
 		w.MenuSep{},
 		w.MenuItem{Label: "New notebook"}}, Width: w.MenuWidth290}, "s-io-11", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
@@ -2566,6 +2572,12 @@ var _ = add(
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
 			w.Diag{Text: "Артём Белов · 1a77-40de-bb02\nИрина Соколова · 33b0-9ffa-1120"}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "With a new UID", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
+			w.Diag{Text: "Вера Дорошенко · 2b7e-11aa → 9d04-77c1 · imported as a copy\nВиктор Панов · 51c0-3a8e → baikal-0412 · the server gave its own"}}},
+		w.Card{Items: []w.CardPart{
+			w.Rubric{Text: "Not kept by the server", Items: []w.RubricPart{w.Mono{Text: "1", Variant: w.MonoTight}}},
+			w.Diag{Text: "Галина Мещерякова · PHOTO"}}},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
 			w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}}},

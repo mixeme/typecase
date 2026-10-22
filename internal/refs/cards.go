@@ -10,6 +10,8 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
+	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Nothing was read."), w.Text(" «Разное (mix).vcf» is not a vCard file: its first line is not "), w.Mono{Text: "BEGIN:VCARD"}, w.Text(". Choose the file again.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-io-18", "tc-msg", 1),
+	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed.")}, Space: w.MsgFlushSides}, "s-io-3", "tc-msg", 1),
 	cards("gutter", w.Msg{Parts: []w.MsgPart{w.Strong("nextcloud:"), w.Text(" 1 new collection — «Поездки». Tick it to see it in the rail.")}, Space: w.MsgInset20}, "s-profile-27", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The archive is larger than 16 MB. Choose a folder of your storage for it, or put it there and choose "), w.Strong("From a server"), w.Text(".")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12}, "s-backup-16", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("• 10 collections"), w.Break{}, w.Text("• 1 published link"), w.Break{}, w.Text("• 1 source of a backup job"), w.Break{}, w.Text("• 1 davloom device’s sync of them")}, Space: w.MsgFlush}, "s-profile-26", "tc-msg", 2),
@@ -20,7 +22,7 @@ var _ = add(
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("This combination cannot be written.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-conflict-8", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Not moved yet."), w.Text(" Your edit also moves this note to "), w.Mark{Colour: "#6B4E7A"}, w.Text(" nextcloud · Дневник.")}, Space: w.MsgFlushSides}, "s-conflict-11", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"}}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-conflict-10", "tc-msg", 1),
-	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Front matter is read when present: title, date, tags, UID and "), w.Mono{Text: "X-"}, w.Text("properties exported earlier. A file without it becomes a note dated by its own timestamp.")}}, "s-io-4", "tc-msg", 1),
+	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Front matter is read when present: title, date, tags, UID and "), w.Mono{Text: "X-"}, w.Text("properties exported earlier. A file without it becomes a note dated by its own timestamp.")}, Space: w.MsgFlushSides}, "s-io-4", "tc-msg", 1),
 	cards("lost", w.Msg{Parts: []w.MsgPart{w.Strong("The change was saved, but the server did not keep two days of the series."), w.Text(" Other clients will not see them either: the meeting of 24 August, which was skipped, is back; the meeting of 31 August, which was moved to 1 September, 15:00, is back on its day at 12:00.")}, Space: w.MsgFlushTop2}, "states-36", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}, "s-dup-6", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("3"), w.Text(" files, 4.4 MB, are deleted on sftpgo · vps. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-files-22", "tc-msg", 1),
@@ -76,7 +78,7 @@ var _ = add(
 	// tc-diag
 	cards("ink", w.Diag{Text: "#!/bin/sh\nset -eu\nh='Authorization: Bearer cbk_7f3a-91de-4402-lamp'\nb=https://carrel.example/api/backup\nout=/var/backups\n\nid=$(curl -fsS -X POST -H \"$h\" \"$b/run?job=personal\")\nuntil [ \"$(curl -fsS -H \"$h\" \"$b/status?id=$id\")\" != running ]; do sleep 20; done\ncurl -fsS -H \"$h\" \"$b/$id/download\" -o \"$out/carrel-personal-$(date +%F).zip\"", Variant: w.DiagInk}, "s-backup-3", "tc-diag", 1),
 	cards("plain", w.Diag{Text: "[discover] GET /.well-known/caldav → 200\n[principal] /principals/mix/"}, "components-30", "tc-diag", 1),
-	cards("danger", w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}, "s-io-9", "tc-diag", 2),
+	cards("danger", w.Diag{Text: "line 12: cannot decode quoted-printable", Variant: w.DiagDanger}, "s-io-9", "tc-diag", 4),
 
 	// tc-danger
 	cards("plain", w.Danger{Button: w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}}, "s-contacts-6", "tc-danger", 1),
@@ -427,6 +429,13 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
+		w.Diag{Text: "Артём Белов · 1a77-40de-bb02\nИрина Соколова · 33b0-9ffa-1120"}}}, "s-io-9", "tc-card", 2),
+	cards("plain", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "From a file"},
+		w.Field{Label: "iCalendar file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Личный 2026.ics", Label: "Личный 2026.ics", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".ics", Label: "iCalendar file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".ics"}, w.Text(" — iCalendar 2.0. One file holds any number of events; tasks and journal entries in it are skipped and named in the report.")}, Line: true}}}, "s-io-15", "tc-card", 1),
 	cards("shown", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "nextcloud", Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Hide password", Small: true, Href: "/app/settings/connections"}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Look for changes", Small: true, Form: "conn-picks", To: "/app/settings/connections?op=rediscover&account=nextcloud"}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGap6}}},
 		w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5Dusty},
@@ -510,7 +519,8 @@ var _ = add(
 		w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}}}}, "s-profile-15", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
-		w.Field{Label: "Markdown or a zip of them", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}}}}, "s-io-4", "tc-card", 1),
+		w.Field{Label: "Markdown, a zip of them, or .ics", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "заметки-2026.zip", Label: "заметки-2026.zip", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".md,.zip,.ics", Label: "Markdown, a zip of them, or .ics", Shows: "import-file", Many: true}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".md"}, w.Text(" — Markdown, "), w.Mono{Text: ".zip"}, w.Text(" — any number of them, "), w.Mono{Text: ".ics"}, w.Text(" — iCalendar 2.0 journal entries. Several files may be picked at once; events and tasks in an "), w.Mono{Text: ".ics"}, w.Text(" are skipped and named in the report.")}, Line: true}}}, "s-io-4", "tc-card", 1),
 	cards("alert", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "baikal"},
 		w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap},
@@ -593,8 +603,8 @@ var _ = add(
 		w.CardList{Items: []string{"Kept and rewritten: Вера Лебедева · nextcloud · Архив", "Still there: Лебедева Вера · nextcloud · Контакты"}}}, Variant: w.CardApart}, "s-dup-5", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
-		w.Field{Label: "vCard file", Width: w.FieldW100, Parts: []w.FieldPart{w.Input{Value: "x", Label: "x"}}},
-		w.CardHint{Parts: []w.CardTextPart{w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}, "s-io-3", "tc-card", 1),
+		w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}, "s-io-3", "tc-card", 1),
 	cards("chosen", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a WebDAV folder"},
 		w.Tree{Rows: []w.TreeRow{
@@ -796,19 +806,20 @@ var _ = add(
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no FN)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("vCard 2.1 quoted-printable: cannot decode line 12")}, Tone: w.CellDanger}}}}}, "s-io-5", "tc-table", 1),
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger}}}}}, "s-io-5", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "When", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дежурство: первая линия")}}, {Parts: []w.CellPart{w.Text("Mon 09:00 · weekly until 2026-12-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — the series as one record")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отпуск")}}, {Parts: []w.CellPart{w.Text("2026-07-13 → 2026-07-27 · all day")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-08-17 10:00 Asia/Yekaterinburg")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — time zone kept as sent")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Купить билеты "), w.Badge{Label: "VTODO"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: a calendar takes events — import it into a list of tasks")}, Tone: w.CellDusty}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-05-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("DTSTART without DTEND or DURATION: cannot tell how long it lasts")}, Tone: w.CellDanger}}}}}, "s-io-6", "tc-table", 1),
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-05-04 · all day")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no end: a whole day; no title")}}}}}}, "s-io-6", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "Due", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}}, {Parts: []w.CellPart{w.Text("2026-08-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ответить подрядчику по смете")}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Ready — a task without a date is a task")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}}, {Parts: []w.CellPart{w.Text("2026-09-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}}, {Parts: []w.CellPart{w.Text("2026-08-17")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: a list of tasks takes tasks — import it into a calendar")}, Tone: w.CellDusty}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("Neither SUMMARY nor DESCRIPTION: nothing to name it by")}, Tone: w.CellDanger}}}}}, "s-io-7", "tc-table", 1),
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-09-10")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no title")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Сдать отчёт")}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("line 88: cannot read DUE «2026-13-01»")}, Tone: w.CellDanger}}}}}, "s-io-7", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "File"}, {Label: "Title"}, {Label: "Date", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-03-11-podryadchik.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Встреча с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-03-11")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — title, date and tags from front matter")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("idei/crdt.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Что почитать про CRDT")}}, {Parts: []w.CellPart{w.Text("2026-08-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no front matter: title from the first heading, date from the file")}}}},

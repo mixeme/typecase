@@ -109,7 +109,7 @@ var _ = add(
 	primitive("one", w.Mark{Colour: "#4A6B52"}, "components-11", "tc-mark", 2),
 	primitive("multi", w.Mark{Kind: w.MarkMulti}, "components-11", "tc-mark", 1),
 	primitive("multi", w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, "s-contacts-1", "tc-mark", 6),
-	primitive("sized", w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, "s-contacts-6", "tc-mark", 3),
+	primitive("sized", w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, "s-contacts-6", "tc-mark", 4),
 	primitive("external", w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, "s-profile-1", "tc-mark", 17),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, "s-agenda-17", "tc-mark", 10),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, "s-mail-1", "tc-mark", 16),

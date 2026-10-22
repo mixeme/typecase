@@ -462,7 +462,7 @@ func Io3() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты"},
+											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -499,7 +499,8 @@ func Io3() Screen {
 									},
 									w.CardHint{
 										Parts: []w.CardTextPart{
-											w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
+											w.Mono{Text: ".vcf"},
+											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
 											w.Mono{Text: ".ics"},
 											w.Text(" here instead."),
 										},
@@ -511,9 +512,534 @@ func Io3() Screen {
 								Parts: []w.MsgPart{
 									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
 								},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogStep560,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io15 is frame «Импорт событий · шаг 1 из 3, источник» (s-io-15).
+func Io15() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
+							w.Head{Title: &w.HeadTitle{Text: "Import events"}},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Into",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.FieldHint{Parts: []w.Inline{w.Text("Any calendar you may write to, on every connected server.")}},
+										},
+										Width: w.FieldW100,
+									},
+								},
+								Variant: w.FormBottom12,
+								Tight:   true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From a file"},
+									w.Field{
+										Label: "iCalendar file",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{
+														Placeholder: "Личный 2026.ics",
+														Label:       "Личный 2026.ics",
+														Picked:      true,
+														ID:          "import-file",
+														Variant:     w.InputFill,
+													},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".ics", Label: "iCalendar file", Shows: "import-file"},
+													},
+													w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldW100,
+									},
+									w.CardHint{
+										Parts: []w.CardTextPart{
+											w.Mono{Text: ".ics"},
+											w.Text(" — iCalendar 2.0. One file holds any number of events; tasks and journal entries in it are skipped and named in the report."),
+										},
+										Line: true,
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
+								},
+								Space: w.MsgFlushSides,
+							},
+						},
+						Variant: w.DialogStep560,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io16 is frame «Импорт задач · шаг 1 из 3, источник» (s-io-16).
+func Io16() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
+							w.Head{Title: &w.HeadTitle{Text: "Import tasks"}},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Into",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.FieldHint{Parts: []w.Inline{w.Text("Any list of tasks you may write to, on every connected server.")}},
+										},
+										Width: w.FieldW100,
+									},
+								},
+								Variant: w.FormBottom12,
+								Tight:   true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From a file"},
+									w.Field{
+										Label: "iCalendar file",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{Placeholder: "Дела.ics", Label: "Дела.ics", Picked: true, ID: "import-file", Variant: w.InputFill},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".ics", Label: "iCalendar file", Shows: "import-file"},
+													},
+													w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldW100,
+									},
+									w.CardHint{
+										Parts: []w.CardTextPart{
+											w.Mono{Text: ".ics"},
+											w.Text(" — iCalendar 2.0. One file holds any number of tasks; events and journal entries in it are skipped and named in the report."),
+										},
+										Line: true,
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
+								},
+								Space: w.MsgFlushSides,
+							},
+						},
+						Variant: w.DialogStep560,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io17 is frame «Импорт · «Into» не выбрано» (s-io-17).
+func Io17() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
+							w.Head{Title: &w.HeadTitle{Text: "Import contacts"}},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Into",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "Choose an address book", Unset: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
+										},
+										Width: w.FieldW100,
+									},
+								},
+								Variant: w.FormBottom12,
+								Tight:   true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From a file"},
+									w.Field{
+										Label: "vCard file",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{
+														Value:   "Разное (mix).vcf",
+														Label:   "File",
+														Mono:    true,
+														Picked:  true,
+														ID:      "import-file",
+														Variant: w.InputFill,
+													},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"},
+													},
+													w.Button{
+														Label:  "Preview file",
+														Kind:   w.ButtonPrimary,
+														Title:  "Choose under «Into» where the records go.",
+														Submit: true,
+														State:  w.ButtonDisabled,
+													},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldW100,
+									},
+									w.CardHint{
+										Parts: []w.CardTextPart{
+											w.Mono{Text: ".vcf"},
+											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
+											w.Mono{Text: ".ics"},
+											w.Text(" here instead."),
+										},
+										Line: true,
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
+								},
+								Space: w.MsgFlushSides,
+							},
+						},
+						Variant: w.DialogStep560,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io18 is frame «Импорт · шаг 1, файл не принят» (s-io-18).
+func Io18() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
+							w.Head{Title: &w.HeadTitle{Text: "Import contacts"}},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Nothing was read."),
+									w.Text(" «Разное (mix).vcf» is not a vCard file: its first line is not "),
+									w.Mono{Text: "BEGIN:VCARD"},
+									w.Text(". Choose the file again."),
+								},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Into",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
+										},
+										Width: w.FieldW100,
+									},
+								},
+								Variant: w.FormBottom12,
+								Tight:   true,
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "From a file"},
+									w.Field{
+										Label: "vCard file",
+										Parts: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Input{
+														Placeholder: "Разное (mix).vcf",
+														Label:       "Разное (mix).vcf",
+														Picked:      true,
+														ID:          "import-file",
+														Variant:     w.InputFill,
+													},
+													w.Button{
+														Label: "Browse",
+														File:  &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"},
+													},
+													w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true},
+												},
+												Gap: w.LineGap8,
+											},
+										},
+										Width: w.FieldW100,
+									},
+									w.CardHint{
+										Parts: []w.CardTextPart{
+											w.Mono{Text: ".vcf"},
+											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
+											w.Mono{Text: ".ics"},
+											w.Text(" here instead."),
+										},
+										Line: true,
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
+								},
+								Space: w.MsgFlushSides,
+							},
+						},
+						Variant: w.DialogStep560,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Io19 is frame «Импорт · предпросмотр, коллекция не ответила» (s-io-19).
+func Io19() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 2},
+							w.Head{
+								Title: &w.HeadTitle{Text: "Import contacts"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Разное (mix).vcf"}, w.Text(" · 84 KB · vCard 3.0")}}},
+								Acts: &w.Acts{
+									Items: []w.ActsPart{
+										w.Button{Label: "Cancel"},
+										w.Button{
+											Label: "Import 117 contacts",
+											Kind:  w.ButtonPrimary,
+											Title: "nextcloud · Контакты did not answer",
+											State: w.ButtonDisabled,
+										},
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("nextcloud · Контакты did not answer"),
+									w.Text(", so what is already there cannot be told. Nothing is written; try again, or choose another address book under «Into»."),
+								},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Into",
+										Parts: []w.FieldPart{
+											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.FieldHint{
+												Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")},
+											},
+										},
+										Width: w.FieldLG,
+									},
+								},
+								Tight: true,
+							},
+							w.Stats{
+								Items: []w.Stat{w.Stat{Value: "117", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}},
+							},
+							w.Table{
+								Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}},
+								Rows: []w.TableRow{
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Анна Ковалёва")}},
+											{Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Ready")}},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Артём Белов")}},
+											{Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Ready")}},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
+										},
+									},
+								},
+							},
+							w.Msg{
+								Parts: []w.MsgPart{w.Text("What is skipped is listed in the report, and so is what could not be read.")},
+								Space: w.MsgFlushSides,
+							},
+						},
+						Variant: w.DialogWide,
 					},
 				},
 			},
@@ -568,7 +1094,7 @@ func Io4() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Записи"},
+											w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{Parts: []w.Inline{w.Text("The notebook the notes are created in. Every source below lands there.")}},
 										},
 										Width: w.FieldW100,
@@ -581,7 +1107,7 @@ func Io4() Screen {
 								Items: []w.CardPart{
 									w.Rubric{Text: "From a file"},
 									w.Field{
-										Label: "Markdown or a zip of them",
+										Label: "Markdown, a zip of them, or .ics",
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
@@ -594,7 +1120,14 @@ func Io4() Screen {
 													},
 													w.Button{
 														Label: "Browse",
-														File:  &w.FileField{Form: "", Name: "file", Accept: ".md,.zip", Label: "Markdown or a zip of them", Shows: "import-file"},
+														File: &w.FileField{
+															Form:   "",
+															Name:   "file",
+															Accept: ".md,.zip,.ics",
+															Label:  "Markdown, a zip of them, or .ics",
+															Shows:  "import-file",
+															Many:   true,
+														},
 													},
 													w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true},
 												},
@@ -602,6 +1135,19 @@ func Io4() Screen {
 											},
 										},
 										Width: w.FieldW100,
+									},
+									w.CardHint{
+										Parts: []w.CardTextPart{
+											w.Mono{Text: ".md"},
+											w.Text(" — Markdown, "),
+											w.Mono{Text: ".zip"},
+											w.Text(" — any number of them, "),
+											w.Mono{Text: ".ics"},
+											w.Text(" — iCalendar 2.0 journal entries. Several files may be picked at once; events and tasks in an "),
+											w.Mono{Text: ".ics"},
+											w.Text(" are skipped and named in the report."),
+										},
+										Line: true,
 									},
 								},
 							},
@@ -640,6 +1186,7 @@ func Io4() Screen {
 									w.Mono{Text: "X-"},
 									w.Text("properties exported earlier. A file without it becomes a note dated by its own timestamp."),
 								},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogStep560,
@@ -695,7 +1242,7 @@ func Io5() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты"},
+											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")},
 											},
@@ -748,15 +1295,16 @@ func Io5() Screen {
 									{
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("— (no FN)")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("vCard 2.1 quoted-printable: cannot decode line 12")}, Tone: w.CellDanger},
+											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
 										},
 									},
 								},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{w.Text("What is skipped is listed in the report, and so is what could not be read.")},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -807,7 +1355,7 @@ func Io6() Screen {
 									w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Личный 2026.ics"}, w.Text(" · 210 KB · iCalendar 2.0")}},
 								},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 81 events", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 82 events", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -815,7 +1363,7 @@ func Io6() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Личный"},
+											w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Calendars only. A list of tasks is a different collection and takes different components.")},
 											},
@@ -841,8 +1389,8 @@ func Io6() Screen {
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "81", Label: "ready"},
-									w.Stat{Value: "2", Label: "with errors", Error: true},
+									w.Stat{Value: "82", Label: "ready"},
+									w.Stat{Value: "1", Label: "with errors", Error: true},
 									w.Stat{Value: "3", Label: "already here"},
 									w.Stat{Value: "6", Label: "skipped"},
 								},
@@ -893,18 +1441,16 @@ func Io6() Screen {
 									{
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("2026-05-04")}, Mono: true},
-											{
-												Parts: []w.CellPart{w.Text("DTSTART without DTEND or DURATION: cannot tell how long it lasts")},
-												Tone:  w.CellDanger,
-											},
+											{Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("2026-05-04 · all day")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Ready — no end: a whole day; no title")}},
 										},
 									},
 								},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{w.Text("A repeating event keeps its rule: the series is one record, not fifty-two.")},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -952,7 +1498,7 @@ func Io7() Screen {
 								Title: &w.HeadTitle{Text: "Import tasks"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Дела.ics"}, w.Text(" · 12 KB · iCalendar 2.0")}}},
 								Acts: &w.Acts{
-									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 27 tasks", Kind: w.ButtonPrimary}},
+									Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 28 tasks", Kind: w.ButtonPrimary}},
 								},
 							},
 							w.Form{
@@ -960,7 +1506,7 @@ func Io7() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Дела"},
+											w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Lists of tasks only. A calendar is a different collection: events go there, not here.")},
 											},
@@ -986,7 +1532,7 @@ func Io7() Screen {
 							},
 							w.Stats{
 								Items: []w.Stat{
-									w.Stat{Value: "27", Label: "ready"},
+									w.Stat{Value: "28", Label: "ready"},
 									w.Stat{Value: "1", Label: "with errors", Error: true},
 									w.Stat{Value: "2", Label: "already here"},
 									w.Stat{Value: "5", Label: "skipped"},
@@ -1038,12 +1584,17 @@ func Io7() Screen {
 									{
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("— (no SUMMARY)")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("2026-09-10")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Ready — no title")}},
+										},
+									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Сдать отчёт")}},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-											{
-												Parts: []w.CellPart{w.Text("Neither SUMMARY nor DESCRIPTION: nothing to name it by")},
-												Tone:  w.CellDanger,
-											},
+											{Parts: []w.CellPart{w.Text("line 88: cannot read DUE «2026-13-01»")}, Tone: w.CellDanger},
 										},
 									},
 								},
@@ -1052,6 +1603,7 @@ func Io7() Screen {
 								Parts: []w.MsgPart{
 									w.Text("STATUS, PERCENT-COMPLETE and PRIORITY come across as they are: a task that was half done arrives half done."),
 								},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -1115,7 +1667,7 @@ func Io8() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Записи"},
+											w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("Any notebook you may write to. A WebDAV folder from the step before lands in this same table."),
@@ -1203,6 +1755,7 @@ func Io8() Screen {
 								Parts: []w.MsgPart{
 									w.Text("Markdown is stored as it was written — nothing is reformatted — and front matter Carrel exported earlier comes back: UID, tags, X-properties."),
 								},
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -1248,7 +1801,9 @@ func Io9() Screen {
 							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 3},
 							w.Head{
 								Title: &w.HeadTitle{Text: "Import report"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
+								Subs: []w.HeadSub{
+									w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
+								},
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -1259,6 +1814,20 @@ func Io9() Screen {
 								Items: []w.CardPart{
 									w.Rubric{Text: "Already here, skipped", Items: []w.RubricPart{w.Mono{Text: "5", Variant: w.MonoTight}}},
 									w.Diag{Text: "Артём Белов · 1a77-40de-bb02\nИрина Соколова · 33b0-9ffa-1120"},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "With a new UID", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
+									w.Diag{
+										Text: "Вера Дорошенко · 2b7e-11aa → 9d04-77c1 · imported as a copy\nВиктор Панов · 51c0-3a8e → baikal-0412 · the server gave its own",
+									},
+								},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{Text: "Not kept by the server", Items: []w.RubricPart{w.Mono{Text: "1", Variant: w.MonoTight}}},
+									w.Diag{Text: "Галина Мещерякова · PHOTO"},
 								},
 							},
 							w.Card{
@@ -1316,12 +1885,14 @@ func Io14() Screen {
 							w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 3},
 							w.Head{
 								Title: &w.HeadTitle{Text: "Import report"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}},
+								Subs: []w.HeadSub{
+									w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
+								},
 							},
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{Text: "Created"},
-									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("81")}}},
+									w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("82")}}},
 							},
 							w.Card{
 								Items: []w.CardPart{
@@ -1331,8 +1902,8 @@ func Io14() Screen {
 							},
 							w.Card{
 								Items: []w.CardPart{
-									w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
-									w.Diag{Text: "— (no SUMMARY): DTSTART without DTEND or DURATION", Variant: w.DiagDanger},
+									w.Rubric{Text: "Failed", Items: []w.RubricPart{w.Mono{Text: "1", Variant: w.MonoTight}}},
+									w.Diag{Text: "line 418: cannot read RRULE «FREQ=FORTNIGHTLY»", Variant: w.DiagDanger},
 								},
 							},
 							w.Card{

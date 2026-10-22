@@ -214,7 +214,9 @@ func Contacts1() Screen {
 							w.Button{Label: "All records", Small: true},
 							w.Button{Icon: "dots", Small: true, Title: "More"},
 						},
-						Subs:   []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
+						},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,
 					},
@@ -1261,7 +1263,7 @@ func Contacts6() Screen {
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
 						Subs: []w.HeadSub{
 							w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}},
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
@@ -1929,7 +1931,7 @@ func Contacts16() Screen {
 						Title: &w.HeadTitle{Text: "Анна Ковалёва"},
 						Subs: []w.HeadSub{
 							w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}},
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Контакты")}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
