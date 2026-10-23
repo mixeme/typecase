@@ -123,11 +123,7 @@ func textpart(e *El, k string) string {
 
 // say is words in two lengths (Р-65).
 func (g *gen) say(e *El) string {
-	f := "Full: " + q(e.Kid("tc-say__full").Text()) + ", Short: " + q(e.Kid("tc-say__short").Text())
-	if e.Has("tc-say--mono") {
-		f += ", Mono: true"
-	}
-	return "w.Say{" + f + "}"
+	return "w.Say{Full: " + q(e.Kid("tc-say__full").Text()) + ", Short: " + q(e.Kid("tc-say__short").Text()) + "}"
 }
 
 func (g *gen) mono(e *El) string {

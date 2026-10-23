@@ -49,6 +49,7 @@ var Routes = []Route{
 	{Frame: "s-files-5", Caption: "Файлы · плитки", Screen: Files5},
 	{Frame: "s-files-6", Caption: "Файлы · корень «Selected collections»", Screen: Files6},
 	{Frame: "s-find-1", Caption: "Поиск по всем источникам", Screen: Find1},
+	{Frame: "s-find-4", Caption: "Поиск идёт", Screen: Find4},
 	{Frame: "s-find-2", Caption: "Подсказки: история запросов", Screen: Find2},
 	{Frame: "s-find-3", Caption: "Подсказки по мере набора", Screen: Find3},
 	{Frame: "s-dup-1", Caption: "Дубликаты · группы и решения", Screen: Dup1},

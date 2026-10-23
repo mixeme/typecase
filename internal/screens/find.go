@@ -12,7 +12,12 @@ func Find1() Screen {
 			Search: &w.Search{Query: w.Query{Value: "ковал", Label: "Search everything…"}, Clear: true},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{
+					Label: "2 min ago",
+					Icon:  "refresh",
+					Title: "Search again",
+					Href:  "/app/search?q=%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB",
+				},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -56,7 +61,7 @@ func Find1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "«ковал»"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("14 of 14 collections · 7 records · 1 source timed out")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("7 records")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Seg{
@@ -93,14 +98,6 @@ func Find1() Screen {
 								},
 							},
 							w.Mono{Text: "1.8 s"},
-							w.Line{
-								Items: []w.LinePart{
-									w.Say{Full: "answered 11:42", Short: "11:42", Mono: true},
-									w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"},
-								},
-								Gap:   w.LineGap8,
-								Place: w.Pushed,
-							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Contacts", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
@@ -109,7 +106,7 @@ func Find1() Screen {
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Avatar:   w.Avatar{Initials: "АК"},
-								Title:    []w.Inline{w.Strong("Ковал"), w.Text("ёва Анна")},
+								Title:    []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")},
 								Subtitle: "+7 912 445-10-88",
 								Detail:   "a.kovaleva@example.org",
 								Caption:  "Издательство «Слово»",
@@ -118,7 +115,7 @@ func Find1() Screen {
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
 								Avatar:   w.Avatar{Initials: "ПК"},
-								Title:    []w.Inline{w.Strong("Ковал"), w.Text("ёв Пётр")},
+								Title:    []w.Inline{w.Text("Пётр "), w.Strong("Ковал"), w.Text("ёв")},
 								Subtitle: "—",
 								Detail:   "p.kovalev@example.org",
 								Caption:  "—",
@@ -131,11 +128,10 @@ func Find1() Screen {
 						Rows: []w.ListRow{
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "15:00",
+								Time:   "10 Aug",
 								Title:  []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
-								Detail: "Zoom",
+								Detail: "15:00 · Zoom",
 								Source: "nextcloud · Личный",
-								Short:  true,
 							},
 						},
 					},
@@ -143,7 +139,7 @@ func Find1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.DueRow{
-								Tick:     w.Tick{Label: "Done"},
+								Tick:     w.Tick{Sign: true},
 								Mark:     w.Mark{Colour: "#3F6E8C"},
 								Title:    []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")},
 								Due:      "12 Aug",
@@ -168,7 +164,7 @@ func Find1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.SizeRow{
-								Ticked: w.TickedOff,
+								Mark:   &w.Mark{Colour: "#4A6B52"},
 								Icon:   "doc",
 								Name:   []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")},
 								Bytes:  "240 KB",
@@ -177,7 +173,7 @@ func Find1() Screen {
 								Source: "sftpgo · vps · Documents",
 							},
 							w.SizeRow{
-								Ticked: w.TickedOff,
+								Mark:   &w.Mark{Colour: "#4A6B52"},
 								Icon:   "doc",
 								Name:   []w.Inline{w.Strong("Ковал"), w.Text("ёва — правки по обложке.md")},
 								Bytes:  "6 KB",
@@ -188,6 +184,152 @@ func Find1() Screen {
 						},
 					},
 					w.Msg{Parts: []w.MsgPart{w.Text("Files are found by their names; what is inside them is not searched.")}},
+				},
+			},
+		},
+	}
+}
+
+// Find4 is frame «Поиск идёт» (s-find-4).
+func Find4() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "ковал", Label: "Search everything…"}, Clear: true},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "Refresh", Icon: "refresh", Title: "The search is still running.", State: w.ButtonDisabled},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "14 / 14", Variant: w.MonoTight}}},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий"},
+						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Files"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "«ковал»"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 records so far")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "All", On: true},
+										{Label: "Contacts"},
+										{Label: "Events"},
+										{Label: "Tasks"},
+										{Label: "Notes"},
+										{Label: "Files"},
+									},
+								},
+							},
+						},
+					},
+					w.Runbar{
+						Meter: w.Meter{Percent: 62},
+						Parts: []w.RunbarPart{
+							w.Text("Searching · 9 of 14 answered · 5 records"),
+							w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true, Form: "search-stop"}}},
+						},
+					},
+					w.PostForm{
+						ID:     "search-stop",
+						Action: "/app/search/cancel?q=%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB",
+						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Contacts", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АК"},
+								Title:    []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")},
+								Subtitle: "+7 912 445-10-88",
+								Detail:   "a.kovaleva@example.org",
+								Caption:  "Издательство «Слово»",
+								Source:   "nextcloud · Контакты",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Initials: "ПК"},
+								Title:    []w.Inline{w.Text("Пётр "), w.Strong("Ковал"), w.Text("ёв")},
+								Subtitle: "—",
+								Detail:   "p.kovalev@example.org",
+								Caption:  "—",
+								Source:   "radicale · vps · Команда",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Events", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10 Aug",
+								Title:  []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
+								Detail: "15:00 · Zoom",
+								Source: "nextcloud · Личный",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tasks", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#3F6E8C"},
+								Title:    []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")},
+								Due:      "12 Aug",
+								Progress: "40%",
+								Source:   "nextcloud · Работа",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Notes", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")},
+								Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…",
+								Date:    "10 Aug",
+								Source:  "nextcloud · Записи",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -209,18 +351,27 @@ func Find2() Screen {
 					w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
 					w.MenuItem{
 						Icon:  "clock",
-						Trail: w.Mono{Text: "8 found · 2 min ago", Variant: w.Mono11DustyTight, Place: w.Pushed},
+						Trail: w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight, Place: w.Pushed},
 						Label: "ковал",
+						Href:  "/app/search?q=%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB",
 					},
 					w.MenuItem{
 						Icon:  "clock",
 						Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed},
-						Label: "смета",
+						Label: "смета ковалёвой",
+						Href:  "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0+%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB%D1%91%D0%B2%D0%BE%D0%B9",
 					},
 					w.MenuItem{
 						Icon:  "clock",
 						Trail: w.Mono{Text: "nothing found · Monday", Variant: w.Mono11DustyTight, Place: w.Pushed},
 						Label: "дача",
+						Href:  "/app/search?q=%D0%B4%D0%B0%D1%87%D0%B0",
+					},
+					w.MenuItem{
+						Icon:  "clock",
+						Trail: w.Mono{Text: "no source answered · Sunday", Variant: w.Mono11DustyTight, Place: w.Pushed},
+						Label: "договор",
+						Href:  "/app/search?q=%D0%B4%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80",
 					},
 					w.MenuSep{},
 					w.MenuItem{Trail: w.Kbd{Keys: "Enter"}, Label: "Type to search everything", Tone: w.MenuToneDusty},
@@ -379,6 +530,7 @@ func Find3() Screen {
 					w.MenuHeading{Rubric: w.Rubric{Text: "Jump to", Form: w.RubricItem}},
 					w.MenuItem{
 						Icon:  "con",
+						Mark:  &w.Mark{Colour: "#4A6B52"},
 						Found: []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")},
 						Trail: w.Dim{
 							Parts:   []w.Inline{w.Text("nextcloud · Контакты")},
@@ -389,11 +541,18 @@ func Find3() Screen {
 					},
 					w.MenuItem{
 						Icon:  "cal",
+						Mark:  &w.Mark{Colour: "#4A6B52"},
 						Found: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")},
-						Trail: w.Dim{Parts: []w.Inline{w.Text("10 Aug · Личный")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed},
+						Trail: w.Dim{
+							Parts:   []w.Inline{w.Text("10 Aug · nextcloud · Личный")},
+							Size:    w.Dim11,
+							Variant: w.DimTight,
+							Place:   w.Pushed,
+						},
 					},
 					w.MenuItem{
 						Icon:  "file",
+						Mark:  &w.Mark{Colour: "#4A6B52"},
 						Found: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")},
 						Trail: w.Dim{
 							Parts:   []w.Inline{w.Text("sftpgo · vps · Documents")},
@@ -406,15 +565,15 @@ func Find3() Screen {
 					w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "Enter"}, Label: "Show all results for «ковал»", On: true},
 					w.MenuItem{
 						Icon:  "all",
+						Found: []w.Inline{w.Text("Timeline · Анна "), w.Strong("Ковал"), w.Text("ёва")},
 						Trail: w.Dim{Parts: []w.Inline{w.Text("asks every server")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed},
-						Label: "Timeline · Анна Ковалёва",
 					},
 					w.MenuSep{},
 					w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
 					w.MenuItem{
 						Icon:  "clock",
+						Found: []w.Inline{w.Text("смета "), w.Strong("ковал"), w.Text("ёвой")},
 						Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed},
-						Label: "смета",
 					},
 				},
 				Width: w.MenuWidthFull,

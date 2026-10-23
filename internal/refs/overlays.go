@@ -8,6 +8,10 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "ковал", Href: "/app/search?q=%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB"},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "nothing found · Monday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "дача", Href: "/app/search?q=%D0%B4%D0%B0%D1%87%D0%B0"}}, Width: w.MenuWidthFull}, "s-find-6", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Дела", On: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа"},
@@ -515,22 +519,23 @@ var _ = add(
 		w.MenuItem{Icon: "mail", Label: "Letter"}}}, "s-notes-7", "tc-menu", 1),
 	overlay("heading", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
-		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "8 found · 2 min ago", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "ковал"},
-		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "смета"},
-		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "nothing found · Monday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "дача"},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "ковал", Href: "/app/search?q=%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB"},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "смета ковалёвой", Href: "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0+%D0%BA%D0%BE%D0%B2%D0%B0%D0%BB%D1%91%D0%B2%D0%BE%D0%B9"},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "nothing found · Monday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "дача", Href: "/app/search?q=%D0%B4%D0%B0%D1%87%D0%B0"},
+		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "no source answered · Sunday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "договор", Href: "/app/search?q=%D0%B4%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80"},
 		w.MenuSep{},
 		w.MenuItem{Trail: w.Kbd{Keys: "Enter"}, Label: "Type to search everything", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull}, "s-find-2", "tc-menu", 1),
 	overlay("found", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Jump to", Form: w.RubricItem}},
-		w.MenuItem{Icon: "con", Found: []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")}, Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud · Контакты")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
-		w.MenuItem{Icon: "cal", Found: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Trail: w.Dim{Parts: []w.Inline{w.Text("10 Aug · Личный")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
-		w.MenuItem{Icon: "file", Found: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")}, Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo · vps · Documents")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
+		w.MenuItem{Icon: "con", Mark: &w.Mark{Colour: "#4A6B52"}, Found: []w.Inline{w.Text("Анна "), w.Strong("Ковал"), w.Text("ёва")}, Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud · Контакты")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
+		w.MenuItem{Icon: "cal", Mark: &w.Mark{Colour: "#4A6B52"}, Found: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Trail: w.Dim{Parts: []w.Inline{w.Text("10 Aug · nextcloud · Личный")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
+		w.MenuItem{Icon: "file", Mark: &w.Mark{Colour: "#4A6B52"}, Found: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")}, Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo · vps · Documents")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
 		w.MenuSep{},
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "Enter"}, Label: "Show all results for «ковал»", On: true},
-		w.MenuItem{Icon: "all", Trail: w.Dim{Parts: []w.Inline{w.Text("asks every server")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}, Label: "Timeline · Анна Ковалёва"},
+		w.MenuItem{Icon: "all", Found: []w.Inline{w.Text("Timeline · Анна "), w.Strong("Ковал"), w.Text("ёва")}, Trail: w.Dim{Parts: []w.Inline{w.Text("asks every server")}, Size: w.Dim11, Variant: w.DimTight, Place: w.Pushed}},
 		w.MenuSep{},
 		w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
-		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "смета"}}, Width: w.MenuWidthFull}, "s-find-3", "tc-menu", 1),
+		w.MenuItem{Icon: "clock", Found: []w.Inline{w.Text("смета "), w.Strong("ковал"), w.Text("ёвой")}, Trail: w.Mono{Text: "3 found · yesterday", Variant: w.Mono11DustyTight, Place: w.Pushed}}}, Width: w.MenuWidthFull}, "s-find-3", "tc-menu", 1),
 	overlay("fields", w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Points per signal", Items: []w.RubricPart{w.Push{Items: []w.PushPart{w.Text("Default")}}, w.RubricCol{Text: "Yours"}}, Form: w.RubricItem}, Form: w.MenuHeadingRoomy},
 		w.MenuField{Label: "Same UID", Default: w.Dim{Parts: []w.Inline{w.Text("80")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "80", Mono: true, Variant: w.InputChip, Label: "Same UID"}},

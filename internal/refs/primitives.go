@@ -30,7 +30,6 @@ var _ = add(
 	primitive("primary", w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/admin/users"}, "s-admin-14", "tc-btn", 2),
 	primitive("disabled", w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, "s-files-16", "tc-btn", 1),
 	primitive("menu", w.Button{Label: "9 records", Menu: true, Small: true}, "s-contacts-29", "tc-btn", 1),
-	primitive("folds", w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"}, "s-find-1", "tc-btn", 5),
 	primitive("tertiary", w.Button{Label: "Print", Icon: "print", Tertiary: true}, "s-contacts-6", "tc-btn", 5),
 	primitive("link", w.Button{Label: "Edit this copy", Kind: w.ButtonPrimary, Submit: true}, "s-contacts-32", "tc-btn", 1),
 	primitive("disabled-plain", w.Button{Label: "Send invitation", Title: "SMTP is not configured: no letter can go.", Submit: true, State: w.ButtonDisabled}, "s-admin-18", "tc-btn", 2),
@@ -82,7 +81,7 @@ var _ = add(
 	primitive("off", w.Button{Label: "Rename", Icon: "pencil", Folds: true, State: w.ButtonOff, Title: "Rename"}, "s-files-2", "tc-btn", 12),
 	primitive("focus", w.Button{Label: "Weights", Small: true, Focus: true}, "s-dup-3", "tc-btn", 1),
 	primitive("focus", w.Button{Icon: "plus", Focus: true, Title: "New calendar"}, "s-profile-5", "tc-btn", 3),
-	primitive("variant", w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search"}, "phone-1", "tc-btn", 2),
+	primitive("variant", w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search", Href: "/app/search"}, "phone-1", "tc-btn", 2),
 	primitive("primary", w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "Where to write"}, "components-9", "tc-btn", 8),
 	primitive("with-content", w.Button{Label: "Columns", Icon: "cols", Variant: w.ButtonOnCard, Aside: &w.Mono{Text: "5", Variant: w.MonoDusty11}}, "components-21", "tc-btn", 1),
 	primitive("with-content", w.Button{Label: "Mark done", Tick: &w.Tick{Glyph: true}}, "s-tasks-2", "tc-btn", 4),
@@ -189,7 +188,7 @@ var _ = add(
 	// tc-mono
 	// words in two lengths (Р-65): the run of a search, its answer's time
 	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
-	primitive("mono", w.Say{Full: "answered 11:42", Short: "11:42", Mono: true}, "s-find-1", "tc-say", 2),
+	primitive("plain", w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-6", "tc-mono", 1),
 	primitive("danger", w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}, "s-backup-13", "tc-mono", 7),
 	primitive("span", w.Mono{Text: "14 items · 38.2 MB"}, "components-16", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: ".vcf", Variant: w.Mono11}, "components-19", "tc-mono", 1),
@@ -201,7 +200,6 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "5", Variant: w.MonoDusty11}, "components-21", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "1.6×", Variant: w.Mono11Dusty}, "s-contacts-5", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: "12.4 MB", Variant: w.MonoDusty}, "components-26", "tc-mono", 1),
-	primitive("variant", w.Mono{Text: "8 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-2", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}, "s-profile-1", "tc-mono", 8),
 	primitive("variant", w.Mono{Text: "10:00", Variant: w.MonoFace}, "print-1", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "264 px · sections + sources", Form: w.MonoLine, Variant: w.Mono11Top}, "shell-1", "tc-mono", 1),

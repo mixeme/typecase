@@ -228,8 +228,8 @@ func (v MonoVariant) class() string {
 // Say — tc-say
 //
 // Роль. Слова в двух длинах: полные и короткие для узкого экрана — сказать короче, а не сжать (Р-65); смысл и числа в обеих те же.
-// Вход. Say{Full, Short, Mono}.
-// Состояния. plain | mono.
+// Вход. Say{Full, Short}.
+// Состояния. plain.
 // Инварианты. Видна одна длина: короткая — где колонка не шире 640 px; кусок печатает фрагмент своего кадра.
 // Поведение. нет: длину выбирает CSS по ширине.
 // Эталон. кадр `s-find-1`, фрагмент `.tc-say`.
@@ -238,14 +238,13 @@ func (v MonoVariant) class() string {
 type Say struct {
 	Full  string
 	Short string
-	Mono  bool // monospaced: a time, a count
 }
 
 // Render prints the words.
 func (s Say) Render() string { return s.html(nil) }
 
 func (s Say) html(m mix) string {
-	return `<span` + class(m, "tc-say", pick(s.Mono, "tc-say--mono")) + `><span class="tc-say__full">` + esc(s.Full) +
+	return `<span` + class(m, "tc-say") + `><span class="tc-say__full">` + esc(s.Full) +
 		`</span><span class="tc-say__short">` + esc(s.Short) + `</span></span>`
 }
 

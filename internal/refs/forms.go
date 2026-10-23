@@ -113,7 +113,6 @@ var _ = add(
 
 	// tc-line, tc-stack, tc-grow, tc-push
 	form("plain", w.Line{Items: []w.LinePart{w.Strong("baikal"), w.Dim{Parts: []w.Inline{w.Text("login")}}, w.Mono{Text: "m.yenuchenko"}, w.Faced{Face: w.FaceDanger, Items: []w.LinePart{w.Text("the server refused the saved password")}}}, Gap: w.LineGap8}, "s-plan-4", "tc-line", 3),
-	form("gap", w.Line{Items: []w.LinePart{w.Say{Full: "answered 11:42", Short: "11:42", Mono: true}, w.Button{Folds: true, Label: "Search again", Icon: "refresh", Small: true, Title: "Search again"}}, Gap: w.LineGap8}, "s-find-1", "tc-line", 1),
 	form("plain", w.Line{Items: []w.LinePart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Check{On: true, Name: "copy", Value: "nextcloud/dela", Parts: []w.CheckPart{w.Text("nextcloud · Дела")}}, w.Dim{Parts: []w.Inline{w.Text("due 12 Aug 18:00")}, Size: w.Dim11_5}}, Gap: w.LineGap8, Block: true}, "s-tasks-16", "tc-line", 1),
 	form("span", w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true}}, Gap: w.LineGap8}, "s-notes-11", "tc-line", 1),
 	form("block", w.Line{Gap: w.LineGap8, Block: true}, "s-notes-11", "tc-line", 2),

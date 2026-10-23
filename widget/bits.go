@@ -268,7 +268,6 @@ func (Span) runbarPart() {}
 func (Mono) runbarPart() {}
 func (Say) runbarPart()  {}
 func (Push) runbarPart() {}
-func (Line) runbarPart() {}
 func (Drop) runbarPart() {}
 
 // Runbar — tc-runbar
@@ -740,16 +739,17 @@ type PadPart interface {
 
 func (Thumb) padPart() {}
 func (Card) padPart()  {}
+func (Menu) padPart()  {}
 
 // Pad — tc-pad
 //
-// Роль. Отступ страницы вокруг того, у чего своих полей нет: карточки, превью.
+// Роль. Отступ страницы вокруг того, у чего своих полей нет: карточки, превью, меню на странице.
 // Вход. Pad{Items}.
 // Состояния. plain.
 // Инварианты. Поля — токен страницы; блок печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `s-files-1`, фрагмент `.tc-pad`.
-// Содержимое. Карточки, превью.
+// Содержимое. Карточки, превью, меню, стоящее на странице (история запросов без запроса).
 // Чего нет. Своего вида.
 type Pad struct {
 	Items []PadPart

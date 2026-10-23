@@ -137,7 +137,7 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Badges, Source, On, Past, Inset, Single, Short, Href}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Badges, Source, On, Past, Inset, Single, Href}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
@@ -158,7 +158,6 @@ type TimeRow struct {
 	Past   bool // gone by: faded
 	Inset  bool
 	Single bool   // the list of one collection: the row has no source column
-	Short  bool   // the lead is a time of day only: its column as narrow as the time (search results)
 	Href   string // the row is a link to its record
 }
 
@@ -167,7 +166,7 @@ func (r TimeRow) Render() string { return r.html(nil) }
 
 func (r TimeRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Single, "tc-row--single"), pick(r.Past, "tc-row--timecols--op-7"), pick(r.Short, "tc-row--timecols--time")) + attr("href", r.Href) + `>`)
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Single, "tc-row--single"), pick(r.Past, "tc-row--timecols--op-7")) + attr("href", r.Href) + `>`)
 	s.WriteString(r.Mark.html(nil))
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))
@@ -402,7 +401,7 @@ func (r DueRow) html(m mix) string {
 // SizeRow — tc-row
 //
 // Роль. Строка вещи с размером: галка, значок и имя, размер, когда менялась, права, источник.
-// Вход. SizeRow{Ticked, Icon, Name, Bytes, Time, Access, Source, Send, Href}.
+// Вход. SizeRow{Ticked, Mark, Icon, Name, Bytes, Time, Access, Source, Send, Href}.
 // Состояния. found.
 // Инварианты. Галка — кнопка с доступным именем; колонки строки — её тип; строка печатает фрагмент своего кадра.
 // Поведение. Галка выбирает вещь для действий шапки; нажатие на имя открывает её.
@@ -411,6 +410,9 @@ func (r DueRow) html(m mix) string {
 // Чего нет. Метки источника: источник назван словами.
 type SizeRow struct {
 	Ticked Ticked
+	// Mark stands in the tick's place where nothing is done with the file
+	// but open it: a search's results (Carrel's task 189).
+	Mark   *Mark
 	Send   Send // what pressing the tick sends
 	Icon   Icon
 	Name   []Inline
@@ -431,7 +433,11 @@ func (r SizeRow) html(m mix) string {
 	if r.Href != "" {
 		name = "a"
 	}
-	return `<div` + class(m, "tc-row", "tc-row--tickcols") + `>` + r.Ticked.box(plain(r.Name), r.Send) +
+	lead := r.Ticked.box(plain(r.Name), r.Send)
+	if r.Mark != nil {
+		lead = r.Mark.html(nil)
+	}
+	return `<div` + class(m, "tc-row", "tc-row--tickcols") + `>` + lead +
 		`<` + name + ` class="tc-row__title tc-row__name"` + attr("href", r.Href) + `><svg>` + r.Icon.use() + `</svg><span class="tc-row__file">` + inlines(r.Name) + `</span></` + name + `>` +
 		cell(r.Bytes, "tc-row__excerpt", "tc-mono", "tc-row__size") + cell(r.Time, "tc-row__excerpt", "tc-mono", "tc-row__time") +
 		cell(r.Access, "tc-row__cell", "tc-mono", "tc-row__detail") + source(r.Source, "", nil) + `</div>`

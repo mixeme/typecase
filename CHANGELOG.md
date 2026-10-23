@@ -8,6 +8,12 @@ do, not what the authors did.
 
 ### Breaking
 
+- `TimeRow.Short` is gone with its rule (`.tc-row--timecols--time`): a
+  search's event shows its day in the lead, the time beside the place
+  (Carrel's task 189). `Say.Mono` is gone with `.tc-say--mono`, and a
+  `Runbar` no longer takes a `Line`, nor a `Line` a `Say`: a search's bar
+  has no «answered · Search again» of its own — the header's button is the
+  one door, as on every list.
 - `Chevron` (the small arrow after a cell's value) is gone with its rule
   (`.tc-ico--inline`): a cell's value that can be changed is a closed
   choice (Carrel's task 212).
@@ -86,6 +92,9 @@ do, not what the authors did.
 
 ### Added
 
+- **`SizeRow.Mark`** — the collection's mark in the tick's place, where
+  nothing is done with the file but open it: a search's results (Carrel's
+  task 189). **`Pad` takes a `Menu`**: the search page's recent searches.
 - **A button after a message's words stands apart from them**
   (`.tc-msg > .tc-btn`, `.tc-msg__aside > .tc-btn`: 6 px to the left), and
   a link button in an alert keeps the button's ink instead of the alert's
@@ -889,6 +898,21 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Search: the day of an event, the states of a search, the menu of
+  suggestions** (Carrel's task 189; accepted by the owner 23.10). `s-find-1`:
+  an event shows «10 Aug» and «15:00 · Zoom»; a task's tick is a sign; a
+  file has the collection's mark instead of a tick; names as the card holds
+  them; the bar has no time or «Search again» of its own — the header's
+  button searches again; the subtitle says only what was found. `s-find-2`:
+  «7 found», «no source answered». `s-find-3`: the jumps carry their
+  collections' marks, «Timeline · Анна **Ковал**ёва», the history keeps
+  only what holds the typed. New frames: `s-find-4` (running, Stop),
+  `-5` (nothing found), `-6` (the search page without a query — its own
+  field), `-7` (nothing ticked), `-8` (too many searches), `-9` (no source
+  answered), `-10` (stopped). The phone's search button is a link to
+  `/app/search` (`phone-1`, `-4`); the mailbox's search bar and subtitle
+  follow (`s-mailbox-14`).
 
 - **Import after note 111** (Carrel's task 222; accepted by the owner 22.10,
   Р-76). A card without FN gets it from N only, else «Unnamed contact» —

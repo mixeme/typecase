@@ -11,7 +11,7 @@ func Phone1() Screen {
 			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
 			Brand: w.Brand{Title: "Combined calendar"},
 			Actions: []w.TopAction{
-				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search"},
+				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search", Href: "/app/search"},
 				w.Button{
 					Icon:    "quill",
 					IconBox: w.IconBox16,
@@ -263,7 +263,7 @@ func Phone4() Screen {
 			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
 			Brand: w.Brand{Title: "Combined address book"},
 			Actions: []w.TopAction{
-				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search"},
+				w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search", Href: "/app/search"},
 				w.Button{
 					Icon:    "quill",
 					IconBox: w.IconBox16,
