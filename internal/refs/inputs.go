@@ -55,6 +55,7 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.Input11Fill, Label: "Link"}, "s-admin-1", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Documents · sftpgo / carrel-backup/…", Variant: w.Input11Fill, Label: "Folder"}, "components-20", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"}, "s-agenda-8", "tc-in", 1),
+	form("plain", w.Pick{Name: "to.1", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true}, {Value: "", Label: "Do not rewrite"}}, Label: "Rewrite a.kovaleva@example.org to", Variant: w.PickT12W240}, "s-contacts-19", "tc-in", 1),
 	form("plain", w.Pick{Value: "Choose an address book", Unset: true}, "s-io-17", "tc-in", 1),
 	form("mark", w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}}, "s-io-3", "tc-in", 1),
 	form("pick", w.Pick{Name: "collection", Options: []w.PickOption{{Value: "", Label: "Choose a collection", On: true}, {Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents"}}, Label: "Collection"}, "attachments-5", "tc-in", 1),

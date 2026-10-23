@@ -4225,7 +4225,7 @@ Read  2 min ago · not changed on server</div>
     </div>
   </div>
 </div>
-<figcaption><b>Заменили адрес и нажали Save — лист поверх правки предлагает переписать его в записях, где человек участник</b> (решения владельца 12.10 и 14.10, задачи Carrel 157, 185). Хронология строится по адресам: встречи и задачи со старым выпадают из неё, поэтому главная кнопка — переписать. Лист один при любом числе замен: каждая — строка «старый адрес → выбор», группы риска — отметки, по умолчанию отмечены все (так переписывалось всё и до решения); снятая исключает группу, кнопка считает остаток. Строка о записи в двух группах появляется, только когда из-за снятой отметки запись остаётся как была (пример — s-contacts-29). Без сценария лист — форма: Rewrite отправляет её, Leave as is — её же с <code>?op=leave</code>.</figcaption>
+<figcaption><b>Заменили адрес и нажали Save — лист поверх правки предлагает переписать его в записях, где человек участник</b> (решения владельца 12.10 и 14.10, задачи Carrel 157, 185). Хронология строится по адресам: встречи и задачи со старым выпадают из неё, поэтому главная кнопка — переписать. Лист один при любом числе замен: каждая — строка «старый адрес → выбор», группы риска — отметки, по умолчанию отмечены все (так переписывалось всё и до решения); снятая исключает группу, кнопка считает остаток. Строка о записи в двух группах появляется, только когда из-за снятой отметки запись остаётся как была (пример — s-contacts-29). Без сценария лист — форма: Rewrite отправляет её, Leave as is — её же с <code>?op=leave</code>. <b>Записи в группе — по дате:</b> прошедшие — от поздней к ранней (ближайшая к сегодня первой), будущие — от ранней к поздней.</figcaption>
 </figure>
 
 <figure>
@@ -4392,31 +4392,20 @@ Read  2 min ago · not changed on server</div>
         <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва · saved</span>
         </div>
         <div class="tc-sheet__body">
-          <div class="tc-sheet__block">
-            <div class="tc-rubric tc-rubric--bot7">The address</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>a.kovaleva@example.org → a.kovaleva@slovo.example</b> <span class="tc-dim">— 1 event or task names the old one; it drops out of the person’s timeline</span></span>
-            </div>
-          </div>
-          <div class="tc-sheet__block">
-            <div class="tc-rubric tc-rubric--bot7">What rewriting can set off</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>1 record on a server that schedules</b> <span class="tc-dim">— the server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees</span></span>
-            </div>
-          </div>
-          <div class="tc-sheet__block">
-            <div class="tc-rubric tc-rubric--bot7">What will not change</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>Общий · baikal</b> <span class="tc-dim">— could not be read: the server answered 401 Unauthorized. What it holds keeps the old address.</span></span>
-            </div>
-          </div>
-          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Collections that are not ticked were not looked in.</span>
+          <div class="tc-rubric">The address</div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">a.kovaleva@example.org</span><span class="tc-dim tc-dim--t11-5">1 record names it</span></div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">→</span><span class="tc-in is-pick tc-in--t12-w240"><select class="tc-in__list" name="to.1" aria-label="Rewrite a.kovaleva@example.org to"><option value="a.kovaleva@slovo.example" selected>a.kovaleva@slovo.example</option><option value="">Do not rewrite</option></select></span></div>
+          <div class="tc-rubric">What rewriting can set off</div>
+          <div class="tc-line tc-line--gap-8"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="group" value="scheduling" checked><span class="tc-tickrow__tick"></span>On servers that schedule</label><details class="tc-drop"><summary class="tc-btn is-sm">1 record<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w290"><a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/aa01" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>Синк-ап по релизу <span class="tc-mono tc-mono--t11">10 Aug</span></a></div></details></div>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The server may send a cancellation to the old address, an invitation to the new one and an update to the other attendees.</span>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Общий · baikal could not be read, and what it holds keeps the old address. Collections that are not ticked were not looked in.</span>
+          <template data-tc-tally><i data-tc-if="to.1 group=scheduling"></i></template>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rewrite 1 record</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" data-tc-count="Rewrite {n} records" data-tc-count-1="Rewrite 1 record">Rewrite 1 record</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
-  <figcaption>Одна запись — единственное число во всех строках. Отмеченная коллекция, которая не ответила, стоит в «What will not change» с причиной; неотмеченные коллекции не просматриваются, и лист говорит это строкой внизу.</figcaption>
+  <figcaption>Одна запись — тот же лист, что при многих (кадр «Контакт · адрес заменён — переписать участников?»): строка замены с выбором, группы риска отметками, кнопка считает остаток; число единственное. Что останется как было — одной строкой над кнопкой: отмеченная коллекция, которая не прочиталась, — «… could not be read, and what it holds keeps the old address.»; неотмеченные не просматривались.</figcaption>
   </figure>
 
 <figure style="flex:1 1 100%">
@@ -4430,26 +4419,15 @@ Read  2 min ago · not changed on server</div>
         <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва · saved</span>
         </div>
         <div class="tc-sheet__body">
-          <div class="tc-sheet__block">
-            <div class="tc-rubric tc-rubric--bot7">The address</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>a.kovaleva@example.org → a.kovaleva@slovo.example</b> <span class="tc-dim">— 2 events and tasks name the old one</span></span>
-            </div>
-          </div>
-          <div class="tc-sheet__block">
-            <div class="tc-rubric tc-rubric--bot7">What will not change</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
-              <span class="tc-stack__item"><b>2 records in Shared</b> <span class="tc-dim">— read-only; they keep the old address</span></span>
-              <span class="tc-stack__item"><b>Общий · baikal</b> <span class="tc-dim">— could not be read: the server answered 401 Unauthorized. What it holds keeps the old address.</span></span>
-            </div>
-          </div>
-          <div class="tc-msg is-alert tc-msg--flush">Nothing here can be rewritten: every record that names the old address is read-only or could not be read.</div>
+          <div class="tc-rubric">The address</div>
+          <div class="tc-line tc-line--gap-8"><span class="tc-mono">a.kovaleva@example.org</span><span class="tc-dim tc-dim--t11-5">2 records name it</span></div>
+          <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">2 records in Shared are read-only and keep the old address. Общий · baikal could not be read, and what it holds keeps the old address. Collections that are not ticked were not looked in.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Rewrite 0 records</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" title="Nothing here can be rewritten." type="submit" disabled>Rewrite 0 records</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
-  <figcaption>Все записи со старым адресом только для чтения или не прочитались — переписывать нечего: кнопка «Rewrite 0 records» выключена, причина — сообщением над ней.</figcaption>
+  <figcaption>Переписывать нечего — каждая запись со старым адресом только для чтения или не прочиталась: выбора адреса и групп нет, строка над кнопкой называет, что останется как было, «Rewrite 0 records» выключена с причиной в подсказке.</figcaption>
   </figure>
 
   <figure style="flex:1 1 100%">
@@ -5928,7 +5906,7 @@ Read  2 min ago · changed on server 3 days ago</div>
       </form>
     </div>
   </div>
-  <figcaption><b>Лист удаления записи — только когда есть что терять</b> (решения владельца 12.10, А8, А3, А12); простая запись удаляется сразу, как прежде. Здесь полный набор. «What is pointing at it now» — тот же перечень, что у удаления коллекции (<code>s-profile-9</code>): опубликованная ссылка и записи, которые на неё ссылаются (<code>RELATED-TO</code>), — счёт из загруженного, и строка так и говорит. Об отмене — словом «may», как в листах переноса: сообщит ли сервер участникам, решает он. Вложение, записанное в событие, уходит с ним; вложение-ссылка остаётся, и его можно удалить вместе — отметка снята. Копии — отметками: отмечена та, из которой пришли, остальные можно отметить и удалить вместе. Delete — тревожная, без набора имени: запись одна, перечень виден целиком.</figcaption>
+  <figcaption><b>Лист удаления записи — только когда есть что терять</b> (решения владельца 12.10, А8, А3, А12); простая запись удаляется сразу, как прежде. Здесь полный набор. «What is pointing at it now» — тот же перечень, что у удаления коллекции (<code>s-profile-9</code>): опубликованная ссылка и записи, которые на неё ссылаются (<code>RELATED-TO</code>), — счёт из загруженного, и строка так и говорит. Об отмене — словом «may», как в листах переноса: сообщит ли сервер участникам, решает он. Вложение, записанное в событие, уходит с ним; вложение-ссылка остаётся, и его можно удалить вместе — отметка снята. Копии — отметками: отмечена та, из которой пришли, остальные можно отметить и удалить вместе. Delete — тревожная, без набора имени: запись одна, перечень виден целиком. <b>Ширина листа удаления записи:</b> 560, когда лист перечисляет копии (метка, отметка, что держит), иначе 480 (кадр «Задача · удаление, одна ссылка»).</figcaption>
   </figure>
   <figure style="flex:0 1 250px">
   <div class="frame" data-frame="s-agenda-5">
@@ -20217,7 +20195,7 @@ jobs:
                 </div>
                 <span class="tc-field__hint">Without the title an event shows as “Busy”.</span></div>
               <div class="tc-stack tc-stack--gap-5 tc-sheet__checks">
-                <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1" checked><span class="tc-tickrow__tick"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
+                <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
@@ -20765,7 +20743,7 @@ Read  2 min ago · changed on server 3 days ago</div>
                 </div>
                 <span class="tc-field__hint">Without the title the event shows as “Busy”.</span></div>
               <div class="tc-stack tc-stack--gap-5 tc-sheet__checks">
-                <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1" checked><span class="tc-tickrow__tick"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
+                <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
@@ -20984,7 +20962,7 @@ Read  2 min ago</div>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="attachments" value="1"><span class="tc-tickrow__tick is-off"></span>Publish them too — each gets its own link</label>
                   <span class="tc-field__hint">The links are created together with this one, expire with it and are revoked with it. Without this the page says how many files there are, but not their names: a file name gives away more than it looks.</span>
                 </div></div>
-              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1" checked><span class="tc-tickrow__tick"></span>Allow <span class="tc-mono">.md</span> download</label>
+              <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.md</span> download</label>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
             <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/notes">Cancel</a></div>

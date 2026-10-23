@@ -1115,7 +1115,6 @@ func Publish2() Screen {
 						w.SheetChecks{
 							Items: []w.Check{
 								w.Check{
-									On:    true,
 									Name:  "download",
 									Value: "1",
 									Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")},
@@ -2627,7 +2626,6 @@ func Publish19() Screen {
 						w.SheetChecks{
 							Items: []w.Check{
 								w.Check{
-									On:    true,
 									Name:  "download",
 									Value: "1",
 									Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".ics"}, w.Text(" download and subscription")},
@@ -3149,7 +3147,6 @@ func Publish4() Screen {
 							Width: w.FieldW100,
 						},
 						w.Check{
-							On:    true,
 							Name:  "download",
 							Value: "1",
 							Parts: []w.CheckPart{w.Text("Allow "), w.Mono{Text: ".md"}, w.Text(" download")},

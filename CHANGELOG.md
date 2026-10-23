@@ -925,6 +925,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The rewrite sheets in one view; the download of a link off by default**
+  (Carrel's tasks 223, 229; accepted by the owner 23.10). `s-contacts-19`,
+  `-20` are drawn as `s-contacts-15`: the replacement row with its choice,
+  the groups by ticks, what stays as it was in one line over the button;
+  with nothing to rewrite, «Rewrite 0 records» is off with its reason. The
+  captions say the order of a group's records and the delete sheet's width.
+  «Allow … download» is unticked in `s-publish-2`, `-4`, `-19`.
+
 - **Sheets: the move's lines, «where» of the quick sheets, export, the
   password, the crop** (Carrel's task 197 pp. 3, 5; accepted by the owner
   23.10, Р-77). A sheet's note says only what matters and is not obvious —
