@@ -150,14 +150,17 @@ func (v DimVariant) class() string {
 // Dim — tc-dim
 //
 // Роль. Приглушённый текст рядом с главным: «· in 7 months», «412 KB», имя источника.
-// Вход. Dim{Parts, Size, Variant, Place, Empty, ID}.
+// Вход. Dim{Mark, Parts, Size, Variant, Place, Empty, ID}.
 // Состояния. plain | sized | wrap | tight | indent | top | slot | struck | fixed | mixed.
 // Инварианты. Тон один — приглушённый, другой тон — не этот блок; размер и посадка — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `s-contacts-6`, фрагмент `.tc-dim`.
-// Содержимое. Текст, жирное, моноширинный кусок, подсказка, точка состояния.
+// Содержимое. Текст, жирное, моноширинный кусок, подсказка, точка состояния, метка коллекции перед её именем — с ним на одной строке.
 // Чего нет. Ссылок и кнопок: приглушённое не нажимают.
 type Dim struct {
+	// Mark is a collection's mark before its name in Parts: the two do not
+	// part at the end of a line (Carrel's task 190).
+	Mark    *Mark
 	Parts   []Inline
 	Size    DimSize
 	Variant DimVariant
@@ -177,6 +180,9 @@ func (d Dim) Render() string { return d.html(nil) }
 func (d Dim) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<span` + class(m, "tc-dim", d.Size.class(), d.Variant.class(), d.Place.class()) + attr("id", d.ID) + flag("data-tc-empty", d.Empty) + `>`)
+	if d.Mark != nil {
+		s.WriteString(d.Mark.html(nil) + " ")
+	}
 	for _, p := range d.Parts {
 		s.WriteString(p.html(nil))
 	}

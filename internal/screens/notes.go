@@ -104,7 +104,7 @@ func Notes1() Screen {
 						Rows: []w.ListRow{
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Заметка со встречи 10.08 ")},
+								Title:      []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:     true,
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
@@ -114,7 +114,7 @@ func Notes1() Screen {
 							},
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
+								Title:      []w.Inline{w.Text("Что почитать про CRDT")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
 								Date:       "8 Aug",
@@ -356,7 +356,7 @@ func Notes31() Screen {
 							},
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
+								Title:      []w.Inline{w.Text("Что почитать про CRDT")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked, Title: "nextcloud · Записи, nextcloud · Дневник"},
 								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
 								Date:       "8 Aug",
@@ -2418,25 +2418,28 @@ func Notes9() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Strong:   true,
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@example.org",
-									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
-									On:       true,
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Avatar:     w.Avatar{Initials: "АК"},
+									Title:      []w.Inline{w.Text("Анна Ковалёва")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+									Subtitle:   "+7 912 445-10-88",
+									Detail:     "a.kovaleva@example.org",
+									Caption:    "Издательство «Слово»",
+									Source:     "3 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+									On:         true,
 								},
 								w.FaceRow{
 									Mark:       w.Mark{Colour: "#6B4E7A"},
 									Avatar:     w.Avatar{Photo: true},
-									Title:      []w.Inline{w.Text("Артём Белов ")},
+									Title:      []w.Inline{w.Text("Артём Белов")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Subtitle:   "+7 903 118-22-04",
 									Detail:     "a.belov@example.org",
 									Caption:    "Тензор",
-									Source:     "radicale · vps · Команда",
+									Source:     "2 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
@@ -2641,7 +2644,7 @@ func Notes10() Screen {
 							Rows: []w.ListRow{
 								w.ExcerptRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
-									Title:      []w.Inline{w.Text("Заметка со встречи 10.08 ")},
+									Title:      []w.Inline{w.Text("Заметка со встречи 10.08")},
 									Strong:     true,
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
@@ -2651,7 +2654,7 @@ func Notes10() Screen {
 								},
 								w.ExcerptRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
-									Title:      []w.Inline{w.Text("Что почитать про CRDT ")},
+									Title:      []w.Inline{w.Text("Что почитать про CRDT")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
 									Date:       "8 Aug",

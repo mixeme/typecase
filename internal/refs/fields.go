@@ -92,7 +92,7 @@ var _ = add(
 	form("labelled", field("Tags", w.FieldFlex3_320, in), "s-notes-20", "tc-field", 4),
 	form("labelled", field("Related to", w.FieldFlex3_340, tags), "s-notes-20", "tc-field", 6),
 	form("labelled", field(" ", w.FieldFill120, chk), "s-notes-9", "tc-field", 5),
-	form("labelled", w.Field{Label: "Match threshold", Parts: []w.FieldPart{w.Input{Name: "threshold", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52}, w.Button{Label: "Weights", Small: true}}, Width: w.FieldInline, Action: "/app/duplicates"}, "s-dup-1", "tc-field", 1),
+	form("labelled", w.Field{Label: "Match threshold", Parts: []w.FieldPart{w.Input{Name: "value", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52}, w.Button{Label: "Weights", Small: true}}, Width: w.FieldInline, Action: "/app/duplicates/decide", Post: true, Sends: []w.Hidden{w.Hidden{Name: "csrf", Value: "7f3a91de"}, w.Hidden{Name: "do", Value: "threshold"}}}, "s-dup-1", "tc-field", 1),
 	form("own-line", w.Field{OwnLine: true, Parts: []w.FieldPart{sg}}, "s-backup-2", "tc-field", 3),
 	form("own-line", w.Field{OwnLine: true, Parts: []w.FieldPart{chk, hint(t("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."))}}, "s-backup-2", "tc-field", 8),
 	form("bare", w.Field{Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Check{On: true, Name: "signin.on", Value: "on", Parts: []w.CheckPart{w.Text("On sign-in, if the last copy is older than")}}, w.Input{Name: "signin", Value: "7", Label: "Days", Mono: true, Variant: w.InputChip}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}, Gap: w.LineGap7, Block: true}}, Gap: 8}, "s-backup-2", "tc-field", 10),

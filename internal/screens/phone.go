@@ -369,7 +369,7 @@ func Phone5() Screen {
 						Initials: "АК",
 						Name:     "Анна Ковалёва",
 						Sub:      "Издательство «Слово»",
-						Badge:    &w.Badge{Label: "in 2 books", Tone: w.BadgeLinked},
+						Badge:    &w.Badge{Label: "in 3 books", Tone: w.BadgeLinked},
 						Acts:     []w.Button{w.Button{Label: "Call"}, w.Button{Label: "Email"}, w.Button{Icon: "quill", Title: "New note"}},
 					},
 					w.Bar{

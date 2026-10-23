@@ -137,7 +137,7 @@ func Tasks1() Screen {
 							w.DueRow{
 								Tick:       w.Tick{Label: "Done"},
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Собрать чемодан ")},
+								Title:      []w.Inline{w.Text("Собрать чемодан")},
 								Strong:     true,
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Due:        "12 Aug 18:00",
@@ -402,7 +402,7 @@ func Tasks15() Screen {
 							w.DueRow{
 								Tick:       w.Tick{Label: "Done"},
 								Mark:       w.Mark{Colour: "#4A6B52"},
-								Title:      []w.Inline{w.Text("Собрать чемодан ")},
+								Title:      []w.Inline{w.Text("Собрать чемодан")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked, Title: "nextcloud · Дела, nextcloud · Работа"},
 								Due:        "12 Aug 18:00",
 								Progress:   "—",
@@ -1315,7 +1315,7 @@ func Tasks19() Screen {
 								w.DueRow{
 									Tick:       w.Tick{Label: "Done"},
 									Mark:       w.Mark{Colour: "#4A6B52"},
-									Title:      []w.Inline{w.Text("Собрать чемодан ")},
+									Title:      []w.Inline{w.Text("Собрать чемодан")},
 									Strong:     true,
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Due:        "12 Aug 18:00",

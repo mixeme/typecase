@@ -9,6 +9,11 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "print", Label: "Print"},
+		w.MenuItem{Icon: "dup", Label: "Open in Duplicates", Href: "/app/duplicates"},
+		w.MenuSep{},
+		w.MenuItem{Icon: "link", Label: "Unlink", Form: "post-unlink", Name: "group", Value: "g3"}}, Width: w.MenuWidth212}, "s-contacts-36", "tc-menu", 1),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true, Href: "/app/contacts/nextcloud/kontakty/import"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "radicale · vps · Команда", Reason: "Read-only: nothing can be written here."},
@@ -324,7 +329,7 @@ var _ = add(
 		w.MenuField{Label: "Same name", Default: w.Dim{Parts: []w.Inline{w.Text("20")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "20", Mono: true, Variant: w.InputChip, Label: "Same name"}},
 		w.MenuField{Label: "Same birthday", Default: w.Dim{Parts: []w.Inline{w.Text("10")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "10", Mono: true, Variant: w.InputChip, Label: "Same birthday"}},
 		w.MenuField{Label: "Same title and date (events, tasks, notes)", Default: w.Dim{Parts: []w.Inline{w.Text("70")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "70", Mono: true, Variant: w.InputChip, Label: "Same title and date (events, tasks, notes)"}},
-		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Back to defaults", Small: true, Title: "Every weight is the default already.", State: w.ButtonDisabled}}}}, Width: w.MenuWidth420, Fields: true}, "s-dup-7", "tc-menu", 1),
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true, Name: "do", Value: "weights", Submit: true}, w.Button{Label: "Back to defaults", Small: true, Title: "Every weight is the default already.", Name: "do", Value: "defaults", Submit: true, State: w.ButtonDisabled}}}}, Width: w.MenuWidth420, Fields: true, Action: "/app/duplicates/decide", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-dup-7", "tc-menu", 1),
 	overlay("icons", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
 		w.MenuItem{Icon: "move", Label: "Move"},
@@ -570,7 +575,7 @@ var _ = add(
 		w.MenuField{Label: "Same name", Default: w.Dim{Parts: []w.Inline{w.Text("20")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "20", Mono: true, Variant: w.InputChip, Label: "Same name"}},
 		w.MenuField{Label: "Same birthday", Badge: &w.Badge{Label: "changed"}, Default: w.Dim{Parts: []w.Inline{w.Text("10")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "20", Mono: true, Variant: w.InputChip, Label: "Same birthday"}},
 		w.MenuField{Label: "Same title and date (events, tasks, notes)", Default: w.Dim{Parts: []w.Inline{w.Text("70")}, Size: w.Dim10_5, Place: w.Pushed}, Input: w.Input{Value: "70", Mono: true, Variant: w.InputChip, Label: "Same title and date (events, tasks, notes)"}},
-		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true}, w.Button{Label: "Back to defaults", Small: true}}}}, Width: w.MenuWidth420, Fields: true}, "s-dup-3", "tc-menu", 1),
+		w.MenuFoot{Items: []w.Button{w.Button{Label: "Save", Kind: w.ButtonPrimary, Small: true, Name: "do", Value: "weights", Submit: true}, w.Button{Label: "Back to defaults", Small: true, Name: "do", Value: "defaults", Submit: true}}}}, Width: w.MenuWidth420, Fields: true, Action: "/app/duplicates/decide", Hidden: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "s-dup-3", "tc-menu", 1),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true, Href: "/app/contacts/nextcloud/kontakty/import"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},

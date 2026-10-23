@@ -905,9 +905,13 @@ func (g *gen) field(k *El) string {
 			}
 		}
 	}
-	var parts []string
+	var parts, sends []string
 	for _, x := range k.Els() {
-		if x != skip {
+		switch {
+		case x == skip:
+		case x.Tag == "input" && x.Attr("type") == "hidden":
+			sends = append(sends, "w.Hidden{Name: "+q(x.Attr("name"))+", Value: "+q(x.Attr("value"))+"}")
+		default:
 			parts = append(parts, g.fieldPart(x))
 		}
 	}
@@ -927,6 +931,12 @@ func (g *gen) field(k *El) string {
 	}
 	if k.Tag == "form" {
 		f = append(f, "Action: "+q(k.Attr("action")))
+		if strings.EqualFold(k.Attr("method"), "post") {
+			f = append(f, "Post: true")
+		}
+		if len(sends) > 0 {
+			f = append(f, "Sends: []w.Hidden{"+join(sends, ", ")+"}")
+		}
 	}
 	return "w.Field{" + join(f, ", ") + placef(k) + "}"
 }

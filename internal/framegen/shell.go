@@ -763,7 +763,11 @@ func (g *gen) tree(e *El) string {
 }
 
 func (g *gen) titleFields(t *El, name string) []string {
-	f := []string{name + ": " + g.inl(t)}
+	words := t
+	if w := t.Kid("tc-row__words"); w != nil {
+		words = w // the words beside a badge, shortened on their own
+	}
+	f := []string{name + ": " + g.inl(words)}
 	if t.Has("is-strong") {
 		f = append(f, "Strong: true")
 	}
@@ -960,7 +964,11 @@ func (g *gen) row0(e *El) string {
 			txt = outer.Els()[1]
 		}
 		t := txt.Kid("tc-row__title")
-		f = append(f, "Title: "+q(t.OwnText()))
+		words := t.OwnText()
+		if w := t.Kid("tc-row__words"); w != nil {
+			words = w.Text()
+		}
+		f = append(f, "Title: "+q(words))
 		if b := t.Kid("tc-badge"); b != nil {
 			f = append(f, "TitleBadge: &"+g.badge(b))
 		}

@@ -8,6 +8,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A `Mark` is no `ValuePart`**: the collection a value came from is a
+  `Dim` with its `Mark` (`Dim.Mark`, new) — the mark and the name stay on
+  one line (`.tc-dim:has(> .tc-mark--inline)`; Carrel's task 190).
 - **«Save as» names its element by `data-tc-save-from`**, not
   `data-tc-from` (`Button.SaveFrom`; Carrel's task 224): `data-tc-from` is
   a derived field's source, a field's name (`Input.From`). The page check
@@ -96,6 +99,16 @@ do, not what the authors did.
 
 ### Added
 
+- **`Field.Post` and `Field.Sends`** — a field that is a form of its own
+  (`Field.Action`) can be a POST with hidden fields: the duplicates'
+  threshold, kept with the person's decisions (Carrel's task 190).
+  **`FaceRow.SourceHint`** — a linked person's row names its sources in
+  full, as a linked task's and note's do. **`Dim.Mark`** — see Breaking. The
+  close button of a panel whose head is centred stands at the top, level
+  with the name (`.tc-head--mid > .tc-acts:has(> .tc-close)`; `s-contacts-1`,
+  `-7`, `s-notes-1`). **A row's title with a badge** prints its words in
+  `.tc-row__words`: on a narrow list they shorten with «…» and the badge
+  stays whole (twenty titles in the mockup).
 - **`SizeRow.Mark`** — the collection's mark in the tick's place, where
   nothing is done with the file but open it: a search's results (Carrel's
   task 189). **`Pad` takes a `Menu`**: the search page's recent searches.
@@ -902,6 +915,21 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Duplicates and the linked record** (Carrel's task 190; accepted by the
+  owner 23.10). `s-dup-1`: every linked group is on the screen, one data
+  set with the lists; single values are asked by a switch, many by «what to
+  keep» ticks; an event's time is one question «When», a task's «Due»; the
+  points add the weights (a name with its words swapped is the same name);
+  the forms post to `/app/duplicates/decide`, the threshold too; a task's
+  tick is a sign. `s-dup-3`, `-7`: the weights are a form. `s-dup-6`:
+  «Decided earlier» without loaded lists. New `s-dup-8`: a merge that went
+  through, with «Linked records». The linked record's card has Edit
+  (→ «Which copy to edit?») and «⋯» — Print, Open in Duplicates, Unlink (new
+  `s-contacts-36`); «differ» is said against what is shown; the combined
+  list's panel shows the linked record (`s-contacts-1`); Анна is linked in
+  three books everywhere, «Which copy to edit?» is hers (`s-contacts-32`,
+  `-35`).
 
 - **The import wizard's «Into» is a drop of links** (Carrel's task 225;
   accepted by the owner 23.10): `s-io-3`…`-8`, `-15`…`-19` — a `Drop` with

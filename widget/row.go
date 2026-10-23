@@ -76,11 +76,17 @@ func cell(text string, own ...string) string {
 // title prints the title cell: the words, the bold of what was found, a
 // badge after them.
 func title(parts []Inline, strong bool, badge *Badge, own ...string) string {
-	s := `<span` + class(nil, append([]string{"tc-row__title", is("strong", strong)}, own...)...) + `>` + inlines(parts)
-	if badge != nil {
-		s += " " + badge.html(nil)
+	return `<span` + class(nil, append([]string{"tc-row__title", is("strong", strong)}, own...)...) + `>` + titled(parts, badge) + `</span>`
+}
+
+// titled is a title's words and its badge: with a badge the words are an
+// element of their own, which shortens with «…» while the badge stays whole
+// («Анна Ковалёва linked ×3» at 640, Carrel's task 190).
+func titled(parts []Inline, badge *Badge) string {
+	if badge == nil {
+		return inlines(parts)
 	}
-	return s + `</span>`
+	return `<span class="tc-row__words">` + inlines(parts) + `</span> ` + badge.html(nil)
 }
 
 // linkTitle is the row's title, a link to the record when href is set: in a
@@ -89,11 +95,7 @@ func linkTitle(href string, parts []Inline, strong bool, badge *Badge) string {
 	if href == "" {
 		return title(parts, strong, badge)
 	}
-	s := `<a` + class(nil, "tc-row__title", is("strong", strong)) + attr("href", href) + `>` + inlines(parts)
-	if badge != nil {
-		s += " " + badge.html(nil)
-	}
-	return s + `</a>`
+	return `<a` + class(nil, "tc-row__title", is("strong", strong)) + attr("href", href) + `>` + titled(parts, badge) + `</a>`
 }
 
 // source prints the source cell: where the record lives.
@@ -208,7 +210,7 @@ func (r SkelRow) html(m mix) string {
 // FaceRow — tc-row
 //
 // Роль. Строка человека: аватар, имя, телефон, почта, организация.
-// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceBadge, On, Inset, Single, Href}.
+// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceHint, SourceBadge, On, Inset, Single, Href}.
 // Состояния. plain | on | strong | badge | inset | found.
 // Инварианты. Колонки строки — её тип: у строки человека есть аватар и нет времени; метка источника — первой; строка печатает фрагмент своего кадра.
 // Поведение. Нажатие открывает карточку; стрелки ходят по строкам списка.
@@ -225,6 +227,7 @@ type FaceRow struct {
 	Detail      string
 	Caption     string
 	Source      string
+	SourceHint  string // the sources in full when there are several: a linked person
 	SourceBadge *Badge
 	On          bool
 	Inset       bool
@@ -239,7 +242,7 @@ func (r FaceRow) html(m mix) string {
 	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` +
 		r.Mark.html(nil) + r.Avatar.html(nil) + title(r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Subtitle, "tc-row__excerpt", "tc-mono", "tc-row__subtitle") + cell(r.Detail, "tc-row__excerpt", "tc-row__detail") +
-		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, "", r.SourceBadge, r.Single) + `</` + rowTag(r.Href) + `>`
+		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, r.SourceHint, r.SourceBadge, r.Single) + `</` + rowTag(r.Href) + `>`
 }
 
 // FindRow — tc-row

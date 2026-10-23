@@ -20,6 +20,8 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("plain", w.Button{Icon: "dots", Variant: w.ButtonPadX3, Title: "More"}, "s-contacts-33", "tc-btn", 2),
+	primitive("plain", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled}, "s-dup-1", "tc-btn", 12),
 	primitive("danger-off", w.Button{Label: "End", Kind: w.ButtonDanger, Small: true, Title: "This is the session you are using: sign out instead.", State: w.ButtonDisabled}, "account-1", "tc-btn", 6),
 	primitive("picks-small", w.Button{Label: "Keep both", Small: true, File: &w.FileField{Form: "taken-release", Name: "keep", Label: "Keep both"}}, "components-26", "tc-btn", 2),
 	primitive("disabled", w.Button{Folds: true, Label: "Rename", Icon: "pencil", Title: "Public is read-only.", Form: "files-sel", Name: "op", Value: "rename", State: w.ButtonDisabled}, "states-34", "tc-btn", 11),
@@ -87,7 +89,7 @@ var _ = add(
 	primitive("with-content", w.Button{Label: "Mark done", Tick: &w.Tick{Glyph: true}}, "s-tasks-2", "tc-btn", 4),
 	primitive("variant", w.Button{Label: "Focus", Icon: "focus", Folds: true, Variant: w.ButtonOnCard, Title: "Focus"}, "s-notes-4", "tc-btn", 14),
 	primitive("variant", w.Button{Icon: "panel", Variant: w.ButtonOnCard, Title: "Details"}, "s-files-1", "tc-btn", 9),
-	primitive("disabled", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled, Reason: "Общий is read-only"}, "s-dup-1", "tc-btn", 16),
+	primitive("disabled", w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true}, "s-dup-1", "tc-btn", 16),
 	primitive("primary", w.Button{Label: "Save", Small: true, Kind: w.ButtonPrimary}, "s-dup-3", "tc-btn", 2),
 	primitive("with-content", w.Button{Label: "Download", Icon: "download", Href: "/app/collections/nextcloud/dni-rozhdeniya/export", Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}, After: "first"}, "s-profile-9", "tc-btn", 9),
 	primitive("with-content", w.Button{Label: "Save as", Icon: "download", SaveAs: "carrel-personal.sh", SaveFrom: "trigger-script", Aside: &w.Mono{Text: "carrel-personal.sh", Variant: w.Mono11}}, "s-backup-3", "tc-btn", 2),
@@ -165,6 +167,7 @@ var _ = add(
 	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
 
 	// tc-dim
+	primitive("mark", w.Dim{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Команда")}}, "s-contacts-1", "tc-dim", 1),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, "s-backup-12", "tc-dim", 13),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}, "s-contacts-6", "tc-dim", 1),
 	primitive("mixed", dim(w.Dim11, w.DimInline, w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}), "components-35", "tc-dim", 1),
@@ -196,7 +199,7 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "last used", Variant: w.Mono10Dusty}, "components-6", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5Dusty}, "s-profile-1", "tc-mono", 5),
 	primitive("variant", w.Mono{Text: "412 KB", Variant: w.MonoMuted}, "components-16", "tc-mono", 1),
-	primitive("variant", w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 3),
+	primitive("variant", w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 11),
 	primitive("variant", w.Mono{Text: "5", Variant: w.MonoDusty11}, "components-21", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "1.6×", Variant: w.Mono11Dusty}, "s-contacts-5", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: "12.4 MB", Variant: w.MonoDusty}, "components-26", "tc-mono", 1),

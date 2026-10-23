@@ -2568,7 +2568,7 @@ func Publish19() Screen {
 											w.Text(" "),
 											w.Link{Text: "baikal · Общий", Href: "#"},
 											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("· Where differ")}},
+											w.Dim{Parts: []w.Inline{w.Text("· When, where differ")}},
 										},
 									},
 									Gap: 5,

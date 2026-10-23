@@ -16,10 +16,9 @@ func (Badge) valuePart() {}
 func (Tag) valuePart()   {}
 func (Break) valuePart() {}
 
-// A mark in a value names the collection the value came from: a card of a
-// linked record shows the fields of all its copies, and a value that is not
-// in the copy opened carries the mark and the name of its own (Р-58).
-func (Mark) valuePart() {}
+// The collection a value came from is a Dim with its Mark: a card of a
+// linked record shows the values chosen among its copies, each with the mark
+// and the name of the copy it came from, on one line (Р-58, Carrel's task 190).
 
 // ValueFace is how a value of a panel's fields is set.
 type ValueFace int

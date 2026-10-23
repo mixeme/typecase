@@ -134,25 +134,28 @@ func Contacts1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АК"},
-								Title:    []w.Inline{w.Text("Анна Ковалёва")},
-								Strong:   true,
-								Subtitle: "+7 912 445-10-88",
-								Detail:   "a.kovaleva@example.org",
-								Caption:  "Издательство «Слово»",
-								Source:   "nextcloud · Контакты",
-								On:       true,
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Avatar:     w.Avatar{Initials: "АК"},
+								Title:      []w.Inline{w.Text("Анна Ковалёва")},
+								Strong:     true,
+								TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+								Subtitle:   "+7 912 445-10-88",
+								Detail:     "a.kovaleva@example.org",
+								Caption:    "Издательство «Слово»",
+								Source:     "3 sources",
+								SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+								On:         true,
 							},
 							w.FaceRow{
 								Mark:       w.Mark{Colour: "#6B4E7A"},
 								Avatar:     w.Avatar{Photo: true},
-								Title:      []w.Inline{w.Text("Артём Белов ")},
+								Title:      []w.Inline{w.Text("Артём Белов")},
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Subtitle:   "+7 903 118-22-04",
 								Detail:     "a.belov@example.org",
 								Caption:    "Тензор",
-								Source:     "radicale · vps · Команда",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
@@ -210,13 +213,11 @@ func Contacts1() Screen {
 						Photo: &w.HeadPhoto{Initials: "АК"},
 						Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19},
 						Tools: []w.HeadTool{
-							w.Button{Label: "Edit", Small: true},
+							w.Button{Label: "Edit", Small: true, Href: "/app/contacts/linked/4f2b-9c31-a0e7/copies"},
 							w.Button{Label: "All records", Small: true},
 							w.Button{Icon: "dots", Small: true, Title: "More"},
 						},
-						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}},
-						},
+						Subs:   []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("in 3 books")}}},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,
 					},
@@ -225,8 +226,22 @@ func Contacts1() Screen {
 							{Term: "Organisation", Value: []w.ValuePart{w.Text("Издательство «Слово»")}},
 							{Term: "Title", Value: []w.ValuePart{w.Text("Выпускающий редактор")}},
 							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
-							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+							{
+								Term: "Phone · work",
+								Value: []w.ValuePart{
+									w.Text("+7 495 120-45-77 "),
+									w.Dim{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Команда")}},
+								},
+								Face: w.ValueMono,
+							},
 							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+							{
+								Term: "Email · second",
+								Value: []w.ValuePart{
+									w.Text("anna.kovaleva@slovo.example "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
+								},
+							},
 							{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
 							{
 								Term:  "Tags",
@@ -237,15 +252,35 @@ func Contacts1() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 3", Small: true}}},
+							w.Rubric{Text: "Where this person is kept", Items: []w.RubricPart{w.Badge{Label: "3", Tone: w.BadgeLinked}}},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Контакты", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone differs")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Email differs")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+								},
+								Gap: 5,
+							},
 						},
 					},
-					w.Sec{
-						Items: []w.SecPart{
-							w.Rubric{Text: "Source"},
-							w.Diag{Text: "UID   4f2b-9c31-a0e7\nRead  2 min ago"}},
-					},
-					w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},
@@ -383,25 +418,28 @@ func Contacts2() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Strong:   true,
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@example.org",
-									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
-									On:       true,
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Avatar:     w.Avatar{Initials: "АК"},
+									Title:      []w.Inline{w.Text("Анна Ковалёва")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+									Subtitle:   "+7 912 445-10-88",
+									Detail:     "a.kovaleva@example.org",
+									Caption:    "Издательство «Слово»",
+									Source:     "3 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+									On:         true,
 								},
 								w.FaceRow{
 									Mark:       w.Mark{Colour: "#6B4E7A"},
 									Avatar:     w.Avatar{Photo: true},
-									Title:      []w.Inline{w.Text("Артём Белов ")},
+									Title:      []w.Inline{w.Text("Артём Белов")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Subtitle:   "+7 903 118-22-04",
 									Detail:     "a.belov@example.org",
 									Caption:    "Тензор",
-									Source:     "radicale · vps · Команда",
+									Source:     "2 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
@@ -2173,23 +2211,26 @@ func Contacts35() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@example.org",
-									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Avatar:     w.Avatar{Initials: "АК"},
+									Title:      []w.Inline{w.Text("Анна Ковалёва")},
+									TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+									Subtitle:   "+7 912 445-10-88",
+									Detail:     "a.kovaleva@example.org",
+									Caption:    "Издательство «Слово»",
+									Source:     "3 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
 								},
 								w.FaceRow{
 									Mark:       w.Mark{Colour: "#6B4E7A"},
 									Avatar:     w.Avatar{Photo: true},
-									Title:      []w.Inline{w.Text("Артём Белов ")},
+									Title:      []w.Inline{w.Text("Артём Белов")},
 									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 									Subtitle:   "+7 903 118-22-04",
 									Detail:     "a.belov@example.org",
 									Caption:    "Тензор",
-									Source:     "radicale · vps · Команда",
+									Source:     "2 sources",
+									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
@@ -2246,13 +2287,13 @@ func Contacts35() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/contacts/linked/8d21-55ce-0b17/edit",
+					Action: "/app/contacts/linked/4f2b-9c31-a0e7/edit",
 					Method: "get",
 					Icon:   "pencil",
 					Title:  "Which copy to edit?",
 					Head: []w.SheetHeadPart{
 						w.Dim{
-							Parts:   []w.Inline{w.Text("Вера Лебедева · 3 copies")},
+							Parts:   []w.Inline{w.Text("Анна Ковалёва · 3 copies")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 							Place:   w.Pushed,
@@ -2262,38 +2303,38 @@ func Contacts35() Screen {
 						w.SheetNote{Text: "Saving changes one copy only; the others stay as they are."},
 						w.Line{
 							Items: []w.LinePart{
-								w.Mark{Colour: "#A05A2C", Size: w.MarkH11},
-								w.Check{
-									On:    true,
-									Name:  "copy",
-									Value: "nextcloud/arhiv",
-									Radio: true,
-									Parts: []w.CheckPart{w.Text("nextcloud · Архив")},
-								},
-								w.Dim{Parts: []w.Inline{w.Text("the copy you opened · vera@arhiv.example")}, Size: w.Dim11_5},
-							},
-							Gap:   w.LineGap8,
-							Block: true,
-						},
-						w.Line{
-							Items: []w.LinePart{
 								w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
 								w.Check{
+									On:    true,
 									Name:  "copy",
 									Value: "nextcloud/kontakty",
 									Radio: true,
 									Parts: []w.CheckPart{w.Text("nextcloud · Контакты")},
 								},
-								w.Dim{Parts: []w.Inline{w.Text("Email differ · v.lebedeva@example.org")}, Size: w.Dim11_5},
+								w.Dim{Parts: []w.Inline{w.Text("the copy you opened · Phone differs")}, Size: w.Dim11_5},
 							},
 							Gap:   w.LineGap8,
 							Block: true,
 						},
 						w.Line{
 							Items: []w.LinePart{
-								w.Mark{Colour: "#9A9280", Size: w.MarkH11},
-								w.Dim{Parts: []w.Inline{w.Text("baikal · Общий")}},
-								w.Dim{Parts: []w.Inline{w.Text("Phone differ · read-only: it cannot be edited")}, Size: w.Dim11_5},
+								w.Mark{Colour: "#A05A2C", Size: w.MarkH11},
+								w.Check{
+									Name:  "copy",
+									Value: "nextcloud/arhiv",
+									Radio: true,
+									Parts: []w.CheckPart{w.Text("nextcloud · Архив")},
+								},
+								w.Dim{Parts: []w.Inline{w.Text("Phone, email differ")}, Size: w.Dim11_5},
+							},
+							Gap:   w.LineGap8,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+								w.Dim{Parts: []w.Inline{w.Text("radicale · vps · Команда")}},
+								w.Dim{Parts: []w.Inline{w.Text("Email differs · read-only: it cannot be edited")}, Size: w.Dim11_5},
 							},
 							Gap:   w.LineGap8,
 							Block: true,
@@ -2303,7 +2344,7 @@ func Contacts35() Screen {
 						w.Button{Label: "Edit this copy", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
-							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts/linked/8d21-55ce-0b17"}, w.Kbd{Keys: "Esc"}},
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts/linked/4f2b-9c31-a0e7"}, w.Kbd{Keys: "Esc"}},
 							Gap:   w.LineGap7,
 							Place: w.Pushed,
 						},
@@ -2393,7 +2434,7 @@ func Contacts7() Screen {
 							w.HeadSub{
 								Parts: []w.HeadSubPart{
 									w.Text("Издательство «Слово» · Выпускающий редактор "),
-									w.Badge{Label: "in 2 books", Tone: w.BadgeLinked},
+									w.Badge{Label: "in 3 books", Tone: w.BadgeLinked},
 								},
 							},
 						},

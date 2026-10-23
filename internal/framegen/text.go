@@ -320,7 +320,17 @@ func (g *gen) dimx(e *El) string {
 	if id := e.Attr("id"); id != "" {
 		empty += ", ID: " + q(id)
 	}
-	return "w.Dim{Parts: []w.Inline{" + join(g.dimparts(e), ", ") + "}" + g.ev(e, "DimSize", "Size") + g.ev(e, "DimVariant", "Variant") + placef(e) + empty + "}"
+	mark := ""
+	if len(e.Kids) > 0 {
+		if k, ok := e.Kids[0].(*El); ok && k.Has("tc-mark") {
+			// a collection's mark before its name: one Dim, one line
+			mark = "Mark: &" + g.mark(k) + ", "
+			c := *e
+			c.Kids = e.Kids[1:]
+			e = &c
+		}
+	}
+	return "w.Dim{" + mark + "Parts: []w.Inline{" + join(g.dimparts(e), ", ") + "}" + g.ev(e, "DimSize", "Size") + g.ev(e, "DimVariant", "Variant") + placef(e) + empty + "}"
 }
 
 // unq reverses q.

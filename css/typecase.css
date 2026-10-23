@@ -1354,6 +1354,14 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-fset--rule.tc-fset--rule{border-top:.5px solid var(--tc-hair);padding-top:12px}
 .tc-grid--flush-fill-pad8.tc-grid--flush-fill-pad8{margin:0;flex:1;padding:8px}
 .tc-head--mid.tc-head--mid{align-items:center}
+/* закрыть панель — в углу, на уровне имени, а не посередине фото */
+.tc-head--mid > .tc-acts:has(> .tc-close){align-self:flex-start}
+/* имя строки с бейджем укорачивается «…», бейдж остаётся целым */
+.tc-row__title:has(> .tc-row__words){display:flex;align-items:baseline;column-gap:4px}
+.tc-row__words{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.tc-row__title > .tc-row__words + .tc-badge{flex:none}
+/* метка коллекции и её имя не расходятся по строкам */
+.tc-dim:has(> .tc-mark--inline){white-space:nowrap}
 .tc-head--padt11.tc-head--padt11{padding-top:11px}
 .tc-head--padb10.tc-head--padb10{padding-bottom:10px}
 .tc-head--rule.tc-head--rule{padding-bottom:9px;border-bottom:.5px solid var(--tc-rule)}
