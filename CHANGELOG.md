@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `PhotoCrop.After` is gone: the crop page says nothing after its fields
+  (Carrel's task 197, Р-77).
 - **A `Mark` is no `ValuePart`**: the collection a value came from is a
   `Dim` with its `Mark` (`Dim.Mark`, new) — the mark and the name stay on
   one line (`.tc-dim:has(> .tc-mark--inline)`; Carrel's task 190).
@@ -922,6 +924,21 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Sheets: the move's lines, «where» of the quick sheets, export, the
+  password, the crop** (Carrel's task 197 pp. 3, 5; accepted by the owner
+  23.10, Р-77). A sheet's note says only what matters and is not obvious —
+  no note when there is nothing such: the move and copy sheets of records,
+  collections and files are shortened or lose their note (`s-contacts-2`,
+  `-17`, `s-files-4`, `-11`, `-12`, `-13`, `s-profile-7`, `-8`, `-18`,
+  `-34`, `-35`). New frames: `s-agenda-29` (an event moved to another
+  account: its attendees may get a cancellation), `s-contacts-37` (a copy
+  under a new UID), `s-agenda-30` (the export sheet of a combined view),
+  `s-profile-36` (a wrong password). «Where» of a quick sheet is a drop of
+  radios `into`, the last used one first, a read-only one off (`s-notes-5`,
+  `-8`, `-9`, `-10`, `-16`, `-17`, `-19`); a pushed drop in a sheet's head
+  keeps its field at the right. The crop page is a form (`s-contacts-5`);
+  the new card's form has no «Show 5 empty fields» (`s-contacts-27`).
 
 - **Search after note 114** (Carrel's task 227; accepted by the owner
   23.10): the stopped search has its segments (`s-find-10`); one bar in

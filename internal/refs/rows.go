@@ -47,6 +47,29 @@ var _ = add(
 	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow", 7),
 
 	// tc-tree
+	rows("plain", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Badge{Label: "read-only"}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 2}, "s-contacts-37", "tc-tree", 1),
+	rows("plain", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 4}, "s-contacts-17", "tc-tree", 1),
+	rows("plain", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "c", Value: "nextcloud/lichnyj", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Send: w.Send{Name: "c", Value: "nextcloud/rabota", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Send: w.Send{Name: "c", Value: "nextcloud/dni-rozhdeniya", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Send: w.Send{Name: "c", Value: "radicale/proekty", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Send: w.Send{Name: "c", Value: "radicale/dezhurstva", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#9A9280"}, Label: "Общий", Unavailable: true, Send: w.Send{Name: "c", Value: "baikal/obshchiy", One: true}, Trail: w.Mono{Text: "password · 401", Variant: w.Mono10Dusty}}}, On: 1}, "s-agenda-30", "tc-tree", 1),
+	rows("plain", w.Tree{Rows: []w.TreeRow{
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/proekty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Send: w.Send{Name: "to", Value: "radicale/dezhurstva", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "to", Value: "nextcloud/lichnyj", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Send: w.Send{Name: "to", Value: "nextcloud/rabota", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#9A9280"}, Label: "Общий", Unavailable: true, Send: w.Send{Name: "to", Value: "baikal/obshchiy", One: true}, Trail: w.Mono{Text: "password · 401", Variant: w.Mono10Dusty}}}, On: 4}, "s-agenda-29", "tc-tree", 1),
 	rows("links", w.Tree{Rows: []w.TreeRow{
 		{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=folder&dir=sftpgo"},
 		{Icon: "file", Label: "Documents", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=folder&dir=sftpgo/documents"},
@@ -133,9 +156,9 @@ var _ = add(
 		{Icon: "file", Label: "смета", Indent: w.TreeLevel20}}, On: 1}, "components-28", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Badge{Label: "read-only"}},
-		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 2}, "s-contacts-2", "tc-tree", 1),
+		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 4}, "s-contacts-2", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Documents", Href: "/app/files/picker?to=sftpgo/documents", Swap: "upload-sheet"},
 		{Icon: "file", Label: "carrel", Indent: w.TreeLevel22, Href: "/app/files/picker?to=sftpgo/documents/carrel", Swap: "upload-sheet"},

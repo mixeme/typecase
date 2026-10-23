@@ -1822,7 +1822,36 @@ func Notes5() Screen {
 					Icon:   "quill",
 					Title:  "New note",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Place: w.Pushed},
+						w.Drop{
+							Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}, Variant: w.PickT12W200},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#4A6B52"},
+										Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed},
+										Label: "nextcloud · Записи",
+										On:    true,
+										Name:  "into",
+										Value: "nextcloud/zapisi",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#6B4E7A"},
+										Label: "nextcloud · Дневник",
+										Name:  "into",
+										Value: "nextcloud/dnevnik",
+									},
+									w.MenuItem{
+										Mark:   &w.Mark{Colour: "#3F6E8C"},
+										Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+										Label:  "nextcloud · Общие с семьёй",
+										Reason: "Read-only: nothing can be written here.",
+									},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
 						w.Close{Label: "Close"},
 					},
 					Body: []w.SheetPart{
@@ -2296,7 +2325,31 @@ func Notes8() Screen {
 					Icon:   "con",
 					Title:  "New contact",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "nextcloud · Контакты", Variant: w.PickT12W200, Place: w.Pushed},
+						w.Drop{
+							Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}, Variant: w.PickT12W200},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#4A6B52"},
+										Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed},
+										Label: "nextcloud · Контакты",
+										On:    true,
+										Name:  "into",
+										Value: "nextcloud/kontakty",
+									},
+									w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Name: "into", Value: "nextcloud/arhiv"},
+									w.MenuItem{
+										Mark:   &w.Mark{Colour: "#6B4E7A"},
+										Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+										Label:  "radicale · vps · Команда",
+										Reason: "Read-only: nothing can be written here.",
+									},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
 						w.Close{Label: "Close"},
 					},
 					Body: []w.SheetPart{
@@ -2499,7 +2552,49 @@ func Notes9() Screen {
 					Icon:   "cal",
 					Title:  "New event",
 					Head: []w.SheetHeadPart{
-						w.Pick{Value: "nextcloud · Личный", Variant: w.PickT12W200, Place: w.Pushed},
+						w.Drop{
+							Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}, Variant: w.PickT12W200},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#4A6B52"},
+										Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed},
+										Label: "nextcloud · Личный",
+										On:    true,
+										Name:  "into",
+										Value: "nextcloud/lichnyj",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#3F6E8C"},
+										Label: "nextcloud · Работа",
+										Name:  "into",
+										Value: "nextcloud/rabota",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#A05A2C"},
+										Label: "nextcloud · Дни рождения",
+										Name:  "into",
+										Value: "nextcloud/dni-rozhdeniya",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#6B4E7A"},
+										Label: "radicale · vps · Проекты",
+										Name:  "into",
+										Value: "radicale/proekty",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#8C6239"},
+										Label: "radicale · vps · Дежурства",
+										Name:  "into",
+										Value: "radicale/dezhurstva",
+									},
+									w.MenuItem{Mark: &w.Mark{Colour: "#9A9280"}, Label: "baikal · Общий", Name: "into", Value: "baikal/obshchiy"},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
 						w.Close{Label: "Close"},
 					},
 					Body: []w.SheetPart{
@@ -2679,7 +2774,33 @@ func Notes10() Screen {
 					Action: "/app/tasks/nextcloud/dela/quick",
 					Icon:   "task",
 					Title:  "New task",
-					Head:   []w.SheetHeadPart{w.Pick{Value: "nextcloud · Дела", Variant: w.PickT12W200, Place: w.Pushed}, w.Close{Label: "Close"}},
+					Head: []w.SheetHeadPart{
+						w.Drop{
+							Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}, Variant: w.PickT12W200},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#4A6B52"},
+										Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed},
+										Label: "nextcloud · Дела",
+										On:    true,
+										Name:  "into",
+										Value: "nextcloud/dela",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#3F6E8C"},
+										Label: "nextcloud · Работа",
+										Name:  "into",
+										Value: "nextcloud/rabota",
+									},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
+						w.Close{Label: "Close"},
+					},
 					Body: []w.SheetPart{
 						w.SheetFields{
 							Items: []w.Field{

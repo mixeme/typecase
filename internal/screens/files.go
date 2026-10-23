@@ -1253,14 +1253,6 @@ func Files4() Screen {
 							},
 							On: 4,
 						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Inside one server this is "),
-								w.Mono{Text: "MOVE", Form: w.MonoCode},
-								w.Text(": instant, no traffic. To another storage the file has to be downloaded and uploaded again — Carrel says so before it starts, not after."),
-							},
-							Space: w.MsgFlushTop2,
-						},
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true},

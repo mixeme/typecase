@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("plain", w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Submit: true, Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}}, "s-agenda-30", "tc-btn", 1),
 	primitive("plain", w.Button{Icon: "dots", Variant: w.ButtonPadX3, Title: "More"}, "s-contacts-33", "tc-btn", 2),
 	primitive("plain", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled}, "s-dup-1", "tc-btn", 12),
 	primitive("danger-off", w.Button{Label: "End", Kind: w.ButtonDanger, Small: true, Title: "This is the session you are using: sign out instead.", State: w.ButtonDisabled}, "account-1", "tc-btn", 6),
@@ -191,6 +192,7 @@ var _ = add(
 	// tc-mono
 	// words in two lengths (Р-65): the run of a search, its answer's time
 	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
+	primitive("code", w.Mono{Text: ".well-known", Form: w.MonoCode}, "s-profile-2", "tc-mono", 4),
 	primitive("plain", w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-6", "tc-mono", 1),
 	primitive("danger", w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}, "s-backup-13", "tc-mono", 7),
 	primitive("span", w.Mono{Text: "14 items · 38.2 MB"}, "components-16", "tc-mono", 2),
@@ -206,7 +208,6 @@ var _ = add(
 	primitive("line", w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}, "s-profile-1", "tc-mono", 8),
 	primitive("variant", w.Mono{Text: "10:00", Variant: w.MonoFace}, "print-1", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "264 px · sections + sources", Form: w.MonoLine, Variant: w.Mono11Top}, "shell-1", "tc-mono", 1),
-	primitive("code", w.Mono{Text: "MOVE", Form: w.MonoCode}, "s-contacts-2", "tc-mono", 6),
 	primitive("variant", w.Mono{Text: "3 collections", Variant: w.Mono11Indent}, "s-backup-1", "tc-mono", 4),
 	primitive("variant", w.Mono{Text: "carrel.example", Variant: w.MonoTightPlain}, "account-5", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "<mix@carrel.example>", Variant: w.Mono11Muted}, "s-mail-7", "tc-mono", 1),

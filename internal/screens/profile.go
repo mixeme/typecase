@@ -4231,9 +4231,7 @@ func Profile7() Screen {
 							Width: w.FieldW100,
 						},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Renaming is not moving: the address does not change, so devices, published links and backup jobs pointing here go on working. The new name and colour are written to the server — other clients will show them at their next sync."),
-							},
+							Parts: []w.MsgPart{w.Text("The address stays: links, devices and backups keep working.")},
 							Space: w.MsgFlushTop2,
 						},
 					},
@@ -4433,9 +4431,7 @@ func Profile8() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("Carrel creates a calendar there, copies all "),
-								w.Strong("128"),
-								w.Text(" events, then deletes this one on nextcloud. Devices, published links and backup jobs pointing at the old address will see it vanish — same as Delete, except the records live on. This is not renaming the path. nextcloud may tell the attendees of its meetings that they are cancelled."),
+								w.Text("Links, devices and backups lose the old address. nextcloud may send attendees a cancellation."),
 							},
 							Space: w.MsgFlushTop2,
 						},

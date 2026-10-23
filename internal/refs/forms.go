@@ -58,7 +58,7 @@ var _ = add(
 	form("table-wrap", w.Seg{Options: []w.SegOption{{Label: "Wrap", On: true}, {Label: "One line"}}, Variant: w.SegCompactSmall}, "s-notes-21", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Remote", "Local")}, "components-13", "tc-seg", 1),
 	form("default", w.Seg{Options: seg(0, "Open 12", "Done 48", "All")}, "components-9", "tc-seg", 1),
-	form("start", w.Seg{Options: seg(0, "0°", "90°", "180°", "270°"), Variant: w.SegStart}, "s-contacts-5", "tc-seg", 1),
+	form("start", w.Seg{Options: []w.SegOption{{Label: "0°", On: true, Value: "0"}, {Label: "90°", Value: "90"}, {Label: "180°", Value: "180"}, {Label: "270°", Value: "270"}}, Variant: w.SegStart, Name: "rotate"}, "s-contacts-5", "tc-seg", 1),
 	form("default", w.BarForm{Items: []w.BarFormPart{w.Drop{Trigger: w.Pick{Value: "All actions", Unset: true, Variant: w.PickH26W190}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Label: "All actions", On: true, Name: "action", Value: ""},
 		w.MenuSep{},

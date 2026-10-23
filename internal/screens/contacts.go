@@ -518,17 +518,18 @@ func Contacts2() Screen {
 									Trail:       w.Mono{Text: "already there", Variant: w.Mono10Dusty},
 								},
 								{
-									Mark:  &w.Mark{Colour: "#A05A2C"},
-									Label: "Архив",
-									Send:  w.Send{Name: "to", Value: "nextcloud/arhiv", One: true},
-									Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty},
+									Mark:        &w.Mark{Colour: "#A05A2C"},
+									Label:       "Архив",
+									Unavailable: true,
+									Send:        w.Send{Name: "to", Value: "nextcloud/arhiv", One: true},
+									Trail:       w.Mono{Text: "already there", Variant: w.Mono10Dusty},
 								},
 								{
 									Mark:        &w.Mark{Colour: "#6B4E7A"},
 									Label:       "Команда",
 									Unavailable: true,
 									Send:        w.Send{Name: "to", Value: "radicale/komanda", One: true},
-									Trail:       w.Badge{Label: "read-only"},
+									Trail:       w.Mono{Text: "already there", Variant: w.Mono10Dusty},
 								},
 								{
 									Mark:  &w.Mark{Colour: "#8C6239"},
@@ -537,15 +538,7 @@ func Contacts2() Screen {
 									Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty},
 								},
 							},
-							On: 2,
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Inside one server this is "),
-								w.Mono{Text: "MOVE", Form: w.MonoCode},
-								w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after."),
-							},
-							Space: w.MsgFlushTop2,
+							On: 4,
 						},
 					},
 					Foot: []w.SheetFootPart{
@@ -1171,7 +1164,6 @@ func Contacts27() Screen {
 									w.Field{Label: "Note", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
 								},
 							},
-							w.Field{Parts: []w.FieldPart{w.Button{Label: "Show 5 empty fields"}}},
 						},
 					},
 				},
@@ -1218,15 +1210,21 @@ func Contacts5() Screen {
 							},
 							w.PhotoCrop{
 								Colour: "#8C7B6A",
-								Note:   "Drag the photo to choose the frame. The box is what other clients will see.",
+								Note:   "Drag to choose the frame.",
 								Fields: []w.Field{
 									w.Field{Label: "Zoom", Parts: []w.FieldPart{w.Zoom{Value: "1.6×"}}, Width: w.FieldW100},
 									w.Field{
 										Label: "Rotate",
 										Parts: []w.FieldPart{
 											w.Seg{
-												Options: []w.SegOption{{Label: "0°", On: true}, {Label: "90°"}, {Label: "180°"}, {Label: "270°"}},
+												Options: []w.SegOption{
+													{Label: "0°", On: true, Value: "0"},
+													{Label: "90°", Value: "90"},
+													{Label: "180°", Value: "180"},
+													{Label: "270°", Value: "270"},
+												},
 												Variant: w.SegStart,
+												Name:    "rotate",
 											},
 										},
 										Width: w.FieldW100,
@@ -1234,31 +1232,40 @@ func Contacts5() Screen {
 									w.Field{
 										Label: "Saved as",
 										Parts: []w.FieldPart{
-											w.Input{Value: "512 × 512 · JPEG · about 90 KB", Label: "Saved as", Mono: true},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("The photo lives inside the card itself, so its size is the card’s size: a square of 512 px at quality 85 keeps a vCard near 200 KB, which servers and phones still accept. Lists are served a smaller copy of the same crop — the original file is not kept anywhere."),
-												},
-											},
+											w.Input{Value: "512 × 512 · JPEG · about 90 KB", Label: "Saved as", Mono: true, ReadOnly: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("Kept inside the card, so it is made small.")}},
 										},
 										Width: w.FieldW100,
 									},
 								},
-								After: &w.Dim{
-									Parts: []w.Inline{w.Text("EXIF orientation is already applied, metadata is stripped.")},
-									Size:  w.Dim11,
-								},
 							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
-									w.Button{Label: "Save photo", Kind: w.ButtonPrimary},
-									w.Button{Label: "Cancel"},
-									w.Push{Items: []w.PushPart{w.Button{Label: "Remove photo", Kind: w.ButtonDanger}}},
+									w.Button{Label: "Save photo", Kind: w.ButtonPrimary, Submit: true},
+									w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/edit"},
+									w.Push{
+										Items: []w.PushPart{
+											w.Button{
+												Label:  "Remove photo",
+												Kind:   w.ButtonDanger,
+												To:     "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/photo-preview?op=remove",
+												Submit: true,
+											},
+										},
+									},
 								},
 								Variant: w.FormFootFlush,
 							},
 						},
 						Variant: w.Dialog520,
+						Action:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/photo-preview?op=crop",
+						Fields: []w.Hidden{
+							{Name: "csrf", Value: "7f3a91de"},
+							{Name: "etag", Value: "7f3a-91de"},
+							{Name: "zoom", Value: "1.6"},
+							{Name: "x", Value: "0.12"},
+							{Name: "y", Value: "0.08"},
+						},
 					},
 				},
 			},

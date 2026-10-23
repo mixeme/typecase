@@ -105,7 +105,6 @@ type PhotoCrop struct {
 	Src    string // the picture being cropped
 	Note   string
 	Fields []Field
-	After  *Dim // what is done to the file on its way in
 }
 
 func (p PhotoCrop) html(mix) string {
@@ -119,9 +118,6 @@ func (p PhotoCrop) html(mix) string {
 		`<span class="tc-dim--muted tc-dim--t12-5">` + esc(p.Note) + `</span>`)
 	for _, f := range p.Fields {
 		s.WriteString(f.html(nil))
-	}
-	if p.After != nil {
-		s.WriteString(p.After.html(nil))
 	}
 	s.WriteString(`</div></div>`)
 	return s.String()

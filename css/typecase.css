@@ -621,6 +621,8 @@ details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 /* Выпадашка в шапке листа сжимается, как поле на её месте: выбор подключения не выталкивает строку пути. */
 .tc-sheet__head > .tc-drop{display:flex;min-width:0;flex:0 1 auto}
 .tc-sheet__head > .tc-drop > .tc-in{flex:1 1 auto}
+/* «куда» листа, прижатое вправо, остаётся справа и когда шапка растягивает его */
+.tc-sheet__head > .tc-drop.tc-push{justify-content:flex-end}
 .tc-drop > summary,.tc-drop__anchor > summary{list-style:none;cursor:pointer}
 .tc-drop > summary::-webkit-details-marker,.tc-drop__anchor > summary::-webkit-details-marker{display:none}
 .tc-field:has(> .tc-menu.is-pop){position:relative}

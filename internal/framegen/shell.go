@@ -1325,13 +1325,9 @@ func (g *gen) dialog(e *El) string {
 			ph := x.Kid("tc-dialog__photo")
 			side := x.Kid("tc-dialog__side")
 			var flds []string
-			var aft *El
 			for _, y := range side.Els()[1:] {
 				if y.Has("tc-field") {
 					flds = append(flds, g.field(y))
-				}
-				if aft == nil && y.Has("tc-dim") {
-					aft = y
 				}
 			}
 			src := ""
@@ -1339,9 +1335,6 @@ func (g *gen) dialog(e *El) string {
 				src = ", Src: " + q(img.Attr("src"))
 			}
 			s := "w.PhotoCrop{Colour: " + q(ph.Attr("data-tc-colour")) + src + ", Note: " + q(side.Els()[0].Text()) + ", Fields: []w.Field{" + join(flds, ", ") + "}"
-			if aft != nil {
-				s += ", After: &w.Dim{Parts: []w.Inline{w.Text(" + q(aft.Text()) + ")}, Size: w.Dim11}"
-			}
 			items = append(items, s+"}")
 		default:
 			items = append(items, g.anyblock(x))
