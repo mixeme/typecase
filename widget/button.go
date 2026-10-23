@@ -232,7 +232,7 @@ func (b Button) html(m mix) string {
 			typ = "submit"
 		}
 		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("data-tc-target", b.Target) + flag("data-tc-close", b.Closes) + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) + flag("data-tc-remove", b.Removes) +
-			attr("data-tc-save", b.SaveAs) + attr("data-tc-from", b.SaveFrom) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
+			attr("data-tc-save", b.SaveAs) + attr("data-tc-save-from", b.SaveFrom) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))

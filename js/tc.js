@@ -419,7 +419,7 @@
 		// page (Carrel's task 94: a secret shown once has no address).
 		var save = closest(e.target, "[data-tc-save]");
 		if (save) {
-			var from = document.getElementById(save.getAttribute("data-tc-from"));
+			var from = document.getElementById(save.getAttribute("data-tc-save-from"));
 			if (from) {
 				e.preventDefault();
 				var a = document.createElement("a");

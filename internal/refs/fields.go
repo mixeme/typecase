@@ -63,7 +63,12 @@ var _ = add(
 	form("hint-xl", w.Field{Label: "Advanced RRULE", Parts: []w.FieldPart{w.Input{Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261228", Label: "Advanced RRULE", Mono: true}, w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}}}, Width: w.FieldXL}, "s-agenda-3", "tc-field", 24),
 	form("error-aside", w.Field{Label: "Email", LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}}, Parts: []w.FieldPart{w.Input{Value: "viktor@", Label: "Email", Error: true}, w.FieldHint{Parts: []w.Inline{w.Text("Enter one address, like name@example.org.")}, Variant: w.HintDanger}}, Width: w.FieldMD}, "s-admin-19", "tc-field", 3),
 	form("labelled", w.Field{Label: "Every", Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}}, Width: w.FieldXS}, "s-agenda-3", "tc-field", 20),
-	form("hint", w.Field{Label: "Into", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Контакты"}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")}}}, Width: w.FieldLG}, "s-io-5", "tc-field", 1),
+	form("hint", w.Field{Label: "Into", Parts: []w.FieldPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true, Href: "/app/contacts/nextcloud/kontakty/import"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "radicale · vps · Команда", Reason: "Read-only: nothing can be written here."},
+		w.MenuSep{},
+		w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")}}}, Width: w.FieldLG}, "s-io-5", "tc-field", 1),
 	form("labelled", w.Field{Label: "Street", Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}}, Width: w.FieldLG}, "s-contacts-3", "tc-field", 17),
 	form("labelled", field("Time", w.FieldFix130, in), "s-notes-20", "tc-field", 3),
 	form("labelled", field("Start", w.FieldFix96, in), "s-notes-9", "tc-field", 3),

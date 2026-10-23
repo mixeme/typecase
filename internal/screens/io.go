@@ -462,7 +462,37 @@ func Io3() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															On:    true,
+															Href:  "/app/contacts/nextcloud/kontakty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Архив",
+															Href:  "/app/contacts/nextcloud/arhiv/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#6B4E7A"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "radicale · vps · Команда",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New address book",
+															Href:  "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -563,7 +593,51 @@ func Io15() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Личный",
+															On:    true,
+															Href:  "/app/calendar/nextcloud/lichnyj/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "nextcloud · Работа",
+															Href:  "/app/calendar/nextcloud/rabota/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Дни рождения",
+															Href:  "/app/calendar/nextcloud/dni-rozhdeniya/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#6B4E7A"},
+															Label: "radicale · vps · Проекты",
+															Href:  "/app/calendar/radicale/proekty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#8C6239"},
+															Label: "radicale · vps · Дежурства",
+															Href:  "/app/calendar/radicale/dezhurstva/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#9A9280"},
+															Label: "baikal · Общий",
+															Href:  "/app/calendar/baikal/obshchiy/import",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New calendar",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any calendar you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -661,7 +735,28 @@ func Io16() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Дела",
+															On:    true,
+															Href:  "/app/tasks/nextcloud/dela/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "nextcloud · Работа",
+															Href:  "/app/tasks/nextcloud/rabota/import",
+														},
+														w.MenuSep{},
+														w.MenuItem{Label: "New task list", Href: "/app/collections/new?kind=task&back=/app/tasks/nextcloud/dela/import"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any list of tasks you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -753,7 +848,33 @@ func Io17() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "Choose an address book", Unset: true},
+											w.Drop{
+												Trigger: w.Pick{Value: "Choose an address book", Unset: true},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															Href:  "/app/contacts/nextcloud/kontakty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Архив",
+															Href:  "/app/contacts/nextcloud/arhiv/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#6B4E7A"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "radicale · vps · Команда",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/import"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -870,7 +991,37 @@ func Io18() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															On:    true,
+															Href:  "/app/contacts/nextcloud/kontakty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Архив",
+															Href:  "/app/contacts/nextcloud/arhiv/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#6B4E7A"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "radicale · vps · Команда",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New address book",
+															Href:  "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}},
 										},
 										Width: w.FieldW100,
@@ -993,7 +1144,37 @@ func Io19() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															On:    true,
+															Href:  "/app/contacts/nextcloud/kontakty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Архив",
+															Href:  "/app/contacts/nextcloud/arhiv/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#6B4E7A"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "radicale · vps · Команда",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New address book",
+															Href:  "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")},
 											},
@@ -1095,7 +1276,37 @@ func Io4() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Записи",
+															On:    true,
+															Href:  "/app/notes/nextcloud/zapisi/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#6B4E7A"},
+															Label: "nextcloud · Дневник",
+															Href:  "/app/notes/nextcloud/dnevnik/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#3F6E8C"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "nextcloud · Общие с семьёй",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New notebook",
+															Href:  "/app/collections/new?kind=note&back=/app/notes/nextcloud/zapisi/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("The notebook the notes are created in. Every source below lands there.")}},
 										},
 										Width: w.FieldW100,
@@ -1243,7 +1454,37 @@ func Io5() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Контакты",
+															On:    true,
+															Href:  "/app/contacts/nextcloud/kontakty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Архив",
+															Href:  "/app/contacts/nextcloud/arhiv/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#6B4E7A"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "radicale · vps · Команда",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New address book",
+															Href:  "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")},
 											},
@@ -1372,7 +1613,51 @@ func Io6() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Личный",
+															On:    true,
+															Href:  "/app/calendar/nextcloud/lichnyj/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "nextcloud · Работа",
+															Href:  "/app/calendar/nextcloud/rabota/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#A05A2C"},
+															Label: "nextcloud · Дни рождения",
+															Href:  "/app/calendar/nextcloud/dni-rozhdeniya/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#6B4E7A"},
+															Label: "radicale · vps · Проекты",
+															Href:  "/app/calendar/radicale/proekty/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#8C6239"},
+															Label: "radicale · vps · Дежурства",
+															Href:  "/app/calendar/radicale/dezhurstva/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#9A9280"},
+															Label: "baikal · Общий",
+															Href:  "/app/calendar/baikal/obshchiy/import",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New calendar",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Calendars only. A list of tasks is a different collection and takes different components.")},
 											},
@@ -1455,6 +1740,14 @@ func Io6() Screen {
 											{Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}},
 										},
 									},
+									{
+										Cells: []w.TableCell{
+											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
+											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
+											{Parts: []w.CellPart{w.Text("line 23: cannot read DTSTART «2026-02-30»")}, Tone: w.CellDanger},
+										},
+									},
 								},
 							},
 							w.Msg{
@@ -1515,7 +1808,28 @@ func Io7() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Дела",
+															On:    true,
+															Href:  "/app/tasks/nextcloud/dela/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#3F6E8C"},
+															Label: "nextcloud · Работа",
+															Href:  "/app/tasks/nextcloud/rabota/import",
+														},
+														w.MenuSep{},
+														w.MenuItem{Label: "New task list", Href: "/app/collections/new?kind=task&back=/app/tasks/nextcloud/dela/import"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{w.Text("Lists of tasks only. A calendar is a different collection: events go there, not here.")},
 											},
@@ -1676,7 +1990,37 @@ func Io8() Screen {
 									w.Field{
 										Label: "Into",
 										Parts: []w.FieldPart{
-											w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+											w.Drop{
+												Trigger: w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#4A6B52"},
+															Label: "nextcloud · Записи",
+															On:    true,
+															Href:  "/app/notes/nextcloud/zapisi/import",
+														},
+														w.MenuItem{
+															Mark:  &w.Mark{Colour: "#6B4E7A"},
+															Label: "nextcloud · Дневник",
+															Href:  "/app/notes/nextcloud/dnevnik/import",
+														},
+														w.MenuItem{
+															Mark:   &w.Mark{Colour: "#3F6E8C"},
+															Trail:  w.Badge{Label: "ro", Place: w.Pushed},
+															Label:  "nextcloud · Общие с семьёй",
+															Reason: "Read-only: nothing can be written here.",
+														},
+														w.MenuSep{},
+														w.MenuItem{
+															Label: "New notebook",
+															Href:  "/app/collections/new?kind=note&back=/app/notes/nextcloud/zapisi/import",
+														},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("Any notebook you may write to. A WebDAV folder from the step before lands in this same table."),

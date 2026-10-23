@@ -12,7 +12,7 @@ import (
 // wrong — a button submits a form the page has not, a panel takes a file
 // into a form with no file field, «Add» copies a template that is not
 // there, a link asks a zone no part carries, an option shows a field its
-// form has not, an id is given twice — is told so, part by part; the same
+// form has not, a field is derived from a name its form has not, an id is given twice — is told so, part by part; the same
 // page put together right has nothing to say.
 func TestCheck(t *testing.T) {
 	// the parts as a consumer puts them on a page of its own
@@ -20,16 +20,18 @@ func TestCheck(t *testing.T) {
 		forms := []w.PostForm{{ID: "post-import", Action: "/import", File: "file"}, {ID: "post-attach", Action: "/attach"}}
 		pick := w.Pick{Name: "remind", Label: "Remind", Options: []w.PickOption{{Value: "10m", Label: "10 minutes before"}, {Value: "custom", Label: "Custom…", Shows: "remind.count"}}}
 		count := w.Input{Name: "remind.cnt", Label: "How long"}
-		tpl, zone := "tpl-tels", ""
+		tpl, zone, from := "tpl-tels", "", "nam"
 		if right {
 			forms[1].File = "file"
 			forms = append(forms, w.PostForm{ID: "post-signout", Action: "/signout"})
 			count.Name = "remind.count"
-			tpl, zone = "tpl-tel", "side"
+			tpl, zone, from = "tpl-tel", "side", "name"
 		}
 		form := w.Form{Action: "/event", Items: []w.FormPart{
 			w.Field{Label: "Remind", Parts: []w.FieldPart{pick}},
 			w.Field{Label: "How long", Parts: []w.FieldPart{count}},
+			w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Label: "Name"}}},
+			w.Field{Label: "Address", Parts: []w.FieldPart{w.Input{Name: "address", Label: "Address", From: from}}},
 			w.FieldSet{Items: []w.FieldSetPart{w.Template{ID: "tpl-tel"}, w.Button{Label: "Add phone", Submit: true, Name: "add", Value: "tel", Adds: tpl}}},
 		}}
 		s := `<!doctype html><html><body><div class="tc-root">` +
@@ -55,6 +57,7 @@ func TestCheck(t *testing.T) {
 		`div.tc-side data-tc-drop="post-attach": names a form with no file field: the file goes nowhere`,
 		`form.tc-form data-tc-target="side": names no zone on the page: what is pressed goes the plain way`,
 		`option data-tc-shows="remind.count": names no field of its form`,
+		`input.tc-in data-tc-from="nam": names no field of its form`,
 		`button.tc-btn data-tc-add="tpl-tels": names nothing on the page`,
 	}
 	if strings.Join(said, "\n") != strings.Join(want, "\n") {

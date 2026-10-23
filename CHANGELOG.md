@@ -8,6 +8,10 @@ do, not what the authors did.
 
 ### Breaking
 
+- **«Save as» names its element by `data-tc-save-from`**, not
+  `data-tc-from` (`Button.SaveFrom`; Carrel's task 224): `data-tc-from` is
+  a derived field's source, a field's name (`Input.From`). The page check
+  looks that name up in the field's form, as it does `data-tc-disables`.
 - `TimeRow.Short` is gone with its rule (`.tc-row--timecols--time`): a
   search's event shows its day in the lead, the time beside the place
   (Carrel's task 189). `Say.Mono` is gone with `.tc-say--mono`, and a
@@ -898,6 +902,15 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **The import wizard's «Into» is a drop of links** (Carrel's task 225;
+  accepted by the owner 23.10): `s-io-3`…`-8`, `-15`…`-19` — a `Drop` with
+  a `Pick` trigger, the collections as links to the same step, a read-only
+  one shown off with its reason, «New ‹kind›» under the line; the menus
+  `s-io-10`…`-13` the same. Closed, it looks as before (pixel for pixel).
+  `s-io-6` has the row its «1 with errors» counts. The notices above
+  Connections' cards (`s-profile-31`, `-32`) stand with the page's gutter,
+  their diagnostics too (Carrel's task 224).
 
 - **Search: the day of an event, the states of a search, the menu of
   suggestions** (Carrel's task 189; accepted by the owner 23.10). `s-find-1`:

@@ -12270,7 +12270,13 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
             <div class="tc-field tc-field--w100">
-              <label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</button>
+              <label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/nextcloud/kontakty/import" role="menuitem">New address book</a>
+              </div></details>
               <span class="tc-field__hint">Any address book you may write to, on every connected server.</span></div>
           </div>
           <div class="tc-card">
@@ -12322,7 +12328,16 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import events</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
             <div class="tc-field tc-field--w100">
-              <label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</button>
+              <label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/calendar/nextcloud/lichnyj/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</a>
+                <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
+                <a class="tc-menu__item" href="/app/calendar/nextcloud/dni-rozhdeniya/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Дни рождения</a>
+                <a class="tc-menu__item" href="/app/calendar/radicale/proekty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Проекты</a>
+                <a class="tc-menu__item" href="/app/calendar/radicale/dezhurstva/import" role="menuitem"><span class="tc-mark" data-tc-colour="#8C6239"></span>radicale · vps · Дежурства</a>
+                <a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/import" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>baikal · Общий</a>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=event&amp;back=/app/calendar/nextcloud/lichnyj/import" role="menuitem">New calendar</a>
+              </div></details>
               <span class="tc-field__hint">Any calendar you may write to, on every connected server.</span></div>
           </div>
           <div class="tc-card">
@@ -12373,7 +12388,12 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import tasks</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
             <div class="tc-field tc-field--w100">
-              <label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</button>
+              <label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/tasks/nextcloud/dela/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</a>
+                <a class="tc-menu__item" href="/app/tasks/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=task&amp;back=/app/tasks/nextcloud/dela/import" role="menuitem">New task list</a>
+              </div></details>
               <span class="tc-field__hint">Any list of tasks you may write to, on every connected server.</span></div>
           </div>
           <div class="tc-card">
@@ -12424,7 +12444,13 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
             <div class="tc-field tc-field--w100">
-              <label>Into</label><button class="tc-in is-pick is-ph" type="button">Choose an address book</button>
+              <label>Into</label><details class="tc-drop"><summary class="tc-in is-pick is-ph" title="Into">Choose an address book</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/import" role="menuitem">New address book</a>
+              </div></details>
               <span class="tc-field__hint">Any address book you may write to, on every connected server.</span></div>
           </div>
           <div class="tc-card">
@@ -12476,7 +12502,13 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Nothing was read.</b> «Разное (mix).vcf» is not a vCard file: its first line is not <span class="tc-mono">BEGIN:VCARD</span>. Choose the file again.</div>
           <div class="tc-form is-tight tc-form--padb12">
             <div class="tc-field tc-field--w100">
-              <label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</button>
+              <label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/nextcloud/kontakty/import" role="menuitem">New address book</a>
+              </div></details>
               <span class="tc-field__hint">Any address book you may write to, on every connected server.</span></div>
           </div>
           <div class="tc-card">
@@ -12529,7 +12561,13 @@ dav: HTTP 503: the server is busy</div>
           </div>
           <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>nextcloud · Контакты did not answer</b>, so what is already there cannot be told. Nothing is written; try again, or choose another address book under «Into». <a class="tc-btn is-sm" href="/app/contacts/nextcloud/kontakty/import">Try again</a></div>
           <div class="tc-form is-tight">
-            <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</button>
+            <div class="tc-field tc-field--lg"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/nextcloud/kontakty/import" role="menuitem">New address book</a>
+              </div></details>
               <span class="tc-field__hint">Any address book you may write to. What is already here is counted against it.</span></div>
           </div>
           <div class="tc-stats">
@@ -12559,11 +12597,11 @@ dav: HTTP 503: the server is busy</div>
     <div class="frame-label"><span>Куда импортировать · контакты</span><span class="frag">список</span><i>поле Into</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w290">
-        <button class="is-on tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+        <a class="is-on tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+        <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+        <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">New address book</button>
+        <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/nextcloud/kontakty/import" role="menuitem">New address book</a>
       </div>
     </div>
   </div>
@@ -12599,7 +12637,13 @@ dav: HTTP 503: the server is busy</div>
       <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import notes</div></div></div>
       <div class="tc-form is-tight tc-form--padb12">
-        <div class="tc-field tc-field--w100"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</button>
+        <div class="tc-field tc-field--w100"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/notes/nextcloud/zapisi/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</a>
+                <a class="tc-menu__item" href="/app/notes/nextcloud/dnevnik/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>nextcloud · Дневник</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Общие с семьёй<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=note&amp;back=/app/notes/nextcloud/zapisi/import" role="menuitem">New notebook</a>
+              </div></details>
           <span class="tc-field__hint">The notebook the notes are created in. Every source below lands there.</span></div>
       </div>
       <div class="tc-card">
@@ -12638,11 +12682,11 @@ dav: HTTP 503: the server is busy</div>
     <div class="frame-label"><span>Куда импортировать · заметки</span><span class="frag">список</span><i>поле Into</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w290">
-        <button class="is-on tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>nextcloud · Дневник</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Общие с семьёй<span class="tc-badge tc-push">ro</span></button>
+        <a class="is-on tc-menu__item" href="/app/notes/nextcloud/zapisi/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</a>
+        <a class="tc-menu__item" href="/app/notes/nextcloud/dnevnik/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>nextcloud · Дневник</a>
+        <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Общие с семьёй<span class="tc-badge tc-push">ro</span></button>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">New notebook</button>
+        <a class="tc-menu__item" href="/app/collections/new?kind=note&amp;back=/app/notes/nextcloud/zapisi/import" role="menuitem">New notebook</a>
       </div>
     </div>
   </div>
@@ -12683,7 +12727,13 @@ dav: HTTP 503: the server is busy</div>
             <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 117 contacts</button></div>
           </div>
           <div class="tc-form is-tight">
-            <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</button>
+            <div class="tc-field tc-field--lg"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/contacts/nextcloud/kontakty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Контакты</a>
+                <a class="tc-menu__item" href="/app/contacts/nextcloud/arhiv/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Архив</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Команда<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=contact&amp;back=/app/contacts/nextcloud/kontakty/import" role="menuitem">New address book</a>
+              </div></details>
               <span class="tc-field__hint">Any address book you may write to. What is already here is counted against it.</span></div>
             <div class="tc-field is-own-line"><label>5 records of this file are already in Контакты</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/import?existing=copy">Import as copies</a></span>
               <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
@@ -12742,7 +12792,16 @@ dav: HTTP 503: the server is busy</div>
             <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 82 events</button></div>
           </div>
           <div class="tc-form is-tight">
-            <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</button>
+            <div class="tc-field tc-field--lg"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/calendar/nextcloud/lichnyj/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</a>
+                <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
+                <a class="tc-menu__item" href="/app/calendar/nextcloud/dni-rozhdeniya/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Дни рождения</a>
+                <a class="tc-menu__item" href="/app/calendar/radicale/proekty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Проекты</a>
+                <a class="tc-menu__item" href="/app/calendar/radicale/dezhurstva/import" role="menuitem"><span class="tc-mark" data-tc-colour="#8C6239"></span>radicale · vps · Дежурства</a>
+                <a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/import" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>baikal · Общий</a>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=event&amp;back=/app/calendar/nextcloud/lichnyj/import" role="menuitem">New calendar</a>
+              </div></details>
               <span class="tc-field__hint">Calendars only. A list of tasks is a different collection and takes different components.</span></div>
             <div class="tc-field is-own-line"><label>3 events of this file are already in Личный</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/calendar/nextcloud/lichny/import?existing=copy">Import as copies</a></span>
               <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
@@ -12761,6 +12820,7 @@ dav: HTTP 503: the server is busy</div>
               <tr><td class="tc-mono">Личный 2026.ics</td><td>Созвон с подрядчиком</td><td class="tc-mono tc-table__n3">2026-08-17 10:00 Asia/Yekaterinburg</td><td class="tc-table__n4">Ready — time zone kept as sent</td></tr>
               <tr><td class="tc-mono">Личный 2026.ics</td><td>Купить билеты <span class="tc-badge">VTODO</span></td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--dusty">Skipped: a calendar takes events — import it into a list of tasks</td></tr>
               <tr><td class="tc-mono">Личный 2026.ics</td><td class="tc-dim">Untitled event</td><td class="tc-mono tc-table__n3">2026-05-04 · all day</td><td class="tc-table__n4">Ready — a whole day (no end), no title</td></tr>
+              <tr><td class="tc-mono">Личный 2026.ics</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">line 23: cannot read DTSTART «2026-02-30»</td></tr>
             </tbody>
           </table>
           <div class="tc-msg tc-msg--mr0-ml0">A repeating event keeps its rule: the series is one record, not fifty-two.</div>
@@ -12778,14 +12838,14 @@ dav: HTTP 503: the server is busy</div>
     <div class="frame-label"><span>Куда импортировать · события</span><span class="frag">список</span><i>поле Into</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w290">
-        <button class="is-on tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Дни рождения</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Проекты</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#8C6239"></span>radicale · vps · Дежурства</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>baikal · Общий</button>
+        <a class="is-on tc-menu__item" href="/app/calendar/nextcloud/lichnyj/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Личный</a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
+        <a class="tc-menu__item" href="/app/calendar/nextcloud/dni-rozhdeniya/import" role="menuitem"><span class="tc-mark" data-tc-colour="#A05A2C"></span>nextcloud · Дни рождения</a>
+        <a class="tc-menu__item" href="/app/calendar/radicale/proekty/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>radicale · vps · Проекты</a>
+        <a class="tc-menu__item" href="/app/calendar/radicale/dezhurstva/import" role="menuitem"><span class="tc-mark" data-tc-colour="#8C6239"></span>radicale · vps · Дежурства</a>
+        <a class="tc-menu__item" href="/app/calendar/baikal/obshchiy/import" role="menuitem"><span class="tc-mark" data-tc-colour="#9A9280"></span>baikal · Общий</a>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">New calendar</button>
+        <a class="tc-menu__item" href="/app/collections/new?kind=event&amp;back=/app/calendar/nextcloud/lichnyj/import" role="menuitem">New calendar</a>
       </div>
     </div>
   </div>
@@ -12823,7 +12883,12 @@ dav: HTTP 503: the server is busy</div>
             <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 28 tasks</button></div>
           </div>
           <div class="tc-form is-tight">
-            <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</button>
+            <div class="tc-field tc-field--lg"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/tasks/nextcloud/dela/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</a>
+                <a class="tc-menu__item" href="/app/tasks/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=task&amp;back=/app/tasks/nextcloud/dela/import" role="menuitem">New task list</a>
+              </div></details>
               <span class="tc-field__hint">Lists of tasks only. A calendar is a different collection: events go there, not here.</span></div>
             <div class="tc-field is-own-line"><label>2 tasks of this file are already in Дела</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=skip">Skip them</a><a class="tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=replace">Replace them</a><a class="tc-seg__opt" href="/app/tasks/nextcloud/dela/import?existing=copy">Import as copies</a></span>
               <span class="tc-field__hint">They stay as they are here; the file's version is not written.</span></div>
@@ -12860,10 +12925,10 @@ dav: HTTP 503: the server is busy</div>
     <div class="frame-label"><span>Куда импортировать · задачи</span><span class="frag">список</span><i>поле Into</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-menu tc-menu--w290">
-        <button class="is-on tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</button>
-        <button class="tc-menu__item" type="button" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</button>
+        <a class="is-on tc-menu__item" href="/app/tasks/nextcloud/dela/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Дела</a>
+        <a class="tc-menu__item" href="/app/tasks/nextcloud/rabota/import" role="menuitem"><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Работа</a>
         <span class="tc-menu__sep"></span>
-        <button class="tc-menu__item" type="button" role="menuitem">New task list</button>
+        <a class="tc-menu__item" href="/app/collections/new?kind=task&amp;back=/app/tasks/nextcloud/dela/import" role="menuitem">New task list</a>
       </div>
     </div>
   </div>
@@ -12902,7 +12967,13 @@ dav: HTTP 503: the server is busy</div>
             <div class="tc-acts"><button class="tc-btn" type="button">Cancel</button><button class="tc-btn is-primary" type="button">Import 60 notes</button></div>
           </div>
           <div class="tc-form is-tight">
-            <div class="tc-field tc-field--lg"><label>Into</label><button class="tc-in is-pick" type="button"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</button>
+            <div class="tc-field tc-field--lg"><label>Into</label><details class="tc-drop"><summary class="tc-in is-pick" title="Into"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</summary><div class="tc-menu is-pop tc-menu--w290">
+                <a class="is-on tc-menu__item" href="/app/notes/nextcloud/zapisi/import" role="menuitem"><span class="tc-mark" data-tc-colour="#4A6B52"></span>nextcloud · Записи</a>
+                <a class="tc-menu__item" href="/app/notes/nextcloud/dnevnik/import" role="menuitem"><span class="tc-mark" data-tc-colour="#6B4E7A"></span>nextcloud · Дневник</a>
+                <button class="tc-menu__item" type="button" role="menuitem" title="Read-only: nothing can be written here." disabled><span class="tc-mark" data-tc-colour="#3F6E8C"></span>nextcloud · Общие с семьёй<span class="tc-badge tc-push">ro</span></button>
+                <span class="tc-menu__sep"></span>
+                <a class="tc-menu__item" href="/app/collections/new?kind=note&amp;back=/app/notes/nextcloud/zapisi/import" role="menuitem">New notebook</a>
+              </div></details>
               <span class="tc-field__hint">Any notebook you may write to. A WebDAV folder from the step before lands in this same table.</span></div>
             <div class="tc-field is-own-line"><label>1 note of this file is already in Записи</label><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=skip">Skip it</a><a class="tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=replace">Replace it</a><a class="tc-seg__opt" href="/app/notes/nextcloud/zapisi/import?existing=copy">Import as a copy</a></span>
               <span class="tc-field__hint">It stays as it is here; the file's version is not written.</span></div>
@@ -15137,9 +15208,9 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
   <div class="frame" data-frame="s-profile-31">
     <div class="frame-label"><span>Удаление · сервер отказал</span><span class="frag">фрагмент</span><i>уведомление над карточками Connections</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14 tc-root--col">
-        <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Архив was not deleted.</b> nextcloud refused: this account can read here but not write. Архив is as it was.</div>
-        <div class="tc-diag">[delete]  DELETE /remote.php/dav/addressbooks/users/mix/archive/ → 403
-&lt;d:error&gt;&lt;d:need-privileges/&gt;&lt;/d:error&gt;</div>
+        <div class="tc-msg is-alert tc-msg--mx20"><b>Архив was not deleted.</b> nextcloud refused: this account can read here but not write. Архив is as it was.</div>
+        <div class="tc-main__diag"><div class="tc-diag">[delete]  DELETE /remote.php/dav/addressbooks/users/mix/archive/ → 403
+&lt;d:error&gt;&lt;d:need-privileges/&gt;&lt;/d:error&gt;</div></div>
     </div>
   </div>
   <figcaption>Лист удаления закрыт: набирать имя второй раз незачем, решение уже принято. Ответ сервера встаёт уведомлением на странице Connections — там же, где строка коллекции, которая осталась на месте.</figcaption>
@@ -15149,10 +15220,10 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
   <div class="frame" data-frame="s-profile-32">
     <div class="frame-label"><span>Перенос · записано не всё</span><span class="frag">фрагмент</span><i>уведомление над карточками Connections</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14 tc-root--col">
-        <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Copied, and the original kept.</b> radicale · vps did not keep all of what was copied, so Личный on nextcloud was not deleted. Both are there now. <a class="tc-btn is-sm" href="/app/calendar/radicale/lichnyj">Open the copy</a></div>
-        <div class="tc-diag">What radicale · vps did not keep
+        <div class="tc-msg is-alert tc-msg--mx20"><b>Copied, and the original kept.</b> radicale · vps did not keep all of what was copied, so Личный on nextcloud was not deleted. Both are there now. <a class="tc-btn is-sm" href="/app/calendar/radicale/lichnyj">Open the copy</a></div>
+        <div class="tc-main__diag"><div class="tc-diag">What radicale · vps did not keep
 Синк-ап по релизу · ATTACH
-Забрать документы · not there after it was written</div>
+Забрать документы · not there after it was written</div></div>
     </div>
   </div>
   <figcaption>Перенос удаляет исходную коллекцию только после целой копии. Сервер-цель потерял запись или свойство — исходная остаётся, обе видны в Connections, уведомление называет потерянное и ведёт к копии. Так же — «Copied, but the original changed, so it stays» (кто-то писал в неё во время копии) и «Copied, but the original could not be deleted» (с ответом сервера). Отказ записи по ходу копии забирает копию назад: «radicale · vps refused 2 records of 128, so the new calendar there was taken back. Личный is as it was.»</figcaption>
@@ -18406,7 +18477,7 @@ until [ "$(curl -fsS -H "$h" "$b/status?id=$id")" != running ]; do sleep 20; don
 curl -fsS -H "$h" "$b/$id/download" -o "$out/carrel-personal-$(date +%F).zip"</div>
         <div class="tc-line tc-line--gap-8 tc-card__top8">
           <button class="tc-btn is-primary" type="button" data-tc-copy-from="trigger-script" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the script</button>
-          <button class="tc-btn" type="button" data-tc-save="carrel-personal.sh" data-tc-from="trigger-script"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
+          <button class="tc-btn" type="button" data-tc-save="carrel-personal.sh" data-tc-save-from="trigger-script"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
         </div>
         <div class="tc-card__note">Put it where the password is to live, make it executable, and give <span class="tc-mono">crontab -e</span> one line: <span class="tc-mono">0 3 * * * /usr/local/bin/carrel-personal.sh</span> — the schedule stays a line, the work moves into the file. The date has to live in the script and not in the crontab line: <span class="tc-mono">cron</span> reads <span class="tc-mono">%</span> as a newline, so <span class="tc-mono">date +%F</span> written up there would break the entry.</div>
         <div class="tc-msg tc-msg--flush-top9">A copy that fails needs no separate check: the download answers with an error, <span class="tc-mono">set -eu</span> stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and <span class="tc-mono">409</span> until then means «not yet», not «broken».</div>
@@ -18498,7 +18569,7 @@ jobs:
       - run: curl -fsS -m 30 -X POST -H "Authorization: Bearer ${{ secrets.CARREL_BACKUP }}" 'https://carrel.example/api/backup/run?job=personal'</div>
           <div class="tc-line tc-line--gap-8 tc-card__top8">
             <button class="tc-btn is-primary" type="button">Copy the workflow</button>
-            <button class="tc-btn" type="button" data-tc-save="carrel-personal.yaml" data-tc-from="trigger-gitea"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.yaml</span></button>
+            <button class="tc-btn" type="button" data-tc-save="carrel-personal.yaml" data-tc-save-from="trigger-gitea"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.yaml</span></button>
           </div>
           <div class="tc-card__grid">
             <span class="tc-dim tc-dim--t11">Secret</span>

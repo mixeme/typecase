@@ -124,7 +124,7 @@ var idNames = map[string]func(*checker, *html.Node) string{
 	"data-tc-paste":     fileForm,
 	"data-tc-add":       tag("template"),
 	"data-tc-open":      anything,
-	"data-tc-from":      anything,
+	"data-tc-save-from": anything,
 	"data-tc-copy-from": anything,
 	"data-tc-preview":   anything,
 	"data-tc-list":      anything,
@@ -270,7 +270,7 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 		}
 	}
 	// names of fields, searched in the element's form
-	for _, key := range []string{"data-tc-disables", "data-tc-follows", "data-tc-shows"} {
+	for _, key := range []string{"data-tc-disables", "data-tc-follows", "data-tc-shows", "data-tc-from"} {
 		v, ok := attrOf(n, key)
 		if !ok || (key == "data-tc-shows" && n.Data == "input") {
 			continue
