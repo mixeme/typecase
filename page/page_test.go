@@ -79,6 +79,15 @@ func TestZones(t *testing.T) {
 	if strings.Contains(plain, "data-tc-view-header") || strings.Contains(plain, "data-tc-address-zone") {
 		t.Error("a document without zones names some")
 	}
+	// the search's suggestions: an address on the root, none without one
+	// (Carrel's task 227)
+	sug, err := page.Document{Assets: page.At("/s"), Suggest: "/app/search/suggest"}.Render()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(sug, ` data-tc-search-suggest="/app/search/suggest"`) || strings.Contains(plain, "data-tc-search-suggest") {
+		t.Errorf("the suggestions' address: %s", sug[:200])
+	}
 	f := page.Fragment{Body: []page.Part{w.Main{Zone: "main"}},
 		Extra: []page.ZonePart{{Zone: "notices", Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("Saved")}}}}}}.Render()
 	if !strings.HasPrefix(f, `<div class="tc-main" data-tc-zone="main">`) || !strings.Contains(f, `</div><template data-tc-zone="notices"><div class="tc-msg">Saved</div></template>`) {

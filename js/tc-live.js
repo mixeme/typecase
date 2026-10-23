@@ -42,6 +42,56 @@
 		}, 150);
 	}
 
+	// The search line's suggestions (Carrel's task 227): the page names
+	// their address (data-tc-search-suggest on the root, Document.Suggest);
+	// the focus and each pause in typing ask it ?q=…, and the answer — the
+	// menu, its items saying when they show — stands under the line, where
+	// the core filters it, walks it with the arrows and hides it.
+	var searchTimer = 0;
+
+	function searchSuggest(line) {
+		var url = document.documentElement.getAttribute("data-tc-search-suggest");
+		var search = url && line.closest(".tc-search");
+		if (!search) return;
+		var wrap = search.parentNode;
+		if (!wrap.classList.contains("tc-top__search")) {
+			wrap = document.createElement("span");
+			wrap.className = "tc-line tc-top__search";
+			search.parentNode.insertBefore(wrap, search);
+			wrap.appendChild(search);
+			line.focus();
+		}
+		var box = wrap.querySelector(".tc-top__suggest");
+		if (!box) {
+			box = document.createElement("span");
+			box.className = "tc-top__suggest";
+			box.hidden = true;
+			box.style.display = "none";
+			wrap.appendChild(box);
+		}
+		clearTimeout(searchTimer);
+		var q = line.value.trim();
+		searchTimer = setTimeout(function () {
+			fetch(url + (url.indexOf("?") < 0 ? "?" : "&") + "q=" + encodeURIComponent(q), { credentials: "same-origin", headers: { Accept: "text/html" } })
+				.then(function (r) {
+					return r.ok ? r.text() : "";
+				})
+				.then(function (html) {
+					if (line.value.trim() !== q) return;
+					box.innerHTML = html.trim();
+					tc.suggest(line);
+				})
+				.catch(function () {});
+		}, 120);
+	}
+
+	document.addEventListener("focusin", function (e) {
+		if (e.target.matches && e.target.matches(".tc-top .tc-search .tc-q")) searchSuggest(e.target);
+	});
+	document.addEventListener("input", function (e) {
+		if (e.target.matches && e.target.matches(".tc-top .tc-search .tc-q")) searchSuggest(e.target);
+	});
+
 	// Where the server suggests, the line's own list (a page without a
 	// script, Carrel's task 96) would cover the menu: it goes.
 	document.addEventListener("focusin", function (e) {

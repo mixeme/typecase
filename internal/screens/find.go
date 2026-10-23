@@ -36,8 +36,8 @@ func Find1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "14 / 14", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "1"},
@@ -97,7 +97,7 @@ func Find1() Screen {
 									Pop:   w.MenuUnderEnd,
 								},
 							},
-							w.Mono{Text: "1.8 s"},
+							w.Mono{Text: "1.8 s", Place: w.Pushed},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Contacts", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
@@ -217,8 +217,8 @@ func Find4() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "14 / 14", Variant: w.MonoTight}}},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "1"},
@@ -261,7 +261,7 @@ func Find4() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Text("Searching · 9 of 14 answered · 5 records"),
+							w.Say{Full: "Searching · 9 of 14 answered · 5 records", Short: "9 of 14 · 5 records"},
 							w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true, Form: "search-stop"}}},
 						},
 					},

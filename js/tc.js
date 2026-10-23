@@ -1648,6 +1648,14 @@
 		},
 		showMenu: showMenu,
 		fillWords: fillWords,
+		// the search line's menu, put in place by the live layer: shown with
+		// what fits what is typed, as a printed one
+		suggest: function (line) {
+			var box = suggestOf(line);
+			if (!box) return;
+			filterSuggest(line);
+			if (document.activeElement === line) show(box);
+		},
 		fileSize: fileSize,
 		closeMenu: function (trigger) {
 			if (openTrigger === trigger) closeMenu(false);

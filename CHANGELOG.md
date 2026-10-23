@@ -99,6 +99,13 @@ do, not what the authors did.
 
 ### Added
 
+- **The search line's suggestions come from the server** (Carrel's task
+  227): `page.Document.Suggest` names their address (`data-tc-search-suggest`
+  on the root); with the live layer the line asks it `?q=…` as it gets the
+  focus and at each pause in typing, and puts the answer — a `Menu` whose
+  items say `When` — under the line, where the core filters it, walks it
+  and hides it as a printed one. The page prints no menu; without the live
+  layer there is none. `TestSearchSuggestAsks`.
 - **`Field.Post` and `Field.Sends`** — a field that is a form of its own
   (`Field.Action`) can be a POST with hidden fields: the duplicates'
   threshold, kept with the person's decisions (Carrel's task 190).
@@ -915,6 +922,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Search after note 114** (Carrel's task 227; accepted by the owner
+  23.10): the stopped search has its segments (`s-find-10`); one bar in
+  every state — the words in two lengths, the menu of refusals after them,
+  the time pushed right (`s-find-1`, `-4`, `-5`, `-9`, `-10`); Пётр Ковалёв
+  counts for Команда (`s-find-1`, `-4`); the captions say when the line about
+  files stands and that the suggestions come from the server.
 
 - **Duplicates and the linked record** (Carrel's task 190; accepted by the
   owner 23.10). `s-dup-1`: every linked group is on the screen, one data

@@ -2643,6 +2643,85 @@ func TestSearchSuggest(t *testing.T) {
 	}
 }
 
+// TestSearchSuggestAsks: a page that names its suggestions' address
+// (Document.Suggest, Carrel's task 227) prints no menu; the search line asks
+// the address as it gets the focus — the history comes — and again as
+// something is typed — the jumps the server found, set bold — and the
+// menu stands under the line, walked by ↓ and hidden by Esc, as a printed
+// one. A page without the address asks nothing.
+func TestSearchSuggestAsks(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var asked []string
+	url := h.RegisterStream("suggest", func(rw http.ResponseWriter, r *http.Request) {
+		q := r.URL.Query().Get("q")
+		asked = append(asked, q)
+		items := []w.MenuPart{
+			w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
+			w.MenuItem{Icon: "clock", Label: "смета", Href: "#h"},
+			w.MenuSep{},
+			w.MenuItem{Label: "Type to search everything", Tone: w.MenuToneDusty, When: w.WhenEmpty},
+		}
+		if q != "" {
+			items = append(items, w.MenuSep{}, w.MenuHeading{Rubric: w.Rubric{Text: "Jump to", Form: w.RubricItem}},
+				w.MenuItem{Icon: "con", Label: "Анна Ковалёва", Href: "#a", When: w.WhenFound},
+				w.MenuItem{Icon: "search", Label: "Show all results for «{q}»", When: w.WhenTyped})
+		}
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(w.Menu{Width: w.MenuWidthFull, Items: items}.Render()))
+	})
+	top := w.Top{Search: &w.Search{Query: w.Query{Name: "q", Label: "Search everything…"}, Action: "/find"}}
+	body := `<div class="tc-root">` + top.Render() + `<button id="away">Away</button></div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), "<html", `<html data-tc-search-suggest="`+url+`"`, 1)
+	const state = `(() => { const box = document.querySelector(".tc-top__suggest"); if (!box || !box.getClientRects().length) return "hidden";
+		const b = box.querySelector(".tc-menu__label b");
+		return [...box.querySelectorAll(".tc-menu > *")].filter(e => e.getClientRects().length && !e.classList.contains("tc-menu__sep")).map(e => e.textContent.trim()).join(",") + (b ? " bold:" + b.textContent : "") })()`
+	wait := chromedp.Sleep(600 * time.Millisecond)
+	var before, empty, typed, down, esc, away string
+	if err := h.Run(h.RegisterPage("search-suggest", doc), 900, 600,
+		chromedp.Evaluate(state, &before),
+		chromedp.Click(`.tc-top .tc-q`, chromedp.ByQuery),
+		wait,
+		chromedp.Evaluate(state, &empty),
+		chromedp.SendKeys(`.tc-top .tc-q`, "ковал", chromedp.ByQuery),
+		wait,
+		chromedp.Evaluate(state, &typed),
+		chromedp.KeyEvent(kb.ArrowDown),
+		chromedp.Evaluate(`document.activeElement.textContent.trim()`, &down),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(state+` + " " + (document.activeElement.matches(".tc-q") ? "line" : "elsewhere")`, &esc),
+		chromedp.Focus(`#away`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &away),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "hidden" || empty != "Recent searches,смета,Type to search everything" {
+		t.Errorf("before the focus %q, with the line empty %q; want no menu, then the history the server sent", before, empty)
+	}
+	if typed != "Recent searches,смета,Jump to,Анна Ковалёва,Show all results for «ковал» bold:Ковал" {
+		t.Errorf("with «ковал» typed: %q; want the server's jumps, the typed set bold, the row that sends it", typed)
+	}
+	if down != "смета" || esc != "hidden line" || away != "hidden" {
+		t.Errorf("↓: %q; Esc: %q; leaving: %q; want смета, hidden with the focus in the line, hidden", down, esc, away)
+	}
+	if len(asked) == 0 || asked[0] != "" || asked[len(asked)-1] != "ковал" {
+		t.Errorf("asked %q; want the focus to ask with nothing typed and the pause after typing to ask «ковал»", asked)
+	}
+	n := len(asked)
+	var none string
+	if err := h.Run(h.RegisterPage("search-suggest-none", browser.PageHTML(body, "")), 900, 600,
+		chromedp.Click(`.tc-top .tc-q`, chromedp.ByQuery),
+		chromedp.SendKeys(`.tc-top .tc-q`, "ковал", chromedp.ByQuery),
+		wait,
+		chromedp.Evaluate(state, &none),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if none != "hidden" || len(asked) != n {
+		t.Errorf("a page without the address: %q, asked %d more; want no menu and nothing asked", none, len(asked)-n)
+	}
+}
+
 // TestFileRanges: a file field with data-tc-ranges sends only the parts of
 // its file the server names (Carrel's task 213): the other fields with the
 // file's name and size go to the ranges address first, its lines «offset

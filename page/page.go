@@ -63,6 +63,20 @@ type Document struct {
 	// decides as before: the address's ?theme=, what this browser
 	// remembers, the system.
 	Theme string
+	// Suggest is the address of the search line's suggestions (Carrel's
+	// task 227): with the live layer the line asks it ?q=… as it gets the
+	// focus and as something is typed, and the answer — a Menu whose items
+	// say When — stands under the line. The suggestions come from what the
+	// server holds, so the page prints none; without the live layer the
+	// line has no menu and Enter sends the search.
+	Suggest string
+}
+
+func (d Document) suggestAttr() string {
+	if d.Suggest == "" {
+		return ""
+	}
+	return ` data-tc-search-suggest="` + html.EscapeString(d.Suggest) + `"`
 }
 
 func (d Document) themeAttrs() string {
@@ -200,7 +214,7 @@ func (d Document) Render() (string, error) {
 		lang = "en"
 	}
 	var b strings.Builder
-	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.themeAttrs() + d.Zones.attrs() + d.App.attrs(d.Assets.Worker) + `><head><meta charset="utf-8">` +
+	b.WriteString(`<!doctype html><html lang="` + html.EscapeString(lang) + `" data-tc-root data-tc-noscript` + d.themeAttrs() + d.Zones.attrs() + d.suggestAttr() + d.App.attrs(d.Assets.Worker) + `><head><meta charset="utf-8">` +
 		`<meta name="viewport" content="width=device-width, initial-scale=1"><title>` + html.EscapeString(d.Title) + `</title>` + d.App.head() +
 		`<script src="` + html.EscapeString(d.Assets.Theme) + `"></script>` +
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)
