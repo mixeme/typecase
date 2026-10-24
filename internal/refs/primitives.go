@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("plain", w.Button{Label: "How to mount", Menu: true, Small: true, Focus: true}, "s-publish-32", "tc-btn", 2),
 	primitive("plain", w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Submit: true, Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}}, "s-agenda-30", "tc-btn", 1),
 	primitive("plain", w.Button{Icon: "dots", Variant: w.ButtonPadX3, Title: "More"}, "s-contacts-33", "tc-btn", 2),
 	primitive("plain", w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, State: w.ButtonDisabled}, "s-dup-1", "tc-btn", 12),
@@ -144,6 +145,7 @@ var _ = add(
 	primitive("local", w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}, "s-plan-1", "tc-badge", 2),
 
 	// tc-tick
+	primitive("sign", w.Tick{Done: true, Sign: true}, "s-publish-28", "tc-tick", 4),
 	primitive("done", w.Tick{Done: true, Label: "Done"}, "s-tasks-1", "tc-tick", 5),
 	primitive("open", w.Tick{Label: "Done"}, "s-tasks-1", "tc-tick", 1),
 	primitive("sign", w.Tick{Variant: w.TickNudge, Sign: true}, "s-notes-1", "tc-tick", 1),

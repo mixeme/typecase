@@ -233,6 +233,12 @@ func States3() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
@@ -678,6 +684,12 @@ func States6() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
@@ -2606,6 +2618,12 @@ func States13() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
@@ -2973,6 +2991,12 @@ func States15() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar/nextcloud/lichny",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichny?from=2026-10-26"},
 							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichny"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichny?from=2026-11-09"},

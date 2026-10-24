@@ -3009,7 +3009,7 @@ func Publish4() Screen {
 											Variant: w.ProseLead,
 										},
 										w.DocTasks{
-											Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
+											Title: "Что делаем",
 											Items: []w.DocTask{
 												{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 												{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
@@ -3389,7 +3389,7 @@ func Publish6() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download"}},
+							Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/7f3ac9/download"}},
 						},
 						Wide: true,
 					},
@@ -3398,20 +3398,27 @@ func Publish6() Screen {
 						Items: []w.StripPart{
 							w.Input{
 								Value:    "webcal://carrel.example/p/7f3ac9/personal.ics",
+								Label:    "Subscribe in your own client",
 								Mono:     true,
 								ReadOnly: true,
 								Variant:  w.InputLineFill,
 							},
 							w.Button{Label: "Copy", Small: true, Copy: "webcal://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"},
-							w.Button{Label: "Open in calendar app", Small: true},
+							w.Button{Label: "Open in calendar app", Small: true, Href: "webcal://carrel.example/p/7f3ac9/personal.ics"},
 							w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11},
 						},
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Личный"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026 · the page is read from the server on every visit")},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Waiting: true,
+									Action:  "/p/7f3ac9",
+									Variant: w.FilterH26W190,
+								},
 							},
 						},
 						Pad: w.HeadPadBottom8,
@@ -3424,12 +3431,15 @@ func Publish6() Screen {
 								Time:   "10:00",
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/7f3ac9?uid=aa01",
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
 								Time:   "18:00",
 								Title:  []w.Inline{w.Text("Забрать документы")},
 								Detail: "МФЦ, Мясницкая 13",
+								Href:   "/p/7f3ac9?uid=ab02",
 							},
 						},
 					},
@@ -3441,10 +3451,12 @@ func Publish6() Screen {
 								Time:   "09:30",
 								Title:  []w.Inline{w.Text("Ревью архитектуры")},
 								Detail: "Переговорная 1",
+								Badges: []w.Badge{w.Badge{Label: "3 attendees"}},
+								Href:   "/p/7f3ac9?uid=ac03",
 							},
 						},
 					},
-					w.MainFoot{Text: "This link works until 8 September 2026. The owner can revoke it at any moment.", Roomy: true},
+					w.MainFoot{Text: "This link works until 8 September 2026."},
 				},
 			},
 		},
@@ -3463,7 +3475,7 @@ func Publish7() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "download"}},
+							Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "download", Href: "/p/2b91f4/download"}},
 						},
 						Wide: true,
 					},
@@ -3472,6 +3484,7 @@ func Publish7() Screen {
 						Items: []w.StripPart{
 							w.Input{
 								Value:    "https://carrel.example/p/2b91f4/team.vcf",
+								Label:    "Address of this book",
 								Mono:     true,
 								ReadOnly: true,
 								Variant:  w.InputLineFill,
@@ -3485,14 +3498,13 @@ func Publish7() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Команда"},
-						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("13 contacts · the list is read from the server on every visit")}},
-						},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("13 contacts")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Search this list", Label: "Search this list"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
 									Waiting: true,
+									Action:  "/p/2b91f4",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -3510,6 +3522,7 @@ func Publish7() Screen {
 								Subtitle: "+7 903 118-22-04",
 								Detail:   "a.belov@example.org",
 								Caption:  "Тензор",
+								Href:     "/p/2b91f4?uid=c101",
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
@@ -3518,6 +3531,7 @@ func Publish7() Screen {
 								Subtitle: "+7 912 445-10-88",
 								Detail:   "a.kovaleva@example.org",
 								Caption:  "Издательство «Слово»",
+								Href:     "/p/2b91f4?uid=c102",
 							},
 						},
 					},
@@ -3531,10 +3545,11 @@ func Publish7() Screen {
 								Subtitle: "—",
 								Detail:   "v.goncharov@example.org",
 								Caption:  "Городская библиотека №4",
+								Href:     "/p/2b91f4?uid=c103",
 							},
 						},
 					},
-					w.MainFoot{Text: "This link works until 9 September 2026. The owner can revoke it at any moment.", Roomy: true},
+					w.MainFoot{Text: "This link works until 9 September 2026."},
 				},
 			},
 		},
@@ -3554,8 +3569,13 @@ func Publish8() Screen {
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
 							Items: []w.LinePart{
-								w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}},
-								w.Button{Label: "Download .md", Icon: "download"},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "Full width", Href: "/p/9e31a4", On: true},
+										{Label: "Reading width", Href: "/p/9e31a4?width=reading"},
+									},
+								},
+								w.Button{Label: "Download .md", Icon: "download", Href: "/p/9e31a4/download"},
 							},
 						},
 					},
@@ -3572,7 +3592,7 @@ func Publish8() Screen {
 										Variant: w.ProseLead,
 									},
 									w.DocTasks{
-										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
+										Title: "Что делаем",
 										Items: []w.DocTask{
 											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
@@ -3618,8 +3638,13 @@ func Publish23() Screen {
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
 							Items: []w.LinePart{
-								w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}},
-								w.Button{Label: "Download .md", Icon: "download"},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "Full width", Href: "/p/9e31a4", On: true},
+										{Label: "Reading width", Href: "/p/9e31a4?width=reading"},
+									},
+								},
+								w.Button{Label: "Download .md", Icon: "download", Href: "/p/9e31a4/download"},
 							},
 						},
 					},
@@ -3636,7 +3661,7 @@ func Publish23() Screen {
 										Variant: w.ProseLead,
 									},
 									w.DocTasks{
-										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
+										Title: "Что делаем",
 										Items: []w.DocTask{
 											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
@@ -3664,7 +3689,11 @@ func Publish9() Screen {
 					w.Banner{
 						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
 						Badge: &w.Badge{Label: "read-only"},
-						End:   w.Push{Items: []w.PushPart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary}}},
+						End: w.Push{
+							Items: []w.PushPart{
+								w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/Bn4q7Zs1Wd2e/download"},
+							},
+						},
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle19},
@@ -3692,8 +3721,13 @@ func Publish10() Screen {
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
 							Items: []w.LinePart{
-								w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}},
-								w.Button{Label: "Download", Icon: "download"},
+								w.Seg{
+									Options: []w.SegOption{
+										{Label: "Full width", Href: "/p/b72c19", On: true},
+										{Label: "Reading width", Href: "/p/b72c19?width=reading"},
+									},
+								},
+								w.Button{Label: "Download", Icon: "download", Href: "/p/b72c19/download"},
 							},
 						},
 					},
@@ -3717,7 +3751,7 @@ func Publish10() Screen {
 						},
 						Text: true,
 					},
-					w.MainFoot{Text: "This link works until 19 August 2026 · the file is read from the server on every visit"},
+					w.MainFoot{Text: "This link works until 19 August 2026."},
 				},
 			},
 		},
@@ -3738,8 +3772,8 @@ func Publish11() Screen {
 						Thumb:    w.Thumb{Icon: "doc", Form: w.ThumbSquare},
 						Title:    "макет-обложки.psd",
 						Meta:     w.Mono{Text: "image/vnd.adobe.photoshop · 84.2 MB · changed 2026-08-04"},
-						Download: w.Button{Label: "Download 84.2 MB", Icon: "download", Kind: w.ButtonPrimary},
-						Note:     "This file cannot be shown in a browser, and Carrel does not try. It is streamed with its own type, transcoded nowhere and stored nowhere.",
+						Download: w.Button{Label: "Download 84.2 MB", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/d0a6f3/download"},
+						Note:     "A browser cannot show this file.",
 					},
 					w.MainFoot{Text: "This link works until 19 August 2026."},
 				},
@@ -3760,20 +3794,50 @@ func Publish12() Screen {
 						End: w.Line{
 							Gap:   w.LineGap6,
 							Place: w.Pushed,
-							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download"}},
+							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download", Href: "/p/5c40e2/download"}},
 						},
 					},
 					w.Head{
 						Title:  &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19},
-						Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}},
-						Pad:    w.HeadPadBottom8,
+						Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 items · 6.6 MB")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Waiting: true,
+									Action:  "/p/5c40e2",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
 					},
 					w.Strip{
 						Label: "Mount as a drive",
 						Items: []w.StripPart{
-							w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Mono: true, ReadOnly: true, Variant: w.InputLineFill},
+							w.Input{
+								Value:    "https://carrel.example/p/5c40e2/dav/",
+								Label:    "Mount as a drive",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
 							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/5c40e2/dav/", Copied: "Copied"},
-							w.Button{Label: "How to mount", Small: true},
+							w.Drop{
+								Trigger: w.Button{Label: "How to mount", Menu: true, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+										w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+										w.MenuText{
+											Title: "Linux",
+											Text:  "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.",
+										},
+									},
+									Width: w.MenuWidth290,
+									Pop:   w.MenuUnder,
+								},
+							},
 							w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11},
 						},
 					},
@@ -3788,46 +3852,984 @@ func Publish12() Screen {
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты"}}},
+									{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты", Href: "/p/5c40e2?in=скриншоты"}}},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("folder · 6 files")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("folder · 6 items")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Label: "Open", Small: true}}, Acts: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/download?in=скриншоты"}},
+										Acts:  true,
+									},
 								},
 								State: w.RowFolder,
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}},
-									{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md", Href: "/p/5c40e2?file=release-checklist.md"}},
+									},
+									{Parts: []w.CellPart{w.Text("3.1 KB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/release-checklist.md"}},
+										Acts:  true,
+									},
 								},
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}},
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg", Href: "/p/5c40e2?file=2026-08-04-whiteboard.jpg"},
+										},
+									},
 									{Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/2026-08-04-whiteboard.jpg"}},
+										Acts:  true,
+									},
 								},
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}},
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf", Href: "/p/5c40e2?file=смета-подрядчик.pdf"}},
+									},
 									{Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/смета-подрядчик.pdf"}},
+										Acts:  true,
+									},
 								},
 							},
 						},
 					},
-					w.MainFoot{
-						Text: "This link works until 1 September 2026 · the contents are read from the server on every visit",
+					w.MainFoot{Text: "This link works until 1 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish24 is frame «Публичная страница · весь календарь» (s-publish-24).
+func Publish24() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
 					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Личный"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 16 August 2026")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Waiting: true,
+									Action:  "/p/a41d07",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Button{Icon: "back", Title: "Previous week", Href: "/p/a41d07?from=2026-08-03"},
+							w.Button{Label: "Today", Href: "/p/a41d07"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-17"},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "",
+								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/a41d07?uid=aa01",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "18:00",
+								Title:  []w.Inline{w.Text("Забрать документы")},
+								Detail: "",
+								Href:   "/p/a41d07?uid=ab02",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Thursday · 13 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "12:00",
+								Title:  []w.Inline{w.Text("Обед с Анной")},
+								Detail: "",
+								Href:   "/p/a41d07?uid=ad04",
+							},
+						},
+					},
+					w.MainFoot{Text: "This link does not expire."},
+				},
+			},
+		},
+	}
+}
+
+// Publish39 is frame «Публичная страница · календарь, фильтр» (s-publish-39).
+func Publish39() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Личный"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 events with «синк»")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "q"},
+									Action:  "/p/a41d07",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "11:00",
+								Title:  []w.Inline{w.Text("Синк-ап с подрядчиком")},
+								Detail: "",
+								Past:   true,
+								Href:   "/p/a41d07?uid=a907",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "",
+								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/a41d07?uid=aa01",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Thursday · 3 September", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "15:00",
+								Title:  []w.Inline{w.Text("Синк-ап: итоги квартала")},
+								Detail: "",
+								Href:   "/p/a41d07?uid=ae05",
+							},
+						},
+					},
+					w.MainFoot{Text: "This link does not expire."},
+				},
+			},
+		},
+	}
+}
+
+// Publish25 is frame «Публичная страница · календарь, пустая неделя» (s-publish-25).
+func Publish25() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Личный"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Button{Icon: "back", Title: "Previous week", Href: "/p/a41d07?from=2026-08-10"},
+							w.Button{Label: "Today", Href: "/p/a41d07"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-24"},
+						},
+					},
+					w.Empty{Parts: []w.EmptyPart{w.Strong("No events this week.")}},
+					w.MainFoot{Text: "This link does not expire."},
+				},
+			},
+		},
+	}
+}
+
+// Publish16 is frame «Публичная страница · событие» (s-publish-16).
+func Publish16() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+						End: w.Line{
+							Gap:   w.LineGap6,
+							Place: w.Pushed,
+							Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/c3f1a8/download"}},
+						},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday, 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Description"},
+							w.Prose{
+								Parts: []w.Inline{w.Text("Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.")},
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}},
+									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
+									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
+									[]w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
+								},
+								Columns: true,
+							},
+						},
+					},
+					w.MainFoot{Text: "This link works until 8 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish26 is frame «Публичная страница · контакт» (s-publish-26).
+func Publish26() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Photo: &w.HeadPhoto{Initials: "АК"},
+						Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{
+								Term:  "Phone · mobile",
+								Value: []w.ValuePart{w.Text("+7 912 445-10-88")},
+								Face:  w.ValueMono,
+								Href:  "tel:+79124451088",
+							},
+							{
+								Term:  "Phone · work",
+								Value: []w.ValuePart{w.Text("+7 495 120-45-00")},
+								Face:  w.ValueMono,
+								Href:  "tel:+74951204500",
+							},
+							{
+								Term:  "Email · work",
+								Value: []w.ValuePart{w.Text("a.kovaleva@example.org")},
+								Href:  "mailto:a.kovaleva@example.org",
+							},
+							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
+						},
+					},
+					w.MainFoot{Text: "This link works until 9 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish27 is frame «Публичная страница · задача» (s-publish-27).
+func Publish27() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Due Friday, 7 August 2026 · МФЦ, Мясницкая 13")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{Term: "Status", Value: []w.ValuePart{w.Text("In process "), w.Mono{Text: "40%"}}}},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Description"},
+							w.Prose{Parts: []w.Inline{w.Text("Паспорт, СНИЛС и заявление; копии заверить заранее.")}},
+						},
+					},
+					w.MainFoot{Text: "This link works until 8 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish28 is frame «Публичная страница · список задач» (s-publish-28).
+func Publish28() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Дела"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 tasks")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Waiting: true,
+									Action:  "/p/e5b210",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Open", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Отправить документы в МФЦ")},
+								Due:      "7 Aug",
+								Progress: "—",
+								Single:   true,
+								Overdue:  true,
+								Href:     "/p/e5b210?uid=t1",
+							},
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Собрать чемодан")},
+								Due:      "14 Aug",
+								Progress: "40%",
+								Single:   true,
+								Href:     "/p/e5b210?uid=t2",
+							},
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Купить адаптер для розеток")},
+								Due:      "15 Aug",
+								Progress: "—",
+								Single:   true,
+								Href:     "/p/e5b210?uid=t3",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Done", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Done: true, Sign: true},
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Title:    []w.Inline{w.Text("Продлить страховку")},
+								Due:      "3 Aug",
+								Progress: "100%",
+								Single:   true,
+								Href:     "/p/e5b210?uid=t4",
+							},
+						},
+					},
+					w.MainFoot{Text: "This link works until 8 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish29 is frame «Публичная страница · тетрадь» (s-publish-29).
+func Publish29() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Записи"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 notes")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Waiting: true,
+									Action:  "/p/61d4c7",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
+								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Date:    "10 Aug",
+								Single:  true,
+								Href:    "/p/61d4c7?uid=n1",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Date:    "8 Aug",
+								Single:  true,
+								Href:    "/p/61d4c7?uid=n2",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Список к поездке")},
+								Excerpt: "Адаптер, зарядка, страховка, распечатать билеты…",
+								Date:    "2 Aug",
+								Single:  true,
+								Href:    "/p/61d4c7?uid=n3",
+							},
+						},
+					},
+					w.MainFoot{Text: "This link works until 19 August 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish33 is frame «Публичная страница · PDF» (s-publish-33).
+func Publish33() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+						End: w.Line{
+							Gap:   w.LineGap6,
+							Place: w.Pushed,
+							Items: []w.LinePart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/4f60c2/download"}},
+						},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "смета-подрядчик.pdf", Size: w.HeadTitle19},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "application/pdf · 1.2 MB · changed 2026-08-05"}}}},
+						Pad:   w.HeadPadBottom6,
+					},
+					w.MainThumbs{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbWide}},
+					w.MainFoot{Text: "This link works until 19 August 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish34 is frame «Публичная страница · текст сверх потолка» (s-publish-34).
+func Publish34() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Stage{
+						Thumb:    w.Thumb{Icon: "doc", Form: w.ThumbSquare},
+						Title:    "server-log-august.txt",
+						Meta:     w.Mono{Text: "text/plain · 14.6 MB · changed 2026-08-11"},
+						Download: w.Button{Label: "Download 14.6 MB", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/5a2f9e/download"},
+						Note:     "Too large to show on the page.",
+					},
+					w.MainFoot{Text: "This link works until 19 August 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish30 is frame «Публичная страница · папка в папке» (s-publish-30).
+func Publish30() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+						End: w.Line{
+							Gap:   w.LineGap6,
+							Place: w.Pushed,
+							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download", Href: "/p/5c40e2/download?in=скриншоты"}},
+						},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19},
+						Crumbs: &w.Crumbs{
+							Path:    []w.Crumb{{Label: "Материалы к релизу", Href: "#"}},
+							Current: "скриншоты",
+							Aside:   &w.Dim{Parts: []w.Inline{w.Text("· 6 items · 4.2 MB")}},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Waiting: true,
+									Action:  "/p/5c40e2",
+									Hidden:  []w.Hidden{{Name: "in", Value: "скриншоты"}},
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.Strip{
+						Label: "Mount as a drive",
+						Items: []w.StripPart{
+							w.Input{
+								Value:    "https://carrel.example/p/5c40e2/dav/",
+								Label:    "Mount as a drive",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
+							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/5c40e2/dav/", Copied: "Copied"},
+							w.Drop{
+								Trigger: w.Button{Label: "How to mount", Menu: true, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+										w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+										w.MenuText{
+											Title: "Linux",
+											Text:  "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.",
+										},
+									},
+									Width: w.MenuWidth290,
+									Pop:   w.MenuUnder,
+								},
+							},
+							w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11},
+						},
+					},
+					w.Table{
+						Cols: []w.TableCol{
+							{Label: "Name"},
+							{Label: "Size", Width: w.ColSize},
+							{Label: "Type", Width: w.ColChanged, Rank: w.Rank3},
+							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4},
+							{Width: w.Col90},
+						},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-10-sync-board.png",
+												Href: "/p/5c40e2?file=скриншоты/2026-08-10-sync-board.png",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/2026-08-10-sync-board.png"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{
+												Icon: "img",
+												Name: "2026-08-10-timeline.png",
+												Href: "/p/5c40e2?file=скриншоты/2026-08-10-timeline.png",
+											},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("688 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-10 11:05")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/2026-08-10-timeline.png"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "export-dialog.png", Href: "/p/5c40e2?file=скриншоты/export-dialog.png"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("540 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09 17:40")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/export-dialog.png"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "import-wizard.png", Href: "/p/5c40e2?file=скриншоты/import-wizard.png"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("1.1 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09 17:32")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/import-wizard.png"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "publish-sheet.png", Href: "/p/5c40e2?file=скриншоты/publish-sheet.png"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("730 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09 17:20")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/publish-sheet.png"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "img", Name: "search-results.png", Href: "/p/5c40e2?file=скриншоты/search-results.png"},
+										},
+									},
+									{Parts: []w.CellPart{w.Text("790 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-08-09 17:11")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/скриншоты/search-results.png"}},
+										Acts:  true,
+									},
+								},
+							},
+						},
+					},
+					w.MainFoot{Text: "This link works until 1 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish31 is frame «Публичная страница · папка сверх потолка» (s-publish-31).
+func Publish31() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+						End: w.Line{
+							Gap:   w.LineGap6,
+							Place: w.Pushed,
+							Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download", Href: "/p/e93b06/download"}},
+						},
+					},
+					w.Head{
+						Title:  &w.HeadTitle{Text: "Фото с выезда", Size: w.HeadTitle19},
+						Crumbs: &w.Crumbs{Current: "Фото с выезда", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 2 340 items · 7.6 GB")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Filter{
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Waiting: true,
+									Action:  "/p/e93b06",
+									Variant: w.FilterH26W190,
+								},
+							},
+						},
+						Pad: w.HeadPadBottom8,
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Showing 500 of 2 340."),
+							w.Text(" Filter by name, download the folder or mount it to get all of them."),
+						},
+					},
+					w.Strip{
+						Label: "Mount as a drive",
+						Items: []w.StripPart{
+							w.Input{
+								Value:    "https://carrel.example/p/e93b06/dav/",
+								Label:    "Mount as a drive",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
+							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/e93b06/dav/", Copied: "Copied"},
+							w.Drop{
+								Trigger: w.Button{Label: "How to mount", Menu: true, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+										w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+										w.MenuText{
+											Title: "Linux",
+											Text:  "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.",
+										},
+									},
+									Width: w.MenuWidth290,
+									Pop:   w.MenuUnder,
+								},
+							},
+							w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11},
+						},
+					},
+					w.Table{
+						Cols: []w.TableCol{
+							{Label: "Name"},
+							{Label: "Size", Width: w.ColSize},
+							{Label: "Type", Width: w.ColChanged, Rank: w.Rank3},
+							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4},
+							{Width: w.Col90},
+						},
+						Rows: []w.TableRow{
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "IMG_0001.jpg", Href: "/p/e93b06?file=IMG_0001.jpg"}},
+									},
+									{Parts: []w.CellPart{w.Text("3.4 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-06-01 09:12")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/e93b06/file/IMG_0001.jpg"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "IMG_0002.jpg", Href: "/p/e93b06?file=IMG_0002.jpg"}},
+									},
+									{Parts: []w.CellPart{w.Text("3.1 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-06-01 09:12")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/e93b06/file/IMG_0002.jpg"}},
+										Acts:  true,
+									},
+								},
+							},
+							{
+								Cells: []w.TableCell{
+									{
+										Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "IMG_0003.jpg", Href: "/p/e93b06?file=IMG_0003.jpg"}},
+									},
+									{Parts: []w.CellPart{w.Text("2.9 MB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("2026-06-01 09:13")}, Mono: true},
+									{
+										Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/e93b06/file/IMG_0003.jpg"}},
+										Acts:  true,
+									},
+								},
+							},
+						},
+					},
+					w.MainFoot{Text: "This link works until 1 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish35 is frame «Публичная страница · пустая книга» (s-publish-35).
+func Publish35() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title: &w.HeadTitle{Text: "Рассылки"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 contacts")}}},
+						Pad:   w.HeadPadBottom8,
+					},
+					w.Empty{Parts: []w.EmptyPart{w.Strong("This book is empty.")}},
+					w.MainFoot{Text: "This link works until 9 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish36 is frame «Публичная страница · пустая папка» (s-publish-36).
+func Publish36() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{
+						Title:  &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19},
+						Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}},
+						Pad:    w.HeadPadBottom8,
+					},
+					w.Strip{
+						Label: "Mount as a drive",
+						Items: []w.StripPart{
+							w.Input{
+								Value:    "https://carrel.example/p/7d1e88/dav/",
+								Label:    "Mount as a drive",
+								Mono:     true,
+								ReadOnly: true,
+								Variant:  w.InputLineFill,
+							},
+							w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7d1e88/dav/", Copied: "Copied"},
+							w.Drop{
+								Trigger: w.Button{Label: "How to mount", Menu: true, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+										w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+										w.MenuText{
+											Title: "Linux",
+											Text:  "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.",
+										},
+									},
+									Width: w.MenuWidth290,
+									Pop:   w.MenuUnder,
+								},
+							},
+							w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11},
+						},
+					},
+					w.Empty{Parts: []w.EmptyPart{w.Strong("This folder is empty.")}},
+					w.MainFoot{Text: "This link works until 1 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish37 is frame «Публичная страница · источник не ответил» (s-publish-37).
+func Publish37() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{Title: &w.HeadTitle{Text: "Личный"}, Pad: w.HeadPadBottom8},
+					w.Msg{
+						Parts: []w.MsgPart{w.Strong("The source did not answer."), w.Text(" Try again later.")},
+						Tone:  w.MsgAlert,
+					},
+					w.MainFoot{Text: "This link works until 8 September 2026."},
+				},
+			},
+		},
+	}
+}
+
+// Publish38 is frame «Публичная страница · опубликованного больше нет» (s-publish-38).
+func Publish38() Screen {
+	return w.Shell{
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Banner{
+						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
+						Badge: &w.Badge{Label: "read-only"},
+					},
+					w.Head{Title: &w.HeadTitle{Text: "отчёт-июль.pdf"}, Pad: w.HeadPadBottom8},
+					w.Msg{Parts: []w.MsgPart{w.Strong("No longer there."), w.Text(" It was deleted or moved.")}},
 				},
 			},
 		},

@@ -1201,7 +1201,7 @@ func (g *gen) rub(k *El) string {
 }
 
 func (g *gen) tasks(k *El, phone bool) string {
-	s := "w.DocTasks{Title: " + g.rub(k.Kid("tc-rubric")) + ", Items: []w.DocTask{" + g.each(k.Kid("tc-doc__list").Els(), docTask) + "}"
+	s := "w.DocTasks{Title: " + q(k.Kid("tc-doc__heading").Text()) + ", Items: []w.DocTask{" + g.each(k.Kid("tc-doc__list").Els(), docTask) + "}"
 	if phone {
 		s += ", Phone: true"
 	}

@@ -307,6 +307,7 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 /* Переключатель в карточке — своей ширины и на телефоне, где карточка ставит части столбцом. */
 .tc-card > .tc-seg{align-self:flex-start}
 :where(div,span,label,p):has(> .tc-in) > .tc-btn,
+:where(div,span,label,p):has(> .tc-in) > :where(.tc-drop) > .tc-btn,
 :where(div,span,label,p):has(> .tc-in) > .tc-seg,
 :where(div,span,label,p):has(> .tc-field) > .tc-btn,
 :where(div,span,label,p):has(> .tc-field) > .tc-seg{height:28px}
@@ -650,6 +651,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__sep{display:block;height:1px;background:var(--tc-hair);margin:4px 6px;padding:0}
 /* Меню с полями кончается кнопками: сохранить — это действие, а не пункт.
    Пункт меню действует сразу; поля ждут кнопки. */
+.tc-menu__text{display:flex;flex-direction:column;gap:2px;padding:6px 8px;font-size:12px;line-height:1.45;color:var(--tc-muted)}
+.tc-menu__text > b{color:var(--tc-ink);font-weight:600}
 .tc-menu__foot{display:flex;flex-wrap:wrap;gap:8px;padding:8px 8px 4px;margin-top:4px;border-top:1px solid var(--tc-hair)}
 /* полноэкранная заметка: чтение и правка */
 /* Колонка справа — та же панель подробностей, 400 px; при рабочей области уже 880 — 296. */
@@ -767,6 +770,12 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar--wide .tc-segfold__pick{display:block}
   .tc-bar--wide:has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar--wide:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Широкая полоса с фильтром (агенда, Carrel's task 196) шире на поле фильтра — около 1070 px: её is-2nd уходит под «...» с 1100. */
+@container tcbox (max-width:1100px){
+  .tc-bar--wide:has(> .tc-in) .is-2nd{display:none}
+  .tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
 }
 /* Короткий переключатель (.tc-segfold--phone, Day / Week / Month / Range агенды) широкая полоса держит целиком: он складывается только на телефоне, с 640. */
 @container tcbox (min-width:641px){
@@ -1265,7 +1274,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-sheet__checks.tc-sheet__checks{margin-top:4px}
 .tc-main__banner.tc-main__banner{border-bottom:.5px solid var(--tc-rule);background:var(--tc-surface);padding:14px 20px}
 .tc-main__strip.tc-main__strip{border-bottom:.5px solid var(--tc-hair);padding:9px 20px}
-.tc-main__foot--16.tc-main__foot--16{border-top:.5px solid var(--tc-hair);font-size:11.5px;color:var(--tc-dusty);padding:16px 20px}
 .tc-main__banner--12.tc-main__banner--12{border-bottom:.5px solid var(--tc-rule);background:var(--tc-surface);padding:12px 20px}
 .tc-doc__sec--rule.tc-doc__sec--rule{margin-top:20px;padding-top:12px;border-top:.5px solid var(--tc-hair)}
 .tc-doc__files.tc-doc__files{font-size:12.5px;color:var(--tc-muted)}
@@ -1274,6 +1282,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Полоса витрины узкая нарочно — своим контейнером, иначе «...» не появится на широком кадре. */
 .tc-root__bar-box.tc-root__bar-box{padding-bottom:88px;max-width:460px;container:tcbox / inline-size}
 .tc-doc__heading.tc-doc__heading{font-family:var(--tc-font-serif);font-size:19px}
+.tc-doc__sec > .tc-doc__heading,.tc-doc__acts > .tc-doc__heading{margin-bottom:8px}
 .tc-doc__body.tc-doc__body{font-size:14px;line-height:1.7}
 .tc-main__stage.tc-main__stage{text-align:center;align-items:center;padding:34px 20px}
 .tc-main__stage-note.tc-main__stage-note{font-size:12px;color:var(--tc-muted);max-width:44ch}

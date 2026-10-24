@@ -44,6 +44,7 @@ type StripPart interface {
 func (Input) stripPart()  {}
 func (Button) stripPart() {}
 func (Dim) stripPart()    {}
+func (Drop) stripPart()   {}
 
 // Strip is the line of a public page that gives its address to a client:
 // what to do, the address, the buttons, what the address gives.
@@ -64,12 +65,11 @@ func (p Strip) html(mix) string {
 
 // MainFoot is the last line of a public page: how long the link lives.
 type MainFoot struct {
-	Text  string
-	Roomy bool // 16 px above: after a list
+	Text string
 }
 
 func (f MainFoot) html(mix) string {
-	return `<div class="` + pick(f.Roomy, "tc-main__foot--16") + pick(!f.Roomy, "tc-main__foot") + `">` + esc(f.Text) + `</div>`
+	return `<div class="tc-main__foot">` + esc(f.Text) + `</div>`
 }
 
 // Stage is the middle of a public page that shows one file it cannot

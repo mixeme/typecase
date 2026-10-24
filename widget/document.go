@@ -95,9 +95,11 @@ type DocTask struct {
 	Text string
 }
 
-// DocTasks is a list of tasks in a document under its rubric.
+// DocTasks is a list of tasks in a document under its heading: the
+// author's Markdown heading, drawn as text, not as the interface's rubric
+// (Carrel's task 196).
 type DocTasks struct {
-	Title Rubric
+	Title string
 	Items []DocTask
 	Phone bool // a phone's list: wider gaps
 }
@@ -105,9 +107,9 @@ type DocTasks struct {
 func (t DocTasks) html(mix) string {
 	var s strings.Builder
 	if t.Phone {
-		s.WriteString(`<div class="tc-doc__acts">` + t.Title.html(nil) + `<ul class="tc-stack tc-stack--gap-9 tc-doc__list">`)
+		s.WriteString(`<div class="tc-doc__acts">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--gap-9 tc-doc__list">`)
 	} else {
-		s.WriteString(`<div class="tc-doc__sec">` + t.Title.html(nil) + `<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
+		s.WriteString(`<div class="tc-doc__sec">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
 	}
 	for _, it := range t.Items {
 		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil))

@@ -238,16 +238,14 @@ func (g *gen) main(e *El) string {
 					return g.button(x)
 				case x.Has("tc-dim"):
 					return g.dimx(x)
+				case x.Has("tc-drop"):
+					return g.drop(x)
 				}
 				return g.input(x)
 			})
 			items = append(items, "w.Strip{Label: "+q(k.Els()[0].Text())+", Items: []w.StripPart{"+parts+"}}")
-		case k.Has("tc-main__foot") || k.Has("tc-main__foot--16"):
-			s := "w.MainFoot{Text: " + q(k.Text())
-			if k.Has("tc-main__foot--16") {
-				s += ", Roomy: true"
-			}
-			items = append(items, s+"}")
+		case k.Has("tc-main__foot"):
+			items = append(items, "w.MainFoot{Text: "+q(k.Text())+"}")
 		case k.Has("tc-main__results"):
 			items = append(items, "w.MainResults{Items: []w.ResultsPart{"+g.each(k.Els(), g.anyblock)+"}}")
 		case k.Has("tc-main__cards"):
@@ -538,6 +536,8 @@ func (g *gen) menu(e *El) string {
 			r := k.Kid("tc-menu__what")
 			items = append(items, "w.MenuRefusal{Mark: "+g.mark(k.Kid("tc-mark"))+", Source: "+q(r.Kid("tc-menu__source").Text())+
 				", Answer: "+q(r.Kid("tc-menu__answer").Text())+", Retry: "+g.button(k.Kid("tc-btn"))+"}")
+		case k.Has("tc-menu__text"):
+			items = append(items, "w.MenuText{Title: "+q(k.Els()[0].Text())+", Text: "+q(k.OwnText())+"}")
 		case k.Has("tc-menu__foot"):
 			items = append(items, "w.MenuFoot{Items: []w.Button{"+g.buttons(k.Els())+"}}")
 		case k.Has("tc-menu__item"):
@@ -1509,8 +1509,8 @@ func (g *gen) child(e *El) string {
 		return g.seg(e)
 	case e.Has("tc-field"):
 		return g.field(e)
-	case e.Has("tc-in") && e.Has("is-ph"):
-		return "w.Filter{Query: " + queryOf(e.Kid("tc-q")) + ", Waiting: true, Variant: w.FilterH26W190}"
+	case e.Has("tc-in") && (e.Has("is-ph") || e.Tag == "form"):
+		return g.filter(e)
 	}
 	stop("child? " + join(e.Cls(), " "))
 	return ""

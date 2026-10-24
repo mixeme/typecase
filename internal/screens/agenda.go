@@ -122,6 +122,12 @@ func Agenda1() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar?from=2026-08-17"},
@@ -1250,6 +1256,12 @@ func Agenda17() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Waiting: true,
+								Action:  "/app/calendar/nextcloud/lichny",
+								Variant: w.FilterH26W200,
+							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichny?from=2026-08-03"},
 							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichny"},
 							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichny?from=2026-08-17"},
@@ -1331,6 +1343,168 @@ func Agenda17() Screen {
 								Time:   "18:00",
 								Title:  []w.Inline{w.Text("Забрать документы")},
 								Detail: "МФЦ, Мясницкая 13",
+								Single: true,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Agenda31 is frame «Календарь · фильтр по слову» (s-agenda-31).
+func Agenda31() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+					On: 2,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked: w.TickedPart,
+							Kind:   w.TickRowAll,
+							Mark:   w.Mark{Kind: w.MarkMulti},
+							Label:  "Combined calendar",
+							Meta:   "6",
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "radicale · vps"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "baikal"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
+						w.TickRow{
+							Kind:  w.TickRowExternal,
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Праздники РФ",
+							Meta:  "3",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Расписание лиги",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New calendar"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Личный"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 3 events with «синк»")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "q"},
+								Action:  "/app/calendar/nextcloud/lichny",
+								Variant: w.FilterH26W200,
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Variant: w.BarWide,
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "11:00",
+								Title:  []w.Inline{w.Text("Синк-ап с подрядчиком")},
+								Detail: "Переговорная 1",
+								Single: true,
+								Past:   true,
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Single: true,
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Thursday · 3 September", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "15:00",
+								Title:  []w.Inline{w.Text("Синк-ап: итоги квартала")},
+								Detail: "Переговорная 2",
 								Single: true,
 							},
 						},

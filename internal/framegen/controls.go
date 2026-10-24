@@ -449,6 +449,15 @@ func (g *gen) filter(x *El) string {
 	}
 	if x.Tag == "form" {
 		f = append(f, "Action: "+q(x.Attr("action")))
+		var hs []string
+		for _, h := range x.Els() {
+			if h.Tag == "input" && h.Attr("type") == "hidden" {
+				hs = append(hs, "{Name: "+q(h.Attr("name"))+", Value: "+q(h.Attr("value"))+"}")
+			}
+		}
+		if len(hs) > 0 {
+			f = append(f, "Hidden: []w.Hidden{"+join(hs, ", ")+"}")
+		}
 	}
 	return "w.Filter{" + join(f, ", ") + g.ev(x, "FilterVariant", "Variant") + placef(x) + "}"
 }

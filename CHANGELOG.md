@@ -8,6 +8,13 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`DocTasks.Title` is a string** drawn as the document's heading
+  (`.tc-doc__heading`), not a `Rubric`: a note's Markdown heading is the
+  author's text, not the interface's rubric (Carrel's task 196).
+- `MainFoot.Roomy` is gone with its rule (`.tc-main__foot--16`): every
+  public page ends with the same foot, the link's day only (Carrel's task
+  196).
+
 - `PhotoCrop.After` is gone: the crop page says nothing after its fields
   (Carrel's task 197, Р-77).
 - **A `Mark` is no `ValuePart`**: the collection a value came from is a
@@ -101,6 +108,9 @@ do, not what the authors did.
 
 ### Added
 
+- `MenuText` — a menu row that only says something, a name over a line
+  (`.tc-menu__text`): how to mount a public folder on each system. A
+  public page's address `Strip` takes a `Drop` (Carrel's task 196).
 - **The search line's suggestions come from the server** (Carrel's task
   227): `page.Document.Suggest` names their address (`data-tc-search-suggest`
   on the root); with the live layer the line asks it `?q=…` as it gets the
@@ -924,6 +934,34 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Public pages: what the guest sees, the views without frames** (Carrel's
+  task 196; accepted by the owner 24.10). A row's caption is what the link gives — «repeats weekly» and
+  the status always, «3 attendees» with Attendees ticked, the owner's marks
+  never; a row of a published list opens its record's page in the same
+  link (`?uid=`), a folder's name its listing (`?in=`) or the file's page
+  (`?file=`). The foot is the link's day only, on every page; the line
+  under a title says the days or the count. Downloads are links; the filter is a GET form
+  (`?q=`), the width switch is addresses
+  (`?width=reading`), «How to mount» opens without a script. A folder
+  counts «items»; over the ceiling only the page's listing is cut — the
+  archive and the drive give the whole folder. New: the whole calendar by weeks (`s-publish-24`), an
+  empty week, book and folder (`-25`, `-35`, `-36`), an event, a contact,
+  a task (`-16`, `-26`, `-27`), a task list and a notebook (`-28`, `-29`),
+  a folder in a folder and over the ceiling (`-30`, `-31`), «How to mount»
+  open (`-32`), a PDF and a text over the ceiling (`-33`, `-34`), «The
+  source did not answer» and «No longer there» (`-37`, `-38`).
+- **A calendar filters by word, as the other kinds do** (Carrel's task
+  196; the owner, 24.10): «Filter by word» first in the bar of the
+  owner's calendar (`s-agenda-1`, `-17`, `states-3`, `-6`, `-13`, `-15`)
+  and in the head of a public calendar (`s-publish-6`, `-24`). With a word
+  the list is everything found in the calendar by days — in a range link,
+  in the range — and ← Today →, the period and the range go
+  (`s-agenda-31`, `s-publish-39`); a repeating event stands once, at its
+  nearest time. A public page filters with the owner's words: «Filter by
+  word», «Filter this folder». A note's Markdown heading is drawn as a
+  heading of the text everywhere (`s-notes-2`, `-3`, `s-publish-4`, `-8`,
+  `-23`, the phone's note).
 
 - **The rewrite sheets in one view; the download of a link off by default**
   (Carrel's tasks 223, 229; accepted by the owner 23.10). `s-contacts-19`,

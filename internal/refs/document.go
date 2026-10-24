@@ -28,7 +28,7 @@ var _ = add(
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
 		w.DocNote{Parts: []w.Inline{w.Text("2 attached files are not published.")}}}}, "s-publish-23", "tc-doc", 1),
 	document("read", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
@@ -71,7 +71,7 @@ var _ = add(
 	document("read", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, "s-notes-2", "tc-doc", 1),
 	document("edit", w.Doc{Items: []w.DocPart{
 		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
@@ -82,7 +82,7 @@ var _ = add(
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
 		w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Href: "/p/Bn4q7Zs1Wd2e"}, {Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Href: "/p/Kd9x3Pq6Tr1m"}}}}}, "s-publish-8", "tc-doc", 1),
 	document("text", w.Doc{Items: []w.DocPart{
 		w.DocHeading{Text: "Перед заморозкой"},
@@ -93,7 +93,7 @@ var _ = add(
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
-		w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
 		w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}}, "phone-7", "tc-doc", 1),
 
 	// tc-docbar

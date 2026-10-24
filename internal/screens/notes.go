@@ -482,7 +482,7 @@ func Notes2() Screen {
 										Variant: w.ProseLead,
 									},
 									w.DocTasks{
-										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
+										Title: "Что делаем",
 										Items: []w.DocTask{
 											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
@@ -893,7 +893,7 @@ func Notes3() Screen {
 										Variant: w.ProseLead,
 									},
 									w.DocTasks{
-										Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8},
+										Title: "Что делаем",
 										Items: []w.DocTask{
 											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},

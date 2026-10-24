@@ -4,6 +4,11 @@ import w "carrel.dev/typecase/widget"
 
 var _ = add(
 	// tc-head
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}}, Pad: w.HeadPadBottom8}, "s-publish-25", "tc-head", 1),
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}}, Pad: w.HeadPadBottom8}, "s-publish-36", "tc-head", 1),
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Pad: w.HeadPadBottom8}, "s-publish-37", "tc-head", 1),
+	shell("plain", w.Head{Photo: &w.HeadPhoto{Initials: "АК"}, Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}}}, Pad: w.HeadPadBottom8}, "s-publish-26", "tc-head", 1),
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Path: []w.Crumb{{Label: "Материалы к релизу", Href: "#"}}, Current: "скриншоты", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 6 items · 4.2 MB")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Search this folder", Label: "Search this folder", Name: "q"}, Waiting: true, Action: "/p/5c40e2", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8}, "s-publish-30", "tc-head", 1),
 	shell("mark", w.Head{Title: &w.HeadTitle{Text: "Import report"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Контакты")}}}}, "s-io-9", "tc-head", 1),
 	shell("lock", w.Head{Title: &w.HeadTitle{Text: "Connections"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 19 collections · 2 subscriptions "), w.Badge{Label: "credentials unlocked · 4:12", Accent: true}, w.Button{Label: "Lock now", Small: true}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Subscribe to a feed", Icon: "link"}}}}, "s-profile-4", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "«ковал»"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("7 records")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All", On: true}, {Label: "Contacts"}, {Label: "Events"}, {Label: "Tasks"}, {Label: "Notes"}, {Label: "Files"}}}}}}, "s-find-1", "tc-head", 1),
@@ -54,8 +59,8 @@ var _ = add(
 	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}}, Pad: w.HeadPadBottom8}, "s-profile-3", "tc-head", 1),
 	shell("acts", w.Head{Title: &w.HeadTitle{Text: "davloom", Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One address for every device instead of an account for every server · "), w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Add device", Icon: "plus", Kind: w.ButtonPrimary}}}}, "s-davloom-1", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Published links", Badge: &w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: may be unreachable from outside"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Read-only, one object or one collection per link · "), w.Span{Face: w.FaceDanger, Text: "this instance is local: the link opens only from your network"}}}}}, "s-publish-1", "tc-head", 1),
-	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026 · the page is read from the server on every visit")}}}, Pad: w.HeadPadBottom8}, "s-publish-6", "tc-head", 1),
-	shell("crumbs", w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}}, Pad: w.HeadPadBottom8}, "s-publish-12", "tc-head", 1),
+	shell("padded", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"}, Waiting: true, Action: "/p/7f3ac9", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8}, "s-publish-6", "tc-head", 1),
+	shell("crumbs", w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 items · 6.6 MB")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Search this folder", Label: "Search this folder", Name: "q"}, Waiting: true, Action: "/p/5c40e2", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8}, "s-publish-12", "tc-head", 1),
 	shell("avatar", w.Head{Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar44}, Kicker: &w.Rubric{Text: "Mentions", Variant: w.RubricBottom2}, Title: &w.HeadTitle{Text: "Анна Ковалёва"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Where she is named, not where she takes part · the timeline has that")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Write a note", Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "Timeline", Icon: "all"}}}, Pad: w.HeadPadBottom10}, "mentions-2", "tc-head", 1),
 	shell("acts", w.Head{Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 1 card · the server granted no write access")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}}}}, "states-4", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("shown from this session’s memory")}}}}, "states-5", "tc-head", 1),
@@ -81,6 +86,74 @@ var _ = add(
 	shell("selection", w.Bar{Items: []w.BarPart{w.Button{Icon: "download", Title: "Download", Form: "files-sel", Name: "op", Value: "download"}, w.Button{Icon: "move", Title: "Move", Form: "files-sel", Name: "op", Value: "move"}, w.Button{Icon: "trash", Kind: w.ButtonDangerSolid, Title: "Delete", Form: "files-sel", Name: "op", Value: "delete"}, w.Button{Icon: "close", Title: "Clear selection", Place: w.Pushed, ScriptOnly: true}}, Count: &w.BarCount{Text: "2 selected", Small: true}, Variant: w.BarSelection}, "phone-6", "tc-bar", 1),
 
 	// tc-main
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 events with «синк»")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "q"}, Action: "/p/a41d07", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "11:00", Title: []w.Inline{w.Text("Синк-ап с подрядчиком")}, Detail: "", Past: true, Href: "/p/a41d07?uid=a907"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Href: "/p/a41d07?uid=aa01"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Thursday · 3 September", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "15:00", Title: []w.Inline{w.Text("Синк-ап: итоги квартала")}, Detail: "", Href: "/p/a41d07?uid=ae05"}}},
+		w.MainFoot{Text: "This link does not expire."}}}, "s-publish-39", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "Записи"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 notes")}}}, Pad: w.HeadPadBottom8},
+		w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+		w.List{Rows: []w.ListRow{
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Заметка со встречи 10.08")}, Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…", Date: "10 Aug", Single: true, Href: "/p/61d4c7?uid=n1"},
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Что почитать про CRDT")}, Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…", Date: "8 Aug", Single: true, Href: "/p/61d4c7?uid=n2"},
+			w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Список к поездке")}, Excerpt: "Адаптер, зарядка, страховка, распечатать билеты…", Date: "2 Aug", Single: true, Href: "/p/61d4c7?uid=n3"}}},
+		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-29", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}}, Pad: w.HeadPadBottom8},
+		w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/p/a41d07?from=2026-08-10"}, w.Button{Label: "Today", Href: "/p/a41d07"}, w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-24"}}},
+		w.Empty{Parts: []w.EmptyPart{w.Strong("No events this week.")}},
+		w.MainFoot{Text: "This link does not expire."}}}, "s-publish-25", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "отчёт-июль.pdf"}, Pad: w.HeadPadBottom8},
+		w.Msg{Parts: []w.MsgPart{w.Strong("No longer there."), w.Text(" It was deleted or moved.")}}}}, "s-publish-38", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}}, Pad: w.HeadPadBottom8},
+		w.Strip{Label: "Mount as a drive", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/7d1e88/dav/", Label: "Mount as a drive", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/7d1e88/dav/", Copied: "Copied"}, w.Drop{Trigger: w.Button{Label: "How to mount", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+			w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+			w.MenuText{Title: "Linux", Text: "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://."}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11}}},
+		w.Empty{Parts: []w.EmptyPart{w.Strong("This folder is empty.")}},
+		w.MainFoot{Text: "This link works until 1 September 2026."}}}, "s-publish-36", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/4f60c2/download"}}}},
+		w.Head{Title: &w.HeadTitle{Text: "смета-подрядчик.pdf", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "application/pdf · 1.2 MB · changed 2026-08-05"}}}}, Pad: w.HeadPadBottom6},
+		w.MainThumbs{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbWide}},
+		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-33", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Strip{Label: "Mount as a drive", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Label: "Mount as a drive", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/5c40e2/dav/", Copied: "Copied"}, w.Drop{Open: true, Trigger: w.Button{Label: "How to mount", Menu: true, Small: true, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+			w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+			w.MenuText{Title: "Linux", Text: "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://."}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11}}},
+		w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.ColSize}, {Label: "Type", Width: w.ColChanged, Rank: w.Rank3}, {Label: "Changed", Width: w.ColTime, Rank: w.Rank4}, {Width: w.Col90}}, Rows: []w.TableRow{
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты", Href: "/p/5c40e2?in=скриншоты"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 6 items")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/download?in=скриншоты"}}, Acts: true}}, State: w.RowFolder},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md", Href: "/p/5c40e2?file=release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3.1 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/release-checklist.md"}}, Acts: true}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg", Href: "/p/5c40e2?file=2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/2026-08-04-whiteboard.jpg"}}, Acts: true}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf", Href: "/p/5c40e2?file=смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/смета-подрядчик.pdf"}}, Acts: true}}}}}}}, "s-publish-32", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
+		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 16 August 2026")}}}, Pad: w.HeadPadBottom8},
+		w.Bar{Items: []w.BarPart{w.Button{Icon: "back", Title: "Previous week", Href: "/p/a41d07?from=2026-08-03"}, w.Button{Label: "Today", Href: "/p/a41d07"}, w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-17"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Href: "/p/a41d07?uid=aa01"},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "", Href: "/p/a41d07?uid=ab02"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Thursday · 13 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "12:00", Title: []w.Inline{w.Text("Busy")}, Detail: "", Href: "/p/a41d07?uid=ad04"}}},
+		w.MainFoot{Text: "This link does not expire."}}}, "s-publish-24", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "DAV validator"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Discovery without saving credentials")}}}},
 		w.Form{Items: []w.FormPart{w.Field{Label: "Server URL", Parts: []w.FieldPart{w.Input{Name: "server", Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true, Required: true}}, Width: w.FieldXL}, w.Field{Label: "Username", Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}}, Width: w.FieldMD}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"}, w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}}}, Width: w.FieldMD}, w.Field{Label: "Certificate fingerprint", LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}}, Parts: []w.FieldPart{w.Input{Name: "certFingerprint", Placeholder: "only for a certificate the system does not trust", Label: "Certificate fingerprint", Mono: true}}, Width: w.FieldFull}, w.Field{Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}}}}, ID: "dav", Action: "/admin/dav", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
@@ -132,8 +205,18 @@ var _ = add(
 			w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk},
 			w.CardRow{Kind: w.CardTop8, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Done"}}}}, Variant: w.CardChosen}}}}}, "s-admin-17", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
-		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download"}}}, Wide: true},
-		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8}}}, "s-publish-16", "tc-main", 1),
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/c3f1a8/download"}}}},
+		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday, 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8},
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+			{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}},
+		w.Sec{Items: []w.SecPart{
+			w.Rubric{Text: "Description"},
+			w.Prose{Parts: []w.Inline{w.Text("Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.")}}}},
+		w.Sec{Items: []w.SecPart{
+			w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
+			w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Columns: true}}},
+		w.MainFoot{Text: "This link works until 8 September 2026."}}}, "s-publish-16", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
 		w.Head{}, w.Bar{},
 		w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 3, Alert: true}}, w.List{},
@@ -197,7 +280,7 @@ var _ = add(
 		w.DocLayout{Items: []w.DocLayoutPart{w.Doc{Items: []w.DocPart{
 			w.DocTitle{Text: "Заметка со встречи 10.08"},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-			w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
+			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, w.Docmeta{Sections: []w.DocmetaSec{
 			{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 			{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
@@ -266,17 +349,17 @@ var _ = add(
 				w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АС"}, Title: []w.Inline{w.Text("Алексей Смирнов")}, Subtitle: "+7 495 120-45-00", Detail: "—", Caption: "—", Source: "nextcloud · Контакты", Inset: true}}, Inset: true},
 			w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "do", Value: "again", Submit: true}}}}, Action: "/app/duplicates/decide", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "group", Value: "g9"}}}}}}}, "s-dup-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
-		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download"}}}, Wide: true},
-		w.Strip{Label: "Subscribe in your own client", Items: []w.StripPart{w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Mono: true, Variant: w.InputLineFill, Label: "Address"}, w.Button{Label: "Copy", Small: true}, w.Button{Label: "Open in calendar app", Small: true}, w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11}}},
-		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026 · the page is read from the server on every visit")}}}, Pad: w.HeadPadBottom8},
-		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August"}, Count: &w.Num{Value: 2}},
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/7f3ac9/download"}}}, Wide: true},
+		w.Strip{Label: "Subscribe in your own client", Items: []w.StripPart{w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Label: "Subscribe in your own client", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "webcal://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"}, w.Button{Label: "Open in calendar app", Small: true, Href: "webcal://carrel.example/p/7f3ac9/personal.ics"}, w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11}}},
+		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026")}}}, Pad: w.HeadPadBottom8},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2"},
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13"}}},
-		w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August"}, Count: &w.Num{Value: 1}},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Href: "/p/7f3ac9?uid=ab02"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "09:30", Title: []w.Inline{w.Text("Ревью архитектуры")}, Detail: "Переговорная 1"}}},
-		w.MainFoot{Text: "This link works until 8 September 2026. The owner can revoke it at any moment.", Roomy: true}}}, "s-publish-6", "tc-main", 1),
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "09:30", Title: []w.Inline{w.Text("Ревью архитектуры")}, Detail: "Переговорная 1", Badges: []w.Badge{w.Badge{Label: "3 attendees"}}, Href: "/p/7f3ac9?uid=ac03"}}},
+		w.MainFoot{Text: "This link works until 8 September 2026."}}}, "s-publish-6", "tc-main", 1),
 	shell("zone", w.Main{Items: []w.MainPart{
 		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Variant: w.Mono11Top}}}, Variant: w.MainZone}, "shell-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
@@ -284,7 +367,7 @@ var _ = add(
 		w.DocLayout{Items: []w.DocLayoutPart{w.Doc{Items: []w.DocPart{
 			w.DocTitle{Text: "Заметка со встречи 10.08"},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-			w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
+			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, w.Docmeta{Sections: []w.DocmetaSec{
 			{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 			{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
@@ -407,7 +490,7 @@ var _ = add(
 			w.DocTitle{Text: "Заметка со встречи 10.08"},
 			w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-			w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom8}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
+			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
 			w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}}, {Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}}}}}}, View: w.DocViewFocus},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-8", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
@@ -416,28 +499,31 @@ var _ = add(
 		w.MainThumbs{Thumb: w.Thumb{Icon: "img", Form: w.ThumbWide}},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-9", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
-		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}}, w.Button{Label: "Download", Icon: "download"}}}},
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Seg{Options: []w.SegOption{{Label: "Full width", Href: "/p/b72c19", On: true}, {Label: "Reading width", Href: "/p/b72c19?width=reading"}}}, w.Button{Label: "Download", Icon: "download", Href: "/p/b72c19/download"}}}},
 		w.Head{Title: &w.HeadTitle{Text: "release-checklist.md", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "text/markdown · 3.1 KB · changed 2026-08-09"}}}}, Pad: w.HeadPadBottom6},
 		w.Doc{Items: []w.DocPart{
 			w.DocHeading{Text: "Перед заморозкой"},
 			w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}}, []w.Inline{w.Text("проверить changelog")}, []w.Inline{w.Text("письмо пользователям — черновик у Анны")}}},
 			w.DocHeading{Text: "После"},
 			w.DocBody{Text: "Тег ставит Виктор. Образ собирается вручную до появления CI."}}, Text: true},
-		w.MainFoot{Text: "This link works until 19 August 2026 · the file is read from the server on every visit"}}}, "s-publish-10", "tc-main", 1),
+		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-10", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
-		w.Stage{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbSquare}, Title: "макет-обложки.psd", Meta: w.Mono{Text: "image/vnd.adobe.photoshop · 84.2 MB · changed 2026-08-04"}, Download: w.Button{Label: "Download 84.2 MB", Icon: "download", Kind: w.ButtonPrimary}, Note: "This file cannot be shown in a browser, and Carrel does not try. It is streamed with its own type, transcoded nowhere and stored nowhere."},
+		w.Stage{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbSquare}, Title: "макет-обложки.psd", Meta: w.Mono{Text: "image/vnd.adobe.photoshop · 84.2 MB · changed 2026-08-04"}, Download: w.Button{Label: "Download 84.2 MB", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/d0a6f3/download"}, Note: "A browser cannot show this file."},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-11", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
-		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download"}}}},
-		w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}}, Pad: w.HeadPadBottom8},
-		w.Strip{Label: "Mount as a drive", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Mono: true, Variant: w.InputLineFill, Label: "Address"}, w.Button{Label: "Copy", Small: true}, w.Button{Label: "How to mount", Small: true}, w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11}}},
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download folder", Icon: "download", Href: "/p/5c40e2/download"}}}},
+		w.Head{Title: &w.HeadTitle{Text: "Материалы к релизу", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 items · 6.6 MB")}}}, Pad: w.HeadPadBottom8},
+		w.Strip{Label: "Mount as a drive", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/5c40e2/dav/", Label: "Mount as a drive", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/5c40e2/dav/", Copied: "Copied"}, w.Drop{Trigger: w.Button{Label: "How to mount", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+			w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+			w.MenuText{Title: "Linux", Text: "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://."}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.Dim{Parts: []w.Inline{w.Text("read-only WebDAV, no password")}, Size: w.Dim11}}},
 		w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.ColSize}, {Label: "Type", Width: w.ColChanged, Rank: w.Rank3}, {Label: "Changed", Width: w.ColTime, Rank: w.Rank4}, {Width: w.Col90}}, Rows: []w.TableRow{
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 6 files")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Open", Small: true}}, Acts: true}}, State: w.RowFolder},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true}}, Acts: true}}}}},
-		w.MainFoot{Text: "This link works until 1 September 2026 · the contents are read from the server on every visit"}}}, "s-publish-12", "tc-main", 1),
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "скриншоты", Href: "/p/5c40e2?in=скриншоты"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("folder · 6 items")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/download?in=скриншоты"}}, Acts: true}}, State: w.RowFolder},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md", Href: "/p/5c40e2?file=release-checklist.md"}}}, {Parts: []w.CellPart{w.Text("3.1 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/release-checklist.md"}}, Acts: true}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-04-whiteboard.jpg", Href: "/p/5c40e2?file=2026-08-04-whiteboard.jpg"}}}, {Parts: []w.CellPart{w.Text("2.8 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/jpeg")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-04 17:03")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/2026-08-04-whiteboard.jpg"}}, Acts: true}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf", Href: "/p/5c40e2?file=смета-подрядчик.pdf"}}}, {Parts: []w.CellPart{w.Text("1.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-08-05 14:20")}, Mono: true}, {Parts: []w.CellPart{w.Button{Label: "Download", Small: true, Href: "/p/5c40e2/file/смета-подрядчик.pdf"}}, Acts: true}}}}},
+		w.MainFoot{Text: "This link works until 1 September 2026."}}}, "s-publish-12", "tc-main", 1),
 	shell("groups", w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "Контакты"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("312 записей · 2 отмечено")}}}},
 		w.ListGroup{Title: w.Rubric{Text: "А"}, Count: &w.Num{Value: 4}},
@@ -545,7 +631,7 @@ var _ = add(
 			w.DocTitle{Text: "Заметка со встречи 10.08"},
 			w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
-			w.DocTasks{Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7}, Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
+			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
 			w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}},
 		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 4}}}, "phone-7", "tc-main", 1),
 

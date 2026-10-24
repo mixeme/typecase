@@ -38,6 +38,7 @@ var _ = add(
 	// tc-crumbs
 	shell("path", w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}}, Current: "attachments"}, "components-15", "tc-crumbs", 1),
 	shell("path", w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}}, Current: "2026-07"}, "s-files-5", "tc-crumbs", 1),
+	shell("aside", w.Crumbs{Path: []w.Crumb{{Label: "Материалы к релизу", Href: "#"}}, Current: "скриншоты", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 6 items · 4.2 MB")}}}, "s-publish-30", "tc-crumbs", 1),
 	shell("aside", w.Crumbs{Current: "Материалы к релизу", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 4 files · 6.6 MB")}}}, "s-publish-12", "tc-crumbs", 1),
 
 	// tc-acts

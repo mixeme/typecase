@@ -293,6 +293,17 @@ func (r MenuRefusal) html(mix) string {
 		`</span><span class="tc-menu__answer">` + esc(r.Answer) + `</span></span>` + r.Retry.html(nil) + `</div>`
 }
 
+// MenuText is a row of a menu that only says something: what to do on one
+// system to mount a public folder (Carrel's task 196).
+type MenuText struct {
+	Title string // «Windows»
+	Text  string
+}
+
+func (t MenuText) html(mix) string {
+	return `<div class="tc-menu__text"><b>` + esc(t.Title) + `</b>` + esc(t.Text) + `</div>`
+}
+
 // MenuFoot is the last row of a menu that edits: save, go back.
 type MenuFoot struct {
 	Items []Button
@@ -321,6 +332,7 @@ func (MenuField) menuPart()   {}
 func (MenuColumn) menuPart()  {}
 func (MenuFoot) menuPart()    {}
 func (MenuRefusal) menuPart() {}
+func (MenuText) menuPart()    {}
 func (Rubric) menuPart()      {}
 func (Input) menuPart()       {}
 func (Range) menuPart()       {}

@@ -502,7 +502,7 @@ func Phone7() Screen {
 								Variant: w.ProseReadTop,
 							},
 							w.DocTasks{
-								Title: w.Rubric{Text: "Что делаем", Variant: w.RubricBottom7},
+								Title: "Что делаем",
 								Items: []w.DocTask{
 									{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 									{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить скриншоты"},
