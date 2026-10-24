@@ -3,6 +3,7 @@ package page_test
 import (
 	"strings"
 	"testing"
+	"time"
 
 	"carrel.dev/typecase/page"
 	w "carrel.dev/typecase/widget"
@@ -109,12 +110,23 @@ func TestZones(t *testing.T) {
 	if !strings.HasPrefix(notice, `<div class="tc-msg">Read from the copy</div><div class="tc-main__diag"><div class="tc-diag">`) {
 		t.Errorf("the notice: %s", notice)
 	}
-	run := w.Runbar{Zone: "run", Stream: "/run/events", Changed: "changed", Ended: "ended", Poll: "/run", Every: 5}.Render()
-	if !strings.Contains(run, `data-tc-zone="run" data-tc-stream="/run/events" data-tc-changed="changed" data-tc-ended="ended" data-tc-poll="/run" data-tc-every="5"`) {
+	run := w.Runbar{Zone: "run", Stream: "/run/events", Changed: "changed", Ended: "ended", Poll: "/run", Every: 5 * time.Second}.Render()
+	if !strings.Contains(run, `data-tc-zone="run" data-tc-stream="/run/events" data-tc-changed="changed" data-tc-ended="ended" data-tc-poll="/run" data-tc-every="5000"`) {
 		t.Errorf("the run's line does not name its stream and poll: %s", run)
 	}
 	nav := w.Nav{Target: "main", Items: []w.NavItem{{Label: "Tasks", Href: "/tasks"}}}.Render()
 	if !strings.Contains(nav, `class="tc-nav" data-tc-target="main"`) {
 		t.Errorf("the nav does not name its target: %s", nav)
+	}
+}
+
+// TestFragmentForms (Carrel's task 226): an answer prints the zone's widget,
+// then the page's forms its buttons name, and the same in each other zone.
+func TestFragmentForms(t *testing.T) {
+	got := page.Fragment{Body: []page.Part{w.Side{Zone: "panel"}}, Forms: []w.PostForm{{ID: "post-del", Action: "/del"}},
+		Extra: []page.ZonePart{{Zone: "queue", Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("q")}}}, Forms: []w.PostForm{{ID: "post-ans", Action: "/ans"}}}}}.Render()
+	side, del, tpl, ans := strings.Index(got, `class="tc-side"`), strings.Index(got, `id="post-del"`), strings.Index(got, `<template data-tc-zone="queue">`), strings.Index(got, `id="post-ans"`)
+	if side < 0 || del < side || tpl < del || ans < tpl || ans > strings.Index(got, `</template>`) {
+		t.Errorf("the forms do not follow their zone's widget: %s", got)
 	}
 }

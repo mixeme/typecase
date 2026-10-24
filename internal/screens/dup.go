@@ -1394,16 +1394,20 @@ func Dup6() Screen {
 							},
 						},
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
-						},
-						Tone: w.MsgAccent,
-					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Strong("Nothing is loaded yet."),
-							w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back."),
+					w.Notices{
+						Items: []w.Msg{
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
+								},
+								Tone: w.MsgAccent,
+							},
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Nothing is loaded yet."),
+									w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back."),
+								},
+							},
 						},
 					},
 					w.MainResults{

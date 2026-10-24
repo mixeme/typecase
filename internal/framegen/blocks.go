@@ -105,6 +105,9 @@ func (g *gen) meter(e *El) string {
 }
 
 func (g *gen) runbar(e *El) string {
+	if e.HasAttr("hidden") && len(e.Els()) == 0 && e.Attr("data-tc-progress") == "" {
+		return "w.Runbar{Closed: true}" // a zone that waits for a run (Carrel's task 226)
+	}
 	f := []string{"Meter: " + g.meter(e.Kid("tc-meter"))}
 	if p := e.Attr("data-tc-progress"); p != "" {
 		f = append(f, "Progress: "+q(p))
@@ -510,12 +513,17 @@ func (g *gen) fields(e *El) string {
 	return s
 }
 
+// notices is the zone of a page's messages (Carrel's task 226).
+func (g *gen) notices(e *El) string {
+	return "w.Notices{Items: []w.Msg{" + g.each(e.Els(), g.msg) + "}}"
+}
+
 // anyblock is the widget a block element is, for a place that takes many.
 func (g *gen) anyblock(k *El) string {
 	table := []struct {
 		c  string
 		fn func(*El) string
-	}{{"tc-msg", g.msg}, {"tc-diag", g.diag}, {"tc-danger", g.danger}, {"tc-meter", g.meter}, {"tc-runbar", g.runbar}, {"tc-queue", g.queue},
+	}{{"tc-msg", g.msg}, {"tc-notices", g.notices}, {"tc-diag", g.diag}, {"tc-danger", g.danger}, {"tc-meter", g.meter}, {"tc-runbar", g.runbar}, {"tc-queue", g.queue},
 		{"tc-stats", g.stats}, {"tc-steps", g.steps}, {"tc-diff", g.diff}, {"tc-empty", g.empty}, {"tc-grid", g.grid}, {"tc-thumb", g.thumb},
 		{"tc-fields", g.fields}, {"tc-sec", g.sec}, {"tc-card", g.card}, {"tc-table", g.table},
 		{"tc-prose", g.prose}, {"tc-list", g.list}, {"tc-tree", g.tree}, {"tc-head", g.head}, {"tc-bar", g.bar}, {"tc-rubric", func(x *El) string { return g.rubric(x, "") }},

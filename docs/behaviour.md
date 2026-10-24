@@ -7,7 +7,7 @@
 нужно. Собрана сценарием из описаний и тестов; при новом виджете или
 поведении — дописать строку.
 
-**Итог.** 98 виджетов с описанием; 54 печатаются в браузерных тестах. У 19
+**Итог.** 99 виджетов с описанием; 55 печатаются в браузерных тестах. У 19
 поведение описано, а своего теста нет: 14 работают без сценария (ссылка,
 форма, `details`), 3 — общим правилом, проверенным на другом виджете, у 2
 описание обещало то, чего в `tc.js` нет (`Filter` — сужение по мере набора,
@@ -66,6 +66,7 @@
 | `Meter` | `tc-meter` | нет. | тест: `TestEditFile`, `TestPasteAndQueue`, `TestRunFollows` |
 | `Mono` | `tc-mono` | нет. | тест: `TestEditFile`, `TestPasteAndQueue` |
 | `Msg` | `tc-msg` | нет. | тест: `TestAppWorker`, `TestPageUnderStrictPolicy`, `TestScriptOnly`, `TestZonePanel` |
+| `Notices` | `tc-notices` | Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает. | тест: `TestZoneAnswerForms` |
 | `Nav` | `tc-nav` | Нажатие открывает раздел; текущий помечен для чтения (aria-current). В рейле из значков (641–1007) повторное нажатие на текущий раздел открывает лист его источников (Opens). | тест: `TestRailReopensSources`, `TestZones` |
 | `Num` | `tc-num` | нет. | — |
 | `Overlay` | `tc-overlay` | Пока лист открыт, фокус не уходит под затемнение. | общим правилом: ловушка фокуса затемнения (`TestZoneSheet`) |
@@ -84,7 +85,7 @@
 | `RailStatus` | `tc-railstatus` | нет. | — |
 | `Range` | `tc-range` | Show применяет диапазон; Enter в поле — то же. С адресом (Action) диапазон — форма GET: From и To уходят полями, Show её отправляет, без сценария. | без сценария (ссылка, форма, `details`) |
 | `Rubric` | `tc-rubric` | нет. | тест: `TestAddRowAndDrop`, `TestConflictForm`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestSearchSuggest`, `TestTemplateShows`, `TestZonePick` |
-| `Runbar` | `tc-runbar` | «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама. | тест: `TestEditFile`, `TestRunFollows` |
+| `Runbar` | `tc-runbar` | «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама; скрытая строка (пустая, ждущая хода или опустевшая по концу) не следит. | тест: `TestEditFile`, `TestRunFollows`, `TestRunHiddenRests` |
 | `Scrim` | `tc-scrim` | Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте. | тест: `TestAddRowAndDrop`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestSideDrop`, `TestZoneSheet` |
 | `Search` | `tc-search` | Ввод ищет; Esc очищает запрос и закрывает подсказки. | тест: `TestSearchSuggest`, `TestShortcuts` |
 | `Sec` | `tc-sec` | нет. | — |

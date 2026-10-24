@@ -1234,6 +1234,7 @@ var _ = add(
 			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true}}}}}, "phone-9", "tc-sheet", 1),
 
 	// tc-scrim
+	overlay("plain", w.Scrim{Closed: true}, "shell-1", "tc-scrim", 1),
 	overlay("pad", w.Scrim{Content: w.Sheet{Icon: "move", Title: "Move contact", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · from nextcloud · Контакты")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Rubric{Text: "Write into"},
 		w.Tree{Rows: []w.TreeRow{

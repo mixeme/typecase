@@ -522,6 +522,29 @@
 		if (!empty && tc.init) tc.init(zone);
 	}
 
+	// The page's forms an answer carries after the widget of its zone
+	// (Carrel's task 226): a button outside a form names its form by ID, and
+	// the page prints such forms after its root. Each takes the place of the
+	// page's form of the same ID, or joins the end of the page.
+	function forms(content) {
+		var out = [];
+		Array.prototype.forEach.call(content.children, function (f) {
+			if (f.tagName === "FORM" && f.id && f.classList.contains("tc-post") && f.previousElementSibling) out.push(f);
+		});
+		out.forEach(function (f) {
+			content.removeChild(f);
+		});
+		return out;
+	}
+
+	function place(list) {
+		list.forEach(function (f) {
+			var old = document.getElementById(f.id);
+			if (old && old.tagName === "FORM") old.parentNode.replaceChild(f, old);
+			else document.body.appendChild(f);
+		});
+	}
+
 	function put(target, html) {
 		var zone = zoneOf(target);
 		if (!zone) return false;
@@ -534,11 +557,15 @@
 		extra.forEach(function (t) {
 			box.content.removeChild(t);
 		});
+		var posts = forms(box.content);
 		fill(zone, box.content);
 		extra.forEach(function (t) {
 			var z = zoneOf(t.getAttribute("data-tc-zone"));
-			if (z) fill(z, t.content);
+			if (!z) return;
+			posts = posts.concat(forms(t.content));
+			fill(z, t.content);
 		});
+		place(posts);
 		if (tc.layoutUpdates) tc.layoutUpdates();
 		follow();
 		return true;
@@ -627,16 +654,17 @@
 	// event carries a fragment, put as an answer is; on the event that ends
 	// the run the stream is closed. With no stream, or one that refused or
 	// broke, the line's poll address (data-tc-poll) is asked every
-	// data-tc-every seconds for as long as the line that comes back names
-	// one and is shown. One run is followed once, whatever comes to replace
-	// its line.
+	// data-tc-every milliseconds for as long as the line that comes back
+	// names one and is shown. One run is followed once, whatever comes to
+	// replace its line. A hidden line — empty, waiting for a run, or emptied
+	// by the event that ended it — is not followed (Carrel's task 226).
 	var runs = {};
 
 	function poll(name) {
 		var bar = zoneOf(name);
 		var url = bar && !bar.hidden && bar.getAttribute("data-tc-poll");
 		if (!url || runs[name]) return;
-		var every = (parseFloat(bar.getAttribute("data-tc-every")) || 5) * 1000;
+		var every = parseFloat(bar.getAttribute("data-tc-every")) || 5000;
 		runs[name] = {
 			timer: setTimeout(function () {
 				var again = function () {
@@ -651,7 +679,7 @@
 	function follow() {
 		Array.prototype.forEach.call(document.querySelectorAll(".tc-runbar[data-tc-zone]"), function (bar) {
 			var name = bar.getAttribute("data-tc-zone"), stream = bar.getAttribute("data-tc-stream");
-			if (runs[name]) return;
+			if (runs[name] || bar.hidden) return;
 			if (!stream || !window.EventSource) {
 				poll(name);
 				return;

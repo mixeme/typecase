@@ -449,6 +449,9 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-runbar .tc-meter{width:64px;height:3px;border-radius:2px;background:var(--tc-edge);overflow:hidden;flex:none}
 .tc-runbar .tc-meter__bar{display:block;height:100%;background:var(--tc-accent)}
 /* Отступ у баннера с обеих сторон. */
+/* Полоса сообщений — зона живого слоя без своего вида: отступы у сообщений (Notices, задача Carrel 226). */
+.tc-notices{display:contents}
+.tc-notices[hidden]{display:none}
 .tc-msg{display:block;padding:9px 12px;margin:12px var(--tc-page-gutter);font-size:12.5px;line-height:1.5;
   background:var(--tc-card);border-left:2px solid var(--tc-edge);border-radius:0 3px 3px 0}
 .tc-msg.is-row{display:flex;gap:9px;align-items:flex-start}
@@ -557,6 +560,8 @@ label.tc-tree__row{cursor:pointer}
 /* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */
 /* Лист открывается и по адресу (#id) — без сценариев: ссылка на него, крестик — ссылка «#». */
 .tc-scrim[hidden]{display:none}
+/* Место листа над всей оболочкой (Shell.Sheet, задача Carrel 226): затемнение ложится на полосу, рейл и страницу. */
+.tc-shell:has(> .tc-scrim){position:relative}
 .tc-scrim[hidden]:target{display:flex}
 .tc-scrim{position:absolute;inset:0;z-index:7;background:rgba(23,33,28,.22);display:flex;align-items:flex-start;justify-content:center;padding-top:44px}
 [data-tc-theme="dark"] .tc-scrim{background:rgba(0,0,0,.42)}

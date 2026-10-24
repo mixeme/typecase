@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`Runbar.Every` is a `time.Duration`**, printed in milliseconds
+  (`data-tc-every`): a poll every 1500 ms can be said (Carrel's task 226).
 - **`DocTasks.Title` is a string** drawn as the document's heading
   (`.tc-doc__heading`), not a `Rubric`: a note's Markdown heading is the
   author's text, not the interface's rubric (Carrel's task 196).
@@ -108,6 +110,19 @@ do, not what the authors did.
 
 ### Added
 
+- **The live layer for Carrel's zones** (Carrel's task 226):
+  - an answer carries the page's forms after its zone's widget
+    (`page.Fragment.Forms`, `ZonePart.Forms`): the widget takes the zone's
+    place whole, each `tc-post` form takes the place of the page's form of
+    the same ID or joins the end of the page;
+  - `Runbar.Closed` — an empty, hidden line that waits for a run; a hidden
+    line is not followed, so a line emptied by the event that ends its run
+    no longer opens its stream again;
+  - `Notices` — the zone of a page's messages in `Main`, without a look of
+    its own (`.tc-notices{display:contents}`), hidden when empty;
+  - `Shell.Sheet` — the place of a sheet over the whole shell (the top
+    bar, the rail and the page dimmed, as `Overlay`), closed until an
+    answer fills it.
 - `DocRef.From`, `DocAttach.From` — the copy a line of a document's side
   column comes from, on a linked record (Р-78; Carrel's task 230).
 - `MenuText` — a menu row that only says something, a name over a line

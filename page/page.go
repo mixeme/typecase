@@ -176,14 +176,20 @@ func (p Printed) Render() string { return string(p) }
 // else becomes the zone's content. An empty Body empties the zone: a panel
 // or a sheet closes.
 type Fragment struct {
-	Body  []Part
+	Body []Part
+	// Forms are the page's forms the zone's buttons outside a form name by
+	// ID (Button.Form), printed after the zone's widget: the live layer puts
+	// each in place of the page's form of the same ID, or at the end of the
+	// page (Carrel's task 226).
+	Forms []widget.PostForm
 	Extra []ZonePart
 }
 
 // ZonePart is one more zone of an answer and what goes into it.
 type ZonePart struct {
-	Zone string
-	Body []Part
+	Zone  string
+	Body  []Part
+	Forms []widget.PostForm // as Fragment.Forms
 }
 
 // Render prints the answer: the body, then each other zone in a template
@@ -193,9 +199,15 @@ func (f Fragment) Render() string {
 	for _, p := range f.Body {
 		b.WriteString(p.Render())
 	}
+	for _, p := range f.Forms {
+		b.WriteString(p.Render())
+	}
 	for _, z := range f.Extra {
 		b.WriteString(`<template data-tc-zone="` + html.EscapeString(z.Zone) + `">`)
 		for _, p := range z.Body {
+			b.WriteString(p.Render())
+		}
+		for _, p := range z.Forms {
 			b.WriteString(p.Render())
 		}
 		b.WriteString(`</template>`)

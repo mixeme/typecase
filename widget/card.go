@@ -473,6 +473,7 @@ func (Empty) mainPart()       {}
 func (Fields) mainPart()      {}
 func (Grid) mainPart()        {}
 func (Msg) mainPart()         {}
+func (Notices) mainPart()     {}
 func (Pad) mainPart()         {}
 func (Queue) mainPart()       {}
 func (Runbar) mainPart()      {}

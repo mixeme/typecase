@@ -326,7 +326,7 @@ func (ShellBody) shellContent() {}
 // Shell — tc-shell
 //
 // Роль. Оболочка приложения: верхняя полоса, рейл, страница, панель — корень экрана.
-// Вход. Shell{Top, Body}.
+// Вход. Shell{Top, Body, Sheet}.
 // Состояния. plain | side | no-rail | no-top | icons | zone | overlay.
 // Инварианты. Зон четыре, и каждая на своём месте: полоса сверху, рейл слева, страница, панель справа; как оболочка ведёт себя на узком экране, решает CSS (--tc-shell-mode); оболочка печатает фрагмент своего кадра.
 // Поведение. На узком экране рейл становится ящиком, панель — листом поверх страницы.
@@ -336,6 +336,11 @@ func (ShellBody) shellContent() {}
 type Shell struct {
 	Top  *Top
 	Body ShellContent
+	// Sheet is the place of a sheet over the whole shell — the top bar, the
+	// rail and the page dimmed, as an Overlay draws them: the zone a link
+	// opening a sheet puts its answer in (Carrel's task 226). Closed, it
+	// waits hidden.
+	Sheet *Scrim
 }
 
 // Render prints the shell.
@@ -348,6 +353,9 @@ func (s Shell) html(m mix) string {
 	}
 	if s.Body != nil {
 		out += s.Body.html(nil)
+	}
+	if s.Sheet != nil {
+		out += s.Sheet.html(nil)
 	}
 	return out + `</div>`
 }

@@ -48,5 +48,6 @@ func Shell1() Screen {
 			},
 			Height: w.ShellHeight230,
 		},
+		Sheet: &w.Scrim{Closed: true},
 	}
 }

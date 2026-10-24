@@ -197,6 +197,8 @@ func (g *gen) main(e *El) string {
 		switch {
 		case k.Has("tc-list__group"):
 			items = append(items, g.listGroup(k))
+		case k.Has("tc-notices"):
+			items = append(items, g.notices(k))
 		case k.Has("tc-field__hint--gutter"):
 			items = append(items, "w.MainHint{Text: "+q(k.Text())+"}")
 		case k.Has("tc-nav--bottom"):
@@ -1213,6 +1215,9 @@ func (g *gen) sheet(e *El) string {
 }
 
 func (g *gen) scrim(e *El) string {
+	if e.HasAttr("hidden") && len(e.Els()) == 0 {
+		return "w.Scrim{Closed: true}" // a place that waits for a sheet (Carrel's task 226)
+	}
 	s := e.Kid("tc-sheet")
 	if s == nil {
 		pad := ""
@@ -1605,6 +1610,9 @@ func (g *gen) shell(e *El) string {
 		return "w.Shell{" + join(f, ", ") + "}"
 	}
 	f = append(f, "Body: "+g.body(e.Kid("tc-shell__body")))
+	if c := e.Kid("tc-scrim"); c != nil && c.HasAttr("hidden") && len(c.Els()) == 0 {
+		f = append(f, "Sheet: &w.Scrim{Closed: true}") // the place of a sheet over the shell (Carrel's task 226)
+	}
 	return "w.Shell{" + join(f, ", ") + "}"
 }
 

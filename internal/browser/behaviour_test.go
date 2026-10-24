@@ -2218,7 +2218,7 @@ func TestRunFollows(t *testing.T) {
 	h := browser.NewHarness(t)
 	bar := func(text, stream, poll string) w.Runbar {
 		return w.Runbar{Zone: "run", Meter: w.Meter{Percent: 50, Track: 100}, Parts: []w.RunbarPart{w.Text(text)},
-			Stream: stream, Changed: "changed", Ended: "ended", Poll: poll, Every: 1}
+			Stream: stream, Changed: "changed", Ended: "ended", Poll: poll, Every: time.Second}
 	}
 	frag := func(b w.Runbar) string {
 		return strings.ReplaceAll(page.Fragment{Body: []page.Part{b}}.Render(), "\n", " ")
@@ -2309,6 +2309,86 @@ func TestRunFollows(t *testing.T) {
 	}
 	if got != "0 of 6" {
 		t.Errorf("without the layer: the line says %q; want 0 of 6", got)
+	}
+}
+
+// TestRunHiddenRests (Carrel's task 226): a run's line emptied by the event
+// that ends the run is hidden and keeps its stream's address; it is not
+// followed again — the stream is opened once, not after every end. A line
+// that asks its poll every 300 ms asks it in 300 ms: the interval is in
+// milliseconds. The bites: the old layer opened the stream again on each end,
+// and read 300 as seconds.
+func TestRunHiddenRests(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	frag := func(b w.Runbar) string {
+		return strings.ReplaceAll(page.Fragment{Body: []page.Part{b}}.Render(), "\n", " ")
+	}
+	var opened int32
+	stream := h.RegisterStream("run-ends-empty", func(rw http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&opened, 1)
+		rw.Header().Set("Content-Type", "text/event-stream")
+		fmt.Fprintf(rw, "event: ended\ndata: \n\n")
+		rw.(http.Flusher).Flush()
+	})
+	bar := w.Runbar{Zone: "run", Meter: w.Meter{Percent: 50, Track: 100}, Parts: []w.RunbarPart{w.Text("0 of 6")}, Stream: stream, Changed: "changed", Ended: "ended"}
+	const state = `(() => { const b = document.querySelector(".tc-runbar"); return (b.hidden ? "hidden" : "shown") + " " + JSON.stringify(b.textContent.trim()) })()`
+	var got string
+	if err := h.Run(h.RegisterPage("run-ends-empty-page", browser.PageHTML(`<div class="tc-root">`+bar.Render()+`</div>`, "")), 900, 400,
+		chromedp.Sleep(2600*time.Millisecond), chromedp.Evaluate(state, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != `hidden ""` || atomic.LoadInt32(&opened) != 1 {
+		t.Errorf("a line emptied by the end: %s after %d openings; want hidden and empty after one", got, opened)
+	}
+
+	poll := h.RegisterPage("run-fast-poll", frag(w.Runbar{Zone: "run", Meter: w.Meter{Percent: 100, Track: 100}, Parts: []w.RunbarPart{w.Text("fast")}}))
+	fast := w.Runbar{Zone: "run", Meter: w.Meter{Percent: 10, Track: 100}, Parts: []w.RunbarPart{w.Text("0 of 6")}, Poll: poll, Every: 300 * time.Millisecond}
+	if !strings.Contains(fast.Render(), `data-tc-every="300"`) {
+		t.Fatalf("the interval is not printed in milliseconds: %s", fast.Render())
+	}
+	if err := h.Run(h.RegisterPage("run-fast-page", browser.PageHTML(`<div class="tc-root">`+fast.Render()+`</div>`, "")), 900, 400,
+		chromedp.Sleep(1800*time.Millisecond), chromedp.Evaluate(state, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got != `shown "fast"` {
+		t.Errorf("a poll every 300 ms: %s after 1.8 s; want the answer of the poll", got)
+	}
+}
+
+// TestZoneAnswerForms (Carrel's task 226): an answer is the zone's widget and,
+// after it, the page's forms its buttons name by ID. The widget takes the
+// zone's place whole — a panel is not put inside the panel; a form takes the
+// place of the page's form of the same ID, a new one joins the end of the
+// page. The zone of messages (Notices) waits hidden and shows the messages
+// that come. The bite: the old layer put all of it into the zone, the panel
+// in the panel and a second form of the same ID.
+func TestZoneAnswerForms(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	side := func(title, form string) w.Side {
+		return w.Side{Zone: "panel", Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: title}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Delete", Form: form}}}}}}
+	}
+	part := h.RegisterPage("forms-part", page.Fragment{Body: []page.Part{side("Новая", "post-del")},
+		Forms: []w.PostForm{{ID: "post-del", Action: "/new-delete"}, {ID: "post-move", Action: "/move"}},
+		Extra: []page.ZonePart{{Zone: "notices", Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("Read from the copy")}}}}}}.Render())
+	body := `<div class="tc-root">` + w.Notices{Zone: "notices"}.Render() + w.Button{Label: "Open", Href: part, Target: "panel"}.Render() + side("Старая", "post-del").Render() + `</div>` +
+		w.PostForm{ID: "post-del", Action: "/old-delete"}.Render()
+	doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`, `data-tc-noscript data-tc-target-header="X-Target">`, 1)
+	var got string
+	if err := h.Run(h.RegisterPage("forms-page", doc), 900, 500,
+		chromedp.Click(`a.tc-btn`, chromedp.ByQuery),
+		chromedp.Sleep(1200*time.Millisecond),
+		chromedp.Evaluate(`[document.querySelectorAll(".tc-side").length, document.querySelector(".tc-side .tc-head__title").textContent,
+			document.querySelectorAll("#post-del").length, new URL(document.getElementById("post-del").action).pathname,
+			document.getElementById("post-move") ? "move" : "no move", document.querySelector(".tc-side form") ? "a form in the panel" : "no form in the panel",
+			(document.querySelector(".tc-notices").hidden ? "notices hidden" : "notices: " + document.querySelector(".tc-notices").textContent.trim())].join(" | ")`, &got),
+	); err != nil {
+		t.Fatal(err)
+	}
+	const want = "1 | Новая | 1 | /new-delete | move | no form in the panel | notices: Read from the copy"
+	if got != want {
+		t.Errorf("after the answer: %s; want %s", got, want)
 	}
 }
 

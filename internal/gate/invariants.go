@@ -13,6 +13,7 @@ var invariantBindings = map[string][]string{
 	"Danger":       {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"Meter":        {"gate:typed-input", "gate:widget-fragments"},
 	"Runbar":       {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
+	"Notices":      {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"Queue":        {"gate:widget-fragments", "gate:widget-fragments", "gate:widget-fragments"},
 	"Stat":         {"gate:typed-input", "gate:widget-fragments"},
 	"Stats":        {"gate:css-from-mockup", "gate:widget-fragments"},
