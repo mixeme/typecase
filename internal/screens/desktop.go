@@ -194,7 +194,7 @@ func Desktop1() Screen {
 							w.Rubric{Text: "Attachments"},
 							w.SecOpen{
 								Items: []w.SecOpenPart{
-									w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}},
+									w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3.1 KB")}}},
 									w.Line{
 										Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}},
 										Gap:   w.LineGap6,
@@ -1060,7 +1060,11 @@ func Desktop16() Screen {
 				Columns: true,
 			},
 			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "release-checklist.md"}, w.PrintNum{Text: "3 KB"}, w.PrintNum{Text: "2026-08-09"}},
+				Items: []w.PrintRowPart{
+					w.PrintCell{Name: "release-checklist.md"},
+					w.PrintNum{Text: "3.1 KB"},
+					w.PrintNum{Text: "2026-08-09"},
+				},
 				Columns: true,
 			},
 			w.PrintRow{

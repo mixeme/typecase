@@ -37,7 +37,7 @@ func Io1() Screen {
 								Kind:   w.TickRowAll,
 								Mark:   w.Mark{Kind: w.MarkMulti},
 								Label:  "Combined address book",
-								Meta:   "7",
+								Meta:   "9",
 							},
 						},
 					},
@@ -45,13 +45,13 @@ func Io1() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 						},
 					},
 					w.RailFoot{
@@ -378,7 +378,7 @@ func Io2() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -1249,7 +1249,7 @@ func Io4() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1957,7 +1957,7 @@ func Io8() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},

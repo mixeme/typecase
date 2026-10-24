@@ -349,7 +349,7 @@ func States4() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
-							Meta:   "7",
+							Meta:   "9",
 						},
 					},
 				},
@@ -357,7 +357,7 @@ func States4() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
@@ -366,7 +366,7 @@ func States4() Screen {
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#6B4E7A"},
 							Label:   "Команда",
-							Meta:    "1",
+							Meta:    "2",
 							Current: true,
 							Trail:   w.Badge{Label: "ro"},
 						},
@@ -1120,7 +1120,7 @@ func States17() Screen {
 												Face: w.FaceLarge,
 												Items: []w.LinePart{
 													w.Text("release-checklist.md "),
-													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 													w.Text(" "),
 													w.Badge{Label: "in the event"},
 												},
@@ -1472,7 +1472,7 @@ func States36() Screen {
 												Face: w.FaceLarge,
 												Items: []w.LinePart{
 													w.Text("release-checklist.md "),
-													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 													w.Text(" "),
 													w.Badge{Label: "in the event"},
 												},
@@ -1590,7 +1590,7 @@ func States7() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2", Hidden: true},
 					},
 				},
 				w.RailSec{
@@ -1600,7 +1600,7 @@ func States7() Screen {
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Команда",
-							Meta:   "1",
+							Meta:   "2",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -1685,7 +1685,7 @@ func States8() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
@@ -1778,22 +1778,25 @@ func States8() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АК"},
-								Title:    []w.Inline{w.Text("Анна Ковалёва")},
-								Subtitle: "+7 912 445-10-88",
-								Detail:   "a.kovaleva@example.org",
-								Caption:  "Издательство «Слово»",
-								Source:   "nextcloud · Контакты",
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Avatar:     w.Avatar{Initials: "АК"},
+								Title:      []w.Inline{w.Text("Анна Ковалёва")},
+								TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+								Subtitle:   "+7 912 445-10-88",
+								Detail:     "a.kovaleva@example.org",
+								Caption:    "Издательство «Слово»",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Контакты, nextcloud · Архив",
 							},
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АБ"},
-								Title:    []w.Inline{w.Text("Артём Белов")},
-								Subtitle: "+7 903 118-22-04",
-								Detail:   "a.belov@example.org",
-								Caption:  "—",
-								Source:   "nextcloud · Контакты",
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Avatar:     w.Avatar{Initials: "АБ"},
+								Title:      []w.Inline{w.Text("Артём Белов")},
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+								Subtitle:   "+7 903 118-22-04",
+								Detail:     "a.belov@example.org",
+								Caption:    "Тензор",
+								Source:     "nextcloud · Контакты",
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
@@ -1881,7 +1884,7 @@ func States9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "6",
+							Meta:    "7",
 							Current: true,
 						},
 					},
@@ -1890,7 +1893,7 @@ func States9() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
@@ -2001,22 +2004,25 @@ func States9() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АК"},
-								Title:    []w.Inline{w.Text("Анна Ковалёва")},
-								Subtitle: "+7 912 445-10-88",
-								Detail:   "a.kovaleva@example.org",
-								Caption:  "Издательство «Слово»",
-								Source:   "nextcloud · Контакты",
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Avatar:     w.Avatar{Initials: "АК"},
+								Title:      []w.Inline{w.Text("Анна Ковалёва")},
+								TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
+								Subtitle:   "+7 912 445-10-88",
+								Detail:     "a.kovaleva@example.org",
+								Caption:    "Издательство «Слово»",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Контакты, nextcloud · Архив",
 							},
 							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АБ"},
-								Title:    []w.Inline{w.Text("Артём Белов")},
-								Subtitle: "+7 903 118-22-04",
-								Detail:   "a.belov@example.org",
-								Caption:  "—",
-								Source:   "nextcloud · Контакты",
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Avatar:     w.Avatar{Initials: "АБ"},
+								Title:      []w.Inline{w.Text("Артём Белов")},
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+								Subtitle:   "+7 903 118-22-04",
+								Detail:     "a.belov@example.org",
+								Caption:    "Тензор",
+								Source:     "nextcloud · Контакты",
 							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#4A6B52"},
@@ -2110,7 +2116,7 @@ func States10() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
-							Meta:   "7",
+							Meta:   "9",
 						},
 					},
 				},
@@ -2118,13 +2124,13 @@ func States10() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 						w.TickRow{
 							Ticked:  w.TickedOff,
 							Mark:    w.Mark{Colour: "#8C6239"},
@@ -2211,7 +2217,7 @@ func States11() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
-							Meta:   "2",
+							Meta:   "4",
 						},
 					},
 				},
@@ -2219,13 +2225,13 @@ func States11() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 					},
 				},
@@ -4181,7 +4187,7 @@ func States25() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3", Hidden: true},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -4730,7 +4736,7 @@ func States30() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#3F6E8C"},
 							Label:   "Общие с семьёй",
@@ -4841,7 +4847,7 @@ func States31() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},

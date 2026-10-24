@@ -1127,8 +1127,15 @@ func (g *gen) docmeta(e *El) string {
 					} else {
 						s += "Name: " + q(it.Kid("tc-dim--accent").Text())
 					}
-					if d := it.Kid("tc-dim"); d != nil {
-						s += ", What: " + dimText(d.Text())
+					for _, d := range it.Els() {
+						if !d.Has("tc-dim") {
+							continue
+						}
+						if d.Kid("tc-mark") != nil {
+							s += ", From: &" + g.dimx(d) // the copy it comes from (Р-78)
+						} else {
+							s += ", What: " + dimText(d.Text())
+						}
 					}
 					refs = append(refs, s+"}")
 				}
@@ -1391,6 +1398,11 @@ func (g *gen) docAttach(x *El) string {
 	s := "w.DocAttach{Name: " + q(name) + ", Size: " + dimText(x.Kid("tc-dim").Text())
 	if b := x.Kid("tc-badge"); b != nil {
 		s += ", Where: " + g.badge(b)
+	}
+	for _, d := range x.Els() {
+		if d.Has("tc-dim") && d.Kid("tc-mark") != nil {
+			s += ", From: &" + g.dimx(d) // the copy it comes from (Р-78)
+		}
 	}
 	if b := x.Kid("tc-btn"); b != nil {
 		s += ", Remove: &" + g.button(b)

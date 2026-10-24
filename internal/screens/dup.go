@@ -43,7 +43,7 @@ func Dup1() Screen {
 						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -138,8 +138,14 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Name: "choice.FN", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("Вера Лебедева")}},
-															w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Лебедева Вера")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.FN",
+																Value: "1",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Вера Лебедева · Архив")},
+															},
+															w.Check{Name: "choice.FN", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Лебедева Вера · Контакты")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -151,8 +157,14 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("—")}},
-															w.Check{On: true, Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Библиотека №4")}},
+															w.Check{Name: "choice.ORG", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.ORG",
+																Value: "2",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Библиотека №4 · Контакты")},
+															},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -164,8 +176,19 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Name: "choice.EMAIL", Value: "1", Parts: []w.CheckPart{w.Text("vera@example.net")}},
-															w.Check{On: true, Name: "choice.EMAIL", Value: "2", Parts: []w.CheckPart{w.Text("v.lebedeva@example.org")}},
+															w.Check{On: true, Name: "choice.EMAIL", Value: "1", Parts: []w.CheckPart{w.Text("vera@example.net · Архив")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.EMAIL",
+																Value: "2",
+																Parts: []w.CheckPart{w.Text("vera.l@work.example · Архив")},
+															},
+															w.Check{
+																On:    true,
+																Name:  "choice.EMAIL",
+																Value: "3",
+																Parts: []w.CheckPart{w.Text("v.lebedeva@example.org · Контакты")},
+															},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -285,7 +308,7 @@ func Dup1() Screen {
 												Text: "",
 												Items: []w.RubricAsidePart{
 													w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
-													w.Mono{Text: "140 points · same phone, same email, same name", Variant: w.MonoTightDusty},
+													w.Mono{Text: "220 points · same UID, same phone, same email, same name", Variant: w.MonoTightDusty},
 												},
 											},
 										},
@@ -318,7 +341,7 @@ func Dup1() Screen {
 												Title:    []w.Inline{w.Text("Анна Ковалёва")},
 												Subtitle: "+7 912 445-10-88",
 												Detail:   "a.kovaleva@example.org",
-												Caption:  "—",
+												Caption:  "Издательство «Слово»",
 												Source:   "nextcloud · Архив",
 												Inset:    true,
 											},
@@ -353,6 +376,80 @@ func Dup1() Screen {
 																Value: "1",
 																Parts: []w.CheckPart{w.Text("anna.kovaleva@slovo.example · Контакты")},
 															},
+														},
+														Gap:   w.LineGap12,
+														Block: true,
+													},
+												},
+											},
+											w.Field{
+												Label: "Title",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Check{
+																On:    true,
+																Name:  "choice.TITLE",
+																Value: "1",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Выпускающий редактор · Контакты")},
+															},
+															w.Check{Name: "choice.TITLE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Команда, Архив")}},
+														},
+														Gap:   w.LineGap12,
+														Block: true,
+													},
+												},
+											},
+											w.Field{
+												Label: "Address · work",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Check{
+																On:    true,
+																Name:  "choice.ADR",
+																Value: "1",
+																Parts: []w.CheckPart{w.Text("Москва, Тверская 12, стр. 3 · Контакты")},
+															},
+														},
+														Gap:   w.LineGap12,
+														Block: true,
+													},
+												},
+											},
+											w.Field{
+												Label: "Birthday",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Check{
+																On:    true,
+																Name:  "choice.BDAY",
+																Value: "1",
+																Radio: true,
+																Parts: []w.CheckPart{w.Mono{Text: "1987-03-14"}, w.Text(" · Контакты")},
+															},
+															w.Check{Name: "choice.BDAY", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Команда, Архив")}},
+														},
+														Gap:   w.LineGap12,
+														Block: true,
+													},
+												},
+											},
+											w.Field{
+												Label: "Note",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Check{
+																On:    true,
+																Name:  "choice.NOTE",
+																Value: "1",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Пишет по вторникам… · Контакты")},
+															},
+															w.Check{Name: "choice.NOTE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Команда, Архив")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -400,7 +497,7 @@ func Dup1() Screen {
 												Title:    []w.Inline{w.Text("Артём Белов")},
 												Subtitle: "+7 903 118-22-04",
 												Detail:   "a.belov@example.org",
-												Caption:  "—",
+												Caption:  "Тензор",
 												Source:   "nextcloud · Контакты",
 												Inset:    true,
 											},
@@ -421,6 +518,25 @@ func Dup1() Screen {
 										Kind: w.CardTop11,
 										Gap:  22,
 										Items: []w.CardRowPart{
+											w.Field{
+												Label: "Title",
+												Parts: []w.FieldPart{
+													w.Line{
+														Items: []w.LinePart{
+															w.Check{Name: "choice.TITLE", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("— · Контакты")}},
+															w.Check{
+																On:    true,
+																Name:  "choice.TITLE",
+																Value: "2",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Ведущий инженер · Команда")},
+															},
+														},
+														Gap:   w.LineGap12,
+														Block: true,
+													},
+												},
+											},
 											w.Field{
 												Label: "Photo",
 												Parts: []w.FieldPart{
@@ -468,7 +584,7 @@ func Dup1() Screen {
 												Text: "",
 												Items: []w.RubricAsidePart{
 													w.Badge{Label: "linked ×3", Tone: w.BadgeLinked},
-													w.Mono{Text: "70 points · same title, same date", Variant: w.MonoTightDusty},
+													w.Mono{Text: "70 points · same title, same start", Variant: w.MonoTightDusty},
 												},
 											},
 										},
@@ -543,9 +659,14 @@ func Dup1() Screen {
 																Name:  "choice.LOCATION",
 																Value: "1",
 																Radio: true,
-																Parts: []w.CheckPart{w.Text("Переговорная 2")},
+																Parts: []w.CheckPart{w.Text("Переговорная 2 · Личный, Проекты")},
 															},
-															w.Check{Name: "choice.LOCATION", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("Переговорная 3")}},
+															w.Check{
+																Name:  "choice.LOCATION",
+																Value: "2",
+																Radio: true,
+																Parts: []w.CheckPart{w.Text("Переговорная 3 · Общий")},
+															},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -639,7 +760,7 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{Name: "choice.PRIORITY", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("— · Дела")}},
+															w.Check{Name: "choice.PRIORITY", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("5 · Дела")}},
 															w.Check{
 																On:    true,
 																Name:  "choice.PRIORITY",
@@ -738,7 +859,7 @@ func Dup1() Screen {
 												Parts: []w.FieldPart{
 													w.Line{
 														Items: []w.LinePart{
-															w.Check{On: true, Name: "choice.CATEGORIES", Value: "1", Parts: []w.CheckPart{w.Text("релиз · Дневник")}},
+															w.Check{On: true, Name: "choice.CATEGORIES", Value: "1", Parts: []w.CheckPart{w.Text("релиз · Записи")}},
 														},
 														Gap:   w.LineGap12,
 														Block: true,
@@ -919,7 +1040,7 @@ func Dup2() Screen {
 						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -1029,7 +1150,7 @@ func Dup4() Screen {
 						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -1149,7 +1270,7 @@ func Dup5() Screen {
 						w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 					},
 				},
 				w.RailFoot{
@@ -1208,7 +1329,12 @@ func Dup6() Screen {
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
 				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
-				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.Button{
+					Label: "Refresh",
+					Icon:  "refresh",
+					Title: "Nothing is loaded yet: open a list first.",
+					State: w.ButtonDisabled,
+				},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -1282,7 +1408,7 @@ func Dup6() Screen {
 					},
 					w.MainResults{
 						Items: []w.ResultsPart{
-							w.Rubric{Text: "Decided earlier", Items: []w.RubricPart{w.Mono{Text: "2", Variant: w.MonoTight}}},
+							w.Rubric{Text: "Decided earlier", Items: []w.RubricPart{w.Mono{Text: "3", Variant: w.MonoTight}}},
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
@@ -1312,6 +1438,36 @@ func Dup6() Screen {
 								},
 								Action: "/app/duplicates/decide",
 								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "group", Value: "g3"}},
+							},
+							w.Card{
+								Items: []w.CardPart{
+									w.Rubric{
+										Text: "Артём Белов",
+										Items: []w.RubricPart{
+											w.RubricAside{
+												Text: "",
+												Items: []w.RubricAsidePart{
+													w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+													w.Mono{Text: "Not loaded in this session", Variant: w.MonoTightDusty},
+												},
+											},
+										},
+									},
+									w.CardText{
+										Kind: w.CardLine,
+										Parts: []w.CardTextPart{
+											w.Text("nextcloud · Контакты, radicale · vps · Команда "),
+											w.Dim{Parts: []w.Inline{w.Text("· UID c3f7-8a21-1b09, d41a-6f30-92be")}},
+										},
+									},
+									w.CardRow{
+										Kind:  w.CardActs,
+										Gap:   8,
+										Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true}},
+									},
+								},
+								Action: "/app/duplicates/decide",
+								Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "group", Value: "g4"}},
 							},
 							w.Card{
 								Items: []w.CardPart{

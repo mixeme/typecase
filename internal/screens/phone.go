@@ -444,7 +444,7 @@ func Phone6() Screen {
 								Pick:    &w.TickBox{Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 								Icon:    "doc",
 								Title:   "release-checklist.md",
-								Sub:     []w.Inline{w.Text("3 KB · text/markdown")},
+								Sub:     []w.Inline{w.Text("3.1 KB · text/markdown")},
 								SubMono: true,
 								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
 								On:      true,
@@ -564,7 +564,7 @@ func Phone8() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "4",
+							Meta:    "5",
 							Current: true,
 						},
 					},
@@ -573,7 +573,7 @@ func Phone8() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -689,7 +689,7 @@ func Phone9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "4",
+							Meta:    "5",
 							Current: true,
 						},
 					},
@@ -698,7 +698,7 @@ func Phone9() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -773,7 +773,7 @@ func Phone9() Screen {
 											Kind:    w.TickRowAll,
 											Mark:    w.Mark{Kind: w.MarkMulti},
 											Label:   "Combined notebook",
-											Meta:    "4",
+											Meta:    "5",
 											Current: true,
 										},
 									},
@@ -782,7 +782,7 @@ func Phone9() Screen {
 									Items: []w.RailSecPart{
 										w.Rubric{Text: "nextcloud"},
 										w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+										w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 										w.TickRow{
 											Ticked: w.TickedOff,
 											Mark:   w.Mark{Colour: "#3F6E8C"},

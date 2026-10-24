@@ -378,7 +378,7 @@ func Agenda1() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -723,7 +723,7 @@ func Agenda27() Screen {
 													Face: w.FaceLarge,
 													Items: []w.LinePart{
 														w.Text("release-checklist.md "),
-														w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+														w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 														w.Text(" "),
 														w.Badge{Label: "in the event"},
 													},
@@ -1010,7 +1010,7 @@ func Agenda28() Screen {
 										[]w.SecItemPart{
 											w.Link{Text: "release-checklist.md", Href: "#"},
 											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 											w.Text(" "),
 											w.Badge{Label: "in the event"},
 										},
@@ -1648,7 +1648,7 @@ func Agenda2() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -2019,7 +2019,7 @@ func Agenda3() Screen {
 												Face: w.FaceLarge,
 												Items: []w.LinePart{
 													w.Text("release-checklist.md "),
-													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 													w.Text(" "),
 													w.Badge{Label: "in the event"},
 												},

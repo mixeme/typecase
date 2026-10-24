@@ -32,7 +32,9 @@ var _ = add(
 		w.DocNote{Parts: []w.Inline{w.Text("2 attached files are not published.")}}}}, "s-publish-23", "tc-doc", 1),
 	document("read", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
-		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead}}}, "s-notes-32", "tc-doc", 1),
+		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
+		w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, "s-notes-32", "tc-doc", 1),
 	document("edit", w.Doc{Items: []w.DocPart{
 		w.Area{Text: "", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"},
 		w.DocFields{Items: []w.Field{w.Field{Label: "Date", Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "dtstart.date", Value: "2026-08-10", Label: "Date", Mono: true}}, Width: w.FieldFix150}, w.Field{Label: "Time", Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "dtstart.time", Value: "11:05", Label: "Time", Mono: true}}, Width: w.FieldFix130}, w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Name: "categories", Placeholder: "—", Label: "Tags"}}, Width: w.FieldFlex3_320}, w.Field{Label: "Link", Parts: []w.FieldPart{w.Input{Name: "url", Placeholder: "optional", Label: "Link"}}, Width: w.FieldFlex2_280}, w.Field{Label: "Related to", Parts: []w.FieldPart{w.TagInput{Parts: []w.TagInputPart{}, Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"}}}, Width: w.FieldFlex3_340}}},

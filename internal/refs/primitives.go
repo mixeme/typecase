@@ -170,7 +170,7 @@ var _ = add(
 	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
 
 	// tc-dim
-	primitive("mark", w.Dim{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Команда")}}, "s-contacts-1", "tc-dim", 1),
+	primitive("mark", w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}, "s-contacts-1", "tc-dim", 1),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, "s-backup-12", "tc-dim", 13),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}, "s-contacts-6", "tc-dim", 1),
 	primitive("mixed", dim(w.Dim11, w.DimInline, w.Text("Last response"), w.Mono{Text: "2026-08-16 09:41"}), "components-35", "tc-dim", 1),
@@ -194,6 +194,7 @@ var _ = add(
 	// tc-mono
 	// words in two lengths (Р-65): the run of a search, its answer's time
 	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
+	primitive("variant", w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 3),
 	primitive("code", w.Mono{Text: ".well-known", Form: w.MonoCode}, "s-profile-2", "tc-mono", 4),
 	primitive("plain", w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-6", "tc-mono", 1),
 	primitive("danger", w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}, "s-backup-13", "tc-mono", 7),
@@ -203,7 +204,6 @@ var _ = add(
 	primitive("variant", w.Mono{Text: "last used", Variant: w.Mono10Dusty}, "components-6", "tc-mono", 1),
 	primitive("line", w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5Dusty}, "s-profile-1", "tc-mono", 5),
 	primitive("variant", w.Mono{Text: "412 KB", Variant: w.MonoMuted}, "components-16", "tc-mono", 1),
-	primitive("variant", w.Mono{Text: "60 points · same phone", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 11),
 	primitive("variant", w.Mono{Text: "5", Variant: w.MonoDusty11}, "components-21", "tc-mono", 1),
 	primitive("variant", w.Mono{Text: "1.6×", Variant: w.Mono11Dusty}, "s-contacts-5", "tc-mono", 2),
 	primitive("variant", w.Mono{Text: "12.4 MB", Variant: w.MonoDusty}, "components-26", "tc-mono", 1),

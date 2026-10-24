@@ -36,7 +36,7 @@ func Contacts1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "7",
+							Meta:    "9",
 							Current: true,
 						},
 					},
@@ -45,13 +45,13 @@ func Contacts1() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 					},
 				},
@@ -224,7 +224,13 @@ func Contacts1() Screen {
 					w.Fields{
 						Items: []w.FieldsItem{
 							{Term: "Organisation", Value: []w.ValuePart{w.Text("Издательство «Слово»")}},
-							{Term: "Title", Value: []w.ValuePart{w.Text("Выпускающий редактор")}},
+							{
+								Term: "Title",
+								Value: []w.ValuePart{
+									w.Text("Выпускающий редактор "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
+								},
+							},
 							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
 							{
 								Term: "Phone · work",
@@ -242,12 +248,34 @@ func Contacts1() Screen {
 									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
 								},
 							},
-							{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
+							{
+								Term: "Address · work",
+								Value: []w.ValuePart{
+									w.Text("Москва, Тверская 12, стр. 3 "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
+								},
+							},
+							{
+								Term: "Birthday",
+								Value: []w.ValuePart{
+									w.Text("1987-03-14 "),
+									w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}},
+									w.Text(" "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
+								},
+								Face: w.ValueMono,
+							},
 							{
 								Term:  "Tags",
 								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
 							},
-							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
+							{
+								Term: "Note",
+								Value: []w.ValuePart{
+									w.Text("Пишет по вторникам, отвечает в тот же день. "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
+								},
+							},
 						},
 					},
 					w.Sec{
@@ -320,7 +348,7 @@ func Contacts2() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "7",
+								Meta:    "9",
 								Current: true,
 							},
 						},
@@ -329,13 +357,13 @@ func Contacts2() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 						},
 					},
@@ -1393,11 +1421,11 @@ func Contacts6() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 									[]w.SecItemPart{
-										w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "baikal · Общий", Href: "#"},
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}},
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 								},
 								Gap: 5,
@@ -2120,7 +2148,7 @@ func Contacts35() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "7",
+								Meta:    "9",
 								Current: true,
 							},
 						},
@@ -2129,13 +2157,13 @@ func Contacts35() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 						},
 					},
@@ -2616,6 +2644,7 @@ func Contacts7() Screen {
 							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
 							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 							{
 								Term:  "Birthday",
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
@@ -2644,11 +2673,11 @@ func Contacts7() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 									[]w.SecItemPart{
-										w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "baikal · Общий", Href: "#"},
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}},
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 								},
 								Gap: 6,

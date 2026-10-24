@@ -178,12 +178,10 @@ func Tasks1() Screen {
 				Items: []w.SidePart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Собрать чемодан", Size: w.HeadTitle19},
-						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Дела")}},
-						},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("in 2 lists")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "Edit", Small: true},
+								w.Button{Label: "Edit", Small: true, Href: "/app/tasks/linked/c41a/copies"},
 								w.Button{Icon: "dots", Small: true, Title: "More"},
 								w.Close{Label: "Close the panel"},
 							},
@@ -193,16 +191,23 @@ func Tasks1() Screen {
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 							{
-								Term:  "Due",
-								Value: []w.ValuePart{w.Text("12 August 2026, 18:00 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
-								Face:  w.ValueMono,
+								Term: "Due",
+								Value: []w.ValuePart{
+									w.Text("12 August 2026, 18:00 "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Дела")}},
+								},
+								Face: w.ValueMono,
 							},
 							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
 							{
-								Term:  "Priority",
-								Value: []w.ValuePart{w.Text("5 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
-								Face:  w.ValueMono,
+								Term: "Priority",
+								Value: []w.ValuePart{
+									w.Text("3 "),
+									w.Dim{Mark: &w.Mark{Colour: "#3F6E8C", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Работа")}},
+								},
+								Face: w.ValueMono,
 							},
+							{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}},
 						},
 					},
@@ -214,27 +219,7 @@ func Tasks1() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{
-								Text: "Attachments",
-								Items: []w.RubricPart{
-									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Icon:  "upload",
-													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
-													Label: "From this computer",
-												},
-												w.MenuItem{Icon: "file", Label: "From Files"},
-												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
-											},
-											Width: w.MenuWidth212,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
-							},
+							w.Rubric{Text: "Attachments"},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -243,13 +228,11 @@ func Tasks1() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("application/pdf · 128 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the task"},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Дела")}},
 									},
 								},
 								Gap: 6,
-							},
-							w.SecHint{
-								Text:  "The same block events and notes have: up to 2 MB the file is written into the task itself, above that it goes to the attachments folder and the task keeps a link. Pasting and dropping work the same way.",
-								Apart: true,
 							},
 						},
 					},
@@ -262,18 +245,38 @@ func Tasks1() Screen {
 										w.Span{Face: w.FaceAccent, Text: "Поездка в Казань"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· event")}},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Дела")}},
 									},
 								},
+								Gap: 6,
 							},
 						},
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Source"},
-							w.Diag{Text: "Path  /remote.php/dav/calendars/mix/dela/c41a.ics\nRead  2 min ago · not changed on server"},
+							w.Rubric{Text: "Where this task is kept", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Дела", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Priority differs")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#3F6E8C", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Работа", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Due differs")}},
+									},
+								},
+								Gap: 5,
+							},
 						},
 					},
-					w.Danger{Button: w.Button{Label: "Delete task", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},
@@ -1381,7 +1384,7 @@ func Tasks19() Screen {
 							Items: []w.LinePart{
 								w.Mark{Colour: "#3F6E8C", Size: w.MarkH11},
 								w.Check{Name: "copy", Value: "nextcloud/rabota", Parts: []w.CheckPart{w.Text("nextcloud · Работа")}},
-								w.Dim{Parts: []w.Inline{w.Text("Due differ · due 13 Aug")}, Size: w.Dim11_5},
+								w.Dim{Parts: []w.Inline{w.Text("Due, priority differ · due 12 Aug")}, Size: w.Dim11_5},
 							},
 							Gap:   w.LineGap8,
 							Block: true,

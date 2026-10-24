@@ -9,6 +9,9 @@ type DocRef struct {
 	Name string
 	Href string // a link to the record
 	What Dim
+	// From is the copy it comes from, on a linked record (Р-78; Carrel's
+	// task 230): the collection's mark and name.
+	From *Dim
 }
 
 // DocmetaPart is what a section of the side column holds under its rubric.
@@ -43,6 +46,9 @@ func (r DocRefs) html(mix) string {
 		if len(it.What.Parts) > 0 { // a copy that holds the same says nothing
 			s.WriteString(" " + it.What.html(nil))
 		}
+		if it.From != nil {
+			s.WriteString(" " + it.From.html(nil))
+		}
 		s.WriteString(`</span>`)
 	}
 	s.WriteString(`</div>`)
@@ -61,6 +67,8 @@ type DocAttach struct {
 	// Remove takes the attachment off: on an edit only (the owner's decision
 	// of 02.10).
 	Remove *Button
+	// From is the copy it comes from, on a linked record (Р-78).
+	From *Dim
 }
 
 func (a DocAttach) html(mix) string {
@@ -71,6 +79,9 @@ func (a DocAttach) html(mix) string {
 	s := `<div class="tc-line__text">` + name + ` ` + a.Size.html(nil)
 	if a.Where.Label != "" {
 		s += ` ` + a.Where.html(nil)
+	}
+	if a.From != nil {
+		s += ` ` + a.From.html(nil)
 	}
 	if a.Remove != nil {
 		s += ` ` + a.Remove.html(nil)

@@ -36,7 +36,7 @@ func Notes1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
-							Meta:    "4",
+							Meta:    "5",
 							Current: true,
 						},
 					},
@@ -45,7 +45,7 @@ func Notes1() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -109,7 +109,8 @@ func Notes1() Screen {
 								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
 								Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
 								Date:       "10 Aug",
-								Source:     "nextcloud · Записи",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Записи, nextcloud · Дневник",
 								On:         true,
 							},
 							w.ExcerptRow{
@@ -137,15 +138,16 @@ func Notes1() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Заметка со встречи 10.08", Size: w.HeadTitle19},
 						Tools: []w.HeadTool{
-							w.Button{Label: "Edit", Small: true},
+							w.Button{Label: "Edit", Small: true, Href: "/app/notes/linked/9e31/copies"},
 							w.Button{Icon: "expand", Small: true, Title: "Open the note page"},
 							w.Button{Icon: "dots", Small: true, Title: "More"},
 						},
 						Subs: []w.HeadSub{
 							w.HeadSub{
 								Parts: []w.HeadSubPart{
+									w.Text("in 2 notebooks · text from "),
 									w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
-									w.Text("nextcloud · Записи · "),
+									w.Text("Записи · "),
 									w.Mono{Text: "10 August 2026, 11:05"},
 								},
 							},
@@ -178,31 +180,21 @@ func Notes1() Screen {
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "встречи"}, w.Text(" "), w.Tag{Label: "релиз"}}}},
+							{
+								Term: "Tags",
+								Value: []w.ValuePart{
+									w.Tag{Label: "встречи"},
+									w.Text(" "),
+									w.Tag{Label: "релиз"},
+									w.Text(" "),
+									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Записи")}},
+								},
+							},
+						},
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{
-								Text: "Attachments",
-								Items: []w.RubricPart{
-									w.Drop{
-										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
-										Menu: w.Menu{
-											Items: []w.MenuPart{
-												w.MenuItem{
-													Icon:  "upload",
-													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
-													Label: "From this computer",
-												},
-												w.MenuItem{Icon: "file", Label: "From Files"},
-												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
-											},
-											Width: w.MenuWidth212,
-											Pop:   w.MenuUnder,
-										},
-									},
-								},
-							},
+							w.Rubric{Text: "Attachments"},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -211,6 +203,8 @@ func Notes1() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("image/png · 412 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the note"},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Записи")}},
 									},
 									[]w.SecItemPart{
 										w.Link{Text: "запись-встречи.m4a", Href: "#"},
@@ -218,6 +212,8 @@ func Notes1() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("audio/mp4 · 24 MB")}},
 										w.Text(" "),
 										w.Badge{Label: "Documents / carrel"},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Записи")}},
 									},
 								},
 								Gap: 6,
@@ -233,14 +229,40 @@ func Notes1() Screen {
 										w.Span{Face: w.FaceAccent, Text: "Синк-ап по релизу"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Записи")}},
 									},
 									[]w.SecItemPart{
 										w.Span{Face: w.FaceAccent, Text: "Дописать раздел про кэш"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· task")}},
+										w.Text(" "),
+										w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Записи")}},
 									},
 								},
 								Gap: 6,
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Where this note is kept", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Записи", Href: "#"},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Дневник", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}},
+									},
+								},
+								Gap: 5,
 							},
 						},
 					},
@@ -282,7 +304,7 @@ func Notes31() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
-							Meta:   "4",
+							Meta:   "5",
 						},
 					},
 				},
@@ -290,7 +312,7 @@ func Notes31() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -390,7 +412,7 @@ func Notes2() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -606,7 +628,7 @@ func Notes27() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -802,7 +824,7 @@ func Notes3() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1018,7 +1040,7 @@ func Notes20() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1274,7 +1296,7 @@ func Notes30() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2431,7 +2453,7 @@ func Notes9() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "7",
+								Meta:    "9",
 								Current: true,
 							},
 						},
@@ -2440,13 +2462,13 @@ func Notes9() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "1"},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "1", Trail: w.Badge{Label: "ro"}},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
 						},
 					},
@@ -2697,7 +2719,7 @@ func Notes10() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined notebook",
-								Meta:    "4",
+								Meta:    "5",
 								Current: true,
 							},
 						},
@@ -2706,7 +2728,7 @@ func Notes10() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 							w.TickRow{
 								Ticked: w.TickedOff,
 								Mark:   w.Mark{Colour: "#3F6E8C"},

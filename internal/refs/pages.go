@@ -1110,46 +1110,7 @@ var _ = add(
 			},
 		},
 	}, "desktop-15", "tc-root", 1),
-	page("print", w.Page{
-		Items: []w.PagePart{
-			w.PrintTitle{Text: "Documents / carrel / attachments"},
-			w.PrintSources{Text: "sftpgo · vps · 14 items · 38.2 MB"},
-			w.PrintRubric{Text: "Folders"},
-			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "34 items"}, w.PrintNum{Text: "2026-07-01"}},
-				Columns: true,
-			},
-			w.PrintRubric{Text: "Files"},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.PrintCell{Name: "2026-08-10-sync-board.png"},
-					w.PrintNum{Text: "412 KB"},
-					w.PrintNum{Text: "2026-08-10"},
-				},
-				Columns: true,
-			},
-			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "release-checklist.md"}, w.PrintNum{Text: "3 KB"}, w.PrintNum{Text: "2026-08-09"}},
-				Columns: true,
-			},
-			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "смета-подрядчик.pdf"}, w.PrintNum{Text: "1.2 MB"}, w.PrintNum{Text: "2026-08-05"}},
-				Columns: true,
-			},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.PrintCell{Name: "2026-08-04-whiteboard.jpg"},
-					w.PrintNum{Text: "2.8 MB"},
-					w.PrintNum{Text: "2026-08-04"},
-				},
-				Columns: true,
-			},
-			w.PrintFoot{
-				Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 14 of 14 shown",
-			},
-		},
-		Variant: w.PagePrint,
-	}, "desktop-16", "tc-root", 1),
+	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Documents / carrel / attachments"}, w.PrintSources{Text: "sftpgo · vps · 14 items · 38.2 MB"}, w.PrintRubric{Text: "Folders"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "34 items"}, w.PrintNum{Text: "2026-07-01"}}, Columns: true}, w.PrintRubric{Text: "Files"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-08-10-sync-board.png"}, w.PrintNum{Text: "412 KB"}, w.PrintNum{Text: "2026-08-10"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "release-checklist.md"}, w.PrintNum{Text: "3.1 KB"}, w.PrintNum{Text: "2026-08-09"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "смета-подрядчик.pdf"}, w.PrintNum{Text: "1.2 MB"}, w.PrintNum{Text: "2026-08-05"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-08-04-whiteboard.jpg"}, w.PrintNum{Text: "2.8 MB"}, w.PrintNum{Text: "2026-08-04"}}, Columns: true}, w.PrintFoot{Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 14 of 14 shown"}}, Variant: w.PagePrint}, "desktop-16", "tc-root", 1),
 )
 
 func init() {

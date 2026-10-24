@@ -2524,7 +2524,7 @@ func Publish19() Screen {
 										[]w.SecItemPart{
 											w.Link{Text: "release-checklist.md", Href: "#"},
 											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
+											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
 											w.Text(" "),
 											w.Badge{Label: "in the event"},
 										},
@@ -2917,7 +2917,7 @@ func Publish4() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 							w.TickRow{
 								Ticked: w.TickedOff,
 								Mark:   w.Mark{Colour: "#3F6E8C"},

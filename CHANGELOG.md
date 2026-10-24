@@ -108,6 +108,8 @@ do, not what the authors did.
 
 ### Added
 
+- `DocRef.From`, `DocAttach.From` — the copy a line of a document's side
+  column comes from, on a linked record (Р-78; Carrel's task 230).
 - `MenuText` — a menu row that only says something, a name over a line
   (`.tc-menu__text`): how to mount a public folder on each system. A
   public page's address `Strip` takes a `Drop` (Carrel's task 196).
@@ -934,6 +936,24 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Duplicates after note 117: the frames against the fixture set and
+  each other** (Carrel's task 230; accepted by the owner 24.10). Anna's
+  copies share one UID — «220 points · same UID, …»; every copy has its
+  organisation; a variant says its value and collection everywhere; a
+  field some copies lack is asked with «—» (Title, Address, Birthday,
+  Note); Vera's three addresses; «Decided earlier» has Artём; the empty
+  screen's refresh is off with its reason. **A linked record shows what
+  any copy holds** (Р-78): the contact's panel and card share their
+  fields, the task's and the note's panels are linked records as the
+  book's (Р-63), the linked event, task, note and contact cards have their
+  description, attendees, attachments, related, timeline — with the mark
+  of the copy they come from; Source and Delete stay with each copy. The
+  card after a merge is the whole contact card. Rails count what lies in a
+  collection (Contacts 9, Архив 2, Команда 2; Дневник 3); the timeline's
+  other books are Команда and Архив; `states-8`, `-9` draw the linked rows;
+  the copy sheet says «Due, priority differ · due 12 Aug»;
+  `release-checklist.md` is 3.1 KB everywhere.
 
 - **Public pages: what the guest sees, the views without frames** (Carrel's
   task 196; accepted by the owner 24.10). A row's caption is what the link gives — «repeats weekly» and
