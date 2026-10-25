@@ -32,6 +32,7 @@ func (PrintSources) pagePart() {}
 func (PrintRubric) pagePart()  {}
 func (PrintRow) pagePart()     {}
 func (PrintFoot) pagePart()    {}
+func (PrintText) pagePart()    {}
 
 // Page — tc-root
 //
@@ -41,7 +42,7 @@ func (PrintFoot) pagePart()    {}
 // Инварианты. Корень страницы — один, как у оболочки (tc-root, контейнер tcbox); вид корня — перечисление; страница печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `s-auth-1`, фрагмент `.tc-root`.
-// Содержимое. Страница входа, тело окна, сообщение, форма; на бумаге — заголовок, источники, рубрика, строки, подвал.
+// Содержимое. Страница входа, тело окна, сообщение, форма; на бумаге — заголовок, источники, рубрика, строки, поля, текст, подвал.
 // Чего нет. Верхней полосы и рейла: страница с ними — оболочка (tc-shell).
 type Page struct {
 	Items   []PagePart
@@ -164,15 +165,21 @@ func (PrintCell) printRowPart() {}
 func (PrintNum) printRowPart()  {}
 
 // PrintRow is a row on paper: a time and what is at it, or a name and its
-// numbers in three columns.
+// numbers in three columns, or a field's name and its value.
 type PrintRow struct {
 	Items   []PrintRowPart
 	Columns bool // name, then two numbers: a folder's list
+	// Field is a card's field on paper: its name, then its value (Carrel's
+	// task 228).
+	Field bool
+	// Head is the row naming a table's columns on paper, small capitals
+	// over the rows (the owner, 25.10).
+	Head bool
 }
 
 func (r PrintRow) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, "tc-print__row", pick(r.Columns, "tc-print__row--3col")) + `>`)
+	s.WriteString(`<div` + class(nil, "tc-print__row", pick(r.Columns, "tc-print__row--3col"), pick(r.Field, "tc-print__row--field"), pick(r.Head, "tc-print__row--head")) + `>`)
 	for _, it := range r.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -180,18 +187,60 @@ func (r PrintRow) html(mix) string {
 	return s.String()
 }
 
-// PrintCell is the main cell of a row on paper: a name, or a title in bold
-// with its detail under it.
+// PrintTick is a task's tick on paper: a drawn box, with a check when done
+// (Carrel's task 228).
+type PrintTick int
+
+const (
+	PrintNoTick PrintTick = iota
+	PrintTickOpen
+	PrintTickDone
+)
+
+func (t PrintTick) html() string {
+	switch t {
+	case PrintTickOpen:
+		return `<span class="tc-print__tick" role="img" aria-label="Not done"></span>`
+	case PrintTickDone:
+		return `<span class="tc-print__tick is-done" role="img" aria-label="Done"></span>`
+	}
+	return ""
+}
+
+// PrintCell is the main cell of a row on paper: a name, or a title with its
+// detail under it; a task's with its tick before the name.
 type PrintCell struct {
 	Name   string
 	Detail string // under the name, dim: where and in which collection
+	Tick   PrintTick
 }
 
 func (c PrintCell) html(mix) string {
 	if c.Detail == "" {
-		return `<span class="tc-print__cell">` + esc(c.Name) + `</span>`
+		return `<span class="tc-print__cell">` + c.Tick.html() + esc(c.Name) + `</span>`
 	}
-	return `<span class="tc-print__cell"><b>` + esc(c.Name) + `</b><br><span class="tc-dim--print tc-dim--t11">` + esc(c.Detail) + `</span></span>`
+	return `<span class="tc-print__cell"><b>` + c.Tick.html() + esc(c.Name) + `</b><br><span class="tc-dim--print tc-dim--t11">` + esc(c.Detail) + `</span></span>`
+}
+
+// PrintText is a note's text on paper, in a reader's width: a paragraph, a
+// task line, or — Heading — a heading of the text, not the rubric of a list
+// (Carrel's task 228).
+type PrintText struct {
+	Text    string
+	Heading bool
+	Tick    PrintTick // a task line of the note: its box, struck when done
+}
+
+func (t PrintText) html(mix) string {
+	if t.Heading {
+		return `<div class="tc-print__h2">` + esc(t.Text) + `</div>`
+	}
+	if t.Tick == PrintTickDone {
+		// struck by a line of its own, through the middle of the small letters:
+		// the font's own line-through stands a pixel high (the owner, 25.10)
+		return `<p class="tc-print__text is-done">` + t.Tick.html() + `<span class="tc-print__struck">` + esc(t.Text) + `</span></p>`
+	}
+	return `<p class="tc-print__text">` + t.Tick.html() + esc(t.Text) + `</p>`
 }
 
 // PrintNum is a number on paper: a size, a date.

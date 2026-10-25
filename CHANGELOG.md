@@ -112,6 +112,15 @@ do, not what the authors did.
 
 ### Added
 
+- **Paper for every kind** (Carrel's task 228): `PrintRow.Field` — a
+  card's field, its name then its value; `PrintRow.Head` — the row naming a
+  table's columns, small capitals over the rows (the owner, 25.10);
+  `PrintText` — a note's paragraph or heading in reading width;
+  `PrintTick` (`PrintCell.Tick`, `PrintText.Tick`) — a drawn box, ticked
+  when done, the done text struck through the middle of its small letters.
+  Three-column rows keep one width per column down the sheet and fold
+  under the name on a narrow sheet. A `Top` without `Actions` prints no
+  actions block (the offline page).
 - `Filter.Clear` — the same address without the filter: while the line
   holds a word, a cross at its end leads there (`.tc-in__clear`), without
   a script too (the owner, 25.10; Carrel's task 231).
@@ -958,6 +967,17 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Paper and the offline page** (Carrel's task 228; accepted by the owner
+  25.10–26.10): new «Остальное на бумаге» — the contacts list, a contact's
+  card with the properties kept as the server sent them, tasks of the
+  current filter, a note in reading width, a folder, one calendar's agenda
+  with its own title (`print-2`…`-7`); tables name their columns
+  (`desktop-16` too); names in regular weight, drawn ticks, one line at
+  the bottom. The contacts list prints without photos (the owner, 26.10).
+  `offline-1` — the installed app without a connection: the mark, the
+  message and Try again. A struck-through done item's line runs through the
+  middle of the small letters on screen too.
 
 - **A person's timeline has no «attached to» row** (Carrel's task 237; the
   owner's decision of 25.10): a file inside a record the timeline already

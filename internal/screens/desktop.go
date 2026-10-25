@@ -1045,6 +1045,11 @@ func Desktop16() Screen {
 		Items: []w.PagePart{
 			w.PrintTitle{Text: "Documents / carrel / attachments"},
 			w.PrintSources{Text: "sftpgo · vps · 14 items · 38.2 MB"},
+			w.PrintRow{
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Size"}, w.PrintNum{Text: "Changed"}},
+				Columns: true,
+				Head:    true,
+			},
 			w.PrintRubric{Text: "Folders"},
 			w.PrintRow{
 				Items:   []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "34 items"}, w.PrintNum{Text: "2026-07-01"}},

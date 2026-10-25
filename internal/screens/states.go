@@ -566,6 +566,27 @@ func States5() Screen {
 	}
 }
 
+// Offline1 is frame «Без сети · установленное приложение» (offline-1).
+func Offline1() Screen {
+	return w.Shell{
+		Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}},
+		Body: w.ShellBody{
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("No connection."),
+							w.Text(" Carrel keeps nothing on this device, so there is nothing to show until carrel.example can be reached. "),
+							w.Button{Label: "Try again", Small: true, Href: "/"},
+						},
+						Tone: w.MsgAlert,
+					},
+				},
+			},
+		},
+	}
+}
+
 // States6 is frame «Источник не ответил» (states-6).
 func States6() Screen {
 	return w.Shell{

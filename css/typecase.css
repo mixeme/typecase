@@ -381,7 +381,8 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-row .tc-row__excerpt{font-size:12px;color:var(--tc-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-row .tc-row__cell{font-size:11.5px;color:var(--tc-dusty);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-row .tc-mono{color:var(--tc-muted)}
-.tc-row.is-done .tc-row__title{color:var(--tc-dusty);text-decoration:line-through}
+/* Зачёркнутое — своей чертой по середине строчных: черта шрифта стоит на пиксель выше (владелец, 25.10). */
+.tc-row.is-done .tc-row__title{color:var(--tc-dusty);justify-self:start;max-width:100%;background:linear-gradient(currentColor,currentColor) no-repeat 0 50%/100% 1px}
 .tc-row.is-overdue .tc-mono{color:var(--tc-danger)}
 .tc-row--avatarcols{grid-template-columns:3px 28px minmax(130px,1.4fr) 142px minmax(150px,1.1fr) minmax(110px,.9fr) 140px}
 /* Строка своих столбцов (Columns): набор и порядок — человека, ширина — рода столбца; столбцы ровны, потому что
@@ -749,8 +750,34 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Три колонки: имя / размер / дата. Базовое правило выше — 66px 1fr,
    tc-print__row--3col его не перебивает (слабее). Без этого дата уезжает
    на вторую строку в узкий столбец и ломается по дефисам. */
-.tc-root.tc-root--print .tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
+.tc-root.tc-root--print .tc-print__row--3col{grid-template-columns:minmax(0,1fr) 10em 14.5em}
 .tc-root.tc-root--print .tc-print__row--3col > :not(:first-child){white-space:nowrap}
+/* Поле карточки на бумаге и текст заметки в ширине для чтения (задача Carrel 228). */
+.tc-root.tc-root--print .tc-print__row--field{grid-template-columns:minmax(90px,150px) minmax(0,1fr)}
+.tc-root.tc-root--print .tc-print__row--field > .tc-print__cell{overflow-wrap:anywhere}
+.tc-root.tc-root--print .tc-print__text{max-width:68ch;margin:0 0 8px;line-height:1.5}
+.tc-root.tc-root--print .tc-print__h2{font-family:var(--tc-font-serif);font-size:15px;margin:14px 0 6px}
+.tc-root.tc-root--print .tc-print__sources + :is(.tc-print__row,.tc-print__text){margin-top:14px}
+/* Имя строки на бумаге — обычным начертанием (владелец, 25.10); галка — нарисованный квадрат, у сделанного — с галкой внутри. */
+.tc-root.tc-root--print .tc-print__cell > b{font-weight:400}
+.tc-root.tc-root--print .tc-print__tick{display:inline-block;position:relative;width:10px;height:10px;margin-right:7px;border:1px solid #000;border-radius:2px;vertical-align:-1px}
+.tc-root.tc-root--print .tc-print__tick.is-done::after{content:"";position:absolute;left:50%;top:38%;width:3px;height:6px;border:solid #000;border-width:0 1.5px 1.5px 0;box-sizing:border-box;transform:translate(-50%,-50%) rotate(45deg)}
+.tc-root.tc-root--print .tc-print__text.is-done{color:#555}
+.tc-root.tc-root--print .tc-print__struck{background:linear-gradient(currentColor,currentColor) no-repeat 0 calc(50% + 1px)/100% 1px}
+.tc-root.tc-root--print .tc-print__cell:has(.tc-print__tick) > .tc-dim--print{display:inline-block;margin-left:19px}
+.tc-root.tc-root--print .tc-print__row:has(+ .tc-print__foot){border-bottom:0}
+/* Строка подписей столбцов на бумаге (владелец, 25.10). */
+.tc-root.tc-root--print .tc-print__row--head{margin-top:14px;padding:2px 0 4px;border-bottom:.5px solid #555;color:#555}
+.tc-root.tc-root--print .tc-print__row--head > *{font-family:inherit;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.tc-root.tc-root--print .tc-print__row--head + .tc-print__rub{margin-top:8px}
+.tc-root.tc-root--print .tc-print__rub + .tc-print__row--head{margin-top:2px}
+/* Узкий лист: имя — строкой, остальные столбцы — под ним; подписи остаётся одна. */
+@container tcbox (max-width:560px){
+.tc-root.tc-root--print .tc-print__row--3col{grid-template-columns:max-content minmax(0,1fr);row-gap:2px}
+.tc-root.tc-root--print .tc-print__row--3col > :first-child{grid-column:1/-1}
+.tc-root.tc-root--print .tc-print__row--3col > :not(:first-child){overflow:hidden;text-overflow:ellipsis}
+.tc-root.tc-root--print .tc-print__row--3col.tc-print__row--head > :not(:first-child){display:none}
+}
 .tc-row__text{display:flex;flex-direction:column;gap:2px;min-width:0}
 .tc-skel{background:var(--tc-hair);border-radius:2px;height:9px;display:block}
 /* Колонки уходят по сужению .tc-main, не окна.
@@ -1518,7 +1545,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
 .tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
-.tc-print__row--3col.tc-print__row--3col{grid-template-columns:minmax(0,1fr) max-content max-content}
+.tc-print__row--3col.tc-print__row--3col{grid-template-columns:minmax(0,1fr) 10em 14.5em}
 .tc-prose--t13.tc-prose--t13{font-size:13px}
 .tc-prose--read.tc-prose--read{font-size:14px;line-height:1.65}
 .tc-prose--lead.tc-prose--lead{font-size:14.5px;line-height:1.7}
@@ -1614,7 +1641,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dim--ml6.tc-dim--ml6{margin-left:6px}
 
 .tc-dim--t11-5.tc-dim--t11-5{font-size:11.5px}
-.tc-dim--struck.tc-dim--struck{text-decoration:line-through}
+.tc-dim--struck.tc-dim--struck{background:linear-gradient(currentColor,currentColor) no-repeat 0 calc(50% + 1px)/100% 1px}
 .tc-drop__anchor.tc-drop__anchor{position:relative}
 .tc-drop__panel.tc-drop__panel{position:absolute;top:calc(100% + 5px);left:0;z-index:2}
 

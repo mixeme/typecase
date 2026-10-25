@@ -85,6 +85,12 @@ func (t Top) html(m mix) string {
 	case t.Search != nil:
 		s.WriteString(t.Search.html(nil))
 	}
+	if len(t.Actions) == 0 {
+		// the brand alone: a page that has nothing to act on — the
+		// application opened offline (Carrel's task 228)
+		s.WriteString(`</div>`)
+		return s.String()
+	}
 	s.WriteString(`<div` + class(nil, "tc-top__actions", pick(t.Tight, "tc-top__actions--gap2")) + `>`)
 	for _, a := range t.Actions {
 		s.WriteString(a.html(nil))

@@ -614,6 +614,9 @@ func (g *gen) top(e *El) string {
 		f = append(f, "Search: &"+g.search(s))
 	}
 	a := e.Kid("tc-top__actions")
+	if a == nil {
+		return "w.Top{" + join(f, ", ") + "}" // the brand alone: a page with no data (offline, Carrel's task 228)
+	}
 	if a.Kid("tc-drop__anchor") != nil || e.Kid("tc-top__search") != nil {
 		return ""
 	}
@@ -1612,6 +1615,18 @@ func (g *gen) shell(e *El) string {
 	return "w.Shell{" + join(f, ", ") + "}"
 }
 
+// printTick is a task's tick drawn on paper before a name (Carrel's task 228).
+func printTick(e *El) string {
+	t := e.Kid("tc-print__tick")
+	switch {
+	case t == nil:
+		return ""
+	case t.Has("is-done"):
+		return ", Tick: w.PrintTickDone"
+	}
+	return ", Tick: w.PrintTickOpen"
+}
+
 func (g *gen) printRow(x *El) string {
 	var its []string
 	for _, y := range x.Els() {
@@ -1635,9 +1650,9 @@ func (g *gen) printRow(x *El) string {
 				if d != nil {
 					s += ", Detail: " + q(d.Text())
 				}
-				its = append(its, s+"}")
+				its = append(its, s+printTick(b)+"}")
 			} else {
-				its = append(its, "w.PrintCell{Name: "+q(y.Text())+"}")
+				its = append(its, "w.PrintCell{Name: "+q(y.Text())+printTick(y)+"}")
 			}
 		default:
 			stop("print row? " + join(y.Cls(), " "))
@@ -1646,6 +1661,12 @@ func (g *gen) printRow(x *El) string {
 	s := "w.PrintRow{Items: []w.PrintRowPart{" + join(its, ", ") + "}"
 	if x.Has("tc-print__row--3col") {
 		s += ", Columns: true"
+	}
+	if x.Has("tc-print__row--field") {
+		s += ", Field: true"
+	}
+	if x.Has("tc-print__row--head") {
+		s += ", Head: true"
 	}
 	return s + "}"
 }
@@ -1719,6 +1740,12 @@ func (g *gen) pagePart(x *El) string {
 	}
 	if x.Has("tc-print__row") {
 		return g.printRow(x)
+	}
+	if x.Has("tc-print__text") {
+		return "w.PrintText{Text: " + q(x.Text()) + printTick(x) + "}"
+	}
+	if x.Has("tc-print__h2") {
+		return "w.PrintText{Text: " + q(x.Text()) + ", Heading: true}"
 	}
 	stop("page part? " + x.Tag + " " + join(x.Cls(), " "))
 	return ""
