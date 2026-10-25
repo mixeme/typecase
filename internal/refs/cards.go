@@ -202,8 +202,9 @@ var _ = add(
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 		{Term: "Due", Value: []w.ValuePart{w.Text("7 August 2026")}, Face: w.ValueMono},
-		{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-		{Term: "Where", Value: []w.ValuePart{w.Text("МФЦ, Мясницкая 13")}}}}, "s-tasks-20", "tc-fields", 1),
+		{Term: "Priority", Value: []w.ValuePart{w.Text("High · 1")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}}}}, "s-tasks-20", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 905 331-09-42")}, Face: w.ValueMono},
 		{Term: "Email · home", Value: []w.ValuePart{w.Text("vera@example.net")}},

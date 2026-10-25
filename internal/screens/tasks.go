@@ -458,7 +458,13 @@ func Tasks20() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ", Size: w.HeadTitle19},
 						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Дела")}},
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+									w.Text("nextcloud · Дела · "),
+									w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert},
+								},
+							},
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
@@ -472,14 +478,18 @@ func Tasks20() Screen {
 						Items: []w.FieldsItem{
 							{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 							{Term: "Due", Value: []w.ValuePart{w.Text("7 August 2026")}, Face: w.ValueMono},
-							{Term: "Complete", Value: []w.ValuePart{w.Text("0%")}, Face: w.ValueMono},
-							{Term: "Where", Value: []w.ValuePart{w.Text("МФЦ, Мясницкая 13")}},
+							{Term: "Priority", Value: []w.ValuePart{w.Text("High · 1")}},
+							{Term: "Reminders", Value: []w.ValuePart{w.Text("1 day before")}},
+							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дом"}}},
 						},
 					},
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Description"},
-							w.Prose{Parts: []w.Inline{w.Text("Паспорт, СНИЛС и заявление; копии заверить заранее.")}, Variant: w.Prose13},
+							w.Prose{
+								Parts:   []w.Inline{w.Text("Опись, копия паспорта и заявление. Приём до 18:00, окно 4.")},
+								Variant: w.Prose13,
+							},
 						},
 					},
 					w.Sec{
@@ -505,18 +515,6 @@ func Tasks20() Screen {
 									},
 								},
 							},
-							w.SecList{
-								Items: [][]w.SecItemPart{
-									[]w.SecItemPart{
-										w.Link{Text: "заявление-мфц.pdf", Href: "#"},
-										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("application/pdf · 96 KB")}},
-										w.Text(" "),
-										w.Badge{Label: "in the task"},
-									},
-								},
-								Gap: 6,
-							},
 						},
 					},
 					w.Sec{
@@ -527,7 +525,7 @@ func Tasks20() Screen {
 									[]w.SecItemPart{
 										w.Span{Face: w.FaceAccent, Text: "Забрать документы"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}},
+										w.Dim{Parts: []w.Inline{w.Text("· event · 11 Aug")}},
 									},
 								},
 								Gap: 6,
@@ -537,7 +535,9 @@ func Tasks20() Screen {
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Source"},
-							w.Diag{Text: "Path  /remote.php/dav/calendars/mix/dela/3b7f.ics\nRead  2 min ago · not changed on server"},
+							w.Diag{
+								Text: "Path  /remote.php/dav/calendars/mix/dela/aa10-77bc-0e31.ics\nRead  2 min ago · not changed on server",
+							},
 						},
 					},
 					w.Danger{Button: w.Button{Label: "Delete task", Kind: w.ButtonDangerSolid}},

@@ -4,6 +4,7 @@ import w "carrel.dev/typecase/widget"
 
 var _ = add(
 	// tc-head
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Отправить документы в МФЦ", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Дела · "), w.Badge{Label: "overdue by 3 days", Tone: w.BadgeAlert}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Button{Icon: "dots", Small: true, Title: "More"}, w.Close{Label: "Close the panel"}}}}, "s-tasks-20", "tc-head", 2),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Про дорогу до дачи", Size: w.HeadTitle19}, Tools: []w.HeadTool{w.Button{Label: "Edit", Small: true}, w.Button{Icon: "expand", Small: true, Title: "Open the note page"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text("nextcloud · Дневник · "), w.Mono{Text: "3 August 2026, 19:40"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}}, Middle: true}, "s-notes-33", "tc-head", 2),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}}, Pad: w.HeadPadBottom8}, "s-publish-25", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}}, Pad: w.HeadPadBottom8}, "s-publish-36", "tc-head", 1),

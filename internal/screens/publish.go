@@ -4226,7 +4226,7 @@ func Publish27() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Due Friday, 7 August 2026 · МФЦ, Мясницкая 13")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Due Friday, 7 August 2026")}}},
 						Pad:   w.HeadPadBottom8,
 					},
 					w.Fields{Items: []w.FieldsItem{
@@ -4234,7 +4234,7 @@ func Publish27() Screen {
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Description"},
-							w.Prose{Parts: []w.Inline{w.Text("Паспорт, СНИЛС и заявление; копии заверить заранее.")}},
+							w.Prose{Parts: []w.Inline{w.Text("Опись, копия паспорта и заявление. Приём до 18:00, окно 4.")}},
 						},
 					},
 					w.MainFoot{Text: "This link works until 8 September 2026."},

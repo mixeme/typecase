@@ -959,6 +959,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The tasks of «Дела» as the set holds them** (Carrel's task 236;
+  accepted by the owner 25.10): the МФЦ task's panel and guest page carry
+  its priority, reminder, tag and description, no place and no
+  attachment, «overdue by 3 days» under the panel's title as on the card;
+  «Забрать документы» is related on 11 Aug.
+
 - **One name for a filter's field, `filter`, on every screen** (Carrel's
   task 231; accepted by the owner 25.10): the owner's calendar and the
   guest pages send `filter`, as the owner's lists do — `q` stays the
