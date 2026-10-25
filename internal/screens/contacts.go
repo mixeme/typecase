@@ -1441,7 +1441,7 @@ func Contacts6() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "11", Variant: w.MonoTight}}},
+							w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "10", Variant: w.MonoTight}}},
 							w.List{
 								Rows: []w.ListRow{
 									w.LinkedRow{
@@ -1450,13 +1450,6 @@ func Contacts6() Screen {
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
 										Href:   "/app/calendar/nextcloud/lichny/aa01",
-									},
-									w.LinkedRow{
-										Mark:   w.Mark{Colour: "#4A6B52"},
-										Icon:   "file",
-										Title:  "2026-08-04-обложка.pdf",
-										Detail: "04 Aug · attached to «Согласовать обложку»",
-										Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2086,7 +2079,7 @@ func Contacts16() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
-							w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "11", Variant: w.MonoTight}}},
+							w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "10", Variant: w.MonoTight}}},
 							w.List{
 								Rows: []w.ListRow{
 									w.LinkedRow{
@@ -2095,13 +2088,6 @@ func Contacts16() Screen {
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
 										Href:   "/app/calendar/nextcloud/lichny/aa01",
-									},
-									w.LinkedRow{
-										Mark:   w.Mark{Colour: "#4A6B52"},
-										Icon:   "file",
-										Title:  "2026-08-04-обложка.pdf",
-										Detail: "04 Aug · attached to «Согласовать обложку»",
-										Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2509,7 +2495,7 @@ func Contacts7() Screen {
 									Options: []w.SegOption{
 										{
 											Label: "All",
-											Count: "24",
+											Count: "23",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
 											On:    true,
 										},
@@ -2530,7 +2516,7 @@ func Contacts7() Screen {
 										},
 										{
 											Label: "Files",
-											Count: "4",
+											Count: "3",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file",
 										},
 									},
@@ -2577,7 +2563,7 @@ func Contacts7() Screen {
 							w.Mono{Text: "2 min ago", Place: w.Pushed},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FindRow{
@@ -2587,14 +2573,6 @@ func Contacts7() Screen {
 								Detail: []w.Inline{w.Text("attendee · accepted")},
 								What:   "event",
 								Source: "nextcloud · Личный",
-							},
-							w.FindRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Date:   "4 Aug",
-								Title:  []w.Inline{w.Text("2026-08-04-обложка.pdf")},
-								Detail: []w.Inline{w.Text("attached to «Согласовать обложку»")},
-								What:   "file",
-								Source: "sftpgo · vps · Documents",
 							},
 							w.FindRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},

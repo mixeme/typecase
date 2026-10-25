@@ -2798,7 +2798,7 @@ func Publish3() Screen {
 						},
 						w.Sec{
 							Items: []w.SecPart{
-								w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "11", Variant: w.MonoTight}}},
+								w.Rubric{Text: "Timeline", Items: []w.RubricPart{w.Mono{Text: "10", Variant: w.MonoTight}}},
 								w.List{
 									Rows: []w.ListRow{
 										w.LinkedRow{
@@ -2807,13 +2807,6 @@ func Publish3() Screen {
 											Title:  "Синк-ап по релизу",
 											Detail: "10 Aug · attendee · accepted",
 											Href:   "/app/calendar/nextcloud/lichny/aa01",
-										},
-										w.LinkedRow{
-											Mark:   w.Mark{Colour: "#4A6B52"},
-											Icon:   "file",
-											Title:  "2026-08-04-обложка.pdf",
-											Detail: "04 Aug · attached to «Согласовать обложку»",
-											Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 										},
 										w.LinkedRow{
 											Mark:   w.Mark{Colour: "#3F6E8C"},

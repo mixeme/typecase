@@ -716,7 +716,7 @@ func Io16() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{
@@ -1783,7 +1783,7 @@ func Io7() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{

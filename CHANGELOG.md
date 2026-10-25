@@ -959,6 +959,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A person's timeline has no «attached to» row** (Carrel's task 237; the
+  owner's decision of 25.10): a file inside a record the timeline already
+  shows is not repeated; files come only by the person's name in the file's
+  name. The counts follow (Timeline 10; August 2026 · 2; All 23, Files 3).
+  «Согласовать обложку» lies in «Работа», done; «Ревью вёрстки сборника» in
+  «Проекты» on 29.07 — the task rails, the list's counts and the duplicates'
+  sources count them.
+
 - **The tasks of «Дела» as the set holds them** (Carrel's task 236;
   accepted by the owner 25.10): the МФЦ task's panel and guest page carry
   its priority, reminder, tag and description, no place and no

@@ -3117,7 +3117,7 @@ func States18() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3", Hidden: true},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4", Hidden: true},
 					},
 				},
 				w.RailSec{
@@ -3638,7 +3638,7 @@ func States22() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "3",
+							Meta:   "4",
 						},
 					},
 				},
@@ -3646,7 +3646,7 @@ func States22() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -3741,7 +3741,7 @@ func States23() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "7",
+							Meta:   "8",
 						},
 					},
 				},
@@ -3749,7 +3749,7 @@ func States23() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -3857,7 +3857,7 @@ func States24() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{

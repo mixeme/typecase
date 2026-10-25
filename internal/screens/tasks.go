@@ -36,7 +36,7 @@ func Tasks1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
-							Meta:    "7",
+							Meta:    "8",
 							Current: true,
 						},
 					},
@@ -45,7 +45,7 @@ func Tasks1() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -81,7 +81,7 @@ func Tasks1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 6 tasks")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 7 tasks")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -98,7 +98,7 @@ func Tasks1() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 1"}, {Label: "All 6"}}},
+							w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 2"}, {Label: "All 7"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
 								Secondary: true,
@@ -315,7 +315,7 @@ func Tasks20() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
-							Meta:    "7",
+							Meta:    "8",
 							Current: true,
 						},
 					},
@@ -324,7 +324,7 @@ func Tasks20() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -360,7 +360,7 @@ func Tasks20() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 6 tasks")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 7 tasks")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -377,7 +377,7 @@ func Tasks20() Screen {
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
-							w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 1"}, {Label: "All 6"}}},
+							w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 2"}, {Label: "All 7"}}},
 							w.Seg{
 								Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
 								Secondary: true,
@@ -579,7 +579,7 @@ func Tasks15() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
-							Meta:   "7",
+							Meta:   "8",
 						},
 					},
 				},
@@ -587,7 +587,7 @@ func Tasks15() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -718,7 +718,7 @@ func Tasks2() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{
@@ -871,7 +871,7 @@ func Tasks3() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{
@@ -1174,7 +1174,7 @@ func Tasks14() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 					},
 				},
 				w.RailFoot{
@@ -1481,7 +1481,7 @@ func Tasks19() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined list",
-								Meta:    "7",
+								Meta:    "8",
 								Current: true,
 							},
 						},
@@ -1490,7 +1490,7 @@ func Tasks19() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "3"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
 						},
 					},
 					w.RailSec{
@@ -1526,7 +1526,7 @@ func Tasks19() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined list"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 6 tasks")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 lists · nextcloud · 7 tasks")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New task", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -1543,7 +1543,7 @@ func Tasks19() Screen {
 									Waiting: true,
 									Variant: w.FilterH26W200,
 								},
-								w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 1"}, {Label: "All 6"}}},
+								w.Seg{Options: []w.SegOption{{Label: "Open 5", On: true}, {Label: "Done 2"}, {Label: "All 7"}}},
 								w.Seg{
 									Options:   []w.SegOption{{Label: "By due", On: true}, {Label: "By priority"}, {Label: "Recently changed"}},
 									Secondary: true,
