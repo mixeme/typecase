@@ -60,6 +60,8 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/invite/7f3a…", Mono: true, Variant: w.Input11Fill, Label: "Link"}, "s-admin-1", "tc-in", 2),
 	form("placeholder", w.Input{Placeholder: "Documents · sftpgo / carrel-backup/…", Variant: w.Input11Fill, Label: "Folder"}, "components-20", "tc-in", 1),
 	form("placeholder", w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"}, "s-agenda-8", "tc-in", 1),
+	form("plain", w.Pick{Name: "label", Options: []w.PickOption{{Value: "mobile", Label: "mobile", On: true}}, Label: "Label"}, "s-contacts-15", "tc-in", 9),
+	form("plain", w.Pick{Value: "Write into", Unset: true, Variant: w.PickT12W200}, "s-notes-34", "tc-in", 1),
 	form("plain", w.Pick{Name: "to.1", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true}, {Value: "", Label: "Do not rewrite"}}, Label: "Rewrite a.kovaleva@example.org to", Variant: w.PickT12W240}, "s-contacts-19", "tc-in", 1),
 	form("plain", w.Pick{Value: "Choose an address book", Unset: true}, "s-io-17", "tc-in", 1),
 	form("mark", w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}}, "s-io-3", "tc-in", 1),
@@ -67,7 +69,7 @@ var _ = add(
 	form("pick", w.Pick{Name: "to.1", Options: []w.PickOption{{Value: "a.kovaleva@slovo.example", Label: "a.kovaleva@slovo.example", On: true}, {Value: "anna@home.example", Label: "anna@home.example"}, {Value: "", Label: "Do not rewrite"}}, Label: "Rewrite a.kovaleva@example.org to", Variant: w.PickT12W240}, "s-contacts-29", "tc-in", 1),
 	form("pick", w.Pick{Name: "reminder.1.unit", Options: []w.PickOption{{Value: "minutes", Label: "minutes before"}, {Value: "hours", Label: "hours before"}, {Value: "days", Label: "days before", On: true}, {Value: "weeks", Label: "weeks before"}}, Label: "Unit"}, "s-agenda-19", "tc-in", 3),
 	form("pick", w.Pick{Name: "reminder.1", Options: []w.PickOption{{Value: "at.the.time", Label: "At the time"}, {Value: "5.minutes.before", Label: "5 minutes before"}, {Value: "10.minutes.before", Label: "10 minutes before", On: true}, {Value: "30.minutes.before", Label: "30 minutes before"}, {Value: "1.hour.before", Label: "1 hour before"}, {Value: "1.day.before", Label: "1 day before"}, {Value: "custom", Label: "Custom…", Shows: "reminder.1.count reminder.1.unit"}, {Value: "none", Label: "No reminder"}}, Label: "First"}, "s-agenda-19", "tc-in", 1),
-	form("select", w.Pick{Name: "remind", Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}}, Label: "Remind"}, "s-notes-9", "tc-in", 6),
+	form("select", w.Pick{Name: "remind", Options: []w.PickOption{{Value: "at.the.time", Label: "At the time"}, {Value: "5.minutes.before", Label: "5 minutes before"}, {Value: "10.minutes.before", Label: "10 minutes before", On: true}, {Value: "30.minutes.before", Label: "30 minutes before"}, {Value: "1.hour.before", Label: "1 hour before"}, {Value: "1.day.before", Label: "1 day before"}, {Value: "custom", Label: "Custom…", Shows: "remind.count remind.unit"}, {Value: "none", Label: "No reminder"}}, Label: "Remind"}, "s-notes-9", "tc-in", 6),
 	form("marked", w.Pick{Value: "nextcloud · Записи", Mark: &w.Mark{Colour: "#4A6B52"}}, "s-notes-20", "tc-in", 1),
 	form("aside", w.Pick{Value: "Asia/Yekaterinburg", Aside: &w.Dim{Parts: []w.Inline{w.Text("as sent")}, Variant: w.DimIndent}, Label: "Time zone"}, "s-agenda-3", "tc-in", 11),
 	form("error", w.Input{Value: "nextcloud", Error: true, Focus: true, Label: "Label"}, "s-profile-11", "tc-in", 1),
@@ -115,6 +117,7 @@ var _ = add(
 
 	// tc-in as a text area
 	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 16),
+	form("plain", w.Area{Text: "", Variant: w.AreaBodySm, Focus: true, Name: "description", Label: "Text"}, "s-notes-34", "tc-in", 2),
 	form("body", w.Area{Text: "", Variant: w.AreaBody, Name: "description", Label: "Text"}, "s-notes-30", "tc-in", 8),
 	form("title", w.Area{Text: "", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"}, "s-notes-30", "tc-in", 2),
 	form("area", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 22),

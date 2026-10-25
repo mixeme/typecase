@@ -956,6 +956,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The quick sheet without its collection; «Custom…» in the quick sheets;
+  the crop with its picture** (Carrel's task 233; accepted by the owner
+  25.10). When no collection is remembered, the quick sheet shows its
+  fields at once, «into» without a value («Write into»), and «Save note»
+  waits for the choice (`ButtonWaits`, required radios) — `s-notes-34`.
+  The quick event's and task's reminder list is the full form's, its
+  «Custom…» count and unit hidden in the same row. `s-contacts-5` draws the
+  server's picture. Rails count Anna's copy in Архив everywhere.
+
 - **The hidden zones stand in the shell's scheme only** (Carrel's task
   235): the run's line and the zone of messages, waiting hidden, moved from
   `s-agenda-17` to `shell-1`, beside the sheet's place — a screen's frame
