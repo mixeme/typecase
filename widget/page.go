@@ -9,7 +9,6 @@ type BannerEnd interface {
 }
 
 func (Line) bannerEnd() {}
-func (Push) bannerEnd() {}
 
 // Banner is the head of a page opened by a public link: the logo, what the
 // visitor may do with it, the downloads at the end.

@@ -209,7 +209,7 @@ var _ = add(
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("vera.l@work.example")}},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("v.lebedeva@example.org")}}}}, "s-dup-8", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "Status", Value: []w.ValuePart{w.Text("In process "), w.Mono{Text: "40%"}}}}}, "s-publish-27", "tc-fields", 1),
+		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}}}}, "s-publish-27", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono, Href: "tel:+79124451088"},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono, Href: "tel:+74951204500"},
@@ -382,7 +382,7 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Личный", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· When, where differ")}}}}, Gap: 5}}}, "s-agenda-25", "tc-sec", 5),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attendees", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Columns: true}}}, "s-publish-16", "tc-sec", 2),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}}, []w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}}, []w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}}, []w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}}}, Columns: true}}}, "s-publish-16", "tc-sec", 2),
 	cards("plain", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Source"},
 		w.Diag{Text: "Path  /dav.php/addressbooks/mix/contacts/2b7e.vcf\nRead  2 min ago · not changed on server"}}}, "s-contacts-6", "tc-sec", 4),

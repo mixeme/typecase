@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- A public page's `Banner.End` takes a `Line` only, with one button too
+  (Carrel's task 234: one rule for the banner's end).
 - **`Runbar.Every` is a `time.Duration`**, printed in milliseconds
   (`data-tc-every`): a poll every 1500 ms can be said (Carrel's task 226).
 - **`DocTasks.Title` is a string** drawn as the document's heading
@@ -951,6 +953,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Guest pages against the owner's frames** (Carrel's task 234; accepted
+  by the owner 25.10). «Личный» holds what the owner's calendar does — the
+  weekly sync-up on Mondays (4 attendees), «Забрать документы» on Tuesday
+  11.08 at 18:00; «Команда» holds Anna and Artём; «Записи» two notes; the
+  note ends with its last paragraph; the МФЦ task is not begun. A guest sees
+  an attendee by the name in CN, by the address only when there is none.
 
 - **The linked record and duplicates against their neighbours** (Carrel's
   task 232; accepted by the owner 25.10). Copies stand in the rail's

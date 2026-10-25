@@ -3426,7 +3426,7 @@ func Publish6() Screen {
 						},
 						Pad: w.HeadPadBottom8,
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
@@ -3434,9 +3434,14 @@ func Publish6() Screen {
 								Time:   "10:00",
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
 								Href:   "/p/7f3ac9?uid=aa01",
 							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
 								Time:   "18:00",
@@ -3446,16 +3451,42 @@ func Publish6() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "09:30",
-								Title:  []w.Inline{w.Text("Ревью архитектуры")},
-								Detail: "Переговорная 1",
-								Badges: []w.Badge{w.Badge{Label: "3 attendees"}},
-								Href:   "/p/7f3ac9?uid=ac03",
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/7f3ac9?uid=aa01",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 24 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/7f3ac9?uid=aa01",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 31 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Href:   "/p/7f3ac9?uid=aa01",
 							},
 						},
 					},
@@ -3501,7 +3532,7 @@ func Publish7() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Команда"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("13 contacts")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 contacts")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
@@ -3519,16 +3550,6 @@ func Publish7() Screen {
 						Rows: []w.ListRow{
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
-								Avatar:   w.Avatar{Initials: "АБ"},
-								Title:    []w.Inline{w.Text("Артём Белов")},
-								Strong:   true,
-								Subtitle: "+7 903 118-22-04",
-								Detail:   "a.belov@example.org",
-								Caption:  "Тензор",
-								Href:     "/p/2b91f4?uid=c101",
-							},
-							w.FaceRow{
-								Mark:     w.Mark{Colour: "#6B4E7A"},
 								Avatar:   w.Avatar{Initials: "АК"},
 								Title:    []w.Inline{w.Text("Анна Ковалёва")},
 								Subtitle: "+7 912 445-10-88",
@@ -3536,19 +3557,15 @@ func Publish7() Screen {
 								Caption:  "Издательство «Слово»",
 								Href:     "/p/2b91f4?uid=c102",
 							},
-						},
-					},
-					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
-								Avatar:   w.Avatar{Initials: "ВГ"},
-								Title:    []w.Inline{w.Text("Виктор Гончаров")},
-								Subtitle: "—",
-								Detail:   "v.goncharov@example.org",
-								Caption:  "Городская библиотека №4",
-								Href:     "/p/2b91f4?uid=c103",
+								Avatar:   w.Avatar{Initials: "АБ"},
+								Title:    []w.Inline{w.Text("Артём Белов")},
+								Strong:   true,
+								Subtitle: "+7 903 118-22-04",
+								Detail:   "a.belov@example.org",
+								Caption:  "Тензор",
+								Href:     "/p/2b91f4?uid=c101",
 							},
 						},
 					},
@@ -3600,6 +3617,12 @@ func Publish8() Screen {
 											{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"},
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 										},
+									},
+									w.Prose{
+										Parts: []w.Inline{
+											w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг."),
+										},
+										Variant: w.ProseLeadAfter,
 									},
 									w.DocFiles{
 										Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7},
@@ -3670,6 +3693,12 @@ func Publish23() Screen {
 											{Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"},
 										},
 									},
+									w.Prose{
+										Parts: []w.Inline{
+											w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг."),
+										},
+										Variant: w.ProseLeadAfter,
+									},
 									w.DocNote{Parts: []w.Inline{w.Text("2 attached files are not published.")}},
 								},
 							},
@@ -3692,8 +3721,10 @@ func Publish9() Screen {
 					w.Banner{
 						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
 						Badge: &w.Badge{Label: "read-only"},
-						End: w.Push{
-							Items: []w.PushPart{
+						End: w.Line{
+							Gap:   w.LineGap6,
+							Place: w.Pushed,
+							Items: []w.LinePart{
 								w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/Bn4q7Zs1Wd2e/download"},
 							},
 						},
@@ -3951,7 +3982,7 @@ func Publish24() Screen {
 							w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-17"},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
@@ -3962,24 +3993,17 @@ func Publish24() Screen {
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Href:   "/p/a41d07?uid=aa01",
 							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#4A6B52"},
 								Time:   "18:00",
 								Title:  []w.Inline{w.Text("Забрать документы")},
 								Detail: "",
 								Href:   "/p/a41d07?uid=ab02",
-							},
-						},
-					},
-					w.ListGroup{Title: w.Rubric{Text: "Thursday · 13 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "12:00",
-								Title:  []w.Inline{w.Text("Обед с Анной")},
-								Detail: "",
-								Href:   "/p/a41d07?uid=ad04",
 							},
 						},
 					},
@@ -4131,7 +4155,7 @@ func Publish16() Screen {
 									[]w.SecItemPart{w.Text("Мария Лебедева "), w.Dim{Parts: []w.Inline{w.Text("· organiser")}}},
 									[]w.SecItemPart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· accepted")}}},
 									[]w.SecItemPart{w.Text("Артём Белов "), w.Dim{Parts: []w.Inline{w.Text("· tentative")}}},
-									[]w.SecItemPart{w.Mono{Text: "v@example.org"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
+									[]w.SecItemPart{w.Text("Виктор Гончаров "), w.Dim{Parts: []w.Inline{w.Text("· no reply")}}},
 								},
 								Columns: true,
 							},
@@ -4204,10 +4228,8 @@ func Publish27() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Due Friday, 7 August 2026 · МФЦ, Мясницкая 13")}}},
 						Pad:   w.HeadPadBottom8,
 					},
-					w.Fields{
-						Items: []w.FieldsItem{
-							{Term: "Status", Value: []w.ValuePart{w.Text("In process "), w.Mono{Text: "40%"}}}},
-					},
+					w.Fields{Items: []w.FieldsItem{
+						{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}}}},
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Description"},
@@ -4312,7 +4334,7 @@ func Publish29() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Записи"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 notes")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 notes")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
@@ -4325,7 +4347,7 @@ func Publish29() Screen {
 						},
 						Pad: w.HeadPadBottom8,
 					},
-					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -4343,14 +4365,6 @@ func Publish29() Screen {
 								Date:    "8 Aug",
 								Single:  true,
 								Href:    "/p/61d4c7?uid=n2",
-							},
-							w.ExcerptRow{
-								Mark:    w.Mark{Colour: "#4A6B52"},
-								Title:   []w.Inline{w.Text("Список к поездке")},
-								Excerpt: "Адаптер, зарядка, страховка, распечатать билеты…",
-								Date:    "2 Aug",
-								Single:  true,
-								Href:    "/p/61d4c7?uid=n3",
 							},
 						},
 					},

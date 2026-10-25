@@ -88,6 +88,15 @@ var _ = add(
 
 	// tc-main
 	shell("plain", w.Main{Items: []w.MainPart{
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "download", Href: "/p/2b91f4/download"}}}, Wide: true},
+		w.Strip{Label: "Address of this book", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/2b91f4/team.vcf", Label: "Address of this book", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/2b91f4/team.vcf", Copied: "Copied"}, w.Dim{Parts: []w.Inline{w.Text("another Carrel can subscribe to it; other clients import it")}, Size: w.Dim11}}},
+		w.Head{Title: &w.HeadTitle{Text: "Команда"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 contacts")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"}, Waiting: true, Action: "/p/2b91f4", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8},
+		w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+		w.List{Rows: []w.ListRow{
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "АБ"}, Title: []w.Inline{w.Text("Артём Белов")}, Strong: true, Subtitle: "+7 903 118-22-04", Detail: "a.belov@example.org", Caption: "Тензор", Href: "/p/2b91f4?uid=c101"},
+			w.FaceRow{Mark: w.Mark{Colour: "#6B4E7A"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Href: "/p/2b91f4?uid=c102"}}},
+		w.MainFoot{Text: "This link works until 9 September 2026."}}}, "s-publish-7", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}},
 		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 events with «синк»")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "q"}, Action: "/p/a41d07", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8},
 		w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
@@ -352,14 +361,22 @@ var _ = add(
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/7f3ac9/download"}}}, Wide: true},
 		w.Strip{Label: "Subscribe in your own client", Items: []w.StripPart{w.Input{Value: "webcal://carrel.example/p/7f3ac9/personal.ics", Label: "Subscribe in your own client", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "webcal://carrel.example/p/7f3ac9/personal.ics", Copied: "Copied"}, w.Button{Label: "Open in calendar app", Small: true, Href: "webcal://carrel.example/p/7f3ac9/personal.ics"}, w.Dim{Parts: []w.Inline{w.Text("read-only, updates on its own")}, Size: w.Dim11}}},
-		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026")}}}, Pad: w.HeadPadBottom8},
-		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+		w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 31 August 2026")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"}, Waiting: true, Action: "/p/7f3ac9", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"},
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Href: "/p/7f3ac9?uid=ab02"}}},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"}}},
 		w.ListGroup{Title: w.Rubric{Text: "Tuesday · 11 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 		w.List{Rows: []w.ListRow{
-			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "09:30", Title: []w.Inline{w.Text("Ревью архитектуры")}, Detail: "Переговорная 1", Badges: []w.Badge{w.Badge{Label: "3 attendees"}}, Href: "/p/7f3ac9?uid=ac03"}}},
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "18:00", Title: []w.Inline{w.Text("Забрать документы")}, Detail: "МФЦ, Мясницкая 13", Href: "/p/7f3ac9?uid=ab02"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 24 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"}}},
+		w.ListGroup{Title: w.Rubric{Text: "Monday · 31 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+		w.List{Rows: []w.ListRow{
+			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"}}},
 		w.MainFoot{Text: "This link works until 8 September 2026."}}}, "s-publish-6", "tc-main", 1),
 	shell("zone", w.Main{Items: []w.MainPart{
 		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Variant: w.Mono11Top}}}, Variant: w.MainZone}, "shell-1", "tc-main", 1),
@@ -495,7 +512,7 @@ var _ = add(
 			w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}}, {Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}}}}}}, View: w.DocViewFocus},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-8", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
-		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Push{Items: []w.PushPart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary}}}},
+		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/Bn4q7Zs1Wd2e/download"}}}},
 		w.Head{Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "image/png · 412 KB · changed 2026-08-10"}}}}, Pad: w.HeadPadBottom6},
 		w.MainThumbs{Thumb: w.Thumb{Icon: "img", Form: w.ThumbWide}},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-9", "tc-main", 1),
