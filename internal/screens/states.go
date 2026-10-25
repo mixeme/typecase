@@ -2264,15 +2264,19 @@ func States11() Screen {
 							},
 						},
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Strong("Контакты is unavailable."),
-							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
-							w.Button{Label: "Try again", Small: true},
+					w.Notices{
+						Items: []w.NoticesPart{
+							w.Msg{
+								Parts: []w.MsgPart{
+									w.Strong("Контакты is unavailable."),
+									w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+									w.Button{Label: "Try again", Small: true},
+								},
+								Tone: w.MsgAlert,
+							},
+							w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}},
 						},
-						Tone: w.MsgAlert,
 					},
-					w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}},
 				},
 			},
 		},

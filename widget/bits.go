@@ -102,6 +102,16 @@ func (s MsgSpace) class() string {
 		"tc-msg--flush-top9", "tc-msg--flush-r0", "tc-msg--mx20", "tc-msg--m0-14-12", "tc-msg--my8"}[s]
 }
 
+// NoticesPart is what the zone of messages holds: a message, and a message's
+// technical block under it (Carrel's task 235).
+type NoticesPart interface {
+	part
+	noticesPart()
+}
+
+func (Msg) noticesPart()      {}
+func (MainDiag) noticesPart() {}
+
 // Notices — tc-notices
 //
 // Роль. Полоса сообщений над содержимым страницы, которую живой слой заменяет целиком.
@@ -110,10 +120,10 @@ func (s MsgSpace) class() string {
 // Инварианты. Своих отступов нет — они у сообщений, как без полосы; пустая полоса скрыта; полоса печатает фрагмент своего кадра.
 // Поведение. Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает.
 // Эталон. кадр `s-dup-6`, фрагмент `.tc-notices`.
-// Содержимое. Сообщения.
+// Содержимое. Сообщения и технический блок под сообщением.
 // Чего нет. Своего вида: вид у сообщений.
 type Notices struct {
-	Items []Msg
+	Items []NoticesPart
 	// Zone is the name the consumer gives this area of the page: the live
 	// layer puts an answer for that name here (Carrel's task 226). The
 	// library has no names of its own.

@@ -88,6 +88,11 @@ var _ = add(
 
 	// tc-main
 	shell("plain", w.Main{Items: []w.MainPart{
+		w.Head{Title: &w.HeadTitle{Text: "DAV validator"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Discovery without saving credentials")}}}},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Server URL", Parts: []w.FieldPart{w.Input{Name: "server", Value: "https://dav.office.example/dav.php/", Label: "Server URL", Mono: true, Required: true}}, Width: w.FieldXL}, w.Field{Label: "Username", Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}}, Width: w.FieldMD}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"}, w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}}}, Width: w.FieldMD}, w.Field{Label: "Certificate fingerprint", LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}}, Parts: []w.FieldPart{w.Input{Name: "certFingerprint", Placeholder: "only for a certificate the system does not trust", Label: "Certificate fingerprint", Mono: true}}, Width: w.FieldFull}, w.Field{Parts: []w.FieldPart{w.Button{Label: "Test discovery", Kind: w.ButtonPrimary, To: "/admin/dav?op=test", Submit: true}}}}, ID: "dav", Action: "/admin/dav", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
+		w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert},
+		w.MainDiag{Diag: w.Diag{Text: "[well-known]  GET /.well-known/caldav → 301 → /dav.php/\n[principal]   PROPFIND /dav.php/ → 401 Unauthorized"}}}}, "s-admin-28", "tc-main", 1),
+	shell("plain", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .vcf", Icon: "download", Href: "/p/2b91f4/download"}}}, Wide: true},
 		w.Strip{Label: "Address of this book", Items: []w.StripPart{w.Input{Value: "https://carrel.example/p/2b91f4/team.vcf", Label: "Address of this book", Mono: true, ReadOnly: true, Variant: w.InputLineFill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/p/2b91f4/team.vcf", Copied: "Copied"}, w.Dim{Parts: []w.Inline{w.Text("another Carrel can subscribe to it; other clients import it")}, Size: w.Dim11}}},
 		w.Head{Title: &w.HeadTitle{Text: "Команда"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 contacts")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"}, Waiting: true, Action: "/p/2b91f4", Variant: w.FilterH26W190}}}, Pad: w.HeadPadBottom8},
@@ -205,9 +210,8 @@ var _ = add(
 			{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "схема-проезда.png"}}, {Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "схема-проезда.png", Href: "/app/files/sftpgo/public/схема-проезда.png"}}}, {Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("image/png")}, Mono: true}, {Parts: []w.CellPart{w.Text("2026-06-02 16:40")}, Mono: true}, {Parts: []w.CellPart{w.Button{Icon: "download", Small: true, Title: "Download"}}, Acts: true}}}}},
 		w.PostForm{ID: "files-sel", Action: "/app/files/sftpgo/public/op", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}}}, "states-34", "tc-main", 1),
 	shell("alert-diag", w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Text: "Контакты"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "import"}}}},
-		w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert},
-		w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-main", 1),
+		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Контакты"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "import"}, w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}}}},
+		w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}}}, "states-11", "tc-main", 1),
 	shell("cards", w.Main{Items: []w.MainPart{
 		w.MainCards{Cards: []w.Card{w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
@@ -379,7 +383,9 @@ var _ = add(
 			w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10:00", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: "Переговорная 2", Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}}, Href: "/p/7f3ac9?uid=aa01"}}},
 		w.MainFoot{Text: "This link works until 8 September 2026."}}}, "s-publish-6", "tc-main", 1),
 	shell("zone", w.Main{Items: []w.MainPart{
-		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Variant: w.Mono11Top}}}, Variant: w.MainZone}, "shell-1", "tc-main", 1),
+		w.Notices{Items: []w.NoticesPart{}},
+		w.Runbar{Closed: true},
+		w.Zone{Title: w.Rubric{Text: "Content"}, Note: w.Mono{Text: "fluid · min 0", Form: w.MonoLine, Variant: w.Mono11Top}}}, Variant: w.MainZone}, "shell-1", "tc-main", 1),
 	shell("variant", w.Main{Items: []w.MainPart{
 		w.Head{Meta: &w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52"}, w.Text("nextcloud · Записи · "), w.Mono{Text: "10 Aug 2026 11:05"}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary}, w.Button{Label: "Export Markdown"}, w.Button{Label: "Print", Icon: "print"}, w.Button{Label: "Source"}, w.Seg{Options: []w.SegOption{{Label: "Full width"}, {Label: "Reading width", On: true}}}, w.Button{Icon: "panel", Title: "Hide the side column"}, w.Button{Icon: "dots", Title: "More"}}}, Pad: w.HeadRule},
 		w.DocLayout{Items: []w.DocLayoutPart{w.Doc{Items: []w.DocPart{

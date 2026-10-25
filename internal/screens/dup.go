@@ -1395,7 +1395,7 @@ func Dup6() Screen {
 						},
 					},
 					w.Notices{
-						Items: []w.Msg{
+						Items: []w.NoticesPart{
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),

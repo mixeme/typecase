@@ -515,7 +515,12 @@ func (g *gen) fields(e *El) string {
 
 // notices is the zone of a page's messages (Carrel's task 226).
 func (g *gen) notices(e *El) string {
-	return "w.Notices{Items: []w.Msg{" + g.each(e.Els(), g.msg) + "}}"
+	return "w.Notices{Items: []w.NoticesPart{" + g.each(e.Els(), func(x *El) string {
+		if x.Has("tc-main__diag") {
+			return "w.MainDiag{Diag: " + g.diag(x.Els()[0]) + "}"
+		}
+		return g.msg(x)
+	}) + "}}"
 }
 
 // anyblock is the widget a block element is, for a place that takes many.

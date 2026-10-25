@@ -1322,8 +1322,6 @@ func Agenda17() Screen {
 						},
 						Variant: w.BarWide,
 					},
-					w.Notices{Items: []w.Msg{}},
-					w.Runbar{Closed: true},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{

@@ -10,8 +10,9 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
-	cards("plain", w.Notices{Items: []w.Msg{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices", 1),
-	cards("empty", w.Notices{Items: []w.Msg{}}, "s-agenda-17", "tc-notices", 1),
+	cards("plain", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices", 1),
+	cards("diag", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-notices", 1),
+	cards("empty", w.Notices{Items: []w.NoticesPart{}}, "shell-1", "tc-notices", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Copied, and the original kept."), w.Text(" radicale · vps did not keep all of what was copied, so Личный on nextcloud was not deleted. Both are there now. "), w.Button{Label: "Open the copy", Small: true, Href: "/app/calendar/radicale/lichnyj"}}, Tone: w.MsgAlert, Space: w.MsgInset20}, "s-profile-32", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Архив was not deleted."), w.Text(" nextcloud refused: this account can read here but not write. Архив is as it was.")}, Tone: w.MsgAlert, Space: w.MsgInset20}, "s-profile-31", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Nothing was read."), w.Text(" «Разное (mix).vcf» is not a vCard file: its first line is not "), w.Mono{Text: "BEGIN:VCARD"}, w.Text(". Choose the file again.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-io-18", "tc-msg", 1),
@@ -96,7 +97,7 @@ var _ = add(
 	cards("width", w.Meter{Percent: 100, Width: w.MeterFill}, "desktop-14", "tc-meter", 1),
 
 	// tc-runbar
-	cards("plain", w.Runbar{Closed: true}, "s-agenda-17", "tc-runbar", 1),
+	cards("plain", w.Runbar{Closed: true}, "shell-1", "tc-runbar", 1),
 	cards("done", w.Runbar{Meter: w.Meter{Percent: 100}, Parts: []w.RunbarPart{w.Say{Full: "Done · 14 of 14 sources answered", Short: "14 of 14"}, w.Mono{Text: "1.2 s", Place: w.Pushed}}}, "s-find-5", "tc-runbar", 1),
 	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Say{Full: "Searching · 9 of 14 answered · 5 records", Short: "9 of 14 · 5 records"}, w.Push{Items: []w.PushPart{w.Button{Label: "Stop", Small: true, Form: "search-stop"}}}}}, "s-find-4", "tc-runbar", 1),
 	cards("running", w.Runbar{Meter: w.Meter{Percent: 62}, Parts: []w.RunbarPart{w.Text("Polling · 2 of 3 answered · 6 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}}}, "states-8", "tc-runbar", 1),

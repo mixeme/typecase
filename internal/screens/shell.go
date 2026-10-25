@@ -30,6 +30,8 @@ func Shell1() Screen {
 			RailForm: w.RailZone,
 			Main: w.Main{
 				Items: []w.MainPart{
+					w.Notices{Items: []w.NoticesPart{}},
+					w.Runbar{Closed: true},
 					w.Zone{
 						Title: w.Rubric{Text: "Content"},
 						Note:  w.Mono{Text: "fluid · min 0", Form: w.MonoLine, Variant: w.Mono11Top},

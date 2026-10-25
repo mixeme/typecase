@@ -121,7 +121,9 @@ do, not what the authors did.
     line is not followed, so a line emptied by the event that ends its run
     no longer opens its stream again;
   - `Notices` — the zone of a page's messages in `Main`, without a look of
-    its own (`.tc-notices{display:contents}`), hidden when empty;
+    its own (`.tc-notices{display:contents}`), hidden when empty; it holds
+    messages and a message's technical block (`NoticesPart`: `Msg`,
+    `MainDiag`; Carrel's task 235);
   - `Shell.Sheet` — the place of a sheet over the whole shell (the top
     bar, the rail and the page dimmed, as `Overlay`), closed until an
     answer fills it.
@@ -953,6 +955,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **The hidden zones stand in the shell's scheme only** (Carrel's task
+  235): the run's line and the zone of messages, waiting hidden, moved from
+  `s-agenda-17` to `shell-1`, beside the sheet's place — a screen's frame
+  draws none, the consumer's document puts them. `states-11` draws its
+  message and technical block as one zone of messages. The look of every
+  frame is the same.
 
 - **Guest pages against the owner's frames** (Carrel's task 234; accepted
   by the owner 25.10). «Личный» holds what the owner's calendar does — the
