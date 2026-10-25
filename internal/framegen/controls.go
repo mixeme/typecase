@@ -447,6 +447,9 @@ func (g *gen) filter(x *El) string {
 	if s := svgs(x); len(s) > 0 && s[0].Has("tc-ico--dusty") {
 		f = append(f, "Quiet: true")
 	}
+	if c := x.Kid("tc-in__clear"); c != nil {
+		f = append(f, "Clear: "+q(c.Attr("href")))
+	}
 	if x.Tag == "form" {
 		f = append(f, "Action: "+q(x.Attr("action")))
 		var hs []string

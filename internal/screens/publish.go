@@ -3417,7 +3417,7 @@ func Publish6() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/7f3ac9",
 									Variant: w.FilterH26W190,
@@ -3536,7 +3536,7 @@ func Publish7() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/2b91f4",
 									Variant: w.FilterH26W190,
@@ -3837,7 +3837,7 @@ func Publish12() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/5c40e2",
 									Variant: w.FilterH26W190,
@@ -3966,7 +3966,7 @@ func Publish24() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/a41d07",
 									Variant: w.FilterH26W190,
@@ -4030,7 +4030,8 @@ func Publish39() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
+									Clear:   "/p/a41d07",
 									Action:  "/p/a41d07",
 									Variant: w.FilterH26W190,
 								},
@@ -4259,7 +4260,7 @@ func Publish28() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/e5b210",
 									Variant: w.FilterH26W190,
@@ -4338,7 +4339,7 @@ func Publish29() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/61d4c7",
 									Variant: w.FilterH26W190,
@@ -4452,7 +4453,7 @@ func Publish30() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/5c40e2",
 									Hidden:  []w.Hidden{{Name: "in", Value: "скриншоты"}},
@@ -4634,7 +4635,7 @@ func Publish31() Screen {
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"},
+									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/e93b06",
 									Variant: w.FilterH26W190,

@@ -123,7 +123,7 @@ func Agenda1() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
 								Variant: w.FilterH26W200,
@@ -1257,7 +1257,7 @@ func Agenda17() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"},
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar/nextcloud/lichny",
 								Variant: w.FilterH26W200,
@@ -1463,7 +1463,8 @@ func Agenda31() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "q"},
+								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
+								Clear:   "/app/calendar/nextcloud/lichny",
 								Action:  "/app/calendar/nextcloud/lichny",
 								Variant: w.FilterH26W200,
 							},
@@ -1492,7 +1493,7 @@ func Agenda31() Screen {
 								Time:   "10:00",
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
 								Single: true,
 							},
 						},

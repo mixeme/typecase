@@ -251,10 +251,10 @@ func (v FilterVariant) class() string {
 // Filter — tc-in
 //
 // Роль. Фильтр списка: значок поиска и строка запроса в одной рамке.
-// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action, Hidden}.
+// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action, Hidden, Clear}.
 // Состояния. waiting | quiet.
 // Инварианты. Значок — первый узел поля, строка занимает остаток; фильтр печатает фрагмент своего кадра.
-// Поведение. С адресом (Action) — форма GET: Enter отправляет набранное, без сценария; без адреса — поле, которое читает форма вокруг. Сужения по мере набора нет (ревью 14.10: описание его обещало).
+// Поведение. С адресом (Action) — форма GET: Enter отправляет набранное, без сценария; без адреса — поле, которое читает форма вокруг. Сужения по мере набора нет (ревью 14.10: описание его обещало). Пока в поле есть слово, крестик в конце (Clear) — ссылка на тот же адрес без фильтра, и без сценария тоже.
 // Эталон. кадр `s-contacts-1`, фрагмент `label.tc-in`.
 // Содержимое. Строка запроса.
 // Чего нет. Подсказок по мере набора: это поиск в шапке, а не фильтр.
@@ -266,6 +266,10 @@ type Filter struct {
 	Place   Place
 	Action  string   // the filter is a form that sends its query there (GET)
 	Hidden  []Hidden // what the form sends with the query: the list's other choices (sort, tag)
+	// Clear is the same address without the filter: while the line holds a
+	// word, a cross at its end leads there (the owner, 25.10; Carrel's task
+	// 231), without a script too.
+	Clear string
 }
 
 // Render prints the filter.
@@ -277,6 +281,9 @@ func (f Filter) html(m mix) string {
 		icon = `<svg width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none" class="tc-ico--dusty">`
 	}
 	inner := icon + Icon("search").use() + `</svg>` + f.Query.html(nil)
+	if f.Clear != "" && f.Query.Value != "" {
+		inner += `<a class="tc-in__clear"` + attr("href", f.Clear) + ` title="Clear the filter" aria-label="Clear the filter"><svg viewBox="0 0 24 24">` + Icon("close").use() + `</svg></a>`
+	}
 	if f.Action != "" {
 		for _, h := range f.Hidden {
 			inner += h.html(nil)

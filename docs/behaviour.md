@@ -48,7 +48,7 @@
 | `Field` | `tc-field` | Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов. | тест: `TestAddRowAndDrop`, `TestEditFile`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZoneSheet`, `TestZones`, `TestFieldChanged` |
 | `FieldSet` | `tc-fset` | Группа с адресом (Action) — своя форма: её кнопка шлёт её поля, а не поля соседних групп. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestTemplateShows` |
 | `Fields` | `tc-fields` | нет. | — |
-| `Filter` | `tc-in` | Сужает список по мере набора; Esc очищает. | **описание обещало несделанное — исправлено** (14.10) |
+| `Filter` | `tc-in` | Форма GET отправляет набранное по Enter; крестик (Clear) — ссылка на адрес без фильтра. | без сценария (форма, ссылка) |
 | `FindRow` | `tc-row` | Нажатие открывает запись. | без сценария (ссылка, форма, `details`) |
 | `Form` | `tc-form` | Enter в поле формы отправляет форму. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZones` |
 | `FormFoot` | `tc-formfoot` | нет: поведение у кнопок. | — |

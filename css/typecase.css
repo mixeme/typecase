@@ -188,6 +188,10 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 :where(.tc-root) :where(textarea){field-sizing:content;resize:none}
 :where(.tc-root) :where(button[role=menuitem],a[role=menuitem]){width:100%}
 .tc-root .tc-q{flex:1;min-width:0;min-height:0;overflow:hidden}
+/* Крестик фильтра со словом — ссылка на адрес без фильтра (Filter.Clear, задача Carrel 231). */
+.tc-in__clear{display:inline-flex;flex:none;align-items:center;justify-content:center;width:18px;height:18px;margin-left:4px;color:var(--tc-dusty);border-radius:2px}
+.tc-in__clear:hover{color:var(--tc-ink)}
+.tc-in__clear > svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.6}
 /* Подсказка пустого поля — тем же цветом, что набранное: поле само тихое (U-1). */
 .tc-root .tc-q::placeholder{color:inherit;opacity:1;font:inherit;letter-spacing:inherit;line-height:inherit}
 .tc-acts > .tc-drop{flex:none}

@@ -112,6 +112,9 @@ do, not what the authors did.
 
 ### Added
 
+- `Filter.Clear` — the same address without the filter: while the line
+  holds a word, a cross at its end leads there (`.tc-in__clear`), without
+  a script too (the owner, 25.10; Carrel's task 231).
 - **The live layer for Carrel's zones** (Carrel's task 226):
   - an answer carries the page's forms after its zone's widget
     (`page.Fragment.Forms`, `ZonePart.Forms`): the widget takes the zone's
@@ -955,6 +958,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **One name for a filter's field, `filter`, on every screen** (Carrel's
+  task 231; accepted by the owner 25.10): the owner's calendar and the
+  guest pages send `filter`, as the owner's lists do — `q` stays the
+  search's. The filtered calendar's series row says «4 attendees» and
+  «repeats weekly», as in the week; a filter with a word has its cross
+  (`s-agenda-31`, `s-publish-39`).
 
 - **The quick sheet without its collection; «Custom…» in the quick sheets;
   the crop with its picture** (Carrel's task 233; accepted by the owner
