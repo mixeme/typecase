@@ -143,7 +143,7 @@ func Contacts1() Screen {
 								Detail:     "a.kovaleva@example.org",
 								Caption:    "Издательство «Слово»",
 								Source:     "3 sources",
-								SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+								SourceHint: "nextcloud · Контакты, nextcloud · Архив, radicale · vps · Команда",
 								On:         true,
 							},
 							w.FaceRow{
@@ -280,6 +280,12 @@ func Contacts1() Screen {
 					},
 					w.Sec{
 						Items: []w.SecPart{
+							w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 3", Small: true}}},
+							w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
 							w.Rubric{Text: "Where this person is kept", Items: []w.RubricPart{w.Badge{Label: "3", Tone: w.BadgeLinked}}},
 							w.SecList{
 								Items: [][]w.SecItemPart{
@@ -291,18 +297,18 @@ func Contacts1() Screen {
 										w.Dim{Parts: []w.Inline{w.Text("· Phone differs")}},
 									},
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
-										w.Text(" "),
-										w.Link{Text: "radicale · vps · Команда", Href: "#"},
-										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· Email differs")}},
-									},
-									[]w.SecItemPart{
 										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
 										w.Text(" "),
 										w.Link{Text: "nextcloud · Архив", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Email differs")}},
 									},
 								},
 								Gap: 5,
@@ -455,7 +461,7 @@ func Contacts2() Screen {
 									Detail:     "a.kovaleva@example.org",
 									Caption:    "Издательство «Слово»",
 									Source:     "3 sources",
-									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+									SourceHint: "nextcloud · Контакты, nextcloud · Архив, radicale · vps · Команда",
 									On:         true,
 								},
 								w.FaceRow{
@@ -1414,16 +1420,16 @@ func Contacts6() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 									[]w.SecItemPart{
-										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "nextcloud · Архив", Href: "#"},
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
@@ -1442,18 +1448,21 @@ func Contacts6() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
+										Href:   "/app/calendar/nextcloud/lichny/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#4A6B52"},
 										Icon:   "file",
 										Title:  "2026-08-04-обложка.pdf",
 										Detail: "04 Aug · attached to «Согласовать обложку»",
+										Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
 										Icon:   "task",
 										Title:  "Согласовать обложку",
 										Detail: "04 Aug · organiser · done",
+										Href:   "/app/tasks/nextcloud/rabota/b9d3",
 									},
 								},
 							},
@@ -2056,18 +2065,18 @@ func Contacts16() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+									[]w.SecItemPart{
 										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 										w.Text(" "),
 										w.Link{Text: "radicale · vps · Команда", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
-									},
-									[]w.SecItemPart{
-										w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
-										w.Text(" "),
-										w.Link{Text: "baikal · Общий", Href: "#"},
-										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}},
 									},
 								},
 								Gap: 5,
@@ -2084,18 +2093,21 @@ func Contacts16() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
+										Href:   "/app/calendar/nextcloud/lichny/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#4A6B52"},
 										Icon:   "file",
 										Title:  "2026-08-04-обложка.pdf",
 										Detail: "04 Aug · attached to «Согласовать обложку»",
+										Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
 										Icon:   "task",
 										Title:  "Согласовать обложку",
 										Detail: "04 Aug · organiser · done",
+										Href:   "/app/tasks/nextcloud/rabota/b9d3",
 									},
 								},
 							},
@@ -2254,7 +2266,7 @@ func Contacts35() Screen {
 									Detail:     "a.kovaleva@example.org",
 									Caption:    "Издательство «Слово»",
 									Source:     "3 sources",
-									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+									SourceHint: "nextcloud · Контакты, nextcloud · Архив, radicale · vps · Команда",
 								},
 								w.FaceRow{
 									Mark:       w.Mark{Colour: "#6B4E7A"},
@@ -2666,16 +2678,16 @@ func Contacts7() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},
 									[]w.SecItemPart{
-										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "nextcloud · Архив", Href: "#"},
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
 									},

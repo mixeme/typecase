@@ -272,6 +272,209 @@ func Notes1() Screen {
 	}
 }
 
+// Notes33 is frame «Заметки · панель заметки одной тетради» (s-notes-33).
+func Notes33() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+					On: 4,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined notebook",
+							Meta:    "5",
+							Current: true,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Общие с семьёй",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Tags"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "New notebook"},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 3 notes · VJOURNAL")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Button{Label: "Import", Icon: "import"},
+								w.Button{Label: "Export", Icon: "export"},
+							},
+						},
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Waiting: true,
+								Variant: w.FilterH26W200,
+							},
+							w.Seg{
+								Options:   []w.SegOption{{Label: "Newest", On: true}, {Label: "Oldest"}, {Label: "Title"}, {Label: "Recently changed"}},
+								Secondary: true,
+							},
+							w.Button{Label: "Columns", Icon: "cols"},
+						},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Title:      []w.Inline{w.Text("Заметка со встречи 10.08")},
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+								Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Date:       "10 Aug",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Записи, nextcloud · Дневник",
+							},
+							w.ExcerptRow{
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Title:      []w.Inline{w.Text("Что почитать про CRDT")},
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+								Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Date:       "8 Aug",
+								Source:     "2 sources",
+								SourceHint: "nextcloud · Записи, nextcloud · Дневник",
+							},
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#6B4E7A"},
+								Title:   []w.Inline{w.Text("Про дорогу до дачи")},
+								Strong:  true,
+								Excerpt: "Съезд после заправки, потом грунтовка два километра…",
+								Date:    "3 Aug",
+								Source:  "nextcloud · Дневник",
+								On:      true,
+							},
+						},
+					},
+				},
+			},
+			Side: &w.Side{
+				Items: []w.SidePart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Про дорогу до дачи", Size: w.HeadTitle19},
+						Tools: []w.HeadTool{
+							w.Button{Label: "Edit", Small: true},
+							w.Button{Icon: "expand", Small: true, Title: "Open the note page"},
+							w.Button{Icon: "dots", Small: true, Title: "More"},
+						},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+									w.Text("nextcloud · Дневник · "),
+									w.Mono{Text: "3 August 2026, 19:40"},
+								},
+							},
+						},
+						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
+						Middle: true,
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Prose{
+								Parts:   []w.Inline{w.Text("Съезд после заправки, потом грунтовка два километра. После дождя — только по левой колее.")},
+								Variant: w.ProseRead,
+							},
+						},
+					},
+					w.Fields{Items: []w.FieldsItem{
+						{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "дача"}}}}},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{
+								Text: "Attachments",
+								Items: []w.RubricPart{
+									w.Drop{
+										Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
+										Menu: w.Menu{
+											Items: []w.MenuPart{
+												w.MenuItem{
+													Icon:  "upload",
+													File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+													Label: "From this computer",
+												},
+												w.MenuItem{Icon: "file", Label: "From Files"},
+												w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
+											},
+											Width: w.MenuWidth212,
+											Pop:   w.MenuUnder,
+										},
+									},
+								},
+							},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Link{Text: "маршрут.gpx", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("application/gpx+xml · 18 KB")}},
+										w.Text(" "),
+										w.Badge{Label: "in the note"},
+									},
+								},
+								Gap: 6,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 // Notes31 is frame «Заметки · одна тетрадь» (s-notes-31).
 func Notes31() Screen {
 	return w.Shell{
@@ -370,11 +573,12 @@ func Notes31() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
-								Mark:    w.Mark{Colour: "#4A6B52"},
-								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
-								Date:    "10 Aug",
-								Single:  true,
+								Mark:       w.Mark{Colour: "#4A6B52"},
+								Title:      []w.Inline{w.Text("Заметка со встречи 10.08")},
+								TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked, Title: "nextcloud · Записи, nextcloud · Дневник"},
+								Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Date:       "10 Aug",
+								Single:     true,
 							},
 							w.ExcerptRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
@@ -2502,7 +2706,7 @@ func Notes9() Screen {
 									Detail:     "a.kovaleva@example.org",
 									Caption:    "Издательство «Слово»",
 									Source:     "3 sources",
-									SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив",
+									SourceHint: "nextcloud · Контакты, nextcloud · Архив, radicale · vps · Команда",
 									On:         true,
 								},
 								w.FaceRow{

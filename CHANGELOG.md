@@ -952,6 +952,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The linked record and duplicates against their neighbours** (Carrel's
+  task 232; accepted by the owner 25.10). Copies stand in the rail's
+  order — by connection, then the collections' order in it — in a group's
+  rows, its questions and «Where … is kept»; the contacts' linked panel has
+  «Kept as the server sent them»; the card after a merge has the contact
+  card's head, its timeline rows link to their records («related to this
+  person»), as every contact card's do; the linked task card is drawn as
+  the task card, the linked event repeats «until 2026-12-28», the linked
+  note's column is Tags, Related, Attachments; «Заметка со встречи» is
+  linked in its notebook too. New: the panel of a task and of a note that
+  lie in one collection (`s-tasks-20`, `s-notes-33`). Anna's other books
+  are Архив and Команда in three more frames.
+
 - **Duplicates after note 117: the frames against the fixture set and
   each other** (Carrel's task 230; accepted by the owner 24.10). Anna's
   copies share one UID — «220 points · same UID, …»; every copy has its

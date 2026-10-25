@@ -4,6 +4,7 @@ import w "carrel.dev/typecase/widget"
 
 var _ = add(
 	// tc-head
+	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Про дорогу до дачи", Size: w.HeadTitle19}, Tools: []w.HeadTool{w.Button{Label: "Edit", Small: true}, w.Button{Icon: "expand", Small: true, Title: "Open the note page"}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, w.Text("nextcloud · Дневник · "), w.Mono{Text: "3 August 2026, 19:40"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}}, Middle: true}, "s-notes-33", "tc-head", 2),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}}, Pad: w.HeadPadBottom8}, "s-publish-25", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19}, Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}}, Pad: w.HeadPadBottom8}, "s-publish-36", "tc-head", 1),
 	shell("plain", w.Head{Title: &w.HeadTitle{Text: "Личный"}, Pad: w.HeadPadBottom8}, "s-publish-37", "tc-head", 1),
@@ -638,16 +639,19 @@ var _ = add(
 	// tc-side
 	shell("plain", w.Side{Items: []w.SidePart{w.Head{Photo: &w.HeadPhoto{Initials: "АК"}, Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19}, Tools: []w.HeadTool{w.Button{Label: "Edit", Small: true, Href: "/app/contacts/linked/4f2b-9c31-a0e7/copies"}, w.Button{Label: "All records", Small: true}, w.Button{Icon: "dots", Small: true, Title: "More"}}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("in 3 books")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}}, Middle: true}, w.Fields{Items: []w.FieldsItem{
 		{Term: "Organisation", Value: []w.ValuePart{w.Text("Издательство «Слово»")}},
-		{Term: "Title", Value: []w.ValuePart{w.Text("Выпускающий редактор")}},
+		{Term: "Title", Value: []w.ValuePart{w.Text("Выпускающий редактор "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}}},
 		{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
 		{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-77 "), w.Dim{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Команда")}}}, Face: w.ValueMono},
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 		{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}}},
-		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14")}, Face: w.ValueMono},
+		{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3 "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}}},
+		{Term: "Birthday", Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}, w.Text(" "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}}, Face: w.ValueMono},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
-		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, w.Sec{Items: []w.SecPart{
+		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день. "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}}}}}, w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 3", Small: true}}},
+		w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."}}}, w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Where this person is kept", Items: []w.RubricPart{w.Badge{Label: "3", Tone: w.BadgeLinked}}},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Контакты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone differs")}}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Email differs")}}}, []w.SecItemPart{w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Архив", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}}, Gap: 5}}}}}, "s-contacts-1", "tc-side", 1),
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Контакты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone differs")}}}, []w.SecItemPart{w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "nextcloud · Архив", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}}}, []w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Команда", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Email differs")}}}}, Gap: 5}}}}}, "s-contacts-1", "tc-side", 1),
 	shell("zone", w.Side{Items: []w.SidePart{w.Zone{Title: w.Rubric{Text: "Details"}, Note: w.Mono{Text: "400 px · closes by ✕", Variant: w.Mono11Top}}}, Variant: w.SideZone}, "shell-1", "tc-side", 1),
 	shell("acts", w.Side{Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle17}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · Documents")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Icon: "close", Title: "Close the panel"}}}, Pad: w.HeadPadBottom8}, w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, w.SideActs{Items: []w.Button{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary}, w.Button{Label: "Open"}, w.Button{Label: "Rename", Icon: "pencil"}, w.Button{Label: "Move", Icon: "move"}}}, w.Fields{Items: []w.FieldsItem{
 		{Term: "Size", Value: []w.ValuePart{w.Text("412 KB")}, Face: w.ValueMono},

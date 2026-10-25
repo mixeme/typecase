@@ -2778,18 +2778,18 @@ func Publish3() Screen {
 								w.SecList{
 									Items: [][]w.SecItemPart{
 										[]w.SecItemPart{
+											w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+											w.Text(" "),
+											w.Link{Text: "nextcloud · Архив", Href: "#"},
+											w.Text(" "),
+											w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+										},
+										[]w.SecItemPart{
 											w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
 											w.Text(" "),
 											w.Link{Text: "radicale · vps · Команда", Href: "#"},
 											w.Text(" "),
 											w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
-										},
-										[]w.SecItemPart{
-											w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline},
-											w.Text(" "),
-											w.Link{Text: "baikal · Общий", Href: "#"},
-											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("· The server did not answer; the record stays linked")}},
 										},
 									},
 									Gap: 5,
@@ -2806,18 +2806,21 @@ func Publish3() Screen {
 											Icon:   "cal",
 											Title:  "Синк-ап по релизу",
 											Detail: "10 Aug · attendee · accepted",
+											Href:   "/app/calendar/nextcloud/lichny/aa01",
 										},
 										w.LinkedRow{
 											Mark:   w.Mark{Colour: "#4A6B52"},
 											Icon:   "file",
 											Title:  "2026-08-04-обложка.pdf",
 											Detail: "04 Aug · attached to «Согласовать обложку»",
+											Href:   "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-обложка.pdf",
 										},
 										w.LinkedRow{
 											Mark:   w.Mark{Colour: "#3F6E8C"},
 											Icon:   "task",
 											Title:  "Согласовать обложку",
 											Detail: "04 Aug · organiser · done",
+											Href:   "/app/tasks/nextcloud/rabota/b9d3",
 										},
 									},
 								},
