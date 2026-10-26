@@ -484,6 +484,11 @@ var _ = add(
 
 	// tc-card
 	cards("plain", w.Card{Items: []w.CardPart{
+		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>", Variant: w.Mono11Muted}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Text("Михаил Енученко "), w.Mono{Text: "<mix@example.org>", Variant: w.Mono11Muted}}}, {Slot: "To", Parts: []w.CardTextPart{w.Text("Анна Ковалёва "), w.Mono{Text: "<a.kovaleva@example.org>", Variant: w.Mono11Muted}, w.Text(", Артём Белов "), w.Mono{Text: "<a.belov@example.org>", Variant: w.Mono11Muted}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
+		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.\n\nМихаил Енученко")}, Variant: w.Prose13Card},
+		w.CardRow{Kind: w.CardAttached, Gap: 6, Items: []w.CardRowPart{w.Tag{Label: "smirnov.vcf", Icon: "con"}, w.Tag{Label: "vstrecha.ics", Icon: "cal"}}},
+		w.CardText{Kind: w.CardCaption, Parts: []w.CardTextPart{w.Text("смета-подрядчик.pdf — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/9c1f4e"}, w.Break{}, w.Text("Договор подряда, 1 folder, 6 files — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/2ab77d"}}}}, Variant: w.CardFlush}, "s-mail-14", "tc-card", 1),
+	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Анна Ковалёва", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "linked ×3", Tone: w.BadgeLinked}, w.Mono{Text: "Not loaded in this session", Variant: w.MonoTightDusty}}}}},
 		w.CardText{Kind: w.CardLine, Parts: []w.CardTextPart{w.Text("nextcloud · Контакты, nextcloud · Архив, radicale · vps · Команда "), w.Dim{Parts: []w.Inline{w.Text("· UID 4f2b-9c31-a0e7")}}}},
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true}}}}, Action: "/app/duplicates/decide", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "group", Value: "g3"}}}, "s-dup-6", "tc-card", 1),
@@ -715,7 +720,7 @@ var _ = add(
 		w.Rubric{Text: "Archive password"},
 		w.CardFields{Items: []w.CardFieldsPart{w.Field{Parts: []w.FieldPart{w.Input{Kind: w.InputPassword, Name: "password", Value: "••••••••••••", Label: "Archive password", Focus: true}, w.FieldHint{Parts: []w.Inline{w.Text("The one set in the job, not your sign-in password.")}}}, Width: w.FieldLG}}}}}, "s-backup-7", "tc-card", 2),
 	cards("flush", w.Card{Items: []w.CardPart{
-		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>", Variant: w.Mono11Muted}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Mono{Text: "mix@example.org", Variant: w.Mono11}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
+		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>", Variant: w.Mono11Muted}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Text("Михаил Енученко "), w.Mono{Text: "<mix@example.org>", Variant: w.Mono11Muted}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
 		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.\n\nМихаил Енученко")}, Variant: w.Prose13Card},
 		w.CardRow{Kind: w.CardAttached, Gap: 6, Items: []w.CardRowPart{w.Tag{Label: "smirnov.vcf", Icon: "con"}, w.Tag{Label: "vstrecha.ics", Icon: "cal"}}},
 		w.CardText{Kind: w.CardCaption, Parts: []w.CardTextPart{w.Text("смета-подрядчик.pdf — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/9c1f4e"}, w.Break{}, w.Text("Договор подряда, 1 folder, 6 files — "), w.Span{Face: w.FaceAccent, Text: "carrel.example/p/2ab77d"}}}}, Variant: w.CardFlush}, "s-mail-7", "tc-card", 1),

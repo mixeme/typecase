@@ -622,7 +622,7 @@ a.tc-row__title:hover{text-decoration:underline}
 [data-tc-theme="dark"] .tc-avatar{background:#3A463D;color:#C9BFA6}
 /* метки, значки, статусы */
 .tc-tag{border:.5px solid var(--tc-hair);border-radius:2px;padding:0 5px;font-size:10.5px;color:var(--tc-muted);background:var(--tc-surface);white-space:nowrap}
-.tc-tag:has(> .tc-mark){display:inline-flex;align-items:center;gap:5px}
+.tc-tag:has(> .tc-mark, > svg){display:inline-flex;align-items:center;gap:5px}
 .tc-tag.is-on{border-color:var(--tc-accent);color:var(--tc-accent)}
 .tc-badge{display:inline-flex;align-items:center;gap:4px;height:16px;line-height:1;vertical-align:1px;
   border:.5px solid var(--tc-rule);border-radius:2px;padding:0 6px;font-size:10px;color:var(--tc-muted);white-space:nowrap;
@@ -22750,6 +22750,45 @@ Read  2 min ago</div>
 <figcaption><b>Лист, а не страница, и по той же причине, что у быстрой заметки:</b> письмо пишут о том, что сейчас на экране, и терять этот экран нельзя — две отмеченные строки за листом и есть половина содержимого письма. Открывается оно из-под стрелки у <b>New note</b> (<a href="#s-notes">7.4</a>), последним пунктом и за чертой: это единственное действие того меню, которое ничего не создаёт в коллекции.<br><br><b>Главное в этом окне — колонка «attached / as a link».</b> Она отвечает на вопрос, который иначе задаёт получатель: почему вместо файла пришёл адрес. Правил ровно два, и оба видны здесь без объяснений — папка уходит ссылкой всегда, остальное превращается в ссылку, когда не влезает в потолок. Сказать это <b>до</b> отправки — единственный момент, когда это ещё что-то меняет: человек либо соглашается, либо убирает вложение.<br><br><b>Строка внизу говорит, чем письмо подписано и куда придёт ответ,</b> — оба ответа берутся из профиля и оба не редактируются здесь. Отправитель показан не в поле, а меткой в шапке: выбирать не из чего, форму адреса решил администратор, и поле с одним недоступным значением было бы приглашением его менять. <b>Ошибка отправки</b> встаёт первой фразой строки лимитов под списком получателей: своего поля уведомления у листа нет. <b>Условия ссылки — в её строке</b> (решение владельца 12.10, Б38): срок, как его говорит список ссылок, и «Change…». Она открывает лист публикации (<code>s-publish-5</code>, у календаря и контакта — <code>s-publish-2</code>, <code>-3</code>) поверх письма, с условиями этой строки; главная кнопка листа там — «Apply»: ссылка создаётся, когда письмо уходит, как прежде, и лист возвращает в письмо с новыми условиями в строке. Общая строка под вложениями осталась без срока: она говорит, почему два вложения уходят ссылками и где их отозвать.</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="s-mail-14">
+  <div class="frame-label"><span>Письмо · просмотр</span><span class="frag">фрагмент</span><i>Preview в листе письма</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <form class="tc-sheet tc-sheet--w680" action="/app/mail/send" method="post">
+          <div class="tc-sheet__head">
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-eye"/></svg>
+            <b class="tc-sheet__title">Preview</b>
+            <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">as the recipients get it</span>
+          </div>
+          <div class="tc-sheet__body">
+      <div class="tc-card tc-card--flush">
+              <div class="tc-stack tc-stack--gap-3 tc-card__head">
+                <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--t11-muted">&lt;mix@carrel.example&gt;</span></div>
+                <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Reply-To</span>Михаил Енученко <span class="tc-mono tc-mono--t11-muted">&lt;mix@example.org&gt;</span></div>
+                <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">To</span>Анна Ковалёва <span class="tc-mono tc-mono--t11-muted">&lt;a.kovaleva@example.org&gt;</span>, Артём Белов <span class="tc-mono tc-mono--t11-muted">&lt;a.belov@example.org&gt;</span></div>
+                <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Subject</span>Контакты подрядчика и смета</div>
+              </div>
+              <div class="tc-prose tc-prose--t13-flush-padt11">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.
+
+-- 
+Михаил Енученко</div>
+              <div class="tc-line tc-line--gap-6 tc-card__files">
+                <span class="tc-tag"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><use href="#i-con"/></svg> smirnov.vcf</span>
+                <span class="tc-tag"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><use href="#i-cal"/></svg> vstrecha.ics</span>
+              </div>
+              <div class="tc-card__caption">смета-подрядчик.pdf — <span class="tc-dim--accent">carrel.example/p/9c1f4e</span><br>Договор подряда, 1 folder, 6 files — <span class="tc-dim--accent">carrel.example/p/2ab77d</span></div>
+            </div>
+          </div>
+          <div class="tc-sheet__foot">
+            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+            <a class="tc-btn" href="/app/mail/compose">Edit</a>
+            <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
+          </div>
+        </form>
+  </div>
+</div>
+<figcaption>Preview показывает письмо так, как его получат: заголовки, текст с подписью, вложения файлами и ссылки отдельным блоком под ними. Edit возвращает в лист письма, набранное на месте; Send отправляет то, что видно.</figcaption>
+</figure>
 
 <div class="frames">
   <figure style="flex:0 1 300px">
@@ -23433,11 +23472,12 @@ Read  2 min ago</div>
       <div class="tc-card tc-card--flush">
         <div class="tc-stack tc-stack--gap-3 tc-card__head">
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--t11-muted">&lt;mix@carrel.example&gt;</span></div>
-          <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Reply-To</span><span class="tc-mono tc-mono--t11">mix@example.org</span></div>
+          <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Reply-To</span>Михаил Енученко <span class="tc-mono tc-mono--t11-muted">&lt;mix@example.org&gt;</span></div>
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Subject</span>Контакты подрядчика и смета</div>
         </div>
         <div class="tc-prose tc-prose--t13-flush-padt11">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.
 
+-- 
 Михаил Енученко</div>
         <div class="tc-line tc-line--gap-6 tc-card__files">
           <span class="tc-tag"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><use href="#i-con"/></svg> smirnov.vcf</span>
@@ -23447,7 +23487,7 @@ Read  2 min ago</div>
       </div>
     </div>
   </div>
-  <figcaption>Подпись — то же имя из профиля, что и в <code>From</code>: поле одно, мест два. Ссылки стоят под вложениями отдельным блоком, а не в теле письма: получатель должен видеть их как часть приложенного, иначе они читаются как случайные адреса в тексте.</figcaption>
+  <figcaption>Подпись — то же имя из профиля, что и в <code>From</code>: поле одно, мест два. Перед ней строка «<code>-- </code>» (два дефиса и пробел): по ней почтовые программы узнают подпись. В <code>Reply-To</code> — имя с адресом, как в <code>From</code>: ответ уходит человеку, а не голому адресу. Ссылки стоят под вложениями отдельным блоком, а не в теле письма: получатель должен видеть их как часть приложенного, иначе они читаются как случайные адреса в тексте.</figcaption>
   </figure>
 
   <figure style="flex:1 1 380px">
@@ -23461,6 +23501,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-prose tc-prose--t13-flush-padt11">Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.
 
+-- 
 Михаил Енученко</div>
         <div class="tc-line tc-line--gap-6 tc-card__files">
           <span class="tc-tag"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><use href="#i-con"/></svg> smirnov.vcf</span>

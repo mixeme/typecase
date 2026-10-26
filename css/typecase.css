@@ -441,7 +441,7 @@ a.tc-row__title:hover{text-decoration:underline}
 [data-tc-theme="dark"] .tc-avatar{background:#3A463D;color:#C9BFA6}
 /* метки, значки, статусы */
 .tc-tag{border:.5px solid var(--tc-hair);border-radius:2px;padding:0 5px;font-size:10.5px;color:var(--tc-muted);background:var(--tc-surface);white-space:nowrap}
-.tc-tag:has(> .tc-mark){display:inline-flex;align-items:center;gap:5px}
+.tc-tag:has(> .tc-mark, > svg){display:inline-flex;align-items:center;gap:5px}
 .tc-tag.is-on{border-color:var(--tc-accent);color:var(--tc-accent)}
 .tc-badge{display:inline-flex;align-items:center;gap:4px;height:16px;line-height:1;vertical-align:1px;
   border:.5px solid var(--tc-rule);border-radius:2px;padding:0 6px;font-size:10px;color:var(--tc-muted);white-space:nowrap;

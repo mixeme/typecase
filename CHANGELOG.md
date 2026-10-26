@@ -979,6 +979,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The letter's Preview shows it as the recipients get it** (the owner,
+  26.10; Carrel's task 194 p. 7): new `s-mail-14` — From, Reply-To, To,
+  Subject, the text with its signature, files and the block of links; Send,
+  Edit, Cancel. Reply-To carries the name as From does; the signature
+  stands after «-- » (RFC 3676) in `s-mail-7`, `-8`, `-14`. A tag with an
+  icon keeps it on the name's line (`.tc-tag:has(> svg)`).
+
 - **A file chosen from the computer can be dropped too** (Р-70; accepted by
   the owner 26.10): new «Бросок там, где файл выбирают» — a table of which
   page carries which drop sheet (`Scrim{Drop, Closed}`) and the sheets
