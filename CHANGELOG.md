@@ -112,6 +112,11 @@ do, not what the authors did.
 
 ### Added
 
+- `Shell.Dialogs` — the page's own sheets without an address, each closed
+  under its ID until a button (`Button.Opens`) or a link to «#ID» opens it
+  with the library's script: the keys sheet of «Keyboard shortcuts» and
+  «?» (Carrel's task 239). The frames draw them in the zones' scheme
+  (`shell-1`) only, as the place of a sheet.
 - `MenuItem.Required` — a radio item of a choice the form cannot be sent
   without, without a script too: the notebook of a quick note not chosen
   yet (Carrel's task 238).
@@ -973,6 +978,11 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- «Keyboard shortcuts» in the account's menu (`account-5`, `desktop-2`) is
+  a link to `#keys` pressed by «?» and shown only with a script: without
+  one the keys do not work either. The keys sheet (`account-6`) is
+  `#keys` (Carrel's task 239).
 
 - The guest's address book (`s-publish-7`) draws no row in bold: a guest's
   rows are links, none is open (Carrel's task 238).

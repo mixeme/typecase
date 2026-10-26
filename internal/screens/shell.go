@@ -50,6 +50,7 @@ func Shell1() Screen {
 			},
 			Height: w.ShellHeight230,
 		},
-		Sheet: &w.Scrim{Closed: true},
+		Sheet:   &w.Scrim{Closed: true},
+		Dialogs: []w.Scrim{w.Scrim{ID: "keys", Closed: true}},
 	}
 }

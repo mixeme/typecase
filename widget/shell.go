@@ -326,12 +326,12 @@ func (ShellBody) shellContent() {}
 // Shell — tc-shell
 //
 // Роль. Оболочка приложения: верхняя полоса, рейл, страница, панель — корень экрана.
-// Вход. Shell{Top, Body, Sheet}.
+// Вход. Shell{Top, Body, Sheet, Dialogs}.
 // Состояния. plain | side | no-rail | no-top | icons | zone | overlay.
 // Инварианты. Зон четыре, и каждая на своём месте: полоса сверху, рейл слева, страница, панель справа; как оболочка ведёт себя на узком экране, решает CSS (--tc-shell-mode); оболочка печатает фрагмент своего кадра.
 // Поведение. На узком экране рейл становится ящиком, панель — листом поверх страницы.
 // Эталон. кадр `shell-1`, фрагмент `.tc-shell`.
-// Содержимое. Верхняя полоса и тело: рейл, страница, панель.
+// Содержимое. Верхняя полоса и тело: рейл, страница, панель; место листа и закрытые листы страницы.
 // Чего нет. Порогов в коде: ширины и пороги — токены и контейнерные запросы CSS.
 type Shell struct {
 	Top  *Top
@@ -341,6 +341,11 @@ type Shell struct {
 	// opening a sheet puts its answer in (Carrel's task 226). Closed, it
 	// waits hidden.
 	Sheet *Scrim
+	// Dialogs are the page's own sheets without an address, each closed
+	// (Scrim.Closed) under its ID until a button (Button.Opens) or a link to
+	// «#ID» opens it with the library's script: the keys sheet that
+	// «Keyboard shortcuts» and «?» open (Carrel's task 239).
+	Dialogs []Scrim
 }
 
 // Render prints the shell.
@@ -356,6 +361,9 @@ func (s Shell) html(m mix) string {
 	}
 	if s.Sheet != nil {
 		out += s.Sheet.html(nil)
+	}
+	for _, d := range s.Dialogs {
+		out += d.html(nil)
 	}
 	return out + `</div>`
 }

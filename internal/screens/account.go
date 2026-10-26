@@ -993,7 +993,14 @@ func Account5() Screen {
 									Variant: w.SegStartSmall,
 								},
 							},
-							w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
+							w.MenuItem{
+								Icon:       "search",
+								Trail:      w.Kbd{Keys: "?"},
+								Label:      "Keyboard shortcuts",
+								ScriptOnly: true,
+								Href:       "#keys",
+								Key:        "?",
+							},
 							w.MenuSep{},
 							w.MenuItem{Label: "Sign out", Form: "post-signout"},
 						},
@@ -1352,6 +1359,7 @@ func Account6() Screen {
 					Foot:  []w.SheetFootPart{w.Button{Label: "Close"}, w.Kbd{Keys: "Esc"}, w.Kbd{Keys: "?", Place: w.Pushed}},
 					Width: w.SheetWidth480,
 				},
+				ID: "keys",
 			},
 		},
 	}

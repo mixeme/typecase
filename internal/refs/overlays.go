@@ -632,9 +632,9 @@ var _ = add(
 		w.MenuItem{Icon: "adm", Label: "Administration"},
 		w.MenuSep{},
 		w.MenuColumn{Label: "Theme", Control: w.Seg{Options: []w.SegOption{{Label: "Auto", On: true}, {Label: "Light"}, {Label: "Dark"}}, Variant: w.SegStartSmall}},
-		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
+		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts", ScriptOnly: true, Href: "#keys", Key: "?"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Sign out"}}, Width: w.MenuWidth290}, "account-5", "tc-menu", 1),
+		w.MenuItem{Label: "Sign out", Form: "post-signout"}}, Width: w.MenuWidth290}, "account-5", "tc-menu", 1),
 	overlay("pop", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "pencil", Label: "Rename and colour"},
 		w.MenuItem{Icon: "move", Label: "Move to another server"},
@@ -728,7 +728,7 @@ var _ = add(
 		w.MenuItem{Icon: "server", Label: "Switch instance"},
 		w.MenuSep{},
 		w.MenuColumn{Label: "Theme", Control: w.Seg{Options: []w.SegOption{{Label: "Auto", On: true}, {Label: "Light"}, {Label: "Dark"}}, Variant: w.SegStartSmall}},
-		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts"},
+		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts", ScriptOnly: true, Href: "#keys", Key: "?"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Sign out…"}}, Width: w.MenuWidth290}, "desktop-2", "tc-menu", 1),
 	overlay("on", w.Menu{Items: []w.MenuPart{
