@@ -112,6 +112,12 @@ do, not what the authors did.
 
 ### Added
 
+- `MenuItem.Required` — a radio item of a choice the form cannot be sent
+  without, without a script too: the notebook of a quick note not chosen
+  yet (Carrel's task 238).
+- **`shape` reads the zone of messages as its messages** (Carrel's task
+  238): a screen whose messages stand in `tc-notices` has the shape of a
+  frame that draws them in the page; an empty zone is nothing.
 - **Paper for every kind** (Carrel's task 228): `PrintRow.Field` — a
   card's field, its name then its value; `PrintRow.Head` — the row naming a
   table's columns, small capitals over the rows (the owner, 25.10);
@@ -967,6 +973,9 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- The guest's address book (`s-publish-7`) draws no row in bold: a guest's
+  rows are links, none is open (Carrel's task 238).
 
 - **Paper and the offline page** (Carrel's task 228; accepted by the owner
   25.10–26.10): new «Остальное на бумаге» — the contacts list, a contact's

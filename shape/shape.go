@@ -24,7 +24,8 @@
 // it. What is not compared: text, attributes, a template's contents,
 // the options of a select, a datalist, the hidden fields of a form, an
 // element with hidden but for the progress bar, a menu and the scrim (a
-// script opens those, and the frame draws them hidden), a picture in an
+// script opens those, and the frame draws them hidden), the zone of
+// messages (its messages stand in its place), a picture in an
 // avatar or a thumbnail (Src: data, the frame draws the place), the menu
 // of a button with its menu (the frames draw it beside the screen). Nor is the element's
 // tag when it has classes: its look is its classes, and the meaning of HTML
@@ -57,6 +58,8 @@
 //     (TestDroppedAndOpaque);
 //   - a closed menu is its button (TestClosedMenuIsItsButton);
 //   - a value's link stands for its words (TestMeaningIsNoDifference);
+//   - the zone of messages stands for its messages, empty it is nothing
+//     (TestNoticesAreTheirMessages);
 //   - is-photo of an avatar is data (TestAvatarPhotoIsData);
 //   - a screen is one element (TestDroppedAndOpaque).
 package shape
@@ -192,12 +195,14 @@ func dataClass(classes []string, c string) bool {
 
 // kids are an element's children, with a value's link (tc-fields__link)
 // opened: the link is the value's meaning, its words are the value (task 52).
+// So is the zone of messages (tc-notices): it has no look, its messages
+// stand where it stands, as a frame draws them (Carrel's task 238).
 func kids(n *fragment.Node) []*fragment.Node {
 	var out []*fragment.Node
 	for _, k := range n.Children {
 		link := false
 		for _, c := range k.Classes {
-			if c == "tc-fields__link" {
+			if c == "tc-fields__link" || c == "tc-notices" {
 				link = true
 			}
 		}

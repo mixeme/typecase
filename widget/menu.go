@@ -80,9 +80,13 @@ type MenuItem struct {
 	// Of is the ID of the form a radio item (Name) belongs to without
 	// standing in it: the collection chosen in an edit's head, outside the
 	// edit's form (Carrel's task 203).
-	Of    string
-	Fixed bool
-	Drag  bool // the drawn state of an item being dragged (the mockup's states)
+	Of string
+	// Required makes a radio item (Name) one of a choice the form cannot be
+	// sent without, without a script too: the notebook of a quick note not
+	// chosen yet (Carrel's task 238).
+	Required bool
+	Fixed    bool
+	Drag     bool // the drawn state of an item being dragged (the mockup's states)
 	// Tertiary is the twin of a bar's tertiary item in the menu of «⋯»:
 	// shown on a phone only, where the item itself is under «⋯».
 	Tertiary bool
@@ -160,7 +164,7 @@ func (it MenuItem) html(mix) string {
 		// a collection that cannot be chosen is shown and switched off, its
 		// reason in the hint: read-only (Carrel's task 103)
 		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio"` + attr("form", it.Of) + ` role="menuitemradio"` + attr("name", it.Name) + ` value="` + esc(it.Value) + `"` +
-			flag("checked", it.On) + flag("disabled", it.Reason != "") + `>`)
+			flag("checked", it.On) + flag("required", it.Required) + flag("disabled", it.Reason != "") + `>`)
 		if it.Icon != "" {
 			s.WriteString(`<svg` + class(nil, pick(it.Faint, "tc-ico--op-35")) + `>` + it.Icon.use() + `</svg>`)
 		}

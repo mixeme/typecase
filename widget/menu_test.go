@@ -19,3 +19,18 @@ func TestMenuRadioOf(t *testing.T) {
 		t.Errorf("a radio without Of names a form:\n%s", m)
 	}
 }
+
+// TestMenuRadioRequired: a radio item of a choice the form cannot be sent
+// without carries required (Carrel's task 238); the others do not.
+func TestMenuRadioRequired(t *testing.T) {
+	m := Menu{Items: []MenuPart{
+		MenuItem{Label: "nextcloud · Записи", Name: "into", Value: "nextcloud/zapisi", Required: true},
+		MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+	}}.Render()
+	if !strings.Contains(m, `name="into" value="nextcloud/zapisi" required>`) {
+		t.Errorf("the radio is not required:\n%s", m)
+	}
+	if strings.Contains(m, `value="UTC" required`) {
+		t.Errorf("a radio without Required is required:\n%s", m)
+	}
+}

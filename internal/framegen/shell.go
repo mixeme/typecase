@@ -466,6 +466,9 @@ func (g *gen) menuItem(k *El) string {
 	}
 	if radio != nil {
 		f = append(f, "Name: "+q(radio.Attr("name")), "Value: "+q(radio.Attr("value")))
+		if radio.HasAttr("required") {
+			f = append(f, "Required: true")
+		}
 		if fm := radio.Attr("form"); fm != "" {
 			f = append(f, "Of: "+q(fm))
 		}

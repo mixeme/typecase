@@ -3554,7 +3554,6 @@ func Publish7() Screen {
 								Mark:     w.Mark{Colour: "#6B4E7A"},
 								Avatar:   w.Avatar{Initials: "АБ"},
 								Title:    []w.Inline{w.Text("Артём Белов")},
-								Strong:   true,
 								Subtitle: "+7 903 118-22-04",
 								Detail:   "a.belov@example.org",
 								Caption:  "Тензор",

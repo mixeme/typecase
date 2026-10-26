@@ -9,8 +9,8 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("plain", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", Name: "into", Value: "nextcloud/zapisi"},
-		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "into", Value: "nextcloud/dnevnik"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", Name: "into", Value: "nextcloud/zapisi", Required: true},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "into", Value: "nextcloud/dnevnik", Required: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: nothing can be written here."}}, Width: w.MenuWidth290, Pop: w.MenuUnderEnd}, "s-notes-34", "tc-menu", 1),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},

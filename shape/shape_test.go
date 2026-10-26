@@ -447,3 +447,33 @@ func TestDroppedAndOpaque(t *testing.T) {
 		t.Error("two top elements pass")
 	}
 }
+
+// Carrel's task 238: the zone of messages has no look — a screen whose
+// messages stand in it has the shape of a frame that draws them in the page,
+// and an empty zone is nothing; a message too many is still too many.
+func TestNoticesAreTheirMessages(t *testing.T) {
+	m := mockup(t)
+	r, ok := screens.Find("states-22")
+	if !ok {
+		t.Fatal("no states-22")
+	}
+	page := r.Screen().Render()
+	msg := `<div class="tc-msg is-alert">`
+	i := strings.Index(page, msg)
+	if i < 0 {
+		t.Fatal("no message in states-22")
+	}
+	j := i + strings.Index(page[i:], "</div>") + len("</div>")
+	zone := func(inner string) string {
+		return page[:i] + `<div class="tc-notices" data-tc-zone="notices">` + inner + `</div>` + page[j:]
+	}
+	if err := m.Check("states-22", zone(page[i:j])); err != nil {
+		t.Errorf("the message in its zone: %v", err)
+	}
+	if err := m.Check("states-22", page[:j]+`<div class="tc-notices" data-tc-zone="notices" hidden></div>`+page[j:]); err != nil {
+		t.Errorf("an empty zone beside the message: %v", err)
+	}
+	if err := m.Check("states-22", zone(page[i:j]+`<div class="tc-msg">One more.</div>`)); err == nil {
+		t.Error("a message too many in the zone passes; want it red")
+	}
+}
