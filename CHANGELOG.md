@@ -981,6 +981,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **What follows Send** (the owner, 27.10; Carrel's task 194 p. 7): all
+  accepted — the sheet closes, the screen under it says «The letter went to
+  2 recipients.» (`s-mail-16`); all refused — the letter as it was, the
+  relay's words first under To (`s-mail-17`); some refused — a sheet of who
+  got it and who was refused, «Send again to the refused» (`s-mail-18`). The
+  line under To reads «Up to 10 recipients. Each sees the others'
+  addresses.».
+
 - **The letter's Cancel asks when a text is typed** (the owner, 26.10;
   Carrel's task 194 p. 7): Cancel sends the form (`op=close`); without a
   text the sheet closes and the draft is forgotten, with one — new

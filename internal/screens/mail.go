@@ -250,7 +250,7 @@ func Mail1() Screen {
 									},
 									Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 								},
-								w.FieldHint{Parts: []w.Inline{w.Text("2 of 10 recipients. Everyone sees the whole list.")}},
+								w.FieldHint{Parts: []w.Inline{w.Text("Up to 10 recipients. Each sees the others' addresses.")}},
 							},
 							Width: w.FieldW100,
 						},
@@ -363,6 +363,833 @@ func Mail1() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+			},
+		},
+	}
+}
+
+// Mail16 is frame «Письмо ушло» (s-mail-16).
+func Mail16() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+					},
+					On: 1,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Контакты"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("312 записей · 2 отмечено")}}},
+					},
+					w.Msg{Parts: []w.MsgPart{w.Text("The letter went to 2 recipients.")}, Tone: w.MsgAccent},
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АК"},
+								Title:    []w.Inline{w.Text("Анна Ковалёва")},
+								Strong:   true,
+								Subtitle: "+7 912 445-10-88",
+								Detail:   "a.kovaleva@example.org",
+								Caption:  "Издательство «Слово»",
+								Source:   "nextcloud · Личный",
+								On:       true,
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Артём Белов")},
+								Strong:   true,
+								Subtitle: "+7 903 118-22-04",
+								Detail:   "a.belov@example.org",
+								Caption:  "—",
+								Source:   "radicale · vps · Команда",
+								On:       true,
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АГ"},
+								Title:    []w.Inline{w.Text("Алексей Гринёв")},
+								Strong:   true,
+								Subtitle: "+7 921 330-07-19",
+								Detail:   "a.grinev@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Личный",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#3F6E8C"},
+								Avatar:   w.Avatar{Initials: "АЛ"},
+								Title:    []w.Inline{w.Text("Антонина Лебедева")},
+								Strong:   true,
+								Subtitle: "+7 916 204-55-31",
+								Detail:   "a.lebedeva@example.org",
+								Caption:  "Проектное бюро",
+								Source:   "nextcloud · Работа",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Б", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "БК"},
+								Title:    []w.Inline{w.Text("Борис Кузьмин")},
+								Strong:   true,
+								Subtitle: "+7 905 771-42-08",
+								Detail:   "b.kuzmin@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Личный",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#3F6E8C"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Богдан Ремизов")},
+								Strong:   true,
+								Subtitle: "+7 999 018-63-77",
+								Detail:   "b.remizov@example.org",
+								Caption:  "СМУ-14",
+								Source:   "nextcloud · Работа",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Initials: "БЯ"},
+								Title:    []w.Inline{w.Text("Белла Янковская")},
+								Strong:   true,
+								Subtitle: "+7 926 887-11-40",
+								Detail:   "b.yankovskaya@example.org",
+								Caption:  "—",
+								Source:   "radicale · vps · Команда",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "ВД"},
+								Title:    []w.Inline{w.Text("Вера Дорошенко")},
+								Strong:   true,
+								Subtitle: "+7 903 552-19-06",
+								Detail:   "v.doroshenko@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Личный",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#8C6239"},
+								Avatar:   w.Avatar{Initials: "ВП"},
+								Title:    []w.Inline{w.Text("Виктор Панов")},
+								Strong:   true,
+								Subtitle: "+7 910 443-28-15",
+								Detail:   "v.panov@example.org",
+								Caption:  "Смета-Сервис",
+								Source:   "baikal · Офис",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Г", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "ГМ"},
+								Title:    []w.Inline{w.Text("Галина Мещерякова")},
+								Strong:   true,
+								Subtitle: "+7 962 114-90-23",
+								Detail:   "g.mescher@example.org",
+								Caption:  "—",
+								Source:   "nextcloud · Личный",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#3F6E8C"},
+								Avatar:   w.Avatar{Initials: "ГС"},
+								Title:    []w.Inline{w.Text("Геннадий Соловьёв")},
+								Strong:   true,
+								Subtitle: "+7 911 605-37-84",
+								Detail:   "g.solovyov@example.org",
+								Caption:  "Проектное бюро",
+								Source:   "nextcloud · Работа",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Photo: true},
+								Title:    []w.Inline{w.Text("Глеб Тарасов")},
+								Strong:   true,
+								Subtitle: "+7 985 229-46-12",
+								Detail:   "g.tarasov@example.org",
+								Caption:  "—",
+								Source:   "radicale · vps · Команда",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#8C6239"},
+								Avatar:   w.Avatar{Initials: "ГФ"},
+								Title:    []w.Inline{w.Text("Григорий Фомин")},
+								Strong:   true,
+								Subtitle: "+7 917 783-51-60",
+								Detail:   "g.fomin@example.org",
+								Caption:  "СМУ-14",
+								Source:   "baikal · Офис",
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// Mail17 is frame «Письмо не ушло» (s-mail-17).
+func Mail17() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 1,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Контакты"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("312 записей · 2 отмечено")}}},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Strong:   true,
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@example.org",
+									Caption:  "Издательство «Слово»",
+									Source:   "nextcloud · Личный",
+									On:       true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Артём Белов")},
+									Strong:   true,
+									Subtitle: "+7 903 118-22-04",
+									Detail:   "a.belov@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+									On:       true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АГ"},
+									Title:    []w.Inline{w.Text("Алексей Гринёв")},
+									Strong:   true,
+									Subtitle: "+7 921 330-07-19",
+									Detail:   "a.grinev@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Initials: "АЛ"},
+									Title:    []w.Inline{w.Text("Антонина Лебедева")},
+									Strong:   true,
+									Subtitle: "+7 916 204-55-31",
+									Detail:   "a.lebedeva@example.org",
+									Caption:  "Проектное бюро",
+									Source:   "nextcloud · Работа",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Б", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "БК"},
+									Title:    []w.Inline{w.Text("Борис Кузьмин")},
+									Strong:   true,
+									Subtitle: "+7 905 771-42-08",
+									Detail:   "b.kuzmin@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Богдан Ремизов")},
+									Strong:   true,
+									Subtitle: "+7 999 018-63-77",
+									Detail:   "b.remizov@example.org",
+									Caption:  "СМУ-14",
+									Source:   "nextcloud · Работа",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Initials: "БЯ"},
+									Title:    []w.Inline{w.Text("Белла Янковская")},
+									Strong:   true,
+									Subtitle: "+7 926 887-11-40",
+									Detail:   "b.yankovskaya@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВД"},
+									Title:    []w.Inline{w.Text("Вера Дорошенко")},
+									Strong:   true,
+									Subtitle: "+7 903 552-19-06",
+									Detail:   "v.doroshenko@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#8C6239"},
+									Avatar:   w.Avatar{Initials: "ВП"},
+									Title:    []w.Inline{w.Text("Виктор Панов")},
+									Strong:   true,
+									Subtitle: "+7 910 443-28-15",
+									Detail:   "v.panov@example.org",
+									Caption:  "Смета-Сервис",
+									Source:   "baikal · Офис",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Г", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ГМ"},
+									Title:    []w.Inline{w.Text("Галина Мещерякова")},
+									Strong:   true,
+									Subtitle: "+7 962 114-90-23",
+									Detail:   "g.mescher@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Initials: "ГС"},
+									Title:    []w.Inline{w.Text("Геннадий Соловьёв")},
+									Strong:   true,
+									Subtitle: "+7 911 605-37-84",
+									Detail:   "g.solovyov@example.org",
+									Caption:  "Проектное бюро",
+									Source:   "nextcloud · Работа",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Глеб Тарасов")},
+									Strong:   true,
+									Subtitle: "+7 985 229-46-12",
+									Detail:   "g.tarasov@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#8C6239"},
+									Avatar:   w.Avatar{Initials: "ГФ"},
+									Title:    []w.Inline{w.Text("Григорий Фомин")},
+									Strong:   true,
+									Subtitle: "+7 917 783-51-60",
+									Detail:   "g.fomin@example.org",
+									Caption:  "СМУ-14",
+									Source:   "baikal · Офис",
+								},
+							},
+						},
+					},
+				},
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					ID:     "letter",
+					Action: "/app/mail/send",
+					Icon:   "mail",
+					Title:  "Letter",
+					Head: []w.SheetHeadPart{
+						w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed},
+						w.Close{Label: "Close", Href: "/app/contacts"},
+					},
+					Body: []w.SheetPart{
+						w.Field{
+							Label: "To",
+							Parts: []w.FieldPart{
+								w.Drop{
+									Trigger: w.TagInput{
+										Parts: []w.TagInputPart{
+											w.Tag{
+												Label:     "Анна Ковалёва",
+												Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+												Removable: true,
+												Aside:     &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}},
+												Title:     "a.kovaleva@example.org",
+												Name:      "to",
+												Value:     "a.kovaleva@example.org",
+											},
+											w.Tag{
+												Label:     "Артём Белов",
+												Mark:      &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+												Removable: true,
+												Aside:     &w.Dim{Parts: []w.Inline{w.Text("· a.belov@example.org")}},
+												Title:     "a.belov@example.org",
+												Name:      "to",
+												Value:     "a.belov@example.org",
+											},
+										},
+										Name: "to",
+										Add: &w.TagAdd{
+											Name:        "to.add",
+											Placeholder: "Name or address",
+											Label:       "Add a recipient",
+											Suggest:     "/app/contacts/suggest",
+											Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
+										},
+										Focus: true,
+									},
+									Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+								},
+								w.FieldHint{
+									Parts: []w.Inline{
+										w.Span{Face: w.FaceDanger, Text: "The letter did not go: the relay answered «451 4.7.0 Try again later»."},
+										w.Text(" Up to 10 recipients. Each sees the others' addresses."),
+									},
+								},
+							},
+							Width: w.FieldW100,
+						},
+						w.Field{
+							Label: "Subject",
+							Parts: []w.FieldPart{w.Input{Name: "subject", Value: "Контакты подрядчика и смета", Label: "Subject"}},
+							Width: w.FieldW100,
+						},
+						w.Area{
+							Text:    "Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.",
+							Variant: w.AreaLetter,
+							Name:    "text",
+							Label:   "Text",
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{
+									Text: "Attached",
+									Items: []w.RubricPart{
+										w.Num{Value: 4},
+										w.Line{
+											Items: []w.LinePart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
+															w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},
+															w.MenuItem{Icon: "cal", Label: "Event", To: "/app/mail/send?op=attach&what=event"},
+															w.MenuItem{Icon: "cal", Label: "Calendar", To: "/app/mail/send?op=attach&what=calendar"},
+															w.MenuItem{Icon: "task", Label: "Task", To: "/app/mail/send?op=attach&what=task"},
+															w.MenuItem{Icon: "note", Label: "Note", To: "/app/mail/send?op=attach&what=note"},
+															w.MenuSep{},
+															w.MenuItem{Icon: "doc", Label: "File", To: "/app/mail/send?op=attach&what=file"},
+															w.MenuItem{
+																Icon:  "file",
+																Trail: w.Tag{Label: "link", Place: w.Pushed},
+																Label: "Folder",
+																To:    "/app/mail/send?op=attach&what=folder",
+															},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnderEnd,
+													},
+												},
+											},
+											Gap:   w.LineGap6,
+											Place: w.Pushed,
+										},
+									},
+									Variant: w.RubricRow,
+								},
+								w.SecFiles{
+									Items: []w.SecFile{
+										{
+											Icon:   "con",
+											Name:   "Пётр Смирнов · подрядчик",
+											Size:   w.Mono{Text: ".vcf · 3 KB", Variant: w.MonoDusty11},
+											Tag:    w.Tag{Label: "attached"},
+											Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=0", Submit: true},
+										},
+										{
+											Icon:   "cal",
+											Name:   "Встреча на объекте · 18 August 10:00",
+											Size:   w.Mono{Text: ".ics · 2 KB", Variant: w.MonoDusty11},
+											Tag:    w.Tag{Label: "attached"},
+											Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=1", Submit: true},
+										},
+										{
+											Icon:   "doc",
+											Name:   "смета-подрядчик.pdf",
+											Size:   w.Mono{Text: "4.2 MB", Variant: w.MonoDusty11},
+											Tag:    w.Tag{Label: "as a link", On: true},
+											Terms:  &w.Mono{Text: "30 days", Variant: w.MonoDusty11},
+											Change: &w.Button{Label: "Change…", Small: true, To: "/app/mail/send?op=change&i=2", Submit: true},
+											Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=2", Submit: true},
+										},
+										{
+											Icon:   "file",
+											Name:   "Договор подряда · 1 folder · 6 files",
+											Size:   w.Mono{Text: "folder", Variant: w.MonoDusty11},
+											Tag:    w.Tag{Label: "as a link", On: true},
+											Terms:  &w.Mono{Text: "30 days", Variant: w.MonoDusty11},
+											Change: &w.Button{Label: "Change…", Small: true, To: "/app/mail/send?op=change&i=3", Submit: true},
+											Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=3", Submit: true},
+										},
+									},
+								},
+								w.Msg{
+									Parts: []w.MsgPart{
+										w.Text("The PDF (over 2 MB) and the folder go as links; revoking one in "),
+										w.Strong("Published links"),
+										w.Text(" closes it for this letter too."),
+									},
+									Tone:  w.MsgAccent,
+									Space: w.MsgFlushTop11,
+								},
+							},
+							Flush: true,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Ctrl+Enter"},
+						w.Button{Label: "Preview", To: "/app/mail/send?op=preview", Submit: true},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Signed "), w.Strong("Михаил Енученко"), w.Text(" · replies go to mix@example.org")},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+			},
+		},
+	}
+}
+
+// Mail18 is frame «Письмо ушло не всем» (s-mail-18).
+func Mail18() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+						},
+						On: 1,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+						},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Text: "Контакты"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("312 записей · 2 отмечено")}}},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Strong:   true,
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@example.org",
+									Caption:  "Издательство «Слово»",
+									Source:   "nextcloud · Личный",
+									On:       true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Артём Белов")},
+									Strong:   true,
+									Subtitle: "+7 903 118-22-04",
+									Detail:   "a.belov@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+									On:       true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АГ"},
+									Title:    []w.Inline{w.Text("Алексей Гринёв")},
+									Strong:   true,
+									Subtitle: "+7 921 330-07-19",
+									Detail:   "a.grinev@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Initials: "АЛ"},
+									Title:    []w.Inline{w.Text("Антонина Лебедева")},
+									Strong:   true,
+									Subtitle: "+7 916 204-55-31",
+									Detail:   "a.lebedeva@example.org",
+									Caption:  "Проектное бюро",
+									Source:   "nextcloud · Работа",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Б", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "БК"},
+									Title:    []w.Inline{w.Text("Борис Кузьмин")},
+									Strong:   true,
+									Subtitle: "+7 905 771-42-08",
+									Detail:   "b.kuzmin@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Богдан Ремизов")},
+									Strong:   true,
+									Subtitle: "+7 999 018-63-77",
+									Detail:   "b.remizov@example.org",
+									Caption:  "СМУ-14",
+									Source:   "nextcloud · Работа",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Initials: "БЯ"},
+									Title:    []w.Inline{w.Text("Белла Янковская")},
+									Strong:   true,
+									Subtitle: "+7 926 887-11-40",
+									Detail:   "b.yankovskaya@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВД"},
+									Title:    []w.Inline{w.Text("Вера Дорошенко")},
+									Strong:   true,
+									Subtitle: "+7 903 552-19-06",
+									Detail:   "v.doroshenko@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#8C6239"},
+									Avatar:   w.Avatar{Initials: "ВП"},
+									Title:    []w.Inline{w.Text("Виктор Панов")},
+									Strong:   true,
+									Subtitle: "+7 910 443-28-15",
+									Detail:   "v.panov@example.org",
+									Caption:  "Смета-Сервис",
+									Source:   "baikal · Офис",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "Г", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ГМ"},
+									Title:    []w.Inline{w.Text("Галина Мещерякова")},
+									Strong:   true,
+									Subtitle: "+7 962 114-90-23",
+									Detail:   "g.mescher@example.org",
+									Caption:  "—",
+									Source:   "nextcloud · Личный",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#3F6E8C"},
+									Avatar:   w.Avatar{Initials: "ГС"},
+									Title:    []w.Inline{w.Text("Геннадий Соловьёв")},
+									Strong:   true,
+									Subtitle: "+7 911 605-37-84",
+									Detail:   "g.solovyov@example.org",
+									Caption:  "Проектное бюро",
+									Source:   "nextcloud · Работа",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#6B4E7A"},
+									Avatar:   w.Avatar{Photo: true},
+									Title:    []w.Inline{w.Text("Глеб Тарасов")},
+									Strong:   true,
+									Subtitle: "+7 985 229-46-12",
+									Detail:   "g.tarasov@example.org",
+									Caption:  "—",
+									Source:   "radicale · vps · Команда",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#8C6239"},
+									Avatar:   w.Avatar{Initials: "ГФ"},
+									Title:    []w.Inline{w.Text("Григорий Фомин")},
+									Strong:   true,
+									Subtitle: "+7 917 783-51-60",
+									Detail:   "g.fomin@example.org",
+									Caption:  "СМУ-14",
+									Source:   "baikal · Офис",
+								},
+							},
+						},
+					},
+				},
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Icon:  "mail",
+					Title: "Letter",
+					Head: []w.SheetHeadPart{
+						w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed},
+						w.Close{Label: "Close", Href: "/app/contacts"},
+					},
+					Body: []w.SheetPart{
+						w.Msg{
+							Parts: []w.MsgPart{w.Text("The letter went, but not to everyone. Sending again goes only to the refused.")},
+							Tone:  w.MsgAlert,
+							Space: w.MsgFlushSides,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+								w.Text("Анна Ковалёва "),
+								w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}},
+								w.Text(" — "),
+								w.Strong("sent"),
+							},
+							Gap:   w.LineGap6,
+							Block: true,
+						},
+						w.Line{
+							Items: []w.LinePart{
+								w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+								w.Text("Артём Белов "),
+								w.Dim{Parts: []w.Inline{w.Text("· a.belov@example.org")}},
+								w.Text(" — "),
+								w.Faced{Face: w.FaceDanger, Items: []w.LinePart{w.Text("refused: «550 5.1.1 Mailbox unavailable»")}},
+							},
+							Gap:   w.LineGap6,
+							Block: true,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Send again to the refused", Kind: w.ButtonPrimary, Href: "/app/mail/compose?to=refused"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}},
 							Gap:   w.LineGap7,
 							Place: w.Pushed,
 						},
