@@ -981,6 +981,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The letter's Cancel asks when a text is typed** (the owner, 26.10;
+  Carrel's task 194 p. 7): Cancel sends the form (`op=close`); without a
+  text the sheet closes and the draft is forgotten, with one — new
+  `s-mail-15` «Close the letter?»: «Close and lose the text» (`op=discard`)
+  or «Keep writing» with Esc. The letter's drafts wait for the mail section.
+
 - **Every sheet names its keys** (Р-81, the owner 26.10): the main button
   «Enter», or «Ctrl+Enter» in a sheet with a text (a letter, a reply, a
   quick note); Cancel «Esc» at the end of the foot — 31 sheets mended. A

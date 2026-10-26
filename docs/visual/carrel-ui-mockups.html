@@ -22742,7 +22742,7 @@ Read  2 min ago</div>
             <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="submit" formaction="/app/mail/send?op=preview">Preview</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Signed <b>Михаил Енученко</b> · replies go to mix@example.org</span>
-            <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
+            <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
         </form>
       </div>
@@ -22784,12 +22784,32 @@ Read  2 min ago</div>
           <div class="tc-sheet__foot">
             <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Enter</kbd>
             <a class="tc-btn" href="/app/mail/compose">Edit</a>
-            <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
+            <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
         </form>
   </div>
 </div>
 <figcaption>Preview показывает письмо так, как его получат: заголовки, текст с подписью, вложения файлами и ссылки отдельным блоком под ними. Edit возвращает в лист письма, набранное на месте; Send отправляет то, что видно.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-mail-15">
+  <div class="frame-label"><span>Письмо · закрыть с текстом</span><span class="frag">фрагмент</span><i>Cancel или Esc, когда текст набран</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <form class="tc-sheet tc-sheet--w480" action="/app/mail/send?op=discard" method="post">
+          <div class="tc-sheet__head">
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-mail"/></svg>
+            <b class="tc-sheet__title">Close the letter?</b>
+            <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">from mix@carrel.example</span>
+          </div>
+          <div class="tc-sheet__body">
+            <div class="tc-msg tc-msg--flush">Carrel keeps no drafts: <b>closing loses the text</b>.</div>
+          </div>
+          <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Close and lose the text</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn is-primary" href="/app/mail/compose">Keep writing</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        </form>
+  </div>
+</div>
+<figcaption>Cancel письма отправляет форму (<code>op=close</code>): текста нет — лист закрывается, черновик забыт; текст набран — этот вопрос, как у ящика без папки черновиков. Главное — продолжать писать: Esc ведёт туда, письмо стоит как было. «Close and lose the text» выбрасывает черновик (<code>op=discard</code>) и возвращает на экран под письмом.</figcaption>
 </figure>
 
 <div class="frames">

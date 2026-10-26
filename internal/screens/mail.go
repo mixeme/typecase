@@ -362,7 +362,7 @@ func Mail1() Screen {
 							Variant: w.DimWrap,
 						},
 						w.Line{
-							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}},
+							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
 							Gap:   w.LineGap7,
 							Place: w.Pushed,
 						},
