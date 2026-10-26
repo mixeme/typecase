@@ -13091,6 +13091,71 @@ dav: HTTP 503: the server is busy</div>
 <figcaption><b>Тот же файл, тот же экран, другой исход.</b> На этом экране есть «Import», и по предыдущему кадру бросок открыл бы мастер. Но под курсором открытая карточка — и выигрывает она: файл становится вложением этого события, и никакого мастера не открывается. Совместимость расширения тут ни при чём: вложением карточка берёт любой файл, и <span class="tc-mono">.ics</span> в том числе.<br><br><b>Скрима здесь нет нарочно.</b> На предыдущем кадре цель — всё окно, и накладка гасит экран целиком. Здесь цель — одна панель, и обведена только она: граница подсветки и есть ответ на вопрос «куда это сейчас упадёт». Погасить всё окно в этот момент значило бы солгать о том, что произойдёт. Увести курсор с панели — подсветка съезжает на окно, и бросок снова ведёт в мастер.<br><br><b>Где окажется файл, сказано до броска</b>, а не после: до 2&nbsp;МБ — внутрь события, дальше — в папку вложений со ссылкой в записи (<a href="#attachments">7.12</a>). Размера в этот момент никто не знает — браузер его ещё не отдал, — поэтому коробка называет правило, а не исход.<br><br>На узком экране панели нет вовсе (<a href="#phone">10</a>), и спора о цели там не возникает.</figcaption>
 </figure>
 
+<h3 id="io-drop-fields">Бросок там, где файл выбирают</h3>
+<p>Где файл выбирают с компьютера, его можно и бросить на окно (Р-70): лист броска называет форму этого поля, брошенный файл встаёт в поле, как выбранный, дальше путь тот же. Ближайшая цель по-прежнему побеждает: открытая в панели карточка берёт файл сама (<code>s-io-2</code>).</p>
+<table class="doc">
+  <tr><th style="width:34%">Где</th><th style="width:30%">Лист броска</th><th>Куда встаёт файл</th></tr>
+  <tr><td>Список записей, первый шаг импорта</td><td>«Drop to import» (<code>s-io-1</code>)</td><td>поле файла мастера</td></tr>
+  <tr><td>Событие, задача, заметка на своей странице</td><td>«Drop to attach» с названием записи</td><td>Attach → From this computer</td></tr>
+  <tr><td>Правка и новая запись: событие, задача, заметка</td><td>«Drop to attach · Attached when you save»</td><td>список вложений правки</td></tr>
+  <tr><td>Правка и новый контакт</td><td>«Drop a photo»</td><td>поле фотографии</td></tr>
+  <tr><td>Восстановление с этого компьютера</td><td>«Drop the archive»</td><td>поле архива</td></tr>
+  <tr><td>Папка, лист выбора файла, пустая папка</td><td>как нарисованы (<code>s-files-1</code>, <code>s-notes-11</code>, <code>states-32</code>)</td><td>загрузка в открытую папку</td></tr>
+</table>
+
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<figure style="flex:1 1 330px">
+<div class="frame" data-frame="s-io-20">
+  <div class="frame-label"><span>Событие на своей странице · бросок</span><span class="frag">фрагмент</span><i>лист броска</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <div class="tc-empty tc-empty--drop">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-clip"/></svg>
+          <b class="tc-empty__lead">Drop to attach</b>
+          <span class="tc-dim--t12-5">to <b>Синк-ап по релизу</b></span>
+          <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Over 2 MB it goes to <span class="tc-mono">Documents / carrel</span> and the event keeps a link</span>
+        </div>
+  </div>
+</div>
+</figure>
+<figure style="flex:1 1 330px">
+<div class="frame" data-frame="s-io-21">
+  <div class="frame-label"><span>Правка события · бросок</span><span class="frag">фрагмент</span><i>лист броска</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <div class="tc-empty tc-empty--drop">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-clip"/></svg>
+          <b class="tc-empty__lead">Drop to attach</b>
+          <span class="tc-dim--t12-5">Attached when you save</span>
+        </div>
+  </div>
+</div>
+</figure>
+<figure style="flex:1 1 330px">
+<div class="frame" data-frame="s-io-22">
+  <div class="frame-label"><span>Правка контакта · бросок фотографии</span><span class="frag">фрагмент</span><i>лист броска</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <div class="tc-empty tc-empty--drop">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-img"/></svg>
+          <b class="tc-empty__lead">Drop a photo</b>
+          <span class="tc-dim--t12-5">It replaces the photo when you save</span>
+        </div>
+  </div>
+</div>
+</figure>
+<figure style="flex:1 1 330px">
+<div class="frame" data-frame="s-io-23">
+  <div class="frame-label"><span>Восстановление с этого компьютера · бросок</span><span class="frag">фрагмент</span><i>лист броска</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <div class="tc-empty tc-empty--drop">
+          <svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-restore"/></svg>
+          <b class="tc-empty__lead">Drop the archive</b>
+          <span class="tc-dim--t12-5">One <span class="tc-mono">.zip</span> of a Carrel backup</span>
+        </div>
+  </div>
+</div>
+</figure>
+</div>
+
+
 <h3 id="io-source">Шаг 1 · откуда берут</h3>
 <p>Источник выбирают до предпросмотра, и вместе с ним — коллекцию, куда всё ляжет. Экранов здесь два, а не пять: у контактов, событий и задач он общий, у заметок свой, потому что источника у них два.</p>
 

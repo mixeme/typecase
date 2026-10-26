@@ -979,6 +979,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A file chosen from the computer can be dropped too** (Р-70; accepted by
+  the owner 26.10): new «Бросок там, где файл выбирают» — a table of which
+  page carries which drop sheet (`Scrim{Drop, Closed}`) and the sheets
+  themselves: a record on its own page «Drop to attach» (`s-io-20`), an edit
+  «Attached when you save» (`s-io-21`), a contact's photo (`s-io-22`), a
+  restore from this computer (`s-io-23`); the import wizard's first step
+  carries the list's «Drop to import».
+
 - **Explanations on pass-through screens say only what is important and
   not obvious** (Р-77; accepted by the owner 26.10): about 50 sheets and
   dialogs lose the mechanics and the captain's lines and keep no counts
