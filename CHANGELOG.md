@@ -979,6 +979,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Explanations on pass-through screens say only what is important and
+  not obvious** (Р-77; accepted by the owner 26.10): about 50 sheets and
+  dialogs lose the mechanics and the captain's lines and keep no counts
+  the server would have to compute (the owner, 26.10). Deletions say
+  «Carrel keeps no copy: this cannot be undone.»; a folder's adds
+  «Everything in it goes too.» (new `s-files-27`, «Файлы · удаление
+  папки»); the import wizard's steps lose their reassurances.
+- **Restore asks what import asks** (Р-63; the owner, 26.10): records of the
+  archive already here and different — «Skip them» by default, «Replace
+  them», «Import as copies», above the table (`s-backup-8`, `-20`); the
+  report counts what was skipped (`s-backup-18`). «Restoring is an import:
+  records made since the archive stay, nothing is deleted.»
+
 - «Keyboard shortcuts» in the account's menu (`account-5`, `desktop-2`) is
   a link to `#keys` pressed by «?» and shown only with a script: without
   one the keys do not work either. The keys sheet (`account-6`) is

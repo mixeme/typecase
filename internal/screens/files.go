@@ -412,9 +412,7 @@ func Files1() Screen {
 					w.Sec{
 						Items: []w.SecPart{
 							w.Rubric{Text: "Links"},
-							w.SecNote{
-								Text: "Carrel keeps no index of what points at this file. It may be attached to a note or an event — check before deleting.",
-							},
+							w.SecNote{Text: "Notes or events may hold it as an attachment: Carrel does not look through the records."},
 						},
 					},
 					w.Danger{Button: w.Button{Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid}},

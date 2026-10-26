@@ -341,9 +341,9 @@ func Mail1() Screen {
 								},
 								w.Msg{
 									Parts: []w.MsgPart{
-										w.Text("Two of these go as links, not as files: the PDF is over the 2 MB ceiling, and a folder always goes as a link. Each link can be revoked in "),
+										w.Text("The PDF (over 2 MB) and the folder go as links; revoking one in "),
 										w.Strong("Published links"),
-										w.Text(" — including for the people in this letter."),
+										w.Text(" closes it for this letter too."),
 									},
 									Tone:  w.MsgAccent,
 									Space: w.MsgFlushTop11,
@@ -1551,9 +1551,9 @@ func Mail6() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("This file is over the limit for an attachment, so the letter will carry a secret link to it instead. The link is listed in "),
+								w.Text("Over the attachment limit: the letter carries a link instead, for 30 days. Revoke it in "),
 								w.Strong("Published links"),
-								w.Text(", works for 30 days, and revoking it there closes it for whoever got the letter."),
+								w.Text("."),
 							},
 							Tone:  w.MsgAccent,
 							Space: w.MsgSheet,
@@ -2215,9 +2215,9 @@ func Mail13() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("A folder always goes as a link: the letter carries a secret link to it, with all that is in it. The link is listed in "),
+								w.Text("A folder goes as a link, for 30 days. Revoke it in "),
 								w.Strong("Published links"),
-								w.Text(", works for 30 days, and revoking it there closes it for whoever got the letter."),
+								w.Text("."),
 							},
 							Tone:  w.MsgAccent,
 							Space: w.MsgSheet,

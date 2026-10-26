@@ -538,12 +538,6 @@ func Io3() Screen {
 									},
 								},
 							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
-								},
-								Space: w.MsgFlushSides,
-							},
 						},
 						Variant: w.DialogStep560,
 					},
@@ -681,12 +675,6 @@ func Io15() Screen {
 									},
 								},
 							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
-								},
-								Space: w.MsgFlushSides,
-							},
 						},
 						Variant: w.DialogStep560,
 					},
@@ -793,12 +781,6 @@ func Io16() Screen {
 										Line: true,
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
-								},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogStep560,
@@ -926,12 +908,6 @@ func Io17() Screen {
 										Line: true,
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
-								},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogStep560,
@@ -1066,12 +1042,6 @@ func Io18() Screen {
 										Line: true,
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed."),
-								},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogStep560,
@@ -1215,10 +1185,6 @@ func Io19() Screen {
 										},
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{w.Text("What is skipped is listed in the report, and so is what could not be read.")},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -1393,11 +1359,7 @@ func Io4() Screen {
 								Variant: w.CardChosen,
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Front matter is read when present: title, date, tags, UID and "),
-									w.Mono{Text: "X-"},
-									w.Text("properties exported earlier. A file without it becomes a note dated by its own timestamp."),
-								},
+								Parts: []w.MsgPart{w.Text("A file without front matter is dated by its own timestamp.")},
 								Space: w.MsgFlushSides,
 							},
 						},
@@ -1551,10 +1513,6 @@ func Io5() Screen {
 										},
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{w.Text("What is skipped is listed in the report, and so is what could not be read.")},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -1750,10 +1708,6 @@ func Io6() Screen {
 									},
 								},
 							},
-							w.Msg{
-								Parts: []w.MsgPart{w.Text("A repeating event keeps its rule: the series is one record, not fifty-two.")},
-								Space: w.MsgFlushSides,
-							},
 						},
 						Variant: w.DialogWide,
 					},
@@ -1921,12 +1875,6 @@ func Io7() Screen {
 										},
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("STATUS, PERCENT-COMPLETE and PRIORITY come across as they are: a task that was half done arrives half done."),
-								},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -2103,12 +2051,6 @@ func Io8() Screen {
 										},
 									},
 								},
-							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Markdown is stored as it was written — nothing is reformatted — and front matter Carrel exported earlier comes back: UID, tags, X-properties."),
-								},
-								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,

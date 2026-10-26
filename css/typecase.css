@@ -719,6 +719,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dialog .tc-head{padding-left:0;padding-right:0}
 .tc-dialog .tc-form{padding-left:0;padding-right:0}
 .tc-dialog .tc-formfoot{padding-left:0;padding-right:0}
+/* Вопрос мастера над полосой выбора — с зазором (восстановление, «уже есть»). */
+.tc-dialog > .tc-field + .tc-bar{margin-top:14px}
 .tc-steps{display:flex;gap:0;align-items:center;font-size:11px;color:var(--tc-dusty);margin-bottom:14px;letter-spacing:.1em;text-transform:uppercase}
 .tc-steps__item{padding:0 12px 0 0}
 .tc-steps__item.is-on{color:var(--tc-ink);font-weight:600}

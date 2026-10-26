@@ -621,7 +621,7 @@ func Admin24() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("The passwords this person saved for DAV servers are sealed with their own password, and a reset destroys them: every account they connected has to be connected again, and their published links, devices and external backup triggers stop. Their records on the servers stay as they are."),
+								w.Text("A reset destroys the DAV passwords this person saved: every account has to be connected again, and their published links, devices and external backup triggers stop."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,

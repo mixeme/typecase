@@ -2168,9 +2168,7 @@ func Notes6() Screen {
 					Head:  []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}},
 					Body: []w.SheetPart{
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("There is nowhere to write. Connect an account that has a journal, or create a notebook after connecting — the note is not kept in this window."),
-							},
+							Parts: []w.MsgPart{w.Text("There is nowhere to write: connect an account that holds notes first.")},
 							Space: w.MsgFlush,
 						},
 					},

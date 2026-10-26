@@ -3197,6 +3197,20 @@ func Backup8() Screen {
 									},
 								},
 							},
+							w.Field{
+								Label: "5 records of the archive are already here and differ",
+								Parts: []w.FieldPart{
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "Skip them", Href: "/app/settings/backup/restore?existing=skip", On: true},
+											{Label: "Replace them", Href: "/app/settings/backup/restore?existing=replace"},
+											{Label: "Import as copies", Href: "/app/settings/backup/restore?existing=copy"},
+										},
+									},
+									w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the archive's version is not written.")}},
+								},
+								OwnLine: true,
+							},
 							w.Bar{
 								Items: []w.BarPart{
 									w.BarSep{},
@@ -3287,7 +3301,7 @@ func Backup8() Screen {
 													},
 												},
 											},
-											{Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}},
+											{Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created · 3 already here")}},
 										},
 										State: w.RowPicked,
 									},
@@ -3375,7 +3389,12 @@ func Backup8() Screen {
 													},
 												},
 											},
-											{Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger},
+											{
+												Parts: []w.CellPart{
+													w.Span{Face: w.FaceDanger, Text: "that server is gone — another collection chosen"},
+													w.Text(" · 2 already here"),
+												},
+											},
 										},
 										State: w.RowPicked,
 									},
@@ -3392,12 +3411,9 @@ func Backup8() Screen {
 								Variant: w.TableFit,
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Restoring "),
-									w.Strong("creates"),
-									w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes."),
-								},
-								Tone: w.MsgAlert,
+								Parts: []w.MsgPart{w.Text("Restoring is an import: records made since the archive stay, nothing is deleted.")},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant: w.DialogWide,
@@ -3494,6 +3510,20 @@ func Backup20() Screen {
 									},
 								},
 							},
+							w.Field{
+								Label: "Records of the archive that are already here and differ",
+								Parts: []w.FieldPart{
+									w.Seg{
+										Options: []w.SegOption{
+											{Label: "Skip them", Href: "/app/settings/backup/restore?existing=skip", On: true},
+											{Label: "Replace them", Href: "/app/settings/backup/restore?existing=replace"},
+											{Label: "Import as copies", Href: "/app/settings/backup/restore?existing=copy"},
+										},
+									},
+									w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the archive's version is not written.")}},
+								},
+								OwnLine: true,
+							},
 							w.Bar{
 								Items: []w.BarPart{
 									w.BarSep{},
@@ -3689,12 +3719,9 @@ func Backup20() Screen {
 								Variant: w.TableFit,
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("Restoring "),
-									w.Strong("creates"),
-									w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes."),
-								},
-								Tone: w.MsgAlert,
+								Parts: []w.MsgPart{w.Text("Restoring is an import: records made since the archive stay, nothing is deleted.")},
+								Tone:  w.MsgAlert,
+								Space: w.MsgFlushSides,
 							},
 						},
 						Variant:  w.DialogWide,
@@ -3775,7 +3802,7 @@ func Backup18() Screen {
 								Title: &w.HeadTitle{Text: "Restored from 2026-08-14"},
 								Subs: []w.HeadSub{
 									w.HeadSub{
-										Parts: []w.HeadSubPart{w.Text("3 collections · 143 records created · 2 with a new UID · 1 not restored")},
+										Parts: []w.HeadSubPart{w.Text("3 collections · 141 records created · 5 already here, skipped · 1 not restored")},
 									},
 								},
 								Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/app/settings/backup"}}},
@@ -3793,7 +3820,7 @@ func Backup18() Screen {
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("4")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("4 missing records created")}},
+											{Parts: []w.CellPart{w.Text("4 missing records created · 3 already here — skipped")}},
 										},
 									},
 									{
@@ -3808,10 +3835,10 @@ func Backup18() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("139")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("137")}, Mono: true},
 											{
 												Parts: []w.CellPart{
-													w.Text("2 with a new UID · "),
+													w.Text("2 already here — skipped · "),
 													w.Span{Face: w.FaceDanger, Text: "1 not restored: the server refused it (413, too large)"},
 												},
 											},
@@ -3820,7 +3847,6 @@ func Backup18() Screen {
 								},
 								Variant: w.TableFit,
 							},
-							w.Msg{Parts: []w.MsgPart{w.Text("Nothing on the server was deleted or overwritten.")}},
 						},
 						Variant: w.DialogWide,
 					},

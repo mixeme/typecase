@@ -4041,11 +4041,7 @@ func Profile6() Screen {
 						w.Dim{Parts: []w.Inline{w.Text("radicale · vps")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed},
 					},
 					Body: []w.SheetPart{
-						w.Msg{
-							Parts: []w.MsgPart{w.Text("The server would not make it. Nothing was created, and the form is as you left it.")},
-							Tone:  w.MsgAlert,
-							Space: w.MsgFlush,
-						},
+						w.Msg{Parts: []w.MsgPart{w.Text("The server would not make it.")}, Tone: w.MsgAlert, Space: w.MsgFlush},
 						w.Diag{
 							Text: "[create]  MKCALENDAR /mix/poezdki/ → 403\n              <D:error><D:need-privileges/></D:error>\n              no DAV:bind on the calendar home-set",
 						},
@@ -4600,9 +4596,7 @@ func Profile9() Screen {
 					Body: []w.SheetPart{
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("The calendar and all "),
-								w.Strong("128"),
-								w.Text(" events in it are deleted on nextcloud. Carrel holds no copy — it reads and writes, it does not store — so there is nothing here to undo it with. nextcloud may tell the attendees of its meetings that they are cancelled."),
+								w.Text("Carrel keeps no copy: this cannot be undone. nextcloud may send the attendees of its meetings a cancellation."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,
@@ -4626,11 +4620,11 @@ func Profile9() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("Last time it was in an archive: "),
+								w.Text("Last archived "),
 								w.Mono{Text: "2026-08-14"},
-								w.Text(". Restoring brings the records back into a "),
+								w.Text("; a restore makes a "),
 								w.Strong("new"),
-								w.Text(" collection — not into this one, and not to this address."),
+								w.Text(" collection at a new address."),
 							},
 							Space: w.MsgFlush,
 						},

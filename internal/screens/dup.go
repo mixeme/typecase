@@ -1057,10 +1057,7 @@ func Dup2() Screen {
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}},
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Strong("One record is rewritten and 1 other deleted."),
-									w.Text(" The kept record is rewritten with the values you chose, and only once the server has kept it are the others deleted. This cannot be undone from here."),
-								},
+								Parts: []w.MsgPart{w.Text("The other record is deleted. This cannot be undone.")},
 								Space: w.MsgFlushSides,
 							},
 							w.Card{
@@ -1167,10 +1164,7 @@ func Dup4() Screen {
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Дежурство: первая линия · 2 records")}}},
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Strong("One record is rewritten and 1 other deleted."),
-									w.Text(" The kept record is rewritten with the values you chose, and only once the server has kept it are the others deleted. This cannot be undone from here."),
-								},
+								Parts: []w.MsgPart{w.Text("The other record is deleted. This cannot be undone.")},
 								Space: w.MsgFlushSides,
 							},
 							w.Card{
@@ -1288,8 +1282,8 @@ func Dup5() Screen {
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Strong("Written, but not every other record was deleted."),
-									w.Text(" The merge was written and 0 records deleted; Лебедева Вера refused, and the rest were not tried. Nothing is undone."),
+									w.Strong("Merged, but nothing was deleted:"),
+									w.Text(" Лебедева Вера refused, the rest were not tried."),
 								},
 								Tone:  w.MsgAlert,
 								Space: w.MsgFlushSides,

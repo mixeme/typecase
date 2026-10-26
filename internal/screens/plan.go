@@ -806,9 +806,7 @@ func Davloom5() Screen {
 									Variant: w.FormFlush,
 								},
 								w.Msg{
-									Parts: []w.MsgPart{
-										w.Text("The password is shown once and stored nowhere. Lose it and you create a new one and revoke this — it cannot be recovered."),
-									},
+									Parts: []w.MsgPart{w.Text("Shown once and stored nowhere: lost, it cannot be recovered.")},
 									Tone:  w.MsgAlert,
 									Space: w.MsgFlushSides,
 								},

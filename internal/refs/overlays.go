@@ -2563,6 +2563,7 @@ var _ = add(
 	overlay("wide", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 2},
 		w.Head{Title: &w.HeadTitle{Text: "Restore from 2026-08-14"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 1 214 records · "), w.Mono{Text: "carrel-backup/2026-08-14T09-12.zip"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Restore 3 collections", Icon: "restore", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true}}}},
+		w.Field{Label: "5 records of the archive are already here and differ", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "Skip them", Href: "/app/settings/backup/restore?existing=skip", On: true}, {Label: "Replace them", Href: "/app/settings/backup/restore?existing=replace"}, {Label: "Import as copies", Href: "/app/settings/backup/restore?existing=copy"}}}, w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the archive's version is not written.")}}}, OwnLine: true},
 		w.Bar{Items: []w.BarPart{w.BarSep{}, w.Button{Label: "Restore into", Icon: "restore", Name: "op", Value: "into", Submit: true}, w.Drop{Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", Name: "into", Value: "radicale|proekty"},
 			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", On: true, Name: "into", Value: "nextcloud|lichnyj"},
@@ -2577,7 +2578,7 @@ var _ = add(
 				w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "into.1", Value: "nextcloud|rabota"},
 				w.MenuSep{},
 				w.MenuItem{Label: "New collection", Name: "into.1", Value: "new"},
-				w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.1", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created")}}}, State: w.RowPicked},
+				w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.1", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created · 3 already here")}}}, State: w.RowPicked},
 			{Cells: []w.TableCell{{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}}, {Parts: []w.CellPart{w.Text("86")}, Mono: true}, {Parts: []w.CellPart{w.Drop{Trigger: w.Pick{Value: "radicale · vps · Проекты", Mark: &w.Mark{Colour: "#6B4E7A"}}, Menu: w.Menu{Items: []w.MenuPart{
 				w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "radicale · vps · Проекты", On: true, Name: "into.2", Value: "radicale|proekty"},
 				w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Личный", Name: "into.2", Value: "nextcloud|lichnyj"},
@@ -2591,9 +2592,9 @@ var _ = add(
 				w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "nextcloud · Работа", Name: "into.3", Value: "nextcloud|rabota"},
 				w.MenuSep{},
 				w.MenuItem{Label: "New collection", Name: "into.3", Value: "new"},
-				w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.3", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Text("that server is gone — another collection chosen")}, Tone: w.CellDanger}}, State: w.RowPicked},
+				w.MenuItem{Label: "Skip this one", Tone: w.MenuToneDusty, Name: "into.3", Value: "skip"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}}, {Parts: []w.CellPart{w.Span{Face: w.FaceDanger, Text: "that server is gone — another collection chosen"}, w.Text(" · 2 already here")}}}, State: w.RowPicked},
 			{Cells: []w.TableCell{{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}}, {Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}}, {Parts: []w.CellPart{w.Text("51")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("skip")}, Dim: true}}}}, Variant: w.TableFit},
-		w.Msg{Parts: []w.MsgPart{w.Text("Restoring "), w.Strong("creates"), w.Text(" records, the way import does: a colliding UID gets a fresh one and a line in the report. Nothing on the server is deleted or overwritten — Carrel does not promise “exactly as it was”, because that would mean erasing somebody else’s changes.")}, Tone: w.MsgAlert}}, Variant: w.DialogWide, Action: "/app/settings/backup/restore/match"}, "s-backup-8", "tc-dialog", 1),
+		w.Msg{Parts: []w.MsgPart{w.Text("Restoring is an import: records made since the archive stay, nothing is deleted.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}}, Variant: w.DialogWide, Action: "/app/settings/backup/restore/match"}, "s-backup-8", "tc-dialog", 1),
 	overlay("step", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 1},
 		w.Head{Title: &w.HeadTitle{Text: "Restore"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Nothing is written until you have seen what goes where")}}}},
@@ -2651,14 +2652,19 @@ var _ = add(
 		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Write the merge and delete the rest", Kind: w.ButtonDangerSolid}, w.Button{Label: "Cancel"}, w.Button{Label: "Keep Белов Артём instead", Place: w.Pushed}}}}}, "s-dup-2", "tc-dialog", 1),
 	overlay("wide", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 2},
-		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Разное (mix).vcf"}, w.Text(" · 84 KB · vCard 3.0")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 122 contacts", Kind: w.ButtonPrimary}}}},
-		w.Form{},
-		w.Stats{Items: []w.Stat{w.Stat{Value: "122", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}, w.Stat{Value: "5", Label: "UID collisions"}}},
+		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "Разное (mix).vcf"}, w.Text(" · 84 KB · vCard 3.0")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Import 117 contacts", Kind: w.ButtonPrimary}}}},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Into", Parts: []w.FieldPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true, Href: "/app/contacts/nextcloud/kontakty/import"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "radicale · vps · Команда", Reason: "Read-only: nothing can be written here."},
+			w.MenuSep{},
+			w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")}}}, Width: w.FieldLG}, w.Field{Label: "5 records of this file are already in Контакты", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "Skip them", Href: "/app/contacts/nextcloud/kontakty/import?existing=skip", On: true}, {Label: "Replace them", Href: "/app/contacts/nextcloud/kontakty/import?existing=replace"}, {Label: "Import as copies", Href: "/app/contacts/nextcloud/kontakty/import?existing=copy"}}}, w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}}}, OwnLine: true}}, Tight: true},
+		w.Stats{Items: []w.Stat{w.Stat{Value: "117", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}, w.Stat{Value: "5", Label: "already here"}}},
 		w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("New UID will be assigned")}}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("— (no FN)")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true}, {Parts: []w.CellPart{w.Text("vCard 2.1 quoted-printable: cannot decode line 12")}, Tone: w.CellDanger}}}}},
-		w.Msg{Parts: []w.MsgPart{w.Text("Import always creates. A UID that already exists gets a new one and is listed in the report.")}}}, Variant: w.DialogWide}, "s-io-5", "tc-dialog", 1),
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Вера Лебедева")}}, {Parts: []w.CellPart{w.Text("8e20-5b1f-c7d4")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — name from N")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger}}}}}}, Variant: w.DialogWide}, "s-io-5", "tc-dialog", 1),
 	overlay("page", w.Dialog{Items: []w.DialogPart{
 		w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGap8},
 		w.Prose{Parts: []w.Inline{w.Text("Account "), w.Strong("mix"), w.Text(" has a confirmed email. A silent password reset does not exist: a new password would be a new key, and everything stored under the old one would be lost anyway.")}, Variant: w.ProseMuted},
@@ -2686,12 +2692,16 @@ var _ = add(
 	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Source", "2 · Preview", "3 · Report"}, On: 1},
 		w.Head{Title: &w.HeadTitle{Text: "Import contacts"}},
-		w.Form{Items: []w.FormPart{w.Field{Label: "Into", Parts: []w.FieldPart{w.Pick{Value: "nextcloud · Контакты"}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}}}, Width: w.FieldW100}}, Variant: w.FormBottom12, Tight: true},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Into", Parts: []w.FieldPart{w.Drop{Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Контакты", On: true, Href: "/app/contacts/nextcloud/kontakty/import"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},
+			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "radicale · vps · Команда", Reason: "Read-only: nothing can be written here."},
+			w.MenuSep{},
+			w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}}}, Width: w.FieldW100}}, Variant: w.FormBottom12, Tight: true},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "From a file"},
 			w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, ID: "import-file", Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
-			w.CardHint{Parts: []w.CardTextPart{w.Text("vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}},
-		w.Msg{Parts: []w.MsgPart{w.Text("Nothing is written until the preview has been read: the next step counts what was parsed and names what failed.")}}}, Variant: w.DialogStep560}, "s-io-3", "tc-dialog", 1),
+			w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}}, Variant: w.DialogStep560}, "s-io-3", "tc-dialog", 1),
 	overlay("narrow", w.Dialog{Items: []w.DialogPart{
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
 		w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},

@@ -101,9 +101,7 @@ func Auth2() Screen {
 							},
 						},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
+							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlushBottom12,
 						},
@@ -157,9 +155,7 @@ func Auth12() Screen {
 						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGap4},
 						w.DialogSub{Parts: []w.Inline{w.Text("mix invited you. Choose a login and a password.")}},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
+							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlushBottom12,
 						},
@@ -215,9 +211,7 @@ func Auth14() Screen {
 						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGap4},
 						w.DialogSub{Parts: []w.Inline{w.Text("mix invited you. Choose a login and a password.")}},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
+							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlushBottom12,
 						},
@@ -299,9 +293,7 @@ func Auth4() Screen {
 							Parts: []w.Inline{w.Text("The account you create here is the first one, and it can manage everyone else.")},
 						},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
+							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlushBottom12,
 						},
@@ -590,9 +582,7 @@ func Auth11() Screen {
 							Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")},
 						},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
+							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlushBottom12,
 						},

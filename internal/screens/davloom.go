@@ -105,7 +105,7 @@ func Davloom1() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Changing your Carrel password does "),
 							w.Strong("not"),
-							w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+							w.Text(" disconnect devices; only revoking does."),
 						},
 						Tone: w.MsgAccent,
 					},
@@ -405,9 +405,7 @@ func Davloom2() Screen {
 								Variant: w.FormFlush,
 							},
 							w.Msg{
-								Parts: []w.MsgPart{
-									w.Text("The password is shown once and stored nowhere. Lose it and you create a new one and revoke this — it cannot be recovered."),
-								},
+								Parts: []w.MsgPart{w.Text("Shown once and stored nowhere: lost, it cannot be recovered.")},
 								Tone:  w.MsgAlert,
 								Space: w.MsgFlushSides,
 							},
@@ -685,7 +683,7 @@ func Davloom6() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Changing your Carrel password does "),
 							w.Strong("not"),
-							w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+							w.Text(" disconnect devices; only revoking does."),
 						},
 						Tone: w.MsgAccent,
 					},
@@ -799,7 +797,7 @@ func Davloom7() Screen {
 							Parts: []w.MsgPart{
 								w.Text("Changing your Carrel password does "),
 								w.Strong("not"),
-								w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+								w.Text(" disconnect devices; only revoking does."),
 							},
 							Tone: w.MsgAccent,
 						},
@@ -1208,7 +1206,7 @@ func Davloom8() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Changing your Carrel password does "),
 							w.Strong("not"),
-							w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+							w.Text(" disconnect devices; only revoking does."),
 						},
 						Tone: w.MsgAccent,
 					},
@@ -1457,7 +1455,7 @@ func Davloom9() Screen {
 							Parts: []w.MsgPart{
 								w.Text("Changing your Carrel password does "),
 								w.Strong("not"),
-								w.Text(" disconnect devices: each has its own key wrapper. To disconnect one, revoke it here — that is the only thing that stops it."),
+								w.Text(" disconnect devices; only revoking does."),
 							},
 							Tone: w.MsgAccent,
 						},

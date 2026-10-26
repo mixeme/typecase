@@ -3356,9 +3356,7 @@ func Publish5() Screen {
 							Width: w.FieldSM,
 						},
 						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("The visitor gets the folder with everything inside it, read-only, and the same address mounts as a drive in Windows, macOS and Linux."),
-							},
+							Parts: []w.MsgPart{w.Text("The same address mounts as a read-only drive in Windows, macOS and Linux.")},
 							Space: w.MsgFlush,
 						},
 					},
