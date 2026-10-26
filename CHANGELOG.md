@@ -8,6 +8,8 @@ do, not what the authors did.
 
 ### Breaking
 
+- `Push` is no longer a `SheetFootPart`: a sheet's Cancel stands in a
+  pushed `Line` with its `Kbd` «Esc», as in every sheet (Р-81).
 - A public page's `Banner.End` takes a `Line` only, with one button too
   (Carrel's task 234: one rule for the banner's end).
 - **`Runbar.Every` is a `time.Duration`**, printed in milliseconds
@@ -978,6 +980,13 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Every sheet names its keys** (Р-81, the owner 26.10): the main button
+  «Enter», or «Ctrl+Enter» in a sheet with a text (a letter, a reply, a
+  quick note); Cancel «Esc» at the end of the foot — 31 sheets mended. A
+  button with its key does not shrink in the foot (`.tc-sheet__foot >
+  .tc-line, > .tc-btn, > .tc-kbd{flex:none}`). The keys sheet (`account-6`)
+  says Ctrl+Enter saves or sends a sheet with text.
 
 - **The letter's Preview shows it as the recipients get it** (the owner,
   26.10; Carrel's task 194 p. 7): new `s-mail-14` — From, Reply-To, To,

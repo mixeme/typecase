@@ -2353,6 +2353,7 @@ func Backup14() Screen {
 							To:     "/app/settings/backup/trigger?job=personal&op=on",
 							Submit: true,
 						},
+						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/backup"}, w.Kbd{Keys: "Esc"}},
 							Gap:   w.LineGap7,

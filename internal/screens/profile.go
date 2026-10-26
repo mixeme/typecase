@@ -4051,6 +4051,7 @@ func Profile6() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Back to the form", Kind: w.ButtonPrimary, To: "/app/collections/new?op=back", Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Try again", Submit: true},
 					},
 				},

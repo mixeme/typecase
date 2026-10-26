@@ -1144,7 +1144,12 @@ func Publish2() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Cancel", Href: "/app/calendar"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/calendar"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -1762,6 +1767,7 @@ func Publish13() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Send by letter", Kind: w.ButtonPrimary, Href: "/app/mail/link?id=7Qm2"},
+						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the link", Href: "/p/7Qm2c8XvLk3w"},
 						w.Button{Label: "All published links", Href: "/app/files/published"},
 					},
@@ -2655,7 +2661,12 @@ func Publish19() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Cancel", Href: "/app/calendar"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/calendar"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -2883,7 +2894,12 @@ func Publish3() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Cancel", Href: "/app/contacts"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3170,7 +3186,12 @@ func Publish4() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Cancel", Href: "/app/notes"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/notes"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3362,7 +3383,12 @@ func Publish5() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Create link", Kind: w.ButtonPrimary, Submit: true},
-						w.Button{Label: "Cancel", Href: "/app/files"},
+						w.Kbd{Keys: "Enter"},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/files"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,

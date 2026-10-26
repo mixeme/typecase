@@ -354,6 +354,7 @@ func Mail1() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Ctrl+Enter"},
 						w.Button{Label: "Preview", To: "/app/mail/send?op=preview", Submit: true},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Signed "), w.Strong("Михаил Енученко"), w.Text(" · replies go to mix@example.org")},
@@ -616,8 +617,13 @@ func Mail4() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Copy link instead", To: "/app/mail/send?op=link", Submit: true},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/files/published"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/files/published"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth680,
 				},
@@ -930,12 +936,17 @@ func Mail5() Screen {
 					Flush: true,
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Встреча с подрядчиком, итоги · "), w.Mono{Text: ".md"}, w.Text(" · 4 KB · goes as a file")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth900,
 				},
@@ -1219,6 +1230,7 @@ func Mail10() Screen {
 					Flush: true,
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Form: "attach-calendar"},
+						w.Kbd{Keys: "Enter"},
 						w.Dim{
 							Parts: []w.Inline{
 								w.Text("Calendar «Личный» · 10 August 2026 – 31 August 2026 · "),
@@ -1229,7 +1241,11 @@ func Mail10() Screen {
 							Variant: w.DimWrap,
 							ID:      "attach-line",
 						},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth900,
 				},
@@ -1562,12 +1578,17 @@ func Mail6() Screen {
 					Flush: true,
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("смета-подрядчик.pdf · 4.2 MB · goes as a link")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth900,
 				},
@@ -1865,12 +1886,17 @@ func Mail12() Screen {
 					Flush: true,
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Пётр Смирнов · "), w.Mono{Text: ".vcf"}, w.Text(" · 3 KB · goes as a file")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth900,
 				},
@@ -2226,12 +2252,17 @@ func Mail13() Screen {
 					Flush: true,
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Dim{
 							Parts:   []w.Inline{w.Text("Договор подряда · 1 folder · 6 files · goes as a link")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
-						w.Push{Items: []w.PushPart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}}},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGap7,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth900,
 				},

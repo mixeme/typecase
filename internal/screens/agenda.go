@@ -861,6 +861,7 @@ func Agenda27() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Keep as events", Kind: w.ButtonPrimary, Name: "left", Value: "keep", Submit: true},
+						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Remove", Name: "left", Value: "remove", Submit: true},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Name: "left", Value: "cancel", Submit: true}, w.Kbd{Keys: "Esc"}},

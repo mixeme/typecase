@@ -238,7 +238,6 @@ func (Button) sheetFootPart() {}
 func (Kbd) sheetFootPart()    {}
 func (Dim) sheetFootPart()    {}
 func (Line) sheetFootPart()   {}
-func (Push) sheetFootPart()   {}
 
 // SheetWidth is the width of a sheet.
 type SheetWidth int

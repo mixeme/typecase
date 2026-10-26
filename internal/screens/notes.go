@@ -2174,6 +2174,7 @@ func Notes6() Screen {
 					},
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary},
+						w.Kbd{Keys: "Enter"},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
 					},
 					Width: w.SheetWidth480,

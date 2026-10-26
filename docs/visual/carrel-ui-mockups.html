@@ -755,6 +755,8 @@ label.tc-tree__row{cursor:pointer}
 .tc-sheet__head{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:.5px solid var(--tc-hair);position:relative}
 .tc-sheet__body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
 .tc-sheet__foot{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:.5px solid var(--tc-hair)}
+/* Кнопка с клавишей не сжимается: в тесной строке переносятся слова, а не «Cancel · Esc». */
+.tc-sheet__foot > .tc-line, .tc-sheet__foot > .tc-btn, .tc-sheet__foot > .tc-kbd{flex:none}
 .tc-kbd{font-family:var(--tc-font-mono);font-size:10.5px;border:.5px solid var(--tc-edge);border-radius:3px;
   padding:1px 5px;color:var(--tc-muted);background:var(--tc-bg);white-space:nowrap}
 .tc-menu{width:236px;background:var(--tc-surface);border:.5px solid var(--tc-edge);border-radius:4px;padding:4px}
@@ -4478,7 +4480,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-line tc-line--gap-8"><span class="tc-mono">a.kovaleva@example.org</span><span class="tc-dim tc-dim--t11-5">2 records name it</span></div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">2 records in Shared are read-only and keep the old address. Общий · baikal could not be read, and what it holds keeps the old address. Collections that are not ticked were not looked in.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" title="Nothing here can be rewritten." type="submit" disabled>Rewrite 0 records</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" title="Nothing here can be rewritten." type="submit" disabled>Rewrite 0 records</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite?op=leave">Leave as is</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -5316,7 +5318,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           </div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Kept, each becomes an event of its own, with what was changed in it. Removed, they go with the rest of the series after 19 January.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as events</button><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as events</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -5347,7 +5349,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           </div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Kept, it becomes an event of its own, with what was changed in it. Removed, it goes: the series no longer has that day.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as an event</button><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as an event</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -5515,7 +5517,7 @@ SEQUENCE  2</div>
           </div>
           <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">Kept, each becomes an event of its own, with what was changed in it. Removed, they go with the rest of the series after 18 January.</span>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as events</button><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" name="left" value="keep">Keep as events</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn" type="submit" name="left" value="remove">Remove</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" name="left" value="cancel">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
       </div>
     </div>
@@ -8980,7 +8982,7 @@ Read  2 min ago</div>
             <div class="tc-msg tc-msg--flush">There is nowhere to write: connect an account that holds notes first.</div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg>Connect account</button>
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg>Connect account</button><kbd class="tc-kbd">Enter</kbd>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
         </div>
@@ -10128,7 +10130,7 @@ Read  2 min ago</div>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Move</button><span class="tc-dim tc-dim--t11-5">These items are already here.</span><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" disabled>Move</button><kbd class="tc-kbd">Enter</kbd><span class="tc-dim tc-dim--t11-5">These items are already here.</span><button class="tc-btn tc-nojs" type="submit" name="open" value="1">Open the folder</button><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -10149,7 +10151,7 @@ Read  2 min ago</div>
           <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="release-checklist.md" aria-label="Name"></div>
           <div class="tc-msg tc-msg--flush">Notes, events and published links that point at it will not find it under the new name.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rename</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files/sftpgo/documents">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Rename</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files/sftpgo/documents">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
@@ -10212,7 +10214,7 @@ Read  2 min ago</div>
           <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" value="2026-07" aria-label="Name"></div>
           <div class="tc-msg is-alert tc-msg--flush">There is a folder called «2026-07» in attachments already. Choose another name.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files/sftpgo/documents">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files/sftpgo/documents">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
@@ -10280,7 +10282,7 @@ Read  2 min ago</div>
             <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Public</div>
           </div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><span class="tc-dim tc-dim--t11-5">Choose a file in the tree.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="button" disabled><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd><span class="tc-dim tc-dim--t11-5">Choose a file in the tree.</span><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
@@ -14153,7 +14155,7 @@ dav: HTTP 503: the server is busy</div>
             <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="password" value="••••••••••" aria-label="Your Carrel password">
               <span class="tc-field__hint">Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password.</span></div>
           </div>
-          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Deposit my key</button><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd tc-push">Esc</kbd></div>
+          <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Deposit my key</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
         </form>
       </div>
     </div>
@@ -14858,7 +14860,7 @@ dav: HTTP 503: the server is busy</div>
               <kbd class="tc-kbd">Enter</kbd><span class="tc-stack__item">Open the selected record full screen</span>
               <kbd class="tc-kbd">Esc</kbd><span class="tc-stack__item">Close a sheet, the details panel or focus mode</span>
               <kbd class="tc-kbd">Ctrl+S</kbd><span class="tc-stack__item">Save in the editor</span>
-              <kbd class="tc-kbd">Ctrl+Enter</kbd><span class="tc-stack__item">Save a quick note</span>
+              <kbd class="tc-kbd">Ctrl+Enter</kbd><span class="tc-stack__item">Save or send a sheet with text: a quick note, a letter</span>
               <kbd class="tc-kbd">Ctrl+V</kbd><span class="tc-stack__item">Paste an image as an attachment</span>
             </div>
             <span class="tc-field__hint tc-field__hint--top6">Shortcuts do nothing while the cursor is in a field. None of them destroy anything.</span>
@@ -15936,7 +15938,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Documents" aria-label="Name"></div>
           <div class="tc-msg tc-msg--flush">Links, devices and backups lose the old address.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rename</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/connections">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Rename</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/connections">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </form>
     </div>
   </div>
@@ -16008,7 +16010,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-sheet__body">
           <div class="tc-msg is-alert tc-msg--flush">No server that holds calendars is answering now: baikal. Until one does, there is nothing to create there.</div>
         </div>
-        <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/collections/new?kind=event">Try again</a><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/collections/new?kind=event">Try again</a><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
@@ -16027,7 +16029,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-sheet__body">
           <div class="tc-msg is-alert tc-msg--flush">No connected server holds calendars. Connect one that does first.</div>
         </div>
-        <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/settings/connections/new"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg>Connect account</a><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+        <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/settings/connections/new"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg>Connect account</a><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
       </div>
     </div>
   </div>
@@ -16894,7 +16896,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               no DAV:bind on the calendar home-set</div>
               <span class="tc-dim--muted tc-dim--t11-5 tc-dim--lh1-55 tc-dim--wrap">This account may sign in and read, but radicale · vps would not let it create here. The server does not say why — no such right for the user, or a password issued read-only; whoever runs the server can tell.</span>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/collections/new?op=back">Back to the form</button><button class="tc-btn" type="submit">Try again</button></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/collections/new?op=back">Back to the form</button><kbd class="tc-kbd">Enter</kbd><button class="tc-btn" type="submit">Try again</button></div>
           </form>
         </div>
       </div>
@@ -19865,7 +19867,7 @@ jobs:
             <div class="tc-sheet__body">
               <div class="tc-msg is-alert tc-msg--flush">Turning it on stores this job’s data key under the server’s key — less protection, for convenience: the job can then read without you signed in.</div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/settings/backup/trigger?job=personal&amp;op=on">Turn on</button><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/backup">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" formaction="/app/settings/backup/trigger?job=personal&amp;op=on">Turn on</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/backup">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -20836,7 +20838,7 @@ jobs:
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/calendar">Cancel</a></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -21064,7 +21066,7 @@ jobs:
               <div class="tc-field tc-field--w100"><label>Link</label><span class="tc-line tc-line--gap-6"><input class="tc-in is-mono tc-in--fill" type="text" value="https://carrel.example/p/7Qm2c8XvLk3w" aria-label="Link" readonly><button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/p/7Qm2c8XvLk3w" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy</button></span>
                 <span class="tc-field__hint">Until 2026-09-09.</span></div>
             </div>
-            <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/mail/link?id=7Qm2">Send by letter</a><a class="tc-btn" href="/p/7Qm2c8XvLk3w">Open the link</a><a class="tc-btn" href="/app/files/published">All published links</a></div>
+            <div class="tc-sheet__foot"><a class="tc-btn is-primary" href="/app/mail/link?id=7Qm2">Send by letter</a><kbd class="tc-kbd">Enter</kbd><a class="tc-btn" href="/p/7Qm2c8XvLk3w">Open the link</a><a class="tc-btn" href="/app/files/published">All published links</a></div>
           </div>
         </div>
       </div>
@@ -21384,7 +21386,7 @@ Read  2 min ago · changed on server 3 days ago</div>
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/calendar">Cancel</a></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/calendar">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -21486,7 +21488,7 @@ Read  2 min ago · not changed on server</div>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.vcf</span> download and subscription</label>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">7 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7" checked>7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30">30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/contacts">Cancel</a></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -21601,7 +21603,7 @@ Read  2 min ago</div>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.md</span> download</label>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/notes">Cancel</a></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/notes">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -21696,7 +21698,7 @@ Read  2 min ago</div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">14 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14" checked>14 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30">30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
               <div class="tc-msg tc-msg--flush">The same address mounts as a read-only drive in Windows, macOS and Linux.</div>
             </div>
-            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><a class="tc-btn" href="/app/files">Cancel</a></div>
+            <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create link</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
         </div>
       </div>
@@ -22737,7 +22739,7 @@ Read  2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="submit" formaction="/app/mail/send?op=preview">Preview</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Signed <b>Михаил Енученко</b> · replies go to mix@example.org</span>
             <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
@@ -22780,7 +22782,7 @@ Read  2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Enter</kbd>
             <a class="tc-btn" href="/app/mail/compose">Edit</a>
             <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/contacts">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
           </div>
@@ -22912,9 +22914,9 @@ Read  2 min ago</div>
               </div>
             </div>
             <div class="tc-sheet__foot">
-              <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button>
+              <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Enter</kbd>
               <button class="tc-btn" type="submit" formaction="/app/mail/send?op=link">Copy link instead</button>
-              <span class="tc-push"><a class="tc-btn" href="/app/files/published">Cancel</a></span>
+              <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/files/published">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
             </div>
           </form>
         </div>
@@ -23024,9 +23026,9 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button>
+        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Встреча с подрядчиком, итоги · <span class="tc-mono">.md</span> · 4 KB · goes as a file</span>
-        <span class="tc-push"><a class="tc-btn" href="/app/mail/compose">Cancel</a></span>
+        <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/mail/compose">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </form>
       </div>
@@ -23126,9 +23128,9 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="submit" form="attach-calendar"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button>
+        <button class="tc-btn is-primary" type="submit" form="attach-calendar"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap" id="attach-line">Calendar «Личный» · 10 August 2026 – 31 August 2026 · <span class="tc-mono">.ics</span> · 5 KB · goes as a file</span>
-        <span class="tc-push"><a class="tc-btn" href="/app/mail/compose">Cancel</a></span>
+        <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/mail/compose">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </div>
       </div>
@@ -23233,9 +23235,9 @@ Read  2 min ago</div>
         <div class="tc-msg is-accent tc-msg--m0-14-12">Over the attachment limit: the letter carries a link instead, for 30 days. Revoke it in <b>Published links</b>.</div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button>
+        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">смета-подрядчик.pdf · 4.2 MB · goes as a link</span>
-        <span class="tc-push"><a class="tc-btn" href="/app/mail/compose">Cancel</a></span>
+        <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/mail/compose">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </form>
       </div>
@@ -23337,9 +23339,9 @@ Read  2 min ago</div>
         </div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button>
+        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Пётр Смирнов · <span class="tc-mono">.vcf</span> · 3 KB · goes as a file</span>
-        <span class="tc-push"><a class="tc-btn" href="/app/mail/compose">Cancel</a></span>
+        <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/mail/compose">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </form>
       </div>
@@ -23449,9 +23451,9 @@ Read  2 min ago</div>
         <div class="tc-msg is-accent tc-msg--m0-14-12">A folder goes as a link, for 30 days. Revoke it in <b>Published links</b>.</div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button>
+        <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach</button><kbd class="tc-kbd">Enter</kbd>
         <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Договор подряда · 1 folder · 6 files · goes as a link</span>
-        <span class="tc-push"><a class="tc-btn" href="/app/mail/compose">Cancel</a></span>
+        <span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/mail/compose">Cancel</a><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </form>
       </div>
@@ -26697,7 +26699,7 @@ Read    2 min ago</div>
             <div class="tc-msg is-accent tc-msg--flush">Анна gets no answer from Carrel; if she is waiting for one, reply to her letter.</div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button">Add to Работа</button>
+            <button class="tc-btn is-primary" type="button">Add to Работа</button><kbd class="tc-kbd">Enter</kbd>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
         </div>
@@ -26731,8 +26733,8 @@ Read    2 min ago</div>
           <span class="tc-field__hint">Date of the letter, its subject, the file's name — as for attachments of records. <b>(2)</b>: a file with this name is already there; nothing is overwritten.</span></div>
       </div>
       <div class="tc-sheet__foot">
-        <button class="tc-btn is-primary" type="button">Save to Сборник</button>
-        <span class="tc-push"><button class="tc-btn" type="button">Cancel</button></span>
+        <button class="tc-btn is-primary" type="button">Save to Сборник</button><kbd class="tc-kbd">Enter</kbd>
+        <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
       </div>
     </div>
   </div>
@@ -27148,7 +27150,7 @@ Read    2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button>
+            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="button">Save draft</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Draft saved in home · Drafts at <span class="tc-mono">10:41</span></span>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
