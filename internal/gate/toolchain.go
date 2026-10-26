@@ -3,14 +3,28 @@ package gate
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 )
 
-// CheckGofmt fails when gofmt -l reports any file under root.
+// CheckGofmt fails when gofmt -l reports any file under root. dev/ is left
+// out: the working copy's scratch, with the Go cache and its temporary files.
 func CheckGofmt(root string) error {
-	out, err := exec.Command("gofmt", "-l", root).Output()
+	entries, err := os.ReadDir(root)
+	if err != nil {
+		return fmt.Errorf("gofmt: %w", err)
+	}
+	args := []string{"-l"}
+	for _, e := range entries {
+		// gofmt parses a file it is named whatever its extension.
+		if e.Name() == "dev" || e.Name() == ".git" || !e.IsDir() && filepath.Ext(e.Name()) != ".go" {
+			continue
+		}
+		args = append(args, filepath.Join(root, e.Name()))
+	}
+	out, err := exec.Command("gofmt", args...).Output()
 	if err != nil {
 		return fmt.Errorf("gofmt: %w", err)
 	}

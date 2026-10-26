@@ -4,3 +4,4 @@
 /cmd/screens/screens.exe
 .chromedp-cache/
 __pycache__/
+/dev/

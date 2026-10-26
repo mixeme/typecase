@@ -113,7 +113,7 @@ func CheckNoForeignCSS(root string) error {
 		rel = filepath.ToSlash(rel)
 		if d.IsDir() {
 			switch {
-			case rel == ".git", rel == "css", rel == "docs", strings.HasSuffix(rel, "/testdata"), rel == "node_modules":
+			case rel == ".git", rel == "css", rel == "docs", rel == "dev", strings.HasSuffix(rel, "/testdata"), rel == "node_modules":
 				return filepath.SkipDir
 			}
 			return nil

@@ -673,8 +673,9 @@ func walkFiles(root string, fn func(path string, data []byte) error) error {
 		}
 		if d.IsDir() {
 			// drafts-* is TestDraftBuildsAlone's own, made and removed while
-			// other packages' tests run.
-			if d.Name() == ".git" || d.Name() == "node_modules" || strings.HasPrefix(d.Name(), "drafts-") {
+			// other packages' tests run. dev/ is the working copy's scratch
+			// (git-ignored): the Go cache, shots, throwaway scripts.
+			if d.Name() == ".git" || d.Name() == "node_modules" || strings.HasPrefix(d.Name(), "drafts-") || path == filepath.Join(root, "dev") {
 				return filepath.SkipDir
 			}
 			return nil
