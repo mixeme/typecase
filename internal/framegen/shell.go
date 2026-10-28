@@ -1054,7 +1054,12 @@ func (g *gen) sheet(e *El) string {
 			f = append(f, "Fields: "+hiddens(hidden))
 		}
 	}
+	// widget.Sheet always prints its head and its body: a sheet drawn
+	// without one is not this widget yet.
 	head := e.Kid("tc-sheet__head")
+	if head == nil {
+		stop("sheet without tc-sheet__head")
+	}
 	if s := svgs(head); len(s) > 0 {
 		f = append(f, "Icon: "+icon(s[0]))
 		if s[0].Has("tc-ico--danger") {
@@ -1063,7 +1068,11 @@ func (g *gen) sheet(e *El) string {
 			f = append(f, "Tone: w.SheetIconInk")
 		}
 	}
-	f = append(f, "Title: "+q(head.Kid("tc-sheet__title").Text()))
+	title := head.Kid("tc-sheet__title")
+	if title == nil {
+		stop("sheet without tc-sheet__title")
+	}
+	f = append(f, "Title: "+q(title.Text()))
 	var hp []string
 	for _, x := range head.Els() {
 		switch {
@@ -1103,6 +1112,9 @@ func (g *gen) sheet(e *El) string {
 		f = append(f, "Head: []w.SheetHeadPart{"+join(hp, ", ")+"}")
 	}
 	body := e.Kid("tc-sheet__body")
+	if body == nil {
+		stop("sheet without tc-sheet__body")
+	}
 	var bp []string
 	for _, x := range body.Els() {
 		switch {

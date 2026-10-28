@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"carrel.dev/typecase/internal/fragment"
 )
 
 // Record is the Go expression of the n-th element of block class in a frame
@@ -41,6 +43,16 @@ func Record(root, frameID, class string, n int) (string, error) {
 		return "", fmt.Errorf("%s: %d elements of .%s, not %d", frameID, len(found), class, n)
 	}
 	e := found[n-1]
+	// The record is the block as it prints by itself: the comparison takes
+	// the root's mixins (tc-grow, tc-push, tc-js…) off the frame's side, so
+	// the draft leaves them out too.
+	var own []string
+	for _, c := range e.Cls() {
+		if fragment.OwnClass(class, c) {
+			own = append(own, c)
+		}
+	}
+	e.attrs["class"] = strings.Join(own, " ")
 	expr, why := g.element(e)
 	if why != "" {
 		return "", fmt.Errorf("%s .%s #%d: %s", frameID, class, n, why)
