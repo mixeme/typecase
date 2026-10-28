@@ -663,8 +663,9 @@ func Profile27() Screen {
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.Msg{
-						Parts: []w.MsgPart{w.Strong("nextcloud:"), w.Text(" 1 new collection — «Поездки». Tick it to see it in the rail.")},
-						Space: w.MsgInset20,
+						Parts:  []w.MsgPart{w.Strong("nextcloud:"), w.Text(" 1 new collection — «Поездки». Tick it to see it in the rail.")},
+						Space:  w.MsgInset20,
+						Column: true,
 					},
 					w.MainResults{
 						Items: []w.ResultsPart{
@@ -2046,8 +2047,9 @@ func Profile24() Screen {
 									w.Strong("Could not connect."),
 									w.Text(" The server refused the login and password. Nothing was saved."),
 								},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
+								Tone:   w.MsgAlert,
+								Space:  w.MsgFlushSides,
+								Column: true,
 							},
 							w.Diag{
 								Text: "Discovery trace\nwell-known · ok · GET /.well-known/caldav → 301 → /dav.php/\nprincipal · bad · PROPFIND /dav.php/ → 401 Unauthorized",
@@ -5231,6 +5233,7 @@ func Profile10() Screen {
 							w.Strong("Check"),
 							w.Text(" asks whether the address still replies."),
 						},
+						Column: true,
 					},
 				},
 			},
@@ -5287,6 +5290,7 @@ func Profile10() Screen {
 										Parts: []w.Inline{
 											w.Text("Taken from the feed; change it if you like — other people’s feed names are often longer than the rail."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldW100,
@@ -5304,6 +5308,7 @@ func Profile10() Screen {
 										Parts: []w.Inline{
 											w.Text("A feed sends no colour of its own: Carrel derives one, and hatches the strip so a feed is recognisable among your own collections."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldW100,
@@ -5319,6 +5324,7 @@ func Profile10() Screen {
 										Parts: []w.Inline{
 											w.Text("The login and password are kept the way DAV credentials are: encrypted under your key. A secret link needs no password — the secret is already in the address."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width:   w.FieldW100,
@@ -5332,6 +5338,7 @@ func Profile10() Screen {
 										Parts: []w.Inline{
 											w.Text("Not a choice: a feed is one file. What it carries decides where it lands, and that is visible before subscribing."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldW100,
@@ -5344,8 +5351,9 @@ func Profile10() Screen {
 						Parts: []w.MsgPart{
 							w.Text("The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list."),
 						},
-						Tone:  w.MsgAlert,
-						Space: w.MsgInset20,
+						Tone:   w.MsgAlert,
+						Space:  w.MsgInset20,
+						Column: true,
 					},
 					w.FormFoot{
 						Items: []w.FormFootPart{w.Button{Label: "Subscribe", Kind: w.ButtonPrimary, Form: "subscribe"}, w.Button{Label: "Cancel"}},

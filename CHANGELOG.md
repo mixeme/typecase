@@ -114,6 +114,10 @@ do, not what the authors did.
 
 ### Added
 
+- **The reading column of a settings page** (the owner, 27.10):
+  `FieldW580` — a field as wide as the column; `HintColumn` — a field's
+  hint at most 580 px (`.tc-field__hint--max580`); `Msg.Column` — a message
+  at most 580 px (`.tc-msg--max580`). Tables stay full width.
 - `Shell.Dialogs` — the page's own sheets without an address, each closed
   under its ID until a button (`Button.Opens`) or a link to «#ID» opens it
   with the library's script: the keys sheet of «Keyboard shortcuts» and
@@ -980,6 +984,14 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- **Settings and administration read in one column** (the owner, 27.10):
+  on 74 frames of the settings and administration pages fields' hints and
+  messages stand in a column of 580 px; Display name, Address, Folder in
+  it, Written as, Public address are as wide as the column; «Separate from
+  the sign-in password.» is the password's hint (`s-backup-2`, `-19`).
+  «Signed in as» (`desktop-13`) and «Address for the client» (davloom)
+  name their fields for a screen reader.
 
 - **What follows Send** (the owner, 27.10; Carrel's task 194 p. 7): all
   accepted — the sheet closes, the screen under it says «The letter went to

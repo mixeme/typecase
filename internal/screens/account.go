@@ -85,7 +85,7 @@ func Account1() Screen {
 												Parts: []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
 											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Variant: w.FieldSetLead,
@@ -110,9 +110,10 @@ func Account1() Screen {
 													w.Mono{Text: "Reply-To"},
 													w.Text(" on letters you send."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Action: "/app/settings/account/email",
@@ -123,7 +124,8 @@ func Account1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Parts:   []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -185,6 +187,7 @@ func Account1() Screen {
 												Parts: []w.Inline{
 													w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -273,7 +276,9 @@ func Account2() Screen {
 									Rubric: w.Rubric{Text: "Key escrow"},
 									Items: []w.FieldSetPart{
 										w.Field{
-											Parts: []w.FieldPart{w.FieldHint{Parts: []w.Inline{w.Text("No copy of your data key is deposited.")}}},
+											Parts: []w.FieldPart{
+												w.FieldHint{Parts: []w.Inline{w.Text("No copy of your data key is deposited.")}, Variant: w.HintColumn},
+											},
 											Place: w.Grown,
 										},
 										w.Field{Parts: []w.FieldPart{w.Button{Label: "Deposit my key"}}},
@@ -308,6 +313,7 @@ func Account2() Screen {
 									Parts: []w.Inline{
 										w.Text("Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password."),
 									},
+									Variant: w.HintColumn,
 								},
 							},
 							Width: w.FieldW100,
@@ -404,10 +410,11 @@ func Mail9() Screen {
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
+												Parts:   []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
+												Variant: w.HintColumn,
 											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Variant: w.FieldSetLead,
@@ -433,6 +440,7 @@ func Mail9() Screen {
 													w.Mono{Text: "Reply-To"},
 													w.Text(" on letters you send."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Width: w.FieldXL,
@@ -446,7 +454,8 @@ func Mail9() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Parts:   []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -508,6 +517,7 @@ func Mail9() Screen {
 												Parts: []w.Inline{
 													w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -613,6 +623,7 @@ func Account3() Screen {
 												Parts: []w.Inline{
 													w.Text("Your data stays encrypted under the same key; only the wrapping changes. Saved connections keep working."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -653,9 +664,10 @@ func Account17() Screen {
 						Items: []w.DialogPart{
 							w.Head{Title: &w.HeadTitle{Text: "Change password"}},
 							w.Msg{
-								Parts: []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
+								Parts:  []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")},
+								Tone:   w.MsgAlert,
+								Space:  w.MsgFlushSides,
+								Column: true,
 							},
 							w.Form{
 								Items: []w.FormPart{
@@ -682,6 +694,7 @@ func Account17() Screen {
 												Parts: []w.Inline{
 													w.Text("Your data stays encrypted under the same key; only the wrapping changes. Saved connections keep working."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -773,8 +786,9 @@ func Account4() Screen {
 								Parts: []w.MsgPart{
 									w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars."),
 								},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
+								Tone:   w.MsgAlert,
+								Space:  w.MsgFlushSides,
+								Column: true,
 							},
 							w.Fields{
 								Items: []w.FieldsItem{
@@ -806,7 +820,8 @@ func Account4() Screen {
 										Gap: w.LineGap6,
 									},
 									w.FieldHint{
-										Parts: []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+										Parts:   []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldFull,
@@ -899,8 +914,9 @@ func Account16() Screen {
 								Parts: []w.MsgPart{
 									w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars."),
 								},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
+								Tone:   w.MsgAlert,
+								Space:  w.MsgFlushSides,
+								Column: true,
 							},
 							w.Fields{
 								Items: []w.FieldsItem{
@@ -935,7 +951,8 @@ func Account16() Screen {
 										Gap: w.LineGap6,
 									},
 									w.FieldHint{
-										Parts: []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+										Parts:   []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldFull,

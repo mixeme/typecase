@@ -794,7 +794,7 @@ func Desktop13() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Value: "mix · https://carrel.example", Mono: true, Variant: w.InputFill},
+													w.Input{Value: "mix · https://carrel.example", Label: "Signed in as", Mono: true, Variant: w.InputFill},
 													w.Button{Label: "Sign out…"},
 												},
 												Gap: w.LineGap8,

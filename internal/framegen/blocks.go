@@ -59,6 +59,9 @@ func (g *gen) msg(e *El) string {
 	if e.Has("tc-grow") {
 		f = append(f, "Place: w.Grown")
 	}
+	if e.Has("tc-msg--max580") {
+		f = append(f, "Column: true")
+	}
 	f = append(f, scripted(e)...)
 	return "w.Msg{" + join(f, ", ") + "}"
 }

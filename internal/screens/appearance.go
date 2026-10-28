@@ -108,7 +108,10 @@ func Appearance1() Screen {
 												Variant: w.SegStart,
 												Name:    "density",
 											},
-											w.FieldHint{Parts: []w.Inline{w.Text("List row height: 38 or 32 px. On a phone always 52. This browser.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("List row height: 38 or 32 px. On a phone always 52. This browser.")},
+												Variant: w.HintColumn,
+											},
 										},
 									},
 								},
@@ -142,7 +145,8 @@ func Appearance1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Column sets are remembered per section, in this browser — the button below resets them.")},
+												Parts:   []w.Inline{w.Text("Column sets are remembered per section, in this browser — the button below resets them.")},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -188,6 +192,7 @@ func Appearance1() Screen {
 												Parts: []w.Inline{
 													w.Text("Week start and the clock are kept in the account: another browser shows the same. The time zone is the instance’s, set by the administrator."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,

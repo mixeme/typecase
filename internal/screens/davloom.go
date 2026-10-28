@@ -84,7 +84,12 @@ func Davloom1() Screen {
 								Parts: []w.FieldPart{
 									w.Line{
 										Items: []w.LinePart{
-											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+											w.Input{
+												Value:   "https://carrel.example/dav/",
+												Label:   "Address for the client",
+												Mono:    true,
+												Variant: w.Input11_5Fill,
+											},
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
@@ -94,6 +99,7 @@ func Davloom1() Screen {
 										Parts: []w.Inline{
 											w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldMax640Fill460,
@@ -107,7 +113,8 @@ func Davloom1() Screen {
 							w.Strong("not"),
 							w.Text(" disconnect devices; only revoking does."),
 						},
-						Tone: w.MsgAccent,
+						Tone:   w.MsgAccent,
+						Column: true,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.Table{
@@ -662,7 +669,12 @@ func Davloom6() Screen {
 								Parts: []w.FieldPart{
 									w.Line{
 										Items: []w.LinePart{
-											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+											w.Input{
+												Value:   "https://carrel.example/dav/",
+												Label:   "Address for the client",
+												Mono:    true,
+												Variant: w.Input11_5Fill,
+											},
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
@@ -685,7 +697,8 @@ func Davloom6() Screen {
 							w.Strong("not"),
 							w.Text(" disconnect devices; only revoking does."),
 						},
-						Tone: w.MsgAccent,
+						Tone:   w.MsgAccent,
+						Column: true,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}},
 					w.Empty{Parts: []w.EmptyPart{w.Strong("No devices yet.")}},
@@ -776,7 +789,12 @@ func Davloom7() Screen {
 									Parts: []w.FieldPart{
 										w.Line{
 											Items: []w.LinePart{
-												w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+												w.Input{
+													Value:   "https://carrel.example/dav/",
+													Label:   "Address for the client",
+													Mono:    true,
+													Variant: w.Input11_5Fill,
+												},
 												w.Button{Label: "Copy", Small: true},
 												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 											},
@@ -786,6 +804,7 @@ func Davloom7() Screen {
 											Parts: []w.Inline{
 												w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
 											},
+											Variant: w.HintColumn,
 										},
 									},
 									Width: w.FieldMax640Fill460,
@@ -799,7 +818,8 @@ func Davloom7() Screen {
 								w.Strong("not"),
 								w.Text(" disconnect devices; only revoking does."),
 							},
-							Tone: w.MsgAccent,
+							Tone:   w.MsgAccent,
+							Column: true,
 						},
 						w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 						w.Table{
@@ -1185,7 +1205,12 @@ func Davloom8() Screen {
 								Parts: []w.FieldPart{
 									w.Line{
 										Items: []w.LinePart{
-											w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+											w.Input{
+												Value:   "https://carrel.example/dav/",
+												Label:   "Address for the client",
+												Mono:    true,
+												Variant: w.Input11_5Fill,
+											},
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
@@ -1195,6 +1220,7 @@ func Davloom8() Screen {
 										Parts: []w.Inline{
 											w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldMax640Fill460,
@@ -1208,7 +1234,8 @@ func Davloom8() Screen {
 							w.Strong("not"),
 							w.Text(" disconnect devices; only revoking does."),
 						},
-						Tone: w.MsgAccent,
+						Tone:   w.MsgAccent,
+						Column: true,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.Table{
@@ -1434,7 +1461,12 @@ func Davloom9() Screen {
 									Parts: []w.FieldPart{
 										w.Line{
 											Items: []w.LinePart{
-												w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill},
+												w.Input{
+													Value:   "https://carrel.example/dav/",
+													Label:   "Address for the client",
+													Mono:    true,
+													Variant: w.Input11_5Fill,
+												},
 												w.Button{Label: "Copy", Small: true},
 												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 											},
@@ -1444,6 +1476,7 @@ func Davloom9() Screen {
 											Parts: []w.Inline{
 												w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
 											},
+											Variant: w.HintColumn,
 										},
 									},
 									Width: w.FieldMax640Fill460,
@@ -1457,7 +1490,8 @@ func Davloom9() Screen {
 								w.Strong("not"),
 								w.Text(" disconnect devices; only revoking does."),
 							},
-							Tone: w.MsgAccent,
+							Tone:   w.MsgAccent,
+							Column: true,
 						},
 						w.ListGroup{Title: w.Rubric{Text: "Devices", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 						w.Table{

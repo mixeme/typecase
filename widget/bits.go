@@ -146,7 +146,7 @@ func (n Notices) html(m mix) string {
 // Msg — tc-msg
 //
 // Роль. Сообщение: что произошло, чего нельзя отменить, что получилось.
-// Вход. Msg{Parts, Tone, Icon, End, Space, Place, NoScript, ScriptOnly}.
+// Вход. Msg{Parts, Tone, Icon, End, Space, Place, NoScript, ScriptOnly, Column}.
 // Состояния. plain | alert | accent | icon | flush | rich.
 // Инварианты. Тон — перечисление, и тревожный тон не единственный носитель смысла: сказано словами; сообщение печатает фрагмент своего кадра.
 // Поведение. нет.
@@ -166,13 +166,16 @@ type Msg struct {
 	// what a script does.
 	NoScript   bool
 	ScriptOnly bool
+	// Column keeps the message in the reading column of a settings page,
+	// 580 px at most, as its fields' hints (the owner, 27.10).
+	Column bool
 }
 
 // Render prints the message.
 func (g Msg) Render() string { return g.html(nil) }
 
 func (g Msg) html(m mix) string {
-	s := `<div` + class(m, "tc-msg", g.Tone.class(), is("row", g.Icon != ""), g.Space.class(), g.Place.class(), pick(g.ScriptOnly, "tc-js"), pick(g.NoScript, "tc-nojs")) + `>`
+	s := `<div` + class(m, "tc-msg", g.Tone.class(), is("row", g.Icon != ""), g.Space.class(), g.Place.class(), pick(g.Column, "tc-msg--max580"), pick(g.ScriptOnly, "tc-js"), pick(g.NoScript, "tc-nojs")) + `>`
 	if g.Icon != "" {
 		s += `<svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` +
 			g.Icon.use() + `</svg><span class="tc-msg__aside">` + joined(g.Parts) + `</span>`

@@ -115,9 +115,10 @@ func Admin1() Screen {
 										Items: []w.RubricPart{w.Badge{Label: "hand to hand", Tone: w.BadgeAlert}},
 									},
 									w.Msg{
-										Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")},
-										Tone:  w.MsgAlert,
-										Space: w.MsgFlushBottom12,
+										Parts:  []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")},
+										Tone:   w.MsgAlert,
+										Space:  w.MsgFlushBottom12,
+										Column: true,
 									},
 									w.CardFields{
 										Items: []w.CardFieldsPart{
@@ -979,7 +980,7 @@ func Admin3() Screen {
 											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Variant: w.FieldSetLead,
@@ -1052,6 +1053,7 @@ func Admin3() Screen {
 												Parts: []w.Inline{
 													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										OwnLine: true,
@@ -1181,9 +1183,12 @@ func Admin32() Screen {
 												Mono:     true,
 												ReadOnly: true,
 											},
-											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")},
+												Variant: w.HintColumn,
+											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Variant: w.FieldSetLead,
@@ -1256,6 +1261,7 @@ func Admin32() Screen {
 												Parts: []w.Inline{
 													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										OwnLine: true,
@@ -1278,6 +1284,7 @@ func Admin32() Screen {
 													w.Mono{Text: "carrel@slovo.example"},
 													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -1329,7 +1336,8 @@ func Admin32() Screen {
 													w.Mono{Text: "250 2.0.0 Ok: queued as 4FB1C2"},
 													w.Text("."),
 												},
-												Space: w.MsgFlush,
+												Space:  w.MsgFlush,
+												Column: true,
 											},
 										},
 										Width: w.FieldFull,
@@ -1440,9 +1448,12 @@ func Admin33() Screen {
 												Mono:     true,
 												ReadOnly: true,
 											},
-											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")},
+												Variant: w.HintColumn,
+											},
 										},
-										Width: w.FieldLG,
+										Width: w.FieldW580,
 									},
 								},
 								Variant: w.FieldSetLead,
@@ -1517,6 +1528,7 @@ func Admin33() Screen {
 												Parts: []w.Inline{
 													w.Text("Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										OwnLine: true,
@@ -1543,9 +1555,10 @@ func Admin33() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.Msg{
-												Parts: []w.MsgPart{w.Text("The relay as typed cannot be used: see the marked fields.")},
-												Tone:  w.MsgAlert,
-												Space: w.MsgFlush,
+												Parts:  []w.MsgPart{w.Text("The relay as typed cannot be used: see the marked fields.")},
+												Tone:   w.MsgAlert,
+												Space:  w.MsgFlush,
+												Column: true,
 											},
 										},
 										Width: w.FieldFull,
@@ -1777,6 +1790,7 @@ func Admin4() Screen {
 						Parts: []w.MsgPart{
 							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
 						},
+						Column: true,
 					},
 				},
 			},
@@ -1864,6 +1878,7 @@ func Admin25() Screen {
 						Parts: []w.MsgPart{
 							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
 						},
+						Column: true,
 					},
 				},
 			},
@@ -1948,14 +1963,16 @@ func Admin26() Screen {
 						},
 					},
 					w.Msg{
-						Parts: []w.MsgPart{w.Text("Give the address people open Carrel at, like https://carrel.example.org.")},
-						Tone:  w.MsgAlert,
+						Parts:  []w.MsgPart{w.Text("Give the address people open Carrel at, like https://carrel.example.org.")},
+						Tone:   w.MsgAlert,
+						Column: true,
 					},
 					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
 						},
+						Column: true,
 					},
 				},
 			},
@@ -2040,7 +2057,7 @@ func Admin5() Screen {
 								Label: "Password",
 								Parts: []w.FieldPart{
 									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
-									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}, Variant: w.HintColumn},
 								},
 								Width: w.FieldMD,
 							},
@@ -2084,6 +2101,7 @@ func Admin5() Screen {
 										Parts: []w.Inline{
 											w.Text("The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldFull,
@@ -2178,7 +2196,7 @@ func Admin27() Screen {
 								Label: "Password",
 								Parts: []w.FieldPart{
 									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
-									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}, Variant: w.HintColumn},
 								},
 								Width: w.FieldMD,
 							},
@@ -2286,7 +2304,7 @@ func Admin28() Screen {
 								Label: "Password",
 								Parts: []w.FieldPart{
 									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
-									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}, Variant: w.HintColumn},
 								},
 								Width: w.FieldMD,
 							},
@@ -2311,7 +2329,7 @@ func Admin28() Screen {
 						Action: "/admin/dav",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
-					w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert},
+					w.Msg{Parts: []w.MsgPart{w.Strong("Discovery stopped at the principal.")}, Tone: w.MsgAlert, Column: true},
 					w.MainDiag{
 						Diag: w.Diag{
 							Text: "[well-known]  GET /.well-known/caldav → 301 → /dav.php/\n[principal]   PROPFIND /dav.php/ → 401 Unauthorized",
@@ -2400,7 +2418,7 @@ func Admin29() Screen {
 								Label: "Password",
 								Parts: []w.FieldPart{
 									w.Input{Kind: w.InputPassword, Name: "password", Label: "Password"},
-									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}},
+									w.FieldHint{Parts: []w.Inline{w.Text("Asked each time, never kept.")}, Variant: w.HintColumn},
 								},
 								Width: w.FieldMD,
 							},
@@ -2444,6 +2462,7 @@ func Admin29() Screen {
 										Parts: []w.Inline{
 											w.Text("The second stage writes to this server: one event, task, contact and file, each deleted after it is read. It is written to the audit log."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldFull,
@@ -2568,7 +2587,8 @@ func Admin6() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
 						},
-						Tone: w.MsgAlert,
+						Tone:   w.MsgAlert,
+						Column: true,
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -2588,6 +2608,7 @@ func Admin6() Screen {
 												Parts: []w.Inline{
 													w.Text("Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -2623,6 +2644,7 @@ func Admin6() Screen {
 												Parts: []w.Inline{
 													w.Text("Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -2664,6 +2686,7 @@ func Admin6() Screen {
 												Parts: []w.Inline{
 													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -2788,9 +2811,13 @@ func Admin30() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
 						},
-						Tone: w.MsgAlert,
+						Tone:   w.MsgAlert,
+						Column: true,
 					},
-					w.Msg{Parts: []w.MsgPart{w.Text("The account of "), w.Strong("viktor"), w.Text(" is recovered.")}},
+					w.Msg{
+						Parts:  []w.MsgPart{w.Text("The account of "), w.Strong("viktor"), w.Text(" is recovered.")},
+						Column: true,
+					},
 					w.Pad{
 						Items: []w.PadPart{
 							w.Card{
@@ -2871,6 +2898,7 @@ func Admin30() Screen {
 												Parts: []w.Inline{
 													w.Text("Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -2912,6 +2940,7 @@ func Admin30() Screen {
 												Parts: []w.Inline{
 													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,
@@ -3036,7 +3065,8 @@ func Admin31() Screen {
 						Parts: []w.MsgPart{
 							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
 						},
-						Tone: w.MsgAlert,
+						Tone:   w.MsgAlert,
+						Column: true,
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -3054,7 +3084,8 @@ func Admin31() Screen {
 							w.Field{
 								Parts: []w.FieldPart{
 									w.FieldHint{
-										Parts: []w.Inline{w.Text("If you lose this password, deposited keys cannot be opened. This is not backup.")},
+										Parts:   []w.Inline{w.Text("If you lose this password, deposited keys cannot be opened. This is not backup.")},
+										Variant: w.HintColumn,
 									},
 								},
 								Place: w.Grown,
