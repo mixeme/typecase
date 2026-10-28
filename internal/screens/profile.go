@@ -4627,7 +4627,7 @@ func Profile9() Screen {
 								w.Mono{Text: "2026-08-14"},
 								w.Text("; a restore makes a "),
 								w.Strong("new"),
-								w.Text(" collection at a new address."),
+								w.Text(" calendar at a new address."),
 							},
 							Space: w.MsgFlush,
 						},

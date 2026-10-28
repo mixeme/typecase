@@ -989,6 +989,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- The archive's line of a deleted collection is short in all its cases
+  (Carrel's task 240): «No backup job copies it: there is no archive to
+  restore it from.», «A backup job copies it, but none has finished whole
+  yet: …»; a calendar's restore makes «a new calendar» (`s-profile-9`).
+
 - **The page under the letter is the combined address book** (Carrel's
   task 241): the rail, head and rows' sources of `s-contacts-1` in
   `s-mail-1`, `-5`, `-6`, `-10`, `-12`, `-13`, `-16`…`-18` — no calendars,
