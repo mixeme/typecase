@@ -81,3 +81,60 @@ func ListGofmtDirty(root string) ([]string, error) {
 	}
 	return paths, nil
 }
+
+// ConsumerDeps are the modules outside the standard library the packages a
+// consumer imports may pull in (L-11.1, owner 28.10): x/text for Slug's
+// NFD, x/net/html for page.Check's parse.
+var ConsumerDeps = []string{"golang.org/x/text/", "golang.org/x/net/html"}
+
+// CheckConsumerDeps fails when a package of the module outside internal and
+// cmd depends on a non-standard package of another module that no prefix in
+// allowed covers.
+func CheckConsumerDeps(root string, allowed []string) error {
+	golist := func(args ...string) ([]string, error) {
+		cmd := exec.Command("go", append([]string{"list"}, args...)...)
+		cmd.Dir = root
+		var stderr bytes.Buffer
+		cmd.Stderr = &stderr
+		out, err := cmd.Output()
+		if err != nil {
+			return nil, fmt.Errorf("consumer deps: %v %s", err, strings.TrimSpace(stderr.String()))
+		}
+		return strings.Fields(string(out)), nil
+	}
+	mod, err := golist("-m")
+	if err != nil {
+		return err
+	}
+	all, err := golist("./...")
+	if err != nil {
+		return err
+	}
+	var consumer []string
+	for _, p := range all {
+		if !strings.Contains(p+"/", "/internal/") && !strings.Contains(p+"/", "/cmd/") {
+			consumer = append(consumer, p)
+		}
+	}
+	deps, err := golist(append([]string{"-deps", "-f", "{{if not .Standard}}{{.ImportPath}}{{end}}"}, consumer...)...)
+	if err != nil {
+		return err
+	}
+	var bad []string
+	for _, p := range deps {
+		if p == mod[0] || strings.HasPrefix(p, mod[0]+"/") {
+			continue
+		}
+		ok := false
+		for _, a := range allowed {
+			ok = ok || strings.HasPrefix(p, a)
+		}
+		if !ok {
+			bad = append(bad, p)
+		}
+	}
+	if len(bad) > 0 {
+		return fmt.Errorf("consumer deps: %s is not in ConsumerDeps (L-11.1: a new one is a decision)", strings.Join(bad, ", "))
+	}
+	return nil
+}

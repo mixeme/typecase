@@ -1,6 +1,7 @@
 package gate_test
 
 import (
+	"strings"
 	"testing"
 
 	"carrel.dev/typecase/internal/catalog"
@@ -48,5 +49,20 @@ func TestL8_verifiable(t *testing.T) {
 	}
 	if len(gate.AllGates) != 18 {
 		t.Fatalf("expected 18 gates, got %d", len(gate.AllGates))
+	}
+}
+
+// TestConsumerDeps: what a consumer imports pulls in only the dependencies
+// L-11.1 names; red with one of them taken out of the list.
+func TestConsumerDeps(t *testing.T) {
+	root, err := gate.FindModuleRoot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := gate.CheckConsumerDeps(root, gate.ConsumerDeps); err != nil {
+		t.Fatal(err)
+	}
+	if err := gate.CheckConsumerDeps(root, gate.ConsumerDeps[1:]); err == nil || !strings.Contains(err.Error(), "golang.org/x/text/unicode/norm") {
+		t.Fatalf("without x/text in the list: %v", err)
 	}
 }

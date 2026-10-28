@@ -6,6 +6,12 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Dependencies
+
+- What a consumer imports needs two modules outside the standard library,
+  and only these: `golang.org/x/text` (`widget.Slug`) and
+  `golang.org/x/net` (`page.Check`); both are direct requirements now.
+
 ### Breaking
 
 - `Push` is no longer a `SheetFootPart`: a sheet's Cancel stands in a
