@@ -527,15 +527,20 @@
 
 	// The page's forms an answer carries after the widget of its zone
 	// (Carrel's task 226): a button outside a form names its form by ID, and
-	// the page prints such forms after its root. Each takes the place of the
-	// page's form of the same ID, or joins the end of the page.
+	// the page prints such forms after its root. An answer carries them in a
+	// template[data-tc-forms], so a zone's content that is itself a form stays
+	// the zone's, and an answer of forms only empties its zone. Each takes the
+	// place of the page's form of the same ID, or joins the end of the page.
 	function forms(content) {
-		var out = [];
-		Array.prototype.forEach.call(content.children, function (f) {
-			if (f.tagName === "FORM" && f.id && f.classList.contains("tc-post") && f.previousElementSibling) out.push(f);
+		var out = [], boxes = [];
+		Array.prototype.forEach.call(content.children, function (t) {
+			if (t.tagName === "TEMPLATE" && t.hasAttribute("data-tc-forms")) boxes.push(t);
 		});
-		out.forEach(function (f) {
-			content.removeChild(f);
+		boxes.forEach(function (t) {
+			content.removeChild(t);
+			Array.prototype.forEach.call(t.content.children, function (f) {
+				if (f.tagName === "FORM" && f.id) out.push(f);
+			});
 		});
 		return out;
 	}

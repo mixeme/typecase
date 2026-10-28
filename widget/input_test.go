@@ -46,3 +46,22 @@ func TestSegOptionForm(t *testing.T) {
 		}
 	}
 }
+
+// TestSegRole: buttons that send a form and links are no radios, so their
+// seg is a group; plain options and radios of a form keep the radiogroup
+// (review finding 11).
+func TestSegRole(t *testing.T) {
+	for _, c := range []struct {
+		seg  Seg
+		role string
+	}{
+		{Seg{Options: []SegOption{{Label: "read only", Form: "acts", To: "/a?op=read"}, {Label: "write", On: true, Form: "acts", To: "/a?op=write"}}}, "group"},
+		{Seg{Options: []SegOption{{Label: "A–Z", On: true, Href: "/c?sort=az"}, {Label: "Recent", Href: "/c?sort=new"}}}, "group"},
+		{Seg{Options: []SegOption{{Label: "Day", On: true}, {Label: "Week"}}}, "radiogroup"},
+		{Seg{Name: "theme", Options: []SegOption{{Label: "Auto", Value: "auto", On: true}, {Label: "Light", Value: "light"}}}, "radiogroup"},
+	} {
+		if got := c.seg.Render(); !strings.Contains(got, `role="`+c.role+`"`) {
+			t.Errorf("want role %q: %s", c.role, got)
+		}
+	}
+}

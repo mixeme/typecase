@@ -7,7 +7,7 @@
 нужно. Собрана сценарием из описаний и тестов; при новом виджете или
 поведении — дописать строку.
 
-**Итог.** 99 виджетов с описанием; 55 печатаются в браузерных тестах. У 19
+**Итог.** 101 виджет с описанием; 56 печатаются в браузерных тестах. У 19
 поведение описано, а своего теста нет: 14 работают без сценария (ссылка,
 форма, `details`), 3 — общим правилом, проверенным на другом виджете, у 2
 описание обещало то, чего в `tc.js` нет (`Filter` — сужение по мере набора,
@@ -22,11 +22,12 @@
 | `Avatar` | `tc-avatar` | нет. | — |
 | `Badge` | `tc-badge` | нет. | тест: `TestNotebookPick` |
 | `Bar` | `tc-bar` | «⋯» открывает меню с тем, что не поместилось. | тест: `TestSelectionForm` |
+| `BarForm` | `tc-barform` | Смена поля или выбор пункта меню отправляет форму (сценарий); без сценария — Show в конце. | тест: `TestBarFormSubmits` |
 | `Brand` | `tc-brand` | нет. | — |
 | `BriefRow` | `tc-row` | Нажатие выбирает строку. | без сценария (ссылка, форма, `details`) |
 | `Button` | `tc-btn` | Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт; кнопка с Busy на время отправки формы говорит эти слова и выключена до ответа; ответ живого слоя в зону, при котором форма осталась, возвращает ей слова. | тест: `TestAddRowAndDrop`, `TestButtonBusy`, `TestButtonBusyBack`, `TestCheckFormInMenu`, `TestCheckFormSubmits`, `TestClosedMenuWithoutScripts`, `TestColumnsMenu`, `TestConflictForm`, `TestCopy`, `TestEditFile`, `TestFilePick`, `TestFileSizes`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestRemoveRow`, `TestSaveAs`, `TestScriptOnly`, `TestSelectionForm`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestSwap`, `TestTallyCount`, `TestTemplateShows`, `TestTilePick`, `TestTreeNodeSwap`, `TestTreeSend`, `TestZoneFormOnce`, `TestZoneSheet`, `TestZones` |
 | `Card` | `tc-card` | нет: поведение у того, что в ней. | — |
-| `Check` | `tc-check` | Нажатие переключает; пробел — тоже. | тест: `TestCheckFormInMenu`, `TestCheckFormSubmits`, `TestConflictForm`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestSwap`, `TestTallyCount` |
+| `Check` | `tc-check` | Нажатие переключает; пробел — тоже. Флажок формы с Reason выключен, причина — его подсказка. | тест: `TestCheckFormInMenu`, `TestCheckFormSubmits`, `TestConflictForm`, `TestEndFollowsStart`, `TestFieldChanged`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestSwap`, `TestTallyCount` |
 | `CheckForm` | `tc-checkform` | Смена отметки отправляет форму (сценарий); без сценария — Apply рядом. | тест: `TestCheckFormInMenu`, `TestCheckFormSubmits` |
 | `Close` | `tc-close` | Закрывает свой слой; Esc делает то же, фокус возвращается на вызвавший контрол. | тест: `TestShortcuts`, `TestZonePanel` |
 | `ColumnRow` | `tc-row` | Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным. | без сценария (ссылка, форма, `details`) |
@@ -86,6 +87,7 @@
 | `Range` | `tc-range` | Show применяет диапазон; Enter в поле — то же. С адресом (Action) диапазон — форма GET: From и To уходят полями, Show её отправляет, без сценария. | без сценария (ссылка, форма, `details`) |
 | `Rubric` | `tc-rubric` | нет. | тест: `TestAddRowAndDrop`, `TestConflictForm`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestSearchSuggest`, `TestTemplateShows`, `TestZonePick` |
 | `Runbar` | `tc-runbar` | «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама; скрытая строка (пустая, ждущая хода или опустевшая по концу) не следит. | тест: `TestEditFile`, `TestRunFollows`, `TestRunHiddenRests` |
+| `Say` | `tc-say` | нет: длину выбирает CSS по ширине. | — |
 | `Scrim` | `tc-scrim` | Нажатие на затемнение закрывает лист, как Esc; кнопка с Opens открывает закрытое затемнение на месте. | тест: `TestAddRowAndDrop`, `TestNoScriptSheetAndChecks`, `TestOpensInPlace`, `TestPasteAndQueue`, `TestRailReopensSources`, `TestShortcuts`, `TestSideDrop`, `TestZoneSheet` |
 | `Search` | `tc-search` | Ввод ищет; Esc очищает запрос и закрывает подсказки. | тест: `TestSearchSuggest`, `TestShortcuts` |
 | `Sec` | `tc-sec` | нет. | — |
@@ -97,7 +99,7 @@
 | `SizeRow` | `tc-row` | Галка выбирает вещь для действий шапки; нажатие на имя открывает её. | без сценария (ссылка, форма, `details`) |
 | `Skel` | `tc-skel` | нет. | — |
 | `SkelRow` | `tc-row` | нет. | — |
-| `SlimRow` | `tc-row` | Галка выбирает строку. | без сценария (ссылка, форма, `details`) |
+| `SlimRow` | `tc-row` | Галка выбирает строку; с Reason галка выключена, причина — её подсказка, род справа — тревогой. | без сценария (ссылка, форма, `details`) |
 | `Split` | `tc-split` | Главная половина делает главное; стрелка открывает меню. | без сценария (ссылка, форма, `details`) |
 | `Stack` | `tc-stack` | нет. | — |
 | `Stat` | `tc-stat` | нет. | — |

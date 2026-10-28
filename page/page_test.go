@@ -126,7 +126,15 @@ func TestFragmentForms(t *testing.T) {
 	got := page.Fragment{Body: []page.Part{w.Side{Zone: "panel"}}, Forms: []w.PostForm{{ID: "post-del", Action: "/del"}},
 		Extra: []page.ZonePart{{Zone: "queue", Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("q")}}}, Forms: []w.PostForm{{ID: "post-ans", Action: "/ans"}}}}}.Render()
 	side, del, tpl, ans := strings.Index(got, `class="tc-side"`), strings.Index(got, `id="post-del"`), strings.Index(got, `<template data-tc-zone="queue">`), strings.Index(got, `id="post-ans"`)
-	if side < 0 || del < side || tpl < del || ans < tpl || ans > strings.Index(got, `</template>`) {
+	if side < 0 || del < side || tpl < del || ans < tpl || ans > strings.LastIndex(got, `</template>`) {
 		t.Errorf("the forms do not follow their zone's widget: %s", got)
+	}
+	// in a template of their own: an answer of forms only empties its zone
+	// (review finding 12)
+	if n := strings.Count(got, `<template data-tc-forms><form class="tc-post" id="post-`); n != 2 {
+		t.Errorf("the forms stand in %d templates of their own, want 2: %s", n, got)
+	}
+	if got := (page.Fragment{}).Render(); got != "" {
+		t.Errorf("an answer without forms prints %q", got)
 	}
 }

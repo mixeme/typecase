@@ -20,6 +20,9 @@ do, not what the authors did.
   (Carrel's task 234: one rule for the banner's end).
 - **`Runbar.Every` is a `time.Duration`**, printed in milliseconds
   (`data-tc-every`): a poll every 1500 ms can be said (Carrel's task 226).
+  The old `Every: 5` still compiles and means 5 ns — it prints
+  `data-tc-every="0"`, and the page polls at its default 5000 ms; write
+  `Every: 5 * time.Second`.
 - **`DocTasks.Title` is a string** drawn as the document's heading
   (`.tc-doc__heading`), not a `Rubric`: a note's Markdown heading is the
   author's text, not the interface's rubric (Carrel's task 196).
@@ -2101,6 +2104,15 @@ do, not what the authors did.
 - A `Field.Changed` brought hidden sends nothing from the start, not only
   after its first show; a control the page brought off (`Check.Reason`)
   stays off when its field shows — by `Changed` or by `PickOption.Shows`.
+- A `Seg` of links or of options that send a form (`SegOption.Form`) is a
+  `role="group"`: they are no radios, and a `radiogroup` of them gave a
+  reader no radio to pick. Plain options and a `Seg` with a `Name` stay a
+  `radiogroup`.
+- An answer's page forms (`Fragment.Forms`, `ZonePart.Forms`) come in a
+  `<template data-tc-forms>` of their own: an answer of forms only now
+  empties its zone, as an empty one does, and a zone's content that is
+  itself a `PostForm` stays in the zone. An answer printed by hand puts
+  its page forms in that template too.
 
 ## typecase/v0.11.0 — 2026-10-01
 

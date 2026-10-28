@@ -129,7 +129,15 @@ func (o SegOption) label() string {
 
 func (g Seg) seg(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary), rank3(g.Tertiary)) + attr("data-tc-target", g.Target) + ` role="radiogroup"` + flag("data-tc-theme-switch", g.Theme) + `>`)
+	// radios make a radiogroup; links and buttons that send a form are no
+	// radios, and a radiogroup of them names no radio to a reader
+	role := "radiogroup"
+	for _, o := range g.Options {
+		if g.Name == "" && (o.Href != "" || o.Form != "") {
+			role = "group"
+		}
+	}
+	s.WriteString(`<span` + class(m, "tc-seg", g.Variant.class(), g.Place.class(), rank(g.Secondary), rank3(g.Tertiary)) + attr("data-tc-target", g.Target) + attr("role", role) + flag("data-tc-theme-switch", g.Theme) + `>`)
 	for _, o := range g.Options {
 		if g.Name != "" {
 			kind := "radio"

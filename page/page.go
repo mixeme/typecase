@@ -178,9 +178,9 @@ func (p Printed) Render() string { return string(p) }
 type Fragment struct {
 	Body []Part
 	// Forms are the page's forms the zone's buttons outside a form name by
-	// ID (Button.Form), printed after the zone's widget: the live layer puts
-	// each in place of the page's form of the same ID, or at the end of the
-	// page (Carrel's task 226).
+	// ID (Button.Form), printed after the zone's widget in a template of
+	// their own: the live layer puts each in place of the page's form of the
+	// same ID, or at the end of the page (Carrel's task 226).
 	Forms []widget.PostForm
 	Extra []ZonePart
 }
@@ -199,20 +199,30 @@ func (f Fragment) Render() string {
 	for _, p := range f.Body {
 		b.WriteString(p.Render())
 	}
-	for _, p := range f.Forms {
-		b.WriteString(p.Render())
-	}
+	pageForms(&b, f.Forms)
 	for _, z := range f.Extra {
 		b.WriteString(`<template data-tc-zone="` + html.EscapeString(z.Zone) + `">`)
 		for _, p := range z.Body {
 			b.WriteString(p.Render())
 		}
-		for _, p := range z.Forms {
-			b.WriteString(p.Render())
-		}
+		pageForms(&b, z.Forms)
 		b.WriteString(`</template>`)
 	}
 	return b.String()
+}
+
+// pageForms prints an answer's page forms in a template of their own, so
+// the live layer tells them from a zone's content that is itself a form,
+// and an empty Body still empties its zone.
+func pageForms(b *strings.Builder, forms []widget.PostForm) {
+	if len(forms) == 0 {
+		return
+	}
+	b.WriteString(`<template data-tc-forms>`)
+	for _, p := range forms {
+		b.WriteString(p.Render())
+	}
+	b.WriteString(`</template>`)
 }
 
 // Render prints the document.
