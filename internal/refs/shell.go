@@ -233,11 +233,12 @@ var _ = add(
 		{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 8}, "appearance-1", "tc-nav", 2),
 	shell("plain", w.Nav{Items: []w.NavItem{
-		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 312}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 14}, Href: "#"},
-		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 3}, Href: "#"},
-		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 86}, Href: "#"},
-		{Icon: "file", Label: "Files", Href: "#"}}, On: 1}, "s-mail-1", "tc-nav", 1),
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, "s-mail-1", "tc-nav", 1),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "plus", Label: "Add users", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "con", Label: "Users", Count: &w.Num{Value: 6}, Href: "#"},

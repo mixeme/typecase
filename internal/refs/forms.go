@@ -149,6 +149,16 @@ var _ = add(
 	form("default", w.Push{Items: []w.PushPart{w.Text("Default")}}, "s-dup-3", "tc-push", 1),
 
 	// tc-rubric
+	form("plain", w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 4}, w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
+		w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},
+		w.MenuItem{Icon: "cal", Label: "Event", To: "/app/mail/send?op=attach&what=event"},
+		w.MenuItem{Icon: "cal", Label: "Calendar", To: "/app/mail/send?op=attach&what=calendar"},
+		w.MenuItem{Icon: "task", Label: "Task", To: "/app/mail/send?op=attach&what=task"},
+		w.MenuItem{Icon: "note", Label: "Note", To: "/app/mail/send?op=attach&what=note"},
+		w.MenuSep{},
+		w.MenuItem{Icon: "doc", Label: "File", To: "/app/mail/send?op=attach&what=file"},
+		w.MenuItem{Icon: "file", Trail: w.Tag{Label: "link", Place: w.Pushed}, Label: "Folder", To: "/app/mail/send?op=attach&what=folder"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}, Gap: w.LineGap6, Place: w.Pushed}}, Variant: w.RubricRow}, "s-mail-1", "tc-rubric", 8),
 	form("block", w.Rubric{Text: "", Items: []w.RubricPart{w.Mono{Text: "TEL;work"}}}, "s-conflict-6", "tc-rubric", 2),
 	form("block", w.Rubric{Text: "Rail"}, "shell-1", "tc-rubric", 1),
 	form("inline", w.Rubric{Text: "А", Form: w.RubricInline}, "components-12", "tc-rubric", 1),
@@ -165,7 +175,7 @@ var _ = add(
 	form("item", w.Rubric{Text: "mix", Form: w.RubricItem, Variant: w.RubricItemLine, Items: []w.RubricPart{w.Mono{}}}, "account-5", "tc-rubric", 1),
 	form("variant", w.Rubric{Text: "Subscriptions", Variant: w.RubricRail, Items: []w.RubricPart{w.Badge{Label: "badge"}}}, "components-11", "tc-rubric", 2),
 	form("item", w.Rubric{Text: "Points per signal", Form: w.RubricItem, Items: []w.RubricPart{w.Push{}, w.RubricCol{Text: "Yours"}}}, "s-dup-3", "tc-rubric", 1),
-	form("row", w.Rubric{Text: "Attached", Variant: w.RubricRow, Items: []w.RubricPart{w.Num{}, w.Line{Place: w.Pushed}}}, "s-mail-1", "tc-rubric", 6),
+	form("row", w.Rubric{Text: "В", Form: w.RubricInline}, "s-mail-1", "tc-rubric", 6),
 )
 
 func faceOf(f w.Face) *w.Face { return &f }

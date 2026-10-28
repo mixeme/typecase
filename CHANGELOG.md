@@ -989,6 +989,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The page under the letter is the combined address book** (Carrel's
+  task 241): the rail, head and rows' sources of `s-contacts-1` in
+  `s-mail-1`, `-5`, `-6`, `-10`, `-12`, `-13`, `-16`…`-18` — no calendars,
+  no baikal; the head «Combined address book · 3 of 4 books · 2 accounts ·
+  2 selected».
+
 - The letter's Send says «Sending…» while the letter goes (`s-mail-1`,
   `-14`, `-17`; the drawn state `s-mail-19`, Carrel's task 242).
 

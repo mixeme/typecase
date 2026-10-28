@@ -69,7 +69,7 @@ var _ = add(
 	primitive("focus", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn", 1),
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn", 3),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn", 9),
-	primitive("menu", w.Button{Label: "Attach", Icon: "clip", Menu: true, Small: true}, "s-mail-1", "tc-btn", 3),
+	primitive("menu", w.Button{Icon: "plus", Title: "New address book"}, "s-mail-1", "tc-btn", 3),
 	// The summary of a closed menu is its button (Drop prints it so).
 	primitive("menu", w.Button{Label: "Attach", Icon: "clip", Menu: true, Small: true}, "s-agenda-1", "tc-btn", 23),
 	primitive("link", w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"}, "s-agenda-1", "tc-btn", 10),
@@ -109,13 +109,14 @@ var _ = add(
 	primitive("default", w.Close{Label: "Close the panel"}, "components-33", "tc-close", 1),
 
 	// tc-mark
+	primitive("plain", w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, "components-14", "tc-mark", 1),
 	primitive("one", w.Mark{Colour: "#4A6B52"}, "components-11", "tc-mark", 2),
 	primitive("multi", w.Mark{Kind: w.MarkMulti}, "components-11", "tc-mark", 1),
 	primitive("multi", w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, "s-contacts-1", "tc-mark", 6),
 	primitive("sized", w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline}, "s-contacts-6", "tc-mark", 4),
 	primitive("external", w.Mark{Colour: "#8C6239", Kind: w.MarkExternal}, "s-profile-1", "tc-mark", 17),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, "s-agenda-17", "tc-mark", 10),
-	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, "s-mail-1", "tc-mark", 16),
+	primitive("sized", w.Mark{Colour: "#4A6B52"}, "s-mail-1", "tc-mark", 16),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH32}, "phone-1", "tc-mark", 2),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 1),
 	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 11),
@@ -135,7 +136,7 @@ var _ = add(
 	primitive("person", w.Tag{Label: "Вера Лебедева", Mark: &w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, Removable: true, Title: "vera@example.net", Name: "attendee", Value: "mailto:vera@example.net"}, "s-agenda-12", "tc-tag", 5),
 	primitive("person", w.Tag{Label: "Мария Лебедева", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Fixed: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}}, Title: "m.lebedeva@example.org"}, "s-agenda-14", "tc-tag", 1),
 	primitive("person", w.Tag{Address: &w.Mono{Text: "v@example.org"}, Fixed: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· no reply")}}, Title: "v@example.org"}, "s-agenda-14", "tc-tag", 4),
-	primitive("mark", w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}, "s-mail-1", "tc-tag", 2),
+	primitive("mark", w.Tag{Label: "работа"}, "s-mail-1", "tc-tag", 2),
 
 	// tc-badge
 	primitive("neutral", w.Badge{Label: "external"}, "components-11", "tc-badge", 1),
