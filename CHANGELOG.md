@@ -366,12 +366,17 @@ do, not what the authors did.
   page as the browser and the library's script will and return a `Problem`
   for every name that does not hold: an id given twice; `form`, `list`,
   `for`, `aria-*`, `data-tc-progress`, `data-tc-add`, `data-tc-open`,
-  `data-tc-swap` and the other ids a part gives — naming nothing, or the
-  wrong thing (`data-tc-drop` and `data-tc-paste` want a form with a file
-  field, `data-tc-add` a template, `for` a control); `data-tc-disables`,
-  `data-tc-follows` and an option's `data-tc-shows` — naming no field of
-  their form; `data-tc-target` and the document's address zone — naming no
-  zone on the page. Names with «{n}» are the template's and are left. Such
+  `data-tc-swap`, `data-tc-recount` and the other ids a part gives — naming
+  nothing, or the wrong thing (`data-tc-drop` and `data-tc-paste` want a
+  form with a file field, `data-tc-add` a template, `for` a control);
+  `data-tc-disables`, `data-tc-follows`, `data-tc-changed`, `data-tc-day`,
+  `data-tc-slug-of` and an option's `data-tc-shows` — naming no field of
+  their form; `data-tc-ranges-of` — naming no file field with
+  `data-tc-ranges`; `data-tc-target` and the document's address zone —
+  naming no zone on the page; a submit button of no form (a sheet whose
+  body holds a form of its own prints no form of its Action: `Action`,
+  `Method`, `Fields` and `Target` of the sheet are dropped, and the button
+  does nothing). Names with «{n}» are the template's and are left. Such
   a page renders and looks right; what breaks is what is pressed. Run it in
   your tests over the pages you print. `TestCheck`.
 - **A queue folds in place** (a tail of Carrel's task 88): `Queue.Fold`

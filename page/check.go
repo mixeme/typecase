@@ -132,6 +132,7 @@ var idNames = map[string]func(*checker, *html.Node) string{
 	"aria-labelledby":   anything,
 	"aria-describedby":  anything,
 	"data-tc-swap":      anything,
+	"data-tc-recount":   anything,
 }
 
 func tag(want string) func(*checker, *html.Node) string {
@@ -270,7 +271,7 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 		}
 	}
 	// names of fields, searched in the element's form
-	for _, key := range []string{"data-tc-disables", "data-tc-follows", "data-tc-shows", "data-tc-from"} {
+	for _, key := range []string{"data-tc-disables", "data-tc-follows", "data-tc-shows", "data-tc-from", "data-tc-changed", "data-tc-day", "data-tc-slug-of"} {
 		v, ok := attrOf(n, key)
 		if !ok || (key == "data-tc-shows" && n.Data == "input") {
 			continue
@@ -296,6 +297,18 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 			}
 		}
 	}
+	// the file a form sends parts of again is the one a ranges field of
+	// that name kept, anywhere on the page
+	if v, ok := attrOf(n, "data-tc-ranges-of"); ok && v != "" && !inTemplate && !rangesField(rootOf(n), v) {
+		c.add(n, "data-tc-ranges-of", v, "names no file field with data-tc-ranges on the page")
+	}
+	// a submit button of no form does nothing when pressed: a sheet whose
+	// body holds a form of its own prints no form of its Action
+	if submits(n) && !inTemplate && c.formOf(n) == nil {
+		if _, named := attrOf(n, "form"); !named {
+			c.add(n, "type", "submit", "submits no form: pressed, it does nothing")
+		}
+	}
 	if z, ok := attrOf(n, "data-tc-target"); ok && z != "" && !c.zones[z] {
 		c.add(n, "data-tc-target", z, "names no zone on the page: what is pressed goes the plain way")
 	}
@@ -309,4 +322,42 @@ func rootOf(n *html.Node) *html.Node {
 		n = n.Parent
 	}
 	return n
+}
+
+// submits: a button that sends its form when pressed — a button whose type
+// is submit or not given, an input of type submit or image.
+func submits(n *html.Node) bool {
+	t, _ := attrOf(n, "type")
+	switch n.Data {
+	case "button":
+		return t == "" || strings.EqualFold(t, "submit")
+	case "input":
+		return strings.EqualFold(t, "submit") || strings.EqualFold(t, "image")
+	}
+	return false
+}
+
+// rangesField: a file field named name that keeps its file for parts
+// (data-tc-ranges) under root.
+func rangesField(root *html.Node, name string) bool {
+	found := false
+	var find func(*html.Node)
+	find = func(k *html.Node) {
+		if found || k.Type == html.ElementNode && k.DataAtom == atom.Template {
+			return
+		}
+		if k.Type == html.ElementNode && k.Data == "input" {
+			t, _ := attrOf(k, "type")
+			v, _ := attrOf(k, "name")
+			if _, r := attrOf(k, "data-tc-ranges"); r && t == "file" && v == name {
+				found = true
+				return
+			}
+		}
+		for _, x := range children(k) {
+			find(x)
+		}
+	}
+	find(root)
+	return found
 }

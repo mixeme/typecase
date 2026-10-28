@@ -83,3 +83,42 @@ func TestCheck(t *testing.T) {
 		t.Errorf("an id given twice and a label of a paragraph: %v", twice)
 	}
 }
+
+// TestCheckNamesOfFields (review findings 7 and 10): the other names a part
+// gives — the fields a change brings a question for, the day a time carries
+// over, the field a hint says, the elements a form recounts, the kept file
+// a form sends parts of — hold; a submit button of no form is told so.
+func TestCheckNamesOfFields(t *testing.T) {
+	const wrong = `<!doctype html><body>
+<form action="/c"><input name="url"><div class="tc-field" data-tc-changed="login" hidden></div>
+<input type="time" name="end" data-tc-day="end.dat"><span data-tc-slug-of="adress"></span></form>
+<form action="/a" data-tc-recount="attach-lin"><select name="x"></select></form>
+<form action="/u" data-tc-ranges data-tc-ranges-of="fil"></form><input type="file" name="file" data-tc-ranges="/r">
+<div class="tc-sheet"><button class="tc-btn" type="submit">Send</button><button class="tc-btn" type="button">Cancel</button></div>
+<template><button>Add</button></template></body>`
+	got, err := page.Check(wrong)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var said []string
+	for _, p := range got {
+		said = append(said, p.String())
+	}
+	want := []string{
+		`div.tc-field data-tc-changed="login": names no field of its form`,
+		`input data-tc-day="end.dat": names no field of its form`,
+		`span data-tc-slug-of="adress": names no field of its form`,
+		`form data-tc-recount="attach-lin": names nothing on the page`,
+		`form data-tc-ranges-of="fil": names no file field with data-tc-ranges on the page`,
+		`button.tc-btn type="submit": submits no form: pressed, it does nothing`,
+	}
+	if strings.Join(said, "\n") != strings.Join(want, "\n") {
+		t.Errorf("names that do not hold:\n%s\nwant\n%s", strings.Join(said, "\n"), strings.Join(want, "\n"))
+	}
+	right := strings.NewReplacer(`"login"`, `"url"`, `"end.dat"`, `"end"`, `"adress"`, `"url"`, `"attach-lin"`, `"x"`, `"fil"`, `"file"`,
+		`<button class="tc-btn" type="submit">Send</button>`, `<button class="tc-btn" type="submit" form="send">Send</button><form id="send" action="/s"></form>`).Replace(wrong)
+	right = strings.Replace(right, `<select name="x">`, `<select name="x" id="x">`, 1)
+	if got, err := page.Check(right); err != nil || len(got) > 0 {
+		t.Errorf("the same page put together right: %v %v", got, err)
+	}
+}
