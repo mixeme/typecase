@@ -5,6 +5,7 @@
 //
 //	go run ./cmd/frame2go s-find-2 ...   # print the screen function of each frame
 //	go run ./cmd/frame2go -self s-find-2 # a Go file that builds outside Typecase
+//	go run ./cmd/frame2go -self -out dir s-find-2 s-find-4 # each draft to dir/<frame>/draft.go
 //	go run ./cmd/frame2go                # rewrite internal/screens
 //	go run ./cmd/frame2go -check         # say which files differ, change nothing
 //
@@ -14,6 +15,11 @@
 // application's. Outside Typecase -root is the module's directory:
 //
 //	go run carrel.dev/typecase/cmd/frame2go -self -root "$(go list -m -f '{{.Dir}}' carrel.dev/typecase)" s-find-2
+//
+// The mockup and the library are read once per call, so many frames are one
+// call: all route frames take seconds, one call per frame takes seconds each
+// (Carrel's task 245). With -out each draft is a file of its own, a package
+// per frame, as a client keeps them.
 package main
 
 import (
@@ -31,10 +37,13 @@ func main() {
 	root := flag.String("root", ".", "the module's root")
 	check := flag.Bool("check", false, "compare with internal/screens instead of writing")
 	self := flag.Bool("self", false, "print each frame as a Go file that builds outside Typecase")
+	out := flag.String("out", "", "with -self: write each draft to <out>/<frame>/draft.go instead of printing")
 	flag.Parse()
 	var err error
-	if flag.NArg() > 0 {
-		err = print(*root, flag.Args(), *self)
+	if *out != "" && !*self {
+		err = fmt.Errorf("-out goes with -self")
+	} else if flag.NArg() > 0 {
+		err = print(*root, flag.Args(), *self, *out)
 	} else {
 		err = write(*root, *check)
 	}
@@ -44,8 +53,9 @@ func main() {
 	}
 }
 
-// print prints the screen function of each frame named.
-func print(root string, frames []string, self bool) error {
+// print prints the screen function of each frame named; with out, the
+// -self draft of each goes to out/<frame>/draft.go.
+func print(root string, frames []string, self bool, out string) error {
 	secs, gaps, err := framegen.Load(root)
 	if err != nil {
 		return err
@@ -68,7 +78,17 @@ func print(root string, frames []string, self bool) error {
 					if err != nil {
 						return err
 					}
-					fmt.Print(src)
+					if out != "" {
+						dir := filepath.Join(out, id)
+						if err := os.MkdirAll(dir, 0o755); err != nil {
+							return err
+						}
+						if err := os.WriteFile(filepath.Join(dir, "draft.go"), []byte(src), 0o644); err != nil {
+							return err
+						}
+					} else {
+						fmt.Print(src)
+					}
 					found = true
 				}
 			}

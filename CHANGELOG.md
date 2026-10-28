@@ -114,6 +114,10 @@ do, not what the authors did.
 
 ### Added
 
+- `frame2go -self -out DIR` writes each frame's draft to
+  `DIR/<frame>/draft.go`, a package per frame (Carrel's task 245): many
+  frames are one call — the mockup and the library are read once, all 294
+  route frames take about six seconds.
 - `Button.Busy` — what a submit button says while its form is being sent
   (`data-tc-busy`): with the library's script it takes these words and is
   off until the answer, its icon kept, its name and value still sent; a

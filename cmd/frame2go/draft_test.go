@@ -63,3 +63,46 @@ func TestDraftBuildsAlone(t *testing.T) {
 	}
 	t.Logf("%d drafts build alone", n)
 }
+
+// TestDraftsOut (Carrel's task 245): -self -out writes each frame's draft
+// to its own directory, the same bytes -self prints for it alone, in one
+// call.
+func TestDraftsOut(t *testing.T) {
+	root, err := filepath.Abs(filepath.Join("..", ".."))
+	if err != nil {
+		t.Fatal(err)
+	}
+	frames := []string{"s-find-2", "s-mail-1", "s-tasks-3"}
+	out := t.TempDir()
+	if err := print(root, frames, true, out); err != nil {
+		t.Fatal(err)
+	}
+	secs, _, err := framegen.Load(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refsInputs, err := os.ReadFile(filepath.Join(root, "internal", "refs", "inputs.go"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, id := range frames {
+		got, err := os.ReadFile(filepath.Join(out, id, "draft.go"))
+		if err != nil {
+			t.Fatalf("%s: %v", id, err)
+		}
+		for _, s := range secs {
+			for _, sc := range s.Screens {
+				if sc.Frame != id {
+					continue
+				}
+				want, err := framegen.Draft(sc, string(refsInputs))
+				if err != nil {
+					t.Fatal(err)
+				}
+				if string(got) != want {
+					t.Errorf("%s: the file differs from the printed draft", id)
+				}
+			}
+		}
+	}
+}
