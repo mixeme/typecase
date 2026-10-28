@@ -757,16 +757,23 @@ func Contacts3() Screen {
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},
 									w.Grow{},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "second", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{
+										Parts: []w.FieldPart{w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
 									w.Button{Label: "Add email", Icon: "plus", Small: true},
 								},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Addresses"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "home"}}, Width: w.FieldXS},
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
 									w.Field{
 										Label: "Street",
-										Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}},
+										Parts: []w.FieldPart{w.Input{Value: "Тверская 12, стр. 3", Label: "Street"}},
 										Width: w.FieldLG,
 									},
 									w.Field{Label: "City", Parts: []w.FieldPart{w.Input{Value: "Москва", Label: "City"}}, Width: w.FieldSM},
@@ -975,16 +982,23 @@ func Contacts4() Screen {
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},
 									w.Grow{},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "second", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{
+										Parts: []w.FieldPart{w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
 									w.Button{Label: "Add email", Icon: "plus", Small: true},
 								},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Addresses"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "home"}}, Width: w.FieldXS},
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
 									w.Field{
 										Label: "Street",
-										Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}},
+										Parts: []w.FieldPart{w.Input{Value: "Тверская 12, стр. 3", Label: "Street"}},
 										Width: w.FieldLG,
 									},
 									w.Field{Label: "City", Parts: []w.FieldPart{w.Input{Value: "Москва", Label: "City"}}, Width: w.FieldSM},
@@ -2013,8 +2027,21 @@ func Contacts16() Screen {
 							Items: []w.ActsPart{
 								w.Button{Label: "Edit", Icon: "pencil", Kind: w.ButtonPrimary},
 								w.Button{Label: "Send", Icon: "mail"},
-								w.Button{Label: "Print", Icon: "print"},
-								w.Button{Icon: "dots", Title: "More"},
+								w.Button{Label: "Print", Icon: "print", Tertiary: true},
+								w.Drop{
+									Trigger: w.Button{Icon: "dots", Title: "More"},
+									Menu: w.Menu{
+										Items: []w.MenuPart{
+											w.MenuItem{Icon: "print", Label: "Print", Tertiary: true},
+											w.MenuItem{Icon: "move", Label: "Move"},
+											w.MenuItem{Icon: "dup", Label: "Copy"},
+											w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+											w.MenuItem{Icon: "link", Label: "Publish a link"},
+										},
+										Width: w.MenuWidth212,
+										Pop:   w.MenuUnderEnd,
+									},
+								},
 							},
 						},
 					},
@@ -2027,10 +2054,30 @@ func Contacts16() Screen {
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
-							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
-							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@slovo.example")}},
-							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+							{
+								Term:  "Phone · mobile",
+								Value: []w.ValuePart{w.Text("+7 912 445-10-88")},
+								Face:  w.ValueMono,
+								Href:  "tel:+79124451088",
+							},
+							{
+								Term:  "Phone · work",
+								Value: []w.ValuePart{w.Text("+7 495 120-45-00")},
+								Face:  w.ValueMono,
+								Href:  "tel:+74951204500",
+								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+							},
+							{
+								Term:  "Email · work",
+								Value: []w.ValuePart{w.Text("a.kovaleva@slovo.example")},
+								Href:  "mailto:a.kovaleva@slovo.example",
+							},
+							{
+								Term:  "Email · second",
+								Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")},
+								Href:  "mailto:anna.kovaleva@slovo.example",
+								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
+							},
 							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
 							{
 								Term:  "Birthday",

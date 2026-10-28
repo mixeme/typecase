@@ -2481,16 +2481,23 @@ func States12() Screen {
 									},
 									w.Button{Label: "Remove", Kind: w.ButtonDanger},
 									w.Grow{},
+									w.Field{Parts: []w.FieldPart{w.Pick{Value: "second", Label: "Label"}}, Width: w.FieldXS},
+									w.Field{
+										Parts: []w.FieldPart{w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
 									w.Button{Label: "Add email", Icon: "plus", Small: true},
 								},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Addresses"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "home"}}, Width: w.FieldXS},
+									w.Field{Label: "Label", Parts: []w.FieldPart{w.Pick{Value: "work"}}, Width: w.FieldXS},
 									w.Field{
 										Label: "Street",
-										Parts: []w.FieldPart{w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}},
+										Parts: []w.FieldPart{w.Input{Value: "Тверская 12, стр. 3", Label: "Street"}},
 										Width: w.FieldLG,
 									},
 									w.Field{Label: "City", Parts: []w.FieldPart{w.Input{Value: "Москва", Label: "City"}}, Width: w.FieldSM},
@@ -4099,14 +4106,7 @@ func States24() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{
-										Label: "Frequency",
-										Parts: []w.FieldPart{
-											w.Pick{Value: "Does not repeat"},
-											w.FieldHint{Parts: []w.Inline{w.Text("Repeats from the start date, or from the due date when there is none.")}},
-										},
-										Width: w.FieldSM,
-									},
+									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
 									w.Field{
 										Label: "Every",
 										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
@@ -4140,11 +4140,19 @@ func States24() Screen {
 										Label: "Advanced RRULE",
 										Parts: []w.FieldPart{
 											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
-											w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("The advanced value takes precedence when set. A task repeats from its start date, or from the due date if it has none."),
+												},
+											},
 										},
 										Width: w.FieldXL,
 									},
 								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Kept as the server sent them"},
+								Items:  []w.FieldSetPart{w.Diag{Text: "SEQUENCE  1", Place: w.Grown}},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Source"},
@@ -4156,7 +4164,7 @@ func States24() Screen {
 												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/dela/aa10.ics")},
 												Face:  w.ValueMono,
 											},
-											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
+											{Term: "Read", Value: []w.ValuePart{w.Text("just now · changed on server just now")}},
 										},
 										Place: w.Grown,
 									},

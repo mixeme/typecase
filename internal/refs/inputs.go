@@ -116,11 +116,12 @@ var _ = add(
 	form("wrap", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, Title: "a.kovaleva@example.org", Name: "to", Value: "a.kovaleva@example.org"}}, Name: "to", Add: &w.TagAdd{Name: "to.add", Value: "бел", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest", Enter: &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"}}, Focus: true}, "s-mail-3", "tc-in", 1),
 
 	// tc-in as a text area
-	form("plain", w.Input{Value: "ул. Садовая, 12, кв. 5", Label: "Street"}, "s-contacts-3", "tc-in", 16),
+	form("plain", w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}, "s-contacts-3", "tc-in", 16),
+	form("plain", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 24),
 	form("plain", w.Area{Text: "", Variant: w.AreaBodySm, Focus: true, Name: "description", Label: "Text"}, "s-notes-34", "tc-in", 2),
 	form("body", w.Area{Text: "", Variant: w.AreaBody, Name: "description", Label: "Text"}, "s-notes-30", "tc-in", 8),
 	form("title", w.Area{Text: "", Variant: w.AreaTitle, Focus: true, Name: "summary", Label: "Text"}, "s-notes-30", "tc-in", 2),
-	form("area", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in", 22),
+	form("area", w.Input{Value: "Россия", Label: "Country"}, "s-contacts-3", "tc-in", 22),
 	form("area-empty", w.Area{Label: "Text"}, "s-contacts-27", "tc-in", 14),
 	form("body", w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}, "s-notes-5", "tc-in", 2),
 	form("title", w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Label: "Title"}, "s-notes-20", "tc-in", 2),

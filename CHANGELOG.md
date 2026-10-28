@@ -989,6 +989,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Frames caught up with their neighbours** (Carrel's task 244):
+  `states-24` is the task's edit `s-tasks-3` with its loss line — the
+  repeat's hint under Advanced RRULE, «Kept as the server sent them» with
+  SEQUENCE only, Read «just now · changed on server just now»;
+  `s-contacts-16` is Anna's card `s-contacts-6` with the rewrite's message,
+  the work address the new one; Anna's edits (`s-contacts-3`, `-4`,
+  `states-12`) have her second address and her work address, as the card.
+
 - The archive's line of a deleted collection is short in all its cases
   (Carrel's task 240): «No backup job copies it: there is no archive to
   restore it from.», «A backup job copies it, but none has finished whole
