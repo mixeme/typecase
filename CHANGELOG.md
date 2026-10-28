@@ -2093,6 +2093,9 @@ do, not what the authors did.
   layer puts the answer in a zone and the form stays; sent again the plain
   way it keeps its own words; a `Folds` or `Bold` label says the busy words
   too.
+- A `Field.Changed` brought hidden sends nothing from the start, not only
+  after its first show; a control the page brought off (`Check.Reason`)
+  stays off when its field shows — by `Changed` or by `PickOption.Shows`.
 
 ## typecase/v0.11.0 — 2026-10-01
 

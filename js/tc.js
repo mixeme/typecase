@@ -847,6 +847,21 @@
 		});
 	}
 
+	// off switches a control off for the script's reason — its field is
+	// hidden — and back on only if it was the script that switched it off:
+	// a control the page brought off (a Reason) stays off.
+	function off(f, yes) {
+		if (yes) {
+			if (!f.disabled) {
+				f.disabled = true;
+				f.__tcOff = true;
+			}
+		} else if (f.__tcOff) {
+			f.disabled = false;
+			f.__tcOff = false;
+		}
+	}
+
 	// An option of a pick that shows fields of its form while it is chosen
 	// (data-tc-shows, PickOption.Shows; Carrel's task 156): the fields the
 	// list's options name are shown for the chosen option and hidden for the
@@ -865,7 +880,7 @@
 				var field = f.closest(".tc-field") || f;
 				if (on[name]) show(field);
 				else hide(field);
-				f.disabled = !on[name];
+				off(f, !on[name]);
 			});
 		});
 	}
@@ -960,8 +975,9 @@
 	// A field brought by a change (data-tc-changed, Field.Changed; the owner,
 	// 16.10): a field the page brought hidden shows while one of the named
 	// fields of its form differs from what it was when the page came, and
-	// hides again when they are as they were. A field the page brought shown
-	// (the screen asked after Save) is not touched.
+	// hides again when they are as they were; while hidden its controls are
+	// off and not sent, from the start. A field the page brought shown (the
+	// screen asked after Save) is not touched.
 	function initChanged(root) {
 		root.querySelectorAll(".tc-field[data-tc-changed][hidden]").forEach(function (field) {
 			var scope = field.closest("form") || document.getElementById(field.getAttribute("form") || "") || document;
@@ -972,6 +988,9 @@
 				});
 			});
 			field.tcWas = was;
+			field.querySelectorAll("input, select, textarea").forEach(function (f) {
+				off(f, true);
+			});
 		});
 	}
 
@@ -989,7 +1008,7 @@
 			if (differs) show(field);
 			else hide(field);
 			field.querySelectorAll("input, select, textarea").forEach(function (f) {
-				f.disabled = !differs;
+				off(f, !differs);
 			});
 		});
 	}

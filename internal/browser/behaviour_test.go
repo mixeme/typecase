@@ -1526,7 +1526,9 @@ func TestEndFollowsStart(t *testing.T) {
 // TestFieldChanged: a field brought by a change (Field.Changed; the owner,
 // 16.10) shows while a named field differs from what the page brought, goes
 // again when the edit is undone, sends nothing while hidden, and is not
-// touched when the page brought it shown (the screen asked after Save).
+// touched when the page brought it shown (the screen asked after Save); a
+// check its page brought off with a Reason stays off when it shows (review
+// finding 6).
 func TestFieldChanged(t *testing.T) {
 	needChrome(t)
 	form := func(hidden bool) string {
@@ -1537,12 +1539,16 @@ func TestFieldChanged(t *testing.T) {
 			w.Field{Label: "Published links", Changed: []string{"server.url", "username"}, Hidden: hidden, Parts: []w.FieldPart{
 				w.Check{Name: "published.links", Value: "keep", Radio: true, Parts: []w.CheckPart{w.Text("Keep them")}},
 				w.Check{Name: "published.links", Value: "revoke", Radio: true, Parts: []w.CheckPart{w.Text("Revoke them")}},
+				w.Check{Name: "published.notify", Value: "yes", Reason: "No mail relay", Parts: []w.CheckPart{w.Text("Tell their readers")}},
 			}},
 		}}
 		return `<div class="tc-root">` + f.Render() + `</div>`
 	}
 	const typ = `(n, v) => { const f = document.querySelector('[name="' + n + '"]'); f.value = v; f.dispatchEvent(new Event("input", {bubbles: true})); }`
-	const state = `(() => { const f = document.querySelector("[data-tc-changed]"); const b = f.querySelector("input"); return (f.hidden ? "hidden" : "shown") + (b.disabled ? " off" : " on"); })()`
+	// state: the field shown or hidden, its question on or off, the check
+	// with a Reason off whatever the field is
+	const state = `(() => { const f = document.querySelector("[data-tc-changed]"); const b = f.querySelector("input"); const r = f.querySelector('[name="published.notify"]');
+		return (f.hidden ? "hidden" : "shown") + (b.disabled ? " off" : " on") + (r.disabled ? "" : " reason-on"); })()`
 	h := browser.NewHarness(t)
 	for _, c := range []struct {
 		name   string
@@ -1550,8 +1556,8 @@ func TestFieldChanged(t *testing.T) {
 		steps  string
 		want   string
 	}{
-		{"untouched", true, ``, "hidden on"},
-		{"another label asks nothing", true, `typ("label", "Home")`, "hidden on"},
+		{"untouched: hidden, not sent", true, ``, "hidden off"},
+		{"another label asks nothing", true, `typ("label", "Home")`, "hidden off"},
 		{"another address asks", true, `typ("server.url", "https://cloud.home.example/")`, "shown on"},
 		{"another login asks", true, `typ("username", "anna")`, "shown on"},
 		{"the address back: the question goes", true, `typ("server.url", "https://cloud.home.example/"); typ("server.url", "https://dav.home.example/")`, "hidden off"},
