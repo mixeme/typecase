@@ -731,6 +731,46 @@
 		return true;
 	}
 
+	// A submit button with its words for the sending (data-tc-busy, Carrel's
+	// task 242) says them and is off until the answer: a letter takes
+	// seconds to go, and a second press would send it twice. It is switched
+	// off after the event, so that the form still sends its name and value;
+	// its icon stays, its words change.
+	function onBusy(e) {
+		var by = e.submitter;
+		if (!by || !by.getAttribute("data-tc-busy")) return;
+		setTimeout(function () {
+			var text = null;
+			for (var n = by.lastChild; n; n = n.previousSibling) {
+				if (n.nodeType === 3 && n.nodeValue.trim()) {
+					text = n;
+					break;
+				}
+			}
+			if (!text) return;
+			by.__tcWords = text.nodeValue;
+			text.nodeValue = by.getAttribute("data-tc-busy");
+			by.disabled = true;
+			by.setAttribute("aria-busy", "true");
+		}, 0);
+	}
+
+	// A page come back from the browser's history has its buttons as they
+	// were before the sending.
+	function onBusyBack(e) {
+		if (!e.persisted) return;
+		Array.prototype.forEach.call(document.querySelectorAll("[data-tc-busy][aria-busy]"), function (b) {
+			for (var n = b.lastChild; n; n = n.previousSibling) {
+				if (n.nodeType === 3 && n.nodeValue.trim()) {
+					n.nodeValue = b.__tcWords || n.nodeValue;
+					break;
+				}
+			}
+			b.disabled = false;
+			b.removeAttribute("aria-busy");
+		});
+	}
+
 	// A file pasted from the clipboard (Carrel's task 88). Outside a field it
 	// goes where a dropped one would: to the form of the page's drop sheet.
 	// In a field it is taken only by a text that names a form (data-tc-paste,
@@ -1602,6 +1642,8 @@
 	});
 	document.addEventListener("keydown", onKeydown);
 	document.addEventListener("paste", onPaste);
+	document.addEventListener("submit", onBusy);
+	window.addEventListener("pageshow", onBusyBack);
 	// Enter in a tag field's typing line chooses, it never sends the edit —
 	// on keypress too, where implicit submission happens.
 	document.addEventListener("keypress", function (e) {

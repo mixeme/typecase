@@ -288,10 +288,10 @@
 #### `tc-btn` — кнопка
 
 - **Роль.** Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly}`.
+- **Вход.** `Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly, Busy}`.
 - **Состояния.** normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | focus | with-content | tertiary | link | link-off | post.
 - **Инварианты.** Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
-- **Поведение.** Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
+- **Поведение.** Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт; кнопка с Busy на время отправки формы говорит эти слова и выключена до ответа.
 - **Эталон.** кадр `components-9`, фрагмент `.tc-btn`; формы — в таблице эталонов.
 - **Содержимое.** Значок, подпись (жирная или уходящая при сужении), моноширинный хвост с текстом после, отметка перед подписью, стрелка.
 - **Чего нет.** Своего цвета и своих отступов: кнопка-ссылка и кнопка отправки выглядят как любая другая; причину недоступности кнопка показывает подсказкой, а строкой под рядом — её контейнер.

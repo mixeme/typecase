@@ -2486,6 +2486,46 @@ func TestShortcuts(t *testing.T) {
 	}
 }
 
+// TestButtonBusy (Carrel's task 242): a submit button with Busy says its
+// words and is off once its form goes — after the event, so that the form
+// still sends the button's name and value; its icon stays. A button
+// without Busy is left as it is.
+func TestButtonBusy(t *testing.T) {
+	needChrome(t)
+	body := `<div class="tc-root"><form id="letter" action="/send" method="post">` +
+		w.Input{Name: "subject", Label: "Subject"}.Render() +
+		w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true, Name: "op", Value: "send", Busy: "Sending…"}.Render() +
+		w.Button{Label: "Preview", Submit: true, Name: "op", Value: "preview"}.Render() +
+		`</form></div>`
+	h := browser.NewHarness(t)
+	const prep = `(() => { window.__sent = []; document.addEventListener("submit", e => { e.preventDefault();
+		window.__sent.push(new FormData(e.target, e.submitter).get("op")); }); return true })()`
+	var before, after, preview, sent string
+	if err := h.Run(h.RegisterPage("busy", browser.PageHTML(body, "")), 900, 500,
+		chromedp.Evaluate(prep, nil),
+		chromedp.Evaluate(`(() => { const b = document.querySelector("[data-tc-busy]"); return b.textContent.trim() + "|" + b.disabled })()`, &before),
+		chromedp.Evaluate(`document.querySelector("[data-tc-busy]").click(); true`, nil),
+		chromedp.Sleep(100*time.Millisecond),
+		chromedp.Evaluate(`(() => { const b = document.querySelector("[data-tc-busy]"); return b.textContent.trim() + "|" + b.disabled + "|" + b.getAttribute("aria-busy") + "|" + !!b.querySelector("svg") })()`, &after),
+		chromedp.Evaluate(`(() => { const b = document.querySelector("button[value=preview]"); b.click(); return b.textContent.trim() + "|" + b.disabled })()`, &preview),
+		chromedp.Evaluate(`__sent.join(",")`, &sent),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if before != "Send|false" {
+		t.Errorf("before the press: %s; want Send|false", before)
+	}
+	if after != "Sending…|true|true|true" {
+		t.Errorf("after the press: %s; want Sending…|true|true|true (words, off, busy, the icon kept)", after)
+	}
+	if preview != "Preview|false" {
+		t.Errorf("a button without Busy after its press: %s; want it as it was", preview)
+	}
+	if sent != "send,preview" {
+		t.Errorf("the form sent %q; want send,preview — the busy button's value goes too", sent)
+	}
+}
+
 // TestPasteAndQueue (Carrel's task 88): a picture pasted into a text that
 // names a form becomes a file of that form's field — words are pasted as
 // words; files pasted outside a field go where dropped ones would, to the

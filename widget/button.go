@@ -79,7 +79,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly, Busy}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | wait | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
@@ -189,6 +189,11 @@ type Button struct {
 	// destroys (ButtonDanger, ButtonDangerSolid) takes no key: it is not
 	// printed.
 	Key string
+	// Busy is what a submit button says while its form is being sent: with
+	// the library's script the button takes these words and is off until
+	// the answer, so that a second press does not send twice — «Sending…»
+	// on a letter's Send (Carrel's task 242).
+	Busy string
 }
 
 // Render prints the button.
@@ -214,7 +219,7 @@ func (b Button) html(m mix) string {
 	tag := "button"
 	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.ScriptOnly, "tc-js"), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) +
-		attr("data-tc-key", pick(b.Kind != ButtonDanger && b.Kind != ButtonDangerSolid, b.Key))
+		attr("data-tc-key", pick(b.Kind != ButtonDanger && b.Kind != ButtonDangerSolid, b.Key)) + attr("data-tc-busy", b.Busy)
 	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom) + attr("data-tc-copied", b.Copied) +
 		attr("data-tc-count", b.Count) + attr("data-tc-count-1", b.CountOne)
 	if b.File != nil {

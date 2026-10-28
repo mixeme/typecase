@@ -22743,7 +22743,7 @@ Read  2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
+            <button class="tc-btn is-primary" type="submit" data-tc-busy="Sending…"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="submit" formaction="/app/mail/send?op=preview">Preview</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Signed <b>Михаил Енученко</b> · replies go to mix@example.org</span>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
@@ -22786,7 +22786,7 @@ Read  2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Enter</kbd>
+            <button class="tc-btn is-primary" type="submit" data-tc-busy="Sending…"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Enter</kbd>
             <a class="tc-btn" href="/app/mail/compose">Edit</a>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
@@ -22990,7 +22990,7 @@ Read  2 min ago</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="submit"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
+            <button class="tc-btn is-primary" type="submit" data-tc-busy="Sending…"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
             <button class="tc-btn" type="submit" formaction="/app/mail/send?op=preview">Preview</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Signed <b>Михаил Енученко</b> · replies go to mix@example.org</span>
             <span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
@@ -23086,6 +23086,15 @@ Read  2 min ago</div>
 <figcaption>Адресаты в SMTP передаются по одному, и релей может принять одних и отказать другим — тогда письмо уже ушло принятым, и вернуть его нельзя. Лист итога называет каждого: sent или refused словами сервера. «Send again to the refused» открывает письмо только с отвергнутыми — текст и вложения те же, — чтобы принятые не получили его дважды. Close — на экран под письмом.</figcaption>
 </figure>
 
+<figure>
+<div class="frame" data-frame="s-mail-19">
+  <div class="frame-label"><span>Письмо · уходит</span><span class="frag">фрагмент</span><i>кнопки низа листа, пока релей отвечает</i></div>
+  <div class="tc-root tc-root--on-bg tc-root--pad14">
+        <div class="tc-line tc-line--gap-7"><button class="tc-btn is-primary" type="submit" disabled><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg>Sending…</button><kbd class="tc-kbd">Ctrl+Enter</kbd><button class="tc-btn" type="submit" formaction="/app/mail/send?op=preview">Preview</button></div>
+  </div>
+</div>
+<figcaption>Пока письмо уходит, Send говорит «Sending…» и выключена (<code>Button.Busy</code>, сценарий библиотеки): второе нажатие не отправит письмо дважды. Слова и выключение — на время отправки; ответ сервера заменяет лист, вернувшаяся из истории страница получает кнопку как была.</figcaption>
+</figure>
 
 <div class="frames">
   <figure style="flex:0 1 300px">

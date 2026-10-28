@@ -114,6 +114,10 @@ do, not what the authors did.
 
 ### Added
 
+- `Button.Busy` — what a submit button says while its form is being sent
+  (`data-tc-busy`): with the library's script it takes these words and is
+  off until the answer, its icon kept, its name and value still sent; a
+  page come back from the history has it as it was (Carrel's task 242).
 - **The reading column of a settings page** (the owner, 27.10):
   `FieldW580` — a field as wide as the column; `HintColumn` — a field's
   hint at most 580 px (`.tc-field__hint--max580`); `Msg.Column` — a message
@@ -984,6 +988,9 @@ do, not what the authors did.
   frames.
 
 ### Mockup
+
+- The letter's Send says «Sending…» while the letter goes (`s-mail-1`,
+  `-14`, `-17`; the drawn state `s-mail-19`, Carrel's task 242).
 
 - **Dates in words, the weekday apart** (Carrel's task 243; the owner,
   28.10): the import preview writes dates as the card does — a series'

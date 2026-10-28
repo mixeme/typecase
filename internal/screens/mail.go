@@ -353,7 +353,7 @@ func Mail1() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Busy: "Sending…", Submit: true},
 						w.Kbd{Keys: "Ctrl+Enter"},
 						w.Button{Label: "Preview", To: "/app/mail/send?op=preview", Submit: true},
 						w.Dim{
@@ -929,7 +929,7 @@ func Mail17() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Busy: "Sending…", Submit: true},
 						w.Kbd{Keys: "Ctrl+Enter"},
 						w.Button{Label: "Preview", To: "/app/mail/send?op=preview", Submit: true},
 						w.Dim{
