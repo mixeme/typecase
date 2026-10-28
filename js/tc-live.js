@@ -194,7 +194,9 @@
 					data.append(name, file.slice(at, at + length), at + "-" + length);
 				});
 				if (target) {
-					ask(action, method, data, target, plain);
+					ask(action, method, data, target, plain, function () {
+						tc.unbusy(form);
+					});
 					return;
 				}
 				return fetch(action, { method: method, body: data, credentials: "same-origin" }).then(function (r) {
@@ -365,6 +367,7 @@
 				buttons.forEach(function (b) {
 					b.disabled = false;
 				});
+				tc.unbusy(form);
 				Array.prototype.forEach.call(form.elements, function (f) {
 					if (f.type === "file") f.value = "";
 				});
@@ -758,6 +761,8 @@
 			if (form.requestSubmit && by) form.requestSubmit(by);
 			else form.submit();
 			sentPlain = false;
+		}, function () {
+			tc.unbusy(form);
 		});
 	});
 

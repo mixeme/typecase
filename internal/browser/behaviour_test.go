@@ -2526,6 +2526,60 @@ func TestButtonBusy(t *testing.T) {
 	}
 }
 
+// TestButtonBusyBack (review findings 3–5): a busy button comes back when
+// the live layer puts the answer in a zone and its form stays on the page —
+// its words, on, not busy; sent again the plain way it keeps its own words,
+// not the busy ones; a label in its own element (Folds) says the words too.
+func TestButtonBusyBack(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	sent := h.RegisterStream("send", func(rw http.ResponseWriter, r *http.Request) {
+		time.Sleep(300 * time.Millisecond)
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		fmt.Fprint(rw, page.Fragment{Body: []page.Part{zonePart(`<p class="got">sent</p>`)}}.Render())
+	})
+	body := `<div class="tc-root"><div data-tc-zone="main"><p>old</p></div>` +
+		`<form id="letter" action="` + sent + `" method="post" data-tc-target="main">` +
+		w.Input{Name: "subject", Label: "Subject"}.Render() +
+		w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true, Busy: "Sending…"}.Render() +
+		w.Button{Label: "Save", Icon: "save", Folds: true, Submit: true, Name: "op", Value: "save", Busy: "Saving…"}.Render() +
+		`</form><form id="plain" action="/nowhere" method="post">` +
+		w.Button{Label: "Go", Submit: true, Busy: "Going…"}.Render() + `</form></div>`
+	const state = `(sel) => { const b = document.querySelector(sel); return b.textContent.trim() + "|" + b.disabled + "|" + b.getAttribute("aria-busy") }`
+	var sending, back, folds, again string
+	if err := h.Run(h.RegisterPage("busy-back", browser.PageHTML(body, "")), 900, 500,
+		chromedp.Evaluate(`window.__state = `+state+`; document.addEventListener("submit", e => { if (e.target.id === "plain") e.preventDefault() }); true`, nil),
+		chromedp.Evaluate(`document.querySelector("#letter .is-primary").click(); true`, nil),
+		chromedp.Sleep(100*time.Millisecond),
+		chromedp.Evaluate(`__state("#letter .is-primary")`, &sending),
+		chromedp.Sleep(700*time.Millisecond),
+		chromedp.Evaluate(`__state("#letter .is-primary") + "|" + document.querySelector(".got").textContent`, &back),
+		chromedp.Evaluate(`document.querySelector("button[value=save]").click(); true`, nil),
+		chromedp.Sleep(100*time.Millisecond),
+		chromedp.Evaluate(`__state("button[value=save] .tc-btn__label")`, &folds),
+		// the plain way again, as the live layer does when its asking fails
+		chromedp.Evaluate(`document.querySelector("#plain button").click(); true`, nil),
+		chromedp.Sleep(100*time.Millisecond),
+		chromedp.Evaluate(`(() => { const f = document.getElementById("plain"); f.requestSubmit(f.querySelector("button")); return true })()`, nil),
+		chromedp.Sleep(100*time.Millisecond),
+		chromedp.Evaluate(`(() => { window.dispatchEvent(new PageTransitionEvent("pageshow", {persisted: true})); return __state("#plain button") })()`, &again),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if sending != "Sending…|true|true" {
+		t.Errorf("while the answer is on its way: %s; want Sending…|true|true", sending)
+	}
+	if back != "Send|false|null|sent" {
+		t.Errorf("the answer in the zone, the form kept: %s; want Send|false|null|sent", back)
+	}
+	if !strings.HasPrefix(folds, "Saving…|") {
+		t.Errorf("a label in its own element: %s; want Saving…", folds)
+	}
+	if again != "Go|false|null" {
+		t.Errorf("sent a second time, then back: %s; want Go|false|null — its own words", again)
+	}
+}
+
 // TestPasteAndQueue (Carrel's task 88): a picture pasted into a text that
 // names a form becomes a file of that form's field — words are pasted as
 // words; files pasted outside a field go where dropped ones would, to the

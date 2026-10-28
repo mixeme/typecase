@@ -2087,6 +2087,13 @@ do, not what the authors did.
 - The timeline is where a person takes part, not where they are mentioned:
   the glossary and the captions say so (Carrel's task 70).
 
+### Fixed
+
+- A `Busy` button comes back — its words, on, not busy — when the live
+  layer puts the answer in a zone and the form stays; sent again the plain
+  way it keeps its own words; a `Folds` or `Bold` label says the busy words
+  too.
+
 ## typecase/v0.11.0 — 2026-10-01
 
 ### Breaking

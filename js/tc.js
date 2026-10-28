@@ -735,40 +735,37 @@
 	// task 242) says them and is off until the answer: a letter takes
 	// seconds to go, and a second press would send it twice. It is switched
 	// off after the event, so that the form still sends its name and value;
-	// its icon stays, its words change.
+	// its icon stays, its words change. A form sent again the plain way —
+	// the live layer's asking failed — leaves it busy with its own words kept.
 	function onBusy(e) {
 		var by = e.submitter;
-		if (!by || !by.getAttribute("data-tc-busy")) return;
+		if (!by || !by.getAttribute("data-tc-busy") || by.hasAttribute("aria-busy")) return;
 		setTimeout(function () {
-			var text = null;
-			for (var n = by.lastChild; n; n = n.previousSibling) {
-				if (n.nodeType === 3 && n.nodeValue.trim()) {
-					text = n;
-					break;
-				}
-			}
-			if (!text) return;
-			by.__tcWords = text.nodeValue;
-			text.nodeValue = by.getAttribute("data-tc-busy");
+			var words = labelOf(by);
+			if (!words || by.hasAttribute("aria-busy")) return;
+			by.__tcWords = words.textContent;
+			words.textContent = by.getAttribute("data-tc-busy");
 			by.disabled = true;
 			by.setAttribute("aria-busy", "true");
 		}, 0);
 	}
 
-	// A page come back from the browser's history has its buttons as they
-	// were before the sending.
-	function onBusyBack(e) {
-		if (!e.persisted) return;
-		Array.prototype.forEach.call(document.querySelectorAll("[data-tc-busy][aria-busy]"), function (b) {
-			for (var n = b.lastChild; n; n = n.previousSibling) {
-				if (n.nodeType === 3 && n.nodeValue.trim()) {
-					n.nodeValue = b.__tcWords || n.nodeValue;
-					break;
-				}
-			}
+	// unbusy gives a form's busy buttons back their words: the answer came
+	// and the form is still here — put in a zone by the live layer, or the
+	// page back from the browser's history.
+	function unbusy(form) {
+		Array.prototype.forEach.call(form.elements || [], function (b) {
+			if (!b.hasAttribute("data-tc-busy") || !b.hasAttribute("aria-busy")) return;
+			var words = labelOf(b);
+			if (words && b.__tcWords != null) words.textContent = b.__tcWords;
 			b.disabled = false;
 			b.removeAttribute("aria-busy");
 		});
+	}
+
+	function onBusyBack(e) {
+		if (!e.persisted) return;
+		Array.prototype.forEach.call(document.forms, unbusy);
 	}
 
 	// A file pasted from the clipboard (Carrel's task 88). Outside a field it
@@ -1683,6 +1680,7 @@
 	window.__tc = {
 		init: init,
 		layoutUpdates: layoutUpdates,
+		unbusy: unbusy,
 		shellMode: shellMode,
 		menuOf: function (trigger) {
 			var pop = popupOf(trigger);
