@@ -223,7 +223,7 @@ var _ = add(
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download .ics", Icon: "download", Href: "/p/c3f1a8/download"}}}},
 		w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday, 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}}, Pad: w.HeadPadBottom8},
 		w.Fields{Items: []w.FieldsItem{
-			{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+			{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 			{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}},
 		w.Sec{Items: []w.SecPart{
 			w.Rubric{Text: "Description"},
@@ -684,12 +684,15 @@ var _ = add(
 		{Term: "Path", Value: []w.ValuePart{w.Text("/dav/Documents/carrel/attachments/2026-08-10-sync-board.png")}, Face: w.ValueMonoSmall}}}, w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Links"},
 		w.SecNote{Text: "Carrel keeps no index of what points at this file. It may be attached to a note or an event — check before deleting."}}}, w.Danger{Button: w.Button{Label: "Delete", Icon: "trash", Kind: w.ButtonDangerSolid}}}}, "s-files-1", "tc-side", 1),
-	shell("drop", w.Side{Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52"}, Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · Личный")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Button{Icon: "close", Title: "Close the panel"}}}}, w.Fields{Items: []w.FieldsItem{
-		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
+	shell("drop", w.Side{Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Close{Label: "Close the panel"}}}}, w.Fields{Items: []w.FieldsItem{
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, w.Sec{Items: []w.SecPart{
-		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
-		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
+		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to "), w.Mono{Text: "Documents / carrel"}, w.Text(" and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Related"},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Заметка со встречи 10.08"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· note")}}}}}}}}, Variant: w.SideDrop}, "s-io-2", "tc-side", 1),
 

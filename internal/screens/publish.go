@@ -2448,11 +2448,11 @@ func Publish19() Screen {
 									Term: "When",
 									Value: []w.ValuePart{
 										w.Mono{Text: "10:00 – 11:00"},
-										w.Text(", Monday 10 August "),
+										w.Text(", Monday, 10 August "),
 										w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"},
 									},
 								},
-								{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+								{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 								{
 									Term:  "Where",
@@ -4152,7 +4152,7 @@ func Publish16() Screen {
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 						},
 					},

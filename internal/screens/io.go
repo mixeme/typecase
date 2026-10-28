@@ -346,7 +346,7 @@ func Io2() Screen {
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
-							{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
+							{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August")}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 						},
 					},
@@ -1659,7 +1659,7 @@ func Io6() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Дежурство: первая линия")}},
-											{Parts: []w.CellPart{w.Text("Mon 09:00 · weekly until 2026-12-28")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("Monday, 10 August 2026, 09:00 · weekly until 28 December")}},
 											{Parts: []w.CellPart{w.Text("Ready — the series as one record")}},
 										},
 									},
@@ -1667,7 +1667,7 @@ func Io6() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Отпуск")}},
-											{Parts: []w.CellPart{w.Text("2026-07-13 → 2026-07-27 · all day")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("13 – 26 July 2026 · all day")}},
 											{Parts: []w.CellPart{w.Text("Ready")}},
 										},
 									},
@@ -1675,8 +1675,8 @@ func Io6() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}},
-											{Parts: []w.CellPart{w.Text("2026-08-17 10:00 Asia/Yekaterinburg")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("Ready — time zone kept as sent")}},
+											{Parts: []w.CellPart{w.Text("17 August 2026, 08:00")}},
+											{Parts: []w.CellPart{w.Text("Ready — kept as sent: 10:00 Asia/Yekaterinburg")}},
 										},
 									},
 									{
@@ -1694,7 +1694,7 @@ func Io6() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("2026-05-04 · all day")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("4 May 2026 · all day")}},
 											{Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}},
 										},
 									},
@@ -1827,7 +1827,7 @@ func Io7() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}},
-											{Parts: []w.CellPart{w.Text("2026-08-28")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("7 August 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}},
 										},
 									},
@@ -1843,7 +1843,7 @@ func Io7() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}},
-											{Parts: []w.CellPart{w.Text("2026-09-04")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("4 September 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}},
 										},
 									},
@@ -1851,7 +1851,7 @@ func Io7() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}},
-											{Parts: []w.CellPart{w.Text("2026-08-17")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("17 August 2026")}},
 											{
 												Parts: []w.CellPart{w.Text("Skipped: a list of tasks takes tasks — import it into a calendar")},
 												Tone:  w.CellDusty,
@@ -1862,7 +1862,7 @@ func Io7() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true},
-											{Parts: []w.CellPart{w.Text("2026-09-10")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("10 September 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — no title")}},
 										},
 									},
@@ -2009,7 +2009,7 @@ func Io8() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("2026-03-11-podryadchik.md")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Встреча с подрядчиком")}},
-											{Parts: []w.CellPart{w.Text("2026-03-11")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("11 March 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — title, date and tags from front matter")}},
 										},
 									},
@@ -2017,7 +2017,7 @@ func Io8() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("idei/crdt.md")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Что почитать про CRDT")}},
-											{Parts: []w.CellPart{w.Text("2026-08-04")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("4 August 2026")}},
 											{
 												Parts: []w.CellPart{w.Text("Ready — no front matter: title from the first heading, date from the file")},
 											},
@@ -2027,7 +2027,7 @@ func Io8() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.Text("doroga.md")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Про дорогу до дачи")}},
-											{Parts: []w.CellPart{w.Text("2026-06-30")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("30 June 2026")}},
 											{Parts: []w.CellPart{w.Text("Already here — skipped")}},
 										},
 									},

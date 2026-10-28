@@ -985,6 +985,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Dates in words, the weekday apart** (Carrel's task 243; the owner,
+  28.10): the import preview writes dates as the card does — a series'
+  first start with its rule («Monday, 10 August 2026, 09:00 · weekly until
+  28 December»), a span of whole days by its first and last day («13 – 26
+  July 2026 · all day»), a foreign zone by the person's time, the event's
+  time and zone in the mark (`s-io-6`, `-7`, `-8`), in the plain face. A
+  weekday stands before the date with a comma («Monday, 10 August»), and a
+  series ends in words on the card («until 28 December»).
+
 - **Settings and administration read in one column** (the owner, 27.10):
   on 74 frames of the settings and administration pages fields' hints and
   messages stand in a column of 580 px; Display name, Address, Folder in

@@ -230,7 +230,7 @@ var _ = add(
 		{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}, Href: "mailto:a.kovaleva@example.org"},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-publish-26", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}}}}, "s-publish-16", "tc-fields", 1),
 	cards("mono-line", w.Fields{Items: []w.FieldsItem{
 		{Term: "Time zone", Value: []w.ValuePart{w.Mono{Text: "Europe/Moscow"}, w.Text(" · this instance")}}}, Variant: w.FieldsBleed130}, "appearance-1", "tc-fields", 1),
@@ -240,8 +240,8 @@ var _ = add(
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Path", Value: []w.ValuePart{w.Text("https://files.example.org/dav/Documents/carrel/attachments/")}, Face: w.ValueMonoSmall}}, Variant: w.FieldsBleed130}, "attachments-6", "tc-fields", 2),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}, w.Text(" "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Личный")}}}},
-		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}, w.Text(" "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Личный")}}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Личный")}}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
@@ -303,15 +303,15 @@ var _ = add(
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}}},
 		{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}}}}, "s-contacts-7", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
-		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
-		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "release"}, w.Text(" "), w.Tag{Label: "team"}}}}}, "s-agenda-1", "tc-fields", 1),
+		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
-		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 2026-12-28"}}},
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
+		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
 		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
@@ -342,7 +342,7 @@ var _ = add(
 		{Term: "Changed", Value: []w.ValuePart{w.Text("2026-08-10 11:07")}, Face: w.ValueMono},
 		{Term: "Path", Value: []w.ValuePart{w.Text("/dav/Documents/carrel/attachments/2026-08-10-sync-board.png")}, Face: w.ValueMonoSmall}}}, "s-files-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
-		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday 10 August")}},
+		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "s-io-2", "tc-fields", 1),
 	cards("bleed", w.Fields{Items: []w.FieldsItem{
 		{Term: "Deposited", Value: []w.ValuePart{w.Text("2026-03-02")}, Face: w.ValueMono},
@@ -930,23 +930,23 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger}}}}}, "s-io-5", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "When", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дежурство: первая линия")}}, {Parts: []w.CellPart{w.Text("Mon 09:00 · weekly until 2026-12-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — the series as one record")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отпуск")}}, {Parts: []w.CellPart{w.Text("2026-07-13 → 2026-07-27 · all day")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-08-17 10:00 Asia/Yekaterinburg")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — time zone kept as sent")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дежурство: первая линия")}}, {Parts: []w.CellPart{w.Text("Monday, 10 August 2026, 09:00 · weekly until 28 December")}}, {Parts: []w.CellPart{w.Text("Ready — the series as one record")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отпуск")}}, {Parts: []w.CellPart{w.Text("13 – 26 July 2026 · all day")}}, {Parts: []w.CellPart{w.Text("Ready")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}}, {Parts: []w.CellPart{w.Text("17 August 2026, 08:00")}}, {Parts: []w.CellPart{w.Text("Ready — kept as sent: 10:00 Asia/Yekaterinburg")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Купить билеты "), w.Badge{Label: "VTODO"}}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Skipped: a calendar takes events — import it into a list of tasks")}, Tone: w.CellDusty}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-05-04 · all day")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true}, {Parts: []w.CellPart{w.Text("4 May 2026 · all day")}}, {Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 23: cannot read DTSTART «2026-02-30»")}, Tone: w.CellDanger}}}}}, "s-io-6", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Summary"}, {Label: "Due", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}}, {Parts: []w.CellPart{w.Text("2026-08-28")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}}, {Parts: []w.CellPart{w.Text("7 August 2026")}}, {Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ответить подрядчику по смете")}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Ready — a task without a date is a task")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}}, {Parts: []w.CellPart{w.Text("2026-09-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}}, {Parts: []w.CellPart{w.Text("2026-08-17")}, Mono: true}, {Parts: []w.CellPart{w.Text("Skipped: a list of tasks takes tasks — import it into a calendar")}, Tone: w.CellDusty}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true}, {Parts: []w.CellPart{w.Text("2026-09-10")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no title")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}}, {Parts: []w.CellPart{w.Text("4 September 2026")}}, {Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}}, {Parts: []w.CellPart{w.Text("17 August 2026")}}, {Parts: []w.CellPart{w.Text("Skipped: a list of tasks takes tasks — import it into a calendar")}, Tone: w.CellDusty}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true}, {Parts: []w.CellPart{w.Text("10 September 2026")}}, {Parts: []w.CellPart{w.Text("Ready — no title")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true}, {Parts: []w.CellPart{w.Text("Сдать отчёт")}}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 88: cannot read DUE «2026-13-01»")}, Tone: w.CellDanger}}}}}, "s-io-7", "tc-table", 1),
 	cards("head", w.Table{Cols: []w.TableCol{{Label: "File"}, {Label: "Title"}, {Label: "Date", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-03-11-podryadchik.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Встреча с подрядчиком")}}, {Parts: []w.CellPart{w.Text("2026-03-11")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — title, date and tags from front matter")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("idei/crdt.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Что почитать про CRDT")}}, {Parts: []w.CellPart{w.Text("2026-08-04")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — no front matter: title from the first heading, date from the file")}}}},
-		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("doroga.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Про дорогу до дачи")}}, {Parts: []w.CellPart{w.Text("2026-06-30")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-03-11-podryadchik.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Встреча с подрядчиком")}}, {Parts: []w.CellPart{w.Text("11 March 2026")}}, {Parts: []w.CellPart{w.Text("Ready — title, date and tags from front matter")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("idei/crdt.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Что почитать про CRDT")}}, {Parts: []w.CellPart{w.Text("4 August 2026")}}, {Parts: []w.CellPart{w.Text("Ready — no front matter: title from the first heading, date from the file")}}}},
+		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("doroga.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("Про дорогу до дачи")}}, {Parts: []w.CellPart{w.Text("30 June 2026")}}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("skan.pdf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Skipped: not Markdown")}, Tone: w.CellDusty}}},
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("pustoj.md")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("Empty file: nothing to store and nothing to name it by")}, Tone: w.CellDanger}}}}}, "s-io-8", "tc-table", 1),
 	cards("acts", w.Table{Cols: []w.TableCol{{Label: "Where"}, {Label: "Started"}, {Label: "Last seen", Rank: w.Rank3}, {Width: w.Col120, Rank: w.Rank4}}, Rows: []w.TableRow{
