@@ -3131,7 +3131,14 @@ func Profile4() Screen {
 										Kind: w.CardTop8,
 										Gap:  8,
 										Items: []w.CardRowPart{
-											w.Input{Value: "z3-brick-lamp-9f2", Label: "Password", Mono: true, ReadOnly: true, Variant: w.InputKeySmFill},
+											w.Input{
+												Value:    "z3-brick-lamp-9f2",
+												Label:    "Password",
+												Mono:     true,
+												ReadOnly: true,
+												ID:       "pw-nextcloud",
+												Variant:  w.InputKeySmFill,
+											},
 											w.Button{Label: "Copy", Small: true, CopyFrom: "pw-nextcloud", Copied: "Copied"},
 										},
 									},

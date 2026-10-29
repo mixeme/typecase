@@ -1930,6 +1930,7 @@ func Backup13() Screen {
 											Label:    "Password",
 											Mono:     true,
 											ReadOnly: true,
+											ID:       "trigger-pw",
 											Variant:  w.InputKeySmFill,
 										},
 										w.Button{Label: "Copy", CopyFrom: "trigger-pw", Copied: "Copied"},

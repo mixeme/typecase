@@ -48,3 +48,24 @@ func TestSheetWithoutPartsIsAGap(t *testing.T) {
 		}
 	}
 }
+
+// TestInputKeepsItsID: an input's id is what a Copy beside it names
+// (data-tc-copy-from) as much as a file field's line; the generator dropped
+// it but for the line, and the screen's Copy named nothing (s-profile-4,
+// s-backup-13).
+func TestInputKeepsItsID(t *testing.T) {
+	en, err := loadEnums(filepath.Join("..", "..", "widget"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	g := &gen{en: en, faces: en.faces()}
+	for src, want := range map[string]string{
+		`<input class="tc-in is-mono" type="text" value="z3" aria-label="Password" id="pw-nextcloud" readonly>`: `ID: "pw-nextcloud"`,
+		`<input class="tc-in" type="text" id="pick-name" data-tc-filename readonly>`:                            `ID: "pick-name"`,
+	} {
+		got, why := g.element(Parse(src))
+		if why != "" || !strings.Contains(got, want) {
+			t.Errorf("%s: want %s in %s %s", src, want, got, why)
+		}
+	}
+}

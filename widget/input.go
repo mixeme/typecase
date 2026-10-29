@@ -73,9 +73,10 @@ type Input struct {
 	Of      string
 	Variant InputVariant
 	Place   Place
-	// ID is what a file field beside it names (FileField.Shows): the line
-	// shows the picked file's name, read-only; without a script it is not
-	// shown — the file input shows the name itself (Carrel's task 133).
+	// ID is what a control beside it names: a Copy (Button.CopyFrom), or a
+	// file field (FileField.Shows) — then the line shows the picked file's
+	// name, read-only; without a script it is not shown, the file input
+	// shows the name itself (Carrel's task 133).
 	ID string
 	// Picked marks such a line: what was picked beside it.
 	Picked bool

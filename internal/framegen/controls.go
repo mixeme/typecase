@@ -348,9 +348,13 @@ func (g *gen) input(x *El) string {
 	}
 	if x.HasAttr("data-tc-filename") {
 		// the line of a picked file's name: read-only by itself (Carrel's task 133)
-		f = append(f, "Picked: true", "ID: "+q(x.Attr("id")))
+		f = append(f, "Picked: true")
 	} else if x.HasAttr("readonly") {
 		f = append(f, "ReadOnly: true")
+	}
+	if v := x.Attr("id"); v != "" {
+		// what a button beside it names: a file field's line, a Copy
+		f = append(f, "ID: "+q(v))
 	}
 	if x.HasAttr("required") {
 		f = append(f, "Required: true")
