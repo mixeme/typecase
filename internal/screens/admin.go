@@ -115,10 +115,9 @@ func Admin1() Screen {
 										Items: []w.RubricPart{w.Badge{Label: "hand to hand", Tone: w.BadgeAlert}},
 									},
 									w.Msg{
-										Parts:  []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")},
-										Tone:   w.MsgAlert,
-										Space:  w.MsgFlushBottom12,
-										Column: true,
+										Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")},
+										Tone:  w.MsgAlert,
+										Space: w.MsgFlushBottom12,
 									},
 									w.CardFields{
 										Items: []w.CardFieldsPart{
@@ -978,7 +977,10 @@ func Admin3() Screen {
 												Mono:     true,
 												ReadOnly: true,
 											},
-											w.FieldHint{Parts: []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("Links in letters start with it. Set with CARREL_PUBLIC_URL.")},
+												Variant: w.HintColumn,
+											},
 										},
 										Width: w.FieldW580,
 									},
@@ -2863,6 +2865,7 @@ func Admin30() Screen {
 												Parts: []w.Inline{
 													w.Text("Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Place: w.Grown,

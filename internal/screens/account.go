@@ -82,7 +82,8 @@ func Account1() Screen {
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
+												Parts:   []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
+												Variant: w.HintColumn,
 											},
 										},
 										Width: w.FieldW580,
@@ -313,7 +314,6 @@ func Account2() Screen {
 									Parts: []w.Inline{
 										w.Text("Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password."),
 									},
-									Variant: w.HintColumn,
 								},
 							},
 							Width: w.FieldW100,

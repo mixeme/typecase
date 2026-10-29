@@ -91,7 +91,8 @@ func Appearance1() Screen {
 												Name:    "theme",
 											},
 											w.FieldHint{
-												Parts: []w.Inline{w.Text("“Auto” follows the system. Kept in this browser — another device does not see it.")},
+												Parts:   []w.Inline{w.Text("“Auto” follows the system. Kept in this browser — another device does not see it.")},
+												Variant: w.HintColumn,
 											},
 										},
 									},

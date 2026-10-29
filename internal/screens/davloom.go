@@ -331,7 +331,10 @@ func Davloom2() Screen {
 										Label: "Name",
 										Parts: []w.FieldPart{
 											w.Input{Name: "name", Value: "Телефон · DAVx5", Label: "Name", Focus: true},
-											w.FieldHint{Parts: []w.Inline{w.Text("For you: this is how you will know what you are revoking later.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("For you: this is how you will know what you are revoking later.")},
+												Variant: w.HintColumn,
+											},
 										},
 										Width: w.FieldW100,
 									},
@@ -350,6 +353,7 @@ func Davloom2() Screen {
 												Parts: []w.Inline{
 													w.Text("Read only: the device syncs, and whatever it sends back is refused. Changed later in the device’s row, without a new password."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										Width: w.FieldW100,
@@ -412,9 +416,10 @@ func Davloom2() Screen {
 								Variant: w.FormFlush,
 							},
 							w.Msg{
-								Parts: []w.MsgPart{w.Text("Shown once and stored nowhere: lost, it cannot be recovered.")},
-								Tone:  w.MsgAlert,
-								Space: w.MsgFlushSides,
+								Parts:  []w.MsgPart{w.Text("Shown once and stored nowhere: lost, it cannot be recovered.")},
+								Tone:   w.MsgAlert,
+								Space:  w.MsgFlushSides,
+								Column: true,
 							},
 							w.FormFoot{
 								Items:   []w.FormFootPart{w.Button{Label: "Create password", Kind: w.ButtonPrimary, Form: "device"}, w.Button{Label: "Cancel"}},
@@ -532,7 +537,10 @@ func Davloom3() Screen {
 										Label: "User name",
 										Parts: []w.FieldPart{
 											w.Input{Name: "user.name", Value: "mix", Label: "User name", Mono: true},
-											w.FieldHint{Parts: []w.Inline{w.Text("Your Carrel login; the password is the device’s, not yours.")}},
+											w.FieldHint{
+												Parts:   []w.Inline{w.Text("Your Carrel login; the password is the device’s, not yours.")},
+												Variant: w.HintColumn,
+											},
 										},
 										Width: w.FieldW100,
 									},
@@ -684,6 +692,7 @@ func Davloom6() Screen {
 										Parts: []w.Inline{
 											w.Text("In DAVx5 choose “Login with URL and user name”: the user name is your Carrel one, the password is the device’s, not yours."),
 										},
+										Variant: w.HintColumn,
 									},
 								},
 								Width: w.FieldMax640Fill460,

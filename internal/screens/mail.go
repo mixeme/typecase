@@ -1563,7 +1563,7 @@ func Mail4() Screen {
 						},
 					},
 					Foot: []w.SheetFootPart{
-						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Submit: true},
+						w.Button{Label: "Send", Icon: "mail", Kind: w.ButtonPrimary, Busy: "Sending…", Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Copy link instead", To: "/app/mail/send?op=link", Submit: true},
 						w.Line{

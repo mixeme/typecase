@@ -1007,6 +1007,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The 580 column holds in every frame of a screen** (Carrel's task 246,
+  Р-82): a field's hint and a message stand in it on the page, in a dialog
+  and in a side panel, never in a card or a sheet — 25 frames brought to
+  the rule (`account-1`, `-2`, `appearance-1`, `s-admin-1`, `-3`, `-30`,
+  `s-backup-2`, `-7`, `-8`, `-15`, `-16`, `s-davloom-2`, `-3`, `-6`,
+  `s-profile-2`, `-10`, `-11`, `-14`, `-16`, `-22`…`-24`, `-31`, `-32`,
+  `s-mail-4`); 19 of them look the same to the pixel. The link letter's
+  Send says «Sending…» too (`s-mail-4`).
 - **Frames caught up with their neighbours** (Carrel's task 244):
   `states-24` is the task's edit `s-tasks-3` with its loss line — the
   repeat's hint under Advanced RRULE, «Kept as the server sent them» with
