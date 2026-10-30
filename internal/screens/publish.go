@@ -145,7 +145,7 @@ func Publish1() Screen {
 											w.TableFile{
 												Mark: &w.Mark{Colour: "#4A6B52"},
 												Name: "Личный · 10–31 August",
-												Href: "/app/agenda/nextcloud/lichnyy?view=range&from=2026-08-10&to=2026-08-31",
+												Href: "/app/agenda/nextcloud/lichnyj?view=range&from=2026-08-10&to=2026-08-31",
 											},
 										},
 									},
@@ -338,7 +338,7 @@ func Publish20() Screen {
 											w.TableFile{
 												Mark: &w.Mark{Colour: "#4A6B52"},
 												Name: "Личный · 10–31 August",
-												Href: "/app/agenda/nextcloud/lichnyy?view=range&from=2026-08-10&to=2026-08-31",
+												Href: "/app/agenda/nextcloud/lichnyj?view=range&from=2026-08-10&to=2026-08-31",
 											},
 										},
 									},
@@ -603,7 +603,7 @@ func Publish2() Screen {
 											Rows: []w.TableRow{
 												{
 													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
+														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -1042,7 +1042,7 @@ func Publish2() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/publish?c=lichnyy",
+					Action: "/app/publish?c=lichnyj",
 					Title:  "Publish a calendar",
 					Head: []w.SheetHeadPart{
 						w.Badge{
@@ -1283,7 +1283,7 @@ func Publish13() Screen {
 											Rows: []w.TableRow{
 												{
 													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
+														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -1903,7 +1903,7 @@ func Publish22() Screen {
 											Rows: []w.TableRow{
 												{
 													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
+														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -2527,7 +2527,7 @@ func Publish19() Screen {
 								},
 								w.PostForm{
 									ID:        "post-attach",
-									Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+									Action:    "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach",
 									Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 									Multipart: true,
 								},
@@ -2823,7 +2823,7 @@ func Publish3() Screen {
 											Icon:   "cal",
 											Title:  "Синк-ап по релизу",
 											Detail: "10 Aug · attendee · accepted",
-											Href:   "/app/calendar/nextcloud/lichnyy/aa01",
+											Href:   "/app/calendar/nextcloud/lichnyj/aa01",
 										},
 										w.LinkedRow{
 											Mark:   w.Mark{Colour: "#3F6E8C"},

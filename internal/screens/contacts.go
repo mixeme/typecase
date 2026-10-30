@@ -1597,7 +1597,7 @@ func Contacts6() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
-										Href:   "/app/calendar/nextcloud/lichnyy/aa01",
+										Href:   "/app/calendar/nextcloud/lichnyj/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1960,13 +1960,13 @@ func Contacts15() Screen {
 												Mark:   &w.Mark{Colour: "#9A9280"},
 												Detail: &w.Mono{Text: "12 Aug", Variant: w.Mono11},
 												Label:  "Общий созвон",
-												Href:   "/app/calendar/baikal/obshchiy/bb01",
+												Href:   "/app/calendar/baikal/obshchij/bb01",
 											},
 											w.MenuItem{
 												Mark:   &w.Mark{Colour: "#9A9280"},
 												Detail: &w.Mono{Text: "21 Aug", Variant: w.Mono11},
 												Label:  "Демо для заказчика",
-												Href:   "/app/calendar/baikal/obshchiy/bb02",
+												Href:   "/app/calendar/baikal/obshchij/bb02",
 											},
 										},
 										Width: w.MenuWidth290,
@@ -2268,7 +2268,7 @@ func Contacts16() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
-										Href:   "/app/calendar/nextcloud/lichnyy/aa01",
+										Href:   "/app/calendar/nextcloud/lichnyj/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},

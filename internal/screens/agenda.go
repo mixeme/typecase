@@ -375,7 +375,7 @@ func Agenda1() Screen {
 							},
 							w.PostForm{
 								ID:        "post-attach",
-								Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+								Action:    "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach",
 								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Multipart: true,
 							},
@@ -472,7 +472,7 @@ func Agenda27() Screen {
 															Label: "nextcloud · Личный",
 															On:    true,
 															Name:  "calendar",
-															Value: "nextcloud/lichnyy",
+															Value: "nextcloud/lichnyj",
 															Of:    "event-edit",
 														},
 														w.MenuItem{
@@ -866,7 +866,7 @@ func Agenda27() Screen {
 								},
 							},
 							ID:     "event-edit",
-							Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+							Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 						},
 						w.Danger{
 							Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -878,7 +878,7 @@ func Agenda27() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+					Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 					Icon:   "refresh",
 					Title:  "Keep the meetings that were moved by hand?",
 					Head: []w.SheetHeadPart{
@@ -1072,7 +1072,7 @@ func Agenda28() Screen {
 								},
 								w.PostForm{
 									ID:        "post-attach",
-									Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+									Action:    "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach",
 									Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 									Multipart: true,
 								},
@@ -1149,7 +1149,7 @@ func Agenda28() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+					Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 					Icon:   "refresh",
 					Title:  "Keep the meetings that were moved by hand?",
 					Head: []w.SheetHeadPart{
@@ -1193,13 +1193,13 @@ func Agenda28() Screen {
 						w.Button{
 							Label:  "Try again",
 							Kind:   w.ButtonPrimary,
-							To:     "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=apart&day=2027-02-01",
+							To:     "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=apart&day=2027-02-01",
 							Submit: true,
 						},
 						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Items: []w.LinePart{
-								w.Button{Label: "Leave it in the series", Href: "/app/calendar/nextcloud/lichnyy/8f1c"},
+								w.Button{Label: "Leave it in the series", Href: "/app/calendar/nextcloud/lichnyj/8f1c"},
 								w.Kbd{Keys: "Esc"},
 							},
 							Gap:   w.LineGap7,
@@ -1330,12 +1330,12 @@ func Agenda17() Screen {
 							w.Filter{
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
-								Action:  "/app/calendar/nextcloud/lichnyy",
+								Action:  "/app/calendar/nextcloud/lichnyj",
 								Variant: w.FilterH26W200,
 							},
-							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-08-03"},
-							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyy"},
-							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-08-17"},
+							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-03"},
+							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyj"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-17"},
 							w.SegFold{
 								Seg: w.Seg{
 									Options: []w.SegOption{
@@ -1535,8 +1535,8 @@ func Agenda31() Screen {
 						Items: []w.BarPart{
 							w.Filter{
 								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
-								Clear:   "/app/calendar/nextcloud/lichnyy",
-								Action:  "/app/calendar/nextcloud/lichnyy",
+								Clear:   "/app/calendar/nextcloud/lichnyj",
+								Action:  "/app/calendar/nextcloud/lichnyj",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
@@ -1717,7 +1717,7 @@ func Agenda2() Screen {
 							},
 							w.PostForm{
 								ID:        "post-attach",
-								Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+								Action:    "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach",
 								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Multipart: true,
 							},
@@ -1840,7 +1840,7 @@ func Agenda3() Screen {
 														Label: "nextcloud · Личный",
 														On:    true,
 														Name:  "calendar",
-														Value: "nextcloud/lichnyy",
+														Value: "nextcloud/lichnyj",
 														Of:    "event-edit",
 													},
 													w.MenuItem{
@@ -2234,7 +2234,7 @@ func Agenda3() Screen {
 							},
 						},
 						ID:     "event-edit",
-						Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+						Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -2292,7 +2292,7 @@ func Agenda15() Screen {
 														Label: "nextcloud · Личный",
 														On:    true,
 														Name:  "calendar",
-														Value: "nextcloud/lichnyy",
+														Value: "nextcloud/lichnyj",
 														Of:    "event-new",
 													},
 													w.MenuItem{
@@ -2583,7 +2583,7 @@ func Agenda15() Screen {
 							},
 						},
 						ID:     "event-new",
-						Action: "/app/calendar/nextcloud/lichnyy/new",
+						Action: "/app/calendar/nextcloud/lichnyj/new",
 					},
 				},
 			},

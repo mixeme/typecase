@@ -1463,7 +1463,7 @@ func Mail4() Screen {
 												w.TableFile{
 													Mark: &w.Mark{Colour: "#4A6B52"},
 													Name: "Личный · 10–31 August",
-													Href: "/app/agenda/nextcloud/lichnyy?view=range&from=2026-08-10&to=2026-08-31",
+													Href: "/app/agenda/nextcloud/lichnyj?view=range&from=2026-08-10&to=2026-08-31",
 												},
 											},
 										},
@@ -2175,7 +2175,7 @@ func Mail10() Screen {
 											Mark:   &w.Mark{Colour: "#4A6B52"},
 											Label:  "Личный",
 											Indent: w.TreeLevel22,
-											Href:   "/app/mail/attach?what=calendar&c=lichnyy",
+											Href:   "/app/mail/attach?what=calendar&c=lichnyj",
 										},
 										{
 											Mark:   &w.Mark{Colour: "#3F6E8C"},
@@ -2227,7 +2227,7 @@ func Mail10() Screen {
 										},
 									},
 									ID:      "attach-calendar",
-									Action:  "/app/mail/attach?what=calendar&c=lichnyy",
+									Action:  "/app/mail/attach?what=calendar&c=lichnyj",
 									Recount: "attach-line",
 								},
 							},
@@ -2897,7 +2897,7 @@ func Mail12() Screen {
 											Mark:   &w.Mark{Colour: "#4A6B52"},
 											Label:  "Личный",
 											Indent: w.TreeLevel22,
-											Href:   "/app/mail/attach?what=contact&q=смир&c=lichnyy",
+											Href:   "/app/mail/attach?what=contact&q=смир&c=lichnyj",
 										},
 										{
 											Mark:   &w.Mark{Colour: "#3F6E8C"},

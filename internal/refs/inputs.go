@@ -46,7 +46,7 @@ var _ = add(
 	form("variant", w.Input{Value: "https://carrel.example/dav/", Mono: true, Variant: w.Input11_5Fill, Label: "Address"}, "components-20", "tc-in", 2),
 	form("plain", w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "q"}, Waiting: true, Action: "/app/calendar", Variant: w.FilterH26W200}, "s-agenda-1", "tc-in", 1),
 	form("plain", w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "filter"}, Clear: "/p/a41d07", Action: "/p/a41d07", Variant: w.FilterH26W190}, "s-publish-39", "tc-in", 1),
-	form("plain", w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "filter"}, Clear: "/app/calendar/nextcloud/lichnyy", Action: "/app/calendar/nextcloud/lichnyy", Variant: w.FilterH26W200}, "s-agenda-31", "tc-in", 1),
+	form("plain", w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "filter"}, Clear: "/app/calendar/nextcloud/lichnyj", Action: "/app/calendar/nextcloud/lichnyj", Variant: w.FilterH26W200}, "s-agenda-31", "tc-in", 1),
 	form("plain", w.Filter{Query: w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "q"}, Waiting: true, Action: "/p/5c40e2", Hidden: []w.Hidden{{Name: "in", Value: "скриншоты"}}, Variant: w.FilterH26W190}, "s-publish-30", "tc-in", 1),
 	form("plain", w.Filter{Query: w.Query{Placeholder: "Search this list", Label: "Search this list", Name: "q"}, Waiting: true, Action: "/p/2b91f4", Variant: w.FilterH26W190}, "s-publish-7", "tc-in", 2),
 	form("waiting", w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word"}, Waiting: true, Variant: w.FilterH26W200}, "s-notes-1", "tc-in", 1),

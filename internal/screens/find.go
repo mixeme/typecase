@@ -89,7 +89,7 @@ func Find1() Screen {
 										w.MenuRefusal{
 											Mark:   w.Mark{Colour: "#9A9280", Size: w.MarkH11},
 											Source: "baikal · Общий",
-											Answer: "REPORT /dav.php/calendars/mix/obshchiy/ → no answer in 10 s; the search went on without it.",
+											Answer: "REPORT /dav.php/calendars/mix/obshchij/ → no answer in 10 s; the search went on without it.",
 											Retry:  w.Button{Label: "Retry", Small: true},
 										},
 									},

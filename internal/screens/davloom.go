@@ -996,7 +996,7 @@ func Davloom7() Screen {
 															Meta:   "4 of 9",
 														},
 														w.TickRow{
-															Send:  w.Send{Name: "col", Value: "nextcloud|lichnyy"},
+															Send:  w.Send{Name: "col", Value: "nextcloud|lichnyj"},
 															Form:  w.TickRowNested,
 															Mark:  w.Mark{Colour: "#4A6B52"},
 															Label: "Личный",

@@ -2792,7 +2792,7 @@ func Notes9() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/calendar/nextcloud/lichnyy/quick",
+					Action: "/app/calendar/nextcloud/lichnyj/quick",
 					Icon:   "cal",
 					Title:  "New event",
 					Head: []w.SheetHeadPart{
@@ -2806,7 +2806,7 @@ func Notes9() Screen {
 										Label: "nextcloud · Личный",
 										On:    true,
 										Name:  "into",
-										Value: "nextcloud/lichnyy",
+										Value: "nextcloud/lichnyj",
 									},
 									w.MenuItem{
 										Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -2832,7 +2832,7 @@ func Notes9() Screen {
 										Name:  "into",
 										Value: "radicale/dezhurstva",
 									},
-									w.MenuItem{Mark: &w.Mark{Colour: "#9A9280"}, Label: "baikal · Общий", Name: "into", Value: "baikal/obshchiy"},
+									w.MenuItem{Mark: &w.Mark{Colour: "#9A9280"}, Label: "baikal · Общий", Name: "into", Value: "baikal/obshchij"},
 								},
 								Width: w.MenuWidth290,
 								Pop:   w.MenuUnderEnd,
@@ -2928,7 +2928,7 @@ func Notes9() Screen {
 						w.Button{
 							Label:  "Open the card",
 							Icon:   "expand",
-							To:     "/app/calendar/nextcloud/lichnyy/quick?op=open",
+							To:     "/app/calendar/nextcloud/lichnyj/quick?op=open",
 							Submit: true,
 						},
 						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},

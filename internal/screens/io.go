@@ -381,7 +381,7 @@ func Io2() Screen {
 							},
 							w.PostForm{
 								ID:        "post-attach",
-								Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+								Action:    "/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach",
 								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Multipart: true,
 							},
@@ -608,7 +608,7 @@ func Io15() Screen {
 															Mark:  &w.Mark{Colour: "#4A6B52"},
 															Label: "nextcloud · Личный",
 															On:    true,
-															Href:  "/app/calendar/nextcloud/lichnyy/import",
+															Href:  "/app/calendar/nextcloud/lichnyj/import",
 														},
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -633,12 +633,12 @@ func Io15() Screen {
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#9A9280"},
 															Label: "baikal · Общий",
-															Href:  "/app/calendar/baikal/obshchiy/import",
+															Href:  "/app/calendar/baikal/obshchij/import",
 														},
 														w.MenuSep{},
 														w.MenuItem{
 															Label: "New calendar",
-															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyy/import",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
 														},
 													},
 													Width: w.MenuWidth290,
@@ -690,7 +690,7 @@ func Io15() Screen {
 							},
 						},
 						Variant: w.DialogStep560,
-						Action:  "/app/calendar/nextcloud/lichnyy/import",
+						Action:  "/app/calendar/nextcloud/lichnyj/import",
 					},
 				},
 			},
@@ -1597,7 +1597,7 @@ func Io6() Screen {
 															Mark:  &w.Mark{Colour: "#4A6B52"},
 															Label: "nextcloud · Личный",
 															On:    true,
-															Href:  "/app/calendar/nextcloud/lichnyy/import",
+															Href:  "/app/calendar/nextcloud/lichnyj/import",
 														},
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -1622,12 +1622,12 @@ func Io6() Screen {
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#9A9280"},
 															Label: "baikal · Общий",
-															Href:  "/app/calendar/baikal/obshchiy/import",
+															Href:  "/app/calendar/baikal/obshchij/import",
 														},
 														w.MenuSep{},
 														w.MenuItem{
 															Label: "New calendar",
-															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyy/import",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
 														},
 													},
 													Width: w.MenuWidth290,
@@ -1645,9 +1645,9 @@ func Io6() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "Skip them", Href: "/app/calendar/nextcloud/lichnyy/import?existing=skip", On: true},
-													{Label: "Replace them", Href: "/app/calendar/nextcloud/lichnyy/import?existing=replace"},
-													{Label: "Import as copies", Href: "/app/calendar/nextcloud/lichnyy/import?existing=copy"},
+													{Label: "Skip them", Href: "/app/calendar/nextcloud/lichnyj/import?existing=skip", On: true},
+													{Label: "Replace them", Href: "/app/calendar/nextcloud/lichnyj/import?existing=replace"},
+													{Label: "Import as copies", Href: "/app/calendar/nextcloud/lichnyj/import?existing=copy"},
 												},
 											},
 											w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}},

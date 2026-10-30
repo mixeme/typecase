@@ -908,7 +908,7 @@ func States17() Screen {
 														Label: "nextcloud · Личный",
 														On:    true,
 														Name:  "calendar",
-														Value: "nextcloud/lichnyy",
+														Value: "nextcloud/lichnyj",
 														Of:    "event-edit-loss",
 													},
 													w.MenuItem{
@@ -1271,7 +1271,7 @@ func States17() Screen {
 							},
 						},
 						ID:     "event-edit-loss",
-						Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+						Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -1329,7 +1329,7 @@ func States36() Screen {
 														Label: "nextcloud · Личный",
 														On:    true,
 														Name:  "calendar",
-														Value: "nextcloud/lichnyy",
+														Value: "nextcloud/lichnyj",
 														Of:    "event-edit-loss-days",
 													},
 													w.MenuItem{
@@ -1688,7 +1688,7 @@ func States36() Screen {
 							},
 						},
 						ID:     "event-edit-loss-days",
-						Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
+						Action: "/app/calendar/nextcloud/lichnyj/8f1c/edit",
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -3212,12 +3212,12 @@ func States15() Screen {
 							w.Filter{
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
-								Action:  "/app/calendar/nextcloud/lichnyy",
+								Action:  "/app/calendar/nextcloud/lichnyj",
 								Variant: w.FilterH26W200,
 							},
-							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-10-26"},
-							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyy"},
-							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-11-09"},
+							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-10-26"},
+							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyj"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-11-09"},
 							w.SegFold{
 								Seg: w.Seg{
 									Options: []w.SegOption{
