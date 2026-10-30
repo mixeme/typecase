@@ -604,6 +604,9 @@ func (g *gen) sec(e *El) string {
 				s += ", Apart: true"
 			}
 			items = append(items, s+"}")
+		case k.Has("tc-post"):
+			// the form a button of the section sends: Attach of a record
+			items = append(items, g.postForm(k))
 		case k.Has("tc-sec__note"):
 			items = append(items, "w.SecNote{Text: "+q(k.Text())+"}")
 		case k.Has("tc-sec__acts"):
@@ -1158,6 +1161,9 @@ func (g *gen) docmeta(e *El) string {
 				its = append(its, "w.DocRefs{Items: []w.DocRef{"+join(refs, ", ")+"}}")
 			case x.Has("tc-line__text"):
 				its = append(its, g.docAttach(x))
+			case x.Has("tc-post"):
+				// the form Attach sends, beside it
+				its = append(its, g.postForm(x))
 			default:
 				stop("docmeta? " + join(x.Cls(), " "))
 			}

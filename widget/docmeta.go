@@ -24,6 +24,7 @@ func (Line) docmetaPart()      {}
 func (DocRefs) docmetaPart()   {}
 func (DocAttach) docmetaPart() {}
 func (Diag) docmetaPart()      {}
+func (PostForm) docmetaPart()  {}
 
 // DocRefs is a column of records a document points at.
 type DocRefs struct {
@@ -104,7 +105,7 @@ type DocmetaSec struct {
 // Инварианты. Каждая секция — рубрика и то, что под ней; удаление — последним; колонка печатает фрагмент своего кадра.
 // Поведение. нет: поведение у ссылок и кнопок.
 // Эталон. кадр `s-notes-2`, фрагмент `.tc-docmeta`.
-// Содержимое. Секции: теги, связанные записи, вложения, копии, источник; опасная зона.
+// Содержимое. Секции: теги, связанные записи, вложения с формой их Attach, копии, источник; опасная зона.
 // Чего нет. Полей правки: правят в документе.
 type Docmeta struct {
 	Sections []DocmetaSec

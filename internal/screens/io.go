@@ -373,6 +373,12 @@ func Io2() Screen {
 									},
 								},
 							},
+							w.PostForm{
+								ID:        "post-attach",
+								Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Multipart: true,
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{

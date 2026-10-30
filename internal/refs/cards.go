@@ -434,8 +434,12 @@ var _ = add(
 			w.LinkedRow{Mark: w.Mark{Colour: "#3F6E8C"}, Icon: "task", Title: "Отправить макет Ковалёвой", Detail: "08 Aug · упомянута в названии"}}},
 		w.SecActs{Items: []w.Button{w.Button{Label: "Open the timeline", Icon: "all"}}}}}, "s-contacts-6", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
-		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
+		w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}},
+		w.PostForm{ID: "post-attach", Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Multipart: true},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6}}}, "s-agenda-1", "tc-sec", 3),
 	cards("list", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "The same event in other calendars", Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}}},
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "radicale · vps · Проекты", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Holds the same")}}}, []w.SecItemPart{w.Mark{Colour: "#9A9280", Size: w.MarkH11Inline}, w.Text(" "), w.Link{Text: "baikal · Общий", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· Where differ")}}}}, Gap: 5}}}, "s-agenda-2", "tc-sec", 5),
@@ -464,9 +468,13 @@ var _ = add(
 		w.Rubric{Text: "Links"},
 		w.SecNote{Text: "Notes or events may hold it as an attachment: Carrel does not look through the records."}}}, "s-files-1", "tc-sec", 1),
 	cards("list", w.Sec{Items: []w.SecPart{
-		w.Rubric{Text: "Attachments"},
-		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
-		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, "s-io-2", "tc-sec", 1),
+		w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}},
+		w.PostForm{ID: "post-attach", Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Multipart: true},
+		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Link{Text: "release-checklist.md", Href: "#"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}}, w.Text(" "), w.Badge{Label: "in the event"}}}, Gap: 6},
+		w.Empty{Lead: "Attach to this event", Parts: []w.EmptyPart{w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to "), w.Mono{Text: "Documents / carrel"}, w.Text(" and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDropSide}}}, "s-io-2", "tc-sec", 1),
 	cards("flush", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 4}, w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
@@ -1123,19 +1131,22 @@ var _ = add(
 			w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"}, Href: "#"}, w.DocAttach{Name: "план-поездки.pdf", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}}, ID: "saving-attachments"},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-26", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
-		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
+		{Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Button{Label: "Attach", Menu: true, Small: true}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}}, w.DocAttach{Name: "запись-встречи.m4a", Href: "#", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}}}},
-		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
-		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID 9e31-40b7-c012 Read 2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-2", "tc-docmeta", 1),
-	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
-		{Title: w.Rubric{Text: "Tags"}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
-		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
-		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
 			w.MenuItem{Icon: "file", Label: "From Files"},
-			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Href: "#"}}},
-		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text differ")}}}}}}},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.PostForm{ID: "post-attach", Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Multipart: true}, w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Href: "#"}}},
+		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}}}}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-2", "tc-docmeta", 1),
+	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
+		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},
+		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "upload", File: &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+			w.MenuItem{Icon: "file", Label: "From Files"},
+			w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}}, Items: []w.DocmetaPart{w.PostForm{ID: "post-attach", Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Multipart: true}, w.DocAttach{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Where: w.Badge{Label: "in the note"}, Href: "#"}, w.DocAttach{Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Where: w.Badge{Label: "Documents / carrel"}, Href: "#"}}},
+		{Title: w.Rubric{Text: "The same note in other notebooks", Items: []w.RubricPart{w.Badge{Label: "1", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline}, Name: "nextcloud · Дневник", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· Text, tags differ")}}}}}}},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}}}}, Danger: &w.Danger{Button: w.Button{Label: "Delete note", Kind: w.ButtonDangerSolid}, Space: w.DangerAtEnd}}, "s-notes-3", "tc-docmeta", 1),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Small: true}, Menu: w.Menu{Items: []w.MenuPart{

@@ -515,6 +515,12 @@ func Tasks20() Screen {
 									},
 								},
 							},
+							w.PostForm{
+								ID:        "post-attach",
+								Action:    "/app/tasks/nextcloud/dela/aa10/edit?op=attach",
+								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Multipart: true,
+							},
 						},
 					},
 					w.Sec{
@@ -789,6 +795,12 @@ func Tasks2() Screen {
 										},
 									},
 								},
+							},
+							w.PostForm{
+								ID:        "post-attach",
+								Action:    "/app/tasks/nextcloud/dela/7e40/edit?op=attach",
+								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Multipart: true,
 							},
 							w.SecList{
 								Items: [][]w.SecItemPart{

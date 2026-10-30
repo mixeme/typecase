@@ -1126,12 +1126,21 @@ func States17() Screen {
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon:  "upload",
-															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Icon: "upload",
+															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
+															Row: w.Line{
+																Items: []w.LinePart{
+																	w.Faced{
+																		Face:  w.FaceLarge,
+																		Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																	},
+																	w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Gap: w.LineGap8,
+															},
 															Label: "From this computer",
 														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
-														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,
@@ -1150,6 +1159,7 @@ func States17() Screen {
 										},
 										Gap:   w.LineGap8,
 										Block: true,
+										ID:    "event-attachments",
 										Place: w.Grown,
 									},
 								},
@@ -1478,12 +1488,21 @@ func States36() Screen {
 												Menu: w.Menu{
 													Items: []w.MenuPart{
 														w.MenuItem{
-															Icon:  "upload",
-															File:  &w.FileField{Form: "post-attach", Name: "file", Label: "From this computer"},
+															Icon: "upload",
+															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
+															Row: w.Line{
+																Items: []w.LinePart{
+																	w.Faced{
+																		Face:  w.FaceLarge,
+																		Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																	},
+																	w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Gap: w.LineGap8,
+															},
 															Label: "From this computer",
 														},
 														w.MenuItem{Icon: "file", Label: "From Files"},
-														w.MenuItem{Label: "Upload", NoScript: true, Form: "post-attach"},
 													},
 													Width: w.MenuWidth212,
 													Pop:   w.MenuUnder,
@@ -1502,6 +1521,7 @@ func States36() Screen {
 										},
 										Gap:   w.LineGap8,
 										Block: true,
+										ID:    "event-attachments",
 										Place: w.Grown,
 									},
 								},

@@ -2525,6 +2525,12 @@ func Publish19() Screen {
 										},
 									},
 								},
+								w.PostForm{
+									ID:        "post-attach",
+									Action:    "/app/calendar/nextcloud/lichnyy/8f1c/edit?op=attach",
+									Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+									Multipart: true,
+								},
 								w.SecList{
 									Items: [][]w.SecItemPart{
 										[]w.SecItemPart{
@@ -3077,6 +3083,12 @@ func Publish4() Screen {
 												},
 											},
 											Items: []w.DocmetaPart{
+												w.PostForm{
+													ID:        "post-attach",
+													Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach",
+													Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+													Multipart: true,
+												},
 												w.DocAttach{
 													Name:  "2026-08-10-sync-board.png",
 													Size:  w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},

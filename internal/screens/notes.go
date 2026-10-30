@@ -455,6 +455,12 @@ func Notes33() Screen {
 									},
 								},
 							},
+							w.PostForm{
+								ID:        "post-attach",
+								Action:    "/app/notes/nextcloud/dnevnik/9e31/edit?op=attach",
+								Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Multipart: true,
+							},
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
@@ -764,6 +770,12 @@ func Notes2() Screen {
 											},
 										},
 										Items: []w.DocmetaPart{
+											w.PostForm{
+												ID:        "post-attach",
+												Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach",
+												Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+												Multipart: true,
+											},
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",
 												Size:  w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
@@ -960,6 +972,12 @@ func Notes27() Screen {
 											},
 										},
 										Items: []w.DocmetaPart{
+											w.PostForm{
+												ID:        "post-attach",
+												Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach",
+												Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+												Multipart: true,
+											},
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",
 												Size:  w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
@@ -1175,6 +1193,12 @@ func Notes3() Screen {
 											},
 										},
 										Items: []w.DocmetaPart{
+											w.PostForm{
+												ID:        "post-attach",
+												Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012/edit?op=attach",
+												Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+												Multipart: true,
+											},
 											w.DocAttach{
 												Name:  "2026-08-10-sync-board.png",
 												Size:  w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}},
