@@ -1087,6 +1087,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
 }
 @container style(--tc-shell-mode: drawer){
   .tc-row{min-height:52px;gap:10px}
+  /* Меню строки страницы на телефоне — во всю строку под ней: кнопка стоит
+     то справа, то в начале перенесённой строки, а меню у её края вылезло бы. */
+  .tc-main__strip{position:relative}
+  .tc-main__strip .tc-drop{position:static}
+  .tc-main__strip .tc-drop > .tc-menu.is-pop{left:20px;right:20px;width:auto}
   .tc-list.is-compact .tc-row{min-height:52px}
   .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
   .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
@@ -1360,7 +1365,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-empty--dusty.tc-empty--dusty{color:var(--tc-dusty)}
 .tc-empty--t12-pad12-20.tc-empty--t12-pad12-20{font-size:12px;padding:12px 20px}
 .tc-empty--dashed.tc-empty--dashed{border:.5px dashed var(--tc-edge);border-radius:4px;margin:0;padding:22px}
-.tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px}
+.tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px;max-width:100%}
 .tc-empty--drop-side.tc-empty--drop-side{margin-top:8px;background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:6px;padding:16px}
 .tc-empty--t12-pad14-20.tc-empty--t12-pad14-20{font-size:12px;padding:14px 20px}
 .tc-field--fill300.tc-field--fill300{flex:1 1 300px}

@@ -1268,6 +1268,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
 }
 @container style(--tc-shell-mode: drawer){
   .tc-row{min-height:52px;gap:10px}
+  /* Меню строки страницы на телефоне — во всю строку под ней: кнопка стоит
+     то справа, то в начале перенесённой строки, а меню у её края вылезло бы. */
+  .tc-main__strip{position:relative}
+  .tc-main__strip .tc-drop{position:static}
+  .tc-main__strip .tc-drop > .tc-menu.is-pop{left:20px;right:20px;width:auto}
   .tc-list.is-compact .tc-row{min-height:52px}
   .tc-nav--bottom{display:flex;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);margin-top:auto}
   .tc-nav--bottom .tc-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:auto;padding:7px 0 9px;font-size:9.5px;color:var(--tc-dusty);border-radius:0}
@@ -1541,7 +1546,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-empty--dusty.tc-empty--dusty{color:var(--tc-dusty)}
 .tc-empty--t12-pad12-20.tc-empty--t12-pad12-20{font-size:12px;padding:12px 20px}
 .tc-empty--dashed.tc-empty--dashed{border:.5px dashed var(--tc-edge);border-radius:4px;margin:0;padding:22px}
-.tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px}
+.tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px;max-width:100%}
 .tc-empty--drop-side.tc-empty--drop-side{margin-top:8px;background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:6px;padding:16px}
 .tc-empty--t12-pad14-20.tc-empty--t12-pad14-20{font-size:12px;padding:14px 20px}
 .tc-field--fill300.tc-field--fill300{flex:1 1 300px}
@@ -22429,7 +22434,7 @@ Read  2 min ago</div>
           <span class="tc-dim--muted tc-dim--t12">Mount as a drive</span>
           <input class="tc-in is-mono tc-in--line tc-in--fill" type="text" readonly aria-label="Mount as a drive" value="https://carrel.example/p/5c40e2/dav/">
           <button class="tc-btn is-sm" type="button" data-tc-copy="https://carrel.example/p/5c40e2/dav/" data-tc-copied="Copied">Copy</button>
-          <span class="tc-drop"><button class="tc-btn is-sm is-focus" type="button">How to mount<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><div class="tc-menu is-pop tc-menu--w290" role="menu"><div class="tc-menu__text"><b>Windows</b>File Explorer › This PC › Map network drive, then paste the address.</div><div class="tc-menu__text"><b>macOS</b>Finder › Go › Connect to Server, then paste the address.</div><div class="tc-menu__text"><b>Linux</b>Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.</div></div></span>
+          <span class="tc-drop"><button class="tc-btn is-sm is-focus" type="button">How to mount<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><div class="tc-menu is-pop is-right tc-menu--w290" role="menu"><div class="tc-menu__text"><b>Windows</b>File Explorer › This PC › Map network drive, then paste the address.</div><div class="tc-menu__text"><b>macOS</b>Finder › Go › Connect to Server, then paste the address.</div><div class="tc-menu__text"><b>Linux</b>Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://.</div></div></span>
           <span class="tc-dim tc-dim--t11">read-only WebDAV, no password</span>
         </div>
         <table class="tc-table">

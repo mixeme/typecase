@@ -9,6 +9,10 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuText{Title: "Windows", Text: "File Explorer › This PC › Map network drive, then paste the address."},
+		w.MenuText{Title: "macOS", Text: "Finder › Go › Connect to Server, then paste the address."},
+		w.MenuText{Title: "Linux", Text: "Files › Other Locations › Connect to Server, then type the address with davs:// in place of https://."}}, Width: w.MenuWidth290, Pop: w.MenuUnderEnd}, "s-publish-32", "tc-menu", 1),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer"}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-4", "tc-menu", 2),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
