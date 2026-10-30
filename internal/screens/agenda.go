@@ -1330,12 +1330,12 @@ func Agenda17() Screen {
 							w.Filter{
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
-								Action:  "/app/calendar/nextcloud/lichny",
+								Action:  "/app/calendar/nextcloud/lichnyy",
 								Variant: w.FilterH26W200,
 							},
-							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichny?from=2026-08-03"},
-							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichny"},
-							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichny?from=2026-08-17"},
+							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-08-03"},
+							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyy"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-08-17"},
 							w.SegFold{
 								Seg: w.Seg{
 									Options: []w.SegOption{
@@ -1535,8 +1535,8 @@ func Agenda31() Screen {
 						Items: []w.BarPart{
 							w.Filter{
 								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
-								Clear:   "/app/calendar/nextcloud/lichny",
-								Action:  "/app/calendar/nextcloud/lichny",
+								Clear:   "/app/calendar/nextcloud/lichnyy",
+								Action:  "/app/calendar/nextcloud/lichnyy",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Label: "Columns", Icon: "cols"},

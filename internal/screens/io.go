@@ -608,7 +608,7 @@ func Io15() Screen {
 															Mark:  &w.Mark{Colour: "#4A6B52"},
 															Label: "nextcloud · Личный",
 															On:    true,
-															Href:  "/app/calendar/nextcloud/lichnyj/import",
+															Href:  "/app/calendar/nextcloud/lichnyy/import",
 														},
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -638,7 +638,7 @@ func Io15() Screen {
 														w.MenuSep{},
 														w.MenuItem{
 															Label: "New calendar",
-															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyy/import",
 														},
 													},
 													Width: w.MenuWidth290,
@@ -690,7 +690,7 @@ func Io15() Screen {
 							},
 						},
 						Variant: w.DialogStep560,
-						Action:  "/app/calendar/nextcloud/lichnyj/import",
+						Action:  "/app/calendar/nextcloud/lichnyy/import",
 					},
 				},
 			},
@@ -1597,7 +1597,7 @@ func Io6() Screen {
 															Mark:  &w.Mark{Colour: "#4A6B52"},
 															Label: "nextcloud · Личный",
 															On:    true,
-															Href:  "/app/calendar/nextcloud/lichnyj/import",
+															Href:  "/app/calendar/nextcloud/lichnyy/import",
 														},
 														w.MenuItem{
 															Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -1627,7 +1627,7 @@ func Io6() Screen {
 														w.MenuSep{},
 														w.MenuItem{
 															Label: "New calendar",
-															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyj/import",
+															Href:  "/app/collections/new?kind=event&back=/app/calendar/nextcloud/lichnyy/import",
 														},
 													},
 													Width: w.MenuWidth290,
@@ -1645,9 +1645,9 @@ func Io6() Screen {
 										Parts: []w.FieldPart{
 											w.Seg{
 												Options: []w.SegOption{
-													{Label: "Skip them", Href: "/app/calendar/nextcloud/lichny/import?existing=skip", On: true},
-													{Label: "Replace them", Href: "/app/calendar/nextcloud/lichny/import?existing=replace"},
-													{Label: "Import as copies", Href: "/app/calendar/nextcloud/lichny/import?existing=copy"},
+													{Label: "Skip them", Href: "/app/calendar/nextcloud/lichnyy/import?existing=skip", On: true},
+													{Label: "Replace them", Href: "/app/calendar/nextcloud/lichnyy/import?existing=replace"},
+													{Label: "Import as copies", Href: "/app/calendar/nextcloud/lichnyy/import?existing=copy"},
 												},
 											},
 											w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}},

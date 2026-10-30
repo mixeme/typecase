@@ -1218,7 +1218,7 @@ func Plan4() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyj/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyy/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},
@@ -1488,7 +1488,7 @@ func Plan5() Screen {
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 									{Parts: []w.CellPart{w.Text("CalDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyj/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("…/remote.php/dav/calendars/mix/lichnyy/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},

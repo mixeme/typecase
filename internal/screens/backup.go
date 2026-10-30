@@ -512,7 +512,7 @@ func Backup2() Screen {
 													},
 													w.TickRow{
 														Ticked: w.TickedOff,
-														Send:   w.Send{Name: "src", Value: "baikal|obshchij"},
+														Send:   w.Send{Name: "src", Value: "baikal|obshchiy"},
 														Form:   w.TickRowNested,
 														Mark:   w.Mark{Colour: "#9A9280"},
 														Label:  "Общий",
@@ -921,7 +921,7 @@ func Backup19() Screen {
 													},
 													w.TickRow{
 														Ticked: w.TickedOff,
-														Send:   w.Send{Name: "src", Value: "baikal|obshchij"},
+														Send:   w.Send{Name: "src", Value: "baikal|obshchiy"},
 														Form:   w.TickRowNested,
 														Mark:   w.Mark{Colour: "#9A9280"},
 														Label:  "Общий",
@@ -3249,7 +3249,7 @@ func Backup8() Screen {
 													Label: "nextcloud · Личный",
 													On:    true,
 													Name:  "into",
-													Value: "nextcloud|lichnyj",
+													Value: "nextcloud|lichnyy",
 												},
 												w.MenuItem{
 													Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3302,7 +3302,7 @@ func Backup8() Screen {
 																	Label: "nextcloud · Личный",
 																	On:    true,
 																	Name:  "into.1",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3346,7 +3346,7 @@ func Backup8() Screen {
 																	Mark:  &w.Mark{Colour: "#4A6B52"},
 																	Label: "nextcloud · Личный",
 																	Name:  "into.2",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3390,7 +3390,7 @@ func Backup8() Screen {
 																	Label: "nextcloud · Личный",
 																	On:    true,
 																	Name:  "into.3",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3566,7 +3566,7 @@ func Backup20() Screen {
 													Label: "nextcloud · Личный",
 													On:    true,
 													Name:  "into",
-													Value: "nextcloud|lichnyj",
+													Value: "nextcloud|lichnyy",
 												},
 												w.MenuItem{
 													Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3619,7 +3619,7 @@ func Backup20() Screen {
 																	Label: "nextcloud · Личный",
 																	On:    true,
 																	Name:  "into.1",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3663,7 +3663,7 @@ func Backup20() Screen {
 																	Mark:  &w.Mark{Colour: "#4A6B52"},
 																	Label: "nextcloud · Личный",
 																	Name:  "into.2",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},
@@ -3707,7 +3707,7 @@ func Backup20() Screen {
 																	Label: "nextcloud · Личный",
 																	On:    true,
 																	Name:  "into.3",
-																	Value: "nextcloud|lichnyj",
+																	Value: "nextcloud|lichnyy",
 																},
 																w.MenuItem{
 																	Mark:  &w.Mark{Colour: "#3F6E8C"},

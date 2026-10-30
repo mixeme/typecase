@@ -58,7 +58,7 @@ var _ = add(
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 4}, "s-contacts-17", "tc-tree", 1),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "c", Value: "nextcloud/lichnyj", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "c", Value: "nextcloud/lichnyy", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Send: w.Send{Name: "c", Value: "nextcloud/rabota", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Send: w.Send{Name: "c", Value: "nextcloud/dni-rozhdeniya", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Send: w.Send{Name: "c", Value: "radicale/proekty", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}},
@@ -67,7 +67,7 @@ var _ = add(
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/proekty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Send: w.Send{Name: "to", Value: "radicale/dezhurstva", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}},
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "to", Value: "nextcloud/lichnyj", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Send: w.Send{Name: "to", Value: "nextcloud/lichnyy", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Send: w.Send{Name: "to", Value: "nextcloud/rabota", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#9A9280"}, Label: "Общий", Unavailable: true, Send: w.Send{Name: "to", Value: "baikal/obshchiy", One: true}, Trail: w.Mono{Text: "password · 401", Variant: w.Mono10Dusty}}}, On: 4}, "s-agenda-29", "tc-tree", 1),
 	rows("links", w.Tree{Rows: []w.TreeRow{
@@ -81,7 +81,7 @@ var _ = add(
 	rows("links", w.Tree{Rows: []w.TreeRow{
 		{Mark: &w.Mark{Kind: w.MarkMulti}, Label: "All address books", Href: "/app/mail/attach?what=contact&q=смир"},
 		{Icon: "server", Label: "nextcloud"},
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=lichnyj"},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=lichnyy"},
 		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=rabota"},
 		{Icon: "server", Label: "radicale · vps"},
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=contact&q=смир&c=komanda"}}, On: 1, Variant: w.TreePadded}, "s-mail-12", "tc-tree", 1),
@@ -187,7 +187,7 @@ var _ = add(
 		{Icon: "server", Label: "sftpgo · vps", Unavailable: true, Send: w.Send{Name: "to", Value: "sftpgo"}, Trail: w.Mono{Text: "files only", Variant: w.Mono10Dusty}}}, On: 2}, "s-profile-8", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "server", Label: "nextcloud"},
-		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=lichnyj"},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=lichnyy"},
 		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=rabota"},
 		{Icon: "server", Label: "radicale · vps"},
 		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22, Href: "/app/mail/attach?what=calendar&c=proekty"}}, On: 2, Variant: w.TreePadded}, "s-mail-10", "tc-tree", 1),
@@ -242,7 +242,7 @@ var _ = add(
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Single: true}, "s-io-1", "tc-row", 1),
 	rows("plain", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АС"}, Title: []w.Inline{w.Text("Алексей Смирнов")}, Subtitle: "+7 916 200-71-15", Detail: "—", Caption: "—", Source: "nextcloud · Контакты"}, "s-contacts-1", "tc-row", 3),
 	rows("strong", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва")}, Strong: true, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "nextcloud · Личный"}, "components-12", "tc-row", 1),
-	rows("plain", w.LinkedRow{Mark: w.Mark{Colour: "#4A6B52"}, Icon: "cal", Title: "Синк-ап по релизу", Detail: "10 Aug · attendee · accepted", Href: "/app/calendar/nextcloud/lichny/aa01"}, "s-contacts-6", "tc-row", 1),
+	rows("plain", w.LinkedRow{Mark: w.Mark{Colour: "#4A6B52"}, Icon: "cal", Title: "Синк-ап по релизу", Detail: "10 Aug · attendee · accepted", Href: "/app/calendar/nextcloud/lichnyy/aa01"}, "s-contacts-6", "tc-row", 1),
 	rows("on", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Initials: "АК"}, Title: []w.Inline{w.Text("Анна Ковалёва ")}, Strong: true, TitleBadge: &w.Badge{Label: "linked ×3", Tone: w.BadgeLinked}, Subtitle: "+7 912 445-10-88", Detail: "a.kovaleva@example.org", Caption: "Издательство «Слово»", Source: "3 sources", SourceHint: "nextcloud · Контакты, radicale · vps · Команда, nextcloud · Архив", On: true}, "s-contacts-1", "tc-row", 1),
 	rows("plain", w.FindRow{Mark: w.Mark{Colour: "#4A6B52"}, Date: "10 Aug", Title: []w.Inline{w.Text("Синк-ап по релизу")}, Detail: []w.Inline{w.Text("attendee · accepted")}, What: "event", Source: "nextcloud · Личный"}, "s-contacts-7", "tc-row", 1),
 	rows("inset", w.FaceRow{Mark: w.Mark{Colour: "#4A6B52"}, Avatar: w.Avatar{Photo: true}, Title: []w.Inline{w.Text("Лебедева Вера")}, Subtitle: "+7 905 331-09-42", Detail: "v.lebedeva@example.org", Caption: "Библиотека №4", Source: "nextcloud · Контакты", Inset: true}, "s-dup-1", "tc-row", 1),

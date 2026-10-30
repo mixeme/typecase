@@ -3212,12 +3212,12 @@ func States15() Screen {
 							w.Filter{
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
-								Action:  "/app/calendar/nextcloud/lichny",
+								Action:  "/app/calendar/nextcloud/lichnyy",
 								Variant: w.FilterH26W200,
 							},
-							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichny?from=2026-10-26"},
-							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichny"},
-							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichny?from=2026-11-09"},
+							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-10-26"},
+							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyy"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyy?from=2026-11-09"},
 							w.SegFold{
 								Seg: w.Seg{
 									Options: []w.SegOption{

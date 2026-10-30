@@ -1597,7 +1597,7 @@ func Contacts6() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
-										Href:   "/app/calendar/nextcloud/lichny/aa01",
+										Href:   "/app/calendar/nextcloud/lichnyy/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2268,7 +2268,7 @@ func Contacts16() Screen {
 										Icon:   "cal",
 										Title:  "Синк-ап по релизу",
 										Detail: "10 Aug · attendee · accepted",
-										Href:   "/app/calendar/nextcloud/lichny/aa01",
+										Href:   "/app/calendar/nextcloud/lichnyy/aa01",
 									},
 									w.LinkedRow{
 										Mark:   w.Mark{Colour: "#3F6E8C"},

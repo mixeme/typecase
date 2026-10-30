@@ -128,7 +128,7 @@ func Profile1() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -714,7 +714,7 @@ func Profile27() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -1347,7 +1347,7 @@ func Profile26() Screen {
 											Rows: []w.TableRow{
 												{
 													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
+														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -3154,7 +3154,7 @@ func Profile4() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
@@ -4397,7 +4397,7 @@ func Profile8() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/collections/move?a=nextcloud&c=lichnyj",
+					Action: "/app/collections/move?a=nextcloud&c=lichnyy",
 					Icon:   "move",
 					Title:  "Move calendar",
 					Head: []w.SheetHeadPart{
@@ -4598,7 +4598,7 @@ func Profile9() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/collections/delete?a=nextcloud&c=lichnyj",
+					Action: "/app/collections/delete?a=nextcloud&c=lichnyy",
 					Icon:   "trash",
 					Tone:   w.SheetIconDanger,
 					Title:  "Delete on the server",
@@ -4650,7 +4650,7 @@ func Profile9() Screen {
 								w.Button{
 									Label: "Download",
 									Icon:  "download",
-									Href:  "/app/calendar/nextcloud/lichnyj/export",
+									Href:  "/app/calendar/nextcloud/lichnyy/export",
 									Aside: &w.Mono{Text: ".ics", Variant: w.Mono11},
 									After: "first",
 								},
@@ -4808,7 +4808,7 @@ func Profile10() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyy"}},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 													{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
