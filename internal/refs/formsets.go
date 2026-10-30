@@ -19,6 +19,7 @@ func footItems(items ...w.FormFootPart) []w.FormFootPart {
 // fields, tick row, diagnostics) get their records with those families.
 var _ = add(
 	// tc-fset
+	form("plain", w.PostForm{ID: "conflict.mine", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}}}, "s-conflict-1", "tc-post", 1),
 	form("upload", w.PostForm{ID: "post-import", Action: "/app/contacts/nextcloud/kontakty/import", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, File: "file"}, "components-37", "tc-post", 2),
 	form("default", w.PostForm{ID: "post-disconnect", Action: "/app/settings/connections/nextcloud/disconnect", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, "components-37", "tc-post", 1),
 	form("plain", w.FieldSet{Rubric: w.Rubric{Text: "Sessions", Items: []w.RubricPart{w.Plain{Text: "2 active"}}}, Items: []w.FieldSetPart{w.Table{Cols: []w.TableCol{{Label: "Where"}, {Label: "Started"}, {Label: "Last seen", Rank: w.Rank3}, {Width: w.Col120, Rank: w.Rank4}}, Rows: []w.TableRow{

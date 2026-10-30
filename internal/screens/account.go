@@ -1111,6 +1111,7 @@ func Account5() Screen {
 			},
 			Main: w.Main{
 				Items: []w.MainPart{
+					w.PostForm{ID: "post-signout", Action: "/logout", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"},
 						Subs: []w.HeadSub{

@@ -1780,13 +1780,8 @@ func Notes4() Screen {
 								Menu: w.Menu{
 									Items: []w.MenuPart{
 										w.MenuItem{
-											Icon: "upload",
-											File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"},
-											Row: w.DocAttach{
-												Name:   "{name}",
-												Size:   w.Dim{Parts: []w.Inline{w.Text("· {size}")}},
-												Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
-											},
+											Icon:  "upload",
+											File:  &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer"},
 											Label: "From this computer",
 										},
 										w.MenuItem{Icon: "file", Label: "From Files"},

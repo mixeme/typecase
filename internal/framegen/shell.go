@@ -1299,6 +1299,10 @@ func (g *gen) dialog(e *El) string {
 			items = append(items, g.form(x))
 		case x.Has("tc-formfoot"):
 			items = append(items, g.formFoot(x))
+		case x.Has("tc-post"):
+			// the forms of a foot's buttons that need no choice (a
+			// conflict's «Use only my edit»)
+			items = append(items, g.postForm(x))
 		case x.Has("tc-bar"):
 			items = append(items, g.bar(x))
 		case x.Has("tc-head__title"):

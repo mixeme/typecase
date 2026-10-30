@@ -9,6 +9,9 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 var _ = add(
 	// tc-menu
 	overlay("plain", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer"}, Label: "From this computer"},
+		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}, "s-notes-4", "tc-menu", 2),
+	overlay("plain", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "nextcloud · Записи", Name: "into", Value: "nextcloud/zapisi", Required: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "nextcloud · Дневник", Name: "into", Value: "nextcloud/dnevnik", Required: true},
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: nothing can be written here."}}, Width: w.MenuWidth290, Pop: w.MenuUnderEnd}, "s-notes-34", "tc-menu", 1),
@@ -2713,7 +2716,7 @@ var _ = add(
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "From a file"},
 			w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, ID: "import-file", Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
-			w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}}, Variant: w.DialogStep560}, "s-io-3", "tc-dialog", 1),
+			w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}}, Variant: w.DialogStep560, Action: "/app/contacts/nextcloud/kontakty/import"}, "s-io-3", "tc-dialog", 1),
 	overlay("narrow", w.Dialog{Items: []w.DialogPart{
 		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
 		w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},
@@ -2723,11 +2726,13 @@ var _ = add(
 		w.Head{Title: &w.HeadTitle{Text: "Conflict"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Another client changed this contact while you were editing it. Nothing has been overwritten.")}}}},
 		w.DiffAgree{Property: w.Mono{Text: "FN"}, Text: "agrees — kept as it is."},
 		w.Diff{Items: []w.DiffItem{
-			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
-			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
-			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}}}, w.Check{Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
-			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}},
-		w.FormFoot{Variant: w.FormFootFlush, Items: []w.FormFootPart{w.Button{Label: "Write this combination", Kind: w.ButtonPrimary}, w.Button{Label: "Use only my edit"}, w.Button{Label: "Use only the server version"}, w.Button{Label: "Cancel"}}}}}, "s-conflict-1", "tc-dialog", 1),
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{Name: "choice.0", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "+7 495 120-45-00"}}}, w.Check{Name: "choice.0", Value: "theirs", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "EMAIL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "both changed"}}}, Options: []w.Check{w.Check{Name: "choice.1", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "a.kovaleva@example.org"}}}, w.Check{Name: "choice.1", Value: "theirs", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Server", Value: "anna.kovaleva@slovo.example"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "NOTE"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, Options: []w.Check{w.Check{Name: "choice.2", Value: "mine", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit · include", Value: "Пишет по вторникам, отвечает в тот же день."}}}, w.Check{Name: "choice.2", Value: "theirs", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Leave it out", Value: "—"}}}}},
+			{Title: w.Rubric{Text: "", Lead: &w.Mono{Text: "X-EVOLUTION-FILE-AS"}, Items: []w.RubricPart{w.RubricAside{Text: "only on the server"}}}, Options: []w.Check{w.Check{Name: "choice.3", Value: "mine", Radio: true, Parts: []w.CheckPart{w.Choice{Source: "Your edit", Value: "—"}}}, w.Check{Name: "choice.3", Value: "theirs", Radio: true, On: true, Parts: []w.CheckPart{w.Choice{Source: "Server · include", Value: "Ковалёва, Анна"}}}}}}, ID: "conflict", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}, {Name: "op", Value: "combine"}}},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Write this combination", Kind: w.ButtonPrimary, Form: "conflict"}, w.Button{Label: "Use only my edit", Form: "conflict.mine"}, w.Button{Label: "Use only the server version", Form: "conflict.theirs"}, w.Button{Label: "Cancel", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7"}}, Variant: w.FormFootWrap},
+		w.PostForm{ID: "conflict.mine", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}}},
+		w.PostForm{ID: "conflict.theirs", Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=theirs", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "etag", Value: "3-a7c1"}}}}}, "s-conflict-1", "tc-dialog", 1),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
 		w.Head{Title: &w.HeadTitle{Text: "Connect account"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}}},
 		w.Form{},

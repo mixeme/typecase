@@ -1706,7 +1706,7 @@ func Contacts15() Screen {
 													Items: []w.LinePart{
 														w.Button{
 															Label: "Replace",
-															File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
+															File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo-saved"},
 														},
 														w.Button{Label: "Crop"},
 													},

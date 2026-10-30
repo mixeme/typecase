@@ -1965,7 +1965,7 @@ func Profile2() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
+									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
 								Variant: w.FormFootFlush,
@@ -2116,7 +2116,7 @@ func Profile24() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
+									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
 								Variant: w.FormFootFlush,
@@ -2256,7 +2256,7 @@ func Profile14() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
+									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,
@@ -2524,7 +2524,7 @@ func Profile22() Screen {
 										Width: w.FieldFull,
 									},
 									w.Field{
-										Changed: []string{"server.url", "username"},
+										Changed: []string{"server", "login"},
 										Label:   "Published links",
 										Parts: []w.FieldPart{
 											w.Check{
@@ -2675,7 +2675,7 @@ func Profile23() Screen {
 										Width: w.FieldFull,
 									},
 									w.Field{
-										Changed: []string{"server.url", "username"},
+										Changed: []string{"server", "login"},
 										Label:   "Published links",
 										Parts: []w.FieldPart{
 											w.Check{
@@ -2842,7 +2842,7 @@ func Profile11() Screen {
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", To: "/app/settings/connections/new/test", Submit: true},
+									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,

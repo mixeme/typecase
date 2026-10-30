@@ -4216,7 +4216,7 @@ Read  2 min ago · not changed on server</div>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo" id="photo-saved"></span>
               <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
-                <span class="tc-line tc-line--gap-6"><label class="tc-btn">Replace<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label><button class="tc-btn" type="button">Crop</button></span>
+                <span class="tc-line tc-line--gap-6"><label class="tc-btn">Replace<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo-saved"></label><button class="tc-btn" type="button">Crop</button></span>
                 <button class="tc-btn is-danger" type="button">Remove</button>
                 <span class="tc-field__hint tc-field__hint--max150">EXIF orientation applied, metadata stripped.</span>
               </div>
@@ -8695,7 +8695,7 @@ Read  2 min ago</div>
           <button class="tc-btn" type="button">• list</button>
           <button class="tc-btn" title="Task" type="button"><svg viewBox="0 0 24 24"><use href="#i-task"/></svg><span class="tc-btn__label">task</span></button>
           <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg></button>
-          <details class="tc-drop"><summary class="tc-btn" title="Attach"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg><span class="tc-btn__label">Attach</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-edit" aria-label="From this computer" data-tc-list="note-attachments"><template data-tc-row><div class="tc-line__text">{name} <span class="tc-dim">· {size}</span> <button class="tc-btn is-sm is-danger" type="button" data-tc-remove>Remove</button></div></template></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details>
+          <details class="tc-drop"><summary class="tc-btn" title="Attach"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg><span class="tc-btn__label">Attach</span><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="note-edit" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button></div></details>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           <span class="tc-bar__right">
             <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span>Auto-save</button>
@@ -12229,6 +12229,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12288,6 +12289,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/calendar/nextcloud/lichnyy/5d1a-77c0">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12346,6 +12348,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/tasks/nextcloud/dela/4c1d-8e20-71fa">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/tasks/nextcloud/dela/4c1d-8e20-71fa/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/tasks/nextcloud/dela/4c1d-8e20-71fa/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12405,6 +12408,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/notes/nextcloud/zapisi/9e31-40b7-c012">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12473,6 +12477,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12537,6 +12542,7 @@ Read  just now · written by the merge</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12647,6 +12653,7 @@ end: The end is before the start.</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/calendar/nextcloud/lichnyy/5d1a-77c0">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/calendar/nextcloud/lichnyy/5d1a-77c0/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12723,6 +12730,7 @@ dav: HTTP 507: insufficient storage</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12824,6 +12832,7 @@ dav: HTTP 503: the server is busy</div>
             <button class="tc-btn" type="submit" form="conflict.theirs">Use only the server version</button>
             <a class="tc-btn" href="/app/notes/nextcloud/zapisi/9e31-40b7-c012">Cancel</a>
           </div>
+          <form class="tc-post" id="conflict.mine" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict?op=mine" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form><form class="tc-post" id="conflict.theirs" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012/conflict?op=theirs" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="etag" value="3-a7c1"></form>
         </div>
       </div>
     </div>
@@ -12884,7 +12893,7 @@ dav: HTTP 503: the server is busy</div>
             <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
           </div>
         </div>
-        <div class="tc-main">
+        <div class="tc-main"><form class="tc-post" id="post-import" action="/app/contacts/nextcloud/kontakty/import" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"><input type="file" name="file" aria-label="File"></form>
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark tc-mark--h20" data-tc-colour="#4A6B52"></span>Контакты</div><div class="tc-head__sub">nextcloud · 3 cards</div></div>
             <div class="tc-acts">
@@ -13197,7 +13206,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog is-wide tc-dialog--step560">
+        <form class="tc-dialog is-wide tc-dialog--step560" action="/app/contacts/nextcloud/kontakty/import" method="post" enctype="multipart/form-data">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
@@ -13221,7 +13230,7 @@ dav: HTTP 503: the server is busy</div>
               </span></div>
             <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.vcf</span> — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take <span class="tc-mono">.ics</span> here instead.</div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -13254,7 +13263,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog is-wide tc-dialog--step560">
+        <form class="tc-dialog is-wide tc-dialog--step560" action="/app/calendar/nextcloud/lichnyj/import" method="post" enctype="multipart/form-data">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import events</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
@@ -13281,7 +13290,7 @@ dav: HTTP 503: the server is busy</div>
               </span></div>
             <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.ics</span> — iCalendar 2.0. One file holds any number of events; tasks and journal entries in it are skipped and named in the report.</div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -13313,7 +13322,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog is-wide tc-dialog--step560">
+        <form class="tc-dialog is-wide tc-dialog--step560" action="/app/tasks/nextcloud/dela/import" method="post" enctype="multipart/form-data">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import tasks</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
@@ -13336,7 +13345,7 @@ dav: HTTP 503: the server is busy</div>
               </span></div>
             <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.ics</span> — iCalendar 2.0. One file holds any number of tasks; events and journal entries in it are skipped and named in the report.</div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -13368,7 +13377,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog is-wide tc-dialog--step560">
+        <form class="tc-dialog is-wide tc-dialog--step560" action="/app/contacts/import" method="post" enctype="multipart/form-data">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-form is-tight tc-form--padb12">
@@ -13392,7 +13401,7 @@ dav: HTTP 503: the server is busy</div>
               </span></div>
             <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.vcf</span> — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take <span class="tc-mono">.ics</span> here instead.</div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -13424,7 +13433,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
       <div class="tc-main">
-        <div class="tc-dialog is-wide tc-dialog--step560">
+        <form class="tc-dialog is-wide tc-dialog--step560" action="/app/contacts/nextcloud/kontakty/import" method="post" enctype="multipart/form-data">
           <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
           <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import contacts</div></div></div>
           <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Nothing was read.</b> «Разное (mix).vcf» is not a vCard file: its first line is not <span class="tc-mono">BEGIN:VCARD</span>. Choose the file again.</div>
@@ -13449,7 +13458,7 @@ dav: HTTP 503: the server is busy</div>
               </span></div>
             <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.vcf</span> — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take <span class="tc-mono">.ics</span> here instead.</div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -13559,7 +13568,7 @@ dav: HTTP 503: the server is busy</div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
       </div>
-      <div class="tc-main"><div class="tc-dialog is-wide tc-dialog--step560">
+      <div class="tc-main"><form class="tc-dialog is-wide tc-dialog--step560" action="/app/notes/nextcloud/zapisi/import" method="post" enctype="multipart/form-data">
       <div class="tc-steps"><span class="is-on tc-steps__item">1 · Source</span><i class="tc-steps__rule"></i><span class="tc-steps__item">2 · Preview</span><i class="tc-steps__rule"></i><span class="tc-steps__item">3 · Report</span></div>
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Import notes</div></div></div>
       <div class="tc-form is-tight tc-form--padb12">
@@ -13596,7 +13605,7 @@ dav: HTTP 503: the server is busy</div>
         </div>
       </div>
       <div class="tc-msg tc-msg--mr0-ml0">A file without front matter is dated by its own timestamp.</div>
-    </div></div></div>
+    </form></div></div>
   </div>
 </div>
 <figcaption>Единственный род записей, у которого источника два, — потому и шаг у него свой. Второй легко не заметить: заметки можно взять прямо с того WebDAV, что уже подключён, — без скачивания и загрузки обратно. Оба ведут в один и тот же предпросмотр, нарисованный ниже, и запускает его каждый сам: «Preview file» у файла, «Preview folder» у папки.<br><br>Первым на шаге стоит не источник, а <b>назначение</b>: «Into» — то же поле, что на предпросмотре контактов, и по той же причине.<br><br><b>Рейл здесь — выход, не назначение.</b> Подсвечена тетрадь, из которой открыли мастер; нажатие на «Дневник» бросает мастер и открывает ту тетрадь. Куда лягут заметки — только поле Into. Дерево в карточке WebDAV — то же, что в «Move» и в быстрой загрузке: папку выбирают кликом, путь руками не набирают, отдельного диалога операционной системы нет — это уже подключённый сервер, не диск компьютера. <b>Файлов можно несколько</b>: <span class="tc-mono">.md</span>, zip и <span class="tc-mono">.ics</span> — журнальные записи (VJOURNAL) становятся заметками; предпросмотр календаря шлёт их сюда. У набора подзаголовок предпросмотра — «3 files · 12 KB», обычным шрифтом, как «64 files» у zip; zip в наборе — один файл, его члены в таблице — «‹архив›.zip › ‹имя›.md».</figcaption>
@@ -14671,7 +14680,7 @@ dav: HTTP 503: the server is busy</div>
           <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
         </div>
       </div>
-      <div class="tc-main">
+      <div class="tc-main"><form class="tc-post" id="post-signout" action="/logout" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined calendar</div><div class="tc-head__sub">5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · <span class="tc-mono">Europe/Moscow</span> · 6 events</div></div>
           <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></div>
@@ -15637,7 +15646,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
@@ -15692,7 +15701,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
@@ -15743,7 +15752,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" checked data-tc-disables="password"><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
@@ -15858,7 +15867,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint tc-field__hint--max580">Leave it empty to keep the stored one.</span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
-        <div class="tc-field tc-field--full" data-tc-changed="server.url username"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint tc-field__hint--max580">1 published link uses this connection.</span></div>
+        <div class="tc-field tc-field--full" data-tc-changed="server login"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint tc-field__hint--max580">1 published link uses this connection.</span></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connection-links">Save</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
@@ -15910,7 +15919,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="mix" aria-label="Username"></div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password"><span class="tc-field__hint tc-field__hint--max580">Leave it empty to keep the stored one.</span><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
-        <div class="tc-field tc-field--full" data-tc-changed="server.url username"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint tc-field__hint--max580">1 published link uses this connection.</span><span class="tc-field__hint tc-dim--danger">Choose what becomes of them before saving.</span></div>
+        <div class="tc-field tc-field--full" data-tc-changed="server login"><label>Published links</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="keep"><span class="tc-tickrow__tick is-off"></span>Keep them: they open on what the connection points at now</label><label class="tc-check"><input class="tc-check__box" type="radio" name="published.links" value="revoke"><span class="tc-tickrow__tick is-off"></span>Revoke them</label><span class="tc-field__hint tc-field__hint--max580">1 published link uses this connection.</span><span class="tc-field__hint tc-dim--danger">Choose what becomes of them before saving.</span></div>
       </form>
       <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connection-links">Save</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
@@ -16283,7 +16292,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
