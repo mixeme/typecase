@@ -297,11 +297,9 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 			}
 		}
 	}
-	// the file a form sends parts of again is the one a ranges field of
-	// that name kept, anywhere on the page
-	if v, ok := attrOf(n, "data-tc-ranges-of"); ok && v != "" && !inTemplate && !rangesField(rootOf(n), v) {
-		c.add(n, "data-tc-ranges-of", v, "names no file field with data-tc-ranges on the page")
-	}
+	// data-tc-ranges-of names the file a field kept a step before, on a
+	// page the zone's answer replaced: it stands on no page of its own form
+	// (s-backup-20 after s-backup-16), and is not checked
 	// a submit button of no form does nothing when pressed: a sheet whose
 	// body holds a form of its own prints no form of its Action
 	if submits(n) && !inTemplate && c.formOf(n) == nil {
@@ -335,29 +333,4 @@ func submits(n *html.Node) bool {
 		return strings.EqualFold(t, "submit") || strings.EqualFold(t, "image")
 	}
 	return false
-}
-
-// rangesField: a file field named name that keeps its file for parts
-// (data-tc-ranges) under root.
-func rangesField(root *html.Node, name string) bool {
-	found := false
-	var find func(*html.Node)
-	find = func(k *html.Node) {
-		if found || k.Type == html.ElementNode && k.DataAtom == atom.Template {
-			return
-		}
-		if k.Type == html.ElementNode && k.Data == "input" {
-			t, _ := attrOf(k, "type")
-			v, _ := attrOf(k, "name")
-			if _, r := attrOf(k, "data-tc-ranges"); r && t == "file" && v == name {
-				found = true
-				return
-			}
-		}
-		for _, x := range children(k) {
-			find(x)
-		}
-	}
-	find(root)
-	return found
 }

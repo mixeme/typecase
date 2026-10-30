@@ -371,7 +371,7 @@ func TestHiddenIsNotDrawn(t *testing.T) {
 		t.Fatal("no s-tasks-3")
 	}
 	page := r.Screen().Render()
-	first := `<button class="tc-in is-pick" type="button">1 day before</button></div>`
+	first := `<option value="1.day.before" selected>1 day before</option></select></span></div>`
 	i := strings.Index(page, first)
 	if i < 0 {
 		t.Fatal("no first reminder in s-tasks-3")

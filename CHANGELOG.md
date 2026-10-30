@@ -374,8 +374,7 @@ do, not what the authors did.
   form with a file field, `data-tc-add` a template, `for` a control);
   `data-tc-disables`, `data-tc-follows`, `data-tc-changed`, `data-tc-day`,
   `data-tc-slug-of` and an option's `data-tc-shows` — naming no field of
-  their form; `data-tc-ranges-of` — naming no file field with
-  `data-tc-ranges`; `data-tc-target` and the document's address zone —
+  their form; `data-tc-target` and the document's address zone —
   naming no zone on the page; a submit button of no form (a sheet whose
   body holds a form of its own prints no form of its Action: `Action`,
   `Method`, `Fields` and `Target` of the sheet are dropped, and the button

@@ -491,7 +491,7 @@ func Agenda27() Screen {
 										Width: w.FieldMD,
 									},
 									w.Button{Label: "Cancel"},
-									w.Button{Label: "Save", Kind: w.ButtonPrimary},
+									w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "event-edit"},
 								},
 							},
 						},
@@ -504,31 +504,45 @@ func Agenda27() Screen {
 							Items: []w.FormPart{
 								w.Field{
 									Label: "Summary",
-									Parts: []w.FieldPart{w.Input{Value: "Синк-ап по релизу", Label: "Summary", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Синк-ап по релизу", Label: "Summary", Focus: true}},
 									Width: w.FieldXL,
 								},
 								w.Field{
 									Label: "Location",
-									Parts: []w.FieldPart{w.Input{Value: "Переговорная 2", Label: "Location"}},
+									Parts: []w.FieldPart{w.Input{Name: "location", Value: "Переговорная 2", Label: "Location"}},
 									Width: w.FieldLG,
 								},
-								w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Confirmed"}}, Width: w.FieldSM},
+								w.Field{
+									Label: "Status",
+									Parts: []w.FieldPart{
+										w.Pick{
+											Name:    "status",
+											Options: []w.PickOption{{Value: "confirmed", Label: "Confirmed", On: true}},
+											Label:   "Status",
+										},
+									},
+									Width: w.FieldSM,
+								},
 								w.Field{
 									Label: "Tags",
-									Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Tags"}},
+									Parts: []w.FieldPart{w.Input{Name: "tags", Value: "release, team", Label: "Tags"}},
 									Width: w.FieldMD,
 								},
 								w.Field{
 									Label: "Description",
 									Parts: []w.FieldPart{
-										w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.", Label: "Text"},
+										w.Area{
+											Text:  "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.",
+											Name:  "description",
+											Label: "Text",
+										},
 									},
 									Width: w.FieldFull,
 								},
 								w.FieldSet{
 									Rubric: w.Rubric{Text: "When"},
 									Items: []w.FieldSetPart{
-										w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+										w.Field{Parts: []w.FieldPart{w.Check{Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}}},
 										w.Field{
 											Label: "Start date",
 											Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
@@ -578,7 +592,7 @@ func Agenda27() Screen {
 													},
 													Menu: w.Menu{
 														Items: []w.MenuPart{
-															w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+															w.Input{Kind: w.InputSearch, Name: "time.zone", Placeholder: "Find a zone", Label: "Find a zone"},
 															w.Rubric{Text: "As sent", Form: w.RubricInline},
 															w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 															w.MenuSep{},
@@ -599,8 +613,28 @@ func Agenda27() Screen {
 								w.FieldSet{
 									Rubric: w.Rubric{Text: "Reminders"},
 									Items: []w.FieldSetPart{
-										w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
-										w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+										w.Field{
+											Label: "First",
+											Parts: []w.FieldPart{
+												w.Pick{
+													Name:    "first",
+													Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}},
+													Label:   "First",
+												},
+											},
+											Width: w.FieldMD,
+										},
+										w.Field{
+											Label: "Reminder",
+											Parts: []w.FieldPart{
+												w.Pick{
+													Name:    "reminder",
+													Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+													Label:   "Reminder",
+												},
+											},
+											Width: w.FieldMD,
+										},
 										w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 									},
 								},
@@ -674,7 +708,7 @@ func Agenda27() Screen {
 									Items: []w.FieldSetPart{
 										w.Field{
 											Label: "Link",
-											Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+											Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
 											Width: w.FieldMD,
 										},
 										w.Field{
@@ -746,10 +780,20 @@ func Agenda27() Screen {
 								w.FieldSet{
 									Rubric: w.Rubric{Text: "Repeats"},
 									Items: []w.FieldSetPart{
-										w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Weekly"}}, Width: w.FieldSM},
+										w.Field{
+											Label: "Frequency",
+											Parts: []w.FieldPart{
+												w.Pick{
+													Name:    "frequency",
+													Options: []w.PickOption{{Value: "weekly", Label: "Weekly", On: true}},
+													Label:   "Frequency",
+												},
+											},
+											Width: w.FieldSM,
+										},
 										w.Field{
 											Label: "Every",
-											Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+											Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
 											Width: w.FieldXS,
 										},
 										w.Field{
@@ -772,14 +816,23 @@ func Agenda27() Screen {
 										},
 										w.Field{
 											Label: "Until",
-											Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2027-01-18", Label: "Until", Mono: true}},
+											Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Value: "2027-01-18", Label: "Until", Mono: true}},
 											Width: w.FieldSM,
 										},
-										w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+										w.Field{
+											Label: "Count",
+											Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+											Width: w.FieldXS,
+										},
 										w.Field{
 											Label: "Advanced RRULE",
 											Parts: []w.FieldPart{
-												w.Input{Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270118", Label: "Advanced RRULE", Mono: true},
+												w.Input{
+													Name:        "advanced.rrule",
+													Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270118",
+													Label:       "Advanced RRULE",
+													Mono:        true,
+												},
 												w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
 											},
 											Width: w.FieldXL,
@@ -812,6 +865,8 @@ func Agenda27() Screen {
 									},
 								},
 							},
+							ID:     "event-edit",
+							Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
 						},
 						w.Danger{
 							Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -1804,7 +1859,7 @@ func Agenda3() Screen {
 									Width: w.FieldMD,
 								},
 								w.Button{Label: "Cancel"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "event-edit"},
 							},
 						},
 					},
@@ -1817,31 +1872,45 @@ func Agenda3() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Summary",
-								Parts: []w.FieldPart{w.Input{Value: "Синк-ап по релизу", Label: "Summary", Focus: true}},
+								Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Синк-ап по релизу", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Location",
-								Parts: []w.FieldPart{w.Input{Value: "Переговорная 2", Label: "Location"}},
+								Parts: []w.FieldPart{w.Input{Name: "location", Value: "Переговорная 2", Label: "Location"}},
 								Width: w.FieldLG,
 							},
-							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Confirmed"}}, Width: w.FieldSM},
+							w.Field{
+								Label: "Status",
+								Parts: []w.FieldPart{
+									w.Pick{
+										Name:    "status",
+										Options: []w.PickOption{{Value: "confirmed", Label: "Confirmed", On: true}},
+										Label:   "Status",
+									},
+								},
+								Width: w.FieldSM,
+							},
 							w.Field{
 								Label: "Tags",
-								Parts: []w.FieldPart{w.Input{Value: "release, team", Label: "Tags"}},
+								Parts: []w.FieldPart{w.Input{Name: "tags", Value: "release, team", Label: "Tags"}},
 								Width: w.FieldMD,
 							},
 							w.Field{
 								Label: "Description",
 								Parts: []w.FieldPart{
-									w.Area{Text: "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.", Label: "Text"},
+									w.Area{
+										Text:  "Обсудить оставшиеся блокеры, дату заморозки и кто пишет письмо пользователям.",
+										Name:  "description",
+										Label: "Text",
+									},
 								},
 								Width: w.FieldFull,
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{Parts: []w.FieldPart{w.Check{Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
 										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
@@ -1891,7 +1960,7 @@ func Agenda3() Screen {
 												},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+														w.Input{Kind: w.InputSearch, Name: "time.zone", Placeholder: "Find a zone", Label: "Find a zone"},
 														w.Rubric{Text: "As sent", Form: w.RubricInline},
 														w.MenuItem{Label: "Asia/Yekaterinburg", On: true, Name: "tz", Value: "Asia/Yekaterinburg"},
 														w.MenuSep{},
@@ -1912,8 +1981,28 @@ func Agenda3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Reminders"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
-									w.Field{Label: "Reminder", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "First",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "first",
+												Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}},
+												Label:   "First",
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Reminder",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "reminder",
+												Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+												Label:   "Reminder",
+											},
+										},
+										Width: w.FieldMD,
+									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
@@ -1987,7 +2076,7 @@ func Agenda3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Link",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -2059,10 +2148,20 @@ func Agenda3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Weekly"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "frequency",
+												Options: []w.PickOption{{Value: "weekly", Label: "Weekly", On: true}},
+												Label:   "Frequency",
+											},
+										},
+										Width: w.FieldSM,
+									},
 									w.Field{
 										Label: "Every",
-										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -2085,14 +2184,23 @@ func Agenda3() Screen {
 									},
 									w.Field{
 										Label: "Until",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-12-28", Label: "Until", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Value: "2026-12-28", Label: "Until", Mono: true}},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Count",
+										Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+										Width: w.FieldXS,
+									},
 									w.Field{
 										Label: "Advanced RRULE",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261228", Label: "Advanced RRULE", Mono: true},
+											w.Input{
+												Name:        "advanced.rrule",
+												Placeholder: "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261228",
+												Label:       "Advanced RRULE",
+												Mono:        true,
+											},
 											w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
 										},
 										Width: w.FieldXL,
@@ -2125,6 +2233,8 @@ func Agenda3() Screen {
 								},
 							},
 						},
+						ID:     "event-edit",
+						Action: "/app/calendar/nextcloud/lichnyy/8f1c/edit",
 					},
 					w.Danger{
 						Button: w.Button{Label: "Delete event", Icon: "trash", Kind: w.ButtonDangerSolid},
@@ -2201,7 +2311,7 @@ func Agenda15() Screen {
 									Width: w.FieldMD,
 								},
 								w.Button{Label: "Cancel"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "event-new"},
 							},
 						},
 					},
@@ -2214,21 +2324,39 @@ func Agenda15() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Summary",
-								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Summary", Focus: true}},
+								Parts: []w.FieldPart{w.Input{Name: "summary", Placeholder: "—", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Location",
-								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Location"}},
+								Parts: []w.FieldPart{w.Input{Name: "location", Placeholder: "—", Label: "Location"}},
 								Width: w.FieldLG,
 							},
-							w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "No status"}}, Width: w.FieldSM},
-							w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
-							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
+							w.Field{
+								Label: "Status",
+								Parts: []w.FieldPart{
+									w.Pick{
+										Name:    "status",
+										Options: []w.PickOption{{Value: "no.status", Label: "No status", On: true}},
+										Label:   "Status",
+									},
+								},
+								Width: w.FieldSM,
+							},
+							w.Field{
+								Label: "Tags",
+								Parts: []w.FieldPart{w.Input{Name: "tags", Placeholder: "—", Label: "Tags"}},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label: "Description",
+								Parts: []w.FieldPart{w.Area{Text: "", Name: "description", Label: "Text"}},
+								Width: w.FieldFull,
+							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{Parts: []w.FieldPart{w.Check{Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
 										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-10", Label: "Start date", Mono: true}},
@@ -2275,7 +2403,7 @@ func Agenda15() Screen {
 												Trigger: w.Pick{Value: "Europe/Moscow"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+														w.Input{Kind: w.InputSearch, Name: "time.zone", Placeholder: "Find a zone", Label: "Find a zone"},
 														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
 														w.MenuSep{},
 														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
@@ -2295,7 +2423,17 @@ func Agenda15() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Reminders"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "10 minutes before"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "First",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "first",
+												Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}},
+												Label:   "First",
+											},
+										},
+										Width: w.FieldMD,
+									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
@@ -2332,7 +2470,7 @@ func Agenda15() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Link",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -2389,10 +2527,20 @@ func Agenda15() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "frequency",
+												Options: []w.PickOption{{Value: "does.not.repeat", Label: "Does not repeat", On: true}},
+												Label:   "Frequency",
+											},
+										},
+										Width: w.FieldSM,
+									},
 									w.Field{
 										Label: "Every",
-										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -2415,14 +2563,18 @@ func Agenda15() Screen {
 									},
 									w.Field{
 										Label: "Until",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Label: "Until", Mono: true}},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Count",
+										Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+										Width: w.FieldXS,
+									},
 									w.Field{
 										Label: "Advanced RRULE",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.Input{Name: "advanced.rrule", Placeholder: "—", Label: "Advanced RRULE", Mono: true},
 											w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
 										},
 										Width: w.FieldXL,
@@ -2430,6 +2582,8 @@ func Agenda15() Screen {
 								},
 							},
 						},
+						ID:     "event-new",
+						Action: "/app/calendar/nextcloud/lichnyy/new",
 					},
 				},
 			},

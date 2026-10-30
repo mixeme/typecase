@@ -928,7 +928,7 @@ func Tasks3() Screen {
 									Width: w.FieldMD,
 								},
 								w.Button{Label: "Cancel"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "task-edit"},
 							},
 						},
 					},
@@ -941,36 +941,64 @@ func Tasks3() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Summary",
-								Parts: []w.FieldPart{w.Input{Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
+								Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Отправить документы в МФЦ", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
 							},
 							w.Field{
 								Label: "Description",
-								Parts: []w.FieldPart{w.Area{Text: "Опись, копия паспорта и заявление. Приём до 18:00, окно 4.", Label: "Text"}},
+								Parts: []w.FieldPart{
+									w.Area{
+										Text:  "Опись, копия паспорта и заявление. Приём до 18:00, окно 4.",
+										Name:  "description",
+										Label: "Text",
+									},
+								},
 								Width: w.FieldFull,
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{
+										Parts: []w.FieldPart{w.Check{On: true, Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}},
+									},
 									w.Field{
 										Label: "Start date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputDate, Name: "start.date", Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true},
+										},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true, Disabled: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:        w.InputTime,
+												Name:        "start.time",
+												Placeholder: "--:--",
+												Label:       "Start time",
+												Mono:        true,
+												Disabled:    true,
+											},
+										},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Due date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Value: "2026-08-07", Label: "Due date", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "due.date", Value: "2026-08-07", Label: "Due date", Mono: true}},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Due time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true, Disabled: true}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:        w.InputTime,
+												Name:        "due.time",
+												Placeholder: "--:--",
+												Label:       "Due time",
+												Mono:        true,
+												Disabled:    true,
+											},
+										},
 										Width: w.FieldXS,
 									},
 								},
@@ -978,20 +1006,53 @@ func Tasks3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Progress"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Needs action"}}, Width: w.FieldSM},
-									w.Field{Label: "Priority", Parts: []w.FieldPart{w.Pick{Value: "High · 1"}}, Width: w.FieldSM},
 									w.Field{
-										Label: "Percent complete",
-										Parts: []w.FieldPart{w.Input{Value: "0", Label: "Percent complete", Mono: true}},
+										Label: "Status",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "status",
+												Options: []w.PickOption{{Value: "needs.action", Label: "Needs action", On: true}},
+												Label:   "Status",
+											},
+										},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("Done")}}}},
+									w.Field{
+										Label: "Priority",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "priority",
+												Options: []w.PickOption{{Value: "high.1", Label: "High · 1", On: true}},
+												Label:   "Priority",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Percent complete",
+										Parts: []w.FieldPart{w.Input{Name: "percent.complete", Value: "0", Label: "Percent complete", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "\u00a0",
+										Parts: []w.FieldPart{w.Check{Name: "done", Value: "1", Parts: []w.CheckPart{w.Text("Done")}}},
+									},
 								},
 							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Reminders"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "First", Parts: []w.FieldPart{w.Pick{Value: "1 day before"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "First",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "first",
+												Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+												Label:   "First",
+											},
+										},
+										Width: w.FieldMD,
+									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
 							},
@@ -1028,13 +1089,17 @@ func Tasks3() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Location",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Location"}},
+										Parts: []w.FieldPart{w.Input{Name: "location", Placeholder: "optional", Label: "Location"}},
 										Width: w.FieldMD,
 									},
-									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Value: "дом", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Tags",
+										Parts: []w.FieldPart{w.Input{Name: "tags", Value: "дом", Label: "Tags"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Link",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -1093,10 +1158,20 @@ func Tasks3() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "frequency",
+												Options: []w.PickOption{{Value: "does.not.repeat", Label: "Does not repeat", On: true}},
+												Label:   "Frequency",
+											},
+										},
+										Width: w.FieldSM,
+									},
 									w.Field{
 										Label: "Every",
-										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -1119,14 +1194,18 @@ func Tasks3() Screen {
 									},
 									w.Field{
 										Label: "Until",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Label: "Until", Mono: true}},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Count",
+										Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+										Width: w.FieldXS,
+									},
 									w.Field{
 										Label: "Advanced RRULE",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.Input{Name: "advanced.rrule", Placeholder: "—", Label: "Advanced RRULE", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("The advanced value takes precedence when set. A task repeats from its start date, or from the due date if it has none."),
@@ -1158,6 +1237,8 @@ func Tasks3() Screen {
 								},
 							},
 						},
+						ID:     "task-edit",
+						Action: "/app/tasks/nextcloud/dela/aa10/edit",
 					},
 					w.Danger{Button: w.Button{Label: "Delete task", Icon: "trash", Kind: w.ButtonDangerSolid}},
 				},
@@ -1230,7 +1311,7 @@ func Tasks14() Screen {
 									Width: w.FieldMD,
 								},
 								w.Button{Label: "Cancel"},
-								w.Button{Label: "Save", Kind: w.ButtonPrimary},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "task-new"},
 							},
 						},
 					},
@@ -1243,32 +1324,42 @@ func Tasks14() Screen {
 						Items: []w.FormPart{
 							w.Field{
 								Label: "Summary",
-								Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Summary", Focus: true}},
+								Parts: []w.FieldPart{w.Input{Name: "summary", Placeholder: "—", Label: "Summary", Focus: true}},
 								Width: w.FieldXL,
 							},
-							w.Field{Label: "Description", Parts: []w.FieldPart{w.Area{Text: "", Label: "Text"}}, Width: w.FieldFull},
+							w.Field{
+								Label: "Description",
+								Parts: []w.FieldPart{w.Area{Text: "", Name: "description", Label: "Text"}},
+								Width: w.FieldFull,
+							},
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "When"},
 								Items: []w.FieldSetPart{
-									w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{Parts: []w.FieldPart{w.Check{Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}}},
 									w.Field{
 										Label: "Start date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputDate, Name: "start.date", Placeholder: "YYYY-MM-DD", Label: "Start date", Mono: true},
+										},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Start time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Start time", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputTime, Name: "start.time", Placeholder: "--:--", Label: "Start time", Mono: true},
+										},
 										Width: w.FieldXS,
 									},
 									w.Field{
 										Label: "Due date",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Placeholder: "YYYY-MM-DD", Label: "Due date", Mono: true}},
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputDate, Name: "due.date", Placeholder: "YYYY-MM-DD", Label: "Due date", Mono: true},
+										},
 										Width: w.FieldSM,
 									},
 									w.Field{
 										Label: "Due time",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Placeholder: "--:--", Label: "Due time", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "due.time", Placeholder: "--:--", Label: "Due time", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -1278,7 +1369,7 @@ func Tasks14() Screen {
 												Trigger: w.Pick{Value: "Europe/Moscow"},
 												Menu: w.Menu{
 													Items: []w.MenuPart{
-														w.Input{Kind: w.InputSearch, Placeholder: "Find a zone", Label: "Find a zone"},
+														w.Input{Kind: w.InputSearch, Name: "time.zone", Placeholder: "Find a zone", Label: "Find a zone"},
 														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
 														w.MenuSep{},
 														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
@@ -1298,14 +1389,37 @@ func Tasks14() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Progress"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Needs action"}}, Width: w.FieldSM},
-									w.Field{Label: "Priority", Parts: []w.FieldPart{w.Pick{Value: "No priority"}}, Width: w.FieldSM},
 									w.Field{
-										Label: "Percent complete",
-										Parts: []w.FieldPart{w.Input{Value: "0", Label: "Percent complete", Mono: true}},
+										Label: "Status",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "status",
+												Options: []w.PickOption{{Value: "needs.action", Label: "Needs action", On: true}},
+												Label:   "Status",
+											},
+										},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Text("Done")}}}},
+									w.Field{
+										Label: "Priority",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "priority",
+												Options: []w.PickOption{{Value: "no.priority", Label: "No priority", On: true}},
+												Label:   "Priority",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Percent complete",
+										Parts: []w.FieldPart{w.Input{Name: "percent.complete", Value: "0", Label: "Percent complete", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "\u00a0",
+										Parts: []w.FieldPart{w.Check{Name: "done", Value: "1", Parts: []w.CheckPart{w.Text("Done")}}},
+									},
 								},
 							},
 							w.FieldSet{
@@ -1345,13 +1459,17 @@ func Tasks14() Screen {
 								Items: []w.FieldSetPart{
 									w.Field{
 										Label: "Location",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Location"}},
+										Parts: []w.FieldPart{w.Input{Name: "location", Placeholder: "optional", Label: "Location"}},
 										Width: w.FieldMD,
 									},
-									w.Field{Label: "Tags", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Tags"}}, Width: w.FieldMD},
+									w.Field{
+										Label: "Tags",
+										Parts: []w.FieldPart{w.Input{Name: "tags", Placeholder: "—", Label: "Tags"}},
+										Width: w.FieldMD,
+									},
 									w.Field{
 										Label: "Link",
-										Parts: []w.FieldPart{w.Input{Placeholder: "optional", Label: "Link"}},
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
 										Width: w.FieldMD,
 									},
 									w.Field{
@@ -1408,10 +1526,20 @@ func Tasks14() Screen {
 							w.FieldSet{
 								Rubric: w.Rubric{Text: "Repeats"},
 								Items: []w.FieldSetPart{
-									w.Field{Label: "Frequency", Parts: []w.FieldPart{w.Pick{Value: "Does not repeat"}}, Width: w.FieldSM},
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "frequency",
+												Options: []w.PickOption{{Value: "does.not.repeat", Label: "Does not repeat", On: true}},
+												Label:   "Frequency",
+											},
+										},
+										Width: w.FieldSM,
+									},
 									w.Field{
 										Label: "Every",
-										Parts: []w.FieldPart{w.Input{Value: "1", Label: "Every", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
 										Width: w.FieldXS,
 									},
 									w.Field{
@@ -1434,14 +1562,18 @@ func Tasks14() Screen {
 									},
 									w.Field{
 										Label: "Until",
-										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Label: "Until", Mono: true}},
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Label: "Until", Mono: true}},
 										Width: w.FieldSM,
 									},
-									w.Field{Label: "Count", Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Count"}}, Width: w.FieldXS},
+									w.Field{
+										Label: "Count",
+										Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+										Width: w.FieldXS,
+									},
 									w.Field{
 										Label: "Advanced RRULE",
 										Parts: []w.FieldPart{
-											w.Input{Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.Input{Name: "advanced.rrule", Placeholder: "—", Label: "Advanced RRULE", Mono: true},
 											w.FieldHint{
 												Parts: []w.Inline{
 													w.Text("The advanced value takes precedence when set. A task repeats from its start date, or from the due date if it has none."),
@@ -1453,6 +1585,8 @@ func Tasks14() Screen {
 								},
 							},
 						},
+						ID:     "task-new",
+						Action: "/app/tasks/nextcloud/dela/new",
 					},
 				},
 			},
