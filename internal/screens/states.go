@@ -5324,8 +5324,9 @@ func States31() Screen {
 										},
 									},
 								},
-								ID:     "note-loss",
-								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								ID:        "note-loss",
+								Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								Multipart: true,
 							},
 							w.Docmeta{
 								Sections: []w.DocmetaSec{

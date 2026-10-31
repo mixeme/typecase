@@ -95,7 +95,9 @@ type MenuItem struct {
 	Form string
 	// To makes the item a submit button of the form it stands in, sending
 	// that form to its own address (formaction), as Button.To does: Upload
-	// on a new record keeps what is typed (Carrel's task 122).
+	// on a new record keeps what is typed (Carrel's task 122). With Form it
+	// sends that form, standing outside it: «From Files» in the bar of a new
+	// note (Carrel's task 247).
 	To string
 	// File makes the item a label that picks a file for a PostForm (Carrel's
 	// task 109): «From this computer» opens the choice without a script.
@@ -186,7 +188,7 @@ func (it MenuItem) html(mix) string {
 			s.WriteString(`<a` + cls + attr("href", it.Href) + attr("data-tc-swap", it.Swap) + ` role="menuitem"` + checked + key + `>`)
 		}
 	} else if it.To != "" {
-		s.WriteString(`<button` + cls + ` type="submit"` + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
+		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("formaction", it.To) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else if it.Form != "" {
 		s.WriteString(`<button` + cls + ` type="submit"` + attr("form", it.Form) + attr("name", it.Name) + attr("value", it.Value) + ` role="menuitem"` + key + attr("title", it.Reason) + flag("disabled", it.Reason != "") + `>`)
 	} else {

@@ -1232,6 +1232,7 @@ func Files4() Screen {
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments", One: true},
 									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel/attachments",
 									Swap:   "move-sheet",
+									Trail:  w.TreeNote{Text: "the items are here"},
 								},
 								{
 									Icon:   "file",

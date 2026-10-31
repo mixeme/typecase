@@ -649,7 +649,7 @@ func multipart(form string) string {
 	field, open := `<input class="tc-file" type="file"`, `" method="post"`
 	end := strings.Index(form, ">")
 	at := strings.Index(form[:end+1], open)
-	if !strings.HasPrefix(form, "<form") || at < 0 {
+	if !strings.HasPrefix(form, "<form") || at < 0 || strings.Contains(form[:end], ` enctype="`) {
 		return form
 	}
 	for rest := form; ; {

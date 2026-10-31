@@ -1323,6 +1323,9 @@ func (g *gen) doc(e *El) string {
 		if len(hidden) > 0 {
 			f = append(f, "Fields: "+hiddens(hidden))
 		}
+		if e.Attr("enctype") == "multipart/form-data" {
+			f = append(f, "Multipart: true")
+		}
 	}
 	return "w.Doc{" + join(f, ", ") + "}"
 }

@@ -87,12 +87,14 @@ func TestCheck(t *testing.T) {
 // TestCheckNamesOfFields (review findings 7 and 10): the other names a part
 // gives — the fields a change brings a question for, the day a time carries
 // over, the field a hint says, the elements a form recounts — hold; a submit
-// button of no form is told so.
+// button of no form is told so. A stream line's data-tc-changed is the name
+// of its event, not of a field (Carrel's task 247).
 func TestCheckNamesOfFields(t *testing.T) {
 	const wrong = `<!doctype html><body>
 <form action="/c"><input name="url"><div class="tc-field" data-tc-changed="login" hidden></div>
 <input type="time" name="end" data-tc-day="end.dat"><span data-tc-slug-of="adress"></span></form>
 <form action="/a" data-tc-recount="attach-lin"><select name="x"></select></form>
+<div class="tc-runbar" data-tc-stream="/poll/events" data-tc-changed="poll" data-tc-ended="done"></div>
 <div class="tc-sheet"><button class="tc-btn" type="submit">Send</button><button class="tc-btn" type="button">Cancel</button></div>
 <template><button>Add</button></template></body>`
 	got, err := page.Check(wrong)
@@ -118,5 +120,15 @@ func TestCheckNamesOfFields(t *testing.T) {
 	right = strings.Replace(right, `<select name="x">`, `<select name="x" id="x">`, 1)
 	if got, err := page.Check(right); err != nil || len(got) > 0 {
 		t.Errorf("the same page put together right: %v %v", got, err)
+	}
+}
+
+// TestCheckMenuToOf: Carrel's task 247 — an item of a menu outside a form,
+// sending that form to its own address, submits it.
+func TestCheckMenuToOf(t *testing.T) {
+	menu := w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "From Files", To: "/choose", Form: "note-new"}}}.Render()
+	got, err := page.Check(`<!doctype html><body>` + menu + `<form id="note-new" action="/save" method="post"></form></body>`)
+	if err != nil || len(got) > 0 {
+		t.Errorf("an item naming its form: %v %v", got, err)
 	}
 }

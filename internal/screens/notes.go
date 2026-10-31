@@ -1440,8 +1440,9 @@ func Notes20() Screen {
 										},
 									},
 								},
-								ID:     "note-edit",
-								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								ID:        "note-edit",
+								Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								Multipart: true,
 							},
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
@@ -1667,8 +1668,9 @@ func Notes30() Screen {
 									},
 									w.Area{Text: "", Variant: w.AreaBody, Name: "description", Label: "Text"},
 								},
-								ID:     "note-new",
-								Action: "/app/notes/nextcloud/zapisi/new",
+								ID:        "note-new",
+								Action:    "/app/notes/nextcloud/zapisi/new",
+								Multipart: true,
 							},
 							w.Docmeta{
 								Sections: []w.DocmetaSec{
@@ -1885,8 +1887,9 @@ func Notes4() Screen {
 										},
 									},
 								},
-								ID:     "note-edit",
-								Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								ID:        "note-edit",
+								Action:    "/app/notes/nextcloud/zapisi/9e31-40b7-c012",
+								Multipart: true,
 							},
 						},
 						View: w.DocViewFocus,

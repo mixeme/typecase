@@ -326,7 +326,7 @@ func (DocCode) docPart()    {}
 // Doc — tc-doc
 //
 // Роль. Документ: текст для чтения или в правке — заголовок, текст, дела, вложения.
-// Вход. Doc{Items, Text, Action, Method, Fields, ID}.
+// Вход. Doc{Items, Text, Action, Method, Fields, ID, Multipart}.
 // Состояния. read | edit | public | text | phone | table.
 // Инварианты. Заголовок — первым; дела — галки, а не строки текста с квадратными скобками; документ печатает фрагмент своего кадра.
 // Поведение. Галка дела в тексте — знак (Tick.Sign): дело отмечают в правке; над таблицей в узком контейнере переключатель «Wrap / One line» держит строки таблицы в одну линию.
@@ -344,6 +344,10 @@ type Doc struct {
 	Method string
 	Fields []Hidden
 	ID     string
+	// Multipart makes the form send files that fields outside it pick for
+	// it (FileField.Form): Attach in a note's edit bar and column (Carrel's
+	// task 249). A file field inside the document makes it so by itself.
+	Multipart bool
 }
 
 // Render prints the document.
@@ -354,7 +358,7 @@ func (d Doc) html(m mix) string {
 	tag := "div"
 	if d.Action != "" {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `">`)
+		s.WriteString(`<form` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `"` + attr("enctype", pick(d.Multipart, "multipart/form-data")) + `>`)
 		for _, h := range d.Fields {
 			s.WriteString(h.html(nil))
 		}

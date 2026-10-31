@@ -34,3 +34,19 @@ func TestMenuRadioRequired(t *testing.T) {
 		t.Errorf("a radio without Required is required:\n%s", m)
 	}
 }
+
+// TestMenuToOf: an item sending a form to its own address names that form
+// when it stands outside it (Carrel's task 247); without Form it sends the
+// form it stands in.
+func TestMenuToOf(t *testing.T) {
+	m := Menu{Items: []MenuPart{
+		MenuItem{Label: "From Files", To: "/choose", Form: "note-new"},
+		MenuItem{Label: "Upload", To: "/upload"},
+	}}.Render()
+	if !strings.Contains(m, `type="submit" form="note-new" formaction="/choose" role="menuitem">`) {
+		t.Errorf("the item does not name its form:\n%s", m)
+	}
+	if !strings.Contains(m, `type="submit" formaction="/upload" role="menuitem">`) {
+		t.Errorf("an item without Form names a form:\n%s", m)
+	}
+}

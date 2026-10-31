@@ -8450,7 +8450,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-runbar" data-tc-progress="note-edit" hidden><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="0%"></i></span>Saving · <span class="tc-mono">0 of 0 MB</span></div>
         <div class="tc-doc__layout">
-          <form class="tc-doc" id="note-edit" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post">
+          <form class="tc-doc" id="note-edit" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post" enctype="multipart/form-data">
             <textarea class="tc-in tc-in--title" name="summary">Заметка со встречи 10.08</textarea>
             <div class="tc-doc__fields">
               <div class="tc-field tc-field--fix150"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-10" name="dtstart.date" aria-label="Date"></div>
@@ -8544,7 +8544,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-runbar" data-tc-progress="note-new" hidden><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="0%"></i></span>Saving · <span class="tc-mono">0 of 0 MB</span></div>
         <div class="tc-doc__layout">
-          <form class="tc-doc" id="note-new" action="/app/notes/nextcloud/zapisi/new" method="post">
+          <form class="tc-doc" id="note-new" action="/app/notes/nextcloud/zapisi/new" method="post" enctype="multipart/form-data">
             <textarea class="tc-in is-focus tc-in--title" name="summary"></textarea>
             <div class="tc-doc__fields">
               <div class="tc-field tc-field--fix150"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-10" name="dtstart.date" aria-label="Date"></div>
@@ -8711,7 +8711,7 @@ Read  2 min ago</div>
           </span>
         </div>
         <div class="tc-doc__layout is-focus">
-          <form class="tc-doc" id="note-edit" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post">
+          <form class="tc-doc" id="note-edit" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post" enctype="multipart/form-data">
             <textarea class="tc-in is-focus tc-in--title" name="summary">Заметка со встречи 10.08</textarea>
             <div class="tc-doc__fields">
               <div class="tc-field tc-field--fix150"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-10" name="dtstart.date" aria-label="Date"></div>
@@ -10073,7 +10073,7 @@ Read  2 min ago</div>
           <div class="tc-tree">
         <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>Documents</label>
         <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>carrel</label>
-        <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>attachments</label>
+        <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">the items are here</span></label>
         <label class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" checked data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=copy&amp;to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="copy-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
         <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
       </div>
@@ -10114,7 +10114,7 @@ Read  2 min ago</div>
           <div class="tc-tree">
             <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>Documents</label>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>carrel</label>
-            <label class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>attachments</label>
+            <label class="is-on tc-tree__row tc-tree__row--padl40" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" checked data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">the items are here</span></label>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl58"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
@@ -10151,7 +10151,7 @@ Read  2 min ago</div>
       </form>
     </div>
   </div>
-  <figcaption><b>Лист открывается с папкой, где вещи лежат, выбранной</b> (задача 158): отсюда «New folder» заводит папку рядом и сразу выбирает её. Целью эта папка быть не может, и об этом сказано дважды — пометкой у самой папки и причиной у выключенной «Move» (правило владельца 09.10: чего нельзя сделать, то выключено). Отметить её можно: она остаётся местом для новой папки. Выбор другой папки включает «Move». <b>Без сценариев</b> у листа есть вторая кнопка формы, «Open the folder» (на странице со сценарием её нет): отметил папку, нажал — сервер отвечает тем же листом с этой папкой выбранной и раскрытой, и «Move» стоит так, как для неё положено. Со сценарием то же делает выбор узла.</figcaption>
+  <figcaption><b>Лист открывается с папкой, где вещи лежат, выбранной</b> (задача 158): отсюда «New folder» заводит папку рядом и сразу выбирает её. Целью эта папка быть не может, и об этом сказано дважды — пометкой у самой папки и причиной у выключенной «Move» (правило владельца 09.10: чего нельзя сделать, то выключено). Отметить её можно: она остаётся местом для новой папки. Пометка стоит у неё всегда — и когда выбрана другая папка, и в листе копирования (решение владельца 31.10, задача 248). Выбор другой папки включает «Move». <b>Без сценариев</b> у листа есть вторая кнопка формы, «Open the folder» (на странице со сценарием её нет): отметил папку, нажал — сервер отвечает тем же листом с этой папкой выбранной и раскрытой, и «Move» стоит так, как для неё положено. Со сценарием то же делает выбор узла.</figcaption>
   </figure>
 
 <figure style="flex:1 1 330px">
@@ -10647,7 +10647,7 @@ Read  2 min ago</div>
               <div class="tc-tree">
             <label class="tc-tree__row"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>Documents</label>
             <label data-part="children" class="tc-tree__row tc-tree__row--padl22"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>carrel</label>
-            <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>attachments</label>
+            <label data-part="children" class="tc-tree__row tc-tree__row--padl40"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments" data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>attachments <span class="tc-tickrow__meta tc-push tc-tickrow__meta--dusty">the items are here</span></label>
             <label class="is-on tc-tree__row tc-tree__row--padl58" data-part="children"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/documents/carrel/attachments/2026-07" checked data-tc-href="/app/files/sftpgo/documents/op/carrel/attachments?op=move&amp;to=sftpgo/documents/carrel/attachments/2026-07" data-tc-swap="move-sheet"><svg><use href="#i-file"/></svg>2026-07</label>
             <label class="tc-tree__row tc-tree__row--op-55"><input class="tc-tree__box" type="radio" name="to" value="sftpgo/public" disabled><svg><use href="#i-file"/></svg>Public <span class="tc-badge tc-push">read-only</span></label>
           </div>
@@ -30852,7 +30852,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-runbar" data-tc-progress="note-loss" hidden><span class="tc-meter"><i class="tc-meter__bar" data-tc-width="0%"></i></span>Saving · <span class="tc-mono">0 of 0 MB</span></div>
         <div class="tc-msg tc-msg--flush-top2"><b>The change was saved, but the server did not keep these properties.</b> Other clients will not see them either: <span class="tc-mono">X-EVOLUTION-MEMO-COLOR</span>, <span class="tc-mono">X-CARREL-UNKNOWN-FLAG</span>.</div>
         <div class="tc-doc__layout">
-          <form class="tc-doc" id="note-loss" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post">
+          <form class="tc-doc" id="note-loss" action="/app/notes/nextcloud/zapisi/9e31-40b7-c012" method="post" enctype="multipart/form-data">
             <textarea class="tc-in tc-in--title" name="summary">Заметка со встречи 10.08</textarea>
             <div class="tc-doc__fields">
               <div class="tc-field tc-field--fix150"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-10" name="dtstart.date" aria-label="Date"></div>

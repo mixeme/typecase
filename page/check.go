@@ -100,6 +100,16 @@ func (c *checker) walk(n *html.Node, inTemplate bool) {
 	}
 }
 
+func hasClass(n *html.Node, name string) bool {
+	cl, _ := attrOf(n, "class")
+	for _, f := range strings.Fields(cl) {
+		if f == name {
+			return true
+		}
+	}
+	return false
+}
+
 func by(n *html.Node) string {
 	s := n.Data
 	if cl, ok := attrOf(n, "class"); ok {
@@ -276,6 +286,11 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 		if !ok || (key == "data-tc-shows" && n.Data == "input") {
 			continue
 		}
+		// a field's data-tc-changed names the fields a change brings it for;
+		// a line's that follows a stream (Runbar) names the stream's event
+		if key == "data-tc-changed" && !hasClass(n, "tc-field") {
+			continue
+		}
 		scope := n
 		if n.Data == "option" {
 			for scope = n.Parent; scope != nil && scope.Data != "select"; scope = scope.Parent {
@@ -300,6 +315,19 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 	// data-tc-ranges-of names the file a field kept a step before, on a
 	// page the zone's answer replaced: it stands on no page of its own form
 	// (s-backup-20 after s-backup-16), and is not checked
+	// a file field's form sends multipart, or a browser sends only the
+	// file's name (Carrel's task 249): the field may stand outside it
+	if t, _ := attrOf(n, "type"); n.Data == "input" && t == "file" && !inTemplate {
+		if f := c.formOf(n); f != nil {
+			if e, _ := attrOf(f, "enctype"); e != "multipart/form-data" {
+				if id, outside := attrOf(n, "form"); outside {
+					c.add(n, "form", id, "names a form that sends no files: only the file's name goes")
+				} else {
+					c.add(n, "type", "file", "stands in a form that sends no files: only the file's name goes")
+				}
+			}
+		}
+	}
 	// a submit button of no form does nothing when pressed: a sheet whose
 	// body holds a form of its own prints no form of its Action
 	if submits(n) && !inTemplate && c.formOf(n) == nil {

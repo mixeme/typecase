@@ -230,6 +230,13 @@ do, not what the authors did.
 - **`PickOption.Disables`** — an option of a pick switches fields of its
   form off while it is chosen (`data-tc-disables` on an option; Carrel's
   task 218): «None — up to 16 MB» and the folder for a large archive.
+- **`Doc.Multipart`** — an edit's document sends the files that fields
+  outside it pick for it (`FileField.Form`): Attach in a note's edit bar
+  and column (Carrel's task 249). A file field inside makes it so by
+  itself.
+- **`MenuItem.To` with `Form`** sends that form from outside it, as
+  `Button.To` with `Form` does: «From Files» in a new note's bar
+  (Carrel's task 247).
 - **`PostForm.Multipart`** — a post form sends multipart without a file
   field of its own: the answer to a taken name (Carrel's task 218).
 - `Dialog` with a file field among its parts sends multipart, as `Form`,
@@ -372,10 +379,13 @@ do, not what the authors did.
   `data-tc-swap`, `data-tc-recount` and the other ids a part gives — naming
   nothing, or the wrong thing (`data-tc-drop` and `data-tc-paste` want a
   form with a file field, `data-tc-add` a template, `for` a control);
-  `data-tc-disables`, `data-tc-follows`, `data-tc-changed`, `data-tc-day`,
+  `data-tc-disables`, `data-tc-follows`, a field's `data-tc-changed`
+  (a stream line's is the name of its event), `data-tc-day`,
   `data-tc-slug-of` and an option's `data-tc-shows` — naming no field of
   their form; `data-tc-target` and the document's address zone —
-  naming no zone on the page; a submit button of no form (a sheet whose
+  naming no zone on the page; a file field whose form, around it or named,
+  does not send multipart — a browser sends the file's name only; a
+  submit button of no form (a sheet whose
   body holds a form of its own prints no form of its Action: `Action`,
   `Method`, `Fields` and `Target` of the sheet are dropped, and the button
   does nothing). Names with «{n}» are the template's and are left. Such
@@ -1968,6 +1978,9 @@ do, not what the authors did.
   one, with the note «the items are here»; it can be ticked, for «New
   folder» makes a folder in it; Move is disabled with its reason beside it,
   «These items are already here.» (the owner's rule of 09.10). 430 frames.
+  The note stands at that folder always — with another folder chosen and
+  in the copy sheet too (the owner's decision of 31.10, Carrel's task 248):
+  `s-files-4`, `-11`, `-13`.
 - **A tree's folder opens without a script** (Carrel's task 158): the
   sheets whose tree chooses a folder have a second button of their form,
   «Open the folder» (`Button.NoScript`, `name="open"`), which only a page
