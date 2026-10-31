@@ -156,6 +156,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-head__titles{min-width:0}
 .tc-bar{display:flex;align-items:center;gap:10px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-rule);
   position:relative}
+/* Фильтр и диапазон дат не прячутся под «...» (хронология человека): где обоим не хватает места, полоса переносится (Р-65). */
+.tc-bar:has(> .tc-in):has(> .tc-range){flex-wrap:wrap}
 .tc-bar__right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--tc-dusty)}
 /* Правая группа не переносит подписи: «Draft in this window · 11:42» в две строки наезжал на Auto-save. Лишнее уходит по порогу, а не сжатием. */
 .tc-bar__right > *{white-space:nowrap;flex:none}
@@ -174,7 +176,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
 .tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
 .tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}
-.tc-range{display:flex;align-items:center;gap:8px;flex:none}
+.tc-range{display:flex;align-items:center;gap:8px;flex:none;max-width:100%;flex-wrap:wrap}
 .tc-range__dash{font-style:normal;color:var(--tc-dusty)}
 /* native controls: zero specificity */
 :where(.tc-root) :where(button,input,textarea,select,form){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}

@@ -2665,6 +2665,12 @@ func Contacts7() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Waiting: true,
+								Action:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+								Variant: w.FilterH26W200,
+							},
 							w.Range{
 								From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-01-01", Label: "From", Mono: true},
 								To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-10", Label: "To", Mono: true},
@@ -2721,11 +2727,7 @@ func Contacts7() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 83, Alert: true},
 						Parts: []w.RunbarPart{
-							w.Text("Polled 5 of 6 calendars · matched by "),
-							w.Mono{Text: "a.kovaleva@example.org"},
-							w.Text(", "),
-							w.Mono{Text: "anna.kovaleva@slovo.example"},
-							w.Text(" and the name · "),
+							w.Text("Polled 5 of 6 calendars · "),
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{

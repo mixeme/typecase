@@ -1016,6 +1016,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A person's timeline filters by word** (Р-63: a filter by name does not
+  care which record): «Filter by word» first in its bar, as in the agenda
+  (`s-contacts-7`). A bar with a filter and a date range wraps where both
+  do not fit — neither goes under «⋯» (`.tc-bar:has(> .tc-in):has(>
+  .tc-range)`, Р-65): at 1191, beside the card, the range goes to a
+  second line.
+  Its poll bar says what was polled, what failed and when — no «matched by»
+  with the card's addresses (Р-77: the column «why» names the field of each
+  row); `s-mailbox-21` too.
+- **Print in every list's head** (Р-63: printing does not care which
+  record): the notes list had New note, Import and Export only —
+  `s-notes-1`, `-31`, `-33`, `states-25`…`-29`, `phone-8`, `-9`; the lists
+  under an import drop and the dark list too (`s-io-1`, `-2`, `dark-2`).
 - **The 580 column holds in every frame of a screen** (Carrel's task 246,
   Р-82): a field's hint and a message stand in it on the page, in a dialog
   and in a side panel, never in a card or a sheet — 25 frames brought to
@@ -2117,6 +2130,11 @@ do, not what the authors did.
 
 ### Fixed
 
+- A date range (`Range`, `.tc-range`) is never wider than its place: where
+  it does not fit, Show wraps under the fields (Р-65; `components-18` cut
+  its button by 1 px at 390). `Range.Wrap` is not needed for that any more.
+  Its sample and `s-mailbox-21` end on a date, as `s-contacts-7` does — not
+  on a text field «today» as wide as a date.
 - A `Dialog` with an `Action` keeps its form when a `PostForm` is one of
   its parts (a footer button's hidden form, as Sign out): that form is
   printed after the dialog's, not in it. Before, the dialog was printed

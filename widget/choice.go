@@ -346,7 +346,7 @@ type Range struct {
 	From      Input
 	To        Input
 	Show      Button
-	Wrap      bool // the range wraps inside a narrow menu
+	Wrap      bool // the range wraps inside a narrow menu; every range wraps where it does not fit (Р-65)
 	Secondary bool
 	Action    string // the range is a form that sends From and To there (GET)
 	// Hidden are the list's other choices that go with it: view=range

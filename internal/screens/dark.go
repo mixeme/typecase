@@ -290,6 +290,7 @@ func Dark2() Screen {
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
 									w.Button{Label: "Import", Icon: "import"},
 									w.Button{Label: "Export", Icon: "export"},
+									w.Button{Label: "Print", Icon: "print"},
 								},
 							},
 						},

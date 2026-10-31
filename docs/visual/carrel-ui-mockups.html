@@ -337,6 +337,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-head__titles{min-width:0}
 .tc-bar{display:flex;align-items:center;gap:10px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-rule);
   position:relative}
+/* Фильтр и диапазон дат не прячутся под «...» (хронология человека): где обоим не хватает места, полоса переносится (Р-65). */
+.tc-bar:has(> .tc-in):has(> .tc-range){flex-wrap:wrap}
 .tc-bar__right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--tc-dusty)}
 /* Правая группа не переносит подписи: «Draft in this window · 11:42» в две строки наезжал на Auto-save. Лишнее уходит по порогу, а не сжатием. */
 .tc-bar__right > *{white-space:nowrap;flex:none}
@@ -355,7 +357,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
 .tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
 .tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}
-.tc-range{display:flex;align-items:center;gap:8px;flex:none}
+.tc-range{display:flex;align-items:center;gap:8px;flex:none;max-width:100%;flex-wrap:wrap}
 .tc-range__dash{font-style:normal;color:var(--tc-dusty)}
 /* native controls: zero specificity */
 :where(.tc-root) :where(button,input,textarea,select,form){margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-align:inherit;text-transform:inherit;min-width:0;min-height:0}
@@ -2642,7 +2644,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 <div class="frame" data-frame="components-18">
   <div class="frame-label"><span>Диапазон дат</span><span class="frag">компонент</span><i>от — до, Show</i></div>
   <div class="tc-root tc-root--on-surface tc-root--pad10-14 tc-root--wrap">
-  <span class="tc-range"><input class="tc-in is-mono" type="date" value="2026-01-01"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="text" value="today"><button class="tc-btn" type="button">Show</button></span>
+  <span class="tc-range"><input class="tc-in is-mono" type="date" value="2026-01-01"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-11-10"><button class="tc-btn" type="button">Show</button></span>
 </div>
 </div>
 </figure>
@@ -4903,13 +4905,14 @@ Read  2 min ago · not changed on server</div>
           </div>
         </div>
         <div class="tc-bar tc-bar--wide">
+          <form class="tc-in is-ph tc-in--h26-w200" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline" method="get"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" name="filter" placeholder="Filter by word" aria-label="Filter by word"></form>
           <form class="tc-range" action="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline" method="get"><input class="tc-in is-mono" type="date" value="2026-01-01" name="from" aria-label="From"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-11-10" name="to" aria-label="To"><button class="tc-btn" type="submit">Show</button></form>
           <span class="tc-segfold"><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All 23</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events 14</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks 2</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes 4</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files 3</a></span><details class="tc-segfold__pick"><summary class="tc-segfold__current">All 23</summary><div class="tc-segfold__menu"><a class="is-on tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All<span class="tc-segfold__count">23</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events<span class="tc-segfold__count">14</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks<span class="tc-segfold__count">2</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes<span class="tc-segfold__count">4</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files<span class="tc-segfold__count">3</span></a></div></details></span>
           <button class="tc-btn is-2nd" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <details class="tc-drop"><summary class="tc-btn tc-bar__more" title="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></summary><span class="tc-menu is-pop is-right" role="menu"><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-cols"/></svg>Columns</button></span></details>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">newest first</span></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="83%"></i></span>Polled 5 of 6 calendars · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> and the name · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">2 min ago</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="83%"></i></span>Polled 5 of 6 calendars · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#9A9280"></span><span class="tc-menu__what"><span class="tc-menu__source">baikal · Общий</span><span class="tc-menu__answer">PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">2 min ago</span></div>
 
         <div class="tc-list__group"><span class="tc-rubric">August 2026</span><span class="tc-num">2</span></div>
         <div class="tc-list">
@@ -7594,7 +7597,7 @@ SEQUENCE  1</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 3 notes · VJOURNAL</div></div>
-          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -7727,7 +7730,7 @@ SEQUENCE  1</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 3 notes · VJOURNAL</div></div>
-          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -7840,7 +7843,7 @@ SEQUENCE  1</div>
       <div class="tc-main">
         <div class="tc-head">
           <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark tc-mark--h20" data-tc-colour="#4A6B52"></span>Записи</div><div class="tc-head__sub">nextcloud · 2 notes · VJOURNAL</div></div>
-          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+          <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
         </div>
         <div class="tc-bar">
           <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -12905,6 +12908,7 @@ dav: HTTP 503: the server is busy</div>
               <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New contact<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button>
+              <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
             </div>
           </div>
           <div class="tc-bar">
@@ -13027,6 +13031,7 @@ dav: HTTP 503: the server is busy</div>
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New event</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button>
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button>
+            <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
           </div>
         </div>
         <div class="tc-list__group"><span class="tc-rubric">Monday · 10 August</span><span class="tc-num">4</span></div>
@@ -27839,13 +27844,13 @@ DATA                → 550 5.7.1 Daily sending limit reached
           </div>
         </div>
         <div class="tc-bar tc-bar--wide">
-          <span class="tc-range"><input class="tc-in is-mono" type="date" value="2026-01-01"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="text" value="today"><button class="tc-btn" type="button">Show</button></span>
+          <span class="tc-range"><input class="tc-in is-mono" type="date" value="2026-01-01"><i class="tc-range__dash">→</i><input class="tc-in is-mono" type="date" value="2026-11-10"><button class="tc-btn" type="button">Show</button></span>
           <span class="tc-segfold"><span class="tc-seg"><a class="is-on tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All 30</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events 14</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks 2</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes 4</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files 4</a><a class="tc-seg__opt" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=mail">Mail 6</a></span><details class="tc-segfold__pick"><summary class="tc-segfold__current">All 30</summary><div class="tc-segfold__menu"><a class="is-on tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline">All<span class="tc-segfold__count">30</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event">Events<span class="tc-segfold__count">14</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task">Tasks<span class="tc-segfold__count">2</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note">Notes<span class="tc-segfold__count">4</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file">Files<span class="tc-segfold__count">4</span></a><a class="tc-segfold__item" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=mail">Mail<span class="tc-segfold__count">6</span></a></div></details></span>
           <button class="tc-btn is-2nd" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns</button>
           <button class="tc-btn tc-bar__more" title="More" type="button"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button>
           <span class="tc-bar__right is-2nd"><span class="tc-mono">newest first</span></span>
         </div>
-        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="80%"></i></span>Polled 4 calendars and 3 of 4 mail folders · matched by <span class="tc-mono">a.kovaleva@example.org</span>, <span class="tc-mono">anna.kovaleva@slovo.example</span> · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span><span class="tc-menu__what"><span class="tc-menu__source">office · Inbox</span><span class="tc-menu__answer">IMAP mail.office.example → no answer in 8 s</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">2 min ago</span></div>
+        <div class="tc-runbar"><span class="tc-meter"><i class="tc-meter__bar tc-meter__bar--alert" data-tc-width="80%"></i></span>Polled 4 calendars and 3 of 4 mail folders · <details class="tc-drop"><summary class="tc-btn is-sm is-danger">1 failed<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w420"><div class="tc-menu__refusal"><span class="tc-mark tc-mark--h11" data-tc-colour="#3F6E8C"></span><span class="tc-menu__what"><span class="tc-menu__source">office · Inbox</span><span class="tc-menu__answer">IMAP mail.office.example → no answer in 8 s</span></span><button class="tc-btn is-sm" type="button">Retry</button></div></div></details><span class="tc-mono tc-push">2 min ago</span></div>
 
         <div class="tc-list__group"><span class="tc-rubric">September 2026</span><span class="tc-num">4</span></div>
         <div class="tc-list">
@@ -30418,7 +30423,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">0 of 3 notebooks · 0 accounts</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-empty"><b>No notebooks are ticked.</b> Tick the notebooks to show in the rail, or all of them at once. <button class="tc-btn is-primary" type="button">Tick every notebook</button></div>
         </div>
@@ -30476,7 +30481,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · VJOURNAL</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -30559,7 +30564,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 2 notes · VJOURNAL</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -30643,7 +30648,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark tc-mark--h20" data-tc-colour="#6B4E7A"></span>Дневник</div><div class="tc-head__sub">nextcloud · 0 notes · VJOURNAL</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-empty"><b>This notebook is empty.</b> Write a note, or import a file of them. <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button> <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button></div>
         </div>
@@ -30701,7 +30706,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark tc-mark--h20" data-tc-colour="#4A6B52"></span>Записи</div><div class="tc-head__sub">nextcloud</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-msg is-alert"><b>Записи is unavailable.</b> The server did not answer as expected, so nothing on this screen comes from it. <button class="tc-btn is-sm" type="button">Try again</button></div>
           <div class="tc-main__diag"><div class="tc-diag">REPORT /remote.php/dav/calendars/mix/zapisi/
@@ -31403,6 +31408,7 @@ dav: HTTP 503: the server is busy</div></div>
               <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New contact<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button>
               <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button>
+              <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button>
             </div>
           </div>
           <div class="tc-bar">
@@ -31958,7 +31964,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 3 notes · VJOURNAL</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-bar">
             <label class="tc-in is-ph tc-in--h26-w200"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"></label>
@@ -32044,7 +32050,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-main">
           <div class="tc-head">
             <div class="tc-head__titles"><div class="tc-head__title"><span class="tc-mark is-multi tc-mark--h20"></span>Combined notebook</div><div class="tc-head__sub">2 of 3 notebooks · 3 notes · VJOURNAL</div></div>
-            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button></div>
+            <div class="tc-acts"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-import"/></svg>Import</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-export"/></svg>Export</button><button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-print"/></svg>Print</button></div>
           </div>
           <div class="tc-list__group"><span class="tc-rubric">August 2026</span><span class="tc-num">3</span></div>
           <div class="tc-list">
