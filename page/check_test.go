@@ -132,3 +132,21 @@ func TestCheckMenuToOf(t *testing.T) {
 		t.Errorf("an item naming its form: %v %v", got, err)
 	}
 }
+
+// TestCheckDialogPostForm (review 31.10): a dialog that is a form keeps its
+// form when a footer button's hidden form is one of its parts — that form
+// stands after the dialog's, not in it, and both buttons send.
+func TestCheckDialogPostForm(t *testing.T) {
+	d := w.Dialog{Action: "/login", Items: []w.DialogPart{
+		w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Label: "Name"}}},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Sign in", Kind: w.ButtonPrimary, Submit: true}, w.Button{Label: "Sign out", Form: "post-signout"}}},
+		w.PostForm{ID: "post-signout", Action: "/logout"},
+	}}.Render()
+	if !strings.HasPrefix(d, `<form class="tc-dialog" action="/login"`) {
+		t.Errorf("the dialog lost its form:\n%s", d)
+	}
+	got, err := page.Check(`<!doctype html><body>` + d + `</body>`)
+	if err != nil || len(got) > 0 {
+		t.Errorf("a dialog with a hidden form: %v %v", got, err)
+	}
+}

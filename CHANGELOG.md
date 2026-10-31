@@ -2117,6 +2117,10 @@ do, not what the authors did.
 
 ### Fixed
 
+- A `Dialog` with an `Action` keeps its form when a `PostForm` is one of
+  its parts (a footer button's hidden form, as Sign out): that form is
+  printed after the dialog's, not in it. Before, the dialog was printed
+  plain and its own fields went nowhere.
 - A `Busy` button comes back — its words, on, not busy — when the live
   layer puts the answer in a zone and the form stays; sent again the plain
   way it keeps its own words; a `Folds` or `Bold` label says the busy words

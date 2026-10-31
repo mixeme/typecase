@@ -314,7 +314,8 @@ func (c *checker) names(n *html.Node, inTemplate bool) {
 	}
 	// data-tc-ranges-of names the file a field kept a step before, on a
 	// page the zone's answer replaced: it stands on no page of its own form
-	// (s-backup-20 after s-backup-16), and is not checked
+	// (s-backup-20 after s-backup-16), and is not checked.
+
 	// a file field's form sends multipart, or a browser sends only the
 	// file's name (Carrel's task 249): the field may stand outside it
 	if t, _ := attrOf(n, "type"); n.Data == "input" && t == "file" && !inTemplate {

@@ -207,8 +207,14 @@ func (d Dialog) Render() string { return d.html(nil) }
 
 func (d Dialog) html(m mix) string {
 	var s strings.Builder
-	var body strings.Builder
+	var body, posts strings.Builder
 	for _, it := range d.Items {
+		// a footer button's hidden form stands after the dialog's own form,
+		// not in it: a form holds no form
+		if f, ok := it.(PostForm); ok && d.Action != "" {
+			posts.WriteString(f.html(nil))
+			continue
+		}
 		body.WriteString(it.html(nil))
 	}
 	// A form holds no form: a dialog one of whose parts is a form of its
@@ -227,7 +233,7 @@ func (d Dialog) html(m mix) string {
 	s.WriteString(`</` + tag + `>`)
 	// a file field among its parts: the form sends multipart (Carrel's
 	// task 218: the archive of a restore from this computer)
-	return multipart(s.String())
+	return multipart(s.String()) + posts.String()
 }
 
 func (Dialog) mainPart() {}
