@@ -1016,6 +1016,22 @@ do, not what the authors did.
 
 ### Mockup
 
+- **On a phone a table is cards with its main column** (Р-66), the first
+  group, accepted by the owner: users with Role (`s-admin-2`, `-22`, `-24`,
+  `-34`), files with Changed (`s-files-1`, `-2`, `-4`, `states-34`,
+  `s-publish-5`, `-12`, `-30`…`-32`, `s-mail-6`, `-13`), connections with
+  Changed on the server (`s-profile-1` and its family; What is in it in
+  `s-profile-7`…`-9`), devices with What it can see and do (`s-davloom-1`,
+  `-7`…`-9`). A card's first line is the name — the cell with a file, or
+  the first one not empty and not a tick — and the row's last button,
+  «⋯»; a row with one button and no «⋯» (Revoke) keeps it. Declare the
+  column with `TableCol.Main`.
+  On a phone the floating upload queue stands under the list, not over its
+  last row (`s-files-2`, `-3`, `-24`; folded, it is a bar
+  as wide); in a form that turned into a column a
+  field's basis no longer becomes its height (`s-davloom-1`, `-6`…`-9` had
+  ~460 px empty under the address); a switch in a table row is 38 px, as
+  the row's buttons (Р-65). At 1351 and 820 no frame differs.
 - **A person's timeline filters by word** (Р-63: a filter by name does not
   care which record): «Filter by word» first in its bar, as in the agenda
   (`s-contacts-7`). A bar with a filter and a date range wraps where both

@@ -122,7 +122,7 @@ func Profile1() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -320,7 +320,7 @@ func Profile1() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -449,7 +449,7 @@ func Profile1() Screen {
 											{Label: "Folder"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -708,7 +708,7 @@ func Profile27() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -902,7 +902,7 @@ func Profile27() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -1031,7 +1031,7 @@ func Profile27() Screen {
 											{Label: "Folder"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -1341,7 +1341,7 @@ func Profile26() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1521,7 +1521,7 @@ func Profile26() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1650,7 +1650,7 @@ func Profile26() Screen {
 												{Label: "Folder"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -3148,7 +3148,7 @@ func Profile4() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -3329,7 +3329,7 @@ func Profile4() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -3458,7 +3458,7 @@ func Profile4() Screen {
 											{Label: "Folder"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -4168,7 +4168,7 @@ func Profile7() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Collection"},
-												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "What is in it", Rank: w.Rank3, Main: true},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 												{Width: w.ColMenu},
 											},
@@ -4356,7 +4356,7 @@ func Profile8() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Collection"},
-												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "What is in it", Rank: w.Rank3, Main: true},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 												{Width: w.ColMenu},
 											},
@@ -4557,7 +4557,7 @@ func Profile9() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Collection"},
-												{Label: "What is in it", Rank: w.Rank3},
+												{Label: "What is in it", Rank: w.Rank3, Main: true},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 												{Width: w.ColMenu},
 											},
@@ -4802,7 +4802,7 @@ func Profile10() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -4982,7 +4982,7 @@ func Profile10() Screen {
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -5111,7 +5111,7 @@ func Profile10() Screen {
 											{Label: "Folder"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{

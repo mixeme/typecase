@@ -313,7 +313,7 @@ func Admin2() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Login"},
-							{Label: "Role"},
+							{Label: "Role", Main: true},
 							{Label: "Created", Rank: w.Rank3, Secondary: true},
 							{Label: "Last login", Rank: w.Rank4},
 							{Label: "DAV"},
@@ -495,7 +495,7 @@ func Admin24() Screen {
 						w.Table{
 							Cols: []w.TableCol{
 								{Label: "Login"},
-								{Label: "Role"},
+								{Label: "Role", Main: true},
 								{Label: "Created", Rank: w.Rank3, Secondary: true},
 								{Label: "Last login", Rank: w.Rank4},
 								{Label: "DAV"},
@@ -734,7 +734,7 @@ func Admin34() Screen {
 						w.Table{
 							Cols: []w.TableCol{
 								{Label: "Login"},
-								{Label: "Role"},
+								{Label: "Role", Main: true},
 								{Label: "Created", Rank: w.Rank3, Secondary: true},
 								{Label: "Last login", Rank: w.Rank4},
 								{Label: "DAV"},

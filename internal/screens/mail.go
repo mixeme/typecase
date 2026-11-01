@@ -2544,7 +2544,7 @@ func Mail6() Screen {
 									Cols: []w.TableCol{
 										{Label: "Name"},
 										{Label: "Size", Width: w.Col90},
-										{Label: "Changed", Width: w.Col110, Rank: w.Rank3},
+										{Label: "Changed", Width: w.Col110, Rank: w.Rank3, Main: true},
 										{Width: w.ColType, Rank: w.Rank4},
 									},
 									Rows: []w.TableRow{
@@ -3264,7 +3264,7 @@ func Mail13() Screen {
 									Cols: []w.TableCol{
 										{Label: "In it · 1 folder · 6 files"},
 										{Label: "Size", Width: w.Col90},
-										{Label: "Changed", Width: w.Col110, Rank: w.Rank3},
+										{Label: "Changed", Width: w.Col110, Rank: w.Rank3, Main: true},
 									},
 									Rows: []w.TableRow{
 										{

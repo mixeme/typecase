@@ -543,6 +543,10 @@ a.tc-tile__name:hover,a.tc-table__filename:hover{text-decoration:underline}
 .tc-tile__meta{font-size:10.5px;color:var(--tc-dusty);font-family:var(--tc-font-mono)}
 .tc-queue{width:330px;margin:14px var(--tc-page-gutter) 16px auto;border:.5px solid var(--tc-edge);border-radius:4px;background:var(--tc-surface)}
 .tc-main > .tc-queue{position:absolute;right:var(--tc-page-gutter);bottom:16px;margin:0;z-index:4}
+/* На телефоне плавающая очередь встаёт под содержимое во всю ширину: поверх она закрывала бы последнюю строку списка (Р-65). */
+@container tcbox (max-width:460px){
+  .tc-main > .tc-queue{position:static;width:auto;margin:14px var(--tc-page-gutter) 16px}
+}
 .tc-queue.is-min{width:auto}
 .tc-queue.is-min .tc-queue__head{border-bottom:none}
 .tc-queue__head{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:.5px solid var(--tc-hair);font-size:12px}
@@ -951,7 +955,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* строка хода: кнопка со складной подписью остаётся значком, как в баре */
   .tc-runbar .tc-btn > .tc-btn__label{display:none}
   /* Таблица с главной колонкой — карточки (Р-66): имя и «⋯» первой строкой, под ними
-     главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯». */
+     главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯».
+     Имя — ячейка с файлом или первая непустая, кроме галочки; «⋯» — последняя кнопка
+     строки (одна кнопка без «⋯», как Revoke, остаётся сама). */
   .tc-table:has(td.tc-table__main),.tc-table:has(td.tc-table__main) > tbody{display:block;width:100%}
   .tc-table:has(td.tc-table__main) > thead{display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:4px;
@@ -959,13 +965,15 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table:has(td.tc-table__main) > tbody > tr > td{display:none;padding:0;border:0}
   .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1}
   .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-table__file),
-  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name{display:block;grid-column:2;grid-row:1;min-width:0}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name,
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:not(:empty):not(.tc-table__main):not(:has(> .tc-tickrow__tick,> .tc-tick)){display:block;grid-column:2;grid-row:1;min-width:0}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
-  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > :not(.tc-acts__more):not(.tc-drop:has(> .tc-acts__more)){display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > :not(:last-child){display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts .tc-acts__more,
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .tc-drop:has(> .tc-acts__more){display:inline-flex}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main{display:block;grid-column:2 / 4;grid-row:2;font-size:12px;white-space:normal}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main::before{content:attr(data-tc-label) " · ";color:var(--tc-dusty);font-family:var(--tc-font-sans)}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main:has(> .tc-table__wrap)::before{content:attr(data-tc-label);display:block;margin-bottom:4px}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br{display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br + .tc-dim::before{content:" · "}
 }
@@ -1108,6 +1116,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-form .tc-btn:not(.is-sm),.tc-fset .tc-btn:not(.is-sm),.tc-field .tc-btn:not(.is-sm),
   .tc-bar .tc-in,.tc-docbar .tc-in,.tc-head .tc-acts .tc-in,.tc-sheet__head .tc-in,
   .tc-bar .tc-seg,.tc-docbar .tc-seg,.tc-head .tc-acts .tc-seg{height:38px}
+  /* Переключатель в строке таблицы (read only / read and write устройства) — в рост кнопок строки, как Change рядом: 22 px — не попасть пальцем. */
+  .tc-table .tc-seg.tc-seg--h22{height:38px}
   /* поле полосы — той же высоты, что полоса, поверх своего класса размера (tc-in--h26-…) */
   .tc-bar .tc-in.tc-in,.tc-docbar .tc-in.tc-in,.tc-head .tc-acts .tc-in.tc-in{height:38px}
   .tc-seg,.tc-bar > .tc-in,.tc-barform > .tc-in,.tc-in{overflow:visible}
@@ -1128,6 +1138,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-crumbs{position:relative;z-index:1}
   .tc-shell__body .tc-main,.tc-shell__body .tc-bar,.tc-shell__body .tc-head,.tc-shell__body .tc-acts{overflow:visible}
   .tc-form{flex-direction:column;flex-wrap:nowrap;align-items:stretch}
+  /* В столбце основа поля (tc-field--fill300, --max640-fill460…) стала бы его высотой — пустота под полем; в столбце поле по содержимому. */
+  .tc-form > .tc-field.tc-field{flex-basis:auto}
   .tc-field,.tc-field--xs,.tc-field--sm,.tc-field--md,.tc-field--lg,.tc-field--xl,.tc-field--full{width:100%;min-width:0}
   .tc-fields{grid-template-columns:minmax(0,1fr)}
   .tc-head .tc-acts{flex:1 1 100%;justify-content:flex-start}

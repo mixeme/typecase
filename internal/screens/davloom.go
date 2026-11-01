@@ -120,7 +120,7 @@ func Davloom1() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Device"},
-							{Label: "What it can see and do"},
+							{Label: "What it can see and do", Main: true},
 							{Label: "Created", Rank: w.Rank4, Secondary: true},
 							{Label: "Last request", Secondary: true},
 							{Width: w.Col90},
@@ -834,7 +834,7 @@ func Davloom7() Screen {
 						w.Table{
 							Cols: []w.TableCol{
 								{Label: "Device"},
-								{Label: "What it can see and do"},
+								{Label: "What it can see and do", Main: true},
 								{Label: "Created", Rank: w.Rank4, Secondary: true},
 								{Label: "Last request", Secondary: true},
 								{Width: w.Col90},
@@ -1250,7 +1250,7 @@ func Davloom8() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Device"},
-							{Label: "What it can see and do"},
+							{Label: "What it can see and do", Main: true},
 							{Label: "Created", Rank: w.Rank4, Secondary: true},
 							{Label: "Last request", Secondary: true},
 							{Width: w.Col90},
@@ -1506,7 +1506,7 @@ func Davloom9() Screen {
 						w.Table{
 							Cols: []w.TableCol{
 								{Label: "Device"},
-								{Label: "What it can see and do"},
+								{Label: "What it can see and do", Main: true},
 								{Label: "Created", Rank: w.Rank4, Secondary: true},
 								{Label: "Last request", Secondary: true},
 								{Width: w.Col90},

@@ -597,7 +597,7 @@ func Publish2() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -777,7 +777,7 @@ func Publish2() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -906,7 +906,7 @@ func Publish2() Screen {
 												{Label: "Folder"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1277,7 +1277,7 @@ func Publish13() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1457,7 +1457,7 @@ func Publish13() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1586,7 +1586,7 @@ func Publish13() Screen {
 												{Label: "Folder"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -1897,7 +1897,7 @@ func Publish22() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -2077,7 +2077,7 @@ func Publish22() Screen {
 												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -2206,7 +2206,7 @@ func Publish22() Screen {
 												{Label: "Folder"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-												{Label: "Changed on the server", Width: w.ColChanged},
+												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 												{Width: w.ColMenu},
 											},
 											Rows: []w.TableRow{
@@ -3317,7 +3317,7 @@ func Publish5() Screen {
 								{Label: "Name"},
 								{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
 								{Label: "Type", Width: w.ColType, Rank: w.Rank4},
-								{Label: "Changed", Width: w.ColTime},
+								{Label: "Changed", Width: w.ColTime, Main: true},
 							},
 							Rows: []w.TableRow{
 								{
@@ -3908,7 +3908,7 @@ func Publish12() Screen {
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize},
 							{Label: "Type", Width: w.ColChanged, Rank: w.Rank3},
-							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4},
+							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4, Main: true},
 							{Width: w.Col90},
 						},
 						Rows: []w.TableRow{
@@ -4525,7 +4525,7 @@ func Publish30() Screen {
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize},
 							{Label: "Type", Width: w.ColChanged, Rank: w.Rank3},
-							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4},
+							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4, Main: true},
 							{Width: w.Col90},
 						},
 						Rows: []w.TableRow{
@@ -4712,7 +4712,7 @@ func Publish31() Screen {
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize},
 							{Label: "Type", Width: w.ColChanged, Rank: w.Rank3},
-							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4},
+							{Label: "Changed", Width: w.ColTime, Rank: w.Rank4, Main: true},
 							{Width: w.Col90},
 						},
 						Rows: []w.TableRow{

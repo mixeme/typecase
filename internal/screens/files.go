@@ -201,7 +201,7 @@ func Files1() Screen {
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
 							{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
-							{Label: "Changed", Width: w.ColTime},
+							{Label: "Changed", Width: w.ColTime, Main: true},
 							{Width: w.ColNum},
 						},
 						Rows: []w.TableRow{
@@ -620,7 +620,7 @@ func Files2() Screen {
 							{Label: "Name"},
 							{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
 							{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
-							{Label: "Changed", Width: w.ColTime},
+							{Label: "Changed", Width: w.ColTime, Main: true},
 							{Width: w.ColNum},
 						},
 						Rows: []w.TableRow{
@@ -1022,7 +1022,7 @@ func Files4() Screen {
 								{Label: "Name"},
 								{Label: "Size", Width: w.ColSize, Rank: w.Rank3},
 								{Label: "Type", Width: w.ColType, Rank: w.Rank4, Secondary: true},
-								{Label: "Changed", Width: w.ColTime},
+								{Label: "Changed", Width: w.ColTime, Main: true},
 								{Width: w.ColNum},
 							},
 							Rows: []w.TableRow{

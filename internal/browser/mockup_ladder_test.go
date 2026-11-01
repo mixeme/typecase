@@ -38,36 +38,13 @@ type ladderProbe struct {
 // work named here is done — the list must go to nothing. Anything else in
 // them still fails.
 var ladderPending = map[string]string{
-	"s-profile-1":  "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-profile-4":  "s-profile-1's page with one more row or line: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-profile-27": "s-profile-1's page with one more row or line: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-publish-2":  "s-profile-1's page under its publish sheet: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-publish-13": "s-profile-1's page under its publish sheet: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-publish-22": "s-profile-1's page under its publish sheet: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-profile-26": "s-profile-1 under the Disconnect sheet: its table on a phone, cards with the main column (Р-66) not yet",
-	"s-profile-10": "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-admin-2":    "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-admin-24":   "the Users table of s-admin-2 under the reset sheet: cards (Р-66) not yet",
-	"s-admin-34":   "the Users table of s-admin-2 under the delete sheet: cards (Р-66) not yet",
-	"s-admin-22":   "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-davloom-1":  "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-davloom-7":  "s-davloom-1's table of devices under it: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-davloom-8":  "s-davloom-1's table of devices under it: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-davloom-9":  "s-davloom-1's table of devices under it: a table on a phone, cards with the main column (Р-66) not yet",
-	"s-files-1":    "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-files-2":    "a table on a phone: cards with the main column (Р-66) not yet",
-	"s-files-4":    "a table on a phone: cards with the main column (Р-66) not yet",
 	"s-mailbox-14": "the mailbox is approved and put off (30.09): its frames wait",
 	"s-mailbox-21": "the mailbox is approved and put off (30.09): its frames wait",
 }
 
 // tapPending are the frames whose taps miss for a reason named here, the
 // list to go to nothing as ladderPending.
-var tapPending = map[string]string{
-	// the rows grew with the phone's 38 px buttons, and the last one goes
-	// under the floating queue by a few px
-	"s-files-2": "a table under the floating queue: cards with the main column (Р-66) not yet",
-}
+var tapPending = map[string]string{}
 
 func TestMockupLadder(t *testing.T) {
 	if !browser.ChromeAvailable() {
