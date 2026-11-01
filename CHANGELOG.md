@@ -1016,6 +1016,23 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Tables as cards, the second group** (Р-66, accepted by the owner 02.11):
+  sessions with Last seen (`account-1`, `-15`, `s-mail-9`), published
+  links with Expires (`s-publish-1`, `-17`, `-20`, `-21`, `s-mail-4`),
+  invitations with Expires (`s-admin-1`; a link invitation's address reads
+  «by link», not «—»), escrow with Deposited (`s-admin-6`, `-30`; «no», not
+  «not deposited»). A card keeps the button before «⋯» (Copy link, a file's
+  Download) and «⋯»; where «⋯» is a fold (`tc-acts__more`), only what folds
+  into it (`is-2nd`) goes — a link's Copy stays.
+  On a phone a field with `flex:1` in a line that turned into a column is
+  38 px, not squeezed to its text (`tc-in--fill`: `account-1`, `-8`…`-10`,
+  `attachments-1`, `-5`, `-6`, `s-admin-3`, `-32`, `-33`, `s-backup-2`,
+  `-19`, `s-davloom-1`, `-6`…`-9`, `s-plan-2`, `desktop-13`). The selection
+  bar puts its count on the first line and every action on the second — the
+  separator turns into a line break — instead of one button falling down
+  alone (the owner's decision 02.11; `s-files-1`, `-2`, `-4`, `-5`,
+  `s-backup-8`, `-20`, `s-mailbox-3`, `components-16`, `-17`, `dark-3`).
+  At 1351 and 820 only the two texts differ.
 - **On a phone a table is cards with its main column** (Р-66), the first
   group, accepted by the owner: users with Role (`s-admin-2`, `-22`, `-24`,
   `-34`), files with Changed (`s-files-1`, `-2`, `-4`, `states-34`,

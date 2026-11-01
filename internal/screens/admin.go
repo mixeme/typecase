@@ -195,13 +195,13 @@ func Admin1() Screen {
 							{Label: "Delivery"},
 							{Label: "Status", Rank: w.Rank3},
 							{Label: "Mail", Rank: w.Rank4},
-							{Label: "Expires"},
+							{Label: "Expires", Main: true},
 							{},
 						},
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.Text("—")}},
+									{Parts: []w.CellPart{w.Text("by link")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("link")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("pending")}},
 									{Parts: []w.CellPart{w.Text("—")}},
@@ -2704,7 +2704,7 @@ func Admin6() Screen {
 						Count: &w.Num{Value: 4},
 					},
 					w.Table{
-						Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited"}, {Label: "Last recovery", Rank: w.Rank3}},
+						Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited", Main: true}, {Label: "Last recovery", Rank: w.Rank3}},
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
@@ -2737,14 +2737,14 @@ func Admin6() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("ivan")}},
-									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("no")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("mix")}},
-									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("no")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},
@@ -2959,7 +2959,7 @@ func Admin30() Screen {
 						Count: &w.Num{Value: 4},
 					},
 					w.Table{
-						Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited"}, {Label: "Last recovery", Rank: w.Rank3}},
+						Cols: []w.TableCol{{Label: "Account"}, {Label: "Deposited", Main: true}, {Label: "Last recovery", Rank: w.Rank3}},
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
@@ -2992,14 +2992,14 @@ func Admin30() Screen {
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("ivan")}},
-									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("no")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},
 							{
 								Cells: []w.TableCell{
 									{Parts: []w.CellPart{w.Text("mix")}},
-									{Parts: []w.CellPart{w.Text("not deposited")}, Mono: true, Tone: w.CellDusty},
+									{Parts: []w.CellPart{w.Text("no")}, Mono: true, Tone: w.CellDusty},
 									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
 								},
 							},

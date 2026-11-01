@@ -141,7 +141,7 @@ func Account1() Screen {
 										Cols: []w.TableCol{
 											{Label: "Where"},
 											{Label: "Started"},
-											{Label: "Last seen", Rank: w.Rank3},
+											{Label: "Last seen", Rank: w.Rank3, Main: true},
 											{Width: w.Col120, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
@@ -470,7 +470,7 @@ func Mail9() Screen {
 										Cols: []w.TableCol{
 											{Label: "Where"},
 											{Label: "Started"},
-											{Label: "Last seen", Rank: w.Rank3},
+											{Label: "Last seen", Rank: w.Rank3, Main: true},
 											{Width: w.Col120, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{

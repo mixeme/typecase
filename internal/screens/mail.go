@@ -1403,7 +1403,7 @@ func Mail4() Screen {
 								{Label: "What is published"},
 								{Label: "Kind", Rank: w.Rank1},
 								{Label: "Created", Rank: w.Rank3, Secondary: true},
-								{Label: "Expires", Rank: w.Rank4},
+								{Label: "Expires", Rank: w.Rank4, Main: true},
 								{Label: "Last opened", Secondary: true},
 								{Label: "Opens"},
 								{Width: w.Col120},

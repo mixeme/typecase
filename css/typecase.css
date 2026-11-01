@@ -947,7 +947,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar .tc-btn > .tc-btn__label{display:none}
   .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
-  .tc-bar.tc-bar--sel{flex-wrap:wrap}
+  /* Панель выделения: счёт первой строкой, все действия — второй (разделитель становится
+     переносом), а не одна кнопка, упавшая вниз сама (решение владельца 02.11). */
+  .tc-bar.tc-bar--sel{flex-wrap:wrap;row-gap:8px}
+  .tc-bar.tc-bar--sel > .tc-bar__sep{flex-basis:100%;height:0;margin-top:-8px;background:none}
   .tc-docbar{flex-wrap:wrap}
   .tc-bar > .tc-range{flex-wrap:wrap}
   .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
@@ -956,8 +959,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-runbar .tc-btn > .tc-btn__label{display:none}
   /* Таблица с главной колонкой — карточки (Р-66): имя и «⋯» первой строкой, под ними
      главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯».
-     Имя — ячейка с файлом или первая непустая, кроме галочки; «⋯» — последняя кнопка
-     строки (одна кнопка без «⋯», как Revoke, остаётся сама). */
+     Имя — ячейка с файлом или первая непустая, кроме галочки; справа — «⋯» и кнопка перед
+     ним (Copy link приглашения, Download файла); одна кнопка без «⋯», как Revoke, остаётся
+     сама. Где у строки складное «⋯» (tc-acts__more), уходит только сложенное в него
+     (is-2nd): Copy ссылки остаётся. */
   .tc-table:has(td.tc-table__main),.tc-table:has(td.tc-table__main) > tbody{display:block;width:100%}
   .tc-table:has(td.tc-table__main) > thead{display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:4px;
@@ -968,7 +973,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name,
   .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:not(:empty):not(.tc-table__main):not(:has(> .tc-tickrow__tick,> .tc-tick)){display:block;grid-column:2;grid-row:1;min-width:0}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
-  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > :not(:last-child){display:none}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts:not(:has(> .tc-drop > .tc-acts__more)) > :not(:last-child):not(:nth-last-child(2)),
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .is-2nd{display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts .tc-acts__more,
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .tc-drop:has(> .tc-acts__more){display:inline-flex}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main{display:block;grid-column:2 / 4;grid-row:2;font-size:12px;white-space:normal}
@@ -1155,6 +1161,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-card{display:flex;flex-direction:column}
   /* Строка полей встаёт столбцом; фраза с полем-фишкой («старше [7] дней») — нет. */
   .tc-form .tc-line.tc-line:where(:not(:has(> .tc-in--chip))){flex-direction:column;align-items:stretch}
+  /* …и в столбце поле с flex:1 (tc-in--fill) не сжимается в нулевую основу: высота — своя, 38 px. */
+  .tc-form .tc-line.tc-line:where(:not(:has(> .tc-in--chip))) > *{flex-basis:auto}
   label,.tc-msg,.tc-diag,.tc-field__hint,.tc-rubric,.tc-dim--wrap,.tc-sheet__head,.tc-sheet__title{
     overflow-wrap:anywhere;min-width:0}
   /* input/textarea — replaced, без ::after: зону даёт поле. */
