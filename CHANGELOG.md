@@ -1016,6 +1016,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The notes list on paper** (Carrel's task 250, accepted by the owner
+  02.11): a new frame `print-8`, like the tasks on paper (`print-4`): the
+  title with the notebook, the notebooks in the snapshot, a «Date | Note»
+  head, the month rubrics; a row is the date, then the title and under it,
+  dim, the excerpt and the notebook («in 2 notebooks» for a linked note).
+  The current view is printed: filter, order with its rubrics, columns —
+  Tags, when on, join the line under the title. The foot counts the notes
+  and the notebooks that answered. 570 frames.
 - **The owner's card in the combined contact lists** (Carrel's task 251,
   accepted by the owner 02.11): «Михаил Енученко» (`mix@example.org`,
   nextcloud · Контакты, no phone, no organisation) stands as group «М»

@@ -271,6 +271,50 @@ func Print5() Screen {
 	}
 }
 
+// Print8 is frame «Список заметок на бумаге» (print-8).
+func Print8() Screen {
+	return w.Page{
+		Items: []w.PagePart{
+			w.PrintTitle{Text: "Notes · Combined notebook"},
+			w.PrintSources{Text: "nextcloud · Записи, Дневник"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{w.Mono{Text: "Date", Variant: w.MonoFace}, w.PrintCell{Name: "Note"}},
+				Head:  true,
+			},
+			w.PrintRubric{Text: "August 2026"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "10 Aug", Variant: w.MonoFace},
+					w.PrintCell{
+						Name:   "Заметка со встречи 10.08",
+						Detail: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна… · in 2 notebooks",
+					},
+				},
+			},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "8 Aug", Variant: w.MonoFace},
+					w.PrintCell{
+						Name:   "Что почитать про CRDT",
+						Detail: "Кляйн, глава 5; статья Шапиро 2011; демка automerge… · in 2 notebooks",
+					},
+				},
+			},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "3 Aug", Variant: w.MonoFace},
+					w.PrintCell{
+						Name:   "Про дорогу до дачи",
+						Detail: "Съезд после заправки, потом грунтовка два километра… · nextcloud · Дневник",
+					},
+				},
+			},
+			w.PrintFoot{Text: "Carrel · notes · 3 notes · captured 2026-08-15 09:41 · 2 of 2 notebooks"},
+		},
+		Variant: w.PagePrint,
+	}
+}
+
 // Print6 is frame «Список файлов на бумаге» (print-6).
 func Print6() Screen {
 	return w.Page{

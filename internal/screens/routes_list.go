@@ -281,6 +281,7 @@ var Routes = []Route{
 	{Frame: "print-3", Caption: "Карточка контакта на бумаге", Screen: Print3},
 	{Frame: "print-4", Caption: "Задачи на бумаге", Screen: Print4},
 	{Frame: "print-5", Caption: "Заметка на бумаге", Screen: Print5},
+	{Frame: "print-8", Caption: "Список заметок на бумаге", Screen: Print8},
 	{Frame: "print-6", Caption: "Список файлов на бумаге", Screen: Print6},
 	{Frame: "print-7", Caption: "Агенда одного календаря на бумаге", Screen: Print7},
 	{Frame: "desktop-1", Caption: "Окно приложения", Screen: Desktop1},
