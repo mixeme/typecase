@@ -20,7 +20,7 @@ func Contacts1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -36,7 +36,7 @@ func Contacts1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
-							Meta:    "9",
+							Meta:    "10",
 							Current: true,
 						},
 					},
@@ -44,7 +44,7 @@ func Contacts1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -74,7 +74,7 @@ func Contacts1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -125,7 +125,7 @@ func Contacts1() Screen {
 									Action: "/app/contacts",
 									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 								},
-								w.Mono{Text: "6"},
+								w.Mono{Text: "7"},
 							},
 							Secondary: true,
 						},
@@ -201,6 +201,20 @@ func Contacts1() Screen {
 								Subtitle: "+7 905 331-09-42",
 								Detail:   "v.lebedeva@example.org",
 								Caption:  "Библиотека №4",
+								Source:   "nextcloud · Контакты",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "М", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "МЕ"},
+								Title:    []w.Inline{w.Text("Михаил Енученко")},
+								Subtitle: "—",
+								Detail:   "mix@example.org",
+								Caption:  "—",
 								Source:   "nextcloud · Контакты",
 							},
 						},
@@ -338,7 +352,7 @@ func Contacts2() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -354,7 +368,7 @@ func Contacts2() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "9",
+								Meta:    "10",
 								Current: true,
 							},
 						},
@@ -362,7 +376,7 @@ func Contacts2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
@@ -392,7 +406,7 @@ func Contacts2() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -443,7 +457,7 @@ func Contacts2() Screen {
 										Action: "/app/contacts",
 										Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 									},
-									w.Mono{Text: "6"},
+									w.Mono{Text: "7"},
 								},
 								Secondary: true,
 							},
@@ -519,6 +533,20 @@ func Contacts2() Screen {
 									Subtitle: "+7 905 331-09-42",
 									Detail:   "v.lebedeva@example.org",
 									Caption:  "Библиотека №4",
+									Source:   "nextcloud · Контакты",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "М", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "МЕ"},
+									Title:    []w.Inline{w.Text("Михаил Енученко")},
+									Subtitle: "—",
+									Detail:   "mix@example.org",
+									Caption:  "—",
 									Source:   "nextcloud · Контакты",
 								},
 							},
@@ -611,7 +639,7 @@ func Contacts3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -887,7 +915,7 @@ func Contacts4() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -1162,7 +1190,7 @@ func Contacts27() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -1373,7 +1401,7 @@ func Contacts5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -1475,7 +1503,7 @@ func Contacts6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -1644,7 +1672,7 @@ func Contacts15() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
@@ -2139,7 +2167,7 @@ func Contacts16() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 					},
 				},
@@ -2312,7 +2340,7 @@ func Contacts35() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -2328,7 +2356,7 @@ func Contacts35() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
-								Meta:    "9",
+								Meta:    "10",
 								Current: true,
 							},
 						},
@@ -2336,7 +2364,7 @@ func Contacts35() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "5"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
 							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
 						},
 					},
@@ -2366,7 +2394,7 @@ func Contacts35() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 6 cards")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
@@ -2417,7 +2445,7 @@ func Contacts35() Screen {
 										Action: "/app/contacts",
 										Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
 									},
-									w.Mono{Text: "6"},
+									w.Mono{Text: "7"},
 								},
 								Secondary: true,
 							},
@@ -2493,6 +2521,20 @@ func Contacts35() Screen {
 									Subtitle: "+7 905 331-09-42",
 									Detail:   "v.lebedeva@example.org",
 									Caption:  "Библиотека №4",
+									Source:   "nextcloud · Контакты",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "М", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "МЕ"},
+									Title:    []w.Inline{w.Text("Михаил Енученко")},
+									Subtitle: "—",
+									Detail:   "mix@example.org",
+									Caption:  "—",
 									Source:   "nextcloud · Контакты",
 								},
 							},
@@ -2588,7 +2630,7 @@ func Contacts7() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},

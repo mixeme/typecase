@@ -20,7 +20,7 @@ func Files1() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -438,7 +438,7 @@ func Files2() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -840,7 +840,7 @@ func Files4() Screen {
 				Rail: []w.OverlayRailPart{
 					w.Nav{
 						Items: []w.NavItem{
-							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -1283,7 +1283,7 @@ func Files5() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
@@ -1538,7 +1538,7 @@ func Files6() Screen {
 			Rail: []w.RailPart{
 				w.Nav{
 					Items: []w.NavItem{
-						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},

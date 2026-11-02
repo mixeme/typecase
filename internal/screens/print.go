@@ -104,7 +104,16 @@ func Print2() Screen {
 				},
 				Columns: true,
 			},
-			w.PrintFoot{Text: "Carrel · contacts · 6 cards · captured 2026-08-15 09:41 · 3 of 3 books"},
+			w.PrintRubric{Text: "М"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.PrintCell{Name: "Михаил Енученко", Detail: "nextcloud · Контакты"},
+					w.PrintNum{Text: "—"},
+					w.PrintNum{Text: "mix@example.org"},
+				},
+				Columns: true,
+			},
+			w.PrintFoot{Text: "Carrel · contacts · 7 cards · captured 2026-08-15 09:41 · 3 of 3 books"},
 		},
 		Variant: w.PagePrint,
 	}

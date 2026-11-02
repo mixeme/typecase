@@ -1016,6 +1016,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The owner's card in the combined contact lists** (Carrel's task 251,
+  accepted by the owner 02.11): «Михаил Енученко» (`mix@example.org`,
+  nextcloud · Контакты, no phone, no organisation) stands as group «М»
+  after «Л» in every combined list — `s-contacts-1`, `-2`, `-35`,
+  `s-notes-9`, `s-find-2`, `states-8`, `-9`, `phone-4` and on paper
+  `print-2`. The counts are one card higher: Contacts in the rail 8, the
+  combined address book 10, «Контакты» 6, «7 cards» in heads, poll bars
+  and the paper foot, the loaded counter by Compact rows 7.
 - **Import previews as cards** (Р-66, accepted by the owner 02.11): Result is
   the main column of every import table (`s-io-5`…`-8`, `-19`). An import of
   one file — contacts, events, tasks — has no Source column: every row said
