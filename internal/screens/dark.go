@@ -515,7 +515,20 @@ func Dark3() Screen {
 								Value: "delete",
 							},
 						},
-						Count:   &w.BarCount{Text: "1 selected"},
+						Count: &w.BarCount{Text: "1 selected"},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.Button{
+									Folds:      true,
+									Label:      "Select all",
+									Icon:       "selectall",
+									Small:      true,
+									Title:      "Select all",
+									ScriptOnly: true,
+								},
+								w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+							},
+						},
 						Variant: w.BarSelection,
 					},
 					w.Bar{

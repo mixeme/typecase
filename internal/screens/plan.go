@@ -1189,7 +1189,7 @@ func Plan4() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Collection"},
-							{Label: "Type"},
+							{Label: "Type", Main: true},
 							{Label: "URL", Rank: w.Rank3},
 							{Width: w.ColNum, Rank: w.Rank4},
 						},
@@ -1459,7 +1459,7 @@ func Plan5() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Collection"},
-							{Label: "Type"},
+							{Label: "Type", Main: true},
 							{Label: "URL", Rank: w.Rank3},
 							{Width: w.ColNum, Rank: w.Rank4},
 						},

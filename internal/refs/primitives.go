@@ -20,6 +20,7 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("small-icon-label", w.Button{Folds: true, Label: "Select all", Icon: "selectall", Small: true, Title: "Select all"}, "components-16", "tc-btn", 4),
 	primitive("plain", w.Button{Label: "How to mount", Menu: true, Small: true, Focus: true}, "s-publish-32", "tc-btn", 2),
 	primitive("plain", w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Submit: true, Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}}, "s-agenda-30", "tc-btn", 1),
 	primitive("plain", w.Button{Icon: "dots", Variant: w.ButtonPadX3, Title: "More"}, "s-contacts-33", "tc-btn", 2),
@@ -56,7 +57,7 @@ var _ = add(
 	primitive("danger", w.Button{Label: "1 failed", Small: true, Menu: true, Kind: w.ButtonDanger}, "s-contacts-7", "tc-btn", 10),
 	primitive("normal", w.Button{Label: "Import"}, "components-9", "tc-btn", 2),
 	primitive("menu", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary}, "shell-1", "tc-btn", 1),
-	primitive("icon", w.Button{Icon: "dots", Title: "More"}, "components-16", "tc-btn", 6),
+	primitive("icon", w.Button{Label: "Columns", Icon: "cols"}, "components-16", "tc-btn", 6),
 	primitive("primary", w.Button{Label: "Save", Kind: w.ButtonPrimary}, "components-9", "tc-btn", 1),
 	primitive("primary", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, "components-9", "tc-btn", 7),
 	primitive("variant", w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}, "s-profile-1", "tc-btn", 11),
@@ -79,7 +80,7 @@ var _ = add(
 	primitive("variant", w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Sections"}, "phone-1", "tc-btn", 1),
 	primitive("with-content", w.Button{Label: "B", Bold: true}, "components-29", "tc-btn", 3),
 	primitive("variant", w.Button{Icon: "quill", IconBox: w.IconBox16, Variant: w.ButtonPadX8, Kind: w.ButtonPrimary, Title: "New note"}, "phone-1", "tc-btn", 3),
-	primitive("variant", w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}, "phone-6", "tc-btn", 7),
+	primitive("variant", w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"}, "phone-6", "tc-btn", 8),
 	primitive("variant", w.Button{Label: "I", Variant: w.ButtonItalic}, "s-notes-20", "tc-btn", 6),
 	primitive("folds", w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"}, "s-notes-20", "tc-btn", 11),
 	primitive("off", w.Button{Label: "Rename", Icon: "pencil", Folds: true, State: w.ButtonOff, Title: "Rename"}, "s-files-2", "tc-btn", 12),

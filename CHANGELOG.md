@@ -1016,6 +1016,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Tables as cards, the third group** (Р-66, accepted by the owner 02.11):
+  device setup with Type (`s-plan-4`, `-5`: where to paste the URL; Copy
+  copies it), the backup history with Verified (`s-backup-1`, `-12`…`-14`;
+  the card's name is the date), the restore match with Restore into
+  (`s-backup-8`, `-20`: the field to choose), the restore report with What
+  happened (`s-backup-18`).
+- **One selection bar** (accepted by the owner 02.11): every selection bar
+  ends with Select all and Clear selection, icon and label (a new icon
+  `i-selectall`; `s-files-1`, `-2`, `-4`, `-5`, `s-backup-8`, `-20`,
+  `s-mailbox-3`, `components-16`, `-17`, `dark-3`, `phone-6`). Where the
+  labels go (narrow), the two icons stand on the count line, at its end;
+  the actions are the second line. Up to a 1280 px screen the two are icons
+  (with their hint): a mail bar with every action had no room for both words.
 - **The notes list on paper** (Carrel's task 250, accepted by the owner
   02.11): a new frame `print-8`, like the tasks on paper (`print-4`): the
   title with the notebook, the notebooks in the snapshot, a «Date | Note»

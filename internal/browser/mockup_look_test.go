@@ -46,7 +46,11 @@ const injectFrameJS = `(function(){
       // A label longer than the screen wraps, so a shot is the screen's width.
       f.style.width = "min-content";
       var label = f.querySelector(".frame-label");
-      if (label) label.style.flexWrap = "wrap";
+      if (label) {
+        label.style.flexWrap = "wrap";
+        // A long path in the label breaks anywhere, not past the screen.
+        label.querySelectorAll("span, i").forEach(function (e) { e.style.minWidth = "0"; e.style.whiteSpace = "normal"; e.style.overflowWrap = "anywhere"; });
+      }
     }
   }
   return true;

@@ -148,8 +148,20 @@ func Files1() Screen {
 								Value: "delete",
 							},
 						},
-						Count:   &w.BarCount{Text: "1 selected"},
-						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
+						Count: &w.BarCount{Text: "1 selected"},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.Button{
+									Folds:      true,
+									Label:      "Select all",
+									Icon:       "selectall",
+									Small:      true,
+									Title:      "Select all",
+									ScriptOnly: true,
+								},
+								w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+							},
+						},
 						Variant: w.BarSelection,
 					},
 					w.Bar{
@@ -567,8 +579,20 @@ func Files2() Screen {
 								Value: "delete",
 							},
 						},
-						Count:   &w.BarCount{Text: "3 selected"},
-						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
+						Count: &w.BarCount{Text: "3 selected"},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.Button{
+									Folds:      true,
+									Label:      "Select all",
+									Icon:       "selectall",
+									Small:      true,
+									Title:      "Select all",
+									ScriptOnly: true,
+								},
+								w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+							},
+						},
 						Variant: w.BarSelection,
 					},
 					w.Bar{
@@ -969,8 +993,20 @@ func Files4() Screen {
 									Value: "delete",
 								},
 							},
-							Count:   &w.BarCount{Text: "3 selected"},
-							Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
+							Count: &w.BarCount{Text: "3 selected"},
+							Right: &w.BarRight{
+								Items: []w.BarPart{
+									w.Button{
+										Folds:      true,
+										Label:      "Select all",
+										Icon:       "selectall",
+										Small:      true,
+										Title:      "Select all",
+										ScriptOnly: true,
+									},
+									w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+								},
+							},
 							Variant: w.BarSelection,
 						},
 						w.Bar{
@@ -1407,8 +1443,20 @@ func Files5() Screen {
 								Value: "delete",
 							},
 						},
-						Count:   &w.BarCount{Text: "1 selected"},
-						Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Clear selection", Small: true}}},
+						Count: &w.BarCount{Text: "1 selected"},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.Button{
+									Folds:      true,
+									Label:      "Select all",
+									Icon:       "selectall",
+									Small:      true,
+									Title:      "Select all",
+									ScriptOnly: true,
+								},
+								w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+							},
+						},
 						Variant: w.BarSelection,
 					},
 					w.Bar{

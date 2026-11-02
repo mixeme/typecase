@@ -243,7 +243,7 @@ func Backup1() Screen {
 							{Label: "Job"},
 							{Label: "Size", Rank: w.Rank3, Secondary: true},
 							{Label: "Collections", Rank: w.Rank4},
-							{Label: "Verified"},
+							{Label: "Verified", Main: true},
 							{Label: "Trigger", Secondary: true},
 							{Width: w.ColTime},
 						},
@@ -1390,7 +1390,7 @@ func Backup12() Screen {
 								{Label: "Job"},
 								{Label: "Size", Rank: w.Rank3, Secondary: true},
 								{Label: "Collections", Rank: w.Rank4},
-								{Label: "Verified"},
+								{Label: "Verified", Main: true},
 								{Label: "Trigger", Secondary: true},
 								{Width: w.ColTime},
 							},
@@ -1812,7 +1812,7 @@ func Backup13() Screen {
 								{Label: "Job"},
 								{Label: "Size", Rank: w.Rank3, Secondary: true},
 								{Label: "Collections", Rank: w.Rank4},
-								{Label: "Verified"},
+								{Label: "Verified", Main: true},
 								{Label: "Trigger", Secondary: true},
 								{Width: w.ColTime},
 							},
@@ -2236,7 +2236,7 @@ func Backup14() Screen {
 								{Label: "Job"},
 								{Label: "Size", Rank: w.Rank3, Secondary: true},
 								{Label: "Collections", Rank: w.Rank4},
-								{Label: "Verified"},
+								{Label: "Verified", Main: true},
 								{Label: "Trigger", Secondary: true},
 								{Width: w.ColTime},
 							},
@@ -3267,8 +3267,20 @@ func Backup8() Screen {
 									},
 									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
 								},
-								Count:   &w.BarCount{Text: "3 selected"},
-								Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true, ScriptOnly: true}}},
+								Count: &w.BarCount{Text: "3 selected"},
+								Right: &w.BarRight{
+									Items: []w.BarPart{
+										w.Button{
+											Folds:      true,
+											Label:      "Select all",
+											Icon:       "selectall",
+											Small:      true,
+											Title:      "Select all",
+											ScriptOnly: true,
+										},
+										w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+									},
+								},
 								Variant: w.BarSelection,
 							},
 							w.Table{
@@ -3276,7 +3288,7 @@ func Backup8() Screen {
 									{Width: w.ColTick, Tick: ptr(w.TickedPart)},
 									{Label: "In the archive"},
 									{Label: "Records", Rank: w.Rank3, Secondary: true},
-									{Label: "Restore into", Width: w.Col26, Rank: w.Rank4},
+									{Label: "Restore into", Width: w.Col26, Rank: w.Rank4, Main: true},
 									{Label: "What will happen"},
 								},
 								Rows: []w.TableRow{
@@ -3584,8 +3596,20 @@ func Backup20() Screen {
 									},
 									w.Button{Label: "Skip", Name: "op", Value: "skip", Submit: true},
 								},
-								Count:   &w.BarCount{Text: "3 selected"},
-								Right:   &w.BarRight{Items: []w.BarPart{w.Button{Label: "Select all", Small: true, ScriptOnly: true}}},
+								Count: &w.BarCount{Text: "3 selected"},
+								Right: &w.BarRight{
+									Items: []w.BarPart{
+										w.Button{
+											Folds:      true,
+											Label:      "Select all",
+											Icon:       "selectall",
+											Small:      true,
+											Title:      "Select all",
+											ScriptOnly: true,
+										},
+										w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"},
+									},
+								},
 								Variant: w.BarSelection,
 							},
 							w.Table{
@@ -3593,7 +3617,7 @@ func Backup20() Screen {
 									{Width: w.ColTick, Tick: ptr(w.TickedPart)},
 									{Label: "In the archive"},
 									{Label: "Records", Rank: w.Rank3, Secondary: true},
-									{Label: "Restore into", Width: w.Col26, Rank: w.Rank4},
+									{Label: "Restore into", Width: w.Col26, Rank: w.Rank4, Main: true},
 									{Label: "What will happen"},
 								},
 								Rows: []w.TableRow{
@@ -3836,7 +3860,7 @@ func Backup18() Screen {
 									{Label: "In the archive"},
 									{Label: "Restored into", Width: w.Col26, Rank: w.Rank4},
 									{Label: "Created", Rank: w.Rank3, Secondary: true},
-									{Label: "What happened"},
+									{Label: "What happened", Main: true},
 								},
 								Rows: []w.TableRow{
 									{
