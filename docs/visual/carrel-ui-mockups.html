@@ -13541,11 +13541,11 @@ dav: HTTP 503: the server is busy</div>
             <span class="tc-stat is-error"><b>3</b> with errors</span>
           </div>
           <table class="tc-table">
-            <thead><tr><th>Source</th><th>Name</th><th class="tc-table__n3">UID</th><th class="tc-table__n4">Result</th></tr></thead>
+            <thead><tr><th>Name</th><th class="tc-table__n3">Email</th><th class="tc-table__n4 tc-table__main">Result</th></tr></thead>
             <tbody>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Анна Ковалёва</td><td class="tc-mono tc-table__n3">4f2b-9c31-a0e7</td><td class="tc-table__n4">Ready</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Артём Белов</td><td class="tc-mono tc-table__n3">1a77-40de-bb02</td><td class="tc-table__n4">Ready</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">line 12: cannot decode quoted-printable</td></tr>
+              <tr><td>Анна Ковалёва</td><td class="tc-mono tc-table__n3">a.kovaleva@example.org</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready</td></tr>
+              <tr><td>Артём Белов</td><td class="tc-mono tc-table__n3">a.belov@example.org</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready</td></tr>
+              <tr><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger tc-table__main" data-tc-label="Result">line 12: cannot decode quoted-printable</td></tr>
             </tbody>
           </table>
         </div>
@@ -13709,12 +13709,12 @@ dav: HTTP 503: the server is busy</div>
             <span class="tc-stat"><b>5</b> already here</span>
           </div>
           <table class="tc-table">
-            <thead><tr><th>Source</th><th>Name</th><th class="tc-table__n3">UID</th><th class="tc-table__n4">Result</th></tr></thead>
+            <thead><tr><th>Name</th><th class="tc-table__n3">Email</th><th class="tc-table__n4 tc-table__main">Result</th></tr></thead>
             <tbody>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Анна Ковалёва</td><td class="tc-mono tc-table__n3">4f2b-9c31-a0e7</td><td class="tc-table__n4">Ready</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Вера Лебедева</td><td class="tc-mono tc-table__n3">8e20-5b1f-c7d4</td><td class="tc-table__n4">Ready — name from N</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td>Артём Белов</td><td class="tc-mono tc-table__n3">1a77-40de-bb02</td><td class="tc-table__n4">Already here — skipped</td></tr>
-              <tr><td class="tc-mono">Разное (mix).vcf</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">line 12: cannot decode quoted-printable</td></tr>
+              <tr><td>Анна Ковалёва</td><td class="tc-mono tc-table__n3">a.kovaleva@example.org</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready</td></tr>
+              <tr><td>Вера Лебедева</td><td class="tc-mono tc-table__n3">vera@example.net</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — name from N</td></tr>
+              <tr><td>Артём Белов</td><td class="tc-mono tc-table__n3">a.belov@example.org</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Already here — skipped</td></tr>
+              <tr><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger tc-table__main" data-tc-label="Result">line 12: cannot decode quoted-printable</td></tr>
             </tbody>
           </table>
         </div>
@@ -13722,7 +13722,7 @@ dav: HTTP 503: the server is busy</div>
     </div>
   </div>
 </div>
-<figcaption><b>Записи, которые уже есть, — вопрос, а не молчаливая копия</b> (решение владельца 12.10, задача 159). Вопрос стоит рядом с «Into»: «уже есть» считается относительно выбранной коллекции. Ответ — сегмент ссылок на тот же предпросмотр; кадр рисует «Skip them», ответ по умолчанию. При «Replace them» подсказка — «The ones here are overwritten with the file's version.», строка записи — «Replaces the one here», кнопка считает и их: «Import 122 contacts». При «Import as copies» подсказка — «Each gets a new UID and stands beside the one here.», строка — «New UID will be assigned», кнопка — «Import 122 contacts». Когда писать нечего — всё, что прочиталось, уже есть, и выбран «Skip», — кнопка выключена, причина рядом: «Nothing to import: every record is already here.» Счёт «already here» от ответа не зависит.<br><br>Импорт — мастер: файл → предпросмотр → отчёт. Первая из четырёх таблиц: у карточки читают <b>имя</b>, колонки — источник, имя, UID, результат; ломается по-своему — <code>quoted-printable</code> из vCard&nbsp;2.1, который нечем разобрать.<br><br><b>Коллекция назначения — поле, а не надпись.</b> Предпросмотр даёт повод её сменить: счёт совпадений UID считается по ней. «Into» стоит над счётом, списком (<code>is-pick</code>) — все книги, куда разрешено писать, со всех подключённых серверов, — и его смена перестраивает таблицу. Шапка держит то, что не меняется: файл, размер и разобранный формат.<br><br><b>Пометки «Ready — …»</b> — через запятую, одна на свойство: «a whole day (no end)» и «a moment (no end)» у события без конца, «no title» у события и задачи без названия — название по умолчанию только на экране, в запись не пишется. Карточка без FN получает его из ФИО (N) — «name from N»; без ФИО — «Unnamed contact», записанным в FN, и пометка «no name» (решение владельца 22.10, Р-76: vCard 3.0 и 4.0 без FN неверна). Пустая ячейка — «—», всегда приглушённо.</figcaption>
+<figcaption><b>Записи, которые уже есть, — вопрос, а не молчаливая копия</b> (решение владельца 12.10, задача 159). Вопрос стоит рядом с «Into»: «уже есть» считается относительно выбранной коллекции. Ответ — сегмент ссылок на тот же предпросмотр; кадр рисует «Skip them», ответ по умолчанию. При «Replace them» подсказка — «The ones here are overwritten with the file's version.», строка записи — «Replaces the one here», кнопка считает и их: «Import 122 contacts». При «Import as copies» подсказка — «Each gets a new UID and stands beside the one here.», строка — «New UID will be assigned», кнопка — «Import 122 contacts». Когда писать нечего — всё, что прочиталось, уже есть, и выбран «Skip», — кнопка выключена, причина рядом: «Nothing to import: every record is already here.» Счёт «already here» от ответа не зависит.<br><br>Импорт — мастер: файл → предпросмотр → отчёт. Первая из четырёх таблиц: у карточки читают <b>имя</b>, колонки — имя, адрес, результат: адрес, а не UID, — по нему человек и узнаёт запись; файл один и назван в шапке, поэтому колонки источника нет; ломается по-своему — <code>quoted-printable</code> из vCard&nbsp;2.1, который нечем разобрать.<br><br><b>Коллекция назначения — поле, а не надпись.</b> Предпросмотр даёт повод её сменить: счёт совпадений UID считается по ней. «Into» стоит над счётом, списком (<code>is-pick</code>) — все книги, куда разрешено писать, со всех подключённых серверов, — и его смена перестраивает таблицу. Шапка держит то, что не меняется: файл, размер и разобранный формат.<br><br><b>Пометки «Ready — …»</b> — через запятую, одна на свойство: «a whole day (no end)» и «a moment (no end)» у события без конца, «no title» у события и задачи без названия — название по умолчанию только на экране, в запись не пишется. Карточка без FN получает его из ФИО (N) — «name from N»; без ФИО — «Unnamed contact», записанным в FN, и пометка «no name» (решение владельца 22.10, Р-76: vCard 3.0 и 4.0 без FN неверна). Пустая ячейка — «—», всегда приглушённо.</figcaption>
 </figure>
 
 <figure>
@@ -13777,14 +13777,14 @@ dav: HTTP 503: the server is busy</div>
             <span class="tc-stat"><b>6</b> skipped</span>
           </div>
           <table class="tc-table">
-            <thead><tr><th>Source</th><th>Summary</th><th class="tc-table__n3">When</th><th class="tc-table__n4">Result</th></tr></thead>
+            <thead><tr><th>Summary</th><th class="tc-table__n3">When</th><th class="tc-table__n4 tc-table__main">Result</th></tr></thead>
             <tbody>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td>Дежурство: первая линия</td><td class="tc-table__n3">Monday, 10 August 2026, 09:00 · weekly until 28 December</td><td class="tc-table__n4">Ready — the series as one record</td></tr>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td>Отпуск</td><td class="tc-table__n3">13 – 26 July 2026 · all day</td><td class="tc-table__n4">Ready</td></tr>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td>Созвон с подрядчиком</td><td class="tc-table__n3">17 August 2026, 08:00</td><td class="tc-table__n4">Ready — kept as sent: 10:00 Asia/Yekaterinburg</td></tr>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td>Купить билеты <span class="tc-badge">VTODO</span></td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--dusty">Skipped: a calendar takes events — import it into a list of tasks</td></tr>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td class="tc-dim">Untitled event</td><td class="tc-table__n3">4 May 2026 · all day</td><td class="tc-table__n4">Ready — a whole day (no end), no title</td></tr>
-              <tr><td class="tc-mono">Личный 2026.ics</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">line 23: cannot read DTSTART «2026-02-30»</td></tr>
+              <tr><td>Дежурство: первая линия</td><td class="tc-table__n3">Monday, 10 August 2026, 09:00 · weekly until 28 December</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — the series as one record</td></tr>
+              <tr><td>Отпуск</td><td class="tc-table__n3">13 – 26 July 2026 · all day</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready</td></tr>
+              <tr><td>Созвон с подрядчиком</td><td class="tc-table__n3">17 August 2026, 08:00</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — kept as sent: 10:00 Asia/Yekaterinburg</td></tr>
+              <tr><td>Купить билеты <span class="tc-badge">VTODO</span></td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--dusty tc-table__main" data-tc-label="Result">Skipped: a calendar takes events — import it into a list of tasks</td></tr>
+              <tr><td class="tc-dim">Untitled event</td><td class="tc-table__n3">4 May 2026 · all day</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — a whole day (no end), no title</td></tr>
+              <tr><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger tc-table__main" data-tc-label="Result">line 23: cannot read DTSTART «2026-02-30»</td></tr>
             </tbody>
           </table>
         </div>
@@ -13863,14 +13863,14 @@ dav: HTTP 503: the server is busy</div>
             <span class="tc-stat"><b>5</b> skipped</span>
           </div>
           <table class="tc-table">
-            <thead><tr><th>Source</th><th>Summary</th><th class="tc-table__n3">Due</th><th class="tc-table__n4">Result</th></tr></thead>
+            <thead><tr><th>Summary</th><th class="tc-table__n3">Due</th><th class="tc-table__n4 tc-table__main">Result</th></tr></thead>
             <tbody>
-              <tr><td class="tc-mono">Дела.ics</td><td>Отправить документы в МФЦ</td><td class="tc-table__n3">7 August 2026</td><td class="tc-table__n4">Ready — overdue, and stays overdue</td></tr>
-              <tr><td class="tc-mono">Дела.ics</td><td>Ответить подрядчику по смете</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4">Ready — a task without a date is a task</td></tr>
-              <tr><td class="tc-mono">Дела.ics</td><td>Дописать раздел про кэш</td><td class="tc-table__n3">4 September 2026</td><td class="tc-table__n4">Ready — 40 % done, priority 1</td></tr>
-              <tr><td class="tc-mono">Дела.ics</td><td>Созвон с подрядчиком <span class="tc-badge">VEVENT</span></td><td class="tc-table__n3">17 August 2026</td><td class="tc-table__n4 tc-table__n4--dusty">Skipped: a list of tasks takes tasks — import it into a calendar</td></tr>
-              <tr><td class="tc-mono">Дела.ics</td><td class="tc-dim">Untitled task</td><td class="tc-table__n3">10 September 2026</td><td class="tc-table__n4">Ready — no title</td></tr>
-              <tr><td class="tc-mono">Дела.ics</td><td>Сдать отчёт</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">line 88: cannot read DUE «2026-13-01»</td></tr>
+              <tr><td>Отправить документы в МФЦ</td><td class="tc-table__n3">7 August 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — overdue, and stays overdue</td></tr>
+              <tr><td>Ответить подрядчику по смете</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — a task without a date is a task</td></tr>
+              <tr><td>Дописать раздел про кэш</td><td class="tc-table__n3">4 September 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — 40 % done, priority 1</td></tr>
+              <tr><td>Созвон с подрядчиком <span class="tc-badge">VEVENT</span></td><td class="tc-table__n3">17 August 2026</td><td class="tc-table__n4 tc-table__n4--dusty tc-table__main" data-tc-label="Result">Skipped: a list of tasks takes tasks — import it into a calendar</td></tr>
+              <tr><td class="tc-dim">Untitled task</td><td class="tc-table__n3">10 September 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — no title</td></tr>
+              <tr><td>Сдать отчёт</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger tc-table__main" data-tc-label="Result">line 88: cannot read DUE «2026-13-01»</td></tr>
             </tbody>
           </table>
         </div>
@@ -13947,13 +13947,13 @@ dav: HTTP 503: the server is busy</div>
             <span class="tc-stat"><b>1</b> skipped</span>
           </div>
           <table class="tc-table">
-            <thead><tr><th>File</th><th>Title</th><th class="tc-table__n3">Date</th><th class="tc-table__n4">Result</th></tr></thead>
+            <thead><tr><th>File</th><th>Title</th><th class="tc-table__n3">Date</th><th class="tc-table__n4 tc-table__main">Result</th></tr></thead>
             <tbody>
-              <tr><td class="tc-mono">2026-03-11-podryadchik.md</td><td>Встреча с подрядчиком</td><td class="tc-table__n3">11 March 2026</td><td class="tc-table__n4">Ready — title, date and tags from front matter</td></tr>
-              <tr><td class="tc-mono">idei/crdt.md</td><td>Что почитать про CRDT</td><td class="tc-table__n3">4 August 2026</td><td class="tc-table__n4">Ready — no front matter: title from the first heading, date from the file</td></tr>
-              <tr><td class="tc-mono">doroga.md</td><td>Про дорогу до дачи</td><td class="tc-table__n3">30 June 2026</td><td class="tc-table__n4">Already here — skipped</td></tr>
-              <tr><td class="tc-mono">skan.pdf</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--dusty">Skipped: not Markdown</td></tr>
-              <tr><td class="tc-mono">pustoj.md</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger">Empty file: nothing to store and nothing to name it by</td></tr>
+              <tr><td class="tc-mono">2026-03-11-podryadchik.md</td><td>Встреча с подрядчиком</td><td class="tc-table__n3">11 March 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — title, date and tags from front matter</td></tr>
+              <tr><td class="tc-mono">idei/crdt.md</td><td>Что почитать про CRDT</td><td class="tc-table__n3">4 August 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Ready — no front matter: title from the first heading, date from the file</td></tr>
+              <tr><td class="tc-mono">doroga.md</td><td>Про дорогу до дачи</td><td class="tc-table__n3">30 June 2026</td><td class="tc-table__n4 tc-table__main" data-tc-label="Result">Already here — skipped</td></tr>
+              <tr><td class="tc-mono">skan.pdf</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--dusty tc-table__main" data-tc-label="Result">Skipped: not Markdown</td></tr>
+              <tr><td class="tc-mono">pustoj.md</td><td class="tc-dim">—</td><td class="tc-mono tc-table__n3 tc-table__n3--dusty">—</td><td class="tc-table__n4 tc-table__n4--danger tc-table__main" data-tc-label="Result">Empty file: nothing to store and nothing to name it by</td></tr>
             </tbody>
           </table>
         </div>

@@ -43,6 +43,10 @@ const injectFrameJS = `(function(){
       root.style.width = w + "px";
       root.style.maxWidth = w + "px";
       root.style.flex = "none";
+      // A label longer than the screen wraps, so a shot is the screen's width.
+      f.style.width = "min-content";
+      var label = f.querySelector(".frame-label");
+      if (label) label.style.flexWrap = "wrap";
     }
   }
   return true;

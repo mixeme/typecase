@@ -1016,6 +1016,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Import previews as cards** (Р-66, accepted by the owner 02.11): Result is
+  the main column of every import table (`s-io-5`…`-8`, `-19`). An import of
+  one file — contacts, events, tasks — has no Source column: every row said
+  the same file the head already names; the notes import, the one that takes
+  many files, keeps File first. The contacts preview shows Email, not UID: a
+  person tells two «Анна Ковалёва» apart by the address (Name | Email |
+  Result). On a phone a contact, an event and a task open with their name,
+  a note with its file.
 - **Tables as cards, the second group** (Р-66, accepted by the owner 02.11):
   sessions with Last seen (`account-1`, `-15`, `s-mail-9`), published
   links with Expires (`s-publish-1`, `-17`, `-20`, `-21`, `s-mail-4`),

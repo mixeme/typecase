@@ -1177,27 +1177,24 @@ func Io19() Screen {
 								Items: []w.Stat{w.Stat{Value: "117", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}},
 							},
 							w.Table{
-								Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}},
+								Cols: []w.TableCol{{Label: "Name"}, {Label: "Email", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4, Main: true}},
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Анна Ковалёва")}},
-											{Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Ready")}},
 										},
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Артём Белов")}},
-											{Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Ready")}},
 										},
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
@@ -1498,35 +1495,31 @@ func Io5() Screen {
 								},
 							},
 							w.Table{
-								Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}},
+								Cols: []w.TableCol{{Label: "Name"}, {Label: "Email", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4, Main: true}},
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Анна Ковалёва")}},
-											{Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Ready")}},
 										},
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Вера Лебедева")}},
-											{Parts: []w.CellPart{w.Text("8e20-5b1f-c7d4")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("vera@example.net")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Ready — name from N")}},
 										},
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Артём Белов")}},
-											{Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Already here — skipped")}},
 										},
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger},
@@ -1668,16 +1661,10 @@ func Io6() Screen {
 								},
 							},
 							w.Table{
-								Cols: []w.TableCol{
-									{Label: "Source"},
-									{Label: "Summary"},
-									{Label: "When", Rank: w.Rank3},
-									{Label: "Result", Rank: w.Rank4},
-								},
+								Cols: []w.TableCol{{Label: "Summary"}, {Label: "When", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4, Main: true}},
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Дежурство: первая линия")}},
 											{Parts: []w.CellPart{w.Text("Monday, 10 August 2026, 09:00 · weekly until 28 December")}},
 											{Parts: []w.CellPart{w.Text("Ready — the series as one record")}},
@@ -1685,7 +1672,6 @@ func Io6() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Отпуск")}},
 											{Parts: []w.CellPart{w.Text("13 – 26 July 2026 · all day")}},
 											{Parts: []w.CellPart{w.Text("Ready")}},
@@ -1693,7 +1679,6 @@ func Io6() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Созвон с подрядчиком")}},
 											{Parts: []w.CellPart{w.Text("17 August 2026, 08:00")}},
 											{Parts: []w.CellPart{w.Text("Ready — kept as sent: 10:00 Asia/Yekaterinburg")}},
@@ -1701,7 +1686,6 @@ func Io6() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Купить билеты "), w.Badge{Label: "VTODO"}}},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{
@@ -1712,7 +1696,6 @@ func Io6() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Untitled event")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("4 May 2026 · all day")}},
 											{Parts: []w.CellPart{w.Text("Ready — a whole day (no end), no title")}},
@@ -1720,7 +1703,6 @@ func Io6() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Личный 2026.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 23: cannot read DTSTART «2026-02-30»")}, Tone: w.CellDanger},
@@ -1836,16 +1818,10 @@ func Io7() Screen {
 								},
 							},
 							w.Table{
-								Cols: []w.TableCol{
-									{Label: "Source"},
-									{Label: "Summary"},
-									{Label: "Due", Rank: w.Rank3},
-									{Label: "Result", Rank: w.Rank4},
-								},
+								Cols: []w.TableCol{{Label: "Summary"}, {Label: "Due", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4, Main: true}},
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Отправить документы в МФЦ")}},
 											{Parts: []w.CellPart{w.Text("7 August 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — overdue, and stays overdue")}},
@@ -1853,7 +1829,6 @@ func Io7() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Ответить подрядчику по смете")}},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("Ready — a task without a date is a task")}},
@@ -1861,7 +1836,6 @@ func Io7() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Дописать раздел про кэш")}},
 											{Parts: []w.CellPart{w.Text("4 September 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — 40 % done, priority 1")}},
@@ -1869,7 +1843,6 @@ func Io7() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Созвон с подрядчиком "), w.Badge{Label: "VEVENT"}}},
 											{Parts: []w.CellPart{w.Text("17 August 2026")}},
 											{
@@ -1880,7 +1853,6 @@ func Io7() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Untitled task")}, Dim: true},
 											{Parts: []w.CellPart{w.Text("10 September 2026")}},
 											{Parts: []w.CellPart{w.Text("Ready — no title")}},
@@ -1888,7 +1860,6 @@ func Io7() Screen {
 									},
 									{
 										Cells: []w.TableCell{
-											{Parts: []w.CellPart{w.Text("Дела.ics")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("Сдать отчёт")}},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("line 88: cannot read DUE «2026-13-01»")}, Tone: w.CellDanger},
@@ -2023,7 +1994,12 @@ func Io8() Screen {
 								},
 							},
 							w.Table{
-								Cols: []w.TableCol{{Label: "File"}, {Label: "Title"}, {Label: "Date", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}},
+								Cols: []w.TableCol{
+									{Label: "File"},
+									{Label: "Title"},
+									{Label: "Date", Rank: w.Rank3},
+									{Label: "Result", Rank: w.Rank4, Main: true},
+								},
 								Rows: []w.TableRow{
 									{
 										Cells: []w.TableCell{
