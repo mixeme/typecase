@@ -971,7 +971,7 @@ func Publish2() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Lands in"},
-												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 												{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 											},
 											Rows: []w.TableRow{
@@ -1651,7 +1651,7 @@ func Publish13() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Lands in"},
-												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 												{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 											},
 											Rows: []w.TableRow{
@@ -2271,7 +2271,7 @@ func Publish22() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Lands in"},
-												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 												{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 											},
 											Rows: []w.TableRow{

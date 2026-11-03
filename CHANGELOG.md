@@ -1019,6 +1019,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A subscription's «Lands in» as cards** (Р-66, accepted by the owner
+  03.11): Objects is its main column, the card's name the collection
+  (`s-profile-1`, `-4`, `-10`, `-26`, `-27`, `s-publish-2`, `-13`, `-22`).
 - **Tables as cards, the last group** (Р-66, accepted by the owner 03.11):
   a mailbox's folders with Folder on the server (`s-mailbox-26`; the name
   is the folder's role), the table component with Role (`components-23`;

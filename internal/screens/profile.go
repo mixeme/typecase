@@ -514,7 +514,7 @@ func Profile1() Screen {
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
 											{Label: "Lands in"},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
@@ -1096,7 +1096,7 @@ func Profile27() Screen {
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
 											{Label: "Lands in"},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
@@ -1715,7 +1715,7 @@ func Profile26() Screen {
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
 												{Label: "Lands in"},
-												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+												{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 												{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 											},
 											Rows: []w.TableRow{
@@ -3523,7 +3523,7 @@ func Profile4() Screen {
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
 											{Label: "Lands in"},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
@@ -5176,7 +5176,7 @@ func Profile10() Screen {
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
 											{Label: "Lands in"},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Secondary: true},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Secondary: true, Main: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
