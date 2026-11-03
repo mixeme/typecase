@@ -265,6 +265,17 @@ func Print5() Screen {
 				},
 				Columns: true,
 			},
+			w.PrintRubric{Text: "Kept as the server sent them"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{w.PrintCell{Name: "DESCRIPTION"}, w.PrintCell{Name: "Договорились заморозить ветку в четверг."}},
+				Field: true,
+			},
+			w.PrintRow{
+				Items: []w.PrintRowPart{w.PrintCell{Name: "X-JTX-COLOR"}, w.PrintCell{Name: "-16711936"}},
+				Field: true,
+			},
+			w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "X-JTX-PINNED"}, w.PrintCell{Name: "1"}}, Field: true},
+			w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "X-OTHER"}, w.PrintCell{Name: "kept"}}, Field: true},
 			w.PrintFoot{Text: "Carrel · note · captured 2026-08-15 09:41"},
 		},
 		Variant: w.PagePrint,

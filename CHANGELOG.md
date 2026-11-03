@@ -1019,6 +1019,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The text keeps its font** (Р-83, the owner 03.11): a Markdown heading
+  in a note and a task list's title (`.tc-doc__heading`, on paper
+  `.tc-print__h2`) are the text's font, semibold and a step larger — not
+  the title's serif, which they fought with. Eleven frames (`s-notes-1`,
+  `-2`, `-3`, `-25`, `-28`, `-32`, `s-publish-4`, `-8`, `-10`, `-23`,
+  `phone-7`) and the note on paper (`print-5`).
+- **The note on paper prints what is kept** (Carrel's task 253, accepted
+  by the owner 03.11): «Kept as the server sent them» under Attachments,
+  a row for each property — the second `DESCRIPTION` and the three Carrel
+  does not know (`print-5`), as the contact's paper does.
 - **A note keeps what the server sent** (Carrel's task 253, accepted by the
   owner 03.11): the note's side column, above Source, has «Kept as the
   server sent them» folded with «Show 4» and the contact's hint — a second
