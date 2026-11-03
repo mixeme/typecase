@@ -1019,6 +1019,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Tables as cards, the last group** (Р-66, accepted by the owner 03.11):
+  a mailbox's folders with Folder on the server (`s-mailbox-26`; the name
+  is the folder's role), the table component with Role (`components-23`;
+  the name is the login), the root of Selected collections with Server
+  (`s-files-6`).
 - **The text keeps its font** (Р-83, the owner 03.11): a Markdown heading
   in a note and a task list's title (`.tc-doc__heading`, on paper
   `.tc-print__h2`) are the text's font, semibold and a step larger — not

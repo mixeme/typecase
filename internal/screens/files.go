@@ -1658,7 +1658,7 @@ func Files6() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "Name"},
-							{Label: "Server", Width: w.ColTime},
+							{Label: "Server", Width: w.ColTime, Main: true},
 							{Label: "Access", Width: w.Col80, Rank: w.Rank3},
 							{Label: "Purpose", Width: w.ColTime, Rank: w.Rank4},
 						},
