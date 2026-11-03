@@ -1019,6 +1019,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, first part** (Р-77, accepted by the owner 04.11): the
+  explanations of the local run (`desktop-6`), the sign-out dialog
+  (`desktop-12`; its third message joined the alert), the application
+  settings (`desktop-13`), the backup job (`s-backup-2`, `-19`) and the mail
+  search (`s-mailbox-14`) say only what the screen does not. The field
+  Installed in `desktop-13` has a name for screen readers.
 - **The archive pick keeps its date on the phone** (accepted by the owner
   03.11): the restore's first step (`s-backup-7`) stays a row, and on a
   narrow screen it hides the count of collections, not the date. A picked

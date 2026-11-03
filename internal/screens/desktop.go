@@ -447,11 +447,7 @@ func Desktop6() Screen {
 										Mono:    true,
 										Variant: w.Input11_5,
 									},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("Encrypted state lives here: your DAV connections and settings. Not one contact, event or note — those stay on the servers."),
-										},
-									},
+									w.FieldHint{Parts: []w.Inline{w.Text("Your connections and settings, encrypted. Records stay on the servers.")}},
 								},
 								Place: w.Grown,
 							},
@@ -459,13 +455,7 @@ func Desktop6() Screen {
 								Label: "Port",
 								Parts: []w.FieldPart{
 									w.Input{Value: "chosen at every start · now 51734", Label: "Port", Mono: true},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("Nothing to set here. The app asks the system for a free port on "),
-											w.Mono{Text: "127.0.0.1"},
-											w.Text(", so a busy 8080, a second copy of Carrel or someone else’s server cannot collide with it. The current number is always in the status bar — it is needed only to open the address in a browser."),
-										},
-									},
+									w.FieldHint{Parts: []w.Inline{w.Text("A free one at every start; its number is in the status bar.")}},
 								},
 								Width: w.FieldFill300,
 							},
@@ -475,13 +465,11 @@ func Desktop6() Screen {
 									w.Check{Parts: []w.CheckPart{w.Text("Allow other devices on this network")}},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("While this is off, Carrel listens on "),
-											w.Mono{Text: "127.0.0.1"},
-											w.Text(" only — from outside it does not exist. Turning it on "),
+											w.Text("Turning it on "),
 											w.Strong("pins the port"),
-											w.Text(" and gives "),
+											w.Text(": a phone and DAVx5 reach "),
 											w.Mono{Text: "http://192.168.1.14:8765"},
-											w.Text(" for a phone and for DAVx5, and asks for a password like any other instance: an address that other devices remember cannot change at every start."),
+											w.Text(" with your password."),
 										},
 									},
 								},
@@ -503,7 +491,7 @@ func Desktop6() Screen {
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Text("The password is the only key to the saved connections. Running locally changes nothing about that: nobody can recover it, including the app on your own computer."),
+									w.Text("Nobody can recover the password, not even this app; without it the saved connections are lost."),
 								},
 								Tone:  w.MsgAlert,
 								Space: w.MsgFlushTop2,
@@ -515,16 +503,16 @@ func Desktop6() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Strong("What only works from outside."),
-							w.Text(" A local Carrel is not visible from the internet, so "),
-							w.Strong("published links"),
+							w.Strong("Not reachable from the internet."),
+							w.Text(" "),
+							w.Strong("Published links"),
 							w.Text(", "),
 							w.Strong("devices over davloom"),
 							w.Text(", "),
-							w.Strong("backup started by an external request"),
+							w.Strong("external backup triggers"),
 							w.Text(" and "),
 							w.Strong("invitation links"),
-							w.Text(" either do not work or need you to arrange the access yourself — an invitation letter will go out, but the address inside it opens on your machine only — port forwarding, a tunnel, your own domain and certificate. Carrel neither guesses nor configures any of that: it marks such places and shows what is not answering."),
+							w.Text(" work on this machine only, until you set up port forwarding, a tunnel or your own domain."),
 						},
 						Tone:  w.MsgAlert,
 						Space: w.MsgFlush,
@@ -731,9 +719,9 @@ func Desktop12() Screen {
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}},
-							w.Text(" The app goes back to the first screen, where the mode is chosen again — a server or a local run. "),
+							w.Text(" "),
 							w.Strong("Your other devices stay signed in"),
-							w.Text(" — those sessions end in Settings → Account, and they end there whether this app is running or not."),
+							w.Text(": end those sessions in Settings → Account."),
 						},
 						Space: w.MsgFlush,
 					},
@@ -741,17 +729,11 @@ func Desktop12() Screen {
 						Icon: "shield",
 						Parts: []w.MsgPart{
 							w.Strong("Delete what this app keeps on this computer?"),
-							w.Text(" The data folder "),
+							w.Text(" The folder "),
 							w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"},
-							w.Text(", the instance address and name, the start-at-sign-in setting and the session token in the keychain. The next start would be indistinguishable from the first, and no one can bring the saved connections back — not even from here."),
+							w.Text(", the instance address and the session token. The saved connections cannot be brought back; records on your DAV servers are not touched."),
 						},
 						Tone:  w.MsgAlert,
-						Space: w.MsgFlush,
-					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Your events, contacts and notes are not here and are not touched: they live on your DAV servers. What would be deleted is the key to them, not them."),
-						},
 						Space: w.MsgFlush,
 					},
 					w.Line{
@@ -799,13 +781,7 @@ func Desktop13() Screen {
 												},
 												Gap: w.LineGap8,
 											},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Signing out brings back the first screen, where the mode is chosen again — a server or a local run. Nothing is deleted by it. It asks first, which is what the ellipsis promises — in the web user menu the same words end the session at once and carry no ellipsis. In local mode the line reads "),
-													w.Mono{Text: "mix · local run"},
-													w.Text(": there is no address to show."),
-												},
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Nothing is deleted: the app returns to the first screen.")}},
 										},
 										Place: w.Grown,
 									},
@@ -858,7 +834,7 @@ func Desktop13() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("This appears only after a certificate has been rejected, and it remembers that one fingerprint — it is not “turn checking off”."),
+													w.Text("Appears only after a certificate was rejected; it trusts that one fingerprint, checking stays on."),
 												},
 											},
 										},
@@ -874,17 +850,13 @@ func Desktop13() Screen {
 										Parts: []w.FieldPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Input{Value: "app 0.8.0 · server 0.8.0", Mono: true, Variant: w.Input11_5Fill},
+													w.Input{Value: "app 0.8.0 · server 0.8.0", Label: "Installed", Mono: true, Variant: w.Input11_5Fill},
 													w.Button{Label: "Check now"},
 												},
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Last checked 2 hours ago, by this button · "),
-													w.Mono{Text: "0.8.0"},
-													w.Text(" was the latest. Nothing is checked on its own while the tick below is clear."),
-												},
+												Parts: []w.Inline{w.Text("Last checked 2 hours ago: "), w.Mono{Text: "0.8.0"}, w.Text(" was the latest.")},
 											},
 										},
 										Width: w.FieldFill300,
@@ -896,7 +868,7 @@ func Desktop13() Screen {
 											w.Check{Parts: []w.CheckPart{w.Text("Include pre-releases")}},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Both are off out of the box, and off means the app does not reach the network at all — not “checks and stays quiet”. The button above works either way. With checking on, an update is downloaded from the project’s releases and verified by signature before anything is replaced; with the second tick off it then waits until the button is pressed, and nothing restarts under your hands mid-work."),
+													w.Text("With these clear, the app does not go online. An update is verified by its signature; without the second tick it waits until you install it."),
 												},
 											},
 										},
@@ -906,9 +878,7 @@ func Desktop13() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("The app and the server are versioned separately. In local mode both are updated here at once, because the server runs inside the app. Connected to your own server, this updates the app only — the server is updated where it runs, and the app says so when the two versions stop matching."),
-												},
+												Parts: []w.Inline{w.Text("In local mode this updates the server too; with your own server, the app only.")},
 											},
 										},
 										Place: w.Grown,

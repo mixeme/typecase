@@ -637,11 +637,7 @@ func Backup2() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Copies past the eighth are deleted "),
-													w.Strong("after"),
-													w.Text(" the new one has been read back and checked, not before. The file is dated and never overwritten."),
-												},
+												Parts:   []w.Inline{w.Text("Older copies are deleted only "), w.Strong("after"), w.Text(" the new one is checked.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -650,11 +646,11 @@ func Backup2() Screen {
 									w.Msg{
 										Parts: []w.MsgPart{
 											w.Strong("Download"),
-											w.Text(" streams the archive out and writes nothing to the server: no folder, no retention — the copy is yours to keep. It can still run at three in the morning, but only on an external trigger, because a stream needs somebody at the other end: a browser is not there at that hour, a machine with a disk is. "),
+											w.Text(" writes nothing to the server. On a schedule it runs only from an external trigger: someone has to take the file. "),
 											w.Strong("Both"),
-											w.Text(" does the two at once — and then the trigger has "),
+											w.Text(" does the two, and its trigger has "),
 											w.Strong("two steps"),
-											w.Text(", because the file still has to be taken."),
+											w.Text("."),
 										},
 										Space:  w.MsgFlushTop4,
 										Place:  w.Grown,
@@ -669,9 +665,7 @@ func Backup2() Screen {
 										Parts: []w.FieldPart{
 											w.Check{On: true, Name: "encrypted", Value: "1", Parts: []w.CheckPart{w.Text("Encrypt the archive")}},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."),
-												},
+												Parts:   []w.Inline{w.Text("Turn it off only where nobody but you can reach the copy.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -1047,11 +1041,7 @@ func Backup19() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Copies past the eighth are deleted "),
-													w.Strong("after"),
-													w.Text(" the new one has been read back and checked, not before. The file is dated and never overwritten."),
-												},
+												Parts:   []w.Inline{w.Text("Older copies are deleted only "), w.Strong("after"), w.Text(" the new one is checked.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -1060,11 +1050,11 @@ func Backup19() Screen {
 									w.Msg{
 										Parts: []w.MsgPart{
 											w.Strong("Download"),
-											w.Text(" streams the archive out and writes nothing to the server: no folder, no retention — the copy is yours to keep. It can still run at three in the morning, but only on an external trigger, because a stream needs somebody at the other end: a browser is not there at that hour, a machine with a disk is. "),
+											w.Text(" writes nothing to the server. On a schedule it runs only from an external trigger: someone has to take the file. "),
 											w.Strong("Both"),
-											w.Text(" does the two at once — and then the trigger has "),
+											w.Text(" does the two, and its trigger has "),
 											w.Strong("two steps"),
-											w.Text(", because the file still has to be taken."),
+											w.Text("."),
 										},
 										Space:  w.MsgFlushTop4,
 										Place:  w.Grown,
@@ -1079,9 +1069,7 @@ func Backup19() Screen {
 										Parts: []w.FieldPart{
 											w.Check{On: true, Name: "encrypted", Value: "1", Parts: []w.CheckPart{w.Text("Encrypt the archive")}},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("On by default. Turning it off makes sense in one case only: the copy goes where nobody but you gets in anyway — and then any archiver opens it."),
-												},
+												Parts:   []w.Inline{w.Text("Turn it off only where nobody but you can reach the copy.")},
 												Variant: w.HintColumn,
 											},
 										},
