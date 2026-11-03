@@ -1668,7 +1668,7 @@ func Admin4() Screen {
 						Cols: []w.TableCol{
 							{Width: w.ColMenu},
 							{Label: "Check", Width: w.Col26},
-							{Label: "What happened", Rank: w.Rank3},
+							{Label: "What happened", Rank: w.Rank3, Main: true},
 							{Label: "What to do", Width: w.Col26, Rank: w.Rank4},
 						},
 						Rows: []w.TableRow{
@@ -2477,7 +2477,11 @@ func Admin29() Screen {
 						},
 					},
 					w.Table{
-						Cols: []w.TableCol{{Width: w.ColMenu}, {Label: "Operation", Width: w.Col26}, {Label: "What happened", Rank: w.Rank3}},
+						Cols: []w.TableCol{
+							{Width: w.ColMenu},
+							{Label: "Operation", Width: w.Col26},
+							{Label: "What happened", Rank: w.Rank3, Main: true},
+						},
 						Rows: []w.TableRow{
 							{
 								Cells: []w.TableCell{
@@ -3202,7 +3206,7 @@ func Admin7() Screen {
 					w.Table{
 						Cols: []w.TableCol{
 							{Label: "When"},
-							{Label: "Action"},
+							{Label: "Action", Main: true},
 							{Label: "Actor", Rank: w.Rank3},
 							{Label: "Target", Rank: w.Rank4},
 							{Label: "Detail"},

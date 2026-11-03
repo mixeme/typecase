@@ -1016,6 +1016,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Tables as cards, the fourth group** (Р-66, accepted by the owner 03.11):
+  the setup check and the DAV check with What happened (`s-admin-4`, `-29`;
+  the card's name is the check or the operation, not its status mark), the
+  audit log with Action (`s-admin-7`; the name is the time), the password
+  history with What (`s-auth-15`; the name is the time). A card whose row
+  begins with a tick or a status mark takes the next cell as its name.
 - **Tables as cards, the third group** (Р-66, accepted by the owner 02.11):
   device setup with Type (`s-plan-4`, `-5`: where to paste the URL; Copy
   copies it), the backup history with Verified (`s-backup-1`, `-12`…`-14`;

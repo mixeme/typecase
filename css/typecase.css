@@ -978,6 +978,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1}
   .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-table__file),
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name,
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:has(> .tc-tickrow__tick,> .tc-tick) + td:not(.tc-table__main),
   .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:not(:empty):not(.tc-table__main):not(:has(> .tc-tickrow__tick,> .tc-tick)){display:block;grid-column:2;grid-row:1;min-width:0}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts:not(:has(> .tc-drop > .tc-acts__more)) > :not(:last-child):not(:nth-last-child(2)),

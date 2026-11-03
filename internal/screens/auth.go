@@ -506,7 +506,7 @@ func Auth15() Screen {
 						w.DialogTitle{Text: "Password history of viktor", Gap: w.DialogTitleGap8},
 						w.Prose{Parts: []w.Inline{w.Text("Times are Europe/Moscow.")}, Variant: w.ProseMutedClose},
 						w.Table{
-							Cols: []w.TableCol{{Label: "When"}, {Label: "What"}, {Label: "Who"}},
+							Cols: []w.TableCol{{Label: "When"}, {Label: "What", Main: true}, {Label: "Who"}},
 							Rows: []w.TableRow{
 								{
 									Cells: []w.TableCell{
