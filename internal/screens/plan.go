@@ -121,7 +121,7 @@ func Plan1() Screen {
 										Icon: "shield",
 										Parts: []w.MsgPart{
 											w.Strong("The profile carries passwords in cleartext."),
-											w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log."),
+											w.Text(" Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup."),
 										},
 										Tone:   w.MsgAlert,
 										Space:  w.MsgFlush,
@@ -134,7 +134,6 @@ func Plan1() Screen {
 									w.Card{
 										Items: []w.CardPart{
 											w.Rubric{Text: "Profile"},
-											w.CardHint{Parts: []w.CardTextPart{w.Text("Issued inside the unlock window: nothing more is asked.")}},
 											w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "Generate profile", Kind: w.ButtonDanger}}},
 										},
 									},
@@ -150,11 +149,7 @@ func Plan1() Screen {
 													},
 												},
 											},
-											w.CardHint{
-												Parts: []w.CardTextPart{
-													w.Text("It opens once, for you signed in to Carrel. Open it on the device, install the profile, then delete the file."),
-												},
-											},
+											w.CardHint{Parts: []w.CardTextPart{w.Text("Opens once, for you signed in to Carrel.")}},
 											w.CardRow{
 												Kind: w.CardTop9,
 												Gap:  6,
@@ -285,7 +280,7 @@ func Plan6() Screen {
 										Icon: "shield",
 										Parts: []w.MsgPart{
 											w.Strong("The profile carries passwords in cleartext."),
-											w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log."),
+											w.Text(" Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup."),
 										},
 										Tone:   w.MsgAlert,
 										Space:  w.MsgFlush,

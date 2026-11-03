@@ -57,7 +57,7 @@ var _ = add(
 	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one.")}, Tone: w.MsgAccent}, "components-22", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Files are found by their names; what is inside them is not searched.")}}, "s-find-1", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "account-2", "tc-msg", 1),
-	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The profile carries passwords in cleartext."), w.Text(" It is an ordinary file: it lands in Downloads, in a messenger, in the phone’s backup. Open it on the device and delete it. The link opens once and lives 5 minutes, for you signed in to Carrel; nothing is written to the server’s disk, and the issue is recorded in the audit log.")}, Tone: w.MsgAlert, Space: w.MsgFlush, Column: true}, "s-plan-1", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The profile carries passwords in cleartext."), w.Text(" Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup.")}, Tone: w.MsgAlert, Space: w.MsgFlush, Column: true}, "s-plan-1", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("Files go as files; calendars, tasks and notes as "), w.Mono{Text: ".ics"}, w.Text(", address books as "), w.Mono{Text: ".vcf"}, w.Text(".")}, Space: w.MsgFlushTop4, Column: true}, "s-backup-2", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Also started by"), w.Break{}, w.Text("• Run now — in the job list"), w.Break{}, w.Text("• Your own clock — "), w.Mono{Text: "cron"}, w.Text(", GoSentry, a job in Gitea, "), w.Mono{Text: "curl"}, w.Text(": External trigger in the job’s menu")}, Space: w.MsgFlushTop4, Column: true}, "s-backup-2", "tc-msg", 3),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and the session token. The saved connections cannot be brought back; records on your DAV servers are not touched.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "desktop-12", "tc-msg", 2),
@@ -502,6 +502,10 @@ var _ = add(
 		w.SecOpen{Items: []w.SecOpenPart{w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}, w.Line{Gap: w.LineGap6, Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}}}, w.Dim{Parts: []w.Inline{w.Text("Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.")}, Size: w.Dim11}}}}}, "desktop-1", "tc-sec", 1),
 
 	// tc-card
+	cards("hint-acts", w.Card{Items: []w.CardPart{
+		w.Rubric{Text: "Profile"},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("Asks for your Carrel password first.")}},
+		w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "Generate profile", Kind: w.ButtonDanger}}}}}, "s-plan-6", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.CardHead{Lines: []w.CardHeadLine{{Slot: "From", Parts: []w.CardTextPart{w.Strong("Михаил Енученко"), w.Text(" "), w.Mono{Text: "<mix@carrel.example>", Variant: w.Mono11Muted}}}, {Slot: "Reply-To", Parts: []w.CardTextPart{w.Text("Михаил Енученко "), w.Mono{Text: "<mix@example.org>", Variant: w.Mono11Muted}}}, {Slot: "To", Parts: []w.CardTextPart{w.Text("Анна Ковалёва "), w.Mono{Text: "<a.kovaleva@example.org>", Variant: w.Mono11Muted}, w.Text(", Артём Белов "), w.Mono{Text: "<a.belov@example.org>", Variant: w.Mono11Muted}}}, {Slot: "Subject", Parts: []w.CardTextPart{w.Text("Контакты подрядчика и смета")}}}},
 		w.Prose{Parts: []w.Inline{w.Text("Анна, Артём — вот карточка подрядчика и смета, которую он прислал. Договор в папке, ссылка ниже.\n\nМихаил Енученко")}, Variant: w.Prose13Card},
@@ -633,7 +637,6 @@ var _ = add(
 		w.CardList{Items: []string{"2 reminders from the others"}}}}, "s-dup-4", "tc-card", 3),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Profile"},
-		w.CardHint{Parts: []w.CardTextPart{w.Text("Issued inside the unlock window: nothing more is asked.")}},
 		w.CardRow{Kind: w.CardActs, Items: []w.CardRowPart{w.Button{Label: "Generate profile", Kind: w.ButtonDanger}}}}}, "s-plan-1", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "nextcloud · mix"},
@@ -710,7 +713,7 @@ var _ = add(
 		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("117")}}}}, "s-io-9", "tc-card", 1),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Link ready until 09:46", Items: []w.RubricPart{w.Badge{Label: "local", Tone: w.BadgeLocal, Title: "Local instance: the link will not open from outside your network"}}},
-		w.CardHint{Parts: []w.CardTextPart{w.Text("It opens once, for you signed in to Carrel. Open it on the device, install the profile, then delete the file.")}},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("Opens once, for you signed in to Carrel.")}},
 		w.CardRow{Kind: w.CardTop9, Gap: 6, Items: []w.CardRowPart{w.Button{Label: "Download profile", Icon: "download"}, w.Button{Label: "Revoke", Kind: w.ButtonDanger}}}}}, "s-plan-1", "tc-card", 3),
 	cards("chosen", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Device password"},

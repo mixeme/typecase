@@ -1019,6 +1019,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, second part** (Р-77, accepted by the owner 04.11): the
+  device profile (`s-plan-1`, `-6`; the link card says how long it lives),
+  mail turned off on the instance (`s-mailbox-28`), pictures shown in a
+  letter (`s-mailbox-13`) and a move on a server without UIDPLUS
+  (`s-mailbox-5`, no count of letters).
 - **Fewer words, first part** (Р-77, accepted by the owner 04.11): the
   explanations of the local run (`desktop-6`), the sign-out dialog
   (`desktop-12`; its third message joined the alert), the application
