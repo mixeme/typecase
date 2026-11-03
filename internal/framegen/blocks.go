@@ -1164,6 +1164,9 @@ func (g *gen) docmeta(e *El) string {
 			case x.Has("tc-post"):
 				// the form Attach sends, beside it
 				its = append(its, g.postForm(x))
+			case x.Has("tc-field__hint"):
+				// what is kept as the server sent it (Carrel's task 253)
+				its = append(its, "w.SecHint{Text: "+q(x.Text())+"}")
 			default:
 				stop("docmeta? " + join(x.Cls(), " "))
 			}

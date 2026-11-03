@@ -824,7 +824,7 @@ func Files2() Screen {
 									w.Button{Label: "Skip", Small: true, Form: "taken-release", Name: "answer", Value: "skip"},
 								},
 							},
-							{Name: "архив-2025.zip", Meta: "the server needs the size", Failed: true},
+							{Name: "архив-2025.zip", Meta: "server requires the file size", Failed: true},
 						},
 						Progress: "post-upload",
 						Row:      &w.QueueItem{Name: "{name}", Meta: "{size} · {percent}%", Meter: &w.Meter{Percent: 0, Track: 100}},

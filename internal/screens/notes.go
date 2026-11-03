@@ -812,6 +812,10 @@ func Notes2() Screen {
 										},
 									},
 									{
+										Title: w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 4", Small: true}}},
+										Items: []w.DocmetaPart{w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."}},
+									},
+									{
 										Title: w.Rubric{Text: "Source"},
 										Items: []w.DocmetaPart{w.Diag{Text: "UID   9e31-40b7-c012\nRead  2 min ago"}},
 									},
@@ -1012,6 +1016,10 @@ func Notes27() Screen {
 												},
 											},
 										},
+									},
+									{
+										Title: w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 4", Small: true}}},
+										Items: []w.DocmetaPart{w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."}},
 									},
 									{
 										Title: w.Rubric{Text: "Source"},
@@ -1233,6 +1241,10 @@ func Notes3() Screen {
 												},
 											},
 										},
+									},
+									{
+										Title: w.Rubric{Text: "Kept as the server sent them", Items: []w.RubricPart{w.Button{Label: "Show 4", Small: true}}},
+										Items: []w.DocmetaPart{w.SecHint{Text: "Properties Carrel does not edit are stored byte for byte and go back untouched."}},
 									},
 									{
 										Title: w.Rubric{Text: "Source"},

@@ -123,6 +123,9 @@ do, not what the authors did.
 
 ### Added
 
+- `SecHint` is a `DocmetaPart` too: a section of a document's side column
+  says under its rubric what it keeps (Carrel's task 253: «Kept as the
+  server sent them» of a note).
 - `frame2go -self -out DIR` writes each frame's draft to
   `DIR/<frame>/draft.go`, a package per frame (Carrel's task 245): many
   frames are one call — the mockup and the library are read once, all 294
@@ -1016,6 +1019,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A note keeps what the server sent** (Carrel's task 253, accepted by the
+  owner 03.11): the note's side column, above Source, has «Kept as the
+  server sent them» folded with «Show 4» and the contact's hint — a second
+  `DESCRIPTION` and three properties Carrel does not know (`s-notes-2`,
+  `-3`, `-27`; not the guest's page `s-publish-4`).
+- **A queue row refused for want of the size** says «server requires the
+  file size» (Carrel's task 252, the owner's words; `s-files-2`, `-24`).
 - **Tables as cards, the fourth group** (Р-66, accepted by the owner 03.11):
   the setup check and the DAV check with What happened (`s-admin-4`, `-29`;
   the card's name is the check or the operation, not its status mark), the
