@@ -1019,6 +1019,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The archive pick keeps its date on the phone** (accepted by the owner
+  03.11): the restore's first step (`s-backup-7`) stays a row, and on a
+  narrow screen it hides the count of collections, not the date. A picked
+  row in a table inside a card is lit 8 px past its tick and its last
+  column (`.tc-card > .tc-table tr.is-sel`): the light began at the tick's
+  edge.
 - **A subscription's «Lands in» as cards** (Р-66, accepted by the owner
   03.11): Objects is its main column, the card's name the collection
   (`s-profile-1`, `-4`, `-10`, `-26`, `-27`, `s-publish-2`, `-13`, `-22`).

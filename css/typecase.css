@@ -510,6 +510,8 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-card > .tc-table tr td:last-child,.tc-card > .tc-table tr th:last-child{padding-right:0}
 .tc-card > .tc-table tbody tr:last-child td,.tc-card > .tc-table tbody td[rowspan]{border-bottom:0}
 .tc-card > .tc-table tbody td{padding-top:5px;padding-bottom:5px}
+/* Выбранная строка в карточке: у её ячеек нет поля, и подсветка начиналась у края галочки (владелец 03.11) — выносим её на 8 px за край. */
+.tc-card > .tc-table tr.is-sel{box-shadow:-8px 0 0 var(--tc-card),8px 0 0 var(--tc-card)}
 /* Не опрашивается — приглушено имя, числа остаются. */
 .tc-table tr.is-off .tc-table__filename:last-child{color:var(--tc-dusty)}
 /* файловый менеджер */

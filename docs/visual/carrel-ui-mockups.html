@@ -691,6 +691,8 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-card > .tc-table tr td:last-child,.tc-card > .tc-table tr th:last-child{padding-right:0}
 .tc-card > .tc-table tbody tr:last-child td,.tc-card > .tc-table tbody td[rowspan]{border-bottom:0}
 .tc-card > .tc-table tbody td{padding-top:5px;padding-bottom:5px}
+/* Выбранная строка в карточке: у её ячеек нет поля, и подсветка начиналась у края галочки (владелец 03.11) — выносим её на 8 px за край. */
+.tc-card > .tc-table tr.is-sel{box-shadow:-8px 0 0 var(--tc-card),8px 0 0 var(--tc-card)}
 /* Не опрашивается — приглушено имя, числа остаются. */
 .tc-table tr.is-off .tc-table__filename:last-child{color:var(--tc-dusty)}
 /* файловый менеджер */
@@ -20104,8 +20106,8 @@ jobs:
         <div class="tc-rubric">From a job</div>
         <table class="tc-table">
           <tbody>
-            <tr class="is-sel"><td class="tc-table__col--tick"><input class="tc-tickrow__tick" type="radio" name="archive" value="lichnoe-na-domashnij-disk" aria-label="Pick" checked></td><td>Личное на домашний диск</td><td class="tc-mono tc-table__n3">2026-08-14 09:12</td><td class="tc-mono tc-table__n4">2.1 GB</td><td class="tc-mono">4 collections</td></tr>
-            <tr><td><input class="tc-tickrow__tick is-off" type="radio" name="archive" value="rabochee-ezhednevno" aria-label="Pick"></td><td>Рабочее, ежедневно</td><td class="tc-mono tc-table__n3">2026-08-16 03:10</td><td class="tc-mono tc-table__n4">18.4 MB</td><td class="tc-mono">3 collections</td></tr>
+            <tr class="is-sel"><td class="tc-table__col--tick"><input class="tc-tickrow__tick" type="radio" name="archive" value="lichnoe-na-domashnij-disk" aria-label="Pick" checked></td><td>Личное на домашний диск</td><td class="tc-mono">2026-08-14 09:12</td><td class="tc-mono tc-table__n4">2.1 GB</td><td class="tc-mono tc-table__n3">4 collections</td></tr>
+            <tr><td><input class="tc-tickrow__tick is-off" type="radio" name="archive" value="rabochee-ezhednevno" aria-label="Pick"></td><td>Рабочее, ежедневно</td><td class="tc-mono">2026-08-16 03:10</td><td class="tc-mono tc-table__n4">18.4 MB</td><td class="tc-mono tc-table__n3">3 collections</td></tr>
           </tbody>
         </table>
       </div>
