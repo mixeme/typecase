@@ -19532,8 +19532,8 @@ curl -fsS -H "$h" "$b/$id/download" -o "$out/carrel-personal-$(date +%F).zip"</d
           <button class="tc-btn is-primary" type="button" data-tc-copy-from="trigger-script" data-tc-copied="Copied"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the script</button>
           <button class="tc-btn" type="button" data-tc-save="carrel-personal.sh" data-tc-save-from="trigger-script"><svg viewBox="0 0 24 24"><use href="#i-download"/></svg>Save as <span class="tc-mono tc-mono--t11">carrel-personal.sh</span></button>
         </div>
-        <div class="tc-card__note">Put it where the password is to live, make it executable, and give <span class="tc-mono">crontab -e</span> one line: <span class="tc-mono">0 3 * * * /usr/local/bin/carrel-personal.sh</span> — the schedule stays a line, the work moves into the file. The date has to live in the script and not in the crontab line: <span class="tc-mono">cron</span> reads <span class="tc-mono">%</span> as a newline, so <span class="tc-mono">date +%F</span> written up there would break the entry.</div>
-        <div class="tc-msg tc-msg--flush-top9">A copy that fails needs no separate check: the download answers with an error, <span class="tc-mono">set -eu</span> stops the script on it, and cron sends the mail. The wait is open-ended on purpose — a copy takes what it takes, and <span class="tc-mono">409</span> until then means «not yet», not «broken».</div>
+        <div class="tc-card__note">Put it where the password is to live, make it executable, and give <span class="tc-mono">crontab -e</span> one line: <span class="tc-mono">0 3 * * * /usr/local/bin/carrel-personal.sh</span>. Keep the date in the script: <span class="tc-mono">cron</span> reads <span class="tc-mono">%</span> as a newline, so <span class="tc-mono">date +%F</span> in the crontab line breaks the entry.</div>
+        <div class="tc-msg tc-msg--flush-top9">A failed copy needs no separate check: the download answers with an error, <span class="tc-mono">set -eu</span> stops the script, and cron sends the mail. The wait has no limit: <span class="tc-mono">409</span> means «not yet», not «broken».</div>
       </div>
     </div></div></div>
   </div>
@@ -19574,8 +19574,8 @@ Authorization: Bearer cbk_7f3a-91de-4402-lamp
 https://carrel.example/api/backup/run?job=personal</textarea>
             <button class="tc-btn is-sm tc-btn--self-start" type="button">Copy</button>
           </div>
-          <div class="tc-card__note">GoSentry is a scheduler of commands, not an HTTP checker: its job dialog asks for <b>Name</b>, <b>Folder</b>, <b>Schedule</b>, <b>Command</b> and <b>Arguments</b> (one argument per line, no quotes). This tab copies those fields, not a URL and a header. Leave <b>Start only, do not wait for exit</b> off — <span class="tc-mono">curl</span> exits when the <span class="tc-mono">202</span> comes back.</div>
-          <div class="tc-msg tc-msg--flush-top9">A second GoSentry job, same form: Command <span class="tc-mono">curl</span>, Arguments a <span class="tc-mono">GET /api/backup/status?job=personal</span>, failing when the last <b>successful</b> copy is older than 26 hours. The first job says the copy was asked for; only the second says it happened.</div>
+          <div class="tc-card__note">GoSentry runs commands, not URL checks: its job dialog asks for <b>Name</b>, <b>Folder</b>, <b>Schedule</b>, <b>Command</b> and <b>Arguments</b> (one per line, no quotes), and this tab gives those fields. Leave <b>Start only, do not wait for exit</b> off: <span class="tc-mono">curl</span> exits when the <span class="tc-mono">202</span> comes back.</div>
+          <div class="tc-msg tc-msg--flush-top9">Add a second GoSentry job, same form: Command <span class="tc-mono">curl</span>, Arguments a <span class="tc-mono">GET /api/backup/status?job=personal</span>, failing when the last <b>successful</b> copy is older than 26 hours. The first job only asks for the copy; the second says it happened.</div>
         </div>
       </div></div></div>
     </div>
@@ -19632,7 +19632,7 @@ jobs:
             <input class="tc-in is-mono tc-in--t11" type="text" aria-label="Its value" value="cbk_7f3a-91de-4402-lamp">
             <button class="tc-btn is-sm" type="button">Copy</button>
           </div>
-          <div class="tc-card__note">Put the file into the repository as <span class="tc-mono">.gitea/workflows/carrel-personal.yaml</span> and the password into its secrets as <span class="tc-mono">CARREL_BACKUP</span>: the workflow names the secret, the password never sits in the file. A job that also <b>downloads</b> gets the script as a step, and the archive is kept with <span class="tc-mono">actions/upload-artifact</span>.</div>
+          <div class="tc-card__note">Put the file into the repository as <span class="tc-mono">.gitea/workflows/carrel-personal.yaml</span> and the password into its secrets as <span class="tc-mono">CARREL_BACKUP</span>: the password never sits in the file. A job that also <b>downloads</b> gets the script as a step and keeps the archive with <span class="tc-mono">actions/upload-artifact</span>.</div>
         </div>
       </div></div></div>
     </div>
@@ -19652,7 +19652,7 @@ jobs:
           <div class="tc-line tc-line--gap-8 tc-card__top8">
             <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-dup"/></svg>Copy the line</button>
           </div>
-          <div class="tc-card__note">For anything that can send a <span class="tc-mono">POST</span>: a scheduler of your own, a monitoring service, a hand at the terminal. The line is the whole of it; <span class="tc-mono">GET /api/backup/status?job=personal</span> answers when the last copy went through.</div>
+          <div class="tc-card__note">For anything that can send a <span class="tc-mono">POST</span>: your own scheduler, a monitoring service, a terminal. <span class="tc-mono">GET /api/backup/status?job=personal</span> tells when the last copy went through.</div>
         </div>
       </div></div></div>
     </div>

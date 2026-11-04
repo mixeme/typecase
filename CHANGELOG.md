@@ -1019,6 +1019,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, fifth part** (Р-77, 04.11, without acceptance pictures by
+  the owner's rule): the external backup triggers — cron (`s-backup-3`),
+  GoSentry (`s-backup-4`), Gitea (`s-backup-10`), any scheduler
+  (`s-backup-11`) — keep the steps and the traps (`%` in crontab, the second
+  job that checks the copy happened) and lose the commentary.
 - **Fewer words, fourth part** (Р-77, accepted by the owner 04.11): key
   escrow on the user side (`account-1`, `-2`, `-4`, `-7`, `-12`, `-15`, `-16`,
   `s-mail-9`). The account page says only what losing the password means;
