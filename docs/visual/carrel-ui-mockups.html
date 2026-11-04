@@ -4883,7 +4883,7 @@ Read  2 min ago · not changed on server</div>
     <div class="frame-label"><span>Переписать · итог</span><span class="frag">фрагмент</span><i>сообщение на карточке</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
         <div class="tc-msg"><b>Rewritten in 12 records.</b></div>
-        <div class="tc-msg is-alert"><b>Rewritten in 10 of 12 records.</b> «Созвон с подрядчиком» was not written: it changed after Carrel read it. «Ревью архитектуры» was refused: the server answered 403 Forbidden. Общий · baikal could not be read, and what it holds keeps the old address.</div>
+        <div class="tc-msg is-alert"><b>Rewritten in 10 of 12 records.</b> «Созвон с подрядчиком» was not written: it changed after Carrel read it. «Ревью архитектуры» was refused: 403 Forbidden. Общий · baikal could not be read, so what it holds keeps the old address.</div>
     </div>
   </div>
   <figcaption>Итог без отказов — сообщение без тревоги. С отказами — тревожное, и у каждого отказа своя причина: запись изменилась после чтения, сервер отказал, коллекция не прочиталась. Что сервер не сохранил при переписывании — в подробностях сообщения.</figcaption>
@@ -23554,7 +23554,7 @@ Read  2 min ago</div>
         <div class="tc-sec">
           <div class="tc-field tc-field--w100"><label>Send it as</label>
             <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="format" value="md" checked>Markdown · .md</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="format" value="ics">Source · .ics</label></span>
-            <span class="tc-field__hint">Markdown is what a person opens and reads; it carries the text and links to attachments, not the foreign properties another client wrote. The source <span class="tc-mono">.ics</span> is the faithful copy and needs a client that reads VJOURNAL — jtx Board, Evolution.</span></div>
+            <span class="tc-field__hint">Markdown is for reading: the text and links to attachments, without the properties other clients wrote. The source <span class="tc-mono">.ics</span> keeps everything and needs a client that reads VJOURNAL — jtx Board, Evolution.</span></div>
         </div>
       </div>
       <div class="tc-sheet__foot">
@@ -25022,7 +25022,7 @@ password  4c1-tide-oven</div>
           </tbody>
         </table>
         <form class="tc-post" id="install" action="/admin/install" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-msg tc-msg--max580">The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run.</div>
+        <div class="tc-msg tc-msg--max580">It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run.</div>
       </div>
     </div>
   </div>
@@ -25074,7 +25074,7 @@ password  4c1-tide-oven</div>
           </div>
         </div>
         <form class="tc-post" id="install" action="/admin/install" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-msg tc-msg--max580">The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run.</div>
+        <div class="tc-msg tc-msg--max580">It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run.</div>
       </div>
     </div>
   </div>
@@ -25125,7 +25125,7 @@ password  4c1-tide-oven</div>
         </div>
         <div class="tc-msg is-alert tc-msg--max580">Give the address people open Carrel at, like https://carrel.example.org.</div>
         <form class="tc-post" id="install" action="/admin/install" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-msg tc-msg--max580">The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run.</div>
+        <div class="tc-msg tc-msg--max580">It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run.</div>
       </div>
     </div>
   </div>
@@ -27870,7 +27870,7 @@ DATA                → 550 5.7.1 Daily sending limit reached
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-stack tc-stack--gap-10">
         <div class="tc-msg is-accent tc-msg--flush"><b>The letter went out</b> to 2 recipients from mix@home.example.</div>
-        <div class="tc-msg tc-msg--flush">Its copy did not reach <b>Sent</b>: the server answered <span class="tc-mono">APPEND → NO [OVERQUOTA] Quota exceeded</span>. The recipients have the letter; only your own copy is missing. Free some space in the mailbox — Carrel does not keep a copy to put there later.</div>
+        <div class="tc-msg tc-msg--flush">Its copy did not reach <b>Sent</b>: the server answered <span class="tc-mono">APPEND → NO [OVERQUOTA] Quota exceeded</span>. The recipients have the letter. Free some space in the mailbox: Carrel keeps no copy to put there later.</div>
         <div class="tc-line tc-line--gap-8"><button class="tc-btn" type="button">Close</button></div>
       </div>
     </div>
@@ -33144,7 +33144,7 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
         <div class="tc-msg is-accent is-row tc-msg--flush-r0">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-download"/></svg>
-          <span class="tc-msg__aside"><b>Carrel 0.8.0 is ready to install.</b> It will be applied the next time the app closes, or now — the window reopens where it was.</span>
+          <span class="tc-msg__aside"><b>Carrel 0.8.0 is ready to install.</b> It is applied when the app closes, or now: the window reopens where it was.</span>
           <span class="tc-push">
             <button class="tc-btn is-primary" type="button">Install and restart</button>
             <button class="tc-btn" type="button">What’s new</button>
@@ -33155,14 +33155,14 @@ dav: HTTP 503: the server is busy</div></div>
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>Installed</label>
               <input class="tc-in is-mono tc-in--t11-5" type="text" value="app 0.8.0 · server 0.8.0 — both run inside this app" aria-label="Installed">
-              <span class="tc-field__hint">In local mode the server is part of the app, so one update covers both. Your data folder is untouched by an update: connections and settings stay where they are.</span></div>
+              <span class="tc-field__hint">In local mode one update covers the app and the server. Connections and settings stay as they are.</span></div>
             <div class="tc-field tc-grow"><label>Downloaded</label>
               <span class="tc-line tc-line--gap-9">
                 <span class="tc-meter tc-meter--max260-fill"><i class="tc-meter__bar" data-tc-width="100%"></i></span>
                 <span class="tc-mono tc-mono--t11-dusty">0.8.0 · 14.2 MB · signature checked</span>
               </span></div>
           </div>
-          <div class="tc-msg tc-msg--flush">Nothing installs itself while you work: an update waits for the app to close, or for this button. You are seeing this banner because automatic checking was turned on — out of the box it is off, and the app never goes looking.</div>
+          <div class="tc-msg tc-msg--flush">You see this because automatic checking is on; out of the box the app never goes looking.</div>
         </div>
       </div>
     </div>

@@ -1790,7 +1790,7 @@ func Admin4() Screen {
 					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
+							w.Text("It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run."),
 						},
 						Column: true,
 					},
@@ -1878,7 +1878,7 @@ func Admin25() Screen {
 					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
+							w.Text("It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run."),
 						},
 						Column: true,
 					},
@@ -1972,7 +1972,7 @@ func Admin26() Screen {
 					w.PostForm{ID: "install", Action: "/admin/install", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("The check runs from outside inwards: Carrel calls itself at the base address, so it sees exactly what a browser or DAVx5 will. Nothing is changed and nothing is stored, apart from the audit line saying the check was run."),
+							w.Text("It sees exactly what a browser or DAVx5 will. Nothing is changed or stored, apart from the audit line that the check was run."),
 						},
 						Column: true,
 					},

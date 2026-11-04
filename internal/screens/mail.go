@@ -1899,9 +1899,9 @@ func Mail5() Screen {
 										},
 										w.FieldHint{
 											Parts: []w.Inline{
-												w.Text("Markdown is what a person opens and reads; it carries the text and links to attachments, not the foreign properties another client wrote. The source "),
+												w.Text("Markdown is for reading: the text and links to attachments, without the properties other clients wrote. The source "),
 												w.Mono{Text: ".ics"},
-												w.Text(" is the faithful copy and needs a client that reads VJOURNAL — jtx Board, Evolution."),
+												w.Text(" keeps everything and needs a client that reads VJOURNAL — jtx Board, Evolution."),
 											},
 										},
 									},

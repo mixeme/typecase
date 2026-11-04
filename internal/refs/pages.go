@@ -762,72 +762,7 @@ var _ = add(
 		Variant: w.PageOnBackgroundColumn,
 	}, "desktop-11", "tc-root", 1),
 	page("on-background", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" "), w.Strong("Your other devices stay signed in"), w.Text(": end those sessions in Settings → Account.")}, Space: w.MsgFlush}, w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and the session token. The saved connections cannot be brought back; records on your DAV servers are not touched.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Line{Items: []w.LinePart{w.Button{Label: "Keep and sign out", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Delete and sign out", Kind: w.ButtonDangerSolid}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Gap: w.LineGap8, Block: true}}, Gap: w.WindowGap10, Small: true}}, Variant: w.PageOnBackground}, "desktop-12", "tc-root", 1),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Msg{
-				Icon: "download",
-				Parts: []w.MsgPart{
-					w.Strong("Carrel 0.8.0 is ready to install."),
-					w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was."),
-				},
-				End: &w.Push{
-					Items: []w.PushPart{
-						w.Button{Label: "Install and restart", Kind: w.ButtonPrimary},
-						w.Button{Label: "What’s new"},
-						w.Button{Label: "Later"},
-					},
-				},
-				Tone:  w.MsgAccent,
-				Space: w.MsgFlushEnd,
-			},
-			w.Window{
-				Items: []w.WindowPart{
-					w.Form{
-						Items: []w.FormPart{
-							w.Field{
-								Label: "Installed",
-								Parts: []w.FieldPart{
-									w.Input{
-										Value:   "app 0.8.0 · server 0.8.0 — both run inside this app",
-										Label:   "Installed",
-										Mono:    true,
-										Variant: w.Input11_5,
-									},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("In local mode the server is part of the app, so one update covers both. Your data folder is untouched by an update: connections and settings stay where they are."),
-										},
-									},
-								},
-								Place: w.Grown,
-							},
-							w.Field{
-								Label: "Downloaded",
-								Parts: []w.FieldPart{
-									w.Line{
-										Items: []w.LinePart{
-											w.Meter{Percent: 100, Width: w.MeterFill},
-											w.Mono{Text: "0.8.0 · 14.2 MB · signature checked", Variant: w.Mono11Dusty},
-										},
-										Gap: w.LineGap9,
-									},
-								},
-								Place: w.Grown,
-							},
-						},
-						Variant: w.FormGap12,
-					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Nothing installs itself while you work: an update waits for the app to close, or for this button. You are seeing this banner because automatic checking was turned on — out of the box it is off, and the app never goes looking."),
-						},
-						Space: w.MsgFlush,
-					},
-				},
-				Gap: w.WindowGap12,
-			},
-		},
-	}, "desktop-14", "tc-root", 1),
+	page("plain", w.Page{Items: []w.PagePart{w.Msg{Icon: "download", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It is applied when the app closes, or now: the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, w.Window{Items: []w.WindowPart{w.Form{Items: []w.FormPart{w.Field{Label: "Installed", Parts: []w.FieldPart{w.Input{Value: "app 0.8.0 · server 0.8.0 — both run inside this app", Label: "Installed", Mono: true, Variant: w.Input11_5}, w.FieldHint{Parts: []w.Inline{w.Text("In local mode one update covers the app and the server. Connections and settings stay as they are.")}}}, Place: w.Grown}, w.Field{Label: "Downloaded", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Meter{Percent: 100, Width: w.MeterFill}, w.Mono{Text: "0.8.0 · 14.2 MB · signature checked", Variant: w.Mono11Dusty}}, Gap: w.LineGap9}}, Place: w.Grown}}, Variant: w.FormGap12}, w.Msg{Parts: []w.MsgPart{w.Text("You see this because automatic checking is on; out of the box the app never goes looking.")}, Space: w.MsgFlush}}, Gap: w.WindowGap12}}}, "desktop-14", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{

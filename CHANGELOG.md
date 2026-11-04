@@ -1019,6 +1019,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, sixth part** (Р-77, 04.11, without acceptance pictures):
+  an address rewritten in contacts (`s-contacts-21`), the export format of
+  notes (`s-mail-5`), a letter whose copy missed Sent (`s-mailbox-20`), an
+  update ready to install (`desktop-14`: the third message no longer repeats
+  the alert) and the outside check (`s-admin-4`, `-25`, `-26`: the message no
+  longer repeats the subtitle).
 - **Fewer words, fifth part** (Р-77, 04.11, without acceptance pictures by
   the owner's rule): the external backup triggers — cron (`s-backup-3`),
   GoSentry (`s-backup-4`), Gitea (`s-backup-10`), any scheduler

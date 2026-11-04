@@ -899,7 +899,7 @@ func Desktop14() Screen {
 				Icon: "download",
 				Parts: []w.MsgPart{
 					w.Strong("Carrel 0.8.0 is ready to install."),
-					w.Text(" It will be applied the next time the app closes, or now — the window reopens where it was."),
+					w.Text(" It is applied when the app closes, or now: the window reopens where it was."),
 				},
 				End: &w.Push{
 					Items: []w.PushPart{
@@ -926,7 +926,7 @@ func Desktop14() Screen {
 									},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("In local mode the server is part of the app, so one update covers both. Your data folder is untouched by an update: connections and settings stay where they are."),
+											w.Text("In local mode one update covers the app and the server. Connections and settings stay as they are."),
 										},
 									},
 								},
@@ -949,9 +949,7 @@ func Desktop14() Screen {
 						Variant: w.FormGap12,
 					},
 					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("Nothing installs itself while you work: an update waits for the app to close, or for this button. You are seeing this banner because automatic checking was turned on — out of the box it is off, and the app never goes looking."),
-						},
+						Parts: []w.MsgPart{w.Text("You see this because automatic checking is on; out of the box the app never goes looking.")},
 						Space: w.MsgFlush,
 					},
 				},
