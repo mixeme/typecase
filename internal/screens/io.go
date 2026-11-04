@@ -1337,7 +1337,7 @@ func Io4() Screen {
 											w.Mono{Text: ".zip"},
 											w.Text(" — any number of them, "),
 											w.Mono{Text: ".ics"},
-											w.Text(" — iCalendar 2.0 journal entries. Several files may be picked at once; events and tasks in an "),
+											w.Text(" — iCalendar journal entries. Several files at once; events and tasks in an "),
 											w.Mono{Text: ".ics"},
 											w.Text(" are skipped and named in the report."),
 										},
@@ -1365,7 +1365,7 @@ func Io4() Screen {
 												Parts: []w.CardTextPart{
 													w.Text("Every "),
 													w.Mono{Text: ".md"},
-													w.Text(" directly in that folder. Subfolders are not walked, nothing on the server is moved or deleted — the files stay where they were."),
+													w.Text(" directly in that folder, without subfolders. Nothing on the server is moved or deleted."),
 												},
 											},
 											w.Button{Label: "Preview folder", Kind: w.ButtonPrimary},

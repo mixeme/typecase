@@ -327,7 +327,7 @@ func Desktop4() Screen {
 									},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("The same folder on any computer: plug the stick in, run, sign in with your password. The data folder cannot be moved away from the app in this mode — that is what makes it portable."),
+											w.Text("The same folder on any computer: plug the stick in, run, sign in. In this mode the data folder always sits next to the app."),
 										},
 									},
 								},
@@ -971,7 +971,7 @@ func Desktop15() Screen {
 							w.Strong("The app is newer than the server."),
 							w.Text(" This app is 0.8.0, "),
 							w.Mono{Text: "carrel.example"},
-							w.Text(" runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there."),
+							w.Text(" runs 0.6.4. What both know works; what is newer than the server is not there."),
 						},
 						Tone:  w.MsgAlert,
 						Space: w.MsgFlush,
@@ -984,7 +984,7 @@ func Desktop15() Screen {
 									w.Input{Placeholder: "Update the server where it runs — this app cannot do it", Label: "What to do"},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("The server is somebody’s machine: yours, a friend’s, a hosting account. An app that could update it from the outside would be a way in, and Carrel does not build such ways."),
+											w.Text("The app does not update a server from outside: that would be a way in. Whoever runs the server updates it."),
 										},
 									},
 								},

@@ -1019,6 +1019,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, eighth part** (Р-77, 04.11, without acceptance pictures):
+  importing notes (`s-io-4`), the portable copy in the settings
+  (`desktop-4`), an app newer than its server (`desktop-15`: whoever runs the
+  server updates it), the mail signature (`s-mailbox-27`), uploading files
+  (`s-files-1`), Thunderbird (`s-plan-4`) and duplicates (`s-dup-1`, `-6`).
 - **Fewer words, seventh part** (Р-77, 04.11, without acceptance pictures):
   subscribing to a feed (`s-profile-10`), a new calendar (`s-profile-5`),
   mail in the instance settings (`s-mailbox-29`), unlocked credentials

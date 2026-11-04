@@ -84,7 +84,7 @@ func Dup1() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
+							w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm."),
 						},
 						Tone: w.MsgAccent,
 					},
@@ -274,10 +274,8 @@ func Dup1() Screen {
 										Inset: true,
 									},
 									w.CardHint{
-										Parts: []w.CardTextPart{
-											w.Text("The same event in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other."),
-										},
-										Line: true,
+										Parts: []w.CardTextPart{w.Text("The same event in two calendars, different UIDs: Agenda shows it twice.")},
+										Line:  true,
 									},
 									w.CardRow{
 										Kind: w.CardActs,
@@ -924,10 +922,8 @@ func Dup1() Screen {
 										Inset: true,
 									},
 									w.CardHint{
-										Parts: []w.CardTextPart{
-											w.Text("Same title and the same date: a note copied into a second notebook. Linked, the two are shown as one row; merging writes one and deletes the other."),
-										},
-										Line: true,
+										Parts: []w.CardTextPart{w.Text("Same title and the same date: a note copied into a second notebook.")},
+										Line:  true,
 									},
 									w.CardRow{
 										Kind: w.CardActs,
@@ -1392,7 +1388,7 @@ func Dup6() Screen {
 						Items: []w.NoticesPart{
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm."),
+									w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm."),
 								},
 								Tone: w.MsgAccent,
 							},

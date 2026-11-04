@@ -10,9 +10,10 @@ func ptr(t w.Ticked) *w.Ticked { return &t }
 
 var _ = add(
 	// tc-msg
-	cards("plain", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices", 1),
+	cards("plain", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices", 1),
 	cards("diag", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-notices", 1),
 	cards("empty", w.Notices{Items: []w.NoticesPart{}}, "shell-1", "tc-notices", 1),
+	cards("text-strong-text", w.Msg{Parts: []w.MsgPart{w.Text("Without scripts there is no drop and no queue: "), w.Strong("Upload"), w.Text(" sends the files. A name already taken is refused, not overwritten.")}}, "s-files-1", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("The letter went, but not to everyone. Sending again goes only to the refused.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-mail-18", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Strong("Could not connect."), w.Text(" The server refused the login and password. Nothing was saved.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides, Column: true}, "s-profile-24", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("A feed is read anew on every visit: there is nothing to refresh. "), w.Strong("Check"), w.Text(" asks whether the address still replies.")}, Column: true}, "s-profile-10", "tc-msg", 1),
@@ -48,7 +49,7 @@ var _ = add(
 	cards("bot12", w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12}, "s-admin-17", "tc-msg", 1),
 	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("The password of "), w.Strong("anna"), w.Text(" is reset.")}, Space: w.MsgFlush}, "s-admin-14", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 12 records.")}}, "s-contacts-21", "tc-msg", 1),
-	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so.")}}, "s-files-1", "tc-msg", 1),
+	cards("plain", w.Msg{Parts: []w.MsgPart{w.Text("Drop files onto the window to upload them here. A name already taken is refused, not overwritten.")}}, "s-files-1", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write: connect an account that holds notes first.")}, Space: w.MsgFlush}, "s-notes-6", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12}, "s-admin-1", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The storages ticked in the rail, each with its own tree.")}}, "s-files-6", "tc-msg", 1),
@@ -64,14 +65,14 @@ var _ = add(
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("baikal — the server replied 401. Check the saved password on the profile page.")}, Tone: w.MsgAlert}, "components-22", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Rewritten in 11 of 12 records."), w.Text(" «Планёрка редакции» was refused: its organiser’s server does not take changes to attendees. 2 records in Shared are read-only and keep the old address.")}, Tone: w.MsgAlert}, "s-contacts-16", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("Merged, but nothing was deleted:"), w.Text(" Лебедева Вера refused, the rest were not tried.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides}, "s-dup-5", "tc-msg", 1),
-	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.")}, Tone: w.MsgAccent}, "s-dup-6", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.")}, Tone: w.MsgAccent}, "s-dup-6", "tc-msg", 1),
 	cards("flush", w.Msg{Parts: []w.MsgPart{w.Text("The address stays: links, devices and backups keep working.")}, Space: w.MsgFlushTop2}, "s-profile-7", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Links, devices and backups lose the old address. nextcloud may send attendees a cancellation.")}, Space: w.MsgFlushTop2}, "s-profile-8", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("Carrel keeps no copy: this cannot be undone. nextcloud may send the attendees of its meetings a cancellation.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Last archived "), w.Mono{Text: "2026-08-14"}, w.Text("; a restore makes a "), w.Strong("new"), w.Text(" calendar at a new address.")}, Space: w.MsgFlush}, "s-profile-9", "tc-msg", 2),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Strong("The Carrel server fetches the feed, not your browser."), w.Text(" An address on your local network works only if the server can reach it.")}, Tone: w.MsgAlert, Space: w.MsgInset20, Column: true}, "s-profile-10", "tc-msg", 2),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("One code for each ticked account. Scan it with the phone: DAVx5 opens with the address and the login filled in, and asks for the password shown under the code.")}, Space: w.MsgFlush, Column: true}, "s-plan-2", "tc-msg", 1),
-	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book, with the login and the password from the account row. There is no import file and none is needed.")}, Column: true}, "s-plan-4", "tc-msg", 1),
+	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book, with the login and the password from the account row. No import file is needed.")}, Column: true}, "s-plan-4", "tc-msg", 1),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Text("Unlocked everywhere credentials are shown, not only here; every reveal goes to the audit log.")}, Column: true}, "s-plan-5", "tc-msg", 1),
 	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Changing your Carrel password does "), w.Strong("not"), w.Text(" disconnect devices; only revoking does.")}, Tone: w.MsgAccent, Column: true}, "s-davloom-1", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Strong("Download"), w.Text(" writes nothing to the server. On a schedule it runs only from an external trigger: someone has to take the file. "), w.Strong("Both"), w.Text(" does the two, and its trigger has "), w.Strong("two steps"), w.Text(".")}, Space: w.MsgFlushTop4, Column: true}, "s-backup-2", "tc-msg", 2),
@@ -612,7 +613,7 @@ var _ = add(
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
 		w.Field{Label: "Markdown, a zip of them, or .ics", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "заметки-2026.zip", Label: "заметки-2026.zip", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".md,.zip,.ics", Label: "Markdown, a zip of them, or .ics", Shows: "import-file", Many: true}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
-		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".md"}, w.Text(" — Markdown, "), w.Mono{Text: ".zip"}, w.Text(" — any number of them, "), w.Mono{Text: ".ics"}, w.Text(" — iCalendar 2.0 journal entries. Several files may be picked at once; events and tasks in an "), w.Mono{Text: ".ics"}, w.Text(" are skipped and named in the report.")}, Line: true}}}, "s-io-4", "tc-card", 1),
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".md"}, w.Text(" — Markdown, "), w.Mono{Text: ".zip"}, w.Text(" — any number of them, "), w.Mono{Text: ".ics"}, w.Text(" — iCalendar journal entries. Several files at once; events and tasks in an "), w.Mono{Text: ".ics"}, w.Text(" are skipped and named in the report.")}, Line: true}}}, "s-io-4", "tc-card", 1),
 	cards("alert", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "baikal"},
 		w.Mono{Text: "https://dav.office.example/dav.php/ · m.yenuchenko · last answer refused", Form: w.MonoLine, Variant: w.Mono11_5DustyGap},
@@ -623,7 +624,7 @@ var _ = add(
 		w.List{Rows: []w.ListRow{
 			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Source: "nextcloud · Работа", Inset: true},
 			w.TimeRow{Mark: w.Mark{Colour: "#8C6239"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Source: "radicale · vps · Дежурства", Inset: true}}, Inset: true},
-		w.CardHint{Parts: []w.CardTextPart{w.Text("The same event in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.")}, Line: true},
+		w.CardHint{Parts: []w.CardTextPart{w.Text("The same event in two calendars, different UIDs: Agenda shows it twice.")}, Line: true},
 		w.CardRow{Kind: w.CardActs, Gap: 8, Items: []w.CardRowPart{w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "do", Value: "link", Submit: true}, w.Button{Label: "Not duplicates", Name: "do", Value: "ignore", Submit: true}, w.Button{Label: "Merge on the server", Kind: w.ButtonDanger, Place: w.Pushed, Name: "do", Value: "merge", Submit: true}}}}, Action: "/app/duplicates/decide", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "group", Value: "g2"}}}, "s-dup-1", "tc-card", 2),
 	cards("apart", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Where the merged record stays"},
@@ -707,7 +708,7 @@ var _ = add(
 			{Icon: "file", Label: "notes", Indent: w.TreeLevel22},
 			{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
 			{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}}}, On: 2},
-		w.CardRow{Kind: w.CardTop8, Gap: 10, Items: []w.CardRowPart{w.FillHint{Parts: []w.CardTextPart{w.Text("Every "), w.Mono{Text: ".md"}, w.Text(" directly in that folder. Subfolders are not walked, nothing on the server is moved or deleted — the files stay where they were.")}}, w.Button{Label: "Preview folder", Kind: w.ButtonPrimary}}}}, Variant: w.CardChosen}, "s-io-4", "tc-card", 2),
+		w.CardRow{Kind: w.CardTop8, Gap: 10, Items: []w.CardRowPart{w.FillHint{Parts: []w.CardTextPart{w.Text("Every "), w.Mono{Text: ".md"}, w.Text(" directly in that folder, without subfolders. Nothing on the server is moved or deleted.")}}, w.Button{Label: "Preview folder", Kind: w.ButtonPrimary}}}}, Variant: w.CardChosen}, "s-io-4", "tc-card", 2),
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "Created"},
 		w.CardText{Kind: w.CardNum, Parts: []w.CardTextPart{w.Text("117")}}}}, "s-io-9", "tc-card", 1),

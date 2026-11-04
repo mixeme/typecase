@@ -10032,8 +10032,8 @@ Read  2 min ago</div>
         </table>
         <form class="tc-post" id="files-sel" action="/app/files/sftpgo/documents/op/carrel/attachments" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <form class="tc-post" id="post-upload" action="/app/files/sftpgo/documents/upload/carrel/attachments" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-msg tc-js">Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so.</div>
-        <div class="tc-msg tc-nojs">Dropping files onto the window and the upload queue need scripts, and this page runs none. Upload sends the files; a name that is already taken is refused rather than overwritten.</div>
+        <div class="tc-msg tc-js">Drop files onto the window to upload them here. A name already taken is refused, not overwritten.</div>
+        <div class="tc-msg tc-nojs">Without scripts there is no drop and no queue: <b>Upload</b> sends the files. A name already taken is refused, not overwritten.</div>
         <div class="tc-queue" data-tc-progress="post-upload" data-tc-fold-hide="Hide" data-tc-fold-show="Show" data-tc-fold-total="{percent}%" hidden><div class="tc-queue__head"><b>Uploading {done} of {count}</b><span class="tc-mono tc-push tc-mono--dusty">{sent}</span><button class="tc-btn is-sm" type="button">Hide</button></div><template data-tc-row><li><div class="tc-queue__row"><span class="tc-queue__name">{name}</span><span class="tc-queue__meta">{size} · {percent}%</span></div><span class="tc-meter" data-tc-width="100%"><i class="tc-meter__bar" data-tc-width="0%"></i></span></li></template><template data-tc-taken><li><div class="tc-queue__row"><span class="tc-dim--danger">{name}</span><span class="tc-dim--danger">name taken</span></div><div class="tc-line tc-line--gap-6 tc-queue__acts"><button class="tc-btn is-sm" type="button" name="answer" value="keep">Keep both</button><button class="tc-btn is-sm" type="button" name="answer" value="replace">Replace</button><button class="tc-btn is-sm" type="button" name="answer" value="skip">Skip</button></div></li></template><ul class="tc-queue__list"></ul></div>
       </div>
 
@@ -10065,7 +10065,7 @@ Read  2 min ago</div>
     </div>
   </div>
 </div>
-<figcaption><b>Два ярлыка в рейле — не «умные папки», а два ответа на вопрос «где это лежало».</b> <b>Attachments</b> — та самая папка, которую выбрали один раз в настройках вложений: Carrel складывает туда вложения заметок и событий, не поместившиеся в саму запись (<a href="#attachments">7.12</a>), и знает её адрес, поэтому ярлык просто открывает её, где бы она ни была. Если папка ещё не выбрана, ярлык ведёт на страницу, где её выбирают. <b>Published</b> — файлы и папки с действующей секретной ссылкой: список известен Carrel из его же токенов, ходить за ним на сервер не нужно. Ярлыка «недавние» здесь нет намеренно: WebDAV не умеет спрашивать «что изменилось», и такой список пришлось бы собирать обходом всего дерева на каждый заход.<br><br><b>Из таблицы получился менеджер.</b> Колонка флажков и выделение строки; у каждой строки — скачивание и меню; операции над одним файлом собраны справа, а не разбросаны по формам внизу страницы. Хлебные крошки стали навигацией, а не подписью. Тип файла несёт иконку тонкой линией — единственное место в редизайне, где иконки появляются в содержимом, а не в хроме: в файловом списке тип узнаётся быстрее по значку, чем по строке <code>image/png</code>, и колонка типа при этом остаётся. Панель свойств честно говорит то, чего Carrel не знает: указателя ссылок на файл у него нет, и удаление ничего не проверяет.<br><br><b>Без сценариев строка под списком другая.</b> Про бросок на окно и очередь сказано только там, где они работают; на странице без сценария на том же месте стоит «Dropping files onto the window and the upload queue need scripts, and this page runs none. Upload sends the files; a name that is already taken is refused rather than overwritten.» — недоступное названо, а не замолчано. В кадре вторая строка есть, но не видна: кадр нарисован со сценарием.</figcaption>
+<figcaption><b>Два ярлыка в рейле — не «умные папки», а два ответа на вопрос «где это лежало».</b> <b>Attachments</b> — та самая папка, которую выбрали один раз в настройках вложений: Carrel складывает туда вложения заметок и событий, не поместившиеся в саму запись (<a href="#attachments">7.12</a>), и знает её адрес, поэтому ярлык просто открывает её, где бы она ни была. Если папка ещё не выбрана, ярлык ведёт на страницу, где её выбирают. <b>Published</b> — файлы и папки с действующей секретной ссылкой: список известен Carrel из его же токенов, ходить за ним на сервер не нужно. Ярлыка «недавние» здесь нет намеренно: WebDAV не умеет спрашивать «что изменилось», и такой список пришлось бы собирать обходом всего дерева на каждый заход.<br><br><b>Из таблицы получился менеджер.</b> Колонка флажков и выделение строки; у каждой строки — скачивание и меню; операции над одним файлом собраны справа, а не разбросаны по формам внизу страницы. Хлебные крошки стали навигацией, а не подписью. Тип файла несёт иконку тонкой линией — единственное место в редизайне, где иконки появляются в содержимом, а не в хроме: в файловом списке тип узнаётся быстрее по значку, чем по строке <code>image/png</code>, и колонка типа при этом остаётся. Панель свойств честно говорит то, чего Carrel не знает: указателя ссылок на файл у него нет, и удаление ничего не проверяет.<br><br><b>Без сценариев строка под списком другая.</b> Про бросок на окно и очередь сказано только там, где они работают; на странице без сценария на том же месте стоит «Without scripts there is no drop and no queue: <b>Upload</b> sends the files. A name already taken is refused, not overwritten.» — недоступное названо, а не замолчано. В кадре вторая строка есть, но не видна: кадр нарисован со сценарием.</figcaption>
 </figure>
 
 <figure style="flex:0 1 300px">
@@ -11598,7 +11598,7 @@ Read  2 min ago</div>
           <div class="tc-head__titles"><div class="tc-head__title">Duplicates</div><div class="tc-head__sub">32 records compared · 2 to look at</div></div>
           <div class="tc-acts tc-acts--stack"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All 2</button><button class="tc-seg__opt" type="button">Contacts 1</button><button class="tc-seg__opt" type="button">Events 1</button><button class="tc-seg__opt" type="button">Tasks 0</button><button class="tc-seg__opt" type="button">Notes 0</button></span><form class="tc-field tc-field--inline" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="do" value="threshold"><label>Match threshold</label><input class="tc-in is-mono tc-in--w52" type="text" value="60" name="value" aria-label="Match threshold"><button class="tc-btn is-sm" type="button">Weights</button></form></div>
         </div>
-        <div class="tc-msg is-accent">Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.</div>
+        <div class="tc-msg is-accent">Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.</div>
         <div data-part="results" class="tc-stack tc-stack--gap-10 tc-main__results">
 
           <form class="tc-card" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="group" value="g1">
@@ -11656,7 +11656,7 @@ Read  2 min ago</div>
                 <span class="tc-row__cell tc-row__source">radicale · vps · Дежурства</span>
               </div>
             </div>
-            <div class="tc-field__hint tc-field__hint--top8">The same event in two calendars, different UIDs. Agenda shows it twice; here you decide whether to keep both or write one and delete the other.</div>
+            <div class="tc-field__hint tc-field__hint--top8">The same event in two calendars, different UIDs: Agenda shows it twice.</div>
             <div class="tc-line tc-line--gap-8 tc-card__acts">
               <button class="tc-btn is-primary" type="submit" name="do" value="link">Link them</button>
               <button class="tc-btn" type="submit" name="do" value="ignore">Not duplicates</button>
@@ -11856,7 +11856,7 @@ Read  2 min ago</div>
 <span class="tc-mono tc-row__date">8 Aug</span><span class="tc-row__cell tc-row__source">nextcloud · Дневник</span>
               </div>
             </div>
-            <div class="tc-field__hint tc-field__hint--top8">Same title and the same date: a note copied into a second notebook. Linked, the two are shown as one row; merging writes one and deletes the other.</div>
+            <div class="tc-field__hint tc-field__hint--top8">Same title and the same date: a note copied into a second notebook.</div>
             <div class="tc-line tc-line--gap-8 tc-card__acts">
               <button class="tc-btn" type="submit" name="do" value="unlink">Unlink</button>
               <button class="tc-btn is-danger tc-push" type="submit" name="do" value="merge">Merge on the server</button>
@@ -12215,7 +12215,7 @@ Read  just now · written by the merge</div>
           <div class="tc-acts"><form class="tc-field tc-field--inline" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="do" value="threshold"><label>Match threshold</label><input class="tc-in is-mono tc-in--w52" type="text" value="60" name="value" aria-label="Match threshold"><button class="tc-btn is-sm" type="button">Weights</button></form></div>
         </div>
         <div class="tc-notices">
-          <div class="tc-msg is-accent">Linking changes nothing on any server: the records stay where they are and are shown as one. Merging on the server is a separate, destructive step you are asked to confirm.</div>
+          <div class="tc-msg is-accent">Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.</div>
           <div class="tc-msg"><b>Nothing is loaded yet.</b> Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back.</div>
         </div>
         <div class="tc-stack tc-stack--gap-10 tc-main__results">
@@ -13697,7 +13697,7 @@ dav: HTTP 503: the server is busy</div>
             <label class="tc-btn">Browse<input class="tc-file" type="file" name="file" accept=".md,.zip,.ics" aria-label="Markdown, a zip of them, or .ics" data-tc-shows="import-file" multiple></label>
             <button class="tc-btn is-primary" type="submit">Preview file</button>
           </span></div>
-        <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.md</span> — Markdown, <span class="tc-mono">.zip</span> — any number of them, <span class="tc-mono">.ics</span> — iCalendar 2.0 journal entries. Several files may be picked at once; events and tasks in an <span class="tc-mono">.ics</span> are skipped and named in the report.</div>
+        <div class="tc-field__hint tc-field__hint--top8"><span class="tc-mono">.md</span> — Markdown, <span class="tc-mono">.zip</span> — any number of them, <span class="tc-mono">.ics</span> — iCalendar journal entries. Several files at once; events and tasks in an <span class="tc-mono">.ics</span> are skipped and named in the report.</div>
       </div>
       <div class="tc-card tc-card--edge-accent">
         <div class="tc-rubric">From a WebDAV folder</div>
@@ -13708,7 +13708,7 @@ dav: HTTP 503: the server is busy</div>
           <div class="tc-tree__row"><svg><use href="#i-file"/></svg>Files <span class="tc-push tc-dim tc-dim--t11">nextcloud</span></div>
         </div>
         <div class="tc-line tc-line--gap-10 tc-card__top8">
-          <span class="tc-field__hint tc-field__hint--flush-fill">Every <span class="tc-mono">.md</span> directly in that folder. Subfolders are not walked, nothing on the server is moved or deleted — the files stay where they were.</span>
+          <span class="tc-field__hint tc-field__hint--flush-fill">Every <span class="tc-mono">.md</span> directly in that folder, without subfolders. Nothing on the server is moved or deleted.</span>
           <button class="tc-btn is-primary" type="button">Preview folder</button>
         </div>
       </div>
@@ -18444,7 +18444,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </tbody>
         </table>
         <div class="tc-msg is-row tc-msg--max580"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span class="tc-msg__aside">Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book, with the login and the password from the account row. There is no import file and none is needed.</span></div>
+          <span class="tc-msg__aside">Paste a CalDAV URL into Thunderbird Calendar, a CardDAV URL into Address Book, with the login and the password from the account row. No import file is needed.</span></div>
       </div></div>
     </div>
   </div>
@@ -28311,7 +28311,7 @@ SMTP  smtp.yandex.ru:465  TLS
           <div class="tc-field tc-field--md"><label>Name in From</label><input class="tc-in" type="text" value="Михаил Енученко" aria-label="Name in From"><span class="tc-field__hint">Recipients see «Михаил Енученко &lt;mix@home.example&gt;». Your profile name until you change it here.</span></div>
           <div class="tc-field tc-field--full"><label>Signature</label><textarea class="tc-in is-area is-focus" aria-label="Signature">Михаил Енученко
 вёрстка и допечатная подготовка</textarea>
-            <span class="tc-field__hint">Goes under your text in every letter from home, above the quote, after a line «-- » that mail programs recognise and fold. Plain text, like the letter. Empty — no signature.</span></div>
+            <span class="tc-field__hint">Goes under your text in every letter from home, above the quote, after the line «-- ». Plain text. Empty — no signature.</span></div>
           <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-ph" type="text" placeholder="leave blank to keep the current one" aria-label="Password"></div>
           <div class="tc-fset tc-grow">
             <div class="tc-rubric">Servers</div>
@@ -32682,7 +32682,7 @@ dav: HTTP 503: the server is busy</div></div>
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>Everything lives here</label>
               <input class="tc-in is-mono tc-in--t11-5" type="text" value="E:\Carrel\ — app, carrel.exe, data\state.enc" aria-label="Everything lives here">
-              <span class="tc-field__hint">The same folder on any computer: plug the stick in, run, sign in with your password. The data folder cannot be moved away from the app in this mode — that is what makes it portable.</span></div>
+              <span class="tc-field__hint">The same folder on any computer: plug the stick in, run, sign in. In this mode the data folder always sits next to the app.</span></div>
             <div class="tc-field tc-grow tc-field--gap7">
               <button class="tc-check" type="button"><span class="tc-tickrow__tick is-off"></span><span class="tc-dim">Start at sign-in — not available in a portable copy</span></button>
               <button class="tc-check" type="button"><span class="tc-tickrow__tick"></span>Closing the window hides to the tray</button>
@@ -33179,12 +33179,12 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-stack tc-stack--gap-12 tc-win__body--pad16-20">
           <div class="tc-msg is-alert is-row tc-msg--flush">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-            <span class="tc-msg__aside"><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there.</span>
+            <span class="tc-msg__aside"><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. What both know works; what is newer than the server is not there.</span>
           </div>
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>What to do</label>
               <input class="tc-in is-ph" type="text" placeholder="Update the server where it runs — this app cannot do it" aria-label="What to do">
-              <span class="tc-field__hint">The server is somebody’s machine: yours, a friend’s, a hosting account. An app that could update it from the outside would be a way in, and Carrel does not build such ways.</span></div>
+              <span class="tc-field__hint">The app does not update a server from outside: that would be a way in. Whoever runs the server updates it.</span></div>
           </div>
           <div class="tc-line tc-line--gap-8">
             <button class="tc-btn" type="button">How to update a server</button>

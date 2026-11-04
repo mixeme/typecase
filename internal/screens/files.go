@@ -361,13 +361,15 @@ func Files1() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Drop files onto the window to upload them into this folder. A name that is already taken is refused rather than overwritten, and the queue says so."),
+							w.Text("Drop files onto the window to upload them here. A name already taken is refused, not overwritten."),
 						},
 						ScriptOnly: true,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Dropping files onto the window and the upload queue need scripts, and this page runs none. Upload sends the files; a name that is already taken is refused rather than overwritten."),
+							w.Text("Without scripts there is no drop and no queue: "),
+							w.Strong("Upload"),
+							w.Text(" sends the files. A name already taken is refused, not overwritten."),
 						},
 						NoScript: true,
 					},

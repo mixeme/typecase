@@ -98,7 +98,7 @@ var _ = add(
 	form("labelled", w.Field{Parts: []w.FieldPart{w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}}, Width: w.FieldLG}, "s-contacts-3", "tc-field", 17),
 	form("labelled", field("Time", w.FieldFix130, in), "s-notes-20", "tc-field", 3),
 	form("labelled", field("Start", w.FieldFix96, in), "s-notes-9", "tc-field", 3),
-	form("hint", field("Everything lives here", w.FieldAuto, in, hint(t("The same folder on any computer: plug the stick in, run, sign in with your password. The data folder cannot be moved away from the app in this mode — that is what makes it portable."))), "desktop-4", "tc-field", 1),
+	form("hint", w.Field{Label: "Everything lives here", Parts: []w.FieldPart{w.Input{Value: "E:\\Carrel\\ — app, carrel.exe, data\\state.enc", Label: "Everything lives here", Mono: true, Variant: w.Input11_5}, w.FieldHint{Parts: []w.Inline{w.Text("The same folder on any computer: plug the stick in, run, sign in. In this mode the data folder always sits next to the app.")}}}}, "desktop-4", "tc-field", 1),
 	form("hint", field("Birthday", w.FieldSM, in, hint(t("Type it: 14.03.1987, or 14.03 without the year."))), "components-10", "tc-field", 2),
 	form("labelled", field("Display name", w.FieldXL, in), "s-contacts-3", "tc-field", 3),
 	form("labelled", field("Phone", w.FieldFill200, in), "s-notes-8", "tc-field", 2),

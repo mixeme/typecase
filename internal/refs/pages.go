@@ -497,73 +497,7 @@ var _ = add(
 		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, w.Card{Items: []w.CardPart{
 		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, w.Card{Items: []w.CardPart{
 		w.CardPick{Ticked: w.TickedOff, Title: "Portable — do not install", Note: []w.CardTextPart{w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.")}, Field: &w.Field{Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "E:\\Carrel", Label: "E:\\Carrel", Mono: true, Variant: w.Input11Fill}, w.Button{Label: "Choose"}}, Gap: w.LineGap8}, w.FieldHint{Parts: []w.Inline{w.Text("Nothing is written outside this folder; move it, and Carrel moves with it.")}}}, Width: w.FieldW100}}}, Variant: w.CardFlush}}}, w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Lose the stick, and the finder can guess your password as long as they like."), w.Text(" The encryption holds only as well as the password: choose a long one.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Line{Items: []w.LinePart{w.Button{Label: "Continue", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Dim{Parts: []w.Inline{w.Text("64 MB · app, server, WebView2 check")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Gap: w.LineGap8, Block: true}}, Gap: w.WindowGap13}}}, "desktop-3", "tc-root", 1),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Window{
-				Items: []w.WindowPart{
-					w.Form{
-						Items: []w.FormPart{
-							w.Field{
-								Label: "Everything lives here",
-								Parts: []w.FieldPart{
-									w.Input{
-										Value:   "E:\\Carrel\\ — app, carrel.exe, data\\state.enc",
-										Label:   "Everything lives here",
-										Mono:    true,
-										Variant: w.Input11_5,
-									},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("The same folder on any computer: plug the stick in, run, sign in with your password. The data folder cannot be moved away from the app in this mode — that is what makes it portable."),
-										},
-									},
-								},
-								Place: w.Grown,
-							},
-							w.Field{
-								Parts: []w.FieldPart{
-									w.Check{
-										Parts: []w.CheckPart{w.Dim{Parts: []w.Inline{w.Text("Start at sign-in — not available in a portable copy")}}},
-									},
-									w.Check{On: true, Parts: []w.CheckPart{w.Text("Closing the window hides to the tray")}},
-								},
-								Gap:   7,
-								Place: w.Grown,
-							},
-							w.Field{
-								Label: "Updates",
-								Parts: []w.FieldPart{
-									w.Line{
-										Items: []w.LinePart{
-											w.Input{
-												Placeholder: "Replaces the files in this folder",
-												Label:       "Replaces the files in this folder",
-												Variant:     w.InputFill,
-											},
-											w.Button{Label: "Check now"},
-										},
-										Gap: w.LineGap8,
-									},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("Works while the folder is writable. On a read-only medium the app says so and offers the download instead of installing it."),
-										},
-									},
-								},
-								Place: w.Grown,
-							},
-						},
-						Variant: w.FormGap12,
-					},
-					w.Msg{
-						Parts: []w.MsgPart{w.Text("A portable copy is a full Carrel, local or remote as usual — not a cut-down build.")},
-						Space: w.MsgFlush,
-					},
-				},
-				Gap: w.WindowGap12,
-			},
-		},
-	}, "desktop-4", "tc-root", 1),
+	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Form{Items: []w.FormPart{w.Field{Label: "Everything lives here", Parts: []w.FieldPart{w.Input{Value: "E:\\Carrel\\ — app, carrel.exe, data\\state.enc", Label: "Everything lives here", Mono: true, Variant: w.Input11_5}, w.FieldHint{Parts: []w.Inline{w.Text("The same folder on any computer: plug the stick in, run, sign in. In this mode the data folder always sits next to the app.")}}}, Place: w.Grown}, w.Field{Parts: []w.FieldPart{w.Check{Parts: []w.CheckPart{w.Dim{Parts: []w.Inline{w.Text("Start at sign-in — not available in a portable copy")}}}}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Closing the window hides to the tray")}}}, Gap: 7, Place: w.Grown}, w.Field{Label: "Updates", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Replaces the files in this folder", Label: "Replaces the files in this folder", Variant: w.InputFill}, w.Button{Label: "Check now"}}, Gap: w.LineGap8}, w.FieldHint{Parts: []w.Inline{w.Text("Works while the folder is writable. On a read-only medium the app says so and offers the download instead of installing it.")}}}, Place: w.Grown}}, Variant: w.FormGap12}, w.Msg{Parts: []w.MsgPart{w.Text("A portable copy is a full Carrel, local or remote as usual — not a cut-down build.")}, Space: w.MsgFlush}}, Gap: w.WindowGap12}}}, "desktop-4", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{
@@ -763,48 +697,7 @@ var _ = add(
 	}, "desktop-11", "tc-root", 1),
 	page("on-background", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" "), w.Strong("Your other devices stay signed in"), w.Text(": end those sessions in Settings → Account.")}, Space: w.MsgFlush}, w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and the session token. The saved connections cannot be brought back; records on your DAV servers are not touched.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Line{Items: []w.LinePart{w.Button{Label: "Keep and sign out", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Delete and sign out", Kind: w.ButtonDangerSolid}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed}}, Gap: w.LineGap8, Block: true}}, Gap: w.WindowGap10, Small: true}}, Variant: w.PageOnBackground}, "desktop-12", "tc-root", 1),
 	page("plain", w.Page{Items: []w.PagePart{w.Msg{Icon: "download", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It is applied when the app closes, or now: the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, w.Window{Items: []w.WindowPart{w.Form{Items: []w.FormPart{w.Field{Label: "Installed", Parts: []w.FieldPart{w.Input{Value: "app 0.8.0 · server 0.8.0 — both run inside this app", Label: "Installed", Mono: true, Variant: w.Input11_5}, w.FieldHint{Parts: []w.Inline{w.Text("In local mode one update covers the app and the server. Connections and settings stay as they are.")}}}, Place: w.Grown}, w.Field{Label: "Downloaded", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Meter{Percent: 100, Width: w.MeterFill}, w.Mono{Text: "0.8.0 · 14.2 MB · signature checked", Variant: w.Mono11Dusty}}, Gap: w.LineGap9}}, Place: w.Grown}}, Variant: w.FormGap12}, w.Msg{Parts: []w.MsgPart{w.Text("You see this because automatic checking is on; out of the box the app never goes looking.")}, Space: w.MsgFlush}}, Gap: w.WindowGap12}}}, "desktop-14", "tc-root", 1),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Window{
-				Items: []w.WindowPart{
-					w.Msg{
-						Icon: "shield",
-						Parts: []w.MsgPart{
-							w.Strong("The app is newer than the server."),
-							w.Text(" This app is 0.8.0, "),
-							w.Mono{Text: "carrel.example"},
-							w.Text(" runs 0.6.4. Everything that both versions know still works; what is newer than the server simply is not there."),
-						},
-						Tone:  w.MsgAlert,
-						Space: w.MsgFlush,
-					},
-					w.Form{
-						Items: []w.FormPart{
-							w.Field{
-								Label: "What to do",
-								Parts: []w.FieldPart{
-									w.Input{Placeholder: "Update the server where it runs — this app cannot do it", Label: "What to do"},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("The server is somebody’s machine: yours, a friend’s, a hosting account. An app that could update it from the outside would be a way in, and Carrel does not build such ways."),
-										},
-									},
-								},
-								Place: w.Grown,
-							},
-						},
-						Variant: w.FormGap12,
-					},
-					w.Line{
-						Items: []w.LinePart{w.Button{Label: "How to update a server"}, w.Button{Label: "Do not warn about this server"}},
-						Gap:   w.LineGap8,
-						Block: true,
-					},
-				},
-				Gap: w.WindowGap12,
-			},
-		},
-	}, "desktop-15", "tc-root", 1),
+	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The app is newer than the server."), w.Text(" This app is 0.8.0, "), w.Mono{Text: "carrel.example"}, w.Text(" runs 0.6.4. What both know works; what is newer than the server is not there.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Form{Items: []w.FormPart{w.Field{Label: "What to do", Parts: []w.FieldPart{w.Input{Placeholder: "Update the server where it runs — this app cannot do it", Label: "What to do"}, w.FieldHint{Parts: []w.Inline{w.Text("The app does not update a server from outside: that would be a way in. Whoever runs the server updates it.")}}}, Place: w.Grown}}, Variant: w.FormGap12}, w.Line{Items: []w.LinePart{w.Button{Label: "How to update a server"}, w.Button{Label: "Do not warn about this server"}}, Gap: w.LineGap8, Block: true}}, Gap: w.WindowGap12}}}, "desktop-15", "tc-root", 1),
 	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Documents / carrel / attachments"}, w.PrintSources{Text: "sftpgo · vps · 14 items · 38.2 MB"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Size"}, w.PrintNum{Text: "Changed"}}, Columns: true, Head: true}, w.PrintRubric{Text: "Folders"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "34 items"}, w.PrintNum{Text: "2026-07-01"}}, Columns: true}, w.PrintRubric{Text: "Files"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-08-10-sync-board.png"}, w.PrintNum{Text: "412 KB"}, w.PrintNum{Text: "2026-08-10"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "release-checklist.md"}, w.PrintNum{Text: "3.1 KB"}, w.PrintNum{Text: "2026-08-09"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "смета-подрядчик.pdf"}, w.PrintNum{Text: "1.2 MB"}, w.PrintNum{Text: "2026-08-05"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "2026-08-04-whiteboard.jpg"}, w.PrintNum{Text: "2.8 MB"}, w.PrintNum{Text: "2026-08-04"}}, Columns: true}, w.PrintFoot{Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 14 of 14 shown"}}, Variant: w.PagePrint}, "desktop-16", "tc-root", 1),
 )
 
