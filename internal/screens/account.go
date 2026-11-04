@@ -125,7 +125,7 @@ func Account1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts:   []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Parts:   []w.Inline{w.Text("Your saved connections stay readable after the change.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -186,7 +186,7 @@ func Account1() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
+													w.Text("No copy of your data key is deposited: if you lose your password, nobody can recover the account."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -301,21 +301,14 @@ func Account2() Screen {
 					Body: []w.SheetPart{
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account."),
+								w.Text("With the escrow master password, an administrator will be able to decrypt the DAV credentials you save here, and through them your records. You can withdraw the copy later from Account."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,
 						},
 						w.Field{
 							Label: "Your Carrel password",
-							Parts: []w.FieldPart{
-								w.Input{Name: "password", Value: "••••••••••", Label: "Your Carrel password", Focus: true},
-								w.FieldHint{
-									Parts: []w.Inline{
-										w.Text("Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password."),
-									},
-								},
-							},
+							Parts: []w.FieldPart{w.Input{Name: "password", Value: "••••••••••", Label: "Your Carrel password", Focus: true}},
 							Width: w.FieldW100,
 						},
 					},
@@ -454,7 +447,7 @@ func Mail9() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts:   []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+												Parts:   []w.Inline{w.Text("Your saved connections stay readable after the change.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -515,7 +508,7 @@ func Mail9() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
+													w.Text("No copy of your data key is deposited: if you lose your password, nobody can recover the account."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -784,7 +777,7 @@ func Account4() Screen {
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars."),
+									w.Text("With the escrow master password, an administrator can decrypt the DAV credentials you save here, and through them your records."),
 								},
 								Tone:   w.MsgAlert,
 								Space:  w.MsgFlushSides,
@@ -912,7 +905,7 @@ func Account16() Screen {
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Text("A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars."),
+									w.Text("With the escrow master password, an administrator can decrypt the DAV credentials you save here, and through them your records."),
 								},
 								Tone:   w.MsgAlert,
 								Space:  w.MsgFlushSides,

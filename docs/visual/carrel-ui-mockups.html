@@ -14197,7 +14197,7 @@ dav: HTTP 503: the server is busy</div>
         </form>
         <div class="tc-fset">
           <div class="tc-rubric">Password</div>
-          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Changing your password re-wraps your data key only; saved connections stay readable.</span></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Your saved connections stay readable after the change.</span></div>
           <div class="tc-field"><button class="tc-btn" type="button">Change password</button></div>
         </div>
         <div class="tc-fset">
@@ -14213,7 +14213,7 @@ dav: HTTP 503: the server is busy</div>
         </div>
         <div class="tc-fset">
           <div class="tc-rubric">Key escrow</div>
-          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at.</span></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited: if you lose your password, nobody can recover the account.</span></div>
           <div class="tc-field"><button class="tc-btn" type="button">Deposit my key</button></div>
         </div>
       </div>
@@ -14280,9 +14280,8 @@ dav: HTTP 503: the server is busy</div>
             <b class="tc-sheet__title">Deposit my key</b>
           </div>
           <div class="tc-sheet__body">
-            <div class="tc-msg is-alert tc-msg--flush">An administrator who holds the escrow master password will be able to decrypt the DAV credentials you save here, and through them your contacts, calendars, tasks, notes and files. Ending sessions does not undo this. You can withdraw the copy later from Account.</div>
-            <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="password" value="••••••••••" aria-label="Your Carrel password">
-              <span class="tc-field__hint">Asked because the key is being handed over, not just looked at. Same unlock as showing a saved password.</span></div>
+            <div class="tc-msg is-alert tc-msg--flush">With the escrow master password, an administrator will be able to decrypt the DAV credentials you save here, and through them your records. You can withdraw the copy later from Account.</div>
+            <div class="tc-field tc-field--w100"><label>Your Carrel password</label><input class="tc-in is-focus" type="text" name="password" value="••••••••••" aria-label="Your Carrel password"></div>
           </div>
           <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Deposit my key</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span></div>
         </form>
@@ -14347,7 +14346,7 @@ dav: HTTP 503: the server is busy</div>
           </form>
           <div class="tc-fset">
             <div class="tc-rubric">Password</div>
-            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Changing your password re-wraps your data key only; saved connections stay readable.</span></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Your saved connections stay readable after the change.</span></div>
             <div class="tc-field"><button class="tc-btn" type="button">Change password</button></div>
           </div>
           <div class="tc-fset">
@@ -14363,7 +14362,7 @@ dav: HTTP 503: the server is busy</div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Key escrow</div>
-            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at.</span></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited: if you lose your password, nobody can recover the account.</span></div>
             <div class="tc-field"><button class="tc-btn" type="button">Deposit my key</button></div>
           </div>
         </div>
@@ -14459,7 +14458,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-form">
           <div class="tc-fset tc-fset--lead">
             <div class="tc-rubric">What a deposit does</div>
-            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">A deposited copy lets an administrator who holds the escrow master password recover this account if you lose your password — and, with it, read the DAV credentials you save here. You can withdraw it at any time.</span></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">With a copy, an administrator with the escrow master password can recover this account if you lose your password, and read the DAV credentials you save here. You can withdraw it at any time.</span></div>
             <div class="tc-field"><button class="tc-btn" type="button">Deposit my key</button></div>
           </div>
         </div>
@@ -14505,7 +14504,7 @@ dav: HTTP 503: the server is busy</div>
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main"><div class="tc-form">
             <div class="tc-fset tc-fset--lead">
               <div class="tc-rubric">Key escrow <span class="tc-badge is-alert">deposited 2026-03-02</span></div>
-              <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">A copy of your data key is deposited on this server. If you lose your password, an administrator who holds the escrow master password can recover the account — and, with it, can read the DAV credentials you save here.</span></div>
+              <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">If you lose your password, an administrator with the escrow master password can recover the account and read the DAV credentials you save here.</span></div>
               <div class="tc-field"><button class="tc-btn is-danger-solid" type="button">Withdraw my deposited key</button></div>
             </div>
       </div></div></div>
@@ -14629,7 +14628,7 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max560">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">A copy of your key on this server</div></div></div>
-      <div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580">A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars.</div>
+      <div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580">With the escrow master password, an administrator can decrypt the DAV credentials you save here, and through them your records.</div>
       <dl class="tc-fields tc-fields--bleed">
         <dt>Deposited</dt><dd class="tc-mono">2026-03-02</dd>
         <dt>Last recovery</dt><dd class="tc-mono">never</dd>
@@ -14680,7 +14679,7 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max560">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">A copy of your key on this server</div></div></div>
-      <div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580">A copy of your data key is deposited on this server. An administrator who holds the escrow master password can decrypt the DAV credentials you save here, and through them your contacts and calendars.</div>
+      <div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580">With the escrow master password, an administrator can decrypt the DAV credentials you save here, and through them your records.</div>
       <dl class="tc-fields tc-fields--bleed">
         <dt>Deposited</dt><dd class="tc-mono">2026-03-02</dd>
         <dt>Recovered</dt><dd><span class="tc-mono">2026-07-11 14:02</span> · olga, administrator: the password was reset</dd>
@@ -18345,7 +18344,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         </form>
         <div class="tc-fset">
           <div class="tc-rubric">Password</div>
-          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Changing your password re-wraps your data key only; saved connections stay readable.</span></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Your saved connections stay readable after the change.</span></div>
           <div class="tc-field"><button class="tc-btn" type="button">Change password</button></div>
         </div>
         <div class="tc-fset">
@@ -18361,7 +18360,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         </div>
         <div class="tc-fset">
           <div class="tc-rubric">Key escrow</div>
-          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at.</span></div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited: if you lose your password, nobody can recover the account.</span></div>
           <div class="tc-field"><button class="tc-btn" type="button">Deposit my key</button></div>
         </div>
       </div>

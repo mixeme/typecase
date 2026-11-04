@@ -34,7 +34,7 @@ var _ = add(
 	form("plain", w.FieldSet{Rubric: rub, Items: fsItems(fld, fld, bt, w.Grow{}, fld, fld, bt, w.Grow{}, bt)}, "s-contacts-3", "tc-fset", 1),
 	form("plain", w.FieldSet{Rubric: rub, Items: fsItems(w.Line{Place: w.Grown})}, "s-agenda-3", "tc-fset", 5),
 	form("lead", w.FieldSet{Rubric: w.Rubric{Text: "Name"}, Items: []w.FieldSetPart{w.Field{Label: "Display name", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Name: "display.name", Value: "Михаил Енученко", Label: "Display name", Variant: w.InputFill}, w.Button{Label: "Save", Submit: true}}, Gap: w.LineGap8}, w.FieldHint{Parts: []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")}}}, Width: w.FieldLG}}, Variant: w.FieldSetLead, Action: "/app/settings/account/name"}, "account-1", "tc-fset", 1),
-	form("plain", w.FieldSet{Rubric: w.Rubric{Text: "Password"}, Items: []w.FieldSetPart{w.Field{Parts: []w.FieldPart{w.FieldHint{Parts: []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")}}}, Place: w.Grown}, w.Field{Parts: []w.FieldPart{w.Button{Label: "Change password"}}}}}, "account-1", "tc-fset", 3),
+	form("plain", w.FieldSet{Rubric: w.Rubric{Text: "Password"}, Items: []w.FieldSetPart{w.Field{Parts: []w.FieldPart{w.FieldHint{Parts: []w.Inline{w.Text("Your saved connections stay readable after the change.")}, Variant: w.HintColumn}}, Place: w.Grown}, w.Field{Parts: []w.FieldPart{w.Button{Label: "Change password"}}}}}, "account-1", "tc-fset", 3),
 	form("lead", w.FieldSet{Rubric: rub, Variant: w.FieldSetLead, Items: fsItems(grown, fld)}, "account-2", "tc-fset", 1),
 
 	// tc-form

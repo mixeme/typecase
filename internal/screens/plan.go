@@ -985,7 +985,7 @@ func Account15() Screen {
 										w.Field{
 											Parts: []w.FieldPart{
 												w.FieldHint{
-													Parts:   []w.Inline{w.Text("Changing your password re-wraps your data key only; saved connections stay readable.")},
+													Parts:   []w.Inline{w.Text("Your saved connections stay readable after the change.")},
 													Variant: w.HintColumn,
 												},
 											},
@@ -1046,7 +1046,7 @@ func Account15() Screen {
 											Parts: []w.FieldPart{
 												w.FieldHint{
 													Parts: []w.Inline{
-														w.Text("No copy of your data key is deposited. Nobody but you can decrypt your data — and if you lose your password, it cannot be recovered by anyone. Depositing asks for your Carrel password first: it is the same unlock that shows a saved password, and for the same reason — the key is being handed over, not just looked at."),
+														w.Text("No copy of your data key is deposited: if you lose your password, nobody can recover the account."),
 													},
 													Variant: w.HintColumn,
 												},

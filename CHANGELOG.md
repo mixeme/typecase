@@ -1019,6 +1019,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, fourth part** (Р-77, accepted by the owner 04.11): key
+  escrow on the user side (`account-1`, `-2`, `-4`, `-7`, `-12`, `-15`, `-16`,
+  `s-mail-9`). The account page says only what losing the password means;
+  the deposit sheet has no hint under the password; an alert does not repeat
+  the subtitle above it.
 - **Fewer words, third part** (Р-77, accepted by the owner 04.11): the root
   of Selected collections (`s-files-6`), key escrow (`s-admin-6`, `-30`, `-31`),
   the portable copy (`desktop-3`: the alert names the threat, unlimited
