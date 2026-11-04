@@ -1282,9 +1282,9 @@ func Admin32() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Your relay decides which of the two it will let out. The envelope sender stays "),
+													w.Text("Your relay decides which of the two it lets out. The envelope sender stays "),
 													w.Mono{Text: "carrel@slovo.example"},
-													w.Text(" either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here."),
+													w.Text(", so SPF is unaffected; DKIM and DMARC are set up on the relay."),
 												},
 												Variant: w.HintColumn,
 											},

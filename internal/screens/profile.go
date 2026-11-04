@@ -3780,11 +3780,7 @@ func Profile5() Screen {
 									Label:   "On which server",
 								},
 								w.FieldHint{
-									Parts: []w.Inline{
-										w.Text("Two of three are listed: "),
-										w.Mono{Text: "baikal"},
-										w.Text(" is not answering, and until it does there is nothing to create there."),
-									},
+									Parts:   []w.Inline{w.Mono{Text: "baikal"}, w.Text(" is not answering, so it is not listed.")},
 									Variant: w.HintSmall,
 								},
 							},
@@ -3826,9 +3822,9 @@ func Profile5() Screen {
 								},
 								w.FieldHint{
 									Parts: []w.Inline{
-										w.Text("Most servers settle this when the collection is made and will not change it afterwards. A collection holding only tasks appears in "),
+										w.Text("Most servers will not change this later. A collection holding only tasks appears in "),
 										w.Strong("Tasks"),
-										w.Text(", not here — the rail follows what is inside, not where it was made."),
+										w.Text(", not here."),
 									},
 									Variant: w.HintSmall,
 								},
@@ -3844,7 +3840,7 @@ func Profile5() Screen {
 										w.Mono{Text: "…/remote.php/dav/calendars/mix/"},
 										w.SlugOf{Of: "address", Text: "poezdki"},
 										w.Mono{Text: "/"},
-										w.Text(" — taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show."),
+										w.Text(" — taken from the name, yours to change. Other clients and restores go by the address, not the name."),
 									},
 									Variant: w.HintSmall,
 								},
@@ -5243,7 +5239,7 @@ func Profile10() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("A feed is read again on every visit to the section, so there is nothing here to synchronise and nothing to refresh. "),
+							w.Text("A feed is read anew on every visit: there is nothing to refresh. "),
 							w.Strong("Check"),
 							w.Text(" asks whether the address still replies."),
 						},
@@ -5301,12 +5297,7 @@ func Profile10() Screen {
 								Label: "Name here",
 								Parts: []w.FieldPart{
 									w.Input{Name: "name.here", Value: "Праздники РФ", Label: "Name here"},
-									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("Taken from the feed; change it if you like — other people’s feed names are often longer than the rail."),
-										},
-										Variant: w.HintColumn,
-									},
+									w.FieldHint{Parts: []w.Inline{w.Text("Taken from the feed; yours to change.")}, Variant: w.HintColumn},
 								},
 								Width: w.FieldW100,
 							},
@@ -5320,9 +5311,7 @@ func Profile10() Screen {
 									},
 									w.Dim{Parts: []w.Inline{w.Text("derived from the address")}, Size: w.Dim11},
 									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("A feed sends no colour of its own: Carrel derives one, and hatches the strip so a feed is recognisable among your own collections."),
-										},
+										Parts:   []w.Inline{w.Text("A feed has no colour of its own: Carrel picks one and hatches the strip.")},
 										Variant: w.HintColumn,
 									},
 								},
@@ -5336,9 +5325,7 @@ func Profile10() Screen {
 										Parts: []w.CheckPart{w.Text("This feed asks for a password")},
 									},
 									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("The login and password are kept the way DAV credentials are: encrypted under your key. A secret link needs no password — the secret is already in the address."),
-										},
+										Parts:   []w.Inline{w.Text("Kept encrypted, like DAV credentials. A secret link needs none.")},
 										Variant: w.HintColumn,
 									},
 								},
@@ -5350,9 +5337,7 @@ func Profile10() Screen {
 								Parts: []w.FieldPart{
 									w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 3"}, w.Tag{Label: "Tasks · 1"}}},
 									w.FieldHint{
-										Parts: []w.Inline{
-											w.Text("Not a choice: a feed is one file. What it carries decides where it lands, and that is visible before subscribing."),
-										},
+										Parts:   []w.Inline{w.Text("A feed is one file: what it carries decides where it lands.")},
 										Variant: w.HintColumn,
 									},
 								},
@@ -5364,7 +5349,8 @@ func Profile10() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list."),
+							w.Strong("The Carrel server fetches the feed, not your browser."),
+							w.Text(" An address on your local network works only if the server can reach it."),
 						},
 						Tone:   w.MsgAlert,
 						Space:  w.MsgInset20,

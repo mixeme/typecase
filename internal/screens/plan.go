@@ -1678,9 +1678,7 @@ func Plan5() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Text("Credentials are unlocked for five minutes — here and everywhere else they are handed out. Everything shown closes when the time is up or when you press "),
-							w.Strong("Lock now"),
-							w.Text("; every reveal is written to the audit log."),
+							w.Text("Unlocked everywhere credentials are shown, not only here; every reveal goes to the audit log."),
 						},
 						Column: true,
 					},

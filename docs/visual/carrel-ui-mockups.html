@@ -6542,7 +6542,7 @@ SEQUENCE  2</div>
     <div class="frame-label"><span>Календарь, в который сервер взял не всё</span><span class="frag">фрагмент</span><i>над списками календаря · iCloud</i></div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
-        <div class="tc-msg"><b>The server did not take tasks.</b> The server made «Дом» for events only and said nothing of the tasks you asked for. Tasks need another calendar: make one for them on this server or another. <button class="tc-btn is-sm" type="button">New calendar</button></div>
+        <div class="tc-msg"><b>The server did not take tasks.</b> It made «Дом» for events only. Tasks need another calendar, on this server or another. <button class="tc-btn is-sm" type="button">New calendar</button></div>
       </div></div>
     </div>
   </div>
@@ -16842,7 +16842,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
             <div class="tc-sheet__body">
               <div class="tc-field tc-field--w100"><label>On which server</label>
                 <span class="tc-in is-pick"><select class="tc-in__list" name="account" aria-label="On which server"><option value="nextcloud" selected>nextcloud</option></select></span>
-                <span class="tc-field__hint tc-field__hint--t11-dusty">Two of three are listed: <span class="tc-mono">baikal</span> is not answering, and until it does there is nothing to create there.</span></div>
+                <span class="tc-field__hint tc-field__hint--t11-dusty"><span class="tc-mono">baikal</span> is not answering, so it is not listed.</span></div>
               <div class="tc-field tc-field--w100"><label>Name</label><input class="tc-in is-focus" type="text" name="name" value="Поездки" aria-label="Name"></div>
               <div class="tc-field tc-field--w100"><label>Colour</label>
                 <span class="tc-line tc-line--gap-9 tc-field__swatches">
@@ -16860,10 +16860,10 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="components" value="VTODO" checked><span class="tc-tickrow__tick"></span>Tasks</label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="components" value="VJOURNAL"><span class="tc-tickrow__tick is-off"></span>Notes</label>
                 </div>
-                <span class="tc-field__hint tc-field__hint--t11-dusty">Most servers settle this when the collection is made and will not change it afterwards. A collection holding only tasks appears in <b>Tasks</b>, not here — the rail follows what is inside, not where it was made.</span></div>
+                <span class="tc-field__hint tc-field__hint--t11-dusty">Most servers will not change this later. A collection holding only tasks appears in <b>Tasks</b>, not here.</span></div>
               <div class="tc-field tc-field--w100"><label>Address</label>
                 <input class="tc-in is-mono is-ph" type="text" name="address" placeholder="poezdki" aria-label="Address" data-tc-from="name">
-                <span class="tc-field__hint tc-field__hint--t11-dusty"><span class="tc-mono">…/remote.php/dav/calendars/mix/</span><span class="tc-mono" data-tc-slug-of="address">poezdki</span><span class="tc-mono">/</span> — taken from the name, yours to change. Other clients and restore-by-path go by the address; the name they only show.</span></div>
+                <span class="tc-field__hint tc-field__hint--t11-dusty"><span class="tc-mono">…/remote.php/dav/calendars/mix/</span><span class="tc-mono" data-tc-slug-of="address">poezdki</span><span class="tc-mono">/</span> — taken from the name, yours to change. Other clients and restores go by the address, not the name.</span></div>
             </div>
             <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit">Create</button><kbd class="tc-kbd">Enter</kbd><span class="tc-push tc-line tc-line--gap-7"><a class="tc-btn" href="/app/settings/connections">Cancel</a><kbd class="tc-kbd">Esc</kbd></span></div>
           </form>
@@ -17516,7 +17516,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
 
         </div>
-        <div class="tc-msg tc-msg--max580">A feed is read again on every visit to the section, so there is nothing here to synchronise and nothing to refresh. <b>Check</b> asks whether the address still replies.</div>
+        <div class="tc-msg tc-msg--max580">A feed is read anew on every visit: there is nothing to refresh. <b>Check</b> asks whether the address still replies.</div>
       </div>
 
       <div class="tc-side">
@@ -17537,7 +17537,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
 [access]  the server asked for no password</div>
           </div>
           <div class="tc-field tc-field--w100"><label>Name here</label><input class="tc-in" type="text" name="name.here" value="Праздники РФ" aria-label="Name here">
-            <span class="tc-field__hint tc-field__hint--max580">Taken from the feed; change it if you like — other people’s feed names are often longer than the rail.</span></div>
+            <span class="tc-field__hint tc-field__hint--max580">Taken from the feed; yours to change.</span></div>
           <div class="tc-field tc-field--w100"><label>Label colour</label>
             <span class="tc-line tc-line--gap-9 tc-field__swatches">
               <label data-tc-colour="#4A6B52" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#4A6B52" aria-label="#4A6B52"></label>
@@ -17548,13 +17548,13 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <label data-tc-colour="#9A9280" class="tc-field__swatch"><input class="tc-seg__box" type="radio" name="colour" value="#9A9280" aria-label="#9A9280"></label>
             </span>
             <span class="tc-dim tc-dim--t11">derived from the address</span>
-            <span class="tc-field__hint tc-field__hint--max580">A feed sends no colour of its own: Carrel derives one, and hatches the strip so a feed is recognisable among your own collections.</span></div>
+            <span class="tc-field__hint tc-field__hint--max580">A feed has no colour of its own: Carrel picks one and hatches the strip.</span></div>
           <div class="tc-field is-own-line tc-field--w100">
             <label class="tc-check"><input class="tc-check__box" type="checkbox" name="this.feed.asks.for.a.password" value="1"><span class="tc-tickrow__tick is-off"></span>This feed asks for a password</label>
-            <span class="tc-field__hint tc-field__hint--max580">The login and password are kept the way DAV credentials are: encrypted under your key. A secret link needs no password — the secret is already in the address.</span></div>
-          <div class="tc-field tc-field--w100"><label>Sections</label><span class="tc-in tc-in--tags"><span class="tc-tag">Calendar · 3</span><span class="tc-tag">Tasks · 1</span></span><span class="tc-field__hint tc-field__hint--max580">Not a choice: a feed is one file. What it carries decides where it lands, and that is visible before subscribing.</span></div>
+            <span class="tc-field__hint tc-field__hint--max580">Kept encrypted, like DAV credentials. A secret link needs none.</span></div>
+          <div class="tc-field tc-field--w100"><label>Sections</label><span class="tc-in tc-in--tags"><span class="tc-tag">Calendar · 3</span><span class="tc-tag">Tasks · 1</span></span><span class="tc-field__hint tc-field__hint--max580">A feed is one file: what it carries decides where it lands.</span></div>
         </form>
-        <div class="tc-msg is-alert tc-msg--mx20 tc-msg--max580">The feed is fetched by the Carrel server, not by your browser. An address on your local network works only if the server can reach it; a public Carrel cannot, and it says so instead of returning an empty list.</div>
+        <div class="tc-msg is-alert tc-msg--mx20 tc-msg--max580"><b>The Carrel server fetches the feed, not your browser.</b> An address on your local network works only if the server can reach it.</div>
         <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit" form="subscribe">Subscribe</button><button class="tc-btn" type="button">Cancel</button></div>
       </div>
     </div>
@@ -18517,7 +18517,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </tbody>
         </table>
         <div class="tc-msg is-row tc-msg--max580"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
-          <span class="tc-msg__aside">Credentials are unlocked for five minutes — here and everywhere else they are handed out. Everything shown closes when the time is up or when you press <b>Lock now</b>; every reveal is written to the audit log.</span></div>
+          <span class="tc-msg__aside">Unlocked everywhere credentials are shown, not only here; every reveal goes to the audit log.</span></div>
       </div></div>
     </div>
   </div>
@@ -21725,7 +21725,7 @@ Read  2 min ago</div>
               <div class="tc-field tc-field--w100"><label>Attachments <span class="tc-plain">2 files · 24.4 MB</span></label>
                 <div class="tc-stack tc-stack--gap-5 tc-card__top2">
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="attachments" value="1"><span class="tc-tickrow__tick is-off"></span>Publish them too — each gets its own link</label>
-                  <span class="tc-field__hint">The links are created together with this one, expire with it and are revoked with it. Without this the page says how many files there are, but not their names: a file name gives away more than it looks.</span>
+                  <span class="tc-field__hint">They expire and are revoked with this link. Without it the page shows how many files there are, not their names: a name can give away a lot.</span>
                 </div></div>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.md</span> download</label>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
@@ -24845,7 +24845,7 @@ password  4c1-tide-oven</div>
               <span class="tc-field__hint tc-field__hint--max580">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
             <div class="tc-field tc-grow"><label>Sender address</label>
               <span class="tc-seg tc-seg--start" role="radiogroup"><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="noreply" checked>carrel@slovo.example</label><label class="tc-seg__opt"><input class="tc-seg__box" type="radio" name="sender" value="login">login@slovo.example</label></span>
-              <span class="tc-field__hint tc-field__hint--max580">Your relay decides which of the two it will let out. The envelope sender stays <span class="tc-mono">carrel@slovo.example</span> either way, so SPF is unaffected; DKIM and DMARC for this domain are set up on the relay, not here.</span></div>
+              <span class="tc-field__hint tc-field__hint--max580">Your relay decides which of the two it lets out. The envelope sender stays <span class="tc-mono">carrel@slovo.example</span>, so SPF is unaffected; DKIM and DMARC are set up on the relay.</span></div>
             <div class="tc-field tc-field--xs"><label>Attachment, MB</label><input class="tc-in is-mono" type="text" name="attach" value="2" aria-label="Attachment, MB"></div>
             <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
             <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
@@ -27142,7 +27142,7 @@ Read    2 min ago</div>
     <div class="frame-label"><span>Письмо · текст обрезан, кодировка неизвестна</span><span class="frag">отложена</span><i>колонка текста письма</i></div>
     <div class="tc-root tc-root--on-surface">
       <div class="tc-doc">
-        <div class="tc-msg tc-msg--flush-bot12">The letter says its charset is <span class="tc-mono">x-mac-ukrainian</span>, and Carrel does not know it. The text is shown as it came, so some letters may be wrong. <b>Download .eml</b> opens it in a mail program that knows the charset.</div>
+        <div class="tc-msg tc-msg--flush-bot12">The letter says its charset is <span class="tc-mono">x-mac-ukrainian</span>, and Carrel does not know it: some characters may be wrong. <b>Download .eml</b> opens it in a mail program that knows the charset.</div>
         <div class="tc-prose tc-prose--lead">Добрий день! Надсилаю звіт за ї»ень — таблиця у вкладенні, підсумки в кінці листа…
 
 …</div>
@@ -28407,8 +28407,8 @@ SMTP  mail.home.example:465  TLS
           <div class="tc-fset">
             <div class="tc-rubric">Users' own mailboxes <span class="tc-badge">off</span></div>
             <div class="tc-field is-own-line tc-grow"><button class="tc-check is-focus" type="button"><span class="tc-tickrow__tick is-off"></span>Let users connect their own mailboxes over IMAP and SMTP</button>
-              <span class="tc-field__hint">Carrel then keeps each person's mailbox password — usually the most valuable password they have. Their mail server decides what goes out and how much; the relay and its limits above are not used for it.</span></div>
-            <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail section, no mail in search or timelines, and the mail pages answer as if they did not exist. Mailboxes people already connected are kept: turning this back on brings them back.</div>
+              <span class="tc-field__hint">Carrel then keeps each person's mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
+            <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again.</div>
           </div>
         </div>
       </div>

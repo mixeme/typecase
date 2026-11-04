@@ -1019,6 +1019,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, seventh part** (Р-77, 04.11, without acceptance pictures):
+  subscribing to a feed (`s-profile-10`), a new calendar (`s-profile-5`),
+  mail in the instance settings (`s-mailbox-29`), unlocked credentials
+  (`s-plan-5`), links to attachments (`s-publish-4`), an unknown charset
+  (`s-mailbox-8`), a calendar without tasks (`s-agenda-11`) and the relay
+  sender (`s-admin-32`).
 - **Fewer words, sixth part** (Р-77, 04.11, without acceptance pictures):
   an address rewritten in contacts (`s-contacts-21`), the export format of
   notes (`s-mail-5`), a letter whose copy missed Sent (`s-mailbox-20`), an

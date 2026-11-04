@@ -3161,7 +3161,7 @@ func Publish4() Screen {
 										},
 										w.FieldHint{
 											Parts: []w.Inline{
-												w.Text("The links are created together with this one, expire with it and are revoked with it. Without this the page says how many files there are, but not their names: a file name gives away more than it looks."),
+												w.Text("They expire and are revoked with this link. Without it the page shows how many files there are, not their names: a name can give away a lot."),
 											},
 										},
 									},
