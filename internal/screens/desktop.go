@@ -984,7 +984,7 @@ func Desktop15() Screen {
 									w.Input{Placeholder: "Update the server where it runs — this app cannot do it", Label: "What to do"},
 									w.FieldHint{
 										Parts: []w.Inline{
-											w.Text("The app does not update a server from outside: that would be a way in. Whoever runs the server updates it."),
+											w.Text("The app does not update a server from outside: that would be a way in. The server’s administrator has to update it."),
 										},
 									},
 								},

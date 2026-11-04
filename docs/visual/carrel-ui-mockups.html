@@ -17554,14 +17554,13 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
             <span class="tc-field__hint tc-field__hint--max580">Kept encrypted, like DAV credentials. A secret link needs none.</span></div>
           <div class="tc-field tc-field--w100"><label>Sections</label><span class="tc-in tc-in--tags"><span class="tc-tag">Calendar · 3</span><span class="tc-tag">Tasks · 1</span></span><span class="tc-field__hint tc-field__hint--max580">A feed is one file: what it carries decides where it lands.</span></div>
         </form>
-        <div class="tc-msg is-alert tc-msg--mx20 tc-msg--max580"><b>The Carrel server fetches the feed, not your browser.</b> An address on your local network works only if the server can reach it.</div>
         <div class="tc-formfoot"><button class="tc-btn is-primary" type="submit" form="subscribe">Subscribe</button><button class="tc-btn" type="button">Cancel</button></div>
       </div>
     </div>
   </div>
 </div>
 <figcaption><b>Подписка на календарь — это подписка на файл, а не на события.</b> В <span class="tc-mono">.ics</span> лежат три вида записей, и лента приносит те, что в ней есть: события встанут в календарь, <span class="tc-mono">VTODO</span> — в задачи, <span class="tc-mono">VJOURNAL</span> — в заметки, одной и той же строкой «Подписки» в рейле каждого раздела. <b>Кнопка «Subscribe to a feed» стоит в подвале рейла каждого из этих разделов и в контактах</b> — не только в календаре: иначе адресную книгу подписывают, уходя в чужой раздел. Спрашивать человека, куда положить, нечего — ответ уже в файле, и он показан до подписки. Обратное тоже верно: лента из одних событий не появится в задачах и не будет там мозолить глаза пустой строкой.<br><br><b>Проверка адреса — не «валидация поля», а тот же след, что у discovery:</b> что ответил сервер, сколько это весит, за сколько пришло, что внутри и просили ли пароль. Из ответа же берётся имя ленты (<code>X-WR-CALNAME</code>) и определяется раздел — календарь или адресная книга, — поэтому спрашивать об этом человека не нужно.
-<br><br>Три вещи, которых нет у обычного аккаунта, названы прямо на экране. <b>Password</b> — необязателен и появляется флажком, потому что бо́льшая часть лент открыта, а секретная ссылка носит секрет в себе. <b>Цвет</b> — не приходит с сервера, поэтому его выдумывает Carrel из адреса и даёт поменять, а штриховка полоски отличает чужое от своего в рейле. <b>Кто тянет ленту</b> — сервер, а не браузер: это единственная причина, по которой «у меня в браузере открывается, а Carrel говорит, что нет», и её лучше объяснить до подписки, чем разбирать после.
+<br><br>Две вещи, которых нет у обычного аккаунта, названы прямо на экране. <b>Password</b> — необязателен и появляется флажком, потому что бо́льшая часть лент открыта, а секретная ссылка носит секрет в себе. <b>Цвет</b> — не приходит с сервера, поэтому его выдумывает Carrel из адреса и даёт поменять, а штриховка полоски отличает чужое от своего в рейле. <b>Кто тянет ленту</b> — сервер, а не браузер, но плашки об этом нет (владелец 05.11): проверка адреса идёт с сервера и покажет недоступный адрес до подписки.
 <br><br>Ошибка живёт в строке подписки, как и у аккаунта: «вчера · 401 Unauthorized» вместо пропавших событий. Лента, которая перестала отвечать, не должна выглядеть как лента, в которой ничего не запланировано.</figcaption>
 </figure>
 
@@ -33184,7 +33183,7 @@ dav: HTTP 503: the server is busy</div></div>
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>What to do</label>
               <input class="tc-in is-ph" type="text" placeholder="Update the server where it runs — this app cannot do it" aria-label="What to do">
-              <span class="tc-field__hint">The app does not update a server from outside: that would be a way in. Whoever runs the server updates it.</span></div>
+              <span class="tc-field__hint">The app does not update a server from outside: that would be a way in. The server’s administrator has to update it.</span></div>
           </div>
           <div class="tc-line tc-line--gap-8">
             <button class="tc-btn" type="button">How to update a server</button>

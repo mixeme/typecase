@@ -5347,15 +5347,6 @@ func Profile10() Screen {
 						ID:     "subscribe",
 						Action: "/app/settings/connections/subscribe",
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Strong("The Carrel server fetches the feed, not your browser."),
-							w.Text(" An address on your local network works only if the server can reach it."),
-						},
-						Tone:   w.MsgAlert,
-						Space:  w.MsgInset20,
-						Column: true,
-					},
 					w.FormFoot{
 						Items: []w.FormFootPart{w.Button{Label: "Subscribe", Kind: w.ButtonPrimary, Form: "subscribe"}, w.Button{Label: "Cancel"}},
 					},

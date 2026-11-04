@@ -482,7 +482,6 @@ func (Table) mainPart()       {}
 
 func (Danger) sidePart() {}
 func (Fields) sidePart() {}
-func (Msg) sidePart()    {}
 func (Pad) sidePart()    {}
 func (Sec) sidePart()    {}
 

@@ -37,7 +37,7 @@ func TestCheck(t *testing.T) {
 		s := `<!doctype html><html><body><div class="tc-root">` +
 			w.Button{Label: "Sign out", Form: "post-signout"}.Render() +
 			w.Scrim{ID: "drop", Closed: true, Drop: "post-import", Content: w.Sheet{Title: "Drop to import"}}.Render() +
-			w.Side{Drop: "post-attach", Zone: zone, Items: []w.SidePart{w.Msg{Parts: []w.MsgPart{w.Text("Синк-ап")}}}}.Render() +
+			w.Side{Drop: "post-attach", Zone: zone, Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "Синк-ап"}}}}.Render() +
 			w.Form{Action: "/x", Target: "side"}.Render() + form.Render()
 		for _, f := range forms {
 			s += f.Render()

@@ -431,7 +431,7 @@ func TestAddRowAndDrop(t *testing.T) {
 // the sheet is the target, and over the sheet the panel under it still wins.
 func TestSideDrop(t *testing.T) {
 	needChrome(t)
-	side := w.Side{Drop: "post-attach", Items: []w.SidePart{w.Msg{Parts: []w.MsgPart{w.Text("Синк-ап по релизу")}}}}
+	side := w.Side{Drop: "post-attach", Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "Синк-ап по релизу"}}}}
 	body := `<div class="tc-root"><div style="display:flex"><div id="away" style="flex:1;height:400px"></div>` + side.Render() + `</div>` +
 		w.PostForm{ID: "post-attach", Action: "/attach", File: "file"}.Render() + w.PostForm{ID: "post-import", Action: "/import", File: "file"}.Render() +
 		w.Scrim{ID: "drop", Closed: true, Drop: "post-import", Content: w.Sheet{Title: "Drop to import"}}.Render() + `</div>`
