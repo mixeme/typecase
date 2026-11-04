@@ -14,6 +14,9 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`Msg` is no longer a `SidePart`**: no frame puts a message in a side
+  panel since the feed panel (`s-profile-10`) lost its alert (owner, 05.11).
+  Drop the message from the panel; the check of the address says the rest.
 - `Push` is no longer a `SheetFootPart`: a sheet's Cancel stands in a
   pushed `Line` with its `Kbd` «Esc», as in every sheet (Р-81).
 - A public page's `Banner.End` takes a `Line` only, with one button too
@@ -1019,6 +1022,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The feed panel has no alert** (`s-profile-10`, owner 05.11): the check
+  of the address runs from the server and shows an address it cannot reach
+  before subscribing. An app newer than its server (`desktop-15`) says the
+  server’s administrator has to update it.
 - **Fewer words, eighth part** (Р-77, 04.11, without acceptance pictures):
   importing notes (`s-io-4`), the portable copy in the settings
   (`desktop-4`), an app newer than its server (`desktop-15`: whoever runs the
