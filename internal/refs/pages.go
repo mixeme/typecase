@@ -493,96 +493,10 @@ var _ = add(
 		},
 		Variant: w.PagePrint,
 	}, "print-1", "tc-root", 1),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Window{
-				Items: []w.WindowPart{
-					w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42},
-					w.Stack{
-						Gap: w.StackGap9,
-						Items: []w.StackPart{
-							w.Card{
-								Items: []w.CardPart{
-									w.CardPick{
-										Title: "Just for me",
-										Note:  []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")},
-									},
-								},
-								Variant: w.CardChosenFlush,
-							},
-							w.Card{
-								Items: []w.CardPart{
-									w.CardPick{
-										Ticked: w.TickedOff,
-										Title:  "For everyone on this computer",
-										Note: []w.CardTextPart{
-											w.Text("Installs into "),
-											w.Mono{Text: "Program Files"},
-											w.Text(". Asks for administrator once; each account still keeps its own data and password."),
-										},
-									},
-								},
-								Variant: w.CardFlush,
-							},
-							w.Card{
-								Items: []w.CardPart{
-									w.CardPick{
-										Ticked: w.TickedOff,
-										Title:  "Portable — do not install",
-										Note: []w.CardTextPart{
-											w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state."),
-										},
-										Field: &w.Field{
-											Parts: []w.FieldPart{
-												w.Line{
-													Items: []w.LinePart{
-														w.Input{Placeholder: "E:\\Carrel", Label: "E:\\Carrel", Mono: true, Variant: w.Input11Fill},
-														w.Button{Label: "Choose"},
-													},
-													Gap: w.LineGap8,
-												},
-												w.FieldHint{
-													Parts: []w.Inline{
-														w.Text("Nothing is written outside this folder: no registry, no start-up entry, no traces in the profile. Moving the folder moves Carrel with it."),
-													},
-												},
-											},
-											Width: w.FieldW100,
-										},
-									},
-								},
-								Variant: w.CardFlush,
-							},
-						},
-					},
-					w.Msg{
-						Icon: "shield",
-						Parts: []w.MsgPart{
-							w.Strong("On a stick, the folder is the secret."),
-							w.Text(" Your saved DAV passwords are encrypted with your Carrel password and stay encrypted there — but whoever finds the stick holds that file and can try guessing. Choose a long password, or keep the portable copy where you would keep keys."),
-						},
-						Tone:  w.MsgAlert,
-						Space: w.MsgFlush,
-					},
-					w.Line{
-						Items: []w.LinePart{
-							w.Button{Label: "Continue", Kind: w.ButtonPrimary},
-							w.Button{Label: "Cancel"},
-							w.Dim{
-								Parts:   []w.Inline{w.Text("64 MB · app, server, WebView2 check")},
-								Size:    w.Dim11_5,
-								Variant: w.DimWrap,
-								Place:   w.Pushed,
-							},
-						},
-						Gap:   w.LineGap8,
-						Block: true,
-					},
-				},
-				Gap: w.WindowGap13,
-			},
-		},
-	}, "desktop-3", "tc-root", 1),
+	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, w.Stack{Gap: w.StackGap9, Items: []w.StackPart{w.Card{Items: []w.CardPart{
+		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, w.Card{Items: []w.CardPart{
+		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, w.Card{Items: []w.CardPart{
+		w.CardPick{Ticked: w.TickedOff, Title: "Portable — do not install", Note: []w.CardTextPart{w.Text("Unpacks into a folder you choose and keeps everything inside it: the app, the server binary and your encrypted state.")}, Field: &w.Field{Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "E:\\Carrel", Label: "E:\\Carrel", Mono: true, Variant: w.Input11Fill}, w.Button{Label: "Choose"}}, Gap: w.LineGap8}, w.FieldHint{Parts: []w.Inline{w.Text("Nothing is written outside this folder; move it, and Carrel moves with it.")}}}, Width: w.FieldW100}}}, Variant: w.CardFlush}}}, w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Lose the stick, and the finder can guess your password as long as they like."), w.Text(" The encryption holds only as well as the password: choose a long one.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Line{Items: []w.LinePart{w.Button{Label: "Continue", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.Dim{Parts: []w.Inline{w.Text("64 MB · app, server, WebView2 check")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Gap: w.LineGap8, Block: true}}, Gap: w.WindowGap13}}}, "desktop-3", "tc-root", 1),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Window{

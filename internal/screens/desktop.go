@@ -267,9 +267,7 @@ func Desktop3() Screen {
 													Gap: w.LineGap8,
 												},
 												w.FieldHint{
-													Parts: []w.Inline{
-														w.Text("Nothing is written outside this folder: no registry, no start-up entry, no traces in the profile. Moving the folder moves Carrel with it."),
-													},
+													Parts: []w.Inline{w.Text("Nothing is written outside this folder; move it, and Carrel moves with it.")},
 												},
 											},
 											Width: w.FieldW100,
@@ -283,8 +281,8 @@ func Desktop3() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Strong("On a stick, the folder is the secret."),
-							w.Text(" Your saved DAV passwords are encrypted with your Carrel password and stay encrypted there — but whoever finds the stick holds that file and can try guessing. Choose a long password, or keep the portable copy where you would keep keys."),
+							w.Strong("Lose the stick, and the finder can guess your password as long as they like."),
+							w.Text(" The encryption holds only as well as the password: choose a long one."),
 						},
 						Tone:  w.MsgAlert,
 						Space: w.MsgFlush,

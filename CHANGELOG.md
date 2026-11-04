@@ -1019,6 +1019,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, third part** (Р-77, accepted by the owner 04.11): the root
+  of Selected collections (`s-files-6`), key escrow (`s-admin-6`, `-30`, `-31`),
+  the portable copy (`desktop-3`: the alert names the threat, unlimited
+  guessing on a lost stick), properties the server did not keep (`states-12`,
+  `-17`, `-24`, `-31`, `-36`) and the attendees field. Invitations and
+  cancellations are sent by «the server», not a named one (`s-agenda-26` too).
 - **Fewer words, second part** (Р-77, accepted by the owner 04.11): the
   device profile (`s-plan-1`, `-6`; the link card says how long it lives),
   mail turned off on the instance (`s-mailbox-28`), pictures shown in a

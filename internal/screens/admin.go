@@ -2591,7 +2591,7 @@ func Admin6() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
+							w.Text("Key escrow is a way in, not a backup: with the master password an administrator can decrypt a covered user’s DAV credentials, and through them their records. Covered users are told so, and every recovery is shown to them."),
 						},
 						Tone:   w.MsgAlert,
 						Column: true,
@@ -2611,9 +2611,7 @@ func Admin6() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision."),
-												},
+												Parts:   []w.Inline{w.Text("Copies already taken stay: only their owners delete them.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -2647,9 +2645,7 @@ func Admin6() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again."),
-												},
+												Parts:   []w.Inline{w.Text("The deposited copies stay as they are: nobody has to opt in again.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -2690,7 +2686,7 @@ func Admin6() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
+													w.Text("Connections survive a recovery. The user sees it in their password history, and gets a letter when mail can reach them."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -2815,7 +2811,7 @@ func Admin30() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
+							w.Text("Key escrow is a way in, not a backup: with the master password an administrator can decrypt a covered user’s DAV credentials, and through them their records. Covered users are told so, and every recovery is shown to them."),
 						},
 						Tone:   w.MsgAlert,
 						Column: true,
@@ -2866,9 +2862,7 @@ func Admin30() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Turning coverage off leaves copies already taken alone: deleting one is its owner’s decision."),
-												},
+												Parts:   []w.Inline{w.Text("Copies already taken stay: only their owners delete them.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -2902,9 +2896,7 @@ func Admin30() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Only the recovery private key is re-encrypted. The deposited copies are untouched, so nobody has to opt in again."),
-												},
+												Parts:   []w.Inline{w.Text("The deposited copies stay as they are: nobody has to opt in again.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -2945,7 +2937,7 @@ func Admin30() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Connections survive a recovery. The user sees it by the password-history link they were given; a letter goes too when mail can reach them."),
+													w.Text("Connections survive a recovery. The user sees it in their password history, and gets a letter when mail can reach them."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -3070,7 +3062,7 @@ func Admin31() Screen {
 					w.Msg{
 						Icon: "shield",
 						Parts: []w.MsgPart{
-							w.Text("Key escrow is not a key backup. It is a way in: an administrator holding the master password can decrypt a covered user’s saved DAV credentials, and through them their contacts and calendars. Every covered user is told so in their profile, and every recovery is logged and shown to them."),
+							w.Text("Key escrow is a way in, not a backup: with the master password an administrator can decrypt a covered user’s DAV credentials, and through them their records. Covered users are told so, and every recovery is shown to them."),
 						},
 						Tone:   w.MsgAlert,
 						Column: true,

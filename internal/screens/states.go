@@ -938,8 +938,8 @@ func States17() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Strong("The change was saved, but the server did not keep these properties."),
-							w.Text(" Other clients will not see them either: "),
+							w.Strong("The change was saved, but the server did not keep these properties:"),
+							w.Text(" "),
 							w.Mono{Text: "X-CALENDARSERVER-PRIVATE-COMMENT"},
 							w.Text(", "),
 							w.Mono{Text: "X-MICROSOFT-CDO-BUSYSTATUS"},
@@ -1141,9 +1141,7 @@ func States17() Screen {
 												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
-												},
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
 											},
 										},
 										Width: w.FieldFull,
@@ -1360,7 +1358,7 @@ func States36() Screen {
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Strong("The change was saved, but the server did not keep two days of the series."),
-							w.Text(" Other clients will not see them either: the meeting of 24 August, which was skipped, is back; the meeting of 31 August, which was moved to 1 September, 15:00, is back on its day at 12:00."),
+							w.Text(" The skipped meeting of 24 August is back; the one moved from 31 August to 1 September, 15:00, is back on its day at 12:00."),
 						},
 						Space: w.MsgFlushTop2,
 					},
@@ -1558,9 +1556,7 @@ func States36() Screen {
 												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
-												},
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
 											},
 										},
 										Width: w.FieldFull,
@@ -2537,8 +2533,8 @@ func States12() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Strong("The change was saved, but the server did not keep these properties."),
-							w.Text(" Other clients will not see them either: "),
+							w.Strong("The change was saved, but the server did not keep these properties:"),
+							w.Text(" "),
 							w.Mono{Text: "X-ABLABEL"},
 							w.Text(", "),
 							w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"},
@@ -4149,8 +4145,8 @@ func States24() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Strong("The change was saved, but the server did not keep these properties."),
-							w.Text(" Other clients will not see them either: "),
+							w.Strong("The change was saved, but the server did not keep these properties:"),
+							w.Text(" "),
 							w.Mono{Text: "X-APPLE-SORT-ORDER"},
 							w.Text(", "),
 							w.Mono{Text: "X-OC-HIDESUBTASKS"},
@@ -4296,9 +4292,7 @@ func States24() Screen {
 												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
-												},
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
 											},
 										},
 										Width: w.FieldFull,
@@ -5291,8 +5285,8 @@ func States31() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Strong("The change was saved, but the server did not keep these properties."),
-							w.Text(" Other clients will not see them either: "),
+							w.Strong("The change was saved, but the server did not keep these properties:"),
+							w.Text(" "),
 							w.Mono{Text: "X-EVOLUTION-MEMO-COLOR"},
 							w.Text(", "),
 							w.Mono{Text: "X-CARREL-UNKNOWN-FLAG"},

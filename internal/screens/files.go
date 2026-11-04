@@ -1685,13 +1685,7 @@ func Files6() Screen {
 							},
 						},
 					},
-					w.Msg{
-						Parts: []w.MsgPart{
-							w.Text("This is where the section starts: the storages you ticked in the rail, as top-level folders. Open one and its own tree opens — contents of different servers are never mixed in one folder, because a file has one path and belongs to its own storage. "),
-							w.Strong("Public"),
-							w.Text(" is not ticked, so it is not here."),
-						},
-					},
+					w.Msg{Parts: []w.MsgPart{w.Text("The storages ticked in the rail, each with its own tree.")}},
 				},
 			},
 		},

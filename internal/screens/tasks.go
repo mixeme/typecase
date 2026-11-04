@@ -1075,9 +1075,7 @@ func Tasks3() Screen {
 												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
-												},
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
 											},
 										},
 										Width: w.FieldFull,
@@ -1445,9 +1443,7 @@ func Tasks14() Screen {
 												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("A name or an address: the ticked address books are searched. On save, nextcloud sends the invitations and their changes — Carrel sends no mail itself."),
-												},
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
 											},
 										},
 										Width: w.FieldFull,
