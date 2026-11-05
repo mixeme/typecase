@@ -104,7 +104,7 @@ func Attachments1() Screen {
 													w.Mono{Text: "nextcloud"},
 													w.Text(" 2 MB, "),
 													w.Mono{Text: "radicale · vps"},
-													w.Text(" 1 MB. Nothing here raises it."),
+													w.Text(" 1 MB."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -140,9 +140,7 @@ func Attachments1() Screen {
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel."),
-												},
+												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -214,9 +212,7 @@ func Attachments1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Carrel keeps no index of what points at these files. Nothing here deletes them: an attachment is removed from the record it hangs on, in that record."),
-												},
+												Parts:   []w.Inline{w.Text("Nothing here deletes them: an attachment is removed in the record it hangs on.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -230,7 +226,7 @@ func Attachments1() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Changing the folder moves nothing. Records already written carry the old path and keep working; only new attachments go to the new place."),
+							w.Text("Changing the folder moves nothing: attachments already written keep working, new ones go to the new place."),
 						},
 						Column: true,
 					},
@@ -337,7 +333,7 @@ func Attachments5() Screen {
 													w.Mono{Text: "nextcloud"},
 													w.Text(" 2 MB, "),
 													w.Mono{Text: "radicale · vps"},
-													w.Text(" 1 MB. Nothing here raises it."),
+													w.Text(" 1 MB."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -382,9 +378,7 @@ func Attachments5() Screen {
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel."),
-												},
+												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -552,7 +546,7 @@ func Attachments6() Screen {
 													w.Mono{Text: "nextcloud"},
 													w.Text(" 2 MB, "),
 													w.Mono{Text: "radicale · vps"},
-													w.Text(" 1 MB. Nothing here raises it."),
+													w.Text(" 1 MB."),
 												},
 												Variant: w.HintColumn,
 											},
@@ -588,9 +582,7 @@ func Attachments6() Screen {
 												Gap: w.LineGap8,
 											},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Created on first use. It stays an ordinary folder: openable in Files, mountable as a network drive, readable without Carrel."),
-												},
+												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},
 												Variant: w.HintColumn,
 											},
 										},
@@ -666,7 +658,7 @@ func Attachments6() Screen {
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
-							w.Text("Changing the folder moves nothing. Records already written carry the old path and keep working; only new attachments go to the new place."),
+							w.Text("Changing the folder moves nothing: attachments already written keep working, new ones go to the new place."),
 						},
 						Column: true,
 					},

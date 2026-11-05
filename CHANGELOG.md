@@ -1022,6 +1022,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, ninth part** (Р-77, 05.11, without acceptance pictures):
+  the second sentence that repeats the first goes — a server that is
+  unavailable (`s-conflict-10`, `states-11`, `-22`, `-29`, `-33`), a refused
+  delete (`s-profile-31`), a copy that kept its original (`s-profile-32`),
+  calendar servers not answering (`s-profile-21`), a label taken
+  (`s-profile-11`), duplicates before loading (`s-dup-6`), an import into a
+  silent address book (`s-io-19`), device codes (`s-plan-2`), a video sent as
+  a link (`s-mailbox-18`), a letter the mail server refused (`s-mailbox-19`),
+  a file gone (`s-files-17`), too many searches (`s-find-8`), a meeting not
+  split from its series (`s-agenda-24`, `-28`), «verified» (`s-backup-1`,
+  `-12`, `-13`, `-14`), the attachments folder (`attachments-1`, `-5`, `-6`)
+  and the appearance (`appearance-1`).
 - **The feed panel has no alert** (`s-profile-10`, owner 05.11): the check
   of the address runs from the server and shows an address it cannot reach
   before subscribing. An app newer than its server (`desktop-15`) says the

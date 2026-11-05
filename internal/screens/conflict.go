@@ -1244,7 +1244,7 @@ func Conflict10() Screen {
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Strong("Контакты is unavailable."),
-									w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+									w.Text(" The server did not answer as expected. "),
 									w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/conflict"},
 								},
 								Tone:  w.MsgAlert,

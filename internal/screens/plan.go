@@ -423,7 +423,7 @@ func Plan2() Screen {
 									w.Msg{
 										Icon: "shield",
 										Parts: []w.MsgPart{
-											w.Text("One code for each ticked account. Scan it with the phone: DAVx5 opens with the address and the login filled in, and asks for the password shown under the code."),
+											w.Text("Scan each code with the phone: DAVx5 fills in the address and the login, and asks for the password shown under the code."),
 										},
 										Space:  w.MsgFlush,
 										Column: true,

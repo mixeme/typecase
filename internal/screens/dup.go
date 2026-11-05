@@ -1395,7 +1395,7 @@ func Dup6() Screen {
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Strong("Nothing is loaded yet."),
-									w.Text(" Duplicates are found only among the records this session has already read, so no server was asked. Open a list or a combined view, then come back."),
+									w.Text(" Duplicates are found only among records already read in this session. Open a list or a combined view, then come back."),
 								},
 							},
 						},

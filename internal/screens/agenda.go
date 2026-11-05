@@ -1180,7 +1180,7 @@ func Agenda28() Screen {
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
-								w.Text("The meeting of 1 February was not made a separate event: it stays in the series, with its change, as it was before you saved."),
+								w.Text("The meeting of 1 February was not made a separate event: it stays in the series as it was before you saved."),
 							},
 							Tone:  w.MsgAlert,
 							Space: w.MsgFlush,

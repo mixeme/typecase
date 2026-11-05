@@ -234,7 +234,7 @@ func Backup1() Screen {
 						Variant: w.TableWide,
 					},
 					w.MainHint{
-						Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+						Text: "verified — the archive was read back from where it was written and the checksum matched; otherwise it is marked red.",
 					},
 					w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
 					w.Table{
@@ -1369,7 +1369,7 @@ func Backup12() Screen {
 							Variant: w.TableWide,
 						},
 						w.MainHint{
-							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+							Text: "verified — the archive was read back from where it was written and the checksum matched; otherwise it is marked red.",
 						},
 						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
 						w.Table{
@@ -1791,7 +1791,7 @@ func Backup13() Screen {
 							Variant: w.TableWide,
 						},
 						w.MainHint{
-							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+							Text: "verified — the archive was read back from where it was written and the checksum matched; otherwise it is marked red.",
 						},
 						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
 						w.Table{
@@ -2215,7 +2215,7 @@ func Backup14() Screen {
 							Variant: w.TableWide,
 						},
 						w.MainHint{
-							Text: "verified — the archive was read back from where it was written and the checksum matched. Written and not read back is not verified, and is marked red.",
+							Text: "verified — the archive was read back from where it was written and the checksum matched; otherwise it is marked red.",
 						},
 						w.ListGroup{Title: w.Rubric{Text: "History, all jobs", Form: w.RubricInline}, Count: &w.Num{Value: 13}},
 						w.Table{

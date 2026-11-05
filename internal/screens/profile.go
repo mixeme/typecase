@@ -2780,9 +2780,7 @@ func Profile11() Screen {
 										Parts: []w.FieldPart{
 											w.Input{Name: "label", Value: "nextcloud", Label: "Label", Focus: true, Error: true},
 											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("There is already a connection called “nextcloud”. Choose another label: it is how your sources are told apart."),
-												},
+												Parts:   []w.Inline{w.Text("There is already a connection called “nextcloud”. Choose another label.")},
 												Variant: w.HintDanger,
 											},
 										},

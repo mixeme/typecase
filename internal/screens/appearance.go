@@ -191,7 +191,7 @@ func Appearance1() Screen {
 										Parts: []w.FieldPart{
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Text("Week start and the clock are kept in the account: another browser shows the same. The time zone is the instance’s, set by the administrator."),
+													w.Text("Week start and the clock are kept in the account. The time zone is the instance’s, set by the administrator."),
 												},
 												Variant: w.HintColumn,
 											},

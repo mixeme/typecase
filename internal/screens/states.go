@@ -2444,7 +2444,7 @@ func States11() Screen {
 							w.Msg{
 								Parts: []w.MsgPart{
 									w.Strong("Контакты is unavailable."),
-									w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+									w.Text(" The server did not answer as expected. "),
 									w.Button{Label: "Try again", Small: true},
 								},
 								Tone: w.MsgAlert,
@@ -3927,7 +3927,7 @@ func States22() Screen {
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Strong("Дела is unavailable."),
-							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Text(" The server did not answer as expected. "),
 							w.Button{Label: "Try again", Small: true},
 						},
 						Tone: w.MsgAlert,
@@ -5003,7 +5003,7 @@ func States29() Screen {
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Strong("Записи is unavailable."),
-							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Text(" The server did not answer as expected. "),
 							w.Button{Label: "Try again", Small: true},
 						},
 						Tone: w.MsgAlert,
@@ -5662,7 +5662,7 @@ func States33() Screen {
 					w.Msg{
 						Parts: []w.MsgPart{
 							w.Strong("Documents is unavailable."),
-							w.Text(" The server did not answer as expected, so nothing on this screen comes from it. "),
+							w.Text(" The server did not answer as expected. "),
 							w.Button{Label: "Try again", Small: true},
 						},
 						Tone: w.MsgAlert,

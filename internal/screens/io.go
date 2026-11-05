@@ -1121,8 +1121,8 @@ func Io19() Screen {
 							},
 							w.Msg{
 								Parts: []w.MsgPart{
-									w.Strong("nextcloud · Контакты did not answer"),
-									w.Text(", so what is already there cannot be told. Nothing is written; try again, or choose another address book under «Into». "),
+									w.Strong("nextcloud · Контакты did not answer."),
+									w.Text(" Nothing is written; try again, or choose another address book under «Into». "),
 									w.Button{Label: "Try again", Small: true, Href: "/app/contacts/nextcloud/kontakty/import"},
 								},
 								Tone:  w.MsgAlert,
