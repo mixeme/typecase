@@ -461,7 +461,7 @@ func Dark3() Screen {
 							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
 							Current: "2026-07",
 						},
-						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 6 items")}}},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 7 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
@@ -575,16 +575,23 @@ func Dark3() Screen {
 								},
 							},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "6 items · 89.4 MB"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "7 items · 89.4 MB"}}, Secondary: true},
 					},
 					w.Grid{
 						Tiles: []w.Tile{
 							w.Tile{
 								Thumb: w.Thumb{Icon: "file", Form: w.ThumbFolder},
 								Name:  "архив",
-								Meta:  "12 items",
+								Meta:  "",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/архив",
 								Send:  w.Send{Of: "files-sel", Name: "item", Value: "архив"},
+							},
+							w.Tile{
+								Thumb: w.Thumb{Icon: "file", Form: w.ThumbFolder},
+								Name:  "черновики",
+								Meta:  "0 items",
+								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/черновики",
+								Send:  w.Send{Of: "files-sel", Name: "item", Value: "черновики"},
 							},
 							w.Tile{
 								Thumb:    w.Thumb{Icon: "img"},
@@ -611,14 +618,14 @@ func Dark3() Screen {
 							w.Tile{
 								Thumb: w.Thumb{Icon: "img"},
 								Name:  "схема-1.png",
-								Meta:  "640 KB · 1920×1080",
+								Meta:  "640 KB",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-1.png",
 								Send:  w.Send{Of: "files-sel", Name: "item", Value: "схема-1.png"},
 							},
 							w.Tile{
 								Thumb: w.Thumb{Icon: "img"},
 								Name:  "схема-2.png",
-								Meta:  "712 KB · 1920×1080",
+								Meta:  "712 KB",
 								Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-07/схема-2.png",
 								Send:  w.Send{Of: "files-sel", Name: "item", Value: "схема-2.png"},
 							},
@@ -626,7 +633,7 @@ func Dark3() Screen {
 					},
 					w.PostForm{
 						ID:     "files-sel",
-						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-07",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},

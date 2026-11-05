@@ -183,7 +183,7 @@ func Attachments1() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Mono{Text: "2026-08-10 sync-board.png"},
+													w.Mono{Text: "2026-08-10-sync-board.png"},
 													w.Text(". A name already taken is never overwritten: a counter is added."),
 												},
 												Variant: w.HintColumn,
@@ -421,7 +421,7 @@ func Attachments5() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Mono{Text: "2026-08-10 sync-board.png"},
+													w.Mono{Text: "2026-08-10-sync-board.png"},
 													w.Text(". A name already taken is never overwritten: a counter is added."),
 												},
 												Variant: w.HintColumn,
@@ -625,7 +625,7 @@ func Attachments6() Screen {
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
-													w.Mono{Text: "2026-08-10 sync-board.png"},
+													w.Mono{Text: "2026-08-10-sync-board.png"},
 													w.Text(". A name already taken is never overwritten: a counter is added."),
 												},
 												Variant: w.HintColumn,

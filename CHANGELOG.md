@@ -1022,6 +1022,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The dark tiles follow the light ones** (05.11): `dark-3` draws the July
+  folder as `s-files-5` does — 7 items, «архив» without a count, «черновики»
+  with 0, pictures without their size in pixels, the pick form on the July
+  folder. The attachment name example reads `2026-08-10-sync-board.png`, as
+  the file is named (`attachments-1`, `-5`, `-6`); the group «Редакция
+  «Слово»» in the mentions (`mentions-2`) lies in Контакты, as its card
+  (`mentions-9`).
 - **Sample data agree with the set** (05.11, without acceptance pictures by
   the owner’s rule of 12.10): Objects in the settings tables are what each
   collection holds, as in the fixtures (`s-profile-1`, `-4`, `-7`…`-10`,
