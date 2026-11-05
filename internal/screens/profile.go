@@ -3798,11 +3798,7 @@ func Profile5() Screen {
 									Name:    "colour",
 								},
 								w.FieldHint{
-									Parts: []w.Inline{
-										w.Text("Written to the server as "),
-										w.Mono{Text: "calendar-color"},
-										w.Text(" — DAVx5 and Thunderbird will show the same one."),
-									},
+									Parts:   []w.Inline{w.Text("Written to the server: DAVx5 and Thunderbird show the same one.")},
 									Variant: w.HintSmall,
 								},
 							},

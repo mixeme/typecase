@@ -369,7 +369,7 @@ func Desktop4() Screen {
 						Variant: w.FormGap12,
 					},
 					w.Msg{
-						Parts: []w.MsgPart{w.Text("A portable copy is a full Carrel, local or remote as usual — not a cut-down build.")},
+						Parts: []w.MsgPart{w.Text("A portable copy is a full Carrel, local or remote as usual.")},
 						Space: w.MsgFlush,
 					},
 				},

@@ -90,10 +90,7 @@ func Appearance1() Screen {
 												Variant: w.SegStart,
 												Name:    "theme",
 											},
-											w.FieldHint{
-												Parts:   []w.Inline{w.Text("“Auto” follows the system. Kept in this browser — another device does not see it.")},
-												Variant: w.HintColumn,
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("“Auto” follows the system. Kept in this browser.")}, Variant: w.HintColumn},
 										},
 									},
 								},
@@ -146,7 +143,7 @@ func Appearance1() Screen {
 									w.Field{
 										Parts: []w.FieldPart{
 											w.FieldHint{
-												Parts:   []w.Inline{w.Text("Column sets are remembered per section, in this browser — the button below resets them.")},
+												Parts:   []w.Inline{w.Text("Column sets are remembered per section, in this browser.")},
 												Variant: w.HintColumn,
 											},
 										},

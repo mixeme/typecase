@@ -55,7 +55,7 @@ var _ = add(
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The storages ticked in the rail, each with its own tree.")}}, "s-files-6", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("The other record is deleted. This cannot be undone.")}, Space: w.MsgFlushSides}, "s-dup-2", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("You are signed in with a temporary password. Choose a new one before continuing.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides, Column: true}, "account-17", "tc-msg", 1),
-	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records stay where they are and are shown as one.")}, Tone: w.MsgAccent}, "components-22", "tc-msg", 1),
+	cards("accent", w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records are shown as one.")}, Tone: w.MsgAccent}, "components-22", "tc-msg", 1),
 	cards("rich", w.Msg{Parts: []w.MsgPart{w.Text("Files are found by their names; what is inside them is not searched.")}}, "s-find-1", "tc-msg", 1),
 	cards("alert", w.Msg{Parts: []w.MsgPart{w.Text("With the escrow master password, an administrator will be able to decrypt the DAV credentials you save here, and through them your records. You can withdraw the copy later from Account.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "account-2", "tc-msg", 1),
 	cards("icon", w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The profile carries passwords in cleartext."), w.Text(" Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup.")}, Tone: w.MsgAlert, Space: w.MsgFlush, Column: true}, "s-plan-1", "tc-msg", 1),
@@ -527,7 +527,7 @@ var _ = add(
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
 		w.Field{Label: "iCalendar file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Личный 2026.ics", Label: "Личный 2026.ics", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".ics", Label: "iCalendar file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
-		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".ics"}, w.Text(" — iCalendar 2.0. One file holds any number of events; tasks and journal entries in it are skipped and named in the report.")}, Line: true}}}, "s-io-15", "tc-card", 1),
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".ics"}, w.Text(" — iCalendar, any number of events in one file; tasks and journal entries in it are skipped and named in the report.")}, Line: true}}}, "s-io-15", "tc-card", 1),
 	cards("shown", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "nextcloud", Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Button{Label: "New collection", Icon: "plus", Small: true}, w.Button{Label: "Hide password", Small: true, Href: "/app/settings/connections"}, w.Button{Label: "Test", Small: true}, w.Button{Label: "Look for changes", Small: true, Form: "conn-picks", To: "/app/settings/connections?op=rediscover&account=nextcloud"}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGap6}}},
 		w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5Dusty},
@@ -699,7 +699,7 @@ var _ = add(
 	cards("plain", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a file"},
 		w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGap8}}, Width: w.FieldW100},
-		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "), w.Mono{Text: ".ics"}, w.Text(" here instead.")}, Line: true}}}, "s-io-3", "tc-card", 1),
+		w.CardHint{Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0, any number of cards in one file.")}, Line: true}}}, "s-io-3", "tc-card", 1),
 	cards("chosen", w.Card{Items: []w.CardPart{
 		w.Rubric{Text: "From a WebDAV folder"},
 		w.Tree{Rows: []w.TreeRow{

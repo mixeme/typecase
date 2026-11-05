@@ -1022,6 +1022,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, tenth part** (Р-77, 05.11, without acceptance pictures):
+  the import formats (`s-io-3`, `-15`, `-16`, `-17`, `-18`: no «2.0», no
+  «take .ics here instead»), where an import goes (`s-io-6`, `-7`), linking
+  (`components-22`, as on the duplicates screen), a calendar colour
+  (`s-profile-5`), the appearance (`appearance-1`), the portable copy
+  (`desktop-4`), adding users (`s-admin-1`), a reply’s size (`s-mailbox-15`)
+  and saving an attachment to files (`s-mailbox-10`).
 - **Fewer words, ninth part** (Р-77, 05.11, without acceptance pictures):
   the second sentence that repeats the first goes — a server that is
   unavailable (`s-conflict-10`, `states-11`, `-22`, `-29`, `-33`), a refused

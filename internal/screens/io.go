@@ -542,13 +542,8 @@ func Io3() Screen {
 										Width: w.FieldW100,
 									},
 									w.CardHint{
-										Parts: []w.CardTextPart{
-											w.Mono{Text: ".vcf"},
-											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
-											w.Mono{Text: ".ics"},
-											w.Text(" here instead."),
-										},
-										Line: true,
+										Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0, any number of cards in one file.")},
+										Line:  true,
 									},
 								},
 							},
@@ -684,7 +679,7 @@ func Io15() Screen {
 									w.CardHint{
 										Parts: []w.CardTextPart{
 											w.Mono{Text: ".ics"},
-											w.Text(" — iCalendar 2.0. One file holds any number of events; tasks and journal entries in it are skipped and named in the report."),
+											w.Text(" — iCalendar, any number of events in one file; tasks and journal entries in it are skipped and named in the report."),
 										},
 										Line: true,
 									},
@@ -792,7 +787,7 @@ func Io16() Screen {
 									w.CardHint{
 										Parts: []w.CardTextPart{
 											w.Mono{Text: ".ics"},
-											w.Text(" — iCalendar 2.0. One file holds any number of tasks; events and journal entries in it are skipped and named in the report."),
+											w.Text(" — iCalendar, any number of tasks in one file; events and journal entries in it are skipped and named in the report."),
 										},
 										Line: true,
 									},
@@ -916,13 +911,8 @@ func Io17() Screen {
 										Width: w.FieldW100,
 									},
 									w.CardHint{
-										Parts: []w.CardTextPart{
-											w.Mono{Text: ".vcf"},
-											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
-											w.Mono{Text: ".ics"},
-											w.Text(" here instead."),
-										},
-										Line: true,
+										Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0, any number of cards in one file.")},
+										Line:  true,
 									},
 								},
 							},
@@ -1051,13 +1041,8 @@ func Io18() Screen {
 										Width: w.FieldW100,
 									},
 									w.CardHint{
-										Parts: []w.CardTextPart{
-											w.Mono{Text: ".vcf"},
-											w.Text(" — vCard 2.1, 3.0 and 4.0. One file holds any number of cards; the calendar and the list of tasks take "),
-											w.Mono{Text: ".ics"},
-											w.Text(" here instead."),
-										},
-										Line: true,
+										Parts: []w.CardTextPart{w.Mono{Text: ".vcf"}, w.Text(" — vCard 2.1, 3.0 and 4.0, any number of cards in one file.")},
+										Line:  true,
 									},
 								},
 							},
@@ -1629,9 +1614,7 @@ func Io6() Screen {
 													Pop:   w.MenuUnder,
 												},
 											},
-											w.FieldHint{
-												Parts: []w.Inline{w.Text("Calendars only. A list of tasks is a different collection and takes different components.")},
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Calendars only: a list of tasks is a different collection.")}},
 										},
 										Width: w.FieldLG,
 									},
@@ -1786,9 +1769,7 @@ func Io7() Screen {
 													Pop:   w.MenuUnder,
 												},
 											},
-											w.FieldHint{
-												Parts: []w.Inline{w.Text("Lists of tasks only. A calendar is a different collection: events go there, not here.")},
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Lists of tasks only: a calendar is a different collection.")}},
 										},
 										Width: w.FieldLG,
 									},

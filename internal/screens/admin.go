@@ -54,11 +54,7 @@ func Admin1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Add users"},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Three ways, for three situations. There is no global mode: any of them works.")},
-							},
-						},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Any of the three works: there is no global mode.")}}},
 					},
 					w.MainCards{
 						Cards: []w.Card{
