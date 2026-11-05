@@ -1009,8 +1009,8 @@ func Desktop15() Screen {
 func Desktop16() Screen {
 	return w.Page{
 		Items: []w.PagePart{
-			w.PrintTitle{Text: "Documents / carrel / attachments"},
-			w.PrintSources{Text: "sftpgo · vps · 5 items · 4.4 MB"},
+			w.PrintTitle{Text: "Documents / carrel / attachments / 2026-07"},
+			w.PrintSources{Text: "sftpgo · vps · 7 items · 89.4 MB"},
 			w.PrintRow{
 				Items:   []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Size"}, w.PrintNum{Text: "Changed"}},
 				Columns: true,
@@ -1018,40 +1018,36 @@ func Desktop16() Screen {
 			},
 			w.PrintRubric{Text: "Folders"},
 			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "7 items"}, w.PrintNum{Text: "2026-07-01"}},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "архив"}, w.PrintNum{Text: "—"}, w.PrintNum{Text: "2026-07-01"}},
+				Columns: true,
+			},
+			w.PrintRow{
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "черновики"}, w.PrintNum{Text: "0 items"}, w.PrintNum{Text: "2026-07-29"}},
 				Columns: true,
 			},
 			w.PrintRubric{Text: "Files"},
 			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.PrintCell{Name: "2026-08-10-sync-board.png"},
-					w.PrintNum{Text: "412 KB"},
-					w.PrintNum{Text: "2026-08-10"},
-				},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "панорама.tif"}, w.PrintNum{Text: "84 MB"}, w.PrintNum{Text: "2026-07-21"}},
 				Columns: true,
 			},
 			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.PrintCell{Name: "release-checklist.md"},
-					w.PrintNum{Text: "3.1 KB"},
-					w.PrintNum{Text: "2026-08-09"},
-				},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "схема-2.png"}, w.PrintNum{Text: "712 KB"}, w.PrintNum{Text: "2026-07-16"}},
 				Columns: true,
 			},
 			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "смета-подрядчик.pdf"}, w.PrintNum{Text: "1.2 MB"}, w.PrintNum{Text: "2026-08-05"}},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "схема-1.png"}, w.PrintNum{Text: "640 KB"}, w.PrintNum{Text: "2026-07-16"}},
 				Columns: true,
 			},
 			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.PrintCell{Name: "2026-08-04-whiteboard.jpg"},
-					w.PrintNum{Text: "2.8 MB"},
-					w.PrintNum{Text: "2026-08-04"},
-				},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "whiteboard.jpg"}, w.PrintNum{Text: "2.8 MB"}, w.PrintNum{Text: "2026-07-14"}},
+				Columns: true,
+			},
+			w.PrintRow{
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "смета.pdf"}, w.PrintNum{Text: "1.2 MB"}, w.PrintNum{Text: "2026-07-08"}},
 				Columns: true,
 			},
 			w.PrintFoot{
-				Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 5 of 5 shown",
+				Text: "Carrel · folder · sftpgo / Documents / carrel / attachments / 2026-07 · captured 2026-08-16 20:41 · 7 of 7 shown",
 			},
 		},
 		Variant: w.PagePrint,

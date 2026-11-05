@@ -691,7 +691,7 @@ func (g *gen) tickrow(e *El) string {
 }
 
 var treeIndent = []kv{{"tc-tree__row--padl1-25rem", "TreeLevel20"}, {"tc-tree__row--padl22", "TreeLevel22"}, {"tc-tree__row--padl36", "TreeLevel36"},
-	{"tc-tree__row--padl40", "TreeLevel40"}, {"tc-tree__row--padl44", "TreeLevel44"}, {"tc-tree__row--padl58", "TreeLevel58"}}
+	{"tc-tree__row--padl40", "TreeLevel40"}, {"tc-tree__row--padl44", "TreeLevel44"}, {"tc-tree__row--padl58", "TreeLevel58"}, {"tc-tree__row--padl76", "TreeLevel76"}}
 
 func (g *gen) tree(e *El) string {
 	var f, rows []string

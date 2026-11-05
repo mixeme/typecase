@@ -13,11 +13,12 @@ const (
 	TreeLevel40            // two levels down
 	TreeLevel44            // two levels down, under a row with an icon
 	TreeLevel58            // three levels down
+	TreeLevel76            // four levels down
 )
 
 func (i TreeIndent) class() string {
 	return [...]string{"", "tc-tree__row--padl1-25rem", "tc-tree__row--padl22", "tc-tree__row--padl36",
-		"tc-tree__row--padl40", "tc-tree__row--padl44", "tc-tree__row--padl58"}[i]
+		"tc-tree__row--padl40", "tc-tree__row--padl44", "tc-tree__row--padl58", "tc-tree__row--padl76"}[i]
 }
 
 // TreeTrail is what stands at the end of a row of a tree, pushed to it.

@@ -85,16 +85,12 @@ func Files1() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Text: "attachments"},
+						Title: &w.HeadTitle{Text: "2026-08"},
 						Crumbs: &w.Crumbs{
-							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
-							Current: "attachments",
+							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+							Current: "2026-08",
 						},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
-							},
-						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 4 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
@@ -173,9 +169,9 @@ func Files1() Screen {
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
-									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 								},
 								Secondary: true,
 							},
@@ -183,11 +179,15 @@ func Files1() Screen {
 								Options: []w.SegOption{
 									{
 										Icon:  "menu",
-										Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=list",
 										On:    true,
 										Title: "List",
 									},
-									{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
+									{
+										Icon:  "grid",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=tiles",
+										Title: "Tiles",
+									},
 								},
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
@@ -196,16 +196,16 @@ func Files1() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
-										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
 								},
 							},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4 items · 4.4 MB"}}, Secondary: true},
 					},
 					w.Table{
 						Cols: []w.TableCol{
@@ -222,26 +222,16 @@ func Files1() Screen {
 									{},
 									{
 										Parts: []w.CellPart{
-											w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+											w.TableFile{
+												Icon:   "back",
+												Name:   "up one folder",
+												Accent: true,
+												Href:   "/app/files/sftpgo/documents/carrel/attachments",
+											},
 										},
 										Span: 5,
 									},
 								},
-							},
-							{
-								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
-									{
-										Parts: []w.CellPart{
-											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
-										},
-									},
-									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
-								},
-								State: w.RowFolder,
 							},
 							{
 								Cells: []w.TableCell{
@@ -254,7 +244,7 @@ func Files1() Screen {
 											w.TableFile{
 												Icon: "img",
 												Name: "2026-08-04-whiteboard.jpg",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-04-whiteboard.jpg",
 											},
 										},
 									},
@@ -281,7 +271,7 @@ func Files1() Screen {
 											w.TableFile{
 												Icon: "img",
 												Name: "2026-08-10-sync-board.png",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-10-sync-board.png",
 											},
 										},
 									},
@@ -306,7 +296,7 @@ func Files1() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "release-checklist.md",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/release-checklist.md",
 											},
 										},
 									},
@@ -330,7 +320,7 @@ func Files1() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "смета-подрядчик.pdf",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 											},
 										},
 									},
@@ -350,12 +340,12 @@ func Files1() Screen {
 					},
 					w.PostForm{
 						ID:     "files-sel",
-						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-08",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.PostForm{
 						ID:        "post-upload",
-						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						Multipart: true,
 					},
@@ -418,7 +408,7 @@ func Files1() Screen {
 							{Term: "Changed", Value: []w.ValuePart{w.Text("2026-08-10 11:07")}, Face: w.ValueMono},
 							{
 								Term:  "Path",
-								Value: []w.ValuePart{w.Text("/dav/Documents/carrel/attachments/2026-08-10-sync-board.png")},
+								Value: []w.ValuePart{w.Text("/dav/Documents/carrel/attachments/2026-08/2026-08-10-sync-board.png")},
 								Face:  w.ValueMonoSmall,
 							},
 						},
@@ -517,16 +507,12 @@ func Files2() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Text: "attachments"},
+						Title: &w.HeadTitle{Text: "2026-08"},
 						Crumbs: &w.Crumbs{
-							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
-							Current: "attachments",
+							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+							Current: "2026-08",
 						},
-						Subs: []w.HeadSub{
-							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
-							},
-						},
+						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 4 items")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
@@ -539,7 +525,7 @@ func Files2() Screen {
 					},
 					w.Bar{
 						Items: []w.BarPart{
-							w.Mono{Text: "4.4 MB", Variant: w.MonoMuted},
+							w.Mono{Text: "3.2 MB", Variant: w.MonoMuted},
 							w.BarSep{},
 							w.Button{
 								Folds: true,
@@ -606,9 +592,9 @@ func Files2() Screen {
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
-									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+									{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 								},
 								Secondary: true,
 							},
@@ -616,11 +602,15 @@ func Files2() Screen {
 								Options: []w.SegOption{
 									{
 										Icon:  "menu",
-										Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=list",
 										On:    true,
 										Title: "List",
 									},
-									{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
+									{
+										Icon:  "grid",
+										Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=tiles",
+										Title: "Tiles",
+									},
 								},
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
@@ -629,16 +619,16 @@ func Files2() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
-										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
 								},
 							},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4 items · 4.4 MB"}}, Secondary: true},
 					},
 					w.Table{
 						Cols: []w.TableCol{
@@ -655,26 +645,16 @@ func Files2() Screen {
 									{},
 									{
 										Parts: []w.CellPart{
-											w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+											w.TableFile{
+												Icon:   "back",
+												Name:   "up one folder",
+												Accent: true,
+												Href:   "/app/files/sftpgo/documents/carrel/attachments",
+											},
 										},
 										Span: 5,
 									},
 								},
-							},
-							{
-								Cells: []w.TableCell{
-									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
-									{
-										Parts: []w.CellPart{
-											w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
-										},
-									},
-									{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
-									{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
-								},
-								State: w.RowFolder,
 							},
 							{
 								Cells: []w.TableCell{
@@ -687,7 +667,7 @@ func Files2() Screen {
 											w.TableFile{
 												Icon: "img",
 												Name: "2026-08-04-whiteboard.jpg",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-04-whiteboard.jpg",
 											},
 										},
 									},
@@ -715,7 +695,7 @@ func Files2() Screen {
 											w.TableFile{
 												Icon: "img",
 												Name: "2026-08-10-sync-board.png",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-10-sync-board.png",
 											},
 										},
 									},
@@ -740,7 +720,7 @@ func Files2() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "release-checklist.md",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/release-checklist.md",
 											},
 										},
 									},
@@ -765,7 +745,7 @@ func Files2() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "смета-подрядчик.pdf",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 											},
 										},
 									},
@@ -785,18 +765,18 @@ func Files2() Screen {
 					},
 					w.PostForm{
 						ID:     "files-sel",
-						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-08",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.PostForm{
 						ID:        "post-upload",
-						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						Multipart: true,
 					},
 					w.PostForm{
 						ID:        "taken-release",
-						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments?taken=release-checklist.md",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08?taken=release-checklist.md",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						Multipart: true,
 					},
@@ -931,16 +911,12 @@ func Files4() Screen {
 				Main: w.Main{
 					Items: []w.MainPart{
 						w.Head{
-							Title: &w.HeadTitle{Text: "attachments"},
+							Title: &w.HeadTitle{Text: "2026-08"},
 							Crumbs: &w.Crumbs{
-								Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}},
-								Current: "attachments",
+								Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
+								Current: "2026-08",
 							},
-							Subs: []w.HeadSub{
-								w.HeadSub{
-									Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 5 items")},
-								},
-							},
+							Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 4 items")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
 									w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary},
@@ -953,7 +929,7 @@ func Files4() Screen {
 						},
 						w.Bar{
 							Items: []w.BarPart{
-								w.Mono{Text: "4.4 MB", Variant: w.MonoMuted},
+								w.Mono{Text: "3.2 MB", Variant: w.MonoMuted},
 								w.BarSep{},
 								w.Button{
 									Folds: true,
@@ -1020,9 +996,9 @@ func Files4() Screen {
 								},
 								w.Seg{
 									Options: []w.SegOption{
-										{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name", On: true},
-										{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-										{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+										{Label: "Name", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name", On: true},
+										{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+										{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 									},
 									Secondary: true,
 								},
@@ -1030,11 +1006,15 @@ func Files4() Screen {
 									Options: []w.SegOption{
 										{
 											Icon:  "menu",
-											Href:  "/app/files/sftpgo/documents/carrel/attachments?view=list",
+											Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=list",
 											On:    true,
 											Title: "List",
 										},
-										{Icon: "grid", Href: "/app/files/sftpgo/documents/carrel/attachments?view=tiles", Title: "Tiles"},
+										{
+											Icon:  "grid",
+											Href:  "/app/files/sftpgo/documents/carrel/attachments/2026-08?view=tiles",
+											Title: "Tiles",
+										},
 									},
 								},
 								w.Button{Label: "Columns", Icon: "cols"},
@@ -1043,16 +1023,16 @@ func Files4() Screen {
 									More:    true,
 									Menu: w.Menu{
 										Items: []w.MenuPart{
-											w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments?sort=name"},
-											w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=size"},
-											w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments?sort=changed"},
+											w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=name"},
+											w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=size"},
+											w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08?sort=changed"},
 										},
 										Pop:    w.MenuUnderEnd,
 										Inline: true,
 									},
 								},
 							},
-							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "5 items · 4.4 MB"}}, Secondary: true},
+							Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4 items · 4.4 MB"}}, Secondary: true},
 						},
 						w.Table{
 							Cols: []w.TableCol{
@@ -1069,26 +1049,16 @@ func Files4() Screen {
 										{},
 										{
 											Parts: []w.CellPart{
-												w.TableFile{Icon: "back", Name: "up one folder", Accent: true, Href: "/app/files/sftpgo/documents/carrel"},
+												w.TableFile{
+													Icon:   "back",
+													Name:   "up one folder",
+													Accent: true,
+													Href:   "/app/files/sftpgo/documents/carrel/attachments",
+												},
 											},
 											Span: 5,
 										},
 									},
-								},
-								{
-									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
-										{
-											Parts: []w.CellPart{
-												w.TableFile{Icon: "file", Name: "2026-07", Href: "/app/files/sftpgo/documents/carrel/attachments/2026-07"},
-											},
-										},
-										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("folder")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
-										{Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Title: "More"}}, Acts: true},
-									},
-									State: w.RowFolder,
 								},
 								{
 									Cells: []w.TableCell{
@@ -1101,7 +1071,7 @@ func Files4() Screen {
 												w.TableFile{
 													Icon: "img",
 													Name: "2026-08-04-whiteboard.jpg",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-04-whiteboard.jpg",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-04-whiteboard.jpg",
 												},
 											},
 										},
@@ -1129,7 +1099,7 @@ func Files4() Screen {
 												w.TableFile{
 													Icon: "img",
 													Name: "2026-08-10-sync-board.png",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08-10-sync-board.png",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/2026-08-10-sync-board.png",
 												},
 											},
 										},
@@ -1154,7 +1124,7 @@ func Files4() Screen {
 												w.TableFile{
 													Icon: "doc",
 													Name: "release-checklist.md",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/release-checklist.md",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/release-checklist.md",
 												},
 											},
 										},
@@ -1179,7 +1149,7 @@ func Files4() Screen {
 												w.TableFile{
 													Icon: "doc",
 													Name: "смета-подрядчик.pdf",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 												},
 											},
 										},
@@ -1199,7 +1169,7 @@ func Files4() Screen {
 						},
 						w.PostForm{
 							ID:     "files-sel",
-							Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+							Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-08",
 							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						},
 					},
@@ -1209,7 +1179,7 @@ func Files4() Screen {
 			Scrim: w.Scrim{
 				Content: w.Sheet{
 					ID:     "move-sheet",
-					Action: "/app/files/sftpgo/documents/op/carrel/attachments?op=move",
+					Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move",
 					Icon:   "move",
 					Title:  "Move 3 items",
 					Head: []w.SheetHeadPart{
@@ -1220,12 +1190,12 @@ func Files4() Screen {
 									w.MenuItem{
 										Label: "sftpgo · vps",
 										On:    true,
-										Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&server=sftpgo",
+										Href:  "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&server=sftpgo",
 										Swap:  "move-sheet",
 									},
 									w.MenuItem{
 										Label: "nextcloud",
-										Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&server=nextcloud",
+										Href:  "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&server=nextcloud",
 										Swap:  "move-sheet",
 									},
 									w.MenuItem{Label: "webdav · nas", Reason: "webdav · nas did not answer.", Href: "#"},
@@ -1236,7 +1206,7 @@ func Files4() Screen {
 							Place: w.Pushed,
 						},
 						w.Dim{
-							Parts:   []w.Inline{w.Text("from Documents / carrel / attachments")},
+							Parts:   []w.Inline{w.Text("from Documents / carrel / attachments / 2026-08")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
@@ -1252,7 +1222,7 @@ func Files4() Screen {
 									Icon:  "file",
 									Label: "Documents",
 									Send:  w.Send{Name: "to", Value: "sftpgo/documents", One: true},
-									Href:  "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents",
+									Href:  "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&to=sftpgo/documents",
 									Swap:  "move-sheet",
 								},
 								{
@@ -1260,7 +1230,7 @@ func Files4() Screen {
 									Label:  "carrel",
 									Indent: w.TreeLevel22,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel", One: true},
-									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel",
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&to=sftpgo/documents/carrel",
 									Swap:   "move-sheet",
 								},
 								{
@@ -1268,17 +1238,25 @@ func Files4() Screen {
 									Label:  "attachments",
 									Indent: w.TreeLevel40,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments", One: true},
-									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel/attachments",
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&to=sftpgo/documents/carrel/attachments",
 									Swap:   "move-sheet",
-									Trail:  w.TreeNote{Text: "the items are here"},
 								},
 								{
 									Icon:   "file",
 									Label:  "2026-07",
 									Indent: w.TreeLevel58,
 									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-07", One: true},
-									Href:   "/app/files/sftpgo/documents/op/carrel/attachments?op=move&to=sftpgo/documents/carrel/attachments/2026-07",
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&to=sftpgo/documents/carrel/attachments/2026-07",
 									Swap:   "move-sheet",
+								},
+								{
+									Icon:   "file",
+									Label:  "2026-08",
+									Indent: w.TreeLevel58,
+									Send:   w.Send{Name: "to", Value: "sftpgo/documents/carrel/attachments/2026-08", One: true},
+									Href:   "/app/files/sftpgo/documents/op/carrel/attachments/2026-08?op=move&to=sftpgo/documents/carrel/attachments/2026-08",
+									Swap:   "move-sheet",
+									Trail:  w.TreeNote{Text: "the items are here"},
 								},
 								{
 									Icon:        "file",

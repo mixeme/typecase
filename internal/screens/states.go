@@ -5506,10 +5506,15 @@ func States32() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
-						Title: &w.HeadTitle{Text: "2026-08"},
+						Title: &w.HeadTitle{Text: "черновики"},
 						Crumbs: &w.Crumbs{
-							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "carrel", Href: "#"}, {Label: "attachments", Href: "#"}},
-							Current: "2026-08",
+							Path: []w.Crumb{
+								{Label: "Documents", Href: "#"},
+								{Label: "carrel", Href: "#"},
+								{Label: "attachments", Href: "#"},
+								{Label: "2026-07", Href: "#"},
+							},
+							Current: "черновики",
 						},
 						Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · 0 items")}}},
 						Acts: &w.Acts{
@@ -5535,7 +5540,7 @@ func States32() Screen {
 									Name:  "file",
 									Label: "Files",
 									Size:  "size",
-									Taken: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08?op=taken",
+									Taken: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-07/черновики?op=taken",
 									Many:  true,
 								},
 							},
@@ -5547,7 +5552,7 @@ func States32() Screen {
 					},
 					w.PostForm{
 						ID:        "post-upload",
-						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-08",
+						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-07/черновики",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						Multipart: true,
 					},

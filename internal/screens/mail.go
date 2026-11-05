@@ -1416,7 +1416,7 @@ func Mail4() Screen {
 												w.TableFile{
 													Icon: "doc",
 													Name: "смета-подрядчик.pdf",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 												},
 											},
 										},

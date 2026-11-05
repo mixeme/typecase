@@ -126,6 +126,8 @@ do, not what the authors did.
 
 ### Added
 
+- `TreeLevel76`: a row of a tree four levels down — a file of a month
+  folder in the attachment folder (`s-files-16`), `tc-tree__row--padl76`.
 - `SecHint` is a `DocmetaPart` too: a section of a document's side column
   says under its rubric what it keeps (Carrel's task 253: «Kept as the
   server sent them» of a note).
@@ -1022,6 +1024,20 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The August attachments lie in `2026-08`** (05.11, the owner’s answer):
+  the setting «A subfolder per month» is ticked, so the attachment folder
+  holds the month folders, and the four August files are in `2026-08`. The
+  files screens open it (`s-files-1`, `-2`, `-4`, `phone-6`: «2026-08», 4
+  items, the crumbs one level deeper, every address under `…/2026-08`); the
+  sheets that move, copy, rename and delete them come from it, and their
+  trees show `2026-08` next to `2026-07` with «the items are here»
+  (`s-files-4`, `-11`, `-13`, `-21`, `-22`, `-25`, `-26`, upload `-19`,
+  `s-notes-11` without «just created»); Attach from Files opens it
+  (`s-files-16`). The empty folder is `2026-07/черновики` (`states-32`), the
+  folder print is the July folder, folders and files (`print-6`,
+  `desktop-16`), the publish sheet stands over the two month folders
+  (`s-publish-5`). Three selected files weigh 3.2 MB, not the folder’s
+  4.4 (`s-files-2`, `-4`).
 - **The dark tiles follow the light ones** (05.11): `dark-3` draws the July
   folder as `s-files-5` does — 7 items, «архив» without a count, «черновики»
   with 0, pictures without their size in pixels, the pick form on the July

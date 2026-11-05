@@ -98,7 +98,7 @@ func Publish1() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "смета-подрядчик.pdf",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 											},
 										},
 									},
@@ -293,7 +293,7 @@ func Publish20() Screen {
 											w.TableFile{
 												Icon: "doc",
 												Name: "смета-подрядчик.pdf",
-												Href: "/app/files/sftpgo/documents/carrel/attachments/смета-подрядчик.pdf",
+												Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 											},
 										},
 									},
@@ -3301,7 +3301,7 @@ func Publish5() Screen {
 							},
 							Subs: []w.HeadSub{
 								w.HeadSub{
-									Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 3 items")},
+									Parts: []w.HeadSubPart{w.Text("sftpgo · vps · "), w.Badge{Label: "attachment folder"}, w.Text(" · 2 items")},
 								},
 							},
 							Acts: &w.Acts{
@@ -3332,22 +3332,13 @@ func Publish5() Screen {
 								},
 								{
 									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOn)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "2026-08-10-sync-board.png"}}},
-										{Parts: []w.CellPart{w.Text("412 KB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("image/png")}, Mono: true},
+										{Pick: ptr(w.TickedOff)},
+										{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-08"}}},
+										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("folder · 4 items")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("2026-08-10 11:07")}, Mono: true},
 									},
-									State: w.RowPicked,
-								},
-								{
-									Cells: []w.TableCell{
-										{Pick: ptr(w.TickedOff)},
-										{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md"}}},
-										{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
-									},
+									State: w.RowFolder,
 								},
 							},
 						},

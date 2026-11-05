@@ -417,7 +417,7 @@ func Phone6() Screen {
 	return w.Shell{
 		Top: &w.Top{
 			Lead:  &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"},
-			Brand: w.Brand{Title: "attachments"},
+			Brand: w.Brand{Title: "2026-08"},
 			Actions: []w.TopAction{
 				w.Button{Icon: "upload", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "Upload"},
 			},
@@ -464,10 +464,10 @@ func Phone6() Screen {
 								On:      true,
 							},
 							w.PhoneRow{
-								Pick:    &w.TickBox{Ticked: w.TickedOff, Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
-								Icon:    "file",
-								Title:   "2026-07",
-								Sub:     []w.Inline{w.Text("7 items")},
+								Pick:    &w.TickBox{Ticked: w.TickedOff, Send: w.Send{Of: "files-sel", Name: "item", Value: "смета-подрядчик.pdf"}},
+								Icon:    "doc",
+								Title:   "смета-подрядчик.pdf",
+								Sub:     []w.Inline{w.Text("1.2 MB · application/pdf")},
 								SubMono: true,
 								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
 							},
@@ -475,7 +475,7 @@ func Phone6() Screen {
 					},
 					w.PostForm{
 						ID:     "files-sel",
-						Action: "/app/files/sftpgo/documents/op/carrel/attachments",
+						Action: "/app/files/sftpgo/documents/op/carrel/attachments/2026-08",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 					w.BottomNav{
