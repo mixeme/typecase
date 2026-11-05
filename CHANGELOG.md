@@ -1022,6 +1022,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Fewer words, eleventh part — the pass done** (Р-77, 05.11, without
+  acceptance pictures): the source switch of a restore (`s-backup-7`, `-15`,
+  `-16`, `-17`) has no hint — the switch shows one archive of three itself.
+  The lines that are left say something of their own: a threat, what is
+  kept, where a thing goes.
 - **Fewer words, tenth part** (Р-77, 05.11, without acceptance pictures):
   the import formats (`s-io-3`, `-15`, `-16`, `-17`, `-18`: no «2.0», no
   «take .ics here instead»), where an import goes (`s-io-6`, `-7`), linking

@@ -2514,10 +2514,6 @@ func Backup7() Screen {
 										},
 										Variant: w.SegStart,
 									},
-									w.FieldHint{
-										Parts:   []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")},
-										Variant: w.HintColumn,
-									},
 								},
 								OwnLine: true,
 							},
@@ -2663,10 +2659,6 @@ func Backup15() Screen {
 											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true},
 										},
 										Variant: w.SegStart,
-									},
-									w.FieldHint{
-										Parts:   []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")},
-										Variant: w.HintColumn,
 									},
 								},
 								OwnLine: true,
@@ -2841,10 +2833,6 @@ func Backup16() Screen {
 											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file", On: true},
 										},
 										Variant: w.SegStart,
-									},
-									w.FieldHint{
-										Parts:   []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")},
-										Variant: w.HintColumn,
 									},
 								},
 								OwnLine: true,
@@ -3028,10 +3016,6 @@ func Backup17() Screen {
 											{Label: "From this computer", Href: "/app/settings/backup/restore?from=file"},
 										},
 										Variant: w.SegStart,
-									},
-									w.FieldHint{
-										Parts:   []w.Inline{w.Text("One archive, one of three. The other two stay empty until you switch.")},
-										Variant: w.HintColumn,
 									},
 								},
 								OwnLine: true,
