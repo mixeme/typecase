@@ -2722,30 +2722,25 @@ func Contacts7() Screen {
 							w.SegFold{
 								Seg: w.Seg{
 									Options: []w.SegOption{
-										{
-											Label: "All",
-											Count: "23",
-											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
-											On:    true,
-										},
+										{Label: "All", Count: "5", Href: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline", On: true},
 										{
 											Label: "Events",
-											Count: "14",
+											Count: "2",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event",
 										},
 										{
 											Label: "Tasks",
-											Count: "2",
+											Count: "1",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task",
 										},
 										{
 											Label: "Notes",
-											Count: "4",
+											Count: "1",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note",
 										},
 										{
 											Label: "Files",
-											Count: "3",
+											Count: "1",
 											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file",
 										},
 									},
@@ -2788,7 +2783,7 @@ func Contacts7() Screen {
 							w.Mono{Text: "2 min ago", Place: w.Pushed},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FindRow{
@@ -2800,6 +2795,14 @@ func Contacts7() Screen {
 								Source: "nextcloud · Личный",
 							},
 							w.FindRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Date:   "6 Aug",
+								Title:  []w.Inline{w.Text("ковалёва-обложка-v2.pdf")},
+								Detail: []w.Inline{w.Text("in the file name")},
+								What:   "file",
+								Source: "sftpgo · vps · Documents",
+							},
+							w.FindRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Date:   "4 Aug",
 								Title:  []w.Inline{w.Text("Согласовать обложку")},
@@ -2809,7 +2812,7 @@ func Contacts7() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.FindRow{
@@ -2819,6 +2822,14 @@ func Contacts7() Screen {
 								Detail: []w.Inline{w.Text("attendee · no reply")},
 								What:   "event",
 								Source: "radicale · vps · Проекты",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Date:   "21 Jul",
+								Title:  []w.Inline{w.Text("Про сроки по сборнику")},
+								Detail: []w.Inline{w.Text("related to this person")},
+								What:   "note",
+								Source: "nextcloud · Записи",
 							},
 						},
 					},

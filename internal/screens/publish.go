@@ -606,7 +606,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -632,7 +632,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|rabota"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
 														{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -675,7 +675,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|dnevnik"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
 														{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -705,7 +705,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|kontakty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -718,7 +718,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|arhiv"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -786,7 +786,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|proekty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -812,7 +812,7 @@ func Publish2() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|komanda"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
 														{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1286,7 +1286,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1312,7 +1312,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|rabota"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
 														{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1355,7 +1355,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|dnevnik"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
 														{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1385,7 +1385,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|kontakty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1398,7 +1398,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|arhiv"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1466,7 +1466,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|proekty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1492,7 +1492,7 @@ func Publish13() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|komanda"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
 														{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1906,7 +1906,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|lichnyj"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Личный"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("3 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1932,7 +1932,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|rabota"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#3F6E8C"}, Name: "Работа"}}},
 														{Parts: []w.CellPart{w.Text("calendar · tasks")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("4")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("yesterday")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -1975,7 +1975,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|dnevnik"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Дневник"}}},
 														{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("3")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("5 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2005,7 +2005,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|kontakty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Контакты"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("5")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("6")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("4 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2018,7 +2018,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|arhiv"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "Архив"}}},
 														{Parts: []w.CellPart{w.Text("address book")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("28 July")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2086,7 +2086,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|proekty"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Проекты"}}},
 														{Parts: []w.CellPart{w.Text("calendar")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("1 h ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -2112,7 +2112,7 @@ func Publish22() Screen {
 														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "radicale|komanda"}},
 														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "Команда"}}},
 														{Parts: []w.CellPart{w.Text("address book "), w.Badge{Label: "ro"}}, Mono: true},
-														{Parts: []w.CellPart{w.Text("1")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("6 d ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
@@ -3325,7 +3325,7 @@ func Publish5() Screen {
 										{Pick: ptr(w.TickedOff)},
 										{Parts: []w.CellPart{w.TableFile{Icon: "file", Name: "2026-07"}}},
 										{Parts: []w.CellPart{w.Text("—")}, Mono: true},
-										{Parts: []w.CellPart{w.Text("folder · 34 items")}, Mono: true},
+										{Parts: []w.CellPart{w.Text("folder · 7 items")}, Mono: true},
 										{Parts: []w.CellPart{w.Text("2026-07-01 09:12")}, Mono: true},
 									},
 									State: w.RowFolder,
@@ -3464,6 +3464,7 @@ func Publish6() Screen {
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
 								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Single: true,
 								Href:   "/p/7f3ac9?uid=aa01",
 							},
 						},
@@ -3476,6 +3477,7 @@ func Publish6() Screen {
 								Time:   "18:00",
 								Title:  []w.Inline{w.Text("Забрать документы")},
 								Detail: "МФЦ, Мясницкая 13",
+								Single: true,
 								Href:   "/p/7f3ac9?uid=ab02",
 							},
 						},
@@ -3489,6 +3491,7 @@ func Publish6() Screen {
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
 								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Single: true,
 								Href:   "/p/7f3ac9?uid=aa01",
 							},
 						},
@@ -3502,6 +3505,7 @@ func Publish6() Screen {
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
 								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Single: true,
 								Href:   "/p/7f3ac9?uid=aa01",
 							},
 						},
@@ -3515,6 +3519,7 @@ func Publish6() Screen {
 								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
 								Detail: "Переговорная 2",
 								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Single: true,
 								Href:   "/p/7f3ac9?uid=aa01",
 							},
 						},
@@ -3584,6 +3589,7 @@ func Publish7() Screen {
 								Subtitle: "+7 912 445-10-88",
 								Detail:   "a.kovaleva@example.org",
 								Caption:  "Издательство «Слово»",
+								Single:   true,
 								Href:     "/p/2b91f4?uid=c102",
 							},
 							w.FaceRow{
@@ -3593,6 +3599,7 @@ func Publish7() Screen {
 								Subtitle: "+7 903 118-22-04",
 								Detail:   "a.belov@example.org",
 								Caption:  "Тензор",
+								Single:   true,
 								Href:     "/p/2b91f4?uid=c101",
 							},
 						},

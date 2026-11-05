@@ -393,7 +393,7 @@ func States4() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Команда", Badge: &w.Badge{Label: "read-only"}},
 						Subs: []w.HeadSub{
-							w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 1 card · the server granted no write access")}},
+							w.HeadSub{Parts: []w.HeadSubPart{w.Text("radicale · vps · 2 cards · the server granted no write access")}},
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}},
@@ -445,9 +445,18 @@ func States4() Screen {
 							Secondary: true,
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#6B4E7A"},
+								Avatar:   w.Avatar{Initials: "АК"},
+								Title:    []w.Inline{w.Text("Анна Ковалёва")},
+								Subtitle: "+7 912 445-10-88",
+								Detail:   "a.kovaleva@example.org",
+								Caption:  "Издательство «Слово»",
+								Single:   true,
+							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#6B4E7A"},
 								Avatar:   w.Avatar{Photo: true},

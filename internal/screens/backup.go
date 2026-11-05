@@ -3166,7 +3166,7 @@ func Backup8() Screen {
 								Subs: []w.HeadSub{
 									w.HeadSub{
 										Parts: []w.HeadSubPart{
-											w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 1 214 records · "),
+											w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 147 records · "),
 											w.Mono{Text: "carrel-backup/2026-08-14T09-12.zip"},
 										},
 									},
@@ -3186,7 +3186,7 @@ func Backup8() Screen {
 								},
 							},
 							w.Field{
-								Label: "5 records of the archive are already here and differ",
+								Label: "2 records of the archive are already here and differ",
 								Parts: []w.FieldPart{
 									w.Seg{
 										Options: []w.SegOption{
@@ -3268,7 +3268,7 @@ func Backup8() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
-											{Parts: []w.CellPart{w.Text("312")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 											{
 												Parts: []w.CellPart{
 													w.Drop{
@@ -3304,7 +3304,7 @@ func Backup8() Screen {
 													},
 												},
 											},
-											{Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created · 3 already here")}},
+											{Parts: []w.CellPart{w.Text("matched by path — 4 records missing, will be created · 1 already here")}},
 										},
 										State: w.RowPicked,
 									},
@@ -3312,7 +3312,7 @@ func Backup8() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}},
-											{Parts: []w.CellPart{w.Text("86")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 											{
 												Parts: []w.CellPart{
 													w.Drop{
@@ -3395,7 +3395,7 @@ func Backup8() Screen {
 											{
 												Parts: []w.CellPart{
 													w.Span{Face: w.FaceDanger, Text: "that server is gone — another collection chosen"},
-													w.Text(" · 2 already here"),
+													w.Text(" · 1 already here"),
 												},
 											},
 										},
@@ -3405,7 +3405,7 @@ func Backup8() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}},
-											{Parts: []w.CellPart{w.Text("51")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("skip")}, Dim: true},
 										},
@@ -3495,7 +3495,7 @@ func Backup20() Screen {
 								Subs: []w.HeadSub{
 									w.HeadSub{
 										Parts: []w.HeadSubPart{
-											w.Text("From this computer · manifest read · 4 collections · 1 214 records · "),
+											w.Text("From this computer · manifest read · 4 collections · 147 records · "),
 											w.Mono{Text: "carrel-backup-2026-08-14.zip"},
 										},
 									},
@@ -3597,7 +3597,7 @@ func Backup20() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "nextcloud/personal"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
-											{Parts: []w.CellPart{w.Text("312")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("5")}, Mono: true},
 											{
 												Parts: []w.CellPart{
 													w.Drop{
@@ -3641,7 +3641,7 @@ func Backup20() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOn), Send: w.Send{Name: "collection", Value: "radicale/projects"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#6B4E7A"}, Name: "radicale / projects"}}},
-											{Parts: []w.CellPart{w.Text("86")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 											{
 												Parts: []w.CellPart{
 													w.Drop{
@@ -3729,7 +3729,7 @@ func Backup20() Screen {
 										Cells: []w.TableCell{
 											{Pick: ptr(w.TickedOff), Send: w.Send{Name: "collection", Value: "nextcloud/birthdays"}},
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#A05A2C"}, Name: "nextcloud / birthdays"}}},
-											{Parts: []w.CellPart{w.Text("51")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("1")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("—")}, Mono: true, Unset: true, Tone: w.CellDusty},
 											{Parts: []w.CellPart{w.Text("skip")}, Dim: true},
 										},
@@ -3822,7 +3822,7 @@ func Backup18() Screen {
 								Title: &w.HeadTitle{Text: "Restored from 2026-08-14"},
 								Subs: []w.HeadSub{
 									w.HeadSub{
-										Parts: []w.HeadSubPart{w.Text("3 collections · 141 records created · 5 already here, skipped · 1 not restored")},
+										Parts: []w.HeadSubPart{w.Text("3 collections · 142 records created · 2 already here, skipped · 1 not restored")},
 									},
 								},
 								Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Done", Kind: w.ButtonPrimary, Href: "/app/settings/backup"}}},
@@ -3840,7 +3840,7 @@ func Backup18() Screen {
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "nextcloud / personal"}}},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
 											{Parts: []w.CellPart{w.Text("4")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("4 missing records created · 3 already here — skipped")}},
+											{Parts: []w.CellPart{w.Text("4 missing records created · 1 already here — skipped")}},
 										},
 									},
 									{
@@ -3855,10 +3855,10 @@ func Backup18() Screen {
 										Cells: []w.TableCell{
 											{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "baikal / shared"}}},
 											{Parts: []w.CellPart{w.Text("nextcloud · Личный")}, Mono: true},
-											{Parts: []w.CellPart{w.Text("137")}, Mono: true},
+											{Parts: []w.CellPart{w.Text("138")}, Mono: true},
 											{
 												Parts: []w.CellPart{
-													w.Text("2 already here — skipped · "),
+													w.Text("1 already here — skipped · "),
 													w.Span{Face: w.FaceDanger, Text: "1 not restored: the server refused it (413, too large)"},
 												},
 											},

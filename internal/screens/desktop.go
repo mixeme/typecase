@@ -1010,7 +1010,7 @@ func Desktop16() Screen {
 	return w.Page{
 		Items: []w.PagePart{
 			w.PrintTitle{Text: "Documents / carrel / attachments"},
-			w.PrintSources{Text: "sftpgo · vps · 14 items · 38.2 MB"},
+			w.PrintSources{Text: "sftpgo · vps · 5 items · 4.4 MB"},
 			w.PrintRow{
 				Items:   []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Size"}, w.PrintNum{Text: "Changed"}},
 				Columns: true,
@@ -1018,7 +1018,7 @@ func Desktop16() Screen {
 			},
 			w.PrintRubric{Text: "Folders"},
 			w.PrintRow{
-				Items:   []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "34 items"}, w.PrintNum{Text: "2026-07-01"}},
+				Items:   []w.PrintRowPart{w.PrintCell{Name: "2026-07"}, w.PrintNum{Text: "7 items"}, w.PrintNum{Text: "2026-07-01"}},
 				Columns: true,
 			},
 			w.PrintRubric{Text: "Files"},
@@ -1051,7 +1051,7 @@ func Desktop16() Screen {
 				Columns: true,
 			},
 			w.PrintFoot{
-				Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 14 of 14 shown",
+				Text: "Carrel · folder · sftpgo / Documents / carrel / attachments · captured 2026-08-16 20:41 · 5 of 5 shown",
 			},
 		},
 		Variant: w.PagePrint,

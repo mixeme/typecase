@@ -281,12 +281,13 @@ func Phone4() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.PhoneRow{
-								Mark:    &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
-								Avatar:  &w.Avatar{Initials: "АК", Size: w.Avatar34},
-								Title:   "Анна Ковалёва",
-								Sub:     []w.Inline{w.Text("+7 912 445-10-88")},
-								SubMono: true,
-								Aside:   "Контакты",
+								Mark:       &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar:     &w.Avatar{Initials: "АК", Size: w.Avatar34},
+								Title:      "Анна Ковалёва",
+								TitleBadge: &w.Badge{Label: "×3", Tone: w.BadgeLinked},
+								Sub:        []w.Inline{w.Text("+7 912 445-10-88")},
+								SubMono:    true,
+								Aside:      "Контакты",
 							},
 							w.PhoneRow{
 								Mark:       &w.Mark{Colour: "#6B4E7A", Size: w.MarkH34},
@@ -466,7 +467,7 @@ func Phone6() Screen {
 								Pick:    &w.TickBox{Ticked: w.TickedOff, Send: w.Send{Of: "files-sel", Name: "item", Value: "2026-07"}},
 								Icon:    "file",
 								Title:   "2026-07",
-								Sub:     []w.Inline{w.Text("34 items")},
+								Sub:     []w.Inline{w.Text("7 items")},
 								SubMono: true,
 								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
 							},

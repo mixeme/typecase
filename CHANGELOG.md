@@ -1022,6 +1022,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Sample data agree with the set** (05.11, without acceptance pictures by
+  the owner’s rule of 12.10): Objects in the settings tables are what each
+  collection holds, as in the fixtures (`s-profile-1`, `-4`, `-7`…`-10`,
+  `-26`, `-27`, `s-publish-2`, `-13`, `-22`); the restore of 2026-08-14 adds
+  up (`s-backup-8`, `-18`, `-20`: 147 records, 2 already here, 142
+  created); the timeline counts its rows and has a note and a file
+  (`s-contacts-7`, `s-mailbox-21`); the read-only Команда holds two cards
+  (`states-4`); Анна is linked ×3 on the phone (`phone-4`); the public
+  pages have no source column (`s-publish-6`, `-7`: `Single`); the July
+  folder holds 7 items and the folder print 5 (`s-publish-5`, `phone-6`,
+  `desktop-16`). `docs/spec/typecase.md` names no client and no domain word:
+  `docs/spec/check.py` is green.
 - **Fewer words, eleventh part — the pass done** (Р-77, 05.11, without
   acceptance pictures): the source switch of a restore (`s-backup-7`, `-15`,
   `-16`, `-17`) has no hint — the switch shows one archive of three itself.
