@@ -1024,6 +1024,17 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Carrel’s tasks 254, 255, 256, 258** (06.11): the public calendar’s
+  other two states draw single rows too, without a source cell
+  (`s-publish-24`, `-39`, task 258); a new event and a new card whose files
+  or photo the session no longer keeps come back with «Nothing was saved»
+  under the head, what was typed in place and the lost files marked «not
+  kept» (new frames `s-agenda-32`, `s-contacts-38`, task 256); a published
+  address book that left an unreadable card out says so in a badge by its
+  name, «1 record not in the link», the reason in the badge’s hint (new
+  fragment `s-publish-40`, task 255); the linked note shows «Kept as the
+  server sent them», folded, as the note itself (`s-notes-32`, task 254).
+  573 frames.
 - **The August attachments lie in `2026-08`** (05.11, the owner’s answer):
   the setting «A subfolder per month» is ticked, so the attachment folder
   holds the month folders, and the four August files are in `2026-08`. The

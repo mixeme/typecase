@@ -1382,6 +1382,225 @@ func Contacts27() Screen {
 	}
 }
 
+// Contacts38 is frame «Контакт · новый, фото больше не хранится» (s-contacts-38).
+func Contacts38() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "New contact"},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Контакты", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Контакты",
+														On:    true,
+														Name:  "book",
+														Value: "nextcloud/kontakty",
+														Of:    "contact-new",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#A05A2C"},
+														Label: "nextcloud · Архив",
+														Name:  "book",
+														Value: "nextcloud/arhiv",
+														Of:    "contact-new",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "contact-new"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Nothing was saved:"),
+							w.Text(" the photo chosen here was replaced by one chosen for another new card. Add it again, or save without it."),
+						},
+						Tone:  w.MsgAlert,
+						Space: w.MsgFlushTop2,
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label:     "Photo",
+								LabelSpan: true,
+								Parts: []w.FieldPart{
+									w.Photo{
+										ID: "photo",
+										Side: []w.FieldPart{
+											w.Line{
+												Items: []w.LinePart{
+													w.Button{
+														Label: "Add",
+														File:  &w.FileField{Form: "", Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"},
+													},
+												},
+												Gap: w.LineGap6,
+											},
+											w.FieldHint{Parts: []w.Inline{w.Text("JPEG, PNG, GIF or WebP.")}, Variant: w.HintNarrow},
+										},
+									},
+								},
+								Width: w.FieldFixAuto,
+							},
+							w.FormCols{
+								Items: []w.Field{
+									w.Field{
+										Label: "Display name",
+										Parts: []w.FieldPart{w.Input{Name: "display.name", Value: "Ирина Мельникова", Label: "Display name"}},
+										Width: w.FieldXL,
+									},
+									w.Field{
+										Label: "Given",
+										Parts: []w.FieldPart{w.Input{Name: "given", Value: "Ирина", Label: "Given"}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Family",
+										Parts: []w.FieldPart{w.Input{Name: "family", Value: "Мельникова", Label: "Family"}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Nickname",
+										Parts: []w.FieldPart{w.Input{Name: "nickname", Placeholder: "—", Label: "Nickname"}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Organisation",
+										Parts: []w.FieldPart{w.Input{Name: "organisation", Placeholder: "—", Label: "Organisation"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Title",
+										Parts: []w.FieldPart{w.Input{Name: "title", Placeholder: "—", Label: "Title"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Birthday",
+										Parts: []w.FieldPart{
+											w.Input{Name: "birthday", Placeholder: "DD.MM.YYYY", Label: "Birthday", Mono: true, Numeric: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("Type it: 14.03.1987, or 14.03 without the year.")}},
+										},
+										Width: w.FieldSM,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Phone numbers"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{
+											w.Pick{Name: "label", Options: []w.PickOption{{Value: "mobile", Label: "mobile", On: true}}, Label: "Label"},
+										},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Number",
+										Parts: []w.FieldPart{w.Input{Name: "number", Value: "+7 916 204-37-15", Label: "Number", Mono: true}},
+										Width: w.FieldMD,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Button{Label: "Add phone", Icon: "plus", Small: true},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Email addresses"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{
+											w.Pick{Name: "label", Options: []w.PickOption{{Value: "work", Label: "work", On: true}}, Label: "Label"},
+										},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Address",
+										Parts: []w.FieldPart{w.Input{Name: "address", Placeholder: "—", Label: "Address"}},
+										Width: w.FieldLG,
+									},
+									w.Button{Label: "Remove", Kind: w.ButtonDanger},
+									w.Grow{},
+									w.Button{Label: "Add email", Icon: "plus", Small: true},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Addresses"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add address", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Websites"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add website", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Dates"},
+								Items:  []w.FieldSetPart{w.Button{Label: "Add date", Icon: "plus", Small: true}},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Tags",
+										Parts: []w.FieldPart{w.Input{Name: "tags", Placeholder: "—", Label: "Tags"}},
+										Width: w.FieldLG,
+									},
+									w.Field{
+										Label: "Note",
+										Parts: []w.FieldPart{w.Area{Text: "", Name: "note", Label: "Text"}},
+										Width: w.FieldFull,
+									},
+								},
+							},
+						},
+						ID:     "contact-new",
+						Action: "/app/contacts/nextcloud/kontakty/new",
+					},
+				},
+			},
+		},
+	}
+}
+
 // Contacts5 is frame «Фотография контакта · кадрирование» (s-contacts-5).
 func Contacts5() Screen {
 	return w.Shell{

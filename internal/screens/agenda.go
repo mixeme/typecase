@@ -2584,3 +2584,373 @@ func Agenda15() Screen {
 		},
 	}
 }
+
+// Agenda32 is frame «Событие · новое, файлы больше не хранятся» (s-agenda-32).
+func Agenda32() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "nextcloud"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "New event"},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Field{
+									Parts: []w.FieldPart{
+										w.Drop{
+											Trigger: w.Pick{Value: "nextcloud · Личный", Mark: &w.Mark{Colour: "#4A6B52"}},
+											Menu: w.Menu{
+												Items: []w.MenuPart{
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#4A6B52"},
+														Label: "nextcloud · Личный",
+														On:    true,
+														Name:  "calendar",
+														Value: "nextcloud/lichnyj",
+														Of:    "event-new",
+													},
+													w.MenuItem{
+														Mark:  &w.Mark{Colour: "#3F6E8C"},
+														Label: "nextcloud · Работа",
+														Name:  "calendar",
+														Value: "nextcloud/rabota",
+														Of:    "event-new",
+													},
+												},
+												Width: w.MenuWidth290,
+												Pop:   w.MenuUnder,
+											},
+										},
+									},
+									Width: w.FieldMD,
+								},
+								w.Button{Label: "Cancel"},
+								w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "event-new"},
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("Nothing was saved:"),
+							w.Text(" the files attached here are no longer kept — newer forms took their place. Attach them again, or save without them."),
+						},
+						Tone:  w.MsgAlert,
+						Space: w.MsgFlushTop2,
+					},
+					w.Runbar{
+						Meter:    w.Meter{Percent: 0},
+						Progress: "event-new",
+						Parts:    []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}},
+					},
+					w.Form{
+						Items: []w.FormPart{
+							w.Field{
+								Label: "Summary",
+								Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Планёрка по обложке", Label: "Summary"}},
+								Width: w.FieldXL,
+							},
+							w.Field{
+								Label: "Location",
+								Parts: []w.FieldPart{w.Input{Name: "location", Value: "Переговорная 1", Label: "Location"}},
+								Width: w.FieldLG,
+							},
+							w.Field{
+								Label: "Status",
+								Parts: []w.FieldPart{
+									w.Pick{
+										Name:    "status",
+										Options: []w.PickOption{{Value: "no.status", Label: "No status", On: true}},
+										Label:   "Status",
+									},
+								},
+								Width: w.FieldSM,
+							},
+							w.Field{
+								Label: "Tags",
+								Parts: []w.FieldPart{w.Input{Name: "tags", Placeholder: "—", Label: "Tags"}},
+								Width: w.FieldMD,
+							},
+							w.Field{
+								Label: "Description",
+								Parts: []w.FieldPart{w.Area{Text: "", Name: "description", Label: "Text"}},
+								Width: w.FieldFull,
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "When"},
+								Items: []w.FieldSetPart{
+									w.Field{Parts: []w.FieldPart{w.Check{Name: "all.day", Value: "1", Parts: []w.CheckPart{w.Text("All day")}}}},
+									w.Field{
+										Label: "Start date",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "start.date", Value: "2026-08-13", Label: "Start date", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Start time",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "start.time", Value: "14:00", Label: "Start time", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "End date",
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputDate,
+												Name:    "end.date",
+												Value:   "2026-08-13",
+												Label:   "End date",
+												Mono:    true,
+												Follows: "start.date",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "End time",
+										Parts: []w.FieldPart{
+											w.Input{
+												Kind:    w.InputTime,
+												Name:    "end.time",
+												Value:   "15:00",
+												Label:   "End time",
+												Mono:    true,
+												Follows: "start.time",
+												Day:     "end.date",
+											},
+										},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Time zone",
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.Pick{Value: "Europe/Moscow"},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.Input{Kind: w.InputSearch, Name: "time.zone", Placeholder: "Find a zone", Label: "Find a zone"},
+														w.MenuItem{Label: "Europe/Moscow", On: true, Name: "tz", Value: "Europe/Moscow"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Asia/Yekaterinburg", Name: "tz", Value: "Asia/Yekaterinburg"},
+														w.MenuItem{Label: "UTC", Name: "tz", Value: "UTC"},
+														w.MenuSep{},
+														w.MenuItem{Label: "Floating — the same clock time anywhere", Name: "tz", Value: "floating"},
+													},
+													Width: w.MenuWidth290,
+													Pop:   w.MenuUnder,
+												},
+											},
+										},
+										Width: w.FieldMD,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Reminders"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "First",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "first",
+												Options: []w.PickOption{{Value: "10.minutes.before", Label: "10 minutes before", On: true}},
+												Label:   "First",
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attendees"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Drop{
+												Trigger: w.TagInput{
+													Parts:   []w.TagInputPart{},
+													Columns: true,
+													Add: &w.TagAdd{
+														Name:        "attendee.add",
+														Placeholder: "Name or address",
+														Label:       "Add attendee",
+														Suggest:     "/app/contacts/suggest",
+													},
+												},
+												Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{w.Text("A name or an address. On save, the server sends the invitations, not Carrel.")},
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{
+											w.TagInput{
+												Parts: []w.TagInputPart{},
+												Add:   &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+											},
+										},
+										Width: w.FieldLG,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Attachments"},
+								Items: []w.FieldSetPart{
+									w.Line{
+										Items: []w.LinePart{
+											w.Drop{
+												Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"},
+												Menu: w.Menu{
+													Items: []w.MenuPart{
+														w.MenuItem{
+															Icon: "upload",
+															File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"},
+															Row: w.Line{
+																Items: []w.LinePart{
+																	w.Faced{
+																		Face:  w.FaceLarge,
+																		Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}},
+																	},
+																	w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true},
+																},
+																Gap: w.LineGap8,
+															},
+															Label: "From this computer",
+														},
+														w.MenuItem{Icon: "file", Label: "From Files"},
+													},
+													Width: w.MenuWidth212,
+													Pop:   w.MenuUnder,
+												},
+											},
+											w.Faced{
+												Face: w.FaceLarge,
+												Items: []w.LinePart{
+													w.Text("макет-обложки-v3.pdf "),
+													w.Dim{Parts: []w.Inline{w.Text("application/pdf · 1.8 MB")}},
+													w.Text(" "),
+													w.Badge{Label: "not kept", Tone: w.BadgeAlert},
+												},
+											},
+											w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+											w.Faced{
+												Face: w.FaceLarge,
+												Items: []w.LinePart{
+													w.Text("шрифты-обложки.png "),
+													w.Dim{Parts: []w.Inline{w.Text("image/png · 640 KB")}},
+													w.Text(" "),
+													w.Badge{Label: "not kept", Tone: w.BadgeAlert},
+												},
+											},
+											w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true},
+										},
+										Gap:   w.LineGap8,
+										Block: true,
+										ID:    "event-attachments",
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Repeats"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Frequency",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "frequency",
+												Options: []w.PickOption{{Value: "does.not.repeat", Label: "Does not repeat", On: true}},
+												Label:   "Frequency",
+											},
+										},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Every",
+										Parts: []w.FieldPart{w.Input{Name: "every", Value: "1", Label: "Every", Mono: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "On",
+										Parts: []w.FieldPart{
+											w.Seg{
+												Options: []w.SegOption{
+													{Label: "MO", Value: "MO"},
+													{Label: "TU", Value: "TU"},
+													{Label: "WE", Value: "WE"},
+													{Label: "TH", Value: "TH"},
+													{Label: "FR", Value: "FR"},
+													{Label: "SA", Value: "SA"},
+													{Label: "SU", Value: "SU"},
+												},
+												Name:     "byday",
+												Multiple: true,
+											},
+										},
+									},
+									w.Field{
+										Label: "Until",
+										Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "until", Label: "Until", Mono: true}},
+										Width: w.FieldSM,
+									},
+									w.Field{
+										Label: "Count",
+										Parts: []w.FieldPart{w.Input{Name: "count", Placeholder: "—", Label: "Count"}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Advanced RRULE",
+										Parts: []w.FieldPart{
+											w.Input{Name: "advanced.rrule", Placeholder: "—", Label: "Advanced RRULE", Mono: true},
+											w.FieldHint{Parts: []w.Inline{w.Text("The advanced value takes precedence when set.")}},
+										},
+										Width: w.FieldXL,
+									},
+								},
+							},
+						},
+						ID:     "event-new",
+						Action: "/app/calendar/nextcloud/lichnyj/new",
+					},
+				},
+			},
+		},
+	}
+}
