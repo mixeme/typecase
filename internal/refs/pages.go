@@ -459,40 +459,7 @@ var _ = add(
 			},
 		},
 	}, "rest-3", "tc-root", 1),
-	page("print", w.Page{
-		Items: []w.PagePart{
-			w.PrintTitle{Text: "Agenda · 10 – 16 August 2026"},
-			w.PrintSources{Text: "nextcloud · Личный, Работа · radicale · vps · Проекты, Дежурства"},
-			w.PrintRubric{Text: "Monday · 10 August"},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.Mono{Text: "10:00", Variant: w.MonoFace},
-					w.PrintCell{Name: "Синк-ап по релизу", Detail: "Переговорная 2 · nextcloud · Личный"},
-				},
-			},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.Mono{Text: "all day", Variant: w.MonoFace},
-					w.PrintCell{Name: "Дежурство: первая линия", Detail: "radicale · vps · Дежурства"},
-				},
-			},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.Mono{Text: "15:00", Variant: w.MonoFace},
-					w.PrintCell{Name: "Созвон с подрядчиком", Detail: "Jitsi · nextcloud · Работа"},
-				},
-			},
-			w.PrintRubric{Text: "Tuesday · 11 August"},
-			w.PrintRow{
-				Items: []w.PrintRowPart{
-					w.Mono{Text: "09:30", Variant: w.MonoFace},
-					w.PrintCell{Name: "Ревью архитектуры", Detail: "Переговорная 1 · radicale · vps · Проекты"},
-				},
-			},
-			w.PrintFoot{Text: "Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources"},
-		},
-		Variant: w.PagePrint,
-	}, "print-1", "tc-root", 1),
+	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Agenda · 10 – 16 August 2026"}, w.PrintSources{Text: "nextcloud · Личный, Работа · radicale · vps · Проекты, Дежурства"}, w.PrintRubric{Text: "Monday · 10 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "10:00", Variant: w.MonoFace}, w.PrintCell{Name: "Синк-ап по релизу", Detail: "Переговорная 2 · 4 attendees · repeats weekly · nextcloud · Личный"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · nextcloud · Работа"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · radicale · vps · Дежурства"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "15:00", Variant: w.MonoFace}, w.PrintCell{Name: "Созвон с подрядчиком", Detail: "Jitsi · tentative · nextcloud · Работа"}}}, w.PrintRubric{Text: "Tuesday · 11 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "09:30", Variant: w.MonoFace}, w.PrintCell{Name: "Ревью архитектуры", Detail: "Переговорная 1 · 2 attendees · radicale · vps · Проекты"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "18:00", Variant: w.MonoFace}, w.PrintCell{Name: "Забрать документы", Detail: "МФЦ, Мясницкая 13 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Wednesday · 12 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 1 of 3 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Thursday · 13 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 2 of 3 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Friday · 14 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 3 of 3 · nextcloud · Личный"}}}, w.PrintFoot{Text: "Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources"}}, Variant: w.PagePrint}, "print-1", "tc-root", 1),
 	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, w.Stack{Gap: w.StackGap9, Items: []w.StackPart{w.Card{Items: []w.CardPart{
 		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, w.Card{Items: []w.CardPart{
 		w.CardPick{Ticked: w.TickedOff, Title: "For everyone on this computer", Note: []w.CardTextPart{w.Text("Installs into "), w.Mono{Text: "Program Files"}, w.Text(". Asks for administrator once; each account still keeps its own data and password.")}}}, Variant: w.CardFlush}, w.Card{Items: []w.CardPart{

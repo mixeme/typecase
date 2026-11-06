@@ -14,26 +14,62 @@ func Print1() Screen {
 			w.PrintRow{
 				Items: []w.PrintRowPart{
 					w.Mono{Text: "10:00", Variant: w.MonoFace},
-					w.PrintCell{Name: "Синк-ап по релизу", Detail: "Переговорная 2 · nextcloud · Личный"},
+					w.PrintCell{
+						Name:   "Синк-ап по релизу",
+						Detail: "Переговорная 2 · 4 attendees · repeats weekly · nextcloud · Личный",
+					},
 				},
 			},
 			w.PrintRow{
 				Items: []w.PrintRowPart{
 					w.Mono{Text: "all day", Variant: w.MonoFace},
-					w.PrintCell{Name: "Дежурство: первая линия", Detail: "radicale · vps · Дежурства"},
+					w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · nextcloud · Работа"},
+				},
+			},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "all day", Variant: w.MonoFace},
+					w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · radicale · vps · Дежурства"},
 				},
 			},
 			w.PrintRow{
 				Items: []w.PrintRowPart{
 					w.Mono{Text: "15:00", Variant: w.MonoFace},
-					w.PrintCell{Name: "Созвон с подрядчиком", Detail: "Jitsi · nextcloud · Работа"},
+					w.PrintCell{Name: "Созвон с подрядчиком", Detail: "Jitsi · tentative · nextcloud · Работа"},
 				},
 			},
 			w.PrintRubric{Text: "Tuesday · 11 August"},
 			w.PrintRow{
 				Items: []w.PrintRowPart{
 					w.Mono{Text: "09:30", Variant: w.MonoFace},
-					w.PrintCell{Name: "Ревью архитектуры", Detail: "Переговорная 1 · radicale · vps · Проекты"},
+					w.PrintCell{Name: "Ревью архитектуры", Detail: "Переговорная 1 · 2 attendees · radicale · vps · Проекты"},
+				},
+			},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "18:00", Variant: w.MonoFace},
+					w.PrintCell{Name: "Забрать документы", Detail: "МФЦ, Мясницкая 13 · nextcloud · Личный"},
+				},
+			},
+			w.PrintRubric{Text: "Wednesday · 12 August"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "all day", Variant: w.MonoFace},
+					w.PrintCell{Name: "Поездка в Казань", Detail: "day 1 of 3 · nextcloud · Личный"},
+				},
+			},
+			w.PrintRubric{Text: "Thursday · 13 August"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "all day", Variant: w.MonoFace},
+					w.PrintCell{Name: "Поездка в Казань", Detail: "day 2 of 3 · nextcloud · Личный"},
+				},
+			},
+			w.PrintRubric{Text: "Friday · 14 August"},
+			w.PrintRow{
+				Items: []w.PrintRowPart{
+					w.Mono{Text: "all day", Variant: w.MonoFace},
+					w.PrintCell{Name: "Поездка в Казань", Detail: "day 3 of 3 · nextcloud · Личный"},
 				},
 			},
 			w.PrintFoot{Text: "Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources"},
