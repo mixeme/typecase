@@ -41,8 +41,8 @@ var _ = add(
 	rows("group", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "radicale · vps", Meta: "0 of 2"}, "s-backup-2", "tc-tickrow", 8),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Current: true, Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow", 1),
 	rows("current", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Current: true, Trail: w.Badge{Label: "ro"}}, "states-4", "tc-tickrow", 4),
-	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Form: w.TickRowTouch, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "6", Current: true}, "phone-2", "tc-tickrow", 1),
-	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true}, "phone-2", "tc-tickrow", 2),
+	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Form: w.TickRowTouch, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7", Current: true}, "phone-2", "tc-tickrow", 1),
+	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3", Current: true}, "phone-2", "tc-tickrow", 2),
 	rows("touch", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowTouch, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "phone-2", "tc-tickrow", 4),
 	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow", 7),
 
@@ -148,6 +148,7 @@ var _ = add(
 		{Icon: "img", Label: "2026-08-10-sync-board.png", Indent: w.TreeLevel76, Trail: w.Dim{Parts: []w.Inline{w.Text("412 KB · inside")}, Size: w.Dim11}},
 		{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel76, Trail: w.Dim{Parts: []w.Inline{w.Text("3.1 KB · inside")}, Size: w.Dim11}},
 		{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel76, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
+		{Icon: "doc", Label: "ковалёва-обложка-v2.pdf", Indent: w.TreeLevel22, Trail: w.Dim{Parts: []w.Inline{w.Text("1.6 MB · inside")}, Size: w.Dim11}},
 		{Icon: "file", Label: "Public"}}}, "s-files-16", "tc-tree", 1),
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},

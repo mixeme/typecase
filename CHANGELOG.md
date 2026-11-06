@@ -1024,6 +1024,17 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Carrel’s task 257: the Kazan trip, the note and the file are drawn** (06.11, by
+  the owner’s answer «Нарисовать»). The week agenda draws «Поездка в Казань»
+  (12–14 August, all day, Личный) as a row in each of its days, with «day 1
+  of 3» and on, in every frame that draws the week (`s-agenda-1`, `-17`, `-20`,
+  `-21`, the agenda behind the sheets, `states-6`, `-13`, `dark-1`,
+  `desktop-1`, `phone-1`, `s-publish-6`, `-24`, `print-7`); the week counts
+  it once: 7 events, Calendar 7, Личный 3. The notes lists draw «Про сроки по
+  сборнику» (21 July, Записи) in a July group (`s-notes-1`, `-10`, `-24`,
+  `-31`, `-33`, `s-publish-29`, `states-26`, `-27`, `phone-8`, `-9`,
+  `print-8`): Notes 5, Записи 3. «ковалёва-обложка-v2.pdf» lies at the root of
+  Documents, after its folders in the tree of Attach from Files (`s-files-16`).
 - **Carrel’s tasks 254, 255, 256, 258** (06.11): the public calendar’s
   other two states draw single rows too, without a source cell
   (`s-publish-24`, `-39`, task 258); a new event and a new card whose files

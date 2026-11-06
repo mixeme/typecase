@@ -2417,7 +2417,7 @@ func Publish19() Screen {
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
 							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "2", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 						},
 					},
@@ -2934,7 +2934,7 @@ func Publish4() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "2", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 							w.TickRow{
 								Ticked: w.TickedOff,
@@ -3230,9 +3230,9 @@ func Publish5() Screen {
 					w.Nav{
 						Items: []w.NavItem{
 							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 6}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
-							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 4}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
 							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
 						},
@@ -3470,6 +3470,48 @@ func Publish6() Screen {
 								Detail: "МФЦ, Мясницкая 13",
 								Single: true,
 								Href:   "/p/7f3ac9?uid=ab02",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Wednesday · 12 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "—",
+								Badges: []w.Badge{w.Badge{Label: "day 1 of 3"}},
+								Single: true,
+								Href:   "/p/7f3ac9?uid=3e6b",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Thursday · 13 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "—",
+								Badges: []w.Badge{w.Badge{Label: "day 2 of 3"}},
+								Single: true,
+								Href:   "/p/7f3ac9?uid=3e6b",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Friday · 14 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "—",
+								Badges: []w.Badge{w.Badge{Label: "day 3 of 3"}},
+								Single: true,
+								Href:   "/p/7f3ac9?uid=3e6b",
 							},
 						},
 					},
@@ -4035,6 +4077,48 @@ func Publish24() Screen {
 							},
 						},
 					},
+					w.ListGroup{Title: w.Rubric{Text: "Wednesday · 12 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "",
+								Badges: []w.Badge{w.Badge{Label: "day 1 of 3"}},
+								Single: true,
+								Href:   "/p/a41d07?uid=3e6b",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Thursday · 13 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "",
+								Badges: []w.Badge{w.Badge{Label: "day 2 of 3"}},
+								Single: true,
+								Href:   "/p/a41d07?uid=3e6b",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Friday · 14 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "all day",
+								Title:  []w.Inline{w.Text("Поездка в Казань")},
+								Detail: "",
+								Badges: []w.Badge{w.Badge{Label: "day 3 of 3"}},
+								Single: true,
+								Href:   "/p/a41d07?uid=3e6b",
+							},
+						},
+					},
 					w.MainFoot{Text: "This link does not expire."},
 				},
 			},
@@ -4366,7 +4450,7 @@ func Publish29() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Записи"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 notes")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 notes")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
@@ -4397,6 +4481,19 @@ func Publish29() Screen {
 								Date:    "8 Aug",
 								Single:  true,
 								Href:    "/p/61d4c7?uid=n2",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.ExcerptRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Title:   []w.Inline{w.Text("Про сроки по сборнику")},
+								Excerpt: "Анна просит две недели на вёрстку после сдачи текста.",
+								Date:    "21 Jul",
+								Single:  true,
+								Href:    "/p/61d4c7?uid=n3",
 							},
 						},
 					},
