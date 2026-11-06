@@ -1024,6 +1024,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The agenda print prints the whole week** (07.11, by the owner’s rule of
+  12.10: data towards the fuller set). `print-1` printed four rows of the
+  nine: both duty rows, «Забрать документы» and the Kazan trip on 12–14
+  August are back, and each row prints its badges between the place and
+  the source, as `print-7` does («4 attendees · repeats weekly»,
+  «tentative», «day 1 of 3»).
+- **The roadmap holds only what is open** (07.11): where things stand, what
+  the owner deferred and with what words, what is known as undone, how to
+  work. The history went to git (1761 lines → 170); what was done is
+  in this file and in Carrel’s notes.
 - **Carrel’s task 257: the Kazan trip, the note and the file are drawn** (06.11, by
   the owner’s answer «Нарисовать»). The week agenda draws «Поездка в Казань»
   (12–14 August, all day, Личный) as a row in each of its days, with «day 1
