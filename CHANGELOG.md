@@ -1024,6 +1024,17 @@ do, not what the authors did.
 
 ### Mockup
 
+- **No doubled left indent in tables** (07.11, the owner’s remark of 02.11).
+  A table inside a dialog no longer adds the page gutter to its first and last
+  column: the import preview and the restore tables stand under the steps
+  (`s-io-5`…`-8`, `-19`, `s-backup-8`, `-18`, `-20`, `s-auth-15`). On the
+  phone a card row (Р-66) inside a dialog or a card takes no gutter of its
+  own, and a card without a tick no longer keeps 10 px for the empty tick
+  column — the gaps are the cells’ margins now, not the grid’s (51 frames:
+  connections, files, devices, users, backups, links). `tc-table--mx-20`
+  bleeds by the page gutter, not by 20 px: on the phone «Sessions» stuck out
+  of its form by 6 px (`account-1`, `-15`, `s-mail-9`). 63 frames change,
+  only in their indent.
 - **The agenda print prints the whole week** (07.11, by the owner’s rule of
   12.10: data towards the fuller set). `print-1` printed four rows of the
   nine: both duty rows, «Забрать документы» and the Kazan trip on 12–14

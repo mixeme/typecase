@@ -507,6 +507,10 @@ a.tc-row__title:hover{text-decoration:underline}
 /* Таблица в карточке: отступы у карточки, последняя строка без линии. */
 .tc-card > .tc-table{margin-top:9px}
 .tc-card > .tc-table tr td:first-child,.tc-card > .tc-table tr th:first-child{padding-left:0}
+/* Таблица в диалоге: поле у диалога, первая и последняя колонка своего не берут —
+   иначе отступ двойной (шаг импорта: имя на 20 px правее шагов). */
+.tc-dialog .tc-table tr td:first-child,.tc-dialog .tc-table tr th:first-child{padding-left:0}
+.tc-dialog .tc-table tr td:last-child,.tc-dialog .tc-table tr th:last-child{padding-right:0}
 .tc-card > .tc-table tr td:last-child,.tc-card > .tc-table tr th:last-child{padding-right:0}
 .tc-card > .tc-table tbody tr:last-child td,.tc-card > .tc-table tbody td[rowspan]{border-bottom:0}
 .tc-card > .tc-table tbody td{padding-top:5px;padding-bottom:5px}
@@ -974,15 +978,18 @@ label.tc-menu__item{position:relative;cursor:pointer}
      (is-2nd): Copy ссылки остаётся. */
   .tc-table:has(td.tc-table__main),.tc-table:has(td.tc-table__main) > tbody{display:block;width:100%}
   .tc-table:has(td.tc-table__main) > thead{display:none}
-  .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:4px;
+  .tc-table:has(td.tc-table__main) > tbody > tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:0;row-gap:4px;
     align-items:center;padding:10px var(--tc-page-gutter-narrow);border-bottom:.5px solid var(--tc-hair)}
+  /* Промежутки — полями ячеек, не сетки: карточка без галочки не держит 10 px под её пустую колонку. */
+  /* В диалоге и в карточке поле уже есть: строка-карточка своего не берёт. */
+  .tc-dialog .tc-table:has(td.tc-table__main) > tbody > tr,.tc-card > .tc-table:has(td.tc-table__main) > tbody > tr{padding-left:0;padding-right:0}
   .tc-table:has(td.tc-table__main) > tbody > tr > td{display:none;padding:0;border:0}
-  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-tickrow__tick,> .tc-tick){display:block;grid-column:1;grid-row:1;margin-right:10px}
   .tc-table:has(td.tc-table__main) > tbody > tr > td:has(> .tc-table__file),
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__name,
   .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:has(> .tc-tickrow__tick,> .tc-tick) + td:not(.tc-table__main),
   .tc-table:has(td.tc-table__main) > tbody > tr > td:first-child:not(:empty):not(.tc-table__main):not(:has(> .tc-tickrow__tick,> .tc-tick)){display:block;grid-column:2;grid-row:1;min-width:0}
-  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1}
+  .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts{display:block;grid-column:3;grid-row:1;margin-left:10px}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts:not(:has(> .tc-drop > .tc-acts__more)) > :not(:last-child):not(:nth-last-child(2)),
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts > .is-2nd{display:none}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-acts .tc-acts__more,
@@ -1727,7 +1734,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 
 
 .tc-auth__tagline-lead.tc-auth__tagline-lead{font-size:16px;font-weight:600;color:var(--tc-ink);margin-bottom:4px;display:block}
-.tc-table--mx-20.tc-table--mx-20{margin:0 -20px}
+.tc-table--mx-20.tc-table--mx-20{margin:0 calc(-1 * var(--tc-page-gutter))}
 .tc-table__file--fill.tc-table__file--fill{flex:1}
 .tc-table__filename--accent.tc-table__filename--accent{color:var(--tc-accent)}
 .tc-table__filename--t12.tc-table__filename--t12{font-size:12px}
