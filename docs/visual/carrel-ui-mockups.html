@@ -448,6 +448,13 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 .tc-in.is-pick{padding-right:26px;position:relative}
 /* Список браузера в поле-списке: поле рисует рамку и стрелку, список — только слова (задача 149). */
 .tc-in.is-pick > .tc-in__list{appearance:none;border:0;background:transparent;font:inherit;color:inherit;letter-spacing:inherit;padding:0;margin:0;flex:1 1 auto;min-width:0;width:100%;outline:0;cursor:pointer}
+/* Буквы по середине (владелец 08.11): Public Sans оставляет под строкой больше
+   места, чем над заглавными, и текст однострочных полей, выборов и кнопок стоял
+   на 1 px выше середины; поле ввода (input) браузер и так ставит по середине.
+   Поле сверху на 2 px больше — текст ниже на 1 px; значки остаются, где были.
+   Против полей вариантов (padding:0 Npx) — вес id. */
+:is(.tc-btn,.tc-seg__opt,.tc-segfold__current,.tc-in:not(input,textarea,.tc-in--tags,.tc-in--cols)):not(#_){padding-top:2px;padding-bottom:0}
+:is(.tc-btn,.tc-seg__opt,.tc-segfold__current,.tc-in) > svg{margin-top:-2px}
 /* Отметка-флажок в поле формы — отметка, а не подпись поля. */
 .tc-field > label.tc-check{font-size:12.5px;letter-spacing:normal;color:inherit}
 /* Стрелка в правых 24 px; маска цвета поля закрывает хвост текста. */

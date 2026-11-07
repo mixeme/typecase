@@ -1047,6 +1047,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Letters in the middle of their controls** (08.11, the owner). Public Sans
+  leaves more room under the line than over the capitals, so the text of
+  buttons, picks, segments and the bars' filters stood 1 px above the middle
+  of its box. They take 2 px on top and none at the bottom now, and their
+  icons a margin of −2 px: the text goes 1 px down, the icons stay. Text
+  fields (`input`) keep their place — the browser already put their text in
+  the middle; multi-line fields, tag fields and menus are as they were.
+  Nearly every frame moves a line of text by 1 px; nothing to change in the
+  markup.
 - **A reminder of one's own on the card and in the quick sheet** (Carrel's
   task 156, the owner's answer of 07.11). «Синк-ап по релизу» reminds 10
   minutes and 2 days before, as `s-agenda-19` draws its form: the cards read
