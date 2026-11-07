@@ -7,12 +7,13 @@
 нужно. Собрана сценарием из описаний и тестов; при новом виджете или
 поведении — дописать строку.
 
-**Итог.** 101 виджет с описанием; 56 печатаются в браузерных тестах. У 19
+**Итог.** 101 виджет с описанием; 57 печатаются в браузерных тестах. У 18
 поведение описано, а своего теста нет: 14 работают без сценария (ссылка,
-форма, `details`), 3 — общим правилом, проверенным на другом виджете, у 2
-описание обещало то, чего в `tc.js` нет (`Filter` — сужение по мере набора,
-`TickRow` — галка группы ставит галки под ней): описания исправлены, сами
-поведения — в «Известном несделанном» (`docs/roadmap.md`).
+форма, `details`), 3 — общим правилом, проверенным на другом виджете, у 1
+описание обещало то, чего в `tc.js` нет (`TickRow` — галка группы ставит
+галки под ней): описание исправлено, само поведение — в «Известном
+несделанном» (`docs/roadmap.md`). `Filter` сужает по мере набора с 07.11
+(владелец: фильтр сужает показанное).
 
 | Виджет | Блок | Поведение | Проверка |
 |---|---|---|---|
@@ -49,7 +50,7 @@
 | `Field` | `tc-field` | Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов. | тест: `TestAddRowAndDrop`, `TestEditFile`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZoneSheet`, `TestZones`, `TestFieldChanged` |
 | `FieldSet` | `tc-fset` | Группа с адресом (Action) — своя форма: её кнопка шлёт её поля, а не поля соседних групп. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestPickShows`, `TestRemoveRow`, `TestTemplateShows` |
 | `Fields` | `tc-fields` | нет. | — |
-| `Filter` | `tc-in` | Форма GET отправляет набранное по Enter; крестик (Clear) — ссылка на адрес без фильтра. | без сценария (форма, ссылка) |
+| `Filter` | `tc-in` | Сужает то, что страница показывает. Форма GET отправляет набранное по Enter; со `Swap` живой слой спрашивает адрес на каждой паузе в наборе и ставит главную на место — строка остаётся с набранным, кареткой и фокусом, адрес страницы — с фильтром; крестик (Clear) — ссылка на адрес без фильтра. | тест: `TestFilterNarrows` |
 | `FindRow` | `tc-row` | Нажатие открывает запись. | без сценария (ссылка, форма, `details`) |
 | `Form` | `tc-form` | Enter в поле формы отправляет форму. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestFormsWithoutScripts`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZones` |
 | `FormFoot` | `tc-formfoot` | нет: поведение у кнопок. | — |

@@ -126,6 +126,7 @@ func Agenda1() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
@@ -315,6 +316,7 @@ func Agenda1() Screen {
 						Variant: w.EmptySmall,
 					},
 				},
+				ID: "list-main",
 			},
 			Side: &w.Side{
 				Items: []w.SidePart{
@@ -1368,6 +1370,7 @@ func Agenda17() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar/nextcloud/lichnyj",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-03"},
@@ -1495,6 +1498,7 @@ func Agenda17() Screen {
 						},
 					},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -1597,7 +1601,15 @@ func Agenda31() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Личный"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 3 events with «синк»")}}},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("nextcloud · 10 – 16 August 2026 · "),
+									w.Mono{Text: "Europe/Moscow"},
+									w.Text(" · 1 of 3 events"),
+								},
+							},
+						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
@@ -1613,26 +1625,78 @@ func Agenda31() Screen {
 								Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
 								Clear:   "/app/calendar/nextcloud/lichnyj",
 								Action:  "/app/calendar/nextcloud/lichnyj",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
+							w.Button{
+								Icon:  "back",
+								Title: "Previous week",
+								Href:  "/app/calendar/nextcloud/lichnyj?from=2026-08-03&filter=синк",
+							},
+							w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyj?filter=синк"},
+							w.Button{
+								Icon:  "next",
+								Title: "Next week",
+								Href:  "/app/calendar/nextcloud/lichnyj?from=2026-08-17&filter=синк",
+							},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{Label: "Day", Href: "/app/calendar?view=day"},
+										{Label: "Week", Href: "/app/calendar?view=week", On: true},
+										{Label: "Month", Href: "/app/calendar?view=month"},
+										{Label: "Range", Href: "/app/calendar?view=range"},
+									},
+								},
+								Phone: true,
+							},
+							w.Range{
+								From:      w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+								To:        w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+								Show:      w.Button{Label: "Show", Submit: true},
+								Hidden:    []w.Hidden{{Name: "view", Value: "range"}},
+								Secondary: true,
+								Action:    "/app/calendar",
+							},
 							w.Button{Label: "Columns", Icon: "cols"},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.Range{
+											From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true},
+											To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true},
+											Show:   w.Button{Label: "Show", Submit: true},
+											Hidden: []w.Hidden{{Name: "view", Value: "range"}},
+											Action: "/app/calendar",
+											Wrap:   true,
+										},
+										w.MenuSep{},
+										w.CheckForm{
+											Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+											Action: "/app/calendar",
+											Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
+										},
+									},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right: &w.BarRight{
+							Items: []w.BarPart{
+								w.CheckForm{
+									Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}},
+									Action: "/app/calendar",
+									Apply:  w.Button{Label: "Apply", Small: true, Submit: true},
+								},
+							},
+							Secondary: true,
 						},
 						Variant: w.BarWide,
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "11:00",
-								Title:  []w.Inline{w.Text("Синк-ап с подрядчиком")},
-								Detail: "Переговорная 1",
-								Single: true,
-								Past:   true,
-							},
-						},
-					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
@@ -1645,19 +1709,8 @@ func Agenda31() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Thursday · 3 September", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Синк-ап: итоги квартала")},
-								Detail: "Переговорная 2",
-								Single: true,
-							},
-						},
-					},
 				},
+				ID: "list-main",
 			},
 		},
 	}

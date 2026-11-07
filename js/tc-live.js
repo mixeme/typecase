@@ -462,6 +462,67 @@
 		});
 		swap(url.href, ids);
 	});
+	// A filter that narrows as one types (data-tc-swap on a filter's form,
+	// Filter.Swap; the owner, 07.11): each pause in typing asks the form's
+	// address with its fields, by GET, and puts the elements it names in
+	// place — the page's main with what it shows narrowed. The line in the
+	// answer gets what is typed now and the caret, and keeps the focus; the
+	// address of the page becomes the one asked, so a reload shows the same.
+	// An answer overtaken by later typing is dropped. When the answer fails
+	// the page stays, and Enter sends the form.
+	var narrowTimer = 0, narrowSeq = 0;
+
+	function narrow(line) {
+		var f = line.form;
+		var ids = f.getAttribute("data-tc-swap").split(/\s+/).filter(Boolean);
+		if (!ids.length || !window.DOMParser || !window.FormData || !window.URL) return;
+		clearTimeout(narrowTimer);
+		narrowTimer = setTimeout(function () {
+			var url = new URL(f.getAttribute("action") || location.href, location.href);
+			var data = new FormData(f);
+			data.forEach(function (v, k) {
+				url.searchParams.delete(k);
+			});
+			data.forEach(function (v, k) {
+				if (typeof v === "string" && (v !== "" || k !== line.name)) url.searchParams.append(k, v);
+			});
+			var seq = ++narrowSeq, name = line.name;
+			fetch(url.href, { credentials: "same-origin", headers: { Accept: "text/html" } })
+				.then(function (r) {
+					if (!r.ok) throw new Error(r.status);
+					return r.text();
+				})
+				.then(function (html) {
+					if (seq !== narrowSeq) return;
+					var doc = new DOMParser().parseFromString(html, "text/html");
+					var pairs = ids.map(function (id) {
+						return [document.getElementById(id), doc.getElementById(id)];
+					});
+					if (pairs.some(function (p) { return !p[0] || !p[1]; })) return;
+					var typed = line.value, at = line.selectionStart, had = document.activeElement === line;
+					pairs.forEach(function (p) {
+						var fresh = document.importNode(p[1], true);
+						p[0].replaceWith(fresh);
+						if (tc.init) tc.init(fresh);
+					});
+					var again = document.querySelector('form[data-tc-swap] input[name="' + name + '"]');
+					if (again) {
+						again.value = typed;
+						if (had) {
+							again.focus();
+							try { again.setSelectionRange(at, at); } catch (e) {}
+						}
+					}
+					if (window.history && history.replaceState) history.replaceState(history.state, "", url.href);
+				})
+				.catch(function () {});
+		}, 200);
+	}
+
+	document.addEventListener("input", function (e) {
+		var q = e.target;
+		if (q.matches && q.matches('form.tc-in[data-tc-swap] input[type="search"]')) narrow(q);
+	});
 	// Back and forward over swapped pages load the page of the address.
 	var swapped = false;
 	window.addEventListener("popstate", function () {

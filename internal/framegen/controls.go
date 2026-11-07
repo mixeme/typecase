@@ -465,6 +465,9 @@ func (g *gen) filter(x *El) string {
 		if len(hs) > 0 {
 			f = append(f, "Hidden: []w.Hidden{"+join(hs, ", ")+"}")
 		}
+		if sw := x.Attr("data-tc-swap"); sw != "" {
+			f = append(f, "Swap: "+q(sw))
+		}
 	}
 	return "w.Filter{" + join(f, ", ") + g.ev(x, "FilterVariant", "Variant") + placef(x) + "}"
 }

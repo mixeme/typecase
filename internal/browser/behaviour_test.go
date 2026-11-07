@@ -1760,6 +1760,72 @@ func TestFormRecount(t *testing.T) {
 	}
 }
 
+// TestFilterNarrows (the owner, 07.11): a filter narrows what the page
+// shows as one types — each pause asks the filter's address with the typed
+// word, the live layer puts the main in place, the line keeps the word, the
+// caret and the focus, and the page's address carries the filter; an empty
+// line asks the bare address and the page shows everything again. The
+// bite: without the live layer typing changes nothing until Enter.
+func TestFilterNarrows(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	titles := []string{"Синк-ап по релизу", "Забрать документы", "Поездка в Казань"}
+	var asked string
+	main := func(q string) string {
+		f := w.Filter{Query: w.Query{Name: "filter", Value: q, Label: "Filter by word"}, Waiting: q == "", Variant: w.FilterH26W200, Action: asked, Swap: "list-main"}
+		if q != "" {
+			f.Clear = asked
+		}
+		s := `<div class="tc-main" id="list-main">` + f.Render()
+		for _, r := range titles {
+			if q == "" || strings.Contains(strings.ToLower(r), strings.ToLower(q)) {
+				s += `<div class="tc-row"><span class="tc-row__title">` + r + `</span></div>`
+			}
+		}
+		return s + `</div>`
+	}
+	asked = h.RegisterStream("narrow", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = io.WriteString(rw, main(r.URL.Query().Get("filter")))
+	})
+	page := func(live bool) string {
+		doc := browser.PageHTML(`<div class="tc-root">`+main("")+`</div>`, "")
+		if !live {
+			doc = strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1)
+		}
+		return doc
+	}
+	const typeIn = `(v => { const q = document.querySelector('[name="filter"]'); q.focus(); q.value = v; q.setSelectionRange(v.length, v.length); q.dispatchEvent(new Event("input", {bubbles: true})); return true; })`
+	const state = `(() => { const q = document.querySelector('[name="filter"]'); return Array.from(document.querySelectorAll(".tc-row__title"), x => x.textContent).join(", ") + " | " + q.value + " | " + (document.activeElement === q) + " " + q.selectionStart + " | " + decodeURIComponent(location.search) + " | " + !!document.querySelector(".tc-in__clear"); })()`
+	var narrowed, widened, bare string
+	if err := h.Run(h.RegisterPage("narrow-live", page(true)), 900, 600,
+		chromedp.Evaluate(typeIn+`("син")`, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(state, &narrowed),
+		chromedp.Evaluate(typeIn+`("")`, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(state, &widened),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(h.RegisterPage("narrow-bare", page(false)), 900, 600,
+		chromedp.Evaluate(typeIn+`("син")`, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(state, &bare),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if want := "Синк-ап по релизу | син | true 3 | ?filter=син | true"; narrowed != want {
+		t.Errorf("after typing: %q; want %q", narrowed, want)
+	}
+	if want := "Синк-ап по релизу, Забрать документы, Поездка в Казань |  | true 0 |  | false"; widened != want {
+		t.Errorf("after emptying the line: %q; want %q", widened, want)
+	}
+	if want := "Синк-ап по релизу, Забрать документы, Поездка в Казань | син | true 3 |  | false"; bare != want {
+		t.Errorf("without the live layer: %q; want %q", bare, want)
+	}
+}
+
 // TestPickDisables (Carrel's task 218): an option of a pick switches fields
 // of its form off while it is chosen — «None — up to 16 MB» and the folder
 // for a large archive; another option switches it on, and an off field is

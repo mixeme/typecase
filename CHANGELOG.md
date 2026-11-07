@@ -126,6 +126,15 @@ do, not what the authors did.
 
 ### Added
 
+- **`Filter.Swap`: a filter narrows as one types** (the owner, 07.11: a
+  filter narrows what the page shows; finding in the whole collection is the
+  search in the top bar). With the live layer each pause in typing asks the
+  filter's address with what is typed and puts the named elements in place;
+  the line keeps the word, the caret and the focus, and the page's address
+  gets the filter. Without the layer Enter sends the form, as before. Give
+  the page's main an `ID` and name it in `Swap`; match the word in what each
+  row shows, within what the page shows (a week, a folder), not the whole
+  collection. Tested by `TestFilterNarrows`.
 - `TreeLevel76`: a row of a tree four levels down — a file of a month
   folder in the attachment folder (`s-files-16`), `tc-tree__row--padl76`.
 - `SecHint` is a `DocmetaPart` too: a section of a document's side column
@@ -1024,6 +1033,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The filter narrows what is shown** (07.11, the owner). The calendar's
+  filter keeps the week: `s-agenda-31` is the week of 10–16 August with only
+  «Синк-ап по релизу» left, «1 of 3 events» in the head, ← Today → paging
+  with the same word; nothing left is the week's empty state, «Nothing with
+  «синк» this week.». The guest's filter narrows the shown week the same way
+  (`s-publish-39`, `s-publish-24`'s caption). Every list filter that is a form
+  names its main (`list-main`) to be put in place as one types: 17 frames.
 - **No doubled left indent in tables** (07.11, the owner’s remark of 02.11).
   A table inside a dialog no longer adds the page gutter to its first and last
   column: the import preview and the restore tables stand under the steps

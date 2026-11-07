@@ -3440,6 +3440,7 @@ func Publish6() Screen {
 									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/7f3ac9",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -3559,6 +3560,7 @@ func Publish6() Screen {
 					},
 					w.MainFoot{Text: "This link works until 8 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -3606,6 +3608,7 @@ func Publish7() Screen {
 									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/2b91f4",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -3639,6 +3642,7 @@ func Publish7() Screen {
 					},
 					w.MainFoot{Text: "This link works until 9 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -3908,6 +3912,7 @@ func Publish12() Screen {
 									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/5c40e2",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4013,6 +4018,7 @@ func Publish12() Screen {
 					},
 					w.MainFoot{Text: "This link works until 1 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4037,6 +4043,7 @@ func Publish24() Screen {
 									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/a41d07",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4121,6 +4128,7 @@ func Publish24() Screen {
 					},
 					w.MainFoot{Text: "This link does not expire."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4138,34 +4146,28 @@ func Publish39() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Личный"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 events with «синк»")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("10 – 16 August 2026 · 1 of 3 events")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
 									Query:   w.Query{Value: "синк", Label: "Filter by word", Name: "filter"},
 									Clear:   "/p/a41d07",
 									Action:  "/p/a41d07",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
 						},
 						Pad: w.HeadPadBottom8,
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 27 July", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "11:00",
-								Title:  []w.Inline{w.Text("Синк-ап с подрядчиком")},
-								Detail: "",
-								Single: true,
-								Past:   true,
-								Href:   "/p/a41d07?uid=a907",
-							},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Button{Icon: "back", Title: "Previous week", Href: "/p/a41d07?from=2026-08-03&filter=синк"},
+							w.Button{Label: "Today", Href: "/p/a41d07?filter=синк"},
+							w.Button{Icon: "next", Title: "Next week", Href: "/p/a41d07?from=2026-08-17&filter=синк"},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Monday · 17 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
@@ -4179,21 +4181,9 @@ func Publish39() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "Thursday · 3 September", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
-					w.List{
-						Rows: []w.ListRow{
-							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "15:00",
-								Title:  []w.Inline{w.Text("Синк-ап: итоги квартала")},
-								Detail: "",
-								Single: true,
-								Href:   "/p/a41d07?uid=ae05",
-							},
-						},
-					},
 					w.MainFoot{Text: "This link does not expire."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4378,6 +4368,7 @@ func Publish28() Screen {
 									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/e5b210",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4433,6 +4424,7 @@ func Publish28() Screen {
 					},
 					w.MainFoot{Text: "This link works until 8 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4457,6 +4449,7 @@ func Publish29() Screen {
 									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/61d4c7",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4499,6 +4492,7 @@ func Publish29() Screen {
 					},
 					w.MainFoot{Text: "This link works until 19 August 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4585,6 +4579,7 @@ func Publish30() Screen {
 									Waiting: true,
 									Action:  "/p/5c40e2",
 									Hidden:  []w.Hidden{{Name: "in", Value: "скриншоты"}},
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4737,6 +4732,7 @@ func Publish30() Screen {
 					},
 					w.MainFoot{Text: "This link works until 1 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -4766,6 +4762,7 @@ func Publish31() Screen {
 									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder", Name: "filter"},
 									Waiting: true,
 									Action:  "/p/e93b06",
+									Swap:    "list-main",
 									Variant: w.FilterH26W190,
 								},
 							},
@@ -4862,6 +4859,7 @@ func Publish31() Screen {
 					},
 					w.MainFoot{Text: "This link works until 1 September 2026."},
 				},
+				ID: "list-main",
 			},
 		},
 	}

@@ -237,6 +237,7 @@ func States3() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
@@ -312,6 +313,7 @@ func States3() Screen {
 						},
 					},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -718,6 +720,7 @@ func States6() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
@@ -905,6 +908,7 @@ func States6() Screen {
 						Variant: w.EmptySmall,
 					},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -2912,6 +2916,7 @@ func States13() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar?from=2026-08-03"},
@@ -3085,6 +3090,7 @@ func States13() Screen {
 						},
 					},
 				},
+				ID: "list-main",
 			},
 		},
 	}
@@ -3324,6 +3330,7 @@ func States15() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar/nextcloud/lichnyj",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-10-26"},
@@ -3390,6 +3397,7 @@ func States15() Screen {
 						Parts: []w.EmptyPart{w.Strong("No events this week."), w.Text(" Nothing in Личный from 2 to 8 November.")},
 					},
 				},
+				ID: "list-main",
 			},
 		},
 	}

@@ -2930,6 +2930,7 @@ func Contacts7() Screen {
 								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+								Swap:    "list-main",
 								Variant: w.FilterH26W200,
 							},
 							w.Range{
@@ -3057,6 +3058,7 @@ func Contacts7() Screen {
 						Variant: w.EmptySmallTop,
 					},
 				},
+				ID: "list-main",
 			},
 			Side: &w.Side{
 				Items: []w.SidePart{

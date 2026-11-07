@@ -252,10 +252,10 @@ func (v FilterVariant) class() string {
 // Filter — tc-in
 //
 // Роль. Фильтр списка: значок поиска и строка запроса в одной рамке.
-// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action, Hidden, Clear}.
+// Вход. Filter{Query, Waiting, Quiet, Variant, Place, Action, Hidden, Clear, Swap}.
 // Состояния. waiting | quiet.
 // Инварианты. Значок — первый узел поля, строка занимает остаток; фильтр печатает фрагмент своего кадра.
-// Поведение. С адресом (Action) — форма GET: Enter отправляет набранное, без сценария; без адреса — поле, которое читает форма вокруг. Сужения по мере набора нет (ревью 14.10: описание его обещало). Пока в поле есть слово, крестик в конце (Clear) — ссылка на тот же адрес без фильтра, и без сценария тоже.
+// Поведение. Фильтр сужает то, что страница показывает (владелец 07.11), а не ищет по всей коллекции: это делает поиск в шапке. С адресом (Action) — форма GET: Enter отправляет набранное, без сценария; без адреса — поле, которое читает форма вокруг. Со Swap и живым слоем (tc-live.js) каждая пауза в наборе спрашивает адрес формы с набранным и ставит на место названные элементы — список сужается и расширяется по мере набора; строка остаётся с набранным и кареткой, адрес страницы — с фильтром. Пока в поле есть слово, крестик в конце (Clear) — ссылка на тот же адрес без фильтра, и без сценария тоже.
 // Эталон. кадр `s-contacts-1`, фрагмент `label.tc-in`.
 // Содержимое. Строка запроса.
 // Чего нет. Подсказок по мере набора: это поиск в шапке, а не фильтр.
@@ -271,6 +271,11 @@ type Filter struct {
 	// word, a cross at its end leads there (the owner, 25.10; Carrel's task
 	// 231), without a script too.
 	Clear string
+	// Swap, with Action, names the elements (IDs, separated by spaces) the
+	// live layer puts in place as one types: each pause asks Action with the
+	// form's fields and takes these elements from the answer — the page's
+	// main, the filter among them, keeps what is typed and the caret.
+	Swap string
 }
 
 // Render prints the filter.
@@ -289,7 +294,7 @@ func (f Filter) html(m mix) string {
 		for _, h := range f.Hidden {
 			inner += h.html(nil)
 		}
-		return `<form` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + attr("action", f.Action) + ` method="get">` + inner + `</form>`
+		return `<form` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + attr("action", f.Action) + ` method="get"` + attr("data-tc-swap", f.Swap) + `>` + inner + `</form>`
 	}
 	return `<label` + class(m, "tc-in", is("ph", f.Waiting), f.Variant.class(), f.Place.class()) + `>` + inner + `</label>`
 }
