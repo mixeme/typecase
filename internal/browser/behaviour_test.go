@@ -2075,6 +2075,51 @@ func TestZones(t *testing.T) {
 	}
 }
 
+// TestRailTickZones (the owner, 07.11): the group tick of the rail is a
+// button of the rail's form — it sends «all», and the answer, asked for the
+// rail's zone, puts the rail with every tick under the group set and the
+// list in place, the page kept. The bite: without the live layer the page
+// goes to the answer.
+func TestRailTickZones(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	rail := func(all w.Ticked, one w.Ticked) string {
+		return w.RailSec{Items: []w.RailSecPart{
+			w.TickRow{Ticked: all, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7", Send: w.Send{Form: "post-rail", Name: "src", Value: "all"}},
+			w.TickRow{Ticked: one, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3", Hidden: one == w.TickedOff, Send: w.Send{Form: "post-rail", Name: "src", Value: "nextcloud/lichnyj"}},
+		}}.Render()
+	}
+	answer := h.RegisterPage("rail-answer", page.Fragment{Body: []page.Part{zonePart(rail(w.TickedOn, w.TickedOn))},
+		Extra: []page.ZonePart{{Zone: "main", Body: []page.Part{zonePart(`<p>7 events</p>`)}}}}.Render())
+	form := w.PostForm{ID: "post-rail", Action: answer, Method: "post", Target: "rail"}
+	body := `<div class="tc-root"><div data-tc-zone="rail">` + rail(w.TickedPart, w.TickedOff) + `</div><div data-tc-zone="main"><p>4 events</p></div>` + form.Render() + `</div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), `data-tc-noscript>`,
+		`data-tc-noscript data-tc-view-header="X-View" data-tc-view-value="part" data-tc-target-header="X-Target">`, 1)
+	with := h.RegisterPage("rail-ticks", doc)
+	bare := h.RegisterPage("rail-ticks-bare", strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1))
+	const state = `(() => { window.__kept = window.__kept || false;
+		const ticks = Array.from(document.querySelectorAll(".tc-tickrow__tick"), b => b.getAttribute("aria-pressed")).join(" ");
+		const main = document.querySelector('[data-tc-zone="main"]');
+		return ticks + " | " + (main ? main.textContent.trim() : "no zone") + " | " + (window.__kept ? "kept" : "loaded"); })()`
+	for _, c := range []struct{ name, url, want string }{
+		{"with the live layer", with, "true true | 7 events | kept"},
+		{"without the layer", bare, "true true |  | loaded"}, // the answer itself: the list a template
+	} {
+		var got string
+		if err := h.Run(c.url, 900, 600,
+			chromedp.Evaluate(`window.__kept = true`, nil),
+			chromedp.Click(`.tc-tickrow.is-all .tc-tickrow__tick`, chromedp.ByQuery),
+			chromedp.Sleep(1500*time.Millisecond),
+			chromedp.Evaluate(state, &got),
+		); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+	}
+}
+
 // TestZoneFormOnce (Carrel's note 58): a form that is not GET, sent by the
 // live layer, is sent once — an answer sent on to another address goes
 // there, an answer that is not a part is shown whole, and neither is sent

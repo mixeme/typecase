@@ -126,6 +126,14 @@ do, not what the authors did.
 
 ### Added
 
+- **The rail's group tick sends, and its answer sets the ticks under it**
+  (the owner, 07.11). A `TickRow` of every source (`TickRowAll`, a root) with
+  `Send.Form` is a button of the rail's form, as a source's tick is: it sends
+  «all» or «none», and the server's answer draws the ticks under it — the
+  script does not set them ahead. Give the rail's `PostForm` a `Target` (the
+  rail's zone) and answer with the rail and, after it, the list's zone: the
+  live layer puts both in place and the page stays (`TestRailTickZones`);
+  without the layer the page goes to the answer.
 - **`Filter.Swap`: a filter narrows as one types** (the owner, 07.11: a
   filter narrows what the page shows; finding in the whole collection is the
   search in the top bar). With the live layer each pause in typing asks the
@@ -1033,6 +1041,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The group tick in «everything pressable»** (`components-43`, 07.11):
+  «Combined calendar» stands above «Личный», its tick a button of the rail's
+  form sending «all», half-ticked; the rail's form asks the rail's zone.
 - **The filter narrows what is shown** (07.11, the owner). The calendar's
   filter keeps the week: `s-agenda-31` is the week of 10–16 August with only
   «Синк-ап по релизу» left, «1 of 3 events» in the head, ← Today → paging

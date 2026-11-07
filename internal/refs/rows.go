@@ -8,6 +8,8 @@ func rows(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-tickrow
+	rows("one-sends", w.TickRow{Send: w.Send{Form: "post-sources", Name: "src", Value: "nextcloud/lichnyj"}, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "128"}, "components-43", "tc-tickrow", 2),
+	rows("all-sends", w.TickRow{Ticked: w.TickedPart, Send: w.Send{Form: "post-sources", Name: "src", Value: "all"}, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7"}, "components-43", "tc-tickrow", 1),
 	rows("plain", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник"}, "s-find-4", "tc-tickrow", 12),
 	rows("plain", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ"}, "s-find-4", "tc-tickrow", 9),
 	rows("box", w.TickRow{Send: w.Send{Name: "src", Value: "nextcloud|lichnyj"}, Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "cal."}, "s-backup-2", "tc-tickrow", 2),

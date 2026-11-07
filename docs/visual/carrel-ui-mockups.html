@@ -2931,6 +2931,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <form class="tc-in tc-in--h26-w220" action="/app/contacts/nextcloud/kontakty" method="get"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" class="tc-ico--mr6"><use href="#i-search"/></svg><input class="tc-q" type="search" name="filter" placeholder="Filter" aria-label="Filter"></form>
   <a class="tc-usermenu" href="/app/settings/account">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></a>
   <div class="tc-railsec">
+    <div class="tc-tickrow is-all"><button class="tc-tickrow__tick is-part" type="submit" form="post-sources" name="src" value="all" aria-label="Combined calendar" aria-pressed="mixed"></button><span class="tc-mark is-multi"></span><span class="tc-tickrow__label">Combined calendar</span><span class="tc-tickrow__meta">7</span></div>
     <div class="tc-tickrow"><button class="tc-tickrow__tick" type="submit" form="post-sources" name="src" value="nextcloud/lichnyj" aria-label="Личный" aria-pressed="true"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Личный</span><span class="tc-tickrow__meta">128</span></div>
   </div>
   <table class="tc-table"><tbody><tr><td><input class="tc-tickrow__tick" type="checkbox" name="pick" value="a.pdf" aria-label="Pick" checked></td><td>смета.pdf</td></tr><tr><td><input class="tc-tickrow__tick is-off" type="checkbox" name="pick" value="b.pdf" aria-label="Pick"></td><td>договор.pdf</td></tr></tbody></table>
@@ -2943,11 +2944,11 @@ label.tc-field__swatch{position:relative;cursor:pointer}
       <div class="tc-auth__links"><a class="tc-auth__link" href="/forgot">Forgotten your password?</a><a class="tc-auth__link" href="/register">Create an account</a></div>
     </div>
   </div>
-  <form class="tc-post" id="post-sources" action="/app/sources" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
+  <form class="tc-post" id="post-sources" action="/app/sources" method="post" data-tc-target="rail"><input type="hidden" name="csrf" value="7f3a91de"></form>
   <form class="tc-post" id="post-done" action="/app/tasks/done" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
   </div>
 </div>
-<figcaption><b>Всё, что нажимают, куда-то ведёт или что-то отправляет</b> (задача сервера 39). Поиск и фильтр — формы GET с именем строки запроса. Кнопка учётной записи без сценария — ссылка на учётную запись (со сценарием открывает меню). Галка источника рейла и галка задачи отправляют сразу — кнопками формы POST по имени; галки строк таблицы — флажки формы группового действия. Слова цветом ссылки — ссылка. «Sign in» стоит под полями, вне формы, и отправляет её по имени; Enter в поле делает то же. Ссылки под кнопкой входа ведут на свои адреса. Заголовок меню — строка, не кнопка.</figcaption>
+<figcaption><b>Всё, что нажимают, куда-то ведёт или что-то отправляет</b> (задача сервера 39). Поиск и фильтр — формы GET с именем строки запроса. Кнопка учётной записи без сценария — ссылка на учётную запись (со сценарием открывает меню). Галка источника рейла и галка задачи отправляют сразу — кнопками формы POST по имени. Галка группы («Combined calendar», корень источника) — такая же кнопка: отправляет «все» или «ни одного», галки под ней ставит ответ сервера (владелец 07.11). С живым слоем форма рейла спрашивает зону рейла: ответ ставит на место рейл и список, страница не грузится; галки строк таблицы — флажки формы группового действия. Слова цветом ссылки — ссылка. «Sign in» стоит под полями, вне формы, и отправляет её по имени; Enter в поле делает то же. Ссылки под кнопкой входа ведут на свои адреса. Заголовок меню — строка, не кнопка.</figcaption>
 </figure>
 
 
