@@ -14,6 +14,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/chromedp/cdproto/input"
 	"github.com/chromedp/cdproto/runtime"
 	"github.com/chromedp/chromedp"
 	"github.com/chromedp/chromedp/kb"
@@ -2117,6 +2118,97 @@ func TestRailTickZones(t *testing.T) {
 		if got != c.want {
 			t.Errorf("%s: %s; want %s", c.name, got, c.want)
 		}
+	}
+}
+
+// TestListOneStop (the owner, 07.11): a list is one stop of Tab — Tab
+// comes to one row and goes past the list; the arrows walk the rows, and
+// the list remembers the row they left; Space on a row presses its tick,
+// which is no stop of its own. The bite: without the library's script every
+// tick and row is a stop.
+func TestListOneStop(t *testing.T) {
+	needChrome(t)
+	row := func(id string) string {
+		return `<div class="tc-row"><button class="tc-tick" type="button" aria-label="Done" aria-pressed="false"></button><a class="tc-row__title" href="#` + id + `">` + id + `</a></div>`
+	}
+	body := `<div class="tc-root"><button id="before" type="button">before</button><div class="tc-list">` + row("a") + row("b") + row("c") + `</div><button id="after" type="button">after</button></div>`
+	const at = `(() => { const e = document.activeElement; return e.id || e.textContent || e.getAttribute("aria-label"); })()`
+	const spy = `(() => { window.__pressed = []; document.querySelectorAll(".tc-tick").forEach((b, i) => b.addEventListener("click", () => window.__pressed.push(i))); document.getElementById("before").focus(); return true; })()`
+	shiftTab := chromedp.KeyEvent(kb.Tab, chromedp.KeyModifiers(input.ModifierShift))
+	h := browser.NewHarness(t)
+	run := func(url string) string {
+		var a, b, c, d, e, pressed string
+		if err := h.Run(url, 900, 600,
+			chromedp.Evaluate(spy, nil),
+			chromedp.KeyEvent(kb.Tab),
+			chromedp.Evaluate(at, &a),
+			chromedp.KeyEvent(kb.Tab),
+			chromedp.Evaluate(at, &b),
+			shiftTab,
+			chromedp.KeyEvent(kb.ArrowDown),
+			chromedp.Evaluate(at, &c),
+			chromedp.KeyEvent(kb.Tab),
+			shiftTab,
+			chromedp.Evaluate(at, &d),
+			chromedp.KeyEvent(" "),
+			chromedp.Evaluate(at, &e),
+			chromedp.Evaluate(`window.__pressed.join(" ")`, &pressed),
+		); err != nil {
+			t.Fatal(err)
+		}
+		return strings.Join([]string{a, b, c, d, e, pressed}, " | ")
+	}
+	doc := browser.PageHTML(body, "")
+	with := run(h.RegisterPage("one-stop", doc))
+	bare := run(h.RegisterPage("one-stop-bare", strings.Replace(doc, `<script src="/tc.js"></script>`, "", 1)))
+	if want := "a | after | b | b | b | 1"; with != want {
+		t.Errorf("with the script: %s; want %s", with, want)
+	}
+	if want := "Done | a | Done | Done | Done | 0"; bare != want {
+		t.Errorf("without the script: %s; want %s", bare, want)
+	}
+}
+
+// TestEnterKey (the keys sheet: «Enter — open the chosen record full»): a
+// panel's button that carries the key Enter is pressed by Enter while the
+// focus is on nothing that presses; Enter on a row opens the row, and in a
+// field it is the field's. The bite: without the library's script Enter on
+// the page does nothing.
+func TestEnterKey(t *testing.T) {
+	needChrome(t)
+	row := func(s string) w.ListRow {
+		return w.ExcerptRow{Title: []w.Inline{w.Text(s)}, Href: "#" + s}
+	}
+	body := `<div class="tc-root">` + w.List{Rows: []w.ListRow{row("One"), row("Two")}}.Render() +
+		`<form action="/x" method="get" onsubmit="return false">` + w.Input{Name: "t", Label: "Text"}.Render() + `</form>` +
+		w.Button{Label: "Open full", Href: "#full", Key: "Enter"}.Render() + `</div>`
+	const where = `location.hash`
+	h := browser.NewHarness(t)
+	doc := browser.PageHTML(body, "")
+	run := func(url string) string {
+		var onPage, onRow, inField string
+		if err := h.Run(url, 900, 600,
+			chromedp.Evaluate(`document.activeElement.blur(); true`, nil),
+			chromedp.KeyEvent(""),
+			chromedp.Evaluate(where, &onPage),
+			chromedp.Evaluate(`history.replaceState(null, "", location.pathname); document.querySelector(".tc-row").focus(); true`, nil),
+			chromedp.KeyEvent(""),
+			chromedp.Evaluate(where, &onRow),
+			chromedp.Evaluate(`history.replaceState(null, "", location.pathname); document.querySelector("input[name=t]").focus(); true`, nil),
+			chromedp.KeyEvent(""),
+			chromedp.Evaluate(where, &inField),
+		); err != nil {
+			t.Fatal(err)
+		}
+		return onPage + " | " + onRow + " | " + inField
+	}
+	with := run(h.RegisterPage("enter-key", doc))
+	bare := run(h.RegisterPage("enter-key-bare", strings.Replace(doc, `<script src="/tc.js"></script>`, "", 1)))
+	if want := "#full | #One | "; with != want {
+		t.Errorf("with the script: %q; want %q", with, want)
+	}
+	if want := " | #One | "; bare != want {
+		t.Errorf("without the script: %q; want %q", bare, want)
 	}
 }
 

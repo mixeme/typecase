@@ -244,7 +244,7 @@ var _ = add(
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}, w.Text(" "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Личный")}}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Личный")}}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-25", "tc-fields", 1),
@@ -307,14 +307,14 @@ var _ = add(
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-1", "tc-fields", 1),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "When", Value: []w.ValuePart{w.Mono{Text: "10:00 – 11:00"}, w.Text(", Monday, 10 August "), w.Badge{Label: "created 12:00 Asia/Yekaterinburg", Title: "Created in another time zone"}}},
 		{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+		{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 		{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 		{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}}}}, "s-agenda-2", "tc-fields", 1),

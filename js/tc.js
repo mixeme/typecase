@@ -1500,8 +1500,59 @@
 		return row.tagName === "A" ? row : row.querySelector("a.tc-row__title");
 	}
 
+	// A list is one stop of Tab (the owner, 07.11): of its rows only one takes
+	// the focus by Tab — the one that had it last, or the open one, or the
+	// first — and the next Tab goes past the list; the rows' ticks are not
+	// stops of their own: Space on a row presses its tick. Without the script
+	// every row and tick is a stop, the browser's order.
+	var tickSel = ".tc-tick, .tc-tickrow__tick";
+
+	function rove(list, current) {
+		var links = Array.prototype.map.call(list.querySelectorAll(":scope > .tc-row"), rowLink).filter(Boolean);
+		if (!links.length) return;
+		if (links.indexOf(current) < 0) {
+			current = links.filter(function (a) {
+				return a.tabIndex === 0 && a.hasAttribute("data-tc-stop");
+			})[0];
+		}
+		if (!current) {
+			current = links.filter(function (a) {
+				return closest(a, ".tc-row").classList.contains("is-on");
+			})[0] || links[0];
+		}
+		links.forEach(function (a) {
+			a.tabIndex = a === current ? 0 : -1;
+			a.setAttribute("data-tc-stop", "");
+			closest(a, ".tc-row").querySelectorAll(tickSel).forEach(function (b) {
+				b.tabIndex = -1;
+			});
+		});
+	}
+
+	function initStops(root) {
+		var lists = Array.prototype.slice.call(root.querySelectorAll(".tc-list"));
+		if (root.matches && root.matches(".tc-list")) lists.push(root);
+		lists.forEach(function (l) {
+			rove(l, null);
+		});
+	}
+
+	document.addEventListener("focusin", function (e) {
+		var row = closest(e.target, ".tc-list > .tc-row");
+		var a = row && rowLink(row);
+		if (a) rove(row.parentElement, a);
+	});
+
 	function onListKey(e) {
 		if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return false;
+		if (e.key === " ") {
+			var at = closest(e.target, ".tc-list > .tc-row");
+			var tick = at && e.target === rowLink(at) && at.querySelector(tickSel);
+			if (!tick) return false;
+			e.preventDefault();
+			tick.click();
+			return true;
+		}
 		if (["ArrowDown", "ArrowUp", "Home", "End"].indexOf(e.key) < 0) return false;
 		var row = closest(e.target, ".tc-list .tc-row");
 		if (!row || closest(e.target, 'input:not([type="checkbox"]), textarea, select')) return false;
@@ -1643,6 +1694,7 @@
 		initTally(root);
 		initFollows(root);
 		initChanged(root);
+		initStops(root);
 		layoutUpdates();
 	}
 

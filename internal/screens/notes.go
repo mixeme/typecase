@@ -3306,7 +3306,7 @@ func Notes10() Screen {
 												{Value: "30.minutes.before", Label: "30 minutes before"},
 												{Value: "1.hour.before", Label: "1 hour before"},
 												{Value: "1.day.before", Label: "1 day before"},
-												{Value: "custom", Label: "Custom…", Shows: "remind.count remind.unit"},
+												{Value: "custom", Label: "Custom…", Shows: "remind.count remind.unit remind.at"},
 												{Value: "none", Label: "No reminder", On: true},
 											},
 											Label: "Remind",
@@ -3336,6 +3336,248 @@ func Notes10() Screen {
 										},
 									},
 									Width: w.FieldSM,
+								},
+								w.Field{
+									Hidden: true,
+									Label:  "At",
+									Parts:  []w.FieldPart{w.Input{Kind: w.InputTime, Name: "remind.at", Value: "09:00", Label: "At", Mono: true}},
+									Width:  w.FieldXS,
+								},
+							},
+						},
+						w.Dim{
+							Parts: []w.Inline{
+								w.Text("No time means the whole day. A task with no due date is a task all the same — both may stay empty."),
+							},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Save task", Kind: w.ButtonPrimary, Submit: true},
+						w.Kbd{Keys: "Enter"},
+						w.Button{Label: "Open the card", Icon: "expand", To: "/app/tasks/nextcloud/dela/quick?op=open", Submit: true},
+						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+					},
+				},
+				Pad: w.ScrimPad26,
+			},
+		},
+	}
+}
+
+// Notes35 is frame «Пункт «Task» · своё напоминание» (s-notes-35).
+func Notes35() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+						},
+						On: 4,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.TickRow{
+								Ticked:  w.TickedPart,
+								Kind:    w.TickRowAll,
+								Mark:    w.Mark{Kind: w.MarkMulti},
+								Label:   "Combined notebook",
+								Meta:    "6",
+								Current: true,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "nextcloud"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
+							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Label:  "Общие с семьёй",
+								Meta:   "—",
+								Hidden: true,
+								Trail:  w.Badge{Label: "ro"},
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{Text: "Tags"}},
+						Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "встречи"}, w.Tag{Label: "книги"}, w.Tag{Label: "релиз"}},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}}},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
+						w.List{
+							Rows: []w.ListRow{
+								w.ExcerptRow{
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Title:      []w.Inline{w.Text("Заметка со встречи 10.08")},
+									Strong:     true,
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Excerpt:    "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+									Date:       "10 Aug",
+									Source:     "nextcloud · Записи",
+									On:         true,
+								},
+								w.ExcerptRow{
+									Mark:       w.Mark{Colour: "#4A6B52"},
+									Title:      []w.Inline{w.Text("Что почитать про CRDT")},
+									TitleBadge: &w.Badge{Label: "linked ×2", Tone: w.BadgeLinked},
+									Excerpt:    "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+									Date:       "8 Aug",
+									Source:     "2 sources",
+									SourceHint: "nextcloud · Записи, nextcloud · Дневник",
+								},
+								w.ExcerptRow{
+									Mark:    w.Mark{Colour: "#6B4E7A"},
+									Title:   []w.Inline{w.Text("Про дорогу до дачи")},
+									Excerpt: "Съезд после заправки, потом грунтовка два километра…",
+									Date:    "3 Aug",
+									Source:  "nextcloud · Дневник",
+								},
+							},
+						},
+						w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.List{
+							Rows: []w.ListRow{
+								w.ExcerptRow{
+									Mark:    w.Mark{Colour: "#4A6B52"},
+									Title:   []w.Inline{w.Text("Про сроки по сборнику")},
+									Excerpt: "Анна просит две недели на вёрстку после сдачи текста.",
+									Date:    "21 Jul",
+									Source:  "nextcloud · Записи",
+								},
+							},
+						},
+					},
+				},
+				Height: w.ShellHeight340,
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					Action: "/app/tasks/nextcloud/dela/quick",
+					Icon:   "task",
+					Title:  "New task",
+					Head: []w.SheetHeadPart{
+						w.Drop{
+							Trigger: w.Pick{Value: "nextcloud · Дела", Mark: &w.Mark{Colour: "#4A6B52"}, Variant: w.PickT12W200},
+							Menu: w.Menu{
+								Items: []w.MenuPart{
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#4A6B52"},
+										Trail: w.Mono{Text: "last used", Variant: w.Mono10Dusty, Place: w.Pushed},
+										Label: "nextcloud · Дела",
+										On:    true,
+										Name:  "into",
+										Value: "nextcloud/dela",
+									},
+									w.MenuItem{
+										Mark:  &w.Mark{Colour: "#3F6E8C"},
+										Label: "nextcloud · Работа",
+										Name:  "into",
+										Value: "nextcloud/rabota",
+									},
+								},
+								Width: w.MenuWidth290,
+								Pop:   w.MenuUnderEnd,
+							},
+							Place: w.Pushed,
+						},
+						w.Close{Label: "Close"},
+					},
+					Body: []w.SheetPart{
+						w.SheetFields{
+							Items: []w.Field{
+								w.Field{
+									Label: "Summary",
+									Parts: []w.FieldPart{w.Input{Name: "summary", Value: "Отправить документы в МФЦ", Label: "Summary"}},
+									Place: w.Grown,
+								},
+								w.Field{
+									Label: "Due date",
+									Parts: []w.FieldPart{w.Input{Kind: w.InputDate, Name: "due.date", Value: "2026-08-07", Label: "Due date", Mono: true}},
+									Width: w.FieldFix130,
+								},
+								w.Field{
+									Label: "Due time",
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "due.time", Placeholder: "--:--", Label: "Due time", Mono: true}},
+									Width: w.FieldFix96,
+								},
+								w.Field{
+									Label: "Remind",
+									Parts: []w.FieldPart{
+										w.Pick{
+											Name: "remind",
+											Options: []w.PickOption{
+												{Value: "at.the.time", Label: "At the time"},
+												{Value: "5.minutes.before", Label: "5 minutes before"},
+												{Value: "10.minutes.before", Label: "10 minutes before"},
+												{Value: "30.minutes.before", Label: "30 minutes before"},
+												{Value: "1.hour.before", Label: "1 hour before"},
+												{Value: "1.day.before", Label: "1 day before"},
+												{Value: "custom", Label: "Custom…", On: true, Shows: "remind.count remind.unit remind.at"},
+												{Value: "none", Label: "No reminder"},
+											},
+											Label: "Remind",
+										},
+									},
+									Width: w.FieldFill200,
+								},
+								w.Field{
+									Label: "How long",
+									Parts: []w.FieldPart{w.Input{Name: "remind.count", Value: "1", Label: "How long", Mono: true, Numeric: true}},
+									Width: w.FieldXS,
+								},
+								w.Field{
+									Label: "Unit",
+									Parts: []w.FieldPart{
+										w.Pick{
+											Name: "remind.unit",
+											Options: []w.PickOption{
+												{Value: "minutes", Label: "minutes before"},
+												{Value: "hours", Label: "hours before"},
+												{Value: "days", Label: "days before", On: true},
+												{Value: "weeks", Label: "weeks before"},
+											},
+											Label: "Unit",
+										},
+									},
+									Width: w.FieldSM,
+								},
+								w.Field{
+									Label: "At",
+									Parts: []w.FieldPart{w.Input{Kind: w.InputTime, Name: "remind.at", Value: "09:00", Label: "At", Mono: true}},
+									Width: w.FieldXS,
 								},
 							},
 						},

@@ -47,6 +47,7 @@ var Routes = []Route{
 	{Frame: "s-notes-8", Caption: "Пункт «Contact» — лист поверх экрана", Screen: Notes8},
 	{Frame: "s-notes-9", Caption: "Пункт «Event»", Screen: Notes9},
 	{Frame: "s-notes-10", Caption: "Пункт «Task»", Screen: Notes10},
+	{Frame: "s-notes-35", Caption: "Пункт «Task» · своё напоминание", Screen: Notes35},
 	{Frame: "s-notes-11", Caption: "Пункт «Upload file» — куда именно", Screen: Notes11},
 	{Frame: "s-files-1", Caption: "Файлы · обзор папки, свойства выбранного", Screen: Files1},
 	{Frame: "s-files-2", Caption: "Файлы · выделено несколько, идёт загрузка", Screen: Files2},

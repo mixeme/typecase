@@ -2453,7 +2453,7 @@ func Publish19() Screen {
 									},
 								},
 								{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 								{
 									Term:  "Where",
 									Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},

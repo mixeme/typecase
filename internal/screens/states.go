@@ -1128,11 +1128,27 @@ func States17() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{
 												Name:    "reminder",
-												Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+												Options: []w.PickOption{{Value: "custom", Label: "Custom…", On: true}},
 												Label:   "Reminder",
 											},
 										},
 										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "How long",
+										Parts: []w.FieldPart{w.Input{Name: "reminder.count", Value: "2", Label: "How long", Mono: true, Numeric: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Unit",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "reminder.unit",
+												Options: []w.PickOption{{Value: "days", Label: "days before", On: true}},
+												Label:   "Unit",
+											},
+										},
+										Width: w.FieldSM,
 									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},
@@ -1543,11 +1559,27 @@ func States36() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{
 												Name:    "reminder",
-												Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+												Options: []w.PickOption{{Value: "custom", Label: "Custom…", On: true}},
 												Label:   "Reminder",
 											},
 										},
 										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "How long",
+										Parts: []w.FieldPart{w.Input{Name: "reminder.count", Value: "2", Label: "How long", Mono: true, Numeric: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Unit",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "reminder.unit",
+												Options: []w.PickOption{{Value: "days", Label: "days before", On: true}},
+												Label:   "Unit",
+											},
+										},
+										Width: w.FieldSM,
 									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},

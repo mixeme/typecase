@@ -344,7 +344,7 @@ func Agenda1() Screen {
 								},
 							},
 							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 							{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}},
 							{Term: "Status", Value: []w.ValuePart{w.Text("Confirmed")}},
 							{Term: "Tags", Value: []w.ValuePart{w.Tag{Label: "релиз"}, w.Text(" "), w.Tag{Label: "работа"}}},
@@ -670,11 +670,27 @@ func Agenda27() Screen {
 											Parts: []w.FieldPart{
 												w.Pick{
 													Name:    "reminder",
-													Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+													Options: []w.PickOption{{Value: "custom", Label: "Custom…", On: true}},
 													Label:   "Reminder",
 												},
 											},
 											Width: w.FieldMD,
+										},
+										w.Field{
+											Label: "How long",
+											Parts: []w.FieldPart{w.Input{Name: "reminder.count", Value: "2", Label: "How long", Mono: true, Numeric: true}},
+											Width: w.FieldXS,
+										},
+										w.Field{
+											Label: "Unit",
+											Parts: []w.FieldPart{
+												w.Pick{
+													Name:    "reminder.unit",
+													Options: []w.PickOption{{Value: "days", Label: "days before", On: true}},
+													Label:   "Unit",
+												},
+											},
+											Width: w.FieldSM,
 										},
 										w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 									},
@@ -1037,7 +1053,7 @@ func Agenda28() Screen {
 									Term:  "Repeats",
 									Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 18 January 2027"}},
 								},
-								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+								{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 								{
 									Term:  "Where",
 									Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
@@ -1772,7 +1788,7 @@ func Agenda2() Screen {
 								},
 							},
 							{Term: "Repeats", Value: []w.ValuePart{w.Text("Weekly on Mon "), w.Badge{Label: "until 28 December"}}},
-							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 1 day before")}},
+							{Term: "Reminders", Value: []w.ValuePart{w.Text("10 minutes before · 2 days before")}},
 							{
 								Term:  "Where",
 								Value: []w.ValuePart{w.Text("Переговорная 2 "), w.Badge{Label: "linked", Tone: w.BadgeLinked}},
@@ -2126,11 +2142,27 @@ func Agenda3() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{
 												Name:    "reminder",
-												Options: []w.PickOption{{Value: "1.day.before", Label: "1 day before", On: true}},
+												Options: []w.PickOption{{Value: "custom", Label: "Custom…", On: true}},
 												Label:   "Reminder",
 											},
 										},
 										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "How long",
+										Parts: []w.FieldPart{w.Input{Name: "reminder.count", Value: "2", Label: "How long", Mono: true, Numeric: true}},
+										Width: w.FieldXS,
+									},
+									w.Field{
+										Label: "Unit",
+										Parts: []w.FieldPart{
+											w.Pick{
+												Name:    "reminder.unit",
+												Options: []w.PickOption{{Value: "days", Label: "days before", On: true}},
+												Label:   "Unit",
+											},
+										},
+										Width: w.FieldSM,
 									},
 									w.Field{Label: "\u00a0", Parts: []w.FieldPart{w.Button{Label: "Add reminder"}}},
 								},

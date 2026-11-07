@@ -126,6 +126,12 @@ do, not what the authors did.
 
 ### Added
 
+- **A list is one stop of Tab** (the owner, 07.11). Of a list's rows only
+  one takes the focus by Tab — the one that had it last, the open one, or the
+  first — and the next Tab goes past the list; the rows' ticks are no stops
+  of their own: Space on a row presses its tick. The arrows, Home and End walk
+  the rows as before. Without the script every row and tick is a stop
+  (`TestListOneStop`). Nothing to change in the markup.
 - **The rail's group tick sends, and its answer sets the ticks under it**
   (the owner, 07.11). A `TickRow` of every source (`TickRowAll`, a root) with
   `Send.Form` is a button of the rail's form, as a source's tick is: it sends
@@ -1041,6 +1047,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A reminder of one's own on the card and in the quick sheet** (Carrel's
+  task 156, the owner's answer of 07.11). «Синк-ап по релизу» reminds 10
+  minutes and 2 days before, as `s-agenda-19` draws its form: the cards read
+  «10 minutes before · 2 days before» (`s-agenda-1`, `-2`, `-25`, `-28`,
+  `s-publish-19`), the edit forms hold the second reminder as «Custom…» with
+  How long 2 and Unit «days before» (`s-agenda-3`, `-27`, `states-17`, `-36`).
+  The task's quick sheet has the hour too, hidden until «Custom…»: a due date
+  without a time is the whole day (`s-notes-10`); the new `s-notes-35` draws
+  it chosen — 7 August, «Custom…», 1 day before, At 09:00. 574 frames.
 - **The group tick in «everything pressable»** (`components-43`, 07.11):
   «Combined calendar» stands above «Личный», its tick a button of the rail's
   form sending «all», half-ticked; the rail's form asks the rail's zone.
