@@ -787,11 +787,9 @@ func (g *gen) hintw(x *El) string {
 }
 
 func (g *gen) group(x *El) string {
-	form := ", Form: w.GroupColumnLoose"
+	form := ", Form: w.GroupColumn"
 	if x.Has("tc-line") {
 		form = ""
-	} else if x.Has("tc-stack--gap-2") {
-		form = ", Form: w.GroupColumn"
 	}
 	return "w.Group{Items: []w.FieldPart{" + g.each(x.Els(), g.fieldPart) + "}" + form + "}"
 }

@@ -581,15 +581,9 @@ func (g *gen) sec(e *El) string {
 	for _, k := range e.Els() {
 		switch {
 		case k.Has("tc-sec__list"):
-			gap := 0
-			for _, n := range []int{5, 6} {
-				if k.Has("tc-stack--gap-" + itoa(n)) {
-					gap = n
-				}
-			}
 			s := "w.SecList{Items: [][]w.SecItemPart{" + g.each(k.Els(), func(li *El) string { return g.tparts(li, "[]w.SecItemPart{") }) + "}"
-			if gap > 0 {
-				s += ", Gap: " + itoa(gap)
+			if v := g.en.of(k, "StackGap"); v != "" && v != "w.StackGap0" {
+				s += ", Gap: " + v
 			}
 			if k.Has("tc-sec__list--muted") {
 				s += ", Muted: true"

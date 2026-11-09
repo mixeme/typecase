@@ -436,7 +436,7 @@ func Io2() Screen {
 										w.Badge{Label: "in the event"},
 									},
 								},
-								Gap: 6,
+								Gap: w.StackGapTight,
 							},
 							w.Empty{
 								Lead: "Attach to this event",

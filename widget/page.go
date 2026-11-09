@@ -82,7 +82,7 @@ type Stage struct {
 }
 
 func (g Stage) html(mix) string {
-	return `<div class="tc-stack tc-stack--gap-14 tc-main__stage">` + g.Thumb.html(nil) + `<div class="tc-stack__item"><div class="tc-head__title tc-head__title--t18">` + esc(g.Title) +
+	return `<div class="tc-stack tc-stack--wide tc-main__stage">` + g.Thumb.html(nil) + `<div class="tc-stack__item"><div class="tc-head__title tc-head__title--t18">` + esc(g.Title) +
 		`</div><div class="tc-head__sub tc-head__sub--jc-center">` + g.Meta.html(nil) + `</div></div>` + g.Download.html(nil) +
 		`<div class="tc-main__stage-note">` + esc(g.Note) + `</div></div>`
 }

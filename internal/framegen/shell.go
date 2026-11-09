@@ -1714,11 +1714,11 @@ func (g *gen) windowPart(x *El) string {
 	case x.Has("tc-line"):
 		return g.line(x)
 	case x.Has("tc-stack"):
-		gap := "StackGap9"
-		if x.Has("tc-stack--gap-10") {
-			gap = "StackGap10"
+		gap := g.en.of(x, "StackGap")
+		if gap == "" || gap == "w.StackGap0" {
+			stop("stack without a gap")
 		}
-		return "w.Stack{Gap: w." + gap + ", Items: []w.StackPart{" + g.each(x.Els(), func(y *El) string {
+		return "w.Stack{Gap: " + gap + ", Items: []w.StackPart{" + g.each(x.Els(), func(y *El) string {
 			if y.Has("tc-card") {
 				return g.card(y)
 			}
@@ -1742,8 +1742,7 @@ func (g *gen) windowPart(x *El) string {
 }
 
 func (g *gen) window(x *El) string {
-	gap := firstOf(x, []kv{{"tc-stack--gap-9", "WindowGap9"}, {"tc-stack--gap-10", "WindowGap10"}, {"tc-stack--gap-12", "WindowGap12"},
-		{"tc-stack--gap-13", "WindowGap13"}, {"tc-stack--gap-14", "WindowGap14"}})
+	gap := firstOf(x, []kv{{"tc-stack--normal", "WindowGapNormal"}, {"tc-stack--wide", "WindowGapWide"}})
 	if gap == "" {
 		stop("window without a gap")
 	}

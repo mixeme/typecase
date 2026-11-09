@@ -107,9 +107,9 @@ type DocTasks struct {
 func (t DocTasks) html(mix) string {
 	var s strings.Builder
 	if t.Phone {
-		s.WriteString(`<div class="tc-doc__acts">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--gap-9 tc-doc__list">`)
+		s.WriteString(`<div class="tc-doc__acts">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--normal tc-doc__list">`)
 	} else {
-		s.WriteString(`<div class="tc-doc__sec">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
+		s.WriteString(`<div class="tc-doc__sec">` + DocHeading{Text: t.Title}.html(nil) + `<ul class="tc-stack tc-stack--normal tc-doc__list">`)
 	}
 	for _, it := range t.Items {
 		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil))
@@ -139,7 +139,7 @@ type DocFiles struct {
 
 func (f DocFiles) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-doc__sec--rule">` + f.Title.html(nil) + `<div class="tc-stack tc-stack--gap-5 tc-doc__files">`)
+	s.WriteString(`<div class="tc-doc__sec--rule">` + f.Title.html(nil) + `<div class="tc-stack tc-stack--tight tc-doc__files">`)
 	for _, it := range f.Items {
 		name := `<span class="tc-dim--accent">` + esc(it.Name) + `</span>`
 		if it.Href != "" {
@@ -204,7 +204,7 @@ type DocBullets struct {
 
 func (b DocBullets) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<ul class="tc-stack tc-stack--gap-6 tc-doc__bullets">`)
+	s.WriteString(`<ul class="tc-stack tc-stack--tight tc-doc__bullets">`)
 	for _, it := range b.Items {
 		s.WriteString(`<li>` + inlines(it) + `</li>`)
 	}
@@ -358,12 +358,12 @@ func (d Doc) html(m mix) string {
 	tag := "div"
 	if d.Action != "" {
 		tag = "form"
-		s.WriteString(`<form` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `"` + attr("enctype", pick(d.Multipart, "multipart/form-data")) + `>`)
+		s.WriteString(`<form` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--wide")) + attr("id", d.ID) + attr("action", d.Action) + ` method="` + method(d.Method) + `"` + attr("enctype", pick(d.Multipart, "multipart/form-data")) + `>`)
 		for _, h := range d.Fields {
 			s.WriteString(h.html(nil))
 		}
 	} else {
-		s.WriteString(`<div` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--gap-14")) + `>`)
+		s.WriteString(`<div` + class(m, "tc-doc", pick(d.Text, "tc-stack tc-stack--wide")) + `>`)
 	}
 	for _, it := range d.Items {
 		s.WriteString(it.html(nil))

@@ -1242,18 +1242,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-line--normal.tc-line--normal{gap:var(--tc-gap)}
 .tc-line--wide.tc-line--wide{gap:var(--tc-gap-wide)}
 .tc-line--fields.tc-line--fields{gap:var(--tc-gap-fields)}
-.tc-stack--gap-2.tc-stack--gap-2{gap:2px}
-.tc-stack--gap-3.tc-stack--gap-3{gap:3px}
-.tc-stack--gap-4.tc-stack--gap-4{gap:4px}
-.tc-stack--gap-5.tc-stack--gap-5{gap:5px}
-.tc-stack--gap-6.tc-stack--gap-6{gap:6px}
-.tc-stack--gap-7.tc-stack--gap-7{gap:7px}
-.tc-stack--gap-8.tc-stack--gap-8{gap:8px}
-.tc-stack--gap-9.tc-stack--gap-9{gap:9px}
-.tc-stack--gap-10.tc-stack--gap-10{gap:10px}
-.tc-stack--gap-12.tc-stack--gap-12{gap:12px}
-.tc-stack--gap-13.tc-stack--gap-13{gap:13px}
-.tc-stack--gap-14.tc-stack--gap-14{gap:14px}
+/* Зазор столбика — той же ступенью, что у строки: тесно — пункты списка и галки, обычно — задачи и побочные блоки, широко — карточки и разделы друг под другом (владелец, 09.11). */
+.tc-stack--tight.tc-stack--tight{gap:var(--tc-gap-tight)}
+.tc-stack--normal.tc-stack--normal{gap:var(--tc-gap)}
+.tc-stack--wide.tc-stack--wide{gap:var(--tc-gap-wide)}
 .tc-push.tc-push{margin-left:auto}
 .tc-pad.tc-pad{padding:0 var(--tc-page-gutter)}
 .tc-grow.tc-grow{flex:1 1 100%;width:100%;min-width:0}

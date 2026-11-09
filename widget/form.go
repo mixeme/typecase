@@ -100,9 +100,8 @@ func (z Zoom) html(mix) string {
 type GroupForm int
 
 const (
-	GroupRow         GroupForm = iota // side by side, 14 px apart
-	GroupColumn                       // one under another, 2 px apart
-	GroupColumnLoose                  // one under another, 5 px apart
+	GroupRow    GroupForm = iota // side by side, the wide step apart
+	GroupColumn                  // one under another, the tight step apart
 )
 
 // Group is several controls under one label.
@@ -115,8 +114,7 @@ func (g Group) html(mix) string {
 	var s strings.Builder
 	s.WriteString([...]string{
 		`<div class="tc-line tc-line--wide tc-card__top2">`,
-		`<div class="tc-stack tc-stack--gap-2 tc-card__top2">`,
-		`<div class="tc-stack tc-stack--gap-5 tc-card__top2">`}[g.Form])
+		`<div class="tc-stack tc-stack--tight tc-card__top2">`}[g.Form])
 	for _, it := range g.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -137,10 +135,10 @@ func (p Photo) html(mix) string {
 	var s strings.Builder
 	if p.Src != "" {
 		s.WriteString(`<div class="tc-field__photo-row"><span class="tc-avatar--photo"` + attr("id", p.ID) + `><img class="tc-avatar__img"` + attr("src", p.Src) +
-			` alt=""></span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
+			` alt=""></span><div class="tc-stack tc-stack--tight tc-field__photo-side">`)
 	} else {
 		s.WriteString(`<div class="tc-field__photo-row"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != "")) + attr("id", p.ID) + `>` +
-			esc(p.Initials) + `</span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side">`)
+			esc(p.Initials) + `</span><div class="tc-stack tc-stack--tight tc-field__photo-side">`)
 	}
 	for _, it := range p.Side {
 		s.WriteString(it.html(nil))
@@ -458,7 +456,7 @@ func (c FormColumn) html(mix) string {
 	if c.Wide {
 		w = "tc-form__col--460"
 	}
-	s.WriteString(`<div class="tc-stack tc-stack--gap-12 ` + w + `">`)
+	s.WriteString(`<div class="tc-stack tc-stack--wide ` + w + `">`)
 	for _, it := range c.Items {
 		s.WriteString(it.html(nil))
 	}

@@ -143,7 +143,7 @@ type SheetBlock struct {
 
 func (b SheetBlock) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-sheet__block">` + b.Title.html(nil) + `<div class="tc-stack tc-stack--gap-6 tc-line__text">`)
+	s.WriteString(`<div class="tc-sheet__block">` + b.Title.html(nil) + `<div class="tc-stack tc-stack--tight tc-line__text">`)
 	for _, it := range b.Items {
 		s.WriteString(`<span class="tc-stack__item"><b>` + esc(it.Name) + `</b> ` + it.Note.html(nil) + `</span>`)
 	}
@@ -158,7 +158,7 @@ type SheetChecks struct {
 
 func (c SheetChecks) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-5 tc-sheet__checks">`)
+	s.WriteString(`<div class="tc-stack tc-stack--tight tc-sheet__checks">`)
 	for _, it := range c.Items {
 		s.WriteString(it.html(nil))
 	}

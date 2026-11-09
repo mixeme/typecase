@@ -34,7 +34,7 @@ type DocRefs struct {
 
 func (r DocRefs) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-5 tc-line__text">`)
+	s.WriteString(`<div class="tc-stack tc-stack--tight tc-line__text">`)
 	for _, it := range r.Items {
 		s.WriteString(`<span class="tc-stack__item">`)
 		if it.Mark != nil {

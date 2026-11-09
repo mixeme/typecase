@@ -14,6 +14,14 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A column's gap is a step too** (the owner, 09.11). `StackGap` is
+  `StackGap0` (none), `StackGapTight`, `StackGapNormal`, `StackGapWide`:
+  `StackGap9` becomes `StackGapNormal`, `StackGap10` `StackGapWide`.
+  `WindowGap` keeps two steps: `WindowGap9` becomes `WindowGapNormal`,
+  `WindowGap10`…`WindowGap14` `WindowGapWide`. `GroupColumnLoose` is gone:
+  `GroupColumn` stands one under another the tight step apart. `SecList.Gap`
+  is a `StackGap`, not pixels (`5`, `6` → `StackGapTight`). The classes
+  `tc-stack--gap-N` become `tc-stack--tight`, `--normal`, `--wide`.
 - **A line's gap is a step, not a number** (the owner, 09.11). `LineGap3`,
   `LineGap4` become `LineGapTight`; `LineGap6`…`LineGap10` become
   `LineGapNormal`; `LineGap12` becomes `LineGapWide`; `LineGapFields` is
@@ -1056,6 +1064,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Column gaps in the same steps** (the owner, 09.11). Columns had twelve
+  gaps, 2 to 14 px; now tight 4 for the items of a list and checks (were
+  2–6), normal 8 for tasks and side blocks (7–9), wide 12 for cards and
+  sections one under another (10–14). 97 frames move by 1–4 px.
 - **Line gaps in four steps** (the owner, 09.11: steps, not every pixel).
   Lines had eleven gaps, 3 to 22 px, the same buttons standing 5, 6, 7, 8
   or 9 px apart. Now: tight 4 for marks and tags (were 3, 4), normal 8 for

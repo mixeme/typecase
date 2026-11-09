@@ -1555,7 +1555,7 @@ func Mail4() Screen {
 										[]w.SecItemPart{w.Text("Revoking the link closes it for this recipient too")},
 										[]w.SecItemPart{w.Text("It expires on 8 September, as the link does")},
 									},
-									Gap:   5,
+									Gap:   w.StackGapTight,
 									Muted: true,
 								},
 							},

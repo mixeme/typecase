@@ -14,7 +14,7 @@ const (
 
 func (v PageVariant) class() string {
 	return [...]string{"", "tc-root--print", "tc-root--on-bg tc-root--pad18",
-		"tc-stack tc-stack--gap-14 tc-root--on-bg tc-root--pad18"}[v]
+		"tc-stack tc-stack--wide tc-root--on-bg tc-root--pad18"}[v]
 }
 
 // PagePart is what a page without a shell holds.
@@ -66,15 +66,12 @@ func (p Page) html(m mix) string {
 type WindowGap int
 
 const (
-	WindowGap9 WindowGap = iota
-	WindowGap10
-	WindowGap12
-	WindowGap13
-	WindowGap14
+	WindowGapNormal WindowGap = iota
+	WindowGapWide
 )
 
 func (g WindowGap) class() string {
-	return [...]string{"tc-stack--gap-9", "tc-stack--gap-10", "tc-stack--gap-12", "tc-stack--gap-13", "tc-stack--gap-14"}[g]
+	return [...]string{"tc-stack--normal", "tc-stack--wide"}[g]
 }
 
 // WindowPart is what a desktop window's inside holds.

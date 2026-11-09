@@ -263,7 +263,7 @@ func Desktop3() Screen {
 				Items: []w.WindowPart{
 					w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42},
 					w.Stack{
-						Gap: w.StackGap9,
+						Gap: w.StackGapNormal,
 						Items: []w.StackPart{
 							w.Card{
 								Items: []w.CardPart{
@@ -341,7 +341,7 @@ func Desktop3() Screen {
 						Block: true,
 					},
 				},
-				Gap: w.WindowGap13,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -412,7 +412,7 @@ func Desktop4() Screen {
 						Space: w.MsgFlush,
 					},
 				},
-				Gap: w.WindowGap12,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -426,7 +426,7 @@ func Desktop5() Screen {
 				Items: []w.WindowPart{
 					w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42},
 					w.Stack{
-						Gap: w.StackGap10,
+						Gap: w.StackGapWide,
 						Items: []w.StackPart{
 							w.Card{
 								Items: []w.CardPart{
@@ -465,7 +465,7 @@ func Desktop5() Screen {
 						Block: true,
 					},
 				},
-				Gap: w.WindowGap14,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -573,7 +573,7 @@ func Desktop6() Screen {
 						Block: true,
 					},
 				},
-				Gap: w.WindowGap13,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -619,7 +619,7 @@ func Desktop7() Screen {
 						Block: true,
 					},
 				},
-				Gap: w.WindowGap14,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -651,7 +651,7 @@ func Desktop9() Screen {
 						Size:  w.Dim11,
 					},
 				},
-				Gap:   w.WindowGap9,
+				Gap:   w.WindowGapNormal,
 				Small: true,
 			},
 		},
@@ -711,7 +711,7 @@ func Desktop10() Screen {
 						Size: w.Dim11,
 					},
 				},
-				Gap:   w.WindowGap9,
+				Gap:   w.WindowGapNormal,
 				Small: true,
 			},
 		},
@@ -792,7 +792,7 @@ func Desktop12() Screen {
 						Block: true,
 					},
 				},
-				Gap:   w.WindowGap10,
+				Gap:   w.WindowGapWide,
 				Small: true,
 			},
 		},
@@ -1000,7 +1000,7 @@ func Desktop14() Screen {
 						Space: w.MsgFlush,
 					},
 				},
-				Gap: w.WindowGap12,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}
@@ -1046,7 +1046,7 @@ func Desktop15() Screen {
 						Block: true,
 					},
 				},
-				Gap: w.WindowGap12,
+				Gap: w.WindowGapWide,
 			},
 		},
 	}

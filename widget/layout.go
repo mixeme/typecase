@@ -97,16 +97,19 @@ func (l Line) html(m mix) string {
 	return s.String()
 }
 
-// StackGap is the gap between the items of a column.
+// StackGap is the gap between the items of a column: the same steps as a
+// line's (the owner, 09.11).
 type StackGap int
 
 const (
-	StackGap9 StackGap = iota
-	StackGap10
+	StackGap0      StackGap = iota
+	StackGapTight           // the items of a list, checks
+	StackGapNormal          // tasks, side blocks
+	StackGapWide            // cards and sections one under another
 )
 
 func (g StackGap) class() string {
-	return [...]string{"tc-stack--gap-9", "tc-stack--gap-10"}[g]
+	return [...]string{"", "tc-stack--tight", "tc-stack--normal", "tc-stack--wide"}[g]
 }
 
 // StackPart is what a column holds.

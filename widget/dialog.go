@@ -114,7 +114,7 @@ func (p PhotoCrop) html(mix) string {
 		pic = `<img class="tc-dialog__photo-img"` + attr("src", p.Src) + ` alt="">`
 	}
 	s.WriteString(`<div class="tc-dialog__split"><div` + attr("data-tc-colour", p.Colour) + ` class="tc-dialog__photo">` + pic + `<div class="tc-dialog__photo-frame"></div>` +
-		`<div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--gap-10 tc-dialog__side">` +
+		`<div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--wide tc-dialog__side">` +
 		`<span class="tc-dim--muted tc-dim--t12-5">` + esc(p.Note) + `</span>`)
 	for _, f := range p.Fields {
 		s.WriteString(f.html(nil))

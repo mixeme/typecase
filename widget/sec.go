@@ -126,8 +126,8 @@ func (Break) secItemPart()  {}
 // SecList is a list in a section: related records, what the letter carries.
 type SecList struct {
 	Items [][]SecItemPart
-	Gap   int  // 5 or 6 px between the items; 0: no column
-	Muted bool // quieter: what a letter carries
+	Gap   StackGap // the step between the items; StackGap0: no column
+	Muted bool     // quieter: what a letter carries
 	// Columns sets the items in columns across the width: the attendees of
 	// an event (Carrel's task 77).
 	Columns bool
@@ -136,8 +136,8 @@ type SecList struct {
 func (l SecList) html(mix) string {
 	var s strings.Builder
 	col := ""
-	if l.Gap > 0 {
-		col = "tc-stack tc-stack--gap-" + itoa(l.Gap)
+	if l.Gap != StackGap0 {
+		col = "tc-stack " + l.Gap.class()
 	}
 	s.WriteString(`<ul` + class(nil, col, "tc-sec__list", pick(l.Muted, "tc-sec__list--muted"), pick(l.Columns, "tc-sec__list--cols")) + `>`)
 	for _, it := range l.Items {
@@ -186,7 +186,7 @@ type SecTasks struct {
 
 func (t SecTasks) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<ul class="tc-stack tc-stack--gap-7 tc-doc__list">`)
+	s.WriteString(`<ul class="tc-stack tc-stack--normal tc-doc__list">`)
 	for _, it := range t.Items {
 		s.WriteString(`<li class="tc-doc__task">` + it.Tick.html(nil))
 		if it.Tick.Done {
@@ -224,7 +224,7 @@ type SecFiles struct {
 
 func (f SecFiles) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-6 tc-card__top8">`)
+	s.WriteString(`<div class="tc-stack tc-stack--tight tc-card__top8">`)
 	for _, it := range f.Items {
 		s.WriteString(`<div class="tc-line tc-line--normal tc-line__text"><span class="tc-table__file tc-table__file--fill"><svg>` + it.Icon.use() +
 			`</svg><span class="tc-table__filename">` + esc(it.Name) + `</span></span>` + it.Size.html(nil) + it.Tag.html(nil))
@@ -267,7 +267,7 @@ type SecOpen struct {
 
 func (o SecOpen) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-7 tc-line__text">`)
+	s.WriteString(`<div class="tc-stack tc-stack--normal tc-line__text">`)
 	for _, it := range o.Items {
 		s.WriteString(it.html(nil))
 	}

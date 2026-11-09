@@ -146,7 +146,7 @@ var _ = add(
 	form("block", w.Line{Gap: w.LineGapNormal, Block: true, Items: []w.LinePart{w.Field{}, w.Field{}}}, "s-publish-2", "tc-line", 7),
 	form("block", w.Line{Block: true, Gap: w.LineGapNormal, Items: []w.LinePart{check(true, w.Text("On sign-in, if the last copy is older than")), w.Input{Value: "7", Mono: true, Variant: w.InputChip, Label: "Days"}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("days")}}}}, "s-backup-2", "tc-line", 2),
 	form("block", w.Line{Gap: w.LineGapNormal, Block: true, Items: []w.LinePart{btn, btn, w.Push{Face: faceOf(w.FaceAccent11_5), Items: []w.PushPart{w.Text("Add a second instance")}}}}, "desktop-7", "tc-line", 1),
-	form("default", w.Stack{Gap: w.StackGap9, Items: []w.StackPart{btn}}, "components-21", "tc-stack", 1),
+	form("default", w.Stack{Gap: w.StackGapNormal, Items: []w.StackPart{btn}}, "components-21", "tc-stack", 1),
 	form("default", w.Grow{}, "s-contacts-3", "tc-grow", 1),
 	form("default", w.Push{Items: []w.PushPart{btn}}, "components-22", "tc-push", 1),
 	form("default", w.Push{Items: []w.PushPart{w.Text("Default")}}, "s-dup-3", "tc-push", 1),

@@ -1423,18 +1423,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-line--normal.tc-line--normal{gap:var(--tc-gap)}
 .tc-line--wide.tc-line--wide{gap:var(--tc-gap-wide)}
 .tc-line--fields.tc-line--fields{gap:var(--tc-gap-fields)}
-.tc-stack--gap-2.tc-stack--gap-2{gap:2px}
-.tc-stack--gap-3.tc-stack--gap-3{gap:3px}
-.tc-stack--gap-4.tc-stack--gap-4{gap:4px}
-.tc-stack--gap-5.tc-stack--gap-5{gap:5px}
-.tc-stack--gap-6.tc-stack--gap-6{gap:6px}
-.tc-stack--gap-7.tc-stack--gap-7{gap:7px}
-.tc-stack--gap-8.tc-stack--gap-8{gap:8px}
-.tc-stack--gap-9.tc-stack--gap-9{gap:9px}
-.tc-stack--gap-10.tc-stack--gap-10{gap:10px}
-.tc-stack--gap-12.tc-stack--gap-12{gap:12px}
-.tc-stack--gap-13.tc-stack--gap-13{gap:13px}
-.tc-stack--gap-14.tc-stack--gap-14{gap:14px}
+/* Зазор столбика — той же ступенью, что у строки: тесно — пункты списка и галки, обычно — задачи и побочные блоки, широко — карточки и разделы друг под другом (владелец, 09.11). */
+.tc-stack--tight.tc-stack--tight{gap:var(--tc-gap-tight)}
+.tc-stack--normal.tc-stack--normal{gap:var(--tc-gap)}
+.tc-stack--wide.tc-stack--wide{gap:var(--tc-gap-wide)}
 .tc-push.tc-push{margin-left:auto}
 .tc-pad.tc-pad{padding:0 var(--tc-page-gutter)}
 .tc-grow.tc-grow{flex:1 1 100%;width:100%;min-width:0}
@@ -2459,46 +2451,46 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 
 <div class="demo col" style="gap:22px">
   <div class="specs specs--gap34">
-    <div class="tc-stack tc-stack--gap-8">
+    <div class="tc-stack tc-stack--normal">
       <svg class="tc-brand__logo tc-brand__logo--h60-w150" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
       <span class="sub" style="letter-spacing:.1em">вход, setup, приглашение · 118–150 px</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8">
+    <div class="tc-stack tc-stack--normal">
       <svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
       <span class="sub" style="letter-spacing:.1em">верхняя панель · 56 px</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8">
+    <div class="tc-stack tc-stack--normal">
       <svg class="tc-brand__logo specs__logo--38" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
       <span class="sub" style="letter-spacing:.1em">подвал печати · 38 px</span>
     </div>
   </div>
 
   <div class="specs specs--gap20">
-    <div class="tc-stack tc-stack--gap-8 specs__item">
+    <div class="tc-stack tc-stack--normal specs__item">
       <span class="specs__tile--72">
         <svg width="72" height="72" viewBox="0 0 96 96"><rect width="96" height="96" fill="#E8DFCB"/><path d="M18 42A30 30 0 0 1 78 42V48H18Z" fill="#4A6B52"/><path d="M42 48H54V54H51V75H66A3 3 0 0 1 69 78V81A3 3 0 0 1 66 84H30A3 3 0 0 1 27 81V78A3 3 0 0 1 30 75H45V54H42Z" fill="#17211C"/></svg>
       </span>
       <span class="sub" style="letter-spacing:.1em">PWA · 96</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8 specs__item">
+    <div class="tc-stack tc-stack--normal specs__item">
       <span data-tc-colour="#E8DFCB" class="specs__tile--32">
         <svg width="32" height="32" viewBox="0 0 32 32"><path d="M6 14A10 10 0 0 1 26 14V16H6Z" fill="#4A6B52"/><path d="M14 16H18V18H17V25H22A1 1 0 0 1 23 26V27A1 1 0 0 1 22 28H10A1 1 0 0 1 9 27V26A1 1 0 0 1 10 25H15V18H14Z" fill="#17211C"/></svg>
       </span>
       <span class="sub" style="letter-spacing:.1em">32</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8 specs__item">
+    <div class="tc-stack tc-stack--normal specs__item">
       <span data-tc-colour="#E8DFCB" class="specs__tile--16">
         <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 7A5 5 0 0 1 13 7V8H3Z" fill="#4A6B52"/><path d="M7 8H9V12H12V14H4V12H7Z" fill="#17211C"/></svg>
       </span>
       <span class="sub" style="letter-spacing:.1em">16 · вкладка</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8 specs__item">
+    <div class="tc-stack tc-stack--normal specs__item">
       <span data-tc-colour="#17211C" class="specs__tile--32-ink">
         <svg width="32" height="32" viewBox="0 0 32 32"><path d="M6 14A10 10 0 0 1 26 14V16H6Z" fill="#7FA085"/><path d="M14 16H18V18H17V25H22A1 1 0 0 1 23 26V27A1 1 0 0 1 22 28H10A1 1 0 0 1 9 27V26A1 1 0 0 1 10 25H15V18H14Z" fill="#E8DFCB"/></svg>
       </span>
       <span class="sub" style="letter-spacing:.1em">тёмная</span>
     </div>
-    <div class="tc-stack tc-stack--gap-8 specs__item specs__item--ml18">
+    <div class="tc-stack tc-stack--normal specs__item specs__item--ml18">
       <span data-tc-colour="#E8DFCB" class="specs__tile--32">
         <svg width="32" height="32" viewBox="0 0 96 96"><g fill="none" stroke="#17211C" stroke-width="4" stroke-linecap="round"><path d="M6 12C18 12 30 24 42 33"/><path d="M6 30C24 30 36 42 42 42"/><path d="M6 48H42"/><path d="M6 66C24 66 36 54 42 54"/><path d="M6 84C18 84 30 72 42 63"/></g><rect x="42" y="18" width="6" height="60" rx="1.5" fill="#17211C"/><rect x="48" y="36" width="48" height="24" fill="#4A6B52"/></svg>
       </span>
@@ -2918,7 +2910,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 <div class="frame" data-frame="components-21">
   <div class="frame-label"><span>Выбор столбцов</span><span class="frag">компонент</span><i>меню со списком колонок</i></div>
   <div class="tc-root tc-root--on-surface tc-root--top tc-root--wrap tc-root--pad18-20">
-  <div class="tc-stack tc-stack--gap-9">
+  <div class="tc-stack tc-stack--normal">
     <button class="tc-btn tc-btn--on-card" type="button"><svg viewBox="0 0 24 24"><use href="#i-cols"/></svg>Columns<span class="tc-mono tc-mono--dusty-t11">5</span></button>
   </div>
   <div class="tc-menu">
@@ -3284,13 +3276,13 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   <span class="tc-avatar is-photo"><img class="tc-avatar__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""></span>
   <span class="tc-avatar is-photo tc-avatar--sq44-t15-r4"><img class="tc-avatar__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""></span>
   <div class="tc-grid tc-grid--flush-fill-pad8"><div class="tc-tile"><div class="tc-thumb"><svg><use href="#i-img"/></svg><img class="tc-thumb__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 30'%3E%3Crect width='40' height='30' fill='%239FB4C7'/%3E%3Crect x='6' y='10' width='28' height='20' fill='%23C9B79C'/%3E%3Crect x='10' y='14' width='6' height='6' fill='%23556B7D'/%3E%3Crect x='24' y='14' width='6' height='6' fill='%23556B7D'/%3E%3C/svg%3E" alt="фасад.jpg"></div><span class="tc-tile__name">фасад.jpg</span><span class="tc-tile__meta">1.8 MB</span></div></div>
-  <div class="tc-field tc-field--fixauto"><span class="tc-field__label">Photo</span><div class="tc-field__photo-row"><span class="tc-avatar--photo"><img class="tc-avatar__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""></span><div class="tc-stack tc-stack--gap-6 tc-field__photo-side"><button class="tc-btn" type="button">Replace</button></div></div></div>
+  <div class="tc-field tc-field--fixauto"><span class="tc-field__label">Photo</span><div class="tc-field__photo-row"><span class="tc-avatar--photo"><img class="tc-avatar__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""></span><div class="tc-stack tc-stack--tight tc-field__photo-side"><button class="tc-btn" type="button">Replace</button></div></div></div>
   <div class="tc-card">
     <div class="tc-rubric">nextcloud · mix</div>
-    <div class="tc-card__split"><div data-tc-colour="#FFFDF7" class="tc-card__qr"><img class="tc-card__qr-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 23 23'%3E%3Crect x='-1' y='-1' width='23' height='23' fill='%23FFFDF7'/%3E%3Crect x='0' y='0' width='1' height='1'/%3E%3Crect x='1' y='0' width='1' height='1'/%3E%3Crect x='2' y='0' width='1' height='1'/%3E%3Crect x='3' y='0' width='1' height='1'/%3E%3Crect x='4' y='0' width='1' height='1'/%3E%3Crect x='5' y='0' width='1' height='1'/%3E%3Crect x='6' y='0' width='1' height='1'/%3E%3Crect x='9' y='0' width='1' height='1'/%3E%3Crect x='12' y='0' width='1' height='1'/%3E%3Crect x='14' y='0' width='1' height='1'/%3E%3Crect x='15' y='0' width='1' height='1'/%3E%3Crect x='16' y='0' width='1' height='1'/%3E%3Crect x='17' y='0' width='1' height='1'/%3E%3Crect x='18' y='0' width='1' height='1'/%3E%3Crect x='19' y='0' width='1' height='1'/%3E%3Crect x='20' y='0' width='1' height='1'/%3E%3Crect x='0' y='1' width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3Crect x='2' y='1' width='1' height='1'/%3E%3Crect x='3' y='1' width='1' height='1'/%3E%3Crect x='4' y='1' width='1' height='1'/%3E%3Crect x='5' y='1' width='1' height='1'/%3E%3Crect x='6' y='1' width='1' height='1'/%3E%3Crect x='7' y='1' width='1' height='1'/%3E%3Crect x='10' y='1' width='1' height='1'/%3E%3Crect x='13' y='1' width='1' height='1'/%3E%3Crect x='14' y='1' width='1' height='1'/%3E%3Crect x='15' y='1' width='1' height='1'/%3E%3Crect x='16' y='1' width='1' height='1'/%3E%3Crect x='17' y='1' width='1' height='1'/%3E%3Crect x='18' y='1' width='1' height='1'/%3E%3Crect x='19' y='1' width='1' height='1'/%3E%3Crect x='20' y='1' width='1' height='1'/%3E%3Crect x='0' y='2' width='1' height='1'/%3E%3Crect x='1' y='2' width='1' height='1'/%3E%3Crect x='2' y='2' width='1' height='1'/%3E%3Crect x='3' y='2' width='1' height='1'/%3E%3Crect x='4' y='2' width='1' height='1'/%3E%3Crect x='5' y='2' width='1' height='1'/%3E%3Crect x='6' y='2' width='1' height='1'/%3E%3Crect x='14' y='2' width='1' height='1'/%3E%3Crect x='15' y='2' width='1' height='1'/%3E%3Crect x='16' y='2' width='1' height='1'/%3E%3Crect x='17' y='2' width='1' height='1'/%3E%3Crect x='18' y='2' width='1' height='1'/%3E%3Crect x='19' y='2' width='1' height='1'/%3E%3Crect x='20' y='2' width='1' height='1'/%3E%3Crect x='0' y='3' width='1' height='1'/%3E%3Crect x='1' y='3' width='1' height='1'/%3E%3Crect x='2' y='3' width='1' height='1'/%3E%3Crect x='3' y='3' width='1' height='1'/%3E%3Crect x='4' y='3' width='1' height='1'/%3E%3Crect x='5' y='3' width='1' height='1'/%3E%3Crect x='6' y='3' width='1' height='1'/%3E%3Crect x='9' y='3' width='1' height='1'/%3E%3Crect x='12' y='3' width='1' height='1'/%3E%3Crect x='14' y='3' width='1' height='1'/%3E%3Crect x='15' y='3' width='1' height='1'/%3E%3Crect x='16' y='3' width='1' height='1'/%3E%3Crect x='17' y='3' width='1' height='1'/%3E%3Crect x='18' y='3' width='1' height='1'/%3E%3Crect x='19' y='3' width='1' height='1'/%3E%3Crect x='20' y='3' width='1' height='1'/%3E%3Crect x='0' y='4' width='1' height='1'/%3E%3Crect x='1' y='4' width='1' height='1'/%3E%3Crect x='2' y='4' width='1' height='1'/%3E%3Crect x='3' y='4' width='1' height='1'/%3E%3Crect x='4' y='4' width='1' height='1'/%3E%3Crect x='5' y='4' width='1' height='1'/%3E%3Crect x='6' y='4' width='1' height='1'/%3E%3Crect x='7' y='4' width='1' height='1'/%3E%3Crect x='10' y='4' width='1' height='1'/%3E%3Crect x='13' y='4' width='1' height='1'/%3E%3Crect x='14' y='4' width='1' height='1'/%3E%3Crect x='15' y='4' width='1' height='1'/%3E%3Crect x='16' y='4' width='1' height='1'/%3E%3Crect x='17' y='4' width='1' height='1'/%3E%3Crect x='18' y='4' width='1' height='1'/%3E%3Crect x='19' y='4' width='1' height='1'/%3E%3Crect x='20' y='4' width='1' height='1'/%3E%3Crect x='0' y='5' width='1' height='1'/%3E%3Crect x='1' y='5' width='1' height='1'/%3E%3Crect x='2' y='5' width='1' height='1'/%3E%3Crect x='3' y='5' width='1' height='1'/%3E%3Crect x='4' y='5' width='1' height='1'/%3E%3Crect x='5' y='5' width='1' height='1'/%3E%3Crect x='6' y='5' width='1' height='1'/%3E%3Crect x='14' y='5' width='1' height='1'/%3E%3Crect x='15' y='5' width='1' height='1'/%3E%3Crect x='16' y='5' width='1' height='1'/%3E%3Crect x='17' y='5' width='1' height='1'/%3E%3Crect x='18' y='5' width='1' height='1'/%3E%3Crect x='19' y='5' width='1' height='1'/%3E%3Crect x='20' y='5' width='1' height='1'/%3E%3Crect x='0' y='6' width='1' height='1'/%3E%3Crect x='1' y='6' width='1' height='1'/%3E%3Crect x='2' y='6' width='1' height='1'/%3E%3Crect x='3' y='6' width='1' height='1'/%3E%3Crect x='4' y='6' width='1' height='1'/%3E%3Crect x='5' y='6' width='1' height='1'/%3E%3Crect x='6' y='6' width='1' height='1'/%3E%3Crect x='9' y='6' width='1' height='1'/%3E%3Crect x='12' y='6' width='1' height='1'/%3E%3Crect x='14' y='6' width='1' height='1'/%3E%3Crect x='15' y='6' width='1' height='1'/%3E%3Crect x='16' y='6' width='1' height='1'/%3E%3Crect x='17' y='6' width='1' height='1'/%3E%3Crect x='18' y='6' width='1' height='1'/%3E%3Crect x='19' y='6' width='1' height='1'/%3E%3Crect x='20' y='6' width='1' height='1'/%3E%3Crect x='1' y='7' width='1' height='1'/%3E%3Crect x='4' y='7' width='1' height='1'/%3E%3Crect x='7' y='7' width='1' height='1'/%3E%3Crect x='10' y='7' width='1' height='1'/%3E%3Crect x='13' y='7' width='1' height='1'/%3E%3Crect x='16' y='7' width='1' height='1'/%3E%3Crect x='19' y='7' width='1' height='1'/%3E%3Crect x='0' y='9' width='1' height='1'/%3E%3Crect x='3' y='9' width='1' height='1'/%3E%3Crect x='6' y='9' width='1' height='1'/%3E%3Crect x='9' y='9' width='1' height='1'/%3E%3Crect x='12' y='9' width='1' height='1'/%3E%3Crect x='15' y='9' width='1' height='1'/%3E%3Crect x='18' y='9' width='1' height='1'/%3E%3Crect x='1' y='10' width='1' height='1'/%3E%3Crect x='4' y='10' width='1' height='1'/%3E%3Crect x='7' y='10' width='1' height='1'/%3E%3Crect x='10' y='10' width='1' height='1'/%3E%3Crect x='13' y='10' width='1' height='1'/%3E%3Crect x='16' y='10' width='1' height='1'/%3E%3Crect x='19' y='10' width='1' height='1'/%3E%3Crect x='0' y='12' width='1' height='1'/%3E%3Crect x='3' y='12' width='1' height='1'/%3E%3Crect x='6' y='12' width='1' height='1'/%3E%3Crect x='9' y='12' width='1' height='1'/%3E%3Crect x='12' y='12' width='1' height='1'/%3E%3Crect x='15' y='12' width='1' height='1'/%3E%3Crect x='18' y='12' width='1' height='1'/%3E%3Crect x='1' y='13' width='1' height='1'/%3E%3Crect x='4' y='13' width='1' height='1'/%3E%3Crect x='7' y='13' width='1' height='1'/%3E%3Crect x='10' y='13' width='1' height='1'/%3E%3Crect x='13' y='13' width='1' height='1'/%3E%3Crect x='16' y='13' width='1' height='1'/%3E%3Crect x='19' y='13' width='1' height='1'/%3E%3Crect x='0' y='14' width='1' height='1'/%3E%3Crect x='1' y='14' width='1' height='1'/%3E%3Crect x='2' y='14' width='1' height='1'/%3E%3Crect x='3' y='14' width='1' height='1'/%3E%3Crect x='4' y='14' width='1' height='1'/%3E%3Crect x='5' y='14' width='1' height='1'/%3E%3Crect x='6' y='14' width='1' height='1'/%3E%3Crect x='0' y='15' width='1' height='1'/%3E%3Crect x='1' y='15' width='1' height='1'/%3E%3Crect x='2' y='15' width='1' height='1'/%3E%3Crect x='3' y='15' width='1' height='1'/%3E%3Crect x='4' y='15' width='1' height='1'/%3E%3Crect x='5' y='15' width='1' height='1'/%3E%3Crect x='6' y='15' width='1' height='1'/%3E%3Crect x='9' y='15' width='1' height='1'/%3E%3Crect x='12' y='15' width='1' height='1'/%3E%3Crect x='15' y='15' width='1' height='1'/%3E%3Crect x='18' y='15' width='1' height='1'/%3E%3Crect x='0' y='16' width='1' height='1'/%3E%3Crect x='1' y='16' width='1' height='1'/%3E%3Crect x='2' y='16' width='1' height='1'/%3E%3Crect x='3' y='16' width='1' height='1'/%3E%3Crect x='4' y='16' width='1' height='1'/%3E%3Crect x='5' y='16' width='1' height='1'/%3E%3Crect x='6' y='16' width='1' height='1'/%3E%3Crect x='7' y='16' width='1' height='1'/%3E%3Crect x='10' y='16' width='1' height='1'/%3E%3Crect x='13' y='16' width='1' height='1'/%3E%3Crect x='16' y='16' width='1' height='1'/%3E%3Crect x='19' y='16' width='1' height='1'/%3E%3Crect x='0' y='17' width='1' height='1'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='17' width='1' height='1'/%3E%3Crect x='4' y='17' width='1' height='1'/%3E%3Crect x='5' y='17' width='1' height='1'/%3E%3Crect x='6' y='17' width='1' height='1'/%3E%3Crect x='0' y='18' width='1' height='1'/%3E%3Crect x='1' y='18' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='18' width='1' height='1'/%3E%3Crect x='5' y='18' width='1' height='1'/%3E%3Crect x='6' y='18' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='12' y='18' width='1' height='1'/%3E%3Crect x='15' y='18' width='1' height='1'/%3E%3Crect x='18' y='18' width='1' height='1'/%3E%3Crect x='0' y='19' width='1' height='1'/%3E%3Crect x='1' y='19' width='1' height='1'/%3E%3Crect x='2' y='19' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='19' width='1' height='1'/%3E%3Crect x='6' y='19' width='1' height='1'/%3E%3Crect x='7' y='19' width='1' height='1'/%3E%3Crect x='10' y='19' width='1' height='1'/%3E%3Crect x='13' y='19' width='1' height='1'/%3E%3Crect x='16' y='19' width='1' height='1'/%3E%3Crect x='19' y='19' width='1' height='1'/%3E%3Crect x='0' y='20' width='1' height='1'/%3E%3Crect x='1' y='20' width='1' height='1'/%3E%3Crect x='2' y='20' width='1' height='1'/%3E%3Crect x='3' y='20' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3Crect x='6' y='20' width='1' height='1'/%3E%3C/svg%3E" width="104" height="104" alt="QR"></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side"><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span></div></div>
+    <div class="tc-card__split"><div data-tc-colour="#FFFDF7" class="tc-card__qr"><img class="tc-card__qr-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 23 23'%3E%3Crect x='-1' y='-1' width='23' height='23' fill='%23FFFDF7'/%3E%3Crect x='0' y='0' width='1' height='1'/%3E%3Crect x='1' y='0' width='1' height='1'/%3E%3Crect x='2' y='0' width='1' height='1'/%3E%3Crect x='3' y='0' width='1' height='1'/%3E%3Crect x='4' y='0' width='1' height='1'/%3E%3Crect x='5' y='0' width='1' height='1'/%3E%3Crect x='6' y='0' width='1' height='1'/%3E%3Crect x='9' y='0' width='1' height='1'/%3E%3Crect x='12' y='0' width='1' height='1'/%3E%3Crect x='14' y='0' width='1' height='1'/%3E%3Crect x='15' y='0' width='1' height='1'/%3E%3Crect x='16' y='0' width='1' height='1'/%3E%3Crect x='17' y='0' width='1' height='1'/%3E%3Crect x='18' y='0' width='1' height='1'/%3E%3Crect x='19' y='0' width='1' height='1'/%3E%3Crect x='20' y='0' width='1' height='1'/%3E%3Crect x='0' y='1' width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3Crect x='2' y='1' width='1' height='1'/%3E%3Crect x='3' y='1' width='1' height='1'/%3E%3Crect x='4' y='1' width='1' height='1'/%3E%3Crect x='5' y='1' width='1' height='1'/%3E%3Crect x='6' y='1' width='1' height='1'/%3E%3Crect x='7' y='1' width='1' height='1'/%3E%3Crect x='10' y='1' width='1' height='1'/%3E%3Crect x='13' y='1' width='1' height='1'/%3E%3Crect x='14' y='1' width='1' height='1'/%3E%3Crect x='15' y='1' width='1' height='1'/%3E%3Crect x='16' y='1' width='1' height='1'/%3E%3Crect x='17' y='1' width='1' height='1'/%3E%3Crect x='18' y='1' width='1' height='1'/%3E%3Crect x='19' y='1' width='1' height='1'/%3E%3Crect x='20' y='1' width='1' height='1'/%3E%3Crect x='0' y='2' width='1' height='1'/%3E%3Crect x='1' y='2' width='1' height='1'/%3E%3Crect x='2' y='2' width='1' height='1'/%3E%3Crect x='3' y='2' width='1' height='1'/%3E%3Crect x='4' y='2' width='1' height='1'/%3E%3Crect x='5' y='2' width='1' height='1'/%3E%3Crect x='6' y='2' width='1' height='1'/%3E%3Crect x='14' y='2' width='1' height='1'/%3E%3Crect x='15' y='2' width='1' height='1'/%3E%3Crect x='16' y='2' width='1' height='1'/%3E%3Crect x='17' y='2' width='1' height='1'/%3E%3Crect x='18' y='2' width='1' height='1'/%3E%3Crect x='19' y='2' width='1' height='1'/%3E%3Crect x='20' y='2' width='1' height='1'/%3E%3Crect x='0' y='3' width='1' height='1'/%3E%3Crect x='1' y='3' width='1' height='1'/%3E%3Crect x='2' y='3' width='1' height='1'/%3E%3Crect x='3' y='3' width='1' height='1'/%3E%3Crect x='4' y='3' width='1' height='1'/%3E%3Crect x='5' y='3' width='1' height='1'/%3E%3Crect x='6' y='3' width='1' height='1'/%3E%3Crect x='9' y='3' width='1' height='1'/%3E%3Crect x='12' y='3' width='1' height='1'/%3E%3Crect x='14' y='3' width='1' height='1'/%3E%3Crect x='15' y='3' width='1' height='1'/%3E%3Crect x='16' y='3' width='1' height='1'/%3E%3Crect x='17' y='3' width='1' height='1'/%3E%3Crect x='18' y='3' width='1' height='1'/%3E%3Crect x='19' y='3' width='1' height='1'/%3E%3Crect x='20' y='3' width='1' height='1'/%3E%3Crect x='0' y='4' width='1' height='1'/%3E%3Crect x='1' y='4' width='1' height='1'/%3E%3Crect x='2' y='4' width='1' height='1'/%3E%3Crect x='3' y='4' width='1' height='1'/%3E%3Crect x='4' y='4' width='1' height='1'/%3E%3Crect x='5' y='4' width='1' height='1'/%3E%3Crect x='6' y='4' width='1' height='1'/%3E%3Crect x='7' y='4' width='1' height='1'/%3E%3Crect x='10' y='4' width='1' height='1'/%3E%3Crect x='13' y='4' width='1' height='1'/%3E%3Crect x='14' y='4' width='1' height='1'/%3E%3Crect x='15' y='4' width='1' height='1'/%3E%3Crect x='16' y='4' width='1' height='1'/%3E%3Crect x='17' y='4' width='1' height='1'/%3E%3Crect x='18' y='4' width='1' height='1'/%3E%3Crect x='19' y='4' width='1' height='1'/%3E%3Crect x='20' y='4' width='1' height='1'/%3E%3Crect x='0' y='5' width='1' height='1'/%3E%3Crect x='1' y='5' width='1' height='1'/%3E%3Crect x='2' y='5' width='1' height='1'/%3E%3Crect x='3' y='5' width='1' height='1'/%3E%3Crect x='4' y='5' width='1' height='1'/%3E%3Crect x='5' y='5' width='1' height='1'/%3E%3Crect x='6' y='5' width='1' height='1'/%3E%3Crect x='14' y='5' width='1' height='1'/%3E%3Crect x='15' y='5' width='1' height='1'/%3E%3Crect x='16' y='5' width='1' height='1'/%3E%3Crect x='17' y='5' width='1' height='1'/%3E%3Crect x='18' y='5' width='1' height='1'/%3E%3Crect x='19' y='5' width='1' height='1'/%3E%3Crect x='20' y='5' width='1' height='1'/%3E%3Crect x='0' y='6' width='1' height='1'/%3E%3Crect x='1' y='6' width='1' height='1'/%3E%3Crect x='2' y='6' width='1' height='1'/%3E%3Crect x='3' y='6' width='1' height='1'/%3E%3Crect x='4' y='6' width='1' height='1'/%3E%3Crect x='5' y='6' width='1' height='1'/%3E%3Crect x='6' y='6' width='1' height='1'/%3E%3Crect x='9' y='6' width='1' height='1'/%3E%3Crect x='12' y='6' width='1' height='1'/%3E%3Crect x='14' y='6' width='1' height='1'/%3E%3Crect x='15' y='6' width='1' height='1'/%3E%3Crect x='16' y='6' width='1' height='1'/%3E%3Crect x='17' y='6' width='1' height='1'/%3E%3Crect x='18' y='6' width='1' height='1'/%3E%3Crect x='19' y='6' width='1' height='1'/%3E%3Crect x='20' y='6' width='1' height='1'/%3E%3Crect x='1' y='7' width='1' height='1'/%3E%3Crect x='4' y='7' width='1' height='1'/%3E%3Crect x='7' y='7' width='1' height='1'/%3E%3Crect x='10' y='7' width='1' height='1'/%3E%3Crect x='13' y='7' width='1' height='1'/%3E%3Crect x='16' y='7' width='1' height='1'/%3E%3Crect x='19' y='7' width='1' height='1'/%3E%3Crect x='0' y='9' width='1' height='1'/%3E%3Crect x='3' y='9' width='1' height='1'/%3E%3Crect x='6' y='9' width='1' height='1'/%3E%3Crect x='9' y='9' width='1' height='1'/%3E%3Crect x='12' y='9' width='1' height='1'/%3E%3Crect x='15' y='9' width='1' height='1'/%3E%3Crect x='18' y='9' width='1' height='1'/%3E%3Crect x='1' y='10' width='1' height='1'/%3E%3Crect x='4' y='10' width='1' height='1'/%3E%3Crect x='7' y='10' width='1' height='1'/%3E%3Crect x='10' y='10' width='1' height='1'/%3E%3Crect x='13' y='10' width='1' height='1'/%3E%3Crect x='16' y='10' width='1' height='1'/%3E%3Crect x='19' y='10' width='1' height='1'/%3E%3Crect x='0' y='12' width='1' height='1'/%3E%3Crect x='3' y='12' width='1' height='1'/%3E%3Crect x='6' y='12' width='1' height='1'/%3E%3Crect x='9' y='12' width='1' height='1'/%3E%3Crect x='12' y='12' width='1' height='1'/%3E%3Crect x='15' y='12' width='1' height='1'/%3E%3Crect x='18' y='12' width='1' height='1'/%3E%3Crect x='1' y='13' width='1' height='1'/%3E%3Crect x='4' y='13' width='1' height='1'/%3E%3Crect x='7' y='13' width='1' height='1'/%3E%3Crect x='10' y='13' width='1' height='1'/%3E%3Crect x='13' y='13' width='1' height='1'/%3E%3Crect x='16' y='13' width='1' height='1'/%3E%3Crect x='19' y='13' width='1' height='1'/%3E%3Crect x='0' y='14' width='1' height='1'/%3E%3Crect x='1' y='14' width='1' height='1'/%3E%3Crect x='2' y='14' width='1' height='1'/%3E%3Crect x='3' y='14' width='1' height='1'/%3E%3Crect x='4' y='14' width='1' height='1'/%3E%3Crect x='5' y='14' width='1' height='1'/%3E%3Crect x='6' y='14' width='1' height='1'/%3E%3Crect x='0' y='15' width='1' height='1'/%3E%3Crect x='1' y='15' width='1' height='1'/%3E%3Crect x='2' y='15' width='1' height='1'/%3E%3Crect x='3' y='15' width='1' height='1'/%3E%3Crect x='4' y='15' width='1' height='1'/%3E%3Crect x='5' y='15' width='1' height='1'/%3E%3Crect x='6' y='15' width='1' height='1'/%3E%3Crect x='9' y='15' width='1' height='1'/%3E%3Crect x='12' y='15' width='1' height='1'/%3E%3Crect x='15' y='15' width='1' height='1'/%3E%3Crect x='18' y='15' width='1' height='1'/%3E%3Crect x='0' y='16' width='1' height='1'/%3E%3Crect x='1' y='16' width='1' height='1'/%3E%3Crect x='2' y='16' width='1' height='1'/%3E%3Crect x='3' y='16' width='1' height='1'/%3E%3Crect x='4' y='16' width='1' height='1'/%3E%3Crect x='5' y='16' width='1' height='1'/%3E%3Crect x='6' y='16' width='1' height='1'/%3E%3Crect x='7' y='16' width='1' height='1'/%3E%3Crect x='10' y='16' width='1' height='1'/%3E%3Crect x='13' y='16' width='1' height='1'/%3E%3Crect x='16' y='16' width='1' height='1'/%3E%3Crect x='19' y='16' width='1' height='1'/%3E%3Crect x='0' y='17' width='1' height='1'/%3E%3Crect x='1' y='17' width='1' height='1'/%3E%3Crect x='2' y='17' width='1' height='1'/%3E%3Crect x='3' y='17' width='1' height='1'/%3E%3Crect x='4' y='17' width='1' height='1'/%3E%3Crect x='5' y='17' width='1' height='1'/%3E%3Crect x='6' y='17' width='1' height='1'/%3E%3Crect x='0' y='18' width='1' height='1'/%3E%3Crect x='1' y='18' width='1' height='1'/%3E%3Crect x='2' y='18' width='1' height='1'/%3E%3Crect x='3' y='18' width='1' height='1'/%3E%3Crect x='4' y='18' width='1' height='1'/%3E%3Crect x='5' y='18' width='1' height='1'/%3E%3Crect x='6' y='18' width='1' height='1'/%3E%3Crect x='9' y='18' width='1' height='1'/%3E%3Crect x='12' y='18' width='1' height='1'/%3E%3Crect x='15' y='18' width='1' height='1'/%3E%3Crect x='18' y='18' width='1' height='1'/%3E%3Crect x='0' y='19' width='1' height='1'/%3E%3Crect x='1' y='19' width='1' height='1'/%3E%3Crect x='2' y='19' width='1' height='1'/%3E%3Crect x='3' y='19' width='1' height='1'/%3E%3Crect x='4' y='19' width='1' height='1'/%3E%3Crect x='5' y='19' width='1' height='1'/%3E%3Crect x='6' y='19' width='1' height='1'/%3E%3Crect x='7' y='19' width='1' height='1'/%3E%3Crect x='10' y='19' width='1' height='1'/%3E%3Crect x='13' y='19' width='1' height='1'/%3E%3Crect x='16' y='19' width='1' height='1'/%3E%3Crect x='19' y='19' width='1' height='1'/%3E%3Crect x='0' y='20' width='1' height='1'/%3E%3Crect x='1' y='20' width='1' height='1'/%3E%3Crect x='2' y='20' width='1' height='1'/%3E%3Crect x='3' y='20' width='1' height='1'/%3E%3Crect x='4' y='20' width='1' height='1'/%3E%3Crect x='5' y='20' width='1' height='1'/%3E%3Crect x='6' y='20' width='1' height='1'/%3E%3C/svg%3E" width="104" height="104" alt="QR"></div><div class="tc-stack tc-stack--normal tc-card__qr-side"><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span></div></div>
   </div>
   <div class="tc-dialog tc-dialog--max520">
-    <div class="tc-dialog__split"><div data-tc-colour="#8C7B6A" class="tc-dialog__photo"><img class="tc-dialog__photo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""><div class="tc-dialog__photo-frame"></div><div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--gap-10 tc-dialog__side"><span class="tc-dim--muted tc-dim--t12-5">Drag the photo to choose the frame. The box is what other clients will see.</span></div></div>
+    <div class="tc-dialog__split"><div data-tc-colour="#8C7B6A" class="tc-dialog__photo"><img class="tc-dialog__photo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E" alt=""><div class="tc-dialog__photo-frame"></div><div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--wide tc-dialog__side"><span class="tc-dim--muted tc-dim--t12-5">Drag the photo to choose the frame. The box is what other clients will see.</span></div></div>
   </div>
   </div>
 </div>
@@ -3501,7 +3493,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this person is kept <span class="tc-badge is-linked">3</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">nextcloud · Контакты</a> <span class="tc-dim">· Phone differs</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Email differs</span></li>
@@ -3745,7 +3737,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo" id="photo"></span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Replace<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label><button class="tc-btn" type="button">Crop</button></span>
                 <button class="tc-btn is-danger" type="button">Remove</button>
                 <span class="tc-field__hint tc-field__hint--max150">EXIF orientation applied, metadata stripped.</span>
@@ -3954,7 +3946,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo is-ph" id="photo">АК</span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Add<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label></span>
                 <span class="tc-field__hint tc-field__hint--max150">JPEG, PNG, GIF or WebP.</span>
               </div>
@@ -4082,7 +4074,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo" id="photo"></span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Add<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label></span>
                 <span class="tc-field__hint tc-field__hint--max150">JPEG, PNG, GIF or WebP.</span>
               </div>
@@ -4178,7 +4170,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo" id="photo"></span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Add<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label></span>
                 <span class="tc-field__hint tc-field__hint--max150">JPEG, PNG, GIF or WebP.</span>
               </div>
@@ -4272,7 +4264,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
           <div class="tc-dialog__photo-rule"></div>
           <div class="tc-dialog__photo-rule-v"></div>
         </div>
-        <div class="tc-stack tc-stack--gap-10 tc-dialog__side">
+        <div class="tc-stack tc-stack--wide tc-dialog__side">
           <span class="tc-dim--muted tc-dim--t12-5">Drag to choose the frame.</span>
           <div class="tc-field tc-field--w100"><label>Zoom</label>
             <span class="tc-line tc-line--normal tc-field__zoom">
@@ -4355,7 +4347,7 @@ label.tc-field__swatch{position:relative;cursor:pointer}
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same person in other books <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
           </ul>
@@ -4416,7 +4408,7 @@ Read  2 min ago · not changed on server</div>
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo" id="photo-saved"></span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Replace<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo-saved"></label><button class="tc-btn" type="button">Crop</button></span>
                 <button class="tc-btn is-danger" type="button">Remove</button>
                 <span class="tc-field__hint tc-field__hint--max150">EXIF orientation applied, metadata stripped.</span>
@@ -4556,7 +4548,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same person in other books <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
           </ul>
@@ -4984,7 +4976,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this person is kept <span class="tc-badge is-linked">3</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7">nextcloud · Контакты</a> <span class="tc-dim">· Phone differs</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Email differs</span></li>
@@ -5177,7 +5169,7 @@ Read  2 min ago · not changed on server</div>
         </dl>
         <div class="tc-sec">
           <div class="tc-rubric">The same person in other books <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
           </ul>
@@ -5467,7 +5459,7 @@ Read  2 min ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span></li>
           </ul>
         </div>
@@ -5596,13 +5588,13 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-sheet__body">
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What you changed</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>The series ends on 19 January</b> <span class="tc-dim">— it ran weekly until 28 December</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Left without their day · 3</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>26 January, 12:00 — Duty moved</b> <span class="tc-dim">— it was the meeting of 26 January, 09:00</span></span>
               <span class="tc-stack__item"><b>2 February, 09:00 — Дежурство: вторая линия</b> <span class="tc-dim">— its title was changed</span></span>
               <span class="tc-stack__item"><b>16 February, 14:30 — Duty moved</b> <span class="tc-dim">— it was the meeting of 16 February, 09:00</span></span>
@@ -5629,13 +5621,13 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-sheet__body">
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What you changed</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>The series repeats every two weeks</b> <span class="tc-dim">— it repeated weekly</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Left without its day · 1</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>26 January, 12:00 — Duty moved</b> <span class="tc-dim">— it was the meeting of 26 January, 09:00</span></span>
             </div>
           </div>
@@ -5660,14 +5652,14 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-sheet__body">
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Written</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>The series ends on 19 January</b> <span class="tc-dim">— saved</span></span>
               <span class="tc-stack__item"><b>2 separate events</b> <span class="tc-dim">— 26 January, 12:00 and 16 February, 14:30</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Not written · 1</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>2 February, 09:00 — Дежурство: вторая линия</b> <span class="tc-dim">— the server answered 507 Insufficient Storage</span></span>
             </div>
           </div>
@@ -5797,13 +5789,13 @@ SEQUENCE  2</div>
         <div class="tc-sheet__body">
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What you changed</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>The series ends on 18 January</b> <span class="tc-dim">— it ran weekly until 28 December</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Left without their day · 3</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>25 January, 14:00 — Синк-ап по релизу</b> <span class="tc-dim">— it was the meeting of 25 January, 12:00</span></span>
               <span class="tc-stack__item"><b>1 February, 12:00 — Синк-ап: ретро</b> <span class="tc-dim">— its title was changed</span></span>
               <span class="tc-stack__item"><b>15 February, 16:30 — Синк-ап по релизу</b> <span class="tc-dim">— it was the meeting of 15 February, 12:00</span></span>
@@ -5876,7 +5868,7 @@ SEQUENCE  2</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span></li>
           </ul>
         </div>
@@ -5886,7 +5878,7 @@ SEQUENCE  2</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">radicale · vps · Проекты</a> <span class="tc-dim">· Holds the same</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="#">baikal · Общий</a> <span class="tc-dim">· Where differ</span></li>
           </ul>
@@ -5909,14 +5901,14 @@ Read  2 min ago · changed on server 3 days ago</div>
         <div class="tc-sheet__body">
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Written</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>The series ends on 18 January</b> <span class="tc-dim">— saved</span></span>
               <span class="tc-stack__item"><b>2 separate events</b> <span class="tc-dim">— 25 January, 14:00 and 15 February, 16:30</span></span>
             </div>
           </div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Not written · 1</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>1 February, 12:00 — Синк-ап: ретро</b> <span class="tc-dim">— the server answered 507 Insufficient Storage</span></span>
             </div>
           </div>
@@ -5955,7 +5947,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Личный</span></li>
           </ul>
         </div>
@@ -5965,7 +5957,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this event is kept <span class="tc-badge is-linked">3</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/calendar/nextcloud/lichnyj/8f1c">nextcloud · Личный</a></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/calendar/radicale/proekty/8f1c">radicale · vps · Проекты</a></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="/app/calendar/baikal/obshchij/8f1c">baikal · Общий</a> <span class="tc-dim">· When, where differ</span></li>
@@ -6353,7 +6345,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span></li>
           </ul>
         </div>
@@ -6363,7 +6355,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">radicale · vps · Проекты</a> <span class="tc-dim">· Holds the same</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="#">baikal · Общий</a> <span class="tc-dim">· When, where differ</span></li>
           </ul>
@@ -6396,7 +6388,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-msg is-alert tc-msg--flush">Carrel keeps no copy: this cannot be undone.</div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>1 published link</b> <span class="tc-dim">— answers “not found” from that moment</span></span>
               <span class="tc-stack__item"><b>2 records related to it</b> <span class="tc-dim">— among the loaded ones; their link is left pointing at nothing</span></span>
             </div>
@@ -6404,7 +6396,7 @@ Read  2 min ago · changed on server 3 days ago</div>
           <div class="tc-msg tc-msg--flush">The server may send its attendees a cancellation.</div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">Attachments</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>release-checklist.md</b> <span class="tc-dim">— written into the event, goes with it</span></span>
               <span class="tc-stack__item"><b>agenda-10-08.pdf</b> <span class="tc-dim">— a link to Documents / carrel / attachments / 2026-08, the file stays</span></span>
             </div>
@@ -7011,17 +7003,17 @@ SEQUENCE  2</div>
         <div class="tc-sec"><div class="tc-rubric">Description</div><div class="tc-prose tc-prose--t13">Зарядки, переходник, распечатать посадочный.</div></div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">посадочный-казань.pdf</a> <span class="tc-dim">application/pdf · 128 KB</span> <span class="tc-badge">in the task</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Дела</span></li>
           </ul>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Related</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list"><li><span class="tc-dim--accent">Поездка в Казань</span> <span class="tc-dim">· event · 12 Aug</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Дела</span></li></ul>
+          <ul class="tc-stack tc-stack--tight tc-sec__list"><li><span class="tc-dim--accent">Поездка в Казань</span> <span class="tc-dim">· event · 12 Aug</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Дела</span></li></ul>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this task is kept <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/tasks/nextcloud/dela/c41a">nextcloud · Дела</a> <span class="tc-dim">· Priority differs</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#3F6E8C"></span> <a class="tc-dim--accent" href="/app/tasks/nextcloud/rabota/c41a">nextcloud · Работа</a> <span class="tc-dim">· Due differs</span></li>
           </ul>
@@ -7148,7 +7140,7 @@ SEQUENCE  2</div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/tasks/nextcloud/dela/aa10/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
         </div>
-        <div class="tc-sec"><div class="tc-rubric">Related</div><ul class="tc-stack tc-stack--gap-6 tc-sec__list"><li><span class="tc-dim--accent">Забрать документы</span> <span class="tc-dim">· event · 11 Aug</span></li></ul></div>
+        <div class="tc-sec"><div class="tc-rubric">Related</div><ul class="tc-stack tc-stack--tight tc-sec__list"><li><span class="tc-dim--accent">Забрать документы</span> <span class="tc-dim">· event · 11 Aug</span></li></ul></div>
         <div class="tc-sec">
           <div class="tc-rubric">Source</div>
           <div class="tc-diag">Path  /remote.php/dav/calendars/mix/dela/aa10-77bc-0e31.ics
@@ -7384,7 +7376,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/tasks/nextcloud/dela/7e40/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">посадочный-казань.pdf</a> <span class="tc-dim">application/pdf · 128 KB</span> <span class="tc-badge">in the task</span></li>
           </ul>
         </div>
@@ -7394,7 +7386,7 @@ Read  2 min ago · not changed on server</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same task in other lists <span class="tc-badge is-linked">1</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Работа</a> <span class="tc-dim">· Due, priority differ</span></li>
           </ul>
         </div>
@@ -7426,7 +7418,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-msg is-alert tc-msg--flush">Carrel keeps no copy: this cannot be undone.</div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>1 published link</b> <span class="tc-dim">— answers “not found” from that moment</span></span>
             </div>
           </div>
@@ -7904,7 +7896,7 @@ SEQUENCE  1</div>
         <div class="tc-sec"><div class="tc-rubric">Description</div><div class="tc-prose">Зарядки, переходник, распечатать посадочный.</div></div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">посадочный-казань.pdf</a> <span class="tc-dim">application/pdf · 128 KB</span> <span class="tc-badge">in the task</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Дела</span></li>
           </ul>
         </div>
@@ -7914,7 +7906,7 @@ SEQUENCE  1</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this task is kept <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/tasks/nextcloud/dela/c41a">nextcloud · Дела</a> <span class="tc-dim">· Priority differs</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#3F6E8C"></span> <a class="tc-dim--accent" href="/app/tasks/nextcloud/rabota/c41a">nextcloud · Работа</a> <span class="tc-dim">· Due differs</span></li>
           </ul>
@@ -8040,7 +8032,7 @@ SEQUENCE  1</div>
 
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
           <div class="tc-doc__heading">Что делаем</div>
-          <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+          <ul class="tc-stack tc-stack--normal tc-doc__list">
             <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
             <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
           </ul>
@@ -8051,18 +8043,18 @@ SEQUENCE  1</div>
         </dl>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">2026-08-10-sync-board.png</a> <span class="tc-dim">image/png · 412 KB</span> <span class="tc-badge">in the note</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li>
             <li><a class="tc-dim--accent" href="#">запись-встречи.m4a</a> <span class="tc-dim">audio/mp4 · 24 MB</span> <span class="tc-badge">Documents / carrel</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li>
           </ul>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Related</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list"><li><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li><li><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li></ul>
+          <ul class="tc-stack tc-stack--tight tc-sec__list"><li><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li><li><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></li></ul>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Where this note is kept <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/notes/nextcloud/zapisi/9e31">nextcloud · Записи</a></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/notes/nextcloud/dnevnik/9e31">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></li>
           </ul>
@@ -8187,7 +8179,7 @@ SEQUENCE  1</div>
         </dl>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/notes/nextcloud/dnevnik/9e31/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">маршрут.gpx</a> <span class="tc-dim">application/gpx+xml · 18 KB</span> <span class="tc-badge">in the note</span></li>
           </ul>
         </div>
@@ -8305,7 +8297,7 @@ SEQUENCE  1</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -8319,7 +8311,7 @@ SEQUENCE  1</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></span>
                 <span class="tc-stack__item"><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span> <span class="tc-dim"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> Записи</span></span>
               </div>
@@ -8331,7 +8323,7 @@ SEQUENCE  1</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Where this note is kept <span class="tc-badge is-linked">2</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="/app/notes/nextcloud/zapisi/9e31">nextcloud · Записи</a></span>
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/notes/nextcloud/dnevnik/9e31">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
@@ -8472,7 +8464,7 @@ SEQUENCE  1</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -8486,7 +8478,7 @@ SEQUENCE  1</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span></span>
                 <span class="tc-stack__item"><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span></span>
               </div>
@@ -8498,7 +8490,7 @@ SEQUENCE  1</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
@@ -8566,7 +8558,7 @@ Read  2 min ago</div>
           </div>
         </div>
         <div class="tc-doc__layout">
-          <div class="tc-doc tc-stack tc-stack--gap-14">
+          <div class="tc-doc tc-stack tc-stack--wide">
             <div class="tc-doc__title">Заметка со встречи 10.08</div>
             <pre class="tc-doc__code is-wrap">Договорились заморозить ветку в среду.
 
@@ -8586,7 +8578,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span></span>
                 <span class="tc-stack__item"><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span></span>
               </div>
@@ -8598,7 +8590,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
@@ -8666,13 +8658,13 @@ Read  2 min ago</div>
     <div class="frame-label"><span>Заметка · части текста</span><span class="frag">фрагмент</span><i>чтение</i></div>
     <div class="tc-root tc-shell">
       <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
-        <div class="tc-doc tc-stack tc-stack--gap-14">
+        <div class="tc-doc tc-stack tc-stack--wide">
             <div class="tc-doc__title">Разбор релиза 0.3</div>
             <div class="tc-prose tc-prose--read">Итоги созвона в <em>четверг</em>: релиз держат две вещи, обе — до пятницы. Миграцию гоняем только с <span class="tc-mono tc-mono--chip">--dry-run</span>, подробности — в <a class="tc-dim--accent" href="#">заметке о схеме</a>.</div>
             <div class="tc-doc__heading">Что держит</div>
-            <ul class="tc-stack tc-stack--gap-6 tc-doc__bullets">
+            <ul class="tc-stack tc-stack--tight tc-doc__bullets">
               <li>миграция схемы — <a class="tc-dim--accent" href="#">задача у Виктора</a></li>
-              <li>тесты<ul class="tc-stack tc-stack--gap-6 tc-doc__bullets"><li><span class="tc-mono tc-mono--chip">go test -race ./...</span> — зелёный</li><li>нагрузочный — после 20.08</li></ul></li>
+              <li>тесты<ul class="tc-stack tc-stack--tight tc-doc__bullets"><li><span class="tc-mono tc-mono--chip">go test -race ./...</span> — зелёный</li><li>нагрузочный — после 20.08</li></ul></li>
             </ul>
             <blockquote class="tc-doc__quote">Не выпускаем, пока не прогоним миграцию на копии базы.</blockquote>
             <div class="tc-doc__heading">Как проверить</div>
@@ -8692,9 +8684,9 @@ Read  2 min ago</div>
         <div class="tc-sec">
           <div class="tc-prose tc-prose--read">Итоги созвона в <em>четверг</em>: миграцию гоняем только с <span class="tc-mono tc-mono--chip">--dry-run</span>, подробности — в <a class="tc-dim--accent" href="#">заметке о схеме</a>.</div>
           <div class="tc-doc__heading">Что держит</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-doc__bullets">
+          <ul class="tc-stack tc-stack--tight tc-doc__bullets">
             <li>миграция схемы</li>
-            <li>тесты<ul class="tc-stack tc-stack--gap-6 tc-doc__bullets"><li><span class="tc-mono tc-mono--chip">go test -race ./...</span> — зелёный</li><li>нагрузочный — после 20.08</li></ul></li>
+            <li>тесты<ul class="tc-stack tc-stack--tight tc-doc__bullets"><li><span class="tc-mono tc-mono--chip">go test -race ./...</span> — зелёный</li><li>нагрузочный — после 20.08</li></ul></li>
           </ul>
           <blockquote class="tc-doc__quote">Не выпускаем, пока не прогоним миграцию на копии базы.</blockquote>
           <pre class="tc-doc__code">./carrel migrate --dry-run --from 0.2 --to 0.3</pre>
@@ -8780,7 +8772,7 @@ Read  2 min ago</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -8794,7 +8786,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span></span>
                 <span class="tc-stack__item"><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span></span>
               </div>
@@ -8806,7 +8798,7 @@ Read  2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
@@ -12248,7 +12240,7 @@ Read  2 min ago</div>
           <div class="tc-acts tc-acts--stack"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">All 2</button><button class="tc-seg__opt" type="button">Contacts 1</button><button class="tc-seg__opt" type="button">Events 1</button><button class="tc-seg__opt" type="button">Tasks 0</button><button class="tc-seg__opt" type="button">Notes 0</button></span><form class="tc-field tc-field--inline" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="do" value="threshold"><label>Match threshold</label><input class="tc-in is-mono tc-in--w52" type="text" value="60" name="value" aria-label="Match threshold"><button class="tc-btn is-sm" type="button">Weights</button></form></div>
         </div>
         <div class="tc-msg is-accent">Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.</div>
-        <div data-part="results" class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div data-part="results" class="tc-stack tc-stack--wide tc-main__results">
 
           <form class="tc-card" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="group" value="g1">
             <div class="tc-rubric">Вера Лебедева <span class="tc-rubric__aside"><span class="tc-badge">candidate ×2</span> <span class="tc-mono tc-mono--ls0-dusty">80 points · same phone, same name</span></span></div>
@@ -12593,7 +12585,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-card">
             <div class="tc-rubric">The record that stays gains</div>
-            <ul class="tc-stack tc-stack--gap-4 tc-card__list">
+            <ul class="tc-stack tc-stack--tight tc-card__list">
               <li>ORG: Библиотека №4</li>
               <li>EMAIL;TYPE=work: v.lebedeva@example.org</li>
               <li>PHOTO (from nextcloud · Контакты)</li>
@@ -12686,13 +12678,13 @@ Read  2 min ago</div>
           </div>
           <div class="tc-card">
             <div class="tc-rubric">The record that stays gains</div>
-            <ul class="tc-stack tc-stack--gap-4 tc-card__list">
+            <ul class="tc-stack tc-stack--tight tc-card__list">
               <li>2 reminders from the others</li>
             </ul>
           </div>
           <div class="tc-card">
             <div class="tc-rubric">Not carried over</div>
-            <ul class="tc-stack tc-stack--gap-4 tc-card__list">
+            <ul class="tc-stack tc-stack--tight tc-card__list">
               <li>1 rewritten occurrence of Дежурство: первая линия · radicale · vps · Дежурства, which belongs to its series and goes with it</li>
             </ul>
           </div>
@@ -12754,7 +12746,7 @@ Read  2 min ago</div>
           <div class="tc-msg is-alert tc-msg--mr0-ml0"><b>Merged, but nothing was deleted:</b> Лебедева Вера refused, the rest were not tried.</div>
           <div class="tc-card tc-card--top14">
             <div class="tc-rubric">What happened</div>
-            <ul class="tc-stack tc-stack--gap-4 tc-card__list">
+            <ul class="tc-stack tc-stack--tight tc-card__list">
               <li>Kept and rewritten: Вера Лебедева · nextcloud · Архив</li>
               <li>Still there: Лебедева Вера · nextcloud · Контакты</li>
             </ul>
@@ -12867,7 +12859,7 @@ Read  just now · written by the merge</div>
           <div class="tc-msg is-accent">Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.</div>
           <div class="tc-msg"><b>Nothing is loaded yet.</b> Duplicates are found only among records already read in this session. Open a list or a combined view, then come back.</div>
         </div>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric">Decided earlier <span class="tc-mono tc-mono--ls0">3</span></div>
           <form class="tc-card" action="/app/duplicates/decide" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="group" value="g3">
             <div class="tc-rubric">Анна Ковалёва <span class="tc-rubric__aside"><span class="tc-badge is-linked">linked ×3</span> <span class="tc-mono tc-mono--ls0-dusty">Not loaded in this session</span></span></div>
@@ -13885,7 +13877,7 @@ dav: HTTP 503: the server is busy</div>
         </dl>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span></li>
           </ul>
           <div class="tc-empty tc-empty--drop-side">
@@ -15804,7 +15796,7 @@ dav: HTTP 503: the server is busy</div>
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -16015,7 +16007,7 @@ dav: HTTP 503: the server is busy</div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
         <div class="tc-msg tc-msg--mx20 tc-msg--max580"><b>nextcloud:</b> 1 new collection — «Поездки». Tick it to see it in the rail.</div>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -16272,7 +16264,7 @@ dav: HTTP 503: the server is busy</div>
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -16835,7 +16827,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-msg is-alert tc-msg--flush">Everything in it goes too. Carrel keeps no copy: this cannot be undone.</div>
           <div class="tc-sheet__block">
             <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
-            <div class="tc-stack tc-stack--gap-6 tc-line__text">
+            <div class="tc-stack tc-stack--tight tc-line__text">
               <span class="tc-stack__item"><b>Attachments</b> <span class="tc-dim">— the attachment folder is in it; new attachments will have nowhere to go</span></span>
               <span class="tc-stack__item"><b>Backup job «Личное на домашний диск»</b> <span class="tc-dim">— copies this folder; it will run one short and say so</span></span>
             </div>
@@ -17286,7 +17278,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card tc-card--edge-accent">
@@ -18109,7 +18101,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-msg is-alert tc-msg--flush">Carrel keeps no copy: this cannot be undone. nextcloud may send the attendees of its meetings a cancellation.</div>
               <div class="tc-sheet__block">
                 <div class="tc-rubric tc-rubric--bot7">What is pointing at it now</div>
-                <div class="tc-stack tc-stack--gap-6 tc-line__text">
+                <div class="tc-stack tc-stack--tight tc-line__text">
                   <span class="tc-stack__item"><b>1 published link</b> <span class="tc-dim">— answers “not found” from that moment</span></span>
                   <span class="tc-stack__item"><b>Backup job «Личное на домашний диск»</b> <span class="tc-dim">— copies this collection; it will run one short and say so</span></span>
                   <span class="tc-stack__item"><b>3 devices through davloom</b> <span class="tc-dim">— it disappears for them at the next sync</span></span>
@@ -18182,7 +18174,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -18720,7 +18712,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Apple</button><button class="tc-seg__opt" type="button">Android</button><button class="tc-seg__opt" type="button">Thunderbird</button><button class="tc-seg__opt" type="button">Anything else</button></span></div>
         </div>
         <div class="tc-form tc-form--padb0">
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--460">
+          <div class="tc-stack tc-stack--wide tc-form__col--460">
             <div class="tc-card">
               <div class="tc-rubric">What goes into the profile</div>
               <div class="tc-list tc-list--mx-14">
@@ -18740,7 +18732,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <span class="tc-msg__aside"><b>The profile carries passwords in cleartext.</b> Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup.</span>
             </div>
           </div>
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--300">
+          <div class="tc-stack tc-stack--wide tc-form__col--300">
             <div class="tc-card">
               <div class="tc-rubric">Profile</div>
               <div class="tc-card__acts"><button class="tc-btn is-danger" type="button">Generate profile</button></div>
@@ -18803,7 +18795,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Apple</button><button class="tc-seg__opt" type="button">Android</button><button class="tc-seg__opt" type="button">Thunderbird</button><button class="tc-seg__opt" type="button">Anything else</button></span></div>
         </div>
         <div class="tc-form tc-form--padb0">
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--460">
+          <div class="tc-stack tc-stack--wide tc-form__col--460">
             <div class="tc-card">
               <div class="tc-rubric">What goes into the profile</div>
               <div class="tc-list tc-list--mx-14">
@@ -18823,7 +18815,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <span class="tc-msg__aside"><b>The profile carries passwords in cleartext.</b> Install it, then delete the file: otherwise it stays in Downloads and in the phone’s backup.</span>
             </div>
           </div>
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--300">
+          <div class="tc-stack tc-stack--wide tc-form__col--300">
             <div class="tc-card">
               <div class="tc-rubric">Profile</div>
               <span class="tc-field__hint">Asks for your Carrel password first.</span>
@@ -18880,7 +18872,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           <div class="tc-acts"><span class="tc-seg"><button class="tc-seg__opt" type="button">Apple</button><button class="is-on tc-seg__opt" type="button">Android</button><button class="tc-seg__opt" type="button">Thunderbird</button><button class="tc-seg__opt" type="button">Anything else</button></span></div>
         </div>
         <div class="tc-form tc-form--padb0">
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--460">
+          <div class="tc-stack tc-stack--wide tc-form__col--460">
             <div class="tc-card">
               <div class="tc-rubric">Collections DAVx5 will see</div>
               <div class="tc-list tc-list--mx-14">
@@ -18898,14 +18890,14 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
             <div class="tc-msg is-row tc-msg--flush tc-msg--max580"><svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
               <span class="tc-msg__aside">Scan each code with the phone: DAVx5 fills in the address and the login, and asks for the password shown under the code.</span></div>
           </div>
-          <div class="tc-stack tc-stack--gap-12 tc-form__col--300">
+          <div class="tc-stack tc-stack--wide tc-form__col--300">
             <div class="tc-card">
               <div class="tc-rubric">nextcloud · mix</div>
               <div class="tc-card__split">
                 <div data-tc-colour="#FFFDF7" class="tc-card__qr">
                   <img class="tc-card__qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==" width="104" height="104" alt="QR">
                 </div>
-                <div class="tc-stack tc-stack--gap-8 tc-card__qr-side">
+                <div class="tc-stack tc-stack--normal tc-card__qr-side">
                   <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span>
                   <button class="tc-btn is-sm" type="button">Open in DAVx5</button>
                 </div>
@@ -18919,7 +18911,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
                 <div data-tc-colour="#FFFDF7" class="tc-card__qr">
                   <img class="tc-card__qr-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsAQMAAAC1qMWOAAAABlBMVEX//fcAAADqtqjxAAAAwUlEQVR42qWTsW1FMQwDz0F6eoO3/1h/A3qCS5EgwK8COeoE+QCJNOEfFTWticrH+/Cvdq1N4LDWnrKRc0AiUxaAZw8ev7fhtW/Ys2DxvDhryH4ibOBBWCP2xyjofGfAxJgSp2xsLASmbKIqWjJlTROwOL83UYp2zhbaNNKxVpHgt9RDtmBL6cW9TYAyzu8vTzv3V8XWZurvB2vtnLA58+xH2PuBnE4zCCCbdN2w58DZJ+P/DEktam90Tmxy6e9VfQFbsnKSXbiN/QAAAABJRU5ErkJggg==" width="104" height="104" alt="QR">
                 </div>
-                <div class="tc-stack tc-stack--gap-8 tc-card__qr-side">
+                <div class="tc-stack tc-stack--normal tc-card__qr-side">
                   <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Address and login are in the code.</span>
                   <button class="tc-btn is-sm" type="button">Open in DAVx5</button>
                 </div>
@@ -18977,7 +18969,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
               <div class="tc-acts"><span class="tc-seg"><button class="is-on tc-seg__opt" type="button">Apple</button><button class="tc-seg__opt" type="button">Android</button><button class="tc-seg__opt" type="button">Thunderbird</button><button class="tc-seg__opt" type="button">Anything else</button></span></div>
             </div>
             <div class="tc-form tc-form--padb0">
-              <div class="tc-stack tc-stack--gap-12 tc-form__col--460">
+              <div class="tc-stack tc-stack--wide tc-form__col--460">
                 <div class="tc-card">
                   <div class="tc-rubric">What goes into the profile</div>
                   <div class="tc-list tc-list--mx-14">
@@ -18987,7 +18979,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
                   </div>
                 </div>
               </div>
-              <div class="tc-stack tc-stack--gap-12 tc-form__col--300">
+              <div class="tc-stack tc-stack--wide tc-form__col--300">
                 <div class="tc-card">
                   <div class="tc-rubric">Profile</div>
                   <span class="tc-field__hint">Confirm your password first: the profile hands out the credentials of every included account.</span>
@@ -19061,7 +19053,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
           <div class="tc-field tc-field--w100">
             <label>What the device will see <span class="tc-dim">— changed later too, without re-issuing the password</span></label>
-            <div class="tc-stack tc-stack--gap-2 tc-card__top2">
+            <div class="tc-stack tc-stack--tight tc-card__top2">
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="calendars" value="1" checked><span class="tc-tickrow__tick"></span>Calendars</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="address.books" value="1" checked><span class="tc-tickrow__tick"></span>Address books</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="tasks.vtodo.not.every.client.understands.them" value="1"><span class="tc-tickrow__tick is-off"></span>Tasks <span class="tc-dim">· VTODO — not every client understands them</span></label>
@@ -19071,7 +19063,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
           <div class="tc-field tc-field--w100">
             <label>Collections</label>
-            <div class="tc-stack tc-stack--gap-2 tc-card__top2">
+            <div class="tc-stack tc-stack--tight tc-card__top2">
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Личный</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Работа</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Контакты</label>
@@ -19480,7 +19472,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
           <div class="tc-field tc-field--w100">
             <label>What the device will see <span class="tc-dim">— changed later too, without re-issuing the password</span></label>
-            <div class="tc-stack tc-stack--gap-2 tc-card__top2">
+            <div class="tc-stack tc-stack--tight tc-card__top2">
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="calendars" value="1" checked><span class="tc-tickrow__tick"></span>Calendars</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="address.books" value="1" checked><span class="tc-tickrow__tick"></span>Address books</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="tasks.vtodo.not.every.client.understands.them" value="1"><span class="tc-tickrow__tick is-off"></span>Tasks <span class="tc-dim">· VTODO — not every client understands them</span></label>
@@ -19490,7 +19482,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
           </div>
           <div class="tc-field tc-field--w100">
             <label>Collections</label>
-            <div class="tc-stack tc-stack--gap-2 tc-card__top2">
+            <div class="tc-stack tc-stack--tight tc-card__top2">
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Личный</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Работа</label>
               <label class="tc-check"><input class="tc-check__box" type="checkbox" name="nextcloud" value="1" checked><span class="tc-tickrow__tick"></span>nextcloud · Контакты</label>
@@ -21617,7 +21609,7 @@ jobs:
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -21778,7 +21770,7 @@ jobs:
                 <div class="tc-field tc-field--sm"><label>To</label><input class="tc-in is-mono" type="date" name="to" value="2026-08-31" aria-label="To"></div>
               </div>
               <div class="tc-field tc-field--w100"><label>What the visitor sees</label>
-                <div class="tc-stack tc-stack--gap-5 tc-card__top2">
+                <div class="tc-stack tc-stack--tight tc-card__top2">
                   <label class="tc-check" title="Always shown"><input class="tc-check__box" type="checkbox" name="time" value="1" checked disabled><span class="tc-tickrow__tick"></span>Time<span class="tc-dim tc-dim--t11-5">always shown</span></label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="title" value="1" checked><span class="tc-tickrow__tick"></span>Title</label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="location" value="1"><span class="tc-tickrow__tick is-off"></span>Location</label>
@@ -21788,7 +21780,7 @@ jobs:
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="tags" value="1"><span class="tc-tickrow__tick is-off"></span>Tags</label>
                 </div>
                 <span class="tc-field__hint">Without the title an event shows as “Busy”.</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-sheet__checks">
+              <div class="tc-stack tc-stack--tight tc-sheet__checks">
                 <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
@@ -21864,7 +21856,7 @@ jobs:
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -22077,7 +22069,7 @@ jobs:
           </div>
         </div>
         <form class="tc-post" id="conn-picks" action="/app/settings/connections?op=pick" method="post"><input type="hidden" name="csrf" value="7f3a91de"></form>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
 
           <div class="tc-card">
@@ -22298,7 +22290,7 @@ jobs:
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">Attachments <details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item" role="menuitem"><svg><use href="#i-upload"/></svg>From this computer<input class="tc-file" type="file" name="file" form="post-attach" aria-label="From this computer"></label><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-file"/></svg>From Files</button><button class="tc-menu__item tc-nojs" type="submit" form="post-attach" role="menuitem">Upload</button></div></details></div><form class="tc-post" id="post-attach" action="/app/calendar/nextcloud/lichnyj/8f1c/edit?op=attach" method="post" enctype="multipart/form-data"><input type="hidden" name="csrf" value="7f3a91de"></form>
-          <ul class="tc-stack tc-stack--gap-6 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><a class="tc-dim--accent" href="#">release-checklist.md</a> <span class="tc-dim">text/markdown · 3.1 KB</span> <span class="tc-badge">in the event</span></li>
           </ul>
         </div>
@@ -22308,7 +22300,7 @@ jobs:
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same event in other calendars <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">radicale · vps · Проекты</a> <span class="tc-dim">· Holds the same</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#9A9280"></span> <a class="tc-dim--accent" href="#">baikal · Общий</a> <span class="tc-dim">· When, where differ</span></li>
           </ul>
@@ -22326,7 +22318,7 @@ Read  2 min ago · changed on server 3 days ago</div>
             <div class="tc-sheet__head"><b class="tc-sheet__title">Publish an event</b><span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Синк-ап по релизу</span></div>
             <div class="tc-sheet__body">
               <div class="tc-field tc-field--w100"><label>What the visitor sees</label>
-                <div class="tc-stack tc-stack--gap-5 tc-card__top2">
+                <div class="tc-stack tc-stack--tight tc-card__top2">
                   <label class="tc-check" title="Always shown"><input class="tc-check__box" type="checkbox" name="time" value="1" checked disabled><span class="tc-tickrow__tick"></span>Time<span class="tc-dim tc-dim--t11-5">always shown</span></label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="title" value="1" checked><span class="tc-tickrow__tick"></span>Title</label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="location" value="1"><span class="tc-tickrow__tick is-off"></span>Location</label>
@@ -22336,7 +22328,7 @@ Read  2 min ago · changed on server 3 days ago</div>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="tags" value="1"><span class="tc-tickrow__tick is-off"></span>Tags</label>
                 </div>
                 <span class="tc-field__hint">Without the title the event shows as “Busy”.</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-sheet__checks">
+              <div class="tc-stack tc-stack--tight tc-sheet__checks">
                 <label class="tc-check"><input class="tc-check__box" type="checkbox" name="download" value="1"><span class="tc-tickrow__tick is-off"></span>Allow <span class="tc-mono">.ics</span> download and subscription</label>
               </div>
               <div class="tc-field tc-field--sm"><label>Link lives for</label><details class="tc-drop"><summary class="tc-in is-pick">30 days</summary><div class="tc-menu is-pop tc-menu--w212"><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="7">7 days</label><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="14">14 days</label><label class="is-on tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="30" checked>30 days</label><span class="tc-menu__sep"></span><label class="tc-menu__item"><input class="tc-seg__box" type="radio" role="menuitemradio" name="lives" value="never">No expiry</label></div></details></div>
@@ -22407,7 +22399,7 @@ Read  2 min ago · changed on server 3 days ago</div>
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same person in other books <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
           </ul>
@@ -22433,7 +22425,7 @@ Read  2 min ago · not changed on server</div>
             <div class="tc-sheet__head"><b class="tc-sheet__title">Publish a contact</b><span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Анна Ковалёва</span></div>
             <div class="tc-sheet__body">
               <div class="tc-field tc-field--w100"><label>What the visitor sees</label>
-                <div class="tc-stack tc-stack--gap-5 tc-card__top2">
+                <div class="tc-stack tc-stack--tight tc-card__top2">
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="name" value="1" checked><span class="tc-tickrow__tick"></span>Name and organisation</label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="phones" value="1"><span class="tc-tickrow__tick is-off"></span>Phone numbers</label>
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="emails" value="1"><span class="tc-tickrow__tick is-off"></span>Email addresses</label>
@@ -22506,7 +22498,7 @@ Read  2 min ago · not changed on server</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -22520,7 +22512,7 @@ Read  2 min ago · not changed on server</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Related</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-dim--accent">Синк-ап по релизу</span> <span class="tc-dim">· event · 10 Aug</span></span>
                 <span class="tc-stack__item"><span class="tc-dim--accent">Дописать раздел про кэш</span> <span class="tc-dim">· task</span></span>
               </div>
@@ -22532,7 +22524,7 @@ Read  2 min ago · not changed on server</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">The same note in other notebooks <span class="tc-badge is-linked">1</span></div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="#">nextcloud · Дневник</a> <span class="tc-dim">· Text, tags differ</span></span>
               </div>
             </div>
@@ -22551,7 +22543,7 @@ Read  2 min ago</div>
             <div class="tc-sheet__head"><b class="tc-sheet__title">Publish a note</b><span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">Заметка со встречи 10.08</span></div>
             <div class="tc-sheet__body">
               <div class="tc-field tc-field--w100"><label>Attachments <span class="tc-plain">2 files · 24.4 MB</span></label>
-                <div class="tc-stack tc-stack--gap-5 tc-card__top2">
+                <div class="tc-stack tc-stack--tight tc-card__top2">
                   <label class="tc-check"><input class="tc-check__box" type="checkbox" name="attachments" value="1"><span class="tc-tickrow__tick is-off"></span>Publish them too — each gets its own link</label>
                   <span class="tc-field__hint">They expire and are revoked with this link. Without it the page shows how many files there are, not their names: a name can give away a lot.</span>
                 </div></div>
@@ -22804,7 +22796,7 @@ Read  2 min ago</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -22812,7 +22804,7 @@ Read  2 min ago</div>
             <div class="tc-prose tc-prose--lead tc-prose--top18">Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.</div>
             <div class="tc-doc__sec--rule">
               <div class="tc-rubric tc-rubric--bot7">Attachments</div>
-              <div class="tc-stack tc-stack--gap-5 tc-doc__files">
+              <div class="tc-stack tc-stack--tight tc-doc__files">
                 <span class="tc-stack__item"><a class="tc-dim--accent" href="/p/Bn4q7Zs1Wd2e">2026-08-10-sync-board.png</a> <span class="tc-dim">· 412 KB</span></span>
                 <span class="tc-stack__item"><a class="tc-dim--accent" href="/p/Kd9x3Pq6Tr1m">запись-встречи.m4a</a> <span class="tc-dim">· 24 MB</span></span>
               </div>
@@ -22848,7 +22840,7 @@ Read  2 min ago</div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.</div>
             <div class="tc-doc__sec">
               <div class="tc-doc__heading">Что делаем</div>
-              <ul class="tc-stack tc-stack--gap-7 tc-doc__list">
+              <ul class="tc-stack tc-stack--normal tc-doc__list">
                 <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
                 <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить у Артёма скриншоты</span></li>
               </ul>
@@ -22907,9 +22899,9 @@ Read  2 min ago</div>
           <div class="tc-head__titles"><div class="tc-head__title tc-head__title--t19">release-checklist.md</div>
             <div class="tc-head__sub"><span class="tc-mono">text/markdown · 3.1 KB · changed 2026-08-09</span></div></div>
         </div>
-        <div class="tc-doc tc-stack tc-stack--gap-14">
+        <div class="tc-doc tc-stack tc-stack--wide">
           <div class="tc-doc__heading">Перед заморозкой</div>
-          <ul class="tc-stack tc-stack--gap-6 tc-doc__bullets">
+          <ul class="tc-stack tc-stack--tight tc-doc__bullets">
             <li>прогнать <span class="tc-mono tc-mono--chip">go test -race ./...</span></li>
             <li>проверить changelog</li>
             <li>письмо пользователям — черновик у Анны</li>
@@ -22933,7 +22925,7 @@ Read  2 min ago</div>
           <svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
           <span class="tc-badge">read-only</span>
         </div>
-        <div class="tc-stack tc-stack--gap-14 tc-main__stage">
+        <div class="tc-stack tc-stack--wide tc-main__stage">
           <span class="tc-thumb tc-thumb--tile">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--sq30"><use href="#i-doc"/></svg>
           </span>
@@ -23285,7 +23277,7 @@ Read  2 min ago</div>
           <svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
           <span class="tc-badge">read-only</span>
         </div>
-        <div class="tc-stack tc-stack--gap-14 tc-main__stage">
+        <div class="tc-stack tc-stack--wide tc-main__stage">
           <span class="tc-thumb tc-thumb--tile">
             <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--sq30"><use href="#i-doc"/></svg>
           </span>
@@ -23709,7 +23701,7 @@ Read  2 min ago</div>
             <div class="tc-sec tc-sec--flush-flush-padt11">
               <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">4</span>
                 <span class="tc-push tc-line tc-line--normal"><details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=contact" role="menuitem"><svg><use href="#i-con"/></svg>Contact</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=book" role="menuitem"><svg><use href="#i-con"/></svg>Address book</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=event" role="menuitem"><svg><use href="#i-cal"/></svg>Event</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=calendar" role="menuitem"><svg><use href="#i-cal"/></svg>Calendar</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=task" role="menuitem"><svg><use href="#i-task"/></svg>Task</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=note" role="menuitem"><svg><use href="#i-note"/></svg>Note</button><span class="tc-menu__sep"></span><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=file" role="menuitem"><svg><use href="#i-doc"/></svg>File</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=folder" role="menuitem"><svg><use href="#i-file"/></svg>Folder<span class="tc-tag tc-push">link</span></button></div></details></span></div>
-              <div class="tc-stack tc-stack--gap-6 tc-card__top8">
+              <div class="tc-stack tc-stack--tight tc-card__top8">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-con"/></svg><span class="tc-table__filename">Пётр Смирнов · подрядчик</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.vcf · 3 KB</span>
@@ -23764,7 +23756,7 @@ Read  2 min ago</div>
           </div>
           <div class="tc-sheet__body">
       <div class="tc-card tc-card--flush">
-              <div class="tc-stack tc-stack--gap-3 tc-card__head">
+              <div class="tc-stack tc-stack--tight tc-card__head">
                 <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--t11-muted">&lt;mix@carrel.example&gt;</span></div>
                 <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Reply-To</span>Михаил Енученко <span class="tc-mono tc-mono--t11-muted">&lt;mix@example.org&gt;</span></div>
                 <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">To</span>Анна Ковалёва <span class="tc-mono tc-mono--t11-muted">&lt;a.kovaleva@example.org&gt;</span>, Артём Белов <span class="tc-mono tc-mono--t11-muted">&lt;a.belov@example.org&gt;</span></div>
@@ -23998,7 +23990,7 @@ Read  2 min ago</div>
             <div class="tc-sec tc-sec--flush-flush-padt11">
               <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">4</span>
                 <span class="tc-push tc-line tc-line--normal"><details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=contact" role="menuitem"><svg><use href="#i-con"/></svg>Contact</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=book" role="menuitem"><svg><use href="#i-con"/></svg>Address book</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=event" role="menuitem"><svg><use href="#i-cal"/></svg>Event</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=calendar" role="menuitem"><svg><use href="#i-cal"/></svg>Calendar</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=task" role="menuitem"><svg><use href="#i-task"/></svg>Task</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=note" role="menuitem"><svg><use href="#i-note"/></svg>Note</button><span class="tc-menu__sep"></span><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=file" role="menuitem"><svg><use href="#i-doc"/></svg>File</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=folder" role="menuitem"><svg><use href="#i-file"/></svg>Folder<span class="tc-tag tc-push">link</span></button></div></details></span></div>
-              <div class="tc-stack tc-stack--gap-6 tc-card__top8">
+              <div class="tc-stack tc-stack--tight tc-card__top8">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-con"/></svg><span class="tc-table__filename">Пётр Смирнов · подрядчик</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.vcf · 3 KB</span>
@@ -24269,7 +24261,7 @@ Read  2 min ago</div>
               </div>
               <div class="tc-sec tc-sec--flush-flush-padt11">
                 <div class="tc-rubric">The letter carries</div>
-                <ul class="tc-stack tc-stack--gap-5 tc-sec__list tc-sec__list--muted">
+                <ul class="tc-stack tc-stack--tight tc-sec__list tc-sec__list--muted">
                   <li>The link and your line — nothing of the calendar itself</li>
                   <li>Revoking the link closes it for this recipient too</li>
                   <li>It expires on 8 September, as the link does</li>
@@ -24940,7 +24932,7 @@ Read  2 min ago</div>
     <div class="frame-label"><span>Личные адреса, в профиле есть подтверждённая почта</span><span class="frag">фрагмент</span><i>заголовки письма, а не экран</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad16">
       <div class="tc-card tc-card--flush">
-        <div class="tc-stack tc-stack--gap-3 tc-card__head">
+        <div class="tc-stack tc-stack--tight tc-card__head">
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">From</span><b>Михаил Енученко</b> <span class="tc-mono tc-mono--t11-muted">&lt;mix@carrel.example&gt;</span></div>
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Reply-To</span>Михаил Енученко <span class="tc-mono tc-mono--t11-muted">&lt;mix@example.org&gt;</span></div>
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Subject</span>Контакты подрядчика и смета</div>
@@ -24965,7 +24957,7 @@ Read  2 min ago</div>
     <div class="frame-label"><span>Служебный адрес, почты в профиле нет</span><span class="frag">фрагмент</span><i>заголовки письма, а не экран</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad16">
       <div class="tc-card tc-card--flush">
-        <div class="tc-stack tc-stack--gap-3 tc-card__head">
+        <div class="tc-stack tc-stack--tight tc-card__head">
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">From</span><b>Михаил Енученко (через Carrel)</b> <span class="tc-mono tc-mono--t11-muted">&lt;noreply@carrel.example&gt;</span></div>
           <div class="tc-stack__item"><span class="tc-dim tc-dim--slot">Subject</span>Контакты подрядчика и смета</div>
         </div>
@@ -27081,7 +27073,7 @@ The account itself stays: same login, role and confirmed address, the same first
         </div>
         <div class="tc-sec">
           <div class="tc-rubric">The same person in other books <span class="tc-badge is-linked">2</span></div>
-          <ul class="tc-stack tc-stack--gap-5 tc-sec__list">
+          <ul class="tc-stack tc-stack--tight tc-sec__list">
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#A05A2C"></span> <a class="tc-dim--accent" href="/app/contacts/nextcloud/arhiv/4f2b-9c31-a0e7">nextcloud · Архив</a> <span class="tc-dim">· Phone, email differ</span></li>
             <li><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#6B4E7A"></span> <a class="tc-dim--accent" href="/app/contacts/radicale/komanda/4f2b-9c31-a0e7">radicale · vps · Команда</a> <span class="tc-dim">· Phone, email differ</span></li>
           </ul>
@@ -27902,11 +27894,11 @@ Read  2 min ago · not changed on server</div>
               <dt>Cc</dt><dd>Пётр Смирнов <span class="tc-dim">p.smirnov@example.org</span></dd>
               <dt>Date</dt><dd class="tc-mono">2026-09-24 10:12</dd>
             </dl>
-            <div class="tc-doc__sec--rule tc-stack tc-stack--gap-10">
+            <div class="tc-doc__sec--rule tc-stack tc-stack--wide">
               <div class="tc-prose tc-prose--lead">Михаил, добрый день!
 
 Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:</div>
-              <ul class="tc-stack tc-stack--gap-5 tc-doc__list tc-doc__list--bullets">
+              <ul class="tc-stack tc-stack--tight tc-doc__list tc-doc__list--bullets">
                 <li class="tc-prose tc-prose--lead">на с. 14 и 37 съехали подписи к иллюстрациям;</li>
                 <li class="tc-prose tc-prose--lead">в оглавлении не тот номер у главы «Переплёт»;</li>
                 <li class="tc-prose tc-prose--lead">обложку оставляем, как на прошлой неделе.</li>
@@ -27921,7 +27913,7 @@ Read  2 min ago · not changed on server</div>
             </div>
             <div class="tc-doc__sec--rule">
               <div class="tc-rubric tc-rubric--bot8">Attachments <span class="tc-num">3</span></div>
-              <div class="tc-stack tc-stack--gap-6">
+              <div class="tc-stack tc-stack--tight">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
@@ -27943,7 +27935,7 @@ Read  2 min ago · not changed on server</div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Sender</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">Анна Ковалёва</a> <span class="tc-dim">· nextcloud · Контакты</span></span>
                 <span class="tc-stack__item"><a class="tc-dim--accent" href="#">Timeline</a> <span class="tc-dim">· everything with her</span></span>
               </div>
@@ -28076,11 +28068,11 @@ Read    2 min ago</div>
               <dt>Cc</dt><dd>Пётр Смирнов <span class="tc-dim">p.smirnov@example.org</span></dd>
               <dt>Date</dt><dd class="tc-mono">2026-09-24 10:12</dd>
             </dl>
-            <div class="tc-doc__sec--rule tc-stack tc-stack--gap-10">
+            <div class="tc-doc__sec--rule tc-stack tc-stack--wide">
               <div class="tc-prose tc-prose--lead">Михаил, добрый день!
 
 Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:</div>
-              <ul class="tc-stack tc-stack--gap-5 tc-doc__list tc-doc__list--bullets">
+              <ul class="tc-stack tc-stack--tight tc-doc__list tc-doc__list--bullets">
                 <li class="tc-prose tc-prose--lead">на с. 14 и 37 съехали подписи к иллюстрациям;</li>
                 <li class="tc-prose tc-prose--lead">в оглавлении не тот номер у главы «Переплёт»;</li>
                 <li class="tc-prose tc-prose--lead">обложку оставляем, как на прошлой неделе.</li>
@@ -28095,7 +28087,7 @@ Read    2 min ago</div>
             </div>
             <div class="tc-doc__sec--rule">
               <div class="tc-rubric tc-rubric--bot8">Attachments <span class="tc-num">3</span></div>
-              <div class="tc-stack tc-stack--gap-6">
+              <div class="tc-stack tc-stack--tight">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
@@ -28117,7 +28109,7 @@ Read    2 min ago</div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Sender</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">Анна Ковалёва</a> <span class="tc-dim">· nextcloud · Контакты</span></span>
                 <span class="tc-stack__item"><a class="tc-dim--accent" href="#">Timeline</a> <span class="tc-dim">· everything with her</span></span>
               </div>
@@ -28225,11 +28217,11 @@ Read    2 min ago</div>
         <dt>Date</dt><dd class="tc-mono">2026-09-23 19:30</dd>
       </dl>
       <div class="tc-msg is-row tc-msg--flush-top11"><svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--muted"><use href="#i-doc"/></svg><span class="tc-msg__aside">This letter came only as HTML. It is shown as text: styles, pictures and scripts are left out. <button class="tc-btn is-sm" type="button">Show original</button></span></div>
-      <div class="tc-doc__sec--rule tc-stack tc-stack--gap-10">
+      <div class="tc-doc__sec--rule tc-stack tc-stack--wide">
         <div class="tc-prose tc-prose--lead">Сорок новинок осени
 
 Мы собрали книги, которые выходят в сентябре и октябре: прозу, нон-фикшн и детское. Предзаказ открыт до 5 октября.</div>
-        <ul class="tc-stack tc-stack--gap-5 tc-doc__list tc-doc__list--bullets">
+        <ul class="tc-stack tc-stack--tight tc-doc__list tc-doc__list--bullets">
           <li class="tc-prose tc-prose--lead"><a class="tc-doc__link" href="#">«Переплётчик»</a> <span class="tc-dim">bookfair.example/b/1182</span> — роман, 2026</li>
           <li class="tc-prose tc-prose--lead"><a class="tc-doc__link" href="#">«Как устроена типография»</a> <span class="tc-dim">bookfair.example/b/1190</span> — нон-фикшн</li>
         </ul>
@@ -28515,11 +28507,11 @@ Read    2 min ago</div>
               <dt>Cc</dt><dd>Пётр Смирнов <span class="tc-dim">p.smirnov@example.org</span></dd>
               <dt>Date</dt><dd class="tc-mono">2026-09-24 10:12</dd>
             </dl>
-            <div class="tc-doc__sec--rule tc-stack tc-stack--gap-10">
+            <div class="tc-doc__sec--rule tc-stack tc-stack--wide">
               <div class="tc-prose tc-prose--lead">Михаил, добрый день!
 
 Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:</div>
-              <ul class="tc-stack tc-stack--gap-5 tc-doc__list tc-doc__list--bullets">
+              <ul class="tc-stack tc-stack--tight tc-doc__list tc-doc__list--bullets">
                 <li class="tc-prose tc-prose--lead">на с. 14 и 37 съехали подписи к иллюстрациям;</li>
                 <li class="tc-prose tc-prose--lead">в оглавлении не тот номер у главы «Переплёт»;</li>
                 <li class="tc-prose tc-prose--lead">обложку оставляем, как на прошлой неделе.</li>
@@ -28534,7 +28526,7 @@ Read    2 min ago</div>
             </div>
             <div class="tc-doc__sec--rule">
               <div class="tc-rubric tc-rubric--bot8">Attachments <span class="tc-num">3</span></div>
-              <div class="tc-stack tc-stack--gap-6">
+              <div class="tc-stack tc-stack--tight">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-cal"/></svg><span class="tc-table__filename">Встреча в издательстве · 2026-09-26 11:00</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">.ics · 2 KB</span>
@@ -28556,7 +28548,7 @@ Read    2 min ago</div>
           <div class="tc-docmeta">
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Sender</div>
-              <div class="tc-stack tc-stack--gap-5 tc-line__text">
+              <div class="tc-stack tc-stack--tight tc-line__text">
                 <span class="tc-stack__item"><span class="tc-mark tc-mark--h11 tc-mark--inline" data-tc-colour="#4A6B52"></span> <a class="tc-dim--accent" href="#">Анна Ковалёва</a> <span class="tc-dim">· nextcloud · Контакты</span></span>
                 <span class="tc-stack__item"><a class="tc-dim--accent" href="#">Timeline</a> <span class="tc-dim">· everything with her</span></span>
               </div>
@@ -28607,7 +28599,7 @@ Read    2 min ago</div>
             <div class="tc-sec tc-sec--flush-flush-padt11">
               <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">1</span>
                 <span class="tc-push tc-line tc-line--normal"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span></div>
-              <div class="tc-stack tc-stack--gap-6 tc-card__top8">
+              <div class="tc-stack tc-stack--tight tc-card__top8">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">вёрстка-сборник-v4.pdf</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">3.1 MB</span>
@@ -28635,7 +28627,7 @@ Read    2 min ago</div>
 <div class="frame cap660" data-frame="s-mailbox-16">
   <div class="frame-label"><span>Новое письмо · Cc и Bcc спрятаны</span><span class="frag">отложена</span><i>шапка листа, Write a letter из хронологии</i></div>
   <div class="tc-root tc-root--on-bg tc-root--pad14">
-    <div class="tc-stack tc-stack--gap-10">
+    <div class="tc-stack tc-stack--wide">
       <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
       <div class="tc-field tc-field--w100"><label>To</label>
         <span class="tc-line tc-line--normal"><span class="tc-in tc-in--wrap-gap5 tc-in--fill is-focus"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span><button class="tc-btn" title="Add copy" type="button">Cc</button><button class="tc-btn" title="Add blind copy" type="button">Bcc</button></span></div>
@@ -28675,7 +28667,7 @@ Read    2 min ago</div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-sec tc-sec--flush-flush-padt11">
         <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">2</span></div>
-        <div class="tc-stack tc-stack--gap-6 tc-card__top8">
+        <div class="tc-stack tc-stack--tight tc-card__top8">
           <div class="tc-line tc-line--normal tc-line__text">
             <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">вёрстка-сборник-v4.pdf</span></span>
             <span class="tc-mono tc-mono--dusty-t11">3.1 MB</span>
@@ -28700,7 +28692,7 @@ Read    2 min ago</div>
   <div class="frame" data-frame="s-mailbox-19">
     <div class="frame-label"><span>Сервер отказал</span><span class="frag">отложена</span><i>подвал листа после Send</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-stack tc-stack--gap-10">
+      <div class="tc-stack tc-stack--wide">
         <div class="tc-msg is-alert tc-msg--flush">The mail server of <b>home</b> did not take the letter; nothing was sent. Its answer:</div>
         <div class="tc-diag">EHLO carrel          → 250 SIZE 26214400 · AUTH PLAIN LOGIN
 AUTH PLAIN          → 235 2.7.0 Authentication successful
@@ -28720,7 +28712,7 @@ DATA                → 550 5.7.1 Daily sending limit reached
   <div class="frame" data-frame="s-mailbox-20">
     <div class="frame-label"><span>Письмо ушло, копии в Sent нет</span><span class="frag">отложена</span><i>лист после Send</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-stack tc-stack--gap-10">
+      <div class="tc-stack tc-stack--wide">
         <div class="tc-msg is-accent tc-msg--flush"><b>The letter went out</b> to 2 recipients from mix@home.example.</div>
         <div class="tc-msg tc-msg--flush">Its copy did not reach <b>Sent</b>: the server answered <span class="tc-mono">APPEND → NO [OVERQUOTA] Quota exceeded</span>. The recipients have the letter. Free some space in the mailbox: Carrel keeps no copy to put there later.</div>
         <div class="tc-line tc-line--normal"><button class="tc-btn" type="button">Close</button></div>
@@ -29077,7 +29069,7 @@ SMTP  smtp.yandex.ru:465  TLS
             <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-link"/></svg>Subscribe to a feed</button>
           </div>
         </div>
-        <div class="tc-stack tc-stack--gap-10 tc-main__results">
+        <div class="tc-stack tc-stack--wide tc-main__results">
           <div class="tc-rubric tc-rubric--split tc-rubric--nudge">DAV servers<span class="tc-mono tc-mono--ls0">4</span></div>
           <div class="tc-card">
             <div class="tc-rubric">nextcloud
@@ -29204,7 +29196,7 @@ SMTP  mail.home.example:465  TLS
 <div class="frame cap820" data-frame="s-mailbox-28">
   <div class="frame-label"><span>Почта выключена на экземпляре</span><span class="frag">отложена</span><i>рубрика Mailboxes того же экрана</i></div>
   <div class="tc-root tc-root--on-bg tc-root--pad14">
-    <div class="tc-stack tc-stack--gap-10">
+    <div class="tc-stack tc-stack--wide">
       <div class="tc-rubric tc-rubric--split tc-rubric--nudge">Mailboxes <span class="tc-badge">off on this instance</span><span class="tc-mono tc-mono--ls0">2</span></div>
       <div class="tc-msg tc-msg--flush">The administrator turned off mailboxes on this instance. Their passwords stay sealed in your profile, and everything works again when mailboxes are back on.</div>
       <div class="tc-card tc-card--flush">
@@ -30516,7 +30508,7 @@ dav: HTTP 503: the server is busy</div></div>
             <span class="tc-field__label">Photo</span>
             <div class="tc-field__photo-row">
               <span class="tc-avatar--photo is-ph" id="photo">АК</span>
-              <div class="tc-stack tc-stack--gap-6 tc-field__photo-side">
+              <div class="tc-stack tc-stack--tight tc-field__photo-side">
                 <span class="tc-line tc-line--normal"><label class="tc-btn">Add<input class="tc-file" type="file" name="photo" accept="image/*" aria-label="Photo" data-tc-preview="photo"></label></span>
                 <span class="tc-field__hint tc-field__hint--max150">JPEG, PNG, GIF or WebP.</span>
               </div>
@@ -33056,7 +33048,7 @@ dav: HTTP 503: the server is busy</div></div>
 Письмо пользователям пишет Анна, черновик к вечеру вторника.</div>
           <div class="tc-doc__acts">
             <div class="tc-doc__heading">Что делаем</div>
-            <ul class="tc-stack tc-stack--gap-9 tc-doc__list">
+            <ul class="tc-stack tc-stack--normal tc-doc__list">
               <li class="tc-doc__task"><span class="tc-tick tc-tick--nudge" role="img" aria-label="Not done"></span>проверить changelog</li>
               <li class="tc-doc__task"><span class="tc-tick is-done tc-tick--nudge" role="img" aria-label="Done"></span><span class="tc-dim tc-dim--struck">попросить скриншоты</span></li>
             </ul>
@@ -33665,7 +33657,7 @@ dav: HTTP 503: the server is busy</div></div>
           </dl>
           <div class="tc-sec">
             <div class="tc-rubric">Attachments</div>
-            <div class="tc-stack tc-stack--gap-7 tc-line__text">
+            <div class="tc-stack tc-stack--normal tc-line__text">
               <span class="tc-stack__item">release-checklist.md <span class="tc-dim">· 3.1 KB</span></span>
               <span class="tc-line tc-line--normal"><button class="tc-btn is-sm" type="button">Open in editor</button><button class="tc-btn is-sm" type="button">Show in folder</button></span>
               <span class="tc-dim tc-dim--t11">Edits go to the server when the program closes the file. The temporary copy lives until then and is deleted.</span>
@@ -33719,9 +33711,9 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel setup</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-13 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <svg class="tc-brand__logo tc-brand__logo--h42-w104" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
-          <div class="tc-stack tc-stack--gap-9">
+          <div class="tc-stack tc-stack--normal">
             <div class="tc-card tc-card--edge-accent-flush">
               <div class="tc-card__pick">
                 <button class="tc-tickrow__tick tc-tickrow__tick--top3" type="button"></button>
@@ -33779,7 +33771,7 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel · portable</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-12 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>Everything lives here</label>
               <input class="tc-in is-mono tc-in--t11-5" type="text" value="E:\Carrel\ — app, carrel.exe, data\state.enc" aria-label="Everything lives here">
@@ -33824,9 +33816,9 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-14 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <svg class="tc-brand__logo tc-brand__logo--h42-w104" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
-          <div class="tc-stack tc-stack--gap-10">
+          <div class="tc-stack tc-stack--wide">
             <div class="tc-card tc-card--edge-accent-flush">
               <div class="tc-card__pick">
                 <button class="tc-tickrow__tick tc-tickrow__tick--top3" type="button"></button>
@@ -33863,7 +33855,7 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel · local instance</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-13 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>Data folder</label>
               <input class="tc-in is-mono tc-in--t11-5" type="text" value="C:\Users\mix\AppData\Local\Carrel" aria-label="Data folder">
@@ -33914,7 +33906,7 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-14 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <svg class="tc-brand__logo tc-brand__logo--h42-w104" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg>
           <div class="tc-win__note">The app needs the address of your Carrel instance. The data stays there: the app is a window, not a second copy.</div>
           <div class="tc-form tc-form--col tc-form--gap10 tc-form--pad0">
@@ -33944,7 +33936,7 @@ dav: HTTP 503: the server is busy</div></div>
       <div class="mk-tray">
         <div class="mk-tray__row is-head">
           <div class="tc-rubric tc-rubric--bot7">Today · 16 August</div>
-          <div class="tc-stack tc-stack--gap-5 tc-line__text">
+          <div class="tc-stack tc-stack--tight tc-line__text">
             <span class="tc-line tc-line--normal"><span class="tc-mark tc-mark--h14" data-tc-colour="#4A6B52"></span><span class="tc-mono tc-mono--muted">10:00</span> Синк-ап по релизу</span>
             <span class="tc-line tc-line--normal"><span class="tc-mark tc-mark--h14" data-tc-colour="#3F6E8C"></span><span class="tc-mono tc-mono--muted">15:00</span> Созвон с подрядчиком</span>
             <span class="tc-dim--danger tc-dim--t11-5">3 tasks overdue</span>
@@ -33976,7 +33968,7 @@ dav: HTTP 503: the server is busy</div></div>
           <span class="mk-titlebar__title">New note</span>
           <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
         </div>
-        <div class="tc-stack tc-stack--gap-9 tc-win__sheet--pad12">
+        <div class="tc-stack tc-stack--normal tc-win__sheet--pad12">
           <textarea class="tc-in is-area is-focus tc-in--minh104-t13-5">Спросить у Виктора про миграцию — успеет ли до заморозки.</textarea>
           <div class="tc-line tc-line--normal">
             <button class="tc-in is-pick tc-in--t12-fill" type="button">nextcloud · Записи</button>
@@ -34014,7 +34006,7 @@ dav: HTTP 503: the server is busy</div></div>
           <span class="mk-titlebar__title">New event</span>
           <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
         </div>
-        <div class="tc-stack tc-stack--gap-9 tc-win__sheet--pad12">
+        <div class="tc-stack tc-stack--normal tc-win__sheet--pad12">
           <div class="tc-line tc-sheet__fields">
             <div class="tc-field tc-grow"><label>Title</label><input class="tc-in is-focus" type="text" value="Забрать документы" aria-label="Title"></div>
             <div class="tc-field tc-field--fix130"><label>Date</label><input class="tc-in is-mono" type="date" value="2026-08-11" aria-label="Date"></div>
@@ -34074,7 +34066,7 @@ dav: HTTP 503: the server is busy</div></div>
   <figure style="flex:1 1 380px">
   <div class="frame" data-frame="desktop-11">
     <div class="frame-label"><span>Напоминания</span><i>системное уведомление и его настройка</i></div>
-    <div class="tc-root tc-stack tc-stack--gap-14 tc-root--on-bg tc-root--pad18">
+    <div class="tc-root tc-stack tc-stack--wide tc-root--on-bg tc-root--pad18">
       <div class="mk-toast mk-toast--mid">
         <div class="mk-toast__head">
           <svg viewBox="0 0 24 24" stroke-width="1.3" fill="none" class="tc-ico--muted"><use href="#i-cal"/></svg>
@@ -34125,7 +34117,7 @@ dav: HTTP 503: the server is busy</div></div>
         <span class="mk-titlebar__title">Sign out</span>
         <span class="mk-winbtns"><span class="mk-winbtns__btn mk-winbtns__btn--h30"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span>
       </div>
-      <div class="tc-stack tc-stack--gap-10 tc-win__sheet--pad12">
+      <div class="tc-stack tc-stack--wide tc-win__sheet--pad12">
         <div class="tc-msg tc-msg--flush"><b>Sign out of <span class="tc-mono">carrel.example</span>?</b> <b>Your other devices stay signed in</b>: end those sessions in Settings → Account.</div>
         <div class="tc-msg is-alert is-row tc-msg--flush">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
@@ -34252,7 +34244,7 @@ dav: HTTP 503: the server is busy</div></div>
             <button class="tc-btn" type="button">Later</button>
           </span>
         </div>
-        <div class="tc-stack tc-stack--gap-12 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <div class="tc-form tc-form--gap12-16-pad0">
             <div class="tc-field tc-grow"><label>Installed</label>
               <input class="tc-in is-mono tc-in--t11-5" type="text" value="app 0.8.0 · server 0.8.0 — both run inside this app" aria-label="Installed">
@@ -34277,7 +34269,7 @@ dav: HTTP 503: the server is busy</div></div>
     <div class="tc-root">
       <div class="mk-win">
         <div class="mk-titlebar"><span class="mk-titlebar__title">Carrel · carrel.example</span><span class="mk-winbtns"><span class="mk-winbtns__btn"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span></span></div>
-        <div class="tc-stack tc-stack--gap-12 tc-win__body--pad16-20">
+        <div class="tc-stack tc-stack--wide tc-win__body--pad16-20">
           <div class="tc-msg is-alert is-row tc-msg--flush">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"><use href="#i-shield"/></svg>
             <span class="tc-msg__aside"><b>The app is newer than the server.</b> This app is 0.8.0, <span class="tc-mono">carrel.example</span> runs 0.6.4. What both know works; what is newer than the server is not there.</span>

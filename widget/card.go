@@ -140,7 +140,7 @@ type CardList struct {
 
 func (l CardList) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<ul class="tc-stack tc-stack--gap-4 tc-card__list">`)
+	s.WriteString(`<ul class="tc-stack tc-stack--tight tc-card__list">`)
 	for _, it := range l.Items {
 		s.WriteString(`<li>` + esc(it) + `</li>`)
 	}
@@ -200,10 +200,10 @@ func (q CardQR) html(mix) string {
 	var s strings.Builder
 	if q.Src != "" {
 		s.WriteString(`<div class="tc-card__split"><div` + attr("data-tc-colour", q.Colour) + ` class="tc-card__qr"><img class="tc-card__qr-img"` + attr("src", q.Src) +
-			` width="104" height="104" alt="QR"></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side">`)
+			` width="104" height="104" alt="QR"></div><div class="tc-stack tc-stack--normal tc-card__qr-side">`)
 	} else {
 		s.WriteString(`<div class="tc-card__split"><div` + attr("data-tc-colour", q.Colour) + ` class="tc-card__qr"><svg width="104" height="104" viewBox="-1 -1 27 27" role="img" aria-label="QR">` +
-			`<rect x="-1" y="-1" width="27" height="27"` + attr("fill", q.Colour) + `/><use href="#` + esc(q.Symbol) + `"/></svg></div><div class="tc-stack tc-stack--gap-8 tc-card__qr-side">`)
+			`<rect x="-1" y="-1" width="27" height="27"` + attr("fill", q.Colour) + `/><use href="#` + esc(q.Symbol) + `"/></svg></div><div class="tc-stack tc-stack--normal tc-card__qr-side">`)
 	}
 	for _, it := range q.Side {
 		s.WriteString(it.html(nil))
@@ -297,7 +297,7 @@ type CardHead struct {
 
 func (h CardHead) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-3 tc-card__head">`)
+	s.WriteString(`<div class="tc-stack tc-stack--tight tc-card__head">`)
 	for _, l := range h.Lines {
 		s.WriteString(`<div class="tc-stack__item">` + Dim{Parts: []Inline{Text(l.Slot)}, Variant: DimSlot}.html(nil) + joined(l.Parts) + `</div>`)
 	}
@@ -423,7 +423,7 @@ type MainResults struct {
 
 func (r MainResults) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-stack tc-stack--gap-10 tc-main__results">`)
+	s.WriteString(`<div class="tc-stack tc-stack--wide tc-main__results">`)
 	for _, it := range r.Items {
 		s.WriteString(it.html(nil))
 	}
