@@ -17,8 +17,7 @@ type RubricVariant int
 const (
 	RubricPlain    RubricVariant = iota
 	RubricBottom2                // 2 px below: over a title
-	RubricBottom7                // 7 px below
-	RubricBottom8                // 8 px below: over a list in prose
+	RubricBelow                  // the normal step below: over a list
 	RubricRail                   // the padding of a rail section
 	RubricSplit                  // words left, a count at the right edge, nudged
 	RubricDanger                 // a server that does not answer
@@ -27,7 +26,7 @@ const (
 )
 
 func (v RubricVariant) class() string {
-	return [...]string{"", "tc-rubric--bot2", "tc-rubric--bot7", "tc-rubric--bot8", "tc-rubric--pad0-14-6",
+	return [...]string{"", "tc-rubric--bot2", "tc-rubric--below-normal", "tc-rubric--pad0-14-6",
 		"tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--normal", "tc-line"}[v]
 }
 

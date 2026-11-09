@@ -20,19 +20,19 @@ type ProseVariant int
 const (
 	ProsePlain      ProseVariant = iota
 	ProseMuted                   // a quieter paragraph: what a dialog means
-	ProseMutedClose              // muted, flush, 10 px below: over a button in a card
+	ProseMutedClose              // muted, flush, the normal step below: over a button in a card
 	Prose13                      // 13 px: an event's description
 	Prose13Card                  // 13 px, flush, 11 px above: a card's text
-	ProseLead                    // the first paragraph of a document, 14 px above
-	ProseLeadAfter               // a paragraph after a section, 18 px above
+	ProseLead                    // the first paragraph of a document, the wide step above
+	ProseLeadAfter               // a paragraph after a section, the loose step above
 	ProseRead                    // the reading measure
-	ProseReadTop                 // the reading measure, 14 px above
-	ProseTop                     // 14 px above
+	ProseReadTop                 // the reading measure, the wide step above
+	ProseTop                     // the wide step above
 )
 
 func (v ProseVariant) class() string {
-	return [...]string{"", "tc-prose--muted", "tc-prose--muted-flush-bot10", "tc-prose--t13", "tc-prose--t13-flush-padt11",
-		"tc-prose--lead tc-prose--top14", "tc-prose--lead tc-prose--top18", "tc-prose--read", "tc-prose--read tc-prose--top14", "tc-prose--top14"}[v]
+	return [...]string{"", "tc-prose--muted", "tc-prose--muted-flush-below-normal", "tc-prose--t13", "tc-prose--t13-flush-padt11",
+		"tc-prose--lead tc-prose--above-wide", "tc-prose--lead tc-prose--above-loose", "tc-prose--read", "tc-prose--read tc-prose--above-wide", "tc-prose--above-wide"}[v]
 }
 
 // Prose — tc-prose
@@ -81,7 +81,7 @@ type DocSub struct {
 
 func (b DocSub) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-head__sub tc-head__sub--top6">`)
+	s.WriteString(`<div class="tc-head__sub tc-head__sub--above-normal">`)
 	for _, p := range b.Parts {
 		s.WriteString(p.html(nil))
 	}

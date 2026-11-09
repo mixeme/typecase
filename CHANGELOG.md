@@ -14,6 +14,22 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A margin between neighbours is a step** (the owner, 09.11). Classes
+  named by pixels above or below a block take the step's name:
+  `tc-rubric--bot7`, `--bot8` → `tc-rubric--below-normal`,
+  `tc-prose--top14` → `--above-wide`, `--top18` → `--above-loose`,
+  `tc-msg--flush-top4/9/11` → `--flush-above-tight/normal/wide`,
+  `--flush-bot12` → `--flush-below-wide`, `--my8` → `--around-normal`, and
+  so on for the head's title and sub, a field's hint, a mono line, a diag,
+  a rail section, a card and the sign-in tagline. Constants follow:
+  `RubricBottom7`, `RubricBottom8` → `RubricBelow`; `DialogTitleGap4` →
+  `DialogTitleGapTight`, `DialogTitleGap6`, `DialogTitleGap8` →
+  `DialogTitleGapNormal`; `MsgFlushTop4/9/11` →
+  `MsgFlushAboveTight/Normal/Wide`, `MsgFlushBottom12` →
+  `MsgFlushBelowWide`, `MsgFlushY8` → `MsgAroundNormal`. The root's
+  `--tc-gap-fields` is `--tc-gap-loose` (16 px): fields side by side and a
+  paragraph after a section. Nudges of 2–3 px stay numbers: they align,
+  they do not space.
 - **A column's gap is a step too** (the owner, 09.11). `StackGap` is
   `StackGap0` (none), `StackGapTight`, `StackGapNormal`, `StackGapWide`:
   `StackGap9` becomes `StackGapNormal`, `StackGap10` `StackGapWide`.
@@ -1064,6 +1080,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Margins between neighbours in the same steps** (the owner, 09.11). A
+  rubric over a list, a hint under a field, a message under a line, a title
+  over its sub, a paragraph after a section stood 4 to 18 px apart; now
+  tight 4, normal 8 (were 6–10), wide 12 (11–14), loose 16 (18). 87 frames
+  move by 1–2 px.
 - **Column gaps in the same steps** (the owner, 09.11). Columns had twelve
   gaps, 2 to 14 px; now tight 4 for the items of a list and checks (were
   2–6), normal 8 for tasks and side blocks (7–9), wide 12 for cards and

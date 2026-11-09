@@ -557,7 +557,7 @@ func Phone7() Screen {
 								Phone: true,
 							},
 							w.DocRelated{
-								Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7},
+								Title: w.Rubric{Text: "Related to", Variant: w.RubricBelow},
 								Name:  "Синк-ап по релизу",
 								What:  w.Dim{Parts: []w.Inline{w.Text("· event")}},
 							},

@@ -7,9 +7,8 @@ type DialogTitleGap int
 
 const (
 	DialogTitleGap0 DialogTitleGap = iota
-	DialogTitleGap4
-	DialogTitleGap6
-	DialogTitleGap8
+	DialogTitleGapTight
+	DialogTitleGapNormal
 )
 
 // DialogTitle is the title of a dialog that has no head: a sign-in page.
@@ -19,7 +18,7 @@ type DialogTitle struct {
 }
 
 func (t DialogTitle) html(mix) string {
-	return `<div` + class(nil, "tc-head__title", [...]string{"", "tc-head__title--bot4", "tc-head__title--bot6", "tc-head__title--bot8"}[t.Gap]) + `>` + esc(t.Text) + `</div>`
+	return `<div` + class(nil, "tc-head__title", [...]string{"", "tc-head__title--below-tight", "tc-head__title--below-normal"}[t.Gap]) + `>` + esc(t.Text) + `</div>`
 }
 
 // DialogSub is the line under a dialog's own title.
@@ -28,7 +27,7 @@ type DialogSub struct {
 }
 
 func (b DialogSub) html(mix) string {
-	return `<div class="tc-head__sub tc-head__sub--bot12">` + inlines(b.Parts) + `</div>`
+	return `<div class="tc-head__sub tc-head__sub--below-wide">` + inlines(b.Parts) + `</div>`
 }
 
 // DialogLogo is the logo over a sign-in dialog.
@@ -50,7 +49,7 @@ type Tagline struct {
 }
 
 func (t Tagline) html(mix) string {
-	return `<div` + class(nil, "tc-auth__tagline", pick(t.Centered, "tc-auth__tagline--mid"), pick(!t.Centered, "tc-auth__tagline--bot14")) +
+	return `<div` + class(nil, "tc-auth__tagline", pick(t.Centered, "tc-auth__tagline--mid"), pick(!t.Centered, "tc-auth__tagline--below-wide")) +
 		`><strong class="tc-auth__tagline-lead">` + esc(t.Lead) + `</strong> ` + esc(t.Text) + `</div>`
 }
 

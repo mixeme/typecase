@@ -61,7 +61,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{
 								w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it."),
@@ -72,7 +72,7 @@ var _ = add(
 								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
 							},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -118,7 +118,7 @@ var _ = add(
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},
+						w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("The letter went to "),
@@ -139,7 +139,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{w.Text("The account you create here is the first one, and it can manage everyone else.")},
 						},
@@ -148,7 +148,7 @@ var _ = add(
 								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
 							},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -191,7 +191,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("Enter the login or the confirmed email of the account. There is no way to set a new password and keep the data stored here: the encryption key is derived from the password, and the server never has that key."),
@@ -223,7 +223,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("Account "),
@@ -275,7 +275,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "We cannot help from here", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "We cannot help from here", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("This login has no confirmed email — an address that was entered but never confirmed does not count. There is no letter we can send, and there is no password reset that would keep your data.\n\nIf you deposited the encryption key, ask the administrator in person. Otherwise this account cannot be recovered from the sign-in screen."),
@@ -294,7 +294,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Check your inbox", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Check your inbox", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("If that account has a confirmed email, a letter is on its way. The link erases everything stored here after you confirm it, and then asks for a new password. It cannot bring your data back."),
@@ -313,7 +313,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "The administrator has been asked", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "The administrator has been asked", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("A recovery request is recorded for this account. The administrator still has to use the instance master password. Until then, the sign-in screen will not accept a new password."),
@@ -332,7 +332,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps for "),
@@ -359,7 +359,7 @@ var _ = add(
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")},
 						},
@@ -368,7 +368,7 @@ var _ = add(
 								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
 							},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -401,7 +401,7 @@ var _ = add(
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Invitation", Gap: w.DialogTitleGap6},
+						w.DialogTitle{Text: "Invitation", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("This invitation link is not valid. It may have expired, already been used, or been revoked."),
@@ -421,7 +421,7 @@ var _ = add(
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Email address", Gap: w.DialogTitleGap6},
+						w.DialogTitle{Text: "Email address", Gap: w.DialogTitleGapNormal},
 						w.Prose{Parts: []w.Inline{w.Text("Address confirmed. You can sign in now.")}, Variant: w.ProseMuted},
 						w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush},
 					},

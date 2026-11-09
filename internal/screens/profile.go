@@ -4687,7 +4687,7 @@ func Profile9() Screen {
 							Space: w.MsgFlush,
 						},
 						w.SheetBlock{
-							Title: w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBottom7},
+							Title: w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBelow},
 							Items: []w.SheetLine{
 								{
 									Name: "1 published link",

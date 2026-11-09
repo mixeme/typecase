@@ -232,7 +232,7 @@ var _ = add(
 	shell("cards", w.Main{Items: []w.MainPart{
 		w.MainCards{Cards: []w.Card{w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Mono{Text: "visible only now", Variant: w.MonoTightDanger}}},
-			w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBottom12},
+			w.Msg{Parts: []w.MsgPart{w.Text("The user "), w.Strong("viktor"), w.Text(" is created. Hand this over; until they change it, you can sign in as them.")}, Space: w.MsgFlushBelowWide},
 			w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk},
 			w.CardRow{Kind: w.CardTop8, Gap: w.LineGapNormal, Items: []w.CardRowPart{w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary}, w.Button{Label: "Done"}}}}, Variant: w.CardChosen}}}}}, "s-admin-17", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
@@ -564,7 +564,7 @@ var _ = add(
 			w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
 			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
-			w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}}, {Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}}}}}}, View: w.DocViewFocus},
+			w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBelow}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}}, {Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}}}}}}}, View: w.DocViewFocus},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-8", "tc-main", 1),
 	shell("plain", w.Main{Items: []w.MainPart{
 		w.Banner{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}, Badge: &w.Badge{Label: "read-only"}, End: w.Line{Gap: w.LineGapNormal, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Href: "/p/Bn4q7Zs1Wd2e/download"}}}},
@@ -628,7 +628,7 @@ var _ = add(
 			w.CardRow{Kind: w.CardTop10, Gap: w.LineGapNormal, Items: []w.CardRowPart{w.Input{Value: "https://carrel.example/invite/7f3a…", Label: "Invitation link", Mono: true, ReadOnly: true, Variant: w.Input11Fill}, w.Button{Label: "Copy", Small: true, Copy: "https://carrel.example/invite/7f3a…", Copied: "Copied"}}},
 			w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Or send to", Parts: []w.FieldPart{w.Input{Name: "email", Placeholder: "anna@example.org", Label: "Or send to"}}, Width: w.FieldMD}, w.Button{Label: "Send invitation", To: "/admin/invites?action=send", Submit: true}}, Wide: true, Rule: true}}, Action: "/admin/invites?action=link", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}}, w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Temporary password", Items: []w.RubricPart{w.Badge{Label: "hand to hand", Tone: w.BadgeAlert}}},
-			w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBottom12},
+			w.Msg{Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")}, Tone: w.MsgAlert, Space: w.MsgFlushBelowWide},
 			w.CardFields{Items: []w.CardFieldsPart{w.Field{Label: "Role", Parts: []w.FieldPart{w.Pick{Name: "role", Options: []w.PickOption{{Value: "user", Label: "User", On: true}}, Label: "Role"}}, Width: w.FieldXS}, w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Name: "login", Value: "viktor", Label: "Login"}}, Width: w.FieldSM}, w.Field{Label: "Email", LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}}, Parts: []w.FieldPart{w.Input{Name: "email", Label: "Email"}}, Width: w.FieldMD}, w.Field{Label: "Temporary password", Parts: []w.FieldPart{w.Input{Name: "password", Value: "9f2-brick-lamp", Label: "Temporary password", Mono: true}}, Width: w.FieldMD}, w.Button{Label: "Create user", Kind: w.ButtonPrimary, Submit: true}}, Wide: true}}, Action: "/admin/invites", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}, {Name: "action", Value: "user"}}}, w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Self-registration", Items: []w.RubricPart{w.Badge{Label: "open"}}},
 			w.CardText{Kind: w.CardLede, Parts: []w.CardTextPart{w.Text("A visitor creates an account and confirms the address by email. Cannot be turned on until mail works.")}},
@@ -720,7 +720,7 @@ var _ = add(
 			w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
 			w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
 			w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
-			w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBottom7}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}},
+			w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBelow}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}},
 		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}, {Icon: "task", Label: "Tasks", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}, {Icon: "file", Label: "Files", Href: "#"}}, On: 4}}}, "phone-7", "tc-main", 1),
 
 	// tc-side

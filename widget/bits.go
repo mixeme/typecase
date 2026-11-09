@@ -83,23 +83,23 @@ func (t MsgTone) class() string { return [...]string{"", "is-alert", "is-accent"
 type MsgSpace int
 
 const (
-	MsgSpacePage     MsgSpace = iota // the page's gutters
-	MsgFlush                         // none: inside a sheet or a card
-	MsgFlushTop2                     // none, 2 px above
-	MsgFlushTop4                     // none, 4 px above
-	MsgFlushTop11                    // none, 11 px above
-	MsgFlushBottom12                 // none, 12 px below
-	MsgFlushSides                    // no gutters at the sides: in a dialog
-	MsgFlushTop9                     // none, 9 px above: under a card's rubric
-	MsgFlushEnd                      // no margin at the end: beside a meter
-	MsgInset20                       // 20 px at the sides: in a side panel
-	MsgSheet                         // 0 14 12: in a sheet's picker
-	MsgFlushY8                       // 8 px above and below, none at the sides: a refusal between a field and what follows
+	MsgSpacePage        MsgSpace = iota // the page's gutters
+	MsgFlush                            // none: inside a sheet or a card
+	MsgFlushTop2                        // none, 2 px above
+	MsgFlushAboveTight                  // none, the tight step above
+	MsgFlushAboveWide                   // none, the wide step above
+	MsgFlushBelowWide                   // none, the wide step below
+	MsgFlushSides                       // no gutters at the sides: in a dialog
+	MsgFlushAboveNormal                 // none, the normal step above: under a card's rubric
+	MsgFlushEnd                         // no margin at the end: beside a meter
+	MsgInset20                          // 20 px at the sides: in a side panel
+	MsgSheet                            // 0 14 12: in a sheet's picker
+	MsgAroundNormal                     // the normal step above and below, none at the sides: a refusal between a field and what follows
 )
 
 func (s MsgSpace) class() string {
-	return [...]string{"", "tc-msg--flush", "tc-msg--flush-top2", "tc-msg--flush-top4", "tc-msg--flush-top11", "tc-msg--flush-bot12", "tc-msg--mr0-ml0",
-		"tc-msg--flush-top9", "tc-msg--flush-r0", "tc-msg--mx20", "tc-msg--m0-14-12", "tc-msg--my8"}[s]
+	return [...]string{"", "tc-msg--flush", "tc-msg--flush-top2", "tc-msg--flush-above-tight", "tc-msg--flush-above-wide", "tc-msg--flush-below-wide", "tc-msg--mr0-ml0",
+		"tc-msg--flush-above-normal", "tc-msg--flush-r0", "tc-msg--mx20", "tc-msg--m0-14-12", "tc-msg--around-normal"}[s]
 }
 
 // NoticesPart is what the zone of messages holds: a message, and a message's
@@ -192,12 +192,12 @@ type DiagVariant int
 
 const (
 	DiagPlain  DiagVariant = iota
-	DiagInk                // ink, 9 px above: a line to paste
+	DiagInk                // ink, the normal step above: a line to paste
 	DiagDanger             // what failed
 )
 
 func (v DiagVariant) class() string {
-	return [...]string{"", "tc-diag--top9-ink", "tc-diag--danger"}[v]
+	return [...]string{"", "tc-diag--above-normal-ink", "tc-diag--danger"}[v]
 }
 
 // Diag — tc-diag

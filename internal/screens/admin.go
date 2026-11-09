@@ -113,7 +113,7 @@ func Admin1() Screen {
 									w.Msg{
 										Parts: []w.MsgPart{w.Text("Until the user changes this password, you can sign in as them.")},
 										Tone:  w.MsgAlert,
-										Space: w.MsgFlushBottom12,
+										Space: w.MsgFlushBelowWide,
 									},
 									w.CardFields{
 										Items: []w.CardFieldsPart{

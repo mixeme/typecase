@@ -946,7 +946,7 @@ func Agenda27() Screen {
 					},
 					Body: []w.SheetPart{
 						w.SheetBlock{
-							Title: w.Rubric{Text: "What you changed", Variant: w.RubricBottom7},
+							Title: w.Rubric{Text: "What you changed", Variant: w.RubricBelow},
 							Items: []w.SheetLine{
 								{
 									Name: "The series ends on 18 January",
@@ -955,7 +955,7 @@ func Agenda27() Screen {
 							},
 						},
 						w.SheetBlock{
-							Title: w.Rubric{Text: "Left without their day · 3", Variant: w.RubricBottom7},
+							Title: w.Rubric{Text: "Left without their day · 3", Variant: w.RubricBelow},
 							Items: []w.SheetLine{
 								{
 									Name: "25 January, 14:00 — Синк-ап по релизу",
@@ -1217,7 +1217,7 @@ func Agenda28() Screen {
 					},
 					Body: []w.SheetPart{
 						w.SheetBlock{
-							Title: w.Rubric{Text: "Written", Variant: w.RubricBottom7},
+							Title: w.Rubric{Text: "Written", Variant: w.RubricBelow},
 							Items: []w.SheetLine{
 								{Name: "The series ends on 18 January", Note: w.Dim{Parts: []w.Inline{w.Text("— saved")}}},
 								{
@@ -1227,7 +1227,7 @@ func Agenda28() Screen {
 							},
 						},
 						w.SheetBlock{
-							Title: w.Rubric{Text: "Not written · 1", Variant: w.RubricBottom7},
+							Title: w.Rubric{Text: "Not written · 1", Variant: w.RubricBelow},
 							Items: []w.SheetLine{
 								{
 									Name: "1 February, 12:00 — Синк-ап: ретро",

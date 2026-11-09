@@ -94,7 +94,7 @@ func Auth2() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{
 								w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it."),
@@ -103,7 +103,7 @@ func Auth2() Screen {
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -152,12 +152,12 @@ func Auth12() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGapTight},
 						w.DialogSub{Parts: []w.Inline{w.Text("mix invited you. Choose a login and a password.")}},
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -208,12 +208,12 @@ func Auth14() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Join carrel.example", Gap: w.DialogTitleGapTight},
 						w.DialogSub{Parts: []w.Inline{w.Text("mix invited you. Choose a login and a password.")}},
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -263,7 +263,7 @@ func Auth3() Screen {
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGap6},
+						w.DialogTitle{Text: "Check your email", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("The letter went to "),
@@ -288,14 +288,14 @@ func Auth4() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{w.Text("The account you create here is the first one, and it can manage everyone else.")},
 						},
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{
@@ -342,7 +342,7 @@ func Auth5() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Forgotten your password?", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("Enter the login or the confirmed email of the account. There is no way to set a new password and keep the data stored here: the encryption key is derived from the password, and the server never has that key."),
@@ -378,7 +378,7 @@ func Auth6() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("Account "),
@@ -434,7 +434,7 @@ func Auth7() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "We cannot help from here", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "We cannot help from here", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("This login has no confirmed email — an address that was entered but never confirmed does not count. There is no letter we can send, and there is no password reset that would keep your data.\n\nIf you deposited the encryption key, ask the administrator in person. Otherwise this account cannot be recovered from the sign-in screen."),
@@ -457,7 +457,7 @@ func Auth8() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Check your inbox", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Check your inbox", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("If that account has a confirmed email, a letter is on its way. The link erases everything stored here after you confirm it, and then asks for a new password. It cannot bring your data back."),
@@ -480,7 +480,7 @@ func Auth9() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "The administrator has been asked", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "The administrator has been asked", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("A recovery request is recorded for this account. The administrator still has to use the instance master password. Until then, the sign-in screen will not accept a new password."),
@@ -503,7 +503,7 @@ func Auth15() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Password history of viktor", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Password history of viktor", Gap: w.DialogTitleGapNormal},
 						w.Prose{Parts: []w.Inline{w.Text("Times are Europe/Moscow.")}, Variant: w.ProseMutedClose},
 						w.Table{
 							Cols: []w.TableCol{{Label: "When"}, {Label: "What", Main: true}, {Label: "Who"}},
@@ -546,7 +546,7 @@ func Auth10() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGap8},
+						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGapNormal},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps encrypted for "),
@@ -577,14 +577,14 @@ func Auth11() Screen {
 			w.Auth{
 				Dialog: w.Dialog{
 					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGap4},
+						w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGapTight},
 						w.DialogSub{
 							Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")},
 						},
 						w.Msg{
 							Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")},
 							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBottom12,
+							Space: w.MsgFlushBelowWide,
 						},
 						w.Form{
 							Items: []w.FormPart{

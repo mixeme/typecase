@@ -154,7 +154,7 @@ type SecHint struct {
 }
 
 func (h SecHint) html(mix) string {
-	return `<div` + class(nil, "tc-field__hint", pick(h.Apart, "tc-field__hint--top6")) + `>` + esc(h.Text) + `</div>`
+	return `<div` + class(nil, "tc-field__hint", pick(h.Apart, "tc-field__hint--above-normal")) + `>` + esc(h.Text) + `</div>`
 }
 
 // SecNote is what a section says when it cannot list anything.

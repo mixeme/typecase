@@ -1143,7 +1143,7 @@ func (g *gen) sheet(e *El) string {
 				pairs = append(pairs, "{Keys: "+q(ks[i].Text())+", Does: "+q(ks[i+1].Text())+"}")
 			}
 			bp = append(bp, "w.SheetKeys{Items: []w.SheetKey{"+join(pairs, ", ")+"}}")
-		case x.Has("tc-field__hint--top6"):
+		case x.Has("tc-field__hint--above-normal"):
 			bp = append(bp, "w.SheetHint{Text: "+q(x.Text())+"}")
 		case x.Has("tc-dim--lh1-55"):
 			bp = append(bp, "w.SheetNote{Text: "+q(x.Text())+"}")
@@ -1307,7 +1307,7 @@ func (g *gen) dialog(e *El) string {
 			items = append(items, g.bar(x))
 		case x.Has("tc-head__title"):
 			s := "w.DialogTitle{Text: " + q(x.Text())
-			if v := firstOf(x, []kv{{"tc-head__title--bot4", "DialogTitleGap4"}, {"tc-head__title--bot6", "DialogTitleGap6"}, {"tc-head__title--bot8", "DialogTitleGap8"}}); v != "" {
+			if v := firstOf(x, []kv{{"tc-head__title--below-tight", "DialogTitleGapTight"}, {"tc-head__title--below-normal", "DialogTitleGapNormal"}}); v != "" {
 				s += ", Gap: w." + v
 			}
 			items = append(items, s+"}")
@@ -1593,7 +1593,7 @@ func (g *gen) railsec(e *El) string {
 		out = append(out, "Items: []w.RailSecPart{\n\t\t"+join(items, ",\n\t\t")+"}")
 	}
 	out = append(out, f...)
-	if e.Has("tc-railsec--top14") {
+	if e.Has("tc-railsec--above-wide") {
 		out = append(out, "Apart: true")
 	}
 	return "w.RailSec{" + join(out, ", ") + "}"

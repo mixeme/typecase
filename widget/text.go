@@ -226,9 +226,9 @@ const (
 
 func (v MonoVariant) class() string {
 	return [...]string{"", "tc-mono--t11", "tc-mono--ls0", "tc-mono--t10-dusty", "tc-mono--t11-5-dusty",
-		"tc-mono--t11-5-dusty tc-mono--bot9", "tc-mono--muted", "tc-mono--ls0-dusty", "tc-mono--dusty-t11",
+		"tc-mono--t11-5-dusty tc-mono--below-normal", "tc-mono--muted", "tc-mono--ls0-dusty", "tc-mono--dusty-t11",
 		"tc-mono--t11-dusty", "tc-mono--dusty", "tc-mono--t11-dusty-ls0", "tc-mono--ls0-danger", "tc-mono--f-mono",
-		"tc-mono--t11-top4", "tc-mono--t11-ml4", "tc-mono--ls0-tt-none", "tc-mono--t11-muted", "tc-mono--chip"}[v]
+		"tc-mono--t11-above-tight", "tc-mono--t11-ml4", "tc-mono--ls0-tt-none", "tc-mono--t11-muted", "tc-mono--chip"}[v]
 }
 
 // Say — tc-say

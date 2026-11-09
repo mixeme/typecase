@@ -104,7 +104,7 @@ func (r RailSec) Render() string { return r.html(nil) }
 
 func (r RailSec) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-railsec", pick(r.Apart, "tc-railsec--top14")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-railsec", pick(r.Apart, "tc-railsec--above-wide")) + `>`)
 	for _, it := range r.Items {
 		s.WriteString(it.html(nil))
 	}

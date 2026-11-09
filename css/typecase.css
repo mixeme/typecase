@@ -7,8 +7,8 @@
 }
 /* Классы .tc-* — набор компонентов библиотеки Typecase. */
 .tc-root{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px;
-  /* Ступени зазоров (владелец, 09.11: ступени вместо чисел): тесно, обычно, широко и поля рядом — как в формах. Контейнер может их переопределить. */
-  --tc-gap-tight:4px;--tc-gap:8px;--tc-gap-wide:12px;--tc-gap-fields:16px;
+  /* Ступени зазоров и отступов (владелец, 09.11: ступени вместо чисел): тесно, обычно, широко, просторно (поля рядом, как в формах; абзац после раздела). Контейнер может их переопределить. */
+  --tc-gap-tight:4px;--tc-gap:8px;--tc-gap-wide:12px;--tc-gap-loose:16px;
   /* Колонка значений полей: от подписи (или фото 104 px) её отделяет этот зазор — у списка полей и у шапки с фото один, чтобы имя стояло над значениями. */
   --tc-fields-gap:14px;
   font-family:var(--tc-font-sans);font-size:13px;line-height:1.45;color:var(--tc-ink);background:var(--tc-bg);
@@ -1241,7 +1241,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-line--tight.tc-line--tight{gap:var(--tc-gap-tight)}
 .tc-line--normal.tc-line--normal{gap:var(--tc-gap)}
 .tc-line--wide.tc-line--wide{gap:var(--tc-gap-wide)}
-.tc-line--fields.tc-line--fields{gap:var(--tc-gap-fields)}
+.tc-line--fields.tc-line--fields{gap:var(--tc-gap-loose)}
 /* Зазор столбика — той же ступенью, что у строки: тесно — пункты списка и галки, обычно — задачи и побочные блоки, широко — карточки и разделы друг под другом (владелец, 09.11). */
 .tc-stack--tight.tc-stack--tight{gap:var(--tc-gap-tight)}
 .tc-stack--normal.tc-stack--normal{gap:var(--tc-gap)}
@@ -1269,7 +1269,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-ico--dusty.tc-ico--dusty{stroke:var(--tc-dusty)}
 .tc-ico--muted.tc-ico--muted{stroke:var(--tc-muted)}
 .tc-auth__tagline--mid.tc-auth__tagline--mid{text-align:center;margin:0 0 13px;font-size:13.5px;line-height:1.45;color:var(--tc-muted)}
-.tc-auth__tagline--bot14.tc-auth__tagline--bot14{margin:0 0 14px;font-size:13.5px;line-height:1.45;color:var(--tc-muted)}
+.tc-auth__tagline--below-wide.tc-auth__tagline--below-wide{margin:0 0 var(--tc-gap-wide);font-size:13.5px;line-height:1.45;color:var(--tc-muted)}
 .tc-avatar--photo--sq76-t20.tc-avatar--photo--sq76-t20{height:76px;font-size:20px;width:76px}
 .tc-avatar--photo--sq62-t17.tc-avatar--photo--sq62-t17{height:62px;font-size:17px;width:62px}
 .tc-avatar--sq44-t15-r4.tc-avatar--sq44-t15-r4{height:44px;font-size:15px;border-radius:4px;width:44px}
@@ -1297,14 +1297,14 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-btn--padx6.tc-btn--padx6{padding:0 6px}
 .tc-card--alert.tc-card--alert{border-color:var(--tc-danger)}
 .tc-card--flush.tc-card--flush{margin:0}
-.tc-card--top14.tc-card--top14{margin-top:14px}
+.tc-card--above-wide.tc-card--above-wide{margin-top:var(--tc-gap-wide)}
 .tc-card--edge-accent.tc-card--edge-accent{border-color:var(--tc-accent)}
 .tc-card--edge-accent-flush.tc-card--edge-accent-flush{border-color:var(--tc-accent);margin:0}
 .tc-card--pad12-14.tc-card--pad12-14{padding:12px 14px}
 .tc-danger--top0-pad11-14.tc-danger--top0-pad11-14{margin-top:0;padding:11px 14px}
 .tc-danger--topauto-flush-padt11.tc-danger--topauto-flush-padt11{margin-top:auto;padding:11px 0 0}
 .tc-diag--danger.tc-diag--danger{color:var(--tc-danger)}
-.tc-diag--top9-ink.tc-diag--top9-ink{margin-top:9px;color:var(--tc-ink)}
+.tc-diag--above-normal-ink.tc-diag--above-normal-ink{margin-top:var(--tc-gap);color:var(--tc-ink)}
 .tc-dialog--max420-flush.tc-dialog--max420-flush{max-width:420px;margin:0}
 .tc-dialog--max520-padt0-padb0.tc-dialog--max520-padt0-padb0{max-width:520px;padding-top:0;padding-bottom:0}
 .tc-dialog--max520.tc-dialog--max520{max-width:520px}
@@ -1451,8 +1451,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-field--flex3-320.tc-field--flex3-320{flex:3 1 320px}
 .tc-field--flex3-340.tc-field--flex3-340{flex:3 1 340px}
 .tc-field__hint--max150.tc-field__hint--max150{max-width:150px}
-.tc-field__hint--top6.tc-field__hint--top6{margin-top:6px}
-.tc-field__hint--top8.tc-field__hint--top8{margin-top:8px}
+.tc-field__hint--above-normal.tc-field__hint--above-normal{margin-top:var(--tc-gap)}
 .tc-field__hint--flush-fill.tc-field__hint--flush-fill{margin:0;flex:1}
 .tc-field__hint--t11-dusty.tc-field__hint--t11-dusty{font-size:11px;color:var(--tc-dusty)}
 .tc-field__hint--gutter.tc-field__hint--gutter{padding:6px var(--tc-page-gutter) 4px}
@@ -1491,15 +1490,14 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-head--snug.tc-head--snug{padding-bottom:8px}
 .tc-head__group--ai-center.tc-head__group--ai-center{align-items:center}
 .tc-head__sub--top0.tc-head__sub--top0{margin-top:0}
-.tc-head__sub--top6.tc-head__sub--top6{margin-top:6px}
+.tc-head__sub--above-normal.tc-head__sub--above-normal{margin-top:var(--tc-gap)}
 .tc-head__sub--jc-center.tc-head__sub--jc-center{justify-content:center}
-.tc-head__sub--bot12.tc-head__sub--bot12{margin-bottom:12px}
+.tc-head__sub--below-wide.tc-head__sub--below-wide{margin-bottom:var(--tc-gap-wide)}
 .tc-head__title--t19.tc-head__title--t19{font-size:19px}
 .tc-head__title--t18.tc-head__title--t18{font-size:18px}
 .tc-head__title--t17.tc-head__title--t17{font-size:17px}
-.tc-head__title--bot4.tc-head__title--bot4{margin-bottom:4px}
-.tc-head__title--bot6.tc-head__title--bot6{margin-bottom:6px}
-.tc-head__title--bot8.tc-head__title--bot8{margin-bottom:8px}
+.tc-head__title--below-tight.tc-head__title--below-tight{margin-bottom:var(--tc-gap-tight)}
+.tc-head__title--below-normal.tc-head__title--below-normal{margin-bottom:var(--tc-gap)}
 .tc-head__titles--row.tc-head__titles--row{align-items:flex-start;display:flex;gap:var(--tc-fields-gap)}
 .tc-head__titles.tc-line{gap:var(--tc-fields-gap)}
 .tc-ico--op-35.tc-ico--op-35{opacity:.35}
@@ -1584,11 +1582,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-meter--w60.tc-meter--w60{width:60px}
 .tc-meter--max260-fill.tc-meter--max260-fill{max-width:260px;flex:1}
 .tc-meter__bar--alert.tc-meter__bar--alert{background:var(--tc-danger)}
-.tc-mono--t11-top4.tc-mono--t11-top4{font-size:11px;margin-top:4px}
+.tc-mono--t11-above-tight.tc-mono--t11-above-tight{font-size:11px;margin-top:var(--tc-gap-tight)}
 .tc-mono--ls0-dusty.tc-mono--ls0-dusty{letter-spacing:0;color:var(--tc-dusty)}
 .tc-mono--ls0-tt-none.tc-mono--ls0-tt-none{letter-spacing:0;text-transform:none}
 .tc-mono--t11-5-dusty.tc-mono--t11-5-dusty{font-size:11.5px;color:var(--tc-dusty)}
-.tc-mono--bot9.tc-mono--bot9{margin-bottom:9px}
+.tc-mono--below-normal.tc-mono--below-normal{margin-bottom:var(--tc-gap)}
 .tc-mono--ls0-danger.tc-mono--ls0-danger{letter-spacing:0;color:var(--tc-danger)}
 .tc-mono--t11-ml4.tc-mono--t11-ml4{font-size:11px;margin-left:4px}
 .tc-mono--chip.tc-mono--chip{background:var(--tc-card);border-radius:2px;padding:1px 4px}
@@ -1606,8 +1604,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-mono--t11-dusty-ls0.tc-mono--t11-dusty-ls0{font-size:11px;color:var(--tc-dusty);letter-spacing:0}
 .tc-msg--flush.tc-msg--flush{margin:0}
 .tc-msg--m0-14-12.tc-msg--m0-14-12{margin:0 14px 12px}
-.tc-msg--flush-top11.tc-msg--flush-top11{margin:11px 0 0}
-.tc-msg--flush-bot12.tc-msg--flush-bot12{margin:0 0 12px}
+.tc-msg--flush-above-wide.tc-msg--flush-above-wide{margin:var(--tc-gap-wide) 0 0}
+.tc-msg--flush-below-wide.tc-msg--flush-below-wide{margin:0 0 var(--tc-gap-wide)}
 .tc-msg--flush-r0.tc-msg--flush-r0{margin:0;border-radius:0}
 .tc-msg--flush-r0 .tc-push.tc-push{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:none}
 .tc-msg--flush-r0 .tc-push > .tc-btn{width:100%}
@@ -1615,9 +1613,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-msg--mr0-ml0.tc-msg--mr0-ml0{margin-right:0;margin-left:0}
 .tc-msg--flush-top2.tc-msg--flush-top2{margin:2px 0 0}
 .tc-msg--mx20.tc-msg--mx20{margin:0 20px}
-.tc-msg--flush-top4.tc-msg--flush-top4{margin:4px 0 0}
-.tc-msg--flush-top9.tc-msg--flush-top9{margin:9px 0 0}
-.tc-msg--my8.tc-msg--my8{margin:8px 0}
+.tc-msg--flush-above-tight.tc-msg--flush-above-tight{margin:var(--tc-gap-tight) 0 0}
+.tc-msg--flush-above-normal.tc-msg--flush-above-normal{margin:var(--tc-gap) 0 0}
+.tc-msg--around-normal.tc-msg--around-normal{margin:var(--tc-gap) 0}
 .tc-nav--top2.tc-nav--top2{margin-top:2px}
 .tc-nav__short{display:none}
 .tc-dialog__lede.tc-dialog__lede{font-size:13px;color:var(--tc-muted);margin:0}
@@ -1625,14 +1623,14 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-prose--t13.tc-prose--t13{font-size:13px}
 .tc-prose--read.tc-prose--read{font-size:14px;line-height:1.65}
 .tc-prose--lead.tc-prose--lead{font-size:14.5px;line-height:1.7}
-.tc-prose--top14.tc-prose--top14{margin-top:14px}
-.tc-prose--top18.tc-prose--top18{margin-top:18px}
+.tc-prose--above-wide.tc-prose--above-wide{margin-top:var(--tc-gap-wide)}
+.tc-prose--above-loose.tc-prose--above-loose{margin-top:var(--tc-gap-loose)}
 .tc-prose--t13-flush-padt11.tc-prose--t13-flush-padt11{font-size:13px;padding:11px 0 0}
 .tc-prose--muted.tc-prose--muted{color:var(--tc-muted)}
-.tc-prose--muted-flush-bot10.tc-prose--muted-flush-bot10{color:var(--tc-muted);margin:0 0 10px}
+.tc-prose--muted-flush-below-normal.tc-prose--muted-flush-below-normal{color:var(--tc-muted);margin:0 0 var(--tc-gap)}
 .tc-queue--flush-full.tc-queue--flush-full{margin:0;width:100%}
 .tc-queue--flush-wauto.tc-queue--flush-wauto{margin:0;width:auto}
-.tc-railsec--top14.tc-railsec--top14{margin-top:14px}
+.tc-railsec--above-wide.tc-railsec--above-wide{margin-top:var(--tc-gap-wide)}
 .tc-range--wrap.tc-range--wrap{flex-wrap:wrap}
 
 .tc-root--on-surface.tc-root--on-surface{background:var(--tc-surface)}
@@ -1668,11 +1666,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-row__source--w62pc.tc-row__source--w62pc{width:62%}
 .tc-row__text--row.tc-row__text--row{align-items:center;flex-direction:row;gap:10px}
 .tc-rubric--bot2.tc-rubric--bot2{margin-bottom:2px}
-.tc-rubric--bot8.tc-rubric--bot8{margin-bottom:8px}
 .tc-rubric--split.tc-rubric--split{justify-content:space-between;align-items:baseline;display:flex}
 .tc-rubric--nudge.tc-rubric--nudge{margin:2px 0 -2px}
 .tc-rubric--danger.tc-rubric--danger{color:var(--tc-danger)}
-.tc-rubric--bot7.tc-rubric--bot7{margin-bottom:7px}
+.tc-rubric--below-normal.tc-rubric--below-normal{margin-bottom:var(--tc-gap)}
 .tc-rubric--pad0-14-6.tc-rubric--pad0-14-6{padding:0 14px 6px}
 .tc-runbar--danger.tc-runbar--danger{background:transparent;border-bottom:.5px solid var(--tc-danger);color:var(--tc-danger)}
 .tc-scrim--padt26.tc-scrim--padt26{padding-top:26px}

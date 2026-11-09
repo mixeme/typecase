@@ -3701,7 +3701,7 @@ func Publish8() Screen {
 										Variant: w.ProseLeadAfter,
 									},
 									w.DocFiles{
-										Title: w.Rubric{Text: "Attachments", Variant: w.RubricBottom7},
+										Title: w.Rubric{Text: "Attachments", Variant: w.RubricBelow},
 										Items: []w.DocFile{
 											{
 												Name: "2026-08-10-sync-board.png",

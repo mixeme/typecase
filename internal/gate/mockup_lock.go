@@ -337,7 +337,7 @@ var mockupAllowedVar = map[string]bool{
 	"--tc-font-serif": true, "--tc-font-sans": true, "--tc-font-mono": true,
 	"--tc-font-size": true, "--tc-row-height": true, "--tc-row-height-touch": true,
 	"--tc-page-gutter": true, "--tc-page-gutter-narrow": true,
-	"--tc-gap-tight": true, "--tc-gap": true, "--tc-gap-wide": true, "--tc-gap-fields": true, "--tc-fields-gap": true,
+	"--tc-gap-tight": true, "--tc-gap": true, "--tc-gap-wide": true, "--tc-gap-loose": true, "--tc-fields-gap": true,
 	"--tc-radius": true, "--tc-radius-sm": true, "--tc-stroke": true,
 	"--tc-rail": true, "--tc-side": true, "--tc-top": true,
 	"--tc-colour": true, "--tc-width": true,

@@ -115,7 +115,7 @@ type SheetHint struct {
 }
 
 func (h SheetHint) html(mix) string {
-	return `<span class="tc-field__hint tc-field__hint--top6">` + esc(h.Text) + `</span>`
+	return `<span class="tc-field__hint tc-field__hint--above-normal">` + esc(h.Text) + `</span>`
 }
 
 // SheetNote is a muted paragraph of a sheet: what a failure means.

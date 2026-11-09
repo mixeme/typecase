@@ -4,8 +4,9 @@ import "strings"
 
 // LineGap is the gap between the items of a line: a step, not a number (the
 // owner, 09.11). The steps are the root's variables --tc-gap-tight (4 px),
-// --tc-gap (8), --tc-gap-wide (12) and --tc-gap-fields (16, fields side by
-// side as in a form); a container may set them otherwise.
+// --tc-gap (8), --tc-gap-wide (12) and --tc-gap-loose (16: fields side by
+// side as in a form, a paragraph after a section); a container may set
+// them otherwise.
 type LineGap int
 
 const (

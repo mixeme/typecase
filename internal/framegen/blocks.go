@@ -31,9 +31,9 @@ var (
 		{"tc-table__col--type", "ColType"}, {"tc-table__col--time", "ColTime"}, {"tc-table__col--num", "ColNum"}, {"tc-table__col--menu", "ColMenu"},
 		{"tc-table__col--changed", "ColChanged"}, {"tc-table__col--w26", "Col26"}, {"tc-table__col--w80", "Col80"}, {"tc-table__col--w90", "Col90"},
 		{"tc-table__col--w110", "Col110"}, {"tc-table__col--w120", "Col120"}}
-	msgSpace = []kv{{"tc-msg--flush", "MsgFlush"}, {"tc-msg--flush-top2", "MsgFlushTop2"}, {"tc-msg--flush-top4", "MsgFlushTop4"},
-		{"tc-msg--flush-top11", "MsgFlushTop11"}, {"tc-msg--flush-bot12", "MsgFlushBottom12"}, {"tc-msg--mr0-ml0", "MsgFlushSides"},
-		{"tc-msg--flush-top9", "MsgFlushTop9"}, {"tc-msg--flush-r0", "MsgFlushEnd"}, {"tc-msg--mx20", "MsgInset20"}, {"tc-msg--m0-14-12", "MsgSheet"}, {"tc-msg--my8", "MsgFlushY8"}}
+	msgSpace = []kv{{"tc-msg--flush", "MsgFlush"}, {"tc-msg--flush-top2", "MsgFlushTop2"}, {"tc-msg--flush-above-tight", "MsgFlushAboveTight"},
+		{"tc-msg--flush-above-wide", "MsgFlushAboveWide"}, {"tc-msg--flush-below-wide", "MsgFlushBelowWide"}, {"tc-msg--mr0-ml0", "MsgFlushSides"},
+		{"tc-msg--flush-above-normal", "MsgFlushAboveNormal"}, {"tc-msg--flush-r0", "MsgFlushEnd"}, {"tc-msg--mx20", "MsgInset20"}, {"tc-msg--m0-14-12", "MsgSheet"}, {"tc-msg--around-normal", "MsgAroundNormal"}}
 )
 
 func (g *gen) msg(e *El) string {
@@ -68,7 +68,7 @@ func (g *gen) msg(e *El) string {
 
 func (g *gen) diag(e *El) string {
 	s := "w.Diag{Text: " + q(e.TextRaw())
-	if v := firstOf(e, []kv{{"tc-diag--top9-ink", "DiagInk"}, {"tc-diag--danger", "DiagDanger"}}); v != "" {
+	if v := firstOf(e, []kv{{"tc-diag--above-normal-ink", "DiagInk"}, {"tc-diag--danger", "DiagDanger"}}); v != "" {
 		s += ", Variant: w." + v
 	}
 	if id := e.Attr("id"); id != "" {
@@ -594,7 +594,7 @@ func (g *gen) sec(e *El) string {
 			items = append(items, s+"}")
 		case k.Has("tc-field__hint"):
 			s := "w.SecHint{Text: " + q(k.Text())
-			if k.Has("tc-field__hint--top6") {
+			if k.Has("tc-field__hint--above-normal") {
 				s += ", Apart: true"
 			}
 			items = append(items, s+"}")
@@ -697,7 +697,7 @@ func (g *gen) rowPart(x *El) string {
 type cardVariant = fieldsVariant
 
 var cardVariants = []cardVariant{{"tc-card--edge-accent", "tc-card--flush", "CardChosenFlushGrow"}, {"tc-card--edge-accent-flush", "", "CardChosenFlush"},
-	{"tc-card--edge-accent", "", "CardChosen"}, {"tc-card--alert", "", "CardAlert"}, {"tc-card--top14", "", "CardApart"},
+	{"tc-card--edge-accent", "", "CardChosen"}, {"tc-card--alert", "", "CardAlert"}, {"tc-card--above-wide", "", "CardApart"},
 	{"tc-card--pad12-14", "", "CardSnug"}, {"tc-card--flush", "", "CardFlush"}}
 
 func (g *gen) card(e *El) string {
@@ -1177,10 +1177,10 @@ type proseVariant struct {
 	v   string
 }
 
-var proseVariants = []proseVariant{{[]string{"tc-prose--lead", "tc-prose--top14"}, "ProseLead"}, {[]string{"tc-prose--lead", "tc-prose--top18"}, "ProseLeadAfter"},
-	{[]string{"tc-prose--read", "tc-prose--top14"}, "ProseReadTop"}, {[]string{"tc-prose--muted-flush-bot10"}, "ProseMutedClose"},
+var proseVariants = []proseVariant{{[]string{"tc-prose--lead", "tc-prose--above-wide"}, "ProseLead"}, {[]string{"tc-prose--lead", "tc-prose--above-loose"}, "ProseLeadAfter"},
+	{[]string{"tc-prose--read", "tc-prose--above-wide"}, "ProseReadTop"}, {[]string{"tc-prose--muted-flush-below-normal"}, "ProseMutedClose"},
 	{[]string{"tc-prose--t13-flush-padt11"}, "Prose13Card"}, {[]string{"tc-prose--muted"}, "ProseMuted"}, {[]string{"tc-prose--t13"}, "Prose13"},
-	{[]string{"tc-prose--read"}, "ProseRead"}, {[]string{"tc-prose--top14"}, "ProseTop"}}
+	{[]string{"tc-prose--read"}, "ProseRead"}, {[]string{"tc-prose--above-wide"}, "ProseTop"}}
 
 func (g *gen) prose(e *El) string {
 	v := ""
@@ -1214,7 +1214,7 @@ func (g *gen) rub(k *El) string {
 	if len(items) > 0 {
 		s += ", Items: []w.RubricPart{" + join(items, ", ") + "}"
 	}
-	if v := firstOf(k, []kv{{"tc-rubric--bot7", "RubricBottom7"}, {"tc-rubric--bot8", "RubricBottom8"}}); v != "" {
+	if v := firstOf(k, []kv{{"tc-rubric--below-normal", "RubricBelow"}}); v != "" {
 		s += ", Variant: w." + v
 	}
 	return s + "}"
@@ -1237,7 +1237,7 @@ func (g *gen) doc(e *El) string {
 			hidden = append(hidden, k)
 		case k.Has("tc-doc__title"):
 			items = append(items, "w.DocTitle{Text: "+q(k.Text())+"}")
-		case k.Has("tc-head__sub--top6"):
+		case k.Has("tc-head__sub--above-normal"):
 			var ps []string
 			for _, x := range k.Kids {
 				switch v := x.(type) {

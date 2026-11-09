@@ -65,7 +65,7 @@ type CardHint struct {
 
 func (h CardHint) html(mix) string {
 	if h.Line {
-		return `<div class="tc-field__hint tc-field__hint--top8">` + joined(h.Parts) + `</div>`
+		return `<div class="tc-field__hint tc-field__hint--above-normal">` + joined(h.Parts) + `</div>`
 	}
 	return `<span class="tc-field__hint">` + joined(h.Parts) + `</span>`
 }
@@ -358,7 +358,7 @@ const (
 )
 
 func (v CardVariant) class() string {
-	return [...]string{"", "tc-card--alert", "tc-card--top14", "tc-card--pad12-14", "tc-card--flush", "tc-card--edge-accent",
+	return [...]string{"", "tc-card--alert", "tc-card--above-wide", "tc-card--pad12-14", "tc-card--flush", "tc-card--edge-accent",
 		"tc-card--edge-accent-flush", "tc-card--edge-accent tc-card--flush"}[v]
 }
 
