@@ -964,9 +964,9 @@ func TestFileSizes(t *testing.T) {
 		w.MenuItem{Label: "Upload", Form: "post-upload", NoScript: true}}}
 	place := w.Empty{Variant: w.EmptyDashed, Parts: []w.EmptyPart{w.Text("Drop files here, or "),
 		w.FilePick{Label: "choose on the computer", File: w.FileField{Name: "file", Label: "Files", List: "picked", Size: "size", Many: true},
-			Row: &w.Line{Place: w.Grown, Gap: w.LineGap8, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}},
+			Row: &w.Line{Place: w.Grown, Gap: w.LineGapNormal, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}},
 				w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true}}}},
-		w.Line{Block: true, Gap: w.LineGap8, Place: w.Grown, ID: "picked"}}}
+		w.Line{Block: true, Gap: w.LineGapNormal, Place: w.Grown, ID: "picked"}}}
 
 	body := `<form id="post-upload" method="post" action="/upload" enctype="multipart/form-data"></form>` +
 		`<div class="tc-root"><div class="tc-main">` + menu.Render() +
@@ -1143,11 +1143,11 @@ func TestFileInForm(t *testing.T) {
 func TestEditFile(t *testing.T) {
 	needChrome(t)
 	h := browser.NewHarness(t)
-	row := w.Line{Gap: w.LineGap8, Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}},
+	row := w.Line{Gap: w.LineGapNormal, Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}},
 		w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}}
 	attach := w.Drop{Trigger: w.Button{Label: "Attach", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "up", Label: "From this computer", File: &w.FileField{Name: "file", Label: "From this computer", List: "files"}, Row: row}}}}
-	list := w.Line{ID: "files", Gap: w.LineGap8, Items: []w.LinePart{attach, w.Dim{Parts: []w.Inline{w.Text("Nothing attached")}, Empty: true}}}
+	list := w.Line{ID: "files", Gap: w.LineGapNormal, Items: []w.LinePart{attach, w.Dim{Parts: []w.Inline{w.Text("Nothing attached")}, Empty: true}}}
 	photo := w.Photo{ID: "photo", Initials: "АК", Side: []w.FieldPart{w.Button{Label: "Add", File: &w.FileField{Name: "photo", Accept: "image/*", Label: "Photo", Preview: "photo"}}}}
 	save := w.Runbar{Meter: w.Meter{}, Parts: []w.RunbarPart{w.Text("Saving · "), w.Mono{Text: "0 of 0 MB"}}, Progress: "edit"}
 	body := `<div class="tc-root"><div class="tc-main">` + save.Render() + `<form id="edit" action="/save" method="post" enctype="multipart/form-data"><input name="title" value="Поездка">` +

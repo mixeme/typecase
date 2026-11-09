@@ -131,7 +131,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "Display name",
@@ -147,7 +147,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("Вера Лебедева · Архив")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -166,7 +166,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.ORG", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -190,7 +190,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("vera.l@work.example · Архив")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -209,7 +209,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.PHOTO", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Архив")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -218,7 +218,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "do", Value: "link", Submit: true},
 											w.Button{Label: "Not duplicates", Name: "do", Value: "ignore", Submit: true},
@@ -279,7 +279,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Link them", Kind: w.ButtonPrimary, Name: "do", Value: "link", Submit: true},
 											w.Button{Label: "Not duplicates", Name: "do", Value: "ignore", Submit: true},
@@ -348,7 +348,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "Phone · work",
@@ -358,7 +358,7 @@ func Dup1() Screen {
 															w.Check{Name: "choice.TEL", Value: "1", Parts: []w.CheckPart{w.Text("+7 495 120-45-00 · Контакты")}},
 															w.Check{On: true, Name: "choice.TEL", Value: "2", Parts: []w.CheckPart{w.Text("+7 495 120-45-77 · Команда")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -375,7 +375,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("anna.kovaleva@slovo.example · Контакты")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -394,7 +394,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.TITLE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив, Команда")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -411,7 +411,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("Москва, Тверская 12, стр. 3 · Контакты")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -430,7 +430,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.BDAY", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив, Команда")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -449,7 +449,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.NOTE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив, Команда")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -458,7 +458,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true},
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
@@ -514,7 +514,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "Title",
@@ -530,7 +530,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("Ведущий инженер · Команда")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -549,7 +549,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("radicale · vps · Команда")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -558,7 +558,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true},
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
@@ -621,7 +621,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "When",
@@ -642,7 +642,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("Mon 10:30 – 11:30, weekly · Общий")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -666,7 +666,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("Переговорная 3 · Общий")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -675,7 +675,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true},
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
@@ -732,7 +732,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "Due",
@@ -748,7 +748,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.DUE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("12 Aug · Работа")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -767,7 +767,7 @@ func Dup1() Screen {
 																Parts: []w.CheckPart{w.Text("3 · Работа")},
 															},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -776,7 +776,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true},
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
@@ -831,7 +831,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop11,
-										Gap:  22,
+										Gap:  w.LineGapFields,
 										Items: []w.CardRowPart{
 											w.Field{
 												Label: "Text",
@@ -847,7 +847,7 @@ func Dup1() Screen {
 															},
 															w.Check{Name: "choice.TEXT", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("nextcloud · Дневник")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -859,7 +859,7 @@ func Dup1() Screen {
 														Items: []w.LinePart{
 															w.Check{On: true, Name: "choice.CATEGORIES", Value: "1", Parts: []w.CheckPart{w.Text("релиз · Записи")}},
 														},
-														Gap:   w.LineGap12,
+														Gap:   w.LineGapWide,
 														Block: true,
 													},
 												},
@@ -868,7 +868,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Keep these values", Kind: w.ButtonPrimary, Name: "do", Value: "choose", Submit: true},
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
@@ -927,7 +927,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardActs,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true},
 											w.Button{
@@ -982,7 +982,7 @@ func Dup1() Screen {
 									},
 									w.CardRow{
 										Kind:  w.CardActs,
-										Gap:   8,
+										Gap:   w.LineGapNormal,
 										Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "do", Value: "again", Submit: true}},
 									},
 								},
@@ -1426,7 +1426,7 @@ func Dup6() Screen {
 									},
 									w.CardRow{
 										Kind:  w.CardActs,
-										Gap:   8,
+										Gap:   w.LineGapNormal,
 										Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true}},
 									},
 								},
@@ -1456,7 +1456,7 @@ func Dup6() Screen {
 									},
 									w.CardRow{
 										Kind:  w.CardActs,
-										Gap:   8,
+										Gap:   w.LineGapNormal,
 										Items: []w.CardRowPart{w.Button{Label: "Unlink", Name: "do", Value: "unlink", Submit: true}},
 									},
 								},
@@ -1486,7 +1486,7 @@ func Dup6() Screen {
 									},
 									w.CardRow{
 										Kind:  w.CardActs,
-										Gap:   8,
+										Gap:   w.LineGapNormal,
 										Items: []w.CardRowPart{w.Button{Label: "Offer again", Name: "do", Value: "again", Submit: true}},
 									},
 								},

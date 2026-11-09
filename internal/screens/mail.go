@@ -327,7 +327,7 @@ func Mail1() Screen {
 													},
 												},
 											},
-											Gap:   w.LineGap6,
+											Gap:   w.LineGapNormal,
 											Place: w.Pushed,
 										},
 									},
@@ -393,7 +393,7 @@ func Mail1() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -963,7 +963,7 @@ func Mail17() Screen {
 													},
 												},
 											},
-											Gap:   w.LineGap6,
+											Gap:   w.LineGapNormal,
 											Place: w.Pushed,
 										},
 									},
@@ -1029,7 +1029,7 @@ func Mail17() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -1290,7 +1290,7 @@ func Mail18() Screen {
 								w.Text(" — "),
 								w.Strong("sent"),
 							},
-							Gap:   w.LineGap6,
+							Gap:   w.LineGapNormal,
 							Block: true,
 						},
 						w.Line{
@@ -1301,7 +1301,7 @@ func Mail18() Screen {
 								w.Text(" — "),
 								w.Faced{Face: w.FaceDanger, Items: []w.LinePart{w.Text("refused: «550 5.1.1 Mailbox unavailable»")}},
 							},
-							Gap:   w.LineGap6,
+							Gap:   w.LineGapNormal,
 							Block: true,
 						},
 					},
@@ -1310,7 +1310,7 @@ func Mail18() Screen {
 						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -1568,7 +1568,7 @@ func Mail4() Screen {
 						w.Button{Label: "Copy link instead", To: "/app/mail/send?op=link", Submit: true},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/files/published"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -1921,7 +1921,7 @@ func Mail5() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -2250,7 +2250,7 @@ func Mail10() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -2623,7 +2623,7 @@ func Mail6() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -2961,7 +2961,7 @@ func Mail12() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -3357,7 +3357,7 @@ func Mail13() Screen {
 						},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},

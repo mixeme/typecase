@@ -115,15 +115,15 @@ func (h FillHint) html(mix) string {
 // CardRow is a row of a card.
 type CardRow struct {
 	Kind  CardRowKind
-	Gap   int // the gap of the row's line, in px; 0: not a line
+	Gap   LineGap // the step of the row's line; LineGap0: not a line
 	Items []CardRowPart
 }
 
 func (r CardRow) html(mix) string {
 	var s strings.Builder
 	line := ""
-	if r.Gap > 0 {
-		line = "tc-line tc-line--gap-" + itoa(r.Gap)
+	if r.Gap != LineGap0 {
+		line = "tc-line " + r.Gap.class()
 	}
 	s.WriteString(`<div` + class(nil, r.Kind.class(), line) + `>`)
 	for _, it := range r.Items {

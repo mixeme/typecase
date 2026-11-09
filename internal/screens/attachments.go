@@ -137,7 +137,7 @@ func Attachments1() Screen {
 													w.Input{Name: "folder.in.it", Value: "/carrel/attachments", Mono: true, Variant: w.InputFill},
 													w.Button{Label: "Browse"},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},
@@ -375,7 +375,7 @@ func Attachments5() Screen {
 													},
 													w.Button{Label: "Browse"},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},
@@ -579,7 +579,7 @@ func Attachments6() Screen {
 													w.Input{Name: "folder.in.it", Value: "/carrel/attachments", Mono: true, Variant: w.InputFill},
 													w.Button{Label: "Browse"},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts:   []w.Inline{w.Text("Created on first use. An ordinary folder, readable without Carrel.")},

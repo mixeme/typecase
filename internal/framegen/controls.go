@@ -1015,9 +1015,12 @@ func (g *gen) lineText(e *El) []string {
 	return out
 }
 
+// lineStep are the classes of the line's gap steps.
+var lineStep = map[string]bool{"tc-line--tight": true, "tc-line--normal": true, "tc-line--wide": true, "tc-line--fields": true}
+
 func (g *gen) line(e *El) string {
 	for _, c := range e.Cls() {
-		if c != "tc-line" && !strings.HasPrefix(c, "tc-line--gap-") && c != "tc-push" && c != "tc-grow" {
+		if c != "tc-line" && !lineStep[c] && c != "tc-push" && c != "tc-grow" {
 			stop("line with " + c)
 		}
 	}

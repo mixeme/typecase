@@ -28,7 +28,7 @@ const (
 
 func (v RubricVariant) class() string {
 	return [...]string{"", "tc-rubric--bot2", "tc-rubric--bot7", "tc-rubric--bot8", "tc-rubric--pad0-14-6",
-		"tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--gap-8", "tc-line"}[v]
+		"tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--normal", "tc-line"}[v]
 }
 
 // RubricPart is what a rubric holds after its words.

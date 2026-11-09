@@ -71,7 +71,7 @@ type Swatches struct {
 
 func (w Swatches) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<span class="tc-line tc-line--gap-9 tc-field__swatches" role="radiogroup">`)
+	s.WriteString(`<span class="tc-line tc-line--normal tc-field__swatches" role="radiogroup">`)
 	for i, c := range w.Colours {
 		if w.Name != "" {
 			// the chosen one is outlined by its checked radio, not by a class
@@ -92,7 +92,7 @@ type Zoom struct {
 }
 
 func (z Zoom) html(mix) string {
-	return `<span class="tc-line tc-line--gap-9 tc-field__zoom"><span class="tc-field__rail"><span class="tc-field__fill"></span>` +
+	return `<span class="tc-line tc-line--normal tc-field__zoom"><span class="tc-field__rail"><span class="tc-field__fill"></span>` +
 		`<span class="tc-field__knob"></span></span>` + Mono{Text: z.Value, Variant: Mono11Dusty}.html(nil) + `</span>`
 }
 
@@ -114,7 +114,7 @@ type Group struct {
 func (g Group) html(mix) string {
 	var s strings.Builder
 	s.WriteString([...]string{
-		`<div class="tc-line tc-line--gap-14 tc-card__top2">`,
+		`<div class="tc-line tc-line--wide tc-card__top2">`,
 		`<div class="tc-stack tc-stack--gap-2 tc-card__top2">`,
 		`<div class="tc-stack tc-stack--gap-5 tc-card__top2">`}[g.Form])
 	for _, it := range g.Items {

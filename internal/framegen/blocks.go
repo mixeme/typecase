@@ -723,15 +723,9 @@ func (g *gen) card(e *El) string {
 		case k.Has("tc-field") && k.Has("tc-card__top9"):
 			items = append(items, "w.SpacedField{Field: "+g.field(k)+"}")
 		case row != "":
-			gap := 0
-			for _, n := range []int{6, 7, 8, 10, 22} {
-				if k.Has("tc-line--gap-" + itoa(n)) {
-					gap = n
-				}
-			}
 			s := "w.CardRow{Kind: w." + row
-			if gap > 0 {
-				s += ", Gap: " + itoa(gap)
+			if v := g.en.of(k, "LineGap"); v != "" && v != "w.LineGap0" {
+				s += ", Gap: " + v
 			}
 			items = append(items, s+", Items: []w.CardRowPart{"+g.each(k.Els(), g.rowPart)+"}}")
 		case k.Has("tc-field__hint"):
@@ -1125,7 +1119,7 @@ func (g *gen) docmeta(e *El) string {
 				its = append(its, g.diag(x))
 			case x.Has("tc-line") && !x.Has("tc-line__text"):
 				// tags, and where they come from when there was a choice (Р-58)
-				its = append(its, "w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{"+g.each(x.Els(), g.linePart)+"}}")
+				its = append(its, "w.Line{Block: true, Gap: w.LineGapTight, Items: []w.LinePart{"+g.each(x.Els(), g.linePart)+"}}")
 			case x.Has("tc-stack"):
 				var refs []string
 				for _, it := range x.Els() {

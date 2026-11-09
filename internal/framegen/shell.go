@@ -223,7 +223,7 @@ func (g *gen) main(e *El) string {
 					}
 					return g.child(x)
 				})
-				f = append(f, "End: w.Line{Gap: w.LineGap6, Place: w.Pushed, Items: []w.LinePart{"+inner+"}}")
+				f = append(f, "End: w.Line{Gap: w.LineGapNormal, Place: w.Pushed, Items: []w.LinePart{"+inner+"}}")
 			}
 			if k.Has("tc-main__banner") {
 				f = append(f, "Wide: true")

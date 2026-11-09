@@ -109,7 +109,7 @@ func (r RailSec) html(m mix) string {
 		s.WriteString(it.html(nil))
 	}
 	if len(r.Tags) > 0 {
-		s.WriteString(`<div class="tc-line tc-line--gap-4 tc-railsec__tags">`)
+		s.WriteString(`<div class="tc-line tc-line--tight tc-railsec__tags">`)
 		for _, t := range r.Tags {
 			s.WriteString(t.html(nil))
 		}

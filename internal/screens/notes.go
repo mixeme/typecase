@@ -772,7 +772,11 @@ func Notes2() Screen {
 									{
 										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
-											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
+											w.Line{
+												Block: true,
+												Gap:   w.LineGapTight,
+												Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}},
+											},
 										},
 									},
 									{
@@ -978,7 +982,11 @@ func Notes27() Screen {
 									{
 										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
-											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
+											w.Line{
+												Block: true,
+												Gap:   w.LineGapTight,
+												Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}},
+											},
 										},
 									},
 									{
@@ -1203,7 +1211,11 @@ func Notes3() Screen {
 									{
 										Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}},
 										Items: []w.DocmetaPart{
-											w.Line{Block: true, Gap: w.LineGap4, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}},
+											w.Line{
+												Block: true,
+												Gap:   w.LineGapTight,
+												Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}},
+											},
 										},
 									},
 									{
@@ -2210,7 +2222,11 @@ func Notes5() Screen {
 							To:     "/app/notes/nextcloud/zapisi/quick?op=open",
 							Submit: true,
 						},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 			},
@@ -2287,7 +2303,11 @@ func Notes6() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth480,
 				},
@@ -2804,7 +2824,11 @@ func Notes8() Screen {
 							To:     "/app/contacts/nextcloud/kontakty/quick?op=open",
 							Submit: true,
 						},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3116,7 +3140,11 @@ func Notes9() Screen {
 							To:     "/app/calendar/nextcloud/lichnyj/quick?op=open",
 							Submit: true,
 						},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3357,7 +3385,11 @@ func Notes10() Screen {
 						w.Button{Label: "Save task", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the card", Icon: "expand", To: "/app/tasks/nextcloud/dela/quick?op=open", Submit: true},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3593,7 +3625,11 @@ func Notes35() Screen {
 						w.Button{Label: "Save task", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
 						w.Button{Label: "Open the card", Icon: "expand", To: "/app/tasks/nextcloud/dela/quick?op=open", Submit: true},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,
@@ -3853,14 +3889,14 @@ func Notes11() Screen {
 											},
 											w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Place: w.Pushed, Removes: true},
 										},
-										Gap:   w.LineGap8,
+										Gap:   w.LineGapNormal,
 										Place: w.Grown,
 									},
 								},
 								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
 								w.Text(" "),
-								w.Line{Items: []w.LinePart{}, Gap: w.LineGap8, Block: true, ID: "upload-files", Place: w.Grown},
+								w.Line{Items: []w.LinePart{}, Gap: w.LineGapNormal, Block: true, ID: "upload-files", Place: w.Grown},
 							},
 							Variant: w.EmptyDashed,
 						},
@@ -3918,7 +3954,11 @@ func Notes11() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Upload", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 				},
 				Pad: w.ScrimPad26,

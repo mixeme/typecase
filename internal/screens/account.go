@@ -79,7 +79,7 @@ func Account1() Screen {
 													w.Input{Name: "display.name", Value: "Михаил Енученко", Label: "Display name", Variant: w.InputFill},
 													w.Button{Label: "Save", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts:   []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
@@ -103,7 +103,7 @@ func Account1() Screen {
 													w.Input{Name: "address", Value: "mix@example.org", Label: "Address", Variant: w.InputFill},
 													w.Button{Label: "Change", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -315,7 +315,11 @@ func Account2() Screen {
 					Foot: []w.SheetFootPart{
 						w.Button{Label: "Deposit my key", Kind: w.ButtonPrimary, Submit: true},
 						w.Kbd{Keys: "Enter"},
-						w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGap7, Place: w.Pushed},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
 					},
 					Width: w.SheetWidth480,
 				},
@@ -400,7 +404,7 @@ func Mail9() Screen {
 													w.Input{Name: "display.name", Value: "Михаил Енученко", Label: "Display name", Variant: w.InputFill},
 													w.Button{Label: "Save", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts:   []w.Inline{w.Text("Shown as the sender and used as the signature in letters you send. Blank means your login.")},
@@ -425,7 +429,7 @@ func Mail9() Screen {
 													w.Button{Label: "Change", Submit: true},
 													w.Button{Label: "Send confirmation", To: "/app/settings/account/email/confirm", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 											w.FieldHint{
 												Parts: []w.Inline{
@@ -810,7 +814,7 @@ func Account4() Screen {
 												Copied: "Copied",
 											},
 										},
-										Gap: w.LineGap6,
+										Gap: w.LineGapNormal,
 									},
 									w.FieldHint{
 										Parts:   []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},
@@ -941,7 +945,7 @@ func Account16() Screen {
 												Copied: "Copied",
 											},
 										},
-										Gap: w.LineGap6,
+										Gap: w.LineGapNormal,
 									},
 									w.FieldHint{
 										Parts:   []w.Inline{w.Text("Keep it: it shows what was done to your password, even when you cannot sign in.")},

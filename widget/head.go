@@ -149,7 +149,7 @@ func (h Head) titles() string {
 		s.WriteString(b.html())
 	}
 	if len(h.Tools) > 0 {
-		s.WriteString(`<div class="tc-line tc-line--gap-5 tc-sec__acts">`)
+		s.WriteString(`<div class="tc-line tc-line--normal tc-sec__acts">`)
 		for _, b := range h.Tools {
 			s.WriteString(b.html(nil))
 		}
@@ -167,7 +167,7 @@ func (h Head) html(m mix) string {
 	case h.Grouped:
 		s.WriteString(`<div class="tc-head__group tc-head__group--ai-center">` + h.Photo.html() + `<div class="tc-head__titles">` + h.titles() + `</div></div>`)
 	case h.Photo != nil:
-		s.WriteString(`<div class="tc-head__titles tc-line tc-line--gap-14">` + h.Photo.html() + `<div class="tc-head__text">` + h.titles() + `</div></div>`)
+		s.WriteString(`<div class="tc-head__titles tc-line">` + h.Photo.html() + `<div class="tc-head__text">` + h.titles() + `</div></div>`)
 	case h.Avatar != nil:
 		s.WriteString(`<div class="tc-head__titles tc-head__titles--row">` + h.Avatar.html(nil) + `<div class="tc-head__text">` + h.titles() + `</div></div>`)
 	default:

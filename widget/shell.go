@@ -58,7 +58,7 @@ type FootActs struct {
 
 func (f FootActs) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-line tc-line--gap-8 tc-main__foot-acts">`)
+	s.WriteString(`<div class="tc-line tc-line--normal tc-main__foot-acts">`)
 	for _, b := range f.Items {
 		s.WriteString(b.html(nil))
 	}
@@ -148,7 +148,7 @@ type SideActs struct {
 
 func (a SideActs) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-line tc-line--gap-6 tc-side__acts">`)
+	s.WriteString(`<div class="tc-line tc-line--normal tc-side__acts">`)
 	for _, b := range a.Items {
 		s.WriteString(b.html(nil))
 	}

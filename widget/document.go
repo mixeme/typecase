@@ -514,7 +514,7 @@ func (h Hero) html(mix) string {
 	if h.Fields != nil {
 		s.WriteString(h.Fields.html(nil))
 	}
-	s.WriteString(`<div class="tc-line tc-line--gap-8 tc-doc__acts">`)
+	s.WriteString(`<div class="tc-line tc-line--normal tc-doc__acts">`)
 	for _, b := range h.Acts {
 		s.WriteString(b.html(nil))
 	}

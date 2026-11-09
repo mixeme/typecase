@@ -7,6 +7,10 @@
 }
 /* Классы .tc-* — набор компонентов библиотеки Typecase. */
 .tc-root{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px;
+  /* Ступени зазоров (владелец, 09.11: ступени вместо чисел): тесно, обычно, широко и поля рядом — как в формах. Контейнер может их переопределить. */
+  --tc-gap-tight:4px;--tc-gap:8px;--tc-gap-wide:12px;--tc-gap-fields:16px;
+  /* Колонка значений полей: от подписи (или фото 104 px) её отделяет этот зазор — у списка полей и у шапки с фото один, чтобы имя стояло над значениями. */
+  --tc-fields-gap:14px;
   font-family:var(--tc-font-sans);font-size:13px;line-height:1.45;color:var(--tc-ink);background:var(--tc-bg);
   container:tcbox / inline-size}
 /* Коробка кадра-компонента: то, что раньше давало правило страницы .demo.
@@ -152,7 +156,7 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
 .tc-side > .tc-head{flex-wrap:nowrap}
 .tc-side > .tc-head > .tc-acts{flex:none}
 /* Левая половина шапки: .tc-head__group (фото + заголовки), внутри .tc-head__titles. */
-.tc-head__group{display:flex;gap:14px;align-items:flex-start;min-width:0}
+.tc-head__group{display:flex;gap:var(--tc-fields-gap);align-items:flex-start;min-width:0}
 .tc-head__titles{min-width:0}
 .tc-bar{display:flex;align-items:center;gap:10px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-rule);
   position:relative}
@@ -483,7 +487,7 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-diag{font-family:var(--tc-font-mono);font-size:11px;line-height:1.65;background:var(--tc-card);border-radius:3px;
   padding:9px 11px;color:var(--tc-muted);white-space:pre-wrap;overflow-x:auto}
 /* панель подробностей */
-.tc-root .tc-fields{display:grid;grid-template-columns:104px minmax(0,1fr);gap:7px 14px;padding:12px var(--tc-page-gutter);font-size:13px}
+.tc-root .tc-fields{display:grid;grid-template-columns:104px minmax(0,1fr);gap:7px var(--tc-fields-gap);padding:12px var(--tc-page-gutter);font-size:13px}
 .tc-fields dt{color:var(--tc-dusty);font-size:11.5px;padding-top:1px}
 .tc-fields dd{overflow-wrap:anywhere}
 .tc-sec{border-top:.5px solid var(--tc-hair);padding:12px var(--tc-page-gutter)}
@@ -1233,17 +1237,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* layout glue */
 .tc-line.tc-line{display:flex;align-items:center;flex-wrap:wrap}
 .tc-stack.tc-stack{display:flex;flex-direction:column}
-.tc-line--gap-3.tc-line--gap-3{gap:3px}
-.tc-line--gap-4.tc-line--gap-4{gap:4px}
-.tc-line--gap-5.tc-line--gap-5{gap:5px}
-.tc-line--gap-6.tc-line--gap-6{gap:6px}
-.tc-line--gap-7.tc-line--gap-7{gap:7px}
-.tc-line--gap-8.tc-line--gap-8{gap:8px}
-.tc-line--gap-9.tc-line--gap-9{gap:9px}
-.tc-line--gap-10.tc-line--gap-10{gap:10px}
-.tc-line--gap-12.tc-line--gap-12{gap:12px}
-.tc-line--gap-14.tc-line--gap-14{gap:14px}
-.tc-line--gap-22.tc-line--gap-22{gap:22px}
+/* Зазор строки — ступенью, а не числом: тесно — метки и теги, обычно — кнопки, поля и подписи, широко — галки, логотип со значком, поля рядом — как в формах; фото и заголовок держат колонку полей (--tc-fields-gap). */
+.tc-line--tight.tc-line--tight{gap:var(--tc-gap-tight)}
+.tc-line--normal.tc-line--normal{gap:var(--tc-gap)}
+.tc-line--wide.tc-line--wide{gap:var(--tc-gap-wide)}
+.tc-line--fields.tc-line--fields{gap:var(--tc-gap-fields)}
 .tc-stack--gap-2.tc-stack--gap-2{gap:2px}
 .tc-stack--gap-3.tc-stack--gap-3{gap:3px}
 .tc-stack--gap-4.tc-stack--gap-4{gap:4px}
@@ -1510,7 +1508,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-head__title--bot4.tc-head__title--bot4{margin-bottom:4px}
 .tc-head__title--bot6.tc-head__title--bot6{margin-bottom:6px}
 .tc-head__title--bot8.tc-head__title--bot8{margin-bottom:8px}
-.tc-head__titles--row.tc-head__titles--row{align-items:flex-start;display:flex;gap:14px}
+.tc-head__titles--row.tc-head__titles--row{align-items:flex-start;display:flex;gap:var(--tc-fields-gap)}
+.tc-head__titles.tc-line{gap:var(--tc-fields-gap)}
 .tc-ico--op-35.tc-ico--op-35{opacity:.35}
 .tc-ico--sq17.tc-ico--sq17{height:17px;width:17px}
 .tc-ico--sq16.tc-ico--sq16{height:16px;width:16px}

@@ -93,7 +93,7 @@ func Davloom1() Screen {
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
-										Gap: w.LineGap8,
+										Gap: w.LineGapNormal,
 									},
 									w.FieldHint{
 										Parts: []w.Inline{
@@ -140,7 +140,7 @@ func Davloom1() Screen {
 															w.Mark{Colour: "#6B4E7A"},
 															w.Mark{Colour: "#A05A2C"},
 														},
-														Gap: w.LineGap3,
+														Gap: w.LineGapTight,
 													},
 													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
 													w.Button{
@@ -177,7 +177,7 @@ func Davloom1() Screen {
 										Parts: []w.CellPart{
 											w.CellWrap{
 												Items: []w.CellPart{
-													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGapTight},
 													w.Mono{Text: "all kinds", Variant: w.Mono11},
 													w.Button{
 														Label: "12 collections · Change",
@@ -215,7 +215,7 @@ func Davloom1() Screen {
 												Items: []w.CellPart{
 													w.Line{
 														Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
-														Gap:   w.LineGap3,
+														Gap:   w.LineGapTight,
 													},
 													w.Mono{Text: "Calendars", Variant: w.Mono11},
 													w.Button{
@@ -503,7 +503,7 @@ func Davloom3() Screen {
 									w.Rubric{Text: "Device password"},
 									w.CardRow{
 										Kind: w.CardTop2,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Input{Value: "brick-lamp-9f2-carrel", Mono: true, Variant: w.InputKeyFill},
 											w.Button{Label: "Copy"},
@@ -686,7 +686,7 @@ func Davloom6() Screen {
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
-										Gap: w.LineGap8,
+										Gap: w.LineGapNormal,
 									},
 									w.FieldHint{
 										Parts: []w.Inline{
@@ -807,7 +807,7 @@ func Davloom7() Screen {
 												w.Button{Label: "Copy", Small: true},
 												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 											},
-											Gap: w.LineGap8,
+											Gap: w.LineGapNormal,
 										},
 										w.FieldHint{
 											Parts: []w.Inline{
@@ -854,7 +854,7 @@ func Davloom7() Screen {
 																w.Mark{Colour: "#6B4E7A"},
 																w.Mark{Colour: "#A05A2C"},
 															},
-															Gap: w.LineGap3,
+															Gap: w.LineGapTight,
 														},
 														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
 														w.Button{
@@ -891,7 +891,7 @@ func Davloom7() Screen {
 											Parts: []w.CellPart{
 												w.CellWrap{
 													Items: []w.CellPart{
-														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGapTight},
 														w.Mono{Text: "all kinds", Variant: w.Mono11},
 														w.Button{
 															Label: "12 collections · Change",
@@ -929,7 +929,7 @@ func Davloom7() Screen {
 													Items: []w.CellPart{
 														w.Line{
 															Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
-															Gap:   w.LineGap3,
+															Gap:   w.LineGapTight,
 														},
 														w.Mono{Text: "Calendars", Variant: w.Mono11},
 														w.Button{
@@ -1121,7 +1121,7 @@ func Davloom7() Screen {
 						w.Kbd{Keys: "Enter"},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/davloom"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -1223,7 +1223,7 @@ func Davloom8() Screen {
 											w.Button{Label: "Copy", Small: true},
 											w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 										},
-										Gap: w.LineGap8,
+										Gap: w.LineGapNormal,
 									},
 									w.FieldHint{
 										Parts: []w.Inline{
@@ -1270,7 +1270,7 @@ func Davloom8() Screen {
 															w.Mark{Colour: "#6B4E7A"},
 															w.Mark{Colour: "#A05A2C"},
 														},
-														Gap: w.LineGap3,
+														Gap: w.LineGapTight,
 													},
 													w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
 													w.Button{
@@ -1307,7 +1307,7 @@ func Davloom8() Screen {
 										Parts: []w.CellPart{
 											w.CellWrap{
 												Items: []w.CellPart{
-													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+													w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGapTight},
 													w.Mono{Text: "all kinds", Variant: w.Mono11},
 													w.Button{
 														Label: "12 collections · Change",
@@ -1345,7 +1345,7 @@ func Davloom8() Screen {
 												Items: []w.CellPart{
 													w.Line{
 														Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
-														Gap:   w.LineGap3,
+														Gap:   w.LineGapTight,
 													},
 													w.Mono{Text: "Calendars", Variant: w.Mono11},
 													w.Button{
@@ -1479,7 +1479,7 @@ func Davloom9() Screen {
 												w.Button{Label: "Copy", Small: true},
 												w.Button{Label: "What the client sees", Small: true, Href: "/app/settings/davloom/tree"},
 											},
-											Gap: w.LineGap8,
+											Gap: w.LineGapNormal,
 										},
 										w.FieldHint{
 											Parts: []w.Inline{
@@ -1526,7 +1526,7 @@ func Davloom9() Screen {
 																w.Mark{Colour: "#6B4E7A"},
 																w.Mark{Colour: "#A05A2C"},
 															},
-															Gap: w.LineGap3,
+															Gap: w.LineGapTight,
 														},
 														w.Mono{Text: "Calendars, Address books", Variant: w.Mono11},
 														w.Button{
@@ -1563,7 +1563,7 @@ func Davloom9() Screen {
 											Parts: []w.CellPart{
 												w.CellWrap{
 													Items: []w.CellPart{
-														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGap3},
+														w.Line{Items: []w.LinePart{w.Mark{Kind: w.MarkMulti}}, Gap: w.LineGapTight},
 														w.Mono{Text: "all kinds", Variant: w.Mono11},
 														w.Button{
 															Label: "12 collections · Change",
@@ -1601,7 +1601,7 @@ func Davloom9() Screen {
 													Items: []w.CellPart{
 														w.Line{
 															Items: []w.LinePart{w.Mark{Colour: "#4A6B52"}, w.Mark{Colour: "#3F6E8C"}, w.Mark{Colour: "#8C6239"}},
-															Gap:   w.LineGap3,
+															Gap:   w.LineGapTight,
 														},
 														w.Mono{Text: "Calendars", Variant: w.Mono11},
 														w.Button{
@@ -1734,7 +1734,7 @@ func Davloom9() Screen {
 					Foot: []w.SheetFootPart{
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Close", Href: "/app/settings/davloom"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},

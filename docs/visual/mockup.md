@@ -211,7 +211,8 @@ Typecase рядом с макетом, но макет о них не знает
 |---|---|
 | `tc-line` | `display:flex` в строку (`align-items:center`, перенос) |
 | `tc-stack` | `display:flex;flex-direction:column` |
-| `tc-line--gap-N`, `tc-stack--gap-N` | `gap:Npx`; N — только значения, встретившиеся в кадрах ≥2 раз |
+| `tc-line--tight`, `--normal`, `--wide`, `--fields` | зазор строки ступенью: `--tc-gap-tight` 4 (метки, теги), `--tc-gap` 8 (кнопки, поля, подписи), `--tc-gap-wide` 12 (галки, логотип со значком), `--tc-gap-fields` 16 (поля рядом, как в форме); переменные — у `.tc-root`, контейнер может их переопределить (владелец, 09.11: ступени вместо чисел). Фото и заголовок в шапке и колонки списка полей — `--tc-fields-gap` 14: имя стоит над значениями |
+| `tc-stack--gap-N` | `gap:Npx`; N — только значения, встретившиеся в кадрах ≥2 раз (до перевода на ступени) |
 | `tc-push` | `margin-left:auto`. `.tc-close` после `tc-push` второго `margin-left:auto` не берёт |
 | `tc-pad` | `padding:0 var(--tc-page-gutter)` |
 | `tc-grow` | `flex:1 1 100%`, `width:100%` у ребёнка ряда |

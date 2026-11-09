@@ -76,7 +76,7 @@ func Admin1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop10,
-										Gap:  6,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Input{
 												Value:    "https://carrel.example/invite/7f3a…",
@@ -165,7 +165,7 @@ func Admin1() Screen {
 									},
 									w.CardRow{
 										Kind: w.CardTop10,
-										Gap:  6,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Input{
 												Value:    "https://carrel.example/register",
@@ -644,7 +644,7 @@ func Admin24() Screen {
 						w.Button{Label: "Reset password", Kind: w.ButtonDangerSolid, Submit: true},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/admin/"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -867,7 +867,7 @@ func Admin34() Screen {
 						w.Button{Label: "Delete account", Kind: w.ButtonDangerSolid, Submit: true},
 						w.Line{
 							Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/admin/"}, w.Kbd{Keys: "Esc"}},
-							Gap:   w.LineGap7,
+							Gap:   w.LineGapNormal,
 							Place: w.Pushed,
 						},
 					},
@@ -1070,7 +1070,7 @@ func Admin3() Screen {
 													w.Input{Name: "to", Placeholder: "you@example.org", Label: "Send test message to", Variant: w.InputFill},
 													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 										},
 										Width: w.FieldLG,
@@ -1320,7 +1320,7 @@ func Admin32() Screen {
 													w.Input{Name: "to", Value: "mix@slovo.example", Label: "Send test message to", Variant: w.InputFill},
 													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 										},
 										Width: w.FieldLG,
@@ -1545,7 +1545,7 @@ func Admin33() Screen {
 													w.Input{Name: "to", Value: "mix@slovo.example", Label: "Send test message to", Variant: w.InputFill},
 													w.Button{Label: "Send test", To: "/admin/settings/mail-test", Submit: true},
 												},
-												Gap: w.LineGap8,
+												Gap: w.LineGapNormal,
 											},
 										},
 										Width: w.FieldLG,
@@ -2827,7 +2827,7 @@ func Admin30() Screen {
 									w.Diag{Text: "login     viktor\npassword  9f2-brick-lamp", Variant: w.DiagInk, ID: "s-admin-30-secret"},
 									w.CardRow{
 										Kind: w.CardTop8,
-										Gap:  8,
+										Gap:  w.LineGapNormal,
 										Items: []w.CardRowPart{
 											w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary, CopyFrom: "s-admin-30-secret", Copied: "Copied"},
 											w.Button{Label: "Done", Href: "/admin/escrow"},

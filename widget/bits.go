@@ -489,7 +489,7 @@ func (it QueueItem) html() string {
 		s.WriteString(it.Meter.html(nil))
 	}
 	if len(it.Acts) > 0 {
-		s.WriteString(`<div class="tc-line tc-line--gap-6 tc-queue__acts">`)
+		s.WriteString(`<div class="tc-line tc-line--normal tc-queue__acts">`)
 		for _, b := range it.Acts {
 			s.WriteString(b.html(nil))
 		}

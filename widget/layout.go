@@ -2,24 +2,22 @@ package widget
 
 import "strings"
 
-// LineGap is the gap between the items of a line.
+// LineGap is the gap between the items of a line: a step, not a number (the
+// owner, 09.11). The steps are the root's variables --tc-gap-tight (4 px),
+// --tc-gap (8), --tc-gap-wide (12) and --tc-gap-fields (16, fields side by
+// side as in a form); a container may set them otherwise.
 type LineGap int
 
 const (
-	LineGap0 LineGap = iota
-	LineGap3
-	LineGap4
-	LineGap6
-	LineGap7
-	LineGap8
-	LineGap9
-	LineGap10
-	LineGap12
+	LineGap0      LineGap = iota
+	LineGapTight          // marks, tags
+	LineGapNormal         // buttons, fields, words
+	LineGapWide           // checks, a logo with its badge
+	LineGapFields         // fields side by side
 )
 
 func (g LineGap) class() string {
-	return [...]string{"", "tc-line--gap-3", "tc-line--gap-4", "tc-line--gap-6", "tc-line--gap-7", "tc-line--gap-8",
-		"tc-line--gap-9", "tc-line--gap-10", "tc-line--gap-12"}[g]
+	return [...]string{"", "tc-line--tight", "tc-line--normal", "tc-line--wide", "tc-line--fields"}[g]
 }
 
 // LinePart is what a line holds.

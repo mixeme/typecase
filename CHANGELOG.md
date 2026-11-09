@@ -14,6 +14,15 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A line's gap is a step, not a number** (the owner, 09.11). `LineGap3`,
+  `LineGap4` become `LineGapTight`; `LineGap6`…`LineGap10` become
+  `LineGapNormal`; `LineGap12` becomes `LineGapWide`; `LineGapFields` is
+  new. `CardRow.Gap` is a `LineGap`, not pixels. The classes
+  `tc-line--gap-N` are gone: `tc-line--tight`, `--normal`, `--wide`,
+  `--fields` take the root's variables `--tc-gap-tight` (4 px), `--tc-gap`
+  (8), `--tc-gap-wide` (12), `--tc-gap-fields` (16), which a container may
+  set otherwise. `--tc-fields-gap` (14) is the gap of a field list's columns
+  and of a head's photo and titles.
 - **`Msg` is no longer a `SidePart`**: no frame puts a message in a side
   panel since the feed panel (`s-profile-10`) lost its alert (owner, 05.11).
   Drop the message from the panel; the check of the address says the rest.
@@ -1047,6 +1056,14 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Line gaps in four steps** (the owner, 09.11: steps, not every pixel).
+  Lines had eleven gaps, 3 to 22 px, the same buttons standing 5, 6, 7, 8
+  or 9 px apart. Now: tight 4 for marks and tags (were 3, 4), normal 8 for
+  buttons, fields and words (5–10), wide 12 for checks and a logo with its
+  badge (12, 14), and 16 for fields side by side, as a form sets them (22).
+  A photo and its heading keep 14 px: the root's `--tc-fields-gap`, the gap
+  of a field list's columns, so the name stands over the values. 264 frames
+  move by 1–6 px; the other 310 are as they were.
 - **The geometry check** (`TestMockupGeometry`, the owner, 07.11: what was
   found by eye, a check should find). Every frame at every width of the
   ladder is measured three ways: where the first ink of each row of a table

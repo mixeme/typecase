@@ -174,7 +174,7 @@ type SheetFrom struct {
 
 func (f SheetFrom) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-line tc-line--gap-8 tc-sheet__from">` + Dim{Parts: []Inline{Text(f.Label)}, Variant: DimFixed}.html(nil) + `<span class="tc-line__item">`)
+	s.WriteString(`<div class="tc-line tc-line--normal tc-sheet__from">` + Dim{Parts: []Inline{Text(f.Label)}, Variant: DimFixed}.html(nil) + `<span class="tc-line__item">`)
 	for i, l := range f.Lines {
 		if i > 0 {
 			s.WriteString(`<br>`)

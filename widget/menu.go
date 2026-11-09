@@ -278,7 +278,7 @@ type MenuColumn struct {
 }
 
 func (c MenuColumn) html(mix) string {
-	return `<div class="tc-menu__item tc-menu__item--col"><span class="tc-line tc-line--gap-9 tc-menu__item-indent">` + esc(c.Label) + `</span>` +
+	return `<div class="tc-menu__item tc-menu__item--col"><span class="tc-line tc-line--normal tc-menu__item-indent">` + esc(c.Label) + `</span>` +
 		c.Control.html(nil) + `</div>`
 }
 

@@ -20,9 +20,9 @@ type Banner struct {
 }
 
 func (b Banner) html(mix) string {
-	s := `<div class="tc-line tc-line--gap-14 tc-main__banner">`
+	s := `<div class="tc-line tc-line--wide tc-main__banner">`
 	if !b.Wide {
-		s = `<div class="tc-line tc-line--gap-12 tc-main__banner--12">`
+		s = `<div class="tc-line tc-line--wide tc-main__banner--12">`
 	}
 	s += b.Logo.html(nil)
 	if b.Badge != nil {
@@ -54,7 +54,7 @@ type Strip struct {
 
 func (p Strip) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-line tc-line--gap-8 tc-main__strip"><span class="tc-dim--muted tc-dim--t12">` + esc(p.Label) + `</span>`)
+	s.WriteString(`<div class="tc-line tc-line--normal tc-main__strip"><span class="tc-dim--muted tc-dim--t12">` + esc(p.Label) + `</span>`)
 	for _, it := range p.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -99,12 +99,12 @@ type Person struct {
 
 func (p Person) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div class="tc-line tc-line--gap-12 tc-main__person"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != ""), "tc-avatar--photo--sq62-t17") + `>` +
+	s.WriteString(`<div class="tc-line tc-line--wide tc-main__person"><span` + class(nil, "tc-avatar--photo", is("ph", p.Initials != ""), "tc-avatar--photo--sq62-t17") + `>` +
 		esc(p.Initials) + `</span><div class="tc-main__person-side"><div class="tc-main__person-name">` + esc(p.Name) + `</div><div class="tc-head__sub">` + esc(p.Sub))
 	if p.Badge != nil {
 		s.WriteString(" " + p.Badge.html(nil))
 	}
-	s.WriteString(`</div></div></div><div class="tc-line tc-line--gap-6 tc-main__person-acts">`)
+	s.WriteString(`</div></div></div><div class="tc-line tc-line--normal tc-main__person-acts">`)
 	for _, b := range p.Acts {
 		s.WriteString(b.html(nil))
 	}

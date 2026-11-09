@@ -226,7 +226,7 @@ func (f SecFiles) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<div class="tc-stack tc-stack--gap-6 tc-card__top8">`)
 	for _, it := range f.Items {
-		s.WriteString(`<div class="tc-line tc-line--gap-9 tc-line__text"><span class="tc-table__file tc-table__file--fill"><svg>` + it.Icon.use() +
+		s.WriteString(`<div class="tc-line tc-line--normal tc-line__text"><span class="tc-table__file tc-table__file--fill"><svg>` + it.Icon.use() +
 			`</svg><span class="tc-table__filename">` + esc(it.Name) + `</span></span>` + it.Size.html(nil) + it.Tag.html(nil))
 		if it.Terms != nil {
 			s.WriteString(it.Terms.html(nil))
