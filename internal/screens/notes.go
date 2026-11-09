@@ -1824,10 +1824,10 @@ func Notes4() Screen {
 							w.BarSep{},
 							w.Button{Label: "B", Bold: true},
 							w.Button{Label: "I", Variant: w.ButtonItalic},
-							w.Button{Label: "H2"},
-							w.Button{Label: "• list"},
-							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task"},
-							w.Button{Icon: "link", Title: "Link"},
+							w.Button{Label: "H2", Tertiary: true},
+							w.Button{Label: "• list", Tertiary: true},
+							w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true},
+							w.Button{Icon: "link", Title: "Link", Tertiary: true},
 							w.Drop{
 								Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"},
 								Menu: w.Menu{
@@ -1846,7 +1846,7 @@ func Notes4() Screen {
 						},
 						More: &w.Button{Icon: "dots", Title: "More"},
 						End: []w.DocbarEnd{
-							w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}},
+							w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true},
 							w.DraftNote{Text: "Draft in this window ·", Time: w.Mono{Text: "11:42"}, Secondary: true},
 							w.Kbd{Keys: "Ctrl+S", Secondary: true},
 							w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}, Secondary: true},

@@ -1047,6 +1047,48 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The geometry check** (`TestMockupGeometry`, the owner, 07.11: what was
+  found by eye, a check should find). Every frame at every width of the
+  ladder is measured three ways: where the first ink of each row of a table
+  or a list starts against the heading it stands under; whether a box sticks
+  out sideways of the page, panel, sheet, dialog, card, form, menu or rail it
+  stands in; whether a part of a bar is squeezed narrower than what it holds
+  (a field one types into gives way by design and is left out).
+  `TestMockupGeometryBite` puts an old fault of each kind back and sees it
+  found. On the commit before it found 1751 places in 97 frames, of six
+  kinds, fixed in the CSS and the ranks of one frame's buttons:
+  - in a container of 620 px and less the rows took 12 px of padding while
+    their rubric kept the page's gutter — the rows keep the gutter
+    (`s-agenda-1` and 74 more, from 820 px down, and at 1191 where a list
+    column is that narrow);
+  - a list inside a section (`.tc-sec`) took the row's padding a second time,
+    20 px right of its rubric (`s-contacts-6`, `-16`, `-33`, `s-dup-8`,
+    `s-publish-3`, `mentions-1`, `-9`) — it takes none;
+  - a card's table at 641 px stuck out of its card by 19 px, «Changed on the
+    server» kept on one line (`s-profile-1`, `-4`, `-26`, `-27`,
+    `s-publish-2`, `-13`, `-22`) — in a container of 620 px and less the
+    headers wrap, wider they stay on one line;
+  - the note's edit bar squeezed the notebook pick to its mark — at 1008 px
+    (`s-notes-20`, `-26`, `-30`, `states-31`) and at 1191 in Focus
+    (`s-notes-4`). The pick now takes the width of its text (154 px for
+    «nextcloud · Записи», at most 210; full width in the drawer, as before),
+    first; then the buttons lose their labels and stand closer, at 860 px
+    and less (was 740); only then do they go under «⋯» — so a button goes
+    only when there is no room for it (the owner, 09.11). The bar holds by
+    ranks in one line, as the bars of buttons do: the second rank goes at
+    1280 px and less (was 1120), the third (H2, list, task, link, Auto-save)
+    at 740 and less, not only on the phone; `s-notes-4`'s buttons got the
+    ranks the other edit frames have. «⋯» stands right after the buttons it
+    hides, the right group alone keeps to the right edge: the two automatic
+    margins had shared the room and hung «⋯» in the middle;
+  - the narrow rail showed lines wider than itself: the empty line
+    «No account connected» (`s-notes-6` at 641–1007) and the version
+    «Carrel 0.0.1 · 786949a» in the foot of the icon rail (`s-conflict-2`) —
+    they are hidden there; the davloom emblem stays in the icon rail's foot,
+    in the middle;
+  - a long note in a rubric's aside stood 51 px past its card at 390
+    (`s-dup-1`) — it wraps, flush right.
+  The mailbox's frame `s-mailbox-14` waits with the mailbox.
 - **Letters in the middle of their controls** (08.11, the owner). Public Sans
   leaves more room under the line than over the capitals, so the text of
   buttons, picks, segments and the bars' filters stood 1 px above the middle

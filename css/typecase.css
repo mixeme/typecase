@@ -165,6 +165,8 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    иначе пустой flex-элемент добавил бы полосе промежуток. */
 .tc-bar .tc-bar__more,.tc-docbar .tc-bar__more{display:none;margin-left:auto}
 .tc-bar .tc-drop:has(> .tc-bar__more),.tc-docbar .tc-drop:has(> .tc-bar__more){display:none;margin-left:auto;flex:none}
+/* В панели документа «⋯» прячет кнопки форматирования и стоит сразу за ними; к правому краю панель прижимает её правая группа. Два отступа auto делили свободное место, и «⋯» висел посередине (владелец, 08.11). */
+.tc-docbar .tc-bar__more,.tc-docbar .tc-drop:has(> .tc-bar__more){margin-left:0}
 /* Меню «...» полосы открыто, только пока видна сама кнопка: без неё оно висело бы ни от чего. */
 .tc-bar .tc-bar__more + .tc-menu,.tc-docbar .tc-bar__more + .tc-menu{display:none}
 /* .tc-bar__sep и .tc-range — элементы панели: диапазон уходит в «...» целиком.
@@ -486,6 +488,8 @@ a.tc-row__title:hover{text-decoration:underline}
 .tc-fields dd{overflow-wrap:anywhere}
 .tc-sec{border-top:.5px solid var(--tc-hair);padding:12px var(--tc-page-gutter)}
 .tc-sec > .tc-rubric{margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline}
+/* Список в секции: поле у секции, строка своего не берёт — иначе метка на 20 px правее рубрики (хронология карточки, 08.11). */
+.tc-sec > .tc-list > .tc-row{padding-left:0;padding-right:0}
 .tc-avatar--photo{width:104px;height:104px;border-radius:4px;background:#8C7B6A;flex:none}
 .tc-avatar--photo.is-ph{background:#D9D2BE;display:flex;align-items:center;justify-content:center;color:#4E4738;font-size:26px;font-family:var(--tc-font-serif)}
 /* таблицы */
@@ -726,6 +730,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-docmeta{border-left:.5px solid var(--tc-rule);padding:16px 18px;display:flex;flex-direction:column;gap:15px;background:var(--tc-surface)}
 .tc-docmeta .tc-rubric{margin-bottom:6px}
 .tc-docbar{display:flex;align-items:center;gap:6px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-hair);background:var(--tc-surface)}
+/* Выбор коллекции в панели документа — по ширине своего текста, не шире 210: сначала сжимается он, потом кнопки уходят под «⋯» (владелец, 09.11). */
+.tc-docbar > .tc-field{width:auto;max-width:210px}
 /* диалоги и одиночные страницы */
 /* Страницы до входа: карточка в поле пустой страницы. Не примитив набора. */
 .tc-auth{min-height:520px;display:flex;align-items:center;justify-content:center;padding:40px 20px}
@@ -753,6 +759,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-card > .tc-rubric{margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 /* Правая часть рубрики: части переносятся целиком, фраза внутри не рвётся и за край карточки не выходит. */
 .tc-rubric__aside{display:inline-flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-end;gap:4px 6px;white-space:nowrap;min-width:0}
+/* Длинная моноширинная приписка переносится внутри себя: «220 points · same UID, same phone…» на 390 уходила за край карточки (проверка геометрии, 08.11). */
+.tc-rubric__aside > .tc-mono{white-space:normal;text-align:right}
 /* Слияние: список «куда» сжимается (min-width:0), кнопка не уезжает. */
 /* Конфликт: карточка на свойство, не три колонки в ряд. */
 .tc-diff{display:flex;flex-direction:column;gap:8px;margin-top:10px}
@@ -819,12 +827,21 @@ label.tc-menu__item{position:relative;cursor:pointer}
 @container tcbox (max-width:880px){
   .tc-doc__layout{grid-template-columns:minmax(0,1fr) 296px}
 }
-/* Панель правки заметки: порог 1120 — целиком она занимает около 1115
-   (левая группа до Attach 447, правая: черновик + Ctrl+S + ширина + Focus). */
-@container tcbox (max-width:1120px){
+/* Панель правки заметки: порог 1280 — с выбором блокнота по его тексту целиком она занимает около 1270
+   (правая группа: черновик + Ctrl+S + ширина + Focus), без второго ранга — около 850; на 1191 в «Focus»
+   (`s-notes-4`) выбор блокнота сжимался до метки (08.11). Пороги считаны по «nextcloud · Записи»;
+   имя длиннее сначала укорачивается многоточием в пределах 210. */
+@container tcbox (max-width:1280px){
   .tc-docbar .is-2nd{display:none}
   .tc-docbar:has(.is-2nd) .tc-bar__more,.tc-docbar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-docbar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+}
+/* Значками, с третьим рангом и «⋯», панели правки нужно около 737 px (у колонки правки на 1008 их 744):
+   с 740 третий ранг (H2, список, задача, ссылка, Auto-save) уходит под «⋯» здесь же, не только на телефоне, —
+   панель держится рангами в одну строку, а не сжимает выбор блокнота до метки и не переносится
+   (проверка геометрии и владелец, 08.11). */
+@container tcbox (max-width:740px){
+  .tc-docbar > .is-3rd,.tc-docbar > .tc-bar__right > .is-3rd{display:none}
 }
 /* Тяжёлая полоса — .tc-bar--wide: целиком ей нужно 930–940 px, поэтому
    is-2nd уходит под «...» с 960, а не с 800. Агенда, хронология человека. */
@@ -846,10 +863,16 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar .tc-segfold.tc-segfold--phone > .tc-seg{display:inline-flex}
   .tc-bar .tc-segfold.tc-segfold--phone > .tc-segfold__pick{display:none}
 }
-/* Без is-2nd панели правки нужно 740: дальше кнопки теряют подписи, не действия, и стоят плотнее. */
+/* Панель документа уже 740: кнопки теряют подписи, не действия, и стоят плотнее. */
 @container tcbox (max-width:740px){
   .tc-docbar .tc-btn > .tc-btn__label{display:none}
   .tc-docbar .tc-btn{padding:0 7px}
+}
+/* Панели правки заметки без второго ранга с подписями нужно около 850: с 860 её кнопки теряют подписи —
+   раньше, чем третий ранг уходит под «⋯» (владелец, 09.11: место есть — кнопки на виду). */
+@container tcbox (max-width:860px){
+  .tc-docbar--edit .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar--edit .tc-btn{padding:0 7px}
 }
 @container tcbox (max-width:800px){
   /* is-2nd уходит под «...». У таблицы порог 700: ячейка умеет сжиматься. */
@@ -896,7 +919,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-row--excerpt.tc-row--single{grid-template-columns:3px minmax(116px,1.4fr) 80px}
 }
 @container tcbox (max-width:620px){
-  .tc-row{padding-left:12px;padding-right:12px}
+  /* Заголовок колонки в карточке переносится, когда тесно: «Changed on the server» в одну строку выталкивал таблицу за край карточки на 641; шире — в одну строку, как было (проверка геометрии, 08.11). */
+  .tc-card > .tc-table th{white-space:normal}
+  /* Строки держат поле страницы, как заголовки групп над ними (проверка геометрии, 08.11): своё поле 12 px ставило метку на 8 px левее заголовка дня. */
   /* Тесная шапка: набор кнопок переносится, а не выдавливает панель. */
   .tc-head .tc-acts{flex:0 1 auto;min-width:0}
   .tc-row--cols > :is(.tc-col--email,.tc-col--status,.tc-col--badges,.tc-col--excerpt){display:none}
@@ -1027,7 +1052,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
     --tc-shell-mode:rail;grid-template-columns:minmax(0,1fr)}
   .tc-shell__body.tc-shell__body--side > .tc-side{display:none}
   .tc-shell__rail{overflow:hidden;padding:12px 4px;align-items:center}
-  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot,.tc-shell__rail .tc-empty{display:none}
   .tc-nav{padding:0;align-items:center}
   .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
   .tc-nav .tc-num{display:none}
@@ -1171,6 +1196,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   /* В столбце основа поля (tc-field--fill300, --max640-fill460…) стала бы его высотой — пустота под полем; в столбце поле по содержимому. */
   .tc-form > .tc-field.tc-field{flex-basis:auto}
   .tc-field,.tc-field--xs,.tc-field--sm,.tc-field--md,.tc-field--lg,.tc-field--xl,.tc-field--full{width:100%;min-width:0}
+  .tc-docbar > .tc-field{width:100%;max-width:none}
   .tc-fields{grid-template-columns:minmax(0,1fr)}
   .tc-head .tc-acts{flex:1 1 100%;justify-content:flex-start}
   .tc-head .tc-acts--stack{align-items:flex-start}
@@ -1683,6 +1709,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-shell__body--minh280.tc-shell__body--minh280{min-height:280px}
 .tc-shell__rail--zone.tc-shell__rail--zone{justify-content:center;color:var(--tc-dusty);align-items:center}
 .tc-shell__rail--icons.tc-shell__rail--icons{align-items:center;padding:12px 4px}
+/* Рейл из значков на любой ширине: пустой строки и строки о версии в нём нет — в 56 px они не помещаются; эмблема davloom в подвале остаётся, по середине (проверка геометрии, 08.11). */
+.tc-shell__rail--icons .tc-railfoot__about,.tc-shell__rail--icons .tc-empty{display:none}
+.tc-shell__rail--icons .tc-railfoot{align-self:stretch;justify-content:center;padding-left:0;padding-right:0}
+.tc-shell__rail--icons .tc-railfoot > .tc-emblem{margin-left:0}
 .tc-side--zone.tc-side--zone{justify-content:center;color:var(--tc-dusty);align-items:center}
 .tc-side--drop.tc-side--drop{outline:1.5px dashed var(--tc-accent);outline-offset:-3px}
 .tc-skel--w16.tc-skel--w16{width:16px}
