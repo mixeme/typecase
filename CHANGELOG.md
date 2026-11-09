@@ -1080,6 +1080,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **«Записи» hold three notes in the settings tables too** (Carrel's task
+  259). Since note 182 the set has three notes in «Записи» and the lists
+  count them so; the tables of collections still said 2 objects. Now 3 in
+  `s-profile-1`, `-4`, `-10`, `-26`, `-27`, `s-publish-2`, `-13`, `-22`.
 - **Margins between neighbours in the same steps** (the owner, 09.11). A
   rubric over a list, a hint under a field, a message under a line, a title
   over its sub, a paragraph after a section stood 4 to 18 px apart; now
