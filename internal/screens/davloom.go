@@ -105,7 +105,7 @@ func Davloom1() Screen {
 								Width: w.FieldMax640Fill460,
 							},
 						},
-						Variant: w.FormBottom12,
+						Variant: w.FormBottom,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -698,7 +698,7 @@ func Davloom6() Screen {
 								Width: w.FieldMax640Fill460,
 							},
 						},
-						Variant: w.FormBottom12,
+						Variant: w.FormBottom,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -819,7 +819,7 @@ func Davloom7() Screen {
 									Width: w.FieldMax640Fill460,
 								},
 							},
-							Variant: w.FormBottom12,
+							Variant: w.FormBottom,
 						},
 						w.Msg{
 							Parts: []w.MsgPart{
@@ -1235,7 +1235,7 @@ func Davloom8() Screen {
 								Width: w.FieldMax640Fill460,
 							},
 						},
-						Variant: w.FormBottom12,
+						Variant: w.FormBottom,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -1491,7 +1491,7 @@ func Davloom9() Screen {
 									Width: w.FieldMax640Fill460,
 								},
 							},
-							Variant: w.FormBottom12,
+							Variant: w.FormBottom,
 						},
 						w.Msg{
 							Parts: []w.MsgPart{

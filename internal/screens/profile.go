@@ -2916,7 +2916,7 @@ func Profile3() Screen {
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19},
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
-							Pad:   w.HeadPadBottom8,
+							Pad:   w.HeadSnug,
 						},
 						w.Pad{
 							Items: []w.PadPart{
@@ -4208,7 +4208,7 @@ func Profile7() Screen {
 							Title: &w.HeadTitle{Text: "Connections"},
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
-							Pad:   w.HeadPadBottom8,
+							Pad:   w.HeadSnug,
 						},
 						w.Pad{
 							Items: []w.PadPart{
@@ -4396,7 +4396,7 @@ func Profile8() Screen {
 							Title: &w.HeadTitle{Text: "Connections"},
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
-							Pad:   w.HeadPadBottom8,
+							Pad:   w.HeadSnug,
 						},
 						w.Pad{
 							Items: []w.PadPart{
@@ -4597,7 +4597,7 @@ func Profile9() Screen {
 							Title: &w.HeadTitle{Text: "Connections"},
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 15 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
-							Pad:   w.HeadPadBottom8,
+							Pad:   w.HeadSnug,
 						},
 						w.Pad{
 							Items: []w.PadPart{
@@ -5325,7 +5325,7 @@ func Profile10() Screen {
 						Title: &w.HeadTitle{Text: "Subscribe to a feed", Size: w.HeadTitle17},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Somebody else’s calendar or address book, read-only")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Form{
 						Items: []w.FormPart{

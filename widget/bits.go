@@ -234,7 +234,7 @@ const (
 )
 
 func (s DangerSpace) class() string {
-	return [...]string{"", "tc-danger--topauto-flush-padt11", "tc-danger--top0-pad11-14"}[s]
+	return [...]string{"", "tc-danger--topauto-flush-padt", "tc-danger--top0-pad"}[s]
 }
 
 // Danger — tc-danger
@@ -622,7 +622,7 @@ const (
 )
 
 func (v EmptyVariant) class() string {
-	return [...]string{"", "tc-empty--t12-pad14-20", "tc-empty--t12-pad12-20", "tc-empty--dusty tc-empty--t12-pad12-20", "tc-empty--dashed",
+	return [...]string{"", "tc-empty--t12-pad", "tc-empty--t12-pad", "tc-empty--dusty tc-empty--t12-pad", "tc-empty--dashed",
 		"tc-empty--drop", "tc-empty--drop-side"}[v]
 }
 
@@ -776,7 +776,7 @@ func (g Grid) Render() string { return g.html(nil) }
 
 func (g Grid) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-grid", pick(g.Flush, "tc-grid--flush-fill-pad8")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-grid", pick(g.Flush, "tc-grid--flush-fill-pad")) + `>`)
 	for _, t := range g.Tiles {
 		s.WriteString(t.html(nil))
 	}

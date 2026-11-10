@@ -1,7 +1,6 @@
 package widget
 
 import (
-	"strconv"
 	"strings"
 )
 
@@ -194,7 +193,7 @@ func (w FieldWidth) class() string {
 // Field — tc-field
 //
 // Роль. Поле формы: подпись и контролы под ней, подсказка о том, что значит значение.
-// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gap, OwnLine, Place, Action, Post, Sends, Hidden, Changed}.
+// Вход. Field{Label, LabelAside, LabelSpan, Parts, Width, Gapped, OwnLine, Place, Action, Post, Sends, Hidden, Changed}.
 // Состояния. labelled | bare | hint | group | swatches | zoom | photo | own-line.
 // Инварианты. Ширина — перечисление: поле даты не растягивается, растягивается поле тегов; подпись связана с контролом; поле печатает фрагмент своего кадра.
 // Поведение. Поле с Changed появляется, пока названные поля формы отличаются от пришедших со страницей, и прячется, когда правку вернули; остальное — у контролов.
@@ -207,7 +206,7 @@ type Field struct {
 	LabelSpan  bool // the label is not for one control: the photo field
 	Parts      []FieldPart
 	Width      FieldWidth
-	Gap        int // 7 or 8 between several checks; 0 is the form's
+	Gapped     bool // the normal step between several checks; false: the form's
 	OwnLine    bool
 	Place      Place
 	// Action makes the field a GET form of its own: Enter in its line sends
@@ -237,8 +236,8 @@ func (f Field) Render() string { return f.html(nil) }
 func (f Field) html(m mix) string {
 	var s strings.Builder
 	gap := ""
-	if f.Gap != 0 {
-		gap = "tc-field--gap" + strconv.Itoa(f.Gap)
+	if f.Gapped {
+		gap = "tc-field--gap"
 	}
 	tag := "div"
 	if f.Action != "" {
@@ -468,21 +467,21 @@ func (c FormColumn) html(mix) string {
 type FormVariant int
 
 const (
-	FormPlain          FormVariant = iota
-	FormFlush                      // no side padding: inside a dialog
-	FormFlushBottom                // no bottom padding
-	FormFlushAll                   // no padding: inside a card
-	FormGap12                      // 12/16 gaps, no padding
-	FormBottom12                   // 12 px below
-	FormColumnFlush                // one column, no padding
-	FormColumnGap10                // one column, 10 px gaps, no padding
-	FormColumnGap10Mid             // the same, centred at 340 px
+	FormPlain         FormVariant = iota
+	FormFlush                     // no side padding: inside a dialog
+	FormFlushBottom               // no bottom padding
+	FormFlushAll                  // no padding: inside a card
+	FormGapFields                 // the wide step down, fields side by side the loose step apart, no padding
+	FormBottom                    // the wide step below
+	FormColumnFlush               // one column, no padding
+	FormColumnWide                // one column, the wide step apart, no padding
+	FormColumnWideMid             // the same, centred at 340 px
 )
 
 func (v FormVariant) class() string {
-	return [...]string{"", "tc-form--padl0-padr0", "tc-form--padb0", "tc-form--pad0", "tc-form--gap12-16-pad0",
-		"tc-form--padb12", "tc-form--col tc-form--pad0", "tc-form--col tc-form--gap10 tc-form--pad0",
-		"tc-form--col tc-form--gap10 tc-form--mid340 tc-form--pad0"}[v]
+	return [...]string{"", "tc-form--padl0-padr0", "tc-form--padb0", "tc-form--pad0", "tc-form--gap-fields-pad0",
+		"tc-form--padb", "tc-form--col tc-form--pad0", "tc-form--col tc-form--gap-wide tc-form--pad0",
+		"tc-form--col tc-form--gap-wide tc-form--mid340 tc-form--pad0"}[v]
 }
 
 // Form — tc-form

@@ -2922,7 +2922,7 @@ func Contacts7() Screen {
 								w.Button{Label: "Print", Icon: "print"},
 							},
 						},
-						Pad: w.HeadPadBottom10,
+						Pad: w.HeadSnug,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -3055,7 +3055,7 @@ func Contacts7() Screen {
 					},
 					w.Empty{
 						Parts:   []w.EmptyPart{w.Text("Nothing was looked for before January 2026. Widen the range if you need it.")},
-						Variant: w.EmptySmallTop,
+						Variant: w.EmptySmall,
 					},
 				},
 				ID: "list-main",
@@ -3084,7 +3084,7 @@ func Contacts7() Screen {
 						},
 						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
 						Middle: true,
-						Pad:    w.HeadPadBottom10,
+						Pad:    w.HeadSnug,
 					},
 					w.Fields{
 						Items: []w.FieldsItem{

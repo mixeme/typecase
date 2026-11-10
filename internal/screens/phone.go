@@ -222,7 +222,7 @@ func Phone3() Screen {
 						Subs: []w.HeadSub{
 							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Fields{
 						Items: []w.FieldsItem{

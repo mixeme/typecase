@@ -2572,7 +2572,7 @@ var _ = add(
 			{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
 			{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
 			{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 2}}}, w.RailFoot{Items: []w.RailFootPart{w.RailStatus{Text: "davloom · running · 3 devices", Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11}}, w.RailStatus{Text: "Backups are running", Detail: w.Dim{Parts: []w.Inline{w.Text("Last backup "), w.Mono{Text: "2026-08-16 03:10"}, w.Text("· ")}, Size: w.Dim11}}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}}, Pad: w.HeadPadBottom8},
+		w.Head{Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 servers · 12 collections · 2 subscriptions")}}}, Pad: w.HeadSnug},
 		w.Pad{Items: []w.PadPart{w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "nextcloud"},
 			w.Mono{Text: "https://cloud.example.org/remote.php/dav/ · mix · last answer 2 min ago", Form: w.MonoLine, Variant: w.Mono11_5DustyGap}}}, w.Card{Items: []w.CardPart{
@@ -2718,7 +2718,7 @@ var _ = add(
 			w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "nextcloud · Архив", Href: "/app/contacts/nextcloud/arhiv/import"},
 			w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "radicale · vps · Команда", Reason: "Read-only: nothing can be written here."},
 			w.MenuSep{},
-			w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}}}, Width: w.FieldW100}}, Variant: w.FormBottom12, Tight: true},
+			w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to, on every connected server.")}}}, Width: w.FieldW100}}, Variant: w.FormBottom, Tight: true},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "From a file"},
 			w.Field{Label: "vCard file", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Input{Placeholder: "Разное (mix).vcf", Label: "Разное (mix).vcf", Picked: true, ID: "import-file", Variant: w.InputFill}, w.Button{Label: "Browse", File: &w.FileField{Form: "", Name: "file", Accept: ".vcf", Label: "vCard file", Shows: "import-file"}}, w.Button{Label: "Preview file", Kind: w.ButtonPrimary, Submit: true}}, Gap: w.LineGapNormal}}, Width: w.FieldW100},

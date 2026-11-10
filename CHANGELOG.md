@@ -14,6 +14,20 @@ do, not what the authors did.
 
 ### Breaking
 
+- **Inner padding takes the gutters and the steps** (the owner, 09.11).
+  Padding named by pixels takes a name: at the sides the page's gutter or
+  the narrow one, above and below a step — `tc-card--pad12-14` →
+  `tc-card--snug`, `tc-row--*--padl14-padr14` → `tc-row--*--inset`,
+  `tc-tickrow--padl14` → `tc-tickrow--inset`, `tc-empty--t12-pad14-20` and
+  `-pad12-20` → `tc-empty--t12-pad`, `tc-main__banner--12` →
+  `tc-main__banner--snug`, `tc-head--padb6`, `--padb10` → `tc-head--snug`,
+  and so on. Constants follow: `HeadPadTop11` → `HeadPadTopWide`;
+  `HeadPadBottom6`, `HeadPadBottom8`, `HeadPadBottom10` → `HeadSnug`;
+  `FormGap12` → `FormGapFields`, `FormBottom12` → `FormBottom`,
+  `FormColumnGap10` → `FormColumnWide`, `FormColumnGap10Mid` →
+  `FormColumnWideMid`. `Field.Gap` (7 or 8) is `Field.Gapped`, a flag.
+  The sizes stay numbers: icon buttons' padding, tree levels, sample frames'
+  padding, a sheet's offset, a menu item's 5/7.
 - **A margin between neighbours is a step** (the owner, 09.11). Classes
   named by pixels above or below a block take the step's name:
   `tc-rubric--bot7`, `--bot8` → `tc-rubric--below-normal`,
@@ -1080,6 +1094,11 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Inner padding on the gutters and the steps** (the owner, 09.11). At
+  the sides nothing moves: the 14 and 20 px were the gutters already.
+  Above and below: 11 and 14 become 12, 6 and 10 become 8, a field's checks
+  7 → 8 apart, a card's fields and a column form 10 → 12, a wrapping tag
+  field 5 → 4. 120 frames move by 1–2 px.
 - **«Записи» hold three notes in the settings tables too** (Carrel's task
   259). Since note 182 the set has three notes in «Записи» and the lists
   count them so; the tables of collections still said 2 objects. Now 3 in

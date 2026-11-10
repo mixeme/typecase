@@ -82,7 +82,7 @@ func (g *gen) danger(e *El) string {
 	if t := e.OwnText(); t != "" {
 		f = append(f, "Note: "+q(t))
 	}
-	for _, v := range allOf(e, []kv{{"tc-danger--topauto-flush-padt11", "DangerAtEnd"}, {"tc-danger--top0-pad11-14", "DangerTight"}}) {
+	for _, v := range allOf(e, []kv{{"tc-danger--topauto-flush-padt", "DangerAtEnd"}, {"tc-danger--top0-pad", "DangerTight"}}) {
 		f = append(f, "Space: w."+v)
 	}
 	return "w.Danger{" + join(f, ", ") + "}"
@@ -290,7 +290,7 @@ func (g *gen) diff(e *El) string {
 	return s + "}"
 }
 
-var emptyVariant = []kv{{"tc-empty--t12-pad14-20", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"}, {"tc-empty--t12-pad12-20", "EmptySmallTop"},
+var emptyVariant = []kv{{"tc-empty--t12-pad", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"}, {"tc-empty--t12-pad", "EmptySmallTop"},
 	{"tc-empty--dashed", "EmptyDashed"}, {"tc-empty--drop", "EmptyDrop"}, {"tc-empty--drop-side", "EmptyDropSide"}}
 
 func (g *gen) empty(e *El) string {
@@ -403,7 +403,7 @@ func (g *gen) tile(e *El) string {
 
 func (g *gen) grid(e *El) string {
 	s := "w.Grid{Tiles: []w.Tile{" + g.each(e.Els(), g.tile) + "}"
-	if e.Has("tc-grid--flush-fill-pad8") {
+	if e.Has("tc-grid--flush-fill-pad") {
 		s += ", Flush: true"
 	}
 	return s + "}"
@@ -420,8 +420,8 @@ func (g *gen) pad(e *El) string {
 
 type fieldsVariant struct{ a, b, v string }
 
-var fieldsVariants = []fieldsVariant{{"tc-fields--cols88", "tc-fields--pad4-14-12", "Fields88Pad"}, {"tc-fields--cols88", "", "Fields88"},
-	{"tc-fields--bleed", "tc-fields--cols130", "FieldsBleed130"}, {"tc-fields--bleed", "", "FieldsBleed"}, {"tc-fields--cols130", "tc-fields--flush-padt14", "Fields130Flush"}}
+var fieldsVariants = []fieldsVariant{{"tc-fields--cols88", "tc-fields--pad-inset", "Fields88Pad"}, {"tc-fields--cols88", "", "Fields88"},
+	{"tc-fields--bleed", "tc-fields--cols130", "FieldsBleed130"}, {"tc-fields--bleed", "", "FieldsBleed"}, {"tc-fields--cols130", "tc-fields--flush-padt", "Fields130Flush"}}
 
 func (g *gen) fields(e *El) string {
 	var its []string
@@ -652,7 +652,7 @@ func (g *gen) sec(e *El) string {
 		}
 	}
 	s := "w.Sec{Items: []w.SecPart{\n\t\t" + join(items, ",\n\t\t") + "}"
-	if e.Has("tc-sec--flush-flush-padt11") {
+	if e.Has("tc-sec--flush-flush-padt") {
 		s += ", Flush: true"
 	}
 	return s + "}"
@@ -698,7 +698,7 @@ type cardVariant = fieldsVariant
 
 var cardVariants = []cardVariant{{"tc-card--edge-accent", "tc-card--flush", "CardChosenFlushGrow"}, {"tc-card--edge-accent-flush", "", "CardChosenFlush"},
 	{"tc-card--edge-accent", "", "CardChosen"}, {"tc-card--alert", "", "CardAlert"}, {"tc-card--above-wide", "", "CardApart"},
-	{"tc-card--pad12-14", "", "CardSnug"}, {"tc-card--flush", "", "CardFlush"}}
+	{"tc-card--snug", "", "CardSnug"}, {"tc-card--flush", "", "CardFlush"}}
 
 func (g *gen) card(e *El) string {
 	var items []string
@@ -740,7 +740,7 @@ func (g *gen) card(e *El) string {
 				}
 				return "w.Span{Face: w.FaceMuted12, Text: " + q(x.Text()) + "}"
 			}) + "}"
-			if k.Has("tc-card__fields--gap10-12") {
+			if k.Has("tc-card__fields--gap") {
 				s += ", Wide: true"
 			}
 			if k.Has("tc-card__fields--rule") {
@@ -1179,7 +1179,7 @@ type proseVariant struct {
 
 var proseVariants = []proseVariant{{[]string{"tc-prose--lead", "tc-prose--above-wide"}, "ProseLead"}, {[]string{"tc-prose--lead", "tc-prose--above-loose"}, "ProseLeadAfter"},
 	{[]string{"tc-prose--read", "tc-prose--above-wide"}, "ProseReadTop"}, {[]string{"tc-prose--muted-flush-below-normal"}, "ProseMutedClose"},
-	{[]string{"tc-prose--t13-flush-padt11"}, "Prose13Card"}, {[]string{"tc-prose--muted"}, "ProseMuted"}, {[]string{"tc-prose--t13"}, "Prose13"},
+	{[]string{"tc-prose--t13-flush-padt"}, "Prose13Card"}, {[]string{"tc-prose--muted"}, "ProseMuted"}, {[]string{"tc-prose--t13"}, "Prose13"},
 	{[]string{"tc-prose--read"}, "ProseRead"}, {[]string{"tc-prose--above-wide"}, "ProseTop"}}
 
 func (g *gen) prose(e *El) string {

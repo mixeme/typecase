@@ -102,9 +102,9 @@ type Window struct {
 
 func (w Window) html(mix) string {
 	var s strings.Builder
-	pad := "tc-win__body--pad16-20"
+	pad := "tc-win__body--pad"
 	if w.Small {
-		pad = "tc-win__sheet--pad12"
+		pad = "tc-win__sheet--pad"
 	}
 	s.WriteString(`<div class="tc-stack ` + w.Gap.class() + ` ` + pad + `">`)
 	for _, it := range w.Items {

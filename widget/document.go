@@ -31,7 +31,7 @@ const (
 )
 
 func (v ProseVariant) class() string {
-	return [...]string{"", "tc-prose--muted", "tc-prose--muted-flush-below-normal", "tc-prose--t13", "tc-prose--t13-flush-padt11",
+	return [...]string{"", "tc-prose--muted", "tc-prose--muted-flush-below-normal", "tc-prose--t13", "tc-prose--t13-flush-padt",
 		"tc-prose--lead tc-prose--above-wide", "tc-prose--lead tc-prose--above-loose", "tc-prose--read", "tc-prose--read tc-prose--above-wide", "tc-prose--above-wide"}[v]
 }
 

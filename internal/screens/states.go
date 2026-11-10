@@ -6127,7 +6127,7 @@ func States35() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Selected collections", Size: w.HeadTitle18},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 3 storages")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{

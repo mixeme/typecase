@@ -71,7 +71,7 @@ const (
 )
 
 func (f TickRowForm) class() string {
-	return [...]string{"", "tc-tickrow--padl0", "tc-tickrow--padl14", "tc-tickrow--h44"}[f]
+	return [...]string{"", "tc-tickrow--padl0", "tc-tickrow--inset", "tc-tickrow--h44"}[f]
 }
 
 // TickRowTrail is what stands at the end of a row of the rail.

@@ -171,7 +171,7 @@ type CardFields struct {
 
 func (f CardFields) html(mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(nil, "tc-card__fields", pick(f.Wide, "tc-card__fields--gap10-12"), pick(f.Rule, "tc-card__fields--rule"), pick(f.Top, "tc-card__fields--top")) + `>`)
+	s.WriteString(`<div` + class(nil, "tc-card__fields", pick(f.Wide, "tc-card__fields--gap"), pick(f.Rule, "tc-card__fields--rule"), pick(f.Top, "tc-card__fields--top")) + `>`)
 	for _, it := range f.Items {
 		s.WriteString(it.html(nil))
 	}
@@ -358,7 +358,7 @@ const (
 )
 
 func (v CardVariant) class() string {
-	return [...]string{"", "tc-card--alert", "tc-card--above-wide", "tc-card--pad12-14", "tc-card--flush", "tc-card--edge-accent",
+	return [...]string{"", "tc-card--alert", "tc-card--above-wide", "tc-card--snug", "tc-card--flush", "tc-card--edge-accent",
 		"tc-card--edge-accent-flush", "tc-card--edge-accent tc-card--flush"}[v]
 }
 

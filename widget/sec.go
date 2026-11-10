@@ -59,8 +59,8 @@ const (
 )
 
 func (v FieldsVariant) class() string {
-	return [...]string{"", "tc-fields--bleed", "tc-fields--bleed tc-fields--cols130", "tc-fields--cols130 tc-fields--flush-padt14", "tc-fields--cols88",
-		"tc-fields--cols88 tc-fields--pad4-14-12"}[v]
+	return [...]string{"", "tc-fields--bleed", "tc-fields--bleed tc-fields--cols130", "tc-fields--cols130 tc-fields--flush-padt", "tc-fields--cols88",
+		"tc-fields--cols88 tc-fields--pad-inset"}[v]
 }
 
 // Fields — tc-fields
@@ -324,7 +324,7 @@ func (c Sec) Render() string { return c.html(nil) }
 
 func (c Sec) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-sec", pick(c.Flush, "tc-sec--flush-flush-padt11")) + `>`)
+	s.WriteString(`<div` + class(m, "tc-sec", pick(c.Flush, "tc-sec--flush-flush-padt")) + `>`)
 	for _, it := range c.Items {
 		s.WriteString(it.html(nil))
 	}

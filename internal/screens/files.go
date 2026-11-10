@@ -389,7 +389,7 @@ func Files1() Screen {
 						Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle17},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("sftpgo · vps · Documents")}}},
 						Acts:  &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}},
 					w.SideActs{
@@ -1637,7 +1637,7 @@ func Files6() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Selected collections", Size: w.HeadTitle18},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 storages on 2 servers")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Table{
 						Cols: []w.TableCol{

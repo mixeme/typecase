@@ -26,7 +26,7 @@ const (
 )
 
 func (v RubricVariant) class() string {
-	return [...]string{"", "tc-rubric--bot2", "tc-rubric--below-normal", "tc-rubric--pad0-14-6",
+	return [...]string{"", "tc-rubric--bot2", "tc-rubric--below-normal", "tc-rubric--pad-inset",
 		"tc-rubric--split tc-rubric--nudge", "tc-rubric--danger", "tc-line tc-line--normal", "tc-line"}[v]
 }
 

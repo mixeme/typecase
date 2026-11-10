@@ -416,7 +416,7 @@ func Auth6() Screen {
 									Variant: w.CardSnug,
 								},
 							},
-							Variant: w.FormColumnGap10,
+							Variant: w.FormColumnWide,
 						},
 						w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Back to sign in"}}, Variant: w.FormFootFlush},
 					},

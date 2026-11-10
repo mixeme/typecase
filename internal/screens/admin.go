@@ -2601,8 +2601,8 @@ func Admin6() Screen {
 										Parts: []w.FieldPart{
 											w.Check{On: true, Name: "coverNew", Value: "on", Parts: []w.CheckPart{w.Text("New accounts are covered")}},
 										},
-										Gap:   7,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Field{
 										Parts: []w.FieldPart{
@@ -2852,8 +2852,8 @@ func Admin30() Screen {
 										Parts: []w.FieldPart{
 											w.Check{On: true, Name: "coverNew", Value: "on", Parts: []w.CheckPart{w.Text("New accounts are covered")}},
 										},
-										Gap:   7,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Field{
 										Parts: []w.FieldPart{

@@ -3449,7 +3449,7 @@ func Publish6() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
 					w.List{
@@ -3617,7 +3617,7 @@ func Publish7() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -3808,7 +3808,7 @@ func Publish9() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "2026-08-10-sync-board.png", Size: w.HeadTitle19},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "image/png · 412 KB · changed 2026-08-10"}}}},
-						Pad:   w.HeadPadBottom6,
+						Pad:   w.HeadSnug,
 					},
 					w.MainThumbs{Thumb: w.Thumb{Icon: "img", Form: w.ThumbWide}},
 					w.MainFoot{Text: "This link works until 19 August 2026."},
@@ -3844,7 +3844,7 @@ func Publish10() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "release-checklist.md", Size: w.HeadTitle19},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "text/markdown · 3.1 KB · changed 2026-08-09"}}}},
-						Pad:   w.HeadPadBottom6,
+						Pad:   w.HeadSnug,
 					},
 					w.Doc{
 						Items: []w.DocPart{
@@ -3921,7 +3921,7 @@ func Publish12() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Strip{
 						Label: "Mount as a drive",
@@ -4052,7 +4052,7 @@ func Publish24() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -4162,7 +4162,7 @@ func Publish39() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -4206,7 +4206,7 @@ func Publish25() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Личный"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("17 – 23 August 2026")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Bar{
 						Items: []w.BarPart{
@@ -4241,7 +4241,7 @@ func Publish16() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Синк-ап по релизу"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Monday, 10 August 2026, 10:00 – 11:00 · Переговорная 2")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
@@ -4292,7 +4292,7 @@ func Publish26() Screen {
 						Photo: &w.HeadPhoto{Initials: "АК"},
 						Title: &w.HeadTitle{Text: "Анна Ковалёва", Size: w.HeadTitle19},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Издательство «Слово» · Выпускающий редактор")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
@@ -4336,7 +4336,7 @@ func Publish27() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Отправить документы в МФЦ"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Due Friday, 7 August 2026")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Fields{Items: []w.FieldsItem{
 						{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}}}},
@@ -4377,7 +4377,7 @@ func Publish28() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Open", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -4458,7 +4458,7 @@ func Publish29() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -4520,7 +4520,7 @@ func Publish33() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "смета-подрядчик.pdf", Size: w.HeadTitle19},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "application/pdf · 1.2 MB · changed 2026-08-05"}}}},
-						Pad:   w.HeadPadBottom6,
+						Pad:   w.HeadSnug,
 					},
 					w.MainThumbs{Thumb: w.Thumb{Icon: "doc", Form: w.ThumbWide}},
 					w.MainFoot{Text: "This link works until 19 August 2026."},
@@ -4588,7 +4588,7 @@ func Publish30() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Strip{
 						Label: "Mount as a drive",
@@ -4771,7 +4771,7 @@ func Publish31() Screen {
 								},
 							},
 						},
-						Pad: w.HeadPadBottom8,
+						Pad: w.HeadSnug,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{
@@ -4882,7 +4882,7 @@ func Publish35() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Рассылки"},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 contacts")}}},
-						Pad:   w.HeadPadBottom8,
+						Pad:   w.HeadSnug,
 					},
 					w.Empty{Parts: []w.EmptyPart{w.Strong("This book is empty.")}},
 					w.MainFoot{Text: "This link works until 9 September 2026."},
@@ -4905,7 +4905,7 @@ func Publish36() Screen {
 					w.Head{
 						Title:  &w.HeadTitle{Text: "Черновики", Size: w.HeadTitle19},
 						Crumbs: &w.Crumbs{Current: "Черновики", Aside: &w.Dim{Parts: []w.Inline{w.Text("· 0 items")}}},
-						Pad:    w.HeadPadBottom8,
+						Pad:    w.HeadSnug,
 					},
 					w.Strip{
 						Label: "Mount as a drive",
@@ -4954,7 +4954,7 @@ func Publish37() Screen {
 						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
 						Badge: &w.Badge{Label: "read-only"},
 					},
-					w.Head{Title: &w.HeadTitle{Text: "Личный"}, Pad: w.HeadPadBottom8},
+					w.Head{Title: &w.HeadTitle{Text: "Личный"}, Pad: w.HeadSnug},
 					w.Msg{
 						Parts: []w.MsgPart{w.Strong("The source did not answer."), w.Text(" Try again later.")},
 						Tone:  w.MsgAlert,
@@ -4976,7 +4976,7 @@ func Publish38() Screen {
 						Logo:  w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"},
 						Badge: &w.Badge{Label: "read-only"},
 					},
-					w.Head{Title: &w.HeadTitle{Text: "отчёт-июль.pdf"}, Pad: w.HeadPadBottom8},
+					w.Head{Title: &w.HeadTitle{Text: "отчёт-июль.pdf"}, Pad: w.HeadSnug},
 					w.Msg{Parts: []w.MsgPart{w.Strong("No longer there."), w.Text(" It was deleted or moved.")}},
 				},
 			},

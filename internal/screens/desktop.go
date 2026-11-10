@@ -220,7 +220,7 @@ func Desktop1() Screen {
 							w.HeadSub{Parts: []w.HeadSubPart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("nextcloud · Личный")}},
 						},
 						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Edit", Small: true}, w.Close{Label: "Close the panel"}}},
-						Pad:  w.HeadPadBottom8,
+						Pad:  w.HeadSnug,
 					},
 					w.Fields{
 						Items: []w.FieldsItem{
@@ -379,8 +379,8 @@ func Desktop4() Screen {
 									},
 									w.Check{On: true, Parts: []w.CheckPart{w.Text("Closing the window hides to the tray")}},
 								},
-								Gap:   7,
-								Place: w.Grown,
+								Gapped: true,
+								Place:  w.Grown,
 							},
 							w.Field{
 								Label: "Updates",
@@ -405,7 +405,7 @@ func Desktop4() Screen {
 								Place: w.Grown,
 							},
 						},
-						Variant: w.FormGap12,
+						Variant: w.FormGapFields,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{w.Text("A portable copy is a full Carrel, local or remote as usual.")},
@@ -514,12 +514,12 @@ func Desktop6() Screen {
 										},
 									},
 								},
-								Gap:     7,
+								Gapped:  true,
 								OwnLine: true,
 								Place:   w.Grown,
 							},
 						},
-						Variant: w.FormGap12,
+						Variant: w.FormGapFields,
 					},
 					w.FieldSet{
 						Rubric: w.Rubric{Text: "Account"},
@@ -604,7 +604,7 @@ func Desktop7() Screen {
 							},
 							w.Check{On: true, Parts: []w.CheckPart{w.Text("Start at sign-in")}},
 						},
-						Variant: w.FormColumnGap10,
+						Variant: w.FormColumnWide,
 					},
 					w.Diag{
 						Text: "[connect]  GET /healthz → 200\n[tls]      Let's Encrypt certificate, valid until 2026-11-02\n[version]  0.8.0 · compatible",
@@ -744,7 +744,7 @@ func Desktop11() Screen {
 						Width: w.FieldW100,
 					},
 				},
-				Variant: w.FormColumnGap10Mid,
+				Variant: w.FormColumnWideMid,
 			},
 		},
 		Variant: w.PageOnBackgroundColumn,
@@ -809,7 +809,7 @@ func Desktop13() Screen {
 					w.Head{
 						Title: &w.HeadTitle{Text: "Application", Size: w.HeadTitle19},
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Account and collection settings are inside, in Settings")}}},
-						Pad:   w.HeadPadBottom6,
+						Pad:   w.HeadSnug,
 					},
 					w.Form{
 						Items: []w.FormPart{
@@ -841,8 +841,8 @@ func Desktop13() Screen {
 											w.Check{On: true, Parts: []w.CheckPart{w.Text("Start at sign-in")}},
 											w.Check{On: true, Parts: []w.CheckPart{w.Text("Closing the window hides to the tray")}},
 										},
-										Gap:   8,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Field{
 										Label: "Global note shortcut",
@@ -917,8 +917,8 @@ func Desktop13() Screen {
 												},
 											},
 										},
-										Gap:   7,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Field{
 										Parts: []w.FieldPart{
@@ -993,7 +993,7 @@ func Desktop14() Screen {
 								Place: w.Grown,
 							},
 						},
-						Variant: w.FormGap12,
+						Variant: w.FormGapFields,
 					},
 					w.Msg{
 						Parts: []w.MsgPart{w.Text("You see this because automatic checking is on; out of the box the app never goes looking.")},
@@ -1038,7 +1038,7 @@ func Desktop15() Screen {
 								Place: w.Grown,
 							},
 						},
-						Variant: w.FormGap12,
+						Variant: w.FormGapFields,
 					},
 					w.Line{
 						Items: []w.LinePart{w.Button{Label: "How to update a server"}, w.Button{Label: "Do not warn about this server"}},

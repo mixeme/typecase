@@ -114,8 +114,8 @@ func (g *gen) head(e *El) string {
 	if e.Has("tc-head--mid") {
 		f = append(f, "Middle: true")
 	}
-	for _, v := range allOf(e, []kv{{"tc-head--padt11", "HeadPadTop11"}, {"tc-head--padb6", "HeadPadBottom6"}, {"tc-head--snug", "HeadPadBottom8"},
-		{"tc-head--padb10", "HeadPadBottom10"}, {"tc-head--rule", "HeadRule"}}) {
+	for _, v := range allOf(e, []kv{{"tc-head--padt-wide", "HeadPadTopWide"}, {"tc-head--snug", "HeadSnug"},
+		{"tc-head--rule", "HeadRule"}}) {
 		f = append(f, "Pad: w."+v)
 	}
 	return "w.Head{" + join(f, ", ") + "}"
@@ -211,7 +211,7 @@ func (g *gen) main(e *El) string {
 				its = append(its, "{Icon: "+icon(svgs(a)[0])+", Label: "+q(a.OwnText())+`, Href: "#"}`)
 			}
 			items = append(items, "w.BottomNav{Items: []w.BottomItem{"+join(its, ", ")+"}, On: "+itoa(on)+"}")
-		case k.Has("tc-main__banner") || k.Has("tc-main__banner--12"):
+		case k.Has("tc-main__banner") || k.Has("tc-main__banner--snug"):
 			f := []string{"Logo: " + logo(k.Kid("tc-brand__logo"))}
 			if b := k.Kid("tc-badge"); b != nil {
 				f = append(f, "Badge: &"+g.badge(b))
@@ -653,7 +653,7 @@ func (g *gen) tickrow(e *El) string {
 	for _, v := range allOf(e, []kv{{"is-all", "TickRowAll"}, {"is-root", "TickRowRoot"}, {"is-ext", "TickRowExternal"}}) {
 		f = append(f, "Kind: w."+v)
 	}
-	for _, v := range allOf(e, []kv{{"tc-tickrow--padl0", "TickRowGroup"}, {"tc-tickrow--padl14", "TickRowNested"}, {"tc-tickrow--h44", "TickRowTouch"}}) {
+	for _, v := range allOf(e, []kv{{"tc-tickrow--padl0", "TickRowGroup"}, {"tc-tickrow--inset", "TickRowNested"}, {"tc-tickrow--h44", "TickRowTouch"}}) {
 		f = append(f, "Form: w."+v)
 	}
 	if lead := els[1]; lead.Tag == "svg" {
@@ -696,7 +696,7 @@ var treeIndent = []kv{{"tc-tree__row--padl1-25rem", "TreeLevel20"}, {"tc-tree__r
 func (g *gen) tree(e *El) string {
 	var f, rows []string
 	on := 0
-	for _, v := range allOf(e, []kv{{"tc-tree--padx8", "TreePadded"}, {"tc-tree--max520", "TreeNarrow"}}) {
+	for _, v := range allOf(e, []kv{{"tc-tree--padx", "TreePadded"}, {"tc-tree--max520", "TreeNarrow"}}) {
 		f = append(f, "Variant: w."+v)
 	}
 	for i, r := range e.Els() {
@@ -847,7 +847,7 @@ func (g *gen) row0(e *El) string {
 		if e.Has("tc-row--timecols--op-7") {
 			f = append(f, "Past: true")
 		}
-		if e.Has("tc-row--timecols--padl14-padr14") {
+		if e.Has("tc-row--timecols--inset") {
 			f = append(f, "Inset: true")
 		}
 		return "w.TimeRow{" + join(f, ", ") + "}"
@@ -860,7 +860,7 @@ func (g *gen) row0(e *El) string {
 		if on {
 			f = append(f, "On: true")
 		}
-		if e.Has("tc-row--avatarcols--padl14-padr14") {
+		if e.Has("tc-row--avatarcols--inset") {
 			f = append(f, "Inset: true")
 		}
 		return "w.FaceRow{" + join(f, ", ") + "}"
@@ -889,7 +889,7 @@ func (g *gen) row0(e *El) string {
 		if on {
 			f = append(f, "On: true")
 		}
-		if e.Has("tc-row--excerpt--padl14-padr14") {
+		if e.Has("tc-row--excerpt--inset") {
 			f = append(f, "Inset: true")
 		}
 		return "w.ExcerptRow{" + join(f, ", ") + "}"
@@ -912,7 +912,7 @@ func (g *gen) row0(e *El) string {
 		if e.Has("is-overdue") {
 			f = append(f, "Overdue: true")
 		}
-		if e.Has("tc-row--tickmarkcols--padl14-padr14") {
+		if e.Has("tc-row--tickmarkcols--inset") {
 			f = append(f, "Inset: true")
 		}
 		if t := e.Kid("tc-row__title"); t != nil && t.Tag == "a" {
@@ -1747,7 +1747,7 @@ func (g *gen) window(x *El) string {
 		stop("window without a gap")
 	}
 	s := "w.Window{Items: []w.WindowPart{" + g.each(x.Els(), g.windowPart) + "}, Gap: w." + gap
-	if x.Has("tc-win__sheet--pad12") {
+	if x.Has("tc-win__sheet--pad") {
 		s += ", Small: true"
 	}
 	return s + "}"
@@ -1759,7 +1759,7 @@ func (g *gen) pagePart(x *El) string {
 	switch {
 	case x.Has("tc-auth"):
 		return g.auth(x)
-	case x.Has("tc-win__body--pad16-20") || x.Has("tc-win__sheet--pad12"):
+	case x.Has("tc-win__body--pad") || x.Has("tc-win__sheet--pad"):
 		return g.window(x)
 	case x.Has("tc-msg"):
 		return g.msg(x)

@@ -85,16 +85,14 @@ func (p HeadPhoto) html() string {
 type HeadPad int
 
 const (
-	HeadPadPage     HeadPad = iota
-	HeadPadTop11            // 11 px above: a head inside a component
-	HeadPadBottom6          // 6 px below
-	HeadPadBottom8          // 8 px below: a snug head over a list
-	HeadPadBottom10         // 10 px below
-	HeadRule                // a rule below: a head over a document
+	HeadPadPage    HeadPad = iota
+	HeadPadTopWide         // the wide step above: a head inside a component
+	HeadSnug               // the normal step below: a snug head over a list
+	HeadRule               // a rule below: a head over a document
 )
 
 func (p HeadPad) class() string {
-	return [...]string{"", "tc-head--padt11", "tc-head--padb6", "tc-head--snug", "tc-head--padb10", "tc-head--rule"}[p]
+	return [...]string{"", "tc-head--padt-wide", "tc-head--snug", "tc-head--rule"}[p]
 }
 
 // HeadTool is a small button under a head's lines, or one with its menu.

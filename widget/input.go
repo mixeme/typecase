@@ -377,7 +377,7 @@ func (t TagInput) html(m mix) string {
 	var s strings.Builder
 	variant := "tc-in--tags"
 	if t.Wrap {
-		variant = "tc-in--wrap-gap5"
+		variant = "tc-in--wrap-gap"
 	}
 	sug := ""
 	if t.Add != nil {

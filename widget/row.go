@@ -131,9 +131,10 @@ func rowTagLabel(t RowTag) string {
 	return ""
 }
 
-// inset is the variant of a row set in a card: 14 px at the sides.
+// inset is the variant of a row set in a card: the narrow gutter at the
+// sides.
 func inset(kind string, on bool) string {
-	return pick(on, "tc-row--"+kind+"--padl14-padr14")
+	return pick(on, "tc-row--"+kind+"--inset")
 }
 
 // TimeRow — tc-row

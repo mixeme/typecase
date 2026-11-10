@@ -702,8 +702,8 @@ func Backup2() Screen {
 												Block: true,
 											},
 										},
-										Gap:   8,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
@@ -1106,8 +1106,8 @@ func Backup19() Screen {
 												Block: true,
 											},
 										},
-										Gap:   8,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Msg{
 										Parts: []w.MsgPart{

@@ -104,7 +104,7 @@ const (
 )
 
 func (v TreeVariant) class() string {
-	return [...]string{"", "tc-tree--padx8", "tc-tree--max520"}[v]
+	return [...]string{"", "tc-tree--padx", "tc-tree--max520"}[v]
 }
 
 // Tree — tc-tree

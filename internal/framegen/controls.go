@@ -489,7 +489,7 @@ func (g *gen) tagInput(x *El) string {
 		}
 	}
 	f := []string{"Parts: []w.TagInputPart{" + join(parts, ", ") + "}"}
-	if x.Has("tc-in--wrap-gap5") {
+	if x.Has("tc-in--wrap-gap") {
 		f = append(f, "Wrap: true")
 	}
 	if x.Has("tc-in--cols") {
@@ -868,8 +868,6 @@ func (g *gen) fieldPart(x *El) string {
 	return ""
 }
 
-var fieldGap = regexp.MustCompile(`^tc-field--gap(\d+)$`)
-
 func (g *gen) field(k *El) string {
 	var f []string
 	if k.HasAttr("hidden") {
@@ -938,10 +936,8 @@ func (g *gen) field(k *El) string {
 	if v := g.en.of(k, "FieldWidth"); v != "" {
 		f = append(f, "Width: "+v)
 	}
-	for _, c := range k.Cls() {
-		if m := fieldGap.FindStringSubmatch(c); m != nil {
-			f = append(f, "Gap: "+m[1])
-		}
+	if k.Has("tc-field--gap") {
+		f = append(f, "Gapped: true")
 	}
 	if k.Has("is-own-line") {
 		f = append(f, "OwnLine: true")

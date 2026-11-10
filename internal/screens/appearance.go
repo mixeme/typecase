@@ -137,8 +137,8 @@ func Appearance1() Screen {
 												Parts: []w.CheckPart{w.Text("Open notes in full width")},
 											},
 										},
-										Gap:   7,
-										Place: w.Grown,
+										Gapped: true,
+										Place:  w.Grown,
 									},
 									w.Field{
 										Parts: []w.FieldPart{

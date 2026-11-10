@@ -551,7 +551,7 @@ func Io3() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{
@@ -686,7 +686,7 @@ func Io15() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{
@@ -800,7 +800,7 @@ func Io16() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{
@@ -913,7 +913,7 @@ func Io17() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{
@@ -1050,7 +1050,7 @@ func Io18() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{
@@ -1318,7 +1318,7 @@ func Io4() Screen {
 										Width: w.FieldW100,
 									},
 								},
-								Variant: w.FormBottom12,
+								Variant: w.FormBottom,
 								Tight:   true,
 							},
 							w.Card{

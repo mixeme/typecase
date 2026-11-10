@@ -22,7 +22,7 @@ type Banner struct {
 func (b Banner) html(mix) string {
 	s := `<div class="tc-line tc-line--wide tc-main__banner">`
 	if !b.Wide {
-		s = `<div class="tc-line tc-line--wide tc-main__banner--12">`
+		s = `<div class="tc-line tc-line--wide tc-main__banner--snug">`
 	}
 	s += b.Logo.html(nil)
 	if b.Badge != nil {
