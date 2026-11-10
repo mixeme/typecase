@@ -7,12 +7,13 @@ import (
 	typecase "carrel.dev/typecase"
 )
 
-// FitBarsJS is the part of tc.js that folds the bars by measure (between its
-// tc-fit:start and tc-fit:end marks), run on every bar of the page: what a
-// page with the script shows, on a frame painted without it. The frames draw
-// their drops open and the rest of tc.js would close them; this takes the
-// bars' fold alone. It returns the number of bars folded.
-func FitBarsJS() (string, error) {
+// FitJS is the part of tc.js that fits by measure (between its tc-fit:start
+// and tc-fit:end marks): it folds every bar and turns every table its box
+// cannot hold into cards — what a page with the script shows, on a frame
+// painted without it. The frames draw their drops open and the rest of tc.js
+// would close them; this takes the fit alone. It returns the number of bars
+// and tables.
+func FitJS() (string, error) {
 	js, err := typecase.JS()
 	if err != nil {
 		return "", err
@@ -29,6 +30,8 @@ func FitBarsJS() (string, error) {
 	return `(() => {` + body + `
 	var bars = document.querySelectorAll(".tc-bar, .tc-docbar");
 	bars.forEach(fitBar);
-	return bars.length;
+	var tables = document.querySelectorAll("table.tc-table");
+	tables.forEach(fitTable);
+	return bars.length + tables.length;
 })()`, nil
 }

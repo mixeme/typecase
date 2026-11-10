@@ -1246,7 +1246,7 @@ var _ = add(
 			{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka"},
 			{Icon: "file", Label: "Договор подряда", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/dogovor-podryada"},
 			{Icon: "file", Label: "Подряд", Indent: w.TreeLevel44, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/podryad"},
-			{Icon: "file", Label: "Личное", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/lichnoe"}}, On: 5, Variant: w.TreePadded}}, List: []w.SheetPickList{w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.Col90}, {Label: "Changed", Width: w.Col110, Rank: w.Rank3}, {Width: w.ColType, Rank: w.Rank4}}, Rows: []w.TableRow{
+			{Icon: "file", Label: "Личное", Indent: w.TreeLevel36, Href: "/app/mail/attach?what=file&dir=sftpgo/documents/lichnoe"}}, On: 5, Variant: w.TreePadded}}, List: []w.SheetPickList{w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Size", Width: w.Col90}, {Label: "Changed", Width: w.Col110, Rank: w.Rank3, Main: true}, {Width: w.ColType, Rank: w.Rank4}}, Rows: []w.TableRow{
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "смета-подрядчик.pdf", Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/smeta-podryadchik.pdf"}}}, {Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("12 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "over 2 MB · as a link", On: true}}}}, State: w.RowOn},
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "договор-подряда.pdf", Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/dogovor-podryada.pdf"}}}, {Parts: []w.CellPart{w.Text("840 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}},
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "объект-фасад.jpg", Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/obekt-fasad.jpg"}}}, {Parts: []w.CellPart{w.Text("1.6 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}}}}}, Short: true},
@@ -1382,7 +1382,7 @@ var _ = add(
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -1580,7 +1580,7 @@ var _ = add(
 											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -1709,7 +1709,7 @@ var _ = add(
 											{Label: "Folder"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
-											{Label: "Changed on the server", Width: w.ColChanged},
+											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
 											{Width: w.ColMenu},
 										},
 										Rows: []w.TableRow{
@@ -1774,7 +1774,7 @@ var _ = add(
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
 											{Label: "Lands in"},
-											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3},
+											{Label: "Objects", Width: w.ColNum, Rank: w.Rank3, Main: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Rank: w.Rank4},
 										},
 										Rows: []w.TableRow{
@@ -2681,11 +2681,11 @@ var _ = add(
 			w.MenuSep{},
 			w.MenuItem{Label: "New address book", Href: "/app/collections/new?kind=contact&back=/app/contacts/nextcloud/kontakty/import"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}, w.FieldHint{Parts: []w.Inline{w.Text("Any address book you may write to. What is already here is counted against it.")}}}, Width: w.FieldLG}, w.Field{Label: "5 records of this file are already in Контакты", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "Skip them", Href: "/app/contacts/nextcloud/kontakty/import?existing=skip", On: true}, {Label: "Replace them", Href: "/app/contacts/nextcloud/kontakty/import?existing=replace"}, {Label: "Import as copies", Href: "/app/contacts/nextcloud/kontakty/import?existing=copy"}}}, w.FieldHint{Parts: []w.Inline{w.Text("They stay as they are here; the file's version is not written.")}}}, OwnLine: true}}, Tight: true},
 		w.Stats{Items: []w.Stat{w.Stat{Value: "117", Label: "ready"}, w.Stat{Value: "3", Label: "with errors", Error: true}, w.Stat{Value: "5", Label: "already here"}}},
-		w.Table{Cols: []w.TableCol{{Label: "Source"}, {Label: "Name"}, {Label: "UID", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4}}, Rows: []w.TableRow{
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("4f2b-9c31-a0e7")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Вера Лебедева")}}, {Parts: []w.CellPart{w.Text("8e20-5b1f-c7d4")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — name from N")}}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("1a77-40de-bb02")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
-			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Разное (mix).vcf")}, Mono: true}, {Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger}}}}}}, Variant: w.DialogWide}, "s-io-5", "tc-dialog", 1),
+		w.Table{Cols: []w.TableCol{{Label: "Name"}, {Label: "Email", Rank: w.Rank3}, {Label: "Result", Rank: w.Rank4, Main: true}}, Rows: []w.TableRow{
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Анна Ковалёва")}}, {Parts: []w.CellPart{w.Text("a.kovaleva@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Вера Лебедева")}}, {Parts: []w.CellPart{w.Text("vera@example.net")}, Mono: true}, {Parts: []w.CellPart{w.Text("Ready — name from N")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("Артём Белов")}}, {Parts: []w.CellPart{w.Text("a.belov@example.org")}, Mono: true}, {Parts: []w.CellPart{w.Text("Already here — skipped")}}}},
+			{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("—")}, Dim: true}, {Parts: []w.CellPart{w.Text("—")}, Mono: true, Tone: w.CellDusty}, {Parts: []w.CellPart{w.Text("line 12: cannot decode quoted-printable")}, Tone: w.CellDanger}}}}}}, Variant: w.DialogWide}, "s-io-5", "tc-dialog", 1),
 	overlay("page", w.Dialog{Items: []w.DialogPart{
 		w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGapNormal},
 		w.Prose{Parts: []w.Inline{w.Text("Account "), w.Strong("mix"), w.Text(" has a confirmed email. A silent password reset does not exist: a new password would be a new key, and everything stored under the old one would be lost anyway.")}, Variant: w.ProseMuted},

@@ -121,7 +121,7 @@ func TestFrameShotTargets(t *testing.T) {
 // (browser.MockupLadderWidths), though any number works. TC_FRAME_SHOTS_REV
 // shoots the mockup of a git revision instead of the working one, for a
 // picture of «before». TC_FRAME_SHOTS_FIT=1 folds the bars first as tc.js
-// does on a page (browser.FitBarsJS), names the pictures «…-fit.png».
+// does on a page (browser.FitJS), names the pictures «…-fit.png».
 func TestMockupFrameShots(t *testing.T) {
 	spec := os.Getenv("TC_FRAME_SHOTS")
 	if spec == "" {
@@ -165,7 +165,7 @@ func TestMockupFrameShots(t *testing.T) {
 	var then []string
 	suffix := ""
 	if os.Getenv("TC_FRAME_SHOTS_FIT") != "" {
-		fit, err := browser.FitBarsJS()
+		fit, err := browser.FitJS()
 		if err != nil {
 			t.Fatal(err)
 		}

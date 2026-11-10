@@ -53,7 +53,8 @@ const MockupGeometryProbeJS = `(() => {
   };
   const text = (el) => (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 24);
   const blocks = ".tc-sheet__pick-list, .tc-main, .tc-side, .tc-sheet, .tc-dialog, .tc-card, .tc-fset, .tc-sec, .tc-shell__rail, .tc-menu, .tc-root";
-  const heads = [...root.querySelectorAll(".tc-rubric, .tc-head__title, .tc-dialog__title, .tc-sheet__title")].filter(seen);
+  // a sheet's heading starts at its head's first ink: the icon before the title's words
+  const heads = [...root.querySelectorAll(".tc-rubric, .tc-head__title, .tc-dialog__title, .tc-sheet__head")].filter(seen);
   const rows = [];
   // a head row of a table is left out: its first cell is empty over a column of ticks
   for (const r of root.querySelectorAll(".tc-table > tbody > tr, .tc-list > .tc-row")) {

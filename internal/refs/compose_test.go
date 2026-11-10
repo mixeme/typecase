@@ -71,3 +71,29 @@ func render(r refs.Renderer) (out string, err error) {
 	}()
 	return r.Render(), nil
 }
+
+// TestRecordTablesKeepMain (Р-66): a record that holds a table marks the
+// main column where its frame does. A table nested in a container's record
+// is compared only by its place, so the marks could drift unseen — 11
+// records had lost them by 10.11 — and such a table never turns into cards:
+// the free composition then saw a table where a screen shows cards.
+func TestRecordTablesKeepMain(t *testing.T) {
+	m := mockup(t)
+	for _, e := range refs.Entries {
+		got := e.Fixture.Render()
+		if !strings.Contains(got, "<table") {
+			continue
+		}
+		b, err := m.Block(e.Ref)
+		if err != nil {
+			continue
+		}
+		var s strings.Builder
+		if err := html.Render(&s, b); err != nil {
+			t.Fatal(err)
+		}
+		if a, w := strings.Count(got, "tc-table__main"), strings.Count(s.String(), "tc-table__main"); a != w {
+			t.Errorf("%s: the record marks the main column %d times, its frame %d", e.Ref, a, w)
+		}
+	}
+}

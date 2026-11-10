@@ -23,12 +23,6 @@ import (
 // not failed. The key is the composition as Composition.String prints it,
 // without the host: «Owner.Slot+Part».
 var compositionPending = map[string]string{
-	// a table wider than a narrow box: its columns do not give way there
-	"FieldSet.FieldSetPart+Table": narrowTable,
-	"Sheet.SheetPart+Table":       narrowTable,
-	"TableCell.CellPart+CellWrap": narrowTable,
-	"TableCell.CellPart+Seg":      narrowTable,
-	"CellWrap.CellPart+Line":      narrowTable,
 	// the top bar: a drop at its end opens past the edge, a button more is cut on the phone
 	"Top.TopAction+TopDrop":           topBar,
 	"TopDrop.TopDropTrigger+UserMenu": topBar,
@@ -38,17 +32,20 @@ var compositionPending = map[string]string{
 	"List.ListRow+LinkedRow": rowKinds,
 	"Main.MainPart+List":     rowKinds,
 	"Main.MainPart+Table":    rowKinds,
-	// a link inside a row on the phone: its hit zone takes the row's words
-	"PhoneRow.Inline+Link":      linkInRow,
-	"SizeRow.Inline+Link":       linkInRow,
-	"Drop.DropTrigger+TagInput": linkInRow,
+	// a table's cards in a sheet's pick list beside its rubric
+	"SheetPick.SheetPickList+Table": rowKinds,
+	// a second target inside a row on the phone: its hit zone takes the
+	// row's words, or the zone of the name above it in a cell
+	"TableCell.CellPart+CellWrap": linkInRow,
+	"PhoneRow.Inline+Link":        linkInRow,
+	"SizeRow.Inline+Link":         linkInRow,
+	"Drop.DropTrigger+TagInput":   linkInRow,
 }
 
 const (
-	narrowTable = "free composition 10.11: a table in a box narrower than its columns"
-	topBar      = "free composition 10.11: the top bar's end and the phone"
-	rowKinds    = "free composition 10.11: rows of different kinds side by side, gutters at 640"
-	linkInRow   = "free composition 10.11: a second target inside a row on the phone"
+	topBar    = "free composition 10.11: the top bar's end and the phone"
+	rowKinds  = "free composition 10.11: rows of different kinds side by side, gutters at 640"
+	linkInRow = "free composition 10.11: a second target inside a row on the phone"
 )
 
 // TestFreeComposition puts every part a slot takes into a place of that slot
@@ -125,7 +122,7 @@ func composeFindings(t *testing.T, h *browser.Harness, styles, sprite string, fr
 	); err != nil {
 		t.Fatal(err)
 	}
-	fit, err := browser.FitBarsJS()
+	fit, err := browser.FitJS()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +219,7 @@ func shootCompositions(t *testing.T, h *browser.Harness, url string, frames map[
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		t.Fatal(err)
 	}
-	fit, err := browser.FitBarsJS()
+	fit, err := browser.FitJS()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -311,7 +308,7 @@ func renderSafe(r refs.Renderer) (out string, err error) {
 }
 
 // measureComposed paints a frame at every width of the ladder, folds its bars
-// as tc.js does (fit, FitBarsJS: a screen runs the script) and runs both
+// as tc.js does (fit, FitJS: a screen runs the script) and runs both
 // probes: one line a finding, «width<TAB>kind<TAB>what».
 func measureComposed(t *testing.T, run func(...chromedp.Action) error, frame, fit string) []string {
 	t.Helper()

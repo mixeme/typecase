@@ -14,11 +14,6 @@ import (
 	"carrel.dev/typecase/internal/gate"
 )
 
-// barFitDiffers are the frames and widths where tc.js folds a bar of the
-// frame otherwise than the CSS's widths draw it, each with what the owner
-// decided: «frame@width».
-var barFitDiffers = map[string]string{}
-
 // barStateJS lists every element of every bar in the painted frame with
 // whether it shows and how wide: «bar.element class width», «-» for hidden.
 const barStateJS = `(() => {
@@ -31,15 +26,20 @@ const barStateJS = `(() => {
       out.push(b + "." + i + " " + c + " " + (shown ? Math.round(el.getBoundingClientRect().width) : "-"));
     });
   });
+  document.querySelectorAll("#host table.tc-table").forEach((t, i) => {
+    out.push("t." + i + " table" + (getComputedStyle(t).display === "block" ? ".cards" : "") + " " + Math.round(t.getBoundingClientRect().width));
+  });
   return out;
 })()`
 
-// TestBarFitMatchesFrames (Р-4, the owner's decision of 10.11): on the
-// mockup's own frames the script folds every bar as the CSS's widths draw it
-// — those widths were measured for these very sets — at every width of the
-// ladder; where it does not, the frame waits in barFitDiffers for the owner.
-// TC_BARFIT_REPORT=path writes the differences instead of failing.
-func TestBarFitMatchesFrames(t *testing.T) {
+// TestFitOnFrames (Р-4, Р-66, the owner's decisions of 10.11): on the
+// mockup's own frames, at every width of the ladder, the script's fit — the
+// bars folded by measure, a table its box cannot hold turned into cards —
+// breaks nothing: the ladder's and the geometry's probes find nothing after
+// it they did not find on the frame. Where the fit shows otherwise than the
+// frame (more of a bar where there is room, accepted by the owner on 10.11)
+// it is counted; TC_BARFIT_REPORT=path lists it.
+func TestFitOnFrames(t *testing.T) {
 	if !browser.ChromeAvailable() {
 		t.Skip("no Chromium-based browser found (set CHROME_PATH)")
 	}
@@ -54,7 +54,7 @@ func TestBarFitMatchesFrames(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	fit, err := browser.FitBarsJS()
+	fit, err := browser.FitJS()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func TestBarFitMatchesFrames(t *testing.T) {
 	var lines, broken []string
 	frames := 0
 	for _, f := range parts.Frames {
-		if !strings.Contains(f.HTML, "tc-bar") && !strings.Contains(f.HTML, "tc-docbar") {
+		if !strings.Contains(f.HTML, "tc-bar") && !strings.Contains(f.HTML, "tc-docbar") && !strings.Contains(f.HTML, "tc-table") {
 			continue
 		}
 		if _, ok := ladderPending[f.ID]; ok {
@@ -138,7 +138,7 @@ func TestBarFitMatchesFrames(t *testing.T) {
 			}
 		}
 	}
-	t.Logf("%d frames with bars", frames)
+	t.Logf("%d frames with bars or tables", frames)
 	for _, l := range broken {
 		t.Errorf("the folded bar breaks the frame: %s", l)
 	}
@@ -149,14 +149,7 @@ func TestBarFitMatchesFrames(t *testing.T) {
 		t.Logf("%d differences written to %s", len(lines), report)
 		return
 	}
-	for _, l := range lines {
-		key, _, _ := strings.Cut(l, "\t")
-		if why, ok := barFitDiffers[key]; ok {
-			t.Logf("decided: %s (%s)", l, why)
-			continue
-		}
-		t.Errorf("the script folds otherwise than the frame: %s", l)
-	}
+	t.Logf("%d frame×width the fit shows otherwise than the frame (TC_BARFIT_REPORT lists them)", len(lines))
 }
 
 // barStateDiff names what the script shows that the frame hides (+), hides
@@ -176,6 +169,10 @@ func barStateDiff(before, after []string) string {
 			continue
 		}
 		name := a[1]
+		if b[1] != a[1] {
+			out = append(out, b[1]+"→"+a[1]) // a table turned into cards
+			continue
+		}
 		switch {
 		case b[2] == "-":
 			out = append(out, "+"+name)

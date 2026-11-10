@@ -404,6 +404,25 @@
 		});
 		bar.removeAttribute("data-tc-measure");
 	}
+	// A table with a main column (Р-66) that its box cannot hold — wider
+	// than the box, past the bleed its own margins give it — is cards, as on
+	// a phone (the owner's decision of 10.11): name and «⋯», the main column
+	// under them. On a phone the CSS makes the cards itself.
+	function tableCramped(t) {
+		var box = t.parentElement;
+		if (!box) return false;
+		var b = box.getBoundingClientRect(), bs = getComputedStyle(box), ts = getComputedStyle(t), r = t.getBoundingClientRect();
+		var left = b.left + parseFloat(bs.borderLeftWidth) + Math.min(0, parseFloat(ts.marginLeft)) - 1;
+		var right = b.right - parseFloat(bs.borderRightWidth) - Math.min(0, parseFloat(ts.marginRight)) + 1;
+		return r.left < left || r.right > right;
+	}
+
+	function fitTable(t) {
+		if (!t.getClientRects().length || !t.querySelector(":scope > tbody > tr > td.tc-table__main")) return;
+		t.removeAttribute("data-tc-cards");
+		if (getComputedStyle(t).display === "block") return;
+		if (tableCramped(t)) t.setAttribute("data-tc-cards", "");
+	}
 	// tc-fit:end
 
 	// A bar that does not fit even folded whole the script marks and lets
@@ -424,6 +443,7 @@
 		document.querySelectorAll(".tc-shell").forEach(syncShell);
 		var n = 0;
 		document.querySelectorAll(".tc-bar, .tc-docbar").forEach(fitBar);
+		document.querySelectorAll("table.tc-table").forEach(fitTable);
 		document.querySelectorAll(".tc-bar, .tc-docbar, .tc-head").forEach(function (b) {
 			if (checkBar(b)) n++;
 		});
@@ -1799,7 +1819,7 @@
 
 	function watch(root) {
 		if (!sizes) return;
-		root.querySelectorAll(".tc-shell, .tc-bar, .tc-docbar, .tc-head").forEach(function (el) {
+		root.querySelectorAll(".tc-shell, .tc-bar, .tc-docbar, .tc-head, table.tc-table").forEach(function (el) {
 			sizes.observe(el);
 		});
 	}

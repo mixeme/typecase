@@ -178,6 +178,14 @@ do, not what the authors did.
 
 ### Added
 
+- **A table its box cannot hold is cards** (Р-66, the owner's decision of
+  10.11). With the script, `tc.js` turns a table with a main column into
+  cards — name and «⋯», the main column under them — at any width where the
+  table stands past its box further than its own margins let it bleed; on
+  a phone the CSS makes the cards as before. The table carries
+  `data-tc-cards`; no frame's table turns into cards. Any content a screen
+  puts in a cell (a line of buttons, a switch) no longer runs the table off
+  its column or out of its card.
 - **Bars fold by measure** (Р-4, the owner's decision of 10.11). With the
   script, `tc.js` folds every `.tc-bar` and `.tc-docbar` by the room it
   has, not by the container's width: it takes the CSS's steps in order —
@@ -194,7 +202,7 @@ do, not what the authors did.
   `data-tc-fold`; the width rules stay for a page without a script and are
   silent on a folded bar. Where there is room the script shows more than
   the width rules did — the second rank, the labels; nothing to change in a
-  consumer. `TestBarFitMatchesFrames` folds the bars of every frame on
+  consumer. `TestFitOnFrames` folds the bars of every frame on
   every width of the ladder and finds no probe of the ladder or the
   geometry worse.
 - **The free composition check** (`TestFreeComposition`, the owner's thought
@@ -204,9 +212,9 @@ do, not what the authors did.
   the host's frame; the ladder's and the geometry's probes measure it at
   every width, less what the frame shows with its own record.
   `TestCompositions` keeps the set without a browser; the bite puts back
-  the photo column of before. `compositionPending` holds 15 compositions of
-  four kinds that wait: a table in a narrow box, the top bar's end and the
-  phone, rows of other kinds side by side, a link inside a row on the phone.
+  the photo column of before. `compositionPending` holds 11 compositions of
+  three kinds that wait: the top bar's end and the phone, rows of other
+  kinds side by side, a second target inside a row on the phone.
 - **A list is one stop of Tab** (the owner, 07.11). Of a list's rows only
   one takes the focus by Tab — the one that had it last, the open one, or the
   first — and the next Tab goes past the list; the rows' ticks are no stops
@@ -2593,6 +2601,19 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A table in a sheet, a field set and a cell's wrap** (free composition,
+  10.11): a table right in a sheet's body takes no first and last padding
+  of its own, as in a dialog or a card, and its cards none either; a form
+  without side padding (`tc-form--padl0-padr0`) has no page gutter, so a
+  bleeding table (`tc-table--mx-20`) stands in its width; a line inside a
+  cell's wrap wraps instead of being cut by its edge; a row's card takes
+  one name — its first cell with a file, else its first cell with words —
+  where two cells stood one over the other.
+- **Records keep their tables' main column**: 11 records of containers held
+  a table without the main column its frame marks (`Col.Main`), so their
+  table never turned into cards; redrafted from the frames, and
+  `TestRecordTablesKeepMain` keeps them so. The geometry's rows under a
+  sheet's heading count from the head's icon.
 - **A field's label printed as a span keeps its aside** (`Field{LabelSpan,
   LabelAside}`): it was dropped silently; found by the free composition.
 - **What stands beside a photo gives way** (`.tc-field--fixauto`): a message,
