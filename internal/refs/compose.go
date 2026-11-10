@@ -1,0 +1,323 @@
+package refs
+
+import (
+	"fmt"
+	"reflect"
+	"sort"
+)
+
+// Composition is one part put into one slot of one container: the free
+// composition the types allow (L-7) and a screen of Carrel may build, though
+// the frame that draws the pair draws it with other neighbours. The pairs gate
+// says a slot takes only what the mockup draws in it somewhere; this asks
+// whether every part it takes stands well in every place that slot is in.
+type Composition struct {
+	Owner string // the type whose field the slot is: Field, Rubric, Card…
+	Slot  string // the slot's interface: FieldPart, RubricPart…
+	Part  string // the type put in
+	// Host is the record the part is put into: its frame and fragment are
+	// where the composition is painted.
+	Host Entry
+	// Fixture is the host's fixture with the part in: appended to the slot's
+	// list, or in place of the slot's one value.
+	Fixture Renderer
+	// Drawn says the host's slot held a part of this type already: no host
+	// has the slot without it.
+	Drawn bool
+}
+
+func (c Composition) String() string {
+	return fmt.Sprintf("%s.%s+%s in %s", c.Owner, c.Slot, c.Part, c.Host.Ref)
+}
+
+// Compositions returns one composition for each container type, slot and
+// part type the records reach: the part — the first value of its type the
+// records hold in a slot of the same interface, else anywhere — goes into the first place in record order whose slot does
+// not hold that type yet and holds something (a list of one more), else the
+// first place at all. skip leaves hosts out (a frame that waits).
+func Compositions(skip func(Entry) bool) []Composition {
+	var types []reflect.Type
+	for _, w := range Widgets {
+		types = append(types, reflect.TypeOf(w))
+	}
+	for _, p := range Parts {
+		types = append(types, reflect.TypeOf(p))
+	}
+	samples := map[reflect.Type]reflect.Value{}
+	for _, e := range Entries {
+		gather(reflect.ValueOf(e.Fixture), samples)
+	}
+	// a part as it stands in a slot of this kind: a Text in a push is a word
+	// or two, in a hint a sentence
+	inSlot := map[[2]reflect.Type]reflect.Value{}
+	type key struct {
+		owner, slot reflect.Type
+		part        reflect.Type
+	}
+	type place struct {
+		entry int
+		path  []int // to the owner struct: field and element indices
+		field int
+		score int // 2 holds others and not this type, 1 holds others, 0 empty
+		drawn bool
+	}
+	best := map[key]place{}
+	var order []key
+	for ei, e := range Entries {
+		if skip != nil && skip(e) {
+			continue
+		}
+		var walk func(v reflect.Value, path []int)
+		walk = func(v reflect.Value, path []int) {
+			switch v.Kind() {
+			case reflect.Pointer, reflect.Interface:
+				if !v.IsNil() {
+					walk(v.Elem(), path)
+				}
+			case reflect.Slice, reflect.Array:
+				for i := 0; i < v.Len(); i++ {
+					walk(v.Index(i), append(append([]int(nil), path...), i))
+				}
+			case reflect.Struct:
+				t := v.Type()
+				for i := 0; i < t.NumField(); i++ {
+					f := t.Field(i)
+					if !f.IsExported() {
+						continue
+					}
+					fv := v.Field(i)
+					slot, held := slotOf(f.Type, fv)
+					if slot != nil {
+						for _, h := range heldValues(fv) {
+							k := [2]reflect.Type{slot, h.Type()}
+							if _, ok := inSlot[k]; !ok {
+								inSlot[k] = h
+							}
+						}
+						for _, pt := range types {
+							if !pt.Implements(slot) {
+								continue
+							}
+							drawn := false
+							for _, h := range held {
+								if h == pt {
+									drawn = true
+								}
+							}
+							score := 0
+							switch {
+							case len(held) > 0 && !drawn:
+								score = 2
+							case len(held) > 0:
+								score = 1
+							}
+							k := key{t, slot, pt}
+							p, ok := best[k]
+							if !ok {
+								order = append(order, k)
+							}
+							if !ok || score > p.score {
+								best[k] = place{ei, append([]int(nil), path...), i, score, drawn}
+							}
+						}
+					}
+					walk(fv, append(append([]int(nil), path...), i))
+				}
+			}
+		}
+		walk(reflect.ValueOf(e.Fixture), nil)
+	}
+	var out []Composition
+	for _, k := range order {
+		p := best[k]
+		sample, ok := inSlot[[2]reflect.Type{k.slot, k.part}]
+		if !ok {
+			sample, ok = samples[k.part]
+		}
+		if !ok {
+			sample = made(k.part)
+		}
+		host := Entries[p.entry]
+		fixture := rebuild(reflect.ValueOf(host.Fixture), p.path, func(owner reflect.Value) {
+			f := owner.Field(p.field)
+			part := rebuild(sample, nil, nil)
+			if f.Kind() == reflect.Slice {
+				f.Set(reflect.Append(f, part))
+			} else {
+				f.Set(part)
+			}
+		})
+		out = append(out, Composition{
+			Owner:   k.owner.Name(),
+			Slot:    k.slot.Name(),
+			Part:    k.part.Name(),
+			Host:    host,
+			Fixture: fixture.Interface().(Renderer),
+			Drawn:   p.drawn,
+		})
+	}
+	sort.SliceStable(out, func(i, j int) bool {
+		a, b := out[i], out[j]
+		if a.Owner != b.Owner {
+			return a.Owner < b.Owner
+		}
+		if a.Slot != b.Slot {
+			return a.Slot < b.Slot
+		}
+		return a.Part < b.Part
+	})
+	return out
+}
+
+// slotOf says whether a field is a slot — an interface with an unexported
+// method, or a list of one — and which types it holds now.
+func slotOf(ft reflect.Type, v reflect.Value) (reflect.Type, []reflect.Type) {
+	switch {
+	case ft.Kind() == reflect.Interface && isSlot(ft):
+		if v.IsNil() {
+			return ft, nil
+		}
+		return ft, []reflect.Type{valueType(v.Elem())}
+	case ft.Kind() == reflect.Slice && ft.Elem().Kind() == reflect.Interface && isSlot(ft.Elem()):
+		var held []reflect.Type
+		for i := 0; i < v.Len(); i++ {
+			if e := v.Index(i); !e.IsNil() {
+				held = append(held, valueType(e.Elem()))
+			}
+		}
+		return ft.Elem(), held
+	}
+	return nil, nil
+}
+
+// valueType is the type of a held value, a pointer read as what it points at
+// (a record may hold a *Dim where the type list has Dim).
+func valueType(v reflect.Value) reflect.Type {
+	if v.Kind() == reflect.Pointer {
+		return v.Type().Elem()
+	}
+	return v.Type()
+}
+
+// heldValues are the values a slot holds now, pointers read through.
+func heldValues(v reflect.Value) []reflect.Value {
+	var out []reflect.Value
+	switch v.Kind() {
+	case reflect.Interface:
+		if !v.IsNil() {
+			out = append(out, v.Elem())
+		}
+	case reflect.Slice:
+		for i := 0; i < v.Len(); i++ {
+			if e := v.Index(i); !e.IsNil() {
+				out = append(out, e.Elem())
+			}
+		}
+	}
+	for i, h := range out {
+		if h.Kind() == reflect.Pointer && !h.IsNil() {
+			out[i] = h.Elem()
+		}
+	}
+	return out
+}
+
+// gather keeps the first value of every named type the value holds.
+func gather(v reflect.Value, into map[reflect.Type]reflect.Value) {
+	switch v.Kind() {
+	case reflect.Pointer, reflect.Interface:
+		if !v.IsNil() {
+			gather(v.Elem(), into)
+		}
+		return
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			gather(v.Index(i), into)
+		}
+		return
+	}
+	if v.Type().PkgPath() != "" {
+		if _, ok := into[v.Type()]; !ok {
+			into[v.Type()] = v
+		}
+	}
+	if v.Kind() == reflect.Struct {
+		for i := 0; i < v.NumField(); i++ {
+			if v.Type().Field(i).IsExported() {
+				gather(v.Field(i), into)
+			}
+		}
+	}
+}
+
+// made is a value for a type no record holds: words for a text, else zero.
+func made(t reflect.Type) reflect.Value {
+	v := reflect.New(t).Elem()
+	if t.Kind() == reflect.String {
+		v.SetString(t.Name())
+	}
+	return v
+}
+
+// rebuild copies a value deep, so that a change does not reach the record it
+// came from; on the way along path (field and element indices; pointers and
+// interfaces take no step) it calls at on the struct the path ends at.
+func rebuild(v reflect.Value, path []int, at func(reflect.Value)) reflect.Value {
+	switch v.Kind() {
+	case reflect.Pointer:
+		if v.IsNil() {
+			return v
+		}
+		n := reflect.New(v.Type().Elem())
+		n.Elem().Set(rebuild(v.Elem(), path, at))
+		return n
+	case reflect.Interface:
+		if v.IsNil() {
+			return v
+		}
+		n := reflect.New(v.Type()).Elem()
+		n.Set(rebuild(v.Elem(), path, at))
+		return n
+	case reflect.Slice:
+		if v.IsNil() {
+			return v
+		}
+		n := reflect.MakeSlice(v.Type(), v.Len(), v.Len())
+		for i := 0; i < v.Len(); i++ {
+			if at != nil && len(path) > 0 && path[0] == i {
+				n.Index(i).Set(rebuild(v.Index(i), path[1:], at))
+			} else {
+				n.Index(i).Set(rebuild(v.Index(i), nil, nil))
+			}
+		}
+		return n
+	case reflect.Array:
+		n := reflect.New(v.Type()).Elem()
+		for i := 0; i < v.Len(); i++ {
+			if at != nil && len(path) > 0 && path[0] == i {
+				n.Index(i).Set(rebuild(v.Index(i), path[1:], at))
+			} else {
+				n.Index(i).Set(rebuild(v.Index(i), nil, nil))
+			}
+		}
+		return n
+	case reflect.Struct:
+		n := reflect.New(v.Type()).Elem()
+		n.Set(v)
+		for i := 0; i < v.NumField(); i++ {
+			if !v.Type().Field(i).IsExported() {
+				continue
+			}
+			if at != nil && len(path) > 0 && path[0] == i {
+				n.Field(i).Set(rebuild(v.Field(i), path[1:], at))
+			} else {
+				n.Field(i).Set(rebuild(v.Field(i), nil, nil))
+			}
+		}
+		if at != nil && len(path) == 0 {
+			at(n)
+		}
+		return n
+	}
+	return v
+}

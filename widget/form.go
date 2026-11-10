@@ -251,15 +251,15 @@ func (f Field) html(m mix) string {
 	for _, h := range f.Sends {
 		s.WriteString(h.html(nil))
 	}
+	aside := ""
+	if f.LabelAside != nil {
+		aside = " " + f.LabelAside.html(nil)
+	}
 	switch {
 	case f.LabelSpan:
-		s.WriteString(`<span class="tc-field__label">` + esc(f.Label) + `</span>`)
+		s.WriteString(`<span class="tc-field__label">` + esc(f.Label) + aside + `</span>`)
 	case f.Label != "":
-		s.WriteString(`<label>` + esc(f.Label))
-		if f.LabelAside != nil {
-			s.WriteString(" " + f.LabelAside.html(nil))
-		}
-		s.WriteString(`</label>`)
+		s.WriteString(`<label>` + esc(f.Label) + aside + `</label>`)
 	}
 	for _, p := range f.Parts {
 		s.WriteString(p.html(nil))

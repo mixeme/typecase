@@ -117,7 +117,8 @@ const MockupLadderProbeJS = `(() => {
         if (x < 0 || y < 0 || x >= vw || y >= vh) continue;
         if (x < frameR.left || x > frameR.right || y < frameR.top || y > frameR.bottom) continue;
         const hit = document.elementFromPoint(x, y);
-        if (!hit) { miss = Math.round(x - cx) + "," + Math.round(y - cy) + " hit=null"; break; }
+        // no element answers a point on the viewport's very edge: not a miss
+        if (!hit) continue;
         if (el === hit || el.contains(hit) || hit.contains(el)) continue;
         // a details' summary is a button too: a drop's trigger, «⋯»
         if (hit.closest && hit.closest("button, summary, a[href], input, textarea, select, label, .tc-check, .tc-tick, .tc-tickrow__tick, .tc-close, .tc-nav__item, .tc-seg__opt, .tc-menu, .tc-menu__item, .tc-scrim, .tc-sheet, .tc-field, .tc-range, .tc-search, .tc-rubric, .tc-overlay")) continue;

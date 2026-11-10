@@ -461,7 +461,7 @@ func (g *gen) inl2(e *El) string {
 			case v.Tag == "em":
 				x = "w.Em(" + q(v.Text()) + ")"
 			case v.Has("tc-doc__bullets"):
-				x = "w.DocBullets{Items: [][]w.Inline{" + g.each(v.Els(), g.inl2) + "}}"
+				x = "w.DocBullets{Items: [][]w.DocItemPart{" + g.each(v.Els(), g.item) + "}}"
 			case v.Tag == "a":
 				x = "w.Link{Text: " + q(v.Text()) + `, Href: "#"}`
 			case v.Has("tc-mono"):
@@ -492,6 +492,11 @@ func (g *gen) inl2(e *El) string {
 		}
 	}
 	return "[]w.Inline{" + join(out, ", ") + "}"
+}
+
+// item is an item of a bulleted list: running text and a list nested in it.
+func (g *gen) item(e *El) string {
+	return "[]w.DocItemPart{" + strings.TrimPrefix(g.inl2(e), "[]w.Inline{")
 }
 
 // rawparts is a paragraph's text as written: its breaks are the text's.

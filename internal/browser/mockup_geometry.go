@@ -26,6 +26,8 @@ const MockupGeometryProbeJS = `(() => {
     return true;
   };
   const marks = "svg, img, input:not([type=hidden]), select, textarea, button, .tc-mark, .tc-tickrow__tick, .tc-tick, .tc-avatar";
+  // an open menu inside a box floats over it: its words are not the box's ink
+  const floats = (e, el) => e.closest(".tc-menu") && !el.closest(".tc-menu");
   const ink = (el) => {
     let best = Infinity;
     const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
@@ -33,13 +35,13 @@ const MockupGeometryProbeJS = `(() => {
     while ((n = w.nextNode())) {
       if (!n.textContent.trim()) continue;
       const p = n.parentElement;
-      if (!p || !seen(p)) continue;
+      if (!p || !seen(p) || floats(p, el)) continue;
       const r = document.createRange();
       r.selectNodeContents(n);
       for (const q of r.getClientRects()) if (q.width > 0.5) best = Math.min(best, q.left);
     }
     for (const e of el.querySelectorAll(marks)) {
-      if (!seen(e)) continue;
+      if (!seen(e) || floats(e, el)) continue;
       const q = e.getBoundingClientRect();
       if (q.width > 0.5) best = Math.min(best, q.left);
     }
@@ -60,7 +62,9 @@ const MockupGeometryProbeJS = `(() => {
     let h = null;
     for (const x of heads) {
       if (!(x.compareDocumentPosition(r) & Node.DOCUMENT_POSITION_FOLLOWING)) continue;
-      if (x.closest(blocks) !== block && !block.contains(x)) continue;
+      // a heading in a box of its own inside the rows' block (a card's
+      // rubric over a table beside the card) is not theirs
+      if (x.closest(blocks) !== block) continue;
       h = x;
     }
     if (!h) continue;

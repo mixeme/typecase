@@ -3850,10 +3850,10 @@ func Publish10() Screen {
 						Items: []w.DocPart{
 							w.DocHeading{Text: "Перед заморозкой"},
 							w.DocBullets{
-								Items: [][]w.Inline{
-									[]w.Inline{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}},
-									[]w.Inline{w.Text("проверить changelog")},
-									[]w.Inline{w.Text("письмо пользователям — черновик у Анны")},
+								Items: [][]w.DocItemPart{
+									[]w.DocItemPart{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}},
+									[]w.DocItemPart{w.Text("проверить changelog")},
+									[]w.DocItemPart{w.Text("письмо пользователям — черновик у Анны")},
 								},
 							},
 							w.DocHeading{Text: "После"},

@@ -47,7 +47,7 @@ var _ = add(
 		w.DocTitle{Text: "Разбор релиза 0.3"},
 		w.Prose{Parts: []w.Inline{w.Text("Итоги созвона в "), w.Em("четверг"), w.Text(": релиз держат две вещи, обе — до пятницы. Миграцию гоняем только с "), w.Mono{Text: "--dry-run", Variant: w.MonoChip}, w.Text(", подробности — в "), w.Link{Text: "заметке о схеме", Href: "#"}, w.Text(".")}, Variant: w.ProseRead},
 		w.DocHeading{Text: "Что держит"},
-		w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Text("миграция схемы — "), w.Link{Text: "задача у Виктора", Href: "#"}}, []w.Inline{w.Text("тесты"), w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}, w.Text(" — зелёный")}, []w.Inline{w.Text("нагрузочный — после 20.08")}}}}}},
+		w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Text("миграция схемы — "), w.Link{Text: "задача у Виктора", Href: "#"}}, []w.DocItemPart{w.Text("тесты"), w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}, w.Text(" — зелёный")}, []w.DocItemPart{w.Text("нагрузочный — после 20.08")}}}}}},
 		w.DocQuote{Parts: []w.Inline{w.Text("Не выпускаем, пока не прогоним миграцию на копии базы.")}},
 		w.DocHeading{Text: "Как проверить"},
 		w.DocCode{Text: "make db-copy\n./carrel migrate --dry-run --from 0.2 --to 0.3 --database ./copy/carrel.db"}}, Text: true}, "s-notes-25", "tc-doc", 1),
@@ -90,7 +90,7 @@ var _ = add(
 		w.DocFiles{Title: w.Rubric{Text: "Attachments", Variant: w.RubricBelow}, Items: []w.DocFile{{Name: "2026-08-10-sync-board.png", Size: w.Dim{Parts: []w.Inline{w.Text("· 412 KB")}}, Href: "/p/Bn4q7Zs1Wd2e"}, {Name: "запись-встречи.m4a", Size: w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}}, Href: "/p/Kd9x3Pq6Tr1m"}}}}}, "s-publish-8", "tc-doc", 1),
 	document("text", w.Doc{Items: []w.DocPart{
 		w.DocHeading{Text: "Перед заморозкой"},
-		w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}}, []w.Inline{w.Text("проверить changelog")}, []w.Inline{w.Text("письмо пользователям — черновик у Анны")}}},
+		w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}}, []w.DocItemPart{w.Text("проверить changelog")}, []w.DocItemPart{w.Text("письмо пользователям — черновик у Анны")}}},
 		w.DocHeading{Text: "После"},
 		w.DocBody{Text: "Тег ставит Виктор. Образ собирается вручную до появления CI."}}, Text: true}, "s-publish-10", "tc-doc", 1),
 	document("phone", w.Doc{Items: []w.DocPart{

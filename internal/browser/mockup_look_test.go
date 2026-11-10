@@ -173,32 +173,8 @@ func TestMockupFrameShots(t *testing.T) {
 			t.Fatal(err)
 		}
 		for _, w := range ws {
-			var buf []byte
-			if err := run(
-				chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
-				chromedp.Evaluate(fmt.Sprintf(injectFrameJS, raw, w), nil),
-				chromedp.Sleep(50*time.Millisecond),
-				chromedp.ActionFunc(func(ctx context.Context) error {
-					var box browser.Rect
-					if err := chromedp.Evaluate(frameBoxJS, &box).Do(ctx); err != nil {
-						return err
-					}
-					vw := int64(math.Max(float64(browser.MockupShotViewport), math.Ceil(box.Right)+10))
-					vh := int64(math.Min(6000, math.Ceil(box.Bottom)+10))
-					if err := chromedp.EmulateViewport(vw, vh).Do(ctx); err != nil {
-						return err
-					}
-					if err := chromedp.Evaluate(frameBoxJS, &box).Do(ctx); err != nil {
-						return err
-					}
-					png, err := page.CaptureScreenshot().WithFormat(page.CaptureScreenshotFormatPng).Do(ctx)
-					if err != nil {
-						return err
-					}
-					buf, err = cropPNG(png, math.Floor(box.X), math.Floor(box.Y), math.Ceil(box.Width), math.Min(math.Ceil(box.Height), float64(vh)), 1)
-					return err
-				}),
-			); err != nil {
+			buf, err := shootFrame(run, string(raw), w)
+			if err != nil {
 				t.Fatalf("%s @%d: %v", fr.ID, w, err)
 			}
 			name := fr.ID + ".png"
@@ -217,6 +193,43 @@ func TestMockupFrameShots(t *testing.T) {
 			t.Errorf("no frame %q in the mockup", id)
 		}
 	}
+}
+
+// shootFrame paints a frame (its markup as a JSON string) at width w (0: as
+// drawn) and returns the picture of the whole frame, the viewport grown to
+// hold it, up to 6000 px down.
+func shootFrame(run func(...chromedp.Action) error, raw string, w int) ([]byte, error) {
+	var buf []byte
+	err := run(
+		chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
+		chromedp.Evaluate(fmt.Sprintf(injectFrameJS, raw, w), nil),
+		chromedp.Sleep(50*time.Millisecond),
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			var box browser.Rect
+			if err := chromedp.Evaluate(frameBoxJS, &box).Do(ctx); err != nil {
+				return err
+			}
+			vw := int64(math.Max(float64(browser.MockupShotViewport), math.Ceil(box.Right)+10))
+			vh := int64(math.Min(6000, math.Ceil(box.Bottom)+10))
+			if err := chromedp.EmulateViewport(vw, vh).Do(ctx); err != nil {
+				return err
+			}
+			if err := chromedp.Evaluate(frameBoxJS, &box).Do(ctx); err != nil {
+				return err
+			}
+			// a tab behind another paints no frame, and its picture never comes
+			if err := page.BringToFront().Do(ctx); err != nil {
+				return err
+			}
+			png, err := page.CaptureScreenshot().WithFormat(page.CaptureScreenshotFormatPng).Do(ctx)
+			if err != nil {
+				return err
+			}
+			buf, err = cropPNG(png, math.Floor(box.X), math.Floor(box.Y), math.Ceil(box.Width), math.Min(math.Ceil(box.Height), float64(vh)), 1)
+			return err
+		}),
+	)
+	return buf, err
 }
 
 // TestMockupFrameMoves says which frames moved against a commit, and at which

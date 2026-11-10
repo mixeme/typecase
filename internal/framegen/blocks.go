@@ -1282,7 +1282,7 @@ func (g *gen) doc(e *El) string {
 		case k.Has("tc-doc__heading"):
 			items = append(items, "w.DocHeading{Text: "+q(k.Text())+"}")
 		case k.Has("tc-doc__bullets"):
-			items = append(items, "w.DocBullets{Items: [][]w.Inline{"+g.each(k.Els(), g.inl2)+"}}")
+			items = append(items, "w.DocBullets{Items: [][]w.DocItemPart{"+g.each(k.Els(), g.item)+"}}")
 		case k.Has("tc-doc__body"):
 			items = append(items, "w.DocBody{Text: "+q(k.Text())+"}")
 		case k.Has("tc-doc__quote"):
@@ -1433,7 +1433,7 @@ func (g *gen) docText(k *El) string {
 	case k.Has("tc-doc__heading"):
 		return "w.DocHeading{Text: " + q(k.Text()) + "}"
 	case k.Has("tc-doc__bullets"):
-		return "w.DocBullets{Items: [][]w.Inline{" + g.each(k.Els(), g.inl2) + "}}"
+		return "w.DocBullets{Items: [][]w.DocItemPart{" + g.each(k.Els(), g.item) + "}}"
 	case k.Has("tc-doc__quote"):
 		return "w.DocQuote{Parts: " + g.inl2(k) + "}"
 	case k.Has("tc-doc__code"):

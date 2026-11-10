@@ -576,7 +576,7 @@ var _ = add(
 		w.Head{Title: &w.HeadTitle{Text: "release-checklist.md", Size: w.HeadTitle19}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "text/markdown · 3.1 KB · changed 2026-08-09"}}}}, Pad: w.HeadSnug},
 		w.Doc{Items: []w.DocPart{
 			w.DocHeading{Text: "Перед заморозкой"},
-			w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}}, []w.Inline{w.Text("проверить changelog")}, []w.Inline{w.Text("письмо пользователям — черновик у Анны")}}},
+			w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Text("прогнать "), w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}}, []w.DocItemPart{w.Text("проверить changelog")}, []w.DocItemPart{w.Text("письмо пользователям — черновик у Анны")}}},
 			w.DocHeading{Text: "После"},
 			w.DocBody{Text: "Тег ставит Виктор. Образ собирается вручную до появления CI."}}, Text: true},
 		w.MainFoot{Text: "This link works until 19 August 2026."}}}, "s-publish-10", "tc-main", 1),

@@ -414,7 +414,7 @@ var _ = add(
 	cards("text", w.Sec{Items: []w.SecPart{
 		w.Prose{Parts: []w.Inline{w.Text("Итоги созвона в "), w.Em("четверг"), w.Text(": миграцию гоняем только с "), w.Mono{Text: "--dry-run", Variant: w.MonoChip}, w.Text(", подробности — в "), w.Link{Text: "заметке о схеме", Href: "#"}, w.Text(".")}, Variant: w.ProseRead},
 		w.DocHeading{Text: "Что держит"},
-		w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Text("миграция схемы")}, []w.Inline{w.Text("тесты"), w.DocBullets{Items: [][]w.Inline{[]w.Inline{w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}, w.Text(" — зелёный")}, []w.Inline{w.Text("нагрузочный — после 20.08")}}}}}},
+		w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Text("миграция схемы")}, []w.DocItemPart{w.Text("тесты"), w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Mono{Text: "go test -race ./...", Variant: w.MonoChip}, w.Text(" — зелёный")}, []w.DocItemPart{w.Text("нагрузочный — после 20.08")}}}}}},
 		w.DocQuote{Parts: []w.Inline{w.Text("Не выпускаем, пока не прогоним миграцию на копии базы.")}},
 		w.DocCode{Text: "./carrel migrate --dry-run --from 0.2 --to 0.3"},
 		w.DocTable{Head: [][]w.Inline{[]w.Inline{w.Text("Что")}, []w.Inline{w.Text("Кто")}, []w.Inline{w.Text("Когда")}}, Rows: [][][]w.Inline{{[]w.Inline{w.Text("Миграция схемы")}, []w.Inline{w.Text("Виктор")}, []w.Inline{w.Text("до 14.08")}}, {[]w.Inline{w.Text("Письмо пользователям")}, []w.Inline{w.Text("Анна")}, []w.Inline{w.Text("13.08")}}}, Align: []w.DocAlign{w.DocAlignStart, w.DocAlignStart, w.DocAlignCenter}, Switch: w.Seg{Options: []w.SegOption{{Label: "Wrap", On: true}, {Label: "One line"}}, Variant: w.SegCompactSmall}}}}, "s-notes-28", "tc-sec", 1),

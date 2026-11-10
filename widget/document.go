@@ -196,23 +196,45 @@ type DocHeading struct {
 
 func (h DocHeading) html(mix) string { return `<div class="tc-doc__heading">` + esc(h.Text) + `</div>` }
 
-// DocBullets is a bulleted list inside a document's text. An item's parts
-// may end with a DocBullets: the list nested in it (Carrel's task 102).
+// DocBullets is a bulleted list inside a document's text. An item holds
+// running text and the list nested in it (Carrel's task 102).
 type DocBullets struct {
-	Items [][]Inline
+	Items [][]DocItemPart
 }
+
+// DocItemPart is what an item of a bulleted list holds: running text, and
+// a DocBullets — the list nested in the item. A list is not running text: a
+// row's title or a button's label does not take one.
+type DocItemPart interface {
+	part
+	docItemPart()
+}
+
+func (Text) docItemPart()       {}
+func (Strong) docItemPart()     {}
+func (Em) docItemPart()         {}
+func (Hint) docItemPart()       {}
+func (Dot) docItemPart()        {}
+func (Mono) docItemPart()       {}
+func (Span) docItemPart()       {}
+func (Link) docItemPart()       {}
+func (SlugOf) docItemPart()     {}
+func (Mention) docItemPart()    {}
+func (DocBullets) docItemPart() {}
 
 func (b DocBullets) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<ul class="tc-stack tc-stack--tight tc-doc__bullets">`)
 	for _, it := range b.Items {
-		s.WriteString(`<li>` + inlines(it) + `</li>`)
+		s.WriteString(`<li>`)
+		for _, p := range it {
+			s.WriteString(p.html(nil))
+		}
+		s.WriteString(`</li>`)
 	}
 	s.WriteString(`</ul>`)
 	return s.String()
 }
-
-func (DocBullets) inline() {}
 
 // DocQuote is a quotation in a document's text: Markdown's «>» (Carrel's
 // task 102).

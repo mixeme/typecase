@@ -14,6 +14,11 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A bulleted list's item has its own slot** (free composition, 10.11).
+  `DocBullets.Items` is `[][]DocItemPart`, not `[][]Inline`: running text
+  (every type that was `Inline`) and a nested `DocBullets`. `DocBullets` is
+  no longer `Inline` — a row's title, a button's label, a hint took a list
+  and printed it inside their words.
 - **Inner padding takes the gutters and the steps** (the owner, 09.11).
   Padding named by pixels takes a name: at the sides the page's gutter or
   the narrow one, above and below a step — `tc-card--pad12-14` →
@@ -173,6 +178,17 @@ do, not what the authors did.
 
 ### Added
 
+- **The free composition check** (`TestFreeComposition`, the owner's thought
+  of 14.10 on the constructor). `refs.Compositions` puts every part a slot
+  takes into a place of that slot — 729 compositions in 98 slots, the part
+  as it stands in a slot of that kind — and `fragment.Splice` paints it in
+  the host's frame; the ladder's and the geometry's probes measure it at
+  every width, less what the frame shows with its own record.
+  `TestCompositions` keeps the set without a browser; the bite puts back
+  the photo column of before. `compositionPending` holds 18 compositions of
+  five kinds that wait: a bar's item without a rank, a table in a narrow
+  box, the top bar's end and the phone, rows of other kinds side by side, a
+  link inside a row on the phone.
 - **A list is one stop of Tab** (the owner, 07.11). Of a list's rows only
   one takes the focus by Tab — the one that had it last, the open one, or the
   first — and the next Tab goes past the list; the rows' ticks are no stops
@@ -2559,6 +2575,17 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A field's label printed as a span keeps its aside** (`Field{LabelSpan,
+  LabelAside}`): it was dropped silently; found by the free composition.
+- **What stands beside a photo gives way** (`.tc-field--fixauto`): a message,
+  a hint, a pick or a line of buttons beside a contact's photo ran out of
+  the form; the field now shrinks to its place and its words wrap. No frame
+  moves.
+- The ladder's tap probe no longer counts a point on the viewport's very
+  edge as a miss; the geometry's rows take as theirs only a heading in
+  their own block and no words of an open menu inside them; a frame's
+  picture is taken with its tab brought to the front — a tab behind another
+  never sent it, and the shots hung.
 - A date range (`Range`, `.tc-range`) is never wider than its place: where
   it does not fit, Show wraps under the fields (Р-65; `components-18` cut
   its button by 1 px at 390). `Range.Wrap` is not needed for that any more.
