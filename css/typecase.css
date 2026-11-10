@@ -820,8 +820,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
    пол колонки 480 = 1144, и запас; порог прежний — на нём стоят ступени лестницы 1191/1190. */
 /* Select all и Clear selection — иконками, пока полосе с действиями письма тесно (s-mailbox-3 до ~1260). */
 @container tcbox (max-width:1280px){
-  .tc-bar--sel > .tc-bar__right .tc-btn > .tc-btn__label{display:none}
-  .tc-bar--sel > .tc-bar__right .tc-btn:has(> .tc-btn__label){padding:0 9px}
+  .tc-bar--sel:where(:not([data-tc-fold])) > .tc-bar__right .tc-btn > .tc-btn__label{display:none}
+  .tc-bar--sel:where(:not([data-tc-fold])) > .tc-bar__right .tc-btn:has(> .tc-btn__label){padding:0 9px}
 }
 @container tcbox (max-width:1190px){
   .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr)}
@@ -836,58 +836,58 @@ label.tc-menu__item{position:relative;cursor:pointer}
    (`s-notes-4`) выбор блокнота сжимался до метки (08.11). Пороги считаны по «nextcloud · Записи»;
    имя длиннее сначала укорачивается многоточием в пределах 210. */
 @container tcbox (max-width:1280px){
-  .tc-docbar .is-2nd{display:none}
-  .tc-docbar:has(.is-2nd) .tc-bar__more,.tc-docbar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-docbar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  .tc-docbar:where(:not([data-tc-fold])) .is-2nd{display:none}
+  .tc-docbar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more,.tc-docbar:where(:not([data-tc-fold])):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-docbar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
 }
 /* Значками, с третьим рангом и «⋯», панели правки нужно около 737 px (у колонки правки на 1008 их 744):
    с 740 третий ранг (H2, список, задача, ссылка, Auto-save) уходит под «⋯» здесь же, не только на телефоне, —
    панель держится рангами в одну строку, а не сжимает выбор блокнота до метки и не переносится
    (проверка геометрии и владелец, 08.11). */
 @container tcbox (max-width:740px){
-  .tc-docbar > .is-3rd,.tc-docbar > .tc-bar__right > .is-3rd{display:none}
+  .tc-docbar:where(:not([data-tc-fold])) > .is-3rd,.tc-docbar:where(:not([data-tc-fold])) > .tc-bar__right > .is-3rd{display:none}
 }
 /* Тяжёлая полоса — .tc-bar--wide: целиком ей нужно 930–940 px, поэтому
    is-2nd уходит под «...» с 960, а не с 800. Агенда, хронология человека. */
 @container tcbox (max-width:960px){
-  .tc-bar--wide .is-2nd{display:none}
-  .tc-bar--wide .tc-segfold > .tc-seg{display:none}
-  .tc-bar--wide .tc-segfold__pick{display:block}
-  .tc-bar--wide:has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-bar--wide:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar--wide:where(:not([data-tc-fold])) .is-2nd{display:none}
+  .tc-bar--wide:where(:not([data-tc-fold])) .tc-segfold > .tc-seg{display:none}
+  .tc-bar--wide:where(:not([data-tc-fold])) .tc-segfold__pick{display:block}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more,.tc-bar--wide:where(:not([data-tc-fold])):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
 }
 /* Широкая полоса с фильтром (агенда, Carrel's task 196) шире на поле фильтра — около 1070 px: её is-2nd уходит под «...» с 1100. */
 @container tcbox (max-width:1100px){
-  .tc-bar--wide:has(> .tc-in) .is-2nd{display:none}
-  .tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-bar--wide:has(> .tc-in):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-in) .is-2nd{display:none}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-in):has(.is-2nd) .tc-bar__more,.tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-in):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-in):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
 }
 /* Короткий переключатель (.tc-segfold--phone, Day / Week / Month / Range агенды) широкая полоса держит целиком: он складывается только на телефоне, с 640. */
 @container tcbox (min-width:641px){
-  .tc-bar .tc-segfold.tc-segfold--phone > .tc-seg{display:inline-flex}
-  .tc-bar .tc-segfold.tc-segfold--phone > .tc-segfold__pick{display:none}
+  .tc-bar:where(:not([data-tc-fold])) .tc-segfold.tc-segfold--phone > .tc-seg{display:inline-flex}
+  .tc-bar:where(:not([data-tc-fold])) .tc-segfold.tc-segfold--phone > .tc-segfold__pick{display:none}
 }
 /* Панель документа уже 740: кнопки теряют подписи, не действия, и стоят плотнее. */
 @container tcbox (max-width:740px){
-  .tc-docbar .tc-btn > .tc-btn__label{display:none}
-  .tc-docbar .tc-btn{padding:0 7px}
+  .tc-docbar:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar:where(:not([data-tc-fold])) .tc-btn{padding:0 7px}
 }
 /* Панели правки заметки без второго ранга с подписями нужно около 850: с 860 её кнопки теряют подписи —
    раньше, чем третий ранг уходит под «⋯» (владелец, 09.11: место есть — кнопки на виду). */
 @container tcbox (max-width:860px){
-  .tc-docbar--edit .tc-btn > .tc-btn__label{display:none}
-  .tc-docbar--edit .tc-btn{padding:0 7px}
+  .tc-docbar--edit:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar--edit:where(:not([data-tc-fold])) .tc-btn{padding:0 7px}
 }
 @container tcbox (max-width:800px){
   /* is-2nd уходит под «...». У таблицы порог 700: ячейка умеет сжиматься. */
-  .tc-bar .is-2nd{display:none}
-  .tc-bar .tc-segfold > .tc-seg{display:none}
-  .tc-bar .tc-segfold__pick{display:block}
+  .tc-bar:where(:not([data-tc-fold])) .is-2nd{display:none}
+  .tc-bar:where(:not([data-tc-fold])) .tc-segfold > .tc-seg{display:none}
+  .tc-bar:where(:not([data-tc-fold])) .tc-segfold__pick{display:block}
   /* Панель выделения теряет подписи, не действия. */
-  .tc-bar--sel .tc-btn > .tc-btn__label{display:none}
-  .tc-bar--sel .tc-btn:has(> .tc-btn__label){padding:0 9px}
-  .tc-bar:has(.is-2nd) .tc-bar__more,.tc-bar:has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-bar:has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar--sel:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-bar--sel:where(:not([data-tc-fold])) .tc-btn:has(> .tc-btn__label){padding:0 9px}
+  .tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more,.tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
   /* Тяжёлая таблица — .tc-table--wide: целиком ей нужно около 790, поэтому is-2nd уходит с 800, а не с 700. */
   .tc-table--wide th.is-2nd,.tc-table--wide td.is-2nd{display:none}
   .tc-row--cols > :is(.tc-col--org,.tc-col--birthday,.tc-col--tags,.tc-col--changed,.tc-col--complete,.tc-col--priority){display:none}
@@ -986,13 +986,13 @@ label.tc-menu__item{position:relative;cursor:pointer}
    меню на высоту меню); так же панель документа, диапазон внутри себя,
    кнопки строки таблицы в своей ячейке и подвал листа. Решение человека 2026-09-26: без прокрутки. */
 @container tcbox (max-width:460px){
-  .tc-bar > .is-3rd,.tc-bar__right > .is-3rd,.tc-docbar > .is-3rd{display:none}
+  .tc-bar:where(:not([data-tc-fold])) > .is-3rd,:where(:not([data-tc-fold])) > .tc-bar__right > .is-3rd,.tc-docbar:where(:not([data-tc-fold])) > .is-3rd{display:none}
   /* шапка карточки: третий ранг (Print) уходит под её «⋯» */
   .tc-head .tc-acts > .is-3rd{display:none}
-  .tc-bar:has(> .is-3rd) .tc-bar__more,.tc-bar:has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
-  .tc-docbar:has(.is-3rd) .tc-bar__more,.tc-docbar:has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-bar:has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
-  .tc-bar .tc-btn > .tc-btn__label{display:none}
+  .tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-bar__more,.tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
+  .tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
   .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
   /* Панель выделения: счёт первой строкой, все действия — второй (разделитель становится
      переносом), а не одна кнопка, упавшая вниз сама (решение владельца 02.11). */
@@ -1037,15 +1037,47 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-table:has(td.tc-table__main) > tbody > tr > td.tc-table__main br + .tc-dim::before{content:" · "}
 }
 @container tcbox (min-width:461px){
-  .tc-menu:not(.tc-bar--wide .tc-menu) .is-3rd{display:none}
+  .tc-menu:not(.tc-bar--wide .tc-menu):where(:not([data-tc-fold] .tc-menu)) .is-3rd{display:none}
 }
 /* Полоса агенды начинается листанием (Previous · Today · Next, задача 77): целиком
    ей нужно около 1070 px, поэтому её is-2nd уходит под «⋯» с 1100. */
 @container tcbox (max-width:1100px){
-  .tc-bar--wide:has(> .tc-btn:first-child) .is-2nd{display:none}
-  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more,.tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
-  .tc-bar--wide:has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-btn:first-child) .is-2nd{display:none}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more,.tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-btn:first-child):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
+  .tc-bar--wide:where(:not([data-tc-fold])):has(> .tc-btn:first-child):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
 }
+/* Бар со сценарием (Р-4, решение владельца 10.11): tc.js складывает его по месту, а не по ширине окна.
+   data-tc-fold — пройденные ступени: end — подписи правой группы панели выделения; 2nd — второй ранг
+   под «⋯» и складной переключатель (у панели выделения — с подписями); labels — подписи кнопок;
+   3rd — третий ранг под «⋯» и переключатель телефона. Сценарий берёт их по порядку, пока бар не встанет
+   с каждым элементом целиком — выбор по своему тексту, кнопка с подписью — и не больше строк, чем со всеми
+   ступенями; где не хватает и всех — wrap: оставшееся переносится целиком. На замере (data-tc-measure) бар не шире места и ничто в нём не сжимается
+   (бар, которому тесно, раздвигал бы колонку страницы); поле держит ширину своего текста — значения, иначе подсказки, —
+   но не шире, чем ему оставляют пороги, и отдаёт её только после всех ступеней. Пороги по ширине
+   выше — для страницы без сценария: у бара с data-tc-fold они молчат (:where — без прибавки к весу). */
+:is(.tc-bar,.tc-docbar)[data-tc-measure]{min-width:0;max-width:100%}
+:is(.tc-bar,.tc-docbar)[data-tc-measure] > *,
+:is(.tc-bar,.tc-docbar)[data-tc-measure] > :is(.tc-barform,.tc-checkform) > *{flex-shrink:0}
+.tc-bar--sel[data-tc-fold~="end"] > .tc-bar__right .tc-btn > .tc-btn__label,
+.tc-bar--sel[data-tc-fold~="2nd"] .tc-btn > .tc-btn__label,
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="labels"] .tc-btn > .tc-btn__label{display:none}
+.tc-bar--sel[data-tc-fold~="end"] > .tc-bar__right .tc-btn:has(> .tc-btn__label),
+.tc-bar--sel[data-tc-fold~="2nd"] .tc-btn:has(> .tc-btn__label){padding:0 9px}
+.tc-docbar[data-tc-fold~="labels"] .tc-btn{padding:0 7px}
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="2nd"] .is-2nd,
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="3rd"] > .is-3rd,:is(.tc-bar,.tc-docbar)[data-tc-fold~="3rd"] > .tc-bar__right > .is-3rd,
+.tc-bar[data-tc-fold~="2nd"] .tc-segfold:not(.tc-segfold--phone) > .tc-seg,
+.tc-bar[data-tc-fold~="3rd"] .tc-segfold--phone > .tc-seg{display:none}
+.tc-bar[data-tc-fold~="2nd"] .tc-segfold:not(.tc-segfold--phone) > .tc-segfold__pick,
+.tc-bar[data-tc-fold~="3rd"] .tc-segfold--phone > .tc-segfold__pick{display:block}
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="2nd"]:has(.is-2nd) :is(.tc-bar__more,.tc-drop:has(> .tc-bar__more)),
+.tc-bar[data-tc-fold~="3rd"]:has(> .is-3rd) :is(.tc-bar__more,.tc-drop:has(> .tc-bar__more)),
+.tc-docbar[data-tc-fold~="3rd"]:has(.is-3rd) :is(.tc-bar__more,.tc-drop:has(> .tc-bar__more)){display:inline-flex}
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="2nd"]:has(.is-2nd) .tc-bar__more + .tc-menu,
+.tc-bar[data-tc-fold~="3rd"]:has(> .is-3rd) .tc-bar__more + .tc-menu,
+.tc-docbar[data-tc-fold~="3rd"]:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
+:is(.tc-bar:not(.tc-bar--wide),.tc-docbar)[data-tc-fold]:not([data-tc-fold~="3rd"]) .tc-menu .is-3rd{display:none}
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="wrap"]{flex-wrap:wrap}
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){
   .tc-shell__body,.tc-shell__body.tc-shell__body--side{

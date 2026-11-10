@@ -283,8 +283,130 @@
 		if (mode && shell.getAttribute("data-tc-mode") !== mode) shell.setAttribute("data-tc-mode", mode);
 	}
 
-	// The bars (Р-4): what goes under «⋯» and when is the mockup's CSS. The
-	// script only catches a bar the CSS did not fit: it marks it and lets it
+	// tc-fit:start
+	// The bars (Р-4) fold by measure (the owner's decision of 10.11): what
+	// each step folds is the mockup's CSS — data-tc-fold names the steps
+	// taken: the end's labels, the second rank, the labels, the third rank;
+	// the script takes them in that order until the bar stands with every
+	// item whole — a pick at its text, a button with its label — and in no
+	// more lines than with all of them taken; where even that is not enough,
+	// what is left wraps (wrap). Whatever set of items a screen
+	// puts in a bar folds so; without a script the CSS folds it by the
+	// widths measured for the mockup's own sets.
+	var foldSteps = ["", "end", "end 2nd", "end 2nd labels", "end 2nd labels 3rd"];
+
+	function barItems(el, out) {
+		for (var i = 0; i < el.children.length; i++) {
+			var k = el.children[i], cs = getComputedStyle(k);
+			if (cs.display === "contents") {
+				barItems(k, out);
+				continue;
+			}
+			if (cs.display === "none" || cs.position === "absolute" || cs.position === "fixed") continue;
+			var r = k.getBoundingClientRect();
+			if (r.width >= 0.5 && r.height >= 0.5) out.push(r);
+		}
+		return out;
+	}
+
+	// barLines counts the bar's lines, or -1 where an item stands past its
+	// edge.
+	function barLines(bar) {
+		var box = bar.getBoundingClientRect(), cs = getComputedStyle(bar);
+		var left = box.left + parseFloat(cs.borderLeftWidth) + parseFloat(cs.paddingLeft) - 1;
+		var right = box.right - parseFloat(cs.borderRightWidth) - parseFloat(cs.paddingRight) + 1;
+		var items = barItems(bar, []);
+		items.sort(function (a, b) {
+			return a.top - b.top;
+		});
+		var lines = 0, bottom = -Infinity;
+		for (var i = 0; i < items.length; i++) {
+			var r = items[i];
+			if (r.left < left || r.right > right) return -1;
+			if (r.top >= bottom - 1) {
+				lines++;
+				bottom = r.bottom;
+			} else if (r.bottom > bottom) {
+				bottom = r.bottom;
+			}
+		}
+		return lines;
+	}
+
+	// A field narrows to its text first (the owner, 09.11): on the measure a
+	// filter or a field of the bar keeps the width of what it shows — its
+	// value, else its hint — up to its class's width, and gives it up only
+	// after the steps, not for a button the steps would fold; but never wider
+	// than the CSS's widths leave it — where those cut a field below its hint
+	// (a question open with the owner), the script cuts it no more and
+	// settles nothing.
+	var ruler;
+
+	function textWidth(text, cs) {
+		if (!ruler) ruler = document.createElement("canvas").getContext("2d");
+		ruler.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+		return ruler.measureText(text).width;
+	}
+
+	function textFields(bar) {
+		var held = [], fields = bar.querySelectorAll(":scope > .tc-in:not(.is-pick), :scope > .tc-search, :scope > .tc-barform > .tc-in:not(.is-pick)");
+		if (!fields.length) return held;
+		var fold = bar.getAttribute("data-tc-fold"), measure = bar.hasAttribute("data-tc-measure");
+		bar.removeAttribute("data-tc-fold");
+		bar.removeAttribute("data-tc-measure");
+		var css = [];
+		fields.forEach(function (f) {
+			css.push(f.getBoundingClientRect().width);
+		});
+		if (fold !== null) bar.setAttribute("data-tc-fold", fold);
+		if (measure) bar.setAttribute("data-tc-measure", "");
+		fields.forEach(function (f, k) {
+			var input = f.tagName === "INPUT" ? f : f.querySelector("input");
+			if (!input) return;
+			var text = input.value || input.placeholder || "";
+			if (!text) return;
+			var cs = getComputedStyle(input);
+			var need = f.getBoundingClientRect().width - input.clientWidth +
+				parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + Math.ceil(textWidth(text, cs)) + 2;
+			var max = parseFloat(getComputedStyle(f).maxWidth);
+			if (max > 0 && need > max) need = max;
+			if (need > css[k]) need = css[k];
+			held.push([f, f.style.minWidth]);
+			f.style.minWidth = need + "px";
+		});
+		return held;
+	}
+
+	function fitBar(bar) {
+		if (!bar.getClientRects().length) return;
+		bar.setAttribute("data-tc-measure", "");
+		var held = textFields(bar);
+		var last = foldSteps.length - 1;
+		bar.setAttribute("data-tc-fold", foldSteps[last]);
+		var least = barLines(bar), fold = foldSteps[last];
+		if (least > 0) {
+			for (var i = 0; i < last; i++) {
+				bar.setAttribute("data-tc-fold", foldSteps[i]);
+				var n = barLines(bar);
+				if (n > 0 && n <= least) {
+					fold = foldSteps[i];
+					break;
+				}
+			}
+		} else {
+			// folded whole and still past its edge: what is left wraps to the
+			// next line, whole, and is not squeezed (Р-65)
+			fold += " wrap";
+		}
+		bar.setAttribute("data-tc-fold", fold);
+		held.forEach(function (h) {
+			h[0].style.minWidth = h[1];
+		});
+		bar.removeAttribute("data-tc-measure");
+	}
+	// tc-fit:end
+
+	// A bar that does not fit even folded whole the script marks and lets
 	// scroll sideways, so nothing is cut off out of reach.
 	function checkBar(bar) {
 		bar.style.overflowX = "";
@@ -301,6 +423,7 @@
 	function layoutUpdates() {
 		document.querySelectorAll(".tc-shell").forEach(syncShell);
 		var n = 0;
+		document.querySelectorAll(".tc-bar, .tc-docbar").forEach(fitBar);
 		document.querySelectorAll(".tc-bar, .tc-docbar, .tc-head").forEach(function (b) {
 			if (checkBar(b)) n++;
 		});

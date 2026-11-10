@@ -834,7 +834,13 @@ func TestCheckFormInMenu(t *testing.T) {
 		more := w.Drop{More: true, Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
 			w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: action, Hidden: []w.Hidden{{Name: "sort", Value: "az"}}, Apply: w.Button{Label: "Apply", Small: true, Submit: true}}},
 			Pop: w.MenuUnderEnd, Inline: true}}
-		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar"><span class="tc-seg is-2nd"><button class="tc-seg__opt" type="button">A–Z</button></span>` + more.Render() + `</div></div></div>`
+		// a switch that does not fit at 380: it goes under «⋯» by the CSS's
+		// width without a script and by measure with one
+		seg := `<span class="tc-seg is-2nd">`
+		for _, o := range []string{"A–Z", "Z–A", "Newest first", "Oldest first", "Largest", "Smallest"} {
+			seg += `<button class="tc-seg__opt" type="button">` + o + `</button>`
+		}
+		return `<div class="tc-root"><div class="tc-main"><div class="tc-bar">` + seg + `</span>` + more.Render() + `</div></div></div>`
 	}
 	bareURL := h.RegisterPage("menu-checkform-bare", "")
 	h.RegisterPage("menu-checkform-bare", strings.Replace(browser.PageHTML(page(bareURL), ""), `<script src="/tc.js"></script>`, "", 1))

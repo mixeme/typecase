@@ -23,10 +23,6 @@ import (
 // not failed. The key is the composition as Composition.String prints it,
 // without the host: «Owner.Slot+Part».
 var compositionPending = map[string]string{
-	// a bar's item without a rank has no way out when the bar is full
-	"Bar.BarPart+Range":              barRank,
-	"Docbar.DocbarPart+Button":       barRank,
-	"DocLayout.DocLayoutPart+Docbar": barRank,
 	// a table wider than a narrow box: its columns do not give way there
 	"FieldSet.FieldSetPart+Table": narrowTable,
 	"Sheet.SheetPart+Table":       narrowTable,
@@ -49,7 +45,6 @@ var compositionPending = map[string]string{
 }
 
 const (
-	barRank     = "free composition 10.11: a bar's item without a rank — the owner decides how a full bar gives way"
 	narrowTable = "free composition 10.11: a table in a box narrower than its columns"
 	topBar      = "free composition 10.11: the top bar's end and the phone"
 	rowKinds    = "free composition 10.11: rows of different kinds side by side, gutters at 640"
@@ -130,6 +125,10 @@ func composeFindings(t *testing.T, h *browser.Harness, styles, sprite string, fr
 	); err != nil {
 		t.Fatal(err)
 	}
+	fit, err := browser.FitBarsJS()
+	if err != nil {
+		t.Fatal(err)
+	}
 	base := map[fragment.Ref]map[string]bool{}
 	var lines []string
 	for _, c := range comps {
@@ -143,7 +142,7 @@ func composeFindings(t *testing.T, h *browser.Harness, styles, sprite string, fr
 				t.Fatalf("%s: %v", c.Host.Ref, err)
 			}
 			seen := map[string]bool{}
-			for _, l := range measureComposed(t, run, own) {
+			for _, l := range measureComposed(t, run, own, fit) {
 				seen[l] = true
 			}
 			base[c.Host.Ref] = seen
@@ -158,7 +157,7 @@ func composeFindings(t *testing.T, h *browser.Harness, styles, sprite string, fr
 			lines = append(lines, fmt.Sprintf("%s\t-\tsplice\t%v", c, err))
 			continue
 		}
-		for _, l := range measureComposed(t, run, composed) {
+		for _, l := range measureComposed(t, run, composed, fit) {
 			if !base[c.Host.Ref][l] {
 				lines = append(lines, c.String()+"\t"+l)
 			}
@@ -223,6 +222,10 @@ func shootCompositions(t *testing.T, h *browser.Harness, url string, frames map[
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		t.Fatal(err)
 	}
+	fit, err := browser.FitBarsJS()
+	if err != nil {
+		t.Fatal(err)
+	}
 	for _, c := range comps {
 		fr := frames[c.Host.Ref.Frame]
 		rendered, err := renderSafe(c.Fixture)
@@ -254,7 +257,7 @@ func shootCompositions(t *testing.T, h *browser.Harness, url string, frames map[
 				)
 				var buf []byte
 				if err == nil {
-					buf, err = shootFrame(run, string(raw), w)
+					buf, err = shootFrame(run, string(raw), w, fit)
 				}
 				cancel()
 				if err != nil {
@@ -307,9 +310,10 @@ func renderSafe(r refs.Renderer) (out string, err error) {
 	return r.Render(), nil
 }
 
-// measureComposed paints a frame at every width of the ladder and runs both
+// measureComposed paints a frame at every width of the ladder, folds its bars
+// as tc.js does (fit, FitBarsJS: a screen runs the script) and runs both
 // probes: one line a finding, «width<TAB>kind<TAB>what».
-func measureComposed(t *testing.T, run func(...chromedp.Action) error, frame string) []string {
+func measureComposed(t *testing.T, run func(...chromedp.Action) error, frame, fit string) []string {
 	t.Helper()
 	raw, err := json.Marshal(frame)
 	if err != nil {
@@ -321,6 +325,7 @@ func measureComposed(t *testing.T, run func(...chromedp.Action) error, frame str
 		var geo geometryProbe
 		if err := run(
 			chromedp.Evaluate(paintFrameJS(string(raw), w), nil),
+			chromedp.Evaluate(fit, nil),
 			chromedp.Sleep(20*time.Millisecond),
 			chromedp.Evaluate(browser.MockupLadderProbeJS, &ladder),
 			chromedp.Evaluate(browser.MockupGeometryProbeJS, &geo),

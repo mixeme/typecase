@@ -120,7 +120,8 @@ func TestFrameShotTargets(t *testing.T) {
 // A frame without @width is shot as drawn; the widths are the ladder's
 // (browser.MockupLadderWidths), though any number works. TC_FRAME_SHOTS_REV
 // shoots the mockup of a git revision instead of the working one, for a
-// picture of «before».
+// picture of «before». TC_FRAME_SHOTS_FIT=1 folds the bars first as tc.js
+// does on a page (browser.FitBarsJS), names the pictures «…-fit.png».
 func TestMockupFrameShots(t *testing.T) {
 	spec := os.Getenv("TC_FRAME_SHOTS")
 	if spec == "" {
@@ -161,6 +162,15 @@ func TestMockupFrameShots(t *testing.T) {
 	); err != nil {
 		t.Fatal(err)
 	}
+	var then []string
+	suffix := ""
+	if os.Getenv("TC_FRAME_SHOTS_FIT") != "" {
+		fit, err := browser.FitBarsJS()
+		if err != nil {
+			t.Fatal(err)
+		}
+		then, suffix = []string{fit}, "-fit"
+	}
 	seen := map[string]bool{}
 	for _, fr := range parts.Frames {
 		ws, ok := targets[fr.ID]
@@ -173,13 +183,13 @@ func TestMockupFrameShots(t *testing.T) {
 			t.Fatal(err)
 		}
 		for _, w := range ws {
-			buf, err := shootFrame(run, string(raw), w)
+			buf, err := shootFrame(run, string(raw), w, then...)
 			if err != nil {
 				t.Fatalf("%s @%d: %v", fr.ID, w, err)
 			}
-			name := fr.ID + ".png"
+			name := fr.ID + suffix + ".png"
 			if w > 0 {
-				name = fmt.Sprintf("%s@%d.png", fr.ID, w)
+				name = fmt.Sprintf("%s@%d%s.png", fr.ID, w, suffix)
 			}
 			path := filepath.Join(dir, name)
 			if err := os.WriteFile(path, buf, 0644); err != nil {
@@ -198,11 +208,17 @@ func TestMockupFrameShots(t *testing.T) {
 // shootFrame paints a frame (its markup as a JSON string) at width w (0: as
 // drawn) and returns the picture of the whole frame, the viewport grown to
 // hold it, up to 6000 px down.
-func shootFrame(run func(...chromedp.Action) error, raw string, w int) ([]byte, error) {
+func shootFrame(run func(...chromedp.Action) error, raw string, w int, then ...string) ([]byte, error) {
 	var buf []byte
-	err := run(
+	acts := []chromedp.Action{
 		chromedp.EmulateViewport(int64(browser.MockupShotViewport), int64(browser.MockupShotMaxHeight)),
 		chromedp.Evaluate(fmt.Sprintf(injectFrameJS, raw, w), nil),
+	}
+	// what runs on the painted frame before the picture: the bars' fold
+	for _, js := range then {
+		acts = append(acts, chromedp.Evaluate(js, nil))
+	}
+	err := run(append(acts,
 		chromedp.Sleep(50*time.Millisecond),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			var box browser.Rect
@@ -228,7 +244,7 @@ func shootFrame(run func(...chromedp.Action) error, raw string, w int) ([]byte, 
 			buf, err = cropPNG(png, math.Floor(box.X), math.Floor(box.Y), math.Ceil(box.Width), math.Min(math.Ceil(box.Height), float64(vh)), 1)
 			return err
 		}),
-	)
+	)...)
 	return buf, err
 }
 

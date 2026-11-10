@@ -178,6 +178,25 @@ do, not what the authors did.
 
 ### Added
 
+- **Bars fold by measure** (Р-4, the owner's decision of 10.11). With the
+  script, `tc.js` folds every `.tc-bar` and `.tc-docbar` by the room it
+  has, not by the container's width: it takes the CSS's steps in order —
+  the end's labels (a selection bar), the second rank and the folding
+  switch, the labels, the third rank — until the bar stands with every item
+  whole, a pick at its text, a button with its label, and in no more lines
+  than with all of them; where even that is not enough, what is left wraps
+  whole. A filter or a field counts at the width of its text (its value,
+  else its hint), never wider than the width rules leave it: the script
+  narrows a filter to its hint to show a second-rank item, and cuts none
+  more than the rules do. Any set of items a screen puts in a bar folds so: an item without
+  a rank, a range in a selection bar, a second edit bar no longer squeeze a
+  pick or run past the edge. The bar carries the steps taken in
+  `data-tc-fold`; the width rules stay for a page without a script and are
+  silent on a folded bar. Where there is room the script shows more than
+  the width rules did — the second rank, the labels; nothing to change in a
+  consumer. `TestBarFitMatchesFrames` folds the bars of every frame on
+  every width of the ladder and finds no probe of the ladder or the
+  geometry worse.
 - **The free composition check** (`TestFreeComposition`, the owner's thought
   of 14.10 on the constructor). `refs.Compositions` puts every part a slot
   takes into a place of that slot — 729 compositions in 98 slots, the part
@@ -185,10 +204,9 @@ do, not what the authors did.
   the host's frame; the ladder's and the geometry's probes measure it at
   every width, less what the frame shows with its own record.
   `TestCompositions` keeps the set without a browser; the bite puts back
-  the photo column of before. `compositionPending` holds 18 compositions of
-  five kinds that wait: a bar's item without a rank, a table in a narrow
-  box, the top bar's end and the phone, rows of other kinds side by side, a
-  link inside a row on the phone.
+  the photo column of before. `compositionPending` holds 15 compositions of
+  four kinds that wait: a table in a narrow box, the top bar's end and the
+  phone, rows of other kinds side by side, a link inside a row on the phone.
 - **A list is one stop of Tab** (the owner, 07.11). Of a list's rows only
   one takes the focus by Tab — the one that had it last, the open one, or the
   first — and the next Tab goes past the list; the rows' ticks are no stops

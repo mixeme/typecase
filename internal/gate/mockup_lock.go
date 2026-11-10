@@ -240,6 +240,18 @@ func checkMockupEmptyRules(html string) error {
 	return mockupLintErrs("empty-rules", errs, 8)
 }
 
+// scriptFolded says every selector of the list names a bar's state the
+// script sets: a fold step or the measure.
+func scriptFolded(list string) bool {
+	parts := splitSelectors(list)
+	for _, p := range parts {
+		if !strings.Contains(p, "[data-tc-fold") && !strings.Contains(p, "[data-tc-measure]") {
+			return false
+		}
+	}
+	return len(parts) > 0
+}
+
 func checkMockupDeadRules(html string) error {
 	product, _, err := mockupSplitCSS(html)
 	if err != nil {
@@ -258,6 +270,12 @@ func checkMockupDeadRules(html string) error {
 		// The body of a page of the library (package page): a frame holds no
 		// body, so this rule is seen on no frame by design.
 		if sel := strings.TrimSpace(r.Selector); sel == "body[data-tc-root]" || strings.HasPrefix(sel, "[data-tc-noscript] ") {
+			continue
+		}
+		// A bar as tc.js folds it by measure (data-tc-fold, data-tc-measure):
+		// the frames are drawn without the script, so no frame holds it; the
+		// browser's checks of the script see these rules at work.
+		if scriptFolded(r.Selector) {
 			continue
 		}
 		errs = append(errs, compactSel(r.Selector))

@@ -114,6 +114,7 @@
 | Неожиданные сдвиги против HEAD | `go test ./internal/browser -run '^TestMockupStrays$' -v -timeout 55m` |
 | Геометрия: строки под заголовком, ничто не выходит за блок и не сжато (~4 мин) | `go test ./internal/browser -run '^TestMockupGeometry$' -timeout 40m`; `TC_FRAMES=…` — только эти кадры, `TC_GEO_REPORT=путь` — список вместо отказа, `TC_GEO_REV=HEAD` — макет коммита |
 | Свободная сборка: каждая часть в каждом месте своего слота (~15 мин) | `go test ./internal/browser -run '^TestFreeComposition$' -timeout 55m`; `TC_COMPOSE=Rubric.,+Badge` — только эти, `TC_COMPOSE_CHUNK=1/2` — половина, `TC_COMPOSE_REPORT=путь` — список вместо отказа |
+| Бары со сценарием на кадрах (~1 мин) | `go test ./internal/browser -run '^TestBarFitMatchesFrames$'`; `TC_BARFIT_REPORT=путь` — чем сложенный сценарием бар отличается от кадра, `TC_BARFIT_DEBUG=кадр@ширина` — элементы бара на каждой ступени |
 | Снимок кадра | `TC_FRAME_SHOTS=s-dup-1@390,s-plan-2 TC_FRAME_SHOTS_DIR=… go test ./internal/browser -run TestMockupFrameShots -v` |
 | Снимок кадра на коммите | то же с `TC_FRAME_SHOTS_REV=HEAD` |
 | Что сдвинулось против коммита | `TC_FRAME_MOVES=HEAD~1 go test ./internal/browser -run TestMockupFrameMoves -v -timeout 30m` |
@@ -173,7 +174,14 @@
   кнопках, фраза в подсказке), иначе первое где угодно. Укус
   (`TestFreeCompositionBite`) возвращает прежнее правило колонки у фото и
   находит выход за форму. Ждущие сочетания — в `compositionPending`, по
-  роду и с причиной; список идёт к нулю.
+  роду и с причиной; список идёт к нулю. Бары кадра перед замером
+  складываются так, как сложит их `tc.js` (`browser.FitBarsJS` — кусок
+  `tc.js` между `tc-fit:start` и `tc-fit:end`): экран идёт со сценарием.
+- **Бары со сценарием** (`TestBarFitMatchesFrames`, 10.11, Р-4): бары
+  каждого кадра на каждой ступени лестницы складываются кусочком `tc.js`;
+  пробы лестницы и геометрии после него не находят ничего, чего не было
+  на кадре. Чем сложенный бар отличается от нарисованного (сценарий
+  показывает больше, где место есть), — `TC_BARFIT_REPORT`.
 - Перед коммитом прочитать вердикт проверок целиком, а не через обрезку
   вывода: однажды красная лестница спряталась за `tail`.
 

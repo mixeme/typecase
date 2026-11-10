@@ -171,7 +171,10 @@ func TestFramesBites(t *testing.T) {
 
 // longLabelsJS doubles the words of every button in the screen's bars, edit
 // bars and heads — labels longer than the frames draw — and lets tc.js lay
-// the bars out; it returns how many bars its safety caught.
+// the bars out; it returns how many bars took a step the CSS's widths did
+// not (data-tc-fold names more than the width rules fold there: it counts
+// the bars whose labels or more went, or that wrap) and how many its safety
+// caught.
 const longLabelsJS = `(() => {
   const root = document.querySelector("#screenhost > .frame > .tc-root");
   root.querySelectorAll(".tc-bar .tc-btn, .tc-docbar .tc-btn, .tc-head .tc-btn").forEach((b) => {
@@ -179,12 +182,19 @@ const longLabelsJS = `(() => {
     b.querySelectorAll(".tc-btn__label").forEach((l) => { l.textContent = l.textContent + " " + l.textContent; });
   });
   window.__tc.layoutUpdates();
-  return root.querySelectorAll("[data-tc-overflow]").length;
+  let folded = 0;
+  root.querySelectorAll("[data-tc-fold]").forEach((b) => {
+    const f = b.getAttribute("data-tc-fold");
+    if (/labels|3rd|wrap/.test(f)) folded++;
+  });
+  return [folded, root.querySelectorAll(".tc-bar[data-tc-overflow], .tc-docbar[data-tc-overflow]").length];
 })()`
 
-// TestFramesLongLabels: with labels longer than the frames
-// draw, the CSS cannot know their length; the safety of tc.js catches the
-// bars they overflow (at least somewhere), and nothing else scrolls sideways.
+// TestFramesLongLabels: with labels longer than the frames draw, the CSS's
+// widths cannot know their length; tc.js folds the bars by measure (Р-4,
+// 10.11) — somewhere their labels or more go — and no bar is left to the
+// safety's sideways scroll; nothing else scrolls sideways either (a head
+// keeps the safety).
 func TestFramesLongLabels(t *testing.T) {
 	needChrome(t)
 	_, run, done, frames := framesPage(t)
@@ -196,12 +206,12 @@ func TestFramesLongLabels(t *testing.T) {
 	if err := run(chromedp.Evaluate(string(js), nil)); err != nil {
 		t.Fatal(err)
 	}
-	caught := 0
+	folded := 0
 	for _, r := range screens.Routes {
 		fh := frames[r.Frame]
 		screen := r.Screen().Render()
 		for _, w := range browser.MockupLadderWidths {
-			var n int
+			var n [2]int
 			var bad []string
 			fj, _ := json.Marshal(fh)
 			sj, _ := json.Marshal(screen)
@@ -214,16 +224,19 @@ func TestFramesLongLabels(t *testing.T) {
 			if err != nil {
 				t.Fatalf("%s @%d: %v", r.Frame, w, err)
 			}
-			caught += n
+			folded += n[0]
+			if n[1] > 0 {
+				t.Errorf("%s @%d with long labels: %d bars folded whole still scroll sideways", r.Frame, w, n[1])
+			}
 			for _, b := range bad {
-				if strings.HasPrefix(b, "scrolls sideways: ") && !strings.Contains(b, "tc-bar") && !strings.Contains(b, "tc-docbar") && !strings.Contains(b, "tc-head") {
+				if strings.HasPrefix(b, "scrolls sideways: ") && !strings.Contains(b, "tc-head") {
 					t.Errorf("%s @%d with long labels: %s", r.Frame, w, b)
 				}
 			}
 		}
 	}
-	if caught == 0 {
-		t.Error("with long labels the safety never caught a bar")
+	if folded == 0 {
+		t.Error("with long labels no bar folded its labels or more")
 	}
 }
 
