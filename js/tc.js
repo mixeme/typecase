@@ -295,11 +295,14 @@
 	// puts in a bar folds so; without a script the CSS folds it by the
 	// widths measured for the mockup's own sets.
 	var foldSteps = ["", "end", "end 2nd", "end 2nd labels", "end 2nd labels 3rd"];
+	// The top bar folds so too (the owner, 10.11): its buttons' labels, then
+	// the search to its icon, as on a phone.
+	var topSteps = ["", "labels", "labels search"];
 
 	function barItems(el, out) {
 		for (var i = 0; i < el.children.length; i++) {
 			var k = el.children[i], cs = getComputedStyle(k);
-			if (cs.display === "contents") {
+			if (cs.display === "contents" || k.classList.contains("tc-top__actions")) {
 				barItems(k, out);
 				continue;
 			}
@@ -350,7 +353,7 @@
 	}
 
 	function textFields(bar) {
-		var held = [], fields = bar.querySelectorAll(":scope > .tc-in:not(.is-pick), :scope > .tc-search, :scope > .tc-barform > .tc-in:not(.is-pick)");
+		var held = [], fields = bar.querySelectorAll(":scope > .tc-in:not(.is-pick), :scope > .tc-search, :scope > .tc-top__search > .tc-search, :scope > .tc-barform > .tc-in:not(.is-pick)");
 		if (!fields.length) return held;
 		var fold = bar.getAttribute("data-tc-fold"), measure = bar.hasAttribute("data-tc-measure");
 		bar.removeAttribute("data-tc-fold");
@@ -359,6 +362,10 @@
 		fields.forEach(function (f) {
 			css.push(f.getBoundingClientRect().width);
 		});
+		// the search with its suggestions stands in a line of its own: the line holds
+		var item = function (f) {
+			return f.parentElement.classList.contains("tc-top__search") ? f.parentElement : f;
+		};
 		if (fold !== null) bar.setAttribute("data-tc-fold", fold);
 		if (measure) bar.setAttribute("data-tc-measure", "");
 		fields.forEach(function (f, k) {
@@ -367,30 +374,39 @@
 			var text = input.value || input.placeholder || "";
 			if (!text) return;
 			var cs = getComputedStyle(input);
+			// a search drawn as its icon (a phone's) shows no text to keep
+			if (cs.opacity === "0") return;
 			var need = f.getBoundingClientRect().width - input.clientWidth +
 				parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + Math.ceil(textWidth(text, cs)) + 2;
 			var max = parseFloat(getComputedStyle(f).maxWidth);
 			if (max > 0 && need > max) need = max;
-			if (need > css[k]) need = css[k];
-			held.push([f, f.style.minWidth]);
-			f.style.minWidth = need + "px";
+			// the top bar's search has no widths of the CSS to defer to
+			if (need > css[k] && !bar.classList.contains("tc-top")) need = css[k];
+			var box = item(f);
+			held.push([box, box.style.minWidth, box.style.flexBasis]);
+			box.style.minWidth = need + "px";
+			// the top bar's search stands 560 px wide by its basis: on the
+			// measure it takes its text's; a bar's filter keeps its basis — a
+			// bar that counts on a filter shrinking widens the page's column
+			if (bar.classList.contains("tc-top")) box.style.flexBasis = need + "px";
 		});
 		return held;
 	}
 
-	function fitBar(bar) {
+	function fitBar(bar, steps) {
 		if (!bar.getClientRects().length) return;
+		if (!steps || !steps.length) steps = foldSteps;
 		bar.setAttribute("data-tc-measure", "");
 		var held = textFields(bar);
-		var last = foldSteps.length - 1;
-		bar.setAttribute("data-tc-fold", foldSteps[last]);
-		var least = barLines(bar), fold = foldSteps[last];
+		var last = steps.length - 1;
+		bar.setAttribute("data-tc-fold", steps[last]);
+		var least = barLines(bar), fold = steps[last];
 		if (least > 0) {
 			for (var i = 0; i < last; i++) {
-				bar.setAttribute("data-tc-fold", foldSteps[i]);
+				bar.setAttribute("data-tc-fold", steps[i]);
 				var n = barLines(bar);
 				if (n > 0 && n <= least) {
-					fold = foldSteps[i];
+					fold = steps[i];
 					break;
 				}
 			}
@@ -402,6 +418,7 @@
 		bar.setAttribute("data-tc-fold", fold);
 		held.forEach(function (h) {
 			h[0].style.minWidth = h[1];
+			h[0].style.flexBasis = h[2];
 		});
 		bar.removeAttribute("data-tc-measure");
 	}
@@ -455,7 +472,12 @@
 	function layoutUpdates() {
 		document.querySelectorAll(".tc-shell").forEach(syncShell);
 		var n = 0;
-		document.querySelectorAll(".tc-bar, .tc-docbar").forEach(fitBar);
+		document.querySelectorAll(".tc-bar, .tc-docbar").forEach(function (b) {
+			fitBar(b);
+		});
+		document.querySelectorAll(".tc-top").forEach(function (t) {
+			fitBar(t, topSteps);
+		});
 		document.querySelectorAll("table.tc-table").forEach(fitTable);
 		document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel, .tc-drop__panel--right").forEach(fitMenu);
 		document.querySelectorAll(".tc-bar, .tc-docbar, .tc-head").forEach(function (b) {
@@ -1833,7 +1855,7 @@
 
 	function watch(root) {
 		if (!sizes) return;
-		root.querySelectorAll(".tc-shell, .tc-bar, .tc-docbar, .tc-head, table.tc-table").forEach(function (el) {
+		root.querySelectorAll(".tc-shell, .tc-top, .tc-bar, .tc-docbar, .tc-head, table.tc-table").forEach(function (el) {
 			sizes.observe(el);
 		});
 	}

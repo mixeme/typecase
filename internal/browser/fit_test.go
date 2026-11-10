@@ -14,11 +14,11 @@ import (
 	"carrel.dev/typecase/internal/gate"
 )
 
-// barStateJS lists every element of every bar in the painted frame with
+// barStateJS lists every element of every bar and top bar in the painted frame with
 // whether it shows and how wide: «bar.element class width», «-» for hidden.
 const barStateJS = `(() => {
   const out = [];
-  document.querySelectorAll("#host .tc-bar, #host .tc-docbar").forEach((bar, b) => {
+  document.querySelectorAll("#host .tc-bar, #host .tc-docbar, #host .tc-top").forEach((bar, b) => {
     bar.querySelectorAll("*").forEach((el, i) => {
       const shown = el.checkVisibility ? el.checkVisibility() : el.getClientRects().length > 0;
       let c = el.getAttribute("class") || el.tagName.toLowerCase();

@@ -1111,6 +1111,15 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-docbar[data-tc-fold~="3rd"]:has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
 :is(.tc-bar:not(.tc-bar--wide),.tc-docbar)[data-tc-fold]:not([data-tc-fold~="3rd"]) .tc-menu .is-3rd{display:none}
 :is(.tc-bar,.tc-docbar)[data-tc-fold~="wrap"]{flex-wrap:wrap}
+/* Верхняя полоса со сценарием (владелец 10.11: как бары): labels — кнопки действий значками; search — поиск значком,
+   как на телефоне (нажатие открывает поиск), пока в нём нет запроса; wrap — оставшееся переносится. Правила телефона
+   весомее (:where): на нём кнопка-значок остаётся квадратом 38 px. */
+.tc-top[data-tc-measure] > *,.tc-top[data-tc-measure] > .tc-top__actions > *{flex-shrink:0}
+:where(.tc-top[data-tc-fold~="labels"] .tc-top__actions) .tc-btn:has(> svg){font-size:0;gap:2px;padding-left:8px;padding-right:8px}
+.tc-top[data-tc-fold~="search"] .tc-top__search{flex:none}
+.tc-top[data-tc-fold~="search"] .tc-search:not(:has(> svg + svg)){flex:none;width:28px;padding:0;gap:0;justify-content:center;position:relative}
+.tc-top[data-tc-fold~="search"] .tc-search:not(:has(> svg + svg)) .tc-q{position:absolute;inset:0;opacity:0;width:auto;height:auto;padding:0;border:0}
+.tc-top[data-tc-fold~="wrap"]{flex-wrap:wrap;height:auto;row-gap:8px;padding-top:8px;padding-bottom:8px}
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){
   .tc-shell__body,.tc-shell__body.tc-shell__body--side{
@@ -1786,7 +1795,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-drop__panel.tc-drop__panel{position:absolute;top:calc(100% + 5px);left:0;z-index:2}
 
 .tc-top__search.tc-top__search{position:relative;min-width:0;flex:0 1 560px}
-.tc-top__suggest.tc-top__suggest{position:absolute;top:calc(100% + 5px);left:0;z-index:3;width:100%}
+/* Подсказки поиска не уже своих строк (до 360 px): поиск, сжатый до своей подсказки, сжимал бы и их (свободная сборка 10.11). */
+.tc-top__suggest.tc-top__suggest{position:absolute;top:calc(100% + 5px);left:0;z-index:3;width:100%;min-width:min(max-content,360px)}
 .tc-dim--ls0.tc-dim--ls0{letter-spacing:0}
 .tc-plain.tc-plain{text-transform:none;letter-spacing:0;font-weight:400;color:var(--tc-dusty)}
 .tc-drop__panel--right.tc-drop__panel--right{position:absolute;top:calc(100% + 5px);right:0;z-index:2}

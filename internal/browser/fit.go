@@ -29,7 +29,8 @@ func FitJS() (string, error) {
 	}
 	return `(() => {` + body + `
 	var bars = document.querySelectorAll(".tc-bar, .tc-docbar");
-	bars.forEach(fitBar);
+	bars.forEach(function (b) { fitBar(b); });
+	document.querySelectorAll(".tc-top").forEach(function (t) { fitBar(t, topSteps); });
 	var tables = document.querySelectorAll("table.tc-table");
 	tables.forEach(fitTable);
 	document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel, .tc-drop__panel--right").forEach(fitMenu);

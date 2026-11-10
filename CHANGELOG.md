@@ -178,6 +178,13 @@ do, not what the authors did.
 
 ### Added
 
+- **The top bar folds by measure** (the owner's decision of 10.11: as the
+  bars). With the script, `tc.js` folds `.tc-top` by its room: its action
+  buttons lose their labels, then the search becomes its icon (while it
+  holds no query); what does not stand even then wraps. The search counts
+  at the width of its hint; its suggestions are never narrower than their
+  rows (up to 360 px). A button more no longer squeezes the search or runs
+  past the edge on a phone. No frame's top bar folds.
 - **A table its box cannot hold is cards** (Р-66, the owner's decision of
   10.11). With the script, `tc.js` turns a table with a main column into
   cards — name and «⋯», the main column under them — at any width where the
@@ -212,9 +219,9 @@ do, not what the authors did.
   the host's frame; the ladder's and the geometry's probes measure it at
   every width, less what the frame shows with its own record.
   `TestCompositions` keeps the set without a browser; the bite puts back
-  the photo column of before. `compositionPending` holds 11 compositions of
-  three kinds that wait: the top bar's end and the phone, rows of other
-  kinds side by side, a second target inside a row on the phone.
+  the photo column of before. `compositionPending` holds 8 compositions of
+  two kinds that wait: rows of other kinds side by side, a second target
+  inside a row on the phone.
 - **A list is one stop of Tab** (the owner, 07.11). Of a list's rows only
   one takes the focus by Tab — the one that had it last, the open one, or the
   first — and the next Tab goes past the list; the rows' ticks are no stops
