@@ -215,7 +215,8 @@ do, not what the authors did.
 - **The free composition check** (`TestFreeComposition`, the owner's thought
   of 14.10 on the constructor). `refs.Compositions` puts every part a slot
   takes into a place of that slot — 729 compositions in 98 slots, the part
-  as it stands in a slot of that kind — and `fragment.Splice` paints it in
+  as it stands in a slot of that kind and not what its place holds already,
+  by value or by words — and `fragment.Splice` paints it in
   the host's frame; the ladder's and the geometry's probes measure it at
   every width, less what the frame shows with its own record.
   `TestCompositions` keeps the set without a browser; the bite puts back

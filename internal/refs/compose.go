@@ -3,7 +3,9 @@ package refs
 import (
 	"fmt"
 	"reflect"
+	"regexp"
 	"sort"
+	"strings"
 )
 
 // Composition is one part put into one slot of one container: the free
@@ -32,7 +34,8 @@ func (c Composition) String() string {
 
 // Compositions returns one composition for each container type, slot and
 // part type the records reach: the part — the first value of its type the
-// records hold in a slot of the same interface, else anywhere — goes into the first place in record order whose slot does
+// records hold in a slot of the same interface and its place does not hold
+// already, else anywhere — goes into the first place in record order whose slot does
 // not hold that type yet and holds something (a list of one more), else the
 // first place at all. skip leaves hosts out (a frame that waits).
 func Compositions(skip func(Entry) bool) []Composition {
@@ -48,8 +51,10 @@ func Compositions(skip func(Entry) bool) []Composition {
 		gather(reflect.ValueOf(e.Fixture), samples)
 	}
 	// a part as it stands in a slot of this kind: a Text in a push is a word
-	// or two, in a hint a sentence
-	inSlot := map[[2]reflect.Type]reflect.Value{}
+	// or two, in a hint a sentence; the first few, so that the part put in
+	// can differ from what its place holds (a second «New note» beside the
+	// first read as a fault of the screen, the owner 10.11)
+	inSlot := map[[2]reflect.Type][]reflect.Value{}
 	type key struct {
 		owner, slot reflect.Type
 		part        reflect.Type
@@ -90,8 +95,8 @@ func Compositions(skip func(Entry) bool) []Composition {
 					if slot != nil {
 						for _, h := range heldValues(fv) {
 							k := [2]reflect.Type{slot, h.Type()}
-							if _, ok := inSlot[k]; !ok {
-								inSlot[k] = h
+							if len(inSlot[k]) < 8 && !holds(inSlot[k], h) {
+								inSlot[k] = append(inSlot[k], h)
 							}
 						}
 						for _, pt := range types {
@@ -130,16 +135,29 @@ func Compositions(skip func(Entry) bool) []Composition {
 	var out []Composition
 	for _, k := range order {
 		p := best[k]
-		sample, ok := inSlot[[2]reflect.Type{k.slot, k.part}]
-		if !ok {
-			sample, ok = samples[k.part]
-		}
-		if !ok {
-			sample = made(k.part)
-		}
 		host := Entries[p.entry]
 		fixture := rebuild(reflect.ValueOf(host.Fixture), p.path, func(owner reflect.Value) {
 			f := owner.Field(p.field)
+			// the first sample its place does not hold already
+			var sample reflect.Value
+			here := heldValues(f)
+			for _, c := range inSlot[[2]reflect.Type{k.slot, k.part}] {
+				if !holds(here, c) {
+					sample = c
+					break
+				}
+			}
+			if !sample.IsValid() {
+				if v, ok := samples[k.part]; ok && !holds(here, v) {
+					sample = v
+				} else if cs := inSlot[[2]reflect.Type{k.slot, k.part}]; len(cs) > 0 {
+					sample = cs[0]
+				} else if ok {
+					sample = v
+				} else {
+					sample = made(k.part)
+				}
+			}
 			part := rebuild(sample, nil, nil)
 			if f.Kind() == reflect.Slice {
 				f.Set(reflect.Append(f, part))
@@ -167,6 +185,43 @@ func Compositions(skip func(Entry) bool) []Composition {
 		return a.Part < b.Part
 	})
 	return out
+}
+
+// holds says whether one of vs equals v, or says the same words: a drop
+// whose button reads «New note» beside a «New note» button is the same
+// action twice.
+func holds(vs []reflect.Value, v reflect.Value) bool {
+	w := words(v)
+	for _, x := range vs {
+		if x.Type() == v.Type() && reflect.DeepEqual(x.Interface(), v.Interface()) {
+			return true
+		}
+		if w != "" && words(x) == w {
+			return true
+		}
+	}
+	return false
+}
+
+var markup = regexp.MustCompile(`<[^>]*>`)
+
+// words is what a part prints to read, its first words: "" for one that
+// prints none or does not print by itself.
+func words(v reflect.Value) string {
+	r, ok := v.Interface().(Renderer)
+	if !ok {
+		return ""
+	}
+	var out string
+	func() {
+		defer func() { _ = recover() }()
+		out = r.Render()
+	}()
+	f := strings.Fields(markup.ReplaceAllString(out, " "))
+	if len(f) > 3 {
+		f = f[:3]
+	}
+	return strings.Join(f, " ")
 }
 
 // slotOf says whether a field is a slot — an interface with an unexported
