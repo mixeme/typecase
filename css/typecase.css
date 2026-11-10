@@ -613,6 +613,10 @@ label.tc-tree__row{cursor:pointer}
    Витрины раздела 6 — исключение: там меню и есть предмет. */
 .tc-menu.is-pop{position:absolute;top:100%;left:0;margin-top:4px;z-index:3}
 .tc-menu.is-pop.is-right{left:auto;right:0}
+/* Открытое меню стоит там, где есть место (свободная сборка 10.11): то, что ушло бы за край страницы,
+   tc.js поворачивает к другому краю кнопки — data-tc-side. */
+.tc-menu.is-pop[data-tc-side="end"]{left:auto;right:0}
+.tc-menu.is-pop[data-tc-side="start"]{left:0;right:auto}
 /* Кнопка и меню — .tc-drop, везде один: меню встаёт краем к краю кнопки, на 4 px ниже. */
 .tc-drop{position:relative;display:inline-flex}
 /* Отметка полосы формой (Compact rows): форма не рисуется; Apply — только пока страница без сценария (data-tc-noscript снимает tc.js). */
@@ -1786,6 +1790,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dim--ls0.tc-dim--ls0{letter-spacing:0}
 .tc-plain.tc-plain{text-transform:none;letter-spacing:0;font-weight:400;color:var(--tc-dusty)}
 .tc-drop__panel--right.tc-drop__panel--right{position:absolute;top:calc(100% + 5px);right:0;z-index:2}
+:is(.tc-drop__panel,.tc-drop__panel--right)[data-tc-side="end"]{left:auto;right:0}
+:is(.tc-drop__panel,.tc-drop__panel--right)[data-tc-side="start"]{left:0;right:auto}
 .tc-menu__item-indent.tc-menu__item-indent{padding-left:23px}
 .tc-field__swatches.tc-field__swatches{height:22px}
 .tc-field__swatch.tc-field__swatch{height:17px;border-radius:50%;width:17px}

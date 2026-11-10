@@ -8,8 +8,8 @@ import (
 )
 
 // FitJS is the part of tc.js that fits by measure (between its tc-fit:start
-// and tc-fit:end marks): it folds every bar and turns every table its box
-// cannot hold into cards — what a page with the script shows, on a frame
+// and tc-fit:end marks): it folds every bar, turns every table its box
+// cannot hold into cards and an open menu to the side where it has room — what a page with the script shows, on a frame
 // painted without it. The frames draw their drops open and the rest of tc.js
 // would close them; this takes the fit alone. It returns the number of bars
 // and tables.
@@ -32,6 +32,7 @@ func FitJS() (string, error) {
 	bars.forEach(fitBar);
 	var tables = document.querySelectorAll("table.tc-table");
 	tables.forEach(fitTable);
+	document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel, .tc-drop__panel--right").forEach(fitMenu);
 	return bars.length + tables.length;
 })()`, nil
 }

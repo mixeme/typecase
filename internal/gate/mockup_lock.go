@@ -245,7 +245,7 @@ func checkMockupEmptyRules(html string) error {
 func scriptFolded(list string) bool {
 	parts := splitSelectors(list)
 	for _, p := range parts {
-		if !strings.Contains(p, "[data-tc-fold") && !strings.Contains(p, "[data-tc-measure]") && !strings.Contains(p, "[data-tc-cards]") {
+		if !strings.Contains(p, "[data-tc-fold") && !strings.Contains(p, "[data-tc-measure]") && !strings.Contains(p, "[data-tc-cards]") && !strings.Contains(p, "[data-tc-side=") {
 			return false
 		}
 	}
@@ -273,7 +273,8 @@ func checkMockupDeadRules(html string) error {
 			continue
 		}
 		// A bar as tc.js folds it by measure (data-tc-fold, data-tc-measure),
-		// a table it turns into cards (data-tc-cards): the frames are drawn
+		// a table it turns into cards (data-tc-cards), a menu it turns to
+		// the side with room (data-tc-side): the frames are drawn
 		// without the script, so no frame holds them; the browser's checks of
 		// the script see these rules at work.
 		if scriptFolded(r.Selector) {

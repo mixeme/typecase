@@ -2601,6 +2601,11 @@ do, not what the authors did.
 
 ### Fixed
 
+- **An open menu stands where there is room** (free composition, 10.11): a
+  popup menu or a top drop's panel that would run past the page's edge
+  turns to the other side of its button (`data-tc-side`, set by `tc.js` when
+  it opens and on resize). A drop at the top bar's end opened 105 px past
+  the edge, the account menu 3 px.
 - **A table in a sheet, a field set and a cell's wrap** (free composition,
   10.11): a table right in a sheet's body takes no first and last padding
   of its own, as in a dialog or a card, and its cards none either; a form

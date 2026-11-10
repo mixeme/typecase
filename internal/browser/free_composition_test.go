@@ -23,11 +23,10 @@ import (
 // not failed. The key is the composition as Composition.String prints it,
 // without the host: «Owner.Slot+Part».
 var compositionPending = map[string]string{
-	// the top bar: a drop at its end opens past the edge, a button more is cut on the phone
-	"Top.TopAction+TopDrop":           topBar,
-	"TopDrop.TopDropTrigger+UserMenu": topBar,
-	"Top.TopAction+Button":            topBar,
-	"TopDrop.TopDropTrigger+Button":   topBar,
+	// the top bar with a button more: the search squeezed, the end cut on the phone
+	"Top.TopAction+TopDrop":         topBar,
+	"Top.TopAction+Button":          topBar,
+	"TopDrop.TopDropTrigger+Button": topBar,
 	// rows of another kind, or a rubric with another gutter at 640
 	"List.ListRow+LinkedRow": rowKinds,
 	"Main.MainPart+List":     rowKinds,
@@ -43,7 +42,7 @@ var compositionPending = map[string]string{
 }
 
 const (
-	topBar    = "free composition 10.11: the top bar's end and the phone"
+	topBar    = "free composition 10.11: the top bar holds no more than it is drawn with"
 	rowKinds  = "free composition 10.11: rows of different kinds side by side, gutters at 640"
 	linkInRow = "free composition 10.11: a second target inside a row on the phone"
 )

@@ -193,6 +193,7 @@
 		else show(pop);
 		trigger.setAttribute("aria-expanded", "true");
 		openTrigger = trigger;
+		if (pop.classList.contains("tc-menu") && pop.classList.contains("is-pop")) fitMenu(pop);
 	}
 
 	function addTag(field, item) {
@@ -423,6 +424,18 @@
 		if (getComputedStyle(t).display === "block") return;
 		if (tableCramped(t)) t.setAttribute("data-tc-cards", "");
 	}
+	// An open menu stands where there is room (free composition, 10.11): one
+	// that would run past the page's edge turns to the other side of its
+	// button — under its end, or under its start; so does a top drop's panel.
+	function fitMenu(m) {
+		m.removeAttribute("data-tc-side");
+		if (!m.getClientRects().length) return;
+		var root = m.closest(".tc-root");
+		var edge = root ? root.getBoundingClientRect() : { left: 0, right: document.documentElement.clientWidth };
+		var r = m.getBoundingClientRect();
+		if (r.right > edge.right + 1) m.setAttribute("data-tc-side", "end");
+		else if (r.left < edge.left - 1) m.setAttribute("data-tc-side", "start");
+	}
 	// tc-fit:end
 
 	// A bar that does not fit even folded whole the script marks and lets
@@ -444,6 +457,7 @@
 		var n = 0;
 		document.querySelectorAll(".tc-bar, .tc-docbar").forEach(fitBar);
 		document.querySelectorAll("table.tc-table").forEach(fitTable);
+		document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel, .tc-drop__panel--right").forEach(fitMenu);
 		document.querySelectorAll(".tc-bar, .tc-docbar, .tc-head").forEach(function (b) {
 			if (checkBar(b)) n++;
 		});
