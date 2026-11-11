@@ -600,6 +600,12 @@ func (g *gen) top2(e *El) string {
 			if panel.Has("tc-drop__panel--right") {
 				s += ", End: true"
 			}
+			if k.Has("tc-top__more") {
+				s += ", More: true"
+			}
+			if k.Has("is-2nd") {
+				s += ", Secondary: true"
+			}
 			acts = append(acts, s+"}")
 		} else {
 			acts = append(acts, g.child(k))

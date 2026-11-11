@@ -296,8 +296,9 @@
 	// widths measured for the mockup's own sets.
 	var foldSteps = ["", "end", "end 2nd", "end 2nd labels", "end 2nd labels 3rd"];
 	// The top bar folds so too (the owner, 10.11): its buttons' labels, then
-	// the search to its icon, as on a phone.
-	var topSteps = ["", "labels", "labels search"];
+	// the search to its icon, as on a phone, then its second rank under its
+	// «⋯» (11.11).
+	var topSteps = ["", "labels", "labels search", "labels search 2nd"];
 
 	function barItems(el, out) {
 		for (var i = 0; i < el.children.length; i++) {

@@ -178,6 +178,14 @@ do, not what the authors did.
 
 ### Added
 
+- **The top bar's «⋯»** (the owner, 11.11; accepted on 11.11). `TopDrop.More` is the top bar's
+  «⋯»: it stands only while an action of the second rank is folded under
+  it, and its menu holds their twins; `Button.Secondary` and the new
+  `TopDrop.Secondary` give a top bar's action the second rank. With the
+  script it is the top bar's last fold step, after the labels and the
+  search; without one the second rank goes under «⋯» on a phone. Frame
+  components-44, an example: no Carrel screen ranks its top bar's actions
+  yet.
 - **The top bar folds by measure** (the owner's decision of 10.11: as the
   bars). With the script, `tc.js` folds `.tc-top` by its room: its action
   buttons lose their labels, then the search becomes its icon (while it

@@ -759,6 +759,9 @@ var _ = add(
 		w.SecList{Items: [][]w.SecItemPart{[]w.SecItemPart{w.Span{Face: w.FaceAccent, Text: "Заметка со встречи 10.08"}, w.Text(" "), w.Dim{Parts: []w.Inline{w.Text("· note")}}}}}}}}, Variant: w.SideDrop}, "s-io-2", "tc-side", 1),
 
 	// tc-shell
+	shell("bare", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh", Secondary: true}, w.TopDrop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "refresh", Detail: &w.Mono{Text: "2 min ago", Variant: w.Mono11Dusty}, Label: "Refresh"}}}, End: true, More: true}, w.UserMenu{Name: "mix"}}}, Body: w.ShellBody{Main: w.Main{Items: []w.MainPart{
+		w.Empty{Parts: []w.EmptyPart{w.Text("Connect an account to see calendars, address books and notebooks.")}}}}, Height: w.ShellHeight340}}, "components-44", "tc-shell", 1),
 	shell("plain", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "back", Label: "Back to the card", Href: "#"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},

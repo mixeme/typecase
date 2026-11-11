@@ -27,6 +27,13 @@ type TopDrop struct {
 	Menu    Menu
 	End     bool // the menu is aligned to the button's end: the last button of the bar
 	Open    bool // drawn open; closed, the menu waits hidden for its button
+	// More is the top bar's «⋯» (the owner's decision of 11.11): it stands
+	// only while an action of the second rank (Button.Secondary,
+	// TopDrop.Secondary) is folded under it, and its menu holds their twins.
+	More bool
+	// Secondary is the second rank: the drop goes under «⋯» when the bar
+	// has no room for it.
+	Secondary bool
 }
 
 func (d TopDrop) html(mix) string {
@@ -34,12 +41,13 @@ func (d TopDrop) html(mix) string {
 	if d.End {
 		panel = "tc-drop__panel--right"
 	}
+	anchor := class(nil, "tc-drop__anchor", pick(d.More, "tc-top__more"), rank(d.Secondary))
 	if !d.Open {
 		if sum, ok := summaryOf(d.Trigger.html(nil)); ok {
-			return `<details class="tc-drop__anchor">` + sum + `<span class="` + panel + `">` + d.Menu.html(nil) + `</span></details>`
+			return `<details` + anchor + `>` + sum + `<span class="` + panel + `">` + d.Menu.html(nil) + `</span></details>`
 		}
 	}
-	return `<span class="tc-drop__anchor">` + d.Trigger.html(nil) + `<span class="` + panel + `"` + flag("hidden", !d.Open) + `>` + d.Menu.html(nil) + `</span></span>`
+	return `<span` + anchor + `>` + d.Trigger.html(nil) + `<span class="` + panel + `"` + flag("hidden", !d.Open) + `>` + d.Menu.html(nil) + `</span></span>`
 }
 
 // Top — tc-top
@@ -48,9 +56,9 @@ func (d TopDrop) html(mix) string {
 // Вход. Top{Lead, Brand, Search, Suggest, Actions, Tight, Zone, Target}.
 // Состояния. plain | phone | suggest | drop.
 // Инварианты. Знак — один и первый, после кнопки рейла на телефоне; действия — в конце полосы; полоса печатает фрагмент своего кадра.
-// Поведение. Со сценарием полоса складывается по месту, как бары (Р-4): кнопки действий — значками, затем поиск — значком, пока в нём нет запроса; что не встало и после этого — переносится. Остальное поведение — у поиска, кнопок и меню учётной записи.
+// Поведение. Со сценарием полоса складывается по месту, как бары (Р-4): кнопки действий — значками, затем поиск — значком, пока в нём нет запроса, затем второй ранг — под «⋯» (без сценария — на телефоне); что не встало и после этого — переносится. Остальное поведение — у поиска, кнопок и меню учётной записи.
 // Эталон. кадр `shell-1`, фрагмент `.tc-top`.
-// Содержимое. Кнопка рейла (телефон), знак или название раздела, поиск с подсказками под ним, кнопки, кнопки с меню, меню учётной записи.
+// Содержимое. Кнопка рейла (телефон), знак или название раздела, поиск с подсказками под ним, кнопки, кнопки с меню, меню учётной записи; «⋯» (`TopDrop{More: true}`) с двойниками действий второго ранга (`Button.Secondary`, `TopDrop.Secondary`).
 // Чего нет. Навигации по разделам: она в рейле.
 type Top struct {
 	Lead    *Button // on a phone: the button that opens the rail

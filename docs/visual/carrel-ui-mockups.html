@@ -240,6 +240,8 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-search{flex:0 1 560px;width:560px;display:flex;align-items:center;gap:7px;height:28px;padding:0 9px;
   background:var(--tc-bg);border:.5px solid var(--tc-edge);border-radius:3px;color:var(--tc-dusty);font-size:12.5px}
 .tc-top__actions{flex:1 1 0;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+/* «⋯» верхней полосы (владелец 11.11): стоит, только пока под ним действие второго ранга (is-2nd); меню держит его двойника. */
+.tc-top__more{display:none}
 .tc-usermenu{display:flex;align-items:center;gap:7px;padding:0 2px 0 10px;font-size:12.5px;color:var(--tc-muted)}
 .tc-usermenu .tc-avatar{width:22px;height:22px;font-size:9.5px}
 /* каркас */
@@ -1177,6 +1179,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:where(:not([data-tc-fold])) > .is-3rd,:where(:not([data-tc-fold])) > .tc-bar__right > .is-3rd,.tc-docbar:where(:not([data-tc-fold])) > .is-3rd{display:none}
   /* шапка карточки: третий ранг (Print) уходит под её «⋯» */
   .tc-head .tc-acts > .is-3rd{display:none}
+  /* верхняя полоса без сценария: второй ранг уходит под её «⋯» на телефоне */
+  .tc-top:where(:not([data-tc-fold])) .tc-top__actions > .is-2nd{display:none}
+  .tc-top:where(:not([data-tc-fold])):has(.tc-top__actions > .is-2nd) .tc-top__more{display:inline-block}
   .tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-bar__more,.tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-drop:has(> .tc-bar__more),
   .tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
@@ -1293,7 +1298,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 :is(.tc-bar:not(.tc-bar--wide),.tc-docbar)[data-tc-fold]:not([data-tc-fold~="3rd"]) .tc-menu .is-3rd{display:none}
 :is(.tc-bar,.tc-docbar)[data-tc-fold~="wrap"]{flex-wrap:wrap}
 /* Верхняя полоса со сценарием (владелец 10.11: как бары): labels — кнопки действий значками; search — поиск значком,
-   как на телефоне (нажатие открывает поиск), пока в нём нет запроса; wrap — оставшееся переносится. Правила телефона
+   как на телефоне (нажатие открывает поиск), пока в нём нет запроса; 2nd — второй ранг под «⋯» (11.11); wrap —
+   оставшееся переносится. Правила телефона
    весомее (:where): на нём кнопка-значок остаётся квадратом 38 px. */
 .tc-top[data-tc-measure] > *,.tc-top[data-tc-measure] > .tc-top__actions > *{flex-shrink:0}
 :where(.tc-top[data-tc-fold~="labels"] .tc-top__actions) .tc-btn:has(> svg){font-size:0;gap:2px;padding-left:8px;padding-right:8px}
@@ -1301,6 +1307,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-top[data-tc-fold~="search"] .tc-search:not(:has(> svg + svg)){flex:none;width:28px;padding:0;gap:0;justify-content:center;position:relative}
 .tc-top[data-tc-fold~="search"] .tc-search:not(:has(> svg + svg)) .tc-q{position:absolute;inset:0;opacity:0;width:auto;height:auto;padding:0;border:0}
 .tc-top[data-tc-fold~="wrap"]{flex-wrap:wrap;height:auto;row-gap:8px;padding-top:8px;padding-bottom:8px}
+.tc-top[data-tc-fold~="2nd"] .tc-top__actions > .is-2nd{display:none}
+.tc-top[data-tc-fold~="2nd"]:has(.tc-top__actions > .is-2nd) .tc-top__more{display:inline-block}
 /* Рейл из значков: 641–1007. Источники уходят в выезжающую панель. */
 @container tcbox (min-width:641px) and (max-width:1007px){
   .tc-shell__body,.tc-shell__body.tc-shell__body--side{
@@ -3050,6 +3058,30 @@ label.tc-field__swatch{position:relative;cursor:pointer}
   </div>
 </div>
 <figcaption><b>Всё, что нажимают, куда-то ведёт или что-то отправляет</b> (задача сервера 39). Поиск и фильтр — формы GET с именем строки запроса. Кнопка учётной записи без сценария — ссылка на учётную запись (со сценарием открывает меню). Галка источника рейла и галка задачи отправляют сразу — кнопками формы POST по имени. Галка группы («Combined calendar», корень источника) — такая же кнопка: отправляет «все» или «ни одного», галки под ней ставит ответ сервера (владелец 07.11). С живым слоем форма рейла спрашивает зону рейла: ответ ставит на место рейл и список, страница не грузится; галки строк таблицы — флажки формы группового действия. Слова цветом ссылки — ссылка. «Sign in» стоит под полями, вне формы, и отправляет её по имени; Enter в поле делает то же. Ссылки под кнопкой входа ведут на свои адреса. Заголовок меню — строка, не кнопка.</figcaption>
+</figure>
+
+<figure>
+<div class="frame w392" data-frame="components-44">
+  <div class="frame-label"><span>Верхняя полоса · действие второго ранга под «⋯»</span><span class="frag">компонент</span><i>пример формы · 390 px</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>
+        <button class="tc-btn is-2nd" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <span class="tc-drop__anchor tc-top__more"><button class="tc-btn" type="button" title="More" aria-label="More"><svg viewBox="0 0 24 24"><use href="#i-dots"/></svg></button><span class="tc-drop__panel--right"><div class="tc-menu" role="menu"><button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-refresh"/></svg>Refresh<span class="tc-mono tc-mono--t11-dusty">2 min ago</span></button></div></span></span>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body tc-shell__body--no-rail tc-shell__body--minh340">
+      <div class="tc-main">
+        <div class="tc-empty">Connect an account to see calendars, address books and notebooks.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<figcaption><b>Пример формы, не экран Carrel:</b> ни один экран пока не ставит действиям верхней полосы ранг. Действие второго ранга (здесь — обновление) уходит под «⋯», когда полосе не хватает места: со сценарием — после того, как кнопки стали значками и поиск — значком; без сценария — на телефоне. «⋯» стоит, только пока под ним что-то есть, и его меню держит двойника ушедшего действия.</figcaption>
 </figure>
 
 
