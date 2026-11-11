@@ -1144,6 +1144,13 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Search suggestions as wide as their rows** (frames s-find-2 and s-find-3
+  at 641; the owner, 11.11). Under a narrow search the suggestions took its
+  width and their lines broke in two; now they take their rows' width, up
+  to 360 px, never less than the search; on a phone they stay the full
+  width. The rule of 10.11 meant for this was not valid CSS and the
+  browser dropped it.
+
 - **Inner padding on the gutters and the steps** (the owner, 09.11). At
   the sides nothing moves: the 14 and 20 px were the gutters already.
   Above and below: 11 and 14 become 12, 6 and 10 become 8, a field's checks

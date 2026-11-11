@@ -321,7 +321,7 @@ var _ = add(
 
 	// tc-top
 	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top", 1),
-	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "More"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "More"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "More"}}, Tight: true}, "phone-1", "tc-top", 1),
+	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "More"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search everything"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "New note"}}, Tight: true}, "phone-1", "tc-top", 1),
 )
 
 func init() {

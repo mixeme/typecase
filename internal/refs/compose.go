@@ -47,8 +47,10 @@ func Compositions(skip func(Entry) bool) []Composition {
 		types = append(types, reflect.TypeOf(p))
 	}
 	samples := map[reflect.Type]reflect.Value{}
+	anywhere := map[reflect.Type][]reflect.Value{}
 	for _, e := range Entries {
 		gather(reflect.ValueOf(e.Fixture), samples)
+		gatherSome(reflect.ValueOf(e.Fixture), anywhere)
 	}
 	// a part as it stands in a slot of this kind: a Text in a push is a word
 	// or two, in a hint a sentence; the first few, so that the part put in
@@ -136,23 +138,32 @@ func Compositions(skip func(Entry) bool) []Composition {
 	for _, k := range order {
 		p := best[k]
 		host := Entries[p.entry]
+		shown := host.Fixture.Render()
 		fixture := rebuild(reflect.ValueOf(host.Fixture), p.path, func(owner reflect.Value) {
 			f := owner.Field(p.field)
-			// the first sample its place does not hold already
+			// the first sample its place does not hold already and the host
+			// does not show — a part from a slot of this kind, else from any
 			var sample reflect.Value
 			here := heldValues(f)
-			for _, c := range inSlot[[2]reflect.Type{k.slot, k.part}] {
-				if !holds(here, c) {
-					sample = c
-					break
+			fresh := func(c reflect.Value) bool { return !holds(here, c) && !repeats(shown, c) }
+			for _, cs := range [][]reflect.Value{inSlot[[2]reflect.Type{k.slot, k.part}], anywhere[k.part]} {
+				for _, c := range cs {
+					if !sample.IsValid() && fresh(c) {
+						sample = c
+					}
 				}
 			}
 			if !sample.IsValid() {
-				if v, ok := samples[k.part]; ok && !holds(here, v) {
-					sample = v
-				} else if cs := inSlot[[2]reflect.Type{k.slot, k.part}]; len(cs) > 0 {
-					sample = cs[0]
-				} else if ok {
+				for _, cs := range [][]reflect.Value{inSlot[[2]reflect.Type{k.slot, k.part}], anywhere[k.part]} {
+					for _, c := range cs {
+						if !sample.IsValid() && !holds(here, c) {
+							sample = c
+						}
+					}
+				}
+			}
+			if !sample.IsValid() {
+				if v, ok := samples[k.part]; ok {
 					sample = v
 				} else {
 					sample = made(k.part)
@@ -185,6 +196,62 @@ func Compositions(skip func(Entry) bool) []Composition {
 		return a.Part < b.Part
 	})
 	return out
+}
+
+// repeats says the host already shows what the part would: its words, or —
+// a part without words — its icons.
+func repeats(shown string, v reflect.Value) bool {
+	if w := words(v); w != "" {
+		return strings.Contains(strings.Join(strings.Fields(markup.ReplaceAllString(shown, " ")), " "), w)
+	}
+	r, ok := v.Interface().(Renderer)
+	if !ok {
+		return false
+	}
+	var out string
+	func() {
+		defer func() { _ = recover() }()
+		out = r.Render()
+	}()
+	icons := icon.FindAllString(out, -1)
+	if len(icons) == 0 {
+		return false
+	}
+	for _, i := range icons {
+		if !strings.Contains(shown, i) {
+			return false
+		}
+	}
+	return true
+}
+
+var icon = regexp.MustCompile(`#i-[a-z0-9-]+`)
+
+// gatherSome keeps the first few distinct values of every named type the
+// value holds.
+func gatherSome(v reflect.Value, into map[reflect.Type][]reflect.Value) {
+	switch v.Kind() {
+	case reflect.Pointer, reflect.Interface:
+		if !v.IsNil() {
+			gatherSome(v.Elem(), into)
+		}
+		return
+	case reflect.Slice, reflect.Array:
+		for i := 0; i < v.Len(); i++ {
+			gatherSome(v.Index(i), into)
+		}
+		return
+	}
+	if t := v.Type(); t.PkgPath() != "" && len(into[t]) < 32 && !holds(into[t], v) {
+		into[t] = append(into[t], v)
+	}
+	if v.Kind() == reflect.Struct {
+		for i := 0; i < v.NumField(); i++ {
+			if v.Type().Field(i).IsExported() {
+				gatherSome(v.Field(i), into)
+			}
+		}
+	}
 }
 
 // holds says whether one of vs equals v, or says the same words: a drop
