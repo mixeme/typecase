@@ -23,12 +23,6 @@ import (
 // not failed. The key is the composition as Composition.String prints it,
 // without the host: «Owner.Slot+Part».
 var compositionPending = map[string]string{
-	// rows of another kind, or a rubric with another gutter at 640
-	"List.ListRow+LinkedRow": rowKinds,
-	"Main.MainPart+List":     rowKinds,
-	"Main.MainPart+Table":    rowKinds,
-	// a table's cards in a sheet's pick list beside its rubric
-	"SheetPick.SheetPickList+Table": rowKinds,
 	// a second target inside a row on the phone: its hit zone takes the
 	// row's words, or the zone of the name above it in a cell
 	"TableCell.CellPart+CellWrap": linkInRow,
@@ -38,7 +32,6 @@ var compositionPending = map[string]string{
 }
 
 const (
-	rowKinds  = "free composition 10.11: rows of different kinds side by side, gutters at 640"
 	linkInRow = "free composition 10.11: a second target inside a row on the phone"
 )
 

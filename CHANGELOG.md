@@ -2624,6 +2624,18 @@ do, not what the authors did.
 
 ### Fixed
 
+- **One text edge for every block** (the owner, 13.11; free composition
+  10.11: rows of different kinds side by side). Three blocks pinned a
+  number of their own instead of the page's gutter, so a row of another
+  kind beside them stood 6 px off the rubric above it: the results stack
+  (`tc-main__results`) kept 20 px on a phone where the page keeps 14; a
+  list bled out of a card's padding (`tc-list--mx-14`) left its rows the
+  page's 20 px; a table's cards on a phone kept 14 px in a sheet whose rows
+  took 20. Now the sheet and the bled list give their rows the narrow
+  gutter, the stack and the cards take the page's. 17 frames move by 6 px:
+  Connections, Publish, Profile, Duplicates and the mailboxes at ≤640, the
+  pick sheets of mail (s-mail-5, 6, 10, 12, 13) on the wide, the table
+  component at ≤460. The four compositions leave `compositionPending`.
 - **An open menu stands where there is room** (free composition, 10.11): a
   popup menu or a top drop's panel that would run past the page's edge
   turns to the other side of its button (`data-tc-side`, set by `tc.js` when
