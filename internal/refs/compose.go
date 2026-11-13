@@ -6,7 +6,11 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+
+	w "carrel.dev/typecase/widget"
 )
+
+var inlineType = reflect.TypeOf((*w.Inline)(nil)).Elem()
 
 // Composition is one part put into one slot of one container: the free
 // composition the types allow (L-7) and a screen of Carrel may build, though
@@ -171,6 +175,11 @@ func Compositions(skip func(Entry) bool) []Composition {
 			}
 			part := rebuild(sample, nil, nil)
 			if f.Kind() == reflect.Slice {
+				// a word put after words is parted from them by a space, as
+				// a text that holds it would write it
+				if f.Type().Elem() == inlineType && f.Len() > 0 {
+					f.Set(reflect.Append(f, reflect.ValueOf(w.Text(" "))))
+				}
 				f.Set(reflect.Append(f, part))
 			} else {
 				f.Set(part)

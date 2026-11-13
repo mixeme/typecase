@@ -2624,6 +2624,15 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A link inside a row's text wraps on a phone** (the owner, 14.11; free
+  composition 10.11). A row's text slots (`SizeRow.Name`, `PhoneRow.Sub`)
+  take `[]Inline`, so a link may stand in them, though no frame and no
+  Carrel screen puts one there. On a phone the cell's ellipsis cut the
+  link's 44 px hit zone, and the link, standing last, went under «…». Now a
+  row's title, cell, excerpt or file name that holds a link wraps in
+  `drawer` instead. No frame moves. The free composition now parts a word
+  put after words with a space, as a text would write it. The two
+  compositions leave `compositionPending`.
 - **One text edge for every block** (the owner, 13.11; free composition
   10.11: rows of different kinds side by side). Three blocks pinned a
   number of their own instead of the page's gutter, so a row of another

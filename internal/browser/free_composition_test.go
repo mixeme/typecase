@@ -26,8 +26,6 @@ var compositionPending = map[string]string{
 	// a second target inside a row on the phone: its hit zone takes the
 	// row's words, or the zone of the name above it in a cell
 	"TableCell.CellPart+CellWrap": linkInRow,
-	"PhoneRow.Inline+Link":        linkInRow,
-	"SizeRow.Inline+Link":         linkInRow,
 	"Drop.DropTrigger+TagInput":   linkInRow,
 }
 
