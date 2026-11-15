@@ -1152,6 +1152,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Frames follow Carrel's set in four places** (Carrel's tasks 260–263).
+  The rename sheet `s-files-21` says «Notes and events that point at it
+  will not find it under the new name.»: a published link follows the file.
+  The settings tables count 17 collections (were 19, and 15 under the sheets
+  `s-profile-3`, `-7`…`-9`), «Общие с семьёй» 2 objects, «Праздники РФ» ·
+  Tasks 2, Documents 10. The rails of `states-21`, `-23`, `-30` hold what
+  the set holds: no «релиз» in an empty «Работа», an open subscription or
+  notebook unticked as in `s-tasks-1` and `s-notes-1`. The event form in
+  `states-17` and `-36` has the sets «Other» and «Source» of `s-agenda-3`,
+  and the organiser of «Синк-ап по релизу» is the owner, Михаил Енученко,
+  as the set has it (13 frames); `s-agenda-14`, an invitation from someone
+  else, keeps Мария Лебедева as its example.
 - **Search suggestions as wide as their rows** (frames s-find-2 and s-find-3
   at 641; the owner, 11.11). Under a narrow search the suggestions took its
   width and their lines broke in two; now they take their rows' width, up

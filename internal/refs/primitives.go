@@ -131,7 +131,7 @@ var _ = add(
 	primitive("icon", w.Tag{Label: "smirnov.vcf", Icon: "con"}, "s-mail-7", "tc-tag", 1),
 	primitive("removable", w.Tag{Label: "Забрать документы", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true}, "s-tasks-3", "tc-tag", 1),
 	// Carrel's task 77: the attendees — a known person by the colour of their book and name, an unknown one by the address.
-	primitive("person", w.Tag{Label: "Мария Лебедева", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Fixed: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}}, Title: "m.lebedeva@example.org", Value: "mailto:m.lebedeva@example.org"}, "s-agenda-3", "tc-tag", 1),
+	primitive("person", w.Tag{Label: "Михаил Енученко", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Fixed: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}}, Title: "mix@example.org", Name: "attendee", Value: "mailto:mix@example.org"}, "s-agenda-3", "tc-tag", 1),
 	primitive("person", w.Tag{Label: "Анна Ковалёва", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· accepted")}}, Title: "a.kovaleva@example.org", Value: "mailto:a.kovaleva@example.org"}, "s-agenda-3", "tc-tag", 2),
 	primitive("person", w.Tag{Address: &w.Mono{Text: "v@example.org"}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· no reply")}}, Title: "v@example.org", Value: "mailto:v@example.org"}, "s-agenda-3", "tc-tag", 4),
 	primitive("person", w.Tag{Label: "Вера Лебедева", Mark: &w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, Removable: true, Title: "vera@example.net", Name: "attendee", Value: "mailto:vera@example.net"}, "s-agenda-12", "tc-tag", 5),

@@ -8,6 +8,7 @@ func rows(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-tickrow
+	rows("off-badge", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Общие с семьёй", Meta: "2", Current: true, Hidden: true, Trail: w.Badge{Label: "ro"}}, "states-30", "tc-tickrow", 4),
 	rows("one-sends", w.TickRow{Send: w.Send{Form: "post-sources", Name: "src", Value: "nextcloud/lichnyj"}, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "128"}, "components-43", "tc-tickrow", 2),
 	rows("all-sends", w.TickRow{Ticked: w.TickedPart, Send: w.Send{Form: "post-sources", Name: "src", Value: "all"}, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7"}, "components-43", "tc-tickrow", 1),
 	rows("plain", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник"}, "s-find-4", "tc-tickrow", 12),
@@ -18,7 +19,7 @@ var _ = add(
 	rows("on", w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Public", Current: true, Trail: w.Badge{Label: "ro"}}, "states-34", "tc-tickrow", 3),
 	rows("root", w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "3 of 3"}, "states-34", "tc-tickrow", 1),
 	rows("error", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Current: true, Error: true}, "states-11", "tc-tickrow", 2),
-	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "2", Current: true, Trail: w.Badge{Label: "ro"}}, "states-23", "tc-tickrow", 4),
+	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "2", Current: true, Hidden: true, Trail: w.Badge{Label: "ro"}}, "states-23", "tc-tickrow", 4),
 	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0"}, "s-find-1", "tc-tickrow", 9),
 	rows("off-badge", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Hidden: true, Trail: w.Badge{Label: "ro"}}, "states-7", "tc-tickrow", 4),
 	rows("one", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "128"}, "components-11", "tc-tickrow", 2),
