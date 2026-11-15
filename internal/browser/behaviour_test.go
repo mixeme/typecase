@@ -3185,6 +3185,43 @@ func TestFileRanges(t *testing.T) {
 	}
 }
 
+// TestTagFieldEmptyPlace (the owner, 14.11): a press on what in a tag field is
+// not a control of its own — its empty place, a tag that only shows — puts
+// the cursor in its typing line, with suggestions or without: on a phone the
+// line stands under the tags and a finger a little high lands beside it. A
+// tag that is sent with the form stays its own control: a press unticks it.
+func TestTagFieldEmptyPlace(t *testing.T) {
+	needChrome(t)
+	field := w.TagInput{Name: "to", Parts: []w.TagInputPart{
+		w.Tag{Label: "Синк-ап по релизу", Removable: true},
+		w.Tag{Label: "Анна Ковалёва", Removable: true, Value: "a.kovaleva@example.org"}},
+		Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient"}}
+	body := `<div class="tc-root"><form action="/x" method="get"><div class="tc-field tc-field--full">` + field.Render() + `</div></form></div>`
+	h := browser.NewHarness(t)
+	const active = `document.activeElement && document.activeElement.classList.contains("tc-in__add")`
+	const blur = `document.activeElement && document.activeElement.blur(); true`
+	var x, y float64
+	var onShown, onEmpty, onSent, unticked bool
+	if err := h.Run(h.RegisterPage("tag-empty-place", browser.PageHTML(body, "")), 900, 600,
+		chromedp.Click(`span.tc-tag--pill`, chromedp.ByQuery),
+		chromedp.Evaluate(active, &onShown),
+		chromedp.Evaluate(blur, nil),
+		chromedp.Evaluate(`document.querySelector(".tc-in--tags").getBoundingClientRect().right - 8`, &x),
+		chromedp.Evaluate(`document.querySelector(".tc-in--tags").getBoundingClientRect().top + 8`, &y),
+		chromedp.ActionFunc(func(ctx context.Context) error { return chromedp.MouseClickXY(x, y).Do(ctx) }),
+		chromedp.Evaluate(active, &onEmpty),
+		chromedp.Evaluate(blur, nil),
+		chromedp.Click(`label.tc-tag--pill`, chromedp.ByQuery),
+		chromedp.Evaluate(active, &onSent),
+		chromedp.Evaluate(`!document.querySelector("label.tc-tag--pill .tc-check__box").checked`, &unticked),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if !onShown || !onEmpty || onSent || !unticked {
+		t.Errorf("typing line after a press on a shown tag %v, on the empty place %v, on a sent tag %v (unticked %v); want true, true, false (true)", onShown, onEmpty, onSent, unticked)
+	}
+}
+
 // TestTagEnter (Carrel's task 221): Enter in a tag field's line sends its
 // form with the line's unseen default button — the letter's «add the
 // recipient», op=add — and not with the form's first visible submit (Attach's

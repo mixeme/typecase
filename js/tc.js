@@ -556,12 +556,17 @@
 			if (line) line.focus();
 			return;
 		}
-		var field = closest(e.target, "[data-tc-suggest]");
-		if (field) {
-			if (!closest(e.target, ".tc-tag")) {
-				var add = field.querySelector(".tc-in__add");
-				if (add && e.target !== add) add.focus();
-			}
+		// A press on what in a tag field is not a control of its own — its
+		// empty place, a tag that only shows — is a press on its typing line,
+		// with suggestions or without (the owner, 14.11): on a phone the line
+		// stands under the tags, and a finger a little high lands beside it.
+		var tags = closest(e.target, ".tc-in--tags");
+		var own = tags && closest(e.target, "label, a[href], button, input, textarea, select");
+		if (tags && !(own && tags.contains(own))) {
+			var add = tags.querySelector(".tc-in__add");
+			if (add) add.focus();
+		}
+		if (closest(e.target, "[data-tc-suggest]")) {
 			return;
 		}
 		var sug = openTrigger && openTrigger.hasAttribute("data-tc-suggest") && closest(e.target, '[role="menuitem"]');

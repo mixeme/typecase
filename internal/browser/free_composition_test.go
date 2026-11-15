@@ -22,16 +22,7 @@ import (
 // here, the list to go to nothing as ladderPending: what they show is logged,
 // not failed. The key is the composition as Composition.String prints it,
 // without the host: «Owner.Slot+Part».
-var compositionPending = map[string]string{
-	// a second target inside a row on the phone: its hit zone takes the
-	// row's words, or the zone of the name above it in a cell
-	"TableCell.CellPart+CellWrap": linkInRow,
-	"Drop.DropTrigger+TagInput":   linkInRow,
-}
-
-const (
-	linkInRow = "free composition 10.11: a second target inside a row on the phone"
-)
+var compositionPending = map[string]string{}
 
 // TestFreeComposition puts every part a slot takes into a place of that slot
 // — the owner's thought of 14.10 on the constructor: the library should fold

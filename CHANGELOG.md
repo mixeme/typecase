@@ -2624,6 +2624,19 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A press on a tag field's empty place goes to its typing line** (the
+  owner, 14.11; free composition 10.11). On a phone the typing line stands
+  under the tags, and a finger a little high landed beside it. Now a press
+  on what in a tag field is not a control of its own (its empty place, a
+  tag that only shows) puts the cursor in the line, with suggestions or
+  without; a tag sent with the form stays its own tick. The line keeps its
+  height. The ladder's tap probe counts such a press for the line.
+  `TestTagFieldEmptyPlace`, red on the old script.
+- **A cell's block keeps its button's hit zone on a phone** (free
+  composition 10.11). `tc-table__wrap` cut what stands out of it, and with
+  it the 44 px zone of a button that came to stand under a name in the same
+  cell; in `drawer` it no longer cuts. No frame moves. With the tag field,
+  `compositionPending` is empty.
 - **A link inside a row's text wraps on a phone** (the owner, 14.11; free
   composition 10.11). A row's text slots (`SizeRow.Name`, `PhoneRow.Sub`)
   take `[]Inline`, so a link may stand in them, though no frame and no

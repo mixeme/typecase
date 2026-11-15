@@ -120,6 +120,14 @@ const MockupLadderProbeJS = `(() => {
         // no element answers a point on the viewport's very edge: not a miss
         if (!hit) continue;
         if (el === hit || el.contains(hit) || hit.contains(el)) continue;
+        // a tag field's typing line answers a press on all of its field that
+        // is not a control of its own: its empty place, a tag that only shows
+        // (tc.js; the owner, 14.11)
+        if (el.classList.contains("tc-in__add")) {
+          const tags = el.closest(".tc-in--tags");
+          const own = hit.closest && hit.closest("label, a[href], button, input, textarea, select");
+          if (tags && tags.contains(hit) && !(own && tags.contains(own))) continue;
+        }
         // a details' summary is a button too: a drop's trigger, «⋯»
         if (hit.closest && hit.closest("button, summary, a[href], input, textarea, select, label, .tc-check, .tc-tick, .tc-tickrow__tick, .tc-close, .tc-nav__item, .tc-seg__opt, .tc-menu, .tc-menu__item, .tc-scrim, .tc-sheet, .tc-field, .tc-range, .tc-search, .tc-rubric, .tc-overlay")) continue;
         miss = Math.round(x - cx) + "," + Math.round(y - cy) + " hit=" + cls(hit).split(/\s+/).slice(0, 2).join(".");
