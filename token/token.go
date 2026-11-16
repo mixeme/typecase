@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Palette names the eleven overridable palette slots (L-5.1). The dark theme
+// Palette names the twelve overridable palette slots (L-5.1). The dark theme
 // redefines exactly these.
 var Palette = []string{
 	"--tc-ink",
@@ -18,6 +18,7 @@ var Palette = []string{
 	"--tc-muted",
 	"--tc-accent",
 	"--tc-danger",
+	"--tc-progress", // work under way: a count still running (the owner, 16.11)
 	"--tc-edge",
 	"--tc-hair",
 	"--tc-dusty",

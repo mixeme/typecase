@@ -352,7 +352,7 @@ func checkMockupTokenVars(html string) error {
 
 var mockupAllowedVar = map[string]bool{
 	"--tc-ink": true, "--tc-surface": true, "--tc-bg": true, "--tc-card": true,
-	"--tc-rule": true, "--tc-muted": true, "--tc-accent": true, "--tc-danger": true,
+	"--tc-rule": true, "--tc-muted": true, "--tc-accent": true, "--tc-danger": true, "--tc-progress": true,
 	"--tc-edge": true, "--tc-hair": true, "--tc-dusty": true,
 	"--tc-font-serif": true, "--tc-font-sans": true, "--tc-font-mono": true,
 	"--tc-font-size": true, "--tc-row-height": true, "--tc-row-height-touch": true,

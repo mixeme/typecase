@@ -903,6 +903,9 @@ func (g *gen) cellPart(x *El) string {
 		if lab == "" {
 			lab = "Done"
 		}
+		if t := x.Attr("title"); t != "" {
+			v += ", Title: " + q(t)
+		}
 		if s := sendOf(x); s != "" {
 			v += ", Send: " + s
 		}

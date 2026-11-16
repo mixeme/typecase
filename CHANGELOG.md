@@ -178,6 +178,17 @@ do, not what the authors did.
 
 ### Added
 
+- **A tone for work under way** (the owner, 16.11). The palette has a
+  twelfth slot, `--tc-progress`: yellow, #7D5E0C light and #C9A23E dark,
+  as readable as the accent and the failure on the surface and the card.
+  `BadgeProgress` (`.tc-badge.is-progress`) is a badge in it: a count
+  still running, frame s-profile-37. A theme of one's own defines
+  `--tc-progress` too; `token.Validate` asks for it.
+- **A tick says what pressing does** (Carrel's task 264; accepted on
+  15.11). `Tick.Title` is the tick's hint, as `Button.Title`: a repeating
+  task's tick completes this occurrence and moves the task to the next one.
+  A plain tick has none. Frame s-tasks-21, an example: Carrel's set has no
+  repeating task yet.
 - **The top bar's «⋯»** (the owner, 11.11; accepted on 11.11). `TopDrop.More` is the top bar's
   «⋯»: it stands only while an action of the second rank is folded under
   it, and its menu holds their twins; `Button.Secondary` and the new
@@ -1152,6 +1163,16 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Two states Carrel asked for** (Carrel's tasks 262 p. 5 and 264).
+  s-tasks-21: a repeating task's row carries «repeats weekly», as an event
+  in the agenda, and its tick's hint says that Done completes this
+  occurrence. s-profile-37: a folder's Objects while Carrel counts them
+  shows the count so far in a yellow badge of work under way, «4»,
+  with «Counting: 4 so far.» in its hint (the 70 px column holds no
+  words); when the server refused in the middle, a dash
+  in the colour of a failure with the reason in its hint
+  (the owner's decision of 13.11). The phone hides Objects, as in
+  s-profile-1.
 - **Frames follow Carrel's set in four places** (Carrel's tasks 260–263).
   The rename sheet `s-files-21` says «Notes and events that point at it
   will not find it under the new name.»: a published link follows the file.

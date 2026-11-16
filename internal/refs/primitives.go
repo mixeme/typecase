@@ -140,6 +140,7 @@ var _ = add(
 	primitive("mark", w.Tag{Label: "работа"}, "s-mail-1", "tc-tag", 2),
 
 	// tc-badge
+	primitive("progress", w.Badge{Label: "4", Tone: w.BadgeProgress, Title: "Counting: 4 so far."}, "s-profile-37", "tc-badge", 1),
 	primitive("neutral", w.Badge{Label: "external"}, "components-11", "tc-badge", 1),
 	primitive("linked", w.Badge{Label: "linked ×2", Tone: w.BadgeLinked}, "components-12", "tc-badge", 1),
 	primitive("alert", w.Badge{Label: "tentative", Tone: w.BadgeAlert}, "s-agenda-1", "tc-badge", 8),

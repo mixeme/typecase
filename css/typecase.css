@@ -1,6 +1,6 @@
 :root{
   --tc-ink:#17211C; --tc-card:#E8DFCB; --tc-edge:#C9BFA6; --tc-accent:#4A6B52;
-  --tc-bg:#F5F1E8; --tc-surface:#FFFDF7; --tc-rule:#D8CFBB; --tc-hair:#E2DACA; --tc-dusty:#6A6351; --tc-muted:#56503F; --tc-danger:#A84232;
+  --tc-bg:#F5F1E8; --tc-surface:#FFFDF7; --tc-rule:#D8CFBB; --tc-hair:#E2DACA; --tc-dusty:#6A6351; --tc-muted:#56503F; --tc-danger:#A84232; --tc-progress:#7D5E0C;
   --tc-font-serif:"Literata", Georgia, "Times New Roman", serif;
   --tc-font-sans:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --tc-font-mono:"Source Code Pro", ui-monospace, "Cascadia Mono", monospace;
@@ -27,7 +27,7 @@ body[data-tc-root]{margin:0;background:var(--tc-bg);color:var(--tc-ink);font-fam
 .tc-root code,.tc-root .tc-mono{font-family:var(--tc-font-mono);font-size:11.5px}
 .tc-root svg{display:block}
 [data-tc-theme="dark"]{--tc-ink:#E8DFCB;--tc-bg:#141A16;--tc-surface:#1B231D;--tc-card:#242E27;--tc-edge:#3A463D;
-  --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B}
+  --tc-rule:#2F3B33;--tc-hair:#28332B;--tc-dusty:#99927C;--tc-muted:#A79E88;--tc-accent:#7FA085;--tc-danger:#D5786B;--tc-progress:#C9A23E}
 /* верхняя панель */
 .tc-top{height:var(--tc-top);display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--tc-surface);border-bottom:.5px solid var(--tc-rule)}
 /* Поиск по центру: равные крылья flex:1 1 0 слева и справа. */
@@ -465,6 +465,7 @@ a.tc-row__title:hover{text-decoration:underline}
   letter-spacing:.03em;background:transparent}
 .tc-badge.is-linked{border-color:var(--tc-accent);color:var(--tc-accent)}
 .tc-badge.is-alert{border-color:var(--tc-danger);color:var(--tc-danger)}
+.tc-badge.is-progress{border-color:var(--tc-progress);color:var(--tc-progress)}
 .tc-runbar{display:flex;align-items:center;gap:8px;padding:7px var(--tc-page-gutter);background:var(--tc-card);flex-wrap:wrap;
   border-bottom:.5px solid var(--tc-rule);font-size:11.5px;color:var(--tc-muted)}
 /* Индикатор опроса 64 px, не шкала: 120 на планшете выталкивает хвост. */

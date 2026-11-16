@@ -137,21 +137,22 @@ func (t Tag) in(m mix, name string) string {
 type BadgeTone int
 
 const (
-	BadgeNeutral BadgeTone = iota
-	BadgeLinked            // joined with other records
-	BadgeAlert             // needs attention
-	BadgeLocal             // reachable only here
+	BadgeNeutral  BadgeTone = iota
+	BadgeLinked             // joined with other records
+	BadgeAlert              // needs attention
+	BadgeLocal              // reachable only here
+	BadgeProgress           // work under way: a count still running
 )
 
 func (t BadgeTone) class() string {
-	return [...]string{"", "is-linked", "is-alert", "is-local"}[t]
+	return [...]string{"", "is-linked", "is-alert", "is-local", "is-progress"}[t]
 }
 
 // Badge — tc-badge
 //
 // Роль. Короткая пометка рядом с именем: «read-only», «linked ×2», «tentative».
 // Вход. Badge{Label, Tone, Accent, Title, Place}.
-// Состояния. neutral | linked | alert | local | accent.
+// Состояния. neutral | linked | alert | local | progress | accent.
 // Инварианты. В бейдже есть текст; бейдж не ссылка и не кнопка; бейдж печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `components-11`, фрагмент `.tc-badge`.
@@ -189,7 +190,7 @@ func (v TickVariant) class() string {
 // Tick — tc-tick
 //
 // Роль. Галка отметки: задача сделана, пункт списка выполнен.
-// Вход. Tick{Done, Variant, Glyph, Sign, Label, Send}.
+// Вход. Tick{Done, Variant, Glyph, Sign, Label, Title, Send}.
 // Состояния. open | done | variant | glyph | sign.
 // Инварианты. Отметка — кнопка с доступным именем, кроме знака внутри другой кнопки и знака в тексте (Sign: картинка «Done» или «Not done»); сделано или нет — одно поле; отметка печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает отметку; знак (Glyph) не нажимается: нажимается кнопка, в которой он стоит; галка дела в тексте (Sign) — тоже: заметка правится в правке (задача Carrel 99).
@@ -205,7 +206,11 @@ type Tick struct {
 	// task 99).
 	Sign  bool
 	Label string // the accessible name: what is ticked
-	Send  Send   // what pressing sends: the task done or not, without a script
+	// Title says what pressing does when it is not plain: a repeating task's
+	// tick completes this occurrence and moves the task to the next one
+	// (Carrel's task 264). The hint of the button, as Button.Title.
+	Title string
+	Send  Send // what pressing sends: the task done or not, without a script
 }
 
 // Render prints the tick.
@@ -224,7 +229,7 @@ func (t Tick) html(m mix) string {
 		typ = "submit"
 	}
 	return `<button` + c + ` type="` + typ + `"` + attr("form", t.Send.Form) + attr("name", t.Send.Name) + attr("value", t.Send.Value) +
-		attr("aria-label", t.Label) + attr("aria-pressed", strconv.FormatBool(t.Done)) + `></button>`
+		attr("aria-label", t.Label) + attr("title", t.Title) + attr("aria-pressed", strconv.FormatBool(t.Done)) + `></button>`
 }
 
 // Kbd — tc-kbd

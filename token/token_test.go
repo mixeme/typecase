@@ -6,7 +6,7 @@ import (
 )
 
 const complete = `:root{--tc-ink:#000;--tc-surface:#111;--tc-bg:#222;--tc-card:#777;--tc-rule:#333;
---tc-muted:#444;--tc-accent:#555;--tc-danger:#666;--tc-edge:#888;--tc-hair:#999;--tc-dusty:#aaa;
+--tc-muted:#444;--tc-accent:#555;--tc-danger:#666;--tc-progress:#6a6;--tc-edge:#888;--tc-hair:#999;--tc-dusty:#aaa;
 --tc-font-serif:a;--tc-font-sans:b;--tc-font-mono:c}
 .tc-root{--tc-rail:264px;--tc-side:400px;--tc-top:52px;--tc-page-gutter:20px;--tc-page-gutter-narrow:14px}
 [data-tc-colour]{background:var(--tc-colour)}`

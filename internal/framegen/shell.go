@@ -904,7 +904,11 @@ func (g *gen) row0(e *El) string {
 		if els[0].Has("is-done") {
 			d = "Done: true, "
 		}
-		tick := "Tick: w.Tick{" + d + `Label: "Done"}`
+		tt := ""
+		if t := els[0].Attr("title"); t != "" { // what pressing does: a repeating task (Carrel's task 264)
+			tt = ", Title: " + q(t)
+		}
+		tick := "Tick: w.Tick{" + d + `Label: "Done"` + tt + "}"
 		if els[0].Tag == "span" { // a read-only list: the tick is a sign (Carrel's task 124)
 			tick = "Tick: w.Tick{" + d + "Sign: true}"
 		}
