@@ -94,7 +94,7 @@ func Tasks1() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -373,7 +373,7 @@ func Tasks20() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -642,7 +642,7 @@ func Tasks15() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -1681,7 +1681,7 @@ func Tasks19() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+									Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 									Waiting: true,
 									Variant: w.FilterH26W200,
 								},

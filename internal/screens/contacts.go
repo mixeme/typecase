@@ -87,7 +87,7 @@ func Contacts1() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+								Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 								Waiting: true,
 								Variant: w.FilterH26W220,
 							},
@@ -419,7 +419,7 @@ func Contacts2() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+									Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
@@ -2626,7 +2626,7 @@ func Contacts35() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+									Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
@@ -2927,7 +2927,7 @@ func Contacts7() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
 								Swap:    "list-main",

@@ -181,6 +181,18 @@ a.tc-railfoot__about{flex:1 1 100%;font-size:11px;line-height:1.5;color:var(--tc
    сначала сжимается до него, растёт до ширины своего класса — так ряд переносится, только
    когда и минимума не хватает. Класс размера фильтра поэтому держит и max-width. */
 .tc-in:has(> .tc-q){min-width:88px;overflow:hidden;white-space:nowrap;flex:1 1 88px}
+/* Короткая подсказка (Query.Short, владелец 16.11): поверх строки на её месте (за значком 13 px с отступом 6 px или тихим 12 px)
+   стоит короткое слово и поверх него — вся подсказка с фоном поля; не входит вся — уходит на вторую строку, которой не видно,
+   и остаётся короткое слово целиком, а не обрезанная полная. Своя подсказка строки при этом прозрачна; набрано — не видна и эта. */
+.tc-in:has(> .tc-q__ph){position:relative}
+.tc-in > .tc-q:has(+ .tc-q__ph)::placeholder{color:transparent}
+.tc-q__ph{position:absolute;top:0;bottom:0;left:28px;right:9px;padding:inherit;padding-left:0;padding-right:0;display:flex;align-items:center;pointer-events:none;background:inherit}
+.tc-in:has(> .tc-ico--dusty) > .tc-q__ph{left:21px}
+.tc-q__hint{flex:1;display:flex;flex-wrap:wrap;min-width:0;max-height:1lh;overflow-x:visible;overflow-y:clip;background:inherit;position:relative}
+.tc-q__hint::before{content:"\200b";width:0}
+.tc-q__short{position:absolute;left:0;top:0;white-space:nowrap}
+.tc-q__full{position:relative;white-space:nowrap;background:inherit}
+.tc-q:not(:placeholder-shown) + .tc-q__ph{display:none}
 .tc-bar > .tc-seg,.tc-bar > .tc-btn,.tc-bar > .tc-check,.tc-bar > .tc-range,
 .tc-bar > .tc-bar__right,.tc-bar > .tc-bar__sep{flex:none}
 .tc-bar__sep{width:1px;height:20px;background:var(--tc-edge);flex:none}

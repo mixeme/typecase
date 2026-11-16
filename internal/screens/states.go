@@ -234,7 +234,7 @@ func States3() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
 								Swap:    "list-main",
@@ -404,7 +404,7 @@ func States4() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+								Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 								Waiting: true,
 								Variant: w.FilterH26W220,
 							},
@@ -717,7 +717,7 @@ func States6() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
 								Swap:    "list-main",
@@ -1958,7 +1958,7 @@ func States8() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+								Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 								Waiting: true,
 								Variant: w.FilterH26W220,
 							},
@@ -2180,7 +2180,7 @@ func States9() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+								Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 								Waiting: true,
 								Variant: w.FilterH26W220,
 							},
@@ -2945,7 +2945,7 @@ func States13() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
 								Swap:    "list-main",
@@ -3359,7 +3359,7 @@ func States15() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar/nextcloud/lichnyj",
 								Swap:    "list-main",
@@ -3620,7 +3620,7 @@ func States19() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -3775,7 +3775,7 @@ func States20() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -4155,7 +4155,7 @@ func States23() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -4762,7 +4762,7 @@ func States26() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -4899,7 +4899,7 @@ func States27() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -5257,7 +5257,7 @@ func States30() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -5960,7 +5960,7 @@ func States34() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 								Waiting: true,
 								Variant: w.FilterH26W190,
 							},

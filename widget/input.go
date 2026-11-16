@@ -206,18 +206,23 @@ func (p Pick) html(m mix) string {
 // Query — tc-q
 //
 // Роль. Строка запроса внутри поля поиска или фильтра.
-// Вход. Query{Value, Placeholder, Label, Name, Key, Of}.
+// Вход. Query{Value, Placeholder, Short, Label, Name, Key, Of}.
 // Состояния. нет.
 // Инварианты. Тип поля — search; у строки есть доступное имя; строка печатает фрагмент своего кадра.
-// Поведение. Ввод — браузера; Esc очищает, если поле не пусто; клавиша (Key) ставит в строку фокус.
+// Поведение. Ввод — браузера; Esc очищает, если поле не пусто; клавиша (Key) ставит в строку фокус. С короткой подсказкой (Short) поле, которому полная подсказка не входит, показывает короткую целиком, а не обрезанную полную (владелец 16.11) — без сценария тоже.
 // Эталон. кадр `shell-1`, фрагмент `.tc-q`.
 // Содержимое. нет.
 // Чего нет. Рамки и значка: их рисует поле вокруг.
 type Query struct {
 	Value       string
 	Placeholder string // what the empty line says: «Search everything…»
-	Label       string
-	Name        string // what the search sends it as: q
+	// Short is the start of the Placeholder that stands alone when the
+	// whole one does not fit the field: «Filter» of «Filter by word». The
+	// line then says the whole one or only this, never a cut word (the
+	// owner, 16.11). It must be the Placeholder's first words.
+	Short string
+	Label string
+	Name  string // what the search sends it as: q
 	// Key is the key that puts the focus into the line, with the library's
 	// script (Carrel's task 87): «/». It does nothing while the cursor is in
 	// a field.
@@ -232,7 +237,18 @@ type Query struct {
 func (q Query) Render() string { return q.html(nil) }
 
 func (q Query) html(m mix) string {
-	return `<input` + class(m, "tc-q") + ` type="search"` + attr("form", q.Of) + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + attr("data-tc-key", q.Key) + `>`
+	return `<input` + class(m, "tc-q") + ` type="search"` + attr("form", q.Of) + attr("name", q.Name) + attr("value", q.Value) + attr("placeholder", q.Placeholder) + attr("aria-label", q.Label) + attr("data-tc-key", q.Key) + `>` + q.short()
+}
+
+// short prints the hint that gives way to its Short: the Short, and over it
+// the whole hint on the field's ground, drawn as the line's own hint is; a
+// field too narrow for the whole one wraps it out of sight and shows the
+// Short alone.
+func (q Query) short() string {
+	if q.Short == "" || q.Value != "" || !strings.HasPrefix(q.Placeholder, q.Short+" ") {
+		return ""
+	}
+	return `<span class="tc-q__ph" aria-hidden="true"><span class="tc-q__hint"><span class="tc-q__short">` + esc(q.Short) + `</span><span class="tc-q__full">` + esc(q.Placeholder) + `</span></span></span>`
 }
 
 // FilterVariant is the drawn size of a filter.

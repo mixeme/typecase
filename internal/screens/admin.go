@@ -298,7 +298,7 @@ func Admin2() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by login", Label: "Filter by login"},
+								Query:   w.Query{Placeholder: "Filter by login", Short: "Filter", Label: "Filter by login"},
 								Waiting: true,
 								Variant: w.FilterH26W200,
 							},
@@ -480,7 +480,7 @@ func Admin24() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by login", Label: "Filter by login"},
+									Query:   w.Query{Placeholder: "Filter by login", Short: "Filter", Label: "Filter by login"},
 									Waiting: true,
 									Variant: w.FilterH26W200,
 								},
@@ -719,7 +719,7 @@ func Admin34() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter by login", Label: "Filter by login"},
+									Query:   w.Query{Placeholder: "Filter by login", Short: "Filter", Label: "Filter by login"},
 									Waiting: true,
 									Variant: w.FilterH26W200,
 								},

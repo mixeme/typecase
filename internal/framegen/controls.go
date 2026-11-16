@@ -428,7 +428,7 @@ func (g *gen) pick(x *El) string {
 	return "w.Pick{" + join(f, ", ") + g.ev(x, "PickVariant", "Variant") + placef(x) + "}"
 }
 
-func queryOf(qq *El) string {
+func queryOf(qq, box *El) string {
 	n := ""
 	if v := qq.Attr("name"); v != "" {
 		n = ", Name: " + q(v)
@@ -439,12 +439,17 @@ func queryOf(qq *El) string {
 	v := "Value: " + q(qq.Attr("value"))
 	if ph := qq.Attr("placeholder"); ph != "" {
 		v = "Placeholder: " + q(ph)
+		if sh := box.Kid("tc-q__ph"); sh != nil {
+			if t := sh.Kid("tc-q__short"); t != nil {
+				v += ", Short: " + q(t.Text())
+			}
+		}
 	}
 	return "w.Query{" + v + ", Label: " + q(qq.Attr("aria-label")) + n + "}"
 }
 
 func (g *gen) filter(x *El) string {
-	f := []string{"Query: " + queryOf(x.Kid("tc-q"))}
+	f := []string{"Query: " + queryOf(x.Kid("tc-q"), x)}
 	if x.Has("is-ph") {
 		f = append(f, "Waiting: true")
 	}

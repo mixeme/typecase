@@ -123,7 +123,7 @@ func Agenda1() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar",
 								Swap:    "list-main",
@@ -1383,7 +1383,7 @@ func Agenda17() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter by word", Label: "Filter by word", Name: "filter"},
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
 								Waiting: true,
 								Action:  "/app/calendar/nextcloud/lichnyj",
 								Swap:    "list-main",

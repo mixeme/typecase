@@ -163,7 +163,7 @@ func Files1() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 								Waiting: true,
 								Variant: w.FilterH26W190,
 							},
@@ -586,7 +586,7 @@ func Files2() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 								Waiting: true,
 								Variant: w.FilterH26W190,
 							},
@@ -990,7 +990,7 @@ func Files4() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+									Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 									Waiting: true,
 									Variant: w.FilterH26W190,
 								},
@@ -1446,7 +1446,7 @@ func Files5() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 								Waiting: true,
 								Variant: w.FilterH26W190,
 							},

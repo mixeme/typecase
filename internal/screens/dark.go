@@ -336,7 +336,7 @@ func Dark2() Screen {
 						w.Bar{
 							Items: []w.BarPart{
 								w.Filter{
-									Query:   w.Query{Placeholder: "Filter the loaded cards", Label: "Filter the loaded cards"},
+									Query:   w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"},
 									Waiting: true,
 									Variant: w.FilterH26W220,
 								},
@@ -573,7 +573,7 @@ func Dark3() Screen {
 					w.Bar{
 						Items: []w.BarPart{
 							w.Filter{
-								Query:   w.Query{Placeholder: "Filter this folder", Label: "Filter this folder"},
+								Query:   w.Query{Placeholder: "Filter this folder", Short: "Filter", Label: "Filter this folder"},
 								Waiting: true,
 								Variant: w.FilterH26W190,
 							},

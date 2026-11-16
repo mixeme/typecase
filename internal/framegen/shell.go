@@ -1488,7 +1488,7 @@ func usermenu(e *El) string {
 }
 
 func (g *gen) search(e *El) string {
-	f := []string{"Query: " + queryOf(e.Kid("tc-q"))}
+	f := []string{"Query: " + queryOf(e.Kid("tc-q"), e)}
 	if e.Has("is-focus") {
 		f = append(f, "Focus: true")
 	}

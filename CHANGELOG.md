@@ -178,6 +178,13 @@ do, not what the authors did.
 
 ### Added
 
+- **A filter's hint gives way to its first word** (the owner, 16.11).
+  `Query.Short` is the start of the `Placeholder` that stands alone when
+  the whole hint does not fit the field: «Filter» of «Filter by word». The
+  line says the whole hint or only this, never a cut word, without the
+  script too (`.tc-q__ph` over the line; the line's own placeholder is
+  transparent while it stands). Give it to every filter whose hint is
+  longer than a word.
 - **A tone for work under way** (the owner, 16.11). The palette has a
   twelfth slot, `--tc-progress`: yellow, #7D5E0C light and #C9A23E dark,
   as readable as the accent and the failure on the surface and the card.
@@ -1163,6 +1170,10 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A filter's hint is «Filter» where the whole one is cut** (the owner,
+  16.11). The 47 filters with «Filter by word», «Filter this folder»,
+  «Filter by login» and «Filter the loaded cards» carry `Short: "Filter"`;
+  a frame where the hint fits looks as before.
 - **Two states Carrel asked for** (Carrel's tasks 262 p. 5 and 264).
   s-tasks-21: a repeating task's row carries «repeats weekly», as an event
   in the agenda, and its tick's hint says that Done completes this
