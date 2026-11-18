@@ -26,9 +26,9 @@ func Phone1() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Runbar{
-						Meter: w.Meter{Percent: 83, Alert: true, Width: w.Meter60},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("5 of 6 · 7 events · "),
+							w.Say{Full: "Polled · 5 of 6 answered · 7 events ·", Short: "5 of 6 · 7 events ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -44,6 +44,7 @@ func Phone1() Screen {
 									Pop:   w.MenuUnderEnd,
 								},
 							},
+							w.Mono{Text: "2 min ago", Place: w.Pushed},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Mon · 10 Aug", Form: w.RubricInline}, Count: &w.Num{Value: 4}},

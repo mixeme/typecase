@@ -265,19 +265,18 @@ type MeterWidth int
 
 const (
 	MeterAuto MeterWidth = iota
-	Meter60              // 60 px: a phone's bar
 	MeterFill            // grows up to 260 px
 )
 
 func (w MeterWidth) class() string {
-	return [...]string{"", "tc-meter--w60", "tc-meter--max260-fill"}[w]
+	return [...]string{"", "tc-meter--max260-fill"}[w]
 }
 
 // Meter — tc-meter
 //
 // Роль. Шкала: сколько сделано — источников опрошено, файла загружено.
-// Вход. Meter{Percent, Track, Alert, Width}.
-// Состояния. plain | track | alert | width.
+// Вход. Meter{Percent, Track, Width}.
+// Состояния. plain | track | width.
 // Инварианты. Доля — число от 0 до 100, и её ставит сценарий, а не стиль в разметке; шкала печатает фрагмент своего кадра.
 // Поведение. нет.
 // Эталон. кадр `components-26`, фрагмент `.tc-meter`.
@@ -286,7 +285,6 @@ func (w MeterWidth) class() string {
 type Meter struct {
 	Percent int
 	Track   int // the track's own width in per cent, where the frame draws it
-	Alert   bool
 	Width   MeterWidth
 }
 
@@ -298,9 +296,20 @@ func (t Meter) html(m mix) string {
 	if t.Track > 0 {
 		track = strconv.Itoa(t.Track) + "%"
 	}
-	return `<span` + class(m, "tc-meter", t.Width.class()) + attr("data-tc-width", track) + `><i` + class(nil, "tc-meter__bar", pick(t.Alert, "tc-meter__bar--alert")) +
+	return `<span` + class(m, "tc-meter", t.Width.class()) + attr("data-tc-width", track) + `><i` + class(nil, "tc-meter__bar") +
 		attr("data-tc-width", strconv.Itoa(t.Percent)+"%") + ` role="progressbar"` + attr("aria-valuenow", strconv.Itoa(t.Percent)) + `></i></span>`
 }
+
+// RunResult is how a run that is over ended, shown by a dot in place of the meter.
+type RunResult int
+
+// RunResult values.
+const (
+	RunGoing    RunResult = iota // still running: the meter
+	RunAnswered                  // over, every source answered: a green dot
+	RunFailed                    // over, something did not answer: a red dot
+	RunStopped                   // over, stopped before every source answered: a grey dot
+)
 
 // RunbarPart is what follows a run's meter.
 type RunbarPart interface {
@@ -318,15 +327,20 @@ func (Drop) runbarPart() {}
 // Runbar — tc-runbar
 //
 // Роль. Ход опроса над списком: шкала, что опрошено, что не ответило, когда, остановить.
-// Вход. Runbar{Meter, Parts, Failed, Progress, Saving, Zone, Stream, Changed, Ended, Poll, Every, Closed}.
-// Состояния. plain | failed | stop.
-// Инварианты. Шкала — первой; неответившее — кнопкой «N did not answer» с меню отказов (Drop, MenuRefusal), где каждый расписан полностью; строка печатает фрагмент своего кадра.
+// Вход. Runbar{Meter, Result, Parts, Failed, Progress, Saving, Zone, Stream, Changed, Ended, Poll, Every, Closed}.
+// Состояния. plain | failed | stop | answered | refused | stopped.
+// Инварианты. Шкала — первой, пока опрос идёт; кончившийся опрос вместо шкалы несёт точку итога (Result): зелёную, если ответили все, красную, если кто-то нет, серую, если опрос остановили (владелец 17.11); слова — по шаблону Р-84: «Polled · N of M answered · K events · F failed», узко (Say) — «N of M · K events · F failed»; неответившее — кнопкой «F failed» с меню отказов (Drop, MenuRefusal), где каждый расписан полностью; строка печатает фрагмент своего кадра.
 // Поведение. «Stop» прерывает опрос; строка-область с адресом потока или опроса следит за ходом сама; скрытая строка (пустая, ждущая хода или опустевшая по концу) не следит.
 // Эталон. кадр `components-16`, фрагмент `.tc-runbar`.
 // Содержимое. Шкала, текст, красные куски, моноширинное время, прижатая кнопка.
 // Чего нет. Своей кнопки закрытия: строка уходит, когда опрос кончился.
 type Runbar struct {
-	Meter  Meter
+	Meter Meter
+	// Result is how a run that is over ended: the line then begins with a
+	// dot in its colour instead of the meter (the owner, 17.11) — green,
+	// every source answered; red, something did not; grey, stopped. The
+	// zero value is a run still going, with the meter.
+	Result RunResult
 	Parts  []RunbarPart
 	Failed bool // the run failed as a whole
 	// Progress makes the line the Save of the form it names, which sends
@@ -366,12 +380,25 @@ func (r Runbar) html(m mix) string {
 	}
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-runbar", pick(r.Failed, "tc-runbar--danger")) + attr("data-tc-zone", r.Zone) + attr("data-tc-stream", r.Stream) + attr("data-tc-changed", r.Changed) + attr("data-tc-ended", r.Ended) +
-		attr("data-tc-poll", r.Poll) + attr("data-tc-every", pick(r.Every > 0, strconv.FormatInt(r.Every.Milliseconds(), 10))) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.Meter.html(nil))
+		attr("data-tc-poll", r.Poll) + attr("data-tc-every", pick(r.Every > 0, strconv.FormatInt(r.Every.Milliseconds(), 10))) + attr("data-tc-progress", r.Progress) + flag("hidden", r.Progress != "" && !r.Saving) + `>` + r.lead())
 	for _, p := range r.Parts {
 		s.WriteString(p.html(nil))
 	}
 	s.WriteString(`</div>`)
 	return s.String()
+}
+
+// lead is what begins the line: the meter while the run goes, the dot of its result once it is over.
+func (r Runbar) lead() string {
+	switch r.Result {
+	case RunAnswered:
+		return Dot{Tone: DotAccent}.html(nil)
+	case RunFailed:
+		return Dot{Tone: DotDanger}.html(nil)
+	case RunStopped:
+		return Dot{Tone: DotDusty}.html(nil)
+	}
+	return r.Meter.html(nil)
 }
 
 // QueueItem is a file in the upload queue: its name, how far, a meter.

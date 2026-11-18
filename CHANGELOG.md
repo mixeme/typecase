@@ -14,6 +14,11 @@ do, not what the authors did.
 
 ### Breaking
 
+- **A meter no longer turns red, and has no phone width** (the owner,
+  17.11). `Meter.Alert` and `Meter60` are gone with their classes
+  (`tc-meter__bar--alert`, `tc-meter--w60`): a run that ended with a
+  refusal says so by `Runbar.Result: RunFailed`, a red dot in place of the
+  meter, and a run still going keeps the plain meter. `MeterFill` is now 1.
 - **A bulleted list's item has its own slot** (free composition, 10.11).
   `DocBullets.Items` is `[][]DocItemPart`, not `[][]Inline`: running text
   (every type that was `Inline`) and a nested `DocBullets`. `DocBullets` is
@@ -178,6 +183,14 @@ do, not what the authors did.
 
 ### Added
 
+- **A run that is over shows how it ended** (the owner, 17.11).
+  `Runbar.Result` puts a dot in place of the meter: `RunAnswered` green,
+  every source answered; `RunFailed` red, something did not; `RunStopped`
+  grey, stopped before all answered. The zero value, `RunGoing`, keeps the
+  meter of a run still going. Give every line of a run that is over its
+  result — a poll («Polled …»), a search («Done · …»), the mentions
+  («Looked in …»), the checks: the line is a meter shorter and fits a
+  phone on one line.
 - **A filter's hint gives way to its first word** (the owner, 16.11).
   `Query.Short` is the start of the `Placeholder` that stands alone when
   the whole hint does not fit the field: «Filter» of «Filter by word». The
@@ -1170,6 +1183,27 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A run that is over has a dot, not a meter** (the owner, 17.11). The
+  ten «Polled …» lines (components-16, -17, dark-1, s-agenda-1,
+  s-contacts-7, s-mailbox-21, states-6, -9, -20, -27), the ended searches
+  (s-find-1, -5, -9, -10), the mentions (mentions-2, -5), the mail search
+  (s-mailbox-14), the phone's poll (phone-1) and the checks (s-admin-4)
+  begin with a dot: red where something did not answer, green in s-find-5
+  and components-17 («Polled 6 of 6 sources»), grey in the stopped search
+  s-find-10. The dot stands at the middle of the figures and capitals,
+  one pixel row clear of their top and of the baseline in every frame and
+  width (the owner, 18.11: a lift of 0.5 px keeps the rounding the same
+  wherever the line falls).
+- **Every run over sources says it one way** (the owner, 17.11, Р-84).
+  Wide: «Polled · 5 of 6 answered · 7 events · 1 failed», «Polling · …»,
+  «Searched · …», «Searching · …», the time at the end: how long while it
+  runs, how long ago once over («just now» after a search). Narrow (a
+  column up to 640 px, `Say`): «5 of 6 · 7 events · 1 failed». Every line
+  counts its records, named as the list's rows; a refusal is always the
+  «F failed» button with its menu — components-16, -22, s-mailbox-14 and
+  mentions-5 got one, mentions-5 says «6 of 7» as its note does. The
+  mentions say «Searched», without the card's `urn`. No run line wraps at
+  460; states-5 says «No connection · last success 4 min ago» there.
 - **A filter's hint is «Filter» where the whole one is cut** (the owner,
   16.11). The 47 filters with «Filter by word», «Filter this folder»,
   «Filter by login» and «Filter the loaded cards» carry `Short: "Filter"`;

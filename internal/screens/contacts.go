@@ -2982,9 +2982,9 @@ func Contacts7() Screen {
 						Variant: w.BarWide,
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 83, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("Polled 5 of 6 calendars · "),
+							w.Say{Full: "Polled · 5 of 6 answered · 5 records ·", Short: "5 of 6 · 5 records ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{

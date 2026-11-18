@@ -78,10 +78,9 @@ func Find1() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 100, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"},
-							w.Text(" · "),
+							w.Say{Full: "Searched · 13 of 14 answered · 7 records ·", Short: "13 of 14 · 7 records ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -97,7 +96,7 @@ func Find1() Screen {
 									Pop:   w.MenuUnderEnd,
 								},
 							},
-							w.Mono{Text: "1.8 s", Place: w.Pushed},
+							w.Mono{Text: "just now", Place: w.Pushed},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Contacts", Form: w.RubricInline}, Count: &w.Num{Value: 2}},

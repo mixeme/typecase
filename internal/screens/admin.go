@@ -1650,7 +1650,7 @@ func Admin4() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 100},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
 							w.Text("11 checks · "),
 							w.Span{Face: w.FaceAccent, Text: "8 fine"},

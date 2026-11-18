@@ -196,7 +196,7 @@ var _ = add(
 
 	// tc-mono
 	// words in two lengths (Р-65): the run of a search, its answer's time
-	primitive("plain", w.Say{Full: "Done · 13 of 14 sources answered", Short: "13 of 14"}, "s-find-1", "tc-say", 1),
+	primitive("plain", w.Say{Full: "Searched · 13 of 14 answered · 7 records ·", Short: "13 of 14 · 7 records ·"}, "s-find-1", "tc-say", 1),
 	primitive("variant", w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}, "s-dup-1", "tc-mono", 3),
 	primitive("code", w.Mono{Text: ".well-known", Form: w.MonoCode}, "s-profile-2", "tc-mono", 4),
 	primitive("plain", w.Mono{Text: "7 found · 2 min ago", Variant: w.Mono11DustyTight}, "s-find-6", "tc-mono", 1),

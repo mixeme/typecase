@@ -98,10 +98,7 @@ func (g *gen) meter(e *El) string {
 	if t := e.Attr("data-tc-width"); t != "" {
 		f = append(f, "Track: "+strings.TrimRight(t, "%"))
 	}
-	if bar.Has("tc-meter__bar--alert") {
-		f = append(f, "Alert: true")
-	}
-	for _, v := range allOf(e, []kv{{"tc-meter--w60", "Meter60"}, {"tc-meter--max260-fill", "MeterFill"}}) {
+	for _, v := range allOf(e, []kv{{"tc-meter--max260-fill", "MeterFill"}}) {
 		f = append(f, "Width: w."+v)
 	}
 	return "w.Meter{" + join(f, ", ") + "}"
@@ -111,7 +108,17 @@ func (g *gen) runbar(e *El) string {
 	if e.HasAttr("hidden") && len(e.Els()) == 0 && e.Attr("data-tc-progress") == "" {
 		return "w.Runbar{Closed: true}" // a zone that waits for a run (Carrel's task 226)
 	}
-	f := []string{"Meter: " + g.meter(e.Kid("tc-meter"))}
+	var f []string
+	switch {
+	case e.Kid("tc-dot--accent") != nil:
+		f = append(f, "Result: w.RunAnswered") // a run that is over (the owner, 17.11)
+	case e.Kid("tc-dot--danger") != nil:
+		f = append(f, "Result: w.RunFailed")
+	case e.Kid("tc-dot--dusty") != nil:
+		f = append(f, "Result: w.RunStopped")
+	default:
+		f = append(f, "Meter: "+g.meter(e.Kid("tc-meter")))
+	}
 	if p := e.Attr("data-tc-progress"); p != "" {
 		f = append(f, "Progress: "+q(p))
 		if !e.HasAttr("hidden") {
@@ -127,7 +134,7 @@ func (g *gen) runbar(e *El) string {
 			}
 		case *El:
 			switch {
-			case v.Has("tc-meter"):
+			case v.Has("tc-meter"), v.Has("tc-dot--accent"), v.Has("tc-dot--danger"), v.Has("tc-dot--dusty"):
 			case v.Has("tc-dim--danger"):
 				ps = append(ps, g.span(v, "FaceDanger"))
 			case v.Has("tc-dim--accent"):

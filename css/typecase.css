@@ -483,6 +483,8 @@ a.tc-row__title:hover{text-decoration:underline}
 /* Индикатор опроса 64 px, не шкала: 120 на планшете выталкивает хвост. */
 .tc-runbar .tc-meter{width:64px;height:3px;border-radius:2px;background:var(--tc-edge);overflow:hidden;flex:none}
 .tc-runbar .tc-meter__bar{display:block;height:100%;background:var(--tc-accent)}
+/* Кончившийся опрос: точка итога вместо полоски хода (владелец 17.11) — зелёная, если ответили все, красная, если кто-то нет, серая, если опрос остановили. Между точкой и текстом 5px, как у точек состояния; по середине цифр и прописных (владелец 17.11): подъём на 0.5px ставит её низ на целый пиксель от линии букв, так что округление везде одинаково — ровно ряд над точкой и ряд под ней (владелец 18.11). */
+.tc-runbar > .tc-dot--accent.tc-dot--accent,.tc-runbar > .tc-dot--danger.tc-dot--danger,.tc-runbar > .tc-dot--dusty.tc-dot--dusty{flex:none;margin-right:-3px;position:relative;top:-0.5px}
 /* Отступ у баннера с обеих сторон. */
 /* Полоса сообщений — зона живого слоя без своего вида: отступы у сообщений (Notices, задача Carrel 226). */
 .tc-notices{display:contents}
@@ -1675,9 +1677,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu__item--col.tc-menu__item--col{height:auto;align-items:stretch;flex-direction:column;gap:6px;padding:7px 8px}
 .tc-menu__item--muted.tc-menu__item--muted{color:var(--tc-muted)}
 .tc-menu__item--note.tc-menu__item--note{height:24px;font-size:11px;color:var(--tc-dusty);gap:5px}
-.tc-meter--w60.tc-meter--w60{width:60px}
 .tc-meter--max260-fill.tc-meter--max260-fill{max-width:260px;flex:1}
-.tc-meter__bar--alert.tc-meter__bar--alert{background:var(--tc-danger)}
 .tc-mono--t11-above-tight.tc-mono--t11-above-tight{font-size:11px;margin-top:var(--tc-gap-tight)}
 .tc-mono--ls0-dusty.tc-mono--ls0-dusty{letter-spacing:0;color:var(--tc-dusty)}
 .tc-mono--ls0-tt-none.tc-mono--ls0-tt-none{letter-spacing:0;text-transform:none}

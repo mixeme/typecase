@@ -69,6 +69,25 @@ func TestSegRole(t *testing.T) {
 // A query line with a short hint prints the short one and the whole one over
 // it, which a narrow field wraps out of sight; with a value typed, or a
 // short that is not the hint's start, there is nothing of the kind.
+func TestRunbarResult(t *testing.T) {
+	parts := []RunbarPart{Text("Polled 6 of 6 sources")}
+	for _, c := range []struct {
+		r    RunResult
+		want string
+	}{
+		{RunAnswered, `<div class="tc-runbar"><span class="tc-dot--accent"></span>Polled 6 of 6 sources</div>`},
+		{RunFailed, `<div class="tc-runbar"><span class="tc-dot--danger"></span>Polled 6 of 6 sources</div>`},
+		{RunStopped, `<div class="tc-runbar"><span class="tc-dot--dusty"></span>Polled 6 of 6 sources</div>`},
+	} {
+		if got := (Runbar{Meter: Meter{Percent: 83}, Result: c.r, Parts: parts}).Render(); got != c.want {
+			t.Errorf("result %d:\n got %s\nwant %s", c.r, got, c.want)
+		}
+	}
+	if got := (Runbar{Meter: Meter{Percent: 83}, Parts: parts}).Render(); !strings.Contains(got, `tc-meter`) || strings.Contains(got, `tc-dot`) {
+		t.Errorf("a run going keeps its meter: %s", got)
+	}
+}
+
 func TestQueryShort(t *testing.T) {
 	got := Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word"}.Render()
 	want := `<input class="tc-q" type="search" placeholder="Filter by word" aria-label="Filter by word"><span class="tc-q__ph" aria-hidden="true"><span class="tc-q__hint"><span class="tc-q__short">Filter</span><span class="tc-q__full">Filter by word</span></span></span>`

@@ -302,7 +302,7 @@ func States3() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 22},
-						Parts: []w.RunbarPart{w.Text("Polling 6 sources…"), w.Mono{Text: "0.4 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Say{Full: "Polling · 0 of 6 answered", Short: "0 of 6"}, w.Mono{Text: "0.4 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}},
 					w.List{
@@ -535,7 +535,7 @@ func States5() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 0},
 						Parts: []w.RunbarPart{
-							w.Text("No connection to carrel.example · last successful attempt 4 minutes ago "),
+							w.Say{Full: "No connection to carrel.example · last successful attempt 4 minutes ago", Short: "No connection · last success 4 min ago"},
 							w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}},
 						},
 						Failed: true,
@@ -784,9 +784,9 @@ func States6() Screen {
 						Variant: w.BarWide,
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 83, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("Polled 5 of 6 sources · 7 events · "),
+							w.Say{Full: "Polled · 5 of 6 answered · 7 events ·", Short: "5 of 6 · 7 events ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -2003,7 +2003,7 @@ func States8() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polling · 2 of 3 answered · 7 cards"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Say{Full: "Polling · 2 of 3 answered · 7 cards", Short: "2 of 3 · 7 cards"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -2224,9 +2224,9 @@ func States9() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 62, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("Polled 2 of 3 sources · 7 cards · "),
+							w.Say{Full: "Polled · 2 of 3 answered · 7 cards ·", Short: "2 of 3 · 7 cards ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -3014,7 +3014,7 @@ func States13() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Text("Polling · 4 of 6 answered · 6 events · "),
+							w.Say{Full: "Polling · 4 of 6 answered · 6 events ·", Short: "4 of 6 · 6 events ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -3634,7 +3634,7 @@ func States19() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polling · 1 of 2 answered · 4 tasks"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Say{Full: "Polling · 1 of 2 answered · 4 tasks", Short: "1 of 2 · 4 tasks"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 1, Alert: true}},
 					w.List{
@@ -3788,9 +3788,9 @@ func States20() Screen {
 						},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 62, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("Polled 1 of 2 sources · 4 tasks · "),
+							w.Say{Full: "Polled · 1 of 2 answered · 4 tasks ·", Short: "1 of 2 · 4 tasks ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -4776,7 +4776,7 @@ func States26() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Text("Polling · 1 of 2 answered · 3 notes"), w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{w.Say{Full: "Polling · 1 of 2 answered · 3 notes", Short: "1 of 2 · 3 notes"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -4912,9 +4912,9 @@ func States27() Screen {
 						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
 					},
 					w.Runbar{
-						Meter: w.Meter{Percent: 62, Alert: true},
+						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Text("Polled 1 of 2 sources · 3 notes · "),
+							w.Say{Full: "Polled · 1 of 2 answered · 3 notes ·", Short: "1 of 2 · 3 notes ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
