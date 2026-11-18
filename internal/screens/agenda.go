@@ -365,9 +365,9 @@ func Agenda1() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "Мария Лебедева", Href: "#"},
+										w.Link{Text: "Михаил Енученко", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
 									},
@@ -704,13 +704,13 @@ func Agenda27() Screen {
 													Trigger: w.TagInput{
 														Parts: []w.TagInputPart{
 															w.Tag{
-																Label: "Мария Лебедева",
-																Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+																Label: "Михаил Енученко",
+																Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
 																Fixed: true,
 																Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
-																Title: "m.lebedeva@example.org",
+																Title: "mix@example.org",
 																Name:  "attendee",
-																Value: "mailto:m.lebedeva@example.org",
+																Value: "mailto:mix@example.org",
 															},
 															w.Tag{
 																Label:     "Анна Ковалёва",
@@ -1076,9 +1076,9 @@ func Agenda28() Screen {
 								w.SecList{
 									Items: [][]w.SecItemPart{
 										[]w.SecItemPart{
-											w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+											w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 											w.Text(" "),
-											w.Link{Text: "Мария Лебедева", Href: "#"},
+											w.Link{Text: "Михаил Енученко", Href: "#"},
 											w.Text(" "),
 											w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
 										},
@@ -1811,9 +1811,9 @@ func Agenda2() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "Мария Лебедева", Href: "#"},
+										w.Link{Text: "Михаил Енученко", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
 									},
@@ -2176,13 +2176,13 @@ func Agenda3() Screen {
 												Trigger: w.TagInput{
 													Parts: []w.TagInputPart{
 														w.Tag{
-															Label: "Мария Лебедева",
-															Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+															Label: "Михаил Енученко",
+															Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
 															Fixed: true,
 															Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
-															Title: "m.lebedeva@example.org",
+															Title: "mix@example.org",
 															Name:  "attendee",
-															Value: "mailto:m.lebedeva@example.org",
+															Value: "mailto:mix@example.org",
 														},
 														w.Tag{
 															Label:     "Анна Ковалёва",

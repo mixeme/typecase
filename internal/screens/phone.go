@@ -252,9 +252,9 @@ func Phone3() Screen {
 							w.SecList{
 								Items: [][]w.SecItemPart{
 									[]w.SecItemPart{
-										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
 										w.Text(" "),
-										w.Link{Text: "Мария Лебедева", Href: "#"},
+										w.Link{Text: "Михаил Енученко", Href: "#"},
 										w.Text(" "),
 										w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
 									},

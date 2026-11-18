@@ -535,7 +535,10 @@ func States5() Screen {
 					w.Runbar{
 						Meter: w.Meter{Percent: 0},
 						Parts: []w.RunbarPart{
-							w.Say{Full: "No connection to carrel.example · last successful attempt 4 minutes ago", Short: "No connection · last success 4 min ago"},
+							w.Say{
+								Full:  "No connection to carrel.example · last successful attempt 4 minutes ago",
+								Short: "No connection · last success 4 min ago",
+							},
 							w.Push{Items: []w.PushPart{w.Button{Label: "Retry", Small: true}}},
 						},
 						Failed: true,
@@ -1162,13 +1165,13 @@ func States17() Screen {
 												Trigger: w.TagInput{
 													Parts: []w.TagInputPart{
 														w.Tag{
-															Label: "Мария Лебедева",
-															Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+															Label: "Михаил Енученко",
+															Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
 															Fixed: true,
 															Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
-															Title: "m.lebedeva@example.org",
+															Title: "mix@example.org",
 															Name:  "attendee",
-															Value: "mailto:m.lebedeva@example.org",
+															Value: "mailto:mix@example.org",
 														},
 														w.Tag{
 															Label:     "Анна Ковалёва",
@@ -1213,6 +1216,32 @@ func States17() Screen {
 											},
 										},
 										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{
+											w.TagInput{
+												Parts: []w.TagInputPart{
+													w.Tag{
+														Label:     "Заметка со встречи 10.08",
+														Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+														Removable: true,
+													},
+												},
+												Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+											},
+										},
+										Width: w.FieldLG,
 									},
 								},
 							},
@@ -1331,6 +1360,22 @@ func States17() Screen {
 								Items: []w.FieldSetPart{
 									w.Diag{
 										Text:  "X-MOZ-GENERATION  3\nX-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC\nSEQUENCE  2",
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Source"},
+								Items: []w.FieldSetPart{
+									w.Fields{
+										Items: []w.FieldsItem{
+											{
+												Term:  "Path",
+												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/personal/8f1c.ics")},
+												Face:  w.ValueMono,
+											},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
+										},
 										Place: w.Grown,
 									},
 								},
@@ -1593,13 +1638,13 @@ func States36() Screen {
 												Trigger: w.TagInput{
 													Parts: []w.TagInputPart{
 														w.Tag{
-															Label: "Мария Лебедева",
-															Mark:  &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+															Label: "Михаил Енученко",
+															Mark:  &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
 															Fixed: true,
 															Aside: &w.Dim{Parts: []w.Inline{w.Text("· organiser")}},
-															Title: "m.lebedeva@example.org",
+															Title: "mix@example.org",
 															Name:  "attendee",
-															Value: "mailto:m.lebedeva@example.org",
+															Value: "mailto:mix@example.org",
 														},
 														w.Tag{
 															Label:     "Анна Ковалёва",
@@ -1644,6 +1689,32 @@ func States36() Screen {
 											},
 										},
 										Width: w.FieldFull,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Other"},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Label: "Link",
+										Parts: []w.FieldPart{w.Input{Name: "link", Placeholder: "optional", Label: "Link"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Related to",
+										Parts: []w.FieldPart{
+											w.TagInput{
+												Parts: []w.TagInputPart{
+													w.Tag{
+														Label:     "Заметка со встречи 10.08",
+														Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+														Removable: true,
+													},
+												},
+												Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
+											},
+										},
+										Width: w.FieldLG,
 									},
 								},
 							},
@@ -1762,6 +1833,22 @@ func States36() Screen {
 								Items: []w.FieldSetPart{
 									w.Diag{
 										Text:  "X-MOZ-GENERATION  3\nX-APPLE-TRAVEL-ADVISORY-BEHAVIOR  AUTOMATIC\nSEQUENCE  2",
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Source"},
+								Items: []w.FieldSetPart{
+									w.Fields{
+										Items: []w.FieldsItem{
+											{
+												Term:  "Path",
+												Value: []w.ValuePart{w.Text("/remote.php/dav/calendars/mix/personal/8f1c.ics")},
+												Face:  w.ValueMono,
+											},
+											{Term: "Read", Value: []w.ValuePart{w.Text("2 min ago · not changed on server")}},
+										},
 										Place: w.Grown,
 									},
 								},
@@ -2003,7 +2090,10 @@ func States8() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Say{Full: "Polling · 2 of 3 answered · 7 cards", Short: "2 of 3 · 7 cards"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{
+							w.Say{Full: "Polling · 2 of 3 answered · 7 cards", Short: "2 of 3 · 7 cards"},
+							w.Mono{Text: "0.8 s", Place: w.Pushed},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "А", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -3634,7 +3724,10 @@ func States19() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Say{Full: "Polling · 1 of 2 answered · 4 tasks", Short: "1 of 2 · 4 tasks"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{
+							w.Say{Full: "Polling · 1 of 2 answered · 4 tasks", Short: "1 of 2 · 4 tasks"},
+							w.Mono{Text: "0.8 s", Place: w.Pushed},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Overdue", Form: w.RubricInline}, Count: &w.Num{Value: 1, Alert: true}},
 					w.List{
@@ -3924,7 +4017,7 @@ func States21() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Tags"}},
-					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "релиз"}, w.Tag{Label: "read"}},
+					Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "дом"}, w.Tag{Label: "read"}},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -4115,11 +4208,13 @@ func States23() Screen {
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
 						w.TickRow{
+							Ticked:  w.TickedOff,
 							Kind:    w.TickRowExternal,
 							Mark:    w.Mark{Colour: "#8C6239"},
 							Label:   "Праздники РФ",
 							Meta:    "2",
 							Current: true,
+							Hidden:  true,
 							Trail:   w.Badge{Label: "ro"},
 						},
 					},
@@ -4776,7 +4871,10 @@ func States26() Screen {
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
-						Parts: []w.RunbarPart{w.Say{Full: "Polling · 1 of 2 answered · 3 notes", Short: "1 of 2 · 3 notes"}, w.Mono{Text: "0.8 s", Place: w.Pushed}},
+						Parts: []w.RunbarPart{
+							w.Say{Full: "Polling · 1 of 2 answered · 3 notes", Short: "1 of 2 · 3 notes"},
+							w.Mono{Text: "0.8 s", Place: w.Pushed},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -5210,10 +5308,12 @@ func States30() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
+							Ticked:  w.TickedOff,
 							Mark:    w.Mark{Colour: "#3F6E8C"},
 							Label:   "Общие с семьёй",
 							Meta:    "2",
 							Current: true,
+							Hidden:  true,
 							Trail:   w.Badge{Label: "ro"},
 						},
 					},

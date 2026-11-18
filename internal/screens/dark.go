@@ -406,8 +406,30 @@ func Dark2() Screen {
 							Variant: w.DimWrap,
 						},
 					},
-					Refusals: ContactsDropRefusals(),
-					Variant:  w.EmptyDrop,
+					Refusals: []w.Refusal{
+						w.Refusal{
+							Of: ".ics",
+							Parts: []w.Inline{
+								w.Text("Contacts take "),
+								w.Mono{Text: ".vcf"},
+								w.Text(" — the calendar and the list of tasks take this one"),
+							},
+						},
+						w.Refusal{
+							Of:    ".md",
+							Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")},
+						},
+						w.Refusal{
+							Of:    ".zip",
+							Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")},
+						},
+						w.Refusal{
+							Of:    "*",
+							Parts: []w.Inline{w.Text("Only "), w.Mono{Text: ".vcf"}, w.Text(" files are imported here")},
+						},
+						w.Refusal{Of: "several", Parts: []w.Inline{w.Text("One file at a time: only notes take several")}},
+					},
+					Variant: w.EmptyDrop,
 				},
 				Pad: w.ScrimPad38,
 			},

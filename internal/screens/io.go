@@ -158,8 +158,30 @@ func Io1() Screen {
 							Variant: w.DimWrap,
 						},
 					},
-					Refusals: ContactsDropRefusals(),
-					Variant:  w.EmptyDrop,
+					Refusals: []w.Refusal{
+						w.Refusal{
+							Of: ".ics",
+							Parts: []w.Inline{
+								w.Text("Contacts take "),
+								w.Mono{Text: ".vcf"},
+								w.Text(" — the calendar and the list of tasks take this one"),
+							},
+						},
+						w.Refusal{
+							Of:    ".md",
+							Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")},
+						},
+						w.Refusal{
+							Of:    ".zip",
+							Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")},
+						},
+						w.Refusal{
+							Of:    "*",
+							Parts: []w.Inline{w.Text("Only "), w.Mono{Text: ".vcf"}, w.Text(" files are imported here")},
+						},
+						w.Refusal{Of: "several", Parts: []w.Inline{w.Text("One file at a time: only notes take several")}},
+					},
+					Variant: w.EmptyDrop,
 				},
 				Pad:  w.ScrimPad38,
 				Drop: "post-import",
@@ -2235,22 +2257,5 @@ func Io14() Screen {
 				},
 			},
 		},
-	}
-}
-
-// ContactsDropRefusals are what the drop sheet of a list of contacts says
-// of a file it does not take, in Carrel's words (notes 111 p. 4 and 113
-// p. 1; Carrel's task 265): another kind's file — where to carry it; any
-// other — what is imported here; several — one at a time.
-func ContactsDropRefusals() []w.Refusal {
-	elsewhere := func(ext, holder string) w.Refusal {
-		return w.Refusal{Of: ext, Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — " + holder + " this one")}}
-	}
-	return []w.Refusal{
-		elsewhere(".ics", "the calendar and the list of tasks take"),
-		elsewhere(".md", "a notebook takes"),
-		elsewhere(".zip", "a notebook takes"),
-		{Of: w.RefuseOther, Parts: []w.Inline{w.Text("Only "), w.Mono{Text: ".vcf"}, w.Text(" files are imported here")}},
-		{Of: w.RefuseSeveral, Parts: []w.Inline{w.Text("One file at a time: only notes take several")}},
 	}
 }

@@ -439,9 +439,13 @@ func queryOf(qq, box *El) string {
 	v := "Value: " + q(qq.Attr("value"))
 	if ph := qq.Attr("placeholder"); ph != "" {
 		v = "Placeholder: " + q(ph)
+		// the short word stands in the hint over the line: tc-q__ph >
+		// tc-q__hint > tc-q__short
 		if sh := box.Kid("tc-q__ph"); sh != nil {
-			if t := sh.Kid("tc-q__short"); t != nil {
-				v += ", Short: " + q(t.Text())
+			if h := sh.Kid("tc-q__hint"); h != nil {
+				if t := h.Kid("tc-q__short"); t != nil {
+					v += ", Short: " + q(t.Text())
+				}
 			}
 		}
 	}
