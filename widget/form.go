@@ -664,7 +664,7 @@ func multipart(form string) string {
 // PostForm — tc-post
 //
 // Роль. Форма POST без полей на виду: её отправляет кнопка, стоящая где угодно на странице, по её имени (Button.Form).
-// Вход. PostForm{ID, Action, Fields, File, Target, Multipart, Method}.
+// Вход. PostForm{ID, Action, Fields, File, Accept, Many, Target, Multipart, Method}.
 // Состояния. default.
 // Инварианты. Форму не видно: в ней только скрытые поля; форма печатает фрагмент своего кадра.
 // Поведение. Отправку делает браузер — сценарий не нужен.
@@ -676,6 +676,12 @@ type PostForm struct {
 	Action string
 	Fields []Hidden
 	File   string // the name of a file field: the form a dropped file is sent with
+	// Accept is what the file field takes — «.vcf», «.md,.zip,.ics»,
+	// «image/*» — and Many lets it take several files at once: a drop
+	// sheet that names the form refuses on its own what the field does not
+	// take (Empty.Refusals; Carrel's task 265).
+	Accept string
+	Many   bool
 	// Target is the name of the zone the form asks its address for with the
 	// live layer, instead of loading the page (Carrel's task 84): a dropped
 	// or pasted file goes in place, its answer into the zones (task 88).
@@ -700,7 +706,7 @@ func (f PostForm) html(m mix) string {
 		s.WriteString(h.html(nil))
 	}
 	if f.File != "" {
-		s.WriteString(`<input type="file"` + attr("name", f.File) + ` aria-label="File">`)
+		s.WriteString(`<input type="file"` + attr("name", f.File) + attr("accept", f.Accept) + flag("multiple", f.Many) + ` aria-label="File">`)
 	}
 	s.WriteString(`</form>`)
 	return s.String()

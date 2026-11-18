@@ -426,6 +426,71 @@ func TestAddRowAndDrop(t *testing.T) {
 	}
 }
 
+// TestDropRefusal (Carrel's task 265, frames s-io-1 and s-io-24): the drop
+// sheet refuses on its own what the field of its form does not take —
+// several files at once while they are dragged, a name its accept does not
+// take once dropped — in the words of that case (else of any other), sends
+// nothing and stays; a file it takes goes. A dialog with an ID takes a
+// dropped file into its field as one picked there, and does not send.
+func TestDropRefusal(t *testing.T) {
+	needChrome(t)
+	post := w.PostForm{ID: "post-import", Action: "/import", File: "file", Accept: ".vcf"}
+	sheet := w.Empty{Lead: "Drop to import", Variant: w.EmptyDrop, Refusals: []w.Refusal{
+		{Of: ".ics", Parts: []w.Inline{w.Text("ics elsewhere")}},
+		{Of: w.RefuseOther, Parts: []w.Inline{w.Text("only vcf")}},
+		{Of: w.RefuseSeveral, Parts: []w.Inline{w.Text("one at a time")}}}}
+	drop := w.Scrim{ID: "drop", Closed: true, Drop: "post-import", Content: sheet}
+	step := w.Dialog{ID: "step-1", Action: "/restore", Items: []w.DialogPart{w.Field{Label: "Archive", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Button{Label: "Choose a file", File: &w.FileField{Name: "archive", Accept: ".zip", Label: "Archive"}}}}}}}}
+	step2 := w.Scrim{ID: "drop2", Closed: true, Drop: "step-1", Content: w.Empty{Lead: "Drop the archive", Variant: w.EmptyDrop}}
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("drop-refusal", browser.PageHTML(`<div class="tc-root">`+post.Render()+drop.Render()+`</div>`, ""))
+	url2 := h.RegisterPage("drop-dialog", browser.PageHTML(`<div class="tc-root">`+step.Render()+step2.Render()+`</div>`, ""))
+	const js = `(() => {
+		const said = [];
+		document.addEventListener("submit", e => { e.preventDefault(); said.push("sent " + e.target.id); });
+		const sheet = document.getElementById("drop");
+		const files = (...names) => { const dt = new DataTransfer(); names.forEach(n => dt.items.add(new File(["x"], n))); return dt; };
+		const fire = (type, dt) => document.dispatchEvent(new DragEvent(type, {dataTransfer: dt, bubbles: true, cancelable: true}));
+		const state = what => {
+			const on = sheet.querySelector(".tc-empty__refusal.is-on");
+			const lead = sheet.querySelector(".tc-empty__lead");
+			if (!sheet.getClientRects().length) return said.push(what + ": hidden, " + (sheet.querySelector(".tc-empty.is-refused") ? "refused" : "not refused"));
+			said.push(what + ": shown, " + (on ? "says " + on.textContent : "no refusal") + ", lead " + (lead.getClientRects().length > 0 ? "seen" : "unseen"));
+		};
+		fire("dragenter", files("a.vcf", "b.vcf")); state("two dragged");
+		fire("dragover", files("a.vcf")); state("one dragged");
+		fire("drop", files("a.ics")); state("an .ics dropped");
+		fire("dragenter", files("b.txt")); fire("drop", files("b.txt")); state("a .txt dropped");
+		fire("dragenter", files("c.VCF")); fire("drop", files("c.VCF")); state("a .VCF dropped");
+		return said.join("; ");
+	})()`
+	const js2 = `(() => {
+		let sent = false;
+		document.addEventListener("submit", e => { e.preventDefault(); sent = true; });
+		const dt = new DataTransfer(); dt.items.add(new File(["PK"], "backup.zip"));
+		document.dispatchEvent(new DragEvent("dragenter", {dataTransfer: dt, bubbles: true, cancelable: true}));
+		document.dispatchEvent(new DragEvent("drop", {dataTransfer: dt, bubbles: true, cancelable: true}));
+		const f = document.querySelector("#step-1 input[type=file]");
+		return (f.files.length ? f.files[0].name : "none") + (sent ? ", sent" : ", not sent");
+	})()`
+	var got, got2 string
+	if err := h.Run(url, 900, 600, chromedp.Evaluate(js, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(url2, 900, 600, chromedp.Evaluate(js2, &got2)); err != nil {
+		t.Fatal(err)
+	}
+	want := "two dragged: shown, says one at a time, lead unseen; one dragged: shown, no refusal, lead seen; " +
+		"an .ics dropped: shown, says ics elsewhere, lead unseen; a .txt dropped: shown, says only vcf, lead unseen; " +
+		"sent post-import; a .VCF dropped: hidden, not refused"
+	if got != want {
+		t.Errorf("a drop the form does not take:\n got %s\nwant %s", got, want)
+	}
+	if got2 != "backup.zip, not sent" {
+		t.Errorf("a file dropped for a dialog step: %s, want it in the field, not sent", got2)
+	}
+}
+
 // TestSideDrop (a tail of Carrel's task 88, frame s-io-2): a file over the
 // open card's panel marks the panel and keeps the page's drop sheet away;
 // dropped there, it goes to the panel's form, not the sheet's. Off the panel

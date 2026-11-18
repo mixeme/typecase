@@ -137,16 +137,6 @@ func Dark1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Strong: true,
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-								On:     true,
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -161,6 +151,16 @@ func Dark1() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Strong: true,
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
+								On:     true,
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -356,20 +356,20 @@ func Dark2() Screen {
 							Rows: []w.ListRow{
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@example.org",
-									Caption:  "Издательство «Слово»",
-									Source:   "nextcloud · Контакты",
-								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
 									Avatar:   w.Avatar{Initials: "АС"},
 									Title:    []w.Inline{w.Text("Алексей Смирнов")},
 									Subtitle: "+7 916 200-71-15",
 									Detail:   "—",
 									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@example.org",
+									Caption:  "Издательство «Слово»",
 									Source:   "nextcloud · Контакты",
 								},
 							},
@@ -406,7 +406,8 @@ func Dark2() Screen {
 							Variant: w.DimWrap,
 						},
 					},
-					Variant: w.EmptyDrop,
+					Refusals: ContactsDropRefusals(),
+					Variant:  w.EmptyDrop,
 				},
 				Pad: w.ScrimPad38,
 			},

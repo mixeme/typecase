@@ -871,27 +871,113 @@
 		if (panel) panel.classList.add("tc-side--drop");
 	}
 
+	// A drop sheet refuses on its own a file the field of its form does not
+	// take (Carrel's task 265): several where it takes one — known while
+	// the files are dragged, by their number — or, once dropped, a name its
+	// accept does not take. The sheet then says only the refusal of that
+	// case (Empty.Refusals: the file's extension, else any other), in red,
+	// sends nothing and stays until a press or Esc; with no words for the
+	// case the file goes on, and the server answers.
+	function fileField(form) {
+		return (
+			(form &&
+				form.elements &&
+				Array.prototype.filter.call(form.elements, function (x) {
+					return x.type === "file";
+				})[0]) ||
+			null
+		);
+	}
+
+	function takes(input, file) {
+		var accept = (input.getAttribute("accept") || "").split(",");
+		var name = (file.name || "").toLowerCase(),
+			type = (file.type || "").toLowerCase(),
+			any = false;
+		for (var i = 0; i < accept.length; i++) {
+			var a = accept[i].trim().toLowerCase();
+			if (!a) continue;
+			any = true;
+			if (a.charAt(0) === "." ? name.slice(-a.length) === a : a.slice(-2) === "/*" ? type.indexOf(a.slice(0, -1)) === 0 : type === a) return true;
+		}
+		return !any;
+	}
+
+	function refusalOf(input, files, count) {
+		if (!input) return "";
+		if (count > 1 && !input.multiple) return "several";
+		for (var i = 0; files && i < files.length; i++) {
+			if (takes(input, files[i])) continue;
+			var name = (files[i].name || "").toLowerCase(),
+				dot = name.lastIndexOf(".");
+			return dot > 0 ? name.slice(dot) : "*";
+		}
+		return "";
+	}
+
+	function refuse(sheet, how) {
+		var empty = sheet.querySelector(".tc-empty");
+		if (!empty) return false;
+		var said = empty.querySelectorAll("[data-tc-refusal]"),
+			own = null,
+			other = null;
+		empty.classList.remove("is-refused");
+		for (var i = 0; i < said.length; i++) {
+			said[i].classList.remove("is-on");
+			var of = said[i].getAttribute("data-tc-refusal");
+			if (of === how) own = said[i];
+			if (of === "*") other = said[i];
+		}
+		var r = how ? own || (how !== "several" ? other : null) : null;
+		if (!r) return false;
+		empty.classList.add("is-refused");
+		r.classList.add("is-on");
+		return true;
+	}
+
+	function draggedCount(dt) {
+		if (!dt) return 0;
+		if (dt.items && dt.items.length) {
+			var n = 0;
+			for (var i = 0; i < dt.items.length; i++) if (dt.items[i].kind === "file") n++;
+			return n;
+		}
+		return dt.files ? dt.files.length : 0;
+	}
+
 	function onDrag(e) {
 		if (!carriesFiles(e)) return;
 		var sheet = dropSheet(), panel = dropPanel(e);
 		if (!sheet && !panel && !dropOver) return;
 		e.preventDefault();
+		var form = sheet && document.getElementById(sheet.getAttribute("data-tc-drop"));
 		if (e.type === "dragleave") {
 			if (e.relatedTarget) return;
 			markDrop(null);
-			if (sheet) hide(sheet);
+			if (sheet) {
+				hide(sheet);
+				refuse(sheet, "");
+			}
 			return;
 		}
 		if (e.type === "dragenter" || e.type === "dragover") {
 			markDrop(panel);
 			if (sheet && panel) hide(sheet);
-			else if (sheet) show(sheet);
+			else if (sheet) {
+				refuse(sheet, refusalOf(fileField(form), null, draggedCount(e.dataTransfer)));
+				show(sheet);
+			}
 			return;
 		}
 		markDrop(null);
+		var files = e.dataTransfer.files;
+		if (sheet && !panel && refuse(sheet, refusalOf(fileField(form), files, files ? files.length : 0))) {
+			show(sheet);
+			return;
+		}
 		if (sheet) hide(sheet);
 		var to = panel || sheet;
-		if (to) give(document.getElementById(to.getAttribute("data-tc-drop")), e.dataTransfer.files);
+		if (to) give(document.getElementById(to.getAttribute("data-tc-drop")), files);
 	}
 
 	// A file that was dropped or came from the clipboard goes into the file
@@ -899,11 +985,7 @@
 	// its files for Save shows them in its list, any other sends its form —
 	// by its submit event, so that the live layer can send it in place.
 	function give(form, files) {
-		var input =
-			form &&
-			Array.prototype.filter.call(form.elements, function (x) {
-				return x.type === "file";
-			})[0];
+		var input = fileField(form);
 		if (!input || !files || !files.length) return false;
 		try {
 			input.files = files;

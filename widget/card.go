@@ -96,6 +96,7 @@ type CardRowPart interface {
 }
 
 func (Button) cardRowPart()   {}
+func (Drop) cardRowPart()     {}
 func (Input) cardRowPart()    {}
 func (Field) cardRowPart()    {}
 func (Tag) cardRowPart()      {}

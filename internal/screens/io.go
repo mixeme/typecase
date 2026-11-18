@@ -71,6 +71,7 @@ func Io1() Screen {
 							Action: "/app/contacts/nextcloud/kontakty/import",
 							Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 							File:   "file",
+							Accept: ".vcf",
 						},
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Контакты"},
@@ -107,20 +108,20 @@ func Io1() Screen {
 							Rows: []w.ListRow{
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АК"},
-									Title:    []w.Inline{w.Text("Анна Ковалёва")},
-									Subtitle: "+7 912 445-10-88",
-									Detail:   "a.kovaleva@example.org",
-									Caption:  "Издательство «Слово»",
-									Single:   true,
-								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
 									Avatar:   w.Avatar{Initials: "АС"},
 									Title:    []w.Inline{w.Text("Алексей Смирнов")},
 									Subtitle: "+7 916 200-71-15",
 									Detail:   "—",
 									Caption:  "—",
+									Single:   true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АК"},
+									Title:    []w.Inline{w.Text("Анна Ковалёва")},
+									Subtitle: "+7 912 445-10-88",
+									Detail:   "a.kovaleva@example.org",
+									Caption:  "Издательство «Слово»",
 									Single:   true,
 								},
 							},
@@ -157,7 +158,8 @@ func Io1() Screen {
 							Variant: w.DimWrap,
 						},
 					},
-					Variant: w.EmptyDrop,
+					Refusals: ContactsDropRefusals(),
+					Variant:  w.EmptyDrop,
 				},
 				Pad:  w.ScrimPad38,
 				Drop: "post-import",
@@ -286,16 +288,6 @@ func Io2() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Strong: true,
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-								On:     true,
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -310,6 +302,16 @@ func Io2() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Strong: true,
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
+								On:     true,
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -431,7 +433,7 @@ func Io2() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -2233,5 +2235,22 @@ func Io14() Screen {
 				},
 			},
 		},
+	}
+}
+
+// ContactsDropRefusals are what the drop sheet of a list of contacts says
+// of a file it does not take, in Carrel's words (notes 111 p. 4 and 113
+// p. 1; Carrel's task 265): another kind's file — where to carry it; any
+// other — what is imported here; several — one at a time.
+func ContactsDropRefusals() []w.Refusal {
+	elsewhere := func(ext, holder string) w.Refusal {
+		return w.Refusal{Of: ext, Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — " + holder + " this one")}}
+	}
+	return []w.Refusal{
+		elsewhere(".ics", "the calendar and the list of tasks take"),
+		elsewhere(".md", "a notebook takes"),
+		elsewhere(".zip", "a notebook takes"),
+		{Of: w.RefuseOther, Parts: []w.Inline{w.Text("Only "), w.Mono{Text: ".vcf"}, w.Text(" files are imported here")}},
+		{Of: w.RefuseSeveral, Parts: []w.Inline{w.Text("One file at a time: only notes take several")}},
 	}
 }

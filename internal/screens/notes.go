@@ -2071,14 +2071,6 @@ func Notes5() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.TimeRow{
-									Mark:   w.Mark{Colour: "#4A6B52"},
-									Time:   "10:00",
-									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-									Detail: "Переговорная 2",
-									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-									Source: "nextcloud · Личный",
-								},
-								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
 									Time:   "all day",
 									Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -2093,6 +2085,14 @@ func Notes5() Screen {
 									Detail: "—",
 									Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 									Source: "radicale · vps · Дежурства",
+								},
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "10:00",
+									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+									Detail: "Переговорная 2",
+									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+									Source: "nextcloud · Личный",
 								},
 								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2445,14 +2445,6 @@ func Notes7() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -2467,6 +2459,14 @@ func Notes7() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2658,14 +2658,6 @@ func Notes8() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.TimeRow{
-									Mark:   w.Mark{Colour: "#4A6B52"},
-									Time:   "10:00",
-									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-									Detail: "Переговорная 2",
-									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-									Source: "nextcloud · Личный",
-								},
-								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
 									Time:   "all day",
 									Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -2680,6 +2672,14 @@ func Notes8() Screen {
 									Detail: "—",
 									Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 									Source: "radicale · vps · Дежурства",
+								},
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "10:00",
+									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+									Detail: "Переговорная 2",
+									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+									Source: "nextcloud · Личный",
 								},
 								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -2910,6 +2910,15 @@ func Notes9() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АС"},
+									Title:    []w.Inline{w.Text("Алексей Смирнов")},
+									Subtitle: "+7 916 200-71-15",
+									Detail:   "—",
+									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
 									Avatar:     w.Avatar{Initials: "АК"},
 									Title:      []w.Inline{w.Text("Анна Ковалёва")},
@@ -2933,29 +2942,11 @@ func Notes9() Screen {
 									Source:     "2 sources",
 									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АС"},
-									Title:    []w.Inline{w.Text("Алексей Смирнов")},
-									Subtitle: "+7 916 200-71-15",
-									Detail:   "—",
-									Caption:  "—",
-									Source:   "nextcloud · Контакты",
-								},
 							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 						w.List{
 							Rows: []w.ListRow{
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "ВГ"},
-									Title:    []w.Inline{w.Text("Виктор Гончаров")},
-									Subtitle: "—",
-									Detail:   "v.goncharov@example.org",
-									Caption:  "Городская библиотека №4",
-									Source:   "nextcloud · Контакты",
-								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#A05A2C"},
 									Avatar:   w.Avatar{Initials: "ВЛ"},
@@ -2964,6 +2955,15 @@ func Notes9() Screen {
 									Detail:   "vera@example.net",
 									Caption:  "—",
 									Source:   "nextcloud · Архив",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВГ"},
+									Title:    []w.Inline{w.Text("Виктор Гончаров")},
+									Subtitle: "—",
+									Detail:   "v.goncharov@example.org",
+									Caption:  "Городская библиотека №4",
+									Source:   "nextcloud · Контакты",
 								},
 							},
 						},
@@ -3752,14 +3752,6 @@ func Notes11() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.TimeRow{
-									Mark:   w.Mark{Colour: "#4A6B52"},
-									Time:   "10:00",
-									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-									Detail: "Переговорная 2",
-									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-									Source: "nextcloud · Личный",
-								},
-								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
 									Time:   "all day",
 									Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -3774,6 +3766,14 @@ func Notes11() Screen {
 									Detail: "—",
 									Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 									Source: "radicale · vps · Дежурства",
+								},
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "10:00",
+									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+									Detail: "Переговорная 2",
+									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+									Source: "nextcloud · Личный",
 								},
 								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},

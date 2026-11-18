@@ -312,7 +312,8 @@ func (g *gen) empty(e *El) string {
 	if lead != nil {
 		f = append(f, "Lead: "+q(lead.Text()))
 	}
-	var ps []string
+	var ps, refusals []string
+	refused := ""
 	for _, k := range e.Kids {
 		switch v := k.(type) {
 		case string:
@@ -322,6 +323,24 @@ func (g *gen) empty(e *El) string {
 		case *El:
 			switch {
 			case v.Tag == "svg" || v.Has("tc-empty__lead") || v.Has("tc-empty__lead-sm"):
+			case v.Has("tc-empty__refusal"):
+				// a drop sheet's words for a file its form does not take (Carrel's task 265)
+				var its []string
+				for _, y := range v.Kids {
+					switch z := y.(type) {
+					case string:
+						if strings.TrimFunc(z, isSpace) != "" {
+							its = append(its, textpart(v, z))
+						}
+					case *El:
+						its = append(its, g.mono(z))
+					}
+				}
+				of := v.Attr("data-tc-refusal")
+				if v.Has("is-on") {
+					refused = of
+				}
+				refusals = append(refusals, "w.Refusal{Of: "+q(of)+", Parts: []w.Inline{"+join(its, ", ")+"}}")
 			case v.Has("tc-btn"):
 				ps = append(ps, g.button(v))
 			case v.Has("tc-line"):
@@ -374,6 +393,12 @@ func (g *gen) empty(e *El) string {
 	}
 	if len(ps) > 0 {
 		f = append(f, "Parts: []w.EmptyPart{"+join(ps, ", ")+"}")
+	}
+	if len(refusals) > 0 {
+		f = append(f, "Refusals: []w.Refusal{"+join(refusals, ", ")+"}")
+	}
+	if refused != "" {
+		f = append(f, "Refused: "+q(refused))
 	}
 	if v := firstOf(e, emptyVariant); v != "" {
 		f = append(f, "Variant: w."+v)
@@ -680,6 +705,9 @@ func (g *gen) rowPart(x *El) string {
 	switch {
 	case x.Has("tc-btn"):
 		return g.button(x)
+	case x.Has("tc-drop"):
+		// a menu of the records of a group: Take one out (Carrel's task 267)
+		return g.drop(x)
 	case x.Has("tc-field"):
 		return g.field(x)
 	case x.Has("tc-tag"):

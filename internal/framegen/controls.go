@@ -1468,10 +1468,10 @@ func hiddens(es []*El) string {
 func (g *gen) postForm(e *El) string {
 	f := []string{"ID: " + q(e.Attr("id")), "Action: " + q(e.Attr("action"))}
 	var hid []*El
-	file := ""
+	file, accept, many := "", "", false
 	for _, k := range e.Els() {
 		if k.Attr("type") == "file" {
-			file = k.Attr("name")
+			file, accept, many = k.Attr("name"), k.Attr("accept"), k.HasAttr("multiple")
 		} else {
 			hid = append(hid, k)
 		}
@@ -1481,6 +1481,12 @@ func (g *gen) postForm(e *El) string {
 	}
 	if file != "" {
 		f = append(f, "File: "+q(file))
+		if accept != "" {
+			f = append(f, "Accept: "+q(accept))
+		}
+		if many {
+			f = append(f, "Many: true")
+		}
 	} else if e.Attr("enctype") == "multipart/form-data" {
 		f = append(f, "Multipart: true")
 	}

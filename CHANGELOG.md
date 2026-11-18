@@ -183,6 +183,25 @@ do, not what the authors did.
 
 ### Added
 
+- **A drop sheet refuses what its field does not take** (Carrel's task
+  265). `Empty.Refusals` are the sheet's words for a file its form does not
+  take: `Refusal{Of, Parts}`, `Of` an extension («.ics» — where to carry
+  it), `RefuseOther` for any other file, `RefuseSeveral` for several where
+  one is taken. They stay unseen until the library's script refuses: by the
+  number of files while they are dragged, by the name once dropped. Then
+  the sheet says only that refusal, in red, its frame and icon red too,
+  sends nothing and stays until a press or Esc; with no words for the case
+  the file goes on. What the field takes is its own `accept` and
+  `multiple`: `PostForm.Accept` and `PostForm.Many` set them on a drop
+  form; `Empty.Refused` prints the refusing state for a frame.
+- **`Dialog.ID`** is the id of the dialog's form (Carrel's task 265): a
+  drop sheet names it (`Scrim.Drop`), and a file dropped on the window
+  stands in the dialog's file field as one picked there — the first step
+  of an import, a restore from this computer; parts of it go as of a
+  picked one (`FileField.Ranges`).
+- **A card's row holds a drop** (Carrel's task 267): «Take one out ▾»
+  among a group's buttons. A `MenuItem` with `To` sends its `Name` and
+  `Value` too (it was taken for a radio item before).
 - **A run that is over shows how it ended** (the owner, 17.11).
   `Runbar.Result` puts a dot in place of the meter: `RunAnswered` green,
   every source answered; `RunFailed` red, something did not; `RunStopped`
@@ -1183,6 +1202,28 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A drop sheet that refuses, and the sheet of a folder** (Carrel's task
+  265). s-io-24, a fragment: the contacts' sheet when an `.ics` was
+  dropped — «Contacts take .vcf — the calendar and the list of tasks take
+  this one» in red instead of all its words. s-io-1 and dark-2 carry the
+  five refusals unseen (the sheets look the same). s-io-25, a fragment: «Drop to
+  upload · into 2026-08 · A name already taken is refused, not
+  overwritten», the sheet of a folder and an empty folder; the table of
+  drop sheets names it.
+- **One record taken out of a group of duplicates** (Carrel's task 267).
+  s-dup-9: a group of four — three copies of Анна Ковалёва and Алексей
+  Смирнов, pulled in by the shared work phone — with «Take one out ▾», a
+  menu of the records with their collections; it stands in groups of
+  three and more; the open menu stands under its button, the row
+  keeps its buttons on one top line. s-dup-10: after it, the group of three and the pair
+  «not duplicates» with «Offer again».
+- **A–Z is by the name shown, and a day begins with what lasts all day**
+  (Carrel's tasks 266 and 268). The rows of a letter group stand in
+  alphabetical order (19 frames: the contacts, their search, the mail's
+  address book); a day of the agenda puts its all-day events first, then
+  by time (17 frames). The tags of «Синк-ап по релизу» are «релиз,
+  работа» everywhere (s-agenda-21 and four edit forms had «release,
+  team»), and release-checklist.md is «3 KB», as its 3072 bytes.
 - **A run that is over has a dot, not a meter** (the owner, 17.11). The
   ten «Polled …» lines (components-16, -17, dark-1, s-agenda-1,
   s-contacts-7, s-mailbox-21, states-6, -9, -20, -27), the ended searches

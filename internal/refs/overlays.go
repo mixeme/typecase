@@ -8,6 +8,15 @@ func overlay(state string, fixture Renderer, frame, class string, n int) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("marks", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Анна Ковалёва · Контакты", To: "/app/duplicates/decide", Name: "out", Value: "1"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Анна Ковалёва · Архив", To: "/app/duplicates/decide", Name: "out", Value: "2"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Анна Ковалёва · Команда", To: "/app/duplicates/decide", Name: "out", Value: "3"}}}, "s-dup-10", "tc-menu", 1),
+	overlay("marks", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Анна Ковалёва · Контакты", To: "/app/duplicates/decide", Name: "out", Value: "1"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Анна Ковалёва · Архив", To: "/app/duplicates/decide", Name: "out", Value: "2"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Анна Ковалёва · Команда", To: "/app/duplicates/decide", Name: "out", Value: "3"},
+		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Алексей Смирнов · Контакты", To: "/app/duplicates/decide", Name: "out", Value: "4"}}}, "s-dup-9", "tc-menu", 1),
 	overlay("detail", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "refresh", Detail: &w.Mono{Text: "2 min ago", Variant: w.Mono11Dusty}, Label: "Refresh"}}}, "components-44", "tc-menu", 1),
 	overlay("plain", w.Menu{Items: []w.MenuPart{
@@ -1089,7 +1098,7 @@ var _ = add(
 			{Icon: "file", Label: "2026-07", Indent: w.TreeLevel58},
 			{Icon: "img", Label: "2026-08-04-whiteboard.jpg", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("2.8 MB · link")}, Size: w.Dim11}},
 			{Icon: "img", Label: "2026-08-10-sync-board.png", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("412 KB · inside")}, Size: w.Dim11}},
-			{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("3.1 KB · inside")}, Size: w.Dim11}},
+			{Icon: "doc", Label: "release-checklist.md", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("3 KB · inside")}, Size: w.Dim11}},
 			{Icon: "doc", Label: "смета-подрядчик.pdf", Indent: w.TreeLevel58, Trail: w.Dim{Parts: []w.Inline{w.Text("1.2 MB · inside")}, Size: w.Dim11}},
 			{Icon: "file", Label: "Public"}}}}, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, State: w.ButtonDisabled}, w.Kbd{Keys: "Enter"}, w.Dim{Parts: []w.Inline{w.Text("Choose a file in the tree.")}, Size: w.Dim11_5}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, "s-files-16", "tc-sheet", 1),
 	overlay("icon", w.Sheet{Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/rewrite", Icon: "refresh", Title: "Rewrite the address in their records?", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("Анна Ковалёва · saved")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}}, Body: []w.SheetPart{
@@ -1276,7 +1285,7 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("Inside one server this is "), w.Mono{Text: "MOVE", Form: w.MonoCode}, w.Text(": instant, no traffic. To another address book the card is copied and then deleted — Carrel says so before it starts, not after. Copy is this same sheet with "), w.Strong("Copy"), w.Text(".")}, Space: w.MsgFlushTop2}}, Foot: []w.SheetFootPart{w.Button{Label: "Move", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Gap: w.LineGapNormal, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}, "s-contacts-2", "tc-scrim", 1),
 	overlay("plain", w.Scrim{Content: w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Pick{Value: "nextcloud · Записи", Variant: w.PickT12W200, Label: "Where", Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Label: "Text"}}, Foot: []w.SheetFootPart{w.Button{Label: "Save note", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Ctrl+Enter"}, w.Button{Label: "Open the card", Icon: "expand"}, w.Line{Gap: w.LineGapNormal, Place: w.Pushed, Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}}}}}, "s-notes-5", "tc-scrim", 1),
-	overlay("pad", w.Scrim{Content: w.Empty{Icon: "import", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One"), w.Mono{Text: ".vcf"}, w.Text("file into"), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Variant: w.EmptyDrop}, Pad: w.ScrimPad38}, "s-io-1", "tc-scrim", 1),
+	overlay("pad", w.Scrim{Content: w.Empty{Icon: "import", Lead: "Drop to import", Parts: []w.EmptyPart{w.Aside{Face: w.FaceLarge, Parts: []w.Inline{w.Text("One "), w.Mono{Text: ".vcf"}, w.Text(" file into "), w.Strong("nextcloud · Контакты")}}, w.Dim{Parts: []w.Inline{w.Text("The preview opens first: nothing is written until it has been read")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Refusals: []w.Refusal{w.Refusal{Of: ".ics", Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — the calendar and the list of tasks take this one")}}, w.Refusal{Of: ".md", Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")}}, w.Refusal{Of: ".zip", Parts: []w.Inline{w.Text("Contacts take "), w.Mono{Text: ".vcf"}, w.Text(" — a notebook takes this one")}}, w.Refusal{Of: "*", Parts: []w.Inline{w.Text("Only "), w.Mono{Text: ".vcf"}, w.Text(" files are imported here")}}, w.Refusal{Of: "several", Parts: []w.Inline{w.Text("One file at a time: only notes take several")}}}, Variant: w.EmptyDrop}, Pad: w.ScrimPad38, Drop: "post-import"}, "s-io-1", "tc-scrim", 1),
 
 	// tc-overlay
 	overlay("plain", w.Overlay{

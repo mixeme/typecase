@@ -315,6 +315,14 @@ func Phone4() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.PhoneRow{
+								Mark:    &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar:  &w.Avatar{Initials: "АС", Size: w.Avatar34},
+								Title:   "Алексей Смирнов",
+								Sub:     []w.Inline{w.Text("+7 916 200-71-15")},
+								SubMono: true,
+								Aside:   "Контакты",
+							},
+							w.PhoneRow{
 								Mark:       &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
 								Avatar:     &w.Avatar{Initials: "АК", Size: w.Avatar34},
 								Title:      "Анна Ковалёва",
@@ -332,32 +340,24 @@ func Phone4() Screen {
 								SubMono:    true,
 								Aside:      "Команда",
 							},
-							w.PhoneRow{
-								Mark:    &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
-								Avatar:  &w.Avatar{Initials: "АС", Size: w.Avatar34},
-								Title:   "Алексей Смирнов",
-								Sub:     []w.Inline{w.Text("+7 916 200-71-15")},
-								SubMono: true,
-								Aside:   "Контакты",
-							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
 							w.PhoneRow{
-								Mark:   &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
-								Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34},
-								Title:  "Виктор Гончаров",
-								Sub:    []w.Inline{w.Text("v.goncharov@example.org")},
-								Aside:  "Контакты",
-							},
-							w.PhoneRow{
 								Mark:   &w.Mark{Colour: "#A05A2C", Size: w.MarkH34},
 								Avatar: &w.Avatar{Initials: "ВЛ", Size: w.Avatar34},
 								Title:  "Вера Лебедева",
 								Sub:    []w.Inline{w.Text("vera@example.net")},
 								Aside:  "Архив",
+							},
+							w.PhoneRow{
+								Mark:   &w.Mark{Colour: "#4A6B52", Size: w.MarkH34},
+								Avatar: &w.Avatar{Initials: "ВГ", Size: w.Avatar34},
+								Title:  "Виктор Гончаров",
+								Sub:    []w.Inline{w.Text("v.goncharov@example.org")},
+								Aside:  "Контакты",
 							},
 						},
 					},
@@ -492,7 +492,7 @@ func Phone6() Screen {
 								Pick:    &w.TickBox{Send: w.Send{Of: "files-sel", Name: "item", Value: "release-checklist.md"}},
 								Icon:    "doc",
 								Title:   "release-checklist.md",
-								Sub:     []w.Inline{w.Text("3.1 KB · text/markdown")},
+								Sub:     []w.Inline{w.Text("3 KB · text/markdown")},
 								SubMono: true,
 								More:    &w.Button{Icon: "dots", IconBox: w.IconBox16, Variant: w.ButtonPadX4, Title: "More"},
 								On:      true,

@@ -653,20 +653,49 @@ func (v EmptyVariant) class() string {
 		"tc-empty--drop", "tc-empty--drop-side"}[v]
 }
 
+// Refusal is what a drop sheet says, in red and instead of all its words,
+// of a file the form it names does not take (Carrel's task 265): Of is the
+// case — an extension («.ics»: a file of it, which another kind takes —
+// where to carry it), RefuseOther for any other file the field does not
+// accept, RefuseSeveral for several files where the field takes one. What
+// the field takes is its own accept and multiple (PostForm.Accept, Many;
+// FileField.Accept, Many).
+type Refusal struct {
+	Of    string
+	Parts []Inline
+}
+
+// The cases of a refusal that are not an extension.
+const (
+	RefuseOther   = "*"
+	RefuseSeveral = "several"
+)
+
+func (r Refusal) html(on bool) string {
+	return `<b` + class(nil, is("on", on), "tc-empty__refusal") + ` data-tc-refusal="` + esc(r.Of) + `">` + inlines(r.Parts) + `</b>`
+}
+
 // Empty — tc-empty
 //
 // Роль. Пусто: чего здесь нет и что сделать; место, куда бросить файл.
-// Вход. Empty{Icon, Lead, Parts, Variant}.
-// Состояния. plain | small | dusty | action | drop | dashed.
+// Вход. Empty{Icon, Lead, Parts, Refusals, Refused, Variant}.
+// Состояния. plain | small | dusty | action | drop | dashed | refused.
 // Инварианты. Пустое состояние говорит словами, что пусто; вид — перечисление; оно печатает фрагмент своего кадра.
-// Поведение. Бросок файла на зону загружает его.
+// Поведение. Бросок файла на зону загружает его; файл, которого форма листа не берёт (не то расширение, несколько вместо одного), лист отказывает сам — одной красной строкой отказа вместо всех слов, и ничего не уходит.
 // Эталон. кадр `components-22`, фрагмент `.tc-empty`.
-// Содержимое. Значок, крупная первая строка, слова, жирное, моноширинное, клавиша, кнопка.
+// Содержимое. Значок, крупная первая строка, слова, жирное, моноширинное, клавиша, кнопка, строки отказа броска.
 // Чего нет. Картинок-иллюстраций.
 type Empty struct {
-	Icon    Icon
-	Lead    string // a first line in bold
-	Parts   []EmptyPart
+	Icon  Icon
+	Lead  string // a first line in bold
+	Parts []EmptyPart
+	// Refusals are the drop sheet's words for a file its form does not
+	// take, unseen until the library's script refuses one: then the sheet
+	// says only the refusal, in red, and sends nothing (Carrel's task 265).
+	Refusals []Refusal
+	// Refused prints the sheet refusing, with the refusal of this case: the
+	// state the script sets, for a frame to draw.
+	Refused string
 	Variant EmptyVariant
 }
 
@@ -675,7 +704,7 @@ func (e Empty) Render() string { return e.html(nil) }
 
 func (e Empty) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-empty", e.Variant.class()) + `>`)
+	s.WriteString(`<div` + class(m, "tc-empty", e.Variant.class(), is("refused", e.Refused != "")) + `>`)
 	if e.Icon != "" {
 		s.WriteString(`<svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent">` + e.Icon.use() + `</svg>`)
 	}
@@ -688,6 +717,9 @@ func (e Empty) html(m mix) string {
 	}
 	for _, p := range e.Parts {
 		s.WriteString(p.html(nil))
+	}
+	for _, r := range e.Refusals {
+		s.WriteString(r.html(e.Refused != "" && r.Of == e.Refused))
 	}
 	s.WriteString(`</div>`)
 	return s.String()

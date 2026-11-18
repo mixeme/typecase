@@ -20,6 +20,8 @@ func primitive(state string, fixture Renderer, frame, class string, n int) Entry
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("menu", w.Button{Label: "Take one out", Menu: true}, "s-dup-10", "tc-btn", 3),
+	primitive("menu", w.Button{Label: "Take one out", Menu: true}, "s-dup-9", "tc-btn", 3),
 	primitive("small-icon-label", w.Button{Folds: true, Label: "Select all", Icon: "selectall", Small: true, Title: "Select all"}, "components-16", "tc-btn", 4),
 	primitive("plain", w.Button{Label: "How to mount", Menu: true, Small: true, Focus: true}, "s-publish-32", "tc-btn", 2),
 	primitive("plain", w.Button{Label: "Download", Icon: "download", Kind: w.ButtonPrimary, Submit: true, Aside: &w.Mono{Text: ".ics", Variant: w.Mono11}}, "s-agenda-30", "tc-btn", 1),
@@ -119,7 +121,7 @@ var _ = add(
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, "s-agenda-17", "tc-mark", 10),
 	primitive("sized", w.Mark{Colour: "#4A6B52"}, "s-mail-1", "tc-mark", 16),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH32}, "phone-1", "tc-mark", 2),
-	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 1),
+	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH34}, "phone-4", "tc-mark", 2),
 	primitive("sized", w.Mark{Size: w.MarkOnHair}, "states-3", "tc-mark", 11),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH12}, "s-notes-2", "tc-mark", 4),
 	primitive("sized", w.Mark{Colour: "#4A6B52", Size: w.MarkH14}, "desktop-8", "tc-mark", 1),
@@ -168,9 +170,9 @@ var _ = add(
 	primitive("image", w.Avatar{Src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E"}, "components-40", "tc-avatar", 1),
 	primitive("initials", w.Avatar{Initials: "АК"}, "components-12", "tc-avatar", 1),
 	primitive("photo", w.Avatar{Photo: true}, "components-12", "tc-avatar", 2),
-	primitive("sized", w.Avatar{Initials: "АК", Size: w.Avatar34}, "phone-4", "tc-avatar", 1),
+	primitive("sized", w.Avatar{Initials: "АК", Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
 	primitive("sized", w.Avatar{Initials: "АК", Size: w.Avatar44}, "s-contacts-7", "tc-avatar", 1),
-	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 2),
+	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar", 3),
 
 	// tc-dim
 	primitive("mark", w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}, "s-contacts-1", "tc-dim", 1),

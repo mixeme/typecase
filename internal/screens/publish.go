@@ -2536,7 +2536,7 @@ func Publish19() Screen {
 										[]w.SecItemPart{
 											w.Link{Text: "release-checklist.md", Href: "#"},
 											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 											w.Text(" "),
 											w.Badge{Label: "in the event"},
 										},
@@ -3843,7 +3843,7 @@ func Publish10() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "release-checklist.md", Size: w.HeadTitle19},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "text/markdown · 3.1 KB · changed 2026-08-09"}}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Mono{Text: "text/markdown · 3 KB · changed 2026-08-09"}}}},
 						Pad:   w.HeadSnug,
 					},
 					w.Doc{
@@ -3979,7 +3979,7 @@ func Publish12() Screen {
 									{
 										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "release-checklist.md", Href: "/p/5c40e2?file=release-checklist.md"}},
 									},
-									{Parts: []w.CellPart{w.Text("3.1 KB")}, Mono: true},
+									{Parts: []w.CellPart{w.Text("3 KB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("text/markdown")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("2026-08-09 18:44")}, Mono: true},
 									{

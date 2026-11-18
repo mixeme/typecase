@@ -215,16 +215,6 @@ func Agenda1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Strong: true,
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-								On:     true,
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -239,6 +229,16 @@ func Agenda1() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Strong: true,
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
+								On:     true,
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -425,7 +425,7 @@ func Agenda1() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -566,7 +566,7 @@ func Agenda27() Screen {
 								},
 								w.Field{
 									Label: "Tags",
-									Parts: []w.FieldPart{w.Input{Name: "tags", Value: "release, team", Label: "Tags"}},
+									Parts: []w.FieldPart{w.Input{Name: "tags", Value: "релиз, работа", Label: "Tags"}},
 									Width: w.FieldMD,
 								},
 								w.Field{
@@ -818,7 +818,7 @@ func Agenda27() Screen {
 													Face: w.FaceLarge,
 													Items: []w.LinePart{
 														w.Text("release-checklist.md "),
-														w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+														w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 														w.Text(" "),
 														w.Badge{Label: "in the event"},
 													},
@@ -1136,7 +1136,7 @@ func Agenda28() Screen {
 										[]w.SecItemPart{
 											w.Link{Text: "release-checklist.md", Href: "#"},
 											w.Text(" "),
-											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+											w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 											w.Text(" "),
 											w.Badge{Label: "in the event"},
 										},
@@ -1871,7 +1871,7 @@ func Agenda2() Screen {
 									[]w.SecItemPart{
 										w.Link{Text: "release-checklist.md", Href: "#"},
 										w.Text(" "),
-										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+										w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 										w.Text(" "),
 										w.Badge{Label: "in the event"},
 									},
@@ -2038,7 +2038,7 @@ func Agenda3() Screen {
 							},
 							w.Field{
 								Label: "Tags",
-								Parts: []w.FieldPart{w.Input{Name: "tags", Value: "release, team", Label: "Tags"}},
+								Parts: []w.FieldPart{w.Input{Name: "tags", Value: "релиз, работа", Label: "Tags"}},
 								Width: w.FieldMD,
 							},
 							w.Field{
@@ -2290,7 +2290,7 @@ func Agenda3() Screen {
 												Face: w.FaceLarge,
 												Items: []w.LinePart{
 													w.Text("release-checklist.md "),
-													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3.1 KB")}},
+													w.Dim{Parts: []w.Inline{w.Text("text/markdown · 3 KB")}},
 													w.Text(" "),
 													w.Badge{Label: "in the event"},
 												},

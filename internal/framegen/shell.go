@@ -457,6 +457,9 @@ func (g *gen) menuItem(k *El) string {
 	}
 	if to := k.Attr("formaction"); to != "" {
 		f = append(f, "To: "+q(to))
+		if v := k.Attr("name"); v != "" && k.Attr("form") == "" {
+			f = append(f, "Name: "+q(v), "Value: "+q(k.Attr("value")))
+		}
 	}
 	if v := k.Attr("data-tc-key"); v != "" {
 		f = append(f, "Key: "+q(v))
@@ -1382,6 +1385,9 @@ func (g *gen) dialog(e *El) string {
 		f = append(f, "Variant: w."+v)
 	}
 	if e.Tag == "form" {
+		if id := e.Attr("id"); id != "" {
+			f = append(f, "ID: "+q(id))
+		}
 		f = append(f, "Action: "+q(e.Attr("action")))
 		if m := e.Attr("method"); m != "" && m != "post" {
 			f = append(f, "Method: "+q(m))

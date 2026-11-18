@@ -134,6 +134,15 @@ func Contacts1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "АС"},
+								Title:    []w.Inline{w.Text("Алексей Смирнов")},
+								Subtitle: "+7 916 200-71-15",
+								Detail:   "—",
+								Caption:  "—",
+								Source:   "nextcloud · Контакты",
+							},
+							w.FaceRow{
 								Mark:       w.Mark{Colour: "#4A6B52"},
 								Avatar:     w.Avatar{Initials: "АК"},
 								Title:      []w.Inline{w.Text("Анна Ковалёва")},
@@ -157,29 +166,11 @@ func Contacts1() Screen {
 								Source:     "2 sources",
 								SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 							},
-							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "АС"},
-								Title:    []w.Inline{w.Text("Алексей Смирнов")},
-								Subtitle: "+7 916 200-71-15",
-								Detail:   "—",
-								Caption:  "—",
-								Source:   "nextcloud · Контакты",
-							},
 						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
 						Rows: []w.ListRow{
-							w.FaceRow{
-								Mark:     w.Mark{Colour: "#4A6B52"},
-								Avatar:   w.Avatar{Initials: "ВГ"},
-								Title:    []w.Inline{w.Text("Виктор Гончаров")},
-								Subtitle: "—",
-								Detail:   "v.goncharov@example.org",
-								Caption:  "Городская библиотека №4",
-								Source:   "nextcloud · Контакты",
-							},
 							w.FaceRow{
 								Mark:     w.Mark{Colour: "#A05A2C"},
 								Avatar:   w.Avatar{Initials: "ВЛ"},
@@ -188,6 +179,15 @@ func Contacts1() Screen {
 								Detail:   "vera@example.net",
 								Caption:  "—",
 								Source:   "nextcloud · Архив",
+							},
+							w.FaceRow{
+								Mark:     w.Mark{Colour: "#4A6B52"},
+								Avatar:   w.Avatar{Initials: "ВГ"},
+								Title:    []w.Inline{w.Text("Виктор Гончаров")},
+								Subtitle: "—",
+								Detail:   "v.goncharov@example.org",
+								Caption:  "Городская библиотека №4",
+								Source:   "nextcloud · Контакты",
 							},
 						},
 					},
@@ -466,6 +466,15 @@ func Contacts2() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АС"},
+									Title:    []w.Inline{w.Text("Алексей Смирнов")},
+									Subtitle: "+7 916 200-71-15",
+									Detail:   "—",
+									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
 									Avatar:     w.Avatar{Initials: "АК"},
 									Title:      []w.Inline{w.Text("Анна Ковалёва")},
@@ -489,29 +498,11 @@ func Contacts2() Screen {
 									Source:     "2 sources",
 									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АС"},
-									Title:    []w.Inline{w.Text("Алексей Смирнов")},
-									Subtitle: "+7 916 200-71-15",
-									Detail:   "—",
-									Caption:  "—",
-									Source:   "nextcloud · Контакты",
-								},
 							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 						w.List{
 							Rows: []w.ListRow{
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "ВГ"},
-									Title:    []w.Inline{w.Text("Виктор Гончаров")},
-									Subtitle: "—",
-									Detail:   "v.goncharov@example.org",
-									Caption:  "Городская библиотека №4",
-									Source:   "nextcloud · Контакты",
-								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#A05A2C"},
 									Avatar:   w.Avatar{Initials: "ВЛ"},
@@ -520,6 +511,15 @@ func Contacts2() Screen {
 									Detail:   "vera@example.net",
 									Caption:  "—",
 									Source:   "nextcloud · Архив",
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВГ"},
+									Title:    []w.Inline{w.Text("Виктор Гончаров")},
+									Subtitle: "—",
+									Detail:   "v.goncharov@example.org",
+									Caption:  "Городская библиотека №4",
+									Source:   "nextcloud · Контакты",
 								},
 							},
 						},
@@ -2673,6 +2673,15 @@ func Contacts35() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "АС"},
+									Title:    []w.Inline{w.Text("Алексей Смирнов")},
+									Subtitle: "+7 916 200-71-15",
+									Detail:   "—",
+									Caption:  "—",
+									Source:   "nextcloud · Контакты",
+								},
+								w.FaceRow{
 									Mark:       w.Mark{Colour: "#4A6B52"},
 									Avatar:     w.Avatar{Initials: "АК"},
 									Title:      []w.Inline{w.Text("Анна Ковалёва")},
@@ -2694,29 +2703,11 @@ func Contacts35() Screen {
 									Source:     "2 sources",
 									SourceHint: "nextcloud · Контакты, radicale · vps · Команда",
 								},
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "АС"},
-									Title:    []w.Inline{w.Text("Алексей Смирнов")},
-									Subtitle: "+7 916 200-71-15",
-									Detail:   "—",
-									Caption:  "—",
-									Source:   "nextcloud · Контакты",
-								},
 							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "В", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 						w.List{
 							Rows: []w.ListRow{
-								w.FaceRow{
-									Mark:     w.Mark{Colour: "#4A6B52"},
-									Avatar:   w.Avatar{Initials: "ВГ"},
-									Title:    []w.Inline{w.Text("Виктор Гончаров")},
-									Subtitle: "—",
-									Detail:   "v.goncharov@example.org",
-									Caption:  "Городская библиотека №4",
-									Source:   "nextcloud · Контакты",
-								},
 								w.FaceRow{
 									Mark:     w.Mark{Colour: "#A05A2C"},
 									Avatar:   w.Avatar{Initials: "ВЛ"},
@@ -2727,6 +2718,15 @@ func Contacts35() Screen {
 									Caption:  "—",
 									Source:   "nextcloud · Архив",
 									On:       true,
+								},
+								w.FaceRow{
+									Mark:     w.Mark{Colour: "#4A6B52"},
+									Avatar:   w.Avatar{Initials: "ВГ"},
+									Title:    []w.Inline{w.Text("Виктор Гончаров")},
+									Subtitle: "—",
+									Detail:   "v.goncharov@example.org",
+									Caption:  "Городская библиотека №4",
+									Source:   "nextcloud · Контакты",
 								},
 							},
 						},

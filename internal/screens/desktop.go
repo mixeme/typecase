@@ -116,16 +116,6 @@ func Desktop1() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Strong: true,
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-								On:     true,
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -140,6 +130,16 @@ func Desktop1() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Strong: true,
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
+								On:     true,
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -233,7 +233,7 @@ func Desktop1() Screen {
 							w.Rubric{Text: "Attachments"},
 							w.SecOpen{
 								Items: []w.SecOpenPart{
-									w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3.1 KB")}}},
+									w.SecOpened{Name: "release-checklist.md", Size: w.Dim{Parts: []w.Inline{w.Text("· 3 KB")}}},
 									w.Line{
 										Items: []w.LinePart{w.Button{Label: "Open in editor", Small: true}, w.Button{Label: "Show in folder", Small: true}},
 										Gap:   w.LineGapNormal,

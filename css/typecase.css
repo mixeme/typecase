@@ -694,6 +694,9 @@ details.tc-drop,details.tc-drop__anchor{display:inline-block;position:relative}
 .tc-btn:has(> .tc-menu.is-pop){position:relative}
 .tc-btn > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
 .tc-drop > .tc-menu.is-pop{margin-top:4px;font-weight:400;text-align:left}
+/* Меню, раскрытое на месте в ряду кнопок, стоит под своей кнопкой; кнопки ряда остаются на одной верхней линии. */
+span.tc-drop:has(> .tc-btn + .tc-menu:not(.is-pop):not([hidden])){flex-direction:column;align-items:flex-start;gap:4px}
+.tc-line:has(> span.tc-drop > .tc-btn + .tc-menu:not(.is-pop):not([hidden])){align-items:flex-start}
 /* Рубрика внутри меню: говорит, откуда взялся набор строк. */
 .tc-menu > .tc-rubric{padding:4px 8px 6px}
 /* Поиск в длинном списке — поле во всю ширину меню, над строками. */
@@ -1528,6 +1531,12 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-empty--dashed.tc-empty--dashed{border:.5px dashed var(--tc-edge);border-radius:4px;margin:0;padding:22px}
 .tc-empty--drop.tc-empty--drop{background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:8px;padding:24px;width:520px;max-width:100%}
 .tc-empty--drop-side.tc-empty--drop-side{margin-top:8px;background:var(--tc-surface);border:1px dashed var(--tc-accent);border-radius:4px;gap:6px;padding:16px}
+/* Отказ броска (задача Carrel 265): строки отказа не видны, пока сценарий не откажет файлу, которого поле формы листа не берёт; тогда лист говорит одну — красным, размером первой строки, вместо всех слов; рамка и значок красные. */
+.tc-empty__refusal.tc-empty__refusal{font-size:13.5px;color:var(--tc-danger)}
+.tc-empty__refusal:not(.is-on){display:none}
+.tc-empty.is-refused > :not(svg):not(.is-on){display:none}
+.tc-empty--drop.is-refused{border-color:var(--tc-danger)}
+.tc-empty.is-refused > .tc-ico--accent{stroke:var(--tc-danger)}
 .tc-empty--t12-pad.tc-empty--t12-pad{font-size:12px;padding:var(--tc-gap-wide) var(--tc-page-gutter)}
 .tc-field--fill300.tc-field--fill300{flex:1 1 300px}
 .tc-field--fill200.tc-field--fill200{flex:1 1 200px}

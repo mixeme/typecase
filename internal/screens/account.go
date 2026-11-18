@@ -1126,14 +1126,6 @@ func Account5() Screen {
 					w.List{
 						Rows: []w.ListRow{
 							w.TimeRow{
-								Mark:   w.Mark{Colour: "#4A6B52"},
-								Time:   "10:00",
-								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-								Detail: "Переговорная 2",
-								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-								Source: "nextcloud · Личный",
-							},
-							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
 								Time:   "all day",
 								Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -1148,6 +1140,14 @@ func Account5() Screen {
 								Detail: "—",
 								Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 								Source: "radicale · vps · Дежурства",
+							},
+							w.TimeRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Time:   "10:00",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: "Переговорная 2",
+								Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+								Source: "nextcloud · Личный",
 							},
 							w.TimeRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
@@ -1334,14 +1334,6 @@ func Account6() Screen {
 						w.List{
 							Rows: []w.ListRow{
 								w.TimeRow{
-									Mark:   w.Mark{Colour: "#4A6B52"},
-									Time:   "10:00",
-									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
-									Detail: "Переговорная 2",
-									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
-									Source: "nextcloud · Личный",
-								},
-								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},
 									Time:   "all day",
 									Title:  []w.Inline{w.Text("Дежурство: первая линия")},
@@ -1356,6 +1348,14 @@ func Account6() Screen {
 									Detail: "—",
 									Badges: []w.Badge{w.Badge{Label: "repeats weekly"}},
 									Source: "radicale · vps · Дежурства",
+								},
+								w.TimeRow{
+									Mark:   w.Mark{Colour: "#4A6B52"},
+									Time:   "10:00",
+									Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+									Detail: "Переговорная 2",
+									Badges: []w.Badge{w.Badge{Label: "4 attendees"}, w.Badge{Label: "repeats weekly"}},
+									Source: "nextcloud · Личный",
 								},
 								w.TimeRow{
 									Mark:   w.Mark{Colour: "#3F6E8C"},

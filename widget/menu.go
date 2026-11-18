@@ -97,7 +97,8 @@ type MenuItem struct {
 	// that form to its own address (formaction), as Button.To does: Upload
 	// on a new record keeps what is typed (Carrel's task 122). With Form it
 	// sends that form, standing outside it: «From Files» in the bar of a new
-	// note (Carrel's task 247).
+	// note (Carrel's task 247). Name and Value go with it when they are
+	// set: the record a group of duplicates sets apart (Carrel's task 267).
 	To string
 	// File makes the item a label that picks a file for a PostForm (Carrel's
 	// task 109): «From this computer» opens the choice without a script.
@@ -162,7 +163,7 @@ func (it MenuItem) html(mix) string {
 		s.WriteString(`</label>`)
 		return s.String()
 	}
-	if it.Name != "" && it.Form == "" && it.Href == "" {
+	if it.Name != "" && it.Form == "" && it.Href == "" && it.To == "" {
 		// a collection that cannot be chosen is shown and switched off, its
 		// reason in the hint: read-only (Carrel's task 103)
 		s.WriteString(`<label` + cls + attr("title", it.Reason) + `><input class="tc-seg__box" type="radio"` + attr("form", it.Of) + ` role="menuitemradio"` + attr("name", it.Name) + ` value="` + esc(it.Value) + `"` +
