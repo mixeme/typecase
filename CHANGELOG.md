@@ -6,6 +6,8 @@ do, not what the authors did.
 
 ## Unreleased
 
+## typecase/v0.12.0 — 2026-11-20
+
 ### Dependencies
 
 - What a consumer imports needs two modules outside the standard library,
