@@ -345,7 +345,12 @@ func TestCatalogBaseWithoutScript(t *testing.T) {
 // the mark and the announced state ended up; segKeyJS then moves the choice
 // with the arrow key from there.
 const segClickJS = `(() => {
-  const seg = [...document.querySelectorAll(".catalog-demo .tc-seg")].find(s => s.querySelectorAll("button.tc-seg__opt").length > 2);
+  // A switch whose second and third options are not chosen yet: pressing
+  // and the arrow must choose them, not find them chosen by the frame.
+  const seg = [...document.querySelectorAll(".catalog-demo .tc-seg")].find(s => {
+    const o = s.querySelectorAll("button.tc-seg__opt");
+    return o.length > 2 && !o[1].classList.contains("is-on") && !o[2].classList.contains("is-on");
+  });
   if (!seg) return { missing: true };
   seg.id = "seg-under-test";
   const opts = [...seg.querySelectorAll(".tc-seg__opt")];

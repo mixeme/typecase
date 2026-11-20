@@ -171,11 +171,13 @@ func ladderHTML() string {
 // roomJS is the page's own layout script, on both pages (it is not widget
 // behaviour): an open menu, the search's suggestions and a scrim hang out of
 // their box, as the mockup draws them, so a cell that shows one is padded
-// until it is inside.
+// until it is inside — a scrim by what stands on it too: the scrim fills its
+// cell, the sheet on it may be taller (20.11.2026: «Move contact» hung 240 px
+// out of a 34 px cell).
 // It runs again when the width switch or the window changes the layout.
 const roomJS = `<script>
 (function () {
-	var sel = ".tc-menu.is-pop, [class*='tc-drop__panel'], .tc-top__suggest, .tc-scrim";
+	var sel = ".tc-menu.is-pop, [class*='tc-drop__panel'], .tc-top__suggest, .tc-scrim, .tc-scrim > *";
 	function room() {
 		document.querySelectorAll(".catalog-demo").forEach(function (cell) {
 			if (!cell.querySelector(sel)) return;
