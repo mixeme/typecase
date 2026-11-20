@@ -297,7 +297,7 @@ func (g *gen) diff(e *El) string {
 	return s + "}"
 }
 
-var emptyVariant = []kv{{"tc-empty--t12-pad", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"}, {"tc-empty--t12-pad", "EmptySmallTop"},
+var emptyVariant = []kv{{"tc-empty--t12-pad", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"},
 	{"tc-empty--dashed", "EmptyDashed"}, {"tc-empty--drop", "EmptyDrop"}, {"tc-empty--drop-side", "EmptyDropSide"}}
 
 func (g *gen) empty(e *El) string {

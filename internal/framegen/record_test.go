@@ -125,3 +125,30 @@ func TestInputKeepsItsID(t *testing.T) {
 		}
 	}
 }
+
+// TestEnumClassesDistinct: two values of one enum of the widget package
+// print different classes — two that print the same are one value written
+// twice, and the generator, reading a frame's class, can only ever take the
+// first (the review of 21.11: EmptySmall and EmptySmallTop had come to the
+// same class when the paddings became steps).
+func TestEnumClassesDistinct(t *testing.T) {
+	en, err := loadEnums(filepath.Join("../..", "widget"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	n := 0
+	for typ, vals := range en {
+		seen := map[string]string{}
+		for _, v := range vals {
+			key := strings.Join(v.classes, " ")
+			if prev, ok := seen[key]; ok {
+				t.Errorf("%s: %s and %s print the same %q", typ, prev, v.name, key)
+			}
+			seen[key] = v.name
+			n++
+		}
+	}
+	if n < 300 {
+		t.Errorf("%d enum values: the test lost the widget package", n)
+	}
+}

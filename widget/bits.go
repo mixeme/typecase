@@ -640,8 +640,7 @@ type EmptyVariant int
 
 const (
 	EmptyPlain    EmptyVariant = iota
-	EmptySmall                 // 12 px, a list's padding: a day with nothing
-	EmptySmallTop              // 12 px, 12/20 padding
+	EmptySmall                 // 12 px, the gutters' padding: a day with nothing
 	EmptyDusty                 // dusty: a list filtered to nothing
 	EmptyDashed                // a dashed frame: a place to drop a thing
 	EmptyDrop                  // a drop zone over the page
@@ -649,7 +648,7 @@ const (
 )
 
 func (v EmptyVariant) class() string {
-	return [...]string{"", "tc-empty--t12-pad", "tc-empty--t12-pad", "tc-empty--dusty tc-empty--t12-pad", "tc-empty--dashed",
+	return [...]string{"", "tc-empty--t12-pad", "tc-empty--dusty tc-empty--t12-pad", "tc-empty--dashed",
 		"tc-empty--drop", "tc-empty--drop-side"}[v]
 }
 

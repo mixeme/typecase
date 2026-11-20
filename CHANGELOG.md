@@ -6,6 +6,12 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Breaking
+
+- **`EmptySmallTop` is gone** (the review of 21.11): since the paddings
+  became steps it printed the same class as `EmptySmall`. Use
+  `EmptySmall`.
+
 ### Fixed
 
 - **On a page the shell is as high as the window** (Carrel's task 272, the

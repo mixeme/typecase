@@ -297,11 +297,17 @@ func (ed *editor) remove(e refs.Entry, must []string) (bool, error) {
 			return false, nil
 		}
 	}
+	// The record goes with its lines, so they must hold nothing else: before
+	// it only the indent, after it only its comma (the review of 21.11).
+	start, end := from, to
 	for from > 0 && s.src[from-1] != '\n' {
 		from--
 	}
 	for to < len(s.src) && s.src[to] != '\n' {
 		to++
+	}
+	if before, after := strings.TrimSpace(string(s.src[from:start])), strings.TrimSpace(string(s.src[end:to])); before != "" || after != "," {
+		return false, fmt.Errorf("%s (%s): the record shares its lines with %q and %q — take it out by hand", e.Ref, where(e), before, after)
 	}
 	s.edits = append(s.edits, edit{from, min(to+1, len(s.src)), ""})
 	return true, nil
