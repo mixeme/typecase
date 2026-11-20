@@ -21,7 +21,8 @@ menu of links); wrap=1 — the container is left as it is and a
 Two segments in one form need names of their own: both come out as «choice»
 when they stand under no label — rename them by hand. In Git Bash the address
 needs MSYS_NO_PATHCONV=1, or it turns into a Windows path. Afterwards:
-go generate ./internal/screens, fixrefs.sh, the tests, pixpair.sh.
+go generate ./internal/screens, go run ./internal/framegen/cmd/record -refresh,
+the tests, pixpair.sh.
 """
 import re, sys
 

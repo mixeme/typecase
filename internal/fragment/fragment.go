@@ -23,17 +23,28 @@ import (
 // Source is the mockup copy, relative to the module root.
 const Source = "docs/visual/carrel-ui-mockups.html"
 
-// Ref addresses one block in the mockup: the frame's data-frame, the block's
+// Ref addresses a block in the mockup: the frame's data-frame, the block's
 // class and which occurrence of that block in the frame it is, from 1, in
 // document order. An element counts when the class is its block (see Block),
 // not when it merely carries the class as a mixin.
+//
+// A reference record has no N: it stands for the occurrence of its class in
+// its frame that prints as its widget does, found by that form (Locate) —
+// a stable key, so a block put in before it does not move it, and no record
+// holds a number that a frame's edit makes wrong (the owner, 20.11.2026).
+// N is a place: a shape's occurrence, a pending form, what a tool redrafts.
 type Ref struct {
 	Frame string
 	Class string
 	N     int
 }
 
-func (r Ref) String() string { return fmt.Sprintf("%s .%s #%d", r.Frame, r.Class, r.N) }
+func (r Ref) String() string {
+	if r.N == 0 {
+		return fmt.Sprintf("%s .%s", r.Frame, r.Class)
+	}
+	return fmt.Sprintf("%s .%s #%d", r.Frame, r.Class, r.N)
+}
 
 // Mockup is the parsed mockup: its frames by data-frame, in document order.
 type Mockup struct {
@@ -217,7 +228,7 @@ func (m *Mockup) Block(r Ref) (*html.Node, error) {
 		return nil, fmt.Errorf("fragment: no frame %q", r.Frame)
 	}
 	if r.N < 1 {
-		return nil, fmt.Errorf("fragment: %s: occurrence counts from 1", r)
+		return nil, fmt.Errorf("fragment: %s: a record has no place of its own — Locate finds it by its form", r)
 	}
 	found := f.all(r.Class)
 	if r.N > len(found) {
@@ -425,64 +436,102 @@ func Fragment(markup string) ([]*html.Node, error) {
 	return out, nil
 }
 
-// Compare checks a widget's rendered markup against the block Ref points at.
-// It compares the block's own elements: a nested block is a place with its
+// Compare checks a widget's markup against the block r stands for (see
+// Locate). The root is compared by its block's own classes — the class
 // name and the mixins this block puts on it, and its insides are checked by
 // its own records. The mixins on the frame's root come from the frame's
 // container and are not the widget's to print. The error names the first
 // path where the trees part.
 func (m *Mockup) Compare(r Ref, rendered string) error {
-	block, err := m.Block(r)
+	_, err := m.Locate(r, rendered)
+	return err
+}
+
+// Locate returns the place of the block r stands for. With N, it is that
+// occurrence, and the widget's markup must be it. Without N — a record — it
+// is the first occurrence of the class in the frame that the markup is;
+// when none is, the error names the nearest one (the same tree without
+// text first, then the fewest differing places) and how they part, so a
+// frame's edit is redrafted from where the record stood (record -refresh).
+func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
+	got, err := m.printed(r, rendered)
 	if err != nil {
-		return err
+		return r, err
 	}
+	if r.N > 0 {
+		block, err := m.Block(r)
+		if err != nil {
+			return r, err
+		}
+		if d := Diff(m.wanted(r.Class, block, got)); d != "" {
+			return r, fmt.Errorf("%s: %s", r, d)
+		}
+		return r, nil
+	}
+	f, ok := m.byID[r.Frame]
+	if !ok {
+		return r, fmt.Errorf("fragment: no frame %q", r.Frame)
+	}
+	found := f.all(r.Class)
+	if len(found) == 0 {
+		return r, fmt.Errorf("%s: the frame has no .%s", r, r.Class)
+	}
+	near, nearN, nearSame := -1, 0, false
+	shape := Skeleton(got)
+	for i, b := range found {
+		want, have := m.wanted(r.Class, b, got)
+		if Diff(want, have) == "" {
+			r.N = i + 1
+			return r, nil
+		}
+		same := Skeleton(want) == shape
+		k := len(Diffs(want, have, 1000))
+		if near < 0 || same && !nearSame || same == nearSame && k < near {
+			near, nearN, nearSame = k, i+1, same
+		}
+	}
+	at := r
+	at.N = nearN
+	want, have := m.wanted(r.Class, found[nearN-1], got)
+	return r, &NotFound{At: at, Diff: Diff(want, have)}
+}
+
+// NotFound is Locate's error for a record no occurrence prints as: At is
+// the nearest occurrence, Diff where they part.
+type NotFound struct {
+	At   Ref
+	Diff string
+}
+
+func (e *NotFound) Error() string {
+	return fmt.Sprintf("%s .%s: no occurrence prints so; the nearest, #%d: %s", e.At.Frame, e.At.Class, e.At.N, e.Diff)
+}
+
+// printed is a widget's markup in the compared form, checked to be one
+// element of r's block.
+func (m *Mockup) printed(r Ref, rendered string) (*Node, error) {
 	nodes, err := Fragment(rendered)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if len(nodes) != 1 {
-		return fmt.Errorf("%s: the widget printed %d top elements, want 1", r, len(nodes))
+		return nil, fmt.Errorf("%s: the widget printed %d top elements, want 1", r, len(nodes))
 	}
-	cls := r.Class
+	if b := Block(nodes[0]); b != r.Class && !(r.Class == "tc-root" && b == "" && hasClass(nodes[0], "tc-root")) {
+		return nil, fmt.Errorf("%s: the widget prints block %q, want %q", r, b, r.Class)
+	}
+	return m.Own(nodes[0], false), nil
+}
+
+// wanted is a frame's block in the compared form, and the widget's markup
+// as it is compared with it (a summary the frame draws is a button the
+// widget prints).
+func (m *Mockup) wanted(cls string, block *html.Node, got *Node) (*Node, *Node) {
 	want := WithoutMixins(cls, m.Own(block, false))
-	got := m.Own(nodes[0], false)
 	if want.Tag == "summary" && got.Tag == "button" {
 		got = asSummary(got)
 	}
-	if b := Block(nodes[0]); b != cls && !(cls == "tc-root" && b == "" && hasClass(nodes[0], "tc-root")) {
-		return fmt.Errorf("%s: the widget prints block %q, want %q", r, b, cls)
-	}
-	if d := Diff(want, got); d != "" {
-		if k := m.moved(r, got); k > 0 {
-			return fmt.Errorf("%s: %s — the frame's #%d has this form now: renumber the record to #%d", r, d, k, k)
-		}
-		return fmt.Errorf("%s: %s", r, d)
-	}
-	return nil
-}
-
-// moved finds where a record's fragment went when something was put in
-// before it: the one other occurrence of the class the widget's markup
-// matches, or 0 — none or more than one (task: the review of 14.10; a
-// badge put before an alert badge made its record point at the plain one).
-func (m *Mockup) moved(r Ref, got *Node) int {
-	f, ok := m.byID[r.Frame]
-	if !ok {
-		return 0
-	}
-	k := 0
-	for i, b := range f.all(r.Class) {
-		if i+1 == r.N {
-			continue
-		}
-		if Diff(WithoutMixins(r.Class, m.Own(b, false)), got) == "" {
-			if k > 0 {
-				return 0
-			}
-			k = i + 1
-		}
-	}
-	return k
+	return want, got
 }
 
 // RootState is the classes the block at r has of its own on its root — its

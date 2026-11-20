@@ -1,6 +1,7 @@
 package fragment
 
 import (
+	"errors"
 	"strings"
 	"testing"
 )
@@ -70,18 +71,30 @@ func TestNormalize(t *testing.T) {
 	}
 }
 
-// The review of 14.10: a record whose fragment moved — something was put in
-// before it — is told where it went, and the state of a record and of a
-// frame's element are its root's own classes.
-func TestMovedAndState(t *testing.T) {
+// A record stands for the occurrence its widget prints as (the owner,
+// 20.11.2026): something put in before it does not move it; one no
+// occurrence prints as is told the nearest. The state of a record and of a
+// frame's element are its root's own classes (the review of 14.10).
+func TestLocateAndState(t *testing.T) {
 	m := parsed(t)
-	err := m.Compare(Ref{"a-1", "tc-btn", 1}, `<button class="tc-btn" type="button">Cancel</button>`)
-	if err == nil || !strings.Contains(err.Error(), "renumber the record to #2") {
-		t.Fatalf("Cancel against #1: %v; want it told to renumber to #2", err)
+	at, err := m.Locate(Ref{Frame: "a-1", Class: "tc-btn"}, `<button class="tc-btn" type="button">Cancel</button>`)
+	if err != nil || at.N != 2 {
+		t.Fatalf("Cancel: %v %v; want #2", at, err)
 	}
-	err = m.Compare(Ref{"a-1", "tc-btn", 1}, `<button class="tc-btn is-danger" type="button">Delete</button>`)
-	if err == nil || strings.Contains(err.Error(), "renumber") {
-		t.Fatalf("a form the frame does not draw: %v; want a plain difference", err)
+	if err := m.Compare(Ref{"a-1", "tc-btn", 1}, `<button class="tc-btn" type="button">Cancel</button>`); err == nil {
+		t.Fatal("Cancel against the place #1: want a difference")
+	}
+	_, err = m.Locate(Ref{Frame: "a-1", Class: "tc-btn"}, `<button class="tc-btn" type="button">Close</button>`)
+	var nf *NotFound
+	if !errors.As(err, &nf) || nf.At.N != 2 || !strings.Contains(nf.Diff, "Close") {
+		t.Fatalf("Close: %v; want the nearest #2 and the text that parts", err)
+	}
+	_, err = m.Locate(Ref{Frame: "a-1", Class: "tc-btn"}, `<button class="tc-btn is-primary" type="button" title="Save it" aria-label="Save">Keep</button>`)
+	if !errors.As(err, &nf) || nf.At.N != 1 {
+		t.Fatalf("a primary button: %v; want the nearest #1, the same tree", err)
+	}
+	if _, err := m.Block(Ref{Frame: "a-1", Class: "tc-btn"}); err == nil {
+		t.Fatal("a record has no place of its own: want Block to refuse it")
 	}
 	want, err := m.RootState(Ref{"a-1", "tc-btn", 1})
 	if err != nil || strings.Join(want, " ") != "is-primary" {

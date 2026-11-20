@@ -26,6 +26,12 @@ func wait(reason string, refs ...fragment.Ref) bool {
 	return true
 }
 
+// Place is where a record stands in its frame: the occurrence its widget
+// prints as (fragment.Mockup.Locate).
+func Place(m *fragment.Mockup, e Entry) (fragment.Ref, error) {
+	return m.Locate(e.Ref, e.Fixture.Render())
+}
+
 // Uncovered returns, for every block that has a widget type, the forms that
 // have neither a record nor a pending entry.
 func Uncovered(m *fragment.Mockup, entries []Entry, waiting []Pending) []string {
@@ -44,7 +50,11 @@ func Uncovered(m *fragment.Mockup, entries []Entry, waiting []Pending) []string 
 		covered[r.Class][key(r)] = true
 	}
 	for _, e := range entries {
-		mark(e.Ref)
+		at, err := Place(m, e)
+		if err != nil {
+			continue // TestWidgetFragments names it
+		}
+		mark(at)
 	}
 	for _, p := range waiting {
 		mark(p.Ref)

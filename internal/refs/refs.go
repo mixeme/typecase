@@ -19,6 +19,14 @@ type Entry struct {
 	State   string
 	Fixture Renderer
 	Ref     fragment.Ref
+	Pos     Pos
+}
+
+// Pos is the file and line where a record is written, for the record tool
+// (internal/framegen/cmd/record): a record has no number to be found by.
+type Pos struct {
+	File string
+	Line int
 }
 
 // Entries is the table, family by family (one file per family).

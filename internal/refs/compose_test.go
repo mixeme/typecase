@@ -53,7 +53,12 @@ func TestCompositions(t *testing.T) {
 			fr = b.String()
 			frames[c.Host.Ref.Frame] = fr
 		}
-		if _, err := fragment.Splice(fr, c.Host.Ref, got); err != nil {
+		at, err := refs.Place(m, c.Host)
+		if err != nil {
+			t.Errorf("%s: %v", c, err)
+			continue
+		}
+		if _, err := fragment.Splice(fr, at, got); err != nil {
 			t.Errorf("%s: %v", c, err)
 		}
 	}
@@ -84,9 +89,13 @@ func TestRecordTablesKeepMain(t *testing.T) {
 		if !strings.Contains(got, "<table") {
 			continue
 		}
-		b, err := m.Block(e.Ref)
+		at, err := refs.Place(m, e)
 		if err != nil {
 			continue
+		}
+		b, err := m.Block(at)
+		if err != nil {
+			t.Fatal(err)
 		}
 		var s strings.Builder
 		if err := html.Render(&s, b); err != nil {

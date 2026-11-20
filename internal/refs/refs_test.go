@@ -3,6 +3,7 @@ package refs_test
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -34,6 +35,71 @@ func TestWidgetFragments(t *testing.T) {
 				t.Fatal(err)
 			}
 		})
+	}
+}
+
+// TestRecordsOnePerPlace: a record is found by its form (Place), so two
+// records that print one block of one frame are one record written twice;
+// and each knows the line it is written on, for the record tool.
+func TestRecordsOnePerPlace(t *testing.T) {
+	m := mockup(t)
+	seen := map[fragment.Ref]refs.Entry{}
+	for _, e := range refs.Entries {
+		if e.Pos.Line == 0 {
+			t.Errorf("%s: the record does not know where it is written", e.Ref)
+		}
+		at, err := refs.Place(m, e)
+		if err != nil {
+			continue // TestWidgetFragments names it
+		}
+		if p, ok := seen[at]; ok {
+			t.Errorf("%s: the record at %s:%d repeats the one at %s:%d", at, filepath.Base(e.Pos.File), e.Pos.Line, filepath.Base(p.Pos.File), p.Pos.Line)
+			continue
+		}
+		seen[at] = e
+	}
+}
+
+// TestRecordsStayWhenABlockComesFirst: a block of the same class put in
+// before a frame's records does not move them — with the number of the
+// occurrence each record of s-dup-9's buttons pointed at the button before
+// its own (the owner, 20.11.2026: records by a stable key).
+func TestRecordsStayWhenABlockComesFirst(t *testing.T) {
+	wd, _ := os.Getwd()
+	root, err := fragment.FindRoot(wd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	src, err := os.ReadFile(filepath.Join(root, fragment.Source))
+	if err != nil {
+		t.Fatal(err)
+	}
+	s := string(src)
+	at := strings.Index(s, `data-frame="s-dup-9"`)
+	first := at + strings.Index(s[at:], `<button class="tc-btn`)
+	m, err := fragment.Parse(s[:first] + `<button class="tc-btn" type="button">Put in first</button>` + s[first:])
+	if err != nil {
+		t.Fatal(err)
+	}
+	n := 0
+	for _, e := range refs.Entries {
+		if e.Ref.Frame != "s-dup-9" || e.Ref.Class != "tc-btn" {
+			continue
+		}
+		n++
+		if err := m.Compare(e.Ref, e.Fixture.Render()); err != nil {
+			t.Errorf("a button put in first moved the record: %v", err)
+		}
+		before, err := refs.Place(mockup(t), e)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := m.Compare(before, e.Fixture.Render()); err == nil {
+			t.Errorf("%s: by its old number the record is still its button — the bite does not bite", before)
+		}
+	}
+	if n == 0 {
+		t.Fatal("no record of s-dup-9's buttons: the test lost its frame")
 	}
 }
 

@@ -60,6 +60,7 @@ func TestFreeComposition(t *testing.T) {
 		return a || b
 	})
 	comps = pickCompositions(t, comps)
+	comps = placeHosts(t, string(html), comps)
 
 	h := browser.NewHarness(t)
 	lines, url := composeFindings(t, h, parts.Styles, parts.Sprite, frames, comps)
@@ -81,6 +82,20 @@ func TestFreeComposition(t *testing.T) {
 		}
 		t.Error(l)
 	}
+}
+
+// placeHosts puts the hosts at their places in the mockup (refs.PlaceHosts).
+func placeHosts(t *testing.T, mockup string, comps []refs.Composition) []refs.Composition {
+	t.Helper()
+	m, err := fragment.Parse(mockup)
+	if err != nil {
+		t.Fatal(err)
+	}
+	placed, err := refs.PlaceHosts(m, comps)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return placed
 }
 
 // composeFindings measures each composition in its host's frame, less what
@@ -168,6 +183,7 @@ func TestFreeCompositionBite(t *testing.T) {
 			comps = append(comps, c)
 		}
 	}
+	comps = placeHosts(t, string(html), comps)
 	if len(comps) != 1 {
 		t.Fatalf("want one Photo.FieldPart+Msg, got %d", len(comps))
 	}

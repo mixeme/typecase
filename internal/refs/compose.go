@@ -1,6 +1,7 @@
 package refs
 
 import (
+	"carrel.dev/typecase/internal/fragment"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -30,6 +31,21 @@ type Composition struct {
 	// Drawn says the host's slot held a part of this type already: no host
 	// has the slot without it.
 	Drawn bool
+}
+
+// PlaceHosts puts each composition's host at its place in its frame (Place):
+// a record has none of its own, and the composition is painted there.
+func PlaceHosts(m *fragment.Mockup, comps []Composition) ([]Composition, error) {
+	out := make([]Composition, len(comps))
+	for i, c := range comps {
+		at, err := Place(m, c.Host)
+		if err != nil {
+			return nil, fmt.Errorf("%s: %w", c, err)
+		}
+		c.Host.Ref = at
+		out[i] = c
+	}
+	return out, nil
 }
 
 func (c Composition) String() string {
