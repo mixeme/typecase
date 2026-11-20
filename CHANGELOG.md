@@ -2743,6 +2743,10 @@ do, not what the authors did.
 
 ### Fixed
 
+- **What lies under an overlay's scrim is inert** (20.11). `Overlay`
+  prints its top bar and shell body with `inert`: on a page drawn with its
+  sheet open, Tab went to the bar and the head under the scrim before it
+  reached the sheet. Nothing to do; nothing drawn changes.
 - **A press on a tag field's empty place goes to its typing line** (the
   owner, 14.11; free composition 10.11). On a phone the typing line stands
   under the tags, and a finger a little high landed beside it. Now a press
