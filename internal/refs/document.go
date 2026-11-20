@@ -73,8 +73,8 @@ var _ = add(
 		w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — "), w.Mono{Text: "X-JTX-COLOR"}, w.Text(" and two more — are kept unchanged and not shown here.")}}}, ID: "note-edit", Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012", Multipart: true}, "s-notes-4", "tc-doc"),
 	document("read", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
-		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
-		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить у Артёма скриншоты"}, Text: "попросить у Артёма скриншоты"}}},
+		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.")}, Variant: w.ProseLead},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить у Артёма скриншоты"}}},
 		w.Prose{Parts: []w.Inline{w.Text("Перенос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.")}, Variant: w.ProseLeadAfter}}}, "s-notes-2", "tc-doc"),
 	document("edit", w.Doc{Items: []w.DocPart{
 		w.Area{Text: "Заметка со встречи 10.08", Variant: w.AreaTitle, Name: "summary", Label: "Text"},
@@ -96,8 +96,8 @@ var _ = add(
 	document("phone", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August, 11:05"}, w.Text(" · "), w.Tag{Label: "встречи"}}},
-		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду. Письмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
-		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Label: "проверить changelog"}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Label: "попросить скриншоты"}, Text: "попросить скриншоты"}}, Phone: true},
+		w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop},
+		w.DocTasks{Title: "Что делаем", Items: []w.DocTask{{Tick: w.Tick{Variant: w.TickNudge, Sign: true}, Text: "проверить changelog"}, {Tick: w.Tick{Done: true, Variant: w.TickNudge, Sign: true}, Text: "попросить скриншоты"}}, Phone: true},
 		w.DocRelated{Title: w.Rubric{Text: "Related to", Variant: w.RubricBelow}, Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event")}}}}}, "phone-7", "tc-doc"),
 
 	// tc-docbar
@@ -113,7 +113,7 @@ var _ = add(
 		w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Badge{Label: "ro", Place: w.Pushed}, Label: "nextcloud · Общие с семьёй", Reason: "Read-only: this account cannot write here", Name: "notebook", Value: "nextcloud/semya", Of: "note-edit"}}, Width: w.MenuWidth290, Pop: w.MenuUnder}}}, Width: w.FieldMD}, w.BarSep{}, w.Button{Label: "B", Bold: true}, w.Button{Label: "I", Variant: w.ButtonItalic}, w.Button{Label: "H2", Tertiary: true}, w.Button{Label: "• list", Tertiary: true}, w.Button{Folds: true, Label: "task", Icon: "task", Title: "Task", Tertiary: true}, w.Button{Icon: "link", Title: "Link", Tertiary: true}, w.Drop{Trigger: w.Button{Folds: true, Label: "Attach", Menu: true, Icon: "clip", Title: "Attach"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "note-edit", Name: "file", Label: "From this computer", List: "note-attachments"}, Row: w.DocAttach{Name: "{name}", Size: w.Dim{Parts: []w.Inline{w.Text("· {size}")}}, Remove: &w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}}, More: &w.Button{Icon: "dots", Title: "More"}, End: []w.DocbarEnd{w.Check{Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true}, w.DraftNote{Text: "Draft in this window ·", Time: w.Mono{Text: "11:42"}, Secondary: true}, w.Kbd{Keys: "Ctrl+S", Secondary: true}, w.Seg{Options: []w.SegOption{{Label: "Full width", On: true}, {Label: "Reading width"}}, Secondary: true}, w.Button{Folds: true, Label: "Focus", Icon: "focus", Title: "Focus"}}, Edit: true}, "s-notes-20", "tc-docbar"),
-	document("rule", w.Docbar{Items: []w.DocbarPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.BarSep{}, w.Button{Title: "More"}}, End: []w.DocbarEnd{w.Kbd{Keys: "Ctrl+S"}}, Rule: true}, "components-29", "tc-docbar"),
+	document("rule", w.Docbar{Items: []w.DocbarPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel"}, w.BarSep{}, w.Button{Label: "B", Bold: true}}, End: []w.DocbarEnd{w.Kbd{Keys: "Ctrl+S"}}, Rule: true}, "components-29", "tc-docbar"),
 
 	// tc-docmeta
 

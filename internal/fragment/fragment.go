@@ -454,7 +454,7 @@ func (m *Mockup) Compare(r Ref, rendered string) error {
 // text first, then the fewest differing places) and how they part, so a
 // frame's edit is redrafted from where the record stood (record -refresh).
 func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
-	got, err := m.printed(r, rendered)
+	el, got, err := m.printed(r, rendered)
 	if err != nil {
 		return r, err
 	}
@@ -463,7 +463,7 @@ func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
 		if err != nil {
 			return r, err
 		}
-		if d := Diff(m.wanted(r.Class, block, got)); d != "" {
+		if d := m.differs(r.Class, block, el, got); d != "" {
 			return r, fmt.Errorf("%s: %s", r, d)
 		}
 		return r, nil
@@ -476,24 +476,88 @@ func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
 	if len(found) == 0 {
 		return r, fmt.Errorf("%s: the frame has no .%s", r, r.Class)
 	}
-	near, nearN, nearSame := -1, 0, false
+	// The nearest: one whose own tree the markup is and only a nested block
+	// parts; else the same tree without text; else the fewest differences.
+	near, nearN, nearRank := 0, 0, -1
 	shape := Skeleton(got)
 	for i, b := range found {
 		want, have := m.wanted(r.Class, b, got)
+		k, rank := 0, 2
 		if Diff(want, have) == "" {
-			r.N = i + 1
-			return r, nil
+			if m.nested(b, el, "") == "" {
+				r.N = i + 1
+				return r, nil
+			}
+		} else {
+			k, rank = len(Diffs(want, have, 1000)), 0
+			if Skeleton(want) == shape {
+				rank = 1
+			}
 		}
-		same := Skeleton(want) == shape
-		k := len(Diffs(want, have, 1000))
-		if near < 0 || same && !nearSame || same == nearSame && k < near {
-			near, nearN, nearSame = k, i+1, same
+		if rank > nearRank || rank == nearRank && k < near {
+			near, nearN, nearRank = k, i+1, rank
 		}
 	}
 	at := r
 	at.N = nearN
-	want, have := m.wanted(r.Class, found[nearN-1], got)
-	return r, &NotFound{At: at, Diff: Diff(want, have)}
+	return r, &NotFound{At: at, Diff: m.differs(r.Class, found[nearN-1], el, got)}
+}
+
+// differs is where a widget's markup parts from a frame's block: the
+// block's own tree first, then each block nested in it by the same rule, in
+// turn — a record is the whole fragment, the words and forms of its nested
+// blocks included (20.11.2026: compared by place only, 275 records had
+// drifted from their frames unseen). "" when the markup is the block.
+func (m *Mockup) differs(cls string, block, el *html.Node, got *Node) string {
+	if d := Diff(m.wanted(cls, block, got)); d != "" {
+		return d
+	}
+	return m.nested(block, el, "")
+}
+
+// nested compares the blocks nested in want and got pairwise, in document
+// order — their places are equal, the own trees around them having been
+// compared: each by its own tree without the mixins (the container's, and
+// compared as its places), then its own nested blocks.
+func (m *Mockup) nested(want, got *html.Node, path string) string {
+	ws, gs := innerBlocks(want), innerBlocks(got)
+	if len(ws) != len(gs) {
+		return fmt.Sprintf("%s: the frame nests %d blocks, the widget %d", path, len(ws), len(gs))
+	}
+	for i, wb := range ws {
+		cls := Block(wb)
+		at := fmt.Sprintf("%s › .%s[%d]", path, cls, i+1)
+		g := WithoutMixins(cls, m.Own(gs[i], false))
+		w, g := m.wanted(cls, wb, g)
+		if d := Diff(w, g); d != "" {
+			return at + ": " + d
+		}
+		if d := m.nested(wb, gs[i], at); d != "" {
+			return d
+		}
+	}
+	return ""
+}
+
+// innerBlocks are the blocks nested in n, outermost only, in document
+// order: what Own makes places of.
+func innerBlocks(n *html.Node) []*html.Node {
+	var out []*html.Node
+	var walk func(*html.Node)
+	walk = func(n *html.Node) {
+		for _, c := range children(n) { // the desktop's window frame left out, as Own leaves it
+			if c.Type != html.ElementNode {
+				continue
+			}
+			if Block(c) != "" {
+				out = append(out, c)
+				continue
+			}
+			walk(c)
+		}
+	}
+	walk(n)
+	return out
 }
 
 // NotFound is Locate's error for a record no occurrence prints as: At is
@@ -509,18 +573,18 @@ func (e *NotFound) Error() string {
 
 // printed is a widget's markup in the compared form, checked to be one
 // element of r's block.
-func (m *Mockup) printed(r Ref, rendered string) (*Node, error) {
+func (m *Mockup) printed(r Ref, rendered string) (*html.Node, *Node, error) {
 	nodes, err := Fragment(rendered)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if len(nodes) != 1 {
-		return nil, fmt.Errorf("%s: the widget printed %d top elements, want 1", r, len(nodes))
+		return nil, nil, fmt.Errorf("%s: the widget printed %d top elements, want 1", r, len(nodes))
 	}
 	if b := Block(nodes[0]); b != r.Class && !(r.Class == "tc-root" && b == "" && hasClass(nodes[0], "tc-root")) {
-		return nil, fmt.Errorf("%s: the widget prints block %q, want %q", r, b, r.Class)
+		return nil, nil, fmt.Errorf("%s: the widget prints block %q, want %q", r, b, r.Class)
 	}
-	return m.Own(nodes[0], false), nil
+	return nodes[0], m.Own(nodes[0], false), nil
 }
 
 // wanted is a frame's block in the compared form, and the widget's markup

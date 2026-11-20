@@ -56,62 +56,12 @@ var _ = add(
 			},
 		},
 	}, "s-auth-1", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGapTight},
-						w.DialogSub{
-							Parts: []w.Inline{
-								w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it."),
-							},
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
-							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBelowWide,
-						},
-						w.Form{
-							Items: []w.FormPart{
-								w.Field{
-									Label: "Login",
-									Parts: []w.FieldPart{w.Input{Value: "viktor", Label: "Login", Focus: true}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label: "Email",
-									Parts: []w.FieldPart{w.Input{Value: "v@example.org", Label: "Email"}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label: "Password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password"}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label: "Repeat password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}},
-									Width: w.FieldMD,
-								},
-							},
-							Variant: w.FormFlushAll,
-						},
-						w.FormFoot{
-							Items: []w.FormFootPart{
-								w.Button{Label: "Create account", Kind: w.ButtonPrimary},
-								w.Span{Face: w.FaceAccent12, Text: "Already have an account? Sign in"},
-							},
-							Variant: w.FormFootFlush,
-						},
-					},
-					Variant: w.DialogPage440,
-				},
-			},
-		},
-	}, "s-auth-2", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGapTight},
+		w.DialogSub{Parts: []w.Inline{w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")}, Tone: w.MsgAlert, Space: w.MsgFlushBelowWide},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Value: "viktor", Label: "Login", Focus: true}}, Width: w.FieldMD}, w.Field{Label: "Email", Parts: []w.FieldPart{w.Input{Value: "v@example.org", Label: "Email"}}, Width: w.FieldMD}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password"}}, Width: w.FieldMD}, w.Field{Label: "Repeat password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}}, Width: w.FieldMD}}, Variant: w.FormFlushAll},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Create account", Kind: w.ButtonPrimary}, w.Span{Face: w.FaceAccent12, Text: "Already have an account? Sign in"}}, Variant: w.FormFootFlush}}, Variant: w.DialogPage440}}}}, "s-auth-2", "tc-root"),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Auth{
@@ -134,58 +84,12 @@ var _ = add(
 			},
 		},
 	}, "s-auth-3", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGapTight},
-						w.DialogSub{
-							Parts: []w.Inline{w.Text("The account you create here is the first one, and it can manage everyone else.")},
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
-							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBelowWide,
-						},
-						w.Form{
-							Items: []w.FormPart{
-								w.Field{
-									Label: "Login",
-									Parts: []w.FieldPart{w.Input{Placeholder: "a-z 0-9 . _ -", Label: "Login", Mono: true, Focus: true}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label:      "Email",
-									LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}},
-									Parts:      []w.FieldPart{w.Input{Placeholder: "—", Label: "Email"}},
-									Width:      w.FieldMD,
-								},
-								w.Field{
-									Label: "Password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password"}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label: "Repeat password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}},
-									Width: w.FieldMD,
-								},
-							},
-							Variant: w.FormFlushAll,
-						},
-						w.FormFoot{
-							Items:   []w.FormFootPart{w.Button{Label: "Create administrator", Kind: w.ButtonPrimary}},
-							Variant: w.FormFootFlush,
-						},
-					},
-					Variant: w.DialogPage440,
-				},
-			},
-		},
-	}, "s-auth-4", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Set up Carrel", Gap: w.DialogTitleGapTight},
+		w.DialogSub{Parts: []w.Inline{w.Text("The account you create here is the first one, and it can manage everyone else.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")}, Tone: w.MsgAlert, Space: w.MsgFlushBelowWide},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Placeholder: "a-z 0-9 . _ -", Label: "Login", Mono: true, Focus: true}}, Width: w.FieldMD}, w.Field{Label: "Email", LabelAside: w.Dim{Parts: []w.Inline{w.Text("(optional)")}}, Parts: []w.FieldPart{w.Input{Placeholder: "—", Label: "Email"}}, Width: w.FieldMD}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password"}}, Width: w.FieldMD}, w.Field{Label: "Repeat password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}}, Width: w.FieldMD}}, Variant: w.FormFlushAll},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Create administrator", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush}}, Variant: w.DialogPage440}}}}, "s-auth-4", "tc-root"),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Auth{
@@ -218,58 +122,17 @@ var _ = add(
 			},
 		},
 	}, "s-auth-5", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGapNormal},
-						w.Prose{
-							Parts: []w.Inline{
-								w.Text("Account "),
-								w.Strong("mix"),
-								w.Text(" has a confirmed email. A silent password reset does not exist: a new password would be a new key, and everything stored under the old one would be lost anyway."),
-							},
-							Variant: w.ProseMuted,
-						},
-						w.Form{
-							Items: []w.FormPart{
-								w.Card{
-									Items: []w.CardPart{
-										w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Wipe the account")}},
-										w.Prose{
-											Parts: []w.Inline{
-												w.Text("We send a letter to the confirmed address. The link in it is not a reset: after you confirm, everything stored here is erased — connections become unreadable and are deleted — and the same link then lets you set a new password. Address books, calendars, tasks and notes on the servers stay where they are."),
-											},
-											Variant: w.ProseMutedClose,
-										},
-										w.Button{Label: "Send a confirmation letter", Kind: w.ButtonPrimary},
-									},
-									Variant: w.CardSnug,
-								},
-								w.Card{
-									Items: []w.CardPart{
-										w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Ask the administrator")}},
-										w.Prose{
-											Parts: []w.Inline{
-												w.Text("This account deposited its encryption key. The administrator can recover it with the instance master password, and your data is kept. Shown only when deposit is on for this account."),
-											},
-											Variant: w.ProseMutedClose,
-										},
-										w.Button{Label: "Ask the administrator"},
-									},
-									Variant: w.CardSnug,
-								},
-							},
-							Variant: w.FormColumnWide,
-						},
-						w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Back to sign in"}}, Variant: w.FormFootFlush},
-					},
-					Variant: w.DialogPage520,
-				},
-			},
-		},
-	}, "s-auth-6", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "What we can do", Gap: w.DialogTitleGapNormal},
+		w.Prose{Parts: []w.Inline{w.Text("Account "), w.Strong("mix"), w.Text(" has a confirmed email. A silent password reset does not exist: a new password would be a new key, and everything stored under the old one would be lost anyway.")}, Variant: w.ProseMuted},
+		w.Form{Items: []w.FormPart{w.Card{Items: []w.CardPart{
+			w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Wipe the account")}},
+			w.Prose{Parts: []w.Inline{w.Text("We send a letter to the confirmed address. The link in it is not a reset: after you confirm, everything stored here is erased — connections become unreadable and are deleted — and the same link then lets you set a new password. Address books, calendars, tasks and notes on the servers stay where they are.")}, Variant: w.ProseMutedClose},
+			w.Button{Label: "Send a confirmation letter", Kind: w.ButtonPrimary}}, Variant: w.CardSnug}, w.Card{Items: []w.CardPart{
+			w.CardText{Kind: w.CardTerm, Parts: []w.CardTextPart{w.Text("Ask the administrator")}},
+			w.Prose{Parts: []w.Inline{w.Text("This account deposited its encryption key. The administrator can recover it with the instance master password, and your data is kept.")}, Variant: w.ProseMutedClose},
+			w.Button{Label: "Ask the administrator"}}, Variant: w.CardSnug}}, Variant: w.FormColumnWide},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Back to sign in"}}, Variant: w.FormFootFlush}}, Variant: w.DialogPage520}}}}, "s-auth-6", "tc-root"),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Auth{
@@ -327,94 +190,21 @@ var _ = add(
 			},
 		},
 	}, "s-auth-9", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGapNormal},
-						w.Prose{
-							Parts: []w.Inline{
-								w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps for "),
-								w.Strong("mix"),
-								w.Text(": saved connections and their passwords, subscriptions, tags and the settings of this desk. Address books, calendars, tasks and notes on the servers are not touched — you connect to them again afterwards.\n\nThe account itself stays: same login, same confirmed address. Only the password is new, and you set it on the next screen."),
-							},
-							Variant: w.ProseMuted,
-						},
-						w.FormFoot{
-							Items: []w.FormFootPart{
-								w.Button{Label: "Erase and set a new password", Kind: w.ButtonDangerSolid},
-								w.Button{Label: "Cancel"},
-							},
-							Variant: w.FormFootFlush,
-						},
-					},
-					Variant: w.DialogPage520,
-				},
-			},
-		},
-	}, "s-auth-10", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGapTight},
-						w.DialogSub{
-							Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")},
-						},
-						w.Msg{
-							Parts: []w.MsgPart{
-								w.Text("Your password is the only key to your own data. Nobody — including this server — can recover it for you."),
-							},
-							Tone:  w.MsgAlert,
-							Space: w.MsgFlushBelowWide,
-						},
-						w.Form{
-							Items: []w.FormPart{
-								w.Field{
-									Label: "Password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password", Focus: true}},
-									Width: w.FieldMD,
-								},
-								w.Field{
-									Label: "Repeat password",
-									Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}},
-									Width: w.FieldMD,
-								},
-							},
-							Variant: w.FormFlushAll,
-						},
-						w.FormFoot{
-							Items:   []w.FormFootPart{w.Button{Label: "Set the password and sign in", Kind: w.ButtonPrimary}},
-							Variant: w.FormFootFlush,
-						},
-					},
-					Variant: w.DialogPage440,
-				},
-			},
-		},
-	}, "s-auth-11", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
-						w.DialogTitle{Text: "Invitation", Gap: w.DialogTitleGapNormal},
-						w.Prose{
-							Parts: []w.Inline{
-								w.Text("This invitation link is not valid. It may have expired, already been used, or been revoked."),
-							},
-							Variant: w.ProseMuted,
-						},
-						w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush},
-					},
-					Variant: w.DialogNarrow,
-				},
-			},
-		},
-	}, "rest-1", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Erase everything and start again?", Gap: w.DialogTitleGapNormal},
+		w.Prose{Parts: []w.Inline{w.Text("This is not a password recovery. The key to your data comes from the password you forgot, so nothing stored under it can be read again — by you, by us, by anyone.\n\nConfirming erases what Carrel keeps encrypted for "), w.Strong("mix"), w.Text(": saved connections and their passwords, subscriptions, published links, devices, external backup triggers and the deposited copy of the key. Address books, calendars, tasks and notes on the servers are not touched — you connect to them again afterwards.\n\nThe account itself stays: same login, role and confirmed address, the same first day of the week and clock. Only the password is new, and you set it on the next screen.")}, Variant: w.ProseMuted},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Erase and set a new password", Kind: w.ButtonDangerSolid}, w.Button{Label: "Cancel"}}, Variant: w.FormFootFlush}}, Variant: w.DialogPage520}}}}, "s-auth-10", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogTitle{Text: "Set a new password", Gap: w.DialogTitleGapTight},
+		w.DialogSub{Parts: []w.Inline{w.Text("The account "), w.Mono{Text: "mix"}, w.Text(" is empty. Nothing was kept.")}},
+		w.Msg{Parts: []w.MsgPart{w.Text("Nobody can recover this password, this server included.")}, Tone: w.MsgAlert, Space: w.MsgFlushBelowWide},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Password", Focus: true}}, Width: w.FieldMD}, w.Field{Label: "Repeat password", Parts: []w.FieldPart{w.Input{Value: "••••••••••••", Label: "Repeat password"}}, Width: w.FieldMD}}, Variant: w.FormFlushAll},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Set the password and sign in", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush}}, Variant: w.DialogPage440}}}}, "s-auth-11", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo48}, Wide: true},
+		w.DialogTitle{Text: "This link does not work", Gap: w.DialogTitleGapNormal},
+		w.Prose{Parts: []w.Inline{w.Text("It may have expired, been used already, or been withdrawn. Ask whoever sent it for a new one.")}, Variant: w.ProseMuted},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Variant: w.FormFootFlush}}, Variant: w.DialogNarrow}}}}, "rest-1", "tc-root"),
 	page("plain", w.Page{
 		Items: []w.PagePart{
 			w.Auth{
@@ -634,34 +424,7 @@ var _ = add(
 		},
 		Variant: w.PageOnBackground,
 	}, "desktop-10", "tc-root"),
-	page("on-background-column", w.Page{
-		Items: []w.PagePart{
-			w.Form{
-				Items: []w.FormPart{
-					w.Rubric{Text: "Reminders"},
-					w.Field{
-						Label: "Remind me",
-						Parts: []w.FieldPart{w.Pick{Value: "10 minutes · and as set in the event"}},
-						Width: w.FieldW100,
-					},
-					w.Check{On: true, Parts: []w.CheckPart{w.Text("Task due dates — on the morning they are due")}},
-					w.Check{Parts: []w.CheckPart{w.Text("Show the title on the lock screen")}},
-					w.Field{
-						Label: "Quiet hours",
-						Parts: []w.FieldPart{w.Input{Value: "22:00 – 08:00", Label: "Quiet hours", Mono: true}},
-						Width: w.FieldW100,
-					},
-					w.Field{
-						Label: "From which collections",
-						Parts: []w.FieldPart{w.Input{Value: "3 of 7 ticked", Label: "From which collections"}},
-						Width: w.FieldW100,
-					},
-				},
-				Variant: w.FormColumnWideMid,
-			},
-		},
-		Variant: w.PageOnBackgroundColumn,
-	}, "desktop-11", "tc-root"),
+	page("on-background-column", w.Page{Items: []w.PagePart{w.Form{Items: []w.FormPart{w.Rubric{Text: "Reminders"}, w.Field{Label: "Remind me", Parts: []w.FieldPart{w.Pick{Value: "10 minutes · and as set in the event"}}, Width: w.FieldW100}, w.Check{On: true, Parts: []w.CheckPart{w.Text("Task due dates — on the morning they are due")}}, w.Check{Parts: []w.CheckPart{w.Text("Show the title on the lock screen")}}, w.Field{Label: "Quiet hours", Parts: []w.FieldPart{w.Input{Value: "22:00 – 08:00", Label: "Quiet hours", Mono: true}}, Width: w.FieldW100}, w.Field{Label: "From which collections", Parts: []w.FieldPart{w.Input{Value: "3 of 7 ticked", Label: "From which collections"}}, Width: w.FieldW100}}, Variant: w.FormColumnWideMid}}, Variant: w.PageOnBackgroundColumn}, "desktop-11", "tc-root"),
 	page("on-background", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Msg{Parts: []w.MsgPart{w.Bold{Parts: []w.Inline{w.Text("Sign out of "), w.Mono{Text: "carrel.example"}, w.Text("?")}}, w.Text(" "), w.Strong("Your other devices stay signed in"), w.Text(": end those sessions in Settings → Account.")}, Space: w.MsgFlush}, w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("Delete what this app keeps on this computer?"), w.Text(" The folder "), w.Mono{Text: "C:\\Users\\mix\\AppData\\Roaming\\Carrel"}, w.Text(", the instance address and the session token. The saved connections cannot be brought back; records on your DAV servers are not touched.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Line{Items: []w.LinePart{w.Button{Label: "Keep and sign out", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Button{Label: "Delete and sign out", Kind: w.ButtonDangerSolid}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Gap: w.LineGapNormal, Block: true}}, Gap: w.WindowGapWide, Small: true}}, Variant: w.PageOnBackground}, "desktop-12", "tc-root"),
 	page("plain", w.Page{Items: []w.PagePart{w.Msg{Icon: "download", Parts: []w.MsgPart{w.Strong("Carrel 0.8.0 is ready to install."), w.Text(" It is applied when the app closes, or now: the window reopens where it was.")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Install and restart", Kind: w.ButtonPrimary}, w.Button{Label: "What’s new"}, w.Button{Label: "Later"}}}, Tone: w.MsgAccent, Space: w.MsgFlushEnd}, w.Window{Items: []w.WindowPart{w.Form{Items: []w.FormPart{w.Field{Label: "Installed", Parts: []w.FieldPart{w.Input{Value: "app 0.8.0 · server 0.8.0 — both run inside this app", Label: "Installed", Mono: true, Variant: w.Input11_5}, w.FieldHint{Parts: []w.Inline{w.Text("In local mode one update covers the app and the server. Connections and settings stay as they are.")}}}, Place: w.Grown}, w.Field{Label: "Downloaded", Parts: []w.FieldPart{w.Line{Items: []w.LinePart{w.Meter{Percent: 100, Width: w.MeterFill}, w.Mono{Text: "0.8.0 · 14.2 MB · signature checked", Variant: w.Mono11Dusty}}, Gap: w.LineGapNormal}}, Place: w.Grown}}, Variant: w.FormGapFields}, w.Msg{Parts: []w.MsgPart{w.Text("You see this because automatic checking is on; out of the box the app never goes looking.")}, Space: w.MsgFlush}}, Gap: w.WindowGapWide}}}, "desktop-14", "tc-root"),
 	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Msg{Icon: "shield", Parts: []w.MsgPart{w.Strong("The app is newer than the server."), w.Text(" This app is 0.8.0, "), w.Mono{Text: "carrel.example"}, w.Text(" runs 0.6.4. What both know works; what is newer than the server is not there.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, w.Form{Items: []w.FormPart{w.Field{Label: "What to do", Parts: []w.FieldPart{w.Input{Placeholder: "Update the server where it runs — this app cannot do it", Label: "What to do"}, w.FieldHint{Parts: []w.Inline{w.Text("The app does not update a server from outside: that would be a way in. The server’s administrator has to update it.")}}}, Place: w.Grown}}, Variant: w.FormGapFields}, w.Line{Items: []w.LinePart{w.Button{Label: "How to update a server"}, w.Button{Label: "Do not warn about this server"}}, Gap: w.LineGapNormal, Block: true}}, Gap: w.WindowGapWide}}}, "desktop-15", "tc-root"),

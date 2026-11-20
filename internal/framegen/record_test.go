@@ -1,10 +1,66 @@
 package framegen
 
 import (
+	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
+
+	"carrel.dev/typecase/internal/fragment"
 )
+
+// TestRecordCountsAsFragment: the n-th element of a block the record tool
+// drafts from is the n-th the comparison means (fragment.Ref), in every
+// frame, for every block class — counted otherwise, a redraft took a line
+// laid out by another block for the line it should have (20.11.2026).
+func TestRecordCountsAsFragment(t *testing.T) {
+	m, err := fragment.Load("../..")
+	if err != nil {
+		t.Fatal(err)
+	}
+	mock, err := os.ReadFile(filepath.Join("../..", fragment.Source))
+	if err != nil {
+		t.Fatal(err)
+	}
+	classes := map[string]bool{}
+	for _, c := range regexp.MustCompile(`\btc-[a-z0-9]+(?:-[a-z0-9]+)*\b`).FindAllString(string(mock), -1) {
+		// tc-root is a block only as a page's root, where both count one;
+		// elsewhere it is the frame's box, and no record stands for it.
+		if !strings.Contains(c, "--") && c != "tc-root" {
+			classes[c] = true
+		}
+	}
+	roots := map[string]*El{}
+	checked := 0
+	bad := 0
+	for cls := range classes {
+		want := map[string]int{}
+		for _, s := range m.Shapes(cls) {
+			for _, r := range s.Refs {
+				want[r.Frame]++
+			}
+		}
+		for _, f := range m.Frames {
+			root, ok := roots[f.ID]
+			if !ok {
+				if root, err = frameRoot(string(mock), f.ID); err != nil {
+					t.Fatal(err)
+				}
+				roots[f.ID] = root
+			}
+			checked++
+			if got := len(occurrences(root, cls)); got != want[f.ID] && bad < 20 {
+				bad++
+				t.Errorf("%s .%s: the record tool counts %d, the comparison %d", f.ID, cls, got, want[f.ID])
+			}
+		}
+	}
+	if len(classes) < 100 || checked < 10000 {
+		t.Errorf("%d classes, %d frame×class pairs: the test lost its mockup", len(classes), checked)
+	}
+	t.Logf("%d classes, %d frame×class pairs", len(classes), checked)
+}
 
 // TestRecordLeavesMixinsOut: a record is the block as it prints by itself —
 // the comparison takes tc-grow, tc-push off the frame's root, so the draft

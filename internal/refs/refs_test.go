@@ -128,14 +128,20 @@ func TestBite_widgetFragments(t *testing.T) {
 	if !strings.Contains(err.Error(), "button.tc-menu__item[2]") {
 		t.Fatalf("the message does not name the path: %v", err)
 	}
-	// A nested block is a place: its name is the menu's business, its variant is not.
+	// A nested block is compared by its own rules too (20.11.2026): its name
+	// and the mixins are the menu's, its variant and words its own — and the
+	// record holds them all as its frame does.
 	otherBlock := raw(strings.Replace(string(good), `<span class="tc-mono tc-mono--t11">`, `<span class="tc-dim">`, 1))
 	if err := m.Compare(ref, otherBlock.Render()); err == nil || !strings.Contains(err.Error(), "tc-mono") {
 		t.Fatalf("another block in the place passed: %v", err)
 	}
 	ownVariant := raw(strings.Replace(string(good), `<span class="tc-mono tc-mono--t11">`, `<span class="tc-mono tc-mono--t12">`, 1))
-	if err := m.Compare(ref, ownVariant.Render()); err != nil {
-		t.Fatalf("the nested block's own variant is its own record's business: %v", err)
+	if err := m.Compare(ref, ownVariant.Render()); err == nil || !strings.Contains(err.Error(), "tc-mono--t12") {
+		t.Fatalf("a nested block's own variant changed passed: %v", err)
+	}
+	nestedText := raw(strings.Replace(string(good), ">.vcf<", ">.ics<", 1))
+	if err := m.Compare(ref, nestedText.Render()); err == nil || !strings.Contains(err.Error(), `".vcf"`) {
+		t.Fatalf("a nested block's words changed passed: %v", err)
 	}
 	wrongText := raw(strings.Replace(string(good), "Rename", "Rename it", 1))
 	if err := m.Compare(ref, wrongText.Render()); err == nil || !strings.Contains(err.Error(), `"Rename"`) {

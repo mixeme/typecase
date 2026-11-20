@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"carrel.dev/typecase/internal/fragment"
+	"golang.org/x/net/html"
 )
 
 // Record is the Go expression of the n-th element of block class in a frame
@@ -22,23 +23,11 @@ func Record(root, frameID, class string, n int) (string, error) {
 		return "", err
 	}
 	g := &gen{en: en, faces: en.faces()}
-	markup, err := frameMarkup(string(mock), frameID)
+	root2, err := frameRoot(string(mock), frameID)
 	if err != nil {
 		return "", err
 	}
-	root2 := Parse(strings.TrimSpace(markup))
-	unwrap(root2)
-	var found []*El
-	var walk func(e *El)
-	walk = func(e *El) {
-		if e.Has(class) {
-			found = append(found, e)
-		}
-		for _, k := range e.Els() {
-			walk(k)
-		}
-	}
-	walk(root2)
+	found := occurrences(root2, class)
 	if n < 1 || n > len(found) {
 		return "", fmt.Errorf("%s: %d elements of .%s, not %d", frameID, len(found), class, n)
 	}
@@ -104,6 +93,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 	switch {
 	case e.Has("tc-shell"):
 		return g.shell(e), ""
+	case e.Has("tc-overlay"):
+		return g.overlay(e), ""
 	case e.Has("tc-root") && len(e.Cls()) > 0 && e.Cls()[0] == "tc-root" && !e.Has("tc-shell"):
 		return g.page(e), ""
 	case e.Has("tc-main"):
@@ -120,7 +111,7 @@ func (g *gen) element(e *El) (expr string, why string) {
 		return g.checkForm(e), ""
 	case e.Has("tc-barform"):
 		return g.barItem(e), ""
-	case e.Has("tc-drop") && e.Tag == "details":
+	case e.Has("tc-drop"):
 		return g.drop(e), ""
 	case e.Has("tc-range"):
 		return g.barItem(e), ""
@@ -151,4 +142,44 @@ func (g *gen) element(e *El) (expr string, why string) {
 		return g.tile(e), ""
 	}
 	return g.blockChild(e), ""
+}
+
+// blockIs says whether class is e's block, by fragment's rule: the n-th of a
+// class is counted as the comparison counts it, not every element that
+// carries the class as a mixin or as another block's layout (tc-line,
+// tc-stack, tc-push). Counted otherwise, a redraft took another element.
+func blockIs(e *El, class string) bool {
+	n := &html.Node{Type: html.ElementNode, Data: e.Tag, Attr: []html.Attribute{{Key: "class", Val: e.attrs["class"]}}}
+	return fragment.Block(n) == class
+}
+
+// frameRoot is a frame's drawing, parsed, without its label.
+func frameRoot(mock, frameID string) (*El, error) {
+	markup, err := frameMarkup(mock, frameID)
+	if err != nil {
+		return nil, err
+	}
+	root := Parse(strings.TrimSpace(markup))
+	unwrap(root)
+	return root, nil
+}
+
+// occurrences are the elements of block class in a drawing, in document
+// order, counted as fragment counts them (fragment.Ref's N).
+func occurrences(root *El, class string) []*El {
+	var found []*El
+	var walk func(e *El)
+	walk = func(e *El) {
+		if e.Has(class) && (class == "tc-root" || blockIs(e, class)) {
+			found = append(found, e)
+		}
+		if e.Has("mk-titlebar") || e.Has("mk-status") || e.Has("mk-toast") {
+			return // the desktop's chrome: fragment does not count in it
+		}
+		for _, k := range e.Els() {
+			walk(k)
+		}
+	}
+	walk(root)
+	return found
 }

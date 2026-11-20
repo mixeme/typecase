@@ -142,7 +142,8 @@ func redraft(frames []string, force bool) error {
 		}
 		expr, err := framegen.Record(".", r.at.Frame, r.at.Class, r.at.N)
 		if err != nil {
-			return fmt.Errorf("%s: %v", r.at, err)
+			refused = append(refused, fmt.Sprintf("%s (%s): the generator cannot draft #%d: %v", r.e.Ref, where(r.e), r.at.N, err))
+			continue
 		}
 		if err := ed.fixture(r.e, expr); err != nil {
 			return err
