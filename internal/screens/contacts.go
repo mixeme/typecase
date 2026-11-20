@@ -21,7 +21,7 @@ func Contacts1() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -265,7 +265,7 @@ func Contacts1() Screen {
 							{
 								Term: "Address · work",
 								Value: []w.ValuePart{
-									w.Text("Москва, Тверская 12, стр. 3 "),
+									w.Text("Тверская 12, стр. 3, Москва, 123001, Россия "),
 									w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}},
 								},
 							},
@@ -353,7 +353,7 @@ func Contacts2() Screen {
 					w.Nav{
 						Items: []w.NavItem{
 							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
@@ -1788,7 +1788,7 @@ func Contacts6() Screen {
 								Href:  "mailto:anna.kovaleva@slovo.example",
 								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
 							},
-							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
 							{
 								Term:  "Birthday",
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
@@ -2459,7 +2459,7 @@ func Contacts16() Screen {
 								Href:  "mailto:anna.kovaleva@slovo.example",
 								After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
 							},
-							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
 							{
 								Term:  "Birthday",
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
@@ -2560,7 +2560,7 @@ func Contacts35() Screen {
 					w.Nav{
 						Items: []w.NavItem{
 							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
@@ -2850,7 +2850,7 @@ func Contacts7() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -3092,7 +3092,7 @@ func Contacts7() Screen {
 							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
 							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
 							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
-							{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
 							{
 								Term:  "Birthday",
 								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},

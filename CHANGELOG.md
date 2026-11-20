@@ -6,6 +6,22 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Mockup
+
+- **Frames say what Carrel's set holds** (Carrel's tasks 270, 271). An
+  address reads from the street: «Тверская 12, стр. 3, Москва, 123001,
+  Россия» (the owner, 20.11: the order the card keeps it in, as the post
+  writes it) in 10 frames. A calendar collection counts all its events,
+  the section the sum of its ticked collections: Личный 5, Проекты 2,
+  Combined calendar 10, and Calendar 10 in the rail of every frame; the
+  collections stand in the server's order (Личный, Работа, Дни рождения;
+  Проекты, Дежурства). A note's or a contact's excerpt is the first line of
+  its text, cut by the row, not retold. A duplicate group is named by its
+  first record («Лебедева Вера»). The shared contact has both of Anna's
+  addresses, the shared list the tasks of «Дела» as they are. The sheet of
+  a new collection in s-profile-38 has no width of its own, as in
+  s-profile-5.
+
 ## typecase/v0.12.0 — 2026-11-20
 
 ### Dependencies

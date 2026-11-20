@@ -186,7 +186,10 @@ func Print3() Screen {
 				Field: true,
 			},
 			w.PrintRow{
-				Items: []w.PrintRowPart{w.PrintCell{Name: "Address · work"}, w.PrintCell{Name: "Москва, Тверская 12, стр. 3"}},
+				Items: []w.PrintRowPart{
+					w.PrintCell{Name: "Address · work"},
+					w.PrintCell{Name: "Тверская 12, стр. 3, Москва, 123001, Россия"},
+				},
 				Field: true,
 			},
 			w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Birthday"}, w.PrintCell{Name: "1987-03-14"}}, Field: true},
@@ -332,10 +335,7 @@ func Print8() Screen {
 			w.PrintRow{
 				Items: []w.PrintRowPart{
 					w.Mono{Text: "10 Aug", Variant: w.MonoFace},
-					w.PrintCell{
-						Name:   "Заметка со встречи 10.08",
-						Detail: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна… · in 2 notebooks",
-					},
+					w.PrintCell{Name: "Заметка со встречи 10.08", Detail: "Договорились заморозить ветку в среду. · in 2 notebooks"},
 				},
 			},
 			w.PrintRow{
@@ -343,7 +343,7 @@ func Print8() Screen {
 					w.Mono{Text: "8 Aug", Variant: w.MonoFace},
 					w.PrintCell{
 						Name:   "Что почитать про CRDT",
-						Detail: "Кляйн, глава 5; статья Шапиро 2011; демка automerge… · in 2 notebooks",
+						Detail: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля. · in 2 notebooks",
 					},
 				},
 			},

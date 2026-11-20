@@ -841,12 +841,6 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar"),
 
 	// tc-sheet
-	overlay("form-w520", w.Sheet{Action: "/app/collections/new?kind=event", Icon: "plus", Title: "New calendar", Body: []w.SheetPart{
-		w.Field{Label: "On which server", Parts: []w.FieldPart{w.Pick{Name: "account", Options: []w.PickOption{{Value: "nextcloud", Label: "nextcloud", On: true}, {Value: "radicale", Label: "radicale · vps"}}, Label: "On which server"}}, Width: w.FieldW100},
-		w.Field{Label: "Name", Parts: []w.FieldPart{w.Input{Name: "name", Value: "Поездки", Label: "Name", Focus: true, Error: true}, w.FieldHint{Parts: []w.Inline{w.Text("Something deleted at poezdki/ is still in this server's trash bin. Give it another name, or empty the trash bin on the server.")}, Variant: w.HintDanger}}, Width: w.FieldW100},
-		w.Field{Label: "Colour", Parts: []w.FieldPart{w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 2, Name: "colour"}}, Width: w.FieldW100},
-		w.Field{Label: "What goes in it", Parts: []w.FieldPart{w.Group{Items: []w.FieldPart{w.Check{On: true, Name: "components", Value: "VEVENT", Parts: []w.CheckPart{w.Text("Events")}}, w.Check{On: true, Name: "components", Value: "VTODO", Parts: []w.CheckPart{w.Text("Tasks")}}, w.Check{Name: "components", Value: "VJOURNAL", Parts: []w.CheckPart{w.Text("Notes")}}}}}, Width: w.FieldW100},
-		w.Field{Label: "Address", Parts: []w.FieldPart{w.Input{Name: "address", Placeholder: "poezdki", Label: "Address", Mono: true, From: "name"}, w.FieldHint{Parts: []w.Inline{w.Mono{Text: "…/remote.php/dav/calendars/mix/"}, w.SlugOf{Of: "address", Text: "poezdki"}, w.Mono{Text: "/"}, w.Text(" — taken from the name, yours to change.")}, Variant: w.HintSmall}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Create", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/calendar"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, "s-profile-38", "tc-sheet"),
 	overlay("plain", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close", Href: "/app/contacts"}}, Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The letter went, but not to everyone. Sending again goes only to the refused.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},
 		w.Line{Items: []w.LinePart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, w.Text(" — "), w.Strong("sent")}, Gap: w.LineGapNormal, Block: true},
@@ -1374,18 +1368,18 @@ var _ = add(
 		w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write: connect an account that holds notes first.")}, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth480}}}, "s-notes-6", "tc-overlay"),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
-		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3"},
-		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
+		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "radicale · vps"},
-		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "baikal"},
 		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
@@ -1418,7 +1412,7 @@ var _ = add(
 		w.Area{Text: "Позвонить в МФЦ во вторник до 12:00 — уточнить, нужен ли оригинал доверенности.", Variant: w.AreaBodySm, Focus: true, Name: "description", Label: "Text"}}, Foot: []w.SheetFootPart{w.Button{Label: "Save note", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Ctrl+Enter"}, w.Button{Label: "Open the card", Icon: "expand", To: "/app/notes/nextcloud/zapisi/quick?op=open", Submit: true}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}}}}, "s-notes-5", "tc-overlay"),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
@@ -1460,19 +1454,19 @@ var _ = add(
 			{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 4}}, Foot: []w.SheetFootPart{w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}}, "s-contacts-2", "tc-overlay"),
 	overlay("top", w.Overlay{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "7", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
-		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3"},
-		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
+		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "radicale · vps"},
-		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
-		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
+		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "baikal"},
 		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
@@ -1600,7 +1594,7 @@ var _ = add(
 	overlay("crop-image", w.Dialog{Items: []w.DialogPart{
 		w.PhotoCrop{Colour: "#8C7B6A", Src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%238C7B6A'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23E8DFCB'/%3E%3Cpath d='M6 40c2-9 8-13 14-13s12 4 14 13z' fill='%23E8DFCB'/%3E%3C/svg%3E", Note: "Drag the photo to choose the frame. The box is what other clients will see.", Fields: []w.Field{}}}, Variant: w.Dialog520}, "components-40", "tc-dialog"),
 	overlay("width", w.Dialog{Items: []w.DialogPart{
-		w.Head{Title: &w.HeadTitle{Text: "Merge on the server"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}}},
+		w.Head{Title: &w.HeadTitle{Text: "Merge on the server"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Лебедева Вера · 2 records")}}}},
 		w.Msg{Parts: []w.MsgPart{w.Text("The other record is deleted. This cannot be undone.")}, Space: w.MsgFlushSides},
 		w.Card{Items: []w.CardPart{
 			w.Rubric{Text: "Where the merged record stays"},

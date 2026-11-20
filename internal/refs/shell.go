@@ -80,14 +80,14 @@ var _ = add(
 		{Icon: "back", Label: "Back to the card", Href: "#"}}}, "s-contacts-3", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, "s-agenda-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
@@ -103,7 +103,7 @@ var _ = add(
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 2}, "s-profile-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
@@ -129,7 +129,7 @@ var _ = add(
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 6}, "s-backup-6", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
@@ -168,7 +168,7 @@ var _ = add(
 		{Icon: "dup", Label: "Duplicates", Href: "#"}}, On: 6}, "s-dup-6", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"}}, On: 2}, "s-notes-5", "tc-nav"),
@@ -194,21 +194,21 @@ var _ = add(
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 7}, "s-publish-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 3}, "s-tasks-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}}, "s-find-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
@@ -235,7 +235,7 @@ var _ = add(
 		{Icon: "theme", Label: "Appearance", Href: "#"}}, On: 8}, "appearance-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},

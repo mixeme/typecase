@@ -165,7 +165,7 @@ var _ = add(
 	form("block", w.Rubric{Text: "Rail"}, "shell-1", "tc-rubric"),
 	form("inline", w.Rubric{Text: "А", Form: w.RubricInline}, "components-12", "tc-rubric"),
 	form("block", w.Rubric{Text: "nextcloud", Items: []w.RubricPart{w.Mono{Text: "12", Variant: w.MonoTight}}}, "components-11", "tc-rubric"),
-	form("aside", w.Rubric{Text: "Вера Лебедева", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}}}}}, "s-dup-1", "tc-rubric"),
+	form("aside", w.Rubric{Text: "Лебедева Вера", Items: []w.RubricPart{w.RubricAside{Text: "", Items: []w.RubricAsidePart{w.Badge{Label: "candidate ×2"}, w.Mono{Text: "80 points · same phone, same name", Variant: w.MonoTightDusty}}}}}, "s-dup-1", "tc-rubric"),
 	form("aside", w.Rubric{Lead: &w.Mono{Text: "TEL;work"}, Items: []w.RubricPart{w.RubricAside{Text: "only in your edit"}}}, "s-conflict-1", "tc-rubric"),
 	form("item", w.Rubric{Text: "Write into", Form: w.RubricItem}, "components-6", "tc-rubric"),
 	form("variant", w.Rubric{Text: "What is pointing at it now", Variant: w.RubricBelow}, "s-profile-9", "tc-rubric"),

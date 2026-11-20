@@ -21,7 +21,7 @@ func Dup1() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -93,7 +93,7 @@ func Dup1() Screen {
 							w.Card{
 								Items: []w.CardPart{
 									w.Rubric{
-										Text: "Вера Лебедева",
+										Text: "Лебедева Вера",
 										Items: []w.RubricPart{
 											w.RubricAside{
 												Text: "",
@@ -408,7 +408,7 @@ func Dup1() Screen {
 																On:    true,
 																Name:  "choice.ADR",
 																Value: "1",
-																Parts: []w.CheckPart{w.Text("Москва, Тверская 12, стр. 3 · Контакты")},
+																Parts: []w.CheckPart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия · Контакты")},
 															},
 														},
 														Gap:   w.LineGapWide,
@@ -445,7 +445,7 @@ func Dup1() Screen {
 																Name:  "choice.NOTE",
 																Value: "1",
 																Radio: true,
-																Parts: []w.CheckPart{w.Text("Пишет по вторникам… · Контакты")},
+																Parts: []w.CheckPart{w.Text("Пишет по вторникам, отвечает в тот же день. · Контакты")},
 															},
 															w.Check{Name: "choice.NOTE", Value: "2", Radio: true, Parts: []w.CheckPart{w.Text("— · Архив, Команда")}},
 														},
@@ -813,7 +813,7 @@ func Dup1() Screen {
 											w.ExcerptRow{
 												Mark:    w.Mark{Colour: "#4A6B52"},
 												Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-												Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+												Excerpt: "Договорились заморозить ветку в среду.",
 												Date:    "10 Aug",
 												Source:  "nextcloud · Записи",
 												Inset:   true,
@@ -821,7 +821,7 @@ func Dup1() Screen {
 											w.ExcerptRow{
 												Mark:    w.Mark{Colour: "#6B4E7A"},
 												Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-												Excerpt: "Договорились заморозить ветку в среду…",
+												Excerpt: "Договорились заморозить ветку в среду.",
 												Date:    "10 Aug",
 												Source:  "nextcloud · Дневник",
 												Inset:   true,
@@ -905,7 +905,7 @@ func Dup1() Screen {
 											w.ExcerptRow{
 												Mark:    w.Mark{Colour: "#4A6B52"},
 												Title:   []w.Inline{w.Text("Что почитать про CRDT")},
-												Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+												Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля.",
 												Date:    "8 Aug",
 												Source:  "nextcloud · Записи",
 												Inset:   true,
@@ -913,7 +913,7 @@ func Dup1() Screen {
 											w.ExcerptRow{
 												Mark:    w.Mark{Colour: "#6B4E7A"},
 												Title:   []w.Inline{w.Text("Что почитать про CRDT")},
-												Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+												Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля.",
 												Date:    "8 Aug",
 												Source:  "nextcloud · Дневник",
 												Inset:   true,
@@ -1014,7 +1014,7 @@ func Dup2() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -1050,7 +1050,7 @@ func Dup2() Screen {
 						Items: []w.DialogPart{
 							w.Head{
 								Title: &w.HeadTitle{Text: "Merge on the server"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Лебедева Вера · 2 records")}}},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{w.Text("The other record is deleted. This cannot be undone.")},
@@ -1121,7 +1121,7 @@ func Dup4() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -1238,7 +1238,7 @@ func Dup5() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -1274,7 +1274,7 @@ func Dup5() Screen {
 						Items: []w.DialogPart{
 							w.Head{
 								Title: &w.HeadTitle{Text: "Merge on the server"},
-								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Вера Лебедева · 2 records")}}},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Лебедева Вера · 2 records")}}},
 							},
 							w.Msg{
 								Parts: []w.MsgPart{

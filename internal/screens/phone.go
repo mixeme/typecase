@@ -161,7 +161,7 @@ func Phone2() Screen {
 								Form:    w.TickRowTouch,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined calendar",
-								Meta:    "7",
+								Meta:    "10",
 								Current: true,
 							},
 						},
@@ -169,7 +169,7 @@ func Phone2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud", Variant: w.RubricRail},
-							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3", Current: true},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5", Current: true},
 							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
 							w.TickRow{
 								Ticked: w.TickedOff,
@@ -185,7 +185,7 @@ func Phone2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps", Variant: w.RubricRail},
-							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "1"},
+							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
 							w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
 						},
 						Apart: true,
@@ -597,7 +597,7 @@ func Phone8() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -679,7 +679,7 @@ func Phone8() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:  true,
-								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Excerpt: "Договорились заморозить ветку в среду.",
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
@@ -687,7 +687,7 @@ func Phone8() Screen {
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
-								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля.",
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},
@@ -735,7 +735,7 @@ func Phone9() Screen {
 				w.Nav{
 					Items: []w.NavItem{
 						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 						{Icon: "file", Label: "Files", Href: "#"},
@@ -802,7 +802,7 @@ func Phone9() Screen {
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
 								Strong:  true,
-								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Excerpt: "Договорились заморозить ветку в среду.",
 								Date:    "10 Aug",
 								Source:  "nextcloud · Записи",
 								On:      true,
@@ -810,7 +810,7 @@ func Phone9() Screen {
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
-								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля.",
 								Date:    "8 Aug",
 								Source:  "nextcloud · Записи",
 							},

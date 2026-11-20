@@ -2416,9 +2416,9 @@ func Publish19() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "3", Current: true},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5", Current: true},
 							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
+							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
 						},
 					},
 					w.RailFoot{
@@ -2767,7 +2767,7 @@ func Publish3() Screen {
 									Href:  "mailto:anna.kovaleva@slovo.example",
 									After: []w.ValuePart{w.Badge{Label: "linked", Tone: w.BadgeLinked}},
 								},
-								{Term: "Address · work", Value: []w.ValuePart{w.Text("Москва, Тверская 12, стр. 3")}},
+								{Term: "Address · work", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
 								{
 									Term:  "Birthday",
 									Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
@@ -3234,7 +3234,7 @@ func Publish5() Screen {
 					w.Nav{
 						Items: []w.NavItem{
 							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
-							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 7}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 							{Icon: "file", Label: "Files", Href: "#"},
@@ -4313,6 +4313,11 @@ func Publish26() Screen {
 								Value: []w.ValuePart{w.Text("a.kovaleva@example.org")},
 								Href:  "mailto:a.kovaleva@example.org",
 							},
+							{
+								Term:  "Email · second",
+								Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")},
+								Href:  "mailto:anna.kovaleva@slovo.example",
+							},
 							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
 						},
 					},
@@ -4396,17 +4401,17 @@ func Publish28() Screen {
 								Tick:     w.Tick{Sign: true},
 								Mark:     w.Mark{Colour: "#4A6B52"},
 								Title:    []w.Inline{w.Text("Собрать чемодан")},
-								Due:      "14 Aug",
-								Progress: "40%",
+								Due:      "12 Aug 18:00",
+								Progress: "—",
 								Single:   true,
 								Href:     "/p/e5b210?uid=t2",
 							},
 							w.DueRow{
 								Tick:     w.Tick{Sign: true},
 								Mark:     w.Mark{Colour: "#4A6B52"},
-								Title:    []w.Inline{w.Text("Купить адаптер для розеток")},
-								Due:      "15 Aug",
-								Progress: "—",
+								Title:    []w.Inline{w.Text("Продлить страховку")},
+								Due:      "—",
+								Progress: "100%",
 								Single:   true,
 								Href:     "/p/e5b210?uid=t3",
 							},
@@ -4418,8 +4423,8 @@ func Publish28() Screen {
 							w.DueRow{
 								Tick:     w.Tick{Done: true, Sign: true},
 								Mark:     w.Mark{Colour: "#4A6B52"},
-								Title:    []w.Inline{w.Text("Продлить страховку")},
-								Due:      "3 Aug",
+								Title:    []w.Inline{w.Text("Прочитать договор аренды")},
+								Due:      "—",
 								Progress: "100%",
 								Single:   true,
 								Href:     "/p/e5b210?uid=t4",
@@ -4466,7 +4471,7 @@ func Publish29() Screen {
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Заметка со встречи 10.08")},
-								Excerpt: "Договорились заморозить ветку в среду; письмо пользователям пишет Анна…",
+								Excerpt: "Договорились заморозить ветку в среду.",
 								Date:    "10 Aug",
 								Single:  true,
 								Href:    "/p/61d4c7?uid=n1",
@@ -4474,7 +4479,7 @@ func Publish29() Screen {
 							w.ExcerptRow{
 								Mark:    w.Mark{Colour: "#4A6B52"},
 								Title:   []w.Inline{w.Text("Что почитать про CRDT")},
-								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge…",
+								Excerpt: "Кляйн, глава 5; статья Шапиро 2011; демка automerge — посмотреть, как они решают конфликт двух правок одного поля.",
 								Date:    "8 Aug",
 								Single:  true,
 								Href:    "/p/61d4c7?uid=n2",
