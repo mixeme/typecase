@@ -6,6 +6,15 @@ do, not what the authors did.
 
 ## Unreleased
 
+### Fixed
+
+- **On a page the shell is as high as the window** (Carrel's task 272, the
+  first deployment). A shell that stands right in a page's body fills the
+  window: the top bar and the body down to its bottom, the rail stretched
+  and its foot at the window's bottom until content taller than the window
+  takes it down with the page; a sheet's page (an overlay) too. Frames are
+  no page and do not change. Nothing to do.
+
 ### Mockup
 
 - **Frames say what Carrel's set holds** (Carrel's tasks 270, 271). An

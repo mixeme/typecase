@@ -267,9 +267,11 @@ func checkMockupDeadRules(html string) error {
 		if mockupRuleLive(r.Selector, frames) {
 			continue
 		}
-		// The body of a page of the library (package page): a frame holds no
-		// body, so this rule is seen on no frame by design.
-		if sel := strings.TrimSpace(r.Selector); sel == "body[data-tc-root]" || strings.HasPrefix(sel, "[data-tc-noscript] ") {
+		// The body of a page of the library (package page) and what stands
+		// right in it — the shell as high as the window (Carrel's task 272):
+		// a frame holds no body, so these rules are seen on no frame by
+		// design; TestShellFillsTheWindow sees them at work.
+		if sel := strings.TrimSpace(r.Selector); pageRule(sel) || strings.HasPrefix(sel, "[data-tc-noscript] ") {
 			continue
 		}
 		// A bar as tc.js folds it by measure (data-tc-fold, data-tc-measure),
@@ -791,4 +793,15 @@ func mockupLintErrs(rule string, errs []string, capN int) error {
 		errs = append(errs[:capN], fmt.Sprintf("… %d more", len(errs)-capN))
 	}
 	return fmt.Errorf("%s: %s", rule, strings.Join(errs, "; "))
+}
+
+// pageRule says every selector of a rule starts at the body of a page of
+// the library.
+func pageRule(sel string) bool {
+	for _, one := range strings.Split(sel, ",") {
+		if !strings.HasPrefix(strings.TrimSpace(one), "body[data-tc-root]") {
+			return false
+		}
+	}
+	return true
 }

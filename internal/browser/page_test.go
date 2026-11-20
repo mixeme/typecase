@@ -289,3 +289,71 @@ func TestAppInstalls(t *testing.T) {
 		t.Errorf("the browser would not install the page: %s%s", e.ErrorID, args)
 	}
 }
+
+// TestShellFillsTheWindow (Carrel's task 272, the first deployment): on a
+// page the shell is no lower than the window — the top bar and the body
+// fill it, the rail stretches and its foot stands at the window's bottom;
+// content taller than the window takes the foot down with the page, as the
+// frames' shell does in its box. Frames are no page: the rule is the page's.
+func TestShellFillsTheWindow(t *testing.T) {
+	needChrome(t)
+	shell := func(rows int) string {
+		var items []w.MainPart
+		items = append(items, w.Head{Title: &w.HeadTitle{Text: "Contacts"}})
+		for i := 0; i < rows; i++ {
+			items = append(items, w.Msg{Parts: []w.MsgPart{w.Text(fmt.Sprintf("Row %d", i+1))}})
+		}
+		doc := page.Document{Title: "Shell", Assets: page.At("/static/tc"),
+			Root: w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Contacts"}}, Body: w.ShellBody{
+				Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}}, On: 1},
+					w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.3.12 · 580f8fc9"}, Href: "#"}}},
+				Main: w.Main{Items: items}}}}
+		html, err := doc.Render()
+		if err != nil {
+			t.Fatal(err)
+		}
+		return html
+	}
+	short, long := shell(1), shell(60)
+	sheet, err := page.Document{Title: "Sheet", Assets: page.At("/static/tc"),
+		Root: w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Contacts"}}, Body: w.Overlay{
+			Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}}, On: 1},
+				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.3.12 · 580f8fc9"}, Href: "#"}}},
+				Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Contacts"}}}}},
+			Scrim: w.Scrim{Content: w.Sheet{Title: "Rename", Foot: []w.SheetFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}}}}}}}.Render()
+	if err != nil {
+		t.Fatal(err)
+	}
+	mux := http.NewServeMux()
+	mux.HandleFunc("/sheet", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(sheet)) })
+	mux.Handle("/static/tc/", http.StripPrefix("/static/tc", page.Static()))
+	mux.HandleFunc("/short", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(short)) })
+	mux.HandleFunc("/long", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(long)) })
+	srv := httptest.NewServer(mux)
+	defer srv.Close()
+	h := browser.NewHarness(t)
+	const measure = `(() => { const s = document.querySelector(".tc-shell").getBoundingClientRect(), f = document.querySelector(".tc-railfoot").getBoundingClientRect(),
+		m = document.querySelector(".tc-main").getBoundingClientRect();
+		return [Math.round(s.bottom), Math.round(f.bottom), Math.round(m.bottom), window.innerHeight, document.documentElement.scrollHeight]; })()`
+	for _, c := range []struct{ w, h int }{{1920, 1040}, {1351, 800}} {
+		var got []int
+		if err := h.Run(srv.URL+"/short", c.w, c.h, chromedp.Evaluate(measure, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if got[0] != got[3] || got[1] != got[3] || got[4] > got[3] {
+			t.Errorf("%d×%d, a short page: the shell ends at %d, the rail's foot at %d, the page is %d high; want all at the window's %d", c.w, c.h, got[0], got[1], got[4], got[3])
+		}
+		if err := h.Run(srv.URL+"/sheet", c.w, c.h, chromedp.Evaluate(measure, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if got[0] != got[3] || got[1] != got[3] {
+			t.Errorf("%d×%d, a sheet's page: the shell ends at %d, the rail's foot under the scrim at %d; want both at the window's %d", c.w, c.h, got[0], got[1], got[3])
+		}
+		if err := h.Run(srv.URL+"/long", c.w, c.h, chromedp.Evaluate(measure, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if got[0] <= got[3] || got[1] != got[0] || got[2] > got[0] {
+			t.Errorf("%d×%d, a long page: the shell ends at %d, the rail's foot at %d, the list at %d, the window %d; want the foot at the shell's end below the window", c.w, c.h, got[0], got[1], got[2], got[3])
+		}
+	}
+}
