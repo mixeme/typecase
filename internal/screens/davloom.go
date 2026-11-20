@@ -70,7 +70,7 @@ func Davloom1() Screen {
 						Subs: []w.HeadSub{
 							w.HeadSub{
 								Parts: []w.HeadSubPart{
-									w.Text("One address for every device instead of an account for every server · "),
+									w.Text("One address for every device instead of an account for every server\u00a0· "),
 									w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
 								},
 							},
@@ -663,7 +663,7 @@ func Davloom6() Screen {
 						Subs: []w.HeadSub{
 							w.HeadSub{
 								Parts: []w.HeadSubPart{
-									w.Text("One address for every device instead of an account for every server · "),
+									w.Text("One address for every device instead of an account for every server\u00a0· "),
 									w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
 								},
 							},
@@ -784,7 +784,7 @@ func Davloom7() Screen {
 							Subs: []w.HeadSub{
 								w.HeadSub{
 									Parts: []w.HeadSubPart{
-										w.Text("One address for every device instead of an account for every server · "),
+										w.Text("One address for every device instead of an account for every server\u00a0· "),
 										w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
 									},
 								},
@@ -1456,7 +1456,7 @@ func Davloom9() Screen {
 							Subs: []w.HeadSub{
 								w.HeadSub{
 									Parts: []w.HeadSubPart{
-										w.Text("One address for every device instead of an account for every server · "),
+										w.Text("One address for every device instead of an account for every server\u00a0· "),
 										w.Span{Face: w.FaceDanger, Text: "a phone on mobile data will not reach a local address"},
 									},
 								},

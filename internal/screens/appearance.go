@@ -107,7 +107,7 @@ func Appearance1() Screen {
 												Name:    "density",
 											},
 											w.FieldHint{
-												Parts:   []w.Inline{w.Text("List row height: 38 or 32 px. On a phone always 52. This browser.")},
+												Parts:   []w.Inline{w.Text("List row height: 38 or 32\u00a0px. On a phone always 52. This browser.")},
 												Variant: w.HintColumn,
 											},
 										},

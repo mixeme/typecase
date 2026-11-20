@@ -314,9 +314,9 @@ func (m *Mockup) norm(n *html.Node, pre bool) *Node {
 		case html.TextNode:
 			t := c.Data
 			if !pre {
-				t = strings.Join(strings.Fields(t), " ")
+				t = squash(t)
 			}
-			if t == "" || !pre && strings.TrimSpace(t) == "" {
+			if t == "" {
 				continue
 			}
 			out.Children = append(out.Children, &Node{Text: t})
@@ -364,9 +364,9 @@ func (m *Mockup) own(n *html.Node, pre, root, anonymous bool) *Node {
 		case html.TextNode:
 			t := c.Data
 			if !pre {
-				t = strings.Join(strings.Fields(t), " ")
+				t = squash(t)
 			}
-			if t == "" || !pre && strings.TrimSpace(t) == "" {
+			if t == "" {
 				continue
 			}
 			out.Children = append(out.Children, &Node{Text: t})
@@ -671,6 +671,17 @@ func children(n *html.Node) []*html.Node {
 		}
 	}
 	return out
+}
+
+// squash collapses HTML's white space in a text run to one space and trims
+// it. A no-break space is not HTML's white space: it is kept, as the browser
+// keeps it, so a record that prints a plain space where the frame holds a
+// no-break one differs (s-davloom-1's «server&nbsp;·» broke the line in
+// another place on a phone, and the records did not see it).
+func squash(t string) string {
+	return strings.Join(strings.FieldsFunc(t, func(r rune) bool {
+		return r == 0x20 || r == 0x09 || r == 0x0a || r == 0x0c || r == 0x0d
+	}), " ")
 }
 
 func text(n *html.Node) string {

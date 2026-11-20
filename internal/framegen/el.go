@@ -24,7 +24,6 @@ package framegen
 import (
 	"strconv"
 	"strings"
-	"unicode"
 
 	"golang.org/x/net/html"
 )
@@ -212,16 +211,23 @@ func (e *El) TextRaw() string {
 	return b.String()
 }
 
-// norm collapses white space — Unicode's, as the no-break space — to one
-// space and trims it.
-func norm(s string) string { return strings.Join(strings.FieldsFunc(s, unicode.IsSpace), " ") }
+// norm collapses white space to one space and trims it. White space is
+// HTML's (space, tab, line feeds): a no-break space is a letter of the text,
+// as it is to the browser — it holds a word to the next (s-davloom-1's
+// «server&nbsp;·»), and losing it moved the line break on a phone.
+func norm(s string) string { return strings.Join(strings.FieldsFunc(s, htmlSpace), " ") }
+
+// htmlSpace is the white space HTML collapses; a no-break space is not.
+func htmlSpace(r rune) bool {
+	return r == 0x20 || r == 0x09 || r == 0x0a || r == 0x0c || r == 0x0d
+}
 
 // collapse turns every run of white space into one space, keeping the ends.
 func collapse(s string) string {
 	var b strings.Builder
 	space := false
 	for _, r := range s {
-		if unicode.IsSpace(r) {
+		if htmlSpace(r) {
 			if !space {
 				b.WriteByte(' ')
 			}
