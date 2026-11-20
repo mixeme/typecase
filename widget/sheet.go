@@ -423,7 +423,7 @@ func (b OverlayBody) html() string {
 // Вход. Overlay{Top, Body, Scrim}.
 // Состояния. plain | top.
 // Инварианты. Под затемнением — то же тело оболочки, что и без него; наложение печатает фрагмент своего кадра.
-// Поведение. Пока лист открыт, фокус не уходит под затемнение.
+// Поведение. Пока лист открыт, фокус не уходит под затемнение и нажатие туда не доходит: то, что под ним, — inert, и без сценария.
 // Эталон. кадр `s-contacts-2`, фрагмент `.tc-overlay`.
 // Содержимое. Верхняя полоса (когда она тоже под затемнением), тело оболочки, затемнение с листом.
 // Чего нет. Своего вида: вид у затемнения и листа.
@@ -439,9 +439,20 @@ func (o Overlay) Render() string { return o.html(nil) }
 func (o Overlay) html(m mix) string {
 	s := `<div` + class(m, "tc-overlay") + `>`
 	if o.Top != nil {
-		s += o.Top.html(nil)
+		s += inert(o.Top.html(nil))
 	}
-	return s + o.Body.html() + o.Scrim.html(nil) + `</div>`
+	return s + inert(o.Body.html()) + o.Scrim.html(nil) + `</div>`
+}
+
+// inert marks what lies under the scrim inert: the browser takes neither the
+// focus nor a press there while the sheet is open — on a page drawn with its
+// sheet open too, before any script (TestOverlayKeepsFocus; the script's trap
+// held the focus only once it was in the sheet). It changes nothing drawn.
+func inert(html string) string {
+	if i := strings.IndexAny(html, " >"); strings.HasPrefix(html, "<") && i > 0 {
+		return html[:i] + " inert" + html[i:]
+	}
+	return html
 }
 
 func (Overlay) shellContent() {}
