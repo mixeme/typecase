@@ -35,7 +35,8 @@ do, not what the authors did.
   first record («Лебедева Вера»). The shared contact has both of Anna's
   addresses, the shared list the tasks of «Дела» as they are. The sheet of
   a new collection in s-profile-38 has no width of its own, as in
-  s-profile-5.
+  s-profile-5, the same list of servers and the hint that baikal is not
+  answering under it (task 273).
 
 ## typecase/v0.12.0 — 2026-11-20
 
