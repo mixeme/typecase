@@ -91,7 +91,8 @@ func TestShapeNotWords(t *testing.T) {
 	if err := m.Check("s-auth-1", linked); err != nil {
 		t.Errorf("an auth link with its address: %v", err)
 	}
-	primary := `<button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button>`
+	// the head's New note is a split since Carrel's task 276: its main half
+	primary := `<button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-plus"/></svg>New note</button>`
 	gone := strings.Replace(page, primary, "", 1)
 	if gone == page {
 		t.Fatal("no New note button in s-notes-1's head")

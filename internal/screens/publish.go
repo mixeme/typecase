@@ -11,7 +11,10 @@ func Publish1() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -206,7 +209,10 @@ func Publish20() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -397,7 +403,10 @@ func Publish18() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -485,7 +494,10 @@ func Publish2() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1165,7 +1177,10 @@ func Publish13() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1785,7 +1800,10 @@ func Publish22() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2403,7 +2421,10 @@ func Publish19() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2688,7 +2709,10 @@ func Publish3() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2921,7 +2945,10 @@ func Publish4() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -3223,7 +3250,10 @@ func Publish5() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},

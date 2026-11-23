@@ -11,7 +11,10 @@ func Notes1() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -78,7 +81,10 @@ func Notes1() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Split{
+									Main: w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
+									More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+								},
 								w.Button{Label: "Import", Icon: "import"},
 								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
@@ -292,7 +298,10 @@ func Notes33() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -359,7 +368,10 @@ func Notes33() Screen {
 						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "New note", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Split{
+									Main: w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
+									More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+								},
 								w.Button{Label: "Import", Icon: "import"},
 								w.Button{Label: "Export", Icon: "export"},
 								w.Button{Label: "Print", Icon: "print"},
@@ -514,7 +526,10 @@ func Notes31() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -648,7 +663,10 @@ func Notes2() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -878,7 +896,10 @@ func Notes27() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1088,7 +1109,10 @@ func Notes3() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1318,7 +1342,10 @@ func Notes20() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1575,7 +1602,10 @@ func Notes30() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1783,7 +1813,10 @@ func Notes4() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -1970,7 +2003,10 @@ func Notes5() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2065,7 +2101,14 @@ func Notes5() Screen {
 									},
 								},
 							},
-							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Split{
+										Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+										More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+									},
+								},
+							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 						w.List{
@@ -2241,7 +2284,10 @@ func Notes6() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2323,20 +2369,21 @@ func Notes7() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.TopDrop{
-					Open:    true,
-					Trigger: w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
-					Menu: w.Menu{
-						Items: []w.MenuPart{
-							w.MenuItem{Icon: "quill", Trail: w.Kbd{Keys: "N"}, Label: "Note", On: true},
-							w.MenuSep{},
-							w.MenuItem{Icon: "con", Trail: w.Kbd{Keys: "C"}, Label: "Contact"},
-							w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
-							w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
-							w.MenuSep{},
-							w.MenuItem{Icon: "upload", Label: "Upload file"},
-							w.MenuSep{},
-							w.MenuItem{Icon: "mail", Label: "Letter"},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.SplitDrop{
+						Open:  true,
+						Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"},
+						Menu: w.Menu{
+							Items: []w.MenuPart{
+								w.MenuItem{Icon: "con", Trail: w.Kbd{Keys: "C"}, Label: "Contact"},
+								w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
+								w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
+								w.MenuSep{},
+								w.MenuItem{Icon: "upload", Label: "Upload file"},
+								w.MenuSep{},
+								w.MenuItem{Icon: "mail", Label: "Letter"},
+							},
 						},
 					},
 				},
@@ -2439,7 +2486,14 @@ func Notes7() Screen {
 								},
 							},
 						},
-						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Split{
+									Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+									More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+								},
+							},
+						},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 					w.List{
@@ -2551,7 +2605,10 @@ func Notes8() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -2652,7 +2709,14 @@ func Notes8() Screen {
 									},
 								},
 							},
-							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Split{
+										Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+										More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+									},
+								},
+							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 						w.List{
@@ -2844,7 +2908,10 @@ func Notes9() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -3160,7 +3227,10 @@ func Notes10() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -3405,7 +3475,10 @@ func Notes35() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -3645,7 +3718,10 @@ func Notes11() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -3746,7 +3822,14 @@ func Notes11() Screen {
 									},
 								},
 							},
-							Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Split{
+										Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+										More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+									},
+								},
+							},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 						w.List{

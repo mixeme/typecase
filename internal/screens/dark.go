@@ -11,7 +11,10 @@ func Dark1() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.UserMenu{Name: "mix"},
 			},
 		},
@@ -106,7 +109,10 @@ func Dark1() Screen {
 						},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
-								w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+								w.Split{
+									Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary},
+									More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+								},
 								w.Button{Label: "Export"},
 							},
 						},
@@ -266,7 +272,10 @@ func Dark2() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},
@@ -326,7 +335,10 @@ func Dark2() Screen {
 							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 3 cards")}}},
 							Acts: &w.Acts{
 								Items: []w.ActsPart{
-									w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary},
+									w.Split{
+										Main: w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary},
+										More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+									},
 									w.Button{Label: "Import", Icon: "import"},
 									w.Button{Label: "Export", Icon: "export"},
 									w.Button{Label: "Print", Icon: "print"},
@@ -444,7 +456,10 @@ func Dark3() Screen {
 			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
 			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
 			Actions: []w.TopAction{
-				w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary},
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
 				w.Button{Label: "2 min ago", Icon: "refresh"},
 				w.UserMenu{Name: "mix"},
 			},

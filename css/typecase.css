@@ -258,6 +258,14 @@ a.tc-btn[aria-disabled=true]{opacity:.45;cursor:default}
 .tc-split{display:inline-flex;flex:none}
 .tc-split > .tc-btn:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0;border-right:0}
 .tc-split > .tc-btn + .tc-btn{border-top-left-radius:0;border-bottom-left-radius:0;padding:0 8px;border-left:0}
+/* Стрелка сплита с меню — выпадашка верхней полосы (TopDrop): та же половина. У первичного сплита между половинами
+   светлая черта: заливка одна, и без черты «New note» и стрелка читались одной кнопкой (задача Carrel 276). */
+.tc-split > .tc-drop__anchor > .tc-btn{border-top-left-radius:0;border-bottom-left-radius:0;padding:0 8px;border-left:0}
+/* Меню стрелки висит под всем сплитом, от его правого края, как все меню верхней полосы (владелец, 24.11: у кнопки у
+   правого края меню раскрывается внутрь страницы): место ему отсчитывается от сплита. Сплит с меню — слоем выше соседей. */
+.tc-split:has(> .tc-drop__anchor){position:relative;z-index:7}
+.tc-split > .tc-drop__anchor.tc-drop__anchor{position:static}
+.tc-split > .tc-btn.is-primary + .tc-btn.is-primary,.tc-split > .tc-btn.is-primary + .tc-drop__anchor > .tc-btn.is-primary{box-shadow:inset 1px 0 0 rgba(255,253,247,.45)}
 /* Переключатель не сжимается и не переносит подписи: целиком или под «⋯». */
 .tc-seg{display:inline-flex;border:.5px solid var(--tc-edge);border-radius:3px;overflow:hidden;height:26px;
   flex:none;white-space:nowrap}
@@ -1842,8 +1850,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
    под «Columns» полосы ниже, меню верхней полосы — под выпадашки списка (задача Carrel 276). Только слой: где
    выпадашка стоит static (полоса страницы на телефоне), меню меряет себя по строке, а не по кнопке. */
 details.tc-drop[open],details.tc-drop__anchor[open],span.tc-drop:has(> .tc-menu.is-pop:not([hidden])),
-span.tc-drop__anchor:has(> :is(.tc-drop__panel,.tc-drop__panel--right):not([hidden])){z-index:7}
-.tc-drop__panel.tc-drop__panel{position:absolute;top:calc(100% + 5px);left:0;z-index:2}
+span.tc-drop__anchor:has(> .tc-drop__panel--right:not([hidden])){z-index:7}
 
 .tc-top__search.tc-top__search{position:relative;min-width:0;flex:0 1 560px}
 /* Подсказки поиска не уже своих строк (до 360 px): поиск, сжатый до своей подсказки, сжимал бы и их (свободная сборка 10.11). */
@@ -1851,8 +1858,8 @@ span.tc-drop__anchor:has(> :is(.tc-drop__panel,.tc-drop__panel--right):not([hidd
 .tc-dim--ls0.tc-dim--ls0{letter-spacing:0}
 .tc-plain.tc-plain{text-transform:none;letter-spacing:0;font-weight:400;color:var(--tc-dusty)}
 .tc-drop__panel--right.tc-drop__panel--right{position:absolute;top:calc(100% + 5px);right:0;z-index:2}
-:is(.tc-drop__panel,.tc-drop__panel--right)[data-tc-side="end"]{left:auto;right:0}
-:is(.tc-drop__panel,.tc-drop__panel--right)[data-tc-side="start"]{left:0;right:auto}
+.tc-drop__panel--right[data-tc-side="end"]{left:auto;right:0}
+.tc-drop__panel--right[data-tc-side="start"]{left:0;right:auto}
 .tc-menu__item-indent.tc-menu__item-indent{padding-left:23px}
 .tc-field__swatches.tc-field__swatches{height:22px}
 .tc-field__swatch.tc-field__swatch{height:17px;border-radius:50%;width:17px}

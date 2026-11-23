@@ -93,6 +93,8 @@ func (g *gen) element(e *El) (expr string, why string) {
 	switch {
 	case e.Has("tc-shell"):
 		return g.shell(e), ""
+	case e.Has("tc-split"):
+		return g.split(e), ""
 	case e.Has("tc-overlay"):
 		return g.overlay(e), ""
 	case e.Has("tc-root") && len(e.Cls()) > 0 && e.Cls()[0] == "tc-root" && !e.Has("tc-shell"):

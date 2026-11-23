@@ -174,22 +174,53 @@ func (e Emblem) html(m mix) string {
 //
 // Роль. Кнопка с меню: главное действие и стрелка к остальным, сомкнутые в одну.
 // Вход. Split{Main, More}.
-// Состояния. plain.
+// Состояния. plain | menu.
 // Инварианты. Половин две, и обе — кнопки; сплит печатает фрагмент своего кадра.
-// Поведение. Главная половина делает главное; стрелка открывает меню.
+// Поведение. Главная половина делает главное; стрелка открывает меню остального (More — SplitDrop): «New note» делает заметку, меню — контакт, событие, задачу… (владелец, задача Carrel 276). У первичного сплита между половинами светлая черта: видно, что их две.
 // Эталон. кадр `components-9`, фрагмент `.tc-split`.
-// Содержимое. Две кнопки.
+// Содержимое. Две кнопки; вторая — стрелка, одна или с меню.
 // Чего нет. Третьей половины.
 type Split struct {
 	Main Button
-	More Button
+	More SplitMore
 }
+
+// SplitMore is a split's second half: an arrow button, or the arrow with
+// the menu of the rest (SplitDrop).
+type SplitMore interface {
+	part
+	splitMore()
+}
+
+func (Button) splitMore()    {}
+func (SplitDrop) splitMore() {}
+
+// SplitDrop is a split's arrow with the menu it opens: the rest of what the
+// main half makes (Carrel's task 276: «New note» makes a note, its arrow
+// the contact, the event, the task…). Closed, it waits in a details, as a
+// top bar's drop does; Open draws it open, as the frames do.
+type SplitDrop struct {
+	Arrow Button
+	Menu  Menu
+	Open  bool
+}
+
+func (d SplitDrop) html(m mix) string {
+	return TopDrop{Trigger: d.Arrow, Menu: d.Menu, Open: d.Open}.html(m)
+}
+
+func (Split) topAction() {}
+func (Split) actsPart()  {}
 
 // Render prints the split button.
 func (p Split) Render() string { return p.html(nil) }
 
 func (p Split) html(m mix) string {
-	return `<span` + class(m, "tc-split") + `>` + p.Main.html(nil) + p.More.html(nil) + `</span>`
+	more := ""
+	if p.More != nil {
+		more = p.More.html(nil)
+	}
+	return `<span` + class(m, "tc-split") + `>` + p.Main.html(nil) + more + `</span>`
 }
 
 // Zone — tc-zone

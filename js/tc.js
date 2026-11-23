@@ -524,7 +524,7 @@
 			fitBar(t, topSteps);
 		});
 		document.querySelectorAll("table.tc-table").forEach(fitTable);
-		document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel, .tc-drop__panel--right").forEach(fitMenu);
+		document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel--right").forEach(fitMenu);
 		document.querySelectorAll(".tc-bar, .tc-docbar, .tc-head").forEach(function (b) {
 			if (checkBar(b)) n++;
 		});

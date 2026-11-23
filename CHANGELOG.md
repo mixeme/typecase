@@ -8,6 +8,15 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`TopDrop.End` is gone: every menu of the top bar stands under its
+  button's right end** (the owner, 24.11: the bar ends at the page's right
+  edge, and a menu opens into the page). Drop `End: true`; a drop that had
+  none now aligns to the end too, and the script turns a menu with no room.
+- **`Split.More` is a `SplitMore`** (Carrel's task 276): an arrow `Button`, as
+  before, or a `SplitDrop{Arrow, Menu, Open}` — the arrow with the menu of
+  the rest. A literal `Split{More: Button{…}}` compiles as it did; code
+  that reads `More` as a `Button` asserts it. `Split` is a `TopAction` and
+  an `ActsPart` now.
 - **`EmptySmallTop` is gone** (the review of 21.11): since the paddings
   became steps it printed the same class as `EmptySmall`. Use
   `EmptySmall`.
@@ -42,6 +51,15 @@ do, not what the authors did.
 
 ### Mockup
 
+- **«New …» is a split** (the owner, Carrel's task 276): the button makes
+  what it says — a note in the top bar, an event, a contact, a task or a
+  note in a list's head — and its arrow opens the menu of the rest. The
+  top bar's «New note» in 244 frames and the heads of 37; the open menu
+  of s-notes-7 hangs from the split's right end and no longer repeats «Note». The
+  halves of a primary split are told apart by a light rule between them.
+  To do: print `Split{Main: Button{…, Href or Opens}, More: SplitDrop{Arrow:
+  Button{Icon: "chev", Kind: ButtonPrimary, Title: "More to create"},
+  Menu: …}}` where a `Button{Menu: true}` opened the whole menu.
 - **Frames say what Carrel's set holds** (Carrel's tasks 270, 271). An
   address reads from the street: «Тверская 12, стр. 3, Москва, 123001,
   Россия» (the owner, 20.11: the order the card keeps it in, as the post

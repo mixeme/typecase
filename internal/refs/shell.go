@@ -30,6 +30,14 @@ var _ = add(
 	shell("alert", w.Emblem{Symbol: "davloom", Title: "davloom is not responding · last response 2026-08-16 09:12", Alert: true}, "components-36", "tc-emblem"),
 
 	// tc-split
+	shell("menu", w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.SplitDrop{Open: true, Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "con", Trail: w.Kbd{Keys: "C"}, Label: "Contact"},
+		w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
+		w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
+		w.MenuSep{},
+		w.MenuItem{Icon: "upload", Label: "Upload file"},
+		w.MenuSep{},
+		w.MenuItem{Icon: "mail", Label: "Letter"}}}}}, "s-notes-7", "tc-split"),
 	shell("plain", w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More"}}, "components-9", "tc-split"),
 
 	// tc-zone
@@ -320,12 +328,12 @@ var _ = add(
 	shell("strip", w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New notebook"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}, Strip: true}, "components-36", "tc-railfoot"),
 
 	// tc-top
-	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top"),
+	shell("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "shell-1", "tc-top"),
 	shell("phone", w.Top{Lead: &w.Button{Icon: "menu", IconBox: w.IconBox19, Variant: w.ButtonPadX4, Title: "Menu"}, Brand: w.Brand{Title: "Combined calendar"}, Actions: []w.TopAction{w.Button{Icon: "search", IconBox: w.IconBox17, Variant: w.ButtonPadX6, Title: "Search", Href: "/app/search"}, w.Button{Icon: "quill", IconBox: w.IconBox16, Kind: w.ButtonPrimary, Variant: w.ButtonPadX8, Title: "New note"}}, Tight: true}, "phone-1", "tc-top"),
 )
 
 func init() {
 	Widgets = append(Widgets, w.Brand{}, w.Search{}, w.UserMenu{}, w.Emblem{}, w.Split{}, w.Zone{}, w.Crumbs{}, w.Acts{},
 		w.Nav{}, w.RailSec{}, w.RailStatus{}, w.RailFoot{}, w.Top{})
-	Parts = append(Parts, w.Logo{}, w.Crumb{}, w.NavItem{}, w.About{})
+	Parts = append(Parts, w.Logo{}, w.Crumb{}, w.NavItem{}, w.About{}, w.SplitDrop{})
 }

@@ -598,24 +598,37 @@ func (g *gen) top2(e *El) string {
 	var acts []string
 	for _, k := range e.Kid("tc-top__actions").Els() {
 		if k.Has("tc-drop__anchor") {
-			panel := k.Els()[1]
-			s := "w.TopDrop{Open: true, Trigger: " + g.child(k.Els()[0]) + ", Menu: " + g.menu(panel.Els()[0])
-			if panel.Has("tc-drop__panel--right") {
-				s += ", End: true"
-			}
-			if k.Has("tc-top__more") {
-				s += ", More: true"
-			}
-			if k.Has("is-2nd") {
-				s += ", Secondary: true"
-			}
-			acts = append(acts, s+"}")
+			acts = append(acts, g.topDrop(k))
 		} else {
 			acts = append(acts, g.child(k))
 		}
 	}
 	f = append(f, "Actions: []w.TopAction{"+join(acts, ", ")+"}")
 	return "w.Top{" + join(f, ", ") + "}"
+}
+
+// topDrop is a top bar's button drawn open with its menu under it.
+func (g *gen) topDrop(k *El) string {
+	panel := k.Els()[1]
+	s := "w.TopDrop{Open: true, Trigger: " + g.child(k.Els()[0]) + ", Menu: " + g.menu(panel.Els()[0])
+	if k.Has("tc-top__more") {
+		s += ", More: true"
+	}
+	if k.Has("is-2nd") {
+		s += ", Secondary: true"
+	}
+	return s + "}"
+}
+
+// split is a split button: its main half, and its arrow — a button, or the
+// top bar's drop drawn open with the rest under it (Carrel's task 276).
+func (g *gen) split(e *El) string {
+	els := e.Els()
+	more := g.button(els[1])
+	if a := els[1]; a.Has("tc-drop__anchor") {
+		more = "w.SplitDrop{Open: true, Arrow: " + g.button(a.Els()[0]) + ", Menu: " + g.menu(a.Els()[1].Els()[0]) + "}"
+	}
+	return "w.Split{Main: " + g.button(els[0]) + ", More: " + more + "}"
 }
 
 // top is a plain top bar; "" when it has something open (top2).
@@ -1528,6 +1541,9 @@ func (g *gen) brand(e *El) string {
 }
 
 func (g *gen) child(e *El) string {
+	if e.Has("tc-split") {
+		return g.split(e)
+	}
 	table := []struct {
 		c  string
 		fn func(*El) string

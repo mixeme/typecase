@@ -592,8 +592,6 @@ var _ = add(
 		w.MenuSep{},
 		w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}, "s-notes-4", "tc-menu"),
 	overlay("on", w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "quill", Trail: w.Kbd{Keys: "N"}, Label: "Note", On: true},
-		w.MenuSep{},
 		w.MenuItem{Icon: "con", Trail: w.Kbd{Keys: "C"}, Label: "Contact"},
 		w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
 		w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
@@ -792,8 +790,8 @@ var _ = add(
 		w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}, "s-notes-4", "tc-drop"),
 
 	// the forms that waited for menus
-	overlay("more", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh", Secondary: true}, w.TopDrop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "refresh", Detail: &w.Mono{Text: "2 min ago", Variant: w.Mono11Dusty}, Label: "Refresh"}}}, End: true, More: true}, w.UserMenu{Name: "mix"}}}, "components-44", "tc-top"),
+	overlay("more", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "2 min ago", Icon: "refresh", Secondary: true}, w.TopDrop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "refresh", Detail: &w.Mono{Text: "2 min ago", Variant: w.Mono11Dusty}, Label: "Refresh"}}}, More: true}, w.UserMenu{Name: "mix"}}}, "components-44", "tc-top"),
 	overlay("plain", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}}, "offline-1", "tc-top"),
 	overlay("suggest", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}, Focus: true, Variant: w.SearchFull}, Suggest: &w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "Recent searches", Form: w.RubricItem}},
@@ -802,18 +800,16 @@ var _ = add(
 		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "nothing found · Monday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "дача", Href: "/app/search?q=%D0%B4%D0%B0%D1%87%D0%B0"},
 		w.MenuItem{Icon: "clock", Trail: w.Mono{Text: "no source answered · Sunday", Variant: w.Mono11DustyTight, Place: w.Pushed}, Label: "договор", Href: "/app/search?q=%D0%B4%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80"},
 		w.MenuSep{},
-		w.MenuItem{Trail: w.Kbd{Keys: "Enter"}, Label: "Type to search everything", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "s-find-2", "tc-top"),
-	overlay("drop", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.TopDrop{Open: true, Trigger: w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary, Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
-		w.MenuItem{Icon: "quill", Trail: w.Kbd{Keys: "N"}, Label: "Note", On: true},
-		w.MenuSep{},
+		w.MenuItem{Trail: w.Kbd{Keys: "Enter"}, Label: "Type to search everything", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "s-find-2", "tc-top"),
+	overlay("drop", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.SplitDrop{Open: true, Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Trail: w.Kbd{Keys: "C"}, Label: "Contact"},
 		w.MenuItem{Icon: "cal", Trail: w.Kbd{Keys: "E"}, Label: "Event"},
 		w.MenuItem{Icon: "task", Trail: w.Kbd{Keys: "T"}, Label: "Task"},
 		w.MenuSep{},
 		w.MenuItem{Icon: "upload", Label: "Upload file"},
 		w.MenuSep{},
-		w.MenuItem{Icon: "mail", Label: "Letter"}}}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "s-notes-7", "tc-top"),
-	overlay("drop", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.TopDrop{Open: true, Trigger: w.UserMenu{Name: "mix", Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mail", Label: "Letter"}}}}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, "s-notes-7", "tc-top"),
+	overlay("drop", w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.TopDrop{Open: true, Trigger: w.UserMenu{Name: "mix", Focus: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuHeading{Rubric: w.Rubric{Text: "mix", Items: []w.RubricPart{w.Mono{Text: "carrel.example", Variant: w.MonoTightPlain}}, Form: w.RubricItem, Variant: w.RubricItemLine}, Form: w.MenuHeadingSplit},
 		w.MenuItem{Icon: "gear", Label: "Settings"},
 		w.MenuItem{Icon: "adm", Label: "Administration"},
@@ -821,7 +817,7 @@ var _ = add(
 		w.MenuColumn{Label: "Theme", Control: w.Seg{Options: []w.SegOption{{Label: "Auto", On: true}, {Label: "Light"}, {Label: "Dark"}}, Variant: w.SegStartSmall}},
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts", ScriptOnly: true, Href: "#keys", Key: "?"},
 		w.MenuSep{},
-		w.MenuItem{Label: "Sign out", Form: "post-signout"}}, Width: w.MenuWidth290}, End: true}}}, "account-5", "tc-top"),
+		w.MenuItem{Label: "Sign out", Form: "post-signout"}}, Width: w.MenuWidth290}}}}, "account-5", "tc-top"),
 	overlay("plain", w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "filter"}, Clear: "/app/calendar/nextcloud/lichnyj", Action: "/app/calendar/nextcloud/lichnyj", Swap: "list-main", Variant: w.FilterH26W200}, w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-03&filter=синк"}, w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyj?filter=синк"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-17&filter=синк"}, w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, Phone: true}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show", Submit: true}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Secondary: true, Action: "/app/calendar"}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show", Submit: true}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Action: "/app/calendar", Wrap: true},
 		w.MenuSep{},
@@ -1386,7 +1382,7 @@ var _ = add(
 		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3", Trail: w.Badge{Label: "ro"}},
 		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}}},
+		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}}}},
 		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 		w.List{Rows: []w.ListRow{
 			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Source: "nextcloud · Работа"},
@@ -1425,7 +1421,7 @@ var _ = add(
 		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
 		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}}, w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New address book"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New contact", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}, w.Button{Label: "Import", Icon: "import"}, w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}}}},
+		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "Import", Icon: "import"}, w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}}}},
 		w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"}, Waiting: true, Variant: w.FilterH26W220}, w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 			w.MenuItem{Label: "A–Z", On: true, Href: "/app/contacts?sort=az"},
 			w.MenuItem{Label: "Recently changed", Href: "/app/contacts?sort=changed"},
@@ -1452,7 +1448,7 @@ var _ = add(
 			{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
 			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Unavailable: true, Send: w.Send{Name: "to", Value: "radicale/komanda", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
 			{Mark: &w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Send: w.Send{Name: "to", Value: "radicale/rassylki", One: true}, Trail: w.Mono{Text: "radicale · vps", Variant: w.Mono10Dusty}}}, On: 4}}, Foot: []w.SheetFootPart{w.Button{Label: "Move", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/contacts"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, Pad: w.ScrimPad26}}, "s-contacts-2", "tc-overlay"),
-	overlay("top", w.Overlay{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Button{Label: "New note", Menu: true, Icon: "quill", Kind: w.ButtonPrimary}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
+	overlay("top", w.Overlay{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "2 min ago", Icon: "refresh"}, w.UserMenu{Name: "mix"}}}, Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
 		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
@@ -1473,7 +1469,7 @@ var _ = add(
 		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3", Trail: w.Badge{Label: "ro"}},
 		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
-		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "New event", Menu: true, Icon: "plus", Kind: w.ButtonPrimary}}}},
+		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}}}},
 		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
 		w.List{Rows: []w.ListRow{
 			w.TimeRow{Mark: w.Mark{Colour: "#3F6E8C"}, Time: "all day", Title: []w.Inline{w.Text("Дежурство: первая линия")}, Detail: "—", Badges: []w.Badge{w.Badge{Label: "repeats weekly"}}, Source: "nextcloud · Работа"},

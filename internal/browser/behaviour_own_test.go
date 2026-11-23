@@ -102,7 +102,7 @@ func TestOverlayKeepsFocus(t *testing.T) {
 // it and gives the focus back to the button.
 func TestUserMenuOpens(t *testing.T) {
 	needChrome(t)
-	top := w.Top{Brand: w.Brand{Title: "Контакты"}, Actions: []w.TopAction{w.TopDrop{Trigger: w.UserMenu{Name: "mix"}, End: true,
+	top := w.Top{Brand: w.Brand{Title: "Контакты"}, Actions: []w.TopAction{w.TopDrop{Trigger: w.UserMenu{Name: "mix"},
 		Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "Account", Href: "/account"}, w.MenuItem{Label: "Sign out", Href: "/sign-out"}}}}}}
 	body := `<div class="tc-root tc-shell">` + top.Render() + `</div>`
 	h := browser.NewHarness(t)
@@ -249,5 +249,49 @@ func TestTopMenuOverTheList(t *testing.T) {
 		for _, x := range hidden {
 			t.Errorf("at %d px, the head's New note: %s", width, x)
 		}
+	}
+}
+
+// TestSplitArrowOpensTheRest (Carrel's task 276 p. 6): «New note» is a
+// split — its main half makes a note and opens no menu; the arrow opens
+// the menu of the rest, without a script too, and Esc closes it.
+func TestSplitArrowOpensTheRest(t *testing.T) {
+	needChrome(t)
+	split := w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Href: "/app/notes/quick"},
+		More: w.SplitDrop{Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+			Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Icon: "con", Label: "Contact"}, w.MenuItem{Icon: "cal", Label: "Event"}, w.MenuItem{Icon: "task", Label: "Task"}}}}}
+	top := w.Top{Brand: w.Brand{Title: "Notes"}, Actions: []w.TopAction{split, w.UserMenu{Name: "mix"}}}
+	body := `<div class="tc-root tc-shell">` + top.Render() + `</div>`
+	h := browser.NewHarness(t)
+	shown := `(() => { const m = document.querySelector(".tc-split .tc-menu"); return !!m && m.checkVisibility({visibilityProperty: true}); })()`
+	bare := h.RegisterPage("split-bare", strings.Replace(browser.PageHTML(body, ""), `<script src="/tc.js"></script>`, "", 1))
+	var before, after bool
+	if err := h.Run(bare, 1200, 600, chromedp.Evaluate(shown, &before), chromedp.Click(`.tc-split .tc-drop__anchor .tc-btn`, chromedp.ByQuery), chromedp.Evaluate(shown, &after)); err != nil {
+		t.Fatal(err)
+	}
+	if before || !after {
+		t.Errorf("without a script: shown at start %v, after the arrow %v; want false, true", before, after)
+	}
+	url := h.RegisterPage("split", browser.PageHTML(body, ""))
+	var mainOpens bool
+	var href string
+	if err := h.Run(url, 1200, 600,
+		chromedp.Evaluate(`document.querySelector(".tc-split > a.tc-btn").getAttribute("href")`, &href),
+		chromedp.Evaluate(`(() => { document.querySelector(".tc-split > a.tc-btn").addEventListener("click", e => e.preventDefault()); return true; })()`, nil),
+		chromedp.Click(`.tc-split > a.tc-btn`, chromedp.ByQuery), chromedp.Evaluate(shown, &mainOpens)); err != nil {
+		t.Fatal(err)
+	}
+	if href != "/app/notes/quick" || mainOpens {
+		t.Errorf("the main half: goes to %q, opens the menu %v; want /app/notes/quick, false", href, mainOpens)
+	}
+	var opened, closed, back bool
+	if err := h.Run(url, 1200, 600,
+		chromedp.Click(`.tc-split .tc-drop__anchor .tc-btn`, chromedp.ByQuery), chromedp.Evaluate(shown, &opened),
+		chromedp.KeyEvent("\x1b"), chromedp.Evaluate(`!(`+shown+`)`, &closed),
+		chromedp.Evaluate(`document.activeElement === document.querySelector(".tc-split .tc-drop__anchor .tc-btn")`, &back)); err != nil {
+		t.Fatal(err)
+	}
+	if !opened || !closed || !back {
+		t.Errorf("with the script: the arrow opened %v, Esc closed %v, focus back on the arrow %v", opened, closed, back)
 	}
 }

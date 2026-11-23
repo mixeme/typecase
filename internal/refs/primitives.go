@@ -41,6 +41,8 @@ func primitive(state string, fixture Renderer, frame, class string) Entry {
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("menu", w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary}, "s-files-1", "tc-btn"),
+	primitive("plain", w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"}, "s-notes-7", "tc-btn"),
 	primitive("menu", w.Button{Label: "Take one out", Menu: true}, "s-dup-10", "tc-btn"),
 	primitive("menu", w.Button{Label: "Take one out", Menu: true}, "s-dup-9", "tc-btn"),
 	primitive("small-icon-label", w.Button{Folds: true, Label: "Select all", Icon: "selectall", Small: true, Title: "Select all"}, "components-16", "tc-btn"),
@@ -79,7 +81,7 @@ var _ = add(
 	primitive("small", w.Button{Label: "Edit", Small: true}, "components-14", "tc-btn"),
 	primitive("danger", w.Button{Label: "1 failed", Small: true, Menu: true, Kind: w.ButtonDanger}, "s-contacts-7", "tc-btn"),
 	primitive("normal", w.Button{Label: "Import"}, "components-9", "tc-btn"),
-	primitive("menu", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary}, "shell-1", "tc-btn"),
+	primitive("menu", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, "shell-1", "tc-btn"),
 	primitive("icon", w.Button{Label: "Columns", Icon: "cols"}, "components-16", "tc-btn"),
 	primitive("primary", w.Button{Label: "Save", Kind: w.ButtonPrimary}, "components-9", "tc-btn"),
 	primitive("primary", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, "components-9", "tc-btn"),
@@ -90,7 +92,7 @@ var _ = add(
 	primitive("danger", w.Button{Label: "Disconnect", Kind: w.ButtonDanger}, "components-9", "tc-btn"),
 	primitive("small", w.Button{Label: "Add phone", Icon: "plus", Small: true}, "s-contacts-3", "tc-btn"),
 	primitive("danger", w.Button{Label: "End", Small: true, Kind: w.ButtonDanger}, "account-1", "tc-btn"),
-	primitive("focus", w.Button{Label: "New note", Icon: "quill", Menu: true, Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn"),
+	primitive("focus", w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary, Focus: true}, "s-notes-5", "tc-btn"),
 	primitive("folds", w.Button{Label: "Delete", Icon: "trash", Folds: true, Kind: w.ButtonDangerSolid, Title: "Delete"}, "components-16", "tc-btn"),
 	primitive("danger-solid", w.Button{Label: "Delete contact", Icon: "trash", Kind: w.ButtonDangerSolid}, "s-contacts-6", "tc-btn"),
 	primitive("menu", w.Button{Icon: "plus", Title: "New address book"}, "s-mail-1", "tc-btn"),

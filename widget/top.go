@@ -25,7 +25,6 @@ func (UserMenu) topDropTrigger() {}
 type TopDrop struct {
 	Trigger TopDropTrigger
 	Menu    Menu
-	End     bool // the menu is aligned to the button's end: the last button of the bar
 	Open    bool // drawn open; closed, the menu waits hidden for its button
 	// More is the top bar's «⋯» (the owner's decision of 11.11): it stands
 	// only while an action of the second rank (Button.Secondary,
@@ -36,11 +35,11 @@ type TopDrop struct {
 	Secondary bool
 }
 
+// The menu stands under the button's right end, as every menu of the top
+// bar does: the bar ends at the page's right edge, and a menu opens into the
+// page (the owner, 24.11); the script turns one that has no room.
 func (d TopDrop) html(mix) string {
-	panel := "tc-drop__panel"
-	if d.End {
-		panel = "tc-drop__panel--right"
-	}
+	panel := "tc-drop__panel--right"
 	anchor := class(nil, "tc-drop__anchor", pick(d.More, "tc-top__more"), rank(d.Secondary))
 	if !d.Open {
 		if sum, ok := summaryOf(d.Trigger.html(nil)); ok {
