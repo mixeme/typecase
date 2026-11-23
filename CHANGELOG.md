@@ -23,6 +23,13 @@ do, not what the authors did.
 
 ### Fixed
 
+- **Text sits beside its icon in every browser** (Carrel's task 276). The
+  fonts' `@font-face` pin the line's metrics to each font's own typo
+  metrics (`ascent-override`, `descent-override`, `line-gap-override`):
+  what Chromium lays text by, so nothing it draws moves; a browser that
+  took the win metrics (Firefox on Android) put a button's text about a
+  pixel and a half under its icon. Nothing to do: `css/fonts.css` carries
+  them.
 - **A menu of refusals stands whole** (Carrel's task 276). A popped menu 420
   wide (`MenuWidth420`, «N failed» of a run bar) took its button's width
   for its limit and broke the server's answer letter by letter; its limit
