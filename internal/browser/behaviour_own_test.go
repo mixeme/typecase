@@ -175,3 +175,79 @@ func TestOverlayCloseFreesThePage(t *testing.T) {
 		}
 	}
 }
+
+// TestFailedMenuStandsWhole (Carrel's task 276 p. 3): the run bar's «N
+// failed» opens its menu of refusals at its own width (420) where the
+// window has room, and no wider than the window where it has not — not
+// squeezed to its button's width with the server's answer broken letter by
+// letter.
+func TestFailedMenuStandsWhole(t *testing.T) {
+	needChrome(t)
+	bar := w.Runbar{Result: w.RunFailed, Parts: []w.RunbarPart{w.Say{Full: "Polled · 5 of 6 answered · 7 events ·", Short: "5 of 6 · 7 events ·"},
+		w.Drop{Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuRefusal{Mark: w.Mark{Colour: "#9A9280", Size: w.MarkH11}, Source: "baikal · Общий", Answer: "PROPFIND /dav.php/calendars/mix/ → 401 Unauthorized: the saved password was refused. Open Connections to update it.", Retry: w.Button{Label: "Retry", Small: true}}},
+			Width: w.MenuWidth420, Pop: w.MenuUnderEnd}},
+		w.Mono{Text: "2 min ago", Place: w.Pushed}}}
+	shell := w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Calendar"}}, Body: w.ShellBody{
+		Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "cal", Label: "Calendar", Href: "#"}}, On: 1}},
+		Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Combined calendar"}}, bar}}}}
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("failed-menu", browser.PageHTML(shell.Render(), ""))
+	const measure = `(() => { const m = document.querySelector(".tc-runbar .tc-menu"), r = m.getBoundingClientRect(), root = document.querySelector(".tc-root").getBoundingClientRect();
+		return [Math.round(r.width), Math.round(r.left - root.left), Math.round(r.right - root.left), Math.round(root.width)]; })()`
+	for _, width := range []int{860, 1351, 390} {
+		var got []int
+		if err := h.Run(url, width, 800, chromedp.Click(`.tc-runbar .tc-btn.is-danger`, chromedp.ByQuery), chromedp.Evaluate(measure, &got)); err != nil {
+			t.Fatal(err)
+		}
+		want := min(420, got[3]-24)
+		if got[0] < want || got[1] < 0 || got[2] > got[3] {
+			t.Errorf("at %d px the menu is %d wide at %d…%d of a %d px page (from its left edge); want at least %d and inside the page", width, got[0], got[1], got[2], got[3], want)
+		}
+	}
+}
+
+// TestTopMenuOverTheList (Carrel's task 276 p. 4): a menu of the top bar
+// opened over the list stands over everything the list draws — the bar's
+// «Columns» did not stay on top of «New»'s items.
+func TestTopMenuOverTheList(t *testing.T) {
+	needChrome(t)
+	newDrop := w.TopDrop{Trigger: w.Button{Label: "New", Icon: "plus", Kind: w.ButtonPrimary, Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "note", Label: "New note"}, w.MenuItem{Icon: "cal", Label: "New event"}, w.MenuItem{Icon: "task", Label: "New task"},
+		w.MenuItem{Icon: "con", Label: "New contact"}, w.MenuItem{Icon: "upload", Label: "Import"}}}}
+	bar := w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Placeholder: "Filter by word", Label: "Filter by word"}, Variant: w.FilterH26W200},
+		w.Button{Label: "Columns", Icon: "cols"}, w.Button{Label: "Print", Icon: "print"}, w.Button{Label: "Export", Icon: "export"}}}
+	// The head's «New note» with its menu, and the bar under it with
+	// «Columns» as a drop of its own, as Carrel's list pages print them.
+	headNew := w.Drop{Trigger: w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary, Menu: true}, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "note", Label: "New note"}, w.MenuItem{Icon: "upload", Label: "Import notes"}, w.MenuItem{Icon: "export", Label: "Export"}, w.MenuItem{Icon: "print", Label: "Print"}},
+		Pop: w.MenuUnderEnd}}
+	bar.Items = append(bar.Items, w.Drop{Trigger: w.Button{Label: "Columns", Icon: "cols", Menu: true}, Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Label: "Title"}}, Pop: w.MenuUnder}})
+	shell := w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Notes"}, Actions: []w.TopAction{newDrop, w.UserMenu{Name: "mix"}}},
+		Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "note", Label: "Notes", Href: "#"}}, On: 1}},
+			Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Combined notebook"}, Acts: &w.Acts{Items: []w.ActsPart{headNew}}}, bar}}}}
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("top-menu", browser.PageHTML(shell.Render(), ""))
+	const covered = `(() => { const out = [];
+		document.querySelectorAll(".tc-top .tc-menu [role=menuitem]").forEach(it => { const r = it.getBoundingClientRect();
+			for (const x of [r.left + 4, r.left + r.width / 2, r.right - 4]) { const e = document.elementFromPoint(x, r.top + r.height / 2);
+				if (!e || !e.closest(".tc-top .tc-menu")) out.push(it.textContent.trim() + " under " + (e ? (e.closest(".tc-btn") || e).textContent.trim() : "nothing")); } });
+		return out; })()`
+	headCovered := strings.ReplaceAll(covered, ".tc-top .tc-menu", ".tc-head .tc-menu")
+	for _, width := range []int{390, 630, 900, 1351} {
+		var hidden []string
+		if err := h.Run(url, width, 700, chromedp.Click(`.tc-top .tc-btn.is-primary`, chromedp.ByQuery), chromedp.Evaluate(covered, &hidden)); err != nil {
+			t.Fatal(err)
+		}
+		for _, x := range hidden {
+			t.Errorf("at %d px, the top bar's New: %s", width, x)
+		}
+		hidden = nil
+		if err := h.Run(url, width, 700, chromedp.Click(`.tc-head .tc-btn.is-primary`, chromedp.ByQuery), chromedp.Evaluate(headCovered, &hidden)); err != nil {
+			t.Fatal(err)
+		}
+		for _, x := range hidden {
+			t.Errorf("at %d px, the head's New note: %s", width, x)
+		}
+	}
+}

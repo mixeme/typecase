@@ -14,6 +14,16 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A menu of refusals stands whole** (Carrel's task 276). A popped menu 420
+  wide (`MenuWidth420`, «N failed» of a run bar) took its button's width
+  for its limit and broke the server's answer letter by letter; its limit
+  is the window now, and the script places it: an open menu that fits on
+  neither side of its button moves in from the page's edge, and is no
+  wider than the page.
+- **An open menu stands over its neighbours** (Carrel's task 276). On a
+  phone every drop has its own layer, and a later one — the bar's
+  «Columns» — covered the head's «New» menu or the top bar's; an open
+  drop is a layer above them now. Nothing to do.
 - **An overlay that is a whole page carries `tc-root`** (Carrel's task 276).
   `page.Document` prints its root by `widget.PageRoot`: a sheet's own page
   with no shell around it (`Root: Overlay{…}`) was printed without the

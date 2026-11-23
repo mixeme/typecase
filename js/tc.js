@@ -121,6 +121,7 @@
 			onInput({ target: q });
 		}
 		placeMenu(trigger, pop);
+		if (pop.classList.contains("tc-menu") && pop.classList.contains("is-pop")) fitMenu(pop);
 		var first = pop.querySelector('.tc-menu > input[type="search"], [role="menuitem"], [role="menuitemradio"]');
 		if (first) first.focus();
 	}
@@ -471,14 +472,31 @@
 	// An open menu stands where there is room (free composition, 10.11): one
 	// that would run past the page's edge turns to the other side of its
 	// button — under its end, or under its start; so does a top drop's panel.
+	// Where it fits on neither side — a wide menu on a phone — it moves in
+	// from the page's edge by the gap it is short of (Carrel's task 276).
 	function fitMenu(m) {
 		m.removeAttribute("data-tc-side");
+		m.style.transform = "";
+		m.style.maxWidth = "";
 		if (!m.getClientRects().length) return;
 		var root = m.closest(".tc-root");
 		var edge = root ? root.getBoundingClientRect() : { left: 0, right: document.documentElement.clientWidth };
-		var r = m.getBoundingClientRect();
-		if (r.right > edge.right + 1) m.setAttribute("data-tc-side", "end");
-		else if (r.left < edge.left - 1) m.setAttribute("data-tc-side", "start");
+		var r = m.getBoundingClientRect(), dx = 0;
+		// no wider than the page it opens in
+		if (r.width > edge.right - edge.left) {
+			m.style.maxWidth = Math.floor(edge.right - edge.left) + "px";
+			r = m.getBoundingClientRect();
+		}
+		if (r.right > edge.right + 1) {
+			m.setAttribute("data-tc-side", "end");
+			r = m.getBoundingClientRect();
+			if (r.left < edge.left - 1) dx = edge.left - r.left;
+		} else if (r.left < edge.left - 1) {
+			m.setAttribute("data-tc-side", "start");
+			r = m.getBoundingClientRect();
+			if (r.right > edge.right + 1) dx = edge.right - r.right;
+		}
+		if (dx) m.style.transform = "translateX(" + Math.round(dx) + "px)";
 	}
 	// tc-fit:end
 

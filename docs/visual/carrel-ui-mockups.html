@@ -1866,6 +1866,10 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-menu--full.tc-menu--full{width:100%}
 .tc-menu--w290.tc-menu--w290{width:290px}
 .tc-menu--w420.tc-menu--w420{width:420px;max-width:100%}
+/* Всплывающее меню шириной 420 меряет край по окну, а не по своей кнопке: 100% — ширина кнопки, и «N failed»
+   сжималось до 72 px, ответ сервера ломался по букве (задача Carrel 276); куда встать, решает сценарий (fitMenu).
+   Не по колонке (cqw): ближайший контейнер бывает уже кнопки — «How to mount» в s-publish-32 сжалось бы так же. */
+.tc-menu--w420.tc-menu--w420.is-pop{max-width:calc(100vw - 24px)}
 /* меню из строк с полями: длинная подпись на узком переносится, строка растёт */
 .tc-menu--fields .tc-menu__item{height:auto;min-height:28px}
 .tc-menu__item--danger.tc-menu__item--danger{color:var(--tc-danger)}
@@ -2015,6 +2019,11 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-dim--t11-5.tc-dim--t11-5{font-size:11.5px}
 .tc-dim--struck.tc-dim--struck{background:linear-gradient(currentColor,currentColor) no-repeat 0 calc(50% + 1px)/100% 1px}
 .tc-drop__anchor.tc-drop__anchor{position:relative}
+/* Открытая выпадашка — над закрытыми: на телефоне у каждой .tc-drop свой слой (z-index 6), и меню New шапки уходило
+   под «Columns» полосы ниже, меню верхней полосы — под выпадашки списка (задача Carrel 276). Только слой: где
+   выпадашка стоит static (полоса страницы на телефоне), меню меряет себя по строке, а не по кнопке. */
+details.tc-drop[open],details.tc-drop__anchor[open],span.tc-drop:has(> .tc-menu.is-pop:not([hidden])),
+span.tc-drop__anchor:has(> :is(.tc-drop__panel,.tc-drop__panel--right):not([hidden])){z-index:7}
 .tc-drop__panel.tc-drop__panel{position:absolute;top:calc(100% + 5px);left:0;z-index:2}
 
 .tc-top__search.tc-top__search{position:relative;min-width:0;flex:0 1 560px}
