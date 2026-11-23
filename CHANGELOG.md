@@ -14,6 +14,15 @@ do, not what the authors did.
 
 ### Fixed
 
+- **An overlay that is a whole page carries `tc-root`** (Carrel's task 276).
+  `page.Document` prints its root by `widget.PageRoot`: a sheet's own page
+  with no shell around it (`Root: Overlay{…}`) was printed without the
+  library's box, so its rail stood over the list and the root's rules and
+  tokens missed it. It fills the window too, as a shell does.
+- **Closing the sheet of a sheet's page frees the page under it** (Carrel's
+  task 276). The cross, Cancel and Esc close it in place as before; now
+  what lay under it is no longer `inert`, and the address becomes the
+  cross's link — the page under the sheet. Nothing to do.
 - **On a page the shell is as high as the window** (Carrel's task 272, the
   first deployment). A shell that stands right in a page's body fills the
   window: the top bar and the body down to its bottom, the rail stretched

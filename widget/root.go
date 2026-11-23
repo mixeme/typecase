@@ -258,3 +258,16 @@ type Root interface {
 func (Shell) root()   {}
 func (Page) root()    {}
 func (Overlay) root() {}
+
+// PageRoot prints a page's root as the body of a page of the library holds
+// it: with tc-root, the box the library's tokens and rules stand in. Shell
+// and Page print it themselves; an overlay that is the whole page — a
+// sheet's own page with no shell around it — gets it here (Carrel's task
+// 276: without it the rail stood over the list and the page's rules missed
+// it). Elsewhere an overlay stands in a shell and carries none.
+func PageRoot(r Root) string {
+	if o, ok := r.(Overlay); ok {
+		return o.html(mix{"tc-root"})
+	}
+	return r.Render()
+}

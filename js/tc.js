@@ -230,8 +230,33 @@
 		container.addEventListener("keydown", onKey);
 	}
 
+	// An overlay's sheet (Overlay: a sheet's own page) keeps what lies under
+	// it inert while it is open (Carrel's task 276): closing it frees that
+	// again and gives the page the address of the page under the sheet — its
+	// cross's link — so a reload shows what is seen; opening it again makes
+	// it inert again.
+	function underOverlay(layer, inert) {
+		var o = layer.parentElement;
+		if (!layer.classList.contains("tc-scrim") || !o || !o.classList.contains("tc-overlay")) return;
+		for (var i = 0; i < o.children.length; i++) {
+			var k = o.children[i];
+			if (k === layer || k.classList.contains("tc-scrim")) continue;
+			if (inert) k.setAttribute("inert", "");
+			else k.removeAttribute("inert");
+		}
+		if (inert) return;
+		var back = layer.querySelector("a.tc-close[href], a[data-tc-close][href]");
+		var href = back && back.getAttribute("href");
+		if (href && href.charAt(0) !== "#" && window.history && history.replaceState) {
+			try {
+				history.replaceState(history.state, "", new URL(href, location.href).href);
+			} catch (e) {}
+		}
+	}
+
 	function openLayer(layer, opener) {
 		show(layer);
+		underOverlay(layer, true);
 		if (opener) openers.set(layer, opener);
 		var f = Array.prototype.filter.call(layer.querySelectorAll(focusableSel), visible)[0];
 		if (f) f.focus();
@@ -239,6 +264,7 @@
 
 	function closeLayer(layer) {
 		hide(layer);
+		underOverlay(layer, false);
 		var body = layer.parentElement;
 		if (layer.classList.contains("tc-side") && body && body.classList.contains("tc-shell__body")) {
 			body.classList.remove("tc-shell__body--side");

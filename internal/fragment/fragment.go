@@ -477,9 +477,14 @@ func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
 		return r, fmt.Errorf("%s: the frame has no .%s", r, r.Class)
 	}
 	// The nearest: one whose own tree the markup is and only a nested block
-	// parts; else the same tree without text; else the fewest differences.
-	near, nearN, nearRank := 0, 0, -1
+	// parts; else the same tree without text; then the one that shares the
+	// most words and places with it; then the fewest differences. Diffs
+	// stops at a different number of children, so it alone ties every field
+	// that gained a hint (the review of 23.11: «Colour» was redrafted from
+	// «On which server»).
+	near, nearN, nearRank, nearShared := 0, 0, -1, -1
 	shape := Skeleton(got)
+	mine := tokens(got)
 	for i, b := range found {
 		want, have := m.wanted(r.Class, b, got)
 		k, rank := 0, 2
@@ -494,8 +499,9 @@ func (m *Mockup) Locate(r Ref, rendered string) (Ref, error) {
 				rank = 1
 			}
 		}
-		if rank > nearRank || rank == nearRank && k < near {
-			near, nearN, nearRank = k, i+1, rank
+		shared := sharedTokens(mine, tokens(want))
+		if rank > nearRank || rank == nearRank && (shared > nearShared || shared == nearShared && k < near) {
+			near, nearN, nearRank, nearShared = k, i+1, rank, shared
 		}
 	}
 	at := r
@@ -558,6 +564,33 @@ func innerBlocks(n *html.Node) []*html.Node {
 	}
 	walk(n)
 	return out
+}
+
+// tokens are a tree's words and its elements by tag and classes, counted:
+// what two forms of a block share.
+func tokens(n *Node) map[string]int {
+	out := map[string]int{}
+	var walk func(*Node)
+	walk = func(n *Node) {
+		if n.Tag == "" {
+			out["#"+n.Text]++
+			return
+		}
+		out[n.Tag+"."+strings.Join(n.Classes, ".")]++
+		for _, c := range n.Children {
+			walk(c)
+		}
+	}
+	walk(n)
+	return out
+}
+
+func sharedTokens(a, b map[string]int) int {
+	n := 0
+	for k, v := range a {
+		n += min(v, b[k])
+	}
+	return n
 }
 
 // NotFound is Locate's error for a record no occurrence prints as: At is

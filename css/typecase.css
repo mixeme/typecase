@@ -26,6 +26,9 @@ body[data-tc-root]>.tc-shell{display:flex;flex-direction:column;min-height:100vh
 body[data-tc-root]>.tc-shell>.tc-shell__body,body[data-tc-root]>.tc-shell>.tc-overlay{flex:1 0 auto}
 body[data-tc-root]>.tc-shell>.tc-overlay{display:flex;flex-direction:column}
 body[data-tc-root]>.tc-shell>.tc-overlay>.tc-shell__body{flex:1 0 auto}
+/* Страница листа бывает наложением без оболочки вокруг (Overlay корнем страницы): то же — не ниже окна (задача Carrel 276). */
+body[data-tc-root]>.tc-overlay{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+body[data-tc-root]>.tc-overlay>.tc-shell__body{flex:1 0 auto}
 .tc-root *{box-sizing:border-box}
 .tc-root p,.tc-root h1,.tc-root h2,.tc-root h3,.tc-root h4,.tc-root ul,.tc-root ol,.tc-root dl,.tc-root dd,.tc-root dt,.tc-root figure{margin:0;padding:0}
 .tc-root ul{list-style:none}

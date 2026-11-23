@@ -93,6 +93,19 @@ func TestLocateAndState(t *testing.T) {
 	if !errors.As(err, &nf) || nf.At.N != 1 {
 		t.Fatalf("a primary button: %v; want the nearest #1, the same tree", err)
 	}
+	// Two forms that differ only in the number of children tie on Diffs:
+	// the one that shares the record's words is the nearest.
+	two, err := Parse(`<div class="frame" data-frame="f-1"><div class="tc-root">
+<div class="tc-field"><label>Server</label><span class="tc-mono">nextcloud</span><span class="tc-dim">baikal is not answering</span></div>
+<div class="tc-field"><label>Colour</label><span class="tc-mono">green</span><span class="tc-dim">written to the server</span></div>
+</div></div>`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = two.Locate(Ref{Frame: "f-1", Class: "tc-field"}, `<div class="tc-field"><label>Colour</label><span class="tc-mono">green</span></div>`)
+	if !errors.As(err, &nf) || nf.At.N != 2 {
+		t.Fatalf("the colour field without its hint: %v; want the nearest #2, the field that shares its words", err)
+	}
 	if _, err := m.Block(Ref{Frame: "a-1", Class: "tc-btn"}); err == nil {
 		t.Fatal("a record has no place of its own: want Block to refuse it")
 	}

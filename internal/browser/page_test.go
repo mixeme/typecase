@@ -324,8 +324,20 @@ func TestShellFillsTheWindow(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// A sheet's page may be the overlay alone, with no shell around it
+	// (Carrel's task 276 p. 2: «Upload files» on its own address).
+	bare, err := page.Document{Title: "Sheet", Assets: page.At("/static/tc"),
+		Root: w.Overlay{
+			Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{{Icon: "file", Label: "Files", Href: "#"}}, On: 1},
+				w.RailFoot{About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.3.12 · 580f8fc9"}, Href: "#"}}},
+				Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Files"}}}}},
+			Scrim: w.Scrim{Content: w.Sheet{Title: "Upload files", Foot: []w.SheetFootPart{w.Button{Label: "Upload", Kind: w.ButtonPrimary}}}}}}.Render()
+	if err != nil {
+		t.Fatal(err)
+	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sheet", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(sheet)) })
+	mux.HandleFunc("/bare", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(bare)) })
 	mux.Handle("/static/tc/", http.StripPrefix("/static/tc", page.Static()))
 	mux.HandleFunc("/short", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(short)) })
 	mux.HandleFunc("/long", func(rw http.ResponseWriter, r *http.Request) { _, _ = rw.Write([]byte(long)) })
@@ -335,6 +347,18 @@ func TestShellFillsTheWindow(t *testing.T) {
 	const measure = `(() => { const s = document.querySelector(".tc-shell").getBoundingClientRect(), f = document.querySelector(".tc-railfoot").getBoundingClientRect(),
 		m = document.querySelector(".tc-main").getBoundingClientRect();
 		return [Math.round(s.bottom), Math.round(f.bottom), Math.round(m.bottom), window.innerHeight, document.documentElement.scrollHeight]; })()`
+	const bareMeasure = `(() => { const o = document.querySelector(".tc-overlay").getBoundingClientRect(), s = document.querySelector(".tc-scrim").getBoundingClientRect(),
+		f = document.querySelector(".tc-railfoot").getBoundingClientRect();
+		return [Math.round(o.bottom), Math.round(s.bottom), Math.round(f.bottom), window.innerHeight]; })()`
+	for _, c := range []struct{ w, h int }{{1920, 1040}, {1351, 800}, {1280, 2560}} {
+		var bareGot []int
+		if err := h.Run(srv.URL+"/bare", c.w, c.h, chromedp.Evaluate(bareMeasure, &bareGot)); err != nil {
+			t.Fatal(err)
+		}
+		if bareGot[0] != bareGot[3] || bareGot[1] != bareGot[3] || bareGot[2] != bareGot[3] {
+			t.Errorf("%d×%d, a sheet's page with no shell: the overlay ends at %d, its scrim at %d, the rail's foot at %d; want all at the window's %d", c.w, c.h, bareGot[0], bareGot[1], bareGot[2], bareGot[3])
+		}
+	}
 	for _, c := range []struct{ w, h int }{{1920, 1040}, {1351, 800}} {
 		var got []int
 		if err := h.Run(srv.URL+"/short", c.w, c.h, chromedp.Evaluate(measure, &got)); err != nil {

@@ -134,3 +134,44 @@ func TestUserMenuOpens(t *testing.T) {
 		t.Errorf("with the script: opened %v, closed by Esc %v, focus back on the button %v", opened, closed, back)
 	}
 }
+
+// TestOverlayCloseFreesThePage (Carrel's task 276 p. 1): on a sheet's own
+// page the cross and Esc close the sheet in place, and what lay under it is
+// no longer inert — the head's button takes a press again — and the
+// address becomes the page under the sheet, the cross's link.
+func TestOverlayCloseFreesThePage(t *testing.T) {
+	needChrome(t)
+	o := w.Overlay{
+		Top: &w.Top{Brand: w.Brand{Title: "Notes"}},
+		Body: w.OverlayBody{Main: w.Main{Items: []w.MainPart{
+			w.Head{Title: &w.HeadTitle{Text: "Notes"}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Import", Href: "/import"}}}},
+		}}},
+		Scrim: w.Scrim{Content: w.Sheet{Title: "New note", Head: []w.SheetHeadPart{w.Close{Label: "Close", Href: "/app/notes"}},
+			Body: []w.SheetPart{w.Area{Label: "Text"}},
+			Foot: []w.SheetFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary}, w.Button{Label: "Cancel", Href: "/app/notes", Closes: true}}}},
+	}
+	body := `<div class="tc-root tc-shell">` + o.Render() + `</div>`
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("sheet-page", browser.PageHTML(body, ""))
+	const state = `(() => { const s = document.querySelector(".tc-scrim"), b = document.querySelector(".tc-head .tc-btn").getBoundingClientRect();
+		const e = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+		return [s.getClientRects().length ? "open" : "closed", document.querySelector("[inert]") ? "inert" : "free", e && e.closest(".tc-head") ? "reaches" : "blocked", location.pathname].join(" "); })()`
+	for _, how := range []struct {
+		name   string
+		action chromedp.Action
+	}{
+		{"the cross", chromedp.Click(`.tc-sheet .tc-close`, chromedp.ByQuery)},
+		{"Esc", chromedp.KeyEvent("\x1b")},
+	} {
+		var before, after string
+		if err := h.Run(url, 1200, 700, chromedp.Evaluate(state, &before), how.action, chromedp.Evaluate(state, &after)); err != nil {
+			t.Fatal(err)
+		}
+		if !strings.HasPrefix(before, "open inert blocked") {
+			t.Errorf("before %s: %s; want the sheet open over an inert page", how.name, before)
+		}
+		if after != "closed free reaches /app/notes" {
+			t.Errorf("after %s: %s; want closed free reaches /app/notes", how.name, after)
+		}
+	}
+}

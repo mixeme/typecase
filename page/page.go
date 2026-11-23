@@ -242,7 +242,7 @@ func (d Document) Render() (string, error) {
 		`<link rel="stylesheet" href="` + html.EscapeString(d.Assets.CSS) + `"></head><body data-tc-root>`)
 	b.WriteString(`<div hidden>` + string(sprite) + `</div>`)
 	if d.Root != nil {
-		b.WriteString(d.Root.Render())
+		b.WriteString(widget.PageRoot(d.Root))
 	}
 	for _, f := range d.Forms {
 		b.WriteString(f.Render())
