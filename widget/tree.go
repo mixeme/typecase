@@ -51,6 +51,9 @@ type TreeRow struct {
 	Indent      TreeIndent
 	Unavailable bool // cannot be chosen: read-only, already there
 	Trail       TreeTrail
+	// Count is how many of something a node holds, as a section's in the
+	// navigation: a mailbox's folder and its unread letters.
+	Count *Num
 	// Href makes the node a link: a folder opens at the address. With Send the
 	// node stays a radio button and Href is the address of the page drawn
 	// with this node chosen: the live layer asks it when the node is chosen
@@ -86,6 +89,9 @@ func (r TreeRow) html(on bool) string {
 		s.WriteString(Mono{Text: r.Label}.html(nil))
 	} else {
 		s.WriteString(esc(r.Label))
+	}
+	if r.Count != nil {
+		s.WriteString(r.Count.html(nil))
 	}
 	if r.Trail != nil {
 		s.WriteString(" " + r.Trail.html(mix{"tc-push"}))

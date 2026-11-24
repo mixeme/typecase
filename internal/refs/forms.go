@@ -114,6 +114,7 @@ var _ = add(
 	form("wrap", w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Mono: true, Label: "From"}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Mono: true, Label: "To"}, Show: w.Button{Label: "Show"}, Wrap: true, Action: "/app/calendar", Hidden: []w.Hidden{{Name: "view", Value: "range"}}}, "s-agenda-1", "tc-range"),
 
 	// tc-line, tc-stack, tc-grow, tc-push
+	form("mail", w.Line{Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office "), w.Badge{Label: "sending does not work", Tone: w.BadgeAlert}}, Gap: w.LineGapNormal}, "s-mailbox-26", "tc-line"),
 	form("rows-alert", w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip"}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "upload", File: &w.FileField{Form: "", Name: "file", Label: "From this computer", List: "event-attachments"}, Row: w.Line{Items: []w.LinePart{w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("{name} "), w.Dim{Parts: []w.Inline{w.Text("{size}")}}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true, Removes: true}}, Gap: w.LineGapNormal}, Label: "From this computer"},
 		w.MenuItem{Icon: "file", Label: "From Files"}}, Width: w.MenuWidth212, Pop: w.MenuUnder}}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("макет-обложки-v3.pdf "), w.Dim{Parts: []w.Inline{w.Text("application/pdf · 1.8 MB")}}, w.Text(" "), w.Badge{Label: "not kept", Tone: w.BadgeAlert}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}, w.Faced{Face: w.FaceLarge, Items: []w.LinePart{w.Text("шрифты-обложки.png "), w.Dim{Parts: []w.Inline{w.Text("image/png · 640 KB")}}, w.Text(" "), w.Badge{Label: "not kept", Tone: w.BadgeAlert}}}, w.Button{Label: "Remove", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGapNormal, Block: true}, "s-agenda-32", "tc-line"),
@@ -151,6 +152,7 @@ var _ = add(
 	form("default", w.Push{Items: []w.PushPart{w.Text("Default")}}, "s-dup-3", "tc-push"),
 
 	// tc-rubric
+	form("mail", w.Rubric{Text: "", Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office "), w.Badge{Label: "sending does not work", Tone: w.BadgeAlert}}, Gap: w.LineGapNormal}, w.Line{Items: []w.LinePart{w.Button{Label: "Show password", Small: true}, w.Button{Label: "Test again", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGapNormal}}, Variant: w.RubricDanger}, "s-mailbox-26", "tc-rubric"),
 	form("plain", w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 4}, w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
 		w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},

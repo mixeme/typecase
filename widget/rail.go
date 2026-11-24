@@ -91,7 +91,7 @@ func (Nav) railSecPart()     {}
 // RailSec — tc-railsec
 //
 // Роль. Секция рейла: рубрика и то, что под ней, — источники с галками, дерево, навигация настроек, теги.
-// Вход. RailSec{Items, Tags, Note, Apart}.
+// Вход. RailSec{Items, Tags, Note, Apart, Failed, Why}.
 // Состояния. plain | apart | tags | empty.
 // Инварианты. Рубрика — первой, если есть; теги — строкой после строк; секция печатает фрагмент своего кадра.
 // Поведение. нет: поведение у строк и тегов.
@@ -103,6 +103,11 @@ type RailSec struct {
 	Tags  []Tag
 	Note  string // what the section says when it has nothing
 	Apart bool   // 14 px above: a section set apart from the one before
+	// Failed is what the section says when its source did not answer, as
+	// an alarm, and Why says it in full in its hint: a mailbox's server
+	// («no reply · 8 s»). The page's refresh asks it again.
+	Failed string
+	Why    string
 }
 
 // Render prints the section.
@@ -123,6 +128,9 @@ func (r RailSec) html(m mix) string {
 	}
 	if r.Note != "" {
 		s.WriteString(`<div class="tc-railsec__note">` + esc(r.Note) + `</div>`)
+	}
+	if r.Failed != "" {
+		s.WriteString(`<div class="tc-railsec__note"><span class="tc-dim--danger"` + attr("title", r.Why) + `>` + esc(r.Failed) + `</span></div>`)
 	}
 	s.WriteString(`</div>`)
 	return s.String()

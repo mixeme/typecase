@@ -151,6 +151,7 @@ func (AuthStack) dialogPart()   {}
 func (Lede) dialogPart()        {}
 func (PhotoCrop) dialogPart()   {}
 func (PostForm) dialogPart()    {}
+func (Sec) dialogPart()         {}
 
 // DialogVariant is the drawn width and padding of a dialog.
 type DialogVariant int

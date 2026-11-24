@@ -30,6 +30,10 @@ func hintOf(v w.HintVariant, parts ...w.Inline) w.FieldHint {
 var swatchColours = []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}
 
 var _ = add(
+	form("mail", w.Field{Parts: []w.FieldPart{w.Check{Name: "sentCopy", Value: "on", Parts: []w.CheckPart{w.Text("The server puts a copy of sent letters into Sent itself")}}, w.FieldHint{Parts: []w.Inline{w.Text("Off: Carrel puts the copy after sending. Turn it on if every sent letter shows up twice.")}}}, OwnLine: true}, "s-mailbox-24", "tc-field"),
+	form("mail", w.Field{Label: "Signature", Parts: []w.FieldPart{w.Area{Text: "Михаил Енученко\nвёрстка и допечатная подготовка", Focus: true, Name: "signature", Label: "Signature"}, w.FieldHint{Parts: []w.Inline{w.Text("Goes under your text in every letter from home, above the quote, after the line «-- ». Plain text. Empty — no signature.")}}}, Width: w.FieldFull}, "s-mailbox-27", "tc-field"),
+	form("mail", w.Field{Label: "Colour", Parts: []w.FieldPart{w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 3, Name: "colour"}}, Width: w.FieldMD}, "s-mailbox-27", "tc-field"),
+	form("mail", w.Field{Label: "Colour", Parts: []w.FieldPart{w.Swatches{Colours: []string{"#4A6B52", "#3F6E8C", "#6B4E7A", "#A05A2C", "#8C6239", "#9A9280"}, On: 2, Name: "colour"}}, Width: w.FieldMD}, "s-mailbox-22", "tc-field"),
 	form("labelled", w.Field{Label: "Display name", Parts: []w.FieldPart{w.Input{Value: "Анна Ковалёва", Label: "Display name"}}, Width: w.FieldMD}, "components-10", "tc-field"),
 	form("labelled", w.Field{Label: "Status", Parts: []w.FieldPart{w.Pick{Value: "Confirmed"}}, Width: w.FieldSM}, "components-10", "tc-field"),
 	form("labelled", w.Field{Label: "Rotate", Parts: []w.FieldPart{w.Seg{Options: []w.SegOption{{Label: "0°", On: true, Value: "0"}, {Label: "90°", Value: "90"}, {Label: "180°", Value: "180"}, {Label: "270°", Value: "270"}}, Variant: w.SegStart, Name: "rotate"}}, Width: w.FieldW100}, "s-contacts-5", "tc-field"),

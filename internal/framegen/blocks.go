@@ -297,7 +297,7 @@ func (g *gen) diff(e *El) string {
 	return s + "}"
 }
 
-var emptyVariant = []kv{{"tc-empty--t12-pad", "EmptySmall"}, {"tc-empty--dusty", "EmptyDusty"},
+var emptyVariant = []kv{{"tc-empty--dusty", "EmptyDusty"}, {"tc-empty--t12-pad", "EmptySmall"},
 	{"tc-empty--dashed", "EmptyDashed"}, {"tc-empty--drop", "EmptyDrop"}, {"tc-empty--drop-side", "EmptyDropSide"}}
 
 func (g *gen) empty(e *El) string {
@@ -727,6 +727,9 @@ func (g *gen) rowPart(x *El) string {
 		return g.field(x)
 	case x.Has("tc-tag"):
 		return g.tag(x)
+	case x.Has("tc-check"):
+		// a mailbox's switch in its card's foot
+		return g.check(x)
 	case x.Has("tc-field__hint--flush-fill"):
 		return "w.FillHint{Parts: " + g.tparts(x, "[]w.CardTextPart{") + "}"
 	case x.Has("tc-dim--t12-5") && !x.Has("tc-dim"):

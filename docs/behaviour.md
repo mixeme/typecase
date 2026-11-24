@@ -64,6 +64,7 @@
 | `Line` | `tc-line` | нет. | тест: `TestEditFile`, `TestFilePick`, `TestFileSizes` |
 | `LinkedRow` | `tc-row` | Нажатие открывает запись. | без сценария (ссылка, форма, `details`) |
 | `List` | `tc-list` | Одна остановка Tab: Tab приходит на одну строку (последнюю с фокусом, открытую или первую) и уходит за список; галки строк — не остановки. Стрелки ходят по строкам; Enter открывает строку; пробел нажимает её галку. | тест: `TestListOneStop`, `TestNoScriptSheetAndChecks`, `TestShortcuts`, `TestZonePanel` |
+| `MailRow` | `tc-row` | Галка выбирает письмо для действий полосы выбора; флажок отмечает важное сразу; нажатие на отправителя открывает письмо. | без сценария (ссылка, форма, `details`) |
 | `Main` | `tc-main` | нет: поведение у того, что в ней. | тест: `TestZonePanel` |
 | `Mark` | `tc-mark` | нет. | тест: `TestAttendeesSuggest`, `TestNoScriptSheetAndChecks`, `TestNotebookPick` |
 | `Menu` | `tc-menu` | Стрелки ходят по пунктам, Enter выбирает, Esc закрывает меню и возвращает фокус кнопке, которая его открыла; строка поиска оставляет пункты, где есть набранное (без сценария её нет). | тест: `TestAttendeesSuggest`, `TestCheckFormInMenu`, `TestClosedMenuWithoutScripts`, `TestColumnsMenu`, `TestEditFile`, `TestFileInForm`, `TestFilePick`, `TestFileSizes`, `TestNotebookPick`, `TestSearchSuggest`, `TestShortcuts`, `TestZonePick` |

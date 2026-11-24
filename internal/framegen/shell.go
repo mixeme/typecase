@@ -756,6 +756,9 @@ func (g *gen) tree(e *El) string {
 		for _, v := range allOf(r, treeIndent) {
 			x = append(x, "Indent: w."+v)
 		}
+		if n := r.Kid("tc-num"); n != nil {
+			x = append(x, "Count: &"+g.num(n))
+		}
 		if r.Has("tc-tree__row--op-55") {
 			x = append(x, "Unavailable: true")
 		}
@@ -959,6 +962,44 @@ func (g *gen) row0(e *El) string {
 			"Time: "+text("tc-row__time"), "Access: "+text("tc-row__detail"))
 		f = g.src(e, f)
 		return "w.SizeRow{" + join(f, ", ") + "}"
+	case e.Has("tc-row--mailcols"):
+		// a letter in a mailbox's folder
+		if t := tickedOf(els[0]); t != "w.TickedOn" {
+			f = append(f, "Ticked: "+t)
+		}
+		if snd := sendOf(els[0]); snd != "" {
+			f = append(f, "Send: "+snd)
+		}
+		if els[1].Has("is-on") {
+			f = append(f, "Important: true")
+		}
+		if snd := sendOf(els[1]); snd != "" {
+			f = append(f, "Flag: "+snd)
+		}
+		if e.Has("is-unread") {
+			f = append(f, "Unread: true")
+		}
+		if e.Has("is-on") {
+			f = append(f, "On: true")
+		}
+		if e.Has("is-done") {
+			f = append(f, "Done: true")
+		}
+		t := e.Kid("tc-row__title")
+		f = append(f, "From: "+q(t.Text()))
+		letter := e.Kid("tc-row__letter")
+		f = append(f, "Topic: "+q(letter.Kid("tc-row__topic").Text()))
+		if st := strings.TrimPrefix(strings.TrimSpace(letter.OwnText()), "— "); st != "" {
+			f = append(f, "Start: "+q(st))
+		}
+		if n := e.Kid("tc-row__clip").Attr("title"); n != "" {
+			f = append(f, "Attached: "+strings.Fields(n)[0])
+		}
+		f = append(f, "Bytes: "+text("tc-row__size"), "Date: "+text("tc-row__date"))
+		if t.Tag == "a" {
+			f = append(f, "Href: "+q(t.Attr("href")))
+		}
+		return "w.MailRow{" + join(f, ", ") + "}"
 	case e.Has("tc-row--slim"):
 		if els[0].Has("is-off") {
 			f = append(f, "Ticked: w.TickedOff")
@@ -1628,6 +1669,10 @@ func (g *gen) railsec(e *El) string {
 		switch {
 		case k.Has("tc-railsec__tags"):
 			f = append(f, "Tags: []w.Tag{"+g.each(k.Els(), g.tag)+"}")
+		case k.Has("tc-railsec__note") && k.Kid("tc-dim--danger") != nil:
+			// a source that did not answer (a mailbox)
+			d := k.Kid("tc-dim--danger")
+			f = append(f, "Failed: "+q(d.Text()), "Why: "+q(d.Attr("title")))
 		case k.Has("tc-railsec__note"):
 			f = append(f, "Note: "+q(k.Text()))
 		default:

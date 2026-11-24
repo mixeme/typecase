@@ -32,6 +32,19 @@ do, not what the authors did.
 
 ### Added
 
+- **The mailbox's own blocks** (the mail prepared for implementation, the
+  owner 24.11): `MailRow` is a letter in a mailbox's folder — tick, the
+  flag of the important one (a toggle that acts at once, `Flag`), sender,
+  topic with the beginning of the text, the clip with how many attached,
+  size and date; `Unread`, `On`, `Done` (moved on a server that cannot
+  remove only it: struck through). `TreeRow.Count` is a folder's unread
+  number, as a section's in the navigation. `RailSec.Failed` and `Why` are
+  a source that did not answer, as an alarm with the reason in its hint
+  («no reply · 8 s»). A `Check` stands in a card's row (the mailbox's
+  «The server puts a copy of sent letters into Sent itself» in its foot),
+  a `Msg` in `MainResults`, a `Sec` in a `Dialog` (what connecting a
+  mailbox tried, under its rubric).
+
 - **Words that need a script have their pair without one** (Carrel's task
   278): `ScriptPair{With, Without}` is words said one way on a page with a
   script and another without — in an empty state, a dim line, anywhere
@@ -88,6 +101,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The mail is being prepared for implementation** (the owner 24.11).
+  Frames whose group is done lose the mark «отложена» and are checked as
+  all others: screens, records, the ladders. Done: the folder (`s-mailbox-1`
+  … `-5`) and the connections and settings (`-22` … `-29`). On the way the
+  frames caught up with the rest of the mockup: the dialogs that connect
+  and edit a mailbox, and the folders' roles, are forms with names, as
+  «Connect account»; Cancel and Skip are links; the DAV card of `-26` is
+  today's (Update collection list); the instance's settings (`-29`) are
+  `s-admin-32` with the rubric «Users’ own mailboxes»; a mailbox that did
+  not answer has no button Retry of its own (the page's refresh asks it
+  again, as for any source); «Select all shown» left the folder's bar (the
+  selection bar has «Select all», as files').
 - **The only administrator deposits no key** (the owner, Carrel's task 281):
   `account-18` (the account's Key escrow) and `account-19` (the escrow
   page) draw «Deposit my key» off with its reason «No other administrator

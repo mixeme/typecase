@@ -41,6 +41,8 @@ func primitive(state string, fixture Renderer, frame, class string) Entry {
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("mail", w.Button{Folds: true, Label: "Move to", Menu: true, Icon: "move", Title: "Move to"}, "s-mailbox-3", "tc-btn"),
+	primitive("mail", w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "mailbox", State: w.ButtonDisabled}, "s-mailbox-23", "tc-btn"),
 	primitive("menu", w.Button{Label: "Upload", Menu: true, Icon: "upload", Kind: w.ButtonPrimary}, "s-files-1", "tc-btn"),
 	primitive("plain", w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"}, "s-notes-7", "tc-btn"),
 	primitive("menu", w.Button{Label: "Take one out", Menu: true}, "s-dup-10", "tc-btn"),

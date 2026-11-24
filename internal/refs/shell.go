@@ -55,6 +55,14 @@ var _ = add(
 	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, w.Field{Label: "Match threshold", Parts: []w.FieldPart{w.Input{Name: "value", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52}, w.Button{Label: "Weights", Small: true}}, Width: w.FieldInline, Action: "/app/duplicates/decide", Post: true, Sends: []w.Hidden{w.Hidden{Name: "csrf", Value: "7f3a91de"}, w.Hidden{Name: "do", Value: "threshold"}}}}, Stack: true}, "s-dup-1", "tc-acts"),
 
 	// tc-nav
+	shell("mail", w.Nav{Items: []w.NavItem{
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 6}, "s-mailbox-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Href: "#"},
 		{Icon: "cal", Label: "Calendar", Href: "#"},
@@ -315,6 +323,8 @@ var _ = add(
 		{Icon: "clock", Label: "Audit log", Href: "#"}}, On: 7}, "s-admin-7", "tc-nav"),
 
 	// tc-railsec
+	shell("failed", w.RailSec{Items: []w.RailSecPart{w.Rubric{Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office")}, Gap: w.LineGapNormal}}}},
+		Failed: "no reply · 8 s", Why: "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work."}, "s-mailbox-1", "tc-railsec"),
 	shell("plain", w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "169", Current: true}}}, "components-11", "tc-railsec"),
 	shell("apart", w.RailSec{Items: []w.RailSecPart{

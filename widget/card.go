@@ -103,6 +103,7 @@ func (Tag) cardRowPart()      {}
 func (Dim) cardRowPart()      {}
 func (Span) cardRowPart()     {}
 func (FillHint) cardRowPart() {}
+func (Check) cardRowPart()    {}
 
 // FillHint is an explanation that takes the rest of a card's row.
 type FillHint struct {
@@ -416,6 +417,7 @@ type ResultsPart interface {
 
 func (Card) resultsPart()   {}
 func (Rubric) resultsPart() {}
+func (Msg) resultsPart()    {}
 
 // MainResults is a column of cards in a page: candidates, servers.
 type MainResults struct {

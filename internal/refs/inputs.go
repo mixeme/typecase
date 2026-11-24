@@ -117,6 +117,7 @@ var _ = add(
 
 	// tc-in as a text area
 	form("plain", w.Input{Value: "anna.kovaleva@slovo.example", Label: "Address"}, "s-contacts-3", "tc-in"),
+	form("mail", w.Area{Text: "Михаил Енученко\nвёрстка и допечатная подготовка", Focus: true, Name: "signature", Label: "Signature"}, "s-mailbox-27", "tc-in"),
 	form("plain", w.Area{Text: "Пишет по вторникам, отвечает в тот же день.", Label: "Text"}, "s-contacts-3", "tc-in"),
 	form("plain", w.Area{Text: "", Variant: w.AreaBodySm, Focus: true, Name: "description", Label: "Text"}, "s-notes-34", "tc-in"),
 	form("body", w.Area{Text: "", Variant: w.AreaBody, Name: "description", Label: "Text"}, "s-notes-30", "tc-in"),

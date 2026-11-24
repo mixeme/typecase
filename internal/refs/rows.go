@@ -49,6 +49,15 @@ var _ = add(
 	rows("error", w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow"),
 
 	// tc-tree
+	rows("mail", w.Tree{Rows: []w.TreeRow{
+		{Icon: "inbox", Label: "Inbox", Count: &w.Num{Value: 12}},
+		{Icon: "pencil", Label: "Drafts", Count: &w.Num{Value: 1}},
+		{Icon: "send", Label: "Sent"},
+		{Icon: "archive", Label: "Archive"},
+		{Icon: "spam", Label: "Spam", Count: &w.Num{Value: 3}},
+		{Icon: "trash", Label: "Trash"},
+		{Icon: "file", Label: "Стройка", Count: &w.Num{Value: 2}},
+		{Icon: "file", Label: "Рассылки"}}, On: 1, Variant: w.TreePadded}, "s-mailbox-1", "tc-tree"),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Unavailable: true, Send: w.Send{Name: "to", Value: "nextcloud/kontakty", One: true}, Trail: w.Mono{Text: "already there", Variant: w.Mono10Dusty}},
 		{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Архив", Send: w.Send{Name: "to", Value: "nextcloud/arhiv", One: true}, Trail: w.Mono{Text: "nextcloud", Variant: w.Mono10Dusty}},
@@ -297,6 +306,17 @@ var _ = add(
 	rows("found", w.TimeRow{Mark: w.Mark{Colour: "#4A6B52"}, Time: "10 Aug", Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой")}, Detail: "15:00 · Zoom", Source: "nextcloud · Личный"}, "s-find-1", "tc-row"),
 	rows("found", w.DueRow{Tick: w.Tick{Sign: true}, Mark: w.Mark{Colour: "#3F6E8C"}, Title: []w.Inline{w.Text("Ответить "), w.Strong("Ковал"), w.Text("ёвой по смете")}, Due: "12 Aug", Progress: "40%", Source: "nextcloud · Работа"}, "s-find-1", "tc-row"),
 	rows("found", w.ExcerptRow{Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Звонок с "), w.Strong("Ковал"), w.Text("ёвой — тезисы")}, Excerpt: "Договорились заморозить ветку в среду; письмо пишет Анна…", Date: "10 Aug", Source: "nextcloud · Записи"}, "s-find-1", "tc-row"),
+	rows("plain", w.MailRow{Ticked: w.TickedOff, From: "Виктор Гончаров", Topic: "Re: Миграция на копии базы", Start: "Прогнал на копии, всё сошлось, кроме вложений старше 2019 года…", Bytes: "12 KB", Date: "2026-09-23 16:05"}, "s-mailbox-1", "tc-row"),
+	rows("unread", w.MailRow{Ticked: w.TickedOff, Unread: true, From: "Книжная ярмарка", Topic: "Сентябрьская рассылка: сорок новинок осени", Start: "Не видите картинки? Откройте письмо в браузере…", Bytes: "84 KB", Date: "2026-09-23 19:30"}, "s-mailbox-1", "tc-row"),
+	rows("done", w.MailRow{Ticked: w.TickedOff, Done: true, From: "Пётр Смирнов", Topic: "Смета по второму этапу", Start: "Во вложении смета…", Attached: 1, Bytes: "1.1 MB", Date: "2026-09-24 08:47"}, "s-mailbox-5", "tc-row"),
+	rows("done", w.MailRow{Ticked: w.TickedOff, Important: true, Done: true, From: "Анна Ковалёва", Topic: "Вёрстка сборника: правки и встреча в четверг", Start: "Михаил, добрый день!…", Attached: 3, Bytes: "2.6 MB", Date: "2026-09-24 10:12"}, "s-mailbox-5", "tc-row"),
+	rows("on", w.MailRow{Important: true, On: true, From: "Артём Белов", Topic: "Скриншоты к релизу", Start: "Лови, шесть штук, как договаривались…", Attached: 6, Bytes: "5.8 MB", Date: "2026-09-22 14:21"}, "s-mailbox-3", "tc-row"),
+	rows("on", w.MailRow{Unread: true, On: true, From: "Пётр Смирнов", Topic: "Смета по второму этапу", Start: "Во вложении смета, кровлю пересчитал по новым ценам…", Attached: 1, Bytes: "1.1 MB", Date: "2026-09-24 08:47"}, "s-mailbox-3", "tc-row"),
+	rows("on", w.MailRow{Important: true, Unread: true, On: true, From: "Анна Ковалёва", Topic: "Вёрстка сборника: правки и встреча в четверг", Start: "Михаил, добрый день! Прислала правки к третьей вёрстке…", Attached: 3, Bytes: "2.6 MB", Date: "2026-09-24 10:12"}, "s-mailbox-3", "tc-row"),
+	rows("plain", w.MailRow{Ticked: w.TickedOff, From: "Банк «Пример»", Topic: "Выписка за август", Start: "Выписка по счёту во вложении, пароль к файлу — последние четыре цифры…", Attached: 1, Bytes: "240 KB", Date: "2026-09-20 09:00"}, "s-mailbox-1", "tc-row"),
+	rows("important", w.MailRow{Ticked: w.TickedOff, Important: true, From: "Артём Белов", Topic: "Скриншоты к релизу", Start: "Лови, шесть штук, как договаривались. Тёмная тема — отдельно…", Attached: 6, Bytes: "5.8 MB", Date: "2026-09-22 14:21"}, "s-mailbox-1", "tc-row"),
+	rows("unread", w.MailRow{Ticked: w.TickedOff, Unread: true, From: "Пётр Смирнов", Topic: "Смета по второму этапу", Start: "Во вложении смета, кровлю пересчитал по новым ценам, фасад без изменений…", Attached: 1, Bytes: "1.1 MB", Date: "2026-09-24 08:47"}, "s-mailbox-1", "tc-row"),
+	rows("unread", w.MailRow{Ticked: w.TickedOff, Important: true, Unread: true, From: "Анна Ковалёва", Topic: "Вёрстка сборника: правки и встреча в четверг", Start: "Михаил, добрый день! Прислала правки к третьей вёрстке, они в PDF и отмечены жёлтым…", Attached: 3, Bytes: "2.6 MB", Date: "2026-09-24 10:12"}, "s-mailbox-1", "tc-row"),
 	rows("found", w.SizeRow{Mark: &w.Mark{Colour: "#4A6B52"}, Icon: "doc", Name: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")}, Bytes: "240 KB", Time: "2026-08-04 11:20", Access: "rw", Source: "sftpgo · vps · Documents"}, "s-find-1", "tc-row"),
 	rows("found", w.SizeRow{Mark: &w.Mark{Colour: "#4A6B52"}, Icon: "doc", Name: []w.Inline{w.Strong("Ковал"), w.Text("ёва — правки по обложке.md")}, Bytes: "6 KB", Time: "2026-07-21 16:02", Access: "rw", Source: "sftpgo · vps · Documents"}, "s-find-1", "tc-row"),
 	rows("inset", w.DueRow{Tick: w.Tick{Sign: true}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Собрать чемодан")}, Due: "12 Aug 18:00", Progress: "—", Source: "nextcloud · Дела", Inset: true}, "s-dup-1", "tc-row"),
@@ -323,6 +343,6 @@ var _ = add(
 
 func init() {
 	Widgets = append(Widgets, w.TickRow{}, w.Skel{}, w.Tree{}, w.List{}, w.TimeRow{}, w.ColumnRow{}, w.SkelRow{}, w.FaceRow{}, w.FindRow{},
-		w.LinkedRow{}, w.ExcerptRow{}, w.BriefRow{}, w.DueRow{}, w.SizeRow{}, w.SlimRow{}, w.PhoneRow{})
+		w.LinkedRow{}, w.ExcerptRow{}, w.BriefRow{}, w.DueRow{}, w.SizeRow{}, w.SlimRow{}, w.PhoneRow{}, w.MailRow{})
 	Parts = append(Parts, w.TreeRow{}, w.ColumnCell{}, w.TreeNote{}, w.TickBox{})
 }

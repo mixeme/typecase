@@ -28,6 +28,7 @@ func (DueRow) listRow()     {}
 func (SizeRow) listRow()    {}
 func (SlimRow) listRow()    {}
 func (PhoneRow) listRow()   {}
+func (MailRow) listRow()    {}
 
 // RowTag is what the tags cell of a row holds.
 type RowTag interface {
@@ -723,4 +724,68 @@ func (r ColumnRow) html(m mix) string {
 	}
 	s.WriteString(`</` + rowTag(row) + `>`)
 	return s.String()
+}
+
+// MailRow — tc-row
+//
+// Роль. Строка письма в папке ящика: галка, флажок важного, отправитель, тема с началом текста, скрепка, размер, дата.
+// Вход. MailRow{Ticked, Send, Important, Flag, Unread, On, Done, From, Topic, Start, Attached, Bytes, Date, Href}.
+// Состояния. plain | unread | important | on | done.
+// Инварианты. Галка и флажок — кнопки с доступным именем; строка печатает фрагмент своего кадра.
+// Поведение. Галка выбирает письмо для действий полосы выбора; флажок отмечает важное сразу; нажатие на отправителя открывает письмо.
+// Эталон. кадр `s-mailbox-1`, фрагмент `.tc-row`.
+// Содержимое. Галка, флажок, отправитель, тема жирным и начало текста, скрепка со счётом вложений, размер и дата моноширинным.
+// Чего нет. Метки коллекции: письмо — не запись коллекции (C-2.1); цвет ящика — в рейле.
+type MailRow struct {
+	Ticked Ticked
+	Send   Send // what pressing the tick sends
+	// Important is the letter's flag; Flag is what pressing it sends, a
+	// toggle that acts at once.
+	Important bool
+	Flag      Send
+	Unread    bool
+	On        bool
+	// Done strikes the letter through: moved away on a server that cannot
+	// remove only it, it stays listed until the mailbox is cleaned.
+	Done     bool
+	From     string
+	Topic    string
+	Start    string // the beginning of the text, after the topic
+	Attached int    // attachments: the clip and its count
+	Bytes    string // 2.6 MB
+	Date     string
+	Href     string // the letter
+}
+
+// Render prints the row.
+func (r MailRow) Render() string { return r.html(nil) }
+
+func (r MailRow) html(m mix) string {
+	flag, typ := "Mark as important", "button"
+	if r.Important {
+		flag = "Important"
+	}
+	if r.Flag.Form != "" {
+		typ = "submit"
+	}
+	clip := `<span class="tc-row__clip"></span>`
+	switch {
+	case r.Attached == 1:
+		clip = `<span class="tc-row__clip" title="1 attachment"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg></span>`
+	case r.Attached > 1:
+		clip = `<span class="tc-row__clip" title="` + strconv.Itoa(r.Attached) + ` attachments"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg></span>`
+	}
+	from := "span"
+	if r.Href != "" {
+		from = "a"
+	}
+	letter := `<span class="tc-row__letter"><span class="tc-row__topic">` + esc(r.Topic) + `</span>`
+	if r.Start != "" {
+		letter += ` — ` + esc(r.Start)
+	}
+	return `<div` + class(m, "tc-row", "tc-row--mailcols", is("unread", r.Unread), is("on", r.On), is("done", r.Done)) + `>` + r.Ticked.box(r.Topic, r.Send) +
+		`<button` + class(nil, "tc-row__flag", is("on", r.Important)) + attr("title", flag) + attr("aria-label", flag) + ` type="` + typ + `"` + attr("form", r.Flag.Form) + attr("name", r.Flag.Name) + attr("value", r.Flag.Value) +
+		attr("aria-pressed", map[bool]string{true: "true", false: "false"}[r.Important]) + `><svg viewBox="0 0 24 24"><use href="#i-flag"/></svg></button>` +
+		`<` + from + ` class="tc-row__title"` + attr("href", r.Href) + `>` + esc(r.From) + `</` + from + `>` + letter + `</span>` + clip +
+		cell(r.Bytes, "tc-row__cell", "tc-mono", "tc-row__size") + cell(r.Date, "tc-mono", "tc-row__date") + `</div>`
 }

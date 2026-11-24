@@ -8,6 +8,18 @@ func overlay(state string, fixture Renderer, frame, class string) Entry {
 
 var _ = add(
 	// tc-menu
+	overlay("mail", w.Menu{Items: []w.MenuPart{
+		w.Rubric{Text: "home"},
+		w.MenuItem{Icon: "file", Label: "Стройка"},
+		w.MenuItem{Icon: "file", Label: "Рассылки"},
+		w.MenuItem{Icon: "pencil", Label: "Drafts"},
+		w.MenuSep{},
+		w.MenuItem{Label: "Folders are made and renamed where the mailbox lives", Tone: w.MenuToneAside}}}, "s-mailbox-4", "tc-menu"),
+	overlay("mail", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mailopen", Label: "Mark as read"},
+		w.MenuItem{Icon: "mail", Label: "Mark as unread"},
+		w.MenuItem{Icon: "flag", Label: "Mark as important"},
+		w.MenuItem{Icon: "spam", Label: "Spam"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}, "s-mailbox-3", "tc-menu"),
 	overlay("marks", w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Анна Ковалёва · Контакты", To: "/app/duplicates/decide", Name: "out", Value: "1"},
 		w.MenuItem{Mark: &w.Mark{Colour: "#A05A2C"}, Label: "Анна Ковалёва · Архив", To: "/app/duplicates/decide", Name: "out", Value: "2"},
@@ -818,6 +830,11 @@ var _ = add(
 		w.MenuItem{Icon: "search", Trail: w.Kbd{Keys: "?"}, Label: "Keyboard shortcuts", ScriptOnly: true, Href: "#keys", Key: "?"},
 		w.MenuSep{},
 		w.MenuItem{Label: "Sign out", Form: "post-signout"}}, Width: w.MenuWidth290}}}}, "account-5", "tc-top"),
+	overlay("mail", w.Bar{Items: []w.BarPart{w.Mono{Text: "6.8 MB", Variant: w.MonoMuted}, w.BarSep{}, w.Button{Folds: true, Label: "Read", Icon: "mailopen", Title: "Mark as read", Secondary: true}, w.Button{Folds: true, Label: "Unread", Icon: "mail", Title: "Mark as unread", Secondary: true}, w.Button{Folds: true, Label: "Important", Icon: "flag", Title: "Mark as important", Secondary: true}, w.Button{Folds: true, Label: "Move to", Menu: true, Icon: "move", Title: "Move to"}, w.Button{Folds: true, Label: "Archive", Icon: "archive", Title: "Archive"}, w.Button{Folds: true, Label: "Spam", Icon: "spam", Title: "Spam", Secondary: true}, w.Button{Folds: true, Label: "Trash", Icon: "trash", Title: "Move to Trash"}, w.Drop{Open: true, Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mailopen", Label: "Mark as read"},
+		w.MenuItem{Icon: "mail", Label: "Mark as unread"},
+		w.MenuItem{Icon: "flag", Label: "Mark as important"},
+		w.MenuItem{Icon: "spam", Label: "Spam"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}, Count: &w.BarCount{Text: "3 selected"}, Right: &w.BarRight{Items: []w.BarPart{w.Button{Folds: true, Label: "Select all", Icon: "selectall", Small: true, Title: "Select all", ScriptOnly: true}, w.Button{Folds: true, Label: "Clear selection", Icon: "close", Small: true, Title: "Clear selection"}}}, Variant: w.BarSelection}, "s-mailbox-3", "tc-bar"),
 	overlay("plain", w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Value: "синк", Label: "Filter by word", Name: "filter"}, Clear: "/app/calendar/nextcloud/lichnyj", Action: "/app/calendar/nextcloud/lichnyj", Swap: "list-main", Variant: w.FilterH26W200}, w.Button{Icon: "back", Title: "Previous week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-03&filter=синк"}, w.Button{Label: "Today", Href: "/app/calendar/nextcloud/lichnyj?filter=синк"}, w.Button{Icon: "next", Title: "Next week", Href: "/app/calendar/nextcloud/lichnyj?from=2026-08-17&filter=синк"}, w.SegFold{Seg: w.Seg{Options: []w.SegOption{{Label: "Day", Href: "/app/calendar?view=day"}, {Label: "Week", Href: "/app/calendar?view=week", On: true}, {Label: "Month", Href: "/app/calendar?view=month"}, {Label: "Range", Href: "/app/calendar?view=range"}}}, Phone: true}, w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show", Submit: true}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Secondary: true, Action: "/app/calendar"}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
 		w.Range{From: w.Input{Kind: w.InputDate, Name: "from", Value: "2026-08-10", Label: "From", Mono: true}, To: w.Input{Kind: w.InputDate, Name: "to", Value: "2026-08-16", Label: "To", Mono: true}, Show: w.Button{Label: "Show", Submit: true}, Hidden: []w.Hidden{{Name: "view", Value: "range"}}, Action: "/app/calendar", Wrap: true},
 		w.MenuSep{},
@@ -1504,6 +1521,10 @@ var _ = add(
 		w.Dim{Parts: []w.Inline{w.Text("Unlocks stored credentials for five minutes.")}, Size: w.Dim11_5, Variant: w.DimWrap}}, Foot: []w.SheetFootPart{w.Button{Label: "Show", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/settings/connections"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth400}, Pad: w.ScrimPad26}}, "s-profile-3", "tc-overlay"),
 
 	// tc-dialog
+	overlay("mail", w.Dialog{Items: []w.DialogPart{
+		w.Head{Title: &w.HeadTitle{Text: "Which folders are these?"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("home did not say where it keeps its archive and spam.")}}}},
+		w.Form{Items: []w.FormPart{w.Field{Label: "Archive", Parts: []w.FieldPart{w.Pick{Name: "archive", Options: []w.PickOption{{Value: "Архив", Label: "Архив", On: true}}, Label: "Archive"}, w.FieldHint{Parts: []w.Inline{w.Text("Suggested by the name.")}}}, Width: w.FieldMD}, w.Field{Label: "Spam", Parts: []w.FieldPart{w.Pick{Name: "spam", Options: []w.PickOption{{Value: "Junk", Label: "Junk", On: true}}, Label: "Spam"}, w.FieldHint{Parts: []w.Inline{w.Text("Suggested by the name.")}}}, Width: w.FieldMD}, w.Field{Parts: []w.FieldPart{w.Check{Name: "sentCopy", Value: "on", Parts: []w.CheckPart{w.Text("The server puts a copy of sent letters into Sent itself")}}, w.FieldHint{Parts: []w.Inline{w.Text("Off: Carrel puts the copy after sending. Turn it on if every sent letter shows up twice.")}}}, OwnLine: true, Place: w.Grown}}, ID: "folders", Action: "/app/settings/mailboxes/home/folders", Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}}, Variant: w.FormFlush},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Save", Kind: w.ButtonPrimary, Form: "folders"}, w.Button{Label: "Skip", Href: "/app/settings/connections"}}, Variant: w.FormFootFlush}}, Variant: w.DialogCanvas420}, "s-mailbox-24", "tc-dialog"),
 	overlay("wide", w.Dialog{Items: []w.DialogPart{
 		w.Steps{Items: []string{"1 · Archive", "2 · Match", "3 · Report"}, On: 2},
 		w.Head{Title: &w.HeadTitle{Text: "Restore from 2026-08-14"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("Job «Личное на домашний диск» · manifest read · 4 collections · 147 records · "), w.Mono{Text: "carrel-backup/2026-08-14T09-12.zip"}}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Cancel"}, w.Button{Label: "Restore 3 collections", Icon: "restore", Kind: w.ButtonPrimary, Name: "op", Value: "restore", Submit: true}}}},

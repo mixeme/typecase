@@ -72,6 +72,7 @@ var invariantBindings = map[string][]string{
 	"BriefRow":     {"gate:container-pairs", "gate:widget-fragments"},
 	"DueRow":       {"gate:widget-fragments", "gate:container-pairs", "gate:widget-fragments"},
 	"SizeRow":      {"gate:a11y", "gate:container-pairs", "gate:widget-fragments"},
+	"MailRow":      {"gate:a11y", "gate:widget-fragments"},
 	"SlimRow":      {"gate:a11y", "gate:widget-fragments"},
 	"PhoneRow":     {"gate:widget-fragments", "gate:a11y", "gate:widget-fragments"},
 	"tc-push":      {"gate:widget-fragments", "gate:widget-fragments"},
