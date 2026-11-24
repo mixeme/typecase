@@ -40,8 +40,8 @@ do, not what the authors did.
   remove only it: struck through). `TreeRow.Count` is a folder's unread
   number, as a section's in the navigation. `RailSec.Failed` and `Why` are
   a source that did not answer, as an alarm with the reason in its hint
-  («no reply · 8 s»), and `Retry` asks that one alone again (the owner,
-  25.11: the page's refresh asks them all). A `Check` stands in a card's row (the mailbox's
+  («no reply · 8 s»), and `Retry` asks that one alone again, at the line's
+  right edge (the owner, 25.11: the page's refresh asks them all). A `Check` stands in a card's row (the mailbox's
   «The server puts a copy of sent letters into Sent itself» in its foot),
   a `Msg` in `MainResults`, a `Sec` in a `Dialog` (what connecting a
   mailbox tried, under its rubric).
