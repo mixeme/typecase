@@ -103,18 +103,28 @@ type PhotoCrop struct {
 	Colour string // the picture's place, in a colour
 	Src    string // the picture being cropped
 	Note   string
-	Fields []Field
+	// NoScript stands for Note on a page without a script: the frame is
+	// not dragged and the zoom is not moved there (Carrel's task 278).
+	NoScript string
+	Fields   []Field
 }
 
 func (p PhotoCrop) html(mix) string {
 	var s strings.Builder
+	js := ""
+	if p.NoScript != "" {
+		js = " tc-js"
+	}
 	pic := ""
 	if p.Src != "" {
 		pic = `<img class="tc-dialog__photo-img"` + attr("src", p.Src) + ` alt="">`
 	}
 	s.WriteString(`<div class="tc-dialog__split"><div` + attr("data-tc-colour", p.Colour) + ` class="tc-dialog__photo">` + pic + `<div class="tc-dialog__photo-frame"></div>` +
 		`<div class="tc-dialog__photo-rule"></div><div class="tc-dialog__photo-rule-v"></div></div><div class="tc-stack tc-stack--wide tc-dialog__side">` +
-		`<span class="tc-dim--muted tc-dim--t12-5">` + esc(p.Note) + `</span>`)
+		`<span class="tc-dim--muted tc-dim--t12-5` + js + `">` + esc(p.Note) + `</span>`)
+	if p.NoScript != "" {
+		s.WriteString(`<span class="tc-dim--muted tc-dim--t12-5 tc-nojs">` + esc(p.NoScript) + `</span>`)
+	}
 	for _, f := range p.Fields {
 		s.WriteString(f.html(nil))
 	}

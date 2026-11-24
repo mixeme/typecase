@@ -1389,7 +1389,11 @@ func (g *gen) dialog(e *El) string {
 			if img := ph.Kid("tc-dialog__photo-img"); img != nil {
 				src = ", Src: " + q(img.Attr("src"))
 			}
-			s := "w.PhotoCrop{Colour: " + q(ph.Attr("data-tc-colour")) + src + ", Note: " + q(side.Els()[0].Text()) + ", Fields: []w.Field{" + join(flds, ", ") + "}"
+			nojs := ""
+			if k := side.Els()[1]; k.Has("tc-nojs") {
+				nojs = ", NoScript: " + q(k.Text())
+			}
+			s := "w.PhotoCrop{Colour: " + q(ph.Attr("data-tc-colour")) + src + ", Note: " + q(side.Els()[0].Text()) + nojs + ", Fields: []w.Field{" + join(flds, ", ") + "}"
 			items = append(items, s+"}")
 		default:
 			items = append(items, g.anyblock(x))

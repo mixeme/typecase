@@ -556,11 +556,11 @@ func Backup2() Screen {
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
-											w.Text("Files go as files; calendars, tasks and notes as "),
-											w.Mono{Text: ".ics"},
-											w.Text(", address books as "),
+											w.Text("Address books go as "),
 											w.Mono{Text: ".vcf"},
-											w.Text("."),
+											w.Text("; calendars, tasks and notes as "),
+											w.Mono{Text: ".ics"},
+											w.Text("; files as files."),
 										},
 										Space:  w.MsgFlushAboveTight,
 										Place:  w.Grown,
@@ -963,11 +963,11 @@ func Backup19() Screen {
 									},
 									w.Msg{
 										Parts: []w.MsgPart{
-											w.Text("Files go as files; calendars, tasks and notes as "),
-											w.Mono{Text: ".ics"},
-											w.Text(", address books as "),
+											w.Text("Address books go as "),
 											w.Mono{Text: ".vcf"},
-											w.Text("."),
+											w.Text("; calendars, tasks and notes as "),
+											w.Mono{Text: ".ics"},
+											w.Text("; files as files."),
 										},
 										Space:  w.MsgFlushAboveTight,
 										Place:  w.Grown,
@@ -2439,9 +2439,9 @@ func Backup6() Screen {
 					w.Empty{
 						Parts: []w.EmptyPart{
 							w.Text("Carrel copies raw "),
-							w.Mono{Text: ".ics"},
-							w.Text(", "),
 							w.Mono{Text: ".vcf"},
+							w.Text(", "),
+							w.Mono{Text: ".ics"},
 							w.Text(" and files to storage of your own, with a manifest and a read-back check. Nothing is kept here. "),
 							w.Aside{
 								Face: w.FaceLarge,

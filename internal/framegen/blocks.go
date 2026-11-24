@@ -314,7 +314,7 @@ func (g *gen) empty(e *El) string {
 	}
 	var ps, refusals []string
 	refused := ""
-	for _, k := range e.Kids {
+	for i, k := range e.Kids {
 		switch v := k.(type) {
 		case string:
 			if t := textpart(e, v); t != "" {
@@ -386,6 +386,21 @@ func (g *gen) empty(e *El) string {
 				ps = append(ps, g.kbd(v))
 			case v.Tag == "a" && v.Has("tc-dim--accent"):
 				ps = append(ps, "w.Span{Face: w.FaceAccent, Text: "+q(v.Text())+", Href: "+q(v.Attr("href"))+"}")
+			case v.Tag == "span" && v.Has("tc-js") && len(v.Cls()) == 1:
+				// words with a script, the next span without one (Carrel's task 278)
+				var nx *El
+				for _, y := range e.Kids[i+1:] {
+					if z, ok := y.(*El); ok {
+						nx = z
+						break
+					}
+				}
+				if nx == nil || !nx.Has("tc-nojs") {
+					stop("empty: tc-js words without their tc-nojs pair")
+				}
+				ps = append(ps, "w.ScriptPair{With: []w.Inline{"+join(scriptWords(v), ", ")+"}, Without: []w.Inline{"+join(scriptWords(nx), ", ")+"}}")
+			case v.Tag == "span" && v.Has("tc-nojs") && len(v.Cls()) == 1:
+				// read with its tc-js half
 			default:
 				stop("empty? " + join(v.Cls(), " "))
 			}
@@ -1497,4 +1512,23 @@ func scripted(e *El) []string {
 		f = append(f, "NoScript: true")
 	}
 	return f
+}
+
+// scriptWords is the words of one half of a script pair: text and bold.
+func scriptWords(e *El) []string {
+	var its []string
+	for _, k := range e.Kids {
+		switch z := k.(type) {
+		case string:
+			if t := textpart(e, z); t != "" {
+				its = append(its, t)
+			}
+		case *El:
+			if z.Tag != "b" {
+				stop("script pair? " + join(z.Cls(), " "))
+			}
+			its = append(its, "w.Strong("+q(z.Text())+")")
+		}
+	}
+	return its
 }

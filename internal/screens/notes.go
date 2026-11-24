@@ -2330,7 +2330,7 @@ func Notes6() Screen {
 				},
 				Main: w.Main{
 					Items: []w.MainPart{
-						w.Empty{Parts: []w.EmptyPart{w.Text("Connect an account to see calendars, address books and notebooks.")}},
+						w.Empty{Parts: []w.EmptyPart{w.Text("Connect an account to see address books, calendars and notebooks.")}},
 					},
 				},
 				Height: w.ShellHeight340,
@@ -3960,7 +3960,11 @@ func Notes11() Screen {
 					Body: []w.SheetPart{
 						w.Empty{
 							Parts: []w.EmptyPart{
-								w.Text("Drop files here, or "),
+								w.ScriptPair{
+									With:    []w.Inline{w.Text("Drop files here, or")},
+									Without: []w.Inline{w.Text("Without scripts there is no drop:")},
+								},
+								w.Text(" "),
 								w.FilePick{
 									Label: "choose on the computer",
 									File:  w.FileField{Form: "", Name: "file", Label: "Files", List: "upload-files", Size: "size", Many: true},
@@ -3976,9 +3980,7 @@ func Notes11() Screen {
 										Place: w.Grown,
 									},
 								},
-								w.Text(" "),
 								w.Aside{Face: w.FaceSmall, Parts: []w.Inline{w.Text("A name already taken is refused, not overwritten")}},
-								w.Text(" "),
 								w.Line{Items: []w.LinePart{}, Gap: w.LineGapNormal, Block: true, ID: "upload-files", Place: w.Grown},
 							},
 							Variant: w.EmptyDashed,

@@ -55,14 +55,35 @@ type Inline interface {
 	inline()
 }
 
-func (Text) inline()    {}
-func (Strong) inline()  {}
-func (Em) inline()      {}
-func (Hint) inline()    {}
-func (Dot) inline()     {}
-func (Mono) inline()    {}
-func (Span) inline()    {}
-func (Mention) inline() {}
+func (Text) inline()       {}
+func (Strong) inline()     {}
+func (Em) inline()         {}
+func (Hint) inline()       {}
+func (Dot) inline()        {}
+func (Mono) inline()       {}
+func (Span) inline()       {}
+func (Mention) inline()    {}
+func (ScriptPair) inline() {}
+
+// ScriptPair is words said one way with a script and another without: what
+// needs a script — a drop, a drag — is named unavailable on a page without
+// one, not left unsaid (Carrel's task 278). Each half shows on its own page.
+type ScriptPair struct {
+	With    []Inline
+	Without []Inline
+}
+
+func (p ScriptPair) html(mix) string {
+	half := func(cls string, parts []Inline) string {
+		var s strings.Builder
+		s.WriteString(`<span class="` + cls + `">`)
+		for _, x := range parts {
+			s.WriteString(x.html(nil))
+		}
+		return s.String() + `</span>`
+	}
+	return half("tc-js", p.With) + half("tc-nojs", p.Without)
+}
 
 // Face is a face without a block of its own: a tone or a size of dim text
 // set by its variant alone («another tone is the variant instead of the

@@ -51,7 +51,64 @@ func States1() Screen {
 					},
 					w.Empty{
 						Parts: []w.EmptyPart{
-							w.Text("Carrel stores nothing of its own: calendars, contacts and notes come from your DAV servers. Connect the first one — you will need an address, a user name and a password. "),
+							w.Text("Carrel stores nothing of its own: contacts, calendars, tasks and notes come from your DAV servers. Connect the first one — you will need an address, a user name and a password. "),
+							w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+// States37 is frame «Файлы · ничего не подключено» (states-37).
+func States37() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Href: "#"},
+						{Icon: "cal", Label: "Calendar", Href: "#"},
+						{Icon: "task", Label: "Tasks", Href: "#"},
+						{Icon: "note", Label: "Notes", Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Href: "#"},
+					},
+					On: 5,
+				},
+				w.RailSec{Items: []w.RailSecPart{
+					w.Rubric{Text: "Sources"}}, Note: "Nothing connected yet"},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "plus", Title: "Open a folder to make one in it.", State: w.ButtonDisabled},
+						w.Button{Icon: "server", Title: "Connect account"},
+						w.Button{Icon: "link", Title: "Subscribe to a feed"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Files"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("No server connected yet")}}},
+					},
+					w.Empty{
+						Parts: []w.EmptyPart{
+							w.Text("Carrel stores nothing of its own: contacts, calendars, tasks and notes come from your DAV servers. Connect the first one — you will need an address, a user name and a password. "),
 							w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary},
 						},
 					},
@@ -5907,7 +5964,12 @@ func States32() Screen {
 					w.Empty{
 						Parts: []w.EmptyPart{
 							w.Strong("This folder is empty."),
-							w.Text(" Upload files into it, or drop them onto the window. "),
+							w.Text(" "),
+							w.ScriptPair{
+								With:    []w.Inline{w.Text("Upload files into it, or drop them onto the window.")},
+								Without: []w.Inline{w.Text("Upload files into it. Without scripts there is no drop.")},
+							},
+							w.Text(" "),
 							w.Button{
 								Label: "Upload",
 								Icon:  "upload",

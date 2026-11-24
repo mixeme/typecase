@@ -57,7 +57,7 @@ func Rest3() Screen {
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, Wide: true},
 						w.DialogTitle{Text: "Carrel"},
 						w.DialogSub{Parts: []w.Inline{w.Mono{Text: "0.0.1 · 786949a"}}},
-						w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place."},
+						w.Tagline{Lead: "One desk. Every server.", Text: "Contacts, calendars, tasks, notes and files — one place."},
 						w.Prose{
 							Parts: []w.Inline{
 								w.Text("AGPL-3.0-or-later: if you run a modified version for others, you must make the source available to them."),

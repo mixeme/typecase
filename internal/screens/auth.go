@@ -14,7 +14,7 @@ func Auth1() Screen {
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
 						w.Tagline{
 							Lead:     "One desk. Every server.",
-							Text:     "Calendars, contacts, tasks, notes and files — one place.",
+							Text:     "Contacts, calendars, tasks, notes and files — one place.",
 							Centered: true,
 						},
 						w.AuthStack{
@@ -56,7 +56,7 @@ func Auth13() Screen {
 						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
 						w.Tagline{
 							Lead:     "One desk. Every server.",
-							Text:     "Calendars, contacts, tasks, notes and files — one place.",
+							Text:     "Contacts, calendars, tasks, notes and files — one place.",
 							Centered: true,
 						},
 						w.AuthStack{

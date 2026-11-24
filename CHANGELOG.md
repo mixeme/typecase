@@ -32,6 +32,15 @@ do, not what the authors did.
 
 ### Added
 
+- **Words that need a script have their pair without one** (Carrel's task
+  278): `ScriptPair{With, Without}` is words said one way on a page with a
+  script and another without — in an empty state, a dim line, anywhere
+  running text stands; `PhotoCrop.NoScript` is the photo's note on a page
+  without one. To do: the empty folder's «or drop them onto the window»,
+  the upload sheet's «Drop files here, or» and the photo's «Drag to choose
+  the frame.» as pairs, with the words of `states-32`, `s-notes-11`,
+  `s-contacts-5`.
+
 - **The rail opens as a panel on a narrow width** (Carrel's tasks 274, 275;
   the owner, 24.11). Pressed again, the current section opens the rail over
   the list — its sources, in the rail of icons (641–1007) as a panel 264 px
@@ -79,6 +88,19 @@ do, not what the authors did.
 
 ### Mockup
 
+- **Kinds in words go in the sections' order** (the owner, Carrel's task 280):
+  contacts, calendars, tasks, notes, files — in the sign-in's tagline
+  (`s-auth-1`, `-13`, `rest-3`), the first-visit words (`states-1`), «Connect
+  an account to see address books, calendars and notebooks.» (`s-notes-6`,
+  `components-44`) and the backup's formats (`s-backup-2`, `-19`, `-6`).
+- **«Files» on an empty instance** (Carrel's task 279): `states-37` is
+  `states-1` in the Files section; the rail foot's first button, «New
+  folder», is off with its reason «Open a folder to make one in it.».
+- **The empty folder, the upload sheet and the photo's frame say what works
+  without a script** (Carrel's task 278): «Upload files into it. Without
+  scripts there is no drop.», «Without scripts there is no drop:» before
+  «choose on the computer», «Without scripts the frame and zoom stay as
+  shown; rotating works.» — hidden on a page that runs one.
 - **«New …» is a split** (the owner, Carrel's task 276): the button makes
   what it says — a note in the top bar, an event, a contact, a task or a
   note in a list's head — and its arrow opens the menu of the rest. The

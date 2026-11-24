@@ -18,44 +18,10 @@ var _ = add(
 	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Tasks · Open · Combined list"}, w.PrintSources{Text: "nextcloud · Дела, Работа"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "Due", Variant: w.MonoFace}, w.PrintCell{Name: "Task"}}, Head: true}, w.PrintRubric{Text: "Overdue"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "7 Aug", Variant: w.MonoFace}, w.PrintCell{Name: "Отправить документы в МФЦ", Detail: "nextcloud · Дела · overdue by 3 days", Tick: w.PrintTickOpen}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "8 Aug", Variant: w.MonoFace}, w.PrintCell{Name: "Ответить подрядчику по смете", Detail: "nextcloud · Работа · 40%", Tick: w.PrintTickOpen}}}, w.PrintRubric{Text: "This week"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "12 Aug", Variant: w.MonoFace}, w.PrintCell{Name: "Собрать чемодан", Detail: "18:00 · nextcloud · Дела, Работа", Tick: w.PrintTickOpen}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "14 Aug", Variant: w.MonoFace}, w.PrintCell{Name: "Дописать раздел про кэш", Detail: "nextcloud · Работа · 70%", Tick: w.PrintTickOpen}}}, w.PrintFoot{Text: "Carrel · tasks · Open · 4 of 7 · captured 2026-08-15 09:41 · 2 of 2 lists"}}, Variant: w.PagePrint}, "print-4", "tc-root"),
 	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Анна Ковалёва"}, w.PrintSources{Text: "nextcloud · Контакты"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Organisation"}, w.PrintCell{Name: "Издательство «Слово»"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Title"}, w.PrintCell{Name: "Выпускающий редактор"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Phone · mobile"}, w.PrintCell{Name: "+7 912 445-10-88"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Phone · work"}, w.PrintCell{Name: "+7 495 120-45-00"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Email · work"}, w.PrintCell{Name: "a.kovaleva@example.org"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Email · second"}, w.PrintCell{Name: "anna.kovaleva@slovo.example"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Address · work"}, w.PrintCell{Name: "Тверская 12, стр. 3, Москва, 123001, Россия"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Birthday"}, w.PrintCell{Name: "1987-03-14"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Tags"}, w.PrintCell{Name: "работа, издательство"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Note"}, w.PrintCell{Name: "Пишет по вторникам, отвечает в тот же день."}}, Field: true}, w.PrintRubric{Text: "Kept as the server sent them"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "X-EVOLUTION-FILE-AS"}, w.PrintCell{Name: "Ковалёва, Анна"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "X-ABLABEL"}, w.PrintCell{Name: "издательство"}}, Field: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "X-CARREL-UNKNOWN-FLAG"}, w.PrintCell{Name: "1"}}, Field: true}, w.PrintFoot{Text: "Carrel · contact · captured 2026-08-15 09:41"}}, Variant: w.PagePrint}, "print-3", "tc-root"),
 	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Contacts · Combined address book"}, w.PrintSources{Text: "nextcloud · Контакты, Архив · radicale · vps · Команда"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Phone"}, w.PrintNum{Text: "Email"}}, Columns: true, Head: true}, w.PrintRubric{Text: "А"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Алексей Смирнов", Detail: "nextcloud · Контакты"}, w.PrintNum{Text: "+7 916 200-71-15"}, w.PrintNum{Text: "—"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Анна Ковалёва", Detail: "Издательство «Слово» · in 3 books"}, w.PrintNum{Text: "+7 912 445-10-88"}, w.PrintNum{Text: "a.kovaleva@example.org"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Артём Белов", Detail: "Тензор · in 2 books"}, w.PrintNum{Text: "+7 903 118-22-04"}, w.PrintNum{Text: "a.belov@example.org"}}, Columns: true}, w.PrintRubric{Text: "В"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Вера Лебедева", Detail: "nextcloud · Архив"}, w.PrintNum{Text: "+7 905 331-09-42"}, w.PrintNum{Text: "vera@example.net"}}, Columns: true}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Виктор Гончаров", Detail: "Городская библиотека №4 · nextcloud · Контакты"}, w.PrintNum{Text: "—"}, w.PrintNum{Text: "v.goncharov@example.org"}}, Columns: true}, w.PrintRubric{Text: "Л"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Лебедева Вера", Detail: "Библиотека №4 · nextcloud · Контакты"}, w.PrintNum{Text: "+7 905 331-09-42"}, w.PrintNum{Text: "v.lebedeva@example.org"}}, Columns: true}, w.PrintRubric{Text: "М"}, w.PrintRow{Items: []w.PrintRowPart{w.PrintCell{Name: "Михаил Енученко", Detail: "nextcloud · Контакты"}, w.PrintNum{Text: "—"}, w.PrintNum{Text: "mix@example.org"}}, Columns: true}, w.PrintFoot{Text: "Carrel · contacts · 7 cards · captured 2026-08-15 09:41 · 3 of 3 books"}}, Variant: w.PagePrint}, "print-2", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
-						w.Tagline{
-							Lead:     "One desk. Every server.",
-							Text:     "Calendars, contacts, tasks, notes and files — one place.",
-							Centered: true,
-						},
-						w.AuthStack{
-							Items: []w.AuthStackPart{
-								w.Form{
-									Items: []w.FormPart{
-										w.Field{
-											Label: "Login",
-											Parts: []w.FieldPart{w.Input{Value: "mix", Label: "Login", Focus: true}},
-											Width: w.FieldW100,
-										},
-										w.Field{
-											Label: "Password",
-											Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Password"}},
-											Width: w.FieldW100,
-										},
-									},
-									Variant: w.FormColumnFlush,
-								},
-								w.Button{Label: "Sign in", Kind: w.ButtonPrimary},
-							},
-							Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}},
-						},
-					},
-					Variant: w.DialogNarrow,
-				},
-			},
-		},
-	}, "s-auth-1", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo60}},
+		w.Tagline{Lead: "One desk. Every server.", Text: "Contacts, calendars, tasks, notes and files — one place.", Centered: true},
+		w.AuthStack{Items: []w.AuthStackPart{w.Form{Items: []w.FormPart{w.Field{Label: "Login", Parts: []w.FieldPart{w.Input{Value: "mix", Label: "Login", Focus: true}}, Width: w.FieldW100}, w.Field{Label: "Password", Parts: []w.FieldPart{w.Input{Value: "••••••••••", Label: "Password"}}, Width: w.FieldW100}}, Variant: w.FormColumnFlush}, w.Button{Label: "Sign in", Kind: w.ButtonPrimary}}, Links: []w.Link{{Text: "Create an account"}, {Text: "Forgotten your password?"}}}}, Variant: w.DialogNarrow}}}}, "s-auth-1", "tc-root"),
 	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
 		w.DialogTitle{Text: "Create an account", Gap: w.DialogTitleGapTight},
 		w.DialogSub{Parts: []w.Inline{w.Text("A confirmation link will be sent to the address you give; the account cannot be used until you open it.")}},
@@ -220,35 +186,13 @@ var _ = add(
 			},
 		},
 	}, "rest-2", "tc-root"),
-	page("plain", w.Page{
-		Items: []w.PagePart{
-			w.Auth{
-				Dialog: w.Dialog{
-					Items: []w.DialogPart{
-						w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, Wide: true},
-						w.DialogTitle{Text: "Carrel"},
-						w.DialogSub{Parts: []w.Inline{w.Mono{Text: "0.0.1 · 786949a"}}},
-						w.Tagline{Lead: "One desk. Every server.", Text: "Calendars, contacts, tasks, notes and files — one place."},
-						w.Prose{
-							Parts: []w.Inline{
-								w.Text("AGPL-3.0-or-later: if you run a modified version for others, you must make the source available to them."),
-							},
-							Variant: w.ProseMuted,
-						},
-						w.FormFoot{
-							Items: []w.FormFootPart{
-								w.Button{Label: "Source code", Small: true},
-								w.Button{Label: "Third-party licences", Small: true},
-								w.Push{Items: []w.PushPart{w.Button{Label: "Back to sign in"}}},
-							},
-							Variant: w.FormFootFlush,
-						},
-					},
-					Variant: w.DialogNarrow,
-				},
-			},
-		},
-	}, "rest-3", "tc-root"),
+	page("plain", w.Page{Items: []w.PagePart{w.Auth{Dialog: w.Dialog{Items: []w.DialogPart{
+		w.DialogLogo{Logo: w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, Wide: true},
+		w.DialogTitle{Text: "Carrel"},
+		w.DialogSub{Parts: []w.Inline{w.Mono{Text: "0.0.1 · 786949a"}}},
+		w.Tagline{Lead: "One desk. Every server.", Text: "Contacts, calendars, tasks, notes and files — one place."},
+		w.Prose{Parts: []w.Inline{w.Text("AGPL-3.0-or-later: if you run a modified version for others, you must make the source available to them.")}, Variant: w.ProseMuted},
+		w.FormFoot{Items: []w.FormFootPart{w.Button{Label: "Source code", Small: true}, w.Button{Label: "Third-party licences", Small: true}, w.Push{Items: []w.PushPart{w.Button{Label: "Back to sign in"}}}}, Variant: w.FormFootFlush}}, Variant: w.DialogNarrow}}}}, "rest-3", "tc-root"),
 	page("print", w.Page{Items: []w.PagePart{w.PrintTitle{Text: "Agenda · 10 – 16 August 2026"}, w.PrintSources{Text: "nextcloud · Личный, Работа · radicale · vps · Проекты, Дежурства"}, w.PrintRubric{Text: "Monday · 10 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "10:00", Variant: w.MonoFace}, w.PrintCell{Name: "Синк-ап по релизу", Detail: "Переговорная 2 · 4 attendees · repeats weekly · nextcloud · Личный"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · nextcloud · Работа"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Дежурство: первая линия", Detail: "repeats weekly · radicale · vps · Дежурства"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "15:00", Variant: w.MonoFace}, w.PrintCell{Name: "Созвон с подрядчиком", Detail: "Jitsi · tentative · nextcloud · Работа"}}}, w.PrintRubric{Text: "Tuesday · 11 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "09:30", Variant: w.MonoFace}, w.PrintCell{Name: "Ревью архитектуры", Detail: "Переговорная 1 · 2 attendees · radicale · vps · Проекты"}}}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "18:00", Variant: w.MonoFace}, w.PrintCell{Name: "Забрать документы", Detail: "МФЦ, Мясницкая 13 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Wednesday · 12 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 1 of 3 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Thursday · 13 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 2 of 3 · nextcloud · Личный"}}}, w.PrintRubric{Text: "Friday · 14 August"}, w.PrintRow{Items: []w.PrintRowPart{w.Mono{Text: "all day", Variant: w.MonoFace}, w.PrintCell{Name: "Поездка в Казань", Detail: "day 3 of 3 · nextcloud · Личный"}}}, w.PrintFoot{Text: "Carrel · agenda · 2026-08-10 – 2026-08-16 · captured 2026-08-15 09:41 · 5 of 7 sources"}}, Variant: w.PagePrint}, "print-1", "tc-root"),
 	page("plain", w.Page{Items: []w.PagePart{w.Window{Items: []w.WindowPart{w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63", Size: w.Logo42}, w.Stack{Gap: w.StackGapNormal, Items: []w.StackPart{w.Card{Items: []w.CardPart{
 		w.CardPick{Title: "Just for me", Note: []w.CardTextPart{w.Text("Installs into your own profile. No administrator needed.")}}}, Variant: w.CardChosenFlush}, w.Card{Items: []w.CardPart{

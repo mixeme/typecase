@@ -624,6 +624,8 @@ func (Line) emptyPart()     {}
 func (Dim) emptyPart()      {}
 func (Aside) emptyPart()    {}
 
+func (ScriptPair) emptyPart() {}
+
 // Aside is running text in a face of its own that holds more than words: a
 // sentence with a monospaced name in it.
 type Aside struct {

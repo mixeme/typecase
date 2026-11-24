@@ -232,6 +232,7 @@ var Routes = []Route{
 	{Frame: "rest-2", Caption: "Адрес подтверждён", Screen: Rest2},
 	{Frame: "rest-3", Caption: "О программе", Screen: Rest3},
 	{Frame: "states-1", Caption: "Ничего не подключено", Screen: States1},
+	{Frame: "states-37", Caption: "Файлы · ничего не подключено", Screen: States37},
 	{Frame: "states-2", Caption: "Файлы есть в навигации always", Screen: States2},
 	{Frame: "states-3", Caption: "Загрузка", Screen: States3},
 	{Frame: "states-4", Caption: "Только для чтения", Screen: States4},

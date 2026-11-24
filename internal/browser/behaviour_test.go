@@ -2999,9 +2999,12 @@ func TestScriptOnly(t *testing.T) {
 	needChrome(t)
 	body := `<div class="tc-root">` + w.Msg{Parts: []w.MsgPart{w.Text("Drop files")}, ScriptOnly: true}.Render() +
 		w.Msg{Parts: []w.MsgPart{w.Text("Needs scripts")}, NoScript: true}.Render() +
-		w.Button{Label: "Paste", ScriptOnly: true}.Render() + w.Button{Label: "Upload", NoScript: true}.Render() + `</div>`
+		w.Button{Label: "Paste", ScriptOnly: true}.Render() + w.Button{Label: "Upload", NoScript: true}.Render() +
+		// the words of an empty state and a photo's note in pairs (Carrel's task 278)
+		w.Empty{Parts: []w.EmptyPart{w.ScriptPair{With: []w.Inline{w.Text("Or drop")}, Without: []w.Inline{w.Text("No drop")}}}}.Render() +
+		w.Dialog{Items: []w.DialogPart{w.PhotoCrop{Note: "Drag", NoScript: "Stays"}}}.Render() + `</div>`
 	h := browser.NewHarness(t)
-	const shown = `[...document.querySelectorAll(".tc-msg, .tc-btn")].filter(e => e.getClientRects().length).map(e => e.textContent).join(",")`
+	const shown = `[...document.querySelectorAll(".tc-msg, .tc-btn, .tc-empty > span, .tc-dialog__side > span")].filter(e => e.getClientRects().length).map(e => e.textContent).join(",")`
 	var with, bare string
 	if err := h.Run(h.RegisterPage("scriptonly", browser.PageHTML(body, "")), 900, 300, chromedp.Evaluate(shown, &with)); err != nil {
 		t.Fatal(err)
@@ -3010,8 +3013,8 @@ func TestScriptOnly(t *testing.T) {
 	if err := h.Run(h.RegisterPage("scriptonly-bare", doc), 900, 300, chromedp.Evaluate(shown, &bare)); err != nil {
 		t.Fatal(err)
 	}
-	if with != "Drop files,Paste" || bare != "Needs scripts,Upload" {
-		t.Errorf("shown with a script %q, without %q; want «Drop files,Paste», «Needs scripts,Upload»", with, bare)
+	if with != "Drop files,Paste,Or drop,Drag" || bare != "Needs scripts,Upload,No drop,Stays" {
+		t.Errorf("shown with a script %q, without %q; want «Drop files,Paste,Or drop,Drag», «Needs scripts,Upload,No drop,Stays»", with, bare)
 	}
 }
 
