@@ -1873,7 +1873,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--paste.tc-in--paste{font-size:11px;white-space:pre-wrap;min-height:88px;align-items:flex-start}
 .tc-in--key-sm.tc-in--key-sm{min-width:200px;font-size:13px;letter-spacing:.03em}
 .tc-in--line.tc-in--line{min-width:220px;max-width:540px;font-size:11px}
-.tc-in--wrap-gap.tc-in--wrap-gap{flex-wrap:wrap;gap:var(--tc-gap-tight)}
 .tc-in--note.tc-in--note{min-height:82px;font-size:13.5px;line-height:1.6}
 .tc-in--t11-5-fill.tc-in--t11-5-fill{font-size:11.5px;flex:1}
 .tc-in--h26-w120.tc-in--h26-w120{height:26px;width:120px}
@@ -28848,7 +28847,7 @@ Read    2 min ago</div>
 
 <figure>
 <div class="frame" data-frame="s-mailbox-15">
-  <div class="frame-label"><span>Ответ со своего ящика</span><span class="frag">отложена</span><i>Reply all на письме</i></div>
+  <div class="frame-label"><span>Ответ со своего ящика</span><i>Reply all на письме</i></div>
   <div class="tc-root tc-shell">
     <div class="tc-top">
       <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
@@ -28979,21 +28978,22 @@ Read    2 min ago</div>
     </div>
 
       <div class="tc-scrim">
-        <div class="tc-sheet tc-sheet--w680">
+        <form class="tc-sheet tc-sheet--w680" id="letter" action="/app/mail/send" method="post">
           <div class="tc-sheet__head">
             <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-replyall"/></svg>
             <b class="tc-sheet__title">Reply all</b>
             <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">plain text</span>
-            <button class="tc-btn tc-close" title="Close" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+            <a class="tc-btn tc-close" href="/app/mail/home/inbox/48213" title="Close" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></a>
           </div>
           <div class="tc-sheet__body">
-            <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
+            <div class="tc-field tc-field--w100"><label>From</label><span class="tc-in is-pick"><select class="tc-in__list" name="from" aria-label="From"><option value="home" selected>Михаил Енученко · mix@home.example</option></select></span></div>
             <div class="tc-field tc-field--w100"><label>To</label>
-              <span class="tc-line tc-line--normal"><span class="tc-in tc-in--wrap-gap tc-in--fill"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span><button class="tc-btn" title="Add blind copy" type="button">Bcc</button></span></div>
+              <span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
             <div class="tc-field tc-field--w100"><label>Cc</label>
-              <span class="tc-in tc-in--wrap-gap"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Пётр Смирнов · p.smirnov@example.org</span></span></div>
-            <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" value="Re: Вёрстка сборника: правки и встреча в четверг" aria-label="Subject"></div>
-            <textarea class="tc-in is-area tc-in--note is-focus">Анна, спасибо! Подписи поправлю к пятнице, исправленная вёрстка во вложении. В четверг буду.
+              <span class="tc-drop"><span class="tc-in tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="p.smirnov@example.org"><input class="tc-check__box" type="checkbox" name="cc" value="p.smirnov@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Пётр Смирнов <span class="tc-dim">· p.smirnov@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="cc.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
+            <div class="tc-field"><span class="tc-line tc-line--normal"><button class="tc-btn is-sm" type="submit" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
+            <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" name="subject" value="Re: Вёрстка сборника: правки и встреча в четверг" aria-label="Subject"></div>
+            <div class="tc-field tc-field--w100"><textarea class="tc-in is-area tc-in--note" name="text">Анна, спасибо! Подписи поправлю к пятнице, исправленная вёрстка во вложении. В четверг буду.
 
 -- 
 Михаил Енученко
@@ -29003,43 +29003,44 @@ Read    2 min ago</div>
 &gt; Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:
 &gt; — на с. 14 и 37 съехали подписи к иллюстрациям;
 &gt; — в оглавлении не тот номер у главы «Переплёт»;</textarea>
-            <span class="tc-field__hint">Signature of <b>home</b>, set in Connections → home → Edit. It follows the mailbox you send from.</span>
+              <span class="tc-field__hint">Signature of <b>home</b>, set in Connections → home → Edit. It follows the mailbox you send from.</span></div>
             <div class="tc-sec tc-sec--flush-flush-padt">
               <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">1</span>
-                <span class="tc-push tc-line tc-line--normal"><button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span></div>
+                <span class="tc-push tc-line tc-line--normal"><details class="tc-drop"><summary class="tc-btn is-sm"><svg viewBox="0 0 24 24"><use href="#i-clip"/></svg>Attach<svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></summary><div class="tc-menu is-pop is-right tc-menu--w212"><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=contact" role="menuitem"><svg><use href="#i-con"/></svg>Contact</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=book" role="menuitem"><svg><use href="#i-con"/></svg>Address book</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=event" role="menuitem"><svg><use href="#i-cal"/></svg>Event</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=calendar" role="menuitem"><svg><use href="#i-cal"/></svg>Calendar</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=task" role="menuitem"><svg><use href="#i-task"/></svg>Task</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=note" role="menuitem"><svg><use href="#i-note"/></svg>Note</button><span class="tc-menu__sep"></span><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=file" role="menuitem"><svg><use href="#i-doc"/></svg>File</button><button class="tc-menu__item" type="submit" formaction="/app/mail/send?op=attach&amp;what=folder" role="menuitem"><svg><use href="#i-file"/></svg>Folder<span class="tc-tag tc-push">link</span></button></div></details></span></div>
               <div class="tc-stack tc-stack--tight tc-card__top8">
                 <div class="tc-line tc-line--normal tc-line__text">
                   <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">вёрстка-сборник-v4.pdf</span></span>
                   <span class="tc-mono tc-mono--dusty-t11">3.1 MB</span>
                   <span class="tc-tag">attached</span>
-                  <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
+                  <button class="tc-btn is-sm" title="Remove" type="submit" formaction="/app/mail/send?op=remove&amp;i=0"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
               </div>
-              <div class="tc-field__hint tc-field__hint--above-normal">home takes letters up to <b>25 MB</b>. This one is 3.2 MB.</div>
+              <div class="tc-msg is-accent tc-msg--flush-above-wide">home takes letters up to <b>25 MB</b>. This one is 3.2 MB.</div>
             </div>
           </div>
           <div class="tc-sheet__foot">
-            <button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
-            <button class="tc-btn" type="button">Save draft</button>
+            <button class="tc-btn is-primary" type="submit" data-tc-busy="Sending…"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button><kbd class="tc-kbd">Ctrl+Enter</kbd>
+            <button class="tc-btn" type="submit" formaction="/app/mail/send?op=draft">Save draft</button>
             <span class="tc-dim tc-dim--t11-5 tc-dim--wrap">Draft saved in home · Drafts at <span class="tc-mono">10:41</span></span>
-            <span class="tc-push tc-line tc-line--normal"><button class="tc-btn" type="button">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
+            <span class="tc-push tc-line tc-line--normal"><button class="tc-btn" type="submit" formaction="/app/mail/send?op=close">Cancel</button><kbd class="tc-kbd">Esc</kbd></span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>Cc и Bcc видны, только когда в них кто-то есть.</b> «Reply all» заполнил Cc, поэтому поле стоит. Bcc пуст, и от него осталась кнопка справа от поля To. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («Up to 10 recipients») здесь не появляется.<br><br><b>Подпись — своя у каждого ящика</b> и встаёт под текстом, над цитатой, после строки <span class="tc-mono">-- </span>: почтовые программы её узнают и сворачивают. Сменили ящик в поле From — подпись в тексте меняется на подпись нового ящика. Задаётся она в правке ящика (кадр «Ящик · правка»). <b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
+<figcaption><b>Отправитель стал полем.</b> В письме через релей (s-mail-1) он был меткой в шапке: выбирать было не из чего. Теперь выбор есть, и поле — первое в листе. Ответ уходит с ящика, в который пришло письмо. Новое письмо — с ящика последнего письма в этой сессии. <b>Cc и Bcc видны, только когда в них кто-то есть.</b> «Reply all» заполнил Cc, поэтому поле стоит. Bcc пуст, и от него осталась кнопка под полями. <b>«Reply all» берёт To и Cc без адресов самого ящика:</b> здесь нет <span class="tc-mono">mix@home.example</span>, хотя он был в To исходного письма.<br><br><b>Цитата — строками <span class="tc-mono">&gt;</span></b> из текстового вида исходного письма, под ответом, с датой и именем. Письмо уходит <span class="tc-mono">text/plain; format=flowed</span>, и в шапке листа это сказано: редактора разметки нет намеренно. <b>Размер сервера виден до отправки.</b> Сервер объявил <span class="tc-mono">SIZE</span> в ответе <span class="tc-mono">EHLO</span>, и лист сверяет письмо заранее. Своих потолков у Carrel для своего ящика нет: строка лимитов релея («Up to 10 recipients») здесь не появляется.<br><br><b>Подпись — своя у каждого ящика</b> и встаёт под текстом, над цитатой, после строки <span class="tc-mono">-- </span>: почтовые программы её узнают и сворачивают. Сменили ящик в поле From — подпись в тексте меняется на подпись нового ящика. Задаётся она в правке ящика (кадр «Ящик · правка»). <b>Черновик — в папку Drafts ящика, а не в сессию.</b> Он сохраняется по кнопке и при закрытии листа с текстом. Строка в подвале говорит, когда он лёг туда в последний раз. Автосохранения по таймеру нет.</figcaption>
 </figure>
 
 <figure>
 <div class="frame cap660" data-frame="s-mailbox-16">
-  <div class="frame-label"><span>Новое письмо · Cc и Bcc спрятаны</span><span class="frag">отложена</span><i>шапка листа, Write a letter из хронологии</i></div>
-  <div class="tc-root tc-root--on-bg tc-root--pad14">
-    <div class="tc-stack tc-stack--wide">
-      <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick" type="button">Михаил Енученко · mix@home.example</button></div>
+  <div class="frame-label"><span>Новое письмо · Cc и Bcc спрятаны</span><span class="frag">фрагмент</span><i>шапка листа, Write a letter из хронологии</i></div>
+  <div class="tc-root tc-root--on-bg">
+    <div class="tc-sheet__body">
+      <div class="tc-field tc-field--w100"><label>From</label><span class="tc-in is-pick"><select class="tc-in__list" name="from" aria-label="From"><option value="home" selected>Михаил Енученко · mix@home.example</option></select></span></div>
       <div class="tc-field tc-field--w100"><label>To</label>
-        <span class="tc-line tc-line--normal"><span class="tc-in tc-in--wrap-gap tc-in--fill is-focus"><span class="tc-tag"><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва · a.kovaleva@example.org</span></span><button class="tc-btn" title="Add copy" type="button">Cc</button><button class="tc-btn" title="Add blind copy" type="button">Bcc</button></span></div>
-      <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in is-ph" type="text" placeholder="Subject" aria-label="Subject"></div>
+        <span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
+      <div class="tc-field"><span class="tc-line tc-line--normal"><button class="tc-btn is-sm" type="submit" form="letter" formaction="/app/mail/send?op=cc">Cc</button><button class="tc-btn is-sm" type="submit" form="letter" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
+      <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in is-ph" type="text" name="subject" form="letter" placeholder="Subject" aria-label="Subject"></div>
     </div>
   </div>
 </div>
@@ -29049,14 +29050,14 @@ Read    2 min ago</div>
 <div class="frames">
   <figure style="flex:1 1 440px">
   <div class="frame" data-frame="s-mailbox-17">
-    <div class="frame-label"><span>С какого адреса</span><span class="frag">отложена</span><i>поле From внутри листа, экран целиком — выше</i></div>
+    <div class="frame-label"><span>С какого адреса</span><span class="frag">фрагмент</span><i>поле From внутри листа, экран целиком — выше</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-stack tc-root__compose">
-        <div class="tc-field tc-field--w100"><label>From</label><button class="tc-in is-pick is-focus" type="button">Михаил Енученко · mix@home.example</button></div>
+        <div class="tc-field tc-field--w100"><label>From</label><span class="tc-in is-pick is-focus"><select class="tc-in__list" name="from" aria-label="From"><option value="home" selected>Михаил Енученко · mix@home.example</option></select></span></div>
         <div class="tc-menu tc-menu--full">
           <div class="tc-rubric">Your mailboxes</div>
           <button class="is-on tc-menu__item" type="button" role="menuitem"><svg><use href="#i-mail"/></svg>mix@home.example<span class="tc-tag tc-push">home</span></button>
-          <button class="tc-menu__item tc-menu__item--muted" type="button" role="menuitem" disabled><svg><use href="#i-mail"/></svg>m.yenuchenko@office.example<span class="tc-dim--danger tc-push">sending does not work</span></button>
+          <button class="tc-menu__item tc-menu__item--muted" title="office: the server refused the password for sending." type="button" role="menuitem" disabled><svg><use href="#i-mail"/></svg>m.yenuchenko@office.example <span class="tc-dim--danger">sending does not work</span></button>
           <span class="tc-menu__sep"></span>
           <div class="tc-rubric">Through Carrel</div>
           <button class="tc-menu__item" type="button" role="menuitem"><svg><use href="#i-server"/></svg>noreply@carrel.example<span class="tc-tag tc-push">relay</span></button>
@@ -29071,7 +29072,7 @@ Read    2 min ago</div>
 
   <figure style="flex:1 1 440px">
   <div class="frame" data-frame="s-mailbox-18">
-    <div class="frame-label"><span>Больше, чем берёт сервер</span><span class="frag">отложена</span><i>вложения внутри листа</i></div>
+    <div class="frame-label"><span>Больше, чем берёт сервер</span><span class="frag">фрагмент</span><i>вложения внутри листа</i></div>
     <div class="tc-root tc-root--on-bg tc-root--pad14">
       <div class="tc-sec tc-sec--flush-flush-padt">
         <div class="tc-rubric tc-line tc-line--normal">Attached<span class="tc-num">2</span></div>
@@ -29080,12 +29081,12 @@ Read    2 min ago</div>
             <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-doc"/></svg><span class="tc-table__filename">вёрстка-сборник-v4.pdf</span></span>
             <span class="tc-mono tc-mono--dusty-t11">3.1 MB</span>
             <span class="tc-tag">attached</span>
-            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
+            <button class="tc-btn is-sm" title="Remove" type="submit" form="letter" formaction="/app/mail/send?op=remove&amp;i=0"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
           <div class="tc-line tc-line--normal tc-line__text">
             <span class="tc-table__file tc-table__file--fill"><svg><use href="#i-img"/></svg><span class="tc-table__filename">съёмка-обложки.mov</span></span>
             <span class="tc-mono tc-mono--dusty-t11">38 MB</span>
             <span class="tc-tag is-on">as a link</span>
-            <button class="tc-btn is-sm" type="button"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
+            <button class="tc-btn is-sm" title="Remove" type="submit" form="letter" formaction="/app/mail/send?op=remove&amp;i=1"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button></div>
         </div>
         <div class="tc-msg is-accent tc-msg--flush-above-wide">home takes letters up to <b>25 MB</b>, and the video alone is 38 MB. It goes as a link for 30 days; revoke it in <b>Published links</b>.</div>
       </div>
@@ -29098,9 +29099,9 @@ Read    2 min ago</div>
 <div class="frames">
   <figure style="flex:1 1 440px">
   <div class="frame" data-frame="s-mailbox-19">
-    <div class="frame-label"><span>Сервер отказал</span><span class="frag">отложена</span><i>подвал листа после Send</i></div>
-    <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-stack tc-stack--wide">
+    <div class="frame-label"><span>Сервер отказал</span><span class="frag">фрагмент</span><i>подвал листа после Send</i></div>
+    <div class="tc-root tc-root--on-bg">
+      <div class="tc-sheet__body">
         <div class="tc-msg is-alert tc-msg--flush">The mail server of <b>home</b> did not take the letter; nothing was sent. Its answer:</div>
         <div class="tc-diag">EHLO carrel          → 250 SIZE 26214400 · AUTH PLAIN LOGIN
 AUTH PLAIN          → 235 2.7.0 Authentication successful
@@ -29109,8 +29110,8 @@ RCPT TO:&lt;a.kovaleva@example.org&gt; → 250 2.1.5 Ok
 RCPT TO:&lt;p.smirnov@example.org&gt;  → 250 2.1.5 Ok
 DATA                → 550 5.7.1 Daily sending limit reached
                       for mix@home.example; try after 00:00 UTC</div>
-        <div class="tc-line tc-line--normal"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button><button class="tc-btn" type="button">Save draft</button><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The limit is your mail server's, not Carrel's.</span></div>
       </div>
+      <div class="tc-sheet__foot"><button class="tc-btn is-primary" type="submit" form="letter"><svg viewBox="0 0 24 24"><use href="#i-send"/></svg>Send</button><button class="tc-btn" type="submit" form="letter" formaction="/app/mail/send?op=draft">Save draft</button><span class="tc-dim tc-dim--t11-5 tc-dim--wrap">The limit is your mail server's, not Carrel's.</span></div>
     </div>
   </div>
   <figcaption><b>Отказ — полным ответом сервера</b>, как пробное письмо администратора. «Не удалось отправить» не говорит ничего. Здесь видно, на каком шаге и почему, и что лимит — сервера. Письмо остаётся в листе, черновик можно сохранить. Журнал экземпляра запишет только факт попытки, число получателей и вложений, без адресов и темы (M-7).</figcaption>
@@ -29118,13 +29119,13 @@ DATA                → 550 5.7.1 Daily sending limit reached
 
   <figure style="flex:1 1 440px">
   <div class="frame" data-frame="s-mailbox-20">
-    <div class="frame-label"><span>Письмо ушло, копии в Sent нет</span><span class="frag">отложена</span><i>лист после Send</i></div>
-    <div class="tc-root tc-root--on-bg tc-root--pad14">
-      <div class="tc-stack tc-stack--wide">
+    <div class="frame-label"><span>Письмо ушло, копии в Sent нет</span><span class="frag">фрагмент</span><i>лист после Send</i></div>
+    <div class="tc-root tc-root--on-bg">
+      <div class="tc-sheet__body">
         <div class="tc-msg is-accent tc-msg--flush"><b>The letter went out</b> to 2 recipients from mix@home.example.</div>
         <div class="tc-msg tc-msg--flush">Its copy did not reach <b>Sent</b>: the server answered <span class="tc-mono">APPEND → NO [OVERQUOTA] Quota exceeded</span>. The recipients have the letter. Free some space in the mailbox: Carrel keeps no copy to put there later.</div>
-        <div class="tc-line tc-line--normal"><button class="tc-btn" type="button">Close</button></div>
       </div>
+      <div class="tc-sheet__foot"><a class="tc-btn" href="/app/mail/home/inbox/48213">Close</a></div>
     </div>
   </div>
   <figcaption><b>Две строки, а не одна ошибка.</b> Письмо ушло — это главное, и оно сказано первым. Сбой копии — отдельное, меньшее событие со своим ответом сервера. Если выдать его за ошибку отправки, человек отправит письмо второй раз. Когда на подключении отмечено «сервер кладёт копию сам», Carrel копию не кладёт вовсе, и этой строки не бывает.</figcaption>
@@ -29755,19 +29756,19 @@ SMTP  mail.home.example:465  TLS
 
   <figure style="flex:1 1 400px">
   <div class="frame" data-frame="s-mailbox-32">
-    <div class="frame-label"><span>Закрыть лист, когда черновикам некуда лечь</span><span class="frag">отложена</span><i>поверх листа письма</i></div>
-    <div class="tc-root tc-root--on-bg tc-root--pad16">
-      <div class="tc-sheet tc-sheet--max100pc-full">
+    <div class="frame-label"><span>Закрыть лист, когда черновикам некуда лечь</span><span class="frag">фрагмент</span><i>поверх листа письма</i></div>
+    <div class="tc-root tc-root--on-bg tc-root--pad14">
+      <form class="tc-sheet tc-sheet--w480" action="/app/mail/send?op=discard" method="post">
         <div class="tc-sheet__head">
-          <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--muted"><use href="#i-mail"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="tc-ico--accent"><use href="#i-mail"/></svg>
           <b class="tc-sheet__title">Close the letter?</b>
           <span class="tc-push tc-dim tc-dim--t11-5 tc-dim--wrap">from office</span>
         </div>
         <div class="tc-sheet__body">
           <div class="tc-msg tc-msg--flush">office has no Drafts folder: <b>closing loses the text</b>.</div>
         </div>
-        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="button">Close and lose the text</button><span class="tc-push tc-line tc-line--normal"><button class="tc-btn is-primary" type="button">Keep writing</button><kbd class="tc-kbd">Esc</kbd></span></div>
-      </div>
+        <div class="tc-sheet__foot"><button class="tc-btn is-danger-solid" type="submit">Close and lose the text</button><span class="tc-push tc-line tc-line--normal"><a class="tc-btn is-primary" href="/app/mail/compose">Keep writing</a><kbd class="tc-kbd">Esc</kbd></span></div>
+      </form>
     </div>
   </div>
   <figcaption><b>Единственный случай, когда закрытие листа спрашивает.</b> Если у ящика есть Drafts, закрытие с текстом просто кладёт черновик туда. Кнопки «Save draft» в таком листе нет вовсе (M-7). Главное действие — продолжать писать: оно ничего не теряет, и Esc ведёт к нему.</figcaption>

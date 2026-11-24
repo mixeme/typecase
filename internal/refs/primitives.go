@@ -200,6 +200,7 @@ var _ = add(
 	primitive("photo", w.Avatar{Photo: true, Size: w.Avatar34}, "phone-4", "tc-avatar"),
 
 	// tc-dim
+	primitive("mail", w.Dim{Parts: []w.Inline{w.Text("Draft saved in home · Drafts at "), w.Mono{Text: "10:41"}}, Size: w.Dim11_5, Variant: w.DimWrap}, "s-mailbox-15", "tc-dim"),
 	primitive("mark", w.Dim{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Parts: []w.Inline{w.Text("Контакты")}}, "s-contacts-1", "tc-dim"),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("issued 2 August · last run 16 August 03:10 from "), w.Mono{Text: "10.0.0.5"}, w.Text(" · 14 runs")}, Size: w.Dim11_5}, "s-backup-12", "tc-dim"),
 	primitive("plain", w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}, "s-contacts-6", "tc-dim"),

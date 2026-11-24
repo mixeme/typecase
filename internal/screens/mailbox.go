@@ -1120,6 +1120,428 @@ func Mailbox12() Screen {
 	}
 }
 
+// Mailbox15 is frame «Ответ со своего ящика» (s-mailbox-15).
+func Mailbox15() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.Overlay{
+			Body: w.OverlayBody{
+				Rail: []w.OverlayRailPart{
+					w.Nav{
+						Items: []w.NavItem{
+							{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+							{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+							{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+							{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+							{Icon: "file", Label: "Files", Href: "#"},
+							{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+							{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+						},
+						On: 6,
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{
+								Text: "",
+								Items: []w.RubricPart{
+									w.Line{
+										Items: []w.LinePart{w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, w.Text("home")},
+										Gap:   w.LineGapNormal,
+									},
+								},
+							},
+							w.Tree{
+								Rows: []w.TreeRow{
+									{Icon: "inbox", Label: "Inbox", Count: &w.Num{Value: 12}},
+									{Icon: "pencil", Label: "Drafts", Count: &w.Num{Value: 1}},
+									{Icon: "send", Label: "Sent"},
+									{Icon: "archive", Label: "Archive"},
+									{Icon: "spam", Label: "Spam", Count: &w.Num{Value: 3}},
+									{Icon: "trash", Label: "Trash"},
+									{Icon: "file", Label: "Стройка", Count: &w.Num{Value: 2}},
+									{Icon: "file", Label: "Рассылки"},
+								},
+								On:      1,
+								Variant: w.TreePadded,
+							},
+						},
+					},
+					w.RailSec{
+						Items: []w.RailSecPart{
+							w.Rubric{
+								Text: "",
+								Items: []w.RubricPart{
+									w.Line{
+										Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office")},
+										Gap:   w.LineGapNormal,
+									},
+								},
+							},
+						},
+						Failed: "no reply · 8 s",
+						Why:    "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.",
+						Retry:  &w.Button{Label: "Retry", Href: "?retry=office"},
+					},
+					w.RailFoot{
+						Items: []w.RailFootPart{
+							w.Button{Icon: "mail", Title: "Connect a mailbox"},
+							w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+						},
+						About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+					},
+				},
+				Main: w.Main{
+					Items: []w.MainPart{
+						w.Head{
+							Meta: &w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Mark{Colour: "#A05A2C", Size: w.MarkH12},
+									w.Text("home · Inbox · "),
+									w.Mono{Text: "2026-09-24 10:12"},
+								},
+							},
+							Acts: &w.Acts{
+								Items: []w.ActsPart{
+									w.Button{Label: "Reply", Icon: "reply", Kind: w.ButtonPrimary},
+									w.Button{Label: "Reply all", Icon: "replyall"},
+									w.Button{Label: "Forward", Icon: "forward"},
+									w.Button{Label: "Archive", Icon: "archive", Title: "Archive"},
+									w.Button{Icon: "trash", Title: "Move to Trash"},
+									w.Button{Icon: "dots", Title: "More"},
+								},
+							},
+							Pad: w.HeadRule,
+						},
+						w.DocLayout{
+							Items: []w.DocLayoutPart{
+								w.Doc{
+									Items: []w.DocPart{
+										w.DocTitle{Text: "Вёрстка сборника: правки и встреча в четверг"},
+										w.Fields{
+											Items: []w.FieldsItem{
+												{
+													Term:  "From",
+													Value: []w.ValuePart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("a.kovaleva@example.org")}}},
+												},
+												{
+													Term:  "To",
+													Value: []w.ValuePart{w.Text("Михаил Енученко "), w.Dim{Parts: []w.Inline{w.Text("mix@home.example")}}},
+												},
+												{
+													Term:  "Cc",
+													Value: []w.ValuePart{w.Text("Пётр Смирнов "), w.Dim{Parts: []w.Inline{w.Text("p.smirnov@example.org")}}},
+												},
+												{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-24 10:12")}, Face: w.ValueMono},
+											},
+											Variant: w.FieldsLetter,
+										},
+										w.DocRuled{
+											Items: []w.DocPart{
+												w.Prose{
+													Parts: []w.Inline{
+														w.Text("Михаил, добрый день!\n\nПрислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:"),
+													},
+													Variant: w.ProseRead,
+												},
+												w.DocBullets{
+													Items: [][]w.DocItemPart{
+														[]w.DocItemPart{w.Text("на с. 14 и 37 съехали подписи к иллюстрациям;")},
+														[]w.DocItemPart{w.Text("в оглавлении не тот номер у главы «Переплёт»;")},
+														[]w.DocItemPart{w.Text("обложку оставляем, как на прошлой неделе.")},
+													},
+												},
+												w.Prose{
+													Parts: []w.Inline{
+														w.Text("В четверг в 11:00 жду вас в издательстве, приглашение во вложении. Схема проезда — на сайте: "),
+														w.Link{Text: "Как нас найти", Href: "https://slovo.example/contacts", Address: "slovo.example/contacts"},
+														w.Text(". Карточку Петра прикладываю — он возьмёт печать тиража.\n\n—\nАнна Ковалёва\nИздательство «Слово»"),
+													},
+													Variant: w.ProseRead,
+												},
+												w.DocQuote{
+													Parts: []w.Inline{
+														w.Text("2026-09-22 18:40, Михаил Енученко: Анна, третья вёрстка у вас. Посмотрите, пожалуйста, подписи — у меня на двух разворотах они уехали."),
+													},
+												},
+											},
+										},
+										w.DocAttached{
+											Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Num{Value: 3}}, Variant: w.RubricBelow},
+											Items: []w.DocAttachment{
+												{
+													Icon: "cal",
+													Name: "Встреча в издательстве · 2026-09-26 11:00",
+													Size: w.Mono{Text: ".ics · 2 KB", Variant: w.MonoDusty11},
+													Acts: []w.Button{
+														w.Button{Label: "Add to calendar", Icon: "cal", Small: true},
+														w.Button{Icon: "download", Small: true, Title: "Download"},
+													},
+												},
+												{
+													Icon: "con",
+													Name: "Пётр Смирнов",
+													Size: w.Mono{Text: ".vcf · 3 KB", Variant: w.MonoDusty11},
+													Acts: []w.Button{
+														w.Button{Label: "Add to address book", Icon: "con", Small: true},
+														w.Button{Icon: "download", Small: true, Title: "Download"},
+													},
+												},
+												{
+													Icon: "doc",
+													Name: "правки-сборник-v3.pdf",
+													Size: w.Mono{Text: "2.4 MB", Variant: w.MonoDusty11},
+													Acts: []w.Button{
+														w.Button{Label: "Save to files", Icon: "file", Small: true},
+														w.Button{Icon: "download", Small: true, Title: "Download"},
+													},
+												},
+											},
+										},
+									},
+								},
+								w.Docmeta{
+									Sections: []w.DocmetaSec{
+										{
+											Title: w.Rubric{Text: "Sender"},
+											Items: []w.DocmetaPart{
+												w.DocRefs{
+													Items: []w.DocRef{
+														{
+															Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline},
+															Name: "Анна Ковалёва",
+															Href: "#",
+															What: w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}},
+														},
+														{Name: "Timeline", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· everything with her")}}},
+													},
+												},
+											},
+										},
+										{
+											Title: w.Rubric{Text: "Shown as"},
+											Items: []w.DocmetaPart{
+												w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}},
+												w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}},
+											},
+										},
+										{
+											Title: w.Rubric{Text: "Source"},
+											Items: []w.DocmetaPart{w.Diag{Text: "UID     48213\nFolder  INBOX\nSize    2.6 MB\nRead    2 min ago"}},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Scrim: w.Scrim{
+				Content: w.Sheet{
+					ID:     "letter",
+					Action: "/app/mail/send",
+					Icon:   "replyall",
+					Title:  "Reply all",
+					Head: []w.SheetHeadPart{
+						w.Dim{Parts: []w.Inline{w.Text("plain text")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed},
+						w.Close{Label: "Close", Href: "/app/mail/home/inbox/48213"},
+					},
+					Body: []w.SheetPart{
+						w.Field{
+							Label: "From",
+							Parts: []w.FieldPart{
+								w.Pick{
+									Name:    "from",
+									Options: []w.PickOption{{Value: "home", Label: "Михаил Енученко · mix@home.example", On: true}},
+									Label:   "From",
+								},
+							},
+							Width: w.FieldW100,
+						},
+						w.Field{
+							Label: "To",
+							Parts: []w.FieldPart{
+								w.Drop{
+									Trigger: w.TagInput{
+										Parts: []w.TagInputPart{
+											w.Tag{
+												Label:     "Анна Ковалёва",
+												Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+												Removable: true,
+												Aside:     &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}},
+												Title:     "a.kovaleva@example.org",
+												Name:      "to",
+												Value:     "a.kovaleva@example.org",
+											},
+										},
+										Name: "to",
+										Add: &w.TagAdd{
+											Name:        "to.add",
+											Placeholder: "Name or address",
+											Label:       "Add a recipient",
+											Suggest:     "/app/contacts/suggest",
+											Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
+										},
+										Focus: true,
+									},
+									Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+								},
+							},
+							Width: w.FieldW100,
+						},
+						w.Field{
+							Label: "Cc",
+							Parts: []w.FieldPart{
+								w.Drop{
+									Trigger: w.TagInput{
+										Parts: []w.TagInputPart{
+											w.Tag{
+												Label:     "Пётр Смирнов",
+												Mark:      &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11},
+												Removable: true,
+												Aside:     &w.Dim{Parts: []w.Inline{w.Text("· p.smirnov@example.org")}},
+												Title:     "p.smirnov@example.org",
+												Name:      "cc",
+												Value:     "p.smirnov@example.org",
+											},
+										},
+										Name: "cc",
+										Add: &w.TagAdd{
+											Name:        "cc.add",
+											Placeholder: "Name or address",
+											Label:       "Add a recipient",
+											Suggest:     "/app/contacts/suggest",
+											Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
+										},
+									},
+									Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+								},
+							},
+							Width: w.FieldW100,
+						},
+						w.Field{
+							Parts: []w.FieldPart{
+								w.Line{
+									Items: []w.LinePart{w.Button{Label: "Bcc", Small: true, To: "/app/mail/send?op=bcc", Submit: true}},
+									Gap:   w.LineGapNormal,
+								},
+							},
+						},
+						w.Field{
+							Label: "Subject",
+							Parts: []w.FieldPart{
+								w.Input{Name: "subject", Value: "Re: Вёрстка сборника: правки и встреча в четверг", Label: "Subject"},
+							},
+							Width: w.FieldW100,
+						},
+						w.Field{
+							Parts: []w.FieldPart{
+								w.Area{
+									Text:    "Анна, спасибо! Подписи поправлю к пятнице, исправленная вёрстка во вложении. В четверг буду.\n\n-- \nМихаил Енученко\nвёрстка и допечатная подготовка\n\n2026-09-24 10:12, Анна Ковалёва:\n> Прислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:\n> — на с. 14 и 37 съехали подписи к иллюстрациям;\n> — в оглавлении не тот номер у главы «Переплёт»;",
+									Variant: w.AreaLetter,
+									Name:    "text",
+									Label:   "Text",
+								},
+								w.FieldHint{
+									Parts: []w.Inline{
+										w.Text("Signature of "),
+										w.Strong("home"),
+										w.Text(", set in Connections → home → Edit. It follows the mailbox you send from."),
+									},
+								},
+							},
+							Width: w.FieldW100,
+						},
+						w.Sec{
+							Items: []w.SecPart{
+								w.Rubric{
+									Text: "Attached",
+									Items: []w.RubricPart{
+										w.Num{Value: 1},
+										w.Line{
+											Items: []w.LinePart{
+												w.Drop{
+													Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true},
+													Menu: w.Menu{
+														Items: []w.MenuPart{
+															w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
+															w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},
+															w.MenuItem{Icon: "cal", Label: "Event", To: "/app/mail/send?op=attach&what=event"},
+															w.MenuItem{Icon: "cal", Label: "Calendar", To: "/app/mail/send?op=attach&what=calendar"},
+															w.MenuItem{Icon: "task", Label: "Task", To: "/app/mail/send?op=attach&what=task"},
+															w.MenuItem{Icon: "note", Label: "Note", To: "/app/mail/send?op=attach&what=note"},
+															w.MenuSep{},
+															w.MenuItem{Icon: "doc", Label: "File", To: "/app/mail/send?op=attach&what=file"},
+															w.MenuItem{
+																Icon:  "file",
+																Trail: w.Tag{Label: "link", Place: w.Pushed},
+																Label: "Folder",
+																To:    "/app/mail/send?op=attach&what=folder",
+															},
+														},
+														Width: w.MenuWidth212,
+														Pop:   w.MenuUnderEnd,
+													},
+												},
+											},
+											Gap:   w.LineGapNormal,
+											Place: w.Pushed,
+										},
+									},
+									Variant: w.RubricRow,
+								},
+								w.SecFiles{
+									Items: []w.SecFile{
+										{
+											Icon:   "doc",
+											Name:   "вёрстка-сборник-v4.pdf",
+											Size:   w.Mono{Text: "3.1 MB", Variant: w.MonoDusty11},
+											Tag:    w.Tag{Label: "attached"},
+											Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=0", Submit: true},
+										},
+									},
+								},
+								w.Msg{
+									Parts: []w.MsgPart{w.Text("home takes letters up to "), w.Strong("25 MB"), w.Text(". This one is 3.2 MB.")},
+									Tone:  w.MsgAccent,
+									Space: w.MsgFlushAboveWide,
+								},
+							},
+							Flush: true,
+						},
+					},
+					Foot: []w.SheetFootPart{
+						w.Button{Label: "Send", Icon: "send", Kind: w.ButtonPrimary, Busy: "Sending…", Submit: true},
+						w.Kbd{Keys: "Ctrl+Enter"},
+						w.Button{Label: "Save draft", To: "/app/mail/send?op=draft", Submit: true},
+						w.Dim{
+							Parts:   []w.Inline{w.Text("Draft saved in home · Drafts at "), w.Mono{Text: "10:41"}},
+							Size:    w.Dim11_5,
+							Variant: w.DimWrap,
+						},
+						w.Line{
+							Items: []w.LinePart{w.Button{Label: "Cancel", To: "/app/mail/send?op=close", Submit: true}, w.Kbd{Keys: "Esc"}},
+							Gap:   w.LineGapNormal,
+							Place: w.Pushed,
+						},
+					},
+					Width: w.SheetWidth680,
+				},
+			},
+		},
+	}
+}
+
 // Mailbox22 is frame «Подключить почтовый ящик · узнанный провайдер» (s-mailbox-22).
 func Mailbox22() Screen {
 	return w.Shell{

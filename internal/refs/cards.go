@@ -13,6 +13,9 @@ var _ = add(
 	cards("plain", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among records already read in this session. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices"),
 	cards("diag", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-notices"),
 	cards("empty", w.Notices{Items: []w.NoticesPart{}}, "shell-1", "tc-notices"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("Its copy did not reach "), w.Strong("Sent"), w.Text(": the server answered "), w.Mono{Text: "APPEND → NO [OVERQUOTA] Quota exceeded"}, w.Text(". The recipients have the letter. Free some space in the mailbox: Carrel keeps no copy to put there later.")}, Space: w.MsgFlush}, "s-mailbox-20", "tc-msg"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("The mail server of "), w.Strong("home"), w.Text(" did not take the letter; nothing was sent. Its answer:")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-mailbox-19", "tc-msg"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("home takes letters up to "), w.Strong("25 MB"), w.Text(", and the video alone is 38 MB. It goes as a link for 30 days; revoke it in "), w.Strong("Published links"), w.Text(".")}, Tone: w.MsgAccent, Space: w.MsgFlushAboveWide}, "s-mailbox-18", "tc-msg"),
 	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("The text is cut at 1 MB: the rest of the letter is still on the server."), w.Break{}, w.Button{Label: "Show original", Small: true}, w.Text(" "), w.Button{Label: "Download .eml", Icon: "download", Small: true}}, Space: w.MsgFlushAboveWide}, "s-mailbox-8", "tc-msg"),
 	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("Анна gets no answer from Carrel; if she is waiting for one, reply to her letter.")}, Tone: w.MsgAccent, Space: w.MsgFlush}, "s-mailbox-9", "tc-msg"),
 	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("The letter says its charset is "), w.Mono{Text: "x-mac-ukrainian"}, w.Text(", and Carrel does not know it: some characters may be wrong. "), w.Strong("Download .eml"), w.Text(" opens it in a mail program that knows the charset.")}, Space: w.MsgFlushBelowWide}, "s-mailbox-8", "tc-msg"),
@@ -415,6 +418,23 @@ var _ = add(
 		{Term: "Where", Value: []w.ValuePart{w.Text("Переговорная 2")}}}}, "desktop-1", "tc-fields"),
 
 	// tc-sec
+	cards("mail", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 2}}, Variant: w.RubricRow},
+		w.SecFiles{Items: []w.SecFile{{Icon: "doc", Name: "вёрстка-сборник-v4.pdf", Size: w.Mono{Text: "3.1 MB", Variant: w.MonoDusty11}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "Remove", Form: "letter", To: "/app/mail/send?op=remove&i=0"}}, {Icon: "img", Name: "съёмка-обложки.mov", Size: w.Mono{Text: "38 MB", Variant: w.MonoDusty11}, Tag: w.Tag{Label: "as a link", On: true}, Remove: w.Button{Icon: "close", Small: true, Title: "Remove", Form: "letter", To: "/app/mail/send?op=remove&i=1"}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("home takes letters up to "), w.Strong("25 MB"), w.Text(", and the video alone is 38 MB. It goes as a link for 30 days; revoke it in "), w.Strong("Published links"), w.Text(".")}, Tone: w.MsgAccent, Space: w.MsgFlushAboveWide}}, Flush: true}, "s-mailbox-18", "tc-sec"),
+	cards("mail", w.Sec{Items: []w.SecPart{
+		w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 1}, w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
+			w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
+			w.MenuItem{Icon: "con", Label: "Address book", To: "/app/mail/send?op=attach&what=book"},
+			w.MenuItem{Icon: "cal", Label: "Event", To: "/app/mail/send?op=attach&what=event"},
+			w.MenuItem{Icon: "cal", Label: "Calendar", To: "/app/mail/send?op=attach&what=calendar"},
+			w.MenuItem{Icon: "task", Label: "Task", To: "/app/mail/send?op=attach&what=task"},
+			w.MenuItem{Icon: "note", Label: "Note", To: "/app/mail/send?op=attach&what=note"},
+			w.MenuSep{},
+			w.MenuItem{Icon: "doc", Label: "File", To: "/app/mail/send?op=attach&what=file"},
+			w.MenuItem{Icon: "file", Trail: w.Tag{Label: "link", Place: w.Pushed}, Label: "Folder", To: "/app/mail/send?op=attach&what=folder"}}, Width: w.MenuWidth212, Pop: w.MenuUnderEnd}}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Variant: w.RubricRow},
+		w.SecFiles{Items: []w.SecFile{{Icon: "doc", Name: "вёрстка-сборник-v4.pdf", Size: w.Mono{Text: "3.1 MB", Variant: w.MonoDusty11}, Tag: w.Tag{Label: "attached"}, Remove: w.Button{Icon: "close", Small: true, Title: "Remove", To: "/app/mail/send?op=remove&i=0", Submit: true}}}},
+		w.Msg{Parts: []w.MsgPart{w.Text("home takes letters up to "), w.Strong("25 MB"), w.Text(". This one is 3.2 MB.")}, Tone: w.MsgAccent, Space: w.MsgFlushAboveWide}}, Flush: true}, "s-mailbox-15", "tc-sec"),
 	cards("mail", w.Sec{Items: []w.SecPart{
 		w.Rubric{Text: "What was tried"},
 		w.Diag{Text: "[srv]   _imaps._tcp.office.example       → mail.office.example:993\n[srv]   _submissions._tcp.office.example → none\n[srv]   _submission._tcp.office.example  → mail.office.example:587\n[imap]  mail.office.example:993  TLS · certificate matches\n        LOGIN → OK · CAPABILITY IMAP4rev1 MOVE UIDPLUS SPECIAL-USE CONDSTORE\n[smtp]  mail.office.example:587  EHLO → 250 STARTTLS · SIZE 52428800\n        STARTTLS → 220 · certificate matches\n        AUTH PLAIN → 535 5.7.8 Error: authentication failed"},

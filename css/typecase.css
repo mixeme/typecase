@@ -1692,7 +1692,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--paste.tc-in--paste{font-size:11px;white-space:pre-wrap;min-height:88px;align-items:flex-start}
 .tc-in--key-sm.tc-in--key-sm{min-width:200px;font-size:13px;letter-spacing:.03em}
 .tc-in--line.tc-in--line{min-width:220px;max-width:540px;font-size:11px}
-.tc-in--wrap-gap.tc-in--wrap-gap{flex-wrap:wrap;gap:var(--tc-gap-tight)}
 .tc-in--note.tc-in--note{min-height:82px;font-size:13.5px;line-height:1.6}
 .tc-in--t11-5-fill.tc-in--t11-5-fill{font-size:11.5px;flex:1}
 .tc-in--h26-w120.tc-in--h26-w120{height:26px;width:120px}

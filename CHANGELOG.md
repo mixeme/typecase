@@ -127,7 +127,13 @@ do, not what the authors did.
   `tc-doc__bullets`, `tc-doc__quote`; the rules `.tc-quote` and
   `.tc-doc__list--bullets` are gone), a link's address beside it is
   monospaced; «Add to calendar» is a form whose «Into» is a tree of choices,
-  as a move's; the original stands in the letter's document.
+  as a move's; the original stands in the letter's document. The letter
+  sheet of a mailbox (`-15` … `-20`, `-32`) is the relay's (`s-mail-1`) with
+  what a mailbox adds: «From» a list of the mailboxes, To and Cc as
+  recipients from the books, Bcc a button of the form, the mailbox's
+  signature under the text field, its server's size before sending, «Save
+  draft» and when the draft was saved; «Close the letter?» is a form; the
+  rule `.tc-in--wrap-gap` is gone.
 - **The only administrator deposits no key** (the owner, Carrel's task 281):
   `account-18` (the account's Key escrow) and `account-19` (the escrow
   page) draw «Deposit my key» off with its reason «No other administrator
