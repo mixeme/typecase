@@ -56,11 +56,12 @@ const (
 	Fields130Flush               // names 130 px, flush, 14 px above
 	Fields88                     // names 88 px: a phone
 	Fields88Pad                  // names 88 px, 4/14/12 padding: a phone's card
+	FieldsLetter                 // out to the edges, names 88 px, flush: a letter's headers
 )
 
 func (v FieldsVariant) class() string {
 	return [...]string{"", "tc-fields--bleed", "tc-fields--bleed tc-fields--cols130", "tc-fields--cols130 tc-fields--flush-padt", "tc-fields--cols88",
-		"tc-fields--cols88 tc-fields--pad-inset"}[v]
+		"tc-fields--cols88 tc-fields--pad-inset", "tc-fields--bleed tc-fields--cols88 tc-fields--flush-padt"}[v]
 }
 
 // Fields — tc-fields

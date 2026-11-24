@@ -50,6 +50,18 @@ var _ = add(
 
 	// tc-tree
 	rows("mail", w.Tree{Rows: []w.TreeRow{
+		{Icon: "server", Label: "nextcloud"},
+		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "nextcloud/lichnyj", One: true}},
+		{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "nextcloud/rabota", One: true}},
+		{Icon: "server", Label: "radicale · vps"},
+		{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "radicale/proekty", One: true}}}, On: 3, Variant: w.TreeNarrow}, "s-mailbox-9", "tc-tree"),
+	rows("mail", w.Tree{Rows: []w.TreeRow{
+		{Icon: "server", Label: "sftpgo · vps"},
+		{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
+		{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36},
+		{Icon: "file", Label: "Издательство", Indent: w.TreeLevel36},
+		{Icon: "file", Label: "Сборник", Indent: w.TreeLevel44}}, On: 5}, "s-mailbox-10", "tc-tree"),
+	rows("mail", w.Tree{Rows: []w.TreeRow{
 		{Icon: "inbox", Label: "Inbox", Count: &w.Num{Value: 12}},
 		{Icon: "pencil", Label: "Drafts", Count: &w.Num{Value: 1}},
 		{Icon: "send", Label: "Sent"},

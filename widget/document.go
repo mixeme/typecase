@@ -6,10 +6,17 @@ import "strings"
 type Link struct {
 	Text string
 	Href string
+	// Address is where the link leads, shown beside its words: a
+	// letter's links say where they go before they are followed.
+	Address string
 }
 
 func (l Link) html(mix) string {
-	return `<a class="tc-dim--accent"` + attr("href", l.Href) + `>` + esc(l.Text) + `</a>`
+	s := `<a class="tc-dim--accent"` + attr("href", l.Href) + `>` + esc(l.Text) + `</a>`
+	if l.Address != "" {
+		s += ` ` + Mono{Text: l.Address, Variant: Mono11Dusty}.html(nil)
+	}
+	return s
 }
 
 func (Link) inline() {}
@@ -329,21 +336,27 @@ type DocPart interface {
 	docPart()
 }
 
-func (DocTitle) docPart()   {}
-func (DocSub) docPart()     {}
-func (Prose) docPart()      {}
-func (DocTasks) docPart()   {}
-func (DocFiles) docPart()   {}
-func (DocRelated) docPart() {}
-func (Area) docPart()       {}
-func (DocFields) docPart()  {}
-func (DocNote) docPart()    {}
-func (DocHeading) docPart() {}
-func (DocBullets) docPart() {}
-func (DocBody) docPart()    {}
-func (DocTable) docPart()   {}
-func (DocQuote) docPart()   {}
-func (DocCode) docPart()    {}
+func (DocTitle) docPart()    {}
+func (DocSub) docPart()      {}
+func (Prose) docPart()       {}
+func (DocTasks) docPart()    {}
+func (DocFiles) docPart()    {}
+func (DocRelated) docPart()  {}
+func (Area) docPart()        {}
+func (DocFields) docPart()   {}
+func (DocNote) docPart()     {}
+func (DocHeading) docPart()  {}
+func (DocBullets) docPart()  {}
+func (DocBody) docPart()     {}
+func (DocTable) docPart()    {}
+func (DocQuote) docPart()    {}
+func (DocCode) docPart()     {}
+func (DocRuled) docPart()    {}
+func (DocAttached) docPart() {}
+func (Fields) docPart()      {}
+func (Line) docPart()        {}
+func (Msg) docPart()         {}
+func (Original) docPart()    {}
 
 // Doc — tc-doc
 //
@@ -542,4 +555,64 @@ func (h Hero) html(mix) string {
 	}
 	s.WriteString(`</div></div></div>`)
 	return s.String()
+}
+
+// DocRuled is the text of a document under a rule: a letter's body, its
+// paragraphs, lists and quotes as a note's (Carrel's mailbox spec, M-5).
+type DocRuled struct {
+	Items []DocPart
+}
+
+func (d DocRuled) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-doc__sec--rule tc-stack tc-stack--wide">`)
+	for _, it := range d.Items {
+		s.WriteString(it.html(nil))
+	}
+	s.WriteString(`</div>`)
+	return s.String()
+}
+
+// DocAttachment is a file a letter brought, with what can be done to it:
+// an .ics into the calendar, a .vcf into a book, any file into the files,
+// and downloaded.
+type DocAttachment struct {
+	Icon Icon
+	Name string
+	Size Mono
+	Acts []Button
+}
+
+// DocAttached is what a letter brought, under a rule.
+type DocAttached struct {
+	Title Rubric
+	Items []DocAttachment
+}
+
+func (a DocAttached) html(mix) string {
+	var s strings.Builder
+	s.WriteString(`<div class="tc-doc__sec--rule">` + a.Title.html(nil) + `<div class="tc-stack tc-stack--tight tc-line__text">`)
+	for _, it := range a.Items {
+		s.WriteString(`<div class="tc-line tc-line--normal tc-line__text"><span class="tc-table__file tc-table__file--fill"><svg>` + it.Icon.use() +
+			`</svg><span class="tc-table__filename">` + esc(it.Name) + `</span></span>` + it.Size.html(nil))
+		for _, b := range it.Acts {
+			s.WriteString(b.html(nil))
+		}
+		s.WriteString(`</div>`)
+	}
+	s.WriteString(`</div></div>`)
+	return s.String()
+}
+
+// Original is a letter as its sender made it, in a frame of its own: no
+// script, no reach into the page, its pictures only after the person asks
+// for them (Carrel's mailbox spec, C-11). Doc is the letter's HTML, as the
+// server cleaned it.
+type Original struct {
+	Title string // the frame's accessible name
+	Doc   string
+}
+
+func (o Original) html(mix) string {
+	return `<iframe class="tc-original" sandbox=""` + attr("title", o.Title) + attr("srcdoc", o.Doc) + `></iframe>`
 }

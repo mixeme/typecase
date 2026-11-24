@@ -45,6 +45,16 @@ do, not what the authors did.
   «The server puts a copy of sent letters into Sent itself» in its foot),
   a `Msg` in `MainResults`, a `Sec` in a `Dialog` (what connecting a
   mailbox tried, under its rubric).
+- **A letter is a document** (the mail prepared for implementation):
+  `Head.Back` is «← Inbox» first in its head (the owner, 30.09);
+  `Fields` with `FieldsLetter` are its headers; `DocRuled` is its text
+  under a rule, made of a note's blocks (Carrel's mailbox spec, M-5);
+  `DocAttached` is what it brought, each file with its buttons (into the
+  calendar, the book, the files; download); `Original` is the letter as
+  its sender made it, in a frame with `sandbox` and no script; `Link.Address`
+  says where a link leads, beside it. A document also takes a `Line` (the
+  text or the original) and a `Msg` (cut short, pictures not loaded); a
+  sheet takes `Fields`; the side column takes `SecActs`.
 
 - **Words that need a script have their pair without one** (Carrel's task
   278): `ScriptPair{With, Without}` is words said one way on a page with a
@@ -112,7 +122,12 @@ do, not what the authors did.
   today's (Update collection list); the instance's settings (`-29`) are
   `s-admin-32` with the rubric «Users’ own mailboxes»; «Select all shown»
   left the folder's bar (the
-  selection bar has «Select all», as files').
+  selection bar has «Select all», as files'). The letter (`-6` … `-13`):
+  its paragraphs, list and quote are a note's (`tc-prose--read`,
+  `tc-doc__bullets`, `tc-doc__quote`; the rules `.tc-quote` and
+  `.tc-doc__list--bullets` are gone), a link's address beside it is
+  monospaced; «Add to calendar» is a form whose «Into» is a tree of choices,
+  as a move's; the original stands in the letter's document.
 - **The only administrator deposits no key** (the owner, Carrel's task 281):
   `account-18` (the account's Key escrow) and `account-19` (the escrow
   page) draw «Deposit my key» off with its reason «No other administrator

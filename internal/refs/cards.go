@@ -13,6 +13,12 @@ var _ = add(
 	cards("plain", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Text("Linking changes nothing on any server: the records are shown as one. Merging on the server is a separate, destructive step you confirm.")}, Tone: w.MsgAccent}, w.Msg{Parts: []w.MsgPart{w.Strong("Nothing is loaded yet."), w.Text(" Duplicates are found only among records already read in this session. Open a list or a combined view, then come back.")}}}}, "s-dup-6", "tc-notices"),
 	cards("diag", w.Notices{Items: []w.NoticesPart{w.Msg{Parts: []w.MsgPart{w.Strong("Контакты is unavailable."), w.Text(" The server did not answer as expected. "), w.Button{Label: "Try again", Small: true}}, Tone: w.MsgAlert}, w.MainDiag{Diag: w.Diag{Text: "REPORT /alice/contacts/kontakty/\nnextcloud\ndav: HTTP 503: the server is busy"}}}}, "states-11", "tc-notices"),
 	cards("empty", w.Notices{Items: []w.NoticesPart{}}, "shell-1", "tc-notices"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("The text is cut at 1 MB: the rest of the letter is still on the server."), w.Break{}, w.Button{Label: "Show original", Small: true}, w.Text(" "), w.Button{Label: "Download .eml", Icon: "download", Small: true}}, Space: w.MsgFlushAboveWide}, "s-mailbox-8", "tc-msg"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("Анна gets no answer from Carrel; if she is waiting for one, reply to her letter.")}, Tone: w.MsgAccent, Space: w.MsgFlush}, "s-mailbox-9", "tc-msg"),
+	cards("mail", w.Msg{Parts: []w.MsgPart{w.Text("The letter says its charset is "), w.Mono{Text: "x-mac-ukrainian"}, w.Text(", and Carrel does not know it: some characters may be wrong. "), w.Strong("Download .eml"), w.Text(" opens it in a mail program that knows the charset.")}, Space: w.MsgFlushBelowWide}, "s-mailbox-8", "tc-msg"),
+	cards("mail", w.Msg{Icon: "eye", Parts: []w.MsgPart{w.Strong("Pictures are shown for this letter."), w.Text(" "), w.Mono{Text: "cdn.bookfair.example"}, w.Text(", "), w.Mono{Text: "img.mailer.example"}, w.Text(" and "), w.Mono{Text: "open.mailer.example"}, w.Text(" now know the letter was opened. Next time it opens without pictures.")}, Tone: w.MsgAccent, Space: w.MsgFlushAboveWide}, "s-mailbox-13", "tc-msg"),
+	cards("mail", w.Msg{Icon: "eye", Parts: []w.MsgPart{w.Strong("14 pictures from 3 addresses are not loaded."), w.Text(" Loading them tells the sender that you opened this letter, when, and your IP address. The choice is for this letter only. "), w.Button{Label: "Show pictures", Small: true}}, Space: w.MsgFlushAboveWide}, "s-mailbox-12", "tc-msg"),
+	cards("mail", w.Msg{Icon: "doc", Parts: []w.MsgPart{w.Text("This letter came only as HTML. It is shown as text: styles, pictures and scripts are left out. "), w.Button{Label: "Show original", Small: true}}, Space: w.MsgFlushAboveWide}, "s-mailbox-11", "tc-msg"),
 	cards("mail", w.Msg{Icon: "move", Parts: []w.MsgPart{w.Text("The letters are copied to "), w.Strong("Стройка"), w.Text(". In Inbox they stay struck through until your mail program cleans it: this server cannot remove only these.")}}, "s-mailbox-5", "tc-msg"),
 	cards("mail", w.Msg{Parts: []w.MsgPart{w.Strong("Key escrow is on:"), w.Text(" the administrator can open this password too — and through a mailbox, reset your other passwords.")}, Tone: w.MsgAlert, Space: w.MsgFlush}, "s-mailbox-22", "tc-msg"),
 	cards("mail", w.Msg{Parts: []w.MsgPart{w.Strong("Saved. Reading works, sending does not:"), w.Text(" the server refused the password for sending.")}, Tone: w.MsgAccent, Space: w.MsgFlush}, "s-mailbox-25", "tc-msg"),
@@ -227,6 +233,19 @@ var _ = add(
 	cards("plain", w.Pad{Items: []w.PadPart{w.Thumb{Icon: "img", Form: w.ThumbPreview}}}, "s-files-1", "tc-pad"),
 
 	// tc-fields
+	cards("mail", w.Fields{Items: []w.FieldsItem{
+		{Term: "From", Value: []w.ValuePart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("a.kovaleva@example.org")}}}},
+		{Term: "To", Value: []w.ValuePart{w.Text("Михаил Енученко "), w.Dim{Parts: []w.Inline{w.Text("mix@home.example")}}}},
+		{Term: "Cc", Value: []w.ValuePart{w.Text("Пётр Смирнов "), w.Dim{Parts: []w.Inline{w.Text("p.smirnov@example.org")}}}},
+		{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-24 10:12")}, Face: w.ValueMono}}, Variant: w.FieldsLetter}, "s-mailbox-6", "tc-fields"),
+	cards("mail", w.Fields{Items: []w.FieldsItem{
+		{Term: "From", Value: []w.ValuePart{w.Text("Книжная ярмарка "), w.Dim{Parts: []w.Inline{w.Text("news@bookfair.example")}}}},
+		{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-23 19:30")}, Face: w.ValueMono}}, Variant: w.FieldsLetter}, "s-mailbox-11", "tc-fields"),
+	cards("mail", w.Fields{Items: []w.FieldsItem{
+		{Term: "Event", Value: []w.ValuePart{w.Text("Встреча в издательстве")}},
+		{Term: "When", Value: []w.ValuePart{w.Text("2026-09-26 11:00 — 12:00")}, Face: w.ValueMono},
+		{Term: "Where", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
+		{Term: "Organiser", Value: []w.ValuePart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("a.kovaleva@example.org")}}}}}, Variant: w.FieldsLetter}, "s-mailbox-9", "tc-fields"),
 	cards("plain", w.Fields{Items: []w.FieldsItem{
 		{Term: "Status", Value: []w.ValuePart{w.Text("Needs action")}},
 		{Term: "Due", Value: []w.ValuePart{w.Text("7 August 2026")}, Face: w.ValueMono},
@@ -1173,6 +1192,10 @@ var _ = add(
 		{Cells: []w.TableCell{{Parts: []w.CellPart{w.Text("2026-08-12 10:02")}, Mono: true}, {Parts: []w.CellPart{w.Text("settings.instance")}, Mono: true}, {Parts: []w.CellPart{w.Text("mix")}}, {Parts: []w.CellPart{w.Text("—")}}, {Parts: []w.CellPart{w.Text("smtp_host, smtp_port")}, Mono: true}}}}}, "s-admin-7", "tc-table"),
 
 	// tc-docmeta
+	cards("mail", w.Docmeta{Sections: []w.DocmetaSec{
+		{Title: w.Rubric{Text: "Sender"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "Анна Ковалёва", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}, {Name: "Timeline", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· everything with her")}}}}}}},
+		{Title: w.Rubric{Text: "Shown as"}, Items: []w.DocmetaPart{w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}}, w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}}}},
+		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID     48213\nFolder  INBOX\nSize    2.6 MB\nRead    2 min ago"}}}}}, "s-mailbox-6", "tc-docmeta"),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGapTight, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
 		{Title: w.Rubric{Text: "Related"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Name: "Синк-ап по релизу", What: w.Dim{Parts: []w.Inline{w.Text("· event · 10 Aug")}}}, {Name: "Дописать раздел про кэш", What: w.Dim{Parts: []w.Inline{w.Text("· task")}}}}}}},

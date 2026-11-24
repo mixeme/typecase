@@ -8,6 +8,9 @@ func document(state string, fixture Renderer, frame, class string) Entry {
 
 var _ = add(
 	// tc-prose
+	document("mail", w.Prose{Parts: []w.Inline{w.Text("В четверг в 11:00 жду вас в издательстве, приглашение во вложении. Схема проезда — на сайте: "), w.Link{Text: "Как нас найти", Href: "https://slovo.example/contacts", Address: "slovo.example/contacts"}, w.Text(". Карточку Петра прикладываю — он возьмёт печать тиража.\n\n—\nАнна Ковалёва\nИздательство «Слово»")}, Variant: w.ProseRead}, "s-mailbox-6", "tc-prose"),
+	document("mail", w.Prose{Parts: []w.Inline{w.Text("Вы получили это письмо, потому что подписались на рассылку. "), w.Link{Text: "Отписаться", Href: "https://click.mailer.example/u/8f3a", Address: "click.mailer.example/u/8f3a…"}}, Variant: w.ProseMuted}, "s-mailbox-11", "tc-prose"),
+	document("mail", w.Prose{Parts: []w.Inline{w.Link{Text: "Смотреть все новинки", Href: "https://click.mailer.example/c/8f3a/all", Address: "click.mailer.example/c/8f3a…/all"}}, Variant: w.ProseRead}, "s-mailbox-11", "tc-prose"),
 	document("inline", w.Prose{Parts: []w.Inline{w.Text("Итоги созвона в "), w.Em("четверг"), w.Text(": релиз держат две вещи, обе — до пятницы. Миграцию гоняем только с "), w.Mono{Text: "--dry-run", Variant: w.MonoChip}, w.Text(", подробности — в "), w.Link{Text: "заметке о схеме", Href: "#"}, w.Text(".")}, Variant: w.ProseRead}, "s-notes-25", "tc-prose"),
 	document("muted", w.Prose{Parts: []w.Inline{w.Text("This login has no confirmed email — an address that was entered but never confirmed does not count. There is no letter we can send, and there is no password reset that would keep your data.\n\nIf you deposited the encryption key, ask the administrator in person. Otherwise this account cannot be recovered from the sign-in screen.")}, Variant: w.ProseMuted}, "s-auth-7", "tc-prose"),
 	document("plain", w.Prose{Parts: []w.Inline{w.Text("Календарь на осень: три события в «Личный», одно в «Работа». Связанные — Анна и смета.")}}, "components-29", "tc-prose"),
@@ -24,6 +27,42 @@ var _ = add(
 	document("read", w.Prose{Parts: []w.Inline{w.Text("Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника.")}, Variant: w.ProseReadTop}, "phone-7", "tc-prose"),
 
 	// tc-doc
+	document("mail", w.Doc{Items: []w.DocPart{
+		w.Msg{Parts: []w.MsgPart{w.Text("The letter says its charset is "), w.Mono{Text: "x-mac-ukrainian"}, w.Text(", and Carrel does not know it: some characters may be wrong. "), w.Strong("Download .eml"), w.Text(" opens it in a mail program that knows the charset.")}, Space: w.MsgFlushBelowWide},
+		w.Prose{Parts: []w.Inline{w.Text("Добрий день! Надсилаю звіт за ї»ень — таблиця у вкладенні, підсумки в кінці листа…\n\n…")}, Variant: w.ProseRead},
+		w.Msg{Parts: []w.MsgPart{w.Text("The text is cut at 1 MB: the rest of the letter is still on the server."), w.Break{}, w.Button{Label: "Show original", Small: true}, w.Text(" "), w.Button{Label: "Download .eml", Icon: "download", Small: true}}, Space: w.MsgFlushAboveWide}}}, "s-mailbox-8", "tc-doc"),
+	document("mail", w.Doc{Items: []w.DocPart{
+		w.DocTitle{Text: "Сентябрьская рассылка: сорок новинок осени"},
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "From", Value: []w.ValuePart{w.Text("Книжная ярмарка "), w.Dim{Parts: []w.Inline{w.Text("news@bookfair.example")}}}},
+			{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-23 19:30")}, Face: w.ValueMono}}, Variant: w.FieldsLetter},
+		w.Line{Items: []w.LinePart{w.Seg{Options: []w.SegOption{{Label: "Text", Href: "/app/mail/home/inbox/48190"}, {Label: "Original", Href: "/app/mail/home/inbox/48190/original", On: true}}}, w.Mono{Text: "text/html · 84 KB", Variant: w.MonoDusty11}}, Gap: w.LineGapNormal, Block: true},
+		w.Msg{Icon: "eye", Parts: []w.MsgPart{w.Strong("14 pictures from 3 addresses are not loaded."), w.Text(" Loading them tells the sender that you opened this letter, when, and your IP address. The choice is for this letter only. "), w.Button{Label: "Show pictures", Small: true}}, Space: w.MsgFlushAboveWide},
+		w.Original{Title: "Original of the letter", Doc: "<body style='margin:0;background:#efe9dc;font-family:Georgia,serif;color:#222'><div style='max-width:560px;margin:0 auto;background:#fff;padding-bottom:18px'><div style='height:92px;margin:0 0 18px;border-bottom:1px dashed #bbb;display:flex;align-items:center;justify-content:center;font:12px Arial,sans-serif;color:#999'>Книжная ярмарка</div><h1 style='font-size:26px;font-weight:normal;margin:0 24px 8px'>Сорок новинок осени</h1><p style='margin:0 24px 18px;font:15px/1.5 Arial,sans-serif;color:#444'>Мы собрали книги, которые выходят в сентябре и октябре: прозу, нон-фикшн и детское. Предзаказ открыт до 5 октября.</p><table style='border-collapse:collapse;margin:0 16px;width:calc(100% - 32px)'><tr><td style='width:50%;padding:8px;vertical-align:top'><div style='height:150px;border:1px dashed #bbb;display:flex;align-items:center;justify-content:center;font:11px Arial,sans-serif;color:#999'>обложка</div><p style='font:bold 14px Arial,sans-serif;margin:8px 0 2px'>Переплётчик</p><p style='font:12px Arial,sans-serif;color:#777;margin:0'>роман, 2026</p></td><td style='width:50%;padding:8px;vertical-align:top'><div style='height:150px;border:1px dashed #bbb;display:flex;align-items:center;justify-content:center;font:11px Arial,sans-serif;color:#999'>обложка</div><p style='font:bold 14px Arial,sans-serif;margin:8px 0 2px'>Как устроена типография</p><p style='font:12px Arial,sans-serif;color:#777;margin:0'>нон-фикшн</p></td></tr></table><a style='display:inline-block;background:#b0392b;color:#fff;padding:10px 18px;margin:16px 24px;font:bold 14px Arial,sans-serif;text-decoration:none'>Смотреть все новинки</a><p style='font:11px Arial,sans-serif;color:#999;margin:0 24px'>Вы получили это письмо, потому что подписались на рассылку. Отписаться</p></div></body>"}}}, "s-mailbox-12", "tc-doc"),
+	document("mail", w.Doc{Items: []w.DocPart{
+		w.DocTitle{Text: "Вёрстка сборника: правки и встреча в четверг"},
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "From", Value: []w.ValuePart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("a.kovaleva@example.org")}}}},
+			{Term: "To", Value: []w.ValuePart{w.Text("Михаил Енученко "), w.Dim{Parts: []w.Inline{w.Text("mix@home.example")}}}},
+			{Term: "Cc", Value: []w.ValuePart{w.Text("Пётр Смирнов "), w.Dim{Parts: []w.Inline{w.Text("p.smirnov@example.org")}}}},
+			{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-24 10:12")}, Face: w.ValueMono}}, Variant: w.FieldsLetter},
+		w.DocRuled{Items: []w.DocPart{
+			w.Prose{Parts: []w.Inline{w.Text("Михаил, добрый день!\n\nПрислала правки к третьей вёрстке — они в PDF, отмечены жёлтым. Главное:")}, Variant: w.ProseRead},
+			w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Text("на с. 14 и 37 съехали подписи к иллюстрациям;")}, []w.DocItemPart{w.Text("в оглавлении не тот номер у главы «Переплёт»;")}, []w.DocItemPart{w.Text("обложку оставляем, как на прошлой неделе.")}}},
+			w.Prose{Parts: []w.Inline{w.Text("В четверг в 11:00 жду вас в издательстве, приглашение во вложении. Схема проезда — на сайте: "), w.Link{Text: "Как нас найти", Href: "https://slovo.example/contacts", Address: "slovo.example/contacts"}, w.Text(". Карточку Петра прикладываю — он возьмёт печать тиража.\n\n—\nАнна Ковалёва\nИздательство «Слово»")}, Variant: w.ProseRead},
+			w.DocQuote{Parts: []w.Inline{w.Text("2026-09-22 18:40, Михаил Енученко: Анна, третья вёрстка у вас. Посмотрите, пожалуйста, подписи — у меня на двух разворотах они уехали.")}}}},
+		w.DocAttached{Title: w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Num{Value: 3}}, Variant: w.RubricBelow}, Items: []w.DocAttachment{{Icon: "cal", Name: "Встреча в издательстве · 2026-09-26 11:00", Size: w.Mono{Text: ".ics · 2 KB", Variant: w.MonoDusty11}, Acts: []w.Button{w.Button{Label: "Add to calendar", Icon: "cal", Small: true}, w.Button{Icon: "download", Small: true, Title: "Download"}}}, {Icon: "con", Name: "Пётр Смирнов", Size: w.Mono{Text: ".vcf · 3 KB", Variant: w.MonoDusty11}, Acts: []w.Button{w.Button{Label: "Add to address book", Icon: "con", Small: true}, w.Button{Icon: "download", Small: true, Title: "Download"}}}, {Icon: "doc", Name: "правки-сборник-v3.pdf", Size: w.Mono{Text: "2.4 MB", Variant: w.MonoDusty11}, Acts: []w.Button{w.Button{Label: "Save to files", Icon: "file", Small: true}, w.Button{Icon: "download", Small: true, Title: "Download"}}}}}}}, "s-mailbox-6", "tc-doc"),
+	document("mail", w.Doc{Items: []w.DocPart{
+		w.DocTitle{Text: "Сентябрьская рассылка: сорок новинок осени"},
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "From", Value: []w.ValuePart{w.Text("Книжная ярмарка "), w.Dim{Parts: []w.Inline{w.Text("news@bookfair.example")}}}},
+			{Term: "Date", Value: []w.ValuePart{w.Text("2026-09-23 19:30")}, Face: w.ValueMono}}, Variant: w.FieldsLetter},
+		w.Msg{Icon: "doc", Parts: []w.MsgPart{w.Text("This letter came only as HTML. It is shown as text: styles, pictures and scripts are left out. "), w.Button{Label: "Show original", Small: true}}, Space: w.MsgFlushAboveWide},
+		w.DocRuled{Items: []w.DocPart{
+			w.Prose{Parts: []w.Inline{w.Text("Сорок новинок осени\n\nМы собрали книги, которые выходят в сентябре и октябре: прозу, нон-фикшн и детское. Предзаказ открыт до 5 октября.")}, Variant: w.ProseRead},
+			w.DocBullets{Items: [][]w.DocItemPart{[]w.DocItemPart{w.Link{Text: "«Переплётчик»", Href: "https://bookfair.example/b/1182", Address: "bookfair.example/b/1182"}, w.Text(" — роман, 2026")}, []w.DocItemPart{w.Link{Text: "«Как устроена типография»", Href: "https://bookfair.example/b/1190", Address: "bookfair.example/b/1190"}, w.Text(" — нон-фикшн")}}},
+			w.Prose{Parts: []w.Inline{w.Link{Text: "Смотреть все новинки", Href: "https://click.mailer.example/c/8f3a/all", Address: "click.mailer.example/c/8f3a…/all"}}, Variant: w.ProseRead},
+			w.Prose{Parts: []w.Inline{w.Text("Вы получили это письмо, потому что подписались на рассылку. "), w.Link{Text: "Отписаться", Href: "https://click.mailer.example/u/8f3a", Address: "click.mailer.example/u/8f3a…"}}, Variant: w.ProseMuted}}}}}, "s-mailbox-11", "tc-doc"),
 	document("aside", w.Doc{Items: []w.DocPart{
 		w.DocTitle{Text: "Заметка со встречи 10.08"},
 		w.DocSub{Parts: []w.DocSubPart{w.Mono{Text: "10 August 2026, 11:05"}}},
@@ -122,5 +161,6 @@ var _ = add(
 func init() {
 	Widgets = append(Widgets, w.Prose{}, w.Doc{}, w.Docbar{})
 	Parts = append(Parts, w.Link{}, w.DocTitle{}, w.DocSub{}, w.DocTask{}, w.DocTasks{}, w.DocFile{}, w.DocFiles{}, w.DocRelated{},
-		w.DocFields{}, w.DocNote{}, w.DocHeading{}, w.DocBullets{}, w.DocBody{}, w.DocTable{}, w.DraftNote{}, w.DocLayout{}, w.Hero{})
+		w.DocFields{}, w.DocNote{}, w.DocHeading{}, w.DocBullets{}, w.DocBody{}, w.DocTable{}, w.DraftNote{}, w.DocLayout{}, w.Hero{},
+		w.DocRuled{}, w.DocAttached{}, w.DocAttachment{}, w.Original{})
 }

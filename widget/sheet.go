@@ -71,6 +71,7 @@ func (Check) sheetPart()       {}
 func (SheetFrom) sheetPart()   {}
 func (SheetPick) sheetPart()   {}
 func (Tally) sheetPart()       {}
+func (Fields) sheetPart()      {}
 
 // SheetFields is a row of fields in a sheet: the first takes the rest of it.
 type SheetFields struct {

@@ -467,7 +467,7 @@ func (g *gen) pad(e *El) string {
 
 type fieldsVariant struct{ a, b, v string }
 
-var fieldsVariants = []fieldsVariant{{"tc-fields--cols88", "tc-fields--pad-inset", "Fields88Pad"}, {"tc-fields--cols88", "", "Fields88"},
+var fieldsVariants = []fieldsVariant{{"tc-fields--cols88", "tc-fields--pad-inset", "Fields88Pad"}, {"tc-fields--bleed", "tc-fields--cols88", "FieldsLetter"}, {"tc-fields--cols88", "", "Fields88"},
 	{"tc-fields--bleed", "tc-fields--cols130", "FieldsBleed130"}, {"tc-fields--bleed", "", "FieldsBleed"}, {"tc-fields--cols130", "tc-fields--flush-padt", "Fields130Flush"}}
 
 func (g *gen) fields(e *El) string {
@@ -1167,6 +1167,9 @@ func (g *gen) docmeta(e *El) string {
 			switch {
 			case x.Has("tc-diag"):
 				its = append(its, g.diag(x))
+			case x.Has("tc-sec__acts"):
+				// a section's buttons: a letter's «Show original»
+				its = append(its, "w.SecActs{Items: []w.Button{"+g.each(x.Els(), g.button)+"}}")
 			case x.Has("tc-line") && !x.Has("tc-line__text"):
 				// tags, and where they come from when there was a choice (Р-58)
 				its = append(its, "w.Line{Block: true, Gap: w.LineGapTight, Items: []w.LinePart{"+g.each(x.Els(), g.linePart)+"}}")
@@ -1285,10 +1288,45 @@ func (g *gen) tasks(k *El, phone bool) string {
 }
 
 func (g *gen) doc(e *El) string {
+	items, hidden := g.docParts(e)
+	return g.docOf(e, items, hidden)
+}
+
+// docParts are a document's parts, and its hidden fields when it is a form.
+func (g *gen) docParts(e *El) ([]string, []*El) {
 	var items []string
 	var hidden []*El
 	for _, k := range e.Els() {
 		switch {
+		case k.Has("tc-fields"):
+			// a letter's headers
+			items = append(items, g.fields(k))
+		case k.Has("tc-line"):
+			// a letter's text or its original, and what the original is
+			items = append(items, g.line(k))
+		case k.Has("tc-msg"):
+			// what a letter's page says of it: cut short, pictures not loaded
+			items = append(items, g.msg(k))
+		case k.Has("tc-original"):
+			// a letter as its sender made it, in a frame of its own
+			items = append(items, "w.Original{Title: "+q(k.Attr("title"))+", Doc: "+q(k.Attr("srcdoc"))+"}")
+		case k.Has("tc-doc__sec--rule") && k.Has("tc-stack"):
+			// a letter's text under a rule
+			in, _ := g.docParts(k)
+			items = append(items, "w.DocRuled{Items: []w.DocPart{\n\t\t"+join(in, ",\n\t\t")+"}}")
+		case k.Has("tc-doc__sec--rule") && k.Kid("tc-doc__files") == nil && k.Kid("tc-rubric") != nil:
+			// what a letter brought, with what can be done to it
+			var its []string
+			for _, ln := range k.Els()[1].Els() {
+				els := ln.Els()
+				file := els[0]
+				var acts []string
+				for _, b := range els[2:] {
+					acts = append(acts, g.button(b))
+				}
+				its = append(its, "{Icon: "+icon(file.Els()[0])+", Name: "+q(file.Kid("tc-table__filename").Text())+", Size: "+g.mono(els[1])+", Acts: []w.Button{"+join(acts, ", ")+"}}")
+			}
+			items = append(items, "w.DocAttached{Title: "+g.rubric(k.Kid("tc-rubric"), "")+", Items: []w.DocAttachment{"+join(its, ", ")+"}}")
 		case k.Tag == "input" && k.Attr("type") == "hidden":
 			hidden = append(hidden, k)
 		case k.Has("tc-doc__title"):
@@ -1355,6 +1393,10 @@ func (g *gen) doc(e *El) string {
 			stop("doc? " + join(k.Cls(), " "))
 		}
 	}
+	return items, hidden
+}
+
+func (g *gen) docOf(e *El, items []string, hidden []*El) string {
 	f := []string{"Items: []w.DocPart{\n\t\t" + join(items, ",\n\t\t") + "}"}
 	if e.Has("tc-stack") {
 		f = append(f, "Text: true")

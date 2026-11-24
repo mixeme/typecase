@@ -9,6 +9,14 @@ func overlay(state string, fixture Renderer, frame, class string) Entry {
 var _ = add(
 	// tc-menu
 	overlay("mail", w.Menu{Items: []w.MenuPart{
+		w.MenuItem{Icon: "mail", Label: "Mark as unread"},
+		w.MenuItem{Icon: "flag", Label: "Mark as important"},
+		w.MenuItem{Icon: "move", Label: "Move to…"},
+		w.MenuItem{Icon: "spam", Label: "Spam"},
+		w.MenuSep{},
+		w.MenuItem{Icon: "download", Detail: &w.Mono{Text: ".eml", Variant: w.Mono11}, Label: "Download"},
+		w.MenuItem{Icon: "file", Detail: &w.Mono{Text: ".eml", Variant: w.Mono11}, Label: "Save to files as"}}}, "s-mailbox-7", "tc-menu"),
+	overlay("mail", w.Menu{Items: []w.MenuPart{
 		w.Rubric{Text: "home"},
 		w.MenuItem{Icon: "file", Label: "Стройка"},
 		w.MenuItem{Icon: "file", Label: "Рассылки"},
@@ -854,6 +862,28 @@ var _ = add(
 		w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Pop: w.MenuUnderEnd, Inline: true}}}, Right: &w.BarRight{Items: []w.BarPart{w.CheckForm{Checks: []w.Check{w.Check{Name: "compact", Value: "1", Parts: []w.CheckPart{w.Text("Compact rows")}}}, Action: "/app/calendar", Apply: w.Button{Label: "Apply", Small: true, Submit: true}}}, Secondary: true}, Variant: w.BarWide}, "s-agenda-1", "tc-bar"),
 
 	// tc-sheet
+	overlay("mail", w.Sheet{Action: "/app/mail/home/inbox/48213/attachments/1/calendar", Icon: "cal", Title: "Add to calendar", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("from the letter · .ics · 1 event")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.Fields{Items: []w.FieldsItem{
+			{Term: "Event", Value: []w.ValuePart{w.Text("Встреча в издательстве")}},
+			{Term: "When", Value: []w.ValuePart{w.Text("2026-09-26 11:00 — 12:00")}, Face: w.ValueMono},
+			{Term: "Where", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
+			{Term: "Organiser", Value: []w.ValuePart{w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("a.kovaleva@example.org")}}}}}, Variant: w.FieldsLetter},
+		w.Rubric{Text: "Into"},
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "server", Label: "nextcloud"},
+			{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "nextcloud/lichnyj", One: true}},
+			{Mark: &w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "nextcloud/rabota", One: true}},
+			{Icon: "server", Label: "radicale · vps"},
+			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "radicale/proekty", One: true}}}, On: 3, Variant: w.TreeNarrow},
+		w.Msg{Parts: []w.MsgPart{w.Text("Анна gets no answer from Carrel; if she is waiting for one, reply to her letter.")}, Tone: w.MsgAccent, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Add to Работа", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, "s-mailbox-9", "tc-sheet"),
+	overlay("mail", w.Sheet{Icon: "file", Title: "Save to files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("правки-сборник-v3.pdf · 2.4 MB")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+		w.Tree{Rows: []w.TreeRow{
+			{Icon: "server", Label: "sftpgo · vps"},
+			{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
+			{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36},
+			{Icon: "file", Label: "Издательство", Indent: w.TreeLevel36},
+			{Icon: "file", Label: "Сборник", Indent: w.TreeLevel44}}, On: 5},
+		w.Field{Label: "Saved as", Parts: []w.FieldPart{w.Input{Value: "2026-09-24 Вёрстка сборника — правки-сборник-v3 (2).pdf", Label: "Saved as", Mono: true, ReadOnly: true}, w.FieldHint{Parts: []w.Inline{w.Text("Date of the letter, its subject, the file's name. "), w.Strong("(2)"), w.Text(": a file with this name is already there; nothing is overwritten.")}}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Save to Сборник", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidthFull}, "s-mailbox-10", "tc-sheet"),
 	overlay("plain", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close", Href: "/app/contacts"}}, Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The letter went, but not to everyone. Sending again goes only to the refused.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},
 		w.Line{Items: []w.LinePart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, w.Text(" — "), w.Strong("sent")}, Gap: w.LineGapNormal, Block: true},

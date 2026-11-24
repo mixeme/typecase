@@ -2007,19 +2007,11 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-row.is-unread .tc-row__title,.tc-row.is-unread .tc-row__topic{font-weight:600}
 .tc-row.is-unread .tc-row__date{color:var(--tc-ink)}
 
-/* Цитата в тексте письма: строки «>» и цитаты HTML (M-5). */
-.tc-quote{margin:0;padding:1px 0 1px 12px;border-left:2px solid var(--tc-edge);color:var(--tc-muted);
-  font-size:13.5px;line-height:1.65;white-space:pre-wrap}
-.tc-quote .tc-quote{margin-top:6px}
-
-/* Список в тексте письма — с маркерами: у заметки tc-doc__list держит флажки задач. */
-.tc-doc__list.tc-doc__list--bullets{padding-left:18px}
-.tc-doc__list--bullets > li{display:list-item;list-style:disc}
-
 /* Оригинал письма: iframe с sandbox. Белый фон — чужой документ, тема
-   Carrel на него не действует. */
-/* Оригинал идёт сразу под заголовком письма, без второго верхнего поля. */
-.tc-doc--flush-top{padding-top:0}
+   Carrel на него не действует. Цитата и список текста письма — заметки
+   (tc-doc__quote, tc-doc__bullets, M-5). */
+.tc-doc > .tc-line{margin-top:var(--tc-gap-wide)}
+.tc-doc > .tc-original{margin-top:var(--tc-gap-loose)}
 .tc-original{display:block;width:100%;height:430px;border:.5px solid var(--tc-edge);border-radius:3px;background:#fff}
 
 @container tcbox (max-width:800px){

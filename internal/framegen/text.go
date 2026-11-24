@@ -463,11 +463,16 @@ func (g *gen) inl2(e *El) string {
 			case v.Has("tc-doc__bullets"):
 				x = "w.DocBullets{Items: [][]w.DocItemPart{" + g.each(v.Els(), g.item) + "}}"
 			case v.Tag == "a":
-				x = "w.Link{Text: " + q(v.Text()) + `, Href: "#"}`
-			case v.Has("tc-mono"):
+				x = "w.Link{Text: " + q(v.Text()) + ", Href: " + q(v.Attr("href")) + "}"
+			case v.Has("tc-mono") && !(v.Has("tc-mono--t11-dusty") && len(parts) > 1 && strings.HasPrefix(parts[len(parts)-2].v, "w.Link{")):
 				x = g.mono(v)
 			case v.Has("tc-dim--accent"):
 				x = g.span(v, "FaceAccent")
+			case v.Has("tc-mono--t11-dusty") && len(parts) > 1 && parts[len(parts)-1].text && parts[len(parts)-1].v == " " && strings.HasPrefix(parts[len(parts)-2].v, "w.Link{"):
+				// where a letter's link leads, beside it
+				l := parts[len(parts)-2].v
+				parts = parts[:len(parts)-2]
+				x = strings.TrimSuffix(l, "}") + ", Address: " + q(v.Text()) + "}"
 			default:
 				stop("inline? " + join(v.Cls(), " "))
 			}
@@ -515,11 +520,15 @@ func (g *gen) rawparts(e *El) string {
 			case v.Tag == "em":
 				parts = append(parts, "w.Em("+q(v.Text())+")")
 			case v.Tag == "a":
-				parts = append(parts, "w.Link{Text: "+q(v.Text())+`, Href: "#"}`)
-			case v.Has("tc-mono"):
+				parts = append(parts, "w.Link{Text: "+q(v.Text())+", Href: "+q(v.Attr("href"))+"}")
+			case v.Has("tc-mono") && !(v.Has("tc-mono--t11-dusty") && len(parts) > 1 && strings.HasPrefix(parts[len(parts)-2], "w.Link{")):
 				parts = append(parts, g.mono(v))
 			case v.Has("tc-mention"):
 				parts = append(parts, "w.Mention{Name: "+q(v.Text())+"}")
+			case v.Has("tc-mono--t11-dusty") && len(parts) > 1 && parts[len(parts)-1] == `w.Text(" ")` && strings.HasPrefix(parts[len(parts)-2], "w.Link{"):
+				// where a letter's link leads, beside it
+				l := parts[len(parts)-2]
+				parts = append(parts[:len(parts)-2], strings.TrimSuffix(l, "}")+", Address: "+q(v.Text())+"}")
 			default:
 				stop("prose? " + join(v.Cls(), " "))
 			}

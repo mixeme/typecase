@@ -31,7 +31,9 @@ func Allowed(t reflect.Type, widgets []reflect.Type, parts ...reflect.Type) (map
 		isWidget[w] = true
 	}
 	var errs []string
-	seenPart := map[reflect.Type]bool{}
+	// seenPart is the shallowest depth a part was walked at: met nearer the
+	// top later, it is walked again, its fields not cut off by the depth.
+	seenPart := map[reflect.Type]int{}
 	var walk func(ft reflect.Type, path string, depth int)
 	walk = func(ft reflect.Type, path string, depth int) {
 		for ft.Kind() == reflect.Slice || ft.Kind() == reflect.Array || ft.Kind() == reflect.Pointer {
@@ -51,8 +53,8 @@ func Allowed(t reflect.Type, widgets []reflect.Type, parts ...reflect.Type) (map
 				}
 			}
 			for _, p := range parts {
-				if p.Implements(ft) && depth < 4 && !seenPart[p] {
-					seenPart[p] = true
+				if d, seen := seenPart[p]; p.Implements(ft) && depth < 4 && (!seen || depth+1 < d) {
+					seenPart[p] = depth + 1
 					walk(p, path+"("+p.Name()+")", depth+1)
 				}
 			}

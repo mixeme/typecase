@@ -26,6 +26,7 @@ func (DocAttach) docmetaPart() {}
 func (Diag) docmetaPart()      {}
 func (PostForm) docmetaPart()  {}
 func (SecHint) docmetaPart()   {}
+func (SecActs) docmetaPart()   {}
 
 // DocRefs is a column of records a document points at.
 type DocRefs struct {

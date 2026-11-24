@@ -107,6 +107,9 @@ func (g *gen) head(e *El) string {
 			f = append(f, "Meta: &"+g.subparts(k))
 		case k.Has("tc-acts"):
 			f = append(f, "Acts: &"+g.acts(k))
+		case k.Has("tc-btn") && len(f) == 0:
+			// the way back, first: a letter's «← Inbox»
+			f = append(f, "Back: &"+g.button(k))
 		default:
 			stop("head? " + join(k.Cls(), " "))
 		}

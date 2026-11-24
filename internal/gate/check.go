@@ -58,7 +58,10 @@ var (
 	tcRootClass = regexp.MustCompile(`\.tc-([a-z][a-z0-9-]*)\s*[{:,]`)
 	tcClass     = regexp.MustCompile(`\btc-([a-z][a-z0-9-]+)\b`)
 	inlineBad   = regexp.MustCompile(`(?i)(\bon[a-z]+\s*=|<script\b|<style\b|style\s*=)`)
-	idAttr      = regexp.MustCompile(`\sid="([^"]+)"`)
+	// srcdoc is a letter's own HTML in a sandboxed frame without scripts
+	// (Original): its styles are the sender's, not the page's.
+	srcdocAttr = regexp.MustCompile(`\ssrcdoc="[^"]*"`)
+	idAttr     = regexp.MustCompile(`\sid="([^"]+)"`)
 )
 
 // CatalogEntry is a minimal catalog row for gate checks.
@@ -580,7 +583,7 @@ func CheckCatalog(widgetDir string, catalog []CatalogEntry) error {
 func CheckNoInline(catalog []CatalogEntry) error {
 	var bad []string
 	for _, e := range catalog {
-		if inlineBad.MatchString(e.HTML) {
+		if inlineBad.MatchString(srcdocAttr.ReplaceAllString(e.HTML, "")) {
 			bad = append(bad, e.Widget+"/"+e.State)
 		}
 	}

@@ -107,7 +107,7 @@ func (Drop) headTool()   {}
 // Head — tc-head
 //
 // Роль. Шапка страницы или панели: заголовок, строки под ним, действия справа.
-// Вход. Head{Photo, Avatar, Kicker, Title, Crumbs, Subs, Tools, Meta, Acts, Grouped, Middle, Pad}.
+// Вход. Head{Photo, Avatar, Kicker, Title, Crumbs, Subs, Tools, Meta, Back, Acts, Grouped, Middle, Pad}.
 // Состояния. plain | acts | photo | avatar | crumbs | meta | middle | padded.
 // Инварианты. Заголовок — один; строки под ним — после него, действия — в конце; отступы — перечисление; шапка печатает фрагмент своего кадра.
 // Поведение. нет: поведение у действий.
@@ -115,14 +115,17 @@ func (Drop) headTool()   {}
 // Содержимое. Фотография или аватар, рубрика над заголовком, заголовок с меткой и бейджем, путь, строки под заголовком, строка кнопок, действия.
 // Чего нет. Вкладок: разделы страницы — переключатель в действиях или бар под шапкой.
 type Head struct {
-	Photo   *HeadPhoto
-	Avatar  *Avatar
-	Kicker  *Rubric // a rubric over the title: what kind of page it is
-	Title   *HeadTitle
-	Crumbs  *Crumbs
-	Subs    []HeadSub
-	Tools   []HeadTool // small buttons under the lines: a panel's own actions, and its «⋯» with the menu
-	Meta    *HeadSub   // a single line instead of the titles: a document's head
+	Photo  *HeadPhoto
+	Avatar *Avatar
+	Kicker *Rubric // a rubric over the title: what kind of page it is
+	Title  *HeadTitle
+	Crumbs *Crumbs
+	Subs   []HeadSub
+	Tools  []HeadTool // small buttons under the lines: a panel's own actions, and its «⋯» with the menu
+	Meta   *HeadSub   // a single line instead of the titles: a document's head
+	// Back is the way back first in the head, before Meta: a letter's
+	// «← Inbox» (the owner, 30.09).
+	Back    *Button
 	Acts    *Acts
 	Grouped bool // the photo and the titles side by side as one group
 	Middle  bool // the actions centred on the titles, not on their top
@@ -159,6 +162,9 @@ func (h Head) titles() string {
 func (h Head) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-head", pick(h.Middle, "tc-head--mid"), h.Pad.class()) + `>`)
+	if h.Back != nil {
+		s.WriteString(h.Back.html(nil))
+	}
 	switch {
 	case h.Meta != nil:
 		s.WriteString(h.Meta.html("tc-head__sub--top0"))

@@ -152,6 +152,7 @@ var _ = add(
 	form("default", w.Push{Items: []w.PushPart{w.Text("Default")}}, "s-dup-3", "tc-push"),
 
 	// tc-rubric
+	form("mail", w.Rubric{Text: "Attachments", Items: []w.RubricPart{w.Num{Value: 3}}, Variant: w.RubricBelow}, "s-mailbox-6", "tc-rubric"),
 	form("mail", w.Rubric{Text: "", Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office "), w.Badge{Label: "sending does not work", Tone: w.BadgeAlert}}, Gap: w.LineGapNormal}, w.Line{Items: []w.LinePart{w.Button{Label: "Show password", Small: true}, w.Button{Label: "Test again", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGapNormal}}, Variant: w.RubricDanger}, "s-mailbox-26", "tc-rubric"),
 	form("plain", w.Rubric{Text: "Attached", Items: []w.RubricPart{w.Num{Value: 4}, w.Line{Items: []w.LinePart{w.Drop{Trigger: w.Button{Label: "Attach", Menu: true, Icon: "clip", Small: true}, Menu: w.Menu{Items: []w.MenuPart{
 		w.MenuItem{Icon: "con", Label: "Contact", To: "/app/mail/send?op=attach&what=contact"},
