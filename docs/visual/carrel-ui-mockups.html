@@ -15436,6 +15436,43 @@ dav: HTTP 503: the server is busy</div>
   </figure>
 
 <figure style="flex:1 1 330px">
+  <div class="frame" data-frame="account-18">
+    <div class="frame-label"><span>Учётная запись · Key escrow единственного администратора</span><span class="frag">фрагмент</span><i>рубрика Key escrow, страница целиком — выше</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-form">
+        <div class="tc-fset">
+          <div class="tc-rubric">Key escrow</div>
+          <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">No copy of your data key is deposited: if you lose your password, nobody can recover the account.</span></div>
+          <div class="tc-field"><button class="tc-btn" title="No other administrator could recover it: you are the only one." type="button" disabled>Deposit my key</button></div>
+        </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Та же рубрика у единственного администратора: кнопка выключена с причиной в подсказке.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="account-19">
+    <div class="frame-label"><span>Key escrow · единственный администратор</span><span class="frag">фрагмент</span><i>страница /app/settings/escrow</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Key escrow</div><div class="tc-head__sub">No copy of your data key is deposited</div></div></div>
+        <div class="tc-form">
+          <div class="tc-fset tc-fset--lead">
+            <div class="tc-rubric">What a deposit does</div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">With a copy, an administrator with the escrow master password can recover this account if you lose your password, and read the DAV credentials you save here. You can withdraw it at any time.</span></div>
+            <div class="tc-field"><button class="tc-btn" title="No other administrator could recover it: you are the only one." type="button" disabled>Deposit my key</button></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Единственный администратор ключ не депонирует: восстановить его некому. «Deposit my key» выключена, причина — в её подсказке; второй администратор её включает.</figcaption>
+  </figure>
+
+<figure style="flex:1 1 330px">
   <div class="frame" data-frame="account-13">
     <div class="frame-label"><span>Key escrow · схема выключена</span><span class="frag">фрагмент</span><i>блок Key escrow</i></div>
     <div class="tc-root tc-shell">
@@ -26655,6 +26692,27 @@ password  4c1-tide-oven</div>
 </div>
 <figcaption>Самый опасный экран во всей администраторской части, и первое, что на нём стоит, — объяснение, чем депонирование <b>не</b> является. Текст взят из продукта; после решения владельца 16.10 о ссылке на историю пароля восстановление не «mailed», а «shown to them». Покрытие новых учёток — один флажок в Policy со своей кнопкой Save, не кнопка в шапке и флажок сразу: это одно и то же. Ниже — мастер-пароль, восстановление и таблица, отвечающая на вопрос, который администратор задаёт в первую очередь: <b>кого именно</b> этот мастер-пароль открывает. Строка «mix» с прочерками показывает, что администратор может не быть покрыт собственным механизмом, — это нормально и должно быть видно.</figcaption>
 </figure>
+
+<figure style="flex:1 1 330px">
+  <div class="frame" data-frame="s-admin-35">
+    <div class="frame-label"><span>Key escrow · Recover своего логина</span><span class="frag">фрагмент</span><i>рубрика Recover an account после Recover, страница целиком — выше</i></div>
+    <div class="tc-root tc-shell">
+      <div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">
+        <div class="tc-form">
+          <form class="tc-fset" action="/admin/escrow" method="post"><input type="hidden" name="csrf" value="7f3a91de"><input type="hidden" name="action" value="recover">
+            <div class="tc-rubric">Recover an account</div>
+            <div class="tc-field tc-field--md"><label>Account</label><input class="tc-in is-error is-focus" type="text" name="login" value="mix" aria-label="Account" required><span class="tc-field__hint tc-dim--danger">You are signed in as mix: change your password on Account.</span></div>
+            <div class="tc-field tc-field--lg"><label>Master password</label><input class="tc-in" type="password" name="master" aria-label="Master password" required></div>
+            <div class="tc-field tc-field--md"><label>Temporary password for the user</label><input class="tc-in is-mono" type="text" name="temp" value="9f2-brick-lamp" aria-label="Temporary password for the user" required></div>
+            <div class="tc-field"><button class="tc-btn is-danger" type="submit">Recover</button></div>
+            <div class="tc-field tc-grow"><span class="tc-field__hint tc-field__hint--max580">Connections survive a recovery. The user sees it in their password history, and gets a letter when mail can reach them.</span></div>
+          </form>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <figcaption>Свой логин Recover не берёт: свой пароль меняют на Account. Поле — текст, его не выключить, поэтому отказ стоит под ним.</figcaption>
+  </figure>
 
 <figure>
 <div class="frame" data-frame="s-admin-30" data-screen="/admin/escrow" data-part="recovered">

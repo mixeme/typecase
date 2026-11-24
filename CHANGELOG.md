@@ -88,6 +88,12 @@ do, not what the authors did.
 
 ### Mockup
 
+- **The only administrator deposits no key** (the owner, Carrel's task 281):
+  `account-18` (the account's Key escrow) and `account-19` (the escrow
+  page) draw «Deposit my key» off with its reason «No other administrator
+  could recover it: you are the only one.»; `s-admin-35` refuses one's own
+  login in Recover under the Account field: «You are signed in as mix:
+  change your password on Account.».
 - **Kinds in words go in the sections' order** (the owner, Carrel's task 280):
   contacts, calendars, tasks, notes, files — in the sign-in's tagline
   (`s-auth-1`, `-13`, `rest-3`), the first-visit words (`states-1`), «Connect
