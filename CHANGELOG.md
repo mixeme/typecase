@@ -40,7 +40,8 @@ do, not what the authors did.
   remove only it: struck through). `TreeRow.Count` is a folder's unread
   number, as a section's in the navigation. `RailSec.Failed` and `Why` are
   a source that did not answer, as an alarm with the reason in its hint
-  («no reply · 8 s»). A `Check` stands in a card's row (the mailbox's
+  («no reply · 8 s»), and `Retry` asks that one alone again (the owner,
+  25.11: the page's refresh asks them all). A `Check` stands in a card's row (the mailbox's
   «The server puts a copy of sent letters into Sent itself» in its foot),
   a `Msg` in `MainResults`, a `Sec` in a `Dialog` (what connecting a
   mailbox tried, under its rubric).
@@ -109,9 +110,8 @@ do, not what the authors did.
   and edit a mailbox, and the folders' roles, are forms with names, as
   «Connect account»; Cancel and Skip are links; the DAV card of `-26` is
   today's (Update collection list); the instance's settings (`-29`) are
-  `s-admin-32` with the rubric «Users’ own mailboxes»; a mailbox that did
-  not answer has no button Retry of its own (the page's refresh asks it
-  again, as for any source); «Select all shown» left the folder's bar (the
+  `s-admin-32` with the rubric «Users’ own mailboxes»; «Select all shown»
+  left the folder's bar (the
   selection bar has «Select all», as files').
 - **The only administrator deposits no key** (the owner, Carrel's task 281):
   `account-18` (the account's Key escrow) and `account-19` (the escrow

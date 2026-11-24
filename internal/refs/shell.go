@@ -324,7 +324,7 @@ var _ = add(
 
 	// tc-railsec
 	shell("failed", w.RailSec{Items: []w.RailSecPart{w.Rubric{Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office")}, Gap: w.LineGapNormal}}}},
-		Failed: "no reply · 8 s", Why: "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work."}, "s-mailbox-1", "tc-railsec"),
+		Failed: "no reply · 8 s", Why: "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.", Retry: &w.Button{Label: "Retry", Href: "?retry=office"}}, "s-mailbox-1", "tc-railsec"),
 	shell("plain", w.RailSec{Items: []w.RailSecPart{
 		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "169", Current: true}}}, "components-11", "tc-railsec"),
 	shell("apart", w.RailSec{Items: []w.RailSecPart{

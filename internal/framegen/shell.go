@@ -1673,6 +1673,9 @@ func (g *gen) railsec(e *El) string {
 			// a source that did not answer (a mailbox)
 			d := k.Kid("tc-dim--danger")
 			f = append(f, "Failed: "+q(d.Text()), "Why: "+q(d.Attr("title")))
+			if b := k.Kid("tc-btn"); b != nil {
+				f = append(f, "Retry: &"+strings.Replace(g.button(b), ", Small: true", "", 1))
+			}
 		case k.Has("tc-railsec__note"):
 			f = append(f, "Note: "+q(k.Text()))
 		default:

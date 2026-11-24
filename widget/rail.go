@@ -91,7 +91,7 @@ func (Nav) railSecPart()     {}
 // RailSec — tc-railsec
 //
 // Роль. Секция рейла: рубрика и то, что под ней, — источники с галками, дерево, навигация настроек, теги.
-// Вход. RailSec{Items, Tags, Note, Apart, Failed, Why}.
+// Вход. RailSec{Items, Tags, Note, Apart, Failed, Why, Retry}.
 // Состояния. plain | apart | tags | empty.
 // Инварианты. Рубрика — первой, если есть; теги — строкой после строк; секция печатает фрагмент своего кадра.
 // Поведение. нет: поведение у строк и тегов.
@@ -108,6 +108,9 @@ type RailSec struct {
 	// («no reply · 8 s»). The page's refresh asks it again.
 	Failed string
 	Why    string
+	// Retry asks that source alone again, after Failed: the page's refresh
+	// asks them all (the owner, 25.11).
+	Retry *Button
 }
 
 // Render prints the section.
@@ -130,7 +133,13 @@ func (r RailSec) html(m mix) string {
 		s.WriteString(`<div class="tc-railsec__note">` + esc(r.Note) + `</div>`)
 	}
 	if r.Failed != "" {
-		s.WriteString(`<div class="tc-railsec__note"><span class="tc-dim--danger"` + attr("title", r.Why) + `>` + esc(r.Failed) + `</span></div>`)
+		retry := ""
+		if r.Retry != nil {
+			b := *r.Retry
+			b.Small = true
+			retry = " " + b.html(nil)
+		}
+		s.WriteString(`<div class="tc-railsec__note"><span class="tc-dim--danger"` + attr("title", r.Why) + `>` + esc(r.Failed) + `</span>` + retry + `</div>`)
 	}
 	s.WriteString(`</div>`)
 	return s.String()

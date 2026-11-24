@@ -74,6 +74,7 @@ func Mailbox1() Screen {
 					},
 					Failed: "no reply · 8 s",
 					Why:    "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.",
+					Retry:  &w.Button{Label: "Retry", Href: "?retry=office"},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
@@ -312,6 +313,7 @@ func Mailbox3() Screen {
 					},
 					Failed: "no reply · 8 s",
 					Why:    "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.",
+					Retry:  &w.Button{Label: "Retry", Href: "?retry=office"},
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
