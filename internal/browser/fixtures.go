@@ -42,7 +42,6 @@ func GoodFixtures() map[Name]Fixture {
 	taps := w.Shell{Body: w.ShellBody{Main: w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Text: "Tasks"}, Acts: &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close"}}}},
 		w.List{Rows: []w.ListRow{w.DueRow{Tick: w.Tick{Label: "Done"}, Mark: w.Mark{Colour: "#4A6B52"}, Title: []w.Inline{w.Text("Pack")}, Due: "12 Aug", Progress: "—", Source: "nextcloud"}}},
-		w.RailSec{Items: []w.RailSecPart{w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Personal", Meta: "7"}}},
 		w.Form{Items: []w.FormPart{w.Check{On: true, Parts: []w.CheckPart{w.Text("I agree")}}}},
 		w.BottomNav{Items: []w.BottomItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "cal", Label: "Calendar", Href: "#"}}, On: 1},
 	}}, Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}}, On: 1}}}}.Render()

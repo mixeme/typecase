@@ -22,7 +22,7 @@ func Backup1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -357,7 +357,7 @@ func Backup2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -762,7 +762,7 @@ func Backup19() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -1166,7 +1166,7 @@ func Backup12() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -1591,7 +1591,7 @@ func Backup13() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -2018,7 +2018,7 @@ func Backup14() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -2395,7 +2395,7 @@ func Backup6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2477,7 +2477,7 @@ func Backup7() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2626,7 +2626,7 @@ func Backup15() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2803,7 +2803,7 @@ func Backup16() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2989,7 +2989,7 @@ func Backup17() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -3151,7 +3151,7 @@ func Backup8() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -3483,7 +3483,7 @@ func Backup20() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -3814,7 +3814,7 @@ func Backup18() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},

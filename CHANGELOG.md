@@ -8,6 +8,15 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`Nav.Opens` is gone; a `Scrim` no longer stands in `Main`, nor a `RailSec` in
+  a `Sheet` or a sheet picker's rail** (Carrel's task 275): the current
+  section pressed again opens the rail itself as a panel, not a sheet that
+  copied the sources. None of them was printed by Carrel; a page's own
+  sheets stand in `Shell.Dialogs`.
+- **`TickRowTouch` is gone, and a `RailSec` no longer stands in `Main`**
+  (Carrel's task 275): the phone's sources are the rail opened as a panel
+  now, its rows 44 px high there by the drawer's CSS; phone-2 drew them as a
+  page of its own. Neither was printed by Carrel.
 - **`TopDrop.End` is gone: every menu of the top bar stands under its
   button's right end** (the owner, 24.11: the bar ends at the page's right
   edge, and a menu opens into the page). Drop `End: true`; a drop that had
@@ -21,8 +30,20 @@ do, not what the authors did.
   became steps it printed the same class as `EmptySmall`. Use
   `EmptySmall`.
 
-### Fixed
+### Added
 
+- **The rail opens as a panel on a narrow width** (Carrel's tasks 274, 275;
+  the owner, 24.11). Pressed again, the current section opens the rail over
+  the list — its sources, in the rail of icons (641–1007) as a panel 264 px
+  wide, on a phone over the whole screen above the bottom bar; the same press,
+  Esc or a press beside it closes it. Settings and administration show their
+  sections as icons in the rail of icons, and on a phone three places at the
+  bottom: «← App», the current section and «Sections» (`Nav.Sections`, on the
+  navigation that holds «back»), which opens the rail with all of them.
+  `ShellBody.RailOpen` draws the open state. To do: `Sections: true` on the
+  «Back to app» navigation of settings and administration.
+
+### Fixed
 - **Text sits beside its icon in every browser** (Carrel's task 276). The
   fonts' `@font-face` pin the line's metrics to each font's own typo
   metrics (`ascent-override`, `descent-override`, `line-gap-override`):

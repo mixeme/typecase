@@ -84,6 +84,8 @@ body[data-tc-root]>.tc-overlay>.tc-shell__body{flex:1 0 auto}
 .tc-nav--bottom{display:none}
 .tc-nav .tc-nav__item{display:flex;align-items:center;gap:9px;height:29px;padding:0 8px;border-radius:3px;font-size:13.5px;color:var(--tc-ink)}
 .tc-nav .tc-nav__item.is-on{background:var(--tc-card);font-weight:600}
+/* «Sections» — пункт только телефона: на нём разделы настроек сведены за одну кнопку (задача Carrel 274). */
+.tc-nav .tc-nav__all{display:none}
 .tc-nav .tc-nav__item.is-on .tc-num{color:var(--tc-muted)}
 .tc-nav svg{width:15px;height:15px;flex:none;stroke:currentColor;stroke-width:1.3;fill:none;
   stroke-linecap:round;stroke-linejoin:round;opacity:.75}
@@ -1177,6 +1179,21 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-nav{padding:0;align-items:center}
   .tc-nav .tc-nav__item{width:40px;padding:0;justify-content:center;overflow:hidden;font-size:0;gap:0}
   .tc-nav .tc-num{display:none}
+  /* Разделы настроек и администрирования — значками под «Back to app», как разделы приложения (владелец, 24.11;
+     задача Carrel 274): их список стоит в .tc-railsec, который рейл из значков иначе прячет. */
+  .tc-shell__rail .tc-railsec:has(> .tc-nav){display:flex;align-items:stretch}
+  .tc-shell__body:not([data-tc-rail-open]) > .tc-shell__rail .tc-railsec:has(> .tc-nav) > :not(.tc-nav){display:none}
+  /* Рейл открыт (нажатие на текущий раздел, задача Carrel 275): панелью поверх списка во всю свою ширину, с подписями,
+     числами и источниками; список стоит, где стоял. */
+  .tc-shell__body[data-tc-rail-open]{position:relative}
+  .tc-shell__body[data-tc-rail-open] > :is(.tc-main,.tc-side){grid-column:2}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail{position:absolute;top:0;bottom:0;left:0;z-index:8;width:264px;
+    padding:12px 0 0;align-items:stretch;overflow-y:auto;background:var(--tc-bg);box-shadow:6px 0 18px rgba(31,36,32,.14)}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail :is(.tc-railsec,.tc-railfoot){display:flex}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-nav{padding:0 8px;align-items:stretch}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-nav .tc-nav__item{width:auto;padding:0 8px;justify-content:flex-start;
+    overflow:visible;font-size:13.5px;gap:9px}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-nav .tc-num{display:inline}
   /* Крылья brand/actions остаются flex:1 1 0 — поиск по центру, сжимается. */
   .tc-top .tc-search{flex:0 1 560px;width:auto;max-width:560px}
 }
@@ -1211,6 +1228,29 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-shell__rail .tc-nav svg{width:17px;height:17px;opacity:1}
   .tc-shell__rail .tc-nav .tc-emblem{width:16px;height:16px}
   .tc-shell__rail .tc-num{display:none}
+  /* Разделы настроек внизу — три места (владелец, 24.11; задача Carrel 274): «← App», текущий раздел, «Sections». */
+  .tc-shell__rail .tc-railsec:has(> .tc-nav){display:contents}
+  .tc-shell__body:not([data-tc-rail-open]) > .tc-shell__rail .tc-railsec:has(> .tc-nav) > :not(.tc-nav){display:none}
+  .tc-shell__body:not([data-tc-rail-open]) > .tc-shell__rail .tc-railsec > .tc-nav > .tc-nav__item:not(.is-on){display:none}
+  .tc-shell__body:not([data-tc-rail-open]) > .tc-shell__rail .tc-railsec > .tc-nav > .tc-nav__item.is-on{order:1}
+  .tc-shell__rail .tc-nav .tc-nav__all{display:flex;order:2}
+  /* Рейл открыт (текущий раздел или «Sections», задача Carrel 275): во весь экран над своей панелью — источники или
+     все разделы списком, сверху вниз; панель разделов остаётся внизу. */
+  .tc-shell__body[data-tc-rail-open] > .tc-main{display:none}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail{grid-row:1 / span 2;flex-direction:column;border-top:0;padding:12px 0 0;
+    overflow-y:auto;background:var(--tc-bg)}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail :is(.tc-railsec,.tc-railfoot){display:flex}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail > .tc-nav{display:flex;flex-direction:row;order:9;margin-top:auto;
+    position:sticky;bottom:0;border-top:.5px solid var(--tc-rule);background:var(--tc-surface)}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-railsec > .tc-nav{display:flex;flex-direction:column;padding:0 8px}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-railsec > .tc-nav > .tc-nav__item{flex:none;flex-direction:row;
+    justify-content:flex-start;gap:9px;height:44px;padding:0 8px;font-size:13.5px;color:var(--tc-ink);border-radius:3px}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-railsec > .tc-nav > .tc-nav__item.is-on{background:var(--tc-card);
+    color:var(--tc-ink);font-weight:600}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-railsec .tc-num{display:inline}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-nav__all{color:var(--tc-accent)}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-tickrow{min-height:44px}
+  [data-tc-noscript] .tc-shell__rail .tc-nav .tc-nav__all{display:none}
   .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
     padding:8px;gap:8px;overflow-x:clip}
   /* Поиск свёрнут в значок: подсказки под ним — во всю полосу, а не шириной значка. */
@@ -1919,7 +1959,6 @@ label.tc-field__swatch{position:relative;cursor:pointer}
 .tc-tick--edge-dusty.tc-tick--edge-dusty{border-color:var(--tc-dusty)}
 .tc-tickrow--padl0.tc-tickrow--padl0{padding-left:0}
 .tc-tickrow--inset.tc-tickrow--inset{padding-left:var(--tc-page-gutter-narrow)}
-.tc-tickrow--h44.tc-tickrow--h44{height:44px}
 .tc-tickrow__label--fw600.tc-tickrow__label--fw600{font-weight:600}
 .tc-tickrow__meta--dusty.tc-tickrow__meta--dusty{color:var(--tc-dusty)}
 .tc-tickrow__tick--ml2.tc-tickrow__tick--ml2{margin-left:2px}

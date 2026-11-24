@@ -14,10 +14,10 @@ type NavItem struct {
 	Title  string // the name of an item drawn without a label
 }
 
-func (it NavItem) html(on bool, opens string) string {
+func (it NavItem) html(on bool) string {
 	var s strings.Builder
 	s.WriteString(`<a` + class(nil, is("on", on), "tc-nav__item") + attr("href", it.Href) + attr("title", it.Title) +
-		attr("aria-label", pick(it.Label == "", it.Title)) + attr("aria-current", pick(on, "page")) + attr("data-tc-open", pick(on, opens)) + `>`)
+		attr("aria-label", pick(it.Label == "", it.Title)) + attr("aria-current", pick(on, "page")) + `>`)
 	if it.Emblem != nil {
 		s.WriteString(it.Emblem.html(nil))
 	} else {
@@ -38,10 +38,10 @@ func (it NavItem) html(on bool, opens string) string {
 // Nav — tc-nav
 //
 // Роль. Навигация по разделам: в рейле приложения, в рейле настроек, строка «назад».
-// Вход. Nav{Items, On, Apart, Opens, Target}.
-// Состояния. plain | back | apart | icons.
+// Вход. Nav{Items, On, Apart, Sections, Target}.
+// Состояния. plain | back | apart | icons | sections.
 // Инварианты. Текущий раздел — один, его номер, а не флаг у каждого пункта; пункт — ссылка; навигация печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает раздел; текущий помечен для чтения (aria-current). В рейле из значков (641–1007) повторное нажатие на текущий раздел открывает лист его источников (Opens).
+// Поведение. Нажатие открывает раздел; текущий помечен для чтения (aria-current). На узкой ширине (рейл из значков 641–1007, телефон до 640) повторное нажатие на текущий раздел открывает рейл панелью — с источниками списка, а у настроек — со всеми разделами; ещё одно нажатие, Esc или нажатие мимо панели её закрывают (задача Carrel 275). На телефоне разделы настроек внизу — «← App», текущий раздел и «Sections» (Sections), который открывает ту же панель со всеми разделами (владелец, 24.11; задача Carrel 274).
 // Эталон. кадр `s-contacts-1`, фрагмент `.tc-nav`.
 // Содержимое. Пункты: значок или знак службы, название, число.
 // Чего нет. Вложенных пунктов: подразделы — секции рейла под навигацией.
@@ -49,9 +49,12 @@ type Nav struct {
 	Items []NavItem
 	On    int  // the current section, counted from 1; 0 for none
 	Apart bool // 2 px above: a single «back» under the top bar
-	// Opens is the ID of the sheet (Scrim) with the section's sources: in the
-	// rail of icons (Р-3, rail) pressing the current section again opens it.
-	Opens string
+	// Sections adds «Sections», an item only a phone shows: settings and
+	// administration have more sections than its bottom bar holds, so there
+	// it shows «← App» (this navigation's item), the current section and
+	// «Sections», which opens the rail with all of them (the owner, 24.11;
+	// Carrel's task 274). It belongs to the navigation that holds «back».
+	Sections bool
 	// Target is the name of the zone the links and forms inside ask their
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
@@ -65,7 +68,10 @@ func (n Nav) html(m mix) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(m, "tc-nav", pick(n.Apart, "tc-nav--top2")) + attr("data-tc-target", n.Target) + `>`)
 	for i, it := range n.Items {
-		s.WriteString(it.html(i+1 == n.On, n.Opens))
+		s.WriteString(it.html(i+1 == n.On))
+	}
+	if n.Sections {
+		s.WriteString(`<button class="tc-nav__item tc-nav__all tc-js" type="button" data-tc-toggle="rail" aria-expanded="false"><svg>` + Icon("menu").use() + `</svg>Sections</button>`)
 	}
 	s.WriteString(`</div>`)
 	return s.String()

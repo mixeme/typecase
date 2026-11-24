@@ -22,7 +22,7 @@ func Profile1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -606,7 +606,7 @@ func Profile27() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -1191,7 +1191,7 @@ func Profile25() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -1250,7 +1250,7 @@ func Profile26() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -1864,7 +1864,7 @@ func Profile2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2012,7 +2012,7 @@ func Profile24() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2166,7 +2166,7 @@ func Profile14() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2309,7 +2309,7 @@ func Profile16() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2448,7 +2448,7 @@ func Profile22() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2602,7 +2602,7 @@ func Profile23() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2757,7 +2757,7 @@ func Profile11() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -2906,7 +2906,7 @@ func Profile3() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -3061,7 +3061,7 @@ func Profile4() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -4223,7 +4223,7 @@ func Profile7() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -4414,7 +4414,7 @@ func Profile8() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -4618,7 +4618,7 @@ func Profile9() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -4838,7 +4838,7 @@ func Profile10() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},

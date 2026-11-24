@@ -139,40 +139,6 @@ func TestOpensInPlace(t *testing.T) {
 	}
 }
 
-// TestRailReopensSources (Р-3): in the rail of icons the current section,
-// pressed again, opens the sheet with its sources; where the rail shows the
-// sources itself, the current section stays a link.
-func TestRailReopensSources(t *testing.T) {
-	needChrome(t)
-	body := w.Shell{Body: w.ShellBody{
-		Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}, {Icon: "note", Label: "Notes", Href: "#"}}, On: 2, Opens: "sources"}},
-		Main: w.Main{Items: []w.MainPart{
-			w.Head{Title: &w.HeadTitle{Text: "Combined notebook"}},
-			w.Scrim{ID: "sources", Closed: true, Content: w.Sheet{Title: "Sources",
-				Body: []w.SheetPart{w.Dim{Parts: []w.Inline{w.Text("Записи")}}},
-				Foot: []w.SheetFootPart{w.Button{Label: "Apply", Kind: w.ButtonPrimary}}}},
-		}}}}.Render()
-	h := browser.NewHarness(t)
-	url := h.RegisterPage("rail-sources", browser.PageHTML(body, flush))
-	shown := `(() => { const s = document.getElementById("sources"); return !s.hidden && s.getClientRects().length > 0; })()`
-	for _, c := range []struct {
-		width int
-		want  bool
-	}{{820, true}, {1351, false}} {
-		var opened bool
-		err := h.Run(url, c.width, 700,
-			chromedp.Click(`.tc-nav__item[aria-current="page"]`, chromedp.ByQuery),
-			chromedp.Evaluate(shown, &opened),
-		)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if opened != c.want {
-			t.Errorf("%d px: the sources sheet opened %v, want %v", c.width, opened, c.want)
-		}
-	}
-}
-
 // TestDocTableLine: on a narrow screen a table in a text has Wrap / One line
 // over it; One line keeps each row to one line and the table scrolls
 // sideways, Wrap brings the words back. On a wide screen the switch is not

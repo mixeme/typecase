@@ -22,7 +22,7 @@ func Plan1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -192,7 +192,7 @@ func Plan6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -332,7 +332,7 @@ func Plan2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -527,7 +527,7 @@ func Plan3() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -681,7 +681,7 @@ func Davloom5() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -897,7 +897,7 @@ func Account15() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -1140,7 +1140,7 @@ func Plan4() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -1413,7 +1413,7 @@ func Plan5() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},

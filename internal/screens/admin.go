@@ -21,7 +21,7 @@ func Admin1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -256,7 +256,7 @@ func Admin2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -441,7 +441,7 @@ func Admin24() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Administration"},
@@ -683,7 +683,7 @@ func Admin34() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Administration"},
@@ -908,7 +908,7 @@ func Admin3() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -1120,7 +1120,7 @@ func Admin32() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -1388,7 +1388,7 @@ func Admin33() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -1612,7 +1612,7 @@ func Admin4() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -1837,7 +1837,7 @@ func Admin25() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -1928,7 +1928,7 @@ func Admin26() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2025,7 +2025,7 @@ func Admin5() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2167,7 +2167,7 @@ func Admin27() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2278,7 +2278,7 @@ func Admin28() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2395,7 +2395,7 @@ func Admin29() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2591,7 +2591,7 @@ func Admin6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -2814,7 +2814,7 @@ func Admin30() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -3068,7 +3068,7 @@ func Admin31() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},
@@ -3163,7 +3163,7 @@ func Admin7() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Administration"},

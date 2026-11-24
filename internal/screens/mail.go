@@ -1352,7 +1352,7 @@ func Mail4() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},

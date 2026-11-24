@@ -22,7 +22,7 @@ func Davloom1() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -280,7 +280,7 @@ func Davloom2() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -458,7 +458,7 @@ func Davloom3() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -624,7 +624,7 @@ func Davloom6() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -748,7 +748,7 @@ func Davloom7() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},
@@ -1166,7 +1166,7 @@ func Davloom8() Screen {
 		Body: w.ShellBody{
 			Rail: []w.RailPart{
 				w.Nav{Items: []w.NavItem{
-					{Icon: "back", Label: "Back to app", Href: "#"}}},
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "Settings"},
@@ -1426,7 +1426,7 @@ func Davloom9() Screen {
 			Body: w.OverlayBody{
 				Rail: []w.OverlayRailPart{
 					w.Nav{Items: []w.NavItem{
-						{Icon: "back", Label: "Back to app", Href: "#"}}},
+						{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "Settings"},

@@ -172,7 +172,6 @@ var _ = add(
 	form("variant", w.Rubric{Text: "DAV servers", Items: []w.RubricPart{w.Mono{Text: "4", Variant: w.MonoTight}}, Variant: w.RubricSplit}, "s-profile-1", "tc-rubric"),
 	form("variant", w.Rubric{Text: "baikal", Items: []w.RubricPart{w.Line{Items: []w.LinePart{w.Button{Label: "Show password", Small: true}, w.Button{Label: "Test again", Small: true}, w.Button{Label: "Edit", Small: true}, w.Button{Label: "Disconnect", Kind: w.ButtonDanger, Small: true}}, Gap: w.LineGapNormal}}, Variant: w.RubricDanger}, "s-profile-1", "tc-rubric"),
 	form("variant", w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}}, "s-notes-2", "tc-rubric"),
-	form("variant", w.Rubric{Text: "nextcloud", Variant: w.RubricRail}, "phone-2", "tc-rubric"),
 	form("variant", w.Rubric{Text: "Timeline", Variant: w.RubricBottom2}, "s-contacts-7", "tc-rubric"),
 	form("item", w.Rubric{Text: "mix", Items: []w.RubricPart{w.Mono{Text: "carrel.example", Variant: w.MonoTightPlain}}, Variant: w.RubricItemLine}, "account-5", "tc-rubric"),
 	form("variant", w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}, Variant: w.RubricRail}, "components-11", "tc-rubric"),

@@ -354,6 +354,9 @@ func (g *gen) body(b *El) string {
 	for _, v := range allOf(b, shellHeight) {
 		f = append(f, "Height: w."+v)
 	}
+	if b.HasAttr("data-tc-rail-open") {
+		f = append(f, "RailOpen: true")
+	}
 	return "w.ShellBody{" + join(f, ", ") + "}"
 }
 
@@ -675,7 +678,7 @@ func (g *gen) tickrow(e *El) string {
 	for _, v := range allOf(e, []kv{{"is-all", "TickRowAll"}, {"is-root", "TickRowRoot"}, {"is-ext", "TickRowExternal"}}) {
 		f = append(f, "Kind: w."+v)
 	}
-	for _, v := range allOf(e, []kv{{"tc-tickrow--padl0", "TickRowGroup"}, {"tc-tickrow--inset", "TickRowNested"}, {"tc-tickrow--h44", "TickRowTouch"}}) {
+	for _, v := range allOf(e, []kv{{"tc-tickrow--padl0", "TickRowGroup"}, {"tc-tickrow--inset", "TickRowNested"}}) {
 		f = append(f, "Form: w."+v)
 	}
 	if lead := els[1]; lead.Tag == "svg" {
@@ -1475,8 +1478,12 @@ func navItem(a *El) string {
 
 func (g *gen) nav(e *El) string {
 	var items []string
-	on := 0
+	on, sections := 0, false
 	for i, a := range e.Els() {
+		if a.Has("tc-nav__all") {
+			sections = true // «Sections», a phone's item (Carrel's task 274)
+			continue
+		}
 		if a.Has("is-on") {
 			on = i + 1
 		}
@@ -1488,6 +1495,9 @@ func (g *gen) nav(e *El) string {
 	}
 	if e.Has("tc-nav--top2") {
 		f = append(f, "Apart: true")
+	}
+	if sections {
+		f = append(f, "Sections: true")
 	}
 	return "w.Nav{" + join(f, ", ") + "}"
 }

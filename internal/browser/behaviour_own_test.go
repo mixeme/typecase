@@ -295,3 +295,71 @@ func TestSplitArrowOpensTheRest(t *testing.T) {
 		t.Errorf("with the script: the arrow opened %v, Esc closed %v, focus back on the arrow %v", opened, closed, back)
 	}
 }
+
+// TestRailOpensAsPanel (Carrel's tasks 274, 275): on a narrow width the rail
+// opens as a panel. Settings show their sections as icons in the rail of
+// icons, and on a phone «← App», the current section and «Sections» at the
+// bottom; «Sections» or the current section opens the rail with all of them,
+// Esc closes it. A list's current section opens its sources so, in both
+// narrow modes; on a wide page it stays a link.
+func TestRailOpensAsPanel(t *testing.T) {
+	needChrome(t)
+	sections := []w.NavItem{{Icon: "user", Label: "Account", Href: "#a"}, {Icon: "server", Label: "Connections", Href: "#c"}, {Icon: "file", Label: "Attachments", Href: "#t"},
+		{Icon: "device", Label: "New device", Href: "#d"}, {Icon: "archive", Label: "Backup", Href: "#b"}, {Icon: "link", Label: "Published links", Href: "#p"}, {Icon: "theme", Label: "Appearance", Href: "#e"}}
+	settings := w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Settings"}}, Body: w.ShellBody{
+		Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "back", Label: "Back to app", Href: "#app"}}, Sections: true},
+			w.RailSec{Items: []w.RailSecPart{w.Rubric{Text: "Settings"}, w.Nav{Items: sections, On: 2}}}},
+		Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Connections"}}}}}}
+	list := w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Calendar"}}, Body: w.ShellBody{
+		Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#con"}, {Icon: "cal", Label: "Calendar", Href: "#cal"}, {Icon: "task", Label: "Tasks", Href: "#task"}}, On: 2},
+			w.RailSec{Items: []w.RailSecPart{w.Rubric{Text: "nextcloud"}, w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"}, w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"}}}},
+		Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "Combined calendar"}}}}}}
+	h := browser.NewHarness(t)
+	surl := h.RegisterPage("rail-settings", browser.PageHTML(settings.Render(), ""))
+	lurl := h.RegisterPage("rail-list", browser.PageHTML(list.Render(), ""))
+	// what the rail shows, in the order it stands on the screen: top to bottom, then left to right
+	const seen = `(() => [...document.querySelectorAll(".tc-shell__rail .tc-nav__item, .tc-shell__rail .tc-tickrow")].filter(e => e.getClientRects().length && e.checkVisibility())
+		.map(e => ({r: e.getBoundingClientRect(), t: (e.querySelector(".tc-tickrow__label") || e).textContent.trim()})).sort((a, b) => Math.round(a.r.top) - Math.round(b.r.top) || a.r.left - b.r.left).map(e => e.t).join("|"))()`
+	const state = `(() => [document.querySelector(".tc-shell__body").hasAttribute("data-tc-rail-open"), !!document.querySelector(".tc-main").getClientRects().length].join(" "))()`
+	var icons, bottom, open, closed string
+	var stOpen, stClosed string
+	if err := h.Run(surl, 820, 700, chromedp.Evaluate(seen, &icons)); err != nil {
+		t.Fatal(err)
+	}
+	if icons != "Back to app|Account|Connections|Attachments|New device|Backup|Published links|Appearance" {
+		t.Errorf("settings in the rail of icons show %q; want back and the seven sections", icons)
+	}
+	if err := h.Run(surl, 390, 700, chromedp.Evaluate(seen, &bottom),
+		chromedp.Click(`.tc-nav__all`, chromedp.ByQuery), chromedp.Evaluate(seen, &open), chromedp.Evaluate(state, &stOpen),
+		chromedp.KeyEvent("\x1b"), chromedp.Evaluate(seen, &closed), chromedp.Evaluate(state, &stClosed)); err != nil {
+		t.Fatal(err)
+	}
+	if bottom != "Back to app|Connections|Sections" {
+		t.Errorf("settings on a phone show %q at the bottom; want back, the current section and Sections", bottom)
+	}
+	if !strings.Contains(open, "Account|Connections|Attachments|New device|Backup|Published links|Appearance") || stOpen != "true false" {
+		t.Errorf("Sections pressed: %q, state %s; want every section, the rail open over the page", open, stOpen)
+	}
+	if closed != bottom || stClosed != "false true" {
+		t.Errorf("after Esc: %q, state %s; want the bottom bar again and the page", closed, stClosed)
+	}
+	for _, width := range []int{820, 390} {
+		var before, after, again string
+		if err := h.Run(lurl, width, 700, chromedp.Evaluate(seen, &before),
+			chromedp.Click(`.tc-shell__rail .tc-nav__item[aria-current="page"]`, chromedp.ByQuery), chromedp.Evaluate(seen, &after),
+			chromedp.Click(`.tc-shell__rail .tc-nav__item[aria-current="page"]`, chromedp.ByQuery), chromedp.Evaluate(seen, &again)); err != nil {
+			t.Fatal(err)
+		}
+		if strings.Contains(before, "Личный") || !strings.Contains(after, "Личный|Работа") || again != before {
+			t.Errorf("at %d px a list's current section: before %q, pressed %q, pressed again %q; want the sources only while open", width, before, after, again)
+		}
+	}
+	var wide, hash string
+	if err := h.Run(lurl, 1351, 700, chromedp.Click(`.tc-shell__rail .tc-nav__item[aria-current="page"]`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &wide), chromedp.Evaluate(`location.hash`, &hash)); err != nil {
+		t.Fatal(err)
+	}
+	if wide != "false true" || hash != "#cal" {
+		t.Errorf("on a wide page the current section: state %s, address %q; want a plain link", wide, hash)
+	}
+}

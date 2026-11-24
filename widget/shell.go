@@ -45,7 +45,7 @@ func (n BottomNav) html(mix) string {
 	var s strings.Builder
 	s.WriteString(`<div class="tc-nav--bottom">`)
 	for i, it := range n.Items {
-		s.WriteString(NavItem{Icon: it.Icon, Label: it.Label, Href: it.Href}.html(i+1 == n.On, ""))
+		s.WriteString(NavItem{Icon: it.Icon, Label: it.Label, Href: it.Href}.html(i+1 == n.On))
 	}
 	s.WriteString(`</div>`)
 	return s.String()
@@ -80,7 +80,6 @@ func (ListGroup) mainPart() {}
 func (Form) mainPart()      {}
 func (FormFoot) mainPart()  {}
 func (MainHint) mainPart()  {}
-func (RailSec) mainPart()   {}
 func (Zone) mainPart()      {}
 func (BottomNav) mainPart() {}
 func (FootActs) mainPart()  {}
@@ -285,6 +284,10 @@ type ShellBody struct {
 	// rail's links ask their address for (Carrel's task 84).
 	RailZoneName string
 	RailTarget   string
+	// RailOpen draws the rail opened as a panel on a narrow width — the
+	// state the library's script sets when the current section or «Sections»
+	// is pressed (Carrel's tasks 274, 275), for a frame to draw.
+	RailOpen bool
 }
 
 func (b ShellBody) html(mix) string {
@@ -292,14 +295,14 @@ func (b ShellBody) html(mix) string {
 	for i, r := range b.Rail {
 		rail[i] = r
 	}
-	return shellBody(rail, b.RailForm, b.Main, b.Side, b.Height, attr("data-tc-zone", b.RailZoneName)+attr("data-tc-target", b.RailTarget))
+	return shellBody(rail, b.RailForm, b.Main, b.Side, b.Height, attr("data-tc-zone", b.RailZoneName)+attr("data-tc-target", b.RailTarget), b.RailOpen)
 }
 
 // shellBody prints the shell's body, in the shell or under an overlay.
-func shellBody(rail []part, form RailForm, main Main, side *Side, height ShellHeight, railAttrs string) string {
+func shellBody(rail []part, form RailForm, main Main, side *Side, height ShellHeight, railAttrs string, open bool) string {
 	var s strings.Builder
 	s.WriteString(`<div` + class(nil, "tc-shell__body", pick(len(rail) == 0, "tc-shell__body--no-rail"), pick(side != nil && !side.Closed, "tc-shell__body--side"),
-		height.class(), pick(form == RailIcons, "tc-shell__body--tcrail-56")) + `>`)
+		height.class(), pick(form == RailIcons, "tc-shell__body--tcrail-56")) + flag("data-tc-rail-open", open) + `>`)
 	if len(rail) > 0 {
 		s.WriteString(`<div` + class(nil, "tc-shell__rail", [...]string{"", "tc-shell__rail--icons", "tc-shell__rail--zone"}[form]) + railAttrs + `>`)
 		for _, it := range rail {

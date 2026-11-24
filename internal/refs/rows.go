@@ -34,7 +34,7 @@ var _ = add(
 	rows("nested", w.TickRow{Ticked: w.TickedOff, Send: w.Send{Name: "src", Value: "nextcloud|rabota"}, Form: w.TickRowNested, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "cal."}, "s-backup-2", "tc-tickrow"),
 	rows("nested", w.TickRow{Ticked: w.TickedOff, Send: w.Send{Name: "src", Value: "nextcloud|dela"}, Form: w.TickRowNested, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "tasks"}, "s-backup-2", "tc-tickrow"),
 	rows("loading", w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow"),
-	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"}, "phone-2", "tc-tickrow"),
+	rows("touch", w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"}, "phone-2", "tc-tickrow"),
 	rows("external", w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "0", Trail: w.Badge{Label: "ro"}}, "components-11", "tc-tickrow"),
 	rows("external", w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}, "s-agenda-1", "tc-tickrow"),
 	rows("group", w.TickRow{Ticked: w.TickedPart, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "nextcloud", Meta: "4 of 6"}, "s-backup-2", "tc-tickrow"),
@@ -44,10 +44,9 @@ var _ = add(
 	rows("group", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowGroup, Mark: w.Mark{Kind: w.MarkMulti}, Label: "radicale · vps", Meta: "0 of 2"}, "s-backup-2", "tc-tickrow"),
 	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Current: true, Trail: w.Skel{Width: w.Skel16}}, "states-3", "tc-tickrow"),
 	rows("current", w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Current: true, Trail: w.Badge{Label: "ro"}}, "states-4", "tc-tickrow"),
-	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Form: w.TickRowTouch, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}, "phone-2", "tc-tickrow"),
-	rows("touch", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5", Current: true}, "phone-2", "tc-tickrow"),
-	rows("touch", w.TickRow{Ticked: w.TickedOff, Form: w.TickRowTouch, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "phone-2", "tc-tickrow"),
-	rows("error", w.TickRow{Form: w.TickRowTouch, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow"),
+	rows("all", w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}, "phone-2", "tc-tickrow"),
+	rows("touch", w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}, "phone-2", "tc-tickrow"),
+	rows("error", w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", MetaTitle: "401 Unauthorized — the saved password was refused. Open Connections to update it.", Error: true}, "phone-2", "tc-tickrow"),
 
 	// tc-tree
 	rows("plain", w.Tree{Rows: []w.TreeRow{

@@ -67,11 +67,10 @@ const (
 	TickRowRail   TickRowForm = iota // a row of the rail
 	TickRowGroup                     // the head of a group in a grid of choices: flush, bold
 	TickRowNested                    // a row under such a head: indented
-	TickRowTouch                     // a row of a phone: 44 px high
 )
 
 func (f TickRowForm) class() string {
-	return [...]string{"", "tc-tickrow--padl0", "tc-tickrow--inset", "tc-tickrow--h44"}[f]
+	return [...]string{"", "tc-tickrow--padl0", "tc-tickrow--inset"}[f]
 }
 
 // TickRowTrail is what stands at the end of a row of the rail.
@@ -89,7 +88,7 @@ func (TickRow) fieldGridPart() {}
 //
 // Роль. Строка источника с галкой: показать его или скрыть, выбрать для копии, для выгрузки.
 // Вход. TickRow{Ticked, Kind, Form, Mark, Icon, Label, Meta, MetaTitle, Current, Hidden, Error, Trail, Send}.
-// Состояния. one | all | root | external | current | hidden | error | group | nested | touch | loading.
+// Состояния. one | all | root | external | current | hidden | error | group | nested | loading.
 // Инварианты. Галка — кнопка с доступным именем; её состояния, род строки и место строки — перечисления; строка печатает фрагмент своего кадра.
 // Поведение. Галка с Send.Form — кнопка формы рейла: нажатие отправляет выбор, показать источник или скрыть. Галка группы (TickRowAll, TickRowRoot) — такая же кнопка: отправляет «все» или «ни одного»; галки под ней ставит ответ сервера, не сценарий (владелец 07.11). С живым слоем и формой рейла, которая спрашивает зону (PostForm.Target), ответ ставит на место рейл и список без загрузки страницы; без слоя приходит страница.
 // Эталон. кадр `components-11`, фрагмент `.tc-tickrow`.

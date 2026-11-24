@@ -300,6 +300,24 @@
 	// drawer on tc-shell__body, set by container queries. The script reads it
 	// and writes it on the shell's root for what needs to know; it keeps no
 	// threshold of its own.
+	// openRail opens or closes the rail as a panel: the shell's body carries
+	// data-tc-rail-open, the CSS of the narrow modes draws it; «Sections» and
+	// the current section say whether it is open.
+	var railOpener = null;
+
+	function openRail(body, on, by) {
+		if (on) body.setAttribute("data-tc-rail-open", "");
+		else body.removeAttribute("data-tc-rail-open");
+		body.querySelectorAll(".tc-shell__rail .tc-nav__all, .tc-shell__rail .tc-nav__item[aria-current]").forEach(function (b) {
+			b.setAttribute("aria-expanded", on ? "true" : "false");
+		});
+		if (on) railOpener = by;
+		else if (railOpener && document.contains(railOpener)) {
+			railOpener.focus();
+			railOpener = null;
+		}
+	}
+
 	function shellMode(shell) {
 		var body = shell.querySelector(".tc-shell__body");
 		if (!body) return "";
@@ -697,11 +715,24 @@
 			openLayer(sheet, hash);
 			return;
 		}
+		// The rail as a panel on a narrow width (Carrel's tasks 274, 275): the
+		// current section pressed again, or «Sections», opens the rail over the
+		// list with what it holds — a list's sources, settings' sections; the
+		// same press, Esc or a press beside it closes it.
+		var item = closest(e.target, ".tc-shell__rail .tc-nav__item");
+		var railBody = item && closest(item, ".tc-shell__body");
+		if (railBody &&
+			(item.classList.contains("tc-nav__all") || item.getAttribute("aria-current") === "page")) {
+			var railMode = shellMode(closest(item, ".tc-shell"));
+			if (railMode === "rail" || railMode === "drawer") {
+				e.preventDefault();
+				openRail(railBody, !railBody.hasAttribute("data-tc-rail-open"), item);
+				return;
+			}
+		}
+		var railOpen = document.querySelector(".tc-shell__body[data-tc-rail-open]");
+		if (railOpen && !closest(e.target, ".tc-shell__rail")) openRail(railOpen, false, null);
 		var opener = closest(e.target, "[data-tc-open]");
-		// The current section of the navigation opens its sources only in the
-		// rail of icons, where they are not in the rail; otherwise it is a link.
-		var shell = opener && opener.classList.contains("tc-nav__item") ? closest(opener, ".tc-shell") : null;
-		if (shell && shellMode(shell) !== "rail") opener = null;
 		if (opener) {
 			var target = document.getElementById(opener.getAttribute("data-tc-open"));
 			if (target) {
@@ -1957,7 +1988,15 @@
 		}
 		if (closest(e.target, "input, textarea, select")) return;
 		var layers = openLayers();
-		if (!layers.length) return;
+		if (!layers.length) {
+			// a menu and a sheet first, then the rail opened as a panel
+			var railShown = document.querySelector(".tc-shell__body[data-tc-rail-open]");
+			if (railShown) {
+				e.preventDefault();
+				openRail(railShown, false, null);
+			}
+			return;
+		}
 		e.preventDefault();
 		closeLayer(layers[layers.length - 1]);
 	}

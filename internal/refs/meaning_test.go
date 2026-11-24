@@ -154,8 +154,9 @@ func gaps(markup string) []string {
 				_, form := attr(n, "form")
 				_, adds := attr(n, "data-tc-add")
 				_, opens := attr(n, "data-tc-open")
+				_, toggles := attr(n, "data-tc-toggle") // the rail as a panel (Carrel's task 274)
 				_, off := attr(n, "disabled")
-				if !(t == "submit" && (inForm || form)) && !adds && !opens && !off {
+				if !(t == "submit" && (inForm || form)) && !adds && !opens && !toggles && !off {
 					out = append(out, label+" is a button with nothing to send")
 				}
 			case "input", "select", "textarea":

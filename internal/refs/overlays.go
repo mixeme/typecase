@@ -1262,15 +1262,6 @@ var _ = add(
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "договор-подряда.pdf", Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/dogovor-podryada.pdf"}}}, {Parts: []w.CellPart{w.Text("840 KB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}},
 			{Cells: []w.TableCell{{Parts: []w.CellPart{w.TableFile{Icon: "img", Name: "объект-фасад.jpg", Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/obekt-fasad.jpg"}}}, {Parts: []w.CellPart{w.Text("1.6 MB")}, Mono: true}, {Parts: []w.CellPart{w.Text("09 Aug")}, Mono: true}, {Parts: []w.CellPart{w.Tag{Label: "as a file"}}}}}}}}, Short: true},
 		w.Msg{Parts: []w.MsgPart{w.Text("Over the attachment limit: the letter carries a link instead, for 30 days. Revoke it in "), w.Strong("Published links"), w.Text(".")}, Tone: w.MsgAccent, Space: w.MsgSheet}}, Flush: true, Foot: []w.SheetFootPart{w.Button{Label: "Attach", Icon: "clip", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Dim{Parts: []w.Inline{w.Text("смета-подрядчик.pdf · 4.2 MB · goes as a link")}, Size: w.Dim11_5, Variant: w.DimWrap}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel", Href: "/app/mail/compose"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth900}, "s-mail-6", "tc-sheet"),
-	overlay("close", w.Sheet{Title: "Sources", Head: []w.SheetHeadPart{w.Button{Label: "Apply", Small: true, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
-		w.RailSec{Items: []w.RailSecPart{
-			w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined notebook", Meta: "6", Current: true}}},
-		w.RailSec{Items: []w.RailSecPart{
-			w.Rubric{Text: "nextcloud"},
-			w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
-			w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
-			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Общие с семьёй", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}},
-			w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "—", Hidden: true}}}}}, "phone-9", "tc-sheet"),
 
 	// tc-scrim
 	overlay("plain", w.Scrim{Closed: true}, "shell-1", "tc-scrim"),
@@ -1290,7 +1281,7 @@ var _ = add(
 
 	// tc-overlay
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
-		{Icon: "back", Label: "Back to app", Href: "#"}}}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Settings"},
 		w.Nav{Items: []w.NavItem{
 			{Icon: "user", Label: "Account", Href: "#"},
@@ -1492,7 +1483,7 @@ var _ = add(
 		w.SheetKeys{Items: []w.SheetKey{{Keys: "N", Does: "Quick note over this screen"}, {Keys: "/", Does: "Focus the search field in the header"}, {Keys: "Enter", Does: "Open the selected record full screen"}, {Keys: "Esc", Does: "Close a sheet, the details panel or focus mode"}, {Keys: "Ctrl+S", Does: "Save in the editor"}, {Keys: "Ctrl+Enter", Does: "Save or send a sheet with text: a quick note, a letter"}, {Keys: "Ctrl+V", Does: "Paste an image as an attachment"}}},
 		w.SheetHint{Text: "Shortcuts do nothing while the cursor is in a field. None of them destroy anything."}}, Foot: []w.SheetFootPart{w.Button{Label: "Close"}, w.Kbd{Keys: "Esc"}, w.Kbd{Keys: "?", Place: w.Pushed}}, Width: w.SheetWidth480}, ID: "keys"}}, "account-6", "tc-overlay"),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
-		{Icon: "back", Label: "Back to app", Href: "#"}}}, w.RailSec{Items: []w.RailSecPart{
+		{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Settings"},
 		w.Nav{Items: []w.NavItem{
 			{Icon: "user", Label: "Account", Href: "#"},

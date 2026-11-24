@@ -60,7 +60,6 @@ func (Field) sheetPart()       {}
 func (Area) sheetPart()        {}
 func (Line) sheetPart()        {}
 func (Dim) sheetPart()         {}
-func (RailSec) sheetPart()     {}
 func (Form) sheetPart()        {}
 func (SheetFields) sheetPart() {}
 func (SheetKeys) sheetPart()   {}
@@ -191,8 +190,7 @@ type SheetPickRail interface {
 	sheetPickRail()
 }
 
-func (RailSec) sheetPickRail() {}
-func (Tree) sheetPickRail()    {}
+func (Tree) sheetPickRail() {}
 
 // SheetPickList is what the list of a sheet's picker holds.
 type SheetPickList interface {
@@ -414,7 +412,7 @@ func (b OverlayBody) html() string {
 	for i, r := range b.Rail {
 		rail[i] = r
 	}
-	return shellBody(rail, RailFull, b.Main, nil, b.Height, "")
+	return shellBody(rail, RailFull, b.Main, nil, b.Height, "", false)
 }
 
 // Overlay — tc-overlay
@@ -456,7 +454,6 @@ func inert(html string) string {
 }
 
 func (Overlay) shellContent() {}
-func (Scrim) mainPart()       {}
 
 // Tally is what a button's count counts (Button.Count): one record a line,
 // each the conditions on which it is written — separated by spaces, all of

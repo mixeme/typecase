@@ -55,6 +55,8 @@ var _ = add(
 	shell("stack", w.Acts{Items: []w.ActsPart{w.Seg{Options: []w.SegOption{{Label: "All 2", On: true}, {Label: "Contacts 1"}, {Label: "Events 1"}, {Label: "Tasks 0"}, {Label: "Notes 0"}}}, w.Field{Label: "Match threshold", Parts: []w.FieldPart{w.Input{Name: "value", Value: "60", Label: "Match threshold", Mono: true, Variant: w.InputW52}, w.Button{Label: "Weights", Small: true}}, Width: w.FieldInline, Action: "/app/duplicates/decide", Post: true, Sends: []w.Hidden{w.Hidden{Name: "csrf", Value: "7f3a91de"}, w.Hidden{Name: "do", Value: "threshold"}}}}, Stack: true}, "s-dup-1", "tc-acts"),
 
 	// tc-nav
+	shell("sections", w.Nav{Items: []w.NavItem{
+		{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true}, "account-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "user", Label: "Account", Href: "#"},
 		{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
