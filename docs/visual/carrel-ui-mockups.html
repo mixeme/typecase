@@ -963,7 +963,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 @container tcbox (max-width:640px){
   .tc-doc__tablebar{display:flex}
 }
-.tc-doc__layout.is-measure .tc-doc > *{max-width:78ch}
+/* Reading width — одна мера на весь столбец (задача Carrel 284): 78 знаков кегля текста, 14.5, у самого столбца;
+   заголовок, поля и текст кончаются у одного края. Раньше 78ch считались в кегле каждого ребёнка и на широком окне расходились. */
+.tc-doc__layout.is-measure .tc-doc{font-size:14.5px;max-width:calc(78ch + 2 * var(--tc-page-gutter))}
 .tc-doc__title{font-family:var(--tc-font-serif);font-size:27px;line-height:1.15;font-weight:400}
 .tc-docmeta{border-left:.5px solid var(--tc-rule);padding:16px 18px;display:flex;flex-direction:column;gap:15px;background:var(--tc-surface)}
 .tc-docmeta .tc-rubric{margin-bottom:6px}

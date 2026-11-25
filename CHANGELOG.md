@@ -114,6 +114,13 @@ do, not what the authors did.
 
 ### Fixed
 
+- **Reading width is one measure for the column** (Carrel's task 284; the
+  owner at 1920: «the layout fell apart»). 78ch stood on each child of the
+  text column in its own size, and on a wide window the title (1089 px), the
+  fields (620) and the text (692) ended apart; the column itself now takes
+  78 characters of the text's size, 14.5, and all end at one edge.
+  `TestReadingWidthOneMeasure` at 1920 and 1351 (red on the old rule);
+  s-notes-3 is the same to the pixel.
 - **On a phone the bar of sections stays at the window's bottom** (Carrel's
   task 291: at 375×812 a settings page of 1115 px took «← Back to app ·
   Account · Sections» down with its end). On a page (`package page`), in the

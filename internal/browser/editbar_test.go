@@ -200,3 +200,26 @@ func itoa(n int) string {
 	}
 	return string(b)
 }
+
+// TestReadingWidthOneMeasure (Carrel's task 284): Reading width is one
+// measure for the whole column — the title, the fields and the text of an
+// edit end at one edge on a wide window, where 78ch in each child's own size
+// went apart (1920: the title 1089, the fields 620, the text 692).
+func TestReadingWidthOneMeasure(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	url := editPage(t, h, "edit-measure")
+	const widths = `(() => { document.querySelector(".tc-doc__layout").classList.add("is-measure");
+		const d = document.querySelector("form#note-edit.tc-doc");
+		const w = s => Math.round(d.querySelector(s).getBoundingClientRect().right);
+		return [w(".tc-in--title"), w(".tc-doc__fields"), w(".tc-in--body")]; })()`
+	for _, width := range []int{1920, 1351} {
+		var got []int
+		if err := h.Run(url, width, 1000, chromedp.Evaluate(widths, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if got[0] != got[1] || got[1] != got[2] {
+			t.Errorf("at %d px with Reading width the title ends at %d, the fields at %d, the text at %d; want one edge", width, got[0], got[1], got[2])
+		}
+	}
+}
