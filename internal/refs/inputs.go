@@ -102,6 +102,7 @@ var _ = add(
 	form("typed", w.Query{Value: "ковал", Label: "Search everything…"}, "s-find-1", "tc-q"),
 
 	// tc-in as tags
+	form("empty", w.TagInput{Parts: []w.TagInputPart{}, Add: &w.TagAdd{Name: "to.add", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest", Enter: &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"}}, Focus: true}, "s-mail-20", "tc-in"),
 	form("mail", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Пётр Смирнов", Mark: &w.Mark{Colour: "#6B4E7A", Size: w.MarkH11}, Removable: true, Aside: &w.Dim{Parts: []w.Inline{w.Text("· p.smirnov@example.org")}}, Title: "p.smirnov@example.org", Name: "cc", Value: "p.smirnov@example.org"}}, Name: "cc", Add: &w.TagAdd{Name: "cc.add", Placeholder: "Name or address", Label: "Add a recipient", Suggest: "/app/contacts/suggest", Enter: &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"}}}, "s-mailbox-15", "tc-in"),
 	form("focus", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Забрать документы", Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, Removable: true}}, Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"}, Focus: true}, "s-tasks-10", "tc-in"),
 	form("tags", w.TagInput{Parts: []w.TagInputPart{w.Tag{Label: "Calendar · 3"}, w.Tag{Label: "Tasks · 1"}}}, "s-profile-10", "tc-in"),

@@ -39,6 +39,7 @@ func Contacts1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
+							Href:    "/app/contacts",
 							Meta:    "10",
 							Current: true,
 						},
@@ -47,15 +48,33 @@ func Contacts1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Контакты",
+							Href:  "/app/contacts/nextcloud/kontakty",
+							Meta:  "6",
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Команда",
+							Href:  "/app/contacts/radicale/komanda",
+							Meta:  "2",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -377,6 +396,7 @@ func Contacts2() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
+								Href:    "/app/contacts",
 								Meta:    "10",
 								Current: true,
 							},
@@ -385,15 +405,33 @@ func Contacts2() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+							w.TickRow{
+								Mark:  w.Mark{Colour: "#4A6B52"},
+								Label: "Контакты",
+								Href:  "/app/contacts/nextcloud/kontakty",
+								Meta:  "6",
+							},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
-							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+							w.TickRow{
+								Mark:  w.Mark{Colour: "#6B4E7A"},
+								Label: "Команда",
+								Href:  "/app/contacts/radicale/komanda",
+								Meta:  "2",
+								Trail: w.Badge{Label: "ro"},
+							},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Mark:   w.Mark{Colour: "#8C6239"},
+								Label:  "Рассылки",
+								Href:   "/app/contacts/radicale/rassylki",
+								Meta:   "—",
+								Hidden: true,
+							},
 						},
 					},
 					w.RailSec{
@@ -2615,6 +2653,7 @@ func Contacts35() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined address book",
+								Href:    "/app/contacts",
 								Meta:    "10",
 								Current: true,
 							},
@@ -2623,15 +2662,33 @@ func Contacts35() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+							w.TickRow{
+								Mark:  w.Mark{Colour: "#4A6B52"},
+								Label: "Контакты",
+								Href:  "/app/contacts/nextcloud/kontakty",
+								Meta:  "6",
+							},
+							w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 						},
 					},
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "radicale · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
-							w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+							w.TickRow{
+								Mark:  w.Mark{Colour: "#6B4E7A"},
+								Label: "Команда",
+								Href:  "/app/contacts/radicale/komanda",
+								Meta:  "2",
+								Trail: w.Badge{Label: "ro"},
+							},
+							w.TickRow{
+								Ticked: w.TickedOff,
+								Mark:   w.Mark{Colour: "#8C6239"},
+								Label:  "Рассылки",
+								Href:   "/app/contacts/radicale/rassylki",
+								Meta:   "—",
+								Hidden: true,
+							},
 						},
 					},
 					w.RailSec{

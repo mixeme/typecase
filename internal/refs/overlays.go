@@ -1409,7 +1409,7 @@ var _ = add(
 		{Icon: "note", Label: "Notes", Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "—"}}}, w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New calendar"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
+		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Href: "/app/calendar", Meta: "—"}}}, w.Empty{Parts: []w.EmptyPart{w.Text("No account connected.")}}, w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New calendar"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
 		w.Empty{Parts: []w.EmptyPart{w.Text("Connect an account to see address books, calendars and notebooks.")}}}}, Height: w.ShellHeight340}, Scrim: w.Scrim{Content: w.Sheet{Icon: "quill", Title: "New note", Head: []w.SheetHeadPart{w.Close{Label: "Close", Place: w.Pushed}}, Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("There is nowhere to write: connect an account that holds notes first.")}, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Connect account", Icon: "server", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth480}}}, "s-notes-6", "tc-overlay"),
 	overlay("plain", w.Overlay{Body: w.OverlayBody{Rail: []w.OverlayRailPart{w.Nav{Items: []w.NavItem{
@@ -1418,19 +1418,19 @@ var _ = add(
 		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Href: "/app/calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
-		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
-		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
-		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Href: "/app/calendar/nextcloud/lichnyi", Meta: "5"},
+		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "2"},
+		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Href: "/app/calendar/nextcloud/dni-rozhdeniya", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "radicale · vps"},
-		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
-		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "2"},
+		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Href: "/app/calendar/radicale/dezhurstva", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "baikal"},
-		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
-		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3", Trail: w.Badge{Label: "ro"}},
-		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Href: "/app/calendar/prazdniki-rf/feed", Meta: "3", Trail: w.Badge{Label: "ro"}},
+		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Href: "/app/calendar/raspisanie-ligi/feed", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}}}},
 		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
@@ -1463,13 +1463,13 @@ var _ = add(
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined address book", Href: "/app/contacts", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
-		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-		w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Href: "/app/contacts/nextcloud/kontakty", Meta: "6"},
+		w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "radicale · vps"},
-		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
-		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Href: "/app/contacts/radicale/komanda", Meta: "2", Trail: w.Badge{Label: "ro"}},
+		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Href: "/app/contacts/radicale/rassylki", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "работа"}, w.Tag{Label: "издательство"}}}, w.RailFoot{Items: []w.RailFootPart{w.Button{Icon: "plus", Title: "New address book"}, w.Button{Icon: "server", Title: "Connect account"}, w.Button{Icon: "link", Title: "Subscribe to a feed"}, w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined address book"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 of 4 books · 2 accounts · 7 cards")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New contact", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}, w.Button{Label: "Import", Icon: "import"}, w.Button{Label: "Export", Icon: "export"}, w.Button{Label: "Print", Icon: "print"}}}},
 		w.Bar{Items: []w.BarPart{w.Filter{Query: w.Query{Placeholder: "Filter the loaded cards", Short: "Filter", Label: "Filter the loaded cards"}, Waiting: true, Variant: w.FilterH26W220}, w.Seg{Options: []w.SegOption{{Label: "A–Z", Href: "/app/contacts?sort=az", On: true}, {Label: "Recently changed", Href: "/app/contacts?sort=changed"}}, Secondary: true}, w.Button{Label: "Columns", Icon: "cols"}, w.Drop{Trigger: w.Button{Icon: "dots", Title: "More"}, More: true, Menu: w.Menu{Items: []w.MenuPart{
@@ -1505,19 +1505,19 @@ var _ = add(
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 2}, w.RailSec{Items: []w.RailSecPart{
-		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Ticked: w.TickedPart, Kind: w.TickRowAll, Mark: w.Mark{Kind: w.MarkMulti}, Label: "Combined calendar", Href: "/app/calendar", Meta: "10", Current: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "nextcloud"},
-		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
-		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
-		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Href: "/app/calendar/nextcloud/lichnyi", Meta: "5"},
+		w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "2"},
+		w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Href: "/app/calendar/nextcloud/dni-rozhdeniya", Meta: "—", Hidden: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "radicale · vps"},
-		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
-		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "2"},
+		w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Href: "/app/calendar/radicale/dezhurstva", Meta: "1"}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "baikal"},
-		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Subscriptions", Items: []w.RubricPart{w.Badge{Label: "external"}}},
-		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Meta: "3", Trail: w.Badge{Label: "ro"}},
-		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
+		w.TickRow{Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#8C6239"}, Label: "Праздники РФ", Href: "/app/calendar/prazdniki-rf/feed", Meta: "3", Trail: w.Badge{Label: "ro"}},
+		w.TickRow{Ticked: w.TickedOff, Kind: w.TickRowExternal, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Расписание лиги", Href: "/app/calendar/raspisanie-ligi/feed", Meta: "—", Hidden: true, Trail: w.Badge{Label: "ro"}}}}, w.RailSec{Items: []w.RailSecPart{
 		w.Rubric{Text: "Tags"}}, Tags: []w.Tag{w.Tag{Label: "all", On: true}, w.Tag{Label: "релиз"}, w.Tag{Label: "работа"}}}, w.RailFoot{Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}}, About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"}}}, Main: w.Main{Items: []w.MainPart{
 		w.Head{Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined calendar"}, Subs: []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("5 of 7 calendars · 3 accounts · 10 – 16 August 2026 · "), w.Mono{Text: "Europe/Moscow"}, w.Text(" · 7 events")}}}, Acts: &w.Acts{Items: []w.ActsPart{w.Split{Main: w.Button{Label: "New event", Icon: "plus", Kind: w.ButtonPrimary}, More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"}}}}},
 		w.ListGroup{Title: w.Rubric{Text: "Monday · 10 August", Form: w.RubricInline}, Count: &w.Num{Value: 4}},

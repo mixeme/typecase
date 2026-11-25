@@ -38,6 +38,7 @@ func Desktop1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Meta:    "10",
 							Current: true,
 						},
@@ -46,22 +47,34 @@ func Desktop1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Href: "/app/calendar/nextcloud/lichnyi", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "2"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Дежурства",
+							Href:  "/app/calendar/radicale/dezhurstva",
+							Meta:  "1",
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true},
 					},
 				},
 				w.RailSec{
@@ -71,6 +84,7 @@ func Desktop1() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
+							Href:  "/app/calendar/prazdniki-rf/feed",
 							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
@@ -79,6 +93,7 @@ func Desktop1() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},

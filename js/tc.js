@@ -585,7 +585,37 @@
 		return true;
 	}
 
+	// zoneShows says whether the zone a link fills is drawn at this width:
+	// shown for the measure, as the live layer measures it, then put back.
+	function zoneShows(name) {
+		var all = document.querySelectorAll("[data-tc-zone]"), zone = null;
+		for (var i = 0; i < all.length; i++) if (all[i].getAttribute("data-tc-zone") === name) zone = all[i];
+		if (!zone) return false;
+		var body = zone.parentElement;
+		var side = zone.classList.contains("tc-side") && body && body.classList.contains("tc-shell__body");
+		var was = { hidden: zone.hidden, display: zone.style.display, room: side && body.classList.contains("tc-shell__body--side") };
+		zone.hidden = false;
+		zone.style.display = "";
+		if (side) body.classList.add("tc-shell__body--side");
+		var drawn = getComputedStyle(zone).display !== "none";
+		zone.hidden = was.hidden;
+		zone.style.display = was.display;
+		if (side && !was.room) body.classList.remove("tc-shell__body--side");
+		return drawn;
+	}
+
 	function onClick(e) {
+		// A row that opens its record in the panel goes to the record's own
+		// page where this width draws no panel (Carrel's task 290).
+		var paged = closest(e.target, "a[data-tc-page]");
+		if (paged && e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey) {
+			var holder = closest(paged, "[data-tc-target]");
+			if (!holder || !zoneShows(holder.getAttribute("data-tc-target"))) {
+				e.preventDefault();
+				location.assign(paged.getAttribute("data-tc-page"));
+				return;
+			}
+		}
 		var toggle = closest(e.target, ".tc-queue__head .tc-btn");
 		if (toggle && fold(toggle)) {
 			e.preventDefault();

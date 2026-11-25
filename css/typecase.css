@@ -1250,6 +1250,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-railsec .tc-num{display:inline}
   .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-nav__all{color:var(--tc-accent)}
   .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-tickrow{min-height:44px}
+  .tc-shell__body[data-tc-rail-open] > .tc-shell__rail .tc-tickrow > a.tc-tickrow__label{align-self:stretch;display:flex;align-items:center}
   [data-tc-noscript] .tc-shell__rail .tc-nav .tc-nav__all{display:none}
   .tc-top{--tc-shell-mode:drawer;--tc-top:54px;height:54px;--tc-page-gutter:var(--tc-page-gutter-narrow);
     padding:8px;gap:8px;overflow-x:clip}

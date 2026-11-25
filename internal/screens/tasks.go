@@ -39,6 +39,7 @@ func Tasks1() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
+							Href:    "/app/tasks",
 							Meta:    "8",
 							Current: true,
 						},
@@ -47,8 +48,8 @@ func Tasks1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -59,6 +60,7 @@ func Tasks1() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -324,6 +326,7 @@ func Tasks20() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
+							Href:    "/app/tasks",
 							Meta:    "8",
 							Current: true,
 						},
@@ -332,8 +335,8 @@ func Tasks20() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -344,6 +347,7 @@ func Tasks20() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -600,6 +604,7 @@ func Tasks15() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
+							Href:   "/app/tasks",
 							Meta:   "8",
 						},
 					},
@@ -607,8 +612,14 @@ func Tasks15() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Дела",
+							Href:    "/app/tasks/nextcloud/dela",
+							Meta:    "4",
+							Current: true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -619,6 +630,7 @@ func Tasks15() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -1650,6 +1662,7 @@ func Tasks19() Screen {
 								Kind:    w.TickRowAll,
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined list",
+								Href:    "/app/tasks",
 								Meta:    "8",
 								Current: true,
 							},
@@ -1658,8 +1671,8 @@ func Tasks19() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 						},
 					},
 					w.RailSec{
@@ -1670,6 +1683,7 @@ func Tasks19() Screen {
 								Kind:   w.TickRowExternal,
 								Mark:   w.Mark{Colour: "#8C6239"},
 								Label:  "Праздники РФ",
+								Href:   "/app/tasks/prazdniki-rf/feed",
 								Meta:   "—",
 								Hidden: true,
 								Trail:  w.Badge{Label: "ro"},

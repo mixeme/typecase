@@ -211,6 +211,7 @@ func States3() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Current: true,
 							Trail:   w.Skel{Width: w.Skel16},
 						},
@@ -219,12 +220,23 @@ func States3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Trail: w.Skel{Width: w.Skel16}},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Trail: w.Skel{Width: w.Skel16}},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Личный",
+							Href:  "/app/calendar/nextcloud/lichnyi",
+							Trail: w.Skel{Width: w.Skel16},
+						},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#3F6E8C"},
+							Label: "Работа",
+							Href:  "/app/calendar/nextcloud/rabota",
+							Trail: w.Skel{Width: w.Skel16},
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#A05A2C"},
 							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
 							Hidden: true,
 							Trail:  w.Skel{Width: w.Skel16},
 						},
@@ -233,14 +245,29 @@ func States3() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Trail: w.Skel{Width: w.Skel16}},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Trail: w.Skel{Width: w.Skel16}},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Проекты",
+							Href:  "/app/calendar/radicale/proekty",
+							Trail: w.Skel{Width: w.Skel16},
+						},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Дежурства",
+							Href:  "/app/calendar/radicale/dezhurstva",
+							Trail: w.Skel{Width: w.Skel16},
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Trail: w.Skel{Width: w.Skel16}},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#9A9280"},
+							Label: "Общий",
+							Href:  "/app/calendar/baikal/obshchii",
+							Trail: w.Skel{Width: w.Skel16},
+						},
 					},
 				},
 				w.RailSec{
@@ -250,6 +277,7 @@ func States3() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
+							Href:  "/app/calendar/prazdniki-rf/feed",
 							Meta:  "—",
 							Trail: w.Badge{Label: "ro"},
 						},
@@ -258,6 +286,7 @@ func States3() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -423,6 +452,7 @@ func States4() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
+							Href:   "/app/contacts",
 							Meta:   "10",
 						},
 					},
@@ -430,8 +460,13 @@ func States4() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Контакты",
+							Href:  "/app/contacts/nextcloud/kontakty",
+							Meta:  "6",
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
@@ -440,11 +475,19 @@ func States4() Screen {
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#6B4E7A"},
 							Label:   "Команда",
+							Href:    "/app/contacts/radicale/komanda",
 							Meta:    "2",
 							Current: true,
 							Trail:   w.Badge{Label: "ro"},
 						},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -582,6 +625,7 @@ func States5() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Meta:    "—",
 							Current: true,
 						},
@@ -590,14 +634,29 @@ func States5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Error: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Личный",
+							Href:  "/app/calendar/nextcloud/lichnyi",
+							Error: true,
+						},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#3F6E8C"},
+							Label: "Работа",
+							Href:  "/app/calendar/nextcloud/rabota",
+							Error: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Error: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Проекты",
+							Href:  "/app/calendar/radicale/proekty",
+							Error: true,
+						},
 					},
 				},
 				w.RailFoot{
@@ -711,6 +770,7 @@ func States6() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Meta:    "10",
 							Current: true,
 						},
@@ -719,22 +779,34 @@ func States6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Href: "/app/calendar/nextcloud/lichnyi", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "2"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "2"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Дежурства",
+							Href:  "/app/calendar/radicale/dezhurstva",
+							Meta:  "1",
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true},
 					},
 				},
 				w.RailSec{
@@ -744,6 +816,7 @@ func States6() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
+							Href:  "/app/calendar/prazdniki-rf/feed",
 							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
@@ -752,6 +825,7 @@ func States6() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -1989,6 +2063,7 @@ func States7() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
+							Href:    "/app/contacts",
 							Meta:    "—",
 							Current: true,
 						},
@@ -1997,8 +2072,22 @@ func States7() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#4A6B52"},
+							Label:  "Контакты",
+							Href:   "/app/contacts/nextcloud/kontakty",
+							Meta:   "6",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Архив",
+							Href:   "/app/contacts/nextcloud/arkhiv",
+							Meta:   "2",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -2008,11 +2097,19 @@ func States7() Screen {
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Команда",
+							Href:   "/app/contacts/radicale/komanda",
 							Meta:   "2",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailFoot{
@@ -2090,6 +2187,7 @@ func States8() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
+							Href:    "/app/contacts",
 							Meta:    "—",
 							Current: true,
 						},
@@ -2098,15 +2196,33 @@ func States8() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Контакты",
+							Href:  "/app/contacts/nextcloud/kontakty",
+							Meta:  "6",
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "—", Trail: w.Badge{Label: "ro"}},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Команда",
+							Href:  "/app/contacts/radicale/komanda",
+							Meta:  "—",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -2321,6 +2437,7 @@ func States9() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined address book",
+							Href:    "/app/contacts",
 							Meta:    "8",
 							Current: true,
 						},
@@ -2329,15 +2446,32 @@ func States9() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Контакты",
+							Href:  "/app/contacts/nextcloud/kontakty",
+							Meta:  "6",
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Error: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Команда",
+							Href:  "/app/contacts/radicale/komanda",
+							Error: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -2573,6 +2707,7 @@ func States10() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
+							Href:   "/app/contacts",
 							Meta:   "10",
 						},
 					},
@@ -2580,18 +2715,30 @@ func States10() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "6"},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#4A6B52"},
+							Label: "Контакты",
+							Href:  "/app/contacts/nextcloud/kontakty",
+							Meta:  "6",
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Команда",
+							Href:  "/app/contacts/radicale/komanda",
+							Meta:  "2",
+							Trail: w.Badge{Label: "ro"},
+						},
 						w.TickRow{
 							Ticked:  w.TickedOff,
 							Mark:    w.Mark{Colour: "#8C6239"},
 							Label:   "Рассылки",
+							Href:    "/app/contacts/radicale/rassylki",
 							Meta:    "—",
 							Current: true,
 							Hidden:  true,
@@ -2677,6 +2824,7 @@ func States11() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined address book",
+							Href:   "/app/contacts",
 							Meta:   "4",
 						},
 					},
@@ -2684,15 +2832,34 @@ func States11() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Meta: "2"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Контакты",
+							Href:    "/app/contacts/nextcloud/kontakty",
+							Current: true,
+							Error:   true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "Архив", Href: "/app/contacts/nextcloud/arkhiv", Meta: "2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Команда", Meta: "2", Trail: w.Badge{Label: "ro"}},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Рассылки", Meta: "—", Hidden: true},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#6B4E7A"},
+							Label: "Команда",
+							Href:  "/app/contacts/radicale/komanda",
+							Meta:  "2",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Рассылки",
+							Href:   "/app/contacts/radicale/rassylki",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -3069,6 +3236,7 @@ func States13() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Meta:    "—",
 							Current: true,
 						},
@@ -3077,22 +3245,34 @@ func States13() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "5"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "2"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Href: "/app/calendar/nextcloud/lichnyi", Meta: "5"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "2"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "—"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "—"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Дежурства",
+							Href:  "/app/calendar/radicale/dezhurstva",
+							Meta:  "1",
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true},
 					},
 				},
 				w.RailSec{
@@ -3102,6 +3282,7 @@ func States13() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
+							Href:  "/app/calendar/prazdniki-rf/feed",
 							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
@@ -3110,6 +3291,7 @@ func States13() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3373,6 +3555,7 @@ func States14() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined calendar",
+							Href:    "/app/calendar",
 							Meta:    "—",
 							Current: true,
 						},
@@ -3381,22 +3564,64 @@ func States14() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "—", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "—", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#4A6B52"},
+							Label:  "Личный",
+							Href:   "/app/calendar/nextcloud/lichnyi",
+							Meta:   "—",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Работа",
+							Href:   "/app/calendar/nextcloud/rabota",
+							Meta:   "—",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "—", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "—", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Проекты",
+							Href:   "/app/calendar/radicale/proekty",
+							Meta:   "—",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#8C6239"},
+							Label:  "Дежурства",
+							Href:   "/app/calendar/radicale/dezhurstva",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "—", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#9A9280"},
+							Label:  "Общий",
+							Href:   "/app/calendar/baikal/obshchii",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -3407,6 +3632,7 @@ func States14() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/calendar/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3416,6 +3642,7 @@ func States14() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3497,6 +3724,7 @@ func States15() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined calendar",
+							Href:   "/app/calendar",
 							Meta:   "0",
 						},
 					},
@@ -3504,22 +3732,41 @@ func States15() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "0", Current: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "0"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Личный",
+							Href:    "/app/calendar/nextcloud/lichnyi",
+							Meta:    "0",
+							Current: true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/calendar/nextcloud/rabota", Meta: "0"},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#A05A2C"},
+							Label:  "Дни рождения",
+							Href:   "/app/calendar/nextcloud/dni-rozhdeniya",
+							Meta:   "—",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "radicale · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "0"},
-						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Href: "/app/calendar/radicale/proekty", Meta: "0"},
+						w.TickRow{
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Дежурства",
+							Href:  "/app/calendar/radicale/dezhurstva",
+							Meta:  "0",
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "baikal"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Meta: "0"}},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Meta: "0"},
+					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
@@ -3528,6 +3775,7 @@ func States15() Screen {
 							Kind:  w.TickRowExternal,
 							Mark:  w.Mark{Colour: "#8C6239"},
 							Label: "Праздники РФ",
+							Href:  "/app/calendar/prazdniki-rf/feed",
 							Meta:  "3",
 							Trail: w.Badge{Label: "ro"},
 						},
@@ -3536,6 +3784,7 @@ func States15() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#6B4E7A"},
 							Label:  "Расписание лиги",
+							Href:   "/app/calendar/raspisanie-ligi/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3689,6 +3938,7 @@ func States18() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
+							Href:    "/app/tasks",
 							Meta:    "—",
 							Current: true,
 						},
@@ -3697,8 +3947,22 @@ func States18() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#4A6B52"},
+							Label:  "Дела",
+							Href:   "/app/tasks/nextcloud/dela",
+							Meta:   "4",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Работа",
+							Href:   "/app/tasks/nextcloud/rabota",
+							Meta:   "4",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -3709,6 +3973,7 @@ func States18() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3790,6 +4055,7 @@ func States19() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
+							Href:    "/app/tasks",
 							Meta:    "—",
 							Current: true,
 						},
@@ -3798,8 +4064,8 @@ func States19() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "—"},
 					},
 				},
 				w.RailSec{
@@ -3810,6 +4076,7 @@ func States19() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -3954,6 +4221,7 @@ func States20() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined list",
+							Href:    "/app/tasks",
 							Meta:    "4",
 							Current: true,
 						},
@@ -3962,8 +4230,8 @@ func States20() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Error: true},
 					},
 				},
 				w.RailSec{
@@ -3974,6 +4242,7 @@ func States20() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -4139,6 +4408,7 @@ func States21() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
+							Href:   "/app/tasks",
 							Meta:   "4",
 						},
 					},
@@ -4146,8 +4416,14 @@ func States21() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "0", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#3F6E8C"},
+							Label:   "Работа",
+							Href:    "/app/tasks/nextcloud/rabota",
+							Meta:    "0",
+							Current: true,
+						},
 					},
 				},
 				w.RailSec{
@@ -4158,6 +4434,7 @@ func States21() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -4243,6 +4520,7 @@ func States22() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
+							Href:   "/app/tasks",
 							Meta:   "4",
 						},
 					},
@@ -4250,8 +4528,14 @@ func States22() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Дела",
+							Href:    "/app/tasks/nextcloud/dela",
+							Current: true,
+							Error:   true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -4262,6 +4546,7 @@ func States22() Screen {
 							Kind:   w.TickRowExternal,
 							Mark:   w.Mark{Colour: "#8C6239"},
 							Label:  "Праздники РФ",
+							Href:   "/app/tasks/prazdniki-rf/feed",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -4349,6 +4634,7 @@ func States23() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined list",
+							Href:   "/app/tasks",
 							Meta:   "8",
 						},
 					},
@@ -4356,8 +4642,8 @@ func States23() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "4"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Href: "/app/tasks/nextcloud/dela", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Href: "/app/tasks/nextcloud/rabota", Meta: "4"},
 					},
 				},
 				w.RailSec{
@@ -4368,6 +4654,7 @@ func States23() Screen {
 							Kind:    w.TickRowExternal,
 							Mark:    w.Mark{Colour: "#8C6239"},
 							Label:   "Праздники РФ",
+							Href:    "/app/tasks/prazdniki-rf/feed",
 							Meta:    "2",
 							Current: true,
 							Hidden:  true,
@@ -4878,6 +5165,7 @@ func States25() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
+							Href:    "/app/notes",
 							Meta:    "—",
 							Current: true,
 						},
@@ -4886,12 +5174,27 @@ func States25() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3", Hidden: true},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#4A6B52"},
+							Label:  "Записи",
+							Href:   "/app/notes/nextcloud/zapisi",
+							Meta:   "3",
+							Hidden: true,
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Дневник",
+							Href:   "/app/notes/nextcloud/dnevnik",
+							Meta:   "3",
+							Hidden: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Href:   "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -4973,6 +5276,7 @@ func States26() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
+							Href:    "/app/notes",
 							Meta:    "—",
 							Current: true,
 						},
@@ -4981,12 +5285,13 @@ func States26() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "—"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Href: "/app/notes/nextcloud/zapisi", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Href: "/app/notes/nextcloud/dnevnik", Meta: "—"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Href:   "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -5119,6 +5424,7 @@ func States27() Screen {
 							Kind:    w.TickRowAll,
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
+							Href:    "/app/notes",
 							Meta:    "3",
 							Current: true,
 						},
@@ -5127,12 +5433,13 @@ func States27() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Error: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Href: "/app/notes/nextcloud/zapisi", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Href: "/app/notes/nextcloud/dnevnik", Error: true},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Href:   "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -5286,6 +5593,7 @@ func States28() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
+							Href:   "/app/notes",
 							Meta:   "3",
 						},
 					},
@@ -5293,12 +5601,19 @@ func States28() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "0", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Href: "/app/notes/nextcloud/zapisi", Meta: "3"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#6B4E7A"},
+							Label:   "Дневник",
+							Href:    "/app/notes/nextcloud/dnevnik",
+							Meta:    "0",
+							Current: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Href:   "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -5384,6 +5699,7 @@ func States29() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
+							Href:   "/app/notes",
 							Meta:   "2",
 						},
 					},
@@ -5391,12 +5707,19 @@ func States29() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Current: true, Error: true},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "2"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Записи",
+							Href:    "/app/notes/nextcloud/zapisi",
+							Current: true,
+							Error:   true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Href: "/app/notes/nextcloud/dnevnik", Meta: "2"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#3F6E8C"},
 							Label:  "Общие с семьёй",
+							Href:   "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:   "—",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
@@ -5484,6 +5807,7 @@ func States30() Screen {
 							Kind:   w.TickRowAll,
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
+							Href:   "/app/notes",
 							Meta:   "7",
 						},
 					},
@@ -5491,12 +5815,13 @@ func States30() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3"},
-						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Href: "/app/notes/nextcloud/zapisi", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Href: "/app/notes/nextcloud/dnevnik", Meta: "3"},
 						w.TickRow{
 							Ticked:  w.TickedOff,
 							Mark:    w.Mark{Colour: "#3F6E8C"},
 							Label:   "Общие с семьёй",
+							Href:    "/app/notes/nextcloud/obshchie-s-semei",
 							Meta:    "2",
 							Current: true,
 							Hidden:  true,
@@ -5891,6 +6216,7 @@ func States32() Screen {
 							Kind:   w.TickRowRoot,
 							Icon:   "file",
 							Label:  "Selected collections",
+							Href:   "/app/files",
 							Meta:   "2 of 3",
 						},
 					},
@@ -5898,11 +6224,18 @@ func States32() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Documents",
+							Href:    "/app/files/sftpgo/documents",
+							Meta:    "rw",
+							Current: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -5911,7 +6244,7 @@ func States32() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -6054,6 +6387,7 @@ func States33() Screen {
 							Kind:   w.TickRowRoot,
 							Icon:   "file",
 							Label:  "Selected collections",
+							Href:   "/app/files",
 							Meta:   "2 of 3",
 						},
 					},
@@ -6061,11 +6395,18 @@ func States33() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Current: true, Error: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Documents",
+							Href:    "/app/files/sftpgo/documents",
+							Current: true,
+							Error:   true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -6074,7 +6415,7 @@ func States33() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -6160,19 +6501,26 @@ func States34() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Meta: "3 of 3"}},
+						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Href: "/app/files", Meta: "3 of 3"},
+					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Public", Current: true, Trail: w.Badge{Label: "ro"}},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Href: "/app/files/sftpgo/documents", Meta: "rw"},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#9A9280"},
+							Label:   "Public",
+							Href:    "/app/files/sftpgo/public",
+							Current: true,
+							Trail:   w.Badge{Label: "ro"},
+						},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -6382,6 +6730,7 @@ func States35() Screen {
 							Kind:    w.TickRowRoot,
 							Icon:    "file",
 							Label:   "Selected collections",
+							Href:    "/app/files",
 							Meta:    "0 of 3",
 							Current: true,
 						},
@@ -6390,11 +6739,19 @@ func States35() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#4A6B52"},
+							Label:  "Documents",
+							Href:   "/app/files/sftpgo/documents",
+							Meta:   "rw",
+							Hidden: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -6403,7 +6760,14 @@ func States35() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw", Hidden: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "Files",
+							Href:   "/app/files/nextcloud/files",
+							Meta:   "rw",
+							Hidden: true,
+						},
 					},
 				},
 				w.RailSec{

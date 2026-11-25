@@ -15,7 +15,7 @@ import (
 
 // meaningFields are the fields that give an element its meaning in HTML
 // (Р-25): where it goes, what it sends.
-var meaningFields = map[string]bool{"Href": true, "Form": true, "Name": true, "Action": true}
+var meaningFields = map[string]bool{"Href": true, "Form": true, "Name": true, "Action": true, "Page": true}
 
 // clone is a deep copy of v: filling it must not touch the records the other
 // tests compare with their frames.

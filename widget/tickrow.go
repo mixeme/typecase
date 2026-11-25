@@ -87,10 +87,10 @@ func (TickRow) fieldGridPart() {}
 // TickRow — tc-tickrow
 //
 // Роль. Строка источника с галкой: показать его или скрыть, выбрать для копии, для выгрузки.
-// Вход. TickRow{Ticked, Kind, Form, Mark, Icon, Label, Meta, MetaTitle, Current, Hidden, Error, Trail, Send}.
+// Вход. TickRow{Ticked, Kind, Form, Mark, Icon, Label, Meta, MetaTitle, Current, Hidden, Error, Trail, Send, Href, Target}.
 // Состояния. one | all | root | external | current | hidden | error | group | nested | loading.
 // Инварианты. Галка — кнопка с доступным именем; её состояния, род строки и место строки — перечисления; строка печатает фрагмент своего кадра.
-// Поведение. Галка с Send.Form — кнопка формы рейла: нажатие отправляет выбор, показать источник или скрыть. Галка группы (TickRowAll, TickRowRoot) — такая же кнопка: отправляет «все» или «ни одного»; галки под ней ставит ответ сервера, не сценарий (владелец 07.11). С живым слоем и формой рейла, которая спрашивает зону (PostForm.Target), ответ ставит на место рейл и список без загрузки страницы; без слоя приходит страница.
+// Поведение. Галка с Send.Form — кнопка формы рейла: нажатие отправляет выбор, показать источник или скрыть. Галка группы (TickRowAll, TickRowRoot) — такая же кнопка: отправляет «все» или «ни одного»; галки под ней ставит ответ сервера, не сценарий (владелец 07.11). С живым слоем и формой рейла, которая спрашивает зону (PostForm.Target), ответ ставит на место рейл и список без загрузки страницы; без слоя приходит страница. Название с Href — ссылка на коллекцию: нажатие открывает её одну, галка остаётся отметкой (задача Carrel 292); на телефоне ссылка — во всю высоту строки.
 // Эталон. кадр `components-11`, фрагмент `.tc-tickrow`.
 // Содержимое. Галка, метка источника (у корня — значок), название, число, значок ошибки с причиной в подсказке, бейдж, кнопка повтора или заготовка.
 // Чего нет. Своего меню: действия с источником — в меню раздела рейла.
@@ -108,6 +108,11 @@ type TickRow struct {
 	Error     bool   // the source did not answer
 	Trail     TickRowTrail
 	Send      Send // what pressing the tick sends: the source's choice without a script
+	// Href makes the name a link to the collection, the tick staying its
+	// own button (Carrel's task 292): one collection opens from the rail.
+	// Target is the zone the live layer asks for in its place (main).
+	Href   string
+	Target string
 }
 
 // Render prints the row.
@@ -122,7 +127,11 @@ func (r TickRow) html(m mix) string {
 	} else {
 		s.WriteString(r.Mark.html(nil))
 	}
-	s.WriteString(`<span` + class(nil, "tc-tickrow__label", pick(r.Form == TickRowGroup, "tc-tickrow__label--fw600")) + `>` + esc(r.Label) + `</span>`)
+	label := "span"
+	if r.Href != "" {
+		label = "a"
+	}
+	s.WriteString(`<` + label + class(nil, "tc-tickrow__label", pick(r.Form == TickRowGroup, "tc-tickrow__label--fw600")) + attr("href", r.Href) + attr("data-tc-target", r.Target) + `>` + esc(r.Label) + `</` + label + `>`)
 	if r.Error && r.Meta == "" {
 		// A source that did not answer: a mark of the error, the reason in
 		// its hint; in full — in the runbar's menu of refusals (02.10).

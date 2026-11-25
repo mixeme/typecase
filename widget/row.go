@@ -92,11 +92,11 @@ func titled(parts []Inline, badge *Badge) string {
 
 // linkTitle is the row's title, a link to the record when href is set: in a
 // row with a control of its own the title, not the row, goes there.
-func linkTitle(href string, parts []Inline, strong bool, badge *Badge) string {
+func linkTitle(href, page string, parts []Inline, strong bool, badge *Badge) string {
 	if href == "" {
 		return title(parts, strong, badge)
 	}
-	return `<a` + class(nil, "tc-row__title", is("strong", strong)) + attr("href", href) + `>` + titled(parts, badge) + `</a>`
+	return `<a` + class(nil, "tc-row__title", is("strong", strong)) + attr("href", href) + attr("data-tc-page", page) + `>` + titled(parts, badge) + `</a>`
 }
 
 // source prints the source cell: where the record lives.
@@ -141,10 +141,10 @@ func inset(kind string, on bool) string {
 // TimeRow — tc-row
 //
 // Роль. Строка со временем: событие дня, приглашение, запись журнала.
-// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Badges, Source, On, Past, Inset, Single, Href}.
+// Вход. TimeRow{Mark, Time, Title, Strong, Detail, Badges, Source, On, Past, Inset, Single, Href, Page}.
 // Состояния. plain | on | caption | past | inset | found.
 // Инварианты. Колонки строки — её тип: у строки времени нет аватара и срока; метка источника — первой; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает запись; стрелки ходят по строкам списка.
+// Поведение. Нажатие открывает запись; стрелки ходят по строкам списка; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `s-agenda-1`, фрагмент `.tc-row`.
 // Содержимое. Метка, время моноширинным, название (с найденным жирным), место, плашки по важности (видны те, что умещаются целыми; подсказка ячейки называет все, когда их больше одной), источник.
 // Чего нет. Своих кнопок: действия с записью — в панели и в меню «⋯» шапки.
@@ -163,6 +163,9 @@ type TimeRow struct {
 	Inset  bool
 	Single bool   // the list of one collection: the row has no source column
 	Href   string // the row is a link to its record
+	// Page is the record\'s own page: where the row goes when the page has no
+	// panel to open it in (Carrel\'s task 290).
+	Page string
 }
 
 // Render prints the row.
@@ -170,7 +173,7 @@ func (r TimeRow) Render() string { return r.html(nil) }
 
 func (r TimeRow) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Single, "tc-row--single"), pick(r.Past, "tc-row--timecols--op-7")) + attr("href", r.Href) + `>`)
+	s.WriteString(`<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--timecols", is("on", r.On), inset("timecols", r.Inset), pick(r.Single, "tc-row--single"), pick(r.Past, "tc-row--timecols--op-7")) + attr("href", r.Href) + attr("data-tc-page", r.Page) + `>`)
 	s.WriteString(r.Mark.html(nil))
 	s.WriteString(cell(r.Time, "tc-mono", "tc-row__lead"))
 	s.WriteString(title(r.Title, r.Strong, nil))
@@ -212,10 +215,10 @@ func (r SkelRow) html(m mix) string {
 // FaceRow — tc-row
 //
 // Роль. Строка человека: аватар, имя, телефон, почта, организация.
-// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceHint, SourceBadge, On, Inset, Single, Href}.
+// Вход. FaceRow{Mark, Avatar, Title, Strong, TitleBadge, Subtitle, Detail, Caption, Source, SourceHint, SourceBadge, On, Inset, Single, Href, Page}.
 // Состояния. plain | on | strong | badge | inset | found.
 // Инварианты. Колонки строки — её тип: у строки человека есть аватар и нет времени; метка источника — первой; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает карточку; стрелки ходят по строкам списка.
+// Поведение. Нажатие открывает карточку; стрелки ходят по строкам списка; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `components-12`, фрагмент `.tc-row`.
 // Содержимое. Метка, аватар, имя (с найденным жирным и бейджем), телефон моноширинным, почта, организация, источник (с бейджем).
 // Чего нет. Своих кнопок: действия с карточкой — в панели.
@@ -235,13 +238,16 @@ type FaceRow struct {
 	Inset       bool
 	Single      bool   // the list of one collection: the row has no source column
 	Href        string // the row is a link to its record
+	// Page is the record\'s own page: where the row goes when the page has no
+	// panel to open it in (Carrel\'s task 290).
+	Page string
 }
 
 // Render prints the row.
 func (r FaceRow) Render() string { return r.html(nil) }
 
 func (r FaceRow) html(m mix) string {
-	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--avatarcols", is("on", r.On), inset("avatarcols", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + attr("data-tc-page", r.Page) + `>` +
 		r.Mark.html(nil) + r.Avatar.html(nil) + title(r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Subtitle, "tc-row__excerpt", "tc-mono", "tc-row__subtitle") + cell(r.Detail, "tc-row__excerpt", "tc-row__detail") +
 		cell(r.Caption, "tc-row__excerpt", "tc-row__caption") + source(r.Source, r.SourceHint, r.SourceBadge, r.Single) + `</` + rowTag(r.Href) + `>`
@@ -306,10 +312,10 @@ func (r LinkedRow) html(m mix) string {
 // ExcerptRow — tc-row
 //
 // Роль. Строка текста: название, начало текста, дата, источник.
-// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Date, Source, SourceHint, On, Inset, Single, Href}.
+// Вход. ExcerptRow{Mark, Title, Strong, TitleBadge, Excerpt, Date, Source, SourceHint, On, Inset, Single, Href, Page}.
 // Состояния. plain | on | badge | inset | found | link.
 // Инварианты. Колонки строки — её тип; метка источника — первой; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие открывает текст; стрелки ходят по строкам списка.
+// Поведение. Нажатие открывает текст; стрелки ходят по строкам списка; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `s-notes-1`, фрагмент `.tc-row`.
 // Содержимое. Метка, название (с найденным жирным и бейджем), начало текста, дата моноширинным, источник (с подсказкой, когда их несколько).
 // Чего нет. Всего текста: строка показывает начало, текст открывается. Тегов: они в панели записи и в рейле, в строке — столбцом, который включил человек (ColumnRow, Р-53).
@@ -326,13 +332,16 @@ type ExcerptRow struct {
 	Inset      bool
 	Single     bool   // the list of one collection: the row has no source column
 	Href       string // the row is a link to its record
+	// Page is the record\'s own page: where the row goes when the page has no
+	// panel to open it in (Carrel\'s task 290).
+	Page string
 }
 
 // Render prints the row.
 func (r ExcerptRow) Render() string { return r.html(nil) }
 
 func (r ExcerptRow) html(m mix) string {
-	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + `>` + r.Mark.html(nil) +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), inset("excerpt", r.Inset), pick(r.Single, "tc-row--single")) + attr("href", r.Href) + attr("data-tc-page", r.Page) + `>` + r.Mark.html(nil) +
 		title(r.Title, r.Strong, r.TitleBadge) + cell(r.Excerpt, "tc-row__excerpt") +
 		cell(r.Date, "tc-mono", "tc-row__date") + source(r.Source, r.SourceHint, nil, r.Single) + `</` + rowTag(r.Href) + `>`
 }
@@ -340,10 +349,10 @@ func (r ExcerptRow) html(m mix) string {
 // BriefRow — tc-row
 //
 // Роль. Короткая строка текста в выборе: название, дата, где лежит.
-// Вход. BriefRow{Mark, Title, Date, Where, On, Href}.
+// Вход. BriefRow{Mark, Title, Date, Where, On, Href, Page}.
 // Состояния. plain | on.
 // Инварианты. Колонок три, и это её тип; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие выбирает строку.
+// Поведение. Нажатие выбирает строку; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `s-mail-5`, фрагмент `.tc-row`.
 // Содержимое. Метка, название, дата моноширинным, источник.
 // Чего нет. Начала текста и тегов: выбор короче списка.
@@ -354,23 +363,26 @@ type BriefRow struct {
 	Where string
 	On    bool
 	Href  string // the row is a link to its record
+	// Page is the record\'s own page: where the row goes when the page has no
+	// panel to open it in (Carrel\'s task 290).
+	Page string
 }
 
 // Render prints the row.
 func (r BriefRow) Render() string { return r.html(nil) }
 
 func (r BriefRow) html(m mix) string {
-	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), "tc-row--excerpt--cols3-62-148") + attr("href", r.Href) + `>` + r.Mark.html(nil) +
+	return `<` + rowTag(r.Href) + class(m, "tc-row", "tc-row--excerpt", is("on", r.On), "tc-row--excerpt--cols3-62-148") + attr("href", r.Href) + attr("data-tc-page", r.Page) + `>` + r.Mark.html(nil) +
 		cell(r.Title, "tc-row__title", "is-strong") + r.Date.html(nil) + cell(r.Where, "tc-row__cell", "tc-row__tags") + `</` + rowTag(r.Href) + `>`
 }
 
 // DueRow — tc-row
 //
 // Роль. Строка дела: галка, название, срок, сколько сделано, источник.
-// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Due, Progress, Source, SourceHint, On, Overdue, Inset, Single, Href}.
+// Вход. DueRow{Tick, Mark, Title, Strong, TitleBadge, Due, Progress, Source, SourceHint, On, Overdue, Inset, Single, Href, Page}.
 // Состояния. plain | on | overdue | done | inset | found | sign.
 // Инварианты. Сделано ли дело, говорит одна галка: строка берёт это из неё; колонки строки — её тип; строка печатает фрагмент своего кадра.
-// Поведение. Галка отмечает дело сделанным; нажатие на строку открывает его; в списке только для чтения галка — знак (Tick.Sign): дело не отметить.
+// Поведение. Галка отмечает дело сделанным; нажатие на строку открывает его; в списке только для чтения галка — знак (Tick.Sign): дело не отметить; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `s-tasks-1`, фрагмент `.tc-row`.
 // Содержимое. Галка, метка, название (с найденным жирным и бейджем), срок и доля моноширинным, источник.
 // Чего нет. Подзадач: они — в панели дела. Тегов: они в панели дела и в рейле, в строке — столбцом, который включил человек (ColumnRow, Р-53).
@@ -391,6 +403,9 @@ type DueRow struct {
 	// Href makes the title a link to the record (Carrel's task 95): the row
 	// itself cannot be one, its tick is a control of its own.
 	Href string
+	// Page is the record's own page: where the row goes when the page has no
+	// panel to open it in (Carrel's task 290).
+	Page string
 }
 
 // Render prints the row.
@@ -398,7 +413,7 @@ func (r DueRow) Render() string { return r.html(nil) }
 
 func (r DueRow) html(m mix) string {
 	return `<div` + class(m, "tc-row", "tc-row--tickmarkcols", is("on", r.On), is("overdue", r.Overdue), is("done", r.Tick.Done), inset("tickmarkcols", r.Inset), pick(r.Single, "tc-row--single")) + `>` +
-		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Title, r.Strong, r.TitleBadge) +
+		r.Tick.html(nil) + r.Mark.html(nil) + linkTitle(r.Href, r.Page, r.Title, r.Strong, r.TitleBadge) +
 		cell(r.Due, "tc-mono", "tc-row__due") + cell(r.Progress, "tc-row__cell", "tc-mono", "tc-row__progress") +
 		source(r.Source, r.SourceHint, nil, r.Single) + `</div>`
 }
@@ -653,10 +668,10 @@ type ColumnCell struct {
 // ColumnRow — tc-row
 //
 // Роль. Строка списка со столбцами, которые выбрал человек (Columns): набор и порядок — его, ширина — рода столбца.
-// Вход. ColumnRow{Tick, Mark, Avatar, Cells, Strong, On, Overdue, Href}.
+// Вход. ColumnRow{Tick, Mark, Avatar, Cells, Strong, On, Overdue, Href, Page}.
 // Состояния. plain | on | overdue | done | link.
 // Инварианты. Столбцы ровны: у всех строк списка один набор в одном порядке; ширина столбца и ступень, на которой он уходит, — его рода; строка печатает фрагмент своего кадра.
-// Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным.
+// Поведение. Нажатие выбирает строку; строка со ссылкой ведёт на запись; галка дела отмечает его сделанным; с Page, где ширина не рисует панель, нажатие ведёт на страницу записи (задача Carrel 290).
 // Эталон. кадр `s-contacts-23`, фрагмент `.tc-row--cols`.
 // Содержимое. Галка дела, метка источника, аватар, ячейки столбцов: слова, моноширинное, первый тег со счётчиком остальных, плашки события.
 // Чего нет. Своих ширин: столбец задаёт род, а не данные строки.
@@ -671,6 +686,9 @@ type ColumnRow struct {
 	// Href makes the row a link to the record; a row with a Tick cannot be
 	// one, its name is the link then, as DueRow's title (Carrel's task 123).
 	Href string
+	// Page is the record's own page: where the row goes when the page has no
+	// panel to open it in (Carrel's task 290).
+	Page string
 }
 
 // Render prints the row.

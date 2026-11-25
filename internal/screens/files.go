@@ -39,6 +39,7 @@ func Files1() Screen {
 							Kind:   w.TickRowRoot,
 							Icon:   "file",
 							Label:  "Selected collections",
+							Href:   "/app/files",
 							Meta:   "2 of 3",
 						},
 					},
@@ -46,11 +47,18 @@ func Files1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Documents",
+							Href:    "/app/files/sftpgo/documents",
+							Meta:    "rw",
+							Current: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -59,7 +67,7 @@ func Files1() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -464,6 +472,7 @@ func Files2() Screen {
 							Kind:   w.TickRowRoot,
 							Icon:   "file",
 							Label:  "Selected collections",
+							Href:   "/app/files",
 							Meta:   "2 of 3",
 						},
 					},
@@ -471,11 +480,18 @@ func Files2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Documents",
+							Href:    "/app/files/sftpgo/documents",
+							Meta:    "rw",
+							Current: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -484,7 +500,7 @@ func Files2() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -871,6 +887,7 @@ func Files4() Screen {
 								Kind:   w.TickRowRoot,
 								Icon:   "file",
 								Label:  "Selected collections",
+								Href:   "/app/files",
 								Meta:   "2 of 3",
 							},
 						},
@@ -878,11 +895,18 @@ func Files4() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "sftpgo · vps"},
-							w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+							w.TickRow{
+								Mark:    w.Mark{Colour: "#4A6B52"},
+								Label:   "Documents",
+								Href:    "/app/files/sftpgo/documents",
+								Meta:    "rw",
+								Current: true,
+							},
 							w.TickRow{
 								Ticked: w.TickedOff,
 								Mark:   w.Mark{Colour: "#9A9280"},
 								Label:  "Public",
+								Href:   "/app/files/sftpgo/public",
 								Hidden: true,
 								Trail:  w.Badge{Label: "ro"},
 							},
@@ -891,7 +915,7 @@ func Files4() Screen {
 					w.RailSec{
 						Items: []w.RailSecPart{
 							w.Rubric{Text: "nextcloud"},
-							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+							w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 						},
 					},
 					w.RailSec{
@@ -1331,6 +1355,7 @@ func Files5() Screen {
 							Kind:   w.TickRowRoot,
 							Icon:   "file",
 							Label:  "Selected collections",
+							Href:   "/app/files",
 							Meta:   "2 of 3",
 						},
 					},
@@ -1338,11 +1363,18 @@ func Files5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw", Current: true},
+						w.TickRow{
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Documents",
+							Href:    "/app/files/sftpgo/documents",
+							Meta:    "rw",
+							Current: true,
+						},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -1351,7 +1383,7 @@ func Files5() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{
@@ -1601,6 +1633,7 @@ func Files6() Screen {
 							Kind:    w.TickRowRoot,
 							Icon:    "file",
 							Label:   "Selected collections",
+							Href:    "/app/files",
 							Meta:    "2 of 3",
 							Current: true,
 						},
@@ -1609,11 +1642,12 @@ func Files6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Href: "/app/files/sftpgo/documents", Meta: "rw"},
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#9A9280"},
 							Label:  "Public",
+							Href:   "/app/files/sftpgo/public",
 							Hidden: true,
 							Trail:  w.Badge{Label: "ro"},
 						},
@@ -1622,7 +1656,7 @@ func Files6() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Meta: "rw"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Files", Href: "/app/files/nextcloud/files", Meta: "rw"},
 					},
 				},
 				w.RailSec{

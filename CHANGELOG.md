@@ -32,6 +32,24 @@ do, not what the authors did.
 
 ### Added
 
+- **A row that opens its record in the panel goes to its page where there
+  is no panel** (Carrel's task 290; the owner on a tablet: «the note does
+  not open»): `Page` on `TimeRow`, `FaceRow`, `ExcerptRow`, `BriefRow`,
+  `DueRow`, `ColumnRow` is the record's own page (`data-tc-page`); the
+  script goes there when the zone the list fills is not drawn at this width,
+  and fills the panel as before where it is. Without a script the row's
+  `Href` stays (a wide page has the panel). To do: give the rows both
+  addresses.
+
+- **A collection's name in the rail opens it** (Carrel's task 292; the
+  owner: «not clickable»): `TickRow.Href` makes the name a link, the tick
+  staying its own button; `Target` names the zone the live layer asks for
+  (main); on a phone the link takes the row's whole 44 px. The rails of the
+  lists draw it — 440 rows in 79 frames, the address `/app/{kind}/{server}/
+  {collection}` as Carrel's (a feed `/app/{kind}/{feed}/feed`, the combined
+  row the combined list). To do: give the rail's rows their `Href`
+  (`SourceRow.Href`).
+
 - **The mailbox's own blocks** (the mail prepared for implementation, the
   owner 24.11): `MailRow` is a letter in a mailbox's folder — tick, the
   flag of the important one (a toggle that acts at once, `Flag`), sender,
@@ -112,6 +130,9 @@ do, not what the authors did.
 
 ### Mockup
 
+- **An empty To fills its field** (Carrel's task 288): `s-mail-20` draws the
+  letter sheet's To before any recipient, as wide as Subject; the rule came
+  with 25.11's recipients field.
 - **The mail is prepared for implementation** (the owner 24.11): its 32
   frames lost the mark «отложена» and are checked as all others — screens,
   records, the ladders and the geometry, with no frame let off (`-14` and

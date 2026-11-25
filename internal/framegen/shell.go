@@ -689,7 +689,15 @@ func (g *gen) tickrow(e *El) string {
 	} else {
 		f = append(f, "Mark: "+g.mark(lead))
 	}
-	f = append(f, "Label: "+q(e.Kid("tc-tickrow__label").Text()))
+	lab := e.Kid("tc-tickrow__label")
+	f = append(f, "Label: "+q(lab.Text()))
+	if h := lab.Attr("href"); h != "" {
+		// the name is a link to the collection (Carrel's task 292)
+		f = append(f, "Href: "+q(h))
+		if t := lab.Attr("data-tc-target"); t != "" {
+			f = append(f, "Target: "+q(t))
+		}
+	}
 	if meta := e.Kid("tc-tickrow__meta"); meta != nil {
 		f = append(f, "Meta: "+q(meta.Text()))
 		if t := meta.Attr("title"); t != "" {

@@ -3,6 +3,7 @@ package browser_test
 import (
 	"strings"
 	"testing"
+	"time"
 
 	"carrel.dev/typecase/internal/browser"
 	w "carrel.dev/typecase/widget"
@@ -361,5 +362,33 @@ func TestRailOpensAsPanel(t *testing.T) {
 	}
 	if wide != "false true" || hash != "#cal" {
 		t.Errorf("on a wide page the current section: state %s, address %q; want a plain link", wide, hash)
+	}
+}
+
+// TestRowOpensItsPage (Carrel's task 290): a row that opens its record in the
+// panel fills the panel where the width draws one, and goes to the record's
+// own page where it does not — on a tablet the note opened nothing.
+func TestRowOpensItsPage(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	panel := w.Side{Zone: "panel", Items: []w.SidePart{w.Head{Title: &w.HeadTitle{Text: "Заметка"}}}}
+	part := h.RegisterPage("paged-part", panel.Render())
+	own := h.RegisterPage("paged-own", browser.PageHTML(`<div class="tc-root"><p>the note's page</p></div>`, ""))
+	list := w.List{Target: "panel", Rows: []w.ListRow{w.ExcerptRow{Title: []w.Inline{w.Text("Заметка")}, Href: part, Page: own}}}
+	shell := w.Shell{Body: w.ShellBody{Main: w.Main{Zone: "main", Items: []w.MainPart{list}}, Side: &w.Side{Zone: "panel", Closed: true}}}
+	url := h.RegisterPage("paged", browser.PageHTML(shell.Render(), ""))
+	const where = `location.pathname.split("/").pop() + " " + (document.querySelector(".tc-side") && document.querySelector(".tc-side").getClientRects().length ? "panel" : "-")`
+	var wide, narrow string
+	if err := h.Run(url, 1500, 700, chromedp.Click(`.tc-row`, chromedp.ByQuery), chromedp.Sleep(1200*time.Millisecond), chromedp.Evaluate(where, &wide)); err != nil {
+		t.Fatal(err)
+	}
+	if err := h.Run(url, 900, 700, chromedp.Click(`.tc-row`, chromedp.ByQuery), chromedp.Sleep(1200*time.Millisecond), chromedp.Evaluate(where, &narrow)); err != nil {
+		t.Fatal(err)
+	}
+	if wide != "paged panel" {
+		t.Errorf("on a wide page the row: %q; want the panel filled on the same page", wide)
+	}
+	if narrow != "paged-own -" {
+		t.Errorf("without a panel the row: %q; want the record's own page", narrow)
 	}
 }
