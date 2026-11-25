@@ -114,6 +114,13 @@ do, not what the authors did.
 
 ### Fixed
 
+- **On a phone the bar of sections stays at the window's bottom** (Carrel's
+  task 291: at 375×812 a settings page of 1115 px took «← Back to app ·
+  Account · Sections» down with its end). On a page (`package page`), in the
+  drawer's width, the rail that is the bottom bar is sticky at the window's
+  bottom while the page scrolls under it; the rail opened as a panel is as it
+  was. `TestShellFillsTheWindow` scrolls a long page at 375×812 to its top,
+  middle and end (red on the old rule).
 - **Free composition on the mail frames** (26.11). On a phone the
   selection bar's right part (Select all, Clear selection) may shrink and
   wrap what it holds at its right instead of going off the edge — a bar form

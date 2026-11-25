@@ -1226,6 +1226,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
     border-right:0;border-top:.5px solid var(--tc-rule);background:var(--tc-surface);
     overflow:visible;align-items:stretch}
   .tc-shell__rail .tc-railsec,.tc-shell__rail .tc-railfoot{display:none}
+  /* На странице полоса разделов — у низа окна при любой длине страницы: страница прокручивается под ней
+     (задача Carrel 291: настройки длиннее экрана уводили её вниз вместе с концом страницы). */
+  body[data-tc-root] > .tc-shell > .tc-shell__body:not([data-tc-rail-open]) > .tc-shell__rail{position:sticky;bottom:0;z-index:5}
   /* Разделы и возврат — пункты одной панели равной ширины: возврат идёт за разделами, как в рейле, за чертой. */
   .tc-shell__rail .tc-nav{display:contents}
   .tc-shell__rail .tc-nav--top2 .tc-nav__item{border-left:.5px solid var(--tc-rule)}

@@ -12,6 +12,7 @@ import (
 	"net/http/httptest"
 	"sync/atomic"
 	"testing"
+	"time"
 
 	cdppage "github.com/chromedp/cdproto/page"
 	"github.com/chromedp/cdproto/runtime"
@@ -378,6 +379,20 @@ func TestShellFillsTheWindow(t *testing.T) {
 		}
 		if got[0] <= got[3] || got[1] != got[0] || got[2] > got[0] {
 			t.Errorf("%d×%d, a long page: the shell ends at %d, the rail's foot at %d, the list at %d, the window %d; want the foot at the shell's end below the window", c.w, c.h, got[0], got[1], got[2], got[3])
+		}
+	}
+	// On a phone the rail is the bar of sections at the bottom: at the
+	// window's bottom on a page of any length, at its top as in the middle
+	// and at the end (Carrel's task 291: a settings page longer than the
+	// screen took it down with its end).
+	const bottomBar = `(() => { const r = document.querySelector(".tc-shell__rail").getBoundingClientRect(); return [Math.round(r.bottom), window.innerHeight, document.documentElement.scrollHeight]; })()`
+	for _, at := range []string{"0", "600", "document.documentElement.scrollHeight"} {
+		var got []int
+		if err := h.Run(srv.URL+"/long", 375, 812, chromedp.Evaluate(`window.scrollTo(0, `+at+`); true`, nil), chromedp.Sleep(50*time.Millisecond), chromedp.Evaluate(bottomBar, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if got[2] <= got[1] || got[0] != got[1] {
+			t.Errorf("375×812, a long page scrolled to %s: the bar of sections ends at %d, the window at %d, the page is %d high; want the bar at the window's bottom", at, got[0], got[1], got[2])
 		}
 	}
 }
