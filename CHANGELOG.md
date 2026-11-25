@@ -95,7 +95,22 @@ do, not what the authors did.
   «Back to app» navigation of settings and administration.
 
 ### Fixed
-- **Text sits beside its icon in every browser** (Carrel's task 276). The
+-- **Menus by one rule** (Carrel's task 283; the owner: «a system solution,
+  not mending each»). A `TopDrop`'s and a `SplitDrop`'s menu stands in the
+  panel at the button's end whatever its `Pop` (a `MenuUnder` there went
+  off from the panel's zero-width edge); a `Drop` keeps its `Pop` — in place
+  for a menu the page prints open, under for one its button opens. An open
+  drop or split stands a layer over a closed split: the top bar's «New
+  note» menu no longer goes under the list head's «New contact»
+  (`TestTopSplitOverTheHeadSplit`). A menu's and a sheet's words are their
+  own: a rubric, a head or a bar no longer lend them capitals, spacing,
+  size or colour (the note column's «Attach»). A menu
+  with no room below turns its panel, not itself, so it no longer covers
+  its button. `TestMockupMenus` opens every menu of every frame at 1351,
+  820 and 390 as a person would and holds it at its button (or moved in by
+  the script), whole within the frame, its items on one line, in its own
+  letters.
+ **Text sits beside its icon in every browser** (Carrel's task 276). The
   fonts' `@font-face` pin the line's metrics to each font's own typo
   metrics (`ascent-override`, `descent-override`, `line-gap-override`):
   what Chromium lays text by, so nothing it draws moves; a browser that
@@ -2961,21 +2976,6 @@ do, not what the authors did.
 
 ### Fixed
 
-- **Menus by one rule** (Carrel's task 283; the owner: «a system solution,
-  not mending each»). A `TopDrop`'s and a `SplitDrop`'s menu stands in the
-  panel at the button's end whatever its `Pop` (a `MenuUnder` there went
-  off from the panel's zero-width edge); a `Drop` keeps its `Pop` — in place
-  for a menu the page prints open, under for one its button opens. An open
-  drop or split stands a layer over a closed split: the top bar's «New
-  note» menu no longer goes under the list head's «New contact»
-  (`TestTopSplitOverTheHeadSplit`). A menu's and a sheet's words are their
-  own: a rubric, a head or a bar no longer lend them capitals, spacing,
-  size or colour (the note column's «Attach»). A menu
-  with no room below turns its panel, not itself, so it no longer covers
-  its button. `TestMockupMenus` opens every menu of every frame at 1351,
-  820 and 390 as a person would and holds it at its button (or moved in by
-  the script), whole within the frame, its items on one line, in its own
-  letters.
 - **What lies under an overlay's scrim is inert** (20.11). `Overlay`
   prints its top bar and shell body with `inert`: on a page drawn with its
   sheet open, Tab went to the bar and the head under the scrim before it
