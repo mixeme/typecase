@@ -2765,6 +2765,14 @@ func Mailbox27() Screen {
 										Width: w.FieldFull,
 									},
 									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{Name: "autosave", Value: "on", Parts: []w.CheckPart{w.Text("Save the draft by itself every minute")}},
+											w.FieldHint{Parts: []w.Inline{w.Text("Into home · Drafts, the new version replacing the last.")}},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Field{
 										Label: "Password",
 										Parts: []w.FieldPart{
 											w.Input{
