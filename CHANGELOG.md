@@ -146,6 +146,12 @@ do, not what the authors did.
   letter», Mail among the kinds and the letters' rows. «Delete forever» and
   «Delete» without Trash (`-30`, `-31`) are forms; «Download .eml first» a
   link.
+- **The mail checked against the rules made since 30.09** (step 2): every
+  letter's head has «← Inbox» and ↑ ↓, under a sheet too (`-9`, `-15`), the
+  original «← Inbox» (`-12`); «Save to files» (`-10`) is a form whose folders
+  are choices, its main button sends it; the words say only what matters
+  (Р-77: `-8`, `-11`, `-12`, `-15`, `-20`, `-25` … `-28`) — a letter well
+  under its server's size has a quiet line, not a message (`-15`).
 - **A field of recipients fills its field** (the owner, 25.11): To was as
   wide as its tags, in the relay's letter sheet too (`s-mail-1`); now it
   takes the field's width, or what buttons beside it leave.

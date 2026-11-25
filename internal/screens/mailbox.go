@@ -754,6 +754,7 @@ func Mailbox9() Screen {
 				Main: w.Main{
 					Items: []w.MainPart{
 						w.Head{
+							Back: &w.Button{Label: "Inbox", Icon: "back", Href: "/app/mail/home/inbox#l48213"},
 							Meta: &w.HeadSub{
 								Parts: []w.HeadSubPart{
 									w.Mark{Colour: "#A05A2C", Size: w.MarkH12},
@@ -769,6 +770,8 @@ func Mailbox9() Screen {
 									w.Button{Label: "Archive", Icon: "archive", Title: "Archive"},
 									w.Button{Icon: "trash", Title: "Move to Trash"},
 									w.Button{Icon: "dots", Title: "More"},
+									w.Button{Icon: "up", Title: "Newer letter", Href: "/app/mail/home/inbox/48214"},
+									w.Button{Icon: "down", Title: "Older letter", Href: "/app/mail/home/inbox/48190"},
 								},
 							},
 							Pad: w.HeadRule,
@@ -1055,6 +1058,7 @@ func Mailbox12() Screen {
 			Main: w.Main{
 				Items: []w.MainPart{
 					w.Head{
+						Back: &w.Button{Label: "Inbox", Icon: "back", Href: "/app/mail/home/inbox#l48190"},
 						Meta: &w.HeadSub{
 							Parts: []w.HeadSubPart{
 								w.Mark{Colour: "#A05A2C", Size: w.MarkH12},
@@ -1103,7 +1107,7 @@ func Mailbox12() Screen {
 								Icon: "eye",
 								Parts: []w.MsgPart{
 									w.Strong("14 pictures from 3 addresses are not loaded."),
-									w.Text(" Loading them tells the sender that you opened this letter, when, and your IP address. The choice is for this letter only. "),
+									w.Text(" Loading them tells the senders you opened the letter, when, and your IP address. For this letter only. "),
 									w.Button{Label: "Show pictures", Small: true},
 								},
 								Space: w.MsgFlushAboveWide,
@@ -1391,6 +1395,7 @@ func Mailbox15() Screen {
 				Main: w.Main{
 					Items: []w.MainPart{
 						w.Head{
+							Back: &w.Button{Label: "Inbox", Icon: "back", Href: "/app/mail/home/inbox#l48213"},
 							Meta: &w.HeadSub{
 								Parts: []w.HeadSubPart{
 									w.Mark{Colour: "#A05A2C", Size: w.MarkH12},
@@ -1406,6 +1411,8 @@ func Mailbox15() Screen {
 									w.Button{Label: "Archive", Icon: "archive", Title: "Archive"},
 									w.Button{Icon: "trash", Title: "Move to Trash"},
 									w.Button{Icon: "dots", Title: "More"},
+									w.Button{Icon: "up", Title: "Newer letter", Href: "/app/mail/home/inbox/48214"},
+									w.Button{Icon: "down", Title: "Older letter", Href: "/app/mail/home/inbox/48190"},
 								},
 							},
 							Pad: w.HeadRule,
@@ -1638,11 +1645,7 @@ func Mailbox15() Screen {
 									Label:   "Text",
 								},
 								w.FieldHint{
-									Parts: []w.Inline{
-										w.Text("Signature of "),
-										w.Strong("home"),
-										w.Text(", set in Connections → home → Edit. It follows the mailbox you send from."),
-									},
+									Parts: []w.Inline{w.Text("Signature of "), w.Strong("home"), w.Text(": it follows the mailbox in From.")},
 								},
 							},
 							Width: w.FieldW100,
@@ -1696,11 +1699,7 @@ func Mailbox15() Screen {
 										},
 									},
 								},
-								w.Msg{
-									Parts: []w.MsgPart{w.Text("home takes letters up to "), w.Strong("25 MB"), w.Text(". This one is 3.2 MB.")},
-									Tone:  w.MsgAccent,
-									Space: w.MsgFlushAboveWide,
-								},
+								w.SecNote{Text: "3.2 MB of the 25 MB home takes."},
 							},
 							Flush: true,
 						},
@@ -2356,7 +2355,7 @@ func Mailbox25() Screen {
 										Text: "[srv]   _imaps._tcp.office.example       → mail.office.example:993\n[srv]   _submissions._tcp.office.example → none\n[srv]   _submission._tcp.office.example  → mail.office.example:587\n[imap]  mail.office.example:993  TLS · certificate matches\n        LOGIN → OK · CAPABILITY IMAP4rev1 MOVE UIDPLUS SPECIAL-USE CONDSTORE\n[smtp]  mail.office.example:587  EHLO → 250 STARTTLS · SIZE 52428800\n        STARTTLS → 220 · certificate matches\n        AUTH PLAIN → 535 5.7.8 Error: authentication failed",
 									},
 									w.SecNote{
-										Text: "Some servers keep a separate password for sending — ask whoever runs office.example. When it is fixed, Test on the Connections screen checks it without sending anything.",
+										Text: "Some servers keep a separate password for sending: ask whoever runs office.example. Test in Connections checks it without sending.",
 									},
 								},
 								Flush: true,
@@ -2619,12 +2618,7 @@ func Mailbox26() Screen {
 									w.Diag{
 										Text: "[smtp]  mail.office.example:587  EHLO → 250 · STARTTLS → 220\n        AUTH PLAIN → 535 5.7.8 Error: authentication failed",
 									},
-									w.CardText{
-										Kind: w.CardAlertText,
-										Parts: []w.CardTextPart{
-											w.Text("Letters are read; none can be sent from this mailbox. In the letter sheet it stays in «From», switched off, until Test passes."),
-										},
-									},
+									w.CardText{Kind: w.CardAlertText, Parts: []w.CardTextPart{w.Text("In «From» it stays off until Test passes.")}},
 								},
 								Variant: w.CardAlert,
 							},
@@ -2753,11 +2747,7 @@ func Mailbox27() Screen {
 										Label: "Name in From",
 										Parts: []w.FieldPart{
 											w.Input{Name: "fromName", Value: "Михаил Енученко", Label: "Name in From"},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Recipients see «Михаил Енученко <mix@home.example>». Your profile name until you change it here."),
-												},
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Recipients see «Михаил Енученко <mix@home.example>».")}},
 										},
 										Width: w.FieldMD,
 									},
@@ -2770,11 +2760,7 @@ func Mailbox27() Screen {
 												Name:  "signature",
 												Label: "Signature",
 											},
-											w.FieldHint{
-												Parts: []w.Inline{
-													w.Text("Goes under your text in every letter from home, above the quote, after the line «-- ». Plain text. Empty — no signature."),
-												},
-											},
+											w.FieldHint{Parts: []w.Inline{w.Text("Under your text, above the quote. Plain text.")}},
 										},
 										Width: w.FieldFull,
 									},

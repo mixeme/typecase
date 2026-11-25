@@ -888,14 +888,14 @@ var _ = add(
 			{Icon: "server", Label: "radicale · vps"},
 			{Mark: &w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "radicale/proekty", One: true}}}, On: 3, Variant: w.TreeNarrow},
 		w.Msg{Parts: []w.MsgPart{w.Text("Анна gets no answer from Carrel; if she is waiting for one, reply to her letter.")}, Tone: w.MsgAccent, Space: w.MsgFlush}}, Foot: []w.SheetFootPart{w.Button{Label: "Add to Работа", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidth520}, "s-mailbox-9", "tc-sheet"),
-	overlay("mail", w.Sheet{Icon: "file", Title: "Save to files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("правки-сборник-v3.pdf · 2.4 MB")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
+	overlay("mail", w.Sheet{Action: "/app/mail/home/inbox/48213/attachments/3/files", Icon: "file", Title: "Save to files", Head: []w.SheetHeadPart{w.Dim{Parts: []w.Inline{w.Text("правки-сборник-v3.pdf · 2.4 MB")}, Size: w.Dim11_5, Variant: w.DimWrap, Place: w.Pushed}, w.Close{Label: "Close"}}, Body: []w.SheetPart{
 		w.Tree{Rows: []w.TreeRow{
 			{Icon: "server", Label: "sftpgo · vps"},
-			{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
-			{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36},
-			{Icon: "file", Label: "Издательство", Indent: w.TreeLevel36},
-			{Icon: "file", Label: "Сборник", Indent: w.TreeLevel44}}, On: 5},
-		w.Field{Label: "Saved as", Parts: []w.FieldPart{w.Input{Value: "2026-09-24 Вёрстка сборника — правки-сборник-v3 (2).pdf", Label: "Saved as", Mono: true, ReadOnly: true}, w.FieldHint{Parts: []w.Inline{w.Text("Date of the letter, its subject, the file's name. "), w.Strong("(2)"), w.Text(": a file with this name is already there; nothing is overwritten.")}}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Save to Сборник", Kind: w.ButtonPrimary}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidthFull}, "s-mailbox-10", "tc-sheet"),
+			{Icon: "file", Label: "Documents", Indent: w.TreeLevel22, Send: w.Send{Name: "to", Value: "sftpgo/documents", One: true}},
+			{Icon: "file", Label: "Стройка", Indent: w.TreeLevel36, Send: w.Send{Name: "to", Value: "sftpgo/documents/stroyka", One: true}},
+			{Icon: "file", Label: "Издательство", Indent: w.TreeLevel36, Send: w.Send{Name: "to", Value: "sftpgo/documents/izdatelstvo", One: true}},
+			{Icon: "file", Label: "Сборник", Indent: w.TreeLevel44, Send: w.Send{Name: "to", Value: "sftpgo/documents/izdatelstvo/sbornik", One: true}}}, On: 5},
+		w.Field{Label: "Saved as", Parts: []w.FieldPart{w.Input{Name: "name", Value: "2026-09-24 Вёрстка сборника — правки-сборник-v3 (2).pdf", Label: "Saved as", Mono: true, ReadOnly: true}, w.FieldHint{Parts: []w.Inline{w.Strong("(2)"), w.Text(": the name is taken in Сборник; nothing is overwritten.")}}}, Width: w.FieldW100}}, Foot: []w.SheetFootPart{w.Button{Label: "Save to Сборник", Kind: w.ButtonPrimary, Submit: true}, w.Kbd{Keys: "Enter"}, w.Line{Items: []w.LinePart{w.Button{Label: "Cancel"}, w.Kbd{Keys: "Esc"}}, Gap: w.LineGapNormal, Place: w.Pushed}}, Width: w.SheetWidthFull}, "s-mailbox-10", "tc-sheet"),
 	overlay("plain", w.Sheet{Icon: "mail", Title: "Letter", Head: []w.SheetHeadPart{w.Tag{Label: "from mix@carrel.example", On: true, Place: w.Pushed}, w.Close{Label: "Close", Href: "/app/contacts"}}, Body: []w.SheetPart{
 		w.Msg{Parts: []w.MsgPart{w.Text("The letter went, but not to everyone. Sending again goes only to the refused.")}, Tone: w.MsgAlert, Space: w.MsgFlushSides},
 		w.Line{Items: []w.LinePart{w.Mark{Colour: "#4A6B52", Size: w.MarkH11}, w.Text("Анна Ковалёва "), w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}}, w.Text(" — "), w.Strong("sent")}, Gap: w.LineGapNormal, Block: true},
