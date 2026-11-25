@@ -1239,6 +1239,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar.tc-bar--sel > .tc-bar__sep{flex-basis:100%;height:0;margin-top:-8px;background:none}
   /* Правая часть (Select all, Clear selection) — к счёту, справа: на строке действий она уезжала на край одна. */
   .tc-bar.tc-bar--sel > .tc-bar__sep,.tc-bar.tc-bar--sel > .tc-bar__sep ~ :not(.tc-bar__right){order:1}
+  /* Правой части тесно у счёта — она переносит своё внутри себя, справа, а не вылезает за край (свободная композиция, 26.11). */
+  .tc-bar.tc-bar--sel > .tc-bar__right{flex:0 1 auto;flex-wrap:wrap;justify-content:flex-end;min-width:0}
   .tc-docbar{flex-wrap:wrap}
   .tc-bar > .tc-range{flex-wrap:wrap}
   .tc-table .tc-acts{flex-wrap:wrap;white-space:normal}
@@ -1723,6 +1725,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-fset__col.tc-fset__col{display:flex;flex-direction:column;gap:2px;min-width:0}
 .tc-card__note.tc-card__note{font-size:11.5px;color:var(--tc-muted);margin-top:9px;line-height:1.55}
 .tc-card__foot.tc-card__foot{border-top:.5px solid var(--tc-hair);margin-top:11px;padding-top:9px}
+/* Под галкой подвала — место нажатия: то, что идёт следом, не встаёт в её 44 px (свободная композиция, 26.11). */
+.tc-card__foot > .tc-check:not(:last-child){margin-bottom:14px}
 .tc-card__above.tc-card__above{font-size:11.5px;color:var(--tc-dusty);margin:-3px 0 8px}
 .tc-card__grid.tc-card__grid{margin-top:11px;align-items:center;display:grid;gap:8px 12px;grid-template-columns:92px minmax(0,1fr) auto}
 .tc-card__rows.tc-card__rows{font-size:11.5px;display:grid;gap:7px 0;grid-template-columns:minmax(0,1fr)}

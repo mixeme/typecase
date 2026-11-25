@@ -114,6 +114,12 @@ do, not what the authors did.
 
 ### Fixed
 
+- **Free composition on the mail frames** (26.11). On a phone the
+  selection bar's right part (Select all, Clear selection) may shrink and
+  wrap what it holds at its right instead of going off the edge — a bar form
+  put there went 83 px out at 390 (s-mailbox-3); a check in a card's foot
+  with something after it keeps 14 px under it, its tap room (s-mailbox-26).
+  The frames are the same to the pixel.
 - **Menus by one rule** (Carrel's task 283; the owner: «a system solution,
   not mending each»). A `TopDrop`'s and a `SplitDrop`'s menu stands in the
   panel at the button's end whatever its `Pop` (a `MenuUnder` there went
