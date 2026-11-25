@@ -421,15 +421,21 @@ func (Drop) docbarPart()   {}
 // after Cancel (the owner's decision of 16.10).
 func (Field) docbarPart() {}
 
-// DraftNote says where the draft is kept and when it was saved.
+// DraftNote says where the draft is kept and when it was written. With the
+// library's script (Carrel's task 286) the edit's draft is kept in this
+// window as it is typed — a reload of the same edit brings it back while
+// the record is as it was — and the note says when; until there is one,
+// the note stands hidden. Saved is what the note says once the auto-save
+// has written the edit («Saved»), with its time.
 type DraftNote struct {
 	Text      string
 	Time      Mono
+	Saved     string
 	Secondary bool
 }
 
 func (n DraftNote) html(mix) string {
-	return `<span` + class(nil, rank(n.Secondary)) + `>` + esc(n.Text) + ` ` + n.Time.html(nil) + `</span>`
+	return `<span` + class(nil, "tc-docbar__draft", rank(n.Secondary)) + ` data-tc-draft` + attr("data-tc-saved", n.Saved) + `>` + esc(n.Text) + ` ` + n.Time.html(nil) + `</span>`
 }
 
 // DocbarEnd is what the end of an edit bar holds.
@@ -450,7 +456,7 @@ func (Button) docbarEnd()    {}
 // Вход. Docbar{Edit, Items, More, End, Rule}.
 // Состояния. plain | rule.
 // Инварианты. Полоса — одна строка, пока помещается: второстепенное уходит под «⋯» первым, не поместившееся после этого — переносится, краем не режется (Р-65); сохранить — первой кнопкой; полоса печатает фрагмент своего кадра.
-// Поведение. Ctrl+S сохраняет; «⋯» открывает то, что не поместилось.
+// Поведение. Ctrl+S сохраняет; «⋯» открывает то, что не поместилось; со сценарием (задача Carrel 286) кнопки разметки (Button.Marks) ставят Markdown на текст правки, набранное держится черновиком в окне, Auto-save (Check.AutoSave) отправляет правку после паузы набора, Focus (Button.Focuses) убирает рейл и колонку записи, Esc возвращает.
 // Эталон. кадр `components-29`, фрагмент `.tc-docbar`.
 // Содержимое. Кнопки, разделители, «⋯», поле — куда сохраняется запись; в конце — автосохранение, черновик, клавиша, ширина текста, фокус.
 // Чего нет. Второй строки: то, что не влезло, уходит под «⋯».

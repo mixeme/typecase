@@ -157,6 +157,7 @@ func (g *gen) button1(e *El) string {
 	if e.HasAttr("data-tc-remove") {
 		extra = append(extra, "Removes: true")
 	}
+	extra = append(extra, editBarAttrs(e)...)
 	var bs []*El
 	for _, k := range e.Els() {
 		if k.Tag == "b" {
@@ -759,6 +760,9 @@ func (g *gen) check(x *El) string {
 	}
 	if x.Has("is-3rd") {
 		f = append(f, "Tertiary: true")
+	}
+	if v := x.Attr("data-tc-autosave"); v != "" {
+		f = append(f, "AutoSave: "+q(v))
 	}
 	return "w.Check{" + join(f, ", ") + "}"
 }
@@ -1498,4 +1502,17 @@ func (g *gen) postForm(e *El) string {
 		f = append(f, "Method: "+q(m))
 	}
 	return "w.PostForm{" + join(f, ", ") + "}"
+}
+
+// editBarAttrs are what an edit bar's button does with the script (Carrel's
+// task 286): the Markdown it puts on the text, or the edit's Focus.
+func editBarAttrs(e *El) []string {
+	var out []string
+	if v := e.Attr("data-tc-marks"); v != "" {
+		out = append(out, "Marks: w.Mark"+strings.ToUpper(v[:1])+v[1:])
+	}
+	if e.HasAttr("data-tc-focus-mode") {
+		out = append(out, "Focuses: true")
+	}
+	return out
 }

@@ -93,6 +93,7 @@ var _ = add(
 	// tc-check
 	form("off", check(false, w.Text("Print with photos")), "components-10", "tc-check"),
 	form("on", check(true, w.Text("All day")), "components-10", "tc-check"),
+	form("autosave-on", w.Check{On: true, Parts: []w.CheckPart{w.Text("Auto-save")}, Tertiary: true, AutoSave: "notes"}, "s-notes-36", "tc-check"),
 	form("plain", w.Check{On: true, Name: "choice.BDAY", Value: "1", Radio: true, Parts: []w.CheckPart{w.Text("1987-03-14 · Контакты")}}, "s-dup-1", "tc-check"),
 	form("disabled", w.Check{Name: "people", Value: "on", Reason: "Mail is not configured: there is nothing to send through yet.", Parts: []w.CheckPart{w.Text("Let users send letters and links from Carrel")}}, "s-admin-3", "tc-check"),
 	form("rich", w.Check{On: true, Name: "time", Value: "1", Reason: "Always shown", Parts: []w.CheckPart{w.Text("Time"), w.Dim{Parts: []w.Inline{w.Text("always shown")}, Size: w.Dim11_5}}}, "s-publish-2", "tc-check"),

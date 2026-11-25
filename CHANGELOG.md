@@ -32,6 +32,24 @@ do, not what the authors did.
 
 ### Added
 
+- **An edit bar works** (Carrel's task 286; the owner: «the Auto-save tick
+  does not tick»). With the library's script: `Button.Marks` (`MarkBold`,
+  `MarkItalic`, `MarkLink`, `MarkHeading`, `MarkList`, `MarkTick`) puts
+  Markdown around the selection of the edit's text or at the start of its
+  lines, with Ctrl+Z, and takes it off when pressed again; what is typed is
+  kept as a draft in the window, and a reload of the same edit brings it
+  back while the record is as it was (`DraftNote` hidden until there is
+  one); `Check.AutoSave` is a tick kept in the browser under its name —
+  ticked, the edit goes by itself after a pause in typing, as Save sends it
+  (header `Tc-Autosave: 1`, the files wait for Save), without leaving the
+  page, the form goes on to the address the answer came from (a new record's)
+  and the note (`tc-docbar__draft`, second rank) says `DraftNote.Saved`
+  («Saved · 11:44»); `Button.Focuses` —
+  the page without its rail and the record's column, Esc from the text
+  brings them back. The edit is the form its bar's Save names, its text the
+  body field. The new frame s-notes-36 draws Auto-save on; 589 frames.
+  `TestEditBarMarks`, `TestEditBarDraftAndAutoSave`, `TestEditBarFocus` (red
+  on the old script).
 - **A row that opens its record in the panel goes to its page where there
   is no panel** (Carrel's task 290; the owner on a tablet: «the note does
   not open»): `Page` on `TimeRow`, `FaceRow`, `ExcerptRow`, `BriefRow`,

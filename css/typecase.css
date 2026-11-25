@@ -76,6 +76,7 @@ body[data-tc-root]>.tc-overlay>.tc-shell__body{flex:1 0 auto}
 .tc-shell__body{display:grid;grid-template-columns:var(--tc-rail) minmax(0,1fr);min-height:480px;--tc-shell-mode:full}
 .tc-shell__body.tc-shell__body--side{grid-template-columns:var(--tc-rail) minmax(0,1fr) var(--tc-side)}
 .tc-shell__body.tc-shell__body--no-rail{grid-template-columns:minmax(0,1fr)}
+.tc-shell__body[data-tc-focus] > .tc-shell__rail{display:none}
 .tc-shell__rail{border-right:.5px solid var(--tc-rule);padding:12px 0 0;display:flex;flex-direction:column;gap:16px;min-width:0}
 .tc-main{min-width:0;display:flex;flex-direction:column;background:var(--tc-bg);container:tcbox / inline-size;overflow-x:auto;position:relative}
 .tc-side{border-left:.5px solid var(--tc-rule);background:var(--tc-surface);display:flex;flex-direction:column;min-width:0;position:relative;container:tcbox / inline-size}
@@ -747,6 +748,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Колонка справа — та же панель подробностей, 400 px; при рабочей области уже 880 — 296. */
 .tc-doc__layout{display:grid;grid-template-columns:minmax(0,1fr) var(--tc-side);min-height:0}
 .tc-doc__layout.is-focus{grid-template-columns:minmax(0,1fr)}
+/* Focus сценарием (задача Carrel 286): страница та же, что в s-notes-4, — рейл и колонка записи стоят, но не видны (data-tc-focus ставит tc.js). */
+.tc-shell__body[data-tc-focus] .tc-doc__layout > .tc-docmeta{display:none}
 /* Полный экран: поля не зажаты. «Reading width» — названный режим. */
 .tc-doc{padding:20px var(--tc-page-gutter) 30px;min-width:0}
 /* В документе поле занимает свою ячейку целиком. Без width сброс
@@ -786,6 +789,8 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-docbar{display:flex;align-items:center;gap:6px;padding:7px var(--tc-page-gutter);border-bottom:.5px solid var(--tc-hair);background:var(--tc-surface)}
 /* Выбор коллекции в панели документа — по ширине своего текста, не шире 210: сначала сжимается он, потом кнопки уходят под «⋯» (владелец, 09.11). */
 .tc-docbar > .tc-field{width:auto;max-width:210px}
+/* Записка черновика: «Draft in this window · 11:42», после автосохранения — «Saved · 11:44» (задача Carrel 286); время сменяется на месте. */
+.tc-docbar__draft{white-space:nowrap}
 /* диалоги и одиночные страницы */
 /* Страницы до входа: карточка в поле пустой страницы. Не примитив набора. */
 .tc-auth{min-height:520px;display:flex;align-items:center;justify-content:center;padding:40px 20px}

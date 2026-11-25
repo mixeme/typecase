@@ -205,7 +205,7 @@ func (c Choice) html(mix) string {
 // Check — tc-check
 //
 // Роль. Флажок с подписью: включено или нет; или один из нескольких (Radio) — тогда кружок, выбранный с точкой.
-// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio, Required, Of, Reason}.
+// Вход. Check{On, Parts, Label, Tertiary, Name, Value, Disables, Radio, Required, Of, Reason, AutoSave}.
 // Состояния. on | off | rich | tertiary | box | radio | disabled.
 // Инварианты. Включено или нет — одно поле; флажок — кнопка с подписью или флажок формы (Name), у него есть доступное имя; флажок печатает фрагмент своего кадра.
 // Поведение. Нажатие переключает; пробел — тоже. Флажок формы с Reason выключен, причина — его подсказка.
@@ -241,6 +241,12 @@ type Check struct {
 	// Reason turns a check with a Name off and says why: «Let users send
 	// letters» while mail is not configured (Carrel's task 208).
 	Reason string
+	// AutoSave makes a check without a Name the auto-save of its edit bar,
+	// with the library's script (Carrel's task 286): the tick is kept in this
+	// browser under this name — a notebook's, or one for all; ticked, the
+	// edit's form goes by itself after a pause in typing, as Save sends it,
+	// without leaving the page.
+	AutoSave string
 }
 
 // Render prints the check.
@@ -262,7 +268,7 @@ func (c Check) html(m mix) string {
 		return s.String()
 	}
 	s.WriteString(`<button` + class(m, "tc-check", rank3(c.Tertiary)) + ` type="button" role="checkbox"` + attr("aria-checked", boolText(c.On)) +
-		attr("aria-label", c.Label) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
+		attr("aria-label", c.Label) + attr("data-tc-autosave", c.AutoSave) + `><span` + class(nil, "tc-tickrow__tick", pick(!c.On, "is-off")) + `></span>`)
 	for _, p := range c.Parts {
 		s.WriteString(p.html(nil))
 	}

@@ -620,6 +620,7 @@
 				return;
 			}
 		}
+		if (onEditClick(e)) return;
 		var toggle = closest(e.target, ".tc-queue__head .tc-btn");
 		if (toggle && fold(toggle)) {
 			e.preventDefault();
@@ -2007,6 +2008,324 @@
 		return true;
 	}
 
+	// An edit bar's marks, draft, auto-save and focus (Carrel's task 286). The
+	// bar's edit is the form its Save names (form="…"); its text is the
+	// form's body field (textarea.tc-in--body).
+	function editForm(bar) {
+		var named = bar.querySelector("[form]");
+		var form = named ? document.getElementById(named.getAttribute("form")) : closest(bar, "form");
+		return form && form.tagName === "FORM" ? form : null;
+	}
+
+	function editBar(form) {
+		var bars = document.querySelectorAll(".tc-docbar");
+		for (var i = 0; i < bars.length; i++) if (editForm(bars[i]) === form) return bars[i];
+		return null;
+	}
+
+	// The text from..to becomes put, its selection the part s0..s1 of it; the
+	// browser's own insert keeps Ctrl+Z, and the field's input event follows.
+	function putText(area, from, to, put, s0, s1) {
+		area.focus();
+		area.setSelectionRange(from, to);
+		var done = false;
+		try {
+			done = document.execCommand("insertText", false, put);
+		} catch (err) {
+			done = false;
+		}
+		if (!done || area.value.slice(from, from + put.length) !== put) {
+			area.setRangeText(put, from, to, "end");
+			area.dispatchEvent(new Event("input", { bubbles: true }));
+		}
+		area.setSelectionRange(from + s0, from + s1);
+	}
+
+	var linePrefix = { heading: "## ", list: "- ", tick: "- [ ] " };
+	var lineMarks = /^(#{1,6} |- \[[ xX]\] |[-*+] )/;
+
+	// Markdown around the selection (bold, italic, a link) or at the start of
+	// its lines (a heading, a list, a tick box); pressed again on marked text,
+	// the marks come off. The caret stands after what was marked.
+	function markText(area, kind) {
+		var v = area.value, a = area.selectionStart, b = area.selectionEnd, sel = v.slice(a, b);
+		if (kind === "bold" || kind === "italic") {
+			var m = kind === "bold" ? "**" : "*", n = m.length;
+			var round = v.slice(a - n, a) === m && v.slice(b, b + n) === m;
+			// one star on each side of **…** is bold, not italic
+			if (round && kind === "italic" && v.charAt(a - 2) === "*" && v.charAt(b + 1) === "*" && v.charAt(a - 3) !== "*") round = false;
+			if (round) {
+				putText(area, a - n, b + n, sel, 0, sel.length);
+				return;
+			}
+			if (sel.length > 2 * n && sel.slice(0, n) === m && sel.slice(-n) === m && (kind === "bold" || sel.charAt(1) !== "*")) {
+				var bare = sel.slice(n, -n);
+				putText(area, a, b, bare, 0, bare.length);
+				return;
+			}
+			var put = m + sel + m;
+			putText(area, a, b, put, sel ? put.length : n, sel ? put.length : n);
+			return;
+		}
+		if (kind === "link") {
+			// an address selected becomes the link's address, the caret in
+			// its words; words selected, the caret in the address
+			if (/^(https?:\/\/|mailto:|www\.)\S+$/.test(sel)) {
+				putText(area, a, b, "[](" + sel + ")", 1, 1);
+				return;
+			}
+			var link = "[" + sel + "]()";
+			putText(area, a, b, link, link.length - 1, link.length - 1);
+			return;
+		}
+		var p = linePrefix[kind];
+		if (!p) return;
+		var from = v.lastIndexOf("\n", a - 1) + 1;
+		var end = b > a && v.charAt(b - 1) === "\n" ? b - 1 : b;
+		var to = v.indexOf("\n", end);
+		if (to < 0) to = v.length;
+		var lines = v.slice(from, to).split("\n");
+		var full = lines.filter(function (l) {
+			return l.trim() !== "";
+		});
+		var off = full.length > 0 && full.every(function (l) {
+			return l.indexOf(p) === 0 && (kind !== "list" || !/^- \[[ xX]\] /.test(l));
+		});
+		var out = lines.map(function (l) {
+			if (off) return l.slice(p.length);
+			if (l.trim() === "" && lines.length > 1) return l;
+			return p + l.replace(lineMarks, "");
+		}).join("\n");
+		if (a === b && lines.length === 1) {
+			// the caret keeps its place in the words of the line
+			var at = Math.max(0, a - from + out.length - (to - from));
+			putText(area, from, to, out, at, at);
+			return;
+		}
+		putText(area, from, to, out, out.length, out.length);
+	}
+
+	// The edit's fields as typed: names, places among the same name, values —
+	// not the files (they wait for Save) nor what the page holds hidden.
+	function editFields(form) {
+		var seen = {}, out = [];
+		Array.prototype.forEach.call(form.elements, function (f) {
+			if (!f.name || f.disabled || /^(file|hidden|submit|button|reset|image)$/.test(f.type) || /^(BUTTON|FIELDSET|OUTPUT)$/.test(f.tagName)) return;
+			var i = seen[f.name] || 0;
+			seen[f.name] = i + 1;
+			out.push([f.name, i, f.type === "checkbox" || f.type === "radio" ? f.checked : f.value]);
+		});
+		return out;
+	}
+
+	function setEditFields(form, fields) {
+		var seen = {};
+		Array.prototype.forEach.call(form.elements, function (f) {
+			if (!f.name || f.disabled || /^(file|hidden|submit|button|reset|image)$/.test(f.type) || /^(BUTTON|FIELDSET|OUTPUT)$/.test(f.tagName)) return;
+			var i = seen[f.name] || 0;
+			seen[f.name] = i + 1;
+			fields.forEach(function (x) {
+				if (x[0] !== f.name || x[1] !== i) return;
+				if (f.type === "checkbox" || f.type === "radio") f.checked = x[2];
+				else f.value = x[2];
+			});
+		});
+	}
+
+	function draftKey(form) {
+		return "tc-draft:" + location.pathname + "#" + (form.id || "");
+	}
+
+	function clock() {
+		var d = new Date();
+		return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+	}
+
+	// The draft's note: hidden until there is a draft; then «Draft in this
+	// window · 11:42», or the auto-save's words once it has written.
+	function sayDraft(form, time, saved) {
+		var bar = editBar(form), note = bar && bar.querySelector("[data-tc-draft]");
+		if (!note) return;
+		var words = note.firstChild;
+		if (words && words.nodeType === 3) {
+			if (note.tcWords === undefined) note.tcWords = words.nodeValue;
+			var said = saved && note.getAttribute("data-tc-saved");
+			words.nodeValue = said ? said + " · " : note.tcWords;
+		}
+		var t = note.querySelector(".tc-mono");
+		if (t) t.textContent = time;
+		note.hidden = false;
+	}
+
+	// The draft is kept in this window as it is typed: a reload of the same
+	// edit brings it back while the record is as it was when the draft began.
+	function keepDraft(form) {
+		var time = clock();
+		try {
+			sessionStorage.setItem(draftKey(form), JSON.stringify({ base: form.tcBase, fields: editFields(form), time: time }));
+		} catch (err) {
+			return;
+		}
+		sayDraft(form, time, false);
+	}
+
+	function dropDraft(form) {
+		try {
+			sessionStorage.removeItem(draftKey(form));
+		} catch (err) {}
+	}
+
+	// Auto-save: a tick kept in this browser under its name (a notebook's,
+	// or one for all). Ticked, the edit's form goes after a pause in typing,
+	// to its own address as Save sends it, without leaving the page; the
+	// files chosen wait for Save. The first write of a new record creates it:
+	// the answer comes from the record's address, and the form goes there
+	// from then on. Not written, the draft stays in the window.
+	var editPause = 2000;
+
+	function autosaveBox(form) {
+		var bar = editBar(form);
+		return bar && bar.querySelector("[data-tc-autosave]");
+	}
+
+	function setAutosave(box, on, keep) {
+		box.setAttribute("aria-checked", on ? "true" : "false");
+		var tick = box.querySelector(".tc-tickrow__tick");
+		if (tick) tick.classList.toggle("is-off", !on);
+		if (!keep) return;
+		try {
+			var key = "tc-autosave:" + box.getAttribute("data-tc-autosave");
+			if (on) localStorage.setItem(key, "on");
+			else localStorage.removeItem(key);
+		} catch (err) {}
+	}
+
+	function autosave(form) {
+		var data = new FormData();
+		new FormData(form).forEach(function (v, k) {
+			if (typeof File === "undefined" || !(v instanceof File)) data.append(k, v);
+		});
+		var to = form.getAttribute("action") || location.href;
+		return fetch(to, { method: "POST", body: data, credentials: "same-origin", headers: { "Tc-Autosave": "1" } }).then(function (r) {
+			if (!r.ok) throw new Error("not saved");
+			if (r.redirected && r.url) form.setAttribute("action", r.url);
+			form.tcBase = JSON.stringify(editFields(form));
+			dropDraft(form);
+			sayDraft(form, clock(), true);
+		});
+	}
+
+	function onEditInput(e) {
+		var el = e.target;
+		var form = el && (el.form || closest(el, "form"));
+		if (!form || !editBar(form) || form.tcBase === undefined) return;
+		clearTimeout(form.tcPause);
+		form.tcPause = setTimeout(function () {
+			var box = autosaveBox(form);
+			if (box && box.getAttribute("aria-checked") === "true") {
+				autosave(form).catch(function () {
+					keepDraft(form);
+				});
+				return;
+			}
+			keepDraft(form);
+		}, editPause);
+	}
+
+	function initEdits(root) {
+		root.querySelectorAll(".tc-docbar").forEach(function (bar) {
+			var form = editForm(bar);
+			if (!form || form.tcBase !== undefined) return;
+			form.tcBase = JSON.stringify(editFields(form));
+			var box = bar.querySelector("[data-tc-autosave]");
+			if (box) {
+				var kept = false;
+				try {
+					kept = localStorage.getItem("tc-autosave:" + box.getAttribute("data-tc-autosave")) === "on";
+				} catch (err) {}
+				setAutosave(box, kept, false);
+			}
+			var note = bar.querySelector("[data-tc-draft]");
+			var draft = null;
+			try {
+				draft = JSON.parse(sessionStorage.getItem(draftKey(form)) || "null");
+			} catch (err) {}
+			if (draft && draft.base === form.tcBase) {
+				setEditFields(form, draft.fields);
+				sayDraft(form, draft.time, false);
+			} else {
+				if (draft) dropDraft(form);
+				if (note) note.hidden = true;
+			}
+		});
+	}
+
+	// Save sends the edit: the draft has done its work.
+	document.addEventListener("submit", function (e) {
+		var form = e.target;
+		if (form && form.tagName === "FORM" && form.tcBase !== undefined) {
+			clearTimeout(form.tcPause);
+			dropDraft(form);
+		}
+	});
+
+	// Focus: the page without its rail and the record's column (s-notes-4);
+	// pressed again, or Esc, brings them back.
+	function setFocusMode(btn, on) {
+		var body = closest(btn, ".tc-shell__body");
+		var bar = closest(btn, ".tc-docbar"), form = bar && editForm(bar);
+		var layout = form && closest(form, ".tc-doc__layout");
+		if (!body) return;
+		if (on) {
+			body.tcFocus = { btn: btn, rail: !body.classList.contains("tc-shell__body--no-rail"), layout: layout && !layout.classList.contains("is-focus") ? layout : null };
+			body.classList.add("tc-shell__body--no-rail");
+			if (layout) layout.classList.add("is-focus");
+			body.setAttribute("data-tc-focus", "");
+		} else if (body.tcFocus) {
+			if (body.tcFocus.rail) body.classList.remove("tc-shell__body--no-rail");
+			if (body.tcFocus.layout) body.tcFocus.layout.classList.remove("is-focus");
+			body.removeAttribute("data-tc-focus");
+			body.tcFocus = null;
+		}
+		btn.setAttribute("aria-pressed", on ? "true" : "false");
+		btn.classList.toggle("tc-btn--on-card", on);
+	}
+
+	function onEditClick(e) {
+		var mark = closest(e.target, "[data-tc-marks]");
+		if (mark) {
+			var bar = closest(mark, ".tc-docbar"), form = bar && editForm(bar);
+			var area = form && form.querySelector("textarea.tc-in--body");
+			if (area) {
+				e.preventDefault();
+				markText(area, mark.getAttribute("data-tc-marks"));
+			}
+			return true;
+		}
+		var box = closest(e.target, "[data-tc-autosave]");
+		if (box) {
+			e.preventDefault();
+			setAutosave(box, box.getAttribute("aria-checked") !== "true", true);
+			return true;
+		}
+		var focus = closest(e.target, "[data-tc-focus-mode]");
+		if (focus) {
+			e.preventDefault();
+			setFocusMode(focus, focus.getAttribute("aria-pressed") !== "true");
+			return true;
+		}
+		return false;
+	}
+
+	// Esc leaves Focus, from the text too: one writes there.
+	function leaveFocus() {
+		var body = document.querySelector(".tc-shell__body[data-tc-focus]");
+		if (!body || !body.tcFocus) return false;
+		var btn = body.tcFocus.btn;
+		setFocusMode(btn, false);
+		return true;
+	}
+
 	function onKeydown(e) {
 		if (onTagKey(e)) return;
 		if (onSuggestKey(e)) return;
@@ -2017,6 +2336,10 @@
 		if (onShortcut(e)) return;
 		if (e.key !== "Escape") return;
 		if (closeMenu(true)) {
+			e.preventDefault();
+			return;
+		}
+		if (!openLayers().length && leaveFocus()) {
 			e.preventDefault();
 			return;
 		}
@@ -2079,12 +2402,14 @@
 		initFollows(root);
 		initChanged(root);
 		initStops(root);
+		initEdits(root);
 		layoutUpdates();
 	}
 
 	document.addEventListener("click", onClick);
 	document.addEventListener("change", onChange);
 	document.addEventListener("input", onInput);
+	document.addEventListener("input", onEditInput);
 	document.addEventListener("pointerdown", onDragStart);
 	document.addEventListener("pointermove", onDragMove);
 	document.addEventListener("pointerup", onDragEnd);

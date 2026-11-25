@@ -1,0 +1,202 @@
+package browser_test
+
+import (
+	"io"
+	"net/http"
+	"strings"
+	"sync"
+	"testing"
+	"time"
+
+	"carrel.dev/typecase/internal/browser"
+	"carrel.dev/typecase/internal/screens"
+	"github.com/chromedp/chromedp"
+)
+
+// editPage is the note's edit (s-notes-20) as Carrel prints it, with the
+// library's script.
+func editPage(t *testing.T, h *browser.Harness, id string) string {
+	t.Helper()
+	r, ok := screens.Find("s-notes-20")
+	if !ok {
+		t.Fatal("no route s-notes-20")
+	}
+	return h.RegisterPage(id, browser.PageHTML(r.Screen().Render(), ""))
+}
+
+// TestEditBarMarks (Carrel's task 286): B, I, H2, list, tick box and link
+// put Markdown on the edit's text — around the selection or at the start of
+// its lines — and come off when pressed again.
+func TestEditBarMarks(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	url := editPage(t, h, "edit-marks")
+	area := `document.querySelector("form#note-edit textarea.tc-in--body")`
+	set := func(v string, a, b int) chromedp.Action {
+		return chromedp.Evaluate(`(() => { const t = `+area+`; t.value = `+jsq(v)+`; t.focus(); t.setSelectionRange(`+itoa(a)+`, `+itoa(b)+`); return true; })()`, nil)
+	}
+	press := func(mark string) chromedp.Action {
+		return chromedp.Click(`.tc-docbar [data-tc-marks="`+mark+`"]`, chromedp.ByQuery)
+	}
+	type step struct {
+		value      string
+		a, b       int
+		mark, want string
+		caret      int // where the caret stands after; -1: not checked
+	}
+	for _, s := range []step{
+		{"hello world", 6, 11, "bold", "hello **world**", 15},
+		{"hello **world**", 8, 13, "bold", "hello world", -1},
+		{"hello world", 6, 11, "italic", "hello *world*", 13},
+		{"hello **world**", 8, 13, "italic", "hello ***world***", -1},
+		{"", 0, 0, "bold", "****", 2},
+		{"hello world", 3, 3, "heading", "## hello world", 6},
+		{"## hello world", 5, 5, "list", "- hello world", -1},
+		{"- hello world", 0, 0, "tick", "- [ ] hello world", -1},
+		{"- [ ] hello world", 0, 0, "tick", "hello world", -1},
+		{"- [ ] hello", 0, 0, "list", "- hello", -1},
+		{"one\ntwo\n\nthree", 0, 14, "list", "- one\n- two\n\n- three", 20},
+		{"- one\n- two", 0, 11, "list", "one\ntwo", -1},
+		{"see the docs", 8, 12, "link", "see the [docs]()", 15},
+		{"go https://example.org now", 3, 22, "link", "go [](https://example.org) now", 4},
+	} {
+		var got string
+		var caret int
+		if err := h.Run(url, 1351, 900, set(s.value, s.a, s.b), press(s.mark),
+			chromedp.Evaluate(area+`.value`, &got), chromedp.Evaluate(area+`.selectionEnd`, &caret)); err != nil {
+			t.Fatal(err)
+		}
+		if got != s.want {
+			t.Errorf("%s on %q [%d,%d]: %q, want %q", s.mark, s.value, s.a, s.b, got, s.want)
+		}
+		if s.caret >= 0 && caret != s.caret {
+			t.Errorf("%s on %q: the caret at %d, want %d", s.mark, s.value, caret, s.caret)
+		}
+	}
+}
+
+// TestEditBarDraftAndAutoSave (Carrel's task 286): typed words are kept in
+// the window as a draft, and a reload brings them back; with Auto-save
+// ticked — kept in the browser — the edit goes after a pause by itself, as
+// Save sends it, without leaving the page, and the form goes on to the
+// address the answer came from (a new record's).
+func TestEditBarDraftAndAutoSave(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	url := editPage(t, h, "edit-draft")
+	var mu sync.Mutex
+	var posts []string
+	save := h.RegisterStream("edit-save", func(rw http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			body, _ := io.ReadAll(r.Body)
+			mu.Lock()
+			posts = append(posts, r.Header.Get("Tc-Autosave")+" "+string(body))
+			mu.Unlock()
+			http.Redirect(rw, r, "/stream/edit-record", http.StatusSeeOther)
+			return
+		}
+		rw.WriteHeader(http.StatusOK)
+	})
+	h.RegisterStream("edit-record", func(rw http.ResponseWriter, r *http.Request) { rw.WriteHeader(http.StatusOK) })
+	area := `form#note-edit textarea.tc-in--body`
+	note := `document.querySelector(".tc-docbar [data-tc-draft]")`
+	var hiddenAtStart, shown, back, kept bool
+	var noteText, restored string
+	err := h.Run(url, 1351, 900,
+		chromedp.Evaluate(`localStorage.clear(); sessionStorage.clear(); location.reload(); true`, nil),
+		chromedp.Sleep(500*time.Millisecond),
+		chromedp.Evaluate(note+`.hidden`, &hiddenAtStart),
+		chromedp.Evaluate(`(() => { const t = document.querySelector("`+area+`"); t.value = ""; t.focus(); return true; })()`, nil),
+		chromedp.SendKeys(area, "kept in the window", chromedp.ByQuery),
+		chromedp.Sleep(2600*time.Millisecond),
+		chromedp.Evaluate(`!`+note+`.hidden && /^Draft in this window/.test(`+note+`.textContent)`, &shown),
+		chromedp.Reload(),
+		chromedp.Sleep(500*time.Millisecond),
+		chromedp.Evaluate(`document.querySelector("`+area+`").value`, &restored),
+		chromedp.Evaluate(`!`+note+`.hidden`, &back),
+		// Auto-save ticked, then the next pause writes the edit
+		chromedp.Evaluate(`document.getElementById("note-edit").setAttribute("action", `+jsq(save)+`); true`, nil),
+		chromedp.Click(`.tc-docbar [data-tc-autosave]`, chromedp.ByQuery),
+		chromedp.Evaluate(`localStorage.getItem("tc-autosave:notes") === "on" && document.querySelector(".tc-docbar [data-tc-autosave]").getAttribute("aria-checked") === "true"`, &kept),
+		chromedp.SendKeys(area, " and saved", chromedp.ByQuery),
+		chromedp.Sleep(2800*time.Millisecond),
+		chromedp.Evaluate(note+`.textContent`, &noteText),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !hiddenAtStart {
+		t.Error("the draft's note stands before there is a draft")
+	}
+	if !shown {
+		t.Error("after a pause in typing the note does not say the draft is kept")
+	}
+	if restored != "kept in the window" || !back {
+		t.Errorf("after a reload: the text %q, the note shown %v; want the draft back", restored, back)
+	}
+	if !kept {
+		t.Error("Auto-save is not ticked and kept in the browser")
+	}
+	mu.Lock()
+	got := append([]string(nil), posts...)
+	mu.Unlock()
+	if len(got) != 1 || !strings.HasPrefix(got[0], "1 ") || !strings.Contains(got[0], "kept in the window and saved") || !strings.Contains(got[0], `name="summary"`) {
+		t.Errorf("auto-save sent %d edits: %q; want one, with the header and the form's fields", len(got), got)
+	}
+	if !strings.HasPrefix(noteText, "Saved · ") {
+		t.Errorf("after the auto-save the note says %q, want «Saved · …»", noteText)
+	}
+	var still bool
+	if err := h.Run(url, 1351, 900, chromedp.Evaluate(`document.querySelector(".tc-docbar [data-tc-autosave]").getAttribute("aria-checked") === "true"`, &still)); err != nil {
+		t.Fatal(err)
+	}
+	if !still {
+		t.Error("a new page of the edit forgot the Auto-save tick")
+	}
+}
+
+// TestEditBarFocus (Carrel's task 286): Focus leaves the edit alone — no
+// rail, no record's column; pressed again, or Esc from the text, brings
+// them back.
+func TestEditBarFocus(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	url := editPage(t, h, "edit-focus")
+	state := `(() => { const shown = s => { const e = document.querySelector(s); return !!e && e.getClientRects().length > 0; };
+		return [shown(".tc-shell__rail"), shown(".tc-docmeta"), document.querySelector("[data-tc-focus-mode]").getAttribute("aria-pressed") || ""].join(" "); })()`
+	var before, focused, again, escaped string
+	err := h.Run(url, 1351, 900,
+		chromedp.Evaluate(state, &before),
+		chromedp.Click(`[data-tc-focus-mode]`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &focused),
+		chromedp.Click(`[data-tc-focus-mode]`, chromedp.ByQuery),
+		chromedp.Evaluate(state, &again),
+		chromedp.Click(`[data-tc-focus-mode]`, chromedp.ByQuery),
+		chromedp.Focus(`form#note-edit textarea.tc-in--body`, chromedp.ByQuery),
+		chromedp.KeyEvent("\x1b"),
+		chromedp.Evaluate(state, &escaped),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if before != "true true " || focused != "false false true" || again != "true true false" || escaped != "true true false" {
+		t.Errorf("rail, column, pressed: before %q, Focus %q, again %q, Esc %q", before, focused, again, escaped)
+	}
+}
+
+func jsq(s string) string {
+	r := strings.NewReplacer(`\`, `\\`, `"`, `\"`, "\n", `\n`)
+	return `"` + r.Replace(s) + `"`
+}
+
+func itoa(n int) string {
+	if n == 0 {
+		return "0"
+	}
+	var b []byte
+	for n > 0 {
+		b = append([]byte{byte('0' + n%10)}, b...)
+		n /= 10
+	}
+	return string(b)
+}

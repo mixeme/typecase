@@ -1473,16 +1473,20 @@ func (g *gen) docbar(e *El) string {
 				case x.Has("tc-btn"):
 					end = append(end, g.button(x))
 				default:
-					end = append(end, "w.DraftNote{Text: "+q(x.OwnText())+", Time: w.Mono{Text: "+q(x.Kid("tc-mono").Text())+"}"+sec+"}")
+					saved := ""
+					if v := x.Attr("data-tc-saved"); v != "" {
+						saved = ", Saved: " + q(v)
+					}
+					end = append(end, "w.DraftNote{Text: "+q(x.OwnText())+", Time: w.Mono{Text: "+q(x.Kid("tc-mono").Text())+"}"+saved+sec+"}")
 				}
 			}
 		case k.Has("tc-btn"):
 			b := g.button(k)
 			if k.Kid("b") != nil {
-				b = `w.Button{Label: "B", Bold: true}`
+				b = `w.Button{Label: "B", Bold: true` + join(append([]string{""}, editBarAttrs(k)...), ", ") + `}`
 			}
 			if k.Has("tc-btn--fontstyle-italic") {
-				b = `w.Button{Label: "I", Variant: w.ButtonItalic}`
+				b = `w.Button{Label: "I", Variant: w.ButtonItalic` + join(append([]string{""}, editBarAttrs(k)...), ", ") + `}`
 			}
 			items = append(items, b)
 		default:

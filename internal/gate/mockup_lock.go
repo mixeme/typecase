@@ -241,11 +241,12 @@ func checkMockupEmptyRules(html string) error {
 }
 
 // scriptFolded says every selector of the list names a state the script's
-// fit sets: a bar's fold step or measure, a table's cards.
+// fit sets: a bar's fold step or measure, a table's cards — or an edit's
+// Focus (data-tc-focus, Carrel's task 286).
 func scriptFolded(list string) bool {
 	parts := splitSelectors(list)
 	for _, p := range parts {
-		if !strings.Contains(p, "[data-tc-fold") && !strings.Contains(p, "[data-tc-measure]") && !strings.Contains(p, "[data-tc-cards]") && !strings.Contains(p, "[data-tc-side=") {
+		if !strings.Contains(p, "[data-tc-fold") && !strings.Contains(p, "[data-tc-measure]") && !strings.Contains(p, "[data-tc-cards]") && !strings.Contains(p, "[data-tc-side=") && !strings.Contains(p, "[data-tc-focus]") {
 			return false
 		}
 	}
@@ -276,7 +277,8 @@ func checkMockupDeadRules(html string) error {
 		}
 		// A bar as tc.js folds it by measure (data-tc-fold, data-tc-measure),
 		// a table it turns into cards (data-tc-cards), a menu it turns to
-		// the side with room (data-tc-side): the frames are drawn
+		// the side with room (data-tc-side), an edit in Focus
+		// (data-tc-focus): the frames are drawn
 		// without the script, so no frame holds them; the browser's checks of
 		// the script see these rules at work.
 		if scriptFolded(r.Selector) {

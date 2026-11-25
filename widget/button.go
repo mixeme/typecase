@@ -79,7 +79,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly, Busy}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly, Busy, Marks, Focuses}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | wait | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
@@ -194,7 +194,29 @@ type Button struct {
 	// the answer, so that a second press does not send twice — «Sending…»
 	// on a letter's Send (Carrel's task 242).
 	Busy string
+	// Marks makes the button mark the text of its edit with Markdown, with
+	// the library's script (Carrel's task 286): around the selection (bold,
+	// italic, a link) or at the start of its lines (a heading, a list, a
+	// tick box); pressed again on marked text, the marks come off. The edit is
+	// the form its bar's Save names (Docbar), its text the form's body field.
+	Marks TextMark
+	// Focuses makes the button an edit's Focus, with the library's script
+	// (Carrel's task 286): pressed, the page stands without its rail and the
+	// record's column (s-notes-4); pressed again, or Esc, brings them back.
+	Focuses bool
 }
+
+// TextMark is the Markdown a button of an edit bar puts on the text.
+type TextMark string
+
+const (
+	MarkBold    TextMark = "bold"    // **…**
+	MarkItalic  TextMark = "italic"  // *…*
+	MarkLink    TextMark = "link"    // […](…)
+	MarkHeading TextMark = "heading" // «## » at the line's start
+	MarkList    TextMark = "list"    // «- »
+	MarkTick    TextMark = "tick"    // «- [ ] »: a line with a tick box
+)
 
 // Render prints the button.
 func (b Button) Render() string { return b.html(nil) }
@@ -237,7 +259,7 @@ func (b Button) html(m mix) string {
 			typ = "submit"
 		}
 		s.WriteString(`<button` + cls + ` type="` + typ + `"` + attr("data-tc-target", b.Target) + flag("data-tc-close", b.Closes) + attr("form", b.Form) + attr("formaction", b.To) + attr("name", b.Name) + attr("value", b.Value) + attr("data-tc-add", b.Adds) + flag("data-tc-remove", b.Removes) +
-			attr("data-tc-save", b.SaveAs) + attr("data-tc-save-from", b.SaveFrom) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
+			attr("data-tc-save", b.SaveAs) + attr("data-tc-save-from", b.SaveFrom) + attr("data-tc-marks", string(b.Marks)) + flag("data-tc-focus-mode", b.Focuses) + copies + common + flag("disabled", b.State == ButtonDisabled) + `>`)
 	}
 	if b.Tick != nil {
 		s.WriteString(b.Tick.html(nil))

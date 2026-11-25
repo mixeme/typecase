@@ -41,7 +41,7 @@
 | `Diff` | `tc-diff` | Нажатие выбирает вариант свойства. | тест: `TestConflictForm` |
 | `Dim` | `tc-dim` | нет. | тест: `TestEditFile`, `TestFileSizes`, `TestZonePick` |
 | `Doc` | `tc-doc` | Галка дела в тексте — знак (Tick.Sign): дело отмечают в правке; над таблицей в узком контейнере переключатель «Wrap / One line» держит строки таблицы в одну линию. | тест: `TestDocTableLine` |
-| `Docbar` | `tc-docbar` | Ctrl+S сохраняет; «⋯» открывает то, что не поместилось. | тест: `TestSwap` |
+| `Docbar` | `tc-docbar` | Ctrl+S сохраняет; «⋯» открывает то, что не поместилось; кнопки разметки ставят Markdown, набранное держится черновиком в окне, Auto-save отправляет правку после паузы, Focus убирает рейл и колонку, Esc возвращает (задача Carrel 286). | тест: `TestSwap`, `TestEditBarMarks`, `TestEditBarDraftAndAutoSave`, `TestEditBarFocus` |
 | `Docmeta` | `tc-docmeta` | нет: поведение у ссылок и кнопок. | — |
 | `Drop` | `tc-drop` | Нажатие открывает меню под кнопкой; Esc закрывает и возвращает фокус; у выбора с меню из радио (пояс) выбранный пункт становится значением выбора. | тест: `TestAttendeesSuggest`, `TestCheckFormInMenu`, `TestClosedMenuWithoutScripts`, `TestEditFile`, `TestNotebookPick`, `TestShortcuts`, `TestZonePick` |
 | `DueRow` | `tc-row` | Галка отмечает дело сделанным; нажатие на строку открывает его; в списке только для чтения галка — знак (Tick.Sign): дело не отметить. | без сценария (ссылка, форма, `details`) |
