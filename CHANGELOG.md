@@ -95,7 +95,8 @@ do, not what the authors did.
   «Back to app» navigation of settings and administration.
 
 ### Fixed
--- **Menus by one rule** (Carrel's task 283; the owner: «a system solution,
+
+- **Menus by one rule** (Carrel's task 283; the owner: «a system solution,
   not mending each»). A `TopDrop`'s and a `SplitDrop`'s menu stands in the
   panel at the button's end whatever its `Pop` (a `MenuUnder` there went
   off from the panel's zero-width edge); a `Drop` keeps its `Pop` — in place
@@ -110,7 +111,7 @@ do, not what the authors did.
   820 and 390 as a person would and holds it at its button (or moved in by
   the script), whole within the frame, its items on one line, in its own
   letters.
- **Text sits beside its icon in every browser** (Carrel's task 276). The
+- **Text sits beside its icon in every browser** (Carrel's task 276). The
   fonts' `@font-face` pin the line's metrics to each font's own typo
   metrics (`ascent-override`, `descent-override`, `line-gap-override`):
   what Chromium lays text by, so nothing it draws moves; a browser that
