@@ -294,12 +294,13 @@ type ActsPart interface {
 	actsPart()
 }
 
-func (Button) actsPart() {}
-func (Close) actsPart()  {}
-func (Field) actsPart()  {}
-func (Filter) actsPart() {}
-func (Seg) actsPart()    {}
-func (Drop) actsPart()   {}
+func (Button) actsPart()  {}
+func (Close) actsPart()   {}
+func (Field) actsPart()   {}
+func (Filter) actsPart()  {}
+func (Seg) actsPart()     {}
+func (SegFold) actsPart() {}
+func (Drop) actsPart()    {}
 
 // Acts — tc-acts
 //

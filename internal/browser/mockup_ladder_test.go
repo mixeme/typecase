@@ -37,10 +37,7 @@ type ladderProbe struct {
 // (Р-65) and why: their «cut» and «holds» are logged, not failed, until the
 // work named here is done — the list must go to nothing. Anything else in
 // them still fails.
-var ladderPending = map[string]string{
-	"s-mailbox-14": "the mailbox is approved and put off (30.09): its frames wait",
-	"s-mailbox-21": "the mailbox is approved and put off (30.09): its frames wait",
-}
+var ladderPending = map[string]string{}
 
 // tapPending are the frames whose taps miss for a reason named here, the
 // list to go to nothing as ladderPending.

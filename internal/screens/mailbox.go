@@ -1120,6 +1120,193 @@ func Mailbox12() Screen {
 	}
 }
 
+// Mailbox14 is frame «Поиск по всем источникам · с почтой» (s-mailbox-14).
+func Mailbox14() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Value: "смета", Label: "смета"}, Clear: true},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{
+					Label: "2 min ago",
+					Icon:  "refresh",
+					Title: "Search again",
+					Href:  "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0",
+				},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Sources", Items: []w.RubricPart{w.Mono{Text: "10 / 11", Variant: w.MonoTight}}},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Контакты", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Дела", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Inbox", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Sent", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Archive", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "office · Inbox", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "office · Archive", Error: true},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Mark:   w.Mark{Colour: "#3F6E8C"},
+							Label:  "office · Sent",
+							Meta:   "—",
+							Hidden: true,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "«смета»"},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("7 found")}}},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.SegFold{
+									Seg: w.Seg{
+										Options: []w.SegOption{
+											{Label: "All", Count: "7", Href: "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0", On: true},
+											{Label: "Tasks", Count: "1", Href: "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0&kind=task"},
+											{Label: "Files", Count: "2", Href: "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0&kind=file"},
+											{Label: "Mail", Count: "4", Href: "/app/search?q=%D1%81%D0%BC%D0%B5%D1%82%D0%B0&kind=mail"},
+										},
+									},
+								},
+							},
+						},
+					},
+					w.Runbar{
+						Result: w.RunFailed,
+						Parts: []w.RunbarPart{
+							w.Say{Full: "Searched · 9 of 10 answered · 7 records ·", Short: "9 of 10 · 7 records ·"},
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#3F6E8C", Size: w.MarkH11},
+											Source: "office · Inbox",
+											Answer: "IMAP mail.office.example → no answer in 8 s",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+							w.Mono{Text: "just now", Place: w.Pushed},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Tasks", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.List{
+						Rows: []w.ListRow{
+							w.DueRow{
+								Tick:     w.Tick{Sign: true},
+								Mark:     w.Mark{Colour: "#3F6E8C"},
+								Title:    []w.Inline{w.Text("Согласовать "), w.Strong("смет"), w.Text("у второго этапа")},
+								Due:      "30 Sep",
+								Progress: "0%",
+								Source:   "nextcloud · Дела",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Files", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.SizeRow{
+								Mark:   &w.Mark{Colour: "#4A6B52"},
+								Icon:   "doc",
+								Name:   []w.Inline{w.Strong("смет"), w.Text("а-подрядчик.pdf")},
+								Bytes:  "4.2 MB",
+								Time:   "2026-08-12 10:40",
+								Access: "rw",
+								Source: "sftpgo · vps · Documents",
+							},
+							w.SizeRow{
+								Mark:   &w.Mark{Colour: "#4A6B52"},
+								Icon:   "doc",
+								Name:   []w.Inline{w.Text("2026-09-24 Смета по второму этапу — "), w.Strong("смет"), w.Text("а-2.xlsx")},
+								Bytes:  "1.1 MB",
+								Time:   "2026-09-24 09:02",
+								Access: "rw",
+								Source: "sftpgo · vps · Documents",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "Mail", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "24 Sep",
+								Title:  []w.Inline{w.Strong("Смет"), w.Text("а по второму этапу")},
+								Detail: []w.Inline{w.Text("from Пётр Смирнов")},
+								What:   "letter",
+								Source: "home · Inbox",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "24 Sep",
+								Title:  []w.Inline{w.Text("Вёрстка сборника: правки и встреча в четверг")},
+								Detail: []w.Inline{w.Text("from Анна Ковалёва")},
+								What:   "letter",
+								Source: "home · Inbox",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "12 Aug",
+								Title:  []w.Inline{w.Text("Re: "), w.Strong("Смет"), w.Text("а подрядчика")},
+								Detail: []w.Inline{w.Text("to Пётр Смирнов")},
+								What:   "letter",
+								Source: "home · Sent",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Date:   "3 Jul",
+								Title:  []w.Inline{w.Strong("Смет"), w.Text("ы на ремонт офиса — сводная")},
+								Detail: []w.Inline{w.Text("from Бухгалтерия")},
+								What:   "letter",
+								Source: "office · Inbox",
+							},
+						},
+					},
+					w.Msg{
+						Parts: []w.MsgPart{
+							w.Strong("office"),
+							w.Text(" searches headers only: a letter with «смета» only in its text is not found there."),
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 // Mailbox15 is frame «Ответ со своего ящика» (s-mailbox-15).
 func Mailbox15() Screen {
 	return w.Shell{
@@ -1534,6 +1721,391 @@ func Mailbox15() Screen {
 						},
 					},
 					Width: w.SheetWidth680,
+				},
+			},
+		},
+	}
+}
+
+// Mailbox21 is frame «Человек · хронология с письмами» (s-mailbox-21).
+func Mailbox21() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+					On: 1,
+				},
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to list", Short: "Back", Href: "#"}}, Apart: true},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Where to look"},
+						w.TickRow{
+							Ticked:  w.TickedPart,
+							Kind:    w.TickRowAll,
+							Mark:    w.Mark{Kind: w.MarkMulti},
+							Label:   "Combined calendar",
+							Meta:    "20",
+							Current: true,
+						},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Личный", Meta: "9"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "Работа", Meta: "7"},
+						w.TickRow{Ticked: w.TickedOff, Mark: w.Mark{Colour: "#A05A2C"}, Label: "Дни рождения", Meta: "—", Hidden: true},
+						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Проекты", Meta: "4"},
+						w.TickRow{Mark: w.Mark{Colour: "#8C6239"}, Label: "Дежурства", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Error: true},
+						w.TickRow{
+							Kind:  w.TickRowExternal,
+							Mark:  w.Mark{Colour: "#8C6239"},
+							Label: "Праздники РФ",
+							Meta:  "0",
+							Trail: w.Badge{Label: "ro"},
+						},
+						w.TickRow{
+							Ticked: w.TickedOff,
+							Kind:   w.TickRowExternal,
+							Mark:   w.Mark{Colour: "#6B4E7A"},
+							Label:  "Расписание лиги",
+							Meta:   "—",
+							Hidden: true,
+							Trail:  w.Badge{Label: "ro"},
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Mail"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Inbox", Meta: "3"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Sent", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#A05A2C"}, Label: "home · Archive", Meta: "1"},
+						w.TickRow{Mark: w.Mark{Colour: "#3F6E8C"}, Label: "office · Inbox", Error: true},
+					},
+					Apart: true,
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"}},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Avatar: &w.Avatar{Initials: "АК", Size: w.Avatar44},
+						Kicker: &w.Rubric{Text: "Timeline", Variant: w.RubricBottom2},
+						Title:  &w.HeadTitle{Text: "Анна Ковалёва"},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("Издательство «Слово» · Выпускающий редактор "),
+									w.Badge{Label: "in 3 books", Tone: w.BadgeLinked},
+								},
+							},
+						},
+						Acts: &w.Acts{
+							Items: []w.ActsPart{
+								w.Button{Label: "Write a note", Icon: "quill", Kind: w.ButtonPrimary},
+								w.Button{Label: "Write a letter", Icon: "mail"},
+								w.Button{Label: "New event", Icon: "cal"},
+								w.Button{Label: "New task", Icon: "task"},
+								w.Button{Label: "Print", Icon: "print"},
+							},
+						},
+						Pad: w.HeadSnug,
+					},
+					w.Bar{
+						Items: []w.BarPart{
+							w.Filter{
+								Query:   w.Query{Placeholder: "Filter by word", Short: "Filter", Label: "Filter by word", Name: "filter"},
+								Waiting: true,
+								Action:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+								Swap:    "list-main",
+								Variant: w.FilterH26W200,
+							},
+							w.Range{
+								From:   w.Input{Kind: w.InputDate, Name: "from", Value: "2026-01-01", Label: "From", Mono: true},
+								To:     w.Input{Kind: w.InputDate, Name: "to", Value: "2026-11-10", Label: "To", Mono: true},
+								Show:   w.Button{Label: "Show", Submit: true},
+								Action: "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+							},
+							w.SegFold{
+								Seg: w.Seg{
+									Options: []w.SegOption{
+										{
+											Label: "All",
+											Count: "10",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline",
+											On:    true,
+										},
+										{
+											Label: "Events",
+											Count: "2",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=event",
+										},
+										{
+											Label: "Tasks",
+											Count: "1",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=task",
+										},
+										{
+											Label: "Notes",
+											Count: "1",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=note",
+										},
+										{
+											Label: "Files",
+											Count: "1",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=file",
+										},
+										{
+											Label: "Mail",
+											Count: "5",
+											Href:  "/app/contacts/nextcloud/kontakty/4f2b-9c31-a0e7/timeline?kind=mail",
+										},
+									},
+								},
+							},
+							w.Button{Label: "Columns", Icon: "cols", Secondary: true},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Title: "More"},
+								More:    true,
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Icon: "cols", Label: "Columns"}},
+									Pop:    w.MenuUnderEnd,
+									Inline: true,
+								},
+							},
+						},
+						Right:   &w.BarRight{Items: []w.BarPart{w.Mono{Text: "newest first"}}, Secondary: true},
+						Variant: w.BarWide,
+					},
+					w.Runbar{
+						Result: w.RunFailed,
+						Parts: []w.RunbarPart{
+							w.Say{Full: "Polled · 7 of 8 answered · 10 records ·", Short: "7 of 8 · 10 records ·"},
+							w.Drop{
+								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuRefusal{
+											Mark:   w.Mark{Colour: "#3F6E8C", Size: w.MarkH11},
+											Source: "office · Inbox",
+											Answer: "IMAP mail.office.example → no answer in 8 s",
+											Retry:  w.Button{Label: "Retry", Small: true},
+										},
+									},
+									Width: w.MenuWidth420,
+									Pop:   w.MenuUnderEnd,
+								},
+							},
+							w.Mono{Text: "2 min ago", Place: w.Pushed},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "September 2026", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "24 Sep",
+								Title:  []w.Inline{w.Text("Вёрстка сборника: правки и встреча в четверг")},
+								Detail: []w.Inline{w.Text("from")},
+								What:   "letter",
+								Source: "home · Inbox",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "22 Sep",
+								Title:  []w.Inline{w.Text("Вёрстка сборника, третья")},
+								Detail: []w.Inline{w.Text("to")},
+								What:   "letter",
+								Source: "home · Sent",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "18 Sep",
+								Title:  []w.Inline{w.Text("Тираж: сроки печати")},
+								Detail: []w.Inline{w.Text("cc")},
+								What:   "letter",
+								Source: "home · Inbox",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Date:   "10 Sep",
+								Title:  []w.Inline{w.Text("Синк-ап по релизу")},
+								Detail: []w.Inline{w.Text("attendee · accepted")},
+								What:   "event",
+								Source: "nextcloud · Личный",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 4}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Date:   "6 Aug",
+								Title:  []w.Inline{w.Text("ковалёва-обложка-v2.pdf")},
+								Detail: []w.Inline{w.Text("in the file name")},
+								What:   "file",
+								Source: "sftpgo · vps · Documents",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#3F6E8C"},
+								Date:   "4 Aug",
+								Title:  []w.Inline{w.Text("Согласовать обложку")},
+								Detail: []w.Inline{w.Text("organiser · done")},
+								What:   "task",
+								Source: "nextcloud · Работа",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "3 Aug",
+								Title:  []w.Inline{w.Text("Обложка: два варианта")},
+								Detail: []w.Inline{w.Text("from")},
+								What:   "letter",
+								Source: "home · Archive",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#A05A2C"},
+								Date:   "1 Aug",
+								Title:  []w.Inline{w.Text("Re: Обложка: два варианта")},
+								Detail: []w.Inline{w.Text("to")},
+								What:   "letter",
+								Source: "home · Sent",
+							},
+						},
+					},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
+					w.List{
+						Rows: []w.ListRow{
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#6B4E7A"},
+								Date:   "29 Jul",
+								Title:  []w.Inline{w.Text("Ревью вёрстки сборника")},
+								Detail: []w.Inline{w.Text("attendee · no reply")},
+								What:   "event",
+								Source: "radicale · vps · Проекты",
+							},
+							w.FindRow{
+								Mark:   w.Mark{Colour: "#4A6B52"},
+								Date:   "21 Jul",
+								Title:  []w.Inline{w.Text("Про сроки по сборнику")},
+								Detail: []w.Inline{w.Text("related to this person")},
+								What:   "note",
+								Source: "nextcloud · Записи",
+							},
+						},
+					},
+					w.Empty{
+						Parts:   []w.EmptyPart{w.Text("Nothing was looked for before January 2026. Widen the range if you need it.")},
+						Variant: w.EmptySmall,
+					},
+				},
+				ID: "list-main",
+			},
+			Side: &w.Side{
+				Items: []w.SidePart{
+					w.Head{
+						Photo:  &w.HeadPhoto{Initials: "АК", Large: true},
+						Kicker: &w.Rubric{Text: "Card"},
+						Tools: []w.HeadTool{
+							w.Button{Label: "Open the card", Small: true},
+							w.Button{Label: "Edit", Small: true},
+							w.Drop{
+								Trigger: w.Button{Icon: "dots", Small: true, Title: "More"},
+								Menu: w.Menu{
+									Items: []w.MenuPart{
+										w.MenuItem{Icon: "move", Label: "Move"},
+										w.MenuItem{Icon: "dup", Label: "Copy"},
+										w.MenuItem{Icon: "export", Detail: &w.Mono{Text: ".vcf", Variant: w.Mono11}, Label: "Export"},
+										w.MenuItem{Icon: "link", Label: "Publish a link"},
+									},
+									Width: w.MenuWidth212,
+									Pop:   w.MenuUnder,
+								},
+							},
+						},
+						Acts:   &w.Acts{Items: []w.ActsPart{w.Close{Label: "Close the panel"}}},
+						Middle: true,
+						Pad:    w.HeadSnug,
+					},
+					w.Fields{
+						Items: []w.FieldsItem{
+							{Term: "Phone · mobile", Value: []w.ValuePart{w.Text("+7 912 445-10-88")}, Face: w.ValueMono},
+							{Term: "Phone · work", Value: []w.ValuePart{w.Text("+7 495 120-45-00")}, Face: w.ValueMono},
+							{Term: "Email · work", Value: []w.ValuePart{w.Text("a.kovaleva@example.org")}},
+							{Term: "Email · second", Value: []w.ValuePart{w.Text("anna.kovaleva@slovo.example")}},
+							{Term: "Address · work", Value: []w.ValuePart{w.Text("Тверская 12, стр. 3, Москва, 123001, Россия")}},
+							{
+								Term:  "Birthday",
+								Value: []w.ValuePart{w.Text("1987-03-14 "), w.Dim{Parts: []w.Inline{w.Text("· in 7 months")}}},
+								Face:  w.ValueMono,
+							},
+							{
+								Term:  "Tags",
+								Value: []w.ValuePart{w.Tag{Label: "работа"}, w.Text(" "), w.Tag{Label: "издательство"}},
+							},
+							{Term: "Note", Value: []w.ValuePart{w.Text("Пишет по вторникам, отвечает в тот же день.")}},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{
+								Text:  "The same person in other books",
+								Items: []w.RubricPart{w.Badge{Label: "2", Tone: w.BadgeLinked}},
+							},
+							w.SecList{
+								Items: [][]w.SecItemPart{
+									[]w.SecItemPart{
+										w.Mark{Colour: "#A05A2C", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "nextcloud · Архив", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+									[]w.SecItemPart{
+										w.Mark{Colour: "#6B4E7A", Size: w.MarkH11Inline},
+										w.Text(" "),
+										w.Link{Text: "radicale · vps · Команда", Href: "#"},
+										w.Text(" "),
+										w.Dim{Parts: []w.Inline{w.Text("· Phone, email differ")}},
+									},
+								},
+								Gap: w.StackGapTight,
+							},
+							w.SecHint{
+								Text:  "Linked on the duplicates screen. The records stay on their own servers; here they are shown as one person.",
+								Apart: true,
+							},
+						},
+					},
+					w.Sec{
+						Items: []w.SecPart{
+							w.Rubric{Text: "Source"},
+							w.Diag{Text: "UID   4f2b-9c31-a0e7\nRead  2 min ago"}},
+					},
+					w.Danger{Button: w.Button{Label: "Delete contact", Kind: w.ButtonDangerSolid}},
 				},
 			},
 		},

@@ -17,9 +17,7 @@ import (
 // geometryPending are the frames whose geometry waits for work named here,
 // the list to go to nothing as ladderPending: what they show is logged, not
 // failed.
-var geometryPending = map[string]string{
-	"s-mailbox-14": "the mailbox is approved and put off (30.09): its frames wait",
-}
+var geometryPending = map[string]string{}
 
 type geometryProbe struct {
 	Rows     []string `json:"rows"`

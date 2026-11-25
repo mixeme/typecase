@@ -62,6 +62,22 @@ var _ = add(
 		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
 		{Icon: "file", Label: "Files", Href: "#"},
 		{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 1}, "s-mailbox-21", "tc-nav"),
+	shell("mail", w.Nav{Items: []w.NavItem{
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
+		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}}, "s-mailbox-14", "tc-nav"),
+	shell("mail", w.Nav{Items: []w.NavItem{
+		{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+		{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+		{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+		{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+		{Icon: "file", Label: "Files", Href: "#"},
+		{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 12}, Href: "#"},
 		{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"}}, On: 6}, "s-mailbox-1", "tc-nav"),
 	shell("plain", w.Nav{Items: []w.NavItem{
 		{Icon: "con", Label: "Contacts", Href: "#"},

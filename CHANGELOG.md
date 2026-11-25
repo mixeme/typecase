@@ -112,10 +112,12 @@ do, not what the authors did.
 
 ### Mockup
 
-- **The mail is being prepared for implementation** (the owner 24.11).
-  Frames whose group is done lose the mark «отложена» and are checked as
-  all others: screens, records, the ladders. Done: the folder (`s-mailbox-1`
-  … `-5`) and the connections and settings (`-22` … `-29`). On the way the
+- **The mail is prepared for implementation** (the owner 24.11): its 32
+  frames lost the mark «отложена» and are checked as all others — screens,
+  records, the ladders and the geometry, with no frame let off (`-14` and
+  `-21` were). The folder (`s-mailbox-1` … `-5`), the connections and
+  settings (`-22` … `-29`); the letter, the sheet, the search with mail and
+  the timeline, the deletes below. On the way the
   frames caught up with the rest of the mockup: the dialogs that connect
   and edit a mailbox, and the folders' roles, are forms with names, as
   «Connect account»; Cancel and Skip are links; the DAV card of `-26` is
@@ -136,7 +138,14 @@ do, not what the authors did.
   draft» and when the draft was saved; in «From» a mailbox that cannot send
   is off with its label, as the others (the owner, 25.11: the note under the
   list names it); «Close the letter?» is a form; the
-  rule `.tc-in--wrap-gap` is gone.
+  rule `.tc-in--wrap-gap` is gone. The search with mail (`-14`) is today's
+  search (`s-find-1`): «Search again» a link, a task's tick a state, files
+  with their storage's mark; its kinds fold on a narrow page, with their
+  numbers, as the timeline's (`SegFold` stands in a head's actions). The
+  timeline with letters (`-21`) is today's (`s-contacts-7`) with «Write a
+  letter», Mail among the kinds and the letters' rows. «Delete forever» and
+  «Delete» without Trash (`-30`, `-31`) are forms; «Download .eml first» a
+  link.
 - **A field of recipients fills its field** (the owner, 25.11): To was as
   wide as its tags, in the relay's letter sheet too (`s-mail-1`); now it
   takes the field's width, or what buttons beside it leave.
