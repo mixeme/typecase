@@ -11,7 +11,7 @@ var _ = add(
 	overlay("mail", w.Menu{Items: []w.MenuPart{
 		w.Rubric{Text: "Your mailboxes"},
 		w.MenuItem{Icon: "mail", Trail: w.Tag{Label: "home", Place: w.Pushed}, Label: "mix@home.example", On: true},
-		w.MenuItem{Icon: "mail", Note: &w.Span{Face: w.FaceDanger, Text: "sending does not work"}, Label: "m.yenuchenko@office.example", Tone: w.MenuToneMuted, Reason: "office: the server refused the password for sending."},
+		w.MenuItem{Icon: "mail", Trail: w.Tag{Label: "office", Place: w.Pushed}, Label: "m.yenuchenko@office.example", Tone: w.MenuToneMuted, Reason: "office: the server refused the password for sending."},
 		w.MenuSep{},
 		w.Rubric{Text: "Through Carrel"},
 		w.MenuItem{Icon: "server", Trail: w.Tag{Label: "relay", Place: w.Pushed}, Label: "noreply@carrel.example"},

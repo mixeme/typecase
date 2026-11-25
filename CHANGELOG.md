@@ -133,7 +133,9 @@ do, not what the authors did.
   recipients from the books, Cc and Bcc buttons right of To (the owner,
   25.11), the mailbox's
   signature under the text field, its server's size before sending, «Save
-  draft» and when the draft was saved; «Close the letter?» is a form; the
+  draft» and when the draft was saved; in «From» a mailbox that cannot send
+  is off with its label, as the others (the owner, 25.11: the note under the
+  list names it); «Close the letter?» is a form; the
   rule `.tc-in--wrap-gap` is gone.
 - **A field of recipients fills its field** (the owner, 25.11): To was as
   wide as its tags, in the relay's letter sheet too (`s-mail-1`); now it
