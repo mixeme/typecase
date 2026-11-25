@@ -2391,6 +2391,7 @@ func Publish22() Screen {
 										w.Button{
 											Label:  "Copy",
 											Icon:   "dup",
+											Kind:   w.ButtonPrimary,
 											Small:  true,
 											Copy:   "https://carrel.example/p/7Qm2c8XvLk3w",
 											Copied: "Copied",

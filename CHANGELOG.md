@@ -114,6 +114,10 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A publish sheet without mail has its next step** (Carrel's task 285;
+  the owner: «no main button — for a second it is unclear what to do
+  next»). In s-publish-22, where the instance sends no letters, Copy beside
+  the link is the primary button: the link is carried on by the person.
 - **Reading width is one measure for the column** (Carrel's task 284; the
   owner at 1920: «the layout fell apart»). 78ch stood on each child of the
   text column in its own size, and on a wide window the title (1089 px), the
