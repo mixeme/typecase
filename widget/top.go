@@ -39,6 +39,9 @@ type TopDrop struct {
 // bar does: the bar ends at the page's right edge, and a menu opens into the
 // page (the owner, 24.11); the script turns one that has no room.
 func (d TopDrop) html(mix) string {
+	// The panel places the menu at its button's end (Carrel's tasks 276,
+	// 283): the menu stands in it as drawn, whatever its Pop says.
+	d.Menu.Pop = MenuInPlace
 	panel := "tc-drop__panel--right"
 	anchor := class(nil, "tc-drop__anchor", pick(d.More, "tc-top__more"), rank(d.Secondary))
 	if !d.Open {

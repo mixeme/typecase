@@ -380,8 +380,12 @@ const (
 // Содержимое. Пункты (значок, метка, галка, название, приглушённый хвост, клавиша; радио формы вокруг), строка поиска, разделители, заголовки, поле, строка с переключателем, диапазон, отметки-форма (CheckForm), отказы источников (MenuRefusal), подвал.
 // Чего нет. Вложенных меню: второй уровень — лист или страница.
 type Menu struct {
-	Items  []MenuPart
-	Width  MenuWidth
+	Items []MenuPart
+	Width MenuWidth
+	// Pop is where the menu stands: in place (a picture of an open menu, or
+	// a list the page prints open) or under its trigger; in a TopDrop or
+	// SplitDrop the panel places it at the button's end, whatever Pop says
+	// (Carrel's task 283).
 	Pop    MenuPop
 	Fields bool // rows that set values: taller rows
 	Inline bool // a span: a menu inside a line of a bar

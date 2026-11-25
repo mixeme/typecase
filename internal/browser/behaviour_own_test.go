@@ -253,6 +253,38 @@ func TestTopMenuOverTheList(t *testing.T) {
 	}
 }
 
+// TestTopSplitOverTheHeadSplit (Carrel's task 283): the menu of the top
+// bar's split «New note» stands over the list head's split «New contact» —
+// both splits with a menu stand a layer up, and the head's came after.
+func TestTopSplitOverTheHeadSplit(t *testing.T) {
+	needChrome(t)
+	split := func(label, href string) w.Split {
+		return w.Split{Main: w.Button{Label: label, Icon: "plus", Kind: w.ButtonPrimary, Href: href},
+			More: w.SplitDrop{Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				Menu: w.Menu{Items: []w.MenuPart{w.MenuItem{Icon: "con", Label: "Contact"}, w.MenuItem{Icon: "cal", Label: "Event"},
+					w.MenuItem{Icon: "task", Label: "Task"}, w.MenuItem{Icon: "upload", Label: "Import"}, w.MenuItem{Icon: "export", Label: "Export"}}}}}
+	}
+	shell := w.Shell{Top: &w.Top{Brand: w.Brand{Title: "Contacts"}, Actions: []w.TopAction{split("New note", "/app/notes/quick"), w.UserMenu{Name: "mix"}}},
+		Body: w.ShellBody{Rail: []w.RailPart{w.Nav{Items: []w.NavItem{{Icon: "con", Label: "Contacts", Href: "#"}}, On: 1}},
+			Main: w.Main{Items: []w.MainPart{w.Head{Title: &w.HeadTitle{Text: "All contacts"}, Acts: &w.Acts{Items: []w.ActsPart{split("New contact", "/app/contacts/new")}}}}}}}
+	h := browser.NewHarness(t)
+	url := h.RegisterPage("top-split", browser.PageHTML(shell.Render(), ""))
+	const covered = `(() => { const out = [];
+		document.querySelectorAll(".tc-top .tc-menu [role=menuitem]").forEach(it => { const r = it.getBoundingClientRect();
+			for (const x of [r.left + 4, r.left + r.width / 2, r.right - 4]) { const e = document.elementFromPoint(x, r.top + r.height / 2);
+				if (!e || !e.closest(".tc-top .tc-menu")) out.push(it.textContent.trim() + " under " + (e ? (e.closest(".tc-btn") || e).textContent.trim() : "nothing")); } });
+		return out; })()`
+	for _, width := range []int{630, 900, 1351} {
+		var hidden []string
+		if err := h.Run(url, width, 700, chromedp.Click(`.tc-top .tc-split .tc-drop__anchor .tc-btn`, chromedp.ByQuery), chromedp.Evaluate(covered, &hidden)); err != nil {
+			t.Fatal(err)
+		}
+		for _, x := range hidden {
+			t.Errorf("at %d px, the top bar's split: %s", width, x)
+		}
+	}
+}
+
 // TestSplitArrowOpensTheRest (Carrel's task 276 p. 6): «New note» is a
 // split — its main half makes a note and opens no menu; the arrow opens
 // the menu of the rest, without a script too, and Esc closes it.

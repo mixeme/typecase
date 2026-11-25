@@ -94,14 +94,18 @@
 	function placeMenu(trigger, pop) {
 		var menu = menuIn(pop);
 		if (!menu) return;
-		menu.style.top = "";
-		menu.style.bottom = "";
-		var r = menu.getBoundingClientRect();
+		// A top bar's or a split's menu stands in its panel under the button:
+		// the panel turns, not the menu, or the menu would cover its button
+		// (Carrel's task 283).
+		var box = pop.classList.contains("tc-drop__panel--right") ? pop : menu;
+		box.style.top = "";
+		box.style.bottom = "";
+		var r = box.getBoundingClientRect();
 		var t = trigger.getBoundingClientRect();
 		if (r.bottom > window.innerHeight && t.top - r.height > 0) {
 			// No room below: the menu opens above its button.
-			menu.style.top = "auto";
-			menu.style.bottom = "100%";
+			box.style.top = "auto";
+			box.style.bottom = box === pop ? "calc(100% + 5px)" : "100%";
 		}
 	}
 
