@@ -652,7 +652,7 @@ func Mailbox6() Screen {
 									{
 										Title: w.Rubric{Text: "Shown as"},
 										Items: []w.DocmetaPart{
-											w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}},
+											w.SecHint{Text: "The letter's text part · it also has HTML"},
 											w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}},
 										},
 									},
@@ -881,7 +881,7 @@ func Mailbox9() Screen {
 										{
 											Title: w.Rubric{Text: "Shown as"},
 											Items: []w.DocmetaPart{
-												w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}},
+												w.SecHint{Text: "The letter's text part · it also has HTML"},
 												w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}},
 											},
 										},
@@ -1331,7 +1331,7 @@ func Mailbox15() Screen {
 										{
 											Title: w.Rubric{Text: "Shown as"},
 											Items: []w.DocmetaPart{
-												w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}},
+												w.SecHint{Text: "The letter's text part · it also has HTML"},
 												w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}},
 											},
 										},
@@ -1371,30 +1371,36 @@ func Mailbox15() Screen {
 						w.Field{
 							Label: "To",
 							Parts: []w.FieldPart{
-								w.Drop{
-									Trigger: w.TagInput{
-										Parts: []w.TagInputPart{
-											w.Tag{
-												Label:     "Анна Ковалёва",
-												Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
-												Removable: true,
-												Aside:     &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}},
-												Title:     "a.kovaleva@example.org",
-												Name:      "to",
-												Value:     "a.kovaleva@example.org",
+								w.Line{
+									Items: []w.LinePart{
+										w.Drop{
+											Trigger: w.TagInput{
+												Parts: []w.TagInputPart{
+													w.Tag{
+														Label:     "Анна Ковалёва",
+														Mark:      &w.Mark{Colour: "#4A6B52", Size: w.MarkH11},
+														Removable: true,
+														Aside:     &w.Dim{Parts: []w.Inline{w.Text("· a.kovaleva@example.org")}},
+														Title:     "a.kovaleva@example.org",
+														Name:      "to",
+														Value:     "a.kovaleva@example.org",
+													},
+												},
+												Name: "to",
+												Add: &w.TagAdd{
+													Name:        "to.add",
+													Placeholder: "Name or address",
+													Label:       "Add a recipient",
+													Suggest:     "/app/contacts/suggest",
+													Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
+												},
+												Focus: true,
 											},
+											Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
 										},
-										Name: "to",
-										Add: &w.TagAdd{
-											Name:        "to.add",
-											Placeholder: "Name or address",
-											Label:       "Add a recipient",
-											Suggest:     "/app/contacts/suggest",
-											Enter:       &w.TagEnter{Name: "op", Value: "add", Label: "Add", Of: "letter"},
-										},
-										Focus: true,
+										w.Button{Label: "Bcc", Title: "Add blind copy", To: "/app/mail/send?op=bcc", Submit: true},
 									},
-									Menu: w.Menu{Items: []w.MenuPart{}, Width: w.MenuWidth420, Pop: w.MenuUnder},
+									Gap: w.LineGapNormal,
 								},
 							},
 							Width: w.FieldW100,
@@ -1428,14 +1434,6 @@ func Mailbox15() Screen {
 								},
 							},
 							Width: w.FieldW100,
-						},
-						w.Field{
-							Parts: []w.FieldPart{
-								w.Line{
-									Items: []w.LinePart{w.Button{Label: "Bcc", Small: true, To: "/app/mail/send?op=bcc", Submit: true}},
-									Gap:   w.LineGapNormal,
-								},
-							},
 						},
 						w.Field{
 							Label: "Subject",

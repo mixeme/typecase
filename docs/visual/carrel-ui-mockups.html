@@ -1880,6 +1880,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--t12-fill.tc-in--t12-fill{font-size:12px;flex:1}
 .tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px;max-width:220px}
 .tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
+/* Поле меток во всю ширину поля, и в строке с кнопками (Cc, Bcc) — всё, что они оставили. */
+.tc-field > .tc-drop:has(> .tc-in--tags),.tc-field > .tc-line > .tc-drop:has(> .tc-in--tags){display:flex;flex:1 1 auto;min-width:0}
+.tc-drop > .tc-in--tags{flex:1 1 auto}
 /* Плашки колонками — участники события (задача 77): знакомый — меткой книги и именем, незнакомый — адресом; строка набора — в следующей клетке. */
 .tc-in--cols.tc-in--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 10px;align-items:center;justify-items:start;padding:5px 8px}
 .tc-in__add{border:0;background:transparent;font:inherit;color:var(--tc-ink);outline:0;min-width:120px;flex:1 1 120px;padding:0;height:20px}
@@ -28354,7 +28357,7 @@ Read  2 min ago · not changed on server</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Shown as</div>
-              <div class="tc-line__text">The letter's text part <span class="tc-dim">· it also has HTML</span></div>
+              <div class="tc-field__hint">The letter's text part · it also has HTML</div>
               <div class="tc-sec__acts"><button class="tc-btn is-sm" type="button">Show original</button></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -28527,7 +28530,7 @@ Read    2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Shown as</div>
-              <div class="tc-line__text">The letter's text part <span class="tc-dim">· it also has HTML</span></div>
+              <div class="tc-field__hint">The letter's text part · it also has HTML</div>
               <div class="tc-sec__acts"><button class="tc-btn is-sm" type="button">Show original</button></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -28962,7 +28965,7 @@ Read    2 min ago</div>
             </div>
             <div class="tc-docmeta__sec">
               <div class="tc-rubric">Shown as</div>
-              <div class="tc-line__text">The letter's text part <span class="tc-dim">· it also has HTML</span></div>
+              <div class="tc-field__hint">The letter's text part · it also has HTML</div>
               <div class="tc-sec__acts"><button class="tc-btn is-sm" type="button">Show original</button></div>
             </div>
             <div class="tc-docmeta__sec">
@@ -28988,10 +28991,9 @@ Read    2 min ago</div>
           <div class="tc-sheet__body">
             <div class="tc-field tc-field--w100"><label>From</label><span class="tc-in is-pick"><select class="tc-in__list" name="from" aria-label="From"><option value="home" selected>Михаил Енученко · mix@home.example</option></select></span></div>
             <div class="tc-field tc-field--w100"><label>To</label>
-              <span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
+              <span class="tc-line tc-line--normal"><span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span><button class="tc-btn" title="Add blind copy" type="submit" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
             <div class="tc-field tc-field--w100"><label>Cc</label>
               <span class="tc-drop"><span class="tc-in tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="p.smirnov@example.org"><input class="tc-check__box" type="checkbox" name="cc" value="p.smirnov@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#6B4E7A"></span>Пётр Смирнов <span class="tc-dim">· p.smirnov@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="cc.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
-            <div class="tc-field"><span class="tc-line tc-line--normal"><button class="tc-btn is-sm" type="submit" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
             <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in" type="text" name="subject" value="Re: Вёрстка сборника: правки и встреча в четверг" aria-label="Subject"></div>
             <div class="tc-field tc-field--w100"><textarea class="tc-in is-area tc-in--note" name="text">Анна, спасибо! Подписи поправлю к пятнице, исправленная вёрстка во вложении. В четверг буду.
 
@@ -29038,8 +29040,7 @@ Read    2 min ago</div>
     <div class="tc-sheet__body">
       <div class="tc-field tc-field--w100"><label>From</label><span class="tc-in is-pick"><select class="tc-in__list" name="from" aria-label="From"><option value="home" selected>Михаил Енученко · mix@home.example</option></select></span></div>
       <div class="tc-field tc-field--w100"><label>To</label>
-        <span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span></div>
-      <div class="tc-field"><span class="tc-line tc-line--normal"><button class="tc-btn is-sm" type="submit" form="letter" formaction="/app/mail/send?op=cc">Cc</button><button class="tc-btn is-sm" type="submit" form="letter" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
+        <span class="tc-line tc-line--normal"><span class="tc-drop"><span class="tc-in is-focus tc-in--tags" data-tc-suggest="/app/contacts/suggest"> <label class="tc-tag tc-tag--pill" title="a.kovaleva@example.org"><input class="tc-check__box" type="checkbox" name="to" value="a.kovaleva@example.org" checked><span class="tc-mark tc-mark--h11" data-tc-colour="#4A6B52"></span>Анна Ковалёва <span class="tc-dim">· a.kovaleva@example.org</span> <svg width="9" height="9" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none"><use href="#i-close"/></svg></label> <input class="tc-in__add" type="text" name="to.add" placeholder="Name or address" aria-label="Add a recipient" autocomplete="off"><button class="tc-in__enter" type="submit" form="letter" name="op" value="add" hidden>Add</button> </span><div class="tc-menu is-pop tc-menu--w420" role="menu" hidden></div></span><button class="tc-btn" title="Add copy" type="submit" form="letter" formaction="/app/mail/send?op=cc">Cc</button><button class="tc-btn" title="Add blind copy" type="submit" form="letter" formaction="/app/mail/send?op=bcc">Bcc</button></span></div>
       <div class="tc-field tc-field--w100"><label>Subject</label><input class="tc-in is-ph" type="text" name="subject" form="letter" placeholder="Subject" aria-label="Subject"></div>
     </div>
   </div>

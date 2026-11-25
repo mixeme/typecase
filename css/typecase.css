@@ -1699,6 +1699,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-in--t12-fill.tc-in--t12-fill{font-size:12px;flex:1}
 .tc-in--h26-w220.tc-in--h26-w220{height:26px;width:220px;max-width:220px}
 .tc-in--tags.tc-in--tags{height:auto;min-height:28px;flex-wrap:wrap;gap:5px;padding:4px 8px}
+/* Поле меток во всю ширину поля, и в строке с кнопками (Cc, Bcc) — всё, что они оставили. */
+.tc-field > .tc-drop:has(> .tc-in--tags),.tc-field > .tc-line > .tc-drop:has(> .tc-in--tags){display:flex;flex:1 1 auto;min-width:0}
+.tc-drop > .tc-in--tags{flex:1 1 auto}
 /* Плашки колонками — участники события (задача 77): знакомый — меткой книги и именем, незнакомый — адресом; строка набора — в следующей клетке. */
 .tc-in--cols.tc-in--cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,max-content));gap:5px 10px;align-items:center;justify-items:start;padding:5px 8px}
 .tc-in__add{border:0;background:transparent;font:inherit;color:var(--tc-ink);outline:0;min-width:120px;flex:1 1 120px;padding:0;height:20px}

@@ -130,10 +130,14 @@ do, not what the authors did.
   as a move's; the original stands in the letter's document. The letter
   sheet of a mailbox (`-15` … `-20`, `-32`) is the relay's (`s-mail-1`) with
   what a mailbox adds: «From» a list of the mailboxes, To and Cc as
-  recipients from the books, Bcc a button of the form, the mailbox's
+  recipients from the books, Cc and Bcc buttons right of To (the owner,
+  25.11), the mailbox's
   signature under the text field, its server's size before sending, «Save
   draft» and when the draft was saved; «Close the letter?» is a form; the
   rule `.tc-in--wrap-gap` is gone.
+- **A field of recipients fills its field** (the owner, 25.11): To was as
+  wide as its tags, in the relay's letter sheet too (`s-mail-1`); now it
+  takes the field's width, or what buttons beside it leave.
 - **The only administrator deposits no key** (the owner, Carrel's task 281):
   `account-18` (the account's Key escrow) and `account-19` (the escrow
   page) draw «Deposit my key» off with its reason «No other administrator

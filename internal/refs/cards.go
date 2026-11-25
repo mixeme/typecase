@@ -1214,7 +1214,7 @@ var _ = add(
 	// tc-docmeta
 	cards("mail", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Sender"}, Items: []w.DocmetaPart{w.DocRefs{Items: []w.DocRef{{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH11Inline}, Name: "Анна Ковалёва", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· nextcloud · Контакты")}}}, {Name: "Timeline", Href: "#", What: w.Dim{Parts: []w.Inline{w.Text("· everything with her")}}}}}}},
-		{Title: w.Rubric{Text: "Shown as"}, Items: []w.DocmetaPart{w.DocAttach{Name: "The letter's text part", Size: w.Dim{Parts: []w.Inline{w.Text("· it also has HTML")}}}, w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}}}},
+		{Title: w.Rubric{Text: "Shown as"}, Items: []w.DocmetaPart{w.SecHint{Text: "The letter's text part · it also has HTML"}, w.SecActs{Items: []w.Button{w.Button{Label: "Show original", Small: true}}}}},
 		{Title: w.Rubric{Text: "Source"}, Items: []w.DocmetaPart{w.Diag{Text: "UID     48213\nFolder  INBOX\nSize    2.6 MB\nRead    2 min ago"}}}}}, "s-mailbox-6", "tc-docmeta"),
 	cards("read", w.Docmeta{Sections: []w.DocmetaSec{
 		{Title: w.Rubric{Text: "Tags", Items: []w.RubricPart{w.Badge{Label: "linked", Tone: w.BadgeLinked}}}, Items: []w.DocmetaPart{w.Line{Block: true, Gap: w.LineGapTight, Items: []w.LinePart{w.Tag{Label: "встречи"}, w.Tag{Label: "релиз"}}}}},
