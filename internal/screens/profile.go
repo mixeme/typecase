@@ -1977,10 +1977,355 @@ func Profile2() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
+									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
+								},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog540,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Profile39 is frame «Подключение · Test only прошла» (s-profile-39).
+func Profile39() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Connect account"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Server URL",
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:  "server",
+												Value: "https://dav.office.example/dav.php/",
+												Label: "Server URL",
+												Mono:  true,
+												Focus: true,
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed."),
+												},
+												Variant: w.HintColumn,
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"},
+											w.Check{
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label:      "Certificate fingerprint",
+										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:        "certFingerprint",
+												Placeholder: "only for a certificate the system does not trust",
+												Label:       "Certificate fingerprint",
+												Mono:        true,
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+								ID:      "connect",
+								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Variant: w.FormFlush,
+							},
+							w.Notices{
+								Items: []w.NoticesPart{
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Test passed:"),
+											w.Text(" Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below."),
+										},
+										Space:  w.MsgFlushSides,
+										Column: true,
+									},
+									w.Diag{
+										Text: "[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/\n             HTTPS → HTTP: not followed, the URL as typed is used\n[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/\n[home]       calendar-home-set, addressbook-home-set → 207\n[collections] 8 collection(s)",
+									},
+								},
+								Zone: "connect-test",
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
+									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
+								},
+								Variant: w.FormFootFlush,
+							},
+						},
+						Variant: w.Dialog540,
+					},
+				},
+			},
+		},
+	}
+}
+
+// Profile40 is frame «Подключение · Test only не прошла» (s-profile-40).
+func Profile40() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{Items: []w.NavItem{
+					{Icon: "back", Label: "Back to app", Href: "#"}}, Sections: true},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{Text: "Settings"},
+						w.Nav{
+							Items: []w.NavItem{
+								{Icon: "user", Label: "Account", Href: "#"},
+								{Icon: "server", Label: "Connections", Count: &w.Num{Value: 4}, Href: "#"},
+								{Icon: "file", Label: "Attachments", Href: "#"},
+								{Icon: "device", Label: "New device", Href: "#"},
+								{Emblem: &w.Emblem{Symbol: "davloom"}, Label: "davloom", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "archive", Label: "Backup", Count: &w.Num{Value: 3}, Href: "#"},
+								{Icon: "link", Label: "Published links", Count: &w.Num{Value: 2}, Href: "#"},
+								{Icon: "theme", Label: "Appearance", Href: "#"},
+							},
+							On: 2,
+						},
+					},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.RailStatus{
+							Text:   "davloom · running · 3 devices",
+							Detail: w.Dim{Parts: []w.Inline{w.Text("Last response "), w.Mono{Text: "2026-08-16 09:41"}}, Size: w.Dim11},
+						},
+						w.RailStatus{
+							Text: "Backups are running",
+							Detail: w.Dim{
+								Parts: []w.Inline{
+									w.Text("Last backup "),
+									w.Mono{Text: "2026-08-16 03:10"},
+									w.Text(" · "),
+									w.Hint{Text: "verified", Title: "The archive was read back from the destination and the checksum matched"},
+								},
+								Size: w.Dim11,
+							},
+						},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Dialog{
+						Items: []w.DialogPart{
+							w.Head{
+								Title: &w.HeadTitle{Text: "Connect account"},
+								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
+							},
+							w.Form{
+								Items: []w.FormPart{
+									w.Field{
+										Label: "Label",
+										Parts: []w.FieldPart{w.Input{Name: "label", Placeholder: "optional", Label: "Label"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Server URL",
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:  "server",
+												Value: "https://dav.office.example/dav.php/",
+												Label: "Server URL",
+												Mono:  true,
+												Focus: true,
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Mono{Text: ".well-known", Form: w.MonoCode},
+													w.Text(" is tried first, then the URL exactly as typed."),
+												},
+												Variant: w.HintColumn,
+											},
+										},
+										Width: w.FieldFull,
+									},
+									w.Field{
+										Label: "Username",
+										Parts: []w.FieldPart{w.Input{Name: "login", Value: "m.yenuchenko", Label: "Username"}},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label: "Password",
+										Parts: []w.FieldPart{
+											w.Input{Kind: w.InputPassword, Name: "password", Value: "xxxxxxxxxx", Label: "Password"},
+											w.Check{
+												Name:     "noPassword",
+												Value:    "1",
+												Disables: "password",
+												Parts:    []w.CheckPart{w.Text("The server asks no password")},
+											},
+										},
+										Width: w.FieldMD,
+									},
+									w.Field{
+										Label:      "Certificate fingerprint",
+										LabelAside: w.Dim{Parts: []w.Inline{w.Text("SHA-256 · optional")}},
+										Parts: []w.FieldPart{
+											w.Input{
+												Name:        "certFingerprint",
+												Placeholder: "only for a certificate the system does not trust",
+												Label:       "Certificate fingerprint",
+												Mono:        true,
+											},
+										},
+										Width: w.FieldFull,
+									},
+								},
+								ID:      "connect",
+								Action:  "/app/settings/connections/new",
+								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
+								Variant: w.FormFlush,
+							},
+							w.Notices{
+								Items: []w.NoticesPart{
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Test failed:"),
+											w.Text(" discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved."),
+										},
+										Tone:   w.MsgAlert,
+										Space:  w.MsgFlushSides,
+										Column: true,
+									},
+									w.Diag{
+										Text: "[well-known] GET /.well-known/caldav → 301 → /dav.php/\n[principal]  PROPFIND /dav.php/ → 401 Unauthorized\n[home]       not asked: the step before did not pass",
+									},
+								},
+								Zone: "connect-test",
+							},
+							w.FormFoot{
+								Items: []w.FormFootPart{
+									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
 								Variant: w.FormFootFlush,
@@ -2131,10 +2476,16 @@ func Profile24() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
 								Variant: w.FormFootFlush,
@@ -2274,10 +2625,16 @@ func Profile14() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,
@@ -2870,10 +3227,16 @@ func Profile11() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
-									w.Button{Label: "Test only", Form: "connect", To: "/app/settings/connections/new/test"},
+									w.Button{
+										Label:  "Test only",
+										Form:   "connect",
+										To:     "/app/settings/connections/new/test",
+										Target: "connect-test",
+									},
 									w.Button{Label: "Cancel"},
 								},
 								Variant: w.FormFootFlush,

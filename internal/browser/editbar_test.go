@@ -223,3 +223,53 @@ func TestReadingWidthOneMeasure(t *testing.T) {
 		}
 	}
 }
+
+// TestTestOnlyAnswersInItsZone (Carrel's task 282): Test only sends the
+// connect form into the zone under its fields — the outcome and the trace
+// stand there, the form and the typed password stay as they were, the page
+// does not go.
+func TestTestOnlyAnswersInItsZone(t *testing.T) {
+	needChrome(t)
+	r, ok := screens.Find("s-profile-2")
+	if !ok {
+		t.Fatal("no route s-profile-2")
+	}
+	h := browser.NewHarness(t)
+	var mu sync.Mutex
+	var got []string
+	test := h.RegisterStream("connect-test", func(rw http.ResponseWriter, r *http.Request) {
+		_ = r.ParseMultipartForm(1 << 20)
+		mu.Lock()
+		got = append(got, r.Header.Get("X-Target")+" "+r.FormValue("password"))
+		mu.Unlock()
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(`<div class="tc-msg"><b>Test passed:</b> Carrel can sign in and found 8 collections.</div><div class="tc-diag">[collections] 8 collection(s)</div>`))
+	})
+	page := strings.Replace(browser.PageHTML(r.Screen().Render(), ""), `data-tc-noscript>`, `data-tc-noscript data-tc-view-header="X-View" data-tc-target-header="X-Target">`, 1)
+	page = strings.Replace(page, `formaction="/app/settings/connections/new/test"`, `formaction="`+test+`"`, 1)
+	var before, after string
+	var shown bool
+	err := h.Run(h.RegisterPage("connect", page), 1351, 900,
+		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-test]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &before),
+		chromedp.Click(`button[data-tc-target="connect-test"]`, chromedp.ByQuery),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(`(() => { const z = document.querySelector("[data-tc-zone=connect-test]"); return !z.hidden && /Test passed/.test(z.textContent) && /8 collection/.test(z.textContent); })()`, &shown),
+		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-test]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &after),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	mu.Lock()
+	sent := append([]string(nil), got...)
+	mu.Unlock()
+	if len(sent) != 1 || sent[0] != "connect-test xxxxxxxxxx" {
+		t.Errorf("Test only sent %q; want one request for the zone connect-test with the typed password", sent)
+	}
+	if !shown {
+		t.Error("the outcome does not stand in its zone")
+	}
+	wantAfter := strings.Replace(before, "true | ", "false | ", 1)
+	if !strings.HasPrefix(before, "true | xxxxxxxxxx") || after != wantAfter {
+		t.Errorf("before %q, after %q; want the zone shown, the password and the page kept", before, after)
+	}
+}

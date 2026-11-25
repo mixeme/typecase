@@ -153,6 +153,11 @@ func (PhotoCrop) dialogPart()   {}
 func (PostForm) dialogPart()    {}
 func (Sec) dialogPart()         {}
 
+// Notices under a dialog's fields are the zone a check answers into, with
+// the live layer: its outcome and trace, the form untouched (Carrel's task
+// 282: Test only kept the typed password).
+func (Notices) dialogPart() {}
+
 // DialogVariant is the drawn width and padding of a dialog.
 type DialogVariant int
 

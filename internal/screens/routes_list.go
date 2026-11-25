@@ -104,6 +104,8 @@ var Routes = []Route{
 	{Frame: "s-profile-25", Caption: "Подключения · ни одного", Screen: Profile25},
 	{Frame: "s-profile-26", Caption: "Отключить аккаунт · лист поверх Connections", Screen: Profile26},
 	{Frame: "s-profile-2", Caption: "Подключение аккаунта", Screen: Profile2},
+	{Frame: "s-profile-39", Caption: "Подключение · Test only прошла", Screen: Profile39},
+	{Frame: "s-profile-40", Caption: "Подключение · Test only не прошла", Screen: Profile40},
 	{Frame: "s-profile-24", Caption: "Подключение · сервер отказал во входе", Screen: Profile24},
 	{Frame: "s-profile-14", Caption: "Подключение аккаунта · сервер без пароля", Screen: Profile14},
 	{Frame: "s-profile-16", Caption: "Подключение · правка", Screen: Profile16},

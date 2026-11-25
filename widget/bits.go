@@ -112,9 +112,13 @@ type NoticesPart interface {
 func (Msg) noticesPart()      {}
 func (MainDiag) noticesPart() {}
 
+// Diag in a dialog's notices is the trace under its message: a check's
+// steps under its outcome (Carrel's task 282).
+func (Diag) noticesPart() {}
+
 // Notices — tc-notices
 //
-// Роль. Полоса сообщений над содержимым страницы, которую живой слой заменяет целиком.
+// Роль. Полоса сообщений над содержимым страницы или под полями диалога (итог проверки, задача Carrel 282), которую живой слой заменяет целиком.
 // Вход. Notices{Items, Zone}.
 // Состояния. plain | empty.
 // Инварианты. Своих отступов нет — они у сообщений, как без полосы; пустая полоса скрыта; полоса печатает фрагмент своего кадра.

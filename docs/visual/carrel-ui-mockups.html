@@ -16971,11 +16971,122 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
 <figcaption>«Test only» — та же проверка, что у администратора, без сохранения пароля.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-profile-39">
+  <div class="frame-label"><span>Подключение · Test only прошла</span><i>дополнительный кадр: ответ Test only, шаг с предупреждением · диалог</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <span class="tc-split"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note</button><button class="tc-btn is-primary" type="button" title="More to create" aria-label="More to create"><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a><button class="tc-nav__item tc-nav__all tc-js" type="button" data-tc-toggle="rail" aria-expanded="false"><svg><use href="#i-menu"/></svg>Sections</button></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      </form>
+      <div class="tc-notices" data-tc-zone="connect-test"><div class="tc-msg tc-msg--mr0-ml0 tc-msg--max580"><b>Test passed:</b> Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/
+             HTTPS → HTTP: not followed, the URL as typed is used
+[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/
+[home]       calendar-home-set, addressbook-home-set → 207
+[collections] 8 collection(s)</div></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption><b>Итог проверки — над журналом, своей зоной под полями</b> (задача Carrel 282): «Test only» шлёт форму в неё живым слоем, форма и набранный пароль не трогаются. Прошла — спокойное сообщение: что нашлось и что ничего не сохранено до Connect; шаг с предупреждением — одной фразой со ссылкой на журнал. Без сценария ответ — страница, как прежде.</figcaption>
+</figure>
+
+<figure>
+<div class="frame" data-frame="s-profile-40">
+  <div class="frame-label"><span>Подключение · Test only не прошла</span><i>дополнительный кадр: ответ Test only · диалог</i></div>
+  <div class="tc-root tc-shell">
+    <div class="tc-top">
+      <div class="tc-brand"><svg class="tc-brand__logo" viewBox="4.79 -31.36 291.08 116.63" role="img" aria-label="Carrel"><use href="#logo-word" class="tc-logo__word"/><use href="#logo-shade" class="tc-logo__shade"/></svg></div>
+      <div class="tc-search" role="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-search"/></svg><input class="tc-q" type="search" placeholder="Search everything…" aria-label="Search everything…"></div>
+      <div class="tc-top__actions">
+        <span class="tc-split"><button class="tc-btn is-primary" type="button"><svg viewBox="0 0 24 24"><use href="#i-quill"/></svg>New note</button><button class="tc-btn is-primary" type="button" title="More to create" aria-label="More to create"><svg viewBox="0 0 24 24"><use href="#i-chev"/></svg></button></span>
+        <button class="tc-btn" type="button"><svg viewBox="0 0 24 24"><use href="#i-refresh"/></svg>2 min ago</button>
+        <button class="tc-usermenu" type="button">mix<svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none"><use href="#i-chev"/></svg></button>
+      </div>
+    </div>
+    <div class="tc-shell__body">
+      <div class="tc-shell__rail">
+        <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg>Back to app</a><button class="tc-nav__item tc-nav__all tc-js" type="button" data-tc-toggle="rail" aria-expanded="false"><svg><use href="#i-menu"/></svg>Sections</button></div>
+        <div class="tc-railsec">
+          <div class="tc-rubric">Settings</div>
+          <div class="tc-nav">
+            <a class="tc-nav__item" href="#"><svg><use href="#i-user"/></svg>Account</a>
+            <a class="is-on tc-nav__item" href="#"><svg><use href="#i-server"/></svg>Connections<span class="tc-num">4</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-file"/></svg>Attachments</a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-device"/></svg>New device</a>
+            <a class="tc-nav__item" href="#"><svg class="tc-emblem" viewBox="0 0 16 16" aria-hidden="true"><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg>davloom<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-archive"/></svg>Backup<span class="tc-num">3</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-link"/></svg>Published links<span class="tc-num">2</span></a>
+            <a class="tc-nav__item" href="#"><svg><use href="#i-theme"/></svg>Appearance</a>
+          </div>
+        </div>
+        <div class="tc-railfoot">
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>davloom · running · 3 devices<br><span class="tc-dim tc-dim--t11">Last response <span class="tc-mono">2026-08-16 09:41</span></span></div>
+          <div class="tc-railstatus"><span class="tc-dot--accent"></span>Backups are running<br><span class="tc-dim tc-dim--t11">Last backup <span class="tc-mono">2026-08-16 03:10</span> · <span title="The archive was read back from the destination and the checksum matched" class="tc-dim__hint">verified</span></span></div>
+          <a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a>
+        </div>
+      </div>
+      <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
+      <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
+        <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
+        <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
+        <div class="tc-field tc-field--md"><label>Username</label><input class="tc-in" type="text" name="login" value="m.yenuchenko" aria-label="Username"></div>
+        <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
+          <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
+      </form>
+      <div class="tc-notices" data-tc-zone="connect-test"><div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580"><b>Test failed:</b> discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → /dav.php/
+[principal]  PROPFIND /dav.php/ → 401 Unauthorized
+[home]       not asked: the step before did not pass</div></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+    </div></div></div>
+  </div>
+</div>
+<figcaption>Не прошла — сообщение тревоги: на каком шаге остановилось, что делать, что ничего не сохранено; журнал под ним, как в s-profile-39.</figcaption>
 </figure>
 
 <figure>
@@ -17026,7 +17137,8 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
@@ -17077,7 +17189,8 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" checked data-tc-disables="password"><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
@@ -17659,7 +17772,8 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>

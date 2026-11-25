@@ -565,12 +565,19 @@ func (g *gen) fields(e *El) string {
 
 // notices is the zone of a page's messages (Carrel's task 226).
 func (g *gen) notices(e *El) string {
+	zone := ""
+	if v := e.Attr("data-tc-zone"); v != "" {
+		zone = ", Zone: " + q(v)
+	}
 	return "w.Notices{Items: []w.NoticesPart{" + g.each(e.Els(), func(x *El) string {
 		if x.Has("tc-main__diag") {
 			return "w.MainDiag{Diag: " + g.diag(x.Els()[0]) + "}"
 		}
+		if x.Has("tc-diag") {
+			return g.diag(x) // a check's trace under its outcome (Carrel's task 282)
+		}
 		return g.msg(x)
-	}) + "}}"
+	}) + "}" + zone + "}"
 }
 
 // anyblock is the widget a block element is, for a place that takes many.
