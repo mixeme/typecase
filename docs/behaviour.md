@@ -71,7 +71,7 @@
 | `Meter` | `tc-meter` | нет. | тест: `TestEditFile`, `TestPasteAndQueue`, `TestRunFollows` |
 | `Mono` | `tc-mono` | нет. | тест: `TestEditFile`, `TestPasteAndQueue` |
 | `Msg` | `tc-msg` | нет. | тест: `TestAppWorker`, `TestPageUnderStrictPolicy`, `TestScriptOnly`, `TestZonePanel` |
-| `Notices` | `tc-notices` | Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает. | тест: `TestZoneAnswerForms` |
+| `Notices` | `tc-notices` | Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает. Полоса с потоком (`Stream`) слушает его, пока вкладка видна, и пустая тоже: событие `Changed` кладёт фрагмент, как ответ; вкладка скрыта — поток закрыт, снова видна — открыт заново. | тест: `TestNoticesWatch`, `TestZoneAnswerForms` |
 | `Nav` | `tc-nav` | Нажатие открывает раздел; на узкой ширине повторное нажатие на текущий раздел открывает рейл панелью (источники, у настроек — все разделы), его же нажатие, Esc и нажатие мимо закрывают; на телефоне у настроек внизу «← App», текущий раздел и «Sections». | тест: `TestZones`, `TestRailOpensAsPanel` |
 | `Num` | `tc-num` | нет. | — |
 | `Overlay` | `tc-overlay` | Пока лист открыт, фокус не уходит под затемнение и нажатие туда не доходит: то, что под ним, — inert, и без сценария. | тест: `TestOverlayKeepsFocus` |

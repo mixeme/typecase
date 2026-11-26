@@ -37,6 +37,15 @@ do, not what the authors did.
 
 ### Added
 
+- **Messages that watch a stream: `Notices.Stream` and `Changed`**
+  (Carrel's task 293: letters that come into the folder open in the tab).
+  The zone listens while the tab is seen, empty and hidden too; each event
+  named `Changed` carries a fragment, put as an answer is — «2 new letters»
+  with Show into the zone, the rail's row into the rail. The tab hidden,
+  the stream is closed; seen again, it is opened again, so the server sends
+  what came meanwhile. Without the live layer nothing comes: the folder is
+  read anew when opened and by Refresh. Frame `s-mailbox-33` (592 frames).
+  `TestNoticesWatch`.
 - **An answer for the address zone names the tab's title:
   `Fragment.Title`** (Carrel's task 294: a rail's collection opened in
   `main` left «Combined notebook» over the page «Дневник»). Put the page's

@@ -186,6 +186,199 @@ func Mailbox1() Screen {
 	}
 }
 
+// Mailbox33 is frame «Входящие · пришли письма, пока папка открыта» (s-mailbox-33).
+func Mailbox33() Screen {
+	return w.Shell{
+		Top: &w.Top{
+			Brand:  w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}},
+			Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}},
+			Actions: []w.TopAction{
+				w.Split{
+					Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary},
+					More: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Title: "More to create"},
+				},
+				w.Button{Label: "2 min ago", Icon: "refresh"},
+				w.UserMenu{Name: "mix"},
+			},
+		},
+		Body: w.ShellBody{
+			Rail: []w.RailPart{
+				w.Nav{
+					Items: []w.NavItem{
+						{Icon: "con", Label: "Contacts", Count: &w.Num{Value: 8}, Href: "#"},
+						{Icon: "cal", Label: "Calendar", Count: &w.Num{Value: 10}, Href: "#"},
+						{Icon: "task", Label: "Tasks", Count: &w.Num{Value: 2}, Href: "#"},
+						{Icon: "note", Label: "Notes", Count: &w.Num{Value: 5}, Href: "#"},
+						{Icon: "file", Label: "Files", Href: "#"},
+						{Icon: "mail", Label: "Mail", Count: &w.Num{Value: 14}, Href: "#"},
+						{Icon: "dup", Label: "Duplicates", Count: &w.Num{Value: 2}, Href: "#"},
+					},
+					On: 6,
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{
+							Text: "",
+							Items: []w.RubricPart{
+								w.Line{
+									Items: []w.LinePart{w.Mark{Colour: "#A05A2C", Size: w.MarkH11}, w.Text("home")},
+									Gap:   w.LineGapNormal,
+								},
+							},
+						},
+						w.Tree{
+							Rows: []w.TreeRow{
+								{Icon: "inbox", Label: "Inbox", Count: &w.Num{Value: 14}},
+								{Icon: "pencil", Label: "Drafts", Count: &w.Num{Value: 1}},
+								{Icon: "send", Label: "Sent"},
+								{Icon: "archive", Label: "Archive"},
+								{Icon: "spam", Label: "Spam", Count: &w.Num{Value: 3}},
+								{Icon: "trash", Label: "Trash"},
+								{Icon: "file", Label: "Стройка", Count: &w.Num{Value: 2}},
+								{Icon: "file", Label: "Рассылки"},
+							},
+							On:      1,
+							Variant: w.TreePadded,
+						},
+					},
+				},
+				w.RailSec{
+					Items: []w.RailSecPart{
+						w.Rubric{
+							Text: "",
+							Items: []w.RubricPart{
+								w.Line{
+									Items: []w.LinePart{w.Mark{Colour: "#3F6E8C", Size: w.MarkH11}, w.Text("office")},
+									Gap:   w.LineGapNormal,
+								},
+							},
+						},
+					},
+					Failed: "no reply · 8 s",
+					Why:    "mail.office.example:993 did not answer in 8 s. Other mailboxes and the rest of Carrel work.",
+					Retry:  &w.Button{Label: "Retry", Href: "?retry=office"},
+				},
+				w.RailFoot{
+					Items: []w.RailFootPart{
+						w.Button{Icon: "mail", Title: "Connect a mailbox"},
+						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
+					},
+					About: &w.About{Name: "Carrel", Build: w.Mono{Text: "0.0.1 · 786949a"}, Href: "#rest"},
+				},
+			},
+			Main: w.Main{
+				Items: []w.MainPart{
+					w.Head{
+						Title: &w.HeadTitle{Text: "Inbox"},
+						Subs: []w.HeadSub{
+							w.HeadSub{
+								Parts: []w.HeadSubPart{
+									w.Text("home · "),
+									w.Mono{Text: "mix@home.example"},
+									w.Text(" · 1 284 letters · 12 unread · newest first"),
+								},
+							},
+						},
+						Acts: &w.Acts{Items: []w.ActsPart{w.Button{Label: "Write", Icon: "pencil", Kind: w.ButtonPrimary}}},
+					},
+					w.Notices{
+						Items: []w.NoticesPart{
+							w.Msg{
+								Icon:  "inbox",
+								Parts: []w.MsgPart{w.Text("2 new letters")},
+								End:   &w.Push{Items: []w.PushPart{w.Button{Label: "Show", Small: true, Href: "#"}}},
+								Tone:  w.MsgAccent,
+							},
+						},
+						Zone: "mail-new",
+					},
+					w.List{
+						Rows: []w.ListRow{
+							w.MailRow{
+								Ticked:    w.TickedOff,
+								Important: true,
+								Unread:    true,
+								From:      "Анна Ковалёва",
+								Topic:     "Вёрстка сборника: правки и встреча в четверг",
+								Start:     "Михаил, добрый день! Прислала правки к третьей вёрстке, они в PDF и отмечены жёлтым…",
+								Attached:  3,
+								Bytes:     "2.6 MB",
+								Date:      "2026-09-24 10:12",
+							},
+							w.MailRow{
+								Ticked:   w.TickedOff,
+								Unread:   true,
+								From:     "Пётр Смирнов",
+								Topic:    "Смета по второму этапу",
+								Start:    "Во вложении смета, кровлю пересчитал по новым ценам, фасад без изменений…",
+								Attached: 1,
+								Bytes:    "1.1 MB",
+								Date:     "2026-09-24 08:47",
+							},
+							w.MailRow{
+								Ticked: w.TickedOff,
+								Unread: true,
+								From:   "Книжная ярмарка",
+								Topic:  "Сентябрьская рассылка: сорок новинок осени",
+								Start:  "Не видите картинки? Откройте письмо в браузере…",
+								Bytes:  "84 KB",
+								Date:   "2026-09-23 19:30",
+							},
+							w.MailRow{
+								Ticked: w.TickedOff,
+								From:   "Виктор Гончаров",
+								Topic:  "Re: Миграция на копии базы",
+								Start:  "Прогнал на копии, всё сошлось, кроме вложений старше 2019 года…",
+								Bytes:  "12 KB",
+								Date:   "2026-09-23 16:05",
+							},
+							w.MailRow{
+								Ticked: w.TickedOff,
+								From:   "Nextcloud",
+								Topic:  "Your storage is almost full",
+								Start:  "You are using 91% of your storage quota on cloud.example.org…",
+								Bytes:  "9 KB",
+								Date:   "2026-09-23 03:00",
+							},
+							w.MailRow{
+								Ticked:    w.TickedOff,
+								Important: true,
+								From:      "Артём Белов",
+								Topic:     "Скриншоты к релизу",
+								Start:     "Лови, шесть штук, как договаривались. Тёмная тема — отдельно…",
+								Attached:  6,
+								Bytes:     "5.8 MB",
+								Date:      "2026-09-22 14:21",
+							},
+							w.MailRow{
+								Ticked: w.TickedOff,
+								From:   "Вера Лебедева",
+								Topic:  "Дача: ключи и счётчики",
+								Start:  "Ключи оставила у соседки, показания сфотографировала…",
+								Bytes:  "6 KB",
+								Date:   "2026-09-21 11:40",
+							},
+							w.MailRow{
+								Ticked:   w.TickedOff,
+								From:     "Банк «Пример»",
+								Topic:    "Выписка за август",
+								Start:    "Выписка по счёту во вложении, пароль к файлу — последние четыре цифры…",
+								Attached: 1,
+								Bytes:    "240 KB",
+								Date:     "2026-09-20 09:00",
+							},
+						},
+					},
+					w.Empty{
+						Parts:   []w.EmptyPart{w.Span{Face: w.FaceAccent, Text: "Show 50 more", Href: "/app/mail/home/inbox?shown=100"}},
+						Variant: w.EmptyDusty,
+					},
+				},
+			},
+		},
+	}
+}
+
 // Mailbox2 is frame «Почта · ящика ещё нет» (s-mailbox-2).
 func Mailbox2() Screen {
 	return w.Shell{

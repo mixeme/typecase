@@ -2609,6 +2609,70 @@ func TestRunFollows(t *testing.T) {
 	}
 }
 
+// TestNoticesWatch (Carrel's task 293): a zone of messages that names a
+// stream watches it while the tab is seen, empty and hidden as it is: the
+// event puts «2 new letters» into it and the rail's row into the rail. The
+// tab hidden, the stream is closed; seen again, it is opened again. The
+// bite: without the live layer nothing comes, the zone stays hidden.
+func TestNoticesWatch(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	var opened, closed int32
+	stream := h.RegisterStream("arrivals", func(rw http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&opened, 1)
+		rw.Header().Set("Content-Type", "text/event-stream")
+		frag := page.Fragment{Body: []page.Part{w.Msg{Tone: w.MsgAccent, Icon: "inbox", Parts: []w.MsgPart{w.Text("2 new letters")}, End: &w.Push{Items: []w.PushPart{w.Button{Label: "Show", Small: true, Href: "#show"}}}}},
+			Extra: []page.ZonePart{{Zone: "rail", Body: []page.Part{zonePart(`<p>Inbox 14</p>`)}}}}.Render()
+		fmt.Fprintf(rw, "event: arrived\ndata: %s\n\n", strings.ReplaceAll(frag, "\n", " "))
+		rw.(http.Flusher).Flush()
+		select {
+		case <-r.Context().Done():
+			atomic.AddInt32(&closed, 1)
+		case <-time.After(20 * time.Second):
+		}
+	})
+	notices := w.Notices{Zone: "mail-new", Stream: stream, Changed: "arrived"}
+	body := `<div class="tc-root"><div data-tc-zone="rail"><p>Inbox 12</p></div>` + notices.Render() + `<p>the list</p></div>`
+	doc := browser.PageHTML(body, "")
+	const state = `(() => { const n = document.querySelector('[data-tc-zone="mail-new"]'), r = document.querySelector('[data-tc-zone="rail"]');
+		return (n.hidden ? "hidden" : n.textContent.trim()) + " | " + r.textContent.trim(); })()`
+	const hide = `(() => { Object.defineProperty(document, "hidden", { configurable: true, get: () => true }); document.dispatchEvent(new Event("visibilitychange")); return true; })()`
+	const show = `(() => { Object.defineProperty(document, "hidden", { configurable: true, get: () => false }); document.dispatchEvent(new Event("visibilitychange")); return true; })()`
+	var got, hiddenOpen, hiddenClosed string
+	// a test tab counts as hidden: it is made seen first
+	if err := h.Run(h.RegisterPage("notices-watch", doc), 900, 400,
+		chromedp.Evaluate(show, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+		chromedp.Evaluate(state, &got),
+		chromedp.Evaluate(hide, nil),
+		chromedp.Sleep(800*time.Millisecond),
+		chromedp.ActionFunc(func(context.Context) error {
+			hiddenOpen, hiddenClosed = fmt.Sprint(atomic.LoadInt32(&opened)), fmt.Sprint(atomic.LoadInt32(&closed))
+			return nil
+		}),
+		chromedp.Evaluate(show, nil),
+		chromedp.Sleep(1500*time.Millisecond),
+	); err != nil {
+		t.Fatal(err)
+	}
+	if want := "2 new lettersShow | Inbox 14"; got != want {
+		t.Errorf("with the layer: %q; want %q", got, want)
+	}
+	if hiddenOpen != "1" || hiddenClosed != "1" {
+		t.Errorf("the tab hidden: opened %s, closed %s; want the one stream closed", hiddenOpen, hiddenClosed)
+	}
+	if n := atomic.LoadInt32(&opened); n != 2 {
+		t.Errorf("the tab seen again: the stream opened %d times in all; want 2", n)
+	}
+	bare := strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1)
+	if err := h.Run(h.RegisterPage("notices-watch-bare", bare), 900, 400, chromedp.Sleep(1500*time.Millisecond), chromedp.Evaluate(state, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if want := "hidden | Inbox 12"; got != want {
+		t.Errorf("without the layer: %q; want %q", got, want)
+	}
+}
+
 // TestRunHiddenRests (Carrel's task 226): a run's line emptied by the event
 // that ends the run is hidden and keeps its stream's address; it is not
 // followed again — the stream is opened once, not after every end. A line

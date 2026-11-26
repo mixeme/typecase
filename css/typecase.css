@@ -519,6 +519,10 @@ a.tc-row__title:hover{text-decoration:underline}
   background:var(--tc-card);border-left:2px solid var(--tc-edge);border-radius:0 3px 3px 0}
 .tc-msg.is-row{display:flex;gap:9px;align-items:flex-start}
 .tc-msg.is-row > svg{flex:none;margin-top:1px}
+/* Сообщение полосы над страницей в строку с кнопками в конце («2 new letters · Show»,
+   задача Carrel 293): значок, слова и кнопка — по одной середине, и на телефоне, где
+   кнопка выше строки. Многострочное сообщение с кнопками (desktop-14) — как было. */
+.tc-notices > .tc-msg.is-row:has(> .tc-push){align-items:center}
 .tc-msg.is-alert{border-left-color:var(--tc-danger);color:var(--tc-danger);background:transparent;border:.5px solid var(--tc-danger);border-left-width:2px}
 .tc-msg.is-accent{border-left-color:var(--tc-accent)}
 /* кнопка после слов сообщения — с зазором */

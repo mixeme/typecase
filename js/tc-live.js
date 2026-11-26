@@ -761,7 +761,49 @@
 		};
 	}
 
+	// Messages that watch (Notices.Stream, Carrel's task 293): a zone of
+	// messages that names a stream of events follows it while the tab is
+	// seen, empty and hidden too — it waits for what comes. Each event named
+	// data-tc-changed carries a fragment, put as an answer is: «2 new
+	// letters · Show» and the rail's row. When the tab is hidden the streams
+	// are closed; when it is seen they are opened again. A zone that went, or
+	// came back with another stream, has its old one closed.
+	var watches = {};
+
+	function watch() {
+		var seen = {};
+		Array.prototype.forEach.call(document.querySelectorAll(".tc-notices[data-tc-zone][data-tc-stream]"), function (box) {
+			var name = box.getAttribute("data-tc-zone"), url = box.getAttribute("data-tc-stream");
+			seen[name] = url;
+			if (document.hidden || !window.EventSource || (watches[name] && watches[name].url === url)) return;
+			if (watches[name]) watches[name].source.close();
+			var source = new EventSource(url);
+			watches[name] = { url: url, source: source };
+			source.addEventListener(box.getAttribute("data-tc-changed") || "message", function (e) {
+				put(name, e.data);
+			});
+		});
+		Object.keys(watches).forEach(function (name) {
+			if (seen[name] !== watches[name].url) {
+				watches[name].source.close();
+				delete watches[name];
+			}
+		});
+	}
+
+	document.addEventListener("visibilitychange", function () {
+		if (!document.hidden) {
+			watch();
+			return;
+		}
+		Object.keys(watches).forEach(function (name) {
+			watches[name].source.close();
+		});
+		watches = {};
+	});
+
 	function follow() {
+		watch();
 		Array.prototype.forEach.call(document.querySelectorAll(".tc-runbar[data-tc-zone]"), function (bar) {
 			var name = bar.getAttribute("data-tc-zone"), stream = bar.getAttribute("data-tc-stream");
 			if (runs[name] || bar.hidden) return;

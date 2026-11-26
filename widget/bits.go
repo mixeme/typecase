@@ -119,10 +119,10 @@ func (Diag) noticesPart() {}
 // Notices — tc-notices
 //
 // Роль. Полоса сообщений над содержимым страницы или под полями диалога (итог проверки, задача Carrel 282), которую живой слой заменяет целиком.
-// Вход. Notices{Items, Zone}.
+// Вход. Notices{Items, Zone, Stream, Changed}.
 // Состояния. plain | empty.
 // Инварианты. Своих отступов нет — они у сообщений, как без полосы; пустая полоса скрыта; полоса печатает фрагмент своего кадра.
-// Поведение. Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает.
+// Поведение. Пустой ответ живого слоя убирает сообщения и скрывает полосу; ответ с сообщениями её показывает. Полоса с потоком (Stream) слушает его, пока вкладка видна, и пустая тоже: событие Changed кладёт свой фрагмент, как ответ (письма в открытой папке, задача Carrel 293, кадр `s-mailbox-33`).
 // Эталон. кадр `s-dup-6`, фрагмент `.tc-notices`.
 // Содержимое. Сообщения и технический блок под сообщением.
 // Чего нет. Своего вида: вид у сообщений.
@@ -132,6 +132,16 @@ type Notices struct {
 	// layer puts an answer for that name here (Carrel's task 226). The
 	// library has no names of its own.
 	Zone string
+	// Stream is the address of a stream of events the zone watches with the
+	// live layer while the tab is seen (Carrel's task 293: letters that came
+	// into the folder open in the tab). Each event named Changed carries a
+	// fragment, put as an answer is: the messages — «2 new letters» with
+	// Show — and whatever other zones changed, the rail's row. The zone is
+	// watched while empty and hidden too; when the tab is hidden the stream
+	// is closed, and opened again when the tab is seen. Without the layer
+	// nothing comes: the page is read anew when opened, and by Refresh.
+	Stream  string
+	Changed string
 }
 
 // Render prints the messages.
@@ -139,7 +149,7 @@ func (n Notices) Render() string { return n.html(nil) }
 
 func (n Notices) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-notices") + attr("data-tc-zone", n.Zone) + flag("hidden", len(n.Items) == 0) + `>`)
+	s.WriteString(`<div` + class(m, "tc-notices") + attr("data-tc-zone", n.Zone) + attr("data-tc-stream", n.Stream) + attr("data-tc-changed", pick(n.Stream != "", n.Changed)) + flag("hidden", len(n.Items) == 0) + `>`)
 	for _, it := range n.Items {
 		s.WriteString(it.html(nil))
 	}

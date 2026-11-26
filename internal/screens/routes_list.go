@@ -235,6 +235,7 @@ var Routes = []Route{
 	{Frame: "rest-2", Caption: "Адрес подтверждён", Screen: Rest2},
 	{Frame: "rest-3", Caption: "О программе", Screen: Rest3},
 	{Frame: "s-mailbox-1", Caption: "Почта · входящие", Screen: Mailbox1},
+	{Frame: "s-mailbox-33", Caption: "Входящие · пришли письма, пока папка открыта", Screen: Mailbox33},
 	{Frame: "s-mailbox-2", Caption: "Почта · ящика ещё нет", Screen: Mailbox2},
 	{Frame: "s-mailbox-3", Caption: "Входящие · выбраны три письма", Screen: Mailbox3},
 	{Frame: "s-mailbox-6", Caption: "Письмо · чтение", Screen: Mailbox6},
