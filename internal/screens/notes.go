@@ -3254,7 +3254,7 @@ func Notes8() Screen {
 							Items: []w.Field{
 								w.Field{
 									Label: "Display name",
-									Parts: []w.FieldPart{w.Input{Name: "fn", Placeholder: "Пётр Ковалёв", Label: "Display name", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "fn", Placeholder: "Given Family", Label: "Display name", Focus: true}},
 									Place: w.Grown,
 								},
 								w.Field{
