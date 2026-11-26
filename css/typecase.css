@@ -629,7 +629,8 @@ label.tc-tree__row{cursor:pointer}
 .tc-tree__row.is-on:has(> .tc-tree__box:not(:checked)){background:none;font-weight:400}
 .tc-tree__row:has(> .tc-tree__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
-.tc-tree--scroll{max-height:283px;overflow-y:auto;overscroll-behavior:contain}
+.tc-tree--scroll{flex:1 1 0;min-height:283px;overflow-y:auto;overscroll-behavior:contain}
+.tc-railsec:has(> .tc-tree--scroll){flex:1 1 0}
 .tc-tree--scroll > .tc-tree__row{flex:none}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
@@ -1636,7 +1637,6 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-field--flex2-280.tc-field--flex2-280{flex:2 1 280px}
 .tc-field--fix150.tc-field--fix150{flex:0 0 150px}
 .tc-field--flex3-320.tc-field--flex3-320{flex:3 1 320px}
-.tc-field--flex3-340.tc-field--flex3-340{flex:3 1 340px}
 .tc-field__hint--max150.tc-field__hint--max150{max-width:150px}
 .tc-field__hint--above-normal.tc-field__hint--above-normal{margin-top:var(--tc-gap)}
 .tc-field__hint--flush-fill.tc-field__hint--flush-fill{margin:0;flex:1}

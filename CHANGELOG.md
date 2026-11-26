@@ -8,6 +8,11 @@ do, not what the authors did.
 
 ### Breaking
 
+- **`FieldFlex3_340` is gone: «Related to» of a note's edit takes its own
+  row, `FieldW100`** (the owner, 26.11: «Related to growing must leave no
+  void» — its links wrapped onto a second line, and Link beside it stood at
+  the bottom with a void above). Use `FieldW100`; Date, Time, Tags and Link
+  share the rows above as before.
 - **`Nav.Opens` is gone; a `Scrim` no longer stands in `Main`, nor a `RailSec` in
   a `Sheet` or a sheet picker's rail** (Carrel's task 275): the current
   section pressed again opens the rail itself as a panel, not a sheet that
@@ -33,13 +38,16 @@ do, not what the authors did.
 ### Added
 
 - **A long tree scrolls by itself** (Carrel's task 289; the owner: the
-  Neighbours block only). `Tree.Scrolls` holds the tree to ten rows and a
-  half and scrolls it in its own block; the library's script brings the
+  Neighbours block only). `Tree.Scrolls` scrolls the tree in its own block;
+  in the rail the block takes the room down to the footer, ten rows and a
+  half at the least (the owner: «the list did not reach the footer»); the
+  library's script brings the
   chosen row to the block's middle, as near as the block goes — on load, on
   a swap and when a folded rail opens. The rail goes on scrolling with the
   page. Neighbours on the note page holds the whole notebook: «Записи» has
   16 notes in every frame that counts it (s-notes-2, -3, -20, -26, -27,
-  -36, s-publish-4, states-31 draw them all). `TestNeighboursShowTheOpenNote`.
+  -36, s-publish-4, states-31 draw them all). `TestNeighboursShowTheOpenNote`,
+  `TestNeighboursReachTheFooter`.
 - **Test only answers in its own zone** (Carrel's task 282; the owner: «this
   log says nothing to someone new — a banner or a badge»; «can Test only
   keep the password?»). `Notices` stands in a dialog — as a zone

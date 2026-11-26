@@ -484,7 +484,7 @@ var _ = add(
 				w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Dim{Parts: []w.Inline{w.Text("task · 14 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Ответить Анне по смете"},
 				w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Dim{Parts: []w.Inline{w.Text("contact")}, Size: w.Dim11, Place: w.Pushed}, Label: "Анна Ковалёва"},
 				w.MenuSep{},
-				w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}}, Width: w.FieldFlex3_340}}},
+				w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}}, Width: w.FieldW100}}},
 			w.Area{Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.", Variant: w.AreaBody, Name: "description", Label: "Text"},
 			w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — "), w.Mono{Text: "X-JTX-COLOR"}, w.Text(" and two more — are kept unchanged and not shown here.")}}}, ID: "note-edit", Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012", Multipart: true}}, View: w.DocViewFocus}}}, "s-notes-4", "tc-main"),
 	shell("variant", w.Main{Items: []w.MainPart{
@@ -928,7 +928,7 @@ var _ = add(
 				w.MenuItem{Mark: &w.Mark{Colour: "#3F6E8C"}, Trail: w.Dim{Parts: []w.Inline{w.Text("task · 14 Aug")}, Size: w.Dim11, Place: w.Pushed}, Label: "Ответить Анне по смете"},
 				w.MenuItem{Mark: &w.Mark{Colour: "#4A6B52"}, Trail: w.Dim{Parts: []w.Inline{w.Text("contact")}, Size: w.Dim11, Place: w.Pushed}, Label: "Анна Ковалёва"},
 				w.MenuSep{},
-				w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}}, Width: w.FieldFlex3_340}}},
+				w.MenuItem{Label: "By UID…", Tone: w.MenuToneDusty}}, Width: w.MenuWidthFull, Pop: w.MenuUnder}}}, Width: w.FieldW100}}},
 			w.Area{Text: "Договорились заморозить ветку в среду.\n\nПисьмо пользователям пишет Анна, черновик к вечеру вторника. Виктор проверяет миграцию на копии базы — если не успевает, переносим на следующий спринт.\n\n## Что делаем\n\n- [ ] проверить changelog\n- [x] попросить у Артёма скриншоты\n\nПеренос старых вложений в новую папку — Виктор посмотрит, сколько их вообще, и скажет в четверг.", Variant: w.AreaBody, Name: "description", Label: "Text"},
 			w.DocNote{Parts: []w.Inline{w.Text("Properties Carrel does not know — "), w.Mono{Text: "X-JTX-COLOR"}, w.Text(" and two more — are kept unchanged and not shown here.")}}}, ID: "note-edit", Action: "/app/notes/nextcloud/zapisi/9e31-40b7-c012", Multipart: true}}, View: w.DocViewFocus}}}}}, "s-notes-4", "tc-shell"),
 	shell("plain", w.Shell{Top: &w.Top{Brand: w.Brand{Logo: &w.Logo{Label: "Carrel", ViewBox: "4.79 -31.36 291.08 116.63"}}, Search: &w.Search{Query: w.Query{Placeholder: "Search everything…", Label: "Search everything…"}}, Actions: []w.TopAction{w.Split{Main: w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}, More: w.SplitDrop{Open: true, Arrow: w.Button{Icon: "chev", Kind: w.ButtonPrimary, Focus: true, Title: "More to create"}, Menu: w.Menu{Items: []w.MenuPart{

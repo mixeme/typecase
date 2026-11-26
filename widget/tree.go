@@ -131,9 +131,10 @@ type Tree struct {
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
 	Target string
-	// Scrolls makes a long tree scroll by itself, ten rows and a half tall,
-	// and the library's script brings the chosen row to its middle: a long
-	// notebook beside its open note in the rail (Carrel's task 289).
+	// Scrolls makes a long tree scroll by itself: in the rail it takes the
+	// room down to the footer, ten rows and a half at the least, and the
+	// library's script brings the chosen row to its middle — a long notebook
+	// beside its open note (Carrel's task 289).
 	Scrolls bool
 }
 

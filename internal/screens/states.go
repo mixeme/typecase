@@ -6113,7 +6113,7 @@ func States31() Screen {
 														Add: &w.TagAdd{Name: "related.add", Placeholder: "Title or UID", Label: "Add a link"},
 													},
 												},
-												Width: w.FieldFlex3_340,
+												Width: w.FieldW100,
 											},
 										},
 									},

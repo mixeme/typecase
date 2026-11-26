@@ -177,7 +177,6 @@ const (
 	FieldFill300
 	FieldFlex2_280
 	FieldFlex3_320
-	FieldFlex3_340
 	FieldMax640Fill460
 	FieldW580   // the reading column of a settings page (the owner, 27.10)
 	FieldInline // label and control in one line
@@ -187,7 +186,7 @@ func (w FieldWidth) class() string {
 	return [...]string{"", "tc-field--xs", "tc-field--sm", "tc-field--md", "tc-field--lg", "tc-field--xl", "tc-field--full",
 		"tc-field--w100", "tc-field--w280", "tc-field--fix96", "tc-field--fix130", "tc-field--fix150", "tc-field--fixauto",
 		"tc-field--fill120", "tc-field--fill200", "tc-field--fill300", "tc-field--flex2-280", "tc-field--flex3-320",
-		"tc-field--flex3-340", "tc-field--max640-fill460", "tc-field--w580", "tc-field--inline"}[w]
+		"tc-field--max640-fill460", "tc-field--w580", "tc-field--inline"}[w]
 }
 
 // Field — tc-field

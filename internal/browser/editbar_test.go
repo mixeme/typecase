@@ -3,6 +3,7 @@ package browser_test
 import (
 	"io"
 	"net/http"
+	"net/http/httptest"
 	"strings"
 	"sync"
 	"testing"
@@ -10,6 +11,8 @@ import (
 
 	"carrel.dev/typecase/internal/browser"
 	"carrel.dev/typecase/internal/screens"
+	"carrel.dev/typecase/page"
+	w "carrel.dev/typecase/widget"
 	"github.com/chromedp/chromedp"
 )
 
@@ -276,9 +279,10 @@ func TestTestOnlyAnswersInItsZone(t *testing.T) {
 }
 
 // TestNeighboursShowTheOpenNote (Carrel's task 289): the rail's Neighbours
-// holds the whole notebook and scrolls in its own block; the script puts the
-// open note in the block's middle, or as near it as the block goes, and the
-// rest of the rail does not move.
+// holds the whole notebook and scrolls in its own block, which reaches down
+// to the rail's footer (the owner: «the list did not reach the footer»); the
+// script puts the open note in the block's middle, or as near it as the block
+// goes, and the rest of the rail does not move.
 func TestNeighboursShowTheOpenNote(t *testing.T) {
 	needChrome(t)
 	r, ok := screens.Find("s-notes-2")
@@ -292,7 +296,8 @@ func TestNeighboursShowTheOpenNote(t *testing.T) {
 		const rail = document.querySelector(".tc-shell__rail");
 		return [Math.round(tree.scrollTop), Math.round(o.top - t.top), Math.round(t.bottom - o.bottom),
 			Math.round((o.top + o.bottom) / 2 - (t.top + t.bottom) / 2), Math.round(rail.scrollTop), Math.round(window.scrollY),
-			Math.round(tree.scrollHeight - tree.clientHeight), Math.round(o.height)]; })()`
+			Math.round(tree.scrollHeight - tree.clientHeight), Math.round(o.height),
+			Math.round(document.querySelector(".tc-railfoot").getBoundingClientRect().top - t.bottom)]; })()`
 	for _, c := range []struct {
 		row    string
 		centre bool // the row can stand in the middle: not near the end
@@ -309,10 +314,13 @@ func TestNeighboursShowTheOpenNote(t *testing.T) {
 		html = strings.Replace(html, mark, strings.Replace(mark, `class="tc-tree__row"`, `class="is-on tc-tree__row"`, 1), 1)
 		url := h.RegisterPage("neighbours-"+itoa(len(c.row)), html)
 		var got []int
-		if err := h.Run(url, 1351, 1000, chromedp.Evaluate(look, &got)); err != nil {
+		if err := h.Run(url, 1351, 640, chromedp.Evaluate(look, &got)); err != nil {
 			t.Fatal(err)
 		}
 		scroll, above, below, off, rail, win, most := got[0], got[1], got[2], got[3], got[4], got[5], got[6]
+		if got[8] != 16 {
+			t.Errorf("%s: Neighbours ends %d px above the rail's footer; want 16, the rail's gap — the block reaches down to the footer", c.row, got[8])
+		}
 		if got[7] != 26 {
 			t.Errorf("%s: a row of Neighbours is %d px high; want 26, as in any tree — the block scrolls, the rows do not shrink", c.row, got[7])
 		}
@@ -331,5 +339,49 @@ func TestNeighboursShowTheOpenNote(t *testing.T) {
 		if rail != 0 || win != 0 {
 			t.Errorf("%s: the rail scrolled by %d and the page by %d; want only the block to scroll", c.row, rail, win)
 		}
+	}
+}
+
+// TestNeighboursReachTheFooter (Carrel's task 289): on a window taller than
+// the notebook the block of Neighbours still ends at the rail's footer, and
+// it does not scroll — on a page as Carrel serves it, the shell filling the
+// window.
+func TestNeighboursReachTheFooter(t *testing.T) {
+	needChrome(t)
+	r, ok := screens.Find("s-notes-20")
+	if !ok {
+		t.Fatal("no route s-notes-20")
+	}
+	root, ok := r.Screen().(w.Root)
+	if !ok {
+		t.Fatal("s-notes-20 is not a page's root")
+	}
+	html, err := page.Document{Title: "Note", Assets: page.At("/static/tc"), Root: root}.Render()
+	if err != nil {
+		t.Fatal(err)
+	}
+	mux := http.NewServeMux()
+	mux.Handle("/static/tc/", http.StripPrefix("/static/tc", page.Static()))
+	mux.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = rw.Write([]byte(html))
+	})
+	srv := httptest.NewServer(mux)
+	defer srv.Close()
+	h := browser.NewHarness(t)
+	var got []int
+	if err := h.Run(srv.URL+"/", 1351, 1300, chromedp.Evaluate(`(() => { const tree = document.querySelector(".tc-tree--scroll");
+		const t = tree.getBoundingClientRect(), f = document.querySelector(".tc-railfoot").getBoundingClientRect();
+		return [Math.round(f.top - t.bottom), Math.round(tree.scrollHeight - tree.clientHeight), Math.round(f.bottom), innerHeight]; })()`, &got)); err != nil {
+		t.Fatal(err)
+	}
+	if got[2] < got[3]-60 {
+		t.Fatalf("the rail's footer ends at %d on a window of %d; want the shell to fill the window", got[2], got[3])
+	}
+	if got[0] != 16 {
+		t.Errorf("Neighbours ends %d px above the rail's footer; want 16, the rail's gap", got[0])
+	}
+	if got[1] > 0 {
+		t.Errorf("Neighbours scrolls by %d px on a window taller than the notebook; want it whole", got[1])
 	}
 }
