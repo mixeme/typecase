@@ -1495,7 +1495,7 @@ func Phone10() Screen {
 													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "nextcloud|zapisi"}},
 													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Записи"}}},
 													{Parts: []w.CellPart{w.Text("journal")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("16")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("2 h ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},

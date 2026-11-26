@@ -3254,7 +3254,7 @@ func Notes8() Screen {
 							Items: []w.Field{
 								w.Field{
 									Label: "Display name",
-									Parts: []w.FieldPart{w.Input{Name: "fn", Value: "Пётр Ковалёв", Label: "Display name", Focus: true}},
+									Parts: []w.FieldPart{w.Input{Name: "fn", Placeholder: "Пётр Ковалёв", Label: "Display name", Focus: true}},
 									Place: w.Grown,
 								},
 								w.Field{
@@ -3270,9 +3270,7 @@ func Notes8() Screen {
 							},
 						},
 						w.Dim{
-							Parts: []w.Inline{
-								w.Text("The first word is Given, the rest Family — «Пётр Ковалёв», not «Ковалёв Пётр». Everything else is filled in on the card."),
-							},
+							Parts:   []w.Inline{w.Text("Everything else is filled in on the card.")},
 							Size:    w.Dim11_5,
 							Variant: w.DimWrap,
 						},
