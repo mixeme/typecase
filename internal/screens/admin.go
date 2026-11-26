@@ -1075,6 +1075,35 @@ func Admin3() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Users’ own mailboxes", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "mailboxes",
+												Value: "on",
+												Parts: []w.CheckPart{w.Text("Let users connect their own mailboxes over IMAP and SMTP")},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above."),
+												},
+												Variant: w.HintColumn,
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Text("When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again."),
+										},
+										Space: w.MsgFlush,
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Test"},
 								Items: []w.FieldSetPart{
 									w.Field{
@@ -1328,6 +1357,35 @@ func Admin32() Screen {
 								},
 							},
 							w.FieldSet{
+								Rubric: w.Rubric{Text: "Users’ own mailboxes", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "mailboxes",
+												Value: "on",
+												Parts: []w.CheckPart{w.Text("Let users connect their own mailboxes over IMAP and SMTP")},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above."),
+												},
+												Variant: w.HintColumn,
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Text("When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again."),
+										},
+										Space: w.MsgFlush,
+										Place: w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
 								Rubric: w.Rubric{Text: "Test"},
 								Items: []w.FieldSetPart{
 									w.Field{
@@ -1552,6 +1610,35 @@ func Admin33() Screen {
 										},
 										OwnLine: true,
 										Place:   w.Grown,
+									},
+								},
+							},
+							w.FieldSet{
+								Rubric: w.Rubric{Text: "Users’ own mailboxes", Items: []w.RubricPart{w.Badge{Label: "off"}}},
+								Items: []w.FieldSetPart{
+									w.Field{
+										Parts: []w.FieldPart{
+											w.Check{
+												Name:  "mailboxes",
+												Value: "on",
+												Parts: []w.CheckPart{w.Text("Let users connect their own mailboxes over IMAP and SMTP")},
+											},
+											w.FieldHint{
+												Parts: []w.Inline{
+													w.Text("Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above."),
+												},
+												Variant: w.HintColumn,
+											},
+										},
+										OwnLine: true,
+										Place:   w.Grown,
+									},
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Text("When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again."),
+										},
+										Space: w.MsgFlush,
+										Place: w.Grown,
 									},
 								},
 							},

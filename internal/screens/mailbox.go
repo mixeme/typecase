@@ -3252,6 +3252,7 @@ func Mailbox29() Screen {
 												Parts: []w.Inline{
 													w.Text("Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above."),
 												},
+												Variant: w.HintColumn,
 											},
 										},
 										OwnLine: true,

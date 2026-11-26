@@ -26382,6 +26382,12 @@ password  4c1-tide-oven</div>
               <span class="tc-field__hint tc-field__hint--max580">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
           </div>
           <div class="tc-fset">
+            <div class="tc-rubric">Users’ own mailboxes <span class="tc-badge">off</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mailboxes" value="on"><span class="tc-tickrow__tick is-off"></span>Let users connect their own mailboxes over IMAP and SMTP</label>
+              <span class="tc-field__hint tc-field__hint--max580">Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
+            <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again.</div>
+          </div>
+          <div class="tc-fset">
             <div class="tc-rubric">Test</div>
             <div class="tc-field tc-field--lg"><label>Send test message to</label>
               <span class="tc-line tc-line--normal"><input class="tc-in is-ph tc-in--fill" type="text" name="to" placeholder="you@example.org" aria-label="Send test message to"><button class="tc-btn" type="submit" formaction="/admin/settings/mail-test">Send test</button></span></div>
@@ -26390,7 +26396,7 @@ password  4c1-tide-oven</div>
       </div></div>
     </div>
   </div>
-  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; кнопка не выключается никогда: без сервера в поле Host ответ на неё — «Mail is not configured: there is nothing to send through yet.» (кнопка, выключенная по сохранённому, без сценария не включилась бы от набранного; задача 195 п. 5). <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах. <b>Письма людей — только через настроенную почту</b> (владелец, 19.10): пока почта не сохранена, флажок выключен с причиной; адреса отправителя и лимитов нет, пока отправка выключена, — флажок и Save, и они появляются (s-admin-32).</figcaption>
+  <figcaption>Две формы становятся двумя блоками одной формы с рубрикаторами. Пароль SMTP стоит здесь же, рядом с узлом и портом: это один релей, а не отдельный экран. Порт — 96&nbsp;px, а не во всю ширину. «Letters from users» — отдельный блок под Mail: сначала завести релей, потом решать, пускать ли жильцов писать через него. Проверка сервера DAV уехала на свою страницу — она про чужой сервер, а не про настройки этого. <b>Проба письма — кнопка той же формы со своим адресом</b> (форма не держит форму; задача 158): она шлёт то, что набрано в полях почты сейчас, сохранено оно или нет, — так релей проверяют до «Save» — и сама ничего не сохраняет; кнопка не выключается никогда: без сервера в поле Host ответ на неё — «Mail is not configured: there is nothing to send through yet.» (кнопка, выключенная по сохранённому, без сценария не включилась бы от набранного; задача 195 п. 5). <b>Public address</b> только читается: его задаёт <code>CARREL_PUBLIC_URL</code>, и от него строятся ссылки в письмах. <b>Письма людей — только через настроенную почту</b> (владелец, 19.10): пока почта не сохранена, флажок выключен с причиной; адреса отправителя и лимитов нет, пока отправка выключена, — флажок и Save, и они появляются (s-admin-32). <b>Users’ own mailboxes</b> — последний блок перед пробой, выключен по умолчанию; почему — s-mailbox-29.</figcaption>
   </figure>
 
 <figure>
@@ -26459,6 +26465,12 @@ password  4c1-tide-oven</div>
             <div class="tc-field tc-field--xs"><label>Letter, MB</label><input class="tc-in is-mono" type="text" name="letter" value="8" aria-label="Letter, MB"></div>
             <div class="tc-field tc-field--xs"><label>Recipients</label><input class="tc-in is-mono" type="text" name="recipients" value="10" aria-label="Recipients"></div>
             <div class="tc-field tc-field--xs"><label>Letters a day</label><input class="tc-in is-mono" type="text" name="perDay" value="50" aria-label="Letters a day"></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Users’ own mailboxes <span class="tc-badge">off</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mailboxes" value="on"><span class="tc-tickrow__tick is-off"></span>Let users connect their own mailboxes over IMAP and SMTP</label>
+              <span class="tc-field__hint tc-field__hint--max580">Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
+            <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again.</div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
@@ -26532,6 +26544,12 @@ password  4c1-tide-oven</div>
             <div class="tc-rubric">Letters from users <span class="tc-badge">off</span></div>
             <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="people" value="on"><span class="tc-tickrow__tick is-off"></span>Let users send letters and links from Carrel</label>
               <span class="tc-field__hint tc-field__hint--max580">Everyone signed in may send mail through this relay, from this domain. With self-registration on, that is an open sending form.</span></div>
+          </div>
+          <div class="tc-fset">
+            <div class="tc-rubric">Users’ own mailboxes <span class="tc-badge">off</span></div>
+            <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mailboxes" value="on"><span class="tc-tickrow__tick is-off"></span>Let users connect their own mailboxes over IMAP and SMTP</label>
+              <span class="tc-field__hint tc-field__hint--max580">Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
+            <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again.</div>
           </div>
           <div class="tc-fset">
             <div class="tc-rubric">Test</div>
@@ -30257,7 +30275,7 @@ SMTP  mail.home.example:465  TLS
           <div class="tc-fset">
             <div class="tc-rubric">Users’ own mailboxes <span class="tc-badge">off</span></div>
             <div class="tc-field is-own-line tc-grow"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="mailboxes" value="on"><span class="tc-tickrow__tick is-off"></span>Let users connect their own mailboxes over IMAP and SMTP</label>
-              <span class="tc-field__hint">Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
+              <span class="tc-field__hint tc-field__hint--max580">Carrel then keeps each person’s mailbox password, usually the most valuable one they have. Their letters go through their own mail server, not the relay above.</span></div>
             <div class="tc-msg tc-msg--flush tc-grow">When off, there is no mail anywhere in Carrel. Connected mailboxes are kept and come back when it is on again.</div>
           </div>
           <div class="tc-fset">
