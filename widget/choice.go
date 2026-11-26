@@ -147,7 +147,7 @@ func (g Seg) seg(m mix) string {
 			s.WriteString(`<label class="tc-seg__opt"><input class="tc-seg__box" type="` + kind + `"` + attr("name", g.Name) + attr("value", o.Value) +
 				attr("aria-label", pick(o.Label == "", o.Title)) + flag("checked", o.On) + attr("data-tc-disables", o.Disables) + `>`)
 			if o.Icon != "" {
-				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
+				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"` + class(nil, pick(o.Label == "", iconAlone)) + `>` + o.Icon.use() + `</svg>`)
 			}
 			s.WriteString(esc(o.Label) + `</label>`)
 			continue
@@ -158,7 +158,7 @@ func (g Seg) seg(m mix) string {
 			s.WriteString(`<a` + class(nil, is("on", o.On), "tc-seg__opt") + attr("href", o.Href) + attr("data-tc-swap", g.Swap) + attr("aria-current", pick(o.On, "true")) +
 				attr("aria-label", pick(o.Label == "", o.Title)) + attr("title", pick(o.Label == "", o.Title)) + `>`)
 			if o.Icon != "" {
-				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
+				s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"` + class(nil, pick(o.label() == "", iconAlone)) + `>` + o.Icon.use() + `</svg>`)
 			}
 			s.WriteString(esc(o.label()) + `</a>`)
 			continue
@@ -171,7 +171,7 @@ func (g Seg) seg(m mix) string {
 		s.WriteString(`<button` + class(nil, is("on", o.On), "tc-seg__opt") + ` type="button" role="radio"` +
 			attr("aria-checked", pick(o.On, "true")) + attr("aria-label", pick(o.Label == "", o.Title)) + `>`)
 		if o.Icon != "" {
-			s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none">` + o.Icon.use() + `</svg>`)
+			s.WriteString(`<svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.4" fill="none"` + class(nil, pick(o.Label == "", iconAlone)) + `>` + o.Icon.use() + `</svg>`)
 		}
 		s.WriteString(esc(o.Label) + `</button>`)
 	}

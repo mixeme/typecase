@@ -144,6 +144,14 @@ do, not what the authors did.
 
 ### Fixed
 
+- **An icon beside text stands 1 px lower, between the middles of the
+  capitals and the small letters** (Carrel's task 287; the owner, 26.11: «all
+  the icons»). «New note»'s pen stood 1.5–2 px above the small letters. An
+  icon with no text — a `Button` without `Label`, `Close`, a `Seg` option
+  without words — carries `tc-ico--alone` and stays in the middle of its
+  control, and so does an icon whose label a bar folds. Nothing to change in
+  code that prints the widgets; HTML written by hand marks an icon-only
+  control's icon with `tc-ico--alone`.
 - **A publish sheet without mail has its next step** (Carrel's task 285;
   the owner: «no main button — for a second it is unclear what to do
   next»). In s-publish-22, where the instance sends no letters, Copy beside

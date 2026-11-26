@@ -62,6 +62,11 @@ func (v ButtonVariant) class() string {
 		"tc-btn--jc-center-fill"}[v]
 }
 
+// iconAlone marks the icon of a control that has no text: it stays in the
+// middle of its box, while an icon beside text sits 1 px lower, between the
+// middles of the capitals and the small letters (owner, 26.11.2026).
+const iconAlone = "tc-ico--alone"
+
 // IconBox is the box a leading icon is drawn in when it is not the default.
 type IconBox int
 
@@ -265,7 +270,7 @@ func (b Button) html(m mix) string {
 		s.WriteString(b.Tick.html(nil))
 	}
 	if b.Icon != "" {
-		s.WriteString(`<svg viewBox="0 0 24 24"` + class(nil, b.IconBox.class()) + `>` + b.Icon.use() + `</svg>`)
+		s.WriteString(`<svg viewBox="0 0 24 24"` + class(nil, b.IconBox.class(), pick(b.Label == "" && b.Tick == nil, iconAlone)) + `>` + b.Icon.use() + `</svg>`)
 	}
 	switch {
 	case b.Label == "":
@@ -315,9 +320,9 @@ func (c Close) Render() string { return c.html(nil) }
 
 func (c Close) html(m mix) string {
 	if c.Href != "" {
-		return `<a` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("href", c.Href) + attr("title", c.Label) + attr("aria-label", c.Label) + `><svg viewBox="0 0 24 24">` +
+		return `<a` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("href", c.Href) + attr("title", c.Label) + attr("aria-label", c.Label) + `><svg viewBox="0 0 24 24"` + class(nil, iconAlone) + `>` +
 			Icon("close").use() + `</svg></a>`
 	}
-	return `<button` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("title", c.Label) + attr("aria-label", c.Label) + ` type="button"><svg viewBox="0 0 24 24">` +
+	return `<button` + class(m, "tc-btn", "tc-close", c.Place.class()) + attr("title", c.Label) + attr("aria-label", c.Label) + ` type="button"><svg viewBox="0 0 24 24"` + class(nil, iconAlone) + `>` +
 		Icon("close").use() + `</svg></button>`
 }

@@ -312,10 +312,14 @@ label.tc-seg__opt{position:relative;cursor:pointer}
 /* Буквы по середине (владелец 08.11): Public Sans оставляет под строкой больше
    места, чем над заглавными, и текст однострочных полей, выборов и кнопок стоял
    на 1 px выше середины; поле ввода (input) браузер и так ставит по середине.
-   Поле сверху на 2 px больше — текст ниже на 1 px; значки остаются, где были.
-   Против полей вариантов (padding:0 Npx) — вес id. */
+   Поле сверху на 2 px больше — текст ниже на 1 px; значок поля −2 px снова
+   по середине. Значок рядом с текстом сдвинут ещё на 1 px вниз, меж серединой
+   заглавных и строчных (владелец 26.11, задача 287), — сдвигом, не полем:
+   высота кнопки та же. Значок без текста (tc-ico--alone, и значок, чья подпись
+   свёрнута) остаётся по середине. Против полей вариантов — вес id. */
 :is(.tc-btn,.tc-seg__opt,.tc-segfold__current,.tc-in:not(input,textarea,.tc-in--tags,.tc-in--cols)):not(#_){padding-top:2px;padding-bottom:0}
 :is(.tc-btn,.tc-seg__opt,.tc-segfold__current,.tc-in) > svg{margin-top:-2px}
+:is(.tc-btn,.tc-seg__opt,.tc-segfold__current,.tc-in) > svg:not(.tc-ico--alone){translate:0 1px}
 /* Отметка-флажок в поле формы — отметка, а не подпись поля. */
 .tc-field > label.tc-check{font-size:12.5px;letter-spacing:normal;color:inherit}
 /* Стрелка в правых 24 px; маска цвета поля закрывает хвост текста. */
@@ -881,6 +885,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Select all и Clear selection — иконками, пока полосе с действиями письма тесно (s-mailbox-3 до ~1260). */
 @container tcbox (max-width:1280px){
   .tc-bar--sel:where(:not([data-tc-fold])) > .tc-bar__right .tc-btn > .tc-btn__label{display:none}
+  .tc-bar--sel:where(:not([data-tc-fold])) > .tc-bar__right .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   .tc-bar--sel:where(:not([data-tc-fold])) > .tc-bar__right .tc-btn:has(> .tc-btn__label){padding:0 9px}
 }
 @container tcbox (max-width:1190px){
@@ -930,12 +935,14 @@ label.tc-menu__item{position:relative;cursor:pointer}
 /* Панель документа уже 740: кнопки теряют подписи, не действия, и стоят плотнее. */
 @container tcbox (max-width:740px){
   .tc-docbar:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar:where(:not([data-tc-fold])) .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   .tc-docbar:where(:not([data-tc-fold])) .tc-btn{padding:0 7px}
 }
 /* Панели правки заметки без второго ранга с подписями нужно около 850: с 860 её кнопки теряют подписи —
    раньше, чем третий ранг уходит под «⋯» (владелец, 09.11: место есть — кнопки на виду). */
 @container tcbox (max-width:860px){
   .tc-docbar--edit:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-docbar--edit:where(:not([data-tc-fold])) .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   .tc-docbar--edit:where(:not([data-tc-fold])) .tc-btn{padding:0 7px}
 }
 @container tcbox (max-width:800px){
@@ -945,6 +952,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-bar:where(:not([data-tc-fold])) .tc-segfold__pick{display:block}
   /* Панель выделения теряет подписи, не действия. */
   .tc-bar--sel:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-bar--sel:where(:not([data-tc-fold])) .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   .tc-bar--sel:where(:not([data-tc-fold])) .tc-btn:has(> .tc-btn__label){padding:0 9px}
   .tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more,.tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:where(:not([data-tc-fold])):has(.is-2nd) .tc-bar__more + .tc-menu{display:block}
@@ -1056,6 +1064,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-drop:has(> .tc-bar__more){display:inline-flex}
   .tc-bar:where(:not([data-tc-fold])):has(> .is-3rd) .tc-bar__more + .tc-menu,.tc-docbar:where(:not([data-tc-fold])):has(.is-3rd) .tc-bar__more + .tc-menu{display:block}
   .tc-bar:where(:not([data-tc-fold])) .tc-btn > .tc-btn__label{display:none}
+  .tc-bar:where(:not([data-tc-fold])) .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   .tc-bar:has(> .tc-range,> .tc-in,> .tc-search){flex-wrap:wrap}
   /* Панель выделения: счёт первой строкой, все действия — второй (разделитель становится
      переносом), а не одна кнопка, упавшая вниз сама (решение владельца 02.11). */
@@ -1071,6 +1080,7 @@ label.tc-menu__item{position:relative;cursor:pointer}
   .tc-sheet__foot{flex-wrap:wrap}
   /* строка хода: кнопка со складной подписью остаётся значком, как в баре */
   .tc-runbar .tc-btn > .tc-btn__label{display:none}
+  .tc-runbar .tc-btn > svg:has(+ .tc-btn__label){translate:none}
   /* Таблица с главной колонкой — карточки (Р-66): имя и «⋯» первой строкой, под ними
      главное с подписью колонки; остальные колонки уходят, кнопки строки — в «⋯».
      Имя — первая ячейка с файлом, а где файла нет — первая непустая, кроме галочки; справа — «⋯» и кнопка перед
@@ -1152,6 +1162,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
 .tc-bar--sel[data-tc-fold~="end"] > .tc-bar__right .tc-btn > .tc-btn__label,
 .tc-bar--sel[data-tc-fold~="2nd"] .tc-btn > .tc-btn__label,
 :is(.tc-bar,.tc-docbar)[data-tc-fold~="labels"] .tc-btn > .tc-btn__label{display:none}
+.tc-bar--sel[data-tc-fold~="end"] > .tc-bar__right .tc-btn > svg:has(+ .tc-btn__label),
+.tc-bar--sel[data-tc-fold~="2nd"] .tc-btn > svg:has(+ .tc-btn__label),
+:is(.tc-bar,.tc-docbar)[data-tc-fold~="labels"] .tc-btn > svg:has(+ .tc-btn__label){translate:none}
 .tc-bar--sel[data-tc-fold~="end"] > .tc-bar__right .tc-btn:has(> .tc-btn__label),
 .tc-bar--sel[data-tc-fold~="2nd"] .tc-btn:has(> .tc-btn__label){padding:0 9px}
 .tc-docbar[data-tc-fold~="labels"] .tc-btn{padding:0 7px}
