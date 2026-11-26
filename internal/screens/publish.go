@@ -4506,7 +4506,7 @@ func Publish29() Screen {
 					},
 					w.Head{
 						Title: &w.HeadTitle{Text: "Записи"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("3 notes")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("16 notes")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Filter{
@@ -4541,7 +4541,7 @@ func Publish29() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{

@@ -366,7 +366,7 @@ func Print8() Screen {
 					},
 				},
 			},
-			w.PrintFoot{Text: "Carrel · notes · 4 notes · captured 2026-08-15 09:41 · 2 of 2 notebooks"},
+			w.PrintFoot{Text: "Carrel · notes · 17 notes · captured 2026-08-15 09:41 · 2 of 2 notebooks"},
 		},
 		Variant: w.PagePrint,
 	}

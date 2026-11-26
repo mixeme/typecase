@@ -1035,7 +1035,7 @@ func Phone8() Screen {
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
 							Href:    "/app/notes",
-							Meta:    "6",
+							Meta:    "19",
 							Current: true,
 						},
 					},
@@ -1078,7 +1078,7 @@ func Phone8() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Split{
@@ -1104,7 +1104,7 @@ func Phone8() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "17"}}, Secondary: true},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -1134,7 +1134,7 @@ func Phone8() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -1188,7 +1188,7 @@ func Phone9() Screen {
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
 							Href:    "/app/notes",
-							Meta:    "6",
+							Meta:    "19",
 							Current: true,
 						},
 					},
@@ -1231,7 +1231,7 @@ func Phone9() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Split{
@@ -1272,7 +1272,7 @@ func Phone9() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{

@@ -40,7 +40,7 @@ func Notes1() Screen {
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
 							Href:    "/app/notes",
-							Meta:    "6",
+							Meta:    "19",
 							Current: true,
 						},
 					},
@@ -80,7 +80,7 @@ func Notes1() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Split{
@@ -106,7 +106,7 @@ func Notes1() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "17"}}, Secondary: true},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -140,7 +140,7 @@ func Notes1() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -329,7 +329,7 @@ func Notes33() Screen {
 							Mark:    w.Mark{Kind: w.MarkMulti},
 							Label:   "Combined notebook",
 							Href:    "/app/notes",
-							Meta:    "6",
+							Meta:    "19",
 							Current: true,
 						},
 					},
@@ -369,7 +369,7 @@ func Notes33() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Split{
@@ -395,7 +395,7 @@ func Notes33() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "4"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "17"}}, Secondary: true},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
 					w.List{
@@ -429,7 +429,7 @@ func Notes33() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -559,7 +559,7 @@ func Notes31() Screen {
 							Mark:   w.Mark{Kind: w.MarkMulti},
 							Label:  "Combined notebook",
 							Href:   "/app/notes",
-							Meta:   "6",
+							Meta:   "19",
 						},
 					},
 				},
@@ -604,7 +604,7 @@ func Notes31() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Colour: "#4A6B52", Size: w.MarkH20}, Text: "Записи"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 3 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("nextcloud · 16 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Button{Label: "New note", Icon: "plus", Kind: w.ButtonPrimary},
@@ -627,7 +627,7 @@ func Notes31() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "16"}}, Secondary: true},
 					},
 					w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 2}},
 					w.List{
@@ -650,7 +650,7 @@ func Notes31() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -3674,7 +3674,7 @@ func Notes10() Screen {
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined notebook",
 								Href:    "/app/notes",
-								Meta:    "6",
+								Meta:    "19",
 								Current: true,
 							},
 						},
@@ -3709,7 +3709,7 @@ func Notes10() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}}},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
@@ -3743,7 +3743,7 @@ func Notes10() Screen {
 								},
 							},
 						},
-						w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 						w.List{
 							Rows: []w.ListRow{
 								w.ExcerptRow{
@@ -3924,7 +3924,7 @@ func Notes35() Screen {
 								Mark:    w.Mark{Kind: w.MarkMulti},
 								Label:   "Combined notebook",
 								Href:    "/app/notes",
-								Meta:    "6",
+								Meta:    "19",
 								Current: true,
 							},
 						},
@@ -3959,7 +3959,7 @@ func Notes35() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 4 notes · VJOURNAL")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 17 notes · VJOURNAL")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "New note", Icon: "quill", Kind: w.ButtonPrimary}}},
 						},
 						w.ListGroup{Title: w.Rubric{Text: "August 2026", Form: w.RubricInline}, Count: &w.Num{Value: 3}},
@@ -3993,7 +3993,7 @@ func Notes35() Screen {
 								},
 							},
 						},
-						w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+						w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 						w.List{
 							Rows: []w.ListRow{
 								w.ExcerptRow{

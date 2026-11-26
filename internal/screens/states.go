@@ -5343,12 +5343,12 @@ func States26() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "16"}}, Secondary: true},
 					},
 					w.Runbar{
 						Meter: w.Meter{Percent: 62},
 						Parts: []w.RunbarPart{
-							w.Say{Full: "Polling · 1 of 2 answered · 3 notes", Short: "1 of 2 · 3 notes"},
+							w.Say{Full: "Polling · 1 of 2 answered · 16 notes", Short: "1 of 2 · 16 notes"},
 							w.Mono{Text: "0.8 s", Place: w.Pushed},
 						},
 					},
@@ -5371,7 +5371,7 @@ func States26() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
@@ -5465,7 +5465,7 @@ func States27() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Mark: &w.Mark{Kind: w.MarkMulti, Size: w.MarkH20}, Text: "Combined notebook"},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 3 notes · VJOURNAL")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("2 of 3 notebooks · 16 notes · VJOURNAL")}}},
 						Acts: &w.Acts{
 							Items: []w.ActsPart{
 								w.Split{
@@ -5491,12 +5491,12 @@ func States27() Screen {
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
 						},
-						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "3"}}, Secondary: true},
+						Right: &w.BarRight{Items: []w.BarPart{w.Mono{Text: "16"}}, Secondary: true},
 					},
 					w.Runbar{
 						Result: w.RunFailed,
 						Parts: []w.RunbarPart{
-							w.Say{Full: "Polled · 1 of 2 answered · 3 notes ·", Short: "1 of 2 · 3 notes ·"},
+							w.Say{Full: "Polled · 1 of 2 answered · 16 notes ·", Short: "1 of 2 · 16 notes ·"},
 							w.Drop{
 								Trigger: w.Button{Label: "1 failed", Menu: true, Kind: w.ButtonDanger, Small: true},
 								Menu: w.Menu{
@@ -5534,7 +5534,7 @@ func States27() Screen {
 							},
 						},
 					},
-					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 1}},
+					w.ListGroup{Title: w.Rubric{Text: "July 2026", Form: w.RubricInline}, Count: &w.Num{Value: 14}},
 					w.List{
 						Rows: []w.ListRow{
 							w.ExcerptRow{
