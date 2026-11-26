@@ -34,12 +34,16 @@ do, not what the authors did.
 
 - **Test only answers in its own zone** (Carrel's task 282; the owner: «this
   log says nothing to someone new — a banner or a badge»; «can Test only
-  keep the password?»). `Notices` stands in a dialog — under the connect
-  form's fields, a zone (`Notices{Zone}`, hidden while empty) — and takes a
+  keep the password?»). `Notices` stands in a dialog — as a zone
+  (`Notices{Zone}`, hidden while empty) — and takes a
   `Diag` under its message; Test only (`Button.Target`, now read from frames
   too) sends the form there with the live layer: the outcome and the trace
-  come in, the form and the typed password stay. The connect dialogs
-  (s-profile-2, -11, -14, -24) carry the zone, the same to the pixel; new
+  come in, the form and the typed password stay. The zone stands under the
+  dialog's head, and Connect's refusal fills the same zone with the same
+  trace (the owner: «Test only answers above the buttons and Connect under
+  the head — that looks odd»), so the next answer of either button replaces
+  the last. The connect dialogs (s-profile-2, -11, -14 the same to the
+  pixel; -24 with the trace in the one format) carry the zone; new
   frames s-profile-39 (passed, a step with a warning) and s-profile-40
   (failed at the principal), 591 frames. `TestTestOnlyAnswersInItsZone`.
 - **An edit bar works** (Carrel's task 286; the owner: «the Auto-save tick

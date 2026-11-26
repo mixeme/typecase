@@ -1913,6 +1913,7 @@ func Profile2() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-answer"},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
@@ -1977,7 +1978,6 @@ func Profile2() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -1985,7 +1985,7 @@ func Profile2() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
@@ -2067,6 +2067,22 @@ func Profile39() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
+							w.Notices{
+								Items: []w.NoticesPart{
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Test passed:"),
+											w.Text(" Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below."),
+										},
+										Space:  w.MsgFlushSides,
+										Column: true,
+									},
+									w.Diag{
+										Text: "[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/\n             HTTPS → HTTP: not followed, the URL as typed is used\n[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/\n[home]       calendar-home-set, addressbook-home-set → 207\n[collections] 8 collection(s)",
+									},
+								},
+								Zone: "connect-answer",
+							},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
@@ -2131,22 +2147,6 @@ func Profile39() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{
-								Items: []w.NoticesPart{
-									w.Msg{
-										Parts: []w.MsgPart{
-											w.Strong("Test passed:"),
-											w.Text(" Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below."),
-										},
-										Space:  w.MsgFlushSides,
-										Column: true,
-									},
-									w.Diag{
-										Text: "[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/\n             HTTPS → HTTP: not followed, the URL as typed is used\n[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/\n[home]       calendar-home-set, addressbook-home-set → 207\n[collections] 8 collection(s)",
-									},
-								},
-								Zone: "connect-test",
-							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -2154,7 +2154,7 @@ func Profile39() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
@@ -2236,6 +2236,23 @@ func Profile40() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
+							w.Notices{
+								Items: []w.NoticesPart{
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Test failed:"),
+											w.Text(" discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved."),
+										},
+										Tone:   w.MsgAlert,
+										Space:  w.MsgFlushSides,
+										Column: true,
+									},
+									w.Diag{
+										Text: "[well-known] GET /.well-known/caldav → 301 → /dav.php/\n[principal]  PROPFIND /dav.php/ → 401 Unauthorized\n[home]       not asked: the step before did not pass",
+									},
+								},
+								Zone: "connect-answer",
+							},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
@@ -2300,23 +2317,6 @@ func Profile40() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{
-								Items: []w.NoticesPart{
-									w.Msg{
-										Parts: []w.MsgPart{
-											w.Strong("Test failed:"),
-											w.Text(" discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved."),
-										},
-										Tone:   w.MsgAlert,
-										Space:  w.MsgFlushSides,
-										Column: true,
-									},
-									w.Diag{
-										Text: "[well-known] GET /.well-known/caldav → 301 → /dav.php/\n[principal]  PROPFIND /dav.php/ → 401 Unauthorized\n[home]       not asked: the step before did not pass",
-									},
-								},
-								Zone: "connect-test",
-							},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -2324,7 +2324,7 @@ func Profile40() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
@@ -2406,17 +2406,22 @@ func Profile24() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
-							w.Msg{
-								Parts: []w.MsgPart{
-									w.Strong("Could not connect."),
-									w.Text(" The server refused the login and password. Nothing was saved."),
+							w.Notices{
+								Items: []w.NoticesPart{
+									w.Msg{
+										Parts: []w.MsgPart{
+											w.Strong("Could not connect."),
+											w.Text(" The server refused the login and password. Nothing was saved."),
+										},
+										Tone:   w.MsgAlert,
+										Space:  w.MsgFlushSides,
+										Column: true,
+									},
+									w.Diag{
+										Text: "[well-known] GET /.well-known/caldav → 301 → /dav.php/\n[principal]  PROPFIND /dav.php/ → 401 Unauthorized\n[home]       not asked: the step before did not pass",
+									},
 								},
-								Tone:   w.MsgAlert,
-								Space:  w.MsgFlushSides,
-								Column: true,
-							},
-							w.Diag{
-								Text: "Discovery trace\nwell-known · ok · GET /.well-known/caldav → 301 → /dav.php/\nprincipal · bad · PROPFIND /dav.php/ → 401 Unauthorized",
+								Zone: "connect-answer",
 							},
 							w.Form{
 								Items: []w.FormPart{
@@ -2476,7 +2481,6 @@ func Profile24() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -2484,7 +2488,7 @@ func Profile24() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel", Href: "/app/settings/connections"},
 								},
@@ -2566,6 +2570,7 @@ func Profile14() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-answer"},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
@@ -2625,7 +2630,6 @@ func Profile14() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -2633,7 +2637,7 @@ func Profile14() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel"},
 								},
@@ -3163,6 +3167,7 @@ func Profile11() Screen {
 								Title: &w.HeadTitle{Text: "Connect account"},
 								Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("One connection gives calendars and address books alike.")}}},
 							},
+							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-answer"},
 							w.Form{
 								Items: []w.FormPart{
 									w.Field{
@@ -3227,7 +3232,6 @@ func Profile11() Screen {
 								Fields:  []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 								Variant: w.FormFlush,
 							},
-							w.Notices{Items: []w.NoticesPart{}, Zone: "connect-test"},
 							w.FormFoot{
 								Items: []w.FormFootPart{
 									w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "connect"},
@@ -3235,7 +3239,7 @@ func Profile11() Screen {
 										Label:  "Test only",
 										Form:   "connect",
 										To:     "/app/settings/connections/new/test",
-										Target: "connect-test",
+										Target: "connect-answer",
 									},
 									w.Button{Label: "Cancel"},
 								},

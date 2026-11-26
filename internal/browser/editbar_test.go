@@ -237,7 +237,7 @@ func TestTestOnlyAnswersInItsZone(t *testing.T) {
 	h := browser.NewHarness(t)
 	var mu sync.Mutex
 	var got []string
-	test := h.RegisterStream("connect-test", func(rw http.ResponseWriter, r *http.Request) {
+	test := h.RegisterStream("connect-answer", func(rw http.ResponseWriter, r *http.Request) {
 		_ = r.ParseMultipartForm(1 << 20)
 		mu.Lock()
 		got = append(got, r.Header.Get("X-Target")+" "+r.FormValue("password"))
@@ -250,11 +250,11 @@ func TestTestOnlyAnswersInItsZone(t *testing.T) {
 	var before, after string
 	var shown bool
 	err := h.Run(h.RegisterPage("connect", page), 1351, 900,
-		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-test]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &before),
-		chromedp.Click(`button[data-tc-target="connect-test"]`, chromedp.ByQuery),
+		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-answer]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &before),
+		chromedp.Click(`button[data-tc-target="connect-answer"]`, chromedp.ByQuery),
 		chromedp.Sleep(1500*time.Millisecond),
-		chromedp.Evaluate(`(() => { const z = document.querySelector("[data-tc-zone=connect-test]"); return !z.hidden && /Test passed/.test(z.textContent) && /8 collection/.test(z.textContent); })()`, &shown),
-		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-test]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &after),
+		chromedp.Evaluate(`(() => { const z = document.querySelector("[data-tc-zone=connect-answer]"); return !z.hidden && /Test passed/.test(z.textContent) && /8 collection/.test(z.textContent); })()`, &shown),
+		chromedp.Evaluate(`[document.querySelector("[data-tc-zone=connect-answer]").hidden, document.querySelector("input[name=password]").value, location.pathname].join(" | ")`, &after),
 	)
 	if err != nil {
 		t.Fatal(err)
@@ -262,8 +262,8 @@ func TestTestOnlyAnswersInItsZone(t *testing.T) {
 	mu.Lock()
 	sent := append([]string(nil), got...)
 	mu.Unlock()
-	if len(sent) != 1 || sent[0] != "connect-test xxxxxxxxxx" {
-		t.Errorf("Test only sent %q; want one request for the zone connect-test with the typed password", sent)
+	if len(sent) != 1 || sent[0] != "connect-answer xxxxxxxxxx" {
+		t.Errorf("Test only sent %q; want one request for the zone connect-answer with the typed password", sent)
 	}
 	if !shown {
 		t.Error("the outcome does not stand in its zone")

@@ -16964,6 +16964,7 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-notices" data-tc-zone="connect-answer" hidden></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -16971,8 +16972,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
@@ -17016,6 +17016,11 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-notices" data-tc-zone="connect-answer"><div class="tc-msg tc-msg--mr0-ml0 tc-msg--max580"><b>Test passed:</b> Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/
+             HTTPS → HTTP: not followed, the URL as typed is used
+[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/
+[home]       calendar-home-set, addressbook-home-set → 207
+[collections] 8 collection(s)</div></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -17023,16 +17028,11 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test"><div class="tc-msg tc-msg--mr0-ml0 tc-msg--max580"><b>Test passed:</b> Carrel can sign in and found 8 collections. Nothing is saved until you press Connect. One step had a warning: see well-known below.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → http://…/dav.php/
-             HTTPS → HTTP: not followed, the URL as typed is used
-[principal]  PROPFIND /dav.php/ → 207 /dav.php/principals/m.yenuchenko/
-[home]       calendar-home-set, addressbook-home-set → 207
-[collections] 8 collection(s)</div></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
-<figcaption><b>Итог проверки — над журналом, своей зоной под полями</b> (задача Carrel 282): «Test only» шлёт форму в неё живым слоем, форма и набранный пароль не трогаются. Прошла — спокойное сообщение: что нашлось и что ничего не сохранено до Connect; шаг с предупреждением — одной фразой со ссылкой на журнал. Без сценария ответ — страница, как прежде.</figcaption>
+<figcaption><b>Итог проверки — над журналом, в зоне под шапкой, там же, где ответ Connect</b> (задача Carrel 282): «Test only» шлёт форму в неё живым слоем, форма и набранный пароль не трогаются. Прошла — спокойное сообщение: что нашлось и что ничего не сохранено до Connect; шаг с предупреждением — одной фразой со ссылкой на журнал. Без сценария ответ — страница, как прежде.</figcaption>
 </figure>
 
 <figure>
@@ -17072,6 +17072,9 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-notices" data-tc-zone="connect-answer"><div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580"><b>Test failed:</b> discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → /dav.php/
+[principal]  PROPFIND /dav.php/ → 401 Unauthorized
+[home]       not asked: the step before did not pass</div></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono is-focus" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -17079,10 +17082,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test"><div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580"><b>Test failed:</b> discovery stopped at the principal: the server refused the login and password. Check them and test again. Nothing was saved.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → /dav.php/
-[principal]  PROPFIND /dav.php/ → 401 Unauthorized
-[home]       not asked: the step before did not pass</div></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
@@ -17126,10 +17126,9 @@ dav: HTTP 503: the server is busy</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
-      <div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580"><b>Could not connect.</b> The server refused the login and password. Nothing was saved.</div>
-      <div class="tc-diag">Discovery trace
-well-known · ok · GET /.well-known/caldav → 301 → /dav.php/
-principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
+      <div class="tc-notices" data-tc-zone="connect-answer"><div class="tc-msg is-alert tc-msg--mr0-ml0 tc-msg--max580"><b>Could not connect.</b> The server refused the login and password. Nothing was saved.</div><div class="tc-diag">[well-known] GET /.well-known/caldav → 301 → /dav.php/
+[principal]  PROPFIND /dav.php/ → 401 Unauthorized
+[home]       not asked: the step before did not pass</div></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://dav.office.example/dav.php/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -17137,12 +17136,11 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in is-error" type="password" name="password" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><a class="tc-btn" href="/app/settings/connections">Cancel</a></div>
     </div></div></div>
   </div>
 </div>
-<figcaption>Сервер отказал в логине и пароле: ничего не сохранено, диалог — с набранным, пароль обратно не печатается. Над полями — что сказал сервер и на каком шаге, след целиком.</figcaption>
+<figcaption>Сервер отказал в логине и пароле: ничего не сохранено, диалог — с набранным, пароль обратно не печатается. Под шапкой — что сказал сервер и на каком шаге, след целиком: та же зона и тот же журнал, что у «Test only», и следующий ответ любой из кнопок заменяет этот.</figcaption>
 </figure>
 
 <figure>
@@ -17182,6 +17180,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-notices" data-tc-zone="connect-answer" hidden></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-ph" type="text" name="label" placeholder="optional" aria-label="Label"></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://xandikos.home.example/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -17189,8 +17188,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" aria-label="Password" disabled><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" checked data-tc-disables="password"><span class="tc-tickrow__tick"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
@@ -17765,6 +17763,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
       </div>
       <div class="tc-main"><div class="tc-dialog tc-dialog--max540">
       <div class="tc-head"><div class="tc-head__titles"><div class="tc-head__title">Connect account</div><div class="tc-head__sub">One connection gives calendars and address books alike.</div></div></div>
+      <div class="tc-notices" data-tc-zone="connect-answer" hidden></div>
       <form class="tc-form tc-form--padl0-padr0" id="connect" action="/app/settings/connections/new" method="post"><input type="hidden" name="csrf" value="7f3a91de">
         <div class="tc-field tc-field--md"><label>Label</label><input class="tc-in is-error is-focus" type="text" name="label" value="nextcloud" aria-label="Label"><span class="tc-field__hint tc-dim--danger">There is already a connection called “nextcloud”. Choose another label.</span></div>
         <div class="tc-field tc-field--full"><label>Server URL</label><input class="tc-in is-mono" type="text" name="server" value="https://cloud.example.org/" aria-label="Server URL"><span class="tc-field__hint tc-field__hint--max580"><code class="tc-mono">.well-known</code> is tried first, then the URL exactly as typed.</span></div>
@@ -17772,8 +17771,7 @@ principal · bad · PROPFIND /dav.php/ → 401 Unauthorized</div>
         <div class="tc-field tc-field--md"><label>Password</label><input class="tc-in" type="password" name="password" value="xxxxxxxxxx" aria-label="Password"><label class="tc-check"><input class="tc-check__box" type="checkbox" name="noPassword" value="1" data-tc-disables="password"><span class="tc-tickrow__tick is-off"></span>The server asks no password</label></div>
           <div class="tc-field tc-field--full"><label>Certificate fingerprint <span class="tc-dim">SHA-256 · optional</span></label><input class="tc-in is-mono is-ph" type="text" name="certFingerprint" placeholder="only for a certificate the system does not trust" aria-label="Certificate fingerprint"></div>
       </form>
-      <div class="tc-notices" data-tc-zone="connect-test" hidden></div>
-      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-test" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
+      <div class="tc-formfoot tc-formfoot--padl0-padr0"><button class="tc-btn is-primary" type="submit" form="connect">Connect</button><button class="tc-btn" type="submit" form="connect" data-tc-target="connect-answer" formaction="/app/settings/connections/new/test">Test only</button><button class="tc-btn" type="button">Cancel</button></div>
     </div></div></div>
   </div>
 </div>
