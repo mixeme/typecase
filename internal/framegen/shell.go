@@ -735,6 +735,9 @@ func (g *gen) tree(e *El) string {
 	for _, v := range allOf(e, []kv{{"tc-tree--padx", "TreePadded"}, {"tc-tree--max520", "TreeNarrow"}}) {
 		f = append(f, "Variant: w."+v)
 	}
+	if e.Has("tc-tree--scroll") {
+		f = append(f, "Scrolls: true")
+	}
 	for i, r := range e.Els() {
 		var x []string
 		if r.Has("is-on") {

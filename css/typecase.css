@@ -629,6 +629,8 @@ label.tc-tree__row{cursor:pointer}
 .tc-tree__row.is-on:has(> .tc-tree__box:not(:checked)){background:none;font-weight:400}
 .tc-tree__row:has(> .tc-tree__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
+.tc-tree--scroll{max-height:283px;overflow-y:auto;overscroll-behavior:contain}
+.tc-tree--scroll > .tc-tree__row{flex:none}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 /* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */

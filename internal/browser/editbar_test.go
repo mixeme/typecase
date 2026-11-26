@@ -225,7 +225,8 @@ func TestReadingWidthOneMeasure(t *testing.T) {
 }
 
 // TestTestOnlyAnswersInItsZone (Carrel's task 282): Test only sends the
-// connect form into the zone under its fields — the outcome and the trace
+// connect form into the zone under the dialog's head, where Connect's refusal
+// stands too — the outcome and the trace
 // stand there, the form and the typed password stay as they were, the page
 // does not go.
 func TestTestOnlyAnswersInItsZone(t *testing.T) {
@@ -271,5 +272,64 @@ func TestTestOnlyAnswersInItsZone(t *testing.T) {
 	wantAfter := strings.Replace(before, "true | ", "false | ", 1)
 	if !strings.HasPrefix(before, "true | xxxxxxxxxx") || after != wantAfter {
 		t.Errorf("before %q, after %q; want the zone shown, the password and the page kept", before, after)
+	}
+}
+
+// TestNeighboursShowTheOpenNote (Carrel's task 289): the rail's Neighbours
+// holds the whole notebook and scrolls in its own block; the script puts the
+// open note in the block's middle, or as near it as the block goes, and the
+// rest of the rail does not move.
+func TestNeighboursShowTheOpenNote(t *testing.T) {
+	needChrome(t)
+	r, ok := screens.Find("s-notes-2")
+	if !ok {
+		t.Fatal("no route s-notes-2")
+	}
+	page := browser.PageHTML(r.Screen().Render(), "")
+	h := browser.NewHarness(t)
+	const look = `(() => { const tree = document.querySelector(".tc-tree--scroll"), on = tree.querySelector(".is-on");
+		const t = tree.getBoundingClientRect(), o = on.getBoundingClientRect();
+		const rail = document.querySelector(".tc-shell__rail");
+		return [Math.round(tree.scrollTop), Math.round(o.top - t.top), Math.round(t.bottom - o.bottom),
+			Math.round((o.top + o.bottom) / 2 - (t.top + t.bottom) / 2), Math.round(rail.scrollTop), Math.round(window.scrollY),
+			Math.round(tree.scrollHeight - tree.clientHeight), Math.round(o.height)]; })()`
+	for _, c := range []struct {
+		row    string
+		centre bool // the row can stand in the middle: not near the end
+	}{
+		{"Заметка со встречи", false},
+		{"Как устроить резервные копии", true},
+		{"Пароли Wi-Fi у родителей", false},
+	} {
+		html := strings.Replace(page, `<div class="is-on tc-tree__row">`, `<div class="tc-tree__row">`, 1)
+		mark := `<div class="tc-tree__row"><svg><use href="#i-note"/></svg>` + c.row + `</div>`
+		if !strings.Contains(html, mark) {
+			t.Fatalf("no row %q in s-notes-2", c.row)
+		}
+		html = strings.Replace(html, mark, strings.Replace(mark, `class="tc-tree__row"`, `class="is-on tc-tree__row"`, 1), 1)
+		url := h.RegisterPage("neighbours-"+itoa(len(c.row)), html)
+		var got []int
+		if err := h.Run(url, 1351, 1000, chromedp.Evaluate(look, &got)); err != nil {
+			t.Fatal(err)
+		}
+		scroll, above, below, off, rail, win, most := got[0], got[1], got[2], got[3], got[4], got[5], got[6]
+		if got[7] != 26 {
+			t.Errorf("%s: a row of Neighbours is %d px high; want 26, as in any tree — the block scrolls, the rows do not shrink", c.row, got[7])
+		}
+		if most <= 0 {
+			t.Fatalf("Neighbours of 16 notes does not scroll (%v); want a block shorter than the notebook", got)
+		}
+		if above < 0 || below < 0 {
+			t.Errorf("%s: the open note stands %d px from the block's top and %d from its bottom; want it inside", c.row, above, below)
+		}
+		if c.centre && (off < -2 || off > 2) {
+			t.Errorf("%s: the open note is %d px off the block's middle; want it in the middle", c.row, off)
+		}
+		if c.row == "Заметка со встречи" && scroll != 0 {
+			t.Errorf("the first note open: the block scrolled by %d; want it at its top", scroll)
+		}
+		if rail != 0 || win != 0 {
+			t.Errorf("%s: the rail scrolled by %d and the page by %d; want only the block to scroll", c.row, rail, win)
+		}
 	}
 }

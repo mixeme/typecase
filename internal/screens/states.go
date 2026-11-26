@@ -5932,7 +5932,7 @@ func States31() Screen {
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "nextcloud"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "3", Current: true},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "16", Current: true},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "3"},
 						w.TickRow{
 							Ticked: w.TickedOff,
@@ -5950,9 +5950,25 @@ func States31() Screen {
 						w.Tree{
 							Rows: []w.TreeRow{
 								{Icon: "note", Label: "Заметка со встречи"},
-								{Icon: "note", Label: "Что почитать про CRDT"}},
+								{Icon: "note", Label: "Что почитать про CRDT"},
+								{Icon: "note", Label: "Ремонт: что осталось"},
+								{Icon: "note", Label: "Про сроки по сборнику"},
+								{Icon: "note", Label: "Книги на осень"},
+								{Icon: "note", Label: "Разбор третьей главы"},
+								{Icon: "note", Label: "Вопросы к бухгалтеру"},
+								{Icon: "note", Label: "Как устроить резервные копии"},
+								{Icon: "note", Label: "Хлеб на закваске"},
+								{Icon: "note", Label: "Заметки с конференции"},
+								{Icon: "note", Label: "План на квартал"},
+								{Icon: "note", Label: "Идеи для обложки"},
+								{Icon: "note", Label: "Что взять на дачу"},
+								{Icon: "note", Label: "Мысли о переезде"},
+								{Icon: "note", Label: "Пароли Wi-Fi у родителей"},
+								{Icon: "note", Label: "Список к отпуску"},
+							},
 							On:      1,
 							Variant: w.TreePadded,
+							Scrolls: true,
 						},
 					},
 				},

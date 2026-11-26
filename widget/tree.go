@@ -116,10 +116,10 @@ func (v TreeVariant) class() string {
 // Tree — tc-tree
 //
 // Роль. Дерево: папки, источники и их разделы, куда положить или откуда взять.
-// Вход. Tree{Rows, On, Variant, Target}.
+// Вход. Tree{Rows, On, Variant, Target, Scrolls}.
 // Состояния. plain | padded | narrow.
 // Инварианты. Уровень строки и отступ дерева — перечисления; выбранная строка — одна, её номер, а не флаг у каждой строки; дерево печатает фрагмент своего кадра.
-// Поведение. Нажатие на строку выбирает её; недоступную строку выбрать нельзя; строка с `Send` — радиокнопка формы, в которой стоит дерево, и выбирает без сценария.
+// Поведение. Нажатие на строку выбирает её; недоступную строку выбрать нельзя; строка с `Send` — радиокнопка формы, в которой стоит дерево, и выбирает без сценария; дерево со `Scrolls` прокручивается само, а сценарий ставит выбранную строку в его середину.
 // Эталон. кадр `s-notes-11`, фрагмент `.tc-tree`.
 // Содержимое. Строки: значок или метка источника, название (или путь моноширинным), прижатая к концу пометка — приглушённое, моноширинное, бейдж, примечание.
 // Чего нет. Сворачивания ветвей: макет рисует дерево раскрытым.
@@ -131,6 +131,10 @@ type Tree struct {
 	// address for with the live layer, instead of loading the page (Carrel's
 	// task 84); without the layer they are plain links and forms.
 	Target string
+	// Scrolls makes a long tree scroll by itself, ten rows and a half tall,
+	// and the library's script brings the chosen row to its middle: a long
+	// notebook beside its open note in the rail (Carrel's task 289).
+	Scrolls bool
 }
 
 // Render prints the tree.
@@ -138,7 +142,7 @@ func (t Tree) Render() string { return t.html(nil) }
 
 func (t Tree) html(m mix) string {
 	var s strings.Builder
-	s.WriteString(`<div` + class(m, "tc-tree", t.Variant.class()) + attr("data-tc-target", t.Target) + `>`)
+	s.WriteString(`<div` + class(m, "tc-tree", t.Variant.class(), pick(t.Scrolls, "tc-tree--scroll")) + attr("data-tc-target", t.Target) + `>`)
 	for i, r := range t.Rows {
 		s.WriteString(r.html(i+1 == t.On))
 	}

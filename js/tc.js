@@ -315,8 +315,10 @@
 		body.querySelectorAll(".tc-shell__rail .tc-nav__all, .tc-shell__rail .tc-nav__item[aria-current]").forEach(function (b) {
 			b.setAttribute("aria-expanded", on ? "true" : "false");
 		});
-		if (on) railOpener = by;
-		else if (railOpener && document.contains(railOpener)) {
+		if (on) {
+			railOpener = by;
+			centreChosen(body);
+		} else if (railOpener && document.contains(railOpener)) {
 			railOpener.focus();
 			railOpener = null;
 		}
@@ -2388,6 +2390,21 @@
 		});
 	}
 
+	// A tree that scrolls by itself (Tree.Scrolls) shows its chosen row in its
+	// middle: a long notebook's open note in the rail (Carrel's task 289). A
+	// tree not drawn (the rail folded away) waits until the rail opens.
+	function centreChosen(root) {
+		var trees = Array.prototype.slice.call(root.querySelectorAll(".tc-tree--scroll"));
+		if (root.classList && root.classList.contains("tc-tree--scroll")) trees.push(root);
+		trees.forEach(function (tree) {
+			var box = tree.querySelector(".tc-tree__box:checked");
+			var on = box ? box.parentNode : tree.querySelector(".tc-tree__row.is-on");
+			if (!on || !tree.clientHeight || tree.scrollHeight <= tree.clientHeight) return;
+			var t = tree.getBoundingClientRect(), r = on.getBoundingClientRect();
+			tree.scrollTop += r.top - t.top - (tree.clientHeight - r.height) / 2;
+		});
+	}
+
 	function init(root) {
 		watch(root);
 		initDynamic(root);
@@ -2403,6 +2420,7 @@
 		initChanged(root);
 		initStops(root);
 		initEdits(root);
+		centreChosen(root);
 		layoutUpdates();
 	}
 

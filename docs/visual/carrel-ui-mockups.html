@@ -810,6 +810,8 @@ label.tc-tree__row{cursor:pointer}
 .tc-tree__row.is-on:has(> .tc-tree__box:not(:checked)){background:none;font-weight:400}
 .tc-tree__row:has(> .tc-tree__box:focus-visible){outline:1.5px solid var(--tc-accent);outline-offset:1px}
 .tc-tree svg{width:14px;height:14px;stroke:var(--tc-muted);stroke-width:1.3;fill:none}
+.tc-tree--scroll{max-height:283px;overflow-y:auto;overscroll-behavior:contain}
+.tc-tree--scroll > .tc-tree__row{flex:none}
 /* наложение: быстрая заметка поверх любого экрана */
 .tc-overlay{position:relative;container:tcbox / inline-size;min-width:0}
 /* Затемнение — слой над всей страницей, открытые меню (6) и поднятые кнопки ящика (1) тоже под ним. */
@@ -8659,15 +8661,29 @@ SEQUENCE  1</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -8741,7 +8757,7 @@ Read  2 min ago</div>
   </div>
 </div>
 <figcaption><b>Чтение.</b> Текст занимает всю колонку содержимого: кегль 14.5, интерлиньяж 1.7. Справа — колонка с тем, что не текст: теги, связи, вложения, техническая правда об источнике; кнопка <svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none" style="display:inline;vertical-align:-1px"><use href="#i-panel"/></svg> убирает и её.<br><br><b>Эта колонка — не панель подробностей, хотя ширина у неё та же, 400&nbsp;px.</b> Панель на других экранах показывает строку, выбранную в списке: крестик закрывает её, и остаётся список, а открывают снова выбором строки. Здесь списка нет — колонка часть страницы самой заметки. Закрой её крестиком, и вернуть было бы нечем, поэтому её убирает и возвращает переключатель в панели над текстом, а крестика нет: он стал бы вторым способом сделать то же самое. И колонка начинается <b>под</b> этой панелью, а не от шапки: Edit, Export <code>.md</code>, Send, Print, Source и ширина текста относятся ко всей заметке вместе с колонкой. Своей шапки у колонки нет — она повторила бы заголовок, который уже стоит в тексте.<br><br>В рейле вместо списка коллекций — соседние заметки, чтобы листать не возвращаясь. Переключатель <b>Full width / Reading width</b> в панели выбирает между двумя ширинами текста: во всю колонку содержимого — или в 78&nbsp;ch, примерно как в книге. Он нужен на мониторе, который шире, чем удобно читать; выбор запоминается. На кнопке написано, что она делает. Умолчание — полная ширина. Как это выглядит в 78&nbsp;ch — кадр следом.
-<br><br><b>Да, Markdown разбирается — в просмотре и только в нём.</b> Заголовок «Что делаем» и список выше показаны так, как их увидит человек. Это решение, а не набросок: без разбора «режим просмотра» отличался бы от правки одним лишь отсутствием рамки у поля, и заводить его было бы незачем. Стоит оно одной зависимости — <code>goldmark</code> в бинарник, без CDN и без JS, с <b>выключенным сырым HTML</b>: чужая заметка приходит с чужого сервера, и превращать её в исполняемую разметку нельзя. Поддерживается то, что пишут в заметках руками и что кладёт jtx Board: заголовки, списки, задачи-флажки, выделение, ссылки, код, цитаты и таблицы. <b>Хранится по-прежнему текст.</b> Carrel ничего не переписывает: правка отдаёт ровно те символы, которые набрали, а синтаксис, которого разборщик не знает, остаётся видимым текстом, а не пропадает. Кнопка <b>«Source»</b> в меню карточки показывает исходник, когда нужно понять, что именно лежит на сервере. <b>Связанные записи</b> — тот же блок, что у контакта: строка говорит, где лежит другая копия и чем отличается, нажатие открывает её.</figcaption>
+<br><br><b>Да, Markdown разбирается — в просмотре и только в нём.</b> Заголовок «Что делаем» и список выше показаны так, как их увидит человек. Это решение, а не набросок: без разбора «режим просмотра» отличался бы от правки одним лишь отсутствием рамки у поля, и заводить его было бы незачем. Стоит оно одной зависимости — <code>goldmark</code> в бинарник, без CDN и без JS, с <b>выключенным сырым HTML</b>: чужая заметка приходит с чужого сервера, и превращать её в исполняемую разметку нельзя. Поддерживается то, что пишут в заметках руками и что кладёт jtx Board: заголовки, списки, задачи-флажки, выделение, ссылки, код, цитаты и таблицы. <b>Хранится по-прежнему текст.</b> Carrel ничего не переписывает: правка отдаёт ровно те символы, которые набрали, а синтаксис, которого разборщик не знает, остаётся видимым текстом, а не пропадает. Кнопка <b>«Source»</b> в меню карточки показывает исходник, когда нужно понять, что именно лежит на сервере. <b>Связанные записи</b> — тот же блок, что у контакта: строка говорит, где лежит другая копия и чем отличается, нажатие открывает её.<br><br><b>Neighbours — вся тетрадь</b> в порядке списка, открытая подсвечена (задача Carrel 289). Длинная прокручивается в своём блоке, остальной рейл идёт со страницей, как прежде; со сценарием блок открывается так, что открытая заметка — посередине.</figcaption>
 </figure>
 <figure>
 <div class="frame" data-frame="s-notes-27" data-screen="/app/notes/{account}/{col}/{uid}" data-part="source">
@@ -8761,15 +8777,29 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -8968,15 +8998,29 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -9069,15 +9113,29 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -9172,15 +9230,29 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -9274,7 +9346,7 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
@@ -9347,15 +9419,29 @@ Read  2 min ago</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -12560,7 +12646,7 @@ Read  2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -12938,7 +13024,7 @@ Read  2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -13031,7 +13117,7 @@ Read  2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -13108,7 +13194,7 @@ Read  2 min ago</div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#9A9280"></span><span class="tc-tickrow__label">Общий</span><span class="tc-tickrow__meta">1</span></div>
           <div class="tc-tickrow is-ext"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#8C6239"></span><span class="tc-tickrow__label">Праздники РФ</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Дела</span><span class="tc-tickrow__meta">4</span></div>
-          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -13495,7 +13581,7 @@ Read  just now · written by the merge</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
@@ -13918,7 +14004,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
@@ -14756,7 +14842,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
@@ -15080,7 +15166,7 @@ dav: HTTP 503: the server is busy</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
@@ -23095,15 +23181,29 @@ Read  2 min ago · not changed on server</div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>
@@ -32710,15 +32810,29 @@ dav: HTTP 503: the server is busy</div></div>
         <div class="tc-nav"><a class="tc-nav__item" href="#"><svg><use href="#i-back"/></svg><span class="tc-nav__full">Back to list</span><span class="tc-nav__short">Back</span></a></div>
         <div class="tc-railsec">
           <div class="tc-rubric">nextcloud</div>
-          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">3</span></div>
+          <div class="tc-tickrow is-on"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#4A6B52"></span><span class="tc-tickrow__label">Записи</span><span class="tc-tickrow__meta">16</span></div>
           <div class="tc-tickrow"><button class="tc-tickrow__tick" type="button"></button><span class="tc-mark" data-tc-colour="#6B4E7A"></span><span class="tc-tickrow__label">Дневник</span><span class="tc-tickrow__meta">3</span></div>
           <div class="tc-tickrow is-off"><button class="tc-tickrow__tick is-off" type="button"></button><span class="tc-mark" data-tc-colour="#3F6E8C"></span><span class="tc-tickrow__label">Общие с семьёй</span><span class="tc-tickrow__meta">—</span><span class="tc-badge">ro</span></div>
         </div>
         <div class="tc-railsec">
           <div class="tc-rubric">Neighbours</div>
-          <div class="tc-tree tc-tree--padx">
+          <div class="tc-tree tc-tree--padx tc-tree--scroll">
             <div class="is-on tc-tree__row"><svg><use href="#i-note"/></svg>Заметка со встречи</div>
             <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что почитать про CRDT</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Ремонт: что осталось</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Про сроки по сборнику</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Книги на осень</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Разбор третьей главы</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Вопросы к бухгалтеру</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Как устроить резервные копии</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Хлеб на закваске</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Заметки с конференции</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>План на квартал</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Идеи для обложки</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Что взять на дачу</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Мысли о переезде</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Пароли Wi-Fi у родителей</div>
+            <div class="tc-tree__row"><svg><use href="#i-note"/></svg>Список к отпуску</div>
           </div>
         </div>
         <div class="tc-railfoot"><svg class="tc-emblem" viewBox="0 0 16 16" role="img"><title>davloom · running · 3 devices</title><use href="#davloom-stroke" class="tc-emblem__stroke"/><use href="#davloom-fill" class="tc-emblem__fill"/><use href="#davloom-accent" class="tc-emblem__accent"/></svg><a class="tc-railfoot__about" href="#rest">Carrel <span class="tc-mono">0.0.1 · 786949a</span></a></div>

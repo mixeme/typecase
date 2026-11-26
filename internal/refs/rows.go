@@ -53,6 +53,23 @@ var _ = add(
 	rows("error", w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Общий", Href: "/app/calendar/baikal/obshchii", Error: true}, "phone-2", "tc-tickrow"),
 
 	// tc-tree
+	rows("scrolls", w.Tree{Rows: []w.TreeRow{
+		{Icon: "note", Label: "Заметка со встречи"},
+		{Icon: "note", Label: "Что почитать про CRDT"},
+		{Icon: "note", Label: "Ремонт: что осталось"},
+		{Icon: "note", Label: "Про сроки по сборнику"},
+		{Icon: "note", Label: "Книги на осень"},
+		{Icon: "note", Label: "Разбор третьей главы"},
+		{Icon: "note", Label: "Вопросы к бухгалтеру"},
+		{Icon: "note", Label: "Как устроить резервные копии"},
+		{Icon: "note", Label: "Хлеб на закваске"},
+		{Icon: "note", Label: "Заметки с конференции"},
+		{Icon: "note", Label: "План на квартал"},
+		{Icon: "note", Label: "Идеи для обложки"},
+		{Icon: "note", Label: "Что взять на дачу"},
+		{Icon: "note", Label: "Мысли о переезде"},
+		{Icon: "note", Label: "Пароли Wi-Fi у родителей"},
+		{Icon: "note", Label: "Список к отпуску"}}, On: 1, Variant: w.TreePadded, Scrolls: true}, "s-notes-2", "tc-tree"),
 	rows("mail", w.Tree{Rows: []w.TreeRow{
 		{Icon: "server", Label: "nextcloud"},
 		{Mark: &w.Mark{Colour: "#4A6B52"}, Label: "Личный", Indent: w.TreeLevel22, Send: w.Send{Name: "into", Value: "nextcloud/lichnyj", One: true}},
@@ -180,9 +197,6 @@ var _ = add(
 	rows("padded", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "Attachments", Trail: w.TreeNote{Text: "Documents / carrel"}},
 		{Icon: "link", Label: "Published", Trail: w.TreeNote{Text: "2"}}}, On: 1, Variant: w.TreePadded}, "s-files-1", "tc-tree"),
-	rows("padded", w.Tree{Rows: []w.TreeRow{
-		{Icon: "note", Label: "Заметка со встречи"},
-		{Icon: "note", Label: "Что почитать про CRDT"}}, On: 1, Variant: w.TreePadded}, "s-notes-2", "tc-tree"),
 	rows("plain", w.Tree{Rows: []w.TreeRow{
 		{Icon: "file", Label: "attachments"},
 		{Icon: "file", Label: "2026", Indent: w.TreeLevel20},
