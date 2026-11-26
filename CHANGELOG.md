@@ -37,6 +37,15 @@ do, not what the authors did.
 
 ### Added
 
+- **An answer for the address zone names the tab's title:
+  `Fragment.Title`** (Carrel's task 294: a rail's collection opened in
+  `main` left «Combined notebook» over the page «Дневник»). Put the page's
+  `Document.Title` there; the answer begins with its `<title>`, and the live
+  layer sets it when the answer's zone owns the address (`Zones.Address`)
+  and the address goes to the history. Back loads the page before whole,
+  with its own title. A `data-tc-swap` link takes the asked page's title
+  the same way. An answer for another zone leaves the title.
+  `TestZoneTitle`, `TestFragmentTitle`.
 - **A long tree scrolls by itself** (Carrel's task 289; the owner: the
   Neighbours block only). `Tree.Scrolls` scrolls the tree in its own block;
   in the rail the block takes the room down to the footer, ten rows and a

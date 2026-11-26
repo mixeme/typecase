@@ -389,7 +389,8 @@
 
 	// A link with data-tc-swap changes the page in place (Carrel's task 104):
 	// the page at its address is asked for, and the elements it names are put
-	// in place of the same ones here; the address goes to the history. Without
+	// in place of the same ones here; the address goes to the history, and the
+	// page's title becomes the tab's (Carrel's task 294). Without
 	// the layer — or when the answer has not them — the link simply goes.
 	function swap(href, ids, done, failed) {
 		fetch(href, { credentials: "same-origin", headers: { Accept: "text/html" } })
@@ -408,7 +409,7 @@
 					p[0].replaceWith(fresh);
 					if (tc.init) tc.init(fresh);
 				});
-				if (done) done();
+				if (done) done(doc.title);
 			})
 			.catch(function () {
 				if (failed) failed();
@@ -422,8 +423,9 @@
 		if (!ids.length || !window.DOMParser) return;
 		e.preventDefault();
 		var href = a.href;
-		swap(href, ids, function () {
+		swap(href, ids, function (title) {
 			history.pushState({ tcSwap: true }, "", href);
+			if (title) document.title = title;
 			swapped = true;
 		}, function () {
 			location.assign(href);
@@ -542,7 +544,8 @@
 	// An answer that is not HTML, not 2xx, or redirected: the page goes to
 	// the address the plain way. The zone the document names as the one that
 	// owns the address (data-tc-address-zone) puts the address into the
-	// history; Back loads the page whole.
+	// history, and the <title> its answer begins with becomes the tab's title
+	// (Carrel's task 294); Back loads the page whole, with its own title.
 	var doc = document.documentElement;
 
 	function zoneOf(name) {
@@ -614,6 +617,8 @@
 		});
 	}
 
+	var answerTitle = null;
+
 	function put(target, html) {
 		var zone = zoneOf(target);
 		if (!zone) return false;
@@ -625,6 +630,16 @@
 		});
 		extra.forEach(function (t) {
 			box.content.removeChild(t);
+		});
+		// the title of the document the answer names (Fragment.Title,
+		// Carrel's task 294): it is not the zone's; the address zone's answer
+		// sets it with the address
+		answerTitle = null;
+		Array.prototype.forEach.call(box.content.children, function (t) {
+			if (t.tagName === "TITLE") {
+				answerTitle = t.textContent;
+				box.content.removeChild(t);
+			}
 		});
 		var posts = forms(box.content);
 		fill(zone, box.content);
@@ -691,6 +706,7 @@
 				if (!once && !put(target, html)) throw new Error("no zone " + target);
 				if (method === "GET" && doc.getAttribute("data-tc-address-zone") === target) {
 					history.pushState({ tcSwap: true }, "", url);
+					if (answerTitle !== null) document.title = answerTitle;
 					swapped = true;
 				}
 				if (then) then();

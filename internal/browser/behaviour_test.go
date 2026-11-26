@@ -2113,6 +2113,53 @@ func TestZones(t *testing.T) {
 	}
 }
 
+// TestZoneTitle (Carrel's task 294): an answer for the zone that owns the
+// address names the document's title (Fragment.Title), and the tab takes it
+// with the address; Back loads the page before, with its own title. An
+// answer without a title, or for a zone that does not own the address,
+// leaves the title. The bite: the layer that set no title kept «Combined
+// notebook» over the page «Дневник».
+func TestZoneTitle(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	titled := h.RegisterPage("zone-titled", page.Fragment{Title: "Дневник", Body: []page.Part{zonePart(`<p>Дневник</p>`)}}.Render())
+	plain := h.RegisterPage("zone-untitled", page.Fragment{Body: []page.Part{zonePart(`<p>no title</p>`)}}.Render())
+	aside := h.RegisterPage("zone-aside", page.Fragment{Title: "Not the tab's", Body: []page.Part{zonePart(`<p>saved</p>`)}}.Render())
+	nav := w.Nav{Target: "main", Items: []w.NavItem{{Label: "Titled", Href: titled}, {Label: "Untitled", Href: plain}}}
+	side := w.Nav{Target: "notices", Items: []w.NavItem{{Label: "Aside", Href: aside}}}
+	body := `<div class="tc-root">` + nav.Render() + side.Render() + `<div data-tc-zone="main"><p>Combined</p></div><div data-tc-zone="notices"></div></div>`
+	doc := strings.Replace(browser.PageHTML(body, ""), `<meta charset="utf-8">`, `<meta charset="utf-8"><title>Combined notebook</title>`, 1)
+	doc = strings.Replace(doc, `data-tc-noscript>`, `data-tc-noscript data-tc-view-header="X-View" data-tc-target-header="X-Target" data-tc-address-zone="main">`, 1)
+	with := h.RegisterPage("zone-title", doc)
+	bare := h.RegisterPage("zone-title-bare", strings.Replace(doc, `<script src="/tc-live.js"></script>`, "", 1))
+	const state = `document.title + " | " + location.pathname.split("/").pop()`
+	for _, c := range []struct{ name, url, click, want, back string }{
+		{"the address zone's answer", with, `.tc-nav:nth-of-type(1) .tc-nav__item:nth-child(1)`, "Дневник | zone-titled", "Combined notebook | zone-title"},
+		{"an answer without a title", with, `.tc-nav:nth-of-type(1) .tc-nav__item:nth-child(2)`, "Combined notebook | zone-untitled", ""},
+		{"another zone's answer", with, `.tc-nav:nth-of-type(2) .tc-nav__item`, "Combined notebook | zone-title", ""},
+		{"without the layer", bare, `.tc-nav:nth-of-type(1) .tc-nav__item:nth-child(1)`, "Дневник | zone-titled", ""},
+	} {
+		var got, back string
+		acts := []chromedp.Action{
+			chromedp.Click(c.click, chromedp.ByQuery),
+			chromedp.Sleep(1500 * time.Millisecond),
+			chromedp.Evaluate(state, &got),
+		}
+		if c.back != "" {
+			acts = append(acts, chromedp.Evaluate(`history.back(); true`, nil), chromedp.Sleep(1500*time.Millisecond), chromedp.Evaluate(state, &back))
+		}
+		if err := h.Run(c.url, 900, 600, acts...); err != nil {
+			t.Fatal(err)
+		}
+		if got != c.want {
+			t.Errorf("%s: %s; want %s", c.name, got, c.want)
+		}
+		if back != c.back {
+			t.Errorf("%s, back: %s; want %s", c.name, back, c.back)
+		}
+	}
+}
+
 // TestRailTickZones (the owner, 07.11): the group tick of the rail is a
 // button of the rail's form — it sends «all», and the answer, asked for the
 // rail's zone, puts the rail with every tick under the group set and the

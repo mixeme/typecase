@@ -138,3 +138,15 @@ func TestFragmentForms(t *testing.T) {
 		t.Errorf("an answer without forms prints %q", got)
 	}
 }
+
+// TestFragmentTitle (Carrel's task 294): an answer's title comes first,
+// escaped, before the zone's content; an answer without one prints none.
+func TestFragmentTitle(t *testing.T) {
+	got := page.Fragment{Title: "Дневник & <co>", Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("q")}}}}.Render()
+	if !strings.HasPrefix(got, `<title>Дневник &amp; &lt;co&gt;</title><`) {
+		t.Errorf("the title does not open the answer: %s", got)
+	}
+	if strings.Contains(page.Fragment{Body: []page.Part{w.Msg{Parts: []w.MsgPart{w.Text("q")}}}}.Render(), "<title>") {
+		t.Error("an answer without a title prints one")
+	}
+}

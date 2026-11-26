@@ -176,7 +176,12 @@ func (p Printed) Render() string { return string(p) }
 // else becomes the zone's content. An empty Body empties the zone: a panel
 // or a sheet closes.
 type Fragment struct {
-	Body []Part
+	// Title is the document's title with this answer — the page's
+	// Document.Title at the same address. The live layer sets it when the
+	// answer's zone owns the address (Zones.Address) and the address goes
+	// to the history; Back loads the page whole (Carrel's task 294).
+	Title string
+	Body  []Part
 	// Forms are the page's forms the zone's buttons outside a form name by
 	// ID (Button.Form), printed after the zone's widget in a template of
 	// their own: the live layer puts each in place of the page's form of the
@@ -192,10 +197,13 @@ type ZonePart struct {
 	Forms []widget.PostForm // as Fragment.Forms
 }
 
-// Render prints the answer: the body, then each other zone in a template
-// that names it.
+// Render prints the answer: its title, the body, then each other zone in a
+// template that names it.
 func (f Fragment) Render() string {
 	var b strings.Builder
+	if f.Title != "" {
+		b.WriteString(`<title>` + html.EscapeString(f.Title) + `</title>`)
+	}
 	for _, p := range f.Body {
 		b.WriteString(p.Render())
 	}
