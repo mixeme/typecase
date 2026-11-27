@@ -350,6 +350,8 @@
 	// the search to its icon, as on a phone, then its second rank under its
 	// «⋯» (11.11).
 	var topSteps = ["", "labels", "labels search", "labels search 2nd"];
+	// A page head's buttons: their labels (Carrel's task 297).
+	var headSteps = ["", "labels"];
 
 	function barItems(el, out) {
 		for (var i = 0; i < el.children.length; i++) {
@@ -546,6 +548,11 @@
 		});
 		document.querySelectorAll(".tc-top").forEach(function (t) {
 			fitBar(t, topSteps);
+		});
+		// a page head's buttons fold so too: to their icons where they would
+		// wrap (Carrel's task 297)
+		document.querySelectorAll(".tc-head > .tc-acts").forEach(function (a) {
+			fitBar(a, headSteps);
 		});
 		document.querySelectorAll("table.tc-table").forEach(fitTable);
 		document.querySelectorAll(".tc-menu.is-pop, .tc-drop__panel--right").forEach(fitMenu);

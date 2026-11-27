@@ -3040,6 +3040,7 @@ func Publish4() Screen {
 									w.Button{
 										Icon:  "panel",
 										Title: "Hide the side column",
+										Side:  true,
 										Href:  "/app/notes/nextcloud/zapisi/9e31-40b7-c012?side=0",
 										Swap:  "note-main",
 									},

@@ -58,9 +58,9 @@
 | `FormFoot` | `tc-formfoot` | нет: поведение у кнопок. | — |
 | `Grid` | `tc-grid` | Стрелки ходят по плиткам. | тест: `TestSelectionForm`, `TestTilePick` |
 | `Grow` | `tc-grow` | нет. | тест: `TestRemoveRow` |
-| `Head` | `tc-head` | нет: поведение у действий. | тест: `TestZonePanel` |
-| `Input` | `tc-in` | Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, идущий за началом (Follows), сдвигается вместе с ним; поле, выводимое из другого (From), показывает образцом Slug набранного там. | тест: `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZonePick`, `TestZoneSheet`, `TestZones`, `TestSlugAgrees` |
-| `Kbd` | `tc-kbd` | нет. | — |
+| `Head` | `tc-head` | Со сценарием кнопки шапки складываются по месту, как бары: где не встают в строку — значками, первичная остаётся словом; на телефоне без сценария — значками. | тест: `TestZonePanel`, `TestHeadFolds` |
+| `Input` | `tc-in` | Ввод — браузера; нативный выбор даты и времени не заменяется. Конец, идущий за началом (Follows), сдвигается вместе с ним; поле, выводимое из другого (From), показывает образцом Slug набранного там. Под пальцем шрифт поля 16 px, моноширинного тоже: телефон не увеличивает страницу; фокус с клавиатуры — рамка акцента. | тест: `TestTouchFields`, `TestFocusRing`, `TestAddRowAndDrop`, `TestEndFollowsStart`, `TestNoScriptSheetAndChecks`, `TestPickShows`, `TestRemoveRow`, `TestShortcuts`, `TestSignInOutsideItsForm`, `TestTemplateShows`, `TestZoneFormOnce`, `TestZonePick`, `TestZoneSheet`, `TestZones`, `TestSlugAgrees` |
+| `Kbd` | `tc-kbd` | Под пальцем и на телефоне не показывается: клавиатуры нет. | тест: `TestTouchFields` |
 | `Line` | `tc-line` | нет. | тест: `TestEditFile`, `TestFilePick`, `TestFileSizes` |
 | `LinkedRow` | `tc-row` | Нажатие открывает запись. | без сценария (ссылка, форма, `details`) |
 | `List` | `tc-list` | Одна остановка Tab: Tab приходит на одну строку (последнюю с фокусом, открытую или первую) и уходит за список; галки строк — не остановки. Стрелки ходят по строкам; Enter открывает строку; пробел нажимает её галку. | тест: `TestListOneStop`, `TestNoScriptSheetAndChecks`, `TestShortcuts`, `TestZonePanel` |

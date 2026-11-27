@@ -37,6 +37,11 @@ do, not what the authors did.
 
 ### Added
 
+- **`Button.Side`: the button that shows or hides a document's side column**
+  (Carrel's task 297). On a phone the column stands under the text, there
+  is no side to hide it from, and the button is not drawn (`tc-btn--side`).
+  Set `Side: true` on «Hide the side column» / «Show the side column».
+
 - **Messages that watch a stream: `Notices.Stream` and `Changed`**
   (Carrel's task 293: letters that come into the folder open in the tab).
   The zone listens while the tab is seen, empty and hidden too; each event
@@ -161,6 +166,24 @@ do, not what the authors did.
   «Back to app» navigation of settings and administration.
 
 ### Fixed
+
+- **A phone, Carrel's task 297:**
+  - Every field is 16 px under a finger, the monospaced ones too (a phone
+    field 11.5 px made the phone zoom the page when touched).
+  - Key hints (`Kbd`) are gone under a finger and in the phone's layout:
+    there is no keyboard to press them on.
+  - A sheet is as tall as what it holds, at the top of the screen, not
+    stretched to the screen's height.
+  - A page head's buttons stand in one line: where they would wrap, the
+    secondary ones go to their icons and the primary keeps its word, as the
+    bars fold; without the script the phone's layout shows them as icons.
+  - The bottom bar's current section is drawn as the rail's: the card's
+    background, semibold, an accent line on top — not only its colour.
+- **A field, a filter box and a button reached by the keyboard are ringed in
+  the accent**, as `is-focus` draws them, not by the browser's own ring
+  (Carrel's task 297).
+- **A heading of a note's text that has no tasks keeps its space above**
+  after a list of tasks: 18 px, as a heading with tasks (Carrel's task 297).
 
 - **An icon beside text stands 1 px lower, between the middles of the
   capitals and the small letters** (Carrel's task 287; the owner, 26.11: «all

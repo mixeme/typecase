@@ -41,6 +41,7 @@ func primitive(state string, fixture Renderer, frame, class string) Entry {
 
 var _ = add(
 	// tc-btn — every form of the button.
+	primitive("side", w.Button{Icon: "panel", Title: "Hide the side column", Side: true, Href: "/app/notes/nextcloud/zapisi/9e31-40b7-c012?side=0", Swap: "note-main"}, "s-notes-2", "tc-btn"),
 	primitive("primary-small", w.Button{Label: "Copy", Icon: "dup", Kind: w.ButtonPrimary, Small: true, Copy: "https://carrel.example/p/7Qm2c8XvLk3w", Copied: "Copied"}, "s-publish-22", "tc-btn"),
 	primitive("mail", w.Button{Folds: true, Label: "Move to", Menu: true, Icon: "move", Title: "Move to"}, "s-mailbox-3", "tc-btn"),
 	primitive("mail", w.Button{Label: "Connect", Kind: w.ButtonPrimary, Form: "mailbox", State: w.ButtonDisabled}, "s-mailbox-23", "tc-btn"),

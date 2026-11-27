@@ -84,7 +84,7 @@ func (b IconBox) class() string {
 // Button — tc-btn
 //
 // Роль. Действие одним нажатием: подпись, значок или оба, со стрелкой, если нажатие раскрывает список.
-// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Closes, Target, Key, ScriptOnly, Busy, Marks, Focuses}.
+// Вход. Button{Label, Icon, IconBox, Bold, Folds, Aside, After, Tick, Menu, Kind, Small, Variant, State, Reason, Focus, Title, Submit, Href, Form, To, Name, Value, Adds, Opens, SaveAs, SaveFrom, Copy, CopyFrom, Copied, Count, CountOne, Swap, File, NoScript, Removes, Place, Secondary, Tertiary, Side, Closes, Target, Key, ScriptOnly, Busy, Marks, Focuses}.
 // Состояния. normal | icon | primary | danger | danger-solid | small | menu | folds | variant | off | disabled | wait | focus | with-content | tertiary | link | link-off | post.
 // Инварианты. Род, состояние и вариант — перечисления: главную тревожную кнопку, недоступную и выключенную сразу, не собрать; у кнопки без подписи есть доступное имя; кнопка печатает фрагмент своего кадра.
 // Поведение. Нажатие — действие потребителя; кнопка со стрелкой (Menu) открывает свой список через узел меню, а не сама; клавиша (Key) нажимает кнопку, тревожная клавиши не несёт.
@@ -179,6 +179,10 @@ type Button struct {
 	Secondary bool
 	// Tertiary goes under «⋯» on a phone, after the secondary ones.
 	Tertiary bool
+	// Side shows or hides a document's side column (DocLayout): where the
+	// column stands under the text — on a phone — there is no side to hide
+	// it from, and the button is not there (Carrel's task 297).
+	Side bool
 	// Closes makes the button close the sheet or panel it stands in, with
 	// the library's script and without a request: a sheet's Cancel. Without a
 	// script it is what it is besides — a link back (Href) or a button.
@@ -244,7 +248,7 @@ func (b Button) html(m mix) string {
 		state = "is-wait"
 	}
 	tag := "button"
-	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.ScriptOnly, "tc-js"), pick(b.NoScript, "tc-nojs"))
+	cls := class(m, "tc-btn", b.Kind.class(), is("sm", b.Small), state, is("focus", b.Focus), b.Variant.class(), b.Place.class(), rank(b.Secondary), rank3(b.Tertiary), pick(b.Side, "tc-btn--side"), pick(b.ScriptOnly, "tc-js"), pick(b.NoScript, "tc-nojs"))
 	common := attr("title", title) + attr("aria-label", pick(b.Label == "", b.Title)) + attr("data-tc-open", b.Opens) +
 		attr("data-tc-key", pick(b.Kind != ButtonDanger && b.Kind != ButtonDangerSolid, b.Key)) + attr("data-tc-busy", b.Busy)
 	copies := attr("data-tc-copy", b.Copy) + attr("data-tc-copy-from", b.CopyFrom) + attr("data-tc-copied", b.Copied) +
