@@ -58,6 +58,11 @@ const (
 	// MockupNesting requires every closing tag to close the element opened
 	// last, and every element to be closed, across the whole file.
 	MockupNesting MockupLintRule = "nesting"
+	// MockupDrawerFallback requires the drawer's style() block to be
+	// followed by its copy under @media (max-width:640px), each selector
+	// under :where(.tc-shell,.tc-overlay): a browser without style queries
+	// skips the block (Carrel's task 299).
+	MockupDrawerFallback MockupLintRule = "drawer-fallback"
 )
 
 // MockupLintStep0 is the first rule set: frame ids only.
@@ -68,7 +73,7 @@ var MockupLintLive = []MockupLintRule{
 	MockupFrameIDs, MockupStyleBlocks, MockupFrameClasses, MockupFrameElements, MockupFrameNoStyle,
 	MockupFrameNamedClass, MockupDataAttrs, MockupSelfContained, MockupClassesDefined,
 	MockupDeadRules, MockupNamedContainer, MockupTokenVars, MockupEmptyRules,
-	MockupNoNumberedClasses, MockupNesting, MockupContextMinimum,
+	MockupNoNumberedClasses, MockupNesting, MockupContextMinimum, MockupDrawerFallback,
 }
 
 const mockupRel = "docs/visual/carrel-ui-mockups.html"
@@ -162,6 +167,10 @@ func CheckMockupLint(html string, rules ...MockupLintRule) error {
 			}
 		case MockupTokenVars:
 			if err := checkMockupTokenVars(html); err != nil {
+				errs = append(errs, err.Error())
+			}
+		case MockupDrawerFallback:
+			if err := checkMockupDrawerFallback(html); err != nil {
 				errs = append(errs, err.Error())
 			}
 		default:

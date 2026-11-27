@@ -2,6 +2,8 @@ package browser_test
 
 import (
 	"context"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -150,5 +152,63 @@ func TestDocHeadingAfterTasks(t *testing.T) {
 	}
 	if gap < 16 {
 		t.Errorf("the heading after the tasks stands %d px under them, want at least 16", gap)
+	}
+}
+
+// TestDrawerWithoutStyleQueries: a browser that does not know
+// @container style() (Firefox 132 on a phone) skips the drawer's block; its
+// copy under the window's width still gives a phone the drawer's look — the
+// note's side column under the text, rows 52 px — and a wide window keeps
+// the desktop's (Carrel's task 299).
+func TestDrawerWithoutStyleQueries(t *testing.T) {
+	needChrome(t)
+	h := browser.NewHarness(t)
+	data, err := os.ReadFile(filepath.Join(browser.ModuleRoot(t), "css", "typecase.css"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	css := string(data)
+	const q = "@container style(--tc-shell-mode: drawer){"
+	i := strings.Index(css, q)
+	if i < 0 {
+		t.Fatal("no drawer block in typecase.css")
+	}
+	depth, end := 0, -1
+	for j := i + len(q) - 1; j < len(css); j++ {
+		if css[j] == '{' {
+			depth++
+		} else if css[j] == '}' {
+			if depth--; depth == 0 {
+				end = j
+				break
+			}
+		}
+	}
+	old := css[:i] + css[end+1:] // what an old browser reads
+	body := `<div class="tc-root tc-shell"><div class="tc-shell__body tc-shell__body--no-rail"><div class="tc-main">` +
+		`<div class="tc-doc__layout"><div class="tc-doc">Text of the note</div><aside class="tc-docmeta">Side</aside></div>` +
+		`<div class="tc-list"><a class="tc-row" href="#r">Row</a></div></div></div></div>`
+	page := func(id, sheet string) string {
+		return h.RegisterPage(id, `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">`+
+			`<link rel="stylesheet" href="`+h.RegisterCSS(id+".css", sheet)+`"></head><body data-tc-root style="margin:0">`+body+`</body></html>`)
+	}
+	const probe = `(() => { const l = document.querySelector(".tc-doc__layout"), r = document.querySelector(".tc-row");
+		return getComputedStyle(l).gridTemplateColumns.split(" ").length + " cols, row " + getComputedStyle(r).minHeight; })()`
+	for _, c := range []struct {
+		name, sheet string
+		width       int
+		want        string
+	}{
+		{"with style()", css, 360, "1 cols, row 52px"},
+		{"without style()", old, 360, "1 cols, row 52px"},
+		{"without style(), wide", old, 1200, "2 cols"},
+	} {
+		var got string
+		if err := h.Run(page(strings.ReplaceAll(c.name, " ", "-"), c.sheet), c.width, 700, chromedp.Evaluate(probe, &got)); err != nil {
+			t.Fatal(err)
+		}
+		if !strings.HasPrefix(got, c.want) {
+			t.Errorf("%s at %d: %s, want %s", c.name, c.width, got, c.want)
+		}
 	}
 }

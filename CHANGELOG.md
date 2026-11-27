@@ -167,6 +167,16 @@ do, not what the authors did.
 
 ### Fixed
 
+- **A phone in a browser without `@container style()` gets the phone's look**
+  (Carrel's task 299: Firefox 132 on a phone kept the note's side column
+  beside a one-word-wide text, rows as on a tablet). The drawer's block is
+  followed by its copy under `@media (max-width:640px)`, each selector under
+  `:where(.tc-shell,.tc-overlay)`: a window that narrow holds a root as
+  narrow, so the copy only repeats the block where style queries work. A
+  shell set narrower than its window (a frame of the mockup) stays without
+  the drawer's look of descendants in such a browser. Nothing to change in
+  code; the gate `drawer-fallback` keeps the copy equal to the block,
+  `TestDrawerWithoutStyleQueries` reads the CSS without the block.
 - **A phone, Carrel's task 297:**
   - Every field is 16 px under a finger, the monospaced ones too (a phone
     field 11.5 px made the phone zoom the page when touched).
