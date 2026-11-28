@@ -51,8 +51,8 @@ func Find1() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник", Meta: "0"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Files", Meta: "0"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Meta: "2"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "nextcloud · Files", Meta: "0"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "sftpgo · vps · Files", Meta: "2"},
 					},
 				},
 				w.RailFoot{
@@ -172,7 +172,7 @@ func Find1() Screen {
 								Bytes:  "240 KB",
 								Time:   "2026-08-04 11:20",
 								Access: "rw",
-								Source: "sftpgo · vps · Documents",
+								Source: "sftpgo · vps · Files",
 							},
 							w.SizeRow{
 								Mark:   &w.Mark{Colour: "#4A6B52"},
@@ -181,7 +181,7 @@ func Find1() Screen {
 								Bytes:  "6 KB",
 								Time:   "2026-07-21 16:02",
 								Access: "rw",
-								Source: "sftpgo · vps · Documents",
+								Source: "sftpgo · vps · Files",
 							},
 						},
 					},
@@ -234,8 +234,8 @@ func Find4() Screen {
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Дела", Meta: "0"},
 						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Записи", Meta: "1"},
 						w.TickRow{Mark: w.Mark{Colour: "#6B4E7A"}, Label: "Дневник"},
-						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "Files"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents"},
+						w.TickRow{Mark: w.Mark{Colour: "#9A9280"}, Label: "nextcloud · Files"},
+						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "sftpgo · vps · Files"},
 					},
 				},
 				w.RailFoot{
@@ -599,7 +599,7 @@ func Find3() Screen {
 						Mark:  &w.Mark{Colour: "#4A6B52"},
 						Found: []w.Inline{w.Text("договор-"), w.Strong("ковал"), w.Text("ёва.pdf")},
 						Trail: w.Dim{
-							Parts:   []w.Inline{w.Text("sftpgo · vps · Documents")},
+							Parts:   []w.Inline{w.Text("sftpgo · vps · Files")},
 							Size:    w.Dim11,
 							Variant: w.DimTight,
 							Place:   w.Pushed,

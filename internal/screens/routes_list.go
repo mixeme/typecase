@@ -284,7 +284,7 @@ var Routes = []Route{
 	{Frame: "states-31", Caption: "Заметка · сервер не сохранил свойства", Screen: States31},
 	{Frame: "states-32", Caption: "Папка пуста", Screen: States32},
 	{Frame: "states-33", Caption: "Хранилище · сервер не ответил", Screen: States33},
-	{Frame: "states-34", Caption: "Хранилище только для чтения", Screen: States34},
+	{Frame: "states-34", Caption: "Папка только для чтения", Screen: States34},
 	{Frame: "states-35", Caption: "Файлы · ни одно хранилище не отмечено", Screen: States35},
 	{Frame: "dark-1", Caption: "Календарь · тёмная тема", Theme: "dark", Screen: Dark1},
 	{Frame: "dark-2", Caption: "Контакты и накладка перетаскивания · тёмная тема", Theme: "dark", Screen: Dark2},

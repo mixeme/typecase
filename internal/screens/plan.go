@@ -805,12 +805,7 @@ func Davloom5() Screen {
 														w.Check{On: true, Name: "nextcloud", Value: "1", Parts: []w.CheckPart{w.Text("nextcloud · Контакты")}},
 														w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Проекты")}},
 														w.Check{Name: "radicale.vps", Value: "1", Parts: []w.CheckPart{w.Text("radicale · vps · Команда")}},
-														w.Check{
-															On:    true,
-															Name:  "sftpgo.vps.documents",
-															Value: "1",
-															Parts: []w.CheckPart{w.Text("sftpgo · vps · Documents")},
-														},
+														w.Check{On: true, Name: "sftpgo.vps.files", Value: "1", Parts: []w.CheckPart{w.Text("sftpgo · vps · Files")}},
 													},
 													Form: w.GroupColumn,
 												},
@@ -1683,17 +1678,9 @@ func Plan5() Screen {
 							},
 							{
 								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 									{Parts: []w.CellPart{w.Text("WebDAV")}, Mono: true},
-									{Parts: []w.CellPart{w.Text("https://files.example.org/dav/Documents/")}, Mono: true, Small: true},
-									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
-								},
-							},
-							{
-								Cells: []w.TableCell{
-									{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-									{Parts: []w.CellPart{w.Text("WebDAV "), w.Badge{Label: "ro"}}, Mono: true},
-									{Parts: []w.CellPart{w.Text("https://files.example.org/dav/Public/")}, Mono: true, Small: true},
+									{Parts: []w.CellPart{w.Text("https://files.example.org/dav/")}, Mono: true, Small: true},
 									{Parts: []w.CellPart{w.Button{Label: "Copy", Small: true}}, Acts: true},
 								},
 							},

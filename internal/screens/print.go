@@ -300,7 +300,7 @@ func Print5() Screen {
 				Items: []w.PrintRowPart{
 					w.PrintCell{Name: "запись-встречи.m4a"},
 					w.PrintNum{Text: "24 MB"},
-					w.PrintNum{Text: "Documents / carrel"},
+					w.PrintCell{Name: "sftpgo · vps / Documents / carrel"},
 				},
 				Columns: true,
 			},
@@ -377,7 +377,7 @@ func Print6() Screen {
 	return w.Page{
 		Items: []w.PagePart{
 			w.PrintTitle{Text: "Files · Documents / carrel / attachments / 2026-07"},
-			w.PrintSources{Text: "sftpgo · vps · Documents"},
+			w.PrintSources{Text: "sftpgo · vps · Files"},
 			w.PrintRow{
 				Items:   []w.PrintRowPart{w.PrintCell{Name: "Name"}, w.PrintNum{Text: "Size"}, w.PrintNum{Text: "Changed"}},
 				Columns: true,

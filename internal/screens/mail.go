@@ -1507,7 +1507,7 @@ func Mail4() Screen {
 												w.TableFile{
 													Icon: "doc",
 													Name: "смета-подрядчик.pdf",
-													Href: "/app/files/sftpgo/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
+													Href: "/app/files/sftpgo/files/documents/carrel/attachments/2026-08/смета-подрядчик.pdf",
 												},
 											},
 										},
@@ -2648,11 +2648,14 @@ func Mail6() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/smeta-podryadchik.pdf",
+					Action: "/app/mail/attach?what=file&path=sftpgo/files/documents/stroyka/podryad/smeta-podryadchik.pdf",
 					Icon:   "doc",
 					Title:  "Attach a file",
 					Head: []w.SheetHeadPart{
-						w.Crumbs{Path: []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}}, Current: "Подряд"},
+						w.Crumbs{
+							Path:    []w.Crumb{{Label: "Files", Href: "#"}, {Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}},
+							Current: "Подряд",
+						},
 						w.Close{Label: "Close", Href: "/app/mail/compose"},
 					},
 					Body: []w.SheetPart{
@@ -2660,36 +2663,36 @@ func Mail6() Screen {
 							Rail: []w.SheetPickRail{
 								w.Tree{
 									Rows: []w.TreeRow{
-										{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=file&dir=sftpgo"},
+										{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=file&dir=sftpgo/files"},
 										{
 											Icon:   "file",
 											Label:  "Documents",
 											Indent: w.TreeLevel22,
-											Href:   "/app/mail/attach?what=file&dir=sftpgo/documents",
+											Href:   "/app/mail/attach?what=file&dir=sftpgo/files/documents",
 										},
 										{
 											Icon:   "file",
 											Label:  "Стройка",
 											Indent: w.TreeLevel36,
-											Href:   "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka",
+											Href:   "/app/mail/attach?what=file&dir=sftpgo/files/documents/stroyka",
 										},
 										{
 											Icon:   "file",
 											Label:  "Договор подряда",
 											Indent: w.TreeLevel44,
-											Href:   "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/dogovor-podryada",
+											Href:   "/app/mail/attach?what=file&dir=sftpgo/files/documents/stroyka/dogovor-podryada",
 										},
 										{
 											Icon:   "file",
 											Label:  "Подряд",
 											Indent: w.TreeLevel44,
-											Href:   "/app/mail/attach?what=file&dir=sftpgo/documents/stroyka/podryad",
+											Href:   "/app/mail/attach?what=file&dir=sftpgo/files/documents/stroyka/podryad",
 										},
 										{
 											Icon:   "file",
 											Label:  "Личное",
 											Indent: w.TreeLevel36,
-											Href:   "/app/mail/attach?what=file&dir=sftpgo/documents/lichnoe",
+											Href:   "/app/mail/attach?what=file&dir=sftpgo/files/documents/lichnoe",
 										},
 									},
 									On:      5,
@@ -2712,7 +2715,7 @@ func Mail6() Screen {
 														w.TableFile{
 															Icon: "doc",
 															Name: "смета-подрядчик.pdf",
-															Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/smeta-podryadchik.pdf",
+															Href: "/app/mail/attach?what=file&path=sftpgo/files/documents/stroyka/podryad/smeta-podryadchik.pdf",
 														},
 													},
 												},
@@ -2729,7 +2732,7 @@ func Mail6() Screen {
 														w.TableFile{
 															Icon: "doc",
 															Name: "договор-подряда.pdf",
-															Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/dogovor-podryada.pdf",
+															Href: "/app/mail/attach?what=file&path=sftpgo/files/documents/stroyka/podryad/dogovor-podryada.pdf",
 														},
 													},
 												},
@@ -2745,7 +2748,7 @@ func Mail6() Screen {
 														w.TableFile{
 															Icon: "img",
 															Name: "объект-фасад.jpg",
-															Href: "/app/mail/attach?what=file&path=sftpgo/documents/stroyka/podryad/obekt-fasad.jpg",
+															Href: "/app/mail/attach?what=file&path=sftpgo/files/documents/stroyka/podryad/obekt-fasad.jpg",
 														},
 													},
 												},
@@ -3403,12 +3406,12 @@ func Mail13() Screen {
 			},
 			Scrim: w.Scrim{
 				Content: w.Sheet{
-					Action: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada",
+					Action: "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka/dogovor-podryada",
 					Icon:   "file",
 					Title:  "Attach a folder",
 					Head: []w.SheetHeadPart{
 						w.Crumbs{
-							Path:    []w.Crumb{{Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}},
+							Path:    []w.Crumb{{Label: "Files", Href: "#"}, {Label: "Documents", Href: "#"}, {Label: "Стройка", Href: "#"}},
 							Current: "Договор подряда",
 						},
 						w.Close{Label: "Close", Href: "/app/mail/compose"},
@@ -3418,42 +3421,42 @@ func Mail13() Screen {
 							Rail: []w.SheetPickRail{
 								w.Tree{
 									Rows: []w.TreeRow{
-										{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=folder&dir=sftpgo"},
+										{Icon: "server", Label: "sftpgo · vps", Href: "/app/mail/attach?what=folder&dir=sftpgo/files"},
 										{
 											Icon:   "file",
 											Label:  "Documents",
 											Indent: w.TreeLevel22,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents",
 										},
 										{
 											Icon:   "file",
 											Label:  "Стройка",
 											Indent: w.TreeLevel36,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka",
 										},
 										{
 											Icon:   "file",
 											Label:  "Договор подряда",
 											Indent: w.TreeLevel44,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka/dogovor-podryada",
 										},
 										{
 											Icon:   "file",
 											Label:  "Сканы",
 											Indent: w.TreeLevel58,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada/skany",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka/dogovor-podryada/skany",
 										},
 										{
 											Icon:   "file",
 											Label:  "Подряд",
 											Indent: w.TreeLevel44,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/podryad",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka/podryad",
 										},
 										{
 											Icon:   "file",
 											Label:  "Личное",
 											Indent: w.TreeLevel36,
-											Href:   "/app/mail/attach?what=folder&dir=sftpgo/documents/lichnoe",
+											Href:   "/app/mail/attach?what=folder&dir=sftpgo/files/documents/lichnoe",
 										},
 									},
 									On:      4,
@@ -3475,7 +3478,7 @@ func Mail13() Screen {
 														w.TableFile{
 															Icon: "file",
 															Name: "Сканы",
-															Href: "/app/mail/attach?what=folder&dir=sftpgo/documents/stroyka/dogovor-podryada/skany",
+															Href: "/app/mail/attach?what=folder&dir=sftpgo/files/documents/stroyka/dogovor-podryada/skany",
 														},
 													},
 												},

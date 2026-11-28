@@ -865,6 +865,9 @@ label.tc-menu__item{position:relative;cursor:pointer}
    на вторую строку в узкий столбец и ломается по дефисам. */
 .tc-root.tc-root--print .tc-print__row--3col{grid-template-columns:minmax(0,1fr) 10em 14.5em}
 .tc-root.tc-root--print .tc-print__row--3col > :not(:first-child){white-space:nowrap}
+/* Место вложения — хранилище и папка («sftpgo · vps / Documents / carrel», задача Carrel 304) —
+   ячейка, а не число: в 14.5em оно переносится по словам, а не уходит за край. */
+.tc-root.tc-root--print .tc-print__row--3col > .tc-print__cell:last-child{white-space:normal;overflow-wrap:anywhere}
 /* Поле карточки на бумаге и текст заметки в ширине для чтения (задача Carrel 228). */
 .tc-root.tc-root--print .tc-print__row--field{grid-template-columns:minmax(90px,150px) minmax(0,1fr)}
 .tc-root.tc-root--print .tc-print__row--field > .tc-print__cell{overflow-wrap:anywhere}

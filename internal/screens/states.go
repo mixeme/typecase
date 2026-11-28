@@ -6173,11 +6173,15 @@ func States31() Screen {
 												Href:   "#",
 											},
 											w.DocAttach{
-												Name:   "запись-встречи.m4a",
-												Size:   w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
-												Where:  w.Badge{Label: "Documents / carrel"},
-												Remove: &w.Button{Label: "Unlink", Small: true, Title: "Remove the link; the file stays in Documents / carrel"},
-												Href:   "#",
+												Name:  "запись-встречи.m4a",
+												Size:  w.Dim{Parts: []w.Inline{w.Text("· 24 MB")}},
+												Where: w.Badge{Label: "sftpgo · vps / Documents / carrel"},
+												Remove: &w.Button{
+													Label: "Unlink",
+													Small: true,
+													Title: "Remove the link; the file stays in sftpgo · vps / Documents / carrel",
+												},
+												Href: "#",
 											},
 										},
 										ID: "note-loss-attachments",
@@ -6227,14 +6231,7 @@ func States32() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.TickRow{
-							Ticked: w.TickedPart,
-							Kind:   w.TickRowRoot,
-							Icon:   "file",
-							Label:  "Selected collections",
-							Href:   "/app/files",
-							Meta:   "2 of 3",
-						},
+						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Href: "/app/files", Meta: "2 of 2"},
 					},
 				},
 				w.RailSec{
@@ -6242,18 +6239,10 @@ func States32() Screen {
 						w.Rubric{Text: "sftpgo · vps"},
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#4A6B52"},
-							Label:   "Documents",
-							Href:    "/app/files/sftpgo/documents",
+							Label:   "Files",
+							Href:    "/app/files/sftpgo/files",
 							Meta:    "rw",
 							Current: true,
-						},
-						w.TickRow{
-							Ticked: w.TickedOff,
-							Mark:   w.Mark{Colour: "#9A9280"},
-							Label:  "Public",
-							Href:   "/app/files/sftpgo/public",
-							Hidden: true,
-							Trail:  w.Badge{Label: "ro"},
 						},
 					},
 				},
@@ -6292,6 +6281,7 @@ func States32() Screen {
 						Title: &w.HeadTitle{Text: "черновики"},
 						Crumbs: &w.Crumbs{
 							Path: []w.Crumb{
+								{Label: "Files", Href: "#"},
 								{Label: "Documents", Href: "#"},
 								{Label: "carrel", Href: "#"},
 								{Label: "attachments", Href: "#"},
@@ -6328,7 +6318,7 @@ func States32() Screen {
 									Name:  "file",
 									Label: "Files",
 									Size:  "size",
-									Taken: "/app/files/sftpgo/documents/upload/carrel/attachments/2026-07/черновики?op=taken",
+									Taken: "/app/files/sftpgo/files/upload/documents/carrel/attachments/2026-07/черновики?op=taken",
 									Many:  true,
 								},
 							},
@@ -6340,7 +6330,7 @@ func States32() Screen {
 					},
 					w.PostForm{
 						ID:        "post-upload",
-						Action:    "/app/files/sftpgo/documents/upload/carrel/attachments/2026-07/черновики",
+						Action:    "/app/files/sftpgo/files/upload/documents/carrel/attachments/2026-07/черновики",
 						Fields:    []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 						Multipart: true,
 					},
@@ -6398,14 +6388,7 @@ func States33() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.TickRow{
-							Ticked: w.TickedPart,
-							Kind:   w.TickRowRoot,
-							Icon:   "file",
-							Label:  "Selected collections",
-							Href:   "/app/files",
-							Meta:   "2 of 3",
-						},
+						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Href: "/app/files", Meta: "2 of 2"},
 					},
 				},
 				w.RailSec{
@@ -6413,18 +6396,10 @@ func States33() Screen {
 						w.Rubric{Text: "sftpgo · vps"},
 						w.TickRow{
 							Mark:    w.Mark{Colour: "#4A6B52"},
-							Label:   "Documents",
-							Href:    "/app/files/sftpgo/documents",
+							Label:   "Files",
+							Href:    "/app/files/sftpgo/files",
 							Current: true,
 							Error:   true,
-						},
-						w.TickRow{
-							Ticked: w.TickedOff,
-							Mark:   w.Mark{Colour: "#9A9280"},
-							Label:  "Public",
-							Href:   "/app/files/sftpgo/public",
-							Hidden: true,
-							Trail:  w.Badge{Label: "ro"},
 						},
 					},
 				},
@@ -6487,7 +6462,7 @@ func States33() Screen {
 	}
 }
 
-// States34 is frame «Хранилище только для чтения» (states-34).
+// States34 is frame «Папка только для чтения» (states-34).
 func States34() Screen {
 	return w.Shell{
 		Top: &w.Top{
@@ -6517,19 +6492,18 @@ func States34() Screen {
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
-						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Href: "/app/files", Meta: "3 of 3"},
+						w.TickRow{Kind: w.TickRowRoot, Icon: "file", Label: "Selected collections", Href: "/app/files", Meta: "2 of 2"},
 					},
 				},
 				w.RailSec{
 					Items: []w.RailSecPart{
 						w.Rubric{Text: "sftpgo · vps"},
-						w.TickRow{Mark: w.Mark{Colour: "#4A6B52"}, Label: "Documents", Href: "/app/files/sftpgo/documents", Meta: "rw"},
 						w.TickRow{
-							Mark:    w.Mark{Colour: "#9A9280"},
-							Label:   "Public",
-							Href:    "/app/files/sftpgo/public",
+							Mark:    w.Mark{Colour: "#4A6B52"},
+							Label:   "Files",
+							Href:    "/app/files/sftpgo/files",
+							Meta:    "rw",
 							Current: true,
-							Trail:   w.Badge{Label: "ro"},
 						},
 					},
 				},
@@ -6553,7 +6527,7 @@ func States34() Screen {
 				},
 				w.RailFoot{
 					Items: []w.RailFootPart{
-						w.Button{Icon: "plus", Title: "This storage is read-only.", State: w.ButtonDisabled},
+						w.Button{Icon: "plus", Title: "Public is read-only.", State: w.ButtonDisabled},
 						w.Button{Icon: "server", Title: "Connect account"},
 						w.Button{Icon: "link", Title: "Subscribe to a feed"},
 						w.Emblem{Symbol: "davloom", Title: "davloom · running · 3 devices"},
@@ -6633,16 +6607,16 @@ func States34() Screen {
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Label: "Name", Href: "/app/files/sftpgo/public?sort=name", On: true},
-									{Label: "Size", Href: "/app/files/sftpgo/public?sort=size"},
-									{Label: "Changed", Href: "/app/files/sftpgo/public?sort=changed"},
+									{Label: "Name", Href: "/app/files/sftpgo/files/public?sort=name", On: true},
+									{Label: "Size", Href: "/app/files/sftpgo/files/public?sort=size"},
+									{Label: "Changed", Href: "/app/files/sftpgo/files/public?sort=changed"},
 								},
 								Secondary: true,
 							},
 							w.Seg{
 								Options: []w.SegOption{
-									{Icon: "menu", Href: "/app/files/sftpgo/public?view=list", On: true, Title: "List"},
-									{Icon: "grid", Href: "/app/files/sftpgo/public?view=tiles", Title: "Tiles"},
+									{Icon: "menu", Href: "/app/files/sftpgo/files/public?view=list", On: true, Title: "List"},
+									{Icon: "grid", Href: "/app/files/sftpgo/files/public?view=tiles", Title: "Tiles"},
 								},
 							},
 							w.Button{Label: "Columns", Icon: "cols"},
@@ -6651,9 +6625,9 @@ func States34() Screen {
 								More:    true,
 								Menu: w.Menu{
 									Items: []w.MenuPart{
-										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/public?sort=name"},
-										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/public?sort=size"},
-										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/public?sort=changed"},
+										w.MenuItem{Label: "Name", On: true, Href: "/app/files/sftpgo/files/public?sort=name"},
+										w.MenuItem{Label: "Size", Href: "/app/files/sftpgo/files/public?sort=size"},
+										w.MenuItem{Label: "Changed", Href: "/app/files/sftpgo/files/public?sort=changed"},
 									},
 									Pop:    w.MenuUnderEnd,
 									Inline: true,
@@ -6676,7 +6650,9 @@ func States34() Screen {
 								Cells: []w.TableCell{
 									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "прайс-2026.pdf"}},
 									{
-										Parts: []w.CellPart{w.TableFile{Icon: "doc", Name: "прайс-2026.pdf", Href: "/app/files/sftpgo/public/прайс-2026.pdf"}},
+										Parts: []w.CellPart{
+											w.TableFile{Icon: "doc", Name: "прайс-2026.pdf", Href: "/app/files/sftpgo/files/public/прайс-2026.pdf"},
+										},
 									},
 									{Parts: []w.CellPart{w.Text("1.1 MB")}, Mono: true},
 									{Parts: []w.CellPart{w.Text("application/pdf")}, Mono: true},
@@ -6689,7 +6665,7 @@ func States34() Screen {
 									{Pick: ptr(w.TickedOff), Send: w.Send{Of: "files-sel", Name: "item", Value: "схема-проезда.png"}},
 									{
 										Parts: []w.CellPart{
-											w.TableFile{Icon: "img", Name: "схема-проезда.png", Href: "/app/files/sftpgo/public/схема-проезда.png"},
+											w.TableFile{Icon: "img", Name: "схема-проезда.png", Href: "/app/files/sftpgo/files/public/схема-проезда.png"},
 										},
 									},
 									{Parts: []w.CellPart{w.Text("4.2 MB")}, Mono: true},
@@ -6702,7 +6678,7 @@ func States34() Screen {
 					},
 					w.PostForm{
 						ID:     "files-sel",
-						Action: "/app/files/sftpgo/public/op",
+						Action: "/app/files/sftpgo/files/op/public",
 						Fields: []w.Hidden{{Name: "csrf", Value: "7f3a91de"}},
 					},
 				},
@@ -6747,7 +6723,7 @@ func States35() Screen {
 							Icon:    "file",
 							Label:   "Selected collections",
 							Href:    "/app/files",
-							Meta:    "0 of 3",
+							Meta:    "0 of 2",
 							Current: true,
 						},
 					},
@@ -6758,18 +6734,10 @@ func States35() Screen {
 						w.TickRow{
 							Ticked: w.TickedOff,
 							Mark:   w.Mark{Colour: "#4A6B52"},
-							Label:  "Documents",
-							Href:   "/app/files/sftpgo/documents",
+							Label:  "Files",
+							Href:   "/app/files/sftpgo/files",
 							Meta:   "rw",
 							Hidden: true,
-						},
-						w.TickRow{
-							Ticked: w.TickedOff,
-							Mark:   w.Mark{Colour: "#9A9280"},
-							Label:  "Public",
-							Href:   "/app/files/sftpgo/public",
-							Hidden: true,
-							Trail:  w.Badge{Label: "ro"},
 						},
 					},
 				},
@@ -6812,7 +6780,7 @@ func States35() Screen {
 				Items: []w.MainPart{
 					w.Head{
 						Title: &w.HeadTitle{Text: "Selected collections", Size: w.HeadTitle18},
-						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 3 storages")}}},
+						Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("0 of 2 storages")}}},
 						Pad:   w.HeadSnug,
 					},
 					w.Empty{

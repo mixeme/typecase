@@ -69,7 +69,7 @@ func Profile1() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 17 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 16 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -425,7 +425,6 @@ func Profile1() Screen {
 										Items: []w.RubricPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
 													w.Button{Label: "Show password", Small: true},
 													w.Button{Label: "Test", Small: true},
 													w.Button{
@@ -449,7 +448,7 @@ func Profile1() Screen {
 									w.Table{
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
-											{Label: "Folder"},
+											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
@@ -458,30 +457,16 @@ func Profile1() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|documents"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|files"}},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("10")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|public"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-												State: w.RowOff,
 											},
 										},
 									},
@@ -653,7 +638,7 @@ func Profile27() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 17 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 16 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -1010,7 +995,6 @@ func Profile27() Screen {
 										Items: []w.RubricPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
 													w.Button{Label: "Show password", Small: true},
 													w.Button{Label: "Test", Small: true},
 													w.Button{
@@ -1034,7 +1018,7 @@ func Profile27() Screen {
 									w.Table{
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
-											{Label: "Folder"},
+											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
@@ -1043,30 +1027,16 @@ func Profile27() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|documents"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|files"}},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("10")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|public"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-												State: w.RowOff,
 											},
 										},
 									},
@@ -1297,7 +1267,7 @@ func Profile26() Screen {
 							Title: &w.HeadTitle{Text: "Connections"},
 							Subs: []w.HeadSub{
 								w.HeadSub{
-									Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 17 collections · 2 subscriptions")},
+									Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 16 collections · 2 subscriptions")},
 								},
 							},
 							Acts: &w.Acts{
@@ -1635,7 +1605,6 @@ func Profile26() Screen {
 											Items: []w.RubricPart{
 												w.Line{
 													Items: []w.LinePart{
-														w.Button{Label: "New folder", Icon: "plus", Small: true},
 														w.Button{Label: "Show password", Small: true},
 														w.Button{Label: "Test", Small: true},
 														w.Button{
@@ -1659,7 +1628,7 @@ func Profile26() Screen {
 										w.Table{
 											Cols: []w.TableCol{
 												{Width: w.ColTickSmall},
-												{Label: "Folder"},
+												{Label: "Collection"},
 												{Label: "What is in it", Rank: w.Rank3},
 												{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 												{Label: "Changed on the server", Width: w.ColChanged, Main: true},
@@ -1668,30 +1637,16 @@ func Profile26() Screen {
 											Rows: []w.TableRow{
 												{
 													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|documents"}},
-														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+														{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|files"}},
+														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 														{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("10")}, Mono: true},
+														{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 														{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
 														{
 															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 															Acts:  true,
 														},
 													},
-												},
-												{
-													Cells: []w.TableCell{
-														{Pick: ptr(w.TickedOff), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|public"}},
-														{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-														{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-														{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-														{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-														{
-															Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-															Acts:  true,
-														},
-													},
-													State: w.RowOff,
 												},
 											},
 										},
@@ -3318,7 +3273,7 @@ func Profile3() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections", Size: w.HeadTitle19},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 17 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 16 collections · 2 subscriptions")}}},
 							Pad:   w.HeadSnug,
 						},
 						w.Pad{
@@ -3478,7 +3433,7 @@ func Profile4() Screen {
 								Parts: []w.HeadSubPart{
 									w.Text("Signed in as "),
 									w.Strong("mix"),
-									w.Text(" · 4 servers · 17 collections · 2 subscriptions "),
+									w.Text(" · 4 servers · 16 collections · 2 subscriptions "),
 									w.Badge{Label: "credentials unlocked · 4:12", Accent: true},
 									w.Button{Label: "Lock now", Small: true},
 								},
@@ -3835,7 +3790,6 @@ func Profile4() Screen {
 										Items: []w.RubricPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
 													w.Button{Label: "Show password", Small: true},
 													w.Button{Label: "Test", Small: true},
 													w.Button{
@@ -3859,7 +3813,7 @@ func Profile4() Screen {
 									w.Table{
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
-											{Label: "Folder"},
+											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4},
 											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
@@ -3868,30 +3822,16 @@ func Profile4() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|documents"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|files"}},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("10")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|public"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-												State: w.RowOff,
 											},
 										},
 									},
@@ -4665,7 +4605,7 @@ func Profile7() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 17 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 16 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadSnug,
 						},
@@ -4856,7 +4796,7 @@ func Profile8() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 17 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 16 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadSnug,
 						},
@@ -5060,7 +5000,7 @@ func Profile9() Screen {
 					Items: []w.MainPart{
 						w.Head{
 							Title: &w.HeadTitle{Text: "Connections"},
-							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 17 collections · 2 subscriptions")}}},
+							Subs:  []w.HeadSub{w.HeadSub{Parts: []w.HeadSubPart{w.Text("4 servers · 16 collections · 2 subscriptions")}}},
 							Acts:  &w.Acts{Items: []w.ActsPart{w.Button{Label: "Connect account", Icon: "plus", Kind: w.ButtonPrimary}}},
 							Pad:   w.HeadSnug,
 						},
@@ -5282,7 +5222,7 @@ func Profile10() Screen {
 						Title: &w.HeadTitle{Text: "Connections"},
 						Subs: []w.HeadSub{
 							w.HeadSub{
-								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 17 collections · 2 subscriptions")},
+								Parts: []w.HeadSubPart{w.Text("Signed in as "), w.Strong("mix"), w.Text(" · 4 servers · 16 collections · 2 subscriptions")},
 							},
 						},
 						Acts: &w.Acts{
@@ -5620,7 +5560,6 @@ func Profile10() Screen {
 										Items: []w.RubricPart{
 											w.Line{
 												Items: []w.LinePart{
-													w.Button{Label: "New folder", Icon: "plus", Small: true},
 													w.Button{Label: "Show password", Small: true},
 													w.Button{Label: "Test", Small: true},
 													w.Button{
@@ -5644,7 +5583,7 @@ func Profile10() Screen {
 									w.Table{
 										Cols: []w.TableCol{
 											{Width: w.ColTickSmall},
-											{Label: "Folder"},
+											{Label: "Collection"},
 											{Label: "What is in it", Rank: w.Rank3},
 											{Label: "Objects", Width: w.ColNum, Rank: w.Rank4, Secondary: true},
 											{Label: "Changed on the server", Width: w.ColChanged, Main: true},
@@ -5653,30 +5592,16 @@ func Profile10() Screen {
 										Rows: []w.TableRow{
 											{
 												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|documents"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Documents"}}},
+													{Pick: ptr(w.TickedOn), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|files"}},
+													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#4A6B52"}, Name: "Files"}}},
 													{Parts: []w.CellPart{w.Text("files")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("10")}, Mono: true},
+													{Parts: []w.CellPart{w.Text("12")}, Mono: true},
 													{Parts: []w.CellPart{w.Text("5 min ago")}, Mono: true},
 													{
 														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
 														Acts:  true,
 													},
 												},
-											},
-											{
-												Cells: []w.TableCell{
-													{Pick: ptr(w.TickedOff), Send: w.Send{Form: "conn-picks", Name: "pick", Value: "sftpgo|public"}},
-													{Parts: []w.CellPart{w.TableFile{Mark: &w.Mark{Colour: "#9A9280"}, Name: "Public"}}},
-													{Parts: []w.CellPart{w.Text("files "), w.Badge{Label: "ro"}}, Mono: true},
-													{Parts: []w.CellPart{w.Text("2")}, Mono: true},
-													{Parts: []w.CellPart{w.Text("3 d ago")}, Mono: true},
-													{
-														Parts: []w.CellPart{w.Button{Icon: "dots", Small: true, Variant: w.ButtonPadX3, Title: "More"}},
-														Acts:  true,
-													},
-												},
-												State: w.RowOff,
 											},
 										},
 									},

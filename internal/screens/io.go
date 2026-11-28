@@ -505,7 +505,7 @@ func Io2() Screen {
 									w.Dim{
 										Parts: []w.Inline{
 											w.Text("Over 2 MB it goes to "),
-											w.Mono{Text: "Documents / carrel"},
+											w.Mono{Text: "sftpgo · vps / Documents / carrel"},
 											w.Text(" and the event keeps a link"),
 										},
 										Size:    w.Dim11_5,
@@ -1456,12 +1456,13 @@ func Io4() Screen {
 									w.Rubric{Text: "From a WebDAV folder"},
 									w.Tree{
 										Rows: []w.TreeRow{
-											{Icon: "file", Label: "Documents", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
-											{Icon: "file", Label: "notes", Indent: w.TreeLevel22},
-											{Icon: "file", Label: "carrel", Indent: w.TreeLevel22},
+											{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("sftpgo")}, Size: w.Dim11}},
+											{Icon: "file", Label: "Documents", Indent: w.TreeLevel22},
+											{Icon: "file", Label: "notes", Indent: w.TreeLevel36},
+											{Icon: "file", Label: "carrel", Indent: w.TreeLevel36},
 											{Icon: "file", Label: "Files", Trail: w.Dim{Parts: []w.Inline{w.Text("nextcloud")}, Size: w.Dim11}},
 										},
-										On: 2,
+										On: 3,
 									},
 									w.CardRow{
 										Kind: w.CardTop8,

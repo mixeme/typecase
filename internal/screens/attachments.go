@@ -125,7 +125,7 @@ func Attachments1() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{
 												Name:    "collection",
-												Options: []w.PickOption{{Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents", On: true}},
+												Options: []w.PickOption{{Value: "sftpgo.vps.files", Label: "sftpgo · vps · Files", On: true}},
 												Label:   "Collection",
 											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any file collection you can write to.")}, Variant: w.HintColumn},
@@ -359,7 +359,7 @@ func Attachments5() Screen {
 												Name: "collection",
 												Options: []w.PickOption{
 													{Value: "", Label: "Choose a collection", On: true},
-													{Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents"},
+													{Value: "sftpgo.vps.files", Label: "sftpgo · vps · Files"},
 												},
 												Label: "Collection",
 											},
@@ -573,7 +573,7 @@ func Attachments6() Screen {
 										Parts: []w.FieldPart{
 											w.Pick{
 												Name:    "collection",
-												Options: []w.PickOption{{Value: "sftpgo.vps.documents", Label: "sftpgo · vps · Documents", On: true}},
+												Options: []w.PickOption{{Value: "sftpgo.vps.files", Label: "sftpgo · vps · Files", On: true}},
 												Label:   "Collection",
 											},
 											w.FieldHint{Parts: []w.Inline{w.Text("Any file collection you can write to.")}, Variant: w.HintColumn},

@@ -277,6 +277,18 @@ do, not what the authors did.
 
 ### Mockup
 
+- **A file storage is one collection** (the owner, 27.11; Carrel's task 304;
+  Р-85). The address of a connection without a principal is the collection,
+  as «Files» of nextcloud: the `sftpgo · vps` card has one row «Files» and no
+  New folder; its folders, at the root too, are folders, made, renamed,
+  deleted and moved in Files. `s-profile-12` and `-34` (the folder's menu and
+  move from the card) are gone — 590 frames; `s-profile-18`…`-20` open from
+  Files, New folder at the storage's root among them. The Files rail has one
+  row per storage, crumbs start at it, «Public» is a read-only folder in it
+  (`states-34`: rights are the folder's). An attachment's place names the
+  storage: «sftpgo · vps / Documents / carrel»; on paper it wraps
+  (`print-5`). Backups, search, davloom, the mount address and the pickers
+  have one `sftpgo · vps · Files`. Connections count 16 collections.
 - **An empty To fills its field** (Carrel's task 288): `s-mail-20` draws the
   letter sheet's To before any recipient, as wide as Subject; the rule came
   with 25.11's recipients field.

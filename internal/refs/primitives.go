@@ -215,7 +215,7 @@ var _ = add(
 	primitive("slot", dim(w.DimText, w.DimSlot, w.Text("From")), "s-mail-7", "tc-dim"),
 	primitive("struck", dim(w.DimText, w.DimStruck, w.Text("попросить у Артёма скриншоты")), "s-notes-2", "tc-dim"),
 	primitive("tight", dim(w.Dim11, w.DimTight, w.Text("nextcloud · Контакты")), "s-find-3", "tc-dim"),
-	primitive("mixed", dim(w.Dim11_5, w.DimWrap, w.Text("Over 2 MB it goes to"), w.Mono{Text: "Documents / carrel"}, w.Text("and the event keeps a link")), "s-io-2", "tc-dim"),
+	primitive("mixed", w.Dim{Parts: []w.Inline{w.Text("Over 2 MB it goes to "), w.Mono{Text: "sftpgo · vps / Documents / carrel"}, w.Text(" and the event keeps a link")}, Size: w.Dim11_5, Variant: w.DimWrap}, "s-io-2", "tc-dim"),
 	primitive("sized", dim(w.Dim11_5, w.DimInline, w.Text("Properties Carrel does not know are kept unchanged.")), "s-contacts-3", "tc-dim"),
 	primitive("mixed", dim(w.DimText, w.DimInline, w.Text("starts a copy · answers"), w.Mono{Text: "202"}, w.Text("and an id, a second one while it runs is refused")), "s-backup-5", "tc-dim"),
 	primitive("indent", dim(w.DimText, w.DimIndent, w.Text("as sent")), "s-agenda-3", "tc-dim"),

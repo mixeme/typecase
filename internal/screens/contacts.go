@@ -3123,7 +3123,7 @@ func Contacts7() Screen {
 								Title:  []w.Inline{w.Text("ковалёва-обложка-v2.pdf")},
 								Detail: []w.Inline{w.Text("in the file name")},
 								What:   "file",
-								Source: "sftpgo · vps · Documents",
+								Source: "sftpgo · vps · Files",
 							},
 							w.FindRow{
 								Mark:   w.Mark{Colour: "#3F6E8C"},
